@@ -2,14 +2,25 @@
 
 本目录只用于 PRD 与实现设计。业务事实、任务状态、验证证据分开记录。
 
+## 目录说明
+根目录 C:\haodev\ownword
+其余路径采用相对路径
+
 ## 开工顺序
 
-1. 确认工作目录为 `C:\haodev\ownword\_task\system-design`。
+1. 确认工作目录为 `_task\system-design`。
 2. 完整阅读本文件。
 3. 阅读 `feature_list.json`、`progress.md`；续接任务时再读 `session-handoff.md`。
-4. 阅读当前事项引用的 `C:\haodev\ownword\spec` 与 `C:\haodev\ownword\reference` 资料。
 
 未完成以上步骤，不得修改设计文档。
+
+## 目录介绍
+
+- 核心认知 定义系统的核心认知，是原型，prd，后端设计的核心知识来源  `system-design\spec\核心认知.md`
+- 可交互高保真原型 目录 `designs\own-word-prototype`
+- prd 无法可靠表达的产品事实 目录 `_task\system-design\spec\prd`
+- 后端设计文档 后端架构设计与详细实现设计 `_task\system-design\spec\backend` 
+- 设计系统，进行高保真原型设计时必须使用 设计系统 默认选择 `designs\react-spectrum`
 
 ## 事实来源
 
@@ -17,26 +28,26 @@
 - `feature_list.json` 只记录事项范围、状态、依赖和完成证据。
 - `progress.md`、`session-handoff.md` 只记录过程与交接，不承载设计事实。
 
-设计结论必须引用 `C:\haodev\ownword\spec`、`C:\haodev\ownword\reference` 或其他明确证据。资料冲突时停止相关结论，记录冲突并请用户裁决。
+- 设计结论必须引用 `_task\system-design\spec`、`reference` 或其他明确证据。资料冲突时停止相关结论，记录冲突并请用户裁决。
+- 不允许读取 draft的内容  `task\system-design\spec\draft`
 
 ## 工作规则
 
 - 同时只允许一个 `in-progress` 事项。开始前先在 `feature_list.json` 写清目标、依赖、完成条件。
 - 不凭代码片段下结论。涉及现有系统时，结合设计文档、代码、日志、数据或最小实验取证；本目录不修改代码。
 - 未确认信息标为“待确认”，写明负责人或验证方式。禁止把假设写成事实。
-- 架构决策先查 `C:\haodev\ownword\spec` 和 `C:\haodev\ownword\reference`；仍无依据再问用户。
+- 架构决策先查 `_task\system-design\spec` 和 `reference`；仍无依据再问用户。
 - 遵守 DRY：同一知识只在一个权威位置定义，其他文档用路径和章节链接引用。
 - 修改范围限于当前事项。未经用户要求，不修改 `spec`、`reference`、`designs`、`backend` 或任何代码。
-- 设计文档必须记录接口、数据、状态、失败处理、可观测性和验证方案；不在本目录执行集成测试或接口测试。不得记录密码、令牌等秘密。
+- 原型设计 必须使用设计系统和 Baoyu Design 技能，未发现设计系统和技能则停止原型设计，并向用户反馈
+
 
 ## 完成标准
 
 事项标记 `done` 前必须满足：
 
-- 目标、范围、非目标、依赖、约束明确。
-- 术语与关键结论有明确出处。
+- 核心认知必须是唯一事实来源，不允许在prd，设计文档中重复
 - PRD 含可验证验收标准；实现设计逐项映射验收标准。
-- 接口、数据、状态、失败处理、可观测性、安全、迁移、回滚、测试已覆盖，或明确标注“不适用”及理由。
 - 阻塞性“待确认”已清零。
 - 已人工复核事实、范围、验收标准、实现映射和待确认项；证据写入 `feature_list.json` 与 `progress.md`。
 
