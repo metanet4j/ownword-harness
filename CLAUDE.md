@@ -14,7 +14,7 @@
 
 ## 工作区目录
 
-设计文档 `ownword\spec`
+设计文档 `ownword\_task\system-design\spec`
 
 外部仓库文档和代码 `ownword\reference`
 
@@ -23,7 +23,7 @@
 - 钱包 `reference\yours-wallet-main`
 - 1sat、nft  `reference\1sat-ordinals-master`
 
-设计原型 ``ownword\designs``
+设计原型 `ownword\designs\own-word-prototype`
 
 后端代码库 `ownword\backend`
 
@@ -36,6 +36,7 @@
 - 集成测试，接口测试必须使用 提权使用宿主环境来跑
 - 出现问题不清楚的可以通过查询设计文档与核心认知文档进行确认，如果有核心认知文档和设计文档存在冲突，以核心认知文档作为唯一的准确事实来源
 - 强调 核心认知文档作为唯一的准确事实来源，必须遵守 DRY原则
+- 每次完成一个功能项 则进行git commit
 
 ## Skill 路由
 
@@ -45,4 +46,4 @@
 
 ## Escalation
 
-*架构决策\*：读 ownword\reference 外部文档、设计文档ownword\spec 确认，否则问用户
+架构决策：按需读取设计文档 ownword\_task\system-design\spec作为决策依据，否则问用户

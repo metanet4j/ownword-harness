@@ -13,7 +13,7 @@
 
 ## 工作区目录
 
-设计文档 `ownword\spec`
+设计文档 `ownword\_task\system-design\spec`
 
 外部仓库文档和代码 `ownword\reference`
 
@@ -22,7 +22,7 @@
 - 钱包 `reference\yours-wallet-main`
 - 1sat、nft  `reference\1sat-ordinals-master`
 
-设计原型 ``ownword\designs``
+设计原型 `ownword\designs\own-word-prototype`
 
 后端代码库 `ownword\backend`
 
@@ -43,4 +43,4 @@
 
 ## Escalation
 
-架构决策：读 ownword\reference 外部文档、设计文档ownword\spec 确认，否则问用户
+架构决策：按需读取设计文档 ownword\_task\system-design\spec作为决策依据，否则问用户

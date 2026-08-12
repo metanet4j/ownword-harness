@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": null,
+  "activeItem": "design-001",
   "features": [
     {
       "id": "harness-001",
@@ -24,16 +24,26 @@
     },
     {
       "id": "design-001",
-      "name": "首个设计事项",
-      "description": "收到具体目标后，替换为可交付的 PRD 或实现设计事项。",
+      "name": "设计 v0.1 高保真可交互原型",
+      "description": "依据 PRD v0.1 与核心认知，使用 React Spectrum 设计系统和 Baoyu Design 技能设计可交互高保真原型。",
       "dependencies": [
         "harness-001"
       ],
-      "status": "not-started",
+      "status": "in-progress",
+      "inputs": [
+        "_task/system-design/spec/核心认知.md",
+        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+        "designs/react-spectrum"
+      ],
+      "output": "designs/own-word-prototype",
       "doneCriteria": [
-        "目标和用户价值明确",
-        "输入资料与事实来源明确",
-        "交付物和验收标准明确"
+        "原型覆盖 PRD v0.1 中所有用户可见流程、页面和关键状态",
+        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
+        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
+        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
+        "原型在桌面与移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
+        "原型资产已记录到 designs/own-word-prototype/_d_meta.json",
+        "已评估原型变更对 PRD 和后端设计的影响，并记录需要同步的事项"
       ],
       "evidence": ""
     }
