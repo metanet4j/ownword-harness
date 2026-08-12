@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "initializedAt": "2026-08-12",
+  "allowedStatuses": [
+    "not-started",
+    "in-progress",
+    "blocked",
+    "done"
+  ],
+  "activeItem": null,
+  "features": [
+    {
+      "id": "harness-001",
+      "name": "初始化设计任务工作台",
+      "description": "建立任务指令、事项状态和跨会话交接机制。",
+      "dependencies": [],
+      "status": "done",
+      "doneCriteria": [
+        "任务边界和事实取证规则明确",
+        "设计事项状态可跨会话续接",
+        "目录不包含代码、启动脚本或测试脚本"
+      ],
+      "evidence": "目录结构检查通过；见 progress.md。"
+    },
+    {
+      "id": "design-001",
+      "name": "首个设计事项",
+      "description": "收到具体目标后，替换为可交付的 PRD 或实现设计事项。",
+      "dependencies": [
+        "harness-001"
+      ],
+      "status": "not-started",
+      "doneCriteria": [
+        "目标和用户价值明确",
+        "输入资料与事实来源明确",
+        "交付物和验收标准明确"
+      ],
+      "evidence": ""
+    }
+  ]
+}
