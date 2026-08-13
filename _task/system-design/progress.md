@@ -128,3 +128,11 @@
 - 验证：无头 Chrome CDP `_verify.mjs` 56/56 通过：语言+主题合并为一控件、偏好弹层打开、Dark/zh-CN 在弹层内切换并持久、金属表面高光存在、Light/Dark 画布令牌色值正确；原 53 项不回归，console/runtime error 0，320px 无横向溢出。`preview-desktop.png` 更新为 My Identity 浅色，`preview-mobile.png` 更新为 My Identity 320 深色中文。
 - 资产：`_d_meta.json` 保持 `index.html` 状态 `needs-review`。
 - 待办：用户复核金属质感强度与偏好弹层交互；复核通过前 `design-003` 不标记 `done`。
+
+## 2026-08-13 · design-003 三改（阴影与光泽立体感）
+
+- 用户反馈：整体加阴影，要金属散发光泽或宝石光泽的立体感。
+- 实现：`styles.css` 加 `--rs-shadow-soft`、`--rs-glow`、`--rs-edge-hi/lo`、`--rs-accent-glow` 令牌，Light/Dark 同步。表面改双层高光（顶部高光 + 左上径向镜面光斑）+ 底部内阴影；卡片、顶栏、芯片等加环境软阴影与内边缘高光，浮层用加深阴影；accent 按钮与 gateway 连接按钮加珠宝式径向光泽 + 蓝色辉光阴影 + 内高光；品牌标与头像加光泽。修复 hover 时 `background` 简写吞掉光泽的问题，改 `background-color`。
+- 验证：无头 Chrome CDP `_verify.mjs` 57/57 通过：新增“3d shadow + luster on surfaces/buttons”断言，Light/Dark 画布色值不变；原 56 项不回归，console/runtime error 0，320px 无横向溢出。`preview-desktop.png`、`preview-mobile.png` 已更新。
+- 资产：`_d_meta.json` 保持 `index.html` 状态 `needs-review`。
+- 待办：用户复核阴影与光泽强度；复核通过前 `design-003` 不标记 `done`。

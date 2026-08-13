@@ -99,3 +99,11 @@
 - 本次：冷钢金属配色（表面高光渐变，Light/Dark 同步）；语言与主题合并为单一偏好胶囊 + 弹层。
 - 验证：`_verify.mjs` 56/56 通过，console/runtime error 0，320px 无横向溢出；证据详见 `progress.md` 的 `2026-08-13 · design-003 又修订（金属配色 + 偏好合并）`。
 - 唯一下一步：用户复核金属质感强度与偏好弹层交互，反馈保留或继续调整。
+
+## 2026-08-13 · design-003 三改交接
+
+- 当前唯一事项：`design-003`（`in-progress`）；`design-004` 保持 `blocked` 交付候选。
+- 原型：`designs/own-word-prototype-003/index.html`；HTTP `http://127.0.0.1:4311/own-word-prototype-003/index.html`。
+- 本次：整体阴影与光泽——双层表面高光、环境软阴影、内边缘高光/阴影、accent 按钮珠宝光泽。
+- 验证：`_verify.mjs` 57/57 通过，console/runtime error 0，320px 无横向溢出；证据详见 `progress.md` 的 `2026-08-13 · design-003 三改（阴影与光泽立体感）`。
+- 唯一下一步：用户复核阴影与光泽强度，反馈保留或继续调整。
