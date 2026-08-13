@@ -109,3 +109,13 @@
 - 验证：本地 HTTP `http://127.0.0.1:4311/own-word-prototype-004/index.html` 返回 200；无头 Chrome CDP `_verify.mjs` 49/49 通过；console/runtime error 0；Copy 断言传入完整 BAP ID；复制失败时 BAP ID 仍可见；语言与主题刷新后持久；BAP ID 跨语言主题不变；1440px BAP ID 首屏可见；320×740 各关键页 `scrollWidth <= 320` 无横向溢出。截图：`preview-desktop.png`、`preview-mobile.png`。视觉像素复核以 vision probe 结果为准，DOM 几何与计算样式检查已完成。
 - 资产：`_d_meta.json` 已登记 `index.html`，状态 `needs-review`。
 - 待办：用户并排对比四套方案后反馈选择；复核通过前 `design-004` 不标记 `done`。
+
+## 2026-08-13 · design-003 再迭代（首页进入流）
+
+- 用户反馈：首页不保留 Connect Wallet 按钮；右箭头点击或右滑进入新页；连接钱包居中并带动效，点击后进入区块链新大陆。
+- 状态：`design-003` 转为唯一 `in-progress`；`design-004` 转为 `blocked`，保持交付候选。
+- 实现：Welcome 移除 Connect Wallet CTA，只留右箭头与“点击箭头或向右滑动”提示；箭头点击或右滑（pointer 横移 > 60px）进入新页 Wallet gateway；连接钱包居中，带脉冲光环动效；点击连接播放 1.2s 航行过渡后落到 Yours Wallet 确认；连接取消按 BDD 返回 Welcome；连接失败场景落在 gateway 显示失败与 Try Again；修复无钱包时 `stage` 残留 272px 空列导致内容左偏，空壳下单列铺满。
+- 文案：`gatewayTitle`、`gatewaySub`、`walletGateNote`、`swipeHint` 写入 `strings.jsx`，EN/zh-CN 双语。
+- 验证：无头 Chrome CDP `_verify.mjs` 53/53 通过：Welcome 无连接按钮、箭头进 gateway、连接按钮居中且 `::after` 动画 `gateway-pulse`、返回按钮回 Welcome、右滑进 gateway、航行出现、落点钱包确认；原连接/创建/复制/主题语言/切换断开等不回归；320px 无横向溢出；console/runtime error 0。截图新增 `01b-gateway-desktop-light.png`、`06b-gateway-320-dark-zh.png`；`preview-desktop.png` 更新为 gateway，`preview-mobile.png` 更新为 320 首页。
+- 资产：`_d_meta.json` 保持 `index.html` 状态 `needs-review`。
+- 待办：用户复核首页进入流与整体厚重感方向；复核通过前 `design-003` 不标记 `done`。

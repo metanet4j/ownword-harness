@@ -2,9 +2,9 @@
 
 ## 当前目标
 
-- 目标：design-004 第四套高保真可交互原型。
-- 状态：已立项，待下一位 Agent 从零执行。
-- 当前事项：`design-004`。
+- 目标：design-003 迭代——首页进入流与“区块链身份和话语的厚重感”。
+- 状态：本次迭代已实现并验证，待用户复核。
+- 当前事项：`design-003`。
 - 分支 / 提交：master；本交接独立 Git commit。
 
 ## 已完成
@@ -83,3 +83,11 @@
 - 环境备注：unpkg 不可达，React UMD 已 vendored 自 npmmirror（`vendor/`）。
 - 验证：`_verify.mjs` 无头 Chrome CDP 49/49 通过，console error 0，320px 无横向溢出，语言/主题持久，Copy 传完整 BAP ID；截图 `preview-desktop.png`、`preview-mobile.png`。证据详见 `progress.md` 的 `2026-08-13 · design-004 实现与验证`。
 - 唯一下一步：用户并排对比四套原型，反馈保留方向或修改点；复核通过前不标记 `done`。
+
+## 2026-08-13 · design-003 再迭代交接
+
+- 当前唯一事项：`design-003`（`in-progress`）；`design-004` 改 `blocked`，保持交付候选。
+- 原型：`designs/own-word-prototype-003/index.html`；HTTP `http://127.0.0.1:4311/own-word-prototype-003/index.html`。
+- 本次：首页移除 Connect Wallet 按钮；右箭头点击或右滑进入 Wallet gateway；连接钱包居中并带脉冲动效；点击连接播放航行过渡后落到钱包确认。
+- 验证：`_verify.mjs` 53/53 通过，console/runtime error 0，320px 无横向溢出；证据详见 `progress.md` 的 `2026-08-13 · design-003 再迭代（首页进入流）`。
+- 唯一下一步：用户复核首页进入流与“厚重感”整体方向，反馈保留或继续调整。

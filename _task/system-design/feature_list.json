@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "design-004",
+  "activeItem": "design-003",
   "features": [
     {
       "id": "harness-001",
@@ -83,7 +83,7 @@
       "dependencies": [
         "harness-001"
       ],
-      "status": "blocked",
+      "status": "in-progress",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
@@ -110,7 +110,7 @@
         "feature_list.json、progress.md 和 session-handoff.md 已记录验证证据与唯一下一步",
         "已创建独立 Git commit；用户人工复核前保持 needs-review，不标记 done"
       ],
-      "evidence": "2026-08-13：从零建立 designs/own-word-prototype-003，未读取、复制或借鉴前两套原型；Baoyu Design 导入并绑定 React Spectrum S2。第三套视觉与交互独立：工作台壳 + 身份旅程步骤轨 + 单列任务面板，BAP ID 用等宽大字号 ledger 展示，避免身份文档隐喻。覆盖 Wallet 连接/取消/失败/切换/断开、解析分流（已发布/无身份/资料不全/失败）、Setup 表单校验、Review、Create 处理/成功/取消/失败、My Identity、Public Identity、Edit Profile 保存/取消/未保存保护、EN/zh-CN、Light/Dark。无头 Chrome CDP 验证 37/37 通过：HTTP 200；React Spectrum bundle error 0；console/runtime error 0；Copy 返回完整 BAP ID 且失败时标识仍可见；语言与主题刷新后持久；BAP ID 跨语言主题不变；1440px 桌面 BAP ID 首屏可见；320px 无横向溢出；截图 preview-desktop.png 与 preview-mobile.png。_d_meta.json 资产状态 needs-review。2026-08-13：用户要求下一位 Agent 继续设计第四套方案，本项暂停并保留为对比候选。2026-08-13 修订：按用户反馈强化“话语的重量感 + 新大陆感”，上链成功加动效。Hero 标题分两层放大（Own your identity. / Own your words.），加地平线与 Bitcoin 主权身份铭文；My/Public Identity 姓名用大字号粗体、简介加重为陈述、加 bap:0 · Bitcoin 账本标注；Review 加“认领”宣言；Create Identity 成功页改为印章落地动效 + Broadcast/Seen/Accepted/Mined 链上状态逐帧出现，Mined 待确认。2026-08-13 再修订：Welcome 加进场动效（一打开即动）；动效默认开启，Prototype 面板提供 Motion 开关，OS prefers-reduced-motion 下仍可显式开启，关闭后动画全停。2026-08-13 三修订：首页加向右箭头，点击播放航行过渡（地平线扫过 + 圆点前行 + “进入新大陆”文案）后落到钱包确认，营造进入新大陆感；无头 Chrome CDP 48/48 通过，console/runtime error 0。"
+      "evidence": "2026-08-13：从零建立 designs/own-word-prototype-003，未读取、复制或借鉴前两套原型；Baoyu Design 导入并绑定 React Spectrum S2。第三套视觉与交互独立：工作台壳 + 身份旅程步骤轨 + 单列任务面板，BAP ID 用等宽大字号 ledger 展示，避免身份文档隐喻。覆盖 Wallet 连接/取消/失败/切换/断开、解析分流（已发布/无身份/资料不全/失败）、Setup 表单校验、Review、Create 处理/成功/取消/失败、My Identity、Public Identity、Edit Profile 保存/取消/未保存保护、EN/zh-CN、Light/Dark。无头 Chrome CDP 验证 37/37 通过：HTTP 200；React Spectrum bundle error 0；console/runtime error 0；Copy 返回完整 BAP ID 且失败时标识仍可见；语言与主题刷新后持久；BAP ID 跨语言主题不变；1440px 桌面 BAP ID 首屏可见；320px 无横向溢出；截图 preview-desktop.png 与 preview-mobile.png。_d_meta.json 资产状态 needs-review。2026-08-13：用户要求下一位 Agent 继续设计第四套方案，本项暂停并保留为对比候选。2026-08-13 修订：按用户反馈强化“话语的重量感 + 新大陆感”，上链成功加动效。Hero 标题分两层放大（Own your identity. / Own your words.），加地平线与 Bitcoin 主权身份铭文；My/Public Identity 姓名用大字号粗体、简介加重为陈述、加 bap:0 · Bitcoin 账本标注；Review 加“认领”宣言；Create Identity 成功页改为印章落地动效 + Broadcast/Seen/Accepted/Mined 链上状态逐帧出现，Mined 待确认。2026-08-13 再修订：Welcome 加进场动效（一打开即动）；动效默认开启，Prototype 面板提供 Motion 开关，OS prefers-reduced-motion 下仍可显式开启，关闭后动画全停。2026-08-13 三修订：首页加向右箭头，点击播放航行过渡（地平线扫过 + 圆点前行 + “进入新大陆”文案）后落到钱包确认，营造进入新大陆感；无头 Chrome CDP 48/48 通过，console/runtime error 0。2026-08-13 再迭代：首页移除 Connect Wallet 按钮，只留右箭头与滑动提示；箭头点击或右滑进入新页 Wallet gateway，连接钱包居中并带脉冲动效，点击连接播放航行过渡后落钱包确认；连接取消返回 Welcome，连接失败在 gateway 显示失败与 Try Again；修复无钱包时 stage 残留 272px 空列导致内容左偏。无头 Chrome CDP 53/53 通过，console/runtime error 0。"
     },
     {
       "id": "design-004",
@@ -119,7 +119,7 @@
       "dependencies": [
         "harness-001"
       ],
-      "status": "in-progress",
+      "status": "blocked",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
@@ -146,7 +146,7 @@
         "feature_list.json、progress.md 和 session-handoff.md 已记录验证证据与唯一下一步",
         "已创建独立 Git commit；用户人工复核前保持 needs-review，不标记 done"
       ],
-      "evidence": "2026-08-13：从零建立 designs/own-word-prototype-004，未读取、复制或借鉴前三套原型；Baoyu Design import-design-system.mjs 绑定 React Spectrum S2（primary），遵循 _ds_prompt.md 令牌约束。第四套视觉与交互独立：单列引导式聚焦舞台（每步一个居中面板），钱包驻留顶栏胶囊+下拉菜单，Yours Wallet 以深色标题栏模拟窗口呈现，BAP ID 用带边框 ID 铭牌（等宽换行+Copy）表达；Setup 单页表单+Review 单独面板，不用步骤轨/时间线/文档隐喻。覆盖 Wallet 连接/取消/失败/切换/断开、解析分流（已发布/无身份/资料不全/失败）、Setup 校验（必填名、100/1000 字数、本地头像）、Review、创建处理/取消/失败/成功、My Identity、Public Identity、Edit Profile 保存/取消/未保存离开保护、EN/zh-CN、Light/Dark（--rs-* 语义令牌覆写）。因 unpkg 不可达，React UMD 从 npmmirror 下载并本地 vendored，Babel 用技能自带 vendor 副本。无头 Chrome CDP _verify.mjs 49/49 通过：HTTP 200、console/runtime error 0、Copy 传完整 BAP ID、复制失败标识仍可见、语言主题刷新持久、BAP ID 跨语言主题不变、1440px BAP ID 首屏可见、320px 各关键页无横向溢出；截图 preview-desktop.png、preview-mobile.png。_d_meta.json 资产状态 needs-review，等待用户四套对比复核。"
+      "evidence": "2026-08-13：从零建立 designs/own-word-prototype-004，未读取、复制或借鉴前三套原型；Baoyu Design import-design-system.mjs 绑定 React Spectrum S2（primary），遵循 _ds_prompt.md 令牌约束。第四套视觉与交互独立：单列引导式聚焦舞台（每步一个居中面板），钱包驻留顶栏胶囊+下拉菜单，Yours Wallet 以深色标题栏模拟窗口呈现，BAP ID 用带边框 ID 铭牌（等宽换行+Copy）表达；Setup 单页表单+Review 单独面板，不用步骤轨/时间线/文档隐喻。覆盖 Wallet 连接/取消/失败/切换/断开、解析分流（已发布/无身份/资料不全/失败）、Setup 校验（必填名、100/1000 字数、本地头像）、Review、创建处理/取消/失败/成功、My Identity、Public Identity、Edit Profile 保存/取消/未保存离开保护、EN/zh-CN、Light/Dark（--rs-* 语义令牌覆写）。因 unpkg 不可达，React UMD 从 npmmirror 下载并本地 vendored，Babel 用技能自带 vendor 副本。无头 Chrome CDP _verify.mjs 49/49 通过：HTTP 200、console/runtime error 0、Copy 传完整 BAP ID、复制失败标识仍可见、语言主题刷新持久、BAP ID 跨语言主题不变、1440px BAP ID 首屏可见、320px 各关键页无横向溢出；截图 preview-desktop.png、preview-mobile.png。_d_meta.json 资产状态 needs-review，等待用户四套对比复核。2026-08-13：用户返回迭代 design-003，本项改为 blocked，保持交付候选。"
     }
   ]
 }
