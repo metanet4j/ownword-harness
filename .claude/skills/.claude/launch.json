@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "designs",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4311", "--directory", "C:/haodev/ownword/designs"],
+      "port": 4311
+    }
+  ]
+}
