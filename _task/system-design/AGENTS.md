@@ -6,6 +6,13 @@
 根目录 C:\haodev\ownword
 其余路径采用相对路径
 
+## Git 仓库结构
+
+- 根仓库 `C:\haodev\ownword` 只跟踪文档与任务文件；`.gitignore` 忽略 `designs/*`。
+- `designs/` 下每个目录是独立 Git 子仓库，各自提交：`bsv-identity-studio-v1`、`react-spectrum`（设计系统）、`own-word-prototype`、`-002`、`-003`、`-004`（各套原型）。
+- 改原型：进对应子目录提交，不动根仓库。
+- 改任务文档（AGENTS.md、feature_list.json、progress.md、session-handoff.md）：在根仓库提交。
+
 ## 开工顺序
 
 1. 确认工作目录为 `_task\system-design`。
