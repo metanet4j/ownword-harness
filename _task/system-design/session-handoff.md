@@ -107,3 +107,11 @@
 - 本次：整体阴影与光泽——双层表面高光、环境软阴影、内边缘高光/阴影、accent 按钮珠宝光泽。
 - 验证：`_verify.mjs` 57/57 通过，console/runtime error 0，320px 无横向溢出；证据详见 `progress.md` 的 `2026-08-13 · design-003 三改（阴影与光泽立体感）`。
 - 唯一下一步：用户复核阴影与光泽强度，反馈保留或继续调整。
+
+## 2026-08-13 · design-003 四改交接
+
+- 当前唯一事项：`design-003`（`in-progress`）；`design-004` 保持 `blocked` 交付候选。
+- 原型：`designs/own-word-prototype-003/index.html`；HTTP `http://127.0.0.1:4311/own-word-prototype-003/index.html`。
+- 本次：去掉管理后台感，移除左右侧栏，主内容单列居中，与全新访客首页一致。
+- 验证：`_verify.mjs` 58/58 通过，console/runtime error 0，320px 无横向溢出；证据详见 `progress.md` 的 `2026-08-13 · design-003 四改（去后台感，单列聚焦）`。
+- 唯一下一步：用户复核居中聚焦效果，反馈保留或继续调整。

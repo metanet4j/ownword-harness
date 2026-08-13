@@ -136,3 +136,11 @@
 - 验证：无头 Chrome CDP `_verify.mjs` 57/57 通过：新增“3d shadow + luster on surfaces/buttons”断言，Light/Dark 画布色值不变；原 56 项不回归，console/runtime error 0，320px 无横向溢出。`preview-desktop.png`、`preview-mobile.png` 已更新。
 - 资产：`_d_meta.json` 保持 `index.html` 状态 `needs-review`。
 - 待办：用户复核阴影与光泽强度；复核通过前 `design-003` 不标记 `done`。
+
+## 2026-08-13 · design-003 四改（去后台感，单列聚焦）
+
+- 用户反馈：当前布局偏管理后台；保持与全新访客首页一致，内容居中，去掉两边区域，干净、整洁、聚焦。
+- 实现：`app.jsx` 删除 `Rail`、`Journey` 组件与渲染，应用壳改为主内容区直接居中；`styles.css` 删除 shell/rail/stage/journey 相关规则与响应式分支，`.panel` 加 `margin-inline:auto` 居中；`strings.jsx` 删除导航与旅程相关文案。顶栏（品牌、偏好胶囊、钱包状态）保留。
+- 验证：无头 Chrome CDP `_verify.mjs` 58/58 通过：新增“side panels removed + content centered”断言（无 `.rail`、无 `.journey`，面板中心与视口中心差 < 8px）；原 57 项不回归，console/runtime error 0，320px 无横向溢出。`preview-desktop.png`、`preview-mobile.png` 已更新。
+- 资产：`_d_meta.json` 保持 `index.html` 状态 `needs-review`。
+- 待办：用户复核居中聚焦效果；复核通过前 `design-003` 不标记 `done`。
