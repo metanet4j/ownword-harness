@@ -2,10 +2,10 @@
 
 ## 当前目标
 
-- 目标：初始化 PRD 与实现设计工作台。
-- 状态：完成，等待具体设计事项。
-- 当前事项：无。
-- 分支 / 提交：未创建。
+- 目标：design-003 第三套高保真可交互原型。
+- 状态：完成，`needs-review`，等待用户与前两套对比复核。
+- 当前事项：`design-003`。
+- 分支 / 提交：master；本事项独立 Git commit。
 
 ## 已完成
 
@@ -51,3 +51,12 @@
 - 验证：HTTP 桌面与 320px 移动视口、主流程、异常状态、语言/主题持久化、浏览器 console；证据写回 `feature_list.json` 与 `progress.md`。
 - 状态：用户人工复核前保持 `needs-review`，不得标记 `done`。
 - 唯一下一步：从任务输入独立构思并实现第三套高保真原型。
+
+## 2026-08-13 · design-003 交付
+
+- 当前唯一事项：`design-003`（`in-progress`），第三套原型已完成并验证，状态 `needs-review`。
+- 原型：`designs/own-word-prototype-003/index.html`；HTTP `http://127.0.0.1:4311/own-word-prototype-003/index.html`。
+- 方向：工作台壳 + 身份旅程步骤轨 + 单列任务面板；Setup 为两步向导；BAP ID 等宽大字号 ledger 展示；独立于前两套。
+- 隔离保持：全程未读取、复制或借鉴前两套原型的代码、截图、资产、元数据或设计方向。
+- 验证：`_verify.mjs` 无头 Chrome CDP 37/37 通过，bundle error 0，console error 0，320px 无横向溢出，语言/主题持久，复制返回完整 BAP ID；截图 `preview-desktop.png`、`preview-mobile.png`。证据详见 `progress.md` 的 `2026-08-13 · design-003 实现与验证`。
+- 唯一下一步：用户并排对比三套原型，反馈保留方向或修改点；复核通过前不标记 `done`。

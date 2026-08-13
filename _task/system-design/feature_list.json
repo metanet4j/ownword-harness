@@ -110,7 +110,7 @@
         "feature_list.json、progress.md 和 session-handoff.md 已记录验证证据与唯一下一步",
         "已创建独立 Git commit；用户人工复核前保持 needs-review，不标记 done"
       ],
-      "evidence": "2026-08-13：已建立事项与下一位 Agent 交接；尚未创建原型目录，确保从零开始。"
+      "evidence": "2026-08-13：从零建立 designs/own-word-prototype-003，未读取、复制或借鉴前两套原型；Baoyu Design 导入并绑定 React Spectrum S2。第三套视觉与交互独立：工作台壳 + 身份旅程步骤轨 + 单列任务面板，BAP ID 用等宽大字号 ledger 展示，避免身份文档隐喻。覆盖 Wallet 连接/取消/失败/切换/断开、解析分流（已发布/无身份/资料不全/失败）、Setup 表单校验、Review、Create 处理/成功/取消/失败、My Identity、Public Identity、Edit Profile 保存/取消/未保存保护、EN/zh-CN、Light/Dark。无头 Chrome CDP 验证 37/37 通过：HTTP 200；React Spectrum bundle error 0；console/runtime error 0；Copy 返回完整 BAP ID 且失败时标识仍可见；语言与主题刷新后持久；BAP ID 跨语言主题不变；1440px 桌面 BAP ID 首屏可见；320px 无横向溢出；截图 preview-desktop.png 与 preview-mobile.png。_d_meta.json 资产状态 needs-review。保持 needs-review，等用户与前两套对比复核，不标记 done。"
     }
   ]
 }

@@ -2,9 +2,9 @@
 
 ## 当前状态
 
-- 最后更新：2026-08-12
-- 当前事项：无
-- 状态：工作台已初始化，`feature_list.json` 已恢复，等待具体设计目标
+- 最后更新：2026-08-13
+- 当前事项：`design-003`（`in-progress`），原型完成，等待用户对比复核
+- 状态：第三套原型已交付并验证，三套方案齐备，等待挑选
 
 ## 已完成
 
@@ -61,3 +61,15 @@
 - 输入只限核心认知、PRD v0.1、React Spectrum；禁止读取两套既有原型的代码、截图、资产、元数据和设计方向。
 - 第三套必须独立形成视觉层级、布局结构和交互表达；不得覆盖前两套原型。
 - 唯一下一步：下一位 Agent 按门禁读取任务文件，再使用 Baoyu Design 与 React Spectrum 创建、验证第三套原型。
+
+## 2026-08-13 · design-003 实现与验证
+
+- 当前唯一事项：`design-003`（`in-progress`）；`design-002` 保持 `blocked`。
+- 输出：`designs/own-word-prototype-003`；从零建立，未读取、复制或借鉴 `designs/own-word-prototype` 与 `designs/own-word-prototype-002` 的代码、截图、资产、元数据或设计方向。
+- 方法：按门禁先读 `AGENTS.md`、`feature_list.json`、`progress.md`、`session-handoff.md`，再读核心认知与 PRD v0.1；使用 Baoyu Design 技能，导入脚本绑定 React Spectrum S2 到 `_ds/react-spectrum/`，按 `_ds_prompt.md` 绑定规则用 `--rs-*` 与 `--spectrum-*` 令牌、官方图标资产。
+- 第三套视觉与交互独立：工作台应用壳（顶栏 + 状态侧轨 + 右侧身份旅程时间线），BAP ID 用等宽大字号 ledger 展示；不沿用“身份文档/公开凭证”隐喻；Setup 为两步 Profile→Review 向导。
+- 覆盖：Welcome、连接取消/失败、解析中/失败、Setup（新建/资料不全）、表单校验、Review、创建中/成功/取消/失败、My Identity、Public Identity、Edit Profile 保存/取消/失败、未保存离开保护、Account Switch、Disconnect、EN/zh-CN、Light/Dark。Key Rotation 不进入本原型（PRD 已下放 v0.1.1）。
+- 术语与不变量遵守核心认知：BAP ID 不可编辑、缩略显示但 Copy 返回完整值、取消显示 Cancelled、异常显示 Failed、Wallet 连接不称注册/登录、Locale/Theme 不影响链上值。
+- 验证：本地 HTTP `http://127.0.0.1:4311/own-word-prototype-003/index.html` 返回 200；无头 Chrome CDP 自动化 `_verify.mjs` 37/37 通过；React Spectrum bundle `__errors` 为 0；浏览器 console/runtime error 为 0；1440px 桌面 BAP ID 首屏可见；320px 视口 `scrollWidth <= innerWidth` 无横向溢出；语言与主题刷新后持久，BAP ID 跨语言主题不变；复制完整 BAP ID 断言通过。截图：`preview-desktop.png`、`preview-mobile.png`。视觉像素复核跳过（本会话不支持读取图片），以 DOM 几何与计算样式检查替代。
+- 资产：`_d_meta.json` 已登记 `index.html`，状态 `needs-review`。
+- 待办：用户并排对比三套方案后反馈选择；复核通过前 `design-003` 不标记 `done`。
