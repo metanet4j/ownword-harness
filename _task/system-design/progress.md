@@ -95,6 +95,7 @@
 - 验证：无头 Chrome CDP `_verify.mjs` 41/41 通过；console/runtime error 0；320px 无横向溢出；语言主题持久、完整 BAP ID 复制等原 37 项不回归；预览图 `preview-desktop.png`、`preview-mobile.png` 已更新。
 - 状态：`design-003` 保持 `blocked`（对比候选）；待用户最终挑选。
 - 再修订（用户反馈“没有动效”）：Welcome 加进场动效（品牌、标题、副文、地平线、原则、按钮逐层升起），一打开即动；动效默认开启（`data-motion="on"`），Prototype 面板加 Motion 开关可关；OS `prefers-reduced-motion` 下仍可显式开启，关闭后动画全停。验证升至 45/45 通过，含“欢迎进场动画激活、OS 减动效下强制开启、关闭后动画停止”三项断言，console/runtime error 0。
+- 三修订（用户反馈“向右箭头进入新大陆”）：首页底部右侧加带 nudge 动效的向右箭头（ChevronRight + Enter 标签）；点击播放 1.2s 航行过渡——地平线扫过、圆点前行、“正在进入新大陆”文案，随后落到 Yours Wallet 连接确认。验证升至 48/48，含“箭头动画激活、voyage 出现、落点钱包确认”三项断言，console/runtime error 0。
 
 ## 2026-08-13 · design-004 实现与验证
 
