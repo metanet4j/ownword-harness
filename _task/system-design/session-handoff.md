@@ -115,3 +115,11 @@
 - 本次：去掉管理后台感，移除左右侧栏，主内容单列居中，与全新访客首页一致。
 - 验证：`_verify.mjs` 58/58 通过，console/runtime error 0，320px 无横向溢出；证据详见 `progress.md` 的 `2026-08-13 · design-003 四改（去后台感，单列聚焦）`。
 - 唯一下一步：用户复核居中聚焦效果，反馈保留或继续调整。
+
+## 2026-08-13 · design-003 五改交接
+
+- 当前唯一事项：`design-003`（`in-progress`）；`design-004` 保持 `blocked` 交付候选。
+- 原型：`designs/own-word-prototype-003/index.html`；HTTP `http://127.0.0.1:4311/own-word-prototype-003/index.html`。
+- 本次：A+B 方案——碑刻视觉 + 航点线，去掉 1/2/3 编号步骤；My/Public Identity 改纪念碑中心件。
+- 验证：`_verify.mjs` 61/61 通过，console/runtime error 0，320px 无横向溢出；证据详见 `progress.md` 的 `2026-08-13 · design-003 五改（A+B 碑刻航图，去编号步骤）`。
+- 唯一下一步：用户复核 A+B 视觉与航点线效果，反馈保留或继续调整。

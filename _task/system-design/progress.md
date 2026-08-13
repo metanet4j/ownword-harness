@@ -144,3 +144,11 @@
 - 验证：无头 Chrome CDP `_verify.mjs` 58/58 通过：新增“side panels removed + content centered”断言（无 `.rail`、无 `.journey`，面板中心与视口中心差 < 8px）；原 57 项不回归，console/runtime error 0，320px 无横向溢出。`preview-desktop.png`、`preview-mobile.png` 已更新。
 - 资产：`_d_meta.json` 保持 `index.html` 状态 `needs-review`。
 - 待办：用户复核居中聚焦效果；复核通过前 `design-003` 不标记 `done`。
+
+## 2026-08-13 · design-003 五改（A+B 碑刻航图，去编号步骤）
+
+- 用户反馈：BAP 页面像管理后台；选 A+B 方案（碑刻 + 航图），但不要 1/2/3 编号步骤。
+- 实现：`app.jsx` 新增 `Wayline` 组件，细线 + 圆点航点线，无编号。Setup/Review/Creating 用 `Draft → Inscription → On chain` 三航点，当前点发光、已过点亮、未来暗；Ready 用 `Broadcast → Seen → Accepted → Mined` 四航点，Mined 待确认。删除 `.steps`/`.step-num` 与 `.chain` 圆片样式。My/Public Identity 改纪念碑中心件：96px 头像带环、mono kicker、32px 大字姓名，居中排列。钱包确认弹层改 `dialog--sign` 居中签署条。`strings.jsx` 加 `wayAria/wayDraft/wayInscribe/wayChain` 双语文案。
+- 验证：无头 Chrome CDP `_verify.mjs` 61/61 通过：Setup/Review/Creating 无 `.step-num` 且航点线三节点、Ready 四航点含 pending、纪念碑中心件存在；原 58 项不回归，console/runtime error 0，320px 无横向溢出。`preview-desktop.png` 更新为 Review 航点线页，`preview-mobile.png` 更新为 My Identity 纪念碑页。
+- 资产：`_d_meta.json` 保持 `index.html` 状态 `needs-review`。
+- 待办：用户复核 A+B 视觉与航点线效果；复核通过前 `design-003` 不标记 `done`。
