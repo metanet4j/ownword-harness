@@ -3,8 +3,8 @@
 ## 当前状态
 
 - 最后更新：2026-08-13
-- 当前事项：`design-003`（`in-progress`），原型完成，等待用户对比复核
-- 状态：第三套原型已交付并验证，三套方案齐备，等待挑选
+- 当前事项：`design-004`（`in-progress`），待下一位 Agent 从零执行
+- 状态：前三套原型已交付并验证，均为对比候选；第四套已立项，等待执行
 
 ## 已完成
 
@@ -73,3 +73,15 @@
 - 验证：本地 HTTP `http://127.0.0.1:4311/own-word-prototype-003/index.html` 返回 200；无头 Chrome CDP 自动化 `_verify.mjs` 37/37 通过；React Spectrum bundle `__errors` 为 0；浏览器 console/runtime error 为 0；1440px 桌面 BAP ID 首屏可见；320px 视口 `scrollWidth <= innerWidth` 无横向溢出；语言与主题刷新后持久，BAP ID 跨语言主题不变；复制完整 BAP ID 断言通过。截图：`preview-desktop.png`、`preview-mobile.png`。视觉像素复核跳过（本会话不支持读取图片），以 DOM 几何与计算样式检查替代。
 - 资产：`_d_meta.json` 已登记 `index.html`，状态 `needs-review`。
 - 待办：用户并排对比三套方案后反馈选择；复核通过前 `design-003` 不标记 `done`。
+
+## 2026-08-13 · design-004 启动
+
+- 当前唯一事项：`design-004`（`in-progress`）；`design-003` 改为 `blocked`，作为等待对比评审的候选。
+- 执行者：下一位 Agent。
+- 输出：`designs/own-word-prototype-004`；当前不预建目录，保证下一位 Agent 从零开始。
+- 输入只限核心认知、PRD v0.1、React Spectrum；必须使用 Baoyu Design 技能。
+- 隔离：禁止读取、复制、导入或借鉴 `designs/own-word-prototype`、`designs/own-word-prototype-002`、`designs/own-word-prototype-003` 的代码、截图、资产、元数据和设计方向；只能写入 `-004` 目录。
+- 第四套必须独立形成视觉层级、布局结构和交互表达；不得覆盖前三套原型。
+- 验证：HTTP 桌面与 320px 移动视口、主流程、异常状态、语言/主题持久化、浏览器 console；证据写回 `feature_list.json` 与 `progress.md`。
+- 状态：用户人工复核前保持 `needs-review`，不得标记 `done`。
+- 唯一下一步：下一位 Agent 按门禁读取任务文件，再使用 Baoyu Design 与 React Spectrum 创建、验证第四套原型。

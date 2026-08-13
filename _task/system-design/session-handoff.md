@@ -2,10 +2,10 @@
 
 ## 当前目标
 
-- 目标：design-003 第三套高保真可交互原型。
-- 状态：完成，`needs-review`，等待用户与前两套对比复核。
-- 当前事项：`design-003`。
-- 分支 / 提交：master；本事项独立 Git commit。
+- 目标：design-004 第四套高保真可交互原型。
+- 状态：已立项，待下一位 Agent 从零执行。
+- 当前事项：`design-004`。
+- 分支 / 提交：master；本交接独立 Git commit。
 
 ## 已完成
 
@@ -60,3 +60,16 @@
 - 隔离保持：全程未读取、复制或借鉴前两套原型的代码、截图、资产、元数据或设计方向。
 - 验证：`_verify.mjs` 无头 Chrome CDP 37/37 通过，bundle error 0，console error 0，320px 无横向溢出，语言/主题持久，复制返回完整 BAP ID；截图 `preview-desktop.png`、`preview-mobile.png`。证据详见 `progress.md` 的 `2026-08-13 · design-003 实现与验证`。
 - 唯一下一步：用户并排对比三套原型，反馈保留方向或修改点；复核通过前不标记 `done`。
+
+## 2026-08-13 · design-004 交接
+
+- 当前唯一事项：`design-004`（`in-progress`）；`design-003` 已改 `blocked`，保留为对比候选。
+- 执行者：下一位 Agent。
+- 先读：`_task/system-design/AGENTS.md`、`feature_list.json`、`progress.md`、本文件。
+- 事实输入：`_task/system-design/spec/核心认知.md`、`_task/system-design/spec/prd/v0.1/设计文档v0.1.md`。
+- 设计输入：`designs/react-spectrum`；必须使用 Baoyu Design 技能。
+- 输出：`designs/own-word-prototype-004`；目录尚未创建。
+- 隔离：禁止读取、复制、导入或借鉴 `designs/own-word-prototype`、`designs/own-word-prototype-002`、`designs/own-word-prototype-003` 的代码、截图、资产、元数据和设计方向。
+- 验证：HTTP 桌面与 320px 移动视口、主流程、异常状态、语言/主题持久化、浏览器 console；证据写回 `feature_list.json` 与 `progress.md`。
+- 状态：用户人工复核前保持 `needs-review`，不得标记 `done`。
+- 唯一下一步：从任务输入独立构思并实现第四套高保真原型。
