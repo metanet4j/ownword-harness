@@ -38,3 +38,16 @@
 - 约束：继续禁止读取、复制或借鉴 `designs/own-word-prototype`；只在最终对比阶段并排查看两个交付结果。
 - 验证与未决事项：见 `progress.md` 的 `2026-08-13 · design-002`。
 - 唯一下一步：用户通过 HTTP 原型对比复核，反馈保留方向或修改点。
+
+## 2026-08-13 · design-003 交接
+
+- 当前唯一事项：`design-003`（`in-progress`）。
+- 执行者：下一位 Agent。
+- 先读：`_task/system-design/AGENTS.md`、`feature_list.json`、`progress.md`、本文件。
+- 事实输入：`_task/system-design/spec/核心认知.md`、`_task/system-design/spec/prd/v0.1/设计文档v0.1.md`。
+- 设计输入：`designs/react-spectrum`；必须使用 Baoyu Design 技能。
+- 输出：`designs/own-word-prototype-003`；目录尚未创建。
+- 隔离：禁止读取、复制、导入或借鉴 `designs/own-word-prototype` 与 `designs/own-word-prototype-002` 的代码、截图、资产、元数据和设计方向。
+- 验证：HTTP 桌面与 320px 移动视口、主流程、异常状态、语言/主题持久化、浏览器 console；证据写回 `feature_list.json` 与 `progress.md`。
+- 状态：用户人工复核前保持 `needs-review`，不得标记 `done`。
+- 唯一下一步：从任务输入独立构思并实现第三套高保真原型。

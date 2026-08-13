@@ -52,3 +52,12 @@
 - 偏好：切换中文和 Dark 后刷新，`lang=zh-CN`、`data-theme=dark` 保留；协议值与用户内容不变。
 - 资产：`designs/own-word-prototype-002/_d_meta.json` 已登记 `index.html`，状态 `needs-review`。
 - 待办：用户对比复核后，记录选择结果；复核通过才将 `design-002` 标记 `done`。
+
+## 2026-08-13 · design-003 启动
+
+- 当前唯一事项：`design-003`（`in-progress`）；`design-002` 改为 `blocked`，作为等待对比评审的候选。
+- 执行者：下一位 Agent。
+- 输出：`designs/own-word-prototype-003`；当前不预建目录，保证下一位 Agent 从零开始。
+- 输入只限核心认知、PRD v0.1、React Spectrum；禁止读取两套既有原型的代码、截图、资产、元数据和设计方向。
+- 第三套必须独立形成视觉层级、布局结构和交互表达；不得覆盖前两套原型。
+- 唯一下一步：下一位 Agent 按门禁读取任务文件，再使用 Baoyu Design 与 React Spectrum 创建、验证第三套原型。
