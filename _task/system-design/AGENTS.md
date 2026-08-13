@@ -13,6 +13,11 @@
 - 改原型：进对应子目录提交，不动根仓库。
 - 改任务文档（AGENTS.md、feature_list.json、progress.md、session-handoff.md）：在根仓库提交。
 
+## Git 提交规则
+
+- 每次 Git commit 信息必须带当前 PRD 版本号（如 `v0.1`）；根仓库与 `designs/` 子仓库一致。
+- 版本号不明时先向用户确认，确认前禁止提交。
+
 ## 开工顺序
 
 1. 确认工作目录为 `_task\system-design`。
