@@ -38,3 +38,17 @@
 
 - [x] 保留文档存在且非空；`feature_list.json` 可解析；最多一个 `in-progress` 事项。
 - [x] `init.sh` 已删除；目录无启动或测试脚本。
+
+## 2026-08-13 · design-002
+
+- 当前事项：`design-002`，状态 `in-progress`；`design-001` 暂停为 `blocked`，保证唯一进行项。
+- 从零建立 `designs/own-word-prototype-002`；未读取、复制或借鉴 `designs/own-word-prototype`。
+- 设计方向：以“身份文档/公开凭证”为主视觉，避免常规卡片后台；使用 React Spectrum 中性色、边框、紧凑控件、语义状态与焦点规范。
+- 覆盖：Welcome、Wallet 请求/取消/失败、Identity 解析、Setup、表单校验、Review、创建中、成功、My Identity、完整 BAP ID Copy、Edit Profile、保存/取消、未保存离开保护、Account Switch、Disconnect、中文/英文、Light/Dark、解析失败。
+- Key Rotation 依据 PRD 待确认结论下放到 v0.1.1，本原型不包含。
+- HTTP：`http://127.0.0.1:4311/own-word-prototype-002/index.html` 返回 200。
+- 浏览器：主流程可操作；React Spectrum bundle error 为空；console error 为 0。
+- 响应式：1440px 桌面通过；320×740 移动视口 `scrollWidth <= innerWidth`，无横向溢出；移动端隐藏内部“Prototype states”入口，避免遮挡正文。
+- 偏好：切换中文和 Dark 后刷新，`lang=zh-CN`、`data-theme=dark` 保留；协议值与用户内容不变。
+- 资产：`designs/own-word-prototype-002/_d_meta.json` 已登记 `index.html`，状态 `needs-review`。
+- 待办：用户对比复核后，记录选择结果；复核通过才将 `design-002` 标记 `done`。

@@ -30,3 +30,11 @@
 ## 唯一下一步
 
 - 获取首个 PRD 或实现设计目标及其输入资料。
+
+## 2026-08-13 交接
+
+- 当前唯一事项：`design-002`（`in-progress`）。
+- 原型：`designs/own-word-prototype-002/index.html`。
+- 约束：继续禁止读取、复制或借鉴 `designs/own-word-prototype`；只在最终对比阶段并排查看两个交付结果。
+- 验证与未决事项：见 `progress.md` 的 `2026-08-13 · design-002`。
+- 唯一下一步：用户通过 HTTP 原型对比复核，反馈保留方向或修改点。

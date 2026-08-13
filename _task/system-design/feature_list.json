@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "design-001",
+  "activeItem": "design-002",
   "features": [
     {
       "id": "harness-001",
@@ -29,7 +29,7 @@
       "dependencies": [
         "harness-001"
       ],
-      "status": "in-progress",
+      "status": "blocked",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
@@ -45,7 +45,36 @@
         "原型资产已记录到 designs/own-word-prototype/_d_meta.json",
         "已评估原型变更对 PRD 和后端设计的影响，并记录需要同步的事项"
       ],
-      "evidence": ""
+      "evidence": "2026-08-13 按用户要求暂停旧方向；design-002 制作期间禁止读取或参考该原型目录。"
+    },
+    {
+      "id": "design-002",
+      "name": "设计 v0.1 第二套高保真可交互原型",
+      "description": "依据与 design-001 相同的 PRD v0.1、核心认知和 React Spectrum 设计系统，从零建立独立视觉与交互方案，用于对比挑选；禁止读取、复制或借鉴 design-001 的原型目录。",
+      "dependencies": [
+        "harness-001"
+      ],
+      "status": "in-progress",
+      "inputs": [
+        "_task/system-design/spec/核心认知.md",
+        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+        "designs/react-spectrum"
+      ],
+      "output": "designs/own-word-prototype-002",
+      "constraints": [
+        "不得读取、复制或借鉴 design-001 的原型目录及其中资产",
+        "Key Rotation 已由 PRD 决定下放到 v0.1.1，不进入本原型"
+      ],
+      "doneCriteria": [
+        "原型覆盖 PRD v0.1 中 Wallet、Identity、Profile、语言与主题的用户可见流程、页面和关键状态",
+        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
+        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
+        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
+        "原型在桌面与 320px 移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
+        "原型资产已记录到 designs/own-word-prototype-002/_d_meta.json",
+        "已记录与 design-001 独立对比所需的设计差异和验证证据"
+      ],
+      "evidence": "2026-08-13：已从零建立 designs/own-word-prototype-002；通过 Baoyu Design 导入脚本绑定 React Spectrum；HTTP 200；浏览器验证连接、创建、查看、编辑、未保存变更保护、语言与主题持久化；1440px 桌面与 320px 移动视口无横向溢出；浏览器 console error 为 0；_d_meta.json 已记录资产，状态 needs-review，等待用户对比复核。"
     }
   ]
 }
