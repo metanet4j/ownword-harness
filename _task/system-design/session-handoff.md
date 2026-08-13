@@ -91,3 +91,11 @@
 - 本次：首页移除 Connect Wallet 按钮；右箭头点击或右滑进入 Wallet gateway；连接钱包居中并带脉冲动效；点击连接播放航行过渡后落到钱包确认。
 - 验证：`_verify.mjs` 53/53 通过，console/runtime error 0，320px 无横向溢出；证据详见 `progress.md` 的 `2026-08-13 · design-003 再迭代（首页进入流）`。
 - 唯一下一步：用户复核首页进入流与“厚重感”整体方向，反馈保留或继续调整。
+
+## 2026-08-13 · design-003 又修订交接
+
+- 当前唯一事项：`design-003`（`in-progress`）；`design-004` 保持 `blocked` 交付候选。
+- 原型：`designs/own-word-prototype-003/index.html`；HTTP `http://127.0.0.1:4311/own-word-prototype-003/index.html`。
+- 本次：冷钢金属配色（表面高光渐变，Light/Dark 同步）；语言与主题合并为单一偏好胶囊 + 弹层。
+- 验证：`_verify.mjs` 56/56 通过，console/runtime error 0，320px 无横向溢出；证据详见 `progress.md` 的 `2026-08-13 · design-003 又修订（金属配色 + 偏好合并）`。
+- 唯一下一步：用户复核金属质感强度与偏好弹层交互，反馈保留或继续调整。

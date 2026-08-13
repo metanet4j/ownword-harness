@@ -119,3 +119,12 @@
 - 验证：无头 Chrome CDP `_verify.mjs` 53/53 通过：Welcome 无连接按钮、箭头进 gateway、连接按钮居中且 `::after` 动画 `gateway-pulse`、返回按钮回 Welcome、右滑进 gateway、航行出现、落点钱包确认；原连接/创建/复制/主题语言/切换断开等不回归；320px 无横向溢出；console/runtime error 0。截图新增 `01b-gateway-desktop-light.png`、`06b-gateway-320-dark-zh.png`；`preview-desktop.png` 更新为 gateway，`preview-mobile.png` 更新为 320 首页。
 - 资产：`_d_meta.json` 保持 `index.html` 状态 `needs-review`。
 - 待办：用户复核首页进入流与整体厚重感方向；复核通过前 `design-003` 不标记 `done`。
+
+## 2026-08-13 · design-003 又修订（金属配色 + 偏好合并）
+
+- 用户反馈：配色要有金属感；语言与主题切换合并，不再在顶栏并排两段，太丑。
+- 实现：`styles.css` 调语义令牌为冷钢中性色——Light 画布 `#e9ebee`、表面 `#f7f8fa`，Dark 画布 `#17181b`、表面 `#202226`；卡片、顶栏、对话框、弹层等表面加顶部高光渐变（`--rs-metal-hi`），accent 按钮与 gateway 连接按钮加轻高光，形成拉丝金属感；保留单一 accent 与语义色，不加彩色镀铬。
+- 合并：新增 `PreferencesMenu`，顶栏只留一个偏好胶囊（当前语言 · 当前主题），点开弹层内含 Language、Theme 两行 segmented 控件；`strings.jsx` 加 `preferences` 文案，EN/zh-CN 双语。
+- 验证：无头 Chrome CDP `_verify.mjs` 56/56 通过：语言+主题合并为一控件、偏好弹层打开、Dark/zh-CN 在弹层内切换并持久、金属表面高光存在、Light/Dark 画布令牌色值正确；原 53 项不回归，console/runtime error 0，320px 无横向溢出。`preview-desktop.png` 更新为 My Identity 浅色，`preview-mobile.png` 更新为 My Identity 320 深色中文。
+- 资产：`_d_meta.json` 保持 `index.html` 状态 `needs-review`。
+- 待办：用户复核金属质感强度与偏好弹层交互；复核通过前 `design-003` 不标记 `done`。
