@@ -183,3 +183,11 @@
 - 验证：无头 Chrome CDP `_verify.mjs` 升至 58/58 通过（提权宿主环境）：浮空动画 `ow-float` running、视差四层 computed matrix3d 互异且含 64/46px 深度、tilt 时 float paused、reduced-motion 模拟下 float 与 shadow animation 均为 none；原 54 项不回归，console/runtime error 0。`shot-public-3d-light-en.png` 更新为浅色 EN 浮空姿态；`shot-21b-public-3d-1440.png` 更新。
 - 提交：独立 Git commit `feat: stronger parallax depth and idle floating sway for public 3D card (PRD v0.1)`。
 - 待办：用户复核视差强度与摆动幅度；复核通过前 `design-005` 不标记 `done`。
+
+## 2026-08-14 · design-005 迭代：刷新后直达演示身份入口
+
+- 用户反馈：刷新看不到"查看公开身份"入口（刷新回 Welcome 后要重新走连接流程）。
+- 实现：Welcome 页 hero CTA 行新增"查看演示身份"中性按钮（EN "View demo identity"），直接打开 Alice Chen 演示身份的 My Identity，再一步进 Public Identity 3D 卡；刷新后首屏即有入口。`strings.jsx` 加 `demoEntry` 双语文案。
+- 验证：无头 Chrome CDP `_verify.mjs` 升至 62/62 通过（提权宿主环境）：welcome 演示入口存在、点击直达 My Identity（Alice Chen）、再点"查看公开身份"3D 卡可达；原 58 项不回归，console/runtime error 0。截图 `shot-26-demo-public-3d.png`。刷新行为另经探针验证（EN/Light 与 zh/Dark 双态刷新均正常渲染、console 0 错误），探针脚本已删。
+- 提交：独立 Git commit `feat: welcome demo entry opens demo identity so Public Identity stays one click after refresh (PRD v0.1)`。
+- 待办：用户复核入口交互；复核通过前 `design-005` 不标记 `done`。

@@ -150,3 +150,11 @@
 - 本次：视差 translateZ 加强（64/46/34/26/20/12px 六层）；新增 float 层 6s 浮空摆动（±14px + ±0.6deg），阴影同步呼吸；鼠标倾斜时摆动暂停，离开恢复；reduced-motion 与移动端 static 停摆。
 - 验证：`_verify.mjs` 58/58 通过（提权宿主环境），console/runtime error 0；证据详见 `progress.md` 的 `2026-08-14 · design-005 迭代：视差加强 + 浮空摆动`。截图 `shot-public-3d-light-en.png`、`shot-21b-public-3d-1440.png` 已更新。
 - 唯一下一步：用户复核视差强度与摆动幅度，反馈保留或继续调整。
+
+## 2026-08-14 · design-005 迭代交接（刷新直达演示身份）
+
+- 当前唯一事项：`design-005`（`in-progress`），保持 `needs-review`。
+- 原型：`designs/own-word-prototype-005/index.html`；HTTP `http://127.0.0.1:4311/own-word-prototype-005/index.html`。
+- 本次：Welcome 页新增"查看演示身份"按钮，免钱包流程直达 Alice Chen 的 My Identity，再一步进 Public Identity 3D 卡；解决刷新后看不到"查看公开身份"入口的问题。
+- 验证：`_verify.mjs` 62/62 通过（提权宿主环境），console/runtime error 0；证据详见 `progress.md` 的 `2026-08-14 · design-005 迭代：刷新后直达演示身份入口`。截图 `shot-26-demo-public-3d.png`。
+- 唯一下一步：用户复核入口交互与 3D 卡效果，反馈保留或继续调整。
