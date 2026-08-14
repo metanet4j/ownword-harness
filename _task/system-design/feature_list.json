@@ -72,7 +72,7 @@
         "原型资产已记录到 designs/own-word-prototype-006-2/_d_meta.json",
         "页面风格体现灯塔与信号的隐喻：同心环、频率读数、信号闪烁感；个人身份公共查看实现3D、立体、精致、旋转查看的效果"
       ],
-      "evidence": "2026-08-14：从 designs/own-word-prototype-006 复制为基础（DOM 与逻辑不变），新增 motif.css 灯塔与信号皮肤：Hero 同心环+脉冲外环+闪烁信号点；BAP ID 铭牌改信号面板（深色底 rgb(14,22,38)+顶部刻度线+亮色等宽字）；徽章同心环加信号光晕；状态灯与航点闪烁（square 信号点）；3D 卡图表环脉冲+状态点闪烁；冷蓝画布（light rgb(242,245,249)/dark rgb(13,17,25)）。验证：_verify.mjs 32/32、_audit.mjs 17/17、console/runtime/network error 0；320px 无溢出；Light/Dark 对比度 AA。独立 Git 仓库提交 (PRD v0.1)。_d_meta.json 资产 needs-review，等待用户三套对比复核。"
+      "evidence": "2026-08-14：从 designs/own-word-prototype-006 复制为基础（DOM 与逻辑不变），新增 motif.css 灯塔与信号皮肤：Hero 同心环+脉冲外环+闪烁信号点；BAP ID 铭牌改信号面板（深色底 rgb(14,22,38)+顶部刻度线+亮色等宽字）；徽章同心环加信号光晕；状态灯与航点闪烁（square 信号点）；3D 卡图表环脉冲+状态点闪烁；冷蓝画布（light rgb(242,245,249)/dark rgb(13,17,25)）。验证：_verify.mjs 32/32、_audit.mjs 17/17、console/runtime/network error 0；320px 无溢出；Light/Dark 对比度 AA。独立 Git 仓库提交 (PRD v0.1)。_d_meta.json 资产 needs-review，等待用户三套对比复核。2026-08-14 重设计（用户要求布局/结构/交互全新且贴合主题）：信号控制台方向——顶部控制台栏（品牌+SIGNAL 连接读数+等宽开关式偏好键+钱包插口胶囊）、Welcome 雷达扫描场景（同心环+旋转扫描锥+闪烁频谱条，无衬线大字）、Setup/Edit 双栏控制台表单+姓名输入实时信号表（5 格随输入点亮）、Review 传输票据（头像摘要+信号面板分段读数 BAP ID）、Creating 三盏信号灯序列+控制台日志、My Identity 仪表盘（左灯塔装置同心环脉冲+右数据读数，BAP ID 6 字符分段频率读数）、toast 右上角等宽控制台通知、3D 公共卡改雷达屏（深蓝底+扫描环+发光头像）。功能状态机、BDD 文案、data-screen-label/data-testid 契约、3D 卡 DOM 保持不变。验证：_verify.mjs 32/32、_audit.mjs 17/17（按新风格更新断言：sans 标题、雷达扫描、灯塔装置）、console/runtime/network error 0、320px 无溢出、双主题对比度 AA。注意：verify/audit 脚本 CDP 端口与 006-3 区分（9222/9224）。Git 提交 (PRD v0.1)。资产 needs-review。"
     },
     {
       "id": "design-003",
@@ -98,7 +98,7 @@
         "原型资产已记录到 designs/own-word-prototype-006-3/_d_meta.json",
         "页面风格体现地平线与大陆的隐喻：进入新大陆的航行与登陆感；个人身份公共查看实现3D、立体、精致、旋转查看的效果"
       ],
-      "evidence": "2026-08-14：从 designs/own-word-prototype-006 复制为基础（DOM 与逻辑不变），新增 motif.css 地平线与大陆皮肤：Hero 黎明暖色渐变+加粗地平线+铜色太阳沿航线航行+地平线下大陆色带；BAP ID 铭牌改契约式双框（outline 3px 外框+铜色标签）；航点线改地图轨迹虚线；3D 卡路线虚线+铜色太阳；暖沙画布（light rgb(247,244,236)/dark rgb(23,21,18)）。验证：_verify.mjs 32/32、_audit.mjs 17/17、console/runtime/network error 0；320px 无溢出；Light/Dark 对比度 AA。独立 Git 仓库提交 (PRD v0.1)。_d_meta.json 资产 needs-review，等待用户三套对比复核。"
+      "evidence": "2026-08-14：从 designs/own-word-prototype-006 复制为基础（DOM 与逻辑不变），新增 motif.css 地平线与大陆皮肤：Hero 黎明暖色渐变+加粗地平线+铜色太阳沿航线航行+地平线下大陆色带；BAP ID 铭牌改契约式双框（outline 3px 外框+铜色标签）；航点线改地图轨迹虚线；3D 卡路线虚线+铜色太阳；暖沙画布（light rgb(247,244,236)/dark rgb(23,21,18)）。验证：_verify.mjs 32/32、_audit.mjs 17/17、console/runtime/network error 0；320px 无溢出；Light/Dark 对比度 AA。独立 Git 仓库提交 (PRD v0.1)。_d_meta.json 资产 needs-review，等待用户三套对比复核。2026-08-14 重设计（用户要求布局/结构/交互全新且贴合主题）：航海日志方向——Welcome 天空/大地上下分屏（天空衬线大字+铜色太阳沿地平线航行，大地承接 CTA 与说明），指针视差交互（标题/太阳/大地随鼠标分层位移，粗指针/小屏/reduced-motion 静态）、Setup/Review/Creating 左侧航程步进轨（01 身份→02 复核→03 上链，当前步高亮，移动端转顶部横条）、Review 地平线摘要（头像作太阳+姓名落在地平线下）、Creating 船只沿线行进（0%→50%→100% 三航点+航海日志）、My Identity 地标页（太阳头像+地平线+大地姓名简介）、toast 底部胶囊、契约式坐标铭牌（铜色标签+双框）、暖沙双主题。功能状态机、BDD 文案、data-screen-label/data-testid 契约、3D 卡 DOM 保持不变。验证：_verify.mjs 32/32、_audit.mjs 17/17（按新风格更新断言：地标太阳/地平线）、console/runtime/network error 0、320px 无溢出、双主题对比度 AA。注意：verify/audit 脚本 CDP 端口与 006-2 区分（9232/9234）。Git 提交 (PRD v0.1)。资产 needs-review。"
     }
   ]
 }

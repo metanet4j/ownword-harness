@@ -6,9 +6,11 @@
 
 | 仓库 | 风格 | 状态 |
 | --- | --- | --- |
-| `designs/own-word-prototype-006` | 碑刻与航图 | in-progress（activeItem design-001），资产 needs-review |
-| `designs/own-word-prototype-006-2` | 灯塔与信号 | blocked（design-002，保留为对比候选），资产 needs-review |
-| `designs/own-word-prototype-006-3` | 地平线与大陆 | blocked（design-003，保留为对比候选），资产 needs-review |
+| `designs/own-word-prototype-006` | 碑刻与航图（纪念碑居中布局） | in-progress（activeItem design-001），资产 needs-review |
+| `designs/own-word-prototype-006-2` | 灯塔与信号（信号控制台布局） | blocked（design-002，保留为对比候选），资产 needs-review |
+| `designs/own-word-prototype-006-3` | 地平线与大陆（航海日志布局） | blocked（design-003，保留为对比候选），资产 needs-review |
+
+三套功能一致，布局/结构/交互各自独立。验证脚本 CDP 端口：006-2 用 9222/9224，006-3 用 9232/9234，不可并行重复端口。
 
 预览（服务：`python -m http.server 4311 --directory C:\haodev\ownword\designs`）：
 
