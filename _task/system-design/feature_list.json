@@ -46,7 +46,59 @@
         "已评估原型变更对 PRD 和后端设计的影响，并记录需要同步的事项",
         "页面风格体现话语的厚重感，平台的新大陆感。个人身份公共查看要 实现3D、立体、精致、旋转查看的效果"
       ],
-      "evidence": "2026-08-14：从零建立 designs/own-word-prototype-006（最终完成版），未读取前几套原型代码或截图。Baoyu Design import-design-system.mjs 绑定 React Spectrum S2（primary），遵循 _ds_prompt.md，使用 Button/StatusLight/Badge 组件与 --rs-* 令牌。视觉基调按用户选定：碑刻与航图融合——衬线碑铭 Hero 与身份名、地平线航点动线、签署条钱包请求、BAP ID 铭牌；公共身份页 CSS 3D 立体卡片（perspective+preserve-3d，指针 rotateX/rotateY ≤10deg，6 层 translateZ 视差 12–64px，镜面光泽随光源，背面厚度层，6s 浮空摆动+地面阴影呼吸，tilt 时暂停，pointer:coarse/≤640px/prefers-reduced-motion 静态）。覆盖 Wallet 连接/取消/失败（Try Again）/切换/断开（仅会话）、解析分流（已发布/无身份/资料不全/失败+重试）、Setup 校验（必填名、100/1000 计数、本地图片头像、Person/Organization）、Review（预览+BAP ID+Copy+钱包控制声明）、创建处理/取消/失败/成功（航点线 Draft/Inscription/On chain + 链上日志 Broadcast/Seen/Accepted/Mined 待确认）、My Identity（徽章纪念碑+铭牌 BAP ID 首屏+rootPath）、Public Identity（3D 卡）、Edit Profile 保存/取消/未保存离开保护、EN/zh-CN、Light（默认）/Dark、演示身份入口免钱包直达。BAP ID mock 采用 BAP PROTOCOL.md 的 base58(ripemd160(sha256(rootAddress))) 格式（reference/bap-master/bap-master/PROTOCOL.md）。验证（提权宿主环境，无头 Chrome CDP，Node 24 全局 WebSocket）：HTTP 200；_verify.mjs 32/32 通过；console/runtime/network error 0；Copy 传完整 BAP ID 且失败时值仍可见；语言主题刷新持久且 BAP ID 不变；1440px 铭牌首屏可见；320px 各关键页无横向溢出；键盘焦点环可见、图标按钮有 aria-label；_audit.mjs 17/17（hero 衬线、Light/Dark 对比度 AA（dark 下 accent 按钮改深色文字达 4.5:1）、3D 层视差互异、dialog role/aria-modal、toast aria-live、zh 行高）。截图 preview-desktop/mobile、shot-my-identity、shot-public-3d、shot-setup、shot-dark-zh、shot-mobile-my/public。_d_meta.json 资产 needs-review，等待用户复核；已评估对 PRD/后端影响并记录同步事项（见 progress.md）。"
+      "evidence": "2026-08-14：从零建立 designs/own-word-prototype-006（最终完成版），未读取前几套原型代码或截图。Baoyu Design import-design-system.mjs 绑定 React Spectrum S2（primary），遵循 _ds_prompt.md，使用 Button/StatusLight/Badge 组件与 --rs-* 令牌。视觉基调按用户选定：碑刻与航图融合——衬线碑铭 Hero 与身份名、地平线航点动线、签署条钱包请求、BAP ID 铭牌；公共身份页 CSS 3D 立体卡片（perspective+preserve-3d，指针 rotateX/rotateY ≤10deg，6 层 translateZ 视差 12–64px，镜面光泽随光源，背面厚度层，6s 浮空摆动+地面阴影呼吸，tilt 时暂停，pointer:coarse/≤640px/prefers-reduced-motion 静态）。覆盖 Wallet 连接/取消/失败（Try Again）/切换/断开（仅会话）、解析分流（已发布/无身份/资料不全/失败+重试）、Setup 校验（必填名、100/1000 计数、本地图片头像、Person/Organization）、Review（预览+BAP ID+Copy+钱包控制声明）、创建处理/取消/失败/成功（航点线 Draft/Inscription/On chain + 链上日志 Broadcast/Seen/Accepted/Mined 待确认）、My Identity（徽章纪念碑+铭牌 BAP ID 首屏+rootPath）、Public Identity（3D 卡）、Edit Profile 保存/取消/未保存离开保护、EN/zh-CN、Light（默认）/Dark、演示身份入口免钱包直达。BAP ID mock 采用 BAP PROTOCOL.md 的 base58(ripemd160(sha256(rootAddress))) 格式（reference/bap-master/bap-master/PROTOCOL.md）。验证（提权宿主环境，无头 Chrome CDP，Node 24 全局 WebSocket）：HTTP 200；_verify.mjs 32/32 通过；console/runtime/network error 0；Copy 传完整 BAP ID 且失败时值仍可见；语言主题刷新持久且 BAP ID 不变；1440px 铭牌首屏可见；320px 各关键页无横向溢出；键盘焦点环可见、图标按钮有 aria-label；_audit.mjs 17/17（hero 衬线、Light/Dark 对比度 AA（dark 下 accent 按钮改深色文字达 4.5:1）、3D 层视差互异、dialog role/aria-modal、toast aria-live、zh 行高）。截图 preview-desktop/mobile、shot-my-identity、shot-public-3d、shot-setup、shot-dark-zh、shot-mobile-my/public。_d_meta.json 资产 needs-review，等待用户复核；已评估对 PRD/后端影响并记录同步事项（见 progress.md）。2026-08-14 修订：用户要求撤销本仓库内的三风格切换改动（已 git checkout 还原），改为三种风格各建独立仓库；本仓库保持纯碑刻与航图风格。"
+    },
+    {
+      "id": "design-002",
+      "name": "设计 v0.1 灯塔与信号风格原型",
+      "description": "以 designs/own-word-prototype-006 为基础（DOM 与逻辑完全一致），叠加灯塔与信号视觉皮肤，独立 Git 仓库，用于三风格对比挑选。",
+      "dependencies": [
+        "harness-001"
+      ],
+      "status": "blocked",
+      "inputs": [
+        "_task/system-design/spec/核心认知.md",
+        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+        "designs/react-spectrum",
+        "designs/own-word-prototype-006"
+      ],
+      "output": "designs/own-word-prototype-006-2",
+      "doneCriteria": [
+        "原型覆盖 PRD v0.1 中所有用户可见流程、页面和关键状态，与 006 基础版功能一致",
+        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
+        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
+        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
+        "原型在桌面与移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
+        "原型资产已记录到 designs/own-word-prototype-006-2/_d_meta.json",
+        "页面风格体现灯塔与信号的隐喻：同心环、频率读数、信号闪烁感；个人身份公共查看实现3D、立体、精致、旋转查看的效果"
+      ],
+      "evidence": "2026-08-14：从 designs/own-word-prototype-006 复制为基础（DOM 与逻辑不变），新增 motif.css 灯塔与信号皮肤：Hero 同心环+脉冲外环+闪烁信号点；BAP ID 铭牌改信号面板（深色底 rgb(14,22,38)+顶部刻度线+亮色等宽字）；徽章同心环加信号光晕；状态灯与航点闪烁（square 信号点）；3D 卡图表环脉冲+状态点闪烁；冷蓝画布（light rgb(242,245,249)/dark rgb(13,17,25)）。验证：_verify.mjs 32/32、_audit.mjs 17/17、console/runtime/network error 0；320px 无溢出；Light/Dark 对比度 AA。独立 Git 仓库提交 (PRD v0.1)。_d_meta.json 资产 needs-review，等待用户三套对比复核。"
+    },
+    {
+      "id": "design-003",
+      "name": "设计 v0.1 地平线与大陆风格原型",
+      "description": "以 designs/own-word-prototype-006 为基础（DOM 与逻辑完全一致），叠加地平线与大陆视觉皮肤，独立 Git 仓库，用于三风格对比挑选。",
+      "dependencies": [
+        "harness-001"
+      ],
+      "status": "blocked",
+      "inputs": [
+        "_task/system-design/spec/核心认知.md",
+        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+        "designs/react-spectrum",
+        "designs/own-word-prototype-006"
+      ],
+      "output": "designs/own-word-prototype-006-3",
+      "doneCriteria": [
+        "原型覆盖 PRD v0.1 中所有用户可见流程、页面和关键状态，与 006 基础版功能一致",
+        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
+        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
+        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
+        "原型在桌面与移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
+        "原型资产已记录到 designs/own-word-prototype-006-3/_d_meta.json",
+        "页面风格体现地平线与大陆的隐喻：进入新大陆的航行与登陆感；个人身份公共查看实现3D、立体、精致、旋转查看的效果"
+      ],
+      "evidence": "2026-08-14：从 designs/own-word-prototype-006 复制为基础（DOM 与逻辑不变），新增 motif.css 地平线与大陆皮肤：Hero 黎明暖色渐变+加粗地平线+铜色太阳沿航线航行+地平线下大陆色带；BAP ID 铭牌改契约式双框（outline 3px 外框+铜色标签）；航点线改地图轨迹虚线；3D 卡路线虚线+铜色太阳；暖沙画布（light rgb(247,244,236)/dark rgb(23,21,18)）。验证：_verify.mjs 32/32、_audit.mjs 17/17、console/runtime/network error 0；320px 无溢出；Light/Dark 对比度 AA。独立 Git 仓库提交 (PRD v0.1)。_d_meta.json 资产 needs-review，等待用户三套对比复核。"
     }
   ]
 }
