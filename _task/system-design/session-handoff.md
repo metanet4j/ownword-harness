@@ -123,3 +123,14 @@
 - 本次：A+B 方案——碑刻视觉 + 航点线，去掉 1/2/3 编号步骤；My/Public Identity 改纪念碑中心件。
 - 验证：`_verify.mjs` 61/61 通过，console/runtime error 0，320px 无横向溢出；证据详见 `progress.md` 的 `2026-08-13 · design-003 五改（A+B 碑刻航图，去编号步骤）`。
 - 唯一下一步：用户复核 A+B 视觉与航点线效果，反馈保留或继续调整。
+
+## 2026-08-14 · design-005 交付
+
+- 当前唯一事项：`design-005`（`in-progress`）；`design-003` 改 `blocked`，保留对比候选。
+- 原型：`designs/own-word-prototype-005/index.html`；HTTP `http://127.0.0.1:4311/own-word-prototype-005/index.html`（服务根为 `designs/`，端口 4311 后台 python http.server）。
+- 方向：Signal & Beacon——无顶栏、底部 Dock；同心环灯塔件 + 等宽频率读数 BAP ID；链上状态用传输日志行；钱包请求用请求卡。独立于前四套。
+- 隔离保持：全程未读取、复制或借鉴前四套原型的代码、截图、资产、元数据或设计方向。
+- 环境备注：unpkg 与 npmmirror 不可达，React/ReactDOM/Babel 用 Baoyu Design 技能自带 vendor 副本（`vendor/`）。
+- 验证：`_verify.mjs` 无头 Chrome CDP 46/46 通过（提权宿主环境），console/runtime error 0，Copy 传完整 BAP ID，复制失败值仍可见，语言/主题刷新持久，1440px BAP ID 首屏可见，320px 各关键页无横向溢出，focus ring 可见；截图 `preview-desktop.png`、`preview-mobile.png`。证据详见 `progress.md` 的 `2026-08-14 · design-005 启动与实现`。
+- 提交：独立 Git commit 带 `(PRD v0.1)`。
+- 唯一下一步：用户并排对比五套原型，反馈保留方向或修改点；复核通过前不标记 `done`。

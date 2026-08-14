@@ -152,3 +152,16 @@
 - 验证：无头 Chrome CDP `_verify.mjs` 61/61 通过：Setup/Review/Creating 无 `.step-num` 且航点线三节点、Ready 四航点含 pending、纪念碑中心件存在；原 58 项不回归，console/runtime error 0，320px 无横向溢出。`preview-desktop.png` 更新为 Review 航点线页，`preview-mobile.png` 更新为 My Identity 纪念碑页。
 - 资产：`_d_meta.json` 保持 `index.html` 状态 `needs-review`。
 - 待办：用户复核 A+B 视觉与航点线效果；复核通过前 `design-003` 不标记 `done`。
+
+## 2026-08-14 · design-005 启动与实现
+
+- 用户要求：新增一个原型设计功能点并开始设计。`design-005` 登记为唯一 `in-progress`；`design-003` 改 `blocked`，保留对比候选。
+- 输入只限核心认知、PRD v0.1、React Spectrum；必须使用 Baoyu Design 技能；禁止读取、复制、导入或借鉴前四套原型的代码、截图、资产、元数据或设计方向；只能写入 `designs/own-word-prototype-005`。
+- 方向五「Signal & Beacon（信号与灯塔）」：无顶栏，底部 Dock 承载品牌、Prototype 面板、语言、主题、钱包状态；Identity 用同心环灯塔件 + 等宽频率读数 BAP ID；链上状态用传输日志行（Broadcast/Seen/Accepted/Mined，Mined 待确认），不用航点线/时间线/步骤编号；钱包请求用请求卡，不用窗口模拟。与前四套视觉层级、布局结构、交互表达均独立。
+- 覆盖：Wallet 连接/取消/失败/切换/断开、解析分流（已发布/无身份/资料不全/失败）、Setup 校验（必填名、100/1000 字数、本地图片头像）、Review（含"你的钱包控制这个身份"）、创建处理/取消/失败/成功、My Identity、Public Identity、Edit Profile 保存/取消/未保存离开保护、EN/zh-CN、Light/Dark。Key Rotation 不进入本原型（PRD 已下放 v0.1.1）。
+- 术语与不变量遵守核心认知：Wallet 连接不称注册/登录；BAP ID 不可编辑、Copy 返回完整值；用户拒绝为 Cancelled、系统异常为 Failed；Locale/Theme 不影响链上值；状态含文字不只靠颜色。
+- 环境备注：unpkg 与 npmmirror 本次均不可达，React 18.3.1/ReactDOM/Babel standalone 使用 Baoyu Design 技能自带 vendor 副本。
+- 验证：本地 HTTP `http://127.0.0.1:4311/own-word-prototype-005/index.html` 返回 200；无头 Chrome CDP `_verify.mjs` 46/46 通过（提权宿主环境运行）：HTTP 200、console/runtime error 0、Copy 传完整 70 字符 BAP ID、复制失败值仍可见、语言与主题刷新后持久、1440px BAP ID 首屏可见、320×740 各关键页 `scrollWidth <= 320` 无横向溢出、主操作可用、focus ring 可见。截图：`preview-desktop.png`、`preview-mobile.png`、`shot-12-setup-fresh-1440.png`、`shot-17-my-1440-zh-dark.png`、`shot-24-edit-320.png`。本会话模型不支持读取图片，视觉像素复核以 DOM 几何与计算样式断言替代。
+- 资产：`_d_meta.json` 已登记 `index.html`，状态 `needs-review`。
+- 提交：独立 Git 仓库 commit `(PRD v0.1)`；临时探针脚本已从提交中移除。
+- 待办：用户并排对比五套方案后反馈选择；复核通过前 `design-005` 不标记 `done`。
