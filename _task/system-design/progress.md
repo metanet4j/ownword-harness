@@ -165,3 +165,13 @@
 - 资产：`_d_meta.json` 已登记 `index.html`，状态 `needs-review`。
 - 提交：独立 Git 仓库 commit `(PRD v0.1)`；临时探针脚本已从提交中移除。
 - 待办：用户并排对比五套方案后反馈选择；复核通过前 `design-005` 不标记 `done`。
+
+## 2026-08-14 · design-005 迭代：PUBLIC IDENTITY 3D 立体卡片
+
+- 用户反馈：PUBLIC IDENTITY 页做成模拟真实立体卡片，精致，3D 感觉，可随鼠标旋转移动。
+- 实现：`app.jsx` 新增 `PublicCard3D` 组件，`styles.css` 加 3D 样式。卡片在 `perspective: 1200px` 容器内 `preserve-3d`，指针移动按中心偏移计算 `rotateX/rotateY`（最大 8deg，rAF 节流，90ms 线性跟随），鼠标离开清 CSS 变量缓动回正（600ms）。镜面光泽 `radial-gradient` 与地面阴影随指针偏移（`--gx/--gy/--shx/--shy`），头像/姓名/徽章/状态/读数分别 `translateZ` 8-42px 分层视差，卡片背面 `-10px` 厚度层，双层 box-shadow 模拟悬浮高度，Light/Dark 双主题。`pointer: coarse` 或视口 ≤640px 时静态不旋转。触屏与窄屏降级为平面卡。
+- 顺带修复：Edit 表单改用 draft 副本，Discard 后 My Identity 保持旧值（原实现会残留未保存值）；`guardLeave` 非 dirty 分支漏 `navigate` 导致"取消"无法离开编辑页。
+- 验证：无头 Chrome CDP `_verify.mjs` 升至 54/54 通过（提权宿主环境）：3D 卡存在、随鼠标倾斜（`--tilt-x/--tilt-y` 写入且含 deg）、光泽跟随（`--gx` 变化）、离开回正（tilt 类移除）、移动端 static 且 320px 无横向溢出；原 46 项不回归，console/runtime error 0。截图：`shot-21b-public-3d-1440.png`（zh 深色）、`shot-public-3d-light-en.png`（浅色 EN）、`shot-25-public-320.png`。视觉像素复核以 DOM 几何与计算样式断言替代（本会话模型无图输入）。
+- 资产：`_d_meta.json` 保持 `index.html` 状态 `needs-review`。
+- 提交：独立 Git commit `feat: 3D tilting public identity card with pointer-following sheen and shadow (PRD v0.1)`。
+- 待办：用户复核 3D 卡片质感、旋转灵敏度与移动端降级；复核通过前 `design-005` 不标记 `done`。

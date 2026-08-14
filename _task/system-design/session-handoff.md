@@ -134,3 +134,11 @@
 - 验证：`_verify.mjs` 无头 Chrome CDP 46/46 通过（提权宿主环境），console/runtime error 0，Copy 传完整 BAP ID，复制失败值仍可见，语言/主题刷新持久，1440px BAP ID 首屏可见，320px 各关键页无横向溢出，focus ring 可见；截图 `preview-desktop.png`、`preview-mobile.png`。证据详见 `progress.md` 的 `2026-08-14 · design-005 启动与实现`。
 - 提交：独立 Git commit 带 `(PRD v0.1)`。
 - 唯一下一步：用户并排对比五套原型，反馈保留方向或修改点；复核通过前不标记 `done`。
+
+## 2026-08-14 · design-005 迭代交接（PUBLIC IDENTITY 3D 卡）
+
+- 当前唯一事项：`design-005`（`in-progress`），保持 `needs-review`。
+- 原型：`designs/own-word-prototype-005/index.html`；HTTP `http://127.0.0.1:4311/own-word-prototype-005/index.html`。
+- 本次：PUBLIC IDENTITY 改为 3D 立体卡片，随鼠标 rotateX/rotateY 旋转（最大 8deg），镜面光泽与地面阴影跟随指针，头像/姓名等分层 translateZ 视差；离开鼠标缓动回正；触屏/≤640px 静态降级。附带修复 edit draft 回滚与 guardLeave 漏 navigate。
+- 验证：`_verify.mjs` 54/54 通过（提权宿主环境），console/runtime error 0；证据详见 `progress.md` 的 `2026-08-14 · design-005 迭代：PUBLIC IDENTITY 3D 立体卡片`。截图 `shot-public-3d-light-en.png`、`shot-21b-public-3d-1440.png`、`shot-25-public-320.png`。
+- 唯一下一步：用户复核 3D 卡片质感与旋转灵敏度，反馈保留或继续调整。
