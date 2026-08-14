@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "design-004",
+  "activeItem": "design-005",
   "features": [
     {
       "id": "harness-001",
@@ -107,7 +107,7 @@
       "dependencies": [
         "harness-001"
       ],
-      "status": "in-progress",
+      "status": "blocked",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
@@ -124,6 +124,31 @@
         "不参考任何现有实现"
       ],
       "evidence": "2026-08-14：用户澄清风格：就是穹顶之下加地平，非天文观测台，无其他方向。006-4 已丢失（备份目录 C:\\haodev\\system-design-backup 无 006-4），从零全新构建 designs/own-word-prototype-007，未读取任何旧实现，功能行为以核心认知+PRD v0.1 BDD 为准。风格：常驻 Scene（SVG 穹顶主弧+回响弧+中央刻标+地平基准线+21 刻度+等宽刻度数字）；衬线碑铭体话语（Hero/名字/实时刻字预览），等宽读数（BAP ID 铭牌/日志/刻度），冷银秩序色+DS 蓝操作色，浅雾蓝白/墨蓝夜双主题。功能：Wallet 连接/取消/失败（Try Again）/切换（终止敏感操作+新账户重新解析）/断开（仅会话）；解析分流（已发布/无身份/资料不全+Complete your profile/失败+重试+断开）；Setup 校验（必填名≤100、简介≤1000 计数、本地图片头像、Person/Organization）；Review（预览+BAP ID 铭牌+Copy 完整值+钱包控制声明）；创建刻度进度 0/50/100%（Draft/Sign & publish/On chain）+链上日志（Broadcast/Seen/Accepted/Mined pending）+取消保留 profile/失败 Try Again/成功 Go to My Identity；My Identity（铭牌 BAP ID 首屏+rootPath）；Public Identity（3D 立体卡：8 层 translateZ 视差 0–64px、指针 tilt ≤10deg、镜面光泽、6s 浮空+地面阴影呼吸、coarse/320/reduced-motion 静态）；Edit Profile（保存/取消/未保存离开 dialog+beforeunload 保护）；EN/zh-CN（默认 EN）、Light（默认）/Dark 持久化且 BAP ID 不变。BAP ID mock 3wuJXv6FJuxDvgZ8ttiB97qfEUJk 按 BAP PROTOCOL.md 的 base58(ripemd160(sha256(rootAddress))) 派生。技术：React 18/ReactDOM/Babel standalone 本地 vendor（无 CDN 依赖）；Baoyu import-design-system.mjs 绑定 React Spectrum S2（primary），使用 Button/StatusLight/Badge 组件与 --rs-* 令牌。验证（提权宿主环境，无头 Chrome CDP 9252/9254，HTTP 127.0.0.1:4311）：_verify.mjs 82/82（全部功能状态机、Copy 传完整 BAP ID 且失败时值仍可见、语言主题刷新持久且 BAP ID 不变、1440px 铭牌首屏可见、320px 各关键屏无横向溢出、Tab 焦点环 2px solid、图标按钮有 aria-label、console/runtime/network error 0）；_audit.mjs 27/27（穹顶弧+基准线+21 刻度+中央刻标、衬线话语 vs 等宽读数、Light/Dark 画布色、对比度 AA（light 10.87/4.87、dark 15.26、dark accent 7.34）、3D 层 8 种视差深度跨度 64px、dialog role/aria-modal、toast aria-live、zh 行高≥1.8、无 emoji、无观测台词汇、reduced-motion 静态）。截图 10 张。Git 提交 a91a91c (PRD v0.1)。资产 needs-review，等待用户复核。2026-08-14 修订（用户要求）：话语增加厚重感——衬线话语元素（Hero/标题/品牌/名字/刻字预览/3D 卡名/对话框标题）统一 --ow-word-shadow（light 三层压印：0 1px 0 白描边+0 2px 3px+0 10px 22px；dark 三层深影：0 1px 2px+0 6px 16px 黑+0 0 26px 微光）；地平线去掉刻度——Scene 基线仅主线+两端帽，删除 21 刻度线与 6 个刻度数字，刻字预览线去刻度渐变改纯线，删除未用 centerMark/axisUnit 文案键。验证重跑：_verify.mjs 82/82、_audit.mjs 27/27（断言更新：基线仅 3 线无刻度无数字、话语 text-shadow 非 none）。截图重生成。Git 提交 a617387 (PRD v0.1)。资产仍 needs-review。"
+    },
+    {
+      "id": "design-005",
+      "name": "设计 v0.1 地平与穹顶风格原型",
+      "description": "依据核心认知与 PRD v0.1 BDD，全新设计穹顶之下加地平的布局、结构与交互：穹顶天幕（天蓝色光晕）+地平基准线（铁灰色阴影），代表话语的基准与秩序,配色增加厚重感。非天文观测台，无其他风格方向。不参考任何现有实现。独立 Git 仓库",
+      "dependencies": [
+        "harness-001"
+      ],
+      "status": "in-progress",
+      "inputs": [
+        "_task/system-design/spec/核心认知.md",
+        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+        "designs/react-spectrum"
+      ],
+      "output": "designs/own-word-prototype-007-002",
+      "doneCriteria": [
+        "原型覆盖 PRD v0.1 中所有用户可见流程、页面和关键状态",
+        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
+        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
+        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
+        "原型在桌面与移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
+        "页面风格体现穹顶与地平的隐喻：穹顶天幕（天蓝色光晕）、地平基准线（铁灰色阴影、无刻度——继承 design-004 用户裁决 2026-08-14）、配色厚重感、秩序感（非天文观测台）；个人身份公共查看实现3D、立体、精致、旋转查看的效果",
+        "不参考任何现有实现"
+      ],
+      "evidence": "2026-08-14：用户澄清风格：就是穹顶之下加地平，非天文观测台，无其他方向。2026-08-14 开工（design-005）：用户确认地平基准线无刻度（继承 design-004 裁决）；风格按 description——穹顶天幕（天蓝色光晕）+地平基准线（铁灰色阴影）+配色厚重感；输出新仓库 designs/own-word-prototype-007-002，功能行为以核心认知+PRD v0.1 BDD 为准，不读取任何现有原型实现。完成：从零构建 designs/own-word-prototype-007-002（独立 Git 仓库，commit bebe37f (PRD v0.1)）。风格：天幕 Sky band（天蓝渐变+径向光晕+SVG 穹顶主弧/回响弧/中央刻标+光斑）压在地基 Ground 之上，地平基准线=铁灰粗线+两端帽+地面投影（无刻度无数字，继承 004 裁决）；衬线碑铭话语（Hero/标题/名字/3D 卡名，light 压印三层 shadow、dark 深影三层=厚重感），等宽读数（BAP ID 铭牌/钱包胶囊/计数/日志）；配色天蓝光晕+铁灰结构+厚重面板阴影，浅天光/深蓝夜双主题。功能覆盖 PRD v0.1 BDD 全部：Wallet 连接/取消/失败（Try Again）/切换（终止敏感操作+重新解析）/断开（仅会话）；解析分流（已发布→My Identity/无身份→Setup/资料不全→Setup+Complete your profile/失败→Try Again+Disconnect）；Setup 校验（必填名≤100、简介≤1000 计数、本地图片头像、Person/Organization、inline error）；Review（预览+BAP ID 铭牌+Copy+Your wallet controls this identity.）；创建进度 0/50/100%（Draft/Sign & publish/On chain）+链上日志（Broadcast/Seen/Accepted/Mined pending）+取消保留值/失败 Try Again/成功 Go to My Identity；My Identity（BAP ID 铭牌首屏+Avatar/Name/Type/Bio+rootPath bap:0）；Public Identity（3D 卡：8 层 translateZ -64/-40/0/8/16/32/48/64、pointer tilt≤10deg、镜面光泽、6s 浮空+地面阴影呼吸、coarse/320px/reduced-motion 静态）；Edit Profile（保存 Saving→Saved/取消保留编辑值/未保存离开 dialog+beforeunload）；EN（默认）/zh-CN、Light（默认）/Dark 持久化且 BAP ID 不变。BAP ID mock 3SyWUZXvhidNcEHbAC3HkBnKoD2Q 按 BAP PROTOCOL.md line 151-161 的 base58(ripemd160(sha256(rootAddress))) 示例（rootAddress 1WffojxvgpQBmUTigoss7VUdfN45JiiRK，rootPath bap:0）。技术：React 18.3.1/ReactDOM/Babel 7.29.0 本地 vendor（npm 下载，无 CDN 依赖）；Baoyu import-design-system.mjs 绑定 React Spectrum S2（primary，namespace ReactSpectrum_bc5541），使用 Button/StatusLight/Badge 组件与 --rs-* 令牌。验证（提权宿主环境，无头 Chrome CDP 9262/9264，HTTP 127.0.0.1:4313）：_verify.mjs 27/27（全部 BDD 状态机、Copy 传完整 BAP ID 且失败时值仍可见、语言主题刷新持久且 BAP ID 不变、1440px 铭牌首屏可见、320px 各关键屏无横向溢出、focus-visible 2px outline 规则存在、图标按钮有 aria-label、console/runtime/network error 0）；_audit.mjs 11/11（穹顶弧+回响弧+刻标+光晕+光斑、地平 4 线无刻度无数字、衬线话语 vs 等宽读数、话语 text-shadow 非 none、Light/Dark 画布与铭牌不同、对比度 AA（含 dark accent 按钮深色文字）、3D 8 层视差互异跨度 64px+浮空动画+reduced-motion 静态、dialog role/aria-modal、toast role、zh 行高≥1.8、无 emoji、无观测台词汇）。截图 6 张（welcome/setup/setup-dark-zh/my-identity/public-3d/mobile-320）。资产 needs-review，等待用户复核；复核通过后 design-005 标 done。"
     }
   ]
 }

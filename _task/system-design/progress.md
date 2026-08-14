@@ -1,5 +1,34 @@
 # system-design 进度
 
+## 2026-08-14 — design-005 天蓝光晕+铁灰地平+厚重感原版（007-002）
+
+### 决策
+
+- 用户确认地平基准线无刻度（继承 design-004 2026-08-14 裁决）；feature_list 的 doneCriteria 与 description 冲突已按 description 修正。
+- 风格：穹顶天幕（天蓝色光晕）+ 地平基准线（铁灰色阴影、无刻度）+ 配色厚重感；非天文观测台。
+- 全新构建 `designs/own-word-prototype-007-002`，独立 Git 仓库，不读取任何现有原型实现；功能行为以核心认知 + PRD v0.1 BDD 为准。
+
+### 完成项
+
+- 隐喻系统：天幕 Sky band（天蓝渐变+径向光晕+穹顶主弧/回响弧/中央刻标）承载话语（衬线碑铭），地平基准线（铁灰粗线+两端帽+地面投影）分隔出地基 Ground 承载事实（等宽读数、表单、铭牌）。
+- 功能：覆盖 PRD v0.1 BDD 全部流程（Wallet 全状态、解析分流、Setup 校验、Review、创建生命周期、My Identity、Public 3D 卡、Edit Profile、EN/zh-CN、Light/Dark）。
+- 技术：React 18.3.1/ReactDOM/Babel 7.29.0 本地 vendor（npm 下载，无 CDN）；React Spectrum S2 设计系统 primary（import-design-system.mjs 绑定，Button/StatusLight/Badge + --rs-* 令牌）。
+- 契约：`data-ow-test` 测试钩子（DS Button 不透传自定义 props，钩子放 OwT 包装层）；故障注入 URL 参数 walletFail/resolveFail/noIdentity/incompleteProfile/createFail/copyFail。
+- 验证全绿（提权宿主环境）：`_verify.mjs` 27/27（CDP 9262）、`_audit.mjs` 11/11（CDP 9264）、console/runtime/network error 0、320px 无溢出、双主题对比度 AA、3D 8 层视差、reduced-motion 静态。截图 6 张。
+- 独立 Git 仓库提交 `bebe37f` `(PRD v0.1)`；`_d_meta.json` 资产 needs-review，等待用户复核。
+- 预览：`http://127.0.0.1:4313/own-word-prototype-007-002/index.html`（服务 job pwsh-2：`python -m http.server 4313 --directory C:\haodev\ownword\designs`）。
+
+### 风险
+
+- 本会话模型无图像输入，截图未回读模型；视觉检查由 `_audit.mjs` 计算样式断言代替，用户需在浏览器复核视觉效果。
+- 无头 Chrome 不触发 `:focus-visible` 启发式（CDP 键盘模拟无效）；焦点环改为样式表规则存在性断言（DS components.css + 应用层 styles.css 各有 2px outline 规则）。
+- CDP 调试中发现的坑已记录在验证脚本注释：CSSRuleList 不可 for...of、CSSOM shorthand outline 不展开 outlineWidth、CSSStyleRule 也有空 cssRules、navigate 需等 Page.loadEventFired 防竞态。
+- 007-002 CDP 端口 9262/9264，与其他原型仓库端口（9222/9224、9232/9234、9242/9244、9252/9254）互斥。
+
+### 对 PRD / 后端设计的同步事项
+
+- 无新同步项：007-002 严格按核心认知与 PRD v0.1 BDD 实现，未引入新术语、状态或流程。
+
 ## 2026-08-14 — design-004 修订：话语厚重感 + 地平线去刻度
 
 ### 决策
