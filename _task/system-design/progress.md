@@ -175,3 +175,11 @@
 - 资产：`_d_meta.json` 保持 `index.html` 状态 `needs-review`。
 - 提交：独立 Git commit `feat: 3D tilting public identity card with pointer-following sheen and shadow (PRD v0.1)`。
 - 待办：用户复核 3D 卡片质感、旋转灵敏度与移动端降级；复核通过前 `design-005` 不标记 `done`。
+
+## 2026-08-14 · design-005 迭代：视差加强 + 浮空摆动
+
+- 用户反馈：加视差强度、让卡片浮空摆动。
+- 实现：视差 `translateZ` 整体加强——avatar 64px、name 46px、badge 34px、bio 26px、status 20px、readout 12px（原 42/30/24/18/14/8）。新增 `.ow-card3d__float` 中间层：6s `ease-in-out` 无限浮空（`translateY` ±14px + `rotateZ` ±0.6deg 轻摆），地面阴影同步呼吸（opacity 0.5↔0.34）。鼠标倾斜时浮空动画 `animation-play-state: paused`（卡片定住供细看），离开恢复；`prefers-reduced-motion` 与移动端 static 下动画全停。
+- 验证：无头 Chrome CDP `_verify.mjs` 升至 58/58 通过（提权宿主环境）：浮空动画 `ow-float` running、视差四层 computed matrix3d 互异且含 64/46px 深度、tilt 时 float paused、reduced-motion 模拟下 float 与 shadow animation 均为 none；原 54 项不回归，console/runtime error 0。`shot-public-3d-light-en.png` 更新为浅色 EN 浮空姿态；`shot-21b-public-3d-1440.png` 更新。
+- 提交：独立 Git commit `feat: stronger parallax depth and idle floating sway for public 3D card (PRD v0.1)`。
+- 待办：用户复核视差强度与摆动幅度；复核通过前 `design-005` 不标记 `done`。

@@ -142,3 +142,11 @@
 - 本次：PUBLIC IDENTITY 改为 3D 立体卡片，随鼠标 rotateX/rotateY 旋转（最大 8deg），镜面光泽与地面阴影跟随指针，头像/姓名等分层 translateZ 视差；离开鼠标缓动回正；触屏/≤640px 静态降级。附带修复 edit draft 回滚与 guardLeave 漏 navigate。
 - 验证：`_verify.mjs` 54/54 通过（提权宿主环境），console/runtime error 0；证据详见 `progress.md` 的 `2026-08-14 · design-005 迭代：PUBLIC IDENTITY 3D 立体卡片`。截图 `shot-public-3d-light-en.png`、`shot-21b-public-3d-1440.png`、`shot-25-public-320.png`。
 - 唯一下一步：用户复核 3D 卡片质感与旋转灵敏度，反馈保留或继续调整。
+
+## 2026-08-14 · design-005 迭代交接（视差 + 浮空摆动）
+
+- 当前唯一事项：`design-005`（`in-progress`），保持 `needs-review`。
+- 原型：`designs/own-word-prototype-005/index.html`；HTTP `http://127.0.0.1:4311/own-word-prototype-005/index.html`。
+- 本次：视差 translateZ 加强（64/46/34/26/20/12px 六层）；新增 float 层 6s 浮空摆动（±14px + ±0.6deg），阴影同步呼吸；鼠标倾斜时摆动暂停，离开恢复；reduced-motion 与移动端 static 停摆。
+- 验证：`_verify.mjs` 58/58 通过（提权宿主环境），console/runtime error 0；证据详见 `progress.md` 的 `2026-08-14 · design-005 迭代：视差加强 + 浮空摆动`。截图 `shot-public-3d-light-en.png`、`shot-21b-public-3d-1440.png` 已更新。
+- 唯一下一步：用户复核视差强度与摆动幅度，反馈保留或继续调整。
