@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "design-005",
+  "activeItem": "design-001",
   "features": [
     {
       "id": "harness-001",
@@ -29,160 +29,24 @@
       "dependencies": [
         "harness-001"
       ],
-      "status": "blocked",
-      "inputs": [
-        "_task/system-design/spec/核心认知.md",
-        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
-        "designs/react-spectrum"
-      ],
-      "output": "designs/own-word-prototype",
-      "doneCriteria": [
-        "原型覆盖 PRD v0.1 中所有用户可见流程、页面和关键状态",
-        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
-        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
-        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
-        "原型在桌面与移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
-        "原型资产已记录到 designs/own-word-prototype/_d_meta.json",
-        "已评估原型变更对 PRD 和后端设计的影响，并记录需要同步的事项"
-      ],
-      "evidence": "2026-08-13 按用户要求暂停旧方向；design-002 制作期间禁止读取或参考该原型目录。"
-    },
-    {
-      "id": "design-002",
-      "name": "设计 v0.1 第二套高保真可交互原型",
-      "description": "依据与 design-001 相同的 PRD v0.1、核心认知和 React Spectrum 设计系统，从零建立独立视觉与交互方案，用于对比挑选；禁止读取、复制或借鉴 design-001 的原型目录。",
-      "dependencies": [
-        "harness-001"
-      ],
-      "status": "blocked",
-      "inputs": [
-        "_task/system-design/spec/核心认知.md",
-        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
-        "designs/react-spectrum"
-      ],
-      "output": "designs/own-word-prototype-002",
-      "constraints": [
-        "不得读取、复制或借鉴 design-001 的原型目录及其中资产",
-        "Key Rotation 已由 PRD 决定下放到 v0.1.1，不进入本原型"
-      ],
-      "doneCriteria": [
-        "原型覆盖 PRD v0.1 中 Wallet、Identity、Profile、语言与主题的用户可见流程、页面和关键状态",
-        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
-        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
-        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
-        "原型在桌面与 320px 移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
-        "原型资产已记录到 designs/own-word-prototype-002/_d_meta.json",
-        "已记录与 design-001 独立对比所需的设计差异和验证证据"
-      ],
-      "evidence": "2026-08-13：已从零建立 designs/own-word-prototype-002；通过 Baoyu Design 导入脚本绑定 React Spectrum；HTTP 200；浏览器验证连接、创建、查看、编辑、未保存变更保护、语言与主题持久化；1440px 桌面与 320px 移动视口无横向溢出；浏览器 console error 为 0；_d_meta.json 已记录资产，状态 needs-review，等待用户对比复核。2026-08-13：用户要求下一位 Agent 继续设计第三套方案，本项暂停并保留为对比候选。"
-    },
-    {
-      "id": "design-003",
-      "name": "设计 v0.1 第三套高保真可交互原型",
-      "description": "由下一位 Agent 依据 PRD v0.1、核心认知和 React Spectrum 设计系统，从零重新设计第三套独立高保真原型，用于与前两套方案对比挑选。",
-      "dependencies": [
-        "harness-001"
-      ],
-      "status": "blocked",
-      "inputs": [
-        "_task/system-design/spec/核心认知.md",
-        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
-        "designs/react-spectrum"
-      ],
-      "output": "designs/own-word-prototype-003",
-      "constraints": [
-        "必须先阅读 _task/system-design/AGENTS.md、feature_list.json、progress.md 和 session-handoff.md",
-        "必须使用 Baoyu Design 技能和 React Spectrum 设计系统",
-        "不得读取、复制、导入或借鉴 designs/own-word-prototype 与 designs/own-word-prototype-002 的代码、截图、资产、_d_meta.json 或设计方向",
-        "不得覆盖前两套原型；只能写入 designs/own-word-prototype-003",
-        "核心认知是术语、实体、关系、状态和边界的唯一事实源",
-        "Key Rotation 已由 PRD 决定下放到 v0.1.1，不进入本原型",
-        "完成前必须通过 HTTP 进行桌面与 320px 移动视口检查，并记录浏览器错误、交互和响应式证据"
-      ],
-      "doneCriteria": [
-        "原型覆盖 PRD v0.1 中 Wallet、Identity、Profile、语言与主题的用户可见流程、页面和关键状态",
-        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
-        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
-        "第三套视觉层级、布局结构和交互表达独立形成，不从前两套方案派生",
-        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
-        "原型在桌面与 320px 移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
-        "原型资产已记录到 designs/own-word-prototype-003/_d_meta.json",
-        "feature_list.json、progress.md 和 session-handoff.md 已记录验证证据与唯一下一步",
-        "已创建独立 Git commit；用户人工复核前保持 needs-review，不标记 done"
-      ],
-      "evidence": "2026-08-13：从零建立 designs/own-word-prototype-003，未读取、复制或借鉴前两套原型；Baoyu Design 导入并绑定 React Spectrum S2。第三套视觉与交互独立：工作台壳 + 身份旅程步骤轨 + 单列任务面板，BAP ID 用等宽大字号 ledger 展示，避免身份文档隐喻。覆盖 Wallet 连接/取消/失败/切换/断开、解析分流（已发布/无身份/资料不全/失败）、Setup 表单校验、Review、Create 处理/成功/取消/失败、My Identity、Public Identity、Edit Profile 保存/取消/未保存保护、EN/zh-CN、Light/Dark。无头 Chrome CDP 验证 37/37 通过：HTTP 200；React Spectrum bundle error 0；console/runtime error 0；Copy 返回完整 BAP ID 且失败时标识仍可见；语言与主题刷新后持久；BAP ID 跨语言主题不变；1440px 桌面 BAP ID 首屏可见；320px 无横向溢出；截图 preview-desktop.png 与 preview-mobile.png。_d_meta.json 资产状态 needs-review。2026-08-13：用户要求下一位 Agent 继续设计第四套方案，本项暂停并保留为对比候选。2026-08-13 修订：按用户反馈强化“话语的重量感 + 新大陆感”，上链成功加动效。Hero 标题分两层放大（Own your identity. / Own your words.），加地平线与 Bitcoin 主权身份铭文；My/Public Identity 姓名用大字号粗体、简介加重为陈述、加 bap:0 · Bitcoin 账本标注；Review 加“认领”宣言；Create Identity 成功页改为印章落地动效 + Broadcast/Seen/Accepted/Mined 链上状态逐帧出现，Mined 待确认。2026-08-13 再修订：Welcome 加进场动效（一打开即动）；动效默认开启，Prototype 面板提供 Motion 开关，OS prefers-reduced-motion 下仍可显式开启，关闭后动画全停。2026-08-13 三修订：首页加向右箭头，点击播放航行过渡（地平线扫过 + 圆点前行 + “进入新大陆”文案）后落到钱包确认，营造进入新大陆感；无头 Chrome CDP 48/48 通过，console/runtime error 0。2026-08-13 再迭代：首页移除 Connect Wallet 按钮，只留右箭头与滑动提示；箭头点击或右滑进入新页 Wallet gateway，连接钱包居中并带脉冲动效，点击连接播放航行过渡后落钱包确认；连接取消返回 Welcome，连接失败在 gateway 显示失败与 Try Again；修复无钱包时 stage 残留 272px 空列导致内容左偏。无头 Chrome CDP 53/53 通过，console/runtime error 0。2026-08-13 又修订：配色改金属感（冷钢中性色 + 表面顶部高光渐变，Light/Dark 同步），语言与主题合并为单一偏好胶囊 + 弹层，顶栏不再两排铺陈；无头 Chrome CDP 56/56 通过，console/runtime error 0。2026-08-13 三改：整体加阴影与光泽——表面双层高光（顶光 + 左上镜面光斑）、环境软阴影、内边缘高光/阴影、accent 按钮珠宝式光泽，增强立体感；无头 Chrome CDP 57/57 通过，console/runtime error 0。2026-08-13 四改：去掉管理后台感——移除左侧 Rail 与右侧 Journey 两层，主内容单列居中，与全新访客首页一致；无头 Chrome CDP 58/58 通过，console/runtime error 0。2026-08-13 五改：采用 A+B 方案（碑刻 + 航图）且不带 1/2/3 编号——Setup/Review/Creating/Ready 用航点线（Draft/Inscription/On chain 与 Broadcast/Seen/Accepted/Mined），My/Public Identity 改纪念碑中心件（大头像 + kicker + 大字姓名），钱包确认改签署条居中；无头 Chrome CDP 61/61 通过，console/runtime error 0。"
-    },
-    {
-      "id": "design-004",
-      "name": "设计 v0.1 第四套高保真可交互原型",
-      "description": "由下一位 Agent 依据 PRD v0.1、核心认知和 React Spectrum 设计系统，从零重新设计第四套独立高保真原型，用于与前三套方案对比挑选。",
-      "dependencies": [
-        "harness-001"
-      ],
-      "status": "blocked",
-      "inputs": [
-        "_task/system-design/spec/核心认知.md",
-        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
-        "designs/react-spectrum"
-      ],
-      "output": "designs/own-word-prototype-004",
-      "constraints": [
-        "必须先阅读 _task/system-design/AGENTS.md、feature_list.json、progress.md 和 session-handoff.md",
-        "必须使用 Baoyu Design 技能和 React Spectrum 设计系统",
-        "不得读取、复制、导入或借鉴 designs/own-word-prototype、designs/own-word-prototype-002、designs/own-word-prototype-003 的代码、截图、资产、_d_meta.json 或设计方向",
-        "不得覆盖前三套原型；只能写入 designs/own-word-prototype-004",
-        "核心认知是术语、实体、关系、状态和边界的唯一事实源",
-        "Key Rotation 已由 PRD 决定下放到 v0.1.1，不进入本原型",
-        "完成前必须通过 HTTP 进行桌面与 320px 移动视口检查，并记录浏览器错误、交互和响应式证据"
-      ],
-      "doneCriteria": [
-        "原型覆盖 PRD v0.1 中 Wallet、Identity、Profile、语言与主题的用户可见流程、页面和关键状态",
-        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
-        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
-        "第四套视觉层级、布局结构和交互表达独立形成，不从前三套方案派生",
-        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
-        "原型在桌面与 320px 移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
-        "原型资产已记录到 designs/own-word-prototype-004/_d_meta.json",
-        "feature_list.json、progress.md 和 session-handoff.md 已记录验证证据与唯一下一步",
-        "已创建独立 Git commit；用户人工复核前保持 needs-review，不标记 done"
-      ],
-      "evidence": "2026-08-13：从零建立 designs/own-word-prototype-004，未读取、复制或借鉴前三套原型；Baoyu Design import-design-system.mjs 绑定 React Spectrum S2（primary），遵循 _ds_prompt.md 令牌约束。第四套视觉与交互独立：单列引导式聚焦舞台（每步一个居中面板），钱包驻留顶栏胶囊+下拉菜单，Yours Wallet 以深色标题栏模拟窗口呈现，BAP ID 用带边框 ID 铭牌（等宽换行+Copy）表达；Setup 单页表单+Review 单独面板，不用步骤轨/时间线/文档隐喻。覆盖 Wallet 连接/取消/失败/切换/断开、解析分流（已发布/无身份/资料不全/失败）、Setup 校验（必填名、100/1000 字数、本地头像）、Review、创建处理/取消/失败/成功、My Identity、Public Identity、Edit Profile 保存/取消/未保存离开保护、EN/zh-CN、Light/Dark（--rs-* 语义令牌覆写）。因 unpkg 不可达，React UMD 从 npmmirror 下载并本地 vendored，Babel 用技能自带 vendor 副本。无头 Chrome CDP _verify.mjs 49/49 通过：HTTP 200、console/runtime error 0、Copy 传完整 BAP ID、复制失败标识仍可见、语言主题刷新持久、BAP ID 跨语言主题不变、1440px BAP ID 首屏可见、320px 各关键页无横向溢出；截图 preview-desktop.png、preview-mobile.png。_d_meta.json 资产状态 needs-review，等待用户四套对比复核。2026-08-13：用户返回迭代 design-003，本项改为 blocked，保持交付候选。"
-    },
-    {
-      "id": "design-005",
-      "name": "设计 v0.1 第五套高保真可交互原型",
-      "description": "由下一位 Agent 依据 PRD v0.1、核心认知和 React Spectrum 设计系统，从零重新设计第五套独立高保真原型，用于与前四套方案对比挑选。",
-      "dependencies": [
-        "harness-001"
-      ],
       "status": "in-progress",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
         "designs/react-spectrum"
       ],
-      "output": "designs/own-word-prototype-005",
-      "constraints": [
-        "必须先阅读 _task/system-design/AGENTS.md、feature_list.json、progress.md 和 session-handoff.md",
-        "必须使用 Baoyu Design 技能和 React Spectrum 设计系统",
-        "不得读取、复制、导入或借鉴 designs/own-word-prototype、designs/own-word-prototype-002、designs/own-word-prototype-003、designs/own-word-prototype-004 的代码、截图、资产、_d_meta.json 或设计方向",
-        "不得覆盖前四套原型；只能写入 designs/own-word-prototype-005",
-        "核心认知是术语、实体、关系、状态和边界的唯一事实源",
-        "Key Rotation 已由 PRD 决定下放到 v0.1.1，不进入本原型",
-        "完成前必须通过 HTTP 进行桌面与 320px 移动视口检查，并记录浏览器错误、交互和响应式证据"
-      ],
+      "output": "designs/own-word-prototype-006",
       "doneCriteria": [
-        "原型覆盖 PRD v0.1 中 Wallet、Identity、Profile、语言与主题的用户可见流程、页面和关键状态",
+        "原型覆盖 PRD v0.1 中所有用户可见流程、页面和关键状态",
         "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
         "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
-        "第五套视觉层级、布局结构和交互表达独立形成，不从前四套方案派生",
         "关键导航、操作、表单校验、反馈、异常和空状态可交互",
-        "原型在桌面与 320px 移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
-        "原型资产已记录到 designs/own-word-prototype-005/_d_meta.json",
-        "feature_list.json、progress.md 和 session-handoff.md 已记录验证证据与唯一下一步",
-        "已创建独立 Git commit；用户人工复核前保持 needs-review，不标记 done"
+        "原型在桌面与移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
+        "原型资产已记录到 designs/own-word-prototype-006/_d_meta.json",
+        "已评估原型变更对 PRD 和后端设计的影响，并记录需要同步的事项",
+        "页面风格体现话语的厚重感，平台的新大陆感。个人身份公共查看要 实现3D、立体、精致、旋转查看的效果"
       ],
-      "evidence": "2026-08-14：从零建立 designs/own-word-prototype-005，未读取、复制或借鉴前四套原型；Baoyu Design import-design-system.mjs 绑定 React Spectrum S2（primary）。第五套视觉与交互独立：无顶栏，底部 Dock 承载品牌/Prototype 面板/语言/主题/钱包状态；Identity 用同心环灯塔件+等宽频率读数 BAP ID（整值换行+Copy）；链上状态用传输日志行（Broadcast/Seen/Accepted/Mined，非航点线/时间线/文档隐喻）；钱包请求用请求卡（非窗口模拟）。覆盖 Wallet 连接/取消/失败/切换/断开、解析分流（已发布/无身份/资料不全/失败）、Setup 校验（必填名、100/1000 字数、本地图片头像）、Review、创建处理/取消/失败/成功、My Identity、Public Identity、Edit Profile 保存/取消/未保存离开保护、EN/zh-CN、Light/Dark（--rs-* 令牌覆写）。环境：unpkg/npmmirror 均不可达，React/ReactDOM/Babel 用技能自带 vendor 副本。验证：本地 HTTP 200；无头 Chrome CDP _verify.mjs 46/46 通过（提权宿主环境）；console/runtime error 0；Copy 传完整 70 字符 BAP ID 且复制失败值仍可见；语言主题刷新持久；1440px BAP ID 首屏可见；320px 各关键页 scrollWidth<=320 无横向溢出；focus ring 可见。截图 preview-desktop.png、preview-mobile.png。_d_meta.json 资产 needs-review，等待用户五套对比复核。2026-08-14 迭代：用户要求 PUBLIC IDENTITY 页做真实立体卡片，3D 可随鼠标旋转。实现 PublicCard3D 组件：CSS perspective+preserve-3d，卡片随指针 rotateX/rotateY（最大 8deg），镜面光泽与地面阴影跟随光源（--gx/--gy/--shx/--shy 变量），鼠标离开缓动回正；头像/姓名/徽章/状态/读数分层 translateZ 视差，卡片背面 -10px 厚度层；pointer:coarse 或视口<=640px 时静态不旋转；同时修复 edit draft 回滚（discard 后 My Identity 保持旧值）与 guardLeave 非 dirty 分支漏 navigate 的 bug。验证升至 54/54 通过：3D 卡存在、随鼠标倾斜（--tilt-x/--tilt-y 写入）、光泽跟随、离开回正、移动端 static 且 320px 无溢出；console/runtime error 0。截图 shot-21b-public-3d-1440.png（zh 深色）、shot-public-3d-light-en.png（浅色 EN）、shot-25-public-320.png。独立 Git commit (PRD v0.1) 已建，状态保持 needs-review。2026-08-14 再迭代：用户要求加视差强度、卡片浮空摆动。视差 translateZ 加强（avatar 64px/name 46px/badge 34px/bio 26px/status 20px/readout 12px）；新增 .ow-card3d__float 层 6s 缓动浮空摆动（translateY ±14px + rotateZ ±0.6deg），地面阴影同步呼吸（opacity .5/.34），鼠标倾斜时摆动暂停，离开恢复；prefers-reduced-motion 与移动端 static 下动画全停。验证升至 58/58：视差层 matrix3d 互异且含 64/46px、float 动画 running、tilt 时 paused、reduced-motion 下 animation none；console/runtime error 0。截图 shot-public-3d-light-en.png 更新。独立 Git commit (PRD v0.1)。状态保持 needs-review。2026-08-14 三迭代：用户反馈刷新后看不到“查看公开身份”入口。Welcome 页 hero CTA 行新增“查看演示身份”中性按钮，免走钱包流程直达 Alice Chen 演示身份的 My Identity，再一步进 Public Identity 3D 卡；刷新后首屏即有入口。验证升至 62/62：welcome 演示入口存在、点击直达 My Identity（Alice Chen）、再点“查看公开身份”3D 卡可达；console/runtime error 0。截图 shot-26-demo-public-3d.png。独立 Git commit (PRD v0.1)。状态保持 needs-review。"
+      "evidence": "2026-08-14：从零建立 designs/own-word-prototype-006（最终完成版），未读取前几套原型代码或截图。Baoyu Design import-design-system.mjs 绑定 React Spectrum S2（primary），遵循 _ds_prompt.md，使用 Button/StatusLight/Badge 组件与 --rs-* 令牌。视觉基调按用户选定：碑刻与航图融合——衬线碑铭 Hero 与身份名、地平线航点动线、签署条钱包请求、BAP ID 铭牌；公共身份页 CSS 3D 立体卡片（perspective+preserve-3d，指针 rotateX/rotateY ≤10deg，6 层 translateZ 视差 12–64px，镜面光泽随光源，背面厚度层，6s 浮空摆动+地面阴影呼吸，tilt 时暂停，pointer:coarse/≤640px/prefers-reduced-motion 静态）。覆盖 Wallet 连接/取消/失败（Try Again）/切换/断开（仅会话）、解析分流（已发布/无身份/资料不全/失败+重试）、Setup 校验（必填名、100/1000 计数、本地图片头像、Person/Organization）、Review（预览+BAP ID+Copy+钱包控制声明）、创建处理/取消/失败/成功（航点线 Draft/Inscription/On chain + 链上日志 Broadcast/Seen/Accepted/Mined 待确认）、My Identity（徽章纪念碑+铭牌 BAP ID 首屏+rootPath）、Public Identity（3D 卡）、Edit Profile 保存/取消/未保存离开保护、EN/zh-CN、Light（默认）/Dark、演示身份入口免钱包直达。BAP ID mock 采用 BAP PROTOCOL.md 的 base58(ripemd160(sha256(rootAddress))) 格式（reference/bap-master/bap-master/PROTOCOL.md）。验证（提权宿主环境，无头 Chrome CDP，Node 24 全局 WebSocket）：HTTP 200；_verify.mjs 32/32 通过；console/runtime/network error 0；Copy 传完整 BAP ID 且失败时值仍可见；语言主题刷新持久且 BAP ID 不变；1440px 铭牌首屏可见；320px 各关键页无横向溢出；键盘焦点环可见、图标按钮有 aria-label；_audit.mjs 17/17（hero 衬线、Light/Dark 对比度 AA（dark 下 accent 按钮改深色文字达 4.5:1）、3D 层视差互异、dialog role/aria-modal、toast aria-live、zh 行高）。截图 preview-desktop/mobile、shot-my-identity、shot-public-3d、shot-setup、shot-dark-zh、shot-mobile-my/public。_d_meta.json 资产 needs-review，等待用户复核；已评估对 PRD/后端影响并记录同步事项（见 progress.md）。"
     }
   ]
 }
