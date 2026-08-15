@@ -6,6 +6,14 @@
 根目录 C:\haodev\ownword
 其余路径采用相对路径
 
+## 原型预览
+
+```powershell
+python -m http.server 4311 --bind 127.0.0.1 --directory C:\haodev\ownword\designs
+```
+
+访问 `http://127.0.0.1:4311/<项目目录>/`。
+
 ## Git 仓库结构
 
 - 根仓库 `C:\haodev\ownword` 只跟踪文档与任务文件；`.gitignore` 忽略 `designs/*`。
