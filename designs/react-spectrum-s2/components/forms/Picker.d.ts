@@ -1,0 +1,20 @@
+import type {ReactElement, ReactNode} from 'react';
+
+export interface PickerProps {
+  children?: ReactNode;
+  label?: string;
+  description?: string;
+  value?: string | number;
+  variant?: 'accent' | 'primary' | 'secondary' | 'negative' | 'premium' | 'genai' | 'neutral' | 'quiet';
+  fillStyle?: 'fill' | 'outline';
+  size?: 'XS' | 'S' | 'M' | 'L' | 'XL';
+  isDisabled?: boolean;
+  isSelected?: boolean;
+  isQuiet?: boolean;
+  isEmphasized?: boolean;
+  onPress?: () => void;
+  className?: string;
+  'aria-label'?: string;
+}
+
+export declare function Picker(props: PickerProps): ReactElement;
