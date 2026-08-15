@@ -1,0 +1,11 @@
+:root {
+  --rsp3-source-package-version: "3.47.3"; /* @kind other */
+  --rsp3-control-height-medium: 32px;
+  --rsp3-control-height-large: 40px;
+  --rsp3-radius-control: 4px;
+  --rsp3-radius-surface: 6px;
+  --rsp3-focus-width: 2px;
+  --rsp3-motion-fast: 130ms; /* @kind other */
+  --rsp3-motion-standard: 160ms; /* @kind other */
+  --rsp3-motion-slow: 250ms; /* @kind other */
+}

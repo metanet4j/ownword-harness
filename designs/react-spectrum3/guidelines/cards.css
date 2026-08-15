@@ -1,0 +1,15 @@
+.ds-card { box-sizing: border-box; min-height: 100%; padding: 20px 24px; color: var(--rsp3-text); background: var(--rsp3-background); font-family: var(--rsp3-font-family); }
+.ds-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.ds-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.ds-swatch { min-height: 68px; display: flex; flex-direction: column; justify-content: flex-end; padding: 8px; border: 1px solid rgb(0 0 0 / .08); border-radius: 4px; color: #fff; font-size: 11px; font-weight: 700; }
+.ds-swatch.is-light { color: #222; }
+.ds-type { display: flex; flex-direction: column; gap: 4px; }
+.ds-type small, .ds-note { color: var(--rsp3-text-muted); font-size: 12px; }
+.ds-space { display: flex; gap: 8px; align-items: flex-end; }
+.ds-space span { display: block; background: var(--rsp3-accent); }
+.ds-chip { padding: 5px 9px; border: 1px solid var(--rsp3-border); border-radius: 4px; background: var(--rsp3-layer-raised); font-size: 12px; }
+.ds-motion { width: 80px; height: 40px; border-radius: 20px; background: var(--rsp3-accent); animation: ds-slide 1.6s cubic-bezier(.45,0,.4,1) infinite alternate; }
+.ds-illustrations { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: center; }
+.ds-illustrations img { width: 100%; height: 110px; object-fit: contain; }
+@keyframes ds-slide { to { transform: translateX(360px); } }
+@media (prefers-reduced-motion: reduce) { .ds-motion { animation: none; } }
