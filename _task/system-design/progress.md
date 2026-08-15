@@ -9,15 +9,16 @@
 ### 完成项
 
 - 新建独立仓库 `designs/own-word-prototype-styles-001`：DesignCanvas 并排三张 320×600 样板，同一内容骨架（OWNWORD 顶栏、Wallet 胶囊、Hero 话语、BAP ID 铭牌、Signature valid/ACTIVE、Create my Identity CTA、3D 预览位）。
-- A 穹顶碑铭绑定 `react-spectrum-s2`（primary）：天蓝光晕 + 双层穹顶弧 + 中央刻标 + 无刻度铁灰地平 + 衬线厚重话语 + mono 铭牌。
-- B 信号控制台绑定 `react-spectrum3`：深蓝雷达面板、同心环、旋转扫描锥、闪烁信号点、频率读数、BAP ID 分段 mono、控制台日志。
-- C 白昼大陆绑定 `react-spectrum4`：黎明暖色渐变 + 太阳沿航线 + 地平线 + 契约式铭牌 + 胶囊按钮。
+- 2026-08-15 用户裁决：不复用任何既有方案（穹顶/灯塔/大陆），结合产品特点重给三种。样板板更新为：
+- 一 铅字印玺绑定 `react-spectrum4`：纸面细纹 + 衬线压印话语（高光/内影/深影三层）+ 朱砂印章（negative 红）+ 契约式双框铭牌 + 骑缝章。
+- 二 账本坐标绑定 `react-spectrum3`：蓝墨格线纸 + 分类账 ticker（BLOCK/PAGE/CH）+ BAP ID 六格坐标 + 链上日志行（BROADCAST/SEEN/ACCEPTED）。
+- 三 宣言卷轴绑定 `react-spectrum-s2`（primary）：碑式衬线大字 + 青铜饰线（notice 色）+ 火漆印 + 公开宣言编号铭牌 + 签署栏。
 - 三系统经 import-design-system.mjs 导入 `_ds/`，`_d_meta.json` 记录绑定与 primary；资产 4 件 needs-review。
 
 ### 验证
 
-- 宿主 in-app Browser：样板板 3 画板 3 iframe 全部渲染；三页 page error 0；A/B/C accent 按钮实测 rgb(86,129,255)（S2）/ rgb(2,101,220)（RSP3）/ rgb(2,101,220)（S2 核心）；穹顶、雷达、太阳 motif 元素齐备。
-- 独立仓库提交 `353d43b` `(PRD v0.1)`。
+- 宿主 in-app Browser：样板板 3 画板 3 iframe 全部渲染；三页 page error 0；accent 实测 一/二=rgb(2,101,220)、三=rgb(86,129,255)（S2 新蓝）；印章、六格坐标、火漆 motif 齐备。
+- 独立仓库提交 `353d43b`、`<新提交>` `(PRD v0.1)`。
 
 ### 风险
 
