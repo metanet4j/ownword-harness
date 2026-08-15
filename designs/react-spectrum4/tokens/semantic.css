@@ -1,0 +1,35 @@
+/* 本导入层的语义别名：只引用上游已编译 token，不新造数值。 */
+.spectrum {
+  --s2-source-package: "@adobe/spectrum-tokens@14.15.0 + @react-spectrum/s2"; /* @kind other */
+  --s2-font-family: var(--spectrum-global-font-family-base); /* @kind font */
+  --s2-font-mono: var(--spectrum-global-font-family-code); /* @kind font */
+  --s2-background: var(--spectrum-alias-background-color-default);
+  --s2-surface: var(--spectrum-gray-50);
+  --s2-layer: var(--spectrum-gray-75);
+  --s2-border: var(--spectrum-gray-400);
+  --s2-border-strong: var(--spectrum-gray-600);
+  --s2-text: var(--spectrum-gray-900);
+  --s2-text-muted: var(--spectrum-gray-700);
+  --s2-accent: var(--spectrum-accent-background-color-default);
+  --s2-accent-hover: var(--spectrum-accent-background-color-hover);
+  --s2-accent-content: var(--spectrum-accent-content-color-default); /* @kind color */
+  --s2-negative: var(--spectrum-negative-background-color-default);
+  --s2-positive: var(--spectrum-positive-background-color-default);
+  --s2-notice: var(--spectrum-notice-background-color-default); /* @kind color */
+  --s2-informative: var(--spectrum-informative-background-color-default);
+  --s2-focus: var(--spectrum-blue-900);
+  --s2-radius-control: var(--spectrum-alias-border-radius-regular);
+  --s2-radius-field: 8px; /* corner-radius-medium-default */
+  --s2-radius-surface: 8px; /* corner-radius-medium-default */
+  --s2-radius-pill: 999px;
+  --s2-control-height: 32px;
+  --s2-control-height-large: 40px;
+  --s2-motion-fast: var(--spectrum-global-animation-duration-100); /* @kind other */
+  --s2-motion-standard: var(--spectrum-global-animation-duration-200); /* @kind other */
+  --s2-motion-slow: var(--spectrum-global-animation-duration-500); /* @kind other */
+  color: var(--s2-text);
+  font-family: var(--s2-font-family);
+  font-size: var(--spectrum-global-dimension-font-size-100);
+  line-height: 1.5;
+  background: var(--s2-background);
+}

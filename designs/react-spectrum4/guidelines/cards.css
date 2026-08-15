@@ -1,0 +1,17 @@
+.ds-card { box-sizing: border-box; min-height: 100%; padding: 20px 24px; color: var(--s2-text); background: var(--s2-background); font-family: var(--s2-font-family); }
+.ds-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.ds-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.ds-swatch { min-height: 64px; display: flex; flex-direction: column; justify-content: flex-end; padding: 8px; border: 1px solid rgb(0 0 0 / .08); border-radius: var(--s2-radius-control); color: #fff; font-size: 11px; font-weight: 700; }
+.ds-swatch.is-light { color: #222; }
+.ds-type { display: flex; flex-direction: column; gap: 4px; }
+.ds-type small, .ds-note { color: var(--s2-text-muted); font-size: 12px; }
+.ds-space { display: flex; gap: 8px; align-items: flex-end; }
+.ds-space span { display: block; background: var(--s2-accent); }
+.ds-chip { padding: 5px 9px; border: 1px solid var(--s2-border); border-radius: var(--s2-radius-control); background: var(--s2-layer); font-size: 12px; }
+.ds-motion { width: 64px; height: 32px; border-radius: 999px; background: var(--s2-accent); animation: ds-slide 1.6s cubic-bezier(.45, 0, .4, 1) infinite alternate; }
+.ds-theme-panel { flex: 1; min-width: 150px; padding: 14px; border-radius: var(--s2-radius-surface); }
+.ds-icons { display: grid; grid-template-columns: repeat(10, 1fr); gap: 12px; align-items: center; }
+.ds-icons img { width: 20px; height: 20px; }
+.ds-icons small { color: var(--s2-text-muted); font-size: 10px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@keyframes ds-slide { to { transform: translateX(300px); } }
+@media (prefers-reduced-motion: reduce) { .ds-motion { animation: none; } }
