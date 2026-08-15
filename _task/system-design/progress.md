@@ -1,5 +1,28 @@
 # system-design 进度
 
+## 2026-08-15 — design-006 风格样板板（评审辅助）
+
+### 决策
+
+- 用户要求基于现有设计系统推荐三种风格并先看样板再选。样板板作为 design-006 评审辅助，不新建 feature 事项。
+
+### 完成项
+
+- 新建独立仓库 `designs/own-word-prototype-styles-001`：DesignCanvas 并排三张 320×600 样板，同一内容骨架（OWNWORD 顶栏、Wallet 胶囊、Hero 话语、BAP ID 铭牌、Signature valid/ACTIVE、Create my Identity CTA、3D 预览位）。
+- A 穹顶碑铭绑定 `react-spectrum-s2`（primary）：天蓝光晕 + 双层穹顶弧 + 中央刻标 + 无刻度铁灰地平 + 衬线厚重话语 + mono 铭牌。
+- B 信号控制台绑定 `react-spectrum3`：深蓝雷达面板、同心环、旋转扫描锥、闪烁信号点、频率读数、BAP ID 分段 mono、控制台日志。
+- C 白昼大陆绑定 `react-spectrum4`：黎明暖色渐变 + 太阳沿航线 + 地平线 + 契约式铭牌 + 胶囊按钮。
+- 三系统经 import-design-system.mjs 导入 `_ds/`，`_d_meta.json` 记录绑定与 primary；资产 4 件 needs-review。
+
+### 验证
+
+- 宿主 in-app Browser：样板板 3 画板 3 iframe 全部渲染；三页 page error 0；A/B/C accent 按钮实测 rgb(86,129,255)（S2）/ rgb(2,101,220)（RSP3）/ rgb(2,101,220)（S2 核心）；穹顶、雷达、太阳 motif 元素齐备。
+- 独立仓库提交 `353d43b` `(PRD v0.1)`。
+
+### 风险
+
+- 本会话模型无图像输入，视觉以 DOM/计算样式断言代替；用户需浏览器目视三张样板。
+
 ## 2026-08-15 — design-006 React Spectrum S2 穹顶与地平
 
 ### 决策

@@ -2,12 +2,12 @@
 
 ## 当前事项
 
-design-006（in-progress，activeItem）：全新 S2 穹顶与地平原型位于 `designs/own-word-prototype-s2-001`。静态验证 16/16，浏览器主流程、错误矩阵、桌面与真实 320px 视觉验证通过；独立仓库提交 `48e2926` `(PRD v0.1)`；资产 `needs-review`。
+design-006（in-progress，activeItem）：S2 穹顶与地平原型位于 `designs/own-word-prototype-s2-001`，资产 `needs-review`。风格样板板位于 `designs/own-word-prototype-styles-001`（commit `353d43b` `(PRD v0.1)`）。
 
 ## 唯一下一步
 
-等待用户复核 S2 原型（`http://localhost:4311/own-word-prototype-s2-001/index.html`；320px：`http://localhost:4311/own-word-prototype-s2-001/mobile-preview.html`）。复核后：
+等待用户在样板板上选定风格（`http://localhost:4311/own-word-prototype-styles-001/index.html`）：
 
-1. 资产按用户意见 `record-asset.mjs --status approved` 或 `--status changes-requested`。
-2. design-006 标记 done，evidence 补人工复核记录；根仓库 commit。
-3. design-005 保持 blocked；旧候选按用户意见保留或归档。
+1. 选 A：design-006 复核定稿，`record-asset.mjs --status approved`，标 done。
+2. 选 B 或 C：按所选系统新建原型仓库（功能行为以核心认知 + PRD v0.1 BDD 为准），提交带 `(PRD v0.1)`。
+3. 定稿后更新 feature_list.json 证据与状态，根仓库 commit。
