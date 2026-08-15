@@ -1,5 +1,32 @@
 # system-design 进度
 
+## 2026-08-15 — design-006 React Spectrum S2 穹顶与地平
+
+### 决策
+
+- 输出全新独立仓库 `designs/own-word-prototype-s2-001`；只以核心认知、PRD v0.1、BAP 协议与 `designs/react-spectrum-s2` 为依据，不读取或复用旧原型实现。
+- 视觉采用用户确认的穹顶方案：天蓝光晕、双层穹顶弧、中央刻标、无刻度铁灰地平线、地面阴影、厚重话语；非天文观测台。
+- Key Rotation 已移至 PRD v0.1.1；Content、Artifact、Explorer、Relationship 不进入本版。
+
+### 完成项
+
+- Baoyu Design 导入完整 S2 为 primary：namespace `ReactSpectrumS2_ad4872`，应用根节点绑定 `.s2`；使用 Button、ActionButton、Badge、StatusLight、ProgressCircle、S2 Token 与官方 workflow icons。
+- 覆盖 PRD v0.1 用户流程：Wallet 全状态；身份解析四分流；Setup 校验、本地头像与身份类型；Review；创建确认/处理/失败/成功；My/Public Identity；Edit 保存/取消/未保存保护；EN/zh-CN、Light/Dark；账户切换与断开。
+- Public Identity：八层 CSS 3D 景深，指针旋转 ±9deg；粗指针、≤600px 与 reduced-motion 静态降级。
+- `mobile-preview.html` 提供真实 320px iframe 浏览上下文；`preview.png` 为桌面预览图；`_d_meta.json` 已登记 `needs-review`。
+
+### 验证
+
+- 静态：`node verify.mjs` 16/16；S2 + 项目变量闭包无未解析 Token；官方图标均存在；八层深度、320px、粗指针与 reduced-motion 断言通过；`git diff --cached --check` 通过。
+- 宿主 in-app Browser：连接钱包→身份解析；无身份 Setup→必填校验→Review→Creating→Ready；Edit 保存/放弃；Wallet/Resolve/Create/Copy 故障；语言/主题、账户切换、断开；页面切换回顶，全部通过。
+- 视觉：1280px Welcome、Public 3D、Light/Dark、EN/zh-CN 复核通过；320×680 真实浏览上下文无可见横向溢出或阻塞重叠。
+- 独立仓库提交：`48e2926` `feat: design S2 dome identity prototype (PRD v0.1)`。
+
+### 对 PRD / 后端设计的同步事项
+
+- 无新同步项：未引入核心认知与 PRD v0.1 之外的新实体、关系、术语或链上流程。
+- 状态保持 `in-progress`：资产为 `needs-review`，等待用户视觉复核后再标 `done`。
+
 ## 2026-08-14 — design-005 天蓝光晕+铁灰地平+厚重感原版（007-002）
 
 ### 决策

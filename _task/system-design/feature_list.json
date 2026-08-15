@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "design-005",
+  "activeItem": "design-006",
   "features": [
     {
       "id": "harness-001",
@@ -46,7 +46,7 @@
         "已评估原型变更对 PRD 和后端设计的影响，并记录需要同步的事项",
         "页面风格体现话语的厚重感，平台的新大陆感。个人身份公共查看要 实现3D、立体、精致、旋转查看的效果"
       ],
-      "evidence": "2026-08-14：从零建立 designs/own-word-prototype-006（最终完成版），未读取前几套原型代码或截图。Baoyu Design import-design-system.mjs 绑定 React Spectrum S2（primary），遵循 _ds_prompt.md，使用 Button/StatusLight/Badge 组件与 --rs-* 令牌。视觉基调按用户选定：碑刻与航图融合——衬线碑铭 Hero 与身份名、地平线航点动线、签署条钱包请求、BAP ID 铭牌；公共身份页 CSS 3D 立体卡片（perspective+preserve-3d，指针 rotateX/rotateY ≤10deg，6 层 translateZ 视差 12–64px，镜面光泽随光源，背面厚度层，6s 浮空摆动+地面阴影呼吸，tilt 时暂停，pointer:coarse/≤640px/prefers-reduced-motion 静态）。覆盖 Wallet 连接/取消/失败（Try Again）/切换/断开（仅会话）、解析分流（已发布/无身份/资料不全/失败+重试）、Setup 校验（必填名、100/1000 计数、本地图片头像、Person/Organization）、Review（预览+BAP ID+Copy+钱包控制声明）、创建处理/取消/失败/成功（航点线 Draft/Inscription/On chain + 链上日志 Broadcast/Seen/Accepted/Mined 待确认）、My Identity（徽章纪念碑+铭牌 BAP ID 首屏+rootPath）、Public Identity（3D 卡）、Edit Profile 保存/取消/未保存离开保护、EN/zh-CN、Light（默认）/Dark、演示身份入口免钱包直达。BAP ID mock 采用 BAP PROTOCOL.md 的 base58(ripemd160(sha256(rootAddress))) 格式（reference/bap-master/bap-master/PROTOCOL.md）。验证（提权宿主环境，无头 Chrome CDP，Node 24 全局 WebSocket）：HTTP 200；_verify.mjs 32/32 通过；console/runtime/network error 0；Copy 传完整 BAP ID 且失败时值仍可见；语言主题刷新持久且 BAP ID 不变；1440px 铭牌首屏可见；320px 各关键页无横向溢出；键盘焦点环可见、图标按钮有 aria-label；_audit.mjs 17/17（hero 衬线、Light/Dark 对比度 AA（dark 下 accent 按钮改深色文字达 4.5:1）、3D 层视差互异、dialog role/aria-modal、toast aria-live、zh 行高）。截图 preview-desktop/mobile、shot-my-identity、shot-public-3d、shot-setup、shot-dark-zh、shot-mobile-my/public。_d_meta.json 资产 needs-review，等待用户复核；已评估对 PRD/后端影响并记录同步事项（见 progress.md）。2026-08-14 修订：用户要求撤销本仓库内的三风格切换改动（已 git checkout 还原），改为三种风格各建独立仓库；本仓库保持纯碑刻与航图风格。design-004 开工前：仓库已移入 C:\haodev\system-design-backup\own-word-prototype-006，designs/ 下不再存在；状态改 blocked。"
+      "evidence": "2026-08-14：从零建立 designs/own-word-prototype-006（最终完成版），未读取前几套原型代码或截图。Baoyu Design import-design-system.mjs 绑定 React Spectrum S2（primary），遵循 _ds_prompt.md，使用 Button/StatusLight/Badge 组件与 --rs-* 令牌。视觉基调按用户选定：碑刻与航图融合——衬线碑铭 Hero 与身份名、地平线航点动线、签署条钱包请求、BAP ID 铭牌；公共身份页 CSS 3D 立体卡片（perspective+preserve-3d，指针 rotateX/rotateY ≤10deg，6 层 translateZ 视差 12–64px，镜面光泽随光源，背面厚度层，6s 浮空摆动+地面阴影呼吸，tilt 时暂停，pointer:coarse/≤640px/prefers-reduced-motion 静态）。覆盖 Wallet 连接/取消/失败（Try Again）/切换/断开（仅会话）、解析分流（已发布/无身份/资料不全/失败+重试）、Setup 校验（必填名、100/1000 计数、本地图片头像、Person/Organization）、Review（预览+BAP ID+Copy+钱包控制声明）、创建处理/取消/失败/成功（航点线 Draft/Inscription/On chain + 链上日志 Broadcast/Seen/Accepted/Mined 待确认）、My Identity（徽章纪念碑+铭牌 BAP ID 首屏+rootPath）、Public Identity（3D 卡）、Edit Profile 保存/取消/未保存离开保护、EN/zh-CN、Light（默认）/Dark、演示身份入口免钱包直达。BAP ID mock 采用 BAP PROTOCOL.md 的 base58(ripemd160(sha256(rootAddress))) 格式（reference/bap-master/bap-master/PROTOCOL.md）。验证（提权宿主环境，无头 Chrome CDP，Node 24 全局 WebSocket）：HTTP 200；_verify.mjs 32/32 通过；console/runtime/network error 0；Copy 传完整 BAP ID 且失败时值仍可见；语言主题刷新持久且 BAP ID 不变；1440px 铭牌首屏可见；320px 各关键页无横向溢出；键盘焦点环可见、图标按钮有 aria-label；_audit.mjs 17/17（hero 衬线、Light/Dark 对比度 AA（dark 下 accent 按钮改深色文字达 4.5:1）、3D 层视差互异、dialog role/aria-modal、toast aria-live、zh 行高）。截图 preview-desktop/mobile、shot-my-identity、shot-public-3d、shot-setup、shot-dark-zh、shot-mobile-my/public。_d_meta.json 资产 needs-review，等待用户复核；已评估对 PRD/后端影响并记录同步事项（见 progress.md）。2026-08-14 修订：用户要求撤销本仓库内的三风格切换改动（已 git checkout 还原），改为三种风格各建独立仓库；本仓库保持纯碑刻与航图风格。design-004 开工前：仓库已移入 C:\\haodev\\system-design-backup\\own-word-prototype-006，designs/ 下不再存在；状态改 blocked。"
     },
     {
       "id": "design-002",
@@ -132,7 +132,7 @@
       "dependencies": [
         "harness-001"
       ],
-      "status": "in-progress",
+      "status": "blocked",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
@@ -149,6 +149,34 @@
         "不参考任何现有实现"
       ],
       "evidence": "2026-08-14：用户澄清风格：就是穹顶之下加地平，非天文观测台，无其他方向。2026-08-14 开工（design-005）：用户确认地平基准线无刻度（继承 design-004 裁决）；风格按 description——穹顶天幕（天蓝色光晕）+地平基准线（铁灰色阴影）+配色厚重感；输出新仓库 designs/own-word-prototype-007-002，功能行为以核心认知+PRD v0.1 BDD 为准，不读取任何现有原型实现。完成：从零构建 designs/own-word-prototype-007-002（独立 Git 仓库，commit bebe37f (PRD v0.1)）。风格：天幕 Sky band（天蓝渐变+径向光晕+SVG 穹顶主弧/回响弧/中央刻标+光斑）压在地基 Ground 之上，地平基准线=铁灰粗线+两端帽+地面投影（无刻度无数字，继承 004 裁决）；衬线碑铭话语（Hero/标题/名字/3D 卡名，light 压印三层 shadow、dark 深影三层=厚重感），等宽读数（BAP ID 铭牌/钱包胶囊/计数/日志）；配色天蓝光晕+铁灰结构+厚重面板阴影，浅天光/深蓝夜双主题。功能覆盖 PRD v0.1 BDD 全部：Wallet 连接/取消/失败（Try Again）/切换（终止敏感操作+重新解析）/断开（仅会话）；解析分流（已发布→My Identity/无身份→Setup/资料不全→Setup+Complete your profile/失败→Try Again+Disconnect）；Setup 校验（必填名≤100、简介≤1000 计数、本地图片头像、Person/Organization、inline error）；Review（预览+BAP ID 铭牌+Copy+Your wallet controls this identity.）；创建进度 0/50/100%（Draft/Sign & publish/On chain）+链上日志（Broadcast/Seen/Accepted/Mined pending）+取消保留值/失败 Try Again/成功 Go to My Identity；My Identity（BAP ID 铭牌首屏+Avatar/Name/Type/Bio+rootPath bap:0）；Public Identity（3D 卡：8 层 translateZ -64/-40/0/8/16/32/48/64、pointer tilt≤10deg、镜面光泽、6s 浮空+地面阴影呼吸、coarse/320px/reduced-motion 静态）；Edit Profile（保存 Saving→Saved/取消保留编辑值/未保存离开 dialog+beforeunload）；EN（默认）/zh-CN、Light（默认）/Dark 持久化且 BAP ID 不变。BAP ID mock 3SyWUZXvhidNcEHbAC3HkBnKoD2Q 按 BAP PROTOCOL.md line 151-161 的 base58(ripemd160(sha256(rootAddress))) 示例（rootAddress 1WffojxvgpQBmUTigoss7VUdfN45JiiRK，rootPath bap:0）。技术：React 18.3.1/ReactDOM/Babel 7.29.0 本地 vendor（npm 下载，无 CDN 依赖）；Baoyu import-design-system.mjs 绑定 React Spectrum S2（primary，namespace ReactSpectrum_bc5541），使用 Button/StatusLight/Badge 组件与 --rs-* 令牌。验证（提权宿主环境，无头 Chrome CDP 9262/9264，HTTP 127.0.0.1:4313）：_verify.mjs 27/27（全部 BDD 状态机、Copy 传完整 BAP ID 且失败时值仍可见、语言主题刷新持久且 BAP ID 不变、1440px 铭牌首屏可见、320px 各关键屏无横向溢出、focus-visible 2px outline 规则存在、图标按钮有 aria-label、console/runtime/network error 0）；_audit.mjs 11/11（穹顶弧+回响弧+刻标+光晕+光斑、地平 4 线无刻度无数字、衬线话语 vs 等宽读数、话语 text-shadow 非 none、Light/Dark 画布与铭牌不同、对比度 AA（含 dark accent 按钮深色文字）、3D 8 层视差互异跨度 64px+浮空动画+reduced-motion 静态、dialog role/aria-modal、toast role、zh 行高≥1.8、无 emoji、无观测台词汇）。截图 6 张（welcome/setup/setup-dark-zh/my-identity/public-3d/mobile-320）。资产 needs-review，等待用户复核；复核通过后 design-005 标 done。"
+    },
+    {
+      "id": "design-006",
+      "name": "设计 v0.1 React Spectrum S2 穹顶与地平原型",
+      "description": "依据核心认知与 PRD v0.1 BDD，使用独立导入的 React Spectrum S2，从零设计穹顶天幕与无刻度地平基准线方案。非天文观测台，不读取现有原型实现。",
+      "dependencies": [
+        "harness-001"
+      ],
+      "status": "in-progress",
+      "inputs": [
+        "_task/system-design/spec/核心认知.md",
+        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+        "designs/react-spectrum-s2"
+      ],
+      "output": "designs/own-word-prototype-s2-001",
+      "doneCriteria": [
+        "原型覆盖 PRD v0.1 中所有用户可见流程、页面和关键状态；Key Rotation 按 PRD 裁决排除",
+        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
+        "原型通过 Baoyu Design 导入并绑定 designs/react-spectrum-s2，使用 S2 组件与令牌",
+        "关键导航、Wallet 状态、解析分流、表单校验、反馈、异常和空状态可交互",
+        "原型在桌面与 320px 移动视口通过 HTTP、功能和视觉检查，无阻塞错误或内容重叠",
+        "页面体现穹顶天幕、天蓝光晕、无刻度铁灰地平、话语厚重感和秩序感；非天文观测台",
+        "Public Identity 实现精致 3D、分层景深、指针旋转，并为触摸与 reduced-motion 提供静态降级",
+        "原型资产记录到 designs/own-word-prototype-s2-001/_d_meta.json",
+        "独立 Git 仓库提交信息包含 (PRD v0.1)，并记录 PRD 与后端同步评估",
+        "不读取或复用现有原型代码、DOM、CSS 或截图"
+      ],
+      "evidence": "2026-08-15：从核心认知与 PRD v0.1 BDD 全新建立独立仓库 designs/own-word-prototype-s2-001，未读取或复用旧原型实现。Baoyu Design import-design-system.mjs 导入 designs/react-spectrum-s2 为 primary（namespace ReactSpectrumS2_ad4872），应用根节点绑定 .s2，使用 Button、ActionButton、Badge、StatusLight、ProgressCircle 及 S2 Token，官方 S2 workflow icons 替代自绘 SVG。视觉：双层穹顶弧+天蓝光晕+中央刻标、无刻度铁灰地平线+地面阴影、S2 serif 厚重话语阴影、mono BAP 事实铭牌，非天文观测台；Public Identity 为八层 translateZ（-48/-20/8/16/28/44/60/64px）3D 卡，指针 tilt ±9deg，pointer:coarse、≤600px、reduced-motion 静态降级。功能覆盖 PRD v0.1：Wallet 连接/取消/失败/切换/断开；身份解析已发布/无身份/资料不全/失败；Setup 校验与本地头像；Review；创建确认/处理/失败/成功；My/Public Identity；Edit 保存/取消/未保存离开保护；EN/zh-CN、Light/Dark；Key Rotation、Content、Artifact、Explorer、Relationship 按版本裁决排除。验证：node verify.mjs 16/16；宿主 in-app Browser 实测连接解析、无身份 Setup→校验→Review→Creating→Ready、编辑保存与放弃、钱包/解析/创建/复制故障、账户切换与断开、语言主题持久、页面切换 scroll reset；桌面无横向溢出；mobile-preview.html 提供真实 320×680 iframe 浏览上下文并完成视觉检查。preview.png 已生成；_d_meta.json 资产 needs-review。独立仓库提交 48e2926 (PRD v0.1)。未引入 PRD 或后端新同步项，等待用户视觉复核后标 done。"
     }
   ]
 }
