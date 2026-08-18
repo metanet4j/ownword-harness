@@ -95,6 +95,10 @@
   3. 顺带补 `S2_Icon_Settings_20_N.svg`（此前 25 个图标缺 Settings，Demo fab 图标 404）。
 - 验证（真实 Chrome）：暗黑 Connect 按钮 `rgb(86,129,255)` 底白字、secondary 按钮深灰底浅字、图标 fill=`rgb(219,219,219)` 可见；亮色按钮 `rgb(59,99,251)` 正常；Babel 6 文件通过；36 个 `var(--s2*)` 解析。
 
+### 视觉调整（07f1f84）
+- 用户反馈穹顶弧线太少（原 2 条），要求 7 条。将 Welcome hero `.dome-hero` 的弧线由 2 条（`.arc` + `.arc.arc2`）改为 7 条同心弧：`screens-wallet.jsx` 用 `[0..6].map` 循环生成，内联 `inset` 从 4% 起每条 +6%（4%→40%）内缩、`opacity` 从 0.78 起每条 -0.055 递减；`index.html` 删 `.arc.arc2` 规则、`.arc` 只留基础（position/border/圆角），inset/opacity 由内联 style 控制（DRY）。
+- 验证：Babel 通过；浏览器确认 `.dome-hero .arc` 7 条（inset 4/10/16/22/28/34/40%，opacity 0.78→0.45）。
+
 ### 待办
 - 用户视觉复核 `http://127.0.0.1:4311/own-word-prototype-002/index.html`（桌面 1440px / 移动 320px，重点：天穹/地平线观感、3D 卡旋转、主题/语言切换）。复核后 flip `_d_meta.json` 资产状态（当前 needs-review）。
 
