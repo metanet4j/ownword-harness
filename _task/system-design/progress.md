@@ -1,5 +1,15 @@
 # progress.md
 
+## 2026-08-18 选定 design-002 为最终视觉方向（其他封存）
+
+### 决策
+- 用户选定 design-002「穹顶与地平线」为最终视觉方向，design-001（碑铭/印章）、design-003（新大陆/Territory）、styles-001（三版风格探索）暂封存（`feature_list.json` status=archived，目录保留不删）。
+- `feature_list.json`：`activeItem` = design-002，design-002 status=in-progress（继续按用户要求迭代，直到定稿版本）；allowedStatuses 新增 `archived`。
+- 后续所有视觉迭代只落在 `designs/own-word-prototype-002/`，不再动 -001/-003/styles。
+
+### 待办
+- 用户逐条提出 design-002 修改要求，逐条实现、验证、提交，直至定稿。
+
 ## 2026-08-18 design-003 新大陆（Territory，全新设计，完成）
 
 ### 完成项

@@ -5,9 +5,10 @@
     "not-started",
     "in-progress",
     "blocked",
-    "done"
+    "done",
+    "archived"
   ],
-  "activeItem": "design-003",
+  "activeItem": "design-002",
   "features": [
     {
       "id": "design-002",
@@ -16,7 +17,7 @@
       "dependencies": [
         "design-001"
       ],
-      "status": "done",
+      "status": "in-progress",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
@@ -42,7 +43,7 @@
       "dependencies": [
         "harness-001"
       ],
-      "status": "done",
+      "status": "archived",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
@@ -67,7 +68,7 @@
       "dependencies": [
         "harness-001"
       ],
-      "status": "done",
+      "status": "archived",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "designs/react-spectrum-s2"
@@ -102,7 +103,7 @@
       "dependencies": [
         "harness-001"
       ],
-      "status": "done",
+      "status": "archived",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
