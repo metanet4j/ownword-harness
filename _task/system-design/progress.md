@@ -45,6 +45,11 @@
 - 验证（真实 Chrome）：accent 按钮亮色 `rgb(59,99,251)` 底白字、暗色 `rgb(86,129,255)` 底白字；secondary 按钮暗色 `rgb(27,27,27)` 底 + 边框 `rgb(57,57,57)`；StatusLight 圆点 `rgb(5,131,78)` 正常；37 个 `var(--s2*)` 引用全部解析；jsdom 冒烟 34/34 仍全过。
 - 注：此缺陷为 design-001/002/003 三版共有（design-001 的 `--accent: var(--s2d-accent)` 同样失效），本任务仅修复 design-003，未回改 001/002。
 
+### 图标暗黑不可见修复（第四次提交 b70a15f）
+- 浏览器暗黑复核发现：26 个 S2 图标（语言/主题/复制/编辑/锁定/旋转/提示等）在暗黑下不可见。根因：图标 SVG 文件内 `fill="var(--iconPrimary, #222)"`，而 `icons.jsx` 用 `<img src>` 加载 SVG，`<img>` 加载的 SVG 是独立文档、CSS 变量不跨 img 边界继承，恒 fallback 深灰 `#222`；且 `--iconPrimary` 在设计系统里根本未定义（它本意配合内联 SVG）。亮色可看，暗黑 `#222` 图标在深底上几乎同色。
+- 修复（用户选方案 B）：① `icons.jsx` 由 `<img>` 改为内联 SVG（26 个 SVG 内容生成进 `ICON_SVGS`，`Icon` 组件用 `dangerouslySetInnerHTML` 渲染 `<span class="icon">`，fill 继承页面变量）；② `index.html` `:root` 定义 `--iconPrimary: var(--s2-neutral-content-color-default)`；③ 清理 CSS 图标 `img` 尺寸选择器（改为 `.icon`，保留 `.avatar-preview img` 真实头像图与 `.demo-note/.banner` 间距）。
+- 验证（真实 Chrome）：暗黑图标 `path` 计算 fill=`rgb(219,219,219)` 浅灰可见、亮色 `rgb(41,41,41)` 深灰正常；Babel 6 文件通过；37 个 `var(--s2*)` 解析；jsdom 冒烟 34/34 连跑 3 次全过。
+
 ### 待办
 - 用户视觉复核 `http://127.0.0.1:4311/own-word-prototype-003/index.html`（桌面 1440px / 移动 320px，重点：测绘图册布局观感、疆域画布、3D 卡旋转、主题/语言切换）。复核后 flip `_d_meta.json` 资产状态（当前 needs-review）。
 - 三版原型对照评审：`-001`（碑铭/印章）、`-002`（穹顶/地平线）、`-003`（新大陆）。
