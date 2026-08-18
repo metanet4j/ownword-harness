@@ -50,6 +50,10 @@
 - 修复（用户选方案 B）：① `icons.jsx` 由 `<img>` 改为内联 SVG（26 个 SVG 内容生成进 `ICON_SVGS`，`Icon` 组件用 `dangerouslySetInnerHTML` 渲染 `<span class="icon">`，fill 继承页面变量）；② `index.html` `:root` 定义 `--iconPrimary: var(--s2-neutral-content-color-default)`；③ 清理 CSS 图标 `img` 尺寸选择器（改为 `.icon`，保留 `.avatar-preview img` 真实头像图与 `.demo-note/.banner` 间距）。
 - 验证（真实 Chrome）：暗黑图标 `path` 计算 fill=`rgb(219,219,219)` 浅灰可见、亮色 `rgb(41,41,41)` 深灰正常；Babel 6 文件通过；37 个 `var(--s2*)` 解析；jsdom 冒烟 34/34 连跑 3 次全过。
 
+### 视觉微调（第五次提交 3be82e0）
+- 用户反馈刻度尺（`.sheet-ruler` 整条）气质突兀、与「新大陆」制图主题冲突。改为 sheet 左上角一个 9×9 小十字坐标标（`.sheet::before` 用两条 linear-gradient 画十字，`--line-strong` 色、opacity 0.65），作制图锚点、克制不抢戏。删除 JSX 全部 8 处 `<span class="sheet-ruler">` 与 CSS `.sheet-ruler` 规则。
+- 验证：Babel 通过；jsdom 冒烟 34/34；浏览器确认 ruler 已无、`.sheet::before` 十字标 9×9 生效。
+
 ### 待办
 - 用户视觉复核 `http://127.0.0.1:4311/own-word-prototype-003/index.html`（桌面 1440px / 移动 320px，重点：测绘图册布局观感、疆域画布、3D 卡旋转、主题/语言切换）。复核后 flip `_d_meta.json` 资产状态（当前 needs-review）。
 - 三版原型对照评审：`-001`（碑铭/印章）、`-002`（穹顶/地平线）、`-003`（新大陆）。
