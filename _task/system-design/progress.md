@@ -10,6 +10,29 @@
 ### 待办
 - 用户逐条提出 design-002 修改要求，逐条实现、验证、提交，直至定稿。
 
+## 2026-08-18 design-002 迭代：钱包授权 + 穹顶点击动画（commit 6d1058f）
+
+### 完成项
+- 钱包授权弹窗（核心认知不变量 11 + §6.3 统一高影响操作流）：所有需钱包签名的操作先经 Wallet 确认，覆盖 v0.1 三个操作：
+  - Connect Wallet → 授权连接（Approve → connecting → resolve；Reject → Connection cancelled）
+  - Create Identity → 授权身份发布（Approve → creating；Reject → Creation cancelled，保留 profile 值）
+  - Save Profile → 授权 Profile 更新（Approve → saving；Reject → Saving cancelled，保留编辑值）
+- 新增 `WalletAuthDialog` 组件（app.jsx）：模拟 Yours Wallet 请求，展示操作标题 + Identity（name + 完整 BAP ID 可复制，仅 create/save）+ 影响说明 + Approve/Reject；点 backdrop = Reject（模拟关闭钱包请求）。
+- 三个入口改走 `requestAuth('create'|'connect'|'save')`；cancelled/failed 的 Try Again 重试同样重新走授权。
+- Demo 注入语义：`fail` = Approve 后处理失败；`reject` = Approve 后钱包层拒绝（保住故障注入测试能力）。
+- 首页穹顶点击操作性动画：`.hero-sky` 由纯装饰改为可点击（role=button + tabindex + 键盘 Enter/Space + focus-visible），点击触发「弧线依次点亮（arc-lit，stagger）+ 焦点脉冲（focal-pulse）+ 地平线扫光（horizon-scan）」动画并同时触发连接授权；760ms 后动画归位，可重复点击；`prefers-reduced-motion` 降级。
+
+### 验证结果
+- jsdom 冒烟 30/30 PASS（穹顶 role/点击→授权、连接 approve/reject、Create 授权 approve、Save 授权 approve/reject 保留值）。
+- HTTP 全资源 200（index + 6 jsx + bundle + 3 css）。
+- Token 66 个 `var()` 引用全解析（`--icon` 为注释 `--iconPrimary` 的正则误报，实际已定义）。
+- Babel 6 文件转译通过（jsdom 加载时真实转译）。
+- 真实 Chrome：授权弹窗亮色（Approve accent 蓝 `rgb(59,99,251)` 白字、居中 480×296、connect 无 BAP ID 块）/ 暗色（Approve `rgb(86,129,255)` 白字、Reject 深灰 `rgb(27,27,27)` 底浅字可见）；穹顶点击后 `rippling` class + `arc-lit`/`focal-pulse` 动画同步触发、800ms 后移除。
+
+### 决策
+- 授权范围仅 Connect/Create/Save 三个签名操作；Disconnect、Account Switch、Copy 不需签名授权（PRD 待确认 3 结论：Disconnect 只断开会话）。
+- 授权弹窗复用现有 `.dialog` 视觉 + 穹顶 Mark，不引入新设计系统组件（S2 无现成 wallet 授权组件）。
+
 ## 2026-08-18 design-003 新大陆（Territory，全新设计，完成）
 
 ### 完成项
