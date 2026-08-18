@@ -39,6 +39,12 @@
   - My Identity 由双栏 my-grid 改为单列 my-body 堆叠 sheet。
 - 验证：Babel 6 文件通过；token 26 项解析通过；jsdom 冒烟 34 项断言全过（新增 rail 步骤/图例带/航路带断言）。
 
+### 缺陷修复（第三次提交 5d68566）
+- 浏览器复核发现：S2Button 按钮（Connect/Review/Create 等）在亮色模式下看不到——`components.css` 的 `--s2d-accent`/`--s2d-text`/`--s2d-border-strong`/`--s2d-layer` 等别名只定义在 `.s2{}` 作用域内，而 bundle 渲染的按钮（`s2d-button s2d-button-accent`）未挂 `.s2` 类，导致 `var(--s2d-accent)` 无法解析、按钮 background 透明 + `color:white` → 白底白字不可见。
+- 修复：在 `index.html` 的 `:root` 层补定义这组 `--s2d-*` 别名，值引用 `s2-tokens.css` 的 `:root` 级 token。
+- 验证（真实 Chrome）：accent 按钮亮色 `rgb(59,99,251)` 底白字、暗色 `rgb(86,129,255)` 底白字；secondary 按钮暗色 `rgb(27,27,27)` 底 + 边框 `rgb(57,57,57)`；StatusLight 圆点 `rgb(5,131,78)` 正常；37 个 `var(--s2*)` 引用全部解析；jsdom 冒烟 34/34 仍全过。
+- 注：此缺陷为 design-001/002/003 三版共有（design-001 的 `--accent: var(--s2d-accent)` 同样失效），本任务仅修复 design-003，未回改 001/002。
+
 ### 待办
 - 用户视觉复核 `http://127.0.0.1:4311/own-word-prototype-003/index.html`（桌面 1440px / 移动 320px，重点：测绘图册布局观感、疆域画布、3D 卡旋转、主题/语言切换）。复核后 flip `_d_meta.json` 资产状态（当前 needs-review）。
 - 三版原型对照评审：`-001`（碑铭/印章）、`-002`（穹顶/地平线）、`-003`（新大陆）。
