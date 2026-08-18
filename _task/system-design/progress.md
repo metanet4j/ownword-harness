@@ -88,6 +88,13 @@
 - token 用 `semantic.css` 与 `s2-tokens.css` 的 `:root` 级 token；发现 design-001 使用的 `--s2d-background`/`--s2d-text`/`--s2d-accent` 等别名只在 `components.css` 的 `.s2 {}` 作用域内定义，`<html>`/`<body>` 未挂 `.s2` 类时在 `:root` 层不解析，design-002 改用全局 token 规避此问题（仅记录，未回改 design-001）。
 - 状态语义、边界、术语严格遵循核心认知与 PRD v0.1；Key Rotation 已下放 v0.1.1，本版不含。
 
+### 缺陷修复（34bf968，与 design-003 同类问题）
+- 用户指出暗黑模式下按钮/图标不展示，排查发现与 design-003 相同的两处根因，一并修复：
+  1. S2Button 按钮透明：`components.css` 的 `--s2d-accent`/`--s2d-text`/`--s2d-layer`/`--s2d-border-strong` 等别名只在 `.s2{}` 作用域定义，bundle 渲染的按钮未挂 `.s2` 类 → `var(--s2d-accent)` 无法解析、按钮背景透明 + `color:white` → 白底白字不可见。修复：`index.html` `:root` 补定义这组 `--s2d-*` 别名。
+  2. 图标暗黑不可见：26 个图标 SVG `fill="var(--iconPrimary, #222)"` 经 `<img>` 加载，`<img>` 的 SVG 是独立文档、CSS 变量不跨边界继承，恒 fallback 深灰 `#222`，暗黑下与深底同色。修复：`icons.jsx` 由 `<img>` 改为内联 SVG + `:root` 定义 `--iconPrimary: var(--s2-neutral-content-color-default)`；清理 CSS 图标 `img` 尺寸选择器改 `.icon`（保留 `.avatar-preview img`/`.dcard-focal img` 真实图片）。
+  3. 顺带补 `S2_Icon_Settings_20_N.svg`（此前 25 个图标缺 Settings，Demo fab 图标 404）。
+- 验证（真实 Chrome）：暗黑 Connect 按钮 `rgb(86,129,255)` 底白字、secondary 按钮深灰底浅字、图标 fill=`rgb(219,219,219)` 可见；亮色按钮 `rgb(59,99,251)` 正常；Babel 6 文件通过；36 个 `var(--s2*)` 解析。
+
 ### 待办
 - 用户视觉复核 `http://127.0.0.1:4311/own-word-prototype-002/index.html`（桌面 1440px / 移动 320px，重点：天穹/地平线观感、3D 卡旋转、主题/语言切换）。复核后 flip `_d_meta.json` 资产状态（当前 needs-review）。
 
