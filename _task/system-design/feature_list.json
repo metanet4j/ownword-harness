@@ -37,8 +37,8 @@
     },
     {
       "id": "design-003",
-      "name": "design-003 对照版：星图（Constellation，全新设计）",
-      "description": "全新设计第三版对照原型（own-word-prototype-003），不参照 design-001 与 design-002 的任何代码、布局与视觉。风格意象：星图（Constellation）——深色天幕上的星点与细线连线，抽象、稀疏、克制，无具象。Identity 是天幕上被点亮的星，签名/Proof/交易是它与其它点之间的连线，链上即天幕（坐标可验证、可回溯）。功能范围与 PRD v0.1 一致（全部 BDD 场景），术语/状态/边界遵循核心认知，视觉完全重新设计，仍使用 react-spectrum-s2 设计系统 token 与组件。",
+      "name": "design-003 对照版：新大陆（Territory，全新设计）",
+      "description": "全新设计第三版对照原型（own-word-prototype-003），不参照 design-001 与 design-002 的任何代码、布局与视觉。风格意象：新大陆（Territory）——抽象制图语言（疆域轮廓、边界线、坐标、地标、等高线），表达「一块新的数字大陆，用户在链上拥有一块疆域」。Identity = 大陆上被标注的一块疆域；BAP ID = 这块疆域的可验证坐标；签名/Proof = 疆域边界与标注可验证。抽象、克制、无具象。功能范围与 PRD v0.1 一致（全部 BDD 场景），术语/状态/边界遵循核心认知，视觉完全重新设计，仍使用 react-spectrum-s2 设计系统 token 与组件。",
       "dependencies": [
         "harness-001"
       ],
@@ -52,13 +52,13 @@
       "doneCriteria": [
         "全新设计：不复制、不参照 design-001 与 design-002 的 HTML/CSS/JSX 结构",
         "功能与 design-001 一致：覆盖 PRD v0.1 全部用户可见流程、页面与关键状态",
-        "星图元素：星点 + 细线连线抽象表达，贯穿 Welcome 与应用页",
-        "风格尽量抽象：几何、稀疏、克制（深色天幕意象），配色与圆角来自 S2 token allowlist",
-        "Public 身份 3D 查看保留（星图意象融入），仍可旋转",
+        "新大陆元素：疆域轮廓 + 边界/坐标/地标抽象表达，贯穿 Welcome 与应用页",
+        "风格尽量抽象：几何、克制（制图/疆域意象），配色与圆角来自 S2 token allowlist",
+        "Public 身份 3D 查看保留（新大陆意象融入），仍可旋转",
         "副本独立 HTTP 预览通过，jsdom 冒烟通过",
         "副本为独立 Git 子仓库，commit 带 (PRD v0.1)"
       ],
-      "evidence": "未开始（立项，方向已定：星图/Constellation）。"
+      "evidence": "未开始（立项，方向已定：新大陆/Territory，源自设计文档V6.md §4.5「新大陆感」）。"
     },
     {
       "id": "styles-001",

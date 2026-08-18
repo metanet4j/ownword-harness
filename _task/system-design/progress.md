@@ -1,10 +1,10 @@
 # progress.md
 
-## 2026-08-18 design-003 立项（星图，方向已定，未实现）
+## 2026-08-18 design-003 立项（新大陆，方向已定，未实现）
 
 ### 完成项
 - `feature_list.json` 新增 design-003，status=not-started，activeItem 切到 design-003。
-- 方向（自定）：星图（Constellation）——深色天幕上的星点 + 细线连线，抽象、稀疏、克制、无具象。Identity=天幕上被点亮的星，签名/Proof/交易=它与其它的连线，链上=天幕（坐标可验证、可回溯）。
+- 方向（用户指定「新大陆体系」）：新大陆（Territory）——抽象制图语言（疆域轮廓、边界线、坐标、地标、等高线），表达「一块新的数字大陆」。Identity=被标注的疆域，BAP ID=可验证坐标，签名/Proof=边界与标注。抽象、克制、无具象。依据：设计文档V6.md §4.5「新大陆感」。
 - 约束：不参照 design-001（碑铭/印章）与 design-002（穹顶/地平线）的任何代码/布局/视觉；功能范围与 PRD v0.1 一致；仍用 react-spectrum-s2 token 与组件。
 - dependencies=harness-001；inputs=核心认知 + PRD v0.1 + react-spectrum-s2；output=designs/own-word-prototype-003。
 
