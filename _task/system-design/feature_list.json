@@ -11,23 +11,25 @@
   "features": [
     {
       "id": "design-002",
-      "name": "design-001 对照版：穹顶与地平线（抽象几何风）",
-      "description": "在 own-word-prototype-002 副本上迭代对照风格：穹顶（Dome）与地平线（Horizon）抽象几何表达。不画具象建筑，用巨大圆弧/天穹渐变与水平地平线分割构图，极简抽象；整体仍遵循 react-spectrum-s2 设计系统 token 与核心认知（术语、状态、边界不变）。",
+      "name": "design-001 对照版：穹顶与地平线（全新设计）",
+      "description": "全新设计一版对照原型（own-word-prototype-002），不参照 design-001 代码与布局。风格意象：穹顶（Dome）与地平线（Horizon），尽量抽象——大圆弧/天穹弧线 + 水平地平线分割构图，几何化、克制，无具象建筑。功能范围与 design-001 一致（PRD v0.1 全部 BDD 场景），术语/状态/边界遵循核心认知，视觉完全重新设计，仍使用 react-spectrum-s2 设计系统 token 与组件。",
       "dependencies": [
         "design-001"
       ],
       "status": "in-progress",
       "inputs": [
-        "designs/own-word-prototype-001",
-        "designs/own-word-prototype-002"
+        "_task/system-design/spec/核心认知.md",
+        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+        "designs/react-spectrum-s2"
       ],
       "output": "designs/own-word-prototype-002",
       "doneCriteria": [
-        "对照版与 design-001 功能、流程、交互能力完全一致（同 56 项冒烟断言基线）",
-        "穹顶元素：Welcome 与应用页以抽象弧形/天穹渐变呈现（非具象建筑）",
-        "地平线元素：以水平线/水平分隔构图表达地平线意象，贯穿页面",
-        "风格尽量抽象：几何化、克制，配色与圆角仍来自 S2 token allowlist",
-        "Public 3D 身份卡融入穹顶/地平线抽象意象，仍可旋转查看",
+        "全新设计：不复制 design-001 的 HTML/CSS/JSX 结构（文案 i18n 与行为状态机除外）",
+        "功能与 design-001 一致：覆盖 PRD v0.1 全部用户可见流程、页面与关键状态（同 56 项冒烟断言基线）",
+        "穹顶元素：大圆弧/天穹弧线抽象表达，贯穿 Welcome 与应用页",
+        "地平线元素：水平线/水平分割构图贯穿页面",
+        "风格尽量抽象：几何化、克制，配色与圆角来自 S2 token allowlist",
+        "Public 身份 3D 查看保留（穹顶/地平线意象融入），仍可旋转",
         "副本独立 HTTP 预览通过，jsdom 冒烟通过",
         "副本为独立 Git 子仓库，commit 带 (PRD v0.1)"
       ],
