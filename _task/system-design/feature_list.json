@@ -7,8 +7,30 @@
     "blocked",
     "done"
   ],
-  "activeItem": "design-006",
+  "activeItem": "design-001",
   "features": [
+    {
+      "id": "styles-001",
+      "name": "首页风格探索：三版视觉方向",
+      "description": "按用户要求产出三版首页（landing page）风格 HTML，突出话语的厚重感、信实、新体系感觉；基于 react-spectrum-s2 设计系统与核心认知内容。",
+      "dependencies": [
+        "harness-001"
+      ],
+      "status": "done",
+      "inputs": [
+        "_task/system-design/spec/核心认知.md",
+        "designs/react-spectrum-s2"
+      ],
+      "output": "designs/own-word-prototype-styles-001",
+      "doneCriteria": [
+        "三版独立自包含 HTML 首页，可经 http://127.0.0.1:4311 预览",
+        "版一碑铭（深色厚重）、版二宪章（纸面信实）、版三协议（S2 原生新体系）",
+        "每版加载 react-spectrum-s2 设计系统 tokens，引用 token 变量均可解析",
+        "文案、术语、实体与核心认知一致（无注册/登录等禁区用语）",
+        "HTML 标签闭合校验通过，HTTP 200 加载通过"
+      ],
+      "evidence": "designs/own-word-prototype-styles-001/{index,home-ledger,home-charter,home-protocol}.html；HTTP 200、HTML 校验、token 解析检查通过；见 progress.md。"
+    },
     {
       "id": "harness-001",
       "name": "初始化设计任务工作台",
@@ -25,158 +47,26 @@
     {
       "id": "design-001",
       "name": "设计 v0.1 高保真可交互原型",
-      "description": "依据 PRD v0.1 与核心认知，使用 React Spectrum 设计系统和 Baoyu Design 技能设计可交互高保真原型。",
+      "description": "依据 PRD v0.1 与核心认知，使用 React Spectrum s2 设计系统和 Baoyu Design 技能设计可交互高保真原型。",
       "dependencies": [
         "harness-001"
       ],
-      "status": "blocked",
-      "inputs": [
-        "_task/system-design/spec/核心认知.md",
-        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
-        "designs/react-spectrum"
-      ],
-      "output": "designs/own-word-prototype-006",
-      "doneCriteria": [
-        "原型覆盖 PRD v0.1 中所有用户可见流程、页面和关键状态",
-        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
-        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
-        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
-        "原型在桌面与移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
-        "原型资产已记录到 designs/own-word-prototype-006/_d_meta.json",
-        "已评估原型变更对 PRD 和后端设计的影响，并记录需要同步的事项",
-        "页面风格体现话语的厚重感，平台的新大陆感。个人身份公共查看要 实现3D、立体、精致、旋转查看的效果"
-      ],
-      "evidence": "2026-08-14：从零建立 designs/own-word-prototype-006（最终完成版），未读取前几套原型代码或截图。Baoyu Design import-design-system.mjs 绑定 React Spectrum S2（primary），遵循 _ds_prompt.md，使用 Button/StatusLight/Badge 组件与 --rs-* 令牌。视觉基调按用户选定：碑刻与航图融合——衬线碑铭 Hero 与身份名、地平线航点动线、签署条钱包请求、BAP ID 铭牌；公共身份页 CSS 3D 立体卡片（perspective+preserve-3d，指针 rotateX/rotateY ≤10deg，6 层 translateZ 视差 12–64px，镜面光泽随光源，背面厚度层，6s 浮空摆动+地面阴影呼吸，tilt 时暂停，pointer:coarse/≤640px/prefers-reduced-motion 静态）。覆盖 Wallet 连接/取消/失败（Try Again）/切换/断开（仅会话）、解析分流（已发布/无身份/资料不全/失败+重试）、Setup 校验（必填名、100/1000 计数、本地图片头像、Person/Organization）、Review（预览+BAP ID+Copy+钱包控制声明）、创建处理/取消/失败/成功（航点线 Draft/Inscription/On chain + 链上日志 Broadcast/Seen/Accepted/Mined 待确认）、My Identity（徽章纪念碑+铭牌 BAP ID 首屏+rootPath）、Public Identity（3D 卡）、Edit Profile 保存/取消/未保存离开保护、EN/zh-CN、Light（默认）/Dark、演示身份入口免钱包直达。BAP ID mock 采用 BAP PROTOCOL.md 的 base58(ripemd160(sha256(rootAddress))) 格式（reference/bap-master/bap-master/PROTOCOL.md）。验证（提权宿主环境，无头 Chrome CDP，Node 24 全局 WebSocket）：HTTP 200；_verify.mjs 32/32 通过；console/runtime/network error 0；Copy 传完整 BAP ID 且失败时值仍可见；语言主题刷新持久且 BAP ID 不变；1440px 铭牌首屏可见；320px 各关键页无横向溢出；键盘焦点环可见、图标按钮有 aria-label；_audit.mjs 17/17（hero 衬线、Light/Dark 对比度 AA（dark 下 accent 按钮改深色文字达 4.5:1）、3D 层视差互异、dialog role/aria-modal、toast aria-live、zh 行高）。截图 preview-desktop/mobile、shot-my-identity、shot-public-3d、shot-setup、shot-dark-zh、shot-mobile-my/public。_d_meta.json 资产 needs-review，等待用户复核；已评估对 PRD/后端影响并记录同步事项（见 progress.md）。2026-08-14 修订：用户要求撤销本仓库内的三风格切换改动（已 git checkout 还原），改为三种风格各建独立仓库；本仓库保持纯碑刻与航图风格。design-004 开工前：仓库已移入 C:\\haodev\\system-design-backup\\own-word-prototype-006，designs/ 下不再存在；状态改 blocked。"
-    },
-    {
-      "id": "design-002",
-      "name": "设计 v0.1 灯塔与信号风格原型",
-      "description": "以 designs/own-word-prototype-006 为基础（DOM 与逻辑完全一致），叠加灯塔与信号视觉皮肤，独立 Git 仓库，用于三风格对比挑选。",
-      "dependencies": [
-        "harness-001"
-      ],
-      "status": "blocked",
-      "inputs": [
-        "_task/system-design/spec/核心认知.md",
-        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
-        "designs/react-spectrum",
-        "designs/own-word-prototype-006"
-      ],
-      "output": "designs/own-word-prototype-006-2",
-      "doneCriteria": [
-        "原型覆盖 PRD v0.1 中所有用户可见流程、页面和关键状态，与 006 基础版功能一致",
-        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
-        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
-        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
-        "原型在桌面与移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
-        "原型资产已记录到 designs/own-word-prototype-006-2/_d_meta.json",
-        "页面风格体现灯塔与信号的隐喻：同心环、频率读数、信号闪烁感；个人身份公共查看实现3D、立体、精致、旋转查看的效果"
-      ],
-      "evidence": "2026-08-14：从 designs/own-word-prototype-006 复制为基础（DOM 与逻辑不变），新增 motif.css 灯塔与信号皮肤：Hero 同心环+脉冲外环+闪烁信号点；BAP ID 铭牌改信号面板（深色底 rgb(14,22,38)+顶部刻度线+亮色等宽字）；徽章同心环加信号光晕；状态灯与航点闪烁（square 信号点）；3D 卡图表环脉冲+状态点闪烁；冷蓝画布（light rgb(242,245,249)/dark rgb(13,17,25)）。验证：_verify.mjs 32/32、_audit.mjs 17/17、console/runtime/network error 0；320px 无溢出；Light/Dark 对比度 AA。独立 Git 仓库提交 (PRD v0.1)。_d_meta.json 资产 needs-review，等待用户三套对比复核。2026-08-14 重设计（用户要求布局/结构/交互全新且贴合主题）：信号控制台方向——顶部控制台栏（品牌+SIGNAL 连接读数+等宽开关式偏好键+钱包插口胶囊）、Welcome 雷达扫描场景（同心环+旋转扫描锥+闪烁频谱条，无衬线大字）、Setup/Edit 双栏控制台表单+姓名输入实时信号表（5 格随输入点亮）、Review 传输票据（头像摘要+信号面板分段读数 BAP ID）、Creating 三盏信号灯序列+控制台日志、My Identity 仪表盘（左灯塔装置同心环脉冲+右数据读数，BAP ID 6 字符分段频率读数）、toast 右上角等宽控制台通知、3D 公共卡改雷达屏（深蓝底+扫描环+发光头像）。功能状态机、BDD 文案、data-screen-label/data-testid 契约、3D 卡 DOM 保持不变。验证：_verify.mjs 32/32、_audit.mjs 17/17（按新风格更新断言：sans 标题、雷达扫描、灯塔装置）、console/runtime/network error 0、320px 无溢出、双主题对比度 AA。注意：verify/audit 脚本 CDP 端口与 006-3 区分（9222/9224）。Git 提交 (PRD v0.1)。资产 needs-review。"
-    },
-    {
-      "id": "design-003",
-      "name": "设计 v0.1 地平线与大陆风格原型",
-      "description": "以 designs/own-word-prototype-006 为基础（DOM 与逻辑完全一致），叠加地平线与大陆视觉皮肤，独立 Git 仓库，用于三风格对比挑选。",
-      "dependencies": [
-        "harness-001"
-      ],
-      "status": "blocked",
-      "inputs": [
-        "_task/system-design/spec/核心认知.md",
-        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
-        "designs/react-spectrum",
-        "designs/own-word-prototype-006"
-      ],
-      "output": "designs/own-word-prototype-006-3",
-      "doneCriteria": [
-        "原型覆盖 PRD v0.1 中所有用户可见流程、页面和关键状态，与 006 基础版功能一致",
-        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
-        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
-        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
-        "原型在桌面与移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
-        "原型资产已记录到 designs/own-word-prototype-006-3/_d_meta.json",
-        "页面风格体现地平线与大陆的隐喻：进入新大陆的航行与登陆感；个人身份公共查看实现3D、立体、精致、旋转查看的效果"
-      ],
-      "evidence": "2026-08-14：从 designs/own-word-prototype-006 复制为基础（DOM 与逻辑不变），新增 motif.css 地平线与大陆皮肤：Hero 黎明暖色渐变+加粗地平线+铜色太阳沿航线航行+地平线下大陆色带；BAP ID 铭牌改契约式双框（outline 3px 外框+铜色标签）；航点线改地图轨迹虚线；3D 卡路线虚线+铜色太阳；暖沙画布（light rgb(247,244,236)/dark rgb(23,21,18)）。验证：_verify.mjs 32/32、_audit.mjs 17/17、console/runtime/network error 0；320px 无溢出；Light/Dark 对比度 AA。独立 Git 仓库提交 (PRD v0.1)。_d_meta.json 资产 needs-review，等待用户三套对比复核。2026-08-14 重设计（用户要求布局/结构/交互全新且贴合主题）：航海日志方向——Welcome 天空/大地上下分屏（天空衬线大字+铜色太阳沿地平线航行，大地承接 CTA 与说明），指针视差交互（标题/太阳/大地随鼠标分层位移，粗指针/小屏/reduced-motion 静态）、Setup/Review/Creating 左侧航程步进轨（01 身份→02 复核→03 上链，当前步高亮，移动端转顶部横条）、Review 地平线摘要（头像作太阳+姓名落在地平线下）、Creating 船只沿线行进（0%→50%→100% 三航点+航海日志）、My Identity 地标页（太阳头像+地平线+大地姓名简介）、toast 底部胶囊、契约式坐标铭牌（铜色标签+双框）、暖沙双主题。功能状态机、BDD 文案、data-screen-label/data-testid 契约、3D 卡 DOM 保持不变。验证：_verify.mjs 32/32、_audit.mjs 17/17（按新风格更新断言：地标太阳/地平线）、console/runtime/network error 0、320px 无溢出、双主题对比度 AA。注意：verify/audit 脚本 CDP 端口与 006-2 区分（9232/9234）。Git 提交 (PRD v0.1)。资产 needs-review。"
-    },
-    {
-      "id": "design-004",
-      "name": "设计 v0.1 地平与穹顶风格原型",
-      "description": "依据核心认知与 PRD v0.1 BDD，全新设计穹顶之下加地平的布局、结构与交互：穹顶天幕+地平基准线，代表话语的基准与秩序。非天文观测台，无其他风格方向。不参考任何现有实现。独立 Git 仓库",
-      "dependencies": [
-        "harness-001"
-      ],
-      "status": "blocked",
-      "inputs": [
-        "_task/system-design/spec/核心认知.md",
-        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
-        "designs/react-spectrum"
-      ],
-      "output": "designs/own-word-prototype-007",
-      "doneCriteria": [
-        "原型覆盖 PRD v0.1 中所有用户可见流程、页面和关键状态",
-        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
-        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
-        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
-        "原型在桌面与移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
-        "页面风格体现穹顶与地平的隐喻：穹顶天幕、地平基准线与刻度、秩序感（非天文观测台）；个人身份公共查看实现3D、立体、精致、旋转查看的效果",
-        "不参考任何现有实现"
-      ],
-      "evidence": "2026-08-14：用户澄清风格：就是穹顶之下加地平，非天文观测台，无其他方向。006-4 已丢失（备份目录 C:\\haodev\\system-design-backup 无 006-4），从零全新构建 designs/own-word-prototype-007，未读取任何旧实现，功能行为以核心认知+PRD v0.1 BDD 为准。风格：常驻 Scene（SVG 穹顶主弧+回响弧+中央刻标+地平基准线+21 刻度+等宽刻度数字）；衬线碑铭体话语（Hero/名字/实时刻字预览），等宽读数（BAP ID 铭牌/日志/刻度），冷银秩序色+DS 蓝操作色，浅雾蓝白/墨蓝夜双主题。功能：Wallet 连接/取消/失败（Try Again）/切换（终止敏感操作+新账户重新解析）/断开（仅会话）；解析分流（已发布/无身份/资料不全+Complete your profile/失败+重试+断开）；Setup 校验（必填名≤100、简介≤1000 计数、本地图片头像、Person/Organization）；Review（预览+BAP ID 铭牌+Copy 完整值+钱包控制声明）；创建刻度进度 0/50/100%（Draft/Sign & publish/On chain）+链上日志（Broadcast/Seen/Accepted/Mined pending）+取消保留 profile/失败 Try Again/成功 Go to My Identity；My Identity（铭牌 BAP ID 首屏+rootPath）；Public Identity（3D 立体卡：8 层 translateZ 视差 0–64px、指针 tilt ≤10deg、镜面光泽、6s 浮空+地面阴影呼吸、coarse/320/reduced-motion 静态）；Edit Profile（保存/取消/未保存离开 dialog+beforeunload 保护）；EN/zh-CN（默认 EN）、Light（默认）/Dark 持久化且 BAP ID 不变。BAP ID mock 3wuJXv6FJuxDvgZ8ttiB97qfEUJk 按 BAP PROTOCOL.md 的 base58(ripemd160(sha256(rootAddress))) 派生。技术：React 18/ReactDOM/Babel standalone 本地 vendor（无 CDN 依赖）；Baoyu import-design-system.mjs 绑定 React Spectrum S2（primary），使用 Button/StatusLight/Badge 组件与 --rs-* 令牌。验证（提权宿主环境，无头 Chrome CDP 9252/9254，HTTP 127.0.0.1:4311）：_verify.mjs 82/82（全部功能状态机、Copy 传完整 BAP ID 且失败时值仍可见、语言主题刷新持久且 BAP ID 不变、1440px 铭牌首屏可见、320px 各关键屏无横向溢出、Tab 焦点环 2px solid、图标按钮有 aria-label、console/runtime/network error 0）；_audit.mjs 27/27（穹顶弧+基准线+21 刻度+中央刻标、衬线话语 vs 等宽读数、Light/Dark 画布色、对比度 AA（light 10.87/4.87、dark 15.26、dark accent 7.34）、3D 层 8 种视差深度跨度 64px、dialog role/aria-modal、toast aria-live、zh 行高≥1.8、无 emoji、无观测台词汇、reduced-motion 静态）。截图 10 张。Git 提交 a91a91c (PRD v0.1)。资产 needs-review，等待用户复核。2026-08-14 修订（用户要求）：话语增加厚重感——衬线话语元素（Hero/标题/品牌/名字/刻字预览/3D 卡名/对话框标题）统一 --ow-word-shadow（light 三层压印：0 1px 0 白描边+0 2px 3px+0 10px 22px；dark 三层深影：0 1px 2px+0 6px 16px 黑+0 0 26px 微光）；地平线去掉刻度——Scene 基线仅主线+两端帽，删除 21 刻度线与 6 个刻度数字，刻字预览线去刻度渐变改纯线，删除未用 centerMark/axisUnit 文案键。验证重跑：_verify.mjs 82/82、_audit.mjs 27/27（断言更新：基线仅 3 线无刻度无数字、话语 text-shadow 非 none）。截图重生成。Git 提交 a617387 (PRD v0.1)。资产仍 needs-review。"
-    },
-    {
-      "id": "design-005",
-      "name": "设计 v0.1 地平与穹顶风格原型",
-      "description": "依据核心认知与 PRD v0.1 BDD，全新设计穹顶之下加地平的布局、结构与交互：穹顶天幕（天蓝色光晕）+地平基准线（铁灰色阴影），代表话语的基准与秩序,配色增加厚重感。非天文观测台，无其他风格方向。不参考任何现有实现。独立 Git 仓库",
-      "dependencies": [
-        "harness-001"
-      ],
-      "status": "blocked",
-      "inputs": [
-        "_task/system-design/spec/核心认知.md",
-        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
-        "designs/react-spectrum"
-      ],
-      "output": "designs/own-word-prototype-007-002",
-      "doneCriteria": [
-        "原型覆盖 PRD v0.1 中所有用户可见流程、页面和关键状态",
-        "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
-        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
-        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
-        "原型在桌面与移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
-        "页面风格体现穹顶与地平的隐喻：穹顶天幕（天蓝色光晕）、地平基准线（铁灰色阴影、无刻度——继承 design-004 用户裁决 2026-08-14）、配色厚重感、秩序感（非天文观测台）；个人身份公共查看实现3D、立体、精致、旋转查看的效果",
-        "不参考任何现有实现"
-      ],
-      "evidence": "2026-08-14：用户澄清风格：就是穹顶之下加地平，非天文观测台，无其他方向。2026-08-14 开工（design-005）：用户确认地平基准线无刻度（继承 design-004 裁决）；风格按 description——穹顶天幕（天蓝色光晕）+地平基准线（铁灰色阴影）+配色厚重感；输出新仓库 designs/own-word-prototype-007-002，功能行为以核心认知+PRD v0.1 BDD 为准，不读取任何现有原型实现。完成：从零构建 designs/own-word-prototype-007-002（独立 Git 仓库，commit bebe37f (PRD v0.1)）。风格：天幕 Sky band（天蓝渐变+径向光晕+SVG 穹顶主弧/回响弧/中央刻标+光斑）压在地基 Ground 之上，地平基准线=铁灰粗线+两端帽+地面投影（无刻度无数字，继承 004 裁决）；衬线碑铭话语（Hero/标题/名字/3D 卡名，light 压印三层 shadow、dark 深影三层=厚重感），等宽读数（BAP ID 铭牌/钱包胶囊/计数/日志）；配色天蓝光晕+铁灰结构+厚重面板阴影，浅天光/深蓝夜双主题。功能覆盖 PRD v0.1 BDD 全部：Wallet 连接/取消/失败（Try Again）/切换（终止敏感操作+重新解析）/断开（仅会话）；解析分流（已发布→My Identity/无身份→Setup/资料不全→Setup+Complete your profile/失败→Try Again+Disconnect）；Setup 校验（必填名≤100、简介≤1000 计数、本地图片头像、Person/Organization、inline error）；Review（预览+BAP ID 铭牌+Copy+Your wallet controls this identity.）；创建进度 0/50/100%（Draft/Sign & publish/On chain）+链上日志（Broadcast/Seen/Accepted/Mined pending）+取消保留值/失败 Try Again/成功 Go to My Identity；My Identity（BAP ID 铭牌首屏+Avatar/Name/Type/Bio+rootPath bap:0）；Public Identity（3D 卡：8 层 translateZ -64/-40/0/8/16/32/48/64、pointer tilt≤10deg、镜面光泽、6s 浮空+地面阴影呼吸、coarse/320px/reduced-motion 静态）；Edit Profile（保存 Saving→Saved/取消保留编辑值/未保存离开 dialog+beforeunload）；EN（默认）/zh-CN、Light（默认）/Dark 持久化且 BAP ID 不变。BAP ID mock 3SyWUZXvhidNcEHbAC3HkBnKoD2Q 按 BAP PROTOCOL.md line 151-161 的 base58(ripemd160(sha256(rootAddress))) 示例（rootAddress 1WffojxvgpQBmUTigoss7VUdfN45JiiRK，rootPath bap:0）。技术：React 18.3.1/ReactDOM/Babel 7.29.0 本地 vendor（npm 下载，无 CDN 依赖）；Baoyu import-design-system.mjs 绑定 React Spectrum S2（primary，namespace ReactSpectrum_bc5541），使用 Button/StatusLight/Badge 组件与 --rs-* 令牌。验证（提权宿主环境，无头 Chrome CDP 9262/9264，HTTP 127.0.0.1:4313）：_verify.mjs 27/27（全部 BDD 状态机、Copy 传完整 BAP ID 且失败时值仍可见、语言主题刷新持久且 BAP ID 不变、1440px 铭牌首屏可见、320px 各关键屏无横向溢出、focus-visible 2px outline 规则存在、图标按钮有 aria-label、console/runtime/network error 0）；_audit.mjs 11/11（穹顶弧+回响弧+刻标+光晕+光斑、地平 4 线无刻度无数字、衬线话语 vs 等宽读数、话语 text-shadow 非 none、Light/Dark 画布与铭牌不同、对比度 AA（含 dark accent 按钮深色文字）、3D 8 层视差互异跨度 64px+浮空动画+reduced-motion 静态、dialog role/aria-modal、toast role、zh 行高≥1.8、无 emoji、无观测台词汇）。截图 6 张（welcome/setup/setup-dark-zh/my-identity/public-3d/mobile-320）。资产 needs-review，等待用户复核；复核通过后 design-005 标 done。"
-    },
-    {
-      "id": "design-006",
-      "name": "设计 v0.1 React Spectrum S2 穹顶与地平原型",
-      "description": "依据核心认知与 PRD v0.1 BDD，使用独立导入的 React Spectrum S2，从零设计穹顶天幕与无刻度地平基准线方案。非天文观测台，不读取现有原型实现。",
-      "dependencies": [
-        "harness-001"
-      ],
-      "status": "in-progress",
+      "status": "not-started",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
         "designs/react-spectrum-s2"
       ],
-      "output": "designs/own-word-prototype-s2-001",
+      "output": "designs/own-word-prototype-001",
       "doneCriteria": [
-        "原型覆盖 PRD v0.1 中所有用户可见流程、页面和关键状态；Key Rotation 按 PRD 裁决排除",
+        "原型覆盖 PRD v0.1 中所有用户可见流程、页面和关键状态",
         "原型术语、实体、关系、状态和边界与核心认知一致，不重复定义核心事实",
-        "原型通过 Baoyu Design 导入并绑定 designs/react-spectrum-s2，使用 S2 组件与令牌",
-        "关键导航、Wallet 状态、解析分流、表单校验、反馈、异常和空状态可交互",
-        "原型在桌面与 320px 移动视口通过 HTTP、功能和视觉检查，无阻塞错误或内容重叠",
-        "页面体现穹顶天幕、天蓝光晕、无刻度铁灰地平、话语厚重感和秩序感；非天文观测台",
-        "Public Identity 实现精致 3D、分层景深、指针旋转，并为触摸与 reduced-motion 提供静态降级",
-        "原型资产记录到 designs/own-word-prototype-s2-001/_d_meta.json",
-        "独立 Git 仓库提交信息包含 (PRD v0.1)，并记录 PRD 与后端同步评估",
-        "不读取或复用现有原型代码、DOM、CSS 或截图"
-      ],
-      "evidence": "2026-08-15：从核心认知与 PRD v0.1 BDD 全新建立独立仓库 designs/own-word-prototype-s2-001，未读取或复用旧原型实现。Baoyu Design import-design-system.mjs 导入 designs/react-spectrum-s2 为 primary（namespace ReactSpectrumS2_ad4872），应用根节点绑定 .s2，使用 Button、ActionButton、Badge、StatusLight、ProgressCircle 及 S2 Token，官方 S2 workflow icons 替代自绘 SVG。视觉：双层穹顶弧+天蓝光晕+中央刻标、无刻度铁灰地平线+地面阴影、S2 serif 厚重话语阴影、mono BAP 事实铭牌，非天文观测台；Public Identity 为八层 translateZ（-48/-20/8/16/28/44/60/64px）3D 卡，指针 tilt ±9deg，pointer:coarse、≤600px、reduced-motion 静态降级。功能覆盖 PRD v0.1：Wallet 连接/取消/失败/切换/断开；身份解析已发布/无身份/资料不全/失败；Setup 校验与本地头像；Review；创建确认/处理/失败/成功；My/Public Identity；Edit 保存/取消/未保存离开保护；EN/zh-CN、Light/Dark；Key Rotation、Content、Artifact、Explorer、Relationship 按版本裁决排除。验证：node verify.mjs 16/16；宿主 in-app Browser 实测连接解析、无身份 Setup→校验→Review→Creating→Ready、编辑保存与放弃、钱包/解析/创建/复制故障、账户切换与断开、语言主题持久、页面切换 scroll reset；桌面无横向溢出；mobile-preview.html 提供真实 320×680 iframe 浏览上下文并完成视觉检查。preview.png 已生成；_d_meta.json 资产 needs-review。独立仓库提交 48e2926 (PRD v0.1)。未引入 PRD 或后端新同步项。2026-08-15：增建风格样板板 designs/own-word-prototype-styles-001（A 穹顶碑铭 react-spectrum-s2 / B 信号控制台 react-spectrum3 / C 白昼大陆 react-spectrum4，并排对比），独立仓库提交 353d43b (PRD v0.1)；等待用户在样板板上选定风格。"
+        "原型导入并使用 React Spectrum 设计系统组件与设计令牌",
+        "关键导航、操作、表单校验、反馈、异常和空状态可交互",
+        "原型在桌面与移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
+        "已评估原型变更对 PRD 和后端设计的影响，并记录需要同步的事项",
+        "页面风格体现话语的厚重感，平台的新体系感。个人身份公共查看要 实现3D、立体、精致、旋转查看的效果"
+      ]
     }
   ]
 }
