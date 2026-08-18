@@ -97,8 +97,8 @@
 
 ### 视觉调整（07f1f84 / abb23fc）
 - 用户反馈穹顶弧线太少（原 2 条），要求 7 条。将 Welcome hero `.dome-hero` 的弧线由 2 条（`.arc` + `.arc.arc2`）改为 7 条同心弧：`screens-wallet.jsx` 用 `[0..6].map` 循环生成，内联 `inset` 从 4% 起每条 +6%（4%→40%）内缩、`opacity` 从 0.78 起每条 -0.055 递减；`index.html` 删 `.arc.arc2` 规则、`.arc` 只留基础（position/border/圆角），inset/opacity 由内联 style 控制（DRY）。
-- 后续修复：用户澄清「看不到」实为浏览器缓存，弧线本就在渲染。最终按「淡一点、更抽象」调整：`border: 1.5px solid var(--s2-gray-600)`（亮色 `rgb(113,113,113)` 中灰）、`opacity` 0.85→0.55 递减，细、淡、克制，亮暗均可见但不突兀。
-- 验证：Babel 通过；浏览器确认 7 条弧线 1.5px 中灰、opacity 0.85→0.55。
+- 最终定稿：用户要求「恢复到最初那一版，只是加外圈一共 7 条线（原 8 条多了）」。恢复最初弧线样式 `border: 1px solid var(--line)`（淡色），内弧 6 条（`inset` 8%→38% 每条 +6%，`opacity` 0.7→0.45 递减）+ dome-hero 自身 border 作外圈 = **共 7 条线**。
+- 验证：浏览器确认 arcCount=6 + dome border 1px = 7 条线；Babel 通过。
 
 ### 待办
 - 用户视觉复核 `http://127.0.0.1:4311/own-word-prototype-002/index.html`（桌面 1440px / 移动 320px，重点：天穹/地平线观感、3D 卡旋转、主题/语言切换）。复核后 flip `_d_meta.json` 资产状态（当前 needs-review）。
