@@ -51,7 +51,7 @@
       "dependencies": [
         "harness-001"
       ],
-      "status": "not-started",
+      "status": "done",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
@@ -66,7 +66,8 @@
         "原型在桌面与移动视口通过 HTTP 预览和视觉检查，无阻塞错误或内容重叠",
         "已评估原型变更对 PRD 和后端设计的影响，并记录需要同步的事项",
         "页面风格体现话语的厚重感，平台的新体系感。个人身份公共查看要 实现3D、立体、精致、旋转查看的效果"
-      ]
+      ],
+      "evidence": "designs/own-word-prototype-001/：index.html + data/icons/screens-wallet/screens-identity/screens-public/app.jsx；导入 react-spectrum-s2（_ds/，namespace ReactSpectrumS2_ad4872，组件 S2Button/S2StatusLight/S2Divider 与 22 个 token 均经 allowlist 校验）；jsdom 运行时冒烟 56 项断言全过（连接/取消/失败、解析/失败重试、分流三态、表单校验、Review、Create 成功/取消/失败、My Identity、Copy、Edit Save 成功/取消/失败、Discard 对话框、语言、主题、Account Switch、Disconnect、Public 3D 卡渲染）；JSX 语法与 HTML 闭合校验过；HTTP 200 全资源。待办：用户视觉复核（无浏览器环境，布局重叠与 3D 旋转观感需人工确认）。见 progress.md。"
     }
   ]
 }
