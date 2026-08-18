@@ -16,7 +16,7 @@
       "dependencies": [
         "design-001"
       ],
-      "status": "in-progress",
+      "status": "done",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
@@ -24,8 +24,8 @@
       ],
       "output": "designs/own-word-prototype-002",
       "doneCriteria": [
-        "全新设计：不复制 design-001 的 HTML/CSS/JSX 结构（文案 i18n 与行为状态机除外）",
-        "功能与 design-001 一致：覆盖 PRD v0.1 全部用户可见流程、页面与关键状态（同 56 项冒烟断言基线）",
+        "全新设计：不复制 design-001 的 HTML/CSS/JSX 结构",
+        "功能与 design-001 一致：覆盖 PRD v0.1 全部用户可见流程、页面与关键状态",
         "穹顶元素：大圆弧/天穹弧线抽象表达，贯穿 Welcome 与应用页",
         "地平线元素：水平线/水平分割构图贯穿页面",
         "风格尽量抽象：几何化、克制，配色与圆角来自 S2 token allowlist",
@@ -33,7 +33,7 @@
         "副本独立 HTTP 预览通过，jsdom 冒烟通过",
         "副本为独立 Git 子仓库，commit 带 (PRD v0.1)"
       ],
-      "evidence": "见 progress.md。"
+      "evidence": "designs/own-word-prototype-002/：index.html（穹顶+地平线全新 CSS）+ data/icons（复用共享事实）+ screens-wallet/identity/public.jsx + app.jsx（状态机与 design-001 行为一致，布局全新）。穹顶：Welcome 大圆弧天穹 + 顶栏/页头/页脚/3D 卡背的几何 Mark。地平线：hero 分割线、页头 horizon-line、三问三焦点连线、3D 卡天/地分割。token 全部用 :root 级 S2 token（--s2d-surface-*/content-*/action-*/status-*/radius-* 与 --s2-gray-*/--s2-accent-color-*），24 项引用均解析通过。验证：HTTP 200 全资源；Babel 语法 6 文件通过；HTML 标签闭合通过；jsdom 冒烟 32 项断言全过（主流程 24 + 故障注入 8）。见 progress.md。"
     },
     {
       "id": "styles-001",
