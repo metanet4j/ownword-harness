@@ -42,7 +42,7 @@
       "dependencies": [
         "harness-001"
       ],
-      "status": "not-started",
+      "status": "done",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
@@ -58,7 +58,7 @@
         "副本独立 HTTP 预览通过，jsdom 冒烟通过",
         "副本为独立 Git 子仓库，commit 带 (PRD v0.1)"
       ],
-      "evidence": "未开始（立项，方向已定：新大陆/Territory，源自设计文档V6.md §4.5「新大陆感」）。"
+      "evidence": "designs/own-word-prototype-003/：index.html（新大陆制图 CSS：疆域轮廓/等高线/坐标网格/地标/边界）+ data/icons（复用共享事实）+ screens-wallet/identity/public.jsx + app.jsx（行为与 design-001 一致，视觉全新）。疆域图：Welcome hero 抽象大陆 SVG（T_LAND 疆域轮廓 + T_CLAIM 被标注疆域 + 等高线 + 坐标网格 + 地标点）；品牌标记 BrandMark 为小疆域轮廓；面板 map-card 带坐标角标 + 虚线边界；BAP ID 视为可验证坐标；3D 卡正面=迷你疆域图、背面=Proof。token 用 :root 级 S2 token（--s2d-surface-*/content-*/action-*/status-*/radius-*/font-* 与 --s2-gray-*/--s2-accent-color-*/--s2-focus-indicator-color），26 项引用均解析通过。验证：HTTP 200 全资源；Babel 语法 6 文件通过；HTML 零解析错误；jsdom 冒烟 31 项断言全过（主流程 + 故障注入）。独立 Git 子仓库，commit f0784f5 (PRD v0.1)。见 progress.md。"
     },
     {
       "id": "styles-001",

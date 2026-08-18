@@ -2,14 +2,14 @@
 
 ## 当前状态
 
-- design-001 已完成：`designs/own-word-prototype-001/`（PRD v0.1 全部 BDD 场景 + Public 3D 身份卡）。
+- design-001 已完成：`designs/own-word-prototype-001/`（PRD v0.1 全部 BDD 场景 + Public 3D 身份卡，碑铭/印章）。
 - design-002 已完成：`designs/own-word-prototype-002/`（对照版「穹顶与地平线」，功能一致、视觉重设计）。
-- design-003 已立项（not-started）：`feature_list.json` 新增，方向「新大陆（Territory）」，未实现。
+- design-003 已完成：`designs/own-word-prototype-003/`（对照版「新大陆/Territory」，功能一致、视觉重设计，commit f0784f5 (PRD v0.1)）。
 
 ## 唯一下一步
 
-1. 实现 design-003：在 `designs/own-word-prototype-003/` 产出第三个全新设计原型，按 doneCriteria（不参照 design-001/002 任何视觉；疆域/制图意象；功能覆盖 PRD v0.1 全部 BDD；HTTP/Babel/token/jsdom 验证；commit 带 (PRD v0.1)）。
-2. 三版原型对照评审：`/own-word-prototype-001`（碑铭/印章）、`-002`（穹顶/地平线）、`-003`（新大陆）。
+1. 用户视觉复核三版原型（重点：-001 碑铭/印章、-002 穹顶/地平线、-003 新大陆/制图的观感差异、3D 卡旋转、主题/语言切换），复核后 flip 各 `_d_meta.json` 资产状态（当前均 needs-review）。
+2. 三版对照评审并选定最终视觉方向。
 
 ## 注意事项
 
