@@ -1,5 +1,22 @@
 # progress.md
 
+## 2026-08-18 design-002 design-001 对照版（复制基线）
+
+### 完成项
+- 产出 `designs/own-word-prototype-002/`：design-001 内容一致副本（index.html + 6 jsx + _ds/react-spectrum-s2 + assets/icons + _d_meta.json）。
+- 独立 Git 子仓库，commit `30d556d`（(PRD v0.1) 格式）。
+
+### 验证结果
+- HTTP 200：index / app.jsx / _ds bundle。
+- jsdom 主流程冒烟 35 项断言全过（复用 design-001 测试集，仅路径替换）。
+
+### 决策
+- 副本仅作对照基线，内容与 design-001 完全一致；差异化迭代在副本上进行，两版可对照评审。
+- 对照差异方向（视觉 / 交互 / 文案等）待用户指定。
+
+### 待办
+- 用户指定对照差异方向后，在 own-word-prototype-002 上迭代。
+
 ## 2026-08-18 design-001 v0.1 高保真可交互原型
 
 ### 完成项

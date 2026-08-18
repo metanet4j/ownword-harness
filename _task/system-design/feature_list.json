@@ -7,8 +7,28 @@
     "blocked",
     "done"
   ],
-  "activeItem": "design-001",
+  "activeItem": "design-002",
   "features": [
+    {
+      "id": "design-002",
+      "name": "design-001 对照版（复制基线）",
+      "description": "复制 design-001 产出 own-word-prototype-002 作为对照基线，内容与 design-001 一致；后续差异化迭代在副本上进行，两版可对照评审。",
+      "dependencies": [
+        "design-001"
+      ],
+      "status": "in-progress",
+      "inputs": [
+        "designs/own-word-prototype-001"
+      ],
+      "output": "designs/own-word-prototype-002",
+      "doneCriteria": [
+        "副本内容与 design-001 一致（index.html + 6 jsx + _ds + assets/icons）",
+        "副本独立 HTTP 预览通过，jsdom 冒烟主流程通过",
+        "副本为独立 Git 子仓库，commit 带 (PRD v0.1)",
+        "对照差异方向待用户指定后继续迭代"
+      ],
+      "evidence": "designs/own-word-prototype-002/：rsync 复制（排除 .git），HTTP 200，jsdom 主流程 35 项断言全过；子仓库 commit 30d556d (PRD v0.1)。对照差异方向待用户指定。"
+    },
     {
       "id": "styles-001",
       "name": "首页风格探索：三版视觉方向",
