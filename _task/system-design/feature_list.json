@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "design-002",
+  "activeItem": "design-003",
   "features": [
     {
       "id": "design-002",
@@ -34,6 +34,31 @@
         "副本为独立 Git 子仓库，commit 带 (PRD v0.1)"
       ],
       "evidence": "designs/own-word-prototype-002/：index.html（穹顶+地平线全新 CSS）+ data/icons（复用共享事实）+ screens-wallet/identity/public.jsx + app.jsx（状态机与 design-001 行为一致，布局全新）。穹顶：Welcome 大圆弧天穹 + 顶栏/页头/页脚/3D 卡背的几何 Mark。地平线：hero 分割线、页头 horizon-line、三问三焦点连线、3D 卡天/地分割。token 全部用 :root 级 S2 token（--s2d-surface-*/content-*/action-*/status-*/radius-* 与 --s2-gray-*/--s2-accent-color-*），24 项引用均解析通过。验证：HTTP 200 全资源；Babel 语法 6 文件通过；HTML 标签闭合通过；jsdom 冒烟 32 项断言全过（主流程 24 + 故障注入 8）。见 progress.md。"
+    },
+    {
+      "id": "design-003",
+      "name": "design-003 对照版：星图（Constellation，全新设计）",
+      "description": "全新设计第三版对照原型（own-word-prototype-003），不参照 design-001 与 design-002 的任何代码、布局与视觉。风格意象：星图（Constellation）——深色天幕上的星点与细线连线，抽象、稀疏、克制，无具象。Identity 是天幕上被点亮的星，签名/Proof/交易是它与其它点之间的连线，链上即天幕（坐标可验证、可回溯）。功能范围与 PRD v0.1 一致（全部 BDD 场景），术语/状态/边界遵循核心认知，视觉完全重新设计，仍使用 react-spectrum-s2 设计系统 token 与组件。",
+      "dependencies": [
+        "harness-001"
+      ],
+      "status": "not-started",
+      "inputs": [
+        "_task/system-design/spec/核心认知.md",
+        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+        "designs/react-spectrum-s2"
+      ],
+      "output": "designs/own-word-prototype-003",
+      "doneCriteria": [
+        "全新设计：不复制、不参照 design-001 与 design-002 的 HTML/CSS/JSX 结构",
+        "功能与 design-001 一致：覆盖 PRD v0.1 全部用户可见流程、页面与关键状态",
+        "星图元素：星点 + 细线连线抽象表达，贯穿 Welcome 与应用页",
+        "风格尽量抽象：几何、稀疏、克制（深色天幕意象），配色与圆角来自 S2 token allowlist",
+        "Public 身份 3D 查看保留（星图意象融入），仍可旋转",
+        "副本独立 HTTP 预览通过，jsdom 冒烟通过",
+        "副本为独立 Git 子仓库，commit 带 (PRD v0.1)"
+      ],
+      "evidence": "未开始（立项，方向已定：星图/Constellation）。"
     },
     {
       "id": "styles-001",
