@@ -168,6 +168,54 @@
 - 最终前端差异无空白错误；Vite 入口、配置与 npm lockfile 已删除，Next App Router、pnpm lockfile、Tailwind 结构测试已纳入。
 - 已提交 `a0b893a refactor(frontend): 迁移至 xLog 最新技术栈 (PRD v0.1)`。
 
+### 阶段 10：Tailwind utilities 组件内迁移
+
+- **状态：** in_progress
+- 胡先生确认开始把集中 CSS/`@apply` 迁入 JSX Tailwind utilities。
+- 已复读工作区规则、核心认知、规划记录及所需技能。
+- 冻结边界：不改视觉、业务状态、Mock 和无障碍语义；CSS 仅保留 Tailwind 基础设施。
+- 已完整复核 489 行核心认知与现有迁移记录；本阶段不改领域不变量。
+- 已读取 App、共享 UI、Wallet 与 Identity 全部样式消费者；确认迁移只触及 5 个 TSX、`styles.css` 和结构测试。
+- 已把共享组件、App Shell、Wallet、Identity、Public/3D 与 960/720px 响应式样式迁入 TSX Tailwind utilities。
+- `styles.css` 从 689 行降至 156 行；`@apply` 和组件 class selector 均为 0，只保留 Tailwind 主题、Token、Keyframes 与 Reduced Motion。
+- 结构测试已改为禁止 `@apply`/组件选择器，并检查共享 utilities 与 3D Tailwind arbitrary utilities。
+- 宿主 TypeScript 0 错误、Node tests 10/10、Next.js 16 production build 成功。
+- 已加载当前 agent-browser core/dogfood 工作流；回归使用独立命名会话、production 服务、快照/截图与 Console/Network/axe 取证。
+- Next production 服务已在 `127.0.0.1:4313` 启动；隔离会话 `ownword-tailwind-utilities` 加载成功。
+- 1440×900 Welcome 视觉、标题层级与全部首屏交互控件正常；Console/Page errors 为空，截图为 `/tmp/ownword-tailwind-utilities/welcome.png`。
+- Wallet 授权 Approve、Resolve 与 Setup 进入成功；表单控件和视觉层级正常，截图为 `/tmp/ownword-tailwind-utilities/setup.png`。
+- Setup 首张截图疑似顶栏裁切；运行时证据为 `scrollY=0`、Header/Inner `top=0`、高度 `62.25/61.25px`、Sticky 生效，已在稳定帧复截图继续判断。
+- 稳定帧截图 `/tmp/ownword-tailwind-utilities/setup-top.png` 顶栏完整；首张为切屏滚动动画中的截图时序，不是布局回归。
+- Name/Bio 受控输入、Setup→Review、Profile 预览与操作控件通过；截图为 `/tmp/ownword-tailwind-utilities/review.png`。
+- Review 视觉、双栏布局、完整 BAP ID 换行与链流程面板正常。
+- Create 授权 Dialog、Approve、Processing 与 `Your identity is ready` 成功状态通过。
+- My Identity 的 Profile、状态、完整 BAP ID、Bio、Details 与操作按钮正常；截图为 `/tmp/ownword-tailwind-utilities/my-identity.png`。
+- Public 页已进入；3D 自动旋转仍在更新角度，Proof 和完整 BAP ID/TxID 展示正常。
+- Public 运行时边界：`scrollY=0`、视口 `1440×900`、Header/Inner `top=0`、文档高 `1025px`；已采集稳定截图 `/tmp/ownword-tailwind-utilities/public-stable.png`。
+- Public 稳定截图确认顶栏、双栏、3D Card、Proof 与 Demo 入口视觉正常。
+- 3D Pause 后 350ms 角度保持 `71.68` 且 `auto=false`；ArrowRight 后 Y 角增加 9° 至 `80.68`；Reset 可用。
+- 320×800 中文/Dark Public：`innerWidth=documentElement.scrollWidth=body.scrollWidth=320`，`lang=zh-CN`、`theme=dark`，无横向溢出；截图为 `/tmp/ownword-tailwind-utilities/public-mobile-dark.png`。
+- 移动 Dark 截图发现 Secondary Button 边框疑似缺失；计算样式确认背景/文字正确，但边框为透明。
+- 根因：共享 Button Base 含 `border-transparent`，Tailwind 生成顺序不按 `className` 片段顺序覆盖，Secondary 的 `border-line` 未生效；修复必须落在共享 Tone 定义。
+- 已以结构测试复现：共享 Base 禁止携带 `border-transparent`，首次运行 9/10 通过并准确失败。
+- 共享 Base 仅保留边框宽度，每个 Tone 独立声明边框色；测试恢复 10/10 通过。
+- 最终宿主验证：TypeScript 0 错误、Node tests 10/10、Next.js 16.3.1 production build 成功，静态路由 `/` 与 `/_not-found` 生成成功。
+- 最终 production 新构建已启动；Welcome 可访问性快照标题层级与全部首屏交互控件正常。
+- 最终 production 的 Connect Wallet 可打开可访问 Dialog；Reject/Approve 控件完整。
+- Approve 后进入 Setup；Profile 表单、Person/Organization、Review/Cancel 与 Disconnect 控件完整。
+- Secondary Button 在 Light production 的计算样式为 `1px rgb(225,225,225)`；边框不再透明。已切换 Dark 继续复验。
+- Secondary Button 在 Dark production 的计算样式为 `1px rgb(50,50,50)`；根因修复生效。视口已切到 320×800。
+- 320×800 Dark Setup 最终截图：`/tmp/ownword-tailwind-utilities/setup-mobile-dark-final.png`；`innerWidth=rootWidth=bodyWidth=320`，无横向溢出，`lang=en`、`color-scheme=dark`。
+- 最终 production Page errors 与 Console 均为空。
+- 最终网络请求均为 `127.0.0.1:4313` 的 Document/静态资源/字体，0 外部 API 请求。
+- 当前 CLI 正确命令为 `a11y`；WCAG A/AA axe 结果 0 violation、24 pass，1 个颜色对比项需人工确认（`.py-[7px]`）。
+- axe 未判定元素为 Connected Wallet Button；Dark 计算色为前景 `rgb(175,175,175)`、背景 `rgb(27,27,27)`、opacity 1，继续计算实际对比度。
+- 人工计算 Connected Wallet Button 对比度为 `7.85:1`（AA 普通文字门槛 `4.5:1`）；最终移动截图视觉检查无异常。因此最终为 0 WCAG violation，未判定项人工通过。
+- 最终浏览器会话与 production 服务均已停止，进入提交前静态审计。
+- 已确认 4313 无监听；frontend `git diff --check` 通过，变更仅 8 个预期文件，共 403 insertions / 851 deletions；`styles.css` 156 行且 0 `@apply`。
+- 点号选择器审计无输出：`styles.css` 0 组件 class selector；阶段 10 实现与验收完成，待提交。
+- Frontend 已提交：`4bce3de refactor(frontend): 完成 Tailwind utilities 迁移`。
+
 ## 创建或修改的文件
 
 - `.planning/.active_plan`
@@ -223,13 +271,22 @@
 | 2026-08-20 | Tailwind 初版只接入构建管线，未迁移 UI 样式 | 1 | 按用户门禁重开阶段，将常规样式改为 Tailwind |
 | 2026-08-20 | Tailwind 无法应用 `font-inherit` | 1 | 根因是 utility 不存在；按钮字体继承保留标准 CSS 声明 |
 | 2026-08-20 | 浏览器等待错误文案 `Identity ready` 超时 | 1 | 快照证明业务已成功；正确标题为 `Your identity is ready` |
+| 2026-08-20 | `rg` 把以 `--` 开头的 CSS 变量正则识别为参数 | 1 | 根因为缺少 option terminator；改用 `rg -- "--pattern"` |
+| 2026-08-20 | `apply_patch` 拒绝同一补丁删除并新增 `styles.css` | 1 | 编辑器禁止同路径多操作；拆为受 Git 保护的 Delete/Add 两次补丁 |
+| 2026-08-20 | 浏览器等待 `Public Identity` 超时 | 1 | 快照证明已进入 Public；实际标题为 `Identity — Public View`，改以角色与页面快照验收 |
+| 2026-08-20 | Tailwind Secondary Button 边框计算为透明 | 1 | 已定位共享 Base/Tone `border-color` 冲突；先加结构回归测试，再从 Base 移除颜色 |
+| 2026-08-20 | Button 回归测试首次 Green 断言仍假定 Primary 以 `bg-accent` 开头 | 1 | 放宽为同一 Tone 字符串包含 `bg-accent`，保留真正约束：Base 不得声明透明边框 |
+| 2026-08-20 | 当前 agent-browser 不提供 `audit --level aa` 命令 | 1 | 查询当前 CLI/skill 能力，改用其支持的可访问性检查方式 |
+| 2026-08-20 | `querySelector('.py-[7px]')` 未正确转义 arbitrary class | 1 | 改用 `classList.contains('py-[7px]')` 精确定位元素 |
+| 2026-08-20 | `rg` 默认正则引擎不支持组件选择器审计中的 negative lookahead | 1 | 改为列出全部点号选择器后人工确认仅保留主题基础设施选择器 |
+| 2026-08-20 | 记录补丁再次对 `progress.md` 声明两个 Update | 1 | 合并为单个 Update File 下的多个 hunk |
 
 ## 五问重启检查
 
 | 问题 | 答案 |
 |------|------|
-| 我在哪里？ | 全部阶段已完成 |
-| 我要去哪里？ | 已交付 Next.js App Router 最新稳定基线与 Tailwind v4 完整迁移 |
+| 我在哪里？ | 阶段 10：已完成，frontend 已提交 |
+| 我要去哪里？ | 提交规划证据 |
 | 目标是什么？ | 原型 002 的完整前端 UI、交互和 Mock 业务状态 |
 | 我学到了什么？ | 范围、状态模型、Mock 边界和 8 个原型缺陷；见 `findings.md` |
-| 我做了什么？ | 完成原型功能、xLog/Next/pnpm/Tailwind 迁移、10/10 tests 与 production 浏览器验收 |
+| 我做了什么？ | 已完成 JSX utilities 迁移，并修复共享按钮边框冲突 |

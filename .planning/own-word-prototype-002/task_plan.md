@@ -2,7 +2,7 @@
 
 ## 结论
 
-- **状态：** completed。原型功能、xLog 最新技术基线与 Tailwind CSS 迁移均已完成。
+- **状态：** completed。组件样式已迁入 JSX Tailwind utilities，并完成 production 回归。
 - **门禁：** 胡先生已于 2026-08-20 回复“计划通过”。
 - **目标：** 完整实现 `designs/own-word-prototype-002` 的 UI、交互、前端业务状态；钱包与外部 API 全部 Mock。
 
@@ -171,6 +171,16 @@ Screen 事件 → App/useReducer → Wallet/Identity 契约 → Mock
 - 执行 TypeScript、业务测试、production build 与真浏览器回归。
 - **提交：** `refactor(frontend): 迁移至 xLog 最新技术栈 (PRD v0.1)`
 
+### 8. Tailwind utilities 组件内迁移
+
+- **状态：** completed。
+- 将组件、页面、状态和响应式样式迁入 JSX `className`。
+- 3D、渐变、阴影、伪元素和 SVG 静态样式使用 Tailwind arbitrary utilities/variants。
+- `styles.css` 只保留 Tailwind 入口、主题 Token、Keyframes 与全局 Reduced Motion。
+- 保持原型视觉、业务状态、无障碍语义与 Mock 边界不变。
+- 执行结构测试、TypeScript、业务测试、production build 与真浏览器回归。
+- **提交：** `4bce3de`（`refactor(frontend): 完成 Tailwind utilities 迁移`）
+
 ## 验收门禁
 
 ### 自动化
@@ -215,4 +225,4 @@ Screen 事件 → App/useReducer → Wallet/Identity 契约 → Mock
 3. 保留原型视觉，但直接修正上述 8 个已证实缺陷。
 4. v0.1 只做列出的 Mock 闭环，不扩展真实钱包/API 和其他模块。
 
-全部执行阶段已完成。
+Tailwind utilities 组件内迁移已完成；最终验证与提交证据见 `progress.md`。

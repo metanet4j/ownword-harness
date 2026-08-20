@@ -201,3 +201,15 @@
 - 胡先生明确指出，仅引入 Tailwind 构建管线不算迁移。验收标准改为：常规 UI 样式由 Tailwind utilities 或 `@apply` 生成；原生 CSS 只承载 Tailwind 不适合表达的设计 Token、伪元素、3D 和关键帧。
 - 实际迁移采用 Tailwind v4 `@theme inline` 维护 OwnWord 语义 Token，并用 `@apply` 保留已验收的语义 class API；这样无需改写业务 JSX，也避免视觉回归来自 className 大改。
 - `styles.css` 最终包含 247 个 `@apply`，覆盖 Base、导航、按钮、状态、Panel、表单、Dialog、Demo、Welcome、Identity、Public、Proof 与响应式布局；原生 CSS 保留复杂渐变、`color-mix`、SVG stroke、3D transform、伪元素和 keyframes。
+
+## Tailwind utilities 组件内迁移（2026-08-20）
+
+- 胡先生确认继续迁移；目标不是 `styles.css = 0`，而是消除组件选择器和 `@apply`。
+- 组件布局、状态、响应式、渐变、阴影、伪元素、SVG 与 3D 静态样式进入 JSX Tailwind utilities。
+- 仅保留 Tailwind v4 入口/主题 Token、自定义 Keyframes 与全局 Reduced Motion；动态 3D Transform 继续由 React inline style 驱动。
+- 视觉、状态机、Mock、可访问语义和测试契约不变。
+- 样式消费者集中在 `App.tsx`、`ui.tsx` 与三个 `screens-*.tsx`；无需新增依赖或改领域文件。
+- 共享高频样式只有 Wrap、Button、Panel、Page Head、State View、Avatar；适合复用少量 Tailwind 字符串常量，页面专属样式直接就地写入 `className`。
+- 动态状态继续用模板字符串选择完整 utility 片段，禁止运行时拼接 Tailwind 类名片段，避免扫描器漏产物。
+- 实际收口后 `styles.css` 为 156 行：1 个 Tailwind 入口、1 个 `@theme inline`、Light/Dark Token、6 个 Keyframes、1 个 Reduced Motion 全局规则；无 `@apply`，无组件选择器。
+- Tailwind utility 冲突不能依赖 `className` 字符串顺序：共享 Base 与 Tone 同时声明 `border-color` 时，生成 CSS 的排序决定结果。Base 只保留 `border-width`，颜色必须由每个 Tone 唯一声明。
