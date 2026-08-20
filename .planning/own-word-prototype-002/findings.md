@@ -176,3 +176,28 @@
 - 未声明 favicon 导致浏览器兜底请求 `/favicon.ico` 返回 404；使用内联 data favicon 后请求列表为空，未增加静态文件。
 - 最终 production 无 console/page error；运行时资源仅来自本地 origin，无真实 Wallet/API/CDN 请求。
 - 最终保留的限制均为本次明确范围：Wallet/API/链上广播为 Mock，Wallet/Identity 会话不跨刷新，Public 无分享 URL。
+
+## xLog 最新技术栈迁移（2026-08-20）
+
+- 胡先生明确要求以 xLog 技术栈为基线，并使用最新版本；该指令替代原 Vite 决策。
+- 本地 `reference/xLog-dev/package.json` 的核心基线是 Next.js App Router、React、TypeScript、Tailwind CSS 与 pnpm。
+- xLog 通过 `src/app/[locale]/layout.tsx` 和 `providers.tsx` 注入应用级能力；OwnWord 保留同类 App Router 根边界。
+- 现有 `frontend` 是独立 Vite 工程；业务状态机、Mock、屏幕组件、CSS 和 9 个领域测试可原样保留。
+- 迁移只替换工程入口、构建系统和样式管线；不复制 xLog 的 AGPL 业务代码，不引入原型未使用的编辑器、链、数据库等依赖。
+- 最新版本尚待官方 npm registry 核验；核验结果只记录在本文件，lockfile 固定最终解析版本。
+- xLog 根布局使用 App Router `layout.tsx`；客户端 `providers.tsx` 组合 i18n、Theme、Query 与 Wallet 能力。
+- OwnWord 当前功能只需 App Router 根布局和客户端应用边界；真实 Query/Wallet 仍是 Mock，禁止为了“看起来像 xLog”安装未使用依赖。
+- 当前 `App` 在状态初始化时直接读取 `localStorage`。Next 预渲染会访问服务端环境；迁移入口必须建立明确客户端边界，避免 SSR/Hydration 错误。
+- 现有 738 行 CSS 已完成视觉验收。迁移保留该事实源，只接入最新 Tailwind 管线；不重写已验证样式。
+- 官方 npm registry 于 2026-08-20 返回：Next.js `16.3.1`、React/React DOM `19.2.8`、TypeScript `7.0.2`、Tailwind CSS 与 `@tailwindcss/postcss` `4.3.3`、PostCSS `8.5.26`、pnpm `11.22.0`。
+- 类型与字体最新版本：`@types/node 26.2.0`、`@types/react 19.2.18`、`@types/react-dom 19.2.4`、`@fontsource-variable/noto-sans-sc 5.3.0`。
+- Next.js 16.3.1 要求 Node `>=20.9.0`；pnpm 11.22.0 要求 Node `>=22.13`；宿主 Node 24.14.0 满足两者。
+- 依赖使用精确版本，不使用 `^`；`pnpm-lock.yaml` 固定传递依赖。
+- 浏览器全局只出现在 `App.tsx`、`screens-public.tsx` 与 `ui.tsx`；它们均由单一客户端页面入口传递，可整体置于 `ssr: false` 边界。
+- Vite 专属代码只有 `src/main.tsx`、`vite.config.ts`、`index.html` 和 `vite/client` 类型；领域、Mock、消息、屏幕组件无需改写。
+- Next 根布局承接 Metadata、Viewport、字体、全局 CSS 与偏好预加载脚本；页面入口仅负责加载现有 `App`。
+- Next.js 16 production build 强制将 `jsx` 设为 `react-jsx` 并生成 `next-env.d.ts`；两者是当前框架的正式配置，应纳入提交。
+- `output: standalone` 只适合配套独立 Node 入口；它与标准 `next start` 冲突。当前无容器部署需求，使用标准 Next build/start，避免无用自定义服务器。
+- 胡先生明确指出，仅引入 Tailwind 构建管线不算迁移。验收标准改为：常规 UI 样式由 Tailwind utilities 或 `@apply` 生成；原生 CSS 只承载 Tailwind 不适合表达的设计 Token、伪元素、3D 和关键帧。
+- 实际迁移采用 Tailwind v4 `@theme inline` 维护 OwnWord 语义 Token，并用 `@apply` 保留已验收的语义 class API；这样无需改写业务 JSX，也避免视觉回归来自 className 大改。
+- `styles.css` 最终包含 247 个 `@apply`，覆盖 Base、导航、按钮、状态、Panel、表单、Dialog、Demo、Welcome、Identity、Public、Proof 与响应式布局；原生 CSS 保留复杂渐变、`color-mix`、SVG stroke、3D transform、伪元素和 keyframes。

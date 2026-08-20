@@ -2,7 +2,7 @@
 
 ## 结论
 
-- **状态：** completed。原型功能、修复与 production 验收均完成。
+- **状态：** completed。原型功能、xLog 最新技术基线与 Tailwind CSS 迁移均已完成。
 - **门禁：** 胡先生已于 2026-08-20 回复“计划通过”。
 - **目标：** 完整实现 `designs/own-word-prototype-002` 的 UI、交互、前端业务状态；钱包与外部 API 全部 Mock。
 
@@ -14,15 +14,15 @@
 | 视觉源 | `designs/own-word-prototype-002` | 用户指定；迁移，不重设计 |
 | 目标目录 | `/home/haodev/ownword/frontend` | 工作区尚无前端工程 |
 | Git | `frontend` 独立仓库；根 `.gitignore` 增加 `frontend/*` | 根仓库只跟踪文档/任务；功能提交隔离 |
-| 技术栈 | React 19、TypeScript strict、Vite、原生 CSS | 当前需求是单页客户端；不需要 SSR、服务端路由 |
+| 技术栈 | xLog 基线：Next.js App Router、React、TypeScript、Tailwind CSS、pnpm；使用最新稳定版 | 胡先生于 2026-08-20 明确要求迁移并升级全部技术栈 |
 | 中文字体 | `@fontsource-variable/noto-sans-sc` 自托管 | 宿主无中文字体；避免中文显示方框 |
 | 状态 | 单一 `useReducer` 状态机 | 原型已验证；集中、可测、无额外 Store |
 | Mock | 两个普通 TS 服务契约：Wallet、Identity | 现在 Mock；以后在同一边界替换真实实现 |
 | 页面切换 | 内存 Screen 状态，不引入 Router | v0.1 无分享 URL；原型也无 URL 路由 |
 | UI 基础 | 语义 HTML、原生 `<dialog>`、Pointer/Clipboard/File API | 少依赖；保留无障碍与完整交互 |
-| 测试 | Node 内建 test + TypeScript 检查 + Vite build + 真浏览器验收 | 覆盖业务状态与真实 UI，不加测试框架 |
+| 测试 | Node 内建 test + TypeScript 检查 + Next.js build + 真浏览器验收 | 覆盖业务状态与真实 UI，不加测试框架 |
 
-仅参考 `reference/xLog-dev` 的 React/TypeScript、根能力组织、组件分层和适配边界；不复制其 AGPL 业务代码，也不引入 Next、Tailwind、Zustand、TanStack Query、React Hook Form、next-intl、next-themes、Mantine、Headless UI、Framer Motion。
+以 `reference/xLog-dev` 的 Next.js App Router 工程结构为架构基线，不复制其 AGPL 业务代码。只引入当前功能实际需要的基线依赖；依赖版本以迁移时官方 npm `latest` 为准，并由 lockfile 固定。
 
 ## 范围
 
@@ -47,10 +47,14 @@
 
 ```text
 frontend/
-├── index.html
 ├── package.json
+├── pnpm-lock.yaml
+├── next.config.ts
+├── postcss.config.mjs
 ├── src/
-│   ├── main.tsx
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
 │   ├── App.tsx
 │   ├── domain.ts          # 类型、状态机、校验、常量
 │   ├── mocks.ts           # Wallet/Identity Mock 与故障注入
@@ -59,8 +63,10 @@ frontend/
 │   ├── screens-wallet.tsx
 │   ├── screens-identity.tsx
 │   ├── screens-public.tsx
-│   └── styles.css         # 原型 CSS/token 的单一迁移源
-└── tests/domain.test.ts
+│   └── styles.css         # Tailwind v4 主题、组件与必要原生 CSS
+└── tests/
+    ├── domain.test.ts
+    └── stack.test.ts
 ```
 
 只在文件确实过大时再拆分。数据流固定为：
@@ -155,13 +161,23 @@ Screen 事件 → App/useReducer → Wallet/Identity 契约 → Mock
 - 证据写入 `progress.md` 与 `frontend/artifacts/dogfood/report.md`。
 - **提交：** 仅在发现问题时使用对应 `fix(frontend): ...`；不制造空提交。
 
+### 7. xLog 最新技术栈迁移
+
+- **状态：** completed。Commit `a0b893a`。
+- 审计 xLog App Router、Provider、Tailwind 与 pnpm 结构。
+- 从 Vite 迁移到 Next.js App Router，保留既有 UI、状态机、Mock 边界与测试。
+- 将布局、间距、排版、响应式和常规组件样式迁移到 Tailwind CSS；全局 CSS 只保留 Token、伪元素、3D 和关键帧。
+- 使用官方 npm `latest` 版本，生成 pnpm lockfile。
+- 执行 TypeScript、业务测试、production build 与真浏览器回归。
+- **提交：** `refactor(frontend): 迁移至 xLog 最新技术栈 (PRD v0.1)`
+
 ## 验收门禁
 
 ### 自动化
 
 - TypeScript strict：0 error。
 - `node:test`：状态映射、三态分流、异步失效、表单边界、Copy 原值全部通过。
-- Vite production build：成功；产物不含 Babel/UMD/远程字体。
+- Next.js 16 production build：成功；App Router 静态生成，Tailwind v4 编译成功。
 
 ### 浏览器
 
@@ -186,7 +202,7 @@ Screen 事件 → App/useReducer → Wallet/Identity 契约 → Mock
 |---|---|
 | Corepack 默认 cache 只读 | `COREPACK_HOME` 指向工作区或 `/tmp` |
 | 安装依赖需要网络 | 评审通过后按需申请宿主权限 |
-| 集成/接口测试必须宿主运行 | Vite 预览和浏览器验收均用宿主环境 |
+| 集成/接口测试必须宿主运行 | Next production 预览和浏览器验收均用宿主环境 |
 | xLog 无 `node_modules` | 不复用其安装目录；目标工程独立安装 |
 | 根工作树有大量无关修改 | 不清理、不覆盖；精确路径暂存 |
 
@@ -195,8 +211,8 @@ Screen 事件 → App/useReducer → Wallet/Identity 契约 → Mock
 胡先生已通过以下四点：
 
 1. 新建独立仓库 `/home/haodev/ownword/frontend`。
-2. 使用 React 19 + TypeScript + Vite，不使用 Next.js。
+2. 原评审采用 Vite；胡先生于 2026-08-20 明确将其替换为 xLog 最新技术基线。
 3. 保留原型视觉，但直接修正上述 8 个已证实缺陷。
 4. v0.1 只做列出的 Mock 闭环，不扩展真实钱包/API 和其他模块。
 
-全部执行阶段完成。
+全部执行阶段已完成。
