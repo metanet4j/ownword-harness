@@ -34,7 +34,7 @@
         "副本独立 HTTP 预览通过，jsdom 冒烟通过",
         "副本为独立 Git 子仓库，commit 带 (PRD v0.1)"
       ],
-      "evidence": "designs/own-word-prototype-002/：index.html（穹顶+地平线全新 CSS）+ data/icons（复用共享事实）+ screens-wallet/identity/public.jsx + app.jsx（状态机与 design-001 行为一致，布局全新）。穹顶：Welcome 大圆弧天穹 + 顶栏/页头/页脚/3D 卡背的几何 Mark。地平线：hero 分割线、页头 horizon-line、三问三焦点连线、3D 卡天/地分割。token 全部用 :root 级 S2 token（--s2d-surface-*/content-*/action-*/status-*/radius-* 与 --s2-gray-*/--s2-accent-color-*），24 项引用均解析通过。验证：HTTP 200 全资源；Babel 语法 6 文件通过；HTML 标签闭合通过；jsdom 冒烟 32 项断言全过（主流程 24 + 故障注入 8）。见 progress.md。"
+      "evidence": "designs/own-word-prototype-002/ commit bedc658（PRD v0.1_20260829-163926）：质感提升——纸墨材质（body 颗粒 + 面板受光边 + 实底顶栏）、字体三角色（sans 框架 / serif 姓名与用户话语 / mono 证据）、三问改为一条地平线三焦点（去卡片）、三原则改为账目行、Proof 与 3D 卡背账目 hairline、3D 自动旋转正/背停驻（正面停留→转 180° 展示 Proof→转回）并尊重 prefers-reduced-motion；交互修复——路由切换 scrollTo 顶部、cancelled/failed 顶栏状态正确、授权弹窗 max-height 可滚、name/bio 长度校验进入 validate、desktop footer 避开 Demo FAB。验证：真实 Chrome 1440/960/720/390/320 无横向溢出；320×568 Connect CTA 首屏可见（top=442）；Light/Dark 关键文字对比度≥4.5（ink-faint 4.91/6.02）；axe home/review/public 0 violations（1 incomplete 为 S2 按钮 oklch 无法自动判定）；104 个 var(--s2*) 引用全解析；连接/取消/创建/编辑保存/公共查看 Chrome 冒烟通过；HTTP 全资源 200。仍需用户视觉复核（尤其纸纹与 3D 正/背停驻节奏）。"
     },
     {
       "id": "design-003",

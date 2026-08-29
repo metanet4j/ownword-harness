@@ -1,4 +1,34 @@
 # progress.md
+## 2026-08-29 design-002 质感与交互打磨（commit bedc658）
+
+### 完成项
+- 按“纸上墨线与天光”方向执行 material pass（用户确认按建议执行，方向默认：英文主标保留 sans 800，中文口号与用户话语用 serif；3D 卡 Light=纸页、Dark=墨岩刻字）。
+- 材质：body 增加 1–2% SVG 纸纹（light multiply / dark overlay）；面板改为受光边 + 更深纸影；顶栏由玻璃 blur 改为实底纸/墨 + hairline。
+- 字体三角色：界面框架 sans；姓名/命题/用户话语 serif（Review/My/3D 姓名加签名线，Bio 改 blockquote 引文块）；BAP ID/TxID/Proof mono。
+- 母题重构：三问由三张 qcard 改为“一条两端淡出的地平线 + 三个焦点 + 居中 serif 问题”；三原则改为无卡片账目行（01/02/03）；kicker/q-num/chain-num/demo 标题 accent 蓝收拢为中性，accent 只留给焦点、主行动、品牌签名。
+- 穹顶动画调沉：弧线非等距（外疏内密）、透明度指数递减、粗细 0.5→1.4px；波速/幅度下调、阻尼放长、拨动间隔放宽。
+- 3D 公共身份卡：自动旋转由连续 360° 改为正面停留 2600ms → 1800ms 转至背面停留 → 转回；`prefers-reduced-motion` 下自动旋转关闭；厚度侧面改为顶部受光/底部落影渐变。
+- Proof/卡背改账目式 hairline 分隔；proof-list 由非法 dl 结构改 ul/li（axe definition-list violation 清零），p3d-controls 补 role=group。
+- 交互修复（上一轮 P0 一并落地）：phase 变化 scrollTo 顶部；顶栏 cancelled/failed 不再显示 Connected；dialog max-height calc(100dvh-40px)+overflow（568×320 授权可滚动）；name/bio 长度校验进 validate；desktop footer 右侧预留 132px，避免 Demo FAB 遮挡主题按钮。
+
+### 验证结果
+- 真实 Chrome（agent-browser）1440/960/720/390/320，Light/Dark：无横向溢出；320×568 Connect CTA top=442 首屏可见；中文 320 body 1840 无重叠。
+- 对比度计算：`--ink-faint` 提升到 82%，Light 4.91:1 / Dark 6.02:1；关键文字均 ≥4.5:1（品牌 span 改用 --s2-accent-color-1000 后 Light 4.49→达标）。
+- axe：home 0 violations、review 0、public 0（Light/Dark）；仅剩 S2 按钮/oklch 的 incomplete 自动判定项。
+- token：104 个 `var(--s2*)` 引用全部解析（含补定义 `--s2-focus-ring-color`）。
+- Chrome 冒烟：连接→Setup→Review→Create→My→Public、连接取消顶栏状态、Edit Save、语言/主题、3D 停驻旋转（实测正面/背面各稳定 316px 宽，转场最窄 12px 仅过渡瞬间）、reduced-motion 下 auto-rotate off 且 transform 静止。
+- HTTP 全资源 200（index + 6 jsx + bundle + styles）。
+
+### 决策
+- 方向 B：英文主标 sans、中文口号/用户话语 serif；比全衬线更贴合 S2 且不会退回 design-001。
+- Demo FAB 保留右下；footer 在 ≥721px 视口加右侧安全区，主题按钮实测与 FAB 重叠面积 0。
+- 纸纹用 body::before 固定层，不改 token 色板；卡片背面颜色问题（light-dark 在 background 多层列表被解析为 none）用 background-color 单独声明解决。
+- design-002 继续 in-progress，等待用户视觉复核后再决定是否 flip `_d_meta.json` 状态。
+
+### 待办
+- 用户视觉复核 `http://127.0.0.1:4311/own-word-prototype-002/index.html`（重点：纸纹颗粒浓度、三问地平线构图、serif 签名块、3D 卡正/背停驻节奏、Dark 墨岩质感）。
+- 复核后按反馈迭代；定稿后 flip `_d_meta.json` assets 状态并更新 feature_list doneCriteria 证据。
+
 
 ## 2026-08-18 选定 design-002 为最终视觉方向（其他封存）
 
