@@ -1,4 +1,25 @@
 # progress.md
+## 2026-08-29 design-002 穹顶恢复到 V6（commit bcd886e）
+
+### 完成项
+- 用户确认按 V6 恢复。仅回滚首页穹顶区域：
+  - `theme.jsx`：移除 Canvas 潮汐实现（Canvas/rAF/ResizeObserver/MutationObserver/DOME_* 参数），改回 V6 的 6 个 `<div class="arc">`，inset 8% 起每条 +6%、opacity 0.70 起每条 -0.05；外圈由 `.dome-hero` border 提供，共 7 条线。
+  - `index.html`：`.dome-hero` 背景/边框恢复 V6 写法；`.dome-canvas` 删除；地平线恢复 1px 实线 opacity 0.6；焦点恢复 16px 静态，删除 `focal-breathe` 动画。
+- 保留范围外修改：纸纹（无 mix-blend-mode）、字体/材质/三问三原则、3D 停驻旋转、以及全部交互修复；320px 下仍保留穹顶高度 112px 的响应式优化。
+
+### 验证结果
+- 真实 Chrome（本地 vendor React/Babel 测试，最终 HTML 已恢复 unpkg 引用）：穹顶 6 个 `.arc`、无 `.dome-canvas`、`focal animationName=none`。
+- 性能：360 帧 rAF 采样 p95=16.8ms、0 帧超过 34ms（纯静态，无动画循环）。
+- 320×568：无横向溢出、Connect CTA top=442 首屏可见；弧线宽度 207/177/148/118/89/59 等比排列。
+- axe home 0 violations；Dark 下弧线 border 计算为 `rgb(68,68,68)`、地平线 opacity 0.6。
+
+### 决策
+- 穹顶线条最终回到 V6 静态版；不保留任何线条动画。
+- 后续不再对穹顶线条增加逐帧动画；如需要动效，只允许 CSS 过渡/淡入这类低成本方案。
+
+### 待办
+- 用户复核静态七线观感；继续整体视觉复核，定稿后 flip `_d_meta.json`。
+
 ## 2026-08-29 design-002 穹顶动画卡顿排查与修复（commit 598bc6a）
 
 ### 现象与排查
