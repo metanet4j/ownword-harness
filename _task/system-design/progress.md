@@ -1,4 +1,37 @@
 # progress.md
+## 2026-08-29 design-002 穹顶动画卡顿排查与修复（commit 598bc6a）
+
+### 现象与排查
+- 用户反馈：首页穹顶线条动画无律动美感，且导致页面卡顿。
+- 实测（1440×900 真实 Chrome，rAF 间隔采样 360 帧）：
+  - 修复前静止状态 p50=16.7ms / p95=50.0ms / max=66.7ms，20/360 帧超过 34ms；
+  - 模拟鼠标扫过穹顶时 max=116.6ms，长期任务出现；DevTools trace 5s 内 Paint 160.9ms、UpdateLayoutTree 162.7ms、Layerize 86.2ms、FunctionCall 279.7ms。
+- 根因（两个叠加）：
+  1. `theme.jsx` 的 SVG 实现每帧用字符串重建 6 条 path 的 `d` 并 `setAttribute`，且 `.arc-glow` 带 `filter: blur(2px)`，即使静止也在 60fps 全量重绘；鼠标拨弦模型每条弦按最近点独立激励 + 端点反射，相位互相干扰，视觉上“乱”而不是“律动”。
+  2. `body::before` 纸纹使用 `mix-blend-mode: multiply`（dark 为 overlay），固定层与动画层叠加时强制全视口重合成；实验：仅把 blend 改为 normal，同样动画 p95 立即降到 16.8ms。
+
+### 修复
+- `theme.jsx` 改为 **Canvas 潮汐节律**：6 条弧线共享单一时间相位，内圈先起、按 `DOME_PHASE_STEP=0.62` 向外依次错开；每条弧线叠加两端固定（sin 包络）的 2 波数行进横波；accent 光晕用更宽描边替代 blur。
+- 主题切换：MutationObserver 监听 `data-color-scheme`，Canvas 描边颜色从 CSS 变量（`--line` / `--accent`）重新读取；resize 用 ResizeObserver。
+- `prefers-reduced-motion`：Canvas 只画一次静态弧线，不再启动 rAF。
+- `index.html`：纸纹去色（feColorMatrix saturate=0）、去掉 `mix-blend-mode`，只保留 0.04（dark 0.05）透明度。
+
+### 验证结果
+- 修复后（1440×900 真实 Chrome，预热后连续 3 轮 360 帧采样）：p95=16.7 / 16.8 / 16.8ms，0 帧超过 34ms；3s PerformanceObserver（非 buffered）0 个 long task。
+- 动画确实变化：Canvas `toDataURL` 间隔 700ms 前后不一致；reduced-motion 下 800ms 前后完全一致（静态）。
+- Dark 主题：切到 dark 后 Canvas 非透明像素 25,546 且平均 RGB 偏向 accent 蓝，说明颜色监听生效。
+- 320×568：Canvas 尺寸 246×111、无横向溢出、Connect CTA top=442 首屏可见；axe home 0 violations。
+- HTTP 全资源 200。
+
+### 决策
+- 放弃“鼠标拨弦 + SVG path 逐帧变形”方案：交互不可预期、相位互相干扰，且 DOM 逐帧 path 更新 + blur 无法在满幅穹顶上稳定 60fps。
+- Canvas 只负责穹顶装饰层，不参与 DOM/无障碍语义（父级 `aria-hidden`）；主题/尺寸变化通过观察器同步，不重挂载 React。
+- 纸纹今后禁用 `mix-blend-mode`，纹理只允许低透明度普通 alpha 合成。
+
+### 待办
+- 用户复核新“潮汐”节律的幅度/速度/方向（可调参数：`DOME_OMEGA / DOME_PHASE_STEP / DOME_WAVES / amp`）。
+- 继续视觉复核整体质感；定稿后 flip `_d_meta.json`。
+
 ## 2026-08-29 design-002 质感与交互打磨（commit bedc658）
 
 ### 完成项
