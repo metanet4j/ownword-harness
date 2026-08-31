@@ -1,4 +1,24 @@
 # progress.md
+## 2026-08-31 design-002 美学 P0 落地（commit 9182ade）
+
+### 完成项
+- 按用户确认落地美学建议第 1/2/3 项（仅 designs/own-word-prototype-002，独立子仓库提交 9182ade）：
+  - PageHead 增加 52px 地平线 + 5px 焦点；StateView 由三圈圆环改为“双穹顶弧 + 地平线 + 焦点核心”，图标反白；三原则账目行加 hairline 分隔；3D 卡正面由 1 弧补为 3 弧（透明度 0.55/0.38/0.24）。
+  - `.hero-title .dim` 由 ink-strong 改为 ink-dim；zh 态隐藏与 h1 同文的 `.hero-zh`；My Identity 页 PageHead 由姓名改为 `my.title`（en Your identity is live / zh 你的身份已发布），serif 姓名只出现一次。
+  - 三问地平线焦点与列心对齐：`.questions-band` 定义 `--q-gap`，`.questions-horizon` 计算 `--q-col-edge`，焦点 left 用该值；≤960px 单列隐藏两侧焦点，保留中间焦点。
+- 数据字典新增 en/zh `my.title`。
+
+### 验证结果
+- 真实 Chrome（agent-browser）1440×900 Light：三焦点圆心 x=399/720/1041，与三列圆心完全相等（改动前外侧各偏 111px）；hero-title 第二行计算色 light rgb(80,80,80) / dark rgb(175,175,175)，与第一行分层。
+- 状态页（连接取消）：state-emblem 结构 arc/arc.r2/horizon-line/core/icon 齐全，88×88 盒内 arc 78×46 与 50×33，地平线 y=52，icon path fill=#fff。
+- PageHead line 52×1 + focal 在 Setup/My 均渲染；My 页姓名仅在 `.my-name` 出现一次。
+- Public 3D 卡正面 `.dome-arc` 3 条，inset/opacity 符合预期。
+- 响应式：960×800 与 320×568 无横向溢出；≤960 可见焦点数 1；320×568 Connect CTA top=442 首屏可见。
+- HTTP 200；Babel 全脚本渲染无错误（home/setup/my/public 与取消状态均走通）。
+
+### 待办
+- 用户视觉复核本轮改动；确认后再决定是否继续第 4/5 项（S2 一致性按钮/圆角/阴影/动效与零碎打磨）。
+
 ## 2026-08-29 design-002 穹顶恢复到 V6（commit bcd886e）
 
 ### 完成项
