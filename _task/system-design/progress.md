@@ -1,4 +1,24 @@
 # progress.md
+## 2026-08-31 design-002 美学 P1：抽象穹顶 + S2 一致性（commit 67ec59f）
+
+### 完成项
+- 按用户要求把首页穹顶做得更抽象：删除 `.dome-hero` 的封闭半圆 border、双层填充与 6 条同心弧，改为 4 条 `mask-image` 两端渐隐、错落分布的残弧（a1–a4，opacity 0.8/0.62/0.48/0.36），只保留极淡的天光 radial-gradient；地平线与焦点不变。无动画、无 rAF、无 Canvas。
+- S2 一致性：删除全部自定义 `.btn` 样式与引用，全站动作统一 S2Button（pill、40px、14px、gap 8）；输入框圆角 `--r-lg`→`--r-md`(8px)；`--shadow-card` 回 S2 elevated `0 8px 24px .16`（保留 1px 接触阴影），dialog/demo-panel 回 dragged `0 12px 28px .22`，toast 回 elevated；`.view` 动效 0.38s→0.18s 并加 8px 上移。
+- 零碎打磨：字号清掉 9/9.5/11.5/12.5/13.5/14.5/15.5/21/23/26/29/30 等半档，对齐 S2 阶 10/11/12/14/16/18/20/22/25/28/32/36；kicker 字距收成 label .18em / hero .24em；中文字距 .09→.05em、hero-sub 行高 2→1.8；Public 返回按钮改用 S2 源图标 ChevronLeft（新增 assets/icons/S2_Icon_ChevronLeft_20_N.svg + icons.jsx 暴露）；Demo FAB 改 40px icon-only（aria-label/title 保留）。
+- `.bapid-box .s2d-button`、`.bapid-line .s2d-button` 由旧 `.btn` 选择器迁移；`.avatar-actions` 改 `align-items:flex-start`，避免 S2Button 被纵向 flex 拉伸。
+
+### 验证结果
+- 真实 Chrome 1440×900 Light：`.dome-hero` 无 border/实底填充，4 条 `.arc` mask-image 计算值生效；CTA 40px/999px/14px；Setup/Review/My/Public/Dialog 各按钮实测均为 40px pill，无残留 `.btn`。
+- 三问焦点仍与列心完全对齐（399/720/1041，Light/Dark 均复核）。
+- 320×568：CTA top=442（en）首屏可见、无横向溢出；zh 态 hero-zh 不渲染、CTA top=335。
+- Dark：残弧 border 计算 rgb(68,68,68)、focal rgb(86,129,255)，无横向溢出。
+- 性能：1440 Light 120 帧采样 p50=16.7ms / p95=16.9ms / max=17.3ms，0 帧>34ms（静态无动画回归）。
+- Babel/ds errors 为空；HTTP 全资源 200（含新增 ChevronLeft SVG）。
+- 提交 67ec59f（PRD v0.1_20260831-233849），独立子仓库。
+
+### 待办
+- 用户视觉复核抽象残弧观感与 S2 pill/40px 按钮体系；确认后本轮美学优化可视为完成，等待 flip `_d_meta.json` 决定。
+
 ## 2026-08-31 design-002 美学 P0 落地（commit 9182ade）
 
 ### 完成项
