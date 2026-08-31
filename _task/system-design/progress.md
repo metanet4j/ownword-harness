@@ -1,4 +1,23 @@
 # progress.md
+## 2026-08-31 design-002 美学 P1a：仅按钮统一 + 动效 + 阴影（commit 3b6d77f）
+
+### 完成项
+- 按用户要求只落“按钮统一 + 动效 + 阴影”这一组，不动字阶/返回图标/Demo FAB/输入框圆角，也不动首页穹顶。
+- 按钮统一：删除 `index.html` 的 `.btn/.btn-primary/.btn-secondary/.btn-negative/.btn-quiet/.btn-sm` 整套自定义样式，新增全局 `.s2d-button { min-height:40px; padding:0 22px; gap:8px; font-size:14px; border-radius:999px }`；`app.jsx` 弹窗与授权弹窗、`screens-identity.jsx` 6 处、`screens-public.jsx` 返回按钮全部改 `<S2Button variant=… onPress=…>`；删除 `.hero-actions/.form-actions` 对 S2Button 的 8px 圆角与 padding 覆盖；`.bapid-box/.bapid-line` 选择器迁移到 `.s2d-button`；`.avatar-actions` 加 `align-items:flex-start`。
+- 阴影回 S2：`--shadow-card` 保留 1px 接触阴影 + `0 8px 24px .16`（elevated）；dialog/demo-panel `0 12px 28px .22`（dragged）；toast `0 8px 24px .16`。
+- 动效：`.view` 0.38s→0.18s 并加 8px 上移；dialog/demo-panel `dialog-in 0.2s→0.18s`。
+
+### 验证结果
+- 真实 Chrome 1440×900 Light：首页 CTA、授权弹窗、Setup、My、Public 全部按钮 40px/999px/14px/700；无 `.btn` 类或选择器残留。
+- 卡片计算阴影含 `0 8px 24px .16` + 1px 接触边；demo-panel 阴影 `0 12px 28px .22`、动画 0.18s；`.view` 动画 0.18s。
+- 320×568：CTA top=442 首屏可见、无横向溢出。
+- 性能：1440 下 120 帧采样 p50=16.7ms / p95=17.1ms / max=24ms，0 帧>34ms。
+- Babel/ds errors 为空；HTTP 全资源 200。
+- 提交 3b6d77f（PRD v0.1_20260831-235334），独立子仓库。
+
+### 待办
+- 用户视觉复核本组；确认后再决定是否继续“字阶/字距”“返回图标”“Demo FAB”等第 5 项零碎打磨。
+
 ## 2026-08-31 design-002 美学 P0 落地（commit 9182ade）
 
 ### 完成项
