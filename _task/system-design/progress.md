@@ -1,4 +1,22 @@
 # progress.md
+## 2026-09-01 design-002 美学 P1b+P1c：字阶/图标/FAB + 页面减负（commit 167dc31）
+
+### 完成项
+- P1b 零碎打磨：字号全部对齐 S2 阶（10/11/12/14/16/18/20/22/25/28/32/36），清掉半档；`.kicker`/`.auth-kicker` 字距 0.22→0.18em；`.hero-zh` 0.09→0.05em、hero-sub 行高 2→1.8；Public 返回按钮换 S2 ChevronLeft（新增源图标资产并暴露 `IconChevronLeft`）；Demo FAB 改 40×40 icon-only，保留 aria-label/title。
+- P1c 页面减负：`.panel` 去掉 inset 受光边、padding 26→24、只保留 S2 阴影；首页 hero 底部 52→64、welcome-band 底部 64→80、三问 gap 44→48（`--q-gap` 同步，焦点公式自动对齐）、原则行 padding 22→24；review/public 两栏 gap 22/26→24；My 页 hero 不再使用 panel，BAP ID + Bio + Details 合并进单个 `my-identity-panel`（内部 hairline 分区），去掉重复的 ACTIVE 状态胶囊。
+
+### 验证结果
+- 真实 Chrome 1440×900 Light：三问焦点 397/720/1043 与列心逐一相等；hero-sub 16px/1.8、hero-zh 22px/0.05em、q-title 22px/q-zh 14px 均符合 S2 阶；Demo FAB 40×40 无文字。
+- My 页：面板数由 3 个降为 1 个（`.my-identity-panel`），hero 无 panel 类，无 ACTIVE 胶囊，BAP ID/Bio/Details 同面板内 hairline 分区。
+- 320×568：en CTA top=442、zh CTA top=335，均首屏可见；My 页 panel 284px、无横向溢出。
+- 性能：1440 下 120 帧 p50=16.7ms / p95=16.9ms / max=17.1ms，0 帧>34ms。
+- Babel/ds errors 为空；HTTP 全资源 200（含 ChevronLeft SVG）。
+- 提交 167dc31（PRD v0.1_20260901-104821），独立子仓库。
+
+### 待办
+- 用户视觉复核“干净清爽”这一版；如对 My 页合并/去状态胶囊不满意，可单独回退或微调。
+- 尚未动：顶栏/Footer 重排、Review 页信息减负、首页穹顶透明度等可选优化。
+
 ## 2026-08-31 design-002 美学 P1a：仅按钮统一 + 动效 + 阴影（commit 3b6d77f）
 
 ### 完成项
