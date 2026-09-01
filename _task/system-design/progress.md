@@ -1,4 +1,23 @@
 # progress.md
+## 2026-09-01 design-002 美学 P1d 收尾：穹顶降淡 + Review 精简 + 顶栏/Footer 重排（commit b03e5d2）
+
+### 完成项
+- 首页穹顶只做“整体降淡 15%”：`.dome-hero` 增加 `opacity: 0.85`，V6 七线结构、位置、颜色完全不变。
+- Review 页信息精简：移除 `.panel-head`（类型 label + `S2StatusLight NOT PUBLISHED`），类型只保留在姓名下方的 `.review-type` 一次，避免重复。
+- 顶栏/Footer 重排：语言/主题从 Footer 移入 `.topbar-prefs`（两个 `.icon-btn`，aria/title 保留）；Footer 删除 `.footer-main`/`.pref-switch` 体系，改为单行居中（OWNWORD · tagline）；删除 desktop footer 132px 右安全区与移动端旧 footer/pref 规则。
+
+### 验证结果
+- 真实 Chrome 1440×900：顶栏 children = brand / topbar-prefs / wallet-slot；Footer 单行文本、中心 x=720；穹顶 opacity=0.85、6 条 `.arc` 不变。
+- 语言/主题 icon 切换正常（en↔zh、light↔dark）；320×568 顶栏无横向溢出、CTA top=448 首屏可见。
+- Review 实测：无 `.panel-head`、无 NOT PUBLISHED、PERSON 仅出现一次，无横向溢出。
+- 性能：1440 下 120 帧 p50=16.7ms / p95=16.8ms / max=17.5ms，0 帧>34ms。
+- Babel/ds errors 为空；HTTP 全资源 200。
+- 提交 b03e5d2（PRD v0.1_20260901-131244），独立子仓库。
+
+### 待办
+- 用户复核本轮三处观感（穹顶降淡、Review 精简、顶栏/Footer 重排）。
+- 至此上一轮提出的美学优化项已全部落地；如定稿，下一步可 flip `_d_meta.json` 状态。
+
 ## 2026-09-01 design-002 美学 P1b+P1c：字阶/图标/FAB + 页面减负（commit 167dc31）
 
 ### 完成项
