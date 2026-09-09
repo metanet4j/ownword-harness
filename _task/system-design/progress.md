@@ -1,4 +1,30 @@
 # progress.md
+## 2026-09-09 design-astra-001 立项并激活：astra 原型打磨至生产实现就绪
+
+### 完成项
+- 新增事项 `design-astra-001`（`feature_list.json`），`status=in-progress`，`activeItem` 由 `design-002` 改为 `design-astra-001`；写入 12 条 doneCriteria（BDD 全覆盖、术语一致、S2 一致性、无障碍、响应式、双语双主题、状态断言、生产替换契约、无 CDN 依赖、证据可复现、用户视觉复核、提交规范）。
+- `design-002` 置为 `archived` 并加 `statusNote`：当前视觉方向由 `designs/own-word-prototype-s2-astra-001` 承接，目录与证据保留、不再迭代。至此 `in-progress` 唯一。
+- 基线确定：`designs/own-word-prototype-s2-astra-001` @ `d7706da`（09-06 00:18）。回退前状态（412ca12）保存在分支 `backup/astra-412ca12` 与 `stash@{0}`；按用户裁决，本次打磨**不使用** backup 分支成果。
+- 激活前按开工门禁完整阅读 `_task/system-design/AGENTS.md`、`CLAUDE.md`、`feature_list.json`、`progress.md`、`session-handoff.md`，并核对核心认知第 11/12 节与 PRD v0.1 第 5、8.8、9 节范围。
+
+### 验证结果
+- `feature_list.json` 经 JSON 解析校验通过：6 个事项，`in-progress` 恰好 1 个（`design-astra-001`），其余为 archived/done。
+- 原型基线核对：工作区 `git status` 干净，HEAD = `d7706da`，1130 个跟踪文件；`index.html` 引用 unpkg CDN（回退后状态），`vendor/` 已随 stash 移出。
+- 预览可用性实测：`http://127.0.0.1:4312/own-word-prototype-s2-astra-001/index.html` 为实时服务（返回回退版本，`lab.html` 404）；4311 是快照服务，仍返回回退前内容，不能用于本轮打磨的观测。
+
+### 决策
+- feature id 采用 `design-astra-001`：`verification.md` 第 7 行已将该 id 记为当前任务，避免新增重复命名。
+- 打磨基线为 `d7706da`，不恢复已回退的 13 个提交（含离线启动、演练台分离、实现交接文档、行尾修复）；这些能力若仍需，按 doneCriteria 重新实现并单独取证。
+- 核心认知第 12 节三项待确认（Inscription Number 端点、Artifact 签名封装、Blockchain 状态映射）不作为本轮原型阻塞，但必须按 doneCriteria 第 8 条在实现交接文档中显式标注验证方式。
+
+### 待办
+- 按 doneCriteria 逐项打磨与取证；每完成一项：astra 子仓库提交（`(PRD v0.1_${datetime})`）+ 更新本文件与 `feature_list.json` 证据。
+- 打磨完成后 `_d_meta.json` 资产状态由用户确认后 flip 为 approved。
+
+### 风险 / 待确认
+- 4311 端口被既有快照服务占用，实时预览改用 4312；若用户要求固定 4311，需先停掉既有实例再重启（待确认）。
+- 4312 服务是本会话后台任务，会话结束即停止；需要常驻需另行安排。
+
 ## 2026-09-01 design-002 美学 P1d 收尾：穹顶降淡 + Review 精简 + 顶栏/Footer 重排（commit b03e5d2）
 
 ### 完成项
