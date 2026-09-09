@@ -94,6 +94,18 @@
 
 仍未关闭：**E1 用户视觉复核**——需用户查看预览后确认，再把 `_d_meta.json` 资产状态由 `needs-review` 改为 `approved`。
 
+### round 5 结果（2026-09-09，提交 `1a2132b`）
+
+补 doneCriteria ④/⑤ 的无障碍证据，并修掉一个真实缺陷：
+
+- **发现并修复缺陷**：跳至正文链接（`a.skip-link` → `#main`）聚焦后可见，但激活时焦点落回 `BODY`——`main` 缺 `tabindex="-1"`，链接等于不起作用。补 `tabIndex="-1"` 与 `main:focus { outline: none }` 后实测 `document.activeElement === main`。
+- **新增断言**（全部通过）：跳至正文聚焦可见、激活后焦点进入 `main` 地标；键盘 Tab 经过的 5 个控件都有可见焦点环（`:focus-visible` 2px 轮廓）；钱包弹窗打开时焦点进入弹窗、关闭后回到触发按钮；`prefers-reduced-motion` 下 3D 自动旋转关闭且装饰动画时长降为 0.01ms。
+- 复核 `_d_meta.json` 资产索引与目录一致（index/brand/brand-explorations 均存在）；`implementation-handoff.md` 补充品牌页定位（设计参考，生产不迁移）。
+
+验证：`node check-model.cjs` 59 项、`check-tokens.py` 66/66、`check-offline.py` 4 项、`OWNWORD_PORT=4312 python3 check-browser.py` **373 项**通过，axe 0 violations、26 项 incomplete。
+
+仍未关闭：**E1 用户视觉复核**（唯一剩余项）。
+
 ### 风险 / 待确认
 - 4311 端口被既有快照服务占用，实时预览改用 4312；若用户要求固定 4311，需先停掉既有实例再重启（待确认）。
 - 4312 服务是本会话后台任务，会话结束即停止；需要常驻需另行安排。
