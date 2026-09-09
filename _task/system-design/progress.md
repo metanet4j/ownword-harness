@@ -104,6 +104,12 @@
 
 验证：`node check-model.cjs` 59 项、`check-tokens.py` 66/66、`check-offline.py` 4 项、`OWNWORD_PORT=4312 python3 check-browser.py` **373 项**通过，axe 0 violations、26 项 incomplete。
 
+### round 7 结果（2026-09-09，提交 `b194fa9`）
+
+- **错误路径覆盖**：把 `Storage.prototype.setItem` 改为抛错后切换偏好，断言页面以 `role="alert"` 明示「偏好无法保存」而不是静默失败（`Unwritable storage is announced instead of failing silently`）。
+
+验证：`node check-model.cjs` 59 项、`OWNWORD_PORT=4312 python3 check-browser.py` **382 项**通过，axe 0 violations、26 项 incomplete。
+
 仍未关闭：**E1 用户视觉复核**（唯一剩余项）。
 
 ### round 6 结果（2026-09-09，提交 `765c827`）
@@ -112,6 +118,12 @@
 - **状态机移植契约**：`implementation-handoff.md` 补全动作表（17 个动作 → 状态效果）与「原型文件 → 生产模块」对应表，使实现方能按表照搬而不必读 JSX。
 
 验证：`node check-model.cjs` 59 项、`check-tokens.py` 66/66、`OWNWORD_PORT=4312 python3 check-browser.py` **381 项**通过，axe 0 violations、26 项 incomplete。
+
+### round 7 结果（2026-09-09，提交 `b194fa9`）
+
+- **错误路径覆盖**：把 `Storage.prototype.setItem` 改为抛错后切换偏好，断言页面以 `role="alert"` 明示「偏好无法保存」而不是静默失败（`Unwritable storage is announced instead of failing silently`）。
+
+验证：`node check-model.cjs` 59 项、`OWNWORD_PORT=4312 python3 check-browser.py` **382 项**通过，axe 0 violations、26 项 incomplete。
 
 仍未关闭：**E1 用户视觉复核**（唯一剩余项）。
 
