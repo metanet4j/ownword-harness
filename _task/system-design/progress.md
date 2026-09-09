@@ -117,7 +117,20 @@
 
 验证：见上；工作区干净。
 
-仍未关闭：**E1 用户视觉复核**（唯一剩余项）。
+### round 9 结果（2026-09-09，提交 `aeb2cdf`，批 1：文案与断言解耦）
+
+用户批准我的新方案后开工，先做批 1（低风险、且是批 3 文案精简的前提）：
+
+- **词典抽离**：中英双语 142 键从 `app.jsx` 移到 `copy.js`（UMD 形式，node 可 `require`），新增 `check-copy.cjs` 校验两语言键集一致、无空串、无核心认知第 2.3 节禁区用词、无重复长句。
+- **断言去文案化**：状态改由 `data-*` 暴露（`data-notice`/`data-error`/`data-busy`/`data-incomplete`/`data-copy-feedback`/`data-field-error`/`data-modal-title`/`data-action`），389 项浏览器断言不再按句子匹配文案；每个状态仍同时断言"文本非空"，保留 PRD「要显示提示」的意图。
+- **面板关闭三态**：新增 `useDismissable`——点外点击、Escape（焦点回归触发按钮）、Tab 移出均可关闭；补 `aria-controls`。过程中修掉一个真实缺陷：`focusin` 判断写成 `relatedTarget`（旧焦点）而非 `target`，导致"Tab 移出"晚一次才生效。
+- **确认提示 6s 自动消失**：`CLEAR_NOTICE` 动作 + `noticePaused` 暂停；悬停或聚焦暂停倒计时，`Failed` 类错误常驻不消失。模型断言 59 → 62。
+- **小屏弹窗实测**：320×800 下创建确认弹窗内容高于视口、弹窗内可滚动；主操作 Cancel/Approve 首屏可见，原型专用的模拟行需滚动。新增断言 `Dialog primary actions stay inside a 320px viewport`，并写入 `implementation-handoff.md` 第 3.1 节作为生产注意项。
+- **测试脚本加固**：点击前 `scrollIntoView({behavior:"instant"})`（`scroll-behavior: smooth` 会让坐标点击漂移）；布局签名改用绝对坐标（此前滚动位置不同会误报"深浅布局位移"）。
+
+验证：62 项模型断言、4 项词典契约、66/66 令牌解析、4 项离线检查、**389 项浏览器检查**全部通过；axe 0 violations、26 项 incomplete。
+
+仍未关闭：**E1 用户视觉复核**；批 2（移动端量测修复、穹顶交互重写）与批 3（链上记录、文案精简）待用户看完预览后定。
 
 ### round 6 结果（2026-09-09，提交 `765c827`）
 
@@ -139,7 +152,20 @@
 
 验证：见上；工作区干净。
 
-仍未关闭：**E1 用户视觉复核**（唯一剩余项）。
+### round 9 结果（2026-09-09，提交 `aeb2cdf`，批 1：文案与断言解耦）
+
+用户批准我的新方案后开工，先做批 1（低风险、且是批 3 文案精简的前提）：
+
+- **词典抽离**：中英双语 142 键从 `app.jsx` 移到 `copy.js`（UMD 形式，node 可 `require`），新增 `check-copy.cjs` 校验两语言键集一致、无空串、无核心认知第 2.3 节禁区用词、无重复长句。
+- **断言去文案化**：状态改由 `data-*` 暴露（`data-notice`/`data-error`/`data-busy`/`data-incomplete`/`data-copy-feedback`/`data-field-error`/`data-modal-title`/`data-action`），389 项浏览器断言不再按句子匹配文案；每个状态仍同时断言"文本非空"，保留 PRD「要显示提示」的意图。
+- **面板关闭三态**：新增 `useDismissable`——点外点击、Escape（焦点回归触发按钮）、Tab 移出均可关闭；补 `aria-controls`。过程中修掉一个真实缺陷：`focusin` 判断写成 `relatedTarget`（旧焦点）而非 `target`，导致"Tab 移出"晚一次才生效。
+- **确认提示 6s 自动消失**：`CLEAR_NOTICE` 动作 + `noticePaused` 暂停；悬停或聚焦暂停倒计时，`Failed` 类错误常驻不消失。模型断言 59 → 62。
+- **小屏弹窗实测**：320×800 下创建确认弹窗内容高于视口、弹窗内可滚动；主操作 Cancel/Approve 首屏可见，原型专用的模拟行需滚动。新增断言 `Dialog primary actions stay inside a 320px viewport`，并写入 `implementation-handoff.md` 第 3.1 节作为生产注意项。
+- **测试脚本加固**：点击前 `scrollIntoView({behavior:"instant"})`（`scroll-behavior: smooth` 会让坐标点击漂移）；布局签名改用绝对坐标（此前滚动位置不同会误报"深浅布局位移"）。
+
+验证：62 项模型断言、4 项词典契约、66/66 令牌解析、4 项离线检查、**389 项浏览器检查**全部通过；axe 0 violations、26 项 incomplete。
+
+仍未关闭：**E1 用户视觉复核**；批 2（移动端量测修复、穹顶交互重写）与批 3（链上记录、文案精简）待用户看完预览后定。
 
 ### 风险 / 待确认
 - 4311 端口被既有快照服务占用，实时预览改用 4312；若用户要求固定 4311，需先停掉既有实例再重启（待确认）。
