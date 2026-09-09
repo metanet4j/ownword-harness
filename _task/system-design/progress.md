@@ -82,6 +82,18 @@
 
 仍未关闭：E1（用户视觉复核）。另需复核 doneCriteria ②（术语与核心认知一致、无禁区用词）与 ③（token 引用 100% 解析）是否有自动化证据，④ 的 26 项 incomplete 需给出逐条复核结论。
 
+### round 4 结果（2026-09-09，提交 `c3915cd`）
+
+关闭 doneCriteria ②③④ 的证据缺口：
+
+- **② 术语与禁区用词**：按核心认知第 2.3 节扫描原型文案与结构，禁区词命中 0（`注册`、`登录`、`sign up`、`log in`、`register`、`Verified`、`BAP NFT`、`Create BAP NFT`、`Broadcast`、`Push`）；唯一 `Submit` 命中是 `onSubmit` 事件处理器名而非用户文案；Publish 用词统一为 `Published` / `Publishing`。记录 `evidence/term-scan.txt`。
+- **③ 设计系统一致性**：新增 `check-tokens.py`——提取原型自身 CSS 的全部 `var(--s2*)` 引用，与设计系统 7 个 CSS 文件定义的 2509 个令牌比对；**66 个引用全部解析，0 未定义**。记录 `evidence/token-resolution.json`。
+- **④ axe incomplete 逐项复核**：26 项 incomplete 全为 `color-contrast`（文本位于装饰层、渐变或伪元素之上，axe 无法判定背景）。复核方式：取实测计算样式（颜色、字号、字重）与元素实际背景（页面表面或身份卡渐变三个端点色），按 WCAG 2.1 计算最差对比度。**22 组组合全部达标，最差 6.37:1**（`.eyebrow` 深色，要求 4.5:1）。记录 `evidence/axe-incomplete-review.json`。
+
+验证：`node check-model.cjs` 59 项、`python3 check-tokens.py` 66/66 解析、`python3 check-offline.py` 4 项、`OWNWORD_PORT=4312 python3 check-browser.py` 365 项（原型源码自 `a88071d` 后未再变动，证据与源码状态一致）。
+
+仍未关闭：**E1 用户视觉复核**——需用户查看预览后确认，再把 `_d_meta.json` 资产状态由 `needs-review` 改为 `approved`。
+
 ### 风险 / 待确认
 - 4311 端口被既有快照服务占用，实时预览改用 4312；若用户要求固定 4311，需先停掉既有实例再重启（待确认）。
 - 4312 服务是本会话后台任务，会话结束即停止；需要常驻需另行安排。
