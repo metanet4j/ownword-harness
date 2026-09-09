@@ -21,6 +21,43 @@
 - 按 doneCriteria 逐项打磨与取证；每完成一项：astra 子仓库提交（`(PRD v0.1_${datetime})`）+ 更新本文件与 `feature_list.json` 证据。
 - 打磨完成后 `_d_meta.json` 资产状态由用户确认后 flip 为 approved。
 
+### 缺口清单（round 1，按 doneCriteria 分组）
+
+依据：PRD v0.1 第 5 节 / 8.8 / 第 9 节裁决逐条枚举得 **28 条在范围内场景**（§5.1×3、§5.2×2、§5.3×4、§5.4×5、§5.5×3、§5.6×3、§8.8×3、§5.9×3、§5.10×2；§5.7×3 按第 9 节第 5 项裁决下放 v0.1.1 排除），对照 `designs/own-word-prototype-s2-astra-001` @ `d7706da` 的实现与 `verification.md` 映射。
+
+| 组 | 缺口 | doneCriteria | 处置 |
+| --- | --- | --- | --- |
+| A 观测层 | A1 `check-browser.py` 硬编码 `127.0.0.1:4311`；4311 现为快照服务，跑它等于验证错的版本 | ⑩ | 已改为读 `OWNWORD_URL` / `OWNWORD_PORT` |
+| A 观测层 | A2 `verification.md`「复现与观测」只有 Windows 路径与 4311，缺跨平台与实时服务前提 | ⑩ | 待改 |
+| A 观测层 | A3 响应式只验 320px + 1440 截图，未覆盖 390/768/960 | ⑤ | 待改 |
+| A 观测层 | A4 axe 只拦 critical/serious，未断言 0 violations，incomplete 未逐条记录 | ④ | 待改（现状：32 份审计 violations=0、incomplete=26 全为 color-contrast） |
+| B 依赖与卫生 | B1 `index.html` 依赖 unpkg 三条 CDN（React/ReactDOM/Babel），`font-faces.css` 依赖 use.typekit.net 字体 | ⑨ | 待处理（本地化或明确降级） |
+| B 依赖与卫生 | B2 无 `.gitattributes`；HEAD 为 LF，Windows 侧编辑会引入 CRLF 全量差异 | ⑨ | 待加 `* text=auto eol=lf` |
+| C 生产契约 | C1 无实现交接文档：钱包连接与签名、BAP 解析与 Indexer、头像存储、交易广播与确认、状态归一化五类模拟点未文档化 | ⑧ | 待产出 |
+| C 生产契约 | C2 核心认知第 12 节三项待确认未在原型侧标注验证方式 | ⑧ | 待产出 |
+| C 生产契约 | C3 原型期入口（页脚 `Interactive prototype` 面板、模拟失败与复制失败开关）未标注为可移除 | ⑧ | 待产出 |
+| D 验收覆盖 | D1 28 条场景需逐条映射到脚本断言 + 证据文件（当前 `verification.md` 为粗粒度映射） | ① | 待补细 |
+| D 验收覆盖 | D2 §5.5「BAP ID 出现在首屏」仅桌面断言，320 未断言 | ① | 待补 |
+| D 验收覆盖 | D3 §5.10「图标按钮有可访问名称」仅靠 axe 间接覆盖 | ① | 待补显式断言 |
+| D 验收覆盖 | D4 §5.9「状态不依赖颜色」无显式断言 | ① | 待补显式断言 |
+| D 验收覆盖 | D5 核心认知第 11 节可验证验收中属 v0.1 范围的第 6/7/10/11 项未映射 | ② | 待核对并映射 |
+| E 用户复核 | E1 `_d_meta.json` 资产状态仍为 `needs-review` | ⑪ | 待用户确认 |
+
+### round 1 结果（2026-09-09，提交 `acafbd9`）
+
+关闭 A1–A4、B2、D2–D4：
+
+- **A1/A2**：`check-browser.py` 改读 `OWNWORD_URL` / `OWNWORD_PORT`（默认 4311）；`verification.md` 复现段改为跨平台，并给出“先 `diff` 确认服务的是当前工作区文件”的判别命令。
+- **A3**：响应式矩阵由 320px 扩为 320/390/768/960 + 1440 桌面，`inspect()` 内每屏每组合逐宽度断言。
+- **A4**：axe 断言由“无严重/致命”收紧为 **0 violations**；incomplete 逐条记录（屏幕/规则/目标/原因）到 `evidence/axe-incomplete-summary.json`。
+- **观测缺陷（新发现）**：切换语言或主题后立即审计会采到按钮 150ms `color/background/border` 过渡的中间色，导致 `ready zh/light` 误报对比度 4.17:1（`#f1f1f1` on `#3d65fb`）。加 `settle()` 等待有限过渡结束后，同一页面计算样式为 `rgb(255,255,255)` on `rgb(59,99,251)`，axe 0 violations。判定为观测方法缺陷，非产品缺陷；两条路径均留证。
+- **B2**：新增 `.gitattributes`（`* text=auto eol=lf` + 二进制声明），消除 Windows 侧编辑产生的全量行尾差异。
+- **D2/D3/D4**：新增显式断言——320px 下 BAP ID 首屏可见、图标按钮具备可访问名称、状态不以颜色单独表达（`span[role="img"]` 与 `.s2d-status` 检查）。
+
+验证：`node check-model.cjs` 59 项通过；`OWNWORD_PORT=4312 python3 check-browser.py` **360 项通过**，32 份 axe 审计 0 violations，26 项 incomplete 全为 `color-contrast`（文本位于装饰层、渐变或伪元素之上，axe 无法判定背景；目标与原因见 `evidence/axe-incomplete-summary.json`），`evidence/browser-errors.txt` 为空。
+
+仍未关闭：B1（CDN 依赖）、C1–C3（生产替换契约文档）、D1（28 条场景逐条映射）、D5（核心认知第 11 节映射）、E1（用户视觉复核）。
+
 ### 风险 / 待确认
 - 4311 端口被既有快照服务占用，实时预览改用 4312；若用户要求固定 4311，需先停掉既有实例再重启（待确认）。
 - 4312 服务是本会话后台任务，会话结束即停止；需要常驻需另行安排。
