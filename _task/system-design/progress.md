@@ -110,6 +110,13 @@
 
 验证：`node check-model.cjs` 59 项、`OWNWORD_PORT=4312 python3 check-browser.py` **382 项**通过，axe 0 violations、26 项 incomplete。
 
+### round 8 结果（2026-09-09，提交 `781c684`）
+
+- **干净检出复现**：`git archive HEAD` 解压到临时目录（不含工作区残留与浏览器缓存），用独立端口 4313 服务，四个脚本结果与工作区完全一致——59 模型断言 / 66-of-66 token 解析 / 4 项离线检查 / 382 项浏览器检查。证明已提交的树自包含，不依赖未跟踪文件或工作区外资源。证据 `evidence/clean-checkout-verification.json`。
+- 清掉遗留调试截图 `evidence/review-debug.png`（.gitignore 已忽略，未进版本库）。
+
+验证：见上；工作区干净。
+
 仍未关闭：**E1 用户视觉复核**（唯一剩余项）。
 
 ### round 6 结果（2026-09-09，提交 `765c827`）
@@ -124,6 +131,13 @@
 - **错误路径覆盖**：把 `Storage.prototype.setItem` 改为抛错后切换偏好，断言页面以 `role="alert"` 明示「偏好无法保存」而不是静默失败（`Unwritable storage is announced instead of failing silently`）。
 
 验证：`node check-model.cjs` 59 项、`OWNWORD_PORT=4312 python3 check-browser.py` **382 项**通过，axe 0 violations、26 项 incomplete。
+
+### round 8 结果（2026-09-09，提交 `781c684`）
+
+- **干净检出复现**：`git archive HEAD` 解压到临时目录（不含工作区残留与浏览器缓存），用独立端口 4313 服务，四个脚本结果与工作区完全一致——59 模型断言 / 66-of-66 token 解析 / 4 项离线检查 / 382 项浏览器检查。证明已提交的树自包含，不依赖未跟踪文件或工作区外资源。证据 `evidence/clean-checkout-verification.json`。
+- 清掉遗留调试截图 `evidence/review-debug.png`（.gitignore 已忽略，未进版本库）。
+
+验证：见上；工作区干净。
 
 仍未关闭：**E1 用户视觉复核**（唯一剩余项）。
 
