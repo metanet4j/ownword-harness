@@ -159,6 +159,16 @@
 
 验证：69 模型断言 + 4 词典契约（155 键）+ 66/66 令牌 + 4 离线 + **430 项浏览器检查**通过；35 份 axe 审计（32 页面 + 3 弹窗）0 violations、29 项 incomplete 全部逐条复核。
 
+### round 13 结果（2026-09-09，提交 `4cb61e5` / `3ae0a6e`：生产替换契约依据核实）
+
+按上轮计划，把 `implementation-handoff.md` 里对 Yours Wallet Provider 的 API 声明逐条对照 `reference/yours-wallet-main/yours-wallet-main/docs/provider-api.md` 核实：
+
+- **更正一处错误**：早期把 `signWithBAP` 写成身份发布的签名替换点。实际它是 `@1sat/actions` 的 `inscribe.execute()` 上的可选字段，只用于内容 Inscription；身份发布/更新/轮换分别由 `publishIdentity`、`updateProfile`、`rotateIdentity` 完成，签名在动作内部处理。
+- **补准确入口**：连接/断开/状态/`identityKey` 来自 `useWallet()`（`WalletProvider` 只是包裹层）；所有动作调用前需 `createContext(wallet, {chain, services})`，`services` 为 `@1sat/client` 的 `OneSatServices`；解析身份用 `getProfile.execute(ctx, {})`（返回 `{bapId?, profile?, error?}`）。
+- **依据表**：`verification.md` 新增「生产替换契约的依据」，把每项声明映射到参考文件章节或核心认知条款，避免后续凭印象书写。
+
+验证：本轮只改文档（`git diff --name-only` 确认无代码/脚本变更），模型/词典/令牌检查重跑通过（69 / 4 / 66-66）；浏览器与离线结果沿用上一轮干净检出证据，已在 `evidence/clean-checkout-verification.json` 中记录续接依据。
+
 仍未关闭：**E1 用户视觉复核**；批 2-b（穹顶指针光）与文案精简范围待用户决定。
 
 ### round 6 结果（2026-09-09，提交 `765c827`）
@@ -222,6 +232,16 @@
 - **incomplete 逐条复核**：新增 3 项（弹窗正文浅/深、紧凑头像浅/深共 6 组实测）全部达标——弹窗正文 8.06:1（浅）/7.25:1（深），头像首字母 12.32:1（浅）/10.53:1（深）；复核总表 28 组全部通过，最差仍是 `.eyebrow` 深色 6.37:1。
 
 验证：69 模型断言 + 4 词典契约（155 键）+ 66/66 令牌 + 4 离线 + **430 项浏览器检查**通过；35 份 axe 审计（32 页面 + 3 弹窗）0 violations、29 项 incomplete 全部逐条复核。
+
+### round 13 结果（2026-09-09，提交 `4cb61e5` / `3ae0a6e`：生产替换契约依据核实）
+
+按上轮计划，把 `implementation-handoff.md` 里对 Yours Wallet Provider 的 API 声明逐条对照 `reference/yours-wallet-main/yours-wallet-main/docs/provider-api.md` 核实：
+
+- **更正一处错误**：早期把 `signWithBAP` 写成身份发布的签名替换点。实际它是 `@1sat/actions` 的 `inscribe.execute()` 上的可选字段，只用于内容 Inscription；身份发布/更新/轮换分别由 `publishIdentity`、`updateProfile`、`rotateIdentity` 完成，签名在动作内部处理。
+- **补准确入口**：连接/断开/状态/`identityKey` 来自 `useWallet()`（`WalletProvider` 只是包裹层）；所有动作调用前需 `createContext(wallet, {chain, services})`，`services` 为 `@1sat/client` 的 `OneSatServices`；解析身份用 `getProfile.execute(ctx, {})`（返回 `{bapId?, profile?, error?}`）。
+- **依据表**：`verification.md` 新增「生产替换契约的依据」，把每项声明映射到参考文件章节或核心认知条款，避免后续凭印象书写。
+
+验证：本轮只改文档（`git diff --name-only` 确认无代码/脚本变更），模型/词典/令牌检查重跑通过（69 / 4 / 66-66）；浏览器与离线结果沿用上一轮干净检出证据，已在 `evidence/clean-checkout-verification.json` 中记录续接依据。
 
 仍未关闭：**E1 用户视觉复核**；批 2-b（穹顶指针光）与文案精简范围待用户决定。
 
