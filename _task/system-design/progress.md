@@ -58,6 +58,18 @@
 
 仍未关闭：B1（CDN 依赖）、C1–C3（生产替换契约文档）、D1（28 条场景逐条映射）、D5（核心认知第 11 节映射）、E1（用户视觉复核）。
 
+### round 2 结果（2026-09-09，提交 `a88071d`）
+
+关闭 B1、C1–C3：
+
+- **B1 本地化启动依赖**：从 unpkg 取回 React 18.3.1、ReactDOM 18.3.1、`@babel/standalone` 7.29.0 三个原文件放入 `vendor/`，`openssl dgst -sha384` 计算的哈希与 `index.html` 既有 `integrity` 值逐一相等；`index.html` 改引本地路径，CDN 引用归零。来源、版本、大小与哈希记入 `vendor/README.md`。字体仍外链 `use.typekit.net`，许可不允许随仓库分发，故保留外链并记录离线回退到系统字体的降级行为。
+- **新增 `check-offline.py`**：以 `--allowed-domains 127.0.0.1,localhost` 阻断全部外部域，断言启动脚本同源、Welcome 渲染、启动占位被替换、Babel 离线编译 JSX 并走到 Setup。4 项通过，`evidence/offline-errors.txt` 为空。
+- **C1–C3 生产替换契约**：新增 `implementation-handoff.md`——状态机契约（`epoch` 会话序号、敏感操作取消、draft/profile 分离、校验规则、四态分流）、11 项模拟点到生产替换的输入输出与验收、不得丢失的可观察行为、生产替换清单；核心认知第 12 节三项待确认单列，未关闭前不得写成事实；演示面板、fixtures 与人为延时明确标注为不得进入生产。
+
+验证：`node check-model.cjs` 59 项；`OWNWORD_PORT=4312 python3 check-browser.py` 360 项（切换 vendor 后重跑通过）；`OWNWORD_PORT=4312 python3 check-offline.py` 4 项；axe 0 violations、26 项 incomplete 记录不变。改动后证据仅 `public-*` 截图因 3D 自动旋转存在像素差异。
+
+仍未关闭：D1（28 条场景逐条映射到断言与证据文件）、D5（核心认知第 11 节范围内条目映射）、E1（用户视觉复核后 flip `_d_meta.json`）。
+
 ### 风险 / 待确认
 - 4311 端口被既有快照服务占用，实时预览改用 4312；若用户要求固定 4311，需先停掉既有实例再重启（待确认）。
 - 4312 服务是本会话后台任务，会话结束即停止；需要常驻需另行安排。
