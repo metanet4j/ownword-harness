@@ -1,4 +1,59 @@
 # progress.md
+## 2026-09-11 design-flash4.1-001 第一步：首页风格（穹顶与地平线）
+
+### 完成项
+
+- 新增事项 `design-flash4.1-001`（`feature_list.json`，`status=in-progress`，`activeItem` 改为 `design-flash4.1-001`，`output=designs/own-word-prototype-s2-flash4.1-001`）；验收标准沿用 `design-flash-001` 的 13 条。
+- 约束：设计过程**未读取任何现有原型实现代码**（design-001/002/003、styles-001、astra、flash-001/002/003/004）；事实依据只有核心认知、PRD v0.1、`designs/react-spectrum-s2` 与 `reference/`。
+- 第一步交付首页：`index.html` + `styles.css` + `src/core/*`（几何/能力/文案/状态机/示例数据）+ `src/ui/*`（视图）+ `vendor/`（本地 React）+ `_ds/react-spectrum-s2`（设计系统导入副本）。
+- 视觉命题落地：**七线穹顶＝七条纬线环**（半球方程 `rx²+z²=R²`，穹顶高度 0..0.94R 等分，12° 正交俯视投影；每条环远侧实、近侧虚）；**无刻度地平**＝整幅唯一一条 1px 直线，由 DOM 绘制并与穹顶底平面共用同一 `--u` 换算；**3D Public Identity**＝中心骑在地平线上的翻面卡（正面 Profile、背面 Proof）。
+- 七条线自下而上对应 PRD 第 1 节七项能力；第 05 条按第 9 节第 5 项画虚线并标 `Planned for v0.1.1`；能力文本索引落在地平线之下。
+- 架构：纯逻辑层 node 与浏览器加载同一份文件；视图用 `React.createElement`，**不引入浏览器内 Babel/JSX**；运行时本地化，无 CDN。
+- flash 子仓库已初始化并提交：`7472672`（PRD v0.1_20260911-0342，1062 个文件）。
+
+### 验证结果（`bash verification/run-step1.sh`，exit=0 全绿）
+
+| 检查 | 结果 | 证据 |
+| --- | --- | --- |
+| 模型断言 | 56/56（几何 G1–G19、能力 C1–C5、文案 I1–I4、状态机 P1–P15、示例 S1–S6、禁区词 T1–T3、装配 A1–A4） | `evidence/model-results.txt`、`geometry.json` |
+| S2 token | 68/68 引用解析（设计系统 2511 变量），0 颜色字面量 | `evidence/token-resolution.{json,txt}` |
+| 浏览器矩阵 | 20 组（320/390/768/960/1440 × 浅深 × 中英）无溢出/无重叠/CTA 首屏/卡片贴线/两面不溢出 | `evidence/browser-checks.txt`、`responsive-matrix.jsonl`、`screens/*.png` |
+| axe | 7 个状态 violations 0；87 个 incomplete 节点实例去重 62 组逐条实测对比度 | `evidence/axe/*.json`、`axe-manual-review.json` |
+| 对比度 | 69 组全部达标（信息性最低 4.81:1；装饰性 aria-hidden 文本单列） | `evidence/contrast.{json,txt}` |
+| 交互 | 按钮/←→/Enter/拖拽翻面、阈值 40px、Copy 完整 BAP ID、Copied 不位移、失败保留标识、语言与主题持久化且 BAP ID 不变、reduced-motion 无过渡、Tab 焦点可见 | `browser-checks.txt` B18–B36 |
+| 运行期 | 0 页面错误、0 console error、0 外部请求（同源 29 项） | `console.txt`、`network.txt` |
+| 干净环境 | 默认 headless 浏览器（触摸档 1.25×）复跑同样 38/38 全绿 | `clean-env-run.txt` |
+
+### 过程中发现并修正的缺陷
+
+1. **指针捕获吞掉按钮点击**：卡片 `pointerdown` 时 `setPointerCapture` 使 click 落在卡片而非按钮上，鼠标点击翻面/复制失效 → 改为按钮不参与拖拽，位移超过 8px 才 capture（`browser-checks.txt` B21/B26 覆盖）。
+2. **触摸档卡片溢出**：`--s2-scale: 1.25` 下 320/768/960 的证明面内容超出固定卡片高度 → 卡片高度改为随 `--s2-scale` 缩放，并加高窄屏档（B6 覆盖两种档位）。
+3. **深色 CTA 对比度**：设计系统 `.s2d-button-accent` 深色白字仅 3.51:1（AA 需 4.5）→ 只在 CTA 容器内改用 `--s2-accent-color-700`（5.25:1），缺口入 `verification.md` 缺口表。
+4. **浏览器缓存导致复现失真**：`python -m http.server` 的启发式缓存会让复现读到旧 `styles.css`（一度出现"改了 CSS 断言不变"）→ 新增 `verification/serve.py`，显式 `Cache-Control: no-store`，并写入复现文档。
+5. **地平线在 compact 档缺少定位**：`.ow-horizon` 的 `top` 只写在 wide 媒体查询里，窄屏落到容器顶部 → 常量统一到基础规则并加断言（G15 + B3）。
+
+### 决策
+
+1. 视图不用浏览器内 Babel/JSX，改用 `React.createElement`：少约 3 MB 运行时与首屏转译，且 `src/core` 因此能被 node 直接加载，模型断言与浏览器测的是同一份几何与状态代码。
+2. 七条线改为**纬线环**而不是经线弧：与"穹顶"语义一致、可用半球方程严格检验，并与既有原型的经线表达形式区分开。
+3. 地平线由 **DOM** 绘制（不是 SVG 内一条线）：保证它在任何视口都通栏、且与穹顶底平面用同一个 `--u` 对齐，便于断言。
+4. 能力文本索引放在**地平线之下**（地面＝链上事实），穹顶之上只留产品能力与文案；第 05 条 deferred 用虚线环 + 徽标双表达，不靠颜色单独表达状态。
+5. URL 参数只用于评审/截图钉住状态，不写回存储；用户显式切换才持久化。
+6. 验证服务器改用 `verification/serve.py`（no-store），并把"默认 headless 浏览器复跑"作为干净环境证据。
+
+### 风险 / 待确认
+
+- **用户视觉复核未完成**（第 ⑫ 条）：本步只交付首页风格，穹顶节奏、地平线高度、卡片翻面手感与断点观感需用户目视确认；`_d_meta.json` 资产状态保持 `needs-review`。
+- 桌面档（`--s2-scale: 1`）与触摸档（1.25×）是设计系统的两套尺寸：验收截图取自桌面档，触摸档另有独立复跑证据；两档均已通过同一套断言。
+- 深色下头像首字母（装饰性 `aria-hidden` 文本）实测 3.51:1，低于正文 AA；已单列记录（姓名文字重复表达同一信息）。
+- 核心认知第 12 节三项待确认不在首页范围，第 2 步交付时按"未关闭不得写成事实"处理。
+
+### 唯一下一步
+
+用户打开 `http://127.0.0.1:4311/own-word-prototype-s2-flash4.1-001/index.html`（深色中文：
+`?theme=dark&locale=zh`，翻面态：`?face=proof`）确认首页风格；确认后进入第 2 步：实现 PRD v0.1 §5（5.1–5.4、5.6、5.7）
+与 §8.8、§9 裁决的全部场景，补齐状态机、生产替换契约与 13 条 doneCriteria，并把 `_d_meta.json` 资产状态置 `approved`。
+
 ## 2026-09-10 design-flash-004 立项并交付第一步：首页风格（穹顶与地平线）
 
 ### 完成项
