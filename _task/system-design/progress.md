@@ -845,3 +845,7 @@
 - **用户视觉复核未完成**：`_d_meta.json` 的 `assets.status = needs-review`。本模型无图像输入能力，未对截图做视觉判断；布局重叠、3D 翻转手感、母题节奏需用户目视确认后翻为 `approved`。
 - 设计系统品牌字体为远程 Typekit，离线回退系统字体（设计系统自身边界，已在离线检查断言降级）。
 - 浏览器内 Babel 会在控制台留一条提示（非错误）；生产改预编译。
+
+### 干净检出复验（2026-09-10，端口 4331）
+
+`git clone` 子仓库到 `/tmp/flash-clean/`，`OWNWORD_PORT=4331 bash verification/run-all.sh`：模型 53/53、设计系统一致性 PASS（56 引用全解析、0 自造颜色）、浏览器 51/51、离线 5/5，axe 24 份 0 violations / 0 incomplete。结论：证据只依赖仓库内容与 node/agent-browser，不依赖本机工作区状态。子仓库提交 `fa20ed6` 记录该结果。
