@@ -2,33 +2,34 @@
 
 ## 当前状态
 
-- **当前事项：design-flash-003「flash 原型三：穹顶与地平线（全新设计，不参考任何现有实现）」**，
-  `status=in-progress`，`activeItem=design-flash-003`，产出 `designs/own-word-prototype-s2-flash-003`。
-- 用户于 2026-09-10 指定交付本事项，要求**第一步先给首页风格、单个 HTML、提供预览地址、确认后再继续**；
-  验收标准沿用 design-flash-001 的 13 条。
-- 第 1 步已完成并提交：子仓库 `e658dd8`（PRD v0.1_20260910-1511）。交付单个 HTML `home.html`，
-  提供 A（穹顶之下，对称）/B（偏心穹顶）/C（穹顶即路径）三种首页构图，页面底部原型控件切换；
-  七线穹顶对应 PRD §1 七项能力（Rotate Key 按 §9.5 画虚线 deferred）、1px 无刻度地平、3D Public Identity 卡正/背面翻转、中英 × 浅深四组合。
-- 验证（第 1 步）：axe 四组合 violations 0，color-contrast incomplete 26 节点人工复核全部 PASS（最低 4.81:1）；
-  63/63 个 `var(--s2*)` 解析、0 自造色值；1440/960/768/390/320 无横向溢出、无重叠、CTA 首屏可见；
-  语言/主题/构图切换刷新持久化且协议值不变；复制成功与失败、翻转 aria 状态、能力-穹顶联动均有断言；
-  React/ReactDOM 本地化、远程字体降级、0 外部请求、console/errors 空。证据在 `verification/step1-notes.md` 与 `verification/evidence/`。
-- 预览（实时服务）：`http://127.0.0.1:4311/own-word-prototype-s2-flash-003/home.html`（4311 已服务 `designs/`）。
-- 并行例外：design-flash-001、design-flash-002、design-astra-001 仍保持 in-progress（2026-09-10 用户裁决）；本事项不读取其源码。
-- design-001/002/003、styles-001 已封存；harness-001 `done`。
+- **当前事项：design-flash-004「flash 原型四：穹顶与地平线（全新设计，不参考任何现有实现）」**，
+  `status=in-progress`，`activeItem=design-flash-004`，产出 `designs/own-word-prototype-s2-flash-004`。
+- 用户于 2026-09-10 指定交付，并要求**第一步先给首页风格、单个 HTML、提供预览地址、用户确认后再继续**。
+- 第 1 步已完成并提交：子仓库 `8a17e8b`（PRD v0.1_20260910-0745，1000 个文件）。交付物为单页 `index.html`：
+  七线穹顶（椭圆弧经线，半球正视投影、正弦间距）、1px 通栏无刻度地平、站在地平线上的 3D Public Identity 卡
+  （正/背面翻转：按钮／方向键／拖动／Esc）、七线图例、S2 token 条；中英 × 浅深可切换且刷新持久。
+- 验证（第 1 步）：`bash verification/run-step1.sh` 63 项断言全绿（exit=0）——几何 39/39、响应式 320–1440 无溢出且
+  CTA 首屏可见、axe 20 状态 violations 0、对比度 48 采样最低 3.51:1、axe incomplete 46 节点人工重算 0 失败、
+  术语 0 命中、焦点/翻转/reduced-motion/Copy/偏好持久均通过、console 0 条。证据在 `verification.md` 与 `verification/evidence/`。
+- 预览（实时服务，4311 已在服务 `designs/`）：`http://127.0.0.1:4311/own-word-prototype-s2-flash-004/index.html`
+  （深色中文：`?theme=dark&locale=zh`）。
+- design-flash-001/002/003 与 design-astra-001 仍为 in-progress（用户裁决的并行例外）；本轮不读取其源码。
 
 ## 唯一下一步
 
-1. **用户视觉复核首页风格**：打开上面的 URL，确认 A/B/C 三构图的取舍、七线穹顶节奏、无刻度地平、3D 卡翻转手感，以及中英 × 浅深与 320–1440 的版面。
-2. 确认通过：续做第 2 步——实现 PRD v0.1 §5（5.1–5.10）、§8.8 与 §9 裁决的全部场景；
-   补齐 BDD 逐条映射、生产替换契约、干净环境一键复现；完成后把 `_d_meta.json` 资产状态置 `approved`，再按收工顺序关闭 13 条 doneCriteria。
-3. 不通过：在本事项内继续迭代首页（每轮验证 → flash 子仓库 commit `(PRD v0.1_${datetime})` → 更新 progress.md 与 feature_list.json）。
+1. **用户视觉复核首页风格**：打开上面的 URL，确认七线穹顶的节奏、无刻度地平的位置、3D 身份卡手感、
+   中英 × 浅深观感，以及 1440/960/768/390/320 的版面（尤其 960 以下单列时卡片压在穹顶之上的层次是否可接受）。
+2. 确认通过：续做第 2 步——实现 PRD v0.1 第 5 节（5.1–5.10）、8.8 与第 9 节裁决的全部场景；
+   接入完整运行时（React/Babel/设计系统 bundle 本地化到 vendor/，仍无 CDN）；补齐 `verification.md` 的 BDD 逐条映射、
+   生产替换契约、干净环境一键复现；完成后把 `_d_meta.json` 资产状态置 `approved`，再按收工顺序关闭 13 条 doneCriteria。
+3. 不通过：在本事项内继续迭代首页（每轮验证 → flash 子仓库 commit（`(PRD v0.1_${datetime})`）→ 更新 progress.md 与 feature_list.json）。
 
 ## 注意事项
 
-- 只改 `designs/own-word-prototype-s2-flash-003` 子仓库，不动其他原型目录与 `designs/react-spectrum-s2`；任务文档变更在根仓库提交。
-- 不读取任何现有原型源码（design-001/002/003、styles-001、astra、flash-001/002）；事实依据只有核心认知、PRD v0.1、designs/react-spectrum-s2 与 reference。
-- 首页示例 BAP ID `4U5eEMQSUdmPXeqmyQJtvELPNE8E` 由 BAP 测试向量 rootAddress `1wt1buQLx2G39adHovj2QJZnZK9vsXUjC` 确定性派生，页面带 `Sample data` 标注，不是产品事实。
-- 原型暂无真实 Wallet：首页 CTA 点击只给占位提示；连接/签名/索引等模拟点在完整交付时于实现交接文档中逐个文档化。
-- 核心认知第 12 节三项待确认在 v0.1 中不做断言，处理方式在完整交付时写明；不得写成事实。
-- 本模型无图像输入能力：几何/对比度用 DOM 探针与 axe 代替，视觉观感必须由用户判断。
+- 只改 `designs/own-word-prototype-s2-flash-004` 子仓库，不动其他原型目录与 `designs/react-spectrum-s2`；任务文档变更在根仓库提交。
+- 不读取任何现有原型源码（design-001/002/003、styles-001、astra、flash-001/002/003）；事实依据只有核心认知、PRD v0.1、designs/react-spectrum-s2 与 reference。
+- 首页示例身份（`Avery Chen`、`1SampleDomeTextForPreviewOnly1234`、示例 TxID）为合成占位值且带 `Sample/示例` 标签，不是产品事实。
+- 原型暂无真实 Wallet；连接/签名/索引等模拟点在完整交付时于 implementation-handoff 中逐个文档化。
+- 核心认知第 12 节三项待确认在 v0.1 中不做断言，处理方式在完整交付时写明。
+- 本模型无图像输入能力：几何/对比度用 node 断言、DOM 探针、axe 与 PNG 截图代替，视觉观感必须由用户判断。
+- 设计系统缺口已记录：`--s2-focus-ring-color` 未定义（回退 `--s2d-accent`）；`.s2d-button-secondary` 深色对比不足。

@@ -1,4 +1,38 @@
 # progress.md
+## 2026-09-10 design-flash-004 立项并交付第一步：首页风格（穹顶与地平线）
+
+### 完成项
+- 新增事项 `design-flash-004`（`feature_list.json`），`status=in-progress`，`activeItem` 由 `design-flash-003` 改为 `design-flash-004`；沿用 `design-flash-001` 的 13 条 doneCriteria。用户于 2026-09-10 指定交付，并要求**第一步先给首页风格、单个 HTML、提供预览地址，确认后再继续**。
+- 第一步交付 `designs/own-word-prototype-s2-flash-004/index.html`（单页）：七线穹顶（椭圆弧经线，半球正视投影，正弦间距）、1px 通栏无刻度地平、站在地平线上的 3D Public Identity 卡（正/背面翻转）、七线图例、S2 token 条；中英与浅深可切换且刷新持久。
+- 设计系统按 baoyu-design 消费流程导入为 `_ds/react-spectrum-s2`，绑定写入 `_d_meta.json`（`assets.status=needs-review`）。
+- 证据与文档：`verification/run-step1.sh`（一键复现）、`verification/probes.js`、`verification/geometry-check.js`、`verification.md`、`README.md`、`.gitattributes`。
+- flash 子仓库已初始化并提交：`8a17e8b`（1000 个文件，PRD v0.1_20260910-0745）。
+
+### 验证结果
+- `bash verification/run-step1.sh` 本轮 63 项断言全绿（exit=0）：
+  - 几何与状态模型 39/39（node 加载浏览器同一份 `app.js`）：七线均起于穹顶顶点、落在地平线，脚点严格左右有序且正弦间距；卡片矩形不压任何一条线；恰好一条 active、一条 deferred。
+  - 响应式 320/390/768/960/1440：无横向溢出、CTA 首屏可见、无可聚焦元素重叠、触控目标 ≥24px。
+  - axe 20 状态（5 视口 × 浅深 × 中英）＋ 翻面态：violations 0。
+  - 对比度：48 采样最低 3.51:1 全部达 AA；对 axe 报的 46 个 incomplete 节点逐节点手工重算，最低 3.51:1、0 失败。
+  - 术语：中英页面禁区用词（注册账号／登录账号／Verified Identity／Create BAP NFT 等）0 命中；Publish 未与 submit/broadcast 混用。
+  - 交互与偏好：每个 Tab 停靠点有可见 outline；方向键可翻转并复位；reduced-motion 移除翻转过渡；Copy 携带完整 BAP ID；刷新后中英×浅深持久且 BAP ID 不变；console/errors 0 条。
+- 无外部 CDN：交付文件 0 条 http(s) 资源引用（SVG 命名空间除外）；设计系统的 Typekit 远程字体声明未被引用，改用本地 face + 系统字体回退。
+
+### 决策
+1. 第一步只交付一个自包含 `index.html`（+ 本地 `styles.css`/`app.js`），不引入 React/Babel/设计系统 bundle：单文件便于你直接审阅风格，完整运行时在第 2 步接入（届时按设计系统提示本地化 vendor，仍然无 CDN）。
+2. 用 URL 参数 `?theme=&locale=` 钉住 UI 状态：只为评审与截图可复现，不写入 localStorage，也不影响任何身份/链上值。
+3. 状态色与选中态不靠颜色单独表达：选中态同时有 `aria-pressed`，焦点色改用已定义的 `--s2-focus-indicator-color`。
+4. 穹顶与卡片共用一套画布几何：卡片列＝画布宽 30%（右列），卡片顶＝地平线下 74 画布单位，保证任何视口下经线都不压卡片。
+
+### 风险 / 待确认
+- **用户视觉复核未完成**（13 条 doneCriteria 第 ⑫ 条）：本模型无图像输入能力，穹顶节奏、地平线位置、3D 翻转手感与断点观感必须由你目视确认；`_d_meta.json` 资产状态保持 `needs-review`。
+- axe 报 color-contrast incomplete（无法自动判定装饰层上的文本背景）：已逐节点人工重算并记录，属人工复核而非自动判定。
+- 设计系统缺口：`--s2-focus-ring-color` 被自带 `components.css` 引用但未在 `tokens/` 定义（回退 `--s2d-accent`）；`.s2d-button-secondary` 深色下对比不足，本页改用 `--s2d-layer-raised`。需反馈设计系统维护者。
+- 剩余 12 条 doneCriteria（BDD 全覆盖、生产替换契约、干净环境复现等）属第 2 步。
+
+### 唯一下一步
+用户打开 `http://127.0.0.1:4311/own-word-prototype-s2-flash-004/index.html`（深色中文：加 `?theme=dark&locale=zh`）确认首页风格；确认后实现 PRD v0.1 §5（5.1–5.10）、§8.8 与 §9 裁决的全部场景，逐条补齐 13 条 doneCriteria 证据。
+
 ## 2026-09-09 design-astra-001 立项并激活：astra 原型打磨至生产实现就绪
 
 ### 完成项
