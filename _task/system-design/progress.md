@@ -799,3 +799,49 @@
 
 仍未关闭：**E1 用户视觉复核**。
 
+
+## 2026-09-10 design-flash-001 立项与实现（穹顶与地平线·全新设计，不参考现有实现）
+
+用户要求以全新设计另出一版对照原型，需求集合与 design-astra-001 一致，id `design-flash-001`。AskUserQuestion 裁决三项：①交付范围＝注册条目并从零建成完整原型；②design-astra-001 与 design-flash-001 本轮同时保持 in-progress（破例）；③视觉意象沿用「穹顶与地平线：七线穹顶、无刻度地平、3D Public Identity」。
+
+### 完成项
+
+- **立项**：`feature_list.json` 新增 design-flash-001（13 条 doneCriteria，含「不参考任何现有实现代码」自证条），`activeItem` 切至本事项，astra 加 statusNote 记录并行例外。
+- **设计概念（本版自有）**：七线穹顶的每条线＝PRD v0.1 第 1 节的一项用户能力，线有三态（`active` 当前在用 / `ready` 可用 / `deferred` 后续版本，画虚线，v0.1 仅密钥轮换）；无刻度地平每页只出现一次（应用页在页头下沿，Welcome 在 hero 底部、穹顶立于其上），不画刻度、标签或百分比；地平线之上＝Bitcoin 可证明的事实，之下＝留在本设备的内容。3D 公开身份卡：正面身份、背面 Proof，可拖拽/方向键/按钮翻转，首次自动翻一次，`prefers-reduced-motion` 下完全静止，隐藏面 `aria-hidden` + `inert`。
+- **架构（本版自有）**：纯逻辑层 `src/core/{model,dome,i18n,format,prefs}.js`（UMD-lite，无框架依赖，node 检查直接加载浏览器运行的同一份文件）；视图层 `src/ui/*.jsx`（浏览器内 Babel 转译，命名空间 `window.OW`）；`step(state,event) → {state, effects}` 的「状态＋效果」状态机让取消/失败/切换等时序在 node 中可断言。
+- **运行时本地化**：React 18.3.1 与 Babel 7.29.0 下载后按设计系统提示给的三条 sha384 逐一校验通过，落在 `vendor/`；`index.html` 23 条引用全部本地。
+- **设计系统一致性**：`import-design-system.mjs` 同步 `_ds/react-spectrum-s2`；引用 56 个自定义属性全部解析（设计系统 47 + 本项目 9），无 `#hex`/`rgb()`/`hsl()`/`oklch()` 自造颜色；阴影改用 `--s2-drop-shadow-*`。
+- **文档**：`verification/verification.md`（复现方式、证据索引、BDD 逐条映射、全新设计自证、设计系统缺口表、无障碍/响应式/双语双主题/术语、未关闭项）、`verification/implementation-handoff.md`（11 个模拟点的替换契约、不得丢失的可观察行为、生产替换验收清单、核心认知第 12 节三项待确认的处理）、`README.md`、`vendor/README.md`、`.gitattributes`、`verification/run-all.sh` 一键复现。
+
+### 验证结果
+
+| 套件 | 结果 | 证据 |
+| --- | --- | --- |
+| 模型（纯逻辑 + BDD + 不变量 + 词典契约） | 53/53 | `evidence/model-results.txt` |
+| 设计系统一致性 | 56 引用全解析、0 自造颜色 | `evidence/token-resolution.{txt,json}` |
+| 浏览器（BDD、响应式矩阵、axe、对比度、键盘、触控、动效、用词） | 51/51 | `evidence/browser-checks.txt` |
+| axe 审计 | 24 份，violations 0、incomplete 0 | `evidence/axe-summary.json` + `axe/*.json` |
+| 文字对比度 | 24 组实测，最低 4.81:1（AA 门槛 4.5） | `evidence/contrast.{txt,json}` |
+| 离线（阻断全部 https） | 5/5 | `evidence/offline-checks.txt` |
+
+一键复现：`bash designs/own-word-prototype-s2-flash-001/verification/run-all.sh`（本轮在端口 4330 全新拉起服务复跑，四套件全绿）。
+
+### 决策
+
+1. **七线＝七项能力**：让母题承载产品状态而非装饰；穹顶绘制与图例读同一份 `capabilityStates(screen)`，两者不可能互相矛盾（浏览器检查 `welcome: seven dome lines with product state` 断言绘制与图例逐一相等）。
+2. **密钥轮换按第 9 节裁决处理**：功能流程完整可验证，界面以 `Planned for v0.1.1` 徽标与虚线穹顶线明确标注，不冒充 v0.1 已交付能力。
+3. **状态在 node 可断言**：纯逻辑与浏览器同源，避免「文档一套、实现一套」；模型检查覆盖取消保留草稿、轮换不改 BAP ID、账户切换终止敏感操作与旧回调失效等不变量。
+4. **发现并修正设计系统缺陷**：`.s2d-button-accent` 深色下白字对比度 3.51:1 不达 AA；本原型深色改用 accent-700（5.25:1），缺口写入 `verification.md` 缺口表并列入生产交接。
+5. **量测必须在过渡结束后取值**：对比度检查加入 settle（双 rAF + 260ms），否则会读到 150ms 颜色过渡的中间值（首次运行即误报 3.51 与 4.81 混读，settle 后稳定为 5.25）。
+6. **原型脚手架自我约束**：模拟面板默认只在 ≥960px 视口展开，避免遮挡产品内容；面板带 `Prototype` 标记，其文案在词典中单列 `sim.*`。
+
+### 文件
+
+- 新增子仓库 `designs/own-word-prototype-s2-flash-001`（1065 文件，含 `_ds` 设计系统副本），提交 `d73ab45`（PRD v0.1_20260910-*）。
+- 任务文档：`_task/system-design/feature_list.json`、本文件、`session-handoff.md`。
+
+### 风险 / 待确认
+
+- **用户视觉复核未完成**：`_d_meta.json` 的 `assets.status = needs-review`。本模型无图像输入能力，未对截图做视觉判断；布局重叠、3D 翻转手感、母题节奏需用户目视确认后翻为 `approved`。
+- 设计系统品牌字体为远程 Typekit，离线回退系统字体（设计系统自身边界，已在离线检查断言降级）。
+- 浏览器内 Babel 会在控制台留一条提示（非错误）；生产改预编译。
