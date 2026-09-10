@@ -783,3 +783,19 @@
 
 仍未关闭：**E1 用户视觉复核**。
 
+### round 22 结果（2026-09-10，提交 `6112980`：减少动效专项 dogfood）
+
+用 `prefers-reduced-motion: reduce` 走完整流程，发现并修复一项，同时把一处不稳定证据改造掉：
+
+| 编号 | 发现 | 级别 | 处置 |
+| --- | --- | --- | --- |
+| ISSUE-009 | 减少动效下点「Rotate identity」：控件变为 `aria-pressed=true`、文案变「Pause rotation」，但实测运行中动画数 **0**、卡片 transform 不变——控件报告了不会发生的状态 | low | **已修**：减少动效下不渲染旋转开关，改显示说明文案「Reduced motion follows your device preference.」（复用此前未使用的 `reducedMotion` 词条）并强制 `rotating=false`；媒体查询变化实时同步。新增断言 `Reduced motion replaces the rotation toggle with an explanation` |
+
+**证据稳定性改造**：`identity-resolving`（仅 850ms）的 axe 审计在复现中出现"审计完成时状态已离开"，会产出描述错误屏幕的证据。改为 3 条针对性断言（busy 状态、`role=status` 具备可访问名、装饰骨架 `aria-hidden`、提供断开出口），axe 审计数由 39 降为 38（32 页面 + 6 瞬时状态），避免不诚实证据。
+
+同轮验证通过：减少动效下提示 6 秒自动消失、复制反馈 6 秒自动清除、运行中动画数 0、控制台无错误。
+
+验证：模型 74；浏览器 448 → **451**；词典契约 4（155 键）/ 令牌 66-66 / 离线 4 全部通过；干净检出（端口 4327）一致。dogfood 报告 9 项（3 medium、6 low，无 critical/high），7 项已修。
+
+仍未关闭：**E1 用户视觉复核**。
+
