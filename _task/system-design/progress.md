@@ -734,3 +734,23 @@
 
 仍未关闭：**E1 用户视觉复核**。
 
+### round 19 结果（2026-09-10，提交 `bc2580a`：dogfood 探索式测试）
+
+用户批准后按 `agent-browser` 的 dogfood 技能跑了一轮探索式测试（不预设断言），报告 `designs/own-word-prototype-s2-astra-001/evidence/dogfood/report.md`，截图 12 张。共 5 项发现，无 critical/high：
+
+| 编号 | 发现 | 级别 | 处置 |
+| --- | --- | --- | --- |
+| ISSUE-001 | 浏览器后退键直接离开应用（`about:blank`），会话静默丢失 | medium | 记录为实现边界（原型无路由；生产需路由 + 会话恢复，已写入实现交接「内存态」行） |
+| ISSUE-002 | 字符计数按码点而非字素簇：5 个家庭 emoji 显示 `35 / 1000`，15 个被判定超 100 字符 | low | **已修**：`model.js` 新增 `countGraphemes()`（`Intl.Segmenter`，缺支持回退码点），校验与计数器统一 |
+| ISSUE-003 | 复制反馈「Copied」永不消失 | low | **已修**：`Identifier` 6 秒后自动清除（与确认提示同节奏） |
+| ISSUE-004 | 解析中装饰骨架未标 `aria-hidden` | low | **已修**：骨架容器补 `aria-hidden="true"` |
+| ISSUE-005 | 320px 弹窗次级操作被裁出首屏 | low | 记录为实现交接 3.2 的可接受行为（模拟区生产删除；主操作可见性已有断言） |
+
+探索中同时验证通过的项：弹窗焦点陷阱（6 次 Tab / 2 次 Shift+Tab 均在弹窗内）、背面 TxID 复制按钮键盘可达（Shift+Tab 到 `copy-tx`，Enter 触发）、断开连接后无旧身份残留、双击 Approve 不产生重复提交、RTL 名称与超长无空格串在 1440/320 均无溢出。
+
+证据限制：无头浏览器 `agent-browser record` 报 `No frames captured`，无法产出 WebM repro 视频，报告以分步截图替代并注明。
+
+验证：模型断言 69 → **74**；浏览器检查 440 → **443**；词典契约 4（155 键）/ 令牌 66-66 / 离线 4 全部通过；干净检出（端口 4324）一致。
+
+仍未关闭：**E1 用户视觉复核**。
+
