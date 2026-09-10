@@ -894,3 +894,42 @@
 ### 唯一下一步
 
 用户打开 `http://127.0.0.1:4311/own-word-prototype-s2-flash-002/index.html` 确认首页风格；确认后进入第 2 步：实现 PRD v0.1 第 5 节（5.1–5.10）、8.8 与第 9 节裁决的全部场景，并逐条补齐 13 条 doneCriteria 的证据。
+
+## 2026-09-10 design-flash-003 第一步：首页风格单页（待用户确认）
+
+### 完成项
+
+- 新增事项 `design-flash-003`（`feature_list.json`，`status=in-progress`，`output=designs/own-word-prototype-s2-flash-003`），激活顺序：`activeItem` 改为 `design-flash-003`。验收标准沿用 design-flash-001 的 13 条。
+- 约束：设计过程不读取任何现有原型实现代码（design-001/002/003、styles-001、astra、flash-001/002）；事实依据仅核心认知、PRD v0.1、`designs/react-spectrum-s2`、`reference`。
+- 第一步交付 `home.html`（单个 HTML，A/B/C 三种首页构图）与 `_d_meta.json`（`assets.status=needs-review`）；**不做完整实现**，等用户确认风格。
+- 视觉命题映射：七条线对应 PRD v0.1 第 1 节七项用户能力，其中 Rotate Key 按第 9 节第 5 项裁决画虚线 deferred；无刻度地平为整页唯一 1px 单线渐变；3D Public Identity 卡正面身份/背面 Proof。
+
+### 验证结果
+
+| 检查 | 结果 |
+| --- | --- |
+| S2 token | 63/63 个 `var(--s2*)` 解析；设计系统 CSS 定义 2511 token；0 未定义、0 自造色值 |
+| axe | 四组合（en/zh × light/dark）violations 0；color-contrast incomplete 26 节点人工复核全部 PASS，最低 4.81:1 |
+| 响应式 | 1440/960/768/390/320 横向溢出 0、文案与身份卡无重叠、主 CTA 首屏可见 |
+| 交互 | 语言/主题/构图切换与刷新持久化、协议值不变、复制成功与失败、翻转 aria 状态、能力-穹顶联动 |
+| 无 CDN | React/ReactDOM 本地化到 `vendor/`；远程字体显式降级为系统字体栈；实测 0 外部请求、console/errors 空 |
+| 运行异常 | page errors 空、console 空 |
+
+证据：`designs/own-word-prototype-s2-flash-003/verification/step1-notes.md` 与 `verification/evidence/`。子仓库提交 `e658dd8`。预览：`http://127.0.0.1:4311/own-word-prototype-s2-flash-003/home.html`（4311 已服务 `designs/`）。
+
+### 决策
+
+1. 首页 CTA 暂不接 Wallet：点击只显示占位提示，避免风格评审阶段出现假流程；完整连接流程在下一步实现。
+2. 示例 BAP ID `4U5eEMQSUdmPXeqmyQJtvELPNE8E` 由 BAP 测试向量 rootAddress `1wt1buQLx2G39adHovj2QJZnZK9vsXUjC` 确定性派生，页面标注 Sample data，不写成产品事实。
+3. 深色主按钮改用 `--s2-accent-color-700`（5.25:1）：设计系统 `.s2d-button-accent` 深色白字仅 3.51:1；只用 S2 token，缺口记入 `step1-notes.md`，需反馈设计系统维护者。
+4. 字体：S2 的 Adobe Clean 由 Typekit 远程提供，本步覆盖 `--s2d-font-family` 为系统字体栈，页面 0 外部请求；品牌字体本地化方案留待用户确认许可后处理。
+
+### 风险 / 待确认
+
+- **用户视觉复核未完成**：模型无图像输入能力；像素与几何探针只覆盖可量化部分，穹顶节奏、留白、3D 翻转手感需用户目视确认。
+- A/B/C 三构图待用户选择或组合；确认后再继续完整原型。
+- 核心认知第 12 节三项待确认不在首页范围，正式交付时须显式标注验证方式。
+
+### 唯一下一步
+
+用户打开 `http://127.0.0.1:4311/own-word-prototype-s2-flash-003/home.html`，确认首页风格（或指定 A/B/C 组合与修改点）；确认后实现 PRD v0.1 §5（5.1–5.10）、§8.8 与 §9 裁决的全部场景，并逐条补齐 13 条 doneCriteria 证据。
