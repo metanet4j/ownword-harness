@@ -849,3 +849,48 @@
 ### 干净检出复验（2026-09-10，端口 4331）
 
 `git clone` 子仓库到 `/tmp/flash-clean/`，`OWNWORD_PORT=4331 bash verification/run-all.sh`：模型 53/53、设计系统一致性 PASS（56 引用全解析、0 自造颜色）、浏览器 51/51、离线 5/5，axe 24 份 0 violations / 0 incomplete。结论：证据只依赖仓库内容与 node/agent-browser，不依赖本机工作区状态。子仓库提交 `fa20ed6` 记录该结果。
+
+## 2026-09-10 design-flash-002 第 1 步：首页风格（等待用户确认）
+
+用户指定交付 `design-flash-002`（目录 `designs/own-word-prototype-s2-flash-002`，13 条 doneCriteria 沿用 design-flash-001），并要求**第一步先给首页风格、提供预览地址、确认后再继续**。
+
+### 完成项
+
+- **立项**：`feature_list.json` 新增 `design-flash-002`（依赖 design-flash-001 的需求集合，非代码依赖；不读取任何现有原型源码），`activeItem` 切至本事项；并行状态在 statusNote 记录。
+- **门禁**：已读 `_task/system-design/AGENTS.md`、`CLAUDE.md`、`feature_list.json`、`progress.md`、`session-handoff.md`、`spec/核心认知.md`、`spec/prd/v0.1/设计文档v0.1.md`、`designs/react-spectrum-s2`（readme/SKILL/tokens/components/manifest）。未读取 `_task/system-design/spec/draft`。
+- **交付形态**：按用户「一个 html 即可」的要求，首页全部写在 `index.html` 单文件（结构 + 样式 + 交互 + i18n 词典）；设计系统用 `import-design-system.mjs` 同步到 `_ds/react-spectrum-s2/`。
+- **首页设计（自有）**：七线穹顶由 7 条经线弧组成，几何由半球正视投影推导（`viewBox 0 0 1000 500`，apex `(500,6)`，`rx = 494·k/7`，`ry = 494`，弧端点落在地平线上）；无刻度地平为 1px 通栏直线，无刻度/标签/百分比；3D Public Identity 示例卡正/背翻面；语言/主题持久化（默认 en/light，PRD 8.8 与第 9 节裁决）；地面层为三根原则。
+- **响应式**：桌面两栏（文案左、卡右、穹顶 apex 落在两栏之间），≤1000px 单列（地平线排在 CTA 之后、身份卡落在地平线之下）；穹顶宽度在单列下收窄，保证 apex 不越出视口。
+- **提交**：子仓库 `designs/own-word-prototype-s2-flash-002` 提交 `3b1201f`（PRD v0.1_20260910-1501），1012 个文件（含 `_ds` 副本）。
+
+### 验证结果（第 1 步）
+
+| 检查 | 结果 |
+| --- | --- |
+| axe | 1440 浅/深、320 中文深：violations 0；incomplete 1（10 节点，背景无法自动判定，已人工复核） |
+| 对比度 | 正文 14.55:1（浅）/13.64:1（深）；次级 8.06/8.61；CTA 4.81（浅）/5.24（深） |
+| token | 44 个引用全解析（34 个 `--s2-*`、4 个 `--s2d-*`、6 个项目布局别名）；0 自造颜色 |
+| 无 CDN | 除设计系统 Typekit 字体边界（带回退）外全同源；阻断字体域后无错误、布局正常 |
+| 响应式 | 1440/960/768/390/320 横向溢出均为 0；七线 7 条；地平线均 1px 通栏；CTA 首屏可见 |
+| 双语双主题 | 切换即时生效、reload 后持久化；示例姓名/BAP ID/TxID 不随语言变化 |
+| 运行异常 | page errors 空、console errors 空 |
+| 几何 | PNG 像素探针：浅色地平线 rgb(198)@y=752、深色 rgb(68)、keystone rgb(86,129,255)，经线出现在预期坐标 |
+
+证据：`designs/own-word-prototype-s2-flash-002/verification.md` 与 `verification/evidence/`。预览：`http://127.0.0.1:4311/own-word-prototype-s2-flash-002/index.html`（服务在 4311 已拉起）。
+
+### 决策
+
+1. 首页先不接 Wallet：CTA 点击只显示「钱包连接将在本原型的下一步接入」，避免风格评审阶段出现假流程。
+2. 示例身份数据（`Avery Chen`、`1SampleDome…`、示例 TxID）硬编码为 sample 且卡面有 `Sample/示例` 标签，不写成产品事实。
+3. 深色 CTA 使用 `--s2-accent-color-700`（5.24:1）：设计系统 `--s2-accent-background-color-default` 深色为 4.51:1，过于贴近 AA 下限；该改动只用 S2 token，缺口记入 verification.md。
+4. 不引入 React/Babel：第 1 步一个 HTML 可完成；后续是否引入由完整原型架构决策，倾向继续无框架以免原型期技术债。
+
+### 风险 / 待确认
+
+- **用户视觉复核未完成**：模型无图像输入能力，数值探针（地平线/经线像素、对比度、溢出）只覆盖可量化部分；穹顶节奏、字号与留白需用户目视确认。
+- 首页为单列 ≤1000px 布局，若用户希望 960 也保持两栏，需要另行调整。
+- Typekit 字体为设计系统边界，离线走系统字体回退。
+
+### 唯一下一步
+
+用户打开 `http://127.0.0.1:4311/own-word-prototype-s2-flash-002/index.html` 确认首页风格；确认后进入第 2 步：实现 PRD v0.1 第 5 节（5.1–5.10）、8.8 与第 9 节裁决的全部场景，并逐条补齐 13 条 doneCriteria 的证据。

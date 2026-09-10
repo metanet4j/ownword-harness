@@ -8,7 +8,7 @@
     "done",
     "archived"
   ],
-  "activeItem": "design-flash-001",
+  "activeItem": "design-flash-002",
   "features": [
     {
       "id": "design-flash-001",
@@ -43,6 +43,40 @@
         "提交规范：全部改动在 flash 子仓库提交且 commit 信息带 (PRD v0.1_${datetime})，任务文档变更在根仓库提交"
       ],
       "evidence": "立项与激活：2026-09-10 用户要求以全新设计另出一版，不参考现有任何实现代码，需求集合与 design-astra-001 一致。AskUserQuestion 裁决：①交付范围＝注册条目并从零建成完整原型；②design-astra-001 与 design-flash-001 本轮同时保持 in-progress（破例）；③视觉意象沿用「穹顶与地平线：七线穹顶、无刻度地平、3D Public Identity」。激活前已按门禁阅读 AGENTS.md/CLAUDE.md/feature_list.json/progress.md/session-handoff.md 与 spec/核心认知.md、spec/prd/v0.1/设计文档v0.1.md。实现（子仓库提交 d73ab45，PRD v0.1_20260910-*）：①设计概念——七线穹顶每线对应 v0.1 的一项用户能力（active/ready/deferred 三态，deferred 画虚线，v0.1 仅密钥轮换），绘制与图例读同一份 capabilityStates(screen)；无刻度地平每页只出现一次，不画刻度与百分比；地平线之上＝Bitcoin 可证明的事实；3D 公开身份卡正/背面 + 拖拽/方向键/按钮翻转、首次自动翻一次、reduced-motion 静止、隐藏面 aria-hidden+inert。②架构——纯逻辑层 src/core/{model,dome,i18n,format,prefs}.js（无框架依赖，node 检查加载浏览器同一份文件），视图层 src/ui/*.jsx 经浏览器内 Babel 转译，step(state,event)→{state,effects} 状态机。③运行时本地化——React 18.3.1 与 Babel 7.29.0 按设计系统提示的三条 sha384 校验后落 vendor/，index.html 23 条引用全本地。验证（一键复现 bash verification/run-all.sh，本轮在端口 4330 全新拉起服务复跑全绿）：模型 53/53（BDD 5.1–5.7/8.8/5.9、状态机不变量、词典契约 190 键、穹顶几何、标识符规则、偏好降级）→ evidence/model-results.txt；设计系统一致性：56 个自定义属性引用全解析（设计系统 47 + 本项目 9）、0 自造颜色 → evidence/token-resolution.{txt,json}；浏览器 51/51（BDD 全流程、响应式矩阵 320/390/768/960/1440、暗色与中文、键盘焦点与可访问名称、触控目标、reduced-motion、整页用词扫描）→ evidence/browser-checks.txt；axe 24 份（20 页面状态 + 4 瞬时/对话框状态）violations 0、incomplete 0 → evidence/axe-summary.json + axe/*.json；对比度 24 组实测最低 4.81:1 → evidence/contrast.{txt,json}；离线（阻断全部 https）5/5 → evidence/offline-checks.txt；控制台 0 error（2 条已知提示：React DevTools、浏览器内 Babel）→ evidence/console-errors.txt。文档：verification/verification.md（BDD 逐条映射＋证据索引＋全新设计自证＋设计系统缺口表＋未关闭项）、verification/implementation-handoff.md（11 个模拟点替换契约、不得丢失的可观察行为、生产替换验收清单、核心认知第 12 节三项待确认的处理）、README.md、vendor/README.md、.gitattributes。发现并修正设计系统缺陷：.s2d-button-accent 深色下白字对比度 3.51:1 不达 AA，本原型深色改用 accent-700（5.25:1），缺口已记入 verification.md 与生产交接。仍未关闭：⑫ 用户视觉复核——_d_meta.json assets.status=needs-review，本模型无图像输入能力，未对截图做视觉判断；用户确认后改 approved 即可置 done。干净检出复验：git clone 子仓库到 /tmp/flash-clean，OWNWORD_PORT=4331 bash verification/run-all.sh 四套件全绿（模型 53/53、设计系统一致性 PASS、浏览器 51/51、离线 5/5，axe 24 份 0/0），说明证据只依赖仓库内容与 node/agent-browser。子仓库提交：d73ab45（原型本体）、fa20ed6（干净检出复验记录）。"
+    },
+    {
+      "id": "design-flash-002",
+      "name": "flash 原型二：穹顶与地平线（全新设计，不参考任何现有实现）",
+      "description": "在 designs/own-word-prototype-s2-flash-002 从零全新设计并实现 Ownword v0.1 高保真可交互原型。视觉命题与 design-flash-001 相同：穹顶与地平线——七线穹顶、无刻度地平、3D Public Identity；表达方式、信息架构、组件拆分、状态实现与几何全部重新设计。约束：设计过程中不读取、不参考任何现有原型实现代码（design-001/002/003、astra、flash-001），只以核心认知、PRD v0.1、designs/react-spectrum-s2 设计系统与 reference 协议资料为事实依据。验收标准沿用 design-flash-001 的 13 条 doneCriteria。",
+      "dependencies": [
+        "design-flash-001"
+      ],
+      "status": "in-progress",
+      "statusNote": "依赖 design-flash-001 的需求集合（同一命题与同一验收标准），不是代码依赖；本事项实现不读取 design-flash-001 的代码。2026-09-10 用户指定交付本事项，与 design-flash-001、design-astra-001 并行；工作规则「同时只允许一个 in-progress」的破例已在 progress.md 记录。 2026-09-10：第 1 步首页风格已交付，等待用户视觉确认后继续。",
+      "inputs": [
+        "_task/system-design/spec/核心认知.md",
+        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+        "designs/react-spectrum-s2",
+        "reference/bap-master",
+        "reference/yours-wallet-main"
+      ],
+      "output": "designs/own-word-prototype-s2-flash-001",
+      "doneCriteria": [
+        "全新设计且不参考实现：设计过程不读取任何现有原型源码（design-001/002/003、astra、flash-001）；原型的 HTML/CSS/JS/JSX 结构、组件拆分、状态实现与几何算法与既有原型无复制或改写关系；全新设计自证清单写入 verification.md，可逐项复核",
+        "BDD 全覆盖：PRD v0.1 第 5 节（5.1–5.10）与第 8.8 节、第 9 节裁决的每条场景在原型中有可操作入口，verification.md 映射表逐条给出可复现证据（脚本 + 证据文件）",
+        "术语与事实一致：文案、实体、状态、边界与核心认知一致，无第 2.3 节禁区用词，不重复定义核心事实而改为引用核心认知章节",
+        "S2 一致性：视觉与组件来自 designs/react-spectrum-s2 的 token 与组件 allowlist，无自造平行体系，token 引用 100% 解析",
+        "无障碍达标：关键页面 axe 0 violations，incomplete 项逐条人工复核并记录；键盘可达、焦点可见、触控目标达标、prefers-reduced-motion 生效",
+        "响应式达标：320/390/768/960/1440 无横向溢出与内容重叠，关键 CTA 首屏可见，截图证据齐备",
+        "双语双主题：中英 × 浅深四组合全部页面渲染通过，刷新后偏好持久化，链上标识与用户内容不变",
+        "状态模型可断言：连接/取消/失败、分流四态、创建/取消/失败、编辑与离开保护、账户切换与断开均有自动化断言，浏览器运行异常为空",
+        "生产替换契约文档化：交付实现交接文档，逐项列出原型中全部模拟点（钱包连接与签名、BAP 解析与 Indexer、头像存储、交易广播与确认、状态归一化）的生产替换点、输入输出与验收方式；核心认知第 12 节三项待确认显式标注验证方式，未关闭项不得写成事实",
+        "无原型期技术债阻塞：页面不依赖外部 CDN（依赖本地化或明确降级），文件编码与行尾统一（.gitattributes），无遗留临时探针文件",
+        "证据可复现：模型/浏览器/导航检查脚本在干净环境一键复现，evidence 下 json/txt/png/axe 证据与 verification.md 一一对应",
+        "用户视觉复核通过：_d_meta.json 资产状态经用户确认后由 needs-review 改为 approved",
+        "提交规范：全部改动在 flash 子仓库提交且 commit 信息带 (PRD v0.1_${datetime})，任务文档变更在根仓库提交"
+      ],
+      "evidence": "立项：2026-09-10 用户要求交付 design-flash-002（output designs/own-word-prototype-s2-flash-002），第一步先给首页风格并等待视觉确认，确认后再继续完整原型；验收标准沿用 design-flash-001 的 13 条。已按门禁阅读 AGENTS.md/CLAUDE.md/feature_list.json/progress.md/session-handoff.md 与 spec/核心认知.md、spec/prd/v0.1/设计文档v0.1.md 及 designs/react-spectrum-s2。 第 1 步（首页风格，2026-09-10）：按用户要求先只交付首页并等待视觉确认。产出 designs/own-word-prototype-s2-flash-002/index.html（单文件：结构/样式/交互/i18n），同步 _ds/react-spectrum-s2 设计系统副本；子仓库提交 3b1201f「(PRD v0.1_20260910-1501)」。首页实现：顶栏品牌 + EN/中文 + Light/Dark；英雄区七线穹顶（7 条经线弧，viewBox 0 0 1000 500，apex (500,6)，rx=494k/7，ry=494，均由半球正视投影推导）+ 1px 通栏无刻度地平 + 3D Public Identity 示例卡（正/背面，点击/Enter/←→ 翻面，背面 inert+aria-hidden，reduced-motion 无过渡）+ 三根原则地基层。验证：axe 三组（1440 浅/深、320 中文深）violations 0、incomplete 1（color-contrast 10 节点，人工复核为装饰穹顶 SVG 遮挡/卡片渐变导致背景无法自动判定；实测正文 14.55:1、次级 8.06:1 浅，13.64:1/8.61:1 深，CTA 4.81:1 浅、5.24:1 深）；44 个 token 引用全解析、0 自造颜色；320–1440 五档无横向溢出、CTA 首屏可见；中英/浅深切换持久化且示例身份值不变；无 page/console error；除设计系统 Typekit 字体边界（带回退）外全同源。证据：verification.md、verification/evidence/{axe, screens, responsive-matrix.jsonl, token-resolution.json, pixel-probe-*.txt, axe-incomplete-summary.json, offline-font-fallback.txt}。未关闭：用户视觉复核首页风格；确认后再续做 PRD v0.1 全流程、生产替换契约与干净环境一键复现，并逐条关闭 13 条 doneCriteria。"
     },
     {
       "id": "design-astra-001",
