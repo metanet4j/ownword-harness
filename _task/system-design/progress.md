@@ -1,4 +1,58 @@
 # progress.md
+
+
+## 2026-09-11 design-flash4.1-002 从零完整交付：穹顶与地平线
+
+### 完成项
+
+- 新增事项 `design-flash4.1-002`（`feature_list.json`，`status=in-progress`，`activeItem` 改为 `design-flash4.1-002`，`output=designs/own-word-prototype-s2-flash4.1-002`）；验收标准沿用 `design-flash-001` 的 13 条。
+- 约束遵守：设计过程**未读取任何现有原型实现代码**（design-001/002/003、styles-001、astra、flash-001/002/003/004、flash4.1-001）；事实依据只有核心认知、PRD v0.1、`designs/react-spectrum-s2` 与 `reference/`。
+- 一次性完整交付，不再分两步：交付目录包含 `index.html`、`styles.css`、`src/core/core.js`（UMD 纯逻辑，Node/浏览器同源）、`src/ui/app.jsx`、本地 React/ReactDOM/Babel vendor、设计系统消费副本 `_ds/react-spectrum-s2`、完整证据与文档。
+- 视觉命题（独立实现）：**七线穹顶＝七条嵌套立方拱线**（`DOME_ARCHES` halfWidth/height；控制点 y＝horizon−4h/3 使拱顶精确为 h；端点严格落在地平线）；**无刻度地平**＝整幅唯一一条 1px 线，与穹顶基线共用 `HORIZON_RATIO=0.62`；**3D Public Identity**＝站在地平线上的翻面卡（正面 Profile/背面 Proof，按钮、←→、Enter/Space、40px 拖拽，隐藏面 `aria-hidden`+`tabindex=-1`，reduced-motion 无过渡）。七条线对应 PRD §1 七项能力，第 05 条按 §9 第 5 项画虚线 deferred。
+- 功能范围：PRD 28 条场景可交互（5.1–5.6、8.8、5.9、5.10）。WalletDialog 模拟 Approve/Reject/System failure；resolve 四态；创建成功/取消/失败；Copy 完整 BAP ID（CDP 读取浏览器剪贴板实测）；Edit 保存/取消/离开保护；Account Switch 取消敏感操作并清旧 Identity；Disconnect；中英×浅深即时切换且持久化，协议值不变。
+- flash 子仓库已提交：`f3ce701`（PRD v0.1_20260911-0852，1084 个文件）。
+
+### 验证结果（`bash verification/run.sh`，exit=0 全绿）
+
+| 检查 | 结果 | 证据 |
+| --- | --- | --- |
+| 模型断言 | 57/57（几何 G01–G10、能力 C01–C05、标识 I01–I05、校验 P01–P05、状态 S01–S23、术语 T01–T05、视图 V01–V04） | `evidence/model-results.txt`、`geometry.json` |
+| S2 token | 73/73 引用解析（设计系统 2511 变量），项目 CSS 0 原始颜色字面量 | `evidence/token-resolution.{json,txt}` |
+| 术语 | 禁区用词 0 命中；en/zh-CN 各 206 key | `evidence/term-scan.txt` |
+| 无 CDN | index 实际加载 13 个文件 0 远程 URL；Typekit `font-faces.css` 明确不加载 | `evidence/no-cdn.txt` |
+| 浏览器 BDD | 85/85；28 条场景全过；0 page error / 0 console error / 0 外部请求 | `evidence/browser-checks.txt`、`console.txt`、`network.txt` |
+| 响应式 | 80 组全绿（320/390/768/960/1440 × light/dark × en/zh-CN × Welcome/My Identity/Setup/Resolution failed），无溢出、主 CTA 首屏、唯一地平线 0 tick、7 拱线、BAP ID 首屏实测可见 | `evidence/responsive-matrix.jsonl`、`screens/*.png`（32 张） |
+| axe | 25 状态 violations 0；191 incomplete 全为 color-contrast；12 token 对最低 4.51:1 | `evidence/axe/*.json`、`axe-incomplete-summary.json`、`contrast-review.{json,txt}` |
+| 干净环境 | 从仅含 git 跟踪文件的临时目录复跑全绿：模型 57/57、token 73/73、浏览器 85/85、axe 0 violations | `evidence/clean-env-run.txt` |
+
+### 过程中发现并修正的缺陷
+
+1. **设计系统按钮色阶在深色下不达 AA**：`components.css` 的 `.s2d-button-accent` 白字在深色仅 3.51:1；项目样式按 S2 语义背景角色覆盖为 `--s2-accent-background-color-default`，两主题 ≥4.51:1，缺口记入 `verification.md` 与交接文档。
+2. **320px 卡片内容裁切**：窄屏 `.ow-card-anchor` 的 `min-height:160px` 使卡片超过地平线可用高度，BAP ID 被裁剪；改为卡片高度≤地平线可用空间并压缩窄屏卡片排版，同时 My Identity 面板新增首屏完整 BAP ID 行，Tab/命中测试确认可见。
+3. **桌面表单 CTA 首屏不可见**：`Review/Save` 在 768/960/1440 位于首屏之下；`.ow-form-actions` 改为全尺寸 sticky，80 组矩阵复验主 CTA 全部首屏可见。
+4. **干净环境剪贴板/网络端口硬编码**：`browser-check.py` 曾把 4321 写死，clean-env 的 4331 复跑误报；改为从 `OWNWORD_URL` 派生 origin 与白名单后 clean-env 全绿。
+5. **axe incomplete 处理**：3D 变换卡片内文字 axe 无法计算背景，产生 191 个 `color-contrast` incomplete（非 violation）；`axe-review.py` 逐节点列出并人工重算 token 对比对，最低 4.51:1。
+
+### 决策
+
+1. 七线穹顶采用**嵌套立方拱线**（非纬线环/经线弧），几何公式与断言在 `core.js` + `model-check.mjs` 中唯一表达，便于 Node/浏览器共同验证。
+2. 纯逻辑用 UMD `core.js`，Node 与浏览器加载同一份；视图用 React + 本地 Babel，生产按交接文档预编译。
+3. 设计系统只加载实际需要的本地 CSS 与 bundle；Typekit 远程字体声明不加载，使用系统字体回退，满足无 CDN。
+4. URL 参数（`?screen/theme/locale/hold/nextWallet/...`）只用于评审/截图钉住状态，不写回链上事实；用户显式切换才持久化偏好。
+5. 所有原型控制、fixtures、人为延时在 `implementation-handoff.md` 标注为生产移除项。
+
+### 风险 / 待确认
+
+- **用户视觉复核未完成**（第 ⑫ 条）：`_d_meta.json` 资产状态保持 `needs-review`；本模型无图像输入能力，穹顶节奏、地平线高度、卡片翻面手感与断点观感需用户目视确认。
+- 核心认知 §12 三项（Inscription Number 端点、Artifact 签名封装、Blockchain 状态映射）属 Artifact/Content/Explorer 范围，本版未实现，已在交接文档逐项标注验证方式与“待确认”。
+- 原型 BAP ID、Profile、txid 均为 fixture；真实密钥/签名/交易替换点见 `implementation-handoff.md`。
+
+### 唯一下一步
+
+用户打开预览：
+`http://127.0.0.1:4311/own-word-prototype-s2-flash4.1-002/index.html`
+（深色中文：`?theme=dark&locale=zh`；证明面：`?screen=my-identity&face=back`）。
+确认后由用户把 `_d_meta.json` 资产状态改为 `approved`，再把 `design-flash4.1-002` 置 `done`；如需调整，本事项内迭代并重跑 `bash verification/run.sh`。
 ## 2026-09-11 design-flash4.1-001 第一步：首页风格（穹顶与地平线）
 
 ### 完成项
