@@ -1,6 +1,38 @@
 # progress.md
 
 
+## 2026-09-11 用户裁决：feature_list.json 只保留 design-astra-001，启动 astra 预览服务
+
+### 完成项
+
+- 按用户要求把 `feature_list.json` 从 12 条事项裁剪为只保留 `design-astra-001`（astra 原型打磨至生产实现就绪），`activeItem` 由 `design-flash4.1-002` 改为 `design-astra-001`。移除的 11 条：design-flash-001/002/003/004、design-flash4.1-001/002、design-001/002/003、styles-001、harness-001；移除前内容见根仓库提交 `9f0584a`。裁剪后 `in-progress` 恰好 1 个，并行破例结束。
+- 启动 astra 原型预览服务：`http://127.0.0.1:4312/own-word-prototype-s2-astra-001/index.html`（no-store 静态服务，根目录 `designs/`，改文件后刷新即生效）。
+- 4311 已有另一处实时服务，同样指向 `designs/` 且返回当前工作区文件，保留作备用入口。
+
+### 验证结果
+
+| 检查 | 结果 | 证据 |
+| --- | --- | --- |
+| HTTP 资源 | `index.html`、`app.css`、`app.jsx`、`components.jsx`、`model.js`、`copy.js`、`_ds/react-spectrum-s2/_ds_bundle.js`、`vendor/react.development.js`、`brand/ownword-mark.svg` 全部 200 | curl 实测（4312） |
+| 服务一致性 | 4311 返回的 `index.html` 与工作区文件 md5 相同（`7937df33517f18820d60b10820116bb5`），两者均为 no-store | curl + md5sum |
+| 页面渲染 | 标题与 URL 正确；`h1`×1、穹顶×1、地平线×1、按钮×5；console 仅 2 条已知提示（React DevTools、浏览器内 Babel），0 error | agent-browser 会话 `astra-e9671acd2448` |
+| JSON 合法性 | 裁剪后 `feature_list.json` 解析通过，12 条 doneCriteria 与 output 字段完整，唯一 in-progress | `python3 -c json.load` |
+
+### 决策
+
+1. 预览服务不改动 astra 仓库：服务脚本放在 `/tmp/astra-preview-server.py`，原型目录只做被测对象，不新增非交付文件、不产生未提交改动。
+2. 本轮不改原型代码，也不重跑五套验证脚本（工作区处于 `babe8ef` 干净状态，上一轮 round 22 结果即当前基线）；用户复核后如要迭代，再按 `verification.md` 命令复跑。
+3. 移除的事项条目不留在本文件，靠根仓库 git 历史回溯：事项状态只有一份权威记录。
+
+### 风险 / 待确认
+
+- astra 的 12 条 doneCriteria 中，E1 用户视觉复核仍未关闭；本模型无图像输入能力，截图的观感判断只能由用户完成。
+
+### 唯一下一步
+
+用户视觉复核 astra 原型（七线穹顶节奏、无刻度地平高度、3D 卡翻面手感、中英 × 浅深、五档视口），确认后再定打磨范围。
+
+
 ## 2026-09-11 design-flash4.1-002 从零完整交付：穹顶与地平线
 
 ### 完成项
