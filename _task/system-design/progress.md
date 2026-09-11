@@ -1,6 +1,47 @@
 # progress.md
 
 
+## 2026-09-11 design-astra-001 打磨：公开身份卡移除视角控件
+
+### 完成项
+
+- 按用户要求移除 Public Identity 3D 卡旁的整组视角控件（用户截图所示区域）：`View chain record`（翻面按钮）、`Pause rotation` / `Rotate identity`、`Reset view`、`Viewing angle` 滑块，以及只为解释该开关而存在的 reduced-motion 提示。
+- 交互保留：进入公开身份页仍然自动旋转；指针拖动卡片改变视角（0.35°/px），跨过 90° 露出背面「链上记录」。
+- 同步清理：`copy.js` 删除 7 个随之失效的词典键（155 → 148，中英同步）；`app.css` 删除 `.card-actions`、`.rotation-controls`、`.rotation-label` 规则；`components.jsx` 删除不再使用的 `stage` ref。
+- astra 子仓库提交 `3192c8e`（PRD v0.1_20260911-123602，34 个文件）。
+
+### 验证结果（`OWNWORD_PORT=4312`，指向本次启动的实时服务）
+
+| 检查 | 结果 | 证据 |
+| --- | --- | --- |
+| 模型断言 | 74/74 | 脚本 stdout（`evidence/model-results.txt` 是 09-09 手工留档的 59，见「发现 3」） |
+| 词典契约 | 4/4，148 键（原 155） | `evidence/copy-contract.json` |
+| S2 token | 66/66 解析，0 未定义 | `evidence/token-resolution.json` |
+| 浏览器 | 450/450（原 451：删 2 条翻面按钮断言、改 1 条 reduced-motion 断言、新增 2 条拖拽断言） | `evidence/browser-results.json` |
+| axe | 38 份审计 0 violations；32 项 incomplete 全为 color-contrast | `evidence/axe-incomplete-summary.json` |
+| 离线启动 | 4/4（阻断全部外部域） | `evidence/offline-startup.json` |
+
+### 过程中发现
+
+1. **键盘路径变化（取舍需用户确认）**：删掉翻面按钮后，卡片背面只能靠拖拽或自动旋转露出。为保住验收覆盖，`check-browser.py` 新增 `drag_card()`（CDP 鼠标拖动）驱动「跨过 90° 露出链上记录」「拖回正面」「链上记录面 axe 审计」「TxID 复制」四条断言；键盘用户不再有翻面入口。
+2. **中文截图与 09-10 提交的版本逐字节不同**：原因是 Adobe Typekit 字体可达性——可达时 6 个字面加载、320px 中文首页整页高 831px，阻断外部域时为 875px。同环境独立复测 320×831 与新证据一致；英文页面及与本次改动无关的截图逐字节相同。中文 `color-contrast` incomplete 因此多出 `.welcome-intro` 节点，`evidence/axe-incomplete-review.json` 已覆盖（浅色 13.7:1、深色 12.44:1）。差异属字体环境，不是本次改动引起。
+3. `evidence/model-results.txt` 仍是 59 的过期手工留档（`check-model.cjs` 只打印 stdout、不写该文件）；用户此前要求清空 `feature_list.json` 的 `evidence` 字段，故本轮不再回填，待用户决定该文件是刷新还是删除。
+
+### 决策
+
+1. 只删控件、保留自动旋转与拖拽：3D 公开身份的视觉命题不退化，改动范围最小。
+2. 断言迁移到拖拽而不是删除覆盖：双面链上记录、单面在可访问树、TxID 复制仍逐条有证据。
+
+### 风险 / 待确认
+
+- 背面「链上记录」不再有键盘入口；若要求键盘可达，需补一个可聚焦的翻面入口（待用户裁决）。
+- E1 用户视觉复核仍未关闭（`_d_meta.json` = `needs-review`）。
+
+### 唯一下一步
+
+用户复核删除后的版面：`http://127.0.0.1:4312/own-word-prototype-s2-astra-001/index.html`；确认是否需要键盘翻面入口或恢复某个控件。
+
+
 ## 2026-09-11 用户裁决：feature_list.json 只保留 design-astra-001，启动 astra 预览服务
 
 ### 完成项
