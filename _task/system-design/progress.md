@@ -8,6 +8,7 @@
 - 按用户要求把 `feature_list.json` 从 12 条事项裁剪为只保留 `design-astra-001`（astra 原型打磨至生产实现就绪），`activeItem` 由 `design-flash4.1-002` 改为 `design-astra-001`。移除的 11 条：design-flash-001/002/003/004、design-flash4.1-001/002、design-001/002/003、styles-001、harness-001；移除前内容见根仓库提交 `9f0584a`。裁剪后 `in-progress` 恰好 1 个，并行破例结束。
 - 启动 astra 原型预览服务：`http://127.0.0.1:4312/own-word-prototype-s2-astra-001/index.html`（no-store 静态服务，根目录 `designs/`，改文件后刷新即生效）。
 - 4311 已有另一处实时服务，同样指向 `designs/` 且返回当前工作区文件，保留作备用入口。
+- 按用户要求清空 `design-astra-001` 的 `evidence` 字段内容（9102 字符 → 空，字段保留）；权威证据仍在 `designs/own-word-prototype-s2-astra-001/verification.md` 与原型内 `evidence/`，删除前的文本可在根仓库提交 `3b3146a` 回溯。
 
 ### 验证结果
 
