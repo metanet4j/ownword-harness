@@ -1229,7 +1229,7 @@
 
 ### 文件与提交
 
-- 子仓库：`designs/design-flash-mini-001`，提交 `95490f2`、`6c3f5c3`。
+- 子仓库：`designs/design-flash-mini-001`，提交 `95490f2`、`6c3f5c3`；视觉迭代提交 `8c3379c`、`0388301`。
 - 任务文档：`_task/system-design/feature_list.json`、`progress.md`、`session-handoff.md`（根仓库提交）。
 
 ### 风险 / 待确认
@@ -1237,3 +1237,36 @@
 - **用户视觉复核未完成**：`_d_meta.json` asset status 仍为 `needs-review`；自动化证据只覆盖可量化部分，穹顶节奏、留白、3D 翻转手感与四组合观感需用户目视确认。
 - 核心认知 §12 三项（Inscription Number endpoint、Artifact 签名封装、Blockchain 状态映射）不在 v0.1 范围，已在交接文档写明验证方式，未写成事实。
 - 卡片整体为鼠标点击便利项，键盘用户通过独立 `Flip card` 按钮可达；若要严格等价，需要把卡片改为真正的可聚焦控件。
+
+## 2026-09-12 design-flash-mini-001 视觉迭代：3D 卡片 / 右下角模拟器 / 抽象穹顶光晕
+
+用户反馈：3D 卡片不够立体和精致；原型模拟整合到右下角；穹顶线条抽象点、在下一层、带光晕，并有从屏幕延伸出去的感觉。
+
+### 完成项
+
+- **3D Public Identity 精修**：新增 `identity-depth` 两层景深叠层（translate3d/rotateZ）、卡片正/背面 `translateZ(12px)`、更强层级阴影与内高光、指针移动倾斜（`--tilt-x`/`--tilt-y`，reduced-motion 下不绑定）、保留独立 `Flip card` 按钮与 inactive face `inert`。
+- **模拟器整合到右下角**：移除正文内联模拟器；新增固定右下角 `Prototype` 开关与可开合 dock（移动端位于固定底部操作条上方）。`?sim=open` 直接展开；`?sim=1` 只启用模拟路径（如钱包不可用按钮），dock 默认收起，避免遮挡产品内容。
+- **穹顶抽象化与光晕**：七条线改为各自独立的 apex 与竖向半径、非对称宽度，放大到 1600×920 并作为固定下层绘制，超出屏幕边缘；加 token 派生的 drop-shadow 光晕与 `horizon--glow` 单线；能力状态图例与线条仍同读 `capabilityStates(state)`。
+- **验证更新**：模型 28/28；token 28/28、0 自造颜色；浏览器 14/14；axe 15 次 0 violations、5 条 incomplete（6 节点）人工复核；对比度 11/11；离线 3/3；截图 19 张（含 `simulator-dock-open-1440.png`）；320/390/768/960/1440 无横向溢出，完整 BAP ID 与关键 CTA 首屏可见。
+
+### 决策
+
+1. **模拟器默认收起**：避免 dock 展开时遮挡 320px 首屏身份卡与复制按钮；`Prototype` 按钮始终可发现，点击即开启并同时启用模拟路径。
+2. **抽象穹顶仍保持七线可及性**：七条 SVG 线为 `aria-hidden` 装饰层，能力名称与状态仍由独立图例列表承担；绘制与图例数据同源。
+3. **3D 卡片保留 reduced-motion 分支**：减少动效时不绑定指针倾斜，翻转 transition 置 none，不引入持续动画。
+
+### 验证结果（迭代后）
+
+| 套件 | 结果 | 证据 |
+| --- | --- | --- |
+| 模型 | 28/28 | `designs/design-flash-mini-001/verification/evidence/model-results.{txt,json}` |
+| S2 token | 28/28 解析、0 自造颜色 | `evidence/token-resolution.{txt,json}` |
+| 浏览器 | 14/14 | `evidence/browser-checks.{txt,json}` |
+| axe | 15 次 0 violations、5 incomplete（6 节点）已复核 | `evidence/axe-summary.json`、`evidence/axe-incomplete-review.json` |
+| 对比度 | 11/11 达标 | `evidence/contrast-review.txt` |
+| 离线 | 3/3 | `evidence/offline-checks.{txt,json}` |
+| 截图 | 19 张 | `evidence/screens/` |
+
+### 唯一下一步
+
+用户打开 `http://127.0.0.1:4400/index.html`（可点右下角 `Prototype` 查看模拟器），确认 3D 卡立体感、穹顶抽象/光晕/出屏感与 mini 版面；确认后把 `_d_meta.json` 的 `needs-review` 改为 `approved` 并置 `done`。
