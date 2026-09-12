@@ -1270,3 +1270,28 @@
 ### 唯一下一步
 
 用户打开 `http://127.0.0.1:4400/index.html`（可点右下角 `Prototype` 查看模拟器），确认 3D 卡立体感、穹顶抽象/光晕/出屏感与 mini 版面；确认后把 `_d_meta.json` 的 `needs-review` 改为 `approved` 并置 `done`。
+
+## 2026-09-12 design-flash-mini-001 第三轮：穹顶线条收拢为「上层隐藏光晕」
+
+用户反馈：穹顶线条主要集中在屏幕上方、紧密一些、更细更短，好似隐藏的。
+
+### 完成项
+
+- **收拢到屏幕上方**：`dome-backdrop` 由全屏 fixed 下层改为顶部居中固定层：`top:-10px; left:-12vw; right:-12vw; height:clamp(160px,24vh,280px)`；1440 下实测图层 1786×216，320 下 397×160，仍超出屏幕宽度以保留延伸感。
+- **更紧密**：`domeArcs(1200,300)`，宽度比收窄为 `[0.24,0.32,0.4,0.48,0.56,0.64,0.72]`，apex 偏移系数由 0.018 降到 0.012，七条弧在屏幕上方中心形成紧凑扇形。
+- **更细更短**：stroke-width 0.8px（active 1.4px），opacity 0.13（active 0.4、deferred 0.26）；弧线基于 300 高 viewBox 生成，天然只保留短弧，不再从地平线拉满全屏。
+- **好似隐藏**：低透明度 + token drop-shadow 微光 + `mask-image` 自上而下淡出；SVG 与容器 `overflow: visible`（避免 axe 把 fixed 容器判为不可判定背景），既保持可发现的微光，又不抢占前景。
+- **附带**：`hero__copy` 使用 `--s2d-background` 实体背景，保证文本背景可判定；本次调整后欢迎页 axe 回到 0 violations / 0 incomplete。
+
+### 验证结果
+
+- fresh-design 0 命中；模型 28/28；token 28/28、0 自造颜色；浏览器 14/14；axe 15 次 0 violations、5 条 incomplete（6 节点）人工复核；对比度 11/11；离线 3/3；截图 19 张。
+- 320/1440 无横向溢出；欢迎页 axe 0 violations、0 incomplete。
+
+### 提交
+
+- 子仓库：`41b54fb`（第三轮视觉迭代，PRD v0.1_20260912-113026）、`3bc2203`（干净检出复验，PRD v0.1_20260912-113246）。
+
+### 唯一下一步
+
+用户复核屏幕上方穹顶的密度、粗细、长度与隐藏感；确认后把 `_d_meta.json` 改为 `approved` 并置 `done`。
