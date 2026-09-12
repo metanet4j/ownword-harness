@@ -2,50 +2,56 @@
 
 ## 当前状态
 
-- **当前事项：design-astra-001「astra 原型打磨至生产实现就绪」**，`status=in-progress`，`activeItem=design-astra-001`，
-  产出 `designs/own-word-prototype-s2-astra-001`。
-- 2026-09-11 用户裁决：`feature_list.json` 只保留本事项，其余 11 条事项条目已移除（移除前内容见根仓库提交 `9f0584a`）；
-  「同时只允许一个 in-progress」的并行破例结束，本事项为唯一 in-progress。同日按用户要求清空本事项的 `evidence` 字段内容
-  （权威证据在原型 `verification.md` 与原型内 `evidence/`，删除前文本见根仓库提交 `3b3146a`）。
-- astra 子仓库工作区干净，最近提交 `6f39097`（PRD v0.1_20260911-133906）：版面收窄 `main` 1280 → 1120px、双栏 gap 96 → 64px，
-  并加 `max-height: 640px` 的矮窗口压缩（1220×555 主操作进首屏：整页 1042 → 771px；320×568 用 fixed 底部操作条）。
-  上一提交 `3192c8e`：按用户要求移除公开身份卡旁的视角控件，保留自动旋转与指针拖拽翻面。
-- 词典 148 键；token 65/65；断言：模型 74、浏览器 **454**（新增 4 条短窗口断言）、离线 4，axe 38 份 0 violations。
-- 12 条 doneCriteria 中 11 条已交付并取证，唯一未关闭：⑪ 用户视觉复核（`_d_meta.json` 资产仍为 `needs-review`）。
-- 未决取舍：卡片背面「链上记录」失去键盘入口（只剩拖拽与自动旋转），需要键盘可达时要补一个可聚焦的翻面入口。
-- 打磨 round 1–22 的完成项、缺陷与决策见 `progress.md` 2026-09-09 / 09-10 各节；
-  BDD 映射与证据索引见原型内 `verification.md`，模拟点生产替换契约见原型内 `implementation-handoff.md`。
+- **当前事项：design-flash-mini-001「flash-mini 原型：穹顶与地平线（全新设计，不参考任何现有实现，mini 紧凑版面）」**，
+  `status=in-progress`，`activeItem=design-flash-mini-001`，产出 `designs/design-flash-mini-001`。
+- 2026-09-12 用户要求：以全新设计另出一版，不参考任何现有实现代码；要求集合与 `design-astra-001` 一致；
+  id=design-flash-mini-001，输出 designs/design-flash-mini-001。为避免双 in-progress，`design-astra-001` 暂置 `blocked`。
+- 交付已完成并提交子仓库：`95490f2`（原型本体，PRD v0.1_20260912-094341）、`6c3f5c3`（干净检出复验，PRD v0.1_20260912-094621）。
+- 自动化证据：fresh-design 0 命中；模型 28/28；S2 token 28/28、0 自造颜色；浏览器 14/14；axe 15 次 0 violations、
+  5 条 incomplete（7 节点）逐条人工复核；对比度 11/11；离线 3/3；18 张截图；干净检出 4405 端口全绿。
+- 13 条 doneCriteria 中 12 条已交付并取证，唯一未关闭：⑫ 用户视觉复核（`_d_meta.json` assets.status 仍为 `needs-review`）。
+- 未决取舍：卡片整体为鼠标点击便利项，键盘用户通过独立 `Flip card` 按钮可达；若要严格等价，需要把卡片改为真正的可聚焦控件。
 
 ## 预览服务
 
-- 本次启动：`http://127.0.0.1:4312/own-word-prototype-s2-astra-001/index.html`
-  （no-store 静态服务，根目录 `designs/`，改文件后刷新即生效；服务脚本 `/tmp/astra-preview-server.py`）。
-- 备用入口：`http://127.0.0.1:4311/own-word-prototype-s2-astra-001/index.html`
-  （另一处实时服务，实测与工作区 `index.html` md5 相同，同为 no-store）。
-- 实测：关键资源全部 200；浏览器打开标题正确、React 已挂载（`h1`×1、穹顶×1、地平线×1），
-  console 0 error（仅 React DevTools 与浏览器内 Babel 两条已知提示）。
+- 一键启动（no-store，项目根为服务根目录）：
+  `cd designs/design-flash-mini-001 && python3 verification/serve.py 4400`
+- 访问：`http://127.0.0.1:4400/index.html`
+- 模拟器：追加 `?sim=1`，可切换四态分流、账户 A/B/C、操作成功/失败；普通预览不显示模拟器。
+- 一键验证：`cd designs/design-flash-mini-001 && OWNWORD_PORT=4401 bash verification/run-all.sh`
 
 ## 唯一下一步
 
-1. **用户视觉复核** astra 原型（本次已改动公开身份页）：确认删除控件后的版面、七线穹顶的节奏与疏密、
-   无刻度地平线高度、3D 卡自动旋转与拖拽翻面手感、中英 × 浅深四组合观感，以及 1440/960/768/390/320 版面。
-2. 若要求卡片背面键盘可达，补一个可聚焦的翻面入口并补断言；否则保持现状。
-3. 复核通过后，把 `_d_meta.json` 的资产状态由 `needs-review` 改为 `approved`，再将 `design-astra-001` 置 `done`；
-   若需调整，在本事项内迭代并复跑验证脚本，改动在 astra 子仓库提交且信息带 `(PRD v0.1_${datetime})`。
-4. 核心认知 §12 三项待确认不在 v0.1 范围；进入 Artifact/Content/Explorer 前必须按
-   `implementation-handoff.md` 的验证方式关闭。
+1. **用户视觉复核** flash-mini 原型：打开 4400 预览（建议同时看 `?sim=1`），确认：
+   - 七线穹顶的节奏、疏密与 keystone 汇聚；
+   - 无刻度地平的高度与通栏感；
+   - 3D Public Identity 卡片正/背面、翻转按钮与 reduced-motion 表现；
+   - mini 单列版面、≤760px 固定底部操作条、320px 完整 BAP ID 首屏；
+   - 中英 × 浅深四组合观感，以及 1440/960/768/390/320 响应式。
+2. 复核通过后，把 `designs/design-flash-mini-001/_d_meta.json` 的 asset status 由 `needs-review` 改为 `approved`，
+   在子仓库提交（commit 信息带 `(PRD v0.1_${datetime})`），再把 `design-flash-mini-001` 置 `done`。
+3. 若用户要求调整视觉或交互，在本事项内迭代并复跑 `verification/run-all.sh`；改动提交到
+   `designs/design-flash-mini-001` 子仓库，任务文档改动提交到根仓库。
+4. `design-astra-001` 保持 `blocked`，等待用户决定是否继续视觉复核或归档；不要未经用户确认同时恢复两个 in-progress。
+5. 核心认知 §12 三项待确认不在 v0.1 范围；进入 Artifact/Content/Explorer 前必须按
+   `verification/implementation-handoff.md` 的验证方式关闭。
 
 ## 常用命令
 
 ```bash
-# 预览服务（no-store，根目录 designs/）
-python3 /tmp/astra-preview-server.py 4312 /home/haodev/ownword/designs
+# 预览（no-store，项目根为服务根目录）
+cd designs/design-flash-mini-001
+python3 verification/serve.py 4400
+# http://127.0.0.1:4400/index.html?sim=1
 
-# 原型自检（在原型目录内，先确保 4312 在服务）
-cd designs/own-word-prototype-s2-astra-001
-node check-model.cjs
-node check-copy.cjs
-python3 check-tokens.py
-OWNWORD_PORT=4312 python3 check-browser.py
-OWNWORD_PORT=4312 python3 check-offline.py
+# 一键全量验证
+OWNWORD_PORT=4401 bash verification/run-all.sh
+
+# 单独运行
+node verification/check-fresh.mjs
+node verification/check-model.mjs
+node verification/check-tokens.mjs
+OWNWORD_PORT=4400 node verification/check-browser.mjs
+OWNWORD_PORT=4400 node verification/check-offline.mjs
+node verification/review-accessibility.mjs
 ```

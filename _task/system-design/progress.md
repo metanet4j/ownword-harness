@@ -1187,3 +1187,53 @@
 ### 唯一下一步
 
 用户打开 `http://127.0.0.1:4311/own-word-prototype-s2-flash-003/home.html`，确认首页风格（或指定 A/B/C 组合与修改点）；确认后实现 PRD v0.1 §5（5.1–5.10）、§8.8 与 §9 裁决的全部场景，并逐条补齐 13 条 doneCriteria 证据。
+
+## 2026-09-12 design-flash-mini-001 从零全新设计并交付完整原型
+
+用户要求：基于 `feature_list.json` 重新设计一版，不参考任何现有实现代码，全新思考、全新设计；要求仍与 `design-astra-001` 一致，id 为 `design-flash-mini-001`，输出到 `design-flash-mini-001`。
+
+### 完成项
+
+- **立项**：`feature_list.json` 新增 `design-flash-mini-001`（依赖 `design-astra-001` 的需求集合，非代码依赖；输出 `designs/design-flash-mini-001`），`activeItem` 切至本事项；`design-astra-001` 暂置 `blocked`，保持「同时只允许一个 in-progress」。13 条 doneCriteria 沿用 astra 并显式加入「全新设计且不参考实现」。
+- **全新设计约束**：设计过程只读核心认知、PRD v0.1、`designs/react-spectrum-s2` 与 reference 协议资料；未读取 astra/design-001/002/003/flash-* 实现代码；`verification/evidence/fresh-design-scan.txt` 扫描产品源码 0 命中。
+- **交付形态**：`designs/design-flash-mini-001/`，纯 ESM + DOM，无 React/Babel/外部 CDN；`_ds/react-spectrum-s2` 为自包含设计系统副本；`verification/serve.py` 提供 no-store 预览。
+- **视觉**：沿用穹顶与地平线命题但重新实现——7 条非对称宽度比经线弧、keystone 汇聚、1px 无刻度地平、3D Public Identity 正/背面；mini 约束为紧凑单列、≤760px 固定底部操作条、320px 首屏保留完整 BAP ID；穹顶弧与能力图例同读 `capabilityStates(state)`。
+- **状态模型**：`src/core/model.js` 纯 `step(state,event)`，覆盖连接 DETECTING→CONNECTING→CONNECTED、取消/失败、四态分流、创建/取消/失败、编辑保存/取消/离开保护、Key Rotation（v0.1.1 徽标）、账户切换取消敏感操作并清旧身份、断开、偏好持久化、reducer 纯度。
+- **文档**：`verification.md`（BDD 逐条映射、证据索引、全新设计自证、S2 缺口、axe incomplete 复核）、`verification/implementation-handoff.md`（12 项模拟点生产替换契约、不得丢失行为、核心认知 §12 三项待确认的验证方式）、`README.md`、`_d_meta.json`（asset status=needs-review）。
+- **提交**：子仓库 `designs/design-flash-mini-001` 提交 `95490f2`（原型本体，PRD v0.1_20260912-094341）与 `6c3f5c3`（干净检出复验，PRD v0.1_20260912-094621）。
+
+### 关键决策
+
+1. **不用框架**：为满足无 CDN、离线可启动与可断言性，采用纯 ESM + DOM；设计系统以 `_ds` 副本的 token 与组件类组合消费，生产替换为真实 `@react-spectrum/s2` 组件。
+2. **七线穹顶重新推导**：使用显式非对称宽度比 `[0.26,0.4,0.53,0.65,0.77,0.89,1]`，使 7 条弧互不重合且全部汇聚于 keystone；不画刻度/百分比。
+3. **mini 行为**：320/390 下主 CTA 用固定底部操作条保证首屏可见；完整 BAP ID 放在身份卡正面，保证 320×568 首屏可见。
+4. **无障碍缺口修正**：深色主按钮改用 `--s2-accent-color-700`（5.25:1）、negative 按钮改用 `--s2-negative-color-700`（5.24:1）、深色错误文字改用 `--s2-negative-color-1000`（5.55:1）；缺口记入 `verification.md`。
+5. **Key Rotation 按 §9 裁决**：完整可交互流程保留评审/批准/取消/失败，但界面始终标注 `Planned for v0.1.1`，不冒充 v0.1 交付。
+6. **axe incomplete 处理**：5 条 incomplete（7 个节点）经人工复核——4 个为 aria-hidden 装饰性头像首字母，3 个为钱包弹窗覆盖导致的 heading-order 无法判定；结论写入 `evidence/axe-incomplete-review.json`。
+
+### 验证结果
+
+| 套件 | 结果 | 证据 |
+| --- | --- | --- |
+| 全新设计扫描 | 0 命中 | `designs/design-flash-mini-001/verification/evidence/fresh-design-scan.txt` |
+| 模型 | 28/28 | `evidence/model-results.{txt,json}` |
+| S2 token | 28/28 解析，2509 定义 token，0 自造颜色 | `evidence/token-resolution.{txt,json}` |
+| 浏览器 | 14/14 | `evidence/browser-checks.{txt,json}` |
+| axe | 15 次 0 violations、5 incomplete（7 节点）已复核 | `evidence/axe-summary.json`、`evidence/axe/*.json`、`evidence/axe-incomplete-review.json` |
+| 对比度 | 11/11 组合达标（最低 4.81:1） | `evidence/contrast-review.txt` |
+| 离线 | 3/3 | `evidence/offline-checks.{txt,json}` |
+| 截图 | 18 张 | `evidence/screens/` |
+| 干净检出 | `git archive HEAD` 后 4405 端口全绿 | `evidence/clean-checkout.txt` |
+
+一键复现：`cd designs/design-flash-mini-001 && OWNWORD_PORT=4401 bash verification/run-all.sh`。
+
+### 文件与提交
+
+- 子仓库：`designs/design-flash-mini-001`，提交 `95490f2`、`6c3f5c3`。
+- 任务文档：`_task/system-design/feature_list.json`、`progress.md`、`session-handoff.md`（根仓库提交）。
+
+### 风险 / 待确认
+
+- **用户视觉复核未完成**：`_d_meta.json` asset status 仍为 `needs-review`；自动化证据只覆盖可量化部分，穹顶节奏、留白、3D 翻转手感与四组合观感需用户目视确认。
+- 核心认知 §12 三项（Inscription Number endpoint、Artifact 签名封装、Blockchain 状态映射）不在 v0.1 范围，已在交接文档写明验证方式，未写成事实。
+- 卡片整体为鼠标点击便利项，键盘用户通过独立 `Flip card` 按钮可达；若要严格等价，需要把卡片改为真正的可聚焦控件。
