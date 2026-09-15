@@ -1,0 +1,117 @@
+# ownword 研发共享中间件（长期基础设施）
+#
+# 定位：供 ownword 后续所有研发/联调/验证任务复用，不是某个任务的临时环境。
+#      固定版本、固定端口、固定凭据、开机自启、数据落卷。
+#
+# 用法：
+#   ./up.sh          # 启动并等待就绪
+#   ./down.sh        # 停止（保留数据卷）
+#   ./down.sh -v     # 停止并删除数据卷（彻底重置）
+#   ./status.sh      # 查看状态
+#
+# 镜像来源：本机 docker daemon 直连 Docker Hub 不可达（registry-1.docker.io dial timeout），
+#         故 Docker Hub 来源一律走 docker.m.daocloud.io 全限定名；elastic 官方仓库可直连。
+#
+# 版本锁定：所有镜像钉到补丁号，避免 pull 漂移导致有数据卷的服务升级失败。
+#         升级须显式改本文件，并同步更新 README.md 与使用方文档。
+
+name: ownword-infra
+
+volumes:
+  mongo-data:
+  es-data:
+  kafka-data:
+  redis-data:
+  mysql-data:
+
+services:
+  mongo:
+    image: docker.m.daocloud.io/library/mongo:8.0.32
+    container_name: infra-mongo
+    restart: unless-stopped
+    ports: ["27017:27017"]
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: bschema
+      MONGO_INITDB_ROOT_PASSWORD: bschema123
+      MONGO_INITDB_DATABASE: bschema
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.4.5
+    container_name: infra-es
+    restart: unless-stopped
+    ports: ["9200:9200"]
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:9200 >/dev/null || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  kafka:
+    # Kafka 4.x 起 ZooKeeper 模式已移除，必须 KRaft
+    image: docker.m.daocloud.io/apache/kafka:4.2.1
+    container_name: infra-kafka
+    restart: unless-stopped
+    ports: ["9092:9092"]
+    environment:
+      # CLUSTER_ID 必须固定：数据卷复用时不匹配会导致 KRaft 拒绝启动
+      CLUSTER_ID: ownword-infra-kraft-01
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 20
+
+  redis:
+    image: docker.m.daocloud.io/library/redis:7.4.11
+    container_name: infra-redis
+    restart: unless-stopped
+    ports: ["6379:6379"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  mysql:
+    image: docker.m.daocloud.io/library/mysql:8.4.11
+    container_name: infra-mysql
+    restart: unless-stopped
+    ports: ["3306:3306"]
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: bap_user
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot123"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
