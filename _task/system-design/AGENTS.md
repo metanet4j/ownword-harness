@@ -3,27 +3,27 @@
 本目录只用于 PRD 与实现设计。业务事实、任务状态、验证证据分开记录。
 
 ## 目录说明
-根目录 C:\haodev\ownword
+根目录 ownword
 其余路径采用相对路径
 
 ## 原型预览
 
 ```powershell
-python -m http.server 4311 --bind 127.0.0.1 --directory C:\haodev\ownword\designs
+python -m http.server 4311 --bind 127.0.0.1 --directory ownword\designs
 ```
 
 访问 `http://127.0.0.1:4311/<项目目录>/`。
 
 ## Git 仓库结构
 
-- 根仓库 `C:\haodev\ownword` 只跟踪文档与任务文件；`.gitignore` 忽略 `designs/*`。
+- 根仓库 `ownword` 只跟踪文档与任务文件；`.gitignore` 忽略 `designs/*`。
 - `designs/` 下每个目录是独立 Git 子仓库，各自提交：`bsv-identity-studio-v1`、`react-spectrum`（设计系统）、`own-word-prototype`、`-002`、`-003`、`-004`（各套原型）。
 - 改原型：进对应子目录提交，不动根仓库。
 - 改任务文档（AGENTS.md、feature_list.json、progress.md、session-handoff.md）：在根仓库提交。
 
 ## Git 提交规则
 
-- `designs/` 下各子仓库每次 Git commit 信息必须带当前 PRD 版本号，格式 `(PRD v0.1)`；根仓库提交不受此限。
+- `designs/` 下各子仓库每次 Git commit 信息必须带当前 PRD 版本号，格式 `(PRD v0.1_${datetime})`；根仓库提交不受此限。
 - 版本号不明时先向用户确认，确认前禁止提交。
 
 ## 开工顺序
@@ -40,7 +40,7 @@ python -m http.server 4311 --bind 127.0.0.1 --directory C:\haodev\ownword\design
 - 可交互高保真原型 替代大部分PRD描述 目录 `designs\own-word-prototype`
 - prd 描述无法可靠表达的产品事实 目录 `_task\system-design\spec\prd`
 - 后端设计文档 后端架构设计与详细实现设计 `_task\system-design\spec\backend` 
-- 设计系统，进行高保真原型设计时必须使用 设计系统 默认选择 `designs\react-spectrum`
+- 设计系统，进行高保真原型设计时必须使用 设计系统 默认选择 `designs/react-spectrum-s2`
 
 ## 事实来源
 
