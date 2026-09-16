@@ -87,12 +87,16 @@ cd /home/haodev/ownword/infra
 
 ## 5. Git 约定
 
+上级 `ownword/AGENTS.md` 已规定"每完成一个功能项即 commit"；落到本工作区的**补充约定**：
+
 - **不擅自改 `dev`/`test`/`master`，不擅自新建分支**；分支策略由各任务计划指定（常见做法：在任务指定的 feature 分支上改）。
 - 每个仓库**独立提交**；commit 用中文 Conventional Commits，说明"改了什么、为什么"。
 - **不推送远端**，除非用户明确要求。
 - 提交前先 `git status --short` 与 `git diff --name-only --cached` 确认范围，不混入无关改动。
 
 ## 6. 验证与证据
+
+上级 `ownword/AGENTS.md` 已规定"通过官方文档确认的优先通过官方文档确认"，以及"不要只看到代码就下结论"。落到本工作区的**补充约定**：
 
 - 任何"完成"的声明都要附**命令与输出**，不接受"应该没问题"。
 - 版本相关的结论**以官方文档为准**（Spring / Kafka / Elasticsearch / MySQL / MongoDB 等），把链接与结论写进任务文档。

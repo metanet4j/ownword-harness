@@ -7,24 +7,27 @@
 - 回答简洁，但不省略关键证据和验证方式。
 
  ### 开工门禁
-\- 进入 `_tasks/<任务名>/` 目录下开始任何工作前，第一步必须 Read `_tasks/<任务名>/AGENTS.md` 或者CLAUDE.md 。CLAUDE.md 、AGENTS.md优先级高于本文件。
+\- 进入 `_task/<任务名>/` 目录下开始任何工作前，第一步必须 Read `_task/<任务名>/AGENTS.md` 。该文件优先级高于本文件。
 
 \- 未读齐上述文件前，禁止一切操作。
 
 ## 工作区目录
 
-设计文档 `ownword\_task\system-design\spec`
+设计文档 `_task/system-design/spec`
 
-外部仓库文档和代码 `ownword\reference`
+外部仓库文档和代码 `reference`
 
-- bap 协议 `reference\bap-master `
-- schema、内容、关系 `reference\schema-master`
-- 钱包 `reference\yours-wallet-main`
-- 1sat、nft  `reference\1sat-ordinals-master`
+- bap 协议 `reference/bap-master`
+- schema、内容、关系 `reference/schema-master`
+- 钱包 `reference/yours-wallet-main`
+- 1sat、nft `reference/1sat-ordinals-master`
+- 设计系统 `reference/react-spectrum-main`
+- 外部参考项目 `reference/xLog-dev`
 
-设计原型 `ownword\designs\own-word-prototype`
+设计原型 `designs/ownword-design-prototype`（设计系统 `designs/react-spectrum-s2`）
 
-后端代码库 `ownword\backend`
+后端代码（dev 基线）`backend`：`metanet4j-parent`、`metanet4j-base`、`metanet4j-sdk`、`metanet4j-component` 四个独立仓库，另含上游 fork `bitcoinj-sv`。
+多仓库改造任务不直接改基线，而在 `_task/backend-worktree/<任务名>/` 下建这 4 个仓库的 worktree 副本，在任务指定的分支上改（见该目录的 `AGENTS.md`）。
 
 ## Working Rules
 - 可以通过官方文档确认的，优先通过官方文档确认
@@ -44,4 +47,4 @@
 
 ## Escalation
 
-架构决策：按需读取设计文档 ownword\_task\system-design\spec作为决策依据，否则问用户
+架构决策：按需读取设计文档 `_task/system-design/spec` 作为决策依据，否则问用户
