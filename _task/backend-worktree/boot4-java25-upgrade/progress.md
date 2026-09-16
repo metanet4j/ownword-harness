@@ -155,6 +155,26 @@
   - `BapRawStrResolverTest`(8)/`BsocialRawResolverTest`(2)：`PlanariaBapConvertor.convert` 抛「数据不符合bap格式」（BAP_PROTOCOL/AIP_PROTOCOL 校验不过）→ 疑 fixture 陈旧或协议常量变化，待定性
   - `ComplteTxFactoryTest`(2)：`this.bapBase` 为 null（`@BeforeEach` 初始化依赖的数据未就绪）
 
+**第四轮：Mongo 两类认证问题的诊断结论（2026-09-16）**
+
+复现命令（注意两个坑：必须 `-am`，否则解析不到兄弟模块；`-Dtest` 多类要用**逗号**，`+` 在 JUnit Platform 下不生效；
+另需 `-Dsurefire.failIfNoSpecifiedTests=false`）：
+
+```bash
+$MVN -pl metanet4j-component-test -am clean test \
+  -Dtest='BapMongodbTest,BsocialReplyMongodbTest' -DexcludedGroups=external \
+  -Dsurefire.failIfNoSpecifiedTests=false
+```
+
+- 隔离下稳定失败：**26 run / 23 error**，日志出现 63 次 `requires authentication` → 排除"用例相互影响"
+- 调用链：`CustomizedBsocialReplyRepositoryImpl.saveReply` → `MongoTemplate.findById` → `find` 被拒（**连接无凭据**）
+- 已证事实：① 修 `spring.mongodb.uri` 前缀后，启动期 `createIndexes` 的认证错误消失（说明索引那条路径用的是有凭据的客户端）；
+  ② 仓库内**没有**自定义 `MongoClient`/`MongoDatabaseFactory`/`MongoTemplate` Bean；
+  ③ 反向实验——把 deprecated 的 `spring.data.mongodb.uri` 一并补回**无效**（回滚）
+- 待查（下一轮首选）：在测试里注入 `MongoDatabaseFactory` 打印其 `MongoClientSettings`，或加
+  `logging.level.org.mongodb.driver=DEBUG` 看失败客户端实际使用的连接串；重点怀疑 Boot 4 下
+  `MongoTemplate` 与 `MongoClient` 来自两条不同的自动配置路径
+
 **下一轮建议**：先 `mvn -pl metanet4j-component-test -am test` 复现 Mongo 两类的认证问题（可能是注入的 template/repository 用了 `spring.data.mongodb.*` 的默认连接），再处理 ES 查询与 resolver 数据两类。
 1. `BapMongodbTest`(14) / `BsocialReplyMongodbTest`(9)：Mongo 写入/查询相关，需看具体异常（未取根因）
 2. `TxUtxoServiceTest`(2)、`ComplteTxFactoryTest`(2)、`MetaIdConvertorTest`(1)：未取根因
