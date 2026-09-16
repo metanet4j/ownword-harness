@@ -5,6 +5,7 @@
 - 工作目录：`_task/system-design`；当前事项：`design-astra-001`，唯一状态源为 `feature_list.json`。
 - 原型：`designs/own-word-prototype-s2-astra-001`。用户将其作为产品文档，不要求生产构建或正式组件替换。
 - 场景控制集中、示例说明集中、外部钱包边界明确两批工作均已完成。原型提交：`42168a0`、`f56ce04`。
+- 导航吸顶与底部提示已完成；提示 6 秒自动消失，悬停／焦点暂停，保留错误状态和重试。当前专项命令：`OWNWORD_PORT=4311 python3 check-browser.py --feedback-only`，宿主环境执行，29 条通过。日志与截图见 `evidence/header-feedback-*`；4 次 axe 审计无 violation，4 条背景文字／导航 incomplete 已记录。
 - 操作与验证：[原型演练](../../designs/own-word-prototype-s2-astra-001/原型演练_20260916-1604.md)。
 
 ## 预览与验证
@@ -23,6 +24,6 @@ python3 -m http.server 4311 --bind 127.0.0.1 --directory /home/haodev/ownword/de
 
 ## 下一步
 
-用户预览复核本次两批结果，再按反馈调整。资产仍为 `needs-review`，不能标记整体事项完成。既有卡片背面键盘入口缺失尚未处理。
+用户预览复核导航吸顶与底部提示，再按反馈调整。资产仍为 `needs-review`，不能标记整体事项完成。既有卡片背面键盘入口缺失尚未处理。
 
 根仓库已有用户暂存改动，后续提交必须限定本次文件，禁止一起提交。
