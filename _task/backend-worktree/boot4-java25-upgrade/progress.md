@@ -4,7 +4,7 @@
 
 ## Current State（当前状态）
 
-- Last Updated：2026-09-16（用户决策：修产品代码 + 测试统一 JUnit 5；两项均已落地并提交）
+- Last Updated：2026-09-16（P5 联调进行中：已修 Boot 4 Mongo 前缀与 Feign 缺件；剩余失败已归类）
 - Current Objective：**`boot4-tests-jupiter`（in-progress）**——Jupiter 迁移已完成、sdk 52 个用例可执行；
   余下：component-test/planaria 逐模块执行数 + `contextLoads` 出现性（P5 口径）+ 联网用例是否打 `@Tag("external")`。
 - Recommended Next Step：见文末 `Next` 第 1 条。
@@ -110,3 +110,29 @@
 | 附 | `HibernateJpaAutoConfiguration` 不在 component-test 类路径（无 JPA 依赖） | 删除该 import 与 exclude 项（保留会编译失败）；计划 §6.5 已修正 |
 
 **另需注意**：`dependencyManagement` 里不带 `<version>` 的条目会屏蔽 Boot BOM（P3 已踩，父 POM 已修；新增第三方坐标时不要留空版本）。
+
+## 过程记录：P5 联调（2026-09-16）
+
+**已修**
+- Boot 4 Mongo 前缀：`spring.data.mongodb.uri` → `spring.mongodb.uri`（前者 deprecated 且实测不生效 → 无凭据连接报 `createIndexes requires authentication`）
+- `connect-planaria` 补 `spring-boot-http-converter`（Feign 配置引用其 `ClientHttpMessageConvertersCustomizer`，Boot 4 模块化后未传递 → 上下文启动失败）
+- sdk 3 个联网交易类打 `@Tag("external")`：`-DexcludedGroups=external` 时 sdk 23/23 通过
+
+**当前执行数（`mvn clean test -DexcludedGroups=external`）**
+
+| 模块 | 执行数 | 结果 |
+|---|---|---|
+| metanet4j-base | 2 | 2 通过 |
+| metanet4j-sdk | 23 | 23 通过（另 29 个 external 用例被排除） |
+| metanet4j-connect-planaria | 1 | 1 通过 |
+| metanet4j-component-file | 8 | 8 通过 |
+| metanet4j-component-test | 125 | 尚有失败，已归类（见下） |
+
+**component-test 剩余失败归类**
+1. 配置绑定类：`MetaIdConvertorTest`/`BapConvertorTest` → `PlanariaProperties.getBitbus()` 为 null（测试未加载 `application-slave.yml` 的 `bitbus.*`）
+2. ES 索引类：`EsTest` 4 个（建索引用例；需比对 ES 9 mapping/索引已存在等具体原因）
+3. 外部服务类：`BsocailConvertorTest`（`FetchBitfsError`/`SignatureVerifyFail`，依赖 bitfs 外部接口）
+4. `BlockTaskServiceTest` 的 `contextLoads` 上下文加载失败（需取根因）
+5. `BapRawStrResolverTest`/`BsocialRawResolverTest` 若干 `IllegalArgumentException`（待定性）
+
+**下一步**：继续按上述分类收敛；外部依赖类按 `@Tag("external")` 处理，配置类先补 profile/属性绑定，ES/DB 类查索引与 schema。

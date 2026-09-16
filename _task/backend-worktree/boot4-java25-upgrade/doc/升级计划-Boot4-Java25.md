@@ -473,6 +473,17 @@ ElasticsearchClient client = ElasticsearchClient.of(b -> b
   `addCallback(success, failure)` 需改为 `whenComplete((result, ex) -> ...)`；
   影响 `component-message/producer/AbstractMessageProducer.java`。
 
+**P5 联调发现的 Boot 4 迁移点（2026-09-16 实测）**
+
+- **Mongo 配置前缀迁移**：Boot 4 中 `spring.data.mongodb.uri` 已 deprecated，规范前缀是
+  **`spring.mongodb.uri`**（`spring-configuration-metadata.json` 可证）；只改 yml 不改前缀会导致
+  应用以**无凭据**连接 → `Command createIndexes requires authentication`。
+  注意 `spring.data.mongodb.auto-index-creation` 仍是有效属性（由 `spring-boot-data-mongodb` 管理）。
+  （Redis 仍是 `spring.data.redis.*`，无需再迁。）
+- **Boot 4 模块化缺件**：Spring Cloud OpenFeign 的 `FeignClientsConfiguration` 需要
+  `spring-boot-http-converter` 的 `ClientHttpMessageConvertersCustomizer`，该模块不再随 starter 传递，
+  需在 `connect-planaria` 显式引入（版本随 Boot BOM），否则上下文启动 `ClassNotFoundException`。
+
 **测试基建（2026-09-16 用户决策：测试统一 JUnit 5，不使用 vintage）**
 
 > 用户决策：*"junit 必须保持统一，使用 junit5"* —— 原 D17（JUnit Platform + vintage 过渡）作废，
