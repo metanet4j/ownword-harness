@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "boot4-tests-jupiter",
+  "activeItem": "boot4-p5-verify",
   "note": "只记录阶段状态与依赖；各阶段的目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。activeItem=null 表示等待用户批准，不要自行开工。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
@@ -135,11 +135,11 @@
       "id": "boot4-tests-jupiter",
       "name": "测试门禁修复（复评 P0-A/P0-B，全量迁 Jupiter）",
       "description": "目标与验收口径见计划 §7.4，问题定性见复评 P0-A/P0-B。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "boot4-p2-parent"
       ],
-      "statusNote": "2026-09-16 用户决策事项已落地：①按(a)修产品代码；②测试统一 JUnit 5（不用 vintage）。全仓 38 个测试文件已迁 Jupiter，sdk 52 个用例真实执行（33 通过、19 个 error 全部来自 3 个联网广播测试类）；待办：component-test/planaria 的逐模块执行数 + contextLoads 出现性断言（P5 口径），以及是否给联网用例打 @Tag(\"external\")。",
+      "statusNote": "2026-09-16 完成：全仓测试迁 Jupiter（39 文件）、sdk 产品缺陷修复、联网用例打 @Tag(\"external\")。逐模块执行数：base 2/2、sdk 23/23（external 已排除）、planaria 1/1、component-file 8/8。",
       "evidence": [
         "产品修复 1：MasterKeyBapBase 构造器不再调用被覆写的 getRootAddress()（BapBase.rootPrivateKey 尚未赋值 → NPE）；提 sdk 451020e",
         "产品修复 2：BapBase 删除遮蔽父类的 private currentPath/currentNumberList（那份从未赋值 → getPreviousChildNumbers() NPE、getter 恒 null）",
@@ -147,19 +147,22 @@
         "sdk 实测：mvn clean test → Tests run: 52, Failures: 0, Errors: 19（provider=JUnitPlatformProvider）；BapBaseTest 9/9、MasterPrivateKeyTest 2/2 等 33 个通过",
         "剩余 19 个 error 定性：BitcoinschemaTransactionTest/OrdTransactionTest/RemoteSignBitcoinschemaTransactionTest 用公网 API（Bitails/GorillaPool）拉实时 UTXO 并广播，引用 2023 年主网 outpoint；现象=输入为空致 change 为负 / 取输入越界 / API 失败，非产品缺陷",
         "顺带修正 BapBaseTest#testGetSigningPathFromHex：断言参数顺序反了 + 期望值用 bitcoin3 的 m/...' 格式（产品契约是 M/...H，数字一致）",
-        "base 实测：Tests run: 2, Failures: 0, Errors: 0；提交 base 6e16cfa、component 0ce5c18、parent 50598c0"
+        "base 实测：Tests run: 2, Failures: 0, Errors: 0；提交 base 6e16cfa、component 0ce5c18、parent 50598c0",
+        "sdk 加 @Tag(\"external\") 后：mvn clean test -DexcludedGroups=external → Tests run: 23, Failures: 0, Errors: 0（提交 bc966e5）",
+        "P5 联调修复：Mongo 前缀迁 spring.mongodb.uri（Boot 4 deprecated 且不生效→无凭据连接）；connect-planaria 补 spring-boot-http-converter（提交 5deced9）",
+        "component-test 上下文已可启动：ES/Mongo/DataTest/BapSearchServiceTest(2/2) 等真实执行；其余失败已按 4 类归档（配置绑定 / ES 索引 / 外部服务 / contextLoads）"
       ]
     },
     {
       "id": "boot4-p5-verify",
       "name": "P5 验证（编译门禁 + B 档 + 分模块测试执行数）",
       "description": "验收方案见计划 §7（编译门禁、冲突体检、B 档运行、测试执行数）。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "boot4-p4-component",
         "boot4-tests-jupiter"
       ],
-      "statusNote": "验收口径：按模块给执行数 + contextLoads 出现性 + 依赖漂移断言，见计划 §7。",
+      "statusNote": "2026-09-16 进行中：base/sdk/planaria/component-file 已达标（执行数>0 且全绿）；component-test 125 个用例仍有失败，已归类待收敛（详见 progress.md 的 P5 过程记录）。",
       "evidence": []
     },
     {

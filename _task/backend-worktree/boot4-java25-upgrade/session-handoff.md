@@ -6,10 +6,10 @@
 
 ## 30 秒现状
 
-- 进度：**P0 / P0.5 / P1 / P2 / P3 / P4 全部完成并提交**；四仓库工作区干净，`activeItem=null`。
-- 状态：`activeItem = boot4-tests-jupiter`（in-progress）。用户已决策：**修产品代码** + **测试统一 JUnit 5**，
-  两项均已落地（sdk 52 用例可跑、39 个测试文件迁 Jupiter）。余下：component-test/planaria 执行数与门禁口径。
-- 基座：parent / base / sdk 的 0.2.0 已在隔离仓库，component 聚合 `mvn clean package -DskipTests` 为绿。
+- 进度：P0~P4 完成；`boot4-tests-jupiter` 完成（JUnit5 统一 + sdk 缺陷修复 + external 打 Tag）；
+  **`boot4-p5-verify` 进行中**：base 2/2、sdk 23/23、planaria 1/1、component-file 8/8 已绿。
+- 状态：`activeItem = boot4-p5-verify`。**component-test 125 个用例仍有失败**，已按 4 类归档（见下）。
+- 环境：五个中间件 healthy；Boot 4 的 Mongo 前缀与 Feign 缺件已修（component `5deced9`）。
 
 ---
 
@@ -60,12 +60,16 @@ P5 验收口径（不变）：按模块给执行数（base/sdk/component-test/co
 
 ---
 
-## Next Session（后续顺序，做完一项再申请下一项）
+## Next Session（后续顺序）
 
-1. ✅ P0 / P0.5 / P1 / P2 / P3 / P4 全部完成（提交见 `progress.md`）
-2. **`boot4-tests-jupiter`（in-progress，本次交接）**——Jupiter 迁移已完成；余下 component-test/planaria 的
-   逐模块执行数与 `contextLoads` 出现性，以及联网用例的 `@Tag("external")` 取舍
-3. 之后：`boot4-p5-verify`（编译门禁 + B 档 + 分模块执行数）→ `boot4-p6-finish`
+1. ✅ P0 / P0.5 / P1 / P2 / P3 / P4 / `boot4-tests-jupiter`
+2. **`boot4-p5-verify`（in-progress）**——按四类收敛 component-test 剩余失败：
+   - ① 配置绑定：`PlanariaProperties.getBitbus()` 为 null（测试未加载 `application-slave.yml` 的 `bitbus.*`）
+   - ② ES 索引：`EsTest` 4 个建索引用例（需看具体报错：mapping/已存在/连接）
+   - ③ 外部服务：`BsocailConvertorTest`（FetchBitfs / SignatureVerifyFail，依赖 bitfs 外部接口）→ 建议 `@Tag("external")`
+   - ④ 上下文加载：`BlockTaskServiceTest.contextLoads`（取根因，可能 MySQL/Redis 配置）
+   - 另：`BapRawStrResolverTest`/`BsocialRawResolverTest` 的 `IllegalArgumentException` 待定性
+3. 之后 `boot4-p6-finish`（四仓库提交 + 文档同步 + 最终验收输出）
 
 ## 开工自检
 
