@@ -2,6 +2,7 @@
 
 > 本文件是 `_task/backend-worktree/` 下**所有任务共享**的工程与环境说明：仓库布局、Maven 命令、环境准备。
 > 具体任务的目标、阶段、改动清单、验证门禁**写在各任务的计划文档里**，不写在本文件。
+> Maven 命令的完整模板（生命周期、各命令含义、flag、执行顺序、结果判定）见 **`mvn-command.md`**，本文件只给要点。
 > 进入某个任务前，先读本文件，再读该任务目录的 `AGENTS.md` 与计划文档。
 
 ## 1. 这里有什么
@@ -11,6 +12,7 @@
 ```
 backend-worktree/
 ├── AGENTS.md                      ← 本文件（共享规则）
+├── mvn-command.md                 ← Maven 命令固定模板（唯一事实来源）
 └── <task>/                        ← 每个任务一个目录
     ├── AGENTS.md                  ← 任务级 harness（开工门禁/DoD/收尾）
     ├── doc/                       ← 该任务的计划与评审
@@ -45,25 +47,15 @@ backend-worktree/
 
 其他任务/环境继续使用它们原本的版本；需要哪个版本，就在命令里**显式指定**。
 
-## 3. Maven 命令模板
+## 3. Maven 命令
 
-**永远显式指定 JAVA_HOME；不要用裸 `mvn`**——shell 默认 JDK 可能不是任务需要的版本，裸跑会得到误导性的失败。
+**完整模板见 [`mvn-command.md`](mvn-command.md)**（生命周期与各命令含义、flag 清单、四个仓库的执行顺序、单模块调试、测试结果判定）。
 
-```bash
-JAVA_HOME=<任务的 JDK 绝对路径> \
-<任务的 Maven 绝对路径>/bin/mvn \
-  -B clean package          # 跑测试用 clean test
-```
+三条不可省略的要点：
 
-若任务需要指定 settings（本地仓库位置、私服等），再加 `-s <settings 绝对路径>`。
-
-判定当前 Maven 实际用的是哪个 JDK：
-
-```bash
-JAVA_HOME=<JDK 路径> <mvn 路径> -v | grep 'Java version'
-```
-
-**测试一律带 `clean`**：`target/` 里的陈旧字节码会让 surefire 报出与源码不符的结果（曾出现过指向源码中不存在的字段的假 error）。不 clean 的测试结果不可信。
+- **永远显式指定 JAVA_HOME，不用裸 `mvn`**——shell 默认 JDK 可能不是任务需要的版本。
+- **测试一律 `clean test`**——`target/` 里的陈旧字节码会让 surefire 报出与源码不符的结果。
+- **判定测试是否真的跑了，看 `target/surefire-reports/` 的执行数**，不看 `BUILD SUCCESS`（无引擎时用例会被静默跳过而构建照样绿）。
 
 ## 4. 共享中间件（跨任务基础设施）
 

@@ -10,7 +10,7 @@
 Before writing code：
 
 1. `pwd` 确认在本目录。
-2. 读 `../AGENTS.md`——工程与环境共享规则。
+2. 读 `../AGENTS.md`（工程与环境共享规则）与 `../mvn-command.md`（Maven 命令固定模板）。
 3. 读 `doc/升级计划-Boot4-Java25.md`——**本任务的唯一事实来源**（目标、版本矩阵、决策 D1–D26、改动清单、门禁）。
 4. 读本目录的 `feature_list.json` 与 `session-handoff.md`——阶段状态与唯一下一步。
 5. 运行 `./init.sh` 确认环境与仓库状态；有异常先修，不要带病开工。
@@ -50,7 +50,7 @@ Before ending a session：
 
 - **工具链与仓库**：本任务用 JDK 25 + Maven 3.9.16 的绝对路径，并固定 `-s ~/.m2/metanet4j-settings.xml`
   （本地仓库 `~/.m2/metanet4j`，与默认仓库隔离）；全局默认（JDK 8 / Maven 3.9.9）**不得改动**。
-  命令模板见 `../AGENTS.md` §3，`./init.sh` 每次校验全局是否被污染。
+  命令模板见 `../mvn-command.md`，`./init.sh` 每次校验全局是否被污染。
 - **测试一律 `clean test`**，且验收按**模块**给执行数，不接受"总数 > 0"。
 - **共享中间件**用 `ownword/infra/`，不要自起容器；**不要 `down -v`**（会清掉跨任务数据）。
 - **未获批准不改代码**——这条是踩过坑写下来的（曾把"选方案"误当"批准开工"，改了 44 个文件后全部回退）。

@@ -55,7 +55,7 @@ esac
   || ok "全局 maven 默认未被改动：${GLOBAL_MVN:-未知}"
 
 sec "2. 任务文件"
-for f in ../AGENTS.md AGENTS.md feature_list.json progress.md session-handoff.md init.sh doc/升级计划-Boot4-Java25.md; do
+for f in ../AGENTS.md ../mvn-command.md AGENTS.md feature_list.json progress.md session-handoff.md init.sh doc/升级计划-Boot4-Java25.md; do
   [ -e "$ROOT/$f" ] && ok "$f" || bad "$f 缺失"
 done
 
