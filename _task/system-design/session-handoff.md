@@ -2,6 +2,8 @@
 
 ## 任务与范围
 
+- 长内容边界已处理：公开卡昵称两行、简介四行摘要，背面昵称两行；卡片下方支持展开完整资料，原始内容与长度校验不变。宿主环境运行 `OWNWORD_PORT=4311 python3 check-browser.py --content-only`，146 条通过；8 次完整资料折叠区 axe 无 violation/incomplete，证据见 `evidence/long-content-*`。长链接仅按简介纯文本验证，无新增字段或跳转。
+
 - 窄屏页头已收紧，仅调整响应式 CSS；320×568 已连接页头为 120px，未连接为 68px，按钮至少 44px 高。宿主环境运行 `OWNWORD_PORT=4311 python3 check-browser.py --header-only`，40 条通过；4 次页头 axe 无 violation/incomplete，证据见 `evidence/narrow-header-*`。原有 `--feedback-only` 同轮重跑，29 条通过。
 
 - 公开身份卡下方的链上记录折叠区已完成，支持键盘展开／收起与 TxID 复制，和背面共用记录组件。专项 `OWNWORD_PORT=4311 python3 check-browser.py --chain-only` 在宿主环境执行，24 条通过；4 次折叠区 axe 无 violation/incomplete。证据见 `evidence/chain-disclosure-*`。
@@ -13,6 +15,8 @@
 - 操作与验证：[原型演练](../../designs/own-word-prototype-s2-astra-001/原型演练_20260916-1604.md)。
 
 ## 预览与验证
+
+长内容改动后，同轮重跑 `--chain-only`，24 条通过；卡片拖动、链上记录和 TxID 复制正常。模型 74、词典 4（160 个 key）、65 个 token 通过。
 
 预览：http://127.0.0.1:4311/own-word-prototype-s2-astra-001/
 
@@ -28,6 +32,6 @@ python3 -m http.server 4311 --bind 127.0.0.1 --directory /home/haodev/ownword/de
 
 ## 下一步
 
-用户预览复核窄屏页头，再按反馈调整。资产仍为 `needs-review`，不能标记整体事项完成。链上记录键盘访问缺口已补齐，3D 卡片拖动效果保留。
+用户预览复核长内容卡面摘要与完整资料展开，再按反馈调整。资产仍为 `needs-review`，不能标记整体事项完成。链上记录键盘访问缺口已补齐，3D 卡片拖动效果保留。
 
 根仓库已有用户暂存改动，后续提交必须限定本次文件，禁止一起提交。
