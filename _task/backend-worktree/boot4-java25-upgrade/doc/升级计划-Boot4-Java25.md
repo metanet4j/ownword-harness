@@ -215,7 +215,7 @@ git -C <每个仓库> status --porcelain      # 不应出现 .mvn/ 或 wrapper �
   1. 子模块 `<parent><version>0.1.0</version>`；
   2. 模块间依赖 `<dependency><version>0.1.0</version>`；
   3. 模块自身 `<version>0.1.0</version>`。
-- **关键遗漏点**：`metanet4j-parent/pom.xml` 的 `<metanet4j.version>0.1.0</metanet4j.version>`（第 14 行）也要改为 `0.2.0`。它不在 `<version>0.1.0</version>` 的 grep 统计内；不改会导致 `mvn -N install` 仍安装 0.1.0，子模块声明父 0.2.0 后解析失败。
+- **关键遗漏点**：`metanet4j-parent/pom.xml` 的 `<metanet4j.version>0.1.0</metanet4j.version>`（**2026-09-16 实测在第 18 行**；第 14 行是 `<version>${metanet4j.version}</version>`，勿混淆）也要改为 `0.2.0`。它不在 `<version>0.1.0</version>` 的 grep 统计内；不改会导致 `mvn -N install` 仍安装 0.1.0，子模块声明父 0.2.0 后解析失败。
 - parent depMgmt：`metanet4j-base` 0.1.0→0.2.0；`metanet4j-sdk` 保持 0.2.0。
 - 删除全部 13 处 `<java.version>11</java.version>`，位置：
   - `metanet4j-parent/pom.xml:20`

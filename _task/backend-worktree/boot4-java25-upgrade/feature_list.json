@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": null,
+  "activeItem": "boot4-p2-parent",
   "note": "只记录阶段状态与依赖；各阶段的目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。activeItem=null 表示等待用户批准，不要自行开工。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
@@ -62,22 +62,29 @@
       "id": "boot4-p1-version",
       "name": "P1 版本号统一 0.2.0",
       "description": "目标与门禁见计划 §6.1（84 处版本字面量 + metanet4j.version 属性 + 13 处 java.version 清零）。",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "boot4-p05-prefetch"
       ],
-      "statusNote": "纯机械改动：84 处版本字面量 + metanet4j.version 属性 + 13 处 java.version=11 清零；门禁见计划 §6.1。",
-      "evidence": []
+      "statusNote": "2026-09-16 完成：82 处版本字面量 + metanet4j.version 属性统一到 0.2.0，13 处 java.version=11 覆盖清零；四条 Gate 全绿，四仓库各自提交。",
+      "evidence": [
+        "Gate 实测：0.1.0 字面量=0、metanet4j.version 残留=0、java.version=11 文件=0、pom 总数=25（全部符合计划 §6.1 期望）",
+        "0.2.0 字面量合计 84 = 本次改动 82 + 原有 2（sdk 自身版本、parent depMgmt 的 sdk 条目）",
+        "顺带清理 11 个因删除 java.version 而变空的 <properties> 块；25 个 pom XML 全部通过合法性校验",
+        "mvn -N install（metanet4j-parent）→ BUILD SUCCESS，安装 com.metanet4j:metanet4j-parent:0.2.0 到隔离仓库",
+        "提交：metanet4j-parent 5f462fa、metanet4j-base d0e2384、metanet4j-sdk 52e59bb、metanet4j-component 6ecd226",
+        "计划文档偏差修正：metanet4j.version 实际在第 18 行（计划原写 14 行），已先改计划再改代码"
+      ]
     },
     {
       "id": "boot4-p2-parent",
       "name": "P2 parent（版本矩阵 / 钉死清理 / 插件 / enforcer）",
       "description": "改动清单与 Gate 见计划 §6.2；注意复评 P1-1 的 annotationProcessorPaths 陷阱。",
-      "status": "blocked",
+      "status": "in-progress",
       "dependencies": [
         "boot4-p1-version"
       ],
-      "statusNote": "等用户批准动手。不改 lombok 1.18.20 则 JDK 25 下编译直接崩，故本阶段必须先落地。注意复评 P1-1：删除 lombok 属性时必须同步改 annotationProcessorPaths 的字面量。",
+      "statusNote": "2026-09-16 开工中。用户当日指示\"继续执行，改代码不必逐项确认\"，P1 完成后直接进入本项。关键内容：Boot 4.1.1 parent、java 25、删除 lombok/slf4j/log4j/hibernate-validator/jackson/lettuce/commons-lang3/jakarta.json 钉死、ES 9.4.5、swagger-annotations-jakarta、jjwt 0.13、compiler 用 Boot BOM 3.15.0 + release、新增 enforcer。",
       "evidence": []
     },
     {

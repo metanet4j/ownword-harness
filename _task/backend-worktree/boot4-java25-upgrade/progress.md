@@ -4,10 +4,12 @@
 
 ## Current State（当前状态）
 
-- Last Updated：2026-09-16（P0.5 依赖预取完成并交接）
-- Current Objective：**无在办事项（`activeItem=null`）**。P0.5 已完成；下一步 P1/P2 都要改代码，
-  **等待用户明确批准**——等待期间不得开工（`AGENTS.md` §4 红线：选方案 ≠ 批准开工）。
+- Last Updated：2026-09-16（P1 完成并提交；进入 P2）
+- Current Objective：执行 **`boot4-p2-parent`（父 POM 改造）**——in-progress，改造清单见计划 §6.2 与
+  `session-handoff.md` 的「本次交接」章。**本项是测试能否真实执行的前置（lombok 钉死必须清掉）。**
 - Recommended Next Step：见文末 `Next` 第 1 条。
+- 执行授权：用户 2026-09-16 指示"继续执行，改代码不必逐项确认"——本计划各阶段按顺序执行，
+  仅在计划未覆盖的架构决策/取舍上停下来问（`AGENTS.md` §5 的升级路径仍适用）。
 - 隔离仓库：`~/.m2/metanet4j` 已从 265MB/516 jar 预取到 **352MB/705 jar**，升级后坐标集全部可解析（P0.5 结论）。
 - 中间件：共享设施五个容器 healthy 运行中。
 - 全局工具链：JDK 8 / Maven 3.9.9 未被改动（`./init.sh` 每次校验）。
@@ -19,6 +21,7 @@
 | P0 环境（工具链 + 共享中间件 `ownword/infra`） | ownword 提交 `8770634`；五服务握手 PASS；计划 §11 第三/五轮 |
 | P0 基线清理（移除 5 个模块的过期 Maven Wrapper） | metanet4j-component 提交 `d677634` |
 | P0.5 依赖预取（升级后坐标集拉进隔离仓库，0 仓库改动） | `/tmp/boot4-prefetch/prefetch.log`：`go-offline` + `resolve-plugins/resolve` 两次 BUILD SUCCESS、0 失败；仓库 265MB/516 jar → **352MB/705 jar**；摘要 `/tmp/boot4-prefetch/prefetch-summary.md`；逐条版本见 `feature_list.json` 的 evidence |
+| P1 版本号统一 0.2.0 | 四条 Gate 全绿（0/0/0/25）；0.2.0 合计 84 = 改动 82 + 原有 2；`mvn -N install` 装出 `metanet4j-parent:0.2.0`；提交 parent `5f462fa` / base `d0e2384` / sdk `52e59bb` / component `6ecd226` |
 | 版本矩阵与兼容性核对（对官方文档逐条核对） | 计划 §2/§3（D23–D26）、§10 证据表 |
 | 任务文档纳入版本控制 | ownword 提交 `4a28fe0`；`.git/info/exclude` 按子仓库逐个排除 |
 | 任务 harness 初始化 | ownword 提交 `15406eb` |
@@ -55,6 +58,6 @@
 
 ## Next（下一步）
 
-1. **`boot4-p1-version` 版本号统一 0.2.0（下一项；`activeItem=null`，等待用户批准）**——84 处版本字面量 + `metanet4j.version` 属性 + 13 处 `java.version=11` 清零；门禁见计划 §6.1。**改代码，必须先取得批准。**
-2. `boot4-p2-parent` 父 POM（**含 lombok 清理，此步落地后测试才可能真实执行**）——改代码，需批准。
+1. ✅ `boot4-p1-version`（已完成，提交见上表）
+2. **`boot4-p2-parent` 父 POM（in-progress）**——含 lombok 1.18.20 清理，此步落地后测试才可能真实执行；Gate：`mvn -N install` + effective compiler 3.15.0 + `enforcer:enforce`
 3. 之后 `boot4-p3-base-sdk` / `boot4-p4-component` / `boot4-tests-jupiter`（测试门禁，依赖 P2）→ `boot4-p5-verify` → `boot4-p6-finish`
