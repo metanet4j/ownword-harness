@@ -8,7 +8,7 @@
     "done"
   ],
   "activeItem": null,
-  "note": "只记录阶段状态与依赖；各阶段的目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。activeItem=null 表示等待用户批准（当前：P5 已完成，P6 待批准；另有 2 项计划未覆盖的取舍待用户决策，见 progress.md「未决项」）。",
+  "note": "只记录阶段状态与依赖；各阶段目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。任务已全部完成（P0~P6），交付物见 doc/验收报告-Boot4-Java25-20260916-1320.md；activeItem=null 表示无进行中项——两项升级范围外的取舍待用户决策，见 progress.md「未决项」。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -180,12 +180,18 @@
       "id": "boot4-p6-finish",
       "name": "P6 收尾（四仓库提交 + 文档同步）",
       "description": "收尾要求见计划 §8（Git 工作流）与 §5 的 P6。",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "boot4-p5-verify"
       ],
-      "statusNote": "输出受影响仓库、每仓库编译命令与提交 ID。",
-      "evidence": []
+      "statusNote": "2026-09-16 完成：四仓库提交确认（均在 feature/java21、0 脏、只领先 dev）+ 文档同步 + 交付 doc/验收报告-Boot4-Java25-20260916-1320.md（受影响仓库、每仓库编译命令、提交 ID、门禁结果、用例账目、遗留项）。",
+      "evidence": [
+        "提交 ID：metanet4j-parent 50598c0（+4）、metanet4j-base 6e16cfa（+3）、metanet4j-sdk bc966e5（+4）、metanet4j-component 73e3ad4（+9）；四仓库 feature/java21、工作区 0 脏、落后 dev=0；未推送远端",
+        "编译命令（顺序不可乱）：parent -N install → base clean install → sdk clean install → component clean package；只编译加 -DskipTests，跑测试用 clean test -DexcludedGroups=external",
+        "交付物 doc/验收报告-Boot4-Java25-20260916-1320.md：验收结论、受影响仓库与逐仓库提交 ID、每仓库编译命令、门禁结果（base 2 / sdk 23 / connect-planaria 1 / component-file 8 / component-test 95，全 0 error）、§6.6 九条、依赖漂移断言、用例账目、遗留项与声明",
+        "用例账目（component-test 静态 129 实例）：95 常规执行 + 30 @Tag(\"external\") 排除 + 3 从未被 surefire 选中（TxoBobConverter 类名不含 Test）+ 1 非 void @Test 被 Jupiter 忽略（BitcoinschemaTransactionTest）；sdk：52 = 23 执行 + 29 external",
+        "文档同步：计划 §6.6 命令路径修正、§8 按实际分支 feature/java21 重写、§9 三条遗留项、§11 P5/P6 记录；progress.md / session-handoff.md 收口"
+      ]
     }
   ]
 }

@@ -5,9 +5,9 @@
 
 ## Current State（当前状态）
 
-- **Last Updated**：2026-09-16（P5 完成：component-test 全绿，五模块执行数达标，§6.6 九条门禁复跑通过）
-- **Current Objective**：`boot4-p5-verify` 已收口 → next 为 **P6 收尾**（四仓库提交确认 + 文档同步 + 最终验收输出）
-- **Recommended Next Step**：见文末「下一步」；开工前先看「未决项」是否有用户决策
+- **Last Updated**：2026-09-16（P6 完成：**任务全部收口**，P0~P6 十项全 done）
+- **Current Objective**：无（本任务已交付；交付物见 `doc/验收报告-Boot4-Java25-20260916-1320.md`）
+- **Recommended Next Step**：无必做项；如有后续动作，先看文末「下一步」与「未决项」
 - **执行授权**：用户 2026-09-16 指示「继续执行，改代码不必逐项确认」；仅在计划未覆盖的架构决策/取舍上停下问（`AGENTS.md` §5）
 - **依赖基座**：parent / base / sdk / component 的 0.2.0 均可构建安装
 - **中间件**：共享设施 `ownword/infra/` 五个容器 healthy 运行中
@@ -47,7 +47,8 @@
 | P3 base + sdk（jakarta·JSpecify / Jackson 3 / 日志） | base `4f5a65a`；sdk `097870d` |
 | P4 component（22 pom + 源码迁移 + ES 9 + Redisson 4.7.0 + 测试基建） | component `b468ba8`（含 6 处先改计划的偏差） |
 | 测试门禁（全仓 39 文件迁 Jupiter + sdk 两处构造链缺陷修复 + 联网用例打 Tag） | parent `50598c0` / base `6e16cfa` / sdk `451020e`·`bc966e5` / component `0ce5c18` |
-| **P5 验证与收敛**（Mongo 认证根因、ES 两处、resolver 两类、`ComplteTxFactoryTest` 定性；门禁复跑全绿） | 见计划 §11「P5 验证」记录与本文件「门禁与证据」；本轮的 component 提交见 git log |
+| **P5 验证与收敛**（Mongo 认证根因、ES 两处、resolver 两类、`ComplteTxFactoryTest` 定性；门禁复跑全绿） | 见计划 §11「P5 验证」记录与本文件「门禁与证据」；component 提交 `73e3ad4` |
+| **P6 收尾**（四仓库提交确认 + 文档同步 + 验收报告输出） | `doc/验收报告-Boot4-Java25-20260916-1320.md`；ownword 提交见 git log |
 
 ## 关键事实（避免重复踩坑）
 
@@ -78,10 +79,14 @@
 
 | # | 事项 | 影响 | 建议 |
 |---|---|---|---|
-| 1 | sdk `initSignType` 死代码（`BapDataLockBuilder.buildRoot/buildId` 的签名类型永不生效） | 产出的 BAP root/ID 交易无法被自己的解析器识别为 root | 本次**未改**产品代码（超范围）；本次仅测试夹具绕过。建议单独立项修 3 处赋值 |
-| 2 | 测试应用 `application.yml` 的 Redis 密码（`metaid2022`，实际无密码）与 MySQL 凭据（`root/123456`，实际 `root/root123`，且缺 `allowPublicKeyRetrieval=true`） | 这些键本轮因 YAML 修复**重新生效**；当前无用例覆盖（相关类已 external），门禁不受影响 | 待确认后按 `ownword/infra/README-*.md`（唯一事实来源）对齐 |
+| 1 | sdk `initSignType` 死代码（`BapDataLockBuilder.buildRoot/buildId` 的签名类型永不生效） | 产出的 BAP root/ID 交易无法被自己的解析器识别为 root（上游既有） | 本次**未改**产品代码（超范围），测试夹具已绕过；建议单独立项修 3 处赋值 |
+| 2 | 测试应用 `application.yml` 的 Redis 密码（`metaid2022`，实际无密码）与 MySQL 凭据（`root/123456`，实际 `root/root123`，且缺 `allowPublicKeyRetrieval=true`） | 这些键因 P5 的 YAML 修复**重新生效**；当前无用例覆盖（相关类已 external），门禁不受影响 | 待确认后按 `ownword/infra/README-*.md`（唯一事实来源）对齐 |
+| 3 | 未打基线 tag `pre-boot4-java25` | 计划 §8 草案要求开工前打；实测 `dev` 全程未移动，回滚等价 `git checkout dev` | 如需留痕可补打 |
+| 4 | `TxoBobConverter`（3 个用例）从未被 surefire 选中 | 类名不含 `Test`，不匹配默认 includes（上游遗留） | 如需恢复执行，重命名为 `TxoBobConverterTest` |
 
 ## 下一步（Next）
 
-1. **P6 收尾**：四仓库提交确认 → 文档同步 → 输出最终验收（受影响仓库、每仓库编译命令、提交 ID）。
-2. 待用户对「未决项」两条给出取舍（是否本次修产品代码 / 是否对齐测试应用配置），再决定是否纳入本次提交范围。
+1. 本任务已交付：提交 ID = parent `50598c0` / base `6e16cfa` / sdk `bc966e5` / component `73e3ad4`；
+   验收报告见 `doc/验收报告-Boot4-Java25-20260916-1320.md`。
+2. 如需继续，按顺序处理：① 对「未决项」1/2 给出取舍（是否修产品代码 / 是否对齐配置）；
+   ② 明确要求后再推送远端（当前四仓库均未推送）；③ 需要留痕则补打基线 tag。

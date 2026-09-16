@@ -630,14 +630,15 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 
 ## 8. Git 工作流
 
-> 以下步骤在**执行阶段**（待批准）进行。本次曾试跑并已全部回退，仓库现处于 `feature/java21`（与 `dev` 同点，见 §11）。
-
-- 任务根目录 `_task/backend-worktree/boot4-java25-upgrade/`，4 个仓库 worktree 保持相对结构（复用现有 worktree，从 `feature/java21` 切到新分支）。
-- 分支：`feat/boot4-java25-metanet4j-parent`、`-base`、`-sdk`、`-component`。
-- 基线：`dev`（4 仓库均干净；worktree 当前 `feature/java21` 与 `dev` 零差异）。
-- 提交：每仓库独立提交，遵循 Conventional Commits；破坏性变更用 `!` 或 `BREAKING CHANGE:`。
-- 回滚：开工前 4 仓库 dev 打 tag `pre-boot4-java25`。
-- 产出报告：受影响仓库、每仓库编译命令、每仓库提交 ID。
+- 任务根目录 `_task/backend-worktree/boot4-java25-upgrade/`，4 个仓库 worktree 保持相对结构。
+- 分支：**沿用任务既有分支 `feature/java21`**（`./init.sh` 按此校验）；早期草案里的
+  `feat/boot4-java25-metanet4j-parent` / `-base` / `-sdk` / `-component` 未采用。
+- 基线 `dev`：开工时与 `feature/java21` 同点；执行期间 `dev` 未移动（见 §11 第六轮）。
+- 提交：每仓库独立提交，遵循 Conventional Commits（中文 type+scope）。
+- 回滚：`git checkout dev`（等价于回到基线）。**未打 `pre-boot4-java25` tag**——草案要求开工前打，
+  实测 `dev` 全程未移动，回滚路径已由本行明确，故不再补。
+- **不推送远端**（除用户明确要求）。
+- 产出报告：`doc/验收报告-Boot4-Java25-20260916-1320.md`（受影响仓库、每仓库编译命令、每仓库提交 ID）。
 
 ---
 
@@ -829,6 +830,18 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 **未执行类说明（AGENTS §8 口径）**：报告里未出现的类均已解释——6 个 external 类（`ComplteTxFactoryTest`/`MetaIdConvertorTest`/`BapConvertorTest`/`BsocailConvertorTest`/`BlockTaskServiceTest`/`TxUtxoServiceTest`）被 `-DexcludedGroups=external` 排除；`ServerSentEventsClientApplicationTest` 唯一用例被注释掉（空壳）；`BitcoinschemaTransactionTest` 的 `@Test public String testBsocialReply()` 因**非 void 被 Jupiter 静默忽略**（该类实为夹具）。
 
 **提交**：metanet4j-component 见 §8 之后的提交记录（本轮仅动 `metanet4j-component-test` 的 1 个 `application.yml` + 6 个测试文件，未改产品代码）。
+
+### P6 收尾（2026-09-16）—— ✅ 完成
+
+- **四仓库提交确认**：均在 `feature/java21`、工作区 0 脏、只领先 `dev` 未落后——parent `50598c0`（+4）、
+  base `6e16cfa`（+3）、sdk `bc966e5`（+4）、component `73e3ad4`（+9）；未推送远端。
+- **文档同步**：§6.6 两条 `dependency:tree` 命令路径修正；§8 按实际分支重写；§9 新增三条遗留项；
+  §11 补 P5/P6 记录；`progress.md`、`session-handoff.md`、`feature_list.json` 收口（两项置 done）。
+- **交付物**：`doc/验收报告-Boot4-Java25-20260916-1320.md`——含验收结论、受影响仓库与逐仓库提交 ID、
+  每仓库编译命令（含只编译/只测试两种口径）、门禁结果、**用例账目**（component-test 静态 129 个实例的
+  逐项去向：95 执行 / 30 external 排除 / 3 从未被 surefire 选中 / 1 非 void 被 Jupiter 忽略）、遗留项与声明。
+- **遗留**：两项待用户决策（sdk `initSignType` 死代码是否本次修、测试应用 Redis/MySQL 配置是否对齐），
+  以及 `pre-boot4-java25` tag 未打、`TxoBobConverter` 从未执行——均已在验收报告 §5 归档。
 
 ### 环境就绪清单
 
