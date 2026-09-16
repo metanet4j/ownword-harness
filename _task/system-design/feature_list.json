@@ -27,7 +27,7 @@
         "用户视觉复核通过：_d_meta.json 资产状态经用户确认后由 needs-review 改为 approved",
         "提交规范：全部改动在 astra 子仓库提交且 commit 信息带 (PRD v0.1_${datetime})，任务文档变更在根仓库提交"
       ],
-      "evidence": ""
+      "evidence": "原型验证范围已写入 _task/system-design/AGENTS.md；本次仅检查文档差异，未运行原型测试。整体事项仍待用户视觉复核。"
     }
   ]
 }
