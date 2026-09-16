@@ -45,29 +45,17 @@ backend-worktree/
 
 其他任务/环境继续使用它们原本的版本；需要哪个版本，就在命令里**显式指定**。
 
-### 2.2 本地 Maven 仓库隔离
-
-不同任务可能要求不同的依赖版本，**不要共用默认仓库**。惯例是按任务建独立仓库与 settings：
-
-```bash
-# ~/.m2/<task>-settings.xml
-<settings>
-  <localRepository>/home/haodev/.m2/<task></localRepository>
-</settings>
-```
-
-构建时用 `-s` 指定该 settings，例如 `-s ~/.m2/metanet4j-settings.xml`。
-
 ## 3. Maven 命令模板
 
-**永远显式指定 JAVA_HOME 与 settings；不要用裸 `mvn`**——shell 默认 JDK 可能不是任务需要的版本，裸跑会得到误导性的失败。
+**永远显式指定 JAVA_HOME；不要用裸 `mvn`**——shell 默认 JDK 可能不是任务需要的版本，裸跑会得到误导性的失败。
 
 ```bash
 JAVA_HOME=<任务的 JDK 绝对路径> \
 <任务的 Maven 绝对路径>/bin/mvn \
-  -s <任务的 settings 绝对路径> \
   -B clean package          # 跑测试用 clean test
 ```
+
+若任务需要指定 settings（本地仓库位置、私服等），再加 `-s <settings 绝对路径>`。
 
 判定当前 Maven 实际用的是哪个 JDK：
 
