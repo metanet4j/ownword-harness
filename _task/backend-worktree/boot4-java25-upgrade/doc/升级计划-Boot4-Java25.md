@@ -364,6 +364,20 @@ find . -name pom.xml -not -path '*/target/*' | wc -l                            
 | `io.springfox:springfox-swagger2` | `io.swagger.core.v3:swagger-annotations-jakarta` | `metanet4j-component-model/pom.xml` |
 | `io.jsonwebtoken:jjwt` | `jjwt-api`（compile）+ `jjwt-impl`/`jjwt-jackson`（runtime）0.13.0 | `metanet4j-api-common` 等使用处 |
 
+**MyBatis-Plus 3.5.17 的类搬迁（2026-09-16 实测，P4 构建暴露）**
+
+- `IService` / `ServiceImpl` 在 3.5.17 已从 `com.baomidou.mybatisplus.extension.service(.impl)`
+  移到 **`com.baomidou.mybatisplus.spring.service(.impl)`**（证据：`mybatis-plus-spring-3.5.17.jar` 内含
+  `com/baomidou/mybatisplus/spring/service/IService.class`；`extension` 包下已无该类）。
+- 影响：`metanet4j-store-sql` 的 **11 个文件**需同步改 import（原计划未覆盖）。
+- 兼容性已核实：新 `ServiceImpl` 继承 `spring.repository.CrudRepository`（含 `protected M baseMapper`），
+  `IService` 继承 `extension.repository.IRepository`（save/getById/updateById/removeById/listByIds/getOne/exists/count 等仍在），
+  故只改 import 即可，方法调用无需调整（store-sql 的 service 均为薄壳，用 `baseMapper` 直连 mapper）。
+- **自动填充 API 变更（同批实测）**：`MetaObjectHandler.setInsertFieldValByName(...)` / `setUpdateFieldValByName(...)`
+  在 3.5.17 已删除，需改用 `strictInsertFill(metaObject, field, Class, value)` / `strictUpdateFill(...)`
+  （语义差异：strict 填充只在字段为 null 且实体标注 `@TableField(fill=...)` 时生效，不再无条件覆盖）。
+  影响 `store-sql/handler/MetanetObjectHandler.java`。
+
 **javax → jakarta / jspecify（component 16 个文件）**
 
 | 类别 | 文件 |
@@ -379,7 +393,7 @@ find . -name pom.xml -not -path '*/target/*' | wc -l                            
 
 **Boot 4 包迁移（3 个文件，见 D13）**
 
-- `component-test/src/main/.../Metanet4jComponentTestApplication.java`：3 个 import + exclude 数组 + Druid 包名（boot4）。
+- `component-test/src/main/.../Metanet4jComponentTestApplication.java`：Druid 包名（boot4.autoconfigure）+ `DataSourceAutoConfiguration`/`DataSourceTransactionManagerAutoConfiguration` 迁 `org.springframework.boot.jdbc.autoconfigure`。**2026-09-16 修正**：`HibernateJpaAutoConfiguration` 不迁包也不排除——`spring-boot-hibernate` 不在该模块类路径上（无 JPA 依赖），保留 exclude 会导致编译期找不到类；故直接删除该 import 与 exclude 项。
 - `connect-planaria/.../fegin/DefaultFeginClient.java`：删除未使用的 `HttpMessageConverters` import。
 - `component-cache/.../RedissonAutoConfiguration.java`：`RedisAutoConfiguration`→`DataRedisAutoConfiguration`、`RedisProperties`→`DataRedisProperties`（`getCluster`/`getTimeout` 方法名已在 Boot 4 中确认存在）；**同时把 redisson 依赖升到 4.7.0**（见下"Redisson 4.7.0"）。
 
@@ -389,6 +403,11 @@ find . -name pom.xml -not -path '*/target/*' | wc -l                            
 - 删掉 `<=3.52` 时代的 `redisson-spring-data-2x` 残留依赖（若有）。
 - 全仓 grep `RedissonAutoConfigurationV2`（YAML / properties / 注解三种写法都要查），存在则改 `RedissonAutoConfigurationV4`——该名字在 Boot 4 下**不报错也不生效**，是官方点名的静默陷阱。
 - 排除 redisson 传递的 `javax.cache:cache-api`，否则 enforcer 的 `bannedDependencies` 会拦（见 D21）。
+- **Spring Cache 集成拆包（2026-09-16 实测）**：4.7.0 起 `org.redisson.spring.cache.*`
+  （`CacheConfig` / `RedissonSpringCacheManager`）已从主 jar 拆到独立坐标
+  **`org.redisson:redisson-spring-cache:4.7.0`**；`component-cache/pom.xml` 需补该依赖（原计划未覆盖）。
+- **Micrometer 2.x 移除 `io.micrometer.core.instrument.util.StringUtils`**：`RedisUtils` 改用已有的
+  `cn.hutool.core.util.StrUtil.isBlank(...)`（原计划未覆盖）。
 - 保留模块内自研 `RedissonAutoConfiguration` 的显式包路径调整；`RedissonProperties` 的 `spring.redis.redisson.*` 前缀未变，不需要改配置。
 
 **Elasticsearch 9.4.5（store-search）**
@@ -446,6 +465,15 @@ ElasticsearchClient client = ElasticsearchClient.of(b -> b
   - `FileOutConfig` 在 3.5.17 已删除；
   - `InjectionConfig` 已移到 `com.baomidou.mybatisplus.generator.config` 包；自定义文件输出改用 `injectionConfig(...).customFile(...)` 形式；
   - 不再使用旧 `AutoGenerator` + `GlobalConfig/DataSourceConfig/PackageConfig/StrategyConfig` 的 setter 组合，改为 `FastAutoGenerator.create(url,user,pwd).globalConfig(...).packageConfig(...).strategyConfig(...).injectionConfig(...).templateEngine(new VelocityTemplateEngine()).execute()`。
+
+**Boot 4 / Spring Kafka 4 的 API 变更（2026-09-16 实测，P4 构建暴露）**
+
+- `PropertyMapper.get().alwaysApplyingWhenNonNull()` 已删除（`alwaysApplyingWhenNonNull()` 在 Boot 4 不存在）。
+  Boot 4 的 `Source.adapt(...)` 已内建非空过滤（源码：`value != null && predicate.test(value)`），
+  故 `PropertyMapper.get()` 即为原语义；影响 `component-message/config/KafkaProperties.java` 6 处。
+- Spring Kafka 4 的 `KafkaTemplate.send(...)` 返回 `CompletableFuture`（不再返回已移除的 `ListenableFuture`），
+  `addCallback(success, failure)` 需改为 `whenComplete((result, ex) -> ...)`；
+  影响 `component-message/producer/AbstractMessageProducer.java`。
 
 **测试基建（D17/D18，P4 内完成）**
 

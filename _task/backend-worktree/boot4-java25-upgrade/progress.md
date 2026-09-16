@@ -4,11 +4,11 @@
 
 ## Current State（当前状态）
 
-- Last Updated：2026-09-16（P2、P3 完成并提交；进入 P4）
-- Current Objective：执行 **`boot4-p4-component`（P4，22 个 pom + 源码迁移）**——in-progress，
-  清单见计划 §6.5/§6.6 与 `session-handoff.md` 的「本次交接」章。
+- Last Updated：2026-09-16（P4 完成并提交；`activeItem=null`，等待用户决策后进入测试门禁）
+- Current Objective：**无在办事项**。四个仓库的代码迁移全部完成；剩下的是测试门禁与验收。
+  待决策：sdk 26 个既有 error 的处置（产品代码 bug，计划未覆盖）。
 - Recommended Next Step：见文末 `Next` 第 1 条。
-- 依赖基座：parent / base / sdk 的 0.2.0 均已安装进隔离仓库，component 可直接构建。
+- 依赖基座：parent / base / sdk / component 的 0.2.0 均可构建（component 聚合 `package -DskipTests` 已绿）。
 - 执行授权：用户 2026-09-16 指示"继续执行，改代码不必逐项确认"——本计划各阶段按顺序执行，
   仅在计划未覆盖的架构决策/取舍上停下来问（`AGENTS.md` §5 的升级路径仍适用）。
 - 隔离仓库：`~/.m2/metanet4j` 已从 265MB/516 jar 预取到 **352MB/705 jar**，升级后坐标集全部可解析（P0.5 结论）。
@@ -25,6 +25,7 @@
 | P1 版本号统一 0.2.0 | 四条 Gate 全绿（0/0/0/25）；0.2.0 合计 84 = 改动 82 + 原有 2；`mvn -N install` 装出 `metanet4j-parent:0.2.0`；提交 parent `5f462fa` / base `d0e2384` / sdk `52e59bb` / component `6ecd226` |
 | P2 父 POM（Boot 4.1.1 / Java 25 / 钉死清理 / enforcer） | 三条 Gate 全绿（`-N install`、effective compiler 3.15.0、`enforcer:enforce`）；负向验证确认 javax.* 拦截生效；提交 `935b5f5` + `a82ab4e` |
 | P3 base + sdk（jakarta/jspecify、Jackson 3、日志） | base `clean install` BUILD SUCCESS + 2/2 用例通过（`4f5a65a`）；sdk `clean install -DskipTests` BUILD SUCCESS + 4 通过/26 既有错误（`097870d`） |
+| P4 component（22 pom + 源码迁移 + ES 9 + Redisson 4.7.0 + 测试基建） | 聚合 `clean package -DskipTests` BUILD SUCCESS；§6.6 九条门禁全绿；依赖树断言 ES 9.4.5/Rest5Client、Redisson 4.7.0/spring-data-41；6 处计划外偏差先改计划再改代码；提交 `b468ba8` |
 | 版本矩阵与兼容性核对（对官方文档逐条核对） | 计划 §2/§3（D23–D26）、§10 证据表 |
 | 任务文档纳入版本控制 | ownword 提交 `4a28fe0`；`.git/info/exclude` 按子仓库逐个排除 |
 | 任务 harness 初始化 | ownword 提交 `15406eb` |
@@ -72,10 +73,10 @@
 
 ## Next（下一步）
 
-1. ✅ `boot4-p2-parent`（三条 Gate 全绿）
-2. ✅ `boot4-p3-base-sdk`（编译门禁通过；sdk 26 个既有测试错误已定性）
-3. **`boot4-p4-component`（in-progress）**——22 个 pom + Boot 4 包迁移 + javax/Jackson 迁移 + ES 9（Rest5Client）+ Redisson 4.7.0 + Swagger/JJWT
-4. 之后 `boot4-tests-jupiter`（测试门禁；需先决定 sdk 构造顺序缺陷的处置）→ `boot4-p5-verify` → `boot4-p6-finish`
+1. ✅ `boot4-p2-parent` / ✅ `boot4-p3-base-sdk` / ✅ `boot4-p4-component`（代码迁移全部完成）
+2. **`boot4-tests-jupiter`（blocked，等用户决策）**——①sdk 的 `BapBase` 构造顺序 NPE 是修产品代码还是修夹具；
+   ②是否还要做"全量迁 Jupiter"（P4 已按计划默认的 D17 vintage 方案落地测试引擎接线）
+3. 之后 `boot4-p5-verify`（编译门禁 + B 档运行 + 分模块执行数）→ `boot4-p6-finish`
 
 ## 过程记录：P3 期间的两处计划偏差与处置
 
@@ -83,3 +84,17 @@
    实测其中 3 个在 Jackson 3 已并入 databind（Central 404、三方 BOM 注释）→ **先改计划 §6.3/§6.5 再改代码**，base 只保留 `tools.jackson.core:jackson-databind`。
 2. **P3 Gate 口径**：计划原写"两仓库 `package` 成功"；sdk 因**既有** 26 个用例错误无法 `package`（非本次引入，代码级根因已定位）
    → 先改计划 §5/§6.4，编译门禁改用 `mvn clean package/install -DskipTests`（仍含 test-compile），测试执行数单独记录。
+
+## 过程记录：P4 的六处计划外偏差（均为"先改计划、再改代码"）
+
+| # | 实测发现 | 处置 |
+|---|---|---|
+| 1 | MyBatis-Plus 3.5.17 把 `IService`/`ServiceImpl` 从 `extension.service(.impl)` 迁到 `spring.service(.impl)` | 改 11 个文件 import；计划 §6.5 补说明 |
+| 2 | `MetaObjectHandler.setXxxFieldValByName` 已删除 | 改 `strictInsertFill/strictUpdateFill`；记入计划 |
+| 3 | Redisson 4.x 把 `org.redisson.spring.cache.*` 拆到 `redisson-spring-cache:4.7.0` | component-cache 补依赖；记入计划 |
+| 4 | Micrometer 2.x 移除 `io.micrometer.core.instrument.util.StringUtils` | `RedisUtils` 改用已有 `StrUtil.isBlank`；记入计划 |
+| 5 | Boot 4 删除 `PropertyMapper.alwaysApplyingWhenNonNull()`（新默认即非空语义） | KafkaProperties 6 处去调用；记入计划 |
+| 6 | Spring Kafka 4 的 `send()` 返回 `CompletableFuture`（ListenableFuture 已随 Spring 7 移除） | `addCallback` → `whenComplete`；记入计划 |
+| 附 | `HibernateJpaAutoConfiguration` 不在 component-test 类路径（无 JPA 依赖） | 删除该 import 与 exclude 项（保留会编译失败）；计划 §6.5 已修正 |
+
+**另需注意**：`dependencyManagement` 里不带 `<version>` 的条目会屏蔽 Boot BOM（P3 已踩，父 POM 已修；新增第三方坐标时不要留空版本）。

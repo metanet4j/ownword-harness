@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "boot4-p4-component",
+  "activeItem": null,
   "note": "只记录阶段状态与依赖；各阶段的目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。activeItem=null 表示等待用户批准，不要自行开工。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
@@ -117,22 +117,29 @@
       "id": "boot4-p4-component",
       "name": "P4 component（22 pom + 源码迁移 + ES 9 + Redisson 4.7.0）",
       "description": "改动清单与门禁见计划 §6.5/§6.6。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "boot4-p3-base-sdk"
       ],
-      "statusNote": "2026-09-16 开工中：22 个 pom 坐标/源码迁移（Boot 4 包名、javax 16 文件、Jackson 14 文件、Swagger、JJWT 0.13、generator、EsConfig 迁 Rest5Client、Redisson 4.7.0）。依赖基座已就绪：parent/base/sdk 0.2.0 均已安装。",
-      "evidence": []
+      "statusNote": "2026-09-16 完成：22 个 pom + 63 个源码/配置文件迁移，聚合 clean package -DskipTests BUILD SUCCESS，§6.6 全部门禁通过。",
+      "evidence": [
+        "mvn clean package -DskipTests → BUILD SUCCESS（22 模块；-DskipTests 仍执行 test-compile，15+ 测试源文件编译通过）",
+        "§6.6 门禁逐条：pom=25；<version>0.1.0</version>=0；metanet4j.version=0.1.0=0；java.version=11 文件=0；javax 导入仅剩 sdk/crypto/AesCBCUtil（3 行）；Boot 旧包名=0；Jackson 旧 core/databind=0；HttpHost/RestClient/RestClientTransport=0；RedissonAutoConfigurationV2=0",
+        "依赖树断言：elasticsearch-java 9.4.5 + elasticsearch-rest5-client 9.4.5（无 legacy rest-client）；redisson-spring-boot-starter 4.7.0 + redisson-spring-data-41 4.7.0 + redisson-spring-cache 4.7.0（无 redisson-spring-data-2x）",
+        "提交：metanet4j-component b468ba8（66 files changed）",
+        "计划未覆盖、实测后补入计划 §6.5 的 6 处偏差：MyBatis-Plus IService/ServiceImpl 迁 spring.service、MetaObjectHandler.strictXxxFill、Redisson Spring Cache 拆包 redisson-spring-cache、Micrometer 2.x 移除 io.micrometer...util.StringUtils、Boot 4 PropertyMapper 默认非空、Spring Kafka 4 send() 返 CompletableFuture（addCallback→whenComplete）",
+        "测试基建（D17）：component-test 删悬空 metanet4j-bootstrap、加 junit-vintage-engine+junit4.13.2；基类去 @RunWith（Jupiter 保留）；11 个含 JUnit4 用例的子类补 @RunWith(SpringRunner)（第 12 个 BsocialMongodbTest 无用例，跳过以免 No runnable methods）；component-file mockito-inline → mockito-core(BOM 5.23.0)"
+      ]
     },
     {
       "id": "boot4-tests-jupiter",
       "name": "测试门禁修复（复评 P0-A/P0-B，全量迁 Jupiter）",
       "description": "目标与验收口径见计划 §7.4，问题定性见复评 P0-A/P0-B。",
-      "status": "not-started",
+      "status": "blocked",
       "dependencies": [
         "boot4-p2-parent"
       ],
-      "statusNote": "依赖 P2 已解除（P2/P3 均已完成）。2026-09-16 P3 实测补充：①纯 JUnit4 模块（base/sdk/planaria）无需 vintage 也真实执行（surefire junit4 provider），故\"不迁移就被静默跳过\"的前提不成立；②sdk 有 26 个既有 error（BapBase 构造顺序 NPE，非迁移引入），需先决定\"修构造顺序 or 修测试夹具\"；③迁移方案（全新代，38 文件）此前已回退过一次，重做前建议先确认方案范围。",
+      "statusNote": "2026-09-16 待用户决策：①sdk 26 个既有 error 的处置（修 BapBase 构造顺序 vs 修测试夹具）——这是产品代码行为变更，计划未覆盖；②本项是\"全量迁 Jupiter\"方案，与已在 P4 落地的 D17（vintage）方案二选一，需要确认是否继续做。",
       "evidence": [
         "复评 P0-A：JUnit 4 用例真实总量 37，计划只覆盖 21",
         "复评 P0-B：基类 Jupiter @Test 与 JUnit 4 @RunWith 混用，contextLoads 会空转",
