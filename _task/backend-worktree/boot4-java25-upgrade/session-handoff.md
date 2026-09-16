@@ -7,8 +7,8 @@
 ## 30 秒现状
 
 - 进度：**P0 / P0.5 / P1 / P2 / P3 / P4 全部完成并提交**；四仓库工作区干净，`activeItem=null`。
-- 状态：**等待用户决策**（两件）：① sdk 26 个既有 error 的处置；② 测试门禁是否继续做"全量迁 Jupiter"。
-  **未获决策前不要开新代码改动**（计划 §7.4 明确该项需再次确认）。
+- 状态：`activeItem = boot4-tests-jupiter`（in-progress）。用户已决策：**修产品代码** + **测试统一 JUnit 5**，
+  两项均已落地（sdk 52 用例可跑、39 个测试文件迁 Jupiter）。余下：component-test/planaria 执行数与门禁口径。
 - 基座：parent / base / sdk 的 0.2.0 已在隔离仓库，component 聚合 `mvn clean package -DskipTests` 为绿。
 
 ---
@@ -63,7 +63,8 @@ P5 验收口径（不变）：按模块给执行数（base/sdk/component-test/co
 ## Next Session（后续顺序，做完一项再申请下一项）
 
 1. ✅ P0 / P0.5 / P1 / P2 / P3 / P4 全部完成（提交见 `progress.md`）
-2. ⏸ `boot4-tests-jupiter`（blocked，等用户决策：sdk 构造顺序缺陷 + 测试门禁口径）
+2. **`boot4-tests-jupiter`（in-progress，本次交接）**——Jupiter 迁移已完成；余下 component-test/planaria 的
+   逐模块执行数与 `contextLoads` 出现性，以及联网用例的 `@Tag("external")` 取舍
 3. 之后：`boot4-p5-verify`（编译门禁 + B 档 + 分模块执行数）→ `boot4-p6-finish`
 
 ## 开工自检
@@ -78,8 +79,8 @@ cd /home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade
 
 | 阻塞/取舍 | 说明 |
 |---|---|
-| 测试门禁口径 | D17（vintage，P4 已落地）vs 全量迁 Jupiter（`boot4-tests-jupiter`，38 文件）——等用户确认 |
-| sdk 26 个既有错误 | `BapBase` 构造顺序缺陷 → NPE；**等用户选**：修产品代码 or 修测试夹具（计划 §6.4） |
+| 测试门禁口径 | ✅ 已定：统一 JUnit 5（Jupiter），不使用 vintage；39 个测试文件已迁移 |
+| sdk 19 个联网用例 error | 3 个广播测试类依赖公网 API + 2023 年主网 outpoint；待定是否 `@Tag("external")` + `-DexcludedGroups`（见计划 §6.4） |
 | 逐项批准 | 用户 2026-09-16 指示「继续执行，改代码不必逐项确认」；仅计划未覆盖的架构决策/取舍需停下来问 |
 | `Archive/prototype/`（207MB 归档） | 按约定未纳入 ownword 版本控制 |
 

@@ -4,9 +4,9 @@
 
 ## Current State（当前状态）
 
-- Last Updated：2026-09-16（P4 完成并提交；`activeItem=null`，等待用户决策后进入测试门禁）
-- Current Objective：**无在办事项**。四个仓库的代码迁移全部完成；剩下的是测试门禁与验收。
-  待决策：sdk 26 个既有 error 的处置（产品代码 bug，计划未覆盖）。
+- Last Updated：2026-09-16（用户决策：修产品代码 + 测试统一 JUnit 5；两项均已落地并提交）
+- Current Objective：**`boot4-tests-jupiter`（in-progress）**——Jupiter 迁移已完成、sdk 52 个用例可执行；
+  余下：component-test/planaria 逐模块执行数 + `contextLoads` 出现性（P5 口径）+ 联网用例是否打 `@Tag("external")`。
 - Recommended Next Step：见文末 `Next` 第 1 条。
 - 依赖基座：parent / base / sdk / component 的 0.2.0 均可构建（component 聚合 `package -DskipTests` 已绿）。
 - 执行授权：用户 2026-09-16 指示"继续执行，改代码不必逐项确认"——本计划各阶段按顺序执行，
@@ -70,6 +70,18 @@
 - 用户追问"为什么开始改代码了"。**流程错误：选方案 ≠ 批准开工。**
 - 处置：`git checkout -- .` 全部回退，四仓库回到 0 脏；并清理跑测试产生的 `target/`（避免陈旧字节码继续误导）。
 - 回退无损失。已固化为 `AGENTS.md` §4 的红线。
+
+## 过程记录：sdk 缺陷修复与测试统一 JUnit 5（2026-09-16 用户决策）
+
+- 用户决策：**(a) 修产品代码**；**"junit 必须保持统一，使用 junit5"**（原 D17 vintage 方案作废）。
+- sdk 实测定位到**两个**构造链缺陷并修复：
+  1. `MasterKeyBapBase` 构造器调用被覆写的 `getRootAddress()`（`rootPrivateKey` 未赋值 → NPE）；
+  2. `BapBase` 重复声明 `currentPath/currentNumberList` 遮蔽父类字段（那份从未赋值 → 构造期 NPE、getter 恒 null）。
+- 效果：sdk 由「26 error」变为 **52 个用例真实执行（33 通过、19 error）**；19 个 error 全部位于
+  3 个用公网 API 拉实时 UTXO 的广播测试类（Bitails/GorillaPool，引用 2023 年主网 outpoint），非产品缺陷。
+- 测试统一：base 2 + sdk 14 + component 23 = **39 个文件迁 Jupiter**；pom 统一 `junit-jupiter(test)`；
+  parent 删除 junit4 属性与 depMgmt；`component-test` 撤掉 vintage。
+- 提交：parent `50598c0`、base `6e16cfa`、sdk `451020e`、component `0ce5c18`。
 
 ## Next（下一步）
 

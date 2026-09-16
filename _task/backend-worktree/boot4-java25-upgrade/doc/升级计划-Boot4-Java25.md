@@ -326,30 +326,28 @@ find . -name pom.xml -not -path '*/target/*' | wc -l                            
 - `src/test/java/.../TestData.java` 的 `com.fasterxml.jackson.core.type.TypeReference` → `tools.jackson.core.type.TypeReference`（通过 base 传递 tools.jackson）。
 - 版本号保持 0.2.0；`<parent><version>` 改 0.2.0。
 
-**既有缺陷（2026-09-16 P3 实测发现，不属本次迁移）**
+**sdk 既有缺陷（2026-09-16 实测 → 已按用户决策修复）**
 
-- 现象：`cd metanet4j-sdk && mvn clean install` → `BitcoinschemaTransactionTest` 13 error + `OrdTransactionTest` 13 error，
-  全部同一个 NPE：
-  ```
-  java.lang.NullPointerException: Cannot invoke "io.bitcoinsv.bitcoinjsv.crypto.DeterministicKey.getPrivKey()"
-    because "this.rootPrivateKey" is null
-      at BapBase.getRootPrivateKey(BapBase.java:319)
-      at BapBase.getRootAddress(BapBase.java:351)
-      at MasterKeyBapBase.<init>(MasterKeyBapBase.java:35)
-      at BapBase.<init>(BapBase.java:49)
-      ...
-      at TransactionContextTest.before(TransactionContextTest.java:45)
-  ```
-  报告：`metanet4j-sdk/target/surefire-reports/com.metanet4j.sdk.transcation.{BitcoinschemaTransactionTest,OrdTransactionTest}.txt`
-- 根因（代码级）：`BapBase extends MasterKeyBapBase`；父类构造器第 35 行调用 `getRootAddress()`，
-  该方法被 `BapBase` 覆写（351 行）并读取 `BapBase.rootPrivateKey`，而该字段要到 `super()` 返回后才在 51 行赋值
-  ——典型的"构造器调用可覆写方法"缺陷。
-- 影响面：所有走 `BapBase.fromOnlyMasterPrivateKey(...)` / `fromRootChildNumberList(...)` 的构造路径都会 NPE（不只测试）。
-- 处置：**P3 不修**（P3 范围是依赖/包名迁移，改构造顺序属行为变更），归入 `boot4-tests-jupiter` 或单独立项，需用户决策。
-- 与迁移无关的证据：P3 对 `BapBase.java`、`MasterKeyBapBase.java`、`TransactionContextTest.java` 的改动只有 import 行（javax→jspecify/jakarta），
-  `git -C metanet4j-sdk diff` 可核。
+用户 2026-09-16 决策：**修产品代码**（选项 a）。实际定位到**两个**构造链缺陷：
 
----
+1. `MasterKeyBapBase` 构造器调用被 `BapBase` 覆写的 `getRootAddress()` 计算 `identityKey`，
+   而 `BapBase.rootPrivateKey` 要等 `super()` 返回后才赋值 → 构造期必 NPE。
+   **修复**：父类构造器不再计算 `identityKey`（由 `BapBase` 在其字段就绪后设置，见其构造器末尾）。
+2. `BapBase` 重复声明 `private currentPath / currentNumberList`，**遮蔽**父类 `protected` 同名字段，
+   而本类那份从未赋值 → `getPreviousChildNumbers()`（构造器内调用）NPE、`getCurrentPath()/getCurrentNumberList()` 恒为 null。
+   **修复**：删除重复声明，引用回到父类已初始化的字段。
+
+效果（`mvn clean test`）：sdk 从「26 个 error、其余用例不执行」变为
+**Tests run: 52, Failures: 0, Errors: 19**（provider = JUnitPlatformProvider）。
+- 已通过 33 个：`BapBaseTest` 9/9（含修正后的 `testGetSigningPathFromHex`）、`MasterPrivateKeyTest` 2/2、
+  `ScriptTest` 2/2、`TestData` 2/2、`WordsvBapBaseTest` 2/2、`PrivateKeyTest`、`AddressLiteTest` 等。
+- 剩余 19 个 error 集中在 `BitcoinschemaTransactionTest`(12) / `OrdTransactionTest`(4) /
+  `RemoteSignBitcoinschemaTransactionTest`(3)：这三个类用**公网 API（Bitails / GorillaPool）拉实时 UTXO**
+  并构造+广播交易，且引用 2023 年的主网 outpoint（例：`58a97bf6…_0`）；现象为「输入为空 → change 为负 /
+  correctlySpends 取 0 号输入越界 / API 返回失败」，单跑 `OrdTransactionTest` 耗时 189s（网络等待）。
+  **属链上数据与外部服务依赖，不是产品逻辑缺陷**；是否打 `@Tag("external")` 并用 `-DexcludedGroups` 排除，待 P5 决定。
+- 顺带修正测试缺陷 1 处：`BapBaseTest#testGetSigningPathFromHex` 的断言参数顺序反了，且期望值写成
+  bitcoinj 的 `m/...'` 格式（产品按约定输出 `M/...H`，数字部分一致）。
 
 ### 6.5 P4 metanet4j-component（21 子模块 + 根 pom = 22 个 pom）
 
@@ -475,11 +473,17 @@ ElasticsearchClient client = ElasticsearchClient.of(b -> b
   `addCallback(success, failure)` 需改为 `whenComplete((result, ex) -> ...)`；
   影响 `component-message/producer/AbstractMessageProducer.java`。
 
-**测试基建（D17/D18，P4 内完成）**
+**测试基建（2026-09-16 用户决策：测试统一 JUnit 5，不使用 vintage）**
 
-- `component-test/pom.xml` 增加 `junit-vintage-engine`（Boot BOM/junit-bom 管理 6.0.3）+ junit 4.13.2。
+> 用户决策：*"junit 必须保持统一，使用 junit5"* —— 原 D17（JUnit Platform + vintage 过渡）作废，
+> 改为全量迁 Jupiter；本项与 `boot4-tests-jupiter` 合并执行。
+
+- `component-test/pom.xml`：**不引** `junit-vintage-engine`，也**不再有** junit 4.13.2。
 - 基类 `Metanet4jComponentTestApplicationTests`：去掉 `@RunWith(SpringRunner.class)` 与 JUnit 4 import，保持 Jupiter `@Test` + `@SpringBootTest`。
-- 12 个继承基类的 JUnit 4 测试类各自补 `@RunWith(SpringRunner.class)` + import（保持 `@Autowired` 生效）。
+- 11 个继承基类的测试类：去掉 `@RunWith`，`@Test/@Before` 迁 Jupiter（Spring 上下文由 `@SpringBootTest` 的
+  `@ExtendWith(SpringExtension.class)` 提供）；`BsocialMongodbTest` 无活跃用例，不迁也不加注解。
+- 全仓测试依赖：`base/sdk/planaria` 新增 `org.junit.jupiter:junit-jupiter`（test，版本随 junit-bom 6.0.3）；
+  parent 删除 `junit.version` 与 junit depMgmt 条目；`component-file` 删除 junit4。
 - 删除悬空依赖 `com.metanet4j.bootstrap:metanet4j-bootstrap:0.1.0`（代码无引用）。
 - `component-file/pom.xml`：删除 `mockito-inline:4.11.0` 与 `mockito-inline.version` 属性，改 `org.mockito:mockito-core`（版本由 Boot BOM 5.23.0 管理）。
 - `MessageProducerTest` 无断言，P5 用发送回调日志/状态判断；建议补回调断言（可选，但要能证明确实执行）。
@@ -597,15 +601,14 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 
 ### 7.4 测试引擎与执行门禁
 
-- 引擎：JUnit Platform（Jupiter 6.0.3 + vintage 6.0.3）；JUnit 4.13.2。
+- 引擎：**JUnit Platform + Jupiter 6.0.3（统一 JUnit 5，不引入 vintage）**——2026-09-16 用户决策。
 - **2026-09-16 实测修正**（P3 构建）：纯 JUnit 4 模块（base、sdk）**不需要 vintage 也会真实执行**——
   surefire 3.5.6 只要在测试类路径上发现 `junit:junit` 4.x 就自动选 `surefire-junit4` provider
   （日志：`Using auto detected provider org.apache.maven.surefire.junit4.JUnit4Provider`）；
   实测 base 2/2 通过、sdk 4 通过（另有 26 个既有错误，见 §6.4）。
   因此复评 P0-A"这些模块的 JUnit 4 用例会被静默跳过"的前提**不成立**。
-  但 **vintage 仍是必需的**：只要模块里同时存在 Jupiter 用例（如 `component-test`、`component-file`），
-  该模块就走 JUnit Platform，其中的 JUnit 4 用例必须有 vintage 才能被平台执行（否则同样静默丢失）。
-  D17 的"引擎装到每个含 JUnit 4 用例的模块"作为统一口径保留（成本低、避免混用陷阱）。
+  该实测也解释了为什么"纯 JUnit4 模块会被静默跳过"的担心不成立。既然用户已决定统一 JUnit 5，
+  全仓测试已迁 Jupiter（38 个文件），不再需要 vintage，也不存在混用陷阱。
 - 验收：`mvn -pl metanet4j-component-test -am test` 后，**逐模块**断言 surefire 实际执行数：base > 0、sdk > 0、component-test > 0、connect-planaria > 0；component-test 内至少覆盖一个 Mongo 8.0 用例、一个 ES 9.4.5 用例、一个 Kafka 4.2.1 用例、一个纯逻辑用例；Redis/MySQL 各一个独立小用例。
 - 基类用例必须真的被执行：断言 surefire 报告里出现 `contextLoads`（`grep -r contextLoads */target/surefire-reports/*.txt`），否则"上下文启动"冒烟等于没跑（见复评 P0-B）。
 - 若选择把测试全迁 Jupiter（替代 vintage 方案），需单独评估工作量后再改本计划；默认按 D17 执行。

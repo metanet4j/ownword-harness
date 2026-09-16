@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": null,
+  "activeItem": "boot4-tests-jupiter",
   "note": "只记录阶段状态与依赖；各阶段的目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。activeItem=null 表示等待用户批准，不要自行开工。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
@@ -135,15 +135,19 @@
       "id": "boot4-tests-jupiter",
       "name": "测试门禁修复（复评 P0-A/P0-B，全量迁 Jupiter）",
       "description": "目标与验收口径见计划 §7.4，问题定性见复评 P0-A/P0-B。",
-      "status": "blocked",
+      "status": "in-progress",
       "dependencies": [
         "boot4-p2-parent"
       ],
-      "statusNote": "2026-09-16 待用户决策：①sdk 26 个既有 error 的处置（修 BapBase 构造顺序 vs 修测试夹具）——这是产品代码行为变更，计划未覆盖；②本项是\"全量迁 Jupiter\"方案，与已在 P4 落地的 D17（vintage）方案二选一，需要确认是否继续做。",
+      "statusNote": "2026-09-16 用户决策事项已落地：①按(a)修产品代码；②测试统一 JUnit 5（不用 vintage）。全仓 38 个测试文件已迁 Jupiter，sdk 52 个用例真实执行（33 通过、19 个 error 全部来自 3 个联网广播测试类）；待办：component-test/planaria 的逐模块执行数 + contextLoads 出现性断言（P5 口径），以及是否给联网用例打 @Tag(\"external\")。",
       "evidence": [
-        "复评 P0-A：JUnit 4 用例真实总量 37，计划只覆盖 21",
-        "复评 P0-B：基类 Jupiter @Test 与 JUnit 4 @RunWith 混用，contextLoads 会空转",
-        "2026-09-15 实测（已回退）：base 迁移后 Tests run: 2 通过；sdk 出现 7 个 error 且报错引用源码中不存在的字段，判定为陈旧 target 字节码污染，结论不可用"
+        "产品修复 1：MasterKeyBapBase 构造器不再调用被覆写的 getRootAddress()（BapBase.rootPrivateKey 尚未赋值 → NPE）；提 sdk 451020e",
+        "产品修复 2：BapBase 删除遮蔽父类的 private currentPath/currentNumberList（那份从未赋值 → getPreviousChildNumbers() NPE、getter 恒 null）",
+        "测试迁移：base 2 + sdk 14 + component 23 = 39 个文件迁 Jupiter（@Test/@Before/Assert/@RunWith 全清）；pom 依赖统一 junit-jupiter(test)，parent 删除 junit4 属性与 depMgmt",
+        "sdk 实测：mvn clean test → Tests run: 52, Failures: 0, Errors: 19（provider=JUnitPlatformProvider）；BapBaseTest 9/9、MasterPrivateKeyTest 2/2 等 33 个通过",
+        "剩余 19 个 error 定性：BitcoinschemaTransactionTest/OrdTransactionTest/RemoteSignBitcoinschemaTransactionTest 用公网 API（Bitails/GorillaPool）拉实时 UTXO 并广播，引用 2023 年主网 outpoint；现象=输入为空致 change 为负 / 取输入越界 / API 失败，非产品缺陷",
+        "顺带修正 BapBaseTest#testGetSigningPathFromHex：断言参数顺序反了 + 期望值用 bitcoin3 的 m/...' 格式（产品契约是 M/...H，数字一致）",
+        "base 实测：Tests run: 2, Failures: 0, Errors: 0；提交 base 6e16cfa、component 0ce5c18、parent 50598c0"
       ]
     },
     {
