@@ -4,10 +4,11 @@
 
 ## Current State（当前状态）
 
-- Last Updated：2026-09-16（P1 完成并提交；进入 P2）
-- Current Objective：执行 **`boot4-p2-parent`（父 POM 改造）**——in-progress，改造清单见计划 §6.2 与
-  `session-handoff.md` 的「本次交接」章。**本项是测试能否真实执行的前置（lombok 钉死必须清掉）。**
+- Last Updated：2026-09-16（P2、P3 完成并提交；进入 P4）
+- Current Objective：执行 **`boot4-p4-component`（P4，22 个 pom + 源码迁移）**——in-progress，
+  清单见计划 §6.5/§6.6 与 `session-handoff.md` 的「本次交接」章。
 - Recommended Next Step：见文末 `Next` 第 1 条。
+- 依赖基座：parent / base / sdk 的 0.2.0 均已安装进隔离仓库，component 可直接构建。
 - 执行授权：用户 2026-09-16 指示"继续执行，改代码不必逐项确认"——本计划各阶段按顺序执行，
   仅在计划未覆盖的架构决策/取舍上停下来问（`AGENTS.md` §5 的升级路径仍适用）。
 - 隔离仓库：`~/.m2/metanet4j` 已从 265MB/516 jar 预取到 **352MB/705 jar**，升级后坐标集全部可解析（P0.5 结论）。
@@ -22,6 +23,8 @@
 | P0 基线清理（移除 5 个模块的过期 Maven Wrapper） | metanet4j-component 提交 `d677634` |
 | P0.5 依赖预取（升级后坐标集拉进隔离仓库，0 仓库改动） | `/tmp/boot4-prefetch/prefetch.log`：`go-offline` + `resolve-plugins/resolve` 两次 BUILD SUCCESS、0 失败；仓库 265MB/516 jar → **352MB/705 jar**；摘要 `/tmp/boot4-prefetch/prefetch-summary.md`；逐条版本见 `feature_list.json` 的 evidence |
 | P1 版本号统一 0.2.0 | 四条 Gate 全绿（0/0/0/25）；0.2.0 合计 84 = 改动 82 + 原有 2；`mvn -N install` 装出 `metanet4j-parent:0.2.0`；提交 parent `5f462fa` / base `d0e2384` / sdk `52e59bb` / component `6ecd226` |
+| P2 父 POM（Boot 4.1.1 / Java 25 / 钉死清理 / enforcer） | 三条 Gate 全绿（`-N install`、effective compiler 3.15.0、`enforcer:enforce`）；负向验证确认 javax.* 拦截生效；提交 `935b5f5` + `a82ab4e` |
+| P3 base + sdk（jakarta/jspecify、Jackson 3、日志） | base `clean install` BUILD SUCCESS + 2/2 用例通过（`4f5a65a`）；sdk `clean install -DskipTests` BUILD SUCCESS + 4 通过/26 既有错误（`097870d`） |
 | 版本矩阵与兼容性核对（对官方文档逐条核对） | 计划 §2/§3（D23–D26）、§10 证据表 |
 | 任务文档纳入版本控制 | ownword 提交 `4a28fe0`；`.git/info/exclude` 按子仓库逐个排除 |
 | 任务 harness 初始化 | ownword 提交 `15406eb` |
@@ -45,6 +48,17 @@
    `Could not find artifact org.springframework.boot:spring-boot-starter-aop:jar:4.1.1 in central`；
    替代坐标 `spring-boot-starter-aspectj:4.1.1` 解析成功。
 11. **ES 9.4.5 客户端同时带 Jackson 2 与 Jackson 3**：探针树里 `tools.jackson.core:jackson-databind:3.1.5`
+12. **depMgmt 里不带 `<version>` 的条目会屏蔽 Boot BOM**：子模块声明该依赖时报 `version is missing`（就近条目优先）。
+    实证：`parent=spring-boot-starter-parent:4.1.1` 时 `log4j-slf4j2-impl` 不写版本可解析；换成 `metanet4j-parent:0.2.0`（含空版本条目）即报错。
+    规则：**"跟随 BOM"的坐标必须整条删除 depMgmt 条目**（已在父 POM 修掉 log4j-slf4j2-impl / mysql-connector-j 两条）。
+13. **Jackson 3 只有 core/databind 三件套**：`jackson-datatype-jdk8`、`jackson-datatype-jsr310`、`jackson-module-parameter-names`
+    已并入 `jackson-databind`——独立坐标在 Central 404，且在 `tools.jackson:jackson-bom:3.1.5` 中被 XML 注释掉；
+    `jackson-databind-3.1.5.jar` 内置 `tools/jackson/databind/ext/javatime/**`。**不要**再引这三个坐标。
+14. **纯 JUnit4 模块不会"静默跳过"**：surefire 3.5.6 检测到测试类路径上有 `junit:junit` 就自动选
+    `surefire-junit4` provider（实测 base 2/2、sdk 4 通过）。vintage 只在模块含 Jupiter（走 JUnit Platform）时才必需。
+15. **sdk 有 26 个既有 error（非迁移引入）**：`BapBase extends MasterKeyBapBase`，父类构造器调用被覆写的
+    `getRootAddress()`，而 `rootPrivateKey` 要等 `super()` 返回后才赋值 → NPE；影响所有 `fromOnlyMasterPrivateKey` 构造路径。
+    处置待定（修构造顺序 or 修夹具），见计划 §6.4。
    与 `com.fasterxml.jackson.core:jackson-databind:2.21.5` 并存，且 `elasticsearch-rest-client` 0 处（走 Rest5Client）；
    Redisson 4.7.0 传递引入 `javax.cache:cache-api:1.1.1`（P4 需按 D21 排除）。→ 支撑计划 §6.6 的漂移断言。
 
@@ -58,6 +72,14 @@
 
 ## Next（下一步）
 
-1. ✅ `boot4-p1-version`（已完成，提交见上表）
-2. **`boot4-p2-parent` 父 POM（in-progress）**——含 lombok 1.18.20 清理，此步落地后测试才可能真实执行；Gate：`mvn -N install` + effective compiler 3.15.0 + `enforcer:enforce`
-3. 之后 `boot4-p3-base-sdk` / `boot4-p4-component` / `boot4-tests-jupiter`（测试门禁，依赖 P2）→ `boot4-p5-verify` → `boot4-p6-finish`
+1. ✅ `boot4-p2-parent`（三条 Gate 全绿）
+2. ✅ `boot4-p3-base-sdk`（编译门禁通过；sdk 26 个既有测试错误已定性）
+3. **`boot4-p4-component`（in-progress）**——22 个 pom + Boot 4 包迁移 + javax/Jackson 迁移 + ES 9（Rest5Client）+ Redisson 4.7.0 + Swagger/JJWT
+4. 之后 `boot4-tests-jupiter`（测试门禁；需先决定 sdk 构造顺序缺陷的处置）→ `boot4-p5-verify` → `boot4-p6-finish`
+
+## 过程记录：P3 期间的两处计划偏差与处置
+
+1. **Jackson 3 坐标**：计划 §6.3 要求把 base 的 4 个 Jackson 坐标都切成 `tools.jackson.*`；
+   实测其中 3 个在 Jackson 3 已并入 databind（Central 404、三方 BOM 注释）→ **先改计划 §6.3/§6.5 再改代码**，base 只保留 `tools.jackson.core:jackson-databind`。
+2. **P3 Gate 口径**：计划原写"两仓库 `package` 成功"；sdk 因**既有** 26 个用例错误无法 `package`（非本次引入，代码级根因已定位）
+   → 先改计划 §5/§6.4，编译门禁改用 `mvn clean package/install -DskipTests`（仍含 test-compile），测试执行数单独记录。

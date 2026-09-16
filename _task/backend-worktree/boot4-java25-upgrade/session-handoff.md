@@ -6,78 +6,80 @@
 
 ## 30 秒现状
 
-- 进度：**P0 环境 + P0 基线清理 + P0.5 预取 + P1 版本号统一 已完成**（四仓库均有提交，见 `progress.md`）。
-- 状态：`activeItem = boot4-p2-parent`（in-progress）——用户 2026-09-16 指示「继续执行，改代码不必逐项确认」。
-- 环境：共享中间件五个容器 healthy；全局工具链未污染；隔离仓库 `~/.m2/metanet4j` 已预取 352MB/705 jar。
+- 进度：**P0 / P0.5 / P1 / P2 / P3 全部完成并提交**；四仓库工作区干净（各 commit 见 `progress.md`）。
+- 状态：`activeItem = boot4-p4-component`（in-progress）——本项是本次升级的主战场（22 pom + 源码迁移）。
+- 基座：`~/.m2/metanet4j` 中 parent / base / sdk 的 0.2.0 均已安装，component 可直接构建。
+- 环境：共享中间件五个容器 healthy；全局工具链未污染。
 
 ---
 
-# 本次交接：执行 `boot4-p2-parent`（父 POM 改造）
+# 本次交接：执行 `boot4-p4-component`（22 个 pom + 源码迁移）
 
-> 这是**测试能否真实执行的前置**：lombok 1.18.20 + JDK 25 编译必崩，本项不落地，后面所有测试都跑不起来。
-> 改动清单以计划 **§6.2** 为准，本文件只写「怎么执行、怎么验」。
+> 改动清单以计划 **§6.5** 为准（本节是执行摘要），门禁以 **§6.6** 的 grep/tree 命令为准。
+> 依赖基座已就绪：`metanet4j-parent` / `-base` / `-sdk` 0.2.0 已 install 进隔离仓库。
 
-## 1. 改什么（计划 §6.2 摘要）
+## 1. pom 坐标（旧 → 新）
 
-**属性与 BOM**
-- `spring-boot-starter-parent` 2.3.2.RELEASE → **4.1.1**；`java.version` → **25**；`maven.compiler.release` → `${java.version}`。
-- `spring-cloud.version` Hoxton.SR8 → **2025.1.3**；删除 spring-cloud-alibaba BOM import。
-- 删除 `maven.compiler.source/target`（改用 release）。
+| 旧 | 新 | 位置 |
+|---|---|---|
+| `spring-boot-starter-aop` | `spring-boot-starter-aspectj` | component-common |
+| `mysql:mysql-connector-java` | `com.mysql:mysql-connector-j`（BOM 9.7.0，不写版本） | store-sql、mybatispuls-generator |
+| `com.alibaba:druid-spring-boot-starter` | `druid-spring-boot-4-starter` 1.2.28（parent 管） | store-sql |
+| `com.baomidou:mybatis-plus-boot-starter` | `mybatis-plus-spring-boot4-starter` 3.5.17（parent 管） | store-sql |
+| `io.springfox:springfox-swagger2` | `io.swagger.core.v3:swagger-annotations-jakarta` 2.2.55（parent 管） | component-model |
+| `io.jsonwebtoken:jjwt` | `jjwt-api`(compile) + `jjwt-impl`/`jjwt-jackson`(runtime) 0.13.0 | api-common 等 |
+| Jackson 2 core/datatype/module | **仅** `tools.jackson.core:jackson-databind`（datatype/module 已并入 databind） | base 已改，component-file 同 |
+| redisson-spring-boot-starter 3.17.0 | **4.7.0**（自带 redisson-spring-data-41，勿加 exclusion）；**排除传递的 `javax.cache:cache-api`**（D21） | component-cache |
+| `elasticsearch-java` 7.17.5（内联版本） | **9.4.5**；不引 legacy `elasticsearch-rest-client` | store-search |
+| `jakarta.json-api` 钉死 | 删除（parent 已删，BOM 2.1.3） | store-search |
+| `hibernate-validator` 6.x 钉死 | 走 BOM 9.1.3.Final（javax → jakarta） | base/component-common 等 |
+| `log4j-slf4j-impl` | `log4j-slf4j2-impl`（base 已改，component 若有同步） | 全仓 grep |
 
-**删除/上调的钉死（D14，逐条都做了才算完）**
+## 2. 源码迁移（16 + 14 + 3 + 3 + 1 类）
 
-| 属性/坐标 | 动作 |
-|---|---|
-| lombok 1.18.20 | 删除（跟随 Boot BOM 1.18.46）——**本项核心** |
-| slf4j 1.7.32 与 3 个 depMgmt | 删除；移除 `slf4j-jdk14` |
-| log4j 2.20.0 | 删除钉死；`log4j-slf4j-impl` → **`log4j-slf4j2-impl`**（base pom 同步换 artifactId） |
-| hibernate-validator 6.1.5.Final | 删除（跟随 BOM 9.1.3.Final；6.1.5 是 javax.validation） |
-| jackson 2.13.2（6 个 depMgmt） | 删除 core/databind/datatype/module 钉死（注解 2.21.5 由 jackson-2-bom 管，tools.jackson 由 jackson-bom 3.1.5 管） |
-| junit 4.13 | → **4.13.2** |
-| lettuce 5.3.2.RELEASE | 删除（跟随 BOM 7.5.2.RELEASE） |
-| mysql-connector-java 8.0.25 | 删除属性；depMgmt 坐标改 `com.mysql:mysql-connector-j` |
-| druid 1.2.1 | → **1.2.28**；artifactId → `druid-spring-boot-4-starter` |
-| mybatis-plus 3.4.2（出现两次） | → **3.5.17**；artifactId → `mybatis-plus-spring-boot4-starter` |
-| mybatis-plus-generator 3.4.1 | → **3.5.17** |
-| velocity-engine-core 2.0 | → **2.4.1** |
-| commons-lang3 3.10 | 删除（跟随 BOM 3.20.0） |
-| jakarta.json 2.0.1 | 删除（跟随 BOM 2.1.3；ES 9.4.5 要求 2.1.3） |
-| ES client 7.17.5 | → **9.4.5**（仍走 Rest5Client，不补 legacy rest-client） |
-| springfox-swagger2 depMgmt | 删除；新增 `io.swagger.core.v3:swagger-annotations-jakarta:2.2.55` |
-| jjwt 0.9.1 depMgmt | 改 `jjwt-api`/`jjwt-impl`/`jjwt-jackson` **0.13.0** |
-| guava 30.1.1-jre / bcprov 1.71 / fastjson 1.2.76 / mapstruct 1.5.5.Final | **保留**（注明原因） |
+- **javax → jakarta/jspecify（16 文件）**：validation 9 处 → `jakarta.validation.*`；
+  `javax.annotation.Resource/PostConstruct` 5 处 → `jakarta.annotation.*`；
+  `javax.servlet.http.HttpServletRequest` 2 处 → `jakarta.servlet.http.*`；测试文件 1 个（`S3FileClientTest`，`-DskipTests` 也要 test-compile）。
+  **`javax.crypto` 不动**（在 sdk）。
+- **Boot 4 包迁移（3 文件）**：`Metanet4jComponentTestApplication`（3 import + exclude 数组 + Druid 包名 boot4）、
+  `DefaultFeginClient`（删未用的 `HttpMessageConverters`）、`RedissonAutoConfiguration`（`RedisAutoConfiguration`→`DataRedisAutoConfiguration`、`RedisProperties`→`DataRedisProperties`）。
+- **Jackson 3（14 文件）**：8 个 `core/databind/datatype` 导入迁 `tools.jackson.*`；6 个只用注解的不动；
+  **store-search 不删 Jackson 2**（ES 9.4.5 客户端的 `JacksonJsonpMapper` 仍用 Jackson 2）。
+- **Swagger（3 文件 + 1 pom）**：`@ApiModel`→`@Schema(description=...)`、`@ApiModel(value=)`→`@Schema(name=)`、`@ApiModelProperty(value=)`→`@Schema(description=)`。
+- **JJWT 0.13**：`JwtTokenProvider` 重写（`Jwts.parser().verifyWith(key)`、`Jwts.SIG.HS256`、`Keys.hmacShaKeyFor`），不再用 `SignatureAlgorithm`/`javax.xml.bind`。
+- **ES 9**：`EsConfig` 改 `ElasticsearchClient.of(b -> b.host(...).jsonMapper(new Jackson3JsonpMapper()))`（Rest5Client），测试 `EsTest` 同步。
+- **Redisson**：`RedissonAutoConfigurationV2` → `RedissonAutoConfigurationV4`（yml/properties/注解三种写法都查）。
+- **配置**：`application.yml` 的 `spring.redis.*` → `spring.data.redis.*`；Mongo URI 补 `?authSource=admin`。
 
-**build / 插件**
-- 删 compiler 插件的 `<version>3.8.1</version>`（用 Boot BOM 3.15.0）；`<source>/<target>` → `<release>${java.version}</release>`；
-  保留 `annotationProcessorPaths`（mapstruct / lombok / lombok-mapstruct-binding）——**注意复评 P1-1：删 lombok 属性时同步改这里的字面量**。
-- `maven-source-plugin` 保留。
-- 新增 `maven-enforcer-plugin`：`requireJavaVersion [25,)` + `bannedDependencies` 拦 `javax.*`（白名单 `javax.cache:cache-api`）。
-
-## 2. 怎么验（P2 Gate，三条都要贴输出）
+## 3. Gate（§6.6，逐条贴输出）
 
 ```bash
 export JAVA_HOME=$HOME/.sdkman/candidates/java/25.0.4.1-tem
 MVN="$HOME/.sdkman/candidates/maven/3.9.16/bin/mvn -s $HOME/.m2/metanet4j-settings.xml -B"
-cd $TASK/metanet4j-parent
-$MVN -N install                                   # ① 成功，且装出 0.2.0
-$MVN help:effective-pom | grep -A3 maven-compiler-plugin | grep -m1 '<version>'   # ② 3.15.0
-$MVN enforcer:enforce                             # ③ 通过（含 javax.* 拦截规则生效）
+cd $TASK/metanet4j-component
+$MVN clean package -DskipTests          # ① 聚合编译（含 test-compile；测试执行归 P5）
+grep -rn '^import javax\.' --include='*.java' .. | grep -v /target/     # ② 只允许 sdk 的 AesCBCUtil
+grep -rn -E 'org\.springframework\.boot\.autoconfigure\.(jdbc|orm\.jpa|http\.HttpMessageConverters|data\.redis)' --include='*.java' .. | grep -v /target/   # ③ = 0
+grep -rn -E 'com\.fasterxml\.jackson\.(core|databind|datatype|module)' --include='*.java' .. | grep -v /target/  # ④ = 0
+grep -rn -E 'org\.apache\.http\.HttpHost|org\.elasticsearch\.client\.RestClient|RestClientTransport' --include='*.java' .. | grep -v /target/  # ⑤ = 0
+$MVN -pl metanet4j-store-search dependency:tree -Dincludes=co.elastic.clients,org.elasticsearch.client   # ⑥ ES=9.4.5 且无 legacy
+$MVN -pl metanet4j-component-cache dependency:tree -Dincludes=org.redisson                               # ⑦ redisson-spring-data-41 在、无 2x
+grep -rn 'RedissonAutoConfigurationV2' . --include='*.yml' --include='*.yaml' --include='*.properties' --include='*.java' | grep -v /target/   # ⑧ = 0
 ```
 
-## 3. 完成后
+## 4. 完成后
 
-1. `mvn -N install` 产物确认后，parent 仓库单独提交（中文 Conventional Commits）。
-2. 更新 `feature_list.json`（P2→done 附 evidence、`activeItem`→`boot4-p3-base-sdk` 或 null）、`progress.md`、本文件。
-3. 若发现计划与实际不符：**先改计划文档，再改代码**，并在 `progress.md` 记录偏差。
+1. component 仓库单独提交（中文 Conventional Commits）；若 base/sdk 需同步（如 log4j artifactId），各自提交。
+2. 更新 `feature_list.json`（P4→done 附 evidence、`activeItem`→`boot4-tests-jupiter` 或 null）、`progress.md`、本文件。
+3. 计划与实际不符时：**先改计划文档，再改代码**。
 
 ---
 
 ## Next Session（后续顺序，做完一项再申请下一项）
 
-1. ✅ `boot4-p05-prefetch` 依赖预取（0 失败，隔离仓库 352MB/705 jar）
-2. ✅ `boot4-p1-version` 版本号统一 0.2.0（四条 Gate 全绿，四仓库已提交）
-3. **`boot4-p2-parent` 父 POM 改造（in-progress，本次交接）**——**lombok 1.18.20 必须换掉，否则 JDK 25 下编译直接崩**
-4. 之后：P3（base+sdk）→ P4（component，含 ES 9 与 Redisson 4.7.0）→ 测试门禁（复评 P0-A/P0-B）→ P5 验证 → P6 收尾
+1. ✅ `boot4-p05-prefetch`、✅ `boot4-p1-version`、✅ `boot4-p2-parent`、✅ `boot4-p3-base-sdk`
+2. **`boot4-p4-component`（in-progress，本次交接）**——22 pom + 源码迁移 + ES 9 + Redisson 4.7.0
+3. 之后：`boot4-tests-jupiter`（测试门禁）→ `boot4-p5-verify` → `boot4-p6-finish`
 
 ## 开工自检
 
@@ -91,10 +93,9 @@ cd /home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade
 
 | 阻塞/取舍 | 说明 |
 |---|---|
+| sdk 26 个既有错误 | `BapBase` 构造顺序缺陷（父类构造器调被覆写方法）→ NPE；**需用户决策**：修构造顺序 or 修测试夹具（计划 §6.4） |
+| 测试门禁基线 | `boot4-tests-jupiter` 依赖已解除（P2 完成），但需先决定 sdk 构造顺序缺陷的处置 |
 | 逐项批准 | 用户 2026-09-16 指示「继续执行，改代码不必逐项确认」；仅计划未覆盖的架构决策/取舍需停下来问 |
-| P2 与测试门禁互相牵扯 | 测试门禁（`boot4-tests-jupiter`）**依赖 P2**：不改 parent 的 lombok 与测试依赖，测试根本跑不起来 |
-| sdk 那 7 个曾报 NPE 的用例 | 需定性：是迁移引入还是既有问题（迁移前这些用例从未执行，无法直接对比） |
-| Jackson 钉死何时清理 | 影响 base `JacksonUtil` 的迁移顺序（P3），需确认是否一次性做完 |
 | `Archive/prototype/`（207MB 归档） | 按约定未纳入 ownword 版本控制 |
 
 ## Files（关键路径）

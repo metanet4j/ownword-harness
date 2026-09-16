@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "boot4-p2-parent",
+  "activeItem": "boot4-p4-component",
   "note": "只记录阶段状态与依赖；各阶段的目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。activeItem=null 表示等待用户批准，不要自行开工。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
@@ -80,44 +80,59 @@
       "id": "boot4-p2-parent",
       "name": "P2 parent（版本矩阵 / 钉死清理 / 插件 / enforcer）",
       "description": "改动清单与 Gate 见计划 §6.2；注意复评 P1-1 的 annotationProcessorPaths 陷阱。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "boot4-p1-version"
       ],
-      "statusNote": "2026-09-16 开工中。用户当日指示\"继续执行，改代码不必逐项确认\"，P1 完成后直接进入本项。关键内容：Boot 4.1.1 parent、java 25、删除 lombok/slf4j/log4j/hibernate-validator/jackson/lettuce/commons-lang3/jakarta.json 钉死、ES 9.4.5、swagger-annotations-jakarta、jjwt 0.13、compiler 用 Boot BOM 3.15.0 + release、新增 enforcer。",
-      "evidence": []
+      "statusNote": "2026-09-16 完成：父 POM 升 Boot 4.1.1 / Java 25、清理 11 类钉死、compiler 3.15.0、新增 enforcer；三条 Gate 全绿。",
+      "evidence": [
+        "Gate①：mvn -N install → BUILD SUCCESS，安装 metanet4j-parent:0.2.0；enforcer（RequireJavaVersion [25,) + BannedDependencies javax.*）两规则 pass",
+        "Gate②：help:effective-pom → maven-compiler-plugin 3.15.0；annotationProcessorPaths 解析为具体版本（mapstruct-processor 1.5.5.Final / lombok 1.18.46 / lombok-mapstruct-binding 0.2.0）；enforcer 3.6.3；java.version=25、maven.compiler.release=25",
+        "Gate③：mvn enforcer:enforce → BUILD SUCCESS（rules 提到 plugin 级，CLI 与生命周期两条路径都生效）",
+        "负向验证：/tmp/p2-enforcer-neg 中 javax.cache:cache-api:1.1.1 被 bannedDependencies 拦截（BUILD FAILURE），证明规则真的生效；父 POM 白名单放行该坐标",
+        "提交：metanet4j-parent 935b5f5（P2 主体）+ a82ab4e（fix：删除两条不带 version 的 depMgmt 条目，见下方陷阱）",
+        "新发现陷阱（已写进计划 §6.2 与 progress.md）：depMgmt 中不带 <version> 的条目会屏蔽 Boot BOM，子模块报 version is missing；对照实验见 /tmp/p3-mask"
+      ]
     },
     {
       "id": "boot4-p3-base-sdk",
       "name": "P3 base + sdk（javax→jakarta/jspecify、Jackson 3、日志）",
       "description": "改动清单见计划 §6.3（base）与 §6.4（sdk）。",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "boot4-p2-parent"
       ],
-      "statusNote": "改动清单见计划 §6.3/§6.4。",
-      "evidence": []
+      "statusNote": "2026-09-16 完成：base 迁 jakarta.validation + Jackson 3；sdk 迁 JSpecify/Jakarta 并引入 jspecify。编译门禁通过；sdk 26 个既有测试错误已定性（非迁移引入）。",
+      "evidence": [
+        "base：mvn clean install → BUILD SUCCESS（javac release 25；28 主源 + 2 测试源）；Tests run: 2, Failures: 0, Errors: 0（AipTest/BapTest，surefire 自动选 JUnit4Provider）",
+        "sdk：mvn clean install -DskipTests → BUILD SUCCESS（73 主源 + 15 测试源，release 25），安装 metanet4j-sdk:0.2.0",
+        "sdk 测试实测：4 通过（BitailsProviderTest 2、MasterPrivateKeyTest 2）+ 26 error（BitcoinschemaTransactionTest 13、OrdTransactionTest 13）",
+        "26 个 error 定性：既有构造顺序缺陷——BapBase extends MasterKeyBapBase，父类构造器第 35 行调用被 BapBase 覆写的 getRootAddress()，而 rootPrivateKey 要到 super() 返回后才赋值 → NPE；P3 对相关文件只改了 import 行（git diff 可核）。详见计划 §6.4",
+        "机制修正（写进计划 §7.4）：纯 JUnit4 模块无需 vintage 也会真实执行——surefire 3.5.6 检测到 junit:junit 即自动选 surefire-junit4 provider；vintage 只在模块含 Jupiter（走 JUnit Platform）时才必需",
+        "Jackson 3 坐标修正（写进计划 §6.3）：datatype-jdk8 / datatype-jsr310 / module-parameter-names 已并入 databind，独立坐标 Central 404 且被三方 BOM 注释；base 仅保留 tools.jackson.core:jackson-databind",
+        "提交：metanet4j-base 4f5a65a、metanet4j-sdk 097870d"
+      ]
     },
     {
       "id": "boot4-p4-component",
       "name": "P4 component（22 pom + 源码迁移 + ES 9 + Redisson 4.7.0）",
       "description": "改动清单与门禁见计划 §6.5/§6.6。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "boot4-p3-base-sdk"
       ],
-      "statusNote": "含 Boot 4 包迁移、javax 16 文件、Jackson 14 文件、Swagger、JJWT 0.13、generator、EsConfig 迁 Rest5Client。store-search 须保留 Jackson 2 支撑 ES 客户端。",
+      "statusNote": "2026-09-16 开工中：22 个 pom 坐标/源码迁移（Boot 4 包名、javax 16 文件、Jackson 14 文件、Swagger、JJWT 0.13、generator、EsConfig 迁 Rest5Client、Redisson 4.7.0）。依赖基座已就绪：parent/base/sdk 0.2.0 均已安装。",
       "evidence": []
     },
     {
       "id": "boot4-tests-jupiter",
       "name": "测试门禁修复（复评 P0-A/P0-B，全量迁 Jupiter）",
       "description": "目标与验收口径见计划 §7.4，问题定性见复评 P0-A/P0-B。",
-      "status": "blocked",
+      "status": "not-started",
       "dependencies": [
         "boot4-p2-parent"
       ],
-      "statusNote": "方案已定（全新代，38 个文件）。此前擅自开工改过一轮、已全部回退（4 仓库 0 脏），重做前需再次明确批准；重做必须 mvn clean test。",
+      "statusNote": "依赖 P2 已解除（P2/P3 均已完成）。2026-09-16 P3 实测补充：①纯 JUnit4 模块（base/sdk/planaria）无需 vintage 也真实执行（surefire junit4 provider），故\"不迁移就被静默跳过\"的前提不成立；②sdk 有 26 个既有 error（BapBase 构造顺序 NPE，非迁移引入），需先决定\"修构造顺序 or 修测试夹具\"；③迁移方案（全新代，38 文件）此前已回退过一次，重做前建议先确认方案范围。",
       "evidence": [
         "复评 P0-A：JUnit 4 用例真实总量 37，计划只覆盖 21",
         "复评 P0-B：基类 Jupiter @Test 与 JUnit 4 @RunWith 混用，contextLoads 会空转",

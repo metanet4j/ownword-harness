@@ -196,7 +196,7 @@ git -C <每个仓库> status --porcelain      # 不应出现 .mvn/ 或 wrapper �
 | P0.5 依赖预取 | 用升级后的坐标集造探针 pom 预取依赖 | `dependency:go-offline` 成功（本地仓库当前为空壳，300+ jar 从未下载） |
 | P1 版本号 | 25 个 pom 的 84 处版本字面量（82 改、2 不改）+ `metanet4j.version` 属性 + 13 处 `java.version` 覆盖清零 | §6.1 脚本断言全绿 |
 | P2 parent | 版本矩阵、坐标、钉死清理、插件、enforcer | `mvn -N install` 成功；effective compiler 3.15.0；enforcer 通过 |
-| P3 base + sdk | javax→jakarta/jspecify、Jackson 3、日志、jspecify 依赖 | 两仓库 `package` 成功（含 test-compile） |
+| P3 base + sdk | javax→jakarta/jspecify、Jackson 3、日志、jspecify 依赖 | 两仓库 `package` 成功（含 test-compile）；**2026-09-16 修正**：sdk 现存 26 个既有用例错误（见 §6.4），故编译门禁用 `mvn clean package -DskipTests`，测试执行数单独记录 |
 | P4 component | 22 个 pom 坐标/源码/配置迁移、Boot 4 包迁移、ES 9 迁移、Redisson 4.7.0、测试引擎 | 聚合 `package` 成功；javax/旧包名 grep 归零；§6.6 依赖漂移断言通过 |
 | P5 验证 | 编译门禁 + B 档（Mongo 8.0/ES 9.4.5/Kafka 4.2.1/Redis 7.4/MySQL 8.4）+ 测试实际执行数 | 用例通过 + 冒烟通过（§7）；逐模块执行数断言 |
 | P6 收尾 | 4 仓库独立提交、文档同步 | 输出提交 ID 与编译命令 |
@@ -256,12 +256,12 @@ find . -name pom.xml -not -path '*/target/*' | wc -l                            
 |---|---|---|
 | `<lombok.version>1.18.20</lombok.version>` | **删除**（跟随 Boot BOM 1.18.46） | 1.18.20 在 JDK 25 编译必崩（实测） |
 | `<slf4j.version>1.7.32</slf4j.version>` + `slf4j-api`/`jul-to-slf4j`/`slf4j-jdk14` depMgmt | **删除**（跟随 Boot BOM 2.0.18）；移除 `slf4j-jdk14` | `log4j-slf4j2-impl` 要求 SLF4J 2.x；1.7.32 会覆盖 BOM |
-| `<log4j.version>2.20.0</log4j.version>` + log4j-api/core/slf4j-impl depMgmt | 删除版本钉死或改 2.25.5；`log4j-slf4j-impl` → **`log4j-slf4j2-impl`** | 随 Boot BOM；base pom 同步换 artifactId |
+| `<log4j.version>2.20.0</log4j.version>` + log4j-api/core/slf4j-impl depMgmt | **三条 depMgmt 条目整条删除**（版本随 Boot BOM 2.25.5）；base pom 的 `log4j-slf4j-impl` → **`log4j-slf4j2-impl`** | 随 Boot BOM；base pom 同步换 artifactId。**注意**：保留不带 `<version>` 的 depMgmt 条目会屏蔽 BOM（见下方陷阱） |
 | `<hibernate-validator.version>6.1.5.Final</hibernate-validator.version>` + depMgmt | **删除**（跟随 Boot BOM 9.1.3.Final） | 6.1.5 提供的是 `javax.validation.*`，迁 jakarta 后编译失败 |
 | `<jackson.version>2.13.2 </jackson.version>` + `jackson-databind/core/annotations/jdk8/jsr310/parameter-names` depMgmt | **删除 2.x core/databind/datatype/module 钉死**；注解 2.21.5 由 `jackson-2-bom` 管理；`tools.jackson.*` 由 `jackson-bom 3.1.5` 管理 | 代码迁 tools.jackson 后，旧钉死会覆盖注解版本并留下双版本 |
 | `<junit.version>4.13</junit.version>` | 改 **4.13.2**（junit-vintage-engine 需要） | Boot BOM `junit 4.13.2` |
 | `<lettuce.version>5.3.2.RELEASE</lettuce.version>` | **删除**（跟随 Boot BOM 7.5.2.RELEASE） | 仅编译 Redis 模块；不删会与 Spring Data Redis 4 冲突 |
-| `<mysql-connector-java.version>8.0.25</mysql-connector-java.version>` + `mysql:mysql-connector-java` depMgmt | **删除属性**；depMgmt 坐标改 `com.mysql:mysql-connector-j`（跟随 Boot BOM 9.7.0） | 旧坐标在新版已无版本管理 |
+| `<mysql-connector-java.version>8.0.25</mysql-connector-java.version>` + `mysql:mysql-connector-java` depMgmt | **删除属性，depMgmt 条目整条删除**（`com.mysql:mysql-connector-j` 由 Boot BOM 管 9.7.0，子模块不写版本） | 旧坐标在新版已无版本管理；留空版本条目会屏蔽 BOM（见下方陷阱） |
 | `<druid.version>1.2.1</druid.version>` + `druid-spring-boot-starter` depMgmt | 改 **1.2.28**；artifactId → `druid-spring-boot-4-starter` | 新 starter 是 Boot 4 专用坐标 |
 | `<mybatis-plus>3.4.2</mybatis-plus>`（重复出现两次） | 改 **3.5.17**；depMgmt artifactId → `mybatis-plus-spring-boot4-starter` | 新坐标不被 Boot BOM 管理，必须显式给版本 |
 | `<mybatis-plus-generator>3.4.1</mybatis-plus-generator>` | 改 **3.5.17** | 与 generator 模块一致 |
@@ -275,6 +275,15 @@ find . -name pom.xml -not -path '*/target/*' | wc -l                            
 | `<mapstruct.version>1.5.5.Final</mapstruct.version>` | 保留 | JDK 25 探针 BUILD SUCCESS |
 | `io.springfox:springfox-swagger2` depMgmt | 删除；新增 `io.swagger.core.v3:swagger-annotations-jakarta:2.2.55` | 代码只用注解 |
 | `io.jsonwebtoken:jjwt` depMgmt | 改为 `jjwt-api` / `jjwt-impl` / `jjwt-jackson` 0.13.0 | 0.9.1 依赖 javax.xml.bind |
+
+**依赖管理陷阱（2026-09-16 实测，P3 构建暴露）**
+
+- `dependencyManagement` 中**不带 `<version>` 的条目会屏蔽 Boot BOM 的版本管理**（就近条目优先），
+  导致子模块声明该依赖时报 `'dependencies.dependency.version' ... is missing`。
+- 对照实验：`parent=spring-boot-starter-parent:4.1.1` 时 `log4j-slf4j2-impl` 不写版本可解析；
+  换成 `metanet4j-parent:0.2.0`（其 depMgmt 有一条不带 version 的同名条目）即报 version missing。
+- 规则：**"跟随 BOM"的坐标必须整条删除 depMgmt 条目**，不能保留空版本条目；
+  确需保留条目（如带 exclusion 的 `spring-boot-starter-logging`）时，必须显式写版本。
 
 **build / 插件**
 
@@ -290,11 +299,13 @@ find . -name pom.xml -not -path '*/target/*' | wc -l                            
 ### 6.3 P3 metanet4j-base
 
 - `pom.xml` 的 `log4j-slf4j-impl` → `log4j-slf4j2-impl`（scope runtime）。
-- pom 的 Jackson 依赖切到 tools.jackson（版本由 Boot BOM 管理）：
+- pom 的 Jackson 依赖切到 tools.jackson（**只保留一条**，版本由 Boot BOM 管理）：
   - `tools.jackson.core:jackson-databind`
-  - `tools.jackson.datatype:jackson-datatype-jdk8`
-  - `tools.jackson.datatype:jackson-datatype-jsr310`
-  - `tools.jackson.module:jackson-module-parameter-names`
+- **修正（2026-09-16 实测）**：Jackson 3 已把 jdk8 / jsr310 / parameter-names 三个模块**并入 databind**——
+  `tools.jackson.datatype:jackson-datatype-jsr310`、`...-jdk8`、`tools.jackson.module:jackson-module-parameter-names`
+  在 Central 上 404，且在三方 BOM `tools.jackson:jackson-bom:3.1.5` 中被 XML 注释掉（未管理）；
+  `jackson-databind-3.1.5.jar` 内置 `tools/jackson/databind/ext/javatime/**`。
+  故 base（以及 P4 的 component-file）**不要**再引入这三个坐标，否则 `version is missing`。
 - `model/AIP.java`、`model/BPP.java`：`javax.validation.constraints.*` → `jakarta.validation.constraints.*`。
 - `util/JacksonUtil.java` 重写：
   - 导入改 `tools.jackson.databind.json.JsonMapper`、`tools.jackson.core.type.TypeReference`、`tools.jackson.databind.JavaType`、`tools.jackson.core.JacksonException`；注解 `JsonInclude` 保持 `com.fasterxml.jackson.annotation`。
@@ -314,6 +325,31 @@ find . -name pom.xml -not -path '*/target/*' | wc -l                            
 - 新增 `org.jspecify:jspecify` 依赖（parent depMgmt 不写版本，由 Boot BOM 1.0.1 管理；sdk pom 加 compile 依赖）。
 - `src/test/java/.../TestData.java` 的 `com.fasterxml.jackson.core.type.TypeReference` → `tools.jackson.core.type.TypeReference`（通过 base 传递 tools.jackson）。
 - 版本号保持 0.2.0；`<parent><version>` 改 0.2.0。
+
+**既有缺陷（2026-09-16 P3 实测发现，不属本次迁移）**
+
+- 现象：`cd metanet4j-sdk && mvn clean install` → `BitcoinschemaTransactionTest` 13 error + `OrdTransactionTest` 13 error，
+  全部同一个 NPE：
+  ```
+  java.lang.NullPointerException: Cannot invoke "io.bitcoinsv.bitcoinjsv.crypto.DeterministicKey.getPrivKey()"
+    because "this.rootPrivateKey" is null
+      at BapBase.getRootPrivateKey(BapBase.java:319)
+      at BapBase.getRootAddress(BapBase.java:351)
+      at MasterKeyBapBase.<init>(MasterKeyBapBase.java:35)
+      at BapBase.<init>(BapBase.java:49)
+      ...
+      at TransactionContextTest.before(TransactionContextTest.java:45)
+  ```
+  报告：`metanet4j-sdk/target/surefire-reports/com.metanet4j.sdk.transcation.{BitcoinschemaTransactionTest,OrdTransactionTest}.txt`
+- 根因（代码级）：`BapBase extends MasterKeyBapBase`；父类构造器第 35 行调用 `getRootAddress()`，
+  该方法被 `BapBase` 覆写（351 行）并读取 `BapBase.rootPrivateKey`，而该字段要到 `super()` 返回后才在 51 行赋值
+  ——典型的"构造器调用可覆写方法"缺陷。
+- 影响面：所有走 `BapBase.fromOnlyMasterPrivateKey(...)` / `fromRootChildNumberList(...)` 的构造路径都会 NPE（不只测试）。
+- 处置：**P3 不修**（P3 范围是依赖/包名迁移，改构造顺序属行为变更），归入 `boot4-tests-jupiter` 或单独立项，需用户决策。
+- 与迁移无关的证据：P3 对 `BapBase.java`、`MasterKeyBapBase.java`、`TransactionContextTest.java` 的改动只有 import 行（javax→jspecify/jakarta），
+  `git -C metanet4j-sdk diff` 可核。
+
+---
 
 ### 6.5 P4 metanet4j-component（21 子模块 + 根 pom = 22 个 pom）
 
@@ -378,7 +414,7 @@ ElasticsearchClient client = ElasticsearchClient.of(b -> b
 |---|---|
 | 注解不变，仅确认 | `component-file/.../FileClientConfig`、`S3FileClientConfig`（`@JsonTypeInfo`/`@JsonIgnore`）；`api-common/base/R`、`component-model/.../BaseResult`（`@JsonFormat`）；`component-model/.../domain/bap/Identity`；`sdk/.../Txo`（`@JsonProperty`） |
 | 迁 `tools.jackson.*` 导入 | `base/util/JacksonUtil`；`component-common/utils/JacksonBeanUtils`；`component-bap/service/BapSearchService`；`store-search/repository/BapIdentityRepository`（未使用 import 可直接删）；测试 `BapBaseTest`、`BitcoinschemaTransactionTest`、`EsTest`、`sdk/src/test/TestData` |
-| pom 坐标 | `base`、`component-file` 的 `com.fasterxml.jackson.core/datatype/module` → `tools.jackson.*`（版本由 Boot BOM 管理）；**`store-search` 不删 Jackson 2**——ES 9.4.5 客户端 pom 同时以 runtime 引入 Jackson 2.22.0 与 Jackson 3.1.0，其 `JacksonJsonpMapper` 仍引用 Jackson 2，删了会在运行期挂 |
+| pom 坐标 | `base`、`component-file` 的 Jackson 依赖只保留 `tools.jackson.core:jackson-databind`（版本由 Boot BOM 管理；datatype/module 三坐标在 Jackson 3 不存在，见 §6.3 修正）；**`store-search` 不删 Jackson 2**——ES 9.4.5 客户端 pom 同时以 runtime 引入 Jackson 2.22.0 与 Jackson 3.1.0，其 `JacksonJsonpMapper` 仍引用 Jackson 2，删了会在运行期挂 |
 
 **Swagger 注解（3 个文件 + 1 个 pom）**
 
@@ -533,7 +569,15 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 
 ### 7.4 测试引擎与执行门禁
 
-- 引擎：JUnit Platform（Jupiter 6.0.3 + vintage 6.0.3）；JUnit 4.13.2。**引擎必须装到每个含 JUnit 4 用例的模块**（base、sdk、component-test、connect-planaria），不能只装 component-test（见复评 P0-A）。
+- 引擎：JUnit Platform（Jupiter 6.0.3 + vintage 6.0.3）；JUnit 4.13.2。
+- **2026-09-16 实测修正**（P3 构建）：纯 JUnit 4 模块（base、sdk）**不需要 vintage 也会真实执行**——
+  surefire 3.5.6 只要在测试类路径上发现 `junit:junit` 4.x 就自动选 `surefire-junit4` provider
+  （日志：`Using auto detected provider org.apache.maven.surefire.junit4.JUnit4Provider`）；
+  实测 base 2/2 通过、sdk 4 通过（另有 26 个既有错误，见 §6.4）。
+  因此复评 P0-A"这些模块的 JUnit 4 用例会被静默跳过"的前提**不成立**。
+  但 **vintage 仍是必需的**：只要模块里同时存在 Jupiter 用例（如 `component-test`、`component-file`），
+  该模块就走 JUnit Platform，其中的 JUnit 4 用例必须有 vintage 才能被平台执行（否则同样静默丢失）。
+  D17 的"引擎装到每个含 JUnit 4 用例的模块"作为统一口径保留（成本低、避免混用陷阱）。
 - 验收：`mvn -pl metanet4j-component-test -am test` 后，**逐模块**断言 surefire 实际执行数：base > 0、sdk > 0、component-test > 0、connect-planaria > 0；component-test 内至少覆盖一个 Mongo 8.0 用例、一个 ES 9.4.5 用例、一个 Kafka 4.2.1 用例、一个纯逻辑用例；Redis/MySQL 各一个独立小用例。
 - 基类用例必须真的被执行：断言 surefire 报告里出现 `contextLoads`（`grep -r contextLoads */target/surefire-reports/*.txt`），否则"上下文启动"冒烟等于没跑（见复评 P0-B）。
 - 若选择把测试全迁 Jupiter（替代 vintage 方案），需单独评估工作量后再改本计划；默认按 D17 执行。
