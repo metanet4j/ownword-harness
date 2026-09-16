@@ -1,182 +1,133 @@
 {
   "schemaVersion": 1,
   "initializedAt": "2026-09-16",
-  "allowedStatuses": ["not-started", "in-progress", "blocked", "done"],
+  "allowedStatuses": [
+    "not-started",
+    "in-progress",
+    "blocked",
+    "done"
+  ],
   "activeItem": null,
-  "note": "任务级 harness。activeItem 为空 = 等待用户批准下一阶段（P2）。schema 与 _task/system-design 保持一致的字段习惯。",
+  "note": "只记录阶段状态与依赖；各阶段的目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。activeItem=null 表示等待用户批准，不要自行开工。",
+  "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
       "id": "boot4-p0-env",
-      "name": "P0 环境：工具链锁定 + 共享中间件就绪",
-      "description": "注册 JDK 25（sdkman 25.0.4.1-tem）、Maven 3.9.16，固定独立本地仓库 ~/.m2/metanet4j 与 settings.xml；把五个中间件抽为跨任务共享设施 ownword/infra（compose 项目 ownword-infra），镜像钉补丁号、挂命名数据卷、restart unless-stopped；完成五服务握手验证。全程不修改全局 java/maven 默认版本。",
-      "dependencies": [],
+      "name": "P0 环境（工具链 + 共享中间件）",
+      "description": "目标与验收见计划 §4/§11（环境固化与握手验证）。",
       "status": "done",
-      "statusNote": "2026-09-16 完成。全局 java current 仍指向 8.0.181-local、maven current 仍指向 3.9.9，未被改动。",
-      "output": "ownword/infra/（docker-compose.yml、README-ownword-infra-20260915-1720.md、up.sh/down.sh/status.sh）",
-      "doneCriteria": [
-        "JDK 25 与 Maven 3.9.16 以绝对路径可用，构建模板带显式 JAVA_HOME",
-        "~/.m2/metanet4j-settings.xml 固定 localRepository=~/.m2/metanet4j，与默认仓库隔离",
-        "五个中间件容器全部 healthy：infra-mongo/es/kafka/redis/mysql",
-        "逐服务握手 PASS：MongoDB 8.0.32 读写、ES 9.4.5 建索引与查询、Kafka 4.2.1 建 topic 与收发、Redis 7.4.11 SET/GET、MySQL 8.4.11 建表与查询",
-        "宿主机 27017/9200/9092/6379/3306 均可连接",
-        "全局 java/maven 默认版本未被修改"
-      ],
+      "dependencies": [],
+      "statusNote": "已完成；全局 java/maven 默认版本未被改动。",
       "evidence": [
-        "ownword 仓库提交 8770634（feat(infra): 新增 ownword 跨任务共享中间件编排）",
-        "升级计划 §11「第三轮：镜像 tag 可拉取性验证」「握手验证（第五轮）—— 全部 PASS」",
-        "实测版本：MongoDB 8.0.32 / ES 9.4.5(Lucene 10.4.0) / Kafka 4.2.1 KRaft / Redis 7.4.11 / MySQL 8.4.11"
+        "ownword 提交 8770634（ownword/infra 共享中间件）",
+        "五服务握手 PASS：MongoDB 8.0.32 / ES 9.4.5 / Kafka 4.2.1 KRaft / Redis 7.4.11 / MySQL 8.4.11",
+        "计划文档 §11 第三轮与第五轮"
       ]
     },
     {
       "id": "boot4-p0-cleanup",
-      "name": "基线清理：移除过期 Maven Wrapper",
-      "description": "删除 metanet4j-component 下 5 个模块内被 git 跟踪的过期 .mvn/wrapper（distributionUrl 锁 Maven 3.8.2/3.8.3），避免绕过 JDK 25 + Maven 3.9.16 的版本隔离；仓库内零引用，各模块 .gitignore 本就忽略 .mvn/**。",
-      "dependencies": ["boot4-p0-env"],
+      "name": "P0 基线清理（移除过期 Maven Wrapper）",
+      "description": "目标见计划 §4 的 Maven Wrapper 说明；验收：.mvn 无残留、零引用。",
       "status": "done",
-      "statusNote": "2026-09-15 完成，是本次任务的第一个代码改动。",
-      "output": "metanet4j-component 仓库提交 d677634",
-      "doneCriteria": [
-        "5 个模块的 .mvn/wrapper 全部删除（15 个文件）",
-        "find . -name .mvn 无残留；git ls-files 中 .mvn 计数为 0",
-        "仓库内无任何脚本/CI/pom 引用 mvnw 或 maven-wrapper",
-        "不新增 mvnw 脚本"
+      "dependencies": [
+        "boot4-p0-env"
       ],
+      "statusNote": "已完成；15 个文件删除，仓库内零引用。",
       "evidence": [
-        "提交 d677634（build: 移除 5 个模块中过期的 Maven Wrapper（锁定 3.8.2/3.8.3））",
-        "升级计划 §11「首个代码改动（第四轮）」与 §5 P0 Gate"
+        "metanet4j-component 提交 d677634"
       ]
     },
     {
       "id": "boot4-p05-prefetch",
-      "name": "P0.5 依赖预取：用新坐标集预下载依赖",
-      "description": "本地仓库 ~/.m2/metanet4j 目前仅 190MB（只有探针依赖），项目依赖树从未下载过。用升级后的坐标集造一个探针 pom 预取依赖，把下载风险与坐标问题在改代码之前暴露。",
-      "dependencies": ["boot4-p0-env"],
+      "name": "P0.5 依赖预取",
+      "description": "目标见计划 §5 的 P0.5；验收：新坐标集全部可解析。",
       "status": "not-started",
-      "statusNote": "待用户批准后执行。",
-      "output": "探针工程 + dependency:go-offline 日志",
-      "doneCriteria": [
-        "探针 pom 覆盖升级后的全部新坐标（Boot 4.1.1、Cloud 2025.1.3、ES 9.4.5、Kafka 4.2.1、Redisson 4.7.0、MyBatis-Plus 3.5.17、Druid 1.2.28、MongoDB 5.8.1、Connector/J 9.7.0 等）",
-        "dependency:go-offline 或等价命令成功，无坐标解析失败",
-        "日志落盘可复现"
+      "dependencies": [
+        "boot4-p0-env"
       ],
+      "statusNote": "本地仓库 ~/.m2/metanet4j 现约 260MB，项目依赖树从未完整下载。",
       "evidence": []
     },
     {
       "id": "boot4-p1-version",
-      "name": "P1 版本号：25 个 pom 统一到 0.2.0",
-      "description": "84 处版本字面量（82×0.1.0 改 0.2.0，2×0.2.0 不动）+ metanet4j-parent 的 <metanet4j.version> 属性 + 13 处 <java.version>11</java.version> 覆盖清零。此阶段只改版本号，不碰依赖与源码。",
-      "dependencies": ["boot4-p05-prefetch"],
+      "name": "P1 版本号统一 0.2.0",
+      "description": "目标与门禁见计划 §6.1（84 处版本字面量 + metanet4j.version 属性 + 13 处 java.version 清零）。",
       "status": "not-started",
-      "output": "25 个 pom.xml 的版本号改动（4 仓库各自提交）",
-      "doneCriteria": [
-        "grep -rn '<version>0\\.1\\.0</version>' --include=pom.xml . | grep -v /target/ | wc -l 结果为 0",
-        "grep -rn '<metanet4j.version>0\\.1\\.0</metanet4j.version>' --include=pom.xml . 结果为 0",
-        "grep -rln '<java.version>11</java.version>' --include=pom.xml . 计数为 0",
-        "find . -name pom.xml -not -path '*/target/*' | wc -l 仍为 25",
-        "sdk 保持 0.2.0（同名重发）"
+      "dependencies": [
+        "boot4-p05-prefetch"
       ],
+      "statusNote": "纯机械改动：84 处版本字面量 + metanet4j.version 属性 + 13 处 java.version=11 清零；门禁见计划 §6.1。",
       "evidence": []
     },
     {
       "id": "boot4-p2-parent",
-      "name": "P2 parent：版本矩阵、钉死清理、插件与 enforcer",
-      "description": "metanet4j-parent 升级到 Boot 4.1.1 + Cloud 2025.1.3 + Java 25；删除/上调各处显式钉死（lombok、slf4j、log4j、hibernate-validator、jackson、junit、lettuce、mysql、commons-lang3、jakarta.json、elasticsearch.client）；坐标替换（MyBatis-Plus→mybatis-plus-spring-boot4-starter、Druid→druid-spring-boot-4-starter、mysql-connector-j、jjwt 0.13.0、springfox→swagger-annotations-jakarta）；删除 maven-compiler-plugin 显式 3.8.1 与 source/target 改 release；新增 enforcer。",
-      "dependencies": ["boot4-p1-version"],
+      "name": "P2 parent（版本矩阵 / 钉死清理 / 插件 / enforcer）",
+      "description": "改动清单与 Gate 见计划 §6.2；注意复评 P1-1 的 annotationProcessorPaths 陷阱。",
       "status": "blocked",
-      "statusNote": "等待用户批准动手。方案（含全新代测试迁移）已确认，但用户此前明确：选方案不等于批准开工；且实测显示不改 lombok 钉死连编译都过不去，故 P2 必须最先落地。",
-      "output": "metanet4j-parent/pom.xml",
-      "doneCriteria": [
-        "mvn -N install 成功（JDK 25）",
-        "mvn help:effective-pom 中 maven-compiler-plugin 为 3.15.0，且 annotationProcessorPaths 三个处理器版本可解析（lombok 版本须为字面量或属性已同步，不能引用被删除的属性）",
-        "mvn enforcer:enforce 通过（requireJavaVersion [25,)，bannedDependencies 拦 javax.*，白名单 javax.cache:cache-api）",
-        "Jackson 钉死删除后注解仍由 jackson-2-bom 管理（2.21.5），tools.jackson 由 jackson-bom 3.1.5 管理",
-        "hibernate-validator 跟随 Boot BOM 9.1.3.Final（提供 jakarta.validation.*）"
+      "dependencies": [
+        "boot4-p1-version"
       ],
-      "evidence": [
-        "复评报告 P1-1：父 POM annotationProcessorPaths 引用 ${lombok.version}，删属性必须同步改字面量，否则编译期表达式解析失败"
-      ]
+      "statusNote": "等用户批准动手。不改 lombok 1.18.20 则 JDK 25 下编译直接崩，故本阶段必须先落地。注意复评 P1-1：删除 lombok 属性时必须同步改 annotationProcessorPaths 的字面量。",
+      "evidence": []
     },
     {
       "id": "boot4-p3-base-sdk",
-      "name": "P3 base + sdk：javax→jakarta/jspecify、Jackson 3、日志",
-      "description": "base：log4j-slf4j-impl→log4j-slf4j2-impl；Jackson 依赖切 tools.jackson；AIP/BPP 的 javax.validation→jakarta.validation；JacksonUtil 重写（JsonMapper.builder、JacksonException、去掉 IOException catch）。sdk：12 处 javax.annotation→org.jspecify（11×Nullable + 1×Nonnull）、MasterKeyBapBase 的 NotNull→jakarta、AesCBCUtil 的 javax.crypto 不动、新增 org.jspecify:jspecify 依赖、TestData 的 TypeReference 迁移。",
-      "dependencies": ["boot4-p2-parent"],
+      "name": "P3 base + sdk（javax→jakarta/jspecify、Jackson 3、日志）",
+      "description": "改动清单见计划 §6.3（base）与 §6.4（sdk）。",
       "status": "not-started",
-      "output": "base 与 sdk 两仓库的 pom + 源码",
-      "doneCriteria": [
-        "两仓库 package 成功（含 test-compile）",
-        "sdk 的 javax.annotation 12 处全部迁移，javax.crypto 保留",
-        "base 的 JacksonUtil 不再出现 catch (IOException) 与 throws IOException",
-        "grep 门禁：^import javax\\. 仅剩 sdk/crypto/AesCBCUtil.java"
+      "dependencies": [
+        "boot4-p2-parent"
       ],
+      "statusNote": "改动清单见计划 §6.3/§6.4。",
       "evidence": []
     },
     {
       "id": "boot4-p4-component",
-      "name": "P4 component：22 个 pom 与源码迁移 + ES 9 迁移 + Redisson 4.7.0",
-      "description": "component 聚合 22 个 pom 的坐标与测试依赖迁移；Boot 4 autoconfigure 包迁移（3 个文件）；javax→jakarta（16 个文件）；Jackson 3（14 个文件，store-search 保留 Jackson 2 以支撑 ES 客户端）；Swagger 注解替换；JJWT 0.13 API 重写；generator 改 FastAutoGenerator；Redisson 3.17.0→4.7.0 并清理 RedissonAutoConfigurationV2；EsConfig 改 ElasticsearchClient.of + Jackson3JsonpMapper（Rest5Client）。",
-      "dependencies": ["boot4-p3-base-sdk"],
+      "name": "P4 component（22 pom + 源码迁移 + ES 9 + Redisson 4.7.0）",
+      "description": "改动清单与门禁见计划 §6.5/§6.6。",
       "status": "not-started",
-      "output": "metanet4j-component 聚合工程",
-      "doneCriteria": [
-        "聚合 package 成功；grep 门禁全绿（javax、Boot 4 旧包名、Jackson 旧 core/databind 导入、RedissonAutoConfigurationV2、HttpHost/RestClientTransport）",
-        "依赖漂移断言通过：elasticsearch-java=9.4.5 且无 legacy elasticsearch-rest-client；redisson-spring-data-41 存在；kafka-clients=4.2.1；mongodb-driver-sync=5.8.1；mysql-connector-j=9.7.0",
-        "component-model 的 springfox 依赖已换 swagger-annotations-jakarta，@ApiModel/@ApiModelProperty 已换 @Schema",
-        "generator 模块改用 FastAutoGenerator 且 velocity-engine-core 2.4.1"
+      "dependencies": [
+        "boot4-p3-base-sdk"
       ],
-      "evidence": [
-        "复评报告 P1-4：component-test 的 javax 文件清单须含 S3FileClientTest；component 的 31 个 javax 文件中 store-mongo/BsocialBase 不可漏"
-      ]
+      "statusNote": "含 Boot 4 包迁移、javax 16 文件、Jackson 14 文件、Swagger、JJWT 0.13、generator、EsConfig 迁 Rest5Client。store-search 须保留 Jackson 2 支撑 ES 客户端。",
+      "evidence": []
     },
     {
       "id": "boot4-tests-jupiter",
-      "name": "测试门禁修复（复评 P0-A/P0-B）：全量迁 JUnit 5 Jupiter",
-      "description": "把 38 个 JUnit 4 测试文件全量迁到 Jupiter：base 2 + sdk 14 + component-test 21 + connect-planaria 1；base/sdk/connect-planaria 补 spring-boot-starter-test 测试依赖（此前 sdk 与 connect-planaria 完全没有测试依赖）；component-test 基类去 @RunWith 与 JUnit 4 import，12 个继承类通过继承 @SpringBootTest 获得上下文（实测 12 个类全部依赖 @Autowired，不需要各自重复标注）；sdk 2 处与 component-test 1 处 @Before 改 @BeforeEach 并逐个确认初始化语义。",
-      "dependencies": ["boot4-p2-parent"],
+      "name": "测试门禁修复（复评 P0-A/P0-B，全量迁 Jupiter）",
+      "description": "目标与验收口径见计划 §7.4，问题定性见复评 P0-A/P0-B。",
       "status": "blocked",
-      "statusNote": "方案已确认（全新代），改动已做过一轮但因未获批准而全部回退（4 仓库回到 0 脏）。等待用户明确批准后重做；重做时必须 mvn clean test。",
-      "output": "38 个测试文件 + 4 个 pom 的测试依赖",
-      "doneCriteria": [
-        "逐模块 surefire 执行数均 > 0：base / sdk / component-test / connect-planaria，不接受总数口径",
-        "grep -r contextLoads */target/surefire-reports/*.txt 命中（证明基类上下文用例真的执行）",
-        "全仓 grep '^import org.junit.(Test|Assert|Before|After)' 归零",
-        "无 JUnit 4 独有特性残留（@Rule/@ClassRule/ExpectedException/Assume/assertThat 实测本来就为 0）",
-        "sdk 的 7 个曾报 NPE 的用例逐个定性：要么修好并给出通过证据，要么记录为既有问题并说明与迁移无关"
+      "dependencies": [
+        "boot4-p2-parent"
       ],
+      "statusNote": "方案已定（全新代，38 个文件）。此前擅自开工改过一轮、已全部回退（4 仓库 0 脏），重做前需再次明确批准；重做必须 mvn clean test。",
       "evidence": [
-        "复评报告 P0-A：JUnit 4 用例真实总量 37（component-test 21、sdk 13、base 2、connect-planaria 1），计划只覆盖 21 个",
-        "复评报告 P0-B：基类 Jupiter @Test 与 JUnit 4 @RunWith 混用，contextLoads 会空转",
-        "2026-09-15 实测（已回退）：base 迁移后 Tests run: 2, Failures: 0；sdk 出现 7 个 error，且报错引用源码中不存在的字段，判定为陈旧 target 字节码污染，结论不可用"
+        "复评 P0-A：JUnit 4 用例真实总量 37，计划只覆盖 21",
+        "复评 P0-B：基类 Jupiter @Test 与 JUnit 4 @RunWith 混用，contextLoads 会空转",
+        "2026-09-15 实测（已回退）：base 迁移后 Tests run: 2 通过；sdk 出现 7 个 error 且报错引用源码中不存在的字段，判定为陈旧 target 字节码污染，结论不可用"
       ]
     },
     {
       "id": "boot4-p5-verify",
-      "name": "P5 验证：编译门禁 + B 档运行 + 分模块测试执行数",
-      "description": "四仓库编译门禁；用共享中间件做 B 档运行验证（Mongo 8.0 / ES 9.4.5 / Kafka 4.2.1 / Redis 7.4 / MySQL 8.4）；逐模块给出 surefire 执行数与 contextLoads 出现性；记录 Mongo authSource、MySQL allowPublicKeyRetrieval 等配置结论。",
-      "dependencies": ["boot4-p4-component", "boot4-tests-jupiter"],
+      "name": "P5 验证（编译门禁 + B 档 + 分模块测试执行数）",
+      "description": "验收方案见计划 §7（编译门禁、冲突体检、B 档运行、测试执行数）。",
       "status": "not-started",
-      "output": "验证报告（逐模块执行数 + 冒烟证据）",
-      "doneCriteria": [
-        "四仓库 clean package 成功（含 test-compile）",
-        "逐模块测试执行数与验收清单匹配",
-        "B 档冒烟：上下文启动、JWT、Jackson 3 序列化、ES 9 查询、Kafka 4.2.1 发送、Redis 装配、MySQL 往返",
-        "依赖树断言与冲突体检（§5 门禁）全部通过"
+      "dependencies": [
+        "boot4-p4-component",
+        "boot4-tests-jupiter"
       ],
+      "statusNote": "验收口径：按模块给执行数 + contextLoads 出现性 + 依赖漂移断言，见计划 §7。",
       "evidence": []
     },
     {
       "id": "boot4-p6-finish",
-      "name": "P6 收尾：四仓库独立提交与文档同步",
-      "description": "4 个仓库各自提交（Conventional Commits，中文）；同步升级计划与评审结论；输出受影响仓库、每仓库编译命令、每仓库提交 ID。",
-      "dependencies": ["boot4-p5-verify"],
+      "name": "P6 收尾（四仓库提交 + 文档同步）",
+      "description": "收尾要求见计划 §8（Git 工作流）与 §5 的 P6。",
       "status": "not-started",
-      "output": "提交清单与最终文档",
-      "doneCriteria": [
-        "4 仓库各自有独立提交，commit 信息说明改了什么",
-        "升级计划中的状态与实测一致",
-        "工作区干净（子仓库 0 脏）",
-        "输出每仓库编译命令与提交 ID"
+      "dependencies": [
+        "boot4-p5-verify"
       ],
+      "statusNote": "输出受影响仓库、每仓库编译命令与提交 ID。",
       "evidence": []
     }
   ]
