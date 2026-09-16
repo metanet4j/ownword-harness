@@ -126,7 +126,7 @@
 | metanet4j-sdk | 23 | 23 通过（另 29 个 external 用例被排除） |
 | metanet4j-connect-planaria | 1 | 1 通过 |
 | metanet4j-component-file | 8 | 8 通过 |
-| metanet4j-component-test | 125 | 尚有失败，已归类（见下） |
+| metanet4j-component-test | 109（排除 external 后） | 10 个类全绿；9 个类待收敛（见下） |
 
 **component-test 剩余失败归类**
 1. 配置绑定类：`MetaIdConvertorTest`/`BapConvertorTest` → `PlanariaProperties.getBitbus()` 为 null（测试未加载 `application-slave.yml` 的 `bitbus.*`）
@@ -135,4 +135,22 @@
 4. `BlockTaskServiceTest` 的 `contextLoads` 上下文加载失败（需取根因）
 5. `BapRawStrResolverTest`/`BsocialRawResolverTest` 若干 `IllegalArgumentException`（待定性）
 
-**下一步**：继续按上述分类收敛；外部依赖类按 `@Tag("external")` 处理，配置类先补 profile/属性绑定，ES/DB 类查索引与 schema。
+**已收敛（2026-09-16 第二轮）**
+- planaria 配置绑定：`application.yml` 补 `planaria.bitbus.txoUrl/bobUrl`、`planaria.bitfs.url`
+  （`PlanariaProperties` 前缀 `planaria` 且为嵌套结构；原 `application-slave.yml` 写的是顶层 `bitbus/bitfs` 且 profile 未激活）
+- `EsTest` 建索引幂等化（先 delete 再 create）→ 错误 4 → 2
+- 新增 `@Tag("external")`：`BlockTaskServiceTest`（需 store-sql/MySQL，测试应用按设计排除扫描）、
+  `BsocailConvertorTest`、`BapConvertorTest`（Bitfs/Bitbus 公网）
+- 全绿 10 类：`Metanet4jComponentTestApplicationTests`(contextLoads)、`MessageProducerTest`(Kafka)、
+  `BapSearchServiceTest`(ES)、`DataTest`/`BsocialMongodbTest`(Mongo)、`BapBaseTest`/`BaseDataTest`/`transaction.CommonTest`、
+  `common.CommonTest`/`StateCalculatorTest`
+
+**仍待收敛（9 类 / 43 error）**
+1. `BapMongodbTest`(14) / `BsocialReplyMongodbTest`(9)：Mongo 写入/查询相关，需看具体异常（未取根因）
+2. `TxUtxoServiceTest`(2)、`ComplteTxFactoryTest`(2)、`MetaIdConvertorTest`(1)：未取根因
+3. `EsTest`(2)：剩余 2 个（原 4 个）
+4. `BapRawStrResolverTest`(8) / `BsocialRawResolverTest`(2)：本地数据校验失败（`数据不符合bap格式` / `IllegalArgumentException`），
+   疑 fixture 陈旧（2021–2023 年原始串）或转换契约变化，需定性
+5. `BapConvertorTest`/`BsocailConvertorTest`：已打 external
+
+**下一步**：按 1→4 顺序取根因；第 4 类若确认为陈旧 fixture，按 external 或改写数据。
