@@ -13,21 +13,13 @@
 
 ## 工作区目录
 
-设计文档 `_task/system-design/spec`
+各区只列存在性；**具体清单与当前状态由各任务在自己的任务目录里维护**，本文件不替任务维护清单。
 
-外部仓库文档和代码 `reference`
-
-- bap 协议 `reference/bap-master`
-- schema、内容、关系 `reference/schema-master`
-- 钱包 `reference/yours-wallet-main`
-- 1sat、nft `reference/1sat-ordinals-master`
-- 设计系统 `reference/react-spectrum-main`
-- 外部参考项目 `reference/xLog-dev`
-
-设计原型 `designs/ownword-design-prototype`（设计系统 `designs/react-spectrum-s2`）
-
-后端代码（dev 基线）`backend`：`metanet4j-parent`、`metanet4j-base`、`metanet4j-sdk`、`metanet4j-component` 四个独立仓库，另含上游 fork `bitcoinj-sv`。
-多仓库改造任务不直接改基线，而在 `_task/backend-worktree/<任务名>/` 下建这 4 个仓库的 worktree 副本，在任务指定的分支上改（见该目录的 `AGENTS.md`）。
+- 设计文档：`_task/system-design/spec`
+- 外部仓库文档与代码：`reference`
+- 设计原型与设计系统：`designs`
+- 后端代码基线：`backend`（各仓库独立）
+- 多仓库改造任务的工作副本：`_task/backend-worktree/<任务名>/`，不直接改基线（见该目录的 `AGENTS.md`）
 
 ## Working Rules
 - 可以通过官方文档确认的，优先通过官方文档确认
