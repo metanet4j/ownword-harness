@@ -2,6 +2,8 @@
 
 ## 任务与范围
 
+- 公开身份卡下方的链上记录折叠区已完成，支持键盘展开／收起与 TxID 复制，和背面共用记录组件。专项 `OWNWORD_PORT=4311 python3 check-browser.py --chain-only` 在宿主环境执行，24 条通过；4 次折叠区 axe 无 violation/incomplete。证据见 `evidence/chain-disclosure-*`。
+
 - 工作目录：`_task/system-design`；当前事项：`design-astra-001`，唯一状态源为 `feature_list.json`。
 - 原型：`designs/own-word-prototype-s2-astra-001`。用户将其作为产品文档，不要求生产构建或正式组件替换。
 - 场景控制集中、示例说明集中、外部钱包边界明确两批工作均已完成。原型提交：`42168a0`、`f56ce04`。
@@ -24,6 +26,6 @@ python3 -m http.server 4311 --bind 127.0.0.1 --directory /home/haodev/ownword/de
 
 ## 下一步
 
-用户预览复核导航吸顶与底部提示，再按反馈调整。资产仍为 `needs-review`，不能标记整体事项完成。既有卡片背面键盘入口缺失尚未处理。
+用户预览复核链上记录折叠区，再按反馈调整。资产仍为 `needs-review`，不能标记整体事项完成。链上记录键盘访问缺口已补齐，3D 卡片拖动效果保留。
 
 根仓库已有用户暂存改动，后续提交必须限定本次文件，禁止一起提交。
