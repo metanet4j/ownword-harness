@@ -10,7 +10,7 @@
       "description": "打磨 designs/own-word-prototype-s2-astra-001（穹顶与地平线：七线穹顶、无刻度地平、3D Public Identity），使原型达到可进入生产实现的状态：PRD v0.1 全部 BDD 场景可交互且可验证，术语/状态/边界与核心认知一致，S2 设计系统一致，无障碍/响应式/i18n/主题达标，全部模拟点与生产替换契约逐项文档化，验证证据可复现。基线为 commit d7706da（09-06 00:18，用户要求回退后的状态）；本次打磨不复用 backup/astra-412ca12 分支的成果。",
       "dependencies": ["design-002"],
       "status": "in-progress",
-      "statusNote": "公开身份卡下方的链上记录折叠区已完成，默认收起，支持点击、Enter/空格展开收起与 Tab 复制完整 TxID。与卡片背面共用记录展示，保留 3D 效果，已补齐链上记录的键盘访问路径。模型 74、词典 4、65 个 token 与链上记录专项 24 条通过；4 次折叠区 axe 审计无 violation/incomplete。操作与证据见 designs/own-word-prototype-s2-astra-001/原型演练_20260916-1604.md。未重跑全量 BDD，整体事项仍待视觉复核，evidence 字段保持空值。",
+      "statusNote": "窄屏页头收紧完成，320px 已连接页头从 168px 减至 120px，保留完整文案和至少 44px 点击高度，桌面布局不变。模型 74、词典 4、65 个 token 与页头专项 40 条通过；4 次页头 axe 无 violation/incomplete，截图已复核。操作与证据见 designs/own-word-prototype-s2-astra-001/原型演练_20260916-1604.md。未重跑全量 BDD，整体仍待用户视觉复核，资产保持 needs-review。",
       "inputs": ["_task/system-design/spec/核心认知.md", "_task/system-design/spec/prd/v0.1/设计文档v0.1.md", "designs/react-spectrum-s2"],
       "output": "designs/own-word-prototype-s2-astra-001",
       "doneCriteria": [
