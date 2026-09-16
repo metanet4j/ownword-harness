@@ -8,7 +8,7 @@
     "done",
     "archived"
   ],
-  "activeItem": "design-flash-mini-001",
+  "activeItem": "design-astra-001",
   "features": [
     {
       "id": "design-astra-001",
@@ -17,8 +17,8 @@
       "dependencies": [
         "design-002"
       ],
-      "status": "blocked",
-      "statusNote": "2026-09-12 用户要求以全新设计另出一版（id=design-flash-mini-001，输出 designs/design-flash-mini-001），不参考任何现有实现代码；验收标准沿用本事项。为避免双 in-progress，本事项暂置 blocked，等待用户视觉复核 ⑪；一旦复核通过即可翻 _d_meta.json 并置 done。",
+      "status": "in-progress",
+      "statusNote": "2026-09-16 用户选定本原型作为后续持续打磨的唯一原型；已由 Archive/prototype/own-word-prototype-s2-astra-001 移入 designs/own-word-prototype-s2-astra-001。后续迭代以本事项的完成条件为准。",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
@@ -48,8 +48,8 @@
       "dependencies": [
         "design-astra-001"
       ],
-      "status": "in-progress",
-      "statusNote": "2026-09-12 用户要求全新设计一版并指定 id/输出；自动化交付与证据已完成，唯一未关闭：⑫ 用户视觉复核（_d_meta.json assets.status=needs-review）。design-astra-001 暂置 blocked，待用户复核后关闭。",
+      "status": "blocked",
+      "statusNote": "2026-09-16 用户选定 design-astra-001 作为后续持续打磨的唯一原型；本事项暂停，避免同时存在多个 in-progress 事项。",
       "inputs": [
         "_task/system-design/spec/核心认知.md",
         "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
