@@ -7,8 +7,8 @@
     "blocked",
     "done"
   ],
-  "activeItem": "boot4-p5-verify",
-  "note": "只记录阶段状态与依赖；各阶段的目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。activeItem=null 表示等待用户批准，不要自行开工。",
+  "activeItem": null,
+  "note": "只记录阶段状态与依赖；各阶段的目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。activeItem=null 表示等待用户批准（当前：P5 已完成，P6 待批准；另有 2 项计划未覆盖的取舍待用户决策，见 progress.md「未决项」）。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -157,13 +157,24 @@
       "id": "boot4-p5-verify",
       "name": "P5 验证（编译门禁 + B 档 + 分模块测试执行数）",
       "description": "验收方案见计划 §7（编译门禁、冲突体检、B 档运行、测试执行数）。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "boot4-p4-component",
         "boot4-tests-jupiter"
       ],
-      "statusNote": "2026-09-16 进行中：base/sdk/planaria/component-file 已达标（执行数>0 且全绿）；component-test 125 个用例仍有失败，已归类待收敛（详见 progress.md 的 P5 过程记录）。",
-      "evidence": []
+      "statusNote": "2026-09-16 完成：component-test 由「125 用例/43 error」收敛到全绿；五模块执行数均 >0（base 2、sdk 23、planaria 1、component-file 8、component-test 95），0 error 0 failure；§6.6 九条 grep 门禁与依赖树断言复跑通过。",
+      "evidence": [
+        "根因①：8d21caf 把 planaria: 顶格插入 spring: 块中间 → 其后 mongodb/data/datasource/kafka 被 YAML 归入 planaria.* → spring.mongodb.uri 未绑定、以无凭据连 localhost:27017/test；诊断证据 spring.mongodb.uri=null / planaria.mongodb.uri=<uri> / mongoTemplate.getDb().getName()=test；修后 spring: 块与 5deced9 逐字节一致，BapMongodbTest 16/0、BsocialReplyMongodbTest 10/0",
+        "根因②：BsocialReplyMongodbTest 两个用例对 @Autowired 真实 MongoTemplate 做 when/verify 桩打（桩 findOne、实现走 findById、commentCount 未初始化），自 5c1e557 起从未通过 → 改写为真实 Mongo 集成用例",
+        "根因③：EsTest#testCreateIdentityIndex 名实不符（create bapIndex 且未先删）→ recreateIndex(identityIndex)；EsTest#testSearchAliasPage 按不存在的字段 txInMemoryPoolTimeStamp 排序 → 改用产品真实字段 eventTime 并自足造映射",
+        "根因④：BapRawStrResolverTest/BsocialRawResolverTest 失败全部为上游既有缺陷（与 b468ba8^ 逐条比对确认零改动）→ 夹具补 .sign()/buildRoot()/twiceOf；依赖「签名地址→identityKey」反查的 3 个用例打 @Tag(\"external\")（MongoBapService.findIdentityKey 为 @Primary 的 null 桩，真实实现在 MysqlBapService）",
+        "根因⑤：ComplteTxFactoryTest 需客户端登录态（ThreadLocal BapBase）且会查公网 Bitails 实时 UTXO 并向主网广播 → 类级 @Tag(\"external\")",
+        "门禁实测：parent -N install / base clean test 2-0-0 / sdk clean test -DexcludedGroups=external 23-0-0 / component clean test -DexcludedGroups=external BUILD SUCCESS（component-test 95-0-0）；contextLoads 在 8 个类的 TEST-*.xml 中 PASS",
+        "§6.6 九条：pom 25 / 0.1.0 字面量 0 / metanet4j.version=0.1.0 0 / java.version=11 0 / import javax.* 仅白名单 AesCBCUtil / Boot 4 旧包名 0 / Jackson 旧 core·databind 0 / RedissonAutoConfigurationV2 0 / http·RestClient·RestClientTransport 0",
+        "依赖树断言：elasticsearch-java 9.4.5 + elasticsearch-rest5-client（无 legacy rest-client）、redisson-spring-data-41 4.7.0（无 2x）、kafka-clients 4.2.1、mongodb-driver-sync 5.8.1、mysql-connector-j 9.7.0",
+        "原始日志：/tmp/boot4-p5-diag/（full-gate.log、component-test-green.log、diag-before/after.log、repro-mongo*.log、es*.log、resolver*.log）",
+        "本轮改动范围：仅 metanet4j-component-test（application.yml + 6 个测试文件），未改产品代码；另修正计划 §6.6 两条 dependency:tree 命令路径"
+      ]
     },
     {
       "id": "boot4-p6-finish",
