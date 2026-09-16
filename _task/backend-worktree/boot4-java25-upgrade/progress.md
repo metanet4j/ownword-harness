@@ -145,7 +145,17 @@
   `BapSearchServiceTest`(ES)、`DataTest`/`BsocialMongodbTest`(Mongo)、`BapBaseTest`/`BaseDataTest`/`transaction.CommonTest`、
   `common.CommonTest`/`StateCalculatorTest`
 
-**仍待收敛（9 类 / 43 error）**
+**仍待收敛（第三轮更新）**
+
+- 已新增 Tag：`TxUtxoServiceTest`（需 store-sql/MySQL）、`MetaIdConvertorTest`（读作者本机绝对路径文件，仓库内无该 .raw）
+- 根因已取回（2026-09-16）：
+  - `BapMongodbTest`(14)/`BsocialReplyMongodbTest`(9)：`Command find requires authentication`——Spring 上下文里这两个类的仓储操作走的是**无凭据连接**（同上下文的 DataTest 正常）；
+    隔离复现尝试因 `-pl metanet4j-component-test` 单独构建解析不到兄弟模块而失败（需 `-am` 或先 install），下一步用 `-am` 复现并检查这两个类注入的 MongoTemplate/Repository 来源
+  - `EsTest`(2)：`search_phase_execution_exception / all shards failed`（建索引已幂等化，剩查询类用例）
+  - `BapRawStrResolverTest`(8)/`BsocialRawResolverTest`(2)：`PlanariaBapConvertor.convert` 抛「数据不符合bap格式」（BAP_PROTOCOL/AIP_PROTOCOL 校验不过）→ 疑 fixture 陈旧或协议常量变化，待定性
+  - `ComplteTxFactoryTest`(2)：`this.bapBase` 为 null（`@BeforeEach` 初始化依赖的数据未就绪）
+
+**下一轮建议**：先 `mvn -pl metanet4j-component-test -am test` 复现 Mongo 两类的认证问题（可能是注入的 template/repository 用了 `spring.data.mongodb.*` 的默认连接），再处理 ES 查询与 resolver 数据两类。
 1. `BapMongodbTest`(14) / `BsocialReplyMongodbTest`(9)：Mongo 写入/查询相关，需看具体异常（未取根因）
 2. `TxUtxoServiceTest`(2)、`ComplteTxFactoryTest`(2)、`MetaIdConvertorTest`(1)：未取根因
 3. `EsTest`(2)：剩余 2 个（原 4 个）
