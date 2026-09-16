@@ -200,6 +200,7 @@ git -C <每个仓库> status --porcelain      # 不应出现 .mvn/ 或 wrapper �
 | P4 component | 22 个 pom 坐标/源码/配置迁移、Boot 4 包迁移、ES 9 迁移、Redisson 4.7.0、测试引擎 | 聚合 `package` 成功；javax/旧包名 grep 归零；§6.6 依赖漂移断言通过 |
 | P5 验证 | 编译门禁 + B 档（Mongo 8.0/ES 9.4.5/Kafka 4.2.1/Redis 7.4/MySQL 8.4）+ 测试实际执行数 | 用例通过 + 冒烟通过（§7）；逐模块执行数断言 |
 | P6 收尾 | 4 仓库独立提交、文档同步 | 输出提交 ID 与编译命令 |
+| 交付后修复 | sdk `initSignType` 死代码修复（含离线回归用例）+ 测试应用配置对齐共享设施 | 回归用例正/负向验证通过；门禁复跑全绿 |
 
 ---
 
@@ -637,7 +638,9 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 - 提交：每仓库独立提交，遵循 Conventional Commits（中文 type+scope）。
 - 回滚：`git checkout dev`（等价于回到基线）。**未打 `pre-boot4-java25` tag**——草案要求开工前打，
   实测 `dev` 全程未移动，回滚路径已由本行明确，故不再补。
-- **不推送远端**（除用户明确要求）。
+- **推送**：2026-09-16 用户指示"先推当前成果、修复后再推一次" → 四仓库已推送 `origin/feature/java21`
+  （**新建远端分支**，未触碰 `dev`/`master`）；两轮推送后逐仓库核对本地 HEAD 与远端引用一致。
+  ownword（任务文档）仍为本地提交、未推送。
 - 产出报告：`doc/验收报告-Boot4-Java25-20260916-1320.md`（受影响仓库、每仓库编译命令、每仓库提交 ID）。
 
 ---
@@ -659,9 +662,9 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 | springdoc UI 未引入 | 本次只引 swagger 注解 | 需要 UI 时单独立项 |
 | JSpecify 与 JSR305 语义差异 | `@NonNull` 比 JSR305 `@Nonnull` 更严格 | 仅注解，无运行时/tooling 影响；如接 nullness 工具再评估 |
 | 显式钉死清理不彻底 | 残留 pin 会静默降级 Boot 4 | 以 §6.2 表 + `effective-pom`/`dependency:tree` 门禁为准 |
-| **sdk `initSignType` 是死代码** | `UnSpendableDataLockBuilder` 把 `signType` 初始化为 `SignType.CURRENT`（非 null），而 `BapDataLockBuilder.initSignType(...)` 只在 `signType == null` 时赋值 → `buildRoot()`/`buildId()` 实际永远用 **CURRENT** 地址签名。后果：产出的 BAP root/ID 交易 AIP 签名地址不是根/上一地址，`BapHelper.isRootBap` 判 false，解析器无法识别为 root。上游既有缺陷（升级窗口内该文件零改动） | **本次不改产品代码**（超出 Boot 4 升级范围）；测试夹具改用 SDK 公开的 3 参构造器显式声明 `SignType` 绕过；建议单独立项修 `BapDataLockBuilder`（3 处直接赋值 `this.signType`） |
+| ~~sdk `initSignType` 是死代码~~ **（已修 `bae4c36`）** | `UnSpendableDataLockBuilder` 把 `signType` 初始化为 `SignType.CURRENT`（非 null），而 `BapDataLockBuilder.initSignType(...)` 只在 `signType == null` 时赋值 → `buildRoot()` 用 **CURRENT** 地址签名、`buildId()` 同理，产出的 BAP root/ID 交易 AIP 签名地址不是根/上一地址，`BapHelper.isRootBap` 判 false、解析器认不出 root（上游既有缺陷） | ✅ 2026-09-16 按用户指示修复：`initSignType` 直接写入 `signType`；新增离线回归用例 `BapDataLockBuilderSignTypeTest` 并做负向验证；component-test 夹具撤掉 3 参构造器绕过、恢复 `buildXxx().sign()` |
 | `MongoBapService.findIdentityKey` 是返回 null 的桩 | 该类带 `@Primary`，故 BAP/Bsocial 解析器「签名地址 → identityKey」反查在 Mongo-only 部署下恒不生效（真实实现在 `MysqlBapService` + `SignerRepository`，本测试应用按设计未纳入 store-sql） | 相关用例打 `@Tag("external")`（与 `BlockTaskServiceTest` 同因）；若产品要支持 Mongo-only 部署需单独立项实现 |
-| 测试应用 `application.yml` 里 Redis/MySQL 凭据与共享设施不一致 | 该文件 `spring.data.redis.password: metaid2022`（实际**无密码**）、`spring.datasource.druid` 用 `root/123456`（实际 `root/root123`，且 JDBC 需 `allowPublicKeyRetrieval=true`）。这些键此前被 YAML 缩进 bug 吞掉（见 §11 P5 记录），本轮修复后**重新生效**；当前无用例覆盖 Redis/MySQL（相关类已 external），故门禁不受影响 | 待用户确认后对齐 `ownword/infra/README-*.md`（连接信息唯一事实来源） |
+| ~~测试应用 Redis/MySQL 凭据与共享设施不一致~~ **（已对齐 `d585194`）** | 原 `spring.data.redis.password: metaid2022`（实际**无密码**）、`spring.datasource.druid` 用 `root/123456`（实际 `root/root123`，且 JDBC 需 `allowPublicKeyRetrieval=true`）；这些键此前被 YAML 缩进 bug 吞掉，P5 修复后重新生效 | ✅ 2026-09-16 已按 `ownword/infra/README-*.md`（唯一事实来源）对齐；实测旧 MySQL 密码 `Access denied`、新密码可连 8.4.11，Redis `requirepass` 为空。注：该应用类路径无 `spring-data-redis`、无 `DataSource` Bean，故不建立运行时连接（配置卫生） |
 
 ---
 
@@ -822,7 +825,7 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 | 1 | `BapMongodbTest`(16)/`BsocialReplyMongodbTest`(10) 26 run/23 error，63 次 `Command find requires authentication` | 第二轮提交 `8d21caf` 把 `planaria:` 顶格插进 `spring:` 块中间，其后 `mongodb:`/`data:`/`datasource:`/`kafka:` 被 YAML 归入 `planaria.*` → `spring.mongodb.uri` 未绑定 → 以无凭据连 `localhost:27017/test`。诊断证据（临时用例）：`spring.mongodb.uri=null`、`planaria.mongodb.uri=@uri`、`mongoTemplate.getDb().getName()=test`；独立复刻：`mongosh` 无凭据 `find` 报同一错误、带凭据成功 | `planaria:` 块整体移到 `spring:` 之后；`spring:` 块与未破坏前（`5deced9`）**逐字节一致**。修后 26/0 |
 | 2 | 上述两类残留 2 个 `No class parameter provided` | `BsocialReplyMongodbTest` 两个用例对 `@Autowired` 的**真实** `MongoTemplate` 做 `when/verify` 桩打；且桩的是 `findOne`（实现走 `findById`）、断言里 `commentCount` 未初始化（会 NPE）→ 自 `5c1e557` 引入起从未通过 | 改写为真实 Mongo 集成用例（与同类 8 个用例同风格），保留原意图：`<10` 追加一条、`==10` 只计数不追加（固化当前实现行为） |
 | 3 | `EsTest` 2 error | ① `testCreateIdentityIndex` 名为 identity 却 `create(bapIndex)` 且未先删 → `resource_already_exists_exception`；② `testSearchAliasPage` 按 `txInMemoryPoolTimeStamp` 排序，该字段全仓仅此一处引用、ES mapping 中不存在 → `No mapping found ... in order to sort on`（`all shards failed`） | ① 改 `recreateIndex(identityIndex)`（幂等、名副其实）；② 改用产品实体真实字段 `eventTime`，并在用例内先写一条含该字段的文档保证 mapping 存在（自足、不依赖用例顺序） |
-| 4 | `BapRawStrResolverTest`(9→6 err)/`BsocialRawResolverTest`(3→2 err) | **上游既有缺陷**（升级窗口内这些文件零改动，已逐条与 `b468ba8^` 比对）：夹具 `BitcoinschemaTransactionTest` 的三个 BAP 构造器漏 `.sign()` → 产出「只有 BAP、无 AIP 签名块」的不合规输出，被 `PlanariaBapConvertor` 判「数据不符合bap格式」；`testBapRootTransaction` 名实不符（调 `buildId`）；post 方法 `Sha256Hash.wrap(34 字节脚本)` 必抛 `IllegalArgumentException`；`testHandleFollow` 把 MAP 交易喂给 BAP 解析器 | 夹具补齐 `.sign()`、改用 `buildRoot()`、`wrap`→`twiceOf`；`testHandleFollow` 改为显式负向契约（非 BAP 数据必须被拒）；另因 sdk `initSignType` 死代码（见 §9），夹具改用 3 参构造器显式声明 `SignType.ROOT/PREVIOUS/CURRENT` |
+| 4 | `BapRawStrResolverTest`(9→6 err)/`BsocialRawResolverTest`(3→2 err) | **上游既有缺陷**（升级窗口内这些文件零改动，已逐条与 `b468ba8^` 比对）：夹具 `BitcoinschemaTransactionTest` 的三个 BAP 构造器漏 `.sign()` → 产出「只有 BAP、无 AIP 签名块」的不合规输出，被 `PlanariaBapConvertor` 判「数据不符合bap格式」；`testBapRootTransaction` 名实不符（调 `buildId`）；post 方法 `Sha256Hash.wrap(34 字节脚本)` 必抛 `IllegalArgumentException`；`testHandleFollow` 把 MAP 交易喂给 BAP 解析器 | 夹具补齐 `.sign()`、改用 `buildRoot()`、`wrap`→`twiceOf`；`testHandleFollow` 改为显式负向契约（非 BAP 数据必须被拒）；另当时 sdk `initSignType` 死代码使 root 无法按 ROOT 签名（已在"交付后修复"轮修 `bae4c36`，夹具随之恢复惯用 `buildXxx().sign()`） |
 | 5 | `ComplteTxFactoryTest` 3 error（`bapBase` 为 null） | 需客户端登录态（`DefaultBapBaseFactory` 用 ThreadLocal 存 BapBase，仅客户端会话调 `buildBapBase` 后才有值）；且 `completePrepareTx` 会走 `UtxoResolver.listUtxo(..., BitailsUtxoProvider)` 查公网实时 UTXO 并向主网**广播** | 类级 `@Tag("external")`（与 sdk 3 个公网广播测试同类），排除在常规门禁外 |
 
 **本轮新增 external 标签**：`ComplteTxFactoryTest`（类级）；`BapRawStrResolverTest#testHandleBapId`、`BsocialRawResolverTest#testHandleBsocialPost`、`BsocialRawResolverTest#testHandleBsocialFollow`（方法级，原因见 §9 的 `MongoBapService.findIdentityKey` 桩）。
@@ -840,8 +843,22 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 - **交付物**：`doc/验收报告-Boot4-Java25-20260916-1320.md`——含验收结论、受影响仓库与逐仓库提交 ID、
   每仓库编译命令（含只编译/只测试两种口径）、门禁结果、**用例账目**（component-test 静态 129 个实例的
   逐项去向：95 执行 / 30 external 排除 / 3 从未被 surefire 选中 / 1 非 void 被 Jupiter 忽略）、遗留项与声明。
-- **遗留**：两项待用户决策（sdk `initSignType` 死代码是否本次修、测试应用 Redis/MySQL 配置是否对齐），
+- **遗留**：两项待决已按用户指示闭环（见下「交付后修复」轮）；`pre-boot4-java25` tag 未打、
+  `TxoBobConverter` 从未执行——已在验收报告 §5 归档。
   以及 `pre-boot4-java25` tag 未打、`TxoBobConverter` 从未执行——均已在验收报告 §5 归档。
+
+### 交付后修复（2026-09-16，第七轮）—— ✅ 完成
+
+用户指示"先推当前成果、修复后再推一次"。两轮推送：第一轮推四仓库交付成果（远端**新建** `feature/java21`），
+第二轮推两处修复；远端 `dev`/`master` 全程未被触碰，推送后核对本地 HEAD 与远端引用一致。
+
+| # | 修复 | 提交 | 验证 |
+|---|---|---|---|
+| 1 | sdk `BapDataLockBuilder.initSignType` 死代码：父类已把 `signType` 初始化为 `CURRENT`（非 null），`if (signType == null)` 恒假 → `buildRoot()` 声明的 ROOT、`buildId()` 声明的 PREVIOUS 永不生效；产品路径 `OrdTransactionTemplate` 的 `buildRoot().sign()` 因此用 CURRENT 地址签名，`BapHelper.isRootBap` 判 false、自家解析器认不出 root | sdk **`bae4c36`** | 新增离线回归用例 `BapDataLockBuilderSignTypeTest`（断言 AIP 签名地址 = root/previous/current）；**负向验证**：回退修复后 2 用例失败（expected root `1QBoVK…` but was current `1PpNsZ…`）；sdk 26/0/0；component-test 夹具撤掉绕过、恢复惯用写法后 resolver 两类全绿 |
+| 2 | 测试应用 `application.yml` 与共享设施不一致：Redis 配了不存在的密码、MySQL 密码错误且缺 `allowPublicKeyRetrieval=true` | component **`d585194`** | 实测 `docker exec infra-mysql`：旧密码 `Access denied`、`root/root123` 可连 8.4.11；Redis `requirepass` 为空、无密码 `PING=PONG`；Spring `Environment` 实测绑定为新值；确认该应用类路径无 Redis 客户端、无 `DataSource` Bean |
+
+修复后全量门禁复跑（`-DexcludedGroups=external`）：base 2/2、sdk **26**/0/0（含 3 个新回归用例）、
+connect-planaria 1/1、component-file 8/8、component-test 95/0/0；`contextLoads` 8 处 PASS；四仓库 0 脏。
 
 ### 环境就绪清单
 

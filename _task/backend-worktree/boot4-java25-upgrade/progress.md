@@ -5,9 +5,10 @@
 
 ## Current State（当前状态）
 
-- **Last Updated**：2026-09-16（P6 完成：**任务全部收口**，P0~P6 十项全 done）
+- **Last Updated**：2026-09-16（交付后修复也已完成：任务全部收口，P0~P6 + 交付后修复全 done）
 - **Current Objective**：无（本任务已交付；交付物见 `doc/验收报告-Boot4-Java25-20260916-1320.md`）
 - **Recommended Next Step**：无必做项；如有后续动作，先看文末「下一步」与「未决项」
+- **远端状态**：四仓库已推送 `origin/feature/java21`（两轮：交付成果 → 交付后修复），远端 `dev`/`master` 未被触碰；ownword 仍为本地提交
 - **执行授权**：用户 2026-09-16 指示「继续执行，改代码不必逐项确认」；仅在计划未覆盖的架构决策/取舍上停下问（`AGENTS.md` §5）
 - **依赖基座**：parent / base / sdk / component 的 0.2.0 均可构建安装
 - **中间件**：共享设施 `ownword/infra/` 五个容器 healthy 运行中
@@ -18,7 +19,7 @@
 | 模块 | 执行数 | 结果 |
 |---|---|---|
 | metanet4j-base | 2 | 2 通过 |
-| metanet4j-sdk | 23 | 23 通过（另 29 个 external 用例被排除） |
+| metanet4j-sdk | 26 | 26 通过（含交付后新增 3 个离线回归用例；另 29 个 external 被排除） |
 | metanet4j-connect-planaria | 1 | 1 通过 |
 | metanet4j-component-file | 8 | 8 通过（8 skipped 为需凭据的 S3/SFTP 用例） |
 | metanet4j-component-test | 95 | 95 通过 |
@@ -49,6 +50,7 @@
 | 测试门禁（全仓 39 文件迁 Jupiter + sdk 两处构造链缺陷修复 + 联网用例打 Tag） | parent `50598c0` / base `6e16cfa` / sdk `451020e`·`bc966e5` / component `0ce5c18` |
 | **P5 验证与收敛**（Mongo 认证根因、ES 两处、resolver 两类、`ComplteTxFactoryTest` 定性；门禁复跑全绿） | 见计划 §11「P5 验证」记录与本文件「门禁与证据」；component 提交 `73e3ad4` |
 | **P6 收尾**（四仓库提交确认 + 文档同步 + 验收报告输出） | `doc/验收报告-Boot4-Java25-20260916-1320.md`；ownword 提交见 git log |
+| **交付后修复**（sdk `initSignType` 死代码 + 测试应用 Redis/MySQL 配置对齐） | sdk `bae4c36`（含离线回归用例 + 负向验证）、component `d585194`；两处均已推送 |
 
 ## 关键事实（避免重复踩坑）
 
@@ -70,8 +72,8 @@
 14. **纯 JUnit4 模块不会静默跳过**：surefire 3.5.6 见到 `junit:junit` 会自动选 junit4 provider。
 15. **Jupiter 会静默忽略非 void 的 `@Test` 方法**（`@Test public String foo()` 不报错也不执行）；
     报告里没出现的类要能逐条解释（AGENTS §8 口径）。
-16. **`BapDataLockBuilder.initSignType` 是死代码**（父类 `signType` 已初始化成 `CURRENT`，非 null）→ `buildRoot()`/`buildId()` 永远用 CURRENT 地址签名；
-    需要 root/previous 语义时用 3 参构造器显式传 `SignType`。上游既有缺陷，本次未改产品代码（见计划 §9）。
+16. **`BapDataLockBuilder.initSignType` 曾是死代码**（父类 `signType` 已初始化成 `CURRENT`，非 null，导致 `if (signType == null)` 恒假）→ `buildRoot()`/`buildId()` 用 CURRENT 地址签名、
+    `BapHelper.isRootBap` 判 false、解析器认不出 root。**已于交付后修复**（sdk `bae4c36`：直接写入 `signType`；新增离线回归用例 `BapDataLockBuilderSignTypeTest` + 负向验证）。
 17. **`MongoBapService.findIdentityKey` 是返回 null 的桩**且带 `@Primary` → Mongo-only 部署下「签名地址 → identityKey」反查恒失效；
     真实实现在 `MysqlBapService`（本测试应用按设计未纳入 store-sql）。相关用例已打 `@Tag("external")`。
 
@@ -79,14 +81,15 @@
 
 | # | 事项 | 影响 | 建议 |
 |---|---|---|---|
-| 1 | sdk `initSignType` 死代码（`BapDataLockBuilder.buildRoot/buildId` 的签名类型永不生效） | 产出的 BAP root/ID 交易无法被自己的解析器识别为 root（上游既有） | 本次**未改**产品代码（超范围），测试夹具已绕过；建议单独立项修 3 处赋值 |
-| 2 | 测试应用 `application.yml` 的 Redis 密码（`metaid2022`，实际无密码）与 MySQL 凭据（`root/123456`，实际 `root/root123`，且缺 `allowPublicKeyRetrieval=true`） | 这些键因 P5 的 YAML 修复**重新生效**；当前无用例覆盖（相关类已 external），门禁不受影响 | 待确认后按 `ownword/infra/README-*.md`（唯一事实来源）对齐 |
+| 1 | ~~sdk `initSignType` 死代码~~ **已修** | — | ✅ sdk `bae4c36`（含离线回归用例 + 负向验证），已推送 |
+| 2 | ~~测试应用 Redis/MySQL 配置与共享设施不一致~~ **已对齐** | — | ✅ component `d585194`，已推送 |
 | 3 | 未打基线 tag `pre-boot4-java25` | 计划 §8 草案要求开工前打；实测 `dev` 全程未移动，回滚等价 `git checkout dev` | 如需留痕可补打 |
 | 4 | `TxoBobConverter`（3 个用例）从未被 surefire 选中 | 类名不含 `Test`，不匹配默认 includes（上游遗留） | 如需恢复执行，重命名为 `TxoBobConverterTest` |
+| 5 | 58 个用例被 `@Tag("external")` 排除 | sdk 29 + component-test 30（需公网/MySQL/S3 凭据等） | 已逐类定性归档；不进常规门禁 |
 
 ## 下一步（Next）
 
-1. 本任务已交付：提交 ID = parent `50598c0` / base `6e16cfa` / sdk `bc966e5` / component `73e3ad4`；
-   验收报告见 `doc/验收报告-Boot4-Java25-20260916-1320.md`。
-2. 如需继续，按顺序处理：① 对「未决项」1/2 给出取舍（是否修产品代码 / 是否对齐配置）；
-   ② 明确要求后再推送远端（当前四仓库均未推送）；③ 需要留痕则补打基线 tag。
+1. 本任务已交付并已推送：提交 ID = parent `50598c0` / base `6e16cfa` / sdk **`bae4c36`** / component **`d585194`**；
+   远端 `origin/feature/java21`（四仓库一致）；验收报告见 `doc/验收报告-Boot4-Java25-20260916-1320.md`。
+2. 如需继续：① 需要留痕则补打基线 tag `pre-boot4-java25`；② 如需更彻底可单独立项处理
+   `MongoBapService.findIdentityKey` 空桩与 `TxoBobConverter` 未执行；③ ownword 任务文档若要推送需明确指示。

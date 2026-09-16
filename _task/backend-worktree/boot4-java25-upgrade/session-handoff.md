@@ -7,13 +7,15 @@
 ## 30 秒现状
 
 - 阶段：**P0~P6 全部完成（任务已交付）**。交付物：`doc/验收报告-Boot4-Java25-20260916-1320.md`。
-- 门禁（`-DexcludedGroups=external`，最新一轮全绿）：base 2/2、sdk 23/23、connect-planaria 1/1、
-  component-file 8/8（8 skipped 为需凭据用例）、**component-test 95/95**；§6.6 九条 grep 门禁与依赖树断言全过。
+- 门禁（`-DexcludedGroups=external`，最新一轮全绿）：base 2/2、sdk **26/26**（含 3 个交付后新增离线回归用例）、
+  connect-planaria 1/1、component-file 8/8（8 skipped 为需凭据用例）、**component-test 95/95**；
+  §6.6 九条 grep 门禁与依赖树断言全过。
 - 本轮（P5）收敛了 5 个问题：YAML 顶层键破坏 `spring.*` 绑定（Mongo 认证）、`BsocialReplyMongodbTest` 两个死用例、
   `EsTest` 两处、resolver 两类（上游既有夹具缺陷）、`ComplteTxFactoryTest` 定性为联网广播。明细见计划 §11「P5 验证」。
 - 四仓库均在 `feature/java21`，工作区干净；本轮只动 `metanet4j-component-test`（1 个 `application.yml` + 6 个测试文件），**未改产品代码**。
-- 提交 ID：parent `50598c0` / base `6e16cfa` / sdk `bc966e5` / component `73e3ad4`；四仓库均**未推送远端**。
-- **两处待用户决策**（见下 Blockers 1/2），未决前不要再改产品代码。
+- 提交 ID：parent `50598c0` / base `6e16cfa` / sdk **`bae4c36`** / component **`d585194`**。
+- **已推送远端**：四仓库 `origin/feature/java21`（两轮：交付成果 → 交付后修复），远端 `dev`/`master` 未被触碰。
+- 原先两处待决取舍**已闭环**（见 Blockers 1/2）；无阻塞项。
 
 ## 复跑与工具链
 
@@ -34,8 +36,8 @@ MVN="$HOME/.sdkman/candidates/maven/3.9.16/bin/mvn -s $HOME/.m2/metanet4j-settin
 
 | # | 阻塞/取舍 | 说明 | 建议 |
 |---|---|---|---|
-| 1 | sdk `initSignType` 死代码 | `BapDataLockBuilder.buildRoot()/buildId()` 的签名类型永不生效（父类 `signType` 已初始化为 `CURRENT`），产出 BAP root/ID 交易无法被 `BapHelper.isRootBap` 识别为 root。上游既有（升级窗口内零改动） | 本次**未改产品代码**（超范围），测试夹具用 3 参构造器显式传 `SignType` 绕过；建议单独立项 |
-| 2 | 测试应用配置漂移 | `application.yml` 的 `spring.data.redis.password: metaid2022`（实际 Redis 无密码）、`spring.datasource.druid` 用 `root/123456`（实际 `root/root123`，JDBC 缺 `allowPublicKeyRetrieval=true`）。本轮 YAML 修复后这些键**重新生效**，但无用例覆盖（相关类已 external） | 待确认后按 `ownword/infra/README-*.md` 对齐 |
+| 1 | ~~sdk `initSignType` 死代码~~ **已修** | `BapDataLockBuilder.buildRoot()/buildId()` 的签名类型曾永不生效（父类 `signType` 已初始化为 `CURRENT`）→ BAP root 交易被 CURRENT 地址签名、`isRootBap` 判 false | ✅ sdk `bae4c36`：`initSignType` 直接写入 `signType`；新增离线回归用例 + 负向验证；夹具已恢复惯用写法 |
+| 2 | ~~测试应用配置漂移~~ **已对齐** | Redis 曾配不存在的密码、MySQL 密码错误且缺 `allowPublicKeyRetrieval=true` | ✅ component `d585194`：按 `ownword/infra/README-*.md` 对齐，实测中间件凭据 + Spring 绑定取证 |
 | 3 | 58 个用例被 `@Tag("external")` 排除 | sdk 29（Bitails/GorillaPool 广播、2023 年主网 outpoint）+ component-test 30（需公网/MySQL/S3 凭据等） | 已逐类定性归档；真跑需联网与真实资金，不进常规门禁 |
 | 4 | 测试门禁口径 | 统一 JUnit 5（Jupiter），不使用 vintage；39 个文件已迁移 | 已完成 |
 | 5 | `Archive/prototype/`（207MB 归档） | 按约定未纳入版本控制 | 保持 |
@@ -56,6 +58,7 @@ MVN="$HOME/.sdkman/candidates/maven/3.9.16/bin/mvn -s $HOME/.m2/metanet4j-settin
 
 ## Next Session（后续顺序）
 
-1. ✅ P0 / P0.5 / P1 / P2 / P3 / P4 / `boot4-tests-jupiter` / `boot4-p5-verify` / **P6 收尾**——本任务已交付。
-2. 后续（按用户指示）：① 对 Blockers 1/2 给出取舍；② 需要时推送远端；③ 需要留痕则补打基线 tag；
-   ④ 可选：修 sdk `initSignType` 死代码 / 对齐测试应用 Redis·MySQL 配置 / 恢复 `TxoBobConverter` 执行。
+1. ✅ P0 / P0.5 / P1 / P2 / P3 / P4 / `boot4-tests-jupiter` / `boot4-p5-verify` / **P6 收尾** /
+   **交付后修复**——本任务已交付并已推送 `origin/feature/java21`。
+2. 如无新指示则无必做项；可选项：① 补打基线 tag `pre-boot4-java25`；② 单独立项处理
+   `MongoBapService.findIdentityKey` 空桩、`TxoBobConverter` 未执行；③ ownword 任务文档推送需明确指示。

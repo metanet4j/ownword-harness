@@ -8,7 +8,7 @@
     "done"
   ],
   "activeItem": null,
-  "note": "只记录阶段状态与依赖；各阶段目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。任务已全部完成（P0~P6），交付物见 doc/验收报告-Boot4-Java25-20260916-1320.md；activeItem=null 表示无进行中项——两项升级范围外的取舍待用户决策，见 progress.md「未决项」。",
+  "note": "只记录阶段状态与依赖；各阶段目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。任务已全部完成（P0~P6 + 交付后修复），交付物见 doc/验收报告-Boot4-Java25-20260916-1320.md；四仓库已推送 origin/feature/java21（远端 dev/master 未触碰）。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -191,6 +191,23 @@
         "交付物 doc/验收报告-Boot4-Java25-20260916-1320.md：验收结论、受影响仓库与逐仓库提交 ID、每仓库编译命令、门禁结果（base 2 / sdk 23 / connect-planaria 1 / component-file 8 / component-test 95，全 0 error）、§6.6 九条、依赖漂移断言、用例账目、遗留项与声明",
         "用例账目（component-test 静态 129 实例）：95 常规执行 + 30 @Tag(\"external\") 排除 + 3 从未被 surefire 选中（TxoBobConverter 类名不含 Test）+ 1 非 void @Test 被 Jupiter 忽略（BitcoinschemaTransactionTest）；sdk：52 = 23 执行 + 29 external",
         "文档同步：计划 §6.6 命令路径修正、§8 按实际分支 feature/java21 重写、§9 三条遗留项、§11 P5/P6 记录；progress.md / session-handoff.md 收口"
+      ]
+    },
+    {
+      "id": "boot4-followup-fix",
+      "name": "交付后修复（sdk 签名类型 + 配置对齐）",
+      "description": "用户 2026-09-16 指示「先推当前成果、修复后再推一次」后执行的两项修复；见计划 §11「交付后修复」轮与验收报告 §5。",
+      "status": "done",
+      "dependencies": [
+        "boot4-p6-finish"
+      ],
+      "statusNote": "2026-09-16 完成：① sdk BapDataLockBuilder.initSignType 死代码修复（BAP root/id 现在按 ROOT/PREVIOUS 地址签名）+ 新增离线回归用例并做负向验证；② 测试应用 Redis/MySQL 配置按共享设施 README 对齐。两轮推送 origin/feature/java21，远端 dev/master 未触碰。",
+      "evidence": [
+        "sdk bae4c36：initSignType 直接写入 signType（原 if (signType == null) 因父类初始化为 CURRENT 而恒假，导致 buildRoot() 用 CURRENT 地址签名、BapHelper.isRootBap 判 false、解析器认不出 root；产品路径 OrdTransactionTemplate 的 buildRoot().sign() 受影响）",
+        "新增 sdk 离线回归用例 BapDataLockBuilderSignTypeTest（3 用例断言 AIP 签名地址 = root/previous/current）；负向验证：回退修复后 2 用例失败（expected root 1QBoVK… but was current 1PpNsZ…）",
+        "component d585194：application.yml 对齐共享设施——Redis 去掉 password（实测 requirepass 为空、无密码 PING=PONG）、MySQL 改 root/root123 并补 allowPublicKeyRetrieval=true（实测旧密码 Access denied、新密码可连 8.4.11）；component-test 夹具撤掉 P5 的 3 参构造器绕过，恢复 buildXxx().sign()",
+        "修复后门禁复跑（-DexcludedGroups=external）：base 2/0/0、sdk 26/0/0、connect-planaria 1/0/0、component-file 8/0/0、component-test 95/0/0；contextLoads 8 处 PASS；四仓库 0 脏",
+        "推送：origin/feature/java21 新建于四仓库（parent 50598c0 / base 6e16cfa / sdk bae4c36 / component d585194），两轮推送后本地与远端引用逐仓库核对一致；远端 dev/master 未变"
       ]
     }
   ]
