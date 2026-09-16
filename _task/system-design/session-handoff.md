@@ -1,62 +1,28 @@
-# session-handoff.md
+# 当前交接
 
-## 当前状态
+## 任务与范围
 
-- **当前事项：design-flash-mini-001「flash-mini 原型：穹顶与地平线（全新设计，不参考任何现有实现，mini 紧凑版面）」**，
-  `status=in-progress`，`activeItem=design-flash-mini-001`，产出 `designs/design-flash-mini-001`。
-- 2026-09-12 用户要求：以全新设计另出一版，不参考任何现有实现代码；要求集合与 `design-astra-001` 一致；
-  id=design-flash-mini-001，输出 designs/design-flash-mini-001。为避免双 in-progress，`design-astra-001` 暂置 `blocked`。
-- 交付已完成并提交子仓库：`95490f2`（原型本体）、`6c3f5c3`（首轮干净检出复验）；视觉迭代提交 `8c3379c`（3D 卡片/模拟器 dock/抽象光晕穹顶）、`0388301`（迭代后干净检出复验，PRD v0.1_20260912-102440）；第三轮穹顶收拢提交 `41b54fb`、`3bc2203`；第四轮语义解耦+卡片立体化提交 `780fdc8`、`2bc6430`；第五轮背面重做提交 `be62487`、`7f46ba4`（PRD v0.1_20260912-123721）。
-- 2026-09-12 第二轮视觉迭代已完成：3D 卡片增加景深叠层/指针倾斜/translateZ；模拟器改为右下角可开合 dock。
-- 2026-09-12 第三轮视觉迭代已完成：穹顶七线收拢到屏幕上方、间距更紧密、线条更细更短、低透明度 + 淡出遮罩，呈「好似隐藏」的下层微光。
-- 2026-09-12 第四轮视觉迭代已完成：穹顶弧与能力列表彻底解耦（线条纯装饰、能力列表独立维护）；线条改渐变描边对称细弧；卡片增加静态预倾斜与更强景深，移动端防溢出。
-- 2026-09-12 第五轮视觉迭代已完成：卡片背面重做为分块 Proof 面板（签名徽章/姓名/Owner+Created/BAP ID 复制/交易折叠），修正 dlitem 违规；静态预倾斜收敛为 -2.5°/-4.5°、translateZ 4px、阴影柔化，翻面文字恢复清晰；新增明/暗背面截图。
-- 自动化证据（迭代后）：fresh-design 0 命中；模型 28/28；S2 token 28/28、0 自造颜色；浏览器 14/14；axe 15 次 0 violations、
-  5 条 incomplete（6 节点）逐条人工复核；对比度 11/11；离线 3/3；21 张截图（含模拟器 dock 展开与明/暗背面）；干净检出 4417 端口全绿。
-- 13 条 doneCriteria 中 12 条已交付并取证，唯一未关闭：⑫ 用户视觉复核（`_d_meta.json` assets.status 仍为 `needs-review`）。
-- 未决取舍：卡片整体为鼠标点击便利项，键盘用户通过独立 `Flip card` 按钮可达；若要严格等价，需要把卡片改为真正的可聚焦控件。
+- 工作目录：`_task/system-design`；当前事项：`design-astra-001`，唯一状态源为 `feature_list.json`。
+- 原型：`designs/own-word-prototype-s2-astra-001`。用户将其作为产品文档，不要求生产构建或正式组件替换。
+- 场景控制集中、示例说明集中、外部钱包边界明确两批工作均已完成。原型提交：`42168a0`、`f56ce04`。
+- 操作与验证：[原型演练](../../designs/own-word-prototype-s2-astra-001/原型演练_20260916-1604.md)。
 
-## 预览服务
+## 预览与验证
 
-- 一键启动（no-store，项目根为服务根目录）：
-  `cd designs/design-flash-mini-001 && python3 verification/serve.py 4400`
-- 访问：`http://127.0.0.1:4400/index.html`
-- 模拟器：右下角 `Prototype` 开关，默认收起；`?sim=open` 直接展开，`?sim=1` 启用失败路径。
-- 一键验证：`cd designs/design-flash-mini-001 && OWNWORD_PORT=4401 bash verification/run-all.sh`
+预览：http://127.0.0.1:4311/own-word-prototype-s2-astra-001/
 
-## 唯一下一步
-
-1. **用户视觉复核** flash-mini 原型：打开 4400 预览（建议同时看 `?sim=1`），确认：
-   - 屏幕上方抽象七线的密度、粗细、长度与隐藏感；
-   - 无刻度地平的高度与通栏感；
-   - 3D Public Identity 卡片正/背面、景深叠层、指针倾斜与翻转手感；
-   - 右下角 `Prototype` 模拟器 dock 的开合、位置与遮挡情况；
-   - mini 单列版面、≤760px 固定底部操作条、320px 完整 BAP ID 首屏；
-   - 中英 × 浅深四组合观感，以及 1440/960/768/390/320 响应式。
-2. 复核通过后，把 `designs/design-flash-mini-001/_d_meta.json` 的 asset status 由 `needs-review` 改为 `approved`，
-   在子仓库提交（commit 信息带 `(PRD v0.1_${datetime})`），再把 `design-flash-mini-001` 置 `done`。
-3. 若用户要求调整视觉或交互，在本事项内迭代并复跑 `verification/run-all.sh`；改动提交到
-   `designs/design-flash-mini-001` 子仓库，任务文档改动提交到根仓库。
-4. `design-astra-001` 保持 `blocked`，等待用户决定是否继续视觉复核或归档；不要未经用户确认同时恢复两个 in-progress。
-5. 核心认知 §12 三项待确认不在 v0.1 范围；进入 Artifact/Content/Explorer 前必须按
-   `verification/implementation-handoff.md` 的验证方式关闭。
-
-## 常用命令
+服务目录为 `designs/`。若需重启：
 
 ```bash
-# 预览（no-store，项目根为服务根目录）
-cd designs/design-flash-mini-001
-python3 verification/serve.py 4400
-# http://127.0.0.1:4400/index.html?sim=1
-
-# 一键全量验证
-OWNWORD_PORT=4401 bash verification/run-all.sh
-
-# 单独运行
-node verification/check-fresh.mjs
-node verification/check-model.mjs
-node verification/check-tokens.mjs
-OWNWORD_PORT=4400 node verification/check-browser.mjs
-OWNWORD_PORT=4400 node verification/check-offline.mjs
-node verification/review-accessibility.mjs
+python3 -m http.server 4311 --bind 127.0.0.1 --directory /home/haodev/ownword/designs
 ```
+
+原型目录运行 `OWNWORD_PORT=4311 python3 check-browser.py --controls-only`，须使用宿主环境。专项 45 条通过，模型 74、词典 4、65 个 token 通过；8 次 axe 审计 0 violation、4 条背景文字 incomplete 已记录。未重跑全量 BDD。
+
+浏览器日志证据为 `evidence/prototype-controls-errors.txt`；场景事件通过 `[Ownword prototype] account event` 输出。没有真实钱包交易、数据库或上传服务。
+
+## 下一步
+
+用户预览复核本次两批结果，再按反馈调整。资产仍为 `needs-review`，不能标记整体事项完成。既有卡片背面键盘入口缺失尚未处理。
+
+根仓库已有用户暂存改动，后续提交必须限定本次文件，禁止一起提交。

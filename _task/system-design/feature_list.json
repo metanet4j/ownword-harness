@@ -10,7 +10,7 @@
       "description": "打磨 designs/own-word-prototype-s2-astra-001（穹顶与地平线：七线穹顶、无刻度地平、3D Public Identity），使原型达到可进入生产实现的状态：PRD v0.1 全部 BDD 场景可交互且可验证，术语/状态/边界与核心认知一致，S2 设计系统一致，无障碍/响应式/i18n/主题达标，全部模拟点与生产替换契约逐项文档化，验证证据可复现。基线为 commit d7706da（09-06 00:18，用户要求回退后的状态）；本次打磨不复用 backup/astra-412ca12 分支的成果。",
       "dependencies": ["design-002"],
       "status": "in-progress",
-      "statusNote": "2026-09-16 用户选定本原型作为后续持续打磨的唯一原型；已由 Archive/prototype/own-word-prototype-s2-astra-001 移入 designs/own-word-prototype-s2-astra-001。后续迭代以本事项的完成条件为准。",
+      "statusNote": "2026-09-16 两批原型整理已完成：场景控制集中到右下角设置；示例数据说明集中，授权弹窗明确外部钱包边界。沿用现有 PRD v0.1、S2 与模拟状态机，不进行生产工程改造。模型 74、词典 4、65 个 token 与专项浏览器 45 条通过；8 次 axe 审计 0 violation，4 条背景文字 incomplete 已记录。操作与证据见 designs/own-word-prototype-s2-astra-001/原型演练_20260916-1604.md。整体事项仍待用户视觉复核，未重跑全量 BDD；既有 evidence 字段保持空值。",
       "inputs": ["_task/system-design/spec/核心认知.md", "_task/system-design/spec/prd/v0.1/设计文档v0.1.md", "designs/react-spectrum-s2"],
       "output": "designs/own-word-prototype-s2-astra-001",
       "doneCriteria": [
