@@ -6,69 +6,76 @@
 
 ## 30 秒现状
 
-- 进度：P0~P4 完成；`boot4-tests-jupiter` 完成（JUnit5 统一 + sdk 缺陷修复 + external 打 Tag）；
-  **`boot4-p5-verify` 进行中**：base 2/2、sdk 23/23、planaria 1/1、component-file 8/8 已绿。
-- 状态：`activeItem = boot4-p5-verify`。**component-test 125 个用例仍有失败**，已按 4 类归档（见下）。
-- 环境：五个中间件 healthy；Boot 4 的 Mongo 前缀与 Feign 缺件已修（component `5deced9`）。
+- 进度：P0~P4 完成；`boot4-tests-jupiter` 完成（JUnit 5 统一 39 文件 + sdk 两个构造链缺陷修复 + 联网用例打 Tag）；
+  **`boot4-p5-verify` 进行中**。
+- 已全绿：base 2/2、sdk 23/23（external 已排除）、connect-planaria 1/1、component-file 8/8；
+  component-test 109 run（10 个类全绿，含 `contextLoads`、Kafka、ES 检索、transaction 系列）。
+- 未收敛 4 类（都在 component-test）：Mongo 两类 23 error / ES 2 / resolver 10 / ComplteTxFactory 2。
+- 环境：五个中间件 healthy；已修 Boot 4 的 `spring.mongodb.*` 前缀、Feign 缺 `spring-boot-http-converter`。
 
 ---
 
-# 本次交接：代码迁移已收口，等用户决策后进入测试门禁 / P5
+# 本次交接：继续收敛 component-test 剩余 4 类（P5）
 
-## 1. 已完成（可直接复现）
+## 1. 当前执行状态与提交
 
-| 阶段 | 提交 | 复现命令（任务根目录，$MVN 见下） |
-|---|---|---|
-| P1 版本号 | parent `5f462fa` / base `d0e2384` / sdk `52e59bb` / component `6ecd226` | 四条 grep 门禁（计划 §6.1） |
-| P2 父 POM | parent `935b5f5` + `a82ab4e` | `cd metanet4j-parent && $MVN -N install`；`$MVN enforcer:enforce` |
-| P3 base+sdk | base `4f5a65a` / sdk `097870d` | base `$MVN clean install`；sdk `$MVN clean install -DskipTests` |
-| P4 component | component `b468ba8`（66 文件） | `cd metanet4j-component && $MVN clean package -DskipTests` + 计划 §6.6 九条门禁 |
+| 项 | 值 |
+|---|---|
+| 最近提交 | parent `50598c0`、base `6e16cfa`、sdk `bc966e5`、component `8df13c6`（+ 诊断文档提交） |
+| 四仓库 | 全部 0 脏 |
+| 复跑命令 | `cd metanet4j-component && $MVN clean test -DexcludedGroups=external` |
+| 工具链 | `JAVA_HOME=~/.sdkman/candidates/java/25.0.4.1-tem`；`$MVN="$HOME/.sdkman/candidates/maven/3.9.16/bin/mvn -s $HOME/.m2/metanet4j-settings.xml -B"` |
 
-其中 `JAVA_HOME=$HOME/.sdkman/candidates/java/25.0.4.1-tem`，
-`MVN="$HOME/.sdkman/candidates/maven/3.9.16/bin/mvn -s $HOME/.m2/metanet4j-settings.xml -B"`。
+## 2. 剩余 4 类（按收益排序）
 
-## 2. 待用户决策（两件，不要自行开工）
+### ① Mongo 两类：`BapMongodbTest`(14) + `BsocialReplyMongodbTest`(9) —— 进行中的卡点
+- 现象：隔离复现 **26 run / 23 error**，63 次 `Command find requires authentication`；调用链
+  `CustomizedBsocialReplyRepositoryImpl.saveReply` → `MongoTemplate.findById`（连接**无凭据**）
+- 已证：启动期 `createIndexes` 认证正常（说明存在有凭据的客户端）；仓库内无自定义 Mongo Bean；
+  补 deprecated 的 `spring.data.mongodb.uri` **无效**（已回滚）
+- **下一步（推荐顺序）**：
+  1. 写临时诊断用例：`@Autowired MongoDatabaseFactory` → 打印 `MongoClientSettings`（看 credential 是否为空）
+  2. 或在 `component-test/src/test/resources/logback-test.xml` 把 `org.mongodb.driver` 设为 DEBUG
+     （注意：用 `-Dlogging.level...=DEBUG` 传 Maven **无效**，已实测）
+  3. 独立验证凭据：`docker exec infra-mongo mongosh "mongodb://bschema:bschema123@localhost:27017/bschema?authSource=admin" --eval "db.bap_id.findOne()"`
+- 复现命令（三个坑：必须 `-am`；`-Dtest` 多类用**逗号**；需 `-Dsurefire.failIfNoSpecifiedTests=false`）：
+  ```bash
+  $MVN -pl metanet4j-component-test -am clean test \
+    -Dtest='BapMongodbTest,BsocialReplyMongodbTest' -DexcludedGroups=external \
+    -Dsurefire.failIfNoSpecifiedTests=false
+  ```
 
-1. **sdk 26 个既有 error**：`BapBase extends MasterKeyBapBase`，父类构造器调用被覆写的 `getRootAddress()`，
-   而 `rootPrivateKey` 要等 `super()` 返回后才赋值 → NPE（计划 §6.4 有堆栈与根因）。
-   影响所有 `fromOnlyMasterPrivateKey` / `fromRootChildNumberList` 构造路径（不只测试）。
-   **选项**：(a) 修产品代码（把 `identityKey` 赋值挪到 `BapBase` 字段赋值之后）；(b) 只改测试夹具。
-2. **测试门禁口径**：计划默认 D17（vintage 跑存量 JUnit4），P4 已按此接线（component-test 加 vintage+junit4，
-   基类留 Jupiter、11 个子类补 `@RunWith`）。`boot4-tests-jupiter` 原方案是"全量迁 Jupiter（38 文件）"，
-   且此前误开工回退过一次 —— 需确认是否还要做、做哪一套。
+### ② ES `EsTest`（2）
+`search_phase_execution_exception / all shards failed`（建索引已幂等化，余下是查询类用例）。
+查该用例查询的索引是否存在、字段与 mapping 是否匹配。
 
-## 3. 决策后的下一步（按计划顺序）
+### ③ resolver 两类（10）：`BapRawStrResolverTest`(8) + `BsocialRawResolverTest`(2)
+`PlanariaBapConvertor.convert` 抛「数据不符合bap格式」（`BAP_PROTOCOL`/`AIP_PROTOCOL` 校验不过）。
+只做定性：fixture 陈旧（2021–2023 原始串）→ 换数据或打 `@Tag("external")`；还是协议常量变化 → 产品问题。
+
+### ④ `ComplteTxFactoryTest`（2）
+`this.bapBase` 为 null（`@BeforeEach` 初始化未就绪）；可能随 ①/③ 修复自动消失。
+
+## 3. 收尾判定（P5 → P6）
 
 ```bash
-# ① 全链路编译回归，确认基座没被后续改动破坏
-(cd metanet4j-parent    && $MVN -N install)
-(cd metanet4j-base      && $MVN clean install)
-(cd metanet4j-sdk       && $MVN clean install -DskipTests)
-(cd metanet4j-component && $MVN clean package -DskipTests)
-
-# ② P5：编译门禁 + B 档 + 逐模块执行数（计划 §7）
-#    中间件已在跑：ownword/infra 五容器 healthy（Mongo 8.0.32 / ES 9.4.5 / Kafka 4.2.1 KRaft / Redis 7.4.11 / MySQL 8.4.11）
+cd metanet4j-component && $MVN clean test -DexcludedGroups=external
+# 断言：base/sdk/component-test/connect-planaria 执行数均 > 0；surefire 报告出现 contextLoads；§6.6 九条门禁复跑
 ```
-
-P5 验收口径（不变）：按模块给执行数（base/sdk/component-test/connect-planaria 均 > 0）、
-`surefire-reports` 里出现 `contextLoads`、§6.6 的依赖漂移断言复跑。
-
-## 4. 完成后
-
-1. 更新 `feature_list.json`（P5→done 附 evidence、`activeItem`）、`progress.md`、本文件。
-2. P6 收尾：四仓库提交 + 文档同步（四仓库本次已各自提交，P6 只剩文档与最终验收输出）。
+全绿或失败项全部有明确定性并归档 → `boot4-p5-verify` 置 done → **P6**：四仓库提交确认 + 文档同步 +
+输出最终验收（受影响仓库、每仓库编译命令、提交 ID）。
 
 ---
 
 ## Next Session（后续顺序）
 
 1. ✅ P0 / P0.5 / P1 / P2 / P3 / P4 / `boot4-tests-jupiter`
-2. **`boot4-p5-verify`（in-progress）**——按四类收敛 component-test 剩余失败：
+2. **`boot4-p5-verify`（in-progress，本次交接）**——按四类收敛 component-test 剩余失败：
    - ① 配置绑定：`PlanariaProperties.getBitbus()` 为 null（测试未加载 `application-slave.yml` 的 `bitbus.*`）
    - ② ES 索引：`EsTest` 4 个建索引用例（需看具体报错：mapping/已存在/连接）
    - ③ 外部服务：`BsocailConvertorTest`（FetchBitfs / SignatureVerifyFail，依赖 bitfs 外部接口）→ 建议 `@Tag("external")`
-   - ④ 上下文加载：`BlockTaskServiceTest.contextLoads`（取根因，可能 MySQL/Redis 配置）
-   - 另：`BapRawStrResolverTest`/`BsocialRawResolverTest` 的 `IllegalArgumentException` 待定性
+   - ④ `ComplteTxFactoryTest` 的 `bapBase` 为 null
+   - （`BlockTaskServiceTest`/`TxUtxoServiceTest`/`MetaIdConvertorTest`/`BsocailConvertorTest`/`BapConvertorTest` 已打 `@Tag("external")`，不进常规门禁）
 3. 之后 `boot4-p6-finish`（四仓库提交 + 文档同步 + 最终验收输出）
 
 ## 开工自检
