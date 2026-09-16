@@ -155,6 +155,13 @@
   - `BapRawStrResolverTest`(8)/`BsocialRawResolverTest`(2)：`PlanariaBapConvertor.convert` 抛「数据不符合bap格式」（BAP_PROTOCOL/AIP_PROTOCOL 校验不过）→ 疑 fixture 陈旧或协议常量变化，待定性
   - `ComplteTxFactoryTest`(2)：`this.bapBase` 为 null（`@BeforeEach` 初始化依赖的数据未就绪）
 
+**第四轮补充（2026-09-16）**：用 `-Dlogging.level.org.mongodb.driver=DEBUG` 传给 Maven 的方式**抓不到 driver 日志**
+（该属性未生效于 surefire 的 fork 进程；surefire 报告与 Maven 日志里都没有 "Cluster created with settings"）。
+下一轮改用确定性做法之一：
+1. 在 `component-test/src/test/resources/logback-test.xml` 里把 `org.mongodb.driver` 设为 DEBUG；
+2. 或写一个临时诊断用例 `@Autowired MongoDatabaseFactory` 打印 `MongoClientSettings`（对比 `spring.mongodb.uri` 的凭据是否带上）；
+3. 或先直接验证凭据本身：`docker exec infra-mongo mongosh "<uri>" --eval "db.bap_id.findOne()"`。
+
 **第四轮：Mongo 两类认证问题的诊断结论（2026-09-16）**
 
 复现命令（注意两个坑：必须 `-am`，否则解析不到兄弟模块；`-Dtest` 多类要用**逗号**，`+` 在 JUnit Platform 下不生效；
