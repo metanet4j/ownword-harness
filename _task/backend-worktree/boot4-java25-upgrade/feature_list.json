@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": null,
+  "activeItem": "boot4-p05-prefetch",
   "note": "只记录阶段状态与依赖；各阶段的目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。activeItem=null 表示等待用户批准，不要自行开工。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
@@ -41,11 +41,11 @@
       "id": "boot4-p05-prefetch",
       "name": "P0.5 依赖预取",
       "description": "目标见计划 §5 的 P0.5；验收：新坐标集全部可解析。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "boot4-p0-env"
       ],
-      "statusNote": "本地仓库 ~/.m2/metanet4j 现约 260MB，项目依赖树从未完整下载。",
+      "statusNote": "2026-09-16 已激活，交由下一个 agent 执行。本事项不改任何仓库文件：只在临时目录建探针 pom，把升级后的坐标集拉进隔离仓库 ~/.m2/metanet4j。执行细节见 session-handoff.md 的「本次交接」章。",
       "evidence": []
     },
     {

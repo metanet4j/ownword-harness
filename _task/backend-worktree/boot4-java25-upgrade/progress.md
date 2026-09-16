@@ -4,8 +4,9 @@
 
 ## Current State（当前状态）
 
-- Last Updated：2026-09-16（harness 初始化并精简）
-- Current Objective：**等待用户批准**进入 P0.5/P1/P2。代码零改动，四个子仓库 0 脏。
+- Last Updated：2026-09-16（激活 boot4-p05-prefetch 并交接）
+- Current Objective：执行 **`boot4-p05-prefetch`（依赖预取）**——已激活，交由下一个 agent 执行；
+  该事项不改任何仓库文件，只在 `/tmp` 建探针 pom 把升级后的坐标集拉进 `~/.m2/metanet4j`。执行细节见 `session-handoff.md` 的「本次交接」章。
 - Recommended Next Step：见文末 `Next`。
 - 中间件：共享设施五个容器 healthy 运行中。
 - 全局工具链：JDK 8 / Maven 3.9.9 未被改动（`./init.sh` 每次校验）。
@@ -39,11 +40,9 @@
 - 处置：`git checkout -- .` 全部回退，四仓库回到 0 脏；并清理跑测试产生的 `target/`（避免陈旧字节码继续误导）。
 - 回退无损失。已固化为 `AGENTS.md` §4 的红线。
 
-## Next（下一步，等待用户批准）
+## Next（下一步）
 
-按 `feature_list.json` 依赖顺序：
-
-1. `boot4-p05-prefetch` 依赖预取（把坐标/网络风险提前暴露）
+1. **`boot4-p05-prefetch` 依赖预取（in-progress）**——照 `session-handoff.md`「本次交接」执行，完成后置 done 并把 activeItem 置 null
 2. `boot4-p1-version` 版本号统一（纯机械）
 3. `boot4-p2-parent` 父 POM（**含 lombok 清理，此步落地后测试才可能真实执行**）
 4. 之后 `boot4-p3-base-sdk` / `boot4-p4-component` / `boot4-tests-jupiter`（测试门禁，依赖 P2）→ `boot4-p5-verify` → `boot4-p6-finish`
