@@ -5,10 +5,10 @@
 
 ## Current State（当前状态）
 
-- **Last Updated**：2026-09-16（交付后修复也已完成：任务全部收口，P0~P6 + 交付后修复全 done）
+- **Last Updated**：2026-09-16（交付后修复 I/II 均完成：任务全部收口，P0~P6 + 两轮交付后修复全 done）
 - **Current Objective**：无（本任务已交付；交付物见 `doc/验收报告-Boot4-Java25-20260916-1320.md`）
 - **Recommended Next Step**：无必做项；如有后续动作，先看文末「下一步」与「未决项」
-- **远端状态**：四仓库已推送 `origin/feature/java21`（两轮：交付成果 → 交付后修复），远端 `dev`/`master` 未被触碰；ownword 仍为本地提交
+- **远端状态**：四仓库已推送 `origin/feature/java21`（三轮：交付成果 → 交付后修复 I → 交付后修复 II），远端 `dev`/`master` 未被触碰；ownword 仍为本地提交
 - **执行授权**：用户 2026-09-16 指示「继续执行，改代码不必逐项确认」；仅在计划未覆盖的架构决策/取舍上停下问（`AGENTS.md` §5）
 - **依赖基座**：parent / base / sdk / component 的 0.2.0 均可构建安装
 - **中间件**：共享设施 `ownword/infra/` 五个容器 healthy 运行中
@@ -22,11 +22,11 @@
 | metanet4j-sdk | 26 | 26 通过（含交付后新增 3 个离线回归用例；另 29 个 external 被排除） |
 | metanet4j-connect-planaria | 1 | 1 通过 |
 | metanet4j-component-file | 8 | 8 通过（8 skipped 为需凭据的 S3/SFTP 用例） |
-| metanet4j-component-test | 95 | 95 通过 |
+| metanet4j-component-test | 101 | 101 通过（交付后修复 II 后 +6：3 个撤销 external 的 resolver 用例、1 个补断言的 `testAddress`、2 个新回归类实例） |
 
 - 复跑：`export JAVA_HOME=$HOME/.sdkman/candidates/java/25.0.4.1-tem`；`MVN="$HOME/.sdkman/candidates/maven/3.9.16/bin/mvn -s $HOME/.m2/metanet4j-settings.xml -B"`；
   `(cd metanet4j-component && $MVN clean test -DexcludedGroups=external)`
-- `contextLoads` 在 8 个类的 `TEST-*.xml` 中真实执行。**注意口径**：surefire 的 `.txt` 只记失败项，
+- `contextLoads` 在 9 个类的 `TEST-*.xml` 中真实执行。**注意口径**：surefire 的 `.txt` 只记失败项，
   通过用例不出现 → 判定 `contextLoads` 必须看 XML，`grep *.txt` 会误报"未执行"。
 - §6.6 九条 grep 门禁全绿（pom 25 / 0.1.0 字面量 0 / `metanet4j.version=0.1.0` 0 / `java.version=11` 0 /
   `import javax.*` 仅白名单 `AesCBCUtil` / Boot 4 旧包名 0 / Jackson 旧 core·databind 0 /
@@ -50,7 +50,8 @@
 | 测试门禁（全仓 39 文件迁 Jupiter + sdk 两处构造链缺陷修复 + 联网用例打 Tag） | parent `50598c0` / base `6e16cfa` / sdk `451020e`·`bc966e5` / component `0ce5c18` |
 | **P5 验证与收敛**（Mongo 认证根因、ES 两处、resolver 两类、`ComplteTxFactoryTest` 定性；门禁复跑全绿） | 见计划 §11「P5 验证」记录与本文件「门禁与证据」；component 提交 `73e3ad4` |
 | **P6 收尾**（四仓库提交确认 + 文档同步 + 验收报告输出） | `doc/验收报告-Boot4-Java25-20260916-1320.md`；ownword 提交见 git log |
-| **交付后修复**（sdk `initSignType` 死代码 + 测试应用 Redis/MySQL 配置对齐） | sdk `bae4c36`（含离线回归用例 + 负向验证）、component `d585194`；两处均已推送 |
+| **交付后修复 I**（sdk `initSignType` 死代码 + 测试应用 Redis/MySQL 配置对齐） | sdk `bae4c36`（含离线回归用例 + 负向验证）、component `d585194`；已推送 |
+| **交付后修复 II**（`MongoBapService.findIdentityKey` 空桩 + `TxoBobConverter` 用例从未执行） | component `e634982`（含自足回归用例 + 负向验证；3 个 resolver 用例撤销 external 并自足化）；已推送 |
 
 ## 关键事实（避免重复踩坑）
 
@@ -83,13 +84,13 @@
 |---|---|---|---|
 | 1 | ~~sdk `initSignType` 死代码~~ **已修** | — | ✅ sdk `bae4c36`（含离线回归用例 + 负向验证），已推送 |
 | 2 | ~~测试应用 Redis/MySQL 配置与共享设施不一致~~ **已对齐** | — | ✅ component `d585194`，已推送 |
-| 3 | 未打基线 tag `pre-boot4-java25` | 计划 §8 草案要求开工前打；实测 `dev` 全程未移动，回滚等价 `git checkout dev` | 如需留痕可补打 |
-| 4 | `TxoBobConverter`（3 个用例）从未被 surefire 选中 | 类名不含 `Test`，不匹配默认 includes（上游遗留） | 如需恢复执行，重命名为 `TxoBobConverterTest` |
-| 5 | 58 个用例被 `@Tag("external")` 排除 | sdk 29 + component-test 30（需公网/MySQL/S3 凭据等） | 已逐类定性归档；不进常规门禁 |
+| 3 | ~~`MongoBapService.findIdentityKey` 空桩~~ **已修** | — | ✅ component `e634982`（委托 `BapIdRepository.findIdentityKey`；自足回归用例 + 负向验证），已推送 |
+| 4 | ~~`TxoBobConverter`（3 个用例）从未被 surefire 选中~~ **已修** | — | ✅ component `e634982`：改名 `TxoBobConverterTest`；1 补断言入门禁 / 1 空用例删除 / 1 打方法级 external |
+| 5 | 未打基线 tag `pre-boot4-java25` | 计划 §8 草案要求开工前打；实测 `dev` 全程未移动，回滚等价 `git checkout dev` | 如需留痕可补打 |
+| 6 | 57 个用例被 `@Tag("external")` 排除 | sdk 29 + component-test 28（需公网广播、本机绝对路径夹具、MySQL/S3 凭据、2023 主网 outpoint 等） | 已逐类定性归档；不进常规门禁 |
 
 ## 下一步（Next）
 
-1. 本任务已交付并已推送：提交 ID = parent `50598c0` / base `6e16cfa` / sdk **`bae4c36`** / component **`d585194`**；
+1. 本任务已交付并已推送：提交 ID = parent `50598c0` / base `6e16cfa` / sdk **`bae4c36`** / component **`e634982`**；
    远端 `origin/feature/java21`（四仓库一致）；验收报告见 `doc/验收报告-Boot4-Java25-20260916-1320.md`。
-2. 如需继续：① 需要留痕则补打基线 tag `pre-boot4-java25`；② 如需更彻底可单独立项处理
-   `MongoBapService.findIdentityKey` 空桩与 `TxoBobConverter` 未执行；③ ownword 任务文档若要推送需明确指示。
+2. 如需继续：① 需要留痕则补打基线 tag `pre-boot4-java25`；② ownword 任务文档若要推送需明确指示。

@@ -200,7 +200,7 @@ git -C <每个仓库> status --porcelain      # 不应出现 .mvn/ 或 wrapper �
 | P4 component | 22 个 pom 坐标/源码/配置迁移、Boot 4 包迁移、ES 9 迁移、Redisson 4.7.0、测试引擎 | 聚合 `package` 成功；javax/旧包名 grep 归零；§6.6 依赖漂移断言通过 |
 | P5 验证 | 编译门禁 + B 档（Mongo 8.0/ES 9.4.5/Kafka 4.2.1/Redis 7.4/MySQL 8.4）+ 测试实际执行数 | 用例通过 + 冒烟通过（§7）；逐模块执行数断言 |
 | P6 收尾 | 4 仓库独立提交、文档同步 | 输出提交 ID 与编译命令 |
-| 交付后修复 | sdk `initSignType` 死代码修复（含离线回归用例）+ 测试应用配置对齐共享设施 | 回归用例正/负向验证通过；门禁复跑全绿 |
+| 交付后修复 | ① sdk `initSignType` 死代码（含离线回归用例）② 测试应用配置对齐共享设施 ③ `MongoBapService.findIdentityKey` 空桩 ④ `TxoBobConverter` 用例从未被执行 | 回归用例正/负向验证通过；门禁复跑全绿（component-test 95→101） |
 
 ---
 
@@ -663,7 +663,7 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 | JSpecify 与 JSR305 语义差异 | `@NonNull` 比 JSR305 `@Nonnull` 更严格 | 仅注解，无运行时/tooling 影响；如接 nullness 工具再评估 |
 | 显式钉死清理不彻底 | 残留 pin 会静默降级 Boot 4 | 以 §6.2 表 + `effective-pom`/`dependency:tree` 门禁为准 |
 | ~~sdk `initSignType` 是死代码~~ **（已修 `bae4c36`）** | `UnSpendableDataLockBuilder` 把 `signType` 初始化为 `SignType.CURRENT`（非 null），而 `BapDataLockBuilder.initSignType(...)` 只在 `signType == null` 时赋值 → `buildRoot()` 用 **CURRENT** 地址签名、`buildId()` 同理，产出的 BAP root/ID 交易 AIP 签名地址不是根/上一地址，`BapHelper.isRootBap` 判 false、解析器认不出 root（上游既有缺陷） | ✅ 2026-09-16 按用户指示修复：`initSignType` 直接写入 `signType`；新增离线回归用例 `BapDataLockBuilderSignTypeTest` 并做负向验证；component-test 夹具撤掉 3 参构造器绕过、恢复 `buildXxx().sign()` |
-| `MongoBapService.findIdentityKey` 是返回 null 的桩 | 该类带 `@Primary`，故 BAP/Bsocial 解析器「签名地址 → identityKey」反查在 Mongo-only 部署下恒不生效（真实实现在 `MysqlBapService` + `SignerRepository`，本测试应用按设计未纳入 store-sql） | 相关用例打 `@Tag("external")`（与 `BlockTaskServiceTest` 同因）；若产品要支持 Mongo-only 部署需单独立项实现 |
+| ~~`MongoBapService.findIdentityKey` 是返回 null 的桩~~ **（已修 `e634982`）** | 该类带 `@Primary`，故 BAP/Bsocial 解析器「签名地址 → identityKey」反查在 Mongo-only 部署下恒不生效（真实实现当时只在 `MysqlBapService` + `SignerRepository`） | ✅ 2026-09-16 修复：委托 `BapIdRepository.findIdentityKey`（Mongo 侧 match `signers.address`）；新增自足回归用例 + 负向验证；3 个原因此打 external 的 resolver 用例已撤销标签并自足化（先落 root、再落 ID 更新交易，与产品上链顺序一致） |
 | ~~测试应用 Redis/MySQL 凭据与共享设施不一致~~ **（已对齐 `d585194`）** | 原 `spring.data.redis.password: metaid2022`（实际**无密码**）、`spring.datasource.druid` 用 `root/123456`（实际 `root/root123`，且 JDBC 需 `allowPublicKeyRetrieval=true`）；这些键此前被 YAML 缩进 bug 吞掉，P5 修复后重新生效 | ✅ 2026-09-16 已按 `ownword/infra/README-*.md`（唯一事实来源）对齐；实测旧 MySQL 密码 `Access denied`、新密码可连 8.4.11，Redis `requirepass` 为空。注：该应用类路径无 `spring-data-redis`、无 `DataSource` Bean，故不建立运行时连接（配置卫生） |
 
 ---
@@ -859,6 +859,21 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 
 修复后全量门禁复跑（`-DexcludedGroups=external`）：base 2/2、sdk **26**/0/0（含 3 个新回归用例）、
 connect-planaria 1/1、component-file 8/8、component-test 95/0/0；`contextLoads` 8 处 PASS；四仓库 0 脏。
+
+### 交付后修复 II（2026-09-16，第八轮）—— ✅ 完成
+
+用户指示"这两项一并修复"（`MongoBapService.findIdentityKey` 空桩、`TxoBobConverter` 用例从未执行）。
+
+| # | 修复 | 提交 | 验证 |
+|---|---|---|---|
+| 1 | `MongoBapService.findIdentityKey` 空桩：`return null` 使 Mongo-only 部署下「签名地址 → identityKey」反查恒失效（非 root 数据上传报 "not find identityKey by SignatureAddress" / "identityKey should not null"） | component **`e634982`** | 委托 `BapIdRepository.findIdentityKey`（Mongo 侧 match `signers.address`）；新增自足回归用例 `MongoBapServiceFindIdentityKeyTest`（注册 signer → 反查 → 清理）+ **负向验证**（回退空桩后失败：expected `p5-test-identity-…` but was `null`）；连带撤销 3 个因此打 external 的 resolver 用例标签并自足化 |
+| 2 | `TxoBobConverter`（3 用例）从未被 surefire 选中：类名不以 `Test` 结尾 | component **`e634982`** | 改名 `TxoBobConverterTest` 后 surefire 可选中（实测 run=3）；逐个归档：`testAddress()` 补断言入门禁、`testBob()` 空用例删除、`test()` 依赖作者本机绝对路径 hex → 方法级 `@Tag("external")` |
+| 3 | 连带：`BitcoinschemaTransactionTest#testBapIdTransaction` 先调 `generateNextChildNumbers()`，把 `previous` 顶成尚未登记的子地址 → ID 更新反查失败；且新钱包 `previous` 本就是 root 地址（已登记） | component **`e634982`** | 去掉该自增；`BapRawStrResolverTest#testHandleBapId`、`BsocialRawResolverTest` 两用例改为自足（@BeforeEach 先落 root + ID 更新交易登记 current 地址），撤销 `@Tag("external")` 后全部通过 |
+
+修复后全量门禁复跑（`-DexcludedGroups=external`）：base 2/0/0、sdk 26/0/0、connect-planaria 1/0/0、
+component-file 8/0/0、**component-test 101/0/0**（交付时 95）；`contextLoads` 9 处 PASS；
+component-test 用例账目 130 = 101 执行 + 28 `@Tag("external")` 排除 + 1 非 void `@Test` 被 Jupiter 忽略。
+四仓库已推送 `origin/feature/java21`（component 第三轮推送 `d585194 → e634982`）。
 
 ### 环境就绪清单
 
