@@ -10,7 +10,7 @@
       "description": "打磨 designs/own-word-prototype-s2-astra-001（穹顶与地平线：七线穹顶、无刻度地平、3D Public Identity），使原型达到可进入生产实现的状态：PRD v0.1 全部 BDD 场景可交互且可验证，术语/状态/边界与核心认知一致，S2 设计系统一致，无障碍/响应式/i18n/主题达标，全部模拟点与生产替换契约逐项文档化，验证证据可复现。基线为 commit d7706da（09-06 00:18，用户要求回退后的状态）；本次打磨不复用 backup/astra-412ca12 分支的成果。",
       "dependencies": ["design-002"],
       "status": "in-progress",
-      "statusNote": "视觉评审 6 项建议均已落实。第 3 项收紧手机创建页标题、身份摘要与头像区，390px 名称和类型区上移约 121px，保留完整 BAP ID 和 44px 按钮。正常创建与 320px 英文深色边界验证通过，等待用户整体视觉复核；整体保持 in-progress、资产 needs-review。",
+      "statusNote": "第二轮四项优化均已实现并定向验证：字段即时纠错、无改动保存拦截、短屏提示收紧、公开卡单次轻动后静止。第一轮六项保留。等待用户视觉复核，整体保持 in-progress、资产 needs-review。",
       "inputs": ["_task/system-design/spec/核心认知.md", "_task/system-design/spec/prd/v0.1/设计文档v0.1.md", "designs/react-spectrum-s2"],
       "output": "designs/own-word-prototype-s2-astra-001",
       "doneCriteria": [
@@ -29,12 +29,34 @@
       ],
       "evidence": "designs/own-word-prototype-s2-astra-001/evidence/card-back-check.json 与 card-back-desktop.png、card-back-mobile.png。验证范围遵循 _task/system-design/AGENTS.md。整体事项仍待用户视觉复核。",
       "currentChange": {
-        "goal": "落实评审第 3 项：收紧手机创建页的标题、身份摘要与头像区，让名称和类型更早进入首屏。",
-        "dependencies": ["用户同意继续第 3 项", "review-20260917/index.html#form", "现有 S2 组件与 token", "核心认知第 10.5 节"],
-        "doneCriteria": ["390px 手机名称与类型明显上移，BAP ID 完整可读", "触控目标不缩小，字段之间保留清楚间距", "正常创建及320px边界验证、截图复核，表单校验与预览返回可用"],
-        "scope": "手机 setup 页面样式、对应资源版本、评审状态与验证证据。",
-        "status": "done",
-        "evidence": "designs/own-word-prototype-s2-astra-001/evidence/setup-layout-20260917/verification.json、console.txt 与六张截图。390px 正常场景名称输入从约635px上移至514px；320px英文深色图片操作与表单无横向溢出，必填校验、预览返回及模拟创建通过。未执行全量回归或真实手机键盘验证。"
+        "goal": "落实第二轮四项优化：输入纠错即时反馈、无改动保存拦截、短屏提示收紧、公开卡单次轻动后静止。",
+        "prdVersion": "v0.1",
+        "prdSource": "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+        "dependencies": [
+          "用户明确授权全部修复",
+          "当前原型实查截图与状态",
+          "核心认知第 6.3、10.5 节",
+          "绑定的 S2 设计系统"
+        ],
+        "doneCriteria": [
+          "首次提交后字段错误随当前值更新，超限与恢复均正确",
+          "无改动与改回原值均阻止保存授权，真实修改可保存",
+          "短屏取消提示更紧凑，关闭和底部操作可用",
+          "卡片单次轻动后静止，手动翻面和减少动态效果可用",
+          "正常与相关边界验证、截图和日志齐备，提交审阅"
+        ],
+        "scope": "表单状态与校验、保存守卫、提示与卡片样式及对应验证。",
+        "status": "in-progress",
+        "implementationStatus": "implemented-and-verified",
+        "reviewStatus": "awaiting-user-review",
+        "evidence": "designs/own-word-prototype-s2-astra-001/evidence/feedback-motion-20260917/verification.json、六张修复后截图及 console.txt；92 条模型断言、4 项文案契约、66 个 token 引用通过。仅验证本轮正常与相关边界，未执行全量浏览器回归。",
+        "commits": [
+          "4e6b227 即时纠错",
+          "060fa8a 无改动拦截",
+          "0c00ce2 短屏提示",
+          "4265f03 单次轻动"
+        ],
+        "nextStep": "用户查看原型并复核本轮四项调整。"
       },
       "currentReview": {
         "goal": "从美学、视觉层次与主流程交互寻找下一批优化项，交付带实际截图的评审页。",
