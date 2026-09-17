@@ -267,6 +267,44 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "68b6d4c"
+    },
+    {
+      "id": "R01",
+      "name": "P0 审查与数据安全修复",
+      "description": "审查持久化、身份隔离及签名发布闭环；复现确认的问题后逐项修复。",
+      "dependencies": [
+        "C04",
+        "C07",
+        "C09",
+        "C10"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "C04-A",
+        "C04-B",
+        "C04-D",
+        "C04-E",
+        "C04-F",
+        "C07-A",
+        "C07-D",
+        "C07-E",
+        "C07-F",
+        "C09-A"
+      ],
+      "doneCriteria": [
+        "发现按影响分级，保留可复现证据",
+        "确认的问题修复并通过相关正常与边界检查",
+        "源码逐项提交，状态与审查结论同步"
+      ],
+      "evidence": "ownword-prototype/evidence/R01/verification.json；确认并修复 1 项 P0 和 2 项关联 P1，双标签页、存储恢复、身份隔离及发布查询回归通过。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commits": [
+        "36eeacb",
+        "66f1dfd",
+        "a2cbce6"
+      ],
+      "report": "ownword-prototype/P0审查与修复v0.2.0-20260917-235527.md"
     }
   ],
   "designReview": {
