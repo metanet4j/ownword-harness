@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "purpose": "v0.2.0 文字内容高保真原型；状态记录不替代 PRD。",
+  "lastUpdated": "2026-09-17",
+  "allowedStatuses": [
+    "not-started",
+    "in-progress",
+    "needs-review",
+    "blocked",
+    "done"
+  ],
+  "activeFeature": null,
+  "nextFeature": "C01",
+  "environment": {
+    "worktree": "ownword-prototype",
+    "sourceRepository": "designs/own-word-prototype-s2-astra-001",
+    "baselineCommit": "8d924aeaa2bc315903a8a2910394830559cf135c",
+    "branch": "prototype/v0.2.0-content",
+    "prdVersion": "v0.2.0",
+    "prdSource": "_task/system-design/spec/prd/v0.2.0/设计文档v0.2.0-20260917-210556.md",
+    "previewPort": 4312,
+    "designSystem": "react-spectrum-s2"
+  },
+  "features": [
+    {
+      "id": "H00",
+      "name": "版本设计文档与 harness 初始化",
+      "description": "将计划转为版本 PRD，在 _task 建立独立原型 worktree，初始化可续接的任务环境。",
+      "dependencies": [],
+      "status": "needs-review",
+      "doneCriteria": [
+        "PRD 含页面、组件、状态、BDD 和逐项制作映射",
+        "worktree 与当前 dev 基线一致，原型源码不进入根仓库",
+        "init.sh 可重复运行，harness 无占位任务，基线预览实际验证",
+        "状态、证据与唯一下一步记录完整，交付用户复核"
+      ],
+      "evidence": "evidence/bootstrap-check-20260917.txt、evidence/environment-check-20260917.json、evidence/baseline-browser-20260917.json、三张 baseline 截图及 browser-errors/console 日志。PRD 引用、基线 worktree、S2 资源、92 条既有模型断言、harness 结构及桌面/320px 基线验证通过。内容功能未制作，真实外部服务未接入。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review"
+    },
+    {
+      "id": "C01",
+      "name": "内容入口与工作台",
+      "description": "按权威 PRD 第 4.1、4.2 节制作，功能范围见第 2 节，文件映射见第 6 节。",
+      "dependencies": [
+        "H00"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "C01-A",
+        "C01-B"
+      ],
+      "doneCriteria": [
+        "适用 BDD 场景可操作，证据逐条映射",
+        "本项正常与相关边界验证，截图与浏览器日志已审阅",
+        "实现提交并经用户复核；未复核时保持 needs-review"
+      ],
+      "evidence": ""
+    },
+    {
+      "id": "C02",
+      "name": "Markdown 编辑器",
+      "description": "按权威 PRD 第 4.2、4.3 节制作，功能范围见第 2 节，文件映射见第 6 节。",
+      "dependencies": [
+        "C01"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "C02-A",
+        "C02-B",
+        "X02"
+      ],
+      "doneCriteria": [
+        "适用 BDD 场景可操作，证据逐条映射",
+        "本项正常与相关边界验证，截图与浏览器日志已审阅",
+        "实现提交并经用户复核；未复核时保持 needs-review"
+      ],
+      "evidence": ""
+    },
+    {
+      "id": "C03",
+      "name": "统一预览与排版",
+      "description": "按权威 PRD 第 4.3 节制作，功能范围见第 2 节，文件映射见第 6 节。",
+      "dependencies": [
+        "C02"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "C03-A",
+        "C03-B",
+        "X01"
+      ],
+      "doneCriteria": [
+        "适用 BDD 场景可操作，证据逐条映射",
+        "本项正常与相关边界验证，截图与浏览器日志已审阅",
+        "实现提交并经用户复核；未复核时保持 needs-review"
+      ],
+      "evidence": ""
+    },
+    {
+      "id": "C04",
+      "name": "草稿管理",
+      "description": "按权威 PRD 第 4.4 节制作，功能范围见第 2 节，文件映射见第 6 节。",
+      "dependencies": [
+        "C03"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "C04-A",
+        "C04-B",
+        "C04-C"
+      ],
+      "doneCriteria": [
+        "适用 BDD 场景可操作，证据逐条映射",
+        "本项正常与相关边界验证，截图与浏览器日志已审阅",
+        "实现提交并经用户复核；未复核时保持 needs-review"
+      ],
+      "evidence": ""
+    },
+    {
+      "id": "C05",
+      "name": "Markdown 导入导出",
+      "description": "按权威 PRD 第 4.4 节制作，功能范围见第 2 节，文件映射见第 6 节。",
+      "dependencies": [
+        "C04"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "C05-A",
+        "C05-B"
+      ],
+      "doneCriteria": [
+        "适用 BDD 场景可操作，证据逐条映射",
+        "本项正常与相关边界验证，截图与浏览器日志已审阅",
+        "实现提交并经用户复核；未复核时保持 needs-review"
+      ],
+      "evidence": ""
+    },
+    {
+      "id": "C06",
+      "name": "发布确认",
+      "description": "按权威 PRD 第 4.5 节制作，功能范围见第 2 节，文件映射见第 6 节。",
+      "dependencies": [
+        "C05"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "C06-A",
+        "C06-B",
+        "X01"
+      ],
+      "doneCriteria": [
+        "适用 BDD 场景可操作，证据逐条映射",
+        "本项正常与相关边界验证，截图与浏览器日志已审阅",
+        "实现提交并经用户复核；未复核时保持 needs-review"
+      ],
+      "evidence": ""
+    },
+    {
+      "id": "C07",
+      "name": "模拟身份签名与链上发布",
+      "description": "按权威 PRD 第 4.5 节制作，功能范围见第 2 节，文件映射见第 6 节。",
+      "dependencies": [
+        "C06"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "C07-A",
+        "C07-B",
+        "C07-C",
+        "C07-D",
+        "C07-E"
+      ],
+      "doneCriteria": [
+        "适用 BDD 场景可操作，证据逐条映射",
+        "本项正常与相关边界验证，截图与浏览器日志已审阅",
+        "实现提交并经用户复核；未复核时保持 needs-review"
+      ],
+      "evidence": ""
+    },
+    {
+      "id": "C08",
+      "name": "内容详情与公开阅读",
+      "description": "按权威 PRD 第 4.6 节制作，功能范围见第 2 节，文件映射见第 6 节。",
+      "dependencies": [
+        "C07"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "C08-A",
+        "C08-B"
+      ],
+      "doneCriteria": [
+        "适用 BDD 场景可操作，证据逐条映射",
+        "本项正常与相关边界验证，截图与浏览器日志已审阅",
+        "实现提交并经用户复核；未复核时保持 needs-review"
+      ],
+      "evidence": ""
+    },
+    {
+      "id": "C09",
+      "name": "修订与版本历史",
+      "description": "按权威 PRD 第 4.6 节制作，功能范围见第 2 节，文件映射见第 6 节。",
+      "dependencies": [
+        "C08"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "C09-A",
+        "C09-B"
+      ],
+      "doneCriteria": [
+        "适用 BDD 场景可操作，证据逐条映射",
+        "本项正常与相关边界验证，截图与浏览器日志已审阅",
+        "实现提交并经用户复核；未复核时保持 needs-review"
+      ],
+      "evidence": ""
+    },
+    {
+      "id": "C10",
+      "name": "Proof 与交易详情",
+      "description": "按权威 PRD 第 4.6 节制作，功能范围见第 2 节，文件映射见第 6 节。",
+      "dependencies": [
+        "C09"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "C10-A",
+        "C10-B"
+      ],
+      "doneCriteria": [
+        "适用 BDD 场景可操作，证据逐条映射",
+        "本项正常与相关边界验证，截图与浏览器日志已审阅",
+        "实现提交并经用户复核；未复核时保持 needs-review"
+      ],
+      "evidence": ""
+    }
+  ]
+}

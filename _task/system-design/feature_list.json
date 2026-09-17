@@ -1,17 +1,30 @@
 {
   "schemaVersion": 1,
   "initializedAt": "2026-08-12",
-  "allowedStatuses": ["not-started", "in-progress", "blocked", "done", "archived"],
-  "activeItem": "design-astra-001",
+  "allowedStatuses": [
+    "not-started",
+    "in-progress",
+    "needs-review",
+    "blocked",
+    "done",
+    "archived"
+  ],
+  "activeItem": "design-content-v020",
   "features": [
     {
       "id": "design-astra-001",
       "name": "astra 原型打磨至生产实现就绪",
       "description": "打磨 designs/own-word-prototype-s2-astra-001（穹顶与地平线：七线穹顶、无刻度地平、3D Public Identity），使原型达到可进入生产实现的状态：PRD v0.1 全部 BDD 场景可交互且可验证，术语/状态/边界与核心认知一致，S2 设计系统一致，无障碍/响应式/i18n/主题达标，全部模拟点与生产替换契约逐项文档化，验证证据可复现。基线为 commit d7706da（09-06 00:18，用户要求回退后的状态）；本次打磨不复用 backup/astra-412ca12 分支的成果。",
-      "dependencies": ["design-002"],
-      "status": "in-progress",
-      "statusNote": "第二轮四项优化均已实现并定向验证：字段即时纠错、无改动保存拦截、短屏提示收紧、公开卡单次轻动后静止。第一轮六项保留。等待用户视觉复核，整体保持 in-progress、资产 needs-review。",
-      "inputs": ["_task/system-design/spec/核心认知.md", "_task/system-design/spec/prd/v0.1/设计文档v0.1.md", "designs/react-spectrum-s2"],
+      "dependencies": [
+        "design-002"
+      ],
+      "status": "needs-review",
+      "statusNote": "v0.1 成果已提交并集成至 dev；保留人工视觉复核，不因 v0.2.0 启动而标记完成。",
+      "inputs": [
+        "_task/system-design/spec/核心认知.md",
+        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+        "designs/react-spectrum-s2"
+      ],
       "output": "designs/own-word-prototype-s2-astra-001",
       "doneCriteria": [
         "BDD 全覆盖：PRD v0.1 第 5 节与第 8.8 节、第 9 节裁决的每条场景在原型中有可操作入口，verification.md 映射表逐条给出可复现证据（脚本 + 证据文件）",
@@ -46,7 +59,7 @@
           "正常与相关边界验证、截图和日志齐备，提交审阅"
         ],
         "scope": "表单状态与校验、保存守卫、提示与卡片样式及对应验证。",
-        "status": "in-progress",
+        "status": "needs-review",
         "implementationStatus": "implemented-and-verified",
         "reviewStatus": "awaiting-user-review",
         "evidence": "designs/own-word-prototype-s2-astra-001/evidence/feedback-motion-20260917/verification.json、六张修复后截图及 console.txt；92 条模型断言、4 项文案契约、66 个 token 引用通过。仅验证本轮正常与相关边界，未执行全量浏览器回归。",
@@ -72,7 +85,11 @@
       },
       "currentReview": {
         "goal": "从美学、视觉层次与主流程交互寻找下一批优化项，交付带实际截图的评审页。",
-        "dependencies": ["现有 PRD v0.1 原型", "既有 S2 设计系统", "核心认知第 6.3、10.5 节"],
+        "dependencies": [
+          "现有 PRD v0.1 原型",
+          "既有 S2 设计系统",
+          "核心认知第 6.3、10.5 节"
+        ],
         "doneCriteria": [
           "主流程和手机边界实际查看",
           "交互问题有截图与复现步骤",
@@ -87,29 +104,51 @@
     {
       "id": "design-content-v020",
       "name": "v0.2.0 内容高保真原型",
-      "status": "not-started",
+      "status": "in-progress",
       "targetVersion": "v0.2.0",
-      "goal": "基于当前 dev 规划文字内容编辑、草稿、真实身份签名与链上发布、阅读和版本修订，Markdown 编辑器参考 xLog。",
+      "goal": "基于当前 dev 制作文字内容高保真原型；Markdown 参考 xLog，以可交互的模拟流程表达身份签名、链上发布、阅读与修订。",
       "dependencies": [
         "原型 dev@8d924ae",
         "spec/核心认知.md 第 6.1、6.3、7.4、7.5、9.3、10.1、10.3 节",
         "reference/xLog-dev 编辑器与 Markdown 渲染代码",
-        "当前 S2 设计系统",
-        "可验证的 BAP 身份签名能力与 BitcoinSchema Post 编码",
-        "真实钱包、广播及链上查询服务的接入验证"
+        "当前 React Spectrum S2 设计系统"
       ],
       "doneCriteria": [
-        "环境与当前版本可并行预览，旧版本可追溯",
-        "内容类型范围明确，版本 PRD 与核心认知一致",
-        "编辑、草稿、真实钱包身份签名、BSV 链上发布、按 TxID 读取与 Revision 主流程可操作",
-        "提供真实 TxID、内容一致性、AIP 签名和 BAP ID 归属验证证据；模拟结果不计为发布验收通过",
-        "正常与相关边界有定向验证、截图与日志",
-        "用户复核通过后交付"
+        "版本设计文档提供页面、组件、状态、BDD 与原型实现映射",
+        "独立 worktree 与 harness 可启动，旧版可并行预览",
+        "文字编辑、草稿、模拟身份签名及链上发布、阅读与修订均可交互",
+        "模拟边界明确，发布成功与链上确认分开表达",
+        "每项正常与相关边界有定向验证、截图和日志",
+        "用户复核通过后标记 done"
       ],
-      "scope": "当前交付环境与功能计划；文字内容、身份签名和链上发布已确认为必需，原型实施尚未启动。",
-      "plan": "v0.2.0-内容原型实施计划-20260917-204043.md",
-      "planningStatus": "proposal-ready-for-review",
-      "scopeConfirmation": "用户已确认：只处理文字内容，Markdown 编辑器参考 xLog，发布必须支持身份签名和链上发布。"
+      "scope": "本轮交付 v0.2.0 设计文档、独立原型 worktree 与 harness；内容页面后续按功能清单制作。全版不接入真实钱包、密钥、签名服务、交易广播或索引服务。",
+      "scopeConfirmation": "用户明确要求高保真原型，不是具体产品实现；只处理文字内容，Markdown 参考 xLog，发布必须呈现身份签名和链上发布。",
+      "prdVersion": "v0.2.0",
+      "prdSource": "_task/system-design/spec/prd/v0.2.0/设计文档v0.2.0-20260917-210556.md",
+      "harnessPath": "_task/prototype-worktree/ownword-v0.2.0",
+      "output": "_task/prototype-worktree/ownword-v0.2.0/ownword-prototype",
+      "branch": "prototype/v0.2.0-content",
+      "baselineCommit": "8d924aeaa2bc315903a8a2910394830559cf135c",
+      "currentChange": {
+        "id": "H00",
+        "goal": "将计划转为版本设计文档，在 _task 建立原型 worktree 并初始化 harness。",
+        "status": "needs-review",
+        "dependencies": [
+          "已提交的 v0.1 原型 dev 基线",
+          "v0.1 文档和任务目录结构"
+        ],
+        "doneCriteria": [
+          "设计文档可逐项映射到页面及可观察验收",
+          "Git worktree 指向独立分支，根仓库排除原型源码",
+          "harness 五类文件无占位项，检查及预览实际运行",
+          "状态与唯一下一步可跨会话续接"
+        ],
+        "implementationStatus": "implemented-and-verified",
+        "reviewStatus": "awaiting-user-review",
+        "evidence": "_task/prototype-worktree/ownword-v0.2.0/evidence/：bootstrap-check-20260917.txt、environment-check-20260917.json、baseline-browser-20260917.json、三张截图及浏览器日志。文档引用、92 条既有模型断言、harness 结构和基线桌面/手机验证通过。",
+        "nextStep": "后续从 C01 内容入口与工作台开始；本轮不提前制作内容页面。"
+      },
+      "statusNote": "本轮 H00 设计文档与环境已完成并验证，待用户复核；C01–C10 尚未开始。详细状态以任务 harness 为准。"
     }
   ]
 }

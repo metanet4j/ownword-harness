@@ -1,0 +1,25 @@
+{
+  "scope": "H00 文档、worktree 与 harness 初始化；非内容功能验收",
+  "prdLocalLinks": 12,
+  "invalidArgument": {
+    "exitCode": 2,
+    "message": "用法：./init.sh [--check|--serve]"
+  },
+  "previews": [
+    {
+      "url": "http://127.0.0.1:4312/",
+      "status": 200,
+      "matchesBaselineIndex": true
+    },
+    {
+      "url": "http://127.0.0.1:4311/own-word-prototype-s2-astra-001/",
+      "status": 200,
+      "matchesBaselineIndex": true
+    }
+  ],
+  "prototypeWorktreeClean": true,
+  "prototypeSourceIgnoredByRoot": true,
+  "centralActiveItem": "design-content-v020",
+  "contentFeaturesNotStarted": true,
+  "harnessSetupStatus": "needs-review"
+}
