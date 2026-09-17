@@ -121,7 +121,7 @@
         "每项正常与相关边界有定向验证、截图和日志",
         "用户复核通过后标记 done"
       ],
-      "scope": "本轮交付 v0.2.0 设计文档、独立原型 worktree 与 harness；内容页面后续按功能清单制作。全版不接入真实钱包、密钥、签名服务、交易广播或索引服务。",
+      "scope": "审查并修正文档后，按 harness 顺序连续完成 C01–C10 高保真原型。签名、发布和 Proof 使用可控样例。",
       "scopeConfirmation": "用户明确要求高保真原型，不是具体产品实现；只处理文字内容，Markdown 参考 xLog，发布必须呈现身份签名和链上发布。",
       "prdVersion": "v0.2.0",
       "prdSource": "_task/system-design/spec/prd/v0.2.0/设计文档v0.2.0-20260917-210556.md",
@@ -130,25 +130,21 @@
       "branch": "prototype/v0.2.0-content",
       "baselineCommit": "8d924aeaa2bc315903a8a2910394830559cf135c",
       "currentChange": {
-        "id": "H00",
-        "goal": "将计划转为版本设计文档，在 _task 建立原型 worktree 并初始化 harness。",
-        "status": "needs-review",
+        "id": "C01-C10",
+        "goal": "审查通过后逐项制作、验证并提交内容高保真原型。",
+        "status": "in-progress",
         "dependencies": [
-          "已提交的 v0.1 原型 dev 基线",
-          "v0.1 文档和任务目录结构"
+          "通过审查的 v0.2.0 PRD",
+          "已初始化的 prototype/v0.2.0-content worktree"
         ],
         "doneCriteria": [
-          "设计文档可逐项映射到页面及可观察验收",
-          "Git worktree 指向独立分支，根仓库排除原型源码",
-          "harness 五类文件无占位项，检查及预览实际运行",
-          "状态与唯一下一步可跨会话续接"
+          "C01–C10 适用验收通过并有可复现证据",
+          "逐功能提交，文档与状态同步",
+          "交付可交互原型并如实保留用户视觉复核状态"
         ],
-        "implementationStatus": "implemented-and-verified",
-        "reviewStatus": "awaiting-user-review",
-        "evidence": "_task/prototype-worktree/ownword-v0.2.0/evidence/：bootstrap-check-20260917.txt、environment-check-20260917.json、baseline-browser-20260917.json、三张截图及浏览器日志。文档引用、92 条既有模型断言、harness 结构和基线桌面/手机验证通过。",
-        "nextStep": "后续从 C01 内容入口与工作台开始；本轮不提前制作内容页面。"
+        "designReview": "_task/system-design/spec/prd/v0.2.0/设计审查v0.2.0-20260917-213000.md"
       },
-      "statusNote": "本轮 H00 设计文档与环境已完成并验证，待用户复核；C01–C10 尚未开始。详细状态以任务 harness 为准。"
+      "statusNote": "文档审查问题已补齐，无阻塞项，进入 C01。详细功能状态见任务 harness。"
     }
   ]
 }

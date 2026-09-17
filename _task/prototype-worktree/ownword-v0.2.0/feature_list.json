@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": null,
-  "nextFeature": "C01",
+  "activeFeature": "C01",
+  "nextFeature": "C02",
   "environment": {
     "worktree": "ownword-prototype",
     "sourceRepository": "designs/own-word-prototype-s2-astra-001",
@@ -45,10 +45,11 @@
       "dependencies": [
         "H00"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "acceptanceRefs": [
         "C01-A",
-        "C01-B"
+        "C01-B",
+        "C01-C"
       ],
       "doneCriteria": [
         "适用 BDD 场景可操作，证据逐条映射",
@@ -108,7 +109,8 @@
       "acceptanceRefs": [
         "C04-A",
         "C04-B",
-        "C04-C"
+        "C04-C",
+        "C04-D"
       ],
       "doneCriteria": [
         "适用 BDD 场景可操作，证据逐条映射",
@@ -169,7 +171,8 @@
         "C07-B",
         "C07-C",
         "C07-D",
-        "C07-E"
+        "C07-E",
+        "C07-F"
       ],
       "doneCriteria": [
         "适用 BDD 场景可操作，证据逐条映射",
@@ -235,5 +238,11 @@
       ],
       "evidence": ""
     }
-  ]
+  ],
+  "designReview": {
+    "status": "passed",
+    "reviewer": "Codex（用户要求审查设计后实施）",
+    "source": "_task/system-design/spec/prd/v0.2.0/设计审查v0.2.0-20260917-213000.md",
+    "scope": "核心事实、原型边界、交互闭环与验收映射；用户视觉复核仍独立保留。"
+  }
 }
