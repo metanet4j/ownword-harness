@@ -89,24 +89,27 @@
       "name": "v0.2.0 内容高保真原型",
       "status": "not-started",
       "targetVersion": "v0.2.0",
-      "goal": "基于当前 dev 规划文字内容编辑、草稿、发布、阅读和版本修订，Markdown 编辑器参考 xLog。",
+      "goal": "基于当前 dev 规划文字内容编辑、草稿、真实身份签名与链上发布、阅读和版本修订，Markdown 编辑器参考 xLog。",
       "dependencies": [
         "原型 dev@8d924ae",
         "spec/核心认知.md 第 6.1、6.3、7.4、7.5、9.3、10.1、10.3 节",
         "reference/xLog-dev 编辑器与 Markdown 渲染代码",
-        "当前 S2 设计系统"
+        "当前 S2 设计系统",
+        "可验证的 BAP 身份签名能力与 BitcoinSchema Post 编码",
+        "真实钱包、广播及链上查询服务的接入验证"
       ],
       "doneCriteria": [
         "环境与当前版本可并行预览，旧版本可追溯",
         "内容类型范围明确，版本 PRD 与核心认知一致",
-        "编辑、草稿、发布、阅读、Revision 主流程可操作",
+        "编辑、草稿、真实钱包身份签名、BSV 链上发布、按 TxID 读取与 Revision 主流程可操作",
+        "提供真实 TxID、内容一致性、AIP 签名和 BAP ID 归属验证证据；模拟结果不计为发布验收通过",
         "正常与相关边界有定向验证、截图与日志",
         "用户复核通过后交付"
       ],
-      "scope": "当前交付环境与功能计划；文字内容范围已确认，原型实施尚未启动。",
+      "scope": "当前交付环境与功能计划；文字内容、身份签名和链上发布已确认为必需，原型实施尚未启动。",
       "plan": "v0.2.0-内容原型实施计划-20260917-204043.md",
       "planningStatus": "proposal-ready-for-review",
-      "scopeConfirmation": "用户已确认：只处理文字内容；Markdown 编辑器参考 xLog。"
+      "scopeConfirmation": "用户已确认：只处理文字内容，Markdown 编辑器参考 xLog，发布必须支持身份签名和链上发布。"
     }
   ]
 }
