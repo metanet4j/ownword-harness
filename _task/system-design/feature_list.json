@@ -130,25 +130,24 @@
       "branch": "prototype/v0.2.0-content",
       "baselineCommit": "8d924aeaa2bc315903a8a2910394830559cf135c",
       "currentChange": {
-        "id": "R02",
-        "goal": "补齐用户指出缺失的 Markdown 详情目录",
+        "id": "R03",
+        "goal": "增加用户选定的可视化编辑＋源码切换",
         "status": "needs-review",
         "dependencies": [
-          "C08 阅读页",
-          "R01 修复成果"
+          "256e5b2 已交付原型"
         ],
         "doneCriteria": [
-          "目录层级、章节定位及手机折叠通过定向验证"
+          "正文完整、交互可用、发布确认使用最新内容",
+          "定向验证通过并独立提交"
         ],
         "harness": "_task/prototype-worktree/ownword-v0.2.0/feature_list.json",
-        "implementationStatus": "implemented-and-verified",
-        "reviewStatus": "awaiting-user-review",
-        "nextStep": "用户刷新详情页复核章节目录。"
+        "commit": "dfdba06",
+        "evidence": "_task/prototype-worktree/ownword-v0.2.0/ownword-prototype/evidence/R03/verification.json"
       },
-      "statusNote": "内容原型、P0 修复及详情目录均已实现、验证并提交，等待用户复核；详见任务 harness。",
+      "statusNote": "内容原型、P0 修复、详情目录及可视化编辑均已实现、验证并提交，等待用户复核；详见任务 harness。",
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "../prototype-worktree/ownword-v0.2.0/feature_list.json 与原型 evidence/R02/verification.json；既有证据保留。"
+      "evidence": "../prototype-worktree/ownword-v0.2.0/feature_list.json 与原型 evidence/R03/verification.json；既有证据保留。"
     }
   ]
 }

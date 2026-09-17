@@ -327,6 +327,42 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "256e5b2"
+    },
+    {
+      "id": "R03",
+      "name": "可视化 Markdown 编辑",
+      "description": "按用户选择增加可视化编辑与源码切换，沿用文字内容和模拟发布范围。",
+      "dependencies": [
+        "C02",
+        "C03",
+        "C04",
+        "C05",
+        "C06",
+        "R01",
+        "R02"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "C02-A",
+        "C02-B",
+        "C02-C",
+        "C02-D",
+        "C04-A",
+        "C05-A",
+        "C06-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "可在排版正文中直接编辑并使用现有格式工具",
+        "仅切换模式不改写原文；不支持语法保留并提供源码编辑入口",
+        "自动保存、导入导出与检查发布使用最新 Markdown",
+        "正常与相关边界通过浏览器和模型验证，独立提交并交付复核"
+      ],
+      "evidence": "ownword-prototype/evidence/R03/verification.json；格式、中文输入、原文切换、导入导出、自动保存、发布确认和手机布局通过；浏览器无运行错误。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "dfdba06"
     }
   ],
   "designReview": {
