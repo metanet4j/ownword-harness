@@ -4,7 +4,7 @@
 
 ## 1. 这里有什么
 
-- `own-word-web/`：本任务的 **git worktree**（`.git` 是文件），主 clone 在 `../../own-word-web/`，两者同一仓库。
+- 路径相对本文件所在目录：`own-word-web/` 是任务 **git worktree**（`.git` 是文件），主 clone 在 `../own-word-web/`，两者同一仓库。
 - 远程：`https://github.com/metanet4j/ownword-web.git`
 - 任务分支：`feature/ownword-v0.1.0`，基线 `master`，起点 `34353ef`
 
@@ -12,9 +12,9 @@
 
 1. `pwd` 确认在本目录。
 2. 读工作区根 `AGENTS.md`。
-3. 读 `_task/fronted-worktree/README.md`（仓库与 worktree 清单）。
+3. 读 `../README.md`（仓库与 worktree 清单）。
 
 ## 3. 收尾
 
-- 改动只在 `own-word-web/` 内提交，中文 Conventional Commits。
+- 前端代码在 `own-word-web/` 内提交，任务文档在根仓库提交，均用中文 Conventional Commits。
 - 不擅自改 `master`、不擅自新建分支、不推送远端（除非用户明确要求）。
