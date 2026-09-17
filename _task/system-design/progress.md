@@ -1,26 +1,11 @@
 # 当前进展
 
-当前事项为 `design-content-v020`。本轮交付 v0.2.0 设计文档与原型任务环境；详细功能状态以[任务功能清单](../prototype-worktree/ownword-v0.2.0/feature_list.json)为准。
+当前事项 design-content-v020；用户授权审查设计后逐项完成。设计审查通过，详细结论见 spec/prd/v0.2.0/设计审查v0.2.0-20260917-213000.md。
 
-## 范围与产物
+已制作并验证 C01、C02，保留用户视觉复核。当前 C03。功能状态、提交与证据以[任务清单](../prototype-worktree/ownword-v0.2.0/feature_list.json)为准。
 
-- 用户明确要求高保真原型。仅处理文字内容，Markdown 参考 xLog；身份签名与链上发布通过可交互样例表达，不接真实服务或发送交易。
-- 原计划已转为[版本设计文档](spec/prd/v0.2.0/设计文档v0.2.0-20260917-210556.md)，沿用 v0.1 的版本目录与文档结构，包含六组页面、C01–C10、状态、BDD 与逐项制作映射。
-- [原型任务目录](../prototype-worktree/ownword-v0.2.0/AGENTS.md)包含独立 Git worktree 和 harness。新分支从原型 `dev@8d924ae` 建立，环境登记在任务功能清单中。
-- `AGENTS.md`、功能清单、启动脚本、进展与交接文件已初始化；内容功能均为 `not-started`。旧版和新版预览使用不同端口，浏览器存储独立。
+后续从[任务 AGENTS.md](../prototype-worktree/ownword-v0.2.0/AGENTS.md)续接，运行 ./init.sh。工作区 _task/prototype-worktree/ownword-v0.2.0/ownword-prototype，分支 prototype/v0.2.0-content。
 
-## 基线与验证
+预览 http://127.0.0.1:4312/；旧版 4311 保留。真实钱包、签名、交易和索引不在本原型范围。原有技能文件改动保留，不纳入提交。
 
-v0.1 原型已集成至 `dev@8d924ae`，原有四项修复及既有证据保留在该基线。原事项标记 `needs-review`，不因新版本开始而自动通过人工视觉复核。
-
-H00 环境检查通过：PRD 版本和本地引用、worktree 分支与基线、S2 本地资源、任务状态及脚本语法。宿主运行现有模型检查通过 92 条断言；harness 结构评分 100/100，仅表示结构检查通过。桌面与 320px 基线渲染、模拟授权取消验证通过，三张截图已查看，浏览器运行错误为空；实际证据见[任务进展](../prototype-worktree/ownword-v0.2.0/progress.md)。H00 待用户复核，不标记 done。
-
-## 工作区
-
-原型源码由其独立仓库管理，根仓库显式忽略 worktree。根仓库原有技能文件删除与新增保留，不纳入本次提交。没有新增内容页面、编辑器依赖、真实钱包或链上集成。
-
-## 唯一下一步
-
-本轮 H00 交付后，从 C01 开始制作内容入口与工作台。细项依赖和 BDD 引用由任务清单维护，不在此重复。
-
-新版环境：http://127.0.0.1:4312/ 。旧版：http://127.0.0.1:4311/own-word-prototype-s2-astra-001/ 。
+唯一下一步：继续 C03。

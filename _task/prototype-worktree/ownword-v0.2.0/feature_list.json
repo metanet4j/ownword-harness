@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": "C01",
-  "nextFeature": "C02",
+  "activeFeature": "C03",
+  "nextFeature": "C04",
   "environment": {
     "worktree": "ownword-prototype",
     "sourceRepository": "designs/own-word-prototype-s2-astra-001",
@@ -45,7 +45,7 @@
       "dependencies": [
         "H00"
       ],
-      "status": "in-progress",
+      "status": "needs-review",
       "acceptanceRefs": [
         "C01-A",
         "C01-B",
@@ -56,7 +56,10 @@
         "本项正常与相关边界验证，截图与浏览器日志已审阅",
         "实现提交并经用户复核；未复核时保持 needs-review"
       ],
-      "evidence": ""
+      "evidence": "ownword-prototype/evidence/C01；工作台正常筛选、空态、失败重试和未连接门槛通过，模型与浏览器错误检查通过。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "6e9b582"
     },
     {
       "id": "C02",
@@ -65,7 +68,7 @@
       "dependencies": [
         "C01"
       ],
-      "status": "not-started",
+      "status": "needs-review",
       "acceptanceRefs": [
         "C02-A",
         "C02-B",
@@ -76,7 +79,10 @@
         "本项正常与相关边界验证，截图与浏览器日志已审阅",
         "实现提交并经用户复核；未复核时保持 needs-review"
       ],
-      "evidence": ""
+      "evidence": "ownword-prototype/evidence/C02；CodeMirror 选区格式、撤销、查找、长文手机切换及正文/光标/滚动保持通过；浏览器无运行错误。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "8bd4d47"
     },
     {
       "id": "C03",
@@ -85,7 +91,7 @@
       "dependencies": [
         "C02"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "acceptanceRefs": [
         "C03-A",
         "C03-B",

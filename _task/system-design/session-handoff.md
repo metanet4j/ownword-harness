@@ -1,23 +1,11 @@
 # 当前交接
 
-## 当前任务
+当前事项 design-content-v020；用户授权审查设计后逐项完成。设计审查通过，详细结论见 spec/prd/v0.2.0/设计审查v0.2.0-20260917-213000.md。
 
-胡先生要求将 v0.2.0 计划转为可落地的高保真原型设计文档，并在 `_task` 建立 worktree、初始化 harness。只处理文字内容，Markdown 参考 xLog，必须呈现身份签名与链上发布；这些外部动作均为可交互模拟，不是真实产品接入。
+已制作并验证 C01、C02，保留用户视觉复核。当前 C03。功能状态、提交与证据以[任务清单](../prototype-worktree/ownword-v0.2.0/feature_list.json)为准。
 
-## 当前产物
+后续从[任务 AGENTS.md](../prototype-worktree/ownword-v0.2.0/AGENTS.md)续接，运行 ./init.sh。工作区 _task/prototype-worktree/ownword-v0.2.0/ownword-prototype，分支 prototype/v0.2.0-content。
 
-- [版本设计文档](spec/prd/v0.2.0/设计文档v0.2.0-20260917-210556.md)是本版需求与制作映射入口；旧计划已移除。
-- [任务 AGENTS.md](../prototype-worktree/ownword-v0.2.0/AGENTS.md)是后续制作入口。基线、分支、PRD 来源、检查命令及功能状态由该任务维护。
-- 原型基线为 `dev@8d924ae`；新 worktree 路径 `_task/prototype-worktree/ownword-v0.2.0/ownword-prototype`，分支 `prototype/v0.2.0-content`。
-- 新预览 4312，旧预览 4311；新环境目前仍显示继承的身份原型。C01–C10 尚未开始。
-- 全局事实仍以核心认知为准，没有为模拟环境改写全局模型。
+预览 http://127.0.0.1:4312/；旧版 4311 保留。真实钱包、签名、交易和索引不在本原型范围。原有技能文件改动保留，不纳入提交。
 
-## 验证与限制
-
-H00 文档与环境检查通过，现有模型 92 条断言通过，harness 结构评分 100/100；浏览器基线证据见任务进展。未验证内容功能、真实签名或真实上链。
-
-根仓库原有技能改动保留。根文档在根仓库提交，原型代码在 worktree 内提交。v0.1 保留 `needs-review`，v0.2.0 是唯一进行中的总体事项；人工复核前不把 H00 或整体任务标为 done。
-
-## 唯一下一步
-
-后续制作从 C01 内容入口与工作台开始：先读原型任务 AGENTS.md 与状态文件，运行 `./init.sh`，按 PRD 第 4.1、4.2 节制作并验证 C01-A/B。本轮不提前实现这些页面。
+唯一下一步：继续 C03。
