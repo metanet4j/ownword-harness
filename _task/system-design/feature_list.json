@@ -130,25 +130,25 @@
       "branch": "prototype/v0.2.0-content",
       "baselineCommit": "8d924aeaa2bc315903a8a2910394830559cf135c",
       "currentChange": {
-        "id": "R01",
-        "goal": "按用户要求审查并修复 P0 问题",
+        "id": "R02",
+        "goal": "补齐用户指出缺失的 Markdown 详情目录",
         "status": "needs-review",
         "dependencies": [
-          "68b6d4c 已交付原型"
+          "C08 阅读页",
+          "R01 修复成果"
         ],
         "doneCriteria": [
-          "可复现问题按级别记录",
-          "修复通过定向检查并提交"
+          "目录层级、章节定位及手机折叠通过定向验证"
         ],
         "harness": "_task/prototype-worktree/ownword-v0.2.0/feature_list.json",
         "implementationStatus": "implemented-and-verified",
         "reviewStatus": "awaiting-user-review",
-        "nextStep": "用户视觉复核内容原型及 R01 修复。"
+        "nextStep": "用户刷新详情页复核章节目录。"
       },
-      "statusNote": "C01–C10 与 R01 已实现、验证并提交，等待用户视觉复核；详见任务 harness。",
+      "statusNote": "内容原型、P0 修复及详情目录均已实现、验证并提交，等待用户复核；详见任务 harness。",
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "../prototype-worktree/ownword-v0.2.0/feature_list.json 与原型 evidence/R01/verification.json。"
+      "evidence": "../prototype-worktree/ownword-v0.2.0/feature_list.json 与原型 evidence/R02/verification.json；既有证据保留。"
     }
   ]
 }
