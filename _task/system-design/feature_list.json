@@ -10,7 +10,7 @@
       "description": "打磨 designs/own-word-prototype-s2-astra-001（穹顶与地平线：七线穹顶、无刻度地平、3D Public Identity），使原型达到可进入生产实现的状态：PRD v0.1 全部 BDD 场景可交互且可验证，术语/状态/边界与核心认知一致，S2 设计系统一致，无障碍/响应式/i18n/主题达标，全部模拟点与生产替换契约逐项文档化，验证证据可复现。基线为 commit d7706da（09-06 00:18，用户要求回退后的状态）；本次打磨不复用 backup/astra-412ca12 分支的成果。",
       "dependencies": ["design-002"],
       "status": "in-progress",
-      "statusNote": "页面标题排版已优化：平衡断行，中文放宽行距、取消负字距，窄屏使用 S2 较小一级字号；只改 CSS，文案、结构与业务流程不变。桌面与 320px 中文浅色编辑页截图复核通过，窄屏编辑标题完整一行，较长身份标题按逗号分为两行。仅做最小验证，未跑整套回归。整体仍待用户视觉复核，资产保持 needs-review。",
+      "statusNote": "编辑页视觉节奏已整理：当前身份信息收紧，标识使用辅助字号；头像区增加分隔，资料字段增加组间留白，短屏表单间距统一为 24px。仅改 CSS，沿用 S2，不改文案、业务流程、创建与确认页样式。桌面编辑预览与 320px 短屏空名称校验通过，两张截图已复核，无横向溢出或页面运行错误。未跑全量回归；整体待用户视觉复核，资产保持 needs-review。",
       "inputs": ["_task/system-design/spec/核心认知.md", "_task/system-design/spec/prd/v0.1/设计文档v0.1.md", "designs/react-spectrum-s2"],
       "output": "designs/own-word-prototype-s2-astra-001",
       "doneCriteria": [
@@ -27,7 +27,7 @@
         "用户视觉复核通过：_d_meta.json 资产状态经用户确认后由 needs-review 改为 approved",
         "提交规范：全部改动在 astra 子仓库提交且 commit 信息带 (PRD v0.1_${datetime})，任务文档变更在根仓库提交"
       ],
-      "evidence": "designs/own-word-prototype-s2-astra-001/evidence/type-polish-check.json 与 type-polish-desktop.png、type-polish-mobile.png。验证范围遵循 _task/system-design/AGENTS.md。整体事项仍待用户视觉复核。"
+      "evidence": "designs/own-word-prototype-s2-astra-001/evidence/edit-polish-check.json 与 edit-polish-desktop.png、edit-polish-mobile.png。验证范围遵循 _task/system-design/AGENTS.md。整体事项仍待用户视觉复核。"
     }
   ]
 }
