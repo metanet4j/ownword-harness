@@ -5,8 +5,8 @@
 
 | 子目录 | 当前分支 | HEAD | 远程仓库 |
 |---|---|---|---|
-| `ownword-design-prototype/` | `master` | `50673d0` | https://github.com/metanet4j/ownword-design-prototype.git |
-| `own-word-prototype-s2-astra-001/` | `codex/design-astra-001` | `a66a3ba` | 无（仅本地） |
+| `ownword-design-prototype/` | `master` | `50673d0` | 无（已解除远端关联，仓库保留本地） |
+| `own-word-prototype-s2-astra-001/` | `master` | `a66a3ba` | https://github.com/metanet4j/ownword-design-prototype.git |
 
 ## 被忽略的非仓库目录
 
