@@ -1,9 +1,52 @@
-# 工具产物（本地运行态，不入库）
+# ============ 子仓库（独立 Git 仓库，内容不纳入主仓）============
+# 原则：显式列出仓库路径，不做 backend/*、designs/* 这类整树屏蔽；
+# 各目录结构由同级 README.md 保留（目录结构要保留，子仓库要忽略）。
+/Archive/prototype/own-word-prototype-001/
+/Archive/prototype/own-word-prototype-002/
+/Archive/prototype/own-word-prototype-003/
+/backend/bitcoinj-sv/
+/backend/metanet4j-parent/
+/backend/metanet4j-base/
+/backend/metanet4j-sdk/
+/backend/metanet4j-component/
+/designs/ownword-design-prototype/
+/designs/own-word-prototype-s2-astra-001/
+/_task/backend-worktree/boot4-java25-upgrade/metanet4j-parent/
+/_task/backend-worktree/boot4-java25-upgrade/metanet4j-base/
+/_task/backend-worktree/boot4-java25-upgrade/metanet4j-sdk/
+/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/
+/frontend/
+
+# ============ 整体忽略的外部资料 / vendor（非 Git 仓库）============
+# reference: 上游源码快照，只保留 README.md 标注目录结构
+/reference/*
+!/reference/README.md
+# designs/react-spectrum-s2: 第三方 design system 副本
+/designs/react-spectrum-s2/
+
+# ============ 构建与依赖产物 ============
+node_modules/
+dist/
+build/
+.next/
+out/
+target/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+coverage/
+.turbo/
+.cache/
+.pytest_cache/
+*.tsbuildinfo
+*.class
+*.log
+*.tmp
+.DS_Store
+# 注意：Maven wrapper（.mvn/）不是产物，不在此忽略
+
+# ============ 工具运行态（本地，不入库）============
 .ab-run/
 .ab-shots/
 .commandcode/
-
-backend/*
-designs/*
-reference/*
-frontend/
