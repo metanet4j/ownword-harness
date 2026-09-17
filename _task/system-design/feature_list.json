@@ -29,22 +29,12 @@
       ],
       "evidence": "designs/own-word-prototype-s2-astra-001/evidence/card-back-check.json 与 card-back-desktop.png、card-back-mobile.png。验证范围遵循 _task/system-design/AGENTS.md。整体事项仍待用户视觉复核。",
       "currentChange": {
-        "goal": "落实视觉评审第 4、5 项：收紧公开身份卡比例，将复制入口靠近卡片，提供可见、键盘可操作的翻面按钮并保留拖动。",
-        "dependencies": [
-          "用户选择评审第 4、5 项",
-          "review-20260917/index.html#card",
-          "核心认知第 10.5 节",
-          "绑定的 S2 设计系统"
-        ],
-        "doneCriteria": [
-          "正反面内容可见且不溢出，正常资料卡片高度降低",
-          "按钮可正反翻面，操作后焦点保留；拖动继续可用",
-          "桌面正常场景与手机长资料边界实际截图复核",
-          "复制、完整资料与链上记录入口可用，完成局部验证与独立提交"
-        ],
-        "scope": "公开身份卡相关组件、双语文案、样式与对应评审状态。",
+        "goal": "修复用户在公开身份页看不到翻面入口的反馈：提高按钮辨识度，并更新入口资源版本以避开旧缓存。",
+        "dependencies": ["用户确认当前位于公开身份页", "宿主预览服务与实际浏览器截图", "S2 secondary 按钮"],
+        "doneCriteria": ["翻面入口采用可辨识的现有 S2 按钮样式", "普通刷新加载带版本的当前应用资源", "桌面正常与手机边界截图、正反翻面通过"],
+        "scope": "翻面按钮样式、入口资源版本与对应截图和记录。",
         "status": "done",
-        "evidence": "designs/own-word-prototype-s2-astra-001/evidence/card-layout-flip-20260917/verification.json 与同目录截图；review-20260917/index.html#card 已同步当前实现。390px 示例卡片由约 549px 降至 376px；按钮、Enter/Space、鼠标拖动、减少动态效果、复制反馈与折叠入口通过。未执行全量回归、真实触屏或真实钱包验证，等待用户视觉复核。"
+        "evidence": "designs/own-word-prototype-s2-astra-001/evidence/flip-visible-20260917/verification.json 与三张截图。普通刷新加载新版资源；1440px 桌面与 320px 窄屏按钮可见、点击及 Enter 翻面通过。用户浏览器是否有旧缓存未证实；未执行全量回归。"
       },
       "currentReview": {
         "goal": "从美学、视觉层次与主流程交互寻找下一批优化项，交付带实际截图的评审页。",
