@@ -10,7 +10,7 @@
       "description": "打磨 designs/own-word-prototype-s2-astra-001（穹顶与地平线：七线穹顶、无刻度地平、3D Public Identity），使原型达到可进入生产实现的状态：PRD v0.1 全部 BDD 场景可交互且可验证，术语/状态/边界与核心认知一致，S2 设计系统一致，无障碍/响应式/i18n/主题达标，全部模拟点与生产替换契约逐项文档化，验证证据可复现。基线为 commit d7706da（09-06 00:18，用户要求回退后的状态）；本次打磨不复用 backup/astra-412ca12 分支的成果。",
       "dependencies": ["design-002"],
       "status": "in-progress",
-      "statusNote": "已落实视觉评审第 1、2、4、5、6 项。第 1、2 项修复页面切换后的阅读起点，确认卡完整换行显示 BAP ID；手机正常场景与窄屏长资料、返回编辑、授权取消与模拟保存通过。第 3 项手机创建页比例待处理，整体保持 in-progress、资产 needs-review。",
+      "statusNote": "视觉评审 6 项建议均已落实。第 3 项收紧手机创建页标题、身份摘要与头像区，390px 名称和类型区上移约 121px，保留完整 BAP ID 和 44px 按钮。正常创建与 320px 英文深色边界验证通过，等待用户整体视觉复核；整体保持 in-progress、资产 needs-review。",
       "inputs": ["_task/system-design/spec/核心认知.md", "_task/system-design/spec/prd/v0.1/设计文档v0.1.md", "designs/react-spectrum-s2"],
       "output": "designs/own-word-prototype-s2-astra-001",
       "doneCriteria": [
@@ -29,12 +29,12 @@
       ],
       "evidence": "designs/own-word-prototype-s2-astra-001/evidence/card-back-check.json 与 card-back-desktop.png、card-back-mobile.png。验证范围遵循 _task/system-design/AGENTS.md。整体事项仍待用户视觉复核。",
       "currentChange": {
-        "goal": "落实评审第 1、2 项：页面切换回到清晰的阅读起点，确认页完整展示可复制 BAP ID。",
-        "dependencies": ["用户同意继续第 1、2 项", "核心认知第 6.3 节", "review-20260917/index.html#confirmation", "现有 S2 设计系统"],
-        "doneCriteria": ["从编辑页底部进入确认页时，标题与步骤可见且标题获得焦点", "确认页 BAP ID 完整换行、可复制，无横向溢出", "正常资料及窄屏长资料边界截图复核，返回编辑和模拟保存可用"],
-        "scope": "页面切换的共享滚动处理、确认卡标识样式、资源版本和对应评审证据。",
+        "goal": "落实评审第 3 项：收紧手机创建页的标题、身份摘要与头像区，让名称和类型更早进入首屏。",
+        "dependencies": ["用户同意继续第 3 项", "review-20260917/index.html#form", "现有 S2 组件与 token", "核心认知第 10.5 节"],
+        "doneCriteria": ["390px 手机名称与类型明显上移，BAP ID 完整可读", "触控目标不缩小，字段之间保留清楚间距", "正常创建及320px边界验证、截图复核，表单校验与预览返回可用"],
+        "scope": "手机 setup 页面样式、对应资源版本、评审状态与验证证据。",
         "status": "done",
-        "evidence": "designs/own-word-prototype-s2-astra-001/evidence/confirmation-20260917/verification.json、console.txt 与六张截图；390px 手机正常场景和 320px 深色长资料无标题遮挡、标识截断或横向溢出，复制反馈、返回草稿、授权取消及模拟保存通过。未执行全量回归或真实钱包验证。"
+        "evidence": "designs/own-word-prototype-s2-astra-001/evidence/setup-layout-20260917/verification.json、console.txt 与六张截图。390px 正常场景名称输入从约635px上移至514px；320px英文深色图片操作与表单无横向溢出，必填校验、预览返回及模拟创建通过。未执行全量回归或真实手机键盘验证。"
       },
       "currentReview": {
         "goal": "从美学、视觉层次与主流程交互寻找下一批优化项，交付带实际截图的评审页。",
