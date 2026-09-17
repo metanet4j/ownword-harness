@@ -66,10 +66,10 @@ for r in "${REPOS[@]}"; do
   if ! git -C "$d" rev-parse --git-dir >/dev/null 2>&1; then bad "$r 不是 git 仓库"; continue; fi
   br="$(git -C "$d" branch --show-current 2>/dev/null)"
   dirt="$(git -C "$d" status --porcelain 2>/dev/null | wc -l)"
-  if [ "$br" = "feature/java21" ]; then
+  if [ "$br" = "feature/java25" ]; then
     [ "$dirt" = "0" ] && ok "$r：分支 $br，工作区干净" || warn "$r：分支 $br，有 $dirt 个未提交改动"
   else
-    warn "$r：分支为 $br（预期 feature/java21）"
+    warn "$r：分支为 $br（预期 feature/java25）"
   fi
 done
 

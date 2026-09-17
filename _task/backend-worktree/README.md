@@ -6,10 +6,10 @@
 
 | 子目录（worktree） | 所属主仓库 | 当前分支 | HEAD | 远程仓库 |
 |---|---|---|---|---|
-| `boot4-java25-upgrade/metanet4j-parent/` | `backend/metanet4j-parent/` | `feature/java21` | `50598c0` | https://github.com/metanet4j/metanet4j-parent.git |
-| `boot4-java25-upgrade/metanet4j-base/` | `backend/metanet4j-base/` | `feature/java21` | `6e16cfa` | https://github.com/metanet4j/metanet4j-base.git |
-| `boot4-java25-upgrade/metanet4j-sdk/` | `backend/metanet4j-sdk/` | `feature/java21` | `bae4c36` | https://github.com/metanet4j/metanet4j-sdk.git |
-| `boot4-java25-upgrade/metanet4j-component/` | `backend/metanet4j-component/` | `feature/java21` | `e634982` | https://github.com/metanet4j/metanet4j-component.git |
+| `boot4-java25-upgrade/metanet4j-parent/` | `backend/metanet4j-parent/` | `feature/java25` | `50598c0` | https://github.com/metanet4j/metanet4j-parent.git |
+| `boot4-java25-upgrade/metanet4j-base/` | `backend/metanet4j-base/` | `feature/java25` | `6e16cfa` | https://github.com/metanet4j/metanet4j-base.git |
+| `boot4-java25-upgrade/metanet4j-sdk/` | `backend/metanet4j-sdk/` | `feature/java25` | `bae4c36` | https://github.com/metanet4j/metanet4j-sdk.git |
+| `boot4-java25-upgrade/metanet4j-component/` | `backend/metanet4j-component/` | `feature/java25` | `e634982` | https://github.com/metanet4j/metanet4j-component.git |
 
 ## 约定
 

@@ -6,10 +6,10 @@
 | 子目录 | 当前分支 | HEAD | 远程仓库 |
 |---|---|---|---|
 | `bitcoinj-sv/` | `master` | `1946a149` | https://github.com/bitcoin-sv/bitcoinj-sv.git |
-| `metanet4j-parent/` | `dev` | `9ef0784` | https://github.com/metanet4j/metanet4j-parent.git |
-| `metanet4j-base/` | `dev` | `2c3b005` | https://github.com/metanet4j/metanet4j-base.git |
-| `metanet4j-sdk/` | `dev` | `31e93e6` | https://github.com/metanet4j/metanet4j-sdk.git |
-| `metanet4j-component/` | `dev` | `c332a2e` | https://github.com/metanet4j/metanet4j-component.git |
+| `metanet4j-parent/` | `dev` | `50598c0` | https://github.com/metanet4j/metanet4j-parent.git |
+| `metanet4j-base/` | `dev` | `6e16cfa` | https://github.com/metanet4j/metanet4j-base.git |
+| `metanet4j-sdk/` | `dev` | `bae4c36` | https://github.com/metanet4j/metanet4j-sdk.git |
+| `metanet4j-component/` | `dev` | `e634982` | https://github.com/metanet4j/metanet4j-component.git |
 
 ## 约定
 

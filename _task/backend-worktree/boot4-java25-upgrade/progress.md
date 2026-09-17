@@ -5,10 +5,10 @@
 
 ## Current State（当前状态）
 
-- **Last Updated**：2026-09-16（交付后修复 I/II 均完成：任务全部收口，P0~P6 + 两轮交付后修复全 done）
+- **Last Updated**：2026-09-17（交付后修复 I/II 完成；2026-09-17 分支更名 `feature/java25` 并快进合入 `dev` 推送）
 - **Current Objective**：无（本任务已交付；交付物见 `doc/验收报告-Boot4-Java25-20260916-1320.md`）
 - **Recommended Next Step**：无必做项；如有后续动作，先看文末「下一步」与「未决项」
-- **远端状态**：四仓库已推送 `origin/feature/java21`（三轮：交付成果 → 交付后修复 I → 交付后修复 II），远端 `dev`/`master` 未被触碰；ownword 仍为本地提交
+- **远端状态**：四仓库已推送 `origin/feature/java25`（三轮：交付成果 → 交付后修复 I → 交付后修复 II），远端 `master` 未被触碰，`dev` 已于 2026-09-17 快进合入本次成果并推送（`dev` = `feature/java25`，旧分支 `feature/java21` 已删除）；ownword 文档已推送
 - **执行授权**：用户 2026-09-16 指示「继续执行，改代码不必逐项确认」；仅在计划未覆盖的架构决策/取舍上停下问（`AGENTS.md` §5）
 - **依赖基座**：parent / base / sdk / component 的 0.2.0 均可构建安装
 - **中间件**：共享设施 `ownword/infra/` 五个容器 healthy 运行中
@@ -92,5 +92,5 @@
 ## 下一步（Next）
 
 1. 本任务已交付并已推送：提交 ID = parent `50598c0` / base `6e16cfa` / sdk **`bae4c36`** / component **`e634982`**；
-   远端 `origin/feature/java21`（四仓库一致）；验收报告见 `doc/验收报告-Boot4-Java25-20260916-1320.md`。
+   远端 `origin/feature/java25`（四仓库一致）；验收报告见 `doc/验收报告-Boot4-Java25-20260916-1320.md`。
 2. 如需继续：① 需要留痕则补打基线 tag `pre-boot4-java25`；② ownword 任务文档若要推送需明确指示。

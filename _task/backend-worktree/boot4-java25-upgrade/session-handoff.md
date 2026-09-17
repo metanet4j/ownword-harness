@@ -12,9 +12,9 @@
   §6.6 九条 grep 门禁与依赖树断言全过。
 - 本轮（P5）收敛了 5 个问题：YAML 顶层键破坏 `spring.*` 绑定（Mongo 认证）、`BsocialReplyMongodbTest` 两个死用例、
   `EsTest` 两处、resolver 两类（上游既有夹具缺陷）、`ComplteTxFactoryTest` 定性为联网广播。明细见计划 §11「P5 验证」。
-- 四仓库均在 `feature/java21`，工作区干净；本轮只动 `metanet4j-component-test`（1 个 `application.yml` + 6 个测试文件），**未改产品代码**。
+- 四仓库均在 `feature/java25`，工作区干净；本轮只动 `metanet4j-component-test`（1 个 `application.yml` + 6 个测试文件），**未改产品代码**。
 - 提交 ID：parent `50598c0` / base `6e16cfa` / sdk **`bae4c36`** / component **`e634982`**。
-- **已推送远端**：四仓库 `origin/feature/java21`（三轮：交付成果 → 交付后修复 I → II），远端 `dev`/`master` 未被触碰。
+- **已推送远端**：四仓库 `origin/feature/java25`（三轮：交付成果 → 交付后修复 I → II）；2026-09-17 快进合入 `dev` 并推送（`dev` = `feature/java25`），远端旧分支 `feature/java21` 已删除，`master` 未被触碰。
 - 原先两处待决取舍与用户追加的两项**均已闭环**（见 Blockers 1~4）；无阻塞项。
 
 ## 复跑与工具链
@@ -61,5 +61,5 @@ MVN="$HOME/.sdkman/candidates/maven/3.9.16/bin/mvn -s $HOME/.m2/metanet4j-settin
 ## Next Session（后续顺序）
 
 1. ✅ P0 / P0.5 / P1 / P2 / P3 / P4 / `boot4-tests-jupiter` / `boot4-p5-verify` / **P6 收尾** /
-   **交付后修复**——本任务已交付并已推送 `origin/feature/java21`。
+   **交付后修复**——本任务已交付并已推送 `origin/feature/java25`。
 2. 如无新指示则无必做项；可选项：① 补打基线 tag `pre-boot4-java25`；② ownword 任务文档推送需明确指示。

@@ -14,7 +14,7 @@
 | 规模 | 25 个 `pom.xml`；31 个含 `javax.` 导入的 Java 文件（迁 30，1 个 `javax.crypto` 不动）；14 个 Jackson 使用文件；3 个 Boot 4 包迁移文件；1 个 ES 客户端迁移文件（`EsConfig`） |
 | 版本号 | parent / base / component → **0.2.0**；sdk **保持 0.2.0**（同名重发） |
 
-> **当前边界**：本任务只做两件事——产出升级计划、准备好环境。4 个仓库的代码与 pom **均未改动**，全部停留在 `dev` 基线（worktree 在 `feature/java21`，与 `dev` 零差异）。曾试跑的版本号改动已全部撤销（见 §11）。
+> **当前边界**：本任务只做两件事——产出升级计划、准备好环境。4 个仓库的代码与 pom **均未改动**，全部停留在 `dev` 基线（worktree 在 `feature/java25`，与 `dev` 零差异）。曾试跑的版本号改动已全部撤销（见 §11）。
 
 ---
 
@@ -95,7 +95,7 @@
 | D8 | ES 客户端 | 升 **9.4.5**，与服务端同版；**走官方推荐的 Rest5Client transport**（ES 9 默认 transport，基于 Apache HttpClient 5）；`EsConfig` 改用 `ElasticsearchClient.of(...)` + `Jackson3JsonpMapper`；**不引入** legacy `org.elasticsearch.client:elasticsearch-rest-client` | 用户决策：以官方为准（服务端一并升 9.4.5、transport 走官方推荐）；官方 9.0.0 release notes：legacy `RestClient` 自 9.x 起变为可选外部依赖，替代品 Rest5Client 随客户端内置 |
 | D9 | 验证档位 | **B 档**：MongoDB 8.0 + ES 9.4.5 + Kafka 4.2.1(KRaft) + Redis 7.4 + MySQL 8.4 | 本次服务端全部升级，验证范围随之覆盖五个中间件 |
 | D10 | Kafka | **起 4.2.1 broker，KRaft 模式**（不再用 ZooKeeper） | Kafka 4.x 起 ZooKeeper 模式移除；客户端 4.2.1 与服务端 4.2.1 同版（官方矩阵：3.x/4.x broker 对 4.x 客户端 ✅ Fully Compatible） |
-| D11 | 基线分支 | 4 仓库均以 `dev` 为基线；当前 worktree 在 `feature/java21`（与 `dev` 同点） | 当前均干净；技能默认 master，此处按实际取 dev |
+| D11 | 基线分支 | 4 仓库均以 `dev` 为基线；当前 worktree 在 `feature/java25`（与 `dev` 同点） | 当前均干净；技能默认 master，此处按实际取 dev |
 | D12 | 回滚 | 开工前 4 仓库 dev 打 tag `pre-boot4-java25` | 保留可回退点 |
 | D13 | Boot 4 autoconfigure 包迁移 | 按下表逐个改；Druid 新包为 `com.alibaba.druid.spring.boot4.autoconfigure` | Boot 4.1.1 jar 实测类已迁移 |
 | D14 | 显式钉死清理 | 删除/上调：lombok、slf4j、log4j、hibernate-validator、jackson、junit、lettuce、mysql、commons-lang3、jakarta.json、elasticsearch.client 7.17.5；保留 fastjson 1.2.76、bcprov 1.71、guava 30.1.1 | 直接 depMgmt 条目优先于 import 的 BOM |
@@ -632,15 +632,15 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 ## 8. Git 工作流
 
 - 任务根目录 `_task/backend-worktree/boot4-java25-upgrade/`，4 个仓库 worktree 保持相对结构。
-- 分支：**沿用任务既有分支 `feature/java21`**（`./init.sh` 按此校验）；早期草案里的
+- 分支：**沿用任务既有分支 `feature/java25`**（`./init.sh` 按此校验）；早期草案里的
   `feat/boot4-java25-metanet4j-parent` / `-base` / `-sdk` / `-component` 未采用。
-- 基线 `dev`：开工时与 `feature/java21` 同点；执行期间 `dev` 未移动（见 §11 第六轮）。
+- 基线 `dev`：开工时与 `feature/java25` 同点；**2026-09-17 已快进合入本次成果并推送**，现 `dev` = `feature/java25`（旧基线 parent `9ef0784` / base `2c3b005` / sdk `31e93e6` / component `c332a2e`）。
 - 提交：每仓库独立提交，遵循 Conventional Commits（中文 type+scope）。
-- 回滚：`git checkout dev`（等价于回到基线）。**未打 `pre-boot4-java25` tag**——草案要求开工前打，
-  实测 `dev` 全程未移动，回滚路径已由本行明确，故不再补。
-- **推送**：2026-09-16 用户指示"先推当前成果、修复后再推一次" → 四仓库已推送 `origin/feature/java21`
-  （**新建远端分支**，未触碰 `dev`/`master`）；两轮推送后逐仓库核对本地 HEAD 与远端引用一致。
-  ownword（任务文档）仍为本地提交、未推送。
+- 回滚：`dev` 现含本次成果，回滚用 `git revert <提交范围>` 或 `git reset --hard <旧 dev 提交>`（旧基线见上行）。
+  **未打 `pre-boot4-java25` tag**，tag 仍可不补。
+- **推送**：2026-09-16 用户指示"先推当前成果、修复后再推一次" → 四仓库已推送 `origin/feature/java25`
+  （新建远端分支，2026-09-16 当时未触碰 `dev`/`master`）；**2026-09-17 分支更名 `feature/java25`、快进合入 `dev` 并推送**，远端 `feature/java21` 已删除，`master` 仍未触碰。
+  ownword（任务文档）已推送。
 - 产出报告：`doc/验收报告-Boot4-Java25-20260916-1320.md`（受影响仓库、每仓库编译命令、每仓库提交 ID）。
 
 ---
@@ -753,7 +753,7 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 | 撤销项 | 处理 | 结果 |
 |---|---|---|
 | `chore(release): bump metanet4j to 0.2.0`（4 仓库各 1 次提交） | 删除承载提交的分支，提交不可达 | 4 仓库 `diff dev` = 0，工作区 0 脏文件 |
-| 分支 `feat/boot4-java25-<repo>`（4 条） | `git branch -D` | 已删除，4 仓库回到 `feature/java21` |
+| 分支 `feat/boot4-java25-<repo>`（4 条） | `git branch -D` | 已删除，4 仓库回到 `feature/java25` |
 | tag `pre-boot4-java25`（4 个） | `git tag -d` | 已删除（`metanet4j-sdk` 的 `v0.2.0` 是原有资产，未动） |
 
 **保留项**：JDK 25、Maven 3.9.16、`~/.m2/metanet4j` 与 settings、Gate 0 探针 `/tmp/gate0`、本计划文档、Review 记录。
@@ -785,7 +785,7 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 | 项 | 值 |
 |---|---|
 | 仓库 | `metanet4j-component`（唯一受影响仓库，其余 3 仓库仍 0 脏） |
-| 分支 | `feature/java21`（按 AGENTS.md 要求，未使用 dev/test/master、未新建分支） |
+| 分支 | `feature/java25`（按 AGENTS.md 要求，未使用 dev/test/master、未新建分支） |
 | 提交 | **`d677634`** — `build: 移除 5 个模块中过期的 Maven Wrapper（锁定 3.8.2/3.8.3）` |
 | 范围 | 15 个文件删除（`.mvn/wrapper/` × 5 模块：`MavenWrapperDownloader.java`、`maven-wrapper.jar`、`maven-wrapper.properties`），598 行删除 |
 | 依据 | 用户指令；wrapper 锁定 Maven 3.8.2/3.8.3 会绕过 JDK 25 + Maven 3.9.16 的版本隔离（D5a）；仓库内零引用，各模块 `.gitignore` 本就忽略 `.mvn/**` 与 `mvnw` |
@@ -836,7 +836,7 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 
 ### P6 收尾（2026-09-16）—— ✅ 完成
 
-- **四仓库提交确认**：均在 `feature/java21`、工作区 0 脏、只领先 `dev` 未落后——parent `50598c0`（+4）、
+- **四仓库提交确认**：均在 `feature/java25`、工作区 0 脏、只领先 `dev` 未落后——parent `50598c0`（+4）、
   base `6e16cfa`（+3）、sdk `bc966e5`（+4）、component `73e3ad4`（+9）；未推送远端。
 - **文档同步**：§6.6 两条 `dependency:tree` 命令路径修正；§8 按实际分支重写；§9 新增三条遗留项；
   §11 补 P5/P6 记录；`progress.md`、`session-handoff.md`、`feature_list.json` 收口（两项置 done）。
@@ -849,7 +849,7 @@ cd /home/haodev/ownword/infra && ./up.sh      # 启动并等待全部 healthy
 
 ### 交付后修复（2026-09-16，第七轮）—— ✅ 完成
 
-用户指示"先推当前成果、修复后再推一次"。两轮推送：第一轮推四仓库交付成果（远端**新建** `feature/java21`），
+用户指示"先推当前成果、修复后再推一次"。两轮推送：第一轮推四仓库交付成果（远端**新建** `feature/java25`），
 第二轮推两处修复；远端 `dev`/`master` 全程未被触碰，推送后核对本地 HEAD 与远端引用一致。
 
 | # | 修复 | 提交 | 验证 |
@@ -873,7 +873,7 @@ connect-planaria 1/1、component-file 8/8、component-test 95/0/0；`contextLoad
 修复后全量门禁复跑（`-DexcludedGroups=external`）：base 2/0/0、sdk 26/0/0、connect-planaria 1/0/0、
 component-file 8/0/0、**component-test 101/0/0**（交付时 95）；`contextLoads` 9 处 PASS；
 component-test 用例账目 130 = 101 执行 + 28 `@Tag("external")` 排除 + 1 非 void `@Test` 被 Jupiter 忽略。
-四仓库已推送 `origin/feature/java21`（component 第三轮推送 `d585194 → e634982`）。
+四仓库已推送 `origin/feature/java25`（component 第三轮推送 `d585194 → e634982`）。
 
 ### 环境就绪清单
 
@@ -888,6 +888,6 @@ component-test 用例账目 130 = 101 执行 + 28 `@Tag("external")` 排除 + 1 
 | `--release 25` 编译通过 | ✅ |
 | Jackson 3 运行期冒烟 | ✅ |
 | docker 可用于 B 档验证；27017/9200/9092/6379/3306 空闲；`e2e-zookeeper` 在跑（仅供 rocketmq，Kafka 4.2.1 走 KRaft） | ✅（目标版本镜像待执行阶段拉取并先验 tag） |
-| 4 仓库代码状态 = `feature/java21`（与 dev 同点、0 脏） | ✅ |
+| 4 仓库代码状态 = `feature/java25`（与 dev 同点、0 脏） | ✅ |
 | 中间件版本矩阵与兼容性核对（官方文档） | ✅ 见 §2 / D23–D24 / §10 证据表 |
 | 中间件目标版本镜像与 tag 可拉取性 | ✅ 五个 tag 全部实测拉取成功（Kafka 需用 daocloud 全限定名） |
