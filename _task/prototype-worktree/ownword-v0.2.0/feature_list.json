@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": "C05",
-  "nextFeature": "C06",
+  "activeFeature": "C08",
+  "nextFeature": "C09",
   "environment": {
     "worktree": "ownword-prototype",
     "sourceRepository": "designs/own-word-prototype-s2-astra-001",
@@ -138,7 +138,7 @@
       "dependencies": [
         "C04"
       ],
-      "status": "in-progress",
+      "status": "needs-review",
       "acceptanceRefs": [
         "C05-A",
         "C05-B"
@@ -148,7 +148,10 @@
         "本项正常与相关边界验证，截图与浏览器日志已审阅",
         "实现提交并经用户复核；未复核时保持 needs-review"
       ],
-      "evidence": ""
+      "evidence": "ownword-prototype/evidence/C05；中文 UTF-8、BOM 与 CRLF 文件上传下载逐字节一致；取消替换与无效编码不覆盖正文。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "859365f"
     },
     {
       "id": "C06",
@@ -157,7 +160,7 @@
       "dependencies": [
         "C05"
       ],
-      "status": "not-started",
+      "status": "needs-review",
       "acceptanceRefs": [
         "C06-A",
         "C06-B",
@@ -168,7 +171,10 @@
         "本项正常与相关边界验证，截图与浏览器日志已审阅",
         "实现提交并经用户复核；未复核时保持 needs-review"
       ],
-      "evidence": ""
+      "evidence": "ownword-prototype/evidence/C06；发布确认绑定最新正文与作者；空白及字节上限门槛通过，手机完整 BAP ID 与复制反馈通过。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "5a73b24"
     },
     {
       "id": "C07",
@@ -177,7 +183,7 @@
       "dependencies": [
         "C06"
       ],
-      "status": "not-started",
+      "status": "needs-review",
       "acceptanceRefs": [
         "C07-A",
         "C07-B",
@@ -191,7 +197,10 @@
         "本项正常与相关边界验证，截图与浏览器日志已审阅",
         "实现提交并经用户复核；未复核时保持 needs-review"
       ],
-      "evidence": ""
+      "evidence": "ownword-prototype/evidence/C07；模拟签名与发布阶段、取消/失败、待核实查询、刷新恢复、存储失败与账户隔离通过；未连接真实服务。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "b5b0f94"
     },
     {
       "id": "C08",
@@ -200,7 +209,7 @@
       "dependencies": [
         "C07"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "acceptanceRefs": [
         "C08-A",
         "C08-B"
