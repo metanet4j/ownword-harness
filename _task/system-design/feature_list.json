@@ -83,6 +83,30 @@
         "status": "done",
         "evidence": "designs/own-word-prototype-s2-astra-001/review-20260917/index.html 与同目录截图；桌面视角切换、标注锚点、手机默认阅读、图片加载和无横向溢出已验证。未执行全量回归。"
       }
+    },
+    {
+      "id": "design-content-v020",
+      "name": "v0.2.0 内容高保真原型",
+      "status": "not-started",
+      "targetVersion": "v0.2.0",
+      "goal": "基于当前 dev 规划内容编辑、草稿、发布、阅读和版本修订，Markdown 编辑器参考 xLog。",
+      "dependencies": [
+        "原型 dev@8d924ae",
+        "spec/核心认知.md 第 6.1、6.3、7.4、7.5、9.3、10.1、10.3 节",
+        "reference/xLog-dev 编辑器与 Markdown 渲染代码",
+        "当前 S2 设计系统"
+      ],
+      "doneCriteria": [
+        "环境与当前版本可并行预览，旧版本可追溯",
+        "内容类型范围明确，版本 PRD 与核心认知一致",
+        "编辑、草稿、发布、阅读、Revision 主流程可操作",
+        "正常与相关边界有定向验证、截图与日志",
+        "用户复核通过后交付"
+      ],
+      "scope": "当前仅产出环境与功能计划；原型实施待范围确认。",
+      "plan": "v0.2.0-内容原型实施计划-20260917-204043.md",
+      "planningStatus": "proposal-ready-for-review",
+      "pendingClarification": "用户所述“只处理问题”是提问类型还是文字内容，等待确认；编辑器参考 xLog 已确认。"
     }
   ]
 }
