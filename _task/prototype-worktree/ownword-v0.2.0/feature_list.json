@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": "C03",
-  "nextFeature": "C04",
+  "activeFeature": "C05",
+  "nextFeature": "C06",
   "environment": {
     "worktree": "ownword-prototype",
     "sourceRepository": "designs/own-word-prototype-s2-astra-001",
@@ -91,7 +91,7 @@
       "dependencies": [
         "C02"
       ],
-      "status": "in-progress",
+      "status": "needs-review",
       "acceptanceRefs": [
         "C03-A",
         "C03-B",
@@ -102,7 +102,10 @@
         "本项正常与相关边界验证，截图与浏览器日志已审阅",
         "实现提交并经用户复核；未复核时保持 needs-review"
       ],
-      "evidence": ""
+      "evidence": "ownword-prototype/evidence/C03；统一 Markdown 渲染、安全文字边界、段落同步滚动与 320px 表格通过；中文深色切换不改写正文。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "2d586e0"
     },
     {
       "id": "C04",
@@ -111,7 +114,7 @@
       "dependencies": [
         "C03"
       ],
-      "status": "not-started",
+      "status": "needs-review",
       "acceptanceRefs": [
         "C04-A",
         "C04-B",
@@ -123,7 +126,10 @@
         "本项正常与相关边界验证，截图与浏览器日志已审阅",
         "实现提交并经用户复核；未复核时保持 needs-review"
       ],
-      "evidence": ""
+      "evidence": "ownword-prototype/evidence/C04；草稿自动保存、刷新恢复、失败保护、身份隔离及确认删除通过；切回身份可恢复未保存正文。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "2f01169"
     },
     {
       "id": "C05",
@@ -132,7 +138,7 @@
       "dependencies": [
         "C04"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "acceptanceRefs": [
         "C05-A",
         "C05-B"
