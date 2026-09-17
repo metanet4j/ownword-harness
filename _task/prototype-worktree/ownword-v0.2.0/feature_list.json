@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": "C08",
-  "nextFeature": "C09",
+  "activeFeature": null,
+  "nextFeature": null,
   "environment": {
     "worktree": "ownword-prototype",
     "sourceRepository": "designs/own-word-prototype-s2-astra-001",
@@ -209,7 +209,7 @@
       "dependencies": [
         "C07"
       ],
-      "status": "in-progress",
+      "status": "needs-review",
       "acceptanceRefs": [
         "C08-A",
         "C08-B"
@@ -219,7 +219,10 @@
         "本项正常与相关边界验证，截图与浏览器日志已审阅",
         "实现提交并经用户复核；未复核时保持 needs-review"
       ],
-      "evidence": ""
+      "evidence": "ownword-prototype/evidence/C08；访客公开阅读、样例链接复制、原文导出和本机内容刷新重开通过；未知标识显示明确提示，320px 无溢出。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "4e0f2a0"
     },
     {
       "id": "C09",
@@ -228,7 +231,7 @@
       "dependencies": [
         "C08"
       ],
-      "status": "not-started",
+      "status": "needs-review",
       "acceptanceRefs": [
         "C09-A",
         "C09-B"
@@ -238,7 +241,10 @@
         "本项正常与相关边界验证，截图与浏览器日志已审阅",
         "实现提交并经用户复核；未复核时保持 needs-review"
       ],
-      "evidence": ""
+      "evidence": "ownword-prototype/evidence/C09；修订追加新版本，旧正文与链接保持；历史往返、无改动门槛和同版本修订草稿复用通过。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "8552aa8"
     },
     {
       "id": "C10",
@@ -247,7 +253,7 @@
       "dependencies": [
         "C09"
       ],
-      "status": "not-started",
+      "status": "needs-review",
       "acceptanceRefs": [
         "C10-A",
         "C10-B"
@@ -257,7 +263,10 @@
         "本项正常与相关边界验证，截图与浏览器日志已审阅",
         "实现提交并经用户复核；未复核时保持 needs-review"
       ],
-      "evidence": ""
+      "evidence": "ownword-prototype/evidence/C10；Proof 三态、独立确认及完整 TxID 通过；2184 字节原文贯穿预览、中英 Review 和阅读完全一致，320px 与最终 harness 检查通过。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "68b6d4c"
     }
   ],
   "designReview": {

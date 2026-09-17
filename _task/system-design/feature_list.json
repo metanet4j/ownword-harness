@@ -9,7 +9,7 @@
     "done",
     "archived"
   ],
-  "activeItem": "design-content-v020",
+  "activeItem": null,
   "features": [
     {
       "id": "design-astra-001",
@@ -104,7 +104,7 @@
     {
       "id": "design-content-v020",
       "name": "v0.2.0 内容高保真原型",
-      "status": "in-progress",
+      "status": "needs-review",
       "targetVersion": "v0.2.0",
       "goal": "基于当前 dev 制作文字内容高保真原型；Markdown 参考 xLog，以可交互的模拟流程表达身份签名、链上发布、阅读与修订。",
       "dependencies": [
@@ -144,7 +144,10 @@
         ],
         "designReview": "_task/system-design/spec/prd/v0.2.0/设计审查v0.2.0-20260917-213000.md"
       },
-      "statusNote": "设计审查通过；C01、C02、C03、C04、C05、C06、C07 已实现并验证，当前 C08。详见任务 harness。"
+      "statusNote": "设计审查通过；C01、C02、C03、C04、C05、C06、C07、C08、C09、C10 已实现并验证，当前 等待用户视觉复核。详见任务 harness。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "设计审查通过；C01–C10 已逐项实现、验证并提交。功能及提交映射见 ../prototype-worktree/ownword-v0.2.0/feature_list.json；最终证据见原型 evidence/C10/verification.json 与 harness-check.txt。"
     }
   ]
 }

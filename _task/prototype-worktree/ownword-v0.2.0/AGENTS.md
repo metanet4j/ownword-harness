@@ -22,7 +22,7 @@
 - `ownword-prototype/` 是独立原型仓库的 worktree。源仓库、基线、分支、版本和 PRD 路径以 `feature_list.json` 的 `environment` 为准。
 - 本目录 harness 和版本设计文档提交到根仓库；原型源码与内容功能证据在原型仓库提交，不把 worktree 源码纳入根仓库。
 - 原型提交前检查 `prdVersion` 与权威 PRD，提交信息携带 `(PRD v0.2.0_YYYYMMDD-HHMMSS)`；每个功能实现并验证后提交。合并或推送按用户本次授权执行。
-- `./init.sh`：路径、分支、S2、状态和依赖、脚本 syntax/lint、现有模型 test，以及 harness 结构检查。只验证这些命令实际覆盖的内容。
+- `./init.sh`：路径、分支、S2、状态和依赖、脚本及 JSX 语法、身份/内容模型、Markdown、双语文案、设计 token 与 harness 结构检查。只验证这些命令实际覆盖的内容。
 - `./init.sh --serve`：前台启动 4312 静态预览；Ctrl+C 结束。日志 `.runtime/preview.log`。端口被占用时不结束其他进程。旧版 4311 独立运行。
 - 浏览器验证使用宿主环境的 `agent-browser`。默认一个正常场景与相关边界，查看受影响截图，记录 console/errors；不默认全量回归。
 - H00 证据在本目录 `evidence/`；内容功能证据放原型 `evidence/` 并标注 C 编号。运行日志放 `.runtime/`，不提交。

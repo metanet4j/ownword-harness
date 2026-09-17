@@ -27,7 +27,7 @@ const prd = fs.readFileSync(path.join(process.argv[2], env.prdSource), 'utf8');
 assert.ok(prd.includes(`# Ownword 产品设计 ${env.prdVersion}`), 'PRD 版本不一致');
 const meta = JSON.parse(fs.readFileSync(path.join(env.worktree, '_d_meta.json'), 'utf8'));
 assert.equal(meta.primaryDesignSystem, env.designSystem, 'S2 绑定不一致');
-for (const file of ['index.html', 'vendor/react.development.js', 'vendor/babel.min.js', '_ds/react-spectrum-s2/_ds_bundle.js', '_ds/react-spectrum-s2/_ds_prompt.md']) {
+for (const file of ['index.html', 'vendor/react.development.js', 'vendor/babel.min.js', '_ds/react-spectrum-s2/_ds_bundle.js', '_ds/react-spectrum-s2/_ds_prompt.md', 'vendor/editor-tools.js', 'content-model.js', 'content-editor.jsx', 'content-publication.jsx', 'content-reader.jsx']) {
   assert.ok(fs.existsSync(path.join(env.worktree, file)), `缺少本地资源：${file}`);
 }
 const ids = new Set(state.features.map(f => f.id));
@@ -43,10 +43,21 @@ assert.equal(state.activeFeature, active[0]?.id ?? null, '当前功能与状态�
 console.log(`环境通过：${env.branch}，PRD ${env.prdVersion}，${state.features.length} 项任务`);
 JS
 
-# Syntax/lint 与既有模型 test 不代表新增内容功能已验收。
+# 检查原型源码语法、状态不变量、Markdown 边界与双语文案；浏览器证据另列。
 node --check ownword-prototype/model.js
 node --check ownword-prototype/copy.js
 node ownword-prototype/check-model.cjs
+node ownword-prototype/check-content.cjs
+node ownword-prototype/check-markdown.mjs
+node ownword-prototype/check-copy.cjs
+python3 ownword-prototype/check-tokens.py
+node <<'JS'
+const fs=require('node:fs'),Babel=require('./ownword-prototype/vendor/babel.min.js');
+for(const file of fs.readdirSync('ownword-prototype').filter(f=>f.endsWith('.jsx'))) {
+  Babel.transform(fs.readFileSync('ownword-prototype/'+file,'utf8'),{presets:['react'],filename:file});
+}
+console.log('全部 JSX 源码语法检查通过');
+JS
 node "$WORKSPACE_DIR/.agents/skills/harness-creator/scripts/validate-harness.mjs" --target "$TASK_DIR"
 
 if [[ "${1:---check}" == '--serve' ]]; then
