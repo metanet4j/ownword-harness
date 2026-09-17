@@ -56,7 +56,19 @@
           "0c00ce2 短屏提示",
           "4265f03 单次轻动"
         ],
-        "nextStep": "用户查看原型并复核本轮四项调整。"
+        "nextStep": "用户查看原型并复核本轮四项调整。",
+        "integration": {
+          "request": "用户要求提交并合并到 dev",
+          "targetBranch": "dev",
+          "repositories": [
+            "designs/own-word-prototype-s2-astra-001",
+            "ownword 根仓库"
+          ],
+          "mode": "本地和远端原无 dev；从各仓库已提交成果建立 dev，无合并冲突。",
+          "prototypeCommit": "8d924aeaa2bc315903a8a2910394830559cf135c",
+          "remoteTarget": "origin/dev",
+          "excluded": "根仓库原有技能文件删除与新增未纳入提交。"
+        }
       },
       "currentReview": {
         "goal": "从美学、视觉层次与主流程交互寻找下一批优化项，交付带实际截图的评审页。",

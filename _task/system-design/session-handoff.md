@@ -15,6 +15,10 @@
 - 验证使用宿主 `agent-browser` 定向操作，未运行全量浏览器脚本、全部组合、真实手机输入/触屏或真实钱包。
 - 证据：`evidence/feedback-motion-20260917/verification.json`、截图、`console.txt`、`browser-errors.txt`。四项实现提交为 `4e6b227`、`060fa8a`、`0c00ce2`、`4265f03`。
 
+## 分支交付
+
+用户要求提交并合并到 `dev`。两个仓库本地和远端原先均无 `dev`，现均从已提交成果建立此分支，推送目标为 `origin/dev`；原型提交为 `8d924ae`，任务记录在根仓库单独提交。无需解决合并冲突，产品文件内容不变，未重复运行浏览器回归。原有技能文件改动保留。
+
 ## 预览与注意事项
 
 - 原型：http://127.0.0.1:4311/own-word-prototype-s2-astra-001/
