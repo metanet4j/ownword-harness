@@ -10,7 +10,7 @@
       "description": "打磨 designs/own-word-prototype-s2-astra-001（穹顶与地平线：七线穹顶、无刻度地平、3D Public Identity），使原型达到可进入生产实现的状态：PRD v0.1 全部 BDD 场景可交互且可验证，术语/状态/边界与核心认知一致，S2 设计系统一致，无障碍/响应式/i18n/主题达标，全部模拟点与生产替换契约逐项文档化，验证证据可复现。基线为 commit d7706da（09-06 00:18，用户要求回退后的状态）；本次打磨不复用 backup/astra-412ca12 分支的成果。",
       "dependencies": ["design-002"],
       "status": "in-progress",
-      "statusNote": "视觉与交互评审已交付 6 项建议，证据与复现步骤见 review-20260917/index.html。本轮未修改产品页面；整体事项继续 in-progress，资产保持 needs-review。",
+      "statusNote": "已落实用户选定的视觉评审第 6 项：我的身份页改为紧凑单列，发布状态靠近姓名，简介自然衔接。桌面英文浅色、320px 中文深色长简介及相关交互验证通过；其他建议未应用，整体保持 in-progress、资产 needs-review。",
       "inputs": ["_task/system-design/spec/核心认知.md", "_task/system-design/spec/prd/v0.1/设计文档v0.1.md", "designs/react-spectrum-s2"],
       "output": "designs/own-word-prototype-s2-astra-001",
       "doneCriteria": [
@@ -28,6 +28,24 @@
         "提交规范：全部改动在 astra 子仓库提交且 commit 信息带 (PRD v0.1_${datetime})，任务文档变更在根仓库提交"
       ],
       "evidence": "designs/own-word-prototype-s2-astra-001/evidence/card-back-check.json 与 card-back-desktop.png、card-back-mobile.png。验证范围遵循 _task/system-design/AGENTS.md。整体事项仍待用户视觉复核。",
+      "currentChange": {
+        "goal": "落实视觉评审第 6 项：收紧我的身份页标题与内容层次，将发布状态靠近身份信息，简介自然衔接。",
+        "dependencies": [
+          "用户选择评审第 6 项",
+          "review-20260917/index.html#identity",
+          "核心认知第 10.5 节",
+          "项目绑定的 S2 设计系统"
+        ],
+        "doneCriteria": [
+          "名称、BAP ID、发布状态、简介分组清晰",
+          "桌面正常资料与手机长资料截图复核",
+          "复制反馈、编辑与公开身份入口可用",
+          "仅改身份页相关结构与样式，完成独立提交"
+        ],
+        "scope": "我的身份页及本项评审状态；其他优化项不在本轮范围。",
+        "status": "done",
+        "evidence": "designs/own-word-prototype-s2-astra-001/evidence/identity-layout-20260917/verification.json、desktop.png、mobile.png 与 mobile-full.png；桌面正常场景、手机长简介边界、复制反馈和编辑/公开身份入口通过。待用户视觉复核。"
+      },
       "currentReview": {
         "goal": "从美学、视觉层次与主流程交互寻找下一批优化项，交付带实际截图的评审页。",
         "dependencies": ["现有 PRD v0.1 原型", "既有 S2 设计系统", "核心认知第 6.3、10.5 节"],
@@ -37,7 +55,7 @@
           "审美建议说明观察、影响与调整方向",
           "评审页可打开且标注可切换"
         ],
-        "scope": "本次只交付评审，原型产品页面保持现状；整体事项继续 in-progress。",
+        "scope": "评审产出范围；后续实施以 currentChange 为准。",
         "status": "done",
         "evidence": "designs/own-word-prototype-s2-astra-001/review-20260917/index.html 与同目录截图；桌面视角切换、标注锚点、手机默认阅读、图片加载和无横向溢出已验证。未执行全量回归。"
       }
