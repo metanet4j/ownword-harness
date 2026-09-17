@@ -363,6 +363,27 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "dfdba06"
+    },
+    {
+      "id": "R04",
+      "name": "编辑区焦点样式减重",
+      "description": "回应用户对蓝色边框的反馈，弱化写作区焦点装饰。",
+      "dependencies": [
+        "R03"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X02"
+      ],
+      "doneCriteria": [
+        "可视化与源码编辑不再显示整圈蓝框",
+        "键盘焦点仍可辨识，浅深主题正常",
+        "定向截图审阅并独立提交"
+      ],
+      "evidence": "ownword-prototype/evidence/R04/verification.json；浅深主题、两种编辑器键盘焦点、原文保持与资源刷新通过，浏览器无运行错误。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "67eff79"
     }
   ],
   "designReview": {

@@ -130,24 +130,23 @@
       "branch": "prototype/v0.2.0-content",
       "baselineCommit": "8d924aeaa2bc315903a8a2910394830559cf135c",
       "currentChange": {
-        "id": "R03",
-        "goal": "增加用户选定的可视化编辑＋源码切换",
+        "id": "R04",
+        "goal": "减轻编辑区焦点边框",
         "status": "needs-review",
         "dependencies": [
-          "256e5b2 已交付原型"
+          "dfdba06 已交付原型"
         ],
         "doneCriteria": [
-          "正文完整、交互可用、发布确认使用最新内容",
-          "定向验证通过并独立提交"
+          "正常与键盘焦点可用，浅深主题截图通过"
         ],
         "harness": "_task/prototype-worktree/ownword-v0.2.0/feature_list.json",
-        "commit": "dfdba06",
-        "evidence": "_task/prototype-worktree/ownword-v0.2.0/ownword-prototype/evidence/R03/verification.json"
+        "commit": "67eff79",
+        "evidence": "_task/prototype-worktree/ownword-v0.2.0/ownword-prototype/evidence/R04/verification.json"
       },
-      "statusNote": "内容原型、P0 修复、详情目录及可视化编辑均已实现、验证并提交，等待用户复核；详见任务 harness。",
+      "statusNote": "内容原型及 R01–R04 修复已实现、验证并提交，等待用户复核；详见任务 harness。",
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "../prototype-worktree/ownword-v0.2.0/feature_list.json 与原型 evidence/R03/verification.json；既有证据保留。"
+      "evidence": "../prototype-worktree/ownword-v0.2.0/feature_list.json 与原型 evidence/R04/verification.json；既有证据保留。"
     }
   ]
 }
