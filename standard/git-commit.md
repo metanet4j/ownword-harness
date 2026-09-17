@@ -3,7 +3,6 @@
 ## 1. 适用范围
 
 - 适用于 `harness-hh` 下所有需要 `git add`、`git commit`、`git push` 的场景。
-- 涉及暂存范围控制时，先配合 `execution-rules.md` 中的“脏工作区策略”和“计划中的 Git 命令规范”执行。
 
 ## 2. 提交格式
 
