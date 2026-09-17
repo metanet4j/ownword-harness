@@ -6,7 +6,7 @@ ownword 主仓内有多处子目录本身是**独立 Git 仓库**，不纳入主
 | 位置 | 内容 | 明细 |
 |---|---|---|
 | `frontend/` | 1 个独立仓库（仅本地），主仓根直属 | 见下表 |
-| `designs/` | 2 个独立仓库 + 1 个被忽略的第三方 vendor | [`designs/README.md`](designs/README.md) |
+| `designs/` | 4 个独立仓库 + 1 个被忽略的第三方 vendor | [`designs/README.md`](designs/README.md) |
 | `backend/` | 5 个独立仓库 | [`backend/README.md`](backend/README.md) |
 | `Archive/prototype/` | 3 个仅本地的独立仓库 | [`Archive/prototype/README.md`](Archive/prototype/README.md) |
 | `_task/backend-worktree/boot4-java25-upgrade/` | 4 个 git worktree（主仓库在 `backend/`） | [`_task/backend-worktree/README.md`](_task/backend-worktree/README.md) |

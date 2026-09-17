@@ -11,6 +11,8 @@
 /backend/metanet4j-component/
 /designs/ownword-design-prototype/
 /designs/own-word-prototype-s2-astra-001/
+/designs/own-word-prototype-s2-astra-002/
+/designs/own-word-prototype-s2-astra-ultra-003/
 /_task/backend-worktree/boot4-java25-upgrade/metanet4j-parent/
 /_task/backend-worktree/boot4-java25-upgrade/metanet4j-base/
 /_task/backend-worktree/boot4-java25-upgrade/metanet4j-sdk/
@@ -45,6 +47,10 @@ coverage/
 *.tmp
 .DS_Store
 # 注意：Maven wrapper（.mvn/）不是产物，不在此忽略
+
+# ============ C 盘工作副本的本地目录（不入库）============
+/fronted/
+/test-yours
 
 # ============ 工具运行态（本地，不入库）============
 .ab-run/
