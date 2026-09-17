@@ -7,7 +7,7 @@
 |---|---|---|---|
 | `ownword-design-prototype/` | `master` | `50673d0` | 无（已解除远端关联，仓库保留本地） |
 | `own-word-prototype-s2-astra-001/` | `master` | `a66a3ba` | https://github.com/metanet4j/ownword-design-prototype.git |
-| `own-word-prototype-s2-astra-002/` | `master` | `50673d0` | https://github.com/metanet4j/ownword-design-prototype.git |
+| `own-word-prototype-s2-astra-002/` | `master` | `50673d0` | 无（已解除远端关联，仓库保留本地） |
 | `own-word-prototype-s2-astra-ultra-003/` | `codex/design-astra-ultra-003` | `70d40d9` | 无（仅本地） |
 
 ## 被忽略的非仓库目录
