@@ -1,9 +1,9 @@
 # 当前交接
 
-交付事项 design-content-v020 为 needs-review。内容原型及 R01–R04 修复已实现、定向验证并提交，等待用户复核。当前交付为编辑区焦点样式减重。
+交付事项 design-content-v020 为 needs-review。内容原型及 R01–R05 调整已实现、定向验证并提交，等待用户复核。当前交付为全站输入控件样式统一。
 
 当前结果、提交与证据以[任务清单](../prototype-worktree/ownword-v0.2.0/feature_list.json)为准。从[任务 AGENTS.md](../prototype-worktree/ownword-v0.2.0/AGENTS.md)续接，运行 ./init.sh。
 
-预览 http://127.0.0.1:4312/#/content，日志位于任务 .runtime/preview.log。旧版 4311 保留；签名、发布和 Proof 为模拟。
+预览 http://127.0.0.1:4312/，日志位于任务 .runtime/preview.log。旧版 4311 保留；签名、发布和 Proof 为模拟。
 
-唯一下一步：用户刷新后打开草稿，点击正文复核焦点样式。v0.2.0 保留任务分支，尚未合并或推送；根仓库原有技能改动不纳入任务提交。
+唯一下一步：用户刷新，复核身份表单、链接弹窗与内容编辑页面的输入样式。v0.2.0 保留任务分支，尚未合并或推送；根仓库原有技能改动不纳入任务提交。

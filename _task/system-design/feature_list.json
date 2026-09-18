@@ -130,23 +130,23 @@
       "branch": "prototype/v0.2.0-content",
       "baselineCommit": "8d924aeaa2bc315903a8a2910394830559cf135c",
       "currentChange": {
-        "id": "R04",
-        "goal": "减轻编辑区焦点边框",
+        "id": "R05",
+        "goal": "统一其他页面的输入控件样式",
         "status": "needs-review",
         "dependencies": [
-          "dfdba06 已交付原型"
+          "67eff79 已交付原型"
         ],
         "doneCriteria": [
-          "正常与键盘焦点可用，浅深主题截图通过"
+          "身份、链接、搜索及下拉控件一致，错误与键盘状态可辨识"
         ],
         "harness": "_task/prototype-worktree/ownword-v0.2.0/feature_list.json",
-        "commit": "67eff79",
-        "evidence": "_task/prototype-worktree/ownword-v0.2.0/ownword-prototype/evidence/R04/verification.json"
+        "commit": "006acbf",
+        "evidence": "_task/prototype-worktree/ownword-v0.2.0/ownword-prototype/evidence/R05/verification.json"
       },
-      "statusNote": "内容原型及 R01–R04 修复已实现、验证并提交，等待用户复核；详见任务 harness。",
+      "statusNote": "内容原型及 R01–R05 调整已实现、验证并提交，等待用户复核；详见任务 harness。",
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "../prototype-worktree/ownword-v0.2.0/feature_list.json 与原型 evidence/R04/verification.json；既有证据保留。"
+      "evidence": "../prototype-worktree/ownword-v0.2.0/feature_list.json 与原型 evidence/R05/verification.json；既有证据保留。"
     }
   ]
 }

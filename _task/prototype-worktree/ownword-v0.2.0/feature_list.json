@@ -384,6 +384,27 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "67eff79"
+    },
+    {
+      "id": "R05",
+      "name": "统一全站输入控件样式",
+      "description": "将身份表单、链接弹窗、源码搜索与下拉框统一为轻量输入样式。",
+      "dependencies": [
+        "R04"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X02"
+      ],
+      "doneCriteria": [
+        "所有实际输入控件使用一致的中性边框、间距和焦点提示",
+        "错误状态清楚，键盘与手机输入保持可用",
+        "定向浏览器截图审阅并独立提交"
+      ],
+      "evidence": "ownword-prototype/evidence/R05/verification.json；身份表单、链接、查找替换与 11 个场景下拉框统一，浅深色、键盘焦点、错误和窄屏布局通过。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "006acbf"
     }
   ],
   "designReview": {
