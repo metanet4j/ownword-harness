@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 1,
+  "purpose": "v0.3.0 Identity Artifact 高保真原型；本轮仅完成 H00 环境准备。",
+  "lastUpdated": "2026-09-18",
+  "allowedStatuses": [
+    "not-started",
+    "in-progress",
+    "needs-review",
+    "blocked",
+    "done"
+  ],
+  "activeFeature": null,
+  "nextFeature": "A01",
+  "executionScope": "bootstrap-only",
+  "environment": {
+    "worktree": "ownword-prototype",
+    "sourceRepository": "designs/own-word-prototype-s2-astra-001",
+    "sourceRemote": "https://github.com/metanet4j/ownword-design-prototype.git",
+    "sourceRef": "origin/dev",
+    "baselineCommit": "006acbf3cb551bf3c5de68681420238667dab06d",
+    "branch": "codex/prototype-v0.3.0-artifact",
+    "prdVersion": "v0.3.0",
+    "prdSource": "_task/system-design/spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md",
+    "previewHost": "127.0.0.1",
+    "previewPort": 4313,
+    "previewLog": ".runtime/preview.log",
+    "designSystem": "react-spectrum-s2",
+    "designSystemNamespace": "ReactSpectrumS2_ad4872",
+    "restoredDesignSystem": "designs/react-spectrum-s2",
+    "designSystemRecovery": "基线 _ds 运行时消费副本；不包含完整生成工程",
+    "backend": "none; deterministic prototype fixtures only"
+  },
+  "features": [
+    {
+      "id": "H00",
+      "name": "设计审查与 harness 初始化",
+      "description": "完成设计审查、独立基线、S2 资源、启动入口和浏览器基线验证，准备后汇报。",
+      "dependencies": [],
+      "status": "needs-review",
+      "doneCriteria": [
+        "设计审查无未处理阻塞项，结论可追溯",
+        "基线与上一版最终交付一致，独立 worktree 和 S2 资源可用",
+        "Windows 与 Bash 启动入口可重复运行，端口冲突明确失败",
+        "基线正常与相关边界有截图和日志；A01–A09 未实施",
+        "提交本轮文件并向用户汇报，人工复核前保持 needs-review"
+      ],
+      "evidence": "evidence/environment-check.json；设计审查及启动、浏览器、端口冲突的原始证据见该文件。A01–A09 未开始。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review"
+    },
+    {
+      "id": "A01",
+      "name": "身份入口与 Artifact 工作台",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "H00"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "A01-A",
+        "A01-B",
+        "A01-C"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "",
+      "implementationStatus": "not-started",
+      "reviewStatus": "not-submitted"
+    },
+    {
+      "id": "A02",
+      "name": "创建内容与预览",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A01"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "A02-A",
+        "A02-B",
+        "X03"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "",
+      "implementationStatus": "not-started",
+      "reviewStatus": "not-submitted"
+    },
+    {
+      "id": "A03",
+      "name": "Review、身份签名与创建",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A02"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "A03-A",
+        "A03-B",
+        "A03-C",
+        "A03-D",
+        "A03-E",
+        "X04",
+        "X05"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "",
+      "implementationStatus": "not-started",
+      "reviewStatus": "not-submitted"
+    },
+    {
+      "id": "A04",
+      "name": "Artifact 详情与 Proof",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A03"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "A04-A",
+        "A04-B",
+        "A04-C",
+        "X04"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "",
+      "implementationStatus": "not-started",
+      "reviewStatus": "not-submitted"
+    },
+    {
+      "id": "A05",
+      "name": "编号追踪与稳定状态",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A04"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "A05-A",
+        "A05-B",
+        "A05-C",
+        "A05-D"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "",
+      "implementationStatus": "not-started",
+      "reviewStatus": "not-submitted"
+    },
+    {
+      "id": "A06",
+      "name": "多 Artifact 与 Current 切换",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A04",
+        "A05"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "A06-A",
+        "A06-B",
+        "X05"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "",
+      "implementationStatus": "not-started",
+      "reviewStatus": "not-submitted"
+    },
+    {
+      "id": "A07",
+      "name": "Artifact 转移",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A06",
+        "A08"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "A07-A",
+        "A07-B",
+        "A07-C",
+        "X05"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "",
+      "implementationStatus": "not-started",
+      "reviewStatus": "not-submitted"
+    },
+    {
+      "id": "A08",
+      "name": "无效关联处理",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A06"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "A08-A",
+        "A08-B",
+        "X05"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "",
+      "implementationStatus": "not-started",
+      "reviewStatus": "not-submitted"
+    },
+    {
+      "id": "A09",
+      "name": "数字 ID 精确查找",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A01",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "A09-A",
+        "A09-B",
+        "A09-C",
+        "A09-D",
+        "X01",
+        "X02",
+        "X03",
+        "X04",
+        "X05"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "",
+      "implementationStatus": "not-started",
+      "reviewStatus": "not-submitted"
+    }
+  ],
+  "designReview": {
+    "status": "passed-with-corrections",
+    "reviewer": "Codex，用户指定设计审查",
+    "source": "_task/system-design/spec/prd/v0.3.0/设计审查v0.3.0-20260918-225543.md",
+    "scope": "产品一致性、交互恢复、安全预览、模拟边界、制作映射和基线条件；不是用户视觉批准。"
+  }
+}

@@ -1,11 +1,11 @@
 # 当前交接
 
-当前事项 `reference-identity-refresh` 为 `needs-review`。参考源码和文档已同步，设计依据已修正并检查；`design-artifact-v030-doc` 保留待复核状态。
+当前事项 `prototype-artifact-v030-bootstrap` 为 `needs-review`。设计审查和环境准备均已完成，Artifact 功能尚未开始。
 
-续接时先读[任务指南](AGENTS.md)、[功能清单](feature_list.json)和[进展](progress.md)。参考入口及上游文档差异见[reference 说明](../../reference/README.md)，准确来源和版本以[sources.lock.json](../../reference/sources.lock.json)为准。更新参考库前检查其 Git 状态，不覆盖本地修改；旧快照备份仅用于必要恢复。
+续接时先读[任务指南](AGENTS.md)、[功能清单](feature_list.json)和[进展](progress.md)。具体制作环境、验证和唯一下一步以[v0.3.0 harness](../prototype-worktree/ownword-v0.3.0/AGENTS.md)及其状态文件为准，不从旧版缺失路径重新初始化，也不改动原型旧基线 checkout。
 
 产品事实见[核心认知](spec/核心认知.md)，页面和验收见[v0.3.0 设计文档](spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md)。identityKey 含义已由用户确认，不重复提问。普通 Transfer 的签名缺口已写入核心认知第 12 节，不能因更新 SDK 就认为所有交易已满足身份签名要求。
 
-源码来源和完整性、文档链接、BDD、JSON 及差异检查通过，详见进展；未安装或运行外部项目。后续制作仍须按设计文档第 9 节恢复 v0.2.0 基线与 S2 资源，本轮没有制作原型或实现生产 API。
+设计审查修正了未知结果恢复与安全预览边界，全部 33 条 BDD 已映射。独立基线、S2 消费资源、启动入口、浏览器与端口冲突检查已通过；证据和限制见[版本进展](../prototype-worktree/ownword-v0.3.0/progress.md)。harness 结构检查不能代替 Artifact 实现验收。
 
-唯一下一步：用户复核参考资料入口及同步后的 v0.3.0 设计依据。
+唯一下一步：收到用户后续制作指示后，按版本清单启动 A01；本轮停在环境准备完成。
