@@ -329,6 +329,33 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "c2b185a600dad3001ba4779e38317cdd6a273c7f"
+    },
+    {
+      "id": "R03",
+      "name": "统一收敛页面说明与编号样式",
+      "description": "按用户五条批注检查同类问题：删去重复小标题，辅助规则按需展示，统一纯数字编号，将模拟说明集中在演示面板。",
+      "dependencies": [
+        "R02"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A03-A",
+        "A04-A",
+        "A06-A",
+        "A07-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "确认及关联页面的重复说明已收敛，重要操作对象与影响仍可辨认",
+        "帮助入口支持悬浮、焦点、点击和 Escape，手机可用且无横向溢出",
+        "编号显示统一为纯数字，完整复制与兼容 # 查询保持有效",
+        "模型、受影响流程和截图检查通过，文档、证据与提交齐备"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R03/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "e4238ca40193e922312e6a00d0d0dd1e199a4bf6"
     }
   ],
   "designReview": {
@@ -337,8 +364,8 @@
     "source": "_task/system-design/spec/prd/v0.3.0/设计审查v0.3.0-20260918-225543.md",
     "scope": "产品一致性、交互恢复、安全预览、模拟边界、制作映射和基线条件；不是用户视觉批准。"
   },
-  "authorization": "用户授权完成全部 feature，并要求从美学、设计、交互及移动端全面 review，发现问题直接修复至本轮问题清零。",
+  "authorization": "用户授权完成全部 feature，并要求全面体验审查；当前按五条页面批注统一检查和修正同类说明、编号样式及高保真呈现问题。",
   "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
-  "finalVerification": "evidence/R02-init.txt",
-  "experienceReview": "ownword-prototype/evidence/artifact-v030/R02/体验审查-20260919-011800.md"
+  "finalVerification": "evidence/R03-init.txt",
+  "experienceReview": "ownword-prototype/evidence/artifact-v030/R03/说明收敛审查-20260919-071512.md"
 }
