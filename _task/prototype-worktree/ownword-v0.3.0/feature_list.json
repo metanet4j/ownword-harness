@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": "A03",
-  "nextFeature": "A03",
+  "activeFeature": "A04",
+  "nextFeature": "A04",
   "executionScope": "artifact-features",
   "environment": {
     "worktree": "ownword-prototype",
@@ -101,7 +101,7 @@
       "dependencies": [
         "A02"
       ],
-      "status": "in-progress",
+      "status": "needs-review",
       "acceptanceRefs": [
         "A03-A",
         "A03-B",
@@ -116,9 +116,10 @@
         "正常与相关边界、受影响截图及浏览器日志已审阅",
         "原型独立提交并交付复核，未复核时保持 needs-review"
       ],
-      "evidence": "",
-      "implementationStatus": "in-progress",
-      "reviewStatus": "not-submitted"
+      "evidence": "ownword-prototype/evidence/artifact-v030/A03.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "93ed9ac19783b318a2852745da6dba2ba9e044dd"
     },
     {
       "id": "A04",
@@ -127,7 +128,7 @@
       "dependencies": [
         "A03"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "acceptanceRefs": [
         "A04-A",
         "A04-B",
@@ -140,7 +141,7 @@
         "原型独立提交并交付复核，未复核时保持 needs-review"
       ],
       "evidence": "",
-      "implementationStatus": "not-started",
+      "implementationStatus": "in-progress",
       "reviewStatus": "not-submitted"
     },
     {
