@@ -23,10 +23,11 @@
 /_task/prototype-worktree/ownword-v0.2.0/.runtime/
 /frontend/
 
-# ============ 整体忽略的外部资料 / vendor（非 Git 仓库）============
-# reference: 上游源码快照，只保留 README.md 标注目录结构
+# ============ 整体忽略的外部资料 / vendor ============
+# reference: 上游参考仓库，只保留说明与来源锁定清单
 /reference/*
 !/reference/README.md
+!/reference/sources.lock.json
 # designs/react-spectrum-s2: 第三方 design system 副本
 /designs/react-spectrum-s2/
 

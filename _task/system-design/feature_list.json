@@ -9,8 +9,34 @@
     "done",
     "archived"
   ],
-  "activeItem": "design-artifact-v030-doc",
+  "activeItem": "reference-identity-refresh",
   "features": [
+    {
+      "id": "reference-identity-refresh",
+      "name": "Identity Artifact 参考源码与文档更新",
+      "status": "needs-review",
+      "goal": "核对并更新本次设计依赖的上游参考资料，使本地源码、来源版本和设计引用可追溯。",
+      "scope": "核对 reference 中的 BAP、Yours Wallet、1Sat Ordinals，补充所需 1sat-sdk 与 1sat-stack 参考；保留来源不明的本地差异，同步受影响的设计文档，不升级产品运行依赖。",
+      "dependencies": [
+        "用户要求更新之前指出过时的本地代码与文档",
+        "各项目官方上游源码和当前本地快照",
+        "spec/核心认知.md 与 v0.3.0 设计文档"
+      ],
+      "doneCriteria": [
+        "更新或核实相关源码快照，记录上游地址、分支和准确 commit",
+        "既有本地差异得到保留，不把上游文档错误伪装成已修复",
+        "设计引用与更新后的源码一致，缺失 API 仍如实标明",
+        "内容与来源验证、文档检查通过，提交本任务受版本控制的文件"
+      ],
+      "prdVersion": "v0.3.0",
+      "prdSource": "_task/system-design/spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md",
+      "output": "reference/README.md",
+      "implementationStatus": "synced-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "五份参考仓库的 commit、Git tree、文件数及官方来源均与 reference/sources.lock.json 一致，git fsck 通过且工作区干净。三份旧快照已保留。参考说明、核心认知与 PRD 共 54 个本地链接可定位，31 条 BDD 保持完整；JSON 与差异检查通过。未安装依赖、构建钱包或调用交易 API。",
+      "statusNote": "参考资料已同步；上游残留旧示例及普通转移签名缺口已明确，未以源码更新宣称生产能力齐备。",
+      "nextStep": "用户复核参考资料入口及同步后的 v0.3.0 设计依据。"
+    },
     {
       "id": "design-artifact-v030-doc",
       "name": "v0.3.0 Identity Artifact 核心认知与设计文档",
@@ -37,7 +63,7 @@
       "implementationStatus": "documentation-written-and-checked",
       "reviewStatus": "awaiting-user-review",
       "statusNote": "用户裁决已落实，identityKey 含义已确认。核心认知与版本设计文档完成并交付复核；本轮未制作原型或实现 API。",
-      "evidence": "核心认知和 PRD 的 25 个本地链接均可定位，代码围栏成对；31 条 BDD 编号唯一，A01–A09 均有范围、验收与制作映射。任务 JSON 与 git diff --check 通过；未执行浏览器、真实钱包或 API 验证。",
+      "evidence": "核心认知和 PRD 的 40 个本地链接均可定位，代码围栏成对；31 条 BDD 编号唯一，A01–A09 均有范围、验收与制作映射。任务 JSON 与 git diff --check 通过；未执行浏览器、真实钱包或 API 验证。参考资料更新证据见 reference-identity-refresh。",
       "nextStep": "用户复核核心认知及 v0.3.0 设计文档。后续原型制作前须恢复 v0.2.0 基线并核实 S2 资源。"
     },
     {
