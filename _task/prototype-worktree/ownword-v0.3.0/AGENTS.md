@@ -12,7 +12,7 @@
 ## 范围与授权
 
 - One feature at a time：同时只允许一个 `in-progress` 功能，`activeFeature` 与其一致。
-- Stay in scope：本轮授权仅 H00 设计审查、harness 准备和基线验证。准备好后汇报，A01–A09 保持 `not-started`，等待用户后续指示再制作。
+- Stay in scope：用户已授权连续完成 A01–A09。按依赖逐项实施、验证和提交，完成一项即继续下一项；人工视觉复核前保留 `needs-review`，不因此中断后续功能。
 - 身份、签名、交易、编号、ownership 与 Binding 均为可控样例；不接真实钱包，不读取密钥，不发送真实交易，不实现 metanet4j。
 - 页面制作使用 `baoyu-design`，先读原型 `_d_meta.json` 和绑定的 `_ds/react-spectrum-s2/_ds_prompt.md`。只复用该 S2 的 bundle、组件和 token。
 - `designs/react-spectrum-s2/` 是从基线恢复的消费副本，不包含完整生成工程；本任务不升级 S2 或重新生成该系统。

@@ -9,8 +9,30 @@
     "done",
     "archived"
   ],
-  "activeItem": "prototype-artifact-v030-bootstrap",
+  "activeItem": "prototype-artifact-v030",
   "features": [
+    {
+      "id": "prototype-artifact-v030",
+      "name": "v0.3.0 Identity Artifact 高保真原型",
+      "status": "in-progress",
+      "goal": "连续完成 A01–A09，逐项验证、提交并交付审阅。",
+      "scope": "按已审查 PRD 制作可交互原型；不接真实钱包或生产 API。",
+      "dependencies": [
+        "用户明确授权完成全部 feature",
+        "prototype-artifact-v030-bootstrap"
+      ],
+      "doneCriteria": [
+        "九项功能及 33 条 BDD 均有对应证据",
+        "正常与相关边界、响应式、双语主题及日志检查通过",
+        "每项独立提交，交付前状态真实完整"
+      ],
+      "prdVersion": "v0.3.0",
+      "prdSource": "_task/system-design/spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md",
+      "harnessPath": "_task/prototype-worktree/ownword-v0.3.0",
+      "output": "_task/prototype-worktree/ownword-v0.3.0/ownword-prototype",
+      "implementationStatus": "in-progress",
+      "reviewStatus": "not-submitted"
+    },
     {
       "id": "prototype-artifact-v030-bootstrap",
       "name": "v0.3.0 设计审查与原型 harness 初始化",
