@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "purpose": "完成 v0.3.0 Identity Artifact 高保真原型的 A01–A09 功能。",
+  "purpose": "完成 v0.3.0 Identity Artifact 高保真原型 A01–A09，以及用户授权的外观与体验修正。",
   "lastUpdated": "2026-09-19",
   "allowedStatuses": [
     "not-started",
@@ -298,6 +298,37 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "ad69e4a7ad160faba676ae40a77acee38e511cf8"
+    },
+    {
+      "id": "R02",
+      "name": "全面体验审查与修正",
+      "description": "实查 Artifact 工作台、详情、查找、创建、Review、关联、转移、异常恢复及共用导航；按用户反馈收敛视觉，修复可复现的交互与移动端问题。",
+      "dependencies": [
+        "R01"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-A",
+        "A02-A",
+        "A03-A",
+        "A04-A",
+        "A06-A",
+        "A07-A",
+        "A08-A",
+        "A09-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "审查桌面、平板和 390/320px 手机布局，含中英文与深色代表场景",
+        "问题有复现证据与修复结果；数字 ID、关联身份、主次操作和默认内容层次清晰",
+        "核心操作、错误恢复、键盘与弹窗检查通过，本轮发现问题全部关闭",
+        "每个完成的修正提交，报告与最终截图可追溯，模型、语法、token 及浏览器错误检查通过"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R02/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "c2b185a600dad3001ba4779e38317cdd6a273c7f"
     }
   ],
   "designReview": {
@@ -306,7 +337,8 @@
     "source": "_task/system-design/spec/prd/v0.3.0/设计审查v0.3.0-20260918-225543.md",
     "scope": "产品一致性、交互恢复、安全预览、模拟边界、制作映射和基线条件；不是用户视觉批准。"
   },
-  "authorization": "用户：好的，开始，直到 feature 全部完成。",
+  "authorization": "用户授权完成全部 feature，并要求从美学、设计、交互及移动端全面 review，发现问题直接修复至本轮问题清零。",
   "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
-  "finalVerification": "evidence/R01-init.txt"
+  "finalVerification": "evidence/R02-init.txt",
+  "experienceReview": "ownword-prototype/evidence/artifact-v030/R02/体验审查-20260919-011800.md"
 }
