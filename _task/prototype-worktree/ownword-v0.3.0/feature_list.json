@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "purpose": "完成 v0.3.0 Identity Artifact 高保真原型的 A01–A09 功能。",
-  "lastUpdated": "2026-09-18",
+  "lastUpdated": "2026-09-19",
   "allowedStatuses": [
     "not-started",
     "in-progress",
@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": "A09",
-  "nextFeature": "A09",
+  "activeFeature": null,
+  "nextFeature": null,
   "executionScope": "artifact-features",
   "environment": {
     "worktree": "ownword-prototype",
@@ -41,10 +41,10 @@
         "设计审查无未处理阻塞项，结论可追溯",
         "基线与上一版最终交付一致，独立 worktree 和 S2 资源可用",
         "Windows 与 Bash 启动入口可重复运行，端口冲突明确失败",
-        "基线正常与相关边界有截图和日志；A01–A09 未实施",
+        "基线正常与相关边界有截图和日志；Artifact 功能证据分别登记",
         "提交本轮文件并向用户汇报，人工复核前保持 needs-review"
       ],
-      "evidence": "evidence/environment-check.json；设计审查及启动、浏览器、端口冲突的原始证据见该文件。A01–A09 未开始。",
+      "evidence": "evidence/environment-check.json；该记录说明初始化基线，功能当前状态见本清单 A01–A09。",
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review"
     },
@@ -253,7 +253,7 @@
         "A07",
         "A08"
       ],
-      "status": "in-progress",
+      "status": "needs-review",
       "acceptanceRefs": [
         "A09-A",
         "A09-B",
@@ -270,9 +270,10 @@
         "正常与相关边界、受影响截图及浏览器日志已审阅",
         "原型独立提交并交付复核，未复核时保持 needs-review"
       ],
-      "evidence": "",
-      "implementationStatus": "in-progress",
-      "reviewStatus": "not-submitted"
+      "evidence": "ownword-prototype/evidence/artifact-v030/A09.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "1c7de427f153959012e7f4bd7e89e113443fdb4e"
     }
   ],
   "designReview": {
@@ -281,5 +282,7 @@
     "source": "_task/system-design/spec/prd/v0.3.0/设计审查v0.3.0-20260918-225543.md",
     "scope": "产品一致性、交互恢复、安全预览、模拟边界、制作映射和基线条件；不是用户视觉批准。"
   },
-  "authorization": "用户：好的，开始，直到 feature 全部完成。"
+  "authorization": "用户：好的，开始，直到 feature 全部完成。",
+  "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
+  "finalVerification": "evidence/final-init.txt"
 }

@@ -27,8 +27,8 @@
 
 ## 验证（Verification Commands）
 
-- `./init.ps1` 或 `./init.sh`：验证登记、worktree、PRD、全部验收引用、依赖关系、S2 资源、JS/JSX 语法、既有身份和内容模型，以及 harness 结构。检查不改变原型文件。
-- 模型测试（model tests）可单独运行 `node ownword-prototype/check-model.cjs` 与 `node ownword-prototype/check-content.cjs`；两项也包含在启动检查中，只验证既有基线模型。
+- `./init.ps1` 或 `./init.sh`：验证登记、worktree、PRD、全部验收引用、依赖关系、S2 资源、JS/JSX 语法、身份、内容及 Artifact 模型，以及 harness 结构。检查不改变原型文件。
+- 模型测试（model tests）可单独运行 `node ownword-prototype/check-model.cjs` 与 `node ownword-prototype/check-content.cjs`；Artifact 模型检查为 `node ownword-prototype/check-artifact.cjs`。三项均包含在启动检查中；浏览器证据另见功能清单。
 - `./init.ps1 -Serve` 或 `./init.sh --serve`：检查后前台启动本地预览。日志位置见任务清单；Ctrl+C 停止。端口占用时失败并说明，不终止其他进程。
 - 浏览器操作使用宿主环境的 `agent-browser`，使用独立 session；基线正常页面和一个相关边界即可，不把基线验证当作 Artifact 验收。
 - 后续每项验证适用 BDD，默认正常场景、相关边界与受影响截图；扩大范围须有实际原因。签名、重组和存储边界按 PRD 的明确验收执行。

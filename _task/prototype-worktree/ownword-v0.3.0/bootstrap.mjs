@@ -101,12 +101,13 @@ for (const file of fs.readdirSync(prototype).filter(name => name.endsWith('.jsx'
 }
 console.log(run(process.execPath, ['check-model.cjs']));
 console.log(run(process.execPath, ['check-content.cjs']));
+console.log(run(process.execPath, ['check-artifact.cjs']));
 console.log(run(process.execPath, [path.join(workspace, '.agents/skills/harness-creator/scripts/validate-harness.mjs'),
   '--target', taskDir]));
 const python = process.platform === 'win32' ? 'python' : 'python3';
 console.log(run(python, ['--version']));
 console.log(`环境通过：${env.branch}，PRD ${env.prdVersion}，${state.features.length} 项任务，${bdd.length} 条 BDD。`);
-console.log('这是基线与 harness 检查，不代表 Artifact 或生产 API 已通过验收。');
+console.log('这是模拟模型与 harness 自动检查；浏览器证据见功能清单，不代表生产 API 验证。');
 
 if (mode === '--serve') {
   await new Promise((resolve, reject) => {

@@ -9,12 +9,12 @@
     "done",
     "archived"
   ],
-  "activeItem": "prototype-artifact-v030",
+  "activeItem": null,
   "features": [
     {
       "id": "prototype-artifact-v030",
       "name": "v0.3.0 Identity Artifact 高保真原型",
-      "status": "in-progress",
+      "status": "needs-review",
       "goal": "连续完成 A01–A09，逐项验证、提交并交付审阅。",
       "scope": "按已审查 PRD 制作可交互原型；不接真实钱包或生产 API。",
       "dependencies": [
@@ -30,15 +30,17 @@
       "prdSource": "_task/system-design/spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md",
       "harnessPath": "_task/prototype-worktree/ownword-v0.3.0",
       "output": "_task/prototype-worktree/ownword-v0.3.0/ownword-prototype",
-      "implementationStatus": "in-progress",
-      "reviewStatus": "not-submitted"
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json；九项功能、33 条 BDD、模型检查、浏览器截图与错误检查均有证据。",
+      "nextStep": "用户视觉复核；生产钱包和 metanet4j 留给后续实施。"
     },
     {
       "id": "prototype-artifact-v030-bootstrap",
       "name": "v0.3.0 设计审查与原型 harness 初始化",
       "status": "needs-review",
       "goal": "审查并修正设计文档，在无阻塞问题后建立可重复启动的 v0.3.0 原型环境并汇报。",
-      "scope": "设计审查、独立 worktree、S2 基线恢复、任务清单、启动检查和浏览器基线验证；本轮不实施 A01–A09 或调用真实交易。",
+      "scope": "设计审查、独立 worktree、S2 基线恢复、任务清单、启动检查和浏览器基线验证；功能制作状态见 prototype-artifact-v030。",
       "dependencies": [
         "用户明确要求先 review，无问题后初始化 harness",
         "v0.3.0 设计文档与核心认知",
@@ -50,7 +52,7 @@
         "worktree、版本、S2、预览和日志路径登记准确",
         "harness 可重复检查与启动，功能及 BDD 映射完整",
         "正常与相关边界的基线浏览器验证有截图和日志",
-        "提交本轮改动并汇报；Artifact 功能保持未开始"
+        "初始化成果提交并交付审阅；功能制作证据在独立事项登记"
       ],
       "prdVersion": "v0.3.0",
       "prdSource": "_task/system-design/spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md",
@@ -59,8 +61,8 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "evidence": "_task/prototype-worktree/ownword-v0.3.0/evidence/environment-check.json；两处设计边界已修正，33 条 BDD 已映射，独立基线及双启动入口、模型、浏览器与端口冲突检查通过。",
-      "statusNote": "设计审查通过，harness 已就绪；A01–A09 未开始，不代表生产或用户视觉验收通过。",
-      "nextStep": "交付准备结果；收到用户后续制作指示后从 A01 开始。"
+      "statusNote": "设计审查及 harness 初始化证据已交付，功能制作已由独立事项完成。",
+      "nextStep": "与功能原型一并等待用户视觉复核。"
     },
     {
       "id": "reference-identity-refresh",
