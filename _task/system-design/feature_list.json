@@ -9,8 +9,37 @@
     "done",
     "archived"
   ],
-  "activeItem": "design-content-v020",
+  "activeItem": "design-artifact-v030-doc",
   "features": [
+    {
+      "id": "design-artifact-v030-doc",
+      "name": "v0.3.0 Identity Artifact 核心认知与设计文档",
+      "status": "needs-review",
+      "targetVersion": "v0.3.0",
+      "goal": "落实本次用户裁决，更新核心认知，并完成 Identity Artifact 高保真原型的版本设计文档供审阅。",
+      "scope": "仅修改核心认知、版本设计文档和任务状态；本轮不制作原型、不实现 metanet4j API。",
+      "dependencies": [
+        "用户本轮关于数字 ID、后续名称、身份签名及稳定状态的裁决",
+        "spec/核心认知.md",
+        "reference 中的 BAP、Yours Wallet 与 1Sat 协议和源码",
+        "v0.2.0 设计文档与既有原型绑定的 React Spectrum S2"
+      ],
+      "doneCriteria": [
+        "核心认知承载用户裁决，术语、边界、状态与验收一致",
+        "版本设计提供功能范围、页面、组件、交互、异常和 BDD 验收",
+        "每个功能具有原型制作映射，生产 API 缺口及验证责任明确",
+        "链接、状态文件和变更范围检查通过，仅提交本任务文档",
+        "交付用户复核；复核前状态为 needs-review，不标记 done"
+      ],
+      "prdVersion": "v0.3.0",
+      "prdSource": "_task/system-design/spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md",
+      "output": "_task/system-design/spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md",
+      "implementationStatus": "documentation-written-and-checked",
+      "reviewStatus": "awaiting-user-review",
+      "statusNote": "用户裁决已落实，identityKey 含义已确认。核心认知与版本设计文档完成并交付复核；本轮未制作原型或实现 API。",
+      "evidence": "核心认知和 PRD 的 25 个本地链接均可定位，代码围栏成对；31 条 BDD 编号唯一，A01–A09 均有范围、验收与制作映射。任务 JSON 与 git diff --check 通过；未执行浏览器、真实钱包或 API 验证。",
+      "nextStep": "用户复核核心认知及 v0.3.0 设计文档。后续原型制作前须恢复 v0.2.0 基线并核实 S2 资源。"
+    },
     {
       "id": "design-astra-001",
       "name": "astra 原型打磨至生产实现就绪",
