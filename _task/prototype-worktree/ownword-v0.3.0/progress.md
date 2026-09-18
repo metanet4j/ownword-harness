@@ -2,11 +2,11 @@
 
 ## 当前状态（Current State）
 
-H00 与 A01–A09 均已实现、验证并独立提交，等待用户视觉复核。没有进行中功能；不将人工复核记录为已完成。
+H00、A01–A09 与反馈调整 R01 均已实现、验证并提交，等待用户视觉复核。R01 移除默认装饰图案，详情与列表突出数字 ID，上传图片保留完整预览。没有进行中功能。
 
 ## 验证证据（Verification Evidence）
 
-准确提交、33 条 BDD 映射、交付报告与逐项证据统一见[功能清单](feature_list.json)。最终检查输出见[evidence/final-init.txt](evidence/final-init.txt)。
+准确提交、既有 33 条 BDD 与本次 R01 定向证据统一见[功能清单](feature_list.json)。本次启动检查见[evidence/R01-init.txt](evidence/R01-init.txt)；桌面列表、默认内容 Review、419px 详情、320px 上传预览及浏览器错误检查均已记录。未重新运行全部浏览器 BDD。
 
 ## 文件（Files）与阻塞（Blockers）
 
@@ -14,4 +14,4 @@ H00 与 A01–A09 均已实现、验证并独立提交，等待用户视觉复�
 
 ## 唯一下一步（Recommended Next Step）
 
-交付用户视觉复核，按反馈处理调整；未经指示不合并或推送。
+用户刷新原型并复核 R01 外观调整；未经指示不合并或推送。

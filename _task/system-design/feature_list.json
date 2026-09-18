@@ -33,7 +33,13 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "evidence": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json；九项功能、33 条 BDD、模型检查、浏览器截图与错误检查均有证据。",
-      "nextStep": "用户视觉复核；生产钱包和 metanet4j 留给后续实施。"
+      "nextStep": "用户刷新原型，复核 R01 默认内容外观调整。",
+      "currentChange": {
+        "id": "R01",
+        "status": "needs-review",
+        "harness": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json",
+        "commit": "ad69e4a7ad160faba676ae40a77acee38e511cf8"
+      }
     },
     {
       "id": "prototype-artifact-v030-bootstrap",

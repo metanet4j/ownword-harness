@@ -274,6 +274,30 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "1c7de427f153959012e7f4bd7e89e113443fdb4e"
+    },
+    {
+      "id": "R01",
+      "name": "移除默认装饰图案",
+      "description": "根据用户图案反馈，移除默认穹顶线条、Logo 大图和口号；数字 ID 与关联身份优先，默认内容改为简洁信息条。",
+      "dependencies": [
+        "A09"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A04-A",
+        "A04-C",
+        "X02"
+      ],
+      "doneCriteria": [
+        "共享默认内容展示不再绘制装饰图案，列表、详情与创建 Review 保持一致",
+        "详情默认内容不阻挡编号、关联身份与操作，上传图片仍完整预览",
+        "验证桌面正常页面、419px 手机详情及上传图片边界，记录截图与浏览器错误",
+        "提交原型和文档，交付用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R01.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "ad69e4a7ad160faba676ae40a77acee38e511cf8"
     }
   ],
   "designReview": {
@@ -284,5 +308,5 @@
   },
   "authorization": "用户：好的，开始，直到 feature 全部完成。",
   "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
-  "finalVerification": "evidence/final-init.txt"
+  "finalVerification": "evidence/R01-init.txt"
 }
