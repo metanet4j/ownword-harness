@@ -1,9 +1,7 @@
 # 当前交接
 
-当前事项 prototype-artifact-v030 的 A01–A09 与 R01–R05 已实现、验证并提交，等待用户复核。R05 完成用户 16 条批注，准确范围、提交与证据见[版本任务清单](../prototype-worktree/ownword-v0.3.0/feature_list.json)，没有进行中事项。
+v0.3.0 的 A01–A09 与 R01–R06 已实现、验证并提交，等待用户视觉复核；没有进行中事项。R06 将头部偏好入口改为 S2 Contrast 图标与圆形 ActionButton，PRD 已同步，产品事实未改变。
 
-编号关联资格同步核心认知第 9.4 节；导航、图标、结果回执、空状态与写入锁行为同步 v0.3.0 PRD。状态文件不另行定义产品事实。原型提交 19b24b4a9640ecf209ba74b51f5ce6db4224f8d7，根仓库只包含本任务文档和状态。
+[任务清单](../prototype-worktree/ownword-v0.3.0/feature_list.json)记录准确状态；[R06 证据](../prototype-worktree/ownword-v0.3.0/ownword-prototype/evidence/artifact-v030/R06/verification.json)记录深浅色、1189/320px、键盘与 44px 触控检查。运行时错误为 0，启动检查通过；本轮未重跑全部浏览器 BDD。原型提交 8e60a22a019d44b09dbdfa4606e8481d7c95278a。
 
-[当前审查报告](../prototype-worktree/ownword-v0.3.0/ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md)记录 16 项修正、320/575/1306px 代表页面、双标签页自动恢复和内容发布不中断的验证。启动检查通过；运行时错误为 0。320px 回执有一个 axe 对比度待确认项，实际截图未见遮挡，桌面同按钮检查通过；详情窄屏及浅色桌面扫描无违规或待确认。未重跑全部浏览器 BDD，未验证真机 Safari 或生产 API。
-
-预览为 http://127.0.0.1:4313/ ，QA 会话已关闭，服务保留。唯一下一步：用户刷新并复核 R05；未要求合并或推送。续接先读[版本指南](../prototype-worktree/ownword-v0.3.0/AGENTS.md)及状态文件。
+预览为 http://127.0.0.1:4313/ ，QA 会话已关闭，服务保留。唯一下一步：用户刷新并复核 R06；未要求合并或推送。续接先读版本 harness 的 AGENTS.md 与状态文件。

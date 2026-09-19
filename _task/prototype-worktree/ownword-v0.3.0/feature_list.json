@@ -410,6 +410,27 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "19b24b4a9640ecf209ba74b51f5ce6db4224f8d7"
+    },
+    {
+      "id": "R06",
+      "name": "外观与语言入口精修",
+      "description": "按用户批注，以 S2 Contrast 图标与 ActionButton 改进头部偏好入口。",
+      "dependencies": [
+        "R05"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "使用现有 S2 图标和按钮，深浅色层次与展开态清晰",
+        "偏好开关、Escape 与 320px 触控范围验证通过，提交截图和状态"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R06/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "8e60a22a019d44b09dbdfa4606e8481d7c95278a"
     }
   ],
   "designReview": {
@@ -420,6 +441,6 @@
   },
   "authorization": "用户要求逐项修正 16 条浏览器批注，含布局、浮层、标签页占用、结果语义及编号待确认时的关联资格。",
   "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
-  "finalVerification": "evidence/R05-init.txt",
+  "finalVerification": "evidence/R06-init.txt",
   "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md"
 }
