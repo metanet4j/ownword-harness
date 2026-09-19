@@ -1,0 +1,93 @@
+[info] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+[warning] You are using the in-browser Babel transformer. Be sure to precompile your scripts for production - https://babeljs.io/docs/setup/
+[info] [Ownword prototype] {page: "welcome", wallet: "disconnected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "resolving", wallet: "connected", operation: "resolving", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "identity", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "public", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "artifacts", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword writer] acquired ownword-v030-artifact-writer
+[info] [Ownword artifact] {operation: "985fe9a8-293f-478f-955d-b170f7e981fc", kind: "transfer", phase: "cancelled", bapId: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword artifact] draft saved {bapId: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword artifact] {operation: "c2dd4c81-97ad-427b-9028-6605eee5b266", kind: "create", phase: "signing", bapId: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword artifact] {operation: "c2dd4c81-97ad-427b-9028-6605eee5b266", kind: "create", phase: "validating", bapId: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword artifact] {operation: "c2dd4c81-97ad-427b-9028-6605eee5b266", kind: "create", phase: "submitting", bapId: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword writer] released ownword-v030-artifact-writer
+[info] [Ownword content] {page: "content", identity: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword prototype] {page: "content", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword writer] acquired ownword-v020-content-writer
+[info] [Ownword content] {page: "write", identity: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword review] {draft: "draft-first", author: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD", bytes: 174, issue: ""}
+[info] [Ownword content] drafts saved {author: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword content] {page: "review", identity: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword publication] {operation: "op-f7690572-65ff-4f1a-a59c-2b1dc7f67340", phase: "authorize", author: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD", stored: true}
+[info] [Ownword content] {page: "publish", identity: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword publication] {operation: "op-f7690572-65ff-4f1a-a59c-2b1dc7f67340", phase: "signing", author: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD", stored: true}
+[info] [Ownword publication] {operation: "op-f7690572-65ff-4f1a-a59c-2b1dc7f67340", phase: "broadcasting", author: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD", stored: true}
+[info] [Ownword publication] accepted and saved op-f7690572-65ff-4f1a-a59c-2b1dc7f67340
+[info] [Ownword content] {page: "read", identity: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword content] {page: "history", identity: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword content] {page: "read", identity: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword content] drafts saved {author: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword content] {page: "write", identity: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword review] {draft: "draft-077ad420-b7ff-481e-9d00-77ee03297167", author: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD", bytes: 174, issue: "revisionUnchanged"}
+[info] [Ownword writer] released ownword-v020-content-writer
+[info] [Ownword prototype] {page: "identity", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "edit", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "review", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "review", wallet: "connected", operation: "save", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "identity", wallet: "connected", operation: "none", account: 0, notice: "saved", ...}
+[info] [Ownword prototype] {page: "artifacts", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword writer] acquired ownword-v030-artifact-writer
+[info] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+[warning] You are using the in-browser Babel transformer. Be sure to precompile your scripts for production - https://babeljs.io/docs/setup/
+[info] [Ownword prototype] {page: "welcome", wallet: "disconnected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "artifacts", wallet: "disconnected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword writer] acquired ownword-v030-artifact-writer
+[info] [Ownword writer] released ownword-v030-artifact-writer
+[info] [Ownword prototype] {page: "welcome", wallet: "disconnected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "resolving", wallet: "connected", operation: "resolving", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "identity", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "edit", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "review", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "review", wallet: "connected", operation: "save", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "identity", wallet: "connected", operation: "none", account: 0, notice: "saved", ...}
+[info] [Ownword prototype] {page: "artifacts", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword writer] acquired ownword-v030-artifact-writer
+[info] [Ownword writer] released ownword-v030-artifact-writer
+[info] [Ownword prototype] {page: "identity", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "artifacts", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword writer] acquired ownword-v030-artifact-writer
+[info] [Ownword artifact] {operation: "d164dfcf-99b2-4774-b944-bb73881e09af", kind: "bind", phase: "signing", bapId: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword artifact] {operation: "d164dfcf-99b2-4774-b944-bb73881e09af", kind: "bind", phase: "validating", bapId: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword artifact] {operation: "d164dfcf-99b2-4774-b944-bb73881e09af", kind: "bind", phase: "submitting", bapId: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword writer] released ownword-v030-artifact-writer
+[info] [Ownword content] {page: "content", identity: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword prototype] {page: "content", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword writer] acquired ownword-v020-content-writer
+[info] [Ownword content] drafts saved {author: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword content] {page: "write", identity: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword review] {draft: "draft-324f20e7-cf6f-4af7-b6ce-51d2038c494c", author: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD", bytes: 0, issue: "reviewEmpty"}
+[info] [Ownword review] {draft: "draft-324f20e7-cf6f-4af7-b6ce-51d2038c494c", author: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD", bytes: 0, issue: "reviewEmpty"}
+[info] [Ownword content] {page: "content", identity: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword writer] released ownword-v020-content-writer
+[info] [Ownword prototype] {page: "artifacts", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword writer] acquired ownword-v030-artifact-writer
+[info] [Ownword artifact] draft saved {bapId: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword artifact] {operation: "f5b13c3b-3bb1-4a6d-81c4-cd5b77bdb6ab", kind: "create", phase: "cancelled", bapId: "2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD"}
+[info] [Ownword prototype] {page: "welcome", wallet: "disconnected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword writer] released ownword-v030-artifact-writer
+[info] [Ownword content] {page: "content", identity: "visitor"}
+[info] [Ownword prototype] {page: "content", wallet: "disconnected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "resolving", wallet: "connected", operation: "resolving", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "setup", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword content] {page: "content", identity: "visitor"}
+[info] [Ownword prototype] {page: "content", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "setup", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword content] {page: "content", identity: "visitor"}
+[info] [Ownword prototype] {page: "content", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword writer] acquired ownword-v030-artifact-writer
+[info] [Ownword writer] released ownword-v030-artifact-writer
+[info] [Ownword prototype] {page: "resolving", wallet: "connected", operation: "resolving", account: 0, notice: "", ...}
+[info] [Ownword prototype] {page: "setup", wallet: "connected", operation: "none", account: 0, notice: "", ...}
+[info] [Ownword content] {page: "content", identity: "visitor"}
+[info] [Ownword prototype] {page: "content", wallet: "connected", operation: "none", account: 0, notice: "", ...}

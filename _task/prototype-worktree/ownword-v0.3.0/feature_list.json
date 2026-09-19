@@ -538,6 +538,14 @@
   },
   "authorization": "用户反馈输入框焦点描边、帮助图标关系和详情分组，授权按设计系统调整。",
   "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
+  "fullDesignReview": {
+    "status": "completed-with-findings",
+    "report": "全量设计评审-20260919-181000.md",
+    "evidence": "evidence/review-20260919/verification.json",
+    "prototypeCommit": "fe5319d2a2b7577c340f52fcf36a700bded238fe",
+    "scope": "用户要求按设计原则全量评审并排序；本轮仅审查，不修改原型。",
+    "resolutionStatus": "findings-open"
+  },
   "finalVerification": "evidence/R10-init.txt",
   "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md"
 }
