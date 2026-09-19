@@ -746,6 +746,33 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "bc31951"
+    },
+    {
+      "id": "R21",
+      "name": "查找身份页面重新设计",
+      "description": "按用户两条批注收敛查询布局、输入提示、结果关系和反馈状态，移除演示快捷入口。",
+      "dependencies": [
+        "R20"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A09-A",
+        "A09-B",
+        "A09-C",
+        "A09-D",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "查询区宽度受控，标签、输入、提示及操作关联清晰；页面没有样例快捷按钮",
+        "关联身份、Artifact 及未找到、无关联、输入错误、服务异常状态层级清楚，精确查找逻辑保留",
+        "检查用户批注尺寸、手机窄屏、中英文深浅色代表场景及键盘，记录截图、日志和启动检查",
+        "原型及任务状态分别提交，等待用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R21/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "9aedd92b669e61ab2c2e495cf83893d21714a250"
     }
   ],
   "designReview": {
@@ -754,7 +781,7 @@
     "source": "_task/system-design/spec/prd/v0.3.0/设计审查v0.3.0-20260918-225543.md",
     "scope": "产品一致性、交互恢复、安全预览、模拟边界、制作映射和基线条件；不是用户视觉批准。"
   },
-  "authorization": "用户在全量设计评审后要求“修复”，授权修复报告全部 10 项。",
+  "authorization": "用户批注授权重新设计查找身份页面，并质疑样例快捷入口；本轮收敛查询页及结果状态，移除页面样例按钮。",
   "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
   "fullDesignReview": {
     "status": "completed-with-findings",
@@ -767,6 +794,6 @@
     "fixedPrototypeCommit": "9e4f6dbbaeeb9806f97d2076d644885b24fdd148",
     "resolutionEvidence": "ownword-prototype/evidence/artifact-v030/review-fixes/verification.json"
   },
-  "finalVerification": "evidence/R11-R20-init.txt",
+  "finalVerification": "evidence/R21-init.txt",
   "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md"
 }
