@@ -382,6 +382,34 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "7d89750236ae42f1fe654943544705c1bc5ef6e6"
+    },
+    {
+      "id": "R05",
+      "name": "批注体验修正与关联资格",
+      "description": "处理用户 16 条具体批注，覆盖身份卡比例、通知、浮层、空状态、写入锁、结果页、详情及选择流程。",
+      "dependencies": [
+        "R04"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-B",
+        "A03-A",
+        "A04-A",
+        "A05-A",
+        "A06-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "16 条批注逐项有实现与验证说明",
+        "编号待确认或不可核实不能新增 Current，排序与筛选有真实区分",
+        "跨标签页仍防止覆盖但闲置身份页面不占用 Artifact 编辑锁",
+        "相关正常、边界、窄屏和键盘检查通过，设计文档及证据同步提交"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R05/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "19b24b4a9640ecf209ba74b51f5ce6db4224f8d7"
     }
   ],
   "designReview": {
@@ -390,8 +418,8 @@
     "source": "_task/system-design/spec/prd/v0.3.0/设计审查v0.3.0-20260918-225543.md",
     "scope": "产品一致性、交互恢复、安全预览、模拟边界、制作映射和基线条件；不是用户视觉批准。"
   },
-  "authorization": "用户要求调整身份页布局、下拉导航、中性边框，并从整体产品结构划分各模块。",
+  "authorization": "用户要求逐项修正 16 条浏览器批注，含布局、浮层、标签页占用、结果语义及编号待确认时的关联资格。",
   "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
-  "finalVerification": "evidence/R04-init.txt",
-  "experienceReview": "ownword-prototype/evidence/artifact-v030/R04/模块结构审查-20260919-080958.md"
+  "finalVerification": "evidence/R05-init.txt",
+  "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md"
 }
