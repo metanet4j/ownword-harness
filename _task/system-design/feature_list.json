@@ -32,13 +32,13 @@
       "output": "_task/prototype-worktree/ownword-v0.3.0/ownword-prototype",
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json；功能证据统一由版本清单维护。本轮 R03 五类呈现问题已修正，帮助交互、窄屏、完整编号复制、相关页面及启动检查通过。",
-      "nextStep": "用户刷新原型，复核 R03 页面说明、编号样式与帮助交互。",
+      "evidence": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json；R04 模块结构、身份摘要、下拉导航与中性视觉调整已提交，相关浏览器、边界和启动检查通过。",
+      "nextStep": "用户刷新原型，复核 R04 模块结构、身份页与导航。",
       "currentChange": {
-        "id": "R03",
+        "id": "R04",
         "status": "needs-review",
         "harness": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json",
-        "commit": "e4238ca40193e922312e6a00d0d0dd1e199a4bf6"
+        "commit": "7d89750236ae42f1fe654943544705c1bc5ef6e6"
       }
     },
     {

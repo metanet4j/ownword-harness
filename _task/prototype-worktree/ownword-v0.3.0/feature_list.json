@@ -356,6 +356,32 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "e4238ca40193e922312e6a00d0d0dd1e199a4bf6"
+    },
+    {
+      "id": "R04",
+      "name": "模块结构与身份页布局",
+      "description": "依据既有平行模块结构，调整身份摘要、模块下拉导航和 S2 中性色层次，审查同类无具体含义文案。",
+      "dependencies": [
+        "R03"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-A",
+        "A01-B",
+        "A08-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "身份、Artifact、内容各有独立工作区；身份页仅保留资料与紧凑数字标识",
+        "当前模块下拉支持键盘、外部关闭和移动端，切换仍执行未保存保护",
+        "中性边框与 S2 表面层次一致，当前状态与键盘焦点清晰",
+        "相关正常、边界及受影响截图验证通过，文档、证据与提交齐备"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R04/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "7d89750236ae42f1fe654943544705c1bc5ef6e6"
     }
   ],
   "designReview": {
@@ -364,8 +390,8 @@
     "source": "_task/system-design/spec/prd/v0.3.0/设计审查v0.3.0-20260918-225543.md",
     "scope": "产品一致性、交互恢复、安全预览、模拟边界、制作映射和基线条件；不是用户视觉批准。"
   },
-  "authorization": "用户授权完成全部 feature，并要求全面体验审查；当前按五条页面批注统一检查和修正同类说明、编号样式及高保真呈现问题。",
+  "authorization": "用户要求调整身份页布局、下拉导航、中性边框，并从整体产品结构划分各模块。",
   "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
-  "finalVerification": "evidence/R03-init.txt",
-  "experienceReview": "ownword-prototype/evidence/artifact-v030/R03/说明收敛审查-20260919-071512.md"
+  "finalVerification": "evidence/R04-init.txt",
+  "experienceReview": "ownword-prototype/evidence/artifact-v030/R04/模块结构审查-20260919-080958.md"
 }

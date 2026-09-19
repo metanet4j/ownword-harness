@@ -1,0 +1,61 @@
+92 model assertions passed
+C01 route and author fixtures passed
+C04 durable draft and author separation passed
+C05 UTF-8, BOM, CRLF and invalid import boundaries passed
+C06 empty / UTF-8 byte limit / optional title review gates passed
+C07 publication journal, reload, durable acceptance and duplicate protection passed
+C09 immutable versions, unchanged revision gate and draft reuse passed
+C10 proof sample states and tampered text / author / transaction guards passed
+R01 recovery preserves disk and unsaved drafts, authors, raw text and dirty state
+A01 current, ownership and fixed routes passed
+A02 name, formats and author-isolated storage passed
+A03 identity signatures, durable intent, recovery and separate association passed
+A04 safe preview and independent proof roles passed
+A05 confirmation boundary, resolving, reorg and stale evidence passed
+A06 Current uniqueness, eligibility and stale Review passed
+A08 invalid versus unverified association, safe removal passed
+A07 transfer freshness, signatures and separately verified ownership passed
+A09 exact decimal strings and trustworthy identity lookup passed
+A09 bilingual copy and recoverable unavailable storage passed
+Artifact JSX and S2 tokens passed; 10 model groups.
+Harness validation for C:\haodev\ownword\_task\prototype-worktree\ownword-v0.3.0
+Overall: 100/100
+Bottleneck: none — all subsystems at full score
+
+instructions: 5/5 (5/5)
+  PASS Agent instruction file exists
+  PASS Startup workflow documented
+  PASS Definition of done documented
+  PASS Verification commands discoverable
+  PASS State artifacts routed from instructions
+
+state: 5/5 (5/5)
+  PASS Feature tracker exists
+  PASS Feature tracker is valid and has feature fields
+  PASS Progress log exists
+  PASS Progress log supports restart
+  PASS Handoff captures blockers/files/next step
+
+verification: 5/5 (5/5)
+  PASS Verification entrypoint exists
+  PASS Verification fails fast
+  PASS Test command documented
+  PASS Static/build check documented
+  PASS Verification evidence is recorded
+
+scope: 5/5 (5/5)
+  PASS One-feature-at-a-time rule exists
+  PASS Feature dependencies are tracked
+  PASS Feature status is explicit
+  PASS Scope boundary documented
+  PASS Completion gate limits scope closure
+
+lifecycle: 5/5 (5/5)
+  PASS Startup script exists
+  PASS End-of-session procedure exists
+  PASS Session handoff template exists
+  PASS Session restart markers exist
+  PASS Clean restart path documented
+Python 3.14.3
+环境通过：codex/prototype-v0.3.0-artifact，PRD v0.3.0，14 项任务，33 条 BDD。
+这是模拟模型与 harness 自动检查；浏览器证据见功能清单，不代表生产 API 验证。
