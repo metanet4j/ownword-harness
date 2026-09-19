@@ -431,6 +431,32 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "8e60a22a019d44b09dbdfa4606e8481d7c95278a"
+    },
+    {
+      "id": "R07",
+      "name": "My Artifact 设计原则审查修复",
+      "description": "修复已确认的信息层级、筛选语义、操作关系、移动端密度及内容和历史组织问题；核对 S2 来源边界。",
+      "dependencies": [
+        "R06"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-A",
+        "A04-A",
+        "A06-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "历史与资格不混用，当前编号突出，列表直接进入关联确认",
+        "编号复制和刷新贴近对象，关联操作位于关联区，铭文内容与持有及交易记录分组",
+        "历史显示有证据的时间和结束原因，旧数据不虚构记录",
+        "验证正常关联与待确认边界、移动端和键盘展开，保存截图、来源核对及检查证据"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R07/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "452a080b63b548c59be463ad709ffcb9115c14cf"
     }
   ],
   "designReview": {
