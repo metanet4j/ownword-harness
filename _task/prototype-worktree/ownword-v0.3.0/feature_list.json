@@ -502,6 +502,32 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "cb06773fcf67632dfb3cf66f15dd277a4bdc2e31"
+    },
+    {
+      "id": "R10",
+      "name": "Artifact 表单焦点与详情分组优化",
+      "description": "依据绑定 S2 修正输入焦点，帮助入口紧邻对象，详情改用 Tab 与内容卡片。",
+      "dependencies": [
+        "R09"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A04-A",
+        "A04-B",
+        "A07-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "鼠标输入采用中性聚焦边框，键盘可见焦点和错误状态保留",
+        "地址及转移帮助紧邻字段或标题，点击和键盘可用",
+        "详情四类信息以 Tab 切换，内容与操作完整，方向键和窄屏可用",
+        "启动及定向浏览器检查、截图、提交完成"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R10/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "fe5319d2a2b7577c340f52fcf36a700bded238fe"
     }
   ],
   "designReview": {
@@ -510,8 +536,8 @@
     "source": "_task/system-design/spec/prd/v0.3.0/设计审查v0.3.0-20260918-225543.md",
     "scope": "产品一致性、交互恢复、安全预览、模拟边界、制作映射和基线条件；不是用户视觉批准。"
   },
-  "authorization": "用户报告公开身份卡溢出、与下方复制区域重叠，授权修复。",
+  "authorization": "用户反馈输入框焦点描边、帮助图标关系和详情分组，授权按设计系统调整。",
   "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
-  "finalVerification": "evidence/R09-init.txt",
+  "finalVerification": "evidence/R10-init.txt",
   "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md"
 }

@@ -32,15 +32,15 @@
       "output": "_task/prototype-worktree/ownword-v0.3.0/ownword-prototype",
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json；R09 公开身份卡内容溢出修复已验证并提交。",
-      "nextStep": "用户刷新复核公开身份卡、下方复制区域及翻面布局。",
+      "evidence": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json；R10 输入焦点、帮助位置与详情标签已验证并提交。",
+      "nextStep": "用户刷新复核输入焦点、帮助位置与详情标签。",
       "currentChange": {
-        "id": "R09",
+        "id": "R10",
         "status": "needs-review",
         "harness": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json",
         "implementationStatus": "implemented-and-verified",
-        "commit": "cb06773fcf67632dfb3cf66f15dd277a4bdc2e31",
-        "evidence": "_task/prototype-worktree/ownword-v0.3.0/ownword-prototype/evidence/artifact-v030/R09/verification.json"
+        "commit": "fe5319d2a2b7577c340f52fcf36a700bded238fe",
+        "evidence": "_task/prototype-worktree/ownword-v0.3.0/ownword-prototype/evidence/artifact-v030/R10/verification.json"
       }
     },
     {
