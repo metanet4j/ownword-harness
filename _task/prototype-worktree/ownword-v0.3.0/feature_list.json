@@ -480,6 +480,28 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "23e4d9d1fc05a4feb38650532f76f2d241da614d"
+    },
+    {
+      "id": "R09",
+      "name": "公开身份卡内容溢出修复",
+      "description": "修复身份卡固定比例与内容高度冲突，合并相应布局规则。",
+      "dependencies": [
+        "R08"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "桌面正反面内容均在卡面内，不与外部复制区域重叠",
+        "保持 PRD 的正反面独立高度；320px 与长文本边界不溢出",
+        "翻面、键盘操作及受影响截图验证通过，保存证据并提交"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R09/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "cb06773fcf67632dfb3cf66f15dd277a4bdc2e31"
     }
   ],
   "designReview": {
@@ -488,8 +510,8 @@
     "source": "_task/system-design/spec/prd/v0.3.0/设计审查v0.3.0-20260918-225543.md",
     "scope": "产品一致性、交互恢复、安全预览、模拟边界、制作映射和基线条件；不是用户视觉批准。"
   },
-  "authorization": "用户授权修复 CSS 重复定义，并检查按钮及图标的自定义实现。",
+  "authorization": "用户报告公开身份卡溢出、与下方复制区域重叠，授权修复。",
   "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
-  "finalVerification": "evidence/R08-init.txt",
+  "finalVerification": "evidence/R09-init.txt",
   "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md"
 }
