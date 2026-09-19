@@ -528,6 +528,224 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "fe5319d2a2b7577c340f52fcf36a700bded238fe"
+    },
+    {
+      "id": "R11",
+      "name": "统一当前身份资料",
+      "description": "修复全量设计评审第 1 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R10"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R11/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "0807cc5f74a145e929910573c67406a2bd626265"
+    },
+    {
+      "id": "R12",
+      "name": "区分待核实和空关联",
+      "description": "修复全量设计评审第 2 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R11"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R12/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "74be3bcb30b677801e3733e968e3e6aa46e97a13",
+      "commits": [
+        "85e636f",
+        "74be3bcb30b677801e3733e968e3e6aa46e97a13"
+      ]
+    },
+    {
+      "id": "R13",
+      "name": "发布校验反馈可见",
+      "description": "修复全量设计评审第 3 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R12"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R13/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "da1fb67"
+    },
+    {
+      "id": "R14",
+      "name": "按钱包阶段引导内容入口",
+      "description": "修复全量设计评审第 4 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R13"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R14/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "21069c1"
+    },
+    {
+      "id": "R15",
+      "name": "收紧手机编辑器头部",
+      "description": "修复全量设计评审第 5 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R14"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R15/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "a8ee02f"
+    },
+    {
+      "id": "R16",
+      "name": "明确复制控件名称",
+      "description": "修复全量设计评审第 6 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R15"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R16/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "eb48ad8"
+    },
+    {
+      "id": "R17",
+      "name": "统一标题选择控件",
+      "description": "修复全量设计评审第 7 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R16"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R17/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "d8319c9"
+    },
+    {
+      "id": "R18",
+      "name": "统一任务标题",
+      "description": "修复全量设计评审第 8 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R17"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R18/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "5651dcc",
+      "commits": [
+        "816efb5",
+        "5651dcc"
+      ]
+    },
+    {
+      "id": "R19",
+      "name": "关联筛选帮助就近布局",
+      "description": "修复全量设计评审第 9 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R18"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R19/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "808bc59"
+    },
+    {
+      "id": "R20",
+      "name": "修复列表摘要分词",
+      "description": "修复全量设计评审第 10 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R19"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R20/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "bc31951"
     }
   ],
   "designReview": {
@@ -536,16 +754,19 @@
     "source": "_task/system-design/spec/prd/v0.3.0/设计审查v0.3.0-20260918-225543.md",
     "scope": "产品一致性、交互恢复、安全预览、模拟边界、制作映射和基线条件；不是用户视觉批准。"
   },
-  "authorization": "用户反馈输入框焦点描边、帮助图标关系和详情分组，授权按设计系统调整。",
+  "authorization": "用户在全量设计评审后要求“修复”，授权修复报告全部 10 项。",
   "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
   "fullDesignReview": {
     "status": "completed-with-findings",
     "report": "全量设计评审-20260919-181000.md",
     "evidence": "evidence/review-20260919/verification.json",
     "prototypeCommit": "fe5319d2a2b7577c340f52fcf36a700bded238fe",
-    "scope": "用户要求按设计原则全量评审并排序；本轮仅审查，不修改原型。",
-    "resolutionStatus": "findings-open"
+    "scope": "全量评审基线与优先级；用户随后授权修复，全部10项已实现并验证，待视觉复核。",
+    "resolutionStatus": "implemented-and-verified",
+    "resolutionReport": "设计评审修复验收-20260919-215551.md",
+    "fixedPrototypeCommit": "9e4f6dbbaeeb9806f97d2076d644885b24fdd148",
+    "resolutionEvidence": "ownword-prototype/evidence/artifact-v030/review-fixes/verification.json"
   },
-  "finalVerification": "evidence/R10-init.txt",
+  "finalVerification": "evidence/R11-R20-init.txt",
   "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md"
 }

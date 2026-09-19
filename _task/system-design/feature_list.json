@@ -32,15 +32,15 @@
       "output": "_task/prototype-worktree/ownword-v0.3.0/ownword-prototype",
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json；本次全量设计评审和未关闭问题见其中 fullDesignReview，不改变 R10 实现记录。",
-      "nextStep": "用户审阅全量设计评审的优先级清单；本轮未修改原型，问题尚未修复。",
+      "evidence": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json；全量设计评审的10项修复及证据见 fullDesignReview.resolutionReport。",
+      "nextStep": "用户查看原型并视觉复核本轮10项修复。",
       "currentChange": {
-        "id": "R10",
+        "id": "R11–R20",
         "status": "needs-review",
         "harness": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json",
         "implementationStatus": "implemented-and-verified",
-        "commit": "fe5319d2a2b7577c340f52fcf36a700bded238fe",
-        "evidence": "_task/prototype-worktree/ownword-v0.3.0/ownword-prototype/evidence/artifact-v030/R10/verification.json"
+        "commit": "9e4f6dbbaeeb9806f97d2076d644885b24fdd148",
+        "evidence": "_task/prototype-worktree/ownword-v0.3.0/设计评审修复验收-20260919-215551.md"
       }
     },
     {
