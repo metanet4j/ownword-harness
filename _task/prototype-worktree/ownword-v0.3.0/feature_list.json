@@ -457,6 +457,29 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "452a080b63b548c59be463ad709ffcb9115c14cf"
+    },
+    {
+      "id": "R08",
+      "name": "设计系统样式去重与按钮图标统一",
+      "description": "清理重复 CSS 入口、基础控件覆盖和同级失效规则，统一图标按钮及 S2 图标资产入口。",
+      "dependencies": [
+        "R07"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "设计系统仅加载单一 CSS 入口；页面不再另定义输入框及图标按钮外观",
+        "共用按钮保留 S2 variant、禁用和焦点；44px 点击区域集中适配",
+        "基础图标引用绑定 S2 资产，不手绘通用箭头或确认符号",
+        "桌面与窄屏检查、表单正常与错误状态及键盘验证通过，提交证据并记录封装限制"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R08/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "23e4d9d1fc05a4feb38650532f76f2d241da614d"
     }
   ],
   "designReview": {
@@ -465,8 +488,8 @@
     "source": "_task/system-design/spec/prd/v0.3.0/设计审查v0.3.0-20260918-225543.md",
     "scope": "产品一致性、交互恢复、安全预览、模拟边界、制作映射和基线条件；不是用户视觉批准。"
   },
-  "authorization": "用户要求逐项修正 16 条浏览器批注，含布局、浮层、标签页占用、结果语义及编号待确认时的关联资格。",
+  "authorization": "用户授权修复 CSS 重复定义，并检查按钮及图标的自定义实现。",
   "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
-  "finalVerification": "evidence/R06-init.txt",
+  "finalVerification": "evidence/R08-init.txt",
   "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md"
 }

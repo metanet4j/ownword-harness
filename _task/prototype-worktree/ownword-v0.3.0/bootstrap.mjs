@@ -102,6 +102,7 @@ for (const file of fs.readdirSync(prototype).filter(name => name.endsWith('.jsx'
 console.log(run(process.execPath, ['check-model.cjs']));
 console.log(run(process.execPath, ['check-content.cjs']));
 console.log(run(process.execPath, ['check-artifact.cjs']));
+console.log(run(process.execPath, ['check-ui.cjs']));
 console.log(run(process.execPath, [path.join(workspace, '.agents/skills/harness-creator/scripts/validate-harness.mjs'),
   '--target', taskDir]));
 const python = process.platform === 'win32' ? 'python' : 'python3';
