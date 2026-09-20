@@ -15,7 +15,7 @@
     ]
   },
   "activeItem": null,
-  "nextItem": "migration-impl-bignumber",
+  "nextItem": "migration-impl-hash-random",
   "features": [
     {
       "id": "migration-env",
@@ -271,7 +271,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "primitives：完整大整数与模运算",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "migration-impl-bignumber-constructor"
       ],
@@ -313,7 +313,15 @@
       "apiBatchRefs": [
         "migration-api-values"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标工程提交 a697a49：完整 BigNumber、ReductionContext、Mersenne、K256、MontgomoryMethod 及本任务所需 Utils 编码辅助；7 个原测试文件共 174 个 Java 用例，保留既有构造 28 用例。",
+        ".cache/evidence/bignumber-final-20260920-173943-23798q/：TS 原测试 7 文件 174/174 通过，零失败/跳过/todo；Java clean test 211/211（primitives 210，含 Hex 8、构造 28 与本项 174），零失败/错误/跳过。",
+        "test-map.json：新增 174 个原用例映射，累计 210 用例；siteReviews 781 个源码位置全部复核；174 个 Java 身份均在 Surefire 实际执行且与冻结 TS 名称/数量一致。",
+        "node audit-api.cjs batches --batch migration-api-values：通过 371 声明结构复核；node test-audit.test.cjs：41/41 通过。",
+        "累计回归：既有 Hex 8/8 与原构造 28/28 在目标工程 clean test 中重跑通过；此前 36 用例的原始调用轨迹继续由 .cache/evidence/hex-parity-20260920-153441-zd037qhq/ 提供。",
+        "限制：本批未生成 174 个新用例的逐断言 TS/Java 原始值文件，summary.json 标记 formalAcceptance=false；无过滤 API check 与六模块 audit-tests.py check 仍保留完整范围，不能以本项局部通过代替整模块验收。",
+        "BIGNUMBER-FIXTURES 大整数向量作为 test 范围常量保留；K256/Mersenne/Montgomory 身份、red 状态、符号/名义长度及异常顺序均按原测试断言核验。"
+      ],
       "modules": [
         "primitives"
       ],
