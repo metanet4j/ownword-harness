@@ -71,6 +71,21 @@ test('清点包含 each、循环、同名、skip、todo、only 和 manual；不�
   }
 })
 
+test('清点依赖包含类型接口和跨模块测试辅助代码', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'migration-dependencies-'))
+  try {
+    fs.mkdirSync(path.join(dir, 'src/script/__tests'), { recursive: true })
+    fs.writeFileSync(path.join(dir, 'jest.config.cjs'), "module.exports={testEnvironment:'node'}\n")
+    fs.writeFileSync(path.join(dir, 'src/script/sample.test.js'), "test('注册', () => {})\n")
+    fs.writeFileSync(path.join(dir, 'src/script/Template.ts'), "import type { WalletInterface } from '../wallet/Wallet.interfaces.js'\nexport type Wallet = WalletInterface\n")
+    fs.writeFileSync(path.join(dir, 'src/script/__tests/helper.ts'), "import { CompletedProtoWallet } from '../../auth/fixture.js'\nexport const wallet = CompletedProtoWallet\n")
+    const out = path.join(dir, 'census.json')
+    const result = spawnSync(process.execPath, [path.join(__dirname, 'collect-cases.cjs'), '--sdk', dir, '--output', out, 'src/script/sample.test.js'], { encoding: 'utf8' })
+    assert.equal(result.status, 0, result.stdout + result.stderr)
+    assert.deepEqual(JSON.parse(fs.readFileSync(out)).moduleDependencies.script, ['auth', 'wallet'])
+  } finally { fs.rmSync(dir, { recursive: true, force: true }) }
+})
+
 const corruptions = [
   ['整模块依赖未纳入', f => { const d = f.read('catalog.json'); d.moduleDependencies.compat = ['primitives']; f.write('catalog.json', d) }, /依赖模块/],
   ['少一个映射', f => { const d = f.read('mapping.json'); d.cases.pop(); f.write('mapping.json', d) }, /未映射/],

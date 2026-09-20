@@ -5,10 +5,12 @@
     "primitives",
     "compat",
     "script",
-    "transaction"
+    "transaction",
+    "wallet",
+    "auth"
   ],
   "scopeReview": "pending",
-  "note": "这四个完整模块确定纳入；其余模块仍需依赖审查，pending 不代表排除。根测试目录的两个文件已按实际被测接口归入 overlay-tools，选中该模块时自动纳入。",
+  "note": "六个完整模块纳入：原四模块加 wallet/auth。类型接口与 PushDrop 的真实钱包测试辅助依赖不能省略；其余九模块经复核排除。scopeReview 仍待 P0 联合验收。",
   "crossModuleTestOwners": {
     "src/__tests/LookupResolver.diagnostics.test.ts": {
       "module": "overlay-tools",
@@ -18,5 +20,126 @@
       "module": "overlay-tools",
       "reason": "直接导入并测试 overlay-tools/LookupResolver 导出的 HTTPSOverlayLookupFacilitator 字节传输。"
     }
-  }
+  },
+  "moduleReviews": {
+    "auth": {
+      "decision": "selected",
+      "reason": "PushDrop 测试直接使用 auth 的 CompletedProtoWallet；完整 wallet 的 WalletWireProcessor/Transceiver 又使用 auth Certificate，按依赖闭包完整纳入。",
+      "evidence": [
+        "src/script/templates/__tests/PushDrop.test.ts:3",
+        "src/wallet/substrates/WalletWireProcessor.ts",
+        "src/wallet/substrates/WalletWireTransceiver.ts"
+      ]
+    },
+    "compat": {
+      "decision": "selected",
+      "reason": "现有 HD/Mnemonic、BSM、ECIES、UTXO 适配能力；模块全部保留。",
+      "evidence": [
+        "metanet4j-sdk/src/main/java/com/metanet4j/sdk/crypto/CryptoHelper.java",
+        "metanet4j-sdk/src/main/java/com/metanet4j/sdk/crypto/Ecies.java"
+      ]
+    },
+    "identity": {
+      "decision": "excluded",
+      "reason": "IdentityClient 是上层身份查询客户端，现有 BAP 业务不等于该客户端；六模块生产/类型/测试无指向此模块的依赖。",
+      "evidence": [
+        "src/identity/index.ts",
+        "src/identity/IdentityClient.ts"
+      ]
+    },
+    "kvstore": {
+      "decision": "excluded",
+      "reason": "LocalKVStore/GlobalKVStore 为上层存储服务；六模块无依赖，现有 UTXO 查询不使用此协议。",
+      "evidence": [
+        "src/kvstore/index.ts"
+      ]
+    },
+    "messages": {
+      "decision": "excluded",
+      "reason": "SignedMessage/EncryptedMessage 为独立消息封装，现有 BSM/ECIES 入口对应 compat；六模块无依赖。",
+      "evidence": [
+        "src/messages/SignedMessage.ts",
+        "src/messages/EncryptedMessage.ts"
+      ]
+    },
+    "overlay-tools": {
+      "decision": "excluded",
+      "reason": "LookupResolver/SHIP/Overlay 管理是上层服务；六模块无直接依赖，根目录两项测试归属此模块，不是基础交易测试。",
+      "evidence": [
+        "src/overlay-tools/index.ts",
+        "src/__tests/LookupResolver.diagnostics.test.ts",
+        "src/__tests__/BRC100OverlayTransport.test.ts"
+      ]
+    },
+    "primitives": {
+      "decision": "selected",
+      "reason": "现有 Java 密钥、签名、哈希、编码依赖；完整纳入密码学、字节读写与全部辅助类。",
+      "evidence": [
+        "metanet4j-sdk/src/main/java/com/metanet4j/sdk/PrivateKey.java",
+        "metanet4j-sdk/src/main/java/com/metanet4j/sdk/EcKeyLiteExtend.java"
+      ]
+    },
+    "registry": {
+      "decision": "excluded",
+      "reason": "RegistryClient 是上层注册服务；六模块无依赖，旧 Java SDK 未使用对应接口。",
+      "evidence": [
+        "src/registry/index.ts"
+      ]
+    },
+    "remittance": {
+      "decision": "excluded",
+      "reason": "汇款通信/身份/支付模块为上层能力；六模块无依赖，旧 Java 交易构建不等于该汇款协议。",
+      "evidence": [
+        "src/remittance/index.ts"
+      ]
+    },
+    "script": {
+      "decision": "selected",
+      "reason": "现有脚本构建、解析、签名及执行；全部模板和资源边界纳入。",
+      "evidence": [
+        "metanet4j-sdk/src/main/java/com/metanet4j/sdk/script/ScriptExtend.java",
+        "metanet4j-sdk/src/main/java/com/metanet4j/sdk/ordinals/OrdScriptBuilder.java"
+      ]
+    },
+    "storage": {
+      "decision": "excluded",
+      "reason": "UHRP StorageUploader/Downloader 是上层资源存储；六模块无依赖，旧 Java SDK 未使用对应接口。",
+      "evidence": [
+        "src/storage/index.ts"
+      ]
+    },
+    "telemetry": {
+      "decision": "excluded",
+      "reason": "遥测与钱包装饰器为上层可选能力；六模块无依赖，仅排除的 overlay 根测试引用 Telemetry。",
+      "evidence": [
+        "src/telemetry/index.ts",
+        "src/__tests/LookupResolver.diagnostics.test.ts"
+      ]
+    },
+    "totp": {
+      "decision": "excluded",
+      "reason": "独立 TOTP 能力；六模块无依赖，现有 SDK 无 TOTP 入口。",
+      "evidence": [
+        "src/totp/index.ts"
+      ]
+    },
+    "transaction": {
+      "decision": "selected",
+      "reason": "现有交易输入输出、签名、序列化依赖；全部 BEEF、证明、广播/链追踪、费率和 HTTP 子目录纳入。",
+      "evidence": [
+        "metanet4j-sdk/src/main/java/com/metanet4j/sdk/transcation/TransactionBuilder.java",
+        "metanet4j-sdk/src/main/java/com/metanet4j/sdk/remote/RemoteTransactionSigner.java"
+      ]
+    },
+    "wallet": {
+      "decision": "selected",
+      "reason": "PushDrop/Transaction 的钱包类型接口以及 CompletedProtoWallet 使用的 ProtoWallet/KeyDeriver 为必需依赖；按整模块规则纳入全部 wallet，含所有 substrates。",
+      "evidence": [
+        "src/script/templates/PushDrop.ts:12",
+        "src/transaction/Transaction.ts:26",
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:2"
+      ]
+    }
+  },
+  "dependencyReview": "doc/完整模块与API映射-20260920-122800.md"
 }

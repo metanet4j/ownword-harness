@@ -81,15 +81,22 @@ function moduleDependencies(sdk, files) {
     const dependencies = new Set()
     const folder = path.join(sdk, 'src', module)
     for (const relative of fs.readdirSync(folder, { recursive: true })) {
-      if (!relative.endsWith('.ts') || relative.endsWith('.d.ts') || relative.endsWith('.test.ts') || relative.split(path.sep).some(p => p.startsWith('__'))) continue
+      if (!relative.endsWith('.ts')) continue
       const file = path.join(folder, relative)
-      const emitted = ts.transpileModule(fs.readFileSync(file, 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
-      const ast = ts.createSourceFile(file, emitted, ts.ScriptTarget.Latest, true)
-      for (const node of ast.statements) {
-        if (!(ts.isImportDeclaration(node) || ts.isExportDeclaration(node)) || !node.moduleSpecifier?.text?.startsWith('.')) continue
-        const target = path.relative(path.join(sdk, 'src'), path.resolve(path.dirname(file), node.moduleSpecifier.text)).split(path.sep)[0]
-        if (target !== module && !target.startsWith('..')) dependencies.add(target)
+      // 类型接口与测试辅助代码也需要迁移，不能在编译擦除后才计算依赖。
+      const ast = ts.createSourceFile(file, fs.readFileSync(file, 'utf8'), ts.ScriptTarget.Latest, true)
+      function visit(node) {
+        let specifier
+        if (ts.isImportDeclaration(node) || ts.isExportDeclaration(node)) specifier = node.moduleSpecifier
+        else if (ts.isImportTypeNode(node)) specifier = node.argument.literal
+        else if (ts.isCallExpression(node) && (node.expression.kind === ts.SyntaxKind.ImportKeyword || (ts.isIdentifier(node.expression) && node.expression.text === 'require'))) specifier = node.arguments[0]
+        if (specifier && ts.isStringLiteral(specifier) && specifier.text.startsWith('.')) {
+          const target = path.relative(path.join(sdk, 'src'), path.resolve(path.dirname(file), specifier.text)).split(path.sep)[0]
+          if (target !== module && !target.startsWith('..')) dependencies.add(target)
+        }
+        ts.forEachChild(node, visit)
       }
+      visit(ast)
     }
     graph[module] = [...dependencies].sort()
   }

@@ -2,22 +2,22 @@
 
 ## Current State
 
-[实施前审查](doc/实施前审查-20260920-115837.md)完成，结论为可以进入 P0。五个 Java 仓库和固定 TS 源码状态正常，任务工具与全局默认保持隔离；本次唯一可修改工程为同级 metanet4j-bsv-sdk；其他工程源码、测试、POM 和配置均只读，工程边界见 feature_list.json 的 scope。
+P0 完整模块范围复核已完成，依据见[完整模块与 API 映射](doc/完整模块与API映射-20260920-122800.md)。发现类型及真实测试辅助依赖，完整纳入 wallet/auth；15 个候选模块均有结论，六模块依赖闭合，九模块排除依据齐全。
 
-本轮五仓构建通过（跳过执行测试）；新 SDK 基础测试 1/1、业务 SDK 离线回归 3/3、TS 九文件冒烟 191/191、检查器自测 23/23 通过。TS 构建、JAR 安装及环境自检通过，共享五个容器 healthy。
+冻结清单为 292 文件、133 测试文件、5329 注册用例及 7554 AST 位置；原 207 文件和 4275 用例对象全部保留。源码类型/测试依赖形成六模块闭环，P1 按模块逐行为实施，六模块联合验收；P2 为独立 SDK 最终交付。
 
-完整范围仍为 207 个源码/测试/辅助文件、92 个测试文件、4275 个注册用例及 4856 个 AST 复核位置。Java 功能映射为 0；正式 check 如期拒绝未迁移用例。完整 TS 基线（含 manual）、输入重放、真实结果采集与运行断言完整性验证尚未完成。
+本轮依赖扫描修复遵循 TDD：23 通过/1 失败 → 24/24 通过；目标工程 clean test 基础测试 1/1 通过，零失败/错误/跳过。init 通过，正式 check 重新清点一致后预期拒绝缺失的 5329 个 Java 映射。原始证据在 .cache/evidence/scope-*。完整 TS 基线和 Java 生产迁移均未完成。
 
 ## Last Updated
 
-2026-09-20，独立 SDK 实施范围及 P0–P3 功能项明确。
+2026-09-20，完整模块与测试依赖范围复核完成。
 
 ## Current Objective
 
-feature_list.json 保留七个 P0 功能项和 P0 联合验收，随后执行 P1 三模块联合迁移、P2 完整 compat、P3 独立 SDK 最终验收；本次不含其他工程适配或接入。迁移功能项均为 not-started，activeItem 为空，nextItem 为 migration-scope-review。
+feature_list.json 中 migration-scope-review 已完成，activeItem 为空，nextItem 为 migration-ts-baseline。先执行已满足依赖的完整 TS 基线，尽早验证参考测试和 manual 资源边界，再继续 API/用例映射；一次只推进一个事项。
 
 ## Recommended Next Step
 
-读取规则和[模块迁移计划](doc/模块迁移计划-20260920-103547.md)，执行 ./init.sh；将 migration-scope-review 设为进行中，开始完整模块及依赖范围复核。按 feature_list.json 的步骤、产物和验收条件推进，一次只处理一个事项。
+按 migration-ts-baseline 的步骤实现读取冻结清单的 TS 运行入口，审查网络模拟和 manual 内存预算，实际执行六模块全部测试并保存每次运行的独立报告。未通过完整基线不能完成 P0。
 
-审查证据在 .cache/evidence/readiness-*。现有基础测试、冒烟和检查器自测不计入 TS 功能复刻。根仓既有无关改动保留；当前工程范围明确后只调整任务资料及目标工程 README，未修改任何 Java 源码或 POM；其他四个 Java 工程无本任务改动，未推送。
+本次唯一工程为 metanet4j-bsv-sdk；新增 wallet/auth 包目录已提交 72d2007，基础测试不计入 TS 移植数量。其他四工程只读，固定 TS 源码无改动；根仓既有无关改动保留，未推送。

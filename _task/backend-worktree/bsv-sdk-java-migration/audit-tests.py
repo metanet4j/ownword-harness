@@ -160,6 +160,13 @@ def collect():
     require(commit == config['upstream']['commit'] == scope['upstreamCommit'], '上游固定版本不匹配')
     require(not subprocess.check_output(['git', '-C', str(upstream), 'status', '--porcelain'], text=True).strip(), '上游工作区存在修改')
     modules = scope['selectedModules']
+    available = {p.name for p in (sdk / 'src').iterdir() if p.is_dir() and not p.name.startswith('__')}
+    reviews = scope.get('moduleReviews', {})
+    require(set(reviews) <= available, '范围复核包含未知模块')
+    for module, review in reviews.items():
+        require(review.get('decision') in ('selected', 'excluded') and bool(review.get('reason'))
+                and bool(review.get('evidence')), f'模块范围缺少结论或依据：{module}')
+        require((review['decision'] == 'selected') == (module in modules), f'模块范围结论与已选列表矛盾：{module}')
     require(bool(modules) and len(set(modules)) == len(modules), '模块列表为空或重复')
     require(all(re.fullmatch(r'[a-z][a-z0-9-]*', m) and (sdk / 'src' / m).is_dir() for m in modules), '只接受完整顶层模块名，禁止文件/方法过滤')
     all_files = sorted(p for m in modules for p in (sdk / 'src' / m).rglob('*') if p.is_file())
@@ -186,7 +193,8 @@ def collect():
         'upstreamCommit': commit, 'scopeSha256': digest(TASK / 'module-scope.json'),
         'modules': modules,
         'moduleFiles': {p.relative_to(sdk).as_posix(): digest(p) for p in all_files},
-        'pendingModules': sorted(p.name for p in (sdk / 'src').iterdir() if p.is_dir() and not p.name.startswith('__') and p.name not in modules),
+        'pendingModules': sorted(available - set(reviews)),
+        'excludedModules': sorted(m for m, r in reviews.items() if r['decision'] == 'excluded'),
         'crossModuleTestOwners': owners,
         'crossModuleTestsPending': sorted(set(cross) - set(owners)),
     })
@@ -224,6 +232,7 @@ def main():
             result = compare(args)
             if args.command == 'check':
                 require(read(TASK / 'module-scope.json')['scopeReview'] == 'reviewed', '依赖模块及跨目录测试归属尚未审查完成')
+                require(not current['pendingModules'], '存在未逐项决定范围的候选模块')
                 require(not current['crossModuleTestsPending'], '跨目录用例仍待归属，不能仅修改 reviewed 标志通过验收')
             print(json.dumps({'status': 'PASS', 'check': args.command, **result}, ensure_ascii=False))
     except (ValueError, KeyError, TypeError, OSError, ET.ParseError, subprocess.CalledProcessError) as error:

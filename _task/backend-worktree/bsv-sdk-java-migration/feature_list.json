@@ -15,7 +15,7 @@
     ]
   },
   "activeItem": null,
-  "nextItem": "migration-scope-review",
+  "nextItem": "migration-ts-baseline",
   "features": [
     {
       "id": "migration-env",
@@ -111,7 +111,7 @@
       "dependencies": [
         "migration-readiness"
       ],
-      "status": "not-started",
+      "status": "done",
       "steps": [
         "对照 module-scope.json、upstream-tests.json 和实际 Java/TS 源码，复核选定模块全部子目录、依赖和跨目录测试。",
         "为 pending 模块逐项记录是否纳入及依据；若范围扩大，审查候选清单差异并调整累计阶段。"
@@ -125,7 +125,14 @@
         "已选模块全部功能、辅助文件与测试保留，AESGCM.man.test.ts 不得排除。",
         "保存复核依据；scopeReview 总体验收标志在 migration-map 完成时更新。"
       ],
-      "evidence": [],
+      "evidence": [
+        "doc/完整模块与API映射-20260920-122800.md：15 个候选模块逐项复核；纳入完整 wallet/auth，六模块依赖闭合，其余九模块排除依据齐全，跨目录归属无未决项。",
+        "module-tests.json：292 文件、133 测试文件、5329 注册用例、7554 AST 位置；原 207 文件及 4275 用例对象逐项原样保留，新增 1054 用例；scope-catalog-diff.json 保存差异核对。",
+        "TDD 修复依赖清点遗漏类型及测试辅助代码：scope-dependency-red.log 为 23 通过/1 失败；scope-dependency-green.log 与 scope-audit-tests.log 为 24/24 通过。",
+        "./verify.sh bsv-test：仅工程基础测试 1/1 通过，失败/错误/跳过为 0；新增 wallet/auth 包目录已在目标仓提交 72d2007。",
+        "./init.sh 通过；audit-tests.py check 重新清点一致后预期退出 1，缺失 5329 Java 映射；未把清点当作 TS 测试通过。",
+        "阶段按源码、类型与测试依赖调整为 P0 前置准备、P1 六模块逐行为实施与联合验收、P2 独立 SDK 最终验收。scopeReview 仍 pending，等待 P0 联合验收。"
+      ],
       "scopeRef": "scope"
     },
     {
@@ -172,7 +179,7 @@
         "可供运行采集核对的断言与样本预期约束"
       ],
       "acceptanceCriteria": [
-        "当前基线 4275 个注册用例及 4856 个 AST 位置逐项有依据；范围变化以重新审查的清单为准。",
+        "当前基线 5329 个注册用例及 7554 个 AST 位置逐项有依据；范围变化以重新审查的清单为准。",
         "静态扫描未覆盖的辅助断言和动态样本经源码复核补齐，不把注册数当断言数。",
         "不自动填 reviewed、不批量生成未验证 Java 测试、不把计划映射计为已通过。"
       ],
@@ -253,7 +260,7 @@
       "acceptanceCriteria": [
         "保留原始断言语义和实际执行次数，不复制 TS 输出充作 Java 实际输出。",
         "字节、异常、undefined/null、数字类型等按测试契约无损比较。",
-        "缺失采集、重复 ID、输入改变或执行失败均返回非零，完整 SDK 结果随 P1/P2 实现逐项形成。"
+        "缺失采集、重复 ID、输入改变或执行失败均返回非零，完整 SDK 结果随 P1 实现逐项形成。"
       ],
       "evidence": [],
       "scopeRef": "scope"
@@ -318,8 +325,8 @@
     },
     {
       "id": "migration-core-modules",
-      "name": "P1 完整 primitives/script/transaction 联合迁移",
-      "description": "三个完整模块有循环依赖，逐行为 TDD 后联合累计验收所有功能与测试。",
+      "name": "P1 六个完整模块按模块实施与联合验收",
+      "description": "primitives/compat/script/transaction/wallet/auth 的源码、类型与测试依赖形成闭环；按模块逐行为 TDD，六模块完整联合累计验收。",
       "dependencies": [
         "migration-map"
       ],
@@ -328,12 +335,16 @@
       "phase": "P1",
       "modules": [
         "primitives",
+        "compat",
         "script",
-        "transaction"
+        "transaction",
+        "wallet",
+        "auth"
       ],
       "steps": [
-        "按模块迁移计划逐行为执行 TDD，保存 RED/GREEN、真实输入输出及完成项提交。",
-        "执行本阶段完整范围和此前模块的累计测试、结果比较及 API/行为核对。"
+        "按基础数据与密码学 → 基础脚本和交易 → compat → wallet/auth → 依赖钱包的脚本/交易能力顺序逐行为 TDD；保存 RED/GREEN、真实输入输出及提交。",
+        "每个模块保留全部功能/API/测试；内部实现里程碑不标记模块验收完成。",
+        "六模块全部实现后执行冻结范围的累计测试、逐断言结果比较和 API 核对。"
       ],
       "outputs": [
         "完整实现、测试和向量",
@@ -343,46 +354,17 @@
         "所有依赖功能项完成；测试与结果证据匹配当前固定上游及 Java 源码。",
         "阶段内全部功能和测试完整交付，遗漏/未映射/未执行/跳过/未比较/未解决差异为零。",
         "实现和 Java 测试只落在 metanet4j-bsv-sdk；其他工程仅只读参考，不能用冒烟或跳过测试的构建代替完整模块验收。",
-        "三个循环依赖模块完整联合验收，命令包含 --module primitives --module script --module transaction；内部行为里程碑不等于模块完成。"
-      ],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-compat-module",
-      "name": "P2 完整 compat 模块迁移",
-      "description": "迁移 compat 全部功能、接口、辅助能力与测试，累计验收全部四个模块。",
-      "dependencies": [
-        "migration-core-modules"
-      ],
-      "status": "not-started",
-      "evidence": [],
-      "phase": "P2",
-      "modules": [
-        "compat"
-      ],
-      "steps": [
-        "按模块迁移计划逐行为执行 TDD，保存 RED/GREEN、真实输入输出及完成项提交。",
-        "执行本阶段完整范围和此前模块的累计测试、结果比较及 API/行为核对。"
-      ],
-      "outputs": [
-        "完整实现、测试和向量",
-        "本阶段原始执行报告、逐项比较结果及验收报告"
-      ],
-      "acceptanceCriteria": [
-        "所有依赖功能项完成；测试与结果证据匹配当前固定上游及 Java 源码。",
-        "阶段内全部功能和测试完整交付，遗漏/未映射/未执行/跳过/未比较/未解决差异为零。",
-        "实现和 Java 测试只落在 metanet4j-bsv-sdk；其他工程仅只读参考，不能用冒烟或跳过测试的构建代替完整模块验收。",
-        "compat 全部功能及此前三个模块累计通过默认全范围 check；依赖复核新增的范围同样纳入。"
+        "六模块完整联合验收，使用默认全范围 check；不得排除 PushDrop、completeWithWallet 或依赖 compat 的交易测试，不能用桩替代上游实际调用的钱包算法。"
       ],
       "scopeRef": "scope"
     },
     {
       "id": "migration-sdk-acceptance",
-      "phase": "P3",
-      "name": "P3 独立 BSV SDK 最终累计验收",
+      "phase": "P2",
+      "name": "P2 独立 BSV SDK 最终累计验收",
       "description": "仅交付 metanet4j-bsv-sdk 的完整模块实现、测试、向量、JAR 和使用说明，不接入或修改其他工程。",
       "dependencies": [
-        "migration-compat-module"
+        "migration-core-modules"
       ],
       "status": "not-started",
       "scopeRef": "scope",
