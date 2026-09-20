@@ -1,24 +1,25 @@
 {
-  "activeItem": "migration-env",
+  "activeItem": null,
   "features": [
     {
       "id": "migration-env",
       "name": "独立工作区与迁移环境准备",
-      "description": "建立四个固定基线的 worktree，取得固定 Go 上游，隔离工具与依赖缓存，完成构建和离线冒烟。",
+      "description": "在 feature/java25 基线上准备固定 TypeScript 上游与隔离工具链，完成构建、环境检查和离线冒烟。",
       "dependencies": [],
-      "status": "paused",
+      "status": "done",
       "evidence": [
-        "四个 Java worktree 已从 workspace.json 中的提交建立，生产代码未修改。",
-        "Maven 第三方缓存已复制到任务 .cache/maven，未安装 Go 工具链，未执行构建或测试。",
-        "用户要求先暂停，比较 TypeScript SDK 作为迁移参考；环境准备未完成。",
-        "已核对四仓迁移分支 HEAD、记录的 baseCommit 与各自 feature/java25 HEAD 完全一致，工作区干净；无需重建。",
-        "任务目录与四仓迁移分支已改为 BSV 中性名称；使用 git worktree move 更新关联，基线提交未变。"
+        "doc/环境检查报告-20260920-101559.md",
+        "./init.sh：通过；固定提交、工具链、测试清单 SHA-256、隔离缓存与全局默认均已核对。",
+        "Java 四仓构建通过（跳过测试执行）；SDK 现有离线回归 3/3 通过，0 失败/错误/跳过。",
+        "TypeScript SDK 构建通过；9 文件 191/191 用例通过，0 失败/跳过/todo。",
+        "upstream-tests.json：173 个测试文件、28 个辅助文件；默认 Jest 172 个，额外手动资源测试已记录。",
+        "宿主 infra/status.sh：5 个容器 healthy，5 个端口可连接。"
       ]
     },
     {
       "id": "migration-map",
       "name": "依赖映射与实施范围收敛",
-      "description": "按真实调用建立 Java/Go 方法映射，明确公共底层落点、接口兼容和对照向量；生产迁移须后续明确授权。",
+      "description": "按真实调用建立 Java/TypeScript 方法与逐测试用例映射，明确公共底层落点及兼容约束；执行测试迁移契约。",
       "dependencies": [
         "migration-env"
       ],

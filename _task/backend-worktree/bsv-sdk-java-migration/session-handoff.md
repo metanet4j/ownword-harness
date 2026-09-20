@@ -2,20 +2,24 @@
 
 ## 状态
 
-用户在建立工作区途中要求“等下”，先比较 TypeScript SDK。已暂停环境安装和验证；不要按原 Go 计划继续安装。
+TypeScript 环境准备已验收；用户要求的测试一比一复刻已写入测试迁移契约。Java 生产移植与测试复刻尚未开始。
 
 ## Files
 
-- `workspace.json`：四个已创建 worktree 的基线与分支，以及先前选择的 Go 提交。
-- `feature_list.json`、`progress.md`：实际准备进度。
-- `doc/环境准备计划-20260920-095838.md`：原 Go 路线准备计划，切换前需修订。
+- `workspace.json`：四仓 feature/java25 起点、迁移分支、TS 固定提交与工具版本。
+- `README.md`、`init.sh`、`mvn.sh`、`pnpm.sh`、`verify.sh`：环境使用与验证入口。
+- `upstream-tests.json`、`inventory-tests.py`：测试文件及辅助向量清单，含校验值；不是已完成的逐用例映射。
+- `doc/环境检查报告-20260920-101559.md`：实测命令、结果与未验证范围。
+- `doc/测试迁移契约-20260920-101559.md`：用户要求的 TDD、一比一复刻和零遗漏门禁。
 
 ## Blockers
 
-上游路线正在讨论；Java worktree 已建成且可复用。Go clone 尚未 checkout，工具链未安装。`init.sh` 返回 2 表示未就绪，完整自检与验证脚本尚未实现。不能声称初始化完成或测试通过。
+环境无阻塞。架构实施前仍需收敛公共 core 落点与公开 Java 类型兼容；现有授权覆盖环境和迁移准备，不能将本轮验证自动视作公共模块拆分批准。
 
 ## Next Session
 
-按用户后续选择继续。建议 TypeScript SDK 为主参考，固定其 commit 和包管理器版本，再验证所需模块。此前四个 Java worktree 已核对均以 `feature/java25` 为起点，无需重建；目录与分支均已采用中性名称；实际名称见 `workspace.json`，Git worktree 路径已同步。
+读取本目录 AGENTS.md、README.md、feature_list.json、测试迁移契约，运行 ./init.sh。将 migration-map 设为进行中，按实际调用建立模块/接口和逐用例映射，明确所有上游测试文件的范围归属；默认被排除的 AESGCM.man.test.ts 必须有去向，不静默遗漏。
 
-本轮准备产生的 `.gitignore`、两个目录 README 及任务文件在根仓独立提交；根仓既有规则与技能文件改动属于用户原有内容，保留，不混入后续提交。
+开始新增 Java 测试前，具体接口边界须满足 tdd 技能要求；按用户指定上游测试逐项映射，任何尚未确认的接口差异须先解决。一次只写一个失败测试并实现使其通过，保留 RED/GREEN 证据。全部 Java 对应测试实际通过且逐项核对无遗漏之前，不得标记迁移完成。
+
+四个 worktree 保持 feature/java25 起点，未改 Java/POM，未推送。根仓既有无关规则/技能修改继续保留，不混入本任务提交。

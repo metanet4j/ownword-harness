@@ -11,7 +11,8 @@
 | `schema-master/` | 上游源码快照 | 无 |
 | `xLog-dev/` | 上游源码快照 | 无 |
 | `yours-wallet-main/` | 上游源码快照 | 无 |
-| `go-sdk/` | 固定提交的只读 Git 源码，版本由[迁移工作区](../_task/backend-worktree/bsv-sdk-java-migration/workspace.json)维护 | https://github.com/bsv-blockchain/go-sdk |
+| `go-sdk/` | 已下载、未检出的参考仓库，本轮迁移不使用 | https://github.com/bsv-blockchain/go-sdk |
+| `ts-stack/` | TypeScript SDK 固定源码，版本由[迁移工作区](../_task/backend-worktree/bsv-sdk-java-migration/workspace.json)维护 | https://github.com/bsv-blockchain/ts-stack |
 
 ## 注意
 

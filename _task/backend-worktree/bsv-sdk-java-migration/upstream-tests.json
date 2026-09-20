@@ -1,0 +1,1526 @@
+{
+  "upstreamCommit": "f999e0c1aad9a7afd0cbadaaf23841d049af9d5a",
+  "scope": "packages/sdk 全部测试文件；逐用例、断言与参数化映射尚未建立",
+  "testFileCount": 173,
+  "jestDefaultFileCount": 172,
+  "defaultExcludedFileCount": 1,
+  "byDirectory": {
+    "__tests": 1,
+    "__tests__": 1,
+    "auth": 19,
+    "compat": 5,
+    "identity": 2,
+    "kvstore": 4,
+    "messages": 2,
+    "overlay-tools": 17,
+    "primitives": 43,
+    "registry": 2,
+    "remittance": 4,
+    "script": 17,
+    "storage": 3,
+    "telemetry": 3,
+    "totp": 1,
+    "transaction": 27,
+    "wallet": 22
+  },
+  "files": [
+    {
+      "path": "src/__tests/LookupResolver.diagnostics.test.ts",
+      "sha256": "c878ed99eab02ca5ade235331f4a5761be644f5df2f8cc3bfa45a455bdb23086",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/__tests__/BRC100OverlayTransport.test.ts",
+      "sha256": "9cb27d2320be52436024d8920f519c34c63ae5b19ac8bf14f9ba0b739c5a1c56",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/__tests/Peer.boundary.test.ts",
+      "sha256": "4a4e6931eb0442f1bce2a7871d3ea73d36efd3a936be9939137c2573bc4fab93",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/__tests/Peer.certificatePolicy.test.ts",
+      "sha256": "c03ab0871bd7e8d6ab0618f9f9d3b32b04ed5a4506c93152d1905302d06584bc",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/__tests/Peer.test.ts",
+      "sha256": "9fbf06d8456d333670b3d34f30425b2cce519631d87b97d9d2c31775fa8882e5",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/__tests/SessionManager.test.ts",
+      "sha256": "2d92b2c78b8f3348e022a37ee77a78635c8006f156ab1e2768c586b688530965",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/__tests/build.test.ts",
+      "sha256": "ba5005d49663f39ab4c19e7d9b45833d311a7611042f5225629f39d61cca303e",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/certificates/__tests/Certificate.test.ts",
+      "sha256": "6df4929dd01fe0e02f422f879f8b80d99f5f540acb6df6207d467d262cf16dee",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/certificates/__tests/MasterCertificate.test.ts",
+      "sha256": "a87d9a77be823357793e684ed1e186c30a39480bfe558af79738b13b84d33f18",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/certificates/__tests/VerifiableCertificate.test.ts",
+      "sha256": "9a7a38a681677b7e8e1c5cc0665b95fce4a95a2e442111f1e129ddd9b2c22486",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/clients/__tests__/AuthFetch.additional.test.ts",
+      "sha256": "177e6ca599905a61274e400c0b85d8719526a2e09003ac207b0513a3fb60afc6",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/clients/__tests__/AuthFetch.boundary.test.ts",
+      "sha256": "3433ae64def745066c5bb1fc9f49f83417ad284ae7fe07b662fa901762b1ce36",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/clients/__tests__/AuthFetch.knownTxids.test.ts",
+      "sha256": "45cd2827f50c79db32b99f0997d7407e9b8ce7a4367284a743fb759bbe6fe1a5",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/clients/__tests__/AuthFetch.peer.test.ts",
+      "sha256": "c31e9a135aef3f4c951925bd2f5f2545c710803d1bbdb48f023edf1e1a3918f0",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/clients/__tests__/AuthFetch.property.test.ts",
+      "sha256": "7cc0576019a546899531157cb76ed434026e2c977e7c760a3127c3f51b9cdf41",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/clients/__tests__/AuthFetch.test.ts",
+      "sha256": "0312c9107dbd4acddab1cd282355090fad28dfe58b0f395b642641cca7654f0a",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/transports/__tests__/SimplifiedFetchTransport.additional.test.ts",
+      "sha256": "358b274d77f0c14eb7464ead9dc0a6fe897989f83608f0281f307b9c0be9ed72",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/transports/__tests__/SimplifiedFetchTransport.test.ts",
+      "sha256": "eaf496a79befee15a6e1cf85f74d94478768caef370a6fdbc9a3ef52001fb01b",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/utils/__tests/cryptononce.test.ts",
+      "sha256": "03e8d3f3a6392639ebfd1a36ec2e3d8685a032cd941ff030d052fa7feb84137d",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/utils/__tests/getVerifiableCertificates.test.ts",
+      "sha256": "3d1d37514dc08310d68a7063764d30e36dc6bebff1fbf39100b89ae06f3aa7f7",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/auth/utils/__tests/validateCertificates.test.ts",
+      "sha256": "3491f3c8ca0b87e0b962b052ab0f1eedd599ca6602d0dbe2647c6c09ee47e8cd",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/compat/__tests/BSM.test.ts",
+      "sha256": "36cb6cab99e404f52528bdd5d1350ee3a49051356c8fea202d58016b6fad51a9",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/compat/__tests/ECIES.test.ts",
+      "sha256": "cf73c958b20e98edb98cd14b990c9ec93530cb758c98c31dc07374fc6a3d7ce9",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/compat/__tests/HD.test.ts",
+      "sha256": "625cb53aa861add0bd084f4dccf0ad0c91d54bf85ebcfb45d8a410b772227560",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/compat/__tests/Mnemonic.additional.test.ts",
+      "sha256": "93705122095f15fd0dd3c2d05f2b9a5ebfe7a6b9e9e5da5d4b0d16ecb7041e2e",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/compat/__tests/Mnemonic.test.ts",
+      "sha256": "afb1913a329841a1f1b87dbd730ff7b589aaf297c01fc496a04c2cd441357d02",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/identity/__tests/IdentityClient.additional.test.ts",
+      "sha256": "589caf44a6119b4d545041fdb95439c81b6add98854485d69b33989f4b29ee2b",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/identity/__tests/IdentityClient.test.ts",
+      "sha256": "a1093d46309e419b30acac58f443e5346b4b149de02ad53e90da4c330d2b47cd",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/kvstore/__tests/GlobalKVStore.test.ts",
+      "sha256": "e1607d566838a3eb135b997705ab952e6bd9fbb061e50d6d167f7fa2bd3d9e9e",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/kvstore/__tests/LocalKVStore.additional.test.ts",
+      "sha256": "a38d59861d6c9bc6c72235a17564896345893ca9f6e9bd6203c1f31946fa561d",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/kvstore/__tests/LocalKVStore.test.ts",
+      "sha256": "7901b6302b0e20785ff548c24e99d5af3c7e10d40f940740e1e7110c2282f961",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/kvstore/__tests/kvStoreInterpreter.test.ts",
+      "sha256": "66f6d5d30d5d23d8d8abc5acd432bebe2446bdca9231537ae9f64944ef7a2d91",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/messages/__tests/EncryptedMessage.test.ts",
+      "sha256": "b37ec2b42390807afcb4902d1b5ba6455b5f91bad242bf59ecd5b4df0af0309a",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/messages/__tests/SignedMessage.test.ts",
+      "sha256": "0a90f064f85928930c09db5861143a999e995ce745424754473203dca859b03b",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/Historian.test.ts",
+      "sha256": "f174851864d30f5f0e3643d10a7d56c19301662e13aee4c3de39893d68d0e65e",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/HostReputationTracker.additional.test.ts",
+      "sha256": "13b813d04b2bcd6affc016dfe1c29373ac766cec23456755d9468a2931405494",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/LookupDiscovery.test.ts",
+      "sha256": "ca2f2b6fec0248bbaaf1be2f07c47dfa4635a74c095b887c4c2a4b6829073f18",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/LookupHostQueue.test.ts",
+      "sha256": "63b7e8d49e806b69189854eb886818f5754a5d02c7ecdbe54a058b7ba626fb77",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/LookupResolver.additional.test.ts",
+      "sha256": "2a86c3a4f7ed70d2760f73ceef0720d259b73128022d73ab2028157ab9e614eb",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/LookupResolver.dynamic.test.ts",
+      "sha256": "d51cd9105e6be01b9aca92ddc2ef7d8d7b97d0f3e467d526247ee092782bea1b",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/LookupResolver.evidence.test.ts",
+      "sha256": "3c7d42eb9560577b5e002116daf35a7b58c01a98692d8c35e8056b09f7e96c0c",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/LookupResolver.http.test.ts",
+      "sha256": "bc6e760fd1d965c238f2d5a9f5df5af1a2271f28efdc080fd4ab49b93190b53e",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/LookupResolver.limits.test.ts",
+      "sha256": "86586d9e748de843c6ba8b5582c20439de548c100c94f049e2b7f7258cf89ea8",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/LookupResolver.resiliency.test.ts",
+      "sha256": "97e1882c66a488134664eaf01badc2691662c6d7db79cac7c374795119cae103",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/LookupResolver.test.ts",
+      "sha256": "65c9d92ff7b930ea6988449ff966751de8a7982b8edc0c98b88dc15e6ccf2f36",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/LookupResolver.transport.test.ts",
+      "sha256": "b9168dd5927678d0c4eafcb3905bf9ca84805fd1fe07e4eed3d64a2cf043f755",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/LookupResources.test.ts",
+      "sha256": "c406c4c4c164b25ccf12dbc55086948c9de476bd4125557806f213655fe561fa",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/LookupResponseReader.test.ts",
+      "sha256": "d00805e81343b72c657adf0145451b3770e6e958354d3038b2377266d11e6842",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/OverlayAdminTokenTemplate.test.ts",
+      "sha256": "ca3e2e2a59f220d2471d896ec4c1cb38aab9b7162ea9579609c3841ceadc15fa",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/SHIPBroadcaster.test.ts",
+      "sha256": "2635e355524591c01140a5d818ac527721ca4777dae6cecbc1898451a72b5377",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/overlay-tools/__tests/withDoubleSpendRetry.test.ts",
+      "sha256": "4901183905791b199b0b10c210d52550d8e962756ef694416713f6fd98e11466",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/AESGCM.man.test.ts",
+      "sha256": "d77d292dd287c2f0903a009edc6acdf30593aa529072c6f68a910568ca1054db",
+      "jestDefaultDiscovered": false,
+      "upstreamDefaultExclusion": "manual/resource（上游 Jest 默认排除，迁移不能据此遗漏）",
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/AESGCM.test.ts",
+      "sha256": "0e1620167dabf3fc269d3e65ca75e8f543b84481bc2272c4b9e28d10f8b632e3",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/AsyncCryptoBackend.test.ts",
+      "sha256": "7b0c97ba0be75a72fc7d3d2ffc708802553fe9658e6f4b893722504bbb545fe2",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/BigNumber.additional.test.ts",
+      "sha256": "d20bfb35e954040e60a90433eb0db801b3a8643309d8e8a584aba5ae198d42ed",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/BigNumber.arithmatic.test.ts",
+      "sha256": "3599e0d32f4d123e3a500875fa57353f313802262e44f7f352793a18f4d961d0",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/BigNumber.binary.test.ts",
+      "sha256": "7625ecd98b059603b0bf9012851bb4250926dc712972b4009911f114ac54c01c",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/BigNumber.constructor.test.ts",
+      "sha256": "d25a58bb8fb100d4ef5d52ead3442ef9cf9b2eeb5746ed4c2c5c626644eb0de8",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/BigNumber.dhGroup.test.ts",
+      "sha256": "340f292f62915700fbbebcc1f1ea2d06da5ab6e14670cfee4801cd0bcb2a2062",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/BigNumber.serializers.test.ts",
+      "sha256": "f4ab6c43fdd7e68dfcd8d1753f6f27f8bf5ff494e400472f3d4ac6e7d2bcf0dc",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/BigNumber.utils.test.ts",
+      "sha256": "8b79d586f43f055323ed12dafd749fd1b494a781a6d1c3801ea1b3b0f2ee8271",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/Curve.additional.test.ts",
+      "sha256": "3616f328785c0ef687df2a3e2f9fa9f010a2e2ded7bb2c9ac649da3fda7505f2",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/Curve.unit.test.ts",
+      "sha256": "8337a1615e5645a979c0574a27ec4e394f060f61c11e486875a5d203d74ef7b6",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/DRBG.test.ts",
+      "sha256": "8359f4f5fa218206c6be2ecff259a61d290ed989d14ca9d991d5fa4a53b312e9",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/ECDH.test.ts",
+      "sha256": "45f357e605d697f0dc4cfb741e6341531e2d8286f5f2bebb3161fe9ba2ccc31b",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/ECDSA.additional.test.ts",
+      "sha256": "605ac585011965e16acaf30de020950541443a33af92ac499d2f5bd838a9aeeb",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/ECDSA.test.ts",
+      "sha256": "c12fc8b1e3ebc67f090e796c2290d279e34c8b16f68d035fd1bf96097fcf43cf",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/HMAC.test.ts",
+      "sha256": "4e559843bbdbbc9a605085302e8b6a835477654869471981f8b4e901f2c722e0",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/Hash.additional.test.ts",
+      "sha256": "9722a19f349cbb3114e259b7204b5060b120d0f26996b800246dcb4860ccfd26",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/Hash.test.ts",
+      "sha256": "ee48f6fe427d5aac88f431d114216dc8a47b6b9bf27e5528ccd0930b505cd3c6",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/JacobianPoint.test.ts",
+      "sha256": "00a5ef30422c92b6feb4ebbc3e757e8a191cffca86cd0944ca99f4a0bb634eed",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/Point.additional.test.ts",
+      "sha256": "e1fe947f28bb9d859cf63e6b53b05ffe80d790f565b4afa4e1c329b15960bd0e",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/Point.test.ts",
+      "sha256": "93fd406babe17af4944664383ec10f7028ec8e6b747826562ef07405e116195c",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/PrivateKey.split.test.ts",
+      "sha256": "f12b4a09e0ad39926add2d8f417da42e1af93c0dd1622a396d53bfc098fc0d3b",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/PrivateKey.test.ts",
+      "sha256": "4c4076ceb191bff73e7ec8a86083e55aa0ec6aac89dc9789afb5ddccf4f98927",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/PublicKey.additional.test.ts",
+      "sha256": "06fa89d352fa48cee265bf6256abd91eb722269289d1c848621f42aafc43f30a",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/PublicKey.test.ts",
+      "sha256": "763119d696027ef2b7561ec07f068bcc7daef4a52535d76673ea148564b03f29",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/Random.additional.test.ts",
+      "sha256": "d9011ae424d67daa5e148915ecdcd7374ef937a5d9c7d2e217e4901ef963d625",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/Random.test.ts",
+      "sha256": "38884385f346d89216c2768d1e46f0e11d3d24e66adad88e8d78365ce6fcc156",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/Reader.test.ts",
+      "sha256": "edf40724e03af7973abdea220ed53aca60bbc32153772fddb8ea26e0760e765a",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/ReaderUint8Array.test.ts",
+      "sha256": "7ee2cf69ef534adbd292613c9f2cf1505eabcc60afe945fe4eeeefb25358b830",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/ReductionContext.test.ts",
+      "sha256": "8a3d3529f03f58a4626a010cfc3d17350f956e502e7b415460b91128e50943ee",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/Schnorr.test.ts",
+      "sha256": "e1c7d58219dfb03d186b2d77a726d8c21648af8bac821d9bf70980c864e1337c",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/Secp256r1.test.ts",
+      "sha256": "997fdf6cb57a69c8189a2993693e041ae6bc21bcd7108968b459d8bb1f8c5748",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/Signature.test.ts",
+      "sha256": "dfdc30349ae327ece06708f4107b6b32004478b3799ee64f8491d9ff704bf109",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/SymmetricKey.test.ts",
+      "sha256": "09d8de9b09fa655988846b9d2adfb3088012c596f8113492f0cfa6cf70cbd270",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/SymmetricKeyCompatibility.test.ts",
+      "sha256": "f5fa2f0b1dd3cf42e6365982d84a380b242c384cf08782438af947a0e37736a9",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/TransactionSignature.additional.test.ts",
+      "sha256": "961cd623819a988c1abdad024a22653774e43ec2495178ca78dbe5cc2e92ea7a",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/Writer.test.ts",
+      "sha256": "2bfc23d2e95c9a57cfb5e98dd501f8d6f4492f4c817e8d0003f64217c0fd6ef1",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/WriterUint8Array.test.ts",
+      "sha256": "98315d9379057e116e7266b4e7eec6e87b6531bc583e9d69b645fd948b795bb6",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/bug-31.test.ts",
+      "sha256": "20942d01e4fc5696b4c720d894553264f4384a8e2a6c31e59b1e328a6f6c742b",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/hex.test.ts",
+      "sha256": "044cff38585d6f48e62206d81b08c88d7c4408b11584a0843bb8b9da980ac728",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/utils.property.test.ts",
+      "sha256": "46ee5885071ab5d8ee3f1a2664dae84881f3c270c4ac5dd2256b23478efa8537",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/primitives/__tests/utils.test.ts",
+      "sha256": "5074dc0525ce0127e8379f1a6b6e0e40f0a0857999eb25b3ede3a51c426b9a85",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/registry/__tests/RegistryClient.additional.test.ts",
+      "sha256": "8898338d5bae07f9e5eb38da5c1102dcd7e3df7f278c212153e968878b059c1f",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/registry/__tests/RegistryClient.test.ts",
+      "sha256": "09d40b259faf3c60ee43d7cdc9dad9bcc8c499de26f940c9e038bf5ad7eb39ae",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/remittance/__tests/BasicBRC29.additional.test.ts",
+      "sha256": "ed4fdce8af80980f7ea4d24a510024f3b6a2c9eff9abb97d265ca8c3f8c1e841",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/remittance/__tests/BasicBRC29.test.ts",
+      "sha256": "4075ea7458f01109b8ef7fcc1e077bbe356f3e3f461cec320a9a239a075410d8",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/remittance/__tests/RemittanceManager.additional.test.ts",
+      "sha256": "ea1f94b2f78bae68bbbc50313d6938546497c4df61ee9f19c0751ab98bb222b2",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/remittance/__tests/RemittanceManager.test.ts",
+      "sha256": "1948b8fad0debe4b37c5e23554dd77c362ab00b3db564b80f709225978e0ef56",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/__tests/Chronicle.test.ts",
+      "sha256": "268c04e14146587fe5fbb149129b3e3c66ae7e85cf7ec795fcec7d5df8f9761e",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/__tests/ChronicleOpcodes.test.ts",
+      "sha256": "e845b61a148e82a37ef2a320d8b0e39b171fe2d8b08585ae40474a5722a82636",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/__tests/LockingUnlockingScript.test.ts",
+      "sha256": "3a116a78aa1a0bedf4399237ca733afdf326d9229779f2b6e09572a42f8b053f",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/__tests/NormativeVectors.test.ts",
+      "sha256": "e074b159faace689aaa9bb28c8d0b596f2585abbea1bc80061d92873e148d5d1",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/__tests/Script.additional.test.ts",
+      "sha256": "72cc587cec75a689da3d360658e3d43a7c98f02e62091786e1192ade121927d8",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/__tests/Script.test.ts",
+      "sha256": "34f6f2b5f08b417f3065503b351fc1d830c65603c56cafcd87dee1f02b0fb81a",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/__tests/ScriptEvaluationError.test.ts",
+      "sha256": "cacf9d179db96cb4755ce30de89f72174f55423f9bd548f8e5fd1f80d4504660",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/__tests/Spend.additional.test.ts",
+      "sha256": "853ccd9671cb1df5b030bd1d9253e0aa36b15bc48ecacf5c9f4b9e14461d2b29",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/__tests/Spend.codeseparator.test.ts",
+      "sha256": "99c008af5e5d64d7c2c789ffea6490928b3546fb759733c6c956365f084d158b",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/__tests/Spend.test.ts",
+      "sha256": "5d2dd7fb354387e3478fd686e1a74cf0fec5a00b5e35e8816906a8aa1e5fbc7c",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/__tests/Spend.verifier.test.ts",
+      "sha256": "abd853aa272698f3404ab47ee542f9c8e296c92cc3beaccf9d3dc69cbfb4a359",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/__tests/SpendComplex.test.ts",
+      "sha256": "50676d57e3c35732bdaf44bddda788a17d41012853ffa47238543cf7877fca86",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/__tests/SpendValildVectors.test.ts",
+      "sha256": "00d8287ddaed0dbb2d8ddb6478bf88be9c9ed7782d8953322208a25cb3cc722c",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/__tests/lrshiftnum.test.ts",
+      "sha256": "6780e3a3ea28ce26dec38e9e92e199a4cc0b27351bde410e15ee5db32f7a242f",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/templates/__tests/P2PKH.async-backend.test.ts",
+      "sha256": "c3958a2856b6b2305da72e5294258730102280bca083a006ae7cb9cc04269d58",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/templates/__tests/PushDrop.test.ts",
+      "sha256": "8f4f32808e0d1dfbbc5e068d21697f1cad90fcad58e7beabc6b7fbcb33881155",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/script/templates/__tests/RPuzzle.test.ts",
+      "sha256": "bd0b9d1a6c763ab6a767f6230ed241c02d2e079297971579228b686c643e7874",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/storage/__tests/StorageDownloader.test.ts",
+      "sha256": "7d3676b8ef2578a1af04a51be352cdace3bea3776a423ab88cd4b686f36c356e",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/storage/__tests/StorageUploader.test.ts",
+      "sha256": "a06d75e7467741df94bd82a1d7f940f068212937b480825348141925d78ad4e5",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/storage/__tests/StorageUtils.test.ts",
+      "sha256": "785512748776a60b01ae382ed1cfd42b26a8fae3388e1ed6e8a617558b980ac9",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/telemetry/__tests__/Telemetry.test.ts",
+      "sha256": "2818c69c09724555b92a3068b8ffe409da88491f551f28ab49561bc1e3f53896",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/telemetry/__tests__/TraceContext.test.ts",
+      "sha256": "088087f752adbbd1cc2734cfe72982d39ca69effc94a17c4561afcda33dda52d",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/telemetry/__tests__/WalletInstrumentation.test.ts",
+      "sha256": "ac389995af33a3c3132442537f054a2766344706ff6e5af90807555f725b4de8",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/totp/__tests/totp.test.ts",
+      "sha256": "9b9e53b138ec04d87cc80f32cc57c5d0d1968be1d34a4827cc9a7696d9475f2b",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/__tests/Beef.test.ts",
+      "sha256": "f29358e5278a1bb9ef122916b17bd7c3c00b2fafbd030130ed36057b423e5c0f",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/__tests/BeefParty.additional.test.ts",
+      "sha256": "2205d4e654fb853ada2d55eb57fd6f93f7cca253b16f0ffdda53994ed9438033",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/__tests/Broadcaster.test.ts",
+      "sha256": "e531d2e7036848c210a774268f8f9c358dba9787e2334267b690b28070ea28a4",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/__tests/ChainTracker.test.ts",
+      "sha256": "0ad072bf3620fbeb70f34a704fe4c0d8353ca2140032c975146f0540b26df646",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/__tests/MerklePath.bench.test.ts",
+      "sha256": "3df8ede83c589a99832dc7b5e89828e2a036e49143a2dedd2b676f2edb520901",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/__tests/MerklePath.safeOffsets.test.ts",
+      "sha256": "408b8e18e95d8aa5d9e0552d730efa02e7d8d087f1f831aa17d40d79b68278c9",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/__tests/MerklePath.test.ts",
+      "sha256": "78b8bc0858a0d47917bbadd9418d8d6ddf8b1d9f9b1f062a80df92291dfcd063",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/__tests/Transaction.additional.test.ts",
+      "sha256": "8a5481380823611f996ee6de00e59f241c2f583fcf81bfcf4a5b0dddab696f30",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/__tests/Transaction.ef-cache.test.ts",
+      "sha256": "a2c1ccb63a3451fad8b0dfba6c277eb43454675dcef145a09cf793d9991d3caa",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/__tests/Transaction.performance.test.ts",
+      "sha256": "1fd1fbdf4e7765956c8c36aa7b402e79186e4946e02f990f22430195c08155c5",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/__tests/Transaction.test.ts",
+      "sha256": "c87fcf39b9bf0123eae0f90223d9b2a64cd650966716992df5b1d8484139aa35",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/__tests/Transaction.verifier.test.ts",
+      "sha256": "1d150d13686983aa1160a9c0ac76d1a4fa83b184cb2d574f62ca07e65441509f",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/__tests/TransactionEvidence.test.ts",
+      "sha256": "24ea2061e5d9a61fe5762346a08063e057d0aac31258f8b0eaf502c3a8568171",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/__tests/TransactionEvidenceCoordinator.test.ts",
+      "sha256": "ed19135ee48481a50454dcc2403f4cb3263375bbbfc32e9617806b1e482884d8",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/broadcasters/__tests/ARC.additional.test.ts",
+      "sha256": "566ea16ef44f80b56aef1f939be7e80231a70f71f814aa078d47293dec408f15",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/broadcasters/__tests/ARC.test.ts",
+      "sha256": "d595f67133f1637c1c1a7647bf51b18b10765f3b38e7a630fbdcb6a90bd0737b",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/broadcasters/__tests/Teranode.test.ts",
+      "sha256": "64fceb2f48a4559a99c54b443ddf6c20b48ccb56aa3cdf8463b4f0463f5dd67e",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/broadcasters/__tests/WhatsOnChainBroadcaster.test.ts",
+      "sha256": "3c6049f3f4f61fe4810478c5c17ebd638a13f45bef06359974bf89997f32b871",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/chaintrackers/__tests/BlockHeadersService.test.ts",
+      "sha256": "214e838d82ed5d399fa544289d6bc865cdcbc45baa77d4f12915bb4c2aceab93",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/chaintrackers/__tests/DefaultChainTracker.test.ts",
+      "sha256": "dd24677c5c90bbf11d5952558bf2ceeb34540f44fba6a92d47c181ff48c72f0b",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/chaintrackers/__tests/WhatsOnChain.additional.test.ts",
+      "sha256": "1a043f51f38c45de475d9b0e63d0236a7858e1ed02d1a8fc2c61c4924a9a7067",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/chaintrackers/__tests/WhatsOnChainChainTracker.test.ts",
+      "sha256": "7ebf84c052b9cd8b0f54d485fafa99a2e11d35818cfac9eb7614b3ca8c4b61e3",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/fee-models/__tests/LivePolicy.test.ts",
+      "sha256": "a841142085083bfb6ae247059cdb900da7a10bcf3af225ec0b302e1336d0f2bc",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/fee-models/__tests/SatoshisPerKilobyte.test.ts",
+      "sha256": "d40cf8b00d9ad2719ee36baafe39438067751faee09fc35d570119d27c18a9d7",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/http/__tests/BinaryFetchClient.test.ts",
+      "sha256": "7553af6a1bcbbc239115be5784bacd62d35d5c0e352386d4d207cd3f87cc4735",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/http/__tests/DefaultHttpClient.additional.test.ts",
+      "sha256": "77204d8b7e289d2ceb15c93ead0ec5a98d0d2076f5dc6a9fd03809fe972c6984",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/transaction/http/__tests/DefaultHttpClient.test.ts",
+      "sha256": "0ac972622b6a81b0c8c08d8266715a57a41ba307bc0180a0726d1d938d6339f5",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/__tests/BRC100ByteEncoding.property.test.ts",
+      "sha256": "6b7e93d4995760fc7deca259c7064edc673ccf80274388d049477c64f1dbe5c1",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/__tests/BRC100ByteEncoding.test.ts",
+      "sha256": "24ee07927c08a960f469eec1b1bb3689e6793852423e1a84cd870a192bedd43b",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/__tests/CachedKeyDeriver.test.ts",
+      "sha256": "66fbf8f800232d906dae3fe83736bbaf4875f45e24ae1f5b9283439d4624d698",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/__tests/KeyDeriver.test.ts",
+      "sha256": "c5514a636e0cbaeed504a51c1cc339c97318f725634dd314809191f7655c7c6c",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/__tests/ProtoWallet.additional.test.ts",
+      "sha256": "9310b7799b015d18597b69b98499af4dbf6c5c4838991a5a56235b6a8a049d0f",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/__tests/ProtoWallet.async-backend.test.ts",
+      "sha256": "4adaf0bda30c981c2babd525cc49ddf78e7d955f5cf8d45ae0cac245faf0dcef",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/__tests/ProtoWallet.native-hash.test.ts",
+      "sha256": "7b51570854e1f2ee5d100b63f3c987806227a17340cdd0a4f43aebbb121c6349",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/__tests/ProtoWallet.test.ts",
+      "sha256": "3072fd9ea05a53f2543dba06e05c26bf28ddb017f5c9f1526b77354b9a35a721",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/__tests/WERR.test.ts",
+      "sha256": "a2bd8daba765939f045a69ac1724eecd263b7028cef9c7d015e04a10e9612dd3",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/__tests/WalletClient.additional.test.ts",
+      "sha256": "80438bb6d2752cf3d398ddba712de4e84d3bda00d6f41b6800ad10e56256f868",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/__tests/WalletClient.substrate.test.ts",
+      "sha256": "e4963d24a521737758813721c69c07eb744616bdac00fb218524fa26b8f890d0",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/__tests/WalletClient.test.ts",
+      "sha256": "c52aaae313d0ab06b6dbf4ab1cb8adefa50292804e7061380b6f4de4cf561f29",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/__tests/WalletError.test.ts",
+      "sha256": "8b76fbf8d9936262f168ebdb8e789a2e55ac07de3a69357a83e2c99dda806999",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/__tests/validationHelpers.test.ts",
+      "sha256": "36a89c8e47e5e5e3e0687ed8d266d8cc5c3cbaf7e453a4870fe2b509cb856eab",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts",
+      "sha256": "a2de576348e729815664757c3d751603628bc350b7e121a48725e37121410164",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/substrates/__tests/HTTPWalletWire.test.ts",
+      "sha256": "1368c09abc5e17f5be2eb4e48bdf8f0b1f684aa4d0c986172e5d42b3c4913af0",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/substrates/__tests/ReactNativeWebView.test.ts",
+      "sha256": "d803831490f4fd1054e76389227168d2e34fdce966a55d1f31e8f06fac689b9c",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/substrates/__tests/WalletWire.integration.test.ts",
+      "sha256": "197df759cc9407dd1e6e4df94c68f57e9f87252c9be3649db5321014193c9a0f",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/substrates/__tests/XDM.test.ts",
+      "sha256": "611f8827508a966291b595b43e520160d2db79427ca09b3b22a7e7f221c11224",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/substrates/__tests/jsonByteEncoding.test.ts",
+      "sha256": "d12897f7adee255febd0213900b622f47a6544e8b4ecbbb96580e611f2dfe2df",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/substrates/__tests/toOriginHeader.test.ts",
+      "sha256": "f99156e55e7bed882d080996b085e1e0b9b1776f997c86da335bfd938a9dd296",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    },
+    {
+      "path": "src/wallet/substrates/__tests/window.CWI.test.ts",
+      "sha256": "6e9903f55861c1cdffff87f24e7f3b68efbf924189d0d52f01917ec41ab4e607",
+      "jestDefaultDiscovered": true,
+      "upstreamDefaultExclusion": null,
+      "migrationScope": "待实际调用映射确定",
+      "javaCaseMapping": "尚未建立"
+    }
+  ],
+  "supportFiles": [
+    {
+      "path": "src/auth/certificates/__tests/CompletedProtoWallet.ts",
+      "sha256": "9b8e26f475757dcbec54ae4cf324298ab36430f0380462d4971c1717cb165543"
+    },
+    {
+      "path": "src/compat/__tests/Mnemonic.vectors.ts",
+      "sha256": "b68a7e7428c06fb2b35c2308d4495daa751c5de925d8f5dbb876bca422291775"
+    },
+    {
+      "path": "src/primitives/__tests/BRC42.private.vectors.ts",
+      "sha256": "59e8558d1611da34b90403a136c491cd6d8c7a34499abf021ea7c053b192f2f2"
+    },
+    {
+      "path": "src/primitives/__tests/BRC42.public.vectors.ts",
+      "sha256": "3a9f9ef4de1279ad363e45f889c5bf2d81908139b92662a296eb9e5d1a6ea9ac"
+    },
+    {
+      "path": "src/primitives/__tests/BigNumber.fixtures.ts",
+      "sha256": "f11b2dd54dc36723122e3cbc84f58087312d8933736db39cdf0ed2551c7940aa"
+    },
+    {
+      "path": "src/primitives/__tests/DRBG.vectors.ts",
+      "sha256": "be1f1971750f3e4ac99bff7a18dce3f3f39ec263d35431eb9c6c5e692fb921b4"
+    },
+    {
+      "path": "src/primitives/__tests/PBKDF2.vectors.ts",
+      "sha256": "5be5ddf6adfaacd5f277891c57ade2e0fbb31f65a3cc3a9480c38f6d9a20e637"
+    },
+    {
+      "path": "src/primitives/__tests/SymmetricKey.vectors.ts",
+      "sha256": "40d59e7d98a7b3bc7e8b0270f34804aa17c5362cc82b89e571de51942d3ea800"
+    },
+    {
+      "path": "src/primitives/__tests/sighash.vectors.ts",
+      "sha256": "c03a7e69eb8cc1685efef848d1d808633aa7214a615c398d29dd4e1eacafb9b3"
+    },
+    {
+      "path": "src/remittance/__tests/examples.ts",
+      "sha256": "62d68325bfadf12f50a5530f78a614dd2cb37946c8fa5ddec8cd2f6986cbbea9"
+    },
+    {
+      "path": "src/script/__tests/fixtures/SOURCES.md",
+      "sha256": "eda61b4c30232e306466862959f7deee64bcdcf3163b3aed61216b708e127ae8"
+    },
+    {
+      "path": "src/script/__tests/fixtures/bitcoin-sv/script_tests.json",
+      "sha256": "a77f8b94412ef61e9ee59980ebc682a64212b47a16f06d87f809d91770ba496d"
+    },
+    {
+      "path": "src/script/__tests/fixtures/bitcoin-sv/sighash.json",
+      "sha256": "9c1afcaf81e8482f818345efa8a3f0610f6541b975023b58550d50ad2a557f63"
+    },
+    {
+      "path": "src/script/__tests/fixtures/bitcoin-sv/tx_invalid.json",
+      "sha256": "536a533f00714374d15fb24f601b989a87f9447a7a414a6532380e41c09c4fbe"
+    },
+    {
+      "path": "src/script/__tests/fixtures/bitcoin-sv/tx_valid.json",
+      "sha256": "20e42308ead38db645454c4def763288e8cef2e5c47a4d9088e53dc7fc01419d"
+    },
+    {
+      "path": "src/script/__tests/fixtures/teranode/script_tests.json",
+      "sha256": "3577a2e6e71e3356c5ec06eaa5fffb243e563eeef3946bd9b0285a54f0ad87f9"
+    },
+    {
+      "path": "src/script/__tests/fixtures/teranode/sighash.json",
+      "sha256": "ca2d6449c7cb98b8a83f3e18dc994d8227001d87adedd907b5e9a235114e283f"
+    },
+    {
+      "path": "src/script/__tests/fixtures/teranode/tx_invalid.json",
+      "sha256": "536a533f00714374d15fb24f601b989a87f9447a7a414a6532380e41c09c4fbe"
+    },
+    {
+      "path": "src/script/__tests/fixtures/teranode/tx_valid.json",
+      "sha256": "20e42308ead38db645454c4def763288e8cef2e5c47a4d9088e53dc7fc01419d"
+    },
+    {
+      "path": "src/script/__tests/script.invalid.vectors.ts",
+      "sha256": "17fa391879ffdc1238870a53641ff6a1f83fd27661e1a8de0bfc80476c4f042f"
+    },
+    {
+      "path": "src/script/__tests/script.valid.vectors.ts",
+      "sha256": "8e03b0a7f4613a81201c965ae98ca59004b85b859b8691433f29486ed448c1db"
+    },
+    {
+      "path": "src/script/__tests/sighashTestData.ts",
+      "sha256": "e1656df31fc4fd0f37d5f8ed82d73809001a8e3638589d5cae213eeb726cf1af"
+    },
+    {
+      "path": "src/script/__tests/spend.valid.vectors.ts",
+      "sha256": "b9e4f32ebcb58bb3d0f82e83751abcc97dbba49f6ab58d3d7e1b98af83a4223e"
+    },
+    {
+      "path": "src/transaction/__tests/bigtx.vectors.ts",
+      "sha256": "cc1e12a0fb34f12818b16a8670ddb26c80fb6f754ef43792e647507af76e4c6a"
+    },
+    {
+      "path": "src/transaction/__tests/bump.invalid.vectors.ts",
+      "sha256": "5c007c751e472f89b0915f1a036d7bd998c3ea8fca36b3cac9f4ee12beb213ce"
+    },
+    {
+      "path": "src/transaction/__tests/bump.valid.vectors.ts",
+      "sha256": "b4efb2dd2477a4642da60411a20d8d6086665fa9966775030b32d2d042fc5301"
+    },
+    {
+      "path": "src/transaction/__tests/tx.invalid.vectors.ts",
+      "sha256": "0b7a765ce44f50cf1b34e706eb684059009c99129a5c18956dd4a03eb55a614d"
+    },
+    {
+      "path": "src/transaction/__tests/tx.valid.vectors.ts",
+      "sha256": "d4bf15425842f67370a0bf17920c77b48ca12a11321cb2a1cfb151d5563698fb"
+    }
+  ]
+}

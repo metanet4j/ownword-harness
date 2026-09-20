@@ -23,13 +23,28 @@
     }
   ],
   "upstream": {
-    "path": "reference/go-sdk",
-    "url": "https://github.com/bsv-blockchain/go-sdk.git",
-    "commit": "aaa650f810e96349669b625ca68dac896dde8fd1"
+    "path": "reference/ts-stack",
+    "packagePath": "packages/sdk",
+    "url": "https://github.com/bsv-blockchain/ts-stack.git",
+    "commit": "f999e0c1aad9a7afd0cbadaaf23841d049af9d5a",
+    "package": "@bsv/sdk",
+    "version": "2.7.1"
   },
   "globalDefaults": {
     "java": "/usr/local/java/jdk1.8.0_181",
     "maven": "/home/haodev/.sdkman/candidates/maven/3.9.9"
   },
-  "baseBranch": "feature/java25"
+  "baseBranch": "feature/java25",
+  "tools": {
+    "javaHome": "/home/haodev/.sdkman/candidates/java/25.0.4.1-tem",
+    "maven": "/home/haodev/.sdkman/candidates/maven/3.9.16/bin/mvn",
+    "mavenSettings": "/home/haodev/.m2/metanet4j-settings.xml",
+    "node": "/home/haodev/.nvm/versions/node/v24.14.0/bin/node",
+    "nodeVersion": "v24.14.0",
+    "pnpmVersion": "10.33.2"
+  },
+  "globalCommandVersions": {
+    "node": "v24.14.0",
+    "pnpm": "11.23.0"
+  }
 }
