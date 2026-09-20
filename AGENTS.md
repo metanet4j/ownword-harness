@@ -28,22 +28,26 @@ OwnWord 设计能力架构见：
 
 `standard/design-skill-architecture.md`
 
-设计能力按照以下层级协作：
+设计任务先读取事实和版本设计依据，再加载设计 skill：
 
 ```text
-ownword-design-principles
+_task/system-design/spec/核心认知.md
+        ↓
+当前版本相关设计文档
         ↓
 baoyu-design
         ↓
 design-taste-frontend
         ↓
+high-end-visual-design（按需）
+        ↓
 react-spectrum
 ```
 
-- ownword-design-principles：定义 OwnWord 产品设计原则。
-- baoyu-design：提供设计方法和质量判断。
-- design-taste-frontend：负责视觉方向和前端设计执行。
-- react-spectrum：负责组件实现规范和交互一致性。
+- 核心认知是 OwnWord 产品、设计、原型、代码和测试的唯一事实来源。
+- 当前版本设计文档负责把核心认知落到页面、组件、流程、视觉方向和验收。
+- 外部 skill 只提供设计方法、视觉执行或组件实现能力，不得定义 OwnWord 产品事实。
+- 新增设计规则或 skill 前，先检查核心认知和当前版本设计文档，避免产生重复事实来源。
 
 ## 按场景加载规范
 
