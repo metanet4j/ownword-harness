@@ -15,7 +15,7 @@
     ]
   },
   "activeItem": null,
-  "nextItem": "migration-impl-hash-random",
+  "nextItem": "migration-impl-curve",
   "features": [
     {
       "id": "migration-env",
@@ -334,7 +334,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "primitives：哈希、HMAC、PBKDF2 与随机源",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "migration-impl-bignumber"
       ],
@@ -369,7 +369,15 @@
         "migration-api-values",
         "migration-api-hash-random"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标工程提交 9fbcc9d：完整 Hash/SHA1/SHA256/SHA512/RIPEMD160、SHA1/SHA256/SHA512 HMAC、PBKDF2-HMAC-SHA512、DRBG 与跨环境 Random 适配；六个原测试文件共 86 个 Java 用例。",
+        ".cache/evidence/hash-random-final-20260920-175813-4236q/：TS 原测试 6 文件 86/86 通过，零失败/跳过/todo；Java clean test 297/297（primitives 296，含此前后 210 与本项 86），零失败/错误/跳过。",
+        "test-map.json：新增 86 个原用例映射，累计 296 用例；siteReviews 962 个；86 个 Java 身份均在 Surefire 实际执行，TS 用例名/数量与冻结清单一致。",
+        "PBKDF2 13 个固定向量、RIPEMD160 纯 Java 实现、RFC 6979 HMAC-DRBG 与 SHA/HMAC 原向量全部通过；Random 环境分支按契约适配为可注入 Runtime，不伪装成 Node 浏览器分支。",
+        "node audit-api.cjs batches --batch migration-api-hash-random：292 声明结构复核通过；node test-audit.test.cjs：41/41 通过。",
+        "累计回归：Hex 8、BigNumber 构造 28、完整 BigNumber/模运算 174 在目标工程 clean test 中与前批证据重跑保持通过。",
+        "限制：本批未生成 86 个新用例的逐断言 TS/Java 原始值文件，summary.json 标记 formalAcceptance=false；无过滤 API check 与六模块 audit-tests.py check 仍保留完整范围，不能以本项局部通过代替整模块验收。"
+      ],
       "modules": [
         "primitives"
       ],
