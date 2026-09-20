@@ -23,7 +23,7 @@
 
 ## Next Session
 
-读取本目录 AGENTS.md、README.md、feature_list.json、测试契约、模块计划与脚本说明，运行 ./init.sh。将 migration-map 设为进行中，执行 P0：核对完整模块的全部 API/行为、建立 Java 用例/断言映射、审查跨目录测试和依赖、实现真实结果采集。AESGCM.man.test.ts 已纳入 primitives，必须执行，不可排除。已选模块内的 Schnorr、Secp256r1、BEEF、脚本模板、广播/链追踪等未被业务直接使用的功能也必须完整迁移。
+读取本目录 AGENTS.md、README.md、feature_list.json、测试契约、模块计划与脚本说明，运行 ./init.sh。先读模块计划的“文件和脚本的职责”及“按顺序执行”，将 migration-map 设为进行中，按第 2–4 步执行 P0：核对完整模块的全部 API/行为、建立 Java 用例/断言映射、审查跨目录测试和依赖、实现真实结果采集。完整模块 TS 测试运行入口、输入重放及两端采集尚待实现，不能把现有 check 当作运行器；落实后更新计划与 README 中的实际命令。AESGCM.man.test.ts 已纳入 primitives，必须执行，不可排除。已选模块内的 Schnorr、Secp256r1、BEEF、脚本模板、广播/链追踪等未被业务直接使用的功能也必须完整迁移。
 
 `python3 audit-tests.py check` 会重新清点上游并比对冻结清单；当前预期报 4,275 个未映射项。不要为让门禁变绿删改清单、自动填写 reviewed，或把 `compare` 调试命令当作最终验收。Jest 注册数不覆盖测试体内每条循环/属性样本，需结合 AST 位置人工复核和运行结果采集；原始报告及其校验值必须匹配。
 
