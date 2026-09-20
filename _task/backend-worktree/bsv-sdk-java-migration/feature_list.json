@@ -162,11 +162,12 @@
       ],
       "evidence": [
         "进行中，不满足完成条件：api-catalog.json 已清点 133 个 API 源文件、3576 项声明、1016 个导出入口；其中 266 个入口来自根 mod.ts。",
-        "api-map.json 已复核 hex 的 3 项设计映射；其余 3573 项未映射，未创建 Java 功能实现或复刻测试。",
-        "清点纳入 auth/certificates/index.ts 真实公开导出的 __tests/CompletedProtoWallet.ts；源码文件 SHA-256 与冻结 moduleFiles 全部匹配。",
-        "node test-audit.test.cjs：35/35 工具用例通过；API 清点、辅助类导出、根入口和同时删除清单/映射的反例已有证据；不计入 SDK 用例。",
-        "Reader、hex、AES 的固定 TS 小输入探针保存在 .cache/evidence/api-*-observations.json，只确认记录的实际结果，不充抵完整 TS 基线或 Java 对照。",
-        "下一步先解决 primitives 的数值/undefined、字节视图及内部状态类型，再逐项完成六模块 Java 接口和平台行为；scopeReview 仍 pending。"
+        "api-map.json 已复核 9 个完整文件、371 项设计映射；其余 3205 项未映射，未创建 Java 功能实现或复刻测试。",
+        "源码清点分母与测试范围未变；数值/容器、BigNumber 与 ReductionContext/MontgomoryMethod/Mersenne/K256 的 API 契约已登记，含别名、nominal length 和错误时机。",
+        "api-values-probe.mjs 在 Buffer 存在/缺失两种环境分别实际观察 26 组输入；本次两组结果相同，不能推断全输入或 Java 等价；实际值在 .cache/evidence/api-values*-observations.json。",
+        "用户已授权 WUA-ZERO-CAPACITY 最小修复并单列差异/额外回归；授权引用在 api-map.approvedDifferences，尚未实施修复或 Java 测试，不能扩大为其他修复。",
+        "API 检查器最近一次自测 35/35 通过，本轮未修改；当前映射集合和契约引用核对见 .cache/evidence/api-value-mapping-check.json，正式 API check 应拒绝剩余 3205 项。",
+        "下一步复核 Hash、HMAC/DRBG、Random、AESGCM 等基础密码学文件，再逐项完成六模块接口与平台行为；scopeReview 仍 pending。"
       ],
       "scopeRef": "scope"
     },
@@ -297,7 +298,8 @@
         "扩展现有检查器，核对预期断言/样本、TS 运行轨迹、Java 运行轨迹和映射；从实际输入产物复核校验值。",
         "增加少一个循环样本、两端同时少登记断言、陈旧报告、字节差异及无测试执行等反例，保留 RED/GREEN。",
         "落实报告命令和执行顺序；clean test、重新打包或提交后按当前源码版本重新采集，不混用报告。",
-        "补齐 feature_list 状态约束：唯一 ID、有效依赖、无环、activeItem 与状态一致，未完成依赖不能进入后续实施。"
+        "补齐 feature_list 状态约束：唯一 ID、有效依赖、无环、activeItem 与状态一致，未完成依赖不能进入后续实施。",
+        "按 api-map.approvedDifferences 的授权 ID 和契约精确登记行为差异，原始上游用例与 Java 额外回归分开计数；验证未授权输入、不同方法或扩大范围的豁免仍被拒绝。"
       ],
       "outputs": [
         "增强后的 audit-tests.py 与检查器自测",

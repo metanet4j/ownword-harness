@@ -2,8 +2,3503 @@
   "upstreamCommit": "f999e0c1aad9a7afd0cbadaaf23841d049af9d5a",
   "contractDocument": "doc/完整模块与API映射-20260920-122800.md",
   "reviewStatus": "pending",
-  "note": "API 清点不等于 Java API 映射；在源码行为与 Java 类型逐项复核后填写 entries，不自动填 reviewed。",
+  "note": "逐项源码复核后的 Java 设计映射，不代表实现或测试通过。WriterUint8Array 零容量扩容按用户授权做最小修复，差异见契约；未映射项继续阻止 P0 完成。",
   "entries": [
+    {
+      "id": "src/primitives/BigNumber.ts#class:BigNumber:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "public class BigNumber",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:26",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#constructor:BigNumber.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#constructor",
+      "javaSignature": "public BigNumber(Object number, Object base, Object endian)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:242",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#get:BigNumber._computedWordsArray:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#computedWordsArray",
+      "javaSignature": "private List<Double> computedWordsArray()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:132",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#get:BigNumber.length:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#getLength",
+      "javaSignature": "public double getLength()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:190",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#get:BigNumber.negative:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#getNegative",
+      "javaSignature": "public double getNegative()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:115",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#get:BigNumber.words:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#getWords",
+      "javaSignature": "public List<Double> getWords()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:148",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._bigIntToStringInBase:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:371",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._bigNumberFromSigned:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1130",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._computeMod:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1118",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._finishInitialization:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:444",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._getMinimalHex:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:532",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._getSignedValue:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:766",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._iaddn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#_iaddn",
+      "javaSignature": "public BigNumber _iaddn(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1082",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._initFromHexString:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:316",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._initFromNonHexString:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:342",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._initFromString:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:279",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._initializeState:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:438",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._invmp:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#_invmp",
+      "javaSignature": "public BigNumber _invmp(BigNumber p)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1722",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._iop:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:844",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._iuop:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:820",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._paddedZero:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:600",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._parseBaseString:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:387",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._parseBaseWord:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:422",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._setValueFromSigned:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:770",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._toHexString:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:537",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._uop_new:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:857",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber._zeroPaddedChunk:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:609",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.abs:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#abs",
+      "javaSignature": "public BigNumber abs()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1101",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.add:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#add",
+      "javaSignature": "public BigNumber add(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:915",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.addn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#addn",
+      "javaSignature": "public BigNumber addn(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1091",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.and:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#and",
+      "javaSignature": "public BigNumber and(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:870",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.andln:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#andln",
+      "javaSignature": "public double andln(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1266",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.assert:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:454",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.bincn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#bincn",
+      "javaSignature": "public BigNumber bincn(double bit)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1270",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.bitLength:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#bitLength",
+      "javaSignature": "public double bitLength()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:700",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.byteLength:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#byteLength",
+      "javaSignature": "public double byteLength()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:759",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.clone:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#clone",
+      "javaSignature": "public BigNumber clone()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:503",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.cmp:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#cmp",
+      "javaSignature": "public double cmp(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1291",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.cmpn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#cmpn",
+      "javaSignature": "public double cmpn(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1279",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.copy:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#copy",
+      "javaSignature": "public void copy(BigNumber dest)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:491",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.div:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#div",
+      "javaSignature": "public BigNumber div(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1137",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.divRound:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#divRound",
+      "javaSignature": "public BigNumber divRound(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1149",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.divmod:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#divmod",
+      "javaSignature": "public Map<String, BigNumber> divmod(BigNumber num, Object mode, Object positive)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1105",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.divn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#divn",
+      "javaSignature": "public BigNumber divn(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1194",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.egcd:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#egcd",
+      "javaSignature": "public Map<String, BigNumber> egcd(BigNumber p)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1198",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.eq:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#eq",
+      "javaSignature": "public boolean eq(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1338",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.eqn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#eqn",
+      "javaSignature": "public boolean eqn(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1335",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.expand:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#expand",
+      "javaSignature": "public BigNumber expand(double size)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:509",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.forceRed:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#forceRed",
+      "javaSignature": "public BigNumber forceRed(ReductionContext ctx)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1351",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.fromBits:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#fromBits",
+      "javaSignature": "public static BigNumber fromBits(double bits, Object strict)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1589",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.fromHex:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#fromHex",
+      "javaSignature": "public static BigNumber fromHex(String hex, Object endian)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1429",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.fromJSON:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#fromJSON",
+      "javaSignature": "public static BigNumber fromJSON(String str)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1472",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.fromNumber:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#fromNumber",
+      "javaSignature": "public static BigNumber fromNumber(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1484",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.fromRed:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#fromRed",
+      "javaSignature": "public BigNumber fromRed()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1347",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.fromScriptNum:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#fromScriptNum",
+      "javaSignature": "public static BigNumber fromScriptNum(List<?> num, Object requireMinimal, Object maxNumSize)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1678",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.fromSm:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#fromSm",
+      "javaSignature": "public static BigNumber fromSm(List<?> bytes, Object endian)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1510",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.fromString:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#fromString",
+      "javaSignature": "public static BigNumber fromString(String str, Object base)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1497",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.fromTwos:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#fromTwos",
+      "javaSignature": "public BigNumber fromTwos(double width)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:794",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.gcd:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#gcd",
+      "javaSignature": "public BigNumber gcd(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1228",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.gt:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#gt",
+      "javaSignature": "public boolean gt(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1314",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.gte:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#gte",
+      "javaSignature": "public boolean gte(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1320",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.gten:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#gten",
+      "javaSignature": "public boolean gten(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1317",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.gtn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#gtn",
+      "javaSignature": "public boolean gtn(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1311",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.iabs:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#iabs",
+      "javaSignature": "public BigNumber iabs()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1097",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.iadd:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#iadd",
+      "javaSignature": "public BigNumber iadd(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:911",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.iaddn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#iaddn",
+      "javaSignature": "public BigNumber iaddn(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1076",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.iand:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#iand",
+      "javaSignature": "public BigNumber iand(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:851",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.idivn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#idivn",
+      "javaSignature": "public BigNumber idivn(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1187",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.imaskn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#imaskn",
+      "javaSignature": "public BigNumber imaskn(double bits)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1060",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.imul:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#imul",
+      "javaSignature": "public BigNumber imul(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:938",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.imuln:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#imuln",
+      "javaSignature": "public BigNumber imuln(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:946",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.ineg:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#ineg",
+      "javaSignature": "public BigNumber ineg()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:813",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.initArray:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:475",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.initNumber:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:458",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.inotn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#inotn",
+      "javaSignature": "public BigNumber inotn(double width)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:885",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.inspect:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#inspect",
+      "javaSignature": "public String inspect()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:528",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.invm:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#invm",
+      "javaSignature": "public BigNumber invm(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1251",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.ior:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#ior",
+      "javaSignature": "public BigNumber ior(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:848",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.isBN:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#isBN",
+      "javaSignature": "public static boolean isBN(Object num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:201",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.isEven:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#isEven",
+      "javaSignature": "public boolean isEven()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1260",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.isNeg:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#isNeg",
+      "javaSignature": "public boolean isNeg()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:807",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.isOdd:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#isOdd",
+      "javaSignature": "public boolean isOdd()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1263",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.isZero:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#isZero",
+      "javaSignature": "public boolean isZero()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1276",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.ishln:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#ishln",
+      "javaSignature": "public BigNumber ishln(Object bits)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1016",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.ishrn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#ishrn",
+      "javaSignature": "public BigNumber ishrn(Object bits, Object hint, Object extended)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1037",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.isqr:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#isqr",
+      "javaSignature": "public BigNumber isqr()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:964",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.isub:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#isub",
+      "javaSignature": "public BigNumber isub(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:920",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.isubn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#isubn",
+      "javaSignature": "public BigNumber isubn(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1085",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.iuand:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#iuand",
+      "javaSignature": "public BigNumber iuand(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:838",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.iuor:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#iuor",
+      "javaSignature": "public BigNumber iuor(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:835",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.iushln:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#iushln",
+      "javaSignature": "public BigNumber iushln(Object bits)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1008",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.iushrn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#iushrn",
+      "javaSignature": "public BigNumber iushrn(Object bits, Object hint, Object extended)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1021",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.iuxor:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#iuxor",
+      "javaSignature": "public BigNumber iuxor(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:841",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.ixor:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#ixor",
+      "javaSignature": "public BigNumber ixor(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:854",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.lt:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#lt",
+      "javaSignature": "public boolean lt(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1326",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.lte:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#lte",
+      "javaSignature": "public boolean lte(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1332",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.lten:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#lten",
+      "javaSignature": "public boolean lten(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1329",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.ltn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#ltn",
+      "javaSignature": "public boolean ltn(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1323",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.maskn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#maskn",
+      "javaSignature": "public BigNumber maskn(double bits)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1073",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.max:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#max",
+      "javaSignature": "public static BigNumber max(BigNumber left, BigNumber right)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:219",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.min:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#min",
+      "javaSignature": "public static BigNumber min(BigNumber left, BigNumber right)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:231",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.mod:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#mod",
+      "javaSignature": "public BigNumber mod(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1141",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.modrn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#modrn",
+      "javaSignature": "public double modrn(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1178",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.move:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#move",
+      "javaSignature": "public static void move(BigNumber dest, BigNumber src)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:497",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.mul:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#mul",
+      "javaSignature": "public BigNumber mul(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:929",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.mulTo:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#mulTo",
+      "javaSignature": "public BigNumber mulTo(BigNumber num, BigNumber out)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1762",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.muln:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#muln",
+      "javaSignature": "public BigNumber muln(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:952",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.neg:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#neg",
+      "javaSignature": "public BigNumber neg()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:810",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.normSign:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#normSign",
+      "javaSignature": "public BigNumber normSign()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:522",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.normalizeNonNegativeBigInt:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:998",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.notn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#notn",
+      "javaSignature": "public BigNumber notn(double width)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:897",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.or:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#or",
+      "javaSignature": "public BigNumber or(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:863",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.pow:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#pow",
+      "javaSignature": "public BigNumber pow(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:972",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.redAdd:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#redAdd",
+      "javaSignature": "public BigNumber redAdd(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1355",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.redIAdd:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#redIAdd",
+      "javaSignature": "public BigNumber redIAdd(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1359",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.redIMul:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#redIMul",
+      "javaSignature": "public BigNumber redIMul(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1380",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.redISqr:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#redISqr",
+      "javaSignature": "public BigNumber redISqr()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1390",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.redISub:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#redISub",
+      "javaSignature": "public BigNumber redISub(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1367",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.redInvm:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#redInvm",
+      "javaSignature": "public BigNumber redInvm()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1400",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.redMul:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#redMul",
+      "javaSignature": "public BigNumber redMul(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1375",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.redNeg:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#redNeg",
+      "javaSignature": "public BigNumber redNeg()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1405",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.redPow:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#redPow",
+      "javaSignature": "public BigNumber redPow(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1410",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.redShl:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#redShl",
+      "javaSignature": "public BigNumber redShl(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1371",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.redSqr:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#redSqr",
+      "javaSignature": "public BigNumber redSqr()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1385",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.redSqrt:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#redSqrt",
+      "javaSignature": "public BigNumber redSqrt()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1395",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.redSub:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#redSub",
+      "javaSignature": "public BigNumber redSub(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1363",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.setn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#setn",
+      "javaSignature": "public BigNumber setn(double bit, Object val)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:900",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.shln:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#shln",
+      "javaSignature": "public BigNumber shln(Object bits)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1042",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.shrn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#shrn",
+      "javaSignature": "public BigNumber shrn(Object bits)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1048",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.sqr:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#sqr",
+      "javaSignature": "public BigNumber sqr()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:955",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.strip:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#strip",
+      "javaSignature": "public BigNumber strip()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:518",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.sub:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#sub",
+      "javaSignature": "public BigNumber sub(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:924",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.subn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#subn",
+      "javaSignature": "public BigNumber subn(double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1094",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.testn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#testn",
+      "javaSignature": "public boolean testn(double bit)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1055",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toArray:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#toArray",
+      "javaSignature": "public List<Double> toArray(Object endian, Object length)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:678",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toArrayLikeGeneric:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:652",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toBaseString:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部行为由 BigNumber 承接；无需增加公开方法",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:571",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toBigInt:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#toBigInt",
+      "javaSignature": "public BigInteger toBigInt()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:637",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toBitArray:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#toBitArray",
+      "javaSignature": "public static List<Double> toBitArray(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:713",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toBitArray:2",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#toBitArray",
+      "javaSignature": "public List<Double> toBitArray()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:727",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toBits:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#toBits",
+      "javaSignature": "public double toBits()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1624",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toHex:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#toHex",
+      "javaSignature": "public String toHex(Object byteLength)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1446",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toJSON:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#toJSON",
+      "javaSignature": "public String toJSON()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:647",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toNumber:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#toNumber",
+      "javaSignature": "public double toNumber()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:624",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toRed:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#toRed",
+      "javaSignature": "public BigNumber toRed(ReductionContext ctx)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-red",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1342",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toScriptNum:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#toScriptNum",
+      "javaSignature": "public List<Double> toScriptNum()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1702",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toSm:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#toSm",
+      "javaSignature": "public List<Double> toSm(Object endian)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1546",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toString:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#toString",
+      "javaSignature": "public String toString(Object base, Object padding)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:561",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.toTwos:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#toTwos",
+      "javaSignature": "public BigNumber toTwos(double width)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:782",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.uand:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#uand",
+      "javaSignature": "public BigNumber uand(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:874",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.ucmp:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#ucmp",
+      "javaSignature": "public double ucmp(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1302",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.umod:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#umod",
+      "javaSignature": "public BigNumber umod(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1145",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.uor:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#uor",
+      "javaSignature": "public BigNumber uor(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:867",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.ushln:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#ushln",
+      "javaSignature": "public BigNumber ushln(Object bits)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1045",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.ushrn:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#ushrn",
+      "javaSignature": "public BigNumber ushrn(Object bits)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:1051",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.uxor:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#uxor",
+      "javaSignature": "public BigNumber uxor(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:881",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.xor:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#xor",
+      "javaSignature": "public BigNumber xor(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-bits",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:877",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#method:BigNumber.zeroBits:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#zeroBits",
+      "javaSignature": "public double zeroBits()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:742",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber.MAX_IMULN_ARG:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#MAX_IMULN_ARG",
+      "javaSignature": "private static final double MAX_IMULN_ARG",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:90",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber.MAX_NOMINAL_WORD_LENGTH:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#MAX_NOMINAL_WORD_LENGTH",
+      "javaSignature": "private static final double MAX_NOMINAL_WORD_LENGTH",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:95",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber.MAX_NUMBER_CONSTRUCTOR_MAG_BIGINT:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#MAX_NUMBER_CONSTRUCTOR_MAG_BIGINT",
+      "javaSignature": "private static final BigInteger MAX_NUMBER_CONSTRUCTOR_MAG_BIGINT",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:91",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber.MAX_SAFE_INTEGER_BIGINT:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#MAX_SAFE_INTEGER_BIGINT",
+      "javaSignature": "private static final BigInteger MAX_SAFE_INTEGER_BIGINT",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:88",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber.MIN_SAFE_INTEGER_BIGINT:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#MIN_SAFE_INTEGER_BIGINT",
+      "javaSignature": "private static final BigInteger MIN_SAFE_INTEGER_BIGINT",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:89",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber.WORD_MASK:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#WORD_MASK",
+      "javaSignature": "private static final BigInteger WORD_MASK",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:87",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber.WORD_SIZE_BIGINT:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#WORD_SIZE_BIGINT",
+      "javaSignature": "private static final BigInteger WORD_SIZE_BIGINT",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:86",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber._magnitude:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#_magnitude",
+      "javaSignature": "private BigInteger _magnitude",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:97",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber._nominalWordLength:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#_nominalWordLength",
+      "javaSignature": "private double _nominalWordLength",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:99",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber._sign:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#_sign",
+      "javaSignature": "private int _sign",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:98",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber.groupBases:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#groupBases",
+      "javaSignature": "public static final List<Double> groupBases",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:70",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber.groupSizes:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#groupSizes",
+      "javaSignature": "public static final List<Double> groupSizes",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:62",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber.red:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#red",
+      "javaSignature": "public ReductionContext red",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:106",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber.wordSize:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#wordSize",
+      "javaSignature": "public static final double wordSize",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:85",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#property:BigNumber.zeros:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#zeros",
+      "javaSignature": "public static final List<String> zeros",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:30",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#set:BigNumber.negative:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#setNegative",
+      "javaSignature": "public void setNegative(double value)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:122",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#set:BigNumber.words:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#setWords",
+      "javaSignature": "public void setWords(List<?> words)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-state",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:170",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#type:CompareResult:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#cmp",
+      "javaSignature": "double /* 仅 -1、+0、1 */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-arithmetic",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:6",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#variable:BufferCtor:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部编码路径：由所属 Java 类承接，不暴露 Node Buffer 对象",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-values",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:8",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#variable:CAN_USE_BUFFER:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber",
+      "javaSignature": "内部编码路径：由所属 Java 类承接，不暴露 Node Buffer 对象",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-values",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:9",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/BigNumber.ts#variable:HEX_CHAR_TO_VALUE:1",
+      "java": "com.metanet4j.bsv.primitives.BigNumber#HEX_CHAR_TO_VALUE",
+      "javaSignature": "private static final byte[] HEX_CHAR_TO_VALUE",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-bn-conversion",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BigNumber.ts:10",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/K256.ts#class:K256:1",
+      "java": "com.metanet4j.bsv.primitives.K256",
+      "javaSignature": "public class K256 extends Mersenne",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-k256",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/K256.ts:15",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/K256.ts#constructor:K256.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.K256#constructor",
+      "javaSignature": "public K256()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-k256",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/K256.ts:25",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/K256.ts#method:K256.imulK:1",
+      "java": "com.metanet4j.bsv.primitives.K256#imulK",
+      "javaSignature": "public BigNumber imulK(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-k256",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/K256.ts:115",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/K256.ts#method:K256.split:1",
+      "java": "com.metanet4j.bsv.primitives.K256#split",
+      "javaSignature": "public void split(BigNumber input, BigNumber out)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-k256",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/K256.ts:42",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Mersenne.ts#class:Mersenne:1",
+      "java": "com.metanet4j.bsv.primitives.Mersenne",
+      "javaSignature": "public class Mersenne",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-mersenne",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Mersenne.ts:14",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Mersenne.ts#constructor:Mersenne.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.Mersenne#constructor",
+      "javaSignature": "public Mersenne(String name, String p)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-mersenne",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Mersenne.ts:29",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Mersenne.ts#method:Mersenne._tmp:1",
+      "java": "com.metanet4j.bsv.primitives.Mersenne",
+      "javaSignature": "内部 tmp 初始化，由 Mersenne 承接",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-mersenne",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Mersenne.ts:46",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Mersenne.ts#method:Mersenne.imulK:1",
+      "java": "com.metanet4j.bsv.primitives.Mersenne#imulK",
+      "javaSignature": "public BigNumber imulK(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-mersenne",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Mersenne.ts:116",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Mersenne.ts#method:Mersenne.ireduce:1",
+      "java": "com.metanet4j.bsv.primitives.Mersenne#ireduce",
+      "javaSignature": "public BigNumber ireduce(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-mersenne",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Mersenne.ts:64",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Mersenne.ts#method:Mersenne.split:1",
+      "java": "com.metanet4j.bsv.primitives.Mersenne#split",
+      "javaSignature": "public void split(BigNumber input, BigNumber out)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-mersenne",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Mersenne.ts:100",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Mersenne.ts#property:Mersenne.k:1",
+      "java": "com.metanet4j.bsv.primitives.Mersenne#k",
+      "javaSignature": "public BigNumber k",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-mersenne",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Mersenne.ts:17",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Mersenne.ts#property:Mersenne.n:1",
+      "java": "com.metanet4j.bsv.primitives.Mersenne#n",
+      "javaSignature": "public double n",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-mersenne",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Mersenne.ts:18",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Mersenne.ts#property:Mersenne.name:1",
+      "java": "com.metanet4j.bsv.primitives.Mersenne#name",
+      "javaSignature": "public String name",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-mersenne",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Mersenne.ts:15",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Mersenne.ts#property:Mersenne.p:1",
+      "java": "com.metanet4j.bsv.primitives.Mersenne#p",
+      "javaSignature": "public BigNumber p",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-mersenne",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Mersenne.ts:16",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Mersenne.ts#property:Mersenne.tmp:1",
+      "java": "com.metanet4j.bsv.primitives.Mersenne#tmp",
+      "javaSignature": "private final BigNumber tmp",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-mersenne",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Mersenne.ts:19",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/MontgomoryMethod.ts#class:MontgomoryMethod:1",
+      "java": "com.metanet4j.bsv.primitives.MontgomoryMethod",
+      "javaSignature": "public class MontgomoryMethod extends ReductionContext",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-montgomorymethod",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/MontgomoryMethod.ts:23",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/MontgomoryMethod.ts#constructor:MontgomoryMethod.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.MontgomoryMethod#constructor",
+      "javaSignature": "public MontgomoryMethod(Object m)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-montgomorymethod",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/MontgomoryMethod.ts:34",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/MontgomoryMethod.ts#method:MontgomoryMethod.convertFrom:1",
+      "java": "com.metanet4j.bsv.primitives.MontgomoryMethod#convertFrom",
+      "javaSignature": "public BigNumber convertFrom(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-montgomorymethod",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/MontgomoryMethod.ts:77",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/MontgomoryMethod.ts#method:MontgomoryMethod.convertTo:1",
+      "java": "com.metanet4j.bsv.primitives.MontgomoryMethod#convertTo",
+      "javaSignature": "public BigNumber convertTo(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-montgomorymethod",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/MontgomoryMethod.ts:62",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/MontgomoryMethod.ts#method:MontgomoryMethod.imul:1",
+      "java": "com.metanet4j.bsv.primitives.MontgomoryMethod#imul",
+      "javaSignature": "public BigNumber imul(BigNumber a, BigNumber b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-montgomorymethod",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/MontgomoryMethod.ts:95",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/MontgomoryMethod.ts#method:MontgomoryMethod.invm:1",
+      "java": "com.metanet4j.bsv.primitives.MontgomoryMethod#invm",
+      "javaSignature": "public BigNumber invm(BigNumber a)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-montgomorymethod",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/MontgomoryMethod.ts:155",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/MontgomoryMethod.ts#method:MontgomoryMethod.mul:1",
+      "java": "com.metanet4j.bsv.primitives.MontgomoryMethod#mul",
+      "javaSignature": "public BigNumber mul(BigNumber a, BigNumber b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-montgomorymethod",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/MontgomoryMethod.ts:128",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/MontgomoryMethod.ts#property:MontgomoryMethod.minv:1",
+      "java": "com.metanet4j.bsv.primitives.MontgomoryMethod#minv",
+      "javaSignature": "public BigNumber minv",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-montgomorymethod",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/MontgomoryMethod.ts:28",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/MontgomoryMethod.ts#property:MontgomoryMethod.r2:1",
+      "java": "com.metanet4j.bsv.primitives.MontgomoryMethod#r2",
+      "javaSignature": "public BigNumber r2",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-montgomorymethod",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/MontgomoryMethod.ts:26",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/MontgomoryMethod.ts#property:MontgomoryMethod.r:1",
+      "java": "com.metanet4j.bsv.primitives.MontgomoryMethod#r",
+      "javaSignature": "public BigNumber r",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-montgomorymethod",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/MontgomoryMethod.ts:25",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/MontgomoryMethod.ts#property:MontgomoryMethod.rinv:1",
+      "java": "com.metanet4j.bsv.primitives.MontgomoryMethod#rinv",
+      "javaSignature": "public BigNumber rinv",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-montgomorymethod",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/MontgomoryMethod.ts:27",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/MontgomoryMethod.ts#property:MontgomoryMethod.shift:1",
+      "java": "com.metanet4j.bsv.primitives.MontgomoryMethod#shift",
+      "javaSignature": "public double shift",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-montgomorymethod",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/MontgomoryMethod.ts:24",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#class:ReaderUint8Array:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array",
+      "javaSignature": "public class ReaderUint8Array",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:7",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#constructor:ReaderUint8Array.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#constructor",
+      "javaSignature": "public ReaderUint8Array(Object bin, Object pos)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:22",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.eof:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#eof",
+      "javaSignature": "public boolean eof()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:34",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.makeReader:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#makeReader",
+      "javaSignature": "public static Object makeReader(Object bin, Object pos)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:12",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.read:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#read",
+      "javaSignature": "public ByteView read(Object len)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:38",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readInt16BE:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readInt16BE",
+      "javaSignature": "public double readInt16BE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:99",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readInt16LE:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readInt16LE",
+      "javaSignature": "public double readInt16LE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:111",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readInt32BE:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readInt32BE",
+      "javaSignature": "public double readInt32BE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:128",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readInt32LE:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readInt32LE",
+      "javaSignature": "public double readInt32LE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:145",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readInt64LEBn:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readInt64LEBn",
+      "javaSignature": "public BigNumber readInt64LEBn()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:164",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readInt8:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readInt8",
+      "javaSignature": "public Object readInt8()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:86",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readReverse:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readReverse",
+      "javaSignature": "public ByteView readReverse(Object len)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:71",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readUInt16BE:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readUInt16BE",
+      "javaSignature": "public double readUInt16BE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:93",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readUInt16LE:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readUInt16LE",
+      "javaSignature": "public double readUInt16LE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:105",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readUInt32BE:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readUInt32BE",
+      "javaSignature": "public double readUInt32BE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:118",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readUInt32LE:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readUInt32LE",
+      "javaSignature": "public double readUInt32LE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:134",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readUInt64BEBn:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readUInt64BEBn",
+      "javaSignature": "public BigNumber readUInt64BEBn()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:151",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readUInt64LEBn:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readUInt64LEBn",
+      "javaSignature": "public BigNumber readUInt64LEBn()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:158",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readUInt8:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readUInt8",
+      "javaSignature": "public Object readUInt8()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:80",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readVarInt:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readVarInt",
+      "javaSignature": "public ByteView readVarInt()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:195",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readVarIntBn:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readVarIntBn",
+      "javaSignature": "public BigNumber readVarIntBn()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:209",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readVarIntNum:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readVarIntNum",
+      "javaSignature": "public Object readVarIntNum(Object signed)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:175",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.readView:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#readView",
+      "javaSignature": "public ByteView readView(Object len)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:50",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.remaining:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#remaining",
+      "javaSignature": "public double remaining()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:67",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#method:ReaderUint8Array.skip:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#skip",
+      "javaSignature": "public void skip(double len)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:60",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#property:ReaderUint8Array.bin:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#bin",
+      "javaSignature": "public ByteView bin",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:8",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#property:ReaderUint8Array.length:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#length",
+      "javaSignature": "private final double length",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:10",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReaderUint8Array.ts#property:ReaderUint8Array.pos:1",
+      "java": "com.metanet4j.bsv.primitives.ReaderUint8Array#pos",
+      "javaSignature": "public double pos",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReaderUint8Array.ts:9",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#class:ReductionContext:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext",
+      "javaSignature": "public class ReductionContext",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:25",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#constructor:ReductionContext.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#constructor",
+      "javaSignature": "public ReductionContext(Object m)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:39",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.add:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#add",
+      "javaSignature": "public BigNumber add(BigNumber a, BigNumber b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:162",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.assert:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext",
+      "javaSignature": "内部断言，由 ReductionContext 承接",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:63",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.convertFrom:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#convertFrom",
+      "javaSignature": "public BigNumber convertFrom(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:520",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.convertTo:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#convertTo",
+      "javaSignature": "public BigNumber convertTo(BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:500",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.iadd:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#iadd",
+      "javaSignature": "public BigNumber iadd(BigNumber a, BigNumber b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:198",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.imod:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#imod",
+      "javaSignature": "public BigNumber imod(BigNumber a)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:120",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.imul:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#imul",
+      "javaSignature": "public BigNumber imul(BigNumber a, BigNumber b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:296",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.invm:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#invm",
+      "javaSignature": "public BigNumber invm(BigNumber a)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:441",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.isqr:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#isqr",
+      "javaSignature": "public BigNumber isqr(BigNumber a)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:335",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.isub:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#isub",
+      "javaSignature": "public BigNumber isub(BigNumber a, BigNumber b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:251",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.mul:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#mul",
+      "javaSignature": "public BigNumber mul(BigNumber a, BigNumber b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:315",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.neg:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#neg",
+      "javaSignature": "public BigNumber neg(BigNumber a)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:140",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.pow:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#pow",
+      "javaSignature": "public BigNumber pow(BigNumber a, BigNumber num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:465",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.shl:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#shl",
+      "javaSignature": "public BigNumber shl(BigNumber a, double num)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:275",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.sqr:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#sqr",
+      "javaSignature": "public BigNumber sqr(BigNumber a)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:352",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.sqrt:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#sqrt",
+      "javaSignature": "public BigNumber sqrt(BigNumber a)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:369",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.sub:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#sub",
+      "javaSignature": "public BigNumber sub(BigNumber a, BigNumber b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:225",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.verify1:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#verify1",
+      "javaSignature": "public void verify1(BigNumber a)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:78",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#method:ReductionContext.verify2:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#verify2",
+      "javaSignature": "public void verify2(BigNumber a, BigNumber b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:96",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#property:ReductionContext.m:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#m",
+      "javaSignature": "public BigNumber m",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:27",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/ReductionContext.ts#property:ReductionContext.prime:1",
+      "java": "com.metanet4j.bsv.primitives.ReductionContext#prime",
+      "javaSignature": "public Mersenne prime",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-reductioncontext",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ReductionContext.ts:26",
+        "src/primitives/__tests/ReductionContext.test.ts",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#class:WriterUint8Array:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array",
+      "javaSignature": "public class WriterUint8Array",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:12",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#constructor:WriterUint8Array.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#constructor",
+      "javaSignature": "public WriterUint8Array(Object bufs, Object initialCapacity)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:17",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.ensureCapacity:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#ensureCapacity",
+      "javaSignature": "private void ensureCapacity(double needed)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writer-zero-capacity",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:68",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json",
+        ".cache/evidence/api-writer-zero-capacity-observation.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.getLength:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#getLength",
+      "javaSignature": "public double getLength()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:35",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.reserve:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#reserve",
+      "javaSignature": "public void reserve(double additionalBytes)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:61",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.reset:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#reset",
+      "javaSignature": "public void reset()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:200",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.toArray:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#toArray",
+      "javaSignature": "public List<Double> toArray()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:49",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.toUint8Array:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#toUint8Array",
+      "javaSignature": "public ByteView toUint8Array()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:42",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.toUint8ArrayZeroCopy:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#toUint8ArrayZeroCopy",
+      "javaSignature": "public ByteView toUint8ArrayZeroCopy()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:56",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.write:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#write",
+      "javaSignature": "public WriterUint8Array write(Object chunk)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:81",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeInt16BE:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeInt16BE",
+      "javaSignature": "public WriterUint8Array writeInt16BE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:132",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeInt16LE:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeInt16LE",
+      "javaSignature": "public WriterUint8Array writeInt16LE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:127",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeInt32BE:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeInt32BE",
+      "javaSignature": "public WriterUint8Array writeInt32BE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:162",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeInt32LE:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeInt32LE",
+      "javaSignature": "public WriterUint8Array writeInt32LE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:157",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeInt8:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeInt8",
+      "javaSignature": "public WriterUint8Array writeInt8(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:106",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeReverse:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeReverse",
+      "javaSignature": "public WriterUint8Array writeReverse(Object buf)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:89",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeUInt16BE:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeUInt16BE",
+      "javaSignature": "public WriterUint8Array writeUInt16BE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:119",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeUInt16LE:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeUInt16LE",
+      "javaSignature": "public WriterUint8Array writeUInt16LE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:111",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeUInt32BE:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeUInt32BE",
+      "javaSignature": "public WriterUint8Array writeUInt32BE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:147",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeUInt32LE:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeUInt32LE",
+      "javaSignature": "public WriterUint8Array writeUInt32LE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:137",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeUInt64BEBn:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeUInt64BEBn",
+      "javaSignature": "public WriterUint8Array writeUInt64BEBn(BigNumber bn)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:167",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeUInt64LE:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeUInt64LE",
+      "javaSignature": "public WriterUint8Array writeUInt64LE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:179",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeUInt64LEBn:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeUInt64LEBn",
+      "javaSignature": "public WriterUint8Array writeUInt64LEBn(BigNumber bn)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:173",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeUInt8:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeUInt8",
+      "javaSignature": "public WriterUint8Array writeUInt8(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:99",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeVarIntBn:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeVarIntBn",
+      "javaSignature": "public WriterUint8Array writeVarIntBn(BigNumber bn)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:191",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.writeVarIntNum:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#writeVarIntNum",
+      "javaSignature": "public WriterUint8Array writeVarIntNum(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:185",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#property:WriterUint8Array.buffer:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#buffer",
+      "javaSignature": "private ByteView buffer",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:13",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#property:WriterUint8Array.capacity:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#capacity",
+      "javaSignature": "private double capacity",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:15",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#property:WriterUint8Array.pos:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#pos",
+      "javaSignature": "private double pos",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:14",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/WriterUint8Array.ts#type:WriterChunk:1",
+      "java": "com.metanet4j.bsv.primitives.WriterUint8Array#write",
+      "javaSignature": "Object chunk /* List<?> 或 ByteView */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-values",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/WriterUint8Array.ts:4",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
     {
       "id": "src/primitives/hex.ts#function:assertValidHex:1",
       "java": "com.metanet4j.bsv.primitives.Hex#assertValidHex",
@@ -36,6 +3531,990 @@
         "src/primitives/hex.ts:4",
         ".cache/evidence/api-hex-observations.json"
       ]
+    },
+    {
+      "id": "src/primitives/utils.ts#class:Reader:1",
+      "java": "com.metanet4j.bsv.primitives.Reader",
+      "javaSignature": "public class Reader",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:621",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#class:Writer:1",
+      "java": "com.metanet4j.bsv.primitives.Writer",
+      "javaSignature": "public class Writer",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:390",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#constructor:Reader.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#constructor",
+      "javaSignature": "public Reader(Object bin, Object pos)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:626",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#constructor:Writer.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#constructor",
+      "javaSignature": "public Writer(Object bufs)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:394",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:base64CharacterValue:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#base64CharacterValue",
+      "javaSignature": "private static double base64CharacterValue(double codePoint, double index)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-encoding",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:157",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:encode:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#encode",
+      "javaSignature": "public static Object encode(List<?> arr, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-encoding",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:219",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:fromBase58:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#fromBase58",
+      "javaSignature": "public static List<Double> fromBase58(Object str)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-base58",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:271",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:fromBase58Check:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#fromBase58Check",
+      "javaSignature": "public static Map<String, Object> fromBase58Check(Object str, Object enc, Object prefixLength)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-base58",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:366",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:hexToArray:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#hexToArray",
+      "javaSignature": "private static List<Double> hexToArray(Object msg)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-encoding",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:116",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:hexToUint8Array:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#hexToUint8Array",
+      "javaSignature": "public static ByteView hexToUint8Array(Object msg)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-encoding",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:124",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:minimallyEncode:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#minimallyEncode",
+      "javaSignature": "public static List<Object> minimallyEncode(List<Object> buf)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-script",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:794",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:normalizeBase64:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#normalizeBase64",
+      "javaSignature": "private static String normalizeBase64(Object msg)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-encoding",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:141",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:toArray:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#toArray",
+      "javaSignature": "public static List<Object> toArray(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-encoding",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:89",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:toBase58:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#toBase58",
+      "javaSignature": "public static String toBase58(List<?> bin)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-base58",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:313",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:toBase58Check:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#toBase58Check",
+      "javaSignature": "public static String toBase58Check(List<?> bin, Object prefix)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-base58",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:353",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:toHex:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#toHex",
+      "javaSignature": "public static String toHex(Object bytes)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-encoding",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:59",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:toSafeString:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#toSafeString",
+      "javaSignature": "public static String toSafeString(Object value, Object fallback)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-diagnostics",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:16",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:toUTF8:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#toUTF8",
+      "javaSignature": "public static String toUTF8(Object bytes)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-encoding",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:209",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:toUint8Array:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#toUint8Array",
+      "javaSignature": "public static ByteView toUint8Array(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-encoding",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:75",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function-variable:zero2:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#zero2",
+      "javaSignature": "public static String zero2(String word)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-encoding",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:40",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function:base64ToArray:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#base64ToArray",
+      "javaSignature": "public static List<Double> base64ToArray(Object msg)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-encoding",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:166",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function:constantTimeEquals:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#constantTimeEquals",
+      "javaSignature": "public static boolean constantTimeEquals(Object a, Object b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-script",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:860",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function:toBase64:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#toBase64",
+      "javaSignature": "public static String toBase64(Object bytes)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-encoding",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:241",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function:utf8ToArray:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#utf8ToArray",
+      "javaSignature": "private static List<Double> utf8ToArray(String str)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-encoding",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:200",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#function:verifyNotNull:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#verifyNotNull",
+      "javaSignature": "public static <T> T verifyNotNull(T value, Object errorMessage)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-diagnostics",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:852",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.eof:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#eof",
+      "javaSignature": "public boolean eof()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:632",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.read:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#read",
+      "javaSignature": "public List<Object> read(Object len)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:636",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readInt16BE:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readInt16BE",
+      "javaSignature": "public double readInt16BE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:671",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readInt16LE:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readInt16LE",
+      "javaSignature": "public double readInt16LE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:683",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readInt32BE:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readInt32BE",
+      "javaSignature": "public double readInt32BE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:700",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readInt32LE:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readInt32LE",
+      "javaSignature": "public double readInt32LE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:717",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readInt64LEBn:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readInt64LEBn",
+      "javaSignature": "public BigNumber readInt64LEBn()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:736",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readInt8:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readInt8",
+      "javaSignature": "public Object readInt8()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:658",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readReverse:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readReverse",
+      "javaSignature": "public List<Object> readReverse(Object len)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:643",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readUInt16BE:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readUInt16BE",
+      "javaSignature": "public double readUInt16BE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:665",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readUInt16LE:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readUInt16LE",
+      "javaSignature": "public double readUInt16LE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:677",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readUInt32BE:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readUInt32BE",
+      "javaSignature": "public double readUInt32BE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:690",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readUInt32LE:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readUInt32LE",
+      "javaSignature": "public double readUInt32LE()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:706",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readUInt64BEBn:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readUInt64BEBn",
+      "javaSignature": "public BigNumber readUInt64BEBn()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:723",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readUInt64LEBn:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readUInt64LEBn",
+      "javaSignature": "public BigNumber readUInt64LEBn()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:730",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readUInt8:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readUInt8",
+      "javaSignature": "public Object readUInt8()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:652",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readVarInt:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readVarInt",
+      "javaSignature": "public List<Object> readVarInt()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:765",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readVarIntBn:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readVarIntBn",
+      "javaSignature": "public BigNumber readVarIntBn()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:779",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Reader.readVarIntNum:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#readVarIntNum",
+      "javaSignature": "public Object readVarIntNum(Object signed)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:745",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.getLength:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#getLength",
+      "javaSignature": "public double getLength()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:400",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.toArray:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#toArray",
+      "javaSignature": "public List<Object> toArray()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:414",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.toHex:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#toHex",
+      "javaSignature": "public String toHex()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:433",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.toUint8Array:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#toUint8Array",
+      "javaSignature": "public ByteView toUint8Array()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:404",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.varIntBn:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#varIntBn",
+      "javaSignature": "public static List<Double> varIntBn(BigNumber bn)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:594",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.varIntNum:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#varIntNum",
+      "javaSignature": "public static List<Double> varIntNum(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:551",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.write:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#write",
+      "javaSignature": "public Writer write(Object chunk)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:439",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeInt16BE:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeInt16BE",
+      "javaSignature": "public Writer writeInt16BE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:472",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeInt16LE:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeInt16LE",
+      "javaSignature": "public Writer writeInt16LE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:484",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeInt32BE:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeInt32BE",
+      "javaSignature": "public Writer writeInt32BE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:498",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeInt32LE:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeInt32LE",
+      "javaSignature": "public Writer writeInt32LE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:512",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeInt8:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeInt8",
+      "javaSignature": "public Writer writeInt8(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:460",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeReverse:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeReverse",
+      "javaSignature": "public Writer writeReverse(List<?> buf)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:445",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeUInt16BE:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeUInt16BE",
+      "javaSignature": "public Writer writeUInt16BE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:464",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeUInt16LE:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeUInt16LE",
+      "javaSignature": "public Writer writeUInt16LE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:476",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeUInt32BE:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeUInt32BE",
+      "javaSignature": "public Writer writeUInt32BE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:488",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeUInt32LE:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeUInt32LE",
+      "javaSignature": "public Writer writeUInt32LE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:502",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeUInt64BEBn:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeUInt64BEBn",
+      "javaSignature": "public Writer writeUInt64BEBn(BigNumber bn)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:516",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeUInt64LE:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeUInt64LE",
+      "javaSignature": "public Writer writeUInt64LE(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:528",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeUInt64LEBn:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeUInt64LEBn",
+      "javaSignature": "public Writer writeUInt64LEBn(BigNumber bn)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:522",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeUInt8:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeUInt8",
+      "javaSignature": "public Writer writeUInt8(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:453",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeVarIntBn:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeVarIntBn",
+      "javaSignature": "public Writer writeVarIntBn(BigNumber bn)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:545",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#method:Writer.writeVarIntNum:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#writeVarIntNum",
+      "javaSignature": "public Writer writeVarIntNum(double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:539",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#property:Reader.bin:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#bin",
+      "javaSignature": "public List<Object> bin",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:622",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#property:Reader.length:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#length",
+      "javaSignature": "private final double length",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:624",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#property:Reader.pos:1",
+      "java": "com.metanet4j.bsv.primitives.Reader#pos",
+      "javaSignature": "public double pos",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-readers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:623",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#property:Writer.bufs:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#bufs",
+      "javaSignature": "public List<Object> bufs",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:391",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#property:Writer.length:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#length",
+      "javaSignature": "private double length",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writers",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:392",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#type:WriterChunk:1",
+      "java": "com.metanet4j.bsv.primitives.Writer#write",
+      "javaSignature": "Object chunk /* List<?> 或 ByteView */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-values",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:388",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#variable:BufferCtor:1",
+      "java": "com.metanet4j.bsv.primitives.Utils",
+      "javaSignature": "内部编码路径：由所属 Java 类承接，不暴露 Node Buffer 对象",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-values",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:9",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#variable:CAN_USE_BUFFER:1",
+      "java": "com.metanet4j.bsv.primitives.Utils",
+      "javaSignature": "内部编码路径：由所属 Java 类承接，不暴露 Node Buffer 对象",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-values",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:10",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#variable:HEX_BYTE_STRINGS:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#HEX_BYTE_STRINGS",
+      "javaSignature": "private static final String[] HEX_BYTE_STRINGS",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-internals",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:54",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#variable:HEX_CHAR_TO_VALUE:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#HEX_CHAR_TO_VALUE",
+      "javaSignature": "private static final byte[] HEX_CHAR_TO_VALUE",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-internals",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:107",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#variable:HEX_DIGITS:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#HEX_DIGITS",
+      "javaSignature": "private static final String HEX_DIGITS",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-internals",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:53",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#variable:OverflowInt64:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#OverflowInt64",
+      "javaSignature": "private static final BigNumber OverflowInt64",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-internals",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:837",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#variable:OverflowUint64:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#OverflowUint64",
+      "javaSignature": "private static final BigNumber OverflowUint64",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-internals",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:838",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/utils.ts#variable:base58chars:1",
+      "java": "com.metanet4j.bsv.primitives.Utils#base58chars",
+      "javaSignature": "private static final String base58chars",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-internals",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/utils.ts:264",
+        ".cache/evidence/api-values-observations.json",
+        ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    }
+  ],
+  "approvedDifferences": [
+    {
+      "id": "WUA-ZERO-CAPACITY",
+      "apiId": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.ensureCapacity:1",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-writer-zero-capacity",
+      "status": "authorized-not-implemented",
+      "authorization": {
+        "source": "本会话用户明确回复",
+        "decision": "允许最小修复并单列差异（推荐）"
+      }
     }
   ]
 }
