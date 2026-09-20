@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""运行完整 Hex 原测试及 Java 测试，对照真实调用；仅为内部实施项，不能验收整模块。"""
+"""运行 Hex，可累计加入 BigNumber 构造原测试；对照真实调用，不能验收整模块。"""
 import argparse
 import base64
 from datetime import datetime, timezone
@@ -37,6 +37,7 @@ def identity():
         'upstreamCommit': commit, 'javaRevision': audit.java_revision(),
         'files': {name: audit.digest(TASK / name) for name in (
             'module-tests.json', 'test-map.json', 'run-hex-parity.py', 'capture-hex.cjs',
+            'capture-bn-constructor.cjs', 'bn-constructor-parity.py',
             'audit-tests.py', 'ts-offline-guard.cjs', 'verify.sh', 'mvn.sh', 'pnpm.sh', 'env.sh', 'workspace.json')}
     }
 
@@ -108,11 +109,24 @@ def verify(folder):
         audit.require(audit.digest(folder / name) == digest, f'原始证据已变化：{name}')
     audit.require(not (folder / 'network.jsonl').read_text().strip(), '存在真实网络调用')
     result = compare(folder)
+    if manifest.get('includeBnConstructor'):
+        bn = compare_bn(folder)
+        result = {'scope': 'Hex + BigNumber 构造内部实施项，非完整模块验收', 'formalAcceptance': False,
+                  'files': 2, 'cases': result['cases'] + bn['cases'], 'javaCases': result['javaCases'] + bn['javaCases'],
+                  'comparedAssertions': result['comparedAssertions'] + bn['comparedAssertions'],
+                  'reviewedSites': result['reviewedSites'] + bn['reviewedSites'], 'byFile': {'hex': result, 'bnConstructor': bn}}
     write(folder / 'summary.json', result)
     print(json.dumps({'evidence': str(folder), **result}, ensure_ascii=False))
 
 
-def run():
+def compare_bn(folder):
+    spec = importlib.util.spec_from_file_location('bn_parity', TASK / 'bn-constructor-parity.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.compare(folder, SimpleNamespace(audit=audit, TASK=TASK, write=write))
+
+
+def run(include_bn=False):
     sdk, snapshot = identity()
     folder = Path(tempfile.mkdtemp(prefix='hex-parity-' + datetime.now().strftime('%Y%m%d-%H%M%S') + '-', dir=TASK / '.cache/evidence'))
     print(f'Hex 对照证据：{folder}', flush=True)
@@ -122,17 +136,27 @@ def run():
         [str(TASK / 'pnpm.sh'), '--dir', str(sdk), 'exec', 'jest', '--runInBand', '--watchman=false', '--runTestsByPath', TEST,
          '--setupFilesAfterEnv', str(TASK / 'ts-offline-guard.cjs'), str(TASK / 'capture-hex.cjs'), '--json', '--outputFile=' + str(folder / 'ts.jest.json')],
         [str(TASK / 'verify.sh'), 'bsv-test']]
-    env = {**os.environ, 'MIGRATION_HEX_OBSERVATIONS': str(folder / 'ts.calls.jsonl'), 'MIGRATION_NETWORK_LOG': str(folder / 'network.jsonl')}
-    write(folder / 'manifest.json', {'status': 'running', 'identity': snapshot, 'commands': commands})
-    for label, command in zip(('ts', 'java'), commands):
+    labels = ['ts', 'java']
+    if include_bn:
+        (folder / 'ts.bn.calls.jsonl').touch()
+        commands.insert(1, [str(TASK / 'pnpm.sh'), '--dir', str(sdk), 'exec', 'jest', '--runInBand', '--watchman=false',
+            '--runTestsByPath', 'src/primitives/__tests/BigNumber.constructor.test.ts', '--setupFilesAfterEnv',
+            str(TASK / 'ts-offline-guard.cjs'), str(TASK / 'capture-bn-constructor.cjs'), '--json', '--outputFile=' + str(folder / 'bn.jest.json')])
+        labels.insert(1, 'bn')
+    env = {**os.environ, 'MIGRATION_HEX_OBSERVATIONS': str(folder / 'ts.calls.jsonl'),
+           'MIGRATION_BN_OBSERVATIONS': str(folder / 'ts.bn.calls.jsonl'), 'MIGRATION_NETWORK_LOG': str(folder / 'network.jsonl')}
+    write(folder / 'manifest.json', {'status': 'running', 'identity': snapshot, 'commands': commands, 'includeBnConstructor': include_bn})
+    for label, command in zip(labels, commands):
         with (folder / f'{label}.log').open('w') as log:
             subprocess.run(command, cwd=TASK, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
     target = TASK / 'metanet4j-bsv-sdk/target'
     shutil.copyfile(target / 'upstream-observations/hex.tsv', folder / 'java.calls.tsv')
+    if include_bn:
+        shutil.copyfile(target / 'upstream-observations/bn-constructor.jsonl', folder / 'java.bn.calls.jsonl')
     for report in (target / 'surefire-reports').glob('TEST-*.xml'):
         shutil.copyfile(report, folder / report.name)
     audit.require(identity()[1] == snapshot, '运行期间源码或工具变化，证据无效')
-    write(folder / 'manifest.json', {'status': 'captured', 'identity': snapshot, 'commands': commands,
+    write(folder / 'manifest.json', {'status': 'captured', 'identity': snapshot, 'commands': commands, 'includeBnConstructor': include_bn,
         'capturedAt': datetime.now(timezone.utc).isoformat(), 'reports': {p.name: audit.digest(p) for p in folder.iterdir() if p.name != 'manifest.json'}})
     verify(folder)
 
@@ -140,8 +164,9 @@ def run():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--verify', type=Path, help='复核已有运行批次，源码与版本必须仍相同')
+    parser.add_argument('--bn-constructor', action='store_true', help='累计对照 Hex 与完整 BigNumber 构造原文件')
     args = parser.parse_args()
     if args.verify:
         verify(args.verify.resolve())
     else:
-        run()
+        run(args.bn_constructor)

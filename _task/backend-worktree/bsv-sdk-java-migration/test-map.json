@@ -107,6 +107,366 @@
         "src/primitives/__tests/hex.test.ts:53:7:assertion",
         "src/primitives/__tests/hex.test.ts:54:7:assertion"
       ]
+    },
+    {
+      "id": "b38c5b36723396e7b35d5b9d598c5ade03182a82420b52e16f805178b92744d2",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsOneLimbNumber"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:6:7:assertion"
+      ]
+    },
+    {
+      "id": "2d453cd7751d100f5d5d50b6b18547c7c106c383263205555b0f60ec9ba466db",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsTwoLimbNumber"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:10:7:assertion"
+      ]
+    },
+    {
+      "id": "d6143ca1e320b45d960f992d8eaf1ce3033abcf73fa23df3ba450b94a1e66b66",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "accepts52Bits"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:15:7:assertion"
+      ]
+    },
+    {
+      "id": "35c85626ca75e1c8b111382488aa2bdcd37e1809f7d68cc730140ffbffebd61b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsMaxSafeInteger"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:20:7:assertion"
+      ]
+    },
+    {
+      "id": "7e9f34c14cff3a023cc6e66ef613a2b22269013c6570540bfee09caf290a664d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "rejectsUnsafeInteger"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:26:7:assertion"
+      ]
+    },
+    {
+      "id": "20b17746da02fdfe5f5dd5164fa626d5f4eb46d83a283c0bc3a737f970f6b725",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsLittleEndianNumber"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:32:7:assertion"
+      ]
+    },
+    {
+      "id": "11cba34cf1243e52e13d64ba586072e75ed7954ce977a36815b29c7cc2b0b01d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsHexString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:40:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:43:7:assertion"
+      ]
+    },
+    {
+      "id": "7a5b97f0579ba943299ed07b97cf0f9c1364d03487ace5c82dfbfa1aa38e5f99",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsHexBaseAlias"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:49:7:assertion"
+      ]
+    },
+    {
+      "id": "7d9e0a7dd6e4010a08e26c8ec1f7139f6349f47a8cd541e2b2c23f002618b234",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsSpacedHexString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:54:7:assertion"
+      ]
+    },
+    {
+      "id": "de473312074eab63ca9e79f14502875f6170052b2fba99d2143e6a7d618bdfdc",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsLongHexString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:61:7:assertion"
+      ]
+    },
+    {
+      "id": "f22a09112f46b6d1ce4657cf25c2bcf4f0ffce5a4aa1b7d7133cc854164d9439",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsPositiveDecimalString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:65:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:66:7:assertion"
+      ]
+    },
+    {
+      "id": "38c715c5c1c96bde3a49058abdb7ad90d13b5e6a92e089234caa720bf8131a4b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsNegativeDecimalString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:72:7:assertion"
+      ]
+    },
+    {
+      "id": "1cf9f1170352499d69b402ee5ce8503e47ae37c5288574b8c631f445d3dd2ec0",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsLongDecimalString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:79:7:assertion"
+      ]
+    },
+    {
+      "id": "43c646d1f16ea44a52e4fc45346038b091908685e89ba03dc4f4437736defe2f",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsBinaryString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:84:7:assertion"
+      ]
+    },
+    {
+      "id": "aafc99ef8b0295bf88f3cb8cd184d2b6e64c65b2cdffcff583458d040641e4f7",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsBase36String"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:89:7:assertion"
+      ]
+    },
+    {
+      "id": "f21863053f5a7d271cf76e45f7b25e9d3e7c2f83708fbab62759b042e1d3c19e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "preserves26BitWords"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:97:7:assertion"
+      ]
+    },
+    {
+      "id": "26705d18b5026d634a68afcd5959533244ead5464a4730e286de394d9d0f199e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsLittleEndianHexString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:101:7:assertion"
+      ]
+    },
+    {
+      "id": "1b4b233f92bf9dad170aef7fe156a8ff212e35f3d492c46a4adbc1a9dfdace4d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "preservesLeadingZerosWhenReadingLittleEndianHex"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:107:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:108:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:109:7:assertion"
+      ]
+    },
+    {
+      "id": "d7a6cf1ff19373017b048b4d928ebe47c9a60eaf102b58d9839c8679f55326f7",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "rejectsInvalidDecimalCharacters"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:113:7:assertion"
+      ]
+    },
+    {
+      "id": "369d0f5a337291612e767488e50ac865d573263ede7fd37afd3b699b77bb02cb",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "rejectsDecimalPoints"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:119:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:123:7:assertion"
+      ]
+    },
+    {
+      "id": "1747e86f2f4ced4edd72adea4caac0a82ce86db8ea29790d79dd6b38f756e977",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "rejectsAllNonHexSamples"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:139:9:assertion#1",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:139:9:assertion#2",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:139:9:assertion#3",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:139:9:assertion#4",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:139:9:assertion#5",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:139:9:assertion#6",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:139:9:assertion#7",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:139:9:assertion#8"
+      ]
+    },
+    {
+      "id": "10ed02b5ccdc89691cbf1d8446ead3da4ec8aa2c3d57086e15291ba2b557eca1",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsEmptyArray"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:148:7:assertion"
+      ]
+    },
+    {
+      "id": "7da7adf212ffae3dcb1718b0737f7d48968cbdf36f4962ddc78b428c0beaf748",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "importsAndExportsBigEndianArray"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:152:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:153:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:154:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:155:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:156:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:159:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:162:7:assertion"
+      ]
+    },
+    {
+      "id": "a0119df440f16b1d6218eab58b72e90d6678e4e7021d27bde3a38e9981048d2e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "importsLittleEndianArray"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:168:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:169:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:170:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:173:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:176:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:179:7:assertion",
+        "src/primitives/__tests/BigNumber.constructor.test.ts:182:7:assertion"
+      ]
+    },
+    {
+      "id": "f5b426a2d35ad9baddba2a1b552828dc09fc817e689811bb95fe46020c8c9236",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsEndianAsSecondArgument"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:188:7:assertion"
+      ]
+    },
+    {
+      "id": "42ddcb3973d49562ad580b63f5886a5460921296611beaee7a9d2b2514970e9f",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "acceptsEmptyBufferAsOriginalString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:196:7:assertion"
+      ]
+    },
+    {
+      "id": "4f9b3d09a6e8a810051b0e7132f08ce30cb81e92631342297d45b3d44f0b5d7f",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "importsAndExportsBufferAsHexString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:202:7:assertion"
+      ]
+    },
+    {
+      "id": "8ecfd58c82e9c82a0058d4642ad7523c19c047cc51e991923b4c4d6c3f975ccc",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.BigNumberConstructorTest",
+          "name": "importsBufferAsLittleEndianArray"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts:211:7:assertion"
+      ]
     }
   ],
   "siteReviews": [
@@ -325,6 +685,598 @@
         "40b3323fb738a1af517f29f0baa621f2378f556db8372a357fd39d04035830d4"
       ],
       "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:5:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b38c5b36723396e7b35d5b9d598c5ade03182a82420b52e16f805178b92744d2"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsOneLimbNumber，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:6:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b38c5b36723396e7b35d5b9d598c5ade03182a82420b52e16f805178b92744d2"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsOneLimbNumber，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:9:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "2d453cd7751d100f5d5d50b6b18547c7c106c383263205555b0f60ec9ba466db"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsTwoLimbNumber，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:10:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "2d453cd7751d100f5d5d50b6b18547c7c106c383263205555b0f60ec9ba466db"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsTwoLimbNumber，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:13:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "d6143ca1e320b45d960f992d8eaf1ce3033abcf73fa23df3ba450b94a1e66b66"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.accepts52Bits，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:15:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "d6143ca1e320b45d960f992d8eaf1ce3033abcf73fa23df3ba450b94a1e66b66"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.accepts52Bits，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:18:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "35c85626ca75e1c8b111382488aa2bdcd37e1809f7d68cc730140ffbffebd61b"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsMaxSafeInteger，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:20:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "35c85626ca75e1c8b111382488aa2bdcd37e1809f7d68cc730140ffbffebd61b"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsMaxSafeInteger，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:23:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "7e9f34c14cff3a023cc6e66ef613a2b22269013c6570540bfee09caf290a664d"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.rejectsUnsafeInteger，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:26:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7e9f34c14cff3a023cc6e66ef613a2b22269013c6570540bfee09caf290a664d"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.rejectsUnsafeInteger，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:31:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "20b17746da02fdfe5f5dd5164fa626d5f4eb46d83a283c0bc3a737f970f6b725"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsLittleEndianNumber，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:32:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "20b17746da02fdfe5f5dd5164fa626d5f4eb46d83a283c0bc3a737f970f6b725"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsLittleEndianNumber，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:39:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "11cba34cf1243e52e13d64ba586072e75ed7954ce977a36815b29c7cc2b0b01d"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsHexString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:40:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "11cba34cf1243e52e13d64ba586072e75ed7954ce977a36815b29c7cc2b0b01d"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsHexString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:43:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "11cba34cf1243e52e13d64ba586072e75ed7954ce977a36815b29c7cc2b0b01d"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsHexString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:48:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "7a5b97f0579ba943299ed07b97cf0f9c1364d03487ace5c82dfbfa1aa38e5f99"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsHexBaseAlias，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:49:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7a5b97f0579ba943299ed07b97cf0f9c1364d03487ace5c82dfbfa1aa38e5f99"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsHexBaseAlias，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:52:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "7d9e0a7dd6e4010a08e26c8ec1f7139f6349f47a8cd541e2b2c23f002618b234"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsSpacedHexString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:54:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7d9e0a7dd6e4010a08e26c8ec1f7139f6349f47a8cd541e2b2c23f002618b234"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsSpacedHexString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:59:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "de473312074eab63ca9e79f14502875f6170052b2fba99d2143e6a7d618bdfdc"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsLongHexString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:61:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "de473312074eab63ca9e79f14502875f6170052b2fba99d2143e6a7d618bdfdc"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsLongHexString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:64:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "f22a09112f46b6d1ce4657cf25c2bcf4f0ffce5a4aa1b7d7133cc854164d9439"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsPositiveDecimalString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:65:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f22a09112f46b6d1ce4657cf25c2bcf4f0ffce5a4aa1b7d7133cc854164d9439"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsPositiveDecimalString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:66:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f22a09112f46b6d1ce4657cf25c2bcf4f0ffce5a4aa1b7d7133cc854164d9439"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsPositiveDecimalString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:71:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "38c715c5c1c96bde3a49058abdb7ad90d13b5e6a92e089234caa720bf8131a4b"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsNegativeDecimalString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:72:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "38c715c5c1c96bde3a49058abdb7ad90d13b5e6a92e089234caa720bf8131a4b"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsNegativeDecimalString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:77:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "1cf9f1170352499d69b402ee5ce8503e47ae37c5288574b8c631f445d3dd2ec0"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsLongDecimalString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:79:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1cf9f1170352499d69b402ee5ce8503e47ae37c5288574b8c631f445d3dd2ec0"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsLongDecimalString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:82:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "43c646d1f16ea44a52e4fc45346038b091908685e89ba03dc4f4437736defe2f"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsBinaryString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:84:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "43c646d1f16ea44a52e4fc45346038b091908685e89ba03dc4f4437736defe2f"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsBinaryString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:87:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "aafc99ef8b0295bf88f3cb8cd184d2b6e64c65b2cdffcff583458d040641e4f7"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsBase36String，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:89:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "aafc99ef8b0295bf88f3cb8cd184d2b6e64c65b2cdffcff583458d040641e4f7"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsBase36String，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:94:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "f21863053f5a7d271cf76e45f7b25e9d3e7c2f83708fbab62759b042e1d3c19e"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.preserves26BitWords，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:97:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f21863053f5a7d271cf76e45f7b25e9d3e7c2f83708fbab62759b042e1d3c19e"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.preserves26BitWords，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:100:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "26705d18b5026d634a68afcd5959533244ead5464a4730e286de394d9d0f199e"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsLittleEndianHexString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:101:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "26705d18b5026d634a68afcd5959533244ead5464a4730e286de394d9d0f199e"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsLittleEndianHexString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:106:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "1b4b233f92bf9dad170aef7fe156a8ff212e35f3d492c46a4adbc1a9dfdace4d"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.preservesLeadingZerosWhenReadingLittleEndianHex，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:107:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1b4b233f92bf9dad170aef7fe156a8ff212e35f3d492c46a4adbc1a9dfdace4d"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.preservesLeadingZerosWhenReadingLittleEndianHex，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:108:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1b4b233f92bf9dad170aef7fe156a8ff212e35f3d492c46a4adbc1a9dfdace4d"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.preservesLeadingZerosWhenReadingLittleEndianHex，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:109:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1b4b233f92bf9dad170aef7fe156a8ff212e35f3d492c46a4adbc1a9dfdace4d"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.preservesLeadingZerosWhenReadingLittleEndianHex，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:112:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "d7a6cf1ff19373017b048b4d928ebe47c9a60eaf102b58d9839c8679f55326f7"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.rejectsInvalidDecimalCharacters，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:113:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "d7a6cf1ff19373017b048b4d928ebe47c9a60eaf102b58d9839c8679f55326f7"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.rejectsInvalidDecimalCharacters，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:118:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "369d0f5a337291612e767488e50ac865d573263ede7fd37afd3b699b77bb02cb"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.rejectsDecimalPoints，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:119:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "369d0f5a337291612e767488e50ac865d573263ede7fd37afd3b699b77bb02cb"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.rejectsDecimalPoints，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:123:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "369d0f5a337291612e767488e50ac865d573263ede7fd37afd3b699b77bb02cb"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.rejectsDecimalPoints，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:128:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "1747e86f2f4ced4edd72adea4caac0a82ce86db8ea29790d79dd6b38f756e977"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.rejectsAllNonHexSamples，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:139:9:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1747e86f2f4ced4edd72adea4caac0a82ce86db8ea29790d79dd6b38f756e977"
+      ],
+      "note": "保留原 forEach 的 8 个非法字符串，每个样本单独采集，断言 ID 使用 #1..#8，不覆盖重复记录。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:147:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "10ed02b5ccdc89691cbf1d8446ead3da4ec8aa2c3d57086e15291ba2b557eca1"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsEmptyArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:148:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "10ed02b5ccdc89691cbf1d8446ead3da4ec8aa2c3d57086e15291ba2b557eca1"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsEmptyArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:151:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "7da7adf212ffae3dcb1718b0737f7d48968cbdf36f4962ddc78b428c0beaf748"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsAndExportsBigEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:152:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7da7adf212ffae3dcb1718b0737f7d48968cbdf36f4962ddc78b428c0beaf748"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsAndExportsBigEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:153:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7da7adf212ffae3dcb1718b0737f7d48968cbdf36f4962ddc78b428c0beaf748"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsAndExportsBigEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:154:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7da7adf212ffae3dcb1718b0737f7d48968cbdf36f4962ddc78b428c0beaf748"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsAndExportsBigEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:155:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7da7adf212ffae3dcb1718b0737f7d48968cbdf36f4962ddc78b428c0beaf748"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsAndExportsBigEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:156:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7da7adf212ffae3dcb1718b0737f7d48968cbdf36f4962ddc78b428c0beaf748"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsAndExportsBigEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:159:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7da7adf212ffae3dcb1718b0737f7d48968cbdf36f4962ddc78b428c0beaf748"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsAndExportsBigEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:162:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7da7adf212ffae3dcb1718b0737f7d48968cbdf36f4962ddc78b428c0beaf748"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsAndExportsBigEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:167:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "a0119df440f16b1d6218eab58b72e90d6678e4e7021d27bde3a38e9981048d2e"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsLittleEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:168:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a0119df440f16b1d6218eab58b72e90d6678e4e7021d27bde3a38e9981048d2e"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsLittleEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:169:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a0119df440f16b1d6218eab58b72e90d6678e4e7021d27bde3a38e9981048d2e"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsLittleEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:170:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a0119df440f16b1d6218eab58b72e90d6678e4e7021d27bde3a38e9981048d2e"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsLittleEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:173:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a0119df440f16b1d6218eab58b72e90d6678e4e7021d27bde3a38e9981048d2e"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsLittleEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:176:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a0119df440f16b1d6218eab58b72e90d6678e4e7021d27bde3a38e9981048d2e"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsLittleEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:179:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a0119df440f16b1d6218eab58b72e90d6678e4e7021d27bde3a38e9981048d2e"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsLittleEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:182:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a0119df440f16b1d6218eab58b72e90d6678e4e7021d27bde3a38e9981048d2e"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsLittleEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:187:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "f5b426a2d35ad9baddba2a1b552828dc09fc817e689811bb95fe46020c8c9236"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsEndianAsSecondArgument，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:188:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f5b426a2d35ad9baddba2a1b552828dc09fc817e689811bb95fe46020c8c9236"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsEndianAsSecondArgument，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:195:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "42ddcb3973d49562ad580b63f5886a5460921296611beaee7a9d2b2514970e9f"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsEmptyBufferAsOriginalString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:196:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "42ddcb3973d49562ad580b63f5886a5460921296611beaee7a9d2b2514970e9f"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.acceptsEmptyBufferAsOriginalString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:197:23:conditional",
+      "status": "reviewed",
+      "caseIds": [
+        "42ddcb3973d49562ad580b63f5886a5460921296611beaee7a9d2b2514970e9f"
+      ],
+      "note": "保留空 Buffer 转 hex 后的原条件表达式；固定空 Buffer 走字符串 0 分支，实际构造参数随两端记录核对。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:201:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "4f9b3d09a6e8a810051b0e7132f08ce30cb81e92631342297d45b3d44f0b5d7f"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsAndExportsBufferAsHexString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:202:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "4f9b3d09a6e8a810051b0e7132f08ce30cb81e92631342297d45b3d44f0b5d7f"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsAndExportsBufferAsHexString，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:210:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "8ecfd58c82e9c82a0058d4642ad7523c19c047cc51e991923b4c4d6c3f975ccc"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsBufferAsLittleEndianArray，保留原输入、断言及调用顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/BigNumber.constructor.test.ts:211:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8ecfd58c82e9c82a0058d4642ad7523c19c047cc51e991923b4c4d6c3f975ccc"
+      ],
+      "note": "独立对应 BigNumberConstructorTest.importsBufferAsLittleEndianArray，保留原输入、断言及调用顺序。"
     }
   ]
 }

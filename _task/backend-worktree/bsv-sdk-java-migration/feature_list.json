@@ -15,7 +15,7 @@
     ]
   },
   "activeItem": null,
-  "nextItem": "migration-impl-bignumber-constructor",
+  "nextItem": "migration-impl-bignumber-serializers",
   "features": [
     {
       "id": "migration-env",
@@ -1076,7 +1076,7 @@
         "migration-ts-baseline",
         "migration-impl-hex"
       ],
-      "status": "not-started",
+      "status": "done",
       "steps": [
         "审查原测试全部输入、断言及运行轨迹，登记真实 Java 入口和完整文件映射。",
         "逐行为 RED→GREEN，只实现当前行为与必要依赖，保留 sign/nominal length、字节序及异常顺序；不提前加入占位 API。",
@@ -1085,6 +1085,37 @@
       "acceptanceCriteria": [
         "原文件 28 用例全部执行且逐断言实际结果一致，源码复核位置无遗漏。",
         "Hex 原测试累计回归通过；不将构造基础完成等同于完整 BigNumber 或 primitives 完成。"
+      ],
+      "evidence": [
+        "目标工程提交 9c22ba1：BigNumber 构造基础及原文件全部 28 个 Java 用例；保留 sign/nominal length、BE/LE 输入宽度、26 位词和错误消息。",
+        "12 组真实 RED→GREEN：.cache/evidence/bn-01/05/06/07/08/09/12/16/18/19/22/23-red.log 及对应 green；其余 16 原用例由已有行为直接满足。",
+        ".cache/evidence/hex-parity-20260920-153441-zd037qhq/：提交后重新执行；BigNumber TS/Java 28/28，45 静态断言执行 52 次，92 次实际 API 调用输入/结果/异常及断言实参逐项一致。",
+        "累计 Hex：TS/Java 原用例 36/36，71 次断言结果一致，101 AST 位置映射齐全；目标工程总计 37/37（另含基础测试 1），零失败/错误/跳过。",
+        "run-hex-parity.py --bn-constructor 复用已有比较引擎并绑定完整原始证据；14 项工具自测覆盖循环样本遗漏/重复、调用遗漏、输入/结果/异常变化与报告篡改，不充抵 SDK 测试。",
+        "当前 BigNumber 仍是内部实施基础；完整 API、参数分支及其他测试未完成，不能标整类/模块验收。Jackson 仅 test 依赖；bn.js MIT 和 BSV 来源许可随资源保留。",
+        "收尾：./init.sh、audit-api.cjs batches 通过；audit-tests.py check 重扫 133 原文件/5329 用例后按预期退出 1（缺失 5293、多余 0）。日志 bn-init-final.log、bn-api-batches-final.log、bn-formal-gate-final.log；14 项工具自测见 bn-parity-selftests-final.log。"
+      ],
+      "scopeRef": "scope"
+    },
+    {
+      "id": "migration-impl-bignumber-serializers",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "primitives：BigNumber 完整序列化原测试",
+      "description": "按完整 BigNumber.serializers.test.ts 的 16 个原用例继续 TDD，补齐所需构造/转换分支、协议编码及 Utils 基础编解码；完整 BigNumber 和 primitives 的其余 API/测试保留后续范围。",
+      "dependencies": [
+        "migration-api-values",
+        "migration-impl-bignumber-constructor"
+      ],
+      "status": "not-started",
+      "steps": [
+        "审查原文件全部输入、断言、动态轨迹及 Utils 依赖，登记实际 Java 入口。",
+        "按原测试逐行为实施 JSON/String/Hex、compact bits、signed magnitude 和 ScriptNum；补齐无参零值、必要参数重载及错误顺序。",
+        "扩展已有真实采集和比较入口，累计回归 Hex 与 BigNumber 构造；单文件通过不能代替完整类或模块验收。"
+      ],
+      "acceptanceCriteria": [
+        "16 个原用例全部复刻、执行且实际结果一致，每个断言和样本均有映射。",
+        "之前 36 个原用例累计回归与对照通过，零失败/跳过；工程修改仅限 metanet4j-bsv-sdk。"
       ],
       "evidence": [],
       "scopeRef": "scope"

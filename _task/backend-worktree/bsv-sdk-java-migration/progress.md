@@ -2,26 +2,28 @@
 
 ## 当前成果
 
-用户已授权已完成 API 设计且依赖闭合的部分先编码，执行规则见 feature_list.json 的 implementationPolicy。完整模块范围和最终验收条件保持不变。
+用户已授权已完成 API 设计且依赖闭合的部分先编码，执行规则见 feature_list.json 的 implementationPolicy。完整模块范围和最终门禁保持不变。
 
-migration-impl-hex 已完成：目标工程提交 `0ecb8d1` 实现完整 Hex 两函数、Undefined 和 Error/TypeError 对应类型，完整复刻原 hex.test.ts 的 8 个用例、19 条断言。5 组真实行为 RED→GREEN；另外 3 个原用例由已有行为直接满足，全部保留。
+已完成两个内部项：Hex（目标仓提交 0ecb8d1）和 BigNumber 构造基础（9c22ba1）。本项完整复刻 BigNumber.constructor.test.ts 的 28 个原用例，保留 45 个静态断言的 52 次实际执行，以及 8 个非法字符串循环样本；12 组真实 RED→GREEN，其余 16 个原用例由此前行为直接满足。
 
-提交后通过 `python3 run-hex-parity.py` 重新执行：TS 8/8，Java 对应 8/8，19 次实际输入、返回值、异常类型及消息一致，27 个 AST 位置完整映射。目标 Java 工程累计 9/9（包含基础测试 1），零失败/错误/跳过。证据：`.cache/evidence/hex-parity-20260920-150144-mgrmta7b/`；原始 Jest/Surefire 报告、两端采集、命令及源码/工具/Java 版本均在其中。
+提交后通过 `python3 run-hex-parity.py --bn-constructor` 重新执行：BigNumber 两端 28/28、52 次断言和 92 次 API 调用轨迹的实际输入/返回/异常及断言实参均一致。累计 Hex 后，原用例 36/36、71 次断言结果、101 个 AST 位置全部核对通过。目标 Java 工程累计 37/37（含基础测试 1），零失败/错误/跳过。
 
-检查器自身 7/7 反例测试通过，覆盖漏采、重复、输入/结果/异常差异及报告篡改，不计 SDK 用例。运行方法和职责见[模块迁移计划](doc/模块迁移计划-20260920-103547.md)的“已就绪实施项：Hex”。
+最新证据：`.cache/evidence/hex-parity-20260920-153441-zd037qhq/`。manifest 绑定源码、工具、Java 提交/工作树、原始报告哈希和命令；Jest JSON、全部 Surefire XML、两端实际记录及比较结果已独立保存。旧批次在 Java 版本变化后不用于当前验收，不改写旧证据版本。
+
+采集比较工具自测 14/14，通过真实证据和漏采循环样本、重复、调用缺失、输入位变化、断言值/异常消息变化、报告篡改等反例，不计 SDK 用例。具体步骤见[模块迁移计划](doc/模块迁移计划-20260920-103547.md)的 Hex/BigNumber 实施入口。
 
 ## 尚未完成
 
-六模块仍为 primitives/compat/script/transaction/wallet/auth；冻结范围 292 文件、133 测试文件、5329 用例、7554 AST 位置。Java 原测试已映射 8/5329，其余 5321 未映射。Hex 仅是 primitives 内部实施项，尚无完整模块验收通过。
+六模块仍为 primitives/compat/script/transaction/wallet/auth，冻结范围 292 文件、133 测试文件、5329 用例、7554 AST 位置。Java 原用例已映射 36/5329，剩余 5293。BigNumber 仅完成原构造测试涉及的基础实现，完整 API、参数分支及其他原测试尚未完成；暂无整类/完整模块验收通过。
 
-API 设计为 371/3576，剩余 3205；21 个设计批次中 values 完成，其余未开始。hash-random 不再占用当前事项。P0 通用输入重放/轨迹采集、API 总验收和联合门禁仍未完成，scopeReview 保持 pending。此前 TS 完整基线 5329/5329（含原规模 manual）仍有效，本轮只重跑受影响原文件，没有重复 37 分钟 AES manual。
+API 设计仍为 371/3576，剩余 3205；21 个设计批次只有 values 完成。P0 通用输入重放、随机/属性轨迹采集、API 总验收和联合门禁仍未完成，scopeReview 保持 pending。此前 TS 完整基线为 5329/5329（含原规模 manual），本轮只累计重跑两个已实现原文件，没有重复 37 分钟 AES manual。
 
-WUA-ZERO-CAPACITY 的最小修复授权保留，尚未实现；后续只在旧容量为 0 时从 1 开始扩容，独立计数，不改变固定 TS 或冒充两端一致。其余已观察怪异行为仍按原样保留，契约详见 API 文档。
+WUA-ZERO-CAPACITY 的最小修复授权保留，尚未实现；后续仅在旧容量 0 时从 1 开始扩容，额外回归单列，不改变 TS 或冒充一致。其他契约和已知特殊行为见 API 文档。
 
-环境自检和 21 个 API 批次覆盖/状态检查通过；正式 audit-tests.py check 重扫 133 文件、5329 用例后按预期退出 1（缺失 5321、多余 0），证明 Hex 局部通过没有放宽全量门禁。日志为 `.cache/evidence/hex-init-final.log`、`hex-api-batches.log`、`hex-formal-gate.log`。
+收尾环境自检和 API 批次覆盖/状态检查通过。正式 audit-tests.py check 重扫完整冻结清单后按预期退出 1：缺失 5293 个 Java 映射，多余 0。证据为 `.cache/evidence/bn-init-final.log`、`bn-api-batches-final.log`、`bn-formal-gate-final.log`。
 
 ## 下一步
 
-feature_list.json 共 38 项：9 done、0 in-progress、29 not-started；activeItem=null，nextItem=migration-impl-bignumber-constructor。从完整 BigNumber.constructor.test.ts 的 28 个原用例开始 TDD，推进构造、解析及所需编码；完整 BigNumber 其他行为与测试仍保留在后续范围。
+feature_list.json 共 39 项：10 done、0 in-progress、29 not-started；activeItem=null，nextItem=migration-impl-bignumber-serializers。继续完整 BigNumber.serializers.test.ts 的 16 个原用例，补齐所需构造/转换分支、协议编码和 Utils 编解码，并累计回归当前 36 个原用例。
 
-工程改动仅限 metanet4j-bsv-sdk，其他四工程及固定 TS 只读。任务根目录维护对照工具、映射和状态；既有根仓无关修改保留，未推送。
+工程代码/测试/POM 只修改 metanet4j-bsv-sdk；Jackson 仅测试采集依赖，沿用父工程管理，未改其他工程。任务根目录维护工具、映射和状态；固定 TS 只读，根仓既有无关修改保留，未推送。
