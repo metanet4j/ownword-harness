@@ -8,7 +8,7 @@
     "done"
   ],
   "activeItem": null,
-  "note": "只记录阶段状态与依赖；各阶段目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。任务已全部完成（P0~P6 + 交付后修复），交付物见 doc/验收报告-Boot4-Java25-20260916-1320.md；四仓库 origin/feature/java25 已快进合入 dev 并推送（dev = feature/java25，2026-09-17；旧分支 feature/java21 已删除，master 未触碰）。",
+  "note": "原 Boot 4 / Java 25 升级及交付后修复均已完成，原阶段证据保留。当前新增目标为四仓库单元测试全覆盖；2026-09-20 已完成调查与计划，用户要求先做计划，实施未开工。新增测试范围与验收以 testPlanDoc 为准。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -214,6 +214,122 @@
         "修复 II 后门禁复跑：component clean test -DexcludedGroups=external BUILD SUCCESS，component-test 101/0/0（原 95）；contextLoads 9 处 PASS；用例账目 130 = 101 执行 + 28 external 排除 + 1 非 void @Test 被 Jupiter 忽略",
         "第三轮推送：component d585194 → e634982，远端与本地一致"
       ]
+    },
+    {
+      "id": "unit-plan",
+      "name": "单元测试全覆盖计划与现状调查",
+      "description": "用户要求先制定所有子仓库的单元测试计划；范围、分阶段清单与验收见 doc/单元测试全覆盖计划-20260920-090603.md。",
+      "status": "done",
+      "dependencies": [],
+      "statusNote": "2026-09-20：计划已完成；本轮未修改子仓库代码、POM 或测试，未运行 Maven 测试。",
+      "evidence": [
+        "静态盘点：4 个仓库、25 个 POM、23 个源码模块、369 个生产 Java 文件（20,712 物理行）、52 个测试目录 Java 文件；component 21 个子模块中 18 个无本模块测试源码。",
+        "读取既有 Surefire XML（2026-09-16）：base 2/0/0/0、sdk 26/0/0/0、connect-planaria 1/0/0/0、component-file 8/0/0/8、component-test 101/0/0/0（tests/failures/errors/skipped）；不是本轮执行结果。",
+        "POM 无 JaCoCo 配置、无 jacoco.xml，当前覆盖率未知；计划明确逐模块行/分支/方法 100% 和单元测试零失败、零错误、零跳过。",
+        "./init.sh 退出 0，任务工具链及隔离仓库可用，四子仓库 feature/java25 且干净；本执行环境中间件检查告警，宿主状态未复核。",
+        "计划产物：doc/单元测试全覆盖计划-20260920-090603.md；U0—U9 均未开工。"
+      ]
+    },
+    {
+      "id": "unit-u0-baseline",
+      "name": "U0 基线与测试公共配置",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "not-started",
+      "dependencies": [
+        "unit-plan"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "unit-u1-base",
+      "name": "U1 base 单元测试",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "not-started",
+      "dependencies": [
+        "unit-u0-baseline"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "unit-u2-sdk",
+      "name": "U2 sdk 单元测试",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "not-started",
+      "dependencies": [
+        "unit-u1-base"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "unit-u3-foundation",
+      "name": "U3 component 基础模块",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "not-started",
+      "dependencies": [
+        "unit-u2-sdk"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "unit-u4-protocol",
+      "name": "U4 数据输入与协议处理",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "not-started",
+      "dependencies": [
+        "unit-u3-foundation"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "unit-u5-storage",
+      "name": "U5 存储层",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "not-started",
+      "dependencies": [
+        "unit-u4-protocol"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "unit-u6-business",
+      "name": "U6 核心业务链路",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "not-started",
+      "dependencies": [
+        "unit-u5-storage"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "unit-u7-adapters",
+      "name": "U7 外围能力",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "not-started",
+      "dependencies": [
+        "unit-u6-business"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "unit-u8-tools",
+      "name": "U8 工具与测试应用收口",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "not-started",
+      "dependencies": [
+        "unit-u7-adapters"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "unit-u9-acceptance",
+      "name": "U9 全量验收与交付",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "not-started",
+      "dependencies": [
+        "unit-u8-tools"
+      ],
+      "evidence": []
     }
-  ]
+  ],
+  "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md"
 }
