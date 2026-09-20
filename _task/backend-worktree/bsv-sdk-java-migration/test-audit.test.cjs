@@ -292,3 +292,110 @@ test('TS 清单与报告同时变成零用例也不能通过基线', () => {
     assert.match(result.stderr, /空用例/)
   } finally { f.close() }
 })
+
+test('API 清点覆盖深层导出、重载、属性、默认值、匿名类型和导出别名，不执行源码', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'migration-api-'))
+  try {
+    fs.mkdirSync(path.join(dir, 'src/primitives/deep'), { recursive: true })
+    fs.writeFileSync(path.join(dir, 'src/primitives/deep/Thing.ts'), `
+      throw new Error('清点不得执行源码')
+      export default class Thing {
+        constructor(public value: number = 7) {}
+        run(value: string): string
+        run(value: number): number
+        run(value: string | number): string | number { return value }
+        get size(): number { return 1 }
+        private secret = 2
+      }
+      export type Options = { count?: number; callback: (x: number) => Promise<string> }
+      export const build = (options: Options = { callback: async () => 'ok' }): Thing => new Thing()
+    `)
+    fs.writeFileSync(path.join(dir, 'src/primitives/index.ts'), "export { default as Alias } from './deep/Thing.js'\n")
+    const output = path.join(dir, 'api.json')
+    const result = spawnSync(process.execPath, [path.join(__dirname, 'audit-api.cjs'), 'inventory', '--sdk', dir, '--module', 'primitives', '--output', output], { encoding: 'utf8' })
+    assert.equal(result.status, 0, result.stdout + result.stderr)
+    const data = JSON.parse(fs.readFileSync(output))
+    assert.equal(data.files.length, 2)
+    const entries = data.entries
+    assert.ok(entries.some(e => e.name === 'Thing' && e.exportNames.includes('default')))
+    assert.equal(entries.filter(e => e.name === 'Thing.run').length, 3)
+    assert.ok(entries.some(e => e.name === 'Thing.value' && e.kind === 'parameter-property'))
+    assert.ok(entries.some(e => e.name === 'Thing.secret' && e.visibility === 'private'))
+    assert.ok(entries.some(e => e.name === 'Thing.size' && e.kind === 'get'))
+    assert.ok(entries.some(e => e.name === 'Thing.constructor' && e.parameters[0].default === '7'))
+    assert.ok(entries.some(e => e.name === 'Options' && e.signature.includes('callback: (x: number) => Promise<string>')))
+    assert.ok(entries.some(e => e.name === 'build' && e.parameters[0].default.includes('callback')))
+    assert.ok(data.exports.some(e => e.file === 'src/primitives/index.ts' && e.name === 'Alias' && e.targets.some(t => t.endsWith('#class:Thing:1'))))
+    assert.equal(new Set(entries.map(e => e.id)).size, entries.length)
+  } finally { fs.rmSync(dir, { recursive: true, force: true }) }
+})
+
+test('API 清点不能因测试目录名遗漏真实公开导出的辅助类', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'migration-api-export-'))
+  try {
+    fs.mkdirSync(path.join(dir, 'src/auth/__tests'), { recursive: true })
+    fs.writeFileSync(path.join(dir, 'src/auth/index.ts'), "export { Wallet } from './__tests/helper.js'\n")
+    fs.writeFileSync(path.join(dir, 'src/auth/__tests/helper.ts'), 'export class Wallet { sign(data: number[]): number[] { return data } }\n')
+    const output = path.join(dir, 'api.json')
+    const result = spawnSync(process.execPath, [path.join(__dirname, 'audit-api.cjs'), 'inventory', '--sdk', dir, '--module', 'auth', '--output', output], { encoding: 'utf8' })
+    assert.equal(result.status, 0, result.stdout + result.stderr)
+    const data = JSON.parse(fs.readFileSync(output))
+    assert.ok(data.entries.some(e => e.file === 'src/auth/__tests/helper.ts' && e.name === 'Wallet.sign'))
+    assert.ok(data.exports.some(e => e.file === 'src/auth/index.ts' && e.name === 'Wallet'))
+  } finally { fs.rmSync(dir, { recursive: true, force: true }) }
+})
+
+test('API 复核重新扫描源码；清单与映射同时漏掉接口也必须拒绝', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'migration-api-check-'))
+  try {
+    fs.mkdirSync(path.join(dir, 'src/primitives'), { recursive: true })
+    fs.writeFileSync(path.join(dir, 'src/primitives/a.ts'), 'export function one(): number { return 1 }\nexport function two(): number { return 2 }\n')
+    const catalog = path.join(dir, 'api.json'), mapping = path.join(dir, 'map.json')
+    const run = (command, extra) => spawnSync(process.execPath, [path.join(__dirname, 'audit-api.cjs'), command, '--sdk', dir, '--module', 'primitives', ...extra], { encoding: 'utf8' })
+    const census = run('inventory', ['--output', catalog])
+    assert.equal(census.status, 0, census.stdout + census.stderr)
+    const full = JSON.parse(fs.readFileSync(catalog))
+    const map = { entries: full.entries.map(e => ({ id: e.id, java: 'com.metanet4j.bsv.primitives.A#' + e.name, contract: 'API-NUMBER', review: 'pending' })) }
+    fs.writeFileSync(mapping, JSON.stringify(map))
+    let result = run('check', ['--catalog', catalog, '--mapping', mapping])
+    assert.equal(result.status, 1, result.stdout + result.stderr)
+    assert.match(result.stderr, /未复核/)
+    map.entries.forEach(e => { e.review = 'reviewed' })
+    fs.writeFileSync(mapping, JSON.stringify(map))
+    result = run('check', ['--catalog', catalog, '--mapping', mapping])
+    assert.equal(result.status, 0, result.stdout + result.stderr)
+    map.upstreamCommit = 'wrong-version'
+    fs.writeFileSync(mapping, JSON.stringify(map))
+    result = run('check', ['--catalog', catalog, '--mapping', mapping])
+    assert.equal(result.status, 1, result.stdout + result.stderr)
+    assert.match(result.stderr, /上游版本/)
+    delete map.upstreamCommit
+    const missing = structuredClone(full)
+    missing.entries.pop()
+    map.entries.pop()
+    fs.writeFileSync(catalog, JSON.stringify(missing))
+    fs.writeFileSync(mapping, JSON.stringify(map))
+    result = run('check', ['--catalog', catalog, '--mapping', mapping])
+    assert.equal(result.status, 1, result.stdout + result.stderr)
+    assert.match(result.stderr, /清单与固定源码不一致/)
+  } finally { fs.rmSync(dir, { recursive: true, force: true }) }
+})
+
+test('API 清点保留根入口的别名和命名空间，只纳入选定模块的能力', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'migration-api-root-'))
+  try {
+    fs.mkdirSync(path.join(dir, 'src/primitives'), { recursive: true })
+    fs.mkdirSync(path.join(dir, 'src/excluded'), { recursive: true })
+    fs.writeFileSync(path.join(dir, 'src/primitives/a.ts'), 'export function one(): number { return 1 }\n')
+    fs.writeFileSync(path.join(dir, 'src/excluded/a.ts'), 'export const other = 2\n')
+    fs.writeFileSync(path.join(dir, 'mod.ts'), "export { one as rootOne } from './src/primitives/a.js'\nexport * as Numbers from './src/primitives/a.js'\nexport * from './src/excluded/a.js'\n")
+    const output = path.join(dir, 'api.json')
+    const result = spawnSync(process.execPath, [path.join(__dirname, 'audit-api.cjs'), 'inventory', '--sdk', dir, '--module', 'primitives', '--output', output], { encoding: 'utf8' })
+    assert.equal(result.status, 0, result.stdout + result.stderr)
+    const data = JSON.parse(fs.readFileSync(output))
+    assert.ok(data.exports.some(e => e.file === 'mod.ts' && e.name === 'rootOne'))
+    assert.ok(data.exports.some(e => e.file === 'mod.ts' && e.name === 'Numbers' && e.targets.includes('namespace:src/primitives/a.ts')))
+    assert.ok(!data.exports.some(e => e.name === 'other'))
+    assert.ok(data.entryPoints.some(f => f.path === 'mod.ts' && f.sha256 === digest(fs.readFileSync(path.join(dir, 'mod.ts')))))
+  } finally { fs.rmSync(dir, { recursive: true, force: true }) }
+})

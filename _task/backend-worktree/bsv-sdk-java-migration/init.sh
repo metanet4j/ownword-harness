@@ -20,7 +20,7 @@ def check(label, fn):
         print('[FAIL]', label, str(error))
 def cmd(*args):
     return subprocess.check_output(args, text=True, stderr=subprocess.STDOUT).strip()
-for name in ['AGENTS.md', 'README.md', 'feature_list.json', 'progress.md', 'session-handoff.md', 'workspace.json', 'env.sh', 'mvn.sh', 'pnpm.sh', 'verify.sh', 'upstream-tests.json', 'module-scope.json', 'module-tests.json', 'test-map.json', 'audit-tests.py', 'collect-cases.cjs', 'test-audit.test.cjs', 'run-ts-baseline.py', 'ts-offline-guard.cjs']:
+for name in ['AGENTS.md', 'README.md', 'feature_list.json', 'progress.md', 'session-handoff.md', 'workspace.json', 'env.sh', 'mvn.sh', 'pnpm.sh', 'verify.sh', 'upstream-tests.json', 'module-scope.json', 'module-tests.json', 'test-map.json', 'audit-tests.py', 'collect-cases.cjs', 'test-audit.test.cjs', 'run-ts-baseline.py', 'ts-offline-guard.cjs', 'audit-api.cjs', 'api-catalog.json', 'api-map.json']:
     check(name, lambda n=name: (task / n).is_file())
 for repo in d['repositories']:
     p = task / repo['name']

@@ -1,0 +1,41 @@
+{
+  "upstreamCommit": "f999e0c1aad9a7afd0cbadaaf23841d049af9d5a",
+  "contractDocument": "doc/完整模块与API映射-20260920-122800.md",
+  "reviewStatus": "pending",
+  "note": "API 清点不等于 Java API 映射；在源码行为与 Java 类型逐项复核后填写 entries，不自动填 reviewed。",
+  "entries": [
+    {
+      "id": "src/primitives/hex.ts#function:assertValidHex:1",
+      "java": "com.metanet4j.bsv.primitives.Hex#assertValidHex",
+      "javaSignature": "public static void assertValidHex(Object msg)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hex",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/hex.ts:6",
+        ".cache/evidence/api-hex-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/hex.ts#function:normalizeHex:1",
+      "java": "com.metanet4j.bsv.primitives.Hex#normalizeHex",
+      "javaSignature": "public static String normalizeHex(Object msg)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hex",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/hex.ts:22",
+        ".cache/evidence/api-hex-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/hex.ts#variable:PURE_HEX_REGEX:1",
+      "java": "com.metanet4j.bsv.primitives.Hex#PURE_HEX_REGEX",
+      "javaSignature": "private static final java.util.regex.Pattern PURE_HEX_REGEX",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hex",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/hex.ts:4",
+        ".cache/evidence/api-hex-observations.json"
+      ]
+    }
+  ]
+}

@@ -14,7 +14,7 @@
       "跨工程发布、部署或远端推送"
     ]
   },
-  "activeItem": null,
+  "activeItem": "migration-api-contract",
   "nextItem": "migration-api-contract",
   "features": [
     {
@@ -143,21 +143,31 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "steps": [
         "逐项登记导出接口、类型、默认值、状态变化、异常、异步行为及 Java 入口。",
         "明确大整数、无符号字节、编码、前导零与序列化语义；解决内部断言及语言专属差异。",
         "按既有架构保持底层不依赖 base/sdk，落实 tdd 技能要求的测试接口边界。"
       ],
       "outputs": [
-        "完整模块/API 映射文档中的 Java 接口与兼容章节"
+        "完整模块/API 映射文档中的 Java 接口与兼容章节",
+        "api-catalog.json：固定源码声明与实际导出入口",
+        "api-map.json：逐项 Java 入口、类型和行为契约",
+        "audit-api.cjs：重新清点及拒绝遗漏的检查入口"
       ],
       "acceptanceCriteria": [
         "选定完整模块的 API/行为均有映射，未映射能力和未解决接口差异为零。",
         "预期来源、异常语义及测试边界明确，不以 Java 实现生成自己的预期。",
         "metanet4j-bsv-sdk 的底层实现不依赖 base/sdk；本次不修改其他工程接口或依赖配置。"
       ],
-      "evidence": [],
+      "evidence": [
+        "进行中，不满足完成条件：api-catalog.json 已清点 133 个 API 源文件、3576 项声明、1016 个导出入口；其中 266 个入口来自根 mod.ts。",
+        "api-map.json 已复核 hex 的 3 项设计映射；其余 3573 项未映射，未创建 Java 功能实现或复刻测试。",
+        "清点纳入 auth/certificates/index.ts 真实公开导出的 __tests/CompletedProtoWallet.ts；源码文件 SHA-256 与冻结 moduleFiles 全部匹配。",
+        "node test-audit.test.cjs：35/35 工具用例通过；API 清点、辅助类导出、根入口和同时删除清单/映射的反例已有证据；不计入 SDK 用例。",
+        "Reader、hex、AES 的固定 TS 小输入探针保存在 .cache/evidence/api-*-observations.json，只确认记录的实际结果，不充抵完整 TS 基线或 Java 对照。",
+        "下一步先解决 primitives 的数值/undefined、字节视图及内部状态类型，再逐项完成六模块 Java 接口和平台行为；scopeReview 仍 pending。"
+      ],
       "scopeRef": "scope"
     },
     {
