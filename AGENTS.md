@@ -28,26 +28,32 @@ OwnWord 设计能力架构见：
 
 `standard/design-skill-architecture.md`
 
-设计任务先读取事实和版本设计依据，再加载设计 skill：
+设计任务采用“事实与版本约束 → 绑定设计系统 → 主设计执行 → 按需 specialist → 实现检查”的模型：
 
 ```text
-_task/system-design/spec/核心认知.md
+核心认知（SSOT）
         ↓
-当前版本相关设计文档
+当前版本设计文档
+        ↓
+React Spectrum / Spectrum S2（版本已指定时）
         ↓
 baoyu-design
+   ├─ design-taste-frontend（按页面类型选择）
+   └─ high-end-visual-design（按视觉目标选择）
         ↓
-design-taste-frontend
-        ↓
-high-end-visual-design（按需）
-        ↓
-react-spectrum
+Prototype / Preview / Verify
+
+react-spectrum skill：组件、Token、交互与 Accessibility 实现检查
 ```
 
 - 核心认知是 OwnWord 产品、设计、原型、代码和测试的唯一事实来源。
-- 当前版本设计文档负责把核心认知落到页面、组件、流程、视觉方向和验收。
-- 外部 skill 只提供设计方法、视觉执行或组件实现能力，不得定义 OwnWord 产品事实。
-- 新增设计规则或 skill 前，先检查核心认知和当前版本设计文档，避免产生重复事实来源。
+- 当前版本设计文档负责把核心认知落到页面、组件、流程、视觉方向、设计系统要求和验收。
+- 已指定的设计系统在开始设计前即为约束，设计 skill 不得自行替换。
+- `baoyu-design` 是主设计执行框架。
+- `design-taste-frontend` 按页面类型选择使用强度：公开展示页面可强使用，多步骤任务型 UI 只选择性采用与 anti-slop、排版、响应式和质量检查相关的规则。
+- `high-end-visual-design` 仅用于明确需要强 premium / agency / cinematic 表达的页面或局部区域。
+- `react-spectrum` skill 用于实现检查，不定义产品事实、页面结构或视觉主题。
+- 新增设计规则或 skill 前先检查核心认知、当前版本设计文档和已有设计系统，避免产生重复事实来源。
 
 ## 按场景加载规范
 
