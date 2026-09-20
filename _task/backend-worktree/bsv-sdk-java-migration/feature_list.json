@@ -17,11 +17,106 @@
       ]
     },
     {
-      "id": "migration-map",
-      "name": "依赖映射与实施范围收敛",
-      "description": "按真实调用建立 Java/TypeScript 方法与逐测试用例映射，明确公共底层落点及兼容约束；执行测试迁移契约。",
+      "id": "migration-plan",
+      "name": "逐用例结果契约与模块阶段计划",
+      "description": "明确 TS/Java 实际结果一致的验收要求，建立依赖有序的模块阶段和累计回归门禁；不代表迁移工具或实现完成。",
       "dependencies": [
         "migration-env"
+      ],
+      "status": "done",
+      "evidence": [
+        "doc/模块迁移计划-20260920-103547.md：P0–P8 的模块顺序、前置依赖、执行清单与阶段交付。",
+        "doc/测试迁移契约-20260920-101559.md：逐用例实际结果、确定性输入、差分检查与累计验收规则。",
+        "Python 状态/文档检查通过：11 个任务、依赖无环、活动状态一致、阶段标识匹配、21 个本地链接有效。",
+        "./init.sh 与 git diff --check 通过；本事项只完成计划与契约，不计为 Java 迁移或差分测试通过。"
+      ]
+    },
+    {
+      "id": "migration-map",
+      "name": "依赖映射与实施范围收敛",
+      "description": "P0：按真实调用建立模块/接口及逐用例/断言映射，收敛公共底层落点和兼容约束，建立并验证结果采集与比较入口，冻结阶段范围。",
+      "dependencies": [
+        "migration-plan"
+      ],
+      "status": "not-started",
+      "evidence": []
+    },
+    {
+      "id": "migration-primitives",
+      "name": "P1 基础编码、字节读写与哈希",
+      "description": "按模块计划和测试契约执行逐行为 TDD，完成基础编码、大整数、哈希及所需依赖的用例对照与验收。",
+      "dependencies": [
+        "migration-map"
+      ],
+      "status": "not-started",
+      "evidence": []
+    },
+    {
+      "id": "migration-keys",
+      "name": "P2 密钥、公钥与签名",
+      "description": "迁移 secp256k1、地址/WIF、ECDSA/Signature 及所需随机支撑；逐用例比较并累计回归。",
+      "dependencies": [
+        "migration-primitives"
+      ],
+      "status": "not-started",
+      "evidence": []
+    },
+    {
+      "id": "migration-hd",
+      "name": "P3 HD 与助记词",
+      "description": "迁移 HD、Mnemonic 并核对派生与异常输入的每个上游用例；累计回归已完成模块。",
+      "dependencies": [
+        "migration-keys"
+      ],
+      "status": "not-started",
+      "evidence": []
+    },
+    {
+      "id": "migration-message-crypto",
+      "name": "P4 BSM 与 ECIES",
+      "description": "迁移消息签名、ECIES 和必要 AES-CBC 能力，逐字节比较确定性签名与密文向量并累计回归。",
+      "dependencies": [
+        "migration-hd"
+      ],
+      "status": "not-started",
+      "evidence": []
+    },
+    {
+      "id": "migration-script",
+      "name": "P5 脚本模型与编解码",
+      "description": "迁移 Script、OP、锁定/解锁脚本，完成本阶段用例和累计对照；跨模块用例依赖按 P0 冻结方案处理。",
+      "dependencies": [
+        "migration-message-crypto"
+      ],
+      "status": "not-started",
+      "evidence": []
+    },
+    {
+      "id": "migration-transaction",
+      "name": "P6 交易、sighash、P2PKH 与费用",
+      "description": "逐行为迁移交易序列化、交易签名、P2PKH、费用及必要验证；交易 hex/txid、preimage 和所有签名范围按测试契约对照。",
+      "dependencies": [
+        "migration-script"
+      ],
+      "status": "not-started",
+      "evidence": []
+    },
+    {
+      "id": "migration-sdk-adapters",
+      "name": "P7 SDK 业务与 base 适配",
+      "description": "将既有 BAP/AIP、BSocial、Ordinals、Sigma 和远程签名接到已验收底层，处理 base 帮助类；分别核对 TS 复刻测试与 Java 业务回归。",
+      "dependencies": [
+        "migration-transaction"
+      ],
+      "status": "not-started",
+      "evidence": []
+    },
+    {
+      "id": "migration-downstream",
+      "name": "P8 下游接入与全量验收",
+      "description": "验证受影响 component 模块和公开兼容性，处理旧依赖去向，并按最终范围逐用例执行累计结果对照。",
+      "dependencies": [
+        "migration-sdk-adapters"
       ],
       "status": "not-started",
       "evidence": []
