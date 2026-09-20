@@ -14,8 +14,8 @@
       "跨工程发布、部署或远端推送"
     ]
   },
-  "activeItem": "migration-api-hash-random",
-  "nextItem": "migration-api-hash-random",
+  "activeItem": null,
+  "nextItem": "migration-impl-bignumber-constructor",
   "features": [
     {
       "id": "migration-env",
@@ -93,7 +93,7 @@
         "P0 前置缺口有独立功能项、依赖和验收条件，不将 P0 可开工等同于 P1 可验收。"
       ],
       "evidence": [
-        "doc/实施前审查-20260920-115837.md：可以进入 P0；P1 生产模块迁移依赖 P0 联合验收。",
+        "doc/实施前审查-20260920-115837.md：可以进入 P0；完整模块验收依赖 P0 联合验收；已就绪内部项按 implementationPolicy 先编码。",
         "./init.sh：仓库、基线、目标工程、固定 TS 源码与工具链检查通过；五个 Java 仓库干净。",
         "./verify.sh java-build：五仓构建通过（跳过执行测试），component 22 个 reactor 项目成功。",
         "./verify.sh bsv-build、java-smoke：基础测试 1/1、业务回归 3/3 通过；JAR 安装通过。",
@@ -187,7 +187,7 @@
       "dependencies": [
         "migration-api-values"
       ],
-      "status": "in-progress",
+      "status": "not-started",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
@@ -1038,6 +1038,56 @@
         "不以修改业务 SDK/base/component 或替换其依赖作为本次验收前置条件。"
       ],
       "evidence": []
+    },
+    {
+      "id": "migration-impl-hex",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "primitives：完整 Hex 文件与原测试实现",
+      "description": "用户授权已设计且依赖闭合的部分先编码；完整 hex.ts 的 2 个函数、原测试 8 用例/19 断言逐项移植并采集实际输入和结果，不代表 primitives 整模块完成。",
+      "dependencies": [
+        "migration-api-values",
+        "migration-ts-baseline"
+      ],
+      "status": "done",
+      "acceptanceCriteria": [
+        "原始 hex.test.ts 8 个用例、19 个断言、27 个 AST 位置全部映射，TS 源码和测试保持不变。",
+        "TDD 逐行为推进；Java clean test 全部通过，真实输入、返回值、异常类型与消息逐项和 TS 比较。",
+        "完整模块及 5329 个原测试的最终门禁保持不变。"
+      ],
+      "evidence": [
+        "Java 提交 0ecb8d1：完整 Hex 两函数、Undefined 和错误类型、上游许可及全部 8 个原用例。",
+        ".cache/evidence/hex-01..05-red/green.log：5 组真实行为 RED→GREEN；hex-all-green.log：8/8 原用例通过。",
+        ".cache/evidence/hex-parity-20260920-150144-mgrmta7b/summary.json：提交后重新执行，TS 8/8、Java 原测试 8/8；19 次实际输入/返回/异常全部一致，27 AST 位置映射齐全，formalAcceptance=false。",
+        "同批次保存 Jest JSON、全部 Surefire XML、两端调用记录、源码/工具/Java 版本及报告摘要；目标工程累计 9/9（含基础测试 1），零失败/错误/跳过。",
+        "test-hex-parity.py：7/7 采集对照自测通过；故意漏采/重复/改变输入/返回/异常类型/篡改报告均被拒绝，不计入 SDK 用例。",
+        "收尾检查：./init.sh 和 audit-api.cjs batches 通过；audit-tests.py check 重扫 133 文件/5329 用例后预期退出 1，缺失 5321、多余 0。日志 hex-init-final.log、hex-api-batches.log、hex-formal-gate.log。"
+      ],
+      "scopeRef": "scope"
+    },
+    {
+      "id": "migration-impl-bignumber-constructor",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "primitives：BigNumber 构造与解析基础",
+      "description": "沿用已审查 API 设计，从完整 BigNumber.constructor.test.ts 的 28 个原用例逐行为实施构造、解析及所需编码行为；为完整 BigNumber 实现的内部里程碑，其他 BigNumber 测试及所有内部 API 仍必须后续完成。",
+      "dependencies": [
+        "migration-api-values",
+        "migration-ts-baseline",
+        "migration-impl-hex"
+      ],
+      "status": "not-started",
+      "steps": [
+        "审查原测试全部输入、断言及运行轨迹，登记真实 Java 入口和完整文件映射。",
+        "逐行为 RED→GREEN，只实现当前行为与必要依赖，保留 sign/nominal length、字节序及异常顺序；不提前加入占位 API。",
+        "补齐该文件实际输入/结果采集及对照；执行 Java clean test，包含已完成 Hex 的累计回归。"
+      ],
+      "acceptanceCriteria": [
+        "原文件 28 用例全部执行且逐断言实际结果一致，源码复核位置无遗漏。",
+        "Hex 原测试累计回归通过；不将构造基础完成等同于完整 BigNumber 或 primitives 完成。"
+      ],
+      "evidence": [],
+      "scopeRef": "scope"
     }
   ],
   "apiBatchPolicy": {
@@ -1056,5 +1106,9 @@
       "授权差异仅按 api-map.approvedDifferences 引用的精确范围处理；上游原测试和额外回归分开计数。"
     ],
     "largeFileRule": "Hash、Wallet.interfaces、validationHelpers 等大文件在批次内部逐类/接口族执行，已复核条目即时保存于 api-map；不另增第二套声明状态清单。"
+  },
+  "implementationPolicy": {
+    "authorization": "用户明确要求：已完成的可以进行编码吗？先编码能够进行的部分。",
+    "rule": "允许已完成 API 设计且实现依赖闭合的部分先进入 TDD；每个内部实施项同步完成原测试映射、实际输入/结果采集与对比。API 总验收、P0 联合验收及完整模块最终验收仍必须完成，内部项通过不能声明整模块完成。"
   }
 }

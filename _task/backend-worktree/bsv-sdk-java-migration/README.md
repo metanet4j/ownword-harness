@@ -18,6 +18,7 @@ node test-audit.test.cjs    # 检查器自身正常与反例测试
 node audit-api.cjs check    # 重新扫描源码并检查 Java API 映射；当前应报告未完成
 node audit-api.cjs batches  # 核对所有批次覆盖、依赖和状态，显示逐批进度
 node api-values-probe.mjs  # 观察固定 TS 的数值/容器/模运算边界；输出不是测试报告
+python3 run-hex-parity.py    # 原 TS Hex + 全部 Java 测试，逐项比较实际输入/结果；仅内部实施项
 python3 audit-tests.py check # 整模块用例、映射、执行报告及实际结果验收
 ```
 
@@ -33,8 +34,8 @@ Maven 和 pnpm 分别使用 `./mvn.sh`、`./pnpm.sh`；这两个入口固定工�
 
 迁移单位是完整模块，范围复核确认 `primitives`、`compat`、`script`、`transaction`、`wallet`、`auth` 六模块，含 133 个测试文件、5,329 个注册用例（含 manual）。范围依据见[完整模块与 API 映射](doc/完整模块与API映射-20260920-122800.md)，完整性脚本和数据格式见[检查器说明](doc/测试完整性脚本-20260920-104440.md)。
 
-当前检查器自测通过；Java 映射、真实结果采集和生产迁移尚未完成，所以 `audit-tests.py check` 应返回失败并报告缺失。`init.sh`、`verify.sh` 的环境检查与冒烟不能代替迁移验收。
+已实现完整 Hex 文件并映射 8 个原用例、19 条断言；局部结果采集与对照已通过。其余 5321 个 Java 原用例尚未映射，所以 `audit-tests.py check` 应返回失败并报告缺失。`init.sh`、`verify.sh` 的环境检查与冒烟不能代替迁移验收。
 
-[实施前审查](doc/实施前审查-20260920-115837.md)确认可以进入 P0；七个 P0 功能项及后续完整模块阶段已登记在 [feature_list.json](feature_list.json)，范围复核及[完整 TS 基线](doc/TS完整基线-20260920-124400.md)已完成（5329/5329，含原规模 manual）；当前正在推进 `migration-api-contract`，已复核文件、剩余映射和授权差异见[当前进度](progress.md)及[API 契约](doc/完整模块与API映射-20260920-122800.md)。P1 以前必须完成 P0 联合验收。
+[实施前审查](doc/实施前审查-20260920-115837.md)确认可以进入 P0；七个 P0 功能项及后续完整模块阶段已登记在 [feature_list.json](feature_list.json)，范围复核及[完整 TS 基线](doc/TS完整基线-20260920-124400.md)已完成（5329/5329，含原规模 manual）；已开始已就绪的 Hex 实现；已复核文件、剩余映射和授权差异见[当前进度](progress.md)及[API 契约](doc/完整模块与API映射-20260920-122800.md)。用户已授权已完成设计且依赖闭合的部分先编码，同步落实原测试及真实结果对照；完整模块最终验收仍须完成 P0 联合验收。
 
 逐步执行入口：[模块迁移计划](doc/模块迁移计划-20260920-103547.md)中的“API 设计分批”“文件和脚本的职责”“按顺序执行”和“单行为执行示例”，逐项说明输入、脚本、产物与完成条件；尚未实现的运行/采集入口已明确标记。后续交接：[session-handoff.md](session-handoff.md)。

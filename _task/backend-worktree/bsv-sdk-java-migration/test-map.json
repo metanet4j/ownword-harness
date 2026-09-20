@@ -1,5 +1,330 @@
 {
   "upstreamCommit": "f999e0c1aad9a7afd0cbadaaf23841d049af9d5a",
-  "cases": [],
-  "siteReviews": []
+  "cases": [
+    {
+      "id": "7bbe531b09bf09c04e9d41dda15530b08cdc0a7e9069ce4091336b7128f19370",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.HexTest",
+          "name": "acceptsValidHexStrings"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/hex.test.ts:8:7:assertion",
+        "src/primitives/__tests/hex.test.ts:9:7:assertion",
+        "src/primitives/__tests/hex.test.ts:10:7:assertion",
+        "src/primitives/__tests/hex.test.ts:11:7:assertion",
+        "src/primitives/__tests/hex.test.ts:12:7:assertion"
+      ]
+    },
+    {
+      "id": "0db089dd3fc5cb787da77ebfe6b1f0b34a4c7e8ff70ab74b98e893d7c9addce8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.HexTest",
+          "name": "rejectsNonHexCharacters"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/hex.test.ts:16:7:assertion",
+        "src/primitives/__tests/hex.test.ts:17:7:assertion",
+        "src/primitives/__tests/hex.test.ts:18:7:assertion",
+        "src/primitives/__tests/hex.test.ts:19:7:assertion"
+      ]
+    },
+    {
+      "id": "4824924fd4d69a1051e3cae5da3c4a471dbea9c135c684c6b59f200418cfc23a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.HexTest",
+          "name": "rejectsUndefinedAndNull"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/hex.test.ts:28:7:assertion",
+        "src/primitives/__tests/hex.test.ts:29:7:assertion"
+      ]
+    },
+    {
+      "id": "2a13819d723fcd0a0c198024434b180cec07fa2429e7a9c800b4b8864c3ed969",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.HexTest",
+          "name": "returnsLowercaseHex"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/hex.test.ts:35:7:assertion"
+      ]
+    },
+    {
+      "id": "e7054029fac4bb25b18a58bf4d6acaeb177437a8ed567ed583d148a3d69fa3bc",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.HexTest",
+          "name": "padsOddLengthHexStrings"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/hex.test.ts:39:7:assertion",
+        "src/primitives/__tests/hex.test.ts:40:7:assertion"
+      ]
+    },
+    {
+      "id": "0321d08a86d6ffc65bebd045a43dceead3f4486c7b16f0511364c392019b887d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.HexTest",
+          "name": "preservesEvenLengthHexStrings"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/hex.test.ts:44:7:assertion",
+        "src/primitives/__tests/hex.test.ts:45:7:assertion"
+      ]
+    },
+    {
+      "id": "da93ee56549cdf9a5a6ed6d46e1ebdc9a81ad01159bb2f2436f3e4b3aaea7d6e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.HexTest",
+          "name": "preservesEmptyString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/hex.test.ts:49:7:assertion"
+      ]
+    },
+    {
+      "id": "40b3323fb738a1af517f29f0baa621f2378f556db8372a357fd39d04035830d4",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.HexTest",
+          "name": "rejectsInvalidNormalization"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/hex.test.ts:53:7:assertion",
+        "src/primitives/__tests/hex.test.ts:54:7:assertion"
+      ]
+    }
+  ],
+  "siteReviews": [
+    {
+      "id": "src/primitives/__tests/hex.test.ts:7:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "7bbe531b09bf09c04e9d41dda15530b08cdc0a7e9069ce4091336b7128f19370"
+      ],
+      "note": "原注册点独立对应 HexTest.acceptsValidHexStrings；不包含已注释旧用例。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:8:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7bbe531b09bf09c04e9d41dda15530b08cdc0a7e9069ce4091336b7128f19370"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:9:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7bbe531b09bf09c04e9d41dda15530b08cdc0a7e9069ce4091336b7128f19370"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:10:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7bbe531b09bf09c04e9d41dda15530b08cdc0a7e9069ce4091336b7128f19370"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:11:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7bbe531b09bf09c04e9d41dda15530b08cdc0a7e9069ce4091336b7128f19370"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:12:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7bbe531b09bf09c04e9d41dda15530b08cdc0a7e9069ce4091336b7128f19370"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:15:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "0db089dd3fc5cb787da77ebfe6b1f0b34a4c7e8ff70ab74b98e893d7c9addce8"
+      ],
+      "note": "原注册点独立对应 HexTest.rejectsNonHexCharacters；不包含已注释旧用例。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:16:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0db089dd3fc5cb787da77ebfe6b1f0b34a4c7e8ff70ab74b98e893d7c9addce8"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:17:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0db089dd3fc5cb787da77ebfe6b1f0b34a4c7e8ff70ab74b98e893d7c9addce8"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:18:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0db089dd3fc5cb787da77ebfe6b1f0b34a4c7e8ff70ab74b98e893d7c9addce8"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:19:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0db089dd3fc5cb787da77ebfe6b1f0b34a4c7e8ff70ab74b98e893d7c9addce8"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:27:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "4824924fd4d69a1051e3cae5da3c4a471dbea9c135c684c6b59f200418cfc23a"
+      ],
+      "note": "原注册点独立对应 HexTest.rejectsUndefinedAndNull；不包含已注释旧用例。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:28:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "4824924fd4d69a1051e3cae5da3c4a471dbea9c135c684c6b59f200418cfc23a"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:29:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "4824924fd4d69a1051e3cae5da3c4a471dbea9c135c684c6b59f200418cfc23a"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:34:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "2a13819d723fcd0a0c198024434b180cec07fa2429e7a9c800b4b8864c3ed969"
+      ],
+      "note": "原注册点独立对应 HexTest.returnsLowercaseHex；不包含已注释旧用例。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:35:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "2a13819d723fcd0a0c198024434b180cec07fa2429e7a9c800b4b8864c3ed969"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:38:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "e7054029fac4bb25b18a58bf4d6acaeb177437a8ed567ed583d148a3d69fa3bc"
+      ],
+      "note": "原注册点独立对应 HexTest.padsOddLengthHexStrings；不包含已注释旧用例。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:39:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "e7054029fac4bb25b18a58bf4d6acaeb177437a8ed567ed583d148a3d69fa3bc"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:40:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "e7054029fac4bb25b18a58bf4d6acaeb177437a8ed567ed583d148a3d69fa3bc"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:43:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "0321d08a86d6ffc65bebd045a43dceead3f4486c7b16f0511364c392019b887d"
+      ],
+      "note": "原注册点独立对应 HexTest.preservesEvenLengthHexStrings；不包含已注释旧用例。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:44:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0321d08a86d6ffc65bebd045a43dceead3f4486c7b16f0511364c392019b887d"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:45:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0321d08a86d6ffc65bebd045a43dceead3f4486c7b16f0511364c392019b887d"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:48:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "da93ee56549cdf9a5a6ed6d46e1ebdc9a81ad01159bb2f2436f3e4b3aaea7d6e"
+      ],
+      "note": "原注册点独立对应 HexTest.preservesEmptyString；不包含已注释旧用例。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:49:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "da93ee56549cdf9a5a6ed6d46e1ebdc9a81ad01159bb2f2436f3e4b3aaea7d6e"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:52:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "40b3323fb738a1af517f29f0baa621f2378f556db8372a357fd39d04035830d4"
+      ],
+      "note": "原注册点独立对应 HexTest.rejectsInvalidNormalization；不包含已注释旧用例。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:53:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "40b3323fb738a1af517f29f0baa621f2378f556db8372a357fd39d04035830d4"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/hex.test.ts:54:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "40b3323fb738a1af517f29f0baa621f2378f556db8372a357fd39d04035830d4"
+      ],
+      "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    }
+  ]
 }
