@@ -2,93 +2,167 @@
 
 ## Purpose
 
-本文说明 OwnWord 设计事实、版本设计文档与外部设计 skill 的协作关系。
+本文定义 OwnWord 设计事实、版本设计文档、设计系统与设计 skill 的协作方式。
 
-OwnWord 产品事实只在核心认知中定义。设计 skill 提供方法和执行能力，不建立新的产品事实来源。
+OwnWord 产品事实只在核心认知中定义。版本设计文档负责把事实落实到当前版本。设计系统和 skill 提供约束、方法与执行能力，不建立新的产品事实来源。
 
-## Source of Truth
+## Architecture
+
+```text
+1. Product Truth
+   _task/system-design/spec/核心认知.md
+            ↓
+2. Version Design Contract
+   当前版本相关设计文档
+            ↓
+3. Binding Design System
+   React Spectrum / Spectrum S2（版本指定时）
+            ↓
+4. Design Execution
+   baoyu-design
+      ├─ design-taste-frontend（按页面类型选择）
+      └─ high-end-visual-design（按视觉目标选择）
+            ↓
+   Prototype / Preview / Verify
+
+Implementation Guardrail:
+react-spectrum skill
+```
+
+这里不是固定的 skill 流水线。Core Cognition、Version Design Contract 和 Binding Design System 先建立约束；`baoyu-design` 作为主设计执行框架；其他视觉 skill 按场景加载。
+
+## 1. Product Truth
 
 `_task/system-design/spec/核心认知.md` 是 OwnWord 产品、设计、原型、代码和测试的唯一事实来源（SSOT）。
 
-设计任务必须先读取核心认知，再读取当前版本相关设计文档。版本设计文档负责把核心认知落到页面、组件、流程和验收，不重复定义跨版本事实。
+它定义跨模块、跨版本必须稳定的：
 
-当内容冲突时，遵循核心认知和当前版本设计文档中已有的优先级规则。
+- 产品定位与目标；
+- 术语与命名；
+- 领域实体与关系；
+- 状态与全局不变量；
+- 安全、协议和事实来源边界。
 
-## Capability Flow
+任何设计系统或 skill 都不得修改、补充或重新定义这些事实。缺少新的跨模块事实时，先更新核心认知，再同步下游。
 
-```text
-Core Cognition (SSOT)
-        ↓
-Current Version Design Document
-        ↓
-baoyu-design
-        ↓
-design-taste-frontend
-        ↓
-high-end-visual-design (optional)
-        ↓
-react-spectrum
-```
+## 2. Version Design Contract
 
-其中 Core Cognition 和 Current Version Design Document 是项目事实与设计依据，不是 skill。
+当前版本设计文档把核心认知落实为：
 
-## Responsibility Boundary
+- 页面与信息架构；
+- 用户流程；
+- 组件与状态；
+- 视觉方向；
+- 当前版本设计系统要求；
+- 原型范围和验收。
 
-### Core Cognition
+版本设计文档可以定义当前版本的设计选择，但不得创建与核心认知冲突的产品事实。
 
-定义跨模块、跨版本必须稳定的产品事实、术语、目标、实体、关系、状态和全局约束。
+例如 v0.4.0 已明确个人主页以 BAP ID 为身份核心，并继承既有品牌与 React Spectrum S2 设计系统。
 
-任何设计 skill 都不得修改、补充或重新定义这些事实。发现缺失的跨模块事实时，先更新核心认知，再同步下游设计和实现。
+## 3. Binding Design System
 
-### Current Version Design Document
+当当前版本设计文档已经指定 React Spectrum、Spectrum S2 或其他设计系统时，该设计系统在开始设计前即成为 binding constraint。
 
-把核心认知落实为当前版本的页面结构、组件、流程、视觉方向和验收要求。
+它约束：
 
-例如个人主页版本已经明确 BAP ID 的页面角色、公开主页信息结构，以及 React Spectrum S2 的设计系统约束。skill 必须在这些既有约束内执行。
+- Design Token；
+- 通用组件；
+- 交互状态；
+- 可访问性；
+- 通用视觉和行为一致性。
+
+设计 skill 不得自行重新选择另一个主设计系统，也不得用自己的默认风格覆盖已绑定的设计系统。
+
+项目特有的 Hero、Identity 表达、Content Showcase 等可以自定义，但必须继续服从核心认知、版本设计文档和绑定设计系统的边界。
+
+## 4. Design Execution
 
 ### baoyu-design
 
-提供通用设计方法，包括设计分析、设计系统意识、视觉质量判断和原型验证方法。
+`baoyu-design` 是 OwnWord 高保真设计任务的主设计执行框架。
 
-它用于帮助理解和落实已有设计目标，不定义 OwnWord 产品事实。
+它负责：
+
+- 理解设计任务和现有上下文；
+- 加载并遵循已有 design system；
+- 高保真设计和交互原型；
+- 设计质量检查；
+- Preview、验证和迭代。
+
+它负责组织设计工作，但不拥有 OwnWord 产品事实，也不能覆盖当前版本已经确定的设计约束。
 
 ### design-taste-frontend
 
-负责页面视觉语言和前端设计执行，包括布局、视觉密度、动效强度和反模板化约束。
+`design-taste-frontend` 是前端视觉设计 specialist，不是所有页面必须完整执行的固定步骤。
 
-它必须服从核心认知与当前版本设计文档，不得为了视觉效果改变信息层级、产品语义或既定交互规则。
+它适合强化：
+
+- 页面设计语言判断；
+- Anti-slop / anti-template；
+- Typography、spacing、layout；
+- Visual density；
+- Motion intensity；
+- Responsive mechanics；
+- 前端设计 pre-flight check。
+
+其原始定位偏向 landing page、portfolio 和 redesign，并明确不以 multi-step product UI 为主要使用场景。因此 OwnWord 按页面类型控制使用强度。
+
+| 页面类型 | 使用方式 |
+| --- | --- |
+| Public Personal Homepage、Landing、Content Showcase、公开展示页 | 强使用，可用于整体视觉方向与前端设计质量 |
+| Public Post Reader、内容阅读 | 中等使用，以排版、密度、响应式和细节质量为主 |
+| Identity Setup、Wallet Connect | 选择性使用，采用 anti-slop、排版、响应式和检查规则，不让其重写流程与设计系统 |
+| Publish Review、Wallet Confirmation、Settings、Proof / Transaction Details | 轻量使用，只吸收与清晰度、响应式、状态完整性和实现质量相关的规则 |
+
+任何时候，`design-taste-frontend` 都不得为了视觉变化改变既定业务流程、状态机、信息优先级或已绑定设计系统。
 
 ### high-end-visual-design
 
-可选的视觉精修能力，用于页面结构和设计方向已经确定后的字体、空间、层次、动效和品牌质感优化。
+`high-end-visual-design` 是强风格视觉 specialist，不是通用质量层。
 
-仅在当前页面目标需要更强视觉表达时使用，不作为默认产品设计规则。
+它具有明确的 premium / agency / cinematic 审美倾向，包括强 typography、macro whitespace、非对称布局、复杂 motion 和特定组件造型。
 
-### react-spectrum
+仅当当前页面目标明确需要这种强视觉表达时使用，例如品牌型 Hero 或展示型页面的局部视觉探索。
 
-负责组件实现规范，包括组件选择、Design Token、交互状态和无障碍要求。
+不得把它的固定视觉套路全局应用到 Wallet、Publish、Settings、Proof 等任务型产品 UI，也不得覆盖 OwnWord 已定义的品牌方向或 Spectrum S2 约束。
 
-当前版本设计文档已指定 React Spectrum 或 Spectrum S2 时，优先按该设计系统实现通用交互。品牌展示、特殊内容表达和项目特有组件可以在既有设计约束下自定义。
+## 5. React Spectrum Skill
+
+`react-spectrum` skill 是 implementation guardrail，与 React Spectrum / Spectrum S2 设计系统本体不是同一层概念。
+
+它负责在实现阶段检查：
+
+- 是否优先使用合适的官方组件；
+- 是否使用已有 Token；
+- 交互状态是否一致；
+- keyboard、focus、semantic、screen reader 等 Accessibility 是否满足；
+- 自定义组件是否确有 OwnWord 特有表达需求。
+
+它不决定产品定位、页面结构或视觉主题。
 
 ## Invocation Rules
 
-设计任务按以下顺序执行：
+设计任务执行顺序：
 
 1. 读取 `_task/system-design/spec/核心认知.md`。
 2. 定位并读取当前版本相关设计文档。
-3. 确认已有页面、组件、视觉和设计系统约束。
-4. 使用 `baoyu-design` 做设计分析和质量判断。
-5. 使用 `design-taste-frontend` 完成视觉与前端设计执行。
-6. 需要额外视觉精修时再使用 `high-end-visual-design`。
-7. 使用 `react-spectrum` 落实通用组件、Token、交互和无障碍。
+3. 确认当前版本是否已经绑定 React Spectrum / Spectrum S2 或其他设计系统。
+4. 使用 `baoyu-design` 组织高保真设计、原型、预览和验证。
+5. 根据页面类型决定是否加载以及加载多少 `design-taste-frontend`。
+6. 只有明确需要强 premium / agency / cinematic 表达时，才加载 `high-end-visual-design`，并限制其作用范围。
+7. 实现和验收阶段使用 `react-spectrum` skill 检查组件、Token、交互与 Accessibility。
+8. Preview 并验证页面是否同时满足核心认知、版本设计文档和绑定设计系统。
 
 ## Change Guard
 
-新增设计规则、skill 或标准前必须确认：
+新增设计规则、设计系统或 skill 前必须确认：
 
 - 是否已经在核心认知中定义；
 - 是否已经在当前版本设计文档中定义；
-- 新内容属于产品事实、版本设计、设计方法、视觉执行还是组件实现；
-- 是否会产生第二个事实来源。
+- 是否已有绑定设计系统能够解决；
+- 新能力是 Orchestrator、Specialist 还是 Implementation Guardrail；
+- 是否会与现有 skill 重复或产生第二个事实来源；
+- 是否会改变既定产品流程、信息层级或状态语义。
 
-外部 skill 只提供能力。任何与核心认知或当前版本设计文档冲突的 skill 规则均不得直接应用。
+外部 skill 只提供能力。任何与核心认知、当前版本设计文档或绑定设计系统冲突的规则均不得直接应用。
