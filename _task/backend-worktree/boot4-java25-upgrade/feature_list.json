@@ -8,7 +8,7 @@
     "done"
   ],
   "activeItem": null,
-  "note": "原 Boot 4 / Java 25 升级及交付后修复均已完成，原阶段证据保留。当前新增目标为四仓库单元测试全覆盖；2026-09-20 已完成调查与计划，用户要求先做计划，实施未开工。新增测试范围与验收以 testPlanDoc 为准。",
+  "note": "原 Boot 4 / Java 25 升级及交付后修复均已完成。新增单元测试计划已于 2026-09-20 完成评审修订，技术上可进入 U0；本轮只做评审与文档修订，代码开工仍待用户明确批准，U0—U9 均未实施。新增测试范围与验收以 testPlanDoc 为准，评审依据见 reviewDoc。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -231,12 +231,29 @@
       ]
     },
     {
+      "id": "unit-plan-review",
+      "name": "单元测试计划评审与修订",
+      "description": "评审范围、问题与当前处置见 doc/review-单元测试全覆盖计划-20260920-091540.md；执行约束统一回写 testPlanDoc。",
+      "status": "done",
+      "dependencies": [
+        "unit-plan"
+      ],
+      "statusNote": "2026-09-20：2 项 P1 与 2 项 P2 已在计划层面闭环，可进入 U0；未修改子仓库代码或 POM，未运行 Maven 测试。",
+      "evidence": [
+        "完整性与依赖：4 仓库、25 POM、21 个 component 子模块均覆盖；解析 component 内 39 条直接依赖，无依赖后续阶段的边。",
+        "本地 surefire 3.5.6 插件描述符 failIfNoTests 默认 false；核对 JaCoCo v0.8.14 CheckMojo 源码确认缺 .exec 跳过。计划改为统一入口强制验证完整性并要求 U0 验证门禁反例。",
+        "源码确认 BitailsProviderTest 两个测试无 external 标签，却调用 BitailsClient 实际 HTTP 路径；计划明确先分类和修正标签再采集基线。",
+        "计划区分 baseline/accept 入口，固定严格阈值；明确单元采集路径、逐模块证据保存时点和集成回归的独立路径。",
+        "./init.sh 本轮退出 0，四子仓库干净且在 feature/java25；当前环境中间件检查告警，宿主状态未复核。"
+      ]
+    },
+    {
       "id": "unit-u0-baseline",
       "name": "U0 基线与测试公共配置",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
       "status": "not-started",
       "dependencies": [
-        "unit-plan"
+        "unit-plan-review"
       ],
       "evidence": []
     },
@@ -331,5 +348,6 @@
       "evidence": []
     }
   ],
-  "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md"
+  "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
+  "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md"
 }
