@@ -2153,6 +2153,3968 @@
       ]
     },
     {
+      "id": "src/primitives/DRBG.ts#class:DRBG:1",
+      "java": "com.metanet4j.bsv.primitives.DRBG",
+      "javaSignature": "public class DRBG",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-drbg",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/DRBG.ts:30",
+        "src/primitives/__tests/DRBG.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/DRBG.ts#constructor:DRBG.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.DRBG#constructor",
+      "javaSignature": "public DRBG(Object entropy, Object nonce)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-drbg",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/DRBG.ts:34",
+        "src/primitives/__tests/DRBG.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/DRBG.ts#method:DRBG.generate:1",
+      "java": "com.metanet4j.bsv.primitives.DRBG#generate",
+      "javaSignature": "public String generate(double len)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-drbg",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/DRBG.ts:108",
+        "src/primitives/__tests/DRBG.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/DRBG.ts#method:DRBG.hmac:1",
+      "java": "com.metanet4j.bsv.primitives.DRBG#hmac",
+      "javaSignature": "public SHA256HMAC hmac()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-drbg",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/DRBG.ts:67",
+        "src/primitives/__tests/DRBG.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/DRBG.ts#method:DRBG.update:1",
+      "java": "com.metanet4j.bsv.primitives.DRBG#update",
+      "javaSignature": "public void update(Object seed)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-drbg",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/DRBG.ts:82",
+        "src/primitives/__tests/DRBG.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/DRBG.ts#property:DRBG.K:1",
+      "java": "com.metanet4j.bsv.primitives.DRBG#K",
+      "javaSignature": "public List<Object> K",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-drbg",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/DRBG.ts:31",
+        "src/primitives/__tests/DRBG.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/DRBG.ts#property:DRBG.V:1",
+      "java": "com.metanet4j.bsv.primitives.DRBG#V",
+      "javaSignature": "public List<Object> V",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-drbg",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/DRBG.ts:32",
+        "src/primitives/__tests/DRBG.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#class:BaseHash:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash",
+      "javaSignature": "abstract class BaseHash<T extends BaseHash<T>>",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:43",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#class:FastSHA256:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256",
+      "javaSignature": "static class FastSHA256 extends HashMD<FastSHA256>",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1469",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#class:FastSHA512:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512",
+      "javaSignature": "static class FastSHA512 extends HashMD<FastSHA512>",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1666",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#class:HMAC:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HMAC",
+      "javaSignature": "static class HMAC<T extends HashCore<T>> extends HashCore<HMAC<T>>",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1854",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#class:Hash:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashCore",
+      "javaSignature": "abstract static class HashCore<T extends HashCore<T>> implements FallbackHashLike",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1278",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#class:HashMD:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD",
+      "javaSignature": "abstract static class HashMD<T extends HashMD<T>> extends HashCore<T>",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1341",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#class:RIPEMD160:1",
+      "java": "com.metanet4j.bsv.primitives.RIPEMD160",
+      "javaSignature": "public class RIPEMD160 extends BaseHash<RIPEMD160>",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:628",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#class:SHA1:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1",
+      "javaSignature": "public class SHA1 extends BaseHash<SHA1>",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:745",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#class:SHA1HMAC:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1HMAC",
+      "javaSignature": "public class SHA1HMAC",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:930",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#class:SHA256:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256",
+      "javaSignature": "public class SHA256",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:701",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#class:SHA256HMAC:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256HMAC",
+      "javaSignature": "public class SHA256HMAC",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:860",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#class:SHA512:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512",
+      "javaSignature": "public class SHA512",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:823",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#class:SHA512HMAC:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512HMAC",
+      "javaSignature": "public class SHA512HMAC",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:988",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#constructor:BaseHash.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#constructor",
+      "javaSignature": "BaseHash(double blockSize, double outSize, double hmacStrength, double padLength)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:54",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#constructor:FastSHA256.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256#constructor",
+      "javaSignature": "FastSHA256(Object outputLen)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1486",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#constructor:FastSHA512.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#constructor",
+      "javaSignature": "FastSHA512(Object outputLen)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1699",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#constructor:HMAC.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HMAC#constructor",
+      "javaSignature": "HMAC(IHash<T> hash, Object key)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1861",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#constructor:HashMD.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#constructor",
+      "javaSignature": "HashMD(double blockLen, double outputLen, double padOffset, boolean isLE)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1352",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#constructor:RIPEMD160.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.RIPEMD160#constructor",
+      "javaSignature": "public RIPEMD160()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:631",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#constructor:SHA1.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1#constructor",
+      "javaSignature": "public SHA1()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:750",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#constructor:SHA1HMAC.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1HMAC#constructor",
+      "javaSignature": "public SHA1HMAC(Object key)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:935",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#constructor:SHA256.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256#constructor",
+      "javaSignature": "public SHA256()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:705",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#constructor:SHA256HMAC.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256HMAC#constructor",
+      "javaSignature": "public SHA256HMAC(Object key)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:879",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#constructor:SHA512.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512#constructor",
+      "javaSignature": "public SHA512()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:827",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#constructor:SHA512HMAC.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512HMAC#constructor",
+      "javaSignature": "public SHA512HMAC(Object key)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1007",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:add3H:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#add3H",
+      "javaSignature": "private static double add3H(double low, double Ah, double Bh, double Ch)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1328",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:add3L:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#add3L",
+      "javaSignature": "private static double add3L(double Al, double Bl, double Cl)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1327",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:add4H:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#add4H",
+      "javaSignature": "private static double add4H(double low, double Ah, double Bh, double Ch, double Dh)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1332",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:add4L:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#add4L",
+      "javaSignature": "private static double add4L(double Al, double Bl, double Cl, double Dl)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1330",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:add5H:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#add5H",
+      "javaSignature": "private static double add5H(double low, double Ah, double Bh, double Ch, double Dh, double Eh)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1337",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:add5L:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#add5L",
+      "javaSignature": "private static double add5L(double Al, double Bl, double Cl, double Dl, double El)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1334",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:assert:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#assertHash",
+      "javaSignature": "private static void assertHash(Object expression, Object message)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:6",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:hash160:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#hash160",
+      "javaSignature": "public static List<Double> hash160(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1165",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:hash256:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#hash256",
+      "javaSignature": "public static List<Double> hash256(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1149",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:hmac:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#hmac",
+      "javaSignature": "private static <T extends HashCore<T>> ByteView hmac(IHash<T> hash, Object key, Object message)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1971",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:ripemd160:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#ripemd160",
+      "javaSignature": "public static List<Double> ripemd160(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1085",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:rotrBH:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#rotrBH",
+      "javaSignature": "private static double rotrBH(double h, double l, double s)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1320",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:rotrBL:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#rotrBL",
+      "javaSignature": "private static double rotrBL(double h, double l, double s)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1321",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:rotrSH:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#rotrSH",
+      "javaSignature": "private static double rotrSH(double h, double l, double s)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1318",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:rotrSL:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#rotrSL",
+      "javaSignature": "private static double rotrSL(double h, double l, double s)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1319",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:sha1:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#sha1",
+      "javaSignature": "public static List<Double> sha1(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1102",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:sha256:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#sha256",
+      "javaSignature": "public static List<Double> sha256(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1117",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:sha256hmac:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#sha256hmac",
+      "javaSignature": "public static List<Double> sha256hmac(Object key, Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1184",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:sha512:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#sha512",
+      "javaSignature": "public static List<Double> sha512(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1132",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:sha512hmac:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#sha512hmac",
+      "javaSignature": "public static List<Double> sha512hmac(Object key, Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1202",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:shrSH:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#shrSH",
+      "javaSignature": "private static double shrSH(double h, double l, double s)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1316",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function-variable:shrSL:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#shrSL",
+      "javaSignature": "private static double shrSL(double h, double l, double s)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1317",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:FT_1:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#FT_1",
+      "javaSignature": "private static double FT_1(double s, double x, double y, double z)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:504",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:G0_256:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#G0_256",
+      "javaSignature": "private static double G0_256(double x)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:537",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:G1_256:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#G1_256",
+      "javaSignature": "private static double G1_256(double x)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:541",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:K:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#K",
+      "javaSignature": "private static double K(double j)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:583",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:Kh:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#Kh",
+      "javaSignature": "private static double Kh(double j)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:597",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:S0_256:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#S0_256",
+      "javaSignature": "private static double S0_256(double x)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:529",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:S1_256:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#S1_256",
+      "javaSignature": "private static double S1_256(double x)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:533",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:SUM32_3:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#SUM32_3",
+      "javaSignature": "private static double SUM32_3(double a, double b, double c)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:492",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:SUM32_4:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#SUM32_4",
+      "javaSignature": "private static double SUM32_4(double a, double b, double c, double d)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:496",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:SUM32_5:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#SUM32_5",
+      "javaSignature": "private static double SUM32_5(double a, double b, double c, double d, double e)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:500",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:abytes:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#abytes",
+      "javaSignature": "private static void abytes(Object bytes, double... lengths)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1218",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:add:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#add",
+      "javaSignature": "private static Map<String, Double> add(double Ah, double Al, double Bh, double Bl)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1322",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:aexists:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#aexists",
+      "javaSignature": "private static void aexists(Object instance, Object checkFinished)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1232",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:ahash:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#ahash",
+      "javaSignature": "private static void ahash(Object hash)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1225",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:anumber:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#anumber",
+      "javaSignature": "private static void anumber(Object n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1213",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:aoutput:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#aoutput",
+      "javaSignature": "private static void aoutput(Object out, Object instance)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1238",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:appendUtf8CodeUnit:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#appendUtf8CodeUnit",
+      "javaSignature": "private static double appendUtf8CodeUnit(String msg, double i, List<Double> out)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:218",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:bytesToHex:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#bytesToHex",
+      "javaSignature": "private static String bytesToHex(ByteView data)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:334",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:ch32:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#ch32",
+      "javaSignature": "private static double ch32(double x, double y, double z)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:517",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:clean:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#clean",
+      "javaSignature": "private static void clean(Object... arrays)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1248",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:createHasher:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#createHasher",
+      "javaSignature": "private static <T extends HashCore<T>> Hasher<T> createHasher(java.util.function.Supplier<T> hashCons)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1288",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:createNodeHash:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#createNodeHash",
+      "javaSignature": "private static Object createNodeHash(String algorithm)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:402",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:createNodeHmac:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#createNodeHmac",
+      "javaSignature": "private static Object createNodeHmac(String algorithm, ByteView keyBytes)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:412",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:createView:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#createView",
+      "javaSignature": "private static java.nio.ByteBuffer createView(Object array)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1251",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:digestHexNativeOrFallback:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#digestHexNativeOrFallback",
+      "javaSignature": "private static String digestHexNativeOrFallback(Object nativeDigest, FallbackHashLike fallback)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:396",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:digestNativeOrFallback:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#digestNativeOrFallback",
+      "javaSignature": "private static List<Double> digestNativeOrFallback(Object nativeDigest, FallbackHashLike fallback)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:390",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:digestWithNodeHash:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#digestWithNodeHash",
+      "javaSignature": "private static Object digestWithNodeHash(String algorithm, Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:422",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:digestWithNodeHmac:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#digestWithNodeHmac",
+      "javaSignature": "private static Object digestWithNodeHmac(String algorithm, Object key, Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:433",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:f:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#f",
+      "javaSignature": "private static double f(double j, double x, double y, double z)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:569",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:fromBig:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#fromBig",
+      "javaSignature": "private static Map<String, Double> fromBig(BigInteger n, Object le)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1300",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:hexStringToArray:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#hexStringToArray",
+      "javaSignature": "private static List<Double> hexStringToArray(String msg)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:247",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:htonl:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#htonl",
+      "javaSignature": "@Deprecated public static double htonl(double w)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:291",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:isBytes:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#isBytes",
+      "javaSignature": "private static boolean isBytes(Object value)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1210",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:join32:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#join32",
+      "javaSignature": "private static List<Double> join32(List<?> msg, double start, double end, Object endian)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:445",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:maj32:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#maj32",
+      "javaSignature": "private static double maj32(double x, double y, double z)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:521",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:numberArrayToByteArray:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#numberArrayToByteArray",
+      "javaSignature": "private static List<Double> numberArrayToByteArray(Object msg)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:257",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:p32:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#p32",
+      "javaSignature": "private static double p32(double x, double y, double z)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:525",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:pbkdf2:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#pbkdf2",
+      "javaSignature": "public static List<Double> pbkdf2(Object password, Object salt, Object iterations, Object keylen, Object digest)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-pbkdf2",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1996",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:pbkdf2Core:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#pbkdf2Core",
+      "javaSignature": "private static ByteView pbkdf2Core(IHash<FastSHA512> hash, Object password, Object salt, Map<String, Object> opts)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-pbkdf2",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1931",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:pbkdf2Fast:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#pbkdf2Fast",
+      "javaSignature": "private static ByteView pbkdf2Fast(ByteView password, ByteView salt, Object iterations, Object keylen)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-pbkdf2",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1975",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:realHtonl:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#realHtonl",
+      "javaSignature": "public static double realHtonl(double w)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:2072",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:ripemd160Bytes:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#ripemd160Bytes",
+      "javaSignature": "private static Object ripemd160Bytes(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1070",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:rotl32:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#rotl32",
+      "javaSignature": "private static double rotl32(double w, double b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:484",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:rotr32:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#rotr32",
+      "javaSignature": "private static double rotr32(double w, double b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:480",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:setBigUint64:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#setBigUint64",
+      "javaSignature": "private static void setBigUint64(java.nio.ByteBuffer view, double byteOffset, BigInteger value, boolean isLE)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1441",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:sha256Bytes:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#sha256Bytes",
+      "javaSignature": "private static ByteView sha256Bytes(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1058",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:sha512Bytes:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#sha512Bytes",
+      "javaSignature": "private static ByteView sha512Bytes(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1064",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:split32:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#split32",
+      "javaSignature": "private static List<Double> split32(List<?> msg, String endian)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:461",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:split:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#split",
+      "javaSignature": "private static int[][] split(List<BigInteger> values, Object le)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1305",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:sum32:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#sum32",
+      "javaSignature": "private static double sum32(double a, double b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:488",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:swapBytes32:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#swapBytes32",
+      "javaSignature": "public static double swapBytes32(double w)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:2035",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:toArray:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#toArray",
+      "javaSignature": "public static List<Object> toArray(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:271",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:toBytes:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#toBytes",
+      "javaSignature": "private static ByteView toBytes(Object data)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1254",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:toHashBytes:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#toHashBytes",
+      "javaSignature": "private static ByteView toHashBytes(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:359",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:toHashKeyBytes:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#toHashKeyBytes",
+      "javaSignature": "private static ByteView toHashKeyBytes(Object key)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:369",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:toHex32:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#toHex32",
+      "javaSignature": "private static String toHex32(List<?> msg, Object endian)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:295",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:updateNativeOrFallback:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#updateNativeOrFallback",
+      "javaSignature": "private static void updateNativeOrFallback(Object nativeDigest, FallbackHashLike fallback, ByteView data)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:378",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:utf8StringToArray:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#utf8StringToArray",
+      "javaSignature": "private static List<Double> utf8StringToArray(String msg)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:237",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:utf8ToBytes:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#utf8ToBytes",
+      "javaSignature": "private static ByteView utf8ToBytes(Object str)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1259",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#function:zero8:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#zero8",
+      "javaSignature": "private static String zero8(String word)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:306",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#interface:FallbackHashLike:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FallbackHashLike",
+      "javaSignature": "interface FallbackHashLike",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:373",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#interface:Hasher:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.Hasher",
+      "javaSignature": "interface Hasher<T extends HashCore<T>> extends IHash<T>",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1272",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#interface:IHash:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.IHash",
+      "javaSignature": "interface IHash<T extends HashCore<T>>",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1265",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:BaseHash._digest:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#_digest",
+      "javaSignature": "public List<Double> _digest()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:69",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:BaseHash._digestHex:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#_digestHex",
+      "javaSignature": "public String _digestHex()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:73",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:BaseHash._pad:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#_pad",
+      "javaSignature": "List<Double> _pad()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:162",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:BaseHash._update:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#_update",
+      "javaSignature": "public void _update(List<?> msg, double start)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:65",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:BaseHash.digest:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#digest",
+      "javaSignature": "public List<Double> digest()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:130",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:BaseHash.digestHex:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#digestHex",
+      "javaSignature": "public String digestHex()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:147",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:BaseHash.update:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#update",
+      "javaSignature": "public T update(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:90",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:FastSHA256.destroy:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256#destroy",
+      "javaSignature": "public void destroy()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1564",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:FastSHA256.get:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256#get",
+      "javaSignature": "protected List<Double> get()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1490",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:FastSHA256.process:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256#process",
+      "javaSignature": "protected void process(java.nio.ByteBuffer view, double offset)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1525",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:FastSHA256.roundClean:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256#roundClean",
+      "javaSignature": "protected void roundClean()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1560",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:FastSHA256.set:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256#set",
+      "javaSignature": "protected void set(double... args)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1495",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:FastSHA512.destroy:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#destroy",
+      "javaSignature": "public void destroy()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1847",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:FastSHA512.get:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#get",
+      "javaSignature": "protected List<Double> get()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1703",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:FastSHA512.process:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#process",
+      "javaSignature": "protected void process(java.nio.ByteBuffer view, double offset)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1762",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:FastSHA512.roundClean:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#roundClean",
+      "javaSignature": "protected void roundClean()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1843",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:FastSHA512.set:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#set",
+      "javaSignature": "protected void set(double... args)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1708",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HMAC._cloneInto:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HMAC#_cloneInto",
+      "javaSignature": "public HMAC<T> _cloneInto(HMAC<T> to)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1907",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HMAC.clone:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HMAC#clone",
+      "javaSignature": "public HMAC<T> clone()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1920",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HMAC.destroy:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HMAC#destroy",
+      "javaSignature": "public void destroy()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1924",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HMAC.digest:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HMAC#digest",
+      "javaSignature": "public ByteView digest()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1901",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HMAC.digestInto:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HMAC#digestInto",
+      "javaSignature": "public void digestInto(ByteView out)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1891",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HMAC.update:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HMAC#update",
+      "javaSignature": "public HMAC<T> update(Object data)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1885",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:Hash._cloneInto:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashCore#_cloneInto",
+      "javaSignature": "public abstract T _cloneInto(T to)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1285",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:Hash.clone:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashCore#clone",
+      "javaSignature": "public abstract T clone()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1286",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:Hash.destroy:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashCore#destroy",
+      "javaSignature": "public abstract void destroy()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1284",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:Hash.digest:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashCore#digest",
+      "javaSignature": "public abstract ByteView digest()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1283",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:Hash.digestInto:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashCore#digestInto",
+      "javaSignature": "public abstract void digestInto(ByteView out)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1282",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:Hash.update:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashCore#update",
+      "javaSignature": "public abstract T update(Object data)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1281",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HashMD._cloneInto:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#_cloneInto",
+      "javaSignature": "public T _cloneInto(T to)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1425",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HashMD.clone:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#clone",
+      "javaSignature": "public T clone()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1437",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HashMD.destroy:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#destroy",
+      "javaSignature": "public abstract void destroy()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1365",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HashMD.digest:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#digest",
+      "javaSignature": "public ByteView digest()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1417",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HashMD.digestInto:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#digestInto",
+      "javaSignature": "public void digestInto(ByteView out)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1393",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HashMD.get:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#get",
+      "javaSignature": "protected abstract List<Double> get()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1363",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HashMD.process:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#process",
+      "javaSignature": "protected abstract void process(java.nio.ByteBuffer view, double offset)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1362",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HashMD.roundClean:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#roundClean",
+      "javaSignature": "protected abstract void roundClean()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1366",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HashMD.set:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#set",
+      "javaSignature": "protected abstract void set(double... args)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1364",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:HashMD.update:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#update",
+      "javaSignature": "public T update(Object data)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1367",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:RIPEMD160._digest:1",
+      "java": "com.metanet4j.bsv.primitives.RIPEMD160#_digest",
+      "javaSignature": "public List<Double> _digest()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:673",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:RIPEMD160._digestHex:1",
+      "java": "com.metanet4j.bsv.primitives.RIPEMD160#_digestHex",
+      "javaSignature": "public String _digestHex()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:677",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:RIPEMD160._update:1",
+      "java": "com.metanet4j.bsv.primitives.RIPEMD160#_update",
+      "javaSignature": "public void _update(List<?> msg, double start)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:639",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA1._digest:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1#_digest",
+      "javaSignature": "public List<Double> _digest()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:795",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA1._digestHex:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1#_digestHex",
+      "javaSignature": "public String _digestHex()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:799",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA1._update:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1#_update",
+      "javaSignature": "public void _update(List<?> msg, Object start)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:757",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA1HMAC.digest:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1HMAC#digest",
+      "javaSignature": "public List<Double> digest()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:965",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA1HMAC.digestHex:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1HMAC#digestHex",
+      "javaSignature": "public String digestHex()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:970",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA1HMAC.update:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1HMAC#update",
+      "javaSignature": "public SHA1HMAC update(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:960",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA256.digest:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256#digest",
+      "javaSignature": "public List<Double> digest()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:717",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA256.digestHex:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256#digestHex",
+      "javaSignature": "public String digestHex()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:721",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA256.update:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256#update",
+      "javaSignature": "public SHA256 update(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:712",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA256HMAC.digest:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256HMAC#digest",
+      "javaSignature": "public List<Double> digest()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:912",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA256HMAC.digestHex:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256HMAC#digestHex",
+      "javaSignature": "public String digestHex()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:925",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA256HMAC.update:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256HMAC#update",
+      "javaSignature": "public SHA256HMAC update(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:898",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA512.digest:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512#digest",
+      "javaSignature": "public List<Double> digest()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:839",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA512.digestHex:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512#digestHex",
+      "javaSignature": "public String digestHex()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:843",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA512.update:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512#update",
+      "javaSignature": "public SHA512 update(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:834",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA512HMAC.digest:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512HMAC#digest",
+      "javaSignature": "public List<Double> digest()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1040",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA512HMAC.digestHex:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512HMAC#digestHex",
+      "javaSignature": "public String digestHex()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1053",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#method:SHA512HMAC.update:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512HMAC#update",
+      "javaSignature": "public SHA512HMAC update(Object msg, Object enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1026",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:BaseHash._delta32:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#_delta32",
+      "javaSignature": "public double _delta32",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:50",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:BaseHash._delta8:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#_delta8",
+      "javaSignature": "public double _delta8",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:49",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:BaseHash.blockSize:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#blockSize",
+      "javaSignature": "public double blockSize",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:46",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:BaseHash.endian:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#endian",
+      "javaSignature": "public String endian",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:48",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:BaseHash.hmacStrength:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#hmacStrength",
+      "javaSignature": "public double hmacStrength",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:52",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:BaseHash.outSize:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#outSize",
+      "javaSignature": "public double outSize",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:47",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:BaseHash.padLength:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#padLength",
+      "javaSignature": "public double padLength",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:51",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:BaseHash.pending:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#pending",
+      "javaSignature": "public List<Object> pending",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:44",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:BaseHash.pendingTotal:1",
+      "java": "com.metanet4j.bsv.primitives.BaseHash#pendingTotal",
+      "javaSignature": "public double pendingTotal",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:45",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FallbackHashLike.digest:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FallbackHashLike#digest",
+      "javaSignature": "ByteView digest()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:375",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FallbackHashLike.update:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FallbackHashLike#update",
+      "javaSignature": "Object update(Object data)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:374",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA256.A:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256#A",
+      "javaSignature": "protected double A",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1471",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA256.B:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256#B",
+      "javaSignature": "protected double B",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1473",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA256.C:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256#C",
+      "javaSignature": "protected double C",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1475",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA256.D:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256#D",
+      "javaSignature": "protected double D",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1477",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA256.E:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256#E",
+      "javaSignature": "protected double E",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1479",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA256.F:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256#F",
+      "javaSignature": "protected double F",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1481",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA256.G:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256#G",
+      "javaSignature": "protected double G",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1483",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA256.H:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA256#H",
+      "javaSignature": "protected double H",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1485",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Ah:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Ah",
+      "javaSignature": "protected double Ah",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1668",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Al:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Al",
+      "javaSignature": "protected double Al",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1670",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Bh:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Bh",
+      "javaSignature": "protected double Bh",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1672",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Bl:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Bl",
+      "javaSignature": "protected double Bl",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1674",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Ch:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Ch",
+      "javaSignature": "protected double Ch",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1676",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Cl:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Cl",
+      "javaSignature": "protected double Cl",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1678",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Dh:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Dh",
+      "javaSignature": "protected double Dh",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1680",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Dl:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Dl",
+      "javaSignature": "protected double Dl",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1682",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Eh:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Eh",
+      "javaSignature": "protected double Eh",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1684",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.El:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#El",
+      "javaSignature": "protected double El",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1686",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Fh:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Fh",
+      "javaSignature": "protected double Fh",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1688",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Fl:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Fl",
+      "javaSignature": "protected double Fl",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1690",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Gh:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Gh",
+      "javaSignature": "protected double Gh",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1692",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Gl:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Gl",
+      "javaSignature": "protected double Gl",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1694",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Hh:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Hh",
+      "javaSignature": "protected double Hh",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1696",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:FastSHA512.Hl:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.FastSHA512#Hl",
+      "javaSignature": "protected double Hl",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1698",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HMAC.blockLen:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HMAC#blockLen",
+      "javaSignature": "double blockLen",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1857",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HMAC.destroyed:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HMAC#destroyed",
+      "javaSignature": "private boolean destroyed",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1860",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HMAC.finished:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HMAC#finished",
+      "javaSignature": "private boolean finished",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1859",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HMAC.iHash:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HMAC#iHash",
+      "javaSignature": "T iHash",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1856",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HMAC.oHash:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HMAC#oHash",
+      "javaSignature": "T oHash",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1855",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HMAC.outputLen:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HMAC#outputLen",
+      "javaSignature": "double outputLen",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1858",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:Hash.blockLen:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashCore#blockLen",
+      "javaSignature": "abstract double blockLen()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1279",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:Hash.outputLen:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashCore#outputLen",
+      "javaSignature": "abstract double outputLen()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1280",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HashMD.blockLen:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#blockLen",
+      "javaSignature": "final double blockLen",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1342",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HashMD.buffer:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#buffer",
+      "javaSignature": "protected ByteView buffer",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1346",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HashMD.destroyed:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#destroyed",
+      "javaSignature": "protected boolean destroyed",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1351",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HashMD.finished:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#finished",
+      "javaSignature": "protected boolean finished",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1348",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HashMD.isLE:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#isLE",
+      "javaSignature": "final boolean isLE",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1345",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HashMD.length:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#length",
+      "javaSignature": "protected double length",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1349",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HashMD.outputLen:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#outputLen",
+      "javaSignature": "final double outputLen",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1343",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HashMD.padOffset:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#padOffset",
+      "javaSignature": "final double padOffset",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1344",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HashMD.pos:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#pos",
+      "javaSignature": "protected double pos",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1350",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:HashMD.view:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.HashMD#view",
+      "javaSignature": "protected java.nio.ByteBuffer view",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1347",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:Hasher.$call:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.Hasher#apply",
+      "javaSignature": "ByteView apply(Object data)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1273",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:Hasher.blockLen:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.Hasher#blockLen",
+      "javaSignature": "double blockLen()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1274",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:Hasher.create:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.Hasher#create",
+      "javaSignature": "T create()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1276",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:Hasher.outputLen:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.Hasher#outputLen",
+      "javaSignature": "double outputLen()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1275",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:IHash.$call:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.IHash#apply",
+      "javaSignature": "ByteView apply(Object data)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1266",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:IHash.blockLen:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.IHash#blockLen",
+      "javaSignature": "double blockLen()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1267",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:IHash.create:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.IHash#create",
+      "javaSignature": "T create()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1269",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:IHash.outputLen:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.IHash#outputLen",
+      "javaSignature": "double outputLen()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1268",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:RIPEMD160.h:1",
+      "java": "com.metanet4j.bsv.primitives.RIPEMD160#h",
+      "javaSignature": "public List<Object> h",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:629",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA1.W:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1#W",
+      "javaSignature": "public List<Object> W",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:747",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA1.h:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1#h",
+      "javaSignature": "public List<Object> h",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:746",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA1.k:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1#k",
+      "javaSignature": "public List<Object> k",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:748",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA1HMAC.blockSize:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1HMAC#blockSize",
+      "javaSignature": "public double blockSize",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:933",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA1HMAC.inner:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1HMAC#inner",
+      "javaSignature": "public SHA1 inner",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:931",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA1HMAC.outer:1",
+      "java": "com.metanet4j.bsv.primitives.SHA1HMAC#outer",
+      "javaSignature": "public SHA1 outer",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:932",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA256.h:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256#h",
+      "javaSignature": "private final Hash.FastSHA256 h /* absent 时为 null */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:702",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA256.native:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256#nativeDigest",
+      "javaSignature": "private final Object nativeDigest /* absent 时为 null */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:703",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA256HMAC.blockSize:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256HMAC#blockSize",
+      "javaSignature": "public double blockSize",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:863",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA256HMAC.h:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256HMAC#h",
+      "javaSignature": "private final Hash.HMAC<Hash.FastSHA256> h /* absent 时为 null */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:861",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA256HMAC.native:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256HMAC#nativeDigest",
+      "javaSignature": "private final Object nativeDigest /* absent 时为 null */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:862",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA256HMAC.outSize:1",
+      "java": "com.metanet4j.bsv.primitives.SHA256HMAC#outSize",
+      "javaSignature": "public double outSize",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:864",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA512.h:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512#h",
+      "javaSignature": "private final Hash.FastSHA512 h /* absent 时为 null */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:824",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA512.native:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512#nativeDigest",
+      "javaSignature": "private final Object nativeDigest /* absent 时为 null */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:825",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA512HMAC.blockSize:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512HMAC#blockSize",
+      "javaSignature": "public double blockSize",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:991",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA512HMAC.h:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512HMAC#h",
+      "javaSignature": "private final Hash.HMAC<Hash.FastSHA512> h /* absent 时为 null */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:989",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA512HMAC.native:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512HMAC#nativeDigest",
+      "javaSignature": "private final Object nativeDigest /* absent 时为 null */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:990",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#property:SHA512HMAC.outSize:1",
+      "java": "com.metanet4j.bsv.primitives.SHA512HMAC#outSize",
+      "javaSignature": "public double outSize",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-hmac",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:992",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#type:HashInput:1",
+      "java": "com.metanet4j.bsv.primitives.Hash",
+      "javaSignature": "Object /* HashInput：按 api-hash-input 的值表示分支，无 Java 类型别名 */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:357",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#type:Input:1",
+      "java": "com.metanet4j.bsv.primitives.Hash",
+      "javaSignature": "Object /* Input：按 api-hash-input 的值表示分支，无 Java 类型别名 */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1263",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#type:TypedArray:1",
+      "java": "com.metanet4j.bsv.primitives.Hash",
+      "javaSignature": "Object /* TypedArray：按 api-hash-input 的值表示分支，无 Java 类型别名 */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1245",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:BufferCtor:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.Runtime#BufferCtor",
+      "javaSignature": "final Object BufferCtor",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:326",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:CAN_USE_BUFFER:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.Runtime#CAN_USE_BUFFER",
+      "javaSignature": "final boolean CAN_USE_BUFFER",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:327",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:HEX_BYTE_STRINGS:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#HEX_BYTE_STRINGS",
+      "javaSignature": "private static final String[] HEX_BYTE_STRINGS",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:329",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:HEX_DIGITS:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#HEX_DIGITS",
+      "javaSignature": "private static final String HEX_DIGITS",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:328",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:K256:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#K256",
+      "javaSignature": "private static final int[] K256",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1457",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:K512:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#K512",
+      "javaSignature": "private static final int[][] K512",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1576",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:NODE_CRYPTO:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.Runtime#NODE_CRYPTO",
+      "javaSignature": "final Object NODE_CRYPTO",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-platform",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:343",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:SHA256_IV:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#SHA256_IV",
+      "javaSignature": "private static final int[] SHA256_IV",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1454",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:SHA256_W:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#SHA256_W",
+      "javaSignature": "private static final int[] SHA256_W",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1467",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:SHA512_IV:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#SHA512_IV",
+      "javaSignature": "private static final int[] SHA512_IV",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1572",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:SHA512_Kh:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#SHA512_Kh",
+      "javaSignature": "private static final int[] SHA512_Kh",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1661",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:SHA512_Kl:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#SHA512_Kl",
+      "javaSignature": "private static final int[] SHA512_Kl",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1662",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:SHA512_W_H:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#SHA512_W_H",
+      "javaSignature": "private static final int[] SHA512_W_H",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1663",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:SHA512_W_L:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#SHA512_W_L",
+      "javaSignature": "private static final int[] SHA512_W_L",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1664",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:U32_MASK64:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#U32_MASK64",
+      "javaSignature": "private static final BigInteger U32_MASK64",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1298",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:_32n:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#_32n",
+      "javaSignature": "private static final BigInteger _32n",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1299",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:isLittleEndian:1",
+      "java": "com.metanet4j.bsv.primitives.Hash.Runtime#isLittleEndian",
+      "javaSignature": "final boolean isLittleEndian",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-input",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:2045",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:kdfInputToBytes:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#kdfInputToBytes",
+      "javaSignature": "private static final java.util.function.Function<Object, ByteView> kdfInputToBytes = Hash::toBytes",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-pbkdf2",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1264",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:r:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#r",
+      "javaSignature": "private static final double[] r",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:545",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:rh:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#rh",
+      "javaSignature": "private static final double[] rh",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:551",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:s:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#s",
+      "javaSignature": "private static final double[] s",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:557",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:sh:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#sh",
+      "javaSignature": "private static final double[] sh",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-base",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:563",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:sha256Fast:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#sha256Fast",
+      "javaSignature": "private static final Hasher<FastSHA256> sha256Fast",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1569",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Hash.ts#variable:sha512Fast:1",
+      "java": "com.metanet4j.bsv.primitives.Hash#sha512Fast",
+      "javaSignature": "private static final Hasher<FastSHA512> sha512Fast",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-hash-fast",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Hash.ts:1852",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
       "id": "src/primitives/K256.ts#class:K256:1",
       "java": "com.metanet4j.bsv.primitives.K256",
       "javaSignature": "public class K256 extends Mersenne",
@@ -2501,6 +6463,110 @@
         "src/primitives/__tests/ReductionContext.test.ts",
         ".cache/evidence/api-values-observations.json",
         ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Random.ts#class:Rand:1",
+      "java": "com.metanet4j.bsv.primitives.Random.Rand",
+      "javaSignature": "static class Rand",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-random",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Random.ts:14",
+        "src/primitives/__tests/Random.test.ts",
+        "src/primitives/__tests/Random.additional.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Random.ts#constructor:Rand.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.Random.Rand#constructor",
+      "javaSignature": "Rand(Random.Runtime runtime)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-random",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Random.ts:23",
+        "src/primitives/__tests/Random.test.ts",
+        "src/primitives/__tests/Random.additional.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Random.ts#export-assignment:default:1",
+      "java": "com.metanet4j.bsv.primitives.Random#random",
+      "javaSignature": "public static List<Double> random(double len) /* 默认导出同一入口 */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-random",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Random.ts:96",
+        "src/primitives/__tests/Random.test.ts",
+        "src/primitives/__tests/Random.additional.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Random.ts#function-variable:Random:1",
+      "java": "com.metanet4j.bsv.primitives.Random#random",
+      "javaSignature": "public static List<Double> random(double len)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-random",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Random.ts:91",
+        "src/primitives/__tests/Random.test.ts",
+        "src/primitives/__tests/Random.additional.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Random.ts#method:Rand.generate:1",
+      "java": "com.metanet4j.bsv.primitives.Random.Rand#generate",
+      "javaSignature": "List<Double> generate(double len)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-random",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Random.ts:73",
+        "src/primitives/__tests/Random.test.ts",
+        "src/primitives/__tests/Random.additional.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Random.ts#method:Rand.getRandomValues:1",
+      "java": "com.metanet4j.bsv.primitives.Random.Rand#getRandomValues",
+      "javaSignature": "List<Double> getRandomValues(Object obj, double n)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-random",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Random.ts:17",
+        "src/primitives/__tests/Random.test.ts",
+        "src/primitives/__tests/Random.additional.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Random.ts#property:Rand._rand:1",
+      "java": "com.metanet4j.bsv.primitives.Random.Rand#_rand",
+      "javaSignature": "java.util.function.DoubleFunction<List<Double>> _rand",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-random",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Random.ts:15",
+        "src/primitives/__tests/Random.test.ts",
+        "src/primitives/__tests/Random.additional.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Random.ts#variable:ayn:1",
+      "java": "com.metanet4j.bsv.primitives.Random.Runtime#ayn",
+      "javaSignature": "Rand ayn /* 初始 null */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-random",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Random.ts:78",
+        "src/primitives/__tests/Random.test.ts",
+        "src/primitives/__tests/Random.additional.test.ts",
+        ".cache/evidence/api-hash-random-observations.json"
       ]
     },
     {

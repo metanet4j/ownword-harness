@@ -15,7 +15,7 @@
     ]
   },
   "activeItem": null,
-  "nextItem": "migration-impl-bignumber-serializers",
+  "nextItem": "migration-api-symmetric",
   "features": [
     {
       "id": "migration-env",
@@ -187,14 +187,20 @@
       "dependencies": [
         "migration-api-values"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "完整复核 Hash.ts 277、DRBG.ts 7、Random.ts 8 项，共 292 项；Java 设计签名和契约见 api-map.json、doc/完整模块与API映射-20260920-122800.md#api-hash-random。24 个直接导出及 2 个 Hash namespace 绑定均有对应方案。",
+        "node audit-api.cjs batches --batch migration-api-hash-random：292/292 设计映射结构通过，见 .cache/evidence/api-hash-random-batch.log；设计不表示 Java 已实现。",
+        "六个原始 TS 测试文件实际 86/86 通过、零失败/跳过；见 .cache/evidence/api-hash-random-ts.log、api-hash-random-ts.jest.json。未修改原源码/测试，不计新增 Java 通过数。",
+        "node api-hash-random-probe.cjs：133 组真实观察及内置断言通过，含原生/纯 TS/无 Buffer、摘要生命周期、PBKDF2 校验、DRBG 状态、Random 宿主优先级/缓存；原始输入/结果/异常及源码哈希见 .cache/evidence/api-hash-random-observations.json。",
+        "环境与全批覆盖检查通过；全量 API check 仍按预期拒绝 2913 项未映射。证据见 .cache/evidence/api-hash-random-manifest.json。"
+      ],
       "scopeRef": "scope"
     },
     {
@@ -798,7 +804,7 @@
       ],
       "evidence": [
         "已拆为 21 个设计批次，当前完成批次及下一步由各 api-batch 独立维护；本项等待所有批次完成后执行总验收。",
-        "当前 api-map 有 371 项已复核、3205 项未映射，总验收未通过。",
+        "当前 api-map 有 663 项已复核、2913 项未映射，总验收未通过。",
         "node audit-api.cjs batches 已核对 21 批恰好覆盖 133 文件/3576 声明；工具自测 39/39，通过记录见 .cache/evidence/api-batches-all-green.log。分批有效不代表总验收完成。"
       ],
       "scopeRef": "scope",

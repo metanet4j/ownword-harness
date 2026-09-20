@@ -17,6 +17,7 @@ python3 inventory-tests.py  # 重建上游测试文件及辅助向量清单
 node test-audit.test.cjs    # 检查器自身正常与反例测试
 node audit-api.cjs check    # 重新扫描源码并检查 Java API 映射；当前应报告未完成
 node audit-api.cjs batches  # 核对所有批次覆盖、依赖和状态，显示逐批进度
+node api-hash-random-probe.cjs # 哈希/DRBG/随机宿主行为观察，非 Java 验收
 node api-values-probe.mjs  # 观察固定 TS 的数值/容器/模运算边界；输出不是测试报告
 python3 run-hex-parity.py --bn-constructor # 累计 Hex + BigNumber 构造；逐项比较实际输入/结果，仅内部实施项
 python3 audit-tests.py check # 整模块用例、映射、执行报告及实际结果验收
@@ -39,3 +40,5 @@ Maven 和 pnpm 分别使用 `./mvn.sh`、`./pnpm.sh`；这两个入口固定工�
 [实施前审查](doc/实施前审查-20260920-115837.md)确认可以进入 P0；七个 P0 功能项及后续完整模块阶段已登记在 [feature_list.json](feature_list.json)，范围复核及[完整 TS 基线](doc/TS完整基线-20260920-124400.md)已完成（5329/5329，含原规模 manual）；已完成 Hex 与 BigNumber 构造原文件对应的内部实施项；已复核文件、剩余映射和授权差异见[当前进度](progress.md)及[API 契约](doc/完整模块与API映射-20260920-122800.md)。用户已授权已完成设计且依赖闭合的部分先编码，同步落实原测试及真实结果对照；完整模块最终验收仍须完成 P0 联合验收。
 
 逐步执行入口：[模块迁移计划](doc/模块迁移计划-20260920-103547.md)中的“API 设计分批”“文件和脚本的职责”“按顺序执行”和“单行为执行示例”，逐项说明输入、脚本、产物与完成条件；尚未实现的运行/采集入口已明确标记。后续交接：[session-handoff.md](session-handoff.md)。
+
+当前按用户要求继续 API 整理：values、hash-random 共 663/3576 项设计完成，下一批 symmetric（60 项）。实际状态及证据以 feature_list.json 和 progress.md 为准。

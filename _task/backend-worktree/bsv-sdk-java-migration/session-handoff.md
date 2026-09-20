@@ -1,33 +1,33 @@
 # 会话交接
 
-## 执行入口
+## 唯一下一步
 
-用户授权已完成设计且依赖闭合的部分先编码，不能以全量 P0/API 设计未完成阻止内部项。完整六模块、全部 5329 原用例及最终联合门禁保持不变。范围和顺序以 feature_list.json 的 scope/implementationPolicy 为准。
+用户最新要求“还是回来，继续整理api”。下一项 migration-api-symmetric：完整 AESGCM.ts、SymmetricKey.ts、AsyncCryptoBackend.ts 三文件、60 项声明，按 apiBatchPolicy 通读源码/全部相关原测试、逐项映射并核对行为。当前 activeItem=null、nextItem=migration-api-symmetric，39 项中 11 done、28 not-started。BigNumber serializers 暂留待办，不把此前先编码授权撤销或改成绝对 P0 禁止。
 
-读取沿途规则、计划及状态，运行 ./init.sh，核对各仓状态。当前无进行中项，唯一下一步 migration-impl-bignumber-serializers：完整 BigNumber.serializers.test.ts 16 个原用例，先审查所需 Utils 编解码和 BigNumber 构造/参数分支，按单行为 TDD。源码、Java 测试与 POM 仅修改 metanet4j-bsv-sdk；其他四工程只读。
+读取沿途规则、计划及状态，运行 ./init.sh、node audit-api.cjs batches，并检查各仓状态。设计只维护任务根目录；代码/测试/POM 仅允许改 metanet4j-bsv-sdk，其他四工程及固定 TS 只读。
 
-## 已完成且可复验
+## API 设计已完成
 
-目标仓最新提交 9c22ba1：BigNumber 构造基础及原文件全部 28 个用例；前一功能提交 0ecb8d1 为完整 Hex。当前 BigNumber 仍未完成全部参数分支、成员或其他原测试，不要把 28 构造用例通过写成整个构造 API/BigNumber/模块等价证明。下一项补齐必要重载、无参零值和协议编码；后续还需完整 arithmetic/binary/utils/additional/dhGroup 和模运算测试。
+values：9 个完整文件、371 项。hash-random：3 个完整文件、292 项（Hash 277、DRBG 7、Random 8）。累计 663/3576，剩余 19 批、2913 项。Java 签名在 api-map.json，行为唯一依据为 doc/完整模块与API映射-20260920-122800.md。不要自动生成 reviewed 或用空壳清零。
 
-`python3 run-hex-parity.py --bn-constructor` 累计执行两个原 TS 文件及 Java 全部 clean test。最新提交后批次 `.cache/evidence/hex-parity-20260920-153441-zd037qhq/`：原用例 36/36，断言结果 71/71，101 AST 位置；Java 共 37/37（基础 1 单列）。BigNumber 子项 28/28、45 静态断言→52 次执行、92 个 API 调用；全部实际输入/结果/异常及断言实参一致。
+hash-random 六个 TS 原测试实际 86/86 通过，133 组探针观察及内置断言通过；原始输入/返回/异常、源码/工具/报告哈希及命令见 .cache/evidence/api-hash-random-manifest.json 和同前缀文件。Hash 两种环境不是处处等价：重复摘要、PBKDF2 默认 keylen/0 长度/参数错误、RIPEMD160 越界 number[] 存在差异；SHA512HMAC.outSize 实际 32；FastSHA.destroy 不设 destroyed；DRBG seed 缺失/空列表不同；Random 构造选择、缓存及动态对象读取均已明确。此批设计未创建 Java 实现，不计新增 Java 测试。
 
-BigNumber 的 139 行保留 8 个非法字符样本，断言 ID 使用 #1..#8；197 行空 Buffer 条件按原式保留。采集器在原测试导入时安装，避免提前 require 改变 ts-jest 首次编译上下文；TS 源码/断言不修改，调用真实实现一次，内部调用不重复采集。Number 按 IEEE-754 位模式记录，保持 NaN/负零的表示能力；本项不宣称这些未在原文件出现的输入已完成实现。
+下一批须特别注意同步 Hash NODE_CRYPTO 与 AsyncCryptoBackend 注册表是不同机制；后者的已选后端结果权威，不能错误回退。此前 AES 探针仅证明 8 组小输入与 Node GCM 一致，不能宣称所有输入可直接 JCA；完整 AES 原大输入也不得缩小。相关线索在 API 契约“已核实、尚待逐项映射的行为”。
 
-Java BigNumberObservation 使用 test 范围 Jackson 3.1.5（父工程版本管理且缓存已有）；生产 SDK 无新增依赖。保留 BSV 与 bn.js MIT 许可和来源资源。TDD 原始日志 bn-01/05/06/07/08/09/12/16/18/19/22/23-red/green.log，12 个真实红绿行为；其余 16 用例为已有行为的直接 GREEN，未人为制造失败。
+完成时运行本批 batches --batch 和无过滤 check；全量应在全部声明设计完毕前失败。结构检查不证明语义等价，也不能替代 5329 用例/7554 AST 的正式验收。
 
-`python3 test-hex-parity.py <累计批次目录> -v` 为 14 个工具自测，不计 SDK 用例。`run-hex-parity.py --verify <批次>` 要求 Java 提交/工作树、源码/映射/工具及原始报告仍匹配；变化后重新采集，不改旧版本号。局部 catalog/mapping 仅用于 compare，formalAcceptance=false；正式 check 始终重扫六模块，当前应拒绝剩余 5293 个 Java 映射。
+## 已有 Java 成果及恢复入口
 
-收尾 ./init.sh、audit-api.cjs batches 通过；audit-tests.py check 实际重扫 133 原文件/5329 用例，按预期拒绝剩余 5293 映射（多余 0）。日志见 .cache/evidence/bn-init-final.log、bn-api-batches-final.log、bn-formal-gate-final.log；提交后 14 项工具反例通过见 bn-parity-selftests-final.log。
+目标仓 9c22ba1：BigNumber 构造基础原文件 28 用例；0ecb8d1：完整 Hex 8 用例。最新已有累计证据 .cache/evidence/hex-parity-20260920-153441-zd037qhq/：36 原用例、71 次断言、101 AST 位置，Java 37/37（基础测试 1 单列）；BigNumber 子项 52 次实际断言、92 次 API 调用轨迹一致。BigNumber 尚未完成完整参数分支/成员/其他测试，不能写成整类完成。
 
-## 剩余设计与边界
+复验命令 python3 run-hex-parity.py --bn-constructor；已有证据可用 --verify <批次目录> 校验版本/哈希。test-hex-parity.py <批次> -v 的 14 项是工具反例，不计 SDK 用例。局部对照 formalAcceptance=false；正式 audit-tests.py check 始终重扫六模块，仍应拒绝 5293 个缺失 Java 映射。
 
-API 21 批只有 values 完成设计（9 完整文件、371 声明），剩余 3205/3576。设计不等于实现。契约入口为 doc/完整模块与API映射-20260920-122800.md；node audit-api.cjs batches 检查完整归属/状态，正式 check 不按文件过滤。
+采集器在原测试导入时安装，提前 require BigNumber 会改变 ts-jest 编译上下文。第 139 行 8 个非法字符串循环样本用 #1..#8，197 行空 Buffer 条件按原式保留；Number 用 IEEE-754 位模式。Jackson 3.1.5 仅 test 范围，生产无新增依赖。TDD 原始 RED/GREEN 日志 bn-01/05/06/07/08/09/12/16/18/19/22/23；其余 16 原用例直接 GREEN，未伪造红灯。
 
-BigNumber 须保留 magnitude/sign/nominal length、red 身份和失败前副作用。小端 hex 的双字符 parseInt 与 Hex 的严格校验不同（1g 输入等边界尚待 Java 补齐），类型/默认参数/错误顺序不能按 JDK 默认替代。MontgomoryMethod.imul 零分支的原 TypeError 未授权修复；Reader 的 not.toThrow('消息') 不能弱化为 assertDoesNotThrow。详见契约，不自动修正上游怪异行为。
+## 固定边界
 
-WUA-ZERO-CAPACITY 已授权未来只把旧容量 0 的扩容起点设为 1，单列差异与额外回归；尚未实施，不再重复询问。其他差异未经授权仍按原行为。
+BigNumber 保留 magnitude/sign/nominal length、red 身份和失败前副作用；小端 hex 的 1g 等分支还需实现。MontgomoryMethod.imul 零分支原 TypeError 未授权修复；Reader 的 not.toThrow('消息') 不能弱化。唯一已授权差异 WUA-ZERO-CAPACITY 尚未实现，精确范围见 api-map.approvedDifferences，不再询问。
 
-P0 通用输入重放、随机/属性采集、全量映射与联合门禁未完成。此前完整 TS 基线 `.cache/evidence/ts-baseline-20260920-123124/` 为 5329/5329；manual 输入 536870928 字节、37:16.72。无相关变化不为会话切换重跑，但完整阶段最终采集/验收仍须覆盖。
+scopeReview=pending；通用输入重放、随机/属性采集、全量 API 与 P0 联合门禁未完成。此前完整 TS 基线 .cache/evidence/ts-baseline-20260920-123124/ 为 5329/5329，manual 536870928 字节、37:16.72；无相关变化不重复长基线，但最终完整验收不得遗漏。
 
-Maven/pnpm 只经任务脚本。Node 嵌套 spawnSync 清点在沙箱曾 EPERM，清点/工具自测使用宿主；原语单元测试不需要中间件或跨工程构建。固定 TS 提交 f999e0c1aad9a7afd0cbadaaf23841d049af9d5a。feature_list 39 项，10 done、0 in-progress、29 not-started。根仓无关改动保留，不推送。
+Maven/pnpm 仅经任务脚本；Node 嵌套 spawn 的审计可能在沙箱 EPERM，应宿主提权运行取得真实检查结果。只提交任务明确路径，不混入根仓既有规则/技能/.opencode 改动；不推送。独立 Java 仓本批保持 9c22ba1 且干净，无新提交。

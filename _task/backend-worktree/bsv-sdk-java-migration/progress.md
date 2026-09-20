@@ -1,29 +1,30 @@
 # 当前进度
 
-## 当前成果
+## 当前任务
 
-用户已授权已完成 API 设计且依赖闭合的部分先编码，执行规则见 feature_list.json 的 implementationPolicy。完整模块范围和最终门禁保持不变。
+按用户最新要求回到 API 整理。已完成 migration-api-hash-random 的完整设计：Hash.ts 277、DRBG.ts 7、Random.ts 8，共 292 项；累计 values + hash-random 为 12 个完整文件、663/3576 声明，剩余 19 批、2913 项。源码、Java 签名和行为依据见 [API 契约](doc/完整模块与API映射-20260920-122800.md#api-hash-random) 与 api-map.json。
 
-已完成两个内部项：Hex（目标仓提交 0ecb8d1）和 BigNumber 构造基础（9c22ba1）。本项完整复刻 BigNumber.constructor.test.ts 的 28 个原用例，保留 45 个静态断言的 52 次实际执行，以及 8 个非法字符串循环样本；12 组真实 RED→GREEN，其余 16 个原用例由此前行为直接满足。
+已核对 24 个直接声明导出绑定和 2 个 Hash namespace 导出。契约包含原生/纯 TS 的输入转换、摘要重复调用、内部状态/克隆/销毁、PBKDF2 参数顺序与缺省值、DRBG 状态推进，以及 Random 宿主优先级/缓存/异常。SHA512HMAC.outSize=32 等源码实际行为保留；没有新授权差异。
 
-提交后通过 `python3 run-hex-parity.py --bn-constructor` 重新执行：BigNumber 两端 28/28、52 次断言和 92 次 API 调用轨迹的实际输入/返回/异常及断言实参均一致。累计 Hex 后，原用例 36/36、71 次断言结果、101 个 AST 位置全部核对通过。目标 Java 工程累计 37/37（含基础测试 1），零失败/错误/跳过。
+## 本批验证
 
-最新证据：`.cache/evidence/hex-parity-20260920-153441-zd037qhq/`。manifest 绑定源码、工具、Java 提交/工作树、原始报告哈希和命令；Jest JSON、全部 Surefire XML、两端实际记录及比较结果已独立保存。旧批次在 Java 版本变化后不用于当前验收，不改写旧证据版本。
+- `node audit-api.cjs batches --batch migration-api-hash-random`：292/292 映射结构通过；values 的 371 项也保持通过。
+- 六个原 TS 测试文件实际 86/86 通过，零失败/跳过：Hash 30、Hash.additional 9、HMAC 5、DRBG 29、Random 5、Random.additional 8。TS 源码和原断言未改；86 不计作 Java 已迁移。
+- `node api-hash-random-probe.cjs`：133 组真实观察和内置断言通过，覆盖原生/纯 TS/无 Buffer 及隔离随机宿主；不计 SDK 用例。
+- 环境自检、全批文件归属/状态检查通过；无过滤 `audit-api.cjs check` 仍按预期拒绝 2913 项未映射。检查器只能证明结构无漏项，语义复核依据是全文源码、原测试及观察记录。
 
-采集比较工具自测 14/14，通过真实证据和漏采循环样本、重复、调用缺失、输入位变化、断言值/异常消息变化、报告篡改等反例，不计 SDK 用例。具体步骤见[模块迁移计划](doc/模块迁移计划-20260920-103547.md)的 Hex/BigNumber 实施入口。
+原始 Jest JSON、日志、探针输入/返回/异常及哈希在 `.cache/evidence/api-hash-random-*`；命令、源码/脚本/报告哈希和结果索引为 `.cache/evidence/api-hash-random-manifest.json`。本批只修改任务根目录的 API 映射、契约、状态及探针，无 Java 工程改动，无须重复其 clean test 或 37 分钟 AES manual。
 
-## 尚未完成
+## 已有 Java 成果
 
-六模块仍为 primitives/compat/script/transaction/wallet/auth，冻结范围 292 文件、133 测试文件、5329 用例、7554 AST 位置。Java 原用例已映射 36/5329，剩余 5293。BigNumber 仅完成原构造测试涉及的基础实现，完整 API、参数分支及其他原测试尚未完成；暂无整类/完整模块验收通过。
+目标仓提交 9c22ba1（BigNumber 构造基础）、0ecb8d1（Hex）。最近累计对照证据 `.cache/evidence/hex-parity-20260920-153441-zd037qhq/`：原用例 36/36、71 次断言、101 个 AST 位置；Java 共 37/37（基础测试 1 单列），零失败/错误/跳过。BigNumber 子项为原 constructor 文件 28 用例、45 静态断言→52 次执行、92 个 API 调用，实际输入/返回/异常及断言实参一致；完整 BigNumber 尚未实现。上述是已有有效证据，本批未声称重新执行 Java。
 
-API 设计仍为 371/3576，剩余 3205；21 个设计批次只有 values 完成。P0 通用输入重放、随机/属性轨迹采集、API 总验收和联合门禁仍未完成，scopeReview 保持 pending。此前 TS 完整基线为 5329/5329（含原规模 manual），本轮只累计重跑两个已实现原文件，没有重复 37 分钟 AES manual。
+采集比较工具自测已有 14/14，包含循环漏采、重复、API 调用缺失、输入位/断言值/错误消息变化及报告篡改反例。实施与复验入口见模块迁移计划。用户此前允许已完成设计且依赖闭合的部分先编码的授权保留，规则见 feature_list.json 的 implementationPolicy；当前优先继续 API。
 
-WUA-ZERO-CAPACITY 的最小修复授权保留，尚未实现；后续仅在旧容量 0 时从 1 开始扩容，额外回归单列，不改变 TS 或冒充一致。其他契约和已知特殊行为见 API 文档。
+## 剩余门禁与下一步
 
-收尾环境自检和 API 批次覆盖/状态检查通过。正式 audit-tests.py check 重扫完整冻结清单后按预期退出 1：缺失 5293 个 Java 映射，多余 0。证据为 `.cache/evidence/bn-init-final.log`、`bn-api-batches-final.log`、`bn-formal-gate-final.log`。
+六模块仍为 primitives/compat/script/transaction/wallet/auth，冻结范围 292 文件、133 测试文件、5329 原用例、7554 AST 位置。Java 映射 36/5329，缺失 5293；完整 API、通用输入重放/随机轨迹、结果采集和 P0 联合门禁未完成，scopeReview=pending。此前完整 TS 基线为 5329/5329（含原规模 manual），不是 Java 完成证明。
 
-## 下一步
+feature_list.json 共 39 项：11 done、0 in-progress、28 not-started；activeItem=null，唯一下一步 migration-api-symmetric（AESGCM、SymmetricKey、AsyncCryptoBackend 三个完整文件、60 项）。BigNumber serializers 暂留待办。
 
-feature_list.json 共 39 项：10 done、0 in-progress、29 not-started；activeItem=null，nextItem=migration-impl-bignumber-serializers。继续完整 BigNumber.serializers.test.ts 的 16 个原用例，补齐所需构造/转换分支、协议编码和 Utils 编解码，并累计回归当前 36 个原用例。
-
-工程代码/测试/POM 只修改 metanet4j-bsv-sdk；Jackson 仅测试采集依赖，沿用父工程管理，未改其他工程。任务根目录维护工具、映射和状态；固定 TS 只读，根仓既有无关修改保留，未推送。
+WUA-ZERO-CAPACITY 最小修复授权保留，尚未实现；未来只把旧容量 0 的扩容起点设为 1，额外回归单列。工程代码/测试/POM 仅允许修改 metanet4j-bsv-sdk，其他工程与固定 TS 只读；根仓既有无关修改保留，未推送。
