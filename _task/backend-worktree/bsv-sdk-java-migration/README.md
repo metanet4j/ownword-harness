@@ -2,14 +2,14 @@
 
 以本地固定的 `reference/ts-stack/packages/sdk` 为参考。四个既有 Java worktree 基于各自 `feature/java25`；新增同级独立工程 [metanet4j-bsv-sdk](metanet4j-bsv-sdk/README.md) 承载 TS 完整模块，包名为 `com.metanet4j.bsv`。新仓库以骨架提交建立自己的 `feature/java25` 基线，再创建迁移分支。分支、版本与工具路径由 [workspace.json](workspace.json) 维护。
 
+本次唯一实施工程为 `metanet4j-bsv-sdk`；其他 Java 工程只读参考，不修改其源码、测试、POM 或配置，不做业务适配和下游接入。任务范围见 [feature_list.json](feature_list.json) 的 scope。
+
 在本目录运行：
 
 ```bash
 ./init.sh                 # 只读环境检查
 ./verify.sh bsv-test     # 新 SDK 单元测试，核对实际用例和分包执行数
 ./verify.sh bsv-build    # 新 SDK 测试通过后打包安装
-./verify.sh java-build   # 五仓构建，跳过测试执行
-./verify.sh java-smoke   # 现有 SDK 离线回归
 ./verify.sh ts-build     # 上游 SDK 构建
 ./verify.sh ts-smoke     # 固定九个文件的离线算法测试
 python3 inventory-tests.py  # 重建上游测试文件及辅助向量清单

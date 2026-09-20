@@ -1,5 +1,21 @@
 {
+  "scope": {
+    "implementationProject": "metanet4j-bsv-sdk",
+    "referenceOnlyProjects": [
+      "metanet4j-parent",
+      "metanet4j-base",
+      "metanet4j-sdk",
+      "metanet4j-component"
+    ],
+    "rule": "本次工程源码、Java 测试、POM 和工程配置仅修改 metanet4j-bsv-sdk；其他工程只读参考，固定 TS 上游源码保持只读。任务根目录维护计划、清单和迁移验证工具。",
+    "excludedWork": [
+      "修改其他工程源码、测试、POM 或配置",
+      "业务 SDK/base 适配、component 接入、旧依赖替换",
+      "跨工程发布、部署或远端推送"
+    ]
+  },
   "activeItem": null,
+  "nextItem": "migration-scope-review",
   "features": [
     {
       "id": "migration-env",
@@ -109,7 +125,8 @@
         "已选模块全部功能、辅助文件与测试保留，AESGCM.man.test.ts 不得排除。",
         "保存复核依据；scopeReview 总体验收标志在 migration-map 完成时更新。"
       ],
-      "evidence": []
+      "evidence": [],
+      "scopeRef": "scope"
     },
     {
       "id": "migration-api-contract",
@@ -131,9 +148,10 @@
       "acceptanceCriteria": [
         "选定完整模块的 API/行为均有映射，未映射能力和未解决接口差异为零。",
         "预期来源、异常语义及测试边界明确，不以 Java 实现生成自己的预期。",
-        "业务接入策略没有 base→sdk→base 等依赖环。"
+        "metanet4j-bsv-sdk 的底层实现不依赖 base/sdk；本次不修改其他工程接口或依赖配置。"
       ],
-      "evidence": []
+      "evidence": [],
+      "scopeRef": "scope"
     },
     {
       "id": "migration-test-mapping",
@@ -158,7 +176,8 @@
         "静态扫描未覆盖的辅助断言和动态样本经源码复核补齐，不把注册数当断言数。",
         "不自动填 reviewed、不批量生成未验证 Java 测试、不把计划映射计为已通过。"
       ],
-      "evidence": []
+      "evidence": [],
+      "scopeRef": "scope"
     },
     {
       "id": "migration-ts-baseline",
@@ -184,7 +203,8 @@
         "manual 必须实际执行；不能通过缩小输入、排除测试或修改断言完成基线。",
         "上游失败或资源限制保持未完成，完整 TS 基线未通过不得完成 P0。"
       ],
-      "evidence": []
+      "evidence": [],
+      "scopeRef": "scope"
     },
     {
       "id": "migration-input-replay",
@@ -209,7 +229,8 @@
         "循环/属性运行次数、生成器约束和收缩语义不缩水。",
         "无法进行字节相等比较的随机源测试有明确原行为验证和可控输入对照方案。"
       ],
-      "evidence": []
+      "evidence": [],
+      "scopeRef": "scope"
     },
     {
       "id": "migration-result-capture",
@@ -234,7 +255,8 @@
         "字节、异常、undefined/null、数字类型等按测试契约无损比较。",
         "缺失采集、重复 ID、输入改变或执行失败均返回非零，完整 SDK 结果随 P1/P2 实现逐项形成。"
       ],
-      "evidence": []
+      "evidence": [],
+      "scopeRef": "scope"
     },
     {
       "id": "migration-evidence-gate",
@@ -260,7 +282,8 @@
         "同一循环样本或断言从映射及两端结果同时删掉仍被独立的预期/运行记录识别。",
         "注册用例、断言/样本和完整 API 清单分别核对，不能仅依赖总数或人工 reviewed 标记。"
       ],
-      "evidence": []
+      "evidence": [],
+      "scopeRef": "scope"
     },
     {
       "id": "migration-map",
@@ -290,7 +313,8 @@
         "七个 P0 功能项均完成，接口映射、完整 TS 基线、输入重放、真实采集和反例门禁验证齐全。",
         "Java 模块尚未实现时完整 check 可以因未实现而失败，P0 不得声称 SDK 全部通过。",
         "只有本项完成才可进入 P1 生产模块迁移。"
-      ]
+      ],
+      "scopeRef": "scope"
     },
     {
       "id": "migration-core-modules",
@@ -318,9 +342,10 @@
       "acceptanceCriteria": [
         "所有依赖功能项完成；测试与结果证据匹配当前固定上游及 Java 源码。",
         "阶段内全部功能和测试完整交付，遗漏/未映射/未执行/跳过/未比较/未解决差异为零。",
-        "旧 Java 业务回归独立登记；不能用冒烟或跳过测试的构建代替累计验收。",
+        "实现和 Java 测试只落在 metanet4j-bsv-sdk；其他工程仅只读参考，不能用冒烟或跳过测试的构建代替完整模块验收。",
         "三个循环依赖模块完整联合验收，命令包含 --module primitives --module script --module transaction；内部行为里程碑不等于模块完成。"
-      ]
+      ],
+      "scopeRef": "scope"
     },
     {
       "id": "migration-compat-module",
@@ -346,60 +371,37 @@
       "acceptanceCriteria": [
         "所有依赖功能项完成；测试与结果证据匹配当前固定上游及 Java 源码。",
         "阶段内全部功能和测试完整交付，遗漏/未映射/未执行/跳过/未比较/未解决差异为零。",
-        "旧 Java 业务回归独立登记；不能用冒烟或跳过测试的构建代替累计验收。",
+        "实现和 Java 测试只落在 metanet4j-bsv-sdk；其他工程仅只读参考，不能用冒烟或跳过测试的构建代替完整模块验收。",
         "compat 全部功能及此前三个模块累计通过默认全范围 check；依赖复核新增的范围同样纳入。"
-      ]
+      ],
+      "scopeRef": "scope"
     },
     {
-      "id": "migration-sdk-adapters",
-      "name": "P3 SDK 业务与 base 适配",
-      "description": "接入已验收完整模块，核对 TS/Java 累计结果与独立 Java 业务回归。",
+      "id": "migration-sdk-acceptance",
+      "phase": "P3",
+      "name": "P3 独立 BSV SDK 最终累计验收",
+      "description": "仅交付 metanet4j-bsv-sdk 的完整模块实现、测试、向量、JAR 和使用说明，不接入或修改其他工程。",
       "dependencies": [
         "migration-compat-module"
       ],
       "status": "not-started",
-      "evidence": [],
-      "phase": "P3",
+      "scopeRef": "scope",
       "steps": [
-        "按模块迁移计划逐行为执行 TDD，保存 RED/GREEN、真实输入输出及完成项提交。",
-        "执行本阶段完整范围和此前模块的累计测试、结果比较及 API/行为核对。"
+        "核对全部选定模块 API、测试映射和向量，执行全部 TS/Java 测试与实际结果累计比较。",
+        "保存与当前源码版本一致的原始报告和对照结果，完成独立工程打包及本地任务缓存安装。",
+        "只读核对其他工程的基线与工作树，确认没有本任务引入的代码/POM/配置改动；更新交付文档及状态。"
       ],
       "outputs": [
-        "完整实现、测试和向量",
-        "本阶段原始执行报告、逐项比较结果及验收报告"
+        "metanet4j-bsv-sdk 完整源码、测试、向量、JAR 及使用说明",
+        "独立 SDK 最终验收报告及原始证据"
       ],
       "acceptanceCriteria": [
-        "所有依赖功能项完成；测试与结果证据匹配当前固定上游及 Java 源码。",
-        "阶段内全部功能和测试完整交付，遗漏/未映射/未执行/跳过/未比较/未解决差异为零。",
-        "旧 Java 业务回归独立登记；不能用冒烟或跳过测试的构建代替累计验收。",
-        "受影响业务调用、公开 API 兼容和旧依赖去向有实际证据；集成测试按宿主环境规则执行。"
-      ]
-    },
-    {
-      "id": "migration-downstream",
-      "name": "P4 下游接入与全量验收",
-      "description": "验证 component、公开兼容性和旧依赖去向，完成全部模块与业务累计验收。",
-      "dependencies": [
-        "migration-sdk-adapters"
+        "范围内全部功能完整交付，所有测试实际通过，逐项结果一致，遗漏/未执行/跳过/未比较/未解决差异均为零。",
+        "正式 audit-tests.py check 对最终完整范围及当前源码版本通过，原始结果可按命令重现。",
+        "工程修改全部位于 metanet4j-bsv-sdk，其他工程未引入本任务的源码、测试、POM 或配置改动。",
+        "不以修改业务 SDK/base/component 或替换其依赖作为本次验收前置条件。"
       ],
-      "status": "not-started",
-      "evidence": [],
-      "phase": "P4",
-      "steps": [
-        "按模块迁移计划逐行为执行 TDD，保存 RED/GREEN、真实输入输出及完成项提交。",
-        "执行本阶段完整范围和此前模块的累计测试、结果比较及 API/行为核对。"
-      ],
-      "outputs": [
-        "完整实现、测试和向量",
-        "本阶段原始执行报告、逐项比较结果及验收报告"
-      ],
-      "acceptanceCriteria": [
-        "所有依赖功能项完成；测试与结果证据匹配当前固定上游及 Java 源码。",
-        "阶段内全部功能和测试完整交付，遗漏/未映射/未执行/跳过/未比较/未解决差异为零。",
-        "旧 Java 业务回归独立登记；不能用冒烟或跳过测试的构建代替累计验收。",
-        "受影响业务调用、公开 API 兼容和旧依赖去向有实际证据；集成测试按宿主环境规则执行。"
-      ]
+      "evidence": []
     }
-  ],
-  "nextItem": "migration-scope-review"
+  ]
 }
