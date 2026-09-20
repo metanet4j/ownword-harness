@@ -4,7 +4,7 @@
 
 本文定义 OwnWord 设计事实、版本设计文档、固定设计系统与设计 skill 的协作方式。
 
-OwnWord 产品事实只在核心认知中定义。版本设计文档负责把事实落实到当前版本。**Spectrum S2 是 OwnWord 固定且唯一的主设计系统。** 设计 skill 提供方法与执行能力，不建立新的产品事实来源，也不重新选择主设计系统。
+OwnWord 产品事实只在核心认知中定义。版本设计文档负责把事实落实到当前版本。按核心认知第 10.5 节，**Spectrum S2 是 OwnWord 固定且唯一的主设计系统。** 本文只说明这一事实如何约束设计执行，不重复建立新的事实来源。
 
 ## Architecture
 
@@ -60,7 +60,7 @@ react-spectrum skill
 
 ## 3. Binding Design System: Spectrum S2
 
-Spectrum S2 是 OwnWord 固定且唯一的主设计系统，所有设计任务默认绑定，无需询问、选择或重新判断设计系统。
+按 `_task/system-design/spec/核心认知.md` 第 10.5 节，Spectrum S2 是 OwnWord 固定且唯一的主设计系统。所有设计任务默认绑定，无需询问、选择或重新判断设计系统。
 
 Spectrum S2 负责约束：
 
@@ -180,4 +180,4 @@ OwnWord 已固定 Spectrum S2，因此 `baoyu-design` 不再询问“使用哪�
 - 是否会形成第二套设计系统；
 - 是否会改变既定产品流程、信息层级或状态语义。
 
-Spectrum S2 的固定地位只能由项目级架构决策修改。外部 skill 不得改变该选择。
+Spectrum S2 的固定地位属于核心认知；如需变更，必须先修改核心认知，再同步版本设计、架构文档和实现。外部 skill 不得改变该选择。
