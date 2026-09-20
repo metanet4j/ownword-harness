@@ -423,6 +423,73 @@ function apiBatchFixture() {
     close: () => fs.rmSync(dir, { recursive: true, force: true }) }
 }
 
+test('API 复核清单可嵌入编码任务，未完成全量设计不阻止已就绪任务执行', () => {
+  const f = apiBatchFixture()
+  try {
+    f.state.apiBatches = f.state.features.splice(0, 2)
+    f.state.apiBatches[1].status = 'not-started'
+    f.state.features.push({ id: 'code', kind: 'implementation-slice', dependencies: [], status: 'in-progress' })
+    for (const batch of f.state.apiBatches) batch.implementationTasks = ['code']
+    f.state.activeItem = f.state.nextItem = 'code'
+    f.save()
+    let r = f.run()
+    assert.equal(r.status, 0, r.stdout + r.stderr)
+    assert.match(r.stdout, /未映射 1/)
+    f.state.nextItem = 'two'; f.save()
+    r = f.run()
+    assert.equal(r.status, 1)
+    assert.match(r.stderr, /nextItem.*编码任务|nextItem.*执行事项/)
+    f.state.nextItem = 'code'
+    f.state.apiBatches[0].implementationTasks = ['absent']; f.save()
+    r = f.run()
+    assert.equal(r.status, 1)
+    assert.match(r.stderr, /API 复核.*编码任务/)
+  } finally { f.close() }
+})
+
+test('编码任务必须完整分配 API 收口、原测试和辅助资料，缺失或重复均拒绝', () => {
+  const f = apiBatchFixture()
+  try {
+    f.state.apiBatches = f.state.features.splice(0, 2)
+    f.state.apiBatches[1].status = 'not-started'
+    const testCatalog = path.join(path.dirname(f.catalog), 'tests.json')
+    fs.writeFileSync(testCatalog, JSON.stringify({ files: [
+      { path: 'src/primitives/one.test.ts', cases: [{ id: 'a' }] },
+      { path: 'src/primitives/two.test.ts', cases: [{ id: 'b' }, { id: 'c' }] }
+    ], moduleFiles: Object.fromEntries(['one.ts', 'two.ts', 'index.ts', 'one.test.ts', 'two.test.ts', 'vectors.json'].map(n => ['src/primitives/' + n, 'hash'])) }))
+    f.state.implementationPolicy = { testCatalogRef: testCatalog }
+    const coding = ['one', 'two'].map((name, i) => ({
+      id: 'code-' + name, kind: 'implementation-slice', status: 'not-started', dependencies: [],
+      sourceFiles: f.state.apiBatches[i].apiFiles.slice(), apiCompletionFiles: f.state.apiBatches[i].apiFiles.slice(),
+      testFiles: ['src/primitives/' + name + '.test.ts'], regressionTestFiles: [],
+      fixtureFiles: ['src/primitives/vectors.json'], apiBatchRefs: [name]
+    }))
+    f.state.features.push(...coding)
+    for (const [i, batch] of f.state.apiBatches.entries()) batch.implementationTasks = [coding[i].id]
+    f.state.activeItem = null; f.state.nextItem = coding[0].id
+    f.save()
+    let r = f.run()
+    assert.equal(r.status, 0, r.stdout + r.stderr)
+    assert.match(r.stdout, /编码任务.*2.*API 文件 3.*原测试文件 2.*原用例 3/)
+    const original = structuredClone(f.state)
+    for (const [change, message] of [
+      [s => { s.features[2].testFiles = [] }, /原测试.*漏/],
+      [s => { s.features[2].testFiles = s.features[1].testFiles.slice() }, /原测试.*重复/],
+      [s => { s.features[2].apiCompletionFiles.pop() }, /API 收口.*漏/],
+      [s => { s.features[2].apiCompletionFiles.push('src/primitives/one.ts') }, /API 收口.*重复|收口.*实现范围/],
+      [s => { s.features[2].sourceFiles.push('src/primitives/unknown.ts') }, /实现范围.*未知/],
+      [s => { s.features[2].apiBatchRefs = ['one'] }, /复核引用.*不符/],
+      [s => { s.features[1].fixtureFiles = []; s.features[2].fixtureFiles = [] }, /辅助资料.*漏/],
+      [s => { s.features[2].status = 'done'; s.features[2].evidence = ['假完成'] }, /编码任务.*API 未完成/]
+    ]) {
+      Object.assign(f.state, structuredClone(original)); change(f.state); f.save()
+      r = f.run()
+      assert.equal(r.status, 1, r.stdout + r.stderr)
+      assert.match(r.stderr, message)
+    }
+  } finally { f.close() }
+})
+
 test('API 分批覆盖完整文件并保留全量未完成状态，单批可独立核对', () => {
   const f = apiBatchFixture()
   try {

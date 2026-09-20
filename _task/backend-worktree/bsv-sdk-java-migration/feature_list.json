@@ -15,7 +15,7 @@
     ]
   },
   "activeItem": null,
-  "nextItem": "migration-api-symmetric",
+  "nextItem": "migration-impl-bignumber",
   "features": [
     {
       "id": "migration-env",
@@ -136,707 +136,6 @@
       "scopeRef": "scope"
     },
     {
-      "id": "migration-api-values",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-01 数值、字节容器与模运算",
-      "module": "primitives",
-      "apiFiles": [
-        "src/primitives/BigNumber.ts",
-        "src/primitives/K256.ts",
-        "src/primitives/Mersenne.ts",
-        "src/primitives/MontgomoryMethod.ts",
-        "src/primitives/ReaderUint8Array.ts",
-        "src/primitives/ReductionContext.ts",
-        "src/primitives/WriterUint8Array.ts",
-        "src/primitives/hex.ts",
-        "src/primitives/utils.ts"
-      ],
-      "dependencies": [
-        "migration-scope-review"
-      ],
-      "status": "done",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [
-        "033c518：9 个完整文件的 371 项设计映射已登记；不是 Java 实现或测试通过。",
-        ".cache/evidence/api-value-mapping-check.json：声明 ID、契约引用与完整文件集合核对通过。",
-        "api-values-probe.mjs：两种 Buffer 环境分别观察 26 组输入；未计入 SDK 用例。",
-        "WUA-ZERO-CAPACITY 授权见 api-map.approvedDifferences，修复与额外 Java 回归仍待 P1 实施。",
-        "node audit-api.cjs batches --batch migration-api-values 实际通过；日志 .cache/evidence/api-batch-values-current.log。"
-      ],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-hash-random",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-02 哈希、HMAC/PBKDF2、DRBG 与随机源",
-      "module": "primitives",
-      "apiFiles": [
-        "src/primitives/DRBG.ts",
-        "src/primitives/Hash.ts",
-        "src/primitives/Random.ts"
-      ],
-      "dependencies": [
-        "migration-api-values"
-      ],
-      "status": "done",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [
-        "完整复核 Hash.ts 277、DRBG.ts 7、Random.ts 8 项，共 292 项；Java 设计签名和契约见 api-map.json、doc/完整模块与API映射-20260920-122800.md#api-hash-random。24 个直接导出及 2 个 Hash namespace 绑定均有对应方案。",
-        "node audit-api.cjs batches --batch migration-api-hash-random：292/292 设计映射结构通过，见 .cache/evidence/api-hash-random-batch.log；设计不表示 Java 已实现。",
-        "六个原始 TS 测试文件实际 86/86 通过、零失败/跳过；见 .cache/evidence/api-hash-random-ts.log、api-hash-random-ts.jest.json。未修改原源码/测试，不计新增 Java 通过数。",
-        "node api-hash-random-probe.cjs：133 组真实观察及内置断言通过，含原生/纯 TS/无 Buffer、摘要生命周期、PBKDF2 校验、DRBG 状态、Random 宿主优先级/缓存；原始输入/结果/异常及源码哈希见 .cache/evidence/api-hash-random-observations.json。",
-        "环境与全批覆盖检查通过；全量 API check 仍按预期拒绝 2913 项未映射。证据见 .cache/evidence/api-hash-random-manifest.json。"
-      ],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-symmetric",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-03 对称加密与异步密码学后端",
-      "module": "primitives",
-      "apiFiles": [
-        "src/primitives/AESGCM.ts",
-        "src/primitives/AsyncCryptoBackend.ts",
-        "src/primitives/SymmetricKey.ts"
-      ],
-      "dependencies": [
-        "migration-api-hash-random"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-curve",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-04 椭圆曲线与点运算",
-      "module": "primitives",
-      "apiFiles": [
-        "src/primitives/BasePoint.ts",
-        "src/primitives/Curve.ts",
-        "src/primitives/JacobianPoint.ts",
-        "src/primitives/Point.ts"
-      ],
-      "dependencies": [
-        "migration-api-values",
-        "migration-api-hash-random"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-keys-signatures",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-05 密钥、签名与原语导出",
-      "module": "primitives",
-      "apiFiles": [
-        "src/primitives/ECDSA.ts",
-        "src/primitives/Polynomial.ts",
-        "src/primitives/PrivateKey.ts",
-        "src/primitives/PublicKey.ts",
-        "src/primitives/Schnorr.ts",
-        "src/primitives/Secp256r1.ts",
-        "src/primitives/Signature.ts",
-        "src/primitives/TransactionSignature.ts",
-        "src/primitives/index.ts"
-      ],
-      "dependencies": [
-        "migration-api-curve",
-        "migration-api-symmetric"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-compat",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-06 完整兼容模块",
-      "module": "compat",
-      "apiFiles": [
-        "src/compat/BSM.ts",
-        "src/compat/ECIES.ts",
-        "src/compat/HD.ts",
-        "src/compat/Mnemonic.ts",
-        "src/compat/Utxo.ts",
-        "src/compat/bip-39-wordlist-en.ts",
-        "src/compat/index.ts"
-      ],
-      "dependencies": [
-        "migration-api-keys-signatures"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-script-model",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-07 脚本模型、操作码与验证接口",
-      "module": "script",
-      "apiFiles": [
-        "src/script/LockingScript.ts",
-        "src/script/OP.ts",
-        "src/script/Script.ts",
-        "src/script/ScriptChunk.ts",
-        "src/script/ScriptEvaluationError.ts",
-        "src/script/ScriptResourceLimitError.ts",
-        "src/script/ScriptTemplate.ts",
-        "src/script/ScriptTemplateUnlock.ts",
-        "src/script/SpendVerificationContext.ts",
-        "src/script/SpendVerifierInterface.ts",
-        "src/script/UnlockingScript.ts",
-        "src/script/index.ts"
-      ],
-      "dependencies": [
-        "migration-api-keys-signatures"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-wallet-contracts",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-08 钱包协议类型、错误与日志接口",
-      "module": "wallet",
-      "apiFiles": [
-        "src/wallet/WERR_INSUFFICIENT_FUNDS.ts",
-        "src/wallet/WERR_INVALID_PARAMETER.ts",
-        "src/wallet/WERR_REVIEW_ACTIONS.ts",
-        "src/wallet/Wallet.interfaces.ts",
-        "src/wallet/WalletError.ts",
-        "src/wallet/WalletLoggerInterface.ts",
-        "src/wallet/index.ts"
-      ],
-      "dependencies": [
-        "migration-api-keys-signatures"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-transaction-model",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-09 交易模型与费率",
-      "module": "transaction",
-      "apiFiles": [
-        "src/transaction/FeeModel.ts",
-        "src/transaction/Transaction.ts",
-        "src/transaction/TransactionInput.ts",
-        "src/transaction/TransactionOutput.ts",
-        "src/transaction/fee-models/LivePolicy.ts",
-        "src/transaction/fee-models/SatoshisPerKilobyte.ts",
-        "src/transaction/fee-models/index.ts",
-        "src/transaction/index.ts"
-      ],
-      "dependencies": [
-        "migration-api-script-model",
-        "migration-api-wallet-contracts"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-transaction-beef",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-10 BEEF 与 Merkle 证明",
-      "module": "transaction",
-      "apiFiles": [
-        "src/transaction/Beef.ts",
-        "src/transaction/BeefConstants.ts",
-        "src/transaction/BeefParty.ts",
-        "src/transaction/BeefTx.ts",
-        "src/transaction/MerklePath.ts"
-      ],
-      "dependencies": [
-        "migration-api-transaction-model"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-transaction-network",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-11 广播、链追踪与 HTTP",
-      "module": "transaction",
-      "apiFiles": [
-        "src/transaction/Broadcaster.ts",
-        "src/transaction/ChainTracker.ts",
-        "src/transaction/broadcasters/ARC.ts",
-        "src/transaction/broadcasters/DefaultBroadcaster.ts",
-        "src/transaction/broadcasters/Teranode.ts",
-        "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts",
-        "src/transaction/broadcasters/index.ts",
-        "src/transaction/chaintrackers/BlockHeadersService.ts",
-        "src/transaction/chaintrackers/DefaultChainTracker.ts",
-        "src/transaction/chaintrackers/WhatsOnChain.ts",
-        "src/transaction/chaintrackers/index.ts",
-        "src/transaction/http/BinaryFetchClient.ts",
-        "src/transaction/http/DefaultHttpClient.ts",
-        "src/transaction/http/FetchHttpClient.ts",
-        "src/transaction/http/HttpClient.ts",
-        "src/transaction/http/NodejsHttpClient.ts",
-        "src/transaction/http/NodejsHttpRequestUtils.ts",
-        "src/transaction/http/index.ts"
-      ],
-      "dependencies": [
-        "migration-api-transaction-model"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-script-spend",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-12 完整脚本执行器 Spend",
-      "module": "script",
-      "apiFiles": [
-        "src/script/Spend.ts"
-      ],
-      "dependencies": [
-        "migration-api-script-model",
-        "migration-api-transaction-model"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-transaction-evidence",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-13 交易验证后端、证据与并发协调",
-      "module": "transaction",
-      "apiFiles": [
-        "src/transaction/BdkVerifierInterface.ts",
-        "src/transaction/EvidenceScriptWork.ts",
-        "src/transaction/ScriptVerificationBackend.ts",
-        "src/transaction/TransactionEvidence.ts",
-        "src/transaction/TransactionEvidenceCoordinator.ts"
-      ],
-      "dependencies": [
-        "migration-api-transaction-beef",
-        "migration-api-transaction-network",
-        "migration-api-script-spend"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-wallet-validation",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-14 钱包参数校验与字节编码",
-      "module": "wallet",
-      "apiFiles": [
-        "src/wallet/BRC100ByteEncoding.ts",
-        "src/wallet/substrates/utils/jsonByteEncoding.ts",
-        "src/wallet/validationHelpers.ts"
-      ],
-      "dependencies": [
-        "migration-api-wallet-contracts"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-wallet-keys",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-15 钱包密钥派生、缓存与 ProtoWallet",
-      "module": "wallet",
-      "apiFiles": [
-        "src/wallet/CachedKeyDeriver.ts",
-        "src/wallet/KeyDeriver.ts",
-        "src/wallet/ProtoWallet.ts"
-      ],
-      "dependencies": [
-        "migration-api-wallet-contracts",
-        "migration-api-keys-signatures"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-auth-certificates",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-16 证书与公开钱包辅助类",
-      "module": "auth",
-      "apiFiles": [
-        "src/auth/certificates/Certificate.ts",
-        "src/auth/certificates/MasterCertificate.ts",
-        "src/auth/certificates/VerifiableCertificate.ts",
-        "src/auth/certificates/__tests/CompletedProtoWallet.ts",
-        "src/auth/certificates/index.ts",
-        "src/auth/utils/getVerifiableCertificates.ts",
-        "src/auth/utils/validateCertificates.ts"
-      ],
-      "dependencies": [
-        "migration-api-wallet-keys",
-        "migration-api-wallet-validation"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-wallet-wire",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-17 钱包二进制协议与收发",
-      "module": "wallet",
-      "apiFiles": [
-        "src/wallet/substrates/HTTPWalletWire.ts",
-        "src/wallet/substrates/WalletWire.ts",
-        "src/wallet/substrates/WalletWireCalls.ts",
-        "src/wallet/substrates/WalletWireProcessor.ts",
-        "src/wallet/substrates/WalletWireTransceiver.ts"
-      ],
-      "dependencies": [
-        "migration-api-wallet-validation",
-        "migration-api-wallet-keys",
-        "migration-api-auth-certificates"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-wallet-clients",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-18 钱包客户端与宿主桥接",
-      "module": "wallet",
-      "apiFiles": [
-        "src/wallet/WalletClient.ts",
-        "src/wallet/substrates/HTTPWalletJSON.ts",
-        "src/wallet/substrates/InvokableWalletBase.ts",
-        "src/wallet/substrates/ReactNativeWebView.ts",
-        "src/wallet/substrates/XDM.ts",
-        "src/wallet/substrates/index.ts",
-        "src/wallet/substrates/utils/toOriginHeader.ts",
-        "src/wallet/substrates/window.CWI.ts"
-      ],
-      "dependencies": [
-        "migration-api-wallet-wire"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-auth-sessions",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-19 认证会话、Peer、类型与 nonce",
-      "module": "auth",
-      "apiFiles": [
-        "src/auth/Peer.ts",
-        "src/auth/SessionManager.ts",
-        "src/auth/index.ts",
-        "src/auth/types.ts",
-        "src/auth/utils/createNonce.ts",
-        "src/auth/utils/index.ts",
-        "src/auth/utils/verifyNonce.ts"
-      ],
-      "dependencies": [
-        "migration-api-auth-certificates",
-        "migration-api-wallet-clients"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-auth-transport",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-20 认证请求与传输",
-      "module": "auth",
-      "apiFiles": [
-        "src/auth/clients/AuthFetch.ts",
-        "src/auth/clients/index.ts",
-        "src/auth/transports/SimplifiedFetchTransport.ts",
-        "src/auth/transports/index.ts"
-      ],
-      "dependencies": [
-        "migration-api-auth-sessions"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-script-templates",
-      "phase": "P0",
-      "kind": "api-batch",
-      "parentId": "migration-api-contract",
-      "name": "P0 API-21 完整脚本模板与签名辅助",
-      "module": "script",
-      "apiFiles": [
-        "src/script/templates/P2PKH.ts",
-        "src/script/templates/PushDrop.ts",
-        "src/script/templates/RPuzzle.ts",
-        "src/script/templates/SignatureUtils.ts",
-        "src/script/templates/index.ts"
-      ],
-      "dependencies": [
-        "migration-api-script-spend",
-        "migration-api-wallet-keys",
-        "migration-api-auth-certificates",
-        "migration-api-compat"
-      ],
-      "status": "not-started",
-      "stepsRef": "apiBatchPolicy.steps",
-      "outputs": [
-        "api-map.json 中本批次全部声明的设计映射",
-        "API 契约文档的本批次行为说明与证据"
-      ],
-      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-api-contract",
-      "phase": "P0",
-      "name": "P0 全部 API 批次与跨模块接口总验收",
-      "description": "建立全部 TS API/行为到 com.metanet4j.bsv 的对应关系，覆盖没有上游测试的公开能力。",
-      "dependencies": [
-        "migration-scope-review",
-        "migration-api-values",
-        "migration-api-hash-random",
-        "migration-api-symmetric",
-        "migration-api-curve",
-        "migration-api-keys-signatures",
-        "migration-api-compat",
-        "migration-api-script-model",
-        "migration-api-wallet-contracts",
-        "migration-api-transaction-model",
-        "migration-api-transaction-beef",
-        "migration-api-transaction-network",
-        "migration-api-script-spend",
-        "migration-api-transaction-evidence",
-        "migration-api-wallet-validation",
-        "migration-api-wallet-keys",
-        "migration-api-auth-certificates",
-        "migration-api-wallet-wire",
-        "migration-api-wallet-clients",
-        "migration-api-auth-sessions",
-        "migration-api-auth-transport",
-        "migration-api-script-templates"
-      ],
-      "status": "not-started",
-      "steps": [
-        "核对全部 api-batch 已有完整设计映射及证据，执行 batches 与无过滤的 audit-api.cjs check。",
-        "逐项复核 1016 个导出入口及跨批次引用、共享类型、异常、异步和平台适配，确认同一 Java 符号没有冲突。",
-        "核对授权差异与后续用例/采集方案的衔接；全量验收通过后才解锁 migration-test-mapping。"
-      ],
-      "outputs": [
-        "完整模块/API 映射文档中的 Java 接口与兼容章节",
-        "api-catalog.json：固定源码声明与实际导出入口",
-        "api-map.json：逐项 Java 入口、类型和行为契约",
-        "audit-api.cjs：重新清点及拒绝遗漏的检查入口"
-      ],
-      "acceptanceCriteria": [
-        "选定完整模块的 API/行为均有映射，未映射能力和未解决接口差异为零。",
-        "预期来源、异常语义及测试边界明确，不以 Java 实现生成自己的预期。",
-        "metanet4j-bsv-sdk 的底层实现不依赖 base/sdk；本次不修改其他工程接口或依赖配置。"
-      ],
-      "evidence": [
-        "已拆为 21 个设计批次，当前完成批次及下一步由各 api-batch 独立维护；本项等待所有批次完成后执行总验收。",
-        "当前 api-map 有 663 项已复核、2913 项未映射，总验收未通过。",
-        "node audit-api.cjs batches 已核对 21 批恰好覆盖 133 文件/3576 声明；工具自测 39/39，通过记录见 .cache/evidence/api-batches-all-green.log。分批有效不代表总验收完成。"
-      ],
-      "scopeRef": "scope",
-      "kind": "gate"
-    },
-    {
-      "id": "migration-test-mapping",
-      "phase": "P0",
-      "name": "P0 全部用例与断言映射",
-      "description": "为完整模块每个注册用例、参数行和语义位置登记对应方案，映射不代表实际执行通过。",
-      "dependencies": [
-        "migration-api-contract"
-      ],
-      "status": "not-started",
-      "steps": [
-        "重新清点候选清单并与冻结清单比较，在 test-map.json 登记每个上游 ID 的拟定 Java 测试入口。",
-        "逐项复核辅助断言、条件注册、循环、forEach 和属性样本；登记断言位置、样本标识和预期执行约束。",
-        "拟定 Java 名称在逐行为 TDD 执行后用 Surefire 实际名称校准。"
-      ],
-      "outputs": [
-        "test-map.json 的 cases 和 siteReviews",
-        "可供运行采集核对的断言与样本预期约束"
-      ],
-      "acceptanceCriteria": [
-        "当前基线 5329 个注册用例及 7554 个 AST 位置逐项有依据；范围变化以重新审查的清单为准。",
-        "静态扫描未覆盖的辅助断言和动态样本经源码复核补齐，不把注册数当断言数。",
-        "不自动填 reviewed、不批量生成未验证 Java 测试、不把计划映射计为已通过。"
-      ],
-      "evidence": [],
-      "scopeRef": "scope"
-    },
-    {
       "id": "migration-ts-baseline",
       "phase": "P0",
       "name": "P0 完整 TS 模块运行入口与基线",
@@ -873,12 +172,1529 @@
       "scopeRef": "scope"
     },
     {
+      "id": "migration-impl-hex",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "primitives：Hex 编解码（已完成）",
+      "description": "用户授权已设计且依赖闭合的部分先编码；完整 hex.ts 的 2 个函数、原测试 8 用例/19 断言逐项移植并采集实际输入和结果，不代表 primitives 整模块完成。",
+      "dependencies": [
+        "migration-ts-baseline"
+      ],
+      "status": "done",
+      "acceptanceCriteria": [
+        "原始 hex.test.ts 8 个用例、19 个断言、27 个 AST 位置全部映射，TS 源码和测试保持不变。",
+        "TDD 逐行为推进；Java clean test 全部通过，真实输入、返回值、异常类型与消息逐项和 TS 比较。",
+        "完整模块及 5329 个原测试的最终门禁保持不变。"
+      ],
+      "evidence": [
+        "Java 提交 0ecb8d1：完整 Hex 两函数、Undefined 和错误类型、上游许可及全部 8 个原用例。",
+        ".cache/evidence/hex-01..05-red/green.log：5 组真实行为 RED→GREEN；hex-all-green.log：8/8 原用例通过。",
+        ".cache/evidence/hex-parity-20260920-150144-mgrmta7b/summary.json：提交后重新执行，TS 8/8、Java 原测试 8/8；19 次实际输入/返回/异常全部一致，27 AST 位置映射齐全，formalAcceptance=false。",
+        "同批次保存 Jest JSON、全部 Surefire XML、两端调用记录、源码/工具/Java 版本及报告摘要；目标工程累计 9/9（含基础测试 1），零失败/错误/跳过。",
+        "test-hex-parity.py：7/7 采集对照自测通过；故意漏采/重复/改变输入/返回/异常类型/篡改报告均被拒绝，不计入 SDK 用例。",
+        "收尾检查：./init.sh 和 audit-api.cjs batches 通过；audit-tests.py check 重扫 133 文件/5329 用例后预期退出 1，缺失 5321、多余 0。日志 hex-init-final.log、hex-api-batches.log、hex-formal-gate.log。"
+      ],
+      "scopeRef": "scope",
+      "sourceFiles": [
+        "src/primitives/hex.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/primitives/hex.ts"
+      ],
+      "testFiles": [
+        "src/primitives/__tests/hex.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整 Hex 两函数及 8 个原用例。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [],
+      "apiBatchRefs": [
+        "migration-api-values"
+      ],
+      "modules": [
+        "primitives"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-bignumber-constructor",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "primitives：BigNumber 构造基础（已完成）",
+      "description": "沿用已审查 API 设计，从完整 BigNumber.constructor.test.ts 的 28 个原用例逐行为实施构造、解析及所需编码行为；为完整 BigNumber 实现的内部里程碑，其他 BigNumber 测试及所有内部 API 仍必须后续完成。",
+      "dependencies": [
+        "migration-impl-hex"
+      ],
+      "status": "done",
+      "steps": [
+        "审查原测试全部输入、断言及运行轨迹，登记真实 Java 入口和完整文件映射。",
+        "逐行为 RED→GREEN，只实现当前行为与必要依赖，保留 sign/nominal length、字节序及异常顺序；不提前加入占位 API。",
+        "补齐该文件实际输入/结果采集及对照；执行 Java clean test，包含已完成 Hex 的累计回归。"
+      ],
+      "acceptanceCriteria": [
+        "原文件 28 用例全部执行且逐断言实际结果一致，源码复核位置无遗漏。",
+        "Hex 原测试累计回归通过；不将构造基础完成等同于完整 BigNumber 或 primitives 完成。"
+      ],
+      "evidence": [
+        "目标工程提交 9c22ba1：BigNumber 构造基础及原文件全部 28 个 Java 用例；保留 sign/nominal length、BE/LE 输入宽度、26 位词和错误消息。",
+        "12 组真实 RED→GREEN：.cache/evidence/bn-01/05/06/07/08/09/12/16/18/19/22/23-red.log 及对应 green；其余 16 原用例由已有行为直接满足。",
+        ".cache/evidence/hex-parity-20260920-153441-zd037qhq/：提交后重新执行；BigNumber TS/Java 28/28，45 静态断言执行 52 次，92 次实际 API 调用输入/结果/异常及断言实参逐项一致。",
+        "累计 Hex：TS/Java 原用例 36/36，71 次断言结果一致，101 AST 位置映射齐全；目标工程总计 37/37（另含基础测试 1），零失败/错误/跳过。",
+        "run-hex-parity.py --bn-constructor 复用已有比较引擎并绑定完整原始证据；14 项工具自测覆盖循环样本遗漏/重复、调用遗漏、输入/结果/异常变化与报告篡改，不充抵 SDK 测试。",
+        "当前 BigNumber 仍是内部实施基础；完整 API、参数分支及其他测试未完成，不能标整类/模块验收。Jackson 仅 test 依赖；bn.js MIT 和 BSV 来源许可随资源保留。",
+        "收尾：./init.sh、audit-api.cjs batches 通过；audit-tests.py check 重扫 133 原文件/5329 用例后按预期退出 1（缺失 5293、多余 0）。日志 bn-init-final.log、bn-api-batches-final.log、bn-formal-gate-final.log；14 项工具自测见 bn-parity-selftests-final.log。"
+      ],
+      "scopeRef": "scope",
+      "sourceFiles": [
+        "src/primitives/BigNumber.ts"
+      ],
+      "apiCompletionFiles": [],
+      "testFiles": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "保留已完成 28 个原用例；完整 BigNumber 由后续任务负责。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [],
+      "apiBatchRefs": [
+        "migration-api-values"
+      ],
+      "modules": [
+        "primitives"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-bignumber",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "primitives：完整大整数与模运算",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-bignumber-constructor"
+      ],
+      "sourceFiles": [
+        "src/primitives/BigNumber.ts",
+        "src/primitives/K256.ts",
+        "src/primitives/Mersenne.ts",
+        "src/primitives/MontgomoryMethod.ts",
+        "src/primitives/ReductionContext.ts",
+        "src/primitives/utils.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/primitives/BigNumber.ts",
+        "src/primitives/K256.ts",
+        "src/primitives/Mersenne.ts",
+        "src/primitives/MontgomoryMethod.ts",
+        "src/primitives/ReductionContext.ts"
+      ],
+      "testFiles": [
+        "src/primitives/__tests/BigNumber.additional.test.ts",
+        "src/primitives/__tests/BigNumber.arithmatic.test.ts",
+        "src/primitives/__tests/BigNumber.binary.test.ts",
+        "src/primitives/__tests/BigNumber.dhGroup.test.ts",
+        "src/primitives/__tests/BigNumber.serializers.test.ts",
+        "src/primitives/__tests/BigNumber.utils.test.ts",
+        "src/primitives/__tests/ReductionContext.test.ts"
+      ],
+      "regressionTestFiles": [
+        "src/primitives/__tests/BigNumber.constructor.test.ts"
+      ],
+      "deliverable": "补齐 BigNumber 全部 API、参数分支、序列化、位运算和模运算；合并原 serializers 待办。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "全部 174 个新增原用例及既有构造 28 个累计对照，sign/nominal length/red 身份和异常顺序保持一致。",
+        "本任务先实现原测试所需 Utils 编码方法并复核其 API；Utils 全文件验收仍归 byte-codecs。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-values"
+      ],
+      "evidence": [],
+      "modules": [
+        "primitives"
+      ],
+      "fixtureFiles": [
+        "src/primitives/__tests/BigNumber.fixtures.ts"
+      ]
+    },
+    {
+      "id": "migration-impl-hash-random",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "primitives：哈希、HMAC、PBKDF2 与随机源",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-bignumber"
+      ],
+      "sourceFiles": [
+        "src/primitives/DRBG.ts",
+        "src/primitives/Hash.ts",
+        "src/primitives/Random.ts",
+        "src/primitives/utils.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/primitives/DRBG.ts",
+        "src/primitives/Hash.ts",
+        "src/primitives/Random.ts"
+      ],
+      "testFiles": [
+        "src/primitives/__tests/DRBG.test.ts",
+        "src/primitives/__tests/HMAC.test.ts",
+        "src/primitives/__tests/Hash.additional.test.ts",
+        "src/primitives/__tests/Hash.test.ts",
+        "src/primitives/__tests/Random.additional.test.ts",
+        "src/primitives/__tests/Random.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整三文件及六个原测试，包含原生/纯实现和宿主随机源。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "86 个原用例，随机源实际输入轨迹可重放；所有平台分支及生命周期差异按现有契约。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-values",
+        "migration-api-hash-random"
+      ],
+      "evidence": [],
+      "modules": [
+        "primitives"
+      ],
+      "fixtureFiles": [
+        "src/primitives/__tests/DRBG.vectors.ts",
+        "src/primitives/__tests/PBKDF2.vectors.ts"
+      ]
+    },
+    {
+      "id": "migration-impl-curve",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "primitives：曲线与点运算",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-hash-random"
+      ],
+      "sourceFiles": [
+        "src/primitives/BasePoint.ts",
+        "src/primitives/Curve.ts",
+        "src/primitives/JacobianPoint.ts",
+        "src/primitives/Point.ts",
+        "src/primitives/utils.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/primitives/BasePoint.ts",
+        "src/primitives/Curve.ts",
+        "src/primitives/JacobianPoint.ts",
+        "src/primitives/Point.ts"
+      ],
+      "testFiles": [
+        "src/primitives/__tests/Curve.additional.test.ts",
+        "src/primitives/__tests/Curve.unit.test.ts",
+        "src/primitives/__tests/JacobianPoint.test.ts",
+        "src/primitives/__tests/Point.additional.test.ts",
+        "src/primitives/__tests/Point.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整 BasePoint/Curve/Point/JacobianPoint 和无穷点、编码、标量乘法。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "144 个原用例；按真实依赖补齐 Utils 的数值/点编码辅助，不以桩替代。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-values",
+        "migration-api-curve"
+      ],
+      "evidence": [],
+      "modules": [
+        "primitives"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-byte-codecs",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "primitives：字节编码与 Reader/Writer",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-curve"
+      ],
+      "sourceFiles": [
+        "src/primitives/ReaderUint8Array.ts",
+        "src/primitives/WriterUint8Array.ts",
+        "src/primitives/utils.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/primitives/ReaderUint8Array.ts",
+        "src/primitives/WriterUint8Array.ts",
+        "src/primitives/utils.ts"
+      ],
+      "testFiles": [
+        "src/primitives/__tests/Reader.test.ts",
+        "src/primitives/__tests/ReaderUint8Array.test.ts",
+        "src/primitives/__tests/Writer.test.ts",
+        "src/primitives/__tests/WriterUint8Array.test.ts",
+        "src/primitives/__tests/utils.property.test.ts",
+        "src/primitives/__tests/utils.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整 Utils、旧/新 Reader/Writer，收口先前编码辅助实现。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "192 个原用例，包含 property 的全部生成样本；共享视图、复制、偏移、越界语义逐项对照。",
+        "WUA-ZERO-CAPACITY 按唯一授权最小修复并单列 Java 额外回归。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-values"
+      ],
+      "evidence": [],
+      "modules": [
+        "primitives"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-keys-signatures",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "primitives：密钥与签名算法",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-byte-codecs"
+      ],
+      "sourceFiles": [
+        "src/primitives/ECDSA.ts",
+        "src/primitives/Polynomial.ts",
+        "src/primitives/PrivateKey.ts",
+        "src/primitives/PublicKey.ts",
+        "src/primitives/Schnorr.ts",
+        "src/primitives/Secp256r1.ts",
+        "src/primitives/Signature.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/primitives/ECDSA.ts",
+        "src/primitives/Polynomial.ts",
+        "src/primitives/PrivateKey.ts",
+        "src/primitives/PublicKey.ts",
+        "src/primitives/Schnorr.ts",
+        "src/primitives/Secp256r1.ts",
+        "src/primitives/Signature.ts"
+      ],
+      "testFiles": [
+        "src/primitives/__tests/ECDH.test.ts",
+        "src/primitives/__tests/ECDSA.additional.test.ts",
+        "src/primitives/__tests/ECDSA.test.ts",
+        "src/primitives/__tests/PrivateKey.split.test.ts",
+        "src/primitives/__tests/PrivateKey.test.ts",
+        "src/primitives/__tests/PublicKey.additional.test.ts",
+        "src/primitives/__tests/PublicKey.test.ts",
+        "src/primitives/__tests/Schnorr.test.ts",
+        "src/primitives/__tests/Secp256r1.test.ts",
+        "src/primitives/__tests/Signature.test.ts",
+        "src/primitives/__tests/bug-31.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整密钥编码、ECDSA/Schnorr/P-256、ECDH 和私钥拆分；交易签名格式归 transaction-base。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "146 个原用例与 BRC42 向量，随机 k/密钥等实际输入采集并重放。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-keys-signatures"
+      ],
+      "evidence": [],
+      "modules": [
+        "primitives"
+      ],
+      "fixtureFiles": [
+        "src/primitives/__tests/BRC42.private.vectors.ts",
+        "src/primitives/__tests/BRC42.public.vectors.ts"
+      ]
+    },
+    {
+      "id": "migration-impl-symmetric",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "primitives：AES-GCM、对称密钥与异步后端",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-keys-signatures"
+      ],
+      "sourceFiles": [
+        "src/primitives/AESGCM.ts",
+        "src/primitives/AsyncCryptoBackend.ts",
+        "src/primitives/SymmetricKey.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/primitives/AESGCM.ts",
+        "src/primitives/AsyncCryptoBackend.ts",
+        "src/primitives/SymmetricKey.ts"
+      ],
+      "testFiles": [
+        "src/primitives/__tests/AESGCM.man.test.ts",
+        "src/primitives/__tests/AESGCM.test.ts",
+        "src/primitives/__tests/AsyncCryptoBackend.test.ts",
+        "src/primitives/__tests/SymmetricKey.test.ts",
+        "src/primitives/__tests/SymmetricKeyCompatibility.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整 AESGCM/SymmetricKey/AsyncCryptoBackend，包含注册、回退、异步失败与原规模大输入。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "52 个原用例；manual 保留原 536870928 字节及逐字节结果，资源限制不能换成小输入。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-symmetric"
+      ],
+      "evidence": [],
+      "modules": [
+        "primitives"
+      ],
+      "fixtureFiles": [
+        "src/primitives/__tests/SymmetricKey.vectors.ts"
+      ]
+    },
+    {
+      "id": "migration-impl-compat",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "compat：助记词、HD、BSM 与 ECIES",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-symmetric"
+      ],
+      "sourceFiles": [
+        "src/compat/BSM.ts",
+        "src/compat/ECIES.ts",
+        "src/compat/HD.ts",
+        "src/compat/Mnemonic.ts",
+        "src/compat/bip-39-wordlist-en.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/compat/BSM.ts",
+        "src/compat/ECIES.ts",
+        "src/compat/HD.ts",
+        "src/compat/Mnemonic.ts",
+        "src/compat/bip-39-wordlist-en.ts"
+      ],
+      "testFiles": [
+        "src/compat/__tests/BSM.test.ts",
+        "src/compat/__tests/ECIES.test.ts",
+        "src/compat/__tests/HD.test.ts",
+        "src/compat/__tests/Mnemonic.additional.test.ts",
+        "src/compat/__tests/Mnemonic.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整五个算法/词表文件；Utxo 与模块导出在 transaction-complete 按真实交易验收。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "122 个原用例，包括完整词表和全部助记词向量。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-compat"
+      ],
+      "evidence": [],
+      "modules": [
+        "compat"
+      ],
+      "fixtureFiles": [
+        "src/compat/__tests/Mnemonic.vectors.ts"
+      ]
+    },
+    {
+      "id": "migration-impl-wallet-contracts",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "wallet：协议类型、错误、参数和字节校验",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-symmetric"
+      ],
+      "sourceFiles": [
+        "src/wallet/BRC100ByteEncoding.ts",
+        "src/wallet/WERR_INSUFFICIENT_FUNDS.ts",
+        "src/wallet/WERR_INVALID_PARAMETER.ts",
+        "src/wallet/WERR_REVIEW_ACTIONS.ts",
+        "src/wallet/Wallet.interfaces.ts",
+        "src/wallet/WalletError.ts",
+        "src/wallet/WalletLoggerInterface.ts",
+        "src/wallet/substrates/utils/jsonByteEncoding.ts",
+        "src/wallet/validationHelpers.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/wallet/BRC100ByteEncoding.ts",
+        "src/wallet/WERR_INSUFFICIENT_FUNDS.ts",
+        "src/wallet/WERR_INVALID_PARAMETER.ts",
+        "src/wallet/WERR_REVIEW_ACTIONS.ts",
+        "src/wallet/Wallet.interfaces.ts",
+        "src/wallet/WalletError.ts",
+        "src/wallet/WalletLoggerInterface.ts",
+        "src/wallet/substrates/utils/jsonByteEncoding.ts",
+        "src/wallet/validationHelpers.ts"
+      ],
+      "testFiles": [
+        "src/wallet/__tests/BRC100ByteEncoding.property.test.ts",
+        "src/wallet/__tests/BRC100ByteEncoding.test.ts",
+        "src/wallet/__tests/WERR.test.ts",
+        "src/wallet/__tests/WalletError.test.ts",
+        "src/wallet/__tests/validationHelpers.test.ts",
+        "src/wallet/substrates/__tests/jsonByteEncoding.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整钱包协议类型、错误、validationHelpers、BRC100ByteEncoding 和 JSON 字节边界；不把接口当桩。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "253 个原用例；字段缺失/null/undefined、跨 realm、循环对象及错误码全部保留。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-wallet-contracts",
+        "migration-api-wallet-validation"
+      ],
+      "evidence": [],
+      "modules": [
+        "wallet"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-wallet-keys",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "wallet：密钥派生、缓存与 ProtoWallet",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-wallet-contracts"
+      ],
+      "sourceFiles": [
+        "src/wallet/CachedKeyDeriver.ts",
+        "src/wallet/KeyDeriver.ts",
+        "src/wallet/ProtoWallet.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/wallet/CachedKeyDeriver.ts",
+        "src/wallet/KeyDeriver.ts",
+        "src/wallet/ProtoWallet.ts"
+      ],
+      "testFiles": [
+        "src/wallet/__tests/CachedKeyDeriver.test.ts",
+        "src/wallet/__tests/KeyDeriver.test.ts",
+        "src/wallet/__tests/ProtoWallet.additional.test.ts",
+        "src/wallet/__tests/ProtoWallet.async-backend.test.ts",
+        "src/wallet/__tests/ProtoWallet.native-hash.test.ts",
+        "src/wallet/__tests/ProtoWallet.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整 KeyDeriver/CachedKeyDeriver/ProtoWallet 及原生/异步后端路径。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "71 个原用例；密钥、签名与缓存身份/调用轨迹均来自真实实现。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-wallet-keys"
+      ],
+      "evidence": [],
+      "modules": [
+        "wallet"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-auth-certificates",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "auth：证书、验证与钱包辅助类",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-wallet-keys"
+      ],
+      "sourceFiles": [
+        "src/auth/certificates/Certificate.ts",
+        "src/auth/certificates/MasterCertificate.ts",
+        "src/auth/certificates/VerifiableCertificate.ts",
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts",
+        "src/auth/certificates/index.ts",
+        "src/auth/utils/getVerifiableCertificates.ts",
+        "src/auth/utils/validateCertificates.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/auth/certificates/Certificate.ts",
+        "src/auth/certificates/MasterCertificate.ts",
+        "src/auth/certificates/VerifiableCertificate.ts",
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts",
+        "src/auth/certificates/index.ts",
+        "src/auth/utils/getVerifiableCertificates.ts",
+        "src/auth/utils/validateCertificates.ts"
+      ],
+      "testFiles": [
+        "src/auth/certificates/__tests/Certificate.test.ts",
+        "src/auth/certificates/__tests/MasterCertificate.test.ts",
+        "src/auth/certificates/__tests/VerifiableCertificate.test.ts",
+        "src/auth/utils/__tests/getVerifiableCertificates.test.ts",
+        "src/auth/utils/__tests/validateCertificates.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整证书三类、获取/验证辅助和公开 CompletedProtoWallet。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "50 个原用例；证书签名/解密/权限的真实钱包算法不得替换为桩。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-auth-certificates"
+      ],
+      "evidence": [],
+      "modules": [
+        "auth"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-http-chain",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "transaction：HTTP、链追踪与网络接口",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-byte-codecs"
+      ],
+      "sourceFiles": [
+        "src/transaction/Broadcaster.ts",
+        "src/transaction/ChainTracker.ts",
+        "src/transaction/chaintrackers/BlockHeadersService.ts",
+        "src/transaction/chaintrackers/DefaultChainTracker.ts",
+        "src/transaction/chaintrackers/WhatsOnChain.ts",
+        "src/transaction/chaintrackers/index.ts",
+        "src/transaction/http/BinaryFetchClient.ts",
+        "src/transaction/http/DefaultHttpClient.ts",
+        "src/transaction/http/FetchHttpClient.ts",
+        "src/transaction/http/HttpClient.ts",
+        "src/transaction/http/NodejsHttpClient.ts",
+        "src/transaction/http/NodejsHttpRequestUtils.ts",
+        "src/transaction/http/index.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/transaction/Broadcaster.ts",
+        "src/transaction/ChainTracker.ts",
+        "src/transaction/chaintrackers/BlockHeadersService.ts",
+        "src/transaction/chaintrackers/DefaultChainTracker.ts",
+        "src/transaction/chaintrackers/WhatsOnChain.ts",
+        "src/transaction/chaintrackers/index.ts",
+        "src/transaction/http/BinaryFetchClient.ts",
+        "src/transaction/http/DefaultHttpClient.ts",
+        "src/transaction/http/FetchHttpClient.ts",
+        "src/transaction/http/HttpClient.ts",
+        "src/transaction/http/NodejsHttpClient.ts",
+        "src/transaction/http/NodejsHttpRequestUtils.ts",
+        "src/transaction/http/index.ts"
+      ],
+      "testFiles": [
+        "src/transaction/__tests/Broadcaster.test.ts",
+        "src/transaction/__tests/ChainTracker.test.ts",
+        "src/transaction/chaintrackers/__tests/BlockHeadersService.test.ts",
+        "src/transaction/chaintrackers/__tests/DefaultChainTracker.test.ts",
+        "src/transaction/chaintrackers/__tests/WhatsOnChain.additional.test.ts",
+        "src/transaction/chaintrackers/__tests/WhatsOnChainChainTracker.test.ts",
+        "src/transaction/http/__tests/BinaryFetchClient.test.ts",
+        "src/transaction/http/__tests/DefaultHttpClient.additional.test.ts",
+        "src/transaction/http/__tests/DefaultHttpClient.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整 HTTP/链追踪实现、默认选择和广播响应类型/守卫。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "78 个原用例；宿主提权离线验证，保留原请求/响应/错误 fixture，禁止真实网络。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-transaction-network"
+      ],
+      "evidence": [],
+      "modules": [
+        "transaction"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-script-model",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "script：脚本模型、解析与错误",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-keys-signatures"
+      ],
+      "sourceFiles": [
+        "src/script/LockingScript.ts",
+        "src/script/OP.ts",
+        "src/script/Script.ts",
+        "src/script/ScriptChunk.ts",
+        "src/script/ScriptEvaluationError.ts",
+        "src/script/ScriptResourceLimitError.ts",
+        "src/script/ScriptTemplate.ts",
+        "src/script/ScriptTemplateUnlock.ts",
+        "src/script/SpendVerificationContext.ts",
+        "src/script/SpendVerifierInterface.ts",
+        "src/script/UnlockingScript.ts",
+        "src/script/index.ts",
+        "src/script/templates/P2PKH.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/script/LockingScript.ts",
+        "src/script/OP.ts",
+        "src/script/Script.ts",
+        "src/script/ScriptChunk.ts",
+        "src/script/ScriptEvaluationError.ts",
+        "src/script/ScriptResourceLimitError.ts",
+        "src/script/ScriptTemplate.ts",
+        "src/script/ScriptTemplateUnlock.ts",
+        "src/script/SpendVerificationContext.ts",
+        "src/script/SpendVerifierInterface.ts",
+        "src/script/UnlockingScript.ts",
+        "src/script/index.ts"
+      ],
+      "testFiles": [
+        "src/script/__tests/LockingUnlockingScript.test.ts",
+        "src/script/__tests/Script.additional.test.ts",
+        "src/script/__tests/Script.test.ts",
+        "src/script/__tests/ScriptEvaluationError.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整脚本模型/操作码/解析序列化及验证上下文类型；提前实现原测试需要的 P2PKH.lock。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "1104 个原用例，包含全部 script valid/invalid 向量；不按向量个数拆任务。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-script-model",
+        "migration-api-script-templates"
+      ],
+      "evidence": [],
+      "modules": [
+        "script"
+      ],
+      "fixtureFiles": [
+        "src/script/__tests/script.invalid.vectors.ts",
+        "src/script/__tests/script.valid.vectors.ts"
+      ]
+    },
+    {
+      "id": "migration-impl-transaction-base",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "transaction/primitives：交易构造、费率与签名格式",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-script-model",
+        "migration-impl-http-chain",
+        "migration-impl-wallet-contracts",
+        "migration-impl-symmetric"
+      ],
+      "sourceFiles": [
+        "src/primitives/TransactionSignature.ts",
+        "src/primitives/index.ts",
+        "src/script/templates/P2PKH.ts",
+        "src/transaction/FeeModel.ts",
+        "src/transaction/Transaction.ts",
+        "src/transaction/TransactionInput.ts",
+        "src/transaction/TransactionOutput.ts",
+        "src/transaction/fee-models/LivePolicy.ts",
+        "src/transaction/fee-models/SatoshisPerKilobyte.ts",
+        "src/transaction/fee-models/index.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/primitives/TransactionSignature.ts",
+        "src/primitives/index.ts",
+        "src/transaction/FeeModel.ts",
+        "src/transaction/TransactionInput.ts",
+        "src/transaction/TransactionOutput.ts",
+        "src/transaction/fee-models/LivePolicy.ts",
+        "src/transaction/fee-models/SatoshisPerKilobyte.ts",
+        "src/transaction/fee-models/index.ts"
+      ],
+      "testFiles": [
+        "src/primitives/__tests/TransactionSignature.additional.test.ts",
+        "src/transaction/__tests/Transaction.additional.test.ts",
+        "src/transaction/__tests/Transaction.ef-cache.test.ts",
+        "src/transaction/fee-models/__tests/LivePolicy.test.ts",
+        "src/transaction/fee-models/__tests/SatoshisPerKilobyte.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "实现交易基础及缓存行为、完整费率/TransactionSignature；交易完整能力由后续两任务收口。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "74 个原用例；P2PKH 签名和缓存路径所需行为在本项真实实现，不等待空桩。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-keys-signatures",
+        "migration-api-transaction-model",
+        "migration-api-script-templates"
+      ],
+      "evidence": [],
+      "modules": [
+        "primitives",
+        "script",
+        "transaction"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-transaction-beef",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "transaction：MerklePath 与 BEEF",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-transaction-base"
+      ],
+      "sourceFiles": [
+        "src/transaction/Beef.ts",
+        "src/transaction/BeefConstants.ts",
+        "src/transaction/BeefParty.ts",
+        "src/transaction/BeefTx.ts",
+        "src/transaction/MerklePath.ts",
+        "src/transaction/Transaction.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/transaction/Beef.ts",
+        "src/transaction/BeefConstants.ts",
+        "src/transaction/BeefParty.ts",
+        "src/transaction/BeefTx.ts",
+        "src/transaction/MerklePath.ts"
+      ],
+      "testFiles": [
+        "src/transaction/__tests/Beef.test.ts",
+        "src/transaction/__tests/BeefParty.additional.test.ts",
+        "src/transaction/__tests/MerklePath.bench.test.ts",
+        "src/transaction/__tests/MerklePath.safeOffsets.test.ts",
+        "src/transaction/__tests/MerklePath.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整 MerklePath/Beef/BeefTx/BeefParty/常量，原 bench 的约束和安全 offset 检查保留。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "83 个原用例；如出现尚未闭合的 Transaction/Spend 实际调用，先补齐所需行为并采集证据再验收。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-transaction-model",
+        "migration-api-transaction-beef"
+      ],
+      "evidence": [],
+      "modules": [
+        "transaction"
+      ],
+      "fixtureFiles": [
+        "src/transaction/__tests/bump.invalid.vectors.ts",
+        "src/transaction/__tests/bump.valid.vectors.ts"
+      ]
+    },
+    {
+      "id": "migration-impl-script-templates",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "script：完整交易脚本模板",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-transaction-beef",
+        "migration-impl-auth-certificates",
+        "migration-impl-compat"
+      ],
+      "sourceFiles": [
+        "src/script/Spend.ts",
+        "src/script/templates/P2PKH.ts",
+        "src/script/templates/PushDrop.ts",
+        "src/script/templates/RPuzzle.ts",
+        "src/script/templates/SignatureUtils.ts",
+        "src/script/templates/index.ts",
+        "src/transaction/Transaction.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/script/templates/P2PKH.ts",
+        "src/script/templates/PushDrop.ts",
+        "src/script/templates/RPuzzle.ts",
+        "src/script/templates/SignatureUtils.ts",
+        "src/script/templates/index.ts"
+      ],
+      "testFiles": [
+        "src/script/templates/__tests/P2PKH.async-backend.test.ts",
+        "src/script/templates/__tests/PushDrop.test.ts",
+        "src/script/templates/__tests/RPuzzle.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "收口完整 P2PKH/RPuzzle/PushDrop/SignatureUtils；保留真实钱包签名。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "17 个原用例；完整 lock/unlock、异步后端和 PushDrop 的钱包依赖一起验证。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-transaction-model",
+        "migration-api-script-spend",
+        "migration-api-script-templates"
+      ],
+      "evidence": [],
+      "modules": [
+        "script",
+        "transaction"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-script-spend",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "script：Spend 执行与边界行为",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-script-templates"
+      ],
+      "sourceFiles": [
+        "src/script/Spend.ts",
+        "src/transaction/Transaction.ts"
+      ],
+      "apiCompletionFiles": [],
+      "testFiles": [
+        "src/script/__tests/Spend.additional.test.ts",
+        "src/script/__tests/Spend.codeseparator.test.ts",
+        "src/script/__tests/Spend.test.ts",
+        "src/script/__tests/SpendComplex.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "实现 Spend 原主测试和边界测试所需全部行为，Chronicle/规范向量任务完成全文件收口。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "546 个原用例；栈、签名、资源限制、CODESEPARATOR 和错误位置逐断言对照。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-transaction-model",
+        "migration-api-script-spend"
+      ],
+      "evidence": [],
+      "modules": [
+        "script",
+        "transaction"
+      ],
+      "fixtureFiles": [
+        "src/script/__tests/spend.valid.vectors.ts"
+      ]
+    },
+    {
+      "id": "migration-impl-script-vectors",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "script：Chronicle 与完整规范向量",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-script-spend"
+      ],
+      "sourceFiles": [
+        "src/script/Spend.ts",
+        "src/transaction/Transaction.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/script/Spend.ts"
+      ],
+      "testFiles": [
+        "src/script/__tests/Chronicle.test.ts",
+        "src/script/__tests/ChronicleOpcodes.test.ts",
+        "src/script/__tests/NormativeVectors.test.ts",
+        "src/script/__tests/Spend.verifier.test.ts",
+        "src/script/__tests/SpendValildVectors.test.ts",
+        "src/script/__tests/lrshiftnum.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "补齐 Spend 全文件 API 和 Chronicle/移位/规范向量/验证器；收口 script 全部测试。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "555 个原用例；JSON fixture、全部循环和签名哈希向量均核对，不能只核对注册数。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-transaction-model",
+        "migration-api-script-spend"
+      ],
+      "evidence": [],
+      "modules": [
+        "script",
+        "transaction"
+      ],
+      "fixtureFiles": [
+        "src/script/__tests/fixtures/SOURCES.md",
+        "src/script/__tests/fixtures/bitcoin-sv/script_tests.json",
+        "src/script/__tests/fixtures/bitcoin-sv/sighash.json",
+        "src/script/__tests/fixtures/bitcoin-sv/tx_invalid.json",
+        "src/script/__tests/fixtures/bitcoin-sv/tx_valid.json",
+        "src/script/__tests/fixtures/teranode/script_tests.json",
+        "src/script/__tests/fixtures/teranode/sighash.json",
+        "src/script/__tests/fixtures/teranode/tx_invalid.json",
+        "src/script/__tests/fixtures/teranode/tx_valid.json",
+        "src/script/__tests/spend.valid.vectors.ts",
+        "src/script/__tests/sighashTestData.ts"
+      ]
+    },
+    {
+      "id": "migration-impl-broadcasters",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "transaction：广播器与默认选择",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-transaction-base"
+      ],
+      "sourceFiles": [
+        "src/transaction/broadcasters/ARC.ts",
+        "src/transaction/broadcasters/DefaultBroadcaster.ts",
+        "src/transaction/broadcasters/Teranode.ts",
+        "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts",
+        "src/transaction/broadcasters/index.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/transaction/broadcasters/ARC.ts",
+        "src/transaction/broadcasters/DefaultBroadcaster.ts",
+        "src/transaction/broadcasters/Teranode.ts",
+        "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts",
+        "src/transaction/broadcasters/index.ts"
+      ],
+      "testFiles": [
+        "src/transaction/broadcasters/__tests/ARC.additional.test.ts",
+        "src/transaction/broadcasters/__tests/ARC.test.ts",
+        "src/transaction/broadcasters/__tests/Teranode.test.ts",
+        "src/transaction/broadcasters/__tests/WhatsOnChainBroadcaster.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整 ARC/Teranode/WhatsOnChain/默认广播器，保持离线原 fixture。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "68 个原用例；请求数据、响应字段、异常与调用次数全部对照。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-transaction-network"
+      ],
+      "evidence": [],
+      "modules": [
+        "transaction"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-transaction-complete",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "transaction/compat：完整交易流程与 Utxo",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-script-vectors",
+        "migration-impl-transaction-beef",
+        "migration-impl-broadcasters",
+        "migration-impl-wallet-keys",
+        "migration-impl-compat"
+      ],
+      "sourceFiles": [
+        "src/compat/Utxo.ts",
+        "src/compat/index.ts",
+        "src/transaction/Transaction.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/compat/Utxo.ts",
+        "src/compat/index.ts"
+      ],
+      "testFiles": [
+        "src/transaction/__tests/Transaction.performance.test.ts",
+        "src/transaction/__tests/Transaction.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完成交易签名、序列化/BEEF/费率/验证等全部原主测试与性能约束，以及完整 Utxo；Transaction API 在验证任务最终收口。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "745 个原用例，包含 sighash、有效/非法交易、大交易以及完整钱包能力；依赖实际代码，不替换成桩。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-compat",
+        "migration-api-transaction-model"
+      ],
+      "evidence": [],
+      "modules": [
+        "compat",
+        "transaction"
+      ],
+      "fixtureFiles": [
+        "src/primitives/__tests/sighash.vectors.ts",
+        "src/transaction/__tests/bigtx.vectors.ts",
+        "src/transaction/__tests/tx.invalid.vectors.ts",
+        "src/transaction/__tests/tx.valid.vectors.ts"
+      ]
+    },
+    {
+      "id": "migration-impl-transaction-verification",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "transaction：验证后端、证据与协调器",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-transaction-complete"
+      ],
+      "sourceFiles": [
+        "src/transaction/BdkVerifierInterface.ts",
+        "src/transaction/EvidenceScriptWork.ts",
+        "src/transaction/ScriptVerificationBackend.ts",
+        "src/transaction/Transaction.ts",
+        "src/transaction/TransactionEvidence.ts",
+        "src/transaction/TransactionEvidenceCoordinator.ts",
+        "src/transaction/index.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/transaction/BdkVerifierInterface.ts",
+        "src/transaction/EvidenceScriptWork.ts",
+        "src/transaction/ScriptVerificationBackend.ts",
+        "src/transaction/Transaction.ts",
+        "src/transaction/TransactionEvidence.ts",
+        "src/transaction/TransactionEvidenceCoordinator.ts",
+        "src/transaction/index.ts"
+      ],
+      "testFiles": [
+        "src/transaction/__tests/Transaction.verifier.test.ts",
+        "src/transaction/__tests/TransactionEvidence.test.ts",
+        "src/transaction/__tests/TransactionEvidenceCoordinator.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完成验证后端、证据计划、并发/取消/缓存/降级，并收口 Transaction 全文件 API 和模块入口。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "53 个原用例；内部调用/异步拒绝/清理顺序与原结果一致。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-transaction-model",
+        "migration-api-transaction-evidence"
+      ],
+      "evidence": [],
+      "modules": [
+        "transaction"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-wallet-wire",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "wallet：二进制协议与 Wire 传输",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-auth-certificates"
+      ],
+      "sourceFiles": [
+        "src/wallet/substrates/HTTPWalletWire.ts",
+        "src/wallet/substrates/WalletWire.ts",
+        "src/wallet/substrates/WalletWireCalls.ts",
+        "src/wallet/substrates/WalletWireProcessor.ts",
+        "src/wallet/substrates/WalletWireTransceiver.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/wallet/substrates/HTTPWalletWire.ts",
+        "src/wallet/substrates/WalletWire.ts",
+        "src/wallet/substrates/WalletWireCalls.ts",
+        "src/wallet/substrates/WalletWireProcessor.ts",
+        "src/wallet/substrates/WalletWireTransceiver.ts"
+      ],
+      "testFiles": [
+        "src/wallet/substrates/__tests/HTTPWalletWire.test.ts",
+        "src/wallet/substrates/__tests/WalletWire.integration.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整 Wire 编解码、处理器、收发器、调用类型及 HTTPWalletWire。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "128 个原用例；集成测试宿主提权运行，按原内存 fixture，不要求真实钱包服务。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-wallet-wire"
+      ],
+      "evidence": [],
+      "modules": [
+        "wallet"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-wallet-json",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "wallet：JSON HTTP 与 Origin 适配",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-wallet-contracts",
+        "migration-impl-http-chain"
+      ],
+      "sourceFiles": [
+        "src/wallet/substrates/HTTPWalletJSON.ts",
+        "src/wallet/substrates/InvokableWalletBase.ts",
+        "src/wallet/substrates/utils/toOriginHeader.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/wallet/substrates/HTTPWalletJSON.ts",
+        "src/wallet/substrates/InvokableWalletBase.ts",
+        "src/wallet/substrates/utils/toOriginHeader.ts"
+      ],
+      "testFiles": [
+        "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts",
+        "src/wallet/substrates/__tests/toOriginHeader.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整 JSON 钱包通信基类、HTTP 实现和 origin 转换。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "58 个原用例；请求/响应及字节表示按原测试保留。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-wallet-clients"
+      ],
+      "evidence": [],
+      "modules": [
+        "wallet"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-wallet-hosts",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "wallet：浏览器与 React Native 桥接",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-wallet-contracts"
+      ],
+      "sourceFiles": [
+        "src/wallet/substrates/ReactNativeWebView.ts",
+        "src/wallet/substrates/XDM.ts",
+        "src/wallet/substrates/window.CWI.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/wallet/substrates/ReactNativeWebView.ts",
+        "src/wallet/substrates/XDM.ts",
+        "src/wallet/substrates/window.CWI.ts"
+      ],
+      "testFiles": [
+        "src/wallet/substrates/__tests/ReactNativeWebView.test.ts",
+        "src/wallet/substrates/__tests/XDM.test.ts",
+        "src/wallet/substrates/__tests/window.CWI.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整 XDM/React Native/window.CWI 宿主桥接，Java 通过明确宿主能力适配复刻。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "126 个原用例；事件来源、消息 ID、超时、清理及无宿主错误不跳过。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-wallet-clients"
+      ],
+      "evidence": [],
+      "modules": [
+        "wallet"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-wallet-client",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "wallet：WalletClient 连接与模块收口",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-wallet-wire",
+        "migration-impl-wallet-json",
+        "migration-impl-wallet-hosts"
+      ],
+      "sourceFiles": [
+        "src/wallet/WalletClient.ts",
+        "src/wallet/index.ts",
+        "src/wallet/substrates/index.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/wallet/WalletClient.ts",
+        "src/wallet/index.ts",
+        "src/wallet/substrates/index.ts"
+      ],
+      "testFiles": [
+        "src/wallet/__tests/WalletClient.additional.test.ts",
+        "src/wallet/__tests/WalletClient.substrate.test.ts",
+        "src/wallet/__tests/WalletClient.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整 WalletClient 连接顺序、选择/回退和钱包模块导出。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "100 个原用例；并发连接按原优先级选结果，不改成最快返回者获胜。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-wallet-contracts",
+        "migration-api-wallet-clients"
+      ],
+      "evidence": [],
+      "modules": [
+        "wallet"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-auth-sessions",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "auth：会话、Peer 与认证 nonce",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-wallet-client",
+        "migration-impl-auth-certificates"
+      ],
+      "sourceFiles": [
+        "src/auth/Peer.ts",
+        "src/auth/SessionManager.ts",
+        "src/auth/index.ts",
+        "src/auth/types.ts",
+        "src/auth/utils/createNonce.ts",
+        "src/auth/utils/index.ts",
+        "src/auth/utils/verifyNonce.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/auth/Peer.ts",
+        "src/auth/SessionManager.ts",
+        "src/auth/index.ts",
+        "src/auth/types.ts",
+        "src/auth/utils/createNonce.ts",
+        "src/auth/utils/index.ts",
+        "src/auth/utils/verifyNonce.ts"
+      ],
+      "testFiles": [
+        "src/auth/__tests/Peer.boundary.test.ts",
+        "src/auth/__tests/Peer.certificatePolicy.test.ts",
+        "src/auth/__tests/Peer.test.ts",
+        "src/auth/__tests/SessionManager.test.ts",
+        "src/auth/__tests/build.test.ts",
+        "src/auth/utils/__tests/cryptononce.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整 SessionManager/Peer/类型/nonce 及 auth 构建入口。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "85 个原用例；握手、重放、证书策略、等待者清理和错误边界均保留。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-auth-sessions"
+      ],
+      "evidence": [],
+      "modules": [
+        "auth"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-impl-auth-transport",
+      "phase": "P1",
+      "kind": "implementation-slice",
+      "name": "auth：AuthFetch 与认证传输",
+      "status": "not-started",
+      "dependencies": [
+        "migration-impl-auth-sessions",
+        "migration-impl-transaction-verification"
+      ],
+      "sourceFiles": [
+        "src/auth/clients/AuthFetch.ts",
+        "src/auth/clients/index.ts",
+        "src/auth/transports/SimplifiedFetchTransport.ts",
+        "src/auth/transports/index.ts"
+      ],
+      "apiCompletionFiles": [
+        "src/auth/clients/AuthFetch.ts",
+        "src/auth/clients/index.ts",
+        "src/auth/transports/SimplifiedFetchTransport.ts",
+        "src/auth/transports/index.ts"
+      ],
+      "testFiles": [
+        "src/auth/clients/__tests__/AuthFetch.additional.test.ts",
+        "src/auth/clients/__tests__/AuthFetch.boundary.test.ts",
+        "src/auth/clients/__tests__/AuthFetch.knownTxids.test.ts",
+        "src/auth/clients/__tests__/AuthFetch.peer.test.ts",
+        "src/auth/clients/__tests__/AuthFetch.property.test.ts",
+        "src/auth/clients/__tests__/AuthFetch.test.ts",
+        "src/auth/transports/__tests__/SimplifiedFetchTransport.additional.test.ts",
+        "src/auth/transports/__tests__/SimplifiedFetchTransport.test.ts"
+      ],
+      "regressionTestFiles": [],
+      "deliverable": "完整 AuthFetch/SimplifiedFetchTransport，包含 knownTxids、Peer、属性样本与边界。",
+      "stepsRef": "implementationPolicy.steps",
+      "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
+      "acceptanceFocus": [
+        "183 个原用例；网络 fixture 和时序可重放，全部 property 样本与收缩轨迹保留。"
+      ],
+      "scopeRef": "scope",
+      "apiBatchRefs": [
+        "migration-api-auth-transport"
+      ],
+      "evidence": [],
+      "modules": [
+        "auth"
+      ],
+      "fixtureFiles": []
+    },
+    {
+      "id": "migration-api-contract",
+      "phase": "P0",
+      "name": "全部 API 与跨任务接口总验收",
+      "description": "建立全部 TS API/行为到 com.metanet4j.bsv 的对应关系，覆盖没有上游测试的公开能力。",
+      "dependencies": [
+        "migration-scope-review",
+        "migration-api-values",
+        "migration-api-hash-random",
+        "migration-api-symmetric",
+        "migration-api-curve",
+        "migration-api-keys-signatures",
+        "migration-api-compat",
+        "migration-api-script-model",
+        "migration-api-wallet-contracts",
+        "migration-api-transaction-model",
+        "migration-api-transaction-beef",
+        "migration-api-transaction-network",
+        "migration-api-script-spend",
+        "migration-api-transaction-evidence",
+        "migration-api-wallet-validation",
+        "migration-api-wallet-keys",
+        "migration-api-auth-certificates",
+        "migration-api-wallet-wire",
+        "migration-api-wallet-clients",
+        "migration-api-auth-sessions",
+        "migration-api-auth-transport",
+        "migration-api-script-templates"
+      ],
+      "status": "not-started",
+      "steps": [
+        "核对 apiBatches 全部复核完成，执行 batches 与无过滤 audit-api.cjs check。",
+        "逐项复核 1016 个导出入口及跨批次引用、共享类型、异常、异步和平台适配，确认同一 Java 符号没有冲突。",
+        "汇总各编码任务已有映射和授权差异，验证跨任务接口一致性；本项不作为逐任务登记 test-map 或开始编码的前置。"
+      ],
+      "outputs": [
+        "完整模块/API 映射文档中的 Java 接口与兼容章节",
+        "api-catalog.json：固定源码声明与实际导出入口",
+        "api-map.json：逐项 Java 入口、类型和行为契约",
+        "audit-api.cjs：重新清点及拒绝遗漏的检查入口"
+      ],
+      "acceptanceCriteria": [
+        "选定完整模块的 API/行为均有映射，未映射能力和未解决接口差异为零。",
+        "预期来源、异常语义及测试边界明确，不以 Java 实现生成自己的预期。",
+        "metanet4j-bsv-sdk 的底层实现不依赖 base/sdk；本次不修改其他工程接口或依赖配置。"
+      ],
+      "evidence": [
+        "API 复核清单保存在 apiBatches，随对应编码任务完成；已有 663 项设计证据保留，本项等待全部 API 收口。",
+        "当前 api-map 有 663 项已复核、2913 项未映射，总验收未通过。",
+        "node audit-api.cjs batches 已核对 21 批恰好覆盖 133 文件/3576 声明；工具自测 39/39，通过记录见 .cache/evidence/api-batches-all-green.log。分批有效不代表总验收完成。"
+      ],
+      "scopeRef": "scope",
+      "kind": "gate"
+    },
+    {
+      "id": "migration-test-mapping",
+      "phase": "P0",
+      "name": "P0 全部用例与断言映射",
+      "description": "随每个编码任务补齐并独立验证相应能力；本项汇总全量证据，不作为开始全部编码的前置。",
+      "dependencies": [
+        "migration-impl-hex",
+        "migration-impl-bignumber-constructor",
+        "migration-impl-bignumber",
+        "migration-impl-hash-random",
+        "migration-impl-curve",
+        "migration-impl-byte-codecs",
+        "migration-impl-keys-signatures",
+        "migration-impl-symmetric",
+        "migration-impl-compat",
+        "migration-impl-wallet-contracts",
+        "migration-impl-wallet-keys",
+        "migration-impl-auth-certificates",
+        "migration-impl-http-chain",
+        "migration-impl-script-model",
+        "migration-impl-transaction-base",
+        "migration-impl-transaction-beef",
+        "migration-impl-script-templates",
+        "migration-impl-script-spend",
+        "migration-impl-script-vectors",
+        "migration-impl-broadcasters",
+        "migration-impl-transaction-complete",
+        "migration-impl-transaction-verification",
+        "migration-impl-wallet-wire",
+        "migration-impl-wallet-json",
+        "migration-impl-wallet-hosts",
+        "migration-impl-wallet-client",
+        "migration-impl-auth-sessions",
+        "migration-impl-auth-transport"
+      ],
+      "status": "not-started",
+      "steps": [
+        "重新清点候选清单并与冻结清单比较，汇总各编码任务的 test-map.json，逐项核对真实 Java 测试入口和当前 Surefire 报告。",
+        "逐项复核辅助断言、条件注册、循环、forEach 和属性样本，确认断言位置、样本标识、执行约束与真实轨迹一致。",
+        "拒绝拟定但未执行的 Java 名称、遗漏文件或样本，以及没有实际结果对照的完成声明。"
+      ],
+      "outputs": [
+        "test-map.json 的 cases 和 siteReviews",
+        "可供运行采集核对的断言与样本预期约束"
+      ],
+      "acceptanceCriteria": [
+        "当前基线 5329 个注册用例及 7554 个 AST 位置逐项有依据；范围变化以重新审查的清单为准。",
+        "静态扫描未覆盖的辅助断言和动态样本经源码复核补齐，不把注册数当断言数。",
+        "不自动填 reviewed、不批量生成未验证 Java 测试、不把计划映射计为已通过。"
+      ],
+      "evidence": [],
+      "scopeRef": "scope",
+      "kind": "gate",
+      "execution": "incremental-final-audit"
+    },
+    {
       "id": "migration-input-replay",
       "phase": "P0",
       "name": "P0 输入语料记录与 Java 重放",
-      "description": "保留相同实际输入和前置状态，解决跨语言随机、属性、时钟与网络 fixture 的重放。",
+      "description": "随每个编码任务补齐并独立验证相应能力；本项汇总全量证据，不作为开始全部编码的前置。",
       "dependencies": [
-        "migration-test-mapping",
         "migration-ts-baseline"
       ],
       "status": "not-started",
@@ -896,13 +1712,15 @@
         "无法进行字节相等比较的随机源测试有明确原行为验证和可控输入对照方案。"
       ],
       "evidence": [],
-      "scopeRef": "scope"
+      "scopeRef": "scope",
+      "kind": "gate",
+      "execution": "incremental-final-audit"
     },
     {
       "id": "migration-result-capture",
       "phase": "P0",
       "name": "P0 TS/Java 真实逐断言结果采集",
-      "description": "实现采集器，记录两端各自运行观察到的值、异常和可见状态，并关联同次原始报告。",
+      "description": "随每个编码任务补齐并独立验证相应能力；本项汇总全量证据，不作为开始全部编码的前置。",
       "dependencies": [
         "migration-input-replay"
       ],
@@ -922,13 +1740,15 @@
         "缺失采集、重复 ID、输入改变或执行失败均返回非零，完整 SDK 结果随 P1 实现逐项形成。"
       ],
       "evidence": [],
-      "scopeRef": "scope"
+      "scopeRef": "scope",
+      "kind": "gate",
+      "execution": "incremental-final-audit"
     },
     {
       "id": "migration-evidence-gate",
       "phase": "P0",
       "name": "P0 证据完整性与验收流程验证",
-      "description": "将预期断言/样本约束、实际运行轨迹和结果比较连接起来，验证无法靠缩减登记清单取得通过。",
+      "description": "随每个编码任务补齐并独立验证相应能力；本项汇总全量证据，不作为开始全部编码的前置。",
       "dependencies": [
         "migration-result-capture"
       ],
@@ -945,16 +1765,18 @@
         "可重现的完整运行/采集/验收命令及状态验证"
       ],
       "acceptanceCriteria": [
-        "既有 23 项自测与新增反例全部通过，反例确实以非零退出。",
+        "现有检查器全部自测与新增反例通过，缺失/重复/篡改等反例确实以非零退出；工具通过不计 SDK 用例。",
         "同一循环样本或断言从映射及两端结果同时删掉仍被独立的预期/运行记录识别。",
         "注册用例、断言/样本和完整 API 清单分别核对，不能仅依赖总数或人工 reviewed 标记。"
       ],
       "evidence": [],
-      "scopeRef": "scope"
+      "scopeRef": "scope",
+      "kind": "gate",
+      "execution": "incremental-final-audit"
     },
     {
       "id": "migration-map",
-      "name": "P0 前置准备联合验收",
+      "name": "P0 全量设计、映射与采集证据收口",
       "description": "P0：完整模块 API/行为、依赖与逐用例/断言映射，复核 AST 语义位置与跨目录测试，落实真实输入重放和结果采集；不得按调用的方法裁剪。",
       "dependencies": [
         "migration-scope-review",
@@ -978,17 +1800,45 @@
       ],
       "acceptanceCriteria": [
         "七个 P0 功能项均完成，接口映射、完整 TS 基线、输入重放、真实采集和反例门禁验证齐全。",
-        "Java 模块尚未实现时完整 check 可以因未实现而失败，P0 不得声称 SDK 全部通过。",
-        "只有本项完成才可进入 P1 生产模块迁移。"
+        "本项验收映射、输入与采集证据的完整性；SDK 全部通过仍须由六模块联合验收和最终交付的完整执行证明。",
+        "本项是完整模块最终验收前置，不阻止实施任务按自己的 API 前检与独立验收条件进入 TDD。"
       ],
       "scopeRef": "scope"
     },
     {
       "id": "migration-core-modules",
-      "name": "P1 六个完整模块按模块实施与联合验收",
+      "name": "P1 六个完整模块联合验收",
       "description": "primitives/compat/script/transaction/wallet/auth 的源码、类型与测试依赖形成闭环；按模块逐行为 TDD，六模块完整联合累计验收。",
       "dependencies": [
-        "migration-map"
+        "migration-map",
+        "migration-impl-hex",
+        "migration-impl-bignumber-constructor",
+        "migration-impl-bignumber",
+        "migration-impl-hash-random",
+        "migration-impl-curve",
+        "migration-impl-byte-codecs",
+        "migration-impl-keys-signatures",
+        "migration-impl-symmetric",
+        "migration-impl-compat",
+        "migration-impl-wallet-contracts",
+        "migration-impl-wallet-keys",
+        "migration-impl-auth-certificates",
+        "migration-impl-http-chain",
+        "migration-impl-script-model",
+        "migration-impl-transaction-base",
+        "migration-impl-transaction-beef",
+        "migration-impl-script-templates",
+        "migration-impl-script-spend",
+        "migration-impl-script-vectors",
+        "migration-impl-broadcasters",
+        "migration-impl-transaction-complete",
+        "migration-impl-transaction-verification",
+        "migration-impl-wallet-wire",
+        "migration-impl-wallet-json",
+        "migration-impl-wallet-hosts",
+        "migration-impl-wallet-client",
+        "migration-impl-auth-sessions",
+        "migration-impl-auth-transport"
       ],
       "status": "not-started",
       "evidence": [],
@@ -1002,7 +1852,7 @@
         "auth"
       ],
       "steps": [
-        "按基础数据与密码学 → 基础脚本和交易 → compat → wallet/auth → 依赖钱包的脚本/交易能力顺序逐行为 TDD；保存 RED/GREEN、真实输入输出及提交。",
+        "核对全部 implementation-slice 独立验收证据及完整源码/API/原测试分配；每个编码任务已执行 API 前检、TDD 和实际结果对照。",
         "每个模块保留全部功能/API/测试；内部实现里程碑不标记模块验收完成。",
         "六模块全部实现后执行冻结范围的累计测试、逐断言结果比较和 API 核对。"
       ],
@@ -1016,7 +1866,8 @@
         "实现和 Java 测试只落在 metanet4j-bsv-sdk；其他工程仅只读参考，不能用冒烟或跳过测试的构建代替完整模块验收。",
         "六模块完整联合验收，使用默认全范围 check；不得排除 PushDrop、completeWithWallet 或依赖 compat 的交易测试，不能用桩替代上游实际调用的钱包算法。"
       ],
-      "scopeRef": "scope"
+      "scopeRef": "scope",
+      "kind": "gate"
     },
     {
       "id": "migration-sdk-acceptance",
@@ -1044,97 +1895,16 @@
         "不以修改业务 SDK/base/component 或替换其依赖作为本次验收前置条件。"
       ],
       "evidence": []
-    },
-    {
-      "id": "migration-impl-hex",
-      "phase": "P1",
-      "kind": "implementation-slice",
-      "name": "primitives：完整 Hex 文件与原测试实现",
-      "description": "用户授权已设计且依赖闭合的部分先编码；完整 hex.ts 的 2 个函数、原测试 8 用例/19 断言逐项移植并采集实际输入和结果，不代表 primitives 整模块完成。",
-      "dependencies": [
-        "migration-api-values",
-        "migration-ts-baseline"
-      ],
-      "status": "done",
-      "acceptanceCriteria": [
-        "原始 hex.test.ts 8 个用例、19 个断言、27 个 AST 位置全部映射，TS 源码和测试保持不变。",
-        "TDD 逐行为推进；Java clean test 全部通过，真实输入、返回值、异常类型与消息逐项和 TS 比较。",
-        "完整模块及 5329 个原测试的最终门禁保持不变。"
-      ],
-      "evidence": [
-        "Java 提交 0ecb8d1：完整 Hex 两函数、Undefined 和错误类型、上游许可及全部 8 个原用例。",
-        ".cache/evidence/hex-01..05-red/green.log：5 组真实行为 RED→GREEN；hex-all-green.log：8/8 原用例通过。",
-        ".cache/evidence/hex-parity-20260920-150144-mgrmta7b/summary.json：提交后重新执行，TS 8/8、Java 原测试 8/8；19 次实际输入/返回/异常全部一致，27 AST 位置映射齐全，formalAcceptance=false。",
-        "同批次保存 Jest JSON、全部 Surefire XML、两端调用记录、源码/工具/Java 版本及报告摘要；目标工程累计 9/9（含基础测试 1），零失败/错误/跳过。",
-        "test-hex-parity.py：7/7 采集对照自测通过；故意漏采/重复/改变输入/返回/异常类型/篡改报告均被拒绝，不计入 SDK 用例。",
-        "收尾检查：./init.sh 和 audit-api.cjs batches 通过；audit-tests.py check 重扫 133 文件/5329 用例后预期退出 1，缺失 5321、多余 0。日志 hex-init-final.log、hex-api-batches.log、hex-formal-gate.log。"
-      ],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-impl-bignumber-constructor",
-      "phase": "P1",
-      "kind": "implementation-slice",
-      "name": "primitives：BigNumber 构造与解析基础",
-      "description": "沿用已审查 API 设计，从完整 BigNumber.constructor.test.ts 的 28 个原用例逐行为实施构造、解析及所需编码行为；为完整 BigNumber 实现的内部里程碑，其他 BigNumber 测试及所有内部 API 仍必须后续完成。",
-      "dependencies": [
-        "migration-api-values",
-        "migration-ts-baseline",
-        "migration-impl-hex"
-      ],
-      "status": "done",
-      "steps": [
-        "审查原测试全部输入、断言及运行轨迹，登记真实 Java 入口和完整文件映射。",
-        "逐行为 RED→GREEN，只实现当前行为与必要依赖，保留 sign/nominal length、字节序及异常顺序；不提前加入占位 API。",
-        "补齐该文件实际输入/结果采集及对照；执行 Java clean test，包含已完成 Hex 的累计回归。"
-      ],
-      "acceptanceCriteria": [
-        "原文件 28 用例全部执行且逐断言实际结果一致，源码复核位置无遗漏。",
-        "Hex 原测试累计回归通过；不将构造基础完成等同于完整 BigNumber 或 primitives 完成。"
-      ],
-      "evidence": [
-        "目标工程提交 9c22ba1：BigNumber 构造基础及原文件全部 28 个 Java 用例；保留 sign/nominal length、BE/LE 输入宽度、26 位词和错误消息。",
-        "12 组真实 RED→GREEN：.cache/evidence/bn-01/05/06/07/08/09/12/16/18/19/22/23-red.log 及对应 green；其余 16 原用例由已有行为直接满足。",
-        ".cache/evidence/hex-parity-20260920-153441-zd037qhq/：提交后重新执行；BigNumber TS/Java 28/28，45 静态断言执行 52 次，92 次实际 API 调用输入/结果/异常及断言实参逐项一致。",
-        "累计 Hex：TS/Java 原用例 36/36，71 次断言结果一致，101 AST 位置映射齐全；目标工程总计 37/37（另含基础测试 1），零失败/错误/跳过。",
-        "run-hex-parity.py --bn-constructor 复用已有比较引擎并绑定完整原始证据；14 项工具自测覆盖循环样本遗漏/重复、调用遗漏、输入/结果/异常变化与报告篡改，不充抵 SDK 测试。",
-        "当前 BigNumber 仍是内部实施基础；完整 API、参数分支及其他测试未完成，不能标整类/模块验收。Jackson 仅 test 依赖；bn.js MIT 和 BSV 来源许可随资源保留。",
-        "收尾：./init.sh、audit-api.cjs batches 通过；audit-tests.py check 重扫 133 原文件/5329 用例后按预期退出 1（缺失 5293、多余 0）。日志 bn-init-final.log、bn-api-batches-final.log、bn-formal-gate-final.log；14 项工具自测见 bn-parity-selftests-final.log。"
-      ],
-      "scopeRef": "scope"
-    },
-    {
-      "id": "migration-impl-bignumber-serializers",
-      "phase": "P1",
-      "kind": "implementation-slice",
-      "name": "primitives：BigNumber 完整序列化原测试",
-      "description": "按完整 BigNumber.serializers.test.ts 的 16 个原用例继续 TDD，补齐所需构造/转换分支、协议编码及 Utils 基础编解码；完整 BigNumber 和 primitives 的其余 API/测试保留后续范围。",
-      "dependencies": [
-        "migration-api-values",
-        "migration-impl-bignumber-constructor"
-      ],
-      "status": "not-started",
-      "steps": [
-        "审查原文件全部输入、断言、动态轨迹及 Utils 依赖，登记实际 Java 入口。",
-        "按原测试逐行为实施 JSON/String/Hex、compact bits、signed magnitude 和 ScriptNum；补齐无参零值、必要参数重载及错误顺序。",
-        "扩展已有真实采集和比较入口，累计回归 Hex 与 BigNumber 构造；单文件通过不能代替完整类或模块验收。"
-      ],
-      "acceptanceCriteria": [
-        "16 个原用例全部复刻、执行且实际结果一致，每个断言和样本均有映射。",
-        "之前 36 个原用例累计回归与对照通过，零失败/跳过；工程修改仅限 metanet4j-bsv-sdk。"
-      ],
-      "evidence": [],
-      "scopeRef": "scope"
     }
   ],
   "apiBatchPolicy": {
-    "unit": "API 设计按完整源文件分批；六个完整模块的迁移范围和 P0/P1/P2 门禁不变。",
-    "ownership": "每个 api-catalog.files 文件恰好属于一个 api-batch，含零声明的 index.ts；全量声明和导出分母仍由固定源码重新扫描。",
-    "dependencies": "批次 dependencies 表示设计执行前置；源码、类型和测试的完整循环依赖图仍见 module-scope/module-tests 和 API 契约，不用批次顺序替代。",
+    "unit": "API 按完整源文件保留为 apiBatches 复核清单，嵌入编码任务前检，不再单独排期；六个完整模块的最终范围不变。",
+    "ownership": "api-catalog 的每个完整源文件恰属一个 apiBatches 项；api-map 是逐声明设计的唯一清单。编码完成责任和原测试归属由 implementationPolicy 定义。",
+    "dependencies": "dependencies 仅约束已有范围审查；实现前检查相关跨任务符号，不再用设计批次之间的先后顺序阻塞可编码部分。",
     "steps": [
       "读取本批次完整源码与全部相关原测试；沿用已确认公共类型，对跨批次符号保留明确引用。",
       "逐声明登记 Java 入口、类型、默认值、状态、身份、异常、异步和平台行为；必要时以固定 TS 小输入确认，禁止自动填 reviewed。",
-      "执行 node audit-api.cjs batches --batch <ID>，核对本批次全部声明、契约证据和导出；完成后更新状态并提交，只推进一个批次。"
+      "相关完整文件已全部复核时运行 batches --batch <ID> 并更新嵌入清单；未完成整个 API 批次不阻止已有映射的行为 TDD，当前执行项始终为编码任务。"
     ],
     "acceptanceCriteria": [
       "apiFiles 中全部文件、声明和本批次可确定的导出能力已复核，无漏项；不能按调用方法裁剪，超大文件可逐类推进但文件未完整时批次不能 done。",
@@ -1145,7 +1915,746 @@
     "largeFileRule": "Hash、Wallet.interfaces、validationHelpers 等大文件在批次内部逐类/接口族执行，已复核条目即时保存于 api-map；不另增第二套声明状态清单。"
   },
   "implementationPolicy": {
-    "authorization": "用户明确要求：已完成的可以进行编码吗？先编码能够进行的部分。",
-    "rule": "允许已完成 API 设计且实现依赖闭合的部分先进入 TDD；每个内部实施项同步完成原测试映射、实际输入/结果采集与对比。API 总验收、P0 联合验收及完整模块最终验收仍必须完成，内部项通过不能声明整模块完成。"
-  }
+    "authorization": "用户要求：API 检查放在编码任务开始前进行；任务粒度适中且能够独立验收。",
+    "rule": "每个 implementation-slice 在同一任务内完成 API 前检、原测试映射、逐行为 TDD、实际结果比较和提交；无需先完成全部 API/P0。整模块最终门禁不变。",
+    "testCatalogRef": "module-tests.json",
+    "granularity": "按可验证的功能组拆分，以完整原测试文件为最小分配单位；不按单个方法/断言拆任务。已验收 Hex/构造保留，未做 serializers 合入完整大整数任务。较多向量的原测试不人为拆分或缩小。",
+    "ownership": "sourceFiles 为本项实现/前检范围，允许跨任务复用；apiCompletionFiles 为完整文件 API 收口责任且全范围恰好一次。testFiles 为原测试完整文件归属且恰好一次；regressionTestFiles 只追加回归，不重复计数。fixtureFiles 为只读共享辅助资料。",
+    "cycles": "源码引用闭环不等于排期循环。基础任务可实现 sourceFiles 中为原测试实际调用的必要依赖行为；不得写占位方法、删除断言或用桩替代真实算法。若发现必需运行依赖不在任务范围，先明确补入范围或合并相关任务并重跑分配检查；证据未闭合不得 done。",
+    "steps": [
+      "读取本项 sourceFiles 和 testFiles 全文以及相关 fixture；复核对应 api-map 参数、返回、异常、身份、平台分支和依赖；复用已有设计，只补缺口。",
+      "登记本项 test-map 用例/断言/循环样本；补齐本项需要的确定性输入、采集器与比较入口并验证反例，不能把尚待建设的通用工具当作已有成果。",
+      "逐行为先运行原 TS 参考，再写 Java RED、实现 GREEN；原测试完整复刻，必要内部状态断言保留；记录实际输入/输出/异常/调用顺序。",
+      "执行本项全部原 TS 测试、目标工程 clean test 及已完成项累计回归；从冻结清单派生本项比较范围，复用 audit-tests.py compare 核对实际结果。",
+      "收口 apiCompletionFiles 的全部 API；保存原始报告、运行命令、源码/工具/Java 版本摘要和比较结果，满足全部条件后更新本项和相关 API 复核状态，再按范围提交。"
+    ],
+    "acceptanceCriteria": [
+      "本项 sourceFiles 中实际实施的 API 均已前检；apiCompletionFiles 全部声明/导出能力已完成设计和真实实现，未完成功能不能用只有映射来收口。",
+      "testFiles 的全部注册用例、参数行、断言和动态样本均有原始执行及 Java 对应证据；数量从固定 module-tests.json 派生，不在任务里另造分母。",
+      "本项两端原断言均通过，实际输入/结果/异常一致；零失败/跳过/未执行/漏采/未比较，额外 Java 回归与上游分开计数。",
+      "依赖为真实实现或原测试原有 fixture；当前 Java clean test 和此前已完成项累计结果对照通过，报告绑定验收时提交/工作树。",
+      "产出本项可复跑命令与独立证据目录，局部比较标记 formalAcceptance=false；独立任务 done 不表示整个模块验收。完整模块最终仍运行无过滤 API check 与六模块 audit-tests.py check。"
+    ],
+    "validation": {
+      "allocation": "node audit-api.cjs batches：核对 API 复核清单、执行依赖、完整文件收口责任、原测试归属和辅助资料覆盖；只验证结构。",
+      "apiBeforeCoding": "逐项核对本任务 sourceFiles 对应 api-map；完整 API 复核组就绪后用 batches --batch ID 留证。禁止要求无关 API 组先完成。",
+      "java": "./verify.sh bsv-test：目标工程 clean test，核对实际 Surefire XML。",
+      "parity": "复用 audit-tests.py compare 和已有采集机制；每项首次实施时记录自己的真实运行/采集/累计比较命令及日志，未实现入口必须保持待完成。",
+      "final": "node audit-api.cjs check；python3 audit-tests.py check：最终全量门禁不得按内部任务过滤。"
+    }
+  },
+  "apiBatches": [
+    {
+      "id": "migration-api-values",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-01 数值、字节容器与模运算",
+      "module": "primitives",
+      "apiFiles": [
+        "src/primitives/BigNumber.ts",
+        "src/primitives/K256.ts",
+        "src/primitives/Mersenne.ts",
+        "src/primitives/MontgomoryMethod.ts",
+        "src/primitives/ReaderUint8Array.ts",
+        "src/primitives/ReductionContext.ts",
+        "src/primitives/WriterUint8Array.ts",
+        "src/primitives/hex.ts",
+        "src/primitives/utils.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "done",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [
+        "033c518：9 个完整文件的 371 项设计映射已登记；不是 Java 实现或测试通过。",
+        ".cache/evidence/api-value-mapping-check.json：声明 ID、契约引用与完整文件集合核对通过。",
+        "api-values-probe.mjs：两种 Buffer 环境分别观察 26 组输入；未计入 SDK 用例。",
+        "WUA-ZERO-CAPACITY 授权见 api-map.approvedDifferences，修复与额外 Java 回归仍待 P1 实施。",
+        "node audit-api.cjs batches --batch migration-api-values 实际通过；日志 .cache/evidence/api-batch-values-current.log。"
+      ],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-hex",
+        "migration-impl-bignumber-constructor",
+        "migration-impl-bignumber",
+        "migration-impl-hash-random",
+        "migration-impl-curve",
+        "migration-impl-byte-codecs"
+      ]
+    },
+    {
+      "id": "migration-api-hash-random",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-02 哈希、HMAC/PBKDF2、DRBG 与随机源",
+      "module": "primitives",
+      "apiFiles": [
+        "src/primitives/DRBG.ts",
+        "src/primitives/Hash.ts",
+        "src/primitives/Random.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "done",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [
+        "完整复核 Hash.ts 277、DRBG.ts 7、Random.ts 8 项，共 292 项；Java 设计签名和契约见 api-map.json、doc/完整模块与API映射-20260920-122800.md#api-hash-random。24 个直接导出及 2 个 Hash namespace 绑定均有对应方案。",
+        "node audit-api.cjs batches --batch migration-api-hash-random：292/292 设计映射结构通过，见 .cache/evidence/api-hash-random-batch.log；设计不表示 Java 已实现。",
+        "六个原始 TS 测试文件实际 86/86 通过、零失败/跳过；见 .cache/evidence/api-hash-random-ts.log、api-hash-random-ts.jest.json。未修改原源码/测试，不计新增 Java 通过数。",
+        "node api-hash-random-probe.cjs：133 组真实观察及内置断言通过，含原生/纯 TS/无 Buffer、摘要生命周期、PBKDF2 校验、DRBG 状态、Random 宿主优先级/缓存；原始输入/结果/异常及源码哈希见 .cache/evidence/api-hash-random-observations.json。",
+        "环境与全批覆盖检查通过；全量 API check 仍按预期拒绝 2913 项未映射。证据见 .cache/evidence/api-hash-random-manifest.json。"
+      ],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-hash-random"
+      ]
+    },
+    {
+      "id": "migration-api-symmetric",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-03 对称加密与异步密码学后端",
+      "module": "primitives",
+      "apiFiles": [
+        "src/primitives/AESGCM.ts",
+        "src/primitives/AsyncCryptoBackend.ts",
+        "src/primitives/SymmetricKey.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-symmetric"
+      ]
+    },
+    {
+      "id": "migration-api-curve",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-04 椭圆曲线与点运算",
+      "module": "primitives",
+      "apiFiles": [
+        "src/primitives/BasePoint.ts",
+        "src/primitives/Curve.ts",
+        "src/primitives/JacobianPoint.ts",
+        "src/primitives/Point.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-curve"
+      ]
+    },
+    {
+      "id": "migration-api-keys-signatures",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-05 密钥、签名与原语导出",
+      "module": "primitives",
+      "apiFiles": [
+        "src/primitives/ECDSA.ts",
+        "src/primitives/Polynomial.ts",
+        "src/primitives/PrivateKey.ts",
+        "src/primitives/PublicKey.ts",
+        "src/primitives/Schnorr.ts",
+        "src/primitives/Secp256r1.ts",
+        "src/primitives/Signature.ts",
+        "src/primitives/TransactionSignature.ts",
+        "src/primitives/index.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-keys-signatures",
+        "migration-impl-transaction-base"
+      ]
+    },
+    {
+      "id": "migration-api-compat",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-06 完整兼容模块",
+      "module": "compat",
+      "apiFiles": [
+        "src/compat/BSM.ts",
+        "src/compat/ECIES.ts",
+        "src/compat/HD.ts",
+        "src/compat/Mnemonic.ts",
+        "src/compat/Utxo.ts",
+        "src/compat/bip-39-wordlist-en.ts",
+        "src/compat/index.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-compat",
+        "migration-impl-transaction-complete"
+      ]
+    },
+    {
+      "id": "migration-api-script-model",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-07 脚本模型、操作码与验证接口",
+      "module": "script",
+      "apiFiles": [
+        "src/script/LockingScript.ts",
+        "src/script/OP.ts",
+        "src/script/Script.ts",
+        "src/script/ScriptChunk.ts",
+        "src/script/ScriptEvaluationError.ts",
+        "src/script/ScriptResourceLimitError.ts",
+        "src/script/ScriptTemplate.ts",
+        "src/script/ScriptTemplateUnlock.ts",
+        "src/script/SpendVerificationContext.ts",
+        "src/script/SpendVerifierInterface.ts",
+        "src/script/UnlockingScript.ts",
+        "src/script/index.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-script-model"
+      ]
+    },
+    {
+      "id": "migration-api-wallet-contracts",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-08 钱包协议类型、错误与日志接口",
+      "module": "wallet",
+      "apiFiles": [
+        "src/wallet/WERR_INSUFFICIENT_FUNDS.ts",
+        "src/wallet/WERR_INVALID_PARAMETER.ts",
+        "src/wallet/WERR_REVIEW_ACTIONS.ts",
+        "src/wallet/Wallet.interfaces.ts",
+        "src/wallet/WalletError.ts",
+        "src/wallet/WalletLoggerInterface.ts",
+        "src/wallet/index.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-wallet-contracts",
+        "migration-impl-wallet-client"
+      ]
+    },
+    {
+      "id": "migration-api-transaction-model",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-09 交易模型与费率",
+      "module": "transaction",
+      "apiFiles": [
+        "src/transaction/FeeModel.ts",
+        "src/transaction/Transaction.ts",
+        "src/transaction/TransactionInput.ts",
+        "src/transaction/TransactionOutput.ts",
+        "src/transaction/fee-models/LivePolicy.ts",
+        "src/transaction/fee-models/SatoshisPerKilobyte.ts",
+        "src/transaction/fee-models/index.ts",
+        "src/transaction/index.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-transaction-base",
+        "migration-impl-transaction-beef",
+        "migration-impl-script-templates",
+        "migration-impl-script-spend",
+        "migration-impl-script-vectors",
+        "migration-impl-transaction-complete",
+        "migration-impl-transaction-verification"
+      ]
+    },
+    {
+      "id": "migration-api-transaction-beef",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-10 BEEF 与 Merkle 证明",
+      "module": "transaction",
+      "apiFiles": [
+        "src/transaction/Beef.ts",
+        "src/transaction/BeefConstants.ts",
+        "src/transaction/BeefParty.ts",
+        "src/transaction/BeefTx.ts",
+        "src/transaction/MerklePath.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-transaction-beef"
+      ]
+    },
+    {
+      "id": "migration-api-transaction-network",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-11 广播、链追踪与 HTTP",
+      "module": "transaction",
+      "apiFiles": [
+        "src/transaction/Broadcaster.ts",
+        "src/transaction/ChainTracker.ts",
+        "src/transaction/broadcasters/ARC.ts",
+        "src/transaction/broadcasters/DefaultBroadcaster.ts",
+        "src/transaction/broadcasters/Teranode.ts",
+        "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts",
+        "src/transaction/broadcasters/index.ts",
+        "src/transaction/chaintrackers/BlockHeadersService.ts",
+        "src/transaction/chaintrackers/DefaultChainTracker.ts",
+        "src/transaction/chaintrackers/WhatsOnChain.ts",
+        "src/transaction/chaintrackers/index.ts",
+        "src/transaction/http/BinaryFetchClient.ts",
+        "src/transaction/http/DefaultHttpClient.ts",
+        "src/transaction/http/FetchHttpClient.ts",
+        "src/transaction/http/HttpClient.ts",
+        "src/transaction/http/NodejsHttpClient.ts",
+        "src/transaction/http/NodejsHttpRequestUtils.ts",
+        "src/transaction/http/index.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-http-chain",
+        "migration-impl-broadcasters"
+      ]
+    },
+    {
+      "id": "migration-api-script-spend",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-12 完整脚本执行器 Spend",
+      "module": "script",
+      "apiFiles": [
+        "src/script/Spend.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-script-templates",
+        "migration-impl-script-spend",
+        "migration-impl-script-vectors"
+      ]
+    },
+    {
+      "id": "migration-api-transaction-evidence",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-13 交易验证后端、证据与并发协调",
+      "module": "transaction",
+      "apiFiles": [
+        "src/transaction/BdkVerifierInterface.ts",
+        "src/transaction/EvidenceScriptWork.ts",
+        "src/transaction/ScriptVerificationBackend.ts",
+        "src/transaction/TransactionEvidence.ts",
+        "src/transaction/TransactionEvidenceCoordinator.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-transaction-verification"
+      ]
+    },
+    {
+      "id": "migration-api-wallet-validation",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-14 钱包参数校验与字节编码",
+      "module": "wallet",
+      "apiFiles": [
+        "src/wallet/BRC100ByteEncoding.ts",
+        "src/wallet/substrates/utils/jsonByteEncoding.ts",
+        "src/wallet/validationHelpers.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-wallet-contracts"
+      ]
+    },
+    {
+      "id": "migration-api-wallet-keys",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-15 钱包密钥派生、缓存与 ProtoWallet",
+      "module": "wallet",
+      "apiFiles": [
+        "src/wallet/CachedKeyDeriver.ts",
+        "src/wallet/KeyDeriver.ts",
+        "src/wallet/ProtoWallet.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-wallet-keys"
+      ]
+    },
+    {
+      "id": "migration-api-auth-certificates",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-16 证书与公开钱包辅助类",
+      "module": "auth",
+      "apiFiles": [
+        "src/auth/certificates/Certificate.ts",
+        "src/auth/certificates/MasterCertificate.ts",
+        "src/auth/certificates/VerifiableCertificate.ts",
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts",
+        "src/auth/certificates/index.ts",
+        "src/auth/utils/getVerifiableCertificates.ts",
+        "src/auth/utils/validateCertificates.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-auth-certificates"
+      ]
+    },
+    {
+      "id": "migration-api-wallet-wire",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-17 钱包二进制协议与收发",
+      "module": "wallet",
+      "apiFiles": [
+        "src/wallet/substrates/HTTPWalletWire.ts",
+        "src/wallet/substrates/WalletWire.ts",
+        "src/wallet/substrates/WalletWireCalls.ts",
+        "src/wallet/substrates/WalletWireProcessor.ts",
+        "src/wallet/substrates/WalletWireTransceiver.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-wallet-wire"
+      ]
+    },
+    {
+      "id": "migration-api-wallet-clients",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-18 钱包客户端与宿主桥接",
+      "module": "wallet",
+      "apiFiles": [
+        "src/wallet/WalletClient.ts",
+        "src/wallet/substrates/HTTPWalletJSON.ts",
+        "src/wallet/substrates/InvokableWalletBase.ts",
+        "src/wallet/substrates/ReactNativeWebView.ts",
+        "src/wallet/substrates/XDM.ts",
+        "src/wallet/substrates/index.ts",
+        "src/wallet/substrates/utils/toOriginHeader.ts",
+        "src/wallet/substrates/window.CWI.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-wallet-json",
+        "migration-impl-wallet-hosts",
+        "migration-impl-wallet-client"
+      ]
+    },
+    {
+      "id": "migration-api-auth-sessions",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-19 认证会话、Peer、类型与 nonce",
+      "module": "auth",
+      "apiFiles": [
+        "src/auth/Peer.ts",
+        "src/auth/SessionManager.ts",
+        "src/auth/index.ts",
+        "src/auth/types.ts",
+        "src/auth/utils/createNonce.ts",
+        "src/auth/utils/index.ts",
+        "src/auth/utils/verifyNonce.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-auth-sessions"
+      ]
+    },
+    {
+      "id": "migration-api-auth-transport",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-20 认证请求与传输",
+      "module": "auth",
+      "apiFiles": [
+        "src/auth/clients/AuthFetch.ts",
+        "src/auth/clients/index.ts",
+        "src/auth/transports/SimplifiedFetchTransport.ts",
+        "src/auth/transports/index.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-auth-transport"
+      ]
+    },
+    {
+      "id": "migration-api-script-templates",
+      "phase": "P0",
+      "kind": "api-batch",
+      "parentId": "migration-api-contract",
+      "name": "API-21 完整脚本模板与签名辅助",
+      "module": "script",
+      "apiFiles": [
+        "src/script/templates/P2PKH.ts",
+        "src/script/templates/PushDrop.ts",
+        "src/script/templates/RPuzzle.ts",
+        "src/script/templates/SignatureUtils.ts",
+        "src/script/templates/index.ts"
+      ],
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "stepsRef": "apiBatchPolicy.steps",
+      "outputs": [
+        "api-map.json 中本批次全部声明的设计映射",
+        "API 契约文档的本批次行为说明与证据"
+      ],
+      "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
+      "evidence": [],
+      "scopeRef": "scope",
+      "execution": "within-implementation",
+      "implementationTasks": [
+        "migration-impl-script-model",
+        "migration-impl-transaction-base",
+        "migration-impl-script-templates"
+      ]
+    }
+  ]
 }

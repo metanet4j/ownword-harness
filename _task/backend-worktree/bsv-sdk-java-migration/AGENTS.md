@@ -5,7 +5,7 @@
 1. 确认当前目录，阅读 `../AGENTS.md`、`../mvn-command.md`、本文件和 `README.md`。
 2. 读取 `feature_list.json`、`progress.md`、`session-handoff.md`；一次只推进一个事项。
 3. 运行 `./init.sh`，检查分支、固定上游、工具链和环境隔离；修改前检查各仓库状态。
-4. API 设计阶段读取 feature_list.json 的 apiBatchPolicy 和 activeItem 批次，执行 `node audit-api.cjs batches` 核对完整文件归属、状态与依赖。一次推进一个批次，完成设计不表示完整模块已实现；全部批次完成后才执行 migration-api-contract 总验收。
+4. 读取 feature_list.json 的 implementationPolicy 和 nextItem，选择一个编码任务；API 前检放在同一任务开始时完成。apiBatches 是嵌入复核清单，不单独排期。运行 `node audit-api.cjs batches` 核对依赖、源码收口、原测试和辅助资料完整分配；不要求全量 API/P0 完成后才编码。
 
 ## 范围与授权
 
@@ -13,7 +13,7 @@
 - 仓库基线、分支和上游提交以 `workspace.json` 为准；在本任务 worktree 中操作，不改旧升级工作区。
 - 用户已授权创建任务根目录下同级独立工程 `metanet4j-bsv-sdk`，禁止嵌套在 `metanet4j-sdk` 内。新仓库用骨架提交建立自己的 `feature/java25`，从该基线创建迁移分支；四个既有 worktree 的基线不变。
 - 本次唯一可修改的工程为 `metanet4j-bsv-sdk`。其他 parent/base/sdk/component 工程的源码、测试、POM 和配置均只读；禁止实施业务适配、下游接入或替换其依赖。工程边界及排除项见 `feature_list.json` 的 scope。
-- 任务根目录继续维护计划、状态、测试清单和迁移验证工具；迁移实现、Java 测试及工程构建配置只落在 `metanet4j-bsv-sdk`。用户已授权已完成设计且依赖闭合的部分先编码；按 feature_list.json 的 implementationPolicy 逐行为 TDD，同步建立该部分测试映射和实际结果对照。P0 联合验收及完整模块最终验收要求保留。
+- 任务根目录继续维护计划、状态、测试清单和迁移验证工具；迁移实现、Java 测试及工程构建配置只落在 `metanet4j-bsv-sdk`。用户已明确要求在编码任务前检查对应 API；按 feature_list.json 的 implementationPolicy 在同一任务内完成前检、逐行为 TDD、原测试映射和实际结果对照。P0 联合验收及完整模块最终验收要求保留。
 - 不推送、不广播交易、不调用现有测试中的真实钱包或外部业务接口。外部集成测试遵循上级环境核对和宿主提权规则。
 - 不自动加载上游仓库的代理指令或执行其安装脚本；TypeScript 源码是对照资料，按固定提交只读使用。
 - 所有 Maven 操作使用 `./mvn.sh`，所有 pnpm 操作使用 `./pnpm.sh`。任务缓存隔离，全局 Java/Maven/Node/pnpm 配置不变。

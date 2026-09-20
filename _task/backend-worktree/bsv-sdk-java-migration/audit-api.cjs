@@ -170,10 +170,53 @@ function check(fresh, catalog, mapping) {
   console.log(`API 映射结构核对通过：${actual.size} 声明；复核内容、Java 实现与行为等价性仍需独立验收。`)
 }
 
-function checkBatches(fresh, catalog, mapping, state, batchId) {
+function checkTaskAllocation(catalog, mapping, state, tests) {
+  if ((tests.upstreamCommit ?? null) !== (catalog.upstreamCommit ?? null)) throw new Error('任务测试清单的上游版本不符')
+  const tasks = state.features.filter(f => f.kind === 'implementation-slice')
+  const apiFiles = new Set(catalog.files.map(f => f.path)), testFiles = new Set(tests.files.map(f => f.path))
+  const fixtures = new Set(Object.keys(tests.moduleFiles).filter(f => !apiFiles.has(f) && !testFiles.has(f)))
+  const apiOwners = new Set(), testOwners = new Set(), fixtureOwners = new Set()
+  const reviewed = new Set(mapping.entries.filter(e => e.review === 'reviewed').map(e => e.id))
+  function files(task, field, expected, label, owners) {
+    if (!Array.isArray(task[field])) throw new Error(`${label}缺少文件清单：${task.id}`)
+    const seen = new Set()
+    for (const file of task[field]) {
+      if (!expected.has(file)) throw new Error(`${label}含未知文件：${file}`)
+      if (seen.has(file) || owners?.has(file)) throw new Error(`${label}重复归属：${file}`)
+      seen.add(file); owners?.add(file)
+    }
+  }
+  for (const task of tasks) {
+    files(task, 'sourceFiles', apiFiles, '实现范围')
+    files(task, 'apiCompletionFiles', apiFiles, 'API 收口', apiOwners)
+    files(task, 'testFiles', testFiles, '原测试', testOwners)
+    files(task, 'regressionTestFiles', testFiles, '累计回归')
+    files(task, 'fixtureFiles', fixtures, '辅助资料')
+    for (const file of task.fixtureFiles) fixtureOwners.add(file)
+    if (task.apiCompletionFiles.some(f => !task.sourceFiles.includes(f))) throw new Error('API 收口文件不在实现范围：' + task.id)
+    const refs = state.apiBatches.filter(b => b.apiFiles.some(f => task.sourceFiles.includes(f))).map(b => b.id).sort()
+    if (!isDeepStrictEqual(refs, [...(task.apiBatchRefs || [])].sort())) throw new Error('API 复核引用与实现范围不符：' + task.id)
+    if (task.status === 'done') {
+      if (catalog.entries.some(e => task.apiCompletionFiles.includes(e.file) && !reviewed.has(e.id))) throw new Error('编码任务收口 API 未完成：' + task.id)
+      if (!task.evidence?.length) throw new Error('编码任务完成缺少证据：' + task.id)
+    }
+  }
+  for (const [expected, actual, label] of [[apiFiles, apiOwners, 'API 收口'], [testFiles, testOwners, '原测试'], [fixtures, fixtureOwners, '辅助资料']]) {
+    const missing = [...expected].filter(f => !actual.has(f))
+    if (missing.length) throw new Error(`${label}漏文件：${missing.join(', ')}`)
+  }
+  for (const batch of state.apiBatches) {
+    const expected = tasks.filter(t => t.sourceFiles.some(f => batch.apiFiles.includes(f))).map(t => t.id).sort()
+    if (!isDeepStrictEqual(expected, [...batch.implementationTasks].sort())) throw new Error('API 复核绑定与编码任务范围不符：' + batch.id)
+  }
+  console.log(`编码任务 ${tasks.length}：API 文件 ${apiOwners.size}，原测试文件 ${testOwners.size}，原用例 ${tests.files.reduce((n, f) => n + f.cases.length, 0)}，辅助资料 ${fixtureOwners.size}；分配完整不代表实现或测试通过。`)
+}
+
+function checkBatches(fresh, catalog, mapping, state, batchId, tests) {
   const all = mappingStatus(fresh, catalog, mapping)
+  const records = [...state.features, ...(state.apiBatches || [])]
   const features = new Map()
-  for (const feature of state.features) {
+  for (const feature of records) {
     if (!feature.id || features.has(feature.id)) throw new Error('功能项 ID 重复或缺失：' + feature.id)
     if (!['done', 'in-progress', 'not-started'].includes(feature.status)) throw new Error('功能项状态无效：' + feature.id)
     features.set(feature.id, feature)
@@ -189,20 +232,22 @@ function checkBatches(fresh, catalog, mapping, state, batchId) {
     }
     visiting.delete(feature.id); visited.add(feature.id)
   }
-  for (const feature of state.features) visit(feature)
-  for (const feature of state.features) {
+  for (const feature of records) visit(feature)
+  for (const feature of records) {
     if (feature.status !== 'not-started' && (feature.dependencies || []).some(id => features.get(id).status !== 'done')) throw new Error('前置事项未完成：' + feature.id)
   }
   const active = state.features.filter(f => f.status === 'in-progress')
   if (active.length > 1 || (active[0]?.id ?? null) !== (state.activeItem ?? null)) throw new Error('activeItem 与唯一进行中事项不一致')
   if (state.nextItem != null && !features.has(state.nextItem)) throw new Error('nextItem 指向未知事项')
-  const batches = state.features.filter(f => f.kind === 'api-batch')
+  if (state.apiBatches && state.nextItem != null && !state.features.some(f => f.id === state.nextItem)) throw new Error('nextItem 必须指向执行事项，API 复核嵌入编码任务')
+  const batches = state.apiBatches || state.features.filter(f => f.kind === 'api-batch')
   if (!batches.length) throw new Error('API 批次为空')
   const gate = features.get('migration-api-contract')
   if (!gate || gate.kind !== 'gate' || batches.some(b => !gate.dependencies?.includes(b.id))) throw new Error('API 总验收未依赖全部批次')
   const expectedFiles = new Set(catalog.files.map(f => f.path)), assigned = new Set()
   const mapped = new Map(mapping.entries.map(e => [e.id, e]))
   const rows = batches.map(batch => {
+    if (state.apiBatches && (!batch.implementationTasks?.length || batch.implementationTasks.some(id => !state.features.some(f => f.id === id && f.kind === 'implementation-slice')))) throw new Error('API 复核未绑定有效编码任务：' + batch.id)
     if (batch.parentId !== gate.id) throw new Error('API 批次父项无效：' + batch.id)
     if (!Array.isArray(batch.apiFiles) || !batch.apiFiles.length) throw new Error('批次缺少完整文件：' + batch.id)
     for (const file of batch.apiFiles) {
@@ -221,6 +266,7 @@ function checkBatches(fresh, catalog, mapping, state, batchId) {
     if (row.batch.status === 'done' && (row.missing || row.pending)) throw new Error('未完成批次不能标记 done：' + row.batch.id)
     if (row.batch.status === 'done' && (!Array.isArray(row.batch.evidence) || !row.batch.evidence.length)) throw new Error('完成批次缺少证据：' + row.batch.id)
   }
+  if (tests) checkTaskAllocation(catalog, mapping, state, tests)
   if (batchId) {
     const row = rows.find(r => r.batch.id === batchId)
     if (!row) throw new Error('未知 API 批次：' + batchId)
@@ -259,7 +305,12 @@ if (require.main === module) {
       console.log(`API 清点：${data.files.length} 文件、${data.entries.length} 声明、${data.exports.length} 导出；未执行源码或验证行为。`)
     } else {
       const catalog = read(options.catalog || path.join(__dirname, 'api-catalog.json')), mapping = read(options.mapping || path.join(__dirname, 'api-map.json'))
-      if (command === 'batches') checkBatches(data, catalog, mapping, read(options.features || path.join(__dirname, 'feature_list.json')), options.batch)
+      if (command === 'batches') {
+        const featureFile = options.features || path.join(__dirname, 'feature_list.json'), state = read(featureFile)
+        const testRef = state.implementationPolicy?.testCatalogRef
+        const tests = testRef ? read(path.resolve(path.dirname(featureFile), testRef)) : undefined
+        checkBatches(data, catalog, mapping, state, options.batch, tests)
+      }
       else check(data, catalog, mapping)
     }
   } catch (error) { console.error(error.message); process.exitCode = 1 }
