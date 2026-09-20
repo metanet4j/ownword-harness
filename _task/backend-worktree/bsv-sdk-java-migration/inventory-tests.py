@@ -34,12 +34,10 @@ for p in files:
         'sha256': hashlib.sha256(raw).hexdigest(),
         'jestDefaultDiscovered': not excluded,
         'upstreamDefaultExclusion': 'manual/resource（上游 Jest 默认排除，迁移不能据此遗漏）' if excluded else None,
-        'migrationScope': '待实际调用映射确定',
-        'javaCaseMapping': '尚未建立',
     })
 inventory = {
     'upstreamCommit': commit,
-    'scope': 'packages/sdk 全部测试文件；逐用例、断言与参数化映射尚未建立',
+    'scope': 'packages/sdk 全部测试文件；整模块范围见 module-scope.json，注册用例见 module-tests.json，Java 映射见 test-map.json',
     'testFileCount': len(entries),
     'jestDefaultFileCount': len(discovered),
     'defaultExcludedFileCount': len(paths - discovered),

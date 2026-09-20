@@ -1,0 +1,176 @@
+// 只测试用户要求的命令行边界：清点用例与拒绝不完整的迁移证据。
+const { test } = require('node:test')
+const assert = require('node:assert/strict')
+const fs = require('node:fs')
+const os = require('node:os')
+const path = require('node:path')
+const { spawnSync } = require('node:child_process')
+const { createHash } = require('node:crypto')
+const digest = bytes => createHash('sha256').update(bytes).digest('hex')
+
+function evidenceFixture() {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'migration-audit-'))
+  const write = (name, value) => fs.writeFileSync(path.join(dir, name), typeof value === 'string' ? value : JSON.stringify(value))
+  write('catalog.json', { upstreamCommit: 'fixed', modules: ['compat'], moduleDependencies: { compat: [] }, files: [{ path: 'src/compat/a.test.ts', cases: [
+    { id: 'case1', names: ['suite', 'one'], occurrence: 1, mode: 'run' },
+    { id: 'case2', names: ['suite', 'two'], occurrence: 1, mode: 'run' }
+  ], sites: [] }] })
+  write('mapping.json', { upstreamCommit: 'fixed', siteReviews: [], cases: [
+    { id: 'case1', java: [{ className: 'PortTest', name: 'one' }], assertionIds: ['a1'] },
+    { id: 'case2', java: [{ className: 'PortTest', name: 'two' }], assertionIds: ['a2'] }
+  ] })
+  write('ts.json', { success: true, numTotalTests: 2, numPassedTests: 2, numFailedTests: 0, numPendingTests: 0, numTodoTests: 0, testResults: [{ name: '/sdk/src/compat/a.test.ts', status: 'passed', assertionResults: [
+    { ancestorTitles: ['suite'], title: 'one', status: 'passed' },
+    { ancestorTitles: ['suite'], title: 'two', status: 'passed' }
+  ] }] })
+  write('java.xml', '<testsuite tests="2" failures="0" errors="0" skipped="0"><testcase classname="PortTest" name="one"/><testcase classname="PortTest" name="two"/></testsuite>')
+  write('observations.json', { upstreamCommit: 'fixed', javaRevision: 'test-revision',
+    catalogSha256: digest(fs.readFileSync(path.join(dir, 'catalog.json'))),
+    tsReportSha256: [digest(fs.readFileSync(path.join(dir, 'ts.json')))],
+    javaReportSha256: [digest(fs.readFileSync(path.join(dir, 'java.xml')))],
+    cases: ['case1', 'case2'].map((id, i) => ({ id, inputSha256: 'a'.repeat(64),
+      tsInputSha256: 'a'.repeat(64), javaInputSha256: 'a'.repeat(64),
+      ts: [{ id: 'a' + (i + 1), value: { type: 'hex', value: '0001' } }],
+      java: [{ id: 'a' + (i + 1), value: { type: 'hex', value: '0001' } }] }))
+  })
+  return { dir, write, read: name => JSON.parse(fs.readFileSync(path.join(dir, name))),
+    run: (extra = []) => spawnSync('python3', [path.join(__dirname, 'audit-tests.py'), 'compare', '--catalog', path.join(dir, 'catalog.json'), '--mapping', path.join(dir, 'mapping.json'), '--ts-report', path.join(dir, 'ts.json'), '--java-report', path.join(dir, 'java.xml'), '--observations', path.join(dir, 'observations.json'), ...extra], { encoding: 'utf8' }),
+    close: () => fs.rmSync(dir, { recursive: true, force: true }) }
+}
+
+test('清点包含 each、循环、同名、skip、todo、only 和 manual；不执行测试体或 hooks', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'migration-census-'))
+  try {
+    fs.writeFileSync(path.join(dir, 'jest.config.cjs'), "module.exports={testEnvironment:'node',testPathIgnorePatterns:['\\\\.man\\\\.test\\\\.js$']}\n")
+    fs.mkdirSync(path.join(dir, 'src/primitives'), { recursive: true })
+    fs.writeFileSync(path.join(dir, 'src/primitives/sample.man.test.js'), `
+      beforeAll(() => { throw new Error('不应执行 hook') })
+      afterAll(() => { throw new Error('不应执行 hook') })
+      describe('全部用例', () => {
+        test.each([1, 2])('参数 %s', () => { throw new Error('不应执行') })
+        for (let i = 0; i < 2; i++) test('同名', () => { throw new Error('不应执行') })
+        test.skip('跳过', () => {})
+        test.todo('待办')
+        test.only('聚焦', () => {})
+        if (false) test('条件未注册', () => {})
+      })
+    `)
+    const out = path.join(dir, 'census.json')
+    const result = spawnSync(process.execPath, [path.join(__dirname, 'collect-cases.cjs'), '--sdk', dir, '--output', out, 'src/primitives/sample.man.test.js'], { encoding: 'utf8' })
+    assert.equal(result.status, 0, result.stdout + result.stderr)
+    const data = JSON.parse(fs.readFileSync(out))
+    const cases = data.files[0].cases
+    assert.equal(cases.length, 7)
+    assert.equal(new Set(cases.map(c => c.id)).size, 7)
+    assert.deepEqual(cases.map(c => c.names.at(-1)), ['参数 1', '参数 2', '同名', '同名', '跳过', '待办', '聚焦'])
+    assert.deepEqual(cases.slice(-3).map(c => c.mode), ['skip', 'todo', 'only'])
+    assert.ok(data.files[0].sites.some(s => s.kind === 'loop'))
+    assert.ok(data.files[0].sites.some(s => s.kind === 'conditional'))
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true })
+  }
+})
+
+const corruptions = [
+  ['整模块依赖未纳入', f => { const d = f.read('catalog.json'); d.moduleDependencies.compat = ['primitives']; f.write('catalog.json', d) }, /依赖模块/],
+  ['少一个映射', f => { const d = f.read('mapping.json'); d.cases.pop(); f.write('mapping.json', d) }, /未映射/],
+  ['同一个 Java 测试冒充两个用例', f => { const d = f.read('mapping.json'); d.cases[1].java = d.cases[0].java; f.write('mapping.json', d) }, /重复/],
+  ['总数相同但 TS 漏跑并重复另一用例', f => { const d = f.read('ts.json'); d.testResults[0].assertionResults[1].title = 'one'; f.write('ts.json', d) }, /实际用例/],
+  ['Java 漏跑', f => f.write('java.xml', '<testsuite tests="1"><testcase classname="PortTest" name="one"/></testsuite>'), /未实际执行/],
+  ['Java 跳过', f => f.write('java.xml', '<testsuite tests="2"><testcase classname="PortTest" name="one"><skipped/></testcase><testcase classname="PortTest" name="two"/></testsuite>'), /未通过/],
+  ['TS 跳过', f => { const d = f.read('ts.json'); d.testResults[0].assertionResults[0].status = 'pending'; f.write('ts.json', d) }, /跳过/],
+  ['缺少一个用例结果', f => { const d = f.read('observations.json'); d.cases.pop(); f.write('observations.json', d) }, /逐用例结果/],
+  ['签名字节被篡改', f => { const d = f.read('observations.json'); d.cases[0].java[0].value.value = '0002'; f.write('observations.json', d) }, /结果不一致/],
+  ['布尔值与数字不得混同', f => { const d = f.read('observations.json'); d.cases[0].ts[0].value = true; d.cases[0].java[0].value = 1; f.write('observations.json', d) }, /结果不一致/],
+  ['异常语义不同', f => { const d = f.read('observations.json'); d.cases[0].ts[0].value = { error: 'Invalid checksum' }; d.cases[0].java[0].value = { error: 'Invalid key' }; f.write('observations.json', d) }, /结果不一致/],
+  ['缺少一条断言结果', f => { const d = f.read('observations.json'); d.cases[0].java = []; f.write('observations.json', d) }, /断言结果/],
+  ['重复结果行', f => { const d = f.read('observations.json'); d.cases.push(d.cases[0]); f.write('observations.json', d) }, /重复/],
+  ['未复核源码循环或条件', f => { const d = f.read('catalog.json'); d.files[0].sites = [{ id: 'conditional:1', kind: 'conditional' }]; f.write('catalog.json', d) }, /复核/],
+  ['映射来自另一上游版本', f => { const d = f.read('mapping.json'); d.upstreamCommit = 'other'; f.write('mapping.json', d) }, /版本/],
+  ['原始 only 不得验收', f => { const d = f.read('catalog.json'); d.files[0].cases[0].mode = 'only'; f.write('catalog.json', d) }, /skip\/todo\/only/]
+]
+for (const [name, mutate, expected] of corruptions) test('拒绝：' + name, () => {
+  const f = evidenceFixture()
+  try {
+    mutate(f)
+    const observations = f.read('observations.json')
+    observations.catalogSha256 = digest(fs.readFileSync(path.join(f.dir, 'catalog.json')))
+    observations.tsReportSha256 = [digest(fs.readFileSync(path.join(f.dir, 'ts.json')))]
+    observations.javaReportSha256 = [digest(fs.readFileSync(path.join(f.dir, 'java.xml')))]
+    f.write('observations.json', observations)
+    const result = f.run()
+    assert.equal(result.status, 1, result.stdout + result.stderr)
+    assert.match(result.stderr, expected)
+  } finally { f.close() }
+})
+
+test('旧报告校验值和当前报告不同必须失败', () => {
+  const f = evidenceFixture()
+  try {
+    fs.appendFileSync(path.join(f.dir, 'ts.json'), '\n')
+    const result = f.run()
+    assert.equal(result.status, 1)
+    assert.match(result.stderr, /校验值/)
+  } finally { f.close() }
+})
+
+test('完整的一比一映射、实际执行报告和逐断言结果通过证据核对', () => {
+  const f = evidenceFixture()
+  try { const result = f.run(); assert.equal(result.status, 0, result.stdout + result.stderr) }
+  finally { f.close() }
+})
+
+test('报告汇总与实际用例矛盾时拒绝通过', () => {
+  const f = evidenceFixture()
+  try {
+    const report = f.read('ts.json')
+    report.numTotalTests = 3
+    report.numPassedTests = 3
+    f.write('ts.json', report)
+    const observations = f.read('observations.json')
+    observations.tsReportSha256 = [digest(fs.readFileSync(path.join(f.dir, 'ts.json')))]
+    f.write('observations.json', observations)
+    const result = f.run()
+    assert.equal(result.status, 1, result.stdout + result.stderr)
+    assert.match(result.stderr, /汇总/)
+  } finally { f.close() }
+})
+
+test('TS 和 Java 输入不同即使输出相同也必须失败', () => {
+  const f = evidenceFixture()
+  try {
+    const observations = f.read('observations.json')
+    observations.cases[0].javaInputSha256 = 'b'.repeat(64)
+    f.write('observations.json', observations)
+    const result = f.run()
+    assert.equal(result.status, 1, result.stdout + result.stderr)
+    assert.match(result.stderr, /输入/)
+  } finally { f.close() }
+})
+
+test('分阶段选择只接受完整模块名，模块内所有用例仍须映射', () => {
+  const f = evidenceFixture()
+  try {
+    assert.equal(f.run(['--module', 'compat']).status, 0)
+    assert.equal(f.run(['--module', 'compat/HD']).status, 1)
+    const mapping = f.read('mapping.json')
+    mapping.cases.pop()
+    f.write('mapping.json', mapping)
+    const result = f.run(['--module', 'compat'])
+    assert.equal(result.status, 1)
+    assert.match(result.stderr, /未映射/)
+  } finally { f.close() }
+})
+
+test('旧 Java 源码版本的结果不能用于当前版本验收', () => {
+  const f = evidenceFixture()
+  try {
+    const revision = spawnSync('python3', [path.join(__dirname, 'audit-tests.py'), 'revision'], { encoding: 'utf8' })
+    assert.equal(revision.status, 0, revision.stderr)
+    const current = JSON.parse(revision.stdout).javaRevision
+    assert.match(current, /^[0-9a-f]{64}$/)
+    const result = f.run(['--java-revision', current])
+    assert.equal(result.status, 1)
+    assert.match(result.stderr, /Java 源码版本/)
+  } finally { f.close() }
+})

@@ -2,16 +2,19 @@
 
 ## 状态
 
-TypeScript 环境准备已验收；用户要求的一比一复刻、逐用例实际结果一致和按模块分阶段推进已落入测试契约与模块计划。逐用例映射、结果采集/比较工具、Java 生产移植与测试复刻尚未开始。
+用户明确要求完整模块迁移，不能只迁移业务调用的方法。四个完整模块已清点，检查器及 23 项自测通过。Java 映射与生产移植尚未开始，真实结果采集适配器待实现，最终 check 当前应失败。
 
 ## Files
 
 - `workspace.json`：四仓 feature/java25 起点、迁移分支、TS 固定提交与工具版本。
 - `README.md`、`init.sh`、`mvn.sh`、`pnpm.sh`、`verify.sh`：环境使用与验证入口。
-- `upstream-tests.json`、`inventory-tests.py`：测试文件及辅助向量清单，含校验值；不是已完成的逐用例映射。
+- `upstream-tests.json`、`inventory-tests.py`：全 SDK 测试文件及辅助向量清单，含校验值。
+- `module-scope.json`、`module-tests.json`：完整模块范围、静态依赖、全部文件校验值、4,275 个注册用例与 AST 复核位置。
+- `audit-tests.py`、`collect-cases.cjs`、`test-audit.test.cjs`：清点、证据核对及检查器自测。`test-map.json` 当前为空；不得填入伪造映射。
+- `doc/测试完整性脚本-20260920-104440.md`：命令、证据格式、实测结果及自动化边界。
 - `doc/环境检查报告-20260920-101559.md`：实测命令、结果与未验证范围。
 - `doc/测试迁移契约-20260920-101559.md`：TDD、一比一复刻、逐用例运行结果一致和阶段累计验收门禁。
-- `doc/模块迁移计划-20260920-103547.md`：P0–P8 的模块顺序、映射准备清单和依赖处理；状态见 feature_list.json。
+- `doc/模块迁移计划-20260920-103547.md`：P0–P4 的完整模块阶段；primitives/script/transaction 循环依赖需联合验收，随后整模块 compat；状态见 feature_list.json。
 
 ## Blockers
 
@@ -19,7 +22,9 @@ TypeScript 环境准备已验收；用户要求的一比一复刻、逐用例实
 
 ## Next Session
 
-读取本目录 AGENTS.md、README.md、feature_list.json、测试迁移契约和模块迁移计划，运行 ./init.sh。将 migration-map 设为进行中，执行 P0 清单：按实际调用建立模块/接口和逐用例/断言映射，明确所有上游测试文件的范围归属，建立结果采集与比较入口；默认被排除的 AESGCM.man.test.ts 必须有去向，不静默遗漏。当前 init.sh、verify.sh 仅用于环境验证，尚不提供跨语言逐用例比较。
+读取本目录 AGENTS.md、README.md、feature_list.json、测试契约、模块计划与脚本说明，运行 ./init.sh。将 migration-map 设为进行中，执行 P0：核对完整模块的全部 API/行为、建立 Java 用例/断言映射、审查跨目录测试和依赖、实现真实结果采集。AESGCM.man.test.ts 已纳入 primitives，必须执行，不可排除。已选模块内的 Schnorr、Secp256r1、BEEF、脚本模板、广播/链追踪等未被业务直接使用的功能也必须完整迁移。
+
+`python3 audit-tests.py check` 会重新清点上游并比对冻结清单；当前预期报 4,275 个未映射项。不要为让门禁变绿删改清单、自动填写 reviewed，或把 `compare` 调试命令当作最终验收。Jest 注册数不覆盖测试体内每条循环/属性样本，需结合 AST 位置人工复核和运行结果采集；原始报告及其校验值必须匹配。
 
 开始新增 Java 测试前，具体接口边界须满足 tdd 技能要求；按用户指定上游测试逐项映射，任何尚未确认的接口差异须先解决。一次只写一个失败测试并实现使其通过，保留 RED/GREEN 与两端实际结果。每阶段重跑已完成模块；全部范围内用例执行通过、逐项结果一致且核对无遗漏之前，不得标记迁移完成。
 

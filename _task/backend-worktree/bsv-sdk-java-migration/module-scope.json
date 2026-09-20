@@ -1,0 +1,22 @@
+{
+  "upstreamCommit": "f999e0c1aad9a7afd0cbadaaf23841d049af9d5a",
+  "moduleBoundary": "packages/sdk/src 的顶层模块目录，递归包含全部源码、子模块、测试与辅助文件；不接受函数/方法/测试过滤。",
+  "selectedModules": [
+    "primitives",
+    "compat",
+    "script",
+    "transaction"
+  ],
+  "scopeReview": "pending",
+  "note": "这四个完整模块确定纳入；其余模块仍需依赖审查，pending 不代表排除。根测试目录的两个文件已按实际被测接口归入 overlay-tools，选中该模块时自动纳入。",
+  "crossModuleTestOwners": {
+    "src/__tests/LookupResolver.diagnostics.test.ts": {
+      "module": "overlay-tools",
+      "reason": "直接导入并测试 overlay-tools/LookupResolver 的 queryDetailed 与诊断事件。"
+    },
+    "src/__tests__/BRC100OverlayTransport.test.ts": {
+      "module": "overlay-tools",
+      "reason": "直接导入并测试 overlay-tools/LookupResolver 导出的 HTTPSOverlayLookupFacilitator 字节传输。"
+    }
+  }
+}

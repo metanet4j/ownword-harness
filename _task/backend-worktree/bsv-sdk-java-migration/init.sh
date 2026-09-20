@@ -20,7 +20,7 @@ def check(label, fn):
         print('[FAIL]', label, str(error))
 def cmd(*args):
     return subprocess.check_output(args, text=True, stderr=subprocess.STDOUT).strip()
-for name in ['AGENTS.md', 'README.md', 'feature_list.json', 'progress.md', 'session-handoff.md', 'workspace.json', 'env.sh', 'mvn.sh', 'pnpm.sh', 'verify.sh', 'upstream-tests.json']:
+for name in ['AGENTS.md', 'README.md', 'feature_list.json', 'progress.md', 'session-handoff.md', 'workspace.json', 'env.sh', 'mvn.sh', 'pnpm.sh', 'verify.sh', 'upstream-tests.json', 'module-scope.json', 'module-tests.json', 'test-map.json', 'audit-tests.py', 'collect-cases.cjs', 'test-audit.test.cjs']:
     check(name, lambda n=name: (task / n).is_file())
 for repo in d['repositories']:
     p = task / repo['name']
@@ -51,6 +51,22 @@ def verify_inventory():
     for entry in inventory['files'] + inventory['supportFiles']:
         assert hashlib.sha256((sdk / entry['path']).read_bytes()).hexdigest() == entry['sha256'], entry['path']
 check('上游测试文件清单与辅助向量校验值', verify_inventory)
+def verify_module_inventory():
+    scope = json.loads((task / 'module-scope.json').read_text())
+    catalog = json.loads((task / 'module-tests.json').read_text())
+    assert catalog['upstreamCommit'] == scope['upstreamCommit'] == d['upstream']['commit']
+    assert catalog['scopeSha256'] == hashlib.sha256((task / 'module-scope.json').read_bytes()).hexdigest()
+    assert catalog['modules'] == scope['selectedModules']
+    sdk = upstream / d['upstream']['packagePath']
+    files = {p.relative_to(sdk).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+             for module in scope['selectedModules'] for p in (sdk / 'src' / module).rglob('*') if p.is_file()}
+    files.update({name: hashlib.sha256((sdk / name).read_bytes()).hexdigest()
+                  for name, owner in scope.get('crossModuleTestOwners', {}).items()
+                  if owner['module'] in scope['selectedModules']})
+    assert catalog['moduleFiles'] == files
+    tests = {name for name in files if re.search(r'\.(test|spec)\.[cm]?[jt]sx?$', name)}
+    assert tests == {f['path'] for f in catalog['files']}
+check('整模块范围及全部源码/测试文件校验值（不代替动态用例验收）', verify_module_inventory)
 check('Node 版本', lambda: cmd(d['tools']['node'], '--version') == d['tools']['nodeVersion'])
 check('pnpm 锁定版本', lambda: cmd(str(task / 'pnpm.sh'), '--version') == d['tools']['pnpmVersion'])
 def verify_maven():

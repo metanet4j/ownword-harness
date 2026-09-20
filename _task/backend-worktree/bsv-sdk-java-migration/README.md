@@ -11,6 +11,8 @@
 ./verify.sh ts-build     # 上游 SDK 构建
 ./verify.sh ts-smoke     # 固定九个文件的离线算法测试
 python3 inventory-tests.py  # 重建上游测试文件及辅助向量清单
+node test-audit.test.cjs    # 检查器自身正常与反例测试
+python3 audit-tests.py check # 整模块用例、映射、执行报告及实际结果验收
 ```
 
 Maven 和 pnpm 分别使用 `./mvn.sh`、`./pnpm.sh`；这两个入口固定工具版本并隔离缓存。对 TS 仅安装 SDK 所需依赖：
@@ -23,6 +25,8 @@ Maven 和 pnpm 分别使用 `./mvn.sh`、`./pnpm.sh`；这两个入口固定工�
 
 环境已验收，见[环境检查报告](doc/环境检查报告-20260920-101559.md)。迁移按[模块迁移计划](doc/模块迁移计划-20260920-103547.md)分阶段推进，遵循[测试迁移契约](doc/测试迁移契约-20260920-101559.md)：逐项复刻上游测试，按 TDD 执行，对照每个用例的 TS/Java 实际结果；每阶段验收包含此前已完成模块的累计回归。
 
-当前仅完成环境、计划与契约，逐用例映射、结果采集/比较工具及 Java 迁移仍待执行。`init.sh`、`verify.sh` 的环境检查与冒烟不能代替迁移验收。
+迁移单位是完整模块，已选 `primitives`、`compat`、`script`、`transaction` 全部功能和测试。已清点 92 个文件、4,275 个注册用例（含 manual）；完整性脚本和数据格式见[检查器说明](doc/测试完整性脚本-20260920-104440.md)。
+
+当前检查器自测通过；Java 映射、真实结果采集和生产迁移尚未完成，所以 `audit-tests.py check` 应返回失败并报告缺失。`init.sh`、`verify.sh` 的环境检查与冒烟不能代替迁移验收。
 
 后续入口：[session-handoff.md](session-handoff.md)。
