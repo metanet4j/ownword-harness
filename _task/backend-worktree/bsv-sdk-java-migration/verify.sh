@@ -70,6 +70,9 @@ PY
   ts-build)
     run_logged ts-build ./pnpm.sh --dir "$MIGRATION_UPSTREAM" --filter @bsv/sdk build
     ;;
+  ts-modules)
+    python3 run-ts-baseline.py
+    ;;
   ts-smoke)
     # 显式列出已审查为离线算法的测试文件，不自动执行外部接口/钱包测试。
     tests=(
@@ -98,5 +101,5 @@ for suite in d['testResults']:
     print(Path(suite['name']).name, len(suite['assertionResults']), 'passed')
 PY
     ;;
-  *) printf '%s\n' '用法：./verify.sh bsv-test|bsv-build|java-build|java-smoke|ts-build|ts-smoke' >&2; exit 2 ;;
+  *) printf '%s\n' '用法：./verify.sh bsv-test|bsv-build|java-build|java-smoke|ts-build|ts-smoke|ts-modules' >&2; exit 2 ;;
 esac

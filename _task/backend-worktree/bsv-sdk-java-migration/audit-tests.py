@@ -56,6 +56,36 @@ def same_keys(expected, actual, label):
             f'缺失示例 {sorted(missing)[:8]}；多余示例 {sorted(extra)[:8]}')
 
 
+def compare_ts(catalog, report_paths):
+    files = indexed(catalog['files'], lambda f: f['path'], '上游文件')
+    require(bool(files), '禁止使用空清单通过 TS 验收')
+    require(all(f['cases'] for f in files.values()), '禁止使用空用例通过 TS 验收')
+    actual_ts = {}
+    for report_path in report_paths:
+        report = read(report_path)
+        require(report.get('success') is True, f'TS 报告未全部成功：{report_path}')
+        count = sum(len(f['assertionResults']) for f in report['testResults'])
+        require(report['numTotalTests'] == report['numPassedTests'] == count
+                and all(report[k] == 0 for k in ('numFailedTests', 'numPendingTests', 'numTodoTests')),
+                f'TS 报告汇总与实际用例矛盾：{report_path}')
+        for file in report['testResults']:
+            name = file['name'].replace('\\', '/')
+            matches = [p for p in files if name == p or name.endswith('/' + p)]
+            require(len(matches) == 1, f'TS 报告存在范围外文件：{name}')
+            name = matches[0]
+            require(name not in actual_ts, f'TS 报告文件重复：{name}')
+            require(file['status'] == 'passed', f'TS 文件未通过：{name}')
+            actual_ts[name] = file['assertionResults']
+    same_keys(files, actual_ts, 'TS 实际执行文件')
+    for name, file in files.items():
+        expected = Counter(tuple(c['names']) for c in file['cases'])
+        executed = Counter(tuple(c['ancestorTitles'] + [c['title']]) for c in actual_ts[name])
+        require(expected == executed, f'TS 实际用例/参数行不一致：{name}')
+        require(all(c['mode'] == 'run' for c in file['cases']), f'存在 skip/todo/only 用例：{name}')
+        require(all(c['status'] == 'passed' for c in actual_ts[name]), f'TS 存在失败/跳过/未执行：{name}')
+    return {'files': len(files), 'cases': sum(len(f['cases']) for f in files.values())}
+
+
 def compare(args):
     catalog, mapping = read(args.catalog), read(args.mapping)
     selected = set(args.module or catalog['modules'])
@@ -90,29 +120,7 @@ def compare(args):
     for key, review in reviews.items():
         require(review['status'] == 'reviewed' and bool(review['note']) and bool(review['caseIds']), f'源码语义未复核：{key}')
         require(set(review['caseIds']) <= set(cases), f'源码复核引用未知用例：{key}')
-    actual_ts = {}
-    for report_path in args.ts_report:
-        report = read(report_path)
-        require(report.get('success') is True, f'TS 报告未全部成功：{report_path}')
-        count = sum(len(f['assertionResults']) for f in report['testResults'])
-        require(report['numTotalTests'] == report['numPassedTests'] == count
-                and all(report[k] == 0 for k in ('numFailedTests', 'numPendingTests', 'numTodoTests')),
-                f'TS 报告汇总与实际用例矛盾：{report_path}')
-        for file in report['testResults']:
-            name = file['name'].replace('\\', '/')
-            matches = [p for p in files if name == p or name.endswith('/' + p)]
-            require(len(matches) == 1, f'TS 报告存在范围外文件：{name}')
-            name = matches[0]
-            require(name not in actual_ts, f'TS 报告文件重复：{name}')
-            require(file['status'] == 'passed', f'TS 文件未通过：{name}')
-            actual_ts[name] = file['assertionResults']
-    same_keys(files, actual_ts, 'TS 实际执行文件')
-    for name, file in files.items():
-        expected = Counter(tuple(c['names']) for c in file['cases'])
-        executed = Counter(tuple(c['ancestorTitles'] + [c['title']]) for c in actual_ts[name])
-        require(expected == executed, f'TS 实际用例/参数行不一致：{name}')
-        require(all(c['mode'] == 'run' for c in file['cases']), f'存在 skip/todo/only 用例：{name}')
-        require(all(c['status'] == 'passed' for c in actual_ts[name]), f'TS 存在失败/跳过/未执行：{name}')
+    compare_ts(catalog, args.ts_report)
     actual_java = {}
     for report_path in args.java_report:
         root = ET.parse(report_path).getroot()
@@ -207,6 +215,9 @@ def main():
     sub.add_parser('revision', help='生成已登记 Java 仓库当前提交及工作树文件摘要，供真实结果采集记录')
     inventory = sub.add_parser('inventory', help='清点所有已选整模块，含参数化/循环注册与 manual 文件；不执行测试体')
     inventory.add_argument('--output', default=str(TASK / 'module-tests.json'))
+    ts_only = sub.add_parser('compare-ts', help='仅核对 TS 原始报告与完整冻结清单；不代表 Java 迁移或最终 check 通过')
+    ts_only.add_argument('--catalog', default=str(TASK / 'module-tests.json'))
+    ts_only.add_argument('--ts-report', action='append', required=True)
     for name in ('compare', 'check'):
         command = sub.add_parser(name, help='compare 核对所给证据；check 额外重新清点固定上游并核对冻结范围')
         command.add_argument('--catalog', default=str(TASK / 'module-tests.json'))
@@ -220,6 +231,8 @@ def main():
     try:
         if args.command == 'revision':
             print(json.dumps({'javaRevision': java_revision()}))
+        elif args.command == 'compare-ts':
+            print(json.dumps({'status': 'PASS', 'check': 'compare-ts', **compare_ts(read(args.catalog), args.ts_report)}))
         elif args.command == 'inventory':
             result = collect()
             Path(args.output).write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')

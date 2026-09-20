@@ -15,7 +15,7 @@
     ]
   },
   "activeItem": null,
-  "nextItem": "migration-ts-baseline",
+  "nextItem": "migration-api-contract",
   "features": [
     {
       "id": "migration-env",
@@ -194,7 +194,7 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "steps": [
         "在任务侧配置完整模块运行入口，保持固定上游源码和断言不变；审查网络模拟，阻止真实钱包和广播调用。",
         "对 AES-GCM 超过 512 MiB 输入的 manual 用例单独评估峰值内存、运行时间和日志采集，保留原始输入规模并实际执行。",
@@ -210,7 +210,16 @@
         "manual 必须实际执行；不能通过缩小输入、排除测试或修改断言完成基线。",
         "上游失败或资源限制保持未完成，完整 TS 基线未通过不得完成 P0。"
       ],
-      "evidence": [],
+      "evidence": [
+        "doc/TS完整基线-20260920-124400.md：六模块真实基线与命令、网络 fixture、manual 资源和验收边界。",
+        "python3 run-ts-baseline.py --verify .cache/evidence/ts-baseline-20260920-123124：PASS，133 文件、5329/5329 用例；逐项名称/出现次数与冻结清单一致，零失败/跳过/todo，1 个快照通过。",
+        "模块实际执行：primitives 854、compat 122、script 2222、transaction 1077、wallet 736、auth 318；原始两份 Jest JSON、日志、命令、SHA-256 和资源记录在批次目录。",
+        "manual 保留原 536870928 字节输入及逐字节循环，1/1 通过；耗时 37:16.72，峰值 RSS 2000384 KiB，退出 0；未用 1 MiB 探针替代原用例。",
+        "普通最终基线在宿主环境运行，132 文件/5328 用例通过，耗时 2:00.76，峰值 RSS 1530540 KiB；WalletWire 为内存内集成，不使用数据库或真实服务。",
+        "两个上游场景有 4 次登记的离线失败 fixture，最终无未登记网络调用；原 TS 源码/断言保持不变。首次拦截记录与 guard 更新前报告单独归档。",
+        "node test-audit.test.cjs：31/31 通过；TS 报告逐项核对、fetch/Socket 拦截、两种 fixture 与循环连接参数漏记修复均保留 RED/GREEN。",
+        "./init.sh 通过；本项不包含 Java 生产实现、输入语料导出或逐断言结果采集，P0 联合门禁仍未完成。"
+      ],
       "scopeRef": "scope"
     },
     {

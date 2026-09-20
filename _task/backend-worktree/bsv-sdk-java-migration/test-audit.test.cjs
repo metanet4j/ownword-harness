@@ -189,3 +189,106 @@ test('旧 Java 源码版本的结果不能用于当前版本验收', () => {
     assert.match(result.stderr, /Java 源码版本/)
   } finally { f.close() }
 })
+
+test('TS 基线独立验收逐个核对冻结用例，不能用相同总数掩盖漏跑', () => {
+  const f = evidenceFixture()
+  try {
+    const run = () => spawnSync('python3', [path.join(__dirname, 'audit-tests.py'), 'compare-ts', '--catalog', path.join(f.dir, 'catalog.json'), '--ts-report', path.join(f.dir, 'ts.json')], { encoding: 'utf8' })
+    const valid = run()
+    assert.equal(valid.status, 0, valid.stdout + valid.stderr)
+    assert.equal(JSON.parse(valid.stdout).cases, 2)
+    const report = f.read('ts.json')
+    report.testResults[0].assertionResults[1].title = 'one'
+    f.write('ts.json', report)
+    const invalid = run()
+    assert.equal(invalid.status, 1, invalid.stdout + invalid.stderr)
+    assert.match(invalid.stderr, /实际用例/)
+  } finally { f.close() }
+})
+
+test('离线基线拦截真实 fetch；即使调用方捕获异常也保留拒绝记录', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'migration-offline-'))
+  try {
+    const log = path.join(dir, 'network.jsonl')
+    const result = spawnSync(process.execPath, ['--require', path.join(__dirname, 'ts-offline-guard.cjs'), '-e', "fetch('https://example.invalid').catch(() => {})"], {
+      encoding: 'utf8', env: { ...process.env, MIGRATION_NETWORK_LOG: log }
+    })
+    assert.equal(result.status, 0, result.stdout + result.stderr)
+    const event = JSON.parse(fs.readFileSync(log, 'utf8').trim())
+    assert.equal(event.transport, 'fetch')
+    assert.equal(event.target, 'https://example.invalid')
+  } finally { fs.rmSync(dir, { recursive: true, force: true }) }
+})
+
+test('离线基线拦截绕过 fetch 的原生 TCP 连接', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'migration-offline-'))
+  try {
+    const log = path.join(dir, 'network.jsonl')
+    const result = spawnSync(process.execPath, ['--require', path.join(__dirname, 'ts-offline-guard.cjs'), '-e', "try { require('node:net').connect({host:'127.0.0.1',port:1}) } catch {}"], {
+      encoding: 'utf8', env: { ...process.env, MIGRATION_NETWORK_LOG: log }
+    })
+    assert.equal(result.status, 0, result.stdout + result.stderr)
+    assert.equal(JSON.parse(fs.readFileSync(log, 'utf8').trim()).transport, 'socket')
+  } finally { fs.rmSync(dir, { recursive: true, force: true }) }
+})
+
+test('上游钱包无服务场景使用明确失败 fixture，原断言保持不变', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'migration-network-fixture-'))
+  try {
+    const log = path.join(dir, 'network.jsonl')
+    const script = `
+      global.expect = { getState: () => ({ testPath: '/sdk/src/wallet/__tests/WalletClient.additional.test.ts', currentTestName: 'WalletClient – signAction validation does NOT throw for a minimal valid signAction call structure (gets past validation)' }) }
+      require(${JSON.stringify(path.join(__dirname, 'ts-offline-guard.cjs'))})
+      fetch('http://localhost:3301/getVersion').catch(e => { if (e.cause?.code !== 'ECONNREFUSED') process.exitCode = 1 })
+    `
+    const result = spawnSync(process.execPath, ['-e', script], { encoding: 'utf8', env: { ...process.env, MIGRATION_NETWORK_LOG: log } })
+    assert.equal(result.status, 0, result.stdout + result.stderr)
+    assert.equal(fs.existsSync(log), false)
+    const event = JSON.parse(fs.readFileSync(path.join(dir, 'network.fixtures.jsonl'), 'utf8').trim())
+    assert.equal(event.fixture, 'wallet-unavailable')
+  } finally { fs.rmSync(dir, { recursive: true, force: true }) }
+})
+
+test('默认链追踪器可调用性测试使用离线失败 fixture', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'migration-chain-fixture-'))
+  try {
+    const log = path.join(dir, 'network.jsonl')
+    const script = `
+      global.expect = { getState: () => ({ testPath: '/sdk/src/transaction/chaintrackers/__tests/DefaultChainTracker.test.ts', currentTestName: 'defaultChainTracker WhatsOnChain defaults returns a tracker that responds to isValidRootForHeight as a function' }) }
+      require(${JSON.stringify(path.join(__dirname, 'ts-offline-guard.cjs'))})
+      fetch('https://api.whatsonchain.com/v1/bsv/main/block/0/header').catch(e => { if (e.cause?.code !== 'ECONNREFUSED') process.exitCode = 1 })
+    `
+    const result = spawnSync(process.execPath, ['-e', script], { encoding: 'utf8', env: { ...process.env, MIGRATION_NETWORK_LOG: log } })
+    assert.equal(result.status, 0, result.stdout + result.stderr)
+    assert.equal(fs.existsSync(log), false)
+    assert.equal(JSON.parse(fs.readFileSync(path.join(dir, 'network.fixtures.jsonl'), 'utf8').trim()).fixture, 'chaintracker-unavailable')
+  } finally { fs.rmSync(dir, { recursive: true, force: true }) }
+})
+
+test('连接参数含循环引用时仍先记录拒绝，不能因日志序列化而漏记', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'migration-circular-connect-'))
+  try {
+    const log = path.join(dir, 'network.jsonl')
+    const result = spawnSync(process.execPath, ['--require', path.join(__dirname, 'ts-offline-guard.cjs'), '-e', "const options={host:'127.0.0.1',port:1}; options.context=options; try { require('node:net').connect(options) } catch {}"], {
+      encoding: 'utf8', env: { ...process.env, MIGRATION_NETWORK_LOG: log }
+    })
+    assert.equal(result.status, 0, result.stdout + result.stderr)
+    assert.equal(JSON.parse(fs.readFileSync(log, 'utf8').trim()).transport, 'socket')
+  } finally { fs.rmSync(dir, { recursive: true, force: true }) }
+})
+
+test('TS 清单与报告同时变成零用例也不能通过基线', () => {
+  const f = evidenceFixture()
+  try {
+    const catalog = f.read('catalog.json')
+    catalog.files[0].cases = []
+    f.write('catalog.json', catalog)
+    const report = f.read('ts.json')
+    report.testResults[0].assertionResults = []
+    report.numTotalTests = report.numPassedTests = 0
+    f.write('ts.json', report)
+    const result = spawnSync('python3', [path.join(__dirname, 'audit-tests.py'), 'compare-ts', '--catalog', path.join(f.dir, 'catalog.json'), '--ts-report', path.join(f.dir, 'ts.json')], { encoding: 'utf8' })
+    assert.equal(result.status, 1, result.stdout + result.stderr)
+    assert.match(result.stderr, /空用例/)
+  } finally { f.close() }
+})
