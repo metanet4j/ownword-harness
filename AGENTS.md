@@ -28,7 +28,7 @@ OwnWord 设计能力架构见：
 
 `standard/design-skill-architecture.md`
 
-OwnWord **固定使用 Spectrum S2 作为唯一主设计系统**。设计任务不再选择主设计系统，也不得由外部 skill 改用其他设计系统。
+按 `_task/system-design/spec/核心认知.md` 第 10.5 节，OwnWord **固定使用 Spectrum S2 作为唯一主设计系统**。设计任务不再选择主设计系统，也不得由外部 skill 改用其他设计系统。
 
 设计任务采用“事实与版本约束 → Spectrum S2 → 主设计执行 → 按需 specialist → 实现检查”的模型：
 
@@ -50,7 +50,7 @@ react-spectrum skill：Spectrum S2 的组件、Token、交互与 Accessibility �
 
 - 核心认知是 OwnWord 产品、设计、原型、代码和测试的唯一事实来源。
 - 当前版本设计文档负责把核心认知落到页面、组件、流程、视觉方向和验收。
-- Spectrum S2 是项目固定设计系统；Token、通用组件、状态、交互和 Accessibility 以 Spectrum S2 为基础。
+- Spectrum S2 的固定地位以核心认知第 10.5 节为事实来源；Token、通用组件、状态、交互和 Accessibility 以 Spectrum S2 为基础。
 - `baoyu-design` 是主设计执行框架；使用其 design-system 能力时直接采用 Spectrum S2，不询问或重新选择主设计系统。
 - `design-taste-frontend` 按页面类型选择使用强度；其中“选择设计系统”的规则对 OwnWord 不适用，不得替换 Spectrum S2。
 - `high-end-visual-design` 仅用于明确需要强 premium / agency / cinematic 表达的页面或局部区域，其视觉规则只能在 Spectrum S2 与版本设计约束允许范围内使用。
