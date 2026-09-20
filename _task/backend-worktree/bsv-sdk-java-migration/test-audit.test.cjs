@@ -487,6 +487,38 @@ test('编码任务必须完整分配 API 收口、原测试和辅助资料，缺
       assert.equal(r.status, 1, r.stdout + r.stderr)
       assert.match(r.stderr, message)
     }
+
+    // done 任务必须带通过的逐断言 taskAcceptance，不能用 case-level clean test 冒充。
+    Object.assign(f.state, structuredClone(original))
+    for (const entry of f.data.entries) {
+      if (!f.map.entries.some(e => e.id === entry.id)) {
+        f.map.entries.push({ id: entry.id, java: 'com.metanet4j.bsv.primitives.Values#' + entry.name, contract: 'API-' + entry.name, review: 'reviewed' })
+      }
+    }
+    const compareReport = path.join(path.dirname(f.catalog), 'task-acceptance.json')
+    fs.writeFileSync(compareReport, '{}\n')
+    f.state.features[2].status = 'done'
+    f.state.features[2].evidence = ['假完成']
+    f.save()
+    r = f.run()
+    assert.equal(r.status, 1, r.stdout + r.stderr)
+    assert.match(r.stderr, /逐断言验收/)
+    for (const acceptance of [
+      { status: 'pending', casesCompared: 2, assertionsCompared: 2, missingCases: 0, missingAssertions: 0, uncompared: 0, compareReport },
+      { status: 'passed', casesCompared: 1, assertionsCompared: 2, missingCases: 0, missingAssertions: 0, uncompared: 0, compareReport },
+      { status: 'passed', casesCompared: 2, assertionsCompared: 2, missingCases: 1, missingAssertions: 0, uncompared: 0, compareReport },
+      { status: 'passed', casesCompared: 2, assertionsCompared: 2, missingCases: 0, missingAssertions: 0, uncompared: 1, compareReport }
+    ]) {
+      f.state.features[2].taskAcceptance = acceptance
+      f.save()
+      r = f.run()
+      assert.equal(r.status, 1, r.stdout + r.stderr)
+      assert.match(r.stderr, /逐断言验收/)
+    }
+    f.state.features[2].taskAcceptance = { status: 'passed', casesCompared: 2, assertionsCompared: 2, missingCases: 0, missingAssertions: 0, uncompared: 0, compareReport }
+    f.save()
+    r = f.run()
+    assert.equal(r.status, 0, r.stdout + r.stderr)
   } finally { f.close() }
 })
 

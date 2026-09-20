@@ -14,8 +14,8 @@
       "跨工程发布、部署或远端推送"
     ]
   },
-  "activeItem": null,
-  "nextItem": "migration-impl-curve",
+  "activeItem": "migration-impl-bignumber",
+  "nextItem": "migration-impl-bignumber",
   "features": [
     {
       "id": "migration-env",
@@ -215,7 +215,16 @@
       "modules": [
         "primitives"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 8,
+        "assertionsCompared": 19,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/hex-parity-20260920-150144-mgrmta7b/summary.json"
+      }
     },
     {
       "id": "migration-impl-bignumber-constructor",
@@ -264,14 +273,23 @@
       "modules": [
         "primitives"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 28,
+        "assertionsCompared": 52,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/hex-parity-20260920-153441-zd037qhq/summary.json"
+      }
     },
     {
       "id": "migration-impl-bignumber",
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "primitives：完整大整数与模运算",
-      "status": "done",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-bignumber-constructor"
       ],
@@ -327,14 +345,24 @@
       ],
       "fixtureFiles": [
         "src/primitives/__tests/BigNumber.fixtures.ts"
-      ]
+      ],
+      "taskAcceptance": {
+        "status": "pending",
+        "casesCompared": 174,
+        "assertionsCompared": 0,
+        "missingCases": 174,
+        "missingAssertions": 0,
+        "uncompared": 174,
+        "compareReport": "",
+        "note": "代码与原测试已实现并通过 case-level clean test；逐断言 TS/Java 原始值 compare 尚未完成。"
+      }
     },
     {
       "id": "migration-impl-hash-random",
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "primitives：哈希、HMAC、PBKDF2 与随机源",
-      "status": "done",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-bignumber"
       ],
@@ -384,7 +412,17 @@
       "fixtureFiles": [
         "src/primitives/__tests/DRBG.vectors.ts",
         "src/primitives/__tests/PBKDF2.vectors.ts"
-      ]
+      ],
+      "taskAcceptance": {
+        "status": "pending",
+        "casesCompared": 86,
+        "assertionsCompared": 0,
+        "missingCases": 86,
+        "missingAssertions": 0,
+        "uncompared": 86,
+        "compareReport": "",
+        "note": "代码与原测试已实现并通过 case-level clean test；逐断言 TS/Java 原始值 compare 与随机输入重放尚未完成。"
+      }
     },
     {
       "id": "migration-impl-curve",
@@ -1949,15 +1987,18 @@
       "testFiles 的全部注册用例、参数行、断言和动态样本均有原始执行及 Java 对应证据；数量从固定 module-tests.json 派生，不在任务里另造分母。",
       "本项两端原断言均通过，实际输入/结果/异常一致；零失败/跳过/未执行/漏采/未比较，额外 Java 回归与上游分开计数。",
       "依赖为真实实现或原测试原有 fixture；当前 Java clean test 和此前已完成项累计结果对照通过，报告绑定验收时提交/工作树。",
-      "产出本项可复跑命令与独立证据目录，局部比较标记 formalAcceptance=false；独立任务 done 不表示整个模块验收。完整模块最终仍运行无过滤 API check 与六模块 audit-tests.py check。"
+      "产出本项可复跑命令与独立证据目录，局部比较标记 formalAcceptance=false；独立任务 done 不表示整个模块验收。完整模块最终仍运行无过滤 API check 与六模块 audit-tests.py check。",
+      "implementation-slice 的 status=done 必须同时具有通过的 taskAcceptance：casesCompared 与 testFiles 冻结用例数一致，missingCases/missingAssertions/uncompared 均为 0，compareReport 非空；formalAcceptance 仅用于完整模块门禁，不能替代本项逐断言实际值验收。"
     ],
     "validation": {
       "allocation": "node audit-api.cjs batches：核对 API 复核清单、执行依赖、完整文件收口责任、原测试归属和辅助资料覆盖；只验证结构。",
       "apiBeforeCoding": "逐项核对本任务 sourceFiles 对应 api-map；完整 API 复核组就绪后用 batches --batch ID 留证。禁止要求无关 API 组先完成。",
       "java": "./verify.sh bsv-test：目标工程 clean test，核对实际 Surefire XML。",
       "parity": "复用 audit-tests.py compare 和已有采集机制；每项首次实施时记录自己的真实运行/采集/累计比较命令及日志，未实现入口必须保持待完成。",
-      "final": "node audit-api.cjs check；python3 audit-tests.py check：最终全量门禁不得按内部任务过滤。"
-    }
+      "final": "node audit-api.cjs check；python3 audit-tests.py check：最终全量门禁不得按内部任务过滤。",
+      "taskAcceptance": "node audit-api.cjs batches 拒绝缺少 taskAcceptance/存在 missing/uncompared 的 done 任务；test-audit.test.cjs 必须覆盖该反例。"
+    },
+    "taskAcceptanceRule": "implementation-slice 的 status=done 必须满足 taskAcceptance.status=passed、casesCompared 等于 testFiles 冻结用例数、missingCases/missingAssertions/uncompared 均为 0 且 compareReport 非空；formalAcceptance=false 只表示完整模块最终门禁未完成，不能豁免本项逐断言 TS/Java 实际值比较。"
   },
   "apiBatches": [
     {

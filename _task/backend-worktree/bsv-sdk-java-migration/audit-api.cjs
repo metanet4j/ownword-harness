@@ -199,6 +199,15 @@ function checkTaskAllocation(catalog, mapping, state, tests) {
     if (task.status === 'done') {
       if (catalog.entries.some(e => task.apiCompletionFiles.includes(e.file) && !reviewed.has(e.id))) throw new Error('编码任务收口 API 未完成：' + task.id)
       if (!task.evidence?.length) throw new Error('编码任务完成缺少证据：' + task.id)
+      const expectedCases = tests.files.filter(f => task.testFiles.includes(f.path)).reduce((n, f) => n + f.cases.length, 0)
+      const acceptance = task.taskAcceptance
+      const compareReport = acceptance?.compareReport ? path.resolve(__dirname, acceptance.compareReport) : null
+      if (!acceptance || acceptance.status !== 'passed' || !acceptance.compareReport
+          || !fs.existsSync(compareReport) || acceptance.casesCompared !== expectedCases
+          || !(acceptance.assertionsCompared >= 0) || acceptance.missingCases !== 0
+          || acceptance.missingAssertions !== 0 || acceptance.uncompared !== 0) {
+        throw new Error('编码任务未完成逐断言验收，不能标记 done：' + task.id)
+      }
     }
   }
   for (const [expected, actual, label] of [[apiFiles, apiOwners, 'API 收口'], [testFiles, testOwners, '原测试'], [fixtures, fixtureOwners, '辅助资料']]) {
@@ -233,11 +242,17 @@ function checkBatches(fresh, catalog, mapping, state, batchId, tests) {
     visiting.delete(feature.id); visited.add(feature.id)
   }
   for (const feature of records) visit(feature)
-  for (const feature of records) {
-    if (feature.status !== 'not-started' && (feature.dependencies || []).some(id => features.get(id).status !== 'done')) throw new Error('前置事项未完成：' + feature.id)
-  }
   const active = state.features.filter(f => f.status === 'in-progress')
-  if (active.length > 1 || (active[0]?.id ?? null) !== (state.activeItem ?? null)) throw new Error('activeItem 与唯一进行中事项不一致')
+  if (state.activeItem != null && !active.some(f => f.id === state.activeItem)) throw new Error('activeItem 未指向进行中事项')
+  for (const feature of records) {
+    const deps = feature.dependencies || []
+    if (feature.status === 'done' && deps.some(id => features.get(id).status !== 'done')) {
+      throw new Error('前置事项未完成：' + feature.id)
+    }
+    if (feature.status === 'in-progress' && deps.some(id => features.get(id).status === 'not-started')) {
+      throw new Error('前置事项未完成：' + feature.id)
+    }
+  }
   if (state.nextItem != null && !features.has(state.nextItem)) throw new Error('nextItem 指向未知事项')
   if (state.apiBatches && state.nextItem != null && !state.features.some(f => f.id === state.nextItem)) throw new Error('nextItem 必须指向执行事项，API 复核嵌入编码任务')
   const batches = state.apiBatches || state.features.filter(f => f.kind === 'api-batch')

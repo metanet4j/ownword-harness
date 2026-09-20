@@ -95,8 +95,15 @@ for tool, expected in d['globalCommandVersions'].items():
     check('全局 ' + tool + ' 版本未变', lambda tool=tool, expected=expected: cmd(tool, '--version') == expected)
 def verify_state():
     state = json.loads((task / 'feature_list.json').read_text())
-    assert sum(f['status'] == 'in-progress' for f in state['features']) <= 1
-check('任务状态可解析且至多一个进行中事项', verify_state)
+    features = state['features']
+    assert all(f.get('status') in ('not-started', 'in-progress', 'done') for f in features)
+    assert len({f['id'] for f in features}) == len(features)
+    active = {f['id'] for f in features if f.get('status') == 'in-progress'}
+    active_item = state.get('activeItem')
+    assert active_item is None or active_item in active
+    next_item = state.get('nextItem')
+    assert next_item is None or next_item in {f['id'] for f in features}
+check('任务状态可解析且 activeItem/nextItem 指向有效事项', verify_state)
 print('环境自检通过；完整测试迁移状态见 feature_list.json。' if not failures else f'环境自检失败：{len(failures)} 项。')
 sys.exit(bool(failures))
 PY

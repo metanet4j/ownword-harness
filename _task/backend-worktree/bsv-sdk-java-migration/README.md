@@ -35,10 +35,10 @@ Maven 和 pnpm 分别使用 `./mvn.sh`、`./pnpm.sh`；这两个入口固定工�
 
 迁移单位是完整模块，范围复核确认 `primitives`、`compat`、`script`、`transaction`、`wallet`、`auth` 六模块，含 133 个测试文件、5,329 个注册用例（含 manual）。范围依据见[完整模块与 API 映射](doc/完整模块与API映射-20260920-122800.md)，完整性脚本和数据格式见[检查器说明](doc/测试完整性脚本-20260920-104440.md)。
 
-已实现 Hex、BigNumber 构造基础、完整大整数/模运算和哈希/HMAC/PBKDF2/随机源，累计映射 296 个 Java 原用例；哈希随机 6 个原测试文件 86/86、目标工程 clean test 297/297 通过。其余 5033 个 Java 原用例尚未映射，所以 `audit-tests.py check` 应返回失败并报告缺失。`init.sh`、`verify.sh` 的环境检查与冒烟不能代替迁移验收。
+已实现 Hex、BigNumber 构造基础、完整大整数/模运算和哈希/HMAC/PBKDF2/随机源，累计映射 296 个 Java 原用例；但完整大整数/模运算与哈希/随机源两项的逐断言 taskAcceptance 尚未通过，已回到 in-progress。其余 5033 个 Java 原用例尚未映射，所以 `audit-tests.py check` 应返回失败并报告缺失。`init.sh`、`verify.sh` 的环境检查与冒烟不能代替迁移验收。
 
 [实施前审查](doc/实施前审查-20260920-115837.md)确认可以进入 P0；编码任务、嵌入 API 前检及最终门禁已登记在 [feature_list.json](feature_list.json)，范围复核及[完整 TS 基线](doc/TS完整基线-20260920-124400.md)已完成（5329/5329，含原规模 manual）；已完成 Hex 与 BigNumber 构造原文件对应的内部实施项；已复核文件、剩余映射和授权差异见[当前进度](progress.md)及[API 契约](doc/完整模块与API映射-20260920-122800.md)。每个编码任务内先复核对应 API，再 TDD 并落实原测试及真实结果对照；完整模块最终验收仍须完成 P0 联合验收。
 
 逐步执行入口：[模块迁移计划](doc/模块迁移计划-20260920-103547.md)中的“编码任务与 API 前检”“文件和脚本的职责”“按顺序执行”和“单行为执行示例”，逐项说明输入、脚本、产物与完成条件；尚未实现的运行/采集入口已明确标记。后续交接：[session-handoff.md](session-handoff.md)。
 
-当前按功能组拆为 28 个编码任务（4 项已完成），API 复核嵌入任务前检；已有 663 项设计直接复用。下一项 migration-impl-curve：曲线、点与 ECDSA 依赖。任务范围、依赖及独立验收条件以 feature_list.json 为准。
+当前按功能组拆为 28 个编码任务（2 项 done、2 项 in-progress、24 项 not-started），API 复核嵌入任务前检；已有 663 项设计直接复用。先补齐 bignumber/hash-random 的逐断言 taskAcceptance，再推进 migration-impl-curve。任务范围、依赖及独立验收条件以 feature_list.json 为准。
