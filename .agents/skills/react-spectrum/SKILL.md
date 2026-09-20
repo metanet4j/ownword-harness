@@ -7,7 +7,7 @@ description: Spectrum S2 implementation rules for OwnWord frontend development.
 
 ## Purpose
 
-Spectrum S2 is the fixed and only primary design system for OwnWord.
+Per `_task/system-design/spec/核心认知.md` section 10.5, Spectrum S2 is the fixed and only primary design system for OwnWord.
 
 This skill is the implementation guardrail for applying Spectrum S2 to OwnWord frontend work. It does not choose a design system and does not define product facts or product positioning.
 
@@ -19,7 +19,7 @@ Before applying this skill, read:
 
 ## Binding Rule
 
-Always use Spectrum S2 as the primary design system.
+Always use Spectrum S2 as the primary design system, as required by Core Cognition section 10.5.
 
 Do not replace or parallel it with another primary system such as Material, Fluent, Carbon, shadcn/ui, or Radix Themes.
 
