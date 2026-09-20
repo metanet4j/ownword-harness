@@ -4,7 +4,7 @@
 
 环境准备已按用户“等下”指令暂停，当前比较 `ts-stack/packages/sdk` 与 Go SDK 作为 Java 移植参考。尚未批准或实施切换，事项不标记完成。
 
-已建立四个 Java worktree，全部以各自 `feature/java25` 为起点；已复核 HEAD 与该分支相同，精确基线见 `workspace.json`；生产源码与 POM 无改动。任务 Maven 缓存已复制约 485 MB 第三方依赖，排除了 `com/metanet4j`；未执行 Maven 构建和任何测试。
+已建立四个 Java worktree，全部以各自 `feature/java25` 为起点；已复核 HEAD 与该分支相同，任务路径与四仓分支已采用 BSV 中性名称，精确基线见 `workspace.json`；生产源码与 POM 无改动。任务 Maven 缓存已复制约 485 MB 第三方依赖，排除了 `com/metanet4j`；未执行 Maven 构建和任何测试。
 
 `reference/go-sdk` 只完成 `--no-checkout` 克隆，HEAD 已取得，工作文件尚未检出。Go 工具链未安装，TS 源码未克隆、依赖未安装。`init.sh` 是明确返回 2 的未就绪入口。
 

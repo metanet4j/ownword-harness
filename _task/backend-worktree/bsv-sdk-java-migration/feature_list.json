@@ -11,7 +11,8 @@
         "四个 Java worktree 已从 workspace.json 中的提交建立，生产代码未修改。",
         "Maven 第三方缓存已复制到任务 .cache/maven，未安装 Go 工具链，未执行构建或测试。",
         "用户要求先暂停，比较 TypeScript SDK 作为迁移参考；环境准备未完成。",
-        "已核对四仓迁移分支 HEAD、记录的 baseCommit 与各自 feature/java25 HEAD 完全一致，工作区干净；无需重建。"
+        "已核对四仓迁移分支 HEAD、记录的 baseCommit 与各自 feature/java25 HEAD 完全一致，工作区干净；无需重建。",
+        "任务目录与四仓迁移分支已改为 BSV 中性名称；使用 git worktree move 更新关联，基线提交未变。"
       ]
     },
     {

@@ -1,6 +1,6 @@
 # backend-worktree/ 子仓库清单
 
-迁移工作区入口：[go-sdk-java-migration](go-sdk-java-migration/README.md)。该任务的仓库基线、分支和验证状态由其目录内文件维护。
+迁移工作区入口：[bsv-sdk-java-migration](bsv-sdk-java-migration/README.md)。该任务的仓库基线、分支和验证状态由其目录内文件维护。
 
 `_task/backend-worktree/boot4-java25-upgrade/` 下的 4 个目录是**git worktree**，不是普通子目录：
 `.git` 是**文件**（gitdir 指针），主仓库是 `backend/` 下的同名仓库。它们不纳入 ownword 主仓。

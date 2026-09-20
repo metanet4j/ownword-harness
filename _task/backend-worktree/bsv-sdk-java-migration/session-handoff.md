@@ -16,6 +16,6 @@
 
 ## Next Session
 
-按用户后续选择继续。建议 TypeScript SDK 为主参考，固定其 commit 和包管理器版本，再验证所需模块。此前四个 Java worktree 已核对均以 `feature/java25` 为起点，无需重建；目录和分支是否改为中性名称随准备计划处理。不要移动目录后遗留失效的 Git worktree 指针。
+按用户后续选择继续。建议 TypeScript SDK 为主参考，固定其 commit 和包管理器版本，再验证所需模块。此前四个 Java worktree 已核对均以 `feature/java25` 为起点，无需重建；目录与分支均已采用中性名称；实际名称见 `workspace.json`，Git worktree 路径已同步。
 
 本轮准备产生的 `.gitignore`、两个目录 README 及任务文件在根仓独立提交；根仓既有规则与技能文件改动属于用户原有内容，保留，不混入后续提交。
