@@ -1,0 +1,28 @@
+{
+  "activeItem": "migration-env",
+  "features": [
+    {
+      "id": "migration-env",
+      "name": "独立工作区与迁移环境准备",
+      "description": "建立四个固定基线的 worktree，取得固定 Go 上游，隔离工具与依赖缓存，完成构建和离线冒烟。",
+      "dependencies": [],
+      "status": "paused",
+      "evidence": [
+        "四个 Java worktree 已从 workspace.json 中的提交建立，生产代码未修改。",
+        "Maven 第三方缓存已复制到任务 .cache/maven，未安装 Go 工具链，未执行构建或测试。",
+        "用户要求先暂停，比较 TypeScript SDK 作为迁移参考；环境准备未完成。",
+        "已核对四仓迁移分支 HEAD、记录的 baseCommit 与各自 feature/java25 HEAD 完全一致，工作区干净；无需重建。"
+      ]
+    },
+    {
+      "id": "migration-map",
+      "name": "依赖映射与实施范围收敛",
+      "description": "按真实调用建立 Java/Go 方法映射，明确公共底层落点、接口兼容和对照向量；生产迁移须后续明确授权。",
+      "dependencies": [
+        "migration-env"
+      ],
+      "status": "not-started",
+      "evidence": []
+    }
+  ]
+}

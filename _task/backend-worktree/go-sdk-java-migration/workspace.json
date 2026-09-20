@@ -1,0 +1,35 @@
+{
+  "branch": "feature/go-sdk-java-migration",
+  "repositories": [
+    {
+      "name": "metanet4j-parent",
+      "source": "_task/backend-worktree/boot4-java25-upgrade/metanet4j-parent",
+      "baseCommit": "50598c09fda28720ce66a1c69533e81cccc22b57"
+    },
+    {
+      "name": "metanet4j-base",
+      "source": "_task/backend-worktree/boot4-java25-upgrade/metanet4j-base",
+      "baseCommit": "6e16cfa9e838f226ebbb5382203a199d1391da46"
+    },
+    {
+      "name": "metanet4j-sdk",
+      "source": "_task/backend-worktree/boot4-java25-upgrade/metanet4j-sdk",
+      "baseCommit": "bae4c36739e850539efeab060002fad728b6b9ad"
+    },
+    {
+      "name": "metanet4j-component",
+      "source": "_task/backend-worktree/boot4-java25-upgrade/metanet4j-component",
+      "baseCommit": "e634982a88b22d48ca09a7080574393ba55b0908"
+    }
+  ],
+  "upstream": {
+    "path": "reference/go-sdk",
+    "url": "https://github.com/bsv-blockchain/go-sdk.git",
+    "commit": "aaa650f810e96349669b625ca68dac896dde8fd1"
+  },
+  "globalDefaults": {
+    "java": "/usr/local/java/jdk1.8.0_181",
+    "maven": "/home/haodev/.sdkman/candidates/maven/3.9.9"
+  },
+  "baseBranch": "feature/java25"
+}

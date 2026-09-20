@@ -11,6 +11,7 @@
 | `schema-master/` | 上游源码快照 | 无 |
 | `xLog-dev/` | 上游源码快照 | 无 |
 | `yours-wallet-main/` | 上游源码快照 | 无 |
+| `go-sdk/` | 固定提交的只读 Git 源码，版本由[迁移工作区](../_task/backend-worktree/go-sdk-java-migration/workspace.json)维护 | https://github.com/bsv-blockchain/go-sdk |
 
 ## 注意
 
