@@ -2,31 +2,30 @@
 
 ## 唯一下一步
 
-当前 activeItem=migration-impl-bignumber，nextItem=migration-impl-bignumber。`migration-impl-bignumber` 与 `migration-impl-hash-random` 均已回到 in-progress，先补齐逐断言 TS/Java 实际值 compare；不要先推进 migration-impl-curve。
+activeItem=null，nextItem=migration-impl-curve。`migration-impl-bignumber` 与 `migration-impl-hash-random` 已完成逐断言 taskAcceptance 并恢复 done；本次到此停止，尚未开始 curve。
 
-## 为什么回退
+## 逐断言验收入口
 
-feature_list 的 implementationPolicy 要求：testFiles 的全部注册用例、参数行、断言和动态样本均有原始执行及 Java 证据；记录实际输入/输出/异常/调用顺序；复用 audit-tests.py compare 核对实际结果；零漏采/未比较。此前两项只有 case-level 映射、固定期望值和两端 clean test 通过，`formalAcceptance=false`，不满足 done 条件。
+证据批次：`.cache/evidence/parity-final-20260920-191152-19403q/`
 
-## 新增硬门禁
+- `ts-parity.jsonl`：Jest setup `capture-parity.cjs` 记录的全部 matcher received/异常。
+- `parity-java.jsonl`：Java `ParityRecordingExtension` + `RecordingAssertions` 记录的全部断言实际值。
+- `bignumber-parity.json`：174 用例、1145 断言匹配，missing/uncompared=0，`taskAcceptancePassed=true`。
+- `hash-random-parity.json`：86 用例、432 断言匹配，missing/uncompared=0，`taskAcceptancePassed=true`；13 个 Random 随机字节用例按 matcher/边界/pass 策略单列。
+- 复跑：`python3 task-parity.py --task <id> --ts <ts-path> --java <java-path> --output <report>`。
 
-- `taskAcceptanceRule`：implementation-slice 的 done 必须有 `taskAcceptance.status=passed`、`casesCompared` 等于冻结用例数、`missingCases/missingAssertions/uncompared=0`、`compareReport` 文件存在。
-- `node audit-api.cjs batches` 已实现该门禁，`node test-audit.test.cjs` 增加相应反例。
-- `./init.sh` 允许存在多个 in-progress，但 activeItem 必须指向其中一个；nextItem 必须有效。
-- 以后 `formalAcceptance=false` 不能再作为 implementation-slice done 的豁免。
+## 已完成 Java 提交
 
-## 恢复入口
+- `a2f0aa7`：BigNumber/哈希随机测试接入逐断言轨迹采集。
+- `9fbcc9d`：哈希、HMAC、PBKDF2、DRBG、Random。
+- `a697a49`：BigNumber、ReductionContext、Mersenne、K256、MontgomoryMethod。
+- `9c22ba1`：BigNumber 构造基础。
+- `0ecb8d1`：Hex。
 
-- 目标仓当前提交：`9fbcc9d`（哈希/随机）、`a697a49`（完整大整数/模运算）。
-- case-level 证据：
-  - `.cache/evidence/bignumber-final-20260920-173943-23798q/`
-  - `.cache/evidence/hash-random-final-20260920-175813-4236q/`
-- 已完成且有 taskAcceptance passed 的：
-  - Hex：`.cache/evidence/hex-parity-20260920-150144-mgrmta7b/`
-  - BigNumber 构造：`.cache/evidence/hex-parity-20260920-153441-zd037qhq/`
+目标工程 clean test 当前 297/297；Hex/构造既有逐调用证据仍保留在 `.cache/evidence/hex-parity-*`。
 
 ## 固定边界
 
-先为 174 个 BigNumber/模运算用例建立逐断言 TS/Java 原始值对照，再为 86 个哈希/随机用例建立同样对照；Random 的宿主分支必须提供可重放输入轨迹，不能用可注入 Runtime 直接代替真实轨迹。两项都通过 taskAcceptance 后才能恢复 done，再推进 migration-impl-curve。
+Random 的 Node/浏览器分支在 Java 中为可注入 Runtime 适配；随机字节测试不比较跨语言具体字节，只比较原有行为断言。完整六模块 API、通用随机/属性重放和最终 audit-tests.py check 未完成，不能把内部任务 done 当成整模块完成。
 
-scopeReview=pending；完整模块最终仍运行无过滤 API check 与六模块 audit-tests.py check。Maven/pnpm 仅经任务脚本；不推送、不广播交易、不调用真实钱包或外部业务接口。
+Maven/pnpm 仅经任务脚本；不推送、不广播交易、不调用真实钱包或外部业务接口。只提交任务明确路径，不混入根仓既有规则/技能/.opencode 改动。
