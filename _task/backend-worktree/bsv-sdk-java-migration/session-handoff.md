@@ -2,14 +2,15 @@
 
 ## 状态
 
-P0 的 migration-scope-review、migration-ts-baseline 已完成；migration-api-contract 是唯一进行中项，不能标记 done。15 项中 7 done、1 in-progress、7 not-started；activeItem/nextItem 均为 migration-api-contract，scopeReview 仍 pending。
+P0 的 migration-scope-review、migration-ts-baseline 已完成。API 设计拆为 21 批：values 已完成设计，hash-random 为唯一进行中项，其余 19 批未开始；migration-api-contract 保留为等待全部批次的总验收 gate。36 个功能项中 8 done、1 in-progress、27 not-started；activeItem/nextItem 均为 migration-api-hash-random，scopeReview 仍 pending。
 
 六模块及范围依据见[完整模块与 API 映射](doc/完整模块与API映射-20260920-122800.md)。冻结测试范围未变：292 文件、133 测试文件、5329 用例、7554 AST 位置；TS 完整基线此前 5329/5329 通过，含原规模 manual，零跳过。本轮不改 TS 或 Java 源码，未重复完整基线和 Java 基础测试。
 
 ## Files
 
 - api-catalog.json：133 个 API 源文件、3576 个声明、1016 个导出入口（模块内 750、根 mod.ts 266）；含私有/辅助成员、重载，不是公开方法数。
-- audit-api.cjs：inventory 只解析源码；check 重新扫描固定源码后核对冻结清单与映射，拒绝同时删除清单/映射的漏项。默认必须覆盖全部六模块；没有 Java 实现/语义证明能力。
+- feature_list.json：api-batch 的 apiFiles 是每批完整文件的唯一清单；apiBatchPolicy 定义共同步骤与验收。每批 dependencies 是设计前置，不取代源码循环依赖图。
+- audit-api.cjs：inventory 只解析源码；check 重新扫描固定源码后核对冻结清单与映射。新增 batches 检查全部文件唯一归属、依赖、状态和完成证据；--batch 仅做单批设计核对，正式 check 不接受该过滤。没有 Java 实现/语义证明能力。
 - api-map.json：9 个完整文件的 371 项声明完成设计映射，剩余 3205 项未映射；不要批量自动填 reviewed。完成文件为 hex、BigNumber、utils、ReaderUint8Array、WriterUint8Array、ReductionContext、MontgomoryMethod、Mersenne、K256。
 - doc/完整模块与API映射-20260920-122800.md：API 数据格式、数值/容器共同约束、已复核文件契约、实际源码/探针和剩余设计工作。是 API 设计的当前入口。
 - api-values-probe.mjs：可重复运行的固定 TS 小输入探针，26 组输入分别在 Buffer 存在/缺失进程中运行；原始值记录于 .cache/evidence/api-values*-observations.json，不运行 Java、不产生测试通过报告。
@@ -36,7 +37,7 @@ AESGCM 的注释声称 padding 不兼容，但本轮 12/32 字节 IV × 0/1/16/1
 
 ## 验证与限制
 
-工具自测 35/35 通过。沙箱中嵌套 Node spawnSync 曾返回 EPERM 且吞掉输出，后续工具自测和 API 清点在宿主运行。check 的初次 RED 因环境原因无效，已回到未实现版本，在宿主取得明确行为缺失的 RED 后恢复实现取得 GREEN；错误上游版本拒绝也有单独 RED/GREEN。
+工具自测 39/39 通过，原 35 项及 4 项新增分批测试均通过。分批入口、伪造 done、依赖/证据状态门禁都有 RED/GREEN，另验证漏掉零声明 index.ts、重复归属、未知文件，以及同时删除冻结文件和批次仍被重扫识别。证据在 .cache/evidence/api-batches-all-green.log、api-batches-red/green.log、api-batch-status-red/green.log、api-batch-dependencies-red/green.log。Node 嵌套 spawnSync 在沙箱曾 EPERM，工具自测和 API 清点继续在宿主执行。
 
 API check 当前必须退出 1，未映射 3205；正式 audit-tests.py check 仍应拒绝未映射的 5329 个 Java 用例。API 检查器尚未接入联合门禁，后续 migration-evidence-gate 处理，并精确登记授权差异。不要把清点、设计、探针、工具测试或 TS PASS 当成 Java 迁移通过。
 
@@ -44,6 +45,8 @@ API check 当前必须退出 1，未映射 3205；正式 audit-tests.py check �
 
 ## Next Session
 
-读取规则、状态和计划，执行 ./init.sh；保留 migration-api-contract 为唯一进行中项。下一步复核 Hash、HMAC/DRBG、Random、AESGCM 等基础密码学文件，沿用已确定的公共表示，按完整文件清单逐项登记接口与契约。全部 API 设计和复核结束后再进入逐用例映射、输入重放、真实采集和 P0 联合验收，不提前启动 P1。
+读取规则、状态和计划，执行 ./init.sh 与 node audit-api.cjs batches；只推进 migration-api-hash-random。先复核 Hash（含 HMAC/PBKDF2）、DRBG、Random 三个完整文件的 292 项声明及相关原测试。每批完成后执行单批检查、保存证据、更新状态并提交；文件只完成部分时不标记 done。
+
+21 批完整文件清单见 feature_list，概览和命令见模块迁移计划的“API 设计分批”。全部批次完成后，migration-api-contract 核对跨批次接口、1016 个导出入口及完整 API；之后再进入逐用例映射、输入重放、真实采集和 P0 联合验收，不提前启动 P1。不再把全部 3205 项作为一个进行中事项，也不因分批扩大原测试的跳过/豁免范围。
 
 工程实现只允许 metanet4j-bsv-sdk；本轮没有工程代码改动。目标仓 HEAD 仍为 72d2007，最近基础测试 1/1；其他四工程只读，固定 TS 上游保持干净。根仓无关修改保留，仅提交本任务资料与工具，未推送。

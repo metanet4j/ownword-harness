@@ -146,7 +146,7 @@ function inventory(sdk, modules) {
   return { schemaVersion: 1, collectionOnly: true, modules, files: fileRecords, entryPoints, entries, exports }
 }
 
-function check(fresh, catalog, mapping) {
+function mappingStatus(fresh, catalog, mapping) {
   if (!isDeepStrictEqual(fresh, catalog)) throw new Error('API 清单与固定源码不一致；不能同时删除清单和映射来缩小分母')
   if (!catalog.entries.length || !catalog.exports.length) throw new Error('API 清单为空')
   if ((mapping.upstreamCommit ?? null) !== (catalog.upstreamCommit ?? null)) throw new Error('API 映射的上游版本不一致')
@@ -161,8 +161,76 @@ function check(fresh, catalog, mapping) {
   }
   const missing = [...expected].filter(id => !actual.has(id))
   const pending = mapping.entries.filter(e => e.review !== 'reviewed')
+  return { missing, pending, actual }
+}
+
+function check(fresh, catalog, mapping) {
+  const { missing, pending, actual } = mappingStatus(fresh, catalog, mapping)
   if (missing.length || pending.length) throw new Error(`API 未映射 ${missing.length}，未复核 ${pending.length}；不能进入 API 契约验收`)
   console.log(`API 映射结构核对通过：${actual.size} 声明；复核内容、Java 实现与行为等价性仍需独立验收。`)
+}
+
+function checkBatches(fresh, catalog, mapping, state, batchId) {
+  const all = mappingStatus(fresh, catalog, mapping)
+  const features = new Map()
+  for (const feature of state.features) {
+    if (!feature.id || features.has(feature.id)) throw new Error('功能项 ID 重复或缺失：' + feature.id)
+    if (!['done', 'in-progress', 'not-started'].includes(feature.status)) throw new Error('功能项状态无效：' + feature.id)
+    features.set(feature.id, feature)
+  }
+  const visited = new Set(), visiting = new Set()
+  function visit(feature) {
+    if (visiting.has(feature.id)) throw new Error('功能项依赖循环：' + feature.id)
+    if (visited.has(feature.id)) return
+    visiting.add(feature.id)
+    for (const id of feature.dependencies || []) {
+      if (!features.has(id)) throw new Error('功能项含未知依赖：' + id)
+      visit(features.get(id))
+    }
+    visiting.delete(feature.id); visited.add(feature.id)
+  }
+  for (const feature of state.features) visit(feature)
+  for (const feature of state.features) {
+    if (feature.status !== 'not-started' && (feature.dependencies || []).some(id => features.get(id).status !== 'done')) throw new Error('前置事项未完成：' + feature.id)
+  }
+  const active = state.features.filter(f => f.status === 'in-progress')
+  if (active.length > 1 || (active[0]?.id ?? null) !== (state.activeItem ?? null)) throw new Error('activeItem 与唯一进行中事项不一致')
+  if (state.nextItem != null && !features.has(state.nextItem)) throw new Error('nextItem 指向未知事项')
+  const batches = state.features.filter(f => f.kind === 'api-batch')
+  if (!batches.length) throw new Error('API 批次为空')
+  const gate = features.get('migration-api-contract')
+  if (!gate || gate.kind !== 'gate' || batches.some(b => !gate.dependencies?.includes(b.id))) throw new Error('API 总验收未依赖全部批次')
+  const expectedFiles = new Set(catalog.files.map(f => f.path)), assigned = new Set()
+  const mapped = new Map(mapping.entries.map(e => [e.id, e]))
+  const rows = batches.map(batch => {
+    if (batch.parentId !== gate.id) throw new Error('API 批次父项无效：' + batch.id)
+    if (!Array.isArray(batch.apiFiles) || !batch.apiFiles.length) throw new Error('批次缺少完整文件：' + batch.id)
+    for (const file of batch.apiFiles) {
+      if (!expectedFiles.has(file)) throw new Error('批次含未知文件：' + file)
+      if (file.split('/')[1] !== batch.module) throw new Error('批次文件模块不符：' + file)
+      if (assigned.has(file)) throw new Error('批次文件重复归属：' + file)
+      assigned.add(file)
+    }
+    const entries = catalog.entries.filter(e => batch.apiFiles.includes(e.file))
+    return { batch, total: entries.length, missing: entries.filter(e => !mapped.has(e.id)).length,
+      pending: entries.filter(e => mapped.has(e.id) && mapped.get(e.id).review !== 'reviewed').length }
+  })
+  const missingFiles = [...expectedFiles].filter(file => !assigned.has(file))
+  if (missingFiles.length) throw new Error('API 批次漏文件：' + missingFiles.join(', '))
+  for (const row of rows) {
+    if (row.batch.status === 'done' && (row.missing || row.pending)) throw new Error('未完成批次不能标记 done：' + row.batch.id)
+    if (row.batch.status === 'done' && (!Array.isArray(row.batch.evidence) || !row.batch.evidence.length)) throw new Error('完成批次缺少证据：' + row.batch.id)
+  }
+  if (batchId) {
+    const row = rows.find(r => r.batch.id === batchId)
+    if (!row) throw new Error('未知 API 批次：' + batchId)
+    if (row.missing || row.pending) throw new Error(`批次 ${batchId} 未映射 ${row.missing}，未复核 ${row.pending}`)
+    console.log(`单批设计映射结构通过：${batchId}，${row.total} 声明；不是完整 API 或 SDK 验收。`)
+  } else {
+    console.log(`分批覆盖核对：${assigned.size} 文件，${catalog.entries.length} 声明，${batches.length} 批次；未映射 ${all.missing.length}，未复核 ${all.pending.length}。`)
+    for (const row of rows) console.log(`${row.batch.id} [${row.batch.status}]：${row.batch.apiFiles.length} 文件，${row.total} 声明，已复核 ${row.total - row.missing - row.pending}，未映射 ${row.missing}，未复核 ${row.pending}`)
+    console.log('以上仅核对分批覆盖和进度；不是完整 API 或 SDK 验收。')
+  }
 }
 
 if (require.main === module) {
@@ -170,11 +238,12 @@ if (require.main === module) {
     const args = process.argv.slice(2), command = args.shift(), options = { modules: [] }
     while (args.length) {
       const key = args.shift(), value = args.shift()
-      if (!value || !['--sdk', '--module', '--output', '--catalog', '--mapping'].includes(key)) throw new Error('未知或缺失参数：' + key)
+      if (!value || !['--sdk', '--module', '--output', '--catalog', '--mapping', '--features', '--batch'].includes(key)) throw new Error('未知或缺失参数：' + key)
       if (key === '--module') options.modules.push(value)
       else options[key.slice(2)] = value
     }
-    if (!['inventory', 'check'].includes(command) || (command === 'inventory' && !options.output)) throw new Error('用法：node audit-api.cjs inventory --output PATH；check [--catalog PATH] [--mapping PATH]')
+    if (!['inventory', 'check', 'batches'].includes(command) || (command === 'inventory' && !options.output)) throw new Error('用法：node audit-api.cjs inventory --output PATH；check；batches [--batch ID]')
+    if ((options.batch || options.features) && command !== 'batches') throw new Error('--batch/--features 仅用于 batches，不能缩小正式 check 范围')
     const scope = read(path.join(__dirname, 'module-scope.json'))
     const modules = options.modules.length ? options.modules : scope.selectedModules
     if (!modules?.length || modules.some(m => !/^[a-z][a-z0-9-]*$/.test(m)) || new Set(modules).size !== modules.length) throw new Error('必须指定不重复的完整模块名')
@@ -188,6 +257,10 @@ if (require.main === module) {
     if (command === 'inventory') {
       fs.writeFileSync(options.output, JSON.stringify(data, null, 2) + '\n')
       console.log(`API 清点：${data.files.length} 文件、${data.entries.length} 声明、${data.exports.length} 导出；未执行源码或验证行为。`)
-    } else check(data, read(options.catalog || path.join(__dirname, 'api-catalog.json')), read(options.mapping || path.join(__dirname, 'api-map.json')))
+    } else {
+      const catalog = read(options.catalog || path.join(__dirname, 'api-catalog.json')), mapping = read(options.mapping || path.join(__dirname, 'api-map.json'))
+      if (command === 'batches') checkBatches(data, catalog, mapping, read(options.features || path.join(__dirname, 'feature_list.json')), options.batch)
+      else check(data, catalog, mapping)
+    }
   } catch (error) { console.error(error.message); process.exitCode = 1 }
 }

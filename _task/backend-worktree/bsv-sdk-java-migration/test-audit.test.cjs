@@ -399,3 +399,114 @@ test('API 清点保留根入口的别名和命名空间，只纳入选定模块�
     assert.ok(data.entryPoints.some(f => f.path === 'mod.ts' && f.sha256 === digest(fs.readFileSync(path.join(dir, 'mod.ts')))))
   } finally { fs.rmSync(dir, { recursive: true, force: true }) }
 })
+
+function apiBatchFixture() {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'migration-api-batches-'))
+  fs.mkdirSync(path.join(dir, 'src/primitives'), { recursive: true })
+  fs.writeFileSync(path.join(dir, 'src/primitives/one.ts'), 'export const one = 1\n')
+  fs.writeFileSync(path.join(dir, 'src/primitives/two.ts'), 'export const two = 2\n')
+  fs.writeFileSync(path.join(dir, 'src/primitives/index.ts'), "export * from './one.js'\nexport * from './two.js'\n")
+  const catalog = path.join(dir, 'catalog.json'), mapping = path.join(dir, 'mapping.json'), features = path.join(dir, 'features.json')
+  const run = (command, args = []) => spawnSync(process.execPath, [path.join(__dirname, 'audit-api.cjs'), command, '--sdk', dir, '--module', 'primitives', ...args], { encoding: 'utf8' })
+  const census = run('inventory', ['--output', catalog])
+  assert.equal(census.status, 0, census.stdout + census.stderr)
+  const data = JSON.parse(fs.readFileSync(catalog))
+  const map = { entries: data.entries.filter(e => e.name === 'one').map(e => ({ id: e.id, java: 'com.metanet4j.bsv.primitives.Values#one', contract: 'API-ONE', review: 'reviewed' })) }
+  const state = { activeItem: 'two', nextItem: 'two', features: [
+    { id: 'one', kind: 'api-batch', parentId: 'migration-api-contract', module: 'primitives', apiFiles: ['src/primitives/one.ts'], dependencies: [], status: 'done', evidence: ['API-ONE'] },
+    { id: 'two', kind: 'api-batch', parentId: 'migration-api-contract', module: 'primitives', apiFiles: ['src/primitives/two.ts', 'src/primitives/index.ts'], dependencies: ['one'], status: 'in-progress', evidence: [] },
+    { id: 'migration-api-contract', kind: 'gate', dependencies: ['one', 'two'], status: 'not-started' }
+  ] }
+  fs.writeFileSync(mapping, JSON.stringify(map)); fs.writeFileSync(features, JSON.stringify(state))
+  return { catalog, data, map, state, save() { fs.writeFileSync(features, JSON.stringify(state)); fs.writeFileSync(mapping, JSON.stringify(map)) },
+    run: (...args) => run('batches', ['--catalog', catalog, '--mapping', mapping, '--features', features, ...args]),
+    close: () => fs.rmSync(dir, { recursive: true, force: true }) }
+}
+
+test('API 分批覆盖完整文件并保留全量未完成状态，单批可独立核对', () => {
+  const f = apiBatchFixture()
+  try {
+    let r = f.run()
+    assert.equal(r.status, 0, r.stdout + r.stderr)
+    assert.match(r.stdout, /3 文件.*2 声明/)
+    assert.match(r.stdout, /未映射 1/)
+    r = f.run('--batch', 'one')
+    assert.equal(r.status, 0, r.stdout + r.stderr)
+    assert.match(r.stdout, /单批设计映射.*不是完整 API 或 SDK 验收/)
+    r = f.run('--batch', 'two')
+    assert.equal(r.status, 1, r.stdout + r.stderr)
+    assert.match(r.stderr, /批次 two.*未映射 1/)
+  } finally { f.close() }
+})
+
+test('API 未映射或未复核时，即使状态被改成 done 也拒绝通过', () => {
+  const f = apiBatchFixture()
+  try {
+    f.state.features[1].status = 'done'
+    f.state.features[1].evidence = ['伪造的完成记录']
+    f.state.activeItem = null
+    f.state.nextItem = 'migration-api-contract'
+    f.save()
+    let r = f.run()
+    assert.equal(r.status, 1, r.stdout + r.stderr)
+    assert.match(r.stderr, /未完成批次不能标记 done/)
+    const two = f.data.entries.find(e => e.name === 'two')
+    f.map.entries.push({ id: two.id, java: 'com.metanet4j.bsv.primitives.Values#two', contract: 'API-TWO', review: 'pending' })
+    f.save()
+    r = f.run()
+    assert.equal(r.status, 1, r.stdout + r.stderr)
+    assert.match(r.stderr, /未完成批次不能标记 done/)
+  } finally { f.close() }
+})
+
+test('API 分批拒绝无效依赖、状态冒进和缺少证据的完成声明', () => {
+  const f = apiBatchFixture()
+  const original = structuredClone(f.state)
+  try {
+    for (const [change, message] of [
+      [s => { s.features[0].evidence = [] }, /完成批次缺少证据/],
+      [s => { s.features[0].status = 'not-started' }, /前置事项未完成/],
+      [s => { s.features[1].dependencies = ['missing'] }, /未知依赖/],
+      [s => { s.features[0].dependencies = ['two'] }, /依赖循环/],
+      [s => { s.features[1].id = 'one' }, /功能项 ID 重复/],
+      [s => { s.activeItem = 'one' }, /activeItem/],
+      [s => { s.features[2].dependencies = ['one'] }, /总验收未依赖全部批次/],
+      [s => { s.features[0].module = 'auth' }, /文件模块不符/],
+      [s => { s.features[0].parentId = 'other' }, /API 批次父项/]
+    ]) {
+      Object.assign(f.state, structuredClone(original))
+      change(f.state); f.save()
+      const r = f.run()
+      assert.equal(r.status, 1, r.stdout + r.stderr)
+      assert.match(r.stderr, message)
+    }
+  } finally { f.close() }
+})
+
+test('API 分批不能遗漏零声明导出文件，也不能重复分配或随意增加文件', () => {
+  const f = apiBatchFixture()
+  const original = structuredClone(f.state)
+  try {
+    for (const [change, message] of [
+      [s => { s.features[1].apiFiles.pop() }, /漏文件.*index.ts/],
+      [s => { s.features[1].apiFiles.push('src/primitives/one.ts') }, /重复归属/],
+      [s => { s.features[1].apiFiles.push('src/primitives/unknown.ts') }, /未知文件/]
+    ]) {
+      Object.assign(f.state, structuredClone(original))
+      change(f.state); f.save()
+      const r = f.run()
+      assert.equal(r.status, 1, r.stdout + r.stderr)
+      assert.match(r.stderr, message)
+    }
+    Object.assign(f.state, structuredClone(original))
+    f.state.features[1].apiFiles.pop(); f.save()
+    // 即使冻结清单与批次同时删除零声明文件，固定源码重新扫描仍必须识别。
+    const missing = structuredClone(f.data)
+    missing.files = missing.files.filter(e => e.path !== 'src/primitives/index.ts')
+    missing.exports = missing.exports.filter(e => e.file !== 'src/primitives/index.ts')
+    fs.writeFileSync(f.catalog, JSON.stringify(missing))
+    const r = f.run()
+    assert.equal(r.status, 1, r.stdout + r.stderr)
+    assert.match(r.stderr, /清单与固定源码不一致/)
+  } finally { f.close() }
+})

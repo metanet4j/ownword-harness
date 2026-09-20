@@ -16,6 +16,7 @@
 python3 inventory-tests.py  # 重建上游测试文件及辅助向量清单
 node test-audit.test.cjs    # 检查器自身正常与反例测试
 node audit-api.cjs check    # 重新扫描源码并检查 Java API 映射；当前应报告未完成
+node audit-api.cjs batches  # 核对所有批次覆盖、依赖和状态，显示逐批进度
 node api-values-probe.mjs  # 观察固定 TS 的数值/容器/模运算边界；输出不是测试报告
 python3 audit-tests.py check # 整模块用例、映射、执行报告及实际结果验收
 ```
@@ -36,4 +37,4 @@ Maven 和 pnpm 分别使用 `./mvn.sh`、`./pnpm.sh`；这两个入口固定工�
 
 [实施前审查](doc/实施前审查-20260920-115837.md)确认可以进入 P0；七个 P0 功能项及后续完整模块阶段已登记在 [feature_list.json](feature_list.json)，范围复核及[完整 TS 基线](doc/TS完整基线-20260920-124400.md)已完成（5329/5329，含原规模 manual）；当前正在推进 `migration-api-contract`，已复核文件、剩余映射和授权差异见[当前进度](progress.md)及[API 契约](doc/完整模块与API映射-20260920-122800.md)。P1 以前必须完成 P0 联合验收。
 
-逐步执行入口：[模块迁移计划](doc/模块迁移计划-20260920-103547.md)中的“文件和脚本的职责”“按顺序执行”和“单行为执行示例”，逐项说明输入、脚本、产物与完成条件；尚未实现的运行/采集入口已明确标记。后续交接：[session-handoff.md](session-handoff.md)。
+逐步执行入口：[模块迁移计划](doc/模块迁移计划-20260920-103547.md)中的“API 设计分批”“文件和脚本的职责”“按顺序执行”和“单行为执行示例”，逐项说明输入、脚本、产物与完成条件；尚未实现的运行/采集入口已明确标记。后续交接：[session-handoff.md](session-handoff.md)。

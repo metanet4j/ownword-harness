@@ -5,6 +5,7 @@
 1. 确认当前目录，阅读 `../AGENTS.md`、`../mvn-command.md`、本文件和 `README.md`。
 2. 读取 `feature_list.json`、`progress.md`、`session-handoff.md`；一次只推进一个事项。
 3. 运行 `./init.sh`，检查分支、固定上游、工具链和环境隔离；修改前检查各仓库状态。
+4. API 设计阶段读取 feature_list.json 的 apiBatchPolicy 和 activeItem 批次，执行 `node audit-api.cjs batches` 核对完整文件归属、状态与依赖。一次推进一个批次，完成设计不表示完整模块已实现；全部批次完成后才执行 migration-api-contract 总验收。
 
 ## 范围与授权
 
