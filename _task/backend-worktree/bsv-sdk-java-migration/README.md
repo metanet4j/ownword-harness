@@ -1,12 +1,14 @@
 # BSV SDK Java 迁移工作区
 
-以本地固定的 `reference/ts-stack/packages/sdk` 为参考。四个 Java worktree 基于各自 `feature/java25`，分支、版本与工具路径由 [workspace.json](workspace.json) 维护。
+以本地固定的 `reference/ts-stack/packages/sdk` 为参考。四个既有 Java worktree 基于各自 `feature/java25`；新增同级独立工程 [metanet4j-bsv-sdk](metanet4j-bsv-sdk/README.md) 承载 TS 完整模块，包名为 `com.metanet4j.bsv`。新仓库以骨架提交建立自己的 `feature/java25` 基线，再创建迁移分支。分支、版本与工具路径由 [workspace.json](workspace.json) 维护。
 
 在本目录运行：
 
 ```bash
 ./init.sh                 # 只读环境检查
-./verify.sh java-build   # 四仓构建，跳过测试执行
+./verify.sh bsv-test     # 新 SDK 单元测试，核对实际用例和分包执行数
+./verify.sh bsv-build    # 新 SDK 测试通过后打包安装
+./verify.sh java-build   # 五仓构建，跳过测试执行
 ./verify.sh java-smoke   # 现有 SDK 离线回归
 ./verify.sh ts-build     # 上游 SDK 构建
 ./verify.sh ts-smoke     # 固定九个文件的离线算法测试

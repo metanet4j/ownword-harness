@@ -47,11 +47,28 @@
       ]
     },
     {
+      "id": "migration-core-project",
+      "name": "metanet4j-bsv-sdk 独立工程初始化",
+      "description": "在任务根目录建立同级 metanet4j-bsv-sdk Maven/Git 工程，初始化完整模块目录、Java 25 测试与验证入口。",
+      "dependencies": [
+        "migration-audit"
+      ],
+      "status": "done",
+      "evidence": [
+        "metanet4j-bsv-sdk：独立 Git/Maven 工程，Java 25、JUnit、四个完整模块及测试/向量目录；新仓库的 feature/java25 骨架基线见 workspace.json。",
+        "./verify.sh bsv-build：基础用例 1/1 通过，失败/错误/跳过均 0，随后安装 JAR 到任务缓存；字节码 major 69。",
+        "TDD：缺少 UTF-8 资源时 1 个断言失败，添加资源后 1/1 通过；日志 bsv-sdk-bootstrap-red.log、bsv-sdk-bootstrap-green.log。",
+        "./verify.sh java-smoke：既有 SDK 离线回归 3/3 通过；node test-audit.test.cjs：23/23 通过。",
+        "./init.sh：五仓分支/基线、独立目标目录、固定上游与隔离工具检查通过；audit-tests.py revision 已纳入新仓库。",
+        "doc/环境检查报告-20260920-101559.md：实测结果与边界。工程基础测试不计入 TS 移植用例，Java 功能映射仍为 0。"
+      ]
+    },
+    {
       "id": "migration-map",
       "name": "依赖映射与实施范围收敛",
       "description": "P0：完整模块 API/行为、依赖与逐用例/断言映射，复核 AST 语义位置与跨目录测试，落实真实输入重放和结果采集；不得按调用的方法裁剪。",
       "dependencies": [
-        "migration-audit"
+        "migration-core-project"
       ],
       "status": "not-started",
       "evidence": []

@@ -196,7 +196,7 @@ def collect():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='command', required=True)
-    sub.add_parser('revision', help='生成四个 Java 仓库当前提交及工作树文件摘要，供真实结果采集记录')
+    sub.add_parser('revision', help='生成已登记 Java 仓库当前提交及工作树文件摘要，供真实结果采集记录')
     inventory = sub.add_parser('inventory', help='清点所有已选整模块，含参数化/循环注册与 manual 文件；不执行测试体')
     inventory.add_argument('--output', default=str(TASK / 'module-tests.json'))
     for name in ('compare', 'check'):

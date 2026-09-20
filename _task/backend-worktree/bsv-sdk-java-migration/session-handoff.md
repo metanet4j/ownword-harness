@@ -2,11 +2,12 @@
 
 ## 状态
 
-用户明确要求完整模块迁移，不能只迁移业务调用的方法。四个完整模块已清点，检查器及 23 项自测通过。Java 映射与生产移植尚未开始，真实结果采集适配器待实现，最终 check 当前应失败。
+用户明确要求完整模块迁移，不能只迁移业务调用的方法。四个完整模块已清点，检查器及 23 项自测通过。同级独立工程 metanet4j-bsv-sdk 已创建、测试和打包，基础测试 1/1 与既有 SDK 离线回归 3/3 通过。Java 映射与生产移植尚未开始，真实结果采集适配器待实现，最终 check 当前应失败。
 
 ## Files
 
-- `workspace.json`：四仓 feature/java25 起点、迁移分支、TS 固定提交与工具版本。
+- `workspace.json`：四个既有 worktree 与新独立仓库的基线、迁移分支、Java 目标工程和包名、TS 固定提交与工具版本。
+- `metanet4j-bsv-sdk/README.md`：新工程的包、测试、向量目录及 Git 基线策略；`./verify.sh bsv-test|bsv-build` 为测试与打包入口。
 - `README.md`、`init.sh`、`mvn.sh`、`pnpm.sh`、`verify.sh`：环境使用与验证入口。
 - `upstream-tests.json`、`inventory-tests.py`：全 SDK 测试文件及辅助向量清单，含校验值。
 - `module-scope.json`、`module-tests.json`：完整模块范围、静态依赖、全部文件校验值、4,275 个注册用例与 AST 复核位置。
@@ -18,7 +19,7 @@
 
 ## Blockers
 
-环境无阻塞。实施阶段按模块计划推进；公共 core 落点与公开 Java 类型兼容在 P0 收敛，架构变更按工作区规则处理，不能将环境验收自动视作公共模块拆分批准。
+环境与工程初始化无阻塞。用户已明确并确认 Java 目标为任务根目录下的同级 metanet4j-bsv-sdk，不能再次嵌套进 metanet4j-sdk。新仓库建立自己的 feature/java25 基线后创建迁移分支；公开 Java 类型及兼容策略仍在 P0 收敛。
 
 ## Next Session
 
@@ -28,4 +29,4 @@
 
 开始新增 Java 测试前，具体接口边界须满足 tdd 技能要求；按用户指定上游测试逐项映射，任何尚未确认的接口差异须先解决。一次只写一个失败测试并实现使其通过，保留 RED/GREEN 与两端实际结果。每阶段重跑已完成模块；全部范围内用例执行通过、逐项结果一致且核对无遗漏之前，不得标记迁移完成。
 
-四个 worktree 保持 feature/java25 起点，未改 Java/POM，未推送。根仓既有无关规则/技能修改继续保留，不混入本任务提交。
+四个既有 worktree 保持 feature/java25 起点，未改其 Java/POM；新工程骨架已独立提交，源码版本校验已包含该仓库。新工程的 infrastructure 测试不属于 TS 功能复刻，不能加入上游映射充数。未推送。根仓既有无关规则/技能修改继续保留，不混入本任务提交。

@@ -7,6 +7,11 @@
       "baseCommit": "50598c09fda28720ce66a1c69533e81cccc22b57"
     },
     {
+      "name": "metanet4j-bsv-sdk",
+      "kind": "new-repository",
+      "baseCommit": "b4441dce8fbd9bfadb0f760bb057355aad6ed6d1"
+    },
+    {
       "name": "metanet4j-base",
       "source": "_task/backend-worktree/boot4-java25-upgrade/metanet4j-base",
       "baseCommit": "6e16cfa9e838f226ebbb5382203a199d1391da46"
@@ -46,5 +51,9 @@
   "globalCommandVersions": {
     "node": "v24.14.0",
     "pnpm": "11.23.0"
+  },
+  "javaTarget": {
+    "project": "metanet4j-bsv-sdk",
+    "package": "com.metanet4j.bsv"
   }
 }

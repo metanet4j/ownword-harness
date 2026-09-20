@@ -31,7 +31,21 @@ for repo in d['repositories']:
         status = cmd('git', '-C', str(p), 'status', '--porcelain')
         if status:
             print('[WARN]', repo['name'], '有未提交修改，提交前核对归属')
-    check(repo['name'] + ' worktree、分支与基线', verify_repo)
+    check(repo['name'] + ' 仓库、分支与基线', verify_repo)
+def verify_java_target():
+    import xml.etree.ElementTree as E
+    target = d['javaTarget']
+    assert target['project'] in {r['name'] for r in d['repositories']}
+    project = task / target['project']
+    ns = {'m': 'http://maven.apache.org/POM/4.0.0'}
+    pom = E.parse(project / 'pom.xml').getroot()
+    assert pom.findtext('m:artifactId', namespaces=ns) == target['project']
+    package = target['package'].replace('.', '/')
+    for module in json.loads((task / 'module-scope.json').read_text())['selectedModules']:
+        assert (project / 'src/main/java' / package / module / 'package-info.java').is_file()
+        assert (project / 'src/test/java' / package / module).is_dir()
+        assert (project / 'src/test/resources/upstream' / module).is_dir()
+check('独立 Java 目标工程与整模块目录', verify_java_target)
 upstream = workspace / d['upstream']['path']
 def verify_upstream():
     assert cmd('git', '-C', str(upstream), 'rev-parse', 'HEAD') == d['upstream']['commit']

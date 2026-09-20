@@ -8,6 +8,7 @@ d = json.load(open(sys.argv[1]))
 for key in ('javaHome', 'maven', 'mavenSettings', 'node'):
     print(d['tools'][key])
 print(d['upstream']['path'])
+print(d['javaTarget']['project'])
 PY
 )" || return 1
 mapfile -t MIGRATION_VALUES <<< "$MIGRATION_CONFIG"
@@ -16,6 +17,7 @@ MIGRATION_MVN="${MIGRATION_VALUES[1]}"
 MIGRATION_SETTINGS="${MIGRATION_VALUES[2]}"
 MIGRATION_NODE="${MIGRATION_VALUES[3]}"
 MIGRATION_UPSTREAM="$MIGRATION_WORKSPACE/${MIGRATION_VALUES[4]}"
+MIGRATION_JAVA_TARGET="${MIGRATION_VALUES[5]}"
 MIGRATION_PNPM="$MIGRATION_ROOT/.cache/tools/pnpm/node_modules/pnpm/bin/pnpm.cjs"
 export PATH="$MIGRATION_ROOT/.cache/tools/pnpm/node_modules/.bin:$(dirname "$MIGRATION_NODE"):$JAVA_HOME/bin:$PATH"
 export npm_config_cache="$MIGRATION_ROOT/.cache/npm"
