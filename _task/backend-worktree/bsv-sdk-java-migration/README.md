@@ -31,4 +31,6 @@ Maven 和 pnpm 分别使用 `./mvn.sh`、`./pnpm.sh`；这两个入口固定工�
 
 当前检查器自测通过；Java 映射、真实结果采集和生产迁移尚未完成，所以 `audit-tests.py check` 应返回失败并报告缺失。`init.sh`、`verify.sh` 的环境检查与冒烟不能代替迁移验收。
 
+[实施前审查](doc/实施前审查-20260920-115837.md)确认可以进入 P0；七个 P0 功能项及后续完整模块阶段已登记在 [feature_list.json](feature_list.json)，下一项为 `migration-scope-review`。P1 以前必须完成 P0 联合验收。
+
 逐步执行入口：[模块迁移计划](doc/模块迁移计划-20260920-103547.md)中的“文件和脚本的职责”“按顺序执行”和“单行为执行示例”，逐项说明输入、脚本、产物与完成条件；尚未实现的运行/采集入口已明确标记。后续交接：[session-handoff.md](session-handoff.md)。

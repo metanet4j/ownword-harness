@@ -64,14 +64,233 @@
       ]
     },
     {
-      "id": "migration-map",
-      "name": "依赖映射与实施范围收敛",
-      "description": "P0：完整模块 API/行为、依赖与逐用例/断言映射，复核 AST 语义位置与跨目录测试，落实真实输入重放和结果采集；不得按调用的方法裁剪。",
+      "id": "migration-readiness",
+      "phase": "准备",
+      "name": "实施前计划与环境审查",
+      "description": "审查完整模块计划、脚本边界、仓库和工具链；复验构建、冒烟及验收检查器，登记 P0 开工结论。",
       "dependencies": [
         "migration-core-project"
       ],
+      "status": "done",
+      "acceptanceCriteria": [
+        "本轮环境、构建和已指定冒烟有真实报告；正式门禁仍拒绝未迁移用例。",
+        "P0 前置缺口有独立功能项、依赖和验收条件，不将 P0 可开工等同于 P1 可验收。"
+      ],
+      "evidence": [
+        "doc/实施前审查-20260920-115837.md：可以进入 P0；P1 生产模块迁移依赖 P0 联合验收。",
+        "./init.sh：仓库、基线、目标工程、固定 TS 源码与工具链检查通过；五个 Java 仓库干净。",
+        "./verify.sh java-build：五仓构建通过（跳过执行测试），component 22 个 reactor 项目成功。",
+        "./verify.sh bsv-build、java-smoke：基础测试 1/1、业务回归 3/3 通过；JAR 安装通过。",
+        "./verify.sh ts-build、ts-smoke：构建通过；9 文件、191/191 用例通过。",
+        "node test-audit.test.cjs：23/23 通过；audit-tests.py check 如期拒绝缺失 4275 个 Java 映射。",
+        "宿主 infra/status.sh：5 容器 healthy、5 端口可连接；只读观察。",
+        "功能项、依赖图、状态与文档校验记录于 .cache/evidence/readiness-state.log；未完成采集和全模块 TS 基线已作为 P0 功能项。"
+      ]
+    },
+    {
+      "id": "migration-scope-review",
+      "phase": "P0",
+      "name": "P0 完整模块与依赖范围复核",
+      "description": "以真实 Java 调用确定入口，复核完整 TS 模块与全部依赖，不按调用的方法裁剪。",
+      "dependencies": [
+        "migration-readiness"
+      ],
       "status": "not-started",
+      "steps": [
+        "对照 module-scope.json、upstream-tests.json 和实际 Java/TS 源码，复核选定模块全部子目录、依赖和跨目录测试。",
+        "为 pending 模块逐项记录是否纳入及依据；若范围扩大，审查候选清单差异并调整累计阶段。"
+      ],
+      "outputs": [
+        "带时间戳的完整模块/API 映射文档中的范围与依赖章节",
+        "经审查的 module-scope.json、module-tests.json"
+      ],
+      "acceptanceCriteria": [
+        "所有候选模块有范围结论，依赖闭包与跨目录测试归属无未决项。",
+        "已选模块全部功能、辅助文件与测试保留，AESGCM.man.test.ts 不得排除。",
+        "保存复核依据；scopeReview 总体验收标志在 migration-map 完成时更新。"
+      ],
       "evidence": []
+    },
+    {
+      "id": "migration-api-contract",
+      "phase": "P0",
+      "name": "P0 Java API 与行为兼容方案",
+      "description": "建立全部 TS API/行为到 com.metanet4j.bsv 的对应关系，覆盖没有上游测试的公开能力。",
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "steps": [
+        "逐项登记导出接口、类型、默认值、状态变化、异常、异步行为及 Java 入口。",
+        "明确大整数、无符号字节、编码、前导零与序列化语义；解决内部断言及语言专属差异。",
+        "按既有架构保持底层不依赖 base/sdk，落实 tdd 技能要求的测试接口边界。"
+      ],
+      "outputs": [
+        "完整模块/API 映射文档中的 Java 接口与兼容章节"
+      ],
+      "acceptanceCriteria": [
+        "选定完整模块的 API/行为均有映射，未映射能力和未解决接口差异为零。",
+        "预期来源、异常语义及测试边界明确，不以 Java 实现生成自己的预期。",
+        "业务接入策略没有 base→sdk→base 等依赖环。"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "migration-test-mapping",
+      "phase": "P0",
+      "name": "P0 全部用例与断言映射",
+      "description": "为完整模块每个注册用例、参数行和语义位置登记对应方案，映射不代表实际执行通过。",
+      "dependencies": [
+        "migration-api-contract"
+      ],
+      "status": "not-started",
+      "steps": [
+        "重新清点候选清单并与冻结清单比较，在 test-map.json 登记每个上游 ID 的拟定 Java 测试入口。",
+        "逐项复核辅助断言、条件注册、循环、forEach 和属性样本；登记断言位置、样本标识和预期执行约束。",
+        "拟定 Java 名称在逐行为 TDD 执行后用 Surefire 实际名称校准。"
+      ],
+      "outputs": [
+        "test-map.json 的 cases 和 siteReviews",
+        "可供运行采集核对的断言与样本预期约束"
+      ],
+      "acceptanceCriteria": [
+        "当前基线 4275 个注册用例及 4856 个 AST 位置逐项有依据；范围变化以重新审查的清单为准。",
+        "静态扫描未覆盖的辅助断言和动态样本经源码复核补齐，不把注册数当断言数。",
+        "不自动填 reviewed、不批量生成未验证 Java 测试、不把计划映射计为已通过。"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "migration-ts-baseline",
+      "phase": "P0",
+      "name": "P0 完整 TS 模块运行入口与基线",
+      "description": "实现读取冻结范围的真实 TS 测试运行入口，覆盖全部选定模块和 manual 用例。",
+      "dependencies": [
+        "migration-scope-review"
+      ],
+      "status": "not-started",
+      "steps": [
+        "在任务侧配置完整模块运行入口，保持固定上游源码和断言不变；审查网络模拟，阻止真实钱包和广播调用。",
+        "对 AES-GCM 超过 512 MiB 输入的 manual 用例单独评估峰值内存、运行时间和日志采集，保留原始输入规模并实际执行。",
+        "保存本次完整 Jest 报告、命令、源码版本及资源记录，处理上游失败和不稳定用例。"
+      ],
+      "outputs": [
+        "可重跑的完整模块 TS 运行命令及文档",
+        "全部选定模块的原始 Jest 报告与基线日志",
+        "manual 资源预算与实际执行证据"
+      ],
+      "acceptanceCriteria": [
+        "真实执行文件、名称及重复出现次数与冻结清单一致，全部通过且零跳过/禁用/todo。",
+        "manual 必须实际执行；不能通过缩小输入、排除测试或修改断言完成基线。",
+        "上游失败或资源限制保持未完成，完整 TS 基线未通过不得完成 P0。"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "migration-input-replay",
+      "phase": "P0",
+      "name": "P0 输入语料记录与 Java 重放",
+      "description": "保留相同实际输入和前置状态，解决跨语言随机、属性、时钟与网络 fixture 的重放。",
+      "dependencies": [
+        "migration-test-mapping",
+        "migration-ts-baseline"
+      ],
+      "status": "not-started",
+      "steps": [
+        "导出 TS 实际生成的数据、seed/replay 信息、前置状态、循环次数及收缩样本，版本管理必要语料。",
+        "在 Java 测试边界重放同一输入；保持生产随机源语义，保留随机源自身原有行为测试。",
+        "大向量保存可追踪的二进制数据或确定性构造描述；保留实际结果并支持逐字节比较。"
+      ],
+      "outputs": [
+        "有源码和校验值关联的确定性输入语料及重放入口"
+      ],
+      "acceptanceCriteria": [
+        "逐用例与逐样本两端输入、前置状态一致；不能只使用相同 seed 宣称输入相同。",
+        "循环/属性运行次数、生成器约束和收缩语义不缩水。",
+        "无法进行字节相等比较的随机源测试有明确原行为验证和可控输入对照方案。"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "migration-result-capture",
+      "phase": "P0",
+      "name": "P0 TS/Java 真实逐断言结果采集",
+      "description": "实现采集器，记录两端各自运行观察到的值、异常和可见状态，并关联同次原始报告。",
+      "dependencies": [
+        "migration-input-replay"
+      ],
+      "status": "not-started",
+      "steps": [
+        "采集每条断言与样本的实际输入输出、调用次数和有意义的顺序，保留无损类型与原始值。",
+        "由执行流程生成 parity-results.json，绑定上游提交、javaRevision、清单及 Jest/Surefire 报告校验值。",
+        "使用独立基础设施用例验证两端执行到结果文件的完整通路；不得计入 SDK 复刻数量。"
+      ],
+      "outputs": [
+        "真实 TS/Java 采集器、标准化规则和执行命令",
+        "由运行生成的结果文件及原始报告关联"
+      ],
+      "acceptanceCriteria": [
+        "保留原始断言语义和实际执行次数，不复制 TS 输出充作 Java 实际输出。",
+        "字节、异常、undefined/null、数字类型等按测试契约无损比较。",
+        "缺失采集、重复 ID、输入改变或执行失败均返回非零，完整 SDK 结果随 P1/P2 实现逐项形成。"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "migration-evidence-gate",
+      "phase": "P0",
+      "name": "P0 证据完整性与验收流程验证",
+      "description": "将预期断言/样本约束、实际运行轨迹和结果比较连接起来，验证无法靠缩减登记清单取得通过。",
+      "dependencies": [
+        "migration-result-capture"
+      ],
+      "status": "not-started",
+      "steps": [
+        "扩展现有检查器，核对预期断言/样本、TS 运行轨迹、Java 运行轨迹和映射；从实际输入产物复核校验值。",
+        "增加少一个循环样本、两端同时少登记断言、陈旧报告、字节差异及无测试执行等反例，保留 RED/GREEN。",
+        "落实报告命令和执行顺序；clean test、重新打包或提交后按当前源码版本重新采集，不混用报告。",
+        "补齐 feature_list 状态约束：唯一 ID、有效依赖、无环、activeItem 与状态一致，未完成依赖不能进入后续实施。"
+      ],
+      "outputs": [
+        "增强后的 audit-tests.py 与检查器自测",
+        "可重现的完整运行/采集/验收命令及状态验证"
+      ],
+      "acceptanceCriteria": [
+        "既有 23 项自测与新增反例全部通过，反例确实以非零退出。",
+        "同一循环样本或断言从映射及两端结果同时删掉仍被独立的预期/运行记录识别。",
+        "注册用例、断言/样本和完整 API 清单分别核对，不能仅依赖总数或人工 reviewed 标记。"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "migration-map",
+      "name": "P0 前置准备联合验收",
+      "description": "P0：完整模块 API/行为、依赖与逐用例/断言映射，复核 AST 语义位置与跨目录测试，落实真实输入重放和结果采集；不得按调用的方法裁剪。",
+      "dependencies": [
+        "migration-scope-review",
+        "migration-api-contract",
+        "migration-test-mapping",
+        "migration-ts-baseline",
+        "migration-input-replay",
+        "migration-result-capture",
+        "migration-evidence-gate"
+      ],
+      "status": "not-started",
+      "evidence": [],
+      "phase": "P0",
+      "kind": "gate",
+      "steps": [
+        "逐项核对七个 P0 功能项的真实产物与证据，关闭范围/API/采集未决项。",
+        "完成 scopeReview 并更新与范围关联的清单，明确下一阶段完整模块累计范围。"
+      ],
+      "outputs": [
+        "P0 验收报告及可执行的模块迁移入口"
+      ],
+      "acceptanceCriteria": [
+        "七个 P0 功能项均完成，接口映射、完整 TS 基线、输入重放、真实采集和反例门禁验证齐全。",
+        "Java 模块尚未实现时完整 check 可以因未实现而失败，P0 不得声称 SDK 全部通过。",
+        "只有本项完成才可进入 P1 生产模块迁移。"
+      ]
     },
     {
       "id": "migration-core-modules",
@@ -81,7 +300,27 @@
         "migration-map"
       ],
       "status": "not-started",
-      "evidence": []
+      "evidence": [],
+      "phase": "P1",
+      "modules": [
+        "primitives",
+        "script",
+        "transaction"
+      ],
+      "steps": [
+        "按模块迁移计划逐行为执行 TDD，保存 RED/GREEN、真实输入输出及完成项提交。",
+        "执行本阶段完整范围和此前模块的累计测试、结果比较及 API/行为核对。"
+      ],
+      "outputs": [
+        "完整实现、测试和向量",
+        "本阶段原始执行报告、逐项比较结果及验收报告"
+      ],
+      "acceptanceCriteria": [
+        "所有依赖功能项完成；测试与结果证据匹配当前固定上游及 Java 源码。",
+        "阶段内全部功能和测试完整交付，遗漏/未映射/未执行/跳过/未比较/未解决差异为零。",
+        "旧 Java 业务回归独立登记；不能用冒烟或跳过测试的构建代替累计验收。",
+        "三个循环依赖模块完整联合验收，命令包含 --module primitives --module script --module transaction；内部行为里程碑不等于模块完成。"
+      ]
     },
     {
       "id": "migration-compat-module",
@@ -91,7 +330,25 @@
         "migration-core-modules"
       ],
       "status": "not-started",
-      "evidence": []
+      "evidence": [],
+      "phase": "P2",
+      "modules": [
+        "compat"
+      ],
+      "steps": [
+        "按模块迁移计划逐行为执行 TDD，保存 RED/GREEN、真实输入输出及完成项提交。",
+        "执行本阶段完整范围和此前模块的累计测试、结果比较及 API/行为核对。"
+      ],
+      "outputs": [
+        "完整实现、测试和向量",
+        "本阶段原始执行报告、逐项比较结果及验收报告"
+      ],
+      "acceptanceCriteria": [
+        "所有依赖功能项完成；测试与结果证据匹配当前固定上游及 Java 源码。",
+        "阶段内全部功能和测试完整交付，遗漏/未映射/未执行/跳过/未比较/未解决差异为零。",
+        "旧 Java 业务回归独立登记；不能用冒烟或跳过测试的构建代替累计验收。",
+        "compat 全部功能及此前三个模块累计通过默认全范围 check；依赖复核新增的范围同样纳入。"
+      ]
     },
     {
       "id": "migration-sdk-adapters",
@@ -101,7 +358,22 @@
         "migration-compat-module"
       ],
       "status": "not-started",
-      "evidence": []
+      "evidence": [],
+      "phase": "P3",
+      "steps": [
+        "按模块迁移计划逐行为执行 TDD，保存 RED/GREEN、真实输入输出及完成项提交。",
+        "执行本阶段完整范围和此前模块的累计测试、结果比较及 API/行为核对。"
+      ],
+      "outputs": [
+        "完整实现、测试和向量",
+        "本阶段原始执行报告、逐项比较结果及验收报告"
+      ],
+      "acceptanceCriteria": [
+        "所有依赖功能项完成；测试与结果证据匹配当前固定上游及 Java 源码。",
+        "阶段内全部功能和测试完整交付，遗漏/未映射/未执行/跳过/未比较/未解决差异为零。",
+        "旧 Java 业务回归独立登记；不能用冒烟或跳过测试的构建代替累计验收。",
+        "受影响业务调用、公开 API 兼容和旧依赖去向有实际证据；集成测试按宿主环境规则执行。"
+      ]
     },
     {
       "id": "migration-downstream",
@@ -111,7 +383,23 @@
         "migration-sdk-adapters"
       ],
       "status": "not-started",
-      "evidence": []
+      "evidence": [],
+      "phase": "P4",
+      "steps": [
+        "按模块迁移计划逐行为执行 TDD，保存 RED/GREEN、真实输入输出及完成项提交。",
+        "执行本阶段完整范围和此前模块的累计测试、结果比较及 API/行为核对。"
+      ],
+      "outputs": [
+        "完整实现、测试和向量",
+        "本阶段原始执行报告、逐项比较结果及验收报告"
+      ],
+      "acceptanceCriteria": [
+        "所有依赖功能项完成；测试与结果证据匹配当前固定上游及 Java 源码。",
+        "阶段内全部功能和测试完整交付，遗漏/未映射/未执行/跳过/未比较/未解决差异为零。",
+        "旧 Java 业务回归独立登记；不能用冒烟或跳过测试的构建代替累计验收。",
+        "受影响业务调用、公开 API 兼容和旧依赖去向有实际证据；集成测试按宿主环境规则执行。"
+      ]
     }
-  ]
+  ],
+  "nextItem": "migration-scope-review"
 }
