@@ -1,0 +1,125 @@
+{
+  "checkedAt": "2026-09-18T23:21:04.814056+08:00",
+  "result": "passed",
+  "scope": "H00 设计审查、环境准备和既有基线检查；不是 Artifact 实现、用户视觉或生产验收。",
+  "designReview": "_task/system-design/spec/prd/v0.3.0/设计审查v0.3.0-20260918-225543.md",
+  "baseline": {
+    "commit": "006acbf3cb551bf3c5de68681420238667dab06d",
+    "branch": "codex/prototype-v0.3.0-artifact",
+    "worktreeClean": true,
+    "sourceCheckoutCommit": "a66a3baadd92f4dbc797ddaaccb8f1a4944172cf",
+    "sourceCheckoutClean": true,
+    "sourceCheckoutChanged": false
+  },
+  "checks": [
+    {
+      "name": "PowerShell 启动入口",
+      "result": "passed",
+      "command": "./init.ps1",
+      "evidence": "bootstrap-powershell.txt"
+    },
+    {
+      "name": "Git Bash 启动入口",
+      "result": "passed",
+      "command": "./init.sh",
+      "evidence": "bootstrap-bash.txt"
+    },
+    {
+      "name": "harness 结构",
+      "result": "passed",
+      "score": "100/100",
+      "limit": "仅结构检查，不代表功能验收。"
+    },
+    {
+      "name": "任务状态与依赖",
+      "result": "passed",
+      "features": 10,
+      "bddScenarios": 33,
+      "bddMapped": 33,
+      "artifactFeaturesStarted": 0
+    },
+    {
+      "name": "JS/JSX 和既有模型",
+      "result": "passed",
+      "identityModelAssertions": 92,
+      "contentModelCommand": "node ownword-prototype/check-content.cjs",
+      "evidence": "bootstrap-powershell.txt"
+    },
+    {
+      "name": "S2 消费资源与运行时导出",
+      "result": "passed",
+      "components": {
+        "ActionButton": true,
+        "ActionMenu": true,
+        "Button": true,
+        "CardView": true,
+        "Dialog": true,
+        "Disclosure": true,
+        "FileTrigger": true,
+        "InlineAlert": true,
+        "Skeleton": true,
+        "StatusLight": true,
+        "Tabs": true,
+        "TextField": true
+      },
+      "scope": "恢复的 bundle、manifest、prompt 与基线一致；消费副本不包含完整生成工程。"
+    },
+    {
+      "name": "浏览器基线正常流程",
+      "result": "passed",
+      "steps": [
+        "打开预览欢迎页",
+        "Connect Wallet → 模拟钱包 Approve",
+        "等待 My Identity / Maya Chen",
+        "My content → 基线草稿工作台"
+      ],
+      "evidence": [
+        "baseline-desktop.png",
+        "baseline-identity-desktop.png",
+        "baseline-content-desktop.png",
+        "baseline-desktop.json"
+      ],
+      "visualReview": "欢迎页、身份页与内容页截图均已查看。"
+    },
+    {
+      "name": "320px 手机边界",
+      "result": "passed",
+      "viewport": {
+        "height": 900,
+        "width": 320
+      },
+      "documentWidth": 320,
+      "evidence": [
+        "baseline-content-mobile.png",
+        "baseline-mobile.json"
+      ],
+      "visualReview": "已查看截图，无横向溢出或主要操作遮挡。"
+    },
+    {
+      "name": "浏览器日志",
+      "result": "passed",
+      "runtimeErrors": [],
+      "evidence": [
+        "browser-errors.json",
+        "browser-console.txt"
+      ],
+      "notes": "React DevTools 提示和浏览器内 Babel 的原型开发警告属于基线行为。"
+    },
+    {
+      "name": "端口冲突",
+      "result": "passed",
+      "evidence": [
+        "port-conflict.json",
+        "port-conflict.txt"
+      ],
+      "notes": "重复启动退出码 1，EADDRINUSE；未变更原服务 PID，Node fetch 完整读取返回 HTTP 200。"
+    }
+  ],
+  "limitations": [
+    "未实施 A01–A09；当前预览标题和内容仍为 v0.2.0 基线。",
+    "未调用真实钱包、链上交易或 metanet4j API。",
+    "没有执行全量旧版浏览器回归、构建完整 S2 生成工程或宣称用户视觉复核通过。"
+  ],
+  "status": "needs-review",
+  "nextStep": "向用户交付环境；收到后续制作指示后开始 A01。"
+}

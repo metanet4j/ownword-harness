@@ -1,11 +1,7 @@
 # 当前交接
 
-当前事项 `design-artifact-v030-doc` 为 `needs-review`。本轮设计文档已写完并检查，尚待用户复核；未进入页面制作或生产实现。
+v0.3.0 查找身份页 R21 已重新设计并移除演示样例按钮，源码、验证与原型提交齐备，等待用户视觉复核。原型提交 9aedd92b669e61ab2c2e495cf83893d21714a250，无进行中实现事项。
 
-续接时先读[任务指南](AGENTS.md)、[功能清单](feature_list.json)和[进展](progress.md)，再按需查阅[核心认知](spec/核心认知.md)及[v0.3.0 设计文档](spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md)。用户对 identityKey 的澄清已完成，不重复提问；设计事实以核心认知为准，生产契约待验证项见其第 12 节。
+状态与验收只查[版本任务清单](../prototype-worktree/ownword-v0.3.0/feature_list.json)和[R21 验证记录](../prototype-worktree/ownword-v0.3.0/ownword-prototype/evidence/artifact-v030/R21/verification.json)。本轮为页面布局和表达调整，产品规则仍以核心认知及PRD为准。
 
-已检查文档链接、BDD 唯一性与功能映射、任务 JSON 和差异格式；具体结果见进展。未运行原型、浏览器或真实交易验证。
-
-后续制作前按设计文档第 9 节恢复或定位 v0.2.0 已提交基线，并核实绑定的 S2 资源。当前缺失的原型 worktree 不可当作可运行成果，旧 v0.1 也不可冒充 v0.2.0 基线；本轮未创建 worktree 或改动旧版原型。
-
-唯一下一步：用户复核核心认知及 v0.3.0 设计文档。
+唯一下一步：用户复核查询页。预览 http://127.0.0.1:4313/?design=find#/find 保留，测试会话已关闭；未合并或推送。续接先读版本 harness 的 AGENTS.md 与状态文件。

@@ -59,7 +59,7 @@ react-spectrum skill：Spectrum S2 的组件、Token、交互与 Accessibility �
 
 ## 按场景加载规范
 
-命中下列场景时读取对应规范。
+命中下列场景时读取对应规范，已加载无需重读。各规范的来源与适用范围见对应文件，已有明确审批、验证及委派门禁仍适用。
 
 | 使用场景 | 规范 |
 | --- | --- |
@@ -68,6 +68,7 @@ react-spectrum skill：Spectrum S2 的组件、Token、交互与 Accessibility �
 | 回复用户、编写文档、说明技术工作 | [沟通与写作](standard/沟通与写作-20260917-194638.md) |
 | 已明确要求使用子代理协作 | [子代理协作](standard/子代理协作-20260917-194638.md) |
 | 选择验证范围、运行检查或判断是否完成 | [测试与验证](standard/测试与验证-20260917-194638.md) |
+| 设计、修改或评审 OwnWord 界面与原型，核对设计系统使用 | [OwnWord 设计与设计系统](standard/OwnWord设计与设计系统-20260919-145841.md) |
 
 ## Working Rules
 
