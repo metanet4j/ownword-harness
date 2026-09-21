@@ -41,13 +41,15 @@ react-spectrum skill
 - 术语与命名；
 - 领域实体与关系；
 - 状态与全局不变量；
+- Spectrum S2 固定设计系统；
+- 「秩序清晰、关系可感知、密度适当、表达精细」四项设计原则；
 - 安全、协议和事实来源边界。
 
 任何设计系统或 skill 都不得修改、补充或重新定义这些事实。缺少新的跨模块事实时，先更新核心认知，再同步下游。
 
 ## 2. Version Design Contract
 
-当前版本设计文档把核心认知落实为：
+当前版本设计文档把核心认知落实为。设计页面时先明确用户任务、信息层级、内容关系和操作顺序，再将核心认知第 10.5 节的四项设计原则落实到具体页面：
 
 - 页面与信息架构；
 - 用户流程；
@@ -101,7 +103,7 @@ Spectrum S2 负责约束：
 
 OwnWord 已固定 Spectrum S2，因此 `baoyu-design` 不再询问“使用哪个主设计系统”；若其通用流程要求选择设计系统，直接选择 Spectrum S2。
 
-它负责组织设计工作，但不拥有 OwnWord 产品事实，也不能覆盖当前版本已经确定的设计约束。
+它负责组织设计工作，但不拥有 OwnWord 产品事实，也不能覆盖当前版本已经确定的设计约束。设计判断必须遵循核心认知第 10.5 节的四项设计原则。
 
 ### design-taste-frontend
 
@@ -126,7 +128,7 @@ OwnWord 已固定 Spectrum S2，因此 `baoyu-design` 不再询问“使用哪�
 | Identity Setup、Wallet Connect | 选择性使用，采用 anti-slop、排版、响应式和检查规则，不重写流程、组件体系与设计系统 |
 | Publish Review、Wallet Confirmation、Settings、Proof / Transaction Details | 轻量使用，只吸收与清晰度、响应式、状态完整性和实现质量相关的规则 |
 
-任何时候，`design-taste-frontend` 都不得为了视觉变化改变既定业务流程、状态机、信息优先级或 Spectrum S2。
+任何时候，`design-taste-frontend` 都不得为了视觉变化改变既定业务流程、状态机、信息优先级或 Spectrum S2，也不得用自身审美规则替换核心认知第 10.5 节的四项设计原则。
 
 ### high-end-visual-design
 
@@ -136,7 +138,7 @@ OwnWord 已固定 Spectrum S2，因此 `baoyu-design` 不再询问“使用哪�
 
 仅当当前页面目标明确需要这种强视觉表达时使用，例如品牌型 Hero 或展示型页面的局部视觉探索。
 
-使用时只采纳与 OwnWord 品牌方向和 Spectrum S2 相容的规则。其字体、卡片结构、按钮结构、阴影、圆角、布局或动效规则如果与 Spectrum S2 冲突，以 Spectrum S2 为准。
+使用时只采纳与 OwnWord 品牌方向、核心认知第 10.5 节四项设计原则和 Spectrum S2 相容的规则。其字体、卡片结构、按钮结构、阴影、圆角、布局或动效规则如果与 Spectrum S2 冲突，以 Spectrum S2 为准。
 
 不得把其固定视觉套路全局应用到 Wallet、Publish、Settings、Proof 等任务型产品 UI。
 
