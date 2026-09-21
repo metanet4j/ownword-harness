@@ -51,7 +51,7 @@ react-spectrum skill：Spectrum S2 的组件、Token、交互与 Accessibility �
 - 核心认知是 OwnWord 产品、设计、原型、代码和测试的唯一事实来源。
 - 当前版本设计文档负责把核心认知落到页面、组件、流程、视觉方向和验收。
 - Spectrum S2 的固定地位和四项设计原则均以核心认知第 10.5 节为事实来源；所有设计任务先明确用户任务、信息层级、内容关系和操作顺序，再进入组件与视觉实现。
-- `baoyu-design` 是主设计执行框架；使用其 design-system 能力时直接采用 Spectrum S2，并遵循核心认知中的「秩序清晰、关系可感知、密度适当、表达精细」四项设计原则。
+- `baoyu-design` 是主设计执行框架；使用其 design-system 能力时直接采用 Spectrum S2，并遵循核心认知中的「秩序清晰、关系可感知、密度适当、表达准确」四项设计原则。
 - `design-taste-frontend` 按页面类型选择使用强度；其中“选择设计系统”的规则对 OwnWord 不适用，不得替换 Spectrum S2。
 - `high-end-visual-design` 仅用于明确需要强 premium / agency / cinematic 表达的页面或局部区域，其视觉规则只能在 Spectrum S2 与版本设计约束允许范围内使用。
 - `react-spectrum` skill 用于 Spectrum S2 实现检查，不定义产品事实、页面结构或产品视觉方向。
