@@ -22,6 +22,22 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def canonical(value):
+    return json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(',', ':'), allow_nan=False)
+
+
+def capture_rows(path, identity):
+    rows = {}
+    for number, line in enumerate(Path(path).read_text().splitlines(), 1):
+        if not line.strip():
+            continue
+        row = json.loads(line)
+        require(isinstance(row.get('caseId'), str) and isinstance(row.get(identity), str) and 'value' in row,
+                f'原始采集缺少 caseId、{identity} 或实际值：{path}:{number}')
+        rows.setdefault(row['caseId'], []).append(row)
+    return rows
+
+
 def java_revision(repo_paths=None):
     """包含提交及未提交文件，避免新源码沿用旧报告。忽略 Git 已忽略的构建产物。"""
     repo_paths = repo_paths or {}
@@ -142,16 +158,56 @@ def compare(args):
     require(observations['catalogSha256'] == digest(args.catalog), '结果与用例清单不匹配')
     for name, paths in [('tsReportSha256', args.ts_report), ('javaReportSha256', args.java_report)]:
         require(sorted(observations[name]) == sorted(digest(p) for p in paths), f'结果与原始报告校验值不匹配：{name}')
+    capture_names = {'inputPlan': 'input_plan', 'tsInputs': 'ts_inputs', 'javaInputs': 'java_inputs',
+                     'tsAssertions': 'ts_assertions', 'javaAssertions': 'java_assertions'}
+    capture_paths = {name: getattr(args, option, None) for name, option in capture_names.items()}
+    if getattr(args, 'command', 'compare') == 'check' or observations.get('captureSha256') is not None or any(capture_paths.values()):
+        require(all(capture_paths.values()) and isinstance(observations.get('captureSha256'), dict),
+                '完整验收缺少两端原始采集、独立输入/断言计划或校验值')
+        require(set(observations['captureSha256']) == set(capture_names), '原始采集文件清单不完整')
+        for name, path in capture_paths.items():
+            require(observations['captureSha256'][name] == digest(path), f'原始采集校验值不匹配：{name}')
+        plan = read(capture_paths['inputPlan'])
+        same_keys(cases, plan, '独立输入/断言计划用例')
+        for case_id, expected in plan.items():
+            require(isinstance(expected.get('sampleIds'), list) and bool(expected['sampleIds'])
+                    and len(expected['sampleIds']) == len(set(expected['sampleIds'])),
+                    f'独立输入样本计划无效：{case_id}')
+            require(expected.get('assertionIds') == mapped[case_id]['assertionIds'],
+                    f'映射断言与独立计划不符：{case_id}')
+        raw_captures = {name: capture_rows(capture_paths[name], identity) for name, identity in (
+            ('tsInputs', 'sampleId'), ('javaInputs', 'sampleId'),
+            ('tsAssertions', 'assertionId'), ('javaAssertions', 'assertionId'))}
+        for name, rows in raw_captures.items():
+            same_keys(cases, rows, f'{name} 原始采集用例')
     observed = indexed(observations['cases'], lambda c: c['id'], '逐用例结果')
     same_keys(cases, observed, '逐用例结果')
     assertion_count = 0
     for key, observation in observed.items():
         require(bool(re.fullmatch(r'[0-9a-f]{64}', observation['inputSha256'])), f'缺少输入/前置状态校验值：{key}')
         require(observation['inputSha256'] == observation['tsInputSha256'] == observation['javaInputSha256'], f'TS/Java 输入或前置状态不同：{key}')
+        if capture_paths['inputPlan']:
+            samples = observation.get('inputSamples')
+            require(isinstance(samples, dict) and set(samples) == {'TS', 'Java'}, f'缺少两端实际输入样本：{key}')
+            for side in ('TS', 'Java'):
+                require([row['sampleId'] for row in samples[side]] == plan[key]['sampleIds'],
+                        f'{side} 输入样本数量、顺序或 ID 不符：{key}')
+                raw = raw_captures['tsInputs' if side == 'TS' else 'javaInputs'][key]
+                require(canonical(samples[side]) == canonical([{'sampleId': row['sampleId'], 'value': row['value']} for row in raw]),
+                        f'{side} 汇总输入与原始采集不同：{key}')
+                require(hashlib.sha256(canonical(samples[side]).encode()).hexdigest() == observation['inputSha256'],
+                        f'{side} 实际输入样本与摘要不符：{key}')
         ts = indexed(observation['ts'], lambda a: a['id'], 'TS 断言结果')
         java = indexed(observation['java'], lambda a: a['id'], 'Java 断言结果')
         same_keys(mapped[key]['assertionIds'], ts, f'TS 断言结果 {key}')
         same_keys(mapped[key]['assertionIds'], java, f'Java 断言结果 {key}')
+        if capture_paths['inputPlan']:
+            for side, actual in [('tsAssertions', observation['ts']), ('javaAssertions', observation['java'])]:
+                raw = raw_captures[side][key]
+                require([row['assertionId'] for row in raw] == plan[key]['assertionIds'],
+                        f'{side} 原始断言数量、顺序或 ID 不符：{key}')
+                require(canonical(actual) == canonical([{'id': row['assertionId'], 'value': row['value']} for row in raw]),
+                        f'{side} 汇总断言与原始采集不同：{key}')
         for identity in ts:
             # JSON 类型必须保留，不能把 true 当作数值 1，或丢掉字节前导零。
             left = json.dumps(ts[identity]['value'], sort_keys=True, ensure_ascii=False, allow_nan=False)
@@ -228,6 +284,8 @@ def main():
         command.add_argument('--observations', default=str(TASK / '.cache/evidence/parity-results.json'))
         command.add_argument('--module', action='append', default=[], help='整模块累计验收，可重复；默认全部已选模块')
         command.add_argument('--java-revision', help='compare 调试时核对源码摘要；check 始终从当前 Java 工作树重新计算')
+        for name in ('input-plan', 'ts-inputs', 'java-inputs', 'ts-assertions', 'java-assertions'):
+            command.add_argument('--' + name)
     args = parser.parse_args()
     try:
         if args.command == 'revision':
