@@ -100,5 +100,82 @@ class ObservationMappingTest(unittest.TestCase):
             self.convert('java')
 
 
+class AuthFetchAsyncOrderTest(unittest.TestCase):
+    CASE = '61b4ecc5ca8e8e0e52d508368744a12c06c31d670ea752d08a5d880a62cf5f63'
+    FILE = 'src/auth/clients/__tests__/AuthFetch.test.ts'
+    MATCHERS = ('toBe', 'toMatchObject', 'toHaveLength', 'toEqual', 'toEqual',
+                'toBe', 'toBe', 'toThrow', 'toBe', 'toHaveLength')
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.raw = Path(self.temp.name) / 'raw.jsonl'
+        self.catalog = {'upstreamCommit': 'f999e0c1aad9a7afd0cbadaaf23841d049af9d5a',
+                        'files': [{'path': self.FILE,
+                                   'sha256': '0312c9107dbd4acddab1cd282355090fad28dfe58b0f395b642641cca7654f0a',
+                                   'cases': [{'id': self.CASE, 'names': ['AuthFetch payment handling',
+                                       'handlePaymentAndRetry exhausts attempts and throws detailed error'],
+                                              'occurrence': 1}]}]}
+        self.mapping = {'cases': [{'id': self.CASE, 'java': [{
+            'className': 'com.metanet4j.bsv.auth.clients.AuthFetchTest',
+            'name': 'paymentRetryExhaustsAttemptsWithDetails'}]}]}
+        sites = (271, 281, 284, 292, 293, 299, 305, 306, 314, 315)
+        ids = [f'{self.FILE}:{site}:{5 if site >= 314 else 11}:assertion' for site in sites]
+        self.plan = {self.CASE: {'assertionIds': ids, 'comparisonRules': {
+            ids[4]: 'auth-payment-log-v1', ids[5]: 'auth-payment-log-v1'}}}
+
+    def rows(self, side='ts'):
+        counts = {}
+        rows = []
+        for number, matcher in enumerate(self.MATCHERS, 1):
+            counts[matcher] = counts.get(matcher, 0) + 1
+            common = {'index': counts[matcher] if side == 'ts' else number,
+                      'matcher': matcher, 'negated': False,
+                      'actual': {'type': 'number', 'value': str(number)},
+                      'expected': {'type': 'number', 'value': str(number)}}
+            if side == 'ts':
+                common.update(file='/sdk/' + self.FILE,
+                              test='AuthFetch payment handling handlePaymentAndRetry exhausts attempts and throws detailed error',
+                              occurrence=1)
+                common['pass'] = True
+            else:
+                common.update(test='com.metanet4j.bsv.auth.clients.AuthFetchTest#paymentRetryExhaustsAttemptsWithDetails',
+                              method='paymentRetryExhaustsAttemptsWithDetails')
+            rows.append(common)
+        return rows
+
+    def convert(self, rows, side='ts'):
+        original = ''.join(json.dumps(row) + '\n' for row in rows)
+        self.raw.write_text(original)
+        result = module.observations(self.catalog, self.mapping, self.plan, side, self.raw, 'run')[0]
+        self.assertEqual(original, self.raw.read_text())
+        return result
+
+    def test_outer_rejection_is_at_original_source_site_on_both_sides(self):
+        for side in ('ts', 'java'):
+            with self.subTest(side=side):
+                result = self.convert(self.rows(side), side)
+                self.assertEqual(self.plan[self.CASE]['assertionIds'], [row['assertionId'] for row in result])
+                self.assertEqual('8', result[0]['value']['actual']['value'])
+                self.assertEqual('1', result[1]['value']['actual']['value'])
+                self.assertEqual('4', result[4]['value']['actual']['value'])
+                self.assertEqual(side == 'ts', 'pass' in result[4]['value'])
+
+    def test_misaligned_matcher_or_changed_source_is_rejected(self):
+        rows = self.rows()
+        rows[7]['matcher'] = 'toBe'
+        with self.assertRaisesRegex(ValueError, 'matcher 执行顺序变化'):
+            self.convert(rows)
+        self.catalog['files'][0]['sha256'] = '0' * 64
+        with self.assertRaisesRegex(ValueError, '源码或站点身份变化'):
+            self.convert(self.rows())
+
+    def test_missing_and_extra_assertions_are_rejected(self):
+        with self.assertRaisesRegex(ValueError, '次数与计划不符'):
+            self.convert(self.rows()[:-1])
+        with self.assertRaisesRegex(ValueError, '次数多于计划'):
+            self.convert(self.rows() + [self.rows()[-1]])
+
+
 if __name__ == '__main__':
     unittest.main()

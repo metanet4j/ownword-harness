@@ -5,6 +5,15 @@ from collections import defaultdict
 import json
 from pathlib import Path
 
+AUTH_ASYNC_CASE = '61b4ecc5ca8e8e0e52d508368744a12c06c31d670ea752d08a5d880a62cf5f63'
+AUTH_ASYNC_FILE = 'src/auth/clients/__tests__/AuthFetch.test.ts'
+AUTH_ASYNC_SHA = '0312c9107dbd4acddab1cd282355090fad28dfe58b0f395b642641cca7654f0a'
+AUTH_ASYNC_UPSTREAM = 'f999e0c1aad9a7afd0cbadaaf23841d049af9d5a'
+AUTH_ASYNC_SITES = (271, 281, 284, 292, 293, 299, 305, 306, 314, 315)
+AUTH_ASYNC_MATCHERS = ('toBe', 'toMatchObject', 'toHaveLength', 'toEqual', 'toEqual',
+                       'toBe', 'toBe', 'toThrow', 'toBe', 'toHaveLength')
+AUTH_ASYNC_RUNTIME_TO_SOURCE = (1, 2, 3, 4, 5, 6, 7, 0, 8, 9)
+
 
 def read(path):
     return json.loads(Path(path).read_text())
@@ -45,6 +54,14 @@ def observations(catalog, mapping, plan, side, raw, run_id,
                  allow_java_extra=False, allow_ts_extra=False):
     require(side in ('ts', 'java') and run_id, '采集侧别或 runId 无效')
     ts, java = source_case_index(catalog, mapping, plan)
+    if AUTH_ASYNC_CASE in plan:
+        source = [file for file in catalog['files'] if file['path'] == AUTH_ASYNC_FILE]
+        require(catalog.get('upstreamCommit') == AUTH_ASYNC_UPSTREAM and len(source) == 1
+                and source[0].get('sha256') == AUTH_ASYNC_SHA
+                and plan[AUTH_ASYNC_CASE]['assertionIds'] == [
+                    f'{AUTH_ASYNC_FILE}:{site}:{5 if site >= 314 else 11}:assertion'
+                    for site in AUTH_ASYNC_SITES],
+                '固定 AuthFetch 异步断言重排的源码或站点身份变化')
     grouped = defaultdict(list)
     ts_matcher_counts = defaultdict(int)
     extras = 0
@@ -72,6 +89,11 @@ def observations(catalog, mapping, plan, side, raw, run_id,
         planned = plan[case_id]['assertionIds']
         position = len(grouped[case_id])
         require(position < len(planned), f'原断言次数多于计划：{case_id}')
+        if case_id == AUTH_ASYNC_CASE:
+            require(row.get('matcher') == AUTH_ASYNC_MATCHERS[position] and row.get('negated') is False,
+                    f'固定 AuthFetch 异步 matcher 执行顺序变化：{case_id}')
+        source_position = AUTH_ASYNC_RUNTIME_TO_SOURCE[position] if case_id == AUTH_ASYNC_CASE else position
+        assertion_id = planned[source_position]
         if side == 'ts':
             # 固定 Jest 采集器的 index 按文件、测试名和 matcher 累计；
             # 同名注册的 occurrence 不会重置这个计数。
@@ -88,16 +110,21 @@ def observations(catalog, mapping, plan, side, raw, run_id,
             # 表示同一参数序列。只规范容器，不改动原始参数的元素和值。
             value['expected'] = {'type': 'array', 'value': value['expected']}
         value['kind'] = 'assertion'
-        rule = plan[case_id].get('comparisonRules', {}).get(planned[position])
+        rule = plan[case_id].get('comparisonRules', {}).get(assertion_id)
         if rule in ('void-completion-null-adapter-v1', 'async-ready-null-adapter-v1',
-                    'native-null-absence-v1', 'mnemonic-defined-object-v1') and 'pass' in row:
+                    'native-null-absence-v1', 'mnemonic-defined-object-v1',
+                    'auth-payment-log-v1') and 'pass' in row:
             value['pass'] = row['pass']
         grouped[case_id].append({'runId': run_id, 'side': side, 'caseId': case_id,
-                                 'assertionId': planned[position], 'value': value})
+                                 'assertionId': assertion_id, 'value': value})
     require(set(grouped) == set(plan), f'{side} 原断言缺少用例 {len(set(plan) - set(grouped))}')
     for case_id, expected in plan.items():
         require(len(grouped[case_id]) == len(expected['assertionIds']),
                 f'{side} 原断言次数与计划不符：{case_id}')
+        if case_id == AUTH_ASYNC_CASE:
+            by_id = {row['assertionId']: row for row in grouped[case_id]}
+            require(len(by_id) == len(grouped[case_id]), '固定 AuthFetch 异步断言身份重复')
+            grouped[case_id] = [by_id[identity] for identity in expected['assertionIds']]
     output = [row for case_id in plan for row in grouped[case_id]]
     return output, extras
 
