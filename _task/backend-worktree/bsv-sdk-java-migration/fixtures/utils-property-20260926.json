@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "source": "fixed TypeScript fast-check predicate arguments",
+  "upstreamCommit": "f999e0c1aad9a7afd0cbadaaf23841d049af9d5a",
+  "testPath": "packages/sdk/src/primitives/__tests/utils.property.test.ts",
+  "testSha256": "46ee5885071ab5d8ee3f1a2664dae84881f3c270c4ac5dd2256b23478efa8537",
+  "seed": 20260926,
+  "path": null,
+  "numRunsPerProperty": 300,
+  "generatorConstraints": {
+    "nonEmptyBytes": {
+      "minLength": 1,
+      "maxLength": 96
+    },
+    "prefixBytes": {
+      "minLength": 1,
+      "maxLength": 4
+    },
+    "payloadBytes": {
+      "minLength": 0,
+      "maxLength": 96
+    }
+  },
+  "predicateCalls": 600,
+  "shrinkCalls": 0,
+  "boundaryInputs": 76,
+  "assertions": 976,
+  "corpusSha256": "84603a9ab570927af1deeb60eb607edde751c1e3b47dbcd51a3741984561be82",
+  "tsReportSha256": "0ed22811ec7349e7671fb3eccd9b1656b86629ffbb3d2631a5401d62a4a7b7ba",
+  "tsAssertionsSha256": "7d975d50799a3bcb9f9d7dc060c82c433ea1489482ad664818f0af6e503fb93e",
+  "tsBoundariesSha256": "b5d3b3a329148eca1c1190a1217bc9db356b88200a1e07609e1371d7cec48340"
+}
