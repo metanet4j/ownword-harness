@@ -17,6 +17,7 @@ GROUPS = {
     'constant-time': ('constantTimeEquals ', 5, 5),
     'base64': ('toArray base64 ', 7, 13),
     'simple': (('constantTimeEquals ', 'toArray base64 '), 12, 18),
+    'null-check': ('verifyNotNull ', 5, 8),
     'remaining': ('', 56, 116),
 }
 
