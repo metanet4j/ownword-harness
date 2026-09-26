@@ -41,7 +41,8 @@ def file_name(raw_path, paths):
     return matches[0]
 
 
-def observations(catalog, mapping, plan, side, raw, run_id, allow_java_extra=False):
+def observations(catalog, mapping, plan, side, raw, run_id,
+                 allow_java_extra=False, allow_ts_extra=False):
     require(side in ('ts', 'java') and run_id, '采集侧别或 runId 无效')
     ts, java = source_case_index(catalog, mapping, plan)
     grouped = defaultdict(list)
@@ -54,6 +55,10 @@ def observations(catalog, mapping, plan, side, raw, run_id, allow_java_extra=Fal
         if side == 'ts':
             path = file_name(row['file'], {key[0] for key in ts})
             case_id = ts.get((path, row['test'], row['occurrence']))
+            if case_id is None and allow_ts_extra:
+                require(row.get('pass') is True, f'范围外 TS 原断言失败：{raw}:{number}')
+                extras += 1
+                continue
             require(case_id is not None, f'范围外 TS 断言：{raw}:{number}')
             require(row.get('pass') is True, f'固定 TS 原断言失败：{raw}:{number}')
         else:
@@ -102,12 +107,15 @@ def main():
     for name in ('catalog', 'mapping', 'plan', 'side', 'raw', 'run-id', 'output'):
         parser.add_argument('--' + name, required=True)
     parser.add_argument('--allow-java-extra', action='store_true')
+    parser.add_argument('--allow-ts-extra', action='store_true')
     args = parser.parse_args()
     rows, extras = observations(read(args.catalog), read(args.mapping), read(args.plan),
-                                args.side, args.raw, args.run_id, args.allow_java_extra)
+                                args.side, args.raw, args.run_id,
+                                args.allow_java_extra, args.allow_ts_extra)
     Path(args.output).write_text(''.join(json.dumps(row, ensure_ascii=False) + '\n' for row in rows))
     print(json.dumps({'side': args.side, 'cases': len(set(row['caseId'] for row in rows)),
-                      'assertions': len(rows), 'ignoredJavaExtraAssertions': extras}))
+                      'assertions': len(rows),
+                      'ignoredJavaExtraAssertions' if args.side == 'java' else 'ignoredTsExtraAssertions': extras}))
 
 
 if __name__ == '__main__':

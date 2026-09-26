@@ -65,6 +65,22 @@ class ObservationMappingTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, '缺少用例'):
             self.convert('ts')
 
+    def test_whole_file_ts_capture_can_explicitly_ignore_other_passing_cases(self):
+        extra = self.ts(1, 1)
+        extra['test'] = 'sample other case'
+        self.write(extra, self.ts(1, 1), self.ts(1, 1, 'toBeDefined'), self.ts(2, 2))
+        with self.assertRaisesRegex(ValueError, '范围外 TS 断言'):
+            self.convert('ts')
+        rows, ignored = module.observations(self.catalog, self.mapping, self.plan,
+                                            'ts', self.raw, 'run', allow_ts_extra=True)
+        self.assertEqual(3, len(rows))
+        self.assertEqual(1, ignored)
+        extra['pass'] = False
+        self.write(extra, self.ts(1, 1), self.ts(1, 1, 'toBeDefined'), self.ts(2, 2))
+        with self.assertRaisesRegex(ValueError, '范围外 TS 原断言失败'):
+            module.observations(self.catalog, self.mapping, self.plan,
+                                'ts', self.raw, 'run', allow_ts_extra=True)
+
     def test_java_extras_are_explicit_and_mapped_methods_remain_complete(self):
         self.write(self.java('first', 1), self.java('first', 2), self.java('extra', 1),
                    self.java('second', 1))
