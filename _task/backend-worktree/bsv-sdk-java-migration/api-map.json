@@ -20769,12 +20769,12 @@
     {
       "id": "src/wallet/Wallet.interfaces.ts#property:WalletInterface.listCertificates:1",
       "java": "com.metanet4j.bsv.wallet.WalletInterfaces#WalletInterface.listCertificates",
-      "javaSignature": "CompletableFuture<ListCertificatesResult> listCertificates(ListCertificatesArgs args, String originator)",
+      "javaSignature": "default CompletableFuture<ListCertificatesResult> listCertificates(ListCertificatesArgs args, Object originator)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-contracts",
       "review": "reviewed",
       "evidence": [
         "src/wallet/Wallet.interfaces.ts:1229",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletInterfaces.java:909"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletInterfaces.java:927"
       ]
     },
     {
@@ -20791,12 +20791,12 @@
     {
       "id": "src/wallet/Wallet.interfaces.ts#property:WalletInterface.proveCertificate:1",
       "java": "com.metanet4j.bsv.wallet.WalletInterfaces#WalletInterface.proveCertificate",
-      "javaSignature": "CompletableFuture<ProveCertificateResult> proveCertificate(ProveCertificateArgs args, String originator)",
+      "javaSignature": "default CompletableFuture<ProveCertificateResult> proveCertificate(ProveCertificateArgs args, Object originator)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-contracts",
       "review": "reviewed",
       "evidence": [
         "src/wallet/Wallet.interfaces.ts:1241",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletInterfaces.java:913"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletInterfaces.java:935"
       ]
     },
     {
@@ -32196,12 +32196,12 @@
     {
       "id": "src/auth/certificates/VerifiableCertificate.ts#method:VerifiableCertificate.decryptFields:1",
       "java": "com.metanet4j.bsv.auth.certificates.VerifiableCertificate.decryptFields",
-      "javaSignature": "public CompletableFuture<Map<String, String>> decryptFields(Object verifierWallet) {",
+      "javaSignature": "public CompletableFuture<Map<String, String>> decryptFields(Object verifierWallet, Object privileged, Object privilegedReason, Object originator)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
       "review": "reviewed",
       "evidence": [
         "src/auth/certificates/VerifiableCertificate.ts:98",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/VerifiableCertificate.java:57"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/VerifiableCertificate.java:63"
       ]
     },
     {
@@ -32317,23 +32317,23 @@
     {
       "id": "src/auth/utils/getVerifiableCertificates.ts#function-variable:getVerifiableCertificates:1",
       "java": "com.metanet4j.bsv.auth.utils.GetVerifiableCertificates.getVerifiableCertificates",
-      "javaSignature": "public static CompletableFuture<List<VerifiableCertificate>> getVerifiableCertificates(WalletInterface wallet, RequestedCertificateSet requested, String verifierIdentityKey, String originator)",
+      "javaSignature": "public static CompletableFuture<List<VerifiableCertificate>> getVerifiableCertificates(WalletInterface wallet, RequestedCertificateSet requested, String verifierIdentityKey, Object originator)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
       "review": "reviewed",
       "evidence": [
         "src/auth/utils/getVerifiableCertificates.ts:13",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/utils/GetVerifiableCertificates.java:23"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/utils/GetVerifiableCertificates.java:29"
       ]
     },
     {
       "id": "src/auth/utils/validateCertificates.ts#function-variable:validateCertificates:1",
       "java": "com.metanet4j.bsv.auth.utils.ValidateCertificates.validateCertificates",
-      "javaSignature": "public static CompletableFuture<Void> validateCertificates(WalletInterface wallet, AuthMessage message, RequestedCertificateSet requested, String originator)",
+      "javaSignature": "public static CompletableFuture<Void> validateCertificates(WalletInterface wallet, AuthMessage message, RequestedCertificateSet requested, Object originator)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
       "review": "reviewed",
       "evidence": [
         "src/auth/utils/validateCertificates.ts:13",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/utils/ValidateCertificates.java:26"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/utils/ValidateCertificates.java:31"
       ]
     },
     {
