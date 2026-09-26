@@ -1782,7 +1782,7 @@
         }
       ],
       "assertionIds": [
-        "src/primitives/__tests/BigNumber.serializers.test.ts:7:7:assertion"
+        "src/primitives/__tests/BigNumber.serializers.test.ts:20:7:assertion"
       ]
     },
     {
@@ -2305,17 +2305,17 @@
         }
       ],
       "assertionIds": [
-        "src/primitives/__tests/BigNumber.utils.test.ts:199:7:assertion",
-        "src/primitives/__tests/BigNumber.utils.test.ts:200:7:assertion",
-        "src/primitives/__tests/BigNumber.utils.test.ts:201:7:assertion",
-        "src/primitives/__tests/BigNumber.utils.test.ts:202:7:assertion",
-        "src/primitives/__tests/BigNumber.utils.test.ts:203:7:assertion",
-        "src/primitives/__tests/BigNumber.utils.test.ts:204:7:assertion",
-        "src/primitives/__tests/BigNumber.utils.test.ts:205:7:assertion",
-        "src/primitives/__tests/BigNumber.utils.test.ts:208:7:assertion",
-        "src/primitives/__tests/BigNumber.utils.test.ts:209:7:assertion",
-        "src/primitives/__tests/BigNumber.utils.test.ts:210:7:assertion",
-        "src/primitives/__tests/BigNumber.utils.test.ts:211:7:assertion"
+        "src/primitives/__tests/BigNumber.utils.test.ts:217:7:assertion",
+        "src/primitives/__tests/BigNumber.utils.test.ts:218:7:assertion",
+        "src/primitives/__tests/BigNumber.utils.test.ts:219:7:assertion",
+        "src/primitives/__tests/BigNumber.utils.test.ts:220:7:assertion",
+        "src/primitives/__tests/BigNumber.utils.test.ts:221:7:assertion",
+        "src/primitives/__tests/BigNumber.utils.test.ts:222:7:assertion",
+        "src/primitives/__tests/BigNumber.utils.test.ts:223:7:assertion",
+        "src/primitives/__tests/BigNumber.utils.test.ts:224:7:assertion",
+        "src/primitives/__tests/BigNumber.utils.test.ts:225:7:assertion",
+        "src/primitives/__tests/BigNumber.utils.test.ts:226:7:assertion",
+        "src/primitives/__tests/BigNumber.utils.test.ts:227:7:assertion"
       ]
     },
     {
@@ -73608,1243 +73608,937 @@
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:100:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "aa1056e45ba1f5caa3438989feaf452ff02ff6aeb5a18fbcae6ffde7a07a286e",
-        "ab75f0e0eb3d425ca903e0171e743c482f96d7b66c857343d714bd41b5899a29",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromSm > should convert from Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:102:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "aa1056e45ba1f5caa3438989feaf452ff02ff6aeb5a18fbcae6ffde7a07a286e",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromSm > should convert from Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:104:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromSm > should convert from Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:106:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromSm > should convert from Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:108:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "7061fb54d78a97af14acc2646ebbdf0e19cd76c943088152b8cecf82fcb93765",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromSm > should convert from Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:110:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "7061fb54d78a97af14acc2646ebbdf0e19cd76c943088152b8cecf82fcb93765",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromSm > should convert from Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:112:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "7061fb54d78a97af14acc2646ebbdf0e19cd76c943088152b8cecf82fcb93765",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromSm > should convert from Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:114:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "7061fb54d78a97af14acc2646ebbdf0e19cd76c943088152b8cecf82fcb93765",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromSm > should convert from Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:119:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "4be983b6aa47de3ed7049870ccfeb59345662503e040927c58b97b11138fe80e",
-        "7ad9f9d9517a99ac1e212afad2c2743d44f35ef1368ac01dbdd203913e9500d6",
-        "a7bc29baedc87189774b63ad0fca65b9ddaa3c7ee8228bc54de23e0ce691b6d8",
-        "c6a83b7f691fc1c34cb080692e106f084342b03bf2ff4eb0a6c5aced8daaf379"
+        "7ad9f9d9517a99ac1e212afad2c2743d44f35ef1368ac01dbdd203913e9500d6"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toScriptNumBuffer > should output a little endian Sm number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:121:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "7ad9f9d9517a99ac1e212afad2c2743d44f35ef1368ac01dbdd203913e9500d6",
-        "91e9c16516966aabac511d6475911227df6353624c42fea68983bee3ad508e4e",
-        "a7bc29baedc87189774b63ad0fca65b9ddaa3c7ee8228bc54de23e0ce691b6d8"
+        "7ad9f9d9517a99ac1e212afad2c2743d44f35ef1368ac01dbdd203913e9500d6"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toScriptNumBuffer > should output a little endian Sm number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:126:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "0fe242516600669b01362608b603113e1aca0acf3d8f75b5cff3780e14be62ee",
-        "7fc39a9e4b364b763acd4768d78dd91e10b93c4939103329c56d8ea347e34afc",
-        "a454fb20148784e9a31e79f5fee3832e399975140b88b52db1eb0b642d49fbcb",
-        "ab98f4a447c71dcc2b3d221300f6649a28322798130bfefb2e10077a2df6669a"
+        "7fc39a9e4b364b763acd4768d78dd91e10b93c4939103329c56d8ea347e34afc"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should parse this normal number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:127:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "7fc39a9e4b364b763acd4768d78dd91e10b93c4939103329c56d8ea347e34afc",
-        "a454fb20148784e9a31e79f5fee3832e399975140b88b52db1eb0b642d49fbcb",
-        "ab98f4a447c71dcc2b3d221300f6649a28322798130bfefb2e10077a2df6669a"
+        "7fc39a9e4b364b763acd4768d78dd91e10b93c4939103329c56d8ea347e34afc"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should parse this normal number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:12:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "4567a470cc6163c00309d4a8c043bcc141bb7ee863531d9ad4401eb76a8a7a3b",
-        "8275e3fcd1c38c3a77b720b272b8ec3023c1956c8648d80403358523cbefd82c",
-        "9b0b517411abfc60a9251e93b8da170d6bdd231ab023ab49a94fecd7d1fd1946",
-        "e1e1ae456ebf629a91a5cb52353d32a8aad5e20670d9373ecf9d1e90e557c648",
-        "eb651f306459688e01bc967000654465f13be6e6174a20eed8522f986f5fdb1a",
-        "f229d8811157137584b17dd430d81059539ded1f967dc10cdc44137df715d184"
+        "e1e1ae456ebf629a91a5cb52353d32a8aad5e20670d9373ecf9d1e90e557c648"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toJSON > should make string from a Bn；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:130:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "7fc39a9e4b364b763acd4768d78dd91e10b93c4939103329c56d8ea347e34afc",
-        "a454fb20148784e9a31e79f5fee3832e399975140b88b52db1eb0b642d49fbcb",
-        "e3a27938be6efbee7138276f90d035cbc742e192c574523246a1373c8d0c9913"
+        "7fc39a9e4b364b763acd4768d78dd91e10b93c4939103329c56d8ea347e34afc"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should parse this normal number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:133:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "7fc39a9e4b364b763acd4768d78dd91e10b93c4939103329c56d8ea347e34afc",
-        "a454fb20148784e9a31e79f5fee3832e399975140b88b52db1eb0b642d49fbcb",
-        "a58f3431dda5969cc77523d9b4aa19218bcbd72bd468183f883076a6681c9569",
-        "d9bcf6cfe0883d1bff5227c5db4c5e9656518f1b6ca3cb047492a8011d6527d9",
-        "e3a27938be6efbee7138276f90d035cbc742e192c574523246a1373c8d0c9913"
+        "7fc39a9e4b364b763acd4768d78dd91e10b93c4939103329c56d8ea347e34afc"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should parse this normal number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:138:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "61fdb4aab937ed0261fcf53a0ee386f4c8238b34643248ec4de78503fdd6751a",
-        "d9c1e5b518f633df62fcef46dad93b181ac3f66dc277685715463b194df229ed"
+        "61fdb4aab937ed0261fcf53a0ee386f4c8238b34643248ec4de78503fdd6751a"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should allow a number over 4 bytes；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:139:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "12e8e1835d604f7dddb11ce3c2efc2174cfeff4358eaef1af0403167f4b64847",
-        "61fdb4aab937ed0261fcf53a0ee386f4c8238b34643248ec4de78503fdd6751a",
-        "d9c1e5b518f633df62fcef46dad93b181ac3f66dc277685715463b194df229ed"
+        "61fdb4aab937ed0261fcf53a0ee386f4c8238b34643248ec4de78503fdd6751a"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should allow a number over 4 bytes；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:13:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4567a470cc6163c00309d4a8c043bcc141bb7ee863531d9ad4401eb76a8a7a3b",
-        "8275e3fcd1c38c3a77b720b272b8ec3023c1956c8648d80403358523cbefd82c",
-        "9b0b517411abfc60a9251e93b8da170d6bdd231ab023ab49a94fecd7d1fd1946",
-        "e1e1ae456ebf629a91a5cb52353d32a8aad5e20670d9373ecf9d1e90e557c648",
-        "eb651f306459688e01bc967000654465f13be6e6174a20eed8522f986f5fdb1a",
-        "f229d8811157137584b17dd430d81059539ded1f967dc10cdc44137df715d184"
+        "e1e1ae456ebf629a91a5cb52353d32a8aad5e20670d9373ecf9d1e90e557c648"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toJSON > should make string from a Bn；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:144:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "12e8e1835d604f7dddb11ce3c2efc2174cfeff4358eaef1af0403167f4b64847",
-        "15a7db3001210ad3dddbe39a1cbcdee9b5b301f54e9cd9bae65bc196d3ebd137",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
-        "d9c1e5b518f633df62fcef46dad93b181ac3f66dc277685715463b194df229ed"
+        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should throw an error for number that is not a minimal size representation；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:145:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "15a7db3001210ad3dddbe39a1cbcdee9b5b301f54e9cd9bae65bc196d3ebd137",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
-        "d9c1e5b518f633df62fcef46dad93b181ac3f66dc277685715463b194df229ed"
+        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should throw an error for number that is not a minimal size representation；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:148:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "15a7db3001210ad3dddbe39a1cbcdee9b5b301f54e9cd9bae65bc196d3ebd137",
-        "4fa1564e01f2ebca2db78321ed2f627c00fe4e329378231eb869a3bc37a48a21",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
-        "aa6959febd1a18df8259eca3b08852b0a4490e89a2abca9dcdb12ad90897ad79"
+        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should throw an error for number that is not a minimal size representation；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:14:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4567a470cc6163c00309d4a8c043bcc141bb7ee863531d9ad4401eb76a8a7a3b",
-        "8275e3fcd1c38c3a77b720b272b8ec3023c1956c8648d80403358523cbefd82c",
-        "9b0b517411abfc60a9251e93b8da170d6bdd231ab023ab49a94fecd7d1fd1946",
-        "e1e1ae456ebf629a91a5cb52353d32a8aad5e20670d9373ecf9d1e90e557c648",
-        "f229d8811157137584b17dd430d81059539ded1f967dc10cdc44137df715d184"
+        "e1e1ae456ebf629a91a5cb52353d32a8aad5e20670d9373ecf9d1e90e557c648"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toJSON > should make string from a Bn；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:151:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "15a7db3001210ad3dddbe39a1cbcdee9b5b301f54e9cd9bae65bc196d3ebd137",
-        "4fa1564e01f2ebca2db78321ed2f627c00fe4e329378231eb869a3bc37a48a21",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
-        "aa6959febd1a18df8259eca3b08852b0a4490e89a2abca9dcdb12ad90897ad79"
+        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should throw an error for number that is not a minimal size representation；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:154:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "15a7db3001210ad3dddbe39a1cbcdee9b5b301f54e9cd9bae65bc196d3ebd137",
-        "4fa1564e01f2ebca2db78321ed2f627c00fe4e329378231eb869a3bc37a48a21",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
-        "aa6959febd1a18df8259eca3b08852b0a4490e89a2abca9dcdb12ad90897ad79"
+        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should throw an error for number that is not a minimal size representation；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:157:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "15a7db3001210ad3dddbe39a1cbcdee9b5b301f54e9cd9bae65bc196d3ebd137",
-        "43a4d2e73416b22300ddbadbbc0ee437be49db0639f0d09e5665c63ba184136e",
         "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should throw an error for number that is not a minimal size representation；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:160:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "43a4d2e73416b22300ddbadbbc0ee437be49db0639f0d09e5665c63ba184136e",
         "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should throw an error for number that is not a minimal size representation；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:163:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "43a4d2e73416b22300ddbadbbc0ee437be49db0639f0d09e5665c63ba184136e",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
-        "dc7e4155c171fe0c5942fb76a43ac6fc3d62ad70de89bb1b1f6f29ec448fa4d0"
+        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should throw an error for number that is not a minimal size representation；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:166:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
-        "c5555ea3c80a7a7e8ce8d92acb6806ee65e942f9fa49a4b3b25c1c744b74f9f8",
-        "dc7e4155c171fe0c5942fb76a43ac6fc3d62ad70de89bb1b1f6f29ec448fa4d0"
+        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromScriptNum > should throw an error for number that is not a minimal size representation；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:173:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "dc6fba78b5c309a0a55fe8ca95654073dd5d9d3a49b9b02c303d1e314b7adf59",
-        "e20b2b7c38682ce1ad142a1882cdae9705df73772e4419261e8a22796d5c6930",
-        "f227e8738770c1015d503adcbe4051cbe07b13b22a7d1475a66566bdba1b7ac6"
+        "dc6fba78b5c309a0a55fe8ca95654073dd5d9d3a49b9b02c303d1e314b7adf59"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromNumber > should convert from a number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:174:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "dc6fba78b5c309a0a55fe8ca95654073dd5d9d3a49b9b02c303d1e314b7adf59",
-        "e20b2b7c38682ce1ad142a1882cdae9705df73772e4419261e8a22796d5c6930"
+        "dc6fba78b5c309a0a55fe8ca95654073dd5d9d3a49b9b02c303d1e314b7adf59"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromNumber > should convert from a number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:179:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "0c6f0be8117b37e61168cd10212dc43caed78c08f2efa3d5b5800e7da96bef65",
-        "54d5fd04982eeb1241b6dd8210a83493fc2ac33b5b4aa9c208a8e8c6955ad6a9"
+        "0c6f0be8117b37e61168cd10212dc43caed78c08f2efa3d5b5800e7da96bef65"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toNumber > it should convert to a number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:180:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0c6f0be8117b37e61168cd10212dc43caed78c08f2efa3d5b5800e7da96bef65",
-        "54d5fd04982eeb1241b6dd8210a83493fc2ac33b5b4aa9c208a8e8c6955ad6a9"
+        "0c6f0be8117b37e61168cd10212dc43caed78c08f2efa3d5b5800e7da96bef65"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toNumber > it should convert to a number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:19:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "1e8c977a9cdd9b5e4bd851907916d9463a89218ce0ad7a31a47c917c536baee7",
-        "f229d8811157137584b17dd430d81059539ded1f967dc10cdc44137df715d184"
+        "90bc733145b484db34c347f75e0d3c3585aac3928bfbd509affe8fc41f3b76a9"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromString > should make Bn from a string；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:20:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "1e8c977a9cdd9b5e4bd851907916d9463a89218ce0ad7a31a47c917c536baee7",
-        "4d6db4c75663c4e9337355b7127d57e134c9d67a710014a8637428dc122c544e",
-        "f229d8811157137584b17dd430d81059539ded1f967dc10cdc44137df715d184"
+        "90bc733145b484db34c347f75e0d3c3585aac3928bfbd509affe8fc41f3b76a9"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromString > should make Bn from a string；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:25:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "4d6db4c75663c4e9337355b7127d57e134c9d67a710014a8637428dc122c544e",
-        "90977607569e3430c0f3c7e0e7b727835ce0c16c8fd2615cf6f95bf78fceec3f",
-        "94a92d354a2a28ba411756e5218f736d353167ca579ecd9100e37590fad1f2a6"
+        "90977607569e3430c0f3c7e0e7b727835ce0c16c8fd2615cf6f95bf78fceec3f"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toString > should make a string；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:26:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4d6db4c75663c4e9337355b7127d57e134c9d67a710014a8637428dc122c544e",
-        "90977607569e3430c0f3c7e0e7b727835ce0c16c8fd2615cf6f95bf78fceec3f",
-        "94a92d354a2a28ba411756e5218f736d353167ca579ecd9100e37590fad1f2a6",
-        "a9ecddbcf988b389b4a2374921bd9df9e81631e374923f4919cd25954ed9c8f3"
+        "90977607569e3430c0f3c7e0e7b727835ce0c16c8fd2615cf6f95bf78fceec3f"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toString > should make a string；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:31:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "3fa21d35dd93e893f335f01414211c4d42217b67e570790999663ee763da7b4b",
-        "955053b007824a3019e2dfc765f75dbd508559838dc2e431168bc2e6f08dc2c0",
-        "a9ecddbcf988b389b4a2374921bd9df9e81631e374923f4919cd25954ed9c8f3",
-        "ffd826c6c609c2da9998f331aaafcd0fd38ed9dd325907cd7019336042a1101c"
+        "3fa21d35dd93e893f335f01414211c4d42217b67e570790999663ee763da7b4b"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromHex > should create bn from known hex；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:33:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "3fa21d35dd93e893f335f01414211c4d42217b67e570790999663ee763da7b4b",
-        "955053b007824a3019e2dfc765f75dbd508559838dc2e431168bc2e6f08dc2c0",
-        "a9ecddbcf988b389b4a2374921bd9df9e81631e374923f4919cd25954ed9c8f3",
-        "ffd826c6c609c2da9998f331aaafcd0fd38ed9dd325907cd7019336042a1101c"
+        "3fa21d35dd93e893f335f01414211c4d42217b67e570790999663ee763da7b4b"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromHex > should create bn from known hex；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:38:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "12a76c3d237d9d356ef44634cbc925b815deccaa5660f0d9dbabbe80706f3535",
-        "6611b784bdc9bd076bfb0a1daf67e841ca4a72738653a3ee54152eae17d1c342",
-        "b5987f340ef78bc3368d13e6d8046615aa4085411cac8ff5393dbfe721b88b1c",
-        "ffd826c6c609c2da9998f331aaafcd0fd38ed9dd325907cd7019336042a1101c"
+        "6611b784bdc9bd076bfb0a1daf67e841ca4a72738653a3ee54152eae17d1c342"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toHex > should create a hex string of 4 byte buffer；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:40:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "12a76c3d237d9d356ef44634cbc925b815deccaa5660f0d9dbabbe80706f3535",
-        "6611b784bdc9bd076bfb0a1daf67e841ca4a72738653a3ee54152eae17d1c342",
-        "b5987f340ef78bc3368d13e6d8046615aa4085411cac8ff5393dbfe721b88b1c",
-        "ffd826c6c609c2da9998f331aaafcd0fd38ed9dd325907cd7019336042a1101c"
+        "6611b784bdc9bd076bfb0a1daf67e841ca4a72738653a3ee54152eae17d1c342"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toHex > should create a hex string of 4 byte buffer；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:45:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701",
-        "9e83c42f388f201548d08e740ad864695b739e3fd841be60b97aea2150a337c8"
+        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toBits > should convert these known Bns to bits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:46:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701",
-        "9e83c42f388f201548d08e740ad864695b739e3fd841be60b97aea2150a337c8",
-        "f639f665d7d6ed9508202eca820fac51984c925db2058fbcb9ac6f26c1825617"
+        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toBits > should convert these known Bns to bits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:47:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701",
-        "9e83c42f388f201548d08e740ad864695b739e3fd841be60b97aea2150a337c8",
-        "f639f665d7d6ed9508202eca820fac51984c925db2058fbcb9ac6f26c1825617"
+        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toBits > should convert these known Bns to bits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:48:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701",
-        "9e83c42f388f201548d08e740ad864695b739e3fd841be60b97aea2150a337c8",
-        "d64e85f63aa8eafa2fc95c334a02584e7fd3640de141a4eb99c3ce41f69293c7",
-        "f639f665d7d6ed9508202eca820fac51984c925db2058fbcb9ac6f26c1825617"
+        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toBits > should convert these known Bns to bits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:49:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701",
-        "9e83c42f388f201548d08e740ad864695b739e3fd841be60b97aea2150a337c8",
-        "d64e85f63aa8eafa2fc95c334a02584e7fd3640de141a4eb99c3ce41f69293c7",
-        "f639f665d7d6ed9508202eca820fac51984c925db2058fbcb9ac6f26c1825617"
+        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toBits > should convert these known Bns to bits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:50:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701",
-        "d64e85f63aa8eafa2fc95c334a02584e7fd3640de141a4eb99c3ce41f69293c7",
-        "f639f665d7d6ed9508202eca820fac51984c925db2058fbcb9ac6f26c1825617"
+        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toBits > should convert these known Bns to bits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:51:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701",
-        "c156b2ddcf72291fbdce41c2f7b77266c1bb47254cf8ca53f92f4fe0496af904",
-        "d64e85f63aa8eafa2fc95c334a02584e7fd3640de141a4eb99c3ce41f69293c7",
-        "f639f665d7d6ed9508202eca820fac51984c925db2058fbcb9ac6f26c1825617"
+        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toBits > should convert these known Bns to bits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:52:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701",
-        "c156b2ddcf72291fbdce41c2f7b77266c1bb47254cf8ca53f92f4fe0496af904",
-        "d64e85f63aa8eafa2fc95c334a02584e7fd3640de141a4eb99c3ce41f69293c7",
-        "f639f665d7d6ed9508202eca820fac51984c925db2058fbcb9ac6f26c1825617"
+        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toBits > should convert these known Bns to bits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:53:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701",
-        "c156b2ddcf72291fbdce41c2f7b77266c1bb47254cf8ca53f92f4fe0496af904",
-        "d64e85f63aa8eafa2fc95c334a02584e7fd3640de141a4eb99c3ce41f69293c7",
-        "f639f665d7d6ed9508202eca820fac51984c925db2058fbcb9ac6f26c1825617"
+        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toBits > should convert these known Bns to bits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:58:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81",
-        "678ada740cc49403012e2af8a8e4b54c9a3514ff3b3b98c51c5f40982d2b9e56",
-        "789a511f22fb605f41df1024dbc39f2f1fca0f2aff94b91982932b0aa4be7107",
-        "d64e85f63aa8eafa2fc95c334a02584e7fd3640de141a4eb99c3ce41f69293c7"
+        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromBits > should convert these known bits to Bns；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:59:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81",
-        "678ada740cc49403012e2af8a8e4b54c9a3514ff3b3b98c51c5f40982d2b9e56",
-        "789a511f22fb605f41df1024dbc39f2f1fca0f2aff94b91982932b0aa4be7107"
+        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromBits > should convert these known bits to Bns；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:60:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81",
-        "678ada740cc49403012e2af8a8e4b54c9a3514ff3b3b98c51c5f40982d2b9e56",
-        "789a511f22fb605f41df1024dbc39f2f1fca0f2aff94b91982932b0aa4be7107"
+        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromBits > should convert these known bits to Bns；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:61:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81",
-        "789a511f22fb605f41df1024dbc39f2f1fca0f2aff94b91982932b0aa4be7107"
+        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromBits > should convert these known bits to Bns；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:62:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81",
-        "3b0296fbb81a920f6cd616451048e5c1c026b464dbcd59b9eb9878d51e4211cd",
-        "789a511f22fb605f41df1024dbc39f2f1fca0f2aff94b91982932b0aa4be7107",
-        "e6de99c47366b6490f22b95ab7a4f725d6f00f6a4f49efc38f336156c3aec82c"
+        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromBits > should convert these known bits to Bns；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:63:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81",
-        "3b0296fbb81a920f6cd616451048e5c1c026b464dbcd59b9eb9878d51e4211cd",
-        "789a511f22fb605f41df1024dbc39f2f1fca0f2aff94b91982932b0aa4be7107",
-        "e6de99c47366b6490f22b95ab7a4f725d6f00f6a4f49efc38f336156c3aec82c"
+        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromBits > should convert these known bits to Bns；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:64:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81",
-        "3b0296fbb81a920f6cd616451048e5c1c026b464dbcd59b9eb9878d51e4211cd",
-        "e6de99c47366b6490f22b95ab7a4f725d6f00f6a4f49efc38f336156c3aec82c"
+        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromBits > should convert these known bits to Bns；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:65:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81",
-        "3b0296fbb81a920f6cd616451048e5c1c026b464dbcd59b9eb9878d51e4211cd",
-        "79005ada313c7ac3f6dd0b5915e5e80fffa40cc75d975a699389a9be8e4c34ba",
-        "e6de99c47366b6490f22b95ab7a4f725d6f00f6a4f49efc38f336156c3aec82c"
+        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromBits > should convert these known bits to Bns；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:68:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81",
-        "79005ada313c7ac3f6dd0b5915e5e80fffa40cc75d975a699389a9be8e4c34ba",
-        "e6de99c47366b6490f22b95ab7a4f725d6f00f6a4f49efc38f336156c3aec82c"
+        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromBits > should convert these known bits to Bns；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:6:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "90bc733145b484db34c347f75e0d3c3585aac3928bfbd509affe8fc41f3b76a9",
-        "eb651f306459688e01bc967000654465f13be6e6174a20eed8522f986f5fdb1a",
-        "f20945175fbb57cf4af6b329a1f035f7c693e4740cec3e7ae1d7d07bb500e668",
-        "f229d8811157137584b17dd430d81059539ded1f967dc10cdc44137df715d184"
+        "f20945175fbb57cf4af6b329a1f035f7c693e4740cec3e7ae1d7d07bb500e668"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromJSON > should make Bn from a string；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:73:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "e6de99c47366b6490f22b95ab7a4f725d6f00f6a4f49efc38f336156c3aec82c"
+        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toSm > should convert to Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:76:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4aafb5ce03d98769ff44a32295f7d4886b83bc1e33b6ee6eeb6b2b95dcd0960c",
-        "68ec156207f3b5a7a74fa59c884b0e4587f2c5b8509eb16a1cf61f1c0cff78ff",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "962664a13cf5b20babae8a63b859175c697075b2117c62efab74e7ff0520951d"
+        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toSm > should convert to Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:78:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4aafb5ce03d98769ff44a32295f7d4886b83bc1e33b6ee6eeb6b2b95dcd0960c",
-        "68ec156207f3b5a7a74fa59c884b0e4587f2c5b8509eb16a1cf61f1c0cff78ff",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "962664a13cf5b20babae8a63b859175c697075b2117c62efab74e7ff0520951d"
+        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toSm > should convert to Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:7:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "90bc733145b484db34c347f75e0d3c3585aac3928bfbd509affe8fc41f3b76a9",
-        "eb651f306459688e01bc967000654465f13be6e6174a20eed8522f986f5fdb1a",
-        "f20945175fbb57cf4af6b329a1f035f7c693e4740cec3e7ae1d7d07bb500e668",
-        "f229d8811157137584b17dd430d81059539ded1f967dc10cdc44137df715d184"
+        "f20945175fbb57cf4af6b329a1f035f7c693e4740cec3e7ae1d7d07bb500e668"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromJSON > should make Bn from a string；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:80:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "68ec156207f3b5a7a74fa59c884b0e4587f2c5b8509eb16a1cf61f1c0cff78ff",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "a5937ab91dec50a71ec575866f1491c31d30cf372499745311019ff2d56c385d",
-        "baa02d5a553e7cddeb925e99096bf567fffe3153a816478084910ff02e1fe6d8",
-        "fc92a0c3ad1d24263d09d93dc5a84326d09cc529878d388330d848da44cc047e"
+        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toSm > should convert to Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:82:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2bad4207a3a058507141d0fd9ccc1dcc57dc3428886024b32ab212ed90767a7d",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "a5937ab91dec50a71ec575866f1491c31d30cf372499745311019ff2d56c385d",
-        "baa02d5a553e7cddeb925e99096bf567fffe3153a816478084910ff02e1fe6d8",
-        "fc92a0c3ad1d24263d09d93dc5a84326d09cc529878d388330d848da44cc047e"
+        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toSm > should convert to Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:84:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2bad4207a3a058507141d0fd9ccc1dcc57dc3428886024b32ab212ed90767a7d",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "a5937ab91dec50a71ec575866f1491c31d30cf372499745311019ff2d56c385d",
-        "baa02d5a553e7cddeb925e99096bf567fffe3153a816478084910ff02e1fe6d8",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98",
-        "fc92a0c3ad1d24263d09d93dc5a84326d09cc529878d388330d848da44cc047e"
+        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toSm > should convert to Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:86:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2bad4207a3a058507141d0fd9ccc1dcc57dc3428886024b32ab212ed90767a7d",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "7e0485f61abb64e8b19e990ba2d3db03b34dc82758071e79d0f6a2b0973fcd01",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toSm > should convert to Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:88:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2bad4207a3a058507141d0fd9ccc1dcc57dc3428886024b32ab212ed90767a7d",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "7e0485f61abb64e8b19e990ba2d3db03b34dc82758071e79d0f6a2b0973fcd01",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toSm > should convert to Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:90:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toSm > should convert to Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:92:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #toSm > should convert to Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.serializers.test.ts:97:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "aa1056e45ba1f5caa3438989feaf452ff02ff6aeb5a18fbcae6ffde7a07a286e",
-        "ab75f0e0eb3d425ca903e0171e743c482f96d7b66c857343d714bd41b5899a29",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BigNumber/Serializers > #fromSm > should convert from Sm；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:102:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1",
-        "aa1056e45ba1f5caa3438989feaf452ff02ff6aeb5a18fbcae6ffde7a07a286e",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .bitLength() > should return proper bitLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:103:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1",
-        "aa1056e45ba1f5caa3438989feaf452ff02ff6aeb5a18fbcae6ffde7a07a286e",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .bitLength() > should return proper bitLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:104:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .bitLength() > should return proper bitLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:105:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .bitLength() > should return proper bitLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:106:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .bitLength() > should return proper bitLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:107:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "7061fb54d78a97af14acc2646ebbdf0e19cd76c943088152b8cecf82fcb93765",
-        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .bitLength() > should return proper bitLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:108:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "7061fb54d78a97af14acc2646ebbdf0e19cd76c943088152b8cecf82fcb93765",
-        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .bitLength() > should return proper bitLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:109:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "7061fb54d78a97af14acc2646ebbdf0e19cd76c943088152b8cecf82fcb93765",
-        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .bitLength() > should return proper bitLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:110:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "7061fb54d78a97af14acc2646ebbdf0e19cd76c943088152b8cecf82fcb93765",
-        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .bitLength() > should return proper bitLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:111:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "7061fb54d78a97af14acc2646ebbdf0e19cd76c943088152b8cecf82fcb93765",
-        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .bitLength() > should return proper bitLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:112:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "7061fb54d78a97af14acc2646ebbdf0e19cd76c943088152b8cecf82fcb93765",
-        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .bitLength() > should return proper bitLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:113:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "7061fb54d78a97af14acc2646ebbdf0e19cd76c943088152b8cecf82fcb93765",
-        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "9942dac0d5fde2608bbed0e3f59d6111dac2740752cf9fa4a1b8153c6574a9d1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .bitLength() > should return proper bitLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:118:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439",
-        "4be983b6aa47de3ed7049870ccfeb59345662503e040927c58b97b11138fe80e",
-        "a7bc29baedc87189774b63ad0fca65b9ddaa3c7ee8228bc54de23e0ce691b6d8",
-        "c6a83b7f691fc1c34cb080692e106f084342b03bf2ff4eb0a6c5aced8daaf379"
+        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .byteLength() > should return proper byteLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:119:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439",
-        "4be983b6aa47de3ed7049870ccfeb59345662503e040927c58b97b11138fe80e",
-        "7ad9f9d9517a99ac1e212afad2c2743d44f35ef1368ac01dbdd203913e9500d6",
-        "a7bc29baedc87189774b63ad0fca65b9ddaa3c7ee8228bc54de23e0ce691b6d8",
-        "c6a83b7f691fc1c34cb080692e106f084342b03bf2ff4eb0a6c5aced8daaf379"
+        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .byteLength() > should return proper byteLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:11:11:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4567a470cc6163c00309d4a8c043bcc141bb7ee863531d9ad4401eb76a8a7a3b",
-        "4d521b8e2d90825c83d08c67453633b3dc8d746616e24cf75b4fa363fdfb0ee3",
-        "8275e3fcd1c38c3a77b720b272b8ec3023c1956c8648d80403358523cbefd82c",
-        "9b0b517411abfc60a9251e93b8da170d6bdd231ab023ab49a94fecd7d1fd1946",
-        "eb651f306459688e01bc967000654465f13be6e6174a20eed8522f986f5fdb1a",
-        "f229d8811157137584b17dd430d81059539ded1f967dc10cdc44137df715d184"
+        "4d521b8e2d90825c83d08c67453633b3dc8d746616e24cf75b4fa363fdfb0ee3"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > hex no padding > should have same length as input；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:120:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439",
-        "7ad9f9d9517a99ac1e212afad2c2743d44f35ef1368ac01dbdd203913e9500d6",
-        "a7bc29baedc87189774b63ad0fca65b9ddaa3c7ee8228bc54de23e0ce691b6d8"
+        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .byteLength() > should return proper byteLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:121:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439",
-        "7ad9f9d9517a99ac1e212afad2c2743d44f35ef1368ac01dbdd203913e9500d6",
-        "91e9c16516966aabac511d6475911227df6353624c42fea68983bee3ad508e4e",
-        "a7bc29baedc87189774b63ad0fca65b9ddaa3c7ee8228bc54de23e0ce691b6d8"
+        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .byteLength() > should return proper byteLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:122:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439",
-        "7ad9f9d9517a99ac1e212afad2c2743d44f35ef1368ac01dbdd203913e9500d6",
-        "91e9c16516966aabac511d6475911227df6353624c42fea68983bee3ad508e4e"
+        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .byteLength() > should return proper byteLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:123:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439",
-        "0fe242516600669b01362608b603113e1aca0acf3d8f75b5cff3780e14be62ee",
-        "91e9c16516966aabac511d6475911227df6353624c42fea68983bee3ad508e4e",
-        "ab98f4a447c71dcc2b3d221300f6649a28322798130bfefb2e10077a2df6669a"
+        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .byteLength() > should return proper byteLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:124:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439",
-        "0fe242516600669b01362608b603113e1aca0acf3d8f75b5cff3780e14be62ee",
-        "ab98f4a447c71dcc2b3d221300f6649a28322798130bfefb2e10077a2df6669a"
+        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .byteLength() > should return proper byteLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:125:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439",
-        "0fe242516600669b01362608b603113e1aca0acf3d8f75b5cff3780e14be62ee",
-        "a454fb20148784e9a31e79f5fee3832e399975140b88b52db1eb0b642d49fbcb",
-        "ab98f4a447c71dcc2b3d221300f6649a28322798130bfefb2e10077a2df6669a"
+        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .byteLength() > should return proper byteLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:126:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439",
-        "0fe242516600669b01362608b603113e1aca0acf3d8f75b5cff3780e14be62ee",
-        "7fc39a9e4b364b763acd4768d78dd91e10b93c4939103329c56d8ea347e34afc",
-        "a454fb20148784e9a31e79f5fee3832e399975140b88b52db1eb0b642d49fbcb",
-        "ab98f4a447c71dcc2b3d221300f6649a28322798130bfefb2e10077a2df6669a"
+        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .byteLength() > should return proper byteLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:127:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439",
-        "7fc39a9e4b364b763acd4768d78dd91e10b93c4939103329c56d8ea347e34afc",
-        "a454fb20148784e9a31e79f5fee3832e399975140b88b52db1eb0b642d49fbcb",
-        "ab98f4a447c71dcc2b3d221300f6649a28322798130bfefb2e10077a2df6669a"
+        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .byteLength() > should return proper byteLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:128:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439",
-        "7fc39a9e4b364b763acd4768d78dd91e10b93c4939103329c56d8ea347e34afc",
-        "a454fb20148784e9a31e79f5fee3832e399975140b88b52db1eb0b642d49fbcb",
-        "ab98f4a447c71dcc2b3d221300f6649a28322798130bfefb2e10077a2df6669a"
+        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .byteLength() > should return proper byteLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:129:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439",
-        "7fc39a9e4b364b763acd4768d78dd91e10b93c4939103329c56d8ea347e34afc",
-        "a454fb20148784e9a31e79f5fee3832e399975140b88b52db1eb0b642d49fbcb",
-        "ab98f4a447c71dcc2b3d221300f6649a28322798130bfefb2e10077a2df6669a"
+        "0baed098bd844368623eaf502545f0023458ef44765eacf5f1131e7141cd8439"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .byteLength() > should return proper byteLength；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:134:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "4344cf14f55cf74e987e9730a7a5ca1dd05c360ece44161b201a10b8844d54a8",
-        "7fc39a9e4b364b763acd4768d78dd91e10b93c4939103329c56d8ea347e34afc",
-        "a58f3431dda5969cc77523d9b4aa19218bcbd72bd468183f883076a6681c9569",
-        "d9bcf6cfe0883d1bff5227c5db4c5e9656518f1b6ca3cb047492a8011d6527d9"
+        "4344cf14f55cf74e987e9730a7a5ca1dd05c360ece44161b201a10b8844d54a8"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toArray() > should return [ 0 ] for `0`；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:136:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "10e82a4e1d4f3bc4a6b3042b2bf5b0da38514fc512080155d2356243b9ca4753",
-        "4344cf14f55cf74e987e9730a7a5ca1dd05c360ece44161b201a10b8844d54a8",
-        "7fc39a9e4b364b763acd4768d78dd91e10b93c4939103329c56d8ea347e34afc",
-        "a58f3431dda5969cc77523d9b4aa19218bcbd72bd468183f883076a6681c9569",
-        "d9bcf6cfe0883d1bff5227c5db4c5e9656518f1b6ca3cb047492a8011d6527d9"
+        "4344cf14f55cf74e987e9730a7a5ca1dd05c360ece44161b201a10b8844d54a8"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toArray() > should return [ 0 ] for `0`；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:137:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "10e82a4e1d4f3bc4a6b3042b2bf5b0da38514fc512080155d2356243b9ca4753",
-        "4344cf14f55cf74e987e9730a7a5ca1dd05c360ece44161b201a10b8844d54a8",
-        "a58f3431dda5969cc77523d9b4aa19218bcbd72bd468183f883076a6681c9569",
-        "d9bcf6cfe0883d1bff5227c5db4c5e9656518f1b6ca3cb047492a8011d6527d9",
-        "d9c1e5b518f633df62fcef46dad93b181ac3f66dc277685715463b194df229ed"
+        "4344cf14f55cf74e987e9730a7a5ca1dd05c360ece44161b201a10b8844d54a8"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toArray() > should return [ 0 ] for `0`；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:140:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "12e8e1835d604f7dddb11ce3c2efc2174cfeff4358eaef1af0403167f4b64847",
-        "61fdb4aab937ed0261fcf53a0ee386f4c8238b34643248ec4de78503fdd6751a",
-        "d9c1e5b518f633df62fcef46dad93b181ac3f66dc277685715463b194df229ed",
         "f5a87184cf4b0f3b120f8a0b050bb6d46403b26dabc56032fe4aaa83b0687938"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toArray() > should zero pad to desired lengths；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:142:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "12e8e1835d604f7dddb11ce3c2efc2174cfeff4358eaef1af0403167f4b64847",
-        "15a7db3001210ad3dddbe39a1cbcdee9b5b301f54e9cd9bae65bc196d3ebd137",
-        "61fdb4aab937ed0261fcf53a0ee386f4c8238b34643248ec4de78503fdd6751a",
-        "d9c1e5b518f633df62fcef46dad93b181ac3f66dc277685715463b194df229ed",
         "f5a87184cf4b0f3b120f8a0b050bb6d46403b26dabc56032fe4aaa83b0687938"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toArray() > should zero pad to desired lengths；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:143:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "12e8e1835d604f7dddb11ce3c2efc2174cfeff4358eaef1af0403167f4b64847",
-        "15a7db3001210ad3dddbe39a1cbcdee9b5b301f54e9cd9bae65bc196d3ebd137",
-        "d9c1e5b518f633df62fcef46dad93b181ac3f66dc277685715463b194df229ed",
         "f5a87184cf4b0f3b120f8a0b050bb6d46403b26dabc56032fe4aaa83b0687938"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toArray() > should zero pad to desired lengths；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:146:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "15a7db3001210ad3dddbe39a1cbcdee9b5b301f54e9cd9bae65bc196d3ebd137",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
         "722390b002636becd572256cabf4bbfc0ab30252e7ba133a92f8eca6a232a261"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toArray() > should throw when naturally larger than desired length；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:148:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "15a7db3001210ad3dddbe39a1cbcdee9b5b301f54e9cd9bae65bc196d3ebd137",
-        "4fa1564e01f2ebca2db78321ed2f627c00fe4e329378231eb869a3bc37a48a21",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
-        "722390b002636becd572256cabf4bbfc0ab30252e7ba133a92f8eca6a232a261",
-        "aa6959febd1a18df8259eca3b08852b0a4490e89a2abca9dcdb12ad90897ad79"
+        "722390b002636becd572256cabf4bbfc0ab30252e7ba133a92f8eca6a232a261"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toArray() > should throw when naturally larger than desired length；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:155:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "15a7db3001210ad3dddbe39a1cbcdee9b5b301f54e9cd9bae65bc196d3ebd137",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
         "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toNumber() > should return proper Number if below the limit；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:156:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "15a7db3001210ad3dddbe39a1cbcdee9b5b301f54e9cd9bae65bc196d3ebd137",
-        "43a4d2e73416b22300ddbadbbc0ee437be49db0639f0d09e5665c63ba184136e",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
         "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toNumber() > should return proper Number if below the limit；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:157:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "15a7db3001210ad3dddbe39a1cbcdee9b5b301f54e9cd9bae65bc196d3ebd137",
-        "43a4d2e73416b22300ddbadbbc0ee437be49db0639f0d09e5665c63ba184136e",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
         "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toNumber() > should return proper Number if below the limit；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:158:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "43a4d2e73416b22300ddbadbbc0ee437be49db0639f0d09e5665c63ba184136e",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
         "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toNumber() > should return proper Number if below the limit；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:159:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "43a4d2e73416b22300ddbadbbc0ee437be49db0639f0d09e5665c63ba184136e",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
         "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toNumber() > should return proper Number if below the limit；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:160:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "43a4d2e73416b22300ddbadbbc0ee437be49db0639f0d09e5665c63ba184136e",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
         "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toNumber() > should return proper Number if below the limit；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:161:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "43a4d2e73416b22300ddbadbbc0ee437be49db0639f0d09e5665c63ba184136e",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
-        "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902",
-        "dc7e4155c171fe0c5942fb76a43ac6fc3d62ad70de89bb1b1f6f29ec448fa4d0"
+        "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toNumber() > should return proper Number if below the limit；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:162:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "43a4d2e73416b22300ddbadbbc0ee437be49db0639f0d09e5665c63ba184136e",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
-        "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902",
-        "dc7e4155c171fe0c5942fb76a43ac6fc3d62ad70de89bb1b1f6f29ec448fa4d0"
+        "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toNumber() > should return proper Number if below the limit；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:163:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "43a4d2e73416b22300ddbadbbc0ee437be49db0639f0d09e5665c63ba184136e",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
-        "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902",
-        "dc7e4155c171fe0c5942fb76a43ac6fc3d62ad70de89bb1b1f6f29ec448fa4d0"
+        "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toNumber() > should return proper Number if below the limit；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:164:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
-        "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902",
-        "dc7e4155c171fe0c5942fb76a43ac6fc3d62ad70de89bb1b1f6f29ec448fa4d0"
+        "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toNumber() > should return proper Number if below the limit；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:165:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
-        "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902",
-        "c5555ea3c80a7a7e8ce8d92acb6806ee65e942f9fa49a4b3b25c1c744b74f9f8",
-        "dc7e4155c171fe0c5942fb76a43ac6fc3d62ad70de89bb1b1f6f29ec448fa4d0"
+        "5e455dd943d282933ce119746efa8cf3ce44bb4284e1bed2dcb038ee49c17902"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toNumber() > should return proper Number if below the limit；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:168:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "56da524bc03964d8933d4d39ac1006f284f857972a28044741cc303c5e9f52b0",
-        "59fe9e0958db2a8132bfb0e00387760a34b0880d23756aaf391f09497e766010",
-        "c5555ea3c80a7a7e8ce8d92acb6806ee65e942f9fa49a4b3b25c1c744b74f9f8"
+        "56da524bc03964d8933d4d39ac1006f284f857972a28044741cc303c5e9f52b0"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toNumber() > should throw when number exceeds 53 bits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:170:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "56da524bc03964d8933d4d39ac1006f284f857972a28044741cc303c5e9f52b0",
-        "e20b2b7c38682ce1ad142a1882cdae9705df73772e4419261e8a22796d5c6930",
-        "f227e8738770c1015d503adcbe4051cbe07b13b22a7d1475a66566bdba1b7ac6"
+        "56da524bc03964d8933d4d39ac1006f284f857972a28044741cc303c5e9f52b0"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toNumber() > should throw when number exceeds 53 bits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:177:5:registration",
@@ -74866,528 +74560,433 @@
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:179:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8",
-        "0c6f0be8117b37e61168cd10212dc43caed78c08f2efa3d5b5800e7da96bef65",
-        "54d5fd04982eeb1241b6dd8210a83493fc2ac33b5b4aa9c208a8e8c6955ad6a9"
+        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .zeroBits() > should return proper zeroBits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:17:7:registration",
       "status": "reviewed",
       "caseIds": [
-        "1e8c977a9cdd9b5e4bd851907916d9463a89218ce0ad7a31a47c917c536baee7",
-        "4567a470cc6163c00309d4a8c043bcc141bb7ee863531d9ad4401eb76a8a7a3b",
-        "8275e3fcd1c38c3a77b720b272b8ec3023c1956c8648d80403358523cbefd82c",
-        "93edd9fd10ce702fcf954f65eacfaf72afa03f4de0f28f2da9b25c2e338a5a0f",
-        "9b0b517411abfc60a9251e93b8da170d6bdd231ab023ab49a94fecd7d1fd1946",
-        "f229d8811157137584b17dd430d81059539ded1f967dc10cdc44137df715d184"
+        "93edd9fd10ce702fcf954f65eacfaf72afa03f4de0f28f2da9b25c2e338a5a0f"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > binary padding > should have a length of 256；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:180:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8",
-        "0c6f0be8117b37e61168cd10212dc43caed78c08f2efa3d5b5800e7da96bef65",
-        "54d5fd04982eeb1241b6dd8210a83493fc2ac33b5b4aa9c208a8e8c6955ad6a9"
+        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .zeroBits() > should return proper zeroBits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:181:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8",
-        "0c6f0be8117b37e61168cd10212dc43caed78c08f2efa3d5b5800e7da96bef65",
-        "54d5fd04982eeb1241b6dd8210a83493fc2ac33b5b4aa9c208a8e8c6955ad6a9"
+        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .zeroBits() > should return proper zeroBits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:182:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8",
-        "54d5fd04982eeb1241b6dd8210a83493fc2ac33b5b4aa9c208a8e8c6955ad6a9"
+        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .zeroBits() > should return proper zeroBits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:183:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8",
-        "54d5fd04982eeb1241b6dd8210a83493fc2ac33b5b4aa9c208a8e8c6955ad6a9"
+        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .zeroBits() > should return proper zeroBits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:184:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8",
-        "54d5fd04982eeb1241b6dd8210a83493fc2ac33b5b4aa9c208a8e8c6955ad6a9",
-        "bb925405953de9f93f0e0e783a6feadec9cdca087bb2fd40d950c2bd17cb4ab8"
+        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .zeroBits() > should return proper zeroBits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:185:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8",
-        "54d5fd04982eeb1241b6dd8210a83493fc2ac33b5b4aa9c208a8e8c6955ad6a9",
-        "bb925405953de9f93f0e0e783a6feadec9cdca087bb2fd40d950c2bd17cb4ab8"
+        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .zeroBits() > should return proper zeroBits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:186:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8",
-        "54d5fd04982eeb1241b6dd8210a83493fc2ac33b5b4aa9c208a8e8c6955ad6a9",
-        "bb925405953de9f93f0e0e783a6feadec9cdca087bb2fd40d950c2bd17cb4ab8"
+        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .zeroBits() > should return proper zeroBits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:187:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8",
-        "54d5fd04982eeb1241b6dd8210a83493fc2ac33b5b4aa9c208a8e8c6955ad6a9",
-        "bb925405953de9f93f0e0e783a6feadec9cdca087bb2fd40d950c2bd17cb4ab8"
+        "035ad5e90ca3c17b42c8c2933820e920cac95ee2ded7f51cbd9971230f50bab8"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .zeroBits() > should return proper zeroBits；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:192:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "10eefb36adaf3656b20d8b7087d2b9cf49c708e351b5581925e5710eaa995ec0",
-        "54d5fd04982eeb1241b6dd8210a83493fc2ac33b5b4aa9c208a8e8c6955ad6a9",
-        "bb925405953de9f93f0e0e783a6feadec9cdca087bb2fd40d950c2bd17cb4ab8"
+        "10eefb36adaf3656b20d8b7087d2b9cf49c708e351b5581925e5710eaa995ec0"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toJSON > should return hex string；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:193:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "10eefb36adaf3656b20d8b7087d2b9cf49c708e351b5581925e5710eaa995ec0",
-        "54d5fd04982eeb1241b6dd8210a83493fc2ac33b5b4aa9c208a8e8c6955ad6a9",
-        "bb925405953de9f93f0e0e783a6feadec9cdca087bb2fd40d950c2bd17cb4ab8"
+        "10eefb36adaf3656b20d8b7087d2b9cf49c708e351b5581925e5710eaa995ec0"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toJSON > should return hex string；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:198:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf",
-        "bb925405953de9f93f0e0e783a6feadec9cdca087bb2fd40d950c2bd17cb4ab8",
-        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
+        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmpn > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:199:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0350edb7016e6cd811de9ad2c4c351a00b1d7e7de16b6025a97abb2c8f56359e",
-        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf",
-        "bb925405953de9f93f0e0e783a6feadec9cdca087bb2fd40d950c2bd17cb4ab8",
-        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
+        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmpn > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:200:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0350edb7016e6cd811de9ad2c4c351a00b1d7e7de16b6025a97abb2c8f56359e",
-        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf",
-        "bb925405953de9f93f0e0e783a6feadec9cdca087bb2fd40d950c2bd17cb4ab8",
-        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
+        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmpn > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:201:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0350edb7016e6cd811de9ad2c4c351a00b1d7e7de16b6025a97abb2c8f56359e",
-        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf",
-        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
+        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmpn > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:202:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0350edb7016e6cd811de9ad2c4c351a00b1d7e7de16b6025a97abb2c8f56359e",
-        "6513cf41b39d8aacd1d0e889505e011b3b1cb756a879896a7b1377e4d8066ea2",
-        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf",
-        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
+        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmpn > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:203:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0350edb7016e6cd811de9ad2c4c351a00b1d7e7de16b6025a97abb2c8f56359e",
-        "6513cf41b39d8aacd1d0e889505e011b3b1cb756a879896a7b1377e4d8066ea2",
-        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf",
-        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
+        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmpn > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:204:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0350edb7016e6cd811de9ad2c4c351a00b1d7e7de16b6025a97abb2c8f56359e",
-        "6513cf41b39d8aacd1d0e889505e011b3b1cb756a879896a7b1377e4d8066ea2",
-        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf",
-        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
+        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmpn > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:205:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0350edb7016e6cd811de9ad2c4c351a00b1d7e7de16b6025a97abb2c8f56359e",
-        "6513cf41b39d8aacd1d0e889505e011b3b1cb756a879896a7b1377e4d8066ea2",
-        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf",
-        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
+        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmpn > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:208:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "6513cf41b39d8aacd1d0e889505e011b3b1cb756a879896a7b1377e4d8066ea2",
-        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf",
-        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
+        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmpn > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:209:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "6513cf41b39d8aacd1d0e889505e011b3b1cb756a879896a7b1377e4d8066ea2",
-        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf",
-        "7930174db7d313fb055b4a8003e883814046e9b22b8734f43ef8657a5463f085",
-        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
+        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmpn > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:20:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "1e8c977a9cdd9b5e4bd851907916d9463a89218ce0ad7a31a47c917c536baee7",
-        "4d6db4c75663c4e9337355b7127d57e134c9d67a710014a8637428dc122c544e",
-        "93edd9fd10ce702fcf954f65eacfaf72afa03f4de0f28f2da9b25c2e338a5a0f",
-        "f229d8811157137584b17dd430d81059539ded1f967dc10cdc44137df715d184"
+        "93edd9fd10ce702fcf954f65eacfaf72afa03f4de0f28f2da9b25c2e338a5a0f"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > binary padding > should have a length of 256；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:210:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "6513cf41b39d8aacd1d0e889505e011b3b1cb756a879896a7b1377e4d8066ea2",
-        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf",
-        "7930174db7d313fb055b4a8003e883814046e9b22b8734f43ef8657a5463f085",
-        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
+        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmpn > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:211:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "6513cf41b39d8aacd1d0e889505e011b3b1cb756a879896a7b1377e4d8066ea2",
-        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf",
-        "7930174db7d313fb055b4a8003e883814046e9b22b8734f43ef8657a5463f085",
-        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
+        "76c885b7de96094cd279ebcfcc87655004ef10a51e6a03963828e4d8a0b812cf"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmpn > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:216:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "4a19807c7f741182b53166ea9e8c9857b926b68490611ee3da9b27913b6f6f15",
-        "7930174db7d313fb055b4a8003e883814046e9b22b8734f43ef8657a5463f085"
+        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmp > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:217:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4a19807c7f741182b53166ea9e8c9857b926b68490611ee3da9b27913b6f6f15",
-        "7930174db7d313fb055b4a8003e883814046e9b22b8734f43ef8657a5463f085"
+        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmp > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:218:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4a19807c7f741182b53166ea9e8c9857b926b68490611ee3da9b27913b6f6f15",
-        "7930174db7d313fb055b4a8003e883814046e9b22b8734f43ef8657a5463f085"
+        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmp > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:219:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4a19807c7f741182b53166ea9e8c9857b926b68490611ee3da9b27913b6f6f15",
-        "7930174db7d313fb055b4a8003e883814046e9b22b8734f43ef8657a5463f085"
+        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmp > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:220:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4a19807c7f741182b53166ea9e8c9857b926b68490611ee3da9b27913b6f6f15",
-        "7930174db7d313fb055b4a8003e883814046e9b22b8734f43ef8657a5463f085"
+        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmp > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:221:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4a19807c7f741182b53166ea9e8c9857b926b68490611ee3da9b27913b6f6f15",
-        "7930174db7d313fb055b4a8003e883814046e9b22b8734f43ef8657a5463f085"
+        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmp > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:222:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4a19807c7f741182b53166ea9e8c9857b926b68490611ee3da9b27913b6f6f15",
-        "7930174db7d313fb055b4a8003e883814046e9b22b8734f43ef8657a5463f085"
+        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmp > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:223:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4a19807c7f741182b53166ea9e8c9857b926b68490611ee3da9b27913b6f6f15",
-        "7930174db7d313fb055b4a8003e883814046e9b22b8734f43ef8657a5463f085"
+        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmp > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:224:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4a19807c7f741182b53166ea9e8c9857b926b68490611ee3da9b27913b6f6f15",
-        "7930174db7d313fb055b4a8003e883814046e9b22b8734f43ef8657a5463f085"
+        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmp > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:225:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4a19807c7f741182b53166ea9e8c9857b926b68490611ee3da9b27913b6f6f15",
-        "7930174db7d313fb055b4a8003e883814046e9b22b8734f43ef8657a5463f085"
+        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmp > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:226:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4a19807c7f741182b53166ea9e8c9857b926b68490611ee3da9b27913b6f6f15"
+        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmp > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:227:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4a19807c7f741182b53166ea9e8c9857b926b68490611ee3da9b27913b6f6f15"
+        "e55800896ded6a5c591eb388e98dab9e67f36e5f49fd85cc67a108d59f938a23"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .cmp > should return -1, 0, 1 correctly；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:232:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "19b52cf7a1282b35485326240e3a323d90125eaba91519499d0ca970f94205de",
-        "4063b5d18c0c54511a00b84788a65d4088b57aadcaae2437238a10f081a5c89e"
+        "19b52cf7a1282b35485326240e3a323d90125eaba91519499d0ca970f94205de"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gtn greater than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:233:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "19b52cf7a1282b35485326240e3a323d90125eaba91519499d0ca970f94205de",
-        "4063b5d18c0c54511a00b84788a65d4088b57aadcaae2437238a10f081a5c89e"
+        "19b52cf7a1282b35485326240e3a323d90125eaba91519499d0ca970f94205de"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gtn greater than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:234:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "19b52cf7a1282b35485326240e3a323d90125eaba91519499d0ca970f94205de",
-        "4063b5d18c0c54511a00b84788a65d4088b57aadcaae2437238a10f081a5c89e"
+        "19b52cf7a1282b35485326240e3a323d90125eaba91519499d0ca970f94205de"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gtn greater than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:235:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "19b52cf7a1282b35485326240e3a323d90125eaba91519499d0ca970f94205de",
-        "4063b5d18c0c54511a00b84788a65d4088b57aadcaae2437238a10f081a5c89e"
+        "19b52cf7a1282b35485326240e3a323d90125eaba91519499d0ca970f94205de"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gtn greater than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:237:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "4063b5d18c0c54511a00b84788a65d4088b57aadcaae2437238a10f081a5c89e",
-        "5caf69bfa223b27be4312aadcc250debcf833315814043cb8a5eacff561b995e",
-        "76478c0bec40699b43ca131c96bdb6259a4ef1f9c84ea1e2bda76f9a8f4c180d"
+        "5caf69bfa223b27be4312aadcc250debcf833315814043cb8a5eacff561b995e"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gt greater than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:238:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4063b5d18c0c54511a00b84788a65d4088b57aadcaae2437238a10f081a5c89e",
-        "5caf69bfa223b27be4312aadcc250debcf833315814043cb8a5eacff561b995e",
-        "76478c0bec40699b43ca131c96bdb6259a4ef1f9c84ea1e2bda76f9a8f4c180d"
+        "5caf69bfa223b27be4312aadcc250debcf833315814043cb8a5eacff561b995e"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gt greater than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:239:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "5caf69bfa223b27be4312aadcc250debcf833315814043cb8a5eacff561b995e",
-        "76478c0bec40699b43ca131c96bdb6259a4ef1f9c84ea1e2bda76f9a8f4c180d"
+        "5caf69bfa223b27be4312aadcc250debcf833315814043cb8a5eacff561b995e"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gt greater than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:240:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "5caf69bfa223b27be4312aadcc250debcf833315814043cb8a5eacff561b995e",
-        "76478c0bec40699b43ca131c96bdb6259a4ef1f9c84ea1e2bda76f9a8f4c180d",
-        "edbf81e369fab0ba16987b3a55c64be6337d2428b483933e39335bbb18dcdcb5"
+        "5caf69bfa223b27be4312aadcc250debcf833315814043cb8a5eacff561b995e"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gt greater than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:242:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "14aabcd9f1ecd8bfb48522a17290a75a6eac26aa625b246339221a54cab6af44",
-        "76478c0bec40699b43ca131c96bdb6259a4ef1f9c84ea1e2bda76f9a8f4c180d",
-        "edbf81e369fab0ba16987b3a55c64be6337d2428b483933e39335bbb18dcdcb5"
+        "14aabcd9f1ecd8bfb48522a17290a75a6eac26aa625b246339221a54cab6af44"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gten greater than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:243:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "14aabcd9f1ecd8bfb48522a17290a75a6eac26aa625b246339221a54cab6af44",
-        "76478c0bec40699b43ca131c96bdb6259a4ef1f9c84ea1e2bda76f9a8f4c180d",
-        "edbf81e369fab0ba16987b3a55c64be6337d2428b483933e39335bbb18dcdcb5"
+        "14aabcd9f1ecd8bfb48522a17290a75a6eac26aa625b246339221a54cab6af44"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gten greater than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:244:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "14aabcd9f1ecd8bfb48522a17290a75a6eac26aa625b246339221a54cab6af44",
-        "76478c0bec40699b43ca131c96bdb6259a4ef1f9c84ea1e2bda76f9a8f4c180d",
-        "edbf81e369fab0ba16987b3a55c64be6337d2428b483933e39335bbb18dcdcb5"
+        "14aabcd9f1ecd8bfb48522a17290a75a6eac26aa625b246339221a54cab6af44"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gten greater than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:245:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "14aabcd9f1ecd8bfb48522a17290a75a6eac26aa625b246339221a54cab6af44",
-        "76478c0bec40699b43ca131c96bdb6259a4ef1f9c84ea1e2bda76f9a8f4c180d"
+        "14aabcd9f1ecd8bfb48522a17290a75a6eac26aa625b246339221a54cab6af44"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gten greater than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:247:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "0c608db43265cc51388909d370a3f5968213a2be4a2326e611cc0b456c67ccc7",
-        "76478c0bec40699b43ca131c96bdb6259a4ef1f9c84ea1e2bda76f9a8f4c180d"
+        "0c608db43265cc51388909d370a3f5968213a2be4a2326e611cc0b456c67ccc7"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gte greater than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:248:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0c608db43265cc51388909d370a3f5968213a2be4a2326e611cc0b456c67ccc7",
-        "76478c0bec40699b43ca131c96bdb6259a4ef1f9c84ea1e2bda76f9a8f4c180d"
+        "0c608db43265cc51388909d370a3f5968213a2be4a2326e611cc0b456c67ccc7"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gte greater than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:249:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0c608db43265cc51388909d370a3f5968213a2be4a2326e611cc0b456c67ccc7",
-        "76478c0bec40699b43ca131c96bdb6259a4ef1f9c84ea1e2bda76f9a8f4c180d"
+        "0c608db43265cc51388909d370a3f5968213a2be4a2326e611cc0b456c67ccc7"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gte greater than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:24:7:registration",
       "status": "reviewed",
       "caseIds": [
-        "4d6db4c75663c4e9337355b7127d57e134c9d67a710014a8637428dc122c544e",
-        "94a92d354a2a28ba411756e5218f736d353167ca579ecd9100e37590fad1f2a6",
         "a1196c515304e97abd378553c3c12d39fc34a1211d34e4e50769688b519a63cd"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > hex padding > should have length of 8 from leading 15；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:250:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0c608db43265cc51388909d370a3f5968213a2be4a2326e611cc0b456c67ccc7",
-        "76478c0bec40699b43ca131c96bdb6259a4ef1f9c84ea1e2bda76f9a8f4c180d"
+        "0c608db43265cc51388909d370a3f5968213a2be4a2326e611cc0b456c67ccc7"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .gte greater than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:252:5:registration",
@@ -75401,284 +75000,233 @@
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:253:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "1d1dda774f45f5c98cabcf094fc796254f2c628753ee57323e206e5c3a7b6c18",
-        "6e609ee7bbdae2420de8d89723e4c2c5e33110c6c5f5a469c2dfcdddf4845fd3"
+        "1d1dda774f45f5c98cabcf094fc796254f2c628753ee57323e206e5c3a7b6c18"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .ltn less than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:254:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "1d1dda774f45f5c98cabcf094fc796254f2c628753ee57323e206e5c3a7b6c18",
-        "6e609ee7bbdae2420de8d89723e4c2c5e33110c6c5f5a469c2dfcdddf4845fd3"
+        "1d1dda774f45f5c98cabcf094fc796254f2c628753ee57323e206e5c3a7b6c18"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .ltn less than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:255:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "1d1dda774f45f5c98cabcf094fc796254f2c628753ee57323e206e5c3a7b6c18",
-        "6e609ee7bbdae2420de8d89723e4c2c5e33110c6c5f5a469c2dfcdddf4845fd3",
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f"
+        "1d1dda774f45f5c98cabcf094fc796254f2c628753ee57323e206e5c3a7b6c18"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .ltn less than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:257:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "440af4c599c8319552b08722d292eee8e43b7b4305b0113b68dad3f47b0d8c4e",
-        "6e609ee7bbdae2420de8d89723e4c2c5e33110c6c5f5a469c2dfcdddf4845fd3",
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f"
+        "440af4c599c8319552b08722d292eee8e43b7b4305b0113b68dad3f47b0d8c4e"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .lt less than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:258:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "440af4c599c8319552b08722d292eee8e43b7b4305b0113b68dad3f47b0d8c4e",
-        "6e609ee7bbdae2420de8d89723e4c2c5e33110c6c5f5a469c2dfcdddf4845fd3",
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f"
+        "440af4c599c8319552b08722d292eee8e43b7b4305b0113b68dad3f47b0d8c4e"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .lt less than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:259:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "440af4c599c8319552b08722d292eee8e43b7b4305b0113b68dad3f47b0d8c4e",
-        "6e609ee7bbdae2420de8d89723e4c2c5e33110c6c5f5a469c2dfcdddf4845fd3",
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f"
+        "440af4c599c8319552b08722d292eee8e43b7b4305b0113b68dad3f47b0d8c4e"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .lt less than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:260:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "440af4c599c8319552b08722d292eee8e43b7b4305b0113b68dad3f47b0d8c4e",
-        "6e609ee7bbdae2420de8d89723e4c2c5e33110c6c5f5a469c2dfcdddf4845fd3",
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f"
+        "440af4c599c8319552b08722d292eee8e43b7b4305b0113b68dad3f47b0d8c4e"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .lt less than；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:262:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "6e609ee7bbdae2420de8d89723e4c2c5e33110c6c5f5a469c2dfcdddf4845fd3",
-        "9205c3300745768e127d461c5c33fa3c9c356f81df2f898268418a6ecd8c1c9a",
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f"
+        "9205c3300745768e127d461c5c33fa3c9c356f81df2f898268418a6ecd8c1c9a"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .lten less than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:263:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "6e609ee7bbdae2420de8d89723e4c2c5e33110c6c5f5a469c2dfcdddf4845fd3",
-        "9205c3300745768e127d461c5c33fa3c9c356f81df2f898268418a6ecd8c1c9a",
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f"
+        "9205c3300745768e127d461c5c33fa3c9c356f81df2f898268418a6ecd8c1c9a"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .lten less than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:264:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "6e609ee7bbdae2420de8d89723e4c2c5e33110c6c5f5a469c2dfcdddf4845fd3",
-        "9205c3300745768e127d461c5c33fa3c9c356f81df2f898268418a6ecd8c1c9a",
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f"
+        "9205c3300745768e127d461c5c33fa3c9c356f81df2f898268418a6ecd8c1c9a"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .lten less than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:265:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "6e609ee7bbdae2420de8d89723e4c2c5e33110c6c5f5a469c2dfcdddf4845fd3",
-        "9205c3300745768e127d461c5c33fa3c9c356f81df2f898268418a6ecd8c1c9a",
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f"
+        "9205c3300745768e127d461c5c33fa3c9c356f81df2f898268418a6ecd8c1c9a"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .lten less than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:267:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f",
-        "b47d86d18398408a8e1ba83f842f336fa4554b453cef46318b87bb2cf694dc99",
         "dae6fc583fa1d52fcb74957c2df7073ffe2b39b81d1c82cf8941f1030b36f9fc"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .lte less than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:268:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f",
-        "b47d86d18398408a8e1ba83f842f336fa4554b453cef46318b87bb2cf694dc99",
         "dae6fc583fa1d52fcb74957c2df7073ffe2b39b81d1c82cf8941f1030b36f9fc"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .lte less than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:269:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f",
-        "b47d86d18398408a8e1ba83f842f336fa4554b453cef46318b87bb2cf694dc99",
         "dae6fc583fa1d52fcb74957c2df7073ffe2b39b81d1c82cf8941f1030b36f9fc"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .lte less than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:270:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f",
-        "b47d86d18398408a8e1ba83f842f336fa4554b453cef46318b87bb2cf694dc99",
         "dae6fc583fa1d52fcb74957c2df7073ffe2b39b81d1c82cf8941f1030b36f9fc"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .lte less than or equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:272:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "05f98e160e23f8841207fc4cec783da7d5e31483dd35865e7218f9c23974e705",
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f",
-        "b47d86d18398408a8e1ba83f842f336fa4554b453cef46318b87bb2cf694dc99"
+        "05f98e160e23f8841207fc4cec783da7d5e31483dd35865e7218f9c23974e705"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .eqn equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:273:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "05f98e160e23f8841207fc4cec783da7d5e31483dd35865e7218f9c23974e705",
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f",
-        "b47d86d18398408a8e1ba83f842f336fa4554b453cef46318b87bb2cf694dc99"
+        "05f98e160e23f8841207fc4cec783da7d5e31483dd35865e7218f9c23974e705"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .eqn equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:274:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "05f98e160e23f8841207fc4cec783da7d5e31483dd35865e7218f9c23974e705",
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f"
+        "05f98e160e23f8841207fc4cec783da7d5e31483dd35865e7218f9c23974e705"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .eqn equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:275:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "05f98e160e23f8841207fc4cec783da7d5e31483dd35865e7218f9c23974e705",
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f",
-        "b6be304af5b75f3c3f9b73910c9116f4b3c4e4887a09490aa519cc2f9cb12063"
+        "05f98e160e23f8841207fc4cec783da7d5e31483dd35865e7218f9c23974e705"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .eqn equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:277:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f",
-        "b6be304af5b75f3c3f9b73910c9116f4b3c4e4887a09490aa519cc2f9cb12063",
         "d3a9a6ce0b1b0e9d4d86f3bb990b392e6eda0845412b478db9960c98ba93cdea"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .eq equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:278:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f",
-        "b6be304af5b75f3c3f9b73910c9116f4b3c4e4887a09490aa519cc2f9cb12063",
         "d3a9a6ce0b1b0e9d4d86f3bb990b392e6eda0845412b478db9960c98ba93cdea"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .eq equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:279:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f",
-        "b6be304af5b75f3c3f9b73910c9116f4b3c4e4887a09490aa519cc2f9cb12063",
         "d3a9a6ce0b1b0e9d4d86f3bb990b392e6eda0845412b478db9960c98ba93cdea"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .eq equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:27:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4d6db4c75663c4e9337355b7127d57e134c9d67a710014a8637428dc122c544e",
-        "90977607569e3430c0f3c7e0e7b727835ce0c16c8fd2615cf6f95bf78fceec3f",
-        "94a92d354a2a28ba411756e5218f736d353167ca579ecd9100e37590fad1f2a6",
-        "a1196c515304e97abd378553c3c12d39fc34a1211d34e4e50769688b519a63cd",
-        "a9ecddbcf988b389b4a2374921bd9df9e81631e374923f4919cd25954ed9c8f3"
+        "a1196c515304e97abd378553c3c12d39fc34a1211d34e4e50769688b519a63cd"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > hex padding > should have length of 8 from leading 15；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:280:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "9be6202aead4f08f26f7bdd8c444e52b9c54e43995b2f70ef91e1affdcdd399f",
         "d3a9a6ce0b1b0e9d4d86f3bb990b392e6eda0845412b478db9960c98ba93cdea"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > comparison shorthands > .eq equal；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:285:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "0624dc3c038d1166743ba2bd2108f459adeb2e28116a99456c4e201e07da62df",
         "3c8d957077c759222f71cd1b009b239847baa3e8b6b823fca0424fc3cd36a567"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .fromTwos > should convert from two's complement to negative number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:286:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0624dc3c038d1166743ba2bd2108f459adeb2e28116a99456c4e201e07da62df",
         "3c8d957077c759222f71cd1b009b239847baa3e8b6b823fca0424fc3cd36a567"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .fromTwos > should convert from two's complement to negative number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:287:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0624dc3c038d1166743ba2bd2108f459adeb2e28116a99456c4e201e07da62df",
         "3c8d957077c759222f71cd1b009b239847baa3e8b6b823fca0424fc3cd36a567"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .fromTwos > should convert from two's complement to negative number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:288:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0624dc3c038d1166743ba2bd2108f459adeb2e28116a99456c4e201e07da62df",
         "3c8d957077c759222f71cd1b009b239847baa3e8b6b823fca0424fc3cd36a567"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .fromTwos > should convert from two's complement to negative number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:289:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0624dc3c038d1166743ba2bd2108f459adeb2e28116a99456c4e201e07da62df",
         "3c8d957077c759222f71cd1b009b239847baa3e8b6b823fca0424fc3cd36a567"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .fromTwos > should convert from two's complement to negative number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:290:7:assertion",
@@ -75724,600 +75272,457 @@
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:297:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "3c8d957077c759222f71cd1b009b239847baa3e8b6b823fca0424fc3cd36a567",
-        "d82311e33b85d146ed350071793cf79a61f74b78b75f7765e1e46d9b27957143"
+        "3c8d957077c759222f71cd1b009b239847baa3e8b6b823fca0424fc3cd36a567"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .fromTwos > should convert from two's complement to negative number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:302:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "3c8d957077c759222f71cd1b009b239847baa3e8b6b823fca0424fc3cd36a567",
-        "d82311e33b85d146ed350071793cf79a61f74b78b75f7765e1e46d9b27957143"
+        "3c8d957077c759222f71cd1b009b239847baa3e8b6b823fca0424fc3cd36a567"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .fromTwos > should convert from two's complement to negative number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:307:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "3c8d957077c759222f71cd1b009b239847baa3e8b6b823fca0424fc3cd36a567",
-        "d82311e33b85d146ed350071793cf79a61f74b78b75f7765e1e46d9b27957143"
+        "3c8d957077c759222f71cd1b009b239847baa3e8b6b823fca0424fc3cd36a567"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .fromTwos > should convert from two's complement to negative number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:30:7:registration",
       "status": "reviewed",
       "caseIds": [
-        "955053b007824a3019e2dfc765f75dbd508559838dc2e431168bc2e6f08dc2c0",
-        "a9ecddbcf988b389b4a2374921bd9df9e81631e374923f4919cd25954ed9c8f3",
         "fb9e7ee7d4723a9dc93839e6c3fe1e741379a1c2c9172be90ff546867fa3e132"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > hex padding > should have length of 8 from leading zero；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:317:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "3c8d957077c759222f71cd1b009b239847baa3e8b6b823fca0424fc3cd36a567",
-        "7da6c187b80313c1fe6ff0f5f420741b4ceb08fa04cbb5bac75c0735c807a28e"
+        "3c8d957077c759222f71cd1b009b239847baa3e8b6b823fca0424fc3cd36a567"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .fromTwos > should convert from two's complement to negative number；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:331:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "176b13d38caffcec83432e549787950fe61fefccbc1fb292e9db55cc43783620",
         "f1421c23d87ca21abb96b62cca18c8da7a3e5fd6a39151174e65ee88a1462f34"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toTwos > should convert from negative number to two's complement；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:332:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "176b13d38caffcec83432e549787950fe61fefccbc1fb292e9db55cc43783620",
         "f1421c23d87ca21abb96b62cca18c8da7a3e5fd6a39151174e65ee88a1462f34"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toTwos > should convert from negative number to two's complement；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:333:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "176b13d38caffcec83432e549787950fe61fefccbc1fb292e9db55cc43783620",
         "f1421c23d87ca21abb96b62cca18c8da7a3e5fd6a39151174e65ee88a1462f34"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toTwos > should convert from negative number to two's complement；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:334:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "176b13d38caffcec83432e549787950fe61fefccbc1fb292e9db55cc43783620",
         "f1421c23d87ca21abb96b62cca18c8da7a3e5fd6a39151174e65ee88a1462f34"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toTwos > should convert from negative number to two's complement；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:335:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "176b13d38caffcec83432e549787950fe61fefccbc1fb292e9db55cc43783620",
         "f1421c23d87ca21abb96b62cca18c8da7a3e5fd6a39151174e65ee88a1462f34"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toTwos > should convert from negative number to two's complement；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:336:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "176b13d38caffcec83432e549787950fe61fefccbc1fb292e9db55cc43783620",
         "f1421c23d87ca21abb96b62cca18c8da7a3e5fd6a39151174e65ee88a1462f34"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toTwos > should convert from negative number to two's complement；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:337:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "176b13d38caffcec83432e549787950fe61fefccbc1fb292e9db55cc43783620",
         "f1421c23d87ca21abb96b62cca18c8da7a3e5fd6a39151174e65ee88a1462f34"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toTwos > should convert from negative number to two's complement；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:338:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "176b13d38caffcec83432e549787950fe61fefccbc1fb292e9db55cc43783620",
         "f1421c23d87ca21abb96b62cca18c8da7a3e5fd6a39151174e65ee88a1462f34"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toTwos > should convert from negative number to two's complement；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:339:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "176b13d38caffcec83432e549787950fe61fefccbc1fb292e9db55cc43783620",
         "f1421c23d87ca21abb96b62cca18c8da7a3e5fd6a39151174e65ee88a1462f34"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toTwos > should convert from negative number to two's complement；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:33:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "3fa21d35dd93e893f335f01414211c4d42217b67e570790999663ee763da7b4b",
-        "955053b007824a3019e2dfc765f75dbd508559838dc2e431168bc2e6f08dc2c0",
-        "a9ecddbcf988b389b4a2374921bd9df9e81631e374923f4919cd25954ed9c8f3",
-        "fb9e7ee7d4723a9dc93839e6c3fe1e741379a1c2c9172be90ff546867fa3e132",
-        "ffd826c6c609c2da9998f331aaafcd0fd38ed9dd325907cd7019336042a1101c"
+        "fb9e7ee7d4723a9dc93839e6c3fe1e741379a1c2c9172be90ff546867fa3e132"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > hex padding > should have length of 8 from leading zero；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:340:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "176b13d38caffcec83432e549787950fe61fefccbc1fb292e9db55cc43783620",
         "f1421c23d87ca21abb96b62cca18c8da7a3e5fd6a39151174e65ee88a1462f34"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toTwos > should convert from negative number to two's complement；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:343:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "176b13d38caffcec83432e549787950fe61fefccbc1fb292e9db55cc43783620",
         "f1421c23d87ca21abb96b62cca18c8da7a3e5fd6a39151174e65ee88a1462f34"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toTwos > should convert from negative number to two's complement；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:346:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "176b13d38caffcec83432e549787950fe61fefccbc1fb292e9db55cc43783620",
         "f1421c23d87ca21abb96b62cca18c8da7a3e5fd6a39151174e65ee88a1462f34"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toTwos > should convert from negative number to two's complement；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:349:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "176b13d38caffcec83432e549787950fe61fefccbc1fb292e9db55cc43783620",
         "f1421c23d87ca21abb96b62cca18c8da7a3e5fd6a39151174e65ee88a1462f34"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toTwos > should convert from negative number to two's complement；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:357:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "bf329fdef0bb4c0ea8651e7a0cd931d1eff751a100a4747acbc13718f39e1222",
         "f1421c23d87ca21abb96b62cca18c8da7a3e5fd6a39151174e65ee88a1462f34"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toTwos > should convert from negative number to two's complement；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:369:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "bf329fdef0bb4c0ea8651e7a0cd931d1eff751a100a4747acbc13718f39e1222",
         "efd57162d6c7ae26cbc692ee876e094a2492b69983f346554b55293c34d8249a"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isBN > should return true for BN；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:36:7:registration",
       "status": "reviewed",
       "caseIds": [
-        "12a76c3d237d9d356ef44634cbc925b815deccaa5660f0d9dbabbe80706f3535",
-        "2838d5dc609a81d48d988699c69f6641bbc79290ac054958234df6d815841f0c",
-        "b5987f340ef78bc3368d13e6d8046615aa4085411cac8ff5393dbfe721b88b1c",
-        "ffd826c6c609c2da9998f331aaafcd0fd38ed9dd325907cd7019336042a1101c"
+        "2838d5dc609a81d48d988699c69f6641bbc79290ac054958234df6d815841f0c"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > hex padding > should have length of 8 from leading zeros；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:370:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "bf329fdef0bb4c0ea8651e7a0cd931d1eff751a100a4747acbc13718f39e1222",
         "efd57162d6c7ae26cbc692ee876e094a2492b69983f346554b55293c34d8249a"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isBN > should return true for BN；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:373:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "bdceacca7b2dac91af36973563311a886170f172f20e3861700f96439e03dfb7",
-        "bf329fdef0bb4c0ea8651e7a0cd931d1eff751a100a4747acbc13718f39e1222"
+        "bdceacca7b2dac91af36973563311a886170f172f20e3861700f96439e03dfb7"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isBN > should return false for everything else；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:374:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "bdceacca7b2dac91af36973563311a886170f172f20e3861700f96439e03dfb7",
-        "bf329fdef0bb4c0ea8651e7a0cd931d1eff751a100a4747acbc13718f39e1222"
+        "bdceacca7b2dac91af36973563311a886170f172f20e3861700f96439e03dfb7"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isBN > should return false for everything else；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:375:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "bdceacca7b2dac91af36973563311a886170f172f20e3861700f96439e03dfb7",
-        "bf329fdef0bb4c0ea8651e7a0cd931d1eff751a100a4747acbc13718f39e1222"
+        "bdceacca7b2dac91af36973563311a886170f172f20e3861700f96439e03dfb7"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isBN > should return false for everything else；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:376:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "bdceacca7b2dac91af36973563311a886170f172f20e3861700f96439e03dfb7",
-        "bf329fdef0bb4c0ea8651e7a0cd931d1eff751a100a4747acbc13718f39e1222"
+        "bdceacca7b2dac91af36973563311a886170f172f20e3861700f96439e03dfb7"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isBN > should return false for everything else；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:39:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "12a76c3d237d9d356ef44634cbc925b815deccaa5660f0d9dbabbe80706f3535",
-        "2838d5dc609a81d48d988699c69f6641bbc79290ac054958234df6d815841f0c",
-        "6611b784bdc9bd076bfb0a1daf67e841ca4a72738653a3ee54152eae17d1c342",
-        "b5987f340ef78bc3368d13e6d8046615aa4085411cac8ff5393dbfe721b88b1c",
-        "ffd826c6c609c2da9998f331aaafcd0fd38ed9dd325907cd7019336042a1101c"
+        "2838d5dc609a81d48d988699c69f6641bbc79290ac054958234df6d815841f0c"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > hex padding > should have length of 8 from leading zeros；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:42:7:registration",
       "status": "reviewed",
       "caseIds": [
-        "0396f0d40f609bf7516485a5571743d378bc6e3e7a4db260f5a6395793379edf",
-        "12a76c3d237d9d356ef44634cbc925b815deccaa5660f0d9dbabbe80706f3535",
-        "ffd826c6c609c2da9998f331aaafcd0fd38ed9dd325907cd7019336042a1101c"
+        "0396f0d40f609bf7516485a5571743d378bc6e3e7a4db260f5a6395793379edf"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > hex padding > should have length of 64 from leading 15；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:48:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0396f0d40f609bf7516485a5571743d378bc6e3e7a4db260f5a6395793379edf",
-        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701",
-        "9e83c42f388f201548d08e740ad864695b739e3fd841be60b97aea2150a337c8",
-        "d64e85f63aa8eafa2fc95c334a02584e7fd3640de141a4eb99c3ce41f69293c7",
-        "f639f665d7d6ed9508202eca820fac51984c925db2058fbcb9ac6f26c1825617"
+        "0396f0d40f609bf7516485a5571743d378bc6e3e7a4db260f5a6395793379edf"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > hex padding > should have length of 64 from leading 15；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:51:7:registration",
       "status": "reviewed",
       "caseIds": [
-        "5d39956d7b1d40a72f3dd380bd534d2f89d3ce5a882680ded96d978608a21701",
-        "c156b2ddcf72291fbdce41c2f7b77266c1bb47254cf8ca53f92f4fe0496af904",
-        "d64e85f63aa8eafa2fc95c334a02584e7fd3640de141a4eb99c3ce41f69293c7",
-        "e6cfb12a009a32acdd8131331ea5b96fffff662eca7744b0237015924aa7ac5b",
-        "f639f665d7d6ed9508202eca820fac51984c925db2058fbcb9ac6f26c1825617"
+        "e6cfb12a009a32acdd8131331ea5b96fffff662eca7744b0237015924aa7ac5b"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > hex padding > should have length of 64 from leading zero；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:57:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "789a511f22fb605f41df1024dbc39f2f1fca0f2aff94b91982932b0aa4be7107",
-        "d64e85f63aa8eafa2fc95c334a02584e7fd3640de141a4eb99c3ce41f69293c7",
         "e6cfb12a009a32acdd8131331ea5b96fffff662eca7744b0237015924aa7ac5b"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > hex padding > should have length of 64 from leading zero；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:63:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81",
-        "3b0296fbb81a920f6cd616451048e5c1c026b464dbcd59b9eb9878d51e4211cd",
-        "789a511f22fb605f41df1024dbc39f2f1fca0f2aff94b91982932b0aa4be7107",
-        "7af7d50165a9e73635c1e3a0d12ce67a8654e204813997c8af1059048363e490",
-        "e6de99c47366b6490f22b95ab7a4f725d6f00f6a4f49efc38f336156c3aec82c"
+        "7af7d50165a9e73635c1e3a0d12ce67a8654e204813997c8af1059048363e490"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isNeg() > should return true for negative numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:64:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81",
-        "3b0296fbb81a920f6cd616451048e5c1c026b464dbcd59b9eb9878d51e4211cd",
-        "7af7d50165a9e73635c1e3a0d12ce67a8654e204813997c8af1059048363e490",
-        "e6de99c47366b6490f22b95ab7a4f725d6f00f6a4f49efc38f336156c3aec82c"
+        "7af7d50165a9e73635c1e3a0d12ce67a8654e204813997c8af1059048363e490"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isNeg() > should return true for negative numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:65:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81",
-        "3b0296fbb81a920f6cd616451048e5c1c026b464dbcd59b9eb9878d51e4211cd",
-        "79005ada313c7ac3f6dd0b5915e5e80fffa40cc75d975a699389a9be8e4c34ba",
-        "7af7d50165a9e73635c1e3a0d12ce67a8654e204813997c8af1059048363e490",
-        "e6de99c47366b6490f22b95ab7a4f725d6f00f6a4f49efc38f336156c3aec82c"
+        "7af7d50165a9e73635c1e3a0d12ce67a8654e204813997c8af1059048363e490"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isNeg() > should return true for negative numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:66:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81",
-        "79005ada313c7ac3f6dd0b5915e5e80fffa40cc75d975a699389a9be8e4c34ba",
-        "7af7d50165a9e73635c1e3a0d12ce67a8654e204813997c8af1059048363e490",
-        "e6de99c47366b6490f22b95ab7a4f725d6f00f6a4f49efc38f336156c3aec82c"
+        "7af7d50165a9e73635c1e3a0d12ce67a8654e204813997c8af1059048363e490"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isNeg() > should return true for negative numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:67:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2aab460d52b40e7e30f8b8aa6d24e4e28babf439bc93e786182545f2581dcb81",
-        "79005ada313c7ac3f6dd0b5915e5e80fffa40cc75d975a699389a9be8e4c34ba",
-        "7af7d50165a9e73635c1e3a0d12ce67a8654e204813997c8af1059048363e490",
-        "e6de99c47366b6490f22b95ab7a4f725d6f00f6a4f49efc38f336156c3aec82c"
+        "7af7d50165a9e73635c1e3a0d12ce67a8654e204813997c8af1059048363e490"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isNeg() > should return true for negative numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:72:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "546e67ae1314d89d71d7f05ad1e4cf5098f8421683a9d361f839ee7681bb6f60",
-        "79005ada313c7ac3f6dd0b5915e5e80fffa40cc75d975a699389a9be8e4c34ba",
-        "e6de99c47366b6490f22b95ab7a4f725d6f00f6a4f49efc38f336156c3aec82c",
         "fa8a109b8a6a0b0b9ee9b50bd6b6c1113977ab9f003dc257a6d6cbb0fcaca1e1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isOdd() > should return true for odd numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:73:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "e6de99c47366b6490f22b95ab7a4f725d6f00f6a4f49efc38f336156c3aec82c",
         "fa8a109b8a6a0b0b9ee9b50bd6b6c1113977ab9f003dc257a6d6cbb0fcaca1e1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isOdd() > should return true for odd numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:74:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "68ec156207f3b5a7a74fa59c884b0e4587f2c5b8509eb16a1cf61f1c0cff78ff",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "962664a13cf5b20babae8a63b859175c697075b2117c62efab74e7ff0520951d",
-        "e6de99c47366b6490f22b95ab7a4f725d6f00f6a4f49efc38f336156c3aec82c",
         "fa8a109b8a6a0b0b9ee9b50bd6b6c1113977ab9f003dc257a6d6cbb0fcaca1e1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isOdd() > should return true for odd numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:75:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "68ec156207f3b5a7a74fa59c884b0e4587f2c5b8509eb16a1cf61f1c0cff78ff",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "962664a13cf5b20babae8a63b859175c697075b2117c62efab74e7ff0520951d",
         "fa8a109b8a6a0b0b9ee9b50bd6b6c1113977ab9f003dc257a6d6cbb0fcaca1e1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isOdd() > should return true for odd numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:76:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4aafb5ce03d98769ff44a32295f7d4886b83bc1e33b6ee6eeb6b2b95dcd0960c",
-        "68ec156207f3b5a7a74fa59c884b0e4587f2c5b8509eb16a1cf61f1c0cff78ff",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "962664a13cf5b20babae8a63b859175c697075b2117c62efab74e7ff0520951d",
         "fa8a109b8a6a0b0b9ee9b50bd6b6c1113977ab9f003dc257a6d6cbb0fcaca1e1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isOdd() > should return true for odd numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:77:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4aafb5ce03d98769ff44a32295f7d4886b83bc1e33b6ee6eeb6b2b95dcd0960c",
-        "68ec156207f3b5a7a74fa59c884b0e4587f2c5b8509eb16a1cf61f1c0cff78ff",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "962664a13cf5b20babae8a63b859175c697075b2117c62efab74e7ff0520951d",
         "fa8a109b8a6a0b0b9ee9b50bd6b6c1113977ab9f003dc257a6d6cbb0fcaca1e1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isOdd() > should return true for odd numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:78:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "4aafb5ce03d98769ff44a32295f7d4886b83bc1e33b6ee6eeb6b2b95dcd0960c",
-        "68ec156207f3b5a7a74fa59c884b0e4587f2c5b8509eb16a1cf61f1c0cff78ff",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "962664a13cf5b20babae8a63b859175c697075b2117c62efab74e7ff0520951d",
         "fa8a109b8a6a0b0b9ee9b50bd6b6c1113977ab9f003dc257a6d6cbb0fcaca1e1"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isOdd() > should return true for odd numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:7:7:registration",
       "status": "reviewed",
       "caseIds": [
-        "4d521b8e2d90825c83d08c67453633b3dc8d746616e24cf75b4fa363fdfb0ee3",
-        "90bc733145b484db34c347f75e0d3c3585aac3928bfbd509affe8fc41f3b76a9",
-        "eb651f306459688e01bc967000654465f13be6e6174a20eed8522f986f5fdb1a",
-        "f20945175fbb57cf4af6b329a1f035f7c693e4740cec3e7ae1d7d07bb500e668",
-        "f229d8811157137584b17dd430d81059539ded1f967dc10cdc44137df715d184"
+        "4d521b8e2d90825c83d08c67453633b3dc8d746616e24cf75b4fa363fdfb0ee3"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > hex no padding > should have same length as input；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:83:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "2bad4207a3a058507141d0fd9ccc1dcc57dc3428886024b32ab212ed90767a7d",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "a5937ab91dec50a71ec575866f1491c31d30cf372499745311019ff2d56c385d",
-        "baa02d5a553e7cddeb925e99096bf567fffe3153a816478084910ff02e1fe6d8",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98",
-        "f6aaf2f87ee97ef3ccd4cf6115841b00fe5a1a4a7091e42a3885140e6e982a1c",
-        "fc92a0c3ad1d24263d09d93dc5a84326d09cc529878d388330d848da44cc047e"
+        "f6aaf2f87ee97ef3ccd4cf6115841b00fe5a1a4a7091e42a3885140e6e982a1c"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isEven() > should return true for even numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:84:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2bad4207a3a058507141d0fd9ccc1dcc57dc3428886024b32ab212ed90767a7d",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "a5937ab91dec50a71ec575866f1491c31d30cf372499745311019ff2d56c385d",
-        "baa02d5a553e7cddeb925e99096bf567fffe3153a816478084910ff02e1fe6d8",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98",
-        "f6aaf2f87ee97ef3ccd4cf6115841b00fe5a1a4a7091e42a3885140e6e982a1c",
-        "fc92a0c3ad1d24263d09d93dc5a84326d09cc529878d388330d848da44cc047e"
+        "f6aaf2f87ee97ef3ccd4cf6115841b00fe5a1a4a7091e42a3885140e6e982a1c"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isEven() > should return true for even numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:85:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2bad4207a3a058507141d0fd9ccc1dcc57dc3428886024b32ab212ed90767a7d",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98",
         "f6aaf2f87ee97ef3ccd4cf6115841b00fe5a1a4a7091e42a3885140e6e982a1c"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isEven() > should return true for even numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:86:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2bad4207a3a058507141d0fd9ccc1dcc57dc3428886024b32ab212ed90767a7d",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "7e0485f61abb64e8b19e990ba2d3db03b34dc82758071e79d0f6a2b0973fcd01",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98",
         "f6aaf2f87ee97ef3ccd4cf6115841b00fe5a1a4a7091e42a3885140e6e982a1c"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isEven() > should return true for even numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:87:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2bad4207a3a058507141d0fd9ccc1dcc57dc3428886024b32ab212ed90767a7d",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "7e0485f61abb64e8b19e990ba2d3db03b34dc82758071e79d0f6a2b0973fcd01",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98",
         "f6aaf2f87ee97ef3ccd4cf6115841b00fe5a1a4a7091e42a3885140e6e982a1c"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isEven() > should return true for even numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:88:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2bad4207a3a058507141d0fd9ccc1dcc57dc3428886024b32ab212ed90767a7d",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "7e0485f61abb64e8b19e990ba2d3db03b34dc82758071e79d0f6a2b0973fcd01",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98",
         "f6aaf2f87ee97ef3ccd4cf6115841b00fe5a1a4a7091e42a3885140e6e982a1c"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isEven() > should return true for even numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:89:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "2bad4207a3a058507141d0fd9ccc1dcc57dc3428886024b32ab212ed90767a7d",
-        "781eabb441887f74f9485a15cf29bf9713f75338303f83193aff62b0ed94ce04",
-        "7e0485f61abb64e8b19e990ba2d3db03b34dc82758071e79d0f6a2b0973fcd01",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98",
         "f6aaf2f87ee97ef3ccd4cf6115841b00fe5a1a4a7091e42a3885140e6e982a1c"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isEven() > should return true for even numbers；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:94:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "30f7fd040279236edf4ef2ee47561d5bf924eb331894c378c6438a7f2cc2f766",
-        "aa1056e45ba1f5caa3438989feaf452ff02ff6aeb5a18fbcae6ffde7a07a286e",
-        "ab75f0e0eb3d425ca903e0171e743c482f96d7b66c857343d714bd41b5899a29",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "30f7fd040279236edf4ef2ee47561d5bf924eb331894c378c6438a7f2cc2f766"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isZero() > should return true for zero；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:95:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "30f7fd040279236edf4ef2ee47561d5bf924eb331894c378c6438a7f2cc2f766",
-        "aa1056e45ba1f5caa3438989feaf452ff02ff6aeb5a18fbcae6ffde7a07a286e",
-        "ab75f0e0eb3d425ca903e0171e743c482f96d7b66c857343d714bd41b5899a29",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "30f7fd040279236edf4ef2ee47561d5bf924eb331894c378c6438a7f2cc2f766"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isZero() > should return true for zero；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:96:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "30f7fd040279236edf4ef2ee47561d5bf924eb331894c378c6438a7f2cc2f766",
-        "aa1056e45ba1f5caa3438989feaf452ff02ff6aeb5a18fbcae6ffde7a07a286e",
-        "ab75f0e0eb3d425ca903e0171e743c482f96d7b66c857343d714bd41b5899a29",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "30f7fd040279236edf4ef2ee47561d5bf924eb331894c378c6438a7f2cc2f766"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isZero() > should return true for zero；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:97:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "25e0b717e758f290393c7eb05db71046e8074d024fb84c04211437270146f8f1",
-        "30f7fd040279236edf4ef2ee47561d5bf924eb331894c378c6438a7f2cc2f766",
-        "aa1056e45ba1f5caa3438989feaf452ff02ff6aeb5a18fbcae6ffde7a07a286e",
-        "ab75f0e0eb3d425ca903e0171e743c482f96d7b66c857343d714bd41b5899a29",
-        "ef7d4fb5f14ffce281080d76d4e93ec7469ee522854b7ff04e99b7c07b00ce98"
+        "30f7fd040279236edf4ef2ee47561d5bf924eb331894c378c6438a7f2cc2f766"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .isZero() > should return true for zero；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/BigNumber.utils.test.ts:9:9:loop",
       "status": "reviewed",
       "caseIds": [
-        "4567a470cc6163c00309d4a8c043bcc141bb7ee863531d9ad4401eb76a8a7a3b",
-        "4d521b8e2d90825c83d08c67453633b3dc8d746616e24cf75b4fa363fdfb0ee3",
-        "8275e3fcd1c38c3a77b720b272b8ec3023c1956c8648d80403358523cbefd82c",
-        "9b0b517411abfc60a9251e93b8da170d6bdd231ab023ab49a94fecd7d1fd1946",
-        "eb651f306459688e01bc967000654465f13be6e6174a20eed8522f986f5fdb1a",
-        "f229d8811157137584b17dd430d81059539ded1f967dc10cdc44137df715d184"
+        "4d521b8e2d90825c83d08c67453633b3dc8d746616e24cf75b4fa363fdfb0ee3"
       ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+      "note": "按固定源码完整 describe／it 路径复核归属：BN.js/Utils > .toString() > hex no padding > should have same length as input；站点仅归属于该已注册用例。"
     },
     {
       "id": "src/primitives/__tests/DRBG.test.ts:101:7:assertion",
