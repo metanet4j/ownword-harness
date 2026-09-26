@@ -35567,7 +35567,7 @@
     {
       "id": "src/wallet/substrates/ReactNativeWebView.ts#constructor:ReactNativeWebView.constructor:1",
       "java": "com.metanet4j.bsv.wallet.substrates.ReactNativeWebView#ReactNativeWebView",
-      "javaSignature": "public ReactNativeWebView(String domain, Long responseTimeout) {",
+      "javaSignature": "public ReactNativeWebView(); public ReactNativeWebView(String domain); public ReactNativeWebView(String domain, Long responseTimeout)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
       "review": "reviewed",
       "evidence": [
