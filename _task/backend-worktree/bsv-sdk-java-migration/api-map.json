@@ -25824,13 +25824,13 @@
     {
       "id": "src/transaction/Beef.ts#method:Beef.findAtomicTransaction:1",
       "java": "com.metanet4j.bsv.transaction.Beef#findAtomicTransaction",
-      "javaSignature": "public Transaction findAtomicTransaction(String txid) {",
+      "javaSignature": "public Object findAtomicTransaction(String txid) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-beef",
       "review": "reviewed",
-      "note": "交易证明行为由同名 Java 成员实现。",
+      "note": "缺席返回 Undefined.INSTANCE，存在时返回 Transaction；交易证明行为由同名 Java 成员实现。",
       "evidence": [
         "src/transaction/Beef.ts:643",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/Beef.java:720"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/Beef.java:750"
       ]
     },
     {
@@ -27504,25 +27504,25 @@
     {
       "id": "src/transaction/BeefTx.ts#get:BeefTx.rawTxUint8Array:1",
       "java": "com.metanet4j.bsv.transaction.BeefTx#rawTxUint8Array",
-      "javaSignature": "public byte[] rawTxUint8Array() {",
+      "javaSignature": "public Object rawTxUint8Array() {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-beef",
       "review": "reviewed",
-      "note": "原始交易、证明索引、输入依赖与 V1/V2 编解码按对应成员实现。",
+      "note": "保留原 rawTx 的 Undefined、显式 null 或 byte[]；其他编码行为按对应成员实现。",
       "evidence": [
         "src/transaction/BeefTx.ts:135",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/BeefTx.java:145"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/BeefTx.java:151"
       ]
     },
     {
       "id": "src/transaction/BeefTx.ts#get:BeefTx.tx:1",
       "java": "com.metanet4j.bsv.transaction.BeefTx#tx",
-      "javaSignature": "public Transaction tx() {",
+      "javaSignature": "public Object tx() {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-beef",
       "review": "reviewed",
-      "note": "原始交易、证明索引、输入依赖与 V1/V2 编解码按对应成员实现。",
+      "note": "缺席返回 Undefined.INSTANCE，存在时返回 Transaction；其他行为按对应成员实现。",
       "evidence": [
         "src/transaction/BeefTx.ts:115",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/BeefTx.java:140"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/BeefTx.java:146"
       ]
     },
     {
