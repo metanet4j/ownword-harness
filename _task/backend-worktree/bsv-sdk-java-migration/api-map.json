@@ -7794,7 +7794,7 @@
     {
       "id": "src/primitives/Point.ts#method:Point.encode:1",
       "java": "com.metanet4j.bsv.primitives.Point#encode",
-      "javaSignature": "public List<Integer> encode(boolean compact); public String encodeHex(boolean compact)",
+      "javaSignature": "public List<Integer> encode(); public List<Integer> encode(boolean compact); public String encode(boolean compact, String encoding); public String encodeHex(boolean compact)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
       "review": "reviewed",
       "evidence": [
