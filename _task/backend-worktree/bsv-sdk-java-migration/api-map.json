@@ -36058,6 +36058,72 @@
         "src/wallet/WalletClient.ts:63",
         "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:26"
       ]
+    },
+    {
+      "id": "src/compat/Utxo.ts#function:fromUtxo:1",
+      "java": "com.metanet4j.bsv.compat.Utxo#fromUtxo",
+      "javaSignature": "public static TransactionInput fromUtxo(JsonUtxo utxo, ScriptTemplateUnlock unlockingScriptTemplate)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-compat",
+      "review": "reviewed",
+      "evidence": [
+        "src/compat/Utxo.ts:39",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Utxo.java:18"
+      ]
+    },
+    {
+      "id": "src/compat/Utxo.ts#interface:JsonUtxo:1",
+      "java": "com.metanet4j.bsv.compat.Utxo.JsonUtxo",
+      "javaSignature": "public record JsonUtxo(String txid, int vout, double satoshis, String script)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-compat",
+      "review": "reviewed",
+      "evidence": [
+        "src/compat/Utxo.ts:6",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Utxo.java:16"
+      ]
+    },
+    {
+      "id": "src/compat/Utxo.ts#property:JsonUtxo.satoshis:1",
+      "java": "com.metanet4j.bsv.compat.Utxo.JsonUtxo#satoshis",
+      "javaSignature": "public double satoshis()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-compat",
+      "review": "reviewed",
+      "evidence": [
+        "src/compat/Utxo.ts:9",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Utxo.java:16"
+      ]
+    },
+    {
+      "id": "src/compat/Utxo.ts#property:JsonUtxo.script:1",
+      "java": "com.metanet4j.bsv.compat.Utxo.JsonUtxo#script",
+      "javaSignature": "public String script()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-compat",
+      "review": "reviewed",
+      "evidence": [
+        "src/compat/Utxo.ts:10",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Utxo.java:16"
+      ]
+    },
+    {
+      "id": "src/compat/Utxo.ts#property:JsonUtxo.txid:1",
+      "java": "com.metanet4j.bsv.compat.Utxo.JsonUtxo#txid",
+      "javaSignature": "public String txid()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-compat",
+      "review": "reviewed",
+      "evidence": [
+        "src/compat/Utxo.ts:7",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Utxo.java:16"
+      ]
+    },
+    {
+      "id": "src/compat/Utxo.ts#property:JsonUtxo.vout:1",
+      "java": "com.metanet4j.bsv.compat.Utxo.JsonUtxo#vout",
+      "javaSignature": "public int vout()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-compat",
+      "review": "reviewed",
+      "evidence": [
+        "src/compat/Utxo.ts:8",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Utxo.java:16"
+      ]
     }
   ],
   "approvedDifferences": [

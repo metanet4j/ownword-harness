@@ -1495,7 +1495,10 @@
         "migration-api-compat",
         "migration-api-transaction-model"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标提交 f1b5752；隔离干净提交 9bcb650 的固定 TS／Java 745／745 原用例、1390／1390 条实际断言精确一致；连同 BEEF 回归共 769 个 Java 用例通过。",
+        "逐断言报告 .cache/evidence/transaction-complete-clean-parity-9bcb650.json；API-06 Utxo 六项声明已复核。"
+      ],
       "modules": [
         "compat",
         "transaction"
@@ -1505,7 +1508,16 @@
         "src/transaction/__tests/bigtx.vectors.ts",
         "src/transaction/__tests/tx.invalid.vectors.ts",
         "src/transaction/__tests/tx.valid.vectors.ts"
-      ]
+      ],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 745,
+        "assertionsCompared": 1390,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/transaction-complete-clean-parity-9bcb650.json"
+      }
     },
     {
       "id": "migration-impl-transaction-verification",
@@ -2447,14 +2459,17 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "api-map.json：API-06 七个完整源文件共 96 项源码声明已复核，含 Utxo 六项；doc/完整模块与API映射-20260920-122800.md#api-compat 记录行为契约。",
+        "node audit-api.cjs batches --batch migration-api-compat 通过，批次结构无缺项。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
