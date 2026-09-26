@@ -41623,11 +41623,12 @@
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
       "review": "reviewed",
       "implementationStatus": "source-present-verified",
-      "basis": "Java sendCertificateRequest 是直接入口；对应固定用例已覆盖主要返回值与错误边界。",
+      "basis": "固定 TS 的证书请求向 Peer.requestCertificates 传 undefined；Java PeerPort 的 Object 重载保留 Undefined.INSTANCE 给动态 mock，旧 String 实现按 nullish 适配。三条原用例的真实调用、回调和断言已逐项复核。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:418",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:149",
-        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchTest.java"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:171",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchTest.java",
+        "auth-fetch-primary-cert-request-plan.json"
       ]
     },
     {
