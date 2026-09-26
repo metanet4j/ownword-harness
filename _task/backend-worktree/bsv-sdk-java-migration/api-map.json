@@ -24969,7 +24969,7 @@
     {
       "id": "src/primitives/TransactionSignature.ts#property:TransactionSignatureFormatParams.transactionVersion:1",
       "java": "com.metanet4j.bsv.primitives.TransactionSignature.Params#transactionVersion",
-      "javaSignature": "public int transactionVersion;",
+      "javaSignature": "public long transactionVersion;",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-base",
       "review": "reviewed",
       "evidence": [
