@@ -26,7 +26,7 @@ def digest(path):
 
 
 def canonical(value):
-    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':'), allow_nan=False)
+    return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(',', ':'), allow_nan=False)
 
 
 def fail(message):
@@ -224,7 +224,7 @@ def main():
         result = build(args)
     except (ValueError, OSError, KeyError, TypeError) as error:
         parser.error(str(error))
-    Path(args.output).write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
+    Path(args.output).write_text(json.dumps(result, ensure_ascii=True, indent=2) + '\n')
     print(json.dumps({'cases': len(result['cases']), 'assertions': sum(len(c['ts']) for c in result['cases']),
                       'output': args.output}, ensure_ascii=False))
 

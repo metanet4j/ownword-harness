@@ -107,6 +107,26 @@ class BundleTest(unittest.TestCase):
         self.assertEqual(len(result['cases'][0]['inputSamples']['TS']), 3)
         self.assertEqual(json.loads(audit.stdout)['comparedAssertions'], 2)
 
+    def test_unpaired_utf16_surrogate_is_escaped_and_compared(self):
+        for side in ('ts', 'java'):
+            path = self.path(side + '-inputs.jsonl')
+            rows = [json.loads(line) for line in path.read_text().splitlines()]
+            rows[0]['value'] = {'type': 'string', 'value': '\ud800'}
+            path.write_text(''.join(json.dumps(row, ensure_ascii=True) + '\n' for row in rows))
+        self.manifests()
+        self.assertEqual(self.bundle().returncode, 0)
+        self.assertEqual(self.audit().returncode, 0)
+        self.assertEqual(json.loads(self.path('results.json').read_text())['cases'][0]
+                         ['inputSamples']['TS'][0]['value']['value'], '\ud800')
+        path = self.path('java-inputs.jsonl')
+        rows = [json.loads(line) for line in path.read_text().splitlines()]
+        rows[0]['value']['value'] = '\ud801'
+        path.write_text(''.join(json.dumps(row, ensure_ascii=True) + '\n' for row in rows))
+        self.manifests()
+        result = self.bundle()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('输入或前置状态不同', result.stderr)
+
     def test_missing_loop_sample_from_both_sides_is_rejected(self):
         for side in ('ts', 'java'):
             name = side+'-inputs.jsonl'
