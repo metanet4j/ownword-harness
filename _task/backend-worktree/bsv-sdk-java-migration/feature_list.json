@@ -14,8 +14,8 @@
       "跨工程发布、部署或远端推送"
     ]
   },
-  "activeItem": "migration-impl-compat",
-  "nextItem": "migration-impl-compat",
+  "activeItem": "migration-impl-wallet-contracts",
+  "nextItem": "migration-impl-wallet-contracts",
   "features": [
     {
       "id": "migration-env",
@@ -687,7 +687,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "compat：助记词、HD、BSM 与 ECIES",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-symmetric"
       ],
@@ -725,7 +725,8 @@
       ],
       "evidence": [
         "目标提交 2004ecf；固定 TS 五文件 122/122、281 条原断言；Java 五类 122/122，随机 34 次原输入精确重放。",
-        ".cache/evidence/compat-clean-parity.json：122/122、281/281、missing/uncompared/extra=0；90 项 API、122 用例、267 个源码站点映射。"
+        ".cache/evidence/compat-clean-parity.json：122/122、281/281、missing/uncompared/extra=0；90 项 API、122 用例、267 个源码站点映射。",
+        ".cache/evidence/java-full-after-auth-property-20260926/compat-task-parity-current.json：主目标 c0d9fdd 完整 clean test 原始轨迹与固定 TS 重新对照，122／122、281／281，缺失、额外及未比较为 0。"
       ],
       "modules": [
         "compat"
@@ -740,7 +741,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/compat-clean-parity.json"
+    "compareReport": ".cache/evidence/java-full-after-auth-property-20260926/compat-task-parity-current.json"
       }
     },
     {
