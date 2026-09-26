@@ -1,0 +1,43 @@
+{
+  "92c1c6504772ef6e875cd087d46544a5ba049bd8bfbe89f97f47a6f055b10622": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.test.ts:355:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:356:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:357:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.test.ts:355:5:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:355:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:356:5:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:356:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:357:5:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:357:5:assertion"
+    }
+  },
+  "a2a3c75a75ce648585c7263e5344fbb5a3ddcb1c009cb247daec4160aa8a408d": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.test.ts:381:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:384:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.test.ts:381:11:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:381:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:384:5:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:384:5:assertion"
+    }
+  },
+  "73708545c3ed4d7292d2a9a16d198bc24b25f9a74b95af33383b3be2de1f9c61": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.test.ts:411:32:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:417:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.test.ts:411:32:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:411:32:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:417:7:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:417:7:assertion"
+    }
+  }
+}
