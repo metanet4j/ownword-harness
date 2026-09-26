@@ -293,9 +293,11 @@
         "本地 HTTP 集成 evidence/20260926-u2-http/integration/：5/0/0/0",
         "SDK 隔离单元基线 evidence/20260926T075317Z/：32/0/0/0，LINE 392/2005",
         "sdk 提交 7e96ebd（ReadUtils 负长度协议异常，UtilsExtend 签名消息与 SHA-256 固定向量）",
-        "SDK 隔离单元基线 evidence/20260926T080341Z/：36/0/0/0，LINE 400/2000；ReadUtils、UtilsExtend 逐类行/分支/方法无缺口"
+        "SDK 隔离单元基线 evidence/20260926T080341Z/：36/0/0/0，LINE 400/2000；ReadUtils、UtilsExtend 逐类行/分支/方法无缺口",
+        "sdk 提交 986fddd（WIF 压缩标志先红后绿，独立 key=2 密钥/地址固定向量）",
+        "SDK 隔离单元基线 evidence/20260926T082536Z/：39/0/0/0，LINE 434/1996；PrivateKey、PublicKey、AddressEnhance 逐类行/分支/方法无缺口"
       ],
-      "statusNote": "HTTP 子项与字节/哈希工具子项已完成（SDK 4f4a590、7e96ebd）；本地 HTTP 集成 5/0/0/0，SDK 单元 36/0/0/0，LINE 400/2000、BRANCH 39/507、METHOD 115/461；密钥、交易等其余 SDK 行为待补。"
+      "statusNote": "HTTP、字节/哈希工具与 WIF/地址子项已完成（SDK 4f4a590、7e96ebd、986fddd）；本地 HTTP 集成 5/0/0/0，SDK 单元 39/0/0/0，LINE 434/1996、BRANCH 51/503、METHOD 131/461；交易、BAP 等其余 SDK 行为待补。"
     },
     {
       "id": "unit-u3-foundation",

@@ -313,7 +313,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "7e96ebdc3fadc0ae11b9f260be08f4867e0f6fcc",
+      "head": "986fdddc12ec21163e75d5ff3a86d795f1b6e892",
       "modules": [
         {
           "path": ".",
@@ -613,6 +613,31 @@
             }
           ],
           "testSources": [
+            {
+              "path": "src/test/java/com/metanet4j/sdk/KeyAddressContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "roundTripsCompressedAndUncompressedWifOnBothNetworks",
+                  "returnType": "void",
+                  "line": 31,
+                  "classification": "unit"
+                },
+                {
+                  "name": "exposesKnownPublicKeyAddressAndSignature",
+                  "returnType": "void",
+                  "line": 41,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsBadLengthChecksumAndCompressionMarker",
+                  "returnType": "void",
+                  "line": 81,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "独立 key=2 WIF、公钥哈希、地址固定向量；四种 WIF 往返和异常输入"
+            },
             {
               "path": "src/test/java/com/metanet4j/sdk/PrivateKeyTest.java",
               "classification": "unit",
