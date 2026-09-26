@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
 
 TASK = Path(__file__).resolve().parent
 
@@ -14,6 +15,39 @@ def read(path):
 
 def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def complete_report(report, feature, catalog, expected):
+    """只认可字段及逐项计数自洽的历史报告；不追认为当前运行证据。"""
+    rows = report.get('cases')
+    if not isinstance(rows, list) or not all(isinstance(row, dict) for row in rows):
+        return False
+    observed = [row.get('id') for row in rows]
+    revision = report.get('javaRevision')
+    if (not all(isinstance(identity, str) for identity in observed)
+            or len(observed) != len(set(observed)) or set(observed) != expected
+            or report.get('upstreamCommit') != catalog['upstreamCommit']
+            or not isinstance(revision, str) or re.fullmatch(r'[0-9a-f]{64}', revision) is None
+            or report.get('testFiles') != feature['testFiles']
+            or report.get('casesTotal') != len(expected) or report.get('casesCompared') != len(expected)
+            or report.get('missingCases') != 0 or report.get('missingAssertions') != 0
+            or report.get('uncompared') != 0 or report.get('taskAcceptancePassed') is not True):
+        return False
+    files = {case['id']: file['path'] for file in catalog['files'] for case in file['cases']}
+    matched = extra = 0
+    for row in rows:
+        counts = [row.get(name) for name in ('tsAssertions', 'javaAssertions', 'matchedAssertions',
+                                            'missingAssertions', 'extraJavaAssertions')]
+        if (not all(type(value) is int and value >= 0 for value in counts)
+                or row.get('file') != files[row['id']]):
+            return False
+        ts, java, compared, missing, additional = counts
+        if ts != compared or ts <= 0 or java != compared + additional or missing != 0:
+            return False
+        matched += compared
+        extra += additional
+    return (type(report.get('assertionsCompared')) is int and report['assertionsCompared'] == matched
+            and type(report.get('extraJavaAssertions')) is int and report['extraJavaAssertions'] == extra)
 
 
 def inventory(task=TASK):
@@ -38,17 +72,14 @@ def inventory(task=TASK):
         expected = set().union(*(cases_by_file[file] for file in feature['testFiles']))
         valid = []
         for path, report in reports.get(feature['id'], []):
-            observed = [case.get('id') for case in report['cases']]
-            if (len(observed) == len(set(observed)) == len(expected)
-                    and set(observed) == expected and report.get('casesTotal') == len(expected)
-                    and report.get('casesCompared') == len(expected)
-                    and report.get('missingCases') == report.get('missingAssertions') == report.get('uncompared') == 0
-                    and report.get('taskAcceptancePassed') is True):
+            if complete_report(report, feature, catalog, expected):
                 valid.append((path, report))
         chosen = max(valid, key=lambda x: x[0].stat().st_mtime) if valid else None
         rows.append({'taskId': feature['id'], 'expectedCases': len(expected),
                      'report': str(chosen[0].relative_to(task)) if chosen else None,
                      'reportSha256': digest(chosen[0]) if chosen else None,
+                     'evidenceStatus': 'historical-report-structure-only' if chosen else 'missing-valid-report',
+                     'runtimeProvenanceVerified': False,
                      'javaRevision': chosen[1].get('javaRevision') if chosen else None,
                      'assertionsCompared': chosen[1].get('assertionsCompared') if chosen else None})
     mapped = read(task/'test-map.json'); mapped_ids={case['id'] for case in mapped['cases']}
@@ -58,7 +89,7 @@ def inventory(task=TASK):
     api_catalog, api_map = read(task/'api-catalog.json'), read(task/'api-map.json')
     api_ids={entry['id'] for entry in api_catalog['entries']}
     mapped_api={entry['id']:entry for entry in api_map['entries']}
-    return {'upstreamCommit': catalog['upstreamCommit'], 'tasks': rows,
+    return {'upstreamCommit': catalog['upstreamCommit'], 'tasks': rows, 'formalAcceptance': False,
             'taskReportsComplete': sum(row['report'] is not None for row in rows),
             'taskReportsTotal': len(rows),
             'taskReportCases': sum(row['expectedCases'] for row in rows if row['report'] is not None),

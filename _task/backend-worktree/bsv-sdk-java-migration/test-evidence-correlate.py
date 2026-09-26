@@ -30,11 +30,15 @@ class CorrelateTest(unittest.TestCase):
         self.put('api-catalog.json', {'entries': []})
         self.put('api-map.json', {'entries': []})
         self.put('module-scope.json', {'scopeReview': 'pending'})
-        self.put('.cache/evidence/task-report.json', {'taskId': 'slice', 'casesTotal': 2, 'casesCompared': 2,
+        self.put('.cache/evidence/task-report.json', {'taskId': 'slice', 'upstreamCommit': 'fixed',
+            'javaRevision': 'a'*64, 'testFiles': [file], 'casesTotal': 2, 'casesCompared': 2,
             'assertionsCompared': 3, 'missingCases': 0, 'missingAssertions': 0, 'uncompared': 0,
+            'extraJavaAssertions': 0,
             'taskAcceptancePassed': True, 'cases': [
-                {'id': 'one', 'tsAssertions': 1, 'javaAssertions': 1, 'matchedAssertions': 1},
-                {'id': 'loop', 'tsAssertions': 2, 'javaAssertions': 2, 'matchedAssertions': 2}]})
+                {'id': 'one', 'file': file, 'tsAssertions': 1, 'javaAssertions': 1, 'matchedAssertions': 1,
+                 'missingAssertions': 0, 'extraJavaAssertions': 0},
+                {'id': 'loop', 'file': file, 'tsAssertions': 2, 'javaAssertions': 2, 'matchedAssertions': 2,
+                 'missingAssertions': 0, 'extraJavaAssertions': 0}]})
         self.ts = [self.row('suite one', 1, file=file), self.row('suite loop', 2, file=file),
                    self.row('suite loop', 3, file=file)]
         self.java = [self.row('ExampleTest#one', 1), self.row('ExampleTest#loop', 2),

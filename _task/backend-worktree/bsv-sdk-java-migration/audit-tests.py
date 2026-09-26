@@ -57,6 +57,109 @@ def require(condition, message):
         raise ValueError(message)
 
 
+def independent_captures(paths):
+    for ts in ('tsInputs', 'tsAssertions'):
+        for java in ('javaInputs', 'javaAssertions'):
+            require(not Path(paths[ts]).samefile(paths[java]),
+                    f'TS/Java 必须独立采集，不能使用同一物理文件：{ts} / {java}')
+
+
+def validate_plan(catalog, mapping, plan):
+    cases = {case['id']: file for file in catalog['files'] for case in file['cases']}
+    mapped = {case['id']: case for case in mapping['cases']}
+    same_keys(cases, plan, '独立输入/断言计划用例')
+    expected_sites = {site['id'] for file in catalog['files'] for site in file['sites']
+                      if site['kind'] == 'assertion'}
+    expected_loops = {site['id'] for file in catalog['files'] for site in file['sites']
+                      if site['kind'] == 'loop'}
+    covered_sites, covered_loops = set(), set()
+    for case_id, expected in plan.items():
+        samples, assertions = expected.get('sampleIds'), expected.get('assertionIds')
+        for values, label in ((samples, '样本'), (assertions, '断言')):
+            require(isinstance(values, list) and bool(values)
+                    and all(isinstance(value, str) and bool(value) for value in values)
+                    and len(values) == len(set(values)), f'独立{label}计划无效：{case_id}')
+        sites = expected.get('assertionSites')
+        require(isinstance(sites, dict), f'计划缺少冻结断言站点关联：{case_id}')
+        same_keys(assertions, sites, f'断言实例与冻结断言站点关联 {case_id}')
+        file_sites = {site['id'] for site in cases[case_id]['sites'] if site['kind'] == 'assertion'}
+        require(all(isinstance(site, str) and site in file_sites for site in sites.values()),
+                f'计划断言必须关联本文件的冻结断言站点：{case_id}')
+        mapped_sites = []
+        for identity in mapped[case_id]['assertionIds']:
+            require(identity in file_sites or identity in sites,
+                    f'映射中的断言实例未列入独立计划：{case_id} / {identity}')
+            mapped_sites.append(identity if identity in file_sites else sites[identity])
+        require(list(dict.fromkeys(sites[identity] for identity in assertions)) == list(dict.fromkeys(mapped_sites)),
+                f'映射断言站点与独立计划的执行顺序不符：{case_id}')
+        covered_sites.update(sites.values())
+        loops = expected.get('loopSamples', {})
+        require(isinstance(loops, dict), f'循环样本计划无效：{case_id}')
+        file_loops = {site['id'] for site in cases[case_id]['sites'] if site['kind'] == 'loop'}
+        require(set(loops) <= file_loops, f'循环样本必须关联本文件的冻结循环站点：{case_id}')
+        for site, ids in loops.items():
+            require(isinstance(ids, list) and bool(ids) and all(isinstance(x, str) for x in ids)
+                    and len(ids) == len(set(ids)) and set(ids) <= set(samples),
+                    f'冻结循环站点缺少完整输入样本：{case_id} / {site}')
+            covered_loops.add(site)
+    same_keys(expected_sites, covered_sites, '冻结断言站点覆盖')
+    same_keys(expected_loops, covered_loops, '冻结循环站点覆盖')
+
+
+def runtime_provenance(args, catalog, paths):
+    """校验执行器在运行前固定、运行后封存的来源；打包器无权追认旧文件。"""
+    manifests = {}
+    hashes = {}
+    for side in ('ts', 'java'):
+        path = getattr(args, side + '_run_manifest', None)
+        require(bool(path), f'缺少 {side} 运行来源 manifest；须由 capture 包装真实执行后生成，不能追认旧报告')
+        manifest = read(path)
+        require(manifest.get('schemaVersion') == 1 and manifest.get('side') == side,
+                f'{side} 运行来源 manifest 格式或侧别无效')
+        require(not manifest.get('captureError'), f'{side} 采集失败：{manifest.get("captureError")}')
+        require(isinstance(manifest.get('runId'), str)
+                and bool(re.fullmatch(r'[0-9a-f]{32}', manifest['runId'])), f'{side} 运行身份无效')
+        require(manifest.get('producerSha256') == digest(TASK / 'evidence-bundle.py'),
+                f'{side} 运行来源不是当前 capture 执行器产生')
+        require(manifest.get('upstreamCommit') == catalog['upstreamCommit'], f'{side} 运行的固定上游版本不同')
+        for key, artifact in (('catalogSha256', args.catalog), ('mappingSha256', args.mapping),
+                              ('inputPlanSha256', paths['inputPlan'])):
+            require(manifest.get(key) == digest(artifact), f'{side} 运行前固定的清单、映射或输入计划已变化：{key}')
+        command = manifest.get('command')
+        require(isinstance(command, list) and bool(command)
+                and all(isinstance(part, str) and bool(part) for part in command), f'{side} 运行命令缺失')
+        require(type(manifest.get('exitCode')) is int and manifest['exitCode'] == 0,
+                f'{side} 运行未完成或退出状态非零')
+        require(type(manifest.get('startedAtNs')) is int and type(manifest.get('finishedAtNs')) is int
+                and 0 < manifest['startedAtNs'] <= manifest['finishedAtNs'], f'{side} 运行时间记录不完整')
+        require(isinstance(manifest.get('sourceRevision'), str) and bool(manifest['sourceRevision'])
+                and manifest['sourceRevision'] == manifest.get('sourceRevisionAfter'),
+                f'{side} 运行中源码版本变化或版本记录缺失')
+        if side == 'ts':
+            require(manifest['sourceRevision'] == catalog['upstreamCommit'], 'TS 运行来源不是固定上游版本')
+        else:
+            require('clean' in command and 'test' in command
+                    and command.index('clean') < command.index('test')
+                    and not any(re.search(r'skipTests|maven\.test\.skip|testFailureIgnore|failIfNoTests=false', part)
+                                for part in command), 'Java 运行必须是未跳过测试的 clean test')
+        for suffix, field in (('Inputs', 'inputsSha256'), ('Assertions', 'assertionsSha256')):
+            require(manifest.get(field) == digest(paths[side + suffix]), f'{side} 运行原始采集校验值不同：{field}')
+            for rows in capture_rows(paths[side + suffix], 'sampleId' if suffix == 'Inputs' else 'assertionId').values():
+                require(all(row.get('runId') == manifest['runId'] and row.get('side') == side for row in rows),
+                        f'{side} 原始采集运行身份或侧别不符；禁止复制、重放其他运行轨迹')
+        require(manifest.get('reportSha256') == sorted(digest(p) for p in getattr(args, side + '_report')),
+                f'{side} 运行原始报告校验值不同')
+        log = manifest.get('logPath')
+        require(isinstance(log, str) and bool(log), f'{side} 运行日志缺失')
+        require(manifest.get('logSha256') == digest(Path(path).parent / log), f'{side} 运行日志校验值不同')
+        manifests[side], hashes[side] = manifest, digest(path)
+    require(manifests['ts']['runId'] != manifests['java']['runId'], 'TS/Java 必须具有独立运行身份')
+    revision = manifests['java']['sourceRevision']
+    if getattr(args, 'java_revision', None):
+        require(args.java_revision == revision, 'Java 运行来源版本与要求不同；禁止用打包参数重写旧执行版本')
+    return revision, hashes
+
+
 def indexed(rows, key, label):
     result = {}
     for row in rows:
@@ -141,10 +244,17 @@ def compare(args):
     actual_java = {}
     for report_path in args.java_report:
         root = ET.parse(report_path).getroot()
-        for suite in root.iter('testsuite'):
+        require(root.tag in ('testsuite', 'testsuites'), f'Surefire XML 根节点无效：{report_path}')
+        suites = [root] if root.tag == 'testsuite' else list(root.findall('testsuite'))
+        require(bool(suites) and len(suites) == len(list(root.iter('testsuite'))),
+                f'Surefire XML 缺少有效 testsuite 或存在嵌套 suite：{report_path}')
+        testcases = [case for suite in suites for case in suite.findall('testcase')]
+        require(len(testcases) == len(list(root.iter('testcase'))),
+                f'Surefire testcase 不属于直接 testsuite：{report_path}')
+        for suite in suites:
             require(all(int(suite.get(k, '0')) == 0 for k in ('failures', 'errors', 'skipped')), f'Java 报告包含失败/跳过：{report_path}')
             require(int(suite.attrib['tests']) == len(list(suite.iter('testcase'))), f'Java 报告汇总与实际用例矛盾：{report_path}')
-        for case in root.iter('testcase'):
+        for case in testcases:
             identity = (case.attrib['classname'], case.attrib['name'])
             require(identity not in actual_java, f'Java 实际执行记录重复：{identity}')
             require(not any(case.find(tag) is not None for tag in ('failure', 'error', 'skipped')), f'Java 用例未通过：{identity}')
@@ -165,21 +275,19 @@ def compare(args):
         require(all(capture_paths.values()) and isinstance(observations.get('captureSha256'), dict),
                 '完整验收缺少两端原始采集、独立输入/断言计划或校验值')
         require(set(observations['captureSha256']) == set(capture_names), '原始采集文件清单不完整')
+        independent_captures(capture_paths)
         for name, path in capture_paths.items():
             require(observations['captureSha256'][name] == digest(path), f'原始采集校验值不匹配：{name}')
         plan = read(capture_paths['inputPlan'])
-        same_keys(cases, plan, '独立输入/断言计划用例')
-        for case_id, expected in plan.items():
-            require(isinstance(expected.get('sampleIds'), list) and bool(expected['sampleIds'])
-                    and len(expected['sampleIds']) == len(set(expected['sampleIds'])),
-                    f'独立输入样本计划无效：{case_id}')
-            require(expected.get('assertionIds') == mapped[case_id]['assertionIds'],
-                    f'映射断言与独立计划不符：{case_id}')
+        validate_plan(catalog, mapping, plan)
         raw_captures = {name: capture_rows(capture_paths[name], identity) for name, identity in (
             ('tsInputs', 'sampleId'), ('javaInputs', 'sampleId'),
             ('tsAssertions', 'assertionId'), ('javaAssertions', 'assertionId'))}
         for name, rows in raw_captures.items():
             same_keys(cases, rows, f'{name} 原始采集用例')
+        revision, run_hashes = runtime_provenance(args, catalog, capture_paths)
+        require(observations['javaRevision'] == revision, '汇总 Java 版本与实际运行来源不符')
+        require(observations.get('runManifestSha256') == run_hashes, '汇总运行 manifest 校验值不符')
     observed = indexed(observations['cases'], lambda c: c['id'], '逐用例结果')
     same_keys(cases, observed, '逐用例结果')
     assertion_count = 0
@@ -199,8 +307,9 @@ def compare(args):
                         f'{side} 实际输入样本与摘要不符：{key}')
         ts = indexed(observation['ts'], lambda a: a['id'], 'TS 断言结果')
         java = indexed(observation['java'], lambda a: a['id'], 'Java 断言结果')
-        same_keys(mapped[key]['assertionIds'], ts, f'TS 断言结果 {key}')
-        same_keys(mapped[key]['assertionIds'], java, f'Java 断言结果 {key}')
+        expected_ids = plan[key]['assertionIds'] if capture_paths['inputPlan'] else mapped[key]['assertionIds']
+        same_keys(expected_ids, ts, f'TS 断言结果 {key}')
+        same_keys(expected_ids, java, f'Java 断言结果 {key}')
         if capture_paths['inputPlan']:
             for side, actual in [('tsAssertions', observation['ts']), ('javaAssertions', observation['java'])]:
                 raw = raw_captures[side][key]
@@ -214,7 +323,8 @@ def compare(args):
             right = json.dumps(java[identity]['value'], sort_keys=True, ensure_ascii=False, allow_nan=False)
             require(left == right, f'实际结果不一致：{key} / {identity}')
             assertion_count += 1
-    return {'files': len(files), 'cases': len(cases), 'javaCases': len(java_owners), 'comparedAssertions': assertion_count}
+    return {'files': len(files), 'cases': len(cases), 'javaCases': len(java_owners),
+            'comparedAssertions': assertion_count, 'formalAcceptance': getattr(args, 'command', 'compare') == 'check'}
 
 
 def collect():
@@ -286,6 +396,8 @@ def main():
         command.add_argument('--java-revision', help='compare 调试时核对源码摘要；check 始终从当前 Java 工作树重新计算')
         for name in ('input-plan', 'ts-inputs', 'java-inputs', 'ts-assertions', 'java-assertions'):
             command.add_argument('--' + name)
+        for side in ('ts', 'java'):
+            command.add_argument('--' + side + '-run-manifest')
     args = parser.parse_args()
     try:
         if args.command == 'revision':
