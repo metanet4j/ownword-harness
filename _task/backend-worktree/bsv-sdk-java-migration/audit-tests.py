@@ -518,12 +518,19 @@ def compare(args):
             identity = (java['className'], java['name'])
             require(identity not in java_owners, f'Java 用例被重复用于多个映射：{identity}')
             java_owners[identity] = key
-    sites = {s['id'] for f in files.values() for s in f['sites']}
+    sites = {s['id']: f['path'] for f in files.values() for s in f['sites']}
     reviews = indexed(mapping['siteReviews'], lambda r: r['id'], '源码语义复核')
     same_keys(sites, reviews, '注册点、断言、循环与条件分支复核')
     for key, review in reviews.items():
         require(review['status'] == 'reviewed' and bool(review['note']) and bool(review['caseIds']), f'源码语义未复核：{key}')
         require(set(review['caseIds']) <= set(cases), f'源码复核引用未知用例：{key}')
+        require(all(cases[case_id]['file'] == sites[key] for case_id in review['caseIds']),
+                f'源码复核引用其他文件用例：{key}')
+    for key, case in mapped.items():
+        for identity in case['assertionIds']:
+            site = identity.split('#', 1)[0]
+            require(site in sites and sites[site] == cases[key]['file'], f'断言引用其他文件或未知站点：{key}: {identity}')
+            require(key in reviews[site]['caseIds'], f'断言站点未归属该用例：{key}: {identity}')
     compare_ts(catalog, args.ts_report)
     actual_java = {}
     for report_path in args.java_report:

@@ -14,8 +14,11 @@ function evidenceFixture() {
   write('catalog.json', { upstreamCommit: 'fixed', modules: ['compat'], moduleDependencies: { compat: [] }, files: [{ path: 'src/compat/a.test.ts', cases: [
     { id: 'case1', names: ['suite', 'one'], occurrence: 1, mode: 'run' },
     { id: 'case2', names: ['suite', 'two'], occurrence: 1, mode: 'run' }
-  ], sites: [] }] })
-  write('mapping.json', { upstreamCommit: 'fixed', siteReviews: [], cases: [
+  ], sites: [{ id: 'a1', kind: 'assertion' }, { id: 'a2', kind: 'assertion' }] }] })
+  write('mapping.json', { upstreamCommit: 'fixed', siteReviews: [
+    { id: 'a1', status: 'reviewed', note: '原断言', caseIds: ['case1'] },
+    { id: 'a2', status: 'reviewed', note: '原断言', caseIds: ['case2'] }
+  ], cases: [
     { id: 'case1', java: [{ className: 'PortTest', name: 'one' }], assertionIds: ['a1'] },
     { id: 'case2', java: [{ className: 'PortTest', name: 'two' }], assertionIds: ['a2'] }
   ] })
@@ -90,6 +93,8 @@ const corruptions = [
   ['整模块依赖未纳入', f => { const d = f.read('catalog.json'); d.moduleDependencies.compat = ['primitives']; f.write('catalog.json', d) }, /依赖模块/],
   ['少一个映射', f => { const d = f.read('mapping.json'); d.cases.pop(); f.write('mapping.json', d) }, /未映射/],
   ['同一个 Java 测试冒充两个用例', f => { const d = f.read('mapping.json'); d.cases[1].java = d.cases[0].java; f.write('mapping.json', d) }, /重复/],
+  ['断言站点冒充另一个用例', f => { const d = f.read('mapping.json'); d.cases[0].assertionIds = ['a2']; f.write('mapping.json', d) }, /断言站点未归属/],
+  ['源码复核引用其他文件用例', f => { const d = f.read('catalog.json'); d.files[0].cases.pop(); d.files.push({ path: 'src/compat/b.test.ts', cases: [{ id: 'case2', names: ['suite', 'two'], occurrence: 1, mode: 'run' }], sites: [] }); f.write('catalog.json', d) }, /其他文件用例/],
   ['总数相同但 TS 漏跑并重复另一用例', f => { const d = f.read('ts.json'); d.testResults[0].assertionResults[1].title = 'one'; f.write('ts.json', d) }, /实际用例/],
   ['Java 漏跑', f => f.write('java.xml', '<testsuite tests="1"><testcase classname="PortTest" name="one"/></testsuite>'), /未实际执行/],
   ['Java 跳过', f => f.write('java.xml', '<testsuite tests="2"><testcase classname="PortTest" name="one"><skipped/></testcase><testcase classname="PortTest" name="two"/></testsuite>'), /未通过/],
