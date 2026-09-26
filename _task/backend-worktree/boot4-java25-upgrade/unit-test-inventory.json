@@ -313,7 +313,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "20cb3f0278181c65c81c812fa2680e8a896be62f",
+      "head": "b70f3b09184d325f20132ac2693bb8c960f8a440",
       "modules": [
         {
           "path": ".",
@@ -855,6 +855,25 @@
                 }
               ],
               "classificationReason": "远程 BAP 公共地址与无私钥契约、内置路径配置、独立固定 tagged derivation 向量；纯本地计算"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/bap/SpecifyBapBaseContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "constructorOverloadsKeepTheSelectedKeysAndIdentity",
+                  "returnType": "void",
+                  "line": 16,
+                  "classification": "unit"
+                },
+                {
+                  "name": "keyBagFindsPaymentAndOrdByHashOrPublicKey",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "显式 BAP 所有构造入口及支付／Ord 私钥检索，公钥查找失败路径先红后绿；纯本地计算"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/WordsvBapBaseTest.java",

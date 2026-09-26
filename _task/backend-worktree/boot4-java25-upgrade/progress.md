@@ -11,7 +11,7 @@
 
 ## 已验证结果
 
-U0 [四仓测试基线](doc/测试基线与障碍-20260926-145423.md)列出 25 POM、369 个生产 Java 文件、最初 52 个测试文件，以及 19 项集成边界的隔离和观测方式。当前 `unit-test-inventory.json` 已增至 74 个测试文件。U0 全仓基线有 56 个旧用例通过、8 个跳过；17 个含可执行代码的 component 模块零本地单元测试。`component-core` 仅定义接口，按 N/A 处理。宿主五项共享服务健康。
+U0 [四仓测试基线](doc/测试基线与障碍-20260926-145423.md)列出 25 POM、369 个生产 Java 文件、最初 52 个测试文件，以及 19 项集成边界的隔离和观测方式。当前 `unit-test-inventory.json` 已增至 75 个测试文件。U0 全仓基线有 56 个旧用例通过、8 个跳过；17 个含可执行代码的 component 模块零本地单元测试。`component-core` 仅定义接口，按 N/A 处理。宿主五项共享服务健康。
 
 U1 base 提交 `bae7eb6` 与 `77ad9fd`：UTXO 相等性缺陷先红后绿；AIP 坏签名返回 false；BAP 固定身份向量、协议枚举、DTO 与 Jackson 行为均有断言。最终提交后，`python3 verify-unit.py --mode accept --scope metanet4j-base` 退出 0；19 个测试全部通过，零失败/错误/跳过，JaCoCo LINE 208/208、BRANCH 76/76、METHOD 51/51，`jacoco:check` 通过。证据在本地 `evidence/20260926T072220Z/`；同一提交的 base 0.2.0 构件已安装至隔离 Maven 仓库。
 
@@ -38,6 +38,8 @@ U2 BAP KeyBag 子项提交 `12f2c70`：根／当前签名密钥、支付及 Ord 
 U2 BAP 路径子项提交 `451db1d`：固定十六进制片段验证高位无符号数和 hardened 开关；原 `Integer.parseInt` 对 `80000000` 抛 `NumberFormatException`，改 `Long.parseLong` 后通过。SDK 隔离单元基线 66/0/0/0，LINE 798/1985、BRANCH 199/512、METHOD 197/455，证据 `evidence/20260926T093336Z/`。
 
 U2 BAP 变体子项提交 `20cb3f0`：远程身份只持有五类公开地址、不持有私钥；默认与 Panda 配置路径以及 Tagged Derivation 固定向量有断言。PandaBapBase 未把配置应用名带出的问题先红后绿。SDK 隔离单元基线 69/0/0/0，LINE 846/1986、BRANCH 199/512、METHOD 225/455；`BapBaseAbstract`、`RemoteBapBase`、`PandaBapBase`、两套配置逐类无缺口，`TaggedDerivation` 仍有一个隐式构造器未覆盖，证据 `evidence/20260926T094111Z/`。
+
+U2 显式 BAP 子项提交 `b70f3b0`：六种构造入口、身份／密钥 getter、KeyBag 按哈希选择支付或 Ord 私钥、未知哈希错误均有断言；有效公钥返回 `null` 的缺陷先红后绿。SDK 隔离单元基线 71/0/0/0，LINE 886/1986、BRANCH 203/512、METHOD 242/455；`SpecifyBapBase` 与其 KeyBag 逐类无覆盖缺口，证据 `evidence/20260926T094519Z/`。
 
 ## 仓库与工作区
 
