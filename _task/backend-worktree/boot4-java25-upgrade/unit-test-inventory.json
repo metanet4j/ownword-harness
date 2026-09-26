@@ -313,7 +313,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "4f4a5908b6d76b0c4e093b450161d5ba4f4ec857",
+      "head": "7e96ebdc3fadc0ae11b9f260be08f4867e0f6fcc",
       "modules": [
         {
           "path": ".",
@@ -1022,6 +1022,25 @@
               "classificationReason": "无直接 @Test 方法，供其他用例使用"
             },
             {
+              "path": "src/test/java/com/metanet4j/sdk/utils/ReadUtilsTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "readsSequentialBytesIncludingAnEmptySlice",
+                  "returnType": "void",
+                  "line": 13,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsNegativeTruncatedAndOversizedReads",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "真实字节序列与协议异常断言，覆盖空切片、游标、负长度和越界"
+            },
+            {
               "path": "src/test/java/com/metanet4j/sdk/utils/UtilsExtendTest.java",
               "classification": "unit",
               "methods": [
@@ -1030,9 +1049,21 @@
                   "returnType": "void",
                   "line": 9,
                   "classification": "unit"
+                },
+                {
+                  "name": "hashesBytesAndExplicitCharacterEncodings",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit"
+                },
+                {
+                  "name": "formatsBitcoinSignedMessageAtVarIntBoundary",
+                  "returnType": "void",
+                  "line": 36,
+                  "classification": "unit"
                 }
               ],
-              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+              "classificationReason": "固定 SHA-256 和 Bitcoin 签名消息向量，覆盖字符串编码、字节与 VarInt 边界"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utxo/BitailsAndGorillaHttpIntegrationTest.java",
