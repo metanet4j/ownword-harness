@@ -313,7 +313,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "39f82a9ce87d4343eb281013af3b3028609b847d",
+      "head": "18124c8d5cc27133628afc612b72b501fb4ab6ad",
       "modules": [
         {
           "path": ".",
@@ -614,13 +614,74 @@
           ],
           "testSources": [
             {
+              "path": "src/test/java/com/metanet4j/sdk/BobTxoConversionContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "convertsP2pkhInputAndOutputToPublicAddressAndValueFields",
+                  "returnType": "void",
+                  "line": 29,
+                  "classification": "unit"
+                },
+                {
+                  "name": "separatesOpReturnTapeAndKeepsPayloadInTxoFields",
+                  "returnType": "void",
+                  "line": 64,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsIncompleteRawTransaction",
+                  "returnType": "void",
+                  "line": 104,
+                  "classification": "unit"
+                },
+                {
+                  "name": "keepsNonP2pkhInputAndOpReturnAfterEarlierData",
+                  "returnType": "void",
+                  "line": 110,
+                  "classification": "unit"
+                },
+                {
+                  "name": "keepsFalseReturnPairTogetherAfterEarlierPayload",
+                  "returnType": "void",
+                  "line": 139,
+                  "classification": "unit"
+                },
+                {
+                  "name": "opcodeOnlyInputFallsBackToScriptIdentity",
+                  "returnType": "void",
+                  "line": 158,
+                  "classification": "unit"
+                },
+                {
+                  "name": "zeroPushInputIsReportedAsAnOpcode",
+                  "returnType": "void",
+                  "line": 173,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "内存序列化交易验证 BOB/TXO 地址、金额、OP_RETURN 和 tape 分隔，未连接外部服务"
+            },
+            {
               "path": "src/test/java/com/metanet4j/sdk/EcKeyLiteExtendContractTest.java",
               "classification": "unit",
               "methods": [
                 {
                   "name": "signsBinaryMessageAndRecoversThePublicKey",
                   "returnType": "void",
-                  "line": 21,
+                  "line": 22,
+                  "classification": "unit"
+                },
+                {
+                  "name": "compactSignaturePreservesUncompressedPublicKeyFormat",
+                  "returnType": "void",
+                  "line": 47,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsSignatureWhenPrivateAndPublicKeysDoNotMatch",
+                  "returnType": "void",
+                  "line": 65,
                   "classification": "unit"
                 }
               ],
@@ -650,6 +711,61 @@
                 }
               ],
               "classificationReason": "独立 key=2 WIF、公钥哈希、地址固定向量；四种 WIF 往返和异常输入"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/OrdHistoricalFixtureContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "reInscriptionCarriesGltfAndMap",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit"
+                },
+                {
+                  "name": "opnsCarriesTextMapAndSigma",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "unit"
+                },
+                {
+                  "name": "pngInscriptionCarriesPngSignature",
+                  "returnType": "void",
+                  "line": 47,
+                  "classification": "unit"
+                },
+                {
+                  "name": "metadataInscriptionCarriesGltfAndGeohash",
+                  "returnType": "void",
+                  "line": 58,
+                  "classification": "unit"
+                },
+                {
+                  "name": "ordinaryInscriptionFixtureMatchesTheMetadataVector",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sigmaFixtureVerifiesItsFixedSignedMessageAddress",
+                  "returnType": "void",
+                  "line": 68,
+                  "classification": "unit"
+                },
+                {
+                  "name": "transferHasOneSatDestinationWithoutNewInscription",
+                  "returnType": "void",
+                  "line": 82,
+                  "classification": "unit"
+                },
+                {
+                  "name": "marketFixtureHasFourPaymentOutputsWithoutNewInscription",
+                  "returnType": "void",
+                  "line": 93,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "八组仓库内历史 Ordinal 原始交易，固定交易 ID、输入输出、铭文、MAP、Sigma 验签、转移与市场金额字段；两份同字节资源核对一致"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/PrivateKeyTest.java",
@@ -772,6 +888,12 @@
                   "returnType": "void",
                   "line": 126,
                   "classification": "unit"
+                },
+                {
+                  "name": "selfExportReportsMissingEncryptionPathWithItsCause",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 136
                 }
               ],
               "classificationReason": "BAP 本地密钥轮换、重建、地址反查、工厂入口、无符号 hex 路径和身份加解密；包含成功、边界与失败路径"
@@ -1096,6 +1218,244 @@
               "classificationReason": "Ord 内容封装、缺失字段与 MAP 元数据序列化；纯本地脚本构建"
             },
             {
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionBuilderContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "constructorsKeepTheSelectedNetworkTransactionAndSigner",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 42
+                },
+                {
+                  "name": "signsPaymentAndInscribedInputsInMemory",
+                  "returnType": "void",
+                  "line": 65,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsASignerThatReportsFailure",
+                  "returnType": "void",
+                  "line": 89,
+                  "classification": "unit"
+                },
+                {
+                  "name": "forwardsRequestedSignatureModeToTheSigner",
+                  "returnType": "void",
+                  "line": 98,
+                  "classification": "unit"
+                },
+                {
+                  "name": "simpleSignatureOverloadHonorsItsForkIdArgument",
+                  "returnType": "void",
+                  "line": 116,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "内存UTXO和脚本解释器验证Ord构建、签名模式与失败处理，未广播交易"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionTemplateContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "postOrdinalIncludesTheAppAndPostMetadata",
+                  "returnType": "void",
+                  "line": 44,
+                  "classification": "unit"
+                },
+                {
+                  "name": "reinscriptionKeepsItsMediaType",
+                  "returnType": "void",
+                  "line": 64,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sendOrdinalPropagatesSignerFailure",
+                  "returnType": "void",
+                  "line": 82,
+                  "classification": "unit"
+                },
+                {
+                  "name": "defaultCreateOrdinalSignsThePaymentInputAndBalancesChange",
+                  "returnType": "void",
+                  "line": 92,
+                  "classification": "unit"
+                },
+                {
+                  "name": "defaultSendOrdinalSignsBothInputsWithoutReinscription",
+                  "returnType": "void",
+                  "line": 104,
+                  "classification": "unit"
+                },
+                {
+                  "name": "emptyReinscriptionFieldsUseTheOrdinaryTransferOutput",
+                  "returnType": "void",
+                  "line": 116,
+                  "classification": "unit"
+                },
+                {
+                  "name": "deprecatedSendUtxosBuildsAndSignsTheChangePayment",
+                  "returnType": "void",
+                  "line": 133,
+                  "classification": "unit"
+                },
+                {
+                  "name": "defaultCreateBapOrdinalIncludesRootAndSigmaProofs",
+                  "returnType": "void",
+                  "line": 144,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "内存 UTXO 与签名替身验证本地 Ord 帖文元数据、重新铭刻媒体类型及签名失败传播，未广播交易"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "createsAnUnsignedOrdinalWithPendingHashesAndBalancedChange",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                },
+                {
+                  "name": "postOrdinalIncludesPostMetadataInItsLockingScript",
+                  "returnType": "void",
+                  "line": 91,
+                  "classification": "unit"
+                },
+                {
+                  "name": "inputSigningSwitchControlsWhetherTheSignerRuns",
+                  "returnType": "void",
+                  "line": 109,
+                  "classification": "unit"
+                },
+                {
+                  "name": "defaultConstructorEnablesBothSigningStages",
+                  "returnType": "void",
+                  "line": 123,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sendsAnExistingOrdinalWithTwoSpendableInputs",
+                  "returnType": "void",
+                  "line": 130,
+                  "classification": "unit"
+                },
+                {
+                  "name": "reinscriptionKeepsTheRequestedMediaType",
+                  "returnType": "void",
+                  "line": 149,
+                  "classification": "unit"
+                },
+                {
+                  "name": "incompleteReinscriptionFallsBackToAnOrdinaryTransfer",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 165
+                },
+                {
+                  "name": "sendOrdinalPropagatesSignerFailure",
+                  "returnType": "void",
+                  "line": 183,
+                  "classification": "unit"
+                },
+                {
+                  "name": "createsUnsignedBapOrdinalWhenBothSigningStagesAreDisabled",
+                  "returnType": "void",
+                  "line": 193,
+                  "classification": "unit"
+                },
+                {
+                  "name": "defaultPostOverloadBuildsPostMetadataWithoutSigning",
+                  "returnType": "void",
+                  "line": 208,
+                  "classification": "unit"
+                },
+                {
+                  "name": "deprecatedSendUtxosSpendsLocalPaymentInputWithoutBroadcast",
+                  "returnType": "void",
+                  "line": 225,
+                  "classification": "unit"
+                },
+                {
+                  "name": "signsBsmThenInputFromTwoLocallyPreparedRemoteContexts",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 238
+                }
+              ],
+              "classificationReason": "内存 UTXO 与签名替身验证远程 Ord 创建、转移、MAP、开关和签名失败传播，未连接外部服务"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteTransactionContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "requestsAndAppliesRemotePaymentSignatureInMemory",
+                  "returnType": "void",
+                  "line": 60,
+                  "classification": "unit"
+                },
+                {
+                  "name": "routesPaymentAndOrdinalHashesToTheirRespectiveAddresses",
+                  "returnType": "void",
+                  "line": 83,
+                  "classification": "unit"
+                },
+                {
+                  "name": "collectsOnlyUnsignedDataHashesAndSkipsDisconnectedInputs",
+                  "returnType": "void",
+                  "line": 104,
+                  "classification": "unit"
+                },
+                {
+                  "name": "signsTheRequestedSingleAnyoneCanPayHash",
+                  "returnType": "void",
+                  "line": 127,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteOrdinalBuilderReportsSignerFailure",
+                  "returnType": "void",
+                  "line": 147,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteOrdinalBuilderForwardsForkId",
+                  "returnType": "void",
+                  "line": 156,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteOrdinalOutputCarriesTheRequestedContentAndPendingBsmHash",
+                  "returnType": "void",
+                  "line": 170,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteSignerLeavesAnAlreadyDisconnectedInputUntouched",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 188
+                },
+                {
+                  "name": "fourArgumentRemoteOrdinalOutputUsesTheDefaultSigningIdentity",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 202
+                },
+                {
+                  "name": "remoteSignerHasNoSerializedPrivateState",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 219
+                }
+              ],
+              "classificationReason": "本地密钥、内存UTXO与受控签名上下文验证远程交易摘要和签名，未连接远程服务"
+            },
+            {
               "path": "src/test/java/com/metanet4j/sdk/script/ScriptExtendContractTest.java",
               "classification": "unit",
               "methods": [
@@ -1140,14 +1500,20 @@
                 {
                   "name": "forkIdDigestMatchesIndependentPreimageAcrossFlags",
                   "returnType": "void",
-                  "line": 24,
+                  "line": 27,
                   "classification": "unit"
                 },
                 {
                   "name": "singleWithoutCorrespondingOutputUsesZeroOutputHash",
                   "returnType": "void",
-                  "line": 41,
+                  "line": 44,
                   "classification": "unit"
+                },
+                {
+                  "name": "manuallyBuiltTransactionHashesBeforeItsSerializedSizeIsKnown",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 57
                 }
               ],
               "classificationReason": "内存交易和独立 ForkID 预映像计算，无网络或外部状态"
@@ -1241,6 +1607,97 @@
               "classificationReason": "本地线程验证签名上下文按哈希查找和线程隔离，无外部状态"
             },
             {
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "proposedTransactionKeepsRequestedSigningMode",
+                  "returnType": "void",
+                  "line": 40,
+                  "classification": "unit"
+                },
+                {
+                  "name": "twoArgumentRequestKeepsItsForkIdFlag",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 60
+                },
+                {
+                  "name": "threeArgumentRequestPassesForkIdModeToTheStandardLocalSigner",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 67
+                },
+                {
+                  "name": "transactionConversionPreservesSerializedHeaderAndPayments",
+                  "returnType": "void",
+                  "line": 78,
+                  "classification": "unit"
+                },
+                {
+                  "name": "transactionConversionRetainsTheOriginalNetwork",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 93
+                },
+                {
+                  "name": "parserConstructorsReadTheSameTransactionWithOffsetsAndRetentionModes",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 103
+                },
+                {
+                  "name": "signerUsesRequestedForkIdHashFlagsAndAnyoneCanPay",
+                  "returnType": "void",
+                  "line": 123,
+                  "classification": "unit"
+                },
+                {
+                  "name": "missingConnectedOutputHasExplicitSingleInputErrorAndBatchSkip",
+                  "returnType": "void",
+                  "line": 142,
+                  "classification": "unit"
+                },
+                {
+                  "name": "statelessSignerIsReadyBeforeAndAfterStateSerialization",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 155
+                },
+                {
+                  "name": "singleInputSigningCreatesAValidForkIdSignature",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 166
+                },
+                {
+                  "name": "batchSigningSupportsLegacyHashingAndAnyoneCanPay",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 177
+                },
+                {
+                  "name": "publicOnlyKeysAreSkippedByBatchAndReportedUnavailableBySingleInput",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 189
+                },
+                {
+                  "name": "keyLockFailuresPropagateWithoutChangingTheInputScript",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 201
+                },
+                {
+                  "name": "privateKeyAccessLostDuringSigningLeavesTheInputUnsigned",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 219
+                }
+              ],
+              "classificationReason": "内存交易验证头字段保留、ForkID签名标志及缺少连接输出处理，未连接外部服务"
+            },
+            {
               "path": "src/test/java/com/metanet4j/sdk/transcation/BapDataLockBuilderSignTypeTest.java",
               "classification": "unit",
               "methods": [
@@ -1273,82 +1730,216 @@
                   "name": "testBapRootTransaction",
                   "returnType": "void",
                   "line": 34,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BapDataLockBuilderSignTypeTest#buildIdSignsWithPreviousAddress",
+                    "com.metanet4j.sdk.transcation.TransactionBuilderContractTest#signsTheConnectedInputAndProducesASpendableTransaction"
+                  ],
+                  "manualReason": "旧方法名写 root，实际调用 buildId；旧用例查询实时 UTXO 并向 BSV 主网广播；自动回归不能复现链上确认或交易 ID。"
                 },
                 {
                   "name": "testBapAliasTransaction",
                   "returnType": "void",
                   "line": 47,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BapDataLockBuilderSignTypeTest#buildAliasSignsWithCurrentAddress",
+                    "com.metanet4j.sdk.transcation.TransactionBuilderContractTest#signsTheConnectedInputAndProducesASpendableTransaction"
+                  ],
+                  "manualReason": "identity.json 的具体身份内容与主网广播结果未在离线测试中逐项断言；旧用例查询实时 UTXO 并向 BSV 主网广播；自动回归不能复现链上确认或交易 ID。"
                 },
                 {
                   "name": "testBsocialUnFollowTransaction",
                   "returnType": "void",
                   "line": 60,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#relationshipsAndReactionsUseTheirProtocolFieldNames"
+                  ],
+                  "manualReason": "旧用例查询实时 UTXO 并向 BSV 主网广播；自动回归不能复现链上确认或交易 ID。"
                 },
                 {
                   "name": "testBsocialFollowTransaction",
                   "returnType": "void",
                   "line": 73,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#relationshipsAndReactionsUseTheirProtocolFieldNames"
+                  ],
+                  "manualReason": "旧用例查询实时 UTXO 并向 BSV 主网广播；自动回归不能复现链上确认或交易 ID。"
                 },
                 {
                   "name": "testBsocialPostTransaction",
                   "returnType": "void",
                   "line": 86,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#postsSupportTextExtensionsAndSeparateTagMaps",
+                    "com.metanet4j.sdk.transcation.UnSpendableDataLockBuilderContractTest#localSignaturesVerifyTheOriginalBinaryPayloadForEveryBapKey"
+                  ],
+                  "manualReason": "旧用例查询实时 UTXO 并向 BSV 主网广播；自动回归不能复现链上确认或交易 ID。"
                 },
                 {
                   "name": "testBsocialRePostTransaction",
                   "returnType": "void",
                   "line": 105,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#relationshipsAndReactionsUseTheirProtocolFieldNames",
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#postsSupportTextExtensionsAndSeparateTagMaps"
+                  ],
+                  "manualReason": "旧示例组合固定历史 txId、文字内容并广播；现有离线测试分别校验 repost 协议字段与正文，未验证该固定链上引用及广播。"
                 },
                 {
                   "name": "testBsocialReply",
                   "returnType": "void",
                   "line": 124,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#relationshipsAndReactionsUseTheirProtocolFieldNames",
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#postsSupportTextExtensionsAndSeparateTagMaps"
+                  ],
+                  "manualReason": "旧示例组合固定历史 txId、文字内容并广播；现有离线测试分别校验 reply 协议字段与正文，未验证该固定链上引用及广播。"
                 },
                 {
                   "name": "testBsocialImapgePostTransaction",
                   "returnType": "void",
                   "line": 148,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#binaryContentWithoutEncodingKeepsItsBytesAndFieldBoundaries"
+                  ],
+                  "manualReason": "旧示例读取 bsv1.jpeg 并向主网广播；离线测试验证二进制内容边界，但未断言该 JPEG 文件或主网发布结果。"
                 },
                 {
                   "name": "testBsocialPdfTransaction",
                   "returnType": "void",
                   "line": 171,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#binaryContentWithoutEncodingKeepsItsBytesAndFieldBoundaries"
+                  ],
+                  "manualReason": "旧示例引用的 MMS/吉姆第一本书…pdf 不在 SDK 测试资源中，无法重现该文件内容；主网发布结果亦不进入自动回归。"
                 },
                 {
                   "name": "testBsocialLikeTransaction",
                   "returnType": "void",
                   "line": 194,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#relationshipsAndReactionsUseTheirProtocolFieldNames"
+                  ],
+                  "manualReason": "旧示例引用固定历史 txId 并向主网广播；离线测试仅验证 like 协议字段。"
                 },
                 {
                   "name": "testSendUtxo",
                   "returnType": "void",
                   "line": 207,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.TransactionBuilderContractTest#addsProviderUtxoDataAndChangeWithoutLosingValue",
+                    "com.metanet4j.sdk.transcation.TransactionBuilderContractTest#signsTheConnectedInputAndProducesASpendableTransaction",
+                    "com.metanet4j.sdk.utxo.UtxoProvidersTest#bitailsMapsUnspentOutputsAndHandlesEmptyResults"
+                  ],
+                  "manualReason": "旧示例依赖 Bitails 实时 UTXO 并向主网广播；离线测试使用固定 UTXO，不能复现余额变化或广播确认。"
                 },
                 {
                   "name": "testSendUtxos",
                   "returnType": "void",
                   "line": 225,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.TransactionBuilderContractTest#acceptsAddressListUtxoListAndExistingFundingOutput",
+                    "com.metanet4j.sdk.transcation.TransactionBuilderContractTest#signsTheConnectedInputAndProducesASpendableTransaction"
+                  ],
+                  "manualReason": "旧示例依赖 Bitails 实时 UTXO、三个指定金额输出并向主网广播；离线测试覆盖多输入和签名，未复现该笔链上交易。"
                 },
                 {
                   "name": "testEckeyLiteExtend",
                   "returnType": "void",
                   "line": 244,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.bap.BapBaseCoreContractTest#defaultAddressesUseTheirOwnPrivateKeys",
+                    "com.metanet4j.sdk.bap.BapProviderKeyBagTest#findsPaymentAndOrdKeysOutsideTheSignatureSearchRange",
+                    "com.metanet4j.sdk.KeyAddressContractTest#exposesKnownPublicKeyAddressAndSignature"
+                  ]
                 }
               ],
               "classificationReason": "类级 external 标签；涉及实时 UTXO 与主网广播，U2 应拆出可离线行为"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/transcation/BsocialDataLockBuilderContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "encryptedPostsRemainDecryptableWithoutChangingTheCallerContentType",
+                  "returnType": "void",
+                  "line": 49,
+                  "classification": "unit"
+                },
+                {
+                  "name": "relationshipsAndReactionsUseTheirProtocolFieldNames",
+                  "returnType": "void",
+                  "line": 70,
+                  "classification": "unit"
+                },
+                {
+                  "name": "tipsIncludeCurrencyAndAmountOnlyWhenBothArePresent",
+                  "returnType": "void",
+                  "line": 90,
+                  "classification": "unit"
+                },
+                {
+                  "name": "postsSupportTextExtensionsAndSeparateTagMaps",
+                  "returnType": "void",
+                  "line": 102,
+                  "classification": "unit"
+                },
+                {
+                  "name": "mixedContentAndPaymentsAreSortedByIndexBeforeTheirMap",
+                  "returnType": "void",
+                  "line": 121,
+                  "classification": "unit"
+                },
+                {
+                  "name": "binaryContentWithoutEncodingKeepsItsBytesAndFieldBoundaries",
+                  "returnType": "void",
+                  "line": 143,
+                  "classification": "unit"
+                },
+                {
+                  "name": "paymentOnlyContentSupportsMultipleMapsWithoutATrailingSeparator",
+                  "returnType": "void",
+                  "line": 157,
+                  "classification": "unit"
+                },
+                {
+                  "name": "callersCanSupplyAnAlreadyEncryptedPayloadWithoutAnEncryptionKey",
+                  "returnType": "void",
+                  "line": 174,
+                  "classification": "unit"
+                },
+                {
+                  "name": "suppliedProtocolPrefixIsKeptAndRemotePostSignatureVerifies",
+                  "returnType": "void",
+                  "line": 191,
+                  "classification": "unit"
+                },
+                {
+                  "name": "malformedContentAndMapsAreRejected",
+                  "returnType": "void",
+                  "line": 217,
+                  "classification": "unit"
+                },
+                {
+                  "name": "malformedMapIsRejectedWhenItAppearsAfterAValidMap",
+                  "returnType": "void",
+                  "line": 238,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "确定性脚本与固定密钥验证Bsocial协议、加密、排序、MAP校验和远程签名，未连接外部服务"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/transcation/OrdTransactionTest.java",
@@ -1358,79 +1949,124 @@
                   "name": "testCreateOrdinal",
                   "returnType": "void",
                   "line": 35,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest#defaultCreateOrdinalSignsThePaymentInputAndBalancesChange",
+                    "com.metanet4j.sdk.ordinals.OrdScriptBuilderContractTest#inscriptionPreservesDestinationAndPushesMediaEnvelope"
+                  ],
+                  "manualReason": "旧示例从 Bitails 查询实时付款 UTXO、向主网广播并等待确认；离线测试验证确定性铭文与可花费签名，不验证链上确认。"
                 },
                 {
                   "name": "testCreateBapOrdinal",
                   "returnType": "void",
                   "line": 60,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest#defaultCreateBapOrdinalIncludesRootAndSigmaProofs"
+                  ],
+                  "manualReason": "旧示例查询实时付款 UTXO 并向主网广播；离线测试验证 BAP/Ord 输出与签名，不验证链上确认。"
                 },
                 {
                   "name": "testSendOrdinalByCreateUtxo",
                   "returnType": "void",
                   "line": 82,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest#defaultSendOrdinalSignsBothInputsWithoutReinscription"
+                  ],
+                  "manualReason": "旧示例按固定 origin 向 Gorilla 查询实时铭文 UTXO、按 Bitails 查询付款 UTXO并广播；链上花费状态与确认数不可固定。"
                 },
                 {
                   "name": "testSendOrdinalBySendUtxo",
                   "returnType": "void",
                   "line": 96,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest#defaultSendOrdinalSignsBothInputsWithoutReinscription"
+                  ],
+                  "manualReason": "旧示例使用另一固定 origin 与外部收款地址查询实时 UTXO、向主网广播；离线测试验证转移结构与签名，未复现该笔链上转移。"
                 },
                 {
                   "name": "testTransactionOrdReInscriptionby2ndkeyDeserialize",
                   "returnType": "void",
                   "line": 113,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#reInscriptionCarriesGltfAndMap"
+                  ]
                 },
                 {
                   "name": "testOpns",
                   "returnType": "void",
                   "line": 123,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#opnsCarriesTextMapAndSigma"
+                  ]
                 },
                 {
                   "name": "testTransactionOrdSigmaDeserialize",
                   "returnType": "void",
                   "line": 133,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#sigmaFixtureVerifiesItsFixedSignedMessageAddress"
+                  ]
                 },
                 {
                   "name": "testTransactionOrdPngDeserialize",
                   "returnType": "void",
                   "line": 148,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#pngInscriptionCarriesPngSignature"
+                  ]
                 },
                 {
                   "name": "testTransactionOrdMetadataDeserialize",
                   "returnType": "void",
                   "line": 158,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#metadataInscriptionCarriesGltfAndGeohash"
+                  ]
                 },
                 {
                   "name": "testTransactionOrdDeserialize",
                   "returnType": "void",
                   "line": 168,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#ordinaryInscriptionFixtureMatchesTheMetadataVector"
+                  ]
                 },
                 {
                   "name": "testTransactionOrdTransferDeserialize",
                   "returnType": "void",
                   "line": 178,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#transferHasOneSatDestinationWithoutNewInscription"
+                  ]
                 },
                 {
                   "name": "testTransactionOrdMarketDeserialize",
                   "returnType": "void",
                   "line": 187,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#marketFixtureHasFourPaymentOutputsWithoutNewInscription"
+                  ]
                 },
                 {
                   "name": "testSighashType",
                   "returnType": "void",
                   "line": 193,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.script.SigHashExtendContractTest#forkIdDigestMatchesIndependentPreimageAcrossFlags",
+                    "com.metanet4j.sdk.signers.SignerTransactionContractTest#signerUsesRequestedForkIdHashFlagsAndAnyoneCanPay"
+                  ]
                 }
               ],
               "classificationReason": "类级 external 标签；涉及实时 UTXO 与主网广播，U2 应拆出可离线行为"
@@ -1443,28 +2079,182 @@
                   "name": "testBapRootTransactionAndGetAllBsmPreSignHash",
                   "returnType": "void",
                   "line": 35,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.remote.RemoteTransactionContractTest#collectsOnlyUnsignedDataHashesAndSkipsDisconnectedInputs",
+                    "com.metanet4j.sdk.transcation.UnSpendableDataLockBuilderContractTest#remoteRequestIsStableAndTheSameBuilderAcceptsItsSignature"
+                  ],
+                  "manualReason": "旧示例从 Bitails 查询实时 UTXO，打印远程签名请求但无字段断言；离线测试验证固定上下文，不复现线上 UTXO。"
                 },
                 {
                   "name": "testBapRootTransactionAndRemoteSign",
                   "returnType": "void",
                   "line": 46,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.remote.RemoteTransactionContractTest#requestsAndAppliesRemotePaymentSignatureInMemory",
+                    "com.metanet4j.sdk.transcation.UnSpendableDataLockBuilderContractTest#remoteSignatureVerifiesTheOriginalBinaryPayload"
+                  ],
+                  "manualReason": "旧示例查询实时 UTXO并向主网广播；离线测试验证远程 BSM 与输入签名，未复现链上确认。"
                 },
                 {
                   "name": "testCreateOrdinalAndRemoteSign",
                   "returnType": "void",
                   "line": 68,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest#signsBsmThenInputFromTwoLocallyPreparedRemoteContexts"
+                  ],
+                  "manualReason": "旧示例查询实时付款 UTXO并向主网广播；离线测试验证两个远程签名阶段和可花费交易，未复现链上确认。"
                 }
               ],
               "classificationReason": "类级 external 标签；涉及实时 UTXO 与主网广播，U2 应拆出可离线行为"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "addsProviderUtxoDataAndChangeWithoutLosingValue",
+                  "returnType": "void",
+                  "line": 52,
+                  "classification": "unit"
+                },
+                {
+                  "name": "acceptsAddressListUtxoListAndExistingFundingOutput",
+                  "returnType": "void",
+                  "line": 87,
+                  "classification": "unit"
+                },
+                {
+                  "name": "calculateChangeUsesTheFeeRatePassedToThePublicMethod",
+                  "returnType": "void",
+                  "line": 111,
+                  "classification": "unit"
+                },
+                {
+                  "name": "signsTheConnectedInputAndProducesASpendableTransaction",
+                  "returnType": "void",
+                  "line": 122,
+                  "classification": "unit"
+                },
+                {
+                  "name": "reportsSignerFailureInsteadOfReturningAnUnsignedTransaction",
+                  "returnType": "void",
+                  "line": 139,
+                  "classification": "unit"
+                },
+                {
+                  "name": "broadcastDelegatesOnlyToTheProvidedLocalFunction",
+                  "returnType": "void",
+                  "line": 149,
+                  "classification": "unit"
+                },
+                {
+                  "name": "constructorsPreserveTheSelectedNetworkAndExistingTransaction",
+                  "returnType": "void",
+                  "line": 162,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sigmaSigningKeepsThePayloadAndExposesAVerifiableCurrentIdentitySignature",
+                  "returnType": "void",
+                  "line": 185,
+                  "classification": "unit"
+                },
+                {
+                  "name": "publicOnlyKeyUsesAConservativeUnlockingSizeForChangeEstimation",
+                  "returnType": "void",
+                  "line": 207,
+                  "classification": "unit"
+                },
+                {
+                  "name": "completionForwardsTheRequestedForkIdModeToTheSigner",
+                  "returnType": "void",
+                  "line": 226,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "内存 UTXO 和本地替身验证找零、签名与广播回调，未连接网络或真实广播"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionContextTest.java",
               "classification": "fixture",
               "methods": [],
               "classificationReason": "无直接 @Test 方法，供其他用例使用"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/transcation/UnSpendableDataLockBuilderContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "remoteRequestIsStableAndTheSameBuilderAcceptsItsSignature",
+                  "returnType": "void",
+                  "line": 37,
+                  "classification": "unit"
+                },
+                {
+                  "name": "localSignaturesVerifyTheOriginalBinaryPayloadForEveryBapKey",
+                  "returnType": "void",
+                  "line": 60,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteSignatureVerifiesTheOriginalBinaryPayload",
+                  "returnType": "void",
+                  "line": 76,
+                  "classification": "unit"
+                },
+                {
+                  "name": "missingRemoteSignatureLeavesTheBuilderUnsignedAndRetryable",
+                  "returnType": "void",
+                  "line": 88,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteSignatureMustComeFromTheRequestedBapAddress",
+                  "returnType": "void",
+                  "line": 107,
+                  "classification": "unit"
+                },
+                {
+                  "name": "malformedRemoteSignaturesDoNotChangeTheUnsignedScript",
+                  "returnType": "void",
+                  "line": 131,
+                  "classification": "unit"
+                },
+                {
+                  "name": "nullLocalSignTypeUsesTheSameCurrentKeyAsTheDefaultConstructor",
+                  "returnType": "void",
+                  "line": 146,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteEnumCannotSilentlyProduceAnIncompleteLocalSignature",
+                  "returnType": "void",
+                  "line": 156,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rebuildingBapDataClearsThePreviousSignedState",
+                  "returnType": "void",
+                  "line": 165,
+                  "classification": "unit"
+                },
+                {
+                  "name": "inferredRemoteKeyTracksTheOperationWhenTheBuilderIsReused",
+                  "returnType": "void",
+                  "line": 183,
+                  "classification": "unit"
+                },
+                {
+                  "name": "explicitRemoteKeyIsPreservedAcrossBapOperations",
+                  "returnType": "void",
+                  "line": 192,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "固定 BAP 密钥与内存脚本验证原始二进制签名、远程预签名稳定性和失败后重试，未连接外部服务"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utils/ReadUtilsTest.java",
@@ -1624,13 +2414,23 @@
                   "name": "getUtxoByAddress",
                   "returnType": "void",
                   "line": 18,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.utxo.UtxoProvidersTest#bitailsMapsUnspentOutputsAndHandlesEmptyResults",
+                    "com.metanet4j.sdk.utxo.BitailsAndGorillaHttpIntegrationTest#providersMapLocalHttpResponsesAndPropagateServerFailures"
+                  ],
+                  "manualReason": "旧用例查询 Bitails 公网地址的实时 UTXO 并打印；本地 HTTP/固定 DTO 已验证映射，实时余额随链变化且不能用稳定断言替代。"
                 },
                 {
                   "name": "getBalanceByAddress",
                   "returnType": "void",
                   "line": 29,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.utxo.HttpClientsTest#bitailsQueriesUseDefaultAndExplicitEndpoints",
+                    "com.metanet4j.sdk.utxo.BitailsAndGorillaHttpIntegrationTest#bitailsUsesLocalEndpointForReadAndBroadcast"
+                  ],
+                  "manualReason": "旧用例查询 Bitails 公网地址的实时余额并打印；本地 HTTP 已验证请求/解析，公网即时余额无稳定自动断言。"
                 }
               ],
               "classificationReason": "两个测试真实访问 Bitails HTTP，当前无标签；分类修复前不得运行 sdk 自动基线"
@@ -1642,20 +2442,38 @@
                 {
                   "name": "createsRequestsWithMethodHeadersAndTimeout",
                   "returnType": "void",
-                  "line": 27,
+                  "line": 36,
                   "classification": "unit"
                 },
                 {
                   "name": "decodesBodyAndReportsMalformedJson",
                   "returnType": "void",
-                  "line": 42,
+                  "line": 51,
                   "classification": "unit"
                 },
                 {
                   "name": "returnsNullForIoFailureAndRestoresInterruptedStatus",
                   "returnType": "void",
-                  "line": 65,
+                  "line": 74,
                   "classification": "unit"
+                },
+                {
+                  "name": "rejectsInformationalResponseBelowSuccessRange",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 86
+                },
+                {
+                  "name": "defaultSendUsesFactoryClientAndDecodesItsResponse",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 100
+                },
+                {
+                  "name": "bodyHandlerDecodesUtf8AcrossByteBuffers",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 116
                 }
               ],
               "classificationReason": "公开请求/发送入口，经 Mockito HttpClient 替身，不发起网络请求"

@@ -1,51 +1,21 @@
-# session-handoff.md — 会话交接
+# session-handoff.md — Boot 4 / Java 25 测试任务交接
 
-## 当前任务
+## 当前状态
 
-胡先生要求四个子仓库建立完整单元测试与集成测试，并已确认通过公开 API 测试；MongoDB、ES、MySQL、Kafka、Redis、文件和 HTTP 边界实测，公网服务本地模拟，自动测试不广播主网。当前 `unit-u2-sdk` 已恢复实施；U0 测试基线及 U1 base 已完成。
+胡先生要求四个子仓库建立完整单元测试与集成测试，已批准 U0—U9 的实施范围及公开 API 测试。当前只实施 `unit-u2-sdk`；U0 和 U1 已完成，U3—U9 尚未开始。先读本目录 `AGENTS.md`、`../AGENTS.md`、[测试计划](doc/单元测试全覆盖计划-20260920-090603.md)、`feature_list.json`，运行 `./init.sh`。共享 SDK `target` 只允许串行运行 Maven；集成测试须在宿主环境提权执行。不要读取 Archive、推送远端、广播主网或清理共享中间件数据。
 
-开始工作时读取 `../AGENTS.md`、`../mvn-command.md`、本目录 `AGENTS.md`、[测试计划](doc/单元测试全覆盖计划-20260920-090603.md)、`feature_list.json`，再运行 `./init.sh`。遵守单功能项实施、提交和测试门禁；不读取 Archive，不推送，不修改四仓基线。
+SDK HEAD `18124c8`：宿主全量 `python3 verify-unit.py --mode baseline --scope metanet4j-sdk` 退出 0，199/0/0/0，LINE 1948/1961、BRANCH 506/506、METHOD 441/452；报告 `evidence/20260926T164453Z/`。U1 base 严格验收 19/0/0/0，证据 `evidence/20260926T072220Z/`。SDK HTTP 本地集成 5/0/0/0，证据 `evidence/20260926-u2-http/integration/`。八组历史 Ordinal 交易固定向量与 Sigma 验签定向 8/0/0/0，证据 `evidence/20260927-u2-ord-fixtures-sigma-targeted/`。31 个旧 `external` 用例均有真实替代测试，47 条引用已逐个核实方法存在；涉及实时主网的差异另记人工原因。
 
-## 已完成与证据
+## Blockers
 
-parent `4112a48` 提供 JaCoCo 0.8.14 `unit-coverage` profile。`unit-test-inventory.json` 列明 25 POM、369 生产 Java、当前 84 测试 Java、安全分类及 19 项集成边界。sdk Bitails 公网用例标记 `external`；component 的 Spring 基类、ES 与 SSE 类标记 `integration`。U0 基线证据 `evidence/20260926T064228Z/`，报告见[测试基线](doc/测试基线与障碍-20260926-145423.md)。宿主五服务健康。
+1. 远程 Ordinal 公开 `sendOrdinal(RemoteBapBase, …)` 调用时 `KeyBag=null` 导致异常，红测及原测试补丁存于 `evidence/20260927-u2-remote-send-red/`。胡先生已收到设计选择：保留旧 `Transaction` 返回类型并新增 `prepareSendOrdinal(...)` 返回待签构建器，或直接改旧入口返回类型。收到选择前不要改依赖该决定的 API。
+2. 严格验收尚差 13 行：上述远程入口 1 行、10 个无业务行为的隐式构造器、`SigHashExtend` 固定内存流中不可触达的 `IOException` 包装 2 行。胡先生已收到后 12 行的验收口径选择。`verify-unit.py --mode accept --scope metanet4j-sdk --evidence evidence/20260926T164453Z` 退出 1，仅余 22 条覆盖率检查项；不能标记 U2 完成。
+3. `./init.sh` 已退出 0，但共享中间件当前没有运行容器。启动下一阶段的数据库、搜索、消息及缓存集成测试前，按 `infra/README-*.md` 核对连接、服务日志和资源隔离。
 
-U1 base 提交 `bae7eb6` 和 `77ad9fd`，严格入口在最终提交后退出 0：19/0/0/0，LINE 208/208、BRANCH 76/76、METHOD 51/51；证据 `evidence/20260926T072220Z/`。`jacoco:check` 已通过，同一提交的 base 构件 `install -DskipTests` 成功。AIP 坏签名缺陷与 UTXO outpoint 相等性缺陷已修复；BAP 身份派生有固定向量断言。
+## Files
 
-U2 HTTP 子项已提交 sdk `4f4a590`。两个客户端与 Provider 的本机 HTTP 集成测试 5/0/0/0，覆盖成功、畸形 JSON、503，证据 `evidence/20260926-u2-http/integration/`；隔离单元测试 32/0/0/0，LINE 392/2005、BRANCH 35/505、METHOD 114/462，证据 `evidence/20260926T075317Z/`。该单元结果是基线，U2 尚未达到严格验收。
+本任务主仓待提交的状态文件：`feature_list.json`、`progress.md`、`session-handoff.md`、`unit-test-inventory.json`。SDK 工作树当前无待提交改动；HEAD 以 `git -C metanet4j-sdk rev-parse --short HEAD` 为准。ownword 主仓既有 `AGENTS.md`、`standard/`、`.agents/` 等无关改动须保留且不得混入本任务提交。各证据目录为本地运行产物，不代替 Git 提交。
 
-U2 工具子项已提交 sdk `7e96ebd`。`ReadUtils` 负长度问题先红后绿；`UtilsExtend` 固定 SHA-256 和 Bitcoin 签名消息向量已覆盖。最新隔离单元基线 36/0/0/0，LINE 400/2000、BRANCH 39/507、METHOD 115/461，证据 `evidence/20260926T080341Z/`；这两类逐类无覆盖缺口，U2 总体仍未完成。
+## Next Session
 
-U2 密钥子项已提交 sdk `986fddd`。非压缩 WIF 往返缺陷先红后绿；独立 key=2 WIF、公钥及主网／测试网地址向量和非法输入有断言。最新 SDK 隔离单元基线 39/0/0/0，LINE 434/1996、BRANCH 51/503、METHOD 131/461，证据 `evidence/20260926T082536Z/`；`PrivateKey`、`PublicKey`、`AddressEnhance` 逐类无覆盖缺口。
-
-U2 加密子项已提交 sdk `5ef3f2c`。ECIES 固定／随机临时密钥、解密、篡改及 AES/SHA-512 独立对照测试已覆盖。最新 SDK 隔离单元基线 42/0/0/0，LINE 438/1993、BRANCH 55/503、METHOD 131/458，证据 `evidence/20260926T083103Z/`；`Ecies`、`AesCBCUtil`、`DigestUtilExtend` 逐类无缺口。
-
-U2 主密钥子项已提交 sdk `bf40681`。固定 BIP39/BIP32 xprv 向量、随机词表与越界输入有断言；最新 SDK 隔离单元基线 44/0/0/0，LINE 442/1993、BRANCH 60/507、METHOD 133/457，证据 `evidence/20260926T083620Z/`；`MasterPrivateKey` 逐类无缺口。
-
-U2 脚本／Sigma 模型子项已提交 sdk `82c5283`。ScriptHelper 全短路分支及 Sigma BSM 协议字段有断言；最新 SDK 隔离单元基线 46/0/0/0，LINE 457/1991、BRANCH 68/507、METHOD 138/456，证据 `evidence/20260926T084746Z/`；`ScriptHelper`、`Sig`、`SignResponse`、`Algorithm` 逐类无缺口。
-
-U2 Sigma 核心子项已提交 sdk `3c0f214`。小交易哈希、本地/远程签名、重复签名、第二实例、OP_RETURN、缺失输入、远程上下文可选字段都有断言，三项缺陷先红后绿。最新 SDK 隔离单元基线 56/0/0/0，LINE 701/1987、BRANCH 165/513、METHOD 176/455，证据 `evidence/20260926T090939Z/`；`Sigma`、`PreSignHashContext`、`PreSignHashUtils` 逐类无缺口。
-
-U2 BAP 默认 API 子项已提交 sdk `a86bfa5`。五类默认地址映射、真实字节／文本加解密及错误输入有断言；吞异常返回 `null` 缺陷先红后绿。最新 SDK 隔离单元基线 59/0/0/0，LINE 713/1983、BRANCH 165/512、METHOD 182/455，证据 `evidence/20260926T091719Z/`；`BapBaseCore` 逐类无缺口。
-
-U2 BAP 生命周期子项已提交 sdk `7c030d3`。签名密钥轮换、对象重建及按地址反查有断言；上一私钥路径、current 序号 0、未匹配返回 `null` 缺陷先红后绿。最新 SDK 隔离单元基线 62/0/0/0，LINE 756/1984、BRANCH 183/514、METHOD 187/455，证据 `evidence/20260926T092325Z/`；`BapBase` 本体 LINE 111/139、BRANCH 20/28。
-
-U2 BAP KeyBag 子项已提交 sdk `12f2c70`。根／当前／支付／Ord 密钥及公钥查找有断言；公钥查找返回 `null` 缺陷先红后绿。最新 SDK 隔离单元基线 65/0/0/0，LINE 789/1985、BRANCH 193/512、METHOD 196/455，证据 `evidence/20260926T092920Z/`；`BapProviderKeyBag` 逐类无缺口。
-
-U2 BAP 路径子项已提交 sdk `451db1d`。固定高位十六进制片段与 hardened 开关有断言；`Integer.parseInt` 无法处理无符号数的缺陷先红后绿。最新 SDK 隔离单元基线 66/0/0/0，LINE 798/1985、BRANCH 199/512、METHOD 197/455，证据 `evidence/20260926T093336Z/`。
-
-U2 BAP 变体子项已提交 sdk `20cb3f0`。远程地址、默认／Panda 配置路径、Tagged Derivation 固定向量有断言；Panda 应用名缺失先红后绿。最新 SDK 隔离单元基线 69/0/0/0，LINE 846/1986、BRANCH 199/512、METHOD 225/455，证据 `evidence/20260926T094111Z/`；`BapBaseAbstract`、`RemoteBapBase`、`PandaBapBase`、两套配置逐类无缺口，TaggedDerivation 隐式构造器仍未覆盖。
-
-U2 显式 BAP 子项已提交 sdk `b70f3b0`。六种构造入口及 KeyBag 支付／Ord／公钥查找有断言；公钥查找返回 `null` 缺陷先红后绿。最新 SDK 隔离单元基线 71/0/0/0，LINE 886/1986、BRANCH 203/512、METHOD 242/455，证据 `evidence/20260926T094519Z/`；`SpecifyBapBase` 与其 KeyBag 逐类无缺口。
-
-U2 BAP 工厂与身份解密子项已提交 sdk `1e14af8`。工厂入口、配置应用名、绝对路径身份解密、坏密文异常有断言；吞异常返回 `null` 缺陷先红后绿。该提交的 SDK 隔离单元基线 73/0/0/0，LINE 899/1984、BRANCH 203/510、METHOD 247/454，证据 `evidence/20260926T095306Z/`；`BapBase` 当时 BRANCH 26/26、LINE 136/137，剩余空桩已按用户答复在后续提交实现。
-
-U2 追加 sdk `ea025e7`（旧版 CryptoHelper 派生测试）和 `5cd4abf`（胡先生确认 `encryptSelf()` 加密当前 identityKey；往返解密先红后绿）。提交 `5cd4abf` 的定向测试 10/0/0/0，证据 `evidence/20260926-u2-crypto-self-targeted/`。sdk `f86f9ea` 新增 ScriptExtend 花费字节和签名位置测试，定向 2/0/0/0，逐类 LINE 30/30、BRANCH 24/24、METHOD 4/4，证据 `evidence/20260926-u2-script-targeted/`。sdk `d7552a5` 新增 Ord 脚本封装与元数据测试，定向 3/0/0/0、分支 16/16，证据 `evidence/20260926-u2-ord-script-targeted/`。sdk `8a540b9` 新增 Ord 脚本解析、关联输出和赎回数据测试，定向 7/0/0/0；`RedeemDataExtend` 逐类无缺口，`TxHelperExtend` BRANCH 32/32、LINE 40/41、METHOD 6/7，余隐式构造器，证据 `evidence/20260926-u2-txhelper-redeem-targeted/`。sdk `6f32283` 新增交易输入／输出／outpoint 扩展类测试，定向 2/0/0/0，三类 LINE/METHOD 均 100%，证据 `evidence/20260926-u2-transaction-enhance-targeted/`。sdk `7b3d43d` 新增签名上下文线程隔离测试，定向 2/0/0/0、逐类无缺口，证据 `evidence/20260926-u2-threadlocal-targeted/`。sdk `da46655` 新增 ForkID 独立预映像测试，定向 2/0/0/0、BRANCH 25/26、LINE 50/53、METHOD 1/2，证据 `evidence/20260926-u2-sighash-targeted/`。sdk `39f82a9` 新增二进制消息签名与公钥恢复测试，定向 1/0/0/0、LINE 28/30、BRANCH 7/12、METHOD 7/7，证据 `evidence/20260926-u2-eckey-targeted/`。宿主全量 `verify-unit.py` 自动审批被使用额度上限拒绝，命令未执行；全量 73/0/0/0 和覆盖率仅属于旧提交 `1e14af8`，不能当作当前验收。
-
-## 下一步
-
-胡先生已要求派遣子代理继续；Bob/Txo 转换和数据脚本签名子项分别实施。共享 SDK `target` 只能串行运行 Maven，主代理负责统一验证、提交与证据登记。
-
-当前 SDK HEAD `39f82a9` 的宿主全量隔离单元基线已跑：96/0/0/0，LINE 1116/1989、BRANCH 312/508、METHOD 284/454，证据 `evidence/20260926T150042Z/`。继续 SDK 剩余公开 API 测试。旧提交缺口见 `evidence/20260926T095306Z/metanet4j-sdk/metanet4j-sdk/unit/jacoco-unit/jacoco.xml`。严格验收须逐类 LINE/BRANCH/METHOD 100%，完成后继续 U3。
-
-集成测试运行前核对 `infra/README-*.md` 连接参数、`docker logs`、应用日志和 Surefire XML，宿主提权运行。当前 `EsTest` 会删除固定索引、`DefaultCompleteTxFactory` 硬编码广播；未隔离前不运行这些历史实连用例。
+按胡先生的两项决定处理远程入口和剩余覆盖缺口。达到 SDK 严格验收后安装验证产物，再依计划顺序推进 U3—U9。收尾前更新状态文件、运行 `./init.sh` 并只提交本任务文件。
