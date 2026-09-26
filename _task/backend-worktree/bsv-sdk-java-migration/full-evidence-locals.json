@@ -844,6 +844,24 @@
       "java_report": [
         ".cache/evidence/arc-broadcaster-formal-java-e8d4f43-20260927/surefire.xml"
       ]
+    },
+    {
+      "name": "jacobian",
+      "catalog": ".cache/evidence/jacobian-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/jacobian-plan-20260927/mapping.json",
+      "input_plan": "jacobian-input-plan.json",
+      "ts_inputs": ".cache/evidence/jacobian-ts-formal-20260927/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/jacobian-ts-formal-20260927/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/jacobian-ts-formal-20260927/manifest.json",
+      "ts_report": [
+        ".cache/evidence/jacobian-ts-formal-20260927/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/jacobian-java-formal-20260927/inputs.jsonl",
+      "java_assertions": ".cache/evidence/jacobian-java-formal-20260927/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/jacobian-java-formal-20260927/manifest.json",
+      "java_report": [
+        ".cache/evidence/jacobian-java-formal-20260927/surefire.xml"
+      ]
     }
   ]
 }
