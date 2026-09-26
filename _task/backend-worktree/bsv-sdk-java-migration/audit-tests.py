@@ -16,6 +16,8 @@ import xml.etree.ElementTree as ET
 TASK = Path(__file__).resolve().parent
 SEMANTIC_UPSTREAM = 'f999e0c1aad9a7afd0cbadaaf23841d049af9d5a'
 AUTH_WAIT_FILE = 'src/auth/clients/__tests__/AuthFetch.additional.test.ts'
+VALIDATE_CERTIFICATES_FILE = 'src/auth/utils/__tests/validateCertificates.test.ts'
+VALIDATE_CERTIFICATES_SHA = '3491f3c8ca0b87e0b962b052ab0f1eedd599ca6602d0dbe2647c6c09ee47e8cd'
 CACHE_FILE = 'src/wallet/__tests/CachedKeyDeriver.test.ts'
 RANDOM_FILE = 'src/primitives/__tests/Random.test.ts'
 RANDOM_EXTRA_FILE = 'src/primitives/__tests/Random.additional.test.ts'
@@ -45,6 +47,15 @@ SEMANTIC_CASES = {
     '5c6b78e562b2b310489abb962a64b66061f9e2e226acd80d4998b6f2ad8f571f':
         (AUTH_WAIT_FILE, '177e6ca599905a61274e400c0b85d8719526a2e09003ac207b0513a3fb60afc6',
          {'1139:5': ('native-null-absence-v1', 'toBeUndefined', None, 1)}),
+    '07a5dbdce1f6d9f8c7cf13e2e2c12109004de34ab68186fde3e000b0910ee7d0':
+        (VALIDATE_CERTIFICATES_FILE, VALIDATE_CERTIFICATES_SHA,
+         {'77:11': ('void-completion-null-adapter-v1', 'not.toThrow', None, 1)}),
+    'd7c84d782a644801d5697f2676a786714ad43a1999e2d3bd26bfe8b2cc67a9d2':
+        (VALIDATE_CERTIFICATES_FILE, VALIDATE_CERTIFICATES_SHA,
+         {'129:11': ('void-completion-null-adapter-v1', 'not.toThrow', None, 1)}),
+    '4c3b952ad3546f2aa72a27b21cc960ae4cf10925bc9346822aefec05fe0b44c5':
+        (VALIDATE_CERTIFICATES_FILE, VALIDATE_CERTIFICATES_SHA,
+         {'157:11': ('void-completion-null-adapter-v1', 'not.toThrow', None, 1)}),
     '61b4ecc5ca8e8e0e52d508368744a12c06c31d670ea752d08a5d880a62cf5f63':
         ('src/auth/clients/__tests__/AuthFetch.test.ts',
          '0312c9107dbd4acddab1cd282355090fad28dfe58b0f395b642641cca7654f0a',
@@ -268,6 +279,16 @@ def compare_actuals(case_id, expected, identity, left, right):
         require(canonical(left) == canonical(right), f'实际结果不一致：{case_id} / {identity}')
         return
     rule_id, matcher, boundary, _ = rule
+    if rule_id == 'void-completion-null-adapter-v1':
+        for side, value, actual in (('TS', left, {'type': 'undefined'}),
+                                    ('Java', right, {'type': 'null'})):
+            require(isinstance(value, dict) and set(value) ==
+                    {'kind', 'matcher', 'negated', 'actual', 'expected', 'pass'}
+                    and value['kind'] == 'assertion' and value['matcher'] == 'not.toThrow'
+                    and value['negated'] is True and value['pass'] is True
+                    and value['actual'] == actual and value['expected'] == [],
+                    f'固定 void 完成值 {side} 必须保留真实 undefined/null：{identity}')
+        return
     if rule_id in ('async-ready-null-adapter-v1', 'native-null-absence-v1'):
         for side, value, actual, original_matcher, original_expected in (
                 ('TS', left, {'type': 'undefined'}, 'toBeUndefined', []),

@@ -154,6 +154,29 @@ class SemanticTest(unittest.TestCase):
                     self.assertNotEqual(self.bundle().returncode, 0)
                 self.f.path('java-assertions.jsonl').write_text(original)
 
+    def test_void_completion_adapter_keeps_three_original_return_values(self):
+        left = observation('not.toThrow', {'type': 'undefined'}, [], True)
+        right = observation('not.toThrow', {'type': 'null'}, [], True)
+        cases = [('07a5dbdce1f6d9f8c7cf13e2e2c12109004de34ab68186fde3e000b0910ee7d0', '77:11'),
+                 ('d7c84d782a644801d5697f2676a786714ad43a1999e2d3bd26bfe8b2cc67a9d2', '129:11'),
+                 ('4c3b952ad3546f2aa72a27b21cc960ae4cf10925bc9346822aefec05fe0b44c5', '157:11')]
+        for case_id, site in cases:
+            with self.subTest(case_id=case_id):
+                self.case(case_id, [(site, 'void-completion-null-adapter-v1', left, right)])
+                self.accepts()
+                original = self.f.path('java-assertions.jsonl').read_text()
+                for change in [
+                    lambda value: value.update(actual={'type': 'undefined'}),
+                    lambda value: value.update(actual={'type': 'string', 'value': 'null'}),
+                    lambda value: value.update(matcher='toThrow'),
+                    lambda value: value.update(negated=False),
+                    lambda value: value.pop('actual'),
+                ]:
+                    self.f.path('java-assertions.jsonl').write_text(original)
+                    self.mutate_java(lambda rows: change(rows[0]['value']))
+                    self.assertNotEqual(self.bundle().returncode, 0)
+                self.f.path('java-assertions.jsonl').write_text(original)
+
     def test_fixed_timing_bounds_recompute_actuals_and_reject_pass_only(self):
         left = observation('toBeLessThan', number(2), number(50))
         right = observation('toBeLessThan', number(7), number(50))
