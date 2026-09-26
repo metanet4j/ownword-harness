@@ -313,7 +313,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "3c0f214b2d386bb7f7970ca43878c7812e667ca7",
+      "head": "a86bfa56ac234bdcf4cd96ece783f128573f8b0a",
       "modules": [
         {
           "path": ".",
@@ -688,6 +688,31 @@
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseCoreContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "addressesAndEncryptionUseTheSelectedKeys",
+                  "returnType": "void",
+                  "line": 22,
+                  "classification": "unit"
+                },
+                {
+                  "name": "defaultAddressesUseTheirOwnPrivateKeys",
+                  "returnType": "void",
+                  "line": 36,
+                  "classification": "unit"
+                },
+                {
+                  "name": "invalidCiphertextAndMissingEncryptionKeyAreReported",
+                  "returnType": "void",
+                  "line": 51,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "BAP 默认地址映射、真实密钥加解密和无效密文／密钥异常；纯本地计算"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseTest.java",

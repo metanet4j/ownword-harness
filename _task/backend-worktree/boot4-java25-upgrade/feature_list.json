@@ -303,9 +303,11 @@
         "sdk 提交 82c5283（ScriptHelper 四类短路分支、Sigma BSM 协议字段）",
         "SDK 隔离单元基线 evidence/20260926T084746Z/：46/0/0/0，LINE 457/1991；ScriptHelper、Sig、SignResponse、Algorithm 逐类无缺口",
         "sdk 提交 3c0f214（Sigma 输入/数据哈希、四类本地签名、远程上下文、重复签名、缺失输入）",
-        "SDK 隔离单元基线 evidence/20260926T090939Z/：56/0/0/0，LINE 701/1987；Sigma、PreSignHashContext、PreSignHashUtils 逐类行/分支/方法无缺口"
+        "SDK 隔离单元基线 evidence/20260926T090939Z/：56/0/0/0，LINE 701/1987；Sigma、PreSignHashContext、PreSignHashUtils 逐类行/分支/方法无缺口",
+        "sdk 提交 a86bfa5（BAP 默认地址与真实加解密；无效密文和缺失密钥抛异常，先红后绿）",
+        "SDK 隔离单元基线 evidence/20260926T091719Z/：59/0/0/0，LINE 713/1983；BapBaseCore 逐类行/分支/方法无缺口"
       ],
-      "statusNote": "HTTP、字节/哈希、WIF/地址、ECIES/AES、主密钥、脚本模型、Sigma 核心子项已完成（SDK 至 3c0f214）；本地 HTTP 集成 5/0/0/0，SDK 单元 56/0/0/0，LINE 701/1987、BRANCH 165/513、METHOD 176/455；交易、BAP 等其余 SDK 行为待补。"
+      "statusNote": "HTTP、字节/哈希、WIF/地址、ECIES/AES、主密钥、脚本模型、Sigma 核心及 BAP 默认 API 子项已完成（SDK 至 a86bfa5）；本地 HTTP 集成 5/0/0/0，SDK 单元 59/0/0/0，LINE 713/1983、BRANCH 165/512、METHOD 182/455；交易、BAP 等其余 SDK 行为待补。"
     },
     {
       "id": "unit-u3-foundation",

@@ -11,7 +11,7 @@
 
 ## 已验证结果
 
-U0 [四仓测试基线](doc/测试基线与障碍-20260926-145423.md)列出 25 POM、369 个生产 Java 文件、最初 52 个测试文件，以及 19 项集成边界的隔离和观测方式。当前 `unit-test-inventory.json` 已增至 70 个测试文件。U0 全仓基线有 56 个旧用例通过、8 个跳过；17 个含可执行代码的 component 模块零本地单元测试。`component-core` 仅定义接口，按 N/A 处理。宿主五项共享服务健康。
+U0 [四仓测试基线](doc/测试基线与障碍-20260926-145423.md)列出 25 POM、369 个生产 Java 文件、最初 52 个测试文件，以及 19 项集成边界的隔离和观测方式。当前 `unit-test-inventory.json` 已增至 71 个测试文件。U0 全仓基线有 56 个旧用例通过、8 个跳过；17 个含可执行代码的 component 模块零本地单元测试。`component-core` 仅定义接口，按 N/A 处理。宿主五项共享服务健康。
 
 U1 base 提交 `bae7eb6` 与 `77ad9fd`：UTXO 相等性缺陷先红后绿；AIP 坏签名返回 false；BAP 固定身份向量、协议枚举、DTO 与 Jackson 行为均有断言。最终提交后，`python3 verify-unit.py --mode accept --scope metanet4j-base` 退出 0；19 个测试全部通过，零失败/错误/跳过，JaCoCo LINE 208/208、BRANCH 76/76、METHOD 51/51，`jacoco:check` 通过。证据在本地 `evidence/20260926T072220Z/`；同一提交的 base 0.2.0 构件已安装至隔离 Maven 仓库。
 
@@ -28,6 +28,8 @@ U2 主密钥子项提交 `bf40681`：BIP39/BIP32 的固定助记词、口令与 
 U2 脚本／Sigma 模型子项提交 `82c5283`：push data 的空引用、空内容、OP_RETURN、OP_0 与有效内容均有断言，Sigma BSM 协议字段使用真实空交易和脚本验证。最新 SDK 隔离单元基线 46/0/0/0，LINE 457/1991、BRANCH 68/507、METHOD 138/456；`ScriptHelper`、`Sig`、`SignResponse`、`Algorithm` 逐类无覆盖缺口，证据 `evidence/20260926T084746Z/`。
 
 U2 Sigma 核心子项提交 `3c0f214`：构造小交易验证 outpoint、输出和消息哈希；四种本地密钥签名、远程签名、重复签名、第二实例、已有 OP_RETURN 及缺失输入均有断言。重复签名错误追加实例、空输入越界、远程上下文缺少可选字段会抛异常三项缺陷先红后绿。最新 SDK 隔离单元基线 56/0/0/0，LINE 701/1987、BRANCH 165/513、METHOD 176/455；`Sigma`、`PreSignHashContext`、`PreSignHashUtils` 逐类无覆盖缺口，证据 `evidence/20260926T090939Z/`。
+
+U2 BAP 默认 API 子项提交 `a86bfa5`：用不同固定私钥验证五类默认地址映射，用真实主密钥验证字节／文本加解密；原先无效密文或缺失密钥会打印堆栈并返回 `null`，已改为抛出有原因的 `IllegalStateException`，先红后绿。SDK 隔离单元基线 59/0/0/0，LINE 713/1983、BRANCH 165/512、METHOD 182/455；`BapBaseCore` 逐类无覆盖缺口，证据 `evidence/20260926T091719Z/`。
 
 ## 仓库与工作区
 
