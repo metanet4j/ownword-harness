@@ -1757,11 +1757,24 @@
         "migration-api-wallet-contracts",
         "migration-api-wallet-clients"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标提交 0472fc0；固定 TS 三文件 100/100、184 条断言，离线网络调用 0。",
+        "提交后干净目标工作树宿主 Maven 100/100，.cache/evidence/wallet-client-clean-parity-9ae1f87.json 逐实际值 100/100、184/184，缺失和额外断言均为 0。",
+        "目标主分支与宿主三类联合宿主 Maven clean test 226/226，失败、错误、跳过均为 0；35 项 WalletClient API、100 个原用例及 195 个源码站点已映射。"
+      ],
       "modules": [
         "wallet"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 100,
+        "assertionsCompared": 184,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/wallet-client-clean-parity-9ae1f87.json"
+      }
     },
     {
       "id": "migration-impl-auth-sessions",
@@ -2851,14 +2864,16 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "node audit-api.cjs batches：147/147 项声明结构复核通过；行为依据 doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts 与 #api-wallet-client，逐值报告见 .cache/evidence/wallet-hosts-clean-task-parity.json、wallet-client-clean-parity-9ae1f87.json。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [

@@ -54429,6 +54429,1287 @@
         "src/wallet/substrates/__tests/window.CWI.test.ts:253:11:assertion",
         "src/wallet/substrates/__tests/window.CWI.test.ts:254:5:assertion"
       ]
+    },
+    {
+      "id": "a9039c4757684a6f7e7fc8fe794b16692976707e70094590cc7728d9f66196ab",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "storesAutoAlias"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:44:5:assertion"
+      ]
+    },
+    {
+      "id": "e8e57d1e52f25d3d43b79ba7eb3eb27e9e69fdd33394b00dc8794a70ae7eccc1",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createsCicadaWireTransceiver"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:49:5:assertion"
+      ]
+    },
+    {
+      "id": "8cf311ccf958d9c4c0722ee5f976361301b468509b4f745a27eb1d1f8eb6d99d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createsJsonApi"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:54:5:assertion"
+      ]
+    },
+    {
+      "id": "dd657ce00fb91134d52b2dcab877634f5466155f0f99f5d57312a5badc0b6e44",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createsSecureJsonApi"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:59:5:assertion"
+      ]
+    },
+    {
+      "id": "c80fe487fe7ba4cef51fe549fde4e26b720e8915fd2f0e437f433cffdb4a4114",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "reactNativeOriginatorDoesNotFilterMessageOrigin"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:88:13:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:89:7:assertion"
+      ]
+    },
+    {
+      "id": "08d691ae762bac6ac33ab9e6b332d7aafb44b0f103a4e506ef2c085554736764",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "acceptsPrebuiltWalletObject"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:127:5:assertion"
+      ]
+    },
+    {
+      "id": "c213baea25cceb6cb08e3edfef5dce1e5d2902f9c9bec55331f44f6b36e4efe6",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "storesOriginator"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:132:5:assertion"
+      ]
+    },
+    {
+      "id": "3cf5f694e868a828c79d91153b8f1357b194a9861237a15bade108a99da5120c",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "originatorUndefinedWithoutArgument"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:137:5:assertion"
+      ]
+    },
+    {
+      "id": "81d912b74fce0eab2f842237bb979df4dba70b540c5a0dde03d1fca82c7a757b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "prebuiltWalletSkipsDiscovery"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:152:11:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:154:5:assertion"
+      ]
+    },
+    {
+      "id": "155918ee082a8bf1a09b670bed860381c67ee6a33f87bfd54f6e6c21d4111fd1",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createDescriptionTooShort"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "dffe396f209a2d1323b9df590f9737a4643a498318b18982fadb5eeac0610342",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createDescriptionTooLong"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "c7c941fef91cad5542d43646cb2f85c755723f9603553e4673e9cc154bad713a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createEmptyLockingScript"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "cf2ee842a4d422e20f5dd28c4c5ea6036f9ca2f821d5928b05b0561dcae2b0a6",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createOddLockingScript"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "b4d508b9a43d03f3c2493d1137aac7fef770642d57136be362398ff65189cea7",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createMissingOutputDescription"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "9b3090ec5129947dda5f7d31ec338b2286effaf33ebea4dd97cba4ca9de1fc6e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createShortOutputDescription"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "782ce87ac9219a1b0a98061b609e96d12a0162c22e6d4838e362a24162f9dae9",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createNegativeSatoshis"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "f63e589b4503e6349f4546aab66179bb64b01b18c747f60ba5a073d831dedea9",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createFloatSatoshis"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "30a7563a611a065b2c0856001839b7d18695e26cb5614cf9c4eaa1d780ae1cb5",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createMissingUnlockingScriptAndLength"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "c2584589f522e1de677f80d44034ca974a428534058d9cbecd510435cd93a674",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createOddUnlockingScript"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "789dbf6d8c2b6c378763a9210b49ce9f1c5f5c3e9f169779c0f44ed996b08790",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createShortInputDescription"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "d043182a057514c5371ac4af96069376a483bfa79521cb467c0c67ad89708ef8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "createEmptyLabel"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "cdf56be1d25bce2a89dc6ac60a496fec39c812aaeba1f223a86c9eddc69b6739",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "validSignActionPassesValidation"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:311:11:assertion"
+      ]
+    },
+    {
+      "id": "dcbe9165ae52aa5bfa0ce13d18bbff5da742c04176cabc9ae67a6586bb170836",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "abortEmptyReference"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "d2fcd8b0bd5488c66dcf0ca899bce8355369207a1b71757e6539beb3cf818a28",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "abortInvalidBase64"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "d3f617de35392bb330ae95f1a16d56b2cddf5411ad28605d8c8edabab5a22bee",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "listActionsInvalidQueryMode"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "af376bead882860806c7438c8796c7f7c741c640d8890f01f97bfbbca125767b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "listActionsLimitOverMaximum"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "cd21e39df80012dc0e3135a1068adbb51d4d2c19eb80d3792ff68a1db0e33e9a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "listActionsZeroLimit"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "0fb00bd6e9851026988d6160f04c2d08714925b9ac688f71b10b0378f0d339bb",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "listActionsFloatLimit"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "b78eeaf101db0a6a0ec4b95b9c48e1a6119636f1495b4b52156add77bc4b68ec",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "listActionsNegativeOffset"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "2437d69f139180354d570658aa84af18ca56b347da9609815b2240ace1fda7cd",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "listActionsEmptyLabel"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "eba81b994e69fc53d5086c90e59d136af500bf4468c29590854049ae8e325875",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "listActionsLongLabel"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "f031b0d17993cb94266723e49a27196bc89bda8e5e47751b019d5e455306d060",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "listOutputsEmptyBasket"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "a03e8cbc1b2d161b1fe390f1984fba9421c637ea96749214089a7bd69b535346",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "listOutputsInvalidTagQueryMode"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "bb415d8224482f6d7ce1b50460063a70aa5a5cd5c1fdc5103932b6dd9f170ae7",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "listOutputsLimitOverMaximum"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "753f537e91a5f355eefdb2af014e87f9194f419d4abe9fdbe66596e7e67547ea",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "relinquishOutputEmptyBasket"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "498010e1c142e9df2a5abd0a0ae5bbc032f4872c1dc2655466ea4e900c8a5dd9",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "relinquishOutputInvalidOutpoint"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "b424e711b87092684fd0f911eedfc2d8bf6fb69aa6f70888cd1720340aced5b6",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "acquireUnknownProtocol"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "0cc62533f72e7b50767d799b50e98b43bdc6cc75b3b1ff59ae1fec71a145c91f",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "acquireDirectMissingSerial"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "6670bc49e4b7a60fd4b772b043a51a295498aebfec65d675c75ebe4cca4b5e44",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "acquireIssuanceMissingUrl"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "5056e44686b1a297d24747641d4ecce76720d758ca465e6c230b0a9d11cbffd8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "acquireIssuanceForbidsSerial"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "b5f556702e5c6b2c33d1b8a8c4291ad32971b8f38b13ef7b4f396a3e34e9411b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "listCertificatesLimitOverMaximum"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "ab42c2ff81abc04fa64d44e11a872f40cc5d0792a7828b1876cdbef793517261",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "listCertificatesZeroLimit"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "9e5706251cd66794e9a014919b521298fbba59b833a05c55d89f07d6e0784fec",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "listCertificatesNegativeOffset"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "f1b5dcf2bff568a8f21b4baa8ffa901a12144da940401cf04ab9d9802f8ecf1a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "relinquishCertificateEmptyType"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "cb13eef85fa75fd4938c0152a89723d69170a202d33e574f5fc8fb7640752320",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "relinquishCertificateInvalidType"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "801eb83a909ba9a38f35af38d5fb2406afab6329cee89c462156e72f91d97150",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "relinquishCertificateEmptySerial"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "c91e78f5d75bd08c7c554e338f59d3ce7def87cc0fdbcc87b3b24524ec077525",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "relinquishCertificateOddCertifier"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "dd0c16301a14d2f3daa3e17e8c5201960ed0dcf4e45754b8d097e2994abcdc04",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "discoverIdentityShortKey"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "953f2f463bb86301878d3293f5a1bc9dfb3beffe9cbe760f2d82df04990ea31c",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "discoverIdentityEmptyKey"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "cf76743611c637fc2198baa999790eab8ba9e05d02baa1ca8bdcdc376b5bd09a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "discoverIdentityLimitOverMaximum"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "16d3346dff619bc4a00682298a1231d72daf6da6dd53ca56d38da540c99d5894",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "discoverAttributesZeroLimit"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "d4dbd9fffb4ed537683f4cb76cada6629c1bbfe46cf4aae54345a38d3828b715",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "discoverAttributesLimitOverMaximum"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "83cb32ca038b20304228a99fca516cd58a051d6d7585ea9790b6865ecfc9035c",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "proveMissingPrivilegedReason"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "50ad04b996ff3ada7f1cbb9e5607fd27fb934aca22fd6dc7c769acd964a9d4a7",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "proveInvalidVerifier"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion"
+      ]
+    },
+    {
+      "id": "894b1217edf7d1d59fc578c7be1ecb782808d9c573911b5b5349d4e7dbb890f5",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "invalidParameterName"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:700:5:assertion"
+      ]
+    },
+    {
+      "id": "1d2068566c32919683c74c03eccd9733f88a4462aa64129d0d98c4472cb241ea",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "invalidParameterCode"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:705:5:assertion"
+      ]
+    },
+    {
+      "id": "5ae04110567c1e73be21784361e873177fe5232b2a226203f970aae7579adda8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "invalidParameterIsError"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:710:5:assertion"
+      ]
+    },
+    {
+      "id": "4a147c9a937309c354d3b3082e617592b66bd0981c53f20bbf25dc055534671e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "invalidParameterStoresParameter"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:715:5:assertion"
+      ]
+    },
+    {
+      "id": "1286409f86a35e113ac32f9bbca8d680745a16db27de0f79902ceae990eefe9f",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "invalidParameterDefaultMessage"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:720:5:assertion",
+        "src/wallet/__tests/WalletClient.additional.test.ts:721:5:assertion"
+      ]
+    },
+    {
+      "id": "bd5b803b66e53b7886b6786a5ebd14cbe8fc8850837c57513232db62d98c63ec",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "invalidParameterExplicitMessage"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:726:5:assertion"
+      ]
+    },
+    {
+      "id": "c532123fd64a71099e2b29f90347aecbdbdb663c034aac3232b955e281602405",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientAdditionalTest",
+          "name": "invalidParameterIsErrorInstance"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.additional.test.ts:731:5:assertion"
+      ]
+    },
+    {
+      "id": "6f1d36ea8f6e6b92e44d640fc20fc301c2eb1cdeb338ed053135f984ef197d38",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "relinquishOutputDelegatesAndReturns"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:71:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:72:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:73:5:assertion"
+      ]
+    },
+    {
+      "id": "88a370dbb2120c4625b8e454eb2fe7688330fabdd7115775c50d83a0b96b95cd",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "relinquishOutputPropagatesError"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:84:11:assertion"
+      ]
+    },
+    {
+      "id": "be2f9d65325a32893140ba6c8a7707ea4048c878bb8d5877bf05b8c7b2088a9a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "getPublicKeyReturnsKey"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:103:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:104:5:assertion"
+      ]
+    },
+    {
+      "id": "cb3ceb174559d46b5538a27eb29352e30dbd5af201f38818e42848815a83ddf2",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "getPublicKeyPassesProtocolAndKeyId"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:118:5:assertion"
+      ]
+    },
+    {
+      "id": "eb9e5057df94b456eb7076a426b383f9f115655c4564677b482c004b305b916e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "revealCounterpartyLinkageDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:149:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:150:5:assertion"
+      ]
+    },
+    {
+      "id": "f6ec1e74ff322f4a90304bf9e42e32906a9d8b6037ee4ba3c9cb4e8416926851",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "revealSpecificLinkageDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:182:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:183:5:assertion"
+      ]
+    },
+    {
+      "id": "c48a20b09896bface2fcebda1226b2f6074fd8435abd783f04aee41732df4008",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "encryptDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:204:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:205:5:assertion"
+      ]
+    },
+    {
+      "id": "09f6ec7488d18a58910b722cfc1c7bbab84963e2adb0af8a78443e6be8867f61",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "decryptDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:222:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:223:5:assertion"
+      ]
+    },
+    {
+      "id": "84f6a9039e3044e6591c5287024b757a52d8b266da69429c0213ddd1f95590df",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "createHmacDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:244:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:245:5:assertion"
+      ]
+    },
+    {
+      "id": "9cf307562e16deb0262fbe29e119cd10d0dbb59faab013253bcbfecbc3e4422e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "verifyHmacDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:263:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:264:5:assertion"
+      ]
+    },
+    {
+      "id": "91c51568318c00f6fb27af065c5ca3c4954851ab3e83ba039583e5b97ef39933",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "createSignatureDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:285:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:286:5:assertion"
+      ]
+    },
+    {
+      "id": "af14b41e33d860203d13fd2783dbf1bfa0e00c3d84e411c15985ad1b24bc2cfb",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "verifySignatureDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:304:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:305:5:assertion"
+      ]
+    },
+    {
+      "id": "1a9125d799c6d944851c7b0dfe9277a349d2316072e8c1d127ac6fdaa03e8d8f",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "acquireDirectCertificateDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:333:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:334:5:assertion"
+      ]
+    },
+    {
+      "id": "a5c8e4ea712256751c05bac034bd7cd7351b3daaac6e5bbc4d0b4ffd18e7f0d0",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "acquireIssuanceCertificateDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:351:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:352:5:assertion"
+      ]
+    },
+    {
+      "id": "a58bc1c624f9f0977a86f5558249f8aa18f3eed64392ae0f4e8f6d61e1d451ba",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "listCertificatesDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:370:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:371:5:assertion"
+      ]
+    },
+    {
+      "id": "0e2a9bec393ac075e4661db8948946cb445ae8aadc6f3e02f5cf34b3a9d688d8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "proveCertificateDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:401:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:402:5:assertion"
+      ]
+    },
+    {
+      "id": "9f0e7a5ecf9a8514d09ecd5812c3b988ac338f82e1b53e38d144d8f34e11edbb",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "relinquishCertificateDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:423:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:424:5:assertion"
+      ]
+    },
+    {
+      "id": "1f435762f53041f233e2c90a2b4e337790ec0e94992985bdd59ee089cb652e18",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "discoverIdentityDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:442:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:443:5:assertion"
+      ]
+    },
+    {
+      "id": "bcb8e709683c6171fcb839efd438a5849f10dbed2903162389c68ecf7ca97848",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "discoverAttributesDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:461:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:462:5:assertion"
+      ]
+    },
+    {
+      "id": "ea37559c8bfa3f65cd198bc15b6a16d390a96ca94f164876d27f5b2bf6c34b84",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "isAuthenticatedDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:478:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:479:5:assertion"
+      ]
+    },
+    {
+      "id": "26c48278d896ea9c7af55838db97e60493aa322baee4142bedaa9b9d2e158011",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "isAuthenticatedDefaultsArgs"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:489:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:490:5:assertion"
+      ]
+    },
+    {
+      "id": "91d71dd01d52d4efca2589bd6b9b23dcfbb559a6bcb0d0a7f4246154031a7c1a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "waitForAuthenticationDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:506:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:507:5:assertion"
+      ]
+    },
+    {
+      "id": "2c96382b2589ae0acaff81bccc56663687e0fb0eb5d46c0aa8fbd7ecfd3c9ec4",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "getHeightDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:523:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:524:5:assertion"
+      ]
+    },
+    {
+      "id": "8e4b6f8be97119036c2e49da1e6e7394096d014ba9e3ae44f2a4fb7c6b5e6969",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "getHeightDefaultsArgs"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:534:5:assertion"
+      ]
+    },
+    {
+      "id": "c8554940ed9896b20dccc8716944b101f902842a7c971ec7d0e464bf50142edc",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "getHeaderDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:550:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:551:5:assertion"
+      ]
+    },
+    {
+      "id": "62d10e56908bb2152cfb2fad2c0904cb992194e9475dde5939252a77bb08edaf",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "getNetworkMainnet"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:567:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:568:5:assertion"
+      ]
+    },
+    {
+      "id": "f5cd70fbda548ff2f0e14da135d4120ce620274d488db49300c93570956d39ef",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "getNetworkTestnet"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:578:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:579:5:assertion"
+      ]
+    },
+    {
+      "id": "ea1927a5620b32383aba7c702594575ff7cda886748a5ceb927c54e4a78710de",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "getVersionDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:595:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:596:5:assertion"
+      ]
+    },
+    {
+      "id": "5c166cb9759f92047fbab498fa88d10a928412b051304c469d6ed31fe30cfeb4",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "getVersionDefaultsArgs"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:606:5:assertion"
+      ]
+    },
+    {
+      "id": "5c4f2a560ecdb16a8122f43b6e88c8b49528931188f88d419866cea2f0f08e51",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "createActionDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:624:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:625:5:assertion"
+      ]
+    },
+    {
+      "id": "ab6bc6526a66f4270d8af394e726a8667baa857581a5b0cf2a8f6bf5f1d8bc69",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "createActionWithoutOriginator"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:636:5:assertion"
+      ]
+    },
+    {
+      "id": "49a24470f710cdf68a7353983411cb02d6fc7dc578e87c9add3646821636d629",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "signActionDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:654:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:655:5:assertion"
+      ]
+    },
+    {
+      "id": "b140e6f5724b07aff76327ff5fd748db84b1963471a67b3bc25c5b5dfcdab32e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "abortActionDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:671:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:672:5:assertion"
+      ]
+    },
+    {
+      "id": "17e149150a94bc1ced700b7f093aa522c3af0deeb7dfb0b622372b2ef4628737",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "listActionsDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:690:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:691:5:assertion"
+      ]
+    },
+    {
+      "id": "21966bdc728ca060c9a5e9d9edaf50ce42db6e89cc41d1b77480694c24ecc6bf",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "internalizeActionDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:725:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:726:5:assertion"
+      ]
+    },
+    {
+      "id": "f69cebfd167d78b74623e7454a9aabc727c77c43160c5badb95f796738bd3d4c",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "listOutputsDelegates"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:744:5:assertion",
+        "src/wallet/__tests/WalletClient.substrate.test.ts:745:5:assertion"
+      ]
+    },
+    {
+      "id": "b6225162b93d88f9e4343b7afa0a739a217c41b2218b74e519434aa962d57cec",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "autoSelectionNoWalletFailsDescriptively"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:761:13:assertion"
+      ]
+    },
+    {
+      "id": "c6acc8ff4b0fe9e54a75c63f9f86a56c0408d31077b57a58b272fcaa1e504345",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientSubstrateTest",
+          "name": "autoSelectionTimesOutUnresponsiveReactNative"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts:783:13:assertion"
+      ]
+    },
+    {
+      "id": "7991ac50c4865af5aa8f0358b1c827cf6d12d4e8f12a3baa679eebae489db698",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.wallet.WalletClientTest",
+          "name": "createActionValidationSequence"
+        }
+      ],
+      "assertionIds": [
+        "src/wallet/__tests/WalletClient.test.ts:10:9:assertion",
+        "src/wallet/__tests/WalletClient.test.ts:12:9:assertion",
+        "src/wallet/__tests/WalletClient.test.ts:13:9:assertion"
+      ]
     }
   ],
   "siteReviews": [
@@ -120472,6 +121753,1652 @@
         "cb99db8c38eda2ba9a1471d40bd61ee0e5c03fef2c4b29299b87c990eb47b86d"
       ],
       "note": "原参数化注册及两断言由 28 个独立 Java 方法逐一执行，保留各自 DTO 参数引用与 originator。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:42:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "a9039c4757684a6f7e7fc8fe794b16692976707e70094590cc7728d9f66196ab"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:44:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a9039c4757684a6f7e7fc8fe794b16692976707e70094590cc7728d9f66196ab"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:47:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "e8e57d1e52f25d3d43b79ba7eb3eb27e9e69fdd33394b00dc8794a70ae7eccc1"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:49:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "e8e57d1e52f25d3d43b79ba7eb3eb27e9e69fdd33394b00dc8794a70ae7eccc1"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:52:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "8cf311ccf958d9c4c0722ee5f976361301b468509b4f745a27eb1d1f8eb6d99d"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:54:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8cf311ccf958d9c4c0722ee5f976361301b468509b4f745a27eb1d1f8eb6d99d"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:57:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "dd657ce00fb91134d52b2dcab877634f5466155f0f99f5d57312a5badc0b6e44"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:59:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "dd657ce00fb91134d52b2dcab877634f5466155f0f99f5d57312a5badc0b6e44"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:62:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "c80fe487fe7ba4cef51fe549fde4e26b720e8915fd2f0e437f433cffdb4a4114"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:88:13:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c80fe487fe7ba4cef51fe549fde4e26b720e8915fd2f0e437f433cffdb4a4114"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:89:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c80fe487fe7ba4cef51fe549fde4e26b720e8915fd2f0e437f433cffdb4a4114"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:95:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "08d691ae762bac6ac33ab9e6b332d7aafb44b0f103a4e506ef2c085554736764"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:127:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "08d691ae762bac6ac33ab9e6b332d7aafb44b0f103a4e506ef2c085554736764"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:130:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "c213baea25cceb6cb08e3edfef5dce1e5d2902f9c9bec55331f44f6b36e4efe6"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:132:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c213baea25cceb6cb08e3edfef5dce1e5d2902f9c9bec55331f44f6b36e4efe6"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:135:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "3cf5f694e868a828c79d91153b8f1357b194a9861237a15bade108a99da5120c"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:137:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "3cf5f694e868a828c79d91153b8f1357b194a9861237a15bade108a99da5120c"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:146:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "81d912b74fce0eab2f842237bb979df4dba70b540c5a0dde03d1fca82c7a757b"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:152:11:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "81d912b74fce0eab2f842237bb979df4dba70b540c5a0dde03d1fca82c7a757b"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:154:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "81d912b74fce0eab2f842237bb979df4dba70b540c5a0dde03d1fca82c7a757b"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:169:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "155918ee082a8bf1a09b670bed860381c67ee6a33f87bfd54f6e6c21d4111fd1"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:32:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "155918ee082a8bf1a09b670bed860381c67ee6a33f87bfd54f6e6c21d4111fd1",
+        "dffe396f209a2d1323b9df590f9737a4643a498318b18982fadb5eeac0610342",
+        "c7c941fef91cad5542d43646cb2f85c755723f9603553e4673e9cc154bad713a",
+        "cf2ee842a4d422e20f5dd28c4c5ea6036f9ca2f821d5928b05b0561dcae2b0a6",
+        "b4d508b9a43d03f3c2493d1137aac7fef770642d57136be362398ff65189cea7",
+        "9b3090ec5129947dda5f7d31ec338b2286effaf33ebea4dd97cba4ca9de1fc6e",
+        "782ce87ac9219a1b0a98061b609e96d12a0162c22e6d4838e362a24162f9dae9",
+        "f63e589b4503e6349f4546aab66179bb64b01b18c747f60ba5a073d831dedea9",
+        "30a7563a611a065b2c0856001839b7d18695e26cb5614cf9c4eaa1d780ae1cb5",
+        "c2584589f522e1de677f80d44034ca974a428534058d9cbecd510435cd93a674",
+        "789dbf6d8c2b6c378763a9210b49ce9f1c5f5c3e9f169779c0f44ed996b08790",
+        "d043182a057514c5371ac4af96069376a483bfa79521cb467c0c67ad89708ef8",
+        "dcbe9165ae52aa5bfa0ce13d18bbff5da742c04176cabc9ae67a6586bb170836",
+        "d2fcd8b0bd5488c66dcf0ca899bce8355369207a1b71757e6539beb3cf818a28",
+        "d3f617de35392bb330ae95f1a16d56b2cddf5411ad28605d8c8edabab5a22bee",
+        "af376bead882860806c7438c8796c7f7c741c640d8890f01f97bfbbca125767b",
+        "cd21e39df80012dc0e3135a1068adbb51d4d2c19eb80d3792ff68a1db0e33e9a",
+        "0fb00bd6e9851026988d6160f04c2d08714925b9ac688f71b10b0378f0d339bb",
+        "b78eeaf101db0a6a0ec4b95b9c48e1a6119636f1495b4b52156add77bc4b68ec",
+        "2437d69f139180354d570658aa84af18ca56b347da9609815b2240ace1fda7cd",
+        "eba81b994e69fc53d5086c90e59d136af500bf4468c29590854049ae8e325875",
+        "f031b0d17993cb94266723e49a27196bc89bda8e5e47751b019d5e455306d060",
+        "a03e8cbc1b2d161b1fe390f1984fba9421c637ea96749214089a7bd69b535346",
+        "bb415d8224482f6d7ce1b50460063a70aa5a5cd5c1fdc5103932b6dd9f170ae7",
+        "753f537e91a5f355eefdb2af014e87f9194f419d4abe9fdbe66596e7e67547ea",
+        "498010e1c142e9df2a5abd0a0ae5bbc032f4872c1dc2655466ea4e900c8a5dd9",
+        "b424e711b87092684fd0f911eedfc2d8bf6fb69aa6f70888cd1720340aced5b6",
+        "0cc62533f72e7b50767d799b50e98b43bdc6cc75b3b1ff59ae1fec71a145c91f",
+        "6670bc49e4b7a60fd4b772b043a51a295498aebfec65d675c75ebe4cca4b5e44",
+        "5056e44686b1a297d24747641d4ecce76720d758ca465e6c230b0a9d11cbffd8",
+        "b5f556702e5c6b2c33d1b8a8c4291ad32971b8f38b13ef7b4f396a3e34e9411b",
+        "ab42c2ff81abc04fa64d44e11a872f40cc5d0792a7828b1876cdbef793517261",
+        "9e5706251cd66794e9a014919b521298fbba59b833a05c55d89f07d6e0784fec",
+        "f1b5dcf2bff568a8f21b4baa8ffa901a12144da940401cf04ab9d9802f8ecf1a",
+        "cb13eef85fa75fd4938c0152a89723d69170a202d33e574f5fc8fb7640752320",
+        "801eb83a909ba9a38f35af38d5fb2406afab6329cee89c462156e72f91d97150",
+        "c91e78f5d75bd08c7c554e338f59d3ce7def87cc0fdbcc87b3b24524ec077525",
+        "dd0c16301a14d2f3daa3e17e8c5201960ed0dcf4e45754b8d097e2994abcdc04",
+        "953f2f463bb86301878d3293f5a1bc9dfb3beffe9cbe760f2d82df04990ea31c",
+        "cf76743611c637fc2198baa999790eab8ba9e05d02baa1ca8bdcdc376b5bd09a",
+        "16d3346dff619bc4a00682298a1231d72daf6da6dd53ca56d38da540c99d5894",
+        "d4dbd9fffb4ed537683f4cb76cada6629c1bbfe46cf4aae54345a38d3828b715",
+        "83cb32ca038b20304228a99fca516cd58a051d6d7585ea9790b6865ecfc9035c",
+        "50ad04b996ff3ada7f1cbb9e5607fd27fb934aca22fd6dc7c769acd964a9d4a7"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:33:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "155918ee082a8bf1a09b670bed860381c67ee6a33f87bfd54f6e6c21d4111fd1",
+        "dffe396f209a2d1323b9df590f9737a4643a498318b18982fadb5eeac0610342",
+        "c7c941fef91cad5542d43646cb2f85c755723f9603553e4673e9cc154bad713a",
+        "cf2ee842a4d422e20f5dd28c4c5ea6036f9ca2f821d5928b05b0561dcae2b0a6",
+        "b4d508b9a43d03f3c2493d1137aac7fef770642d57136be362398ff65189cea7",
+        "9b3090ec5129947dda5f7d31ec338b2286effaf33ebea4dd97cba4ca9de1fc6e",
+        "782ce87ac9219a1b0a98061b609e96d12a0162c22e6d4838e362a24162f9dae9",
+        "f63e589b4503e6349f4546aab66179bb64b01b18c747f60ba5a073d831dedea9",
+        "30a7563a611a065b2c0856001839b7d18695e26cb5614cf9c4eaa1d780ae1cb5",
+        "c2584589f522e1de677f80d44034ca974a428534058d9cbecd510435cd93a674",
+        "789dbf6d8c2b6c378763a9210b49ce9f1c5f5c3e9f169779c0f44ed996b08790",
+        "d043182a057514c5371ac4af96069376a483bfa79521cb467c0c67ad89708ef8",
+        "dcbe9165ae52aa5bfa0ce13d18bbff5da742c04176cabc9ae67a6586bb170836",
+        "d2fcd8b0bd5488c66dcf0ca899bce8355369207a1b71757e6539beb3cf818a28",
+        "d3f617de35392bb330ae95f1a16d56b2cddf5411ad28605d8c8edabab5a22bee",
+        "af376bead882860806c7438c8796c7f7c741c640d8890f01f97bfbbca125767b",
+        "cd21e39df80012dc0e3135a1068adbb51d4d2c19eb80d3792ff68a1db0e33e9a",
+        "0fb00bd6e9851026988d6160f04c2d08714925b9ac688f71b10b0378f0d339bb",
+        "b78eeaf101db0a6a0ec4b95b9c48e1a6119636f1495b4b52156add77bc4b68ec",
+        "2437d69f139180354d570658aa84af18ca56b347da9609815b2240ace1fda7cd",
+        "eba81b994e69fc53d5086c90e59d136af500bf4468c29590854049ae8e325875",
+        "f031b0d17993cb94266723e49a27196bc89bda8e5e47751b019d5e455306d060",
+        "a03e8cbc1b2d161b1fe390f1984fba9421c637ea96749214089a7bd69b535346",
+        "bb415d8224482f6d7ce1b50460063a70aa5a5cd5c1fdc5103932b6dd9f170ae7",
+        "753f537e91a5f355eefdb2af014e87f9194f419d4abe9fdbe66596e7e67547ea",
+        "498010e1c142e9df2a5abd0a0ae5bbc032f4872c1dc2655466ea4e900c8a5dd9",
+        "b424e711b87092684fd0f911eedfc2d8bf6fb69aa6f70888cd1720340aced5b6",
+        "0cc62533f72e7b50767d799b50e98b43bdc6cc75b3b1ff59ae1fec71a145c91f",
+        "6670bc49e4b7a60fd4b772b043a51a295498aebfec65d675c75ebe4cca4b5e44",
+        "5056e44686b1a297d24747641d4ecce76720d758ca465e6c230b0a9d11cbffd8",
+        "b5f556702e5c6b2c33d1b8a8c4291ad32971b8f38b13ef7b4f396a3e34e9411b",
+        "ab42c2ff81abc04fa64d44e11a872f40cc5d0792a7828b1876cdbef793517261",
+        "9e5706251cd66794e9a014919b521298fbba59b833a05c55d89f07d6e0784fec",
+        "f1b5dcf2bff568a8f21b4baa8ffa901a12144da940401cf04ab9d9802f8ecf1a",
+        "cb13eef85fa75fd4938c0152a89723d69170a202d33e574f5fc8fb7640752320",
+        "801eb83a909ba9a38f35af38d5fb2406afab6329cee89c462156e72f91d97150",
+        "c91e78f5d75bd08c7c554e338f59d3ce7def87cc0fdbcc87b3b24524ec077525",
+        "dd0c16301a14d2f3daa3e17e8c5201960ed0dcf4e45754b8d097e2994abcdc04",
+        "953f2f463bb86301878d3293f5a1bc9dfb3beffe9cbe760f2d82df04990ea31c",
+        "cf76743611c637fc2198baa999790eab8ba9e05d02baa1ca8bdcdc376b5bd09a",
+        "16d3346dff619bc4a00682298a1231d72daf6da6dd53ca56d38da540c99d5894",
+        "d4dbd9fffb4ed537683f4cb76cada6629c1bbfe46cf4aae54345a38d3828b715",
+        "83cb32ca038b20304228a99fca516cd58a051d6d7585ea9790b6865ecfc9035c",
+        "50ad04b996ff3ada7f1cbb9e5607fd27fb934aca22fd6dc7c769acd964a9d4a7"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:176:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "dffe396f209a2d1323b9df590f9737a4643a498318b18982fadb5eeac0610342"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:183:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "c7c941fef91cad5542d43646cb2f85c755723f9603553e4673e9cc154bad713a"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:193:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "cf2ee842a4d422e20f5dd28c4c5ea6036f9ca2f821d5928b05b0561dcae2b0a6"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:203:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b4d508b9a43d03f3c2493d1137aac7fef770642d57136be362398ff65189cea7"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:213:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "9b3090ec5129947dda5f7d31ec338b2286effaf33ebea4dd97cba4ca9de1fc6e"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:223:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "782ce87ac9219a1b0a98061b609e96d12a0162c22e6d4838e362a24162f9dae9"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:233:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "f63e589b4503e6349f4546aab66179bb64b01b18c747f60ba5a073d831dedea9"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:243:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "30a7563a611a065b2c0856001839b7d18695e26cb5614cf9c4eaa1d780ae1cb5"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:256:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "c2584589f522e1de677f80d44034ca974a428534058d9cbecd510435cd93a674"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:270:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "789dbf6d8c2b6c378763a9210b49ce9f1c5f5c3e9f169779c0f44ed996b08790"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:284:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "d043182a057514c5371ac4af96069376a483bfa79521cb467c0c67ad89708ef8"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:306:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "cdf56be1d25bce2a89dc6ac60a496fec39c812aaeba1f223a86c9eddc69b6739"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:311:11:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "cdf56be1d25bce2a89dc6ac60a496fec39c812aaeba1f223a86c9eddc69b6739"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:326:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "dcbe9165ae52aa5bfa0ce13d18bbff5da742c04176cabc9ae67a6586bb170836"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:333:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "d2fcd8b0bd5488c66dcf0ca899bce8355369207a1b71757e6539beb3cf818a28"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:352:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "d3f617de35392bb330ae95f1a16d56b2cddf5411ad28605d8c8edabab5a22bee"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:359:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "af376bead882860806c7438c8796c7f7c741c640d8890f01f97bfbbca125767b"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:366:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "cd21e39df80012dc0e3135a1068adbb51d4d2c19eb80d3792ff68a1db0e33e9a"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:373:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "0fb00bd6e9851026988d6160f04c2d08714925b9ac688f71b10b0378f0d339bb"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:380:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b78eeaf101db0a6a0ec4b95b9c48e1a6119636f1495b4b52156add77bc4b68ec"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:387:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "2437d69f139180354d570658aa84af18ca56b347da9609815b2240ace1fda7cd"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:394:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "eba81b994e69fc53d5086c90e59d136af500bf4468c29590854049ae8e325875"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:413:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "f031b0d17993cb94266723e49a27196bc89bda8e5e47751b019d5e455306d060"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:420:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "a03e8cbc1b2d161b1fe390f1984fba9421c637ea96749214089a7bd69b535346"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:427:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "bb415d8224482f6d7ce1b50460063a70aa5a5cd5c1fdc5103932b6dd9f170ae7"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:446:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "753f537e91a5f355eefdb2af014e87f9194f419d4abe9fdbe66596e7e67547ea"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:453:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "498010e1c142e9df2a5abd0a0ae5bbc032f4872c1dc2655466ea4e900c8a5dd9"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:472:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b424e711b87092684fd0f911eedfc2d8bf6fb69aa6f70888cd1720340aced5b6"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:484:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "0cc62533f72e7b50767d799b50e98b43bdc6cc75b3b1ff59ae1fec71a145c91f"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:497:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "6670bc49e4b7a60fd4b772b043a51a295498aebfec65d675c75ebe4cca4b5e44"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:510:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "5056e44686b1a297d24747641d4ecce76720d758ca465e6c230b0a9d11cbffd8"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:536:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b5f556702e5c6b2c33d1b8a8c4291ad32971b8f38b13ef7b4f396a3e34e9411b"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:543:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "ab42c2ff81abc04fa64d44e11a872f40cc5d0792a7828b1876cdbef793517261"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:550:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "9e5706251cd66794e9a014919b521298fbba59b833a05c55d89f07d6e0784fec"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:569:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "f1b5dcf2bff568a8f21b4baa8ffa901a12144da940401cf04ab9d9802f8ecf1a"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:576:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "cb13eef85fa75fd4938c0152a89723d69170a202d33e574f5fc8fb7640752320"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:583:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "801eb83a909ba9a38f35af38d5fb2406afab6329cee89c462156e72f91d97150"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:590:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "c91e78f5d75bd08c7c554e338f59d3ce7def87cc0fdbcc87b3b24524ec077525"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:609:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "dd0c16301a14d2f3daa3e17e8c5201960ed0dcf4e45754b8d097e2994abcdc04"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:616:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "953f2f463bb86301878d3293f5a1bc9dfb3beffe9cbe760f2d82df04990ea31c"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:623:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "cf76743611c637fc2198baa999790eab8ba9e05d02baa1ca8bdcdc376b5bd09a"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:642:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "16d3346dff619bc4a00682298a1231d72daf6da6dd53ca56d38da540c99d5894"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:649:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "d4dbd9fffb4ed537683f4cb76cada6629c1bbfe46cf4aae54345a38d3828b715"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:668:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "83cb32ca038b20304228a99fca516cd58a051d6d7585ea9790b6865ecfc9035c"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:681:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "50ad04b996ff3ada7f1cbb9e5607fd27fb934aca22fd6dc7c769acd964a9d4a7"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:698:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "894b1217edf7d1d59fc578c7be1ecb782808d9c573911b5b5349d4e7dbb890f5"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:700:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "894b1217edf7d1d59fc578c7be1ecb782808d9c573911b5b5349d4e7dbb890f5"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:703:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "1d2068566c32919683c74c03eccd9733f88a4462aa64129d0d98c4472cb241ea"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:705:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1d2068566c32919683c74c03eccd9733f88a4462aa64129d0d98c4472cb241ea"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:708:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "5ae04110567c1e73be21784361e873177fe5232b2a226203f970aae7579adda8"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:710:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "5ae04110567c1e73be21784361e873177fe5232b2a226203f970aae7579adda8"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:713:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "4a147c9a937309c354d3b3082e617592b66bd0981c53f20bbf25dc055534671e"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:715:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "4a147c9a937309c354d3b3082e617592b66bd0981c53f20bbf25dc055534671e"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:718:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "1286409f86a35e113ac32f9bbca8d680745a16db27de0f79902ceae990eefe9f"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:720:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1286409f86a35e113ac32f9bbca8d680745a16db27de0f79902ceae990eefe9f"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:721:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1286409f86a35e113ac32f9bbca8d680745a16db27de0f79902ceae990eefe9f"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:724:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "bd5b803b66e53b7886b6786a5ebd14cbe8fc8850837c57513232db62d98c63ec"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:726:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "bd5b803b66e53b7886b6786a5ebd14cbe8fc8850837c57513232db62d98c63ec"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:729:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "c532123fd64a71099e2b29f90347aecbdbdb663c034aac3232b955e281602405"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.additional.test.ts:731:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c532123fd64a71099e2b29f90347aecbdbdb663c034aac3232b955e281602405"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:61:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "6f1d36ea8f6e6b92e44d640fc20fc301c2eb1cdeb338ed053135f984ef197d38"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:71:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6f1d36ea8f6e6b92e44d640fc20fc301c2eb1cdeb338ed053135f984ef197d38"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:72:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6f1d36ea8f6e6b92e44d640fc20fc301c2eb1cdeb338ed053135f984ef197d38"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:73:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6f1d36ea8f6e6b92e44d640fc20fc301c2eb1cdeb338ed053135f984ef197d38"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:79:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "88a370dbb2120c4625b8e454eb2fe7688330fabdd7115775c50d83a0b96b95cd"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:84:11:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "88a370dbb2120c4625b8e454eb2fe7688330fabdd7115775c50d83a0b96b95cd"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:95:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "be2f9d65325a32893140ba6c8a7707ea4048c878bb8d5877bf05b8c7b2088a9a"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:103:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "be2f9d65325a32893140ba6c8a7707ea4048c878bb8d5877bf05b8c7b2088a9a"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:104:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "be2f9d65325a32893140ba6c8a7707ea4048c878bb8d5877bf05b8c7b2088a9a"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:107:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "cb3ceb174559d46b5538a27eb29352e30dbd5af201f38818e42848815a83ddf2"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:118:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "cb3ceb174559d46b5538a27eb29352e30dbd5af201f38818e42848815a83ddf2"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:130:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "eb9e5057df94b456eb7076a426b383f9f115655c4564677b482c004b305b916e"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:149:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "eb9e5057df94b456eb7076a426b383f9f115655c4564677b482c004b305b916e"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:150:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "eb9e5057df94b456eb7076a426b383f9f115655c4564677b482c004b305b916e"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:159:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "f6ec1e74ff322f4a90304bf9e42e32906a9d8b6037ee4ba3c9cb4e8416926851"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:182:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f6ec1e74ff322f4a90304bf9e42e32906a9d8b6037ee4ba3c9cb4e8416926851"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:183:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f6ec1e74ff322f4a90304bf9e42e32906a9d8b6037ee4ba3c9cb4e8416926851"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:192:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "c48a20b09896bface2fcebda1226b2f6074fd8435abd783f04aee41732df4008"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:204:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c48a20b09896bface2fcebda1226b2f6074fd8435abd783f04aee41732df4008"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:205:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c48a20b09896bface2fcebda1226b2f6074fd8435abd783f04aee41732df4008"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:210:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "09f6ec7488d18a58910b722cfc1c7bbab84963e2adb0af8a78443e6be8867f61"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:222:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "09f6ec7488d18a58910b722cfc1c7bbab84963e2adb0af8a78443e6be8867f61"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:223:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "09f6ec7488d18a58910b722cfc1c7bbab84963e2adb0af8a78443e6be8867f61"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:232:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "84f6a9039e3044e6591c5287024b757a52d8b266da69429c0213ddd1f95590df"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:244:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "84f6a9039e3044e6591c5287024b757a52d8b266da69429c0213ddd1f95590df"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:245:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "84f6a9039e3044e6591c5287024b757a52d8b266da69429c0213ddd1f95590df"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:250:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "9cf307562e16deb0262fbe29e119cd10d0dbb59faab013253bcbfecbc3e4422e"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:263:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "9cf307562e16deb0262fbe29e119cd10d0dbb59faab013253bcbfecbc3e4422e"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:264:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "9cf307562e16deb0262fbe29e119cd10d0dbb59faab013253bcbfecbc3e4422e"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:273:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "91c51568318c00f6fb27af065c5ca3c4954851ab3e83ba039583e5b97ef39933"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:285:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "91c51568318c00f6fb27af065c5ca3c4954851ab3e83ba039583e5b97ef39933"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:286:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "91c51568318c00f6fb27af065c5ca3c4954851ab3e83ba039583e5b97ef39933"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:291:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "af14b41e33d860203d13fd2783dbf1bfa0e00c3d84e411c15985ad1b24bc2cfb"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:304:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "af14b41e33d860203d13fd2783dbf1bfa0e00c3d84e411c15985ad1b24bc2cfb"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:305:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "af14b41e33d860203d13fd2783dbf1bfa0e00c3d84e411c15985ad1b24bc2cfb"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:326:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "1a9125d799c6d944851c7b0dfe9277a349d2316072e8c1d127ac6fdaa03e8d8f"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:333:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1a9125d799c6d944851c7b0dfe9277a349d2316072e8c1d127ac6fdaa03e8d8f"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:334:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1a9125d799c6d944851c7b0dfe9277a349d2316072e8c1d127ac6fdaa03e8d8f"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:337:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "a5c8e4ea712256751c05bac034bd7cd7351b3daaac6e5bbc4d0b4ffd18e7f0d0"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:351:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a5c8e4ea712256751c05bac034bd7cd7351b3daaac6e5bbc4d0b4ffd18e7f0d0"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:352:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a5c8e4ea712256751c05bac034bd7cd7351b3daaac6e5bbc4d0b4ffd18e7f0d0"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:361:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "a58bc1c624f9f0977a86f5558249f8aa18f3eed64392ae0f4e8f6d61e1d451ba"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:370:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a58bc1c624f9f0977a86f5558249f8aa18f3eed64392ae0f4e8f6d61e1d451ba"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:371:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a58bc1c624f9f0977a86f5558249f8aa18f3eed64392ae0f4e8f6d61e1d451ba"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:380:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "0e2a9bec393ac075e4661db8948946cb445ae8aadc6f3e02f5cf34b3a9d688d8"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:401:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0e2a9bec393ac075e4661db8948946cb445ae8aadc6f3e02f5cf34b3a9d688d8"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:402:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0e2a9bec393ac075e4661db8948946cb445ae8aadc6f3e02f5cf34b3a9d688d8"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:411:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "9f0e7a5ecf9a8514d09ecd5812c3b988ac338f82e1b53e38d144d8f34e11edbb"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:423:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "9f0e7a5ecf9a8514d09ecd5812c3b988ac338f82e1b53e38d144d8f34e11edbb"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:424:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "9f0e7a5ecf9a8514d09ecd5812c3b988ac338f82e1b53e38d144d8f34e11edbb"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:433:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "1f435762f53041f233e2c90a2b4e337790ec0e94992985bdd59ee089cb652e18"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:442:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1f435762f53041f233e2c90a2b4e337790ec0e94992985bdd59ee089cb652e18"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:443:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1f435762f53041f233e2c90a2b4e337790ec0e94992985bdd59ee089cb652e18"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:452:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "bcb8e709683c6171fcb839efd438a5849f10dbed2903162389c68ecf7ca97848"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:461:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "bcb8e709683c6171fcb839efd438a5849f10dbed2903162389c68ecf7ca97848"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:462:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "bcb8e709683c6171fcb839efd438a5849f10dbed2903162389c68ecf7ca97848"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:471:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "ea37559c8bfa3f65cd198bc15b6a16d390a96ca94f164876d27f5b2bf6c34b84"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:478:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ea37559c8bfa3f65cd198bc15b6a16d390a96ca94f164876d27f5b2bf6c34b84"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:479:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ea37559c8bfa3f65cd198bc15b6a16d390a96ca94f164876d27f5b2bf6c34b84"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:482:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "26c48278d896ea9c7af55838db97e60493aa322baee4142bedaa9b9d2e158011"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:489:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "26c48278d896ea9c7af55838db97e60493aa322baee4142bedaa9b9d2e158011"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:490:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "26c48278d896ea9c7af55838db97e60493aa322baee4142bedaa9b9d2e158011"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:499:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "91d71dd01d52d4efca2589bd6b9b23dcfbb559a6bcb0d0a7f4246154031a7c1a"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:506:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "91d71dd01d52d4efca2589bd6b9b23dcfbb559a6bcb0d0a7f4246154031a7c1a"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:507:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "91d71dd01d52d4efca2589bd6b9b23dcfbb559a6bcb0d0a7f4246154031a7c1a"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:516:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "2c96382b2589ae0acaff81bccc56663687e0fb0eb5d46c0aa8fbd7ecfd3c9ec4"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:523:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "2c96382b2589ae0acaff81bccc56663687e0fb0eb5d46c0aa8fbd7ecfd3c9ec4"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:524:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "2c96382b2589ae0acaff81bccc56663687e0fb0eb5d46c0aa8fbd7ecfd3c9ec4"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:527:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "8e4b6f8be97119036c2e49da1e6e7394096d014ba9e3ae44f2a4fb7c6b5e6969"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:534:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8e4b6f8be97119036c2e49da1e6e7394096d014ba9e3ae44f2a4fb7c6b5e6969"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:543:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "c8554940ed9896b20dccc8716944b101f902842a7c971ec7d0e464bf50142edc"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:550:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c8554940ed9896b20dccc8716944b101f902842a7c971ec7d0e464bf50142edc"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:551:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c8554940ed9896b20dccc8716944b101f902842a7c971ec7d0e464bf50142edc"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:560:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "62d10e56908bb2152cfb2fad2c0904cb992194e9475dde5939252a77bb08edaf"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:567:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "62d10e56908bb2152cfb2fad2c0904cb992194e9475dde5939252a77bb08edaf"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:568:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "62d10e56908bb2152cfb2fad2c0904cb992194e9475dde5939252a77bb08edaf"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:571:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "f5cd70fbda548ff2f0e14da135d4120ce620274d488db49300c93570956d39ef"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:578:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f5cd70fbda548ff2f0e14da135d4120ce620274d488db49300c93570956d39ef"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:579:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f5cd70fbda548ff2f0e14da135d4120ce620274d488db49300c93570956d39ef"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:588:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "ea1927a5620b32383aba7c702594575ff7cda886748a5ceb927c54e4a78710de"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:595:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ea1927a5620b32383aba7c702594575ff7cda886748a5ceb927c54e4a78710de"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:596:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ea1927a5620b32383aba7c702594575ff7cda886748a5ceb927c54e4a78710de"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:599:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "5c166cb9759f92047fbab498fa88d10a928412b051304c469d6ed31fe30cfeb4"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:606:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "5c166cb9759f92047fbab498fa88d10a928412b051304c469d6ed31fe30cfeb4"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:615:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "5c4f2a560ecdb16a8122f43b6e88c8b49528931188f88d419866cea2f0f08e51"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:624:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "5c4f2a560ecdb16a8122f43b6e88c8b49528931188f88d419866cea2f0f08e51"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:625:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "5c4f2a560ecdb16a8122f43b6e88c8b49528931188f88d419866cea2f0f08e51"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:628:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "ab6bc6526a66f4270d8af394e726a8667baa857581a5b0cf2a8f6bf5f1d8bc69"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:636:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ab6bc6526a66f4270d8af394e726a8667baa857581a5b0cf2a8f6bf5f1d8bc69"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:645:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "49a24470f710cdf68a7353983411cb02d6fc7dc578e87c9add3646821636d629"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:654:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "49a24470f710cdf68a7353983411cb02d6fc7dc578e87c9add3646821636d629"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:655:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "49a24470f710cdf68a7353983411cb02d6fc7dc578e87c9add3646821636d629"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:664:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b140e6f5724b07aff76327ff5fd748db84b1963471a67b3bc25c5b5dfcdab32e"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:671:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b140e6f5724b07aff76327ff5fd748db84b1963471a67b3bc25c5b5dfcdab32e"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:672:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b140e6f5724b07aff76327ff5fd748db84b1963471a67b3bc25c5b5dfcdab32e"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:681:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "17e149150a94bc1ced700b7f093aa522c3af0deeb7dfb0b622372b2ef4628737"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:690:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "17e149150a94bc1ced700b7f093aa522c3af0deeb7dfb0b622372b2ef4628737"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:691:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "17e149150a94bc1ced700b7f093aa522c3af0deeb7dfb0b622372b2ef4628737"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:700:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "21966bdc728ca060c9a5e9d9edaf50ce42db6e89cc41d1b77480694c24ecc6bf"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:725:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "21966bdc728ca060c9a5e9d9edaf50ce42db6e89cc41d1b77480694c24ecc6bf"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:726:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "21966bdc728ca060c9a5e9d9edaf50ce42db6e89cc41d1b77480694c24ecc6bf"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:735:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "f69cebfd167d78b74623e7454a9aabc727c77c43160c5badb95f796738bd3d4c"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:744:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f69cebfd167d78b74623e7454a9aabc727c77c43160c5badb95f796738bd3d4c"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:745:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f69cebfd167d78b74623e7454a9aabc727c77c43160c5badb95f796738bd3d4c"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:754:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b6225162b93d88f9e4343b7afa0a739a217c41b2218b74e519434aa962d57cec"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:761:13:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b6225162b93d88f9e4343b7afa0a739a217c41b2218b74e519434aa962d57cec"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:769:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "c6acc8ff4b0fe9e54a75c63f9f86a56c0408d31077b57a58b272fcaa1e504345"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.substrate.test.ts:783:13:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c6acc8ff4b0fe9e54a75c63f9f86a56c0408d31077b57a58b272fcaa1e504345"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.test.ts:4:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "7991ac50c4865af5aa8f0358b1c827cf6d12d4e8f12a3baa679eebae489db698"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.test.ts:10:9:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7991ac50c4865af5aa8f0358b1c827cf6d12d4e8f12a3baa679eebae489db698"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.test.ts:12:9:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7991ac50c4865af5aa8f0358b1c827cf6d12d4e8f12a3baa679eebae489db698"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
+    },
+    {
+      "id": "src/wallet/__tests/WalletClient.test.ts:13:9:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7991ac50c4865af5aa8f0358b1c827cf6d12d4e8f12a3baa679eebae489db698"
+      ],
+      "note": "固定原测试注册与断言由对应 Java 方法执行；辅助校验函数保留各次调用的逐断言轨迹。"
     }
   ]
 }

@@ -35645,6 +35645,419 @@
         "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/BrowserEnvironment.java:18"
       ],
       "note": "TS Window 与 ReactNativeWebView.postMessage 结构映射为 JVM 显式宿主能力接口。"
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#class:WalletClient:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient",
+      "javaSignature": "public final class WalletClient implements WalletInterface {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:68",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:24"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#constructor:WalletClient.constructor:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#<init>",
+      "javaSignature": "public WalletClient(Object substrate, String originator) { this(substrate, originator, null, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:71",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:37"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.abortAction:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#abortAction",
+      "javaSignature": "public CompletableFuture<AbortActionResult> abortAction(AbortActionArgs args) { return abortAction(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:191",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:134",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:174"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.acquireCertificate:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#acquireCertificate",
+      "javaSignature": "public CompletableFuture<WalletCertificate> acquireCertificate(AcquireCertificateArgs args) { return acquireCertificate(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:355",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:148",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:223"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.connectToSubstrate:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#connectToSubstrate",
+      "javaSignature": "public CompletableFuture<Void> connectToSubstrate() {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:98",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:67"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.createAction:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#createAction",
+      "javaSignature": "public CompletableFuture<CreateActionResult> createAction(CreateActionArgs args) { return createAction(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:179",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:132",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:166"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.createHmac:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#createHmac",
+      "javaSignature": "public CompletableFuture<CreateHmacResult> createHmac(CreateHmacArgs args) { return createHmac(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:302",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:144",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:211"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.createSignature:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#createSignature",
+      "javaSignature": "public CompletableFuture<CreateSignatureResult> createSignature(CreateSignatureArgs args) { return createSignature(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:327",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:146",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:217"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.decrypt:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#decrypt",
+      "javaSignature": "public CompletableFuture<WalletDecryptResult> decrypt(WalletDecryptArgs args) { return decrypt(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:290",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:143",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:208"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.discoverByAttributes:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#discoverByAttributes",
+      "javaSignature": "public CompletableFuture<DiscoverCertificatesResult> discoverByAttributes(DiscoverByAttributesArgs args) { return discoverByAttributes(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:409",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:153",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:250"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.discoverByIdentityKey:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#discoverByIdentityKey",
+      "javaSignature": "public CompletableFuture<DiscoverCertificatesResult> discoverByIdentityKey(DiscoverByIdentityKeyArgs args) { return discoverByIdentityKey(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:399",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:152",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:245"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.encrypt:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#encrypt",
+      "javaSignature": "public CompletableFuture<WalletEncryptResult> encrypt(WalletEncryptArgs args) { return encrypt(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:278",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:142",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:205"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.getHeaderForHeight:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#getHeaderForHeight",
+      "javaSignature": "public CompletableFuture<GetHeaderResult> getHeaderForHeight(GetHeaderArgs args) { return getHeaderForHeight(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:434",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:162",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:267"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.getHeight:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#getHeight",
+      "javaSignature": "public CompletableFuture<GetHeightResult> getHeight() { return getHeight(null, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:429",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:156",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:263"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.getNetwork:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#getNetwork",
+      "javaSignature": "public CompletableFuture<GetNetworkResult> getNetwork() { return getNetwork(null, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:439",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:157",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:270"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.getPublicKey:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#getPublicKey",
+      "javaSignature": "public CompletableFuture<GetPublicKeyResult> getPublicKey(GetPublicKeyArgs args) { return getPublicKey(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:224",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:139",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:194"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.getVersion:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#getVersion",
+      "javaSignature": "public CompletableFuture<GetVersionResult> getVersion() { return getVersion(null, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:444",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:158",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:274"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.internalizeAction:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#internalizeAction",
+      "javaSignature": "public CompletableFuture<InternalizeActionResult> internalizeAction(InternalizeActionArgs args) { return internalizeAction(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:203",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:136",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:182"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.isAuthenticated:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#isAuthenticated",
+      "javaSignature": "public CompletableFuture<AuthenticatedResult> isAuthenticated() { return isAuthenticated(null, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:419",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:154",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:255"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.listActions:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#listActions",
+      "javaSignature": "public CompletableFuture<ListActionsResult> listActions(ListActionsArgs args) { return listActions(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:197",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:135",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:178"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.listCertificates:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#listCertificates",
+      "javaSignature": "public CompletableFuture<ListCertificatesResult> listCertificates(ListCertificatesArgs args) { return listCertificates(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:370",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:149",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:232"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.listOutputs:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#listOutputs",
+      "javaSignature": "public CompletableFuture<ListOutputsResult> listOutputs(ListOutputsArgs args) { return listOutputs(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:209",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:137",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:186"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.proveCertificate:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#proveCertificate",
+      "javaSignature": "public CompletableFuture<ProveCertificateResult> proveCertificate(ProveCertificateArgs args) { return proveCertificate(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:383",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:150",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:236"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.relinquishCertificate:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#relinquishCertificate",
+      "javaSignature": "public CompletableFuture<RelinquishCertificateResult> relinquishCertificate(RelinquishCertificateArgs args) { return relinquishCertificate(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:389",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:151",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:240"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.relinquishOutput:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#relinquishOutput",
+      "javaSignature": "public CompletableFuture<RelinquishOutputResult> relinquishOutput(RelinquishOutputArgs args) { return relinquishOutput(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:215",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:138",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:190"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.revealCounterpartyKeyLinkage:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#revealCounterpartyKeyLinkage",
+      "javaSignature": "public CompletableFuture<RevealCounterpartyKeyLinkageResult> revealCounterpartyKeyLinkage(RevealCounterpartyKeyLinkageArgs args) { return revealCounterpartyKeyLinkage(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:237",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:140",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:197"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.revealSpecificKeyLinkage:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#revealSpecificKeyLinkage",
+      "javaSignature": "public CompletableFuture<RevealSpecificKeyLinkageResult> revealSpecificKeyLinkage(RevealSpecificKeyLinkageArgs args) { return revealSpecificKeyLinkage(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:257",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:141",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:201"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.signAction:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#signAction",
+      "javaSignature": "public CompletableFuture<SignActionResult> signAction(SignActionArgs args) { return signAction(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:185",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:133",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:170"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.verifyHmac:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#verifyHmac",
+      "javaSignature": "public CompletableFuture<VerifyHmacResult> verifyHmac(VerifyHmacArgs args) { return verifyHmac(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:314",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:145",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:214"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.verifySignature:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#verifySignature",
+      "javaSignature": "public CompletableFuture<VerifySignatureResult> verifySignature(VerifySignatureArgs args) { return verifySignature(args, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:340",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:147",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:220"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#method:WalletClient.waitForAuthentication:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#waitForAuthentication",
+      "javaSignature": "public CompletableFuture<AuthenticatedResult> waitForAuthentication() { return waitForAuthentication(null, null); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:424",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:155",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:259"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#property:WalletClient.originator:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#originator",
+      "javaSignature": "public final String originator;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:70",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:31"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#property:WalletClient.substrate:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#substrate",
+      "javaSignature": "public volatile Object substrate;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:69",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:30"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#variable:MAX_FAST_SUBSTRATE_RESPONSE_WAIT:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#MAX_FAST_SUBSTRATE_RESPONSE_WAIT",
+      "javaSignature": "public static final long MAX_FAST_SUBSTRATE_RESPONSE_WAIT = 1000;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:62",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:25"
+      ]
+    },
+    {
+      "id": "src/wallet/WalletClient.ts#variable:MAX_XDM_RESPONSE_WAIT:1",
+      "java": "com.metanet4j.bsv.wallet.WalletClient#MAX_XDM_RESPONSE_WAIT",
+      "javaSignature": "public static final long MAX_XDM_RESPONSE_WAIT = 200;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/WalletClient.ts:63",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/WalletClient.java:26"
+      ]
     }
   ],
   "approvedDifferences": [
