@@ -122,6 +122,8 @@ afterEach(async () => {
     .slice(starts.fallback).map(resultOf))
   observations.fetchResults = await Promise.all((capture.client.fetch?.mock?.results ?? [])
     .slice(starts.fetch).map(resultOf))
+  observations.recursiveFetchCalls = (capture.client.fetch?.mock?.calls ?? []).slice(starts.fetch)
+    .map(args => ({ url: args[0], config: args.length < 2 ? undefinedValue : valueOf(args[1]) }))
   observations.stoppedIds = (peer.stopListeningForGeneralMessages?.mock?.calls ?? [])
     .slice(starts.stop).map(args => valueOf(args[0]))
   observations.listenCallCount = (peer.listenForGeneralMessages?.mock?.calls.length ?? 0) - starts.listen
