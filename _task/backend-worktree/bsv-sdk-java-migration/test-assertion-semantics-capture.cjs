@@ -95,3 +95,12 @@ test('调用参数编码保留 null、undefined、嵌套数组与所有调用', 
   assert.equal(mock.mock.calls[0][1], null)
   assert.equal(mock.mock.calls[0][2], undefined)
 })
+
+test('固定 Jest expect.any(Object) 接受 null 并拒绝 undefined 与原始值', () => {
+  for (const value of [null, {}, [], new Error('value')]) {
+    assert.doesNotThrow(() => nativeExpect(value).toEqual(nativeExpect.any(Object)))
+  }
+  for (const value of [undefined, 'text', 1, true, () => {}]) {
+    assert.throws(() => nativeExpect(value).toEqual(nativeExpect.any(Object)))
+  }
+})
