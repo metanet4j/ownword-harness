@@ -25368,7 +25368,7 @@
     {
       "id": "src/transaction/Beef.ts#function:indexBumpTxids:1",
       "java": "com.metanet4j.bsv.transaction.Beef#findBump",
-      "javaSignature": "public MerklePath findBump(String txid) {",
+      "javaSignature": "public Object findBump(String txid) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-beef",
       "review": "reviewed",
       "note": "内部辅助逻辑在 Java 对应路径中内聚实现。",
@@ -25752,7 +25752,7 @@
     {
       "id": "src/transaction/Beef.ts#method:Beef.ensureBumpHeightIndex:1",
       "java": "com.metanet4j.bsv.transaction.Beef#findBump",
-      "javaSignature": "public MerklePath findBump(String txid) {",
+      "javaSignature": "public Object findBump(String txid) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-beef",
       "review": "reviewed",
       "note": "内部辅助逻辑在 Java 对应路径中内聚实现。",
@@ -25764,7 +25764,7 @@
     {
       "id": "src/transaction/Beef.ts#method:Beef.ensureBumpTxidIndex:1",
       "java": "com.metanet4j.bsv.transaction.Beef#findBump",
-      "javaSignature": "public MerklePath findBump(String txid) {",
+      "javaSignature": "public Object findBump(String txid) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-beef",
       "review": "reviewed",
       "note": "内部辅助逻辑在 Java 对应路径中内聚实现。",
@@ -25836,7 +25836,7 @@
     {
       "id": "src/transaction/Beef.ts#method:Beef.findBump:1",
       "java": "com.metanet4j.bsv.transaction.Beef#findBump",
-      "javaSignature": "public MerklePath findBump(String txid) {",
+      "javaSignature": "public Object findBump(String txid) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-beef",
       "review": "reviewed",
       "note": "交易证明行为由同名 Java 成员实现。",
@@ -25860,7 +25860,7 @@
     {
       "id": "src/transaction/Beef.ts#method:Beef.findTransactionForSigning:1",
       "java": "com.metanet4j.bsv.transaction.Beef#findTransactionForSigning",
-      "javaSignature": "public Transaction findTransactionForSigning(String txid) {",
+      "javaSignature": "public Object findTransactionForSigning(String txid) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-beef",
       "review": "reviewed",
       "note": "交易证明行为由同名 Java 成员实现。",
@@ -26676,7 +26676,7 @@
     {
       "id": "src/transaction/Beef.ts#property:Beef.bumpIndexByTxid:1",
       "java": "com.metanet4j.bsv.transaction.Beef#findBump",
-      "javaSignature": "public MerklePath findBump(String txid) {",
+      "javaSignature": "public Object findBump(String txid) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-beef",
       "review": "reviewed",
       "note": "内部辅助逻辑在 Java 对应路径中内聚实现。",
@@ -26688,7 +26688,7 @@
     {
       "id": "src/transaction/Beef.ts#property:Beef.bumpIndexesByHeight:1",
       "java": "com.metanet4j.bsv.transaction.Beef#findBump",
-      "javaSignature": "public MerklePath findBump(String txid) {",
+      "javaSignature": "public Object findBump(String txid) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-beef",
       "review": "reviewed",
       "note": "内部辅助逻辑在 Java 对应路径中内聚实现。",
@@ -27492,7 +27492,7 @@
     {
       "id": "src/transaction/BeefTx.ts#get:BeefTx.rawTx:1",
       "java": "com.metanet4j.bsv.transaction.BeefTx#rawTx",
-      "javaSignature": "public byte[] rawTx;",
+      "javaSignature": "public Object rawTx = Undefined.INSTANCE;",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-beef",
       "review": "reviewed",
       "note": "原始交易、证明索引、输入依赖与 V1/V2 编解码按对应成员实现。",
@@ -27636,7 +27636,7 @@
     {
       "id": "src/transaction/BeefTx.ts#property:BeefTx._rawTx:1",
       "java": "com.metanet4j.bsv.transaction.BeefTx#rawTx",
-      "javaSignature": "public byte[] rawTx;",
+      "javaSignature": "public Object rawTx = Undefined.INSTANCE;",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-beef",
       "review": "reviewed",
       "note": "原始交易、证明索引、输入依赖与 V1/V2 编解码按对应成员实现。",
@@ -27648,7 +27648,7 @@
     {
       "id": "src/transaction/BeefTx.ts#property:BeefTx._tx:1",
       "java": "com.metanet4j.bsv.transaction.BeefTx#transaction",
-      "javaSignature": "public Transaction transaction;",
+      "javaSignature": "public Object transaction = Undefined.INSTANCE;",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-beef",
       "review": "reviewed",
       "note": "原始交易、证明索引、输入依赖与 V1/V2 编解码按对应成员实现。",
