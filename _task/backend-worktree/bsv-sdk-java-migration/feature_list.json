@@ -955,7 +955,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "script：脚本模型、解析与错误",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-keys-signatures"
       ],
@@ -1006,21 +1006,33 @@
         "migration-api-script-model",
         "migration-api-script-templates"
       ],
-      "evidence": [],
+      "evidence": [
+        ".cache/evidence/script-model-final-20260926-141500/：固定 TS 四文件 1104/1104、提交后累计 Java clean test 1985/1985；原断言 4276/4276 实际值比较，missing/uncompared/extra 均为 0。",
+        "12 个完整 API 源文件 280 项声明、原测试 1104 个用例及 228 个 AST 位置已复核；3 次 TS Random 输入逐项重放，1030 条原脚本向量保持完整，并有 1 条 Java 边界回归。"
+      ],
       "modules": [
         "script"
       ],
       "fixtureFiles": [
         "src/script/__tests/script.invalid.vectors.ts",
         "src/script/__tests/script.valid.vectors.ts"
-      ]
+      ],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 1104,
+        "assertionsCompared": 4276,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/script-model-final-20260926-141500/postcommit-parity.json"
+      }
     },
     {
       "id": "migration-impl-transaction-base",
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "transaction/primitives：交易构造、费率与签名格式",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-script-model",
         "migration-impl-http-chain",
