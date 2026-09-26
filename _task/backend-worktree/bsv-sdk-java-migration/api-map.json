@@ -41859,7 +41859,7 @@
     {
       "id": "src/auth/clients/AuthFetch.ts#property:AuthPeer.supportsMutualAuth:1",
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.PeerState.supportsMutualAuth",
-      "javaSignature": "public Boolean supportsMutualAuth;",
+      "javaSignature": "public Object supportsMutualAuth = Undefined.INSTANCE;",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
       "review": "reviewed",
       "implementationStatus": "source-present-verified",
