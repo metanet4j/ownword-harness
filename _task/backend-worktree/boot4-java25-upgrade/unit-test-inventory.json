@@ -21,7 +21,7 @@
     },
     {
       "repository": "metanet4j-base",
-      "head": "6e16cfa9e838f226ebbb5382203a199d1391da46",
+      "head": "bae7eb619956a2ff651863dcb1fe0c17b3c3c14a",
       "modules": [
         {
           "path": ".",
@@ -166,6 +166,25 @@
                 }
               ],
               "classificationReason": "只调用本地 AIP/BAP 计算，无 I/O；现有用例缺断言，U1 修复"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/base/dto/TxUtxoDtoTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "coinbaseOutputsAreIdentifiedByTransactionAndIndex",
+                  "returnType": "void",
+                  "line": 13,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sameOutpointHasSymmetricEqualityAndHashCode",
+                  "returnType": "void",
+                  "line": 26,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "UTXO outpoint 相等性与 HashSet 行为，本地纯计算"
             }
           ],
           "classificationReviewed": true,
