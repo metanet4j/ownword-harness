@@ -32405,7 +32405,7 @@
     {
       "id": "src/wallet/substrates/HTTPWalletWire.ts#property:HTTPWalletWire.originator:1",
       "java": "com.metanet4j.bsv.wallet.substrates.HTTPWalletWire#originator",
-      "javaSignature": "public String originator;",
+      "javaSignature": "public Object originator;",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
       "review": "reviewed",
       "evidence": [
@@ -35695,7 +35695,7 @@
     {
       "id": "src/wallet/WalletClient.ts#method:WalletClient.connectToSubstrate:1",
       "java": "com.metanet4j.bsv.wallet.WalletClient#connectToSubstrate",
-      "javaSignature": "public CompletableFuture<Void> connectToSubstrate() {",
+      "javaSignature": "public CompletableFuture<Undefined> connectToSubstrate() {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
       "review": "reviewed",
       "evidence": [
@@ -36018,7 +36018,7 @@
     {
       "id": "src/wallet/WalletClient.ts#property:WalletClient.originator:1",
       "java": "com.metanet4j.bsv.wallet.WalletClient#originator",
-      "javaSignature": "public final String originator;",
+      "javaSignature": "public final Object originator;",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-client",
       "review": "reviewed",
       "evidence": [
