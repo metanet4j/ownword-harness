@@ -544,17 +544,71 @@
       "catalog": ".cache/evidence/mnemonic-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/mnemonic-plan-20260927/mapping.json",
       "input_plan": ".cache/evidence/mnemonic-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/mnemonic-ts-formal-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/mnemonic-ts-formal-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/mnemonic-ts-formal-20260927/manifest.json",
+      "ts_inputs": ".cache/evidence/mnemonic-ts-formal-v2-20260927/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/mnemonic-ts-formal-v2-20260927/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/mnemonic-ts-formal-v2-20260927/manifest.json",
       "ts_report": [
-        ".cache/evidence/mnemonic-ts-formal-20260927/jest.json"
+        ".cache/evidence/mnemonic-ts-formal-v2-20260927/jest.json"
       ],
-      "java_inputs": ".cache/evidence/mnemonic-java-formal-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/mnemonic-java-formal-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/mnemonic-java-formal-20260927/manifest.json",
+      "java_inputs": ".cache/evidence/mnemonic-java-formal-v2-20260927/inputs.jsonl",
+      "java_assertions": ".cache/evidence/mnemonic-java-formal-v2-20260927/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/mnemonic-java-formal-v2-20260927/manifest.json",
       "java_report": [
-        ".cache/evidence/mnemonic-java-formal-20260927/surefire.xml"
+        ".cache/evidence/mnemonic-java-formal-v2-20260927/surefire.xml"
+      ]
+    },
+    {
+      "name": "mnemonic-additional",
+      "catalog": ".cache/evidence/mnemonic-additional-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/mnemonic-additional-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/mnemonic-additional-plan-20260927/input-plan.json",
+      "ts_inputs": ".cache/evidence/mnemonic-additional-ts-formal-20260927/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/mnemonic-additional-ts-formal-20260927/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/mnemonic-additional-ts-formal-20260927/manifest.json",
+      "ts_report": [
+        ".cache/evidence/mnemonic-additional-ts-formal-20260927/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/mnemonic-additional-java-formal-20260927/inputs.jsonl",
+      "java_assertions": ".cache/evidence/mnemonic-additional-java-formal-20260927/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/mnemonic-additional-java-formal-20260927/manifest.json",
+      "java_report": [
+        ".cache/evidence/mnemonic-additional-java-formal-20260927/surefire.xml"
+      ]
+    },
+    {
+      "name": "utils-null",
+      "catalog": ".cache/evidence/utils-null-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/utils-null-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/utils-null-plan-20260927/input-plan.json",
+      "ts_inputs": ".cache/evidence/utils-null-ts-20260927-v2/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/utils-null-ts-20260927-v2/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/utils-null-ts-20260927-v2/manifest.json",
+      "ts_report": [
+        ".cache/evidence/utils-null-ts-20260927-v2/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/utils-null-java-20260927-v2/inputs.jsonl",
+      "java_assertions": ".cache/evidence/utils-null-java-20260927-v2/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/utils-null-java-20260927-v2/manifest.json",
+      "java_report": [
+        ".cache/evidence/utils-null-java-20260927-v2/surefire.xml"
+      ]
+    },
+    {
+      "name": "utils-utf8-misc",
+      "catalog": ".cache/evidence/utils-utf8-misc-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/utils-utf8-misc-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/utils-utf8-misc-plan-20260927/input-plan.json",
+      "ts_inputs": ".cache/evidence/utils-utf8-misc-ts-20260927-v2/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/utils-utf8-misc-ts-20260927-v2/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/utils-utf8-misc-ts-20260927-v2/manifest.json",
+      "ts_report": [
+        ".cache/evidence/utils-utf8-misc-ts-20260927-v2/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/utils-utf8-misc-java-20260927-v2/inputs.jsonl",
+      "java_assertions": ".cache/evidence/utils-utf8-misc-java-20260927-v2/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/utils-utf8-misc-java-20260927-v2/manifest.json",
+      "java_report": [
+        ".cache/evidence/utils-utf8-misc-java-20260927-v2/surefire.xml"
       ]
     }
   ]
