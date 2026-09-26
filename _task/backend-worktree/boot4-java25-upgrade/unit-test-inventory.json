@@ -313,7 +313,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "986fdddc12ec21163e75d5ff3a86d795f1b6e892",
+      "head": "5ef3f2cdf844443824fcf5f70288fc320175ca65",
       "modules": [
         {
           "path": ".",
@@ -781,6 +781,31 @@
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/crypto/EciesContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "aesCbcMatchesThePlatformPkcs5Cipher",
+                  "returnType": "void",
+                  "line": 21,
+                  "classification": "unit"
+                },
+                {
+                  "name": "explicitEphemeralKeyProducesAuthenticatedRoundTrip",
+                  "returnType": "void",
+                  "line": 38,
+                  "classification": "unit"
+                },
+                {
+                  "name": "randomEphemeralKeyAndTamperingAreHandled",
+                  "returnType": "void",
+                  "line": 56,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "平台 AES/SHA-512 对照、固定和随机 ECIES 临时密钥、篡改检测；不联网"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/crypto/MasterPrivateKeyTest.java",
