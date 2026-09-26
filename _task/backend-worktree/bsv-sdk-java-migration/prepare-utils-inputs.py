@@ -28,6 +28,9 @@ GROUPS = {
     'utf8-misc': ('', 24, 35),
     'utf8-bounds': ('toUTF8 bounds checks ', 3, 6),
     'diagnostic': ('utils formats unknown diagnostic values ', 1, 15),
+    'base58-decode': ('utils base58 to binary ', 4, 6),
+    'base58-check': ('utils base58check encoding and decoding ', 4, 22),
+    'point-infinity': ('Point.encode infinity handling ', 3, 6),
     'remaining': ('', 56, 116),
 }
 MISC_NAMES = {
