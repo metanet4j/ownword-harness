@@ -28203,9 +28203,10 @@
     {
       "id": "src/transaction/TransactionInput.ts#property:TransactionInput.sourceTransaction:1",
       "java": "com.metanet4j.bsv.transaction.TransactionInput#sourceTransaction",
-      "javaSignature": "public Transaction sourceTransaction;",
+      "javaSignature": "public Object sourceTransaction = Undefined.INSTANCE;",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-base",
       "review": "reviewed",
+      "note": "保留缺省 undefined、显式 null 或 Transaction；txidOnly 依赖回填可能写入真实 Undefined.INSTANCE。",
       "evidence": [
         "src/transaction/TransactionInput.ts:54",
         "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/TransactionInput.java:8"
