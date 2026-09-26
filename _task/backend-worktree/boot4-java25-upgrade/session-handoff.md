@@ -32,8 +32,10 @@ U2 BAP 生命周期子项已提交 sdk `7c030d3`。签名密钥轮换、对象�
 
 U2 BAP KeyBag 子项已提交 sdk `12f2c70`。根／当前／支付／Ord 密钥及公钥查找有断言；公钥查找返回 `null` 缺陷先红后绿。最新 SDK 隔离单元基线 65/0/0/0，LINE 789/1985、BRANCH 193/512、METHOD 196/455，证据 `evidence/20260926T092920Z/`；`BapProviderKeyBag` 逐类无缺口。
 
+U2 BAP 路径子项已提交 sdk `451db1d`。固定高位十六进制片段与 hardened 开关有断言；`Integer.parseInt` 无法处理无符号数的缺陷先红后绿。最新 SDK 隔离单元基线 66/0/0/0，LINE 798/1985、BRANCH 199/512、METHOD 197/455，证据 `evidence/20260926T093336Z/`。
+
 ## 下一步
 
-U2 继续从 SDK BAP、交易、脚本公开 API 补单元测试。最新缺口按 `evidence/20260926T092920Z/metanet4j-sdk/metanet4j-sdk/unit/jacoco-unit/jacoco.xml` 排序：Sigma 194 行、BsocialDataLockBuilder 128 行、BobHelper 128 行等。每完成一个行为项提交；严格验收须逐类 LINE/BRANCH/METHOD 100%，完成后继续 U3。
+U2 继续从 SDK BAP、交易、脚本公开 API 补单元测试。最新缺口按 `evidence/20260926T093336Z/metanet4j-sdk/metanet4j-sdk/unit/jacoco-unit/jacoco.xml` 排序：Sigma 194 行、BsocialDataLockBuilder 128 行、BobHelper 128 行等。每完成一个行为项提交；严格验收须逐类 LINE/BRANCH/METHOD 100%，完成后继续 U3。
 
 集成测试运行前核对 `infra/README-*.md` 连接参数、`docker logs`、应用日志和 Surefire XML，宿主提权运行。当前 `EsTest` 会删除固定索引、`DefaultCompleteTxFactory` 硬编码广播；未隔离前不运行这些历史实连用例。

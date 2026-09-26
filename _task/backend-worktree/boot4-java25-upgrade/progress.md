@@ -35,6 +35,8 @@ U2 BAP 生命周期子项提交 `7c030d3`：签名密钥轮换、按身份／签
 
 U2 BAP KeyBag 子项提交 `12f2c70`：根／当前签名密钥、支付及 Ord 密钥按公钥哈希检索；有效公钥以前返回 `null`，现转公钥哈希查找，先红后绿。SDK 隔离单元基线 65/0/0/0，LINE 789/1985、BRANCH 193/512、METHOD 196/455；`BapProviderKeyBag` 逐类无覆盖缺口，证据 `evidence/20260926T092920Z/`。
 
+U2 BAP 路径子项提交 `451db1d`：固定十六进制片段验证高位无符号数和 hardened 开关；原 `Integer.parseInt` 对 `80000000` 抛 `NumberFormatException`，改 `Long.parseLong` 后通过。SDK 隔离单元基线 66/0/0/0，LINE 798/1985、BRANCH 199/512、METHOD 197/455，证据 `evidence/20260926T093336Z/`。
+
 ## 仓库与工作区
 
 四子仓库沿用 `feature/java25`，不推送。parent JaCoCo 配置提交 `4112a48`，sdk 测试分类提交 `2577406`，component 测试分类提交 `de1f59f`。ownword 主仓既有 `AGENTS.md`、standard 规范及技能文件的无关改动保留，不纳入本任务提交。

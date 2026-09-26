@@ -313,7 +313,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "12f2c700393848e94ccb38712d4ca9b540979eae",
+      "head": "451db1d70955bb90070765f674a9161050ee21fd",
       "modules": [
         {
           "path": ".",
@@ -735,9 +735,15 @@
                   "returnType": "void",
                   "line": 53,
                   "classification": "unit"
+                },
+                {
+                  "name": "signingPathHandlesUnsignedHexChunksAndHardening",
+                  "returnType": "void",
+                  "line": 76,
+                  "classification": "unit"
                 }
               ],
-              "classificationReason": "BAP 本地密钥轮换、重建和地址反查；包含成功、边界与失败路径"
+              "classificationReason": "BAP 本地密钥轮换、重建、地址反查和无符号 hex 签名路径；包含成功、边界与失败路径"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseTest.java",
