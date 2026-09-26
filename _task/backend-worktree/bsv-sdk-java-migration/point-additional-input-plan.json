@@ -1,0 +1,987 @@
+{
+  "0d7dce9d24b581c2db7924a47e70f7d4b7cd3b108773c5d1e84e33b21ae18c45": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:17:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:17:7:assertion": "src/primitives/__tests/Point.additional.test.ts:17:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "10dae284ae668e49de6d19a36137500d187a90d4e90916e90e307e458f74bf8e": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005",
+      "call-0006",
+      "call-0007",
+      "call-0008",
+      "call-0009",
+      "call-0010",
+      "call-0011"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:25:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:26:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:25:7:assertion": "src/primitives/__tests/Point.additional.test.ts:25:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:26:7:assertion": "src/primitives/__tests/Point.additional.test.ts:26:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "bc5794a340cac4cb32e61a25df22b37fe960502cca8f8e03e5b2c26510b30265": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005",
+      "call-0006"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:34:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:34:7:assertion": "src/primitives/__tests/Point.additional.test.ts:34:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "c4be16049f919f3bc41f096b2b139ed3fa3efb4f080d3ae06c88655842b5e34d": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:45:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:47:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:45:7:assertion": "src/primitives/__tests/Point.additional.test.ts:45:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:47:7:assertion": "src/primitives/__tests/Point.additional.test.ts:47:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "86f82cd625eb151a1d2629dbc4104f0786aab5c4e90e3f84aefbc108604361ca": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005",
+      "call-0006"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:68:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:68:7:assertion": "src/primitives/__tests/Point.additional.test.ts:68:7:assertion"
+    },
+    "loopSamples": {
+      "src/primitives/__tests/Point.additional.test.ts:53:7:loop": [
+        "call-0001"
+      ]
+    }
+  },
+  "a7ae3b6d77fd1e294592924afbb48e0e056e2d94b7bf37c0ad03a697d234b90e": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005",
+      "call-0006",
+      "call-0007",
+      "call-0008",
+      "call-0009",
+      "call-0010",
+      "call-0011",
+      "call-0012",
+      "call-0013",
+      "call-0014",
+      "call-0015",
+      "call-0016",
+      "call-0017",
+      "call-0018"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:90:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:90:7:assertion": "src/primitives/__tests/Point.additional.test.ts:90:7:assertion"
+    },
+    "loopSamples": {
+      "src/primitives/__tests/Point.additional.test.ts:74:7:loop": [
+        "call-0001",
+        "call-0004",
+        "call-0007",
+        "call-0010",
+        "call-0013"
+      ]
+    }
+  },
+  "28dbcc5e52bdcc93250593f242dd2b99b6c04abd0ec0f3cf0658ec809ebb1525": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:104:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:104:7:assertion": "src/primitives/__tests/Point.additional.test.ts:104:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "1450b222978e3c339500bb18ebe81ab26f32cd7caaa6aff229dae6b67e98cebe": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:117:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:117:7:assertion": "src/primitives/__tests/Point.additional.test.ts:117:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "396143f97ec0d14735b730c7043b3ccc6fd7cc9bc9b660f742c7b27f99b78324": {
+    "sampleIds": [
+      "call-0001"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:122:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:122:7:assertion": "src/primitives/__tests/Point.additional.test.ts:122:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "63c6a19008fa6be7c3fb140bd36a485337f013980d1ecd55a7ad2d1a4852ac23": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:132:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:132:7:assertion": "src/primitives/__tests/Point.additional.test.ts:132:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "ce20e6122fe1945d9cca5eb016a919528c586a1258ee2573770479f6293723d2": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:144:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:144:7:assertion": "src/primitives/__tests/Point.additional.test.ts:144:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "81ffa2d1bac13481a979c5127073e912c7194bc72193aa8be7d1957769910c5f": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005",
+      "call-0006",
+      "call-0007"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:153:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:153:7:assertion": "src/primitives/__tests/Point.additional.test.ts:153:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "56292b5a5b0b60b1002353d8e69f8a9fdf1bd6a302526489a0b77bc5edc28b41": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005",
+      "call-0006"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:160:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:160:7:assertion": "src/primitives/__tests/Point.additional.test.ts:160:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5a6ddda36ee78047cac57703c7a5ea39cee219bd71d81305194db3073fc63c59": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005",
+      "call-0006"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:167:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:167:7:assertion": "src/primitives/__tests/Point.additional.test.ts:167:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "7e3bad7157f070cf1c9f2d3b53eeeba30d574f563da2b1b10b127d913967ea8f": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:179:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:179:7:assertion": "src/primitives/__tests/Point.additional.test.ts:179:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "3657077aaeb12d56494b1af278dcc7b1f4eb808188ba914b7af4b6976a6a5237": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:187:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:187:7:assertion": "src/primitives/__tests/Point.additional.test.ts:187:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "807e68a6df6bd1d2e17f4005e4f7bb56b837be94ff9c7ef70288e6067c5f6abb": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:194:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:194:7:assertion": "src/primitives/__tests/Point.additional.test.ts:194:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "17426519eb61980402cbb6e47c3854be3851105bfae27bda31009c797d036654": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:201:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:201:7:assertion": "src/primitives/__tests/Point.additional.test.ts:201:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "bb2532544bf4c7de13911a12761f4a896098702885a1fb176de4cc91c896e687": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:211:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:211:7:assertion": "src/primitives/__tests/Point.additional.test.ts:211:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "6ce9fa9c47c814dbbd036f41420d8a150688f42c2e25d26c5941065fc372641b": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:216:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:216:7:assertion": "src/primitives/__tests/Point.additional.test.ts:216:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "2c95ccb8e19e9fa98c241309fe6d0e51c072772982dc3fe8d375805d0a2c7635": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005",
+      "call-0006",
+      "call-0007",
+      "call-0008",
+      "call-0009",
+      "call-0010",
+      "call-0011"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:236:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:237:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:238:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:239:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:240:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:242:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:236:7:assertion": "src/primitives/__tests/Point.additional.test.ts:236:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:237:7:assertion": "src/primitives/__tests/Point.additional.test.ts:237:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:238:7:assertion": "src/primitives/__tests/Point.additional.test.ts:238:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:239:7:assertion": "src/primitives/__tests/Point.additional.test.ts:239:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:240:7:assertion": "src/primitives/__tests/Point.additional.test.ts:240:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:242:7:assertion": "src/primitives/__tests/Point.additional.test.ts:242:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "fe000431ba8191351c2dc4899c3d00ccdce77e60caf4b1b566f7af62ea4770ba": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:255:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:255:7:assertion": "src/primitives/__tests/Point.additional.test.ts:255:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "cd64aa2fbe0e7889623297bb2bb5556701053edef4f1c8fbc444b96c1aa5b4c0": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:260:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:260:7:assertion": "src/primitives/__tests/Point.additional.test.ts:260:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "dcfbf7d7e08d34f19100795db9fa85d96aa29d39321af2173b8294bc39d991cb": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:266:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:268:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:266:7:assertion": "src/primitives/__tests/Point.additional.test.ts:266:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:268:7:assertion": "src/primitives/__tests/Point.additional.test.ts:268:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "98ff6a8c9d68267bfb8e8bbaba9c166ed30a66533b35bb4c218dc77e196a0536": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:274:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:275:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:274:7:assertion": "src/primitives/__tests/Point.additional.test.ts:274:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:275:7:assertion": "src/primitives/__tests/Point.additional.test.ts:275:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8d2decc7fc6cf8eb62c6b34da79a4d7189f5a25c9fbcb293371c2ecd0b32457e": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:281:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:282:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:281:7:assertion": "src/primitives/__tests/Point.additional.test.ts:281:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:282:7:assertion": "src/primitives/__tests/Point.additional.test.ts:282:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "e6f7b0efdd54b94ea6840a9e7c3df0b66713914e97a8366080ee1b85c0a8ebc3": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:292:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:292:7:assertion": "src/primitives/__tests/Point.additional.test.ts:292:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "247519256df9b7b23338c65c8daff87ef9f0994280e0bc076d3ff142d5391b30": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:298:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:299:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:298:7:assertion": "src/primitives/__tests/Point.additional.test.ts:298:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:299:7:assertion": "src/primitives/__tests/Point.additional.test.ts:299:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "9d5f50fc88677a435e2a7e7ace2c8e8cdda68dca339dda931f2673a12c6b15e6": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:311:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:311:7:assertion": "src/primitives/__tests/Point.additional.test.ts:311:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "62108597a307fd2f4dc900d8aedec525700c0db168746b888e4e53edb5a2eb83": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:318:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:318:7:assertion": "src/primitives/__tests/Point.additional.test.ts:318:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "e8ec763fc7f91ae5e2109394149bef8a006b3b41b6febbd3a8a3d57d98dbee96": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:325:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:325:7:assertion": "src/primitives/__tests/Point.additional.test.ts:325:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "adfb80d4a2e913814b8e88b869487906f04d93620252f30752133f9d2716a4a6": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:332:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:332:7:assertion": "src/primitives/__tests/Point.additional.test.ts:332:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "a6b4659beea6876d6e50bac44b3e3b6efa2562727e246dbe74475afba7eb5e72": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:343:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:343:7:assertion": "src/primitives/__tests/Point.additional.test.ts:343:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "b564f1e3e3450f47441e96a77ea3e0d5afdfff6c7e62c2fa9f90474f5d1db34f": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:349:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:350:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:349:7:assertion": "src/primitives/__tests/Point.additional.test.ts:349:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:350:7:assertion": "src/primitives/__tests/Point.additional.test.ts:350:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "e5d4b1f691df7c250e9f254b06c048f1eb11d3f92e89c78c2704ee7710c4a1a8": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:360:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:360:7:assertion": "src/primitives/__tests/Point.additional.test.ts:360:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "294d9a6630bd94e76f0f3e6a6898cde5bbccbf4aa2c0ad787069829f9bc0d49e": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:366:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:367:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:366:7:assertion": "src/primitives/__tests/Point.additional.test.ts:366:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:367:7:assertion": "src/primitives/__tests/Point.additional.test.ts:367:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "cdc767be27184771b7be24388b891c56be66cb9676303e3ae1b8ea33be42cca3": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:375:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:375:7:assertion": "src/primitives/__tests/Point.additional.test.ts:375:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "c4c925bafd66b14c462adcb5dc82a8a3f63f0102e73b056d94af97de2eef304d": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:386:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:386:7:assertion": "src/primitives/__tests/Point.additional.test.ts:386:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "f86b7ff21b853386d4fba83d8b3114825708dbf66616055c4b0e5c3f904e5fd8": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005",
+      "call-0006"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:393:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:393:7:assertion": "src/primitives/__tests/Point.additional.test.ts:393:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5039158a7cd685f7bfd65faac7db508ef0254d63cbab5a9fed9429beeac46389": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:403:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:404:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:403:7:assertion": "src/primitives/__tests/Point.additional.test.ts:403:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:404:7:assertion": "src/primitives/__tests/Point.additional.test.ts:404:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "4905b4b6a0df96f57cd1020121599d1a3e4f27f45aa0a8a93f2c99f94b35e8e2": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:415:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:415:7:assertion": "src/primitives/__tests/Point.additional.test.ts:415:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "cf66ff984e407a44bf4a154cd1082272e2ebe3a7e0fdd04517650396172aae3b": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:421:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:421:7:assertion": "src/primitives/__tests/Point.additional.test.ts:421:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "d3944abe79230987abe28b8c17e5ec605cb3a233d910e517c3131f60ee67783e": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005",
+      "call-0006",
+      "call-0007"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:429:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:429:7:assertion": "src/primitives/__tests/Point.additional.test.ts:429:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "ab57bb8f7ba567d8ab4b996974d69ed17bd1b66cf7574aa208b7c01703f316a0": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:435:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:435:7:assertion": "src/primitives/__tests/Point.additional.test.ts:435:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "05e6d408337ba40345111643e756f1450ea5d45c2fffa2d96f8be08ccee7bdeb": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:441:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:441:7:assertion": "src/primitives/__tests/Point.additional.test.ts:441:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "a84217e513ed49b5e443051047c0fd509429f9c20ade66dbfcaa6b4f839b6404": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:447:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:447:7:assertion": "src/primitives/__tests/Point.additional.test.ts:447:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "70d58cd782ec3b41430883eadf9a6c9a79ac0ec9040a339add567beec9cc72f1": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:458:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:458:7:assertion": "src/primitives/__tests/Point.additional.test.ts:458:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "821d12eb63752216258c609bbf0f35be7d86780e65071d5b8b8f298fb4e8b9e1": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005",
+      "call-0006",
+      "call-0007"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:465:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:465:7:assertion": "src/primitives/__tests/Point.additional.test.ts:465:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8834e9efed166a0468daa72b0c5e4fe6e0585a318eebfdaae5aca181bd7ae8df": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005",
+      "call-0006",
+      "call-0007",
+      "call-0008"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:471:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:474:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:471:7:assertion": "src/primitives/__tests/Point.additional.test.ts:471:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:474:7:assertion": "src/primitives/__tests/Point.additional.test.ts:474:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "957fca1ef6d3597fed9627b60b26a46ade15591895d799659552b3fa32c9be28": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:484:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:484:7:assertion": "src/primitives/__tests/Point.additional.test.ts:484:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "0b81c861af501dbabec5bef924e3b6342d3e7e6435b3fb5252aea656aaf6405f": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:490:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:490:7:assertion": "src/primitives/__tests/Point.additional.test.ts:490:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "228d7c59d7adb1743055a5664f6d27ad5b0e5ba505b1e44c49c2ab651e3e9fcd": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:496:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:496:7:assertion": "src/primitives/__tests/Point.additional.test.ts:496:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "d888dff72d7c90356f4d548d501103f664ec8f7cebaf60bdc4b06d8f3ccd55ea": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:507:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:507:7:assertion": "src/primitives/__tests/Point.additional.test.ts:507:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5df23e08e2450ce7c2469bcd0d8f248d9cd833bbc448a0251eed1726a427f5c4": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:514:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:514:7:assertion": "src/primitives/__tests/Point.additional.test.ts:514:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "b0eb81a357d751a4d1a8c254b228365592aa63096265dfa469400b83d65b1ecb": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:529:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:529:7:assertion": "src/primitives/__tests/Point.additional.test.ts:529:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "35051d10d3d800659de70cb51b4212ff9dc364e52ee693540a6bfc37aa1da618": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:554:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:555:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:556:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:554:7:assertion": "src/primitives/__tests/Point.additional.test.ts:554:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:555:7:assertion": "src/primitives/__tests/Point.additional.test.ts:555:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:556:7:assertion": "src/primitives/__tests/Point.additional.test.ts:556:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8588d6d615b33023f5694e127b2970aad1f952e36edd850f2ea86053764d6e06": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:566:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:567:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:568:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:569:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:566:7:assertion": "src/primitives/__tests/Point.additional.test.ts:566:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:567:7:assertion": "src/primitives/__tests/Point.additional.test.ts:567:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:568:7:assertion": "src/primitives/__tests/Point.additional.test.ts:568:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:569:7:assertion": "src/primitives/__tests/Point.additional.test.ts:569:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "ad605d7bad957601fdc16149ac4754a2e6b22fad691369e045639c051b38a998": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:566:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:567:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:568:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:569:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:566:7:assertion": "src/primitives/__tests/Point.additional.test.ts:566:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:567:7:assertion": "src/primitives/__tests/Point.additional.test.ts:567:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:568:7:assertion": "src/primitives/__tests/Point.additional.test.ts:568:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:569:7:assertion": "src/primitives/__tests/Point.additional.test.ts:569:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "d508e1d51e4591c628ce0332beae937de5a24137ff2ee488bbb6378744bacd64": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:566:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:567:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:568:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:569:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:566:7:assertion": "src/primitives/__tests/Point.additional.test.ts:566:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:567:7:assertion": "src/primitives/__tests/Point.additional.test.ts:567:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:568:7:assertion": "src/primitives/__tests/Point.additional.test.ts:568:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:569:7:assertion": "src/primitives/__tests/Point.additional.test.ts:569:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "077bff89740cee829fa8acda37d18253107dc80b55155dcd925b455750013498": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/Point.additional.test.ts:576:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:577:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/Point.additional.test.ts:576:7:assertion": "src/primitives/__tests/Point.additional.test.ts:576:7:assertion",
+      "src/primitives/__tests/Point.additional.test.ts:577:7:assertion": "src/primitives/__tests/Point.additional.test.ts:577:7:assertion"
+    },
+    "loopSamples": {}
+  }
+}
