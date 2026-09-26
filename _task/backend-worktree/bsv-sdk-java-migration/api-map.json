@@ -30895,7 +30895,7 @@
         "src/compat/Mnemonic.ts:79",
         "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:61"
       ],
-      "note": "缺失、零或 NaN 位数默认 128；非 32 倍数和小于 128 分别报错。 Java 入口为 loadRandom，对应 TS 实例声明。"
+      "note": "缺失、零或 NaN 位数默认 128；非 32 倍数和小于 128 分别报错。 Java 入口为 loadRandom，对应 TS 实例声明；保留 Number 签名，Object 重载仅接受 Undefined.INSTANCE、null 或 Number 并委派，显式 undefined 原测试真实传入 Undefined.INSTANCE。"
     },
     {
       "id": "src/compat/Mnemonic.ts#method:Mnemonic.fromRandom:2",
