@@ -8,16 +8,19 @@ import shutil
 import subprocess
 TASK = Path(__file__).resolve().parent
 SDK = TASK.parents[2]/'reference/ts-stack/packages/sdk'
-SOURCE = 'src/compat/__tests/Mnemonic.test.ts'
+VARIANTS = {'original': ('src/compat/__tests/Mnemonic.test.ts', 'MnemonicTest', 'mnemonic'),
+            'additional': ('src/compat/__tests/Mnemonic.additional.test.ts', 'MnemonicAdditionalTest', 'mnemonic-additional')}
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('side', choices=('ts','java'))
+    parser.add_argument('--variant', choices=VARIANTS, default='original')
     parser.add_argument('clean', nargs='?')
     parser.add_argument('test', nargs='?')
     for name in ('catalog','mapping','report','replay'):
         parser.add_argument('--'+name, type=Path, required=True)
     args = parser.parse_args()
+    source, java_class, prefix = VARIANTS[args.variant]
     if args.side != os.environ.get('EVIDENCE_SIDE') or not os.environ.get('EVIDENCE_RUN_ID'):
         parser.error('缺少本轮 capture 侧别或 runId')
     if args.side == 'java' and (args.clean,args.test) != ('clean','test'):
@@ -28,19 +31,19 @@ def main():
     env = dict(os.environ)
     if args.side == 'java':
         command = [str(TASK/'mvn.sh'), '-f', str(TASK/'metanet4j-bsv-sdk/pom.xml'), 'clean','test',
-                   '-Dtest=MnemonicTest', '-Dmigration.mnemonic.corpus='+str(args.replay.resolve()),
+                   '-Dtest='+java_class, '-Dmigration.'+prefix+'.corpus='+str(args.replay.resolve()),
                    '-Dmigration.parity.java.output='+str(raw)]
         subprocess.run(command, cwd=TASK, env=env, check=True)
-        shutil.copyfile(TASK/'metanet4j-bsv-sdk/target/surefire-reports/TEST-com.metanet4j.bsv.compat.MnemonicTest.xml', report)
+        shutil.copyfile(TASK/('metanet4j-bsv-sdk/target/surefire-reports/TEST-com.metanet4j.bsv.compat.'+java_class+'.xml'), report)
     else:
         if args.clean or args.test: parser.error('TS 不接受 Java 阶段参数')
         inputs = report.parent/'inputs.raw.jsonl'
         env.update(MIGRATION_MNEMONIC_TS_OBSERVATIONS=str(inputs),
-                   MIGRATION_MNEMONIC_RANDOM=str(TASK/'mnemonic-random-inputs.json'),
+                   MIGRATION_MNEMONIC_RANDOM=str(TASK/(prefix+'-random-inputs.json')),
                    MIGRATION_PARITY_TS_OBSERVATIONS=str(raw),
                    MIGRATION_NETWORK_LOG=str(report.parent/'network.jsonl'))
         command = [str(TASK/'pnpm.sh'), '--dir', str(SDK), 'exec','jest','--runInBand','--watchman=false',
-                   '--runTestsByPath',SOURCE,'--setupFilesAfterEnv',str(TASK/'ts-offline-guard.cjs'),
+                   '--runTestsByPath',source,'--setupFilesAfterEnv',str(TASK/'ts-offline-guard.cjs'),
                    str(TASK/'capture-mnemonic-inputs.cjs'),str(TASK/'capture-parity.cjs'),
                    '--json','--outputFile='+str(report)]
         subprocess.run(command, cwd=TASK, env=env, check=True)

@@ -8,6 +8,7 @@ if (!output) throw new Error('缺少 MIGRATION_MNEMONIC_TS_OBSERVATIONS')
 const testPath = expect.getState().testPath
 const sdk = path.resolve(path.dirname(testPath), '../../..')
 const sourceFile = path.relative(sdk, testPath).replaceAll(path.sep, '/')
+const testFileName = path.basename(testPath)
 const mnemonicPath = path.join(sdk, 'src/compat/Mnemonic.ts')
 const randomPath = path.join(sdk, 'src/primitives/Random.ts')
 const wordlistPath = path.join(sdk, 'src/compat/bip-39-wordlist-en.ts')
@@ -47,8 +48,8 @@ function value (item) {
 function directSource () {
   const frames = new Error().stack.split('\n')
   const firstCaller = frames.slice(2).find(line => !line.includes('capture-mnemonic-inputs.cjs'))
-  if (!firstCaller || !firstCaller.includes('Mnemonic.test.ts:')) return null
-  const match = firstCaller.match(/Mnemonic\.test\.ts:(\d+):\d+/)
+  if (!firstCaller || !firstCaller.includes(testFileName + ':')) return null
+  const match = firstCaller.match(/:(\d+):\d+\)?$/)
   return match ? { file: sourceFile, line: Number(match[1]) } : null
 }
 
@@ -86,7 +87,8 @@ jest.doMock(randomPath, () => {
     }
     const bytes = entry ? Array.from(Buffer.from(entry.preState.generatedBytesHex, 'hex')) : original.default(length)
     if (bytes.length !== length) throw new Error('冻结随机输入字节数错误')
-    const source = new Error().stack.match(/Mnemonic\.test\.ts:(\d+):\d+/)
+    const frame = new Error().stack.split('\n').find(line => line.includes(testFileName + ':'))
+    const source = frame?.match(/:(\d+):\d+\)?$/)
     observe('Random', [value(length)], { generatedBytesHex: Buffer.from(bytes).toString('hex') },
       { file: sourceFile, line: source ? Number(source[1]) : 0 })
     return bytes
@@ -99,7 +101,7 @@ jest.doMock(wordlistPath, () => {
     get (target, property) {
       const result = Reflect.get(target, property, target)
       const source = directSource()
-      if (property === 'value' && source?.line === 18) observe('wordList.value', [],
+      if (testFileName === 'Mnemonic.test.ts' && property === 'value' && source?.line === 18) observe('wordList.value', [],
         { valueLength: result.length, space: target.space }, source)
       return result
     }

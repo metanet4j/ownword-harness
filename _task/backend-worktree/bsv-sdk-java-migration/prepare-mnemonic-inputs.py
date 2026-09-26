@@ -5,7 +5,8 @@ from collections import defaultdict
 import json
 from pathlib import Path
 TASK = Path(__file__).resolve().parent
-SOURCE = 'src/compat/__tests/Mnemonic.test.ts'
+VARIANTS = {'original': ('src/compat/__tests/Mnemonic.test.ts', 50, 258, 158, 7),
+            'additional': ('src/compat/__tests/Mnemonic.additional.test.ts', 8, 21, 10, 3)}
 RULE = 'mnemonic-defined-object-v1'
 
 def write(path, value):
@@ -14,20 +15,22 @@ def write(path, value):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--variant', choices=VARIANTS, default='original')
     for name in ('raw', 'directory', 'replay'):
         parser.add_argument('--' + name, type=Path, required=True)
     args = parser.parse_args()
+    source_file, case_count, input_count, assertion_count, random_count = VARIANTS[args.variant]
     catalog = json.loads((TASK/'module-tests.json').read_text())
-    source = next(f for f in catalog['files'] if f['path'] == SOURCE)
+    source = next(f for f in catalog['files'] if f['path'] == source_file)
     mapping = json.loads((TASK/'test-map.json').read_text())
     ids = {c['id'] for c in source['cases']}
     mapped = {c['id']: c for c in mapping['cases'] if c['id'] in ids}
     names = {' '.join(c['names']): c['id'] for c in source['cases']}
-    assert len(names) == len(mapped) == 50
+    assert len(names) == len(mapped) == case_count
     groups = defaultdict(list)
     for line in args.raw.read_text().splitlines():
         row = json.loads(line)
-        assert row['source']['file'] == SOURCE and row['occurrence'] == 1
+        assert row['source']['file'] == source_file and row['occurrence'] == 1
         groups[names[row['test']]].append(row)
     assert set(groups) == ids
     plan, replay = {}, []
@@ -47,11 +50,11 @@ def main():
             entry['sampleIds'].append(sample)
             replay.append({'caseId': key, 'javaMethod': method, 'sampleId': sample, 'value': row})
         if method == 'case47':
-            assert len(sites) == 1 and len(rows) == 72
+            assert len(sites) == 1 and len(rows) == random_count2
             assert sum(r['method']=='fromEntropy' for r in rows) == 24
         plan[key] = entry
-    assert len(replay) == 258 and sum(len(p['assertionIds']) for p in plan.values()) == 158
-    assert sum(r['value']['method']=='Random' for r in replay) == 7
+    assert len(replay) == input_count and sum(len(p['assertionIds']) for p in plan.values()) == assertion_count
+    assert sum(r['value']['method']=='Random' for r in replay) == random_count
     sites = {s['id'] for s in source['sites']}
     write(args.directory/'catalog.json', dict(catalog, files=[source], partialImplementationOnly=True))
     write(args.directory/'mapping.json', dict(mapping, cases=list(mapped.values()),
@@ -59,5 +62,6 @@ def main():
     write(args.directory/'input-plan.json', plan)
     args.replay.parent.mkdir(parents=True, exist_ok=True)
     args.replay.write_text(''.join(json.dumps(r, ensure_ascii=False)+'\n' for r in replay))
-    print(json.dumps({'cases':50,'inputs':258,'assertions':158,'randomCalls':7,'vectorLoopIterations':24}))
+    print(json.dumps({'cases':case_count,'inputs':input_count,'assertions':assertion_count,'randomCalls':random_count,
+                      'vectorLoopIterations':24 if args.variant == 'original' else 0}))
 if __name__ == '__main__': main()
