@@ -3368,8 +3368,8 @@
         }
       ],
       "assertionIds": [
-        "src/primitives/__tests/Hash.additional.test.ts:27:7:assertion",
-        "src/primitives/__tests/Hash.additional.test.ts:28:7:assertion"
+        "src/primitives/__tests/Hash.additional.test.ts:52:7:assertion",
+        "src/primitives/__tests/Hash.additional.test.ts:53:7:assertion"
       ]
     },
     {
@@ -3424,7 +3424,8 @@
         }
       ],
       "assertionIds": [
-        "src/primitives/__tests/HMAC.test.ts:64:9:assertion"
+        "src/primitives/__tests/HMAC.test.ts:64:9:assertion",
+        "src/primitives/__tests/HMAC.test.ts:67:9:assertion"
       ]
     },
     {
@@ -3436,6 +3437,7 @@
         }
       ],
       "assertionIds": [
+        "src/primitives/__tests/HMAC.test.ts:64:9:assertion",
         "src/primitives/__tests/HMAC.test.ts:67:9:assertion"
       ]
     },
@@ -3448,6 +3450,7 @@
         }
       ],
       "assertionIds": [
+        "src/primitives/__tests/HMAC.test.ts:64:9:assertion",
         "src/primitives/__tests/HMAC.test.ts:67:9:assertion"
       ]
     },
@@ -3460,6 +3463,7 @@
         }
       ],
       "assertionIds": [
+        "src/primitives/__tests/HMAC.test.ts:64:9:assertion",
         "src/primitives/__tests/HMAC.test.ts:67:9:assertion"
       ]
     },
@@ -3472,6 +3476,7 @@
         }
       ],
       "assertionIds": [
+        "src/primitives/__tests/HMAC.test.ts:64:9:assertion",
         "src/primitives/__tests/HMAC.test.ts:67:9:assertion"
       ]
     },
@@ -73925,11 +73930,8 @@
       "id": "src/primitives/__tests/BigNumber.dhGroup.test.ts:17:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "1e8c977a9cdd9b5e4bd851907916d9463a89218ce0ad7a31a47c917c536baee7",
         "4567a470cc6163c00309d4a8c043bcc141bb7ee863531d9ad4401eb76a8a7a3b",
-        "8275e3fcd1c38c3a77b720b272b8ec3023c1956c8648d80403358523cbefd82c",
-        "9b0b517411abfc60a9251e93b8da170d6bdd231ab023ab49a94fecd7d1fd1946",
-        "f229d8811157137584b17dd430d81059539ded1f967dc10cdc44137df715d184"
+        "9b0b517411abfc60a9251e93b8da170d6bdd231ab023ab49a94fecd7d1fd1946"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -73938,10 +73940,7 @@
       "status": "reviewed",
       "caseIds": [
         "4567a470cc6163c00309d4a8c043bcc141bb7ee863531d9ad4401eb76a8a7a3b",
-        "8275e3fcd1c38c3a77b720b272b8ec3023c1956c8648d80403358523cbefd82c",
-        "9b0b517411abfc60a9251e93b8da170d6bdd231ab023ab49a94fecd7d1fd1946",
-        "eb651f306459688e01bc967000654465f13be6e6174a20eed8522f986f5fdb1a",
-        "f229d8811157137584b17dd430d81059539ded1f967dc10cdc44137df715d184"
+        "9b0b517411abfc60a9251e93b8da170d6bdd231ab023ab49a94fecd7d1fd1946"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -76664,9 +76663,7 @@
       "id": "src/primitives/__tests/DRBG.test.ts:101:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "c35f9a64ede0fa199454fdc3802f9cbdb418743e943c2f254b504e4e38c60afb",
-        "d77c334b876930abdb62f279044877d039b8cd6fb3985d7d1ff7db888d3c94aa"
+        "c35f9a64ede0fa199454fdc3802f9cbdb418743e943c2f254b504e4e38c60afb"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -76674,9 +76671,7 @@
       "id": "src/primitives/__tests/DRBG.test.ts:104:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "a0e152a24b1cd9a4ee7614bd63a7ec7dfe4a1599526f32723911563b4fa939ea",
-        "d77c334b876930abdb62f279044877d039b8cd6fb3985d7d1ff7db888d3c94aa"
+        "a0e152a24b1cd9a4ee7614bd63a7ec7dfe4a1599526f32723911563b4fa939ea"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -76684,9 +76679,7 @@
       "id": "src/primitives/__tests/DRBG.test.ts:112:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "a0e152a24b1cd9a4ee7614bd63a7ec7dfe4a1599526f32723911563b4fa939ea",
-        "d77c334b876930abdb62f279044877d039b8cd6fb3985d7d1ff7db888d3c94aa"
+        "a0e152a24b1cd9a4ee7614bd63a7ec7dfe4a1599526f32723911563b4fa939ea"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -76694,8 +76687,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:120:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "3dcf42ba40e33502826b7f15d442962c2b9f2899aab892eb4f6eb43e372ba8f5",
         "b3494993975f9883caf6231e9a5a030aa1729900a28fd64277b84ee451fc6301"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -76704,8 +76695,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:126:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "3dcf42ba40e33502826b7f15d442962c2b9f2899aab892eb4f6eb43e372ba8f5",
         "b3494993975f9883caf6231e9a5a030aa1729900a28fd64277b84ee451fc6301"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -76714,8 +76703,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:127:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "3dcf42ba40e33502826b7f15d442962c2b9f2899aab892eb4f6eb43e372ba8f5",
         "b3494993975f9883caf6231e9a5a030aa1729900a28fd64277b84ee451fc6301"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -76724,7 +76711,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:130:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "3dcf42ba40e33502826b7f15d442962c2b9f2899aab892eb4f6eb43e372ba8f5",
         "8a55ea5359382054d7bf152c0090b9a2aee991bcba16ff35798a3b0280c1331f"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -76733,7 +76719,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:136:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "276e171d2f866fc12acfaa3301cc0b9502e760b414696da89c97ad0884245c9a",
         "8a55ea5359382054d7bf152c0090b9a2aee991bcba16ff35798a3b0280c1331f"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -76742,7 +76727,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:139:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "276e171d2f866fc12acfaa3301cc0b9502e760b414696da89c97ad0884245c9a",
         "4f77da4d2cfe3593170a22609e7c55668cc69c60f0387e001619e5aec38a667e"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -76761,32 +76745,18 @@
       "caseIds": [
         "0478a7194e24164e06e44eee83c5cc8178d119461cd08f28ac4aa93e7f085cc4",
         "0aaab0d4003bc57d98b2d13d29ab93202648205ec094a299142fc08fb56b3bb8",
-        "0ff55c346b5718c3d2b90e2255c88925b78be06c691017e64737f9c68fa1e1f6",
         "1aecd613b5535c6d925b92777d819c97bac15f81f9291a86e04eb2f4b8b39af5",
-        "235cff60e26c757a8ca86918eab54853cf5f056f313a93aab21c2c2a94c9d2d2",
         "36ecfdbba4fa56c867b06c90fcecb03ac2e81d168e920a057371dd6a6d53e99f",
-        "38b6221d3e7dd444aabcc79e038a24a2032102dce0b4b4b9d9dfd01525c5734a",
         "3a51c7ab4fdec0e539c34ba6ffc9119d178f82549449d1efdb43f2f99523be26",
-        "3ca1e812e82d3c9a90ee76fdc5bd1c800e18a3c51621391c4bb592af956adbe5",
         "3cae9aa2068d821c903cf7856d07f379a1f8af1fcc1a8d9db284e93a4494e7c7",
         "4c2155c89db6d9d1de21e941dd1b72628ff3dd6ca708dca101cc66bf5bc56ebf",
-        "4f77da4d2cfe3593170a22609e7c55668cc69c60f0387e001619e5aec38a667e",
         "59659762ce653a8394f4ab5153cdc71fdbffdf97fdde947369c5f98294c7807f",
-        "6bd1b06b630641a31951f3a5d0ceaaac787caf4553ad8d32c1efbf8cd4f64175",
         "71292348b546fbe50260e91e7577543e3fa34978e187218f7dd7ec7fc6dc8d4b",
         "815d687a457b961303e27f521497e86c7fd3c0a4795ec56d6f5c25e9e596fcb2",
-        "8a127cf09d1b22a26fce1ff2b7775922c89983e3110527af3b22c5792ad34463",
-        "8a55ea5359382054d7bf152c0090b9a2aee991bcba16ff35798a3b0280c1331f",
-        "8c4a321727a8cc61d30cf3934d9fac0185888240fb6e9c25aed971092bcfb7f7",
-        "9fff85f75a1b73e9557c8aa4879ed13656c23f89e464208a13f1ba12679ef6e9",
-        "a0e152a24b1cd9a4ee7614bd63a7ec7dfe4a1599526f32723911563b4fa939ea",
-        "b3494993975f9883caf6231e9a5a030aa1729900a28fd64277b84ee451fc6301",
         "b432ac30f3bce72b304c6ecc3b0da498289d8cfbc14b0a4ca7198f8ae38b8b9f",
         "b69e3c49f6f64e2840f331fd63b97db1285ce289b257ae7349743805d9d1bf1c",
         "ba46f65d9e32cd100d6c4bf1ca7819fd48f3033d9c50c4121b537d0b320578b4",
         "bc28ad06d632a39ae907f3fb90cdf2785f935d1cf1f29d59375ffa6570be9d9a",
-        "c35f9a64ede0fa199454fdc3802f9cbdb418743e943c2f254b504e4e38c60afb",
-        "f0b4d71cf9d0a1a3512dddf424276cd1a9cdd648cd98fc628ff36da3c9436740",
         "fd01ba9cc2ff0f985cd02ea983272bca8c8d1696ed063c67d6aa860a3a8a71ed"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -76795,35 +76765,9 @@
       "id": "src/primitives/__tests/DRBG.test.ts:164:7:loop",
       "status": "reviewed",
       "caseIds": [
-        "0478a7194e24164e06e44eee83c5cc8178d119461cd08f28ac4aa93e7f085cc4",
-        "0aaab0d4003bc57d98b2d13d29ab93202648205ec094a299142fc08fb56b3bb8",
         "0ff55c346b5718c3d2b90e2255c88925b78be06c691017e64737f9c68fa1e1f6",
-        "1aecd613b5535c6d925b92777d819c97bac15f81f9291a86e04eb2f4b8b39af5",
-        "235cff60e26c757a8ca86918eab54853cf5f056f313a93aab21c2c2a94c9d2d2",
-        "36ecfdbba4fa56c867b06c90fcecb03ac2e81d168e920a057371dd6a6d53e99f",
         "38b6221d3e7dd444aabcc79e038a24a2032102dce0b4b4b9d9dfd01525c5734a",
-        "3a51c7ab4fdec0e539c34ba6ffc9119d178f82549449d1efdb43f2f99523be26",
-        "3ca1e812e82d3c9a90ee76fdc5bd1c800e18a3c51621391c4bb592af956adbe5",
-        "3cae9aa2068d821c903cf7856d07f379a1f8af1fcc1a8d9db284e93a4494e7c7",
-        "4c2155c89db6d9d1de21e941dd1b72628ff3dd6ca708dca101cc66bf5bc56ebf",
-        "4f77da4d2cfe3593170a22609e7c55668cc69c60f0387e001619e5aec38a667e",
-        "59659762ce653a8394f4ab5153cdc71fdbffdf97fdde947369c5f98294c7807f",
-        "6bd1b06b630641a31951f3a5d0ceaaac787caf4553ad8d32c1efbf8cd4f64175",
-        "71292348b546fbe50260e91e7577543e3fa34978e187218f7dd7ec7fc6dc8d4b",
-        "815d687a457b961303e27f521497e86c7fd3c0a4795ec56d6f5c25e9e596fcb2",
-        "8a127cf09d1b22a26fce1ff2b7775922c89983e3110527af3b22c5792ad34463",
-        "8a55ea5359382054d7bf152c0090b9a2aee991bcba16ff35798a3b0280c1331f",
-        "8c4a321727a8cc61d30cf3934d9fac0185888240fb6e9c25aed971092bcfb7f7",
-        "9fff85f75a1b73e9557c8aa4879ed13656c23f89e464208a13f1ba12679ef6e9",
-        "a0e152a24b1cd9a4ee7614bd63a7ec7dfe4a1599526f32723911563b4fa939ea",
-        "b3494993975f9883caf6231e9a5a030aa1729900a28fd64277b84ee451fc6301",
-        "b432ac30f3bce72b304c6ecc3b0da498289d8cfbc14b0a4ca7198f8ae38b8b9f",
-        "b69e3c49f6f64e2840f331fd63b97db1285ce289b257ae7349743805d9d1bf1c",
-        "ba46f65d9e32cd100d6c4bf1ca7819fd48f3033d9c50c4121b537d0b320578b4",
-        "bc28ad06d632a39ae907f3fb90cdf2785f935d1cf1f29d59375ffa6570be9d9a",
-        "c35f9a64ede0fa199454fdc3802f9cbdb418743e943c2f254b504e4e38c60afb",
-        "f0b4d71cf9d0a1a3512dddf424276cd1a9cdd648cd98fc628ff36da3c9436740",
-        "fd01ba9cc2ff0f985cd02ea983272bca8c8d1696ed063c67d6aa860a3a8a71ed"
+        "8a127cf09d1b22a26fce1ff2b7775922c89983e3110527af3b22c5792ad34463"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -76833,32 +76777,18 @@
       "caseIds": [
         "0478a7194e24164e06e44eee83c5cc8178d119461cd08f28ac4aa93e7f085cc4",
         "0aaab0d4003bc57d98b2d13d29ab93202648205ec094a299142fc08fb56b3bb8",
-        "0ff55c346b5718c3d2b90e2255c88925b78be06c691017e64737f9c68fa1e1f6",
         "1aecd613b5535c6d925b92777d819c97bac15f81f9291a86e04eb2f4b8b39af5",
-        "235cff60e26c757a8ca86918eab54853cf5f056f313a93aab21c2c2a94c9d2d2",
         "36ecfdbba4fa56c867b06c90fcecb03ac2e81d168e920a057371dd6a6d53e99f",
-        "38b6221d3e7dd444aabcc79e038a24a2032102dce0b4b4b9d9dfd01525c5734a",
         "3a51c7ab4fdec0e539c34ba6ffc9119d178f82549449d1efdb43f2f99523be26",
-        "3ca1e812e82d3c9a90ee76fdc5bd1c800e18a3c51621391c4bb592af956adbe5",
         "3cae9aa2068d821c903cf7856d07f379a1f8af1fcc1a8d9db284e93a4494e7c7",
         "4c2155c89db6d9d1de21e941dd1b72628ff3dd6ca708dca101cc66bf5bc56ebf",
-        "4f77da4d2cfe3593170a22609e7c55668cc69c60f0387e001619e5aec38a667e",
         "59659762ce653a8394f4ab5153cdc71fdbffdf97fdde947369c5f98294c7807f",
-        "6bd1b06b630641a31951f3a5d0ceaaac787caf4553ad8d32c1efbf8cd4f64175",
         "71292348b546fbe50260e91e7577543e3fa34978e187218f7dd7ec7fc6dc8d4b",
         "815d687a457b961303e27f521497e86c7fd3c0a4795ec56d6f5c25e9e596fcb2",
-        "8a127cf09d1b22a26fce1ff2b7775922c89983e3110527af3b22c5792ad34463",
-        "8a55ea5359382054d7bf152c0090b9a2aee991bcba16ff35798a3b0280c1331f",
-        "8c4a321727a8cc61d30cf3934d9fac0185888240fb6e9c25aed971092bcfb7f7",
-        "9fff85f75a1b73e9557c8aa4879ed13656c23f89e464208a13f1ba12679ef6e9",
-        "a0e152a24b1cd9a4ee7614bd63a7ec7dfe4a1599526f32723911563b4fa939ea",
-        "b3494993975f9883caf6231e9a5a030aa1729900a28fd64277b84ee451fc6301",
         "b432ac30f3bce72b304c6ecc3b0da498289d8cfbc14b0a4ca7198f8ae38b8b9f",
         "b69e3c49f6f64e2840f331fd63b97db1285ce289b257ae7349743805d9d1bf1c",
         "ba46f65d9e32cd100d6c4bf1ca7819fd48f3033d9c50c4121b537d0b320578b4",
         "bc28ad06d632a39ae907f3fb90cdf2785f935d1cf1f29d59375ffa6570be9d9a",
-        "c35f9a64ede0fa199454fdc3802f9cbdb418743e943c2f254b504e4e38c60afb",
-        "f0b4d71cf9d0a1a3512dddf424276cd1a9cdd648cd98fc628ff36da3c9436740",
         "fd01ba9cc2ff0f985cd02ea983272bca8c8d1696ed063c67d6aa860a3a8a71ed"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -76867,8 +76797,7 @@
       "id": "src/primitives/__tests/DRBG.test.ts:180:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "38b6221d3e7dd444aabcc79e038a24a2032102dce0b4b4b9d9dfd01525c5734a",
-        "f2f6036718bf5c1cf4e047829463ec86f6d7bacbc75c4593c65a2bcf0146d128"
+        "38b6221d3e7dd444aabcc79e038a24a2032102dce0b4b4b9d9dfd01525c5734a"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -76876,8 +76805,7 @@
       "id": "src/primitives/__tests/DRBG.test.ts:207:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "38b6221d3e7dd444aabcc79e038a24a2032102dce0b4b4b9d9dfd01525c5734a",
-        "9c91b84053d0e785d28856f497d70c3f924adaeaf72ad141ccc66678d36d1b7f"
+        "38b6221d3e7dd444aabcc79e038a24a2032102dce0b4b4b9d9dfd01525c5734a"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -76893,7 +76821,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:232:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "19ac6f825ec7a328670a11daa180d6e2429a92e6ce5d9412fce773ec7721b6e3",
         "8a127cf09d1b22a26fce1ff2b7775922c89983e3110527af3b22c5792ad34463"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -76902,8 +76829,7 @@
       "id": "src/primitives/__tests/DRBG.test.ts:235:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "0ff55c346b5718c3d2b90e2255c88925b78be06c691017e64737f9c68fa1e1f6",
-        "19ac6f825ec7a328670a11daa180d6e2429a92e6ce5d9412fce773ec7721b6e3"
+        "0ff55c346b5718c3d2b90e2255c88925b78be06c691017e64737f9c68fa1e1f6"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -76919,9 +76845,21 @@
       "id": "src/primitives/__tests/DRBG.test.ts:26:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "394aca6b5d18d4424972cee1e5b31f2a281f44ea474e8821e2c81b175de210de",
-        "53f0ab9de9ec478c6928cd1312146ff9e71449683639983b3427872e4ee13c93",
-        "eec11778f51a8fb514725aff8b69beee77e5473f477e06677bc58ed9fb9b0c92"
+        "0478a7194e24164e06e44eee83c5cc8178d119461cd08f28ac4aa93e7f085cc4",
+        "0aaab0d4003bc57d98b2d13d29ab93202648205ec094a299142fc08fb56b3bb8",
+        "1aecd613b5535c6d925b92777d819c97bac15f81f9291a86e04eb2f4b8b39af5",
+        "36ecfdbba4fa56c867b06c90fcecb03ac2e81d168e920a057371dd6a6d53e99f",
+        "3a51c7ab4fdec0e539c34ba6ffc9119d178f82549449d1efdb43f2f99523be26",
+        "3cae9aa2068d821c903cf7856d07f379a1f8af1fcc1a8d9db284e93a4494e7c7",
+        "4c2155c89db6d9d1de21e941dd1b72628ff3dd6ca708dca101cc66bf5bc56ebf",
+        "59659762ce653a8394f4ab5153cdc71fdbffdf97fdde947369c5f98294c7807f",
+        "71292348b546fbe50260e91e7577543e3fa34978e187218f7dd7ec7fc6dc8d4b",
+        "815d687a457b961303e27f521497e86c7fd3c0a4795ec56d6f5c25e9e596fcb2",
+        "b432ac30f3bce72b304c6ecc3b0da498289d8cfbc14b0a4ca7198f8ae38b8b9f",
+        "b69e3c49f6f64e2840f331fd63b97db1285ce289b257ae7349743805d9d1bf1c",
+        "ba46f65d9e32cd100d6c4bf1ca7819fd48f3033d9c50c4121b537d0b320578b4",
+        "bc28ad06d632a39ae907f3fb90cdf2785f935d1cf1f29d59375ffa6570be9d9a",
+        "fd01ba9cc2ff0f985cd02ea983272bca8c8d1696ed063c67d6aa860a3a8a71ed"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -76929,9 +76867,21 @@
       "id": "src/primitives/__tests/DRBG.test.ts:27:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "394aca6b5d18d4424972cee1e5b31f2a281f44ea474e8821e2c81b175de210de",
-        "53f0ab9de9ec478c6928cd1312146ff9e71449683639983b3427872e4ee13c93",
-        "eec11778f51a8fb514725aff8b69beee77e5473f477e06677bc58ed9fb9b0c92"
+        "0478a7194e24164e06e44eee83c5cc8178d119461cd08f28ac4aa93e7f085cc4",
+        "0aaab0d4003bc57d98b2d13d29ab93202648205ec094a299142fc08fb56b3bb8",
+        "1aecd613b5535c6d925b92777d819c97bac15f81f9291a86e04eb2f4b8b39af5",
+        "36ecfdbba4fa56c867b06c90fcecb03ac2e81d168e920a057371dd6a6d53e99f",
+        "3a51c7ab4fdec0e539c34ba6ffc9119d178f82549449d1efdb43f2f99523be26",
+        "3cae9aa2068d821c903cf7856d07f379a1f8af1fcc1a8d9db284e93a4494e7c7",
+        "4c2155c89db6d9d1de21e941dd1b72628ff3dd6ca708dca101cc66bf5bc56ebf",
+        "59659762ce653a8394f4ab5153cdc71fdbffdf97fdde947369c5f98294c7807f",
+        "71292348b546fbe50260e91e7577543e3fa34978e187218f7dd7ec7fc6dc8d4b",
+        "815d687a457b961303e27f521497e86c7fd3c0a4795ec56d6f5c25e9e596fcb2",
+        "b432ac30f3bce72b304c6ecc3b0da498289d8cfbc14b0a4ca7198f8ae38b8b9f",
+        "b69e3c49f6f64e2840f331fd63b97db1285ce289b257ae7349743805d9d1bf1c",
+        "ba46f65d9e32cd100d6c4bf1ca7819fd48f3033d9c50c4121b537d0b320578b4",
+        "bc28ad06d632a39ae907f3fb90cdf2785f935d1cf1f29d59375ffa6570be9d9a",
+        "fd01ba9cc2ff0f985cd02ea983272bca8c8d1696ed063c67d6aa860a3a8a71ed"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -76939,8 +76889,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:33:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "53f0ab9de9ec478c6928cd1312146ff9e71449683639983b3427872e4ee13c93",
-        "638349c88625457f118d13bfbf7583a0bac148ae1831211fffe05756739b6b84",
         "8c4a321727a8cc61d30cf3934d9fac0185888240fb6e9c25aed971092bcfb7f7"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -76949,8 +76897,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:37:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "638349c88625457f118d13bfbf7583a0bac148ae1831211fffe05756739b6b84",
-        "81edc4ed7ff27da6024bf758c626707c057ade3aef36ab73048e1b2102d7583b",
         "8c4a321727a8cc61d30cf3934d9fac0185888240fb6e9c25aed971092bcfb7f7"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -76959,7 +76905,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:40:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "64c3c32d6333ca40220675037c22408c03f2e8c41543247d56b3b9302c1adb3d",
         "f0b4d71cf9d0a1a3512dddf424276cd1a9cdd648cd98fc628ff36da3c9436740"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -76968,8 +76913,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:44:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "64c3c32d6333ca40220675037c22408c03f2e8c41543247d56b3b9302c1adb3d",
-        "b81b46d6767dd9252166a550e2432215de897b937569c67aebef10e374f16564",
         "f0b4d71cf9d0a1a3512dddf424276cd1a9cdd648cd98fc628ff36da3c9436740"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -76978,9 +76921,7 @@
       "id": "src/primitives/__tests/DRBG.test.ts:47:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "64c3c32d6333ca40220675037c22408c03f2e8c41543247d56b3b9302c1adb3d",
-        "6bd1b06b630641a31951f3a5d0ceaaac787caf4553ad8d32c1efbf8cd4f64175",
-        "b81b46d6767dd9252166a550e2432215de897b937569c67aebef10e374f16564"
+        "6bd1b06b630641a31951f3a5d0ceaaac787caf4553ad8d32c1efbf8cd4f64175"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -76988,7 +76929,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:51:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "64c3c32d6333ca40220675037c22408c03f2e8c41543247d56b3b9302c1adb3d",
         "6bd1b06b630641a31951f3a5d0ceaaac787caf4553ad8d32c1efbf8cd4f64175"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -76997,8 +76937,7 @@
       "id": "src/primitives/__tests/DRBG.test.ts:54:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "235cff60e26c757a8ca86918eab54853cf5f056f313a93aab21c2c2a94c9d2d2",
-        "64c3c32d6333ca40220675037c22408c03f2e8c41543247d56b3b9302c1adb3d"
+        "235cff60e26c757a8ca86918eab54853cf5f056f313a93aab21c2c2a94c9d2d2"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77006,9 +76945,7 @@
       "id": "src/primitives/__tests/DRBG.test.ts:58:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "235cff60e26c757a8ca86918eab54853cf5f056f313a93aab21c2c2a94c9d2d2",
-        "3704e951b416aa546cf4a0eedb11a96f1ff391ea1fcd5bbc1484e16ea9a93db0",
-        "708009c4ff6dc0575f5ba20787369d552c291b81bb8c80cf53513700579d7222"
+        "235cff60e26c757a8ca86918eab54853cf5f056f313a93aab21c2c2a94c9d2d2"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77016,8 +76953,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:61:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "3704e951b416aa546cf4a0eedb11a96f1ff391ea1fcd5bbc1484e16ea9a93db0",
-        "708009c4ff6dc0575f5ba20787369d552c291b81bb8c80cf53513700579d7222",
         "9fff85f75a1b73e9557c8aa4879ed13656c23f89e464208a13f1ba12679ef6e9"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -77026,7 +76961,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:74:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "21bd95b5b25e7ffbee9307b66474cd144fa24f50aebe4dd238ea896814297c31",
         "9fff85f75a1b73e9557c8aa4879ed13656c23f89e464208a13f1ba12679ef6e9"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -77035,7 +76969,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:82:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "21bd95b5b25e7ffbee9307b66474cd144fa24f50aebe4dd238ea896814297c31",
         "3ca1e812e82d3c9a90ee76fdc5bd1c800e18a3c51621391c4bb592af956adbe5"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -77044,8 +76977,7 @@
       "id": "src/primitives/__tests/DRBG.test.ts:90:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "3ca1e812e82d3c9a90ee76fdc5bd1c800e18a3c51621391c4bb592af956adbe5",
-        "beabe414870dcef7a86aa6975fcbe81b38108730c7c0e25579f045768e6ebde9"
+        "3ca1e812e82d3c9a90ee76fdc5bd1c800e18a3c51621391c4bb592af956adbe5"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77053,7 +76985,6 @@
       "id": "src/primitives/__tests/DRBG.test.ts:93:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "beabe414870dcef7a86aa6975fcbe81b38108730c7c0e25579f045768e6ebde9",
         "c35f9a64ede0fa199454fdc3802f9cbdb418743e943c2f254b504e4e38c60afb"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -77064,32 +76995,18 @@
       "caseIds": [
         "0478a7194e24164e06e44eee83c5cc8178d119461cd08f28ac4aa93e7f085cc4",
         "0aaab0d4003bc57d98b2d13d29ab93202648205ec094a299142fc08fb56b3bb8",
-        "0ff55c346b5718c3d2b90e2255c88925b78be06c691017e64737f9c68fa1e1f6",
         "1aecd613b5535c6d925b92777d819c97bac15f81f9291a86e04eb2f4b8b39af5",
-        "235cff60e26c757a8ca86918eab54853cf5f056f313a93aab21c2c2a94c9d2d2",
         "36ecfdbba4fa56c867b06c90fcecb03ac2e81d168e920a057371dd6a6d53e99f",
-        "38b6221d3e7dd444aabcc79e038a24a2032102dce0b4b4b9d9dfd01525c5734a",
         "3a51c7ab4fdec0e539c34ba6ffc9119d178f82549449d1efdb43f2f99523be26",
-        "3ca1e812e82d3c9a90ee76fdc5bd1c800e18a3c51621391c4bb592af956adbe5",
         "3cae9aa2068d821c903cf7856d07f379a1f8af1fcc1a8d9db284e93a4494e7c7",
         "4c2155c89db6d9d1de21e941dd1b72628ff3dd6ca708dca101cc66bf5bc56ebf",
-        "4f77da4d2cfe3593170a22609e7c55668cc69c60f0387e001619e5aec38a667e",
         "59659762ce653a8394f4ab5153cdc71fdbffdf97fdde947369c5f98294c7807f",
-        "6bd1b06b630641a31951f3a5d0ceaaac787caf4553ad8d32c1efbf8cd4f64175",
         "71292348b546fbe50260e91e7577543e3fa34978e187218f7dd7ec7fc6dc8d4b",
         "815d687a457b961303e27f521497e86c7fd3c0a4795ec56d6f5c25e9e596fcb2",
-        "8a127cf09d1b22a26fce1ff2b7775922c89983e3110527af3b22c5792ad34463",
-        "8a55ea5359382054d7bf152c0090b9a2aee991bcba16ff35798a3b0280c1331f",
-        "8c4a321727a8cc61d30cf3934d9fac0185888240fb6e9c25aed971092bcfb7f7",
-        "9fff85f75a1b73e9557c8aa4879ed13656c23f89e464208a13f1ba12679ef6e9",
-        "a0e152a24b1cd9a4ee7614bd63a7ec7dfe4a1599526f32723911563b4fa939ea",
-        "b3494993975f9883caf6231e9a5a030aa1729900a28fd64277b84ee451fc6301",
         "b432ac30f3bce72b304c6ecc3b0da498289d8cfbc14b0a4ca7198f8ae38b8b9f",
         "b69e3c49f6f64e2840f331fd63b97db1285ce289b257ae7349743805d9d1bf1c",
         "ba46f65d9e32cd100d6c4bf1ca7819fd48f3033d9c50c4121b537d0b320578b4",
         "bc28ad06d632a39ae907f3fb90cdf2785f935d1cf1f29d59375ffa6570be9d9a",
-        "c35f9a64ede0fa199454fdc3802f9cbdb418743e943c2f254b504e4e38c60afb",
-        "f0b4d71cf9d0a1a3512dddf424276cd1a9cdd648cd98fc628ff36da3c9436740",
         "fd01ba9cc2ff0f985cd02ea983272bca8c8d1696ed063c67d6aa860a3a8a71ed"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -77098,11 +77015,7 @@
       "id": "src/primitives/__tests/HMAC.test.ts:15:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "0b2ab9da56bfbc79bd17ccb540f1ce33201de5a9e339fb91289010fbacabcc6c",
-        "231153b32832a34375aa88bcf8bf9bcf7df383334d9c11b4e78e41ab651e8116",
-        "80dd21e43f8274101dd6074de250e066e844a00d3dc01b9ffbbd7a92fd03fa61",
-        "d60afa7a7462b7b17961f5715dde66598efefbdec11129516f6cefb08e653dd7",
-        "e08235fdd114006cebc227898df27718685dc137f8db699e9d024382bd14b41a"
+        "231153b32832a34375aa88bcf8bf9bcf7df383334d9c11b4e78e41ab651e8116"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77110,6 +77023,30 @@
       "id": "src/primitives/__tests/HMAC.test.ts:23:5:registration",
       "status": "reviewed",
       "caseIds": [
+        "0b2ab9da56bfbc79bd17ccb540f1ce33201de5a9e339fb91289010fbacabcc6c"
+      ],
+      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+    },
+    {
+      "id": "src/primitives/__tests/HMAC.test.ts:34:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "d60afa7a7462b7b17961f5715dde66598efefbdec11129516f6cefb08e653dd7"
+      ],
+      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+    },
+    {
+      "id": "src/primitives/__tests/HMAC.test.ts:43:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "80dd21e43f8274101dd6074de250e066e844a00d3dc01b9ffbbd7a92fd03fa61"
+      ],
+      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
+    },
+    {
+      "id": "src/primitives/__tests/HMAC.test.ts:52:7:conditional",
+      "status": "reviewed",
+      "caseIds": [
         "0b2ab9da56bfbc79bd17ccb540f1ce33201de5a9e339fb91289010fbacabcc6c",
         "231153b32832a34375aa88bcf8bf9bcf7df383334d9c11b4e78e41ab651e8116",
         "80dd21e43f8274101dd6074de250e066e844a00d3dc01b9ffbbd7a92fd03fa61",
@@ -77119,36 +77056,14 @@
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
     {
-      "id": "src/primitives/__tests/HMAC.test.ts:34:5:registration",
-      "status": "reviewed",
-      "caseIds": [
-        "638349c88625457f118d13bfbf7583a0bac148ae1831211fffe05756739b6b84"
-      ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
-    },
-    {
-      "id": "src/primitives/__tests/HMAC.test.ts:43:5:registration",
-      "status": "reviewed",
-      "caseIds": [
-        "64c3c32d6333ca40220675037c22408c03f2e8c41543247d56b3b9302c1adb3d",
-        "b81b46d6767dd9252166a550e2432215de897b937569c67aebef10e374f16564"
-      ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
-    },
-    {
-      "id": "src/primitives/__tests/HMAC.test.ts:52:7:conditional",
-      "status": "reviewed",
-      "caseIds": [
-        "64c3c32d6333ca40220675037c22408c03f2e8c41543247d56b3b9302c1adb3d"
-      ],
-      "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
-    },
-    {
       "id": "src/primitives/__tests/HMAC.test.ts:60:7:registration",
       "status": "reviewed",
       "caseIds": [
-        "3704e951b416aa546cf4a0eedb11a96f1ff391ea1fcd5bbc1484e16ea9a93db0",
-        "708009c4ff6dc0575f5ba20787369d552c291b81bb8c80cf53513700579d7222"
+        "0b2ab9da56bfbc79bd17ccb540f1ce33201de5a9e339fb91289010fbacabcc6c",
+        "231153b32832a34375aa88bcf8bf9bcf7df383334d9c11b4e78e41ab651e8116",
+        "80dd21e43f8274101dd6074de250e066e844a00d3dc01b9ffbbd7a92fd03fa61",
+        "d60afa7a7462b7b17961f5715dde66598efefbdec11129516f6cefb08e653dd7",
+        "e08235fdd114006cebc227898df27718685dc137f8db699e9d024382bd14b41a"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77156,7 +77071,11 @@
       "id": "src/primitives/__tests/HMAC.test.ts:64:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "3704e951b416aa546cf4a0eedb11a96f1ff391ea1fcd5bbc1484e16ea9a93db0"
+        "0b2ab9da56bfbc79bd17ccb540f1ce33201de5a9e339fb91289010fbacabcc6c",
+        "231153b32832a34375aa88bcf8bf9bcf7df383334d9c11b4e78e41ab651e8116",
+        "80dd21e43f8274101dd6074de250e066e844a00d3dc01b9ffbbd7a92fd03fa61",
+        "d60afa7a7462b7b17961f5715dde66598efefbdec11129516f6cefb08e653dd7",
+        "e08235fdd114006cebc227898df27718685dc137f8db699e9d024382bd14b41a"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77164,7 +77083,11 @@
       "id": "src/primitives/__tests/HMAC.test.ts:67:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "24369c77befea25f5aa688d69e486e621dae5b327c9286e9e5ef5d8fce01fb78"
+        "0b2ab9da56bfbc79bd17ccb540f1ce33201de5a9e339fb91289010fbacabcc6c",
+        "231153b32832a34375aa88bcf8bf9bcf7df383334d9c11b4e78e41ab651e8116",
+        "80dd21e43f8274101dd6074de250e066e844a00d3dc01b9ffbbd7a92fd03fa61",
+        "d60afa7a7462b7b17961f5715dde66598efefbdec11129516f6cefb08e653dd7",
+        "e08235fdd114006cebc227898df27718685dc137f8db699e9d024382bd14b41a"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77172,10 +77095,6 @@
       "id": "src/primitives/__tests/HMAC.test.ts:6:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "0b2ab9da56bfbc79bd17ccb540f1ce33201de5a9e339fb91289010fbacabcc6c",
-        "231153b32832a34375aa88bcf8bf9bcf7df383334d9c11b4e78e41ab651e8116",
-        "80dd21e43f8274101dd6074de250e066e844a00d3dc01b9ffbbd7a92fd03fa61",
-        "d60afa7a7462b7b17961f5715dde66598efefbdec11129516f6cefb08e653dd7",
         "e08235fdd114006cebc227898df27718685dc137f8db699e9d024382bd14b41a"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -77184,8 +77103,7 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:105:11:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "d77c334b876930abdb62f279044877d039b8cd6fb3985d7d1ff7db888d3c94aa"
+        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77193,8 +77111,7 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:106:11:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "d77c334b876930abdb62f279044877d039b8cd6fb3985d7d1ff7db888d3c94aa"
+        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77202,8 +77119,7 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:107:11:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "d77c334b876930abdb62f279044877d039b8cd6fb3985d7d1ff7db888d3c94aa"
+        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77219,8 +77135,7 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:110:11:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "d77c334b876930abdb62f279044877d039b8cd6fb3985d7d1ff7db888d3c94aa"
+        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77228,8 +77143,7 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:113:11:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "d77c334b876930abdb62f279044877d039b8cd6fb3985d7d1ff7db888d3c94aa"
+        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77237,8 +77151,7 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:116:11:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "3dcf42ba40e33502826b7f15d442962c2b9f2899aab892eb4f6eb43e372ba8f5"
+        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77246,8 +77159,7 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:119:11:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "3dcf42ba40e33502826b7f15d442962c2b9f2899aab892eb4f6eb43e372ba8f5"
+        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77263,8 +77175,7 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:122:11:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "3dcf42ba40e33502826b7f15d442962c2b9f2899aab892eb4f6eb43e372ba8f5"
+        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77296,8 +77207,6 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:24:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "394aca6b5d18d4424972cee1e5b31f2a281f44ea474e8821e2c81b175de210de",
-        "53f0ab9de9ec478c6928cd1312146ff9e71449683639983b3427872e4ee13c93",
         "eec11778f51a8fb514725aff8b69beee77e5473f477e06677bc58ed9fb9b0c92"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -77306,8 +77215,6 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:27:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "394aca6b5d18d4424972cee1e5b31f2a281f44ea474e8821e2c81b175de210de",
-        "53f0ab9de9ec478c6928cd1312146ff9e71449683639983b3427872e4ee13c93",
         "eec11778f51a8fb514725aff8b69beee77e5473f477e06677bc58ed9fb9b0c92"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -77316,8 +77223,6 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:28:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "394aca6b5d18d4424972cee1e5b31f2a281f44ea474e8821e2c81b175de210de",
-        "53f0ab9de9ec478c6928cd1312146ff9e71449683639983b3427872e4ee13c93",
         "eec11778f51a8fb514725aff8b69beee77e5473f477e06677bc58ed9fb9b0c92"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -77326,7 +77231,6 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:31:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "53f0ab9de9ec478c6928cd1312146ff9e71449683639983b3427872e4ee13c93",
         "638349c88625457f118d13bfbf7583a0bac148ae1831211fffe05756739b6b84"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -77335,8 +77239,7 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:37:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "638349c88625457f118d13bfbf7583a0bac148ae1831211fffe05756739b6b84",
-        "81edc4ed7ff27da6024bf758c626707c057ade3aef36ab73048e1b2102d7583b"
+        "638349c88625457f118d13bfbf7583a0bac148ae1831211fffe05756739b6b84"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77344,7 +77247,6 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:42:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "64c3c32d6333ca40220675037c22408c03f2e8c41543247d56b3b9302c1adb3d",
         "b81b46d6767dd9252166a550e2432215de897b937569c67aebef10e374f16564"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -77353,7 +77255,6 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:46:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "64c3c32d6333ca40220675037c22408c03f2e8c41543247d56b3b9302c1adb3d",
         "b81b46d6767dd9252166a550e2432215de897b937569c67aebef10e374f16564"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -77362,7 +77263,7 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:49:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "64c3c32d6333ca40220675037c22408c03f2e8c41543247d56b3b9302c1adb3d"
+        "394aca6b5d18d4424972cee1e5b31f2a281f44ea474e8821e2c81b175de210de"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77370,7 +77271,7 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:52:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "64c3c32d6333ca40220675037c22408c03f2e8c41543247d56b3b9302c1adb3d"
+        "394aca6b5d18d4424972cee1e5b31f2a281f44ea474e8821e2c81b175de210de"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77378,7 +77279,7 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:53:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "64c3c32d6333ca40220675037c22408c03f2e8c41543247d56b3b9302c1adb3d"
+        "394aca6b5d18d4424972cee1e5b31f2a281f44ea474e8821e2c81b175de210de"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77386,7 +77287,6 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:56:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "3704e951b416aa546cf4a0eedb11a96f1ff391ea1fcd5bbc1484e16ea9a93db0",
         "708009c4ff6dc0575f5ba20787369d552c291b81bb8c80cf53513700579d7222"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -77395,7 +77295,6 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:60:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "3704e951b416aa546cf4a0eedb11a96f1ff391ea1fcd5bbc1484e16ea9a93db0",
         "708009c4ff6dc0575f5ba20787369d552c291b81bb8c80cf53513700579d7222"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -77404,8 +77303,7 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:65:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "24369c77befea25f5aa688d69e486e621dae5b327c9286e9e5ef5d8fce01fb78",
-        "3704e951b416aa546cf4a0eedb11a96f1ff391ea1fcd5bbc1484e16ea9a93db0"
+        "24369c77befea25f5aa688d69e486e621dae5b327c9286e9e5ef5d8fce01fb78"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -77413,8 +77311,7 @@
       "id": "src/primitives/__tests/Hash.additional.test.ts:66:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "24369c77befea25f5aa688d69e486e621dae5b327c9286e9e5ef5d8fce01fb78",
-        "3704e951b416aa546cf4a0eedb11a96f1ff391ea1fcd5bbc1484e16ea9a93db0"
+        "24369c77befea25f5aa688d69e486e621dae5b327c9286e9e5ef5d8fce01fb78"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78030,10 +77927,7 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:111:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "a0e152a24b1cd9a4ee7614bd63a7ec7dfe4a1599526f32723911563b4fa939ea",
-        "a118141548f2294d1eb11ebb1ecd1a805f99354a75ff41f3218af610a70e33f8",
-        "d77c334b876930abdb62f279044877d039b8cd6fb3985d7d1ff7db888d3c94aa"
+        "a118141548f2294d1eb11ebb1ecd1a805f99354a75ff41f3218af610a70e33f8"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78041,10 +77935,7 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:112:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "a0e152a24b1cd9a4ee7614bd63a7ec7dfe4a1599526f32723911563b4fa939ea",
-        "a118141548f2294d1eb11ebb1ecd1a805f99354a75ff41f3218af610a70e33f8",
-        "d77c334b876930abdb62f279044877d039b8cd6fb3985d7d1ff7db888d3c94aa"
+        "a118141548f2294d1eb11ebb1ecd1a805f99354a75ff41f3218af610a70e33f8"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78052,10 +77943,7 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:113:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "a0e152a24b1cd9a4ee7614bd63a7ec7dfe4a1599526f32723911563b4fa939ea",
-        "a118141548f2294d1eb11ebb1ecd1a805f99354a75ff41f3218af610a70e33f8",
-        "d77c334b876930abdb62f279044877d039b8cd6fb3985d7d1ff7db888d3c94aa"
+        "a118141548f2294d1eb11ebb1ecd1a805f99354a75ff41f3218af610a70e33f8"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78063,8 +77951,7 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:140:7:conditional",
       "status": "reviewed",
       "caseIds": [
-        "276e171d2f866fc12acfaa3301cc0b9502e760b414696da89c97ad0884245c9a",
-        "4f77da4d2cfe3593170a22609e7c55668cc69c60f0387e001619e5aec38a667e"
+        "b7d145da41c42899831dc99e3b9450b0a055d38958626a1d180f37c04353f266"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78072,7 +77959,7 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:145:7:conditional",
       "status": "reviewed",
       "caseIds": [
-        "4f77da4d2cfe3593170a22609e7c55668cc69c60f0387e001619e5aec38a667e"
+        "b7d145da41c42899831dc99e3b9450b0a055d38958626a1d180f37c04353f266"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78120,7 +78007,7 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:196:7:conditional",
       "status": "reviewed",
       "caseIds": [
-        "38b6221d3e7dd444aabcc79e038a24a2032102dce0b4b4b9d9dfd01525c5734a"
+        "c43ed62b131fb64fdb07e986d87a4c6da45ae132ba5fd63e89ea6671c99fabae"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78128,8 +78015,7 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:201:7:conditional",
       "status": "reviewed",
       "caseIds": [
-        "38b6221d3e7dd444aabcc79e038a24a2032102dce0b4b4b9d9dfd01525c5734a",
-        "fec00e8f2242244c5931f9b19ecdce78bea057bc66e823a9b51ddff2aa2bc026"
+        "c43ed62b131fb64fdb07e986d87a4c6da45ae132ba5fd63e89ea6671c99fabae"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78137,7 +78023,6 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:209:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "9c91b84053d0e785d28856f497d70c3f924adaeaf72ad141ccc66678d36d1b7f",
         "c43ed62b131fb64fdb07e986d87a4c6da45ae132ba5fd63e89ea6671c99fabae"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -78146,8 +78031,6 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:211:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "01e7607f06cd0ebdb31556f50129fc35b93f5976489ce3b720934006531ad163",
-        "8a127cf09d1b22a26fce1ff2b7775922c89983e3110527af3b22c5792ad34463",
         "c43ed62b131fb64fdb07e986d87a4c6da45ae132ba5fd63e89ea6671c99fabae"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -78156,8 +78039,7 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:231:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "68dadce6b69efc64e2c3ece1fc81baf3439ece6853b6c8341441748b4c6912ed",
-        "8a127cf09d1b22a26fce1ff2b7775922c89983e3110527af3b22c5792ad34463"
+        "68dadce6b69efc64e2c3ece1fc81baf3439ece6853b6c8341441748b4c6912ed"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78165,7 +78047,6 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:234:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "19ac6f825ec7a328670a11daa180d6e2429a92e6ce5d9412fce773ec7721b6e3",
         "68dadce6b69efc64e2c3ece1fc81baf3439ece6853b6c8341441748b4c6912ed"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -78174,8 +78055,6 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:236:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0ff55c346b5718c3d2b90e2255c88925b78be06c691017e64737f9c68fa1e1f6",
-        "19ac6f825ec7a328670a11daa180d6e2429a92e6ce5d9412fce773ec7721b6e3",
         "68dadce6b69efc64e2c3ece1fc81baf3439ece6853b6c8341441748b4c6912ed"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -78184,8 +78063,6 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:237:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0ff55c346b5718c3d2b90e2255c88925b78be06c691017e64737f9c68fa1e1f6",
-        "19ac6f825ec7a328670a11daa180d6e2429a92e6ce5d9412fce773ec7721b6e3",
         "68dadce6b69efc64e2c3ece1fc81baf3439ece6853b6c8341441748b4c6912ed"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -78194,7 +78071,8 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:241:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "0ff55c346b5718c3d2b90e2255c88925b78be06c691017e64737f9c68fa1e1f6"
+        "4896580ed70852dbb10ccca604273b66fa744406730fccafd3da711ceb314e43",
+        "7b37113831907a7ebbb6792e2c4186dadc22dfcac9a472142e2b29703e0d482b"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78202,7 +78080,8 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:249:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "0ff55c346b5718c3d2b90e2255c88925b78be06c691017e64737f9c68fa1e1f6"
+        "4896580ed70852dbb10ccca604273b66fa744406730fccafd3da711ceb314e43",
+        "7b37113831907a7ebbb6792e2c4186dadc22dfcac9a472142e2b29703e0d482b"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78242,9 +78121,12 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:31:3:conditional",
       "status": "reviewed",
       "caseIds": [
-        "53f0ab9de9ec478c6928cd1312146ff9e71449683639983b3427872e4ee13c93",
-        "5e1c61041a3ad4dd5556cca21ce12e191ce591d1d1bc66198b17642a9bf4705a",
-        "638349c88625457f118d13bfbf7583a0bac148ae1831211fffe05756739b6b84"
+        "4896580ed70852dbb10ccca604273b66fa744406730fccafd3da711ceb314e43",
+        "68dadce6b69efc64e2c3ece1fc81baf3439ece6853b6c8341441748b4c6912ed",
+        "7b37113831907a7ebbb6792e2c4186dadc22dfcac9a472142e2b29703e0d482b",
+        "a118141548f2294d1eb11ebb1ecd1a805f99354a75ff41f3218af610a70e33f8",
+        "b7d145da41c42899831dc99e3b9450b0a055d38958626a1d180f37c04353f266",
+        "c43ed62b131fb64fdb07e986d87a4c6da45ae132ba5fd63e89ea6671c99fabae"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78252,9 +78134,6 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:57:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "235cff60e26c757a8ca86918eab54853cf5f056f313a93aab21c2c2a94c9d2d2",
-        "3704e951b416aa546cf4a0eedb11a96f1ff391ea1fcd5bbc1484e16ea9a93db0",
-        "708009c4ff6dc0575f5ba20787369d552c291b81bb8c80cf53513700579d7222",
         "b00646e1f384f536e1a5d78b958072753e42b772c17ebd79e304900d3b3dcb19"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -78263,8 +78142,6 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:62:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "3704e951b416aa546cf4a0eedb11a96f1ff391ea1fcd5bbc1484e16ea9a93db0",
-        "9fff85f75a1b73e9557c8aa4879ed13656c23f89e464208a13f1ba12679ef6e9",
         "b00646e1f384f536e1a5d78b958072753e42b772c17ebd79e304900d3b3dcb19"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -78273,8 +78150,6 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:64:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "3704e951b416aa546cf4a0eedb11a96f1ff391ea1fcd5bbc1484e16ea9a93db0",
-        "9fff85f75a1b73e9557c8aa4879ed13656c23f89e464208a13f1ba12679ef6e9",
         "b00646e1f384f536e1a5d78b958072753e42b772c17ebd79e304900d3b3dcb19"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -78283,9 +78158,6 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:65:9:assertion",
       "status": "reviewed",
       "caseIds": [
-        "24369c77befea25f5aa688d69e486e621dae5b327c9286e9e5ef5d8fce01fb78",
-        "3704e951b416aa546cf4a0eedb11a96f1ff391ea1fcd5bbc1484e16ea9a93db0",
-        "9fff85f75a1b73e9557c8aa4879ed13656c23f89e464208a13f1ba12679ef6e9",
         "b00646e1f384f536e1a5d78b958072753e42b772c17ebd79e304900d3b3dcb19"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -78294,8 +78166,7 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:89:7:conditional",
       "status": "reviewed",
       "caseIds": [
-        "3ca1e812e82d3c9a90ee76fdc5bd1c800e18a3c51621391c4bb592af956adbe5",
-        "beabe414870dcef7a86aa6975fcbe81b38108730c7c0e25579f045768e6ebde9"
+        "a118141548f2294d1eb11ebb1ecd1a805f99354a75ff41f3218af610a70e33f8"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78303,9 +78174,7 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:97:5:registration",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "a118141548f2294d1eb11ebb1ecd1a805f99354a75ff41f3218af610a70e33f8",
-        "c35f9a64ede0fa199454fdc3802f9cbdb418743e943c2f254b504e4e38c60afb"
+        "a118141548f2294d1eb11ebb1ecd1a805f99354a75ff41f3218af610a70e33f8"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78313,10 +78182,7 @@
       "id": "src/primitives/__tests/Random.additional.test.ts:99:9:loop",
       "status": "reviewed",
       "caseIds": [
-        "257a55f881f1e8846e1be5b0428f39dca0546d61954cfbbc7362e45397a6bf47",
-        "a118141548f2294d1eb11ebb1ecd1a805f99354a75ff41f3218af610a70e33f8",
-        "c35f9a64ede0fa199454fdc3802f9cbdb418743e943c2f254b504e4e38c60afb",
-        "d77c334b876930abdb62f279044877d039b8cd6fb3985d7d1ff7db888d3c94aa"
+        "a118141548f2294d1eb11ebb1ecd1a805f99354a75ff41f3218af610a70e33f8"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78324,8 +78190,7 @@
       "id": "src/primitives/__tests/Random.test.ts:12:5:assertion",
       "status": "reviewed",
       "caseIds": [
-        "61c17607ef11ee67bafe1096807885f72b10f33070c22870c32d2e3259c4505b",
-        "85cd5845846d5cee0de56d7310f6a43122b65b7cfe0978fb4f394f7a2ffbc076"
+        "61c17607ef11ee67bafe1096807885f72b10f33070c22870c32d2e3259c4505b"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78341,8 +78206,7 @@
       "id": "src/primitives/__tests/Random.test.ts:17:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "848124cde9210d75b0dba6c87bb690fceb48e80509981a2248de901d22e61ee6",
-        "b66cb2ffcd77c1e41cc45330fb0d7b947dfb3a903353079a52c75ff59f8100de"
+        "848124cde9210d75b0dba6c87bb690fceb48e80509981a2248de901d22e61ee6"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78350,8 +78214,7 @@
       "id": "src/primitives/__tests/Random.test.ts:18:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "848124cde9210d75b0dba6c87bb690fceb48e80509981a2248de901d22e61ee6",
-        "b66cb2ffcd77c1e41cc45330fb0d7b947dfb3a903353079a52c75ff59f8100de"
+        "848124cde9210d75b0dba6c87bb690fceb48e80509981a2248de901d22e61ee6"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78359,7 +78222,6 @@
       "id": "src/primitives/__tests/Random.test.ts:21:3:registration",
       "status": "reviewed",
       "caseIds": [
-        "b66cb2ffcd77c1e41cc45330fb0d7b947dfb3a903353079a52c75ff59f8100de",
         "d1c4c7c391647d93d40519c4065a74598d5a1c760b73eec665dcff78b3e92600"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -78368,7 +78230,6 @@
       "id": "src/primitives/__tests/Random.test.ts:22:5:assertion",
       "status": "reviewed",
       "caseIds": [
-        "b66cb2ffcd77c1e41cc45330fb0d7b947dfb3a903353079a52c75ff59f8100de",
         "d1c4c7c391647d93d40519c4065a74598d5a1c760b73eec665dcff78b3e92600"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -78385,10 +78246,7 @@
       "id": "src/primitives/__tests/Random.test.ts:24:5:assertion",
       "status": "reviewed",
       "caseIds": [
-        "394aca6b5d18d4424972cee1e5b31f2a281f44ea474e8821e2c81b175de210de",
-        "53f0ab9de9ec478c6928cd1312146ff9e71449683639983b3427872e4ee13c93",
-        "d1c4c7c391647d93d40519c4065a74598d5a1c760b73eec665dcff78b3e92600",
-        "eec11778f51a8fb514725aff8b69beee77e5473f477e06677bc58ed9fb9b0c92"
+        "d1c4c7c391647d93d40519c4065a74598d5a1c760b73eec665dcff78b3e92600"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78396,10 +78254,7 @@
       "id": "src/primitives/__tests/Random.test.ts:25:5:assertion",
       "status": "reviewed",
       "caseIds": [
-        "394aca6b5d18d4424972cee1e5b31f2a281f44ea474e8821e2c81b175de210de",
-        "53f0ab9de9ec478c6928cd1312146ff9e71449683639983b3427872e4ee13c93",
-        "d1c4c7c391647d93d40519c4065a74598d5a1c760b73eec665dcff78b3e92600",
-        "eec11778f51a8fb514725aff8b69beee77e5473f477e06677bc58ed9fb9b0c92"
+        "d1c4c7c391647d93d40519c4065a74598d5a1c760b73eec665dcff78b3e92600"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78407,10 +78262,7 @@
       "id": "src/primitives/__tests/Random.test.ts:26:5:assertion",
       "status": "reviewed",
       "caseIds": [
-        "394aca6b5d18d4424972cee1e5b31f2a281f44ea474e8821e2c81b175de210de",
-        "53f0ab9de9ec478c6928cd1312146ff9e71449683639983b3427872e4ee13c93",
-        "d1c4c7c391647d93d40519c4065a74598d5a1c760b73eec665dcff78b3e92600",
-        "eec11778f51a8fb514725aff8b69beee77e5473f477e06677bc58ed9fb9b0c92"
+        "d1c4c7c391647d93d40519c4065a74598d5a1c760b73eec665dcff78b3e92600"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78418,10 +78270,7 @@
       "id": "src/primitives/__tests/Random.test.ts:28:3:registration",
       "status": "reviewed",
       "caseIds": [
-        "394aca6b5d18d4424972cee1e5b31f2a281f44ea474e8821e2c81b175de210de",
-        "53f0ab9de9ec478c6928cd1312146ff9e71449683639983b3427872e4ee13c93",
-        "5e1c61041a3ad4dd5556cca21ce12e191ce591d1d1bc66198b17642a9bf4705a",
-        "eec11778f51a8fb514725aff8b69beee77e5473f477e06677bc58ed9fb9b0c92"
+        "5e1c61041a3ad4dd5556cca21ce12e191ce591d1d1bc66198b17642a9bf4705a"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
@@ -78429,7 +78278,6 @@
       "id": "src/primitives/__tests/Random.test.ts:30:5:assertion",
       "status": "reviewed",
       "caseIds": [
-        "53f0ab9de9ec478c6928cd1312146ff9e71449683639983b3427872e4ee13c93",
         "5e1c61041a3ad4dd5556cca21ce12e191ce591d1d1bc66198b17642a9bf4705a"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
@@ -78438,9 +78286,7 @@
       "id": "src/primitives/__tests/Random.test.ts:32:7:assertion",
       "status": "reviewed",
       "caseIds": [
-        "53f0ab9de9ec478c6928cd1312146ff9e71449683639983b3427872e4ee13c93",
-        "5e1c61041a3ad4dd5556cca21ce12e191ce591d1d1bc66198b17642a9bf4705a",
-        "638349c88625457f118d13bfbf7583a0bac148ae1831211fffe05756739b6b84"
+        "5e1c61041a3ad4dd5556cca21ce12e191ce591d1d1bc66198b17642a9bf4705a"
       ],
       "note": "原测试语义、循环/条件与断言位置已复核；Java 对应测试完整复刻该用例。"
     },
