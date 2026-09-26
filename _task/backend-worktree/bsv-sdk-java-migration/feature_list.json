@@ -14,8 +14,8 @@
       "跨工程发布、部署或远端推送"
     ]
   },
-  "activeItem": "migration-impl-symmetric",
-  "nextItem": "migration-impl-symmetric",
+  "activeItem": "migration-impl-compat",
+  "nextItem": "migration-impl-compat",
   "features": [
     {
       "id": "migration-env",
@@ -630,7 +630,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "primitives：AES-GCM、对称密钥与异步后端",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-keys-signatures"
       ],
@@ -662,7 +662,19 @@
       "apiBatchRefs": [
         "migration-api-symmetric"
       ],
-      "evidence": [],
+      "evidence": [
+        "固定 TS 原规模 536870928 字节 manual 测试在 90 分钟上限内 66 分 16 秒通过，Jest 1／1、原 matcher 3／3；Java 当前独立 c0d9fdd 工作树 manual 1／1，逐字节 536870928 次，密文与 tag 经独立 Node crypto 核验。",
+        ".cache/evidence/symmetric-task-parity-c0d9fdd.json：固定 TS／当前 Java 普通轨迹 51／51、384／384 逐字段一致；连同 manual 为 52／52、387／387，缺失与未比较为 0；核验反例 7／7 通过。"
+      ],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 52,
+        "assertionsCompared": 387,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/symmetric-task-parity-c0d9fdd.json"
+      },
       "modules": [
         "primitives"
       ],
