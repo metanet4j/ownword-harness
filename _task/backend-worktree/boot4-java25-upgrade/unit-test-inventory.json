@@ -313,7 +313,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "bf406813027211436879120fa8bd4fe754393517",
+      "head": "82c5283a179a69f2506f066e79538b0f330529a9",
       "modules": [
         {
           "path": ".",
@@ -865,6 +865,19 @@
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
             },
             {
+              "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaProtocolModelTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "signatureAndResponseRetainProtocolFields",
+                  "returnType": "void",
+                  "line": 16,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "真实空交易与脚本验证 Sigma 签名协议字段及 BSM 枚举"
+            },
+            {
               "path": "src/test/java/com/metanet4j/sdk/transcation/BapDataLockBuilderSignTypeTest.java",
               "classification": "unit",
               "methods": [
@@ -1108,6 +1121,19 @@
                 }
               ],
               "classificationReason": "真实字节序列与协议异常断言，覆盖空切片、游标、负长度和越界"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/utils/ScriptHelperContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "acceptsOnlyNonEmptyPushDataChunks",
+                  "returnType": "void",
+                  "line": 14,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "构造实际 ScriptChunk 覆盖有效 push data、OP_RETURN、空数据及 OP_0"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utils/UtilsExtendTest.java",
