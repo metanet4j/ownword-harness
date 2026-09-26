@@ -298,11 +298,65 @@
       "ts_report": [
         ".cache/evidence/writer-u8-ts-20260927-v2/jest.json"
       ],
-      "java_inputs": ".cache/evidence/writer-u8-java-20260927-v2/inputs.jsonl",
-      "java_assertions": ".cache/evidence/writer-u8-java-20260927-v2/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/writer-u8-java-20260927-v2/manifest.json",
+      "java_inputs": ".cache/evidence/writer-u8-java-20260927-v3/inputs.jsonl",
+      "java_assertions": ".cache/evidence/writer-u8-java-20260927-v3/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/writer-u8-java-20260927-v3/manifest.json",
       "java_report": [
-        ".cache/evidence/writer-u8-java-20260927-v2/surefire.xml"
+        ".cache/evidence/writer-u8-java-20260927-v3/surefire.xml"
+      ]
+    },
+    {
+      "name": "writer",
+      "catalog": ".cache/evidence/writer-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/writer-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/writer-plan-20260927/input-plan.json",
+      "ts_inputs": ".cache/evidence/writer-ts-20260927/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/writer-ts-20260927/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/writer-ts-20260927/manifest.json",
+      "ts_report": [
+        ".cache/evidence/writer-ts-20260927/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/writer-java-20260927-v2/inputs.jsonl",
+      "java_assertions": ".cache/evidence/writer-java-20260927-v2/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/writer-java-20260927-v2/manifest.json",
+      "java_report": [
+        ".cache/evidence/writer-java-20260927-v2/surefire.xml"
+      ]
+    },
+    {
+      "name": "reader",
+      "catalog": ".cache/evidence/reader-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/reader-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/reader-plan-20260927/input-plan.json",
+      "ts_inputs": ".cache/evidence/reader-ts-20260927/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/reader-ts-20260927/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/reader-ts-20260927/manifest.json",
+      "ts_report": [
+        ".cache/evidence/reader-ts-20260927/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/reader-java-20260927-v2/inputs.jsonl",
+      "java_assertions": ".cache/evidence/reader-java-20260927-v2/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/reader-java-20260927-v2/manifest.json",
+      "java_report": [
+        ".cache/evidence/reader-java-20260927-v2/surefire.xml"
+      ]
+    },
+    {
+      "name": "reader-uint8array",
+      "catalog": ".cache/evidence/reader-u8-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/reader-u8-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/reader-u8-plan-20260927/input-plan.json",
+      "ts_inputs": ".cache/evidence/reader-u8-ts-20260927/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/reader-u8-ts-20260927/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/reader-u8-ts-20260927/manifest.json",
+      "ts_report": [
+        ".cache/evidence/reader-u8-ts-20260927/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/reader-u8-java-20260927-v3/inputs.jsonl",
+      "java_assertions": ".cache/evidence/reader-u8-java-20260927-v3/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/reader-u8-java-20260927-v3/manifest.json",
+      "java_report": [
+        ".cache/evidence/reader-u8-java-20260927-v3/surefire.xml"
       ]
     },
     {
