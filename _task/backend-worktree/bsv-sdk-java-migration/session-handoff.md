@@ -2,7 +2,15 @@
 
 ## 唯一下一步
 
-activeItem=null，nextItem=migration-impl-curve。`migration-impl-bignumber` 与 `migration-impl-hash-random` 已完成逐断言 taskAcceptance 并恢复 done；本次到此停止，尚未开始 curve。
+activeItem=migration-impl-curve，nextItem=migration-impl-curve。继续补齐 Point、Curve 原测试与 API，再对曲线事项的 144 个用例做完整逐断言验收；当前只完成 JacobianPoint 的 35 个用例对照。
+
+## 曲线任务当前证据
+
+- `.cache/evidence/jacobian-ts-parity.jest.json`、`jacobian-ts-parity.jsonl`：固定 TS 原测试 35/35，断言轨迹 37 条。
+- `.cache/evidence/jacobian-java-parity.log`、`jacobian-java-parity.jsonl`：Java 同名测试 35/35，断言轨迹 37 条。
+- `.cache/evidence/curve-partial-parity.json`：35/144 个原用例已比较，37/37 条断言匹配；`taskAcceptancePassed=false`。
+- `./verify.sh bsv-test`：352/352 通过，失败/错误/跳过 0。`feature_list.json` 中曲线事项保持 in-progress。
+- 目标工程尚有未完成的 Point/Curve API 与测试；`PointCoreTest` 是额外回归，不能计入上游映射。继续时先读 `Point.test.ts`、`Point.additional.test.ts` 并补完其 Java 一对一测试，再实现缺口。
 
 ## 逐断言验收入口
 
@@ -22,7 +30,7 @@ activeItem=null，nextItem=migration-impl-curve。`migration-impl-bignumber` 与
 - `9c22ba1`：BigNumber 构造基础。
 - `0ecb8d1`：Hex。
 
-目标工程 clean test 当前 297/297；Hex/构造既有逐调用证据仍保留在 `.cache/evidence/hex-parity-*`。
+目标工程 clean test 当前 352/352；Hex/构造既有逐调用证据仍保留在 `.cache/evidence/hex-parity-*`。
 
 ## 固定边界
 

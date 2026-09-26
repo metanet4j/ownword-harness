@@ -2,9 +2,16 @@
 
 ## 当前任务
 
-activeItem=null，nextItem=migration-impl-curve。`migration-impl-bignumber` 与 `migration-impl-hash-random` 已补齐逐断言 TS/Java 对照，`taskAcceptance.status=passed`，恢复 done。
+activeItem=migration-impl-curve，nextItem=migration-impl-curve。曲线与点运算正在实施；`migration-impl-bignumber` 与 `migration-impl-hash-random` 已完成的逐断言验收保持 done。
 
-执行队列共 43 项：11 done、0 in-progress、32 not-started。其中编码任务 28 项，已完成 Hex、BigNumber 构造基础、完整大整数/模运算、哈希/HMAC/PBKDF2/随机源 4 项，剩余 24 项。21 组 API 设计：values、hash-random 2 组完成，19 组待完成。
+执行队列共 43 项：11 done、1 in-progress、31 not-started。其中编码任务 28 项，已完成 Hex、BigNumber 构造基础、完整大整数/模运算、哈希/HMAC/PBKDF2/随机源 4 项，曲线任务进行中，其余 23 项尚未开始。21 组 API 设计：values、hash-random 2 组完成，19 组待完成。
+
+## 曲线任务阶段性结果
+
+- 固定 TS 的 `JacobianPoint.test.ts` 35/35 通过；Java `JacobianPointTest` 35/35 通过，37 条原断言的实际值全部匹配，缺失和额外断言均为 0。对照报告为 `.cache/evidence/curve-partial-parity.json`，`taskAcceptancePassed=false`，因为曲线事项共有 144 个原用例。
+- `CurveAdditionalTest` 9 个基础用例和 `PointCoreTest` 11 个内部用例通过；后者是阶段性回归，不充抵尚未复刻的上游用例。
+- `./verify.sh bsv-test` 累计执行 352/352，失败、错误、跳过均为 0；`node audit-api.cjs batches` 结构检查通过。
+- 已实现基础 `Curve`、`BasePoint`、`Point`、`JacobianPoint`。Point 的完整编码、JSON、预计算和标量运算分支、Curve 的 endomorphism 与全部 API 尚未收口；相应测试、映射和逐断言对照继续进行，曲线事项保持 in-progress。
 
 ## 本次逐断言对照
 
@@ -20,7 +27,7 @@ activeItem=null，nextItem=migration-impl-curve。`migration-impl-bignumber` 与
 
 ## 已有 Java 成果
 
-Java 映射测试用例 296/5329，缺失 5033。已完成模块：
+Java 映射测试用例 331/5329，缺失 4998；其中 JacobianPoint 的 35 个原用例已完成阶段性对照，其余完成项为：
 - Hex：8 用例。
 - BigNumber 构造：28 用例。
 - 完整 BigNumber/模运算：174 用例，目标工程累计 211/211；逐断言对照通过。
@@ -30,4 +37,4 @@ Java 映射测试用例 296/5329，缺失 5033。已完成模块：
 
 ## 下一步与固定边界
 
-下一步按依赖进入 migration-impl-curve，但本会话未开始。工程代码/测试/POM 仅允许修改 metanet4j-bsv-sdk，其他工程与固定 TS 只读；根仓既有无关修改保留，未推送。
+下一步继续 migration-impl-curve：先补 `Point.test.ts` 和 `Point.additional.test.ts` 的完整原测试，再补 `Curve.additional.test.ts`、`Curve.unit.test.ts` 剩余行为，完成 144 用例及 153 声明的逐项收口。工程代码/测试/POM 仅允许修改 metanet4j-bsv-sdk，其他工程与固定 TS 只读；根仓既有无关修改保留，未推送。

@@ -3991,6 +3991,428 @@
         "src/primitives/__tests/Random.additional.test.ts:270:9:assertion",
         "src/primitives/__tests/Random.additional.test.ts:271:9:assertion"
       ]
+    },
+    {
+      "id": "b13d3ae2840a82c7763cab1ae1c9641d0426e520d837d1734924ed2fdfcbfd13",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "createsPointAtInfinityWhenAllNull"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:18:7:assertion"
+      ]
+    },
+    {
+      "id": "2c34b43da1911facc3f3a7c410244af6400973a24c30edc1fb03825f5ccca8b8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "createsPointFromStringCoordinates"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:27:7:assertion"
+      ]
+    },
+    {
+      "id": "c2d08b8713d22215786d2e39ab5d5e32469566b9c6d06eade8b9c84835cfb9ba",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "createsPointFromBigNumberCoordinates"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:35:7:assertion"
+      ]
+    },
+    {
+      "id": "73b68e05e8ab7ae9881a93d280e9116dc8b9572ed05a6db5820077b2037b1905",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "infinityIsDetected"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:45:7:assertion"
+      ]
+    },
+    {
+      "id": "bcf4a70a01ea0d83a77ce081626343626414aaf334d0e76bd356f7d014dc7c40",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "finitePointIsDetected"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:51:7:assertion"
+      ]
+    },
+    {
+      "id": "dbdc24eceab9438178d65a147dd0ca05c18ed0da5da2ec5555f73fc83437597b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "infinityToPIsInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:62:7:assertion"
+      ]
+    },
+    {
+      "id": "7565d32c3603edc85062acebf1a22959145d5b967bd3a5f3b307e5a333ab1f5a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "affineRoundTrip"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:69:7:assertion"
+      ]
+    },
+    {
+      "id": "620ed6509197566c3bbe354797602ef5ad16255c5702673ca4e063a119abe126",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "jacobianNegation"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:82:7:assertion"
+      ]
+    },
+    {
+      "id": "38e11ebc347cda4c8c0be69b9d09ae7f9d8f88e83fef763c8de3a78e4e84918e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "addLeftInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:94:7:assertion"
+      ]
+    },
+    {
+      "id": "ba8c5b51ecd412554bd42a6fb802976e518113e1ff1989febfc4bb38406e31c6",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "addRightInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:101:7:assertion"
+      ]
+    },
+    {
+      "id": "e37f643caecc36ff0d43721ce354e34deec52c6a2ae5e3ae0ea00a91eddab18e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "addNegation"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:108:7:assertion"
+      ]
+    },
+    {
+      "id": "0c34255c3f8153c61b8c7a044a977876b9be6132123ce6c6a6262ce93e9f9a8c",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "addSamePointDoubles"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:115:7:assertion"
+      ]
+    },
+    {
+      "id": "056893a99bb63f86eba18957377112bf7c111e3bbe7090489881f4785c125933",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "addDifferentPoints"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:123:7:assertion"
+      ]
+    },
+    {
+      "id": "516e103cb9b9e76c231b55decf5c153441318f4c62d6b9052d507ff1fa750fca",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "mixedAddLeftInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:135:7:assertion"
+      ]
+    },
+    {
+      "id": "adb0947d8419b7debee19e3993a123aaaba41e00199865006f6ded99a1019623",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "mixedAddRightInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:142:7:assertion"
+      ]
+    },
+    {
+      "id": "1a2686b88d2d45bfd4e8e6e2102398309f8ae82ebef5b955373d34f139c65580",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "mixedAddDifferentPoints"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:150:7:assertion"
+      ]
+    },
+    {
+      "id": "3af72f9dd91a7059a4624d8316a36b6c7e1047c4708969476084ce399df6fda7",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "mixedAddSamePointDoubles"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:158:7:assertion"
+      ]
+    },
+    {
+      "id": "8bbbdfb775ff27b5df9f11ccdaa93fb3fd7aacede61493fb885c634b2ff8b88e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "mixedAddNegation"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:166:7:assertion"
+      ]
+    },
+    {
+      "id": "be3af7fc33856953c7694c06fa1c068afcd6a2834f3d19b98d29bcbeae406e12",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "mixedAddRejectsMissingCoordinates"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:173:7:assertion"
+      ]
+    },
+    {
+      "id": "7b33409f8e2050d450f3fab7732a04aa85acef7a31279631c6213fb560b1307f",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "doubleInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:184:7:assertion"
+      ]
+    },
+    {
+      "id": "f66b7280abd35654ac2fd337964a4d1a6ad0ccc720c0ab4a674c401e68848e88",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "doubleWithZOne"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:193:7:assertion"
+      ]
+    },
+    {
+      "id": "bb764ec091780f44818c65e0766a11a704c8b964cd51a88b1eea3ec93f453d13",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "doubleWithGeneralZ"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:203:7:assertion"
+      ]
+    },
+    {
+      "id": "db2895c8c20277b2db12c1a827730ad73647acc6b3e4979ddbcc6d358dfe97b6",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "doublePowerZero"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:214:7:assertion"
+      ]
+    },
+    {
+      "id": "679e577b832073eb3fe1b9d85a7a6c6db94bcbe8469e8a69234616ff046d9c3d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "doublePowerInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:220:7:assertion"
+      ]
+    },
+    {
+      "id": "23528152de5e2d998e0d1b4326094cbd1a047170770bbc1894c6f70f09415d7b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "doublePowerThree"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:227:7:assertion"
+      ]
+    },
+    {
+      "id": "d086f197b9c67ba9d85ea0ebe628b677263da668cc0ff206c368ac79e9e633e4",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "equalsSameInstance"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:237:7:assertion"
+      ]
+    },
+    {
+      "id": "84ff9c2a98c38a10a38a746b549642d4474570af72367aaaa2ddeeb94de0d898",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "equalsSameAffinePoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:245:7:assertion"
+      ]
+    },
+    {
+      "id": "47f45ca1af5de9bd9c8efb5614fbb2233a79b9b66679ee8f7194ed73a81ba1ae",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "differentPointsAreNotEqual"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:251:7:assertion"
+      ]
+    },
+    {
+      "id": "cc2d4f9d2d07728a6e340607facb0172c1b6c2c0006ecc7231def6f963b40922",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "infinityEqualsInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:257:7:assertion"
+      ]
+    },
+    {
+      "id": "ea4572309296cdad2e1cdbb677ff03ff448fc1efa76cbf14eb6e5486da68bef7",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "infinityDiffersFromFinitePoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:263:7:assertion"
+      ]
+    },
+    {
+      "id": "e015cbb26be5f72b083d8de66824df3bbd3375936183bd3f983d54d193ce70e2",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "equalsAffinePoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:269:7:assertion"
+      ]
+    },
+    {
+      "id": "353ca5e1063efe956ee3913ccbb9ec8b9d3776642f22722460b20cdc98e7340e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "matchingXCoordinate"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:280:7:assertion"
+      ]
+    },
+    {
+      "id": "cedd15b2684a741ac670498e3faba2230413cd9af96df53592ba85cb2746f2d2",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "differentXCoordinate"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:287:7:assertion"
+      ]
+    },
+    {
+      "id": "8d994bf88f644b480f642c52d75c18e76c8102a63d75f746631a60a2e7cc95c6",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "infinityInspection"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:297:7:assertion"
+      ]
+    },
+    {
+      "id": "cf58b95eb030efbdc33080109f9f9b8afd7a3264c280ad7d4115c05a773d448b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.JacobianPointTest",
+          "name": "finiteInspection"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/JacobianPoint.test.ts:303:7:assertion",
+        "src/primitives/__tests/JacobianPoint.test.ts:304:7:assertion",
+        "src/primitives/__tests/JacobianPoint.test.ts:305:7:assertion"
+      ]
     }
   ],
   "siteReviews": [
@@ -13468,6 +13890,582 @@
         "7bbe531b09bf09c04e9d41dda15530b08cdc0a7e9069ce4091336b7128f19370"
       ],
       "note": "原输入及断言完整复刻；toThrow(string) 保留消息子串匹配，返回/异常类型和完整消息另做实际对照。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:16:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b13d3ae2840a82c7763cab1ae1c9641d0426e520d837d1734924ed2fdfcbfd13"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:18:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b13d3ae2840a82c7763cab1ae1c9641d0426e520d837d1734924ed2fdfcbfd13"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:21:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "2c34b43da1911facc3f3a7c410244af6400973a24c30edc1fb03825f5ccca8b8"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:27:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "2c34b43da1911facc3f3a7c410244af6400973a24c30edc1fb03825f5ccca8b8"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:30:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "c2d08b8713d22215786d2e39ab5d5e32469566b9c6d06eade8b9c84835cfb9ba"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:35:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c2d08b8713d22215786d2e39ab5d5e32469566b9c6d06eade8b9c84835cfb9ba"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:43:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "73b68e05e8ab7ae9881a93d280e9116dc8b9572ed05a6db5820077b2037b1905"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:45:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "73b68e05e8ab7ae9881a93d280e9116dc8b9572ed05a6db5820077b2037b1905"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:48:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "bcf4a70a01ea0d83a77ce081626343626414aaf334d0e76bd356f7d014dc7c40"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:51:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "bcf4a70a01ea0d83a77ce081626343626414aaf334d0e76bd356f7d014dc7c40"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:59:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "dbdc24eceab9438178d65a147dd0ca05c18ed0da5da2ec5555f73fc83437597b"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:62:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "dbdc24eceab9438178d65a147dd0ca05c18ed0da5da2ec5555f73fc83437597b"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:65:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "7565d32c3603edc85062acebf1a22959145d5b967bd3a5f3b307e5a333ab1f5a"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:69:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7565d32c3603edc85062acebf1a22959145d5b967bd3a5f3b307e5a333ab1f5a"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:77:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "620ed6509197566c3bbe354797602ef5ad16255c5702673ca4e063a119abe126"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:82:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "620ed6509197566c3bbe354797602ef5ad16255c5702673ca4e063a119abe126"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:90:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "38e11ebc347cda4c8c0be69b9d09ae7f9d8f88e83fef763c8de3a78e4e84918e"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:94:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "38e11ebc347cda4c8c0be69b9d09ae7f9d8f88e83fef763c8de3a78e4e84918e"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:97:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "ba8c5b51ecd412554bd42a6fb802976e518113e1ff1989febfc4bb38406e31c6"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:101:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ba8c5b51ecd412554bd42a6fb802976e518113e1ff1989febfc4bb38406e31c6"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:104:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "e37f643caecc36ff0d43721ce354e34deec52c6a2ae5e3ae0ea00a91eddab18e"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:108:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "e37f643caecc36ff0d43721ce354e34deec52c6a2ae5e3ae0ea00a91eddab18e"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:111:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "0c34255c3f8153c61b8c7a044a977876b9be6132123ce6c6a6262ce93e9f9a8c"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:115:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0c34255c3f8153c61b8c7a044a977876b9be6132123ce6c6a6262ce93e9f9a8c"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:118:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "056893a99bb63f86eba18957377112bf7c111e3bbe7090489881f4785c125933"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:123:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "056893a99bb63f86eba18957377112bf7c111e3bbe7090489881f4785c125933"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:131:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "516e103cb9b9e76c231b55decf5c153441318f4c62d6b9052d507ff1fa750fca"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:135:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "516e103cb9b9e76c231b55decf5c153441318f4c62d6b9052d507ff1fa750fca"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:138:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "adb0947d8419b7debee19e3993a123aaaba41e00199865006f6ded99a1019623"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:142:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "adb0947d8419b7debee19e3993a123aaaba41e00199865006f6ded99a1019623"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:145:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "1a2686b88d2d45bfd4e8e6e2102398309f8ae82ebef5b955373d34f139c65580"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:150:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1a2686b88d2d45bfd4e8e6e2102398309f8ae82ebef5b955373d34f139c65580"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:153:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "3af72f9dd91a7059a4624d8316a36b6c7e1047c4708969476084ce399df6fda7"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:158:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "3af72f9dd91a7059a4624d8316a36b6c7e1047c4708969476084ce399df6fda7"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:161:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "8bbbdfb775ff27b5df9f11ccdaa93fb3fd7aacede61493fb885c634b2ff8b88e"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:166:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8bbbdfb775ff27b5df9f11ccdaa93fb3fd7aacede61493fb885c634b2ff8b88e"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:169:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "be3af7fc33856953c7694c06fa1c068afcd6a2834f3d19b98d29bcbeae406e12"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:173:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "be3af7fc33856953c7694c06fa1c068afcd6a2834f3d19b98d29bcbeae406e12"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:181:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "7b33409f8e2050d450f3fab7732a04aa85acef7a31279631c6213fb560b1307f"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:184:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7b33409f8e2050d450f3fab7732a04aa85acef7a31279631c6213fb560b1307f"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:187:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "f66b7280abd35654ac2fd337964a4d1a6ad0ccc720c0ab4a674c401e68848e88"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:193:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f66b7280abd35654ac2fd337964a4d1a6ad0ccc720c0ab4a674c401e68848e88"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:196:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "bb764ec091780f44818c65e0766a11a704c8b964cd51a88b1eea3ec93f453d13"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:203:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "bb764ec091780f44818c65e0766a11a704c8b964cd51a88b1eea3ec93f453d13"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:211:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "db2895c8c20277b2db12c1a827730ad73647acc6b3e4979ddbcc6d358dfe97b6"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:214:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "db2895c8c20277b2db12c1a827730ad73647acc6b3e4979ddbcc6d358dfe97b6"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:217:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "679e577b832073eb3fe1b9d85a7a6c6db94bcbe8469e8a69234616ff046d9c3d"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:220:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "679e577b832073eb3fe1b9d85a7a6c6db94bcbe8469e8a69234616ff046d9c3d"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:223:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "23528152de5e2d998e0d1b4326094cbd1a047170770bbc1894c6f70f09415d7b"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:227:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "23528152de5e2d998e0d1b4326094cbd1a047170770bbc1894c6f70f09415d7b"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:235:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "d086f197b9c67ba9d85ea0ebe628b677263da668cc0ff206c368ac79e9e633e4"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:237:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "d086f197b9c67ba9d85ea0ebe628b677263da668cc0ff206c368ac79e9e633e4"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:240:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "84ff9c2a98c38a10a38a746b549642d4474570af72367aaaa2ddeeb94de0d898"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:245:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "84ff9c2a98c38a10a38a746b549642d4474570af72367aaaa2ddeeb94de0d898"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:248:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "47f45ca1af5de9bd9c8efb5614fbb2233a79b9b66679ee8f7194ed73a81ba1ae"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:251:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "47f45ca1af5de9bd9c8efb5614fbb2233a79b9b66679ee8f7194ed73a81ba1ae"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:254:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "cc2d4f9d2d07728a6e340607facb0172c1b6c2c0006ecc7231def6f963b40922"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:257:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "cc2d4f9d2d07728a6e340607facb0172c1b6c2c0006ecc7231def6f963b40922"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:260:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "ea4572309296cdad2e1cdbb677ff03ff448fc1efa76cbf14eb6e5486da68bef7"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:263:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ea4572309296cdad2e1cdbb677ff03ff448fc1efa76cbf14eb6e5486da68bef7"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:266:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "e015cbb26be5f72b083d8de66824df3bbd3375936183bd3f983d54d193ce70e2"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:269:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "e015cbb26be5f72b083d8de66824df3bbd3375936183bd3f983d54d193ce70e2"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:277:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "353ca5e1063efe956ee3913ccbb9ec8b9d3776642f22722460b20cdc98e7340e"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:280:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "353ca5e1063efe956ee3913ccbb9ec8b9d3776642f22722460b20cdc98e7340e"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:283:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "cedd15b2684a741ac670498e3faba2230413cd9af96df53592ba85cb2746f2d2"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:287:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "cedd15b2684a741ac670498e3faba2230413cd9af96df53592ba85cb2746f2d2"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:295:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "8d994bf88f644b480f642c52d75c18e76c8102a63d75f746631a60a2e7cc95c6"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:297:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8d994bf88f644b480f642c52d75c18e76c8102a63d75f746631a60a2e7cc95c6"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:300:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "cf58b95eb030efbdc33080109f9f9b8afd7a3264c280ad7d4115c05a773d448b"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:303:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "cf58b95eb030efbdc33080109f9f9b8afd7a3264c280ad7d4115c05a773d448b"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:304:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "cf58b95eb030efbdc33080109f9f9b8afd7a3264c280ad7d4115c05a773d448b"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/JacobianPoint.test.ts:305:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "cf58b95eb030efbdc33080109f9f9b8afd7a3264c280ad7d4115c05a773d448b"
+      ],
+      "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
     }
   ]
 }
