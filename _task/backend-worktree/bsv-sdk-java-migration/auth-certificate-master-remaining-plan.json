@@ -1,0 +1,255 @@
+{
+  "0e7dd96cdd2e143612675c415fca4e3d9bea4550c777d84a5f1375587e8264b0": {
+    "sampleIds": [
+      "issue-0",
+      "random-0",
+      "random-1",
+      "random-2",
+      "random-3",
+      "random-4",
+      "random-5",
+      "random-6",
+      "random-7",
+      "random-8",
+      "random-9",
+      "issueResult-0",
+      "decrypt-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:108:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:108:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:108:7:assertion"
+    }
+  },
+  "666d1d1f6716c2f6cd16c0dc01c1a2f61ef94fd160fd55f00acbc6949c7c32ba": {
+    "sampleIds": [
+      "random-0",
+      "random-1",
+      "constructor-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:113:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:113:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:113:7:assertion"
+    }
+  },
+  "420aca9301ad8764b2726d8a668db3bbc45248c7e709c16ab61f665dbd4df9c1": {
+    "sampleIds": [
+      "random-0",
+      "random-1",
+      "random-2",
+      "constructor-0",
+      "decrypt-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:148:13:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:148:13:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:148:13:assertion"
+    }
+  },
+  "e9da673d256fd3040959d6d8c42da9aa8b9681854e4270980d9b3da1d3a0d492": {
+    "sampleIds": [
+      "issue-0",
+      "random-0",
+      "random-1",
+      "random-2",
+      "random-3",
+      "random-4",
+      "random-5",
+      "random-6",
+      "random-7",
+      "random-8",
+      "random-9",
+      "issueResult-0",
+      "keyring-0",
+      "random-10",
+      "verifiableConstructor-0",
+      "verifiableDecrypt-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:195:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:196:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:212:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:195:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:195:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:196:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:196:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:212:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:212:7:assertion"
+    }
+  },
+  "87317252793bad20e1b3463ebf23b471e5ce591b09b40fc3a0fcb3b6862cf1af": {
+    "sampleIds": [
+      "keyring-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:216:13:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:216:13:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:216:13:assertion"
+    }
+  },
+  "afba597b37f51d1e0d010483d21d2dba94d95e5605d7cca7325db10720f4b884": {
+    "sampleIds": [
+      "constructor-0",
+      "keyring-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:249:13:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:249:13:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:249:13:assertion"
+    }
+  },
+  "e67ff8bc289b7162fb8e66a0d4ef9656389efdb856100741c13123ad8d3edc8b": {
+    "sampleIds": [
+      "keyring-0",
+      "random-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:274:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:274:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:274:7:assertion"
+    }
+  },
+  "caad8325cd99a5a3d51b90549d61ea014f7ee5dfe7d07fcb9d168b31e0bee3cb": {
+    "sampleIds": [
+      "keyring-0",
+      "random-0",
+      "keyring-1",
+      "random-1"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:290:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:302:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:290:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:290:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:302:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:302:7:assertion"
+    }
+  },
+  "45100bdfc38832d5200e292bfb3becd5278d5be3828af122a2cfa70d845e4799": {
+    "sampleIds": [
+      "issue-0",
+      "random-0",
+      "random-1",
+      "random-2",
+      "random-3",
+      "random-4",
+      "random-5",
+      "random-6",
+      "revocation-0",
+      "issueResult-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:323:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:326:9:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:326:9:assertion#2",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:330:9:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:330:9:assertion#2",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:333:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:335:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:337:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:323:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:323:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:326:9:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:326:9:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:330:9:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:330:9:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:333:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:333:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:335:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:335:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:337:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:337:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:326:9:assertion#2": "src/auth/certificates/__tests/MasterCertificate.test.ts:326:9:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:330:9:assertion#2": "src/auth/certificates/__tests/MasterCertificate.test.ts:330:9:assertion"
+    },
+    "loopSamples": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:325:7:loop": [
+        "issueResult-0"
+      ],
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:329:7:loop": [
+        "issueResult-0"
+      ]
+    }
+  },
+  "81c307b349b1b2035e7d3b8e5ae9f75e22bd1737a4a6444dcebd03386ff29340": {
+    "sampleIds": [
+      "random-0",
+      "issue-0",
+      "random-1",
+      "random-2",
+      "random-3",
+      "issueResult-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:352:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:353:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:354:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:357:9:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:352:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:352:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:353:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:353:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:354:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:354:7:assertion",
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:357:9:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:357:9:assertion"
+    },
+    "loopSamples": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:356:7:loop": [
+        "issueResult-0"
+      ]
+    }
+  },
+  "25e78fa9c066d5e863141be7c0f65855fc1882ea11b2972b11d97c2c23745e9a": {
+    "sampleIds": [
+      "issue-0",
+      "random-0",
+      "random-1",
+      "random-2",
+      "random-3",
+      "random-4",
+      "random-5",
+      "random-6",
+      "issueResult-0",
+      "decrypt-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:389:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:389:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:389:7:assertion"
+    }
+  },
+  "5ce8ce6188f72cf2ce4aefe5e546822786b42ae8e2982e6948666b87362bedc9": {
+    "sampleIds": [
+      "issue-0",
+      "random-0",
+      "random-1",
+      "random-2",
+      "random-3",
+      "issueResult-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:406:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:406:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:406:7:assertion"
+    }
+  },
+  "b3c040360d1fced69eb77fc6ac19c54839200ede25faf85dcbc0356e8aa5b464": {
+    "sampleIds": [
+      "issue-0",
+      "random-0",
+      "random-1",
+      "random-2",
+      "random-3",
+      "issueResult-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:422:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/MasterCertificate.test.ts:422:7:assertion": "src/auth/certificates/__tests/MasterCertificate.test.ts:422:7:assertion"
+    }
+  }
+}
