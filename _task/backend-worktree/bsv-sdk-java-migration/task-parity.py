@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """按 implementation-slice 对照 TS/Jest 与 Java/JUnit 的逐断言实际结果。
 
-确定性用例精确比较实际值；Random.* 的随机字节用例按契约只比较断言语义
-（matcher、期望长度/边界、pass）并单列为 nondeterministic。Java 测试中
+确定性用例精确比较实际值；Random.* 的随机字节及指定性能用例的耗时断言
+比较断言语义，并单列为 nondeterministic。Java 测试中
 额外断言作为额外回归单列，不冒充上游断言。
 """
 import argparse
@@ -20,6 +20,9 @@ spec.loader.exec_module(audit)
 RANDOM_FILES = {
     'src/primitives/__tests/Random.test.ts',
     'src/primitives/__tests/Random.additional.test.ts',
+}
+TIMING_CASES = {
+    '8cafa389ea1819ec6268cd946171ee603bb27f4bdc4a0cab23277aaf37a1abd0',
 }
 
 
@@ -67,7 +70,7 @@ def expected_value(row):
     return ''
 
 
-def row_key(file_path, row):
+def row_key(file_path, case_id, row):
     matcher = str(row.get('matcher', ''))
     negated = bool(row.get('negated', False))
     passed = bool(row.get('pass', True))
@@ -75,6 +78,18 @@ def row_key(file_path, row):
         category = matcher_class(matcher)
         expected = expected_value(row) if category in ('equal', 'gte', 'lte') else ''
         return ('nondet', category, negated, passed, expected)
+    if case_id in TIMING_CASES and matcher in ('toBeGreaterThanOrEqual', 'toBeLessThan'):
+        actual = row.get('actual')
+        expected = row.get('expected')
+        if not (isinstance(actual, dict) and actual.get('type') == 'number'
+                and isinstance(expected, dict) and expected.get('type') == 'number'):
+            return ('invalid-timing', str(actual), str(expected))
+        try:
+            measured, bound = float(actual['value']), float(expected['value'])
+        except (TypeError, ValueError):
+            return ('invalid-timing', str(actual), str(expected))
+        valid = measured >= bound if matcher == 'toBeGreaterThanOrEqual' else measured < bound
+        return ('timing', matcher, negated, passed, str(expected['value']), valid)
     actual = row.get('actual')
     if isinstance(actual, dict) and actual.get('kind') == 'return':
         return ('return', value_key(actual.get('value')))
@@ -85,11 +100,11 @@ def row_key(file_path, row):
     return ('value', value_key(actual))
 
 
-def align(file_path, ts_rows, java_rows):
+def align(file_path, case_id, ts_rows, java_rows):
     """小用例按最长公共子序列对齐；原规模循环按顺序线性核对。"""
     n, m = len(ts_rows), len(java_rows)
-    ts_keys = [row_key(file_path, row) for row in ts_rows]
-    java_keys = [row_key(file_path, row) for row in java_rows]
+    ts_keys = [row_key(file_path, case_id, row) for row in ts_rows]
+    java_keys = [row_key(file_path, case_id, row) for row in java_rows]
     if n == m and ts_keys == java_keys:
         return [], list(zip(range(n), range(n))), 0
     if n * m > 2_000_000:
@@ -184,7 +199,7 @@ def compare(task_id, ts_path, java_path, java_worktree=None):
     nondeterministic = []
     for case_id, test_file in sorted(case_file.items()):
         ts_sequence, java_sequence = ts_by_case.get(case_id, []), java_by_case.get(case_id, [])
-        unmatched, matched, extra = align(test_file, ts_sequence, java_sequence)
+        unmatched, matched, extra = align(test_file, case_id, ts_sequence, java_sequence)
         if not ts_sequence or not java_sequence:
             missing_cases += 1
         case = {
@@ -196,7 +211,7 @@ def compare(task_id, ts_path, java_path, java_worktree=None):
             'missingAssertions': len(unmatched),
             'extraJavaAssertions': extra,
         }
-        if is_random_task(test_file) and (ts_sequence or java_sequence):
+        if (is_random_task(test_file) or case_id in TIMING_CASES) and (ts_sequence or java_sequence):
             case['nondeterministic'] = True
             nondeterministic.append(case_id)
         if unmatched:
@@ -224,7 +239,7 @@ def compare(task_id, ts_path, java_path, java_worktree=None):
         'uncompared': total_missing,
         'extraJavaAssertions': total_extra,
         'nondeterministicCases': nondeterministic,
-        'nondeterministicPolicy': 'Random.* 随机字节用例比较 matcher/期望边界/pass，不比较跨语言随机字节本身。',
+        'nondeterministicPolicy': 'Random.* 随机字节用例比较 matcher/期望边界/pass；CachedKeyDeriver 性能用例比较耗时断言的阈值和实际是否满足，不比较跨运行时的毫秒数。',
         'cases': cases,
     }
     if java_worktree is not None:

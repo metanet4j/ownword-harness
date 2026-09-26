@@ -675,7 +675,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "compat：助记词、HD、BSM 与 ECIES",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-symmetric"
       ],
@@ -711,7 +711,9 @@
       "apiBatchRefs": [
         "migration-api-compat"
       ],
-      "evidence": [],
+      "evidence": [
+        "固定 TS 122/122；兼容层 90 项 API、122 用例及 267 个源码站点已映射。BSM/ECIES 15 个 Java 用例与 21 条固定 TS 断言精确一致；HD/Mnemonic 隔离 Maven 107/107，正式逐断言验收进行中。"
+      ],
       "modules": [
         "compat"
       ],
@@ -770,18 +772,30 @@
         "migration-api-wallet-contracts",
         "migration-api-wallet-validation"
       ],
-      "evidence": [],
+      "evidence": [
+        ".cache/evidence/wallet-contracts-acceptance.json；API-08 共 442 项、钱包验证 API 248 项及原用例 253/625 站点均已映射。",
+        "干净累计提交 4da4459：相关 16 类 Maven 402/402 通过；任务级固定 TS/Java 逐断言对照见 .cache/evidence/wallet-contracts-clean-parity.json。"
+      ],
       "modules": [
         "wallet"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 253,
+        "assertionsCompared": 1003,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/wallet-contracts-clean-parity.json"
+      }
     },
     {
       "id": "migration-impl-wallet-keys",
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "wallet：密钥派生、缓存与 ProtoWallet",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-wallet-contracts"
       ],
@@ -825,7 +839,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "auth：证书、验证与钱包辅助类",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-wallet-keys"
       ],
@@ -865,7 +879,9 @@
       "apiBatchRefs": [
         "migration-api-auth-certificates"
       ],
-      "evidence": [],
+      "evidence": [
+        "固定 TS 五个原测试和七个源码文件清点、Java 证书实现正在推进。"
+      ],
       "modules": [
         "auth"
       ],
@@ -1081,13 +1097,25 @@
         "migration-api-transaction-model",
         "migration-api-script-templates"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标提交 0a6a81e；固定 TS/Java 原用例 74/74、115 条实际断言逐项一致；.cache/evidence/transaction-base-local-parity-root.json。",
+        "干净累计提交 4da4459：相关 16 类 Maven 402/402 通过；任务级固定 TS/Java 逐断言对照见 .cache/evidence/transaction-base-clean-parity.json。"
+      ],
       "modules": [
         "primitives",
         "script",
         "transaction"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 74,
+        "assertionsCompared": 115,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/transaction-base-clean-parity.json"
+      }
     },
     {
       "id": "migration-impl-transaction-beef",
@@ -1132,14 +1160,26 @@
         "migration-api-transaction-model",
         "migration-api-transaction-beef"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标提交：MerklePath 28e0028、BEEF 7861580；固定 TS 与 Java 原用例 83/83、1553/1553 断言；.cache/evidence/transaction-beef-final-parity.json。",
+        "干净提交 /tmp/bsv-beef-accept-7861580 Maven 五个测试类 83/83，失败/错误/跳过均为 0；BRC-74 bench 101/501/999 规模保留；API-TRANSACTION-BEEF 237 项已复核。"
+      ],
       "modules": [
         "transaction"
       ],
       "fixtureFiles": [
         "src/transaction/__tests/bump.invalid.vectors.ts",
         "src/transaction/__tests/bump.valid.vectors.ts"
-      ]
+      ],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 83,
+        "assertionsCompared": 1553,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/transaction-beef-final-parity.json"
+      }
     },
     {
       "id": "migration-impl-script-templates",
@@ -1186,12 +1226,24 @@
         "migration-api-script-spend",
         "migration-api-script-templates"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标提交 9e420e3；固定 TS/Java 17/17、96/96 条断言一致；.cache/evidence/script-templates-task-parity.json。",
+        "干净累计提交 4da4459：相关 16 类 Maven 402/402 通过；任务级固定 TS/Java 逐断言对照见 .cache/evidence/script-templates-clean-parity.json。"
+      ],
       "modules": [
         "script",
         "transaction"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 17,
+        "assertionsCompared": 96,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/script-templates-clean-parity.json"
+      }
     },
     {
       "id": "migration-impl-script-spend",
@@ -1514,11 +1566,23 @@
       "apiBatchRefs": [
         "migration-api-wallet-clients"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标提交 2d23200；固定 TS/Java 58/58、78/78 条断言，离线网络请求记录 0；.cache/evidence/wallet-json-local-parity-root.json。",
+        "干净累计提交 4da4459：相关 16 类 Maven 402/402 通过；任务级固定 TS/Java 逐断言对照见 .cache/evidence/wallet-json-clean-parity.json。"
+      ],
       "modules": [
         "wallet"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 58,
+        "assertionsCompared": 78,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/wallet-json-clean-parity.json"
+      }
     },
     {
       "id": "migration-impl-wallet-hosts",
@@ -2424,14 +2488,16 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "api-map.json：BEEF/BeefConstants/BeefParty/BeefTx/MerklePath 五文件 237 项声明均已复核；node audit-api.cjs batches --batch migration-api-transaction-beef 通过。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
@@ -2781,14 +2847,16 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "api-map.json：脚本模板五文件 30 项声明均已复核；doc/完整模块与API映射-20260920-122800.md#api-script-templates 保留模板、签名与钱包边界。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
