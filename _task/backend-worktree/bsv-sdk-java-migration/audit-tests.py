@@ -200,7 +200,7 @@ def semantic_payment_log(value, attempt):
     message = f'payment attempt {attempt} failed'
     fixed = {'attempt': {'type': 'number', 'value': str(attempt)},
              'message': {'type': 'string', 'value': message}}
-    require(canonical(value['expected']) == canonical({'type': 'map', 'value': fixed})
+    require(value['expected'] == {'type': 'string', 'value': 'ObjectContaining'}
             and canonical({key: fields[key] for key in fixed}) == canonical(fixed),
             '支付失败日志的固定 attempt/message 或原始预期被修改')
     for key in ('timestamp', 'stack'):

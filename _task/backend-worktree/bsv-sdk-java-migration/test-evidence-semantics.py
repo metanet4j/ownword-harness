@@ -356,7 +356,7 @@ class SemanticTest(unittest.TestCase):
         specs = []
         for attempt, position in ((1, '293:11'), (2, '299:11')):
             stable = {'attempt': number(attempt), 'message': text_value(f'payment attempt {attempt} failed')}
-            expected = {'type': 'map', 'value': stable}
+            expected = text_value('ObjectContaining')
             values = [observation('toEqual', {'type': 'map', 'value': dict(stable,
                 timestamp=text_value(timestamp), stack=text_value(f'Error: payment attempt {attempt} failed\n{frame}'))},
                 expected) for timestamp, frame in [('2026-09-26T10:00:00.001Z', '    at TS.test'),
@@ -377,6 +377,9 @@ class SemanticTest(unittest.TestCase):
                 self.assertNotEqual(self.bundle().returncode, 0)
         self.f.path('java-assertions.jsonl').write_text(original)
         self.mutate_java(lambda rows: rows[0]['value']['actual']['value'].update(attempt=number(2)))
+        self.assertNotEqual(self.bundle().returncode, 0)
+        self.f.path('java-assertions.jsonl').write_text(original)
+        self.mutate_java(lambda rows: rows[0]['value'].update(expected=text_value('Anything')))
         self.assertNotEqual(self.bundle().returncode, 0)
 
     def test_fixed_branch_uses_fixture_operands_and_executed_throw(self):
