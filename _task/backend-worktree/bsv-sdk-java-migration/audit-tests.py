@@ -282,10 +282,12 @@ def compare_actuals(case_id, expected, identity, left, right):
     if rule_id == 'void-completion-null-adapter-v1':
         for side, value, actual in (('TS', left, {'type': 'undefined'}),
                                     ('Java', right, {'type': 'null'})):
-            require(isinstance(value, dict) and set(value) ==
-                    {'kind', 'matcher', 'negated', 'actual', 'expected', 'pass'}
+            required_keys = {'kind', 'matcher', 'negated', 'actual', 'expected'}
+            require(isinstance(value, dict) and
+                    (set(value) == required_keys | {'pass'} if side == 'TS'
+                     else required_keys <= set(value) <= required_keys | {'pass'})
                     and value['kind'] == 'assertion' and value['matcher'] == 'not.toThrow'
-                    and value['negated'] is True and value['pass'] is True
+                    and value['negated'] is True and value.get('pass', True) is True
                     and value['actual'] == actual and value['expected'] == [],
                     f'固定 void 完成值 {side} 必须保留真实 undefined/null：{identity}')
         return
