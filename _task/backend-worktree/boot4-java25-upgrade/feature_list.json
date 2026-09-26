@@ -288,8 +288,12 @@
       "dependencies": [
         "unit-u1-base"
       ],
-      "evidence": [],
-      "statusNote": "开始按现有离线基线与公开 SDK API 补单元测试和本地 HTTP 集成测试；当前 24/0/0/0，行 307/1990、分支 24/505、方法 91/454。"
+      "evidence": [
+        "sdk 提交 4f4a590（Bitails/Gorilla 客户端与 Provider，本地端点注入和错误响应）",
+        "本地 HTTP 集成 evidence/20260926-u2-http/integration/：5/0/0/0",
+        "SDK 隔离单元基线 evidence/20260926T075317Z/：32/0/0/0，LINE 392/2005"
+      ],
+      "statusNote": "HTTP 客户端与 UTXO Provider 子项已完成（SDK 4f4a590）；本地 HTTP 集成 5/0/0/0，SDK 单元 32/0/0/0，LINE 392/2005、BRANCH 35/505、METHOD 114/462；其余 SDK 行为和覆盖率待补。"
     },
     {
       "id": "unit-u3-foundation",

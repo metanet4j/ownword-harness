@@ -313,7 +313,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "257740657c6da456f8a75f21d1ae9f671a122f77",
+      "head": "4f4a5908b6d76b0c4e093b450161d5ba4f4ec857",
       "modules": [
         {
           "path": ".",
@@ -1035,6 +1035,43 @@
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
             },
             {
+              "path": "src/test/java/com/metanet4j/sdk/utxo/BitailsAndGorillaHttpIntegrationTest.java",
+              "classification": "integration",
+              "methods": [
+                {
+                  "name": "bitailsUsesLocalEndpointForReadAndBroadcast",
+                  "returnType": "void",
+                  "line": 32,
+                  "classification": "integration"
+                },
+                {
+                  "name": "gorillaUsesLocalEndpointForOriginLookup",
+                  "returnType": "void",
+                  "line": 67,
+                  "classification": "integration"
+                },
+                {
+                  "name": "malformedHttpPayloadReportsTheLocalRequest",
+                  "returnType": "void",
+                  "line": 82,
+                  "classification": "integration"
+                },
+                {
+                  "name": "nonSuccessStatusIsNotParsedAsSuccessfulBalance",
+                  "returnType": "void",
+                  "line": 97,
+                  "classification": "integration"
+                },
+                {
+                  "name": "providersMapLocalHttpResponsesAndPropagateServerFailures",
+                  "returnType": "void",
+                  "line": 110,
+                  "classification": "integration"
+                }
+              ],
+              "classificationReason": "本机随机端口 HTTP 服务；断言请求及响应，覆盖客户端与 Provider 成功、畸形 JSON 和 503"
+            },
+            {
               "path": "src/test/java/com/metanet4j/sdk/utxo/BitailsProviderTest.java",
               "classification": "external",
               "methods": [
@@ -1052,17 +1089,86 @@
                 }
               ],
               "classificationReason": "两个测试真实访问 Bitails HTTP，当前无标签；分类修复前不得运行 sdk 自动基线"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/utxo/HttpClientFactoryTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "createsRequestsWithMethodHeadersAndTimeout",
+                  "returnType": "void",
+                  "line": 27,
+                  "classification": "unit"
+                },
+                {
+                  "name": "decodesBodyAndReportsMalformedJson",
+                  "returnType": "void",
+                  "line": 42,
+                  "classification": "unit"
+                },
+                {
+                  "name": "returnsNullForIoFailureAndRestoresInterruptedStatus",
+                  "returnType": "void",
+                  "line": 65,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "公开请求/发送入口，经 Mockito HttpClient 替身，不发起网络请求"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/utxo/HttpClientsTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "bitailsQueriesUseDefaultAndExplicitEndpoints",
+                  "returnType": "void",
+                  "line": 30,
+                  "classification": "unit"
+                },
+                {
+                  "name": "broadcastSerializesRawTransactionForBothEndpoints",
+                  "returnType": "void",
+                  "line": 56,
+                  "classification": "unit"
+                },
+                {
+                  "name": "gorillaQueriesUseDefaultAndExplicitEndpoints",
+                  "returnType": "void",
+                  "line": 83,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "静态传输替身下验证默认/本地 URL 和广播载荷，不发起网络请求"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/utxo/UtxoProvidersTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "bitailsMapsUnspentOutputsAndHandlesEmptyResults",
+                  "returnType": "void",
+                  "line": 25,
+                  "classification": "unit"
+                },
+                {
+                  "name": "gorillaChoosesSpendHashWhenAvailable",
+                  "returnType": "void",
+                  "line": 54,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "静态客户端替身下验证 UTXO 映射、空结果与 spend 优先级"
             }
           ],
           "classificationReviewed": true,
-          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "integrationReview": "Bitails/Gorilla 客户端和 Provider 使用本地随机端口 HTTP 服务验证成功、畸形 JSON 和 503；外部公网测试仍隔离",
           "classificationReason": "纯本地测试与 fixture 已核查；公网读取及广播类标为 external 并从单元门禁排除",
           "integrationCases": [
             {
               "boundary": "BitailsClient、GorillaClient 与 UTXOProvider 的 HTTP 请求和错误处理",
               "isolation": "本机随机端口、固定响应夹具，无公网调用",
-              "observation": "记录请求路径/载荷并断言返回 UTXO、错误及超时",
-              "status": "not-started"
+              "observation": "记录请求路径/载荷并断言返回 UTXO、畸形 JSON 和 503 错误",
+              "status": "implemented"
             }
           ]
         }
