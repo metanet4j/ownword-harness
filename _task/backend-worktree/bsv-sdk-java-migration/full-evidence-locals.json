@@ -117,6 +117,12 @@
       "captureKind": "specialized-local"
     },
     {
+      "name": "auth-verifiable-certificate",
+      "deriveCatalogFromPlan": true,
+      "input_plan": "auth-certificate-verifiable-plan.json",
+      "captureKind": "specialized-local"
+    },
+    {
       "name": "script-spend-shared-vectors",
       "catalog": ".cache/evidence/script-vector-inputs-20260927/plan-v2/catalog.json",
       "mapping": ".cache/evidence/script-vector-inputs-20260927/plan-v2/mapping.json",
