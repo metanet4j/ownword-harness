@@ -10,6 +10,7 @@ VARIANTS = {
     'arithmetic': ('src/primitives/__tests/BigNumber.arithmatic.test.ts', 52, 1178, 176),
     'binary': ('src/primitives/__tests/BigNumber.binary.test.ts', 20, 854, 521),
     'serializers': ('src/primitives/__tests/BigNumber.serializers.test.ts', 16, 106, 55),
+    'utils': ('src/primitives/__tests/BigNumber.utils.test.ts', 36, 620, 284),
 }
 BINARY_ITERATIONS = {92: 8 + 256, 96: 2, 112: int('23478905234580795234378912401239784125643978256123048348957342').bit_length()}
 # 原源码四处循环的控制规模，固定全部迭代和方法调用次数。
@@ -73,6 +74,8 @@ def main():
         assert set(occurrences) == set(cases[key]['assertionIds'])
         if args.variant == 'arithmetic':
             assert set(occurrences.values()) == {expected_occurrences}
+        elif args.variant == 'utils' and method == 'toStringHexNoPaddingSameLengthAsInput':
+            assert occurrences == {assertions[11]: 128}
         elif method == 'supportTestSpecificBit':
             assert occurrences == {assertions[line]: count for line, count in BINARY_ITERATIONS.items()}
         else:
@@ -89,6 +92,11 @@ def main():
                            if row['kind'] == 'call' and row['source']['line'] in call_lines]
                 assert len(samples) == count
                 entry['loopSamples'][loop['id']] = samples
+        if args.variant == 'utils' and method == 'toStringHexNoPaddingSameLengthAsInput':
+            constructors = [r for r in rows if r['kind'] == 'call' and r['method'] == 'constructor']
+            assert [r['args'][0]['value'] for r in constructors] == ['1'+'0'*i for i in range(128)]
+            assert [r['source']['line'] for r in constructors] == [10]*128
+            entry['loopSamples'][f'{source_file}:9:9:loop'] = [f"call-{r['sequence']:04d}" for r in constructors]
         plan[key] = entry
     assert sum(len(x['sampleIds']) for x in plan.values()) == input_count
     assert sum(len(x['assertionIds']) for x in plan.values()) == assertion_count

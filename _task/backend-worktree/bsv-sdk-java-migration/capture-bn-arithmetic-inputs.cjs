@@ -4,7 +4,7 @@ const path = require('node:path')
 const output = process.env.MIGRATION_BN_ARITHMETIC_RAW
 if (!output) throw new Error('缺少 BigNumber arithmetic 原输入输出路径')
 const variant = process.env.MIGRATION_BN_VARIANT || 'arithmetic'
-if (!['arithmetic', 'binary', 'serializers'].includes(variant)) throw new Error('未知 BigNumber 固定测试变体')
+if (!['arithmetic', 'binary', 'serializers', 'utils'].includes(variant)) throw new Error('未知 BigNumber 固定测试变体')
 const file = `src/primitives/__tests/BigNumber.${variant === 'arithmetic' ? 'arithmatic' : variant}.test.ts`
 const nativeExpect = global.expect
 const sdk = path.resolve(__dirname, '../../../reference/ts-stack/packages/sdk')
@@ -29,7 +29,7 @@ let ids = new WeakMap(), nextId = 0
 const origins = new WeakMap()
 
 function source() {
-  const match = new Error().stack.match(/BigNumber\.(?:arithmatic|binary|serializers)\.test\.ts:(\d+):(\d+)/)
+  const match = new Error().stack.match(/BigNumber\.(?:arithmatic|binary|serializers|utils)\.test\.ts:(\d+):(\d+)/)
   if (!match) throw new Error('BigNumber arithmetic 调用缺少固定源码位置')
   return { file, line: Number(match[1]), column: Number(match[2]) }
 }
@@ -43,9 +43,12 @@ function typed(value) {
     return result
   }
   if (Array.isArray(value)) return { type: 'bytes', hex: Buffer.from(value).toString('hex') }
+  if (value instanceof Error) return { type: 'Error', name: value.name, message: value.message }
+  if (typeof value === 'number' && !Number.isFinite(value)) return { type: 'number', value: String(value) }
   if (value instanceof RegExp) return { type: 'regexp', source: value.source, flags: value.flags }
   if (['number', 'boolean', 'string'].includes(typeof value)) return { type: typeof value, value }
-  throw new Error('未支持的 BigNumber 算术输入类型')
+  if (value && typeof value === 'object') return { type: 'object', value: Object.fromEntries(Object.entries(value).map(([key, item]) => [key, typed(item)])) }
+  throw new Error('未支持的 BigNumber 原输入类型')
 }
 function binding(value) {
   if (value instanceof Original) return { type: 'BigNumber', id: typed(value).id }
@@ -95,7 +98,8 @@ jest.doMock(modulePath, () => {
     'abs', 'invm', 'gcd', 'egcd', 'ineg', 'neg', 'clone', 'sqr', 'isqr', 'ishln',
     'isNeg', 'cmp', 'cmpn', 'toNumber', 'toString', 'shln', 'ushln', 'shrn', 'ushrn',
     'bincn', 'imaskn', 'testn', 'bitLength', 'and', 'iand', 'or', 'ior', 'xor', 'ixor',
-    'setn', 'notn', 'iushln', 'toJSON', 'toHex', 'toBits', 'toSm', 'toScriptNum', 'ltn']) {
+    'setn', 'notn', 'iushln', 'toJSON', 'toHex', 'toBits', 'toSm', 'toScriptNum', 'ltn', 'isOdd', 'isEven', 'isZero', 'byteLength', 'toArray', 'zeroBits',
+    'gtn', 'gt', 'gten', 'gte', 'lt', 'lten', 'lte', 'eqn', 'eq', 'fromTwos', 'toTwos']) {
     const original = Original.prototype[method]
     jest.spyOn(Original.prototype, method).mockImplementation(function (...args) {
       return observe(method, this, args, () => Reflect.apply(original, this, args))
@@ -105,7 +109,7 @@ jest.doMock(modulePath, () => {
   jest.spyOn(Original.prototype, 'negative', 'get').mockImplementation(function () {
     return observe('negative', this, [], () => negative.call(this))
   })
-  for (const method of ['max', 'min', 'fromJSON', 'fromString', 'fromHex', 'fromNumber', 'fromBits', 'fromSm', 'fromScriptNum']) {
+  for (const method of ['max', 'min', 'fromJSON', 'fromString', 'fromHex', 'fromNumber', 'fromBits', 'fromSm', 'fromScriptNum', 'isBN']) {
     const original = Original[method]
     jest.spyOn(Original, method).mockImplementation(function (...args) {
       return observe(method, null, args, () => Reflect.apply(original, Original, args))
@@ -132,7 +136,7 @@ global.expect = Object.assign(function (actual) {
   function wrapMatcher(assertion, negated = false) {
     return new Proxy(assertion, { get(target, matcher) {
     if (matcher === 'not') return wrapMatcher(target.not, true)
-    if (!['toBe', 'toEqual', 'toThrow'].includes(matcher)) throw new Error('未支持的 arithmetic matcher：' + String(matcher))
+    if (!['toBe', 'toEqual', 'toThrow', 'toHaveLength'].includes(matcher)) throw new Error('未支持的 arithmetic matcher：' + String(matcher))
     return (...args) => {
       const expectedEntry = last !== actualEntry ? last : null
       const result = Reflect.apply(target[matcher], target, args)
@@ -141,6 +145,7 @@ global.expect = Object.assign(function (actual) {
       let transform = null
       if (matcher !== 'toThrow' && !Object.is(actual, received.value)) {
         if (typeof received.value === 'number' && received.value.toString(16) === actual) transform = 'number.toString(16)'
+        else if (typeof received.value === 'number' && Object.is(1 / received.value, actual)) transform = 'number.reciprocal'
         else if (typeof received.value === 'boolean' && !received.value === actual) transform = 'boolean.not'
         else if (Array.isArray(received.value) && Buffer.from(received.value).toString('hex') === actual) transform = 'bytes.toHex'
         else throw new Error('原断言实际值不是已记录 API 返回值')

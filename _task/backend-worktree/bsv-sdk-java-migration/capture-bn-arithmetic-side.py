@@ -13,6 +13,7 @@ VARIANTS = {
     'arithmetic': ('src/primitives/__tests/BigNumber.arithmatic.test.ts', 'BigNumberArithmeticTest'),
     'binary': ('src/primitives/__tests/BigNumber.binary.test.ts', 'BigNumberBinaryTest'),
     'serializers': ('src/primitives/__tests/BigNumber.serializers.test.ts', 'BigNumberSerializersTest'),
+    'utils': ('src/primitives/__tests/BigNumber.utils.test.ts', 'BigNumberUtilsTest'),
 }
 
 
@@ -44,7 +45,7 @@ def main():
         subprocess.run(command, cwd=TASK, env=env, check=True)
         source = TASK / 'metanet4j-bsv-sdk/target/surefire-reports' / ('TEST-com.metanet4j.bsv.primitives.' + java_class + '.xml')
         shutil.copyfile(source, report)
-        if args.variant in ('binary', 'serializers'):
+        if args.variant in ('binary', 'serializers', 'utils'):
             # 原 Java 测试主体仍执行动态循环；核对其全部原断言与输入 replay 的独立结果。
             original = report.parent / 'original-assertions.jsonl'
             convert(args, raw, original)
