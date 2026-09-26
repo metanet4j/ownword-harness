@@ -612,6 +612,24 @@
       ]
     },
     {
+      "name": "bignumber-serializers",
+      "catalog": ".cache/evidence/bn-serializers-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/bn-serializers-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/bn-serializers-plan-20260927/input-plan.json",
+      "ts_inputs": ".cache/evidence/bn-serializers-ts-formal-20260927/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/bn-serializers-ts-formal-20260927/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/bn-serializers-ts-formal-20260927/manifest.json",
+      "ts_report": [
+        ".cache/evidence/bn-serializers-ts-formal-20260927/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/bn-serializers-java-formal-20260927/inputs.jsonl",
+      "java_assertions": ".cache/evidence/bn-serializers-java-formal-20260927/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/bn-serializers-java-formal-20260927/manifest.json",
+      "java_report": [
+        ".cache/evidence/bn-serializers-java-formal-20260927/surefire.xml"
+      ]
+    },
+    {
       "name": "broadcaster",
       "catalog": ".cache/evidence/broadcaster-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/broadcaster-plan-20260927/mapping.json",
