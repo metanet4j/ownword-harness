@@ -1,0 +1,266 @@
+{
+  "e8b66126d21454f747bb9f00b97b085f074325b29dd2703778b82013507b69d8": {
+    "sampleIds": [
+      "random-0",
+      "random-1",
+      "constructor-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:33:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:34:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:35:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:36:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:37:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:38:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:39:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:33:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:33:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:34:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:34:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:35:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:35:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:36:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:36:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:37:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:37:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:38:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:38:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:39:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:39:5:assertion"
+    }
+  },
+  "2246bd1a527a2e8517221f1de658ce49a93e4b9863c913aa69ad1482e775120b": {
+    "sampleIds": [
+      "constructor-0",
+      "fromBinary-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:56:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:57:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:58:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:59:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:60:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:61:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:62:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:56:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:56:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:57:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:57:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:58:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:58:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:59:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:59:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:60:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:60:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:61:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:61:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:62:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:62:5:assertion"
+    }
+  },
+  "34cd68ff9e9505194c110eb95afafd968f04e51e3b7505623cf93b86a04c8e86": {
+    "sampleIds": [
+      "constructor-0",
+      "sign-0",
+      "fromBinary-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:83:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:84:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:85:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:86:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:87:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:88:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:89:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:83:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:83:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:84:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:84:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:85:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:85:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:86:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:86:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:87:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:87:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:88:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:88:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:89:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:89:5:assertion"
+    }
+  },
+  "1d2196c8be4c42410c827f935e9b016a6abc19316b27719f66afe844c70f2ca9": {
+    "sampleIds": [
+      "constructor-0",
+      "sign-0",
+      "verify-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:109:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:109:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:109:5:assertion"
+    }
+  },
+  "045278fb2257782ced9049d59cc98e55e5ddc204e2d21b2f02a386df72a594ff": {
+    "sampleIds": [
+      "constructor-0",
+      "sign-0",
+      "verify-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:131:11:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:131:11:assertion": "src/auth/certificates/__tests/Certificate.test.ts:131:11:assertion"
+    }
+  },
+  "5a3ae11b39819d617b0d1bd095ef04525815d16224ec88ebab4ca6941b9dc5ca": {
+    "sampleIds": [
+      "constructor-0",
+      "verify-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:146:11:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:146:11:assertion": "src/auth/certificates/__tests/Certificate.test.ts:146:11:assertion"
+    }
+  },
+  "8fdbcb89080c5c7d7a25e50171dccb7533350de366d966877d609c907016bdef": {
+    "sampleIds": [
+      "constructor-0",
+      "verify-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:161:11:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:161:11:assertion": "src/auth/certificates/__tests/Certificate.test.ts:161:11:assertion"
+    }
+  },
+  "250b89d07965dfa75bfa77282ba497024ecb7c512b64ac6ce068a49df55c9aff": {
+    "sampleIds": [
+      "constructor-0",
+      "sign-0",
+      "fromBinary-0",
+      "verify-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:185:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:189:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:185:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:185:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:189:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:189:5:assertion"
+    }
+  },
+  "760a39a07db5ca9629f6afe9af2cd886e82f12fad717fbd7b7fb2bd4bd11e4a3": {
+    "sampleIds": [
+      "constructor-0",
+      "fromBinary-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:207:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:208:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:207:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:207:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:208:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:208:5:assertion"
+    }
+  },
+  "91d7b28b912babc447df41cf219fb197f86b10f4b1171307372af640185236df": {
+    "sampleIds": [
+      "constructor-0",
+      "sign-0",
+      "fromBinary-0",
+      "verify-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:238:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:242:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:238:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:238:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:242:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:242:5:assertion"
+    }
+  },
+  "08de563f5c5d36ac5eb9b4f7a2e7effa5684cfeea2efac5239d0fe2fd15ead83": {
+    "sampleIds": [
+      "constructor-0",
+      "fromBinary-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:259:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:259:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:259:5:assertion"
+    }
+  },
+  "9edf2d8cd7bfc281f68c01d368ce82424490a8ea972b78ffd9d398494d294374": {
+    "sampleIds": [
+      "constructor-0",
+      "sign-0",
+      "fromBinary-0",
+      "verify-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:281:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:285:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:281:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:281:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:285:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:285:5:assertion"
+    }
+  },
+  "4088cc12a4513718a204525e9cdf8eeba07fe78701e35a59f69f10c8fefaca03": {
+    "sampleIds": [
+      "constructor-0",
+      "sign-0",
+      "random-2",
+      "constructor-1",
+      "sign-1",
+      "verify-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:302:11:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:321:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:322:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:302:11:assertion": "src/auth/certificates/__tests/Certificate.test.ts:302:11:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:321:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:321:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:322:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:322:5:assertion"
+    }
+  },
+  "fe290bf3642f450334d1e21d96bf4168928cb8b85f855a4124a9d744fa5952b2": {
+    "sampleIds": [
+      "fromObject-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:346:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:347:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:348:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:349:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:350:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:351:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:352:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:346:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:346:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:347:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:347:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:348:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:348:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:349:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:349:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:350:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:350:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:351:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:351:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:352:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:352:5:assertion"
+    }
+  },
+  "00b20e32a76fe0d6773933dca70fa31410aba1a74ccde26c69b3c4f8ccd1e642": {
+    "sampleIds": [
+      "fromObject-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/Certificate.test.ts:369:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:370:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:371:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:372:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:373:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:374:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:375:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/Certificate.test.ts:369:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:369:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:370:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:370:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:371:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:371:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:372:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:372:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:373:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:373:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:374:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:374:5:assertion",
+      "src/auth/certificates/__tests/Certificate.test.ts:375:5:assertion": "src/auth/certificates/__tests/Certificate.test.ts:375:5:assertion"
+    }
+  }
+}
