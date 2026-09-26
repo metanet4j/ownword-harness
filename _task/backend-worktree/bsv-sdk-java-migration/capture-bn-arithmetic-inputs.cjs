@@ -4,8 +4,8 @@ const path = require('node:path')
 const output = process.env.MIGRATION_BN_ARITHMETIC_RAW
 if (!output) throw new Error('缺少 BigNumber arithmetic 原输入输出路径')
 const variant = process.env.MIGRATION_BN_VARIANT || 'arithmetic'
-if (!['arithmetic', 'binary'].includes(variant)) throw new Error('未知 BigNumber 固定测试变体')
-const file = `src/primitives/__tests/BigNumber.${variant === 'arithmetic' ? 'arithmatic' : 'binary'}.test.ts`
+if (!['arithmetic', 'binary', 'serializers'].includes(variant)) throw new Error('未知 BigNumber 固定测试变体')
+const file = `src/primitives/__tests/BigNumber.${variant === 'arithmetic' ? 'arithmatic' : variant}.test.ts`
 const nativeExpect = global.expect
 const sdk = path.resolve(__dirname, '../../../reference/ts-stack/packages/sdk')
 const ts = require(require.resolve('typescript', { paths: [sdk] }))
@@ -13,7 +13,8 @@ const ast = ts.createSourceFile(file, fs.readFileSync(path.join(sdk, file), 'utf
 const assertionSpans = []
 function collect(node) {
   if (ts.isCallExpression(node) && ts.isPropertyAccessExpression(node.expression)) {
-    const call = node.expression.expression
+    let call = node.expression.expression
+    if (ts.isPropertyAccessExpression(call) && call.name.text === 'not') call = call.expression
     if (ts.isCallExpression(call) && ts.isIdentifier(call.expression) && call.expression.text === 'expect') {
       const start = ast.getLineAndCharacterOfPosition(call.getStart(ast))
       const end = ast.getLineAndCharacterOfPosition(node.getEnd())
@@ -28,7 +29,7 @@ let ids = new WeakMap(), nextId = 0
 const origins = new WeakMap()
 
 function source() {
-  const match = new Error().stack.match(/BigNumber\.(?:arithmatic|binary)\.test\.ts:(\d+):(\d+)/)
+  const match = new Error().stack.match(/BigNumber\.(?:arithmatic|binary|serializers)\.test\.ts:(\d+):(\d+)/)
   if (!match) throw new Error('BigNumber arithmetic 调用缺少固定源码位置')
   return { file, line: Number(match[1]), column: Number(match[2]) }
 }
@@ -41,12 +42,14 @@ function typed(value) {
     if (origins.has(value)) result.origin = origins.get(value)
     return result
   }
+  if (Array.isArray(value)) return { type: 'bytes', hex: Buffer.from(value).toString('hex') }
   if (value instanceof RegExp) return { type: 'regexp', source: value.source, flags: value.flags }
   if (['number', 'boolean', 'string'].includes(typeof value)) return { type: typeof value, value }
   throw new Error('未支持的 BigNumber 算术输入类型')
 }
 function binding(value) {
   if (value instanceof Original) return { type: 'BigNumber', id: typed(value).id }
+  if (Array.isArray(value)) return { type: 'array', length: value.length }
   if (value && typeof value === 'object') {
     return { type: 'map', value: Object.fromEntries(Object.entries(value).map(([k, v]) => [k, binding(v)])) }
   }
@@ -58,6 +61,10 @@ function emit(row) {
 }
 function observe(method, receiver, args, action) {
   if (!active || depth) return action()
+  // 通用断言记录器的 String/格式化调用不是原测试的公开入口。
+  const caller = new Error().stack.split('\n').slice(2).find(line =>
+    !line.includes('capture-bn-arithmetic-inputs.cjs') && !line.includes('/node_modules/jest-mock/'))
+  if (!caller?.includes(path.basename(file) + ':')) return action()
   depth++
   const row = { kind: 'call', source: source(), method,
     receiver: receiver ? typed(receiver) : null, args: args.map(typed) }
@@ -88,7 +95,7 @@ jest.doMock(modulePath, () => {
     'abs', 'invm', 'gcd', 'egcd', 'ineg', 'neg', 'clone', 'sqr', 'isqr', 'ishln',
     'isNeg', 'cmp', 'cmpn', 'toNumber', 'toString', 'shln', 'ushln', 'shrn', 'ushrn',
     'bincn', 'imaskn', 'testn', 'bitLength', 'and', 'iand', 'or', 'ior', 'xor', 'ixor',
-    'setn', 'notn', 'iushln']) {
+    'setn', 'notn', 'iushln', 'toJSON', 'toHex', 'toBits', 'toSm', 'toScriptNum', 'ltn']) {
     const original = Original.prototype[method]
     jest.spyOn(Original.prototype, method).mockImplementation(function (...args) {
       return observe(method, this, args, () => Reflect.apply(original, this, args))
@@ -98,7 +105,7 @@ jest.doMock(modulePath, () => {
   jest.spyOn(Original.prototype, 'negative', 'get').mockImplementation(function () {
     return observe('negative', this, [], () => negative.call(this))
   })
-  for (const method of ['max', 'min']) {
+  for (const method of ['max', 'min', 'fromJSON', 'fromString', 'fromHex', 'fromNumber', 'fromBits', 'fromSm', 'fromScriptNum']) {
     const original = Original[method]
     jest.spyOn(Original, method).mockImplementation(function (...args) {
       return observe(method, null, args, () => Reflect.apply(original, Original, args))
@@ -122,7 +129,9 @@ global.expect = Object.assign(function (actual) {
   const location = { file, line: span.line, column: span.column }
   const actualEntry = last
   const assertion = nativeExpect(actual)
-  return new Proxy(assertion, { get(target, matcher) {
+  function wrapMatcher(assertion, negated = false) {
+    return new Proxy(assertion, { get(target, matcher) {
+    if (matcher === 'not') return wrapMatcher(target.not, true)
     if (!['toBe', 'toEqual', 'toThrow'].includes(matcher)) throw new Error('未支持的 arithmetic matcher：' + String(matcher))
     return (...args) => {
       const expectedEntry = last !== actualEntry ? last : null
@@ -133,11 +142,14 @@ global.expect = Object.assign(function (actual) {
       if (matcher !== 'toThrow' && !Object.is(actual, received.value)) {
         if (typeof received.value === 'number' && received.value.toString(16) === actual) transform = 'number.toString(16)'
         else if (typeof received.value === 'boolean' && !received.value === actual) transform = 'boolean.not'
+        else if (Array.isArray(received.value) && Buffer.from(received.value).toString('hex') === actual) transform = 'bytes.toHex'
         else throw new Error('原断言实际值不是已记录 API 返回值')
       }
-      emit({ kind: 'assertion', source: location, matcher, actualRef: received.ref, transform,
+      emit({ kind: 'assertion', source: location, matcher: (negated ? 'not.' : '') + matcher, actualRef: received.ref, transform,
         expected: expectedEntry ? { type: 'result', ref: expectedEntry.ref } : typed(args[0]) })
       return result
     }
   } })
+  }
+  return wrapMatcher(assertion)
 }, nativeExpect)

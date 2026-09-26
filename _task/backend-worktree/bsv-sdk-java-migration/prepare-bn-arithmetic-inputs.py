@@ -9,6 +9,7 @@ TASK = Path(__file__).resolve().parent
 VARIANTS = {
     'arithmetic': ('src/primitives/__tests/BigNumber.arithmatic.test.ts', 52, 1178, 176),
     'binary': ('src/primitives/__tests/BigNumber.binary.test.ts', 20, 854, 521),
+    'serializers': ('src/primitives/__tests/BigNumber.serializers.test.ts', 16, 106, 55),
 }
 BINARY_ITERATIONS = {92: 8 + 256, 96: 2, 112: int('23478905234580795234378912401239784125643978256123048348957342').bit_length()}
 # 原源码四处循环的控制规模，固定全部迭代和方法调用次数。
