@@ -2,17 +2,17 @@
 
 ## 执行位置
 
-`activeItem=nextItem=migration-impl-byte-codecs`，已进入字节编解码与 Reader/Writer 任务。43 个执行事项中 12 done、1 in-progress、30 not-started；28 个编码任务中 5 done、1 in-progress、22 not-started。权威状态与依赖见 [feature_list.json](feature_list.json)。
+`activeItem=nextItem=migration-impl-keys-signatures`，已进入密钥与签名算法任务。43 个执行事项中 13 done、1 in-progress、29 not-started；28 个编码任务中 6 done、1 in-progress、21 not-started。权威状态与依赖见 [feature_list.json](feature_list.json)。
 
 ## 已验收结果
 
-- 曲线任务 `migration-impl-curve` 已通过：固定 TS 五个原文件 144/144；Java 提交 `611b7af`（功能）和 `324e9af`（工程说明）后执行 `./verify.sh bsv-test`，累计 460/460，失败、错误、跳过均为 0。`task-parity.py` 对照 144/144 个原用例、236/236 条原断言，缺失、未比较、额外 Java 原断言均为 0。独立证据目录为 `.cache/evidence/curve-final-20260926-122724/`，局部报告 `formalAcceptance=false`。
-- 曲线四个源文件的 153/153 声明已映射并复核；`node audit-api.cjs batches --batch migration-api-curve` 通过。累计完成 values、hash-random、curve 三组 API，816/3576 项；剩余 2760 项。
-- 累计原测试映射 440/5329，尚余 4889。此前完成的 Hex 8、BigNumber 构造 28、完整 BigNumber/模运算 174、哈希/HMAC/PBKDF2/随机源 86 个原用例仍在本次 Java 全量回归中通过；前批逐断言报告见 `.cache/evidence/parity-final-20260920-191152-19403q/`。
-- `./init.sh` 已通过固定 TS、工具链、缓存隔离与任务清单检查。完整六模块 `audit-tests.py check` 和无过滤 `audit-api.cjs check` 仍按剩余范围拒绝通过，不能把单项验收当作整模块完成。
+- 字节任务 `migration-impl-byte-codecs` 已通过：Java 工程提交 `e8b83f4` 后执行 `./verify.sh bsv-test`，累计 656/656，失败、错误、跳过均为 0。固定 TS 六个原文件 192/192；`task-parity.py` 对照 192/192 个原用例、1242/1242 条原断言，缺失、未比较、额外 Java 原断言均为 0。独立证据目录为 `.cache/evidence/byte-final-20260926-125839/`，局部报告 `formalAcceptance=false`。
+- 两个 Base58 property 用例按固定 seed 各采集并重放 300 组真实输入；WUA-ZERO-CAPACITY 已按授权最小修复，4 个额外 Java 回归不计入原用例。`node test-audit.test.cjs` 在宿主环境 41/41 通过。
+- 本项六个原文件 192 个用例及 467 个 AST 位置已映射，累计 632/5329，尚余 4697。ReaderUint8Array、WriterUint8Array、utils 的 139 项 API 设计映射已复核，所属 values 批次 371 项分批检查通过；累计 values、hash-random、curve 三组 API 为 816/3576 项。
+- 以前完成的 Hex、BigNumber、哈希随机及曲线原用例仍在本次 Java 全量回归中通过。`./init.sh` 检查固定 TS、工具链、缓存隔离与任务清单；完整六模块 `audit-tests.py check` 和无过滤 `audit-api.cjs check` 仍按剩余范围拒绝通过。
 
 ## 下一步
 
-`migration-impl-byte-codecs` 的冻结清单为 Reader.test.ts、ReaderUint8Array.test.ts、Writer.test.ts、WriterUint8Array.test.ts、utils.property.test.ts、utils.test.ts，共 192 个注册用例；其中两个 property 用例各至少 300 次生成样本。先做本组 API 前检和原文件/辅助资料通读，再按测试契约逐行为 RED→GREEN、采集两端真实输入/断言，累计运行 Java `clean test`。WUA-ZERO-CAPACITY 只按已授权的最小修复实施，额外 Java 回归单列。
+`migration-impl-keys-signatures` 的冻结清单为 11 个原测试文件、146 个注册用例，包含 BRC42 私钥和公钥向量。先复核 ECDSA、Polynomial、PrivateKey、PublicKey、Schnorr、Secp256r1、Signature 的 API 与原测试，再按测试契约逐行为 RED→GREEN；随机 k/密钥须采集真实输入并在 Java 重放，累计运行 `clean test`。
 
 仅修改 `metanet4j-bsv-sdk` 的工程代码、测试和 POM；固定 TS 与其他四个 Java 工程只读。根仓既有无关改动保留，不推送、不广播交易或调用真实钱包/外部业务接口。

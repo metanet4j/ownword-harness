@@ -34,7 +34,7 @@ def value_key(value):
     if kind == 'undefined':
         return ('undefined',)
     if kind == 'map':
-        return ('map',)
+        return ('map', tuple(sorted((str(key), value_key(item)) for key, item in value.get('value', {}).items())))
     if kind == 'array':
         return ('array', tuple(value_key(item) for item in value.get('value', [])))
     return (str(kind), json.dumps(value.get('value'), sort_keys=True, ensure_ascii=False))
@@ -129,7 +129,7 @@ def load_task(task_id):
         file_obj = file_objects[test_file]
         for case in file_obj['cases']:
             full_name = ' '.join(case['names'])
-            case_by_ts[full_name] = case['id']
+            case_by_ts[(test_file, full_name, case.get('occurrence', 1))] = case['id']
             case_file[case['id']] = test_file
     for case in mapping['cases']:
         for java in case.get('java', []):
@@ -145,8 +145,24 @@ def compare(task_id, ts_path, java_path):
     task, test_files, case_by_ts, case_by_java, case_file = load_task(task_id)
     ts_rows, java_rows = read_jsonl(ts_path), read_jsonl(java_path)
     ts_by_case, java_by_case = defaultdict(list), defaultdict(list)
+    names_without_file = defaultdict(list)
+    for (file_path, full_name, occurrence), case_id in case_by_ts.items():
+        names_without_file[full_name].append(case_id)
     for row in ts_rows:
-        case_id = case_by_ts.get(row.get('test'))
+        source = str(row.get('file', '')).replace('\\', '/')
+        matches = [file_path for file_path in test_files if source == file_path or source.endswith('/' + file_path)]
+        if source and len(matches) != 1:
+            raise ValueError(f'TS 轨迹文件不能唯一定位：{source}')
+        if matches:
+            occurrence = row.get('occurrence')
+            if occurrence is None and sum(1 for file_path, name, _ in case_by_ts if file_path == matches[0] and name == row.get('test')) > 1:
+                raise ValueError(f'TS 同名参数行缺少 occurrence：{matches[0]} / {row.get("test")}')
+            case_id = case_by_ts.get((matches[0], row.get('test'), occurrence or 1))
+        else:
+            candidates = names_without_file.get(row.get('test'), [])
+            if len(candidates) > 1:
+                raise ValueError(f'TS 同名用例缺少文件定位：{row.get("test")}')
+            case_id = candidates[0] if candidates else None
         if case_id is not None:
             ts_by_case[case_id].append(row)
     for row in java_rows:
@@ -156,11 +172,13 @@ def compare(task_id, ts_path, java_path):
             java_by_case[case_id].append(row)
 
     cases = []
-    total_ts = total_java = total_matched = total_missing = total_extra = 0
+    total_ts = total_java = total_matched = total_missing = total_extra = missing_cases = 0
     nondeterministic = []
     for case_id, test_file in sorted(case_file.items()):
         ts_sequence, java_sequence = ts_by_case.get(case_id, []), java_by_case.get(case_id, [])
         unmatched, matched, extra = align(test_file, ts_sequence, java_sequence)
+        if not ts_sequence or not java_sequence:
+            missing_cases += 1
         case = {
             'id': case_id,
             'file': test_file,
@@ -187,9 +205,9 @@ def compare(task_id, ts_path, java_path):
         'javaRevision': audit.java_revision(),
         'testFiles': test_files,
         'casesTotal': len(cases),
-        'casesCompared': len(cases) - sum(1 for case in cases if case['tsAssertions'] == 0),
+        'casesCompared': len(cases) - missing_cases,
         'assertionsCompared': total_matched,
-        'missingCases': 0,
+        'missingCases': missing_cases,
         'missingAssertions': total_missing,
         'uncompared': total_missing,
         'extraJavaAssertions': total_extra,
@@ -198,7 +216,8 @@ def compare(task_id, ts_path, java_path):
         'cases': cases,
     }
     report['taskAcceptancePassed'] = (
-        report['missingAssertions'] == 0
+        report['missingCases'] == 0
+        and report['missingAssertions'] == 0
         and report['uncompared'] == 0
         and report['casesCompared'] == report['casesTotal']
         and report['casesTotal'] > 0

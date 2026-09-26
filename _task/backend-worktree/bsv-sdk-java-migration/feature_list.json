@@ -14,8 +14,8 @@
       "跨工程发布、部署或远端推送"
     ]
   },
-  "activeItem": "migration-impl-byte-codecs",
-  "nextItem": "migration-impl-byte-codecs",
+  "activeItem": "migration-impl-keys-signatures",
+  "nextItem": "migration-impl-keys-signatures",
   "features": [
     {
       "id": "migration-env",
@@ -493,7 +493,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "primitives：字节编码与 Reader/Writer",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-curve"
       ],
@@ -527,18 +527,34 @@
       "apiBatchRefs": [
         "migration-api-values"
       ],
-      "evidence": [],
+      "evidence": [
+        "Java 工程提交 e8b83f4：完整 ByteView、旧/新 Reader/Writer、Utils 与原测试；其他四个 Java 工程及固定 TS 只读。",
+        ".cache/evidence/byte-final-20260926-125839/：固定 TS 六个原测试文件 192/192，Java post-commit clean test 656/656（primitives 655、工程基础 1），失败/错误/跳过均为 0；原始 Jest、Surefire XML、断言轨迹、命令和哈希见 manifest.json。",
+        "task-parity.py：192 个冻结原用例全部比较，1242/1242 条原断言实际值匹配，missingCases/missingAssertions/uncompared/extraJavaAssertions 均为 0；报告 .cache/evidence/byte-final-20260926-125839/byte-parity.json。",
+        "test-map.json：本项六个原文件的 192 个用例和 467 个 AST 位置全部映射，累计 632/5329；ReaderUint8Array、WriterUint8Array、utils 共 139 项 API 设计映射已复核，migration-api-values 分批结构检查通过。",
+        "fast-check seed=20260926 的前两个 property 用例各重放 300 组固定 TS 输入，fixture SHA-256 为 5c4f616f324a3b183e426a668b808fc5e20a024a312e444f319a556828dea3df；WUA-ZERO-CAPACITY 最小修复另有 4 个 Java 回归，不计入 192 原用例。",
+        "node test-audit.test.cjs 宿主环境 41/41 通过；局部报告 formalAcceptance=false，六模块全量门禁仍待后续事项。"
+      ],
       "modules": [
         "primitives"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 192,
+        "assertionsCompared": 1242,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/byte-final-20260926-125839/byte-parity.json"
+      }
     },
     {
       "id": "migration-impl-keys-signatures",
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "primitives：密钥与签名算法",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-byte-codecs"
       ],
@@ -2050,7 +2066,7 @@
         "033c518：9 个完整文件的 371 项设计映射已登记；不是 Java 实现或测试通过。",
         ".cache/evidence/api-value-mapping-check.json：声明 ID、契约引用与完整文件集合核对通过。",
         "api-values-probe.mjs：两种 Buffer 环境分别观察 26 组输入；未计入 SDK 用例。",
-        "WUA-ZERO-CAPACITY 授权见 api-map.approvedDifferences，修复与额外 Java 回归仍待 P1 实施。",
+        "WUA-ZERO-CAPACITY 授权见 api-map.approvedDifferences，最小修复已在 Java 提交 e8b83f4 实施，4 个额外 Java 回归与原用例分开计数。",
         "node audit-api.cjs batches --batch migration-api-values 实际通过；日志 .cache/evidence/api-batch-values-current.log。"
       ],
       "scopeRef": "scope",

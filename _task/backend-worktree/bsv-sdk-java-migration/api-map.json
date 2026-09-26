@@ -10281,7 +10281,7 @@
       "id": "WUA-ZERO-CAPACITY",
       "apiId": "src/primitives/WriterUint8Array.ts#method:WriterUint8Array.ensureCapacity:1",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-writer-zero-capacity",
-      "status": "authorized-not-implemented",
+      "status": "implemented-verified",
       "authorization": {
         "source": "本会话用户明确回复",
         "decision": "允许最小修复并单列差异（推荐）"
