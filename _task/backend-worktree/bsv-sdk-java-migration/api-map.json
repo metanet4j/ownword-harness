@@ -16436,7 +16436,7 @@
         "src/transaction/http/FetchHttpClient.ts:34",
         "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/http/FetchHttpClient.java"
       ],
-      "note": "请求 data JSON.stringify；响应按 Content-Type application/json 前缀选 json 或 text。"
+      "note": "请求 data JSON.stringify；响应按 Content-Type application/json 前缀选 json 或 text。FetchResponse 保留原五参数构造器与 int status()，新增 Object rawStatus 组件；默认 rawStatus=status，request 原样透传 rawStatus，保留固定 ARC.additional 第 19 例的 undefined 状态。"
     },
     {
       "id": "src/transaction/http/FetchHttpClient.ts#parameter-property:FetchHttpClient.fetch:1",
@@ -16585,14 +16585,14 @@
     {
       "id": "src/transaction/http/HttpClient.ts#type:HttpClientResponse:1",
       "java": "com.metanet4j.bsv.transaction.http.HttpClient.Response",
-      "javaSignature": "record Response(boolean ok,int status,String statusText,Object data)",
+      "javaSignature": "record Response(boolean ok,int status,String statusText,Object data,Object rawStatus)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-network",
       "review": "reviewed",
       "evidence": [
         "src/transaction/http/HttpClient.ts:33",
         "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/http/HttpClient.java"
       ],
-      "note": "固定 TS 数据/函数接口 HttpClientResponse 映射为 Java record Response(boolean ok,int status,String statusText,Object data)；调用形状由固定原用例核对。"
+      "note": "保留原四参数构造器与 int status()；新增 Object rawStatus 组件，原整数构造默认 rawStatus=status。固定 ARC.additional 第 19 例通过 FetchHttpClient 真实传入 Undefined.INSTANCE，ARC 失败分支读取 rawStatus，原状态不转换为整数代号。"
     },
     {
       "id": "src/transaction/http/NodejsHttpClient.ts#class:NodejsHttpClient:1",
