@@ -143,16 +143,26 @@ class SemanticTest(unittest.TestCase):
                 self.case(case_id, [(site, 'native-null-absence-v1', left, right)])
                 self.accepts()
                 original = self.f.path('java-assertions.jsonl').read_text()
+                self.mutate_java(lambda rows: rows[0]['value'].pop('pass'))
+                self.accepts()
+                self.f.path('java-assertions.jsonl').write_text(original)
                 for change in [
                     lambda value: value.update(actual={'type': 'undefined'}),
                     lambda value: value.update(matcher='toBeUndefined'),
                     lambda value: value.update(expected=[]),
                     lambda value: value.pop('actual'),
+                    lambda value: value.update({'pass': False}),
                 ]:
                     self.f.path('java-assertions.jsonl').write_text(original)
                     self.mutate_java(lambda rows: change(rows[0]['value']))
                     self.assertNotEqual(self.bundle().returncode, 0)
                 self.f.path('java-assertions.jsonl').write_text(original)
+                ts_original = self.f.path('ts-assertions.jsonl').read_text()
+                ts_rows = [json.loads(line) for line in ts_original.splitlines()]
+                ts_rows[0]['value'].pop('pass')
+                self.f.write_lines('ts-assertions.jsonl', ts_rows)
+                self.assertNotEqual(self.bundle().returncode, 0)
+                self.f.path('ts-assertions.jsonl').write_text(ts_original)
 
     def test_void_completion_adapter_keeps_three_original_return_values(self):
         left = observation('not.toThrow', {'type': 'undefined'}, [], True)

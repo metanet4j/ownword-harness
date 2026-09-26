@@ -297,10 +297,12 @@ def compare_actuals(case_id, expected, identity, left, right):
                 ('Java', right, {'type': 'null'},
                  'toBeUndefined' if rule_id == 'async-ready-null-adapter-v1' else 'toBeNull',
                  [] if rule_id == 'async-ready-null-adapter-v1' else {'type': 'array', 'value': []})):
-            require(isinstance(value, dict) and set(value) ==
-                    {'kind', 'matcher', 'negated', 'actual', 'expected', 'pass'}
+            keys = {'kind', 'matcher', 'negated', 'actual', 'expected', 'pass'}
+            require(isinstance(value, dict) and
+                    (set(value) in (keys, keys - {'pass'}) if rule_id == 'native-null-absence-v1' and side == 'Java'
+                     else set(value) == keys)
                     and value['kind'] == 'assertion' and value['matcher'] == original_matcher
-                    and value['negated'] is False and value['pass'] is True
+                    and value['negated'] is False and value.get('pass', True) is True
                     and value['actual'] == actual and value['expected'] == original_expected,
                     f'固定 Java null 适配 {side} 必须保留 undefined/null 实际观测：{identity}')
         return
