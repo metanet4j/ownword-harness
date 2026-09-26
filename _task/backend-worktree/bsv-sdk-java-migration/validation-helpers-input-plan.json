@@ -1,0 +1,1880 @@
+{
+  "c61eb462e66311ef9f382e1afb6f76d4a050836a993625187210af0a1247dd64": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:65:parseWalletOutpoint#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:66:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:67:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:66:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:66:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:67:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:67:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "1043bf4c34f36e3ad9d8e648c61b5c4083e1b4ca0ed7b4ec774be49056640b30": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:71:parseWalletOutpoint#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:71:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:71:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:71:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "d1731fc36435aa4721a07bfedb66ffd34c598e25dbe96185877244e177bee29b": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:81:validateSatoshis#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:81:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:81:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:81:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "6b1d641b46227ecd7866eba222de561ade6d8ab3d4fc9058c80c6d8246e55d29": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:85:validateSatoshis#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:85:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:85:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:85:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "79be996498aaf6ceda5983dada7fd190ed515fd3050b3769bf0fb5f036072439": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:89:validateSatoshis#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:89:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:89:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:89:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "b85a30cfde0bb1ce30eefcc6b091aac56b155d19cf737da431c081dc7b7d247b": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:93:validateSatoshis#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:93:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:93:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:93:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8f0c1599d5cd9082be41a7268584e6a84441ca0f91a386deb449815c99db57bf": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:97:validateSatoshis#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:97:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:97:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:97:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "d9a6afa640ba42ef0d92ce932606ca414b23a9f10d218439c002ebc6e63b3661": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:101:validateSatoshis#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:101:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:101:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:101:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "dd659cd3e314e169b2f88bddb322a863e3b54bda51b9b403418db92f9da317f9": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:105:validateSatoshis#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:105:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:105:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:105:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "79df55260a15cedafbf10515db6366ec65ca2a64641473b7ceee6afdef4bebe2": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:109:validateSatoshis#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:109:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:109:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:109:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "a7ec88239ade1220d7b74ac502a63644f6824eb2d29960a1fab9ecb1a471e6f3": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:119:validateInteger#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:119:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:119:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:119:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "301e48732cd867ede0851d6cf1c286412cab76737df709892e4e8aa2b3a1a306": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:123:validateInteger#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:123:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:123:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:123:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "2c1ac0e8e725efe0e5b6924db5edca1aebc430d6c20e62379c913e4eb143315d": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:127:validateInteger#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:127:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:127:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:127:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "34adaa9e7fd19fd43ce6739585bce68c0f97d06e701f0f44242207d44a6333b3": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:131:validateInteger#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:131:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:131:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:131:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "6dc53faeb776bd5bb15ecabb31fab54e85bfbc0ed4514fafc711bae3b942a3d2": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:135:validateInteger#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:135:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:135:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:135:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "884ac2d6e91a1742be57d820ac194353f454ac48e09c25832a3faf9dd5366208": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:139:validateInteger#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:139:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:139:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:139:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "38bdf9dc500e6df24d27f1007ef4fe28c0b30d95930b74170c3656719fff1f15": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:143:validateInteger#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:143:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:143:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:143:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5641b0188640fc56af65afdcc196ca329e6bb05e006479805609967879b533c8": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:147:validateInteger#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:147:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:147:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:147:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "d7598f6cb4c70b4d3332616b9bf9e1b0dc4023f64262feddfa0c62d95e9ce420": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:157:validateOptionalInteger#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:157:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:157:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:157:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "e9acd8b77e734359c2aa1f4faf78101bc6fc44a4d47d34725b6a113c8dd529c3": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:161:validateOptionalInteger#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:161:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:161:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:161:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5c92230e2010cd0bdb8b318061152724274dcc9bda8d8af26bbbac0d285b3a4f": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:165:validateOptionalInteger#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:165:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:165:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:165:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8b05de033dc263c979c416873e56604170df8409e089f47b3491b138f8b8a2a6": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:175:validatePositiveIntegerOrZero#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:175:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:175:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:175:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "c891c0eeb5e8f5aba6d44160948601e2748a56c0574c696bad36598eb2889ffd": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:179:validatePositiveIntegerOrZero#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:179:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:179:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:179:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8e6b191edb506ff15e06b26c983976603bdb27e0ca2314885933b429e390795f": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:183:validatePositiveIntegerOrZero#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:183:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:183:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:183:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "ddaa972346cf35861bac7d31d910f401d1b5b135b951926077a0a269b661fa64": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:193:validateStringLength#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:193:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:193:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:193:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "fb5e5077fae4029b0b4cd9391cfb9d2ba20ceb222cba9d563e2d65c638eb902c": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:197:validateStringLength#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:197:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:197:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:197:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "a6a2b6c4e605a866eb448a57608d05a613ee60742379511a753d9b52f7d29d5d": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:201:validateStringLength#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:201:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:201:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:201:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5e43f3f3de3a9b76f0ec7468c2062c221b23870c6affc1ab64bc6278c2e1e04b": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:205:validateStringLength#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:205:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:205:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:205:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "bfc9c128d117661e802537970fb419ab6548ba15f19cefdb33adcff8403a0a33": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:211:validateStringLength#0001",
+      "src/wallet/__tests/validationHelpers.test.ts:212:validateStringLength#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:211:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:212:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:211:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:211:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:212:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:212:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "51addaf69a71ffd2de468c82c760d2d90e9a7f17e0c44b8d26226611be6d4d8e": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:222:validateBase64String#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:222:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:222:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:222:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "6a0ee4d36dad056d59f04755c6db4f3086a2dc83a76e0039a54f42df02754d1a": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:226:validateBase64String#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:226:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:226:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:226:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "ab39e52eee6b6cb24e28531b2dde89760256272bed52c1603fbf9125e007e7e9": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:230:validateBase64String#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:230:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:230:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:230:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "7da6f9afec46a932d0aff83aafc9b3bd350a17ecf94523f67b9d3cf70eab4b91": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:234:validateBase64String#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:234:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:234:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:234:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "63caa2e659f0beae9be656146a8c38682945097250b275d30b02c7b97169d318": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:240:validateBase64String#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:240:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:240:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:240:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "3c0fe40d2ac1b1bba01d175399f77c92640a05d78926567ab42c40b3b13503a7": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:244:validateBase64String#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:244:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:244:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:244:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "b42c125c17cbf3e111f4975faea42d60c23dc7a55eefe3146d4d059bb3d8fdca": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:249:validateBase64String#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:249:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:249:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:249:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "645507bc22d1c37e7baaf783d02ae547c462cc4d76892a527cc4987af39ba8eb": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:253:validateBase64String#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:253:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:253:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:253:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "76c65935113ff58f065dace1922a126fd108429673d32677c63b2d50030a66fb": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:259:validateBase64String#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:259:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:259:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:259:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "b80826a0588e98ea33571e6fc6d076d58e963a8f31870005705d2706e50454aa": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:265:validateBase64String#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:265:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:265:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:265:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "37d01d8b9f3c3fa8117631f63b8225457c2ec8bc4a6d90ecd95fbd7966dee71b": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:275:isHexString#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:275:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:275:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:275:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "f9cda6ed55c57ec2df06b0af427edbd5215f78d053b315ba72771fa5a0a15e2a": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:279:isHexString#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:279:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:279:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:279:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "637d2798eac332a963d22401a35372959ab3711a498d3f7211c5d5d01ee9489c": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:283:isHexString#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:283:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:283:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:283:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5260091d790a31c426b3016fc2d010582669179cc8a8abdb879bb7f64c2ea7cd": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:287:isHexString#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:287:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:287:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:287:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "cdb5e9d8457790819a43790e6fbc0a93dd6fbefe7e6887b07c8e3324c489ba2a": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:291:isHexString#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:291:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:291:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:291:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "0a9e8d9a967c410b0f01d414e86e450ef724b54d8bb1d7db4fab54169cc9929a": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:301:validateOutpointString#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:302:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:304:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:305:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:302:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:302:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:304:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:304:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:305:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:305:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "3ca6e4004a4aa855bfdd25e075d4cad1826333ca44ca968dfe240a1e96e20ad8": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:309:validateOutpointString#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:309:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:309:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:309:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "ae26297d279f86e16efa8abffe1547a73b1c128e266f00faaf1212ce2d6c7c0e": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:313:validateOutpointString#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:313:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:313:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:313:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "014a24f173f9d89cb9a76f439c7086dc04e4b5245e54573f5d0736b1f6e5b9c7": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:317:validateOutpointString#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:317:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:317:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:317:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "51fc78c9b60b3681b8a59b2c230a13c7912bc31b339a802c42daff5b99c60282": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:321:validateOutpointString#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:321:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:321:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:321:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "3929cebe50d9bbd428865e5478e24929519c3e88f55c8c6b28ca146d4f9f1693": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:327:validateOptionalOutpointString#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:327:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:327:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:327:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "2139704089d46ffe91851616f8ea9425bd66f37641dce0a1fb35a2fe756340a6": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:331:validateOptionalOutpointString#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:331:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:331:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:331:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "430d97c135c3f4bee100df1a6b3134e077a33bc3cc26c88f6bc947fb1c323b68": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:347:validateCreateActionInput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:351:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:352:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:351:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:351:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:352:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:352:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "6abcc8a31c2dc7bb19eaa88e51f6399205aab2de45ff9772a206dab4f9a9fae3": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:356:validateCreateActionInput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:360:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:361:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:360:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:360:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:361:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:361:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "ad64d5be5c447302a5989ff0aad4065af6efdddbd9280e61ef4f0f102098f742": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:366:validateCreateActionInput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:365:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:365:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:365:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "52109197dc1028b6e2176dc97a7bc61456e0e2202d78c8866fcc924d7824bcf3": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:372:validateCreateActionInput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:371:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:371:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:371:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "c8e411a1b53b6fbc92b4c2eaee2c439a8ce56d8d784a6effe0dcaafaf3ef2d09": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:381:validateCreateActionInput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:386:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:386:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:386:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "6fae02a32750b986a67b1dd7d2243db59da66a8c946534c82d1ed6ad22f6720d": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:391:validateCreateActionInput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:390:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:390:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:390:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "2bbe695e191fd7670eeadf07017a8b0d9ebee1a21258f72108dbb9983f4ed38b": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:412:validateCreateActionOutput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:413:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:414:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:413:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:413:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:414:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:414:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "7e50a7449bcf938fd01d12a3c2190af9dfb4efb894c79c2a6431a3e6435867df": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:418:validateCreateActionOutput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:422:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:422:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:422:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "16dfe3dffe9066164d20154a93cf2ba7f1c9609df2e4930eeaa3bf22a2f0bf98": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:426:validateCreateActionOutput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:430:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:430:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:430:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "626dcce0a1c45f26076fd4b174fab301d07efd75036df02fb8dfe034c5c2c63a": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:435:validateCreateActionOutput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:434:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:434:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:434:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "565bbc40f521c032e6b86afb66d3f12ae554a6111b6c0e38210f5412a466de49": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:441:validateCreateActionOutput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:440:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:440:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:440:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "f52814ada713d9e6ed5aaad9387a06f4f2a6c41209ab8a8418c316362dd29501": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:452:validateCreateActionOptions#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:453:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:454:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:455:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:456:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:457:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:458:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:459:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:460:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:453:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:453:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:454:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:454:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:455:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:455:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:456:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:456:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:457:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:457:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:458:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:458:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:459:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:459:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:460:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:460:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "11e5ae6bcb57b9eb28a71cc2359a306cf7a8781549a4784ccd5fd0145787ff82": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:464:validateCreateActionOptions#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:465:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:466:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:465:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:465:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:466:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:466:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "dc21e8ff3670ea8a37e610587a8e6882a099a1a499b37cecc336bde0e5071807": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:470:validateCreateActionOptions#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:476:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:477:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:478:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:479:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:476:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:476:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:477:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:477:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:478:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:478:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:479:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:479:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "d756b40dca904571cdd6b10df7918a625550b728e6cdebafa6f1f4e678a2266e": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:483:validateCreateActionOptions#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:486:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:487:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:486:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:486:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:487:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:487:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "e2ff1bf068c5c2ac52689b78ee8ba91f3dd276c34159911a2349110d7df505d7": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:491:validateCreateActionOptions#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:492:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:492:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:492:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "f05464447c83629162e77f8689a23120d34d8eca0455ce3b95bf70808c6b57e2": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:496:validateCreateActionOptions#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:497:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:497:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:497:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "bd4f2baeaeec08fedf5986d04ba9117f7ed0e3018bbf2ed6c0bfc33f009a4a5b": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:511:validateCreateActionArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:512:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:513:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:514:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:512:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:512:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:513:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:513:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:514:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:514:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "6620bf65cc8b72405d118df0358ee4f3a961f109b7e6faf0654c2d9287801a4c": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:518:validateCreateActionArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:519:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:520:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:519:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:519:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:520:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:520:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "2ab88b8927e43b22efc39d7e69fad0e7ab7f3a143045cef29f039f04df749e8f": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:524:validateCreateActionArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:534:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:534:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:534:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "f6bc492ab2d59f3dd1d0b86522a2fa3dd77e64ad10e634c337ecfe9459f4c45a": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:538:validateCreateActionArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:550:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:550:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:550:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "17a0537105277254411476f037696d6c3a5f00f173b5904127422fa2d6ccdd36": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:555:validateCreateActionOutput#0001",
+      "src/wallet/__tests/validationHelpers.test.ts:560:validateCreateActionOutput#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:566:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:567:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:566:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:566:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:567:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:567:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "76aa47d57f9e7077aeedfcc7b6dc56159be23f87ced4d53eeb7261f1b9b62cb4": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:571:validateCreateActionArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:575:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:575:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:575:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "83575979b4f195b3f7fee728bbcab22bba13c17ab6dd0e709f2e092852472631": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:580:validateCreateActionArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:579:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:579:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:579:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "f4cfa3823b7601527cc1c1f2ce06d13bff7cdbf7bbb4cf14da77f9a219700c00": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:585:validateCreateActionArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:589:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:589:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:589:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "da27b2a0c9e6e79190d86c99bcc3c06553ff161e6819a3b50dd496be52bfb323": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:599:validateSignActionOptions#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:600:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:601:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:602:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:603:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:600:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:600:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:601:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:601:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:602:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:602:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:603:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:603:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "33db5f553f81f2f92cc777f50304166074639390f31c34b625717bb7a87e9f40": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:607:validateSignActionOptions#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:608:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:609:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:608:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:608:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:609:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:609:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "738b2410e85b929832d35a765d49965b7723dffcf83d3e84287af9e5dd364dbd": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:624:validateSignActionArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:625:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:626:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:625:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:625:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:626:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:626:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "355fa69055cb0de1b806b0bca374e663ad6f046e75e7d72514133e8c85499f1f": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:630:validateSignActionArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:634:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:634:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:634:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "47e15560cf32facd304cd816088c91384a3db2df25344561ae344268ced8dbfa": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:644:validateAbortActionArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:645:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:645:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:645:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "2330ed9c4a3f4a3d9ef2ab66ac96ee077e24f27f39f9c6b974590f3942ba820b": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:650:validateAbortActionArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:649:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:649:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:649:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "552799ff63a6b51486e0b707adccc96642e289f4cc9a5e22cbf563d2e5a846ed": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:661:validateWalletPayment#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:661:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:661:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:661:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "b559e6283bf8586c4e5e11b87dba495433a70ec1319da4787fa4f17878ab4f5c": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:665:validateWalletPayment#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:670:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:671:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:670:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:670:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:671:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:671:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "0ddd685859870aa76eaefcfb71e5f80b59f46b3d9bd8a8973bc6f6e53795a895": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:676:validateWalletPayment#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:675:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:675:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:675:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "3fb309cf596155515079fe4e145b81719719ccb52ec234abcf9290dd6d00d59d": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:691:validateBasketInsertion#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:691:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:691:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:691:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "0413106532fa031c8ba48091ee19a1aa5825d9646e7e96152d088fa493af32b2": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:695:validateBasketInsertion#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:699:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:700:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:701:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:699:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:699:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:700:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:700:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:701:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:701:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "41da9e47ff952a0f5daf8ac04841356fc66d9ec675254edcf01698496fe904ab": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:706:validateBasketInsertion#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:705:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:705:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:705:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "701f965b6e5b100fdc32089c3f2ef0d050101d6b6e1d5caf9d84b6dc5091138c": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:717:validateInternalizeOutput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:726:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:727:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:726:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:726:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:727:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:727:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "d0426801b027318995b41465d2856778202415c7c5902278a492e2b4220479b4": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:731:validateInternalizeOutput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:736:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:736:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:736:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "e00be87b89a4cb994a3214ec6ca9dc184b14c04468c00739a5abb5572fcdb0d6": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:741:validateInternalizeOutput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:740:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:740:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:740:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "cc0c48e170ef24f2b6d47660773fd031c5e67660aef0c8aeb9a108528714acd3": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:750:validateInternalizeOutput#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:749:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:749:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:749:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "19e1d9fa9ffb9d304aaedf5b28e47db07bcbcc8c74517866661584c48cf2def2": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:764:validateOriginator#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:764:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:764:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:764:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "035f5125277123e78e15ed2d1e3519ae672f4ea0d38ba7c7495565fd16e757c1": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:768:validateOriginator#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:768:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:768:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:768:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8cd092e1d45aee7fc6fb13c1c821fc9032f92c0fda2ac05037f56963b5bc82a7": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:772:validateOriginator#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:772:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:772:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:772:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "9006f3dc943e50a415cfdd671def2674ea74cbf73ee72bf5267c39d2ea5022ba": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:776:validateOriginator#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:776:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:776:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:776:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "82032a404a6154a4274be6f6e299918e03954cb6283df75c38965859989f5474": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:781:validateOriginator#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:781:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:781:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:781:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "b501f0f667c646269fcb00fb13d337d0456752b431b5c66c2cfaad78c3a265ee": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:786:validateOriginator#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:786:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:786:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:786:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "22ee94e747f4fb749398282b156f6ad36d2fa3b7b631bf44f09a7c4a1e5522b1": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:796:validateRelinquishOutputArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:800:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:801:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:800:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:800:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:801:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:801:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8d5b7824f7fd43cec6b89d38f6f6379f824295877c85c85e2a1702024caf2b5b": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:806:validateRelinquishOutputArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:805:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:805:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:805:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "c95b941a39e2f1fcd895313ef3cecbc8a9e45686321257e524aa19695a53623a": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:817:validateRelinquishCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:822:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:822:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:822:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8f71b8b49769197cc52fcac08804b5b4398c9fc0fab084ced3f6e6b733596fc3": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:827:validateRelinquishCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:826:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:826:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:826:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "b8c086b38df25b5132e67d5bea44eded16593809c76840ecaa2cee903f9e67a8": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:849:validateListCertificatesArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:850:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:851:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:852:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:850:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:850:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:851:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:851:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:852:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:852:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5cdb741be784cebdc3a1d80bdf442069b5632a5820a44007120d708e883912d0": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:856:validateListCertificatesArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:857:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:857:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:857:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "9782962023a7f0a407b2db1dcf416ef37c59831504af277814acf776f6291aaa": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:862:validateListCertificatesArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:861:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:861:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:861:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "3d91087241e32328044859e15bb5820205227b5080daaa71848e03e6d3427b84": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:868:validateListCertificatesArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:867:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:867:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:867:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "95fc95e63788263a782a9abb8340b0c42044015b0e4647a64c3af9faaa03c23c": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:888:validateAcquireIssuanceCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:889:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:890:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:889:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:889:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:890:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:890:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "90b5d414e724157b47bc7310999fdff204f35ab06159981a1209a65d2f3fde1d": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:895:validateAcquireIssuanceCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:894:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:894:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:894:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "f1e1f702c9b7b40b74200f489c84d06c9d94f7dc2700c24d98a292cda8814fcf": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:901:validateAcquireIssuanceCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:900:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:900:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:900:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "4860ff0a55c5fb86ba200534355059260dd41c35c2e6fe73ea83636a6d286207": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:907:validateAcquireIssuanceCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:906:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:906:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:906:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "16e2e224109d16cce5ec65dfcd10e7247381bf0b52ee16efdf4fc18778773edf": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:913:validateAcquireIssuanceCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:912:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:912:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:912:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "e6ef1401b719c60ca65e750f10896260aa6bb89ed4a8c6a88f2591995fec0697": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:919:validateAcquireIssuanceCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:918:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:918:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:918:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "dc7d0583a453148ef21c1126acc5a12f551b36d43b1eb82b3ecd2248ca3eef6f": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:925:validateAcquireIssuanceCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:924:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:924:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:924:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "51a3dc4e2cea1c459e7b0428db5a6116f1d122078f853022cfcf77cf710f56e3": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:931:validateAcquireIssuanceCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:930:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:930:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:930:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8d969adb4fed8a09ff36a2fcd25921d0407de357bfd074e3aa8304f4198d3737": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:937:validateAcquireIssuanceCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:936:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:936:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:936:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "4196f94c2ac1364a2f3721ab9ab9ba4672f190718962b95d7680452ac1f10ccc": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:942:validateAcquireIssuanceCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:947:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:947:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:947:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "e1229f81e07ac226def0233e1588e347c08c4711279558963e3598d2265c8c0e": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:970:validateAcquireDirectCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:971:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:972:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:971:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:971:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:972:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:972:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "77901f6162079e1c3956e6a3809b96c07f51c00c20f92cb62345d5ea24dc2769": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:977:validateAcquireDirectCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:976:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:976:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:976:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "617aa790119df880495a527f39b81c5f731b5871818373be1b67fb57fa290392": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:983:validateAcquireDirectCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:982:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:982:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:982:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "ff39324e72cbc7db2b38010dad577025961337790ae7f57d434379ebd26751da": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:989:validateAcquireDirectCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:988:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:988:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:988:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "28c737aeab51365f14625b40b0a2fcd482c85a4f3d8db147fb3f5affe4dd405b": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:995:validateAcquireDirectCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:994:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:994:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:994:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "c2469ffe1c138a1bf2220336bd489921cd4cca3d81e66d62cd0425f2415534a4": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1001:validateAcquireDirectCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1000:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1000:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1000:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "c3712f0eece364338f2e7c67d64b6785fd2ccb268713100da4c1c98e21af9a17": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1007:validateAcquireDirectCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1006:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1006:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1006:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "098c314088275484b0060686e6e0b0dd9043245d16e9e6b49b6f84729c345d40": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1013:validateAcquireDirectCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1012:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1012:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1012:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8fc2ca115009d07ba8c7f092e7d32f4848fa92584b2795aeb781fbcf30d02da6": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1018:validateAcquireDirectCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1022:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1022:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1022:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "a045e54cce39f8e901797bc300fdbee34e5e89b09ea335e82b156335144a81a3": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1044:validateProveCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1045:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1046:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1047:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1045:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1045:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1046:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1046:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1047:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1047:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "83a8f4eb2a07118f9bba8dfd29647d01d7f369c0b4907d8e53c56d134b62dbc8": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1052:validateProveCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1051:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1051:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1051:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "2053ad4743cc08d5dfce621cd700b3eee751fb7a7f2f18c825b8351e4f2b9b66": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1057:validateProveCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1062:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1062:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1062:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "a99ea80d2820e8ddebdc16b0ecb9e3299a9847573e1dd616e7625d48b291a592": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1066:validateProveCertificateArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1070:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1071:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1070:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1070:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1071:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1071:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "20a696454062f76e92ed80146177d75ad8f9da5e8199d658456339ad7e5075d0": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1087:validateDiscoverByIdentityKeyArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1088:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1089:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1088:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1088:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1089:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1089:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "52b8e38541ce94421bd6c1cb2d7e540469eb2bb71b88bc4dfe2b9b338fca7c09": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1093:validateDiscoverByIdentityKeyArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1094:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1094:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1094:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "58d25f1aad19c1bf24d70bea7a2ced521b9babc47cb94243b0347e159bc84006": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1099:validateDiscoverByIdentityKeyArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1098:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1098:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1098:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "52f13e1fe42c639da1a4fa71f8450b3463c6797e10d91ce5e77e8b5c3895f793": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1116:validateDiscoverByAttributesArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1117:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1118:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1117:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1117:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1118:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1118:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "c75b8cd0216357a19088deee4233a64f829cc51563866cce64b164060213558e": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1122:validateDiscoverByAttributesArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1123:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1123:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1123:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "99b1ad4bb04be6d9769d14bae66587534d5c9282f6add0a55006eca2d2223115": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1129:validateDiscoverByAttributesArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1128:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1128:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1128:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "bc11290b57a416ee00f76dca4a3af703a0ea774387947ec07d6ac5ee8398467b": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1146:validateListOutputsArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1147:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1148:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1149:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1150:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1147:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1147:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1148:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1148:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1149:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1149:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1150:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1150:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "f26c84b288a5c01baac474d61bf4468ae1bf515f86992bb624e4e07b304365ba": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1154:validateListOutputsArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1155:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1156:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1155:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1155:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1156:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1156:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "55ed7dca16e876a0867a5524b490301a644fc671ad74b96971890c70211b0a15": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1160:validateListOutputsArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1161:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1162:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1161:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1161:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1162:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1162:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "a5556e946861176057e32cef3bf06a06f1e716975f7b6a2a839180296476863b": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1166:validateListOutputsArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1167:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1167:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1167:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "31e7c0301750ce3f74ac7f8325985d51d5e8861bebacdb3feac2c4a3b5c1671f": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1172:validateListOutputsArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1171:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1171:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1171:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "7b96972fccbfccec03bcc38345b2dfd4fe22c6feb4c21008d3eaa8f13169cbc3": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1177:validateListOutputsArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1178:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1178:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1178:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "4b831fa19975271921401ff44ab329e8c9b0756b7a719af2478b260db5ed6e0a": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1194:validateListActionsArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1195:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1196:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1197:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1198:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1195:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1195:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1196:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1196:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1197:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1197:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1198:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1198:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "e77dc4458f8e3c50001d2c61da0857219cf276e5bf849abc239005521164efa1": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1202:validateListActionsArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1203:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1203:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1203:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "b7828ed14abaab392a60185087dc87cf02a5b0220a923cb9d23d2b7c762e74fa": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1208:validateListActionsArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1207:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1207:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1207:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "7c3b2bbbbb2d6d849b5905567bfeff83b83d59c6eb9a84ba0490e6840155dfa3": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1213:validateListActionsArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1214:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1214:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1214:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "96f20d72c4e5774c01498731bcca9c7c9cf52d75a89241570e50e6e1bc6bdedd": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1218:validateListActionsArgs#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1227:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1228:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1229:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1230:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1231:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1232:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1227:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1227:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1228:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1228:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1229:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1229:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1230:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1230:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1231:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1231:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1232:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1232:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "59ee133716e29fbfe598b61d0d0ef3c6ccf01b809e354d76bb784b49c4653f13": {
+    "sampleIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1242:specOpThrowReviewActions#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/validationHelpers.test.ts:1242:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1243:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/validationHelpers.test.ts:1242:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1242:5:assertion",
+      "src/wallet/__tests/validationHelpers.test.ts:1243:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:1243:5:assertion"
+    },
+    "loopSamples": {}
+  }
+}
