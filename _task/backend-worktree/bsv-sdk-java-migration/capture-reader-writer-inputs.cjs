@@ -118,6 +118,36 @@ if (primaryUint8) {
       }
       readerPatched = true
     })
+  } else {
+    let writerPatched = false
+    beforeEach(() => {
+      if (writerPatched) return
+      const { Writer } = jest.requireActual(modulePath)
+      const originalWrite = Writer.prototype.writeVarIntBn
+      const originalToArray = Writer.prototype.toArray
+      const receivers = new WeakMap()
+      const writerState = writer => {
+        const bytes = originalToArray.call(writer)
+        return { bytesHex: Buffer.from(bytes).toString('hex'), length: bytes.length }
+      }
+      Writer.prototype.writeVarIntBn = function (...args) {
+        let receiverId = receivers.get(this)
+        if (!receiverId) {
+          receiverId = ++receiverIndex
+          receivers.set(this, receiverId)
+          if (writerState(this).length !== 0) throw new Error('辅助 Writer 构造状态不为空')
+          observe('Writer', receiverId, 'constructor', [], null)
+        }
+        observe('Writer', receiverId, 'writeVarIntBn', args, writerState(this))
+        return originalWrite.apply(this, args)
+      }
+      Writer.prototype.toArray = function (...args) {
+        const receiverId = receivers.get(this)
+        if (receiverId) observe('Writer', receiverId, 'toArray', args, writerState(this))
+        return originalToArray.apply(this, args)
+      }
+      writerPatched = true
+    })
   }
 } else {
   jest.doMock(modulePath, () => {
