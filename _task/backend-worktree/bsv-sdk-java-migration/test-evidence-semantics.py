@@ -106,6 +106,41 @@ class SemanticTest(unittest.TestCase):
                 self.assertNotEqual(self.bundle().returncode, 0)
         self.f.path(name).write_text(original)
 
+    def test_mnemonic_defined_objects_keep_real_observations_at_three_sites(self):
+        cases = [('3615b20d761861ac232b77920af6fcb2926bb073fa24598e4ad5529b463f02da', '10:5'),
+                 ('ade4e3788cc1ef20f22d3aee360d2dc4f5a6751ab67a6018cacdbd84af9f4beb', '122:7'),
+                 ('cc1994143b51b506fc43ce7c967f2ed28a9ce5668e42db3d36cb263d85324589', '129:7')]
+        for case_id, site in cases:
+            with self.subTest(site=site):
+                left = observation('toBeDefined', text_value('真实 TS 类源码或助记词'), [])
+                right = observation('toBeDefined', text_value('[object Object]'), [])
+                right.pop('pass')
+                self.case(case_id, [(site, 'mnemonic-defined-object-v1', left, right)])
+                self.accepts()
+                original = self.f.path('java-assertions.jsonl').read_text()
+                for change in [lambda v: v.update(actual={'type': 'undefined'}),
+                               lambda v: v.pop('actual'),
+                               lambda v: v.update(actual={}),
+                               lambda v: v.update(matcher='toBeTruthy'),
+                               lambda v: v.update(expected=text_value('different')),
+                               lambda v: v.update(negated=True),
+                               lambda v: v.update({'pass': False})]:
+                    self.f.path('java-assertions.jsonl').write_text(original)
+                    self.mutate_java(lambda rows: change(rows[0]['value']))
+                    self.assertNotEqual(self.bundle().returncode, 0)
+                self.f.path('java-assertions.jsonl').write_text(original)
+                self.rejects_mutations('catalog.json', [
+                    ('源码改变', lambda data: data['files'][0].update(sha256='0'*64)),
+                    ('版本改变', lambda data: data.update(upstreamCommit='0'*40))])
+                self.rejects_mutations('plan.json', [
+                    ('未知站点', lambda data: data[self.case_id]['comparisonRules'].update(
+                        {'invented': 'mnemonic-defined-object-v1'})),
+                    ('删除规则', lambda data: data[self.case_id].pop('comparisonRules'))])
+                ts = [json.loads(line) for line in self.f.path('ts-assertions.jsonl').read_text().splitlines()]
+                ts[0]['value'].pop('pass')
+                self.f.write_lines('ts-assertions.jsonl', ts)
+                self.assertNotEqual(self.bundle().returncode, 0)
+
     def test_async_ready_null_adapter_is_limited_to_two_original_sites(self):
         left = observation('toBeUndefined', {'type': 'undefined'}, [])
         right = observation('toBeUndefined', {'type': 'null'}, [])

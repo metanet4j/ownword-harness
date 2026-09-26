@@ -90,7 +90,7 @@ def observations(catalog, mapping, plan, side, raw, run_id,
         value['kind'] = 'assertion'
         rule = plan[case_id].get('comparisonRules', {}).get(planned[position])
         if rule in ('void-completion-null-adapter-v1', 'async-ready-null-adapter-v1',
-                    'native-null-absence-v1') and 'pass' in row:
+                    'native-null-absence-v1', 'mnemonic-defined-object-v1') and 'pass' in row:
             value['pass'] = row['pass']
         grouped[case_id].append({'runId': run_id, 'side': side, 'caseId': case_id,
                                  'assertionId': planned[position], 'value': value})

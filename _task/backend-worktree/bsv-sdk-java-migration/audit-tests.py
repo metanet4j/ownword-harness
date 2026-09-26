@@ -36,6 +36,18 @@ DRBG_BRANCH_CASES = {hashlib.sha256(json.dumps([DRBG_FILE, ['DRBG', 'NIST vector
     for index in range(15)}
 # 每项固定为：文件、源码摘要、站点 → (规则 ID、原 matcher、原边界、执行次数)。
 SEMANTIC_CASES = {
+    '3615b20d761861ac232b77920af6fcb2926bb073fa24598e4ad5529b463f02da':
+        ('src/compat/__tests/Mnemonic.test.ts',
+         'afb1913a329841a1f1b87dbd730ff7b589aaf297c01fc496a04c2cd441357d02',
+         {'10:5': ('mnemonic-defined-object-v1', 'toBeDefined', None, 1)}),
+    'ade4e3788cc1ef20f22d3aee360d2dc4f5a6751ab67a6018cacdbd84af9f4beb':
+        ('src/compat/__tests/Mnemonic.test.ts',
+         'afb1913a329841a1f1b87dbd730ff7b589aaf297c01fc496a04c2cd441357d02',
+         {'122:7': ('mnemonic-defined-object-v1', 'toBeDefined', None, 1)}),
+    'cc1994143b51b506fc43ce7c967f2ed28a9ce5668e42db3d36cb263d85324589':
+        ('src/compat/__tests/Mnemonic.test.ts',
+         'afb1913a329841a1f1b87dbd730ff7b589aaf297c01fc496a04c2cd441357d02',
+         {'129:7': ('mnemonic-defined-object-v1', 'toBeDefined', None, 1)}),
     '5e08c3e9cd40aa0723c8bc4888818daf1fee79d866e74c68f6c76194748dc0c7':
         ('src/primitives/__tests/AsyncCryptoBackend.test.ts',
          '7b0c97ba0be75a72fc7d3d2ffc708802553fe9658e6f4b893722504bbb545fe2',
@@ -279,6 +291,23 @@ def compare_actuals(case_id, expected, identity, left, right):
         require(canonical(left) == canonical(right), f'实际结果不一致：{case_id} / {identity}')
         return
     rule_id, matcher, boundary, _ = rule
+    if rule_id == 'mnemonic-defined-object-v1':
+        # 仅三个固定源码站点：类与实例显示形式跨语言不同，原断言只检验非 undefined。
+        # Java 原 assertDefined 和 Surefire 必须实际通过；不补造 Java pass 字段。
+        for side, value in (('TS', left), ('Java', right)):
+            keys = {'kind', 'matcher', 'negated', 'actual', 'expected'}
+            require(isinstance(value, dict) and
+                    (set(value) == keys | {'pass'} if side == 'TS'
+                     else keys <= set(value) <= keys | {'pass'})
+                    and value['kind'] == 'assertion' and value['matcher'] == 'toBeDefined'
+                    and value['negated'] is False and value.get('pass', True) is True
+                    and value['expected'] == [],
+                    f'Mnemonic 定义断言缺少原 matcher/expected/pass：{identity}')
+            actual = value['actual']
+            require(isinstance(actual, dict) and set(actual) == {'type', 'value'}
+                    and actual['type'] == 'string' and isinstance(actual['value'], str),
+                    f'Mnemonic 定义断言必须保留非 undefined 的原类/实例观察：{identity}')
+        return
     if rule_id == 'void-completion-null-adapter-v1':
         for side, value, actual in (('TS', left, {'type': 'undefined'}),
                                     ('Java', right, {'type': 'null'})):
