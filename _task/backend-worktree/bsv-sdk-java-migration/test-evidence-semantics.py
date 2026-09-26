@@ -133,6 +133,27 @@ class SemanticTest(unittest.TestCase):
                 next(iter(data[self.case_id]['comparisonRules'])))),
         ])
 
+    def test_native_absence_adapters_keep_original_matchers_and_actuals(self):
+        left = observation('toBeUndefined', {'type': 'undefined'}, [])
+        right = observation('toBeNull', {'type': 'null'}, {'type': 'array', 'value': []})
+        cases = [('9cb7ee6ed920ce4f9b0822ea4209d7c8f520e334a16e45f7913fdc989025a0be', '862:11'),
+                 ('5c6b78e562b2b310489abb962a64b66061f9e2e226acd80d4998b6f2ad8f571f', '1139:5')]
+        for case_id, site in cases:
+            with self.subTest(case_id=case_id):
+                self.case(case_id, [(site, 'native-null-absence-v1', left, right)])
+                self.accepts()
+                original = self.f.path('java-assertions.jsonl').read_text()
+                for change in [
+                    lambda value: value.update(actual={'type': 'undefined'}),
+                    lambda value: value.update(matcher='toBeUndefined'),
+                    lambda value: value.update(expected=[]),
+                    lambda value: value.pop('actual'),
+                ]:
+                    self.f.path('java-assertions.jsonl').write_text(original)
+                    self.mutate_java(lambda rows: change(rows[0]['value']))
+                    self.assertNotEqual(self.bundle().returncode, 0)
+                self.f.path('java-assertions.jsonl').write_text(original)
+
     def test_fixed_timing_bounds_recompute_actuals_and_reject_pass_only(self):
         left = observation('toBeLessThan', number(2), number(50))
         right = observation('toBeLessThan', number(7), number(50))

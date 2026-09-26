@@ -39,6 +39,12 @@ SEMANTIC_CASES = {
          '7b0c97ba0be75a72fc7d3d2ffc708802553fe9658e6f4b893722504bbb545fe2',
          {'38:7': ('async-ready-null-adapter-v1', 'toBeUndefined', None, 1),
           '42:7': ('async-ready-null-adapter-v1', 'toBeUndefined', None, 1)}),
+    '9cb7ee6ed920ce4f9b0822ea4209d7c8f520e334a16e45f7913fdc989025a0be':
+        (AUTH_WAIT_FILE, '177e6ca599905a61274e400c0b85d8719526a2e09003ac207b0513a3fb60afc6',
+         {'862:11': ('native-null-absence-v1', 'toBeUndefined', None, 1)}),
+    '5c6b78e562b2b310489abb962a64b66061f9e2e226acd80d4998b6f2ad8f571f':
+        (AUTH_WAIT_FILE, '177e6ca599905a61274e400c0b85d8719526a2e09003ac207b0513a3fb60afc6',
+         {'1139:5': ('native-null-absence-v1', 'toBeUndefined', None, 1)}),
     '61b4ecc5ca8e8e0e52d508368744a12c06c31d670ea752d08a5d880a62cf5f63':
         ('src/auth/clients/__tests__/AuthFetch.test.ts',
          '0312c9107dbd4acddab1cd282355090fad28dfe58b0f395b642641cca7654f0a',
@@ -262,15 +268,18 @@ def compare_actuals(case_id, expected, identity, left, right):
         require(canonical(left) == canonical(right), f'实际结果不一致：{case_id} / {identity}')
         return
     rule_id, matcher, boundary, _ = rule
-    if rule_id == 'async-ready-null-adapter-v1':
-        for side, value, actual in (('TS', left, {'type': 'undefined'}),
-                                    ('Java', right, {'type': 'null'})):
+    if rule_id in ('async-ready-null-adapter-v1', 'native-null-absence-v1'):
+        for side, value, actual, original_matcher, original_expected in (
+                ('TS', left, {'type': 'undefined'}, 'toBeUndefined', []),
+                ('Java', right, {'type': 'null'},
+                 'toBeUndefined' if rule_id == 'async-ready-null-adapter-v1' else 'toBeNull',
+                 [] if rule_id == 'async-ready-null-adapter-v1' else {'type': 'array', 'value': []})):
             require(isinstance(value, dict) and set(value) ==
                     {'kind', 'matcher', 'negated', 'actual', 'expected', 'pass'}
-                    and value['kind'] == 'assertion' and value['matcher'] == 'toBeUndefined'
+                    and value['kind'] == 'assertion' and value['matcher'] == original_matcher
                     and value['negated'] is False and value['pass'] is True
-                    and value['actual'] == actual and value['expected'] == [],
-                    f'AsyncCryptoBackend.ready {side} 必须保留固定 undefined/null 实际观测：{identity}')
+                    and value['actual'] == actual and value['expected'] == original_expected,
+                    f'固定 Java null 适配 {side} 必须保留 undefined/null 实际观测：{identity}')
         return
     for value in (left, right):
         require(isinstance(value, dict) and value.get('kind') == 'assertion'
