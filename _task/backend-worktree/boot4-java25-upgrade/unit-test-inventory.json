@@ -313,7 +313,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "82c5283a179a69f2506f066e79538b0f330529a9",
+      "head": "3c0f214b2d386bb7f7970ca43878c7812e667ca7",
       "modules": [
         {
           "path": ".",
@@ -783,6 +783,31 @@
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
             },
             {
+              "path": "src/test/java/com/metanet4j/sdk/context/PreSignHashContextContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "roundTripsRequiredFieldsWithoutOptionalFeeOrPublicKey",
+                  "returnType": "void",
+                  "line": 19,
+                  "classification": "unit"
+                },
+                {
+                  "name": "roundTripsOptionalFeeAndPublicKey",
+                  "returnType": "void",
+                  "line": 39,
+                  "classification": "unit"
+                },
+                {
+                  "name": "preservesAnAbsentPreSignHashBeforeSigning",
+                  "returnType": "void",
+                  "line": 58,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "远程签名上下文必需/可选字段往返与 Number 费用转换"
+            },
+            {
               "path": "src/test/java/com/metanet4j/sdk/crypto/EciesContractTest.java",
               "classification": "unit",
               "methods": [
@@ -865,6 +890,31 @@
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
             },
             {
+              "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaHashContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "hashesOutpointAndUnsignedOutputScript",
+                  "returnType": "void",
+                  "line": 30,
+                  "classification": "unit"
+                },
+                {
+                  "name": "parsesSigmaPushesAndHashesOnlyPriorData",
+                  "returnType": "void",
+                  "line": 71,
+                  "classification": "unit"
+                },
+                {
+                  "name": "missingInputUsesTheDocumentedDummyHash",
+                  "returnType": "void",
+                  "line": 98,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "构造本地小交易，用独立 SHA-256 对照输入、输出、消息哈希和 Sigma 脚本解析"
+            },
+            {
               "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaProtocolModelTest.java",
               "classification": "unit",
               "methods": [
@@ -876,6 +926,37 @@
                 }
               ],
               "classificationReason": "真实空交易与脚本验证 Sigma 签名协议字段及 BSM 枚举"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaSignContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "signsAndVerifiesForEachLocalKeySelection",
+                  "returnType": "void",
+                  "line": 28,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteSigningUsesMatchingPreSignHashAndClearsThreadContext",
+                  "returnType": "void",
+                  "line": 65,
+                  "classification": "unit"
+                },
+                {
+                  "name": "resigningReplacesTheSelectedInstanceWithoutDroppingOutputData",
+                  "returnType": "void",
+                  "line": 90,
+                  "classification": "unit"
+                },
+                {
+                  "name": "existingOpReturnUsesPipeSeparatorAndKeepsPriorData",
+                  "returnType": "void",
+                  "line": 118,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "真实 BAP 密钥对本地及远程 Sigma 签名验证；ThreadLocal 上下文清理"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/transcation/BapDataLockBuilderSignTypeTest.java",

@@ -301,9 +301,11 @@
         "sdk 提交 bf40681（BIP39/BIP32 固定向量，助记词数量越界立即失败）",
         "SDK 隔离单元基线 evidence/20260926T083620Z/：44/0/0/0，LINE 442/1993；MasterPrivateKey 逐类行/分支/方法无缺口",
         "sdk 提交 82c5283（ScriptHelper 四类短路分支、Sigma BSM 协议字段）",
-        "SDK 隔离单元基线 evidence/20260926T084746Z/：46/0/0/0，LINE 457/1991；ScriptHelper、Sig、SignResponse、Algorithm 逐类无缺口"
+        "SDK 隔离单元基线 evidence/20260926T084746Z/：46/0/0/0，LINE 457/1991；ScriptHelper、Sig、SignResponse、Algorithm 逐类无缺口",
+        "sdk 提交 3c0f214（Sigma 输入/数据哈希、四类本地签名、远程上下文、重复签名、缺失输入）",
+        "SDK 隔离单元基线 evidence/20260926T090939Z/：56/0/0/0，LINE 701/1987；Sigma、PreSignHashContext、PreSignHashUtils 逐类行/分支/方法无缺口"
       ],
-      "statusNote": "HTTP、字节/哈希、WIF/地址、ECIES/AES、主密钥、脚本过滤/Sigma 模型子项已完成（SDK 至 82c5283）；本地 HTTP 集成 5/0/0/0，SDK 单元 46/0/0/0，LINE 457/1991、BRANCH 68/507、METHOD 138/456；交易、BAP、Sigma 核心等其余 SDK 行为待补。"
+      "statusNote": "HTTP、字节/哈希、WIF/地址、ECIES/AES、主密钥、脚本模型、Sigma 核心子项已完成（SDK 至 3c0f214）；本地 HTTP 集成 5/0/0/0，SDK 单元 56/0/0/0，LINE 701/1987、BRANCH 165/513、METHOD 176/455；交易、BAP 等其余 SDK 行为待补。"
     },
     {
       "id": "unit-u3-foundation",
