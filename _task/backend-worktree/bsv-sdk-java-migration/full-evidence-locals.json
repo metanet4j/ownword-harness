@@ -172,9 +172,21 @@
     },
     {
       "name": "auth-fetch-property",
-      "deriveCatalogFromPlan": true,
+      "catalog": ".cache/evidence/auth-fetch-property-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/auth-fetch-property-plan-20260927/mapping.json",
       "input_plan": "auth-fetch-property-input-plan.json",
-      "captureKind": "specialized-local"
+      "ts_inputs": ".cache/evidence/auth-fetch-property-formal-20260927-01/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/auth-fetch-property-formal-20260927-01/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/auth-fetch-property-formal-20260927-01/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/auth-fetch-property-formal-20260927-01/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/auth-fetch-property-formal-20260927-01/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/auth-fetch-property-formal-20260927-01/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/auth-fetch-property-formal-20260927-01/java-run.json",
+      "java_report": [
+        ".cache/evidence/auth-fetch-property-formal-20260927-01/java-surefire.xml"
+      ]
     },
     {
       "name": "script-spend-shared-vectors",
