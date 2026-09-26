@@ -6,12 +6,12 @@
 
 - **更新时间**：2026-09-26。
 - **当前目标**：为四个子仓库建立完整单元测试、集成测试与逐模块覆盖率证据。
-- **当前阶段**：`unit-u2-sdk` 正在实施；U0 测试基线及 U1 base 已完成，U3—U9 待实施。
-- **下一步**：继续 sdk 的 BAP、交易、脚本测试，逐类补足未覆盖代码；HTTP 子项已完成。
+- **当前阶段**：`unit-u2-sdk` 未完成；按胡先生要求暂时停止。U0 测试基线及 U1 base 已完成，U3—U9 待实施。
+- **下一步**：待胡先生要求继续后，先在宿主复跑当前提交的 SDK 全量 `verify-unit.py`，再继续 SDK 剩余公开 API 测试和逐类覆盖。
 
 ## 已验证结果
 
-U0 [四仓测试基线](doc/测试基线与障碍-20260926-145423.md)列出 25 POM、369 个生产 Java 文件、最初 52 个测试文件，以及 19 项集成边界的隔离和观测方式。当前 `unit-test-inventory.json` 已增至 75 个测试文件。U0 全仓基线有 56 个旧用例通过、8 个跳过；17 个含可执行代码的 component 模块零本地单元测试。`component-core` 仅定义接口，按 N/A 处理。宿主五项共享服务健康。
+U0 [四仓测试基线](doc/测试基线与障碍-20260926-145423.md)列出 25 POM、369 个生产 Java 文件、最初 52 个测试文件，以及 19 项集成边界的隔离和观测方式。当前 `unit-test-inventory.json` 已增至 84 个测试文件。U0 全仓基线有 56 个旧用例通过、8 个跳过；17 个含可执行代码的 component 模块零本地单元测试。`component-core` 仅定义接口，按 N/A 处理。宿主五项共享服务健康。
 
 U1 base 提交 `bae7eb6` 与 `77ad9fd`：UTXO 相等性缺陷先红后绿；AIP 坏签名返回 false；BAP 固定身份向量、协议枚举、DTO 与 Jackson 行为均有断言。最终提交后，`python3 verify-unit.py --mode accept --scope metanet4j-base` 退出 0；19 个测试全部通过，零失败/错误/跳过，JaCoCo LINE 208/208、BRANCH 76/76、METHOD 51/51，`jacoco:check` 通过。证据在本地 `evidence/20260926T072220Z/`；同一提交的 base 0.2.0 构件已安装至隔离 Maven 仓库。
 
@@ -41,7 +41,23 @@ U2 BAP 变体子项提交 `20cb3f0`：远程身份只持有五类公开地址、
 
 U2 显式 BAP 子项提交 `b70f3b0`：六种构造入口、身份／密钥 getter、KeyBag 按哈希选择支付或 Ord 私钥、未知哈希错误均有断言；有效公钥返回 `null` 的缺陷先红后绿。SDK 隔离单元基线 71/0/0/0，LINE 886/1986、BRANCH 203/512、METHOD 242/455；`SpecifyBapBase` 与其 KeyBag 逐类无覆盖缺口，证据 `evidence/20260926T094519Z/`。
 
-U2 BAP 工厂与身份解密子项提交 `1e14af8`：各工厂构造相同根身份、高位签名路径、配置应用名、绝对路径密文解密均有断言；坏密文原先打印堆栈并返回 `null`，现抛有原因的异常，先红后绿。SDK 隔离单元基线 73/0/0/0，LINE 899/1984、BRANCH 203/510、METHOD 247/454；`BapBase` 自身 BRANCH 26/26、LINE 136/137，剩余 `encryptSelf()` 空桩语义待用户确认，证据 `evidence/20260926T095306Z/`。
+U2 BAP 工厂与身份解密子项提交 `1e14af8`：各工厂构造相同根身份、高位签名路径、配置应用名、绝对路径密文解密均有断言；坏密文原先打印堆栈并返回 `null`，现抛有原因的异常，先红后绿。该提交的 SDK 隔离单元基线 73/0/0/0，LINE 899/1984、BRANCH 203/510、METHOD 247/454；`BapBase` 当时 BRANCH 26/26、LINE 136/137，未覆盖的 `encryptSelf()` 已在后续提交实现，证据 `evidence/20260926T095306Z/`。
+
+U2 后续两个提交：`ea025e7` 为旧版 `CryptoHelper` 补固定 BIP39 根／子密钥、主网／测试网 WIF／地址和随机入口断言；`5cd4abf` 按胡先生确认，将 `encryptSelf()` 实现为加密当前 `identityKey`，由 `decryptSelf()` 还原，测试先红后绿。提交 `5cd4abf` 的定向 `clean test` 10/0/0/0，日志和 Surefire XML 在 `evidence/20260926-u2-crypto-self-targeted/`。宿主全量 `verify-unit.py` 申请被自动审批系统拒绝，原因是使用额度上限；命令未执行，当前 SDK 提交尚无全量覆盖率结论。上段 73/0/0/0 和覆盖率仅对应旧提交 `1e14af8`。
+
+U2 脚本扩展子项提交 `f86f9ea`：普通地址、多签、P2SH、Ord 和未知脚本的花费字节估算、签名占位替换及脚本创建时间都有断言。定向 `clean test` 2/0/0/0，JaCoCo `ScriptExtend` LINE 30/30、BRANCH 24/24、METHOD 4/4，证据 `evidence/20260926-u2-script-targeted/`。这是定向覆盖率，SDK 全量仍待宿主验证。
+
+U2 Ord 脚本构建子项提交 `d7552a5`：收款地址、内容封装、缺失媒体字段、MAP 元数据必填字段与 `cmd` 过滤都有断言。定向 `clean test` 3/0/0/0，JaCoCo `OrdScriptBuilder` BRANCH 16/16、LINE 25/26、METHOD 1/2；剩余隐式构造器，证据 `evidence/20260926-u2-ord-script-targeted/`。这是定向覆盖率，SDK 全量仍待宿主验证。
+
+U2 Ord 交易解析与赎回数据子项提交 `8a540b9`：有效／畸形脚本、地址、关联输出和密钥选择有断言，移除不可达的空值判断。定向 `clean test` 7/0/0/0；`RedeemDataExtend` LINE 13/13、BRANCH 6/6、METHOD 5/5；`TxHelperExtend` BRANCH 32/32、LINE 40/41、METHOD 6/7，余隐式构造器。证据 `evidence/20260926-u2-txhelper-redeem-targeted/`。SDK 全量仍待宿主验证。
+
+U2 交易扩展类子项提交 `6f32283`：内存交易验证显式索引、关联输出、outpoint 哈希和空解锁脚本。定向 `clean test` 2/0/0/0，三个类的 LINE/METHOD 均 100%，证据 `evidence/20260926-u2-transaction-enhance-targeted/`。SDK 全量仍待宿主验证。
+
+U2 签名上下文线程隔离子项提交 `7b3d43d`：按哈希取回、缺失错误及跨线程不可见均有断言。定向 `clean test` 2/0/0/0，`AllHashSigThreadLocal` LINE 7/7、BRANCH 2/2、METHOD 4/4，证据 `evidence/20260926-u2-threadlocal-targeted/`。SDK 全量仍待宿主验证。
+
+U2 ForkID 签名哈希子项提交 `da46655`：独立预映像核对 ALL/SINGLE/NONE × ANYONECANPAY 与缺失输出，定向 `clean test` 2/0/0/0。`SigHashExtend` BRANCH 25/26、LINE 50/53、METHOD 1/2；未知消息长度容量分支、不可达 I/O 异常处理和隐式构造器仍有缺口，证据 `evidence/20260926-u2-sighash-targeted/`。SDK 全量仍待宿主验证。
+
+U2 二进制消息签名子项提交 `39f82a9`：固定非 UTF-8 消息签名、哈希签名一致性、紧凑签名公钥恢复和改动消息失效有断言。定向 `clean test` 1/0/0/0，`EcKeyLiteExtend` LINE 28/30、BRANCH 7/12、METHOD 7/7，证据 `evidence/20260926-u2-eckey-targeted/`。胡先生要求完成本项后暂停；SDK 全量仍待宿主验证。
 
 ## 仓库与工作区
 

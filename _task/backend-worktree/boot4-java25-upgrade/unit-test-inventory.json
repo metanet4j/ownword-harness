@@ -313,7 +313,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "1e14af83ab02e2764eec784fb2a1b678f04143e1",
+      "head": "39f82a9ce87d4343eb281013af3b3028609b847d",
       "modules": [
         {
           "path": ".",
@@ -614,6 +614,19 @@
           ],
           "testSources": [
             {
+              "path": "src/test/java/com/metanet4j/sdk/EcKeyLiteExtendContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "signsBinaryMessageAndRecoversThePublicKey",
+                  "returnType": "void",
+                  "line": 21,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "固定二进制消息验证签名、预映像哈希和公钥恢复，无网络或外部状态"
+            },
+            {
               "path": "src/test/java/com/metanet4j/sdk/KeyAddressContractTest.java",
               "classification": "unit",
               "methods": [
@@ -753,9 +766,15 @@
                   "returnType": "void",
                   "line": 111,
                   "classification": "unit"
+                },
+                {
+                  "name": "selfExportEncryptsCurrentIdentityAndCanBeRestored",
+                  "returnType": "void",
+                  "line": 126,
+                  "classification": "unit"
                 }
               ],
-              "classificationReason": "BAP 本地密钥轮换、重建、地址反查、工厂入口、无符号 hex 路径和身份解密；包含成功、边界与失败路径"
+              "classificationReason": "BAP 本地密钥轮换、重建、地址反查、工厂入口、无符号 hex 路径和身份加解密；包含成功、边界与失败路径"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseTest.java",
@@ -945,6 +964,31 @@
               "classificationReason": "远程签名上下文必需/可选字段往返与 Number 费用转换"
             },
             {
+              "path": "src/test/java/com/metanet4j/sdk/crypto/CryptoHelperContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "fixedMnemonicDerivesExpectedRootAndConsistentPublicValues",
+                  "returnType": "void",
+                  "line": 26,
+                  "classification": "unit"
+                },
+                {
+                  "name": "childDerivationRespectsNetworkAndParentKey",
+                  "returnType": "void",
+                  "line": 46,
+                  "classification": "unit"
+                },
+                {
+                  "name": "emptyMnemonicAndNoArgumentFactoryCreateUsableKeys",
+                  "returnType": "void",
+                  "line": 62,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "旧版助记词根／子密钥派生、主网与测试网 WIF／地址及随机输入；纯本地计算"
+            },
+            {
               "path": "src/test/java/com/metanet4j/sdk/crypto/EciesContractTest.java",
               "classification": "unit",
               "methods": [
@@ -1008,6 +1052,69 @@
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
             },
             {
+              "path": "src/test/java/com/metanet4j/sdk/input/TransactionEnhanceContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "preservesExplicitOutpointHashAndConnectedAddressOutput",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit"
+                },
+                {
+                  "name": "keepsRawOutputScriptAndDetachedIndex",
+                  "returnType": "void",
+                  "line": 47,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "内存交易验证扩展输入、输出、outpoint 的索引、关联输出和空脚本，无网络或外部状态"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdScriptBuilderContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "inscriptionPreservesDestinationAndPushesMediaEnvelope",
+                  "returnType": "void",
+                  "line": 30,
+                  "classification": "unit"
+                },
+                {
+                  "name": "missingContentOrMediaTypeKeepsOrdEnvelopeOut",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "unit"
+                },
+                {
+                  "name": "mapMetadataRequiresAppAndTypeAndOmitsCommandField",
+                  "returnType": "void",
+                  "line": 58,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "Ord 内容封装、缺失字段与 MAP 元数据序列化；纯本地脚本构建"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/script/ScriptExtendContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "estimatesSpendSizeForCommonAndOrdinalScripts",
+                  "returnType": "void",
+                  "line": 25,
+                  "classification": "unit"
+                },
+                {
+                  "name": "insertsSignaturesAtTheCorrectPositionForEachScriptType",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "普通地址、多签、P2SH、Ord 与未知脚本的花费字节估算、签名位置及创建时间；纯本地计算"
+            },
+            {
               "path": "src/test/java/com/metanet4j/sdk/script/ScriptTest.java",
               "classification": "unit",
               "methods": [
@@ -1025,6 +1132,25 @@
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/script/SigHashExtendContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "forkIdDigestMatchesIndependentPreimageAcrossFlags",
+                  "returnType": "void",
+                  "line": 24,
+                  "classification": "unit"
+                },
+                {
+                  "name": "singleWithoutCorrespondingOutputUsesZeroOutputHash",
+                  "returnType": "void",
+                  "line": 41,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "内存交易和独立 ForkID 预映像计算，无网络或外部状态"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaHashContractTest.java",
@@ -1094,6 +1220,25 @@
                 }
               ],
               "classificationReason": "真实 BAP 密钥对本地及远程 Sigma 签名验证；ThreadLocal 上下文清理"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/signers/AllHashSigThreadLocalContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "findsMatchingSigningContextAndRejectsUnknownHash",
+                  "returnType": "void",
+                  "line": 17,
+                  "classification": "unit"
+                },
+                {
+                  "name": "keepsSigningContextsSeparateAcrossThreads",
+                  "returnType": "void",
+                  "line": 38,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "本地线程验证签名上下文按哈希查找和线程隔离，无外部状态"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/transcation/BapDataLockBuilderSignTypeTest.java",
@@ -1341,6 +1486,31 @@
               "classificationReason": "真实字节序列与协议异常断言，覆盖空切片、游标、负长度和越界"
             },
             {
+              "path": "src/test/java/com/metanet4j/sdk/utils/RedeemDataExtendContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "sortsKeysAndKeepsAnIndependentList",
+                  "returnType": "void",
+                  "line": 21,
+                  "classification": "unit"
+                },
+                {
+                  "name": "adaptsLibraryRedeemDataAndSelectsAvailablePrivateKey",
+                  "returnType": "void",
+                  "line": 40,
+                  "classification": "unit"
+                },
+                {
+                  "name": "singleKeyFactoryReturnsNullForUnknownKey",
+                  "returnType": "void",
+                  "line": 55,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "真实公私钥验证赎回数据排序、拷贝、适配和可用私钥查找，无网络或外部状态"
+            },
+            {
               "path": "src/test/java/com/metanet4j/sdk/utils/ScriptHelperContractTest.java",
               "classification": "unit",
               "methods": [
@@ -1352,6 +1522,37 @@
                 }
               ],
               "classificationReason": "构造实际 ScriptChunk 覆盖有效 push data、OP_RETURN、空数据及 OP_0"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/utils/TxHelperExtendContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "extractsDestinationFromInscriptionWithOptionalMapMetadata",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsOrdinaryAndIncompleteInscriptionScripts",
+                  "returnType": "void",
+                  "line": 52,
+                  "classification": "unit"
+                },
+                {
+                  "name": "resolvesConnectedInscriptionAndOrdinaryPaymentThroughKeyBag",
+                  "returnType": "void",
+                  "line": 86,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsDisconnectedOutputAndUnknownInscriptionKey",
+                  "returnType": "void",
+                  "line": 106,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "本地脚本和内存交易验证 Ord 识别、地址提取、关联输出及密钥查找，无网络或外部状态"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utils/UtilsExtendTest.java",
