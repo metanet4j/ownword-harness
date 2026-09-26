@@ -5,6 +5,61 @@
   "note": "逐项源码复核后的 Java 设计映射，不代表实现或测试通过。WriterUint8Array 零容量扩容按用户授权做最小修复，差异见契约；未映射项继续阻止 P0 完成。",
   "entries": [
     {
+      "id": "src/primitives/BasePoint.ts#class:BasePoint:1",
+      "java": "com.metanet4j.bsv.primitives.BasePoint",
+      "javaSignature": "public abstract class BasePoint",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BasePoint.ts:7",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/BasePoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/BasePoint.ts#constructor:BasePoint.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.BasePoint#constructor",
+      "javaSignature": "protected BasePoint(Curve curve, String type)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BasePoint.ts:16",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/BasePoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/BasePoint.ts#property:BasePoint.curve:1",
+      "java": "com.metanet4j.bsv.primitives.BasePoint#curve",
+      "javaSignature": "public Curve curve",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BasePoint.ts:8",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/BasePoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/BasePoint.ts#property:BasePoint.precomputed:1",
+      "java": "com.metanet4j.bsv.primitives.BasePoint#precomputed",
+      "javaSignature": "public Map<String, Object> precomputed",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BasePoint.ts:10",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/BasePoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/BasePoint.ts#property:BasePoint.type:1",
+      "java": "com.metanet4j.bsv.primitives.BasePoint#type",
+      "javaSignature": "public String type",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/BasePoint.ts:9",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/BasePoint.java"
+      ]
+    },
+    {
       "id": "src/primitives/BigNumber.ts#class:BigNumber:1",
       "java": "com.metanet4j.bsv.primitives.BigNumber",
       "javaSignature": "public class BigNumber",
@@ -2150,6 +2205,516 @@
         "src/primitives/BigNumber.ts:10",
         ".cache/evidence/api-values-observations.json",
         ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#class:Curve:1",
+      "java": "com.metanet4j.bsv.primitives.Curve",
+      "javaSignature": "public class Curve",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:34",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#constructor:Curve.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#shared",
+      "javaSignature": "public static Curve shared()；public Curve() 创建独立实例",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:139",
+        "Java 构造器无法返回既有对象；默认调用方使用 shared() 保留 TS 全局单例身份",
+        "doc/完整模块与API映射-20260920-122800.md#api-curve",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#function:jsfDigit:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#jsfDigit",
+      "javaSignature": "private static int jsfDigit(BigNumber value, int carry, int mod4, int otherMod4)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:24",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#function:nextJsfCarry:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#nextJsfCarry",
+      "javaSignature": "private static int nextJsfCarry(int carry, int digit)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:30",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#function:normalizedMod4:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#normalizedMod4",
+      "javaSignature": "private static int normalizedMod4(BigNumber value, int carry)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:19",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#interface:EndomorphismConfig:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#getEndomorphism",
+      "javaSignature": "Map<String, Object> config（beta、lambda、basis 可选）",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:13",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve._endoSplit:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#endoSplit",
+      "javaSignature": "public EndoSplit endoSplit(BigNumber scalar)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:1176",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve._endomorphismLambdaMatches:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#endomorphismLambdaMatches",
+      "javaSignature": "public boolean endomorphismLambdaMatches(BigNumber lambda, BigNumber beta, boolean requireCoordinates)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:1031",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve._getEndoBasis:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#getEndoBasis",
+      "javaSignature": "public List<BasisVector> getEndoBasis(BigNumber lambda)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:1090",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve._getEndoRoots:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#getEndoRoots",
+      "javaSignature": "public BigNumber[] getEndoRoots(BigNumber number)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:1075",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve._getEndomorphism:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#getEndomorphism",
+      "javaSignature": "public Endomorphism getEndomorphism(Map<String, Object> config)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:1002",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve._resolveEndomorphismBasis:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#resolveEndomorphismBasis",
+      "javaSignature": "public List<BasisVector> resolveEndomorphismBasis(Map<String, Object> config, BigNumber lambda)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:1062",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve._resolveEndomorphismBeta:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#resolveEndomorphismBeta",
+      "javaSignature": "public BigNumber resolveEndomorphismBeta(Map<String, Object> config)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:1023",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve._resolveEndomorphismLambda:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#resolveEndomorphismLambda",
+      "javaSignature": "public BigNumber resolveEndomorphismLambda(Map<String, Object> config, BigNumber beta)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:1050",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve.assert:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#assert",
+      "javaSignature": "public static void assertCondition(Object expression, String message)（异常类型待核对）",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:59",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve.cachedProperty:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#cachedProperty",
+      "javaSignature": "public static <T> T cachedProperty(Map<String, Object> instance, String name, Supplier<T> computer)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:121",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve.getJSF:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#getJSF",
+      "javaSignature": "public List<List<Integer>> getJSF(BigNumber left, BigNumber right)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:94",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve.getNAF:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#getNAF",
+      "javaSignature": "public List<Integer> getNAF(BigNumber num, int width, int bits)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:65",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve.intFromLE:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#intFromLE",
+      "javaSignature": "public static BigNumber intFromLE(List<? extends Number> bytes)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:135",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve.parseBytes:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#parseBytes",
+      "javaSignature": "public static List<Integer> parseBytes(Object bytes)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:131",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#method:Curve.validate:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#validate",
+      "javaSignature": "public boolean validate(Point point)（null 坐标异常待核对）",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:1198",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve._bitLength:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#_bitLength",
+      "javaSignature": "public int _bitLength",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:56",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve._endoWnafT1:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#_endoWnafT1",
+      "javaSignature": "public BigNumber[] _endoWnafT1",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:50",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve._endoWnafT2:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#_endoWnafT2",
+      "javaSignature": "public BigNumber[] _endoWnafT2",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:51",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve._wnafT1:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#_wnafT1",
+      "javaSignature": "public BigNumber[] _wnafT1",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:52",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve._wnafT2:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#_wnafT2",
+      "javaSignature": "public BigNumber[] _wnafT2",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:53",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve._wnafT3:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#_wnafT3",
+      "javaSignature": "public BigNumber[] _wnafT3",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:54",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve._wnafT4:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#_wnafT4",
+      "javaSignature": "public BigNumber[] _wnafT4",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:55",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve.a:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#a",
+      "javaSignature": "public BigNumber a",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:43",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve.b:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#b",
+      "javaSignature": "public BigNumber b",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:44",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve.endo:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#endo",
+      "javaSignature": "public Endomorphism endo",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:48",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve.g:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#g",
+      "javaSignature": "public Point g（含 66 个 doubles 点与 128 个 NAF 点）",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:41",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve.n:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#n",
+      "javaSignature": "public BigNumber n",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:42",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve.one:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#one",
+      "javaSignature": "public BigNumber one",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:39",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve.p:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#p",
+      "javaSignature": "public BigNumber p",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:35",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve.red:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#red",
+      "javaSignature": "public ReductionContext red",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:36",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve.redN:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#redN",
+      "javaSignature": "public BigNumber redN",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:37",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve.threeA:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#threeA",
+      "javaSignature": "public boolean threeA",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:47",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve.tinv:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#tinv",
+      "javaSignature": "public BigNumber tinv",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:45",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve.two:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#two",
+      "javaSignature": "public BigNumber two",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:40",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve.zero:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#zero",
+      "javaSignature": "public BigNumber zero",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:38",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:Curve.zeroA:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#zeroA",
+      "javaSignature": "public boolean zeroA",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:46",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:EndomorphismConfig.basis:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#getEndomorphism",
+      "javaSignature": "config.get(\"basis\")：List<Map<String, String>>，可缺失",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:16",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:EndomorphismConfig.beta:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#getEndomorphism",
+      "javaSignature": "config.get(\"beta\")：String，可缺失",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:14",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#property:EndomorphismConfig.lambda:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#getEndomorphism",
+      "javaSignature": "config.get(\"lambda\")：String，可缺失",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:15",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Curve.ts#variable:globalCurve:1",
+      "java": "com.metanet4j.bsv.primitives.Curve#shared",
+      "javaSignature": "public static Curve shared()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Curve.ts:11",
+        "Java 默认调用方共用 shared()，显式 new Curve() 不具 TS 返回同一对象语义",
+        "doc/完整模块与API映射-20260920-122800.md#api-curve",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Curve.java"
       ]
     },
     {
@@ -6115,6 +6680,193 @@
       ]
     },
     {
+      "id": "src/primitives/JacobianPoint.ts#class:JacobianPoint:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint",
+      "javaSignature": "public class JacobianPoint extends BasePoint",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:21",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#constructor:JacobianPoint.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#constructor",
+      "javaSignature": "public JacobianPoint(Object x, Object y, Object z)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:43",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#method:JacobianPoint.add:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#add",
+      "javaSignature": "public JacobianPoint add(JacobianPoint other)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:140",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#method:JacobianPoint.dbl:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#dbl",
+      "javaSignature": "public JacobianPoint dbl()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:278",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#method:JacobianPoint.dblp:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#dblp",
+      "javaSignature": "public JacobianPoint dblp(int power)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:249",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#method:JacobianPoint.eq:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#eq",
+      "javaSignature": "public boolean eq(JacobianPoint other); public boolean eq(Point other)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:365",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#method:JacobianPoint.eqXToP:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#eqXToP",
+      "javaSignature": "public boolean eqXToP(BigNumber xCoordinate)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:410",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#method:JacobianPoint.inspect:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#inspect",
+      "javaSignature": "public String inspect()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:450",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#method:JacobianPoint.isInfinity:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#isInfinity",
+      "javaSignature": "public boolean isInfinity()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:474",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#method:JacobianPoint.mixedAdd:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#mixedAdd",
+      "javaSignature": "public JacobianPoint mixedAdd(Point other)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:194",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#method:JacobianPoint.neg:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#neg",
+      "javaSignature": "public JacobianPoint neg()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:122",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#method:JacobianPoint.toP:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#toP",
+      "javaSignature": "public Point toP()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:99",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#property:JacobianPoint.x:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#x",
+      "javaSignature": "public BigNumber x",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:22",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#property:JacobianPoint.y:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#y",
+      "javaSignature": "public BigNumber y",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:23",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#property:JacobianPoint.z:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#z",
+      "javaSignature": "public BigNumber z",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:24",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#property:JacobianPoint.zOne:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint#zOne",
+      "javaSignature": "public boolean zOne",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:25",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
+      "id": "src/primitives/JacobianPoint.ts#type:JacobianCoord:1",
+      "java": "com.metanet4j.bsv.primitives.JacobianPoint",
+      "javaSignature": "Object x/y/z（String、BigNumber、null）",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/JacobianPoint.ts:5",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/JacobianPoint.java"
+      ]
+    },
+    {
       "id": "src/primitives/K256.ts#class:K256:1",
       "java": "com.metanet4j.bsv.primitives.K256",
       "javaSignature": "public class K256 extends Mersenne",
@@ -6463,6 +7215,959 @@
         "src/primitives/__tests/ReductionContext.test.ts",
         ".cache/evidence/api-values-observations.json",
         ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#class:Point:1",
+      "java": "com.metanet4j.bsv.primitives.Point",
+      "javaSignature": "public class Point extends BasePoint",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:275",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#constructor:Point.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.Point#constructor",
+      "javaSignature": "public Point(Object x, Object y, boolean isRed); public Point(Object x, Object y)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:453",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:biMod:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#biMod",
+      "javaSignature": "public static BigInteger biMod(BigInteger a)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:49",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:biModAdd:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#biModAdd",
+      "javaSignature": "public static BigInteger biModAdd(BigInteger a, BigInteger b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:52",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:biModInv:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#biModInv",
+      "javaSignature": "public static BigInteger biModInv(BigInteger a)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:53",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:biModMul:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#biModMul",
+      "javaSignature": "public static BigInteger biModMul(BigInteger a, BigInteger b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:51",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:biModPow:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#biModPow",
+      "javaSignature": "public static BigInteger biModPow(BigInteger base, BigInteger exponent)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:68",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:biModSqr:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#biModSqr",
+      "javaSignature": "public static BigInteger biModSqr(BigInteger a)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:66",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:biModSqrt:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#biModSqrt",
+      "javaSignature": "public static BigInteger biModSqrt(BigInteger a)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:95",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:biModSub:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#biModSub",
+      "javaSignature": "public static BigInteger biModSub(BigInteger a, BigInteger b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:50",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:jpAdd:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#jpAdd",
+      "javaSignature": "public static JacobianPointBI jpAdd(JacobianPointBI first, JacobianPointBI second)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:146",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:jpDouble:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#jpDouble",
+      "javaSignature": "public static JacobianPointBI jpDouble(JacobianPointBI point)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:129",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:jpNeg:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#jpNeg",
+      "javaSignature": "public static JacobianPointBI jpNeg(JacobianPointBI point)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:174",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:modInvN:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#modInvN",
+      "javaSignature": "public static BigInteger modInvN(BigInteger a)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:250",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:modMulN:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#modMulN",
+      "javaSignature": "public static BigInteger modMulN(BigInteger a, BigInteger b)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:247",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:modN:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#modN",
+      "javaSignature": "public static BigInteger modN(BigInteger a)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:242",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:scalarMultiplyWNAF:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#scalarMultiplyWNAF",
+      "javaSignature": "public static JacobianPointBI scalarMultiplyWNAF(BigInteger scalar, BigInteger x, BigInteger y, int window)；省略 window 的重载",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:220",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:toBigInt:1",
+      "java": "com.metanet4j.bsv.primitives.Point#toBigInt",
+      "javaSignature": "private static BigInteger toBigInt(Object input)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:105",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:wnafDigits:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#scalarMultiplyWNAF",
+      "javaSignature": "内部窗口数字序列并入 scalarMultiplyWNAF",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:199",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function-variable:wnafTable:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#scalarMultiplyWNAF",
+      "javaSignature": "内部窗口表构造并入 scalarMultiplyWNAF；全局缓存待实现",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:179",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function:ctSwap:1",
+      "java": "com.metanet4j.bsv.primitives.Point#conditionalSwap",
+      "javaSignature": "private static void conditionalSwap(BigInteger bit, BigInteger[] left, BigInteger[] right)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:6",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#function:red:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#red",
+      "javaSignature": "public static BigInteger red(BigInteger input)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:35",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#interface:JacobianPointBI:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#JacobianPointBI",
+      "javaSignature": "public static final class JacobianPointBI（public BigInteger X/Y/Z，可写）",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:123",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#interface:WnafPairContext:1",
+      "java": "com.metanet4j.bsv.primitives.Point#WnafPairContext",
+      "javaSignature": "public static class WnafPairContext",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:86",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point._addWnafStep:1",
+      "java": "com.metanet4j.bsv.primitives.Point#addWnafStep",
+      "javaSignature": "public JacobianPoint addWnafStep(JacobianPoint accumulator, int length, List<BigNumber> temporary, List<List<BasePoint>> windows)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:1181",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point._assertOnCurve:1",
+      "java": "com.metanet4j.bsv.primitives.Point#assertOnCurve",
+      "javaSignature": "public static Point assertOnCurve(Point point)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:280",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point._collectWnafStep:1",
+      "java": "com.metanet4j.bsv.primitives.Point#collectWnafStep",
+      "javaSignature": "public WnafStep collectWnafStep(int start, int length, List<List<Integer>> naf)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:1159",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point._combineWnafPair:1",
+      "java": "com.metanet4j.bsv.primitives.Point#combineWnafPair",
+      "javaSignature": "public WnafPair combineWnafPair(List<Point> points, List<BigNumber> coefficients, List<Integer> widths)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:1102",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point._endoWnafMulAdd:1",
+      "java": "com.metanet4j.bsv.primitives.Point#endoWnafMulAdd",
+      "javaSignature": "public BasePoint endoWnafMulAdd(List<Point> points, List<BigNumber> coeffs, boolean jacobianResult)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:1234",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point._fixedNafMul:1",
+      "java": "com.metanet4j.bsv.primitives.Point#fixedNafMul",
+      "javaSignature": "public Point fixedNafMul(BigNumber scalar)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:1052",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point._getBeta:1",
+      "java": "com.metanet4j.bsv.primitives.Point#getBeta",
+      "javaSignature": "public Point getBeta()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:1002",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point._getDoubles:1",
+      "java": "com.metanet4j.bsv.primitives.Point#getDoubles",
+      "javaSignature": "public Doubles getDoubles(int step, int power)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:1285",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point._getNAFPoints:1",
+      "java": "com.metanet4j.bsv.primitives.Point#getNAFPoints",
+      "javaSignature": "public NafPoints getNAFPoints(int width)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:1309",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point._hasDoubles:1",
+      "java": "com.metanet4j.bsv.primitives.Point#hasDoubles",
+      "javaSignature": "public boolean hasDoubles(BigNumber scalar)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:1272",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point._prepareWnafRepresentations:1",
+      "java": "com.metanet4j.bsv.primitives.Point#prepareWnafRepresentations",
+      "javaSignature": "public int prepareWnafRepresentations(List<Point> points, List<BigNumber> coeffs, int length, List<Integer> widths, List<List<BasePoint>> windows, List<List<Integer>> naf)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:1137",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point._prepareWnafWindows:1",
+      "java": "com.metanet4j.bsv.primitives.Point#prepareWnafWindows",
+      "javaSignature": "public void prepareWnafWindows(int defaultWidth, List<Point> points, int length, List<Integer> widths, List<List<BasePoint>> windows)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:1088",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point._wnafMulAdd:1",
+      "java": "com.metanet4j.bsv.primitives.Point#wnafMulAdd",
+      "javaSignature": "public BasePoint wnafMulAdd(int defaultWidth, List<Point> points, List<BigNumber> coeffs, int length, boolean jacobianResult)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:1196",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.add:1",
+      "java": "com.metanet4j.bsv.primitives.Point#add",
+      "javaSignature": "public Point add(Point other)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:656",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.dbl:1",
+      "java": "com.metanet4j.bsv.primitives.Point#dbl",
+      "javaSignature": "public Point dbl()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:710",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.dblp:1",
+      "java": "com.metanet4j.bsv.primitives.Point#dblp",
+      "javaSignature": "public Point dblp(int power)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:975",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.encode:1",
+      "java": "com.metanet4j.bsv.primitives.Point#encode",
+      "javaSignature": "public List<Integer> encode(boolean compact); public String encodeHex(boolean compact)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:527",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.eq:1",
+      "java": "com.metanet4j.bsv.primitives.Point#eq",
+      "javaSignature": "public boolean eq(Point other)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:912",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.fromDER:1",
+      "java": "com.metanet4j.bsv.primitives.Point#fromDER",
+      "javaSignature": "public static Point fromDER(List<? extends Number> bytes)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:303",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.fromJSON:1",
+      "java": "com.metanet4j.bsv.primitives.Point#fromJSON",
+      "javaSignature": "public static Point fromJSON(Object input, boolean isRed)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:401",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.fromString:1",
+      "java": "com.metanet4j.bsv.primitives.Point#fromString",
+      "javaSignature": "public static Point fromString(String hex)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:345",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.fromX:1",
+      "java": "com.metanet4j.bsv.primitives.Point#fromX",
+      "javaSignature": "public static Point fromX(Object input, boolean odd)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:365",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.getX:1",
+      "java": "com.metanet4j.bsv.primitives.Point#getX",
+      "javaSignature": "public BigNumber getX()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:735",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.getY:1",
+      "java": "com.metanet4j.bsv.primitives.Point#getY",
+      "javaSignature": "public BigNumber getY()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:746",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.inspect:1",
+      "java": "com.metanet4j.bsv.primitives.Point#inspect",
+      "javaSignature": "public String inspect()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:618",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.isInfinity:1",
+      "java": "com.metanet4j.bsv.primitives.Point#isInfinity",
+      "javaSignature": "public boolean isInfinity()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:640",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.jmulAdd:1",
+      "java": "com.metanet4j.bsv.primitives.Point#jmulAdd",
+      "javaSignature": "public JacobianPoint jmulAdd(BigNumber firstScalar, Point secondPoint, BigNumber secondScalar)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:893",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.mul:1",
+      "java": "com.metanet4j.bsv.primitives.Point#mul",
+      "javaSignature": "public Point mul(Object scalar)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:761",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.mulAdd:1",
+      "java": "com.metanet4j.bsv.primitives.Point#mulAdd",
+      "javaSignature": "public Point mulAdd(BigNumber firstScalar, Point secondPoint, BigNumber secondScalar)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:872",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.mulCT:1",
+      "java": "com.metanet4j.bsv.primitives.Point#mulCT",
+      "javaSignature": "public Point mulCT(Object scalar)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:814",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.neg:1",
+      "java": "com.metanet4j.bsv.primitives.Point#neg",
+      "javaSignature": "public Point neg(); public Point neg(boolean withPrecomputation)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:931",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.toJ:1",
+      "java": "com.metanet4j.bsv.primitives.Point#toJ",
+      "javaSignature": "public JacobianPoint toJ()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:994",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.toJSON:1",
+      "java": "com.metanet4j.bsv.primitives.Point#toJSON",
+      "javaSignature": "public List<Object> toJSON()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:572",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.toString:1",
+      "java": "com.metanet4j.bsv.primitives.Point#toString",
+      "javaSignature": "public String toString()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:558",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#method:Point.validate:1",
+      "java": "com.metanet4j.bsv.primitives.Point#validate",
+      "javaSignature": "public boolean validate()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:495",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#property:JacobianPointBI.X:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#JacobianPointBI.X",
+      "javaSignature": "public BigInteger X; public BigInteger X()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:124",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#property:JacobianPointBI.Y:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#JacobianPointBI.Y",
+      "javaSignature": "public BigInteger Y; public BigInteger Y()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:125",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#property:JacobianPointBI.Z:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#JacobianPointBI.Z",
+      "javaSignature": "public BigInteger Z; public BigInteger Z()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:126",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#property:Point.inf:1",
+      "java": "com.metanet4j.bsv.primitives.Point#inf",
+      "javaSignature": "public boolean inf",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:278",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#property:Point.x:1",
+      "java": "com.metanet4j.bsv.primitives.Point#x",
+      "javaSignature": "public BigNumber x",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:276",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#property:Point.y:1",
+      "java": "com.metanet4j.bsv.primitives.Point#y",
+      "javaSignature": "public BigNumber y",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:277",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#property:WnafPairContext.coeffs:1",
+      "java": "com.metanet4j.bsv.primitives.Point#WnafPairContext.coeffs",
+      "javaSignature": "public List<BigNumber> coeffs",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:88",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#property:WnafPairContext.currentMax:1",
+      "java": "com.metanet4j.bsv.primitives.Point#WnafPairContext.currentMax",
+      "javaSignature": "public int currentMax",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:92",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#property:WnafPairContext.naf:1",
+      "java": "com.metanet4j.bsv.primitives.Point#WnafPairContext.naf",
+      "javaSignature": "public List<List<Integer>> naf",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:91",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#property:WnafPairContext.points:1",
+      "java": "com.metanet4j.bsv.primitives.Point#WnafPairContext.points",
+      "javaSignature": "public List<Point> points",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:87",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#property:WnafPairContext.wnd:1",
+      "java": "com.metanet4j.bsv.primitives.Point#WnafPairContext.wnd",
+      "javaSignature": "public List<List<BasePoint>> wnd",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:90",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#property:WnafPairContext.wndWidth:1",
+      "java": "com.metanet4j.bsv.primitives.Point#WnafPairContext.wndWidth",
+      "javaSignature": "public List<Integer> wndWidth",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:89",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/primitives/PointApiTest.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#type:PointInput:1",
+      "java": "com.metanet4j.bsv.primitives.Point",
+      "javaSignature": "Object input（BigNumber、Number、List<Number>、String）",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:84",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Point.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#variable:BI_EIGHT:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#BI_EIGHT",
+      "javaSignature": "public static final BigInteger BI_EIGHT",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:29",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#variable:BI_FOUR:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#BI_FOUR",
+      "javaSignature": "public static final BigInteger BI_FOUR",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:28",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#variable:BI_ONE:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#BI_ONE",
+      "javaSignature": "public static final BigInteger BI_ONE",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:25",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#variable:BI_THREE:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#BI_THREE",
+      "javaSignature": "public static final BigInteger BI_THREE",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:27",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#variable:BI_TWO:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#BI_TWO",
+      "javaSignature": "public static final BigInteger BI_TWO",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:26",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#variable:BI_ZERO:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#BI_ZERO",
+      "javaSignature": "public static final BigInteger BI_ZERO",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:24",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#variable:GX_BIGINT:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#GX_BIGINT",
+      "javaSignature": "public static final BigInteger GX_BIGINT",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:113",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#variable:GY_BIGINT:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#GY_BIGINT",
+      "javaSignature": "public static final BigInteger GY_BIGINT",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:116",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#variable:MASK_256:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#MASK_256",
+      "javaSignature": "public static final BigInteger MASK_256",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:33",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#variable:N_BIGINT:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#N_BIGINT",
+      "javaSignature": "public static final BigInteger N_BIGINT",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:32",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#variable:P_BIGINT:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#P_BIGINT",
+      "javaSignature": "public static final BigInteger P_BIGINT",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:31",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#variable:P_PLUS1_DIV4:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#P_PLUS1_DIV4",
+      "javaSignature": "public static final BigInteger P_PLUS1_DIV4",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:83",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Point.ts#variable:WNAF_TABLE_CACHE:1",
+      "java": "com.metanet4j.bsv.primitives.PointBigInt#WNAF_TABLE_CACHE",
+      "javaSignature": "private static final Map<String, List<JacobianPointBI>> WNAF_TABLE_CACHE",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Point.ts:121",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PointBigInt.java"
       ]
     },
     {

@@ -1,40 +1,18 @@
 # 当前进度
 
-## 当前任务
+## 执行位置
 
-activeItem=migration-impl-curve，nextItem=migration-impl-curve。曲线与点运算正在实施；`migration-impl-bignumber` 与 `migration-impl-hash-random` 已完成的逐断言验收保持 done。
+`activeItem=nextItem=migration-impl-byte-codecs`，已进入字节编解码与 Reader/Writer 任务。43 个执行事项中 12 done、1 in-progress、30 not-started；28 个编码任务中 5 done、1 in-progress、22 not-started。权威状态与依赖见 [feature_list.json](feature_list.json)。
 
-执行队列共 43 项：11 done、1 in-progress、31 not-started。其中编码任务 28 项，已完成 Hex、BigNumber 构造基础、完整大整数/模运算、哈希/HMAC/PBKDF2/随机源 4 项，曲线任务进行中，其余 23 项尚未开始。21 组 API 设计：values、hash-random 2 组完成，19 组待完成。
+## 已验收结果
 
-## 曲线任务阶段性结果
+- 曲线任务 `migration-impl-curve` 已通过：固定 TS 五个原文件 144/144；Java 提交 `611b7af`（功能）和 `324e9af`（工程说明）后执行 `./verify.sh bsv-test`，累计 460/460，失败、错误、跳过均为 0。`task-parity.py` 对照 144/144 个原用例、236/236 条原断言，缺失、未比较、额外 Java 原断言均为 0。独立证据目录为 `.cache/evidence/curve-final-20260926-122724/`，局部报告 `formalAcceptance=false`。
+- 曲线四个源文件的 153/153 声明已映射并复核；`node audit-api.cjs batches --batch migration-api-curve` 通过。累计完成 values、hash-random、curve 三组 API，816/3576 项；剩余 2760 项。
+- 累计原测试映射 440/5329，尚余 4889。此前完成的 Hex 8、BigNumber 构造 28、完整 BigNumber/模运算 174、哈希/HMAC/PBKDF2/随机源 86 个原用例仍在本次 Java 全量回归中通过；前批逐断言报告见 `.cache/evidence/parity-final-20260920-191152-19403q/`。
+- `./init.sh` 已通过固定 TS、工具链、缓存隔离与任务清单检查。完整六模块 `audit-tests.py check` 和无过滤 `audit-api.cjs check` 仍按剩余范围拒绝通过，不能把单项验收当作整模块完成。
 
-- 固定 TS 的 `JacobianPoint.test.ts` 35/35 通过；Java `JacobianPointTest` 35/35 通过，37 条原断言的实际值全部匹配，缺失和额外断言均为 0。对照报告为 `.cache/evidence/curve-partial-parity.json`，`taskAcceptancePassed=false`，因为曲线事项共有 144 个原用例。
-- `CurveAdditionalTest` 9 个基础用例和 `PointCoreTest` 11 个内部用例通过；后者是阶段性回归，不充抵尚未复刻的上游用例。
-- `./verify.sh bsv-test` 累计执行 352/352，失败、错误、跳过均为 0；`node audit-api.cjs batches` 结构检查通过。
-- 已实现基础 `Curve`、`BasePoint`、`Point`、`JacobianPoint`。Point 的完整编码、JSON、预计算和标量运算分支、Curve 的 endomorphism 与全部 API 尚未收口；相应测试、映射和逐断言对照继续进行，曲线事项保持 in-progress。
+## 下一步
 
-## 本次逐断言对照
+`migration-impl-byte-codecs` 的冻结清单为 Reader.test.ts、ReaderUint8Array.test.ts、Writer.test.ts、WriterUint8Array.test.ts、utils.property.test.ts、utils.test.ts，共 166 个注册用例；其中两个 property 用例各至少 300 次生成样本。先做本组 API 前检和原文件/辅助资料通读，再按测试契约逐行为 RED→GREEN、采集两端真实输入/断言，累计运行 Java `clean test`。WUA-ZERO-CAPACITY 只按已授权的最小修复实施，额外 Java 回归单列。
 
-证据批次：`.cache/evidence/parity-final-20260920-191152-19403q/`
-
-- TS 原测试 13 文件一次运行：260/260 通过；Java 目标工程 `./verify.sh bsv-test`：297/297，零失败/错误/跳过。
-- `task-parity.py` 以 TS `expect` 轨迹和 Java `RecordingAssertions` 轨迹按用例做有序断言配对：
-  - `migration-impl-bignumber`：174 用例、1145 个上游断言全部匹配，缺失/未比较 0；额外 Java 断言 24 个单列。
-  - `migration-impl-hash-random`：86 用例、432 个上游断言全部匹配，缺失/未比较 0；额外 Java 断言 11 个单列。
-- Random 随机字节用例：13 个用例按测试契约只比较 matcher、期望长度/边界和 pass；跨语言随机字节本身不要求相等，已单列策略。
-- Java 端提交 a2f0aa7 提供 `ParityRecorder` / `RecordingAssertions` / 扩展；Jest 端 `capture-parity.cjs` 只包 `expect` 记录 received/异常，不改原断言。
-- `node audit-api.cjs batches` 已通过新的 done 门禁；`./init.sh` 通过。
-
-## 已有 Java 成果
-
-Java 映射测试用例 331/5329，缺失 4998；其中 JacobianPoint 的 35 个原用例已完成阶段性对照，其余完成项为：
-- Hex：8 用例。
-- BigNumber 构造：28 用例。
-- 完整 BigNumber/模运算：174 用例，目标工程累计 211/211；逐断言对照通过。
-- 哈希/HMAC/PBKDF2/随机源：86 用例，目标工程累计 297/297；逐断言对照通过。
-
-完整 API、通用随机/属性重放、六模块最终收口和 scopeReview 仍未完成；无过滤 API check 与 `audit-tests.py check` 继续按完整范围拒绝未迁移项。
-
-## 下一步与固定边界
-
-下一步继续 migration-impl-curve：先补 `Point.test.ts` 和 `Point.additional.test.ts` 的完整原测试，再补 `Curve.additional.test.ts`、`Curve.unit.test.ts` 剩余行为，完成 144 用例及 153 声明的逐项收口。工程代码/测试/POM 仅允许修改 metanet4j-bsv-sdk，其他工程与固定 TS 只读；根仓既有无关修改保留，未推送。
+仅修改 `metanet4j-bsv-sdk` 的工程代码、测试和 POM；固定 TS 与其他四个 Java 工程只读。根仓既有无关改动保留，不推送、不广播交易或调用真实钱包/外部业务接口。

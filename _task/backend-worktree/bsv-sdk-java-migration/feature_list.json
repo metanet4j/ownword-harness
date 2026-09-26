@@ -14,8 +14,8 @@
       "跨工程发布、部署或远端推送"
     ]
   },
-  "activeItem": "migration-impl-curve",
-  "nextItem": "migration-impl-curve",
+  "activeItem": "migration-impl-byte-codecs",
+  "nextItem": "migration-impl-byte-codecs",
   "features": [
     {
       "id": "migration-env",
@@ -431,7 +431,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "primitives：曲线与点运算",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-hash-random"
       ],
@@ -468,20 +468,32 @@
         "migration-api-curve"
       ],
       "evidence": [
-        "阶段性：固定 TS JacobianPoint.test.ts 35/35；对应 Java JacobianPointTest 35/35；逐断言 37/37 匹配、缺失 0（.cache/evidence/curve-partial-parity.json，taskAcceptancePassed=false）。",
-        "阶段性：./verify.sh bsv-test 累计 352/352，失败/错误/跳过均 0；曲线完整 144 用例和 153 声明尚未收口。"
+        "Java 工程提交 611b7af（实现与原测试）及 324e9af（当前工程说明）；BasePoint/Curve/Point/JacobianPoint 与 Point.ts 直接导出的 BigInt 辅助能力已实现，其他四个 Java 工程及固定 TS 只读。",
+        ".cache/evidence/curve-final-20260926-122724/：固定 TS 的五个原测试文件 144/144，Java post-commit clean test 460/460（primitives 459、工程基础 1），失败/错误/跳过均为 0；原始 Jest、Surefire XML、断言轨迹、命令与哈希见 manifest.json。",
+        "task-parity.py：144 个冻结原用例全部比较，236/236 条原断言实际值匹配，missingCases/missingAssertions/uncompared/extraJavaAssertions 均为 0，报告为 .cache/evidence/curve-final-20260926-122724/curve-parity.json；额外 Java API 回归单列，不充抵原测试。",
+        "test-map.json：本项五个原文件的 144 个用例和 375 个 AST 复核位置均已映射，累计 440/5329；api-map.json：曲线四文件 153/153 reviewed；node audit-api.cjs batches --batch migration-api-curve 通过。",
+        "Point.fromX 的负号、空输入、非整数错误边界按固定 TS 实测，PointBigInt、endomorphism、预计算及 WNAF 的未直接由原测试调用的入口另有 Java API 回归；局部报告 formalAcceptance=false，六模块全量门禁仍待后续事项。"
       ],
       "modules": [
         "primitives"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 144,
+        "assertionsCompared": 236,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/curve-final-20260926-122724/curve-parity.json"
+      }
     },
     {
       "id": "migration-impl-byte-codecs",
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "primitives：字节编码与 Reader/Writer",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-curve"
       ],
@@ -508,7 +520,7 @@
       "stepsRef": "implementationPolicy.steps",
       "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
       "acceptanceFocus": [
-        "192 个原用例，包含 property 的全部生成样本；共享视图、复制、偏移、越界语义逐项对照。",
+        "166 个冻结原用例；其中 property 用例保留各 300 次生成样本及输入重放，另核对共享视图、复制、偏移、越界语义。",
         "WUA-ZERO-CAPACITY 按唯一授权最小修复并单列 Java 额外回归。"
       ],
       "scopeRef": "scope",
@@ -1686,8 +1698,8 @@
         "metanet4j-bsv-sdk 的底层实现不依赖 base/sdk；本次不修改其他工程接口或依赖配置。"
       ],
       "evidence": [
-        "API 复核清单保存在 apiBatches，随对应编码任务完成；已有 663 项设计证据保留，本项等待全部 API 收口。",
-        "当前 api-map 有 663 项已复核、2913 项未映射，总验收未通过。",
+        "API 复核清单保存在 apiBatches，随对应编码任务完成；已有 816 项映射证据保留，本项等待全部 API 收口。",
+        "当前 api-map 有 816 项已复核、2760 项未映射，总验收未通过。",
         "node audit-api.cjs batches 已核对 21 批恰好覆盖 133 文件/3576 声明；工具自测 39/39，通过记录见 .cache/evidence/api-batches-all-green.log。分批有效不代表总验收完成。"
       ],
       "scopeRef": "scope",
@@ -2079,7 +2091,7 @@
         "node audit-api.cjs batches --batch migration-api-hash-random：292/292 设计映射结构通过，见 .cache/evidence/api-hash-random-batch.log；设计不表示 Java 已实现。",
         "六个原始 TS 测试文件实际 86/86 通过、零失败/跳过；见 .cache/evidence/api-hash-random-ts.log、api-hash-random-ts.jest.json。未修改原源码/测试，不计新增 Java 通过数。",
         "node api-hash-random-probe.cjs：133 组真实观察及内置断言通过，含原生/纯 TS/无 Buffer、摘要生命周期、PBKDF2 校验、DRBG 状态、Random 宿主优先级/缓存；原始输入/结果/异常及源码哈希见 .cache/evidence/api-hash-random-observations.json。",
-        "环境与全批覆盖检查通过；全量 API check 仍按预期拒绝 2913 项未映射。证据见 .cache/evidence/api-hash-random-manifest.json。"
+        "环境与全批覆盖检查通过；该批验收时全量 API check 拒绝尚未映射项；当时证据见 .cache/evidence/api-hash-random-manifest.json，当前剩余 2760 项。"
       ],
       "scopeRef": "scope",
       "execution": "within-implementation",
@@ -2132,14 +2144,18 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "api-map.json：BasePoint.ts 5、Curve.ts 46、JacobianPoint.ts 17、Point.ts 85，共 153/153 声明 reviewed；对应 Java 符号、语言形状差异和行为契约见 doc/完整模块与API映射-20260920-122800.md#api-curve。",
+        "node audit-api.cjs batches --batch migration-api-curve：固定源码重扫、分配与本批次 153 项映射结构通过，日志见 .cache/evidence/curve-final-20260926-122724/api-curve-batch.log。",
+        "本批次真实实现和原测试逐断言验收见 migration-impl-curve；全量 API check 仍按六模块 3576 项门禁执行，局部设计复核不代替最终验收。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [

@@ -2,38 +2,17 @@
 
 ## 唯一下一步
 
-activeItem=migration-impl-curve，nextItem=migration-impl-curve。继续补齐 Point、Curve 原测试与 API，再对曲线事项的 144 个用例做完整逐断言验收；当前只完成 JacobianPoint 的 35 个用例对照。
+`activeItem=nextItem=migration-impl-byte-codecs`，状态 in-progress。先读取 [feature_list.json](feature_list.json) 的本项 sourceFiles/testFiles/acceptanceFocus 与 [API 契约](doc/完整模块与API映射-20260920-122800.md)，完成 ReaderUint8Array、WriterUint8Array、utils 的 API 前检；然后通读六份固定原测试并按一一映射的 RED→GREEN 推进。冻结清单是 166 个注册用例，`utils.property.test.ts` 前两例各至少 300 次生成样本，不能将样本数混入用例分母。
 
-## 曲线任务当前证据
+## 已完成曲线验收
 
-- `.cache/evidence/jacobian-ts-parity.jest.json`、`jacobian-ts-parity.jsonl`：固定 TS 原测试 35/35，断言轨迹 37 条。
-- `.cache/evidence/jacobian-java-parity.log`、`jacobian-java-parity.jsonl`：Java 同名测试 35/35，断言轨迹 37 条。
-- `.cache/evidence/curve-partial-parity.json`：35/144 个原用例已比较，37/37 条断言匹配；`taskAcceptancePassed=false`。
-- `./verify.sh bsv-test`：352/352 通过，失败/错误/跳过 0。`feature_list.json` 中曲线事项保持 in-progress。
-- 目标工程尚有未完成的 Point/Curve API 与测试；`PointCoreTest` 是额外回归，不能计入上游映射。继续时先读 `Point.test.ts`、`Point.additional.test.ts` 并补完其 Java 一对一测试，再实现缺口。
+- Java 工程功能提交 `611b7af`、工程说明提交 `324e9af`，工作树干净。BasePoint/Curve/Point/JacobianPoint 及 Point.ts 的文件级 BigInt 导出已收口；其余四个 Java 工程和固定 TS 未修改。
+- `.cache/evidence/curve-final-20260926-122724/` 保存 TS 三份 Jest 报告（覆盖五个原文件）、原断言轨迹、Java 全量 Surefire XML、`bsv-test` 原始日志及摘要、API 批次检查、逐断言报告和 SHA-256 manifest。固定 TS 原测试 144/144、Java post-commit `clean test` 460/460；逐断言 236/236 匹配，missing/uncompared=0，`taskAcceptancePassed=true`、`formalAcceptance=false`。
+- `api-map.json` 的 curve 批次 153/153 reviewed，`test-map.json` 的曲线五文件 144 个用例/375 个 AST 位置全部映射；全局分别为 816/3576 声明与 440/5329 原用例。
+- 复跑入口：`./init.sh`、`node audit-api.cjs batches --batch migration-api-curve`、`./verify.sh bsv-test`、`python3 task-parity.py --task migration-impl-curve --ts .cache/evidence/curve-final-20260926-122724/ts-parity.jsonl --java .cache/evidence/curve-final-20260926-122724/java-parity.jsonl --output <新报告路径>`。集成/API 检查按工作区规则使用宿主提权。
 
-## 逐断言验收入口
+## 累计边界
 
-证据批次：`.cache/evidence/parity-final-20260920-191152-19403q/`
+先前 Hex、BigNumber 与哈希随机任务的逐断言证据在 `.cache/evidence/parity-final-20260920-191152-19403q/`。整模块全量 API、随机/属性重放通用收口、六模块最终测试门禁仍待后续事项；无过滤 `audit-api.cjs check` 和 `audit-tests.py check` 不因曲线单项通过而放宽。
 
-- `ts-parity.jsonl`：Jest setup `capture-parity.cjs` 记录的全部 matcher received/异常。
-- `parity-java.jsonl`：Java `ParityRecordingExtension` + `RecordingAssertions` 记录的全部断言实际值。
-- `bignumber-parity.json`：174 用例、1145 断言匹配，missing/uncompared=0，`taskAcceptancePassed=true`。
-- `hash-random-parity.json`：86 用例、432 断言匹配，missing/uncompared=0，`taskAcceptancePassed=true`；13 个 Random 随机字节用例按 matcher/边界/pass 策略单列。
-- 复跑：`python3 task-parity.py --task <id> --ts <ts-path> --java <java-path> --output <report>`。
-
-## 已完成 Java 提交
-
-- `a2f0aa7`：BigNumber/哈希随机测试接入逐断言轨迹采集。
-- `9fbcc9d`：哈希、HMAC、PBKDF2、DRBG、Random。
-- `a697a49`：BigNumber、ReductionContext、Mersenne、K256、MontgomoryMethod。
-- `9c22ba1`：BigNumber 构造基础。
-- `0ecb8d1`：Hex。
-
-目标工程 clean test 当前 352/352；Hex/构造既有逐调用证据仍保留在 `.cache/evidence/hex-parity-*`。
-
-## 固定边界
-
-Random 的 Node/浏览器分支在 Java 中为可注入 Runtime 适配；随机字节测试不比较跨语言具体字节，只比较原有行为断言。完整六模块 API、通用随机/属性重放和最终 audit-tests.py check 未完成，不能把内部任务 done 当成整模块完成。
-
-Maven/pnpm 仅经任务脚本；不推送、不广播交易、不调用真实钱包或外部业务接口。只提交任务明确路径，不混入根仓既有规则/技能/.opencode 改动。
+Maven/pnpm 仅经任务脚本；不推送、不广播交易、不调用真实钱包或外部业务接口。根仓已有无关规则/技能/.opencode 修改，提交时仅选择本任务路径。

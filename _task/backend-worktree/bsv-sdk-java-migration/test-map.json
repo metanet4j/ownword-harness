@@ -4413,6 +4413,1404 @@
         "src/primitives/__tests/JacobianPoint.test.ts:304:7:assertion",
         "src/primitives/__tests/JacobianPoint.test.ts:305:7:assertion"
       ]
+    },
+    {
+      "id": "559f578168c07928511fc371f597a9a2773f5877e3f0bfd0b0dbeb75a2c4ad8e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointTest",
+          "name": "rejectsOffCurveJsonCoordinates"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.test.ts:6:5:assertion"
+      ]
+    },
+    {
+      "id": "fa8d29e449f13d1d901f5299118e9881614da639ee2674e251ce9e596217f6e0",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointTest",
+          "name": "rejectsNestedOffCurvePrecomputedPoints"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.test.ts:23:5:assertion"
+      ]
+    },
+    {
+      "id": "8fc2cac19e7c1c9b3eee210d49f72b60eed36f9e245e9bb8e8f365893535e0e7",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointTest",
+          "name": "generatorJsonRoundTrip"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.test.ts:34:5:assertion"
+      ]
+    },
+    {
+      "id": "1e437ee32127c284278f71f00af912ac17793ce4894dc80096e606d7baf2e987",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointTest",
+          "name": "rejectsInvalidCompressedPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.test.ts:41:5:assertion"
+      ]
+    },
+    {
+      "id": "c383cf29ba7936da619b36ca8223bc4008b2d38348be35c83cefbdf2127d315e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointTest",
+          "name": "fromXRejectsMissingSquareRoot"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.test.ts:48:5:assertion"
+      ]
+    },
+    {
+      "id": "15235f3424db44a6e7866cb13b5258905e34d949dc31d2ed6163978235d16011",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointTest",
+          "name": "constantTimeMultiplicationByZero"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.test.ts:57:5:assertion"
+      ]
+    },
+    {
+      "id": "5a6d2f19771125ca8f32712a88c80dabc09be732077e81ca3a7fc077e84f32a7",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointTest",
+          "name": "constantTimeMultiplicationForSmallScalar"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.test.ts:65:5:assertion"
+      ]
+    },
+    {
+      "id": "030373d7128b30c0581eb83667e5b2944124adf1bad6acc82d50549f087922ac",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointTest",
+          "name": "constantTimeMultiplicationForLargeScalar"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.test.ts:74:5:assertion"
+      ]
+    },
+    {
+      "id": "f9e0abe416776cc72a2b24cdfe6d1f5bcf49638f976582fa52d3b5f8e88bd805",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointTest",
+          "name": "constantTimeMultiplicationForOtherBasePoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.test.ts:84:5:assertion"
+      ]
+    },
+    {
+      "id": "f35353b7bdf029a08bf24528a09f734e6a5533f059e8a805bfec8dd9d2580935",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointTest",
+          "name": "constantTimeMultiplicationForAlternatingBits"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.test.ts:94:5:assertion"
+      ]
+    },
+    {
+      "id": "207066331f67cb704088f1182642846267ec2d3dc8fa191b696202888a1ea6fa",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointTest",
+          "name": "constantTimeMultiplicationForNegativeScalar"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.test.ts:101:5:assertion"
+      ]
+    },
+    {
+      "id": "0d7dce9d24b581c2db7924a47e70f7d4b7cd3b108773c5d1e84e33b21ae18c45",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "constructsInfinityPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:17:7:assertion"
+      ]
+    },
+    {
+      "id": "10dae284ae668e49de6d19a36137500d187a90d4e90916e90e307e458f74bf8e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "constructsFromNumberArrays"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:25:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:26:7:assertion"
+      ]
+    },
+    {
+      "id": "bc5794a340cac4cb32e61a25df22b37fe960502cca8f8e03e5b2c26510b30265",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "constructsWithIsRedFalse"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:34:7:assertion"
+      ]
+    },
+    {
+      "id": "c4be16049f919f3bc41f096b2b139ed3fa3efb4f080d3ae06c88655842b5e34d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "parsesUncompressedPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:45:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:47:7:assertion"
+      ]
+    },
+    {
+      "id": "86f82cd625eb151a1d2629dbc4104f0786aab5c4e90e3f84aefbc108604361ca",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "parsesEvenHybridPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:68:7:assertion"
+      ]
+    },
+    {
+      "id": "a7ae3b6d77fd1e294592924afbb48e0e056e2d94b7bf37c0ad03a697d234b90e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "parsesOddHybridPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:90:7:assertion"
+      ]
+    },
+    {
+      "id": "28dbcc5e52bdcc93250593f242dd2b99b6c04abd0ec0f3cf0658ec809ebb1525",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "rejectsEvenHybridWithOddY"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:104:7:assertion"
+      ]
+    },
+    {
+      "id": "1450b222978e3c339500bb18ebe81ab26f32cd7caaa6aff229dae6b67e98cebe",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "rejectsOddHybridWithEvenY"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:117:7:assertion"
+      ]
+    },
+    {
+      "id": "396143f97ec0d14735b730c7043b3ccc6fd7cc9bc9b660f742c7b27f99b78324",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "rejectsUnknownPointFormat"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:122:7:assertion"
+      ]
+    },
+    {
+      "id": "63c6a19008fa6be7c3fb140bd36a485337f013980d1ecd55a7ad2d1a4852ac23",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "parsesCompressedHexPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:132:7:assertion"
+      ]
+    },
+    {
+      "id": "ce20e6122fe1945d9cca5eb016a919528c586a1258ee2573770479f6293723d2",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "fromXAcceptsBigNumber"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:144:7:assertion"
+      ]
+    },
+    {
+      "id": "81ffa2d1bac13481a979c5127073e912c7194bc72193aa8be7d1957769910c5f",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "fromXAcceptsNumberBehavior"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:153:7:assertion"
+      ]
+    },
+    {
+      "id": "56292b5a5b0b60b1002353d8e69f8a9fdf1bd6a302526489a0b77bc5edc28b41",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "fromXAcceptsHexString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:160:7:assertion"
+      ]
+    },
+    {
+      "id": "5a6ddda36ee78047cac57703c7a5ea39cee219bd71d81305194db3073fc63c59",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "fromXAcceptsNumberArray"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:167:7:assertion"
+      ]
+    },
+    {
+      "id": "7e3bad7157f070cf1c9f2d3b53eeeba30d574f563da2b1b10b127d913967ea8f",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "fromJsonAcceptsString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:179:7:assertion"
+      ]
+    },
+    {
+      "id": "3657077aaeb12d56494b1af278dcc7b1f4eb808188ba914b7af4b6976a6a5237",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "fromJsonAcceptsNafPrecomputation"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:187:7:assertion"
+      ]
+    },
+    {
+      "id": "807e68a6df6bd1d2e17f4005e4f7bb56b837be94ff9c7ef70288e6067c5f6abb",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "fromJsonAcceptsDoublesPrecomputation"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:194:7:assertion"
+      ]
+    },
+    {
+      "id": "17426519eb61980402cbb6e47c3854be3851105bfae27bda31009c797d036654",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "fromJsonWithoutPrecomputation"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:201:7:assertion"
+      ]
+    },
+    {
+      "id": "bb2532544bf4c7de13911a12761f4a896098702885a1fb176de4cc91c896e687",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "infinityDoesNotValidate"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:211:7:assertion"
+      ]
+    },
+    {
+      "id": "6ce9fa9c47c814dbbd036f41420d8a150688f42c2e25d26c5941065fc372641b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "generatorValidates"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:216:7:assertion"
+      ]
+    },
+    {
+      "id": "2c95ccb8e19e9fa98c241309fe6d0e51c072772982dc3fe8d375805d0a2c7635",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "buildsPrecomputedDoubles"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:236:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:237:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:238:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:239:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:240:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:242:7:assertion"
+      ]
+    },
+    {
+      "id": "fe000431ba8191351c2dc4899c3d00ccdce77e60caf4b1b566f7af62ea4770ba",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "encodesInfinityAsBytes"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:255:7:assertion"
+      ]
+    },
+    {
+      "id": "cd64aa2fbe0e7889623297bb2bb5556701053edef4f1c8fbc444b96c1aa5b4c0",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "encodesInfinityAsHex"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:260:7:assertion"
+      ]
+    },
+    {
+      "id": "dcfbf7d7e08d34f19100795db9fa85d96aa29d39321af2173b8294bc39d991cb",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "encodesCompressedPointByDefault"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:266:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:268:7:assertion"
+      ]
+    },
+    {
+      "id": "98ff6a8c9d68267bfb8e8bbaba9c166ed30a66533b35bb4c218dc77e196a0536",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "encodesUncompressedPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:274:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:275:7:assertion"
+      ]
+    },
+    {
+      "id": "8d2decc7fc6cf8eb62c6b34da79a4d7189f5a25c9fbcb293371c2ecd0b32457e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "encodesPointAsHex"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:281:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:282:7:assertion"
+      ]
+    },
+    {
+      "id": "e6f7b0efdd54b94ea6840a9e7c3df0b66713914e97a8366080ee1b85c0a8ebc3",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "inspectsInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:292:7:assertion"
+      ]
+    },
+    {
+      "id": "247519256df9b7b23338c65c8daff87ef9f0994280e0bc076d3ff142d5391b30",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "inspectsFinitePoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:298:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:299:7:assertion"
+      ]
+    },
+    {
+      "id": "9d5f50fc88677a435e2a7e7ace2c8e8cdda68dca339dda931f2673a12c6b15e6",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "addsToLeftInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:311:7:assertion"
+      ]
+    },
+    {
+      "id": "62108597a307fd2f4dc900d8aedec525700c0db168746b888e4e53edb5a2eb83",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "addsToRightInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:318:7:assertion"
+      ]
+    },
+    {
+      "id": "e8ec763fc7f91ae5e2109394149bef8a006b3b41b6febbd3a8a3d57d98dbee96",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "addsSamePoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:325:7:assertion"
+      ]
+    },
+    {
+      "id": "adfb80d4a2e913814b8e88b869487906f04d93620252f30752133f9d2716a4a6",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "addsNegationToInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:332:7:assertion"
+      ]
+    },
+    {
+      "id": "a6b4659beea6876d6e50bac44b3e3b6efa2562727e246dbe74475afba7eb5e72",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "doublesInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:343:7:assertion"
+      ]
+    },
+    {
+      "id": "b564f1e3e3450f47441e96a77ea3e0d5afdfff6c7e62c2fa9f90474f5d1db34f",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "doublesGenerator"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:349:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:350:7:assertion"
+      ]
+    },
+    {
+      "id": "e5d4b1f691df7c250e9f254b06c048f1eb11d3f92e89c78c2704ee7710c4a1a8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "negatesInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:360:7:assertion"
+      ]
+    },
+    {
+      "id": "294d9a6630bd94e76f0f3e6a6898cde5bbccbf4aa2c0ad787069829f9bc0d49e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "negatesGenerator"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:366:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:367:7:assertion"
+      ]
+    },
+    {
+      "id": "cdc767be27184771b7be24388b891c56be66cb9676303e3ae1b8ea33be42cca3",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "negatesWithPrecomputation"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:375:7:assertion"
+      ]
+    },
+    {
+      "id": "c4c925bafd66b14c462adcb5dc82a8a3f63f0102e73b056d94af97de2eef304d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "doublePowerZeroKeepsPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:386:7:assertion"
+      ]
+    },
+    {
+      "id": "f86b7ff21b853386d4fba83d8b3114825708dbf66616055c4b0e5c3f904e5fd8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "doublePowerThree"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:393:7:assertion"
+      ]
+    },
+    {
+      "id": "5039158a7cd685f7bfd65faac7db508ef0254d63cbab5a9fed9429beeac46389",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "coordinatesAreBigNumbers"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:403:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:404:7:assertion"
+      ]
+    },
+    {
+      "id": "4905b4b6a0df96f57cd1020121599d1a3e4f27f45aa0a8a93f2c99f94b35e8e2",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "multiplyByZero"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:415:7:assertion"
+      ]
+    },
+    {
+      "id": "cf66ff984e407a44bf4a154cd1082272e2ebe3a7e0fdd04517650396172aae3b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "multiplyInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:421:7:assertion"
+      ]
+    },
+    {
+      "id": "d3944abe79230987abe28b8c17e5ec605cb3a233d910e517c3131f60ee67783e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "multiplyNegativeScalar"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:429:7:assertion"
+      ]
+    },
+    {
+      "id": "ab57bb8f7ba567d8ab4b996974d69ed17bd1b66cf7574aa208b7c01703f316a0",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "multiplyNumber"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:435:7:assertion"
+      ]
+    },
+    {
+      "id": "05e6d408337ba40345111643e756f1450ea5d45c2fffa2d96f8be08ccee7bdeb",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "multiplyHexString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:441:7:assertion"
+      ]
+    },
+    {
+      "id": "a84217e513ed49b5e443051047c0fd509429f9c20ade66dbfcaa6b4f839b6404",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "multiplyNumberArray"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:447:7:assertion"
+      ]
+    },
+    {
+      "id": "70d58cd782ec3b41430883eadf9a6c9a79ac0ec9040a339add567beec9cc72f1",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "multiplyAddOneAndZero"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:458:7:assertion"
+      ]
+    },
+    {
+      "id": "821d12eb63752216258c609bbf0f35be7d86780e65071d5b8b8f298fb4e8b9e1",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "multiplyAddOneAndOne"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:465:7:assertion"
+      ]
+    },
+    {
+      "id": "8834e9efed166a0468daa72b0c5e4fe6e0585a318eebfdaae5aca181bd7ae8df",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "jacobianMultiplyAdd"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:471:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:474:7:assertion"
+      ]
+    },
+    {
+      "id": "957fca1ef6d3597fed9627b60b26a46ade15591895d799659552b3fa32c9be28",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "equalsSameInstance"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:484:7:assertion"
+      ]
+    },
+    {
+      "id": "0b81c861af501dbabec5bef924e3b6342d3e7e6435b3fb5252aea656aaf6405f",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "equalsTwoInfinityPoints"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:490:7:assertion"
+      ]
+    },
+    {
+      "id": "228d7c59d7adb1743055a5664f6d27ad5b0e5ba505b1e44c49c2ab651e3e9fcd",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "infinityDiffersFromGenerator"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:496:7:assertion"
+      ]
+    },
+    {
+      "id": "d888dff72d7c90356f4d548d501103f664ec8f7cebaf60bdc4b06d8f3ccd55ea",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "infinityToJacobian"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:507:7:assertion"
+      ]
+    },
+    {
+      "id": "5df23e08e2450ce7c2469bcd0d8f248d9cd833bbc448a0251eed1726a427f5c4",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "generatorToJacobian"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:514:7:assertion"
+      ]
+    },
+    {
+      "id": "b0eb81a357d751a4d1a8c254b228365592aa63096265dfa469400b83d65b1ecb",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "jsonKeepsPointCoordinates"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:529:7:assertion"
+      ]
+    },
+    {
+      "id": "35051d10d3d800659de70cb51b4212ff9dc364e52ee693540a6bfc37aa1da618",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "keepsIndependentNafWindows"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:554:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:555:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:556:7:assertion"
+      ]
+    },
+    {
+      "id": "8588d6d615b33023f5694e127b2970aad1f952e36edd850f2ea86053764d6e06",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "keepsJsfTableForEqualY"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:566:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:567:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:568:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:569:7:assertion"
+      ]
+    },
+    {
+      "id": "ad605d7bad957601fdc16149ac4754a2e6b22fad691369e045639c051b38a998",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "keepsJsfTableForOppositeY"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:566:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:567:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:568:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:569:7:assertion"
+      ]
+    },
+    {
+      "id": "d508e1d51e4591c628ce0332beae937de5a24137ff2ee488bbb6378744bacd64",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "keepsJsfTableForUnrelatedY"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:566:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:567:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:568:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:569:7:assertion"
+      ]
+    },
+    {
+      "id": "077bff89740cee829fa8acda37d18253107dc80b55155dcd925b455750013498",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PointAdditionalTest",
+          "name": "collectsTerminalAndActiveZeroRuns"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Point.additional.test.ts:576:7:assertion",
+        "src/primitives/__tests/Point.additional.test.ts:577:7:assertion"
+      ]
+    },
+    {
+      "id": "bf40b54c622fdee4f55259e48a6afb7f19cfe6685596b7ac23fe9ec4a03592ec",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "assertAcceptsTruthyExpression"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:14:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:15:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:16:7:assertion"
+      ]
+    },
+    {
+      "id": "9456a9d3da8396595bbeee1290e04a45ad2438b5fd21474a3327072c745faf95",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "assertRejectsFalsyExpressionWithDefaultMessage"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:20:7:assertion"
+      ]
+    },
+    {
+      "id": "4dc0d4f363c0d78b9b85aabc24e0ff266515cf372f11cbe559f1234384a3a022",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "assertRejectsFalsyExpressionWithCustomMessage"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:24:7:assertion"
+      ]
+    },
+    {
+      "id": "642986cb61b4fcc732763787d15efc2c5318ad3dfe47cd6afb6b1f7375cfc8d5",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "nafForPositiveNumber"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:34:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:35:7:assertion"
+      ]
+    },
+    {
+      "id": "b4ed5f5b3c76c0223452963a6d1cafe8eda66fa97427bd7276fa329ebf2210de",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "nafForZero"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:41:7:assertion"
+      ]
+    },
+    {
+      "id": "254176442b7b8ee65c9b64e188a2c6316bcef0a9d41ad7334062cb33f526f8e8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "nafForOddNumber"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:46:7:assertion"
+      ]
+    },
+    {
+      "id": "8188da6de36aef364c5c28d5b16fa9232c26cf0e606c81f1c0852ee51f6feb32",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "jsfForTwoNumbers"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:58:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:59:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:60:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:61:7:assertion"
+      ]
+    },
+    {
+      "id": "201b73c969009cee3407a68bb8945555a292a548eb6e3a9f1283bc26dae441a5",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "jsfForLargeNumbers"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:68:7:assertion"
+      ]
+    },
+    {
+      "id": "b46576cdc94829ee0eeacb1f652ba677a34874964c87236c0c0decb09dd99aac",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "parseHexBytes"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:78:7:assertion"
+      ]
+    },
+    {
+      "id": "90702437aaacf85dabea925a4d6d5b865f7a0f254d42ba0a3a56dcffa16bca37",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "preserveByteArray"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:84:7:assertion"
+      ]
+    },
+    {
+      "id": "8c3a1f0888674424dab6d57aba2c3084827d834e66dd0858133d50aa20186ead",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "intFromLittleEndianBytes"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:95:7:assertion"
+      ]
+    },
+    {
+      "id": "f6a474b7fcb84ccb5438d6c0eee097e9360a455c912b3ccfadfc966a1cec5d24",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "intFromMultipleLittleEndianBytes"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:101:7:assertion"
+      ]
+    },
+    {
+      "id": "3290ffe7c99d3e35be551e46dbef1f21dc8828010bdfa8bf5e53095fb81951c2",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "cachedPropertyComputesOnlyOnce"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:123:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:124:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:125:7:assertion"
+      ]
+    },
+    {
+      "id": "2ded0787af90c42d9d20d6b4960a374cc4e692db2b2d960cf8cf4c321bcba31b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "validatesPointAtInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:135:7:assertion"
+      ]
+    },
+    {
+      "id": "fae65644b91d9f53aff47e491542555c5c89b8a93c36db80902537b96c9f02ac",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "validatesCurvePoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:142:7:assertion"
+      ]
+    },
+    {
+      "id": "5f837d53adca959a85b0a5cdf06036cbc4261afd3c9f21cd52ec9911e94391a6",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "rejectsOffCurvePoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:156:7:assertion"
+      ]
+    },
+    {
+      "id": "ada459f8cf92d54565f26772c7dbf898c6bae4031203f8f4cebb69ca7bf6c0db",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "splitsScalarIntoBalancedComponents"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:167:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:168:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:171:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:172:7:assertion"
+      ]
+    },
+    {
+      "id": "41600369ae7993a8cc9cdb58c3895cd8ca850899ac698eef6c87983e318fd353",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "computesEndomorphismRootsForOrder"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:182:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:183:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:184:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:185:7:assertion"
+      ]
+    },
+    {
+      "id": "d746198ace050dd1a3a2f3763a3abbb5a01c31bd3919d7bb31821384e8cf8550",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "computesEndomorphismRootsForField"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:190:7:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:191:7:assertion"
+      ]
+    },
+    {
+      "id": "6deb0926976171f49791b574631f3b1ea8d20ed3c6ecc51c99387fad18677692",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveAdditionalTest",
+          "name": "computesEndomorphismBasis"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.additional.test.ts:203:9:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:204:9:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:205:9:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:206:9:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:207:9:assertion",
+        "src/primitives/__tests/Curve.additional.test.ts:208:9:assertion"
+      ]
+    },
+    {
+      "id": "b81323faf882b300375ced266fd1492b39a922d3c42fd98aa07191539253b7a3",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "worksWithSecp256k1"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:16:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:17:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:18:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:19:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:25:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:26:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:29:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:37:5:assertion"
+      ]
+    },
+    {
+      "id": "9a7fecd526d12fae2fcd1fa26e6fd944d87501cf246456996cf12960be37ecb1",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "derivesEndomorphismWithoutPrecomputedValues"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:44:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:45:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:46:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:47:5:assertion"
+      ]
+    },
+    {
+      "id": "d0ccf860d6c121f521787cafeaa2a5ead0a88a31ebd1c130fb515cfa9b98a042",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "retainsEndomorphismDerivationFailureBoundaries"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:64:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:71:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:77:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:92:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:102:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:105:5:assertion"
+      ]
+    },
+    {
+      "id": "eb02cb62d36fb154983afc2e66a30671a2a4e33a867947686ac753124bf9f433",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "selectsSmallerDerivedBetaRegardlessOfRootOrder"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:117:5:assertion"
+      ]
+    },
+    {
+      "id": "6d6b728ebcf07a971b5f168a166c1967ad6a2035b712124777f1e33a08f14b71",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "selectsSecondValidLambda"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:130:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:131:5:assertion"
+      ]
+    },
+    {
+      "id": "090f9f3642e790b28d7d9bb280a73225541e41d9e75fc8dc57cb351d288bff09",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "computesProblematicSecp256k1Multiplication"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:137:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:139:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:145:5:assertion"
+      ]
+    },
+    {
+      "id": "68accece70d4280a6a94bc5f919e2ffc7f9d52f56c036af6c2a070ac559f326d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "avoidsFixedNafWhenScalarIsTooLarge"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:151:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:153:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:162:5:assertion"
+      ]
+    },
+    {
+      "id": "aa430878d19bc9dc0c1da26ed352e0feaafd15bbb5c26455855770012c950411",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "handlesSecp256k1Regression"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:179:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:184:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:185:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:186:5:assertion"
+      ]
+    },
+    {
+      "id": "bdd207560b2862ffd453c18be881b7477d36f56a477a148a8c710f6d050cdb53",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "doublesAffinePointOnSecp256k1"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:203:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:206:5:assertion"
+      ]
+    },
+    {
+      "id": "3d429475a6169945f24a7398b9facd1963c5cf8e8dee0592749622a25a2822bb",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "multipliesInfinityByAnotherScalar"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:213:5:assertion"
+      ]
+    },
+    {
+      "id": "a30eadfb146dcb8234597464f0ba780337f5a18343129ab156b518f6880ee19a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "rejectsUnknownPointEncoding"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:277:5:assertion"
+      ]
+    },
+    {
+      "id": "81e899f2f718ada73f2602253890077419b0421cb2e2a30223237e0fe818b90e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "encodesAndDecodesEvenYPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:234:7:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:235:7:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:238:7:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:239:7:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:240:7:assertion"
+      ]
+    },
+    {
+      "id": "a69fa1e279d4859f1c8dfd8db2f6a3a0c96ab6003e4c3ca00f176ce5d71882be",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "encodesAndDecodesOddYPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:234:7:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:235:7:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:238:7:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:239:7:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:240:7:assertion"
+      ]
+    },
+    {
+      "id": "10f7ad59db38256acf6b00baaba054969ff6468b9d7cf4545bf8c25b0037708a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "canonicalizesMultipleInfinityRepresentations"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:303:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:304:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:305:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:307:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:308:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:309:5:assertion"
+      ]
+    },
+    {
+      "id": "0560284154a3a68aa6828a314b5251f6e9a8063bb1339862599bd8c887feeccb",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "infinityDiffersFromFinitePoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:321:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:322:5:assertion"
+      ]
+    },
+    {
+      "id": "b6fcb04bd67438f17c755800f9db404d7d2572bbd242cc6fdf7849ed6509f641",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "canonicalInfinityEqualsCanonicalInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:329:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:330:5:assertion"
+      ]
+    },
+    {
+      "id": "89dbd4c34486b02e6bcc4f76d90459d9e64e89b3bd1878327b20f30de1a15c0b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "detectsRedZeroZAsInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:337:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:340:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:341:5:assertion"
+      ]
+    },
+    {
+      "id": "66b40f2c39fbc0033f79f6bcef55d7c7b5f9ffd8b5e64c6fc09646e644f02e85",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.CurveUnitTest",
+          "name": "comparesCanonicalAndNoncanonicalInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Curve.unit.test.ts:348:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:349:5:assertion",
+        "src/primitives/__tests/Curve.unit.test.ts:350:5:assertion"
+      ]
     }
   ],
   "siteReviews": [
@@ -14466,6 +15864,2445 @@
         "cf58b95eb030efbdc33080109f9f9b8afd7a3264c280ad7d4115c05a773d448b"
       ],
       "note": "已逐行复核原测试与 Java 对应方法；实际结果仍须逐断言比较。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:5:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "559f578168c07928511fc371f597a9a2773f5877e3f0bfd0b0dbeb75a2c4ad8e"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:6:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "559f578168c07928511fc371f597a9a2773f5877e3f0bfd0b0dbeb75a2c4ad8e"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:9:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "fa8d29e449f13d1d901f5299118e9881614da639ee2674e251ce9e596217f6e0"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:23:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "fa8d29e449f13d1d901f5299118e9881614da639ee2674e251ce9e596217f6e0"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:26:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "8fc2cac19e7c1c9b3eee210d49f72b60eed36f9e245e9bb8e8f365893535e0e7"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:34:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8fc2cac19e7c1c9b3eee210d49f72b60eed36f9e245e9bb8e8f365893535e0e7"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:37:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "1e437ee32127c284278f71f00af912ac17793ce4894dc80096e606d7baf2e987"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:41:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1e437ee32127c284278f71f00af912ac17793ce4894dc80096e606d7baf2e987"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:44:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "c383cf29ba7936da619b36ca8223bc4008b2d38348be35c83cefbdf2127d315e"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:48:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c383cf29ba7936da619b36ca8223bc4008b2d38348be35c83cefbdf2127d315e"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:55:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "15235f3424db44a6e7866cb13b5258905e34d949dc31d2ed6163978235d16011"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:57:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "15235f3424db44a6e7866cb13b5258905e34d949dc31d2ed6163978235d16011"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:60:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "5a6d2f19771125ca8f32712a88c80dabc09be732077e81ca3a7fc077e84f32a7"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:65:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "5a6d2f19771125ca8f32712a88c80dabc09be732077e81ca3a7fc077e84f32a7"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:68:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "030373d7128b30c0581eb83667e5b2944124adf1bad6acc82d50549f087922ac"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:74:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "030373d7128b30c0581eb83667e5b2944124adf1bad6acc82d50549f087922ac"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:77:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "f9e0abe416776cc72a2b24cdfe6d1f5bcf49638f976582fa52d3b5f8e88bd805"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:84:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f9e0abe416776cc72a2b24cdfe6d1f5bcf49638f976582fa52d3b5f8e88bd805"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:87:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "f35353b7bdf029a08bf24528a09f734e6a5533f059e8a805bfec8dd9d2580935"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:94:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f35353b7bdf029a08bf24528a09f734e6a5533f059e8a805bfec8dd9d2580935"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:97:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "207066331f67cb704088f1182642846267ec2d3dc8fa191b696202888a1ea6fa"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.test.ts:101:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "207066331f67cb704088f1182642846267ec2d3dc8fa191b696202888a1ea6fa"
+      ],
+      "note": "已复核固定上游测试及 Java 对应方法；实际结果以逐断言报告为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:15:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "0d7dce9d24b581c2db7924a47e70f7d4b7cd3b108773c5d1e84e33b21ae18c45"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:17:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0d7dce9d24b581c2db7924a47e70f7d4b7cd3b108773c5d1e84e33b21ae18c45"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:20:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "10dae284ae668e49de6d19a36137500d187a90d4e90916e90e307e458f74bf8e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:25:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "10dae284ae668e49de6d19a36137500d187a90d4e90916e90e307e458f74bf8e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:26:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "10dae284ae668e49de6d19a36137500d187a90d4e90916e90e307e458f74bf8e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:29:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "bc5794a340cac4cb32e61a25df22b37fe960502cca8f8e03e5b2c26510b30265"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:34:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "bc5794a340cac4cb32e61a25df22b37fe960502cca8f8e03e5b2c26510b30265"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:42:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "c4be16049f919f3bc41f096b2b139ed3fa3efb4f080d3ae06c88655842b5e34d"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:45:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c4be16049f919f3bc41f096b2b139ed3fa3efb4f080d3ae06c88655842b5e34d"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:47:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c4be16049f919f3bc41f096b2b139ed3fa3efb4f080d3ae06c88655842b5e34d"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:50:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "86f82cd625eb151a1d2629dbc4104f0786aab5c4e90e3f84aefbc108604361ca"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:53:7:loop",
+      "status": "reviewed",
+      "caseIds": [
+        "86f82cd625eb151a1d2629dbc4104f0786aab5c4e90e3f84aefbc108604361ca"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:56:9:conditional",
+      "status": "reviewed",
+      "caseIds": [
+        "86f82cd625eb151a1d2629dbc4104f0786aab5c4e90e3f84aefbc108604361ca"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:61:7:conditional",
+      "status": "reviewed",
+      "caseIds": [
+        "86f82cd625eb151a1d2629dbc4104f0786aab5c4e90e3f84aefbc108604361ca"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:68:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "86f82cd625eb151a1d2629dbc4104f0786aab5c4e90e3f84aefbc108604361ca"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:71:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "a7ae3b6d77fd1e294592924afbb48e0e056e2d94b7bf37c0ad03a697d234b90e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:74:7:loop",
+      "status": "reviewed",
+      "caseIds": [
+        "a7ae3b6d77fd1e294592924afbb48e0e056e2d94b7bf37c0ad03a697d234b90e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:77:9:conditional",
+      "status": "reviewed",
+      "caseIds": [
+        "a7ae3b6d77fd1e294592924afbb48e0e056e2d94b7bf37c0ad03a697d234b90e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:82:7:conditional",
+      "status": "reviewed",
+      "caseIds": [
+        "a7ae3b6d77fd1e294592924afbb48e0e056e2d94b7bf37c0ad03a697d234b90e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:90:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a7ae3b6d77fd1e294592924afbb48e0e056e2d94b7bf37c0ad03a697d234b90e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:93:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "28dbcc5e52bdcc93250593f242dd2b99b6c04abd0ec0f3cf0658ec809ebb1525"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:100:7:conditional",
+      "status": "reviewed",
+      "caseIds": [
+        "28dbcc5e52bdcc93250593f242dd2b99b6c04abd0ec0f3cf0658ec809ebb1525"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:104:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "28dbcc5e52bdcc93250593f242dd2b99b6c04abd0ec0f3cf0658ec809ebb1525"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:107:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "1450b222978e3c339500bb18ebe81ab26f32cd7caaa6aff229dae6b67e98cebe"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:114:7:conditional",
+      "status": "reviewed",
+      "caseIds": [
+        "1450b222978e3c339500bb18ebe81ab26f32cd7caaa6aff229dae6b67e98cebe"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:117:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1450b222978e3c339500bb18ebe81ab26f32cd7caaa6aff229dae6b67e98cebe"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:120:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "396143f97ec0d14735b730c7043b3ccc6fd7cc9bc9b660f742c7b27f99b78324"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:122:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "396143f97ec0d14735b730c7043b3ccc6fd7cc9bc9b660f742c7b27f99b78324"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:130:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "63c6a19008fa6be7c3fb140bd36a485337f013980d1ecd55a7ad2d1a4852ac23"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:132:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "63c6a19008fa6be7c3fb140bd36a485337f013980d1ecd55a7ad2d1a4852ac23"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:140:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "ce20e6122fe1945d9cca5eb016a919528c586a1258ee2573770479f6293723d2"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:144:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ce20e6122fe1945d9cca5eb016a919528c586a1258ee2573770479f6293723d2"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:147:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "81ffa2d1bac13481a979c5127073e912c7194bc72193aa8be7d1957769910c5f"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:153:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "81ffa2d1bac13481a979c5127073e912c7194bc72193aa8be7d1957769910c5f"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:156:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "56292b5a5b0b60b1002353d8e69f8a9fdf1bd6a302526489a0b77bc5edc28b41"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:160:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "56292b5a5b0b60b1002353d8e69f8a9fdf1bd6a302526489a0b77bc5edc28b41"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:163:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "5a6ddda36ee78047cac57703c7a5ea39cee219bd71d81305194db3073fc63c59"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:167:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "5a6ddda36ee78047cac57703c7a5ea39cee219bd71d81305194db3073fc63c59"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:175:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "7e3bad7157f070cf1c9f2d3b53eeeba30d574f563da2b1b10b127d913967ea8f"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:179:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "7e3bad7157f070cf1c9f2d3b53eeeba30d574f563da2b1b10b127d913967ea8f"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:182:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "3657077aaeb12d56494b1af278dcc7b1f4eb808188ba914b7af4b6976a6a5237"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:187:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "3657077aaeb12d56494b1af278dcc7b1f4eb808188ba914b7af4b6976a6a5237"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:190:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "807e68a6df6bd1d2e17f4005e4f7bb56b837be94ff9c7ef70288e6067c5f6abb"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:194:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "807e68a6df6bd1d2e17f4005e4f7bb56b837be94ff9c7ef70288e6067c5f6abb"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:197:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "17426519eb61980402cbb6e47c3854be3851105bfae27bda31009c797d036654"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:201:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "17426519eb61980402cbb6e47c3854be3851105bfae27bda31009c797d036654"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:209:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "bb2532544bf4c7de13911a12761f4a896098702885a1fb176de4cc91c896e687"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:211:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "bb2532544bf4c7de13911a12761f4a896098702885a1fb176de4cc91c896e687"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:214:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "6ce9fa9c47c814dbbd036f41420d8a150688f42c2e25d26c5941065fc372641b"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:216:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6ce9fa9c47c814dbbd036f41420d8a150688f42c2e25d26c5941065fc372641b"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:221:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "2c95ccb8e19e9fa98c241309fe6d0e51c072772982dc3fe8d375805d0a2c7635"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:236:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "2c95ccb8e19e9fa98c241309fe6d0e51c072772982dc3fe8d375805d0a2c7635"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:237:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "2c95ccb8e19e9fa98c241309fe6d0e51c072772982dc3fe8d375805d0a2c7635"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:238:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "2c95ccb8e19e9fa98c241309fe6d0e51c072772982dc3fe8d375805d0a2c7635"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:239:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "2c95ccb8e19e9fa98c241309fe6d0e51c072772982dc3fe8d375805d0a2c7635"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:240:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "2c95ccb8e19e9fa98c241309fe6d0e51c072772982dc3fe8d375805d0a2c7635"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:242:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "2c95ccb8e19e9fa98c241309fe6d0e51c072772982dc3fe8d375805d0a2c7635"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:253:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "fe000431ba8191351c2dc4899c3d00ccdce77e60caf4b1b566f7af62ea4770ba"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:255:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "fe000431ba8191351c2dc4899c3d00ccdce77e60caf4b1b566f7af62ea4770ba"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:258:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "cd64aa2fbe0e7889623297bb2bb5556701053edef4f1c8fbc444b96c1aa5b4c0"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:260:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "cd64aa2fbe0e7889623297bb2bb5556701053edef4f1c8fbc444b96c1aa5b4c0"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:263:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "dcfbf7d7e08d34f19100795db9fa85d96aa29d39321af2173b8294bc39d991cb"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:266:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "dcfbf7d7e08d34f19100795db9fa85d96aa29d39321af2173b8294bc39d991cb"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:268:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "dcfbf7d7e08d34f19100795db9fa85d96aa29d39321af2173b8294bc39d991cb"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:271:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "98ff6a8c9d68267bfb8e8bbaba9c166ed30a66533b35bb4c218dc77e196a0536"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:274:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "98ff6a8c9d68267bfb8e8bbaba9c166ed30a66533b35bb4c218dc77e196a0536"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:275:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "98ff6a8c9d68267bfb8e8bbaba9c166ed30a66533b35bb4c218dc77e196a0536"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:278:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "8d2decc7fc6cf8eb62c6b34da79a4d7189f5a25c9fbcb293371c2ecd0b32457e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:281:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8d2decc7fc6cf8eb62c6b34da79a4d7189f5a25c9fbcb293371c2ecd0b32457e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:282:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8d2decc7fc6cf8eb62c6b34da79a4d7189f5a25c9fbcb293371c2ecd0b32457e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:290:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "e6f7b0efdd54b94ea6840a9e7c3df0b66713914e97a8366080ee1b85c0a8ebc3"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:292:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "e6f7b0efdd54b94ea6840a9e7c3df0b66713914e97a8366080ee1b85c0a8ebc3"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:295:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "247519256df9b7b23338c65c8daff87ef9f0994280e0bc076d3ff142d5391b30"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:298:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "247519256df9b7b23338c65c8daff87ef9f0994280e0bc076d3ff142d5391b30"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:299:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "247519256df9b7b23338c65c8daff87ef9f0994280e0bc076d3ff142d5391b30"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:307:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "9d5f50fc88677a435e2a7e7ace2c8e8cdda68dca339dda931f2673a12c6b15e6"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:311:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "9d5f50fc88677a435e2a7e7ace2c8e8cdda68dca339dda931f2673a12c6b15e6"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:314:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "62108597a307fd2f4dc900d8aedec525700c0db168746b888e4e53edb5a2eb83"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:318:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "62108597a307fd2f4dc900d8aedec525700c0db168746b888e4e53edb5a2eb83"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:321:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "e8ec763fc7f91ae5e2109394149bef8a006b3b41b6febbd3a8a3d57d98dbee96"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:325:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "e8ec763fc7f91ae5e2109394149bef8a006b3b41b6febbd3a8a3d57d98dbee96"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:328:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "adfb80d4a2e913814b8e88b869487906f04d93620252f30752133f9d2716a4a6"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:332:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "adfb80d4a2e913814b8e88b869487906f04d93620252f30752133f9d2716a4a6"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:340:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "a6b4659beea6876d6e50bac44b3e3b6efa2562727e246dbe74475afba7eb5e72"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:343:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a6b4659beea6876d6e50bac44b3e3b6efa2562727e246dbe74475afba7eb5e72"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:346:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b564f1e3e3450f47441e96a77ea3e0d5afdfff6c7e62c2fa9f90474f5d1db34f"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:349:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b564f1e3e3450f47441e96a77ea3e0d5afdfff6c7e62c2fa9f90474f5d1db34f"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:350:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b564f1e3e3450f47441e96a77ea3e0d5afdfff6c7e62c2fa9f90474f5d1db34f"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:358:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "e5d4b1f691df7c250e9f254b06c048f1eb11d3f92e89c78c2704ee7710c4a1a8"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:360:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "e5d4b1f691df7c250e9f254b06c048f1eb11d3f92e89c78c2704ee7710c4a1a8"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:363:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "294d9a6630bd94e76f0f3e6a6898cde5bbccbf4aa2c0ad787069829f9bc0d49e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:366:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "294d9a6630bd94e76f0f3e6a6898cde5bbccbf4aa2c0ad787069829f9bc0d49e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:367:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "294d9a6630bd94e76f0f3e6a6898cde5bbccbf4aa2c0ad787069829f9bc0d49e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:370:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "cdc767be27184771b7be24388b891c56be66cb9676303e3ae1b8ea33be42cca3"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:375:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "cdc767be27184771b7be24388b891c56be66cb9676303e3ae1b8ea33be42cca3"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:383:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "c4c925bafd66b14c462adcb5dc82a8a3f63f0102e73b056d94af97de2eef304d"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:386:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c4c925bafd66b14c462adcb5dc82a8a3f63f0102e73b056d94af97de2eef304d"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:389:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "f86b7ff21b853386d4fba83d8b3114825708dbf66616055c4b0e5c3f904e5fd8"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:393:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f86b7ff21b853386d4fba83d8b3114825708dbf66616055c4b0e5c3f904e5fd8"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:401:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "5039158a7cd685f7bfd65faac7db508ef0254d63cbab5a9fed9429beeac46389"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:403:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "5039158a7cd685f7bfd65faac7db508ef0254d63cbab5a9fed9429beeac46389"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:404:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "5039158a7cd685f7bfd65faac7db508ef0254d63cbab5a9fed9429beeac46389"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:412:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "4905b4b6a0df96f57cd1020121599d1a3e4f27f45aa0a8a93f2c99f94b35e8e2"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:415:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "4905b4b6a0df96f57cd1020121599d1a3e4f27f45aa0a8a93f2c99f94b35e8e2"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:418:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "cf66ff984e407a44bf4a154cd1082272e2ebe3a7e0fdd04517650396172aae3b"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:421:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "cf66ff984e407a44bf4a154cd1082272e2ebe3a7e0fdd04517650396172aae3b"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:424:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "d3944abe79230987abe28b8c17e5ec605cb3a233d910e517c3131f60ee67783e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:429:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "d3944abe79230987abe28b8c17e5ec605cb3a233d910e517c3131f60ee67783e"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:432:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "ab57bb8f7ba567d8ab4b996974d69ed17bd1b66cf7574aa208b7c01703f316a0"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:435:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ab57bb8f7ba567d8ab4b996974d69ed17bd1b66cf7574aa208b7c01703f316a0"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:438:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "05e6d408337ba40345111643e756f1450ea5d45c2fffa2d96f8be08ccee7bdeb"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:441:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "05e6d408337ba40345111643e756f1450ea5d45c2fffa2d96f8be08ccee7bdeb"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:444:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "a84217e513ed49b5e443051047c0fd509429f9c20ade66dbfcaa6b4f839b6404"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:447:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a84217e513ed49b5e443051047c0fd509429f9c20ade66dbfcaa6b4f839b6404"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:455:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "70d58cd782ec3b41430883eadf9a6c9a79ac0ec9040a339add567beec9cc72f1"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:458:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "70d58cd782ec3b41430883eadf9a6c9a79ac0ec9040a339add567beec9cc72f1"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:461:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "821d12eb63752216258c609bbf0f35be7d86780e65071d5b8b8f298fb4e8b9e1"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:465:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "821d12eb63752216258c609bbf0f35be7d86780e65071d5b8b8f298fb4e8b9e1"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:468:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "8834e9efed166a0468daa72b0c5e4fe6e0585a318eebfdaae5aca181bd7ae8df"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:471:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8834e9efed166a0468daa72b0c5e4fe6e0585a318eebfdaae5aca181bd7ae8df"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:474:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8834e9efed166a0468daa72b0c5e4fe6e0585a318eebfdaae5aca181bd7ae8df"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:482:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "957fca1ef6d3597fed9627b60b26a46ade15591895d799659552b3fa32c9be28"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:484:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "957fca1ef6d3597fed9627b60b26a46ade15591895d799659552b3fa32c9be28"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:487:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "0b81c861af501dbabec5bef924e3b6342d3e7e6435b3fb5252aea656aaf6405f"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:490:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0b81c861af501dbabec5bef924e3b6342d3e7e6435b3fb5252aea656aaf6405f"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:493:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "228d7c59d7adb1743055a5664f6d27ad5b0e5ba505b1e44c49c2ab651e3e9fcd"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:496:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "228d7c59d7adb1743055a5664f6d27ad5b0e5ba505b1e44c49c2ab651e3e9fcd"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:504:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "d888dff72d7c90356f4d548d501103f664ec8f7cebaf60bdc4b06d8f3ccd55ea"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:507:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "d888dff72d7c90356f4d548d501103f664ec8f7cebaf60bdc4b06d8f3ccd55ea"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:510:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "5df23e08e2450ce7c2469bcd0d8f248d9cd833bbc448a0251eed1726a427f5c4"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:514:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "5df23e08e2450ce7c2469bcd0d8f248d9cd833bbc448a0251eed1726a427f5c4"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:522:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b0eb81a357d751a4d1a8c254b228365592aa63096265dfa469400b83d65b1ecb"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:529:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b0eb81a357d751a4d1a8c254b228365592aa63096265dfa469400b83d65b1ecb"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:551:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "35051d10d3d800659de70cb51b4212ff9dc364e52ee693540a6bfc37aa1da618"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:554:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "35051d10d3d800659de70cb51b4212ff9dc364e52ee693540a6bfc37aa1da618"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:555:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "35051d10d3d800659de70cb51b4212ff9dc364e52ee693540a6bfc37aa1da618"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:556:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "35051d10d3d800659de70cb51b4212ff9dc364e52ee693540a6bfc37aa1da618"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:559:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "8588d6d615b33023f5694e127b2970aad1f952e36edd850f2ea86053764d6e06",
+        "ad605d7bad957601fdc16149ac4754a2e6b22fad691369e045639c051b38a998",
+        "d508e1d51e4591c628ce0332beae937de5a24137ff2ee488bbb6378744bacd64"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:566:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8588d6d615b33023f5694e127b2970aad1f952e36edd850f2ea86053764d6e06",
+        "ad605d7bad957601fdc16149ac4754a2e6b22fad691369e045639c051b38a998",
+        "d508e1d51e4591c628ce0332beae937de5a24137ff2ee488bbb6378744bacd64"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:567:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8588d6d615b33023f5694e127b2970aad1f952e36edd850f2ea86053764d6e06",
+        "ad605d7bad957601fdc16149ac4754a2e6b22fad691369e045639c051b38a998",
+        "d508e1d51e4591c628ce0332beae937de5a24137ff2ee488bbb6378744bacd64"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:568:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8588d6d615b33023f5694e127b2970aad1f952e36edd850f2ea86053764d6e06",
+        "ad605d7bad957601fdc16149ac4754a2e6b22fad691369e045639c051b38a998",
+        "d508e1d51e4591c628ce0332beae937de5a24137ff2ee488bbb6378744bacd64"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:569:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8588d6d615b33023f5694e127b2970aad1f952e36edd850f2ea86053764d6e06",
+        "ad605d7bad957601fdc16149ac4754a2e6b22fad691369e045639c051b38a998",
+        "d508e1d51e4591c628ce0332beae937de5a24137ff2ee488bbb6378744bacd64"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:572:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "077bff89740cee829fa8acda37d18253107dc80b55155dcd925b455750013498"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:576:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "077bff89740cee829fa8acda37d18253107dc80b55155dcd925b455750013498"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Point.additional.test.ts:577:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "077bff89740cee829fa8acda37d18253107dc80b55155dcd925b455750013498"
+      ],
+      "note": "已复核原文件中的输入、断言和动态分支；运行结果以逐断言对照为准。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:13:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "bf40b54c622fdee4f55259e48a6afb7f19cfe6685596b7ac23fe9ec4a03592ec"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:14:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "bf40b54c622fdee4f55259e48a6afb7f19cfe6685596b7ac23fe9ec4a03592ec"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:15:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "bf40b54c622fdee4f55259e48a6afb7f19cfe6685596b7ac23fe9ec4a03592ec"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:16:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "bf40b54c622fdee4f55259e48a6afb7f19cfe6685596b7ac23fe9ec4a03592ec"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:19:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "9456a9d3da8396595bbeee1290e04a45ad2438b5fd21474a3327072c745faf95"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:20:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "9456a9d3da8396595bbeee1290e04a45ad2438b5fd21474a3327072c745faf95"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:23:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "4dc0d4f363c0d78b9b85aabc24e0ff266515cf372f11cbe559f1234384a3a022"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:24:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "4dc0d4f363c0d78b9b85aabc24e0ff266515cf372f11cbe559f1234384a3a022"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:32:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "642986cb61b4fcc732763787d15efc2c5318ad3dfe47cd6afb6b1f7375cfc8d5"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:34:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "642986cb61b4fcc732763787d15efc2c5318ad3dfe47cd6afb6b1f7375cfc8d5"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:35:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "642986cb61b4fcc732763787d15efc2c5318ad3dfe47cd6afb6b1f7375cfc8d5"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:38:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b4ed5f5b3c76c0223452963a6d1cafe8eda66fa97427bd7276fa329ebf2210de"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:41:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b4ed5f5b3c76c0223452963a6d1cafe8eda66fa97427bd7276fa329ebf2210de"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:44:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "254176442b7b8ee65c9b64e188a2c6316bcef0a9d41ad7334062cb33f526f8e8"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:46:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "254176442b7b8ee65c9b64e188a2c6316bcef0a9d41ad7334062cb33f526f8e8"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:54:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "8188da6de36aef364c5c28d5b16fa9232c26cf0e606c81f1c0852ee51f6feb32"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:58:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8188da6de36aef364c5c28d5b16fa9232c26cf0e606c81f1c0852ee51f6feb32"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:59:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8188da6de36aef364c5c28d5b16fa9232c26cf0e606c81f1c0852ee51f6feb32"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:60:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8188da6de36aef364c5c28d5b16fa9232c26cf0e606c81f1c0852ee51f6feb32"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:61:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8188da6de36aef364c5c28d5b16fa9232c26cf0e606c81f1c0852ee51f6feb32"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:64:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "201b73c969009cee3407a68bb8945555a292a548eb6e3a9f1283bc26dae441a5"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:68:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "201b73c969009cee3407a68bb8945555a292a548eb6e3a9f1283bc26dae441a5"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:76:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b46576cdc94829ee0eeacb1f652ba677a34874964c87236c0c0decb09dd99aac"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:78:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b46576cdc94829ee0eeacb1f652ba677a34874964c87236c0c0decb09dd99aac"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:81:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "90702437aaacf85dabea925a4d6d5b865f7a0f254d42ba0a3a56dcffa16bca37"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:84:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "90702437aaacf85dabea925a4d6d5b865f7a0f254d42ba0a3a56dcffa16bca37"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:92:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "8c3a1f0888674424dab6d57aba2c3084827d834e66dd0858133d50aa20186ead"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:95:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8c3a1f0888674424dab6d57aba2c3084827d834e66dd0858133d50aa20186ead"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:98:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "f6a474b7fcb84ccb5438d6c0eee097e9360a455c912b3ccfadfc966a1cec5d24"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:101:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "f6a474b7fcb84ccb5438d6c0eee097e9360a455c912b3ccfadfc966a1cec5d24"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:109:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "3290ffe7c99d3e35be551e46dbef1f21dc8828010bdfa8bf5e53095fb81951c2"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:123:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "3290ffe7c99d3e35be551e46dbef1f21dc8828010bdfa8bf5e53095fb81951c2"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:124:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "3290ffe7c99d3e35be551e46dbef1f21dc8828010bdfa8bf5e53095fb81951c2"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:125:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "3290ffe7c99d3e35be551e46dbef1f21dc8828010bdfa8bf5e53095fb81951c2"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:133:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "2ded0787af90c42d9d20d6b4960a374cc4e692db2b2d960cf8cf4c321bcba31b"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:135:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "2ded0787af90c42d9d20d6b4960a374cc4e692db2b2d960cf8cf4c321bcba31b"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:138:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "fae65644b91d9f53aff47e491542555c5c89b8a93c36db80902537b96c9f02ac"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:142:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "fae65644b91d9f53aff47e491542555c5c89b8a93c36db80902537b96c9f02ac"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:145:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "5f837d53adca959a85b0a5cdf06036cbc4261afd3c9f21cd52ec9911e94391a6"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:156:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "5f837d53adca959a85b0a5cdf06036cbc4261afd3c9f21cd52ec9911e94391a6"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:164:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "ada459f8cf92d54565f26772c7dbf898c6bae4031203f8f4cebb69ca7bf6c0db"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:167:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ada459f8cf92d54565f26772c7dbf898c6bae4031203f8f4cebb69ca7bf6c0db"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:168:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ada459f8cf92d54565f26772c7dbf898c6bae4031203f8f4cebb69ca7bf6c0db"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:171:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ada459f8cf92d54565f26772c7dbf898c6bae4031203f8f4cebb69ca7bf6c0db"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:172:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ada459f8cf92d54565f26772c7dbf898c6bae4031203f8f4cebb69ca7bf6c0db"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:180:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "41600369ae7993a8cc9cdb58c3895cd8ca850899ac698eef6c87983e318fd353"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:182:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "41600369ae7993a8cc9cdb58c3895cd8ca850899ac698eef6c87983e318fd353"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:183:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "41600369ae7993a8cc9cdb58c3895cd8ca850899ac698eef6c87983e318fd353"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:184:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "41600369ae7993a8cc9cdb58c3895cd8ca850899ac698eef6c87983e318fd353"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:185:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "41600369ae7993a8cc9cdb58c3895cd8ca850899ac698eef6c87983e318fd353"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:188:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "d746198ace050dd1a3a2f3763a3abbb5a01c31bd3919d7bb31821384e8cf8550"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:190:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "d746198ace050dd1a3a2f3763a3abbb5a01c31bd3919d7bb31821384e8cf8550"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:191:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "d746198ace050dd1a3a2f3763a3abbb5a01c31bd3919d7bb31821384e8cf8550"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:199:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "6deb0926976171f49791b574631f3b1ea8d20ed3c6ecc51c99387fad18677692"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:201:7:conditional",
+      "status": "reviewed",
+      "caseIds": [
+        "6deb0926976171f49791b574631f3b1ea8d20ed3c6ecc51c99387fad18677692"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:203:9:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6deb0926976171f49791b574631f3b1ea8d20ed3c6ecc51c99387fad18677692"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:204:9:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6deb0926976171f49791b574631f3b1ea8d20ed3c6ecc51c99387fad18677692"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:205:9:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6deb0926976171f49791b574631f3b1ea8d20ed3c6ecc51c99387fad18677692"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:206:9:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6deb0926976171f49791b574631f3b1ea8d20ed3c6ecc51c99387fad18677692"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:207:9:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6deb0926976171f49791b574631f3b1ea8d20ed3c6ecc51c99387fad18677692"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.additional.test.ts:208:9:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6deb0926976171f49791b574631f3b1ea8d20ed3c6ecc51c99387fad18677692"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:8:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b81323faf882b300375ced266fd1492b39a922d3c42fd98aa07191539253b7a3"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:16:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b81323faf882b300375ced266fd1492b39a922d3c42fd98aa07191539253b7a3"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:17:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b81323faf882b300375ced266fd1492b39a922d3c42fd98aa07191539253b7a3"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:18:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b81323faf882b300375ced266fd1492b39a922d3c42fd98aa07191539253b7a3"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:19:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b81323faf882b300375ced266fd1492b39a922d3c42fd98aa07191539253b7a3"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:22:5:conditional",
+      "status": "reviewed",
+      "caseIds": [
+        "b81323faf882b300375ced266fd1492b39a922d3c42fd98aa07191539253b7a3"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:25:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b81323faf882b300375ced266fd1492b39a922d3c42fd98aa07191539253b7a3"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:26:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b81323faf882b300375ced266fd1492b39a922d3c42fd98aa07191539253b7a3"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:29:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b81323faf882b300375ced266fd1492b39a922d3c42fd98aa07191539253b7a3"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:37:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b81323faf882b300375ced266fd1492b39a922d3c42fd98aa07191539253b7a3"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:40:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "9a7fecd526d12fae2fcd1fa26e6fd944d87501cf246456996cf12960be37ecb1"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:44:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "9a7fecd526d12fae2fcd1fa26e6fd944d87501cf246456996cf12960be37ecb1"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:45:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "9a7fecd526d12fae2fcd1fa26e6fd944d87501cf246456996cf12960be37ecb1"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:46:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "9a7fecd526d12fae2fcd1fa26e6fd944d87501cf246456996cf12960be37ecb1"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:47:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "9a7fecd526d12fae2fcd1fa26e6fd944d87501cf246456996cf12960be37ecb1"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:60:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "d0ccf860d6c121f521787cafeaa2a5ead0a88a31ebd1c130fb515cfa9b98a042"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:64:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "d0ccf860d6c121f521787cafeaa2a5ead0a88a31ebd1c130fb515cfa9b98a042"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:71:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "d0ccf860d6c121f521787cafeaa2a5ead0a88a31ebd1c130fb515cfa9b98a042"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:77:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "d0ccf860d6c121f521787cafeaa2a5ead0a88a31ebd1c130fb515cfa9b98a042"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:92:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "d0ccf860d6c121f521787cafeaa2a5ead0a88a31ebd1c130fb515cfa9b98a042"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:102:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "d0ccf860d6c121f521787cafeaa2a5ead0a88a31ebd1c130fb515cfa9b98a042"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:105:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "d0ccf860d6c121f521787cafeaa2a5ead0a88a31ebd1c130fb515cfa9b98a042"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:111:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "eb02cb62d36fb154983afc2e66a30671a2a4e33a867947686ac753124bf9f433"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:117:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "eb02cb62d36fb154983afc2e66a30671a2a4e33a867947686ac753124bf9f433"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:120:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "6d6b728ebcf07a971b5f168a166c1967ad6a2035b712124777f1e33a08f14b71"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:130:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6d6b728ebcf07a971b5f168a166c1967ad6a2035b712124777f1e33a08f14b71"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:131:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6d6b728ebcf07a971b5f168a166c1967ad6a2035b712124777f1e33a08f14b71"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:134:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "090f9f3642e790b28d7d9bb280a73225541e41d9e75fc8dc57cb351d288bff09"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:137:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "090f9f3642e790b28d7d9bb280a73225541e41d9e75fc8dc57cb351d288bff09"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:139:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "090f9f3642e790b28d7d9bb280a73225541e41d9e75fc8dc57cb351d288bff09"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:145:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "090f9f3642e790b28d7d9bb280a73225541e41d9e75fc8dc57cb351d288bff09"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:148:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "68accece70d4280a6a94bc5f919e2ffc7f9d52f56c036af6c2a070ac559f326d"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:151:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "68accece70d4280a6a94bc5f919e2ffc7f9d52f56c036af6c2a070ac559f326d"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:153:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "68accece70d4280a6a94bc5f919e2ffc7f9d52f56c036af6c2a070ac559f326d"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:162:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "68accece70d4280a6a94bc5f919e2ffc7f9d52f56c036af6c2a070ac559f326d"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:165:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "aa430878d19bc9dc0c1da26ed352e0feaafd15bbb5c26455855770012c950411"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:179:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "aa430878d19bc9dc0c1da26ed352e0feaafd15bbb5c26455855770012c950411"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:184:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "aa430878d19bc9dc0c1da26ed352e0feaafd15bbb5c26455855770012c950411"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:185:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "aa430878d19bc9dc0c1da26ed352e0feaafd15bbb5c26455855770012c950411"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:186:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "aa430878d19bc9dc0c1da26ed352e0feaafd15bbb5c26455855770012c950411"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:189:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "bdd207560b2862ffd453c18be881b7477d36f56a477a148a8c710f6d050cdb53"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:203:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "bdd207560b2862ffd453c18be881b7477d36f56a477a148a8c710f6d050cdb53"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:206:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "bdd207560b2862ffd453c18be881b7477d36f56a477a148a8c710f6d050cdb53"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:209:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "3d429475a6169945f24a7398b9facd1963c5cf8e8dee0592749622a25a2822bb"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:213:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "3d429475a6169945f24a7398b9facd1963c5cf8e8dee0592749622a25a2822bb"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:234:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "81e899f2f718ada73f2602253890077419b0421cb2e2a30223237e0fe818b90e",
+        "a69fa1e279d4859f1c8dfd8db2f6a3a0c96ab6003e4c3ca00f176ce5d71882be"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:235:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "81e899f2f718ada73f2602253890077419b0421cb2e2a30223237e0fe818b90e",
+        "a69fa1e279d4859f1c8dfd8db2f6a3a0c96ab6003e4c3ca00f176ce5d71882be"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:238:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "81e899f2f718ada73f2602253890077419b0421cb2e2a30223237e0fe818b90e",
+        "a69fa1e279d4859f1c8dfd8db2f6a3a0c96ab6003e4c3ca00f176ce5d71882be"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:239:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "81e899f2f718ada73f2602253890077419b0421cb2e2a30223237e0fe818b90e",
+        "a69fa1e279d4859f1c8dfd8db2f6a3a0c96ab6003e4c3ca00f176ce5d71882be"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:240:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "81e899f2f718ada73f2602253890077419b0421cb2e2a30223237e0fe818b90e",
+        "a69fa1e279d4859f1c8dfd8db2f6a3a0c96ab6003e4c3ca00f176ce5d71882be"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:276:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "a30eadfb146dcb8234597464f0ba780337f5a18343129ab156b518f6880ee19a"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:277:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a30eadfb146dcb8234597464f0ba780337f5a18343129ab156b518f6880ee19a"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:282:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "81e899f2f718ada73f2602253890077419b0421cb2e2a30223237e0fe818b90e"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:287:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "a69fa1e279d4859f1c8dfd8db2f6a3a0c96ab6003e4c3ca00f176ce5d71882be"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:298:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "10f7ad59db38256acf6b00baaba054969ff6468b9d7cf4545bf8c25b0037708a"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:303:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "10f7ad59db38256acf6b00baaba054969ff6468b9d7cf4545bf8c25b0037708a"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:304:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "10f7ad59db38256acf6b00baaba054969ff6468b9d7cf4545bf8c25b0037708a"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:305:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "10f7ad59db38256acf6b00baaba054969ff6468b9d7cf4545bf8c25b0037708a"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:307:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "10f7ad59db38256acf6b00baaba054969ff6468b9d7cf4545bf8c25b0037708a"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:308:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "10f7ad59db38256acf6b00baaba054969ff6468b9d7cf4545bf8c25b0037708a"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:309:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "10f7ad59db38256acf6b00baaba054969ff6468b9d7cf4545bf8c25b0037708a"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:312:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "0560284154a3a68aa6828a314b5251f6e9a8063bb1339862599bd8c887feeccb"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:321:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0560284154a3a68aa6828a314b5251f6e9a8063bb1339862599bd8c887feeccb"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:322:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0560284154a3a68aa6828a314b5251f6e9a8063bb1339862599bd8c887feeccb"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:325:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b6fcb04bd67438f17c755800f9db404d7d2572bbd242cc6fdf7849ed6509f641"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:329:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b6fcb04bd67438f17c755800f9db404d7d2572bbd242cc6fdf7849ed6509f641"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:330:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b6fcb04bd67438f17c755800f9db404d7d2572bbd242cc6fdf7849ed6509f641"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:333:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "89dbd4c34486b02e6bcc4f76d90459d9e64e89b3bd1878327b20f30de1a15c0b"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:337:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "89dbd4c34486b02e6bcc4f76d90459d9e64e89b3bd1878327b20f30de1a15c0b"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:340:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "89dbd4c34486b02e6bcc4f76d90459d9e64e89b3bd1878327b20f30de1a15c0b"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:341:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "89dbd4c34486b02e6bcc4f76d90459d9e64e89b3bd1878327b20f30de1a15c0b"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:344:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "66b40f2c39fbc0033f79f6bcef55d7c7b5f9ffd8b5e64c6fc09646e644f02e85"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:348:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "66b40f2c39fbc0033f79f6bcef55d7c7b5f9ffd8b5e64c6fc09646e644f02e85"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:349:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "66b40f2c39fbc0033f79f6bcef55d7c7b5f9ffd8b5e64c6fc09646e644f02e85"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/Curve.unit.test.ts:350:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "66b40f2c39fbc0033f79f6bcef55d7c7b5f9ffd8b5e64c6fc09646e644f02e85"
+      ],
+      "note": "已复核固定原文件注册、断言及动态分支；原断言实际值由任务对照报告验收。"
     }
   ]
 }
