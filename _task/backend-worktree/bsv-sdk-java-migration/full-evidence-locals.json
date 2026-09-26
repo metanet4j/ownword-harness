@@ -790,6 +790,42 @@
       "java_report": [
         ".cache/evidence/point-additional-java-formal-20260927/surefire.xml"
       ]
+    },
+    {
+      "name": "auth-fetch-primary-context-labels",
+      "deriveCatalogFromPlan": true,
+      "input_plan": "auth-fetch-primary-context-labels-plan.json",
+      "captureKind": "specialized-local"
+    },
+    {
+      "name": "auth-fetch-primary-retry",
+      "deriveCatalogFromPlan": true,
+      "input_plan": "auth-fetch-primary-retry-plan.json",
+      "captureKind": "specialized-local"
+    },
+    {
+      "name": "auth-fetch-primary-cert-request",
+      "deriveCatalogFromPlan": true,
+      "input_plan": "auth-fetch-primary-cert-request-plan.json",
+      "captureKind": "specialized-local"
+    },
+    {
+      "name": "auth-fetch-boundary",
+      "deriveCatalogFromPlan": true,
+      "input_plan": "auth-fetch-boundary-input-plan.json",
+      "captureKind": "specialized-local"
+    },
+    {
+      "name": "auth-fetch-known-txids",
+      "deriveCatalogFromPlan": true,
+      "input_plan": "auth-fetch-knownTxids-input-plan.json",
+      "captureKind": "specialized-local"
+    },
+    {
+      "name": "auth-fetch-peer",
+      "deriveCatalogFromPlan": true,
+      "input_plan": "auth-fetch-peer-input-plan.json",
+      "captureKind": "specialized-local"
     }
   ]
 }
