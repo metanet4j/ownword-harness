@@ -23,6 +23,9 @@ RANDOM_FILES = {
 }
 TIMING_CASES = {
     '8cafa389ea1819ec6268cd946171ee603bb27f4bdc4a0cab23277aaf37a1abd0',
+    # AuthFetch.wait 的即时返回耗时由运行环境决定；按同一 <50ms 边界核对。
+    '7eaf894b954c8a61105fc2ce63e4218989c2a07e1b6d93b23fb4e166540aa553',
+    '585bb68f6e2a74b0946cdcb6ac5f1d08b90e629cf72f0687aaa401a175bb155e',
 }
 
 
@@ -74,6 +77,11 @@ def row_key(file_path, case_id, row):
     matcher = str(row.get('matcher', ''))
     negated = bool(row.get('negated', False))
     passed = bool(row.get('pass', True))
+    if (matcher == 'toEqual' and isinstance(row.get('expected'), dict)
+            and row['expected'].get('value') == 'ArrayContaining'
+            and isinstance(row.get('actual'), dict) and row['actual'].get('type') == 'array'):
+        # arrayContaining 只断言成员；并发提交顺序不是此 matcher 的观察结果。
+        return ('arrayContaining', tuple(sorted(value_key(item) for item in row['actual']['value'])))
     if is_random_task(file_path):
         category = matcher_class(matcher)
         expected = expected_value(row) if category in ('equal', 'gte', 'lte') else ''

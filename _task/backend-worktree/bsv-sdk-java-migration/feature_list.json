@@ -1563,11 +1563,23 @@
         "migration-api-transaction-model",
         "migration-api-transaction-evidence"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标提交 dfacef7（隔离提交 31ec814）；固定 TS 与 Java 53／53 原用例、162／162 条逐断言实际结果一致；两侧均无遗漏、额外断言或未比较项。",
+        "主目标整合后对照 .cache/evidence/transaction-verification-parity-main-20260926.json；固定 TS 的 verifier 随机输入使用 verifier-seeded-entropy.cjs 固定熵，原测试体和断言未变。"
+      ],
       "modules": [
         "transaction"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 53,
+        "assertionsCompared": 162,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/transaction-verification-parity-main-20260926.json"
+      }
     },
     {
       "id": "migration-impl-wallet-wire",
@@ -1835,11 +1847,23 @@
       "apiBatchRefs": [
         "migration-api-auth-sessions"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标提交 94d5bc0、异步存储修复 7c382f6；固定 TS 与 Java 85／85 原用例、160／160 条逐断言结果一致，另有两例延迟 Future 回归通过。",
+        "正式对照 .cache/evidence/auth-sessions-parity-main-7c382f6.json；主工程会话定向 87／87 通过。"
+      ],
       "modules": [
         "auth"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 85,
+        "assertionsCompared": 160,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/auth-sessions-parity-main-7c382f6.json"
+      }
     },
     {
       "id": "migration-impl-auth-transport",
@@ -2425,14 +2449,17 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "in-progress",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "api-map.json：九文件 177/177 项 reviewed；宿主 node audit-api.cjs batches --batch migration-api-keys-signatures 通过。",
+        ".cache/evidence/keys-final-20260926-133303/summary.json：固定 146/146 原用例、40242/40242 断言；TransactionSignature 另由 .cache/evidence/transaction-base-clean-parity.json（74/74、115/115）和 .cache/evidence/transaction-complete-clean-parity-9bcb650.json（745/745、1390/1390）覆盖。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
@@ -2573,14 +2600,17 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "api-map.json：Transaction 与费率八文件 126／126 项声明已复核；node audit-api.cjs batches --batch migration-api-transaction-model 通过。",
+        "Transaction.fromReader、updateMetadata、writeSerializedBEEF 的真实 Java 入口见目标提交 1289055；定向 API 测试与整合后 Maven 4781／4781 通过。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
@@ -2656,14 +2686,17 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "in-progress",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "api-map.json：18 文件 158/158 项 reviewed；宿主 node audit-api.cjs batches --batch migration-api-transaction-network 通过。",
+        ".cache/evidence/http-chain-final-20260926-140200/summary.json：HTTP/链服务固定 78/78 原用例、133/133 断言；.cache/evidence/broadcasters-task-parity-acd99a2.json：广播固定 68/68 原用例、169/169 断言。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
@@ -2719,14 +2752,17 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "api-map.json：BdkVerifierInterface、EvidenceScriptWork、ScriptVerificationBackend、TransactionEvidence、TransactionEvidenceCoordinator 五文件 176／176 项声明已复核；node audit-api.cjs batches --batch migration-api-transaction-evidence 通过。",
+        "目标提交 dfacef7；固定交易验证与证据 53／53 原用例、162／162 条逐断言结果一致，报告 .cache/evidence/transaction-verification-parity-main-20260926.json。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
@@ -2748,14 +2784,17 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "api-map.json：三文件 248/248 项 reviewed；宿主 node audit-api.cjs batches --batch migration-api-wallet-validation 通过。",
+        ".cache/evidence/wallet-contracts-clean-parity.json：含三文件原测试的六文件 253/253 原用例、1003/1003 断言，missing/uncompared/extra 均为 0。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
@@ -2777,14 +2816,17 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "api-map.json：三文件 75/75 项 reviewed；宿主 node audit-api.cjs batches --batch migration-api-wallet-keys 通过。",
+        ".cache/evidence/wallet-keys-clean-parity.json：固定六文件 71/71 原用例、162/162 断言，missing/uncompared/extra 均为 0。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
@@ -2916,14 +2958,17 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "api-map.json：Peer、SessionManager、类型、nonce 与导出七文件 101／101 项声明已复核；node audit-api.cjs batches --batch migration-api-auth-sessions 通过。",
+        "目标提交 94d5bc0、异步修复 7c382f6 与公开异步存储入口 3e58d02；固定原用例 85／85、160／160 条逐断言一致，报告 .cache/evidence/auth-sessions-parity-main-7c382f6.json。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
