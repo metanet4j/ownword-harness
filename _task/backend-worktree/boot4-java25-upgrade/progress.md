@@ -41,6 +41,8 @@ U2 BAP 变体子项提交 `20cb3f0`：远程身份只持有五类公开地址、
 
 U2 显式 BAP 子项提交 `b70f3b0`：六种构造入口、身份／密钥 getter、KeyBag 按哈希选择支付或 Ord 私钥、未知哈希错误均有断言；有效公钥返回 `null` 的缺陷先红后绿。SDK 隔离单元基线 71/0/0/0，LINE 886/1986、BRANCH 203/512、METHOD 242/455；`SpecifyBapBase` 与其 KeyBag 逐类无覆盖缺口，证据 `evidence/20260926T094519Z/`。
 
+U2 BAP 工厂与身份解密子项提交 `1e14af8`：各工厂构造相同根身份、高位签名路径、配置应用名、绝对路径密文解密均有断言；坏密文原先打印堆栈并返回 `null`，现抛有原因的异常，先红后绿。SDK 隔离单元基线 73/0/0/0，LINE 899/1984、BRANCH 203/510、METHOD 247/454；`BapBase` 自身 BRANCH 26/26、LINE 136/137，剩余 `encryptSelf()` 空桩语义待用户确认，证据 `evidence/20260926T095306Z/`。
+
 ## 仓库与工作区
 
 四子仓库沿用 `feature/java25`，不推送。parent JaCoCo 配置提交 `4112a48`，sdk 测试分类提交 `2577406`，component 测试分类提交 `de1f59f`。ownword 主仓既有 `AGENTS.md`、standard 规范及技能文件的无关改动保留，不纳入本任务提交。

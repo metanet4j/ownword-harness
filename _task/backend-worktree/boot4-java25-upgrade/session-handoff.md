@@ -38,8 +38,10 @@ U2 BAP 变体子项已提交 sdk `20cb3f0`。远程地址、默认／Panda 配�
 
 U2 显式 BAP 子项已提交 sdk `b70f3b0`。六种构造入口及 KeyBag 支付／Ord／公钥查找有断言；公钥查找返回 `null` 缺陷先红后绿。最新 SDK 隔离单元基线 71/0/0/0，LINE 886/1986、BRANCH 203/512、METHOD 242/455，证据 `evidence/20260926T094519Z/`；`SpecifyBapBase` 与其 KeyBag 逐类无缺口。
 
+U2 BAP 工厂与身份解密子项已提交 sdk `1e14af8`。工厂入口、配置应用名、绝对路径身份解密、坏密文异常有断言；吞异常返回 `null` 缺陷先红后绿。最新 SDK 隔离单元基线 73/0/0/0，LINE 899/1984、BRANCH 203/510、METHOD 247/454，证据 `evidence/20260926T095306Z/`；`BapBase` BRANCH 26/26、LINE 136/137，仅 `encryptSelf()` 空桩未覆盖。该 API 导出语义无设计依据，已向用户提出异步澄清，继续不依赖它的测试。
+
 ## 下一步
 
-U2 继续从 SDK BAP、交易、脚本公开 API 补单元测试。最新缺口按 `evidence/20260926T094519Z/metanet4j-sdk/metanet4j-sdk/unit/jacoco-unit/jacoco.xml` 排序：Sigma 194 行、BsocialDataLockBuilder 128 行、BobHelper 128 行等。每完成一个行为项提交；严格验收须逐类 LINE/BRANCH/METHOD 100%，完成后继续 U3。
+U2 继续从 SDK 交易、脚本公开 API 补单元测试。最新缺口按 `evidence/20260926T095306Z/metanet4j-sdk/metanet4j-sdk/unit/jacoco-unit/jacoco.xml` 排序：Sigma 194 行、BsocialDataLockBuilder 128 行、BobHelper 128 行等。每完成一个行为项提交；严格验收须逐类 LINE/BRANCH/METHOD 100%，完成后继续 U3。
 
 集成测试运行前核对 `infra/README-*.md` 连接参数、`docker logs`、应用日志和 Surefire XML，宿主提权运行。当前 `EsTest` 会删除固定索引、`DefaultCompleteTxFactory` 硬编码广播；未隔离前不运行这些历史实连用例。
