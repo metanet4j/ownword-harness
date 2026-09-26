@@ -1,9 +1,11 @@
-// 固定 BigNumber 算术原测试的真实公开入口及断言引用；不导出实际返回值作为重放输入。
+// 固定 BigNumber 原测试的真实公开入口及断言引用；不导出实际返回值作为重放输入。
 const fs = require('node:fs')
 const path = require('node:path')
 const output = process.env.MIGRATION_BN_ARITHMETIC_RAW
 if (!output) throw new Error('缺少 BigNumber arithmetic 原输入输出路径')
-const file = 'src/primitives/__tests/BigNumber.arithmatic.test.ts'
+const variant = process.env.MIGRATION_BN_VARIANT || 'arithmetic'
+if (!['arithmetic', 'binary'].includes(variant)) throw new Error('未知 BigNumber 固定测试变体')
+const file = `src/primitives/__tests/BigNumber.${variant === 'arithmetic' ? 'arithmatic' : 'binary'}.test.ts`
 const nativeExpect = global.expect
 const sdk = path.resolve(__dirname, '../../../reference/ts-stack/packages/sdk')
 const ts = require(require.resolve('typescript', { paths: [sdk] }))
@@ -26,7 +28,7 @@ let ids = new WeakMap(), nextId = 0
 const origins = new WeakMap()
 
 function source() {
-  const match = new Error().stack.match(/BigNumber\.arithmatic\.test\.ts:(\d+):(\d+)/)
+  const match = new Error().stack.match(/BigNumber\.(?:arithmatic|binary)\.test\.ts:(\d+):(\d+)/)
   if (!match) throw new Error('BigNumber arithmetic 调用缺少固定源码位置')
   return { file, line: Number(match[1]), column: Number(match[2]) }
 }
@@ -84,7 +86,9 @@ jest.doMock(modulePath, () => {
   for (const method of ['add', 'iadd', 'iaddn', 'addn', 'sub', 'isub', 'isubn', 'subn', 'mul',
     'imul', 'muln', 'imuln', 'pow', 'div', 'idivn', 'divRound', 'mod', 'umod', 'modrn',
     'abs', 'invm', 'gcd', 'egcd', 'ineg', 'neg', 'clone', 'sqr', 'isqr', 'ishln',
-    'isNeg', 'cmp', 'cmpn', 'toNumber', 'toString']) {
+    'isNeg', 'cmp', 'cmpn', 'toNumber', 'toString', 'shln', 'ushln', 'shrn', 'ushrn',
+    'bincn', 'imaskn', 'testn', 'bitLength', 'and', 'iand', 'or', 'ior', 'xor', 'ixor',
+    'setn', 'notn', 'iushln']) {
     const original = Original.prototype[method]
     jest.spyOn(Original.prototype, method).mockImplementation(function (...args) {
       return observe(method, this, args, () => Reflect.apply(original, this, args))
@@ -128,6 +132,7 @@ global.expect = Object.assign(function (actual) {
       let transform = null
       if (matcher !== 'toThrow' && !Object.is(actual, received.value)) {
         if (typeof received.value === 'number' && received.value.toString(16) === actual) transform = 'number.toString(16)'
+        else if (typeof received.value === 'boolean' && !received.value === actual) transform = 'boolean.not'
         else throw new Error('原断言实际值不是已记录 API 返回值')
       }
       emit({ kind: 'assertion', source: location, matcher, actualRef: received.ref, transform,
