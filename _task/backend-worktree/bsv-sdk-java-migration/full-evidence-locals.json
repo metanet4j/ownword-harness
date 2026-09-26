@@ -934,6 +934,24 @@
       "java_report": [
         ".cache/evidence/arc-additional-java-formal-20260927/surefire.xml"
       ]
+    },
+    {
+      "name": "react-native25",
+      "catalog": ".cache/evidence/react-native-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/react-native-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/react-native-plan-20260927/input-plan.json",
+      "ts_inputs": ".cache/evidence/react-native-ts-formal-v2-20260927/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/react-native-ts-formal-v2-20260927/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/react-native-ts-formal-v2-20260927/manifest.json",
+      "ts_report": [
+        ".cache/evidence/react-native-ts-formal-v2-20260927/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/react-native-java-formal-20260927/inputs.jsonl",
+      "java_assertions": ".cache/evidence/react-native-java-formal-20260927/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/react-native-java-formal-20260927/manifest.json",
+      "java_report": [
+        ".cache/evidence/react-native-java-formal-20260927/surefire.xml"
+      ]
     }
   ]
 }
