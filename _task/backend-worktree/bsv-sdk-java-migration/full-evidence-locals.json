@@ -496,6 +496,24 @@
       "java_report": [
         ".cache/evidence/utils-simple-java-20260927/TEST-com.metanet4j.bsv.primitives.UtilsTest.xml"
       ]
+    },
+    {
+      "name": "fee-model-satoshis-per-kilobyte",
+      "catalog": ".cache/evidence/fee-model-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/fee-model-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/fee-model-plan-20260927/input-plan.json",
+      "ts_inputs": ".cache/evidence/fee-model-formal-ts-20260927/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/fee-model-formal-ts-20260927/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/fee-model-formal-ts-20260927/manifest.json",
+      "ts_report": [
+        ".cache/evidence/fee-model-formal-ts-20260927/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/fee-model-formal-java-ae5d421-20260927/inputs.jsonl",
+      "java_assertions": ".cache/evidence/fee-model-formal-java-ae5d421-20260927/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/fee-model-formal-java-ae5d421-20260927/manifest.json",
+      "java_report": [
+        ".cache/evidence/fee-model-formal-java-ae5d421-20260927/surefire.xml"
+      ]
     }
   ]
 }
