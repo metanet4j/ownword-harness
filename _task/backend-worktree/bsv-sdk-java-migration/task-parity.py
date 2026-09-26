@@ -8,6 +8,7 @@
 import argparse
 import importlib.util
 import json
+import re
 import subprocess
 from collections import defaultdict
 from pathlib import Path
@@ -27,6 +28,23 @@ TIMING_CASES = {
     '7eaf894b954c8a61105fc2ce63e4218989c2a07e1b6d93b23fb4e166540aa553',
     '585bb68f6e2a74b0946cdcb6ac5f1d08b90e629cf72f0687aaa401a175bb155e',
 }
+AUTH_PAYMENT_ERROR_CASE = '61b4ecc5ca8e8e0e52d508368744a12c06c31d670ea752d08a5d880a62cf5f63'
+
+
+def payment_error_entry(row):
+    """只核验固定 AuthFetch 支付失败项中随运行变化的两个字段。"""
+    value = row.get('actual', {})
+    fields = value.get('value', {}) if value.get('type') == 'map' else {}
+    if set(fields) != {'attempt', 'timestamp', 'message', 'stack'}:
+        raise ValueError('AuthFetch 支付失败日志字段不完整')
+    timestamp, message, stack = (fields[name] for name in ('timestamp', 'message', 'stack'))
+    if any(item.get('type') != 'string' for item in (timestamp, message, stack)):
+        raise ValueError('AuthFetch 支付失败日志动态字段类型错误')
+    if not re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}Z', timestamp['value']):
+        raise ValueError('AuthFetch 支付失败日志时间戳格式错误')
+    if message['value'] not in stack['value'] or '\n' not in stack['value']:
+        raise ValueError('AuthFetch 支付失败日志堆栈未保留错误信息')
+    return ('auth-payment-error-entry', value_key(fields['attempt']), value_key(message))
 
 
 def value_key(value):
@@ -77,6 +95,9 @@ def row_key(file_path, case_id, row):
     matcher = str(row.get('matcher', ''))
     negated = bool(row.get('negated', False))
     passed = bool(row.get('pass', True))
+    if case_id == AUTH_PAYMENT_ERROR_CASE and matcher == 'toEqual' and isinstance(row.get('actual'), dict) \
+            and row['actual'].get('type') == 'map' and 'timestamp' in row['actual'].get('value', {}):
+        return (payment_error_entry(row), negated, passed)
     if (matcher == 'toEqual' and isinstance(row.get('expected'), dict)
             and row['expected'].get('value') == 'ArrayContaining'
             and isinstance(row.get('actual'), dict) and row['actual'].get('type') == 'array'):
@@ -208,6 +229,14 @@ def compare(task_id, ts_path, java_path, java_worktree=None):
     nondeterministic = []
     for case_id, test_file in sorted(case_file.items()):
         ts_sequence, java_sequence = ts_by_case.get(case_id, []), java_by_case.get(case_id, [])
+        if case_id == AUTH_PAYMENT_ERROR_CASE:
+            for sequence in (ts_sequence, java_sequence):
+                entries = [row for row in sequence if row.get('matcher') == 'toEqual'
+                           and isinstance(row.get('actual'), dict)
+                           and row['actual'].get('type') == 'map'
+                           and 'timestamp' in row['actual'].get('value', {})]
+                if len(entries) != 2:
+                    raise ValueError('AuthFetch 固定支付失败用例必须核验恰好两条动态日志')
         unmatched, matched, extra = align(test_file, case_id, ts_sequence, java_sequence)
         if not ts_sequence or not java_sequence:
             missing_cases += 1
@@ -220,7 +249,8 @@ def compare(task_id, ts_path, java_path, java_worktree=None):
             'missingAssertions': len(unmatched),
             'extraJavaAssertions': extra,
         }
-        if (is_random_task(test_file) or case_id in TIMING_CASES) and (ts_sequence or java_sequence):
+        if (is_random_task(test_file) or case_id in TIMING_CASES
+                or case_id == AUTH_PAYMENT_ERROR_CASE) and (ts_sequence or java_sequence):
             case['nondeterministic'] = True
             nondeterministic.append(case_id)
         if unmatched:
@@ -248,7 +278,7 @@ def compare(task_id, ts_path, java_path, java_worktree=None):
         'uncompared': total_missing,
         'extraJavaAssertions': total_extra,
         'nondeterministicCases': nondeterministic,
-        'nondeterministicPolicy': 'Random.* 随机字节用例比较 matcher/期望边界/pass；CachedKeyDeriver 性能用例比较耗时断言的阈值和实际是否满足，不比较跨运行时的毫秒数。',
+        'nondeterministicPolicy': 'Random.* 随机字节用例比较 matcher/期望边界/pass；CachedKeyDeriver 性能用例比较耗时断言的阈值和实际是否满足；固定 AuthFetch 支付失败用例仅对两条日志的 timestamp 核验 ISO 毫秒格式、stack 核验包含错误消息和换行，其余字段逐值比较。',
         'cases': cases,
     }
     if java_worktree is not None:

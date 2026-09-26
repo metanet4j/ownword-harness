@@ -1908,11 +1908,24 @@
       "apiBatchRefs": [
         "migration-api-auth-transport"
       ],
-      "evidence": [],
+      "evidence": [
+        "固定 TS Transport＋AuthFetch 183／183 原用例、968／968 实际断言在当前 Java 完整 clean test 轨迹下任务级对照通过；两条动态时间戳／堆栈按固定 case 的字段语义核验，见 .cache/evidence/java-full-after-auth-property-20260926/auth-transport-task-parity-replayed.json。",
+        "AuthFetch.property 固定 TS fast-check seed 20260926 的 300 组实际输入已封存于 fixtures/auth-fetch-property-20260926.jsonl（SHA-256 b0cf9d142fed85b2a9a82b85ac4b254ae6408da60ffa6457f98e757825818392）；Java 本轮逐样本消费 300／300、原断言 600／600 精确一致，shrink 调用 0。",
+        "主目标提交 c0d9fdd 的宿主完整 clean test：156 份 Surefire 报告、4916／4916 测试通过，失败／错误／跳过均 0；该任务排期状态仍等待上游依赖完成。"
+      ],
       "modules": [
         "auth"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 183,
+        "assertionsCompared": 968,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/java-full-after-auth-property-20260926/auth-transport-task-parity-replayed.json"
+      }
     },
     {
       "id": "migration-api-contract",
