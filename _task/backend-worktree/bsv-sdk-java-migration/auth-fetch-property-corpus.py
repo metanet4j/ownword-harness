@@ -63,7 +63,10 @@ def compare(args):
     consumed = records(args.java_inputs)
     if source != consumed or len(source) != 300:
         raise ValueError('Java 未按固定 TS 原输入逐轮消费 300 个样本')
-    ts, java = records(args.ts_assertions), records(args.java_assertions)
+    ts = [row for row in records(args.ts_assertions)
+          if row.get('file', '').endswith('AuthFetch.property.test.ts')]
+    java = [row for row in records(args.java_assertions)
+            if row.get('test') == 'com.metanet4j.bsv.auth.clients.AuthFetchPropertyTest#boundedResponseFieldsAlwaysSettleAndReleaseState']
     if len(ts) != len(java) or len(ts) != 600:
         raise ValueError('TS/Java 原断言数量不是 600/600')
     for index, (left, right) in enumerate(zip(ts, java), 1):
