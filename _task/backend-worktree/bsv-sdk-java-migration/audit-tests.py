@@ -2,6 +2,8 @@
 """整模块测试清点及证据核对；任何缺失、跳过或差异均返回非零。"""
 import argparse
 from collections import Counter
+from decimal import Decimal, InvalidOperation
+from datetime import datetime
 import hashlib
 import json
 from pathlib import Path
@@ -12,6 +14,64 @@ import tempfile
 import xml.etree.ElementTree as ET
 
 TASK = Path(__file__).resolve().parent
+SEMANTIC_UPSTREAM = 'f999e0c1aad9a7afd0cbadaaf23841d049af9d5a'
+AUTH_WAIT_FILE = 'src/auth/clients/__tests__/AuthFetch.additional.test.ts'
+CACHE_FILE = 'src/wallet/__tests/CachedKeyDeriver.test.ts'
+RANDOM_FILE = 'src/primitives/__tests/Random.test.ts'
+RANDOM_EXTRA_FILE = 'src/primitives/__tests/Random.additional.test.ts'
+RANDOM_SHA = '38884385f346d89216c2768d1e46f0e11d3d24e66adad88e8d78365ce6fcc156'
+RANDOM_EXTRA_SHA = 'd9011ae424d67daa5e148915ecdcd7374ef937a5d9c7d2e217e4901ef963d625'
+DRBG_FILE = 'src/primitives/__tests/DRBG.test.ts'
+DRBG_SHA = '8359f4f5fa218206c6be2ecff259a61d290ed989d14ca9d991d5fa4a53b312e9'
+DRBG_VECTORS = 'src/primitives/__tests/DRBG.vectors.ts'
+DRBG_VECTORS_SHA = 'be1f1971750f3e4ac99bff7a18dce3f3f39ec263d35431eb9c6c5e692fb921b4'
+DRBG_GUARD = DRBG_FILE + ':15:9:conditional'
+DRBG_THROW = DRBG_FILE + ':16:11:assertion'
+DRBG_UNEXECUTED = {DRBG_FILE + ':26:9:assertion', DRBG_FILE + ':27:9:assertion'}
+# 固定上游清点器的 ID 算法；仅登记这 15 个固定名称及 occurrence=1。
+DRBG_BRANCH_CASES = {hashlib.sha256(json.dumps([DRBG_FILE, ['DRBG', 'NIST vector compatibility',
+    f'handles NIST-style vector {index} consistently'], 1], separators=(',', ':')).encode()).hexdigest(): index
+    for index in range(15)}
+# 每项固定为：文件、源码摘要、站点 → (规则 ID、原 matcher、原边界、执行次数)。
+SEMANTIC_CASES = {
+    '61b4ecc5ca8e8e0e52d508368744a12c06c31d670ea752d08a5d880a62cf5f63':
+        ('src/auth/clients/__tests__/AuthFetch.test.ts',
+         '0312c9107dbd4acddab1cd282355090fad28dfe58b0f395b642641cca7654f0a',
+         {'293:11': ('auth-payment-log-v1', 'toEqual', 1, 1),
+          '299:11': ('auth-payment-log-v1', 'toEqual', 2, 1)}),
+    'c6ca731b61455ef1e4c19491a8afb0cee5758584cf6fc79d8009535634b7ccdf':
+        (RANDOM_FILE, RANDOM_SHA, {'6:5': ('random-length-v1', 'toHaveLength', 3, 1),
+                                  '7:5': ('random-length-v1', 'toHaveLength', 10, 1)}),
+    '61c17607ef11ee67bafe1096807885f72b10f33070c22870c32d2e3259c4505b':
+        (RANDOM_FILE, RANDOM_SHA, {'12:5': ('random-distinct-v1', 'not.toEqual', 32, 1)}),
+    '848124cde9210d75b0dba6c87bb690fceb48e80509981a2248de901d22e61ee6':
+        (RANDOM_FILE, RANDOM_SHA, {'17:7': ('random-byte-v1', 'toBeGreaterThanOrEqual', 0, 100),
+                                  '18:7': ('random-byte-v1', 'toBeLessThanOrEqual', 255, 100)}),
+    'd1c4c7c391647d93d40519c4065a74598d5a1c760b73eec665dcff78b3e92600':
+        (RANDOM_FILE, RANDOM_SHA, {str(line) + ':5': ('random-length-v1', 'toHaveLength', size, 1)
+                                  for line, size in ((22, 1), (23, 16), (24, 32), (25, 64), (26, 256))}),
+    'b00646e1f384f536e1a5d78b958072753e42b772c17ebd79e304900d3b3dcb19':
+        (RANDOM_EXTRA_FILE, RANDOM_EXTRA_SHA, {'62:7': ('random-length-v1', 'toHaveLength', 16, 1),
+              '64:9': ('random-byte-v1', 'toBeGreaterThanOrEqual', 0, 16),
+              '65:9': ('random-byte-v1', 'toBeLessThanOrEqual', 255, 16)}),
+    '68dadce6b69efc64e2c3ece1fc81baf3439ece6853b6c8341441748b4c6912ed':
+        (RANDOM_EXTRA_FILE, RANDOM_EXTRA_SHA, {'234:7': ('random-length-v1', 'toHaveLength', 8, 1),
+              '236:9': ('random-byte-v1', 'toBeGreaterThanOrEqual', 0, 8),
+              '237:9': ('random-byte-v1', 'toBeLessThanOrEqual', 255, 8)}),
+    '1ccb62346e2135618c6d5ef88233d2d0386fcb3a43d040dbc0c5063181afeddb':
+        (RANDOM_EXTRA_FILE, RANDOM_EXTRA_SHA, {str(line) + ':9': ('random-length-v1', 'toHaveLength', 4, 1)
+                                              for line in (269, 270, 271)}),
+    '7eaf894b954c8a61105fc2ce63e4218989c2a07e1b6d93b23fb4e166540aa553':
+        (AUTH_WAIT_FILE, '177e6ca599905a61274e400c0b85d8719526a2e09003ac207b0513a3fb60afc6',
+         {'822:5': ('timing-ms-v1', 'toBeLessThan', 50, 1)}),
+    '585bb68f6e2a74b0946cdcb6ac5f1d08b90e629cf72f0687aaa401a175bb155e':
+        (AUTH_WAIT_FILE, '177e6ca599905a61274e400c0b85d8719526a2e09003ac207b0513a3fb60afc6',
+         {'829:5': ('timing-ms-v1', 'toBeLessThan', 50, 1)}),
+    '8cafa389ea1819ec6268cd946171ee603bb27f4bdc4a0cab23277aaf37a1abd0':
+        (CACHE_FILE, '66fbf8f800232d906dae3fe83736bbaf4875f45e24ae1f5b9283439d4624d698',
+         {'405:7': ('timing-ms-v1', 'toBeGreaterThanOrEqual', 50, 1),
+          '406:7': ('timing-ms-v1', 'toBeLessThan', 10, 1)}),
+}
 
 
 def read(path):
@@ -64,6 +124,165 @@ def independent_captures(paths):
                     f'TS/Java 必须独立采集，不能使用同一物理文件：{ts} / {java}')
 
 
+def semantic_specs(case_id):
+    entry = SEMANTIC_CASES.get(case_id)
+    return {} if entry is None else {entry[0] + ':' + position + ':assertion': rule
+                                    for position, rule in entry[2].items()}
+
+
+def semantic_number(value):
+    require(isinstance(value, dict) and set(value) == {'type', 'value'} and value['type'] == 'number'
+            and isinstance(value['value'], str), '语义观测必须保留 number 类型和无损数值字符串')
+    require(bool(re.fullmatch(r'-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?', value['value'])),
+            '语义观测包含无效数值')
+    try:
+        result = Decimal(value['value'])
+    except InvalidOperation as error:
+        raise ValueError('语义观测包含无效数值') from error
+    require(result.is_finite(), '语义观测数值必须有限')
+    return result
+
+
+def semantic_bytes(value, length):
+    require(isinstance(value, dict) and set(value) == {'type', 'value'} and value['type'] == 'array'
+            and isinstance(value['value'], list) and len(value['value']) == length,
+            '随机源必须保留原始字节数组及固定长度，不能只上报长度或 pass')
+    numbers = [semantic_number(item) for item in value['value']]
+    require(all(byte == byte.to_integral_value() and 0 <= byte <= 255 for byte in numbers),
+            '随机源观测包含无效字节')
+    return numbers
+
+
+def semantic_payment_log(value, attempt):
+    actual = value['actual']
+    require(isinstance(actual, dict) and set(actual) == {'type', 'value'} and actual['type'] == 'map'
+            and isinstance(actual['value'], dict)
+            and set(actual['value']) == {'attempt', 'timestamp', 'message', 'stack'}, '支付失败日志字段不完整或越界')
+    fields = actual['value']
+    message = f'payment attempt {attempt} failed'
+    fixed = {'attempt': {'type': 'number', 'value': str(attempt)},
+             'message': {'type': 'string', 'value': message}}
+    require(canonical(value['expected']) == canonical({'type': 'map', 'value': fixed})
+            and canonical({key: fields[key] for key in fixed}) == canonical(fixed),
+            '支付失败日志的固定 attempt/message 或原始预期被修改')
+    for key in ('timestamp', 'stack'):
+        require(isinstance(fields[key], dict) and set(fields[key]) == {'type', 'value'}
+                and fields[key]['type'] == 'string' and isinstance(fields[key]['value'], str),
+                f'支付失败日志 {key} 必须保留原始字符串')
+    timestamp, stack = fields['timestamp']['value'], fields['stack']['value']
+    require(bool(re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}Z', timestamp)), '支付失败日志时间戳格式错误')
+    datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
+    frames = stack.splitlines()
+    require(len(frames) > 1 and frames[0].endswith(message) and any(frame.strip() for frame in frames[1:]),
+            '支付失败日志堆栈未保留错误消息及调用帧')
+
+
+def validate_semantic_observations(case_id, expected, rows):
+    specs = semantic_specs(case_id)
+    byte_sites = [site for site, spec in specs.items() if spec[0] == 'random-byte-v1']
+    if not byte_sites:
+        return
+    actual = {site: [semantic_number(row['value']['actual']) for row in rows
+                     if expected['assertionSites'][row['id']] == site] for site in byte_sites}
+    require(all(values == actual[byte_sites[0]] for values in actual.values()),
+            f'同一随机字节在不同边界断言中的原始观测不一致：{case_id}')
+    for row in rows:
+        spec = specs.get(expected['assertionSites'][row['id']])
+        if spec and spec[0] == 'random-length-v1':
+            require(semantic_bytes(row['value']['actual'], spec[2]) == actual[byte_sites[0]],
+                    f'随机源长度断言与逐字节断言不来自同一数组：{case_id}')
+
+
+def validate_branch_plan(catalog, case_id, source, expected):
+    exclusions = expected.get('unexecutedSites', {})
+    require(isinstance(exclusions, dict), f'未执行断言证明格式无效：{case_id}')
+    if case_id not in DRBG_BRANCH_CASES:
+        require(not exclusions, f'没有已核验的固定分支规则，不能豁免断言：{case_id}')
+        return set()
+    require(catalog['upstreamCommit'] == SEMANTIC_UPSTREAM and source['path'] == DRBG_FILE
+            and source.get('sha256') == DRBG_SHA
+            and catalog.get('moduleFiles', {}).get(DRBG_VECTORS) == DRBG_VECTORS_SHA,
+            f'分支规则与固定测试或向量来源不符：{case_id}')
+    same_keys(DRBG_UNEXECUTED, exclusions, f'DRBG 固定提前返回后的未执行站点 {case_id}')
+    require(DRBG_GUARD in {site['id'] for site in source['sites'] if site['kind'] == 'conditional'},
+            '固定分支证明缺少原条件站点')
+    require(list(expected['assertionSites'].values()) == [DRBG_THROW],
+            'DRBG 固定无效向量必须实际执行原异常断言，不能伪造其他断言')
+    sample_ids = set()
+    for proof in exclusions.values():
+        require(isinstance(proof, dict) and set(proof) == {'ruleId', 'guardSiteId', 'sampleId'}
+                and proof['ruleId'] == 'drbg-nist-invalid-input-v1' and proof['guardSiteId'] == DRBG_GUARD
+                and proof['sampleId'] in expected['sampleIds'], '未执行理由必须绑定固定规则、条件和实际样本')
+        sample_ids.add(proof['sampleId'])
+    require(len(sample_ids) == 1, '同一次提前返回须引用同一份分支观测')
+    return set(exclusions)
+
+
+def validate_branch_observations(case_id, expected, samples, rows):
+    if case_id not in DRBG_BRANCH_CASES:
+        return
+    config = read(TASK / 'workspace.json')['upstream']
+    fixture = TASK.parents[2] / config['path'] / config['packagePath'] / DRBG_VECTORS
+    require(digest(fixture) == DRBG_VECTORS_SHA, 'DRBG 固定向量文件发生变化')
+    vectors = re.findall(r"entropy: '([0-9a-f]+)',\s*nonce: '([0-9a-f]+)'", fixture.read_text())
+    require(len(vectors) == 15, 'DRBG 固定向量格式或数量发生变化')
+    entropy, nonce = vectors[DRBG_BRANCH_CASES[case_id]]
+    sample_id = next(iter(expected['unexecutedSites'].values()))['sampleId']
+    values = [sample['value'] for sample in samples if sample['sampleId'] == sample_id]
+    require(len(values) == 1, '未执行断言缺少唯一实际分支样本')
+    actual = values[0]
+    require(isinstance(actual, dict) and set(actual) == {'kind', 'guardSiteId', 'entropyHex', 'nonceHex', 'taken', 'controlFlow'}
+            and actual['kind'] == 'branch' and actual['guardSiteId'] == DRBG_GUARD
+            and actual['entropyHex'] == entropy and actual['nonceHex'] == nonce,
+            '未执行断言的实际输入不对应固定向量，不能捏造分支理由')
+    predicate = len(bytes.fromhex(actual['entropyHex'])) != 32 or len(bytes.fromhex(actual['nonceHex'])) != 32
+    require(predicate and actual['taken'] is True and actual['controlFlow'] == 'return',
+            '原条件没有证明提前返回，不能删除后续断言')
+    require(len(rows) == 1 and expected['assertionSites'][rows[0]['id']] == DRBG_THROW,
+            '固定分支缺少实际异常断言')
+    observation = rows[0]['value']
+    require(isinstance(observation, dict) and observation.get('kind') == 'assertion'
+            and observation.get('matcher') == 'toThrow' and observation.get('negated') is False
+            and observation.get('pass', True) is True and observation.get('expected') == {'type': 'undefined'},
+            '固定分支必须保留原 toThrow 观察，pass 不能代替执行')
+    thrown = observation.get('actual')
+    require(isinstance(thrown, dict) and thrown.get('kind') == 'throw'
+            and isinstance(thrown.get('name'), str) and bool(thrown['name'])
+            and isinstance(thrown.get('message'), str), '固定分支未观察到实际异常')
+
+
+def compare_actuals(case_id, expected, identity, left, right):
+    rule = semantic_specs(case_id).get(expected['assertionSites'][identity]) if expected else None
+    if rule is None:
+        require(canonical(left) == canonical(right), f'实际结果不一致：{case_id} / {identity}')
+        return
+    rule_id, matcher, boundary, _ = rule
+    for value in (left, right):
+        require(isinstance(value, dict) and value.get('kind') == 'assertion'
+                and value.get('matcher') == matcher and value.get('negated') is matcher.startswith('not.')
+                and value.get('pass', True) is True and 'actual' in value and 'expected' in value,
+                f'有界语义缺少原 matcher、实际观测或预期；pass 标记不能代替断言：{identity}')
+        if rule_id == 'timing-ms-v1':
+            actual, bound = semantic_number(value['actual']), semantic_number(value['expected'])
+            require(bound == boundary and actual >= 0, f'耗时断言的固定边界或实际值无效：{identity}')
+            valid = actual < bound if matcher == 'toBeLessThan' else actual >= bound
+            require(valid, f'实际耗时不满足固定原断言：{identity}')
+        elif rule_id == 'random-length-v1':
+            require(semantic_number(value['expected']) == boundary, f'随机长度预期被修改：{identity}')
+            semantic_bytes(value['actual'], boundary)
+        elif rule_id == 'random-distinct-v1':
+            require(semantic_bytes(value['actual'], boundary) != semantic_bytes(value['expected'], boundary),
+                    f'两次随机调用实际字节相同：{identity}')
+        elif rule_id == 'random-byte-v1':
+            actual = semantic_number(value['actual'])
+            require(semantic_number(value['expected']) == boundary and actual == actual.to_integral_value()
+                    and 0 <= actual <= 255, f'随机字节实际值或固定边界无效：{identity}')
+        elif rule_id == 'auth-payment-log-v1':
+            semantic_payment_log(value, boundary)
+        else:
+            raise ValueError(f'未实现的固定语义规则：{rule_id}')
+
+
 def validate_plan(catalog, mapping, plan):
     cases = {case['id']: file for file in catalog['files'] for case in file['cases']}
     mapped = {case['id']: case for case in mapping['cases']}
@@ -85,6 +304,21 @@ def validate_plan(catalog, mapping, plan):
         file_sites = {site['id'] for site in cases[case_id]['sites'] if site['kind'] == 'assertion'}
         require(all(isinstance(site, str) and site in file_sites for site in sites.values()),
                 f'计划断言必须关联本文件的冻结断言站点：{case_id}')
+        rules = expected.get('comparisonRules', {})
+        require(isinstance(rules, dict) and set(rules) <= set(assertions), f'语义规则引用未知断言实例：{case_id}')
+        fixed_rules = semantic_specs(case_id)
+        if fixed_rules:
+            source, source_sha, _ = SEMANTIC_CASES[case_id]
+            require(catalog['upstreamCommit'] == SEMANTIC_UPSTREAM and cases[case_id]['path'] == source
+                    and cases[case_id].get('sha256') == source_sha,
+                    f'语义规则与固定上游源码不符：{case_id}')
+        for identity in assertions:
+            rule = fixed_rules.get(sites[identity])
+            require(rules.get(identity) == (rule[0] if rule else None),
+                    f'断言缺少固定语义规则或试图扩大适用范围：{case_id} / {identity}')
+        counts = Counter(sites.values())
+        for site, rule in fixed_rules.items():
+            require(counts[site] == rule[3], f'固定语义断言执行次数不符：{case_id} / {site}')
         mapped_sites = []
         for identity in mapped[case_id]['assertionIds']:
             require(identity in file_sites or identity in sites,
@@ -93,6 +327,7 @@ def validate_plan(catalog, mapping, plan):
         require(list(dict.fromkeys(sites[identity] for identity in assertions)) == list(dict.fromkeys(mapped_sites)),
                 f'映射断言站点与独立计划的执行顺序不符：{case_id}')
         covered_sites.update(sites.values())
+        covered_sites.update(validate_branch_plan(catalog, case_id, cases[case_id], expected))
         loops = expected.get('loopSamples', {})
         require(isinstance(loops, dict), f'循环样本计划无效：{case_id}')
         file_loops = {site['id'] for site in cases[case_id]['sites'] if site['kind'] == 'loop'}
@@ -319,12 +554,19 @@ def compare(args):
                         f'{side} 汇总断言与原始采集不同：{key}')
         for identity in ts:
             # JSON 类型必须保留，不能把 true 当作数值 1，或丢掉字节前导零。
-            left = json.dumps(ts[identity]['value'], sort_keys=True, ensure_ascii=False, allow_nan=False)
-            right = json.dumps(java[identity]['value'], sort_keys=True, ensure_ascii=False, allow_nan=False)
-            require(left == right, f'实际结果不一致：{key} / {identity}')
+            compare_actuals(key, plan[key] if capture_paths['inputPlan'] else None,
+                           identity, ts[identity]['value'], java[identity]['value'])
             assertion_count += 1
+        if capture_paths['inputPlan']:
+            validate_semantic_observations(key, plan[key], observation['ts'])
+            validate_semantic_observations(key, plan[key], observation['java'])
+            for side, label in (('ts', 'TS'), ('java', 'Java')):
+                validate_branch_observations(key, plan[key], observation['inputSamples'][label], observation[side])
     return {'files': len(files), 'cases': len(cases), 'javaCases': len(java_owners),
-            'comparedAssertions': assertion_count, 'formalAcceptance': getattr(args, 'command', 'compare') == 'check'}
+            'comparedAssertions': assertion_count,
+            'justifiedUnexecutedAssertions': sum(len(case.get('unexecutedSites', {})) for case in plan.values())
+                if capture_paths['inputPlan'] else 0,
+            'formalAcceptance': getattr(args, 'command', 'compare') == 'check'}
 
 
 def collect():

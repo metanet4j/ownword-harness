@@ -113,8 +113,10 @@ def build(args):
                 fail(f'{label} 断言缺少实际值：{case_id}')
             results[label] = [{'id': row['assertionId'], 'value': row['value']} for row in rows]
         for left, right in zip(results['TS'], results['Java']):
-            if canonical(left['value']) != canonical(right['value']):
-                fail(f'实际结果不一致：{case_id} / {left["id"]}')
+            audit.compare_actuals(case_id, plan[case_id], left['id'], left['value'], right['value'])
+        for side in ('TS', 'Java'):
+            audit.validate_semantic_observations(case_id, plan[case_id], results[side])
+            audit.validate_branch_observations(case_id, plan[case_id], inputs[side], results[side])
         output.append({'id': case_id, 'inputSha256': ts_hash, 'tsInputSha256': ts_hash,
                        'javaInputSha256': java_hash, 'inputSamples': inputs,
                        'ts': results['TS'], 'java': results['Java']})
