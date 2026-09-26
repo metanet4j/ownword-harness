@@ -1,0 +1,204 @@
+{
+  "b48b53672f8f0ed3ebd899a82832de3bc581504e72cfeac572124d861ddeb385": {
+    "sampleIds": [
+      "random-0",
+      "random-1",
+      "random-2",
+      "random-3",
+      "random-4",
+      "random-5",
+      "random-6",
+      "random-7",
+      "random-8",
+      "random-9",
+      "random-10",
+      "random-11",
+      "constructor-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:64:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:65:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:66:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:67:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:68:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:69:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:70:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:71:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:64:7:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:64:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:65:7:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:65:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:66:7:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:66:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:67:7:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:67:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:68:7:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:68:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:69:7:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:69:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:70:7:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:70:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:71:7:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:71:7:assertion"
+    }
+  },
+  "6c595c672ed00e550169ffc31b7a748931e728b345b07290752bbf45c67f1668": {
+    "sampleIds": [
+      "random-0",
+      "random-1",
+      "random-2",
+      "random-3",
+      "random-4",
+      "random-5",
+      "random-6",
+      "random-7",
+      "random-8",
+      "random-9",
+      "random-10",
+      "random-11",
+      "constructor-0",
+      "decrypt-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:78:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:78:7:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:78:7:assertion"
+    }
+  },
+  "ffa0cd31bf3196a285b20b0f7224b019f968ae949bdb39b5262c241bdfb3b108": {
+    "sampleIds": [
+      "random-0",
+      "random-1",
+      "random-2",
+      "random-3",
+      "random-4",
+      "random-5",
+      "random-6",
+      "random-7",
+      "random-8",
+      "random-9",
+      "random-10",
+      "random-11",
+      "constructor-0",
+      "decrypt-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:82:13:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:82:13:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:82:13:assertion"
+    }
+  },
+  "e01bc963dc5b0ac6a487c5ee7adf38407cd8216b4fd76a3c65fa0b756aa2bc55": {
+    "sampleIds": [
+      "random-0",
+      "random-1",
+      "random-2",
+      "random-3",
+      "random-4",
+      "random-5",
+      "random-6",
+      "random-7",
+      "random-8",
+      "random-9",
+      "random-10",
+      "random-11",
+      "constructor-0",
+      "constructor-1",
+      "decrypt-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:101:13:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:101:13:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:101:13:assertion"
+    }
+  },
+  "ad01265b4bb62b07bd6163f3287bd37323a7f46f28a12a6029e4f266cd23eea2": {
+    "sampleIds": [
+      "random-0",
+      "random-1",
+      "random-2",
+      "random-3",
+      "random-4",
+      "random-5",
+      "random-6",
+      "random-7",
+      "random-8",
+      "random-9",
+      "random-10",
+      "random-11",
+      "constructor-0",
+      "decrypt-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:109:13:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:109:13:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:109:13:assertion"
+    }
+  },
+  "9e098e9d7cda799e770c4563c5564ed717dcb4db75d0996a63c8171a8977c7d0": {
+    "sampleIds": [
+      "random-0",
+      "random-1",
+      "random-2",
+      "random-3",
+      "random-4",
+      "random-5",
+      "random-6",
+      "random-7",
+      "random-8",
+      "random-9",
+      "random-10",
+      "random-11",
+      "constructor-0",
+      "random-12",
+      "random-13",
+      "random-14",
+      "random-15",
+      "random-16",
+      "random-17",
+      "random-18",
+      "random-19",
+      "random-20",
+      "random-21",
+      "random-22",
+      "random-23",
+      "constructor-1",
+      "decrypt-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:139:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:139:7:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:139:7:assertion"
+    }
+  },
+  "96b539a0963ab9d68cdb4117c0962e3c7c912fd682f004816bfa8edc175905b2": {
+    "sampleIds": [
+      "random-0",
+      "random-1",
+      "random-2",
+      "random-3",
+      "random-4",
+      "random-5",
+      "random-6",
+      "random-7",
+      "random-8",
+      "random-9",
+      "random-10",
+      "random-11",
+      "constructor-0",
+      "fromCertificate-0",
+      "decrypt-0"
+    ],
+    "assertionIds": [
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:157:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:158:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:159:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:162:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:157:7:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:157:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:158:7:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:158:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:159:7:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:159:7:assertion",
+      "src/auth/certificates/__tests/VerifiableCertificate.test.ts:162:7:assertion": "src/auth/certificates/__tests/VerifiableCertificate.test.ts:162:7:assertion"
+    }
+  }
+}
