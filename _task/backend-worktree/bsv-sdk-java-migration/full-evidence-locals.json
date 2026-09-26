@@ -952,6 +952,24 @@
       "java_report": [
         ".cache/evidence/react-native-java-formal-20260927/surefire.xml"
       ]
+    },
+    {
+      "name": "origin-header5",
+      "catalog": ".cache/evidence/origin-header-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/origin-header-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/origin-header-plan-20260927/input-plan.json",
+      "ts_inputs": ".cache/evidence/origin-header-ts-formal-20260927/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/origin-header-ts-formal-20260927/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/origin-header-ts-formal-20260927/manifest.json",
+      "ts_report": [
+        ".cache/evidence/origin-header-ts-formal-20260927/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/origin-header-java-formal-20260927/inputs.jsonl",
+      "java_assertions": ".cache/evidence/origin-header-java-formal-20260927/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/origin-header-java-formal-20260927/manifest.json",
+      "java_report": [
+        ".cache/evidence/origin-header-java-formal-20260927/surefire.xml"
+      ]
     }
   ]
 }
