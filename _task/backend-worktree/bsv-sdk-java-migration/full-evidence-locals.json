@@ -99,6 +99,12 @@
       "captureKind": "specialized-local"
     },
     {
+      "name": "auth-master-certificate-remaining",
+      "deriveCatalogFromPlan": true,
+      "input_plan": "auth-certificate-master-remaining-plan.json",
+      "captureKind": "specialized-local"
+    },
+    {
       "name": "auth-get-verifiable-certificates",
       "deriveCatalogFromPlan": true,
       "input_plan": "auth-certificate-get-verifiable-plan.json",
