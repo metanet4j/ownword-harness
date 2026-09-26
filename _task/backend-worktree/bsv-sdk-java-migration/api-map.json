@@ -35490,12 +35490,12 @@
         "src/wallet/substrates/XDM.ts:38",
         "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/XDMSubstrate.java:15"
       ],
-      "note": "窗口宿主类。"
+      "note": "窗口宿主类；typed 钱包参数在发帧前转为省略未赋值字段的对象。固定 TS 原测试给 internalizeAction.tx 传字符串时，由 Java 的 internalizeAction(Map<String, Object>) 重载原样送入 invoke；原 typed 重载保留。"
     },
     {
       "id": "src/wallet/substrates/XDM.ts#constructor:XDMSubstrate.constructor:1",
       "java": "com.metanet4j.bsv.wallet.substrates.XDMSubstrate#constructor",
-      "javaSignature": "public XDMSubstrate(String domain)",
+      "javaSignature": "public XDMSubstrate(); public XDMSubstrate(String domain)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
       "review": "reviewed",
       "evidence": [
