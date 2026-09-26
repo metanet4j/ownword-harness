@@ -313,7 +313,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "451db1d70955bb90070765f674a9161050ee21fd",
+      "head": "20cb3f0278181c65c81c812fa2680e8a896be62f",
       "modules": [
         {
           "path": ".",
@@ -830,6 +830,31 @@
                 }
               ],
               "classificationReason": "BAP KeyBag 的签名、支付与 Ord 密钥查找，未知哈希和公钥查找；纯本地计算"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapVariantContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "remoteIdentityUsesPublicAddressesAndHasNoPrivateKeys",
+                  "returnType": "void",
+                  "line": 19,
+                  "classification": "unit"
+                },
+                {
+                  "name": "builtInConfigurationsExposeStablePaths",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "unit"
+                },
+                {
+                  "name": "taggedDerivationMatchesFixedVectorAndCommandOutput",
+                  "returnType": "void",
+                  "line": 73,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "远程 BAP 公共地址与无私钥契约、内置路径配置、独立固定 tagged derivation 向量；纯本地计算"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/WordsvBapBaseTest.java",

@@ -311,9 +311,11 @@
         "sdk 提交 12f2c70（BAP KeyBag 查找签名、支付、Ord 及公钥；公钥查找返回 null 缺陷先红后绿）",
         "SDK 隔离单元基线 evidence/20260926T092920Z/：65/0/0/0，LINE 789/1985；BapProviderKeyBag 逐类行/分支/方法无缺口",
         "sdk 提交 451db1d（BAP 签名路径按无符号 hex 块解析；高位块 NumberFormatException 先红后绿）",
-        "SDK 隔离单元基线 evidence/20260926T093336Z/：66/0/0/0，LINE 798/1985、BRANCH 199/512、METHOD 197/455"
+        "SDK 隔离单元基线 evidence/20260926T093336Z/：66/0/0/0，LINE 798/1985、BRANCH 199/512、METHOD 197/455",
+        "sdk 提交 20cb3f0（远程 BAP 公共地址、内置路径、Panda 应用名及 tagged derivation 固定向量）",
+        "SDK 隔离单元基线 evidence/20260926T094111Z/：69/0/0/0，LINE 846/1986；BapBaseAbstract、RemoteBapBase、PandaBapBase、两套配置逐类无缺口；TaggedDerivation 隐式构造器仍未覆盖"
       ],
-      "statusNote": "HTTP、字节/哈希、WIF/地址、ECIES/AES、主密钥、脚本模型、Sigma 核心及 BAP 默认 API／密钥轮换／KeyBag／路径子项已完成（SDK 至 451db1d）；本地 HTTP 集成 5/0/0/0，SDK 单元 66/0/0/0，LINE 798/1985、BRANCH 199/512、METHOD 197/455；交易、BAP 等其余 SDK 行为待补。"
+      "statusNote": "HTTP、字节/哈希、WIF/地址、ECIES/AES、主密钥、脚本模型、Sigma 核心及 BAP 默认 API／密钥轮换／KeyBag／路径／变体子项已完成（SDK 至 20cb3f0）；本地 HTTP 集成 5/0/0/0，SDK 单元 69/0/0/0，LINE 846/1986、BRANCH 199/512、METHOD 225/455；交易、BAP 等其余 SDK 行为待补。"
     },
     {
       "id": "unit-u3-foundation",
