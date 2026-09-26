@@ -520,6 +520,24 @@
       "java_report": [
         ".cache/evidence/fee-model-formal-java-ae5d421-20260927/surefire.xml"
       ]
+    },
+    {
+      "name": "transaction-chain-tracker",
+      "catalog": ".cache/evidence/chain-tracker-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/chain-tracker-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/chain-tracker-plan-20260927/input-plan.json",
+      "ts_inputs": ".cache/evidence/chain-tracker-formal-ts-20260927/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/chain-tracker-formal-ts-20260927/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/chain-tracker-formal-ts-20260927/manifest.json",
+      "ts_report": [
+        ".cache/evidence/chain-tracker-formal-ts-20260927/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/chain-tracker-formal-java-8f6bcfb-20260927/inputs.jsonl",
+      "java_assertions": ".cache/evidence/chain-tracker-formal-java-8f6bcfb-20260927/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/chain-tracker-formal-java-8f6bcfb-20260927/manifest.json",
+      "java_report": [
+        ".cache/evidence/chain-tracker-formal-java-8f6bcfb-20260927/surefire.xml"
+      ]
     }
   ]
 }
