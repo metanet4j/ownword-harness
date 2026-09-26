@@ -16,6 +16,9 @@
       "src/auth/utils/__tests/validateCertificates.test.ts:81:5:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:81:5:assertion",
       "src/auth/utils/__tests/validateCertificates.test.ts:84:5:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:84:5:assertion",
       "src/auth/utils/__tests/validateCertificates.test.ts:85:5:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:85:5:assertion"
+    },
+    "comparisonRules": {
+      "src/auth/utils/__tests/validateCertificates.test.ts:77:11:assertion": "void-completion-null-adapter-v1"
     }
   },
   "8f2b06fb4bac7d2fa27c954289f66801fb2040eea34809930de969d622eac12a": {
@@ -79,6 +82,9 @@
       "src/auth/utils/__tests/validateCertificates.test.ts:129:11:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:129:11:assertion",
       "src/auth/utils/__tests/validateCertificates.test.ts:133:7:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:133:7:assertion"
     },
+    "comparisonRules": {
+      "src/auth/utils/__tests/validateCertificates.test.ts:129:11:assertion": "void-completion-null-adapter-v1"
+    },
     "loopSamples": {
       "src/auth/utils/__tests/validateCertificates.test.ts:132:5:loop": [
         "decrypt-0"
@@ -119,6 +125,9 @@
       "src/auth/utils/__tests/validateCertificates.test.ts:162:5:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:162:5:assertion",
       "src/auth/utils/__tests/validateCertificates.test.ts:164:7:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:164:7:assertion",
       "src/auth/utils/__tests/validateCertificates.test.ts:164:7:assertion#2": "src/auth/utils/__tests/validateCertificates.test.ts:164:7:assertion"
+    },
+    "comparisonRules": {
+      "src/auth/utils/__tests/validateCertificates.test.ts:157:11:assertion": "void-completion-null-adapter-v1"
     },
     "loopSamples": {
       "src/auth/utils/__tests/validateCertificates.test.ts:163:5:loop": [
