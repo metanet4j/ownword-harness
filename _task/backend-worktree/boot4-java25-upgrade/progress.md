@@ -1,33 +1,22 @@
 # progress.md — boot4-java25-upgrade 进度
 
-本文件只记录当前状态；单元与集成测试的范围、模块清单和验收标准见 [测试计划](doc/单元测试全覆盖计划-20260920-090603.md)。阶段状态见 `feature_list.json`。
+本文件只记录当前状态；范围和验收标准见[测试计划](doc/单元测试全覆盖计划-20260920-090603.md)，逐模块状态见 `feature_list.json`。
 
-## Current State（当前状态）
+## 当前状态
 
-- **Last Updated**：2026-09-26。
-- **Current Objective**：为四个子仓库建立完整的单元测试、集成测试和逐模块覆盖率证据。
-- **Active Item**：`unit-u0-baseline`。用户已明确要求实施 U0—U9；目前在梳理测试接口、现有用例分类与资源隔离，尚未编写新测试。
-- **Recommended Next Step**：公开接口边界确认后，完成 U0 清单、JaCoCo 配置、统一验收入口和基线。
-- **本轮验证**：`./init.sh` 退出 0；宿主环境 `infra/status.sh` 确认五服务 healthy、端口可达。base 使用 JDK 25、Maven 3.9.16 执行 `-Punit-coverage clean test jacoco:report`，2/0/0/0；JaCoCo 行 35/225、分支 6/78、方法 6/55。`jacoco:check` 如预期返回 1。其余模块尚未重新测试。
+- **更新时间**：2026-09-26。
+- **当前目标**：为四个子仓库建立完整单元测试、集成测试与逐模块覆盖率证据。
+- **当前阶段**：`unit-u1-base` 正在实施；U0 基线已完成，U2—U9 待实施。用户已确认测试通过公开入口执行，HTTP 和文件协议使用本地模拟，自动测试不广播主网交易。
+- **下一步**：按 JaCoCo 实测缺口为 base 的 AIP/BAP、枚举、DTO、Jackson 工具补有行为断言的单元测试，逐步运行严格验收入口。
 
-## 当前证据
+## 当前证据与缺口
 
-静态规模、逐模块测试文件数量、旧测试报告与已识别缺口统一记录在 [测试计划 §2、§5](doc/单元测试全覆盖计划-20260920-090603.md)，本文件不重复维护。
+U0 报告见[四仓测试基线](doc/测试基线与障碍-20260926-145423.md)。`unit-test-inventory.json` 覆盖 25 POM、369 个生产 Java 文件、52 个测试文件，已完成安全分类，并列出 19 项集成边界、隔离及观测方式。`verify-unit.py` 会核对源码清单、Surefire XML、JaCoCo 执行文件与 XML、覆盖率和历史外部测试去向。
 
-`unit-test-inventory.json` 已列入 25 个 POM、369 个生产 Java 文件与 52 个测试文件；目前只有 parent/base 分类复核完成。parent JaCoCo 配置已提交为 `4112a48`。统一入口端到端运行的 base 原始日志、Surefire XML、JaCoCo 报告与执行文件保存在本地 `evidence/20260926T061230Z/`；五种临时证据反例保存在 `evidence/20260926-u0-pilot/`，均返回 1。其余模块分类完成后再进入自动基线。
+宿主全仓 Maven 基线的四个 reactor 都退出 0，测试账目为 56 通过、8 跳过；统一基线及严格入口因真实缺口退出 1。17 个可执行 component 模块零单元测试，`component-core` 仅有接口，按 N/A 处理。base 当前为行 35/225、分支 6/78、方法 6/55；sdk 为行 307/1990、分支 24/505、方法 91/454。原始证据在本地 `evidence/20260926T064228Z/`，五类门禁反例在 `evidence/20260926-u0-pilot/`。宿主 `infra/status.sh` 已确认 MongoDB、ES、Kafka、Redis、MySQL 五服务健康。
 
-旧报告的 `component-file` 为 tests=8、skipped=8，实际通过为 0；此前文档写成“8 通过”不准确。`BitailsProviderTest` 未标记公网依赖，`EsTest#recreateIndex` 会删除固定索引；必须先分类和隔离。`init.sh --full` 未排除外部测试，不能作为新验收入口。
+现有 `EsTest` 会删除固定索引，不能直接运行集成组；文件模块 8 个历史用例全被禁用；交易完成入口直接调用 Bitails 主网广播。修复和替代测试去向见 U0 报告及 `unit-test-inventory.json`。集成测试须在宿主提权执行，并在运行前确认连接、日志与自有资源清理。
 
-## 已完成的升级基线
+## 仓库与工作区
 
-原 Boot 4 / Java 25 升级及交付后修复已经完成，范围与证据见 [升级计划](doc/升级计划-Boot4-Java25.md)、[升级验收报告](doc/验收报告-Boot4-Java25-20260916-1320.md) 和 `feature_list.json` 的原阶段记录。历史升级验收不代表新增单元测试目标已完成。
-
-四子仓库继续使用 `feature/java25`；当前尚未修改其代码、POM、测试或分支，也未推送。
-
-## 评审结论与未满足的完成条件
-
-U0 正在实施，U1—U9 尚未开始；尚未得到当前覆盖率、完整单元和集成执行结果及最终验收报告。集成测试必须提权在宿主环境执行，先核对连接配置、容器与应用日志、Surefire XML，使用独立资源并清理；自动测试不得向主网广播。
-
-## 既有无关改动
-
-ownword 主仓已有 `AGENTS.md`、三份 standard 规范的修改，以及 caveman、writing-clearly-and-concisely 技能文件的删除。本轮保留，不纳入测试计划提交。
+四个子仓库沿用 `feature/java25`，不推送。parent 的 U0 JaCoCo 配置已提交为 `4112a48`；sdk `2577406` 与 component `de1f59f` 已提交测试分类。ownword 主仓既有 `AGENTS.md`、standard 规范和技能文件的无关改动均保留，不纳入本任务提交。

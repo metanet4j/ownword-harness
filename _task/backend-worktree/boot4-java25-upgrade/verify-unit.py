@@ -42,6 +42,9 @@ def inventory():
             listed_tests = {item["path"] for item in module["testSources"]}
             if actual_tests != listed_tests:
                 raise ValueError(f"{module['artifactId']} 测试源码清单不一致")
+            if module.get("noExecutableReason") and (module["testSources"] or any(
+                    item["kind"] not in ("interface", "@interface") for item in module["production"])):
+                raise ValueError(f"{module['artifactId']} 无可执行代码标记与源码清单冲突")
     return repos
 
 
@@ -128,6 +131,8 @@ def inspect(module, output, strict):
             elif metadata.get("head") != subprocess.check_output(
                     ["git", "-C", str(ROOT / repo_name), "rev-parse", "HEAD"], text=True).strip():
                 problems.append("证据与当前提交不一致")
+    if module.get("noExecutableReason"):
+        return {key: 0 for key in ("tests", "failures", "errors", "skipped")}, {}, problems
     reports = sorted((output / "surefire-reports").glob("TEST-*.xml"))
     if not reports:
         problems.append("缺少 Surefire XML")
@@ -146,15 +151,21 @@ def inspect(module, output, strict):
     if strict and counts["skipped"]:
         problems.append(f"跳过 {counts['skipped']} 个用例")
     for source in module["testSources"]:
-        if source["classification"] not in ("unit", "mixed"):
-            continue
         class_name = source["path"].split("src/test/java/", 1)[-1].removesuffix(".java").replace("/", ".")
+        if strict and source["classification"] == "invalid-test-signature":
+            problems.append(f"测试签名无效：{class_name}")
+        if strict and source["classification"] == "disabled":
+            problems.append(f"测试被禁用：{class_name}")
         for method in source["methods"]:
-            if method["classification"] != "unit":
-                continue
-            if not any(c == class_name and (n == method["name"] or n.startswith(method["name"] + "("))
-                       for c, n in discovered if c and n):
+            found = any(c == class_name and (n == method["name"] or n.startswith(method["name"] + "("))
+                        for c, n in discovered if c and n)
+            if method["classification"] == "unit" and not found:
                 problems.append(f"用例未发现：{class_name}#{method['name']}")
+            if method["classification"] in ("integration", "external", "disabled") and found:
+                problems.append(f"非单元用例混入：{class_name}#{method['name']}")
+            if strict and method["classification"] == "external" and not (
+                    method.get("replacementTests") or method.get("manualReason")):
+                problems.append(f"外部用例未映射去向：{class_name}#{method['name']}")
     if not (output / "jacoco-unit.exec").is_file():
         problems.append("缺少 JaCoCo 执行数据")
     report = output / "jacoco-unit/jacoco.xml"

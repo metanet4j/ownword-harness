@@ -7,8 +7,8 @@
     "blocked",
     "done"
   ],
-  "activeItem": "unit-u0-baseline",
-  "note": "原 Boot 4 / Java 25 升级及交付后修复均已完成。用户现已明确要求四仓库完整单元测试和集成测试，U0 正在实施。新增测试范围与验收以 testPlanDoc 为准，评审依据见 reviewDoc。",
+  "activeItem": "unit-u1-base",
+  "note": "原 Boot 4 / Java 25 升级和 U0 测试基线已完成；用户已确认公共接口与本地模拟边界。U1 正在补 base 单元测试，U2—U9 待实施。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -251,29 +251,30 @@
       "id": "unit-u0-baseline",
       "name": "U0 单元与集成测试基线及公共配置",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "unit-plan-review"
       ],
       "evidence": [
-        "2026-09-26：用户明确要求实施全部四仓库单元与集成测试；测试边界确认请求已发出，尚未编写测试。",
-        "./init.sh 退出 0；宿主 infra/status.sh 确认五服务 healthy、端口可达。",
-        "unit-test-inventory.json：25 POM、369 生产 Java、52 测试 Java；只有 parent/base 分类复核完成，其他模块尚不得自动基线运行。",
-        "parent 提交 4112a48：unit-coverage profile 使用 JaCoCo 0.8.14 和 Surefire excludedGroups=integration,external；已在 base effective POM 核实。",
-        "base clean test jacoco:report：2/0/0/0；JaCoCo 行 35/225、分支 6/78、方法 6/55；jacoco:check 对未覆盖代码返回 1。原始证据在本地 evidence/20260926-u0-pilot/。",
-        "verify-unit.py 证据反例：缺 .exec、缺 JaCoCo XML、零测试、漏生产类、skipped 五种情况均返回 1。",
-        "统一入口端到端实测：python3 verify-unit.py --mode baseline --scope metanet4j-base 退出 0，日志与报告保存至 evidence/20260926T061230Z/；同份证据的 accept 检查退出 1（33 条覆盖缺口）。"
-      ]
+        "parent 4112a48：JaCoCo 0.8.14 的 unit-coverage profile 和 integration/external 分组隔离。",
+        "sdk BitailsProviderTest 标记 external；component Spring 基类、EsTest 与 SSE 类标记 integration。",
+        "宿主 ./init.sh 退出 0，infra/status.sh 五服务 healthy；四仓 Maven 基线 reactor 全部退出 0。",
+        "python3 verify-unit.py --mode baseline --scope all：25 POM 核对成功；证据 evidence/20260926T064228Z/；入口因真实缺口退出 1。",
+        "同份证据严格检查退出 1：17 个可执行模块零测试，8 个 skipped，255 项覆盖缺口，54 个 external 待映射，1 个非法测试签名；component-core 纯接口 N/A。",
+        "五类证据反例均返回非零；详见 doc/测试基线与障碍-20260926-145423.md 和 evidence/20260926-u0-pilot/。"
+      ],
+      "statusNote": "2026-09-26：25 POM、369 生产 Java、52 测试 Java 完成安全分类；19 项集成边界列明入口、隔离和观测；全仓基线与严格入口反例均已实测。U0 完成不代表完整测试目标达标。"
     },
     {
       "id": "unit-u1-base",
       "name": "U1 base 单元测试",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "unit-u0-baseline"
       ],
-      "evidence": []
+      "evidence": [],
+      "statusNote": "开始按公开 API 和实际 JaCoCo 未覆盖行/分支补 base 单元测试；当前基线为 2 个测试，行 35/225、分支 6/78、方法 6/55。"
     },
     {
       "id": "unit-u2-sdk",

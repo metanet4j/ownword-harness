@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "partial-reviewed",
-  "scope": "所有 4 仓库、25 POM；分类待逐文件复核后方可执行自动基线",
+  "scope": "所有 4 仓库、25 POM；已完成现有测试的执行安全分类，覆盖率与集成边界仍待补齐",
   "repositories": [
     {
       "repository": "metanet4j-parent",
@@ -13,9 +13,9 @@
           "production": [],
           "testSources": [],
           "classificationReviewed": true,
-          "classificationReason": "POM，无测试源码或跨服务边界",
-          "integrationBoundariesProposed": [],
-          "integrationReview": "N/A：父 POM 或纯计算／数据契约，无外部服务交互"
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationReview": "N/A：父 POM，无运行时代码",
+          "integrationCases": []
         }
       ]
     },
@@ -169,14 +169,14 @@
             }
           ],
           "classificationReviewed": true,
-          "integrationBoundariesProposed": [],
-          "integrationReview": "N/A：父 POM 或纯计算／数据契约，无外部服务交互"
+          "integrationReview": "N/A：纯协议和计算代码，无跨进程资源",
+          "integrationCases": []
         }
       ]
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "bae4c36739e850539efeab060002fad728b6b9ad",
+      "head": "257740657c6da456f8a75f21d1ae9f671a122f77",
       "modules": [
         {
           "path": ".",
@@ -478,32 +478,32 @@
           "testSources": [
             {
               "path": "src/test/java/com/metanet4j/sdk/PrivateKeyTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "test",
                   "returnType": "void",
                   "line": 10,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/TestData.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "testParse",
                   "returnType": "void",
                   "line": 44,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testContentType",
                   "returnType": "void",
                   "line": 56,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
@@ -516,169 +516,169 @@
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/address/AddressLiteTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "testBase58",
                   "returnType": "void",
                   "line": 9,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "testWordList",
                   "returnType": "void",
                   "line": 27,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testBapDefault",
                   "returnType": "void",
                   "line": 35,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testBapAddress",
                   "returnType": "void",
                   "line": 47,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testEncrypt",
                   "returnType": "void",
                   "line": 75,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testGetSigningPathFromHex",
                   "returnType": "void",
                   "line": 100,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testGetFriendPublicKey",
                   "returnType": "void",
                   "line": 113,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testAddress",
                   "returnType": "void",
                   "line": 124,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testBytes",
                   "returnType": "void",
                   "line": 129,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testBytes2",
                   "returnType": "void",
                   "line": 140,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/WordsvBapBaseTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "testServerBapBase",
                   "returnType": "void",
                   "line": 13,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testClientBapBase",
                   "returnType": "void",
                   "line": 20,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/common/CommonTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "testMediaType",
                   "returnType": "void",
                   "line": 8,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/crypto/MasterPrivateKeyTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "testGenerateWordList",
                   "returnType": "void",
                   "line": 10,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testFromWordList",
                   "returnType": "void",
                   "line": 16,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/script/ScriptTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "testGetAddressByOrdinalScript",
                   "returnType": "void",
                   "line": 10,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testGetAddressByOrdinalScrip2",
                   "returnType": "void",
                   "line": 18,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/transcation/BapDataLockBuilderSignTypeTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "buildRootSignsWithRootAddress",
                   "returnType": "void",
                   "line": 23,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "buildAliasSignsWithCurrentAddress",
                   "returnType": "void",
                   "line": 29,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "buildIdSignsWithPreviousAddress",
                   "returnType": "void",
                   "line": 35,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
@@ -886,48 +886,54 @@
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utils/UtilsExtendTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "testHash",
                   "returnType": "void",
                   "line": 9,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utxo/BitailsProviderTest.java",
-              "classification": "external-unlabeled",
+              "classification": "external",
               "methods": [
                 {
                   "name": "getUtxoByAddress",
                   "returnType": "void",
                   "line": 18,
-                  "classification": "external-unlabeled"
+                  "classification": "external"
                 },
                 {
                   "name": "getBalanceByAddress",
                   "returnType": "void",
                   "line": 29,
-                  "classification": "external-unlabeled"
+                  "classification": "external"
                 }
               ],
               "classificationReason": "两个测试真实访问 Bitails HTTP，当前无标签；分类修复前不得运行 sdk 自动基线"
             }
           ],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [
-            "Bitails/GorillaPool HTTP 适配器（本地协议服务）"
-          ],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "纯本地测试与 fixture 已核查；公网读取及广播类标为 external 并从单元门禁排除",
+          "integrationCases": [
+            {
+              "boundary": "BitailsClient、GorillaClient 与 UTXOProvider 的 HTTP 请求和错误处理",
+              "isolation": "本机随机端口、固定响应夹具，无公网调用",
+              "observation": "记录请求路径/载荷并断言返回 UTXO、错误及超时",
+              "status": "not-started"
+            }
+          ]
         }
       ]
     },
     {
       "repository": "metanet4j-component",
-      "head": "e634982a88b22d48ca09a7080574393ba55b0908",
+      "head": "de1f59fa765e0225f263332a7402ed2817da6ad6",
       "modules": [
         {
           "path": "metanet4j-api-common",
@@ -975,11 +981,17 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [
-            "HTTP 异常转换与响应"
-          ],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "GlobalExceptionTranslator 的 HTTP 异常响应和日志切面",
+              "isolation": "随机端口的测试应用与独立请求标识",
+              "observation": "断言 HTTP 状态/响应体并读取应用日志",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-component-bap",
@@ -1067,11 +1079,17 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [
-            "BAP 服务与 MongoDB/MySQL/ES"
-          ],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "BapService 的 MongoDB、MySQL 与 Elasticsearch 路径",
+              "isolation": "唯一身份键及测试记录，事务回滚或仅删除本轮记录",
+              "observation": "公开服务结果、三种存储查询与应用日志",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-component-bitcoinschema",
@@ -1083,9 +1101,17 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "BitcoinSchemaConsumeEvent 到 Bap/Bsocial handler 的 Spring 事件分派",
+              "isolation": "测试应用上下文、唯一事件标识和隔离的下游存储记录",
+              "observation": "监听器副作用及相应存储查询",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-component-bsocial",
@@ -1193,11 +1219,17 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [
-            "Bsocial 服务与 MongoDB/MySQL/ES"
-          ],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "BsocialService 的 MongoDB、MySQL 与 Elasticsearch 路径",
+              "isolation": "唯一交易/关系键，事务回滚或仅删除本轮记录",
+              "observation": "公开服务结果、持久化状态与应用日志",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-component-cache",
@@ -1221,11 +1253,17 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [
-            "Redis/Redisson"
-          ],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "RedisService 与 Redis/Redisson",
+              "isolation": "每轮随机键前缀，结束只删除该前缀",
+              "observation": "公开缓存 API 与 Redis 键值/TTL",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-component-common",
@@ -1365,9 +1403,17 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "LocalTestUtxoProvider 的文件夹具读取",
+              "isolation": "临时目录内自有 UTXO 夹具",
+              "observation": "公开 Provider 返回值及缺文件错误",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-component-core",
@@ -1383,9 +1429,11 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "N/A：仅接口定义，无实现",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "noExecutableReason": "仅有两个无 default/static 实现的接口；编译产物无可执行方法",
+          "integrationCases": []
         },
         {
           "path": "metanet4j-component-file",
@@ -1479,7 +1527,7 @@
           "testSources": [
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/config/package-info.java",
-              "classification": "fixture-or-undiscovered",
+              "classification": "fixture",
               "methods": []
             },
             {
@@ -1556,15 +1604,21 @@
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/enums/package-info.java",
-              "classification": "fixture-or-undiscovered",
+              "classification": "fixture",
               "methods": []
             }
           ],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [
-            "本地文件、S3、FTP、SFTP、数据库文件客户端"
-          ],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "现有 8 个外部文件客户端用例均为 Disabled；作为待替换的覆盖缺口",
+          "integrationCases": [
+            {
+              "boundary": "Local、DB、S3、FTP、SFTP FileClient 的读写删除",
+              "isolation": "临时目录、唯一对象键、仅本机文件协议服务及独立数据库记录",
+              "observation": "公开 FileClient API、实际文件/对象/数据库状态和服务日志",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-component-handler",
@@ -1580,9 +1634,17 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "BitcoinSchemaTxListener 到 handler 与 MongoBapService",
+              "isolation": "唯一交易标识及独立 Mongo 记录",
+              "observation": "事件处理后的 Mongo 查询与应用日志",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-component-message",
@@ -1630,11 +1692,17 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [
-            "Kafka 生产与消费"
-          ],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "Kafka 生产者和消费者",
+              "isolation": "每轮唯一 topic/consumer group 与事件键",
+              "observation": "生产完成回调、消费结果、Kafka offset 与应用日志",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-component-model",
@@ -1694,9 +1762,10 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "N/A：纯模型和响应对象",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": []
         },
         {
           "path": "metanet4j-component-test",
@@ -1710,79 +1779,79 @@
           "testSources": [
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/Metanet4jComponentTestApplicationTests.java",
-              "classification": "integration-candidate",
+              "classification": "integration",
               "methods": [
                 {
                   "name": "contextLoads",
                   "returnType": "void",
                   "line": 9,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 }
               ]
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/common/CommonTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "testFormatUtxoJson",
                   "returnType": "void",
                   "line": 15,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testInteger",
                   "returnType": "void",
                   "line": 22,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ]
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/common/StateCalculatorTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "testCalculateStatusWithNoLogs",
                   "returnType": "void",
                   "line": 15,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testCalculateStatusWithUnfollowLogs",
                   "returnType": "void",
                   "line": 27,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testCalculateStatusWithFollowLogs",
                   "returnType": "void",
                   "line": 41,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testCalculateStatusWithUnfollowAndFollowLogs",
                   "returnType": "void",
                   "line": 55,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testCalculateStatusWithUnfollowAndMultipleFollowLogs",
                   "returnType": "void",
                   "line": 69,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testCalculateStatusWithMultipleUnfollowAndFollowLogsFollowCountGreaterThanUnfollowCount",
                   "returnType": "void",
                   "line": 84,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testCalculateStatusWithMultipleUnfollowAndFollowLogsUnfollowCountGreaterThanFollowCount",
                   "returnType": "void",
                   "line": 101,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ]
             },
@@ -1836,384 +1905,384 @@
                   "name": "testAddress",
                   "returnType": "void",
                   "line": 159,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ]
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/elasticsearch/BapSearchServiceTest.java",
-              "classification": "integration-candidate",
+              "classification": "integration",
               "methods": [
                 {
                   "name": "testSearch",
                   "returnType": "void",
                   "line": 17,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 }
               ]
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/elasticsearch/EsTest.java",
-              "classification": "integration-candidate",
+              "classification": "integration",
               "methods": [
                 {
                   "name": "testClient",
                   "returnType": "void",
                   "line": 59,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testCreateBapIndex",
                   "returnType": "void",
                   "line": 66,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testCreateBsocialIndex",
                   "returnType": "void",
                   "line": 73,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testCreateIdentityIndex",
                   "returnType": "void",
                   "line": 87,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testGetBapIndex",
                   "returnType": "void",
                   "line": 96,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testGetBapIdentityIndex",
                   "returnType": "void",
                   "line": 103,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testAddBapRootDto",
                   "returnType": "void",
                   "line": 110,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testAddBapAliasDto",
                   "returnType": "void",
                   "line": 131,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testAddAlias",
                   "returnType": "void",
                   "line": 154,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testGetAlias",
                   "returnType": "void",
                   "line": 186,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testSearchAlias",
                   "returnType": "void",
                   "line": 195,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testSearchAlias2",
                   "returnType": "void",
                   "line": 213,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testSearchAliasArray",
                   "returnType": "void",
                   "line": 228,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testSearchAliasPage",
                   "returnType": "void",
                   "line": 258,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testUpdateAlias",
                   "returnType": "void",
                   "line": 285,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testDeleteAlias",
                   "returnType": "void",
                   "line": 299,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testParseRoot",
                   "returnType": "void",
                   "line": 306,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testParseAlias",
                   "returnType": "void",
                   "line": 314,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testAddBsocialContent",
                   "returnType": "void",
                   "line": 322,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testSearchBsocialContent",
                   "returnType": "void",
                   "line": 342,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testAddBsocialBinary",
                   "returnType": "void",
                   "line": 355,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testSearchBsocialBinary",
                   "returnType": "void",
                   "line": 378,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testAddBsocialMap",
                   "returnType": "void",
                   "line": 391,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testSearchBsocialMap",
                   "returnType": "void",
                   "line": 411,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testBsocialMap",
                   "returnType": "void",
                   "line": 423,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testCommon",
                   "returnType": "void",
                   "line": 439,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 }
               ]
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/message/MessageProducerTest.java",
-              "classification": "integration-candidate",
+              "classification": "integration",
               "methods": [
                 {
                   "name": "test",
                   "returnType": "void",
                   "line": 20,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 }
               ]
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/BapMongodbTest.java",
-              "classification": "integration-candidate",
+              "classification": "integration",
               "methods": [
                 {
                   "name": "testSave",
                   "returnType": "void",
                   "line": 69,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testFind",
                   "returnType": "void",
                   "line": 88,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testUpdate",
                   "returnType": "void",
                   "line": 95,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testSaveRoot",
                   "returnType": "void",
                   "line": 103,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testfindRoot",
                   "returnType": "void",
                   "line": 112,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testSaveIdentity",
                   "returnType": "void",
                   "line": 121,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testAddSigner",
                   "returnType": "void",
                   "line": 130,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testAddSigner2",
                   "returnType": "void",
                   "line": 140,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testFindIdentityKey",
                   "returnType": "void",
                   "line": 149,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testRemoveBapIdThenAdd",
                   "returnType": "void",
                   "line": 155,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testAddSignerAndSetIsCurrent",
                   "returnType": "void",
                   "line": 165,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testAddAttest",
                   "returnType": "void",
                   "line": 176,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testAddBapRelation",
                   "returnType": "void",
                   "line": 185,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testFindFollowBapIdentityList",
                   "returnType": "void",
                   "line": 190,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testFindFansBapIdentityList",
                   "returnType": "void",
                   "line": 197,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 }
               ]
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/BsocialMongodbTest.java",
-              "classification": "integration-candidate",
+              "classification": "integration",
               "methods": []
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/BsocialReplyMongodbTest.java",
-              "classification": "integration-candidate",
+              "classification": "integration",
               "methods": [
                 {
                   "name": "testSaveRootReply",
                   "returnType": "void",
                   "line": 24,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testSaveChildReply",
                   "returnType": "void",
                   "line": 32,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testBatchSaveChildReply",
                   "returnType": "void",
                   "line": 38,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testBatchSaveThirdChildReply",
                   "returnType": "void",
                   "line": 47,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testSaveThirdChildReply",
                   "returnType": "void",
                   "line": 56,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testSaveFourChildReply",
                   "returnType": "void",
                   "line": 63,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testAll",
                   "returnType": "void",
                   "line": 70,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testSaveChildReplyWithChildReplyListSizeLessThan10",
                   "returnType": "void",
                   "line": 94,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testSaveChildReplyWithChildReplyListSizeEqualTo10",
                   "returnType": "void",
                   "line": 122,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 }
               ]
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/DataTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "testBapRelation",
                   "returnType": "void",
                   "line": 104,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ]
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/MongoBapServiceFindIdentityKeyTest.java",
-              "classification": "integration-candidate",
+              "classification": "integration",
               "methods": [
                 {
                   "name": "findIdentityKeyByRegisteredSignerAddress",
                   "returnType": "void",
                   "line": 31,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 }
               ]
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/schema/BsocialSchema.java",
-              "classification": "fixture-or-undiscovered",
+              "classification": "fixture",
               "methods": []
             },
             {
@@ -2308,73 +2377,73 @@
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/resolver/BapRawStrResolverTest.java",
-              "classification": "integration-candidate",
+              "classification": "integration",
               "methods": [
                 {
                   "name": "testHandleBapRoot",
                   "returnType": "void",
                   "line": 26,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testHandleBapId",
                   "returnType": "void",
                   "line": 40,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testHandleAlias",
                   "returnType": "void",
                   "line": 48,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testHandleNonBapDataShouldBeRejected",
                   "returnType": "void",
                   "line": 62,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testHandleFollowByFrom",
                   "returnType": "void",
                   "line": 70,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testHandleUnFollowByFrom",
                   "returnType": "void",
                   "line": 80,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testAddBapRootAndAlias",
                   "returnType": "void",
                   "line": 90,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testBatchAddBapRootAndAlias",
                   "returnType": "void",
                   "line": 98,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 }
               ]
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/resolver/BsocialRawResolverTest.java",
-              "classification": "integration-candidate",
+              "classification": "integration",
               "methods": [
                 {
                   "name": "testHandleBsocialPost",
                   "returnType": "void",
                   "line": 34,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 },
                 {
                   "name": "testHandleBsocialFollow",
                   "returnType": "void",
                   "line": 44,
-                  "classification": "integration-candidate"
+                  "classification": "integration"
                 }
               ]
             },
@@ -2410,66 +2479,66 @@
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/sse/ServerSentEventsClientApplicationTest.java",
-              "classification": "integration-candidate",
+              "classification": "integration",
               "methods": []
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/BapBaseTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "testWordList",
                   "returnType": "void",
                   "line": 28,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testBapSeed",
                   "returnType": "void",
                   "line": 40,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testBapDefault",
                   "returnType": "void",
                   "line": 52,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testFromSignatureAddress",
                   "returnType": "void",
                   "line": 62,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testBapAddress",
                   "returnType": "void",
                   "line": 71,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testEncrypt",
                   "returnType": "void",
                   "line": 88,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testDecrypt",
                   "returnType": "void",
                   "line": 97,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ]
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/BaseDataTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "testFollowXpriv",
                   "returnType": "void",
                   "line": 23,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ]
             },
@@ -2487,73 +2556,73 @@
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/CommonTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "test",
                   "returnType": "void",
                   "line": 39,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testHex",
                   "returnType": "void",
                   "line": 46,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testBap",
                   "returnType": "void",
                   "line": 52,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testVerifyAip",
                   "returnType": "void",
                   "line": 66,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testIsRoot",
                   "returnType": "void",
                   "line": 86,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testClose",
                   "returnType": "void",
                   "line": 94,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "convertJson",
                   "returnType": "void",
                   "line": 100,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testType",
                   "returnType": "void",
                   "line": 138,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testPlanaria",
                   "returnType": "void",
                   "line": 153,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 },
                 {
                   "name": "testBapBase",
                   "returnType": "void",
                   "line": 161,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ]
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/LocalTestUtxoProvider.java",
-              "classification": "fixture-or-undiscovered",
+              "classification": "fixture",
               "methods": []
             },
             {
@@ -2569,11 +2638,17 @@
               ]
             }
           ],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [
-            "Spring 应用装配与跨模块业务路径"
-          ],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "Spring 上下文基类与 ES 用例标记 integration；公网/广播用例保持 external；本地 fixture 用例可运行；非法签名另记缺口",
+          "integrationCases": [
+            {
+              "boundary": "Spring 应用装配和跨模块入口",
+              "isolation": "测试专用配置、唯一记录/索引/键，结束按所有权清理",
+              "observation": "应用启动结果、公开服务响应、数据库状态与 Surefire/XML 日志",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-component-tx",
@@ -2633,11 +2708,17 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [
-            "交易服务与持久化边界"
-          ],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "DefaultCompleteTxFactory 的 UTXO 查询与广播 HTTP",
+              "isolation": "注入本机随机端口 HTTP 替身，绝不发送主网交易",
+              "observation": "记录查询/广播请求、公开 OnChainedTx 与异常传播",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-connect-planaria",
@@ -2679,22 +2760,28 @@
           "testSources": [
             {
               "path": "metanet4j-connect-planaria/src/test/java/com/metanet4j/component/AppTest.java",
-              "classification": "unit-candidate",
+              "classification": "unit",
               "methods": [
                 {
                   "name": "shouldAnswerWithTrue",
                   "returnType": "void",
                   "line": 15,
-                  "classification": "unit-candidate"
+                  "classification": "unit"
                 }
               ]
             }
           ],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [
-            "Planaria 数据入口与应用装配"
-          ],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "现有 AppTest 仅作本地断言，不跨外部边界",
+          "integrationCases": [
+            {
+              "boundary": "DefaultFeginClient 的 Planaria HTTP 数据入口",
+              "isolation": "本机随机端口、固定区块/交易响应",
+              "observation": "记录 HTTP 请求并断言公开入口输出与错误传播",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-store-mongo",
@@ -2854,11 +2941,17 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [
-            "MongoDB repository/service"
-          ],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "Mongo repository 自定义查询与保存",
+              "isolation": "每轮唯一集合或记录前缀，仅清理本轮数据",
+              "observation": "公开 repository 查询、Mongo 记录与容器日志",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-store-search",
@@ -2930,11 +3023,17 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [
-            "Elasticsearch repository/search"
-          ],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "Elasticsearch repository 的索引与搜索",
+              "isolation": "每轮唯一索引名，只删除本轮索引",
+              "observation": "公开搜索结果、索引文档与 Elasticsearch 日志",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-store-sql",
@@ -3058,11 +3157,17 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [
-            "MySQL repository/mapper"
-          ],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "MySQL mapper/repository 的读写与事务",
+              "isolation": "唯一主键数据及回滚事务，禁止清空共享表",
+              "observation": "公开 repository 查询、SQL 行状态与 MySQL 日志",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-tx-convertor",
@@ -3126,9 +3231,17 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "Spring ConversionService 注册与协议转换链",
+              "isolation": "独立轻量应用上下文和固定交易夹具",
+              "observation": "公开转换结果及注册转换器列表",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-tx-filter",
@@ -3152,9 +3265,17 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "Spring SourceDataFilterChain 的多过滤器装配与顺序",
+              "isolation": "独立轻量应用上下文、固定交易夹具",
+              "observation": "公开过滤结果与各过滤器调用记录",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": "metanet4j-tx-validator",
@@ -3174,9 +3295,10 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "N/A：本地策略选择与验证，无外部资源",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": []
         },
         {
           "path": "mybatispuls-generator",
@@ -3188,18 +3310,27 @@
             }
           ],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": [
+            {
+              "boundary": "生成器对数据库元数据和文件输出的交互",
+              "isolation": "测试数据库及临时输出目录，不连接硬编码 MySQL 或工作区路径",
+              "observation": "生成文件列表、内容及数据库元数据读取",
+              "status": "not-started"
+            }
+          ]
         },
         {
           "path": ".",
           "artifactId": "metanet4j-component",
           "production": [],
           "testSources": [],
-          "classificationReviewed": false,
-          "integrationBoundariesProposed": [],
-          "integrationReview": "待逐类复核并确认公开接口边界"
+          "classificationReviewed": true,
+          "integrationReview": "N/A：聚合 POM，无运行时代码",
+          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationCases": []
         }
       ]
     }
