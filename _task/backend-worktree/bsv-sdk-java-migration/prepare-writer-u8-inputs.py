@@ -42,7 +42,10 @@ def freeze(args):
     ids = {case['id'] for case in source['cases']}
     mapping_cases = [case for case in all_mapping['cases'] if case['id'] in ids]
     require(len(mapping_cases) == len(ids) == 26, 'WriterUint8Array 冻结映射必须是原 26 例')
-    mapping = {**all_mapping, 'cases': mapping_cases}
+    sites = {site['id'] for site in source['sites']}
+    reviews = [review for review in all_mapping['siteReviews'] if review['id'] in sites]
+    require(len(reviews) == len(sites), '固定 TS 站点审阅必须恰好覆盖本文件')
+    mapping = {**all_mapping, 'cases': mapping_cases, 'siteReviews': reviews}
     cases = {(' '.join(case['names']), case['occurrence']): case for case in source['cases']}
     mapped = {case['id']: case for case in mapping_cases}
     grouped = defaultdict(list)
