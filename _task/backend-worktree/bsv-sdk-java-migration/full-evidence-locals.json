@@ -1,0 +1,78 @@
+{
+  "locals": [
+    {
+      "name": "hex-bn",
+      "catalog": ".cache/evidence/input-replay-hex-bn-20260926/catalog.json",
+      "mapping": ".cache/evidence/input-replay-hex-bn-20260926/mapping.json",
+      "input_plan": ".cache/evidence/input-replay-hex-bn-20260926/input-plan.json",
+      "ts_inputs": ".cache/evidence/input-replay-hex-bn-20260926/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/input-replay-hex-bn-20260926/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/input-replay-hex-bn-20260926/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/input-replay-hex-bn-20260926/ts-hex-jest.json",
+        ".cache/evidence/input-replay-hex-bn-20260926/ts-bn-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/input-replay-hex-bn-20260926/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/input-replay-hex-bn-20260926/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/input-replay-hex-bn-20260926/java-run.json",
+      "java_report": [
+        ".cache/evidence/input-replay-hex-bn-20260926/java-hex-surefire.xml",
+        ".cache/evidence/input-replay-hex-bn-20260926/java-bn-surefire.xml"
+      ]
+    },
+    {
+      "name": "byte-base58",
+      "catalog": ".cache/evidence/byte-utils-input-probe6-20260926/plan2/catalog.json",
+      "mapping": ".cache/evidence/byte-utils-input-probe6-20260926/plan2/mapping.json",
+      "input_plan": ".cache/evidence/byte-utils-input-probe6-20260926/plan2/input-plan.json",
+      "ts_inputs": ".cache/evidence/byte-utils-capture-ts6b-20260926/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/byte-utils-capture-ts6b-20260926/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/byte-utils-capture-ts6b-20260926/manifest.json",
+      "ts_report": [
+        ".cache/evidence/byte-utils-capture-ts6b-20260926/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/byte-utils-capture-java6-20260926/inputs.jsonl",
+      "java_assertions": ".cache/evidence/byte-utils-capture-java6-20260926/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/byte-utils-capture-java6-20260926/manifest.json",
+      "java_report": [
+        ".cache/evidence/byte-utils-capture-java6-20260926/surefire.xml"
+      ]
+    },
+    {
+      "name": "wallet-property",
+      "catalog": ".cache/evidence/wallet-property-probe-20260926/plan/catalog.json",
+      "mapping": ".cache/evidence/wallet-property-probe-20260926/plan/mapping.json",
+      "input_plan": ".cache/evidence/wallet-property-probe-20260926/plan/input-plan.json",
+      "ts_inputs": ".cache/evidence/wallet-property-ts-20260926/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/wallet-property-ts-20260926/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/wallet-property-ts-20260926/manifest.json",
+      "ts_report": [
+        ".cache/evidence/wallet-property-ts-20260926/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/wallet-property-java-20260927/inputs.jsonl",
+      "java_assertions": ".cache/evidence/wallet-property-java-20260927/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/wallet-property-java-20260927/manifest.json",
+      "java_report": [
+        ".cache/evidence/wallet-property-java-20260927/surefire.xml"
+      ]
+    },
+    {
+      "name": "utils-property",
+      "catalog": ".cache/evidence/utils-property-real-20260926/local-gate/catalog.json",
+      "mapping": ".cache/evidence/utils-property-real-20260926/local-gate/mapping.json",
+      "input_plan": ".cache/evidence/utils-property-real-20260926/local-gate/input-plan.json",
+      "ts_inputs": ".cache/evidence/utils-property-formal-20260927-0012/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/utils-property-formal-20260927-0012/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/utils-property-formal-20260927-0012/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/utils-property-formal-20260927-0012/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/utils-property-formal-20260927-0012/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/utils-property-formal-20260927-0012/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/utils-property-formal-20260927-0012/java-run.json",
+      "java_report": [
+        ".cache/evidence/utils-property-formal-20260927-0012/java-surefire.xml"
+      ]
+    }
+  ]
+}
