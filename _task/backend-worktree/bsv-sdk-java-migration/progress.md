@@ -13,6 +13,6 @@
 
 ## 下一步
 
-`migration-impl-byte-codecs` 的冻结清单为 Reader.test.ts、ReaderUint8Array.test.ts、Writer.test.ts、WriterUint8Array.test.ts、utils.property.test.ts、utils.test.ts，共 166 个注册用例；其中两个 property 用例各至少 300 次生成样本。先做本组 API 前检和原文件/辅助资料通读，再按测试契约逐行为 RED→GREEN、采集两端真实输入/断言，累计运行 Java `clean test`。WUA-ZERO-CAPACITY 只按已授权的最小修复实施，额外 Java 回归单列。
+`migration-impl-byte-codecs` 的冻结清单为 Reader.test.ts、ReaderUint8Array.test.ts、Writer.test.ts、WriterUint8Array.test.ts、utils.property.test.ts、utils.test.ts，共 192 个注册用例；其中两个 property 用例各至少 300 次生成样本。先做本组 API 前检和原文件/辅助资料通读，再按测试契约逐行为 RED→GREEN、采集两端真实输入/断言，累计运行 Java `clean test`。WUA-ZERO-CAPACITY 只按已授权的最小修复实施，额外 Java 回归单列。
 
 仅修改 `metanet4j-bsv-sdk` 的工程代码、测试和 POM；固定 TS 与其他四个 Java 工程只读。根仓既有无关改动保留，不推送、不广播交易或调用真实钱包/外部业务接口。

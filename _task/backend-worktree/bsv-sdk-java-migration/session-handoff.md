@@ -2,7 +2,7 @@
 
 ## 唯一下一步
 
-`activeItem=nextItem=migration-impl-byte-codecs`，状态 in-progress。先读取 [feature_list.json](feature_list.json) 的本项 sourceFiles/testFiles/acceptanceFocus 与 [API 契约](doc/完整模块与API映射-20260920-122800.md)，完成 ReaderUint8Array、WriterUint8Array、utils 的 API 前检；然后通读六份固定原测试并按一一映射的 RED→GREEN 推进。冻结清单是 166 个注册用例，`utils.property.test.ts` 前两例各至少 300 次生成样本，不能将样本数混入用例分母。
+`activeItem=nextItem=migration-impl-byte-codecs`，状态 in-progress。先读取 [feature_list.json](feature_list.json) 的本项 sourceFiles/testFiles/acceptanceFocus 与 [API 契约](doc/完整模块与API映射-20260920-122800.md)，完成 ReaderUint8Array、WriterUint8Array、utils 的 API 前检；然后通读六份固定原测试并按一一映射的 RED→GREEN 推进。冻结清单是 192 个注册用例，`utils.property.test.ts` 前两例各至少 300 次生成样本，不能将样本数混入用例分母。
 
 ## 已完成曲线验收
 

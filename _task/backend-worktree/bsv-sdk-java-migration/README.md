@@ -41,4 +41,4 @@ Maven 和 pnpm 分别使用 `./mvn.sh`、`./pnpm.sh`；这两个入口固定工�
 
 逐步执行入口：[模块迁移计划](doc/模块迁移计划-20260920-103547.md)中的“编码任务与 API 前检”“文件和脚本的职责”“按顺序执行”和“单行为执行示例”，逐项说明输入、脚本、产物与完成条件；尚未实现的运行/采集入口已明确标记。后续交接：[session-handoff.md](session-handoff.md)。
 
-当前按功能组拆为 28 个编码任务（5 项 done、1 项 in-progress、22 项 not-started），API 复核嵌入任务前检；values、hash-random、curve 共 816 项已复核。当前执行 `migration-impl-byte-codecs`，其冻结范围为 166 个原用例，并保留 property 生成样本重放。任务范围、依赖及独立验收条件以 feature_list.json 为准。
+当前按功能组拆为 28 个编码任务（5 项 done、1 项 in-progress、22 项 not-started），API 复核嵌入任务前检；values、hash-random、curve 共 816 项已复核。当前执行 `migration-impl-byte-codecs`，其冻结范围为 192 个原用例，并保留 property 生成样本重放。任务范围、依赖及独立验收条件以 feature_list.json 为准。

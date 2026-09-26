@@ -520,7 +520,7 @@
       "stepsRef": "implementationPolicy.steps",
       "acceptanceCriteriaRef": "implementationPolicy.acceptanceCriteria",
       "acceptanceFocus": [
-        "166 个冻结原用例；其中 property 用例保留各 300 次生成样本及输入重放，另核对共享视图、复制、偏移、越界语义。",
+        "192 个冻结原用例；其中 property 用例保留各 300 次生成样本及输入重放，另核对共享视图、复制、偏移、越界语义。",
         "WUA-ZERO-CAPACITY 按唯一授权最小修复并单列 Java 额外回归。"
       ],
       "scopeRef": "scope",
