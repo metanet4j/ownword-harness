@@ -14,6 +14,8 @@ VARIANTS = {
                'com.metanet4j.bsv.primitives.WriterTest', 27, 96),
     'reader': ('src/primitives/__tests/Reader.test.ts',
                'com.metanet4j.bsv.primitives.ReaderTest', 37, 93),
+    'reader-u8': ('src/primitives/__tests/ReaderUint8Array.test.ts',
+                  'com.metanet4j.bsv.primitives.ReaderUint8ArrayTest', 37, 93),
 }
 
 
