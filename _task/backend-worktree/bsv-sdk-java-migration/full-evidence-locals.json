@@ -240,6 +240,24 @@
       ]
     },
     {
+      "name": "compat-bsm",
+      "catalog": ".cache/evidence/bsm-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/bsm-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/bsm-plan-20260927/input-plan.json",
+      "ts_inputs": ".cache/evidence/bsm-ts-formal-20260927/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/bsm-ts-formal-20260927/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/bsm-ts-formal-20260927/manifest.json",
+      "ts_report": [
+        ".cache/evidence/bsm-ts-formal-20260927/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/bsm-java-formal-20260927/inputs.jsonl",
+      "java_assertions": ".cache/evidence/bsm-java-formal-20260927/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/bsm-java-formal-20260927/manifest.json",
+      "java_report": [
+        ".cache/evidence/bsm-java-formal-20260927/surefire.xml"
+      ]
+    },
+    {
       "name": "validation-helpers",
       "deriveCatalogFromPlan": true,
       "input_plan": "validation-helpers-input-plan.json",
