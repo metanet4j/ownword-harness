@@ -7,8 +7,8 @@
     "blocked",
     "done"
   ],
-  "activeItem": "unit-u1-base",
-  "note": "原 Boot 4 / Java 25 升级和 U0 测试基线已完成；用户已确认公共接口与本地模拟边界。U1 正在补 base 单元测试，U2—U9 待实施。",
+  "activeItem": "unit-u2-sdk",
+  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1 base 严格单元验收已完成；U2 sdk 正在实施，U3—U9 待实施。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -269,25 +269,27 @@
       "id": "unit-u1-base",
       "name": "U1 base 单元测试",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "unit-u0-baseline"
       ],
       "evidence": [
-        "TxUtxoDtoTest 红灯：2 测试中 1 失败，发现同一交易不同 coinbase 输出被判相等；修复后定向 2/0/0/0。",
-        "base 提交 bae7eb6；统一基线 evidence/20260926T070148Z/：4/0/0/0，行 50/222、分支 12/76、方法 10/55，仍未达标。"
+        "base 提交 bae7eb6：UTXO outpoint 相等性先红后绿；提交 77ad9fd：AIP/BAP、协议枚举、DTO、Jackson 工具测试与坏签名修复。",
+        "最终提交后执行 python3 verify-unit.py --mode accept --scope metanet4j-base，退出 0；19/0/0/0，LINE 208/208、BRANCH 76/76、METHOD 51/51，jacoco:check 报 All coverage checks have been met；证据 evidence/20260926T072220Z/。",
+        "同一 base 提交执行 Maven install -DskipTests BUILD SUCCESS，构件供 sdk 使用；该安装不代替测试证据。"
       ],
-      "statusNote": "2026-09-26：coinbase SpendUtxo 相等性先红后绿并提交 bae7eb6；base 全量 4/0/0/0，行 50/222、分支 12/76、方法 10/55。其余 API 测试及严格覆盖率仍待补。"
+      "statusNote": "2026-09-26：base 全部手写可执行类的行、分支、方法覆盖率达到 100%；19 个单元测试零失败/错误/跳过。"
     },
     {
       "id": "unit-u2-sdk",
       "name": "U2 sdk 单元测试",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "unit-u1-base"
       ],
-      "evidence": []
+      "evidence": [],
+      "statusNote": "开始按现有离线基线与公开 SDK API 补单元测试和本地 HTTP 集成测试；当前 24/0/0/0，行 307/1990、分支 24/505、方法 91/454。"
     },
     {
       "id": "unit-u3-foundation",

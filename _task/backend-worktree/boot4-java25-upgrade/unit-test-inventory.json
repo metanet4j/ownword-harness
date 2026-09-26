@@ -21,7 +21,7 @@
     },
     {
       "repository": "metanet4j-base",
-      "head": "bae7eb619956a2ff651863dcb1fe0c17b3c3c14a",
+      "head": "77ad9fd463f5186a8befb5b8f0c609458981c8f8",
       "modules": [
         {
           "path": ".",
@@ -148,11 +148,29 @@
                 {
                   "name": "verifyStrMsg",
                   "returnType": "void",
-                  "line": 17,
+                  "line": 26,
+                  "classification": "unit"
+                },
+                {
+                  "name": "verifiesBapFieldsAndRejectsUnsignedAppendData",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsMalformedOrTruncatedSignatures",
+                  "returnType": "void",
+                  "line": 55,
+                  "classification": "unit"
+                },
+                {
+                  "name": "changingRecoverySelectorInvalidatesSignerAddress",
+                  "returnType": "void",
+                  "line": 74,
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "只调用本地 AIP/BAP 计算，无 I/O；现有用例缺断言，U1 修复"
+              "classificationReason": "AIP 公开签名验证 API：有效签名、地址不匹配、附加数据和畸形签名；纯本地计算"
             },
             {
               "path": "src/test/java/com/metanet4j/base/BapTest.java",
@@ -161,11 +179,55 @@
                 {
                   "name": "testBap",
                   "returnType": "void",
-                  "line": 11,
+                  "line": 18,
+                  "classification": "unit"
+                },
+                {
+                  "name": "distinguishesRootDestroyAndOtherBapRecords",
+                  "returnType": "void",
+                  "line": 28,
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "只调用本地 AIP/BAP 计算，无 I/O；现有用例缺断言，U1 修复"
+              "classificationReason": "BAP 公开身份派生与 root/destroy 分类；纯本地计算"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/base/ProtocolContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "bppModelExposesItsProtocolPrefix",
+                  "returnType": "void",
+                  "line": 15,
+                  "classification": "unit"
+                },
+                {
+                  "name": "commonStatusNamesAndMessageTimestampAreAvailable",
+                  "returnType": "void",
+                  "line": 20,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "BPP 协议前缀、通用状态名称及消息时间戳的公开契约"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/base/dto/BitcoinSchemaDtoTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "carriesBapPayloadWithOptionalIdentity",
+                  "returnType": "void",
+                  "line": 12,
+                  "classification": "unit"
+                },
+                {
+                  "name": "carriesBsocialPayloadWithOptionalIdentity",
+                  "returnType": "void",
+                  "line": 26,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "BitcoinSchemaDto 公开构造器的 BAP/Bsocial 载荷及可选身份字段"
             },
             {
               "path": "src/test/java/com/metanet4j/base/dto/TxUtxoDtoTest.java",
@@ -174,17 +236,73 @@
                 {
                   "name": "coinbaseOutputsAreIdentifiedByTransactionAndIndex",
                   "returnType": "void",
-                  "line": 13,
+                  "line": 15,
                   "classification": "unit"
                 },
                 {
                   "name": "sameOutpointHasSymmetricEqualityAndHashCode",
                   "returnType": "void",
-                  "line": 26,
+                  "line": 28,
+                  "classification": "unit"
+                },
+                {
+                  "name": "distinctSpendOutpointsRemainDistinct",
+                  "returnType": "void",
+                  "line": 38,
+                  "classification": "unit"
+                },
+                {
+                  "name": "newOutputsUseOutpointAsIdentity",
+                  "returnType": "void",
+                  "line": 49,
                   "classification": "unit"
                 }
               ],
               "classificationReason": "UTXO outpoint 相等性与 HashSet 行为，本地纯计算"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/base/type/ProtocolTypeTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "bapCodesAndNamesRoundTrip",
+                  "returnType": "void",
+                  "line": 9,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bsocialCodesRoundTripAndPostNameChoosesPost",
+                  "returnType": "void",
+                  "line": 19,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "BAP/Bsocial 协议 code/desc 与未知值、重复 post 描述的公开映射契约"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/base/util/JacksonUtilTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "serializesAndReadsObjectsWithoutLosingUnicode",
+                  "returnType": "void",
+                  "line": 16,
+                  "classification": "unit"
+                },
+                {
+                  "name": "returnsNullForAbsentOrMalformedInput",
+                  "returnType": "void",
+                  "line": 32,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsSelfReferentialValues",
+                  "returnType": "void",
+                  "line": 45,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "Jackson 公共 API 的正常值、空值、泛型、非法 JSON 与循环引用行为"
             }
           ],
           "classificationReviewed": true,
