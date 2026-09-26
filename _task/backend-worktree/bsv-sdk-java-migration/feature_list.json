@@ -1961,9 +1961,8 @@
         "metanet4j-bsv-sdk 的底层实现不依赖 base/sdk；本次不修改其他工程接口或依赖配置。"
       ],
       "evidence": [
-        "API 复核清单保存在 apiBatches，随对应编码任务完成；已有 816 项映射证据保留，本项等待全部 API 收口。",
-        "当前 api-map 有 816 项已复核、2760 项未映射，总验收未通过。",
-        "node audit-api.cjs batches 已核对 21 批恰好覆盖 133 文件/3576 声明；工具自测 39/39，通过记录见 .cache/evidence/api-batches-all-green.log。分批有效不代表总验收完成。"
+        "api-map.json：3576／3576 项固定 TS 声明均有逐项 Java 映射并标记 reviewed；21 个 apiBatches 中每批已完成文件复核。",
+        "node audit-api.cjs batches --batch migration-api-auth-transport 与无过滤 node audit-api.cjs check 均通过；这些命令核对结构，跨任务接口与完整行为仍需本总验收独立确认。"
       ],
       "scopeRef": "scope",
       "kind": "gate"
@@ -2991,14 +2990,17 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "api-map.json：AuthFetch/Transport 四个完整源文件 107／107 项声明逐项复核；固定 TS 与 Java 183／183 用例、968／968 条实际断言任务级对照记录于 .cache/evidence/auth-fetch-complete-java-20260926/task-parity.json；根 URL 路径语义另有 Java 边界回归。",
+        "node audit-api.cjs batches --batch migration-api-auth-transport 通过：本批未映射 0、未复核 0；node audit-api.cjs check 对 3576 项声明结构核对通过。批次完成仅代表设计映射，不替代 AuthFetch 属性样本重放或全模块验收。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [

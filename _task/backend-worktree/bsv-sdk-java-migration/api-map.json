@@ -41186,12 +41186,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.PeerState",
       "javaSignature": "public static final class PeerState {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 接口由 Java PeerState、Map 或方法返回结构承接；待完整路径复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:38",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:83"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:83",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41199,12 +41200,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.createPaymentErrorEntry",
       "javaSignature": "public static Map<String, Object> createPaymentErrorEntry(int attempt, Object error) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 接口由 Java PeerState、Map 或方法返回结构承接；待完整路径复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:45",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:399"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:399",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41226,12 +41228,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.describeRequestBodyForLogging",
       "javaSignature": "public static Map<String, Object> describeRequestBodyForLogging(Object body) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 接口由 Java PeerState、Map 或方法返回结构承接；待完整路径复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:71",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:208"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:208",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41239,12 +41242,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.fetch",
       "javaSignature": "public CompletableFuture<FetchResponse> fetch(String url, Map<String, Object> config) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 接口由 Java PeerState、Map 或方法返回结构承接；待完整路径复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:20",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:472"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:472",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41252,12 +41256,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.buildPaymentActionLabels",
       "javaSignature": "public List<String> buildPaymentActionLabels(Map<String, ?> config,",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 私有步骤 base64NonceToLabelHex 合并到 Java buildPaymentActionLabels；待复核完整分支与副作用。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有步骤并入所列 Java 方法；已核对实现分支与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:855",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:293"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:293",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchTest.java"
       ]
     },
     {
@@ -41304,15 +41309,16 @@
     },
     {
       "id": "src/auth/clients/AuthFetch.ts#method:AuthFetch.composePaymentLogDetails:1",
-      "java": "com.metanet4j.bsv.auth.clients.AuthFetch.buildPaymentFailureError",
-      "javaSignature": "public static PaymentFailureException buildPaymentFailureError(String url,",
+      "java": "com.metanet4j.bsv.auth.clients.AuthFetch.composePaymentLogDetails",
+      "javaSignature": "private static Map<String, Object> composePaymentLogDetails(String url, PaymentContext context) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 私有步骤 composePaymentLogDetails 合并到 Java buildPaymentFailureError；待复核完整分支与副作用。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有步骤并入所列 Java 方法；已核对实现分支与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:967",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:422"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:700",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchPaymentLogBoundaryTest.java"
       ]
     },
     {
@@ -41362,12 +41368,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.serializeRequest",
       "javaSignature": "public CompletableFuture<Writer> serializeRequest(String method, Map<String, String> headers,",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 私有步骤 defaultRequestBody 合并到 Java serializeRequest；待复核完整分支与副作用。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有步骤并入所列 Java 方法；已核对实现分支与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:534",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:718"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:718",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41375,12 +41382,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.describeRequestBodyForLogging",
       "javaSignature": "public static Map<String, Object> describeRequestBodyForLogging(Object body) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 私有步骤 describePlatformRequestBody 合并到 Java describeRequestBodyForLogging；待复核完整分支与副作用。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有步骤并入所列 Java 方法；已核对实现分支与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:911",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:208"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:208",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41402,12 +41410,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.describeRequestBodyForLogging",
       "javaSignature": "public static Map<String, Object> describeRequestBodyForLogging(Object body) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 私有步骤 describeSerializableRequestBody 合并到 Java describeRequestBodyForLogging；待复核完整分支与副作用。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有步骤并入所列 Java 方法；已核对实现分支与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:942",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:208"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:208",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41415,12 +41424,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.describeRequestBodyForLogging",
       "javaSignature": "public static Map<String, Object> describeRequestBodyForLogging(Object body) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 私有步骤 describeSimpleRequestBody 合并到 Java describeRequestBodyForLogging；待复核完整分支与副作用。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有步骤并入所列 Java 方法；已核对实现分支与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:893",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:208"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:208",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41428,12 +41438,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.fetch",
       "javaSignature": "public CompletableFuture<FetchResponse> fetch(String url, Map<String, Object> config) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java fetch 入口存在；当前并行实现仍在补固定用例，暂不认定完整等价。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "AuthFetch 公开请求入口已对照固定原测试的认证、回退、支付和清理分支；根 URL 路径另有 Java 边界回归。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:187",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:472"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:490",
+        ".cache/evidence/auth-fetch-complete-java-20260926/task-parity.json"
       ]
     },
     {
@@ -41455,12 +41466,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.getOrCreatePeer",
       "javaSignature": "protected CompletableFuture<PeerState> getOrCreatePeer(String baseURL) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java getOrCreatePeer 入口存在；当前并行实现仍在补固定用例，暂不认定完整等价。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有步骤并入所列 Java 方法；已核对实现分支与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:301",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:488"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:488",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41482,12 +41494,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.handleFetchAndValidate",
       "javaSignature": "CompletableFuture<FetchResponse> handleFetchAndValidate(String url,",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java handleFetchAndValidate 入口存在；当前并行实现仍在补固定用例，暂不认定完整等价。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有步骤并入所列 Java 方法；已核对实现分支与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:599",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:616"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:616",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41509,12 +41522,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.serializeRequest",
       "javaSignature": "public CompletableFuture<Writer> serializeRequest(String method, Map<String, String> headers,",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 私有步骤 includedRequestHeaders 合并到 Java serializeRequest；待复核完整分支与副作用。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有步骤并入所列 Java 方法；已核对实现分支与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:501",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:718"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:718",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41536,12 +41550,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.recoverAuthenticatedSend",
       "javaSignature": "private CompletableFuture<FetchResponse> recoverAuthenticatedSend(Throwable error,",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 私有步骤 isStaleSessionError 合并到 Java recoverAuthenticatedSend；待复核完整分支与副作用。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有步骤并入所列 Java 方法；已核对实现分支与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:348",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:600"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:600",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41574,15 +41589,16 @@
     },
     {
       "id": "src/auth/clients/AuthFetch.ts#method:AuthFetch.parseAuthenticatedResponse:1",
-      "java": "com.metanet4j.bsv.auth.clients.AuthFetch.fetch",
-      "javaSignature": "public CompletableFuture<FetchResponse> fetch(String url, Map<String, Object> config) {",
+      "java": "com.metanet4j.bsv.auth.clients.AuthFetch.parseAuthenticatedResponse",
+      "javaSignature": "FetchResponse parseAuthenticatedResponse(String baseURL, String requestNonce,",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "当前 Java 未定位 parseAuthenticatedResponse 对应的独立字段或步骤；暂映射到 fetch 主路径，待实现代理确认。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "认证响应解析由 Java 对应方法实现；固定原测试覆盖响应内容、状态码与异常边界。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:376",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:472"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:593",
+        ".cache/evidence/auth-fetch-complete-java-20260926/task-parity.json"
       ]
     },
     {
@@ -41590,12 +41606,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.recoverAuthenticatedSend",
       "javaSignature": "private CompletableFuture<FetchResponse> recoverAuthenticatedSend(Throwable error,",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java recoverAuthenticatedSend 入口存在；当前并行实现仍在补固定用例，暂不认定完整等价。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有步骤并入所列 Java 方法；已核对实现分支与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:358",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:600"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:600",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41619,11 +41636,12 @@
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
       "review": "reviewed",
       "implementationStatus": "source-present-verified",
-      "basis": "Java serializeRequest 是直接入口；对应固定用例已覆盖主要返回值与错误边界。",
+      "basis": "请求序列化由 Java 对应方法实现；固定原测试覆盖头、body、nonce 与编码，根 URL 路径另有边界回归。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:563",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:718",
-        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:739",
+        ".cache/evidence/auth-fetch-complete-java-20260926/task-parity.json"
       ]
     },
     {
@@ -41631,12 +41649,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.waitForDelay",
       "javaSignature": "public static CompletableFuture<Void> waitForDelay(long milliseconds) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 私有步骤 wait 合并到 Java waitForDelay；待复核完整分支与副作用。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有步骤并入所列 Java 方法；已核对实现分支与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:1028",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:375"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:375",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41646,11 +41665,12 @@
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
       "review": "reviewed",
       "implementationStatus": "source-present-verified",
-      "basis": "Java waitForPendingCertificateRequests 是直接入口；对应固定用例已覆盖主要返回值与错误边界。",
+      "basis": "待处理证书请求轮询由 Java 对应方法实现；固定原测试覆盖等待、超时与清理。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:955",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:381",
-        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:399",
+        ".cache/evidence/auth-fetch-complete-java-20260926/task-parity.json"
       ]
     },
     {
@@ -41658,12 +41678,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.writeOptionalText",
       "javaSignature": "private static void writeOptionalText(Writer writer, String text) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java writeOptionalText 入口存在；当前并行实现仍在补固定用例，暂不认定完整等价。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有步骤并入所列 Java 方法；已核对实现分支与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:491",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:772"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:772",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41671,12 +41692,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.serializeRequest",
       "javaSignature": "public CompletableFuture<Writer> serializeRequest(String method, Map<String, String> headers,",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 私有步骤 writeRequestBody 合并到 Java serializeRequest；待复核完整分支与副作用。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有 body 编码步骤内联于 Java serializeRequest；固定原测试覆盖空值、字节与默认 body。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:541",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:718"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:739",
+        ".cache/evidence/auth-fetch-complete-java-20260926/task-parity.json"
       ]
     },
     {
@@ -41684,12 +41706,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.serializeRequest",
       "javaSignature": "public CompletableFuture<Writer> serializeRequest(String method, Map<String, String> headers,",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "TS 私有步骤 writeRequestHeaders 合并到 Java serializeRequest；待复核完整分支与副作用。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 私有步骤并入所列 Java 方法；已核对实现分支与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:522",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:718"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:718",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -41851,12 +41874,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.createPaymentErrorEntry",
       "javaSignature": "entry.put(\"attempt\", attempt);",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java createPaymentErrorEntry 的 Map 字段已定位，待支付日志链路完整复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:46",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:401"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:401",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchPaymentLogBoundaryTest.java"
       ]
     },
     {
@@ -41864,12 +41888,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.createPaymentErrorEntry",
       "javaSignature": "entry.put(\"message\", error instanceof Throwable throwable ? throwable.getMessage() : String.valueOf(error));",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java createPaymentErrorEntry 的 Map 字段已定位，待支付日志链路完整复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:48",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:404"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:404",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchPaymentLogBoundaryTest.java"
       ]
     },
     {
@@ -41877,12 +41902,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.createPaymentErrorEntry",
       "javaSignature": "entry.put(\"stack\", stack.toString().stripTrailing());",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java createPaymentErrorEntry 的 Map 字段已定位，待支付日志链路完整复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:49",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:408"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:408",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchPaymentLogBoundaryTest.java"
       ]
     },
     {
@@ -41890,12 +41916,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.createPaymentErrorEntry",
       "javaSignature": "entry.put(\"timestamp\", new java.time.format.DateTimeFormatterBuilder()",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java createPaymentErrorEntry 的 Map 字段已定位，待支付日志链路完整复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:47",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:402"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:402",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchPaymentLogBoundaryTest.java"
       ]
     },
     {
@@ -42043,12 +42070,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.describeRequestBodyForLogging",
       "javaSignature": "public static Map<String, Object> describeRequestBodyForLogging(Object body) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java 日志摘要 Map 使用相同键，待汇总类型的跨平台边界复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:73",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:208"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:208",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -42056,12 +42084,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.describeRequestBodyForLogging",
       "javaSignature": "public static Map<String, Object> describeRequestBodyForLogging(Object body) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java 日志摘要 Map 使用相同键，待汇总类型的跨平台边界复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:72",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:208"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:208",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -42069,12 +42098,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.serializeRequest",
       "javaSignature": "public CompletableFuture<Writer> serializeRequest(String method, Map<String, String> headers,",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java Map 配置键已定位；TS 选项接口无独立 Java 类，待端到端调用复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "Java 请求配置保留 body 缺省与显式 null 的区别；固定原测试覆盖请求序列化及响应路径。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:23",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:718"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:539",
+        ".cache/evidence/auth-fetch-complete-java-20260926/task-parity.json"
       ]
     },
     {
@@ -42082,12 +42112,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.serializeRequest",
       "javaSignature": "public CompletableFuture<Writer> serializeRequest(String method, Map<String, String> headers,",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java Map 配置键已定位；TS 选项接口无独立 Java 类，待端到端调用复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:22",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:718"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:718",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -42095,12 +42126,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.buildPaymentActionLabels",
       "javaSignature": "public List<String> buildPaymentActionLabels(Map<String, ?> config,",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java Map 配置键已定位；TS 选项接口无独立 Java 类，待端到端调用复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:35",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:293"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:293",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchTest.java"
       ]
     },
     {
@@ -42108,12 +42140,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.serializeRequest",
       "javaSignature": "public CompletableFuture<Writer> serializeRequest(String method, Map<String, String> headers,",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java Map 配置键已定位；TS 选项接口无独立 Java 类，待端到端调用复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:21",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:718"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:718",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -42121,12 +42154,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.handlePaymentAndRetry",
       "javaSignature": "public CompletableFuture<FetchResponse> handlePaymentAndRetry(String url,",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java Map 配置键已定位；TS 选项接口无独立 Java 类，待端到端调用复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:25",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:633"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:633",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -42134,12 +42168,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.getMaxPaymentAttempts",
       "javaSignature": "public static int getMaxPaymentAttempts(Object configured) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java Map 配置键已定位；TS 选项接口无独立 Java 类，待端到端调用复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:26",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:285"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:285",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
@@ -42147,12 +42182,13 @@
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.fetch",
       "javaSignature": "public CompletableFuture<FetchResponse> fetch(String url, Map<String, Object> config) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
-      "review": "draft",
-      "implementationStatus": "design-adapter-needs-review",
-      "basis": "Java Map 配置键已定位；TS 选项接口无独立 Java 类，待端到端调用复核。",
+      "review": "reviewed",
+      "implementationStatus": "source-present-verified",
+      "basis": "TS 内部结构由 Java PeerState 或同键 Map 承接；已核对字段读写与对应 Java 固定用例。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:24",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:472"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:472",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchAdditionalTest.java"
       ]
     },
     {
