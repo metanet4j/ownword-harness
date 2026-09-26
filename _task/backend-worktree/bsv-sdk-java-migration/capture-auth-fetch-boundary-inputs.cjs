@@ -15,12 +15,24 @@ if (cases.size !== 15) throw new Error('固定边界原用例身份变化')
 const undefinedValue = { type: 'undefined' }
 function valueOf(value) {
   if (value === undefined) return undefinedValue
-  if (value instanceof Error) return { type: 'error', name: value.name, message: value.message,
+  if (value instanceof Error || (value && typeof value.name === 'string' && typeof value.message === 'string'))
+    return { type: 'error', name: value.name, message: value.message,
     details: value.details === undefined ? undefinedValue : valueOf(value.details) }
   if (Array.isArray(value)) return value.map(valueOf)
   if (value && typeof value === 'object') return Object.fromEntries(
     Object.entries(value).map(([key, item]) => [key, valueOf(item)]))
   return value
+}
+async function resultOf(result) {
+  if (result.type === 'throw') return { type: 'rejected', value: valueOf(result.value) }
+  try {
+    const value = await result.value
+    if (value instanceof Response) return { type: 'resolved', value: { status: value.status,
+      headers: Object.fromEntries(value.headers.entries()), bodyText: await value.clone().text() } }
+    return { type: 'resolved', value: valueOf(value) }
+  } catch (error) {
+    return { type: 'rejected', value: valueOf(error) }
+  }
 }
 
 const captures = new Map()
@@ -67,8 +79,12 @@ jest.doMock(modulePath, () => {
     const capture = { input, observations, peer, starts: {
       listen: peer.listenForGeneralMessages?.mock?.calls.length ?? 0,
       send: peer.toPeer?.mock?.calls.length ?? 0,
-      stop: peer.stopListeningForGeneralMessages?.mock?.calls.length ?? 0
+      stop: peer.stopListeningForGeneralMessages?.mock?.calls.length ?? 0,
+      wait: this.waitForPendingCertificateRequests?.mock?.calls.length ?? 0,
+      fallback: this.handleFetchAndValidate?.mock?.calls.length ?? 0,
+      fetch: this.fetch?.mock?.calls.length ?? 0
     } }
+    capture.client = this
     captures.set(caseId, capture)
     const originalListen = peer.listenForGeneralMessages
     if (jest.isMockFunction(originalListen)) {
@@ -89,7 +105,7 @@ jest.doMock(modulePath, () => {
   return actual
 })
 
-afterEach(() => {
+afterEach(async () => {
   const caseId = cases.get(expect.getState().currentTestName)
   if (!caseId) return
   const capture = captures.get(caseId)
@@ -98,6 +114,14 @@ afterEach(() => {
   const { peer, starts, observations, input } = capture
   observations.sent = (peer.toPeer?.mock?.calls ?? []).slice(starts.send)
     .map(args => ({ payload: valueOf(args[0]), identityKey: valueOf(args[1]) }))
+  observations.sendResults = await Promise.all((peer.toPeer?.mock?.results ?? [])
+    .slice(starts.send).map(resultOf))
+  observations.waitResults = await Promise.all((capture.client.waitForPendingCertificateRequests?.mock?.results ?? [])
+    .slice(starts.wait).map(resultOf))
+  observations.fallbackResults = await Promise.all((capture.client.handleFetchAndValidate?.mock?.results ?? [])
+    .slice(starts.fallback).map(resultOf))
+  observations.fetchResults = await Promise.all((capture.client.fetch?.mock?.results ?? [])
+    .slice(starts.fetch).map(resultOf))
   observations.stoppedIds = (peer.stopListeningForGeneralMessages?.mock?.calls ?? [])
     .slice(starts.stop).map(args => valueOf(args[0]))
   observations.listenCallCount = (peer.listenForGeneralMessages?.mock?.calls.length ?? 0) - starts.listen
