@@ -104,6 +104,20 @@
       "mapping": ".cache/evidence/script-vector-inputs-20260927/plan-v2/mapping.json",
       "input_plan": ".cache/evidence/script-vector-inputs-20260927/plan-v2/input-plan.json",
       "captureKind": "specialized-local"
+    },
+    {
+      "name": "transaction-shared-vectors",
+      "catalog": ".cache/evidence/transaction-vector-final-20260927/plan/catalog.json",
+      "mapping": ".cache/evidence/transaction-vector-final-20260927/plan/mapping.json",
+      "input_plan": ".cache/evidence/transaction-vector-final-20260927/plan/input-plan.json",
+      "captureKind": "specialized-local"
+    },
+    {
+      "name": "chronicle-opcodes",
+      "catalog": ".cache/evidence/chronicle-opcodes-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/chronicle-opcodes-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/chronicle-opcodes-plan-20260927/input-plan.json",
+      "captureKind": "specialized-local"
     }
   ]
 }
