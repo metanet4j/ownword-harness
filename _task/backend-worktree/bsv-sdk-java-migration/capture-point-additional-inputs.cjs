@@ -76,7 +76,7 @@ function call (method, receiver, args, action) {
 }
 const methods = {
   Point: ['getX', 'getY', 'isInfinity', 'validate', 'toJSON', 'encode', 'inspect', 'add', 'dbl', 'neg',
-    'dblp', 'mul', 'mulAdd', 'jmulAdd', 'eq', 'toJ', '_getDoubles', '_combineWnafPair', '_collectWnafStep'],
+  'dblp', 'mul', 'mulCT', 'mulAdd', 'jmulAdd', 'eq', 'toJ', '_getDoubles', '_combineWnafPair', '_collectWnafStep'],
   BigNumber: ['toArray', 'toString', 'eq', 'neg', 'addn'],
   JacobianPoint: ['toP', 'isInfinity', 'neg', 'add', 'mixedAdd', 'dbl', 'dblp', 'eq', 'eqXToP', 'inspect']
 }

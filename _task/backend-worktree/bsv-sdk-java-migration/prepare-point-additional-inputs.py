@@ -6,7 +6,8 @@ import json
 from pathlib import Path
 TASK = Path(__file__).resolve().parent
 VARIANTS = {'additional': ('Point.additional.test.ts', 60, 259, 87),
-            'jacobian': ('JacobianPoint.test.ts', 35, 184, 37)}
+            'jacobian': ('JacobianPoint.test.ts', 35, 184, 37),
+            'point11': ('Point.test.ts', 11, 29, 11)}
 
 def write(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
