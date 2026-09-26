@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""在一次 evidence-bundle capture 内运行固定 Writer/WriterUint8Array 原测试。"""
+"""在一次 evidence-bundle capture 内运行固定 Reader/Writer 原测试。"""
 import argparse
 import os
 from pathlib import Path
@@ -13,6 +13,8 @@ VARIANTS = {
                   'com.metanet4j.bsv.primitives.WriterUint8ArrayTest', 'migration.writerU8.corpus'),
     'writer': ('src/primitives/__tests/Writer.test.ts',
                'com.metanet4j.bsv.primitives.WriterTest', 'migration.writer.corpus'),
+    'reader': ('src/primitives/__tests/Reader.test.ts',
+               'com.metanet4j.bsv.primitives.ReaderTest', 'migration.reader.corpus'),
 }
 
 
@@ -49,7 +51,7 @@ def main():
             str(TASK / 'ts-offline-guard.cjs'), str(TASK / 'capture-reader-writer-inputs.cjs'),
             str(TASK / 'capture-parity.cjs'), '--json', '--outputFile=' + str(report), env=env)
         if Path(env['MIGRATION_NETWORK_LOG']).exists() and Path(env['MIGRATION_NETWORK_LOG']).read_text().strip():
-            raise RuntimeError('固定 Writer 原测试出现网络调用')
+            raise RuntimeError('固定字节读写原测试出现网络调用')
         run('python3', str(TASK / 'prepare-writer-u8-inputs.py'), 'emit-ts',
             '--raw', str(raw), '--replay', str(replay), '--output', env['EVIDENCE_INPUTS_PATH'], env=env)
     else:

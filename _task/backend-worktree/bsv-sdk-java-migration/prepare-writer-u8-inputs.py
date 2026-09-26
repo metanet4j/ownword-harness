@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""把固定 Writer/WriterUint8Array 原测试的真实入口调用冻结为局部输入计划。"""
+"""把固定 Reader/Writer 原测试的真实入口调用冻结为局部输入计划。"""
 import argparse
 from collections import defaultdict
 import json
@@ -12,6 +12,8 @@ VARIANTS = {
                   'com.metanet4j.bsv.primitives.WriterUint8ArrayTest', 26, 92),
     'writer': ('src/primitives/__tests/Writer.test.ts',
                'com.metanet4j.bsv.primitives.WriterTest', 27, 96),
+    'reader': ('src/primitives/__tests/Reader.test.ts',
+               'com.metanet4j.bsv.primitives.ReaderTest', 37, 93),
 }
 
 
@@ -46,7 +48,7 @@ def freeze(args):
     all_mapping = read(TASK / 'test-map.json')
     ids = {case['id'] for case in source['cases']}
     mapping_cases = [case for case in all_mapping['cases'] if case['id'] in ids]
-    require(len(mapping_cases) == len(ids) == case_count, 'Writer 冻结映射用例数不同')
+    require(len(mapping_cases) == len(ids) == case_count, '字节读写测试冻结映射用例数不同')
     sites = {site['id'] for site in source['sites']}
     reviews = [review for review in all_mapping['siteReviews'] if review['id'] in sites]
     require(len(reviews) == len(sites), '固定 TS 站点审阅必须恰好覆盖本文件')
