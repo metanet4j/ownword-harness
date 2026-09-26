@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "source": "fixed TypeScript fast-check predicate arguments",
+  "upstreamCommit": "f999e0c1aad9a7afd0cbadaaf23841d049af9d5a",
+  "testPath": "packages/sdk/src/auth/clients/__tests__/AuthFetch.property.test.ts",
+  "testSha256": "7cc0576019a546899531157cb76ed434026e2c977e7c760a3127c3f51b9cdf41",
+  "fastCheckVersion": "4.9.0",
+  "seed": 20260926,
+  "path": null,
+  "numRuns": 300,
+  "predicateCalls": 300,
+  "shrinkCalls": 0,
+  "assertions": 600,
+  "corpusSha256": "b0cf9d142fed85b2a9a82b85ac4b254ae6408da60ffa6457f98e757825818392",
+  "tsReportSha256": "b93cb203c332784a5e2fde9966e40f66af9e5a29a9e4c51abb76bb75a9869edf",
+  "tsAssertionsSha256": "e8eb60a8bd486043e08c2257292aca83603a4a8c1744f07661722949b044e961"
+}
