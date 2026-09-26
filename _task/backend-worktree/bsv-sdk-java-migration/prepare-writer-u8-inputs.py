@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""把固定 Reader/Writer 原测试的真实入口调用冻结为局部输入计划。"""
+"""把固定 TS 原测试的真实入口调用冻结为局部输入计划。"""
 import argparse
 from collections import defaultdict
 import json
@@ -16,6 +16,8 @@ VARIANTS = {
                'com.metanet4j.bsv.primitives.ReaderTest', 37, 93),
     'reader-u8': ('src/primitives/__tests/ReaderUint8Array.test.ts',
                   'com.metanet4j.bsv.primitives.ReaderUint8ArrayTest', 37, 93),
+    'hmac': ('src/primitives/__tests/HMAC.test.ts',
+             'com.metanet4j.bsv.primitives.HmacTest', 5, 35),
 }
 
 
