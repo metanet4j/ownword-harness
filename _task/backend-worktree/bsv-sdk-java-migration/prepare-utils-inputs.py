@@ -26,6 +26,8 @@ GROUPS = {
               "toArray('utf8') UTF-8 encoding "), 18, 19),
     'misc': ('', 6, 16),
     'utf8-misc': ('', 24, 35),
+    'utf8-bounds': ('toUTF8 bounds checks ', 3, 6),
+    'diagnostic': ('utils formats unknown diagnostic values ', 1, 15),
     'remaining': ('', 56, 116),
 }
 MISC_NAMES = {
