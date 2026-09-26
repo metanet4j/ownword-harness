@@ -28214,7 +28214,7 @@
     {
       "id": "src/transaction/TransactionInput.ts#property:TransactionInput.unlockingScript:1",
       "java": "com.metanet4j.bsv.transaction.TransactionInput#unlockingScript",
-      "javaSignature": "public Script unlockingScript;",
+      "javaSignature": "public Object unlockingScript = Undefined.INSTANCE;",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-base",
       "review": "reviewed",
       "evidence": [
@@ -28269,7 +28269,7 @@
     {
       "id": "src/transaction/TransactionOutput.ts#property:TransactionOutput.satoshis:1",
       "java": "com.metanet4j.bsv.transaction.TransactionOutput#satoshis",
-      "javaSignature": "public Double satoshis;",
+      "javaSignature": "public Object satoshis = Undefined.INSTANCE;",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-base",
       "review": "reviewed",
       "evidence": [
