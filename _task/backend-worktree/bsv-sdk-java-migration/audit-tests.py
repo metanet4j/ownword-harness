@@ -34,6 +34,11 @@ DRBG_BRANCH_CASES = {hashlib.sha256(json.dumps([DRBG_FILE, ['DRBG', 'NIST vector
     for index in range(15)}
 # 每项固定为：文件、源码摘要、站点 → (规则 ID、原 matcher、原边界、执行次数)。
 SEMANTIC_CASES = {
+    '5e08c3e9cd40aa0723c8bc4888818daf1fee79d866e74c68f6c76194748dc0c7':
+        ('src/primitives/__tests/AsyncCryptoBackend.test.ts',
+         '7b0c97ba0be75a72fc7d3d2ffc708802553fe9658e6f4b893722504bbb545fe2',
+         {'38:7': ('async-ready-null-adapter-v1', 'toBeUndefined', None, 1),
+          '42:7': ('async-ready-null-adapter-v1', 'toBeUndefined', None, 1)}),
     '61b4ecc5ca8e8e0e52d508368744a12c06c31d670ea752d08a5d880a62cf5f63':
         ('src/auth/clients/__tests__/AuthFetch.test.ts',
          '0312c9107dbd4acddab1cd282355090fad28dfe58b0f395b642641cca7654f0a',
@@ -257,6 +262,16 @@ def compare_actuals(case_id, expected, identity, left, right):
         require(canonical(left) == canonical(right), f'实际结果不一致：{case_id} / {identity}')
         return
     rule_id, matcher, boundary, _ = rule
+    if rule_id == 'async-ready-null-adapter-v1':
+        for side, value, actual in (('TS', left, {'type': 'undefined'}),
+                                    ('Java', right, {'type': 'null'})):
+            require(isinstance(value, dict) and set(value) ==
+                    {'kind', 'matcher', 'negated', 'actual', 'expected', 'pass'}
+                    and value['kind'] == 'assertion' and value['matcher'] == 'toBeUndefined'
+                    and value['negated'] is False and value['pass'] is True
+                    and value['actual'] == actual and value['expected'] == [],
+                    f'AsyncCryptoBackend.ready {side} 必须保留固定 undefined/null 实际观测：{identity}')
+        return
     for value in (left, right):
         require(isinstance(value, dict) and value.get('kind') == 'assertion'
                 and value.get('matcher') == matcher and value.get('negated') is matcher.startswith('not.')

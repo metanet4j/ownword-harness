@@ -106,6 +106,33 @@ class SemanticTest(unittest.TestCase):
                 self.assertNotEqual(self.bundle().returncode, 0)
         self.f.path(name).write_text(original)
 
+    def test_async_ready_null_adapter_is_limited_to_two_original_sites(self):
+        left = observation('toBeUndefined', {'type': 'undefined'}, [])
+        right = observation('toBeUndefined', {'type': 'null'}, [])
+        self.case('5e08c3e9cd40aa0723c8bc4888818daf1fee79d866e74c68f6c76194748dc0c7',
+                  [('38:7', 'async-ready-null-adapter-v1', left, right),
+                   ('42:7', 'async-ready-null-adapter-v1', left, right)])
+        self.accepts()
+        original = self.f.path('java-assertions.jsonl').read_text()
+        for label, change in [
+            ('Java 改为未定义', lambda value: value.update(actual={'type': 'undefined'})),
+            ('Java 改为字符串', lambda value: value.update(actual=text_value('undefined'))),
+            ('原 matcher 改动', lambda value: value.update(matcher='toBeNull')),
+            ('只报告 pass', lambda value: value.pop('actual')),
+            ('原预期改动', lambda value: value.update(expected={'type': 'undefined'})),
+        ]:
+            with self.subTest(label=label):
+                self.f.path('java-assertions.jsonl').write_text(original)
+                self.mutate_java(lambda rows: change(rows[0]['value']))
+                self.assertNotEqual(self.bundle().returncode, 0)
+        self.f.path('java-assertions.jsonl').write_text(original)
+        self.rejects_mutations('plan.json', [
+            ('新增站点', lambda data: data[self.case_id]['comparisonRules'].update(
+                {'invented': 'async-ready-null-adapter-v1'})),
+            ('删规则', lambda data: data[self.case_id]['comparisonRules'].pop(
+                next(iter(data[self.case_id]['comparisonRules'])))),
+        ])
+
     def test_fixed_timing_bounds_recompute_actuals_and_reject_pass_only(self):
         left = observation('toBeLessThan', number(2), number(50))
         right = observation('toBeLessThan', number(7), number(50))
