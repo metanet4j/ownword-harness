@@ -30484,33 +30484,33 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/bip-39-wordlist-en.ts:2053",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Bip39WordlistEn.java:7"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Bip39WordlistEn.java:9"
       ],
       "note": "词间分隔符为空格。"
     },
     {
       "id": "src/compat/bip-39-wordlist-en.ts#property:wordList.value:1",
       "java": "com.metanet4j.bsv.compat.Bip39WordlistEn#VALUE",
-      "javaSignature": "public static final List<String> VALUE = List.of(\"\"\"",
+      "javaSignature": "public static final List<String> VALUE",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-compat",
       "review": "reviewed",
       "evidence": [
         "src/compat/bip-39-wordlist-en.ts:3",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Bip39WordlistEn.java:8"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Bip39WordlistEn.java:10"
       ],
       "note": "按原始索引顺序完整复制 2048 英文单词。"
     },
     {
       "id": "src/compat/bip-39-wordlist-en.ts#variable:wordList:1",
-      "java": "com.metanet4j.bsv.compat.Bip39WordlistEn#VALUE",
-      "javaSignature": "public static final List<String> VALUE = List.of(\"\"\"",
+      "java": "com.metanet4j.bsv.compat.Mnemonic#ENGLISH",
+      "javaSignature": "public static final Wordlist ENGLISH = new Wordlist(Bip39WordlistEn.VALUE, Bip39WordlistEn.SPACE);",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-compat",
       "review": "reviewed",
       "evidence": [
         "src/compat/bip-39-wordlist-en.ts:2",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Bip39WordlistEn.java:8"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:22"
       ],
-      "note": "英文 BIP39 词表对象，Java 用 VALUE/SPACE 常量呈现。"
+      "note": "英文 BIP39 词表对象映射 Mnemonic.ENGLISH，引用 VALUE 与 SPACE。"
     },
     {
       "id": "src/compat/HD.ts#class:HD:1",
@@ -30520,19 +30520,19 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:28",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:17"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:18"
       ],
       "note": "BIP32 扩展密钥，持有版本、深度、父指纹、索引、链码与密钥对。"
     },
     {
       "id": "src/compat/HD.ts#constructor:HD.constructor:1",
       "java": "com.metanet4j.bsv.compat.HD#HD",
-      "javaSignature": "public HD() {}",
+      "javaSignature": "public HD(long versionBytesNum, int depth, List<Integer> parentFingerPrint, long childIndex, List<Integer> chainCode, PrivateKey privKey, PublicKey pubKey)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-compat",
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:52",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:29"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:32"
       ],
       "note": "可按七个扩展密钥字段创建；空构造用于加载器。"
     },
@@ -30544,7 +30544,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:217",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:118"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:119"
       ],
       "note": "严格解析 m 路径及末尾硬化标记，拒绝大于 2^31-1 的段。"
     },
@@ -30556,7 +30556,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:262",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:132"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:133"
       ],
       "note": "HMAC-SHA512 派生 IL/IR；私钥模 n 相加，公钥用 IL*G+Kpar。"
     },
@@ -30568,7 +30568,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:162",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:104"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:105"
       ],
       "note": "78 字节 BIP32 序列化：4 字节版本、深度、指纹、索引、链码、33 字节密钥。 Java 实例入口为 fromBinary，对应 TS 静态声明。"
     },
@@ -30580,7 +30580,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:172",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:65"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:66"
       ],
       "note": "78 字节 BIP32 序列化：4 字节版本、深度、指纹、索引、链码、33 字节密钥。 Java 实例入口为 loadBinary，对应 TS 实例声明。"
     },
@@ -30592,7 +30592,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:75",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:48"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:49"
       ],
       "note": "根钱包链码与私钥各取 32 个随机字节，深度/索引清零。 Java 实例入口为 loadRandom，对应 TS 实例声明。"
     },
@@ -30604,7 +30604,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:92",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:59"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:60"
       ],
       "note": "根钱包链码与私钥各取 32 个随机字节，深度/索引清零。 Java 实例入口为 fromRandom，对应 TS 静态声明。"
     },
@@ -30616,7 +30616,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:123",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:84"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:85"
       ],
       "note": "种子限 16–64 字节，以 Bitcoin seed 为 HMAC-SHA512 密钥生成根节点。 Java 实例入口为 fromSeed，对应 TS 静态声明。"
     },
@@ -30628,7 +30628,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:133",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:70"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:71"
       ],
       "note": "种子限 16–64 字节，以 Bitcoin seed 为 HMAC-SHA512 密钥生成根节点。 Java 实例入口为 loadSeed，对应 TS 实例声明。"
     },
@@ -30640,7 +30640,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:102",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:68"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:69"
       ],
       "note": "Base58Check 用四字节版本前缀解码，再加载 78 字节结构。 Java 实例入口为 fromString，对应 TS 静态声明。"
     },
@@ -30652,7 +30652,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:112",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:61"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:62"
       ],
       "note": "Base58Check 用四字节版本前缀解码，再加载 78 字节结构。 Java 实例入口为 loadString，对应 TS 实例声明。"
     },
@@ -30664,7 +30664,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:389",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:178"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:179"
       ],
       "note": "版本字节为 0x0488ade4 时返回 true。"
     },
@@ -30676,7 +30676,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:357",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:116"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:117"
       ],
       "note": "序列化 78 字节，私钥前加 0，公钥用压缩 33 字节。"
     },
@@ -30688,7 +30688,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:337",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:167"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:168"
       ],
       "note": "只读公钥版本 0x0488b21e，清除私钥并保留链码与层级字段。"
     },
@@ -30700,7 +30700,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:206",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:116"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:117"
       ],
       "note": "78 字节结构用空前缀 Base58Check 编码为 xprv/xpub。"
     },
@@ -30712,7 +30712,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:33",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:24"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:25"
       ],
       "note": "持有 HMAC-SHA512 的右 32 字节链码。"
     },
@@ -30724,19 +30724,19 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:32",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:23"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:24"
       ],
       "note": "持有当前子索引，硬化位为 0x80000000。"
     },
     {
       "id": "src/compat/HD.ts#property:HD.constants:1",
       "java": "com.metanet4j.bsv.compat.HD#constants",
-      "javaSignature": "public final Map<String, Long> constants = Map.of(\"pubKey\", PUBLIC_VERSION, \"privKey\", PRIVATE_VERSION);",
+      "javaSignature": "public Map<String, Long> constants = new LinkedHashMap<>(Map.of(\"pubKey\", PUBLIC_VERSION, \"privKey\", PRIVATE_VERSION));",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-compat",
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:36",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:27"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:28"
       ],
       "note": "记录 xprv/xpub 主网版本号。"
     },
@@ -30748,7 +30748,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:30",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:21"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:22"
       ],
       "note": "持有当前派生层级。"
     },
@@ -30760,7 +30760,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:31",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:22"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:23"
       ],
       "note": "父压缩公钥 HASH160 的前四字节。"
     },
@@ -30772,7 +30772,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:34",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:25"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:26"
       ],
       "note": "私钥版持有标量，公钥版为空。"
     },
@@ -30784,7 +30784,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:35",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:26"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:27"
       ],
       "note": "持有当前压缩输出的公钥对象。"
     },
@@ -30796,7 +30796,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/HD.ts:29",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:20"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/HD.java:21"
       ],
       "note": "持有扩展密钥四字节版本标识。"
     },
@@ -30815,12 +30815,12 @@
     {
       "id": "src/compat/Mnemonic.ts#constructor:Mnemonic.constructor:1",
       "java": "com.metanet4j.bsv.compat.Mnemonic#Mnemonic",
-      "javaSignature": "public Mnemonic() { this(\"\", List.of(), ENGLISH); }",
+      "javaSignature": "public Mnemonic(String mnemonic, List<?> seed, Wordlist wordlist)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-compat",
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:27",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:23"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:32"
       ],
       "note": "未提供短语/种子时分别使用空串/空数组，默认英文词表。"
     },
@@ -30832,19 +30832,19 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:270",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:74"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:80"
       ],
       "note": "逐词查表并对 SHA-256 校验位，返回布尔值。"
     },
     {
       "id": "src/compat/Mnemonic.ts#method:Mnemonic.entropy2Mnemonic:1",
       "java": "com.metanet4j.bsv.compat.Mnemonic#entropy2Mnemonic",
-      "javaSignature": "entropy2Mnemonic(CompatRandom.random(bitCount / 8));",
+      "javaSignature": "entropy2Mnemonic(CompatRandom.random((int) (bitCount / 8)));",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-compat",
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:186",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:61"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:67"
       ],
       "note": "熵后附 SHA-256 校验位，每 11 位映射词表索引。"
     },
@@ -30856,7 +30856,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:60",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:46"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:52"
       ],
       "note": "从两个 VarInt 长度域还原短语与种子。"
     },
@@ -30868,7 +30868,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:111",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:68"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:74"
       ],
       "note": "按输入熵生成词组，不自动派生种子。 Java 入口为 loadEntropy，对应 TS 实例声明。"
     },
@@ -30880,7 +30880,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:121",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:69"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:75"
       ],
       "note": "按输入熵生成词组，不自动派生种子。 Java 入口为 fromEntropy，对应 TS 静态声明。"
     },
@@ -30892,7 +30892,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:79",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:55"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:61"
       ],
       "note": "缺失、零或 NaN 位数默认 128；非 32 倍数和小于 128 分别报错。 Java 入口为 loadRandom，对应 TS 实例声明。"
     },
@@ -30904,7 +30904,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:100",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:66"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:72"
       ],
       "note": "缺失、零或 NaN 位数默认 128；非 32 倍数和小于 128 分别报错。 Java 入口为 fromRandom，对应 TS 静态声明。"
     },
@@ -30916,7 +30916,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:132",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:71"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:77"
       ],
       "note": "设置短语后校验词表与 checksum；无效输入抛固定错误。 Java 入口为 loadString，对应 TS 实例声明。"
     },
@@ -30928,7 +30928,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:153",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:80"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:86"
       ],
       "note": "设置短语后校验词表与 checksum；无效输入抛固定错误。 Java 入口为 fromString，对应 TS 静态声明。"
     },
@@ -30940,7 +30940,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:343",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:169"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:177"
       ],
       "note": "尝试派生种子并把异常转成 false。 Java 入口为 checkValid，对应 TS 实例声明。"
     },
@@ -30952,7 +30952,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:360",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:175"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:183"
       ],
       "note": "尝试派生种子并把异常转成 false。 Java 入口为 isValid，对应 TS 静态声明。"
     },
@@ -30964,7 +30964,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:316",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:62"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:68"
       ],
       "note": "短语与密码 NFKD 规范化后 PBKDF2-HMAC-SHA512 2048 轮。"
     },
@@ -30976,7 +30976,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:37",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:38"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:44"
       ],
       "note": "按 VarInt 长度写 UTF-8 短语和种子字节。"
     },
@@ -30988,7 +30988,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:228",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:139"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:145"
       ],
       "note": "由 11 位词索引还原熵并核验 checksum，未知词与坏校验分别报错。"
     },
@@ -31000,7 +31000,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:172",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:82"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:88"
       ],
       "note": "校验后用 PBKDF2-HMAC-SHA512 派生并返回 64 字节种子。"
     },
@@ -31012,7 +31012,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:161",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:81"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:87"
       ],
       "note": "原样返回当前助记词字符串。"
     },
@@ -31024,7 +31024,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:17",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:19"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:25"
       ],
       "note": "当前短语原文；格式校验由 fromString/check 触发。"
     },
@@ -31036,7 +31036,7 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:18",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:20"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:26"
       ],
       "note": "当前派生种子字节。"
     },
@@ -31048,9 +31048,1293 @@
       "review": "reviewed",
       "evidence": [
         "src/compat/Mnemonic.ts:19",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:21"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/compat/Mnemonic.java:27"
       ],
       "note": "可配置词序与分隔符，默认英文 2048 词。"
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#class:ARC:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC",
+      "javaSignature": "public final class ARC implements Broadcaster.BatchBroadcaster",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:114",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:20"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#constructor:ARC.constructor:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#ARC",
+      "javaSignature": "public ARC(String url, ArcConfig config) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:129",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:52"
+      ],
+      "note": "TS 三种构造声明折合两个 Java 重载，默认参数由 ArcConfig 构造处理。"
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#constructor:ARC.constructor:2",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#ARC",
+      "javaSignature": "public ARC(String url, String apiKey) { this(url, new ArcConfig().apiKey(apiKey)); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:136",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:51"
+      ],
+      "note": "TS 三种构造声明折合两个 Java 重载，默认参数由 ArcConfig 构造处理。"
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#constructor:ARC.constructor:3",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#ARC",
+      "javaSignature": "public ARC(String url, ArcConfig config) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:138",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:52"
+      ],
+      "note": "TS 三种构造声明折合两个 Java 重载，默认参数由 ArcConfig 构造处理。"
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#function:caughtArcResponse:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#caughtArcResponse",
+      "javaSignature": "private static Object caughtArcResponse(Throwable error) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:97",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:191"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#function:defaultDeploymentId:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#defaultDeploymentId",
+      "javaSignature": "private static String defaultDeploymentId() {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:24",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:74"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#function:failedArcResponse:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#failedArcResponse",
+      "javaSignature": "static Object failedArcResponse(Object status, Object responseData) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:82",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:177"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#function:parseArcFailureData:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#parseArcFailureData",
+      "javaSignature": "private static Object parseArcFailureData(Object data) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:73",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:171"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#function:successfulArcResponse:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#successfulArcResponse",
+      "javaSignature": "private static Object successfulArcResponse(Object data) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:49",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:146"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#function:transactionHex:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#transactionHex",
+      "javaSignature": "private static String transactionHex(Transaction tx) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:36",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:94"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#interface:ArcConfig:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC.ArcConfig",
+      "javaSignature": "public static final class ArcConfig",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:9",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:35"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#interface:ArcResponse:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#successfulArcResponse",
+      "javaSignature": "private static Object successfulArcResponse(Object data)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:241",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:147"
+      ],
+      "note": "TS ArcResponse 是 HTTP 数据形状；Java 使用 Map 读取字段。"
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#method:ARC.broadcast:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#broadcast",
+      "javaSignature": "@Override public CompletableFuture<Object> broadcast(Object transaction) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:194",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:103"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#method:ARC.broadcastMany:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#broadcastMany",
+      "javaSignature": "@Override public CompletableFuture<List<Object>> broadcastMany(List<?> transactions) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:221",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:122"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#method:ARC.requestHeaders:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#requestHeaders",
+      "javaSignature": "private Map<String, String> requestHeaders() {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:161",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:83"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ARC.apiKey:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#apiKey",
+      "javaSignature": "public final String apiKey;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:116",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:28"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ARC.callbackToken:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#callbackToken",
+      "javaSignature": "public final String callbackToken;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:119",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:31"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ARC.callbackUrl:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#callbackUrl",
+      "javaSignature": "public final String callbackUrl;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:118",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:30"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ARC.deploymentId:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#deploymentId",
+      "javaSignature": "public final String deploymentId;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:117",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:29"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ARC.headers:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#headers",
+      "javaSignature": "public final Map<String, String> headers;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:120",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:32"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ARC.httpClient:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#httpClient",
+      "javaSignature": "public final HttpClient httpClient;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:121",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:33"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ARC.URL:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#URL",
+      "javaSignature": "public final String URL;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:115",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:27"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ArcConfig.apiKey:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC.ArcConfig#apiKey",
+      "javaSignature": "public String apiKey;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:11",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:36"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ArcConfig.callbackToken:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC.ArcConfig#callbackToken",
+      "javaSignature": "public String callbackToken;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:19",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:40"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ArcConfig.callbackUrl:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC.ArcConfig#callbackUrl",
+      "javaSignature": "public String callbackUrl;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:17",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:39"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ArcConfig.deploymentId:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC.ArcConfig#deploymentId",
+      "javaSignature": "public String deploymentId;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:15",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:38"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ArcConfig.headers:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC.ArcConfig#headers",
+      "javaSignature": "public Map<String, String> headers;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:21",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:41"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ArcConfig.httpClient:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC.ArcConfig#httpClient",
+      "javaSignature": "public HttpClient httpClient;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:13",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:37"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ArcResponse.competingTxs:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#successfulArcResponse",
+      "javaSignature": "private static Object successfulArcResponse(Object data)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:245",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:151"
+      ],
+      "note": "TS HTTP 返回字段在 Java 中按 Map 字段读取。"
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ArcResponse.extraInfo:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#successfulArcResponse",
+      "javaSignature": "private static Object successfulArcResponse(Object data)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:243",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:150"
+      ],
+      "note": "TS HTTP 返回字段在 Java 中按 Map 字段读取。"
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ArcResponse.txid:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#successfulArcResponse",
+      "javaSignature": "private static Object successfulArcResponse(Object data)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:242",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:148"
+      ],
+      "note": "TS HTTP 返回字段在 Java 中按 Map 字段读取。"
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#property:ArcResponse.txStatus:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#successfulArcResponse",
+      "javaSignature": "private static Object successfulArcResponse(Object data)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:244",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:149"
+      ],
+      "note": "TS HTTP 返回字段在 Java 中按 Map 字段读取。"
+    },
+    {
+      "id": "src/transaction/broadcasters/ARC.ts#variable:ARC_ERROR_STATUSES:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.ARC#ERROR_STATUSES",
+      "javaSignature": "private static final Set<String> ERROR_STATUSES",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/ARC.ts:28",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/ARC.java:22"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/DefaultBroadcaster.ts#function:defaultBroadcaster:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.DefaultBroadcaster#defaultBroadcaster",
+      "javaSignature": "public static Broadcaster defaultBroadcaster(boolean isTestnet, ARC.ArcConfig config) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/DefaultBroadcaster.ts:4",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/DefaultBroadcaster.java:12"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/Teranode.ts#class:Teranode:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.Teranode",
+      "javaSignature": "public final class Teranode implements Broadcaster {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/Teranode.ts:8",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/Teranode.java:15"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/Teranode.ts#constructor:Teranode.constructor:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.Teranode#Teranode",
+      "javaSignature": "public Teranode(String url, HttpClient client) { URL = url; httpClient = client; }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/Teranode.ts:18",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/Teranode.java:24"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/Teranode.ts#method:Teranode.broadcast:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.Teranode#broadcast",
+      "javaSignature": "@Override public CompletableFuture<Object> broadcast(Object transaction) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/Teranode.ts:29",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/Teranode.java:26"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/Teranode.ts#property:Teranode.httpClient:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.Teranode#httpClient",
+      "javaSignature": "public final HttpClient httpClient;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/Teranode.ts:10",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/Teranode.java:17"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/Teranode.ts#property:Teranode.URL:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.Teranode#URL",
+      "javaSignature": "public final String URL;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/Teranode.ts:9",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/Teranode.java:16"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts#class:WhatsOnChainBroadcaster:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.WhatsOnChainBroadcaster",
+      "javaSignature": "public final class WhatsOnChainBroadcaster implements Broadcaster {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts:9",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/WhatsOnChainBroadcaster.java:14"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts#constructor:WhatsOnChainBroadcaster.constructor:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.WhatsOnChainBroadcaster#WhatsOnChainBroadcaster",
+      "javaSignature": "public WhatsOnChainBroadcaster(String network, HttpClient client) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts:20",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/WhatsOnChainBroadcaster.java:28"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts#method:WhatsOnChainBroadcaster.broadcast:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.WhatsOnChainBroadcaster#broadcast",
+      "javaSignature": "@Override public CompletableFuture<Object> broadcast(Object transaction) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts:35",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/WhatsOnChainBroadcaster.java:34"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts#property:WhatsOnChainBroadcaster.httpClient:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.WhatsOnChainBroadcaster#httpClient",
+      "javaSignature": "public final HttpClient httpClient;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts:12",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/WhatsOnChainBroadcaster.java:17"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts#property:WhatsOnChainBroadcaster.network:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.WhatsOnChainBroadcaster#network",
+      "javaSignature": "public final String network;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts:10",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/WhatsOnChainBroadcaster.java:15"
+      ]
+    },
+    {
+      "id": "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts#property:WhatsOnChainBroadcaster.URL:1",
+      "java": "com.metanet4j.bsv.transaction.broadcasters.WhatsOnChainBroadcaster#URL",
+      "javaSignature": "public final String URL;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-broadcasters",
+      "review": "reviewed",
+      "evidence": [
+        "src/transaction/broadcasters/WhatsOnChainBroadcaster.ts:11",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/transaction/broadcasters/WhatsOnChainBroadcaster.java:16"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#class:CompletedProtoWallet:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet",
+      "javaSignature": "public class CompletedProtoWallet extends ProtoWallet implements WalletInterface {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:32",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:13"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#constructor:CompletedProtoWallet.constructor:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet",
+      "javaSignature": "public CompletedProtoWallet(Object rootKeyOrKeyDeriver) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:36",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:14"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.abortAction:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.abortAction",
+      "javaSignature": "@Override public CompletableFuture<AbortActionResult> abortAction(AbortActionArgs args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:125",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:75"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.acquireCertificate:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.acquireCertificate",
+      "javaSignature": "@Override public CompletableFuture<WalletCertificate> acquireCertificate(AcquireCertificateArgs args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:155",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:76"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.createAction:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.createAction",
+      "javaSignature": "@Override public CompletableFuture<CreateActionResult> createAction(CreateActionArgs args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:113",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:77"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.discoverByAttributes:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.discoverByAttributes",
+      "javaSignature": "@Override public CompletableFuture<DiscoverCertificatesResult> discoverByAttributes(DiscoverByAttributesArgs args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:185",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:78"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.discoverByIdentityKey:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.discoverByIdentityKey",
+      "javaSignature": "@Override public CompletableFuture<DiscoverCertificatesResult> discoverByIdentityKey(DiscoverByIdentityKeyArgs args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:179",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:79"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.getHeaderForHeight:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.getHeaderForHeight",
+      "javaSignature": "@Override public CompletableFuture<GetHeaderResult> getHeaderForHeight(GetHeaderArgs args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:197",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:80"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.getHeight:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.getHeight",
+      "javaSignature": "@Override public CompletableFuture<GetHeightResult> getHeight(Map<String, Object> args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:191",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:81"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.getNetwork:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.getNetwork",
+      "javaSignature": "@Override public CompletableFuture<GetNetworkResult> getNetwork(Map<String, Object> args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:62",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:82"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.getPublicKey:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.getPublicKey",
+      "javaSignature": "@Override public CompletableFuture<GetPublicKeyResult> getPublicKey(GetPublicKeyArgs args) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:74",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:26"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.getVersion:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.getVersion",
+      "javaSignature": "@Override public CompletableFuture<GetVersionResult> getVersion(Map<String, Object> args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:68",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:83"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.internalizeAction:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.internalizeAction",
+      "javaSignature": "@Override public CompletableFuture<InternalizeActionResult> internalizeAction(InternalizeActionArgs args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:137",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:84"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.isAuthenticated:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.isAuthenticated",
+      "javaSignature": "@Override public CompletableFuture<AuthenticatedResult> isAuthenticated(Map<String, Object> args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:51",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:85"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.listActions:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.listActions",
+      "javaSignature": "@Override public CompletableFuture<ListActionsResult> listActions(ListActionsArgs args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:131",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:86"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.listCertificates:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.listCertificates",
+      "javaSignature": "@Override public CompletableFuture<ListCertificatesResult> listCertificates(ListCertificatesArgs args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:161",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:87"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.listOutputs:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.listOutputs",
+      "javaSignature": "@Override public CompletableFuture<ListOutputsResult> listOutputs(ListOutputsArgs args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:143",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:88"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.proveCertificate:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.proveCertificate",
+      "javaSignature": "@Override public CompletableFuture<ProveCertificateResult> proveCertificate(ProveCertificateArgs args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:167",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:89"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.relinquishCertificate:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.relinquishCertificate",
+      "javaSignature": "@Override public CompletableFuture<RelinquishCertificateResult> relinquishCertificate(RelinquishCertificateArgs args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:173",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:90"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.relinquishOutput:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.relinquishOutput",
+      "javaSignature": "@Override public CompletableFuture<RelinquishOutputResult> relinquishOutput(RelinquishOutputArgs args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:149",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:91"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.signAction:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.signAction",
+      "javaSignature": "@Override public CompletableFuture<SignActionResult> signAction(SignActionArgs args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:119",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:92"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#method:CompletedProtoWallet.waitForAuthentication:1",
+      "java": "com.metanet4j.bsv.auth.certificates.CompletedProtoWallet.waitForAuthentication",
+      "javaSignature": "@Override public CompletableFuture<AuthenticatedResult> waitForAuthentication(Map<String, Object> args, String originator) { return unsupported(); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:56",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/CompletedProtoWallet.java:93"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/__tests/CompletedProtoWallet.ts#property:CompletedProtoWallet.keyDeriver:1",
+      "java": "com.metanet4j.bsv.wallet.ProtoWallet.keyDeriver",
+      "javaSignature": "public KeyDeriverApi keyDeriver;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/__tests/CompletedProtoWallet.ts:35",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/ProtoWallet.java:27"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#class:Certificate:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate",
+      "javaSignature": "public class Certificate {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:18",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:19"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#constructor:Certificate.constructor:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate",
+      "javaSignature": "public Certificate(String type, String serialNumber, String subject, String certifier,",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:65",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:30"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#method:Certificate.fromBinary:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.fromBinary",
+      "javaSignature": "public static Certificate fromBinary(Object binary) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:147",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:75"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#method:Certificate.fromObject:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.fromObject",
+      "javaSignature": "public static Certificate fromObject(Map<String, ?> value) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:290",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:137"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#method:Certificate.getCertificateFieldEncryptionDetails:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.getCertificateFieldEncryptionDetails",
+      "javaSignature": "public static EncryptionDetails getCertificateFieldEncryptionDetails(String name) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:274",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:128"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#method:Certificate.sign:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.sign",
+      "javaSignature": "public CompletableFuture<Void> sign(ProtoWallet wallet) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:237",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:109"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#method:Certificate.toBinary:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.toBinary",
+      "javaSignature": "public List<Object> toBinary() { return toBinary(true); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:89",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:46"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#method:Certificate.verify:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.verify",
+      "javaSignature": "public CompletableFuture<Boolean> verify() {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:213",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:98"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#property:Certificate.certifier:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.certifier",
+      "javaSignature": "public String certifier;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:37",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:25"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#property:Certificate.fields:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.fields",
+      "javaSignature": "public Map<String, String> fields;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:47",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:27"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#property:Certificate.revocationOutpoint:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.revocationOutpoint",
+      "javaSignature": "public String revocationOutpoint;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:42",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:26"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#property:Certificate.serialNumber:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.serialNumber",
+      "javaSignature": "public String serialNumber;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:27",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:23"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#property:Certificate.signature:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.signature",
+      "javaSignature": "public String signature;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:52",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:28"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#property:Certificate.subject:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.subject",
+      "javaSignature": "public String subject;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:32",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:24"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/Certificate.ts#property:Certificate.type:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.type",
+      "javaSignature": "public String type;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/Certificate.ts:22",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:22"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#class:MasterCertificate:1",
+      "java": "com.metanet4j.bsv.auth.certificates.MasterCertificate",
+      "javaSignature": "public class MasterCertificate extends Certificate {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:28",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/MasterCertificate.java:21"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#constructor:MasterCertificate.constructor:1",
+      "java": "com.metanet4j.bsv.auth.certificates.MasterCertificate",
+      "javaSignature": "public MasterCertificate(String type, String serialNumber, String subject, String certifier,",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:39",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/MasterCertificate.java:24"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#interface:CreateCertificateFieldsResult:1",
+      "java": "com.metanet4j.bsv.auth.certificates.MasterCertificate.CreatedFields",
+      "javaSignature": "public record CreatedFields(Map<String, String> certificateFields, Map<String, String> masterKeyring) {}",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:15",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/MasterCertificate.java:43"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#method:MasterCertificate.createCertificateFields:1",
+      "java": "com.metanet4j.bsv.auth.certificates.MasterCertificate.createCertificateFields",
+      "javaSignature": "public static CompletableFuture<CreatedFields> createCertificateFields(ProtoWallet creatorWallet,",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:90",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/MasterCertificate.java:46"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#method:MasterCertificate.createKeyringForVerifier:1",
+      "java": "com.metanet4j.bsv.auth.certificates.MasterCertificate.createKeyringForVerifier",
+      "javaSignature": "public static CompletableFuture<Map<String, String>> createKeyringForVerifier(ProtoWallet subjectWallet,",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:138",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/MasterCertificate.java:69"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#method:MasterCertificate.decryptField:1",
+      "java": "com.metanet4j.bsv.auth.certificates.MasterCertificate.decryptField",
+      "javaSignature": "public static CompletableFuture<DecryptedField> decryptField(ProtoWallet wallet,",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:322",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/MasterCertificate.java:155"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#method:MasterCertificate.decryptFields:1",
+      "java": "com.metanet4j.bsv.auth.certificates.MasterCertificate.decryptFields",
+      "javaSignature": "public static CompletableFuture<Map<String, String>> decryptFields(ProtoWallet wallet,",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:289",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/MasterCertificate.java:130"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#method:MasterCertificate.issueCertificateForSubject:1",
+      "java": "com.metanet4j.bsv.auth.certificates.MasterCertificate.issueCertificateForSubject",
+      "javaSignature": "public static CompletableFuture<MasterCertificate> issueCertificateForSubject(ProtoWallet certifierWallet,",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:226",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/MasterCertificate.java:104"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#property:CreateCertificateFieldsResult.certificateFields:1",
+      "java": "com.metanet4j.bsv.auth.certificates.MasterCertificate.CreatedFields.certificateFields",
+      "javaSignature": "public record CreatedFields(Map<String, String> certificateFields, Map<String, String> masterKeyring) {}",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:16",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/MasterCertificate.java:43"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#property:CreateCertificateFieldsResult.masterKeyring:1",
+      "java": "com.metanet4j.bsv.auth.certificates.MasterCertificate.CreatedFields.masterKeyring",
+      "javaSignature": "public record CreatedFields(Map<String, String> certificateFields, Map<String, String> masterKeyring) {}",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:17",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/MasterCertificate.java:43"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#property:MasterCertificate.certifier:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.certifier",
+      "javaSignature": "public String certifier;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:32",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:25"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#property:MasterCertificate.fields:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.fields",
+      "javaSignature": "public Map<String, String> fields;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:34",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:27"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#property:MasterCertificate.masterKeyring:1",
+      "java": "com.metanet4j.bsv.auth.certificates.MasterCertificate.masterKeyring",
+      "javaSignature": "public Map<String, String> masterKeyring;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:37",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/MasterCertificate.java:22"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#property:MasterCertificate.revocationOutpoint:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.revocationOutpoint",
+      "javaSignature": "public String revocationOutpoint;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:33",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:26"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#property:MasterCertificate.serialNumber:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.serialNumber",
+      "javaSignature": "public String serialNumber;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:30",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:23"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#property:MasterCertificate.signature:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.signature",
+      "javaSignature": "public String signature;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:35",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:28"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#property:MasterCertificate.subject:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.subject",
+      "javaSignature": "public String subject;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:31",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:24"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/MasterCertificate.ts#property:MasterCertificate.type:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.type",
+      "javaSignature": "public String type;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/MasterCertificate.ts:29",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:22"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/VerifiableCertificate.ts#class:VerifiableCertificate:1",
+      "java": "com.metanet4j.bsv.auth.certificates.VerifiableCertificate",
+      "javaSignature": "public class VerifiableCertificate extends Certificate {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/VerifiableCertificate.ts:19",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/VerifiableCertificate.java:18"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/VerifiableCertificate.ts#constructor:VerifiableCertificate.constructor:1",
+      "java": "com.metanet4j.bsv.auth.certificates.VerifiableCertificate",
+      "javaSignature": "public VerifiableCertificate(String type, String serialNumber, String subject, String certifier,",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/VerifiableCertificate.ts:31",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/VerifiableCertificate.java:22"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/VerifiableCertificate.ts#method:VerifiableCertificate.decryptFields:1",
+      "java": "com.metanet4j.bsv.auth.certificates.VerifiableCertificate.decryptFields",
+      "javaSignature": "public CompletableFuture<Map<String, String>> decryptFields(Object verifierWallet) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/VerifiableCertificate.ts:98",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/VerifiableCertificate.java:57"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/VerifiableCertificate.ts#method:VerifiableCertificate.fromCertificate:1",
+      "java": "com.metanet4j.bsv.auth.certificates.VerifiableCertificate.fromCertificate",
+      "javaSignature": "public static VerifiableCertificate fromCertificate(WalletCertificate certificate,",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/VerifiableCertificate.ts:74",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/VerifiableCertificate.java:43"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/VerifiableCertificate.ts#property:VerifiableCertificate.certifier:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.certifier",
+      "javaSignature": "public String certifier;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/VerifiableCertificate.ts:23",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:25"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/VerifiableCertificate.ts#property:VerifiableCertificate.decryptedFields:1",
+      "java": "com.metanet4j.bsv.auth.certificates.VerifiableCertificate.decryptedFields",
+      "javaSignature": "public Map<String, String> decryptedFields;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/VerifiableCertificate.ts:29",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/VerifiableCertificate.java:20"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/VerifiableCertificate.ts#property:VerifiableCertificate.fields:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.fields",
+      "javaSignature": "public Map<String, String> fields;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/VerifiableCertificate.ts:25",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:27"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/VerifiableCertificate.ts#property:VerifiableCertificate.keyring:1",
+      "java": "com.metanet4j.bsv.auth.certificates.VerifiableCertificate.keyring",
+      "javaSignature": "public Map<String, String> keyring;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/VerifiableCertificate.ts:28",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/VerifiableCertificate.java:19"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/VerifiableCertificate.ts#property:VerifiableCertificate.revocationOutpoint:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.revocationOutpoint",
+      "javaSignature": "public String revocationOutpoint;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/VerifiableCertificate.ts:24",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:26"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/VerifiableCertificate.ts#property:VerifiableCertificate.serialNumber:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.serialNumber",
+      "javaSignature": "public String serialNumber;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/VerifiableCertificate.ts:21",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:23"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/VerifiableCertificate.ts#property:VerifiableCertificate.signature:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.signature",
+      "javaSignature": "public String signature;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/VerifiableCertificate.ts:26",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:28"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/VerifiableCertificate.ts#property:VerifiableCertificate.subject:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.subject",
+      "javaSignature": "public String subject;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/VerifiableCertificate.ts:22",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:24"
+      ]
+    },
+    {
+      "id": "src/auth/certificates/VerifiableCertificate.ts#property:VerifiableCertificate.type:1",
+      "java": "com.metanet4j.bsv.auth.certificates.Certificate.type",
+      "javaSignature": "public String type;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/certificates/VerifiableCertificate.ts:20",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/certificates/Certificate.java:22"
+      ]
+    },
+    {
+      "id": "src/auth/utils/getVerifiableCertificates.ts#function-variable:getVerifiableCertificates:1",
+      "java": "com.metanet4j.bsv.auth.utils.GetVerifiableCertificates.getVerifiableCertificates",
+      "javaSignature": "public static CompletableFuture<List<VerifiableCertificate>> getVerifiableCertificates(WalletInterface wallet, RequestedCertificateSet requested, String verifierIdentityKey, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/utils/getVerifiableCertificates.ts:13",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/utils/GetVerifiableCertificates.java:23"
+      ]
+    },
+    {
+      "id": "src/auth/utils/validateCertificates.ts#function-variable:validateCertificates:1",
+      "java": "com.metanet4j.bsv.auth.utils.ValidateCertificates.validateCertificates",
+      "javaSignature": "public static CompletableFuture<Void> validateCertificates(WalletInterface wallet, AuthMessage message, RequestedCertificateSet requested, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
+      "review": "reviewed",
+      "evidence": [
+        "src/auth/utils/validateCertificates.ts:13",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/utils/ValidateCertificates.java:26"
+      ]
     }
   ],
   "approvedDifferences": [

@@ -712,14 +712,24 @@
         "migration-api-compat"
       ],
       "evidence": [
-        "固定 TS 122/122；兼容层 90 项 API、122 用例及 267 个源码站点已映射。BSM/ECIES 15 个 Java 用例与 21 条固定 TS 断言精确一致；HD/Mnemonic 隔离 Maven 107/107，正式逐断言验收进行中。"
+        "目标提交 2004ecf；固定 TS 五文件 122/122、281 条原断言；Java 五类 122/122，随机 34 次原输入精确重放。",
+        ".cache/evidence/compat-clean-parity.json：122/122、281/281、missing/uncompared/extra=0；90 项 API、122 用例、267 个源码站点映射。"
       ],
       "modules": [
         "compat"
       ],
       "fixtureFiles": [
         "src/compat/__tests/Mnemonic.vectors.ts"
-      ]
+      ],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 122,
+        "assertionsCompared": 281,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/compat-clean-parity.json"
+      }
     },
     {
       "id": "migration-impl-wallet-contracts",
@@ -828,11 +838,23 @@
       "apiBatchRefs": [
         "migration-api-wallet-keys"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标提交 b81b37f；干净目标工作树 Maven 六类 71/71、失败/错误/跳过均为 0；固定 TS 六文件 71/71、162 条断言，网络请求 0。",
+        ".cache/evidence/wallet-keys-clean-parity.json：71/71、162/162、missing/uncompared/extra=0；仅性能用例两条耗时按原阈值比较。75 项 API、71 用例及 246 个源码站点已映射。"
+      ],
       "modules": [
         "wallet"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 71,
+        "assertionsCompared": 162,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/wallet-keys-clean-parity.json"
+      }
     },
     {
       "id": "migration-impl-auth-certificates",
@@ -880,12 +902,23 @@
         "migration-api-auth-certificates"
       ],
       "evidence": [
-        "固定 TS 五个原测试和七个源码文件清点、Java 证书实现正在推进。"
+        "目标提交 fa67ce4、58a8f73；固定 TS 五个原测试 50/50、128 条断言。",
+        "提交后干净目标工作树 Maven 50/50，失败、错误、跳过均为 0；.cache/evidence/auth-certificates-task-parity.json 逐实际值 50/50、128/128，缺失和额外断言均为 0。",
+        "71 项 API、50 个原用例及 180 个源码站点已映射；证书签名与字段加解密运行真实钱包算法。"
       ],
       "modules": [
         "auth"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 50,
+        "assertionsCompared": 128,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/auth-certificates-task-parity.json"
+      }
     },
     {
       "id": "migration-impl-http-chain",
@@ -1277,14 +1310,27 @@
         "migration-api-transaction-model",
         "migration-api-script-spend"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标提交 2854c50、50732da、ca95898、7174fa5；固定 TS 四文件 546/546、568 条断言。",
+        "干净目标工作树 Maven 546/546，脚本模板回归 17/17，失败/错误/跳过均为 0；.cache/evidence/script-spend-clean-parity.json 逐断言 546/546、568/568、missing/uncompared/extra=0。",
+        "原测试 546 用例、223 个源码站点已映射；Spend.ts 108 项 API 的完整收口归 script-vectors，当前不宣称 API 完成。"
+      ],
       "modules": [
         "script",
         "transaction"
       ],
       "fixtureFiles": [
         "src/script/__tests/spend.valid.vectors.ts"
-      ]
+      ],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 546,
+        "assertionsCompared": 568,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/script-spend-clean-parity.json"
+      }
     },
     {
       "id": "migration-impl-script-vectors",
@@ -1346,7 +1392,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "transaction：广播器与默认选择",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-transaction-base"
       ],
@@ -1381,11 +1427,24 @@
       "apiBatchRefs": [
         "migration-api-transaction-network"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标提交 acd99a2；固定 TS 四个原测试 68/68、169 条断言，干净独立目标工作树 Maven 68/68、失败/错误/跳过均为 0。",
+        ".cache/evidence/broadcasters-task-parity-acd99a2.json：68/68、169/169，缺失、额外及未比较断言均为 0；随机输入原流重放 44/44。",
+        "45 项 API、68 个原用例及 290 个源码站点已映射。"
+      ],
       "modules": [
         "transaction"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 68,
+        "assertionsCompared": 169,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/broadcasters-task-parity-acd99a2.json"
+      }
     },
     {
       "id": "migration-impl-transaction-complete",
@@ -2686,14 +2745,16 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "node audit-api.cjs batches --batch migration-api-auth-certificates：71/71 项声明结构复核通过；行为依据 doc/完整模块与API映射-20260920-122800.md#api-auth-certificates，原测试逐值报告见 .cache/evidence/auth-certificates-task-parity.json。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
