@@ -18,7 +18,23 @@ GROUPS = {
     'base64': ('toArray base64 ', 7, 13),
     'simple': (('constantTimeEquals ', 'toArray base64 '), 12, 18),
     'null-check': ('verifyNotNull ', 5, 8),
+    'utf8-decode': ('toUTF8 UTF-8 decoding ', 9, 9),
+    'utf8-encode': (('utils should encode ', 'utils should return an empty array ',
+                     'utils should replace lone surrogates ', "toArray('utf8') UTF-8 encoding "), 9, 10),
+    'utf8': (('toUTF8 UTF-8 decoding ', 'utils should encode ',
+              'utils should return an empty array ', 'utils should replace lone surrogates ',
+              "toArray('utf8') UTF-8 encoding "), 18, 19),
+    'misc': ('', 6, 16),
+    'utf8-misc': ('', 24, 35),
     'remaining': ('', 56, 116),
+}
+MISC_NAMES = {
+    'utils should convert to array',
+    'utils decodes hex directly to Uint8Array with legacy odd-length handling',
+    'utils should zero pad byte to hex',
+    'utils should convert to hex',
+    'utils should convert to hex without a global Buffer implementation',
+    'utils should encode',
 }
 
 
@@ -43,6 +59,10 @@ def require(condition, message):
 
 def selected(case, group):
     name = ' '.join(case['names'])
+    if group == 'misc':
+        return name in MISC_NAMES
+    if group == 'utf8-misc':
+        return name in MISC_NAMES or name.startswith(GROUPS['utf8'][0])
     return name not in EXCLUDED and name.startswith(GROUPS[group][0])
 
 
