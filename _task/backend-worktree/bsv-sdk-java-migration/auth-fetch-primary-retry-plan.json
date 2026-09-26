@@ -1,0 +1,60 @@
+{
+  "97353ae49636c6d96627b77ac150c89c1c3f4b2e980629a9ff8337b8ddb41b4a": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.test.ts:217:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:218:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:219:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:222:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:223:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:224:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:227:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:233:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.test.ts:217:5:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:217:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:218:5:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:218:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:219:5:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:219:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:222:5:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:222:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:223:5:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:223:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:224:5:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:224:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:227:5:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:227:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:233:5:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:233:5:assertion"
+    }
+  },
+  "61b4ecc5ca8e8e0e52d508368744a12c06c31d670ea752d08a5d880a62cf5f63": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.test.ts:271:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:281:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:284:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:292:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:293:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:299:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:305:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:306:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:314:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:315:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.test.ts:271:11:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:271:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:281:11:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:281:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:284:11:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:284:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:292:11:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:292:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:293:11:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:293:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:299:11:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:299:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:305:11:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:305:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:306:11:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:306:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:314:5:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:314:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:315:5:assertion": "src/auth/clients/__tests__/AuthFetch.test.ts:315:5:assertion"
+    },
+    "comparisonRules": {
+      "src/auth/clients/__tests__/AuthFetch.test.ts:293:11:assertion": "auth-payment-log-v1",
+      "src/auth/clients/__tests__/AuthFetch.test.ts:299:11:assertion": "auth-payment-log-v1"
+    }
+  }
+}
