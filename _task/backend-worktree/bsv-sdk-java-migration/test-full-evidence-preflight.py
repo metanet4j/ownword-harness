@@ -136,6 +136,16 @@ class PreflightTest(unittest.TestCase):
         self.assertEqual(len(result['missingFullRunInterfaces']), 4)
         self.assertFalse(result['readyForFullCapture'])
 
+    def test_specialized_plan_projection_never_becomes_runtime_proof(self):
+        self.local['deriveCatalogFromPlan'] = True
+        self.local['captureKind'] = 'specialized-local'
+        self.local.pop('catalog')
+        self.local.pop('mapping')
+        result = self.inspect()
+        self.assertEqual(result['structurallyPlannedCases'], 2)
+        self.assertEqual(result['currentCaptureVerifiedCases'], 0)
+        self.assertIn('专用局部采集', result['locals'][0]['captureError'])
+
 
 if __name__ == '__main__':
     unittest.main()

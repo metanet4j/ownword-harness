@@ -72,6 +72,21 @@ def merge_plan(merged, incoming):
     merged.update(incoming)
 
 
+def fragment_from_plan(catalog, mapping, plan):
+    """从当前冻结对象投影专用采集器的计划；投影本身不生成运行来源。"""
+    ids = set(plan)
+    sites = {site for row in plan.values() for site in row['assertionSites'].values()}
+    sites.update(site for row in plan.values() for site in row.get('loopSamples', {}))
+    sites.update(review['id'] for review in mapping['siteReviews']
+                 if review['caseIds'] and set(review['caseIds']) <= ids)
+    files = [dict(file, cases=[case for case in file['cases'] if case['id'] in ids],
+                  sites=[site for site in file['sites'] if site['id'] in sites])
+             for file in catalog['files'] if any(case['id'] in ids for case in file['cases'])]
+    return (dict(catalog, files=files, partialImplementationOnly=True),
+            dict(mapping, cases=[case for case in mapping['cases'] if case['id'] in ids],
+                 siteReviews=[review for review in mapping['siteReviews'] if review['id'] in sites]))
+
+
 def java_registrations(mapping, catalog, reports):
     files = {case['id']: file['path'] for file in catalog['files'] for case in file['cases']}
     owners = defaultdict(list)
@@ -125,9 +140,12 @@ def inspect(config, base, catalog_path, mapping_path, revision, reports):
         record = {'name': item['name'], 'planValid': False, 'currentCaptureVerified': False}
         records.append(record)
         try:
-            local_catalog = load(resolve(base, item['catalog']))
-            local_mapping = load(resolve(base, item['mapping']))
             plan = load(resolve(base, item['input_plan']))
+            if item.get('deriveCatalogFromPlan') is True:
+                local_catalog, local_mapping = fragment_from_plan(catalog, mapping, plan)
+            else:
+                local_catalog = load(resolve(base, item['catalog']))
+                local_mapping = load(resolve(base, item['mapping']))
             validate_subset(catalog, mapping, local_catalog, local_mapping, plan)
             merge_plan(merged, plan)
             record.update(planValid=True, cases=len(plan),
@@ -138,6 +156,8 @@ def inspect(config, base, catalog_path, mapping_path, revision, reports):
             errors.append(item['name'] + ': ' + str(error))
             continue
         try:
+            audit.require(item.get('captureKind') != 'specialized-local',
+                          '专用局部采集的结构计划；尚未接入标准双侧 capture，不计当前全量来源')
             args = local_args(item, base, revision)
             result = bundle.build(args)
             java = java_registrations(local_mapping, local_catalog, args.java_report)
