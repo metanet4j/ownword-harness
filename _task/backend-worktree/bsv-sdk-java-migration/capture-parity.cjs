@@ -82,7 +82,6 @@ function matcherReceiver(received, matcher) {
   if (matcher === 'toHaveBeenCalledWith') {
     return { receiver: received, getActual: () => canonicalCalls(received.mock.calls) }
   }
-  if (matcher === 'toBeDefined') return { receiver: received, getActual: () => canonical(received !== undefined) }
   return { receiver: received, getActual: () => canonical(received, 0, matcher === 'toEqual') }
 }
 
@@ -140,7 +139,7 @@ function wrapAssertion(assertion, received, negated, promiseMode = null) {
           failure = error
           throw error
         } finally {
-          append(failure ? thrown(failure) : getActual(), failure === null)
+          append(getActual(), failure === null)
         }
       }
     }
