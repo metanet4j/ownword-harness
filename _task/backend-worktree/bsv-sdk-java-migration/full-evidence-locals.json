@@ -202,6 +202,12 @@
       "java_report": [
         ".cache/evidence/wallet-error-java-20260927/surefire.xml"
       ]
+    },
+    {
+      "name": "validation-helpers",
+      "deriveCatalogFromPlan": true,
+      "input_plan": "validation-helpers-input-plan.json",
+      "captureKind": "specialized-local"
     }
   ]
 }

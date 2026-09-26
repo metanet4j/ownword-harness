@@ -22321,7 +22321,7 @@
     {
       "id": "src/wallet/validationHelpers.ts#function:validateOptionalBase64String:1",
       "java": "com.metanet4j.bsv.wallet.ValidationHelpers#optionalBase64",
-      "javaSignature": "private static String optionalBase64(Object value, String name)",
+      "javaSignature": "private static Object optionalBase64(Object value, String name)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-contracts",
       "review": "reviewed",
       "evidence": [
@@ -22345,7 +22345,7 @@
     {
       "id": "src/wallet/validationHelpers.ts#function:validateOptionalHexString:1",
       "java": "com.metanet4j.bsv.wallet.ValidationHelpers#optionalHex",
-      "javaSignature": "private static String optionalHex(Object value, String name)",
+      "javaSignature": "private static Object optionalHex(Object value, String name)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-contracts",
       "review": "reviewed",
       "evidence": [
@@ -22357,7 +22357,7 @@
     {
       "id": "src/wallet/validationHelpers.ts#function:validateOptionalInteger:1",
       "java": "com.metanet4j.bsv.wallet.ValidationHelpers#validateOptionalInteger",
-      "javaSignature": "public static Number validateOptionalInteger(Object value, String name, Number min, Number max)",
+      "javaSignature": "public static Object validateOptionalInteger(Object value, String name, Number min, Number max)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-contracts",
       "review": "reviewed",
       "evidence": [
@@ -22379,7 +22379,7 @@
     {
       "id": "src/wallet/validationHelpers.ts#function:validateOptionalStringLength:1",
       "java": "com.metanet4j.bsv.wallet.ValidationHelpers#optionalStringLength",
-      "javaSignature": "private static String optionalStringLength(Object value, String name, Integer min, Integer max)",
+      "javaSignature": "private static Object optionalStringLength(Object value, String name, Integer min, Integer max)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-contracts",
       "review": "reviewed",
       "evidence": [
