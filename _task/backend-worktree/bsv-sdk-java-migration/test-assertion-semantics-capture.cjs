@@ -13,7 +13,7 @@ const { expect: nativeExpect } = fromJestExpect('expect')
 const file = path.resolve(__dirname, process.argv[2] || 'capture-parity.cjs')
 const source = fs.readFileSync(file, 'utf8')
 
-function exercise(code) {
+function harness(code) {
   const rows = []
   const hooks = []
   const context = {
@@ -27,6 +27,11 @@ function exercise(code) {
   vm.runInNewContext(code, context, { filename: file })
   nativeExpect.setState({ currentTestName: '记录器语义回归', testPath: '/synthetic/semantics.test.ts' })
   hooks.forEach(hook => hook())
+  return { context, rows }
+}
+
+function exercise(code) {
+  const { context, rows } = harness(code)
   const values = [undefined, null, 'value']
   const matchers = ['toBeUndefined', 'toBeDefined', 'not.toBeDefined']
   const passes = [[true, false, true], [false, true, false], [false, true, false]]
@@ -66,3 +71,27 @@ for (const [name, before, after] of [
     assert.throws(() => verify(exercise(source.replace(before, after))))
   })
 }
+
+
+test('调用参数编码保留 null、undefined、嵌套数组与所有调用', () => {
+  const fromExpect = createRequire(fromJestExpect.resolve('expect'))
+  const { fn } = fromExpect('jest-mock')
+  const { context, rows } = harness(source)
+  const mock = fn()
+  const argument = { field: 'value' }
+  mock(argument, null, undefined, [{}, null, undefined])
+  mock('second')
+  context.expect(mock).toHaveBeenCalledWith(argument, null, undefined, [{}, null, undefined])
+  const opaque = { type: 'string', value: '[object Object]' }
+  const nil = { type: 'null' }
+  const missing = { type: 'undefined' }
+  const first = { type: 'array', value: [opaque, nil, missing,
+    { type: 'array', value: [opaque, nil, missing] }] }
+  assert.deepEqual(rows[0].actual, { type: 'array', value: [first,
+    { type: 'array', value: [{ type: 'string', value: 'second' }] }] })
+  assert.deepEqual(rows[0].expected, first)
+  assert.equal(mock.mock.calls[0][0], argument)
+  assert.deepEqual(argument, { field: 'value' })
+  assert.equal(mock.mock.calls[0][1], null)
+  assert.equal(mock.mock.calls[0][2], undefined)
+})
