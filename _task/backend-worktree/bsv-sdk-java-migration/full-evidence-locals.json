@@ -183,6 +183,12 @@
       "captureKind": "specialized-local"
     },
     {
+      "name": "auth-fetch-additional-validated-fallback",
+      "deriveCatalogFromPlan": true,
+      "input_plan": "auth-fetch-additional-validated-fallback-plan.json",
+      "captureKind": "specialized-local"
+    },
+    {
       "name": "auth-fetch-property",
       "catalog": ".cache/evidence/auth-fetch-property-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/auth-fetch-property-plan-20260927/mapping.json",
