@@ -6904,6 +6904,7 @@
       "id": "src/primitives/JacobianPoint.ts#method:JacobianPoint.mixedAdd:1",
       "java": "com.metanet4j.bsv.primitives.JacobianPoint#mixedAdd",
       "javaSignature": "public JacobianPoint mixedAdd(Point other)",
+      "note": "保留 Point 类型签名；Object 重载接收原测试强转的 Point-like Map，真实调用 BooleanSupplier isInfinity 后执行空坐标守卫。Map 仅表征该非法坐标输入，其他未知类型明确拒绝。",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-curve",
       "review": "reviewed",
       "evidence": [
