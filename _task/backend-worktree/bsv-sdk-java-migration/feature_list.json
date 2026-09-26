@@ -14,8 +14,8 @@
       "跨工程发布、部署或远端推送"
     ]
   },
-  "activeItem": "migration-impl-keys-signatures",
-  "nextItem": "migration-impl-keys-signatures",
+  "activeItem": "migration-impl-symmetric",
+  "nextItem": "migration-impl-symmetric",
   "features": [
     {
       "id": "migration-env",
@@ -554,7 +554,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "primitives：密钥与签名算法",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-byte-codecs"
       ],
@@ -600,21 +600,37 @@
       "apiBatchRefs": [
         "migration-api-keys-signatures"
       ],
-      "evidence": [],
+      "evidence": [
+        "Java 工程提交 67ccb86：迁移 ECDSA、Signature、Polynomial、PrivateKey、PublicKey、Schnorr 与 Secp256r1；原 11 个测试文件、146 个用例和输入重放资源一并提交。固定 TS 上游与其他四个 Java 工程只读。",
+        ".cache/evidence/keys-final-20260926-133303/：原始 Jest、Surefire XML、两端断言轨迹、随机输入、命令、版本与 SHA-256 保存于 manifest.json；目标工程共享 clean test 802/802，失败/错误/跳过均为 0。",
+        "固定 TS 11 文件 146/146；task-parity.py 在提交后的代码版本上比较 146/146 个用例、40242/40242 条原断言，missingCases/missingAssertions/uncompared/extraJavaAssertions 均为 0。",
+        "原 TS Random 10078 次输入与 Java 资源逐项一致，其中 PrivateKey.test.ts 的 10000 次循环和四条逐次断言保持原规模；ECDSA 随机 k 与 Schnorr/P-256 固定实际输入分别采集重放，BRC42 私钥/公钥向量均执行。",
+        "test-map.json：本项 146 个用例、356 个 AST 位置全部复核，累计 778/5329；api-map.json：本项七个完整源文件 129 项声明全部复核，API-05 其余 48 项归 transaction-base 后续任务。",
+        "逐断言反例将第 20000 次循环的一个 Java 实际值篡改后正确失败（40241/40242）；检查器自测宿主环境 41/41。局部报告 formalAcceptance=false，六模块全量验收仍待后续事项。"
+      ],
       "modules": [
         "primitives"
       ],
       "fixtureFiles": [
         "src/primitives/__tests/BRC42.private.vectors.ts",
         "src/primitives/__tests/BRC42.public.vectors.ts"
-      ]
+      ],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 146,
+        "assertionsCompared": 40242,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/keys-final-20260926-133303/keys-parity.json"
+      }
     },
     {
       "id": "migration-impl-symmetric",
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "primitives：AES-GCM、对称密钥与异步后端",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-keys-signatures"
       ],
@@ -860,7 +876,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "transaction：HTTP、链追踪与网络接口",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-byte-codecs"
       ],
@@ -2199,7 +2215,7 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",

@@ -86,10 +86,18 @@ def row_key(file_path, row):
 
 
 def align(file_path, ts_rows, java_rows):
-    """最长公共子序列对齐；返回 (unmatched_ts, matched_pairs, extra_java)。"""
+    """小用例按最长公共子序列对齐；原规模循环按顺序线性核对。"""
     n, m = len(ts_rows), len(java_rows)
     ts_keys = [row_key(file_path, row) for row in ts_rows]
     java_keys = [row_key(file_path, row) for row in java_rows]
+    if n == m and ts_keys == java_keys:
+        return [], list(zip(range(n), range(n))), 0
+    if n * m > 2_000_000:
+        limit = min(n, m)
+        matched = [(i, i) for i in range(limit) if ts_keys[i] == java_keys[i]]
+        unmatched = [ts_rows[i] for i in range(limit) if ts_keys[i] != java_keys[i]]
+        unmatched.extend(ts_rows[limit:])
+        return unmatched, matched, m - len(matched)
     dp = [[0] * (m + 1) for _ in range(n + 1)]
     for i in range(n - 1, -1, -1):
         for j in range(m - 1, -1, -1):

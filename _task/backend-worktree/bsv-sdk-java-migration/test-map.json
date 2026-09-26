@@ -8196,6 +8196,1831 @@
       "assertionIds": [
         "src/primitives/__tests/utils.test.ts:484:5:assertion"
       ]
+    },
+    {
+      "id": "27f7f350baa96a3056214b26c950aae6797ef3fb935dda7590d39469d127991a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDHTest",
+          "name": "secp256k1SharedSecret"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDH.test.ts:12:5:assertion",
+        "src/primitives/__tests/ECDH.test.ts:24:5:assertion",
+        "src/primitives/__tests/ECDH.test.ts:27:5:assertion"
+      ]
+    },
+    {
+      "id": "04bfbcdfd58a790197695419a6ef87e7eda5db64bf1be518c763a39d4a7e6541",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDHTest",
+          "name": "rejectsTwistAttack"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDH.test.ts:34:5:assertion"
+      ]
+    },
+    {
+      "id": "812495815c1987e8da3dd9e1ae81ff2ab63c061987f78f480a5fdcb69c026088",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSAAdditionalTest",
+          "name": "signsNMinusOne"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.additional.test.ts:23:7:assertion"
+      ]
+    },
+    {
+      "id": "1a842dab2cde45460638571937806bb43ea2302f7eebdec562fcfa22e6b233e6",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSAAdditionalTest",
+          "name": "rejectsZeroR"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.additional.test.ts:35:7:assertion"
+      ]
+    },
+    {
+      "id": "0d1d53c2294fafc3192b052411b167dc14d9332b3360a57335706305ec2f5300",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSAAdditionalTest",
+          "name": "rejectsZeroS"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.additional.test.ts:42:7:assertion"
+      ]
+    },
+    {
+      "id": "86dd47125c0f0765f99769ae96df9df264903ebe9a05e77f54c777b5f5948b5b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSAAdditionalTest",
+          "name": "rejectsRAtOrder"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.additional.test.ts:49:7:assertion"
+      ]
+    },
+    {
+      "id": "5da5012261c73d53836cb0765ef0b71f32976d0b57975222442975a1de865d3c",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSAAdditionalTest",
+          "name": "rejectsSAtOrder"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.additional.test.ts:56:7:assertion"
+      ]
+    },
+    {
+      "id": "a501504370670ec573f3a21e4920a13c83d66a37e44306dd03b51e61695b99f4",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSAAdditionalTest",
+          "name": "forcesLowSForTenMessages"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.additional.test.ts:70:9:assertion"
+      ]
+    },
+    {
+      "id": "71959c319bd4157ebd9ab2295212452fd808f5d4435a09c0d75757f9ed9ad15e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSAAdditionalTest",
+          "name": "acceptsFunctionCustomK"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.additional.test.ts:86:7:assertion",
+        "src/primitives/__tests/ECDSA.additional.test.ts:87:7:assertion"
+      ]
+    },
+    {
+      "id": "6d3ef8677a5cf3c77474753d6ecbe4f4a715f5d45f1a5a4b49a384c91d1cd7a2",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSAAdditionalTest",
+          "name": "rejectsMissingPublicCoordinates"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.additional.test.ts:98:7:assertion"
+      ]
+    },
+    {
+      "id": "90ea1c22e7847d5720f0c1cff5f7eaf828f34654c156ec4648ba25385f7d4db0",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSAAdditionalTest",
+          "name": "retriesInvalidFunctionK"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.additional.test.ts:115:7:assertion",
+        "src/primitives/__tests/ECDSA.additional.test.ts:116:7:assertion"
+      ]
+    },
+    {
+      "id": "de7357c6e8badb2b7f3e4bfaff6911b79cfacdcc816ad4d604b835547d109188",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSAAdditionalTest",
+          "name": "rejectsFunctionWithoutNonce"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.additional.test.ts:122:7:assertion"
+      ]
+    },
+    {
+      "id": "564319833e012dccad19c868c13d8011795543393f2997aaf3cadca0dc9d197b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSAAdditionalTest",
+          "name": "rejectsFixedNonceInfinityAndZeroR"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.additional.test.ts:129:7:assertion",
+        "src/primitives/__tests/ECDSA.additional.test.ts:136:7:assertion"
+      ]
+    },
+    {
+      "id": "67e689a23068f204949a452a711ea61754c92e46d9c8ea67def32fdda8380783",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSAAdditionalTest",
+          "name": "rejectsFixedNonceZeroS"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.additional.test.ts:145:7:assertion"
+      ]
+    },
+    {
+      "id": "977ee21ecfd0dac349ce8015af081cb0f241ae4a63db91913b17134ccdf9c0ab",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "signsAndVerifies"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:16:5:assertion"
+      ]
+    },
+    {
+      "id": "c2bef4c1ebe7014cb4ae9a185a24f57876b210abcc88e870db0382402b1ea6d8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "encodesAndDecodesDER"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:22:5:assertion",
+        "src/primitives/__tests/ECDSA.test.ts:24:5:assertion",
+        "src/primitives/__tests/ECDSA.test.ts:25:5:assertion"
+      ]
+    },
+    {
+      "id": "b7fc85d0a141785985bc081e4244514dd903ec8da6aa11ddc073740926680692",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "encodesAndDecodesHexDER"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:31:5:assertion",
+        "src/primitives/__tests/ECDSA.test.ts:33:5:assertion",
+        "src/primitives/__tests/ECDSA.test.ts:34:5:assertion"
+      ]
+    },
+    {
+      "id": "0afd27da0e9e7997e2aab49f8a7bf8e51b337288cb9e6dd04158d6e1797195ee",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "forcesLowS"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:40:5:assertion"
+      ]
+    },
+    {
+      "id": "211893e653960448a09f761de8e2b41502999b17822fd0429948d832f27dadda",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "supportsCustomK"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:45:5:assertion"
+      ]
+    },
+    {
+      "id": "079e77306e0b2404ee79216b2acd3269a59fafdd2746fb9b51bfd1a8292b1f22",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "rejectsIncorrectMessage"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:55:5:assertion"
+      ]
+    },
+    {
+      "id": "88370462a255eb66cb65c32cf10d613ea63f75ece0b7a8212dcf9510a961ad68",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "rejectsWrongPublicKey"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:60:5:assertion"
+      ]
+    },
+    {
+      "id": "a9d23a74082ecc6dd4339cdb48f49288b5b378867c37f47d35cc80459bd11249",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "acceptsBoundaryCustomK"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:70:5:assertion",
+        "src/primitives/__tests/ECDSA.test.ts:75:5:assertion"
+      ]
+    },
+    {
+      "id": "760ad40fa2e4ad98dfbf73fa9904c803f8846ac2de14eec7da8cc8b28e5c5f98",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "rejectsOutOfRangeCustomK"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:82:5:assertion",
+        "src/primitives/__tests/ECDSA.test.ts:85:5:assertion"
+      ]
+    },
+    {
+      "id": "9ce49f7b735745012e797fdadb3e5436e94a12ff2589b01e766aa41dde3df6ea",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "oppositePointsSumToInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:95:5:assertion"
+      ]
+    },
+    {
+      "id": "5d8caa4fa86b7dda00bcd6096b4cfe60f1edb5e8121bcdf12963a47a56c94527",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "zeroScalarProducesInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:102:5:assertion"
+      ]
+    },
+    {
+      "id": "6ac2afd61b9192e98b314be4f3422b7b86df4a69e79879c85984d2626887f6a9",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "rejectsInfinityPublicKey"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:109:5:assertion"
+      ]
+    },
+    {
+      "id": "0081ba234b30b24584ae08b03bf886d469b9ee7d81513771749e988ab6a8aefb",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "supportsLargePrivateKey"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:121:5:assertion"
+      ]
+    },
+    {
+      "id": "e8b9de89c8adc103e565d48033f4e85a594eb014665dd5f0d62d774792133df7",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "rejectsOversizeSigningMessage"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:128:5:assertion"
+      ]
+    },
+    {
+      "id": "fcef75e0eeb4155c2a832410626efcf9097f6ef92a25e01dca138bb7d45e9390",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.ECDSATest",
+          "name": "rejectsOversizeVerificationMessage"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/ECDSA.test.ts:135:5:assertion"
+      ]
+    },
+    {
+      "id": "5fb58cc1d0ad2248639b912070f8e45ac162a4d336d7e4feeed4c5db46c74eca",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeySplitTest",
+          "name": "splitPrivateKeyIntoShares"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.split.test.ts:15:5:assertion",
+        "src/primitives/__tests/PrivateKey.split.test.ts:19:7:assertion",
+        "src/primitives/__tests/PrivateKey.split.test.ts:21:5:assertion"
+      ]
+    },
+    {
+      "id": "48086986f4cd82fbef94788825b41abbba1ad3d8df010647ed41b71137a7ef40",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeySplitTest",
+          "name": "recombineShares"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.split.test.ts:32:7:assertion"
+      ]
+    },
+    {
+      "id": "7555a48d5e21103824855c583aa0082d5afb6e89d2cb63d88c0f11ed8ad5672a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeySplitTest",
+          "name": "invalidThresholdType"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.split.test.ts:40:5:assertion",
+        "src/primitives/__tests/PrivateKey.split.test.ts:44:5:assertion"
+      ]
+    },
+    {
+      "id": "3ab94f0fa41bae1ad75c27019338588828a8f14d8b41419766bc27e7813d931b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeySplitTest",
+          "name": "invalidThreshold"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.split.test.ts:51:5:assertion"
+      ]
+    },
+    {
+      "id": "463cd3e5a621ddc86c91b5a563e0190fce60f467a3f91819735ab42474492d14",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeySplitTest",
+          "name": "invalidTotalShares"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.split.test.ts:56:5:assertion"
+      ]
+    },
+    {
+      "id": "3e35bd243f94c7d1e2e8f52d7391ff977991e62921a0b719e993eaaa095cb212",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeySplitTest",
+          "name": "totalSharesLessThanThreshold"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.split.test.ts:61:5:assertion"
+      ]
+    },
+    {
+      "id": "79d501ffb1bc392f2e12e26184553d5fbd303b871c00cf77dcf9f30cfacca339",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeySplitTest",
+          "name": "duplicateShare"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.split.test.ts:75:5:assertion"
+      ]
+    },
+    {
+      "id": "af227132bc3f1630d14eeea6e0ee460909c886e97b59dae292bada3c6e7e6afc",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeySplitTest",
+          "name": "backupAndRecover"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.split.test.ts:84:5:assertion"
+      ]
+    },
+    {
+      "id": "67ac00b076331927da5714b4825f065956ba34f91e0bba358ae4042049a177b6",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeyTest",
+          "name": "brc42Vector1"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.test.ts:14:9:assertion"
+      ]
+    },
+    {
+      "id": "3110b9a1c58647b7b043126857ce50c561eb773a9de47c74de97cc2288d79279",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeyTest",
+          "name": "brc42Vector2"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.test.ts:14:9:assertion"
+      ]
+    },
+    {
+      "id": "206edeac34e1cc96dca2c6894501992edb7c9fccf514a45acc35aab713951363",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeyTest",
+          "name": "brc42Vector3"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.test.ts:14:9:assertion"
+      ]
+    },
+    {
+      "id": "6ba0a0b5f0d32bd98211c372496b943a70656d6d2ae84ae36d357fd15ce09d29",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeyTest",
+          "name": "brc42Vector4"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.test.ts:14:9:assertion"
+      ]
+    },
+    {
+      "id": "64ce1fc1fd6ae7d2d7638734cfe9b99acd8292a938be16a43b70d3156c5784a5",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeyTest",
+          "name": "brc42Vector5"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.test.ts:14:9:assertion"
+      ]
+    },
+    {
+      "id": "36c8eec3c329f552c966047148eb84ce935119e0ad1eaafab40087263a0a5e47",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeyTest",
+          "name": "validPrivateKeyConversions"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.test.ts:48:9:assertion",
+        "src/primitives/__tests/PrivateKey.test.ts:49:9:assertion",
+        "src/primitives/__tests/PrivateKey.test.ts:52:9:assertion",
+        "src/primitives/__tests/PrivateKey.test.ts:53:9:assertion"
+      ]
+    },
+    {
+      "id": "d646eab157f262ba60a80ff20af049bae12422b3e6d4a3b2e72971fcd64c3e9a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PrivateKeyTest",
+          "name": "tenThousandRandomPrivateKeyConversions"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PrivateKey.test.ts:84:9:assertion",
+        "src/primitives/__tests/PrivateKey.test.ts:85:9:assertion",
+        "src/primitives/__tests/PrivateKey.test.ts:93:9:assertion",
+        "src/primitives/__tests/PrivateKey.test.ts:94:9:assertion"
+      ]
+    },
+    {
+      "id": "48706f97ad1550859eb3761aebc3ba5b3e479b3e07fe0458d6cd1ab30c6d4025",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "toDerHex"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:44:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:45:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:47:7:assertion"
+      ]
+    },
+    {
+      "id": "ac0285910ecd1f9f356b6aba1f9362f2bb11319b19ecf73c1ec5790e3b3639c8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "toDerArray"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:52:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:53:7:assertion"
+      ]
+    },
+    {
+      "id": "40241f779f474e0e0949ef959a5f0dfbb833cd00874e1c23cf6460e3df97544d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "toDerHexAndArrayAgree"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:60:7:assertion"
+      ]
+    },
+    {
+      "id": "feddfec03828e5b6d82eacf5f5c9c7b00b43603805825a8eac41b72c127e0491",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "fromDerBytes"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:71:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:72:7:assertion"
+      ]
+    },
+    {
+      "id": "d9cdd576923230204fd05f701e886b2a9e48fe953c7bb659b97bceb83b8d4248",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "fromDerRoundTrip"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:79:7:assertion"
+      ]
+    },
+    {
+      "id": "3ffe5892c71b0ca30122f23ee8e406eaa8c2e4106b07817aaec806edba1355c9",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "toHashArray"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:89:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:90:7:assertion"
+      ]
+    },
+    {
+      "id": "9102e935309c1470e6415cac4081c90fc16f2513c0fa63ae86b78bee5a8fdd59",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "toHashHex"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:95:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:97:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:98:7:assertion"
+      ]
+    },
+    {
+      "id": "7405b3394d5bd0dc18b48cbc1c31e38c91578a35d398ee39d6cf241e9c1a9bbb",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "toHashArrayAndHexAgree"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:104:7:assertion"
+      ]
+    },
+    {
+      "id": "b3d5f705721489914f1e4261db1732f9cbb60dc2a94e81867ca24eceff4d72de",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "differentKeysHaveDifferentHashes"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:109:7:assertion"
+      ]
+    },
+    {
+      "id": "e82bdebb556ab410aee0b41285bf4d8d73b8712708c6c4299eb6b42ccacfa36d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "defaultAddressString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:119:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:120:7:assertion"
+      ]
+    },
+    {
+      "id": "11ba18bb83f1b946c1b5ba83c5bfb265c671dc6530472d88cd3624e58c888ef1",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "mainnetAddress"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:125:7:assertion"
+      ]
+    },
+    {
+      "id": "a74e7f5c55cea8d0da6c4acadb90f61df66e194858e61d6ebc0844c6f1e80f6c",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "mainAliasAddress"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:130:7:assertion"
+      ]
+    },
+    {
+      "id": "076086541d6a1f16473f9223f33aa9dd764afe51283cb03f5bee74236fa0dff9",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "testnetAddress"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:135:7:assertion"
+      ]
+    },
+    {
+      "id": "03dbb2a3789ca5f9b45d1b6888414b288bcb97893957590731e66a96c12cd84d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "testAliasAddress"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:140:7:assertion"
+      ]
+    },
+    {
+      "id": "c1a31f0b03e87b8cf8ef723ec18aed872720601251fa40f8ee85ef7efbb8537a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "explicitBytePrefixAddress"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:146:7:assertion"
+      ]
+    },
+    {
+      "id": "7118413c4f2fce2a5656fc5a8a43844537a4bf772e8a979041af02356e500e2b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "mainAndTestAddressesDiffer"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:150:7:assertion"
+      ]
+    },
+    {
+      "id": "e7d06a64c4201e85169d8884d828d397c211ae3f4a8958b6fe22547df4011022",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "invalidPrefix"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:154:7:assertion"
+      ]
+    },
+    {
+      "id": "25ede0f1386f9f635c9a872d90c4131259c38f073d0213d322c6d1baaec8e87c",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "constructorFromPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:166:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:167:7:assertion"
+      ]
+    },
+    {
+      "id": "43515fbf46168d6108709870753d6e997ca66aafa14d90da2c75e70ad410f8f8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "constructorFalseRedAllowsDerString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:180:7:assertion"
+      ]
+    },
+    {
+      "id": "3d3260ee6629d50c2b1549421a126637e150bd2db83b2d1a728384bb2d78c9ef",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "verifiesHexEncodedMessage"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:191:7:assertion"
+      ]
+    },
+    {
+      "id": "75eb3340dc398e530b653ffb0c3b90ee82a3011d630e90a76fdf9fc6f7502c77",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "rejectsWrongHexSignature"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:198:7:assertion"
+      ]
+    },
+    {
+      "id": "cb4fa11db4a8a70162dcafde74c53d640a9e4286ad98d4f0cb15272d76dcc607",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "recoversCompactSignature"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:245:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:246:7:assertion"
+      ]
+    },
+    {
+      "id": "2bada1a8ff5eb6cae69c46ff239c49eb7b02c28dec9252f52a9f97b788f9b246",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "rejectsShortCompactSignature"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:251:7:assertion"
+      ]
+    },
+    {
+      "id": "04623fa385f5f410b40ef26b5a20375e5672003c9d1d3dac5e0b1225094d5f66",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "rejectsLongCompactSignature"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:258:7:assertion"
+      ]
+    },
+    {
+      "id": "6a8a5223ac960dbddcdce393c9aab6af5f2cde3b4ef8417ffd895f025564b385",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "rejectsCompactByteBelowRange"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:267:7:assertion"
+      ]
+    },
+    {
+      "id": "c0396eb592bf15119befeb8e7d7572cd1b1e2b1b552a301817924243ce5a93d5",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "rejectsCompactByteAboveRange"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:276:7:assertion"
+      ]
+    },
+    {
+      "id": "76b0ebca9c8a941f06e1fcbd00f2379eb934c78fb4ac54b60d1448e8deb43053",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "recoversHexCompactSignature"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:292:13:assertion"
+      ]
+    },
+    {
+      "id": "5b8b9b35e93c8c9b7f1d0bafd829e3bb9e5be483631c944dcce2f6c6a4e94358",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "recoversUncompressedCompactHeader"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:323:7:assertion"
+      ]
+    },
+    {
+      "id": "f13209806dedb1d503fbf69f0addaddc3dd2bf6ad07429cefacfa2b7e1fdc915",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "cachesOnMiss"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:344:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:345:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:346:7:assertion"
+      ]
+    },
+    {
+      "id": "7aec2fc93101f8634ce7ae38917294c5a52d78334cdbc8f0e6e23676ba3a63c3",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "usesCachedPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:365:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:366:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:368:7:assertion"
+      ]
+    },
+    {
+      "id": "bdc034b62da53d184edfab32ca76c6daa02735ec773bf1d70efaab6209c63ad2",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "cacheMissWithoutStoreCallback"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:375:7:assertion",
+        "src/primitives/__tests/PublicKey.additional.test.ts:379:7:assertion"
+      ]
+    },
+    {
+      "id": "edfec1c528a60e0ae3e2fed564d4b025123fc43814feb3d68d00a9b3d9f45dd3",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyAdditionalTest",
+          "name": "derivesWithoutCache"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.additional.test.ts:384:7:assertion"
+      ]
+    },
+    {
+      "id": "c14543a6922786ca08effae947aeb0ade464e54892d1a8b6fadde02c744b3e33",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyTest",
+          "name": "fromPrivateKeyIsValid"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.test.ts:18:7:assertion"
+      ]
+    },
+    {
+      "id": "31a02b8f53be15b9ea251ff74a62a0fa2fb9a50277a6ac00e6502d667726e1be",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyTest",
+          "name": "fromStringReproducesPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.test.ts:25:7:assertion",
+        "src/primitives/__tests/PublicKey.test.ts:27:7:assertion",
+        "src/primitives/__tests/PublicKey.test.ts:28:7:assertion"
+      ]
+    },
+    {
+      "id": "9338f8912a036e99b7ed7d469ac7e24eb3bbd3bf3b0d3c82dda62934882c5eb9",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyTest",
+          "name": "constructorRejectsDERString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.test.ts:33:9:assertion"
+      ]
+    },
+    {
+      "id": "bb669bcd0166eb4ca3a94794cab056e168e0df55bc75e61073d07eccfd84728c",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyTest",
+          "name": "derivesSharedSecretPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.test.ts:42:9:assertion"
+      ]
+    },
+    {
+      "id": "4d880386d4ae5b8620b40949c6655d209d871ff85f1b46d2f3963b17f75a387a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyTest",
+          "name": "rejectsInvalidPublicPoint"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.test.ts:47:9:assertion"
+      ]
+    },
+    {
+      "id": "4b1a1d2f33b84bf90eda51b97ca44806ecfe8f7096eb77848fa42ddebcfd3d64",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyTest",
+          "name": "verifiesValidSignature"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.test.ts:55:9:assertion"
+      ]
+    },
+    {
+      "id": "428e75c0dad62cff03d9457b91d03cd8bb5a7788bcc26f57221a9821ef46d2e8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyTest",
+          "name": "compressedStringLength"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.test.ts:60:9:assertion",
+        "src/primitives/__tests/PublicKey.test.ts:61:9:assertion"
+      ]
+    },
+    {
+      "id": "8a7ede4436cedcb7b966fbdc835eb4628e96614b4102a0b351931349c41dc1de",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyTest",
+          "name": "compressedByteLength"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.test.ts:66:9:assertion",
+        "src/primitives/__tests/PublicKey.test.ts:67:9:assertion"
+      ]
+    },
+    {
+      "id": "7fb462c70311c30918bb528fb34ee2d0bceba27c8f85c0bdbb4207d656b47603",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyTest",
+          "name": "derStringRoundTrip"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.test.ts:78:9:assertion"
+      ]
+    },
+    {
+      "id": "7a9896b54d3fd73dcaa1b2f571187a7c7ac3f6f5c9fe405d209cdd9b0724ba3e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyTest",
+          "name": "brc42Vector1"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.test.ts:88:11:assertion"
+      ]
+    },
+    {
+      "id": "01424e136029628bd89a722cbbae048806b4db14adec62c2f49b0fc5e600b6b0",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyTest",
+          "name": "brc42Vector2"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.test.ts:88:11:assertion"
+      ]
+    },
+    {
+      "id": "401f84524dda95392c83b405a22c22861ce1b16fb97219761437ba193d92b5b8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyTest",
+          "name": "brc42Vector3"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.test.ts:88:11:assertion"
+      ]
+    },
+    {
+      "id": "006c85a9c12db167cbb060d87f9de638a31d20f5f9404dc7e333adfc8c6d3895",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyTest",
+          "name": "brc42Vector4"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.test.ts:88:11:assertion"
+      ]
+    },
+    {
+      "id": "01854f99ee61106a054366cf15ef0facf84b8d4f3be70b4a0afffd3e2c3d2082",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.PublicKeyTest",
+          "name": "brc42Vector5"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/PublicKey.test.ts:88:11:assertion"
+      ]
+    },
+    {
+      "id": "d27ead71db9b0acea49d87ec4974f2d4146aca5b2fe3110574dd387cb99b59af",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SchnorrTest",
+          "name": "shouldVerifyAValidProof"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Schnorr.test.ts:34:5:assertion"
+      ]
+    },
+    {
+      "id": "0513c24bc8df3d110362bf15d7218d6384b222ca758420f64dd8c6cd67c1f10a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SchnorrTest",
+          "name": "shouldFailVerificationIfProofIsTamperedRModified"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Schnorr.test.ts:58:5:assertion"
+      ]
+    },
+    {
+      "id": "6c4ed68bef5cff3fdcd5e0779c3c41b42e42194d60d8e7655b2f855bac0955e2",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SchnorrTest",
+          "name": "shouldFailVerificationIfProofIsTamperedZModified"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Schnorr.test.ts:82:5:assertion"
+      ]
+    },
+    {
+      "id": "f41ca6cb5fd6da860633f774929d892b57c0728ffb8b6cadfc9286acb07c32db",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SchnorrTest",
+          "name": "shouldFailVerificationIfProofIsTamperedSPrimeModified"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Schnorr.test.ts:106:5:assertion"
+      ]
+    },
+    {
+      "id": "3989422c5031306036dda72add56b113de6f90454b1b242fb7217a8a728c1673",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SchnorrTest",
+          "name": "shouldFailVerificationIfInputsAreTamperedAModified"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Schnorr.test.ts:129:5:assertion"
+      ]
+    },
+    {
+      "id": "95ce35b295b68448c8d64158ffb17e0b6711126c957137517c4b928b4139ab96",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SchnorrTest",
+          "name": "shouldFailVerificationIfInputsAreTamperedBModified"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Schnorr.test.ts:152:5:assertion"
+      ]
+    },
+    {
+      "id": "d5463e5574eaff653af63685a361e29b986d3df053e23ca81f370ef413b9af72",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SchnorrTest",
+          "name": "shouldFailVerificationIfInputsAreTamperedSModified"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Schnorr.test.ts:175:5:assertion"
+      ]
+    },
+    {
+      "id": "98b312c6ca682a2ae36a9b3030f9b74a8c45290a8213504f7fdacc36eb23b5f2",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SchnorrTest",
+          "name": "shouldFailVerificationIfUsingWrongPrivateKey"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Schnorr.test.ts:196:5:assertion"
+      ]
+    },
+    {
+      "id": "958ce0e5cb376f1bfed6eff22923b895c261d997bc5cbf2873eb7b50183ccca9",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SchnorrTest",
+          "name": "shouldFailVerificationIfUsingWrongPublicKey"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Schnorr.test.ts:218:5:assertion"
+      ]
+    },
+    {
+      "id": "dbaec8fd8e915e9416705901b7aabd39bfad263bdec2e92dc91c551e3c8d5eb0",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SchnorrTest",
+          "name": "shouldFailVerificationIfSharedSecretSIsIncorrect"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Schnorr.test.ts:238:5:assertion"
+      ]
+    },
+    {
+      "id": "e9086b06eff6c3c3fa7b6bcfd0a928d7d228fb42b73b3f8eea6f0aea6f5c1896",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SchnorrTest",
+          "name": "shouldVerifyAValidProofWithFixedKeys"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Schnorr.test.ts:268:5:assertion"
+      ]
+    },
+    {
+      "id": "55f6289b9805dc45bd02a716e38de2602a096fad8d2cc592590ec86351eae46b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SchnorrTest",
+          "name": "shouldThrowAnErrorIfInputsAreInvalid"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Schnorr.test.ts:279:5:assertion",
+        "src/primitives/__tests/Schnorr.test.ts:280:5:assertion",
+        "src/primitives/__tests/Schnorr.test.ts:281:5:assertion",
+        "src/primitives/__tests/Schnorr.test.ts:282:5:assertion"
+      ]
+    },
+    {
+      "id": "31e9685bec302dc29310799cdd93c0847d0ec70ee4bb7cdb790e31fe15701b7d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.Secp256r1Test",
+          "name": "basePointMultiplicationMatchesKnownCoordinatesAndHandlesInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Secp256r1.test.ts:18:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:19:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:20:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:21:5:assertion"
+      ]
+    },
+    {
+      "id": "1d790303bc5fda648949207d9bf24c7097d80b6a9f789799161b37adde254ab0",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.Secp256r1Test",
+          "name": "publicKeyGenerationStaysOnCurveSupportsCompressionAndRejectsBadEncodings"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Secp256r1.test.ts:27:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:30:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:31:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:32:5:assertion"
+      ]
+    },
+    {
+      "id": "dfa5e683c15a9f7489db9846b868f0406ed6b0408afeb1038f1337ba803c0e0e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.Secp256r1Test",
+          "name": "addingInversePointsYieldsInfinity"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Secp256r1.test.ts:38:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:39:5:assertion"
+      ]
+    },
+    {
+      "id": "1a041aece251b8c23d803ddc44daa9df99d0a822c92f72776ca67e541ab6c49a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.Secp256r1Test",
+          "name": "ecdsaSignAndVerifyRoundTripLowSEnforcedRejectsMalformedInputs"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Secp256r1.test.ts:48:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:49:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:50:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:52:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:54:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:56:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:57:5:assertion"
+      ]
+    },
+    {
+      "id": "0dd1fe23eb62c7f427ab5329083d906e11cb10e3494a668089279698a0e4b8d8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.Secp256r1Test",
+          "name": "deterministicNonceIsStableAcrossCallsAndMessageChanges"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Secp256r1.test.ts:66:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:68:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:69:5:assertion"
+      ]
+    },
+    {
+      "id": "47ce23c02e5d8172dcb5bba6c318aea8d98606e4cb4981a96f668d56d1e262ce",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.Secp256r1Test",
+          "name": "prehashedSigningPathMatchesExplicitHashingInput"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Secp256r1.test.ts:79:5:assertion",
+        "src/primitives/__tests/Secp256r1.test.ts:80:5:assertion"
+      ]
+    },
+    {
+      "id": "550ff8bc969efa2f8e362c6fc203a18364ce0932a2a9ea3efd6b88d09aa1dfe6",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.Secp256r1Test",
+          "name": "signaturesInteroperateWithNodeCryptoIeeeP1363Encoding"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Secp256r1.test.ts:99:5:assertion"
+      ]
+    },
+    {
+      "id": "690889b3d3b441d6521eedcc0ee1591d2e5d483b3aeb9c169e84a51057e8d903",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsDERWrongPrefix"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:63:7:assertion"
+      ]
+    },
+    {
+      "id": "dcc3c3b557f0519b5a4f9f364c82d1553b59b5944dcda0c52a1cbd6348f5e98b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsDERLongLength"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:63:7:assertion"
+      ]
+    },
+    {
+      "id": "78bf7c1852aa9c832a0f3a767a60d7ea6cc48c4a0f21305554f2c19122cb095f",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsDEROuterLengthMismatch"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:63:7:assertion"
+      ]
+    },
+    {
+      "id": "99eb71146bdcc49d6fac6f8e7a36e66323d129c26263b8f9a1f3e547aae2771a",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsDERWrongRMarker"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:63:7:assertion"
+      ]
+    },
+    {
+      "id": "7358fdf481bd38a25f822519064885107d94e9921730f03175c086129d2b0dde",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsDERWrongSMarker"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:63:7:assertion"
+      ]
+    },
+    {
+      "id": "74ab080bbd7b609022c749edf784c7a107054e79d0b259432378e905414a199d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsDERInvalidRPadding"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:81:7:assertion"
+      ]
+    },
+    {
+      "id": "481cfcc6bfe06f611c5e9a6c5a4702ee1aa2f39848dbf1cf2308b155f130456b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsDERInvalidSPadding"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:98:7:assertion"
+      ]
+    },
+    {
+      "id": "725070fef32f7ab7c355cdc85748dbaa6bbebbb354cc3b377341ca83e98a70db",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsDERInvalidSLength"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:107:7:assertion"
+      ]
+    },
+    {
+      "id": "ea9fe08063333a4d5c8fafc031d0e7b85027e9325e49c69499b939a03e6ed2b1",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "parsesDERHex"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:114:7:assertion",
+        "src/primitives/__tests/Signature.test.ts:115:7:assertion"
+      ]
+    },
+    {
+      "id": "27043b5464432cee189ac2faa5a8ac69304a359d27a21c8b6251c74105e62dd2",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "parsesDERBase64"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:122:7:assertion",
+        "src/primitives/__tests/Signature.test.ts:123:7:assertion"
+      ]
+    },
+    {
+      "id": "2e6453c144e55dbff85876598a0845fb339b5ceb4145824b08ceb33968865ab8",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsCompactWrongLength"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:132:7:assertion",
+        "src/primitives/__tests/Signature.test.ts:135:7:assertion"
+      ]
+    },
+    {
+      "id": "4c8111e305bb3660ef6acdcf27df60c4291bea9af42ae4bcc9c7d438fc75e5fc",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsCompactByteTooSmall"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:143:7:assertion"
+      ]
+    },
+    {
+      "id": "08bf37b702f3c8143d4df58298edcc29357f7b9ac0d2032ff49d355a85e42219",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsCompactByteTooLarge"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:149:7:assertion"
+      ]
+    },
+    {
+      "id": "b6aa84ae2e07610d1e962dfdfc5e58bd4b3881a7dcea1cbef4d3c3c923f80114",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "parsesCompact"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:156:7:assertion",
+        "src/primitives/__tests/Signature.test.ts:157:7:assertion"
+      ]
+    },
+    {
+      "id": "78682a1946fe533ed586bb0a024e8eba1d3d9099cb97a11ea942832e02a07d92",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "parsesCompactHex"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:164:7:assertion"
+      ]
+    },
+    {
+      "id": "8f96cab8582f35c9473804b1d9ec741eb4eb2e995d00ce64b67be84bb956c354",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "parsesCompactBase64"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:171:7:assertion"
+      ]
+    },
+    {
+      "id": "fffdbc6fb326d7b8be031650b0775edf99ffb0aea85aa8699402798974b9265e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "verifiesStringMessage"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:183:7:assertion"
+      ]
+    },
+    {
+      "id": "5a6cb9247eef4bcb31f8a62e89846bc9b06f06e28a259c993c93917b3532e1bd",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsWrongSignature"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:191:7:assertion"
+      ]
+    },
+    {
+      "id": "be4d94cc1a8905a0e20ae478feb81c2a62e7914f9efe30b7119de05cc4417811",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "verifiesHexMessage"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:198:7:assertion"
+      ]
+    },
+    {
+      "id": "56754502fffecddd59b8fd36b8280124bdc26a020f67615129343acf25aea38b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "toStringWithoutEncodingReturnsDERArray"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:210:7:assertion"
+      ]
+    },
+    {
+      "id": "fe7245c5e98000560c17fd1e54603decf8b1d9b825429cd5edf755d316a26a2d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "toStringHexEqualsDERHex"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:215:7:assertion"
+      ]
+    },
+    {
+      "id": "6f549b30f631f492187cc611fc40bb62c48cb95aa61e37f0e1059c7398d44798",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "toDERDefaultsToArray"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:220:7:assertion"
+      ]
+    },
+    {
+      "id": "002a9d02d437a2247ce9ff937c32589e414d789f30ea379a2d66305bf8a7362b",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "toDERHexReturnsHexString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:226:7:assertion",
+        "src/primitives/__tests/Signature.test.ts:227:7:assertion"
+      ]
+    },
+    {
+      "id": "76ef9760ca0cf3069ddbdac374fbf01e1a0d04163b98af71baccc392cb1f620d",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "toDERBase64ReturnsString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:233:7:assertion",
+        "src/primitives/__tests/Signature.test.ts:235:7:assertion"
+      ]
+    },
+    {
+      "id": "6d86af3fc4dce22c233d2d9c7e0c68fcd8fd0483368c17bfa95041acea66afbe",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "roundTripsDER"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:242:7:assertion",
+        "src/primitives/__tests/Signature.test.ts:243:7:assertion"
+      ]
+    },
+    {
+      "id": "77dd288fbff32c6395415f0ff9396d9e2e6c4eb383555e28762d63dbda800dbf",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsNegativeRecovery"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:253:7:assertion"
+      ]
+    },
+    {
+      "id": "e84239381e9b298b53a9907cb9416254c552d771b8590e9d0c621ca7cbcc4e60",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsRecoveryAboveThree"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:258:7:assertion"
+      ]
+    },
+    {
+      "id": "40f1cc3d0f132e17932b3f79876e5f62c1487c77be1123a6b24a3cc00dcbe734",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsNonBooleanCompressed"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:264:7:assertion"
+      ]
+    },
+    {
+      "id": "abf0cd26474411e62b2f4e52be0a67fd7f3c6c958487a941e64c513e0c46fcaf",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "toCompactDefaultsToArray"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:270:7:assertion",
+        "src/primitives/__tests/Signature.test.ts:271:7:assertion"
+      ]
+    },
+    {
+      "id": "dd741e93be3b203957a45bd31d1960e858d9192b4ad7f1bb11099cd50b6cde1e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "toCompactHexHas130Characters"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:277:7:assertion",
+        "src/primitives/__tests/Signature.test.ts:278:7:assertion"
+      ]
+    },
+    {
+      "id": "791a13a3850d8c8e32fe841962fcf629f62c509bf236a1da390f758bf2774734",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "toCompactBase64ReturnsString"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:284:7:assertion"
+      ]
+    },
+    {
+      "id": "6fda31abd267fbba2cca20267da6cfd1fe02aafa5874925cf41ceda1ea7a15eb",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "uncompressedCompactHeaderIs27"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:290:7:assertion"
+      ]
+    },
+    {
+      "id": "ea4a7c117cf333a6fac7ea4260bd2c13cd6dc2a17c0af77863204f7cc92b6729",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "compressedCompactHeaderIs31"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:296:7:assertion"
+      ]
+    },
+    {
+      "id": "0a186253a5d9ec6d14689b521d92db56d6501f27999210974eecd357883b758e",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "recoversPublicKey"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:322:7:assertion"
+      ]
+    },
+    {
+      "id": "801d858107cb6f228137a47ecb74f1bbc00e7505bfe32251ca6d68442e76d066",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "calculatesRecoveryFactor"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:337:7:assertion",
+        "src/primitives/__tests/Signature.test.ts:338:7:assertion"
+      ]
+    },
+    {
+      "id": "013646e10a049c99bc634569119dd6c41682c4102ab704697be38e4c39da830f",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.SignatureTest",
+          "name": "rejectsWrongRecoveryKey"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/Signature.test.ts:347:7:assertion"
+      ]
+    },
+    {
+      "id": "d86aed1d5a0a5662c48f71c631aa36019be140b36890242b620431508320b3a7",
+      "java": [
+        {
+          "className": "com.metanet4j.bsv.primitives.Bug31Test",
+          "name": "rejectsAndReducesOutOfFieldKey"
+        }
+      ],
+      "assertionIds": [
+        "src/primitives/__tests/bug-31.test.ts:11:5:assertion",
+        "src/primitives/__tests/bug-31.test.ts:16:5:assertion",
+        "src/primitives/__tests/bug-31.test.ts:18:5:assertion",
+        "src/primitives/__tests/bug-31.test.ts:21:5:assertion",
+        "src/primitives/__tests/bug-31.test.ts:23:5:assertion",
+        "src/primitives/__tests/bug-31.test.ts:25:5:assertion"
+      ]
     }
   ],
   "siteReviews": [
@@ -24442,6 +26267,2669 @@
         "8632e69481d17dcc84df1c4821b645801042bd3faa7523fb69b5cb5805417084"
       ],
       "note": "已复核固定原文件注册、断言及动态分支；实际值由本任务两端逐断言报告验收。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDH.test.ts:7:3:registration",
+      "caseIds": [
+        "27f7f350baa96a3056214b26c950aae6797ef3fb935dda7590d39469d127991a"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：ECDH should work with secp256k1"
+    },
+    {
+      "id": "src/primitives/__tests/ECDH.test.ts:12:5:assertion",
+      "caseIds": [
+        "27f7f350baa96a3056214b26c950aae6797ef3fb935dda7590d39469d127991a"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：ECDH should work with secp256k1"
+    },
+    {
+      "id": "src/primitives/__tests/ECDH.test.ts:24:5:assertion",
+      "caseIds": [
+        "27f7f350baa96a3056214b26c950aae6797ef3fb935dda7590d39469d127991a"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：ECDH should work with secp256k1"
+    },
+    {
+      "id": "src/primitives/__tests/ECDH.test.ts:27:5:assertion",
+      "caseIds": [
+        "27f7f350baa96a3056214b26c950aae6797ef3fb935dda7590d39469d127991a"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：ECDH should work with secp256k1"
+    },
+    {
+      "id": "src/primitives/__tests/ECDH.test.ts:29:3:registration",
+      "caseIds": [
+        "04bfbcdfd58a790197695419a6ef87e7eda5db64bf1be518c763a39d4a7e6541"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：ECDH should be able to prevent a twist attack for secp256k1"
+    },
+    {
+      "id": "src/primitives/__tests/ECDH.test.ts:34:5:assertion",
+      "caseIds": [
+        "04bfbcdfd58a790197695419a6ef87e7eda5db64bf1be518c763a39d4a7e6541"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：ECDH should be able to prevent a twist attack for secp256k1"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:17:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "812495815c1987e8da3dd9e1ae81ff2ab63c061987f78f480a5fdcb69c026088"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:23:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "812495815c1987e8da3dd9e1ae81ff2ab63c061987f78f480a5fdcb69c026088"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:31:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "1a842dab2cde45460638571937806bb43ea2302f7eebdec562fcfa22e6b233e6"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:35:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "1a842dab2cde45460638571937806bb43ea2302f7eebdec562fcfa22e6b233e6"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:38:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "0d1d53c2294fafc3192b052411b167dc14d9332b3360a57335706305ec2f5300"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:42:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0d1d53c2294fafc3192b052411b167dc14d9332b3360a57335706305ec2f5300"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:45:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "86dd47125c0f0765f99769ae96df9df264903ebe9a05e77f54c777b5f5948b5b"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:49:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "86dd47125c0f0765f99769ae96df9df264903ebe9a05e77f54c777b5f5948b5b"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:52:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "5da5012261c73d53836cb0765ef0b71f32976d0b57975222442975a1de865d3c"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:56:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "5da5012261c73d53836cb0765ef0b71f32976d0b57975222442975a1de865d3c"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:64:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "a501504370670ec573f3a21e4920a13c83d66a37e44306dd03b51e61695b99f4"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:67:7:loop",
+      "status": "reviewed",
+      "caseIds": [
+        "a501504370670ec573f3a21e4920a13c83d66a37e44306dd03b51e61695b99f4"
+      ],
+      "note": "原测试 i=1..10，各输入为 i×0xdeadbeef；Java forcesLowSForTenMessages 完整重放 10 次签名及 low-S 断言。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:70:9:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a501504370670ec573f3a21e4920a13c83d66a37e44306dd03b51e61695b99f4"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:79:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "71959c319bd4157ebd9ab2295212452fd808f5d4435a09c0d75757f9ed9ad15e"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:86:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "71959c319bd4157ebd9ab2295212452fd808f5d4435a09c0d75757f9ed9ad15e"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:87:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "71959c319bd4157ebd9ab2295212452fd808f5d4435a09c0d75757f9ed9ad15e"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:95:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "6d3ef8677a5cf3c77474753d6ecbe4f4a715f5d45f1a5a4b49a384c91d1cd7a2"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:98:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6d3ef8677a5cf3c77474753d6ecbe4f4a715f5d45f1a5a4b49a384c91d1cd7a2"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:106:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "90ea1c22e7847d5720f0c1cff5f7eaf828f34654c156ec4648ba25385f7d4db0"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:111:9:conditional",
+      "status": "reviewed",
+      "caseIds": [
+        "90ea1c22e7847d5720f0c1cff5f7eaf828f34654c156ec4648ba25385f7d4db0"
+      ],
+      "note": "原 customK 函数 iter=0 返回无效 0，后续返回 1358；Java retriesInvalidFunctionK 保留同一分支并核对至少两次调用。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:115:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "90ea1c22e7847d5720f0c1cff5f7eaf828f34654c156ec4648ba25385f7d4db0"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:116:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "90ea1c22e7847d5720f0c1cff5f7eaf828f34654c156ec4648ba25385f7d4db0"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:121:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "de7357c6e8badb2b7f3e4bfaff6911b79cfacdcc816ad4d604b835547d109188"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:122:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "de7357c6e8badb2b7f3e4bfaff6911b79cfacdcc816ad4d604b835547d109188"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:125:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "564319833e012dccad19c868c13d8011795543393f2997aaf3cadca0dc9d197b"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:129:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "564319833e012dccad19c868c13d8011795543393f2997aaf3cadca0dc9d197b"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:136:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "564319833e012dccad19c868c13d8011795543393f2997aaf3cadca0dc9d197b"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:140:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "67e689a23068f204949a452a711ea61754c92e46d9c8ea67def32fdda8380783"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.additional.test.ts:145:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "67e689a23068f204949a452a711ea61754c92e46d9c8ea67def32fdda8380783"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:14:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "977ee21ecfd0dac349ce8015af081cb0f241ae4a63db91913b17134ccdf9c0ab"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:16:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "977ee21ecfd0dac349ce8015af081cb0f241ae4a63db91913b17134ccdf9c0ab"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:19:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "c2bef4c1ebe7014cb4ae9a185a24f57876b210abcc88e870db0382402b1ea6d8"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:22:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c2bef4c1ebe7014cb4ae9a185a24f57876b210abcc88e870db0382402b1ea6d8"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:24:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c2bef4c1ebe7014cb4ae9a185a24f57876b210abcc88e870db0382402b1ea6d8"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:25:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "c2bef4c1ebe7014cb4ae9a185a24f57876b210abcc88e870db0382402b1ea6d8"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:28:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b7fc85d0a141785985bc081e4244514dd903ec8da6aa11ddc073740926680692"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:31:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b7fc85d0a141785985bc081e4244514dd903ec8da6aa11ddc073740926680692"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:33:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b7fc85d0a141785985bc081e4244514dd903ec8da6aa11ddc073740926680692"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:34:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b7fc85d0a141785985bc081e4244514dd903ec8da6aa11ddc073740926680692"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:37:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "0afd27da0e9e7997e2aab49f8a7bf8e51b337288cb9e6dd04158d6e1797195ee"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:40:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0afd27da0e9e7997e2aab49f8a7bf8e51b337288cb9e6dd04158d6e1797195ee"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:43:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "211893e653960448a09f761de8e2b41502999b17822fd0429948d832f27dadda"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:45:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "211893e653960448a09f761de8e2b41502999b17822fd0429948d832f27dadda"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:48:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "079e77306e0b2404ee79216b2acd3269a59fafdd2746fb9b51bfd1a8292b1f22"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:55:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "079e77306e0b2404ee79216b2acd3269a59fafdd2746fb9b51bfd1a8292b1f22"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:58:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "88370462a255eb66cb65c32cf10d613ea63f75ece0b7a8212dcf9510a961ad68"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:60:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "88370462a255eb66cb65c32cf10d613ea63f75ece0b7a8212dcf9510a961ad68"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:63:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "a9d23a74082ecc6dd4339cdb48f49288b5b378867c37f47d35cc80459bd11249"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:70:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a9d23a74082ecc6dd4339cdb48f49288b5b378867c37f47d35cc80459bd11249"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:75:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "a9d23a74082ecc6dd4339cdb48f49288b5b378867c37f47d35cc80459bd11249"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:78:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "760ad40fa2e4ad98dfbf73fa9904c803f8846ac2de14eec7da8cc8b28e5c5f98"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:82:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "760ad40fa2e4ad98dfbf73fa9904c803f8846ac2de14eec7da8cc8b28e5c5f98"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:85:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "760ad40fa2e4ad98dfbf73fa9904c803f8846ac2de14eec7da8cc8b28e5c5f98"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:88:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "9ce49f7b735745012e797fdadb3e5436e94a12ff2589b01e766aa41dde3df6ea"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:95:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "9ce49f7b735745012e797fdadb3e5436e94a12ff2589b01e766aa41dde3df6ea"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:98:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "5d8caa4fa86b7dda00bcd6096b4cfe60f1edb5e8121bcdf12963a47a56c94527"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:102:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "5d8caa4fa86b7dda00bcd6096b4cfe60f1edb5e8121bcdf12963a47a56c94527"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:105:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "6ac2afd61b9192e98b314be4f3422b7b86df4a69e79879c85984d2626887f6a9"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:109:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6ac2afd61b9192e98b314be4f3422b7b86df4a69e79879c85984d2626887f6a9"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:112:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "0081ba234b30b24584ae08b03bf886d469b9ee7d81513771749e988ab6a8aefb"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:121:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0081ba234b30b24584ae08b03bf886d469b9ee7d81513771749e988ab6a8aefb"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:124:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "e8b9de89c8adc103e565d48033f4e85a594eb014665dd5f0d62d774792133df7"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:128:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "e8b9de89c8adc103e565d48033f4e85a594eb014665dd5f0d62d774792133df7"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:131:3:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "fcef75e0eeb4155c2a832410626efcf9097f6ef92a25e01dca138bb7d45e9390"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/ECDSA.test.ts:135:5:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "fcef75e0eeb4155c2a832410626efcf9097f6ef92a25e01dca138bb7d45e9390"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:5:3:registration",
+      "caseIds": [
+        "5fb58cc1d0ad2248639b912070f8e45ac162a4d336d7e4feeed4c5db46c74eca"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PrivateKey should split the private key into shares correctly"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:15:5:assertion",
+      "caseIds": [
+        "5fb58cc1d0ad2248639b912070f8e45ac162a4d336d7e4feeed4c5db46c74eca"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey should split the private key into shares correctly"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:19:7:assertion",
+      "caseIds": [
+        "5fb58cc1d0ad2248639b912070f8e45ac162a4d336d7e4feeed4c5db46c74eca"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey should split the private key into shares correctly"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:21:5:assertion",
+      "caseIds": [
+        "5fb58cc1d0ad2248639b912070f8e45ac162a4d336d7e4feeed4c5db46c74eca"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey should split the private key into shares correctly"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:24:3:registration",
+      "caseIds": [
+        "48086986f4cd82fbef94788825b41abbba1ad3d8df010647ed41b71137a7ef40"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PrivateKey should recombine the shares into a private key correctly"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:26:5:loop",
+      "caseIds": [
+        "48086986f4cd82fbef94788825b41abbba1ad3d8df010647ed41b71137a7ef40"
+      ],
+      "note": "原 while 三轮重组；Java 三轮分别重放 TS 记录的私钥、系数、seed 与坐标随机字节：PrivateKey should recombine the shares into a private key correctly"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:32:7:assertion",
+      "caseIds": [
+        "48086986f4cd82fbef94788825b41abbba1ad3d8df010647ed41b71137a7ef40"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey should recombine the shares into a private key correctly"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:37:3:registration",
+      "caseIds": [
+        "7555a48d5e21103824855c583aa0082d5afb6e89d2cb63d88c0f11ed8ad5672a"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PrivateKey should throw an error for invalid threshold or totalShares"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:40:5:assertion",
+      "caseIds": [
+        "7555a48d5e21103824855c583aa0082d5afb6e89d2cb63d88c0f11ed8ad5672a"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey should throw an error for invalid threshold or totalShares"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:44:5:assertion",
+      "caseIds": [
+        "7555a48d5e21103824855c583aa0082d5afb6e89d2cb63d88c0f11ed8ad5672a"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey should throw an error for invalid threshold or totalShares"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:49:3:registration",
+      "caseIds": [
+        "3ab94f0fa41bae1ad75c27019338588828a8f14d8b41419766bc27e7813d931b"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PrivateKey should throw an error for invalid threshold"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:51:5:assertion",
+      "caseIds": [
+        "3ab94f0fa41bae1ad75c27019338588828a8f14d8b41419766bc27e7813d931b"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey should throw an error for invalid threshold"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:54:3:registration",
+      "caseIds": [
+        "463cd3e5a621ddc86c91b5a563e0190fce60f467a3f91819735ab42474492d14"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PrivateKey should throw an error for invalid totalShares"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:56:5:assertion",
+      "caseIds": [
+        "463cd3e5a621ddc86c91b5a563e0190fce60f467a3f91819735ab42474492d14"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey should throw an error for invalid totalShares"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:59:3:registration",
+      "caseIds": [
+        "3e35bd243f94c7d1e2e8f52d7391ff977991e62921a0b719e993eaaa095cb212"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PrivateKey should throw an error for totalShares being less than threshold"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:61:5:assertion",
+      "caseIds": [
+        "3e35bd243f94c7d1e2e8f52d7391ff977991e62921a0b719e993eaaa095cb212"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey should throw an error for totalShares being less than threshold"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:66:3:registration",
+      "caseIds": [
+        "79d501ffb1bc392f2e12e26184553d5fbd303b871c00cf77dcf9f30cfacca339"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PrivateKey should throw an error if the same share is included twice during recovery"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:75:5:assertion",
+      "caseIds": [
+        "79d501ffb1bc392f2e12e26184553d5fbd303b871c00cf77dcf9f30cfacca339"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey should throw an error if the same share is included twice during recovery"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:80:3:registration",
+      "caseIds": [
+        "af227132bc3f1630d14eeea6e0ee460909c886e97b59dae292bada3c6e7e6afc"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PrivateKey should be able to create a backup array from a private key, and recover the same key back from the backup"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.split.test.ts:84:5:assertion",
+      "caseIds": [
+        "af227132bc3f1630d14eeea6e0ee460909c886e97b59dae292bada3c6e7e6afc"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey should be able to create a backup array from a private key, and recover the same key back from the backup"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.test.ts:10:7:registration",
+      "caseIds": [
+        "67ac00b076331927da5714b4825f065956ba34f91e0bba358ae4042049a177b6",
+        "3110b9a1c58647b7b043126857ce50c561eb773a9de47c74de97cc2288d79279",
+        "206edeac34e1cc96dca2c6894501992edb7c9fccf514a45acc35aab713951363",
+        "6ba0a0b5f0d32bd98211c372496b943a70656d6d2ae84ae36d357fd15ce09d29",
+        "64ce1fc1fd6ae7d2d7638734cfe9b99acd8292a938be16a43b70d3156c5784a5"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PrivateKey BRC42 vectors Passes BRC42 private vector #1；PrivateKey BRC42 vectors Passes BRC42 private vector #2；PrivateKey BRC42 vectors Passes BRC42 private vector #3；PrivateKey BRC42 vectors Passes BRC42 private vector #4；PrivateKey BRC42 vectors Passes BRC42 private vector #5"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.test.ts:14:9:assertion",
+      "caseIds": [
+        "67ac00b076331927da5714b4825f065956ba34f91e0bba358ae4042049a177b6",
+        "3110b9a1c58647b7b043126857ce50c561eb773a9de47c74de97cc2288d79279",
+        "206edeac34e1cc96dca2c6894501992edb7c9fccf514a45acc35aab713951363",
+        "6ba0a0b5f0d32bd98211c372496b943a70656d6d2ae84ae36d357fd15ce09d29",
+        "64ce1fc1fd6ae7d2d7638734cfe9b99acd8292a938be16a43b70d3156c5784a5"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey BRC42 vectors Passes BRC42 private vector #1；PrivateKey BRC42 vectors Passes BRC42 private vector #2；PrivateKey BRC42 vectors Passes BRC42 private vector #3；PrivateKey BRC42 vectors Passes BRC42 private vector #4；PrivateKey BRC42 vectors Passes BRC42 private vector #5"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.test.ts:35:5:registration",
+      "caseIds": [
+        "36c8eec3c329f552c966047148eb84ce935119e0ad1eaafab40087263a0a5e47"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PrivateKey PrivateKey Validation and Conversion Validates and converts valid private keys between hex and string"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.test.ts:48:9:assertion",
+      "caseIds": [
+        "36c8eec3c329f552c966047148eb84ce935119e0ad1eaafab40087263a0a5e47"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey PrivateKey Validation and Conversion Validates and converts valid private keys between hex and string"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.test.ts:49:9:assertion",
+      "caseIds": [
+        "36c8eec3c329f552c966047148eb84ce935119e0ad1eaafab40087263a0a5e47"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey PrivateKey Validation and Conversion Validates and converts valid private keys between hex and string"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.test.ts:52:9:assertion",
+      "caseIds": [
+        "36c8eec3c329f552c966047148eb84ce935119e0ad1eaafab40087263a0a5e47"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey PrivateKey Validation and Conversion Validates and converts valid private keys between hex and string"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.test.ts:53:9:assertion",
+      "caseIds": [
+        "36c8eec3c329f552c966047148eb84ce935119e0ad1eaafab40087263a0a5e47"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey PrivateKey Validation and Conversion Validates and converts valid private keys between hex and string"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.test.ts:77:5:registration",
+      "caseIds": [
+        "d646eab157f262ba60a80ff20af049bae12422b3e6d4a3b2e72971fcd64c3e9a"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PrivateKey PrivateKey Validation and Conversion Tests 10,000 random private keys for valid conversions"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.test.ts:78:7:loop",
+      "caseIds": [
+        "d646eab157f262ba60a80ff20af049bae12422b3e6d4a3b2e72971fcd64c3e9a"
+      ],
+      "note": "原 10,000 次随机密钥循环；Java 逐次重放 TS 记录的 10,000 份 32 字节输入，每次执行四条原断言：PrivateKey PrivateKey Validation and Conversion Tests 10,000 random private keys for valid conversions"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.test.ts:84:9:assertion",
+      "caseIds": [
+        "d646eab157f262ba60a80ff20af049bae12422b3e6d4a3b2e72971fcd64c3e9a"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey PrivateKey Validation and Conversion Tests 10,000 random private keys for valid conversions"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.test.ts:85:9:assertion",
+      "caseIds": [
+        "d646eab157f262ba60a80ff20af049bae12422b3e6d4a3b2e72971fcd64c3e9a"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey PrivateKey Validation and Conversion Tests 10,000 random private keys for valid conversions"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.test.ts:93:9:assertion",
+      "caseIds": [
+        "d646eab157f262ba60a80ff20af049bae12422b3e6d4a3b2e72971fcd64c3e9a"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey PrivateKey Validation and Conversion Tests 10,000 random private keys for valid conversions"
+    },
+    {
+      "id": "src/primitives/__tests/PrivateKey.test.ts:94:9:assertion",
+      "caseIds": [
+        "d646eab157f262ba60a80ff20af049bae12422b3e6d4a3b2e72971fcd64c3e9a"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PrivateKey PrivateKey Validation and Conversion Tests 10,000 random private keys for valid conversions"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:42:5:registration",
+      "caseIds": [
+        "48706f97ad1550859eb3761aebc3ba5b3e479b3e07fe0458d6cd1ab30c6d4025"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toDER returns a 66-char hex string when enc is \"hex\""
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:44:7:assertion",
+      "caseIds": [
+        "48706f97ad1550859eb3761aebc3ba5b3e479b3e07fe0458d6cd1ab30c6d4025"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toDER returns a 66-char hex string when enc is \"hex\""
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:45:7:assertion",
+      "caseIds": [
+        "48706f97ad1550859eb3761aebc3ba5b3e479b3e07fe0458d6cd1ab30c6d4025"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toDER returns a 66-char hex string when enc is \"hex\""
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:47:7:assertion",
+      "caseIds": [
+        "48706f97ad1550859eb3761aebc3ba5b3e479b3e07fe0458d6cd1ab30c6d4025"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toDER returns a 66-char hex string when enc is \"hex\""
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:50:5:registration",
+      "caseIds": [
+        "ac0285910ecd1f9f356b6aba1f9362f2bb11319b19ecf73c1ec5790e3b3639c8"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toDER returns a 33-byte number array when enc is undefined"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:52:7:assertion",
+      "caseIds": [
+        "ac0285910ecd1f9f356b6aba1f9362f2bb11319b19ecf73c1ec5790e3b3639c8"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toDER returns a 33-byte number array when enc is undefined"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:53:7:assertion",
+      "caseIds": [
+        "ac0285910ecd1f9f356b6aba1f9362f2bb11319b19ecf73c1ec5790e3b3639c8"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toDER returns a 33-byte number array when enc is undefined"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:56:5:registration",
+      "caseIds": [
+        "40241f779f474e0e0949ef959a5f0dfbb833cd00874e1c23cf6460e3df97544d"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toDER toDER hex and toDER array encode the same key"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:60:7:assertion",
+      "caseIds": [
+        "40241f779f474e0e0949ef959a5f0dfbb833cd00874e1c23cf6460e3df97544d"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toDER toDER hex and toDER array encode the same key"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:68:5:registration",
+      "caseIds": [
+        "feddfec03828e5b6d82eacf5f5c9c7b00b43603805825a8eac41b72c127e0491"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage fromDER creates a PublicKey from a DER byte array"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:71:7:assertion",
+      "caseIds": [
+        "feddfec03828e5b6d82eacf5f5c9c7b00b43603805825a8eac41b72c127e0491"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage fromDER creates a PublicKey from a DER byte array"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:72:7:assertion",
+      "caseIds": [
+        "feddfec03828e5b6d82eacf5f5c9c7b00b43603805825a8eac41b72c127e0491"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage fromDER creates a PublicKey from a DER byte array"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:75:5:registration",
+      "caseIds": [
+        "d9cdd576923230204fd05f701e886b2a9e48fe953c7bb659b97bceb83b8d4248"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage fromDER round-trips through toDER → fromDER correctly"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:79:7:assertion",
+      "caseIds": [
+        "d9cdd576923230204fd05f701e886b2a9e48fe953c7bb659b97bceb83b8d4248"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage fromDER round-trips through toDER → fromDER correctly"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:87:5:registration",
+      "caseIds": [
+        "3ffe5892c71b0ca30122f23ee8e406eaa8c2e4106b07817aaec806edba1355c9"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toHash returns a non-empty number array by default"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:89:7:assertion",
+      "caseIds": [
+        "3ffe5892c71b0ca30122f23ee8e406eaa8c2e4106b07817aaec806edba1355c9"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toHash returns a non-empty number array by default"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:90:7:assertion",
+      "caseIds": [
+        "3ffe5892c71b0ca30122f23ee8e406eaa8c2e4106b07817aaec806edba1355c9"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toHash returns a non-empty number array by default"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:93:5:registration",
+      "caseIds": [
+        "9102e935309c1470e6415cac4081c90fc16f2513c0fa63ae86b78bee5a8fdd59"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toHash returns a hex string when enc is \"hex\""
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:95:7:assertion",
+      "caseIds": [
+        "9102e935309c1470e6415cac4081c90fc16f2513c0fa63ae86b78bee5a8fdd59"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toHash returns a hex string when enc is \"hex\""
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:97:7:assertion",
+      "caseIds": [
+        "9102e935309c1470e6415cac4081c90fc16f2513c0fa63ae86b78bee5a8fdd59"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toHash returns a hex string when enc is \"hex\""
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:98:7:assertion",
+      "caseIds": [
+        "9102e935309c1470e6415cac4081c90fc16f2513c0fa63ae86b78bee5a8fdd59"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toHash returns a hex string when enc is \"hex\""
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:101:5:registration",
+      "caseIds": [
+        "7405b3394d5bd0dc18b48cbc1c31e38c91578a35d398ee39d6cf241e9c1a9bbb"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toHash toHash() and toHash(\"hex\") represent the same bytes"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:104:7:assertion",
+      "caseIds": [
+        "7405b3394d5bd0dc18b48cbc1c31e38c91578a35d398ee39d6cf241e9c1a9bbb"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toHash toHash() and toHash(\"hex\") represent the same bytes"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:107:5:registration",
+      "caseIds": [
+        "b3d5f705721489914f1e4261db1732f9cbb60dc2a94e81867ca24eceff4d72de"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toHash different keys produce different hashes"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:109:7:assertion",
+      "caseIds": [
+        "b3d5f705721489914f1e4261db1732f9cbb60dc2a94e81867ca24eceff4d72de"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toHash different keys produce different hashes"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:117:5:registration",
+      "caseIds": [
+        "e82bdebb556ab410aee0b41285bf4d8d73b8712708c6c4299eb6b42ccacfa36d"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toAddress returns a string when called with no arguments (mainnet default)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:119:7:assertion",
+      "caseIds": [
+        "e82bdebb556ab410aee0b41285bf4d8d73b8712708c6c4299eb6b42ccacfa36d"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toAddress returns a string when called with no arguments (mainnet default)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:120:7:assertion",
+      "caseIds": [
+        "e82bdebb556ab410aee0b41285bf4d8d73b8712708c6c4299eb6b42ccacfa36d"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toAddress returns a string when called with no arguments (mainnet default)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:123:5:registration",
+      "caseIds": [
+        "11ba18bb83f1b946c1b5ba83c5bfb265c671dc6530472d88cd3624e58c888ef1"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toAddress accepts \"mainnet\" prefix string"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:125:7:assertion",
+      "caseIds": [
+        "11ba18bb83f1b946c1b5ba83c5bfb265c671dc6530472d88cd3624e58c888ef1"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toAddress accepts \"mainnet\" prefix string"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:128:5:registration",
+      "caseIds": [
+        "a74e7f5c55cea8d0da6c4acadb90f61df66e194858e61d6ebc0844c6f1e80f6c"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toAddress accepts \"main\" prefix string (alias for mainnet)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:130:7:assertion",
+      "caseIds": [
+        "a74e7f5c55cea8d0da6c4acadb90f61df66e194858e61d6ebc0844c6f1e80f6c"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toAddress accepts \"main\" prefix string (alias for mainnet)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:133:5:registration",
+      "caseIds": [
+        "076086541d6a1f16473f9223f33aa9dd764afe51283cb03f5bee74236fa0dff9"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toAddress accepts \"testnet\" prefix string"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:135:7:assertion",
+      "caseIds": [
+        "076086541d6a1f16473f9223f33aa9dd764afe51283cb03f5bee74236fa0dff9"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toAddress accepts \"testnet\" prefix string"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:138:5:registration",
+      "caseIds": [
+        "03dbb2a3789ca5f9b45d1b6888414b288bcb97893957590731e66a96c12cd84d"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toAddress accepts \"test\" prefix string (alias for testnet)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:140:7:assertion",
+      "caseIds": [
+        "03dbb2a3789ca5f9b45d1b6888414b288bcb97893957590731e66a96c12cd84d"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toAddress accepts \"test\" prefix string (alias for testnet)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:143:5:registration",
+      "caseIds": [
+        "c1a31f0b03e87b8cf8ef723ec18aed872720601251fa40f8ee85ef7efbb8537a"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toAddress accepts an explicit byte-array prefix"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:146:7:assertion",
+      "caseIds": [
+        "c1a31f0b03e87b8cf8ef723ec18aed872720601251fa40f8ee85ef7efbb8537a"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toAddress accepts an explicit byte-array prefix"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:149:5:registration",
+      "caseIds": [
+        "7118413c4f2fce2a5656fc5a8a43844537a4bf772e8a979041af02356e500e2b"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toAddress mainnet and testnet addresses differ for the same key"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:150:7:assertion",
+      "caseIds": [
+        "7118413c4f2fce2a5656fc5a8a43844537a4bf772e8a979041af02356e500e2b"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toAddress mainnet and testnet addresses differ for the same key"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:153:5:registration",
+      "caseIds": [
+        "e7d06a64c4201e85169d8884d828d397c211ae3f4a8958b6fe22547df4011022"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage toAddress throws on an unrecognised string prefix"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:154:7:assertion",
+      "caseIds": [
+        "e7d06a64c4201e85169d8884d828d397c211ae3f4a8958b6fe22547df4011022"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage toAddress throws on an unrecognised string prefix"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:162:5:registration",
+      "caseIds": [
+        "25ede0f1386f9f635c9a872d90c4131259c38f073d0213d322c6d1baaec8e87c"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage constructor with Point argument builds a PublicKey from an existing Point (uses x/y of point)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:166:7:assertion",
+      "caseIds": [
+        "25ede0f1386f9f635c9a872d90c4131259c38f073d0213d322c6d1baaec8e87c"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage constructor with Point argument builds a PublicKey from an existing Point (uses x/y of point)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:167:7:assertion",
+      "caseIds": [
+        "25ede0f1386f9f635c9a872d90c4131259c38f073d0213d322c6d1baaec8e87c"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage constructor with Point argument builds a PublicKey from an existing Point (uses x/y of point)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:175:5:registration",
+      "caseIds": [
+        "43515fbf46168d6108709870753d6e997ca66aafa14d90da2c75e70ad410f8f8"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage constructor with isRed = false does not throw for a 66-char string when isRed is false"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:180:7:assertion",
+      "caseIds": [
+        "43515fbf46168d6108709870753d6e997ca66aafa14d90da2c75e70ad410f8f8"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage constructor with isRed = false does not throw for a 66-char string when isRed is false"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:188:5:registration",
+      "caseIds": [
+        "3d3260ee6629d50c2b1549421a126637e150bd2db83b2d1a728384bb2d78c9ef"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage verify with hex encoding verifies a signature against a hex-encoded message"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:191:7:assertion",
+      "caseIds": [
+        "3d3260ee6629d50c2b1549421a126637e150bd2db83b2d1a728384bb2d78c9ef"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage verify with hex encoding verifies a signature against a hex-encoded message"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:194:5:registration",
+      "caseIds": [
+        "75eb3340dc398e530b653ffb0c3b90ee82a3011d630e90a76fdf9fc6f7502c77"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage verify with hex encoding returns false for a wrong signature with hex encoding"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:198:7:assertion",
+      "caseIds": [
+        "75eb3340dc398e530b653ffb0c3b90ee82a3011d630e90a76fdf9fc6f7502c77"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage verify with hex encoding returns false for a wrong signature with hex encoding"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:219:28:conditional",
+      "caseIds": [
+        "cb4fa11db4a8a70162dcafde74c53d640a9e4286ad98d4f0cb15272d76dcc607",
+        "76b0ebca9c8a941f06e1fcbd00f2379eb934c78fb4ac54b60d1448e8deb43053",
+        "5b8b9b35e93c8c9b7f1d0bafd829e3bb9e5be483631c944dcce2f6c6a4e94358"
+      ],
+      "note": "Compact header 使用 compressed 分支；相关三项 Java 恢复测试分别执行压缩和非压缩头：PublicKey – additional coverage fromMsgHashAndCompactSignature recovers the correct public key from a compact signature；PublicKey – additional coverage fromMsgHashAndCompactSignature handles hex-encoded compact signature string；PublicKey – additional coverage fromMsgHashAndCompactSignature handles uncompressed compact byte (27-30 range)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:225:5:registration",
+      "caseIds": [
+        "cb4fa11db4a8a70162dcafde74c53d640a9e4286ad98d4f0cb15272d76dcc607"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage fromMsgHashAndCompactSignature recovers the correct public key from a compact signature"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:233:7:loop",
+      "caseIds": [
+        "cb4fa11db4a8a70162dcafde74c53d640a9e4286ad98d4f0cb15272d76dcc607"
+      ],
+      "note": "恢复参数 r 从 0 到 3 逐候选尝试；压缩 header=31+r；候选恢复异常 catch 后继续，匹配目标压缩公钥立即 break，最终断言非空与 key 相等。"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:237:11:conditional",
+      "caseIds": [
+        "cb4fa11db4a8a70162dcafde74c53d640a9e4286ad98d4f0cb15272d76dcc607"
+      ],
+      "note": "候选 compressed compact 恢复成功才与目标压缩公钥比较；失败候选 catch 后继续下一个 r。"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:245:7:assertion",
+      "caseIds": [
+        "cb4fa11db4a8a70162dcafde74c53d640a9e4286ad98d4f0cb15272d76dcc607"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage fromMsgHashAndCompactSignature recovers the correct public key from a compact signature"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:246:7:assertion",
+      "caseIds": [
+        "cb4fa11db4a8a70162dcafde74c53d640a9e4286ad98d4f0cb15272d76dcc607"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage fromMsgHashAndCompactSignature recovers the correct public key from a compact signature"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:249:5:registration",
+      "caseIds": [
+        "2bada1a8ff5eb6cae69c46ff239c49eb7b02c28dec9252f52a9f97b788f9b246"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage fromMsgHashAndCompactSignature throws for a signature array that is not 65 bytes"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:251:7:assertion",
+      "caseIds": [
+        "2bada1a8ff5eb6cae69c46ff239c49eb7b02c28dec9252f52a9f97b788f9b246"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage fromMsgHashAndCompactSignature throws for a signature array that is not 65 bytes"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:256:5:registration",
+      "caseIds": [
+        "04623fa385f5f410b40ef26b5a20375e5672003c9d1d3dac5e0b1225094d5f66"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage fromMsgHashAndCompactSignature throws for a signature array that is 66 bytes"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:258:7:assertion",
+      "caseIds": [
+        "04623fa385f5f410b40ef26b5a20375e5672003c9d1d3dac5e0b1225094d5f66"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage fromMsgHashAndCompactSignature throws for a signature array that is 66 bytes"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:263:5:registration",
+      "caseIds": [
+        "6a8a5223ac960dbddcdce393c9aab6af5f2cde3b4ef8417ffd895f025564b385"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage fromMsgHashAndCompactSignature throws for a compact byte below the valid range (< 27)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:267:7:assertion",
+      "caseIds": [
+        "6a8a5223ac960dbddcdce393c9aab6af5f2cde3b4ef8417ffd895f025564b385"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage fromMsgHashAndCompactSignature throws for a compact byte below the valid range (< 27)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:272:5:registration",
+      "caseIds": [
+        "c0396eb592bf15119befeb8e7d7572cd1b1e2b1b552a301817924243ce5a93d5"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage fromMsgHashAndCompactSignature throws for a compact byte at or above 35"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:276:7:assertion",
+      "caseIds": [
+        "c0396eb592bf15119befeb8e7d7572cd1b1e2b1b552a301817924243ce5a93d5"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage fromMsgHashAndCompactSignature throws for a compact byte at or above 35"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:281:5:registration",
+      "caseIds": [
+        "76b0ebca9c8a941f06e1fcbd00f2379eb934c78fb4ac54b60d1448e8deb43053"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage fromMsgHashAndCompactSignature handles hex-encoded compact signature string"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:286:7:loop",
+      "caseIds": [
+        "76b0ebca9c8a941f06e1fcbd00f2379eb934c78fb4ac54b60d1448e8deb43053"
+      ],
+      "note": "hex compact 用 r=0..3 与压缩 header=31+r，候选失败 catch 后继续；命中目标公钥时断言类型并立即 return。"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:291:11:conditional",
+      "caseIds": [
+        "76b0ebca9c8a941f06e1fcbd00f2379eb934c78fb4ac54b60d1448e8deb43053"
+      ],
+      "note": "hex compact 候选只在恢复 key 与原 key 相同时进入类型断言和 return；其他候选继续。"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:292:13:assertion",
+      "caseIds": [
+        "76b0ebca9c8a941f06e1fcbd00f2379eb934c78fb4ac54b60d1448e8deb43053"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage fromMsgHashAndCompactSignature handles hex-encoded compact signature string"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:303:5:registration",
+      "caseIds": [
+        "5b8b9b35e93c8c9b7f1d0bafd829e3bb9e5be483631c944dcce2f6c6a4e94358"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage fromMsgHashAndCompactSignature handles uncompressed compact byte (27-30 range)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:310:7:loop",
+      "caseIds": [
+        "5b8b9b35e93c8c9b7f1d0bafd829e3bb9e5be483631c944dcce2f6c6a4e94358"
+      ],
+      "note": "非压缩 header=27+r，r=0..3；失败候选 catch 后继续，命中目标压缩公钥即 break。"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:314:11:conditional",
+      "caseIds": [
+        "5b8b9b35e93c8c9b7f1d0bafd829e3bb9e5be483631c944dcce2f6c6a4e94358"
+      ],
+      "note": "非压缩 header 候选恢复后比较目标 key，匹配即置 passed 并 break；异常候选继续。"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:323:7:assertion",
+      "caseIds": [
+        "5b8b9b35e93c8c9b7f1d0bafd829e3bb9e5be483631c944dcce2f6c6a4e94358"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage fromMsgHashAndCompactSignature handles uncompressed compact byte (27-30 range)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:333:5:registration",
+      "caseIds": [
+        "f13209806dedb1d503fbf69f0addaddc3dd2bf6ad07429cefacfa2b7e1fdc915"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage deriveChild cache callbacks calls cacheSharedSecret when retrieveCachedSharedSecret returns undefined"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:344:7:assertion",
+      "caseIds": [
+        "f13209806dedb1d503fbf69f0addaddc3dd2bf6ad07429cefacfa2b7e1fdc915"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage deriveChild cache callbacks calls cacheSharedSecret when retrieveCachedSharedSecret returns undefined"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:345:7:assertion",
+      "caseIds": [
+        "f13209806dedb1d503fbf69f0addaddc3dd2bf6ad07429cefacfa2b7e1fdc915"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage deriveChild cache callbacks calls cacheSharedSecret when retrieveCachedSharedSecret returns undefined"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:346:7:assertion",
+      "caseIds": [
+        "f13209806dedb1d503fbf69f0addaddc3dd2bf6ad07429cefacfa2b7e1fdc915"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage deriveChild cache callbacks calls cacheSharedSecret when retrieveCachedSharedSecret returns undefined"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:349:5:registration",
+      "caseIds": [
+        "7aec2fc93101f8634ce7ae38917294c5a52d78334cdbc8f0e6e23676ba3a63c3"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage deriveChild cache callbacks uses cached shared secret when retrieveCachedSharedSecret returns a Point"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:365:7:assertion",
+      "caseIds": [
+        "7aec2fc93101f8634ce7ae38917294c5a52d78334cdbc8f0e6e23676ba3a63c3"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage deriveChild cache callbacks uses cached shared secret when retrieveCachedSharedSecret returns a Point"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:366:7:assertion",
+      "caseIds": [
+        "7aec2fc93101f8634ce7ae38917294c5a52d78334cdbc8f0e6e23676ba3a63c3"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage deriveChild cache callbacks uses cached shared secret when retrieveCachedSharedSecret returns a Point"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:368:7:assertion",
+      "caseIds": [
+        "7aec2fc93101f8634ce7ae38917294c5a52d78334cdbc8f0e6e23676ba3a63c3"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage deriveChild cache callbacks uses cached shared secret when retrieveCachedSharedSecret returns a Point"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:371:5:registration",
+      "caseIds": [
+        "bdc034b62da53d184edfab32ca76c6daa02735ec773bf1d70efaab6209c63ad2"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage deriveChild cache callbacks does not call cacheSharedSecret when it is not provided (cache miss path)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:375:7:assertion",
+      "caseIds": [
+        "bdc034b62da53d184edfab32ca76c6daa02735ec773bf1d70efaab6209c63ad2"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage deriveChild cache callbacks does not call cacheSharedSecret when it is not provided (cache miss path)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:379:7:assertion",
+      "caseIds": [
+        "bdc034b62da53d184edfab32ca76c6daa02735ec773bf1d70efaab6209c63ad2"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage deriveChild cache callbacks does not call cacheSharedSecret when it is not provided (cache miss path)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:382:5:registration",
+      "caseIds": [
+        "edfec1c528a60e0ae3e2fed564d4b025123fc43814feb3d68d00a9b3d9f45dd3"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey – additional coverage deriveChild cache callbacks derives without any cache callbacks (direct path)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.additional.test.ts:384:7:assertion",
+      "caseIds": [
+        "edfec1c528a60e0ae3e2fed564d4b025123fc43814feb3d68d00a9b3d9f45dd3"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey – additional coverage deriveChild cache callbacks derives without any cache callbacks (direct path)"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:17:5:registration",
+      "caseIds": [
+        "c14543a6922786ca08effae947aeb0ade464e54892d1a8b6fadde02c744b3e33"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey Static methods fromPrivateKey should return a valid PublicKey"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:18:7:assertion",
+      "caseIds": [
+        "c14543a6922786ca08effae947aeb0ade464e54892d1a8b6fadde02c744b3e33"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey Static methods fromPrivateKey should return a valid PublicKey"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:21:5:registration",
+      "caseIds": [
+        "31a02b8f53be15b9ea251ff74a62a0fa2fb9a50277a6ac00e6502d667726e1be"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey Static methods fromDER should create a PublicKey from a string"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:25:7:assertion",
+      "caseIds": [
+        "31a02b8f53be15b9ea251ff74a62a0fa2fb9a50277a6ac00e6502d667726e1be"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey Static methods fromDER should create a PublicKey from a string"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:27:7:assertion",
+      "caseIds": [
+        "31a02b8f53be15b9ea251ff74a62a0fa2fb9a50277a6ac00e6502d667726e1be"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey Static methods fromDER should create a PublicKey from a string"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:28:7:assertion",
+      "caseIds": [
+        "31a02b8f53be15b9ea251ff74a62a0fa2fb9a50277a6ac00e6502d667726e1be"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey Static methods fromDER should create a PublicKey from a string"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:32:7:registration",
+      "caseIds": [
+        "9338f8912a036e99b7ed7d469ac7e24eb3bbd3bf3b0d3c82dda62934882c5eb9"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey Static methods Constructor Should throw when accidentally passing in DER"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:33:9:assertion",
+      "caseIds": [
+        "9338f8912a036e99b7ed7d469ac7e24eb3bbd3bf3b0d3c82dda62934882c5eb9"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey Static methods Constructor Should throw when accidentally passing in DER"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:40:7:registration",
+      "caseIds": [
+        "bb669bcd0166eb4ca3a94794cab056e168e0df55bc75e61073d07eccfd84728c"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey Static methods Instance methods deriveSharedSecret should derive a shared secret Point"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:42:9:assertion",
+      "caseIds": [
+        "bb669bcd0166eb4ca3a94794cab056e168e0df55bc75e61073d07eccfd84728c"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey Static methods Instance methods deriveSharedSecret should derive a shared secret Point"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:45:7:registration",
+      "caseIds": [
+        "4d880386d4ae5b8620b40949c6655d209d871ff85f1b46d2f3963b17f75a387a"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey Static methods Instance methods deriveSharedSecret should throw error for invalid public key"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:47:9:assertion",
+      "caseIds": [
+        "4d880386d4ae5b8620b40949c6655d209d871ff85f1b46d2f3963b17f75a387a"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey Static methods Instance methods deriveSharedSecret should throw error for invalid public key"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:52:7:registration",
+      "caseIds": [
+        "4b1a1d2f33b84bf90eda51b97ca44806ecfe8f7096eb77848fa42ddebcfd3d64"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey Static methods Instance methods verify should return true for valid signature"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:55:9:assertion",
+      "caseIds": [
+        "4b1a1d2f33b84bf90eda51b97ca44806ecfe8f7096eb77848fa42ddebcfd3d64"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey Static methods Instance methods verify should return true for valid signature"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:58:7:registration",
+      "caseIds": [
+        "428e75c0dad62cff03d9457b91d03cd8bb5a7788bcc26f57221a9821ef46d2e8"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey Static methods Instance methods toDER should return DER encoded string of public key"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:60:9:assertion",
+      "caseIds": [
+        "428e75c0dad62cff03d9457b91d03cd8bb5a7788bcc26f57221a9821ef46d2e8"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey Static methods Instance methods toDER should return DER encoded string of public key"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:61:9:assertion",
+      "caseIds": [
+        "428e75c0dad62cff03d9457b91d03cd8bb5a7788bcc26f57221a9821ef46d2e8"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey Static methods Instance methods toDER should return DER encoded string of public key"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:64:7:registration",
+      "caseIds": [
+        "8a7ede4436cedcb7b966fbdc835eb4628e96614b4102a0b351931349c41dc1de"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey Static methods Instance methods toDER should return DER encoded number[] of public key"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:66:9:assertion",
+      "caseIds": [
+        "8a7ede4436cedcb7b966fbdc835eb4628e96614b4102a0b351931349c41dc1de"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey Static methods Instance methods toDER should return DER encoded number[] of public key"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:67:9:assertion",
+      "caseIds": [
+        "8a7ede4436cedcb7b966fbdc835eb4628e96614b4102a0b351931349c41dc1de"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey Static methods Instance methods toDER should return DER encoded number[] of public key"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:70:7:registration",
+      "caseIds": [
+        "7fb462c70311c30918bb528fb34ee2d0bceba27c8f85c0bdbb4207d656b47603"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey Static methods Instance methods fromDER and fromString should result in the same public key"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:74:30:conditional",
+      "caseIds": [
+        "7fb462c70311c30918bb528fb34ee2d0bceba27c8f85c0bdbb4207d656b47603"
+      ],
+      "note": "toDERResult 是 number[]，Array.isArray 真分支把字节序列编码为 hex，再由 PublicKey.fromString 还原；Java 用对应字节到 hex 路径。"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:78:9:assertion",
+      "caseIds": [
+        "7fb462c70311c30918bb528fb34ee2d0bceba27c8f85c0bdbb4207d656b47603"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey Static methods Instance methods fromDER and fromString should result in the same public key"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:82:7:loop",
+      "caseIds": [
+        "7a9896b54d3fd73dcaa1b2f571187a7c7ac3f6f5c9fe405d209cdd9b0724ba3e",
+        "01424e136029628bd89a722cbbae048806b4db14adec62c2f49b0fc5e600b6b0",
+        "401f84524dda95392c83b405a22c22861ce1b16fb97219761437ba193d92b5b8",
+        "006c85a9c12db167cbb060d87f9de638a31d20f5f9404dc7e333adfc8c6d3895",
+        "01854f99ee61106a054366cf15ef0facf84b8d4f3be70b4a0afffd3e2c3d2082"
+      ],
+      "note": "BRC42 public fixture 五组动态注册；Java 五个独立测试逐向量核对派生压缩公钥：PublicKey Static methods BRC42 vectors Passes BRC42 public vector #1；PublicKey Static methods BRC42 vectors Passes BRC42 public vector #2；PublicKey Static methods BRC42 vectors Passes BRC42 public vector #3；PublicKey Static methods BRC42 vectors Passes BRC42 public vector #4；PublicKey Static methods BRC42 vectors Passes BRC42 public vector #5"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:83:9:registration",
+      "caseIds": [
+        "7a9896b54d3fd73dcaa1b2f571187a7c7ac3f6f5c9fe405d209cdd9b0724ba3e",
+        "01424e136029628bd89a722cbbae048806b4db14adec62c2f49b0fc5e600b6b0",
+        "401f84524dda95392c83b405a22c22861ce1b16fb97219761437ba193d92b5b8",
+        "006c85a9c12db167cbb060d87f9de638a31d20f5f9404dc7e333adfc8c6d3895",
+        "01854f99ee61106a054366cf15ef0facf84b8d4f3be70b4a0afffd3e2c3d2082"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：PublicKey Static methods BRC42 vectors Passes BRC42 public vector #1；PublicKey Static methods BRC42 vectors Passes BRC42 public vector #2；PublicKey Static methods BRC42 vectors Passes BRC42 public vector #3；PublicKey Static methods BRC42 vectors Passes BRC42 public vector #4；PublicKey Static methods BRC42 vectors Passes BRC42 public vector #5"
+    },
+    {
+      "id": "src/primitives/__tests/PublicKey.test.ts:88:11:assertion",
+      "caseIds": [
+        "7a9896b54d3fd73dcaa1b2f571187a7c7ac3f6f5c9fe405d209cdd9b0724ba3e",
+        "01424e136029628bd89a722cbbae048806b4db14adec62c2f49b0fc5e600b6b0",
+        "401f84524dda95392c83b405a22c22861ce1b16fb97219761437ba193d92b5b8",
+        "006c85a9c12db167cbb060d87f9de638a31d20f5f9404dc7e333adfc8c6d3895",
+        "01854f99ee61106a054366cf15ef0facf84b8d4f3be70b4a0afffd3e2c3d2082"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：PublicKey Static methods BRC42 vectors Passes BRC42 public vector #1；PublicKey Static methods BRC42 vectors Passes BRC42 public vector #2；PublicKey Static methods BRC42 vectors Passes BRC42 public vector #3；PublicKey Static methods BRC42 vectors Passes BRC42 public vector #4；PublicKey Static methods BRC42 vectors Passes BRC42 public vector #5"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:17:3:registration",
+      "caseIds": [
+        "d27ead71db9b0acea49d87ec4974f2d4146aca5b2fe3110574dd387cb99b59af"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:34:5:assertion",
+      "caseIds": [
+        "d27ead71db9b0acea49d87ec4974f2d4146aca5b2fe3110574dd387cb99b59af"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldVerifyAValidProof 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:37:3:registration",
+      "caseIds": [
+        "0513c24bc8df3d110362bf15d7218d6384b222ca758420f64dd8c6cd67c1f10a"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:58:5:assertion",
+      "caseIds": [
+        "0513c24bc8df3d110362bf15d7218d6384b222ca758420f64dd8c6cd67c1f10a"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldFailVerificationIfProofIsTamperedRModified 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:61:3:registration",
+      "caseIds": [
+        "6c4ed68bef5cff3fdcd5e0779c3c41b42e42194d60d8e7655b2f855bac0955e2"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:82:5:assertion",
+      "caseIds": [
+        "6c4ed68bef5cff3fdcd5e0779c3c41b42e42194d60d8e7655b2f855bac0955e2"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldFailVerificationIfProofIsTamperedZModified 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:85:3:registration",
+      "caseIds": [
+        "f41ca6cb5fd6da860633f774929d892b57c0728ffb8b6cadfc9286acb07c32db"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:106:5:assertion",
+      "caseIds": [
+        "f41ca6cb5fd6da860633f774929d892b57c0728ffb8b6cadfc9286acb07c32db"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldFailVerificationIfProofIsTamperedSPrimeModified 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:109:3:registration",
+      "caseIds": [
+        "3989422c5031306036dda72add56b113de6f90454b1b242fb7217a8a728c1673"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:129:5:assertion",
+      "caseIds": [
+        "3989422c5031306036dda72add56b113de6f90454b1b242fb7217a8a728c1673"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldFailVerificationIfInputsAreTamperedAModified 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:132:3:registration",
+      "caseIds": [
+        "95ce35b295b68448c8d64158ffb17e0b6711126c957137517c4b928b4139ab96"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:152:5:assertion",
+      "caseIds": [
+        "95ce35b295b68448c8d64158ffb17e0b6711126c957137517c4b928b4139ab96"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldFailVerificationIfInputsAreTamperedBModified 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:155:3:registration",
+      "caseIds": [
+        "d5463e5574eaff653af63685a361e29b986d3df053e23ca81f370ef413b9af72"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:175:5:assertion",
+      "caseIds": [
+        "d5463e5574eaff653af63685a361e29b986d3df053e23ca81f370ef413b9af72"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldFailVerificationIfInputsAreTamperedSModified 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:178:3:registration",
+      "caseIds": [
+        "98b312c6ca682a2ae36a9b3030f9b74a8c45290a8213504f7fdacc36eb23b5f2"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:196:5:assertion",
+      "caseIds": [
+        "98b312c6ca682a2ae36a9b3030f9b74a8c45290a8213504f7fdacc36eb23b5f2"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldFailVerificationIfUsingWrongPrivateKey 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:199:3:registration",
+      "caseIds": [
+        "958ce0e5cb376f1bfed6eff22923b895c261d997bc5cbf2873eb7b50183ccca9"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:218:5:assertion",
+      "caseIds": [
+        "958ce0e5cb376f1bfed6eff22923b895c261d997bc5cbf2873eb7b50183ccca9"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldFailVerificationIfUsingWrongPublicKey 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:221:3:registration",
+      "caseIds": [
+        "dbaec8fd8e915e9416705901b7aabd39bfad263bdec2e92dc91c551e3c8d5eb0"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:238:5:assertion",
+      "caseIds": [
+        "dbaec8fd8e915e9416705901b7aabd39bfad263bdec2e92dc91c551e3c8d5eb0"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldFailVerificationIfSharedSecretSIsIncorrect 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:241:3:registration",
+      "caseIds": [
+        "e9086b06eff6c3c3fa7b6bcfd0a928d7d228fb42b73b3f8eea6f0aea6f5c1896"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:268:5:assertion",
+      "caseIds": [
+        "e9086b06eff6c3c3fa7b6bcfd0a928d7d228fb42b73b3f8eea6f0aea6f5c1896"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldVerifyAValidProofWithFixedKeys 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:271:3:registration",
+      "caseIds": [
+        "55f6289b9805dc45bd02a716e38de2602a096fad8d2cc592590ec86351eae46b"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:279:5:assertion",
+      "caseIds": [
+        "55f6289b9805dc45bd02a716e38de2602a096fad8d2cc592590ec86351eae46b"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldThrowAnErrorIfInputsAreInvalid 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:280:5:assertion",
+      "caseIds": [
+        "55f6289b9805dc45bd02a716e38de2602a096fad8d2cc592590ec86351eae46b"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldThrowAnErrorIfInputsAreInvalid 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:281:5:assertion",
+      "caseIds": [
+        "55f6289b9805dc45bd02a716e38de2602a096fad8d2cc592590ec86351eae46b"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldThrowAnErrorIfInputsAreInvalid 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Schnorr.test.ts:282:5:assertion",
+      "caseIds": [
+        "55f6289b9805dc45bd02a716e38de2602a096fad8d2cc592590ec86351eae46b"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.SchnorrTest#shouldThrowAnErrorIfInputsAreInvalid 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:15:3:registration",
+      "caseIds": [
+        "31e9685bec302dc29310799cdd93c0847d0ec70ee4bb7cdb790e31fe15701b7d"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:18:5:assertion",
+      "caseIds": [
+        "31e9685bec302dc29310799cdd93c0847d0ec70ee4bb7cdb790e31fe15701b7d"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#basePointMultiplicationMatchesKnownCoordinatesAndHandlesInfinity 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:19:5:assertion",
+      "caseIds": [
+        "31e9685bec302dc29310799cdd93c0847d0ec70ee4bb7cdb790e31fe15701b7d"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#basePointMultiplicationMatchesKnownCoordinatesAndHandlesInfinity 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:20:5:assertion",
+      "caseIds": [
+        "31e9685bec302dc29310799cdd93c0847d0ec70ee4bb7cdb790e31fe15701b7d"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#basePointMultiplicationMatchesKnownCoordinatesAndHandlesInfinity 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:21:5:assertion",
+      "caseIds": [
+        "31e9685bec302dc29310799cdd93c0847d0ec70ee4bb7cdb790e31fe15701b7d"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#basePointMultiplicationMatchesKnownCoordinatesAndHandlesInfinity 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:24:3:registration",
+      "caseIds": [
+        "1d790303bc5fda648949207d9bf24c7097d80b6a9f789799161b37adde254ab0"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:27:5:assertion",
+      "caseIds": [
+        "1d790303bc5fda648949207d9bf24c7097d80b6a9f789799161b37adde254ab0"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#publicKeyGenerationStaysOnCurveSupportsCompressionAndRejectsBadEncodings 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:30:5:assertion",
+      "caseIds": [
+        "1d790303bc5fda648949207d9bf24c7097d80b6a9f789799161b37adde254ab0"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#publicKeyGenerationStaysOnCurveSupportsCompressionAndRejectsBadEncodings 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:31:5:assertion",
+      "caseIds": [
+        "1d790303bc5fda648949207d9bf24c7097d80b6a9f789799161b37adde254ab0"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#publicKeyGenerationStaysOnCurveSupportsCompressionAndRejectsBadEncodings 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:32:5:assertion",
+      "caseIds": [
+        "1d790303bc5fda648949207d9bf24c7097d80b6a9f789799161b37adde254ab0"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#publicKeyGenerationStaysOnCurveSupportsCompressionAndRejectsBadEncodings 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:35:3:registration",
+      "caseIds": [
+        "dfa5e683c15a9f7489db9846b868f0406ed6b0408afeb1038f1337ba803c0e0e"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:38:5:assertion",
+      "caseIds": [
+        "dfa5e683c15a9f7489db9846b868f0406ed6b0408afeb1038f1337ba803c0e0e"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#addingInversePointsYieldsInfinity 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:39:5:assertion",
+      "caseIds": [
+        "dfa5e683c15a9f7489db9846b868f0406ed6b0408afeb1038f1337ba803c0e0e"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#addingInversePointsYieldsInfinity 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:42:3:registration",
+      "caseIds": [
+        "1a041aece251b8c23d803ddc44daa9df99d0a822c92f72776ca67e541ab6c49a"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:48:5:assertion",
+      "caseIds": [
+        "1a041aece251b8c23d803ddc44daa9df99d0a822c92f72776ca67e541ab6c49a"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#ecdsaSignAndVerifyRoundTripLowSEnforcedRejectsMalformedInputs 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:49:5:assertion",
+      "caseIds": [
+        "1a041aece251b8c23d803ddc44daa9df99d0a822c92f72776ca67e541ab6c49a"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#ecdsaSignAndVerifyRoundTripLowSEnforcedRejectsMalformedInputs 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:50:5:assertion",
+      "caseIds": [
+        "1a041aece251b8c23d803ddc44daa9df99d0a822c92f72776ca67e541ab6c49a"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#ecdsaSignAndVerifyRoundTripLowSEnforcedRejectsMalformedInputs 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:52:5:assertion",
+      "caseIds": [
+        "1a041aece251b8c23d803ddc44daa9df99d0a822c92f72776ca67e541ab6c49a"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#ecdsaSignAndVerifyRoundTripLowSEnforcedRejectsMalformedInputs 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:54:5:assertion",
+      "caseIds": [
+        "1a041aece251b8c23d803ddc44daa9df99d0a822c92f72776ca67e541ab6c49a"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#ecdsaSignAndVerifyRoundTripLowSEnforcedRejectsMalformedInputs 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:56:5:assertion",
+      "caseIds": [
+        "1a041aece251b8c23d803ddc44daa9df99d0a822c92f72776ca67e541ab6c49a"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#ecdsaSignAndVerifyRoundTripLowSEnforcedRejectsMalformedInputs 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:57:5:assertion",
+      "caseIds": [
+        "1a041aece251b8c23d803ddc44daa9df99d0a822c92f72776ca67e541ab6c49a"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#ecdsaSignAndVerifyRoundTripLowSEnforcedRejectsMalformedInputs 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:60:3:registration",
+      "caseIds": [
+        "0dd1fe23eb62c7f427ab5329083d906e11cb10e3494a668089279698a0e4b8d8"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:66:5:assertion",
+      "caseIds": [
+        "0dd1fe23eb62c7f427ab5329083d906e11cb10e3494a668089279698a0e4b8d8"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#deterministicNonceIsStableAcrossCallsAndMessageChanges 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:68:5:assertion",
+      "caseIds": [
+        "0dd1fe23eb62c7f427ab5329083d906e11cb10e3494a668089279698a0e4b8d8"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#deterministicNonceIsStableAcrossCallsAndMessageChanges 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:69:5:assertion",
+      "caseIds": [
+        "0dd1fe23eb62c7f427ab5329083d906e11cb10e3494a668089279698a0e4b8d8"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#deterministicNonceIsStableAcrossCallsAndMessageChanges 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:72:3:registration",
+      "caseIds": [
+        "47ce23c02e5d8172dcb5bba6c318aea8d98606e4cb4981a96f668d56d1e262ce"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:79:5:assertion",
+      "caseIds": [
+        "47ce23c02e5d8172dcb5bba6c318aea8d98606e4cb4981a96f668d56d1e262ce"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#prehashedSigningPathMatchesExplicitHashingInput 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:80:5:assertion",
+      "caseIds": [
+        "47ce23c02e5d8172dcb5bba6c318aea8d98606e4cb4981a96f668d56d1e262ce"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#prehashedSigningPathMatchesExplicitHashingInput 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:83:3:registration",
+      "caseIds": [
+        "550ff8bc969efa2f8e362c6fc203a18364ce0932a2a9ea3efd6b88d09aa1dfe6"
+      ],
+      "note": "原注册用例对应 Java @Test"
+    },
+    {
+      "id": "src/primitives/__tests/Secp256r1.test.ts:99:5:assertion",
+      "caseIds": [
+        "550ff8bc969efa2f8e362c6fc203a18364ce0932a2a9ea3efd6b88d09aa1dfe6"
+      ],
+      "note": "Java com.metanet4j.bsv.primitives.Secp256r1Test#signaturesInteroperateWithNodeCryptoIeeeP1363Encoding 逐断言对应"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:19:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "690889b3d3b441d6521eedcc0ee1591d2e5d483b3aeb9c169e84a51057e8d903",
+        "dcc3c3b557f0519b5a4f9f364c82d1553b59b5944dcda0c52a1cbd6348f5e98b",
+        "78bf7c1852aa9c832a0f3a767a60d7ea6cc48c4a0f21305554f2c19122cb095f",
+        "99eb71146bdcc49d6fac6f8e7a36e66323d129c26263b8f9a1f3e547aae2771a",
+        "7358fdf481bd38a25f822519064885107d94e9921730f03175c086129d2b0dde"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:63:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "690889b3d3b441d6521eedcc0ee1591d2e5d483b3aeb9c169e84a51057e8d903",
+        "dcc3c3b557f0519b5a4f9f364c82d1553b59b5944dcda0c52a1cbd6348f5e98b",
+        "78bf7c1852aa9c832a0f3a767a60d7ea6cc48c4a0f21305554f2c19122cb095f",
+        "99eb71146bdcc49d6fac6f8e7a36e66323d129c26263b8f9a1f3e547aae2771a",
+        "7358fdf481bd38a25f822519064885107d94e9921730f03175c086129d2b0dde"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:66:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "74ab080bbd7b609022c749edf784c7a107054e79d0b259432378e905414a199d"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:81:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "74ab080bbd7b609022c749edf784c7a107054e79d0b259432378e905414a199d"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:84:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "481cfcc6bfe06f611c5e9a6c5a4702ee1aa2f39848dbf1cf2308b155f130456b"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:98:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "481cfcc6bfe06f611c5e9a6c5a4702ee1aa2f39848dbf1cf2308b155f130456b"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:101:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "725070fef32f7ab7c355cdc85748dbaa6bbebbb354cc3b377341ca83e98a70db"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:107:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "725070fef32f7ab7c355cdc85748dbaa6bbebbb354cc3b377341ca83e98a70db"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:110:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "ea9fe08063333a4d5c8fafc031d0e7b85027e9325e49c69499b939a03e6ed2b1"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:114:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ea9fe08063333a4d5c8fafc031d0e7b85027e9325e49c69499b939a03e6ed2b1"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:115:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ea9fe08063333a4d5c8fafc031d0e7b85027e9325e49c69499b939a03e6ed2b1"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:118:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "27043b5464432cee189ac2faa5a8ac69304a359d27a21c8b6251c74105e62dd2"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:122:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "27043b5464432cee189ac2faa5a8ac69304a359d27a21c8b6251c74105e62dd2"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:123:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "27043b5464432cee189ac2faa5a8ac69304a359d27a21c8b6251c74105e62dd2"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:131:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "2e6453c144e55dbff85876598a0845fb339b5ceb4145824b08ceb33968865ab8"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:132:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "2e6453c144e55dbff85876598a0845fb339b5ceb4145824b08ceb33968865ab8"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:135:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "2e6453c144e55dbff85876598a0845fb339b5ceb4145824b08ceb33968865ab8"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:140:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "4c8111e305bb3660ef6acdcf27df60c4291bea9af42ae4bcc9c7d438fc75e5fc"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:143:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "4c8111e305bb3660ef6acdcf27df60c4291bea9af42ae4bcc9c7d438fc75e5fc"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:146:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "08bf37b702f3c8143d4df58298edcc29357f7b9ac0d2032ff49d355a85e42219"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:149:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "08bf37b702f3c8143d4df58298edcc29357f7b9ac0d2032ff49d355a85e42219"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:152:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "b6aa84ae2e07610d1e962dfdfc5e58bd4b3881a7dcea1cbef4d3c3c923f80114"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:156:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b6aa84ae2e07610d1e962dfdfc5e58bd4b3881a7dcea1cbef4d3c3c923f80114"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:157:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "b6aa84ae2e07610d1e962dfdfc5e58bd4b3881a7dcea1cbef4d3c3c923f80114"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:160:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "78682a1946fe533ed586bb0a024e8eba1d3d9099cb97a11ea942832e02a07d92"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:164:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "78682a1946fe533ed586bb0a024e8eba1d3d9099cb97a11ea942832e02a07d92"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:167:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "8f96cab8582f35c9473804b1d9ec741eb4eb2e995d00ce64b67be84bb956c354"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:171:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "8f96cab8582f35c9473804b1d9ec741eb4eb2e995d00ce64b67be84bb956c354"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:179:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "fffdbc6fb326d7b8be031650b0775edf99ffb0aea85aa8699402798974b9265e"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:183:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "fffdbc6fb326d7b8be031650b0775edf99ffb0aea85aa8699402798974b9265e"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:186:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "5a6cb9247eef4bcb31f8a62e89846bc9b06f06e28a259c993c93917b3532e1bd"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:191:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "5a6cb9247eef4bcb31f8a62e89846bc9b06f06e28a259c993c93917b3532e1bd"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:194:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "be4d94cc1a8905a0e20ae478feb81c2a62e7914f9efe30b7119de05cc4417811"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:198:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "be4d94cc1a8905a0e20ae478feb81c2a62e7914f9efe30b7119de05cc4417811"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:206:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "56754502fffecddd59b8fd36b8280124bdc26a020f67615129343acf25aea38b"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:210:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "56754502fffecddd59b8fd36b8280124bdc26a020f67615129343acf25aea38b"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:213:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "fe7245c5e98000560c17fd1e54603decf8b1d9b825429cd5edf755d316a26a2d"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:215:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "fe7245c5e98000560c17fd1e54603decf8b1d9b825429cd5edf755d316a26a2d"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:218:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "6f549b30f631f492187cc611fc40bb62c48cb95aa61e37f0e1059c7398d44798"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:220:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6f549b30f631f492187cc611fc40bb62c48cb95aa61e37f0e1059c7398d44798"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:223:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "002a9d02d437a2247ce9ff937c32589e414d789f30ea379a2d66305bf8a7362b"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:226:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "002a9d02d437a2247ce9ff937c32589e414d789f30ea379a2d66305bf8a7362b"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:227:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "002a9d02d437a2247ce9ff937c32589e414d789f30ea379a2d66305bf8a7362b"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:230:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "76ef9760ca0cf3069ddbdac374fbf01e1a0d04163b98af71baccc392cb1f620d"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:233:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "76ef9760ca0cf3069ddbdac374fbf01e1a0d04163b98af71baccc392cb1f620d"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:235:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "76ef9760ca0cf3069ddbdac374fbf01e1a0d04163b98af71baccc392cb1f620d"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:238:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "6d86af3fc4dce22c233d2d9c7e0c68fcd8fd0483368c17bfa95041acea66afbe"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:242:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6d86af3fc4dce22c233d2d9c7e0c68fcd8fd0483368c17bfa95041acea66afbe"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:243:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6d86af3fc4dce22c233d2d9c7e0c68fcd8fd0483368c17bfa95041acea66afbe"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:251:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "77dd288fbff32c6395415f0ff9396d9e2e6c4eb383555e28762d63dbda800dbf"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:253:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "77dd288fbff32c6395415f0ff9396d9e2e6c4eb383555e28762d63dbda800dbf"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:256:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "e84239381e9b298b53a9907cb9416254c552d771b8590e9d0c621ca7cbcc4e60"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:258:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "e84239381e9b298b53a9907cb9416254c552d771b8590e9d0c621ca7cbcc4e60"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:261:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "40f1cc3d0f132e17932b3f79876e5f62c1487c77be1123a6b24a3cc00dcbe734"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:264:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "40f1cc3d0f132e17932b3f79876e5f62c1487c77be1123a6b24a3cc00dcbe734"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:267:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "abf0cd26474411e62b2f4e52be0a67fd7f3c6c958487a941e64c513e0c46fcaf"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:270:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "abf0cd26474411e62b2f4e52be0a67fd7f3c6c958487a941e64c513e0c46fcaf"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:271:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "abf0cd26474411e62b2f4e52be0a67fd7f3c6c958487a941e64c513e0c46fcaf"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:274:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "dd741e93be3b203957a45bd31d1960e858d9192b4ad7f1bb11099cd50b6cde1e"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:277:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "dd741e93be3b203957a45bd31d1960e858d9192b4ad7f1bb11099cd50b6cde1e"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:278:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "dd741e93be3b203957a45bd31d1960e858d9192b4ad7f1bb11099cd50b6cde1e"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:281:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "791a13a3850d8c8e32fe841962fcf629f62c509bf236a1da390f758bf2774734"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:284:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "791a13a3850d8c8e32fe841962fcf629f62c509bf236a1da390f758bf2774734"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:287:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "6fda31abd267fbba2cca20267da6cfd1fe02aafa5874925cf41ceda1ea7a15eb"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:290:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "6fda31abd267fbba2cca20267da6cfd1fe02aafa5874925cf41ceda1ea7a15eb"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:293:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "ea4a7c117cf333a6fac7ea4260bd2c13cd6dc2a17c0af77863204f7cc92b6729"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:296:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "ea4a7c117cf333a6fac7ea4260bd2c13cd6dc2a17c0af77863204f7cc92b6729"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:304:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "0a186253a5d9ec6d14689b521d92db56d6501f27999210974eecd357883b758e"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:311:7:loop",
+      "status": "reviewed",
+      "caseIds": [
+        "0a186253a5d9ec6d14689b521d92db56d6501f27999210974eecd357883b758e"
+      ],
+      "note": "原测试 recovery=0..3 逐个尝试恢复公钥；Java recoversPublicKey 使用相同固定 TS 私钥字节和相同候选顺序。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:314:11:conditional",
+      "status": "reviewed",
+      "caseIds": [
+        "0a186253a5d9ec6d14689b521d92db56d6501f27999210974eecd357883b758e"
+      ],
+      "note": "仅当候选公钥的压缩编码与原公钥相等时记录并退出；Java recoversPublicKey 保留此条件及非空断言。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:322:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "0a186253a5d9ec6d14689b521d92db56d6501f27999210974eecd357883b758e"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:330:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "801d858107cb6f228137a47ecb74f1bbc00e7505bfe32251ca6d68442e76d066"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:337:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "801d858107cb6f228137a47ecb74f1bbc00e7505bfe32251ca6d68442e76d066"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:338:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "801d858107cb6f228137a47ecb74f1bbc00e7505bfe32251ca6d68442e76d066"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:341:5:registration",
+      "status": "reviewed",
+      "caseIds": [
+        "013646e10a049c99bc634569119dd6c41682c4102ab704697be38e4c39da830f"
+      ],
+      "note": "固定 TS registration 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/Signature.test.ts:347:7:assertion",
+      "status": "reviewed",
+      "caseIds": [
+        "013646e10a049c99bc634569119dd6c41682c4102ab704697be38e4c39da830f"
+      ],
+      "note": "固定 TS assertion 位置及其所属 Java 原用例方法已逐项复核。"
+    },
+    {
+      "id": "src/primitives/__tests/bug-31.test.ts:6:3:registration",
+      "caseIds": [
+        "d86aed1d5a0a5662c48f71c631aa36019be140b36890242b620431508320b3a7"
+      ],
+      "note": "原用例注册；Java 方法按同一完整名称与向量行执行：bug-31 tests 0"
+    },
+    {
+      "id": "src/primitives/__tests/bug-31.test.ts:11:5:assertion",
+      "caseIds": [
+        "d86aed1d5a0a5662c48f71c631aa36019be140b36890242b620431508320b3a7"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：bug-31 tests 0"
+    },
+    {
+      "id": "src/primitives/__tests/bug-31.test.ts:16:5:assertion",
+      "caseIds": [
+        "d86aed1d5a0a5662c48f71c631aa36019be140b36890242b620431508320b3a7"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：bug-31 tests 0"
+    },
+    {
+      "id": "src/primitives/__tests/bug-31.test.ts:18:5:assertion",
+      "caseIds": [
+        "d86aed1d5a0a5662c48f71c631aa36019be140b36890242b620431508320b3a7"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：bug-31 tests 0"
+    },
+    {
+      "id": "src/primitives/__tests/bug-31.test.ts:21:5:assertion",
+      "caseIds": [
+        "d86aed1d5a0a5662c48f71c631aa36019be140b36890242b620431508320b3a7"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：bug-31 tests 0"
+    },
+    {
+      "id": "src/primitives/__tests/bug-31.test.ts:23:5:assertion",
+      "caseIds": [
+        "d86aed1d5a0a5662c48f71c631aa36019be140b36890242b620431508320b3a7"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：bug-31 tests 0"
+    },
+    {
+      "id": "src/primitives/__tests/bug-31.test.ts:25:5:assertion",
+      "caseIds": [
+        "d86aed1d5a0a5662c48f71c631aa36019be140b36890242b620431508320b3a7"
+      ],
+      "note": "原断言观察点；Java 保留同一调用结果、异常或状态并记录实际值：bug-31 tests 0"
     }
   ]
 }

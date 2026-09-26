@@ -64,7 +64,7 @@ function matcherReceiver(received, matcher) {
     return { receiver: wrapped, getActual: () => outcome || { kind: 'throw', name: 'Error', message: 'not executed' } }
   }
   if (matcher === 'toHaveLength') return { receiver: received, getActual: () => canonical(received.length) }
-  if (matcher === 'toHaveBeenCalledTimes') {
+  if (matcher === 'toHaveBeenCalledTimes' || matcher === 'toHaveBeenCalled') {
     const count = received && received.mock ? received.mock.calls.length : 0
     return { receiver: received, getActual: () => canonical(count) }
   }
@@ -104,7 +104,9 @@ function wrapAssertion(assertion, received, negated) {
             matcher: (negated ? 'not.' : '') + matcher,
             negated,
             actual: failure ? thrown(failure) : getActual(),
-            expected: args.length === 1 ? canonical(args[0], 0, matcher === 'toEqual') : args.map(a => canonical(a, 0, matcher === 'toEqual')),
+            expected: args.length === 1
+              ? (matcher === 'toBeInstanceOf' ? canonical(args[0].name) : canonical(args[0], 0, matcher === 'toEqual'))
+              : args.map(a => canonical(a, 0, matcher === 'toEqual')),
             pass: failure === null
           }
           fs.appendFileSync(output, JSON.stringify(row) + '\n')

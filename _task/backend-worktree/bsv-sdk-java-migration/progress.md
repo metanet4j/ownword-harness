@@ -2,17 +2,17 @@
 
 ## 执行位置
 
-`activeItem=nextItem=migration-impl-keys-signatures`，已进入密钥与签名算法任务。43 个执行事项中 13 done、1 in-progress、29 not-started；28 个编码任务中 6 done、1 in-progress、21 not-started。权威状态与依赖见 [feature_list.json](feature_list.json)。
+`activeItem=nextItem=migration-impl-symmetric`；`migration-impl-http-chain` 同步进行。43 个执行事项中 14 done、2 in-progress、27 not-started；28 个编码任务中 7 done、2 in-progress、19 not-started。权威状态与依赖见 [feature_list.json](feature_list.json)。
 
 ## 已验收结果
 
-- 字节任务 `migration-impl-byte-codecs` 已通过：Java 工程提交 `e8b83f4` 后执行 `./verify.sh bsv-test`，累计 656/656，失败、错误、跳过均为 0。固定 TS 六个原文件 192/192；`task-parity.py` 对照 192/192 个原用例、1242/1242 条原断言，缺失、未比较、额外 Java 原断言均为 0。独立证据目录为 `.cache/evidence/byte-final-20260926-125839/`，局部报告 `formalAcceptance=false`。
-- 两个 Base58 property 用例按固定 seed 各采集并重放 300 组真实输入；WUA-ZERO-CAPACITY 已按授权最小修复，4 个额外 Java 回归不计入原用例。`node test-audit.test.cjs` 在宿主环境 41/41 通过。
-- 本项六个原文件 192 个用例及 467 个 AST 位置已映射，累计 632/5329，尚余 4697。ReaderUint8Array、WriterUint8Array、utils 的 139 项 API 设计映射已复核，所属 values 批次 371 项分批检查通过；累计 values、hash-random、curve 三组 API 为 816/3576 项。
-- 以前完成的 Hex、BigNumber、哈希随机及曲线原用例仍在本次 Java 全量回归中通过。`./init.sh` 检查固定 TS、工具链、缓存隔离与任务清单；完整六模块 `audit-tests.py check` 和无过滤 `audit-api.cjs check` 仍按剩余范围拒绝通过。
+- 密钥与签名任务 `migration-impl-keys-signatures` 已通过：Java 工程提交 `67ccb86`，固定 TS 11 个原文件 146/146；共享 Java `clean test` 累计 802/802，失败、错误、跳过均为 0；提交后的 `task-parity.py` 对照 146/146 个原用例、40242/40242 条原断言，缺失、未比较、额外 Java 原断言均为 0。证据目录 `.cache/evidence/keys-final-20260926-133303/`，局部报告 `formalAcceptance=false`。
+- 10,078 次 TS Random 实际输入与 Java 重放资源逐项一致，其中 10,000 次私钥循环保持原规模；BRC42 私钥、公钥向量及 ECDSA、Schnorr、P-256 输入均已执行。篡改循环第 20,000 条 Java 实际值后比较器拒绝通过；检查器自测在宿主环境 41/41 通过。
+- 本项 146 个用例、356 个 AST 位置已映射，累计 778/5329，尚余 4551。七个完整源文件的 129 项 API 已复核，累计 945/3576；API-05 还有归后续交易任务的 48 项，批次保持 in-progress。此前已完成项在共享 Java 全量回归中继续通过。
+- `./init.sh` 与 `node audit-api.cjs batches` 已通过。无过滤 `audit-api.cjs check` 和六模块 `audit-tests.py check` 仍由剩余范围决定。
 
-## 下一步
+## 当前工作
 
-`migration-impl-keys-signatures` 的冻结清单为 11 个原测试文件、146 个注册用例，包含 BRC42 私钥和公钥向量。先复核 ECDSA、Polynomial、PrivateKey、PublicKey、Schnorr、Secp256r1、Signature 的 API 与原测试，再按测试契约逐行为 RED→GREEN；随机 k/密钥须采集真实输入并在 Java 重放，累计运行 `clean test`。
+对称任务的 AESGCM、AsyncCryptoBackend、SymmetricKey 与五个原测试文件由子代理实施；其中 manual 测试保留原 536,870,928 字节规模，另用流式摘要记录实际输入与结果。HTTP/chain 任务依赖已完成的字节模块，另一子代理并行处理 13 个源文件和九个原测试文件。两项完成后按各自冻结用例、API、随机输入及累计 `clean test` 收口并提交。
 
 仅修改 `metanet4j-bsv-sdk` 的工程代码、测试和 POM；固定 TS 与其他四个 Java 工程只读。根仓既有无关改动保留，不推送、不广播交易或调用真实钱包/外部业务接口。

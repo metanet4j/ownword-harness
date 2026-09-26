@@ -2802,6 +2802,128 @@
       ]
     },
     {
+      "id": "src/primitives/ECDSA.ts#function-variable:sign:1",
+      "java": "com.metanet4j.bsv.primitives.ECDSA#sign",
+      "javaSignature": "public static Signature sign(BigNumber, BigNumber, boolean, Object)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ECDSA.ts:150",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/ECDSA.java"
+      ],
+      "note": "默认 forceLowS=false；固定 customK 失败直接抛错，函数 customK 可重试。"
+    },
+    {
+      "id": "src/primitives/ECDSA.ts#function-variable:verify:1",
+      "java": "com.metanet4j.bsv.primitives.ECDSA#verify",
+      "javaSignature": "public static boolean verify(BigNumber, Signature, Point)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ECDSA.ts:211",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/ECDSA.java"
+      ]
+    },
+    {
+      "id": "src/primitives/ECDSA.ts#function:bnToBigInt:1",
+      "java": "com.metanet4j.bsv.primitives.ECDSA#value",
+      "javaSignature": "private static BigInteger value(BigNumber)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ECDSA.ts:52",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/ECDSA.java"
+      ]
+    },
+    {
+      "id": "src/primitives/ECDSA.ts#function:retryOrRejectFixedK:1",
+      "java": "com.metanet4j.bsv.primitives.ECDSA#retryOrReject",
+      "javaSignature": "private static Signature retryOrReject(boolean, String)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ECDSA.ts:83",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/ECDSA.java"
+      ]
+    },
+    {
+      "id": "src/primitives/ECDSA.ts#function:selectK:1",
+      "java": "com.metanet4j.bsv.primitives.ECDSA#selectK",
+      "javaSignature": "private static BigNumber selectK(Object, int, DRBG)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ECDSA.ts:66",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/ECDSA.java"
+      ]
+    },
+    {
+      "id": "src/primitives/ECDSA.ts#function:signatureFromK:1",
+      "java": "com.metanet4j.bsv.primitives.ECDSA#signatureFromK",
+      "javaSignature": "private static Signature signatureFromK(BigNumber, BigInteger, BigInteger, boolean, boolean)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ECDSA.ts:88",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/ECDSA.java"
+      ]
+    },
+    {
+      "id": "src/primitives/ECDSA.ts#function:truncateToN:1",
+      "java": "com.metanet4j.bsv.primitives.ECDSA#truncateToN",
+      "javaSignature": "private static BigNumber truncateToN(BigNumber, boolean)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ECDSA.ts:40",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/ECDSA.java"
+      ]
+    },
+    {
+      "id": "src/primitives/ECDSA.ts#variable:bytes:1",
+      "java": "com.metanet4j.bsv.primitives.ECDSA#BYTES",
+      "javaSignature": "private static final int BYTES",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ECDSA.ts:62",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/ECDSA.java"
+      ]
+    },
+    {
+      "id": "src/primitives/ECDSA.ts#variable:curve:1",
+      "java": "com.metanet4j.bsv.primitives.ECDSA#CURVE",
+      "javaSignature": "private static final Curve CURVE",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ECDSA.ts:61",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/ECDSA.java"
+      ]
+    },
+    {
+      "id": "src/primitives/ECDSA.ts#variable:halfN:1",
+      "java": "com.metanet4j.bsv.primitives.ECDSA#HALF_N",
+      "javaSignature": "private static final BigInteger HALF_N",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ECDSA.ts:64",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/ECDSA.java"
+      ]
+    },
+    {
+      "id": "src/primitives/ECDSA.ts#variable:ns1:1",
+      "java": "com.metanet4j.bsv.primitives.ECDSA#NS1",
+      "javaSignature": "private static final BigInteger NS1",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/ECDSA.ts:63",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/ECDSA.java"
+      ]
+    },
+    {
       "id": "src/primitives/Hash.ts#class:BaseHash:1",
       "java": "com.metanet4j.bsv.primitives.BaseHash",
       "javaSignature": "abstract class BaseHash<T extends BaseHash<T>>",
@@ -8171,6 +8293,578 @@
       ]
     },
     {
+      "id": "src/primitives/Polynomial.ts#class:PointInFiniteField:1",
+      "java": "com.metanet4j.bsv.primitives.Polynomial.PointInFiniteField",
+      "javaSignature": "public static class PointInFiniteField",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Polynomial.ts:7",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Polynomial.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Polynomial.ts#class:Polynomial:1",
+      "java": "com.metanet4j.bsv.primitives.Polynomial",
+      "javaSignature": "public class Polynomial",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Polynomial.ts:45",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Polynomial.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Polynomial.ts#constructor:PointInFiniteField.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.Polynomial.PointInFiniteField#constructor",
+      "javaSignature": "public PointInFiniteField(BigNumber x, BigNumber y)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Polynomial.ts:11",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Polynomial.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Polynomial.ts#constructor:Polynomial.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.Polynomial#constructor",
+      "javaSignature": "public Polynomial(List<PointInFiniteField> points, int threshold)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Polynomial.ts:49",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Polynomial.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Polynomial.ts#method:PointInFiniteField.fromString:1",
+      "java": "com.metanet4j.bsv.primitives.Polynomial.PointInFiniteField#fromString",
+      "javaSignature": "public static PointInFiniteField fromString(String value)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Polynomial.ts:21",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Polynomial.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Polynomial.ts#method:PointInFiniteField.toString:1",
+      "java": "com.metanet4j.bsv.primitives.Polynomial.PointInFiniteField#toString",
+      "javaSignature": "public String toString()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Polynomial.ts:17",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Polynomial.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Polynomial.ts#method:Polynomial.fromPrivateKey:1",
+      "java": "com.metanet4j.bsv.primitives.Polynomial#fromPrivateKey",
+      "javaSignature": "public static Polynomial fromPrivateKey(PrivateKey key, int threshold)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Polynomial.ts:54",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Polynomial.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Polynomial.ts#method:Polynomial.valueAt:1",
+      "java": "com.metanet4j.bsv.primitives.Polynomial#valueAt",
+      "javaSignature": "public BigNumber valueAt(BigNumber x)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Polynomial.ts:72",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Polynomial.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Polynomial.ts#property:PointInFiniteField.x:1",
+      "java": "com.metanet4j.bsv.primitives.Polynomial.PointInFiniteField#x",
+      "javaSignature": "public final BigNumber x",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Polynomial.ts:8",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Polynomial.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Polynomial.ts#property:PointInFiniteField.y:1",
+      "java": "com.metanet4j.bsv.primitives.Polynomial.PointInFiniteField#y",
+      "javaSignature": "public final BigNumber y",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Polynomial.ts:9",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Polynomial.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Polynomial.ts#property:Polynomial.points:1",
+      "java": "com.metanet4j.bsv.primitives.Polynomial#points",
+      "javaSignature": "public final List<PointInFiniteField> points",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Polynomial.ts:46",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Polynomial.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Polynomial.ts#property:Polynomial.threshold:1",
+      "java": "com.metanet4j.bsv.primitives.Polynomial#threshold",
+      "javaSignature": "public final int threshold",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Polynomial.ts:47",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Polynomial.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#class:KeyShares:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey.KeyShares",
+      "javaSignature": "public static class KeyShares",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:27",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#class:PrivateKey:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey",
+      "javaSignature": "public class PrivateKey extends BigNumber",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:84",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#constructor:KeyShares.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey.KeyShares#constructor",
+      "javaSignature": "public KeyShares(List<Polynomial.PointInFiniteField> points, int threshold, String integrity)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:32",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#constructor:PrivateKey.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#constructor",
+      "javaSignature": "public PrivateKey(Object number, Object base, String endian, String modN)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:163",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:KeyShares.fromBackupFormat:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey.KeyShares#fromBackupFormat",
+      "javaSignature": "public static KeyShares fromBackupFormat(List<String> shares)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:38",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:KeyShares.toBackupFormat:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey.KeyShares#toBackupFormat",
+      "javaSignature": "public List<String> toBackupFormat()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:68",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.checkInField:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#checkInField",
+      "javaSignature": "public FieldCheck checkInField()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:192",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.deriveChild:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#deriveChild",
+      "javaSignature": "public PrivateKey deriveChild(PublicKey publicKey, String invoiceNumber, TriConsumer<PrivateKey, Point, Point> cacheSharedSecret, BiFunction<PrivateKey, Point, Point> retrieveCachedSharedSecret)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:393",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.deriveSharedSecret:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#deriveSharedSecret",
+      "javaSignature": "public Point deriveSharedSecret(PublicKey key)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:351",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.fromBackupShares:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#fromBackupShares",
+      "javaSignature": "public static PrivateKey fromBackupShares(List<String> shares)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:517",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.fromHex:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#fromHex",
+      "javaSignature": "public static PrivateKey fromHex(String value)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:122",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.fromKeyShares:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#fromKeyShares",
+      "javaSignature": "public static PrivateKey fromKeyShares(KeyShares shares)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:530",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.fromRandom:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#fromRandom",
+      "javaSignature": "public static PrivateKey fromRandom()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:95",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.fromString:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#fromString",
+      "javaSignature": "public static PrivateKey fromString(String value, Object base)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:109",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.fromWif:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#fromWif",
+      "javaSignature": "public static PrivateKey fromWif(String wif, int prefixLength)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:136",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.isValid:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#isValid",
+      "javaSignature": "public boolean isValid()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:202",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.sign:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#sign",
+      "javaSignature": "public Signature sign(Object msg, String enc, boolean forceLowS, Object customK)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:220",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.toAddress:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#toAddress",
+      "javaSignature": "public String toAddress(Object prefix)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:306",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.toBackupShares:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#toBackupShares",
+      "javaSignature": "public List<String> toBackupShares(int threshold, int totalShares)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:497",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.toHex:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#toHex",
+      "javaSignature": "public String toHex()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:321",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.toKeyShares:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#toKeyShares",
+      "javaSignature": "public KeyShares toKeyShares(int threshold, int totalShares)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:431",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.toPublicKey:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#toPublicKey",
+      "javaSignature": "public PublicKey toPublicKey()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:261",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.toString:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#toString",
+      "javaSignature": "public String toString(Object base, Object padding)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:334",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.toWif:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#toWif",
+      "javaSignature": "public String toWif(List<? extends Number> prefix)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:285",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#method:PrivateKey.verify:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey#verify",
+      "javaSignature": "public boolean verify(Object msg, Signature sig, String enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:244",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#property:KeyShares.integrity:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey.KeyShares#integrity",
+      "javaSignature": "public final String integrity",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:30",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#property:KeyShares.points:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey.KeyShares#points",
+      "javaSignature": "public final List<Polynomial.PointInFiniteField> points",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:28",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PrivateKey.ts#property:KeyShares.threshold:1",
+      "java": "com.metanet4j.bsv.primitives.PrivateKey.KeyShares#threshold",
+      "javaSignature": "public final int threshold",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PrivateKey.ts:29",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PrivateKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PublicKey.ts#class:PublicKey:1",
+      "java": "com.metanet4j.bsv.primitives.PublicKey",
+      "javaSignature": "public class PublicKey extends Point",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PublicKey.ts:17",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PublicKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PublicKey.ts#constructor:PublicKey.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.PublicKey#constructor",
+      "javaSignature": "public PublicKey(Object x, Object y, boolean isRed)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PublicKey.ts:79",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PublicKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PublicKey.ts#method:PublicKey.deriveChild:1",
+      "java": "com.metanet4j.bsv.primitives.PublicKey#deriveChild",
+      "javaSignature": "public PublicKey deriveChild(PrivateKey privateKey, String invoiceNumber, PrivateKey.TriConsumer<PrivateKey, Point, Point> cacheSharedSecret, BiFunction<PrivateKey, Point, Point> retrieveCachedSharedSecret)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PublicKey.ts:205",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PublicKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PublicKey.ts#method:PublicKey.deriveSharedSecret:1",
+      "java": "com.metanet4j.bsv.primitives.PublicKey#deriveSharedSecret",
+      "javaSignature": "public Point deriveSharedSecret(PrivateKey key)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PublicKey.ts:113",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PublicKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PublicKey.ts#method:PublicKey.fromDER:1",
+      "java": "com.metanet4j.bsv.primitives.PublicKey#fromDER",
+      "javaSignature": "public static PublicKey fromDER(List<? extends Number> bytes)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PublicKey.ts:64",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PublicKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PublicKey.ts#method:PublicKey.fromMsgHashAndCompactSignature:1",
+      "java": "com.metanet4j.bsv.primitives.PublicKey#fromMsgHashAndCompactSignature",
+      "javaSignature": "public static PublicKey fromMsgHashAndCompactSignature(BigNumber msgHash, Object signature, String enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PublicKey.ts:250",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PublicKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PublicKey.ts#method:PublicKey.fromPrivateKey:1",
+      "java": "com.metanet4j.bsv.primitives.PublicKey#fromPrivateKey",
+      "javaSignature": "public static PublicKey fromPrivateKey(PrivateKey key)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PublicKey.ts:33",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PublicKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PublicKey.ts#method:PublicKey.fromString:1",
+      "java": "com.metanet4j.bsv.primitives.PublicKey#fromString",
+      "javaSignature": "public static PublicKey fromString(String hex)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PublicKey.ts:49",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PublicKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PublicKey.ts#method:PublicKey.toAddress:1",
+      "java": "com.metanet4j.bsv.primitives.PublicKey#toAddress",
+      "javaSignature": "public String toAddress(Object prefix)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PublicKey.ts:184",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PublicKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PublicKey.ts#method:PublicKey.toDER:1",
+      "java": "com.metanet4j.bsv.primitives.PublicKey#toDER",
+      "javaSignature": "public Object toDER(String enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PublicKey.ts:149",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PublicKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PublicKey.ts#method:PublicKey.toHash:1",
+      "java": "com.metanet4j.bsv.primitives.PublicKey#toHash",
+      "javaSignature": "public Object toHash(String enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PublicKey.ts:162",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PublicKey.java"
+      ]
+    },
+    {
+      "id": "src/primitives/PublicKey.ts#method:PublicKey.verify:1",
+      "java": "com.metanet4j.bsv.primitives.PublicKey#verify",
+      "javaSignature": "public boolean verify(Object msg, Signature sig, String enc)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/PublicKey.ts:134",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/PublicKey.java"
+      ]
+    },
+    {
       "id": "src/primitives/Random.ts#class:Rand:1",
       "java": "com.metanet4j.bsv.primitives.Random.Rand",
       "javaSignature": "static class Rand",
@@ -8907,6 +9601,738 @@
         "src/primitives/__tests/ReductionContext.test.ts",
         ".cache/evidence/api-values-observations.json",
         ".cache/evidence/api-values-without-buffer-observations.json"
+      ]
+    },
+    {
+      "id": "src/primitives/Schnorr.ts#class:Schnorr:1",
+      "java": "com.metanet4j.bsv.primitives.Schnorr",
+      "javaSignature": "public class Schnorr",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Schnorr.ts:38",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Schnorr.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Schnorr.ts#constructor:Schnorr.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.Schnorr#constructor",
+      "javaSignature": "public Schnorr()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Schnorr.ts:41",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Schnorr.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Schnorr.ts#method:Schnorr.computeChallenge:1",
+      "java": "com.metanet4j.bsv.primitives.Schnorr#computeChallenge",
+      "javaSignature": "private BigNumber computeChallenge(Point A, Point B, Point S, Point SPrime, Point R)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Schnorr.ts:101",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Schnorr.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Schnorr.ts#method:Schnorr.generateProof:1",
+      "java": "com.metanet4j.bsv.primitives.Schnorr#generateProof",
+      "javaSignature": "public Proof generateProof(PrivateKey a, PublicKey A, PublicKey B, Point S)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Schnorr.ts:53",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Schnorr.java",
+        ".cache/evidence/keys-schnorr-p256-ts-parity.jsonl"
+      ]
+    },
+    {
+      "id": "src/primitives/Schnorr.ts#method:Schnorr.verifyProof:1",
+      "java": "com.metanet4j.bsv.primitives.Schnorr#verifyProof",
+      "javaSignature": "public boolean verifyProof(Point A, Point B, Point S, Proof proof)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Schnorr.ts:75",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Schnorr.java",
+        ".cache/evidence/keys-schnorr-p256-ts-parity.jsonl"
+      ]
+    },
+    {
+      "id": "src/primitives/Schnorr.ts#property:Schnorr.curve:1",
+      "java": "com.metanet4j.bsv.primitives.Schnorr#curve",
+      "javaSignature": "private final Curve curve",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Schnorr.ts:39",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Schnorr.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#class:Secp256r1:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1",
+      "javaSignature": "public class Secp256r1",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:30",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.add:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#add",
+      "javaSignature": "public P256Point add(P256Point first, P256Point second)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:156",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.addPoints:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#addPoints",
+      "javaSignature": "private P256Point addPoints(P256Point first, P256Point second)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:124",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.assertOnCurve:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#assertOnCurve",
+      "javaSignature": "private void assertOnCurve(P256Point point)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:72",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.bytesToScalar:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#bytesToScalar",
+      "javaSignature": "private BigInteger bytesToScalar(byte[] bytes)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:309",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.deterministicNonce:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#deterministicNonce",
+      "javaSignature": "private BigInteger deterministicNonce(BigInteger privateKey, byte[] digest)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:314",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.doublePoint:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#doublePoint",
+      "javaSignature": "private P256Point doublePoint(P256Point point)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:144",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.generatePrivateKeyHex:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#generatePrivateKeyHex",
+      "javaSignature": "public String generatePrivateKeyHex()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:201",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.isInfinity:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#isInfinity",
+      "javaSignature": "private boolean isInfinity(P256Point point)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:68",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.isOnCurve:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#isOnCurve",
+      "javaSignature": "public boolean isOnCurve(P256Point point)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:188",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.mod:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#mod",
+      "javaSignature": "private BigInteger mod(BigInteger value, BigInteger modulus)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:37",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.modInv:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#modInv",
+      "javaSignature": "private BigInteger modInv(BigInteger value, BigInteger modulus)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:42",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.modPow:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#modPow",
+      "javaSignature": "private BigInteger modPow(BigInteger base, BigInteger exponent, BigInteger modulus)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:55",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.multiply:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#multiply",
+      "javaSignature": "public P256Point multiply(P256Point point, BigInteger scalar)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:163",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.multiplyBase:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#multiplyBase",
+      "javaSignature": "public P256Point multiplyBase(BigInteger scalar)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:181",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.normalizeMessage:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#normalizeMessage",
+      "javaSignature": "private byte[] normalizeMessage(Object message, boolean prehashed)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:303",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.normalizePrivateKey:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#normalizePrivateKey",
+      "javaSignature": "private BigInteger normalizePrivateKey(BigInteger value)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:213",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.pointFromAffine:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#pointFromAffine",
+      "javaSignature": "public P256Point pointFromAffine(BigInteger x, BigInteger y)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:82",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.pointFromHex:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#pointFromHex",
+      "javaSignature": "public P256Point pointFromHex(String hex)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:91",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.pointToHex:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#pointToHex",
+      "javaSignature": "public String pointToHex(P256Point point, boolean compressed)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:112",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.publicKeyFromPrivate:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#publicKeyFromPrivate",
+      "javaSignature": "public P256Point publicKeyFromPrivate(Object privateKey)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:229",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.randomScalar:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#randomScalar",
+      "javaSignature": "private BigInteger randomScalar()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:205",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.sign:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#sign",
+      "javaSignature": "public Signature sign(Object message, Object privateKey, SignOptions options)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:238",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java",
+        ".cache/evidence/keys-schnorr-p256-ts-parity.jsonl"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.to32BytesHex:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#to32BytesHex",
+      "javaSignature": "private String to32BytesHex(BigInteger value)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:341",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.toBytes:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#toBytes",
+      "javaSignature": "private byte[] toBytes(Object value)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:329",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.toScalar:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#toScalar",
+      "javaSignature": "private BigInteger toScalar(Object input)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:219",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#method:Secp256r1.verify:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#verify",
+      "javaSignature": "public boolean verify(Object message, Signature signature, Object publicKey, boolean prehashed); public boolean verify(Object, Map<String, ?>, Object, boolean)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:274",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java",
+        ".cache/evidence/keys-schnorr-p256-ts-parity.jsonl"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#property:G.x:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1.P256Point#x",
+      "javaSignature": "public BigInteger x()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:17",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#property:G.y:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1.P256Point#y",
+      "javaSignature": "public BigInteger y()",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:17",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#property:Secp256r1.a:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#a",
+      "javaSignature": "public final BigInteger a",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:33",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#property:Secp256r1.b:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#b",
+      "javaSignature": "public final BigInteger b",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:34",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#property:Secp256r1.g:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#g",
+      "javaSignature": "public final P256Point g",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:35",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#property:Secp256r1.n:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#n",
+      "javaSignature": "public final BigInteger n",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:32",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#property:Secp256r1.p:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#p",
+      "javaSignature": "public final BigInteger p",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:31",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#type:ByteSource:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#toBytes",
+      "javaSignature": "Object /* String、byte[]、ByteBuffer；经 toBytes 转换 */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:7",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#type:P256Point:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#P256Point",
+      "javaSignature": "public record P256Point(BigInteger x, BigInteger y) /* null 为无穷远点 */",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:5",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#variable:A:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#A",
+      "javaSignature": "private static final BigInteger A",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:13",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#variable:B:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#B",
+      "javaSignature": "private static final BigInteger B",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:14",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#variable:COMPRESSED_EVEN:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#COMPRESSED_EVEN",
+      "javaSignature": "private static final String COMPRESSED_EVEN",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:20",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#variable:COMPRESSED_ODD:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#COMPRESSED_ODD",
+      "javaSignature": "private static final String COMPRESSED_ODD",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:21",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#variable:G:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#G",
+      "javaSignature": "private static final P256Point G",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:17",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#variable:GX:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#GX",
+      "javaSignature": "private static final BigInteger GX",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:15",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#variable:GY:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#GY",
+      "javaSignature": "private static final BigInteger GY",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:16",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#variable:HALF_N:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#HALF_N",
+      "javaSignature": "private static final BigInteger HALF_N",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:18",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#variable:HEX_REGEX:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#HEX_REGEX",
+      "javaSignature": "private static final Pattern HEX_REGEX",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:9",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#variable:N:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#N",
+      "javaSignature": "private static final BigInteger N",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:12",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#variable:P:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#P",
+      "javaSignature": "private static final BigInteger P",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:11",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Secp256r1.ts#variable:UNCOMPRESSED:1",
+      "java": "com.metanet4j.bsv.primitives.Secp256r1#UNCOMPRESSED",
+      "javaSignature": "private static final String UNCOMPRESSED",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Secp256r1.ts:22",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Secp256r1.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Signature.ts#class:Signature:1",
+      "java": "com.metanet4j.bsv.primitives.Signature",
+      "javaSignature": "public class Signature",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Signature.ts:19",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Signature.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Signature.ts#constructor:Signature.constructor:1",
+      "java": "com.metanet4j.bsv.primitives.Signature#Signature",
+      "javaSignature": "public Signature(BigNumber, BigNumber)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Signature.ts:141",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Signature.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Signature.ts#method:Signature.CalculateRecoveryFactor:1",
+      "java": "com.metanet4j.bsv.primitives.Signature#calculateRecoveryFactor",
+      "javaSignature": "public int calculateRecoveryFactor(PublicKey, BigNumber)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Signature.ts:362",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Signature.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Signature.ts#method:Signature.RecoverPublicKey:1",
+      "java": "com.metanet4j.bsv.primitives.Signature#recoverPublicKey",
+      "javaSignature": "public PublicKey recoverPublicKey(int, BigNumber)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Signature.ts:306",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Signature.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Signature.ts#method:Signature.fromCompact:1",
+      "java": "com.metanet4j.bsv.primitives.Signature#fromCompact",
+      "javaSignature": "public static Signature fromCompact(Object, String)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Signature.ts:117",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Signature.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Signature.ts#method:Signature.fromDER:1",
+      "java": "com.metanet4j.bsv.primitives.Signature#fromDER",
+      "javaSignature": "public static Signature fromDER(Object, String)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Signature.ts:44",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Signature.java"
+      ],
+      "note": "保留 short-form DER 长度和无效前导零的固定 TS 错误。"
+    },
+    {
+      "id": "src/primitives/Signature.ts#method:Signature.toCompact:1",
+      "java": "com.metanet4j.bsv.primitives.Signature#toCompact",
+      "javaSignature": "public Object toCompact(int, boolean, String)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Signature.ts:272",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Signature.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Signature.ts#method:Signature.toDER:1",
+      "java": "com.metanet4j.bsv.primitives.Signature#toDER",
+      "javaSignature": "public Object toDER(String)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Signature.ts:201",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Signature.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Signature.ts#method:Signature.toString:1",
+      "java": "com.metanet4j.bsv.primitives.Signature#toString",
+      "javaSignature": "public Object toString(Object)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Signature.ts:183",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Signature.java"
+      ],
+      "note": "Java Object.toString() 返回类型固定为 String；显式 toString(Undefined.INSTANCE) 对应 TS 无参数组，toString(\"hex\") 对应 hex。"
+    },
+    {
+      "id": "src/primitives/Signature.ts#method:Signature.verify:1",
+      "java": "com.metanet4j.bsv.primitives.Signature#verify",
+      "javaSignature": "public boolean verify(Object, PublicKey, String)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Signature.ts:163",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Signature.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Signature.ts#property:Signature.r:1",
+      "java": "com.metanet4j.bsv.primitives.Signature#r",
+      "javaSignature": "public BigNumber r",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Signature.ts:23",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Signature.java"
+      ]
+    },
+    {
+      "id": "src/primitives/Signature.ts#property:Signature.s:1",
+      "java": "com.metanet4j.bsv.primitives.Signature#s",
+      "javaSignature": "public BigNumber s",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-keys-signatures",
+      "review": "reviewed",
+      "evidence": [
+        "src/primitives/Signature.ts:28",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/primitives/Signature.java"
       ]
     },
     {
