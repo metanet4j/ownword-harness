@@ -28192,7 +28192,7 @@
     {
       "id": "src/transaction/TransactionInput.ts#property:TransactionInput.sourceTXID:1",
       "java": "com.metanet4j.bsv.transaction.TransactionInput#sourceTXID",
-      "javaSignature": "public String sourceTXID;",
+      "javaSignature": "public Object sourceTXID = Undefined.INSTANCE;",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-transaction-base",
       "review": "reviewed",
       "evidence": [
