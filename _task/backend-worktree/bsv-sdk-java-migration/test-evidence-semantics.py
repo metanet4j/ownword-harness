@@ -106,6 +106,30 @@ class SemanticTest(unittest.TestCase):
                 self.assertNotEqual(self.bundle().returncode, 0)
         self.f.path(name).write_text(original)
 
+    def test_default_chain_tracker_defined_method_keeps_real_observations(self):
+        case_id = '95c540e3dfc5e64908be396adc032219d870229764fc4ec397293f2cf4ca2715'
+        left = observation('toBeDefined', text_value('async isValidRootForHeight(root, height) { return true }'), [])
+        right = observation('toBeDefined', text_value('[object Object]'), [])
+        right.pop('pass')
+        self.case(case_id, [('35:7', 'default-chain-tracker-defined-method-v1', left, right)])
+        self.accepts()
+        original = self.f.path('java-assertions.jsonl').read_text()
+        for change in [lambda v: v.update(actual={'type': 'undefined'}),
+                       lambda v: v.pop('actual'),
+                       lambda v: v.update(matcher='toBeTruthy'),
+                       lambda v: v.update(expected=text_value('different')),
+                       lambda v: v.update(negated=True),
+                       lambda v: v.update({'pass': False})]:
+            self.f.path('java-assertions.jsonl').write_text(original)
+            self.mutate_java(lambda rows: change(rows[0]['value']))
+            self.assertNotEqual(self.bundle().returncode, 0)
+        self.f.path('java-assertions.jsonl').write_text(original)
+        self.rejects_mutations('catalog.json', [
+            ('源码改变', lambda data: data['files'][0].update(sha256='0'*64)),
+            ('版本改变', lambda data: data.update(upstreamCommit='0'*40))])
+        self.rejects_mutations('plan.json', [
+            ('删除固定规则', lambda data: data[self.case_id].pop('comparisonRules'))])
+
     def test_mnemonic_defined_objects_keep_real_observations_at_three_sites(self):
         cases = [('3615b20d761861ac232b77920af6fcb2926bb073fa24598e4ad5529b463f02da', '10:5'),
                  ('ade4e3788cc1ef20f22d3aee360d2dc4f5a6751ab67a6018cacdbd84af9f4beb', '122:7'),

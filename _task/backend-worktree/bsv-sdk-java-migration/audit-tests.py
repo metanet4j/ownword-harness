@@ -36,6 +36,10 @@ DRBG_BRANCH_CASES = {hashlib.sha256(json.dumps([DRBG_FILE, ['DRBG', 'NIST vector
     for index in range(15)}
 # 每项固定为：文件、源码摘要、站点 → (规则 ID、原 matcher、原边界、执行次数)。
 SEMANTIC_CASES = {
+    '95c540e3dfc5e64908be396adc032219d870229764fc4ec397293f2cf4ca2715':
+        ('src/transaction/chaintrackers/__tests/DefaultChainTracker.test.ts',
+         'dd24677c5c90bbf11d5952558bf2ceeb34540f44fba6a92d47c181ff48c72f0b',
+         {'35:7': ('default-chain-tracker-defined-method-v1', 'toBeDefined', None, 1)}),
     '3615b20d761861ac232b77920af6fcb2926bb073fa24598e4ad5529b463f02da':
         ('src/compat/__tests/Mnemonic.test.ts',
          'afb1913a329841a1f1b87dbd730ff7b589aaf297c01fc496a04c2cd441357d02',
@@ -291,6 +295,23 @@ def compare_actuals(case_id, expected, identity, left, right):
         require(canonical(left) == canonical(right), f'实际结果不一致：{case_id} / {identity}')
         return
     rule_id, matcher, boundary, _ = rule
+    if rule_id == 'default-chain-tracker-defined-method-v1':
+        for side, value in (('TS', left), ('Java', right)):
+            keys = {'kind', 'matcher', 'negated', 'actual', 'expected'}
+            require(isinstance(value, dict) and
+                    (set(value) == keys | {'pass'} if side == 'TS'
+                     else keys <= set(value) <= keys | {'pass'})
+                    and value['kind'] == 'assertion' and value['matcher'] == 'toBeDefined'
+                    and value['negated'] is False and value.get('pass', True) is True
+                    and value['expected'] == [],
+                    f'默认链追踪器定义断言缺少原 matcher/expected/pass：{identity}')
+        ts_actual, java_actual = left['actual'], right['actual']
+        require(isinstance(ts_actual, dict) and set(ts_actual) == {'type', 'value'}
+                and ts_actual['type'] == 'string'
+                and ts_actual['value'].startswith('async isValidRootForHeight(root, height) {')
+                and java_actual == {'type': 'string', 'value': '[object Object]'},
+                f'默认链追踪器定义断言必须保留原 TS 方法及 Java Method 观察：{identity}')
+        return
     if rule_id == 'mnemonic-defined-object-v1':
         # 仅三个固定源码站点：类与实例显示形式跨语言不同，原断言只检验非 undefined。
         # Java 原 assertDefined 和 Surefire 必须实际通过；不补造 Java pass 字段。
