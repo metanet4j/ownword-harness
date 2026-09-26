@@ -41438,15 +41438,17 @@
     {
       "id": "src/auth/clients/AuthFetch.ts#method:AuthFetch.fetch:1",
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.fetch",
-      "javaSignature": "public CompletableFuture<FetchResponse> fetch(String url, Map<String, Object> config) {",
+      "javaSignature": "public CompletableFuture<FetchResponse> fetch(String url); public CompletableFuture<FetchResponse> fetch(String url, Map<String, Object> config)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
       "review": "reviewed",
       "implementationStatus": "source-present-verified",
-      "basis": "AuthFetch 公开请求入口已对照固定原测试的认证、回退、支付和清理分支；根 URL 路径另有 Java 边界回归。",
+      "basis": "TS 的 config 默认空对象；Java 无配置重载将原省略输入交给空 LinkedHashMap。完整入口继续覆盖认证、回退、支付和清理分支。",
       "evidence": [
         "src/auth/clients/AuthFetch.ts:187",
         "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:490",
-        ".cache/evidence/auth-fetch-complete-java-20260926/task-parity.json"
+        ".cache/evidence/auth-fetch-complete-java-20260926/task-parity.json",
+        "src/auth/clients/__tests__/AuthFetch.boundary.test.ts:54",
+        "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchBoundaryTest.java"
       ]
     },
     {
