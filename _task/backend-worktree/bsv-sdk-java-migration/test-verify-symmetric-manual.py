@@ -49,12 +49,17 @@ def main():
         run(report, '--java-xml', xml, success=False)
 
         normal = temp / 'normal.jsonl'
-        lines = (EVIDENCE / 'symmetric-java-parity-exact.jsonl').read_text().splitlines()
+        lines = (EVIDENCE / 'symmetric-java-parity-current-c0d9fdd.jsonl').read_text().splitlines()
         first = json.loads(lines[0])
         first['matcher'] = 'tampered'
         lines[0] = json.dumps(first)
         normal.write_text('\n'.join(lines) + '\n')
-        run(report, '--java-normal', normal, success=False)
+        xml_dir = temp / 'normal-xml'
+        xml_dir.mkdir()
+        original_trace = str(EVIDENCE / 'symmetric-java-parity-current-c0d9fdd.jsonl')
+        for source in (EVIDENCE / 'symmetric-java-current-c0d9fdd-surefire').glob('TEST-*.xml'):
+            (xml_dir / source.name).write_text(source.read_text().replace(original_trace, str(normal)))
+        run(report, '--java-normal', normal, '--java-normal-xml-dir', xml_dir, success=False)
 
         run(report, '--java-revision', '0' * 40, success=False)
     print('7/7：真实证据通过；缺失、TS 长度、Java 逐字节、Surefire、普通轨迹和提交篡改均拒绝')

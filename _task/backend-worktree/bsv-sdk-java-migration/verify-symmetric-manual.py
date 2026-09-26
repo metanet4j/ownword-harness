@@ -126,9 +126,6 @@ def check_manual(args):
 
 def check_normal(args):
     check_jest(args.ts_normal_jest, 51, 4)
-    log = args.java_normal_log.read_text()
-    require(re.search(r'\[\s*51 tests successful\s*\]', log) and
-            re.search(r'\[\s*0 tests failed\s*\]', log), 'Java 普通测试执行数不符')
     expected_classes = {'AESGCMTest': 30, 'AsyncCryptoBackendTest': 3,
                         'SymmetricKeyTest': 15, 'SymmetricKeyCompatibilityTest': 3}
     current_xml = []
@@ -142,6 +139,9 @@ def check_normal(args):
                         and not c.findall('failure') and not c.findall('error')
                         for c in suite.findall('testcase')),
                 f'{path}: 当前提交 Java 普通用例数或执行状态不符')
+        properties = {p.get('name'): p.get('value') for p in suite.findall('./properties/property')}
+        require(properties.get('migration.parity.java.output') == str(args.java_normal.resolve()),
+                f'{path}: Surefire 参数未指向本次 Java 原始轨迹')
         current_xml.append(path)
     feature = read(ROOT / 'feature_list.json')
     task = next(x for x in feature['features'] if x['id'] == 'migration-impl-symmetric')
@@ -196,8 +196,7 @@ def main():
         'node-oracle': 'symmetric-manual-node-crypto-oracle.json',
         'ts-normal-jest': 'symmetric-ts-jest.json',
         'ts-normal': 'symmetric-ts-parity.jsonl',
-        'java-normal-log': 'symmetric-java-junit-exact.log',
-        'java-normal': 'symmetric-java-parity-exact.jsonl',
+        'java-normal': 'symmetric-java-parity-current-c0d9fdd.jsonl',
     }
     for name, file in defaults.items():
         p.add_argument('--' + name, type=Path, default=evidence / file)
@@ -219,9 +218,8 @@ def main():
               'missingCases': 0, 'missingAssertions': 0, 'uncompared': 0,
               'extraJavaAssertions': 0, 'taskAcceptancePassed': True,
               'manualComparisonKind': manual['manualComparisonKind'],
-              'normalComparisonKind': '51 个原 TS/Java 轨迹的 matcher、negated、actual、expected 逐字段精确比较；当前 Java 提交的 51 个 Surefire 用例另行重跑通过',
-              'normalRawTraceRevision': None,
-              'normalRawTraceRevisionNote': '原普通 Java 轨迹未记录提交号；本报告另提供 c0d9fdd 当前提交的 51 个 Surefire 结果，不把旧轨迹冒充当前运行轨迹。',
+              'normalComparisonKind': '固定 TS 轨迹与当前 c0d9fdd Java 原始轨迹的 51 个原用例、384 条断言，逐字段精确比较；Surefire XML 同时核验轨迹输出路径',
+              'normalRawTraceRevision': args.java_revision,
               'evidenceSha256': {str(path): sha(path) for path in files},
               'cases': sorted(normal + [manual], key=lambda c: c['id'])}
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
