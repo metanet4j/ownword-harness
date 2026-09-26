@@ -216,6 +216,24 @@
       ]
     },
     {
+      "name": "wallet-wire",
+      "catalog": ".cache/evidence/wallet-wire-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/wallet-wire-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/wallet-wire-plan-20260927/input-plan.json",
+      "ts_inputs": ".cache/evidence/wallet-wire-ts-20260927/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/wallet-wire-ts-20260927/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/wallet-wire-ts-20260927/manifest.json",
+      "ts_report": [
+        ".cache/evidence/wallet-wire-ts-20260927/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/wallet-wire-java-20260927-v2/inputs.jsonl",
+      "java_assertions": ".cache/evidence/wallet-wire-java-20260927-v2/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/wallet-wire-java-20260927-v2/manifest.json",
+      "java_report": [
+        ".cache/evidence/wallet-wire-java-20260927-v2/surefire.xml"
+      ]
+    },
+    {
       "name": "validation-helpers",
       "deriveCatalogFromPlan": true,
       "input_plan": "validation-helpers-input-plan.json",
