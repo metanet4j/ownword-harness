@@ -7,6 +7,8 @@ if (!output) throw new Error('缺少 Point 输入输出路径')
 const testPath = expect.getState().testPath
 const sdk = path.resolve(path.dirname(testPath), '../../..')
 const sourceFile = path.relative(sdk, testPath).replaceAll(path.sep, '/')
+const testFileName = path.basename(testPath)
+const jacobian = testFileName === 'JacobianPoint.test.ts'
 const classes = {}
 let BN, Point, JPoint, bnString, pointX, pointY, toP
 let sequence = 0
@@ -27,7 +29,12 @@ function encode (item) {
   if (item instanceof Point) return item.inf
     ? { type: 'Point', infinity: true }
     : { type: 'Point', infinity: false, x: bnString.call(pointX.call(item), 16), y: bnString.call(pointY.call(item), 16) }
-  if (item instanceof JPoint) return { type: 'JacobianPoint', affine: encode(toP.call(item)) }
+  if (item instanceof JPoint) {
+    if (!jacobian) return { type: 'JacobianPoint', affine: encode(toP.call(item)) }
+    return { type: 'JacobianPoint', x: bnString.call(item.x.fromRed(), 16),
+      y: bnString.call(item.y.fromRed(), 16), z: bnString.call(item.z.fromRed(), 16), zOne: item.zOne }
+  }
+  if (typeof item === 'function') return { type: 'function', name: item.name }
   if (Array.isArray(item)) return { type: 'array', value: item.map(encode) }
   if (Object.getPrototypeOf(item) === Object.prototype) {
     return { type: 'object', value: Object.fromEntries(Object.keys(item).sort().map(key => [key, encode(item[key])])) }
@@ -37,7 +44,7 @@ function encode (item) {
 function source () {
   const first = new Error().stack.split('\n').slice(2).find(frame =>
     !frame.includes('capture-point-additional-inputs.cjs') && !frame.includes('/node_modules/jest-mock/'))
-  if (!first?.includes('Point.additional.test.ts:')) return null
+  if (!first?.includes(testFileName + ':')) return null
   const match = first.match(/:(\d+):\d+\)?$/)
   return { file: sourceFile, line: Number(match[1]) }
 }
@@ -49,14 +56,29 @@ function call (method, receiver, args, action) {
       fs.appendFileSync(output, JSON.stringify({ test: expect.getState().currentTestName, occurrence,
         sequence: ++sequence, method, receiver: encode(receiver), args: args.map(encode), source: site }) + '\n')
     }
+    if (jacobian && method === 'JacobianPoint.mixedAdd' && args[0] &&
+        Object.getPrototypeOf(args[0]) === Object.prototype && typeof args[0].isInfinity === 'function') {
+      const object = args[0]
+      const original = object.isInfinity
+      const wrapped = function (...callbackArgs) {
+        const result = Reflect.apply(original, this, callbackArgs)
+        fs.appendFileSync(output, JSON.stringify({ test: expect.getState().currentTestName, occurrence,
+          sequence: ++sequence, method: 'PointLike.isInfinity', receiver: encode(null),
+          args: callbackArgs.map(encode), result: encode(result), source: site }) + '\n')
+        return result
+      }
+      Object.defineProperty(wrapped, 'name', { value: original.name })
+      object.isInfinity = wrapped
+      try { return action() } finally { object.isInfinity = original }
+    }
     return action()
   } finally { depth-- }
 }
 const methods = {
   Point: ['getX', 'getY', 'isInfinity', 'validate', 'toJSON', 'encode', 'inspect', 'add', 'dbl', 'neg',
     'dblp', 'mul', 'mulAdd', 'jmulAdd', 'eq', 'toJ', '_getDoubles', '_combineWnafPair', '_collectWnafStep'],
-  BigNumber: ['toArray', 'toString', 'eq', 'neg'],
-  JacobianPoint: ['toP', 'isInfinity']
+  BigNumber: ['toArray', 'toString', 'eq', 'neg', 'addn'],
+  JacobianPoint: ['toP', 'isInfinity', 'neg', 'add', 'mixedAdd', 'dbl', 'dblp', 'eq', 'eqXToP', 'inspect']
 }
 // 延迟至原测试导入，保持固定 ts-jest 的原编译入口。
 let loading = false

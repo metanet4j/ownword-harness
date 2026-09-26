@@ -12,12 +12,13 @@ SDK = TASK.parents[2]/'reference/ts-stack/packages/sdk'
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('side', choices=('ts','java'))
+    parser.add_argument('--variant', choices=('additional','jacobian'), default='additional')
     parser.add_argument('clean', nargs='?')
     parser.add_argument('test', nargs='?')
     for name in ('catalog','mapping','report','replay'):
         parser.add_argument('--'+name, type=Path, required=True)
     args = parser.parse_args()
-    source, java_class, prefix = 'src/primitives/__tests/Point.additional.test.ts', 'PointAdditionalTest', 'point-additional'
+    source, java_class, prefix = ('src/primitives/__tests/Point.additional.test.ts', 'PointAdditionalTest', 'point-additional') if args.variant == 'additional' else ('src/primitives/__tests/JacobianPoint.test.ts', 'JacobianPointTest', 'jacobian')
     if args.side != os.environ.get('EVIDENCE_SIDE') or not os.environ.get('EVIDENCE_RUN_ID'):
         parser.error('缺少本轮 capture 侧别或 runId')
     if args.side == 'java' and (args.clean,args.test) != ('clean','test'):
