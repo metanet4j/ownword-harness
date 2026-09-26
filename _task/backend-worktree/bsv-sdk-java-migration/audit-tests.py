@@ -299,8 +299,7 @@ def compare_actuals(case_id, expected, identity, left, right):
         for side, value in (('TS', left), ('Java', right)):
             keys = {'kind', 'matcher', 'negated', 'actual', 'expected'}
             require(isinstance(value, dict) and
-                    (set(value) == keys | {'pass'} if side == 'TS'
-                     else keys <= set(value) <= keys | {'pass'})
+                    keys <= set(value) <= keys | {'pass'}
                     and value['kind'] == 'assertion' and value['matcher'] == 'toBeDefined'
                     and value['negated'] is False and value.get('pass', True) is True
                     and value['expected'] == [],

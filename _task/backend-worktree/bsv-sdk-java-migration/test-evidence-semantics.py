@@ -110,6 +110,7 @@ class SemanticTest(unittest.TestCase):
         case_id = '95c540e3dfc5e64908be396adc032219d870229764fc4ec397293f2cf4ca2715'
         left = observation('toBeDefined', text_value('async isValidRootForHeight(root, height) { return true }'), [])
         right = observation('toBeDefined', text_value('[object Object]'), [])
+        left.pop('pass')
         right.pop('pass')
         self.case(case_id, [('35:7', 'default-chain-tracker-defined-method-v1', left, right)])
         self.accepts()
