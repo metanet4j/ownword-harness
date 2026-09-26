@@ -40661,14 +40661,14 @@
     {
       "id": "src/auth/SessionManager.ts#property:AsyncSessionManager.getSession:1",
       "java": "com.metanet4j.bsv.auth.AsyncSessionManager.getSession",
-      "javaSignature": "CompletableFuture<PeerSession> getSession(String identifier);",
+      "javaSignature": "CompletableFuture<Object> getSession(String identifier);",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-sessions",
       "review": "reviewed",
       "implementationStatus": "source-present-verified",
-      "basis": "已核对 TS 固定声明、Java 入口及对应原用例的行为；85/85 用例、160/160 逐断言通过。",
+      "basis": "已核对 TS Promise<PeerSession | undefined> 与 Java 缺席时完成为 Undefined.INSTANCE；原用例 85/85、160/160 逐断言通过，新增公开缺席回归通过。",
       "evidence": [
         "src/auth/SessionManager.ts:20",
-        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/AsyncSessionManager.java:9"
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/AsyncSessionManager.java:10"
       ]
     },
     {
