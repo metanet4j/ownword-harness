@@ -1,0 +1,117 @@
+{
+  "95a153c65d4fd6153f4369ae0b6de0e86f3baef8a4c79731570fb7efb7eebc00": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:126:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:127:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:135:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:136:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:137:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:138:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:139:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:140:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:152:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:153:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:156:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:163:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:169:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:173:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:174:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:126:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:126:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:127:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:127:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:135:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:135:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:136:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:136:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:137:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:137:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:138:11:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:138:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:139:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:139:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:140:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:140:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:152:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:152:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:153:11:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:153:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:156:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:156:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:163:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:163:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:169:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:169:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:173:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:173:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:174:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:174:5:assertion"
+    },
+    "loopSamples": {
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:42:3:loop": [
+        "call-0"
+      ]
+    }
+  },
+  "f7bccbb957240c66cfac98eea27a4e256c38c5763a230d89db98b5cb8febda5b": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:194:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:197:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:198:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:194:11:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:194:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:197:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:197:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:198:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:198:5:assertion"
+    }
+  },
+  "44b44ac38b4bcdf41e46bf5198c12e2fc112fccb2cea0e03f4c89e0d074f1288": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:222:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:225:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:226:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:222:11:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:222:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:225:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:225:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:226:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:226:5:assertion"
+    }
+  },
+  "c67aeae5bfa37d0c92169f5e7785ba60d4c21d8af99a0e5187437b018d426e57": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:254:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:257:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:258:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:254:11:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:254:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:257:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:257:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:258:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:258:5:assertion"
+    }
+  },
+  "6d9f831bfc5e0bf3a36cc2c63a8bbafdaf30fe3c9a193a39c79c8112eeae1a0a": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:277:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:277:11:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:277:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:280:5:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:280:5:assertion"
+    }
+  },
+  "eb90925d7d9820b40bf9ad7db72117815e515436b78f3adc806dd96b6834811a": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:298:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:303:11:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:298:11:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:298:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.peer.test.ts:303:11:assertion": "src/auth/clients/__tests__/AuthFetch.peer.test.ts:303:11:assertion"
+    }
+  }
+}
