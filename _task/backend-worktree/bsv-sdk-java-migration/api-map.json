@@ -31943,7 +31943,7 @@
     {
       "id": "src/auth/certificates/Certificate.ts#property:Certificate.signature:1",
       "java": "com.metanet4j.bsv.auth.certificates.Certificate.signature",
-      "javaSignature": "public String signature;",
+      "javaSignature": "public Object signature;",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
       "review": "reviewed",
       "evidence": [
@@ -32141,7 +32141,7 @@
     {
       "id": "src/auth/certificates/MasterCertificate.ts#property:MasterCertificate.signature:1",
       "java": "com.metanet4j.bsv.auth.certificates.Certificate.signature",
-      "javaSignature": "public String signature;",
+      "javaSignature": "public Object signature;",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
       "review": "reviewed",
       "evidence": [
@@ -32284,7 +32284,7 @@
     {
       "id": "src/auth/certificates/VerifiableCertificate.ts#property:VerifiableCertificate.signature:1",
       "java": "com.metanet4j.bsv.auth.certificates.Certificate.signature",
-      "javaSignature": "public String signature;",
+      "javaSignature": "public Object signature;",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-certificates",
       "review": "reviewed",
       "evidence": [
@@ -40596,7 +40596,7 @@
     {
       "id": "src/auth/SessionManager.ts#method:SessionManager.getSession:1",
       "java": "com.metanet4j.bsv.auth.SessionManager.getSession",
-      "javaSignature": "public PeerSession getSession(String identifier) {",
+      "javaSignature": "public Object getSession(String identifier) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-sessions",
       "review": "reviewed",
       "implementationStatus": "source-present-verified",
@@ -41170,7 +41170,7 @@
     {
       "id": "src/auth/clients/AuthFetch.ts#function:parseKnownTxidsHeader:1",
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.parseKnownTxidsHeader",
-      "javaSignature": "public static List<String> parseKnownTxidsHeader(String headerValue) {",
+      "javaSignature": "public static Object parseKnownTxidsHeader(String headerValue) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
       "review": "reviewed",
       "implementationStatus": "source-present-verified",
@@ -42222,7 +42222,7 @@
     {
       "id": "src/auth/clients/AuthFetch.ts#variable:MAX_KNOWN_TXIDS:1",
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.parseKnownTxidsHeader",
-      "javaSignature": "public static List<String> parseKnownTxidsHeader(String headerValue) {",
+      "javaSignature": "public static Object parseKnownTxidsHeader(String headerValue) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
       "review": "reviewed",
       "implementationStatus": "source-present-verified",
@@ -42264,7 +42264,7 @@
     {
       "id": "src/auth/clients/AuthFetch.ts#variable:TXID_REGEX:1",
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.parseKnownTxidsHeader",
-      "javaSignature": "public static List<String> parseKnownTxidsHeader(String headerValue) {",
+      "javaSignature": "public static Object parseKnownTxidsHeader(String headerValue) {",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
       "review": "reviewed",
       "implementationStatus": "source-present-verified",
