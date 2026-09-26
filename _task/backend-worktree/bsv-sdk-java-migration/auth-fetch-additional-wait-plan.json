@@ -1,0 +1,70 @@
+{
+  "7eaf894b954c8a61105fc2ce63e4218989c2a07e1b6d93b23fb4e166540aa553": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:822:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:822:5:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:822:5:assertion"
+    },
+    "comparisonRules": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:822:5:assertion": "timing-ms-v1"
+    }
+  },
+  "585bb68f6e2a74b0946cdcb6ac5f1d08b90e629cf72f0687aaa401a175bb155e": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:829:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:829:5:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:829:5:assertion"
+    },
+    "comparisonRules": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:829:5:assertion": "timing-ms-v1"
+    }
+  },
+  "28590291b473e02c78911135fae624651aa55aa0dc2ae1b67ad3a0eb3bbfbdfe": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:840:7:assertion",
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:843:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:840:7:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:840:7:assertion",
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:843:7:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:843:7:assertion"
+    }
+  },
+  "9cb7ee6ed920ce4f9b0822ea4209d7c8f520e334a16e45f7913fdc989025a0be": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:862:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:865:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:862:11:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:862:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:865:5:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:865:5:assertion"
+    },
+    "comparisonRules": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:862:11:assertion": "native-null-absence-v1"
+    }
+  },
+  "829ab4ef6384f8a7c741b96322a6ac66d4eefd7ac27d288e5971575c40510bb2": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:873:11:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:873:11:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:873:11:assertion"
+    }
+  }
+}
