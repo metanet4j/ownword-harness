@@ -11,7 +11,7 @@
 
 ## 已验证结果
 
-U0 [四仓测试基线](doc/测试基线与障碍-20260926-145423.md)列出 25 POM、369 个生产 Java 文件、最初 52 个测试文件，以及 19 项集成边界的隔离和观测方式。当前 `unit-test-inventory.json` 已增至 64 个测试文件。U0 全仓基线有 56 个旧用例通过、8 个跳过；17 个含可执行代码的 component 模块零本地单元测试。`component-core` 仅定义接口，按 N/A 处理。宿主五项共享服务健康。
+U0 [四仓测试基线](doc/测试基线与障碍-20260926-145423.md)列出 25 POM、369 个生产 Java 文件、最初 52 个测试文件，以及 19 项集成边界的隔离和观测方式。当前 `unit-test-inventory.json` 已增至 65 个测试文件。U0 全仓基线有 56 个旧用例通过、8 个跳过；17 个含可执行代码的 component 模块零本地单元测试。`component-core` 仅定义接口，按 N/A 处理。宿主五项共享服务健康。
 
 U1 base 提交 `bae7eb6` 与 `77ad9fd`：UTXO 相等性缺陷先红后绿；AIP 坏签名返回 false；BAP 固定身份向量、协议枚举、DTO 与 Jackson 行为均有断言。最终提交后，`python3 verify-unit.py --mode accept --scope metanet4j-base` 退出 0；19 个测试全部通过，零失败/错误/跳过，JaCoCo LINE 208/208、BRANCH 76/76、METHOD 51/51，`jacoco:check` 通过。证据在本地 `evidence/20260926T072220Z/`；同一提交的 base 0.2.0 构件已安装至隔离 Maven 仓库。
 
@@ -22,6 +22,8 @@ U2 工具子项提交 `7e96ebd`：负长度读取统一为 `ProtocolException`�
 U2 密钥子项提交 `986fddd`：非压缩 WIF 往返修复先红后绿；key=2 的 WIF、公钥、公钥哈希与主网／测试网地址使用独立固定向量；非法长度、校验和、压缩标志与前缀均有断言。最新 SDK 隔离单元基线 39/0/0/0，LINE 434/1996、BRANCH 51/503、METHOD 131/461；`PrivateKey`、`PublicKey`、`AddressEnhance` 逐类无覆盖缺口，证据 `evidence/20260926T082536Z/`。
 
 U2 加密子项提交 `5ef3f2c`：ECIES 的固定／随机临时密钥、往返解密、错误魔数和 MAC 篡改均有断言；AES-CBC 与平台 PKCS5 Cipher 对照，SHA-512 与 JDK 摘要对照。最新 SDK 隔离单元基线 42/0/0/0，LINE 438/1993、BRANCH 55/503、METHOD 131/458；`Ecies`、`AesCBCUtil`、`DigestUtilExtend` 逐类无覆盖缺口，证据 `evidence/20260926T083103Z/`。
+
+U2 主密钥子项提交 `bf40681`：BIP39/BIP32 的固定助记词、口令与 xprv 独立向量通过；随机词表数量／唯一性、反序列化与越界输入有断言，过大或负长度立即失败。最新 SDK 隔离单元基线 44/0/0/0，LINE 442/1993、BRANCH 60/507、METHOD 133/457；`MasterPrivateKey` 逐类无覆盖缺口，证据 `evidence/20260926T083620Z/`。
 
 ## 仓库与工作区
 

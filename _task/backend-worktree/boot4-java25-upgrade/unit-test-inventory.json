@@ -313,7 +313,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "5ef3f2cdf844443824fcf5f70288fc320175ca65",
+      "head": "bf406813027211436879120fa8bd4fe754393517",
       "modules": [
         {
           "path": ".",
@@ -806,6 +806,25 @@
                 }
               ],
               "classificationReason": "平台 AES/SHA-512 对照、固定和随机 ECIES 临时密钥、篡改检测；不联网"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/crypto/MasterPrivateKeyContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "generatedWordListsHaveRequestedDistinctDictionaryWords",
+                  "returnType": "void",
+                  "line": 19,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bip39VectorAndSerializationRoundTrip",
+                  "returnType": "void",
+                  "line": 31,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "独立 BIP39/BIP32 xprv 向量、主密钥序列化、助记词唯一性与不可能长度边界"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/crypto/MasterPrivateKeyTest.java",
