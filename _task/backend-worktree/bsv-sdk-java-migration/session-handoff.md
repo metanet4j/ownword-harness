@@ -2,9 +2,9 @@
 
 ## 当前执行
 
-`activeItem=nextItem=migration-impl-symmetric`；`migration-impl-wallet-contracts`、`migration-impl-transaction-base` 并行实施。按 [feature_list.json](feature_list.json) 的源文件、测试文件、依赖与验收重点执行；行为依据见[契约](doc/完整模块与API映射-20260920-122800.md)。
+`activeItem=nextItem=migration-impl-symmetric`；`migration-impl-wallet-contracts`、`migration-impl-transaction-base`、`migration-impl-transaction-beef`、`migration-impl-wallet-json` 并行实施。按 [feature_list.json](feature_list.json) 的源文件、测试文件、依赖与验收重点执行；行为依据见[契约](doc/完整模块与API映射-20260920-122800.md)。
 
-对称任务 52 个原用例中 51 个普通用例与 384 条实际断言已匹配；`AESGCM.man.test.ts` 的 536,870,928 字节原规模单例仍需完成 TS、Java 原断言及摘要对照。脚本模型已通过累计提交后验收。交易基础任务十个源文件、五个原测试文件 74 个用例正在并行实施；交易与钱包共用的 BEEF 真实字节边界由根任务实现。钱包契约六文件 253／253 原用例和 1003 条断言已由固定 TS 采集，Java 实施中。
+对称任务 52 个原用例中 51 个普通用例与 384 条实际断言已匹配；`AESGCM.man.test.ts` 本轮 90 分钟超时、退出码 124，未产生 Jest 结果或三条轨迹，未验收，证据 `.cache/evidence/symmetric-manual-ts-timeout.json`。脚本模型已通过累计提交后验收。交易基础 74／74 个原 Java 用例隔离通过，等待 TS 逐断言收口。BEEF 21 个与 BeefParty 3 个原 Java 测试已写，MerklePath 59 例待实现。钱包协议目标提交 `57c17c7`，固定 TS 253／253、1003／1003，真实 BEEF 隔离集成 255／255；累计 Maven 待证明层接入。钱包 JSON 58 例在并行实施。
 
 ## 已验收基线
 

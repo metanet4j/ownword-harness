@@ -1094,7 +1094,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "transaction：MerklePath 与 BEEF",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-transaction-base"
       ],
@@ -1484,7 +1484,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "wallet：JSON HTTP 与 Origin 适配",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-wallet-contracts",
         "migration-impl-http-chain"
@@ -2350,14 +2350,16 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "api-map.json：API-08 七个完整源文件 442 项声明全部复核，doc/完整模块与API映射-20260920-122800.md#api-wallet-contracts 保留字节、错误、异步接口和参数验证契约；node audit-api.cjs batches --batch migration-api-wallet-contracts 通过。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
