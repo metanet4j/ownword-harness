@@ -11,7 +11,7 @@
 
 ## 已验证结果
 
-U0 [四仓测试基线](doc/测试基线与障碍-20260926-145423.md)列出 25 POM、369 个生产 Java 文件、最初 52 个测试文件，以及 19 项集成边界的隔离和观测方式。当前 `unit-test-inventory.json` 已增至 72 个测试文件。U0 全仓基线有 56 个旧用例通过、8 个跳过；17 个含可执行代码的 component 模块零本地单元测试。`component-core` 仅定义接口，按 N/A 处理。宿主五项共享服务健康。
+U0 [四仓测试基线](doc/测试基线与障碍-20260926-145423.md)列出 25 POM、369 个生产 Java 文件、最初 52 个测试文件，以及 19 项集成边界的隔离和观测方式。当前 `unit-test-inventory.json` 已增至 73 个测试文件。U0 全仓基线有 56 个旧用例通过、8 个跳过；17 个含可执行代码的 component 模块零本地单元测试。`component-core` 仅定义接口，按 N/A 处理。宿主五项共享服务健康。
 
 U1 base 提交 `bae7eb6` 与 `77ad9fd`：UTXO 相等性缺陷先红后绿；AIP 坏签名返回 false；BAP 固定身份向量、协议枚举、DTO 与 Jackson 行为均有断言。最终提交后，`python3 verify-unit.py --mode accept --scope metanet4j-base` 退出 0；19 个测试全部通过，零失败/错误/跳过，JaCoCo LINE 208/208、BRANCH 76/76、METHOD 51/51，`jacoco:check` 通过。证据在本地 `evidence/20260926T072220Z/`；同一提交的 base 0.2.0 构件已安装至隔离 Maven 仓库。
 
@@ -32,6 +32,8 @@ U2 Sigma 核心子项提交 `3c0f214`：构造小交易验证 outpoint、输出�
 U2 BAP 默认 API 子项提交 `a86bfa5`：用不同固定私钥验证五类默认地址映射，用真实主密钥验证字节／文本加解密；原先无效密文或缺失密钥会打印堆栈并返回 `null`，已改为抛出有原因的 `IllegalStateException`，先红后绿。SDK 隔离单元基线 59/0/0/0，LINE 713/1983、BRANCH 165/512、METHOD 182/455；`BapBaseCore` 逐类无覆盖缺口，证据 `evidence/20260926T091719Z/`。
 
 U2 BAP 生命周期子项提交 `7c030d3`：签名密钥轮换、按身份／签名地址反查、轮换后对象重建均有断言；上一私钥路径错误、根地址作为 current 时序号 `-1`、未匹配地址返回 `null` 三项缺陷先红后绿。SDK 隔离单元基线 62/0/0/0，LINE 756/1984、BRANCH 183/514、METHOD 187/455；`BapBase` 本体 LINE 111/139、BRANCH 20/28，证据 `evidence/20260926T092325Z/`。
+
+U2 BAP KeyBag 子项提交 `12f2c70`：根／当前签名密钥、支付及 Ord 密钥按公钥哈希检索；有效公钥以前返回 `null`，现转公钥哈希查找，先红后绿。SDK 隔离单元基线 65/0/0/0，LINE 789/1985、BRANCH 193/512、METHOD 196/455；`BapProviderKeyBag` 逐类无覆盖缺口，证据 `evidence/20260926T092920Z/`。
 
 ## 仓库与工作区
 

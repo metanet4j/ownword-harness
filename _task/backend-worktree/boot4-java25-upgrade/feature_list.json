@@ -307,9 +307,11 @@
         "sdk 提交 a86bfa5（BAP 默认地址与真实加解密；无效密文和缺失密钥抛异常，先红后绿）",
         "SDK 隔离单元基线 evidence/20260926T091719Z/：59/0/0/0，LINE 713/1983；BapBaseCore 逐类行/分支/方法无缺口",
         "sdk 提交 7c030d3（签名密钥轮换、重建及地址反查；上一密钥路径和序号 0 缺陷先红后绿）",
-        "SDK 隔离单元基线 evidence/20260926T092325Z/：62/0/0/0，LINE 756/1984；BapBase 本体 LINE 111/139、BRANCH 20/28"
+        "SDK 隔离单元基线 evidence/20260926T092325Z/：62/0/0/0，LINE 756/1984；BapBase 本体 LINE 111/139、BRANCH 20/28",
+        "sdk 提交 12f2c70（BAP KeyBag 查找签名、支付、Ord 及公钥；公钥查找返回 null 缺陷先红后绿）",
+        "SDK 隔离单元基线 evidence/20260926T092920Z/：65/0/0/0，LINE 789/1985；BapProviderKeyBag 逐类行/分支/方法无缺口"
       ],
-      "statusNote": "HTTP、字节/哈希、WIF/地址、ECIES/AES、主密钥、脚本模型、Sigma 核心及 BAP 默认 API／密钥轮换子项已完成（SDK 至 7c030d3）；本地 HTTP 集成 5/0/0/0，SDK 单元 62/0/0/0，LINE 756/1984、BRANCH 183/514、METHOD 187/455；交易、BAP 等其余 SDK 行为待补。"
+      "statusNote": "HTTP、字节/哈希、WIF/地址、ECIES/AES、主密钥、脚本模型、Sigma 核心及 BAP 默认 API／密钥轮换／KeyBag 子项已完成（SDK 至 12f2c70）；本地 HTTP 集成 5/0/0/0，SDK 单元 65/0/0/0，LINE 789/1985、BRANCH 193/512、METHOD 196/455；交易、BAP 等其余 SDK 行为待补。"
     },
     {
       "id": "unit-u3-foundation",

@@ -313,7 +313,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "7c030d37d5e26b6c1d69295491cdb4bdda979ed1",
+      "head": "12f2c700393848e94ccb38712d4ca9b540979eae",
       "modules": [
         {
           "path": ".",
@@ -799,6 +799,31 @@
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapProviderKeyBagTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "findsRootAndCurrentSignatureKeysByPublicKeyHash",
+                  "returnType": "void",
+                  "line": 13,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findsPaymentAndOrdKeysOutsideTheSignatureSearchRange",
+                  "returnType": "void",
+                  "line": 24,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bagBuiltFromIdentityResolvesPublicKeysButNotScriptHashes",
+                  "returnType": "void",
+                  "line": 38,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "BAP KeyBag 的签名、支付与 Ord 密钥查找，未知哈希和公钥查找；纯本地计算"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/WordsvBapBaseTest.java",
