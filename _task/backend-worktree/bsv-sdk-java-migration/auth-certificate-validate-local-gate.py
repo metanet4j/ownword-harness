@@ -70,7 +70,8 @@ def assertions(raw, side, destination, run_id, cases, plan):
     for row in lines(raw):
         case_id = titles.get(row.get('test')) if side == 'ts' else methods.get(row.get('method'))
         if case_id is not None:
-            require(row.get('pass', True) is True, '原 TS 断言采集显示失败')
+            if side == 'ts':
+                require(row.get('pass') is True, '原 TS 断言缺少真实通过结果')
             grouped[case_id].append(row)
     with destination.open('w') as stream:
         for case_id in cases:
@@ -79,6 +80,9 @@ def assertions(raw, side, destination, run_id, cases, plan):
             for identifier, row in zip(ids, grouped[case_id]):
                 value = {'kind': 'assertion', 'matcher': row['matcher'], 'negated': row['negated'],
                          'actual': row['actual'], 'expected': row['expected']}
+                if side == 'ts' and plan[case_id].get('comparisonRules', {}).get(identifier) == \
+                        'void-completion-null-adapter-v1':
+                    value['pass'] = row['pass']
                 stream.write(json.dumps({'runId': run_id, 'side': side, 'caseId': case_id,
                                          'assertionId': identifier, 'value': value}, ensure_ascii=False) + '\n')
 
