@@ -1,0 +1,3207 @@
+{
+  "schemaVersion": 1,
+  "status": "partial-reviewed",
+  "scope": "所有 4 仓库、25 POM；分类待逐文件复核后方可执行自动基线",
+  "repositories": [
+    {
+      "repository": "metanet4j-parent",
+      "head": "4112a4826d052e8a32be08e3582e473dfb5d2ccd",
+      "modules": [
+        {
+          "path": ".",
+          "artifactId": "metanet4j-parent",
+          "production": [],
+          "testSources": [],
+          "classificationReviewed": true,
+          "classificationReason": "POM，无测试源码或跨服务边界",
+          "integrationBoundariesProposed": [],
+          "integrationReview": "N/A：父 POM 或纯计算／数据契约，无外部服务交互"
+        }
+      ]
+    },
+    {
+      "repository": "metanet4j-base",
+      "head": "6e16cfa9e838f226ebbb5382203a199d1391da46",
+      "modules": [
+        {
+          "path": ".",
+          "artifactId": "metanet4j-base",
+          "production": [
+            {
+              "path": "src/main/java/com/metanet4j/base/aip/AipHelper.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/bap/BapHelper.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/bean/AIP.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/bean/B.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/bean/BPP.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/bean/BsocialBean.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/bean/MAP.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/constants/ProtocolConstant.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/dto/BapDto.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/dto/BitcoinSchemaDto.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/dto/BsocialDto.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/dto/TxUtxoDto.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/model/AIP.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/model/B.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/model/BPP.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/model/Bap.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/model/BapId.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/model/BapSigner.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/model/Bsocial.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/model/MAP.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/model/Protocol.java",
+              "kind": "interface"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/model/SortAble.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/msg/MetanetMessage.java",
+              "kind": "interface"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/type/BapTypeEnum.java",
+              "kind": "enum"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/type/BsocialTypeEnum.java",
+              "kind": "enum"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/type/CommonTypeEnum.java",
+              "kind": "enum"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/type/ScriptType.java",
+              "kind": "enum"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/util/JacksonUtil.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [
+            {
+              "path": "src/test/java/com/metanet4j/base/AipTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "verifyStrMsg",
+                  "returnType": "void",
+                  "line": 17,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "只调用本地 AIP/BAP 计算，无 I/O；现有用例缺断言，U1 修复"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/base/BapTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "testBap",
+                  "returnType": "void",
+                  "line": 11,
+                  "classification": "unit"
+                }
+              ],
+              "classificationReason": "只调用本地 AIP/BAP 计算，无 I/O；现有用例缺断言，U1 修复"
+            }
+          ],
+          "classificationReviewed": true,
+          "integrationBoundariesProposed": [],
+          "integrationReview": "N/A：父 POM 或纯计算／数据契约，无外部服务交互"
+        }
+      ]
+    },
+    {
+      "repository": "metanet4j-sdk",
+      "head": "bae4c36739e850539efeab060002fad728b6b9ad",
+      "modules": [
+        {
+          "path": ".",
+          "artifactId": "metanet4j-sdk",
+          "production": [
+            {
+              "path": "src/main/java/com/metanet4j/sdk/BobHelper.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/EcKeyLiteExtend.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/PrivateKey.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/PublicKey.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/SignType.java",
+              "kind": "enum"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/TxoHelper.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/address/AddressEnhance.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/bap/BapBase.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/bap/BapBaseAbstract.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/bap/BapBaseConfig.java",
+              "kind": "interface"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/bap/BapBaseCore.java",
+              "kind": "interface"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/bap/DefaultBapBaseConfig.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/bap/MasterKeyBapBase.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/bap/PandaBapBase.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/bap/PandaBapBaseConfig.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/bap/RemoteBapBase.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/bap/SpecifyBapBase.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/bap/TaggedDerivation.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/context/PreSignHashContext.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/crypto/AesCBCUtil.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/crypto/CryptoHelper.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/crypto/DigestUtilExtend.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/crypto/Ecies.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/crypto/MasterPrivateKey.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/exception/InvalidKeyException.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/exception/SignErrorException.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/input/TransactionInputEnhance.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/input/TransactionOutPointEnhance.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/ordinals/OrdScriptBuilder.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/ordinals/OrdTransactionBuilder.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/ordinals/OrdTransactionTemplate.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/ordinals/Signer.java",
+              "kind": "interface"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/output/TransactionOutputEnhance.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/remote/PreSignHash.java",
+              "kind": "interface"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/remote/PreSignHashUtils.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/remote/RemoteOrdTransactionBuilder.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplate.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/remote/RemoteSignType.java",
+              "kind": "enum"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/remote/RemoteTransactionBuilder.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/remote/RemoteTransactionSigner.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/remote/TransactionAllPreSignHash.java",
+              "kind": "interface"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/script/ScriptExtend.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/script/SigHashExtend.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/sigma/Algorithm.java",
+              "kind": "enum"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/sigma/Sig.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/sigma/Sigma.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/sigma/SignResponse.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/signers/AllHashSigThreadLocal.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/signers/ExtendForSignTransaction.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/signers/OrdinalsTransactionSigner.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/signers/TransactionExtend.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/transcation/BapDataLockBuilder.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/transcation/BsocialDataLockBuilder.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/transcation/LockingScriptBuilder.java",
+              "kind": "interface"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/transcation/TransactionBuilder.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/transcation/UnSpendableDataLockBuilder.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/transcation/UnspendableDataSig.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utils/ReadUtils.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utils/RedeemDataExtend.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utils/ScriptHelper.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utils/TxHelperExtend.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utils/UtilsExtend.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utxo/UTXOProvider.java",
+              "kind": "interface"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utxo/impl/HttpClientFactory.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utxo/impl/bitails/BitailsClient.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utxo/impl/bitails/BitailsUtxoProvider.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utxo/impl/bitails/dto/req/TransactionBroadcastReqDto.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utxo/impl/bitails/dto/res/AddressBalanceResDto.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utxo/impl/bitails/dto/res/AddressUnspentResDto.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utxo/impl/gorillapool/GorillaClient.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utxo/impl/gorillapool/OrdinalsOriginGorillaUtxoProvider.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utxo/impl/gorillapool/dto/res/Inscription.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/utxo/impl/gorillapool/dto/res/Txo.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [
+            {
+              "path": "src/test/java/com/metanet4j/sdk/PrivateKeyTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "test",
+                  "returnType": "void",
+                  "line": 10,
+                  "classification": "unit-candidate"
+                }
+              ],
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/TestData.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "testParse",
+                  "returnType": "void",
+                  "line": 44,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testContentType",
+                  "returnType": "void",
+                  "line": 56,
+                  "classification": "unit-candidate"
+                }
+              ],
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/WordsvTestData.java",
+              "classification": "fixture",
+              "methods": [],
+              "classificationReason": "无直接 @Test 方法，供其他用例使用"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/address/AddressLiteTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "testBase58",
+                  "returnType": "void",
+                  "line": 9,
+                  "classification": "unit-candidate"
+                }
+              ],
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "testWordList",
+                  "returnType": "void",
+                  "line": 27,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testBapDefault",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testBapAddress",
+                  "returnType": "void",
+                  "line": 47,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testEncrypt",
+                  "returnType": "void",
+                  "line": 75,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testGetSigningPathFromHex",
+                  "returnType": "void",
+                  "line": 100,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testGetFriendPublicKey",
+                  "returnType": "void",
+                  "line": 113,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testAddress",
+                  "returnType": "void",
+                  "line": 124,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testBytes",
+                  "returnType": "void",
+                  "line": 129,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testBytes2",
+                  "returnType": "void",
+                  "line": 140,
+                  "classification": "unit-candidate"
+                }
+              ],
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/bap/WordsvBapBaseTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "testServerBapBase",
+                  "returnType": "void",
+                  "line": 13,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testClientBapBase",
+                  "returnType": "void",
+                  "line": 20,
+                  "classification": "unit-candidate"
+                }
+              ],
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/common/CommonTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "testMediaType",
+                  "returnType": "void",
+                  "line": 8,
+                  "classification": "unit-candidate"
+                }
+              ],
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/crypto/MasterPrivateKeyTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "testGenerateWordList",
+                  "returnType": "void",
+                  "line": 10,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testFromWordList",
+                  "returnType": "void",
+                  "line": 16,
+                  "classification": "unit-candidate"
+                }
+              ],
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/script/ScriptTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "testGetAddressByOrdinalScript",
+                  "returnType": "void",
+                  "line": 10,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testGetAddressByOrdinalScrip2",
+                  "returnType": "void",
+                  "line": 18,
+                  "classification": "unit-candidate"
+                }
+              ],
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/transcation/BapDataLockBuilderSignTypeTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "buildRootSignsWithRootAddress",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "buildAliasSignsWithCurrentAddress",
+                  "returnType": "void",
+                  "line": 29,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "buildIdSignsWithPreviousAddress",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "unit-candidate"
+                }
+              ],
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/transcation/BitcoinschemaTransactionTest.java",
+              "classification": "external",
+              "methods": [
+                {
+                  "name": "testBapRootTransaction",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "external"
+                },
+                {
+                  "name": "testBapAliasTransaction",
+                  "returnType": "void",
+                  "line": 47,
+                  "classification": "external"
+                },
+                {
+                  "name": "testBsocialUnFollowTransaction",
+                  "returnType": "void",
+                  "line": 60,
+                  "classification": "external"
+                },
+                {
+                  "name": "testBsocialFollowTransaction",
+                  "returnType": "void",
+                  "line": 73,
+                  "classification": "external"
+                },
+                {
+                  "name": "testBsocialPostTransaction",
+                  "returnType": "void",
+                  "line": 86,
+                  "classification": "external"
+                },
+                {
+                  "name": "testBsocialRePostTransaction",
+                  "returnType": "void",
+                  "line": 105,
+                  "classification": "external"
+                },
+                {
+                  "name": "testBsocialReply",
+                  "returnType": "void",
+                  "line": 124,
+                  "classification": "external"
+                },
+                {
+                  "name": "testBsocialImapgePostTransaction",
+                  "returnType": "void",
+                  "line": 148,
+                  "classification": "external"
+                },
+                {
+                  "name": "testBsocialPdfTransaction",
+                  "returnType": "void",
+                  "line": 171,
+                  "classification": "external"
+                },
+                {
+                  "name": "testBsocialLikeTransaction",
+                  "returnType": "void",
+                  "line": 194,
+                  "classification": "external"
+                },
+                {
+                  "name": "testSendUtxo",
+                  "returnType": "void",
+                  "line": 207,
+                  "classification": "external"
+                },
+                {
+                  "name": "testSendUtxos",
+                  "returnType": "void",
+                  "line": 225,
+                  "classification": "external"
+                },
+                {
+                  "name": "testEckeyLiteExtend",
+                  "returnType": "void",
+                  "line": 244,
+                  "classification": "external"
+                }
+              ],
+              "classificationReason": "类级 external 标签；涉及实时 UTXO 与主网广播，U2 应拆出可离线行为"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/transcation/OrdTransactionTest.java",
+              "classification": "external",
+              "methods": [
+                {
+                  "name": "testCreateOrdinal",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "external"
+                },
+                {
+                  "name": "testCreateBapOrdinal",
+                  "returnType": "void",
+                  "line": 60,
+                  "classification": "external"
+                },
+                {
+                  "name": "testSendOrdinalByCreateUtxo",
+                  "returnType": "void",
+                  "line": 82,
+                  "classification": "external"
+                },
+                {
+                  "name": "testSendOrdinalBySendUtxo",
+                  "returnType": "void",
+                  "line": 96,
+                  "classification": "external"
+                },
+                {
+                  "name": "testTransactionOrdReInscriptionby2ndkeyDeserialize",
+                  "returnType": "void",
+                  "line": 113,
+                  "classification": "external"
+                },
+                {
+                  "name": "testOpns",
+                  "returnType": "void",
+                  "line": 123,
+                  "classification": "external"
+                },
+                {
+                  "name": "testTransactionOrdSigmaDeserialize",
+                  "returnType": "void",
+                  "line": 133,
+                  "classification": "external"
+                },
+                {
+                  "name": "testTransactionOrdPngDeserialize",
+                  "returnType": "void",
+                  "line": 148,
+                  "classification": "external"
+                },
+                {
+                  "name": "testTransactionOrdMetadataDeserialize",
+                  "returnType": "void",
+                  "line": 158,
+                  "classification": "external"
+                },
+                {
+                  "name": "testTransactionOrdDeserialize",
+                  "returnType": "void",
+                  "line": 168,
+                  "classification": "external"
+                },
+                {
+                  "name": "testTransactionOrdTransferDeserialize",
+                  "returnType": "void",
+                  "line": 178,
+                  "classification": "external"
+                },
+                {
+                  "name": "testTransactionOrdMarketDeserialize",
+                  "returnType": "void",
+                  "line": 187,
+                  "classification": "external"
+                },
+                {
+                  "name": "testSighashType",
+                  "returnType": "void",
+                  "line": 193,
+                  "classification": "external"
+                }
+              ],
+              "classificationReason": "类级 external 标签；涉及实时 UTXO 与主网广播，U2 应拆出可离线行为"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/transcation/RemoteSignBitcoinschemaTransactionTest.java",
+              "classification": "external",
+              "methods": [
+                {
+                  "name": "testBapRootTransactionAndGetAllBsmPreSignHash",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "external"
+                },
+                {
+                  "name": "testBapRootTransactionAndRemoteSign",
+                  "returnType": "void",
+                  "line": 46,
+                  "classification": "external"
+                },
+                {
+                  "name": "testCreateOrdinalAndRemoteSign",
+                  "returnType": "void",
+                  "line": 68,
+                  "classification": "external"
+                }
+              ],
+              "classificationReason": "类级 external 标签；涉及实时 UTXO 与主网广播，U2 应拆出可离线行为"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionContextTest.java",
+              "classification": "fixture",
+              "methods": [],
+              "classificationReason": "无直接 @Test 方法，供其他用例使用"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/utils/UtilsExtendTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "testHash",
+                  "returnType": "void",
+                  "line": 9,
+                  "classification": "unit-candidate"
+                }
+              ],
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/utxo/BitailsProviderTest.java",
+              "classification": "external-unlabeled",
+              "methods": [
+                {
+                  "name": "getUtxoByAddress",
+                  "returnType": "void",
+                  "line": 18,
+                  "classification": "external-unlabeled"
+                },
+                {
+                  "name": "getBalanceByAddress",
+                  "returnType": "void",
+                  "line": 29,
+                  "classification": "external-unlabeled"
+                }
+              ],
+              "classificationReason": "两个测试真实访问 Bitails HTTP，当前无标签；分类修复前不得运行 sdk 自动基线"
+            }
+          ],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [
+            "Bitails/GorillaPool HTTP 适配器（本地协议服务）"
+          ],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        }
+      ]
+    },
+    {
+      "repository": "metanet4j-component",
+      "head": "e634982a88b22d48ca09a7080574393ba55b0908",
+      "modules": [
+        {
+          "path": "metanet4j-api-common",
+          "artifactId": "metanet4j-api-common",
+          "production": [
+            {
+              "path": "metanet4j-api-common/src/main/java/com/metanet4j/api/common/GlobalExceptionTranslator.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-api-common/src/main/java/com/metanet4j/api/common/annotations/EnableApiLog.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-api-common/src/main/java/com/metanet4j/api/common/annotations/LogModel.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-api-common/src/main/java/com/metanet4j/api/common/aspect/GlobalApiLogAspect.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-api-common/src/main/java/com/metanet4j/api/common/aspect/LogAspect.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-api-common/src/main/java/com/metanet4j/api/common/base/ApiResult.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-api-common/src/main/java/com/metanet4j/api/common/base/BaseApiResult.java",
+              "kind": "enum"
+            },
+            {
+              "path": "metanet4j-api-common/src/main/java/com/metanet4j/api/common/base/R.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-api-common/src/main/java/com/metanet4j/api/common/security/JwtTokenProvider.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-api-common/src/main/java/com/metanet4j/api/common/utils/ValidateUtils.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [
+            "HTTP 异常转换与响应"
+          ],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-component-bap",
+          "artifactId": "metanet4j-component-bap",
+          "production": [
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/converter/BapIdDoConverters.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/converter/BapRecordConverter.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/converter/BapTxRecordConverters.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/dto/BapVerifyResult.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/handler/BapDtoHandler.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/handler/BapDtoHandlerAbstract.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/handler/MongoStoreBapDtoHandler.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/handler/MysqlStoreBapDtoHandler.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/listener/BapListener.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/listener/BapSearchListener.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/manager/BapManager.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/mapstruct/mongo/BapIdDoMapper.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/mapstruct/mongo/BapIdentityUtil.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/resolver/BapRawStrResolver.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/service/BapSearchService.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/service/BapService.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/service/MongoBapService.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/service/MysqlBapService.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/validator/BapValidator.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/validator/DefaultBapValidator.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [
+            "BAP 服务与 MongoDB/MySQL/ES"
+          ],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-component-bitcoinschema",
+          "artifactId": "metanet4j-component-bitcoinschema",
+          "production": [
+            {
+              "path": "metanet4j-component-bitcoinschema/src/main/java/com/metanet4j/component/bitcoinschema/listener/BitcoinschemaListener.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-component-bsocial",
+          "artifactId": "metanet4j-component-bsocial",
+          "production": [
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/converter/BsocialDoConverters.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/converter/BsocialDtoConverters.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/converter/BsocialRecordConverter.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/converter/BsocialSearchConverters.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/converter/BsocialTxRecordConverters.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/converter/ConverterHelper.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/handler/BsocialDtoHandler.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/handler/BsocialDtoHandlerAbstract.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/handler/MongoStoreBsocialHandler.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/handler/MysqlStoreBsocialHandler.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/listener/BsocialListener.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/listener/BsocialSearchListener.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/manager/BsocialManager.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/mapstruct/BsocialMapperUtils.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/mapstruct/mongo/BapRelationDoMapper.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/mapstruct/mongo/BsocialDoMapper.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/mapstruct/mongo/BsocialRelationDoMapper.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/mapstruct/mongo/BsocialReplyDoMapper.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/mapstruct/mongo/CycleAvoidingMappingContext.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/mapstruct/search/BsocialSearchEntityMapper.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/resolver/BsocialRawResolver.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/service/BsocialSearchService.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/service/BsocialService.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/service/MongoBsocialService.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/main/java/com/metanet4j/component/bsocial/service/MysqlBsocialService.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [
+            "Bsocial 服务与 MongoDB/MySQL/ES"
+          ],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-component-cache",
+          "artifactId": "metanet4j-component-cache",
+          "production": [
+            {
+              "path": "metanet4j-component-cache/src/main/java/com/metanet4j/component/cache/CacheManagerConfig.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-cache/src/main/java/com/metanet4j/component/cache/RedisService.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-cache/src/main/java/com/metanet4j/component/cache/RedisUtils.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-cache/src/main/java/com/metanet4j/component/cache/RedissonAutoConfiguration.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [
+            "Redis/Redisson"
+          ],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-component-common",
+          "artifactId": "metanet4j-component-common",
+          "production": [
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/base/BaseService.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/base/BaseServiceAbstract.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/config/PlanariaConfiguration.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/config/PlanariaProperties.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/constants/AppendDataBapOutKeyConstant.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/constants/SetCmdConstant.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/constants/SingleBapOutKeyConstant.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/dto/BaseDto.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/enums/ConvertTypeEnum.java",
+              "kind": "enum"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/enums/DataSourceTypeEnum.java",
+              "kind": "enum"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/enums/ProtocolGroupTypeValidateEnum.java",
+              "kind": "enum"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/enums/StateTypeEnum.java",
+              "kind": "enum"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/enums/TargetTypeEnum.java",
+              "kind": "enum"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/events/BapConsumeEvent.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/events/BapSearchEvent.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/events/BitcoinSchemaConsumeEvent.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/events/BitcoinSchemaTxArriveEvent.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/events/BlockArrivedEvent.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/events/BsocialConsumeEvent.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/events/BsocialSearchEvent.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/exception/ConverterException.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/exception/FetchPlanariaException.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/exception/VerificationException.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/msg/block/BlockArrivedMsg.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/state/StateHelper.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/state/StateLog.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/transaction/BitcoinSchemaTransaction.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/transaction/LocalTestUtxoProvider.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/transaction/MyBapBase.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/utils/ClientXprvThreadLocal.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/utils/JacksonBeanUtils.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/utils/SimpleBeanUtils.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-common/src/main/java/com/metanet4j/component/common/utils/SqlHelper.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-component-core",
+          "artifactId": "metanet4j-component-core",
+          "production": [
+            {
+              "path": "metanet4j-component-core/src/main/java/com/metanet4j/component/core/BapIdSearcher.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-core/src/main/java/com/metanet4j/component/core/DuplicateSubmitPrevention.java",
+              "kind": "interface"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-component-file",
+          "artifactId": "metanet4j-component-file",
+          "production": [
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/config/GbsFileAutoConfiguration.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/AbstractFileClient.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/FileClient.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/FileClientConfig.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/FileClientFactory.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/FileClientFactoryImpl.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/db/DBFileClient.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/db/DBFileClientConfig.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/db/DBFileContentFrameworkDAO.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/ftp/FtpFileClient.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/ftp/FtpFileClientConfig.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/local/LocalFileClient.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/local/LocalFileClientConfig.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/s3/S3FileClient.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/s3/S3FileClientConfig.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/sftp/SftpFileClient.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/client/sftp/SftpFileClientConfig.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/enums/FileStorageEnum.java",
+              "kind": "enum"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/utils/FileTypeUtils.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/core/utils/FileUtils.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-file/src/main/java/com/metanet4j/component/file/validation/ValidationUtils.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/config/package-info.java",
+              "classification": "fixture-or-undiscovered",
+              "methods": []
+            },
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/ftp/FtpFileClientTest.java",
+              "classification": "disabled",
+              "methods": [
+                {
+                  "name": "test",
+                  "returnType": "void",
+                  "line": 11,
+                  "classification": "disabled"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/local/LocalFileClientTest.java",
+              "classification": "disabled",
+              "methods": [
+                {
+                  "name": "test",
+                  "returnType": "void",
+                  "line": 10,
+                  "classification": "disabled"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/s3/S3FileClientTest.java",
+              "classification": "disabled",
+              "methods": [
+                {
+                  "name": "testMinIO",
+                  "returnType": "void",
+                  "line": 13,
+                  "classification": "disabled"
+                },
+                {
+                  "name": "testAliyun",
+                  "returnType": "void",
+                  "line": 29,
+                  "classification": "disabled"
+                },
+                {
+                  "name": "testQCloud",
+                  "returnType": "void",
+                  "line": 45,
+                  "classification": "disabled"
+                },
+                {
+                  "name": "testQiniu",
+                  "returnType": "void",
+                  "line": 61,
+                  "classification": "disabled"
+                },
+                {
+                  "name": "testHuaweiCloud",
+                  "returnType": "void",
+                  "line": 79,
+                  "classification": "disabled"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/sftp/SftpFileClientTest.java",
+              "classification": "disabled",
+              "methods": [
+                {
+                  "name": "test",
+                  "returnType": "void",
+                  "line": 10,
+                  "classification": "disabled"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/enums/package-info.java",
+              "classification": "fixture-or-undiscovered",
+              "methods": []
+            }
+          ],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [
+            "本地文件、S3、FTP、SFTP、数据库文件客户端"
+          ],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-component-handler",
+          "artifactId": "metanet4j-component-handler",
+          "production": [
+            {
+              "path": "metanet4j-component-handler/src/main/java/com/metanet4j/component/handler/BitcoinSchemaTxHandler.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-handler/src/main/java/com/metanet4j/component/listener/BitcoinSchemaTxListener.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-component-message",
+          "artifactId": "metanet4j-component-message",
+          "production": [
+            {
+              "path": "metanet4j-component-message/src/main/java/com/metanet4j/component/message/config/DefaultKafkaProperties.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-message/src/main/java/com/metanet4j/component/message/config/KafkaConsumerConfiguration.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-message/src/main/java/com/metanet4j/component/message/config/KafkaProducerConfiguration.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-message/src/main/java/com/metanet4j/component/message/config/KafkaProperties.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-message/src/main/java/com/metanet4j/component/message/consumer/BapConsumer.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-message/src/main/java/com/metanet4j/component/message/consumer/BitcoinSchemaConsumer.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-message/src/main/java/com/metanet4j/component/message/consumer/BlockConsumer.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-message/src/main/java/com/metanet4j/component/message/producer/AbstractMessageProducer.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-message/src/main/java/com/metanet4j/component/message/producer/DefaultMessageProducer.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-message/src/main/java/com/metanet4j/component/message/producer/MessageProducer.java",
+              "kind": "interface"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [
+            "Kafka 生产与消费"
+          ],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-component-model",
+          "artifactId": "metanet4j-component-model",
+          "production": [
+            {
+              "path": "metanet4j-component-model/src/main/java/com/metanet4j/model/api/BaseResult.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-model/src/main/java/com/metanet4j/model/api/CustomResultCode.java",
+              "kind": "enum"
+            },
+            {
+              "path": "metanet4j-component-model/src/main/java/com/metanet4j/model/api/ListResult.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-model/src/main/java/com/metanet4j/model/api/ResultCode.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-model/src/main/java/com/metanet4j/model/domain/bap/BapIdDO.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-model/src/main/java/com/metanet4j/model/domain/bap/BapRelationDO.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-model/src/main/java/com/metanet4j/model/domain/bap/Identity.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-model/src/main/java/com/metanet4j/model/domain/bsocial/BsocialDO.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-model/src/main/java/com/metanet4j/model/domain/bsocial/BsocialRelationDO.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-model/src/main/java/com/metanet4j/model/domain/bsocial/BsocialReplyDO.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-model/src/main/java/com/metanet4j/model/planaria/BOB.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-model/src/main/java/com/metanet4j/model/planaria/Planaria.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-model/src/main/java/com/metanet4j/model/planaria/TXO.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-component-test",
+          "artifactId": "metanet4j-component-test",
+          "production": [
+            {
+              "path": "metanet4j-component-test/src/main/java/com/metanet4j/component/test/Metanet4jComponentTestApplication.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/Metanet4jComponentTestApplicationTests.java",
+              "classification": "integration-candidate",
+              "methods": [
+                {
+                  "name": "contextLoads",
+                  "returnType": "void",
+                  "line": 9,
+                  "classification": "integration-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/common/CommonTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "testFormatUtxoJson",
+                  "returnType": "void",
+                  "line": 15,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testInteger",
+                  "returnType": "void",
+                  "line": 22,
+                  "classification": "unit-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/common/StateCalculatorTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "testCalculateStatusWithNoLogs",
+                  "returnType": "void",
+                  "line": 15,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testCalculateStatusWithUnfollowLogs",
+                  "returnType": "void",
+                  "line": 27,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testCalculateStatusWithFollowLogs",
+                  "returnType": "void",
+                  "line": 41,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testCalculateStatusWithUnfollowAndFollowLogs",
+                  "returnType": "void",
+                  "line": 55,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testCalculateStatusWithUnfollowAndMultipleFollowLogs",
+                  "returnType": "void",
+                  "line": 69,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testCalculateStatusWithMultipleUnfollowAndFollowLogsFollowCountGreaterThanUnfollowCount",
+                  "returnType": "void",
+                  "line": 84,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testCalculateStatusWithMultipleUnfollowAndFollowLogsUnfollowCountGreaterThanFollowCount",
+                  "returnType": "void",
+                  "line": 101,
+                  "classification": "unit-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/compltetx/ComplteTxFactoryTest.java",
+              "classification": "external",
+              "methods": [
+                {
+                  "name": "testFollow",
+                  "returnType": "void",
+                  "line": 41,
+                  "classification": "external"
+                },
+                {
+                  "name": "testUnFollow",
+                  "returnType": "void",
+                  "line": 47,
+                  "classification": "external"
+                },
+                {
+                  "name": "testPostAndTags",
+                  "returnType": "void",
+                  "line": 52,
+                  "classification": "external"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/convertor/MetaIdConvertorTest.java",
+              "classification": "external",
+              "methods": [
+                {
+                  "name": "testParseTx",
+                  "returnType": "void",
+                  "line": 22,
+                  "classification": "external"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/convertor/TxoBobConverterTest.java",
+              "classification": "mixed",
+              "methods": [
+                {
+                  "name": "test",
+                  "returnType": "void",
+                  "line": 43,
+                  "classification": "external"
+                },
+                {
+                  "name": "testAddress",
+                  "returnType": "void",
+                  "line": 159,
+                  "classification": "unit-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/elasticsearch/BapSearchServiceTest.java",
+              "classification": "integration-candidate",
+              "methods": [
+                {
+                  "name": "testSearch",
+                  "returnType": "void",
+                  "line": 17,
+                  "classification": "integration-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/elasticsearch/EsTest.java",
+              "classification": "integration-candidate",
+              "methods": [
+                {
+                  "name": "testClient",
+                  "returnType": "void",
+                  "line": 59,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testCreateBapIndex",
+                  "returnType": "void",
+                  "line": 66,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testCreateBsocialIndex",
+                  "returnType": "void",
+                  "line": 73,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testCreateIdentityIndex",
+                  "returnType": "void",
+                  "line": 87,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testGetBapIndex",
+                  "returnType": "void",
+                  "line": 96,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testGetBapIdentityIndex",
+                  "returnType": "void",
+                  "line": 103,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testAddBapRootDto",
+                  "returnType": "void",
+                  "line": 110,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testAddBapAliasDto",
+                  "returnType": "void",
+                  "line": 131,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testAddAlias",
+                  "returnType": "void",
+                  "line": 154,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testGetAlias",
+                  "returnType": "void",
+                  "line": 186,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testSearchAlias",
+                  "returnType": "void",
+                  "line": 195,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testSearchAlias2",
+                  "returnType": "void",
+                  "line": 213,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testSearchAliasArray",
+                  "returnType": "void",
+                  "line": 228,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testSearchAliasPage",
+                  "returnType": "void",
+                  "line": 258,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testUpdateAlias",
+                  "returnType": "void",
+                  "line": 285,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testDeleteAlias",
+                  "returnType": "void",
+                  "line": 299,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testParseRoot",
+                  "returnType": "void",
+                  "line": 306,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testParseAlias",
+                  "returnType": "void",
+                  "line": 314,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testAddBsocialContent",
+                  "returnType": "void",
+                  "line": 322,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testSearchBsocialContent",
+                  "returnType": "void",
+                  "line": 342,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testAddBsocialBinary",
+                  "returnType": "void",
+                  "line": 355,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testSearchBsocialBinary",
+                  "returnType": "void",
+                  "line": 378,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testAddBsocialMap",
+                  "returnType": "void",
+                  "line": 391,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testSearchBsocialMap",
+                  "returnType": "void",
+                  "line": 411,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testBsocialMap",
+                  "returnType": "void",
+                  "line": 423,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testCommon",
+                  "returnType": "void",
+                  "line": 439,
+                  "classification": "integration-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/message/MessageProducerTest.java",
+              "classification": "integration-candidate",
+              "methods": [
+                {
+                  "name": "test",
+                  "returnType": "void",
+                  "line": 20,
+                  "classification": "integration-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/BapMongodbTest.java",
+              "classification": "integration-candidate",
+              "methods": [
+                {
+                  "name": "testSave",
+                  "returnType": "void",
+                  "line": 69,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testFind",
+                  "returnType": "void",
+                  "line": 88,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testUpdate",
+                  "returnType": "void",
+                  "line": 95,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testSaveRoot",
+                  "returnType": "void",
+                  "line": 103,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testfindRoot",
+                  "returnType": "void",
+                  "line": 112,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testSaveIdentity",
+                  "returnType": "void",
+                  "line": 121,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testAddSigner",
+                  "returnType": "void",
+                  "line": 130,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testAddSigner2",
+                  "returnType": "void",
+                  "line": 140,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testFindIdentityKey",
+                  "returnType": "void",
+                  "line": 149,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testRemoveBapIdThenAdd",
+                  "returnType": "void",
+                  "line": 155,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testAddSignerAndSetIsCurrent",
+                  "returnType": "void",
+                  "line": 165,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testAddAttest",
+                  "returnType": "void",
+                  "line": 176,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testAddBapRelation",
+                  "returnType": "void",
+                  "line": 185,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testFindFollowBapIdentityList",
+                  "returnType": "void",
+                  "line": 190,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testFindFansBapIdentityList",
+                  "returnType": "void",
+                  "line": 197,
+                  "classification": "integration-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/BsocialMongodbTest.java",
+              "classification": "integration-candidate",
+              "methods": []
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/BsocialReplyMongodbTest.java",
+              "classification": "integration-candidate",
+              "methods": [
+                {
+                  "name": "testSaveRootReply",
+                  "returnType": "void",
+                  "line": 24,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testSaveChildReply",
+                  "returnType": "void",
+                  "line": 32,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testBatchSaveChildReply",
+                  "returnType": "void",
+                  "line": 38,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testBatchSaveThirdChildReply",
+                  "returnType": "void",
+                  "line": 47,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testSaveThirdChildReply",
+                  "returnType": "void",
+                  "line": 56,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testSaveFourChildReply",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testAll",
+                  "returnType": "void",
+                  "line": 70,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testSaveChildReplyWithChildReplyListSizeLessThan10",
+                  "returnType": "void",
+                  "line": 94,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testSaveChildReplyWithChildReplyListSizeEqualTo10",
+                  "returnType": "void",
+                  "line": 122,
+                  "classification": "integration-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/DataTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "testBapRelation",
+                  "returnType": "void",
+                  "line": 104,
+                  "classification": "unit-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/MongoBapServiceFindIdentityKeyTest.java",
+              "classification": "integration-candidate",
+              "methods": [
+                {
+                  "name": "findIdentityKeyByRegisteredSignerAddress",
+                  "returnType": "void",
+                  "line": 31,
+                  "classification": "integration-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/schema/BsocialSchema.java",
+              "classification": "fixture-or-undiscovered",
+              "methods": []
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/planaria/BapConvertorTest.java",
+              "classification": "external",
+              "methods": [
+                {
+                  "name": "test",
+                  "returnType": "void",
+                  "line": 32,
+                  "classification": "external"
+                },
+                {
+                  "name": "testIdConvert",
+                  "returnType": "void",
+                  "line": 40,
+                  "classification": "external"
+                },
+                {
+                  "name": "testAppendData",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "external"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/planaria/BsocailConvertorTest.java",
+              "classification": "external",
+              "methods": [
+                {
+                  "name": "test",
+                  "returnType": "void",
+                  "line": 30,
+                  "classification": "external"
+                },
+                {
+                  "name": "testBPP",
+                  "returnType": "void",
+                  "line": 38,
+                  "classification": "external"
+                },
+                {
+                  "name": "testB",
+                  "returnType": "void",
+                  "line": 45,
+                  "classification": "external"
+                },
+                {
+                  "name": "testTip",
+                  "returnType": "void",
+                  "line": 51,
+                  "classification": "external"
+                },
+                {
+                  "name": "testPost",
+                  "returnType": "void",
+                  "line": 57,
+                  "classification": "external"
+                },
+                {
+                  "name": "testFollow",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "external"
+                },
+                {
+                  "name": "testRepost",
+                  "returnType": "void",
+                  "line": 69,
+                  "classification": "external"
+                },
+                {
+                  "name": "testLike",
+                  "returnType": "void",
+                  "line": 75,
+                  "classification": "external"
+                },
+                {
+                  "name": "testBigData",
+                  "returnType": "void",
+                  "line": 85,
+                  "classification": "external"
+                },
+                {
+                  "name": "testSdkPost",
+                  "returnType": "void",
+                  "line": 91,
+                  "classification": "external"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/resolver/BapRawStrResolverTest.java",
+              "classification": "integration-candidate",
+              "methods": [
+                {
+                  "name": "testHandleBapRoot",
+                  "returnType": "void",
+                  "line": 26,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testHandleBapId",
+                  "returnType": "void",
+                  "line": 40,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testHandleAlias",
+                  "returnType": "void",
+                  "line": 48,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testHandleNonBapDataShouldBeRejected",
+                  "returnType": "void",
+                  "line": 62,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testHandleFollowByFrom",
+                  "returnType": "void",
+                  "line": 70,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testHandleUnFollowByFrom",
+                  "returnType": "void",
+                  "line": 80,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testAddBapRootAndAlias",
+                  "returnType": "void",
+                  "line": 90,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testBatchAddBapRootAndAlias",
+                  "returnType": "void",
+                  "line": 98,
+                  "classification": "integration-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/resolver/BsocialRawResolverTest.java",
+              "classification": "integration-candidate",
+              "methods": [
+                {
+                  "name": "testHandleBsocialPost",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "integration-candidate"
+                },
+                {
+                  "name": "testHandleBsocialFollow",
+                  "returnType": "void",
+                  "line": 44,
+                  "classification": "integration-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/slave/BlockTaskServiceTest.java",
+              "classification": "external",
+              "methods": [
+                {
+                  "name": "testInsertOne",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "external"
+                },
+                {
+                  "name": "testQueryByStatus",
+                  "returnType": "void",
+                  "line": 54,
+                  "classification": "external"
+                },
+                {
+                  "name": "testUpdateStatusByblkhash",
+                  "returnType": "void",
+                  "line": 61,
+                  "classification": "external"
+                },
+                {
+                  "name": "testGetLastUpdateList",
+                  "returnType": "void",
+                  "line": 66,
+                  "classification": "external"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/sse/ServerSentEventsClientApplicationTest.java",
+              "classification": "integration-candidate",
+              "methods": []
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/BapBaseTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "testWordList",
+                  "returnType": "void",
+                  "line": 28,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testBapSeed",
+                  "returnType": "void",
+                  "line": 40,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testBapDefault",
+                  "returnType": "void",
+                  "line": 52,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testFromSignatureAddress",
+                  "returnType": "void",
+                  "line": 62,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testBapAddress",
+                  "returnType": "void",
+                  "line": 71,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testEncrypt",
+                  "returnType": "void",
+                  "line": 88,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testDecrypt",
+                  "returnType": "void",
+                  "line": 97,
+                  "classification": "unit-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/BaseDataTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "testFollowXpriv",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/BitcoinschemaTransactionTest.java",
+              "classification": "invalid-test-signature",
+              "methods": [
+                {
+                  "name": "testBsocialReply",
+                  "returnType": "String",
+                  "line": 187,
+                  "classification": "invalid-test-signature"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/CommonTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "test",
+                  "returnType": "void",
+                  "line": 39,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testHex",
+                  "returnType": "void",
+                  "line": 46,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testBap",
+                  "returnType": "void",
+                  "line": 52,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testVerifyAip",
+                  "returnType": "void",
+                  "line": 66,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testIsRoot",
+                  "returnType": "void",
+                  "line": 86,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testClose",
+                  "returnType": "void",
+                  "line": 94,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "convertJson",
+                  "returnType": "void",
+                  "line": 100,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testType",
+                  "returnType": "void",
+                  "line": 138,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testPlanaria",
+                  "returnType": "void",
+                  "line": 153,
+                  "classification": "unit-candidate"
+                },
+                {
+                  "name": "testBapBase",
+                  "returnType": "void",
+                  "line": 161,
+                  "classification": "unit-candidate"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/LocalTestUtxoProvider.java",
+              "classification": "fixture-or-undiscovered",
+              "methods": []
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/utxo/TxUtxoServiceTest.java",
+              "classification": "external",
+              "methods": [
+                {
+                  "name": "testAddUtxo",
+                  "returnType": "void",
+                  "line": 29,
+                  "classification": "external"
+                }
+              ]
+            }
+          ],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [
+            "Spring 应用装配与跨模块业务路径"
+          ],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-component-tx",
+          "artifactId": "metanet4j-component-tx",
+          "production": [
+            {
+              "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/BschemaCustomTransactionSigner.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/DefaultBapBaseFactory.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/DefaultCompleteTxFactory.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/DefaultDuplicateSubmitPrevention.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/DefaultPrepareOnchainTxResolver.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/DefaultUnSpendableDataResolver.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/DefaultUtxoResolver.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/OnChainedTx.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/core/BapBaseFactory.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/core/CompleteTxFactory.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/core/PrepareOnchainTxResolver.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/core/UnSpendableDataResolver.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/core/UtxoResolver.java",
+              "kind": "interface"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [
+            "交易服务与持久化边界"
+          ],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-connect-planaria",
+          "artifactId": "metanet4j-connect-planaria",
+          "production": [
+            {
+              "path": "metanet4j-connect-planaria/src/main/java/com/metanet4j/component/planaria/block/pull/BitbusMetaBlockPullerImpl.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-connect-planaria/src/main/java/com/metanet4j/component/planaria/block/pull/BitbusUtxoBlockPullerImpl.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-connect-planaria/src/main/java/com/metanet4j/component/planaria/block/pull/BlockPuller.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-connect-planaria/src/main/java/com/metanet4j/component/planaria/block/pull/DefaultBlockPullerImpl.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-connect-planaria/src/main/java/com/metanet4j/component/planaria/block/pull/MetaBlockPuller.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-connect-planaria/src/main/java/com/metanet4j/component/planaria/block/pull/UtxoBlockPuller.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-connect-planaria/src/main/java/com/metanet4j/component/planaria/block/request/PullBlockDataRequest.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-connect-planaria/src/main/java/com/metanet4j/component/planaria/fegin/DefaultFeginClient.java",
+              "kind": "interface"
+            }
+          ],
+          "testSources": [
+            {
+              "path": "metanet4j-connect-planaria/src/test/java/com/metanet4j/component/AppTest.java",
+              "classification": "unit-candidate",
+              "methods": [
+                {
+                  "name": "shouldAnswerWithTrue",
+                  "returnType": "void",
+                  "line": 15,
+                  "classification": "unit-candidate"
+                }
+              ]
+            }
+          ],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [
+            "Planaria 数据入口与应用装配"
+          ],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-store-mongo",
+          "artifactId": "metanet4j-store-mongo",
+          "production": [
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/BapRecordListener.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/po/BapAttest.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/po/BapId.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/po/BapRecord.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/po/BapRelation.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/po/BapSigner.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/repository/attest/BapAttestRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/repository/attest/CustomizedBapAttestRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/repository/attest/CustomizedBapAttestRepositoryImpl.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/repository/bapid/BapIdRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/repository/bapid/CustomizedBapIdRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/repository/bapid/CustomizedBapIdRepositoryImpl.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/repository/baprecord/BapRecordRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/repository/baprecord/CustomizedBapRecordRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/repository/baprecord/CustomizedBapRecordRepositoryImpl.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/repository/baprelation/BapRelationRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/repository/baprelation/CustomizedBapRelationRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bap/repository/baprelation/CustomizedBapRelationRepositoryImpl.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/base/po/Base.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/base/po/Rel.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/BsocialRecordListener.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/po/Bsocial.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/po/BsocialBase.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/po/BsocialRecord.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/po/BsocialRelation.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/po/BsocialReply.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/repository/bsocial/BsocialRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/repository/bsocial/CustomizedBsocialRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/repository/bsocial/CustomizedBsocialRepositoryImpl.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/repository/bsocialrecord/BsocialRecordRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/repository/bsocialrecord/CustomizedBsocialRecordRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/repository/bsocialrecord/CustomizedBsocialRecordRepositoryImpl.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/repository/bsocialrelation/BsocialRelationRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/repository/bsocialrelation/CustomizedBsocialRelationRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/repository/bsocialrelation/CustomizedBsocialRelationRepositoryImpl.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/repository/bsocialreply/BsocialReplyRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/repository/bsocialreply/CustomizedBsocialReplyRepository.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-mongo/src/main/java/com/metanet4j/store/mongo/bsocail/repository/bsocialreply/CustomizedBsocialReplyRepositoryImpl.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [
+            "MongoDB repository/service"
+          ],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-store-search",
+          "artifactId": "metanet4j-store-search",
+          "production": [
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/EsConfig.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/annotation/SearchField.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/core/BitcoinSchemaParent.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/entity/BapData.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/entity/BapIdentity.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/entity/BitcoinSchemaBinary.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/entity/BitcoinSchemaContent.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/entity/BitcoinSchemaMap.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/entity/Bsocial.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/repository/AbstractRepository.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/repository/BapIdentityRepository.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/repository/BitcoinSchemaBinaryRepository.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/repository/BitcoinSchemaContentRepository.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/repository/BitcoinSchemaMapRepository.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/repository/BsocialSearchRepository.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-search/src/main/java/com/metanet4j/store/search/repository/IndexConstant.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [
+            "Elasticsearch repository/search"
+          ],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-store-sql",
+          "artifactId": "metanet4j-store-sql",
+          "production": [
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/BaseEntity.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bap/mapper/AttestMapper.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bap/mapper/BapTxRecordMapper.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bap/mapper/IdMapper.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bap/mapper/SignerMapper.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bap/po/Attest.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bap/po/BapTxRecord.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bap/po/Id.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bap/po/Signer.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bap/repository/AttestRepository.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bap/repository/BapTxRecordRepository.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bap/repository/IdRepository.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bap/repository/SignerRepository.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bsocial/mapper/BsocialTxRecordMapper.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bsocial/po/BsocialTxRecord.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/bsocial/repository/BsocialTxRecordRepository.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/handler/MetanetObjectHandler.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/slave/blockTask/entity/BlockTask.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/slave/blockTask/mapper/BlockTaskMapper.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/slave/blockTask/service/IBlockTaskService.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/slave/blockTask/service/impl/BlockTaskServiceImpl.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/utxo/txRawkeyIndex/entity/TxRawkeyIndex.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/utxo/txRawkeyIndex/mapper/TxRawkeyIndexMapper.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/utxo/txRawkeyIndex/service/ITxRawkeyIndexService.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/utxo/txRawkeyIndex/service/impl/TxRawkeyIndexServiceImpl.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/utxo/txUtxo/entity/TxUtxo.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/utxo/txUtxo/mapper/TxUtxoMapper.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/utxo/txUtxo/service/ITxUtxoService.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-store-sql/src/main/java/com/metanet4j/store/sql/utxo/txUtxo/service/impl/TxUtxoServiceImpl.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [
+            "MySQL repository/mapper"
+          ],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-tx-convertor",
+          "artifactId": "metanet4j-tx-convertor",
+          "production": [
+            {
+              "path": "metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/BUtils.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/SourceTxConvertor.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/bap/BapModelToDtoConverter.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/bsocial/AIPConverter.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/bsocial/BConverter.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/bsocial/BsocialModelToDtoConverter.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/bsocial/CellItem.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/bsocial/DefaultProtocolConverterFactory.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/bsocial/MAPConverter.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/bsocial/Tape.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/executor/SourceTxConvertorExecutor.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/impl/PlanariaBapConvertor.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/impl/PlanariaBsocialConvertor.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/impl/UtxoConvertor.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-tx-filter",
+          "artifactId": "metanet4j-tx-filter",
+          "production": [
+            {
+              "path": "metanet4j-tx-filter/src/main/java/com/metanet4j/tx/filter/MetaIdProtocolTxFilter.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-filter/src/main/java/com/metanet4j/tx/filter/RepeatSourceDataFilter.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-filter/src/main/java/com/metanet4j/tx/filter/SourceDataFilter.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-tx-filter/src/main/java/com/metanet4j/tx/filter/SourceDataFilterChain.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "metanet4j-tx-validator",
+          "artifactId": "metanet4j-tx-validator",
+          "production": [
+            {
+              "path": "metanet4j-tx-validator/src/main/java/com/metanet4j/tx/validator/executor/MetaDataValidator.java",
+              "kind": "class"
+            },
+            {
+              "path": "metanet4j-tx-validator/src/main/java/com/metanet4j/tx/validator/strategy/ValidateStrategy.java",
+              "kind": "interface"
+            },
+            {
+              "path": "metanet4j-tx-validator/src/main/java/com/metanet4j/tx/validator/strategy/impl/CommonValidateStrategy.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": "mybatispuls-generator",
+          "artifactId": "mybatispuls-generator",
+          "production": [
+            {
+              "path": "mybatispuls-generator/src/main/java/io/metanet/mybatispuls/generator/MybatisPulsCodeGenerator.java",
+              "kind": "class"
+            }
+          ],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        },
+        {
+          "path": ".",
+          "artifactId": "metanet4j-component",
+          "production": [],
+          "testSources": [],
+          "classificationReviewed": false,
+          "integrationBoundariesProposed": [],
+          "integrationReview": "待逐类复核并确认公开接口边界"
+        }
+      ]
+    }
+  ]
+}
