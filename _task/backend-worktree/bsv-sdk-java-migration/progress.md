@@ -2,17 +2,17 @@
 
 ## 执行位置
 
-`activeItem=nextItem=migration-impl-symmetric`；`migration-impl-http-chain` 同步进行。43 个执行事项中 14 done、2 in-progress、27 not-started；28 个编码任务中 7 done、2 in-progress、19 not-started。权威状态与依赖见 [feature_list.json](feature_list.json)。
+`activeItem=nextItem=migration-impl-symmetric`；`migration-impl-script-model`、`migration-impl-wallet-contracts` 并行进行。43 个执行事项中 15 done、3 in-progress、25 not-started；28 个编码任务中 8 done、3 in-progress、17 not-started。权威状态与依赖见 [feature_list.json](feature_list.json)。
 
 ## 已验收结果
 
-- 密钥与签名任务 `migration-impl-keys-signatures` 已通过：Java 工程提交 `67ccb86`，固定 TS 11 个原文件 146/146；共享 Java `clean test` 累计 802/802，失败、错误、跳过均为 0；提交后的 `task-parity.py` 对照 146/146 个原用例、40242/40242 条原断言，缺失、未比较、额外 Java 原断言均为 0。证据目录 `.cache/evidence/keys-final-20260926-133303/`，局部报告 `formalAcceptance=false`。
-- 10,078 次 TS Random 实际输入与 Java 重放资源逐项一致，其中 10,000 次私钥循环保持原规模；BRC42 私钥、公钥向量及 ECDSA、Schnorr、P-256 输入均已执行。篡改循环第 20,000 条 Java 实际值后比较器拒绝通过；检查器自测在宿主环境 41/41 通过。
-- 本项 146 个用例、356 个 AST 位置已映射，累计 778/5329，尚余 4551。七个完整源文件的 129 项 API 已复核，累计 945/3576；API-05 还有归后续交易任务的 48 项，批次保持 in-progress。此前已完成项在共享 Java 全量回归中继续通过。
-- `./init.sh` 与 `node audit-api.cjs batches` 已通过。无过滤 `audit-api.cjs check` 和六模块 `audit-tests.py check` 仍由剩余范围决定。
+- HTTP／chain 任务 `migration-impl-http-chain` 已通过：Java 工程提交 `857928e`，固定 TS 九个原文件 78／78；独立干净工作副本的累计 Java `clean test` 880／880，失败、错误、跳过均为 0；提交后的逐断言对照 78／78 个原用例、133／133 条实际值，missing／uncompared／extra 均为 0。固定 mock 全程离线。证据目录 `.cache/evidence/http-chain-final-20260926-140200/`，局部报告 `formalAcceptance=false`。
+- 13 个完整 HTTP／chain 源文件的 113 项 API 已复核。API-11 另 45 项广播实现归后续任务，批次保持 in-progress；累计 API 映射 1398／3576，其中对称任务 60 项、脚本模型 280 项已审查。HTTP 原用例 78 个、AST 位置 236 个已映射，累计 1960／5329；脚本模型 1104 个用例、228 个 AST 位置已合并。
+- 密钥与签名任务 `migration-impl-keys-signatures` 已通过：Java 工程提交 `67ccb86`，固定 TS 11 个原文件 146／146；累计 Java `clean test` 802／802；提交后逐断言 40242／40242，缺失、未比较、额外 Java 断言均为 0。10,078 次 TS Random 实际输入与 Java 重放逐项一致，其中私钥循环 10,000 次保持原规模。证据目录 `.cache/evidence/keys-final-20260926-133303/`。
+- `./init.sh`、API 批次检查及审计自测已在密钥任务验收时通过；HTTP 状态更新后的批次复核见本次命令记录。六模块无过滤检查继续由剩余任务推进。
 
 ## 当前工作
 
-对称任务的 AESGCM、AsyncCryptoBackend、SymmetricKey 与五个原测试文件由子代理实施；其中 manual 测试保留原 536,870,928 字节规模，另用流式摘要记录实际输入与结果。HTTP/chain 任务依赖已完成的字节模块，另一子代理并行处理 13 个源文件和九个原测试文件。两项完成后按各自冻结用例、API、随机输入及累计 `clean test` 收口并提交。
+对称任务五个原测试文件共 52 个用例；普通四文件 51／51、384／384 断言已通过，536,870,928 字节 manual 用例正按原规模验证。脚本模型已有原测试 1104／1104、实际值 4276／4276 的隔离对照；280 项 API 和 1104 个用例映射已复核，待累计提交后验收。钱包契约原 TS 六文件 253／253 已采集，正在实施 Java 协议类型、错误与验证边界。
 
-仅修改 `metanet4j-bsv-sdk` 的工程代码、测试和 POM；固定 TS 与其他四个 Java 工程只读。根仓既有无关改动保留，不推送、不广播交易或调用真实钱包/外部业务接口。
+仅修改 `metanet4j-bsv-sdk` 的工程代码、测试和 POM；固定 TS 与其他四个 Java 工程只读。根仓既有无关改动保留，不推送、不广播交易或调用真实钱包／外部业务接口。

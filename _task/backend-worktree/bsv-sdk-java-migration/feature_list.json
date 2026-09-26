@@ -724,7 +724,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "wallet：协议类型、错误、参数和字节校验",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-symmetric"
       ],
@@ -876,7 +876,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "transaction：HTTP、链追踪与网络接口",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-byte-codecs"
       ],
@@ -932,18 +932,30 @@
       "apiBatchRefs": [
         "migration-api-transaction-network"
       ],
-      "evidence": [],
+      "evidence": [
+        ".cache/evidence/http-chain-final-20260926-140200/：固定 TS 九文件 78/78，提交后的 Java clean test 累计 880/880；原断言 133/133 逐实际值比较，missing/uncompared/extra 均为 0。",
+        "13 个完整源文件的 113 项 API 声明已复核；API-11 其余 45 项广播实现由后续任务负责。HTTP/链服务全部使用离线 mock，无真实网络请求。"
+      ],
       "modules": [
         "transaction"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 78,
+        "assertionsCompared": 133,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/http-chain-final-20260926-140200/postcommit-parity.json"
+      }
     },
     {
       "id": "migration-impl-script-model",
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "script：脚本模型、解析与错误",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-keys-signatures"
       ],
@@ -2146,14 +2158,17 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "api-map.json：AESGCM、AsyncCryptoBackend、SymmetricKey 三个完整源文件 60/60 项声明逐项复核。",
+        "doc/完整模块与API映射-20260920-122800.md#api-symmetric：AES-GCM、全局可选后端、SymmetricKey 格式与平台差异契约；原 TS/Java 小向量和公开 helpers 证据见 .cache/evidence/symmetric-*。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
@@ -2288,14 +2303,16 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "12 个完整源文件 280 项源码声明已复核并映射到 #api-script-model，含 OP 常量逐值对应；见 .cache/evidence/script-model-api-mapping.json。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
@@ -2437,7 +2454,7 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",

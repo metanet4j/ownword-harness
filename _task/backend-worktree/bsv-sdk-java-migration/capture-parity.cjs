@@ -48,6 +48,17 @@ function thrown(error) {
   return { kind: 'throw', name: mapped, message: error && error.message !== undefined ? String(error.message) : undefined }
 }
 
+function canonicalCallArg(value) {
+  if (typeof value === 'function') return { type: 'string', value: value.name || '<anonymous>' }
+  return canonical(value)
+}
+
+function canonicalCalls(calls) {
+  return { type: 'array', value: calls.map(args => ({
+    type: 'array', value: args.map(canonicalCallArg)
+  })) }
+}
+
 function matcherReceiver(received, matcher) {
   if ((matcher === 'toThrow') && typeof received === 'function') {
     let outcome = null
@@ -68,18 +79,55 @@ function matcherReceiver(received, matcher) {
     const count = received && received.mock ? received.mock.calls.length : 0
     return { receiver: received, getActual: () => canonical(count) }
   }
+  if (matcher === 'toHaveBeenCalledWith') {
+    return { receiver: received, getActual: () => canonicalCalls(received.mock.calls) }
+  }
+  if (matcher === 'toBeDefined') return { receiver: received, getActual: () => canonical(received !== undefined) }
   return { receiver: received, getActual: () => canonical(received, 0, matcher === 'toEqual') }
 }
 
-function wrapAssertion(assertion, received, negated) {
+function wrapAssertion(assertion, received, negated, promiseMode = null) {
   return new Proxy(assertion, {
     get(target, prop) {
-      if (prop === 'not') return wrapAssertion(target.not, received, true)
+      if (prop === 'not') return wrapAssertion(target.not, received, true, promiseMode)
+      if (prop === 'rejects' || prop === 'resolves') return wrapAssertion(target[prop], received, negated, prop)
       const original = target[prop]
       if (typeof original !== 'function') return original
       const matcher = String(prop)
       return (...args) => {
         const { receiver, getActual } = matcherReceiver(received, matcher)
+        const append = (actual, pass) => {
+          const test = nativeExpect.getState().currentTestName || '<unknown>'
+          const key = test + ':' + (negated ? 'not.' : '') + matcher
+          const index = (counters.get(key) || 0) + 1
+          counters.set(key, index)
+          const row = {
+            test,
+            file: path.normalize(nativeExpect.getState().testPath || ''),
+            occurrence: currentOccurrence,
+            index,
+            matcher: (negated ? 'not.' : '') + matcher,
+            negated,
+            actual,
+            expected: matcher === 'toHaveBeenCalledWith'
+              ? { type: 'array', value: args.map(canonicalCallArg) }
+              : args.length === 1
+              ? (matcher === 'toBeInstanceOf' ? canonical(args[0].name) : canonical(args[0], 0, matcher === 'toEqual'))
+              : args.map(a => canonical(a, 0, matcher === 'toEqual')),
+            pass
+          }
+          fs.appendFileSync(output, JSON.stringify(row) + '\n')
+        }
+        if (promiseMode) {
+          const observed = Promise.resolve(received).then(
+            value => promiseMode === 'resolves' ? canonical(value) : { kind: 'return', value: canonical(value) },
+            error => thrown(error)
+          )
+          return Promise.resolve(Reflect.apply(original, target, args)).then(
+            async value => { append(await observed, true); return value },
+            async error => { append(await observed, false); throw error }
+          )
+        }
         let failure = null
         try {
           if (matcher === 'toThrow') {
@@ -92,24 +140,7 @@ function wrapAssertion(assertion, received, negated) {
           failure = error
           throw error
         } finally {
-          const test = nativeExpect.getState().currentTestName || '<unknown>'
-          const key = test + ':' + (negated ? 'not.' : '') + matcher
-          const index = (counters.get(key) || 0) + 1
-          counters.set(key, index)
-          const row = {
-            test,
-            file: path.normalize(nativeExpect.getState().testPath || ''),
-            occurrence: currentOccurrence,
-            index,
-            matcher: (negated ? 'not.' : '') + matcher,
-            negated,
-            actual: failure ? thrown(failure) : getActual(),
-            expected: args.length === 1
-              ? (matcher === 'toBeInstanceOf' ? canonical(args[0].name) : canonical(args[0], 0, matcher === 'toEqual'))
-              : args.map(a => canonical(a, 0, matcher === 'toEqual')),
-            pass: failure === null
-          }
-          fs.appendFileSync(output, JSON.stringify(row) + '\n')
+          append(failure ? thrown(failure) : getActual(), failure === null)
         }
       }
     }

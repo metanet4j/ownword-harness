@@ -22,11 +22,12 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def java_revision():
+def java_revision(repo_paths=None):
     """包含提交及未提交文件，避免新源码沿用旧报告。忽略 Git 已忽略的构建产物。"""
+    repo_paths = repo_paths or {}
     snapshot = {}
     for repo in read(TASK / 'workspace.json')['repositories']:
-        folder = TASK / repo['name']
+        folder = Path(repo_paths.get(repo['name'], TASK / repo['name']))
         commit = subprocess.check_output(['git', '-C', str(folder), 'rev-parse', 'HEAD'], text=True).strip()
         names = subprocess.check_output(['git', '-C', str(folder), 'ls-files', '--cached', '--others', '--exclude-standard', '-z']).decode().split('\0')
         snapshot[repo['name']] = {'commit': commit, 'files': {

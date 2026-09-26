@@ -149,7 +149,7 @@ def read_jsonl(path):
     return [json.loads(line) for line in Path(path).read_text().splitlines() if line.strip()]
 
 
-def compare(task_id, ts_path, java_path):
+def compare(task_id, ts_path, java_path, java_worktree=None):
     task, test_files, case_by_ts, case_by_java, case_file = load_task(task_id)
     ts_rows, java_rows = read_jsonl(ts_path), read_jsonl(java_path)
     ts_by_case, java_by_case = defaultdict(list), defaultdict(list)
@@ -207,10 +207,14 @@ def compare(task_id, ts_path, java_path):
         total_matched += len(matched)
         total_missing += len(unmatched)
         total_extra += extra
+    if java_worktree is not None:
+        dirty = subprocess.check_output(['git', '-C', str(java_worktree), 'status', '--porcelain'], text=True)
+        if dirty.strip():
+            raise ValueError(f'验收 Java worktree 存在未提交源码：{java_worktree}')
     report = {
         'taskId': task_id,
         'upstreamCommit': json.loads((TASK / 'module-tests.json').read_text())['upstreamCommit'],
-        'javaRevision': audit.java_revision(),
+        'javaRevision': audit.java_revision({'metanet4j-bsv-sdk': java_worktree} if java_worktree else None),
         'testFiles': test_files,
         'casesTotal': len(cases),
         'casesCompared': len(cases) - missing_cases,
@@ -223,6 +227,9 @@ def compare(task_id, ts_path, java_path):
         'nondeterministicPolicy': 'Random.* 随机字节用例比较 matcher/期望边界/pass，不比较跨语言随机字节本身。',
         'cases': cases,
     }
+    if java_worktree is not None:
+        report['javaTargetCommit'] = subprocess.check_output(
+            ['git', '-C', str(java_worktree), 'rev-parse', 'HEAD'], text=True).strip()
     report['taskAcceptancePassed'] = (
         report['missingCases'] == 0
         and report['missingAssertions'] == 0
@@ -238,9 +245,13 @@ def main():
     parser.add_argument('--task', required=True)
     parser.add_argument('--ts', required=True, type=Path)
     parser.add_argument('--java', required=True, type=Path)
+    parser.add_argument('--java-worktree', type=Path, help='从干净的独立目标工作树计算验收源码摘要')
     parser.add_argument('--output', required=True, type=Path)
     args = parser.parse_args()
-    report = compare(args.task, args.ts, args.java)
+    try:
+        report = compare(args.task, args.ts, args.java, args.java_worktree)
+    except ValueError as error:
+        parser.error(str(error))
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps({key: report[key] for key in (
         'taskId', 'casesTotal', 'casesCompared', 'assertionsCompared',
