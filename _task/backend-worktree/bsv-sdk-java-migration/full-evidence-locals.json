@@ -754,6 +754,24 @@
       "java_report": [
         ".cache/evidence/utils-point-infinity-java-20260927/surefire.xml"
       ]
+    },
+    {
+      "name": "woc-broadcaster",
+      "catalog": ".cache/evidence/woc-broadcaster-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/woc-broadcaster-plan-20260927/mapping.json",
+      "input_plan": ".cache/evidence/woc-broadcaster-plan-20260927/input-plan.json",
+      "ts_inputs": ".cache/evidence/woc-broadcaster-formal-ts-20260927/inputs.jsonl",
+      "ts_assertions": ".cache/evidence/woc-broadcaster-formal-ts-20260927/assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/woc-broadcaster-formal-ts-20260927/manifest.json",
+      "ts_report": [
+        ".cache/evidence/woc-broadcaster-formal-ts-20260927/jest.json"
+      ],
+      "java_inputs": ".cache/evidence/woc-broadcaster-formal-java-ca3d82f-20260927/inputs.jsonl",
+      "java_assertions": ".cache/evidence/woc-broadcaster-formal-java-ca3d82f-20260927/assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/woc-broadcaster-formal-java-ca3d82f-20260927/manifest.json",
+      "java_report": [
+        ".cache/evidence/woc-broadcaster-formal-java-ca3d82f-20260927/surefire.xml"
+      ]
     }
   ]
 }
