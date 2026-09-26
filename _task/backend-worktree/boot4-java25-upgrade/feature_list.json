@@ -326,9 +326,10 @@
         "sdk 提交 6f32283（交易输入、输出、outpoint 扩展类）；定向 evidence/20260926-u2-transaction-enhance-targeted/：2/0/0/0，三类逐类 LINE/METHOD 100%",
         "sdk 提交 7b3d43d（签名上下文按哈希查找和线程隔离）；定向 evidence/20260926-u2-threadlocal-targeted/：2/0/0/0，AllHashSigThreadLocal LINE 7/7、BRANCH 2/2、METHOD 4/4",
         "sdk 提交 da46655（独立 ForkID 预映像向量，ALL/SINGLE/NONE × ANYONECANPAY）；定向 evidence/20260926-u2-sighash-targeted/：2/0/0/0，SigHashExtend BRANCH 25/26、LINE 50/53、METHOD 1/2",
-        "sdk 提交 39f82a9（二进制消息签名、紧凑签名和公钥恢复）；定向 evidence/20260926-u2-eckey-targeted/：1/0/0/0，EcKeyLiteExtend LINE 28/30、BRANCH 7/12、METHOD 7/7"
+        "sdk 提交 39f82a9（二进制消息签名、紧凑签名和公钥恢复）；定向 evidence/20260926-u2-eckey-targeted/：1/0/0/0，EcKeyLiteExtend LINE 28/30、BRANCH 7/12、METHOD 7/7",
+        "当前 SDK HEAD 39f82a9 的宿主全量隔离单元基线 evidence/20260926T150042Z/：96/0/0/0，LINE 1116/1989、BRANCH 312/508、METHOD 284/454"
       ],
-      "statusNote": "SDK 至 39f82a9；胡先生要求完成最近子项后暂时停止，U2 保持 in-progress。EcKeyLiteExtend 定向 1/0/0/0，LINE 28/30、BRANCH 7/12、METHOD 7/7。最新全量基线仍是旧提交 1e14af8 的 73/0/0/0、LINE 899/1984；当前提交因宿主自动审批使用额度上限无法复跑全量，U2 严格验收尚未完成。U3—U9 未开始。"
+      "statusNote": "SDK HEAD 39f82a9；胡先生已要求子代理继续 U2。当前提交宿主全量单元基线 96/0/0/0，LINE 1116/1989、BRANCH 312/508、METHOD 284/454，证据 evidence/20260926T150042Z/；严格 100% 验收尚未完成。Bob/Txo 与数据脚本签名子项正在分别实施，U3—U9 未开始。"
     },
     {
       "id": "unit-u3-foundation",

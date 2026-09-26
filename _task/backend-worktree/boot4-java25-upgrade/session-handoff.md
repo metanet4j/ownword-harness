@@ -2,7 +2,7 @@
 
 ## 当前任务
 
-胡先生要求四个子仓库建立完整单元测试与集成测试，并已确认通过公开 API 测试；MongoDB、ES、MySQL、Kafka、Redis、文件和 HTTP 边界实测，公网服务本地模拟，自动测试不广播主网。当前 `unit-u2-sdk` 未完成，胡先生要求完成最近子项后暂时停止；U0 测试基线及 U1 base 已完成。
+胡先生要求四个子仓库建立完整单元测试与集成测试，并已确认通过公开 API 测试；MongoDB、ES、MySQL、Kafka、Redis、文件和 HTTP 边界实测，公网服务本地模拟，自动测试不广播主网。当前 `unit-u2-sdk` 已恢复实施；U0 测试基线及 U1 base 已完成。
 
 开始工作时读取 `../AGENTS.md`、`../mvn-command.md`、本目录 `AGENTS.md`、[测试计划](doc/单元测试全覆盖计划-20260920-090603.md)、`feature_list.json`，再运行 `./init.sh`。遵守单功能项实施、提交和测试门禁；不读取 Archive，不推送，不修改四仓基线。
 
@@ -44,8 +44,8 @@ U2 追加 sdk `ea025e7`（旧版 CryptoHelper 派生测试）和 `5cd4abf`（胡
 
 ## 下一步
 
-胡先生已要求暂时停止；待明确要求继续后再执行后续测试工作。
+胡先生已要求派遣子代理继续；Bob/Txo 转换和数据脚本签名子项分别实施。共享 SDK `target` 只能串行运行 Maven，主代理负责统一验证、提交与证据登记。
 
-自动审批额度恢复后，先在宿主复跑 `python3 verify-unit.py --mode baseline --scope metanet4j-sdk`，核对当前提交和逐类覆盖率；再继续 SDK 剩余公开 API 测试。旧提交缺口见 `evidence/20260926T095306Z/metanet4j-sdk/metanet4j-sdk/unit/jacoco-unit/jacoco.xml`。严格验收须逐类 LINE/BRANCH/METHOD 100%，完成后继续 U3。
+当前 SDK HEAD `39f82a9` 的宿主全量隔离单元基线已跑：96/0/0/0，LINE 1116/1989、BRANCH 312/508、METHOD 284/454，证据 `evidence/20260926T150042Z/`。继续 SDK 剩余公开 API 测试。旧提交缺口见 `evidence/20260926T095306Z/metanet4j-sdk/metanet4j-sdk/unit/jacoco-unit/jacoco.xml`。严格验收须逐类 LINE/BRANCH/METHOD 100%，完成后继续 U3。
 
 集成测试运行前核对 `infra/README-*.md` 连接参数、`docker logs`、应用日志和 Surefire XML，宿主提权运行。当前 `EsTest` 会删除固定索引、`DefaultCompleteTxFactory` 硬编码广播；未隔离前不运行这些历史实连用例。

@@ -6,8 +6,8 @@
 
 - **更新时间**：2026-09-26。
 - **当前目标**：为四个子仓库建立完整单元测试、集成测试与逐模块覆盖率证据。
-- **当前阶段**：`unit-u2-sdk` 未完成；按胡先生要求暂时停止。U0 测试基线及 U1 base 已完成，U3—U9 待实施。
-- **下一步**：待胡先生要求继续后，先在宿主复跑当前提交的 SDK 全量 `verify-unit.py`，再继续 SDK 剩余公开 API 测试和逐类覆盖。
+- **当前阶段**：`unit-u2-sdk` 已恢复实施，子代理分别处理 Bob/Txo 与数据脚本签名；U0 测试基线及 U1 base 已完成，U3—U9 待实施。
+- **下一步**：当前提交的 SDK 全量基线已在宿主复跑；串行验证子代理提交的测试，继续 SDK 剩余公开 API 与逐类覆盖。
 
 ## 已验证结果
 
@@ -57,7 +57,9 @@ U2 签名上下文线程隔离子项提交 `7b3d43d`：按哈希取回、缺失�
 
 U2 ForkID 签名哈希子项提交 `da46655`：独立预映像核对 ALL/SINGLE/NONE × ANYONECANPAY 与缺失输出，定向 `clean test` 2/0/0/0。`SigHashExtend` BRANCH 25/26、LINE 50/53、METHOD 1/2；未知消息长度容量分支、不可达 I/O 异常处理和隐式构造器仍有缺口，证据 `evidence/20260926-u2-sighash-targeted/`。SDK 全量仍待宿主验证。
 
-U2 二进制消息签名子项提交 `39f82a9`：固定非 UTF-8 消息签名、哈希签名一致性、紧凑签名公钥恢复和改动消息失效有断言。定向 `clean test` 1/0/0/0，`EcKeyLiteExtend` LINE 28/30、BRANCH 7/12、METHOD 7/7，证据 `evidence/20260926-u2-eckey-targeted/`。胡先生要求完成本项后暂停；SDK 全量仍待宿主验证。
+U2 二进制消息签名子项提交 `39f82a9`：固定非 UTF-8 消息签名、哈希签名一致性、紧凑签名公钥恢复和改动消息失效有断言。定向 `clean test` 1/0/0/0，`EcKeyLiteExtend` LINE 28/30、BRANCH 7/12、METHOD 7/7，证据 `evidence/20260926-u2-eckey-targeted/`。
+
+当前 SDK HEAD `39f82a9` 的宿主全量隔离单元基线：96/0/0/0，LINE 1116/1989、BRANCH 312/508、METHOD 284/454，证据 `evidence/20260926T150042Z/`。基线采集成功，但严格 100% 验收仍未完成。
 
 ## 仓库与工作区
 
