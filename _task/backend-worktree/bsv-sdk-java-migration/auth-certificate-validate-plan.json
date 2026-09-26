@@ -1,0 +1,130 @@
+{
+  "07a5dbdce1f6d9f8c7cf13e2e2c12109004de34ab68186fde3e000b0910ee7d0": {
+    "sampleIds": [
+      "invocation",
+      "verify-0",
+      "decrypt-0"
+    ],
+    "assertionIds": [
+      "src/auth/utils/__tests/validateCertificates.test.ts:77:11:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:81:5:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:84:5:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:85:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/utils/__tests/validateCertificates.test.ts:77:11:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:77:11:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:81:5:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:81:5:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:84:5:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:84:5:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:85:5:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:85:5:assertion"
+    }
+  },
+  "8f2b06fb4bac7d2fa27c954289f66801fb2040eea34809930de969d622eac12a": {
+    "sampleIds": [
+      "invocation"
+    ],
+    "assertionIds": [
+      "src/auth/utils/__tests/validateCertificates.test.ts:91:11:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/utils/__tests/validateCertificates.test.ts:91:11:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:91:11:assertion"
+    }
+  },
+  "50be58fc7e604324292df73350ecd0407df30f4cc622793d9b306637944b7fae": {
+    "sampleIds": [
+      "invocation",
+      "verify-0"
+    ],
+    "assertionIds": [
+      "src/auth/utils/__tests/validateCertificates.test.ts:99:11:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/utils/__tests/validateCertificates.test.ts:99:11:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:99:11:assertion"
+    }
+  },
+  "277465f431806550f2d40562615e591d2abc0a0e60c577cd3f04bc976dfd3ffd": {
+    "sampleIds": [
+      "invocation",
+      "verify-0"
+    ],
+    "assertionIds": [
+      "src/auth/utils/__tests/validateCertificates.test.ts:110:11:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/utils/__tests/validateCertificates.test.ts:110:11:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:110:11:assertion"
+    }
+  },
+  "a3395b245234950d0b1f062970584e44ecd349cd7dd90dc49bc9655e879db1ae": {
+    "sampleIds": [
+      "invocation",
+      "verify-0"
+    ],
+    "assertionIds": [
+      "src/auth/utils/__tests/validateCertificates.test.ts:123:11:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/utils/__tests/validateCertificates.test.ts:123:11:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:123:11:assertion"
+    }
+  },
+  "d7c84d782a644801d5697f2676a786714ad43a1999e2d3bd26bfe8b2cc67a9d2": {
+    "sampleIds": [
+      "invocation",
+      "verify-0",
+      "decrypt-0"
+    ],
+    "assertionIds": [
+      "src/auth/utils/__tests/validateCertificates.test.ts:129:11:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:133:7:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/utils/__tests/validateCertificates.test.ts:129:11:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:129:11:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:133:7:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:133:7:assertion"
+    },
+    "loopSamples": {
+      "src/auth/utils/__tests/validateCertificates.test.ts:132:5:loop": [
+        "decrypt-0"
+      ]
+    }
+  },
+  "1800d7778017c44690035a8d2505605c296b0b79e6d4724aa21e6515e9f8305d": {
+    "sampleIds": [
+      "invocation",
+      "verify-0",
+      "decrypt-0"
+    ],
+    "assertionIds": [
+      "src/auth/utils/__tests/validateCertificates.test.ts:139:11:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/utils/__tests/validateCertificates.test.ts:139:11:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:139:11:assertion"
+    }
+  },
+  "4c3b952ad3546f2aa72a27b21cc960ae4cf10925bc9346822aefec05fe0b44c5": {
+    "sampleIds": [
+      "invocation",
+      "verify-0",
+      "verify-1",
+      "decrypt-0",
+      "decrypt-1"
+    ],
+    "assertionIds": [
+      "src/auth/utils/__tests/validateCertificates.test.ts:157:11:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:161:5:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:162:5:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:164:7:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:164:7:assertion#2"
+    ],
+    "assertionSites": {
+      "src/auth/utils/__tests/validateCertificates.test.ts:157:11:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:157:11:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:161:5:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:161:5:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:162:5:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:162:5:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:164:7:assertion": "src/auth/utils/__tests/validateCertificates.test.ts:164:7:assertion",
+      "src/auth/utils/__tests/validateCertificates.test.ts:164:7:assertion#2": "src/auth/utils/__tests/validateCertificates.test.ts:164:7:assertion"
+    },
+    "loopSamples": {
+      "src/auth/utils/__tests/validateCertificates.test.ts:163:5:loop": [
+        "decrypt-0",
+        "decrypt-1"
+      ]
+    }
+  }
+}
