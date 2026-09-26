@@ -10792,7 +10792,7 @@
     {
       "id": "src/primitives/utils.ts#function-variable:encode:1",
       "java": "com.metanet4j.bsv.primitives.Utils#encode",
-      "javaSignature": "public static Object encode(List<?> arr, Object enc)",
+      "javaSignature": "public static Object encode(List<?> arr); public static Object encode(List<?> arr, Object enc)",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-utils-encoding",
       "review": "reviewed",
       "evidence": [
