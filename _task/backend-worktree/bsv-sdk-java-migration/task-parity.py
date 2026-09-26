@@ -147,7 +147,7 @@ def load_task(task_id):
     if set(file_objects) != set(test_files):
         missing = sorted(set(test_files) - set(file_objects))
         raise SystemExit(f'冻结清单缺少任务测试文件：{missing}')
-    case_by_ts, case_by_java, case_file = {}, {}, {}
+    case_by_ts, case_by_java, case_file = {}, defaultdict(list), {}
     for test_file in test_files:
         file_obj = file_objects[test_file]
         for case in file_obj['cases']:
@@ -155,8 +155,10 @@ def load_task(task_id):
             case_by_ts[(test_file, full_name, case.get('occurrence', 1))] = case['id']
             case_file[case['id']] = test_file
     for case in mapping['cases']:
+        if case['id'] not in case_file:
+            continue
         for java in case.get('java', []):
-            case_by_java[(java['className'], java['name'])] = case['id']
+            case_by_java[(java['className'], java['name'])].append(case['id'])
     return task, test_files, case_by_ts, case_by_java, case_file
 
 
@@ -190,8 +192,7 @@ def compare(task_id, ts_path, java_path, java_worktree=None):
             ts_by_case[case_id].append(row)
     for row in java_rows:
         identity = tuple(str(row.get('test', '')).split('#', 1))
-        case_id = case_by_java.get(identity)
-        if case_id is not None:
+        for case_id in case_by_java.get(identity, []):
             java_by_case[case_id].append(row)
 
     cases = []

@@ -1368,7 +1368,9 @@
         "migration-api-transaction-model",
         "migration-api-script-spend"
       ],
-      "evidence": [],
+      "evidence": [
+        "555 个固定原测试在 TS 与提交后干净 Java 工作树均通过；.cache/evidence/script-vectors-clean-parity.json 逐实际值 555/555、925/925，缺失与额外断言为 0。"
+      ],
       "modules": [
         "script",
         "transaction"
@@ -1385,7 +1387,16 @@
         "src/script/__tests/fixtures/teranode/tx_valid.json",
         "src/script/__tests/spend.valid.vectors.ts",
         "src/script/__tests/sighashTestData.ts"
-      ]
+      ],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 555,
+        "assertionsCompared": 925,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/script-vectors-clean-parity.json"
+      }
     },
     {
       "id": "migration-impl-broadcasters",
@@ -1551,7 +1562,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "wallet：二进制协议与 Wire 传输",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-auth-certificates"
       ],
@@ -1584,11 +1595,22 @@
       "apiBatchRefs": [
         "migration-api-wallet-wire"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标提交 910013e；固定 TS 两文件与提交后干净 Java 工作树均通过 128/128；.cache/evidence/wallet-wire-clean-parity-f6034bf.json 逐实际值 351/351，缺失与额外断言为 0。"
+      ],
       "modules": [
         "wallet"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 128,
+        "assertionsCompared": 351,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/wallet-wire-clean-parity-f6034bf.json"
+      }
     },
     {
       "id": "migration-impl-wallet-json",
@@ -1648,7 +1670,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "wallet：浏览器与 React Native 桥接",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-wallet-contracts"
       ],
@@ -1678,18 +1700,31 @@
       "apiBatchRefs": [
         "migration-api-wallet-clients"
       ],
-      "evidence": [],
+      "evidence": [
+        "目标提交 c062276、cafa005；固定 TS 三文件 126/126、287 条断言，离线网络调用 0。",
+        "提交后干净目标工作树宿主 Maven：XDM 70/70、ReactNative 25/25、Window CWI 31/31；BRC100 相关回归 25/25、WalletWire proofType 聚焦用例通过。",
+        ".cache/evidence/wallet-hosts-clean-task-parity.json 逐实际值 126/126、287/287；缺失、额外断言与未比较项均为 0；46 项宿主 API 已映射。"
+      ],
       "modules": [
         "wallet"
       ],
-      "fixtureFiles": []
+      "fixtureFiles": [],
+      "taskAcceptance": {
+        "status": "passed",
+        "casesCompared": 126,
+        "assertionsCompared": 287,
+        "missingCases": 0,
+        "missingAssertions": 0,
+        "uncompared": 0,
+        "compareReport": ".cache/evidence/wallet-hosts-clean-task-parity.json"
+      }
     },
     {
       "id": "migration-impl-wallet-client",
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "wallet：WalletClient 连接与模块收口",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "migration-impl-wallet-wire",
         "migration-impl-wallet-json",
@@ -2621,14 +2656,16 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "node audit-api.cjs batches：108/108 项声明结构复核通过；行为依据 doc/完整模块与API映射-20260920-122800.md#api-script-spend，逐值报告见 .cache/evidence/script-vectors-clean-parity.json。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [
@@ -2778,14 +2815,16 @@
       "dependencies": [
         "migration-scope-review"
       ],
-      "status": "not-started",
+      "status": "done",
       "stepsRef": "apiBatchPolicy.steps",
       "outputs": [
         "api-map.json 中本批次全部声明的设计映射",
         "API 契约文档的本批次行为说明与证据"
       ],
       "acceptanceCriteriaRef": "apiBatchPolicy.acceptanceCriteria",
-      "evidence": [],
+      "evidence": [
+        "node audit-api.cjs batches：121/121 项声明结构复核通过；行为依据 doc/完整模块与API映射-20260920-122800.md#api-wallet-wire，逐值报告见 .cache/evidence/wallet-wire-clean-parity-f6034bf.json。"
+      ],
       "scopeRef": "scope",
       "execution": "within-implementation",
       "implementationTasks": [

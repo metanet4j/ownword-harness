@@ -32335,6 +32335,3316 @@
         "src/auth/utils/validateCertificates.ts:13",
         "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/utils/ValidateCertificates.java:26"
       ]
+    },
+    {
+      "id": "src/wallet/substrates/HTTPWalletWire.ts#class:HTTPWalletWire:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.HTTPWalletWire",
+      "javaSignature": "public class HTTPWalletWire implements WalletWire",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/HTTPWalletWire.ts:5",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/HTTPWalletWire.java:15"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/HTTPWalletWire.ts#constructor:HTTPWalletWire.constructor:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.HTTPWalletWire#<init>",
+      "javaSignature": "public HTTPWalletWire(String originator) { this(originator, \"http://localhost:3301\"); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/HTTPWalletWire.ts:10",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/HTTPWalletWire.java:21"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/HTTPWalletWire.ts#method:HTTPWalletWire.transmitToWallet:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.HTTPWalletWire#transmitToWallet",
+      "javaSignature": "@Override public CompletableFuture<List<Integer>> transmitToWallet(List<? extends Number> message)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/HTTPWalletWire.ts:20",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/HTTPWalletWire.java:31"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/HTTPWalletWire.ts#method:HTTPWalletWire.transmitToWalletUint8Array:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.HTTPWalletWire#transmitToWalletUint8Array",
+      "javaSignature": "@Override public CompletableFuture<ByteView> transmitToWalletUint8Array(ByteView message)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/HTTPWalletWire.ts:24",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/HTTPWalletWire.java:35"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/HTTPWalletWire.ts#property:HTTPWalletWire.baseUrl:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.HTTPWalletWire#baseUrl",
+      "javaSignature": "public String baseUrl;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/HTTPWalletWire.ts:6",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/HTTPWalletWire.java:17"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/HTTPWalletWire.ts#property:HTTPWalletWire.httpClient:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.HTTPWalletWire#httpClient",
+      "javaSignature": "public FetchHttpClient.Fetch httpClient;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/HTTPWalletWire.ts:7",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/HTTPWalletWire.java:18"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/HTTPWalletWire.ts#property:HTTPWalletWire.originator:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.HTTPWalletWire#originator",
+      "javaSignature": "public String originator;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/HTTPWalletWire.ts:8",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/HTTPWalletWire.java:19"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWire.ts#interface:WalletWire:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWire",
+      "javaSignature": "public interface WalletWire",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWire.ts:4",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWire.java:8"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWire.ts#property:WalletWire.transmitToWallet:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWire#transmitToWallet",
+      "javaSignature": "CompletableFuture<List<Integer>> transmitToWallet(List<? extends Number> message);",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWire.ts:5",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWire.java:9"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWire.ts#property:WalletWire.transmitToWalletUint8Array:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWire#transmitToWalletUint8Array",
+      "javaSignature": "default CompletableFuture<ByteView> transmitToWalletUint8Array(ByteView message)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWire.ts:11",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWire.java:11"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.abortAction:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#abortAction",
+      "javaSignature": "abortAction(3)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:5",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:7"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.acquireCertificate:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#acquireCertificate",
+      "javaSignature": "acquireCertificate(17)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:19",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:10"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.createAction:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#createAction",
+      "javaSignature": "createAction(1)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:3",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:7"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.createHmac:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#createHmac",
+      "javaSignature": "createHmac(13)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:15",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:9"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.createSignature:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#createSignature",
+      "javaSignature": "createSignature(15)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:17",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:10"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.decrypt:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#decrypt",
+      "javaSignature": "decrypt(12)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:14",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:9"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.discoverByAttributes:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#discoverByAttributes",
+      "javaSignature": "discoverByAttributes(22)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:24",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:12"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.discoverByIdentityKey:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#discoverByIdentityKey",
+      "javaSignature": "discoverByIdentityKey(21)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:23",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:11"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.encrypt:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#encrypt",
+      "javaSignature": "encrypt(11)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:13",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:9"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.getHeaderForHeight:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#getHeaderForHeight",
+      "javaSignature": "getHeaderForHeight(26)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:28",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:13"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.getHeight:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#getHeight",
+      "javaSignature": "getHeight(25)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:27",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:12"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.getNetwork:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#getNetwork",
+      "javaSignature": "getNetwork(27)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:29",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:13"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.getPublicKey:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#getPublicKey",
+      "javaSignature": "getPublicKey(8)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:10",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:8"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.getVersion:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#getVersion",
+      "javaSignature": "getVersion(28)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:30",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:13"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.internalizeAction:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#internalizeAction",
+      "javaSignature": "internalizeAction(5)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:7",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:7"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.isAuthenticated:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#isAuthenticated",
+      "javaSignature": "isAuthenticated(23)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:25",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:12"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.listActions:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#listActions",
+      "javaSignature": "listActions(4)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:6",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:7"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.listCertificates:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#listCertificates",
+      "javaSignature": "listCertificates(18)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:20",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:10"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.listOutputs:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#listOutputs",
+      "javaSignature": "listOutputs(6)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:8",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:8"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.proveCertificate:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#proveCertificate",
+      "javaSignature": "proveCertificate(19)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:21",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:11"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.relinquishCertificate:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#relinquishCertificate",
+      "javaSignature": "relinquishCertificate(20)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:22",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:11"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.relinquishOutput:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#relinquishOutput",
+      "javaSignature": "relinquishOutput(7)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:9",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:8"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.revealCounterpartyKeyLinkage:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#revealCounterpartyKeyLinkage",
+      "javaSignature": "revealCounterpartyKeyLinkage(9)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:11",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:8"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.revealSpecificKeyLinkage:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#revealSpecificKeyLinkage",
+      "javaSignature": "revealSpecificKeyLinkage(10)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:12",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:9"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.signAction:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#signAction",
+      "javaSignature": "signAction(2)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:4",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:7"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.verifyHmac:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#verifyHmac",
+      "javaSignature": "verifyHmac(14)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:16",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:9"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.verifySignature:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#verifySignature",
+      "javaSignature": "verifySignature(16)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:18",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:10"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum-member:calls.waitForAuthentication:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls#waitForAuthentication",
+      "javaSignature": "waitForAuthentication(24)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:26",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:12"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#enum:calls:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls",
+      "javaSignature": "public enum WalletWireCalls",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:2",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:6"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#export-assignment:default:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls",
+      "javaSignature": "public enum WalletWireCalls",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:33",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:6"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireCalls.ts#type:CallType:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireCalls",
+      "javaSignature": "public enum WalletWireCalls",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireCalls.ts:34",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireCalls.java:6"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#class:WalletWireProcessor:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor",
+      "javaSignature": "public class WalletWireProcessor implements WalletWire",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:10",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:22"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#constructor:WalletWireProcessor.constructor:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor#<init>",
+      "javaSignature": "public WalletWireProcessor(WalletInterface wallet) { this.wallet = wallet; }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:13",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:25"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#method:WalletWireProcessor.decodeCounterparty:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor#counterparty",
+      "javaSignature": "private static String counterparty(ReaderUint8Array reader)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:2035",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:307"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#method:WalletWireProcessor.decodeKeyRelatedParams:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor#readKeyRelated",
+      "javaSignature": "private static void readKeyRelated(ReaderUint8Array reader, WalletEncryptionArgs args)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:2130",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:323"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#method:WalletWireProcessor.decodeOutpoint:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor#readOutpoint",
+      "javaSignature": "private static String readOutpoint(ReaderUint8Array reader)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:40",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:460"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#method:WalletWireProcessor.decodePrivilegedParams:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor#readPrivileged",
+      "javaSignature": "private static void readPrivileged(ReaderUint8Array reader, WalletEncryptionArgs args)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:2049",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:318"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#method:WalletWireProcessor.decodeProtocolID:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor#protocolID",
+      "javaSignature": "private static List<Object> protocolID(ReaderUint8Array reader)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:2021",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:303"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#method:WalletWireProcessor.decodeString:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor#utf8",
+      "javaSignature": "private static String utf8(ByteView bytes) { return new String(bytes.toByteArray(), StandardCharsets.UTF_8); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:2029",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:274"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#method:WalletWireProcessor.encodeOutpoint:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor#writeOutpoint",
+      "javaSignature": "private static void writeOutpoint(WriterUint8Array writer, String outpoint)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:47",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:464"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#method:WalletWireProcessor.processMessage:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor#transmitToWalletUint8Array",
+      "javaSignature": "@Override public CompletableFuture<ByteView> transmitToWalletUint8Array(ByteView message)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:63",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:31"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#method:WalletWireProcessor.recordFromWireEntries:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor#readRecord",
+      "javaSignature": "args.attributes = readRecord(reader, \"attributes\", false);",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:17",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:230"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#method:WalletWireProcessor.serializeDiscoveryResult:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor#writeDiscovery",
+      "javaSignature": "private static ByteView writeDiscovery(DiscoverCertificatesResult result)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:2061",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:777"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#method:WalletWireProcessor.transmitToWallet:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor#transmitToWallet",
+      "javaSignature": "@Override public CompletableFuture<List<Integer>> transmitToWallet(List<? extends Number> message)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:55",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:27"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#method:WalletWireProcessor.transmitToWalletUint8Array:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor#transmitToWalletUint8Array",
+      "javaSignature": "@Override public CompletableFuture<ByteView> transmitToWalletUint8Array(ByteView message)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:59",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:31"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireProcessor.ts#property:WalletWireProcessor.wallet:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireProcessor#wallet",
+      "javaSignature": "public WalletInterface wallet;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireProcessor.ts:11",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireProcessor.java:23"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#class:WalletWireTransceiver:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver",
+      "javaSignature": "public final class WalletWireTransceiver implements WalletInterface {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:69",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:21"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#constructor:WalletWireTransceiver.constructor:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#WalletWireTransceiver",
+      "javaSignature": "public WalletWireTransceiver(WalletWire wire) { this.wire = wire; }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:72",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:23"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.abortAction:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#abortAction",
+      "javaSignature": "@Override public CompletableFuture<AbortActionResult> abortAction(AbortActionArgs args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:264",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:458"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.acquireCertificate:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#acquireCertificate",
+      "javaSignature": "@Override public CompletableFuture<WalletCertificate> acquireCertificate(",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1165",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:637"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.createAction:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#createAction",
+      "javaSignature": "@Override public CompletableFuture<CreateActionResult> createAction(CreateActionArgs args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:119",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:346"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.createHmac:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#createHmac",
+      "javaSignature": "@Override public CompletableFuture<CreateHmacResult> createHmac(CreateHmacArgs args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:791",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:256"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.createSignature:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#createSignature",
+      "javaSignature": "@Override public CompletableFuture<CreateSignatureResult> createSignature(CreateSignatureArgs args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:854",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:277"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.decrypt:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#decrypt",
+      "javaSignature": "@Override public CompletableFuture<WalletDecryptResult> decrypt(WalletDecryptArgs args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:760",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:246"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.discoverByAttributes:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#discoverByAttributes",
+      "javaSignature": "@Override public CompletableFuture<DiscoverCertificatesResult> discoverByAttributes(",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1494",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:772"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.discoverByIdentityKey:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#discoverByIdentityKey",
+      "javaSignature": "@Override public CompletableFuture<DiscoverCertificatesResult> discoverByIdentityKey(",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1463",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:762"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.encodeKeyRelatedParams:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#writeKeyRelated",
+      "javaSignature": "private static void writeKeyRelated(WriterUint8Array writer, List<Object> protocolID,",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1137",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:124"
+      ],
+      "note": "TS 私有步骤在 Java 中由 writeKeyRelated 承接，保持相同线协议字段顺序。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.encodeOutpoint:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#writeOutpoint",
+      "javaSignature": "private static void writeOutpoint(WriterUint8Array writer, String outpoint) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:563",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:109"
+      ],
+      "note": "TS 私有步骤在 Java 中由 writeOutpoint 承接，保持相同线协议字段顺序。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.encodePrivilegedParams:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#writePrivileged",
+      "javaSignature": "private static void writePrivileged(WriterUint8Array writer, Boolean value, String reason) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1226",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:116"
+      ],
+      "note": "TS 私有步骤在 Java 中由 writePrivileged 承接，保持相同线协议字段顺序。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.encrypt:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#encrypt",
+      "javaSignature": "@Override public CompletableFuture<WalletEncryptResult> encrypt(WalletEncryptArgs args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:729",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:236"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.getHeaderForHeight:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#getHeaderForHeight",
+      "javaSignature": "@Override public CompletableFuture<GetHeaderResult> getHeaderForHeight(GetHeaderArgs args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1560",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:192"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.getHeight:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#getHeight",
+      "javaSignature": "@Override public CompletableFuture<GetHeightResult> getHeight(Map<String, Object> args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1549",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:185"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.getNetwork:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#getNetwork",
+      "javaSignature": "@Override public CompletableFuture<GetNetworkResult> getNetwork(Map<String, Object> args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1572",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:201"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.getPublicKey:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#getPublicKey",
+      "javaSignature": "@Override public CompletableFuture<GetPublicKeyResult> getPublicKey(GetPublicKeyArgs args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:577",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:216"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.getVersion:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#getVersion",
+      "javaSignature": "@Override public CompletableFuture<GetVersionResult> getVersion(Map<String, Object> args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1582",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:208"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.internalizeAction:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#internalizeAction",
+      "javaSignature": "@Override public CompletableFuture<InternalizeActionResult> internalizeAction(",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:425",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:545"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.isAuthenticated:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#isAuthenticated",
+      "javaSignature": "@Override public CompletableFuture<AuthenticatedResult> isAuthenticated(Map<String, Object> args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1532",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:171"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.listActions:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#listActions",
+      "javaSignature": "@Override public CompletableFuture<ListActionsResult> listActions(ListActionsArgs args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:272",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:466"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.listCertificates:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#listCertificates",
+      "javaSignature": "@Override public CompletableFuture<ListCertificatesResult> listCertificates(",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1243",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:667"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.listOutputs:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#listOutputs",
+      "javaSignature": "@Override public CompletableFuture<ListOutputsResult> listOutputs(ListOutputsArgs args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:482",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:578"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.parseAction:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readAction",
+      "javaSignature": "private static WalletAction readAction(ReaderUint8Array reader) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:321",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:487"
+      ],
+      "note": "TS 私有步骤在 Java 中由 readAction 承接，保持相同线协议字段顺序。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.parseActionInput:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readAction",
+      "javaSignature": "if (length >= 0) input.unlockingScript = hex(reader.read(length));",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:360",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:515"
+      ],
+      "note": "TS 私有步骤在 Java 中由 readAction 承接，保持相同线协议字段顺序。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.parseActionOutput:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readAction",
+      "javaSignature": "WalletActionOutput output = new WalletActionOutput();",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:386",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:525"
+      ],
+      "note": "TS 私有步骤在 Java 中由 readAction 承接，保持相同线协议字段顺序。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.parseActionStatus:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readAction",
+      "javaSignature": "String[] status = {\"\", \"completed\", \"unprocessed\", \"sending\", \"unproven\",",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:315",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:492"
+      ],
+      "note": "TS 私有步骤在 Java 中由 readAction 承接，保持相同线协议字段顺序。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.parseCreateActionResult:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#parseCreateActionResult",
+      "javaSignature": "private static CreateActionResult parseCreateActionResult(ByteView data) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:189",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:410"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.parseDiscoveryResult:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#parseDiscoveryResult",
+      "javaSignature": "private static DiscoverCertificatesResult parseDiscoveryResult(ByteView data) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1381",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:734"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.parseListOutputEntry:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#listOutputs",
+      "javaSignature": "output.outpoint = readOutpoint(reader);",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:521",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:603"
+      ],
+      "note": "TS 私有步骤在 Java 中由 listOutputs 承接，保持相同线协议字段顺序。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.proveCertificate:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#proveCertificate",
+      "javaSignature": "@Override public CompletableFuture<ProveCertificateResult> proveCertificate(",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1311",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:703"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.readOutpoint:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readOutpoint",
+      "javaSignature": "private static String readOutpoint(ReaderUint8Array reader) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:571",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:113"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.readSendWithResults:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readSendWithResults",
+      "javaSignature": "private static List<SendWithResult> readSendWithResults(ReaderUint8Array reader) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1006",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:96"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.relinquishCertificate:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#relinquishCertificate",
+      "javaSignature": "@Override public CompletableFuture<RelinquishCertificateResult> relinquishCertificate(",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1362",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:723"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.relinquishOutput:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#relinquishOutput",
+      "javaSignature": "@Override public CompletableFuture<RelinquishOutputResult> relinquishOutput(",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:550",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:624"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.revealCounterpartyKeyLinkage:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#revealCounterpartyKeyLinkage",
+      "javaSignature": "@Override public CompletableFuture<RevealCounterpartyKeyLinkageResult> revealCounterpartyKeyLinkage(",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:622",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:306"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.revealSpecificKeyLinkage:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#revealSpecificKeyLinkage",
+      "javaSignature": "@Override public CompletableFuture<RevealSpecificKeyLinkageResult> revealSpecificKeyLinkage(",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:667",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:324"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.serializeCreateActionInput:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#writeCreateActionInput",
+      "javaSignature": "private static void writeCreateActionInput(WriterUint8Array writer, CreateActionInput input) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1027",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:373"
+      ],
+      "note": "TS 私有步骤在 Java 中由 writeCreateActionInput 承接，保持相同线协议字段顺序。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.serializeCreateActionOptions:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#writeCreateActionOptions",
+      "javaSignature": "private static void writeCreateActionOptions(WriterUint8Array writer, CreateActionOptions options) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1075",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:393"
+      ],
+      "note": "TS 私有步骤在 Java 中由 writeCreateActionOptions 承接，保持相同线协议字段顺序。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.serializeCreateActionOutput:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#writeCreateActionOutput",
+      "javaSignature": "private static void writeCreateActionOutput(WriterUint8Array writer, CreateActionOutput output) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1053",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:385"
+      ],
+      "note": "TS 私有步骤在 Java 中由 writeCreateActionOutput 承接，保持相同线协议字段顺序。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.serializeInternalizeOutput:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#internalizeAction",
+      "javaSignature": "for (InternalizeOutput output : args.outputs) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:445",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:550"
+      ],
+      "note": "TS 私有步骤在 Java 中由 internalizeAction 承接，保持相同线协议字段顺序。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.serializeSignActionOptions:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#writeSignActionOptions",
+      "javaSignature": "private static void writeSignActionOptions(WriterUint8Array writer, SignActionOptions options) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1115",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:450"
+      ],
+      "note": "TS 私有步骤在 Java 中由 writeSignActionOptions 承接，保持相同线协议字段顺序。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.signAction:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#signAction",
+      "javaSignature": "@Override public CompletableFuture<SignActionResult> signAction(SignActionArgs args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:221",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:429"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.transmit:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#transmit",
+      "javaSignature": "private CompletableFuture<ByteView> transmit(WalletWireCalls call, String originator, Object params) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:76",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:25"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.verifyHmac:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#verifyHmac",
+      "javaSignature": "@Override public CompletableFuture<VerifyHmacResult> verifyHmac(VerifyHmacArgs args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:822",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:266"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.verifySignature:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#verifySignature",
+      "javaSignature": "@Override public CompletableFuture<VerifySignatureResult> verifySignature(VerifySignatureArgs args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:895",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:290"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.waitForAuthentication:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#waitForAuthentication",
+      "javaSignature": "@Override public CompletableFuture<AuthenticatedResult> waitForAuthentication(Map<String, Object> args, String originator) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:1541",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:178"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.writeOptionalBool:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#writeOptionalBool",
+      "javaSignature": "private static void writeOptionalBool(WriterUint8Array writer, Boolean value) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:948",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:68"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.writeOptionalUTF8:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#writeOptionalUTF8",
+      "javaSignature": "private static void writeOptionalUTF8(WriterUint8Array writer, String value) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:969",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:78"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.writeOptionalVarInt:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#writeOptionalVarInt",
+      "javaSignature": "private static void writeOptionalVarInt(WriterUint8Array writer, Number value) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:953",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:71"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.writeTxidArray:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#writeTxidArray",
+      "javaSignature": "private static void writeTxidArray(WriterUint8Array writer, List<String> txids) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:994",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:89"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.writeUTF8:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#writeUTF8",
+      "javaSignature": "private static void writeUTF8(WriterUint8Array writer, String value) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:962",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:74"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#method:WalletWireTransceiver.writeUTF8Array:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#writeUTF8Array",
+      "javaSignature": "private static void writeUTF8Array(WriterUint8Array writer, List<String> values) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:980",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:82"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#property:ACTION_STATUS_MAP.1:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readAction",
+      "javaSignature": "String[] status = {\"\", \"completed\", \"unprocessed\", \"sending\", \"unproven\",",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:56",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:492"
+      ],
+      "note": "状态码 1 映射为 completed，在 readAction 状态表中实现。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#property:ACTION_STATUS_MAP.2:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readAction",
+      "javaSignature": "String[] status = {\"\", \"completed\", \"unprocessed\", \"sending\", \"unproven\",",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:57",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:492"
+      ],
+      "note": "状态码 2 映射为 unprocessed，在 readAction 状态表中实现。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#property:ACTION_STATUS_MAP.3:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readAction",
+      "javaSignature": "String[] status = {\"\", \"completed\", \"unprocessed\", \"sending\", \"unproven\",",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:58",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:492"
+      ],
+      "note": "状态码 3 映射为 sending，在 readAction 状态表中实现。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#property:ACTION_STATUS_MAP.4:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readAction",
+      "javaSignature": "String[] status = {\"\", \"completed\", \"unprocessed\", \"sending\", \"unproven\",",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:59",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:492"
+      ],
+      "note": "状态码 4 映射为 unproven，在 readAction 状态表中实现。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#property:ACTION_STATUS_MAP.5:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readAction",
+      "javaSignature": "\"unsigned\", \"nosend\", \"nonfinal\", \"failed\"};",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:60",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:493"
+      ],
+      "note": "状态码 5 映射为 unsigned，在 readAction 状态表中实现。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#property:ACTION_STATUS_MAP.6:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readAction",
+      "javaSignature": "\"unsigned\", \"nosend\", \"nonfinal\", \"failed\"};",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:61",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:493"
+      ],
+      "note": "状态码 6 映射为 nosend，在 readAction 状态表中实现。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#property:ACTION_STATUS_MAP.7:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readAction",
+      "javaSignature": "\"unsigned\", \"nosend\", \"nonfinal\", \"failed\"};",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:62",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:493"
+      ],
+      "note": "状态码 7 映射为 nonfinal，在 readAction 状态表中实现。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#property:ACTION_STATUS_MAP.8:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readAction",
+      "javaSignature": "\"unsigned\", \"nosend\", \"nonfinal\", \"failed\"};",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:63",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:493"
+      ],
+      "note": "状态码 8 映射为 failed，在 readAction 状态表中实现。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#property:WalletWireTransceiver.OPTIONAL_BOOLEAN_WIRE_VALUES:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#writeOptionalBool",
+      "javaSignature": "private static void writeOptionalBool(WriterUint8Array writer, Boolean value) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:941",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:68"
+      ],
+      "note": "TS 可选布尔映射由 Java 三分支 1/0/-1 实现。"
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#property:WalletWireTransceiver.wire:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#wire",
+      "javaSignature": "public final WalletWire wire;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:70",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:22"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/WalletWireTransceiver.ts#variable:ACTION_STATUS_MAP:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WalletWireTransceiver#readAction",
+      "javaSignature": "String[] status = {\"\", \"completed\", \"unprocessed\", \"sending\", \"unproven\",",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-wire",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/WalletWireTransceiver.ts:55",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WalletWireTransceiver.java:492"
+      ],
+      "note": "TS 模块级状态映射内联于 Java 动作解码。"
+    },
+    {
+      "id": "src/script/Spend.ts#class:Spend:1",
+      "java": "com.metanet4j.bsv.script.Spend",
+      "javaSignature": "public class Spend",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:155",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#constructor:Spend.constructor:1",
+      "java": "com.metanet4j.bsv.script.Spend#Spend",
+      "javaSignature": "public Spend(Spend.Params params)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:224",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#function:compareNumberArrays:1",
+      "java": "com.metanet4j.bsv.script.Spend#execute",
+      "javaSignature": "内部函数语义由 execute 实现",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:41",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#function:isChecksigFormatHelper:1",
+      "java": "com.metanet4j.bsv.script.Spend#checkSignatureEncoding",
+      "javaSignature": "内部函数语义由 checkSignatureEncoding 实现",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:86",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#function:isChunkMinimalPushHelper:1",
+      "java": "com.metanet4j.bsv.script.Spend#minimalPush",
+      "javaSignature": "内部函数语义由 minimalPush 实现",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:120",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#function:isMinimallyEncodedHelper:1",
+      "java": "com.metanet4j.bsv.script.Spend#minimal",
+      "javaSignature": "内部函数语义由 minimal 实现",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:69",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#function:largerBigNumber:1",
+      "java": "com.metanet4j.bsv.script.Spend#binary",
+      "javaSignature": "内部函数语义由 binary 实现",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:65",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#function:scriptBoolean:1",
+      "java": "com.metanet4j.bsv.script.Spend#truthy",
+      "javaSignature": "内部函数语义由 truthy 实现",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:49",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#function:scriptBooleanAnd:1",
+      "java": "com.metanet4j.bsv.script.Spend#binary",
+      "javaSignature": "内部函数语义由 binary 实现",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:53",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#function:scriptBooleanOr:1",
+      "java": "com.metanet4j.bsv.script.Spend#binary",
+      "javaSignature": "内部函数语义由 binary 实现",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:57",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#function:smallerBigNumber:1",
+      "java": "com.metanet4j.bsv.script.Spend#binary",
+      "javaSignature": "内部函数语义由 binary 实现",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:61",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.advanceAfterStep:1",
+      "java": "com.metanet4j.bsv.script.Spend#step",
+      "javaSignature": "内联于 step 的原解释器分支",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:806",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.castToBool:1",
+      "java": "com.metanet4j.bsv.script.Spend#truthy",
+      "javaSignature": "方法 truthy 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:2073",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.checkPublicKeyEncoding:1",
+      "java": "com.metanet4j.bsv.script.Spend#checkPublicKeyEncoding",
+      "javaSignature": "方法 checkPublicKeyEncoding 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:603",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.checkSignatureEncoding:1",
+      "java": "com.metanet4j.bsv.script.Spend#checkSignatureEncoding",
+      "javaSignature": "方法 checkSignatureEncoding 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:518",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.clearAltStack:1",
+      "java": "com.metanet4j.bsv.script.Spend#clearAlt",
+      "javaSignature": "方法 clearAlt 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:454",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.countExecutedOpcode:1",
+      "java": "com.metanet4j.bsv.script.Spend#step",
+      "javaSignature": "内联于 step 的原解释器分支",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:732",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.currentScriptForStep:1",
+      "java": "com.metanet4j.bsv.script.Spend#currentScript",
+      "javaSignature": "方法 currentScript 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:671",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.enforceChronicleOnlyOpcode:1",
+      "java": "com.metanet4j.bsv.script.Spend#step",
+      "javaSignature": "内联于 step 的原解释器分支",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:711",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.enforceDiscouragedNop:1",
+      "java": "com.metanet4j.bsv.script.Spend#step",
+      "javaSignature": "内联于 step 的原解释器分支",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:790",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.enforceSignatureForkId:1",
+      "java": "com.metanet4j.bsv.script.Spend#enforceSignatureScope",
+      "javaSignature": "方法 enforceSignatureScope 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:507",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.enforceSignatureHashType:1",
+      "java": "com.metanet4j.bsv.script.Spend#enforceSignatureScope",
+      "javaSignature": "方法 enforceSignatureScope 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:496",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.enforceStepResourceLimits:1",
+      "java": "com.metanet4j.bsv.script.Spend#step",
+      "javaSignature": "内联于 step 的原解释器分支",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:662",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.ensureAltStackMem:1",
+      "java": "com.metanet4j.bsv.script.Spend#pushAlt",
+      "javaSignature": "方法 pushAlt 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:390",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.ensureStackMem:1",
+      "java": "com.metanet4j.bsv.script.Spend#push",
+      "javaSignature": "方法 push 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:384",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.executeDataPush:1",
+      "java": "com.metanet4j.bsv.script.Spend#step",
+      "javaSignature": "内联于 step 的原解释器分支",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:725",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.hasExplicitFlags:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#verifyFlags",
+      "javaSignature": "内联判断 params.verifyFlags != null",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:286",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.hasFlag:1",
+      "java": "com.metanet4j.bsv.script.Spend#flag",
+      "javaSignature": "方法 flag 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:290",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.isAfterChronicle:1",
+      "java": "com.metanet4j.bsv.script.Spend#afterChronicle",
+      "javaSignature": "方法 afterChronicle 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:305",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.isAfterGenesis:1",
+      "java": "com.metanet4j.bsv.script.Spend#afterGenesis",
+      "javaSignature": "方法 afterGenesis 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:294",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.isDefinedHashType:1",
+      "java": "com.metanet4j.bsv.script.Spend#enforceSignatureScope",
+      "javaSignature": "方法 enforceSignatureScope 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:488",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.isP2SHLockingScript:1",
+      "java": "com.metanet4j.bsv.script.Spend#isP2SHLockingScript",
+      "javaSignature": "方法 isP2SHLockingScript 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:2051",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.isRelaxed:1",
+      "java": "com.metanet4j.bsv.script.Spend#relaxed",
+      "javaSignature": "方法 relaxed 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:282",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.maxPushSize:1",
+      "java": "com.metanet4j.bsv.script.Spend#step",
+      "javaSignature": "内联于 step 的原解释器分支",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:359",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.opcodeForOperation:1",
+      "java": "com.metanet4j.bsv.script.Spend#step",
+      "javaSignature": "内联于 step 的原解释器分支",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:692",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.parseChecksigSignature:1",
+      "java": "com.metanet4j.bsv.script.Spend#signature",
+      "javaSignature": "方法 signature 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:543",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.parseLaxChecksigSignature:1",
+      "java": "com.metanet4j.bsv.script.Spend#laxSignature",
+      "javaSignature": "方法 laxSignature 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:589",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.parseLaxDERInteger:1",
+      "java": "com.metanet4j.bsv.script.Spend#laxInteger",
+      "javaSignature": "方法 laxInteger 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:569",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.popAltStack:1",
+      "java": "com.metanet4j.bsv.script.Spend#popAlt",
+      "javaSignature": "方法 popAlt 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:465",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.popStack:1",
+      "java": "com.metanet4j.bsv.script.Spend#pop",
+      "javaSignature": "方法 pop 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:413",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.pushAltStack:1",
+      "java": "com.metanet4j.bsv.script.Spend#pushAlt",
+      "javaSignature": "方法 pushAlt 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:459",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.pushStack:1",
+      "java": "com.metanet4j.bsv.script.Spend#push",
+      "javaSignature": "方法 push 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:400",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.pushStackCopy:1",
+      "java": "com.metanet4j.bsv.script.Spend#push",
+      "javaSignature": "方法 push 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:406",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.readLaxDERLength:1",
+      "java": "com.metanet4j.bsv.script.Spend#laxLength",
+      "javaSignature": "方法 laxLength 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:552",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.readScriptNumber:1",
+      "java": "com.metanet4j.bsv.script.Spend#number",
+      "javaSignature": "方法 number 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:478",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.requireAltStackItems:1",
+      "java": "com.metanet4j.bsv.script.Spend#popAlt",
+      "javaSignature": "方法 popAlt 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:445",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.requireStackItems:1",
+      "java": "com.metanet4j.bsv.script.Spend#require",
+      "javaSignature": "方法 require 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:441",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.requireTruthyTopStack:1",
+      "java": "com.metanet4j.bsv.script.Spend#requireTruthyTop",
+      "javaSignature": "方法 requireTruthyTop 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:2063",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.reset:1",
+      "java": "com.metanet4j.bsv.script.Spend#reset",
+      "javaSignature": "方法 reset 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:364",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.runScript:1",
+      "java": "com.metanet4j.bsv.script.Spend#run",
+      "javaSignature": "方法 run 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:2021",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.scriptEvaluationError:1",
+      "java": "com.metanet4j.bsv.script.Spend#error",
+      "javaSignature": "方法 error 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:2083",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.scriptNumMaxSize:1",
+      "java": "com.metanet4j.bsv.script.Spend#number",
+      "javaSignature": "方法 number 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:354",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.setStack:1",
+      "java": "com.metanet4j.bsv.script.Spend#validateJavaScript",
+      "javaSignature": "内联于 validateJavaScript 的原解释器分支",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:449",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.shouldEnforceCleanStack:1",
+      "java": "com.metanet4j.bsv.script.Spend#cleanStack",
+      "javaSignature": "方法 cleanStack 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:330",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.shouldEnforceDerSignatures:1",
+      "java": "com.metanet4j.bsv.script.Spend#derSignature",
+      "javaSignature": "方法 derSignature 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:335",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.shouldEnforceLowS:1",
+      "java": "com.metanet4j.bsv.script.Spend#lowS",
+      "javaSignature": "方法 lowS 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:315",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.shouldEnforceMinimalData:1",
+      "java": "com.metanet4j.bsv.script.Spend#minimalData",
+      "javaSignature": "方法 minimalData 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:310",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.shouldEnforceNullDummy:1",
+      "java": "com.metanet4j.bsv.script.Spend#nullDummy",
+      "javaSignature": "方法 nullDummy 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:320",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.shouldEnforceSigPushOnly:1",
+      "java": "com.metanet4j.bsv.script.Spend#sigPushOnly",
+      "javaSignature": "方法 sigPushOnly 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:325",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.shouldEnforceStrictEncoding:1",
+      "java": "com.metanet4j.bsv.script.Spend#strictEncoding",
+      "javaSignature": "方法 strictEncoding 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:347",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.skipUnavailablePreChronicleOpcode:1",
+      "java": "com.metanet4j.bsv.script.Spend#skipUnavailablePreChronicleOpcode",
+      "javaSignature": "方法 skipUnavailablePreChronicleOpcode 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:744",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.stackTop:1",
+      "java": "com.metanet4j.bsv.script.Spend#top",
+      "javaSignature": "方法 top 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:426",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.step:1",
+      "java": "com.metanet4j.bsv.script.Spend#step",
+      "javaSignature": "方法 step 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:821",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.toTransactionUint8Array:1",
+      "java": "com.metanet4j.bsv.script.Spend#toTransactionUint8Array",
+      "javaSignature": "方法 toTransactionUint8Array 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:1977",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.validate:1",
+      "java": "com.metanet4j.bsv.script.Spend#validate",
+      "javaSignature": "方法 validate 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:1871",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.validateJavaScript:1",
+      "java": "com.metanet4j.bsv.script.Spend#validateJavaScript",
+      "javaSignature": "方法 validateJavaScript 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:1896",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.validateWith:1",
+      "java": "com.metanet4j.bsv.script.Spend#validateWith",
+      "javaSignature": "方法 validateWith 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:1956",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#method:Spend.verifySignature:1",
+      "java": "com.metanet4j.bsv.script.Spend#signature",
+      "javaSignature": "方法 signature 承接固定 TS 语义",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:636",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.allInputs:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#allInputs",
+      "javaSignature": "Spend.Params 参数字段 allInputs",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:162",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.altStack:1",
+      "java": "com.metanet4j.bsv.script.Spend#altStack",
+      "javaSignature": "Spend 状态字段 altStack",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:173",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.altStackMem:1",
+      "java": "com.metanet4j.bsv.script.Spend#altStackMem",
+      "javaSignature": "Spend 状态字段 altStackMem",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:179",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.context:1",
+      "java": "com.metanet4j.bsv.script.Spend#context",
+      "javaSignature": "Spend 状态字段 context",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:169",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.elseStack:1",
+      "java": "com.metanet4j.bsv.script.Spend#elseStack",
+      "javaSignature": "Spend 状态字段 elseStack",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:175",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.executedOpCount:1",
+      "java": "com.metanet4j.bsv.script.Spend#executedOpCount",
+      "javaSignature": "Spend 状态字段 executedOpCount",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:182",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.hasExplicitMemoryLimit:1",
+      "java": "com.metanet4j.bsv.script.Spend#hasExplicitMemoryLimit",
+      "javaSignature": "Spend 状态字段 hasExplicitMemoryLimit",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:177",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.ifStack:1",
+      "java": "com.metanet4j.bsv.script.Spend#ifStack",
+      "javaSignature": "Spend 状态字段 ifStack",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:174",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.inputIndex:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#inputIndex",
+      "javaSignature": "Spend.Params 参数字段 inputIndex",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:164",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.inputSequence:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#inputSequence",
+      "javaSignature": "Spend.Params 参数字段 inputSequence",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:166",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.isRelaxedOverride:1",
+      "java": "com.metanet4j.bsv.script.Spend#isRelaxedOverride",
+      "javaSignature": "Spend 状态字段 isRelaxedOverride",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:180",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.lastCodeSeparator:1",
+      "java": "com.metanet4j.bsv.script.Spend#lastCodeSeparator",
+      "javaSignature": "Spend 状态字段 lastCodeSeparator",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:171",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.lockingScript:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#lockingScript",
+      "javaSignature": "Spend.Params 参数字段 lockingScript",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:159",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.lockTime:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#lockTime",
+      "javaSignature": "Spend.Params 参数字段 lockTime",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:167",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.memoryLimit:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#memoryLimit",
+      "javaSignature": "Spend.Params 参数字段 memoryLimit",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:176",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.otherInputs:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#otherInputs",
+      "javaSignature": "Spend.Params 参数字段 otherInputs",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:161",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.outputs:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#outputs",
+      "javaSignature": "Spend.Params 参数字段 outputs",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:163",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.ownsSigHashCache:1",
+      "java": "com.metanet4j.bsv.script.Spend#ownsSigHashCache",
+      "javaSignature": "Spend 状态字段 ownsSigHashCache",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:186",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.programCounter:1",
+      "java": "com.metanet4j.bsv.script.Spend#programCounter",
+      "javaSignature": "Spend 状态字段 programCounter",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:170",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.returningFromConditional:1",
+      "java": "com.metanet4j.bsv.script.Spend#returningFromConditional",
+      "javaSignature": "Spend 状态字段 returningFromConditional",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:183",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.sigHashCache:1",
+      "java": "com.metanet4j.bsv.script.Spend#sigHashCache",
+      "javaSignature": "Spend 状态字段 sigHashCache",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:185",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.sourceOutputIndex:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#sourceOutputIndex",
+      "javaSignature": "Spend.Params 参数字段 sourceOutputIndex",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:157",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.sourceSatoshis:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#sourceSatoshis",
+      "javaSignature": "Spend.Params 参数字段 sourceSatoshis",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:158",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.sourceTXID:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#sourceTXID",
+      "javaSignature": "Spend.Params 参数字段 sourceTXID",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:156",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.stack:1",
+      "java": "com.metanet4j.bsv.script.Spend#stack",
+      "javaSignature": "Spend 状态字段 stack",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:172",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.stackMem:1",
+      "java": "com.metanet4j.bsv.script.Spend#stackMem",
+      "javaSignature": "Spend 状态字段 stackMem",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:178",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.transactionVersion:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#transactionVersion",
+      "javaSignature": "Spend.Params 参数字段 transactionVersion",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:160",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.unlockingScript:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#unlockingScript",
+      "javaSignature": "Spend.Params 参数字段 unlockingScript",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:165",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#property:Spend.verifyFlags:1",
+      "java": "com.metanet4j.bsv.script.Spend.Params#verifyFlags",
+      "javaSignature": "Spend.Params 参数字段 verifyFlags",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:181",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#variable:maxJavaScriptArrayLength:1",
+      "java": "com.metanet4j.bsv.script.Spend#execute",
+      "javaSignature": "内部常量值内联于 execute；同等行为由固定向量覆盖",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:26",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#variable:maxMultisigKeyCount:1",
+      "java": "com.metanet4j.bsv.script.Spend#checkmultisig",
+      "javaSignature": "内部常量值内联于 checkmultisig；同等行为由固定向量覆盖",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:28",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#variable:maxMultisigKeyCountBeforeGenesis:1",
+      "java": "com.metanet4j.bsv.script.Spend#checkmultisig",
+      "javaSignature": "内部常量值内联于 checkmultisig；同等行为由固定向量覆盖",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:30",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#variable:maxMultisigKeyCountBigInt:1",
+      "java": "com.metanet4j.bsv.script.Spend#checkmultisig",
+      "javaSignature": "内部常量值内联于 checkmultisig；同等行为由固定向量覆盖",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:29",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#variable:maxOpsBeforeGenesis:1",
+      "java": "com.metanet4j.bsv.script.Spend#step",
+      "javaSignature": "内部常量值内联于 step；同等行为由固定向量覆盖",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:25",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#variable:maxScriptElementSizeBeforeGenesis:1",
+      "java": "com.metanet4j.bsv.script.Spend#step",
+      "javaSignature": "内部常量值内联于 step；同等行为由固定向量覆盖",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:23",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#variable:maxScriptSizeBeforeGenesis:1",
+      "java": "com.metanet4j.bsv.script.Spend#run",
+      "javaSignature": "内部常量值内联于 run；同等行为由固定向量覆盖",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:24",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#variable:maxStackItemsBeforeGenesis:1",
+      "java": "com.metanet4j.bsv.script.Spend#step",
+      "javaSignature": "内部常量值内联于 step；同等行为由固定向量覆盖",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:27",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#variable:SCRIPTNUM_NEG_1:1",
+      "java": "com.metanet4j.bsv.script.Spend#execute",
+      "javaSignature": "内部常量值内联于 execute；同等行为由固定向量覆盖",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:34",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#variable:SCRIPTNUMS_0_TO_16:1",
+      "java": "com.metanet4j.bsv.script.Spend#execute",
+      "javaSignature": "内部常量值内联于 execute；同等行为由固定向量覆盖",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:35",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/script/Spend.ts#variable:sequenceLocktimeDisableFlag:1",
+      "java": "com.metanet4j.bsv.script.Spend#execute",
+      "javaSignature": "内部常量值内联于 execute；同等行为由固定向量覆盖",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-script-spend",
+      "review": "reviewed",
+      "evidence": [
+        "src/script/Spend.ts:31",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/script/Spend.java",
+        ".cache/evidence/script-vectors-ts-jest.json",
+        ".cache/evidence/script-vectors-clean-parity.json"
+      ]
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#class:WindowCWISubstrate:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate",
+      "javaSignature": "public final class WindowCWISubstrate implements WalletInterface",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:45",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:9"
+      ],
+      "note": "窗口宿主类。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#constructor:WindowCWISubstrate.constructor:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#constructor",
+      "javaSignature": "public WindowCWISubstrate() { this(BrowserEnvironment.current()); }",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:47",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:12"
+      ],
+      "note": "构造时验证宿主并固定配置。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.abortAction:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#abortAction",
+      "javaSignature": "public CompletableFuture<AbortActionResult> abortAction(AbortActionArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:115",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:23"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.acquireCertificate:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#acquireCertificate",
+      "javaSignature": "public CompletableFuture<WalletCertificate> acquireCertificate(AcquireCertificateArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:385",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:27"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.createAction:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#createAction",
+      "javaSignature": "public CompletableFuture<CreateActionResult> createAction(CreateActionArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:61",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:31"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.createHmac:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#createHmac",
+      "javaSignature": "public CompletableFuture<CreateHmacResult> createHmac(CreateHmacArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:324",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:35"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.createSignature:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#createSignature",
+      "javaSignature": "public CompletableFuture<CreateSignatureResult> createSignature(CreateSignatureArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:353",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:39"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.decrypt:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#decrypt",
+      "javaSignature": "public CompletableFuture<WalletDecryptResult> decrypt(WalletDecryptArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:310",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:43"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.discoverByAttributes:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#discoverByAttributes",
+      "javaSignature": "public CompletableFuture<DiscoverCertificatesResult> discoverByAttributes(DiscoverByAttributesArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:468",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:47"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.discoverByIdentityKey:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#discoverByIdentityKey",
+      "javaSignature": "public CompletableFuture<DiscoverCertificatesResult> discoverByIdentityKey(DiscoverByIdentityKeyArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:435",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:51"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.encrypt:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#encrypt",
+      "javaSignature": "public CompletableFuture<WalletEncryptResult> encrypt(WalletEncryptArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:296",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:55"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.getHeaderForHeight:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#getHeaderForHeight",
+      "javaSignature": "public CompletableFuture<GetHeaderResult> getHeaderForHeight(GetHeaderArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:522",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:59"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.getHeight:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#getHeight",
+      "javaSignature": "public CompletableFuture<GetHeightResult> getHeight(Map<String, Object> args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:515",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:63"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.getNetwork:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#getNetwork",
+      "javaSignature": "public CompletableFuture<GetNetworkResult> getNetwork(Map<String, Object> args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:529",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:67"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.getPublicKey:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#getPublicKey",
+      "javaSignature": "public CompletableFuture<GetPublicKeyResult> getPublicKey(GetPublicKeyArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:239",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:71"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.getVersion:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#getVersion",
+      "javaSignature": "public CompletableFuture<GetVersionResult> getVersion(Map<String, Object> args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:536",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:75"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.internalizeAction:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#internalizeAction",
+      "javaSignature": "public CompletableFuture<InternalizeActionResult> internalizeAction(InternalizeActionArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:178",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:79"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.isAuthenticated:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#isAuthenticated",
+      "javaSignature": "public CompletableFuture<AuthenticatedResult> isAuthenticated(Map<String, Object> args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:501",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:83"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.listActions:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#listActions",
+      "javaSignature": "public CompletableFuture<ListActionsResult> listActions(ListActionsArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:122",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:87"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.listCertificates:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#listCertificates",
+      "javaSignature": "public CompletableFuture<ListCertificatesResult> listCertificates(ListCertificatesArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:392",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:91"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.listOutputs:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#listOutputs",
+      "javaSignature": "public CompletableFuture<ListOutputsResult> listOutputs(ListOutputsArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:203",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:95"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.proveCertificate:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#proveCertificate",
+      "javaSignature": "public CompletableFuture<ProveCertificateResult> proveCertificate(ProveCertificateArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:417",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:99"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.relinquishCertificate:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#relinquishCertificate",
+      "javaSignature": "public CompletableFuture<RelinquishCertificateResult> relinquishCertificate(RelinquishCertificateArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:424",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:103"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.relinquishOutput:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#relinquishOutput",
+      "javaSignature": "public CompletableFuture<RelinquishOutputResult> relinquishOutput(RelinquishOutputArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:232",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:107"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.revealCounterpartyKeyLinkage:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#revealCounterpartyKeyLinkage",
+      "javaSignature": "public CompletableFuture<RevealCounterpartyKeyLinkageResult> revealCounterpartyKeyLinkage(RevealCounterpartyKeyLinkageArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:254",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:111"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.revealSpecificKeyLinkage:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#revealSpecificKeyLinkage",
+      "javaSignature": "public CompletableFuture<RevealSpecificKeyLinkageResult> revealSpecificKeyLinkage(RevealSpecificKeyLinkageArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:273",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:115"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.signAction:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#signAction",
+      "javaSignature": "public CompletableFuture<SignActionResult> signAction(SignActionArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:108",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:119"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.verifyHmac:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#verifyHmac",
+      "javaSignature": "public CompletableFuture<VerifyHmacResult> verifyHmac(VerifyHmacArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:338",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:123"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.verifySignature:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#verifySignature",
+      "javaSignature": "public CompletableFuture<VerifySignatureResult> verifySignature(VerifySignatureArgs args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:368",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:127"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#method:WindowCWISubstrate.waitForAuthentication:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#waitForAuthentication",
+      "javaSignature": "public CompletableFuture<AuthenticatedResult> waitForAuthentication(Map<String, Object> args, String originator)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:508",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:131"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#property:WindowCWISubstrate.CWI:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.WindowCWISubstrate#CWI",
+      "javaSignature": "private final WalletInterface cwi;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:46",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/WindowCWISubstrate.java:10"
+      ],
+      "note": "实例状态按原构造时确定。"
+    },
+    {
+      "id": "src/wallet/substrates/window.CWI.ts#variable:window:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.BrowserEnvironment.Host",
+      "javaSignature": "WalletInterface windowCWI();",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/window.CWI.ts:38",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/BrowserEnvironment.java:29"
+      ],
+      "note": "TS 全局 window 对应 Java 宿主能力接口。"
+    },
+    {
+      "id": "src/wallet/substrates/XDM.ts#class:XDMSubstrate:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.XDMSubstrate",
+      "javaSignature": "public class XDMSubstrate extends InvokableWalletBase",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/XDM.ts:38",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/XDMSubstrate.java:15"
+      ],
+      "note": "窗口宿主类。"
+    },
+    {
+      "id": "src/wallet/substrates/XDM.ts#constructor:XDMSubstrate.constructor:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.XDMSubstrate#constructor",
+      "javaSignature": "public XDMSubstrate(String domain)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/XDM.ts:41",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/XDMSubstrate.java:23"
+      ],
+      "note": "构造时验证宿主并固定配置。"
+    },
+    {
+      "id": "src/wallet/substrates/XDM.ts#function:isCWIResponse:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.XDMSubstrate#invoke",
+      "javaSignature": "public CompletableFuture<Object> invoke(String call, Object args)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/XDM.ts:15",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/XDMSubstrate.java:36"
+      ],
+      "note": "响应结构在 invoke 收件分支完成校验。"
+    },
+    {
+      "id": "src/wallet/substrates/XDM.ts#method:XDMSubstrate.invoke:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.XDMSubstrate#invoke",
+      "javaSignature": "public CompletableFuture<Object> invoke(String call, Object args)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/XDM.ts:52",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/XDMSubstrate.java:36"
+      ],
+      "note": "逐方法透传或按消息协议发送。"
+    },
+    {
+      "id": "src/wallet/substrates/XDM.ts#property:XDMSubstrate.domain:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.XDMSubstrate#domain",
+      "javaSignature": "private final String domain;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/XDM.ts:39",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/XDMSubstrate.java:16"
+      ],
+      "note": "实例状态按原构造时确定。"
+    },
+    {
+      "id": "src/wallet/substrates/XDM.ts#type:CWIResponse:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.XDMSubstrate#invoke",
+      "javaSignature": "public CompletableFuture<Object> invoke(String call, Object args)",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/XDM.ts:7",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/XDMSubstrate.java:36"
+      ],
+      "note": "响应结构在 invoke 收件分支完成校验。"
+    },
+    {
+      "id": "src/wallet/substrates/ReactNativeWebView.ts#class:ReactNativeWebView:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.ReactNativeWebView",
+      "javaSignature": "public class ReactNativeWebView extends InvokableWalletBase {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/ReactNativeWebView.ts:30",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/ReactNativeWebView.java:25"
+      ],
+      "note": "继承 InvokableWalletBase 并绑定浏览器宿主消息桥。"
+    },
+    {
+      "id": "src/wallet/substrates/ReactNativeWebView.ts#constructor:ReactNativeWebView.constructor:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.ReactNativeWebView#ReactNativeWebView",
+      "javaSignature": "public ReactNativeWebView(String domain, Long responseTimeout) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/ReactNativeWebView.ts:34",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/ReactNativeWebView.java:40"
+      ],
+      "note": "保留通配默认值、宿主能力检查、HTTP(S) 域名归一化及可选超时；注入 Host/ID 仅用于 JVM 宿主适配。"
+    },
+    {
+      "id": "src/wallet/substrates/ReactNativeWebView.ts#function:isBridgeDelivered:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.ReactNativeWebView#isBridgeDelivered",
+      "javaSignature": "private boolean isBridgeDelivered(BrowserEnvironment.MessageEvent event) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/ReactNativeWebView.ts:141",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/ReactNativeWebView.java:100"
+      ],
+      "note": "先核对事件 source；当前窗口/无 source 直接接收，父窗口仅接受同源或配置域名，其他上下文在读取负载前忽略。"
+    },
+    {
+      "id": "src/wallet/substrates/ReactNativeWebView.ts#function:normalizeOrigin:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.ReactNativeWebView#normalizeOrigin",
+      "javaSignature": "private static String normalizeOrigin(String domain) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/ReactNativeWebView.ts:148",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/ReactNativeWebView.java:132"
+      ],
+      "note": "保留 * 与 HTTP(S) 规范化、默认 HTTPS、端口归一和非 HTTP 协议 TypeError。"
+    },
+    {
+      "id": "src/wallet/substrates/ReactNativeWebView.ts#method:ReactNativeWebView.invoke:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.ReactNativeWebView#invoke",
+      "javaSignature": "@Override public CompletableFuture<Object> invoke(String call, Object args) {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/ReactNativeWebView.ts:54",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/ReactNativeWebView.java:61"
+      ],
+      "note": "发送随机 ID CWI 消息；按 ID/来源/域名/响应结构过滤，BRC100 字节字段归一化、WalletError 恢复、超时与同步失败清理。"
+    },
+    {
+      "id": "src/wallet/substrates/ReactNativeWebView.ts#property:ReactNativeWebView.domain:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.ReactNativeWebView#domain",
+      "javaSignature": "private final String domain;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/ReactNativeWebView.ts:31",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/ReactNativeWebView.java:33"
+      ],
+      "note": "保存归一化后的目标域名，默认通配。"
+    },
+    {
+      "id": "src/wallet/substrates/ReactNativeWebView.ts#property:ReactNativeWebView.responseTimeout:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.ReactNativeWebView#responseTimeout",
+      "javaSignature": "private final Long responseTimeout;",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/ReactNativeWebView.ts:32",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/ReactNativeWebView.java:34"
+      ],
+      "note": "保存可选毫秒超时，并在 invoke 注册超时回调。"
+    },
+    {
+      "id": "src/wallet/substrates/ReactNativeWebView.ts#type:ReactNativeWindow:1",
+      "java": "com.metanet4j.bsv.wallet.substrates.BrowserEnvironment.Host",
+      "javaSignature": "public interface Host {",
+      "contract": "doc/完整模块与API映射-20260920-122800.md#api-wallet-hosts",
+      "review": "reviewed",
+      "evidence": [
+        "src/wallet/substrates/ReactNativeWebView.ts:8",
+        "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/wallet/substrates/BrowserEnvironment.java:18"
+      ],
+      "note": "TS Window 与 ReactNativeWebView.postMessage 结构映射为 JVM 显式宿主能力接口。"
     }
   ],
   "approvedDifferences": [
