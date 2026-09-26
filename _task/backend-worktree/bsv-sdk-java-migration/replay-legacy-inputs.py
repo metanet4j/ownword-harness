@@ -10,6 +10,14 @@ FILES = {'hex': 'src/primitives/__tests/hex.test.ts',
          'bn': 'src/primitives/__tests/BigNumber.constructor.test.ts'}
 
 
+def kinds(kind):
+    return ('hex', 'bn') if kind == 'both' else (kind,)
+
+
+def source(args, kind):
+    return getattr(args, 'raw_' + kind) if args.kind == 'both' else args.raw
+
+
 def read(path):
     return json.loads(Path(path).read_text())
 
@@ -47,14 +55,16 @@ def samples(kind, source):
 
 
 def prepare(args):
-    file, by_case = samples(args.kind, args.raw)
+    groups = [samples(kind, source(args, kind)) for kind in kinds(args.kind)]
+    files = [file for file, _ in groups]
+    by_case = {case_id: values for _, cases in groups for case_id, values in cases.items()}
     catalog = read(TASK / 'module-tests.json')
-    catalog['files'] = [file]
+    catalog['files'] = files
     catalog['partialImplementationOnly'] = True
     mapping = read(TASK / 'test-map.json')
     mapping['cases'] = [case for case in mapping['cases'] if case['id'] in by_case]
-    mapping['siteReviews'] = [site for site in mapping['siteReviews']
-                              if site['id'] in {item['id'] for item in file['sites']}]
+    selected_sites = {item['id'] for file in files for item in file['sites']}
+    mapping['siteReviews'] = [site for site in mapping['siteReviews'] if site['id'] in selected_sites]
     plan = {}
     for case in mapping['cases']:
         current = by_case[case['id']]
@@ -73,19 +83,23 @@ def prepare(args):
 
 
 def emit_ts(args):
-    file, by_case = samples(args.kind, args.raw)
+    groups = [(kind, *samples(kind, source(args, kind))) for kind in kinds(args.kind)]
     planned = rows(args.plan)
-    actual = [item for case in file['cases'] for item in by_case[case['id']]]
-    assert planned == actual, '本轮 TS 实际输入与运行前计划不同'
+    actual = [item for _, file, by_case in groups for case in file['cases'] for item in by_case[case['id']]]
+    if planned != actual:
+        raise ValueError('本轮 TS 实际输入与运行前计划不同')
     run_id = args.run_id
-    assert run_id and args.side == 'ts'
+    if not run_id or args.side != 'ts':
+        raise ValueError('缺少本轮 TS 运行身份')
     write_rows(args.inputs, [dict(item, runId=run_id, side='ts') for item in actual])
-    raw = rows(args.raw)
-    names = {' '.join(case['names']): case['id'] for case in file['cases']}
-    write_rows(args.assertions, [{'runId': run_id, 'side': 'ts', 'caseId': names[item['test']],
-              'assertionId': actual_site(file, item, args.kind), 'value': item['outcome'] if args.kind == 'hex'
+    assertions = []
+    for kind, file, _ in groups:
+        names = {' '.join(case['names']): case['id'] for case in file['cases']}
+        assertions.extend({'runId': run_id, 'side': 'ts', 'caseId': names[item['test']],
+              'assertionId': actual_site(file, item, kind), 'value': item['outcome'] if kind == 'hex'
               else {'calls': [{'method': call['method'], 'outcome': call['outcome']} for call in item['calls']],
-                    'matcher': item['matcher'], 'actual': item['actual']}} for item in raw])
+                    'matcher': item['matcher'], 'actual': item['actual']}} for item in rows(source(args, kind)))
+    write_rows(args.assertions, assertions)
 
 
 def actual_site(file, item, kind):
@@ -111,8 +125,10 @@ def verify(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('action', choices=('prepare', 'emit-ts', 'verify'))
-    parser.add_argument('--kind', choices=FILES)
+    parser.add_argument('--kind', choices=(*FILES, 'both'))
     parser.add_argument('--raw')
+    parser.add_argument('--raw-hex')
+    parser.add_argument('--raw-bn')
     parser.add_argument('--output')
     parser.add_argument('--plan')
     parser.add_argument('--run-id')
