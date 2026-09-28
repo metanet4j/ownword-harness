@@ -3181,7 +3181,38 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-component-bitcoinschema/src/test/java/com/metanet4j/component/bitcoinschema/listener/BitcoinschemaListenerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "bapTransactionsAreForwardedToTheBapHandler",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bsocialTransactionsAreForwardedToTheBsocialHandler",
+                  "returnType": "void",
+                  "line": 44,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bapTakesPrecedenceWhenBothPayloadsArePresent",
+                  "returnType": "void",
+                  "line": 54,
+                  "classification": "unit"
+                },
+                {
+                  "name": "eventsWithoutAPayloadAreIgnored",
+                  "returnType": "void",
+                  "line": 65,
+                  "classification": "unit"
+                }
+              ]
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
@@ -3299,7 +3330,542 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/BsocialTestFixture.java",
+              "classification": "fixture",
+              "classificationReason": "受控替身/夹具，无直接 @Test 方法",
+              "methods": []
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/converter/BsocialConvertersContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "converterHelperCopiesPropertiesAndEveryBeanList",
+                  "returnType": "void",
+                  "line": 31,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bsocialRecordConverterStampsTheEventTimeAndCopiesTheLists",
+                  "returnType": "void",
+                  "line": 47,
+                  "classification": "unit"
+                },
+                {
+                  "name": "dtoToBsocialConverterSplitsTagsAndStampsTheEventTime",
+                  "returnType": "void",
+                  "line": 61,
+                  "classification": "unit"
+                },
+                {
+                  "name": "dtoToBsocialConverterLeavesTagsEmptyWithoutATagsMap",
+                  "returnType": "void",
+                  "line": 77,
+                  "classification": "unit"
+                },
+                {
+                  "name": "dtoToBsocialReplyConverterReadsTheParentNoteFromTheFirstMap",
+                  "returnType": "void",
+                  "line": 85,
+                  "classification": "unit"
+                },
+                {
+                  "name": "dtoToBapRelationConverterBuildsTheRelationState",
+                  "returnType": "void",
+                  "line": 98,
+                  "classification": "unit"
+                },
+                {
+                  "name": "dtoToBsocialRelationConverterBuildsTheNoteRelationState",
+                  "returnType": "void",
+                  "line": 116,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchConvertersMapTheDtoToTheSearchEntity",
+                  "returnType": "void",
+                  "line": 132,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchConvertersLeaveTagsEmptyWithoutATagsMap",
+                  "returnType": "void",
+                  "line": 151,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchConvertersLeaveTagsNullWhenTheTagsValueIsBlank",
+                  "returnType": "void",
+                  "line": 159,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchConvertersForContentMapAndBinaryAreStillStubs",
+                  "returnType": "void",
+                  "line": 170,
+                  "classification": "unit"
+                },
+                {
+                  "name": "txRecordConvertersConvertBothDirections",
+                  "returnType": "void",
+                  "line": 180,
+                  "classification": "unit"
+                },
+                {
+                  "name": "txRecordConverterFailsWithoutAMap",
+                  "returnType": "void",
+                  "line": 203,
+                  "classification": "unit"
+                },
+                {
+                  "name": "doConvertersMapEveryMongoDocument",
+                  "returnType": "void",
+                  "line": 218,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/handler/MongoStoreBsocialHandlerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "handleRejectsTransactionsWithoutIdentityKey",
+                  "returnType": "void",
+                  "line": 64,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleFailsWhenTheTransactionHasNoMap",
+                  "returnType": "void",
+                  "line": 75,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleStoresPostsAndReposts",
+                  "returnType": "void",
+                  "line": 85,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handlePromotesRepliesWhoseParentNoteExists",
+                  "returnType": "void",
+                  "line": 100,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleKeepsRepliesUnpromotedWhenTheParentNoteIsMissing",
+                  "returnType": "void",
+                  "line": 119,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleStoresNoteRelationsForLikesAndUnlikes",
+                  "returnType": "void",
+                  "line": 136,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleStoresIdentityRelationsForFollowsAndUnfollows",
+                  "returnType": "void",
+                  "line": 149,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleIgnoresTipAttachmentTagsAndPayment",
+                  "returnType": "void",
+                  "line": 162,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleIgnoresUnknownBsocialTypes",
+                  "returnType": "void",
+                  "line": 173,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/handler/MysqlStoreBsocialHandlerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "handleStoresTheTransactionRecordForEverySupportedType",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleIgnoresUnknownTypesAfterStoringTheRecord",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleRejectsTransactionsWithoutIdentityKey",
+                  "returnType": "void",
+                  "line": 60,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleFailsWhenTheTransactionHasNoMap",
+                  "returnType": "void",
+                  "line": 71,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/listener/BsocialListenerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "consumeEventIsForwardedToTheMongoStoreHandler",
+                  "returnType": "void",
+                  "line": 19,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchEventIsForwardedToTheSearchService",
+                  "returnType": "void",
+                  "line": 32,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/manager/BsocialManagerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "postBsocialChainsDuplicateCheckCompletionAndRawHandling",
+                  "returnType": "void",
+                  "line": 53,
+                  "classification": "unit"
+                },
+                {
+                  "name": "linkIdentityFollowsAndUnfollows",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                },
+                {
+                  "name": "linkIdentityRejectsMissingArguments",
+                  "returnType": "void",
+                  "line": 76,
+                  "classification": "unit"
+                },
+                {
+                  "name": "linkIdentityFailsForUnsupportedTypes",
+                  "returnType": "void",
+                  "line": 84,
+                  "classification": "unit"
+                },
+                {
+                  "name": "linkBsocialLikesAndUnlikes",
+                  "returnType": "void",
+                  "line": 90,
+                  "classification": "unit"
+                },
+                {
+                  "name": "linkBsocialRejectsMissingArguments",
+                  "returnType": "void",
+                  "line": 102,
+                  "classification": "unit"
+                },
+                {
+                  "name": "linkBsocialFailsForUnsupportedTypes",
+                  "returnType": "void",
+                  "line": 110,
+                  "classification": "unit"
+                },
+                {
+                  "name": "replyCompletesTheReplyTransaction",
+                  "returnType": "void",
+                  "line": 115,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/mapstruct/BsocialMapperUtilsContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "toMapReturnsAnEmptyMapForNullAndEmptyInput",
+                  "returnType": "void",
+                  "line": 17,
+                  "classification": "unit"
+                },
+                {
+                  "name": "toMapCopiesEveryEntry",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit"
+                },
+                {
+                  "name": "toSearchMapReturnsAnEmptyMapForNullAndEmptyInput",
+                  "returnType": "void",
+                  "line": 36,
+                  "classification": "unit"
+                },
+                {
+                  "name": "toSearchMapCopiesEveryEntry",
+                  "returnType": "void",
+                  "line": 42,
+                  "classification": "unit"
+                },
+                {
+                  "name": "objectIdToStringHandlesNullAndValues",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/mapstruct/mongo/BsocialMappingContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "bsocialDoMapperReturnsNullForANullSource",
+                  "returnType": "void",
+                  "line": 38,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bsocialDoMapperMapsScalarsAndCopiesTheMapList",
+                  "returnType": "void",
+                  "line": 43,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bsocialDoMapperCopiesEveryBeanListWhenPresent",
+                  "returnType": "void",
+                  "line": 68,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bsocialDoMapperKeepsMissingMapListsNullAndRewritesEmptyMaps",
+                  "returnType": "void",
+                  "line": 82,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bapRelationDoMapperConvertsTheObjectIdScalarsAndNestedRels",
+                  "returnType": "void",
+                  "line": 94,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bapRelationDoMapperKeepsMissingRelsNull",
+                  "returnType": "void",
+                  "line": 118,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bsocialRelationDoMapperConvertsTheObjectIdScalarsAndNestedRels",
+                  "returnType": "void",
+                  "line": 123,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bsocialRelationDoMapperKeepsMissingRelsNull",
+                  "returnType": "void",
+                  "line": 146,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bsocialReplyDoMapperMapsTheWholeReplyTree",
+                  "returnType": "void",
+                  "line": 151,
+                  "classification": "unit"
+                },
+                {
+                  "name": "replyMapperReusesTheContextCacheForRepeatedMappings",
+                  "returnType": "void",
+                  "line": 182,
+                  "classification": "unit"
+                },
+                {
+                  "name": "replyMapperMapsAnEmptyReplyWithoutChildren",
+                  "returnType": "void",
+                  "line": 212,
+                  "classification": "unit"
+                },
+                {
+                  "name": "cycleAvoidingContextReusesAlreadyMappedInstances",
+                  "returnType": "void",
+                  "line": 224,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/mapstruct/search/BsocialSearchEntityMapperContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "convertReturnsNullForANullSource",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit"
+                },
+                {
+                  "name": "convertMapsScalarsMapListAndBeanList",
+                  "returnType": "void",
+                  "line": 28,
+                  "classification": "unit"
+                },
+                {
+                  "name": "convertKeepsMissingMapListAndBeanListNull",
+                  "returnType": "void",
+                  "line": 49,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/resolver/BsocialRawResolverContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "handleKeepsTheIdentityKeyProvidedByTheCaller",
+                  "returnType": "void",
+                  "line": 49,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleLooksUpTheIdentityKeyBySignatureAddress",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleFailsWhenTheSignerIsUnknown",
+                  "returnType": "void",
+                  "line": 77,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleResolvesTheIdentityKeyOnlyOnceForMultipleTransactions",
+                  "returnType": "void",
+                  "line": 91,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleWithOneArgumentDelegatesWithoutAnIdentityKey",
+                  "returnType": "void",
+                  "line": 111,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/service/BsocialSearchServiceContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "handleStoresTheConvertedEntityUnderTheTransactionId",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/service/MongoBsocialServiceContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "findPageByIdentityKeyMapsEveryItemAndKeepsPageMetadata",
+                  "returnType": "void",
+                  "line": 61,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findLatestMapsTheMongoPage",
+                  "returnType": "void",
+                  "line": 75,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getNoteByTxIdAndFindByIdConvertTheStoredNote",
+                  "returnType": "void",
+                  "line": 85,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getNoteByTxIdFailsForAnUnknownNote",
+                  "returnType": "void",
+                  "line": 96,
+                  "classification": "unit"
+                },
+                {
+                  "name": "identityRelationsAreQueriedWithTheBsocialType",
+                  "returnType": "void",
+                  "line": 105,
+                  "classification": "unit"
+                },
+                {
+                  "name": "noteRelationsAndCountersAreQueriedWithTheBsocialType",
+                  "returnType": "void",
+                  "line": 122,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rootReplyListMapsTheReplyPage",
+                  "returnType": "void",
+                  "line": 138,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveOrUpdateBsocialTxIsStillAStub",
+                  "returnType": "void",
+                  "line": 148,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/service/MysqlBsocialServiceContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "saveOrUpdateBsocialTxInsertsNewRecordsAndReportsThemAsNotExisting",
+                  "returnType": "void",
+                  "line": 40,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveOrUpdateBsocialTxUpdatesTheBlockOnlyForExistingRecordsWithBlock",
+                  "returnType": "void",
+                  "line": 53,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveOrUpdateBsocialTxSkipsTheUpdateWhenTheBlockIsUnknown",
+                  "returnType": "void",
+                  "line": 68,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findBsocialRecordReturnsNullForUnknownTransactions",
+                  "returnType": "void",
+                  "line": 80,
+                  "classification": "unit"
+                },
+                {
+                  "name": "readSideMethodsAreStillStubs",
+                  "returnType": "void",
+                  "line": 91,
+                  "classification": "unit"
+                }
+              ]
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
@@ -4033,7 +4599,50 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-component-handler/src/test/java/com/metanet4j/component/handler/BitcoinSchemaTxHandlerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "handleBapTxConvertsTheTxoAndPersistsTheBapModel",
+                  "returnType": "void",
+                  "line": 39,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleBsocialTxConvertsTheBobButDropsTheResult",
+                  "returnType": "void",
+                  "line": 53,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-handler/src/test/java/com/metanet4j/component/listener/BitcoinSchemaTxListenerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "bapEventsAreForwardedToTheTxHandler",
+                  "returnType": "void",
+                  "line": 33,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bsocialEventsAreForwardedToTheTxHandler",
+                  "returnType": "void",
+                  "line": 43,
+                  "classification": "unit"
+                },
+                {
+                  "name": "otherTargetTypesAreIgnored",
+                  "returnType": "void",
+                  "line": 53,
+                  "classification": "unit"
+                }
+              ]
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",

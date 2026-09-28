@@ -256,6 +256,17 @@
           ]
         }
       ]
+    },
+    "metanet4j-component-bsocial": {
+      "entries": [
+        {
+          "class": "com/metanet4j/component/bsocial/converter/ConverterHelper",
+          "reason": "隐式默认构造器，仅提供静态拷贝方法，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 7, "lineMissed": 1, "methodMissed": 1}
+          ]
+        }
+      ]
     }
   }
 }

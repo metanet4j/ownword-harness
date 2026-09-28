@@ -8,7 +8,7 @@
     "done"
   ],
   "activeItem": "unit-u6-business",
-  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1—U5 均已完成；U6 进行中：component-tx、component-bap 已完成，component-bsocial → bitcoinschema → handler 与跨存储链路集成待实施。",
+  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1—U5 均已完成；U6 五模块（tx/bap/bsocial/bitcoinschema/handler）单元测试全部完成，剩余 U6 跨存储链路集成与 U7—U9。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -365,10 +365,13 @@
         "component-tx 提交 630303b：29/0/0/0，LINE 107/111、BRANCH 4/6、METHOD 48/48，缺口为登记的远程签名器桩不可达代码；证据 evidence/20260928T164728Z/。",
         "component-bap 提交 2fbd3f7：63/0/0/0，LINE 293/305、BRANCH 69/70、METHOD 88/88，缺口为登记的 MongoStoreBapDtoHandler 数据分支不可达；证据 evidence/20260928T180551Z/。",
         "component-bap 暴露并最小修复：BapSearchListener 的 BapSearchService 字段漏写 @Autowired，BapSearchEvent 发布即 NPE、搜索身份不落库；已先用 Spring 上下文回归用例复现再修复。",
-        "记录的当前行为：MongoBapService.getByIdentity 空 Optional 直接抛 NoSuchElementException；MysqlBapService 的 destroy 用 is_destroy=1 标记、ATTEST 与 ID 共用 saveRoot 路径；Mongo 的 DATA 类交易恒被忽略（isRootBap 要求 type==ID）。",
-        "待实施：component-bsocial → component-bitcoinschema → component-handler，以及跨存储业务链路集成。"
+        "component-bsocial 提交 b9bfb97：76/0/0/0，LINE 529/530、BRANCH 118/118、METHOD 153/154，缺口为登记的 ConverterHelper 隐式构造器；证据 evidence/20260928T190248Z/。",
+        "记录的当前行为：MongoBapService/MongoBsocialService 空 Optional 直接抛 NoSuchElementException；不受支持的 linkIdentity/linkBsocial 类型不建交易、随后解引用 NPE；mapList 为空时 bsocial handler 与 MySQL 转换器抛 NoSuchElementException（经 ConversionService 包装为 ConversionFailedException）；Mongo 的 DATA 类 BAP 交易恒被忽略。",
+        "component-bitcoinschema 提交 2648727：4/0/0/0，LINE 7/7、BRANCH 4/4、METHOD 2/2（无缺口）；证据 evidence/20260928T194451Z/。",
+        "component-handler 提交 2648727：5/0/0/0，LINE 12/12、BRANCH 4/4、METHOD 5/5（无缺口）；证据 evidence/20260928T195825Z/。记录的行为：BitcoinSchemaTxHandler.handleBsocialTx 转换结果未被使用（该入口不落库）。",
+        "待实施：U6 的跨存储业务链路集成（component-tx/bap/bsocial → Mongo/MySQL/ES 的端到端链路），以及 U7—U9。"
       ],
-      "statusNote": "2026-09-28：component-tx、component-bap 已完成并严格验收，U6 继续按模块顺序推进。"
+      "statusNote": "2026-09-28：U6 五个模块单元测试全部完成并严格验收，剩余跨存储业务链路集成。"
     },
     {
       "id": "unit-u7-adapters",
