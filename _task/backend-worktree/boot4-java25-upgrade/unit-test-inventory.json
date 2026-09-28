@@ -3032,7 +3032,326 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/base/BaseServiceAbstractContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "placeholderMethodsReturnEmptyResults",
+                  "returnType": "void",
+                  "line": 29,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveWithConverterStoresConvertedValueOnly",
+                  "returnType": "void",
+                  "line": 43,
+                  "classification": "unit"
+                },
+                {
+                  "name": "repositoryFieldStaysVisibleThroughGetter",
+                  "returnType": "void",
+                  "line": 58,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/config/PlanariaConfigurationContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "configurationEnablesPlanariaPropertiesAndIsDeprecated",
+                  "returnType": "void",
+                  "line": 16,
+                  "classification": "unit"
+                },
+                {
+                  "name": "propertiesBindUnderPlanariaPrefix",
+                  "returnType": "void",
+                  "line": 26,
+                  "classification": "unit"
+                },
+                {
+                  "name": "nestedEndpointsRemainWritable",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/constants/ProtocolConstantsContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "appendDataBapOutKeysKeepTheirProtocolSlots",
+                  "returnType": "void",
+                  "line": 10,
+                  "classification": "unit"
+                },
+                {
+                  "name": "singleBapOutKeysKeepTheirProtocolSlots",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "unit"
+                },
+                {
+                  "name": "setCmdKeysKeepTheirProtocolSlots",
+                  "returnType": "void",
+                  "line": 55,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/dto/BaseDtoContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "defaultsKeepCursorAtZero",
+                  "returnType": "void",
+                  "line": 11,
+                  "classification": "unit"
+                },
+                {
+                  "name": "fieldsRemainWritable",
+                  "returnType": "void",
+                  "line": 22,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/enums/ComponentCommonEnumContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "convertTypesKeepTheirSourceAndTargetMapping",
+                  "returnType": "void",
+                  "line": 13,
+                  "classification": "unit"
+                },
+                {
+                  "name": "dataSourceAndTargetTypesKeepTheirIds",
+                  "returnType": "void",
+                  "line": 36,
+                  "classification": "unit"
+                },
+                {
+                  "name": "protocolGroupValidateTypesKeepTheirIdsAndNames",
+                  "returnType": "void",
+                  "line": 49,
+                  "classification": "unit"
+                },
+                {
+                  "name": "stateTypesMapPositiveAndNegativeTypes",
+                  "returnType": "void",
+                  "line": 57,
+                  "classification": "unit"
+                },
+                {
+                  "name": "fromTypeResolvesBothEndsAndUnknownTypes",
+                  "returnType": "void",
+                  "line": 73,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/events/ComponentCommonEventsContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "bapEventsCarryDtoAndSource",
+                  "returnType": "void",
+                  "line": 20,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bsocialEventsCarryDtoAndSource",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bitcoinSchemaEventsCarryPayloadAndTargetType",
+                  "returnType": "void",
+                  "line": 47,
+                  "classification": "unit"
+                },
+                {
+                  "name": "blockArrivedEventSupportsBothConstructorsAndSetter",
+                  "returnType": "void",
+                  "line": 61,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/exception/ComponentCommonExceptionContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "converterExceptionKeepsMessageAndCause",
+                  "returnType": "void",
+                  "line": 14,
+                  "classification": "unit"
+                },
+                {
+                  "name": "fetchPlanariaExceptionKeepsMessageAndCause",
+                  "returnType": "void",
+                  "line": 24,
+                  "classification": "unit"
+                },
+                {
+                  "name": "fetchSubtypesCarryFixedMessages",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "unit"
+                },
+                {
+                  "name": "verificationExceptionKeepsMessageAndCause",
+                  "returnType": "void",
+                  "line": 45,
+                  "classification": "unit"
+                },
+                {
+                  "name": "signatureVerifyFailExceptionCarriesFixedMessage",
+                  "returnType": "void",
+                  "line": 55,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/state/StateHelperContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "followStateCountsNetFollows",
+                  "returnType": "void",
+                  "line": 13,
+                  "classification": "unit"
+                },
+                {
+                  "name": "likeStateCountsNetLikes",
+                  "returnType": "void",
+                  "line": 29,
+                  "classification": "unit"
+                },
+                {
+                  "name": "statesWithoutCountingLogicStayNegative",
+                  "returnType": "void",
+                  "line": 44,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/transaction/BitcoinSchemaTransactionContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "constructorBuildsLocalBapContext",
+                  "returnType": "void",
+                  "line": 24,
+                  "classification": "unit"
+                },
+                {
+                  "name": "followAndUnfollowBuildSpendableDataTransactions",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "unit"
+                },
+                {
+                  "name": "defaultPostEmbedsContentAndToleratesEmptyContent",
+                  "returnType": "void",
+                  "line": 52,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/transaction/LocalTestUtxoProviderContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "returnsNoUtxosWhenNoAddressIsRequested",
+                  "returnType": "void",
+                  "line": 25,
+                  "classification": "unit"
+                },
+                {
+                  "name": "readsFixturePerAddressAndMapsUnspentEntries",
+                  "returnType": "void",
+                  "line": 30,
+                  "classification": "unit"
+                },
+                {
+                  "name": "skipsAddressesWhoseFixtureHasNoUnspentList",
+                  "returnType": "void",
+                  "line": 62,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/utils/ComponentCommonUtilsContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "clientXprvThreadLocalStoresAndClearsBapBase",
+                  "returnType": "void",
+                  "line": 21,
+                  "classification": "unit"
+                },
+                {
+                  "name": "jacksonBeanUtilsCopiesThroughJson",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sqlHelperJoinsTxIdAndIndex",
+                  "returnType": "void",
+                  "line": 53,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/utils/SimpleBeanUtilsContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "ofBeanCopiesSingleObjectIntoNewInstance",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                },
+                {
+                  "name": "ofBeanCopiesCollectionsAndHandlesEmptyOnes",
+                  "returnType": "void",
+                  "line": 71,
+                  "classification": "unit"
+                },
+                {
+                  "name": "copyPropertiesKeepsDestinationWhenSourceIsNullAndHonoursIgnores",
+                  "returnType": "void",
+                  "line": 85,
+                  "classification": "unit"
+                },
+                {
+                  "name": "copiesFailWhenTargetCannotBeInstantiated",
+                  "returnType": "void",
+                  "line": 99,
+                  "classification": "unit"
+                }
+              ]
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
@@ -3391,7 +3710,164 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-component-model/src/test/java/com/metanet4j/model/api/BaseResultContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "defaultConstructorStartsFromSuccess",
+                  "returnType": "void",
+                  "line": 14,
+                  "classification": "unit"
+                },
+                {
+                  "name": "dataConstructorCarriesPayloadWithSuccessCode",
+                  "returnType": "void",
+                  "line": 25,
+                  "classification": "unit"
+                },
+                {
+                  "name": "successFactoriesKeepSuccessStateAndPayload",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "unit"
+                },
+                {
+                  "name": "failureFactoriesCopyCodesAndMessages",
+                  "returnType": "void",
+                  "line": 46,
+                  "classification": "unit"
+                },
+                {
+                  "name": "failureAcceptsAnyResultCodeImplementation",
+                  "returnType": "void",
+                  "line": 59,
+                  "classification": "unit"
+                },
+                {
+                  "name": "deprecatedFailureKeepsPayload",
+                  "returnType": "void",
+                  "line": 89,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-model/src/test/java/com/metanet4j/model/api/CustomResultCodeContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "successCarriesItsOwnShowAndSystemMessages",
+                  "returnType": "void",
+                  "line": 11,
+                  "classification": "unit"
+                },
+                {
+                  "name": "failCarriesItsOwnShowAndSystemMessages",
+                  "returnType": "void",
+                  "line": 18,
+                  "classification": "unit"
+                },
+                {
+                  "name": "enumImplementsResultCodeContract",
+                  "returnType": "void",
+                  "line": 25,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-model/src/test/java/com/metanet4j/model/api/ListResultContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "defaultConstructorStartsWithFirstPageAndEmptyList",
+                  "returnType": "void",
+                  "line": 13,
+                  "classification": "unit"
+                },
+                {
+                  "name": "listFieldsRemainWritable",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-model/src/test/java/com/metanet4j/model/domain/bap/BapDomainContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "bapIdCarriesIdentitySignersAndDestroyState",
+                  "returnType": "void",
+                  "line": 17,
+                  "classification": "unit"
+                },
+                {
+                  "name": "identityMapsJsonLdPropertiesOnBothDirections",
+                  "returnType": "void",
+                  "line": 48,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bapRelationKeepsFollowFriendAndNestedRels",
+                  "returnType": "void",
+                  "line": 84,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-model/src/test/java/com/metanet4j/model/domain/bsocial/BsocialDomainContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "bsocialDoCarriesCountersTagsAndProcessTimes",
+                  "returnType": "void",
+                  "line": 15,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bsocialRelationKeepsLikeStateAndNestedRels",
+                  "returnType": "void",
+                  "line": 54,
+                  "classification": "unit"
+                },
+                {
+                  "name": "replyDefaultsAreZeroedAndCollectionsAreMutable",
+                  "returnType": "void",
+                  "line": 81,
+                  "classification": "unit"
+                },
+                {
+                  "name": "replyKeepsThreadAndIdentityReferences",
+                  "returnType": "void",
+                  "line": 112,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-model/src/test/java/com/metanet4j/model/planaria/PlanariaContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "planariaKeepsJsonPayloadOfItsOwn",
+                  "returnType": "void",
+                  "line": 13,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bobAndTxoSharePlanariaJsonBehaviourWithIndependentState",
+                  "returnType": "void",
+                  "line": 26,
+                  "classification": "unit"
+                }
+              ]
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "N/A：纯模型和响应对象",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",

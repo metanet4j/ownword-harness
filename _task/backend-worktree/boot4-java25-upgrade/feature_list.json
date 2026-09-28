@@ -7,8 +7,8 @@
     "blocked",
     "done"
   ],
-  "activeItem": "unit-u3-foundation",
-  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1 base 已完成；U2 sdk 严格验收完成（含用户批准的 12 行精确例外）；U3—U9 待实施。",
+  "activeItem": "unit-u4-protocol",
+  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1 base、U2 sdk、U3 component 基础模块均已完成；U4 sdk 协议处理阶段正在实施，U5—U9 待实施。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -306,21 +306,29 @@
       "id": "unit-u3-foundation",
       "name": "U3 component 基础模块",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "unit-u2-sdk"
       ],
-      "evidence": []
+      "evidence": [
+        "component 提交 63560a3（model）与 4d3cf66（common）：新增 lombok.config（Lombok 生成成员由 JaCoCo 内置 AnnotationGeneratedFilter 逐成员识别）、聚合 POM 补 JUnit/Mockito 与 jacoco:check 例外属性。",
+        "component-model：20/0/0/0，LINE 73/78、BRANCH 2/2、METHOD 18/19，缺口为登记的枚举无调用构造器 5 行；严格验收 evidence/20260928T100401Z/，探针 evidence/20260928-u3-model/enum-ctor-probe.log。",
+        "component-common：41/0/0/0，LINE 239/248、BRANCH 42/42、METHOD 86/95，缺口为 9 个无行为隐式构造器；严格验收 evidence/20260928T103233Z/。",
+        "component-core：2 个纯接口按实测 N/A，严格验收 evidence/20260928T103553Z/（0 可执行方法，gaps=0）。",
+        "测试暴露并最小修复：ConvertTypeEnum 构造器未写入 id、JacksonBeanUtils.copyProperty 忽略目标类型；可测性调整 LocalTestUtxoProvider 目录可配置与 BitcoinSchemaTransaction 可注入 UTXO provider。"
+      ],
+      "statusNote": "2026-09-28 完成：model/common/core 三模块相继达到 §3 口径，剩余缺口均为精确清单登记的无行为或不可达字节码；component 仓库 lombok.config 与聚合 POM 配置就位。"
     },
     {
       "id": "unit-u4-protocol",
       "name": "U4 数据输入与协议处理",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "unit-u3-foundation"
       ],
-      "evidence": []
+      "evidence": [],
+      "statusNote": "2026-09-28 开工：connect-planaria → tx-convertor → tx-filter → tx-validator。"
     },
     {
       "id": "unit-u5-storage",

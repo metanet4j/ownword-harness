@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "decision": "2026-09-28 用户批准：无业务行为的隐式默认构造器与固定内存流不可达的 IOException 包装共 12 行按精确清单例外，其余手写代码维持行、分支、方法 100%。",
+  "decision": "按仓库逐类逐方法登记实测不可达或无行为字节码的精确例外：metanet4j-sdk 12 行（2026-09-28 用户批准）；component 模块起沿用同一机制逐项登记（如枚举中无调用点的构造器），其余手写代码维持行、分支、方法 100%。",
   "enforcement": "verify-unit.py 严格模式双向核对：实测未覆盖方法集合必须与本清单逐项相等；jacoco:check 通过各仓库属性 jacoco.unit.check.excludes 排除本清单类名（check 用点号 Java 名，内部类写作 Outer.Inner；本文件 class 字段用 XML 报告的 $ 名）。",
   "modules": {
     "metanet4j-sdk": {
@@ -74,6 +74,84 @@
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
             {"method": "<init>", "line": 11, "lineMissed": 1, "methodMissed": 1}
+          ]
+        }
+      ]
+    },
+    "metanet4j-component-model": {
+      "entries": [
+        {
+          "class": "com/metanet4j/model/api/CustomResultCode",
+          "reason": "枚举的 2 参构造器无任何常量使用；枚举构造器被 JDK 禁止反射创建（Cannot reflectively create enum objects），无合法触发路径。探针 evidence/20260928-u3-model/enum-ctor-probe.log",
+          "missed": [
+            {"method": "<init>", "line": 15, "lineMissed": 5, "methodMissed": 1}
+          ]
+        }
+      ]
+    },
+    "metanet4j-component-common": {
+      "entries": [
+        {
+          "class": "com/metanet4j/component/common/transaction/MyBapBase",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 6, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/component/common/state/StateHelper",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 8, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/component/common/utils/JacksonBeanUtils",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 5, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/component/common/utils/SqlHelper",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 5, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/component/common/utils/ClientXprvThreadLocal",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 5, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/component/common/constants/SingleBapOutKeyConstant",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 6, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/component/common/constants/AppendDataBapOutKeyConstant",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 6, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/component/common/constants/SetCmdConstant",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 3, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/component/common/config/PlanariaConfiguration",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 9, "lineMissed": 1, "methodMissed": 1}
           ]
         }
       ]
