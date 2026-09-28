@@ -15,6 +15,8 @@ let sequence = 0
 let occurrence = 0
 let operands = []
 let branchEmitted = false
+let instances = new WeakMap()
+let nextInstance = 0
 const occurrences = new Map()
 beforeEach(() => {
   const test = expect.getState().currentTestName
@@ -23,6 +25,8 @@ beforeEach(() => {
   sequence = 0
   operands = []
   branchEmitted = false
+  instances = new WeakMap()
+  nextInstance = 0
 })
 function encode (value) {
   if (value === undefined) return { type: 'undefined' }
@@ -45,19 +49,19 @@ function write (value) {
   if (!test) return
   fs.appendFileSync(output, JSON.stringify({ test, occurrence, sequence: ++sequence, value }) + '\n')
 }
-function call (method, args, action) {
+function call (method, args, receiver, action) {
   const site = source()
   try {
     const result = action()
     if (site) {
       write({ kind: 'call', test: expect.getState().currentTestName, sequence: sequence + 1,
-        source: site, method, args: args.map(encode) })
+        receiverId: receiver(), source: site, method, args: args.map(encode) })
     }
     return result
   } catch (error) {
     if (site) {
       write({ kind: 'call', test: expect.getState().currentTestName, sequence: sequence + 1,
-        source: site, method, args: args.map(encode) })
+        receiverId: receiver(), source: site, method, args: args.map(encode) })
     }
     throw error
   }
@@ -92,11 +96,17 @@ jest.doMock(filename, () => {
   const Real = actual.default
   const generate = Real.prototype.generate
   jest.spyOn(Real.prototype, 'generate').mockImplementation(function (...args) {
-    return call('DRBG.generate', args, () => Reflect.apply(generate, this, args))
+    return call('DRBG.generate', args, () => instances.get(this) ?? null,
+      () => Reflect.apply(generate, this, args))
   })
   const wrapped = new Proxy(Real, {
     construct (target, args, newTarget) {
-      return call('DRBG.constructor', args, () => Reflect.construct(target, args, newTarget))
+      let created = null
+      return call('DRBG.constructor', args, () => (created === null ? null : instances.get(created)), () => {
+        created = Reflect.construct(target, args, newTarget)
+        instances.set(created, ++nextInstance)
+        return created
+      })
     }
   })
   return { ...actual, default: wrapped, __esModule: true }
