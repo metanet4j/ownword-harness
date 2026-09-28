@@ -2,7 +2,7 @@
 
 ## 当前状态
 
-胡先生要求四个子仓库建立完整单元测试与集成测试，已批准 U0—U9 范围与公开 API 测试，并以 `/goal` 要求持续推进到全部完成、遇无法解决的阻塞才停下报告。U0—U3 已完成；当前 `unit-u4-protocol` 在实施（connect-planaria → tx-convertor → tx-filter → tx-validator）。开工前先读本目录 `AGENTS.md`、`../AGENTS.md`、[测试计划](doc/单元测试全覆盖计划-20260920-090603.md)、`feature_list.json`，运行 `./init.sh`。共享 SDK/component `target` 只允许串行运行 Maven；集成测试须在宿主环境提权执行。不要读取 Archive、推送远端、广播主网或清理共享中间件数据。
+胡先生要求四个子仓库建立完整单元测试与集成测试，已批准 U0—U9 范围与公开 API 测试，并以 `/goal` 要求持续推进到全部完成、遇无法解决的阻塞才停下报告。U0—U4 已完成；U5 进行中：store-sql、store-mongo 已完成，store-search 未开始。开工前先读本目录 `AGENTS.md`、`../AGENTS.md`、[测试计划](doc/单元测试全覆盖计划-20260920-090603.md)、`feature_list.json`，运行 `./init.sh`。共享 SDK/component `target` 只允许串行运行 Maven；集成测试须在宿主环境提权执行。不要读取 Archive、推送远端、广播主网或清理共享中间件数据。
 
 U3 证据：component-model 20/0/0/0（`evidence/20260928T100401Z/`）、component-common 41/0/0/0（`evidence/20260928T103233Z/`）、component-core 纯接口 N/A（`evidence/20260928T103553Z/`）；提交 component `63560a3`、`4d3cf66`。U2 证据 `evidence/20260928T093257Z/`（head 670ee3d），U1 base 回归 `evidence/20260928T092443Z/`。
 
@@ -17,4 +17,4 @@ U3 证据：component-model 20/0/0/0（`evidence/20260928T100401Z/`）、compone
 
 ## Next Session
 
-从 `unit-u4-protocol` 的 connect-planaria 开始：读源码 → 按公开接缝写行为测试（外部 HTTP 用受控替身）→ 模块 `clean test jacoco:report` 迭代到仅剩精确清单缺口 → 登记 inventory 与例外 → `verify-unit.py --mode accept --scope <模块>` 保存证据 → 提交；随后 tx-convertor、tx-filter、tx-validator。
+继续 `unit-u5-storage` 的 store-search：以受控 ES client 替身写行为测试 → `clean test jacoco:report` 迭代到仅剩精确清单缺口 → 登记 inventory 与例外 → `verify-unit.py --mode accept --scope metanet4j-store-search` → 提交；随后 U6（component-tx → bap → bsocial → bitcoinschema → handler）。

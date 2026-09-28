@@ -5130,7 +5130,392 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/StoreMongoWiringContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "emptyRepositoryImplementationsRemainInstantiable",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit"
+                },
+                {
+                  "name": "updateBapRecordCopiesTheIdentityKeyAndSaves",
+                  "returnType": "void",
+                  "line": 29,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bap/BapRecordListenerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "beforeConvertStampsNewRecordsAndResolvesTheirIdentityKey",
+                  "returnType": "void",
+                  "line": 44,
+                  "classification": "unit"
+                },
+                {
+                  "name": "beforeConvertKeepsUnresolvedRecordsIncomplete",
+                  "returnType": "void",
+                  "line": 60,
+                  "classification": "unit"
+                },
+                {
+                  "name": "beforeConvertTrustsAlreadyResolvedIdentityKeys",
+                  "returnType": "void",
+                  "line": 74,
+                  "classification": "unit"
+                },
+                {
+                  "name": "afterSavePublishesRootRecordsAsRootBaps",
+                  "returnType": "void",
+                  "line": 85,
+                  "classification": "unit"
+                },
+                {
+                  "name": "afterSavePublishesNonRootRecordsWithoutRootFlag",
+                  "returnType": "void",
+                  "line": 96,
+                  "classification": "unit"
+                },
+                {
+                  "name": "afterSaveIgnoresRecordsWithoutIdentityKey",
+                  "returnType": "void",
+                  "line": 107,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bap/repository/bapid/CustomizedBapIdRepositoryImplContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "saveSignerResetsCurrentFlagsAndPushesTheNewSigner",
+                  "returnType": "void",
+                  "line": 39,
+                  "classification": "unit"
+                },
+                {
+                  "name": "updateIdentityByIdWritesTheIdentityDocumentAndTransaction",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findIdentityKeyFallsBackToAnEmptyDocument",
+                  "returnType": "void",
+                  "line": 57,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findCurrentSignerIsStillAStub",
+                  "returnType": "void",
+                  "line": 69,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findShowIdentityPagesByEventTime",
+                  "returnType": "void",
+                  "line": 74,
+                  "classification": "unit"
+                },
+                {
+                  "name": "listBapIdQueriesByIdentityKeys",
+                  "returnType": "void",
+                  "line": 86,
+                  "classification": "unit"
+                },
+                {
+                  "name": "signingBaseStubsStayDocumented",
+                  "returnType": "void",
+                  "line": 94,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bap/repository/baprelation/CustomizedBapRelationRepositoryImplContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "deprecatedFollowListQueriesCountBeforePaging",
+                  "returnType": "void",
+                  "line": 43,
+                  "classification": "unit"
+                },
+                {
+                  "name": "subscriptionQueriesReturnTheirPages",
+                  "returnType": "void",
+                  "line": 54,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findBapIdentityLinkReturnsTheSingleRelation",
+                  "returnType": "void",
+                  "line": 66,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addOrUpdateRelFollowsTheCalculatedState",
+                  "returnType": "void",
+                  "line": 74,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addOrUpdateRelFiltersExistingRelsOfTheSameState",
+                  "returnType": "void",
+                  "line": 84,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addOrUpdateRelHandlesUnfollowStates",
+                  "returnType": "void",
+                  "line": 94,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addOrUpdateRelIgnoresStatesWithoutHandling",
+                  "returnType": "void",
+                  "line": 104,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addOrUpdateRelValidatesItsInput",
+                  "returnType": "void",
+                  "line": 113,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bsocail/BsocialRecordListenerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "beforeConvertValidatesItsInput",
+                  "returnType": "void",
+                  "line": 36,
+                  "classification": "unit"
+                },
+                {
+                  "name": "beforeConvertStampsNewRecordsAndResolvesIdentityKey",
+                  "returnType": "void",
+                  "line": 48,
+                  "classification": "unit"
+                },
+                {
+                  "name": "beforeConvertKeepsUnresolvedRecordsIncomplete",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                },
+                {
+                  "name": "beforeConvertTrustsAlreadyResolvedIdentityKeys",
+                  "returnType": "void",
+                  "line": 75,
+                  "classification": "unit"
+                },
+                {
+                  "name": "beforeConvertKeepsExistingEventTimes",
+                  "returnType": "void",
+                  "line": 87,
+                  "classification": "unit"
+                },
+                {
+                  "name": "afterSaveOnlyBridgesRecordsThatCarryAnIdentityKey",
+                  "returnType": "void",
+                  "line": 100,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bsocail/repository/bsocial/CustomizedBsocialRepositoryImplContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "findByIdentityKeyUsesThePostType",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findBsocialByPageKeepsCountAndPageMetadata",
+                  "returnType": "void",
+                  "line": 43,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findLatestFiltersOnContentTypeAndPostType",
+                  "returnType": "void",
+                  "line": 52,
+                  "classification": "unit"
+                },
+                {
+                  "name": "updateByNoteInputRewritesContentTitleAndTags",
+                  "returnType": "void",
+                  "line": 59,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bsocail/repository/bsocialrelation/CustomizedBsocialRelationRepositoryImplContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "findNoteLinkQueriesByNoteCharacterAndState",
+                  "returnType": "void",
+                  "line": 42,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findNoteLinksByPageKeepsCountAndPageMetadata",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "unit"
+                },
+                {
+                  "name": "countNoteLinkReturnsTheRawCount",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addOrUpdateRelUpsertsLikeStateWithEveryRel",
+                  "returnType": "void",
+                  "line": 70,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addOrUpdateRelKeepsExistingRelsOfTheSameState",
+                  "returnType": "void",
+                  "line": 79,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addOrUpdateRelHandlesUnlikeStates",
+                  "returnType": "void",
+                  "line": 89,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addOrUpdateRelIgnoresUnknownStates",
+                  "returnType": "void",
+                  "line": 96,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addOrUpdateRelValidatesItsInput",
+                  "returnType": "void",
+                  "line": 105,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bsocail/repository/bsocialreply/CustomizedBsocialReplyRepositoryImplContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "findRootCommentsPageAssemblesChildrenAndBapIdentities",
+                  "returnType": "void",
+                  "line": 44,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findRootCommentsPageToleratesMissingChildDocuments",
+                  "returnType": "void",
+                  "line": 75,
+                  "classification": "unit"
+                },
+                {
+                  "name": "updateRootChildsCountKeepsHigherExistingCounts",
+                  "returnType": "void",
+                  "line": 97,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveReplyValidatesItsInput",
+                  "returnType": "void",
+                  "line": 115,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveReplyStoresRootRepliesDirectly",
+                  "returnType": "void",
+                  "line": 123,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveReplyRequiresAnExistingParent",
+                  "returnType": "void",
+                  "line": 135,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveReplyAttachesSecondLevelRepliesToTheirRootParent",
+                  "returnType": "void",
+                  "line": 144,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveReplyKeepsParentChildListAtTenEntries",
+                  "returnType": "void",
+                  "line": 168,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveReplyCountsThirdLevelRepliesUpToTheRoot",
+                  "returnType": "void",
+                  "line": 189,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveReplySkipsTheSecondLevelCounterForReplyingToTheSecondLevelItself",
+                  "returnType": "void",
+                  "line": 218,
+                  "classification": "unit"
+                },
+                {
+                  "name": "updateRootChildsCountReportsMissingDocuments",
+                  "returnType": "void",
+                  "line": 244,
+                  "classification": "unit"
+                },
+                {
+                  "name": "updateRootChildsCountReportsMissingChildDocument",
+                  "returnType": "void",
+                  "line": 251,
+                  "classification": "unit"
+                },
+                {
+                  "name": "updateRootChildsCountKeepsTheTopTenChildren",
+                  "returnType": "void",
+                  "line": 262,
+                  "classification": "unit"
+                },
+                {
+                  "name": "updateRootChildsCountReplacesOutdatedEntriesForTheSameChild",
+                  "returnType": "void",
+                  "line": 284,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findBsocialRootReplyQueriesByRootAndChildIds",
+                  "returnType": "void",
+                  "line": 301,
+                  "classification": "unit"
+                }
+              ]
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
@@ -5346,7 +5731,104 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/StoreSqlWiringContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "repositoryBeansAndBaseTypesRemainInstantiable",
+                  "returnType": "void",
+                  "line": 15,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/handler/MetanetObjectHandlerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "insertFillStampsCreateTimeOnAnnotatedEntities",
+                  "returnType": "void",
+                  "line": 31,
+                  "classification": "unit"
+                },
+                {
+                  "name": "updateFillStampsUpdateTimeOnAnnotatedEntities",
+                  "returnType": "void",
+                  "line": 42,
+                  "classification": "unit"
+                },
+                {
+                  "name": "insertFillKeepsValuesThatAreAlreadySet",
+                  "returnType": "void",
+                  "line": 52,
+                  "classification": "unit"
+                },
+                {
+                  "name": "unregisteredEntitiesFailFast",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/slave/blockTask/service/impl/BlockTaskServiceImplContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "returnsTheLatestBlockTaskFromTheMapper",
+                  "returnType": "void",
+                  "line": 16,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/utxo/txRawkeyIndex/service/impl/TxRawkeyIndexServiceImplContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "serviceCanBeInstantiatedForSpringWiring",
+                  "returnType": "void",
+                  "line": 10,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/utxo/txUtxo/service/impl/TxUtxoServiceImplContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "insertsNewUtxosUnderTheirGeneratedId",
+                  "returnType": "void",
+                  "line": 29,
+                  "classification": "unit"
+                },
+                {
+                  "name": "updatesSpentUtxosWhenTheStoredRecordIsSpent",
+                  "returnType": "void",
+                  "line": 41,
+                  "classification": "unit"
+                },
+                {
+                  "name": "updatesUnspentUtxosWhenTheStoredRecordIsNotSpent",
+                  "returnType": "void",
+                  "line": 53,
+                  "classification": "unit"
+                },
+                {
+                  "name": "propagatesMapperFailures",
+                  "returnType": "void",
+                  "line": 64,
+                  "classification": "unit"
+                }
+              ]
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",

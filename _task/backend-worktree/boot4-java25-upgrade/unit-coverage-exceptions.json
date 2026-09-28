@@ -212,6 +212,17 @@
           ]
         }
       ]
+    },
+    "metanet4j-store-mongo": {
+      "entries": [
+        {
+          "class": "com/metanet4j/store/mongo/bap/repository/baprelation/CustomizedBapRelationRepositoryImpl",
+          "reason": "StateHelper 对 FRIEND 状态无计数逻辑，calculateState 恒返回 UNKNOWN，friendState 分支不可达",
+          "missed": [
+            {"method": "addOrUpdateRel", "line": 93, "lineMissed": 4, "methodMissed": 0, "branchMissed": 2}
+          ]
+        }
+      ]
     }
   }
 }
