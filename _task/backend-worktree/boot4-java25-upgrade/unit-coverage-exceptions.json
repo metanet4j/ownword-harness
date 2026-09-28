@@ -310,6 +310,25 @@
           ]
         }
       ]
+    },
+    "metanet4j-component-cache": {
+      "entries": [
+        {
+          "class": "com/metanet4j/component/cache/RedissonAutoConfiguration",
+          "reason": "redisson() 中 timeoutValue instanceof Integer 判定与 (Integer) 强转分支：Spring Boot 4 的 DataRedisProperties.getTimeout() 返回 Duration，Integer 分支不可达；clusterMethod != null 的假分支需要旧版 DataRedisProperties（无 getCluster()）才会出现。集群与单机两条真实路径均已覆盖",
+          "missed": [
+            {"method": "redisson", "line": 95, "lineMissed": 1, "methodMissed": 0, "branchMissed": 2}
+          ]
+        },
+        {
+          "class": "com/metanet4j/component/cache/RedisUtils",
+          "reason": "scan/findKeysForPage 释放连接的内层 catch：Spring 的 RedisConnectionUtils.releaseConnection 在受控替身下不会抛异常（实测连接 close 已调用且异常被其内部处理），该防御性兜底在单元环境不可达",
+          "missed": [
+            {"method": "scan", "line": 124, "lineMissed": 2, "methodMissed": 0},
+            {"method": "findKeysForPage", "line": 149, "lineMissed": 2, "methodMissed": 0}
+          ]
+        }
+      ]
     }
   }
 }

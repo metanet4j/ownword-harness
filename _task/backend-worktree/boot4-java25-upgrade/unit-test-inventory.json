@@ -3981,7 +3981,236 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-component-cache/src/test/java/com/metanet4j/component/cache/CacheManagerConfigContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "cacheManagerRegistersTheRedissonCacheMapWithItsTtlAndIdleTime",
+                  "returnType": "void",
+                  "line": 27,
+                  "classification": "unit"
+                },
+                {
+                  "name": "keyGeneratorHashesTheJsonOfTheParameters",
+                  "returnType": "void",
+                  "line": 40,
+                  "classification": "unit"
+                },
+                {
+                  "name": "keyGeneratorProducesDifferentKeysForDifferentParameters",
+                  "returnType": "void",
+                  "line": 52,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-cache/src/test/java/com/metanet4j/component/cache/RedisServiceContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "setStoresTheValueWithoutExpiration",
+                  "returnType": "void",
+                  "line": 36,
+                  "classification": "unit"
+                },
+                {
+                  "name": "setStoresTheValueWithTheGivenTtl",
+                  "returnType": "void",
+                  "line": 43,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getReturnsTheStoredValue",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getReturnsNullForANullKeyWithoutTouchingRedis",
+                  "returnType": "void",
+                  "line": 57,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-cache/src/test/java/com/metanet4j/component/cache/RedisUtilsContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "expireDelegatesOnlyForPositiveDurations",
+                  "returnType": "void",
+                  "line": 86,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getExpireReadsTheRemainingSeconds",
+                  "returnType": "void",
+                  "line": 104,
+                  "classification": "unit"
+                },
+                {
+                  "name": "scanReturnsEveryMatchingKey",
+                  "returnType": "void",
+                  "line": 112,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findKeysForPageReturnsOnlyTheRequestedWindow",
+                  "returnType": "void",
+                  "line": 123,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findKeysForPageStopsWhenTheWindowIsExhausted",
+                  "returnType": "void",
+                  "line": 135,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findKeysForPageBreaksAsSoonAsTheWindowIsExhausted",
+                  "returnType": "void",
+                  "line": 147,
+                  "classification": "unit"
+                },
+                {
+                  "name": "hasKeyAndDelCoverSingleAndMultipleKeys",
+                  "returnType": "void",
+                  "line": 157,
+                  "classification": "unit"
+                },
+                {
+                  "name": "valueOperationsDelegateToTheTemplate",
+                  "returnType": "void",
+                  "line": 180,
+                  "classification": "unit"
+                },
+                {
+                  "name": "incrAndDecrGuardAgainstNonPositiveFactors",
+                  "returnType": "void",
+                  "line": 212,
+                  "classification": "unit"
+                },
+                {
+                  "name": "hashOperationsDelegateToTheTemplate",
+                  "returnType": "void",
+                  "line": 226,
+                  "classification": "unit"
+                },
+                {
+                  "name": "setOperationsDelegateToTheTemplate",
+                  "returnType": "void",
+                  "line": 264,
+                  "classification": "unit"
+                },
+                {
+                  "name": "zsetOperationsDelegateToTheTemplate",
+                  "returnType": "void",
+                  "line": 288,
+                  "classification": "unit"
+                },
+                {
+                  "name": "listOperationsDelegateToTheTemplate",
+                  "returnType": "void",
+                  "line": 322,
+                  "classification": "unit"
+                },
+                {
+                  "name": "prefixHelpersQueryAndDeleteByPattern",
+                  "returnType": "void",
+                  "line": 355,
+                  "classification": "unit"
+                },
+                {
+                  "name": "generateUsesARedisAtomicCounter",
+                  "returnType": "void",
+                  "line": 375,
+                  "classification": "unit"
+                },
+                {
+                  "name": "everyFailurePathFallsBackToItsDefaultValue",
+                  "returnType": "void",
+                  "line": 389,
+                  "classification": "unit"
+                },
+                {
+                  "name": "scanToleratesAClosingConnectionFailure",
+                  "returnType": "void",
+                  "line": 449,
+                  "classification": "unit"
+                },
+                {
+                  "name": "scanRequiresAConnectionFactory",
+                  "returnType": "void",
+                  "line": 464,
+                  "classification": "unit"
+                },
+                {
+                  "name": "instanceIsWiredThroughTheDeclaredField",
+                  "returnType": "void",
+                  "line": 471,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-cache/src/test/java/com/metanet4j/component/cache/RedissonAutoConfigurationContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "redisTemplateBindsTheConnectionFactory",
+                  "returnType": "void",
+                  "line": 42,
+                  "classification": "unit"
+                },
+                {
+                  "name": "stringRedisTemplateBindsTheConnectionFactory",
+                  "returnType": "void",
+                  "line": 51,
+                  "classification": "unit"
+                },
+                {
+                  "name": "redissonConnectionFactoryWrapsTheRedissonClient",
+                  "returnType": "void",
+                  "line": 60,
+                  "classification": "unit"
+                },
+                {
+                  "name": "reactiveAndRxClientsAreDerivedFromTheRedissonClient",
+                  "returnType": "void",
+                  "line": 67,
+                  "classification": "unit"
+                },
+                {
+                  "name": "redissonCreatesAClientFromTheYamlConfigUsingADurationTimeout",
+                  "returnType": "void",
+                  "line": 79,
+                  "classification": "unit"
+                },
+                {
+                  "name": "redissonFailsWithoutAnyConfig",
+                  "returnType": "void",
+                  "line": 92,
+                  "classification": "unit"
+                },
+                {
+                  "name": "redissonAppliesClusterNodesAndTimeoutFromTheProperties",
+                  "returnType": "void",
+                  "line": 100,
+                  "classification": "unit"
+                },
+                {
+                  "name": "convertAddsTheRedisProtocolPrefixWhenItIsMissing",
+                  "returnType": "void",
+                  "line": 114,
+                  "classification": "unit"
+                }
+              ]
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
