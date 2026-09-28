@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """冻结 KeyDeriver 原 Jest 的真实构造与公开方法调用。"""
 import argparse
+import importlib.util
 from collections import defaultdict
 import json
 import os
@@ -68,6 +69,9 @@ def freeze(args):
                                     'javaMethod': java[0]['name'], 'value': identity(row)})
     require(set(grouped) == ids, 'KeyDeriver 原用例有入口未采集')
     require(sum(map(len, grouped.values())) == EVENTS, f'KeyDeriver 固定原入口总数应为 {EVENTS}')
+    spec = importlib.util.spec_from_file_location('audit_tests', TASK / 'audit-tests.py')
+    audit = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(audit)
     plan = {}
     replay = []
     for case in cases:
@@ -75,9 +79,15 @@ def freeze(args):
         events = grouped[case_id]
         assertions = mapped[case_id]['assertionIds']
         require(assertions, 'KeyDeriver 原用例无断言映射')
-        plan[case_id] = {'sampleIds': [event['sampleId'] for event in events],
-                         'assertionIds': assertions,
-                         'assertionSites': {site: site for site in assertions}, 'loopSamples': {}}
+        entry = {'sampleIds': [event['sampleId'] for event in events],
+                 'assertionIds': assertions,
+                 'assertionSites': {site: site for site in assertions}, 'loopSamples': {}}
+        fixed = audit.semantic_specs(case_id)
+        if fixed:
+            entry['comparisonRules'] = {identity: fixed[entry['assertionSites'][identity]][0]
+                                        for identity in assertions
+                                        if entry['assertionSites'][identity] in fixed}
+        plan[case_id] = entry
         replay.extend(events)
     write(args.catalog, catalog)
     write(args.mapping, mapping)
