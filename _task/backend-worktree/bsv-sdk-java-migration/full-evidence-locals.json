@@ -1006,6 +1006,24 @@
       "java_report": [
         ".cache/evidence/drbg-java-formal2-20260928/surefire.xml"
       ]
+    },
+    {
+      "name": "http-wallet-json",
+      "catalog": ".cache/evidence/http-wallet-json-plan-20260927/catalog.json",
+      "mapping": ".cache/evidence/http-wallet-json-plan-20260927/mapping.json",
+      "input_plan": "http-wallet-json-input-plan.json",
+      "ts_inputs": ".cache/evidence/http-wallet-json-formal4-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/http-wallet-json-formal4-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/http-wallet-json-formal4-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/http-wallet-json-formal4-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/http-wallet-json-formal4-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/http-wallet-json-formal4-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/http-wallet-json-formal4-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/http-wallet-json-formal4-20260929/java-surefire.xml"
+      ]
     }
   ]
 }
