@@ -1,0 +1,372 @@
+{
+  "bf42db2f95a8b98d326be1d0c57f2708f2027a923b2dc01a10c6568966219a75": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:21:constructor:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:24:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:29:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:24:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:24:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:29:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:29:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "93e69d39c92dceebf9fa2922920197a0d6916abe4aff0410ac922164e5a2dd6d": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:35:constructor:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:36:verifySignature:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:48:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:48:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:48:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "3d610e82c581d0585e00a41d2b939ca8bf681d328f5be087156a0a0c7fd36c6d": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:51:constructor:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:54:verifyHmac:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:64:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:64:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:64:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "618a99514a1b5a34d17104459909d05604df12f1c23c02f546c8dab5c331be0d": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:67:constructor:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:70:decrypt:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:82:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:82:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:82:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "d43a75017a6b5c59a4bc9983eca2a767f685705ab90a98031c4dad531364a9b3": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:85:encrypt:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:91:decrypt:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:97:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:98:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:97:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:97:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:98:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:98:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "675896aaf5599eef5ebf2c5cffb5b07105541a438f26fd797a32aa8c65d4c494": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:101:encrypt:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:109:decrypt:case1#0004",
+      "src/wallet/__tests/ProtoWallet.test.ts:118:decrypt:case1#0005",
+      "src/wallet/__tests/ProtoWallet.test.ts:127:decrypt:case1#0006"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:107:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:116:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:125:11:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:107:11:assertion": "src/wallet/__tests/ProtoWallet.test.ts:107:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:116:11:assertion": "src/wallet/__tests/ProtoWallet.test.ts:116:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:125:11:assertion": "src/wallet/__tests/ProtoWallet.test.ts:125:11:assertion"
+    },
+    "loopSamples": {}
+  },
+  "57c4b632a8963a3babefa1fb4e5d45a513b79f70167cdda94967d862e8cc4fb8": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:136:getPublicKey:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:140:getPublicKey:case1#0004",
+      "src/wallet/__tests/ProtoWallet.test.ts:145:getPublicKey:case1#0005"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:139:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:151:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:139:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:139:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:151:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:151:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5bf4e1bb43cbde926511c21c9e41bfb7ac4fa495a917211995a820af33ab4b85": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:154:createSignature:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:160:verifySignature:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:167:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:168:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:167:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:167:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:168:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:168:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "628931b16fc1aa228284b4088c0e515071aa8382a607d3d59c41c87a22e8437d": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:171:createSignature:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:177:verifySignature:case1#0004",
+      "src/wallet/__tests/ProtoWallet.test.ts:185:verifySignature:case1#0005"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:184:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:192:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:193:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:184:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:184:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:192:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:192:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:193:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:193:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "10865212fcaac6381d61065033cb76c3e6b18115e0d8945c4dc2e73890d784ca": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:196:createSignature:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:204:verifySignature:case1#0004",
+      "src/wallet/__tests/ProtoWallet.test.ts:214:verifySignature:case1#0005",
+      "src/wallet/__tests/ProtoWallet.test.ts:224:verifySignature:case1#0006",
+      "src/wallet/__tests/ProtoWallet.test.ts:234:verifySignature:case1#0007"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:202:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:212:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:222:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:232:11:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:202:11:assertion": "src/wallet/__tests/ProtoWallet.test.ts:202:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:212:11:assertion": "src/wallet/__tests/ProtoWallet.test.ts:212:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:222:11:assertion": "src/wallet/__tests/ProtoWallet.test.ts:222:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:232:11:assertion": "src/wallet/__tests/ProtoWallet.test.ts:232:11:assertion"
+    },
+    "loopSamples": {}
+  },
+  "2dfb5cc69698249db483967b37f926ca21305657bee0dde4ded4be354806e229": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:244:createHmac:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:250:verifyHmac:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:257:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:258:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:257:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:257:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:258:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:258:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "eb13dbb32d4168cdef9b186c324d11071b6855983f953c1fef27e863bb452768": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:261:createHmac:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:269:verifyHmac:case1#0004",
+      "src/wallet/__tests/ProtoWallet.test.ts:279:verifyHmac:case1#0005",
+      "src/wallet/__tests/ProtoWallet.test.ts:289:verifyHmac:case1#0006",
+      "src/wallet/__tests/ProtoWallet.test.ts:299:verifyHmac:case1#0007"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:267:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:277:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:287:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:297:11:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:267:11:assertion": "src/wallet/__tests/ProtoWallet.test.ts:267:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:277:11:assertion": "src/wallet/__tests/ProtoWallet.test.ts:277:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:287:11:assertion": "src/wallet/__tests/ProtoWallet.test.ts:287:11:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:297:11:assertion": "src/wallet/__tests/ProtoWallet.test.ts:297:11:assertion"
+    },
+    "loopSamples": {}
+  },
+  "fa778d48d4deda30d47c4d06763b4a681da47d7086e463749ab01439a578a5d1": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:309:createHmac:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:314:verifyHmac:case1#0004",
+      "src/wallet/__tests/ProtoWallet.test.ts:321:verifyHmac:case1#0005",
+      "src/wallet/__tests/ProtoWallet.test.ts:330:createSignature:case1#0006",
+      "src/wallet/__tests/ProtoWallet.test.ts:336:constructor:case1#0007",
+      "src/wallet/__tests/ProtoWallet.test.ts:337:verifySignature:case1#0008",
+      "src/wallet/__tests/ProtoWallet.test.ts:345:createSignature:case1#0009",
+      "src/wallet/__tests/ProtoWallet.test.ts:351:verifySignature:case1#0010",
+      "src/wallet/__tests/ProtoWallet.test.ts:359:verifySignature:case1#0011",
+      "src/wallet/__tests/ProtoWallet.test.ts:367:getPublicKey:case1#0012",
+      "src/wallet/__tests/ProtoWallet.test.ts:371:getPublicKey:case1#0013",
+      "src/wallet/__tests/ProtoWallet.test.ts:377:encrypt:case1#0014",
+      "src/wallet/__tests/ProtoWallet.test.ts:382:decrypt:case1#0015",
+      "src/wallet/__tests/ProtoWallet.test.ts:387:decrypt:case1#0016"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:320:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:328:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:329:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:344:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:358:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:366:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:376:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:393:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:394:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:320:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:320:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:328:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:328:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:329:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:329:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:344:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:344:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:358:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:358:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:366:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:366:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:376:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:376:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:393:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:393:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:394:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:394:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "f6e706208e6ac09a294094e58bd419ddc10cd88de8877b871dd50badd638fc48": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:398:constructor:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:401:constructor:case1#0004",
+      "src/wallet/__tests/ProtoWallet.test.ts:406:createHmac:case1#0005",
+      "src/wallet/__tests/ProtoWallet.test.ts:407:createSignature:case1#0006",
+      "src/wallet/__tests/ProtoWallet.test.ts:414:verifyHmac:case1#0007",
+      "src/wallet/__tests/ProtoWallet.test.ts:415:verifySignature:case1#0008",
+      "src/wallet/__tests/ProtoWallet.test.ts:424:createHmac:case1#0009",
+      "src/wallet/__tests/ProtoWallet.test.ts:425:createSignature:case1#0010",
+      "src/wallet/__tests/ProtoWallet.test.ts:432:verifyHmac:case1#0011",
+      "src/wallet/__tests/ProtoWallet.test.ts:433:verifySignature:case1#0012"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:422:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:440:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:422:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:422:5:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:440:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:440:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "79013abffe9fd50021a9f497ec293742215160a9f4e80c6de20344d16ee8d7ff": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:455:constructor:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:455:revealCounterpartyKeyLinkage:case1#0004",
+      "src/wallet/__tests/ProtoWallet.test.ts:459:constructor:case1#0005",
+      "src/wallet/__tests/ProtoWallet.test.ts:459:decrypt:case1#0006"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:466:9:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:467:9:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:466:9:assertion": "src/wallet/__tests/ProtoWallet.test.ts:466:9:assertion",
+      "src/wallet/__tests/ProtoWallet.test.ts:467:9:assertion": "src/wallet/__tests/ProtoWallet.test.ts:467:9:assertion"
+    },
+    "loopSamples": {}
+  },
+  "98bc02e945e24f65cc360c55083ef0678dce51ddb46081beb0f301edb7c62ebb": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:480:constructor:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:481:constructor:case1#0004",
+      "src/wallet/__tests/ProtoWallet.test.ts:484:revealCounterpartyKeyLinkage:case1#0005",
+      "src/wallet/__tests/ProtoWallet.test.ts:490:decrypt:case1#0006"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:503:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:503:7:assertion": "src/wallet/__tests/ProtoWallet.test.ts:503:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "b0fb2974f8177edff12f88d30251e94f029a3ac2638e37d095a8ee938ec4d416": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:513:constructor:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:514:constructor:case1#0004",
+      "src/wallet/__tests/ProtoWallet.test.ts:520:revealSpecificKeyLinkage:case1#0005",
+      "src/wallet/__tests/ProtoWallet.test.ts:528:decrypt:case1#0006"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:575:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:575:7:assertion": "src/wallet/__tests/ProtoWallet.test.ts:575:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "41c5c81b5d5638dc29778e5621bf3a5dc896267bff00f3d13901666203875a21": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:580:createHmac:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:593:verifyHmac:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:591:11:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:591:11:assertion": "src/wallet/__tests/ProtoWallet.test.ts:591:11:assertion"
+    },
+    "loopSamples": {}
+  },
+  "e79bea72cb6ce752a09096a8a151b8b20d35200e2a070f33aa5ec6fa2b9a011e": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:15:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.test.ts:16:constructor:case1#0002",
+      "src/wallet/__tests/ProtoWallet.test.ts:604:createHmac:case1#0003",
+      "src/wallet/__tests/ProtoWallet.test.ts:611:verifyHmac:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.test.ts:619:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.test.ts:619:5:assertion": "src/wallet/__tests/ProtoWallet.test.ts:619:5:assertion"
+    },
+    "loopSamples": {}
+  }
+}
