@@ -344,7 +344,10 @@
       "dependencies": [
         "unit-u4-protocol"
       ],
-      "evidence": []
+      "evidence": [
+        "store-sql 提交 c8c45c3：11/0/0/0，LINE 24/24、BRANCH 4/4、METHOD 14/14，证据 evidence/20260928T132352Z/。",
+        "store-mongo 提交 4904dac：56/0/0/0，LINE 311/315、BRANCH 54/56，缺口为不可达 friendState 分支；证据 evidence/20260928T135300Z/。"
+      ]
     },
     {
       "id": "unit-u6-business",
