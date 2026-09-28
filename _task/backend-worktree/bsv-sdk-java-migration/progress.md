@@ -15,6 +15,7 @@
 - 认证会话：目标提交 `94d5bc0`，异步存储修复 `7c382f6`，公开异步存储入口 `3e58d02`；固定 TS／Java 85／85、160／160 条实际断言一致，另有两例延迟 Future 回归，报告 `.cache/evidence/auth-sessions-parity-main-7c382f6.json`。API-19 的 101 项通过单批审计。
 - 认证传输：固定 TS／Java 的 Transport＋AuthFetch 183／183 个原用例、968／968 条实际断言已在 `c0d9fdd` 对照通过，报告 `.cache/evidence/java-full-after-auth-property-20260926/auth-transport-task-parity-replayed.json`；两条运行时间戳与堆栈按固定字段语义核验。AuthFetch 属性测试固定 TS 300 组实际生成输入已由 Java 同批重放，600／600 条断言精确一致，语料 SHA-256 为 `b0cf9d142fed85b2a9a82b85ac4b254ae6408da60ffa6457f98e757825818392`。本任务 taskAcceptance 已通过，排期状态仍等待依赖。
 - DRBG：目标提交 `c23c6f6`；固定 TS／Java 原例 29／29、实际断言 30／30 逐值一致，72 条真实入口（57 个构造／生成入口＋15 个 NIST 守卫分支）双端一致，30 条未执行断言按固定规则与分支样本有据，审计摘要 `{"status": "PASS", "comparedAssertions": 30, "justifiedUnexecutedAssertions": 30}`，报告 `.cache/evidence/drbg-parity2-20260928.json`，文档 [DRBG原输入验收](doc/DRBG原输入验收-20260928-181254.md)；输入、断言与分支三类篡改均被拒。
+- knownTxids 付款：目标提交 `79c4b3b`；该文件固定 TS 17／17、Java 17／17，6 个付款用例的 6 条真实输入与 8 次付款调用逐字段一致、25 条断言一致，付款输入与断言两类篡改被拒，文档 [knownTxids付款输入验收](doc/knownTxids付款输入验收-20260928-201034.md)。
 
 固定 TS 原始标准／manual Jest 报告合计 5329／5329，通过 `audit-tests.py compare-ts`。Java 当前轮的 5437 条通过记录也不能代替双端同一次完整采集；原始报告还没有覆盖全部用例的输入计划、双侧输入与断言 manifest，最终 `audit-tests.py check` 尚未通过。部分已通过任务的排期状态仍非 `done`，待逐项核对依赖、当前接口行为及同输入证据。
 
