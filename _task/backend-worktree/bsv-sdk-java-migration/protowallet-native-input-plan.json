@@ -1,0 +1,111 @@
+{
+  "5c017ec48d4f19f819755bf63efc28fed67aeedcd72925ba69d9da50803ebecb": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:0:constructor:case1#0001",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:25:createSignature:case1#0002",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:26:createSignature:case1#0003",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:28:verifySignature:case1#0004",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:33:verifySignature:case1#0005"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:27:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:28:11:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:29:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:30:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:33:11:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:27:5:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:27:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:28:11:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:28:11:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:29:5:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:29:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:30:5:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:30:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:33:11:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:33:11:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5f1293261aa4271699e983b6ce4bde64aed0d0978937e85a8f473b61cc3dac2f": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:40:createSignature:case1#0001",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:41:verifySignature:case1#0002",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:43:createSignature:case1#0003",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:44:verifySignature:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:41:11:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:44:11:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:45:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:41:11:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:41:11:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:44:11:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:44:11:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:45:5:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:45:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "1c7ac5e846d545fd39626e9d0d0e1baf8e88e77a2b5b02b8664badca82625929": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:53:createSignature:case1#0001",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:54:createSignature:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:54:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:54:5:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:54:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "d7afa927f123f98cb53453a34c07c6ce13a9f28a8d0d15357459626ae86e83c0": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:59:createSignature:case1#0001",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:60:verifySignature:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:60:11:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:60:11:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:60:11:assertion"
+    },
+    "loopSamples": {}
+  },
+  "b66d0b4eb3b4fd2793a1784a30a9c2a027684b84b1b32250928cbd531226f9c0": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:69:createSignature:case1#0001",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:71:createSignature:case1#0002",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:77:verifySignature:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:72:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:75:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:78:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:81:11:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:72:5:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:72:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:75:5:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:75:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:78:5:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:78:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:81:11:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:81:11:assertion"
+    },
+    "loopSamples": {}
+  },
+  "ea3b386247d5fef0f4b7b60a35085b689eca896626624e822d91056472f899e8": {
+    "sampleIds": [
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:69:createSignature:case1#0001",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:71:createSignature:case1#0002",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:77:verifySignature:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:72:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:75:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:78:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:81:11:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:72:5:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:72:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:75:5:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:75:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:78:5:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:78:5:assertion",
+      "src/wallet/__tests/ProtoWallet.native-hash.test.ts:81:11:assertion": "src/wallet/__tests/ProtoWallet.native-hash.test.ts:81:11:assertion"
+    },
+    "loopSamples": {}
+  }
+}
