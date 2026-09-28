@@ -1316,74 +1316,98 @@
                 {
                   "name": "createsAnUnsignedOrdinalWithPendingHashesAndBalancedChange",
                   "returnType": "void",
-                  "line": 63,
+                  "line": 65,
                   "classification": "unit"
                 },
                 {
                   "name": "postOrdinalIncludesPostMetadataInItsLockingScript",
                   "returnType": "void",
-                  "line": 91,
+                  "line": 93,
                   "classification": "unit"
                 },
                 {
                   "name": "inputSigningSwitchControlsWhetherTheSignerRuns",
                   "returnType": "void",
-                  "line": 109,
+                  "line": 111,
                   "classification": "unit"
                 },
                 {
                   "name": "defaultConstructorEnablesBothSigningStages",
                   "returnType": "void",
-                  "line": 123,
+                  "line": 125,
                   "classification": "unit"
                 },
                 {
                   "name": "sendsAnExistingOrdinalWithTwoSpendableInputs",
                   "returnType": "void",
-                  "line": 130,
+                  "line": 132,
                   "classification": "unit"
                 },
                 {
                   "name": "reinscriptionKeepsTheRequestedMediaType",
                   "returnType": "void",
-                  "line": 149,
+                  "line": 151,
                   "classification": "unit"
                 },
                 {
                   "name": "incompleteReinscriptionFallsBackToAnOrdinaryTransfer",
                   "returnType": "void",
-                  "classification": "unit",
-                  "line": 165
+                  "line": 167,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteSendCanReturnAnUnsignedOrdinalTransferWhenSigningIsDisabled",
+                  "returnType": "void",
+                  "line": 185,
+                  "classification": "unit"
+                },
+                {
+                  "name": "stagedRemoteTransferSignsBothInputsFromExternallyPreparedHashes",
+                  "returnType": "void",
+                  "line": 202,
+                  "classification": "unit"
+                },
+                {
+                  "name": "reinscribedRemoteTransferSignsBsmThenBothInputs",
+                  "returnType": "void",
+                  "line": 231,
+                  "classification": "unit"
+                },
+                {
+                  "name": "prepareSendOrdinalFallsBackToAnOrdinaryTransferForIncompleteReinscriptions",
+                  "returnType": "void",
+                  "line": 269,
+                  "classification": "unit"
                 },
                 {
                   "name": "sendOrdinalPropagatesSignerFailure",
                   "returnType": "void",
-                  "line": 183,
+                  "line": 289,
                   "classification": "unit"
                 },
                 {
                   "name": "createsUnsignedBapOrdinalWhenBothSigningStagesAreDisabled",
                   "returnType": "void",
-                  "line": 193,
+                  "line": 299,
                   "classification": "unit"
                 },
                 {
                   "name": "defaultPostOverloadBuildsPostMetadataWithoutSigning",
                   "returnType": "void",
-                  "line": 208,
+                  "line": 314,
                   "classification": "unit"
                 },
                 {
                   "name": "deprecatedSendUtxosSpendsLocalPaymentInputWithoutBroadcast",
                   "returnType": "void",
-                  "line": 225,
+                  "line": 331,
                   "classification": "unit"
                 },
                 {
                   "name": "signsBsmThenInputFromTwoLocallyPreparedRemoteContexts",
                   "returnType": "void",
-                  "classification": "unit",
-                  "line": 238
+                  "line": 344,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "内存 UTXO 与签名替身验证远程 Ord 创建、转移、MAP、开关和签名失败传播，未连接外部服务"

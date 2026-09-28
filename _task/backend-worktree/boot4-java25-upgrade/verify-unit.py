@@ -109,6 +109,30 @@ def save_artifacts(repo, module, run_root, command, exit_code, log_path):
     return output
 
 
+def coverage_exceptions():
+    path = ROOT / "unit-coverage-exceptions.json"
+    if not path.is_file():
+        raise ValueError("缺少覆盖率例外清单 unit-coverage-exceptions.json")
+    data = json.loads(path.read_text())
+    return {artifact: {entry["class"]: entry for entry in module["entries"]}
+            for artifact, module in data.get("modules", {}).items()}
+
+
+def method_misses(node):
+    missed = {}
+    for method in node.findall("method"):
+        line_missed = method_missed = 0
+        for counter in method.findall("counter"):
+            if counter.get("type") == "LINE":
+                line_missed = int(counter.get("missed"))
+            elif counter.get("type") == "METHOD":
+                method_missed = int(counter.get("missed"))
+        if line_missed or method_missed:
+            missed[method.get("name")] = {"line": int(method.get("line")),
+                                          "lineMissed": line_missed, "methodMissed": method_missed}
+    return missed
+
+
 def inspect(module, output, strict):
     problems = []
     metadata_path = output / "metadata.json"
@@ -184,10 +208,31 @@ def inspect(module, output, strict):
             if class_name not in classes:
                 problems.append(f"生产类缺失：{class_name}")
         if strict:
+            exceptions = coverage_exceptions().get(module["artifactId"], {})
             for class_name, node in classes.items():
-                for counter in node.findall("counter"):
-                    if counter.get("type") in ("LINE", "BRANCH", "METHOD") and int(counter.get("missed")):
-                        problems.append(f"覆盖率未达标：{class_name} {counter.get('type')}")
+                counters = {counter.get("type"): int(counter.get("missed"))
+                            for counter in node.findall("counter")}
+                missed_methods = method_misses(node)
+                expected = exceptions.get(class_name)
+                if expected is None:
+                    for counter_type in ("LINE", "BRANCH", "METHOD"):
+                        if counters.get(counter_type):
+                            problems.append(f"覆盖率未达标：{class_name} {counter_type}")
+                    continue
+                recorded = {item["method"]: {"line": item["line"], "lineMissed": item["lineMissed"],
+                                             "methodMissed": item["methodMissed"]}
+                            for item in expected["missed"]}
+                if counters.get("BRANCH"):
+                    problems.append(f"覆盖率例外含分支缺口：{class_name}")
+                if missed_methods != recorded:
+                    problems.append(f"覆盖率例外清单不符：{class_name} 实测 {missed_methods or '无'}，"
+                                    f"记录 {recorded}")
+                elif counters.get("LINE") != sum(item["lineMissed"] for item in recorded.values()) \
+                        or counters.get("METHOD") != sum(item["methodMissed"] for item in recorded.values()):
+                    problems.append(f"覆盖率例外类级计数不符：{class_name}")
+            for class_name in exceptions:
+                if class_name not in classes:
+                    problems.append(f"覆盖率例外清单未命中实测数据：{class_name}")
     return counts, coverage, problems
 
 

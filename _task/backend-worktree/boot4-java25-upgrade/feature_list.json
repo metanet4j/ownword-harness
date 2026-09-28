@@ -7,8 +7,8 @@
     "blocked",
     "done"
   ],
-  "activeItem": "unit-u2-sdk",
-  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1 base 严格单元验收已完成；U2 sdk 正在实施，U3—U9 待实施。",
+  "activeItem": "unit-u3-foundation",
+  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1 base 已完成；U2 sdk 严格验收完成（含用户批准的 12 行精确例外）；U3—U9 待实施。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -284,21 +284,23 @@
       "id": "unit-u2-sdk",
       "name": "U2 sdk 单元测试",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "unit-u1-base"
       ],
       "evidence": [
-        "SDK HEAD 18124c8 的宿主全量单元基线：199/0/0/0，LINE 1948/1961、BRANCH 506/506、METHOD 441/452；evidence/20260926T164453Z/。",
+        "SDK 提交 670ee3d：远程转移公开 sendOrdinal(RemoteBapBase, …) 保留 Transaction 返回并改用 RemoteOrdTransactionBuilder，新增 prepareSendOrdinal(…)、addOrdInput 与 ordinals 输入签名；契约测试 16 例（新增 4 例：无签名转移、两输入远程签名、reinscription 三阶段、空 reinscription 回退）。",
+        "用户批准的 12 行精确例外（10 个无行为隐式构造器 + SigHashExtend 不可达 IOException 包装 2 行）记入 unit-coverage-exceptions.json；verify-unit.py 严格模式双向核对，jacoco:check 按 metanet4j-sdk 属性显式排除；反例证据 evidence/20260928-u2-exception-controls/（CLI check 通过；篡改清单后 gaps=2 拒绝）。",
+        "提交后严格验收：python3 verify-unit.py --mode accept --scope metanet4j-sdk 退出 0，203/0/0/0，LINE 1965/1977、BRANCH 514/514、METHOD 445/455，实测缺口恰为例外清单 12 行；证据 evidence/20260928T093257Z/（head 670ee3d）。",
+        "同一提交 install -DskipTests BUILD SUCCESS，安装 metanet4j-sdk-0.2.0.jar 供 component 使用；日志 evidence/20260928T093257Z/metanet4j-sdk/install.log。",
+        "父 POM 例外机制提交 metanet4j-parent 7302e1b；base 回归严格验收 19/0/0/0 且 LINE 208/208、BRANCH 76/76、METHOD 51/51，证据 evidence/20260928T092443Z/。",
         "SDK 本地 HTTP 集成测试 5/0/0/0；evidence/20260926-u2-http/integration/。HTTP 单元定向 6/0/0/0，HttpClientFactory 逐类 LINE/BRANCH/METHOD 100%；evidence/20260927-u2-http-sighash-remote-green/。",
         "BAP encryptSelf 加密当前 identityKey 并由 decryptSelf 往返；缺失路径异常定向验证 13/0/0/0；evidence/20260927-u2-bap-http-targeted/。",
-        "交易构建、本地和远程签名、Ord/Bsocial、BOB/TXO、加密与脚本协议已有离线契约测试；源码与测试分类见 unit-test-inventory.json，验证以最新全量报告为准。",
         "BOB/TXO 不可达异常捕获清理后的转换测试 7/0/0/0；evidence/20260927-u2-bob-txo-catch-green/。公钥压缩复用 bitcoinj 后签名回归 3/0/0/0 且 EcKeyLiteExtend 逐类 100%；evidence/20260927-u2-eckey-compression-green/。",
-        "仓库内八组历史 Ordinal 交易固定向量与 Sigma 验签定向 8/0/0/0；evidence/20260927-u2-ord-fixtures-sigma-targeted/。31 个旧 external 用例均登记精确替代测试，47 条替代引用已核实存在；部分主网广播仍列明人工原因。",
-        "远程 Ordinal 公开 sendOrdinal(RemoteBapBase, …) 的本地红测在 KeyBag=null 时抛异常；evidence/20260927-u2-remote-send-red/。返回准备构建器的接口形式待胡先生决定。",
-        "严格审计当前证据退出 1，22 条检查项仅由 13 行覆盖缺口产生：远程转移入口 1 行、10 个无行为隐式构造器及 SigHashExtend 内存流异常包装 2 行。命令：python3 verify-unit.py --mode accept --scope metanet4j-sdk --evidence evidence/20260926T164453Z。"
+        "交易构建、本地和远程签名、Ord/Bsocial、加密与脚本协议的离线契约测试，以及仓库内八组历史 Ordinal 交易固定向量与 Sigma 验签定向 8/0/0/0；evidence/20260927-u2-ord-fixtures-sigma-targeted/。源码与测试分类见 unit-test-inventory.json。",
+        "31 个旧 external 用例均登记精确替代测试，47 条替代引用已核实存在；需实时 UTXO 或主网广播的部分另记人工原因。"
       ],
-      "statusNote": "SDK U2 仍在实施。最新全量基线 199/0/0/0，LINE 1948/1961、BRANCH 506/506、METHOD 441/452；31 个旧 external 用例均有去向。严格验收仅余 13 行覆盖缺口，远程 Ordinal 入口方案及 12 行不可达或无行为字节码的验收口径待胡先生决定。U3—U9 未开始。"
+      "statusNote": "2026-09-28 完成：远程转移入口按决定保留返回类型并新增准备入口；SDK 严格验收 203/0/0/0，LINE/BRANCH/METHOD 除批准清单 12 行外全部 100%，实测缺口与例外清单逐项一致；产物已安装供 component 使用。"
     },
     {
       "id": "unit-u3-foundation",

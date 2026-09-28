@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "decision": "2026-09-28 用户批准：无业务行为的隐式默认构造器与固定内存流不可达的 IOException 包装共 12 行按精确清单例外，其余手写代码维持行、分支、方法 100%。",
+  "enforcement": "verify-unit.py 严格模式双向核对：实测未覆盖方法集合必须与本清单逐项相等；jacoco:check 通过各仓库属性 jacoco.unit.check.excludes 排除本清单类名（check 用点号 Java 名，内部类写作 Outer.Inner；本文件 class 字段用 XML 报告的 $ 名）。",
+  "modules": {
+    "metanet4j-sdk": {
+      "entries": [
+        {
+          "class": "com/metanet4j/sdk/BobHelper",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 26, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/TxoHelper",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 25, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/bap/TaggedDerivation",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 12, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/ordinals/OrdScriptBuilder",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 19, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/ordinals/OrdScriptBuilder$LocalSigner",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 67, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/ordinals/OrdScriptBuilder$RemoteSigner",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 71, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/script/SigHashExtend",
+          "reason": "隐式默认构造器；hashForForkIdSignature 的 IOException 包装在 UnsafeByteArrayOutputStream 固定内存流下不可达",
+          "missed": [
+            {"method": "<init>", "line": 15, "lineMissed": 1, "methodMissed": 1},
+            {"method": "hashForForkIdSignature", "line": 23, "lineMissed": 2, "methodMissed": 0}
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/utils/TxHelperExtend",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 21, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/utxo/impl/bitails/BitailsClient",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 14, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/utxo/impl/gorillapool/GorillaClient",
+          "reason": "隐式默认构造器，无业务行为",
+          "missed": [
+            {"method": "<init>", "line": 11, "lineMissed": 1, "methodMissed": 1}
+          ]
+        }
+      ]
+    }
+  }
+}
