@@ -8,7 +8,7 @@
     "done"
   ],
   "activeItem": "unit-u7-adapters",
-  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1—U6 均已完成（U6 五模块单元 + Mongo/MySQL 跨存储链路集成）；U7 外围能力（component-file → cache → message → api-common）待实施。",
+  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1—U6 均已完成；U7 进行中：component-file 已完成，component-cache → component-message → api-common 与外围集成待实施。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -378,11 +378,18 @@
       "id": "unit-u7-adapters",
       "name": "U7 外围能力",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "unit-u6-business"
       ],
-      "evidence": []
+      "evidence": [
+        "component-file 提交 2195d08：59/0/0/0，LINE 188/199、BRANCH 52/52、METHOD 63/66，缺口全部为登记的精确例外；证据 evidence/20260928T232443Z/。",
+        "原 8 个 @Disabled 用例全部改写为有效测试：local 用 @TempDir 验证读写删，FTP/SFTP 用注入替身验证上传/下载/删除委托 + 本地不可达端口验证路径规范化与连接失败传播，S3 用 MinioClient 替身验证 Put/Remove/Get 参数并覆盖 MinIO/阿里云/腾讯云 endpoint/domain/region 推导。",
+        "记录的行为：无 bucket 前缀的腾讯云 endpoint（cos.<region>.myqcloud.com）推导出空 region，被 MinioClient 拒绝；带 scheme 的 endpoint 走 MinIO 的 domain 拼法（endpoint/bucket）。",
+        "verify-unit.py 修复：例外清单按「方法名:行号」建键，避免同名重载互相覆盖造成类级计数误判（tx/bap/bsocial 证据回放无回归）。",
+        "待实施：component-cache → component-message → api-common 单元测试，以及文件协议（本地可控服务）、Redis、Kafka 集成。"
+      ],
+      "statusNote": "2026-09-28 开工：component-file 完成（含 8 个 disabled 用例改写），继续 cache/message/api-common。"
     },
     {
       "id": "unit-u8-tools",

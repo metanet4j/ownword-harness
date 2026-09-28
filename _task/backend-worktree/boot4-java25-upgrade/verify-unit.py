@@ -130,9 +130,11 @@ def method_misses(node):
             elif counter.get("type") == "BRANCH":
                 branch_missed = int(counter.get("missed"))
         if line_missed or method_missed or branch_missed:
-            missed[method.get("name")] = {"line": int(method.get("line")),
-                                          "lineMissed": line_missed, "methodMissed": method_missed,
-                                          "branchMissed": branch_missed}
+            # 键含行号：同名重载方法（如 createTempFile 的三个重载）必须逐项区分，否则后者会覆盖前者
+            missed[f"{method.get('name')}:{method.get('line')}"] = {
+                "method": method.get("name"), "line": int(method.get("line")),
+                "lineMissed": line_missed, "methodMissed": method_missed,
+                "branchMissed": branch_missed}
     return missed
 
 
@@ -222,10 +224,11 @@ def inspect(module, output, strict):
                         if counters.get(counter_type):
                             problems.append(f"覆盖率未达标：{class_name} {counter_type}")
                     continue
-                recorded = {item["method"]: {"line": item["line"], "lineMissed": item["lineMissed"],
-                                             "methodMissed": item["methodMissed"],
-                                             "branchMissed": item.get("branchMissed", 0)}
-                            for item in expected["missed"]}
+                recorded = {f"{item['method']}:{item['line']}": {
+                    "method": item["method"], "line": item["line"], "lineMissed": item["lineMissed"],
+                    "methodMissed": item["methodMissed"],
+                    "branchMissed": item.get("branchMissed", 0)}
+                    for item in expected["missed"]}
                 if counters.get("BRANCH", 0) != sum(item.get("branchMissed", 0) for item in expected["missed"]):
                     problems.append(f"覆盖率例外分支计数不符：{class_name}")
                 if missed_methods != recorded:

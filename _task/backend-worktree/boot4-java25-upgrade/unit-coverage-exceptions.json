@@ -267,6 +267,49 @@
           ]
         }
       ]
+    },
+    "metanet4j-component-file": {
+      "entries": [
+        {
+          "class": "com/metanet4j/component/file/core/utils/FileUtils",
+          "reason": "隐式默认构造器（仅静态工具方法）；createTempFile 三个重载的受检异常包装行是 @SneakyThrows 生成的合成 catch 块，单元环境无法触达（File/FileUtil 写临时文件不会失败）",
+          "missed": [
+            {"method": "<init>", "line": 19, "lineMissed": 1, "methodMissed": 1},
+            {"method": "createTempFile", "line": 28, "lineMissed": 1, "methodMissed": 0},
+            {"method": "createTempFile", "line": 43, "lineMissed": 1, "methodMissed": 0},
+            {"method": "createTempFile", "line": 57, "lineMissed": 1, "methodMissed": 0}
+          ]
+        },
+        {
+          "class": "com/metanet4j/component/file/core/utils/FileTypeUtils",
+          "reason": "隐式默认构造器（仅静态工具方法）；getMineType(byte[]) 的合成 catch 行是 @SneakyThrows 包装，Tika 检测不会抛受检异常",
+          "missed": [
+            {"method": "<init>", "line": 12, "lineMissed": 1, "methodMissed": 1},
+            {"method": "getMineType", "line": 22, "lineMissed": 1, "methodMissed": 0}
+          ]
+        },
+        {
+          "class": "com/metanet4j/component/file/validation/ValidationUtils",
+          "reason": "隐式默认构造器，仅提供静态校验方法",
+          "missed": [
+            {"method": "<init>", "line": 18, "lineMissed": 1, "methodMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/component/file/core/client/ftp/FtpFileClient",
+          "reason": "doInit 里 new Ftp(...) 会立刻建立真实 FTP 连接；共享基础设施未提供 FTP 服务，单元测试只覆盖路径规范化与连接失败传播，构造成功行按精确清单登记（实连留待可用的本地可控服务）",
+          "missed": [
+            {"method": "doInit", "line": 30, "lineMissed": 2, "methodMissed": 0}
+          ]
+        },
+        {
+          "class": "com/metanet4j/component/file/core/client/sftp/SftpFileClient",
+          "reason": "doInit 里 new Sftp(...) 会立刻建立真实 SSH 连接；共享基础设施未提供 SFTP 服务，单元测试只覆盖路径规范化与连接失败传播，构造成功行按精确清单登记（实连留待可用的本地可控服务）",
+          "missed": [
+            {"method": "doInit", "line": 26, "lineMissed": 2, "methodMissed": 0}
+          ]
+        }
+      ]
     }
   }
 }

@@ -6,7 +6,7 @@
 
 - **Last Updated**：2026-09-28。
 - **Current Objective**：为四个子仓库建立完整单元测试、集成测试与逐模块验收证据。
-- **Active Item**：`unit-u6-business` 已完成（五模块单元 + Mongo/MySQL 跨存储链路集成，提交 8a778c9）；下一项 `unit-u7-adapters`（component-file → cache → message → api-common）待开工。
+- **Active Item**：`unit-u7-adapters` 进行中：component-file 已完成（提交 2195d08），component-cache → message → api-common 与外围集成待实施。
 - U3 三模块严格验收均通过：component-model 20/0/0/0（LINE 73/78、BRANCH 2/2、METHOD 18/19，evidence/20260928T100401Z/）、component-common 41/0/0/0（LINE 239/248、BRANCH 42/42、METHOD 86/95，evidence/20260928T103233Z/）、component-core 纯接口 N/A（evidence/20260928T103553Z/）。提交：component 63560a3、4d3cf66。
 - component 仓库根启用 `lombok.config`（`addLombokGeneratedAnnotation`），Lombok 生成成员由 JaCoCo 内置 `AnnotationGeneratedFilter` 逐成员识别；聚合 POM 补 JUnit/Mockito 测试依赖与 `jacoco.unit.check.excludes` 属性。缺口一律按 `unit-coverage-exceptions.json` 精确清单登记并由 `verify-unit.py` 双向核对。
 - U3 测试暴露并最小修复：`ConvertTypeEnum` 构造器未写入 `id`、`JacksonBeanUtils.copyProperty` 忽略目标类型；`StateHelper` 删除不可达空 `default`；`LocalTestUtxoProvider` 目录可配置、`BitcoinSchemaTransaction` 可注入 UTXO provider（默认行为不变）。
@@ -24,6 +24,9 @@
 - component-bsocial 记录的当前行为：不受支持的 `linkIdentity`/`linkBsocial` 类型不建交易、随后解引用 NPE；`mapList` 为空时 handler 与 MySQL 转换器抛 `NoSuchElementException`（经 ConversionService 包装为 `ConversionFailedException`）；`BsocialDoMapper` 对 null 列表保持 null（不调用 MAPConvert）。
 - component-bitcoinschema 4/0/0/0（LINE 7/7、BRANCH 4/4、METHOD 2/2，`evidence/20260928T194451Z/`）与 component-handler 5/0/0/0（LINE 12/12、BRANCH 4/4、METHOD 5/5，`evidence/20260928T195825Z/`）均无覆盖率缺口，提交 2648727；记录的行为：`BitcoinSchemaTxHandler.handleBsocialTx` 的转换结果未被使用。
 - U6 集成（提交 8a778c9）：MongoBusinessChainIntegrationTest 6/0/0/0 与 MysqlBusinessChainIntegrationTest 4/0/0/0，均为本地离线构造签名的真实原始交易（不联网、不广播）走 解析器 → DTO → Store handler → 存储；证据 `evidence/20260928T211704Z/`（含无 `it_u6_*` 残留检查），同轮回归了 U5 三个存储模块集成用例（6/4/5 例）。单元验收复跑 76/0/0/0（`evidence/20260928T211756Z/`）。
+- U7 进展：component-file 59/0/0/0（LINE 188/199、BRANCH 52/52、METHOD 63/66，`evidence/20260928T232443Z/`，提交 2195d08）；原 8 个 `@Disabled` 用例全部改写为有效测试（local 用 `@TempDir`；FTP/SFTP 注入替身 + 本地不可达端口；S3 用 MinioClient 替身并覆盖三家云 endpoint/domain/region 推导）。
+- U7 记录的行为：无 bucket 前缀的腾讯云 endpoint 推导出空 region 被 MinioClient 拒绝；带 scheme 的 endpoint 走 MinIO 的 domain 拼法。FTP/SFTP 的「构造即连服务」行因共享基础设施无该服务，按精确清单登记为例外（成功构造路径留待本地可控服务）。
+- `verify-unit.py` 例外核对改为按「方法名:行号」建键，修复同名重载（如 `createTempFile` ×3）互相覆盖导致的类级计数误判。
 - U6 集成记录的行为：ID 交易由 root 签名时 `isRootBap` 为真 → 走 root 分支整体替换 signers（而非追加）；两个 handler 的搜索事件发布仍被注释，事件驱动的 ES 索引不会触发；手工装配 MyBatis-Plus 时需显式挂 `MetaObjectHandler`，事务代理需 `proxyTargetClass=true`（否则 `@Resource` 按具体类型注入失败）。
 - component-bap 63/0/0/0（LINE 293/305、BRANCH 69/70、METHOD 88/88，`evidence/20260928T180551Z/`，提交 2fbd3f7）：11 个测试类覆盖两个 BapService、两个事件监听器、两个 Store handler、resolver/validator/converter 与 MapStruct 生成的映射实现；缺口为登记的 `MongoStoreBapDtoHandler` 数据分支不可达。
 - component-bap 暴露并最小修复：`BapSearchListener` 的 `BapSearchService` 漏写 `@Autowired` → 字段恒 null，`BapSearchEvent` 发布即 NPE、搜索身份永不落库（MAP/ES 搜索数据链路断点）。先用 Spring 上下文回归用例复现，再补注解通过。
@@ -33,4 +36,4 @@
 
 ## Recommended Next Step
 
-开工 U7 外围能力：按 component-file → component-cache → component-message → api-common 顺序，先清点 component-file 现有的 8 个 `@Disabled` 用例并逐个定性（可离线化的改单元测试，确属实连的改 `integration`），再补各模块单元测试并逐个严格验收，最后补文件协议、Redis、Kafka 集成。
+继续 U7：按 component-cache → component-message → api-common 顺序补单元测试并逐个严格验收（`verify-unit.py --mode accept --scope <模块>`），随后补 Redis/Kafka 实连集成与本地可控服务的文件协议集成。

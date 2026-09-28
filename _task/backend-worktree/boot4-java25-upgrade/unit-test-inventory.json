@@ -4574,86 +4574,442 @@
           ],
           "testSources": [
             {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/config/GbsFileAutoConfigurationContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "fileClientFactoryBeanProvidesTheDefaultImplementation",
+                  "returnType": "void",
+                  "line": 12,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/config/package-info.java",
               "classification": "fixture",
+              "classificationReason": "夹具/包信息，无直接 @Test 方法",
               "methods": []
             },
             {
-              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/ftp/FtpFileClientTest.java",
-              "classification": "disabled",
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/AbstractFileClientContractTest.java",
+              "classification": "unit",
               "methods": [
                 {
-                  "name": "test",
+                  "name": "initRunsTheCustomInitializationOnce",
                   "returnType": "void",
                   "line": 11,
-                  "classification": "disabled"
+                  "classification": "unit"
+                },
+                {
+                  "name": "refreshKeepsTheClientWhenTheConfigIsUnchanged",
+                  "returnType": "void",
+                  "line": 20,
+                  "classification": "unit"
+                },
+                {
+                  "name": "refreshReinitializesWhenTheConfigChanges",
+                  "returnType": "void",
+                  "line": 29,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getIdAndFormatFileUrlFollowTheClientContract",
+                  "returnType": "void",
+                  "line": 39,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/FileClientFactoryImplContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "createOrUpdateFileClientCreatesInitializesAndCachesTheClient",
+                  "returnType": "void",
+                  "line": 20,
+                  "classification": "unit"
+                },
+                {
+                  "name": "createOrUpdateFileClientRefreshesAnExistingClientWhenTheConfigChanges",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getFileClientReturnsNullForAnUnknownConfigId",
+                  "returnType": "void",
+                  "line": 45,
+                  "classification": "unit"
+                },
+                {
+                  "name": "createOrUpdateFileClientRejectsAnUnknownStorage",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/db/DBFileClientContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "uploadDelegatesToTheDaoAndReturnsTheAccessUrl",
+                  "returnType": "void",
+                  "line": 19,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getContentAndDeleteDelegateToTheDao",
+                  "returnType": "void",
+                  "line": 30,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/ftp/FtpFileClientTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "initNormalizesTheBasePathAndPropagatesConnectionFailure",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "unit"
+                },
+                {
+                  "name": "initKeepsAnAlreadyNormalizedBasePathAndStillPropagatesFailure",
+                  "returnType": "void",
+                  "line": 46,
+                  "classification": "unit"
+                },
+                {
+                  "name": "uploadDelegatesToTheFtpClientAndReturnsTheAccessUrl",
+                  "returnType": "void",
+                  "line": 55,
+                  "classification": "unit"
+                },
+                {
+                  "name": "uploadFailsWhenTheFtpClientReportsFailure",
+                  "returnType": "void",
+                  "line": 68,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getContentDownloadsIntoTheResultBuffer",
+                  "returnType": "void",
+                  "line": 80,
+                  "classification": "unit"
+                },
+                {
+                  "name": "deleteRemovesTheRemoteFile",
+                  "returnType": "void",
+                  "line": 93,
+                  "classification": "unit"
                 }
               ]
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/local/LocalFileClientTest.java",
-              "classification": "disabled",
+              "classification": "unit",
               "methods": [
                 {
-                  "name": "test",
+                  "name": "initAppendsTheFileSeparatorToTheBasePath",
                   "returnType": "void",
-                  "line": 10,
-                  "classification": "disabled"
+                  "line": 25,
+                  "classification": "unit"
+                },
+                {
+                  "name": "initKeepsAnAlreadyNormalizedBasePath",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "unit"
+                },
+                {
+                  "name": "uploadWritesTheContentAndReturnsTheAccessUrl",
+                  "returnType": "void",
+                  "line": 43,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getContentReadsBackWhatWasUploaded",
+                  "returnType": "void",
+                  "line": 53,
+                  "classification": "unit"
+                },
+                {
+                  "name": "deleteRemovesTheStoredFile",
+                  "returnType": "void",
+                  "line": 62,
+                  "classification": "unit"
                 }
               ]
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/s3/S3FileClientTest.java",
-              "classification": "disabled",
+              "classification": "unit",
               "methods": [
                 {
-                  "name": "testMinIO",
+                  "name": "initBuildsTheDomainFromTheBucketForAliyun",
                   "returnType": "void",
-                  "line": 13,
-                  "classification": "disabled"
+                  "line": 34,
+                  "classification": "unit"
                 },
                 {
-                  "name": "testAliyun",
-                  "returnType": "void",
-                  "line": 29,
-                  "classification": "disabled"
-                },
-                {
-                  "name": "testQCloud",
+                  "name": "initStripsTheInternalSuffixFromTheAliyunRegion",
                   "returnType": "void",
                   "line": 45,
-                  "classification": "disabled"
+                  "classification": "unit"
                 },
                 {
-                  "name": "testQiniu",
+                  "name": "initDerivesTheTencentRegionFromTheEndpoint",
                   "returnType": "void",
-                  "line": 61,
-                  "classification": "disabled"
+                  "line": 54,
+                  "classification": "unit"
                 },
                 {
-                  "name": "testHuaweiCloud",
+                  "name": "initFailsForATencentEndpointWithoutTheBucketPrefix",
                   "returnType": "void",
-                  "line": 79,
-                  "classification": "disabled"
+                  "line": 64,
+                  "classification": "unit"
+                },
+                {
+                  "name": "initKeepsAnExplicitDomainAndUsesTheMinioEndpointAsIs",
+                  "returnType": "void",
+                  "line": 76,
+                  "classification": "unit"
+                },
+                {
+                  "name": "initFallsBackToTheEndpointBasedDomainWhenTheDomainIsMissing",
+                  "returnType": "void",
+                  "line": 88,
+                  "classification": "unit"
+                },
+                {
+                  "name": "initTreatsAnHttpsEndpointAsMinioStyleWhenBuildingTheDomain",
+                  "returnType": "void",
+                  "line": 97,
+                  "classification": "unit"
+                },
+                {
+                  "name": "uploadDelegatesToTheMinioClientAndReturnsTheDomainBasedUrl",
+                  "returnType": "void",
+                  "line": 107,
+                  "classification": "unit"
+                },
+                {
+                  "name": "deleteDelegatesToTheMinioClient",
+                  "returnType": "void",
+                  "line": 122,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getContentReadsTheObjectStream",
+                  "returnType": "void",
+                  "line": 135,
+                  "classification": "unit"
+                },
+                {
+                  "name": "validateRejectsAConfigWithoutCredentials",
+                  "returnType": "void",
+                  "line": 146,
+                  "classification": "unit"
+                },
+                {
+                  "name": "validateRequiresADomainForQiniuEndpoints",
+                  "returnType": "void",
+                  "line": 157,
+                  "classification": "unit"
                 }
               ]
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/sftp/SftpFileClientTest.java",
-              "classification": "disabled",
+              "classification": "unit",
               "methods": [
                 {
-                  "name": "test",
+                  "name": "initNormalizesTheBasePathAndPropagatesConnectionFailure",
                   "returnType": "void",
-                  "line": 10,
-                  "classification": "disabled"
+                  "line": 30,
+                  "classification": "unit"
+                },
+                {
+                  "name": "initKeepsAnAlreadyNormalizedBasePathAndStillPropagatesFailure",
+                  "returnType": "void",
+                  "line": 42,
+                  "classification": "unit"
+                },
+                {
+                  "name": "uploadWritesATemporaryFileAndReturnsTheAccessUrl",
+                  "returnType": "void",
+                  "line": 51,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getContentDownloadsIntoATemporaryFile",
+                  "returnType": "void",
+                  "line": 62,
+                  "classification": "unit"
+                },
+                {
+                  "name": "deleteRemovesTheRemoteFile",
+                  "returnType": "void",
+                  "line": 75,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/enums/FileStorageEnumContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "getByStorageMatchesEveryConstant",
+                  "returnType": "void",
+                  "line": 24,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getByStorageReturnsNullForAnUnknownCode",
+                  "returnType": "void",
+                  "line": 31,
+                  "classification": "unit"
+                },
+                {
+                  "name": "everyConstantDeclaresItsConfigAndClientClass",
+                  "returnType": "void",
+                  "line": 36,
+                  "classification": "unit"
+                },
+                {
+                  "name": "everyDeclaredClassImplementsTheClientContracts",
+                  "returnType": "void",
+                  "line": 59,
+                  "classification": "unit"
                 }
               ]
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/enums/package-info.java",
               "classification": "fixture",
+              "classificationReason": "夹具/包信息，无直接 @Test 方法",
               "methods": []
+            },
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/utils/FileTypeUtilsContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "detectsTextContentFromBytes",
+                  "returnType": "void",
+                  "line": 12,
+                  "classification": "unit"
+                },
+                {
+                  "name": "detectsTheTypeFromTheFileName",
+                  "returnType": "void",
+                  "line": 18,
+                  "classification": "unit"
+                },
+                {
+                  "name": "detectsTheTypeFromContentAndNameTogether",
+                  "returnType": "void",
+                  "line": 24,
+                  "classification": "unit"
+                },
+                {
+                  "name": "fallsBackToOctetStreamForUnknownData",
+                  "returnType": "void",
+                  "line": 30,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/utils/FileUtilsContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "createTempFileWritesUtf8Content",
+                  "returnType": "void",
+                  "line": 17,
+                  "classification": "unit"
+                },
+                {
+                  "name": "createTempFileWritesBytes",
+                  "returnType": "void",
+                  "line": 25,
+                  "classification": "unit"
+                },
+                {
+                  "name": "createTempFileCreatesAnEmptyFile",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "unit"
+                },
+                {
+                  "name": "generatePathKeepsTheExtensionOfTheOriginalName",
+                  "returnType": "void",
+                  "line": 43,
+                  "classification": "unit"
+                },
+                {
+                  "name": "generatePathFallsBackToTheHashWhenTheNameHasNoExtension",
+                  "returnType": "void",
+                  "line": 52,
+                  "classification": "unit"
+                },
+                {
+                  "name": "generatePathDetectsTheExtensionFromTheContentWhenTheNameIsBlank",
+                  "returnType": "void",
+                  "line": 59,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/validation/ValidationUtilsContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "isMobileAcceptsChineseMobileNumbersOnly",
+                  "returnType": "void",
+                  "line": 17,
+                  "classification": "unit"
+                },
+                {
+                  "name": "isUrlAcceptsSupportedSchemesOnly",
+                  "returnType": "void",
+                  "line": 27,
+                  "classification": "unit"
+                },
+                {
+                  "name": "isXmlNCNameAcceptsNamesOnly",
+                  "returnType": "void",
+                  "line": 37,
+                  "classification": "unit"
+                },
+                {
+                  "name": "validateRejectsAnInvalidClientConfig",
+                  "returnType": "void",
+                  "line": 46,
+                  "classification": "unit"
+                },
+                {
+                  "name": "validateAcceptsAValidClientConfig",
+                  "returnType": "void",
+                  "line": 56,
+                  "classification": "unit"
+                },
+                {
+                  "name": "validateWithAnExplicitValidatorHonoursGroups",
+                  "returnType": "void",
+                  "line": 61,
+                  "classification": "unit"
+                }
+              ]
             }
           ],
           "classificationReviewed": true,
