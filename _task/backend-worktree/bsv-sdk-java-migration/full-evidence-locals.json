@@ -1045,6 +1045,12 @@
         ".cache/evidence/http-wallet-json-formal5-20260929/java-surefire.xml"
       ],
       "capture": "capture-http-wallet-json-side.py"
+    },
+    {
+      "name": "keyderiver",
+      "deriveCatalogFromPlan": true,
+      "input_plan": "keyderiver-input-plan.json",
+      "captureKind": "specialized-local"
     }
   ]
 }

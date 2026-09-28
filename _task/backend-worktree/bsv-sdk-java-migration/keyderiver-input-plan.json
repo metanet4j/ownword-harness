@@ -1,0 +1,278 @@
+{
+  "dec5299f7132db3948442128bab9a50d20c438b74965bcc24b339d7ac6fc1925": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:27:computeInvoiceNumber:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:31:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:31:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:31:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "422ec1b7ec49de7dfd05d03d7ce8f78db550e8b55e56353562f9ebaad37d3cc4": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:35:normalizeCounterparty:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:35:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:35:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:35:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "f0ba1bc0dd2aec3aa9fd7a4085611f30f19b1947f0f0b2f9dd96df4593d58057": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:39:normalizeCounterparty:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:40:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:40:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:40:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "caaa893aa5defbd8f12d6e3483b3d267351bcaea389eb0299a091a4e900f9936": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:44:normalizeCounterparty:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:45:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:45:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:45:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "7f4652c2ec4dcd4261fc208a612bf19756b8a6d66ed7f63a58a19de420713a30": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:49:normalizeCounterparty:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:52:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:52:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:52:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "4c44d9246b55e9beac72ad83530314e38e0f9ac473eb88923b857c13156fcbcf": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:56:normalizeCounterparty:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:59:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:59:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:59:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "0354a6266ec66c0d30787cd7de8124d501e78d1c660c8e6de035011e737db45a": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:63:constructor:case1#0002",
+      "src/wallet/__tests/KeyDeriver.test.ts:64:derivePublicKey:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:69:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:70:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:69:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:69:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:70:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:70:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "d2397849d816283cfe34b7ef4ac7635731ddccbd878a2c9110751b0a30b2bc48": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:78:derivePublicKey:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:83:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:84:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:83:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:83:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:84:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:84:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "604fec8bc011350b845c751bcb8874bf5403babb8b43534e6c4827386134c8d4": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:92:derivePublicKey:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:98:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:99:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:98:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:98:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:99:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:99:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "c2e5121732cb261f45cbe9f5400da93a87ce503be51738c431c3b0bdd4343c42": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:108:derivePrivateKey:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:113:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:114:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:113:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:113:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:114:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:114:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5c030c11144444f013fd62420ffcfc9d9acc0e1a29c6bff3674830c887f2cfcc": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:125:constructor:case1#0002",
+      "src/wallet/__tests/KeyDeriver.test.ts:132:derivePrivateKeys:case1#0003",
+      "src/wallet/__tests/KeyDeriver.test.ts:133:derivePrivateKey:case1#0004",
+      "src/wallet/__tests/KeyDeriver.test.ts:133:derivePrivateKey:case1#0005",
+      "src/wallet/__tests/KeyDeriver.test.ts:133:derivePrivateKey:case1#0006"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:132:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:139:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:140:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:132:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:132:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:139:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:139:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:140:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:140:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "353feba970e134d5e91894e3b0c5f324d7115d71737f469af939d4c2a8686764": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:144:deriveSymmetricKey:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:149:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:158:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:149:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:149:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:158:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:158:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "201de6bc282dad7b342f6cc09bd07a05fcc87d821cc49704fef70eb23763de4d": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:165:deriveSymmetricKey:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:164:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:164:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:164:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "7023b510ed7102ca35fb4b53e07734095ff1d7f257fcc830c4bd596d4edb2597": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:170:revealCounterpartySecret:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:173:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:174:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:175:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:173:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:173:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:174:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:174:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:175:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:175:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "4af83798927f836f9a67c27d21498441503ea722fb6b783ff983a71045705b11": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:181:revealCounterpartySecret:case1#0002",
+      "src/wallet/__tests/KeyDeriver.test.ts:182:revealCounterpartySecret:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:181:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:182:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:181:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:181:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:182:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:182:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "a5906aed543ffd77de75b8644c40da7c7b9ed640812d7852e3c6dcfa4f575502": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:186:revealSpecificSecret:case1#0002",
+      "src/wallet/__tests/KeyDeriver.test.ts:197:computeInvoiceNumber:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:191:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:192:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:200:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:191:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:191:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:192:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:192:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:200:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:200:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "199d0d1f7ef82f8c4f34276a5bc4c2bc87e123ff0e2f97a51c0dd00f5a384665": {
+    "sampleIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:23:constructor:case1#0001",
+      "src/wallet/__tests/KeyDeriver.test.ts:207:computeInvoiceNumber:case1#0002",
+      "src/wallet/__tests/KeyDeriver.test.ts:213:computeInvoiceNumber:case1#0003",
+      "src/wallet/__tests/KeyDeriver.test.ts:216:computeInvoiceNumber:case1#0004",
+      "src/wallet/__tests/KeyDeriver.test.ts:219:computeInvoiceNumber:case1#0005",
+      "src/wallet/__tests/KeyDeriver.test.ts:222:computeInvoiceNumber:case1#0006",
+      "src/wallet/__tests/KeyDeriver.test.ts:225:computeInvoiceNumber:case1#0007",
+      "src/wallet/__tests/KeyDeriver.test.ts:228:computeInvoiceNumber:case1#0008",
+      "src/wallet/__tests/KeyDeriver.test.ts:234:computeInvoiceNumber:case1#0009",
+      "src/wallet/__tests/KeyDeriver.test.ts:240:computeInvoiceNumber:case1#0010"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/KeyDeriver.test.ts:206:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:212:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:215:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:218:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:221:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:224:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:227:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:233:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:239:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/KeyDeriver.test.ts:206:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:206:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:212:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:212:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:215:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:215:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:218:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:218:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:221:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:221:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:224:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:224:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:227:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:227:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:233:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:233:5:assertion",
+      "src/wallet/__tests/KeyDeriver.test.ts:239:5:assertion": "src/wallet/__tests/KeyDeriver.test.ts:239:5:assertion"
+    },
+    "loopSamples": {}
+  }
+}
