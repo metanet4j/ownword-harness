@@ -2,7 +2,7 @@
 
 ## 权威状态
 
-[feature_list.json](feature_list.json) 是任务状态来源，[完整模块与 API 契约](doc/完整模块与API映射-20260920-122800.md) 是行为依据。最近一次目标 Java 宿主无过滤 `clean test` 绑定提交 `1c979fa`（来源摘要 `75640567…`）：167 份 Surefire 报告为 5437／5437、无失败／错误／跳过，同次覆盖全部 5329 个映射身份且无重复，另有 108 个 Java 回归。报告封存于 `.cache/evidence/http-wallet-json-full-surefire-20260929/`，日志 `.cache/evidence/http-wallet-json-full-java-20260929.log`；该来源与 HTTPWalletJSON 局部采集一致，后续源码变更仍须新一轮无过滤回归。对称加密 52／387、Compat 122／281、交易完整功能 745／1390、交易验证 53／162、认证会话 85／160、认证传输 183／968、DRBG 29／30 已有固定原用例／逐断言任务级对照；AuthFetch 属性 300 组固定 TS 实际输入与 Java 消费一致。证据路径见 [progress.md](progress.md) 与 [feature_list.json](feature_list.json)。
+[feature_list.json](feature_list.json) 是任务状态来源，[完整模块与 API 契约](doc/完整模块与API映射-20260920-122800.md) 是行为依据。最近一次目标 Java 宿主无过滤 `clean test` 绑定提交 `4e656ae`（来源摘要 `382ac6c6…`）：167 份 Surefire 报告为 5437／5437、无失败／错误／跳过，同次覆盖全部 5329 个映射身份且无重复，另有 108 个 Java 回归。报告封存于 `.cache/evidence/wallet-contracts-full-surefire-20260929/`，日志 `.cache/evidence/wallet-contracts-full-java-20260929.log`；该来源与八个当前局部一致，后续源码变更仍须新一轮无过滤回归。对称加密 52／387、Compat 122／281、交易完整功能 745／1390、交易验证 53／162、认证会话 85／160、认证传输 183／968、DRBG 29／30 已有固定原用例／逐断言任务级对照；AuthFetch 属性 300 组固定 TS 实际输入与 Java 消费一致。证据路径见 [progress.md](progress.md) 与 [feature_list.json](feature_list.json)。
 
 当前 API 映射 3576／3576 且已复核，21 个 API 批次均完成；原用例映射 5329／5329，测试站点映射 7554／7554。固定 TS 标准／manual Jest 原始报告合计 5329／5329，并通过 `audit-tests.py compare-ts`。Spend 的第二组 455 个独立注册已由新 Java 类和新映射收口。对称模块 fixed TS 原 536,870,928 字节 manual 在原 90 分钟上限内 66 分 16 秒通过，连同当次 Java 原始轨迹和逐字节摘要的专用桥接见 `.cache/evidence/symmetric-task-parity-c0d9fdd.json`。API 总审计见 `doc/API跨任务接口复核-20260927-000100.md`；Transaction 非阻塞、三个异步异常入口和 PATCH 状态说明修复已合入当前累计回归。
 
@@ -13,8 +13,8 @@
 - DRBG 原 29 例已在 `c23c6f6` 完成双端正式采集并登记：72 条真实入口（含 15 个 NIST 守卫分支）与 30 条断言双端逐值一致，30 条未执行断言按 `drbg-nist-invalid-input-v1` 与分支样本有据，输入／断言／分支三类篡改均被拒；该登记绑定 `c23c6f6`，在当前 Java 版本下被来源复核拒绝，须随最终全量运行重采。计划冻结与探针见 `drbg-input-plan.json`、`capture-drbg-inputs.cjs`、`prepare-drbg-inputs.py`，证据见 `doc/DRBG原输入验收-20260928-181254.md`。
 - knownTxids 付款原 6 例已在 `79c4b3b` 通过局部门禁：6 条真实输入、8 次付款调用与 25 条断言双端一致，付款输入与断言篡改被拒；Java 侧按语料重建 `Response` 且不伪造宿主 `bodyUsed`。证据见 `.cache/evidence/known-payment-local-20260928-03/`，文档 `doc/knownTxids付款输入验收-20260928-201034.md`。
 - knownTxids 真实 Peer 原例已在 `b7acbb4` 通过局部门禁：随机源、两次 fetch 入口、Peer 前置状态、交付帧、发送载荷与结果、监听器编号逐字段一致，6 条断言一致；入口探针与 Peer 探针分两次 Jest 运行后合并语料，文档 `doc/knownTxids真实Peer输入验收-20260928-210831.md`。该文件 17 例输入重放已全部落地。
-- HTTPWalletJSON 原 53 例已在 `c88a04e`／`1c979fa` 完成双端正式采集并登记（`http-wallet-json`）：214 条真实入口（构造、公开 api、fetch 请求／响应／拒绝）与 73 条断言双端逐值一致，53 条线上请求体解析后一致，输入与断言两类篡改被拒；它是当前 `full-evidence-preflight.py` 中唯一通过来源复核的局部（`currentCaptureVerifiedCases=53`），文档 `doc/HTTPWalletJSON原输入验收-20260929-004232.md`。
-- P0 采集来源门禁的语义规则 10／10、bundle 18／18、关联 3／3、宿主审计 41／41 自测通过。最新 `full-evidence-preflight.py` 结构计划覆盖 4028／5329，仍缺 1301 例；其余已登记局部绑定旧 Java 版本（“…运行来源版本与要求不同”），须在最终单次全量运行中重采。旧 Java 完整回归和 TS 原始报告不能代替单次完整双侧来源。通用断言 helper 已修复一批 null/undefined 伪记录，余下的完整调用历史和对象匹配语义正在修复并重新核对受影响局部证据。完整 `audit-tests.py check` 仍须全量真实输入和断言采集。
+- 八个局部已在 Java 来源 `382ac6c6` 重采并通过 `local-evidence-gate.py`：钱包契约六文件（wallet-property 2/600/600、brc100-byte-encoding 23/57/62、werr-constructors 32/32/40、wallet-error 39/54/79、validation-helpers 147/149/203、json-byte-encoding 10/26/19）、HTTPWalletJSON 53/214/73、toOriginHeader 5/5/5。`migration-impl-wallet-contracts` 与 `migration-impl-wallet-json` 已按依赖顺序标记 `done`，`nextItem` 改为 `migration-impl-wallet-keys`。刷新记录见 `doc/钱包契约与钱包JSON证据刷新-20260929-020724.md`。
+- P0 采集来源门禁的语义规则 10／10、bundle 18／18、关联 3／3、宿主审计 41／41 自测通过。最新 `full-evidence-preflight.py` 结构计划覆盖 4028／5329，仍缺 1301 例，来源复核覆盖 311 例（`currentCaptureVerifiedCases`）；其余 41 个标准局部绑定旧执行器或旧 Java 版本，须在最终单次全量运行中重采。`ParityRecorder.errorName` 现按异常公共 `name` 字段记录 JS 可见错误名，WERR 系列不再被记成 `Error`。旧 Java 完整回归和 TS 原始报告不能代替单次完整双侧来源。通用断言 helper 已修复一批 null/undefined 伪记录，余下的完整调用历史和对象匹配语义正在修复并重新核对受影响局部证据。完整 `audit-tests.py check` 仍须全量真实输入和断言采集。
 
 ## 验证与收工
 

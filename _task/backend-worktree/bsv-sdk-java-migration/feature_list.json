@@ -14,8 +14,8 @@
       "跨工程发布、部署或远端推送"
     ]
   },
-  "activeItem": "migration-impl-wallet-contracts",
-  "nextItem": "migration-impl-wallet-contracts",
+  "activeItem": "migration-impl-wallet-keys",
+  "nextItem": "migration-impl-wallet-keys",
   "features": [
     {
       "id": "migration-env",
@@ -741,7 +741,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-    "compareReport": ".cache/evidence/java-full-after-auth-property-20260926/compat-task-parity-current.json"
+        "compareReport": ".cache/evidence/java-full-after-auth-property-20260926/compat-task-parity-current.json"
       }
     },
     {
@@ -749,7 +749,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "wallet：协议类型、错误、参数和字节校验",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-symmetric"
       ],
@@ -796,8 +796,9 @@
         "migration-api-wallet-validation"
       ],
       "evidence": [
-        ".cache/evidence/wallet-contracts-acceptance.json；API-08 共 442 项、钱包验证 API 248 项及原用例 253/625 站点均已映射。",
-        "干净累计提交 4da4459：相关 16 类 Maven 402/402 通过；任务级固定 TS/Java 逐断言对照见 .cache/evidence/wallet-contracts-clean-parity.json。"
+        "API-08 共 442 项、钱包验证 API 248 项及原用例 253/625 站点均已映射。",
+        "当前 Java 来源 382ac6c6：六个原测试文件均为标准双侧同输入局部（wallet-property 2/600/600、brc100-byte-encoding 23/57/62、werr-constructors 32/32/40、wallet-error 39/54/79、validation-helpers 147/149/203、json-byte-encoding 10/26/19），full-evidence-preflight 记为 currentCaptureVerified。",
+        "任务级固定 TS/Java 逐断言对照 .cache/evidence/wallet-contracts-clean-parity.json（253 例、1003 条断言）；证据刷新见 doc/钱包契约与钱包JSON证据刷新-20260929-020724.md。"
       ],
       "modules": [
         "wallet"
@@ -1654,7 +1655,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "wallet：JSON HTTP 与 Origin 适配",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-wallet-contracts",
         "migration-impl-http-chain"
@@ -1686,7 +1687,8 @@
       ],
       "evidence": [
         "目标提交 2d23200；固定 TS/Java 58/58、78/78 条断言，离线网络请求记录 0；.cache/evidence/wallet-json-local-parity-root.json。",
-        "干净累计提交 4da4459：相关 16 类 Maven 402/402 通过；任务级固定 TS/Java 逐断言对照见 .cache/evidence/wallet-json-clean-parity.json。"
+        "当前 Java 来源 382ac6c6：HTTPWalletJSON 53 例（214 输入／73 断言）与 toOriginHeader 5 例（5 输入／5 断言）均为标准双侧同输入局部，输入与断言篡改被拒，见 doc/HTTPWalletJSON原输入验收-20260929-004232.md、doc/钱包契约与钱包JSON证据刷新-20260929-020724.md。",
+        "任务级固定 TS/Java 逐断言对照见 .cache/evidence/wallet-json-clean-parity.json。"
       ],
       "modules": [
         "wallet"

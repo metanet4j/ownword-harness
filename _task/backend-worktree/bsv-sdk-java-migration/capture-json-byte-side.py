@@ -27,7 +27,8 @@ def main():
     if args.side != os.environ.get('EVIDENCE_SIDE'):
         parser.error('capture 侧别与运行环境不同')
     evidence = args.report.parent
-    parity = evidence / 'assertions.raw.jsonl'
+    # 两侧共用同一运行目录：原始断言轨迹按侧别分开命名，避免混装。
+    parity = evidence / f'{args.side}-assertions.raw.jsonl'
     if args.side == 'java':
         if (args.clean, args.test) != ('clean', 'test'):
             parser.error('Java 必须执行 clean test')

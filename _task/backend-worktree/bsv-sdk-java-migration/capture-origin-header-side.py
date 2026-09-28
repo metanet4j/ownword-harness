@@ -24,10 +24,10 @@ def main():
         parser.error('采集侧别不同')
     replay = args.replay.resolve()
     report = args.report.resolve()
-    raw = report.parent / 'calls.raw.jsonl'
-    assertions = report.parent / 'assertions.raw.jsonl'
+    raw = report.parent / f'{args.side}-calls.raw.jsonl'
+    assertions = report.parent / f'{args.side}-assertions.raw.jsonl'
     env = dict(os.environ, MIGRATION_PARITY_TS_OBSERVATIONS=str(assertions),
-               MIGRATION_NETWORK_LOG=str(report.parent / 'network.jsonl'))
+               MIGRATION_NETWORK_LOG=str(report.parent / f'{args.side}-network.jsonl'))
     if args.side == 'ts':
         if args.clean or args.test:
             parser.error('TS 不接受 Maven 阶段')

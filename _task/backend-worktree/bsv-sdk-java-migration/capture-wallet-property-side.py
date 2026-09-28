@@ -41,7 +41,8 @@ def main():
     evidence = args.report.parent
     raw = evidence / 'property.raw.jsonl'
     metadata = evidence / 'property.metadata.json'
-    parity = evidence / 'assertions.raw.jsonl'
+    # 两侧共用同一运行目录：原始断言轨迹按侧别分开命名，避免混装。
+    parity = evidence / f'{args.side}-assertions.raw.jsonl'
     network = evidence / 'network.jsonl'
     env = dict(os.environ, FAST_CHECK_SEED='20260926', FAST_CHECK_NUM_RUNS='300',
                MIGRATION_WALLET_PROPERTY_TS_INPUTS=str(raw), MIGRATION_WALLET_PROPERTY_TS_META=str(metadata),

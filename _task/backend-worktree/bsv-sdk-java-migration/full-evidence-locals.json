@@ -43,18 +43,19 @@
       "catalog": ".cache/evidence/wallet-property-probe-20260926/plan/catalog.json",
       "mapping": ".cache/evidence/wallet-property-probe-20260926/plan/mapping.json",
       "input_plan": ".cache/evidence/wallet-property-probe-20260926/plan/input-plan.json",
-      "ts_inputs": ".cache/evidence/wallet-property-ts-20260926/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/wallet-property-ts-20260926/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/wallet-property-ts-20260926/manifest.json",
+      "ts_inputs": ".cache/evidence/wallet-property-formal2-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/wallet-property-formal2-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/wallet-property-formal2-20260929/ts-run.json",
       "ts_report": [
-        ".cache/evidence/wallet-property-ts-20260926/jest.json"
+        ".cache/evidence/wallet-property-formal2-20260929/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/wallet-property-java-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/wallet-property-java-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/wallet-property-java-20260927/manifest.json",
+      "java_inputs": ".cache/evidence/wallet-property-formal2-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/wallet-property-formal2-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/wallet-property-formal2-20260929/java-run.json",
       "java_report": [
-        ".cache/evidence/wallet-property-java-20260927/surefire.xml"
-      ]
+        ".cache/evidence/wallet-property-formal2-20260929/java-surefire.xml"
+      ],
+      "capture": "capture-wallet-property-side.py"
     },
     {
       "name": "utils-property",
@@ -79,18 +80,19 @@
       "catalog": ".cache/evidence/werr-plan-v2-20260927/catalog.json",
       "mapping": ".cache/evidence/werr-plan-v2-20260927/mapping.json",
       "input_plan": ".cache/evidence/werr-plan-v2-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/werr-ts-v2-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/werr-ts-v2-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/werr-ts-v2-20260927/manifest.json",
-      "java_inputs": ".cache/evidence/werr-java-v2-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/werr-java-v2-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/werr-java-v2-20260927/manifest.json",
+      "ts_inputs": ".cache/evidence/werr-constructors-formal2-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/werr-constructors-formal2-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/werr-constructors-formal2-20260929/ts-run.json",
+      "java_inputs": ".cache/evidence/werr-constructors-formal2-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/werr-constructors-formal2-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/werr-constructors-formal2-20260929/java-run.json",
       "ts_report": [
-        ".cache/evidence/werr-ts-v2-20260927/jest.json"
+        ".cache/evidence/werr-constructors-formal2-20260929/ts-jest.json"
       ],
       "java_report": [
-        ".cache/evidence/werr-java-v2-20260927/surefire.xml"
-      ]
+        ".cache/evidence/werr-constructors-formal2-20260929/java-surefire.xml"
+      ],
+      "capture": "capture-werr-side.py"
     },
     {
       "name": "auth-master-certificate-constructors",
@@ -232,54 +234,57 @@
       "catalog": ".cache/evidence/json-byte-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/json-byte-plan-20260927/mapping.json",
       "input_plan": ".cache/evidence/json-byte-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/json-byte-ts-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/json-byte-ts-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/json-byte-ts-20260927/manifest.json",
+      "ts_inputs": ".cache/evidence/json-byte-encoding-formal2-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/json-byte-encoding-formal2-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/json-byte-encoding-formal2-20260929/ts-run.json",
       "ts_report": [
-        ".cache/evidence/json-byte-ts-20260927/jest.json"
+        ".cache/evidence/json-byte-encoding-formal2-20260929/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/json-byte-java-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/json-byte-java-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/json-byte-java-20260927/manifest.json",
+      "java_inputs": ".cache/evidence/json-byte-encoding-formal2-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/json-byte-encoding-formal2-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/json-byte-encoding-formal2-20260929/java-run.json",
       "java_report": [
-        ".cache/evidence/json-byte-java-20260927/surefire.xml"
-      ]
+        ".cache/evidence/json-byte-encoding-formal2-20260929/java-surefire.xml"
+      ],
+      "capture": "capture-json-byte-side.py"
     },
     {
       "name": "brc100-byte-encoding",
       "catalog": ".cache/evidence/brc100-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/brc100-plan-20260927/mapping.json",
       "input_plan": ".cache/evidence/brc100-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/brc100-ts-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/brc100-ts-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/brc100-ts-20260927/manifest.json",
+      "ts_inputs": ".cache/evidence/brc100-byte-encoding-formal2-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/brc100-byte-encoding-formal2-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/brc100-byte-encoding-formal2-20260929/ts-run.json",
       "ts_report": [
-        ".cache/evidence/brc100-ts-20260927/jest.json"
+        ".cache/evidence/brc100-byte-encoding-formal2-20260929/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/brc100-java-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/brc100-java-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/brc100-java-20260927/manifest.json",
+      "java_inputs": ".cache/evidence/brc100-byte-encoding-formal2-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/brc100-byte-encoding-formal2-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/brc100-byte-encoding-formal2-20260929/java-run.json",
       "java_report": [
-        ".cache/evidence/brc100-java-20260927/surefire.xml"
-      ]
+        ".cache/evidence/brc100-byte-encoding-formal2-20260929/java-surefire.xml"
+      ],
+      "capture": "capture-brc100-side.py"
     },
     {
       "name": "wallet-error",
       "catalog": ".cache/evidence/wallet-error-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/wallet-error-plan-20260927/mapping.json",
       "input_plan": ".cache/evidence/wallet-error-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/wallet-error-ts-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/wallet-error-ts-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/wallet-error-ts-20260927/manifest.json",
+      "ts_inputs": ".cache/evidence/wallet-error-formal2-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/wallet-error-formal2-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/wallet-error-formal2-20260929/ts-run.json",
       "ts_report": [
-        ".cache/evidence/wallet-error-ts-20260927/jest.json"
+        ".cache/evidence/wallet-error-formal2-20260929/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/wallet-error-java-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/wallet-error-java-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/wallet-error-java-20260927/manifest.json",
+      "java_inputs": ".cache/evidence/wallet-error-formal2-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/wallet-error-formal2-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/wallet-error-formal2-20260929/java-run.json",
       "java_report": [
-        ".cache/evidence/wallet-error-java-20260927/surefire.xml"
-      ]
+        ".cache/evidence/wallet-error-formal2-20260929/java-surefire.xml"
+      ],
+      "capture": "capture-wallet-error-side.py"
     },
     {
       "name": "wallet-wire",
@@ -445,9 +450,22 @@
     },
     {
       "name": "validation-helpers",
-      "deriveCatalogFromPlan": true,
       "input_plan": "validation-helpers-input-plan.json",
-      "captureKind": "specialized-local"
+      "catalog": ".cache/evidence/validation-helpers-formal-20260929/catalog.json",
+      "mapping": ".cache/evidence/validation-helpers-formal-20260929/mapping.json",
+      "capture": "capture-validation-helpers-side.py",
+      "ts_inputs": ".cache/evidence/validation-helpers-formal-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/validation-helpers-formal-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/validation-helpers-formal-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/validation-helpers-formal-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/validation-helpers-formal-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/validation-helpers-formal-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/validation-helpers-formal-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/validation-helpers-formal-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "bignumber-arithmetic",
@@ -957,19 +975,20 @@
       "name": "origin-header5",
       "catalog": ".cache/evidence/origin-header-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/origin-header-plan-20260927/mapping.json",
-      "input_plan": ".cache/evidence/origin-header-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/origin-header-ts-formal-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/origin-header-ts-formal-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/origin-header-ts-formal-20260927/manifest.json",
+      "input_plan": "origin-header-input-plan.json",
+      "ts_inputs": ".cache/evidence/origin-header5-formal5-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/origin-header5-formal5-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/origin-header5-formal5-20260929/ts-run.json",
       "ts_report": [
-        ".cache/evidence/origin-header-ts-formal-20260927/jest.json"
+        ".cache/evidence/origin-header5-formal5-20260929/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/origin-header-java-formal-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/origin-header-java-formal-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/origin-header-java-formal-20260927/manifest.json",
+      "java_inputs": ".cache/evidence/origin-header5-formal5-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/origin-header5-formal5-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/origin-header5-formal5-20260929/java-run.json",
       "java_report": [
-        ".cache/evidence/origin-header-java-formal-20260927/surefire.xml"
-      ]
+        ".cache/evidence/origin-header5-formal5-20260929/java-surefire.xml"
+      ],
+      "capture": "capture-origin-header-side.py"
     },
     {
       "name": "bn-utils36",
@@ -1005,25 +1024,27 @@
       "java_run_manifest": ".cache/evidence/drbg-java-formal2-20260928/manifest.json",
       "java_report": [
         ".cache/evidence/drbg-java-formal2-20260928/surefire.xml"
-      ]
+      ],
+      "capture": "capture-drbg-side.py"
     },
     {
       "name": "http-wallet-json",
       "catalog": ".cache/evidence/http-wallet-json-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/http-wallet-json-plan-20260927/mapping.json",
       "input_plan": "http-wallet-json-input-plan.json",
-      "ts_inputs": ".cache/evidence/http-wallet-json-formal4-20260929/ts-inputs.jsonl",
-      "ts_assertions": ".cache/evidence/http-wallet-json-formal4-20260929/ts-assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/http-wallet-json-formal4-20260929/ts-run.json",
+      "ts_inputs": ".cache/evidence/http-wallet-json-formal5-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/http-wallet-json-formal5-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/http-wallet-json-formal5-20260929/ts-run.json",
       "ts_report": [
-        ".cache/evidence/http-wallet-json-formal4-20260929/ts-jest.json"
+        ".cache/evidence/http-wallet-json-formal5-20260929/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/http-wallet-json-formal4-20260929/java-inputs.jsonl",
-      "java_assertions": ".cache/evidence/http-wallet-json-formal4-20260929/java-assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/http-wallet-json-formal4-20260929/java-run.json",
+      "java_inputs": ".cache/evidence/http-wallet-json-formal5-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/http-wallet-json-formal5-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/http-wallet-json-formal5-20260929/java-run.json",
       "java_report": [
-        ".cache/evidence/http-wallet-json-formal4-20260929/java-surefire.xml"
-      ]
+        ".cache/evidence/http-wallet-json-formal5-20260929/java-surefire.xml"
+      ],
+      "capture": "capture-http-wallet-json-side.py"
     }
   ]
 }
