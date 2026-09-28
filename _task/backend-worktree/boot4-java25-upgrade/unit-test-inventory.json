@@ -2708,7 +2708,458 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/BapTestFixture.java",
+              "classification": "fixture",
+              "classificationReason": "受控替身/夹具，无直接 @Test 方法",
+              "methods": []
+            },
+            {
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/converter/BapConvertersContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "bapIdConverterMapsTheMongoDocumentIncludingItsIdentityDocument",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bapIdentityUtilParsesDocumentsAndToleratesNull",
+                  "returnType": "void",
+                  "line": 48,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bapRecordConverterFillsTheIdentityKeyForRootTransactionsAndCopiesAppendedData",
+                  "returnType": "void",
+                  "line": 56,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bapRecordConverterKeepsNonRootRecordsUnresolved",
+                  "returnType": "void",
+                  "line": 77,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bapTxRecordConvertersConvertBothDirections",
+                  "returnType": "void",
+                  "line": 91,
+                  "classification": "unit"
+                },
+                {
+                  "name": "mongoUnderValidateRecordConverterHandlesNonRootTransactionsWithAppendedData",
+                  "returnType": "void",
+                  "line": 112,
+                  "classification": "unit"
+                },
+                {
+                  "name": "mongoUnderValidateRecordConverterFillsTheIdentityKeyForRootTransactions",
+                  "returnType": "void",
+                  "line": 132,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MongoStoreBapDtoHandlerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "handleRejectsTransactionsWithoutIdentityKey",
+                  "returnType": "void",
+                  "line": 44,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleStoresARootIdDocumentWithItsFirstSigner",
+                  "returnType": "void",
+                  "line": 55,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleAppendsANewSignerForANonRootIdTransaction",
+                  "returnType": "void",
+                  "line": 85,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleStoresAnAttestationWithItsOptionallyAppendedData",
+                  "returnType": "void",
+                  "line": 102,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleLeavesTheAttestationDataEmptyWhenNothingIsAppended",
+                  "returnType": "void",
+                  "line": 122,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleUpdatesTheIdentityJsonForAliasTransactions",
+                  "returnType": "void",
+                  "line": 133,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleStoresRevokedAttestationsPointingToTheirOwnTransaction",
+                  "returnType": "void",
+                  "line": 145,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleIgnoresUnknownBapTypes",
+                  "returnType": "void",
+                  "line": 158,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleDataTransactionsRequireARootIdSignatureBeforeTheyCanBeStored",
+                  "returnType": "void",
+                  "line": 168,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MysqlStoreBapDtoHandlerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "handleStoresRootAndSignerForANewRootId",
+                  "returnType": "void",
+                  "line": 30,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleStoresRootAndSignerWhenTheRootIdExplicitlySaysNotDestroyed",
+                  "returnType": "void",
+                  "line": 42,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleDestroysTheIdentityForADestroyRootId",
+                  "returnType": "void",
+                  "line": 54,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleStoresOnlyTheSignerForANonRootId",
+                  "returnType": "void",
+                  "line": 67,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleStoresOnlyTheSignerWhenANonRootIdIsNotDestroyed",
+                  "returnType": "void",
+                  "line": 79,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleStoresTheAliasIdentity",
+                  "returnType": "void",
+                  "line": 92,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleTreatsAttestationsAsIdRows",
+                  "returnType": "void",
+                  "line": 102,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleIgnoresDataAndRevokeTransactions",
+                  "returnType": "void",
+                  "line": 113,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleRejectsTransactionsWithoutIdentityKey",
+                  "returnType": "void",
+                  "line": 121,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/listener/BapListenerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "consumeEventIsForwardedToTheConfiguredBapHandler",
+                  "returnType": "void",
+                  "line": 25,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchListenerSavesTheIdentityWhenTheEventIsPublished",
+                  "returnType": "void",
+                  "line": 38,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/manager/BapManagerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "createRootChainsDataLockCompletionAndRawStrHandling",
+                  "returnType": "void",
+                  "line": 45,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/mapstruct/mongo/BapIdDoMapperContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "convertReturnsNullForANullSource",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit"
+                },
+                {
+                  "name": "convertMapsEveryScalarFieldAndTheIdentityDocument",
+                  "returnType": "void",
+                  "line": 28,
+                  "classification": "unit"
+                },
+                {
+                  "name": "convertKeepsAMissingSignerListAndToleratesNullEntries",
+                  "returnType": "void",
+                  "line": 60,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/resolver/BapRawStrResolverContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "handleWithOneArgumentDelegatesWithoutAnIdentityKey",
+                  "returnType": "void",
+                  "line": 48,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleAcceptsARootTransactionWithItsOwnIdentityKey",
+                  "returnType": "void",
+                  "line": 61,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleRejectsARootTransactionWithoutIdentityKey",
+                  "returnType": "void",
+                  "line": 74,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleLooksUpTheIdentityKeyForNonRootTransactions",
+                  "returnType": "void",
+                  "line": 88,
+                  "classification": "unit"
+                },
+                {
+                  "name": "handleKeepsTheIdentityKeyProvidedByTheCaller",
+                  "returnType": "void",
+                  "line": 104,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/service/BapSearchServiceContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "saveIdentityParsesTheSequenceJsonIntoTheIdentityMap",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveIdentityLeavesTheIdentityMapEmptyWithoutASequence",
+                  "returnType": "void",
+                  "line": 51,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchDelegatesToTheIdentityRepository",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/service/MongoBapServiceContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "saveConvertsTheModelAndStoresTheRecord",
+                  "returnType": "void",
+                  "line": 57,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findBapRootByIdentityKeyReadsTheIdDocumentAndConvertsIt",
+                  "returnType": "void",
+                  "line": 68,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getByIdentityFailsWhenTheIdentityIsUnknown",
+                  "returnType": "void",
+                  "line": 80,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findShowIdentityByPageKeepsPageMetadataAndConvertsEveryItem",
+                  "returnType": "void",
+                  "line": 88,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findShowIdentityAndListIdentityConvertEveryDocument",
+                  "returnType": "void",
+                  "line": 102,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findIdentityKeyDelegatesToTheSignerAddressLookup",
+                  "returnType": "void",
+                  "line": 114,
+                  "classification": "unit"
+                },
+                {
+                  "name": "writeSideMethodsAreStillStubs",
+                  "returnType": "void",
+                  "line": 121,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/service/MysqlBapServiceContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "findIdentityKeyReturnsTheSignerIdentityOrNull",
+                  "returnType": "void",
+                  "line": 66,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findBapRootByIdentityKeyMapsARootIdentityRow",
+                  "returnType": "void",
+                  "line": 77,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findBapRootByIdentityKeyRejectsMissingOrNonRootRows",
+                  "returnType": "void",
+                  "line": 97,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveRootAndSaveSignerWriteTheMappedRows",
+                  "returnType": "void",
+                  "line": 117,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveAliasWritesTheSequenceAsIdentityJson",
+                  "returnType": "void",
+                  "line": 142,
+                  "classification": "unit"
+                },
+                {
+                  "name": "destroyFlagsTheIdentityRowByItsIdentity",
+                  "returnType": "void",
+                  "line": 156,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveOrUpdateBapTxInsertsNewRecordsAndReportsThemAsNotExisting",
+                  "returnType": "void",
+                  "line": 174,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveOrUpdateBapTxUpdatesTheBlockOnlyForExistingRecordsWithBlock",
+                  "returnType": "void",
+                  "line": 187,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveOrUpdateBapTxSkipsTheUpdateWhenTheBlockIsUnknown",
+                  "returnType": "void",
+                  "line": 202,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findBapRecordReturnsNullForUnknownTransactions",
+                  "returnType": "void",
+                  "line": 214,
+                  "classification": "unit"
+                },
+                {
+                  "name": "readSideMethodsAreStillStubs",
+                  "returnType": "void",
+                  "line": 225,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/validator/DefaultBapValidatorContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "validateAcceptsARegisteredRootIdentity",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "unit"
+                },
+                {
+                  "name": "validateRejectsAnUnknownIdentity",
+                  "returnType": "void",
+                  "line": 47,
+                  "classification": "unit"
+                },
+                {
+                  "name": "generateRandomSignHashHexStrIsA64CharHexDigest",
+                  "returnType": "void",
+                  "line": 58,
+                  "classification": "unit"
+                },
+                {
+                  "name": "verifySigFailsForAnUnknownIdentity",
+                  "returnType": "void",
+                  "line": 68,
+                  "classification": "unit"
+                },
+                {
+                  "name": "verifySigDelegatesToAipHelperWithTheRootAddress",
+                  "returnType": "void",
+                  "line": 78,
+                  "classification": "unit"
+                },
+                {
+                  "name": "verifySigReturnsFalseWhenTheSignatureDoesNotMatch",
+                  "returnType": "void",
+                  "line": 92,
+                  "classification": "unit"
+                }
+              ]
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",

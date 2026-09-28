@@ -8,7 +8,7 @@
     "done"
   ],
   "activeItem": "unit-u6-business",
-  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1—U5 均已完成；U6 进行中：component-tx 已完成，component-bap → bsocial → bitcoinschema → handler 与跨存储链路集成待实施。",
+  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1—U5 均已完成；U6 进行中：component-tx、component-bap 已完成，component-bsocial → bitcoinschema → handler 与跨存储链路集成待实施。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -363,10 +363,12 @@
       ],
       "evidence": [
         "component-tx 提交 630303b：29/0/0/0，LINE 107/111、BRANCH 4/6、METHOD 48/48，缺口为登记的远程签名器桩不可达代码；证据 evidence/20260928T164728Z/。",
-        "component-tx 记录的当前行为：DefaultUtxoResolver.listUtxoAddress 忽略入参 bapBase、走工厂付款密钥；BschemaCustomTransactionSigner.getSignature 恒 NPE；BAP root/id 数据锁本身不签名；钱包无法解锁输入时抛 RuntimeException（未被吞）。",
-        "待实施：component-bap → component-bsocial → component-bitcoinschema → component-handler，以及跨存储业务链路集成。"
+        "component-bap 提交 2fbd3f7：63/0/0/0，LINE 293/305、BRANCH 69/70、METHOD 88/88，缺口为登记的 MongoStoreBapDtoHandler 数据分支不可达；证据 evidence/20260928T180551Z/。",
+        "component-bap 暴露并最小修复：BapSearchListener 的 BapSearchService 字段漏写 @Autowired，BapSearchEvent 发布即 NPE、搜索身份不落库；已先用 Spring 上下文回归用例复现再修复。",
+        "记录的当前行为：MongoBapService.getByIdentity 空 Optional 直接抛 NoSuchElementException；MysqlBapService 的 destroy 用 is_destroy=1 标记、ATTEST 与 ID 共用 saveRoot 路径；Mongo 的 DATA 类交易恒被忽略（isRootBap 要求 type==ID）。",
+        "待实施：component-bsocial → component-bitcoinschema → component-handler，以及跨存储业务链路集成。"
       ],
-      "statusNote": "2026-09-28 开工：五模块顺序推进，component-tx 已完成并严格验收。"
+      "statusNote": "2026-09-28：component-tx、component-bap 已完成并严格验收，U6 继续按模块顺序推进。"
     },
     {
       "id": "unit-u7-adapters",

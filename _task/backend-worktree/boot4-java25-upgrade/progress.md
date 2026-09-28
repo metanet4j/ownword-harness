@@ -6,7 +6,7 @@
 
 - **Last Updated**：2026-09-28。
 - **Current Objective**：为四个子仓库建立完整单元测试、集成测试与逐模块验收证据。
-- **Active Item**：`unit-u6-business` 进行中：component-tx 已完成（提交 630303b），component-bap → bsocial → bitcoinschema → handler 与跨存储链路集成待实施。
+- **Active Item**：`unit-u6-business` 进行中：component-tx（提交 630303b）、component-bap（提交 2fbd3f7）已完成，component-bsocial → bitcoinschema → handler 与跨存储链路集成待实施。
 - U3 三模块严格验收均通过：component-model 20/0/0/0（LINE 73/78、BRANCH 2/2、METHOD 18/19，evidence/20260928T100401Z/）、component-common 41/0/0/0（LINE 239/248、BRANCH 42/42、METHOD 86/95，evidence/20260928T103233Z/）、component-core 纯接口 N/A（evidence/20260928T103553Z/）。提交：component 63560a3、4d3cf66。
 - component 仓库根启用 `lombok.config`（`addLombokGeneratedAnnotation`），Lombok 生成成员由 JaCoCo 内置 `AnnotationGeneratedFilter` 逐成员识别；聚合 POM 补 JUnit/Mockito 测试依赖与 `jacoco.unit.check.excludes` 属性。缺口一律按 `unit-coverage-exceptions.json` 精确清单登记并由 `verify-unit.py` 双向核对。
 - U3 测试暴露并最小修复：`ConvertTypeEnum` 构造器未写入 `id`、`JacksonBeanUtils.copyProperty` 忽略目标类型；`StateHelper` 删除不可达空 `default`；`LocalTestUtxoProvider` 目录可配置、`BitcoinSchemaTransaction` 可注入 UTXO provider（默认行为不变）。
@@ -20,11 +20,13 @@
 
 ## 阻塞与剩余工作
 
-- U6 进展：component-tx 29/0/0/0（LINE 107/111、BRANCH 4/6、METHOD 48/48，`evidence/20260928T164728Z/`，提交 630303b），缺口为登记的远程签名器桩不可达代码；剩余 component-bap、component-bsocial、component-bitcoinschema、component-handler 与跨存储链路集成。
+- U6 剩余：component-bsocial、component-bitcoinschema、component-handler 与跨存储业务链路集成。
+- component-bap 63/0/0/0（LINE 293/305、BRANCH 69/70、METHOD 88/88，`evidence/20260928T180551Z/`，提交 2fbd3f7）：11 个测试类覆盖两个 BapService、两个事件监听器、两个 Store handler、resolver/validator/converter 与 MapStruct 生成的映射实现；缺口为登记的 `MongoStoreBapDtoHandler` 数据分支不可达。
+- component-bap 暴露并最小修复：`BapSearchListener` 的 `BapSearchService` 漏写 `@Autowired` → 字段恒 null，`BapSearchEvent` 发布即 NPE、搜索身份永不落库（MAP/ES 搜索数据链路断点）。先用 Spring 上下文回归用例复现，再补注解通过。
 - component-tx 记录的当前行为：`DefaultUtxoResolver.listUtxoAddress` 忽略入参 bapBase（取工厂付款密钥）；`BapDataLockBuilder.buildRoot/buildId` 数据锁不签名（AIP 签名在交易输入侧）；`DefaultCompleteTxFactory` 的广播 lambda 用静态替身验证；钱包无法解锁输入时 `calculateChangeAmount` 先抛 RuntimeException。
 - 共享中间件五个容器当前全部运行且 healthy（`./init.sh` 校验）；集成测试按 `infra/README-ownword-infra-20260915-1720.md` 的连接信息连本机端口，用每轮唯一的库/索引/表，结束后清理自身资源，不动共享数据。
 - 四仓库分支仍为 `feature/java25`，未推送远端。
 
 ## Recommended Next Step
 
-继续 U6 的 component-bap：先读 `BapManager`/`BapService`/`MongoBapService`/`MysqlBapService` 与两个 handler、listener 的调用链，用受控替身补单元测试并 `verify-unit.py --mode accept --scope metanet4j-component-bap` 严格验收，随后 component-bsocial、component-bitcoinschema、component-handler 与跨存储链路集成。
+继续 U6 的 component-bsocial：先读其 handler/service/listener/converter 调用链（与 component-bap 同构），用受控替身补单元测试并 `verify-unit.py --mode accept --scope metanet4j-component-bsocial` 严格验收；随后 component-bitcoinschema、component-handler 与跨存储链路集成。

@@ -245,6 +245,17 @@
           ]
         }
       ]
+    },
+    "metanet4j-component-bap": {
+      "entries": [
+        {
+          "class": "com/metanet4j/component/bap/handler/MongoStoreBapDtoHandler",
+          "reason": "handleDataBapTransaction 先判 BapHelper.isRootBap(dto)，而 isRootBap 要求 type==ID；handle 只在 type==DATA(4) 时进入该方法，两者互斥 → 早退分支恒成立，其后构造并保存 BapAttest 的 12 行不可达（当前行为由 MongoStoreBapDtoHandlerContractTest 记录）",
+          "missed": [
+            {"method": "handleDataBapTransaction", "line": 114, "lineMissed": 12, "methodMissed": 0, "branchMissed": 1}
+          ]
+        }
+      ]
     }
   }
 }
