@@ -7,8 +7,8 @@
     "blocked",
     "done"
   ],
-  "activeItem": "unit-u4-protocol",
-  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1 base、U2 sdk、U3 component 基础模块均已完成；U4 sdk 协议处理阶段正在实施，U5—U9 待实施。",
+  "activeItem": "unit-u5-storage",
+  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1 base、U2 sdk、U3 component 基础模块、U4 数据输入与协议处理均已完成；U5 存储层正在实施，U6—U9 待实施。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -323,18 +323,24 @@
       "id": "unit-u4-protocol",
       "name": "U4 数据输入与协议处理",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "unit-u3-foundation"
       ],
-      "evidence": [],
-      "statusNote": "2026-09-28 开工：connect-planaria → tx-convertor → tx-filter → tx-validator。"
+      "evidence": [
+        "component 提交 53d5d62（connect-planaria）、347635f（tx-convertor）、后续提交（tx-filter/tx-validator）。",
+        "connect-planaria：12/0/0/0，LINE/BRANCH/METHOD 全 100%，恒真占位 AppTest 删除；证据 evidence/20260928T110034Z/。",
+        "tx-convertor：54/0/0/0，LINE 383/398、BRANCH 144/160、METHOD 65/66，缺口为 6 条不可达或防御性字节码；证据 evidence/20260928T122818Z/。",
+        "tx-filter：7/0/0/0，LINE 16/16、BRANCH 5/6、METHOD 9/9；tx-validator：4/0/0/0 全 100%；证据 evidence/20260928T130137Z/ 与 evidence/20260928T130312Z/。",
+        "测试暴露并最小修复：UtxoConvertor 输出分支互换、BAP append-data 签名地址与 appendData 缺失、协议反射工厂前缀错位与非文本字段跳过。"
+      ],
+      "statusNote": "2026-09-28 完成：四模块相继达到 §3 口径（54+12+7+4 例，缺口均为精确清单登记的不可达字节码）。"
     },
     {
       "id": "unit-u5-storage",
       "name": "U5 存储层",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "unit-u4-protocol"
       ],

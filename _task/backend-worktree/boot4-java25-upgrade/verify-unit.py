@@ -121,15 +121,18 @@ def coverage_exceptions():
 def method_misses(node):
     missed = {}
     for method in node.findall("method"):
-        line_missed = method_missed = 0
+        line_missed = method_missed = branch_missed = 0
         for counter in method.findall("counter"):
             if counter.get("type") == "LINE":
                 line_missed = int(counter.get("missed"))
             elif counter.get("type") == "METHOD":
                 method_missed = int(counter.get("missed"))
-        if line_missed or method_missed:
+            elif counter.get("type") == "BRANCH":
+                branch_missed = int(counter.get("missed"))
+        if line_missed or method_missed or branch_missed:
             missed[method.get("name")] = {"line": int(method.get("line")),
-                                          "lineMissed": line_missed, "methodMissed": method_missed}
+                                          "lineMissed": line_missed, "methodMissed": method_missed,
+                                          "branchMissed": branch_missed}
     return missed
 
 
@@ -220,10 +223,11 @@ def inspect(module, output, strict):
                             problems.append(f"覆盖率未达标：{class_name} {counter_type}")
                     continue
                 recorded = {item["method"]: {"line": item["line"], "lineMissed": item["lineMissed"],
-                                             "methodMissed": item["methodMissed"]}
+                                             "methodMissed": item["methodMissed"],
+                                             "branchMissed": item.get("branchMissed", 0)}
                             for item in expected["missed"]}
-                if counters.get("BRANCH"):
-                    problems.append(f"覆盖率例外含分支缺口：{class_name}")
+                if counters.get("BRANCH") != sum(item.get("branchMissed", 0) for item in expected["missed"]):
+                    problems.append(f"覆盖率例外分支计数不符：{class_name}")
                 if missed_methods != recorded:
                     problems.append(f"覆盖率例外清单不符：{class_name} 实测 {missed_methods or '无'}，"
                                     f"记录 {recorded}")

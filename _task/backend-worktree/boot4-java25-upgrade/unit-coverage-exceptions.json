@@ -155,6 +155,63 @@
           ]
         }
       ]
+    },
+    "metanet4j-tx-convertor": {
+      "entries": [
+        {
+          "class": "com/metanet4j/tx/convertor/BUtils",
+          "reason": "隐式默认构造器，仅提供静态工具方法",
+          "missed": [
+            {"method": "<init>", "line": 12, "lineMissed": 1, "methodMissed": 1, "branchMissed": 0}
+          ]
+        },
+        {
+          "class": "com/metanet4j/tx/convertor/bsocial/BConverter",
+          "reason": "bytes 局部变量恒为 null（CellItem.bytes 从未被赋值），整个字节分支不可达",
+          "missed": [
+            {"method": "convert", "line": 26, "lineMissed": 9, "methodMissed": 0, "branchMissed": 11}
+          ]
+        },
+        {
+          "class": "com/metanet4j/tx/convertor/bsocial/DefaultProtocolConverterFactory$ListToProtocolBean",
+          "reason": "ClassNotFoundException 为防御性捕获：targetType 是真实 Class，forName 恒成功",
+          "missed": [
+            {"method": "convert", "line": 31, "lineMissed": 2, "methodMissed": 0, "branchMissed": 0}
+          ]
+        },
+        {
+          "class": "com/metanet4j/tx/convertor/impl/PlanariaBapConvertor",
+          "reason": "BapTypeEnum.fromDesc 恒返回非 null（未匹配时为 UNKNOWN），非有效类型的判断不可达",
+          "missed": [
+            {"method": "verifyAndConvertToBap", "line": 135, "lineMissed": 1, "methodMissed": 0, "branchMissed": 1}
+          ]
+        },
+        {
+          "class": "com/metanet4j/tx/convertor/impl/PlanariaBsocialConvertor",
+          "reason": "CellItem.bytes 从未被赋值，签名消息的原始字节分支不可达",
+          "missed": [
+            {"method": "lambda$convert$8", "line": 144, "lineMissed": 2, "methodMissed": 0, "branchMissed": 3}
+          ]
+        },
+        {
+          "class": "com/metanet4j/tx/convertor/impl/UtxoConvertor",
+          "reason": "script != null 恒为 true（new Script(...) 不会返回 null）",
+          "missed": [
+            {"method": "convert", "line": 26, "lineMissed": 0, "methodMissed": 0, "branchMissed": 1}
+          ]
+        }
+      ]
+    },
+    "metanet4j-tx-filter": {
+      "entries": [
+        {
+          "class": "com/metanet4j/tx/filter/MetaIdProtocolTxFilter",
+          "reason": "lambda 内以十六进制串比较字面量 \"meta\"，条件恒为 false（空 if 体）→ 真分支不可达",
+          "missed": [
+            {"method": "lambda$filter$0", "line": 20, "lineMissed": 0, "methodMissed": 0, "branchMissed": 1}
+          ]
+        }
+      ]
     }
   }
 }

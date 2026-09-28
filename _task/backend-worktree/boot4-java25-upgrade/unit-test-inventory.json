@@ -4865,13 +4865,97 @@
           ],
           "testSources": [
             {
-              "path": "metanet4j-connect-planaria/src/test/java/com/metanet4j/component/AppTest.java",
+              "path": "metanet4j-connect-planaria/src/test/java/com/metanet4j/component/planaria/block/pull/BitbusMetaBlockPullerImplContractTest.java",
               "classification": "unit",
               "methods": [
                 {
-                  "name": "shouldAnswerWithTrue",
+                  "name": "pullByTxIdReturnsNullWithoutTxId",
                   "returnType": "void",
-                  "line": 15,
+                  "line": 53,
+                  "classification": "unit"
+                },
+                {
+                  "name": "pullByTxIdParsesFirstEntryAndSendsTokenHeader",
+                  "returnType": "void",
+                  "line": 59,
+                  "classification": "unit"
+                },
+                {
+                  "name": "pullByTxIdWrapsClientAndPayloadFailures",
+                  "returnType": "void",
+                  "line": 81,
+                  "classification": "unit"
+                },
+                {
+                  "name": "pullBigDataByIdReturnsNullWithoutIdOrResponse",
+                  "returnType": "void",
+                  "line": 94,
+                  "classification": "unit"
+                },
+                {
+                  "name": "pullBigDataByIdReturnsBodyBytes",
+                  "returnType": "void",
+                  "line": 102,
+                  "classification": "unit"
+                },
+                {
+                  "name": "pullBigDataByIdWrapsClientFailures",
+                  "returnType": "void",
+                  "line": 116,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-connect-planaria/src/test/java/com/metanet4j/component/planaria/block/pull/DefaultBlockPullerImplContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "pullForwardsClientResult",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "unit"
+                },
+                {
+                  "name": "pullSwallowsClientFailures",
+                  "returnType": "void",
+                  "line": 42,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-connect-planaria/src/test/java/com/metanet4j/component/planaria/block/request/PullBlockDataRequestContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "serialisesFindFieldWithItsProtocolName",
+                  "returnType": "void",
+                  "line": 13,
+                  "classification": "unit"
+                },
+                {
+                  "name": "carriesValuesThroughItsBuilders",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-connect-planaria/src/test/java/com/metanet4j/component/planaria/fegin/DefaultFeginClientConfigContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "formSupportConfigEnablesFullLogging",
+                  "returnType": "void",
+                  "line": 12,
+                  "classification": "unit"
+                },
+                {
+                  "name": "timeoutConfigBuildsAFeignBuilder",
+                  "returnType": "void",
+                  "line": 17,
                   "classification": "unit"
                 }
               ]
@@ -4879,7 +4963,7 @@
           ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
-          "classificationReason": "现有 AppTest 仅作本地断言，不跨外部边界",
+          "classificationReason": "公开入口以受控 Feign 替身验证请求体、响应解析与异常包装；恒真占位 AppTest 已删除并由行为用例替代",
           "integrationCases": [
             {
               "boundary": "DefaultFeginClient 的 Planaria HTTP 数据入口",
@@ -5336,7 +5420,398 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/BUtilsContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "getMimeTypePrefersTheNonEciesEntry",
+                  "returnType": "void",
+                  "line": 14,
+                  "classification": "unit"
+                },
+                {
+                  "name": "getMimeTypesUnwrapsQuotedContentTypesAndTrimsParts",
+                  "returnType": "void",
+                  "line": 25,
+                  "classification": "unit"
+                },
+                {
+                  "name": "isTextOnlyAcceptsASingleTextType",
+                  "returnType": "void",
+                  "line": 36,
+                  "classification": "unit"
+                },
+                {
+                  "name": "isEciesDetectsAnyEciesEntry",
+                  "returnType": "void",
+                  "line": 43,
+                  "classification": "unit"
+                },
+                {
+                  "name": "isEciesTextRequiresBothTextAndEcies",
+                  "returnType": "void",
+                  "line": 51,
+                  "classification": "unit"
+                },
+                {
+                  "name": "multiMediaChecksLookAtTheFirstType",
+                  "returnType": "void",
+                  "line": 58,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/bap/BapModelToDtoConverterContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "rootBapUsesHashAsIdentityKeyAndKeepsAppendData",
+                  "returnType": "void",
+                  "line": 19,
+                  "classification": "unit"
+                },
+                {
+                  "name": "nonRootBapDoesNotInferIdentityKeyAndLeavesDataEmpty",
+                  "returnType": "void",
+                  "line": 41,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/bsocial/AIPConverterContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "keepsABase64SignatureAsIs",
+                  "returnType": "void",
+                  "line": 19,
+                  "classification": "unit"
+                },
+                {
+                  "name": "fallsBackToTheEncodedSignatureForNonBase64Values",
+                  "returnType": "void",
+                  "line": 32,
+                  "classification": "unit"
+                },
+                {
+                  "name": "emptyTextSignatureStaysEmpty",
+                  "returnType": "void",
+                  "line": 42,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/bsocial/BConverterContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "urlContentKeepsTheLinkAndMetadata",
+                  "returnType": "void",
+                  "line": 19,
+                  "classification": "unit"
+                },
+                {
+                  "name": "inlineContentDecodesHexBytesAndDetectsEcies",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "unit"
+                },
+                {
+                  "name": "optionalEncodingAndFilenameMayBeMissing",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/bsocial/BsocialModelToDtoConverterContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "copiesEveryProtocolListAndLiftsTheFirstSignatureAddress",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit"
+                },
+                {
+                  "name": "keepsSignatureAddressEmptyWithoutAipEntries",
+                  "returnType": "void",
+                  "line": 62,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/bsocial/DefaultProtocolConverterFactoryContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "fillsProtocolFieldsInDeclarationOrder",
+                  "returnType": "void",
+                  "line": 18,
+                  "classification": "unit"
+                },
+                {
+                  "name": "stopsWhenTheCellsRunOut",
+                  "returnType": "void",
+                  "line": 29,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsMismatchedProtocolPrefixes",
+                  "returnType": "void",
+                  "line": 40,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/bsocial/MAPConverterContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "setCommandsCopyPairsAndResolveTheBioSocialType",
+                  "returnType": "void",
+                  "line": 18,
+                  "classification": "unit"
+                },
+                {
+                  "name": "setCommandsWithContextTxBecomeReplies",
+                  "returnType": "void",
+                  "line": 28,
+                  "classification": "unit"
+                },
+                {
+                  "name": "setCommandsKeepTheirTypeWhenContextDoesNotMatch",
+                  "returnType": "void",
+                  "line": 37,
+                  "classification": "unit"
+                },
+                {
+                  "name": "setCommandsWithoutPostTypeAreNotReclassified",
+                  "returnType": "void",
+                  "line": 45,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addCommandsJoinTheAddedValuesIntoTags",
+                  "returnType": "void",
+                  "line": 52,
+                  "classification": "unit"
+                },
+                {
+                  "name": "setCommandsWithAnUnrelatedEighthFieldKeepTheirType",
+                  "returnType": "void",
+                  "line": 61,
+                  "classification": "unit"
+                },
+                {
+                  "name": "setCommandsWithBrokenContextPairsKeepTheirType",
+                  "returnType": "void",
+                  "line": 69,
+                  "classification": "unit"
+                },
+                {
+                  "name": "unknownCommandsReturnNull",
+                  "returnType": "void",
+                  "line": 76,
+                  "classification": "unit"
+                },
+                {
+                  "name": "setCommandFailureIsWrappedAsRuntimeException",
+                  "returnType": "void",
+                  "line": 81,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/executor/SourceTxConvertorExecutorContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "routesRequestsByConvertType",
+                  "returnType": "void",
+                  "line": 25,
+                  "classification": "unit"
+                },
+                {
+                  "name": "keepsTheLastConvertorForDuplicateTypes",
+                  "returnType": "void",
+                  "line": 32,
+                  "classification": "unit"
+                },
+                {
+                  "name": "unknownTypesFailFast",
+                  "returnType": "void",
+                  "line": 51,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/impl/PlanariaBapConvertorContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "convertsSingleBapPayloadsWithAValidSignature",
+                  "returnType": "void",
+                  "line": 36,
+                  "classification": "unit"
+                },
+                {
+                  "name": "stringEntriesShareTheSameConversionRule",
+                  "returnType": "void",
+                  "line": 51,
+                  "classification": "unit"
+                },
+                {
+                  "name": "fallsBackToTheEncodedSignatureWhenTheTextFieldIsNotBase64",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                },
+                {
+                  "name": "reportsItsConvertTypeAndFailsFastOnMissingArrays",
+                  "returnType": "void",
+                  "line": 73,
+                  "classification": "unit"
+                },
+                {
+                  "name": "readsTheEncodedSignatureWhenTheTextFieldIsMissing",
+                  "returnType": "void",
+                  "line": 79,
+                  "classification": "unit"
+                },
+                {
+                  "name": "appendDataReadsTheEncodedSignatureWhenTheTextFieldIsMissing",
+                  "returnType": "void",
+                  "line": 89,
+                  "classification": "unit"
+                },
+                {
+                  "name": "ignoresOutputsWithoutProtocolKeysWhileFiltering",
+                  "returnType": "void",
+                  "line": 98,
+                  "classification": "unit"
+                },
+                {
+                  "name": "appendDataFallsBackToTheEncodedSignatureForNonBase64Text",
+                  "returnType": "void",
+                  "line": 111,
+                  "classification": "unit"
+                },
+                {
+                  "name": "appendDataRejectsSignaturesFromAnotherAddress",
+                  "returnType": "void",
+                  "line": 121,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsPayloadsWithoutBapOutputs",
+                  "returnType": "void",
+                  "line": 133,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsPayloadsWhoseSignatureDoesNotVerify",
+                  "returnType": "void",
+                  "line": 144,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsPayloadsWithoutSigningAddress",
+                  "returnType": "void",
+                  "line": 153,
+                  "classification": "unit"
+                },
+                {
+                  "name": "convertsAppendDataBapWithItsCombinedSignature",
+                  "returnType": "void",
+                  "line": 163,
+                  "classification": "unit"
+                },
+                {
+                  "name": "appendDataPayloadsWithoutSigningAddressFailVerification",
+                  "returnType": "void",
+                  "line": 184,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/impl/PlanariaBsocialConvertorContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "convertsOpReturnTapesWithAllProtocolCells",
+                  "returnType": "void",
+                  "line": 40,
+                  "classification": "unit"
+                },
+                {
+                  "name": "convertsBppCellsThroughTheProtocolFactory",
+                  "returnType": "void",
+                  "line": 64,
+                  "classification": "unit"
+                },
+                {
+                  "name": "skipsTapesWithoutOpReturnAndReturnsOnlyMappedTransactions",
+                  "returnType": "void",
+                  "line": 83,
+                  "classification": "unit"
+                },
+                {
+                  "name": "reportsItsConvertTypeAndToleratesNullableCellOpcodes",
+                  "returnType": "void",
+                  "line": 94,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsTapesWhoseSignatureDoesNotVerify",
+                  "returnType": "void",
+                  "line": 107,
+                  "classification": "unit"
+                },
+                {
+                  "name": "stringEntryPointSharesTheSameRuleSet",
+                  "returnType": "void",
+                  "line": 118,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/impl/UtxoConvertorContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "convertsAddressesRawKeysAndInputsIntoTheirUtxoEntries",
+                  "returnType": "void",
+                  "line": 32,
+                  "classification": "unit"
+                },
+                {
+                  "name": "marksCoinbaseInputsAsSuch",
+                  "returnType": "void",
+                  "line": 53,
+                  "classification": "unit"
+                },
+                {
+                  "name": "reportsItsConvertType",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                }
+              ]
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
@@ -5370,7 +5845,62 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-tx-filter/src/test/java/com/metanet4j/tx/filter/SourceDataFilterChainContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "stopsAtTheFirstFilterThatKeepsTheTransaction",
+                  "returnType": "void",
+                  "line": 16,
+                  "classification": "unit"
+                },
+                {
+                  "name": "keepsNothingWhenEveryFilterAbstains",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit"
+                },
+                {
+                  "name": "filterListKeepsOnlyTransactionsAcceptedByTheChain",
+                  "returnType": "void",
+                  "line": 31,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-tx-filter/src/test/java/com/metanet4j/tx/filter/SourceDataFiltersContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "repeatFilterNeverFilters",
+                  "returnType": "void",
+                  "line": 25,
+                  "classification": "unit"
+                },
+                {
+                  "name": "metaIdFilterKeepsAnyTransactionWithOutputs",
+                  "returnType": "void",
+                  "line": 30,
+                  "classification": "unit"
+                },
+                {
+                  "name": "metaIdFilterFailsOnScriptsWithoutAPayloadSlot",
+                  "returnType": "void",
+                  "line": 47,
+                  "classification": "unit"
+                },
+                {
+                  "name": "metaMarkerEncodesToItsHexadecimalForm",
+                  "returnType": "void",
+                  "line": 55,
+                  "classification": "unit"
+                }
+              ]
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
@@ -5400,7 +5930,44 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-tx-validator/src/test/java/com/metanet4j/tx/validator/executor/MetaDataValidatorContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "registersEveryStrategyByType",
+                  "returnType": "void",
+                  "line": 17,
+                  "classification": "unit"
+                },
+                {
+                  "name": "keepsTheLastStrategyForDuplicateTypes",
+                  "returnType": "void",
+                  "line": 26,
+                  "classification": "unit"
+                },
+                {
+                  "name": "supportsAnEmptyStrategyList",
+                  "returnType": "void",
+                  "line": 36,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-tx-validator/src/test/java/com/metanet4j/tx/validator/strategy/impl/CommonValidateStrategyContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "commonStrategyAlwaysValidates",
+                  "returnType": "void",
+                  "line": 12,
+                  "classification": "unit"
+                }
+              ]
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "N/A：本地策略选择与验证，无外部资源",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
