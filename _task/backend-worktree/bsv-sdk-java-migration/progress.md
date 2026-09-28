@@ -4,7 +4,7 @@
 
 权威任务状态见 [feature_list.json](feature_list.json)：43 个执行事项中 18 个 `done`、10 个 `in-progress`、15 个 `not-started`；`activeItem=nextItem=migration-impl-wallet-contracts`。API 映射 3576／3576 项已复核，21 个嵌入批次均完成；原用例映射 5329／5329 个、源码测试站点映射 7554／7554 个。六模块完整门禁尚未通过。
 
-目标 Java 工程在提交 `c23c6f6` 的宿主无过滤 `clean test` 通过 5437／5437，失败／错误／跳过均为 0；167 份 Surefire 报告覆盖全部 5329 个映射身份且无重复，另有 108 个 Java 回归，报告封存于 `.cache/evidence/drbg-full2-surefire-20260928/`，日志 `.cache/evidence/drbg-full2-java-20260928.log`。此前绑定 `739dad8` 的 5384／5384 快照已过期，后续源码变更仍须新一轮无过滤回归。固定 TypeScript 仓库及其他四个 Java 工程只读；目标工程 `metanet4j-bsv-sdk` 是唯一可改代码仓库。工作区根仓的既有无关改动保留。
+目标 Java 工程在提交 `1c979fa` 的宿主无过滤 `clean test` 通过 5437／5437，失败／错误／跳过均为 0；167 份 Surefire 报告覆盖全部 5329 个映射身份且无重复，另有 108 个 Java 回归，报告封存于 `.cache/evidence/http-wallet-json-full-surefire-20260929/`，日志 `.cache/evidence/http-wallet-json-full-java-20260929.log`，Java 来源摘要 `75640567…`（与 HTTPWalletJSON 局部采集同一来源）。此前绑定 `c23c6f6` 的快照已过期。固定 TypeScript 仓库及其他四个 Java 工程只读；目标工程 `metanet4j-bsv-sdk` 是唯一可改代码仓库。工作区根仓的既有无关改动保留。
 
 ## 已取得的任务级验收
 
@@ -17,7 +17,7 @@
 - DRBG：目标提交 `c23c6f6`；固定 TS／Java 原例 29／29、实际断言 30／30 逐值一致，72 条真实入口（57 个构造／生成入口＋15 个 NIST 守卫分支）双端一致，30 条未执行断言按固定规则与分支样本有据，审计摘要 `{"status": "PASS", "comparedAssertions": 30, "justifiedUnexecutedAssertions": 30}`，报告 `.cache/evidence/drbg-parity2-20260928.json`，文档 [DRBG原输入验收](doc/DRBG原输入验收-20260928-181254.md)；输入、断言与分支三类篡改均被拒。
 - knownTxids 付款：目标提交 `79c4b3b`；该文件固定 TS 17／17、Java 17／17，6 个付款用例的 6 条真实输入与 8 次付款调用逐字段一致、25 条断言一致，付款输入与断言两类篡改被拒，文档 [knownTxids付款输入验收](doc/knownTxids付款输入验收-20260928-201034.md)。
 - knownTxids 真实 Peer：目标提交 `b7acbb4`；同一文件 17／17 原例，真实 Peer 付款例的随机源、两次 fetch 入口、Peer 前置状态、交付帧与发送载荷逐字段一致，6 条断言一致，输入与断言两类篡改被拒，文档 [knownTxids真实Peer输入验收](doc/knownTxids真实Peer输入验收-20260928-210831.md)。至此该文件 17 例的输入重放全部落地。
-- HTTPWalletJSON：目标提交 `c88a04e`、断言记录对齐 `1c979fa`；固定 TS／Java 53／53 原例，214／214 条真实入口（构造、公开 api、fetch 请求／响应／拒绝）与 73／73 条原断言逐值一致，53 条线上请求体解析后一致，输入与断言两类篡改被拒，文档 [HTTPWalletJSON原输入验收](doc/HTTPWalletJSON原输入验收-20260929-004232.md)。该局部经 `full-evidence-preflight.py` 来源复核，使 `currentCaptureVerifiedCases` 首次非零（53）。
+- HTTPWalletJSON：目标提交 `c88a04e`、断言记录对齐 `1c979fa`，同一来源的宿主无过滤 `clean test` 5437／5437；固定 TS／Java 53／53 原例，214／214 条真实入口（构造、公开 api、fetch 请求／响应／拒绝）与 73／73 条原断言逐值一致，53 条线上请求体解析后一致，输入与断言两类篡改被拒，文档 [HTTPWalletJSON原输入验收](doc/HTTPWalletJSON原输入验收-20260929-004232.md)。该局部经 `full-evidence-preflight.py` 来源复核，使 `currentCaptureVerifiedCases` 首次非零（53）。
 
 固定 TS 原始标准／manual Jest 报告合计 5329／5329，通过 `audit-tests.py compare-ts`。Java 当前轮的 5437 条通过记录也不能代替双端同一次完整采集；原始报告还没有覆盖全部用例的输入计划、双侧输入与断言 manifest，最终 `audit-tests.py check` 尚未通过。部分已通过任务的排期状态仍非 `done`，待逐项核对依赖、当前接口行为及同输入证据。
 

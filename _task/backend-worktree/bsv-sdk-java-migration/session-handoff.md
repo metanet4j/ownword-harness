@@ -2,7 +2,7 @@
 
 ## 权威状态
 
-[feature_list.json](feature_list.json) 是任务状态来源，[完整模块与 API 契约](doc/完整模块与API映射-20260920-122800.md) 是行为依据。最近一次目标 Java 宿主无过滤 `clean test` 绑定提交 `c23c6f6`：167 份 Surefire 报告为 5437／5437、无失败／错误／跳过，同次覆盖全部 5329 个映射身份且无重复，另有 108 个 Java 回归。报告封存于 `.cache/evidence/drbg-full2-surefire-20260928/`，日志 `.cache/evidence/drbg-full2-java-20260928.log`；后续源码变更仍须新一轮无过滤回归。对称加密 52／387、Compat 122／281、交易完整功能 745／1390、交易验证 53／162、认证会话 85／160、认证传输 183／968、DRBG 29／30 已有固定原用例／逐断言任务级对照；AuthFetch 属性 300 组固定 TS 实际输入与 Java 消费一致。证据路径见 [progress.md](progress.md) 与 [feature_list.json](feature_list.json)。
+[feature_list.json](feature_list.json) 是任务状态来源，[完整模块与 API 契约](doc/完整模块与API映射-20260920-122800.md) 是行为依据。最近一次目标 Java 宿主无过滤 `clean test` 绑定提交 `1c979fa`（来源摘要 `75640567…`）：167 份 Surefire 报告为 5437／5437、无失败／错误／跳过，同次覆盖全部 5329 个映射身份且无重复，另有 108 个 Java 回归。报告封存于 `.cache/evidence/http-wallet-json-full-surefire-20260929/`，日志 `.cache/evidence/http-wallet-json-full-java-20260929.log`；该来源与 HTTPWalletJSON 局部采集一致，后续源码变更仍须新一轮无过滤回归。对称加密 52／387、Compat 122／281、交易完整功能 745／1390、交易验证 53／162、认证会话 85／160、认证传输 183／968、DRBG 29／30 已有固定原用例／逐断言任务级对照；AuthFetch 属性 300 组固定 TS 实际输入与 Java 消费一致。证据路径见 [progress.md](progress.md) 与 [feature_list.json](feature_list.json)。
 
 当前 API 映射 3576／3576 且已复核，21 个 API 批次均完成；原用例映射 5329／5329，测试站点映射 7554／7554。固定 TS 标准／manual Jest 原始报告合计 5329／5329，并通过 `audit-tests.py compare-ts`。Spend 的第二组 455 个独立注册已由新 Java 类和新映射收口。对称模块 fixed TS 原 536,870,928 字节 manual 在原 90 分钟上限内 66 分 16 秒通过，连同当次 Java 原始轨迹和逐字节摘要的专用桥接见 `.cache/evidence/symmetric-task-parity-c0d9fdd.json`。API 总审计见 `doc/API跨任务接口复核-20260927-000100.md`；Transaction 非阻塞、三个异步异常入口和 PATCH 状态说明修复已合入当前累计回归。
 
