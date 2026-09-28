@@ -7,8 +7,8 @@
     "blocked",
     "done"
   ],
-  "activeItem": "unit-u6-business",
-  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1—U5 均已完成；U6 五模块（tx/bap/bsocial/bitcoinschema/handler）单元测试全部完成，剩余 U6 跨存储链路集成与 U7—U9。",
+  "activeItem": "unit-u7-adapters",
+  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1—U6 均已完成（U6 五模块单元 + Mongo/MySQL 跨存储链路集成）；U7 外围能力（component-file → cache → message → api-common）待实施。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -357,7 +357,7 @@
       "id": "unit-u6-business",
       "name": "U6 核心业务链路",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "unit-u5-storage"
       ],
@@ -369,9 +369,10 @@
         "记录的当前行为：MongoBapService/MongoBsocialService 空 Optional 直接抛 NoSuchElementException；不受支持的 linkIdentity/linkBsocial 类型不建交易、随后解引用 NPE；mapList 为空时 bsocial handler 与 MySQL 转换器抛 NoSuchElementException（经 ConversionService 包装为 ConversionFailedException）；Mongo 的 DATA 类 BAP 交易恒被忽略。",
         "component-bitcoinschema 提交 2648727：4/0/0/0，LINE 7/7、BRANCH 4/4、METHOD 2/2（无缺口）；证据 evidence/20260928T194451Z/。",
         "component-handler 提交 2648727：5/0/0/0，LINE 12/12、BRANCH 4/4、METHOD 5/5（无缺口）；证据 evidence/20260928T195825Z/。记录的行为：BitcoinSchemaTxHandler.handleBsocialTx 转换结果未被使用（该入口不落库）。",
-        "待实施：U6 的跨存储业务链路集成（component-tx/bap/bsocial → Mongo/MySQL/ES 的端到端链路），以及 U7—U9。"
+        "U6 跨存储链路集成（提交 8a778c9）：MongoBusinessChainIntegrationTest 6/0/0/0 与 MysqlBusinessChainIntegrationTest 4/0/0/0，均为真实中间件 + 本地离线构造签名的原始交易（不联网、不广播）；证据 evidence/20260928T211704Z/，含 ES/Mongo/MySQL 无 it_u6_* 残留检查。",
+        "集成暴露/记录的行为：ID 交易由 root 签名时 isRootBap 为真，走 root 分支整体替换 signers（而非追加）；两个 handler 的 BsocialSearchEvent/BapSearchEvent 发布仍被注释，事件驱动的 ES 索引不会触发。"
       ],
-      "statusNote": "2026-09-28：U6 五个模块单元测试全部完成并严格验收，剩余跨存储业务链路集成。"
+      "statusNote": "2026-09-28 完成：五模块单元验收通过（含 1 处监听器漏注入的最小修复），并补齐 Mongo/MySQL 两条跨存储链路的成功与失败传播证据。"
     },
     {
       "id": "unit-u7-adapters",

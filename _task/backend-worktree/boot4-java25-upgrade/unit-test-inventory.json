@@ -3338,6 +3338,78 @@
               "methods": []
             },
             {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MongoBusinessChainIntegrationTest.java",
+              "classification": "integration",
+              "methods": [
+                {
+                  "name": "bapRootTransactionIsParsedAndStoredAsRootIdentity",
+                  "returnType": "void",
+                  "line": 145,
+                  "classification": "integration"
+                },
+                {
+                  "name": "bapIdTransactionAppendsTheCurrentAddressAsSignerThroughMongoLookup",
+                  "returnType": "void",
+                  "line": 162,
+                  "classification": "integration"
+                },
+                {
+                  "name": "bsocialFollowTransactionResolvesTheSignerIdentityFromMongo",
+                  "returnType": "void",
+                  "line": 178,
+                  "classification": "integration"
+                },
+                {
+                  "name": "bsocialPostTransactionStoresTheNoteWithItsTags",
+                  "returnType": "void",
+                  "line": 193,
+                  "classification": "integration"
+                },
+                {
+                  "name": "bsocialTransactionFromAnUnknownSignerIsRejectedWithoutWritingAnything",
+                  "returnType": "void",
+                  "line": 206,
+                  "classification": "integration"
+                },
+                {
+                  "name": "handlerChainDoesNotPublishSearchEventsYet",
+                  "returnType": "void",
+                  "line": 218,
+                  "classification": "integration"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MysqlBusinessChainIntegrationTest.java",
+              "classification": "integration",
+              "methods": [
+                {
+                  "name": "bapRootTransactionIsStoredAsIdentityAndSignerRows",
+                  "returnType": "void",
+                  "line": 196,
+                  "classification": "integration"
+                },
+                {
+                  "name": "bapIdTransactionReplacesTheSignerWithTheCurrentAddress",
+                  "returnType": "void",
+                  "line": 215,
+                  "classification": "integration"
+                },
+                {
+                  "name": "bsocialPostTransactionIsStoredAsTransactionRecord",
+                  "returnType": "void",
+                  "line": 226,
+                  "classification": "integration"
+                },
+                {
+                  "name": "bsocialTransactionFromAnUnknownSignerWritesNothing",
+                  "returnType": "void",
+                  "line": 240,
+                  "classification": "integration"
+                }
+              ]
+            },
+            {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/converter/BsocialConvertersContractTest.java",
               "classification": "unit",
               "methods": [
@@ -3867,14 +3939,24 @@
             }
           ],
           "classificationReviewed": true,
-          "integrationReview": "已识别边界和执行方案；集成测试待实施",
-          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "integrationReview": "已实施并通过：Mongo 与 MySQL 两条链路各含成功与失败传播断言，资源每轮唯一并自行清理",
+          "classificationReason": "已补齐 bsocial 业务链路单元测试（76 例）与 Mongo/MySQL 跨存储链路集成测试（6+4 例）；缺口按 unit-coverage-exceptions.json 登记",
           "integrationCases": [
             {
-              "boundary": "BsocialService 的 MongoDB、MySQL 与 Elasticsearch 路径",
-              "isolation": "唯一交易/关系键，事务回滚或仅删除本轮记录",
-              "observation": "公开服务结果、持久化状态与应用日志",
-              "status": "not-started"
+              "boundary": "raw 交易 → 解析器 → DTO → Store handler → MongoDB 的完整入站链路",
+              "isolation": "每轮唯一库 it_u6_chain_<uuid>，@AfterAll drop；交易为本地离线构造签名，不广播",
+              "observation": "bap_id/bap_signer/bap_relation/bsocial 文档内容、签名地址→identityKey 反查结果、事件总线记录、Mongo 服务日志与残留检查",
+              "status": "done",
+              "evidence": "evidence/20260928T211704Z/（6/0/0/0）与 evidence/20260928T205154Z/",
+              "test": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MongoBusinessChainIntegrationTest.java"
+            },
+            {
+              "boundary": "raw 交易 → 解析器 → DTO → MySQL Store handler → 库表记录的完整入站链路",
+              "isolation": "每轮唯一库 it_u6_sqlchain_<uuid>，@BeforeAll 建表、@AfterAll drop",
+              "observation": "bap_id/bap_signer/bsocial_tx_record 行内容与 MetaObjectHandler 填充的 create_time、MySQL 版本与残留检查",
+              "status": "done",
+              "evidence": "evidence/20260928T211704Z/（4/0/0/0）",
+              "test": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MysqlBusinessChainIntegrationTest.java"
             }
           ]
         },
