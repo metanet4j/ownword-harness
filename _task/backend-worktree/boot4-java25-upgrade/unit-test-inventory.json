@@ -5132,6 +5132,48 @@
           ],
           "testSources": [
             {
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/MongoRepositoryIntegrationTest.java",
+              "classification": "integration",
+              "methods": [
+                {
+                  "name": "savedBapIdRoundTripsThroughMongo",
+                  "returnType": "void",
+                  "line": 80,
+                  "classification": "integration"
+                },
+                {
+                  "name": "saveSignerAppendsTheSignerAndClearsPreviousCurrentFlags",
+                  "returnType": "void",
+                  "line": 103,
+                  "classification": "integration"
+                },
+                {
+                  "name": "bapRecordListenerResolvesTheIdentityKeyFromTheSequenceAddress",
+                  "returnType": "void",
+                  "line": 118,
+                  "classification": "integration"
+                },
+                {
+                  "name": "bsocialRecordListenerResolvesTheIdentityKeyFromBapIdSigners",
+                  "returnType": "void",
+                  "line": 140,
+                  "classification": "integration"
+                },
+                {
+                  "name": "unresolvedRecordsStayIncompleteAndAreFoundByTheDerivedQuery",
+                  "returnType": "void",
+                  "line": 158,
+                  "classification": "integration"
+                },
+                {
+                  "name": "duplicateIdentityKeyIsRejectedByTheUniqueIndex",
+                  "returnType": "void",
+                  "line": 172,
+                  "classification": "integration"
+                }
+              ]
+            },
+            {
               "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/StoreMongoWiringContractTest.java",
               "classification": "unit",
               "methods": [
@@ -5517,14 +5559,16 @@
             }
           ],
           "classificationReviewed": true,
-          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "integrationReview": "已实施并通过：真实中间件实连，资源每轮唯一并自行清理",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
           "integrationCases": [
             {
-              "boundary": "Mongo repository 自定义查询与保存",
-              "isolation": "每轮唯一集合或记录前缀，仅清理本轮数据",
-              "observation": "公开 repository 查询、Mongo 记录与容器日志",
-              "status": "not-started"
+              "boundary": "MongoDB 仓储、事件监听与唯一索引",
+              "isolation": "每轮唯一库 it_u5_mongo_<uuid>，@AfterAll drop 该库；结束后残留检查 0 个",
+              "observation": "真实 Spring Data 仓储读写、集合原始文档、监听器落库字段、Mongo 服务日志与 listDatabases 残留检查",
+              "status": "done",
+              "evidence": "evidence/20260928T161101Z/（6/0/0/0，Mongo 8.0.32，service.log 有本轮库的写入记录）",
+              "test": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/MongoRepositoryIntegrationTest.java"
             }
           ]
         },
@@ -5835,19 +5879,51 @@
             {
               "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/EsClientStub.java",
               "classification": "fixture",
-              "classificationReason": "受控 ES client 替身，无直接 @Test 方法",
+              "classificationReason": "受控替身/夹具，无直接 @Test 方法",
               "methods": []
+            },
+            {
+              "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/EsRepositoryIntegrationTest.java",
+              "classification": "integration",
+              "methods": [
+                {
+                  "name": "savedDocumentIsReadableByIdAndFoundBySearch",
+                  "returnType": "void",
+                  "line": 60,
+                  "classification": "integration"
+                },
+                {
+                  "name": "deletedDocumentIsNoLongerFound",
+                  "returnType": "void",
+                  "line": 76,
+                  "classification": "integration"
+                },
+                {
+                  "name": "mustRequiresEveryClauseWhileShouldAcceptsAnyClause",
+                  "returnType": "void",
+                  "line": 89,
+                  "classification": "integration"
+                },
+                {
+                  "name": "searchReturnsAnEmptyListWhenTheIndexIsMissing",
+                  "returnType": "void",
+                  "line": 107,
+                  "classification": "integration"
+                }
+              ]
             }
           ],
           "classificationReviewed": true,
-          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "integrationReview": "已实施并通过：真实中间件实连，资源每轮唯一并自行清理",
           "classificationReason": "已补齐仓储查询组装、ES client 受控替身与 EsConfig Bean 的离线单元测试；ES 实连集成测试见 integrationCases",
           "integrationCases": [
             {
               "boundary": "Elasticsearch repository 的索引与搜索",
-              "isolation": "每轮唯一索引名，只删除本轮索引",
-              "observation": "公开搜索结果、索引文档与 Elasticsearch 日志",
-              "status": "not-started"
+              "isolation": "每个用例唯一索引 it-u5-search-<uuid>，@AfterEach 删除本轮索引；结束后残留检查 0 个",
+              "observation": "仓储 save/search/delete 的真实读写、client.get 直读文档、ES 服务日志与 _cat/indices 残留检查",
+              "status": "done",
+              "evidence": "evidence/20260928T160246Z/（4/0/0/0，ES 9.4.5，service.log 有本轮索引创建/删除记录）",
+              "test": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/EsRepositoryIntegrationTest.java"
             }
           ]
         },
@@ -5974,6 +6050,42 @@
           ],
           "testSources": [
             {
+              "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/MybatisRepositoryIntegrationTest.java",
+              "classification": "integration",
+              "methods": [
+                {
+                  "name": "saveOrUpdateUtxoInsertsANewUtxo",
+                  "returnType": "void",
+                  "line": 119,
+                  "classification": "integration"
+                },
+                {
+                  "name": "saveOrUpdateUtxoMarksAnExistingUtxoAsSpent",
+                  "returnType": "void",
+                  "line": 136,
+                  "classification": "integration"
+                },
+                {
+                  "name": "saveOrUpdateUtxoRefreshesOnlyRowsThatAreMarkedSpent",
+                  "returnType": "void",
+                  "line": 154,
+                  "classification": "integration"
+                },
+                {
+                  "name": "blockTaskMapperXmlReturnsTheLatestTaskOfTheGivenType",
+                  "returnType": "void",
+                  "line": 174,
+                  "classification": "integration"
+                },
+                {
+                  "name": "duplicatePrimaryKeyIsRejected",
+                  "returnType": "void",
+                  "line": 192,
+                  "classification": "integration"
+                }
+              ]
+            },
+            {
               "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/StoreSqlWiringContractTest.java",
               "classification": "unit",
               "methods": [
@@ -6071,14 +6183,16 @@
             }
           ],
           "classificationReviewed": true,
-          "integrationReview": "已识别边界和执行方案；集成测试待实施",
+          "integrationReview": "已实施并通过：真实中间件实连，资源每轮唯一并自行清理",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
           "integrationCases": [
             {
-              "boundary": "MySQL mapper/repository 的读写与事务",
-              "isolation": "唯一主键数据及回滚事务，禁止清空共享表",
-              "observation": "公开 repository 查询、SQL 行状态与 MySQL 日志",
-              "status": "not-started"
+              "boundary": "MySQL 上 MyBatis-Plus mapper 与 XML SQL",
+              "isolation": "每轮唯一库 it_u5_sql_<uuid>，@BeforeAll 建库建表、@AfterAll drop；结束后残留检查 0 个",
+              "observation": "Service 层真实插入/更新、Mapper XML 查询结果、服务版本与 show databases 残留检查",
+              "status": "done",
+              "evidence": "evidence/20260928T161623Z/（5/0/0/0，MySQL 8.4.11，service.log 记录版本与无残留库）",
+              "test": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/MybatisRepositoryIntegrationTest.java"
             }
           ]
         },

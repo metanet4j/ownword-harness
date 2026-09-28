@@ -7,8 +7,8 @@
     "blocked",
     "done"
   ],
-  "activeItem": "unit-u5-storage",
-  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1 base、U2 sdk、U3 component 基础模块、U4 数据输入与协议处理均已完成；U5 存储层正在实施，U6—U9 待实施。",
+  "activeItem": "unit-u6-business",
+  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1—U5 均已完成；U6 核心业务链路待实施（component-tx → bap → bsocial → bitcoinschema → handler）。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -340,18 +340,18 @@
       "id": "unit-u5-storage",
       "name": "U5 存储层",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "unit-u4-protocol"
       ],
       "evidence": [
-        "store-sql 提交 c8c45c3：11/0/0/0，LINE 24/24、BRANCH 4/4、METHOD 14/14，证据 evidence/20260928T132352Z/。",
-        "store-mongo 提交 4904dac：56/0/0/0，LINE 311/315、BRANCH 54/56，缺口为不可达 friendState 分支；证据 evidence/20260928T135300Z/。",
-        "store-search 提交 fb29000：32/0/0/0，LINE 97/98、BRANCH 31/31、METHOD 35/36，缺口为已登记的 IndexConstant 隐式构造器；证据 evidence/20260928T155239Z/。",
-        "验收入口修复：verify-unit.py 的例外分支计数比较改为 counters.get(\"BRANCH\", 0)，避免无 BRANCH 计数器的例外类被误判（U3 证据回放确认）。",
-        "剩余：三模块的真实存储集成测试（MySQL/MongoDB/ES 实连、独立库表索引）尚未实施。"
+        "store-sql 提交 c8c45c3：单元 11/0/0/0，LINE 24/24、BRANCH 4/4、METHOD 14/14；最终证据 evidence/20260928T162746Z/。",
+        "store-mongo 提交 4904dac：单元 56/0/0/0，LINE 311/315、BRANCH 54/56，缺口为登记的 friendState 不可达分支；最终证据 evidence/20260928T162233Z/。",
+        "store-search 提交 fb29000：单元 32/0/0/0，LINE 97/98、BRANCH 31/31、METHOD 35/36，缺口为登记的 IndexConstant 隐式构造器；最终证据 evidence/20260928T161725Z/。",
+        "集成（提交 5174917）：store-search 4/0/0/0（evidence/20260928T160246Z/）、store-mongo 6/0/0/0（evidence/20260928T161101Z/）、store-sql 5/0/0/0（evidence/20260928T161623Z/）；均为本机真实 ES 9.4.5 / Mongo 8.0.32 / MySQL 8.4.11，每轮唯一索引或库并自行清理，共享数据未改动。",
+        "验收入口修复：verify-unit.py 例外分支计数比较改用 counters.get(\"BRANCH\", 0)，U3 证据回放由 8 条误报降为 0 条。"
       ],
-      "statusNote": "2026-09-28：store-sql、store-mongo、store-search 三模块单元验收通过；U5 的实连集成证据待补。"
+      "statusNote": "2026-09-28 完成：三模块单元覆盖率达标（缺口均按精确清单登记），并各留实连集成证据；集成测试覆盖成功、失败/异常与数据可观察性，资源每轮唯一且已核验无残留。"
     },
     {
       "id": "unit-u6-business",
