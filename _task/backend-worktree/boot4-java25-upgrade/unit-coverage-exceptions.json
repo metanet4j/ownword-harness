@@ -234,6 +234,17 @@
           ]
         }
       ]
+    },
+    "metanet4j-component-tx": {
+      "entries": [
+        {
+          "class": "com/metanet4j/component/tx/BschemaCustomTransactionSigner",
+          "reason": "getSignature 是未实现的远程签名器桩：extendSignatureAndKey 硬编码为 null，取 sha256Hash 即 NPE，if 真分支与 return（第 34、35、37 行）不可达；条件求值抛异常导致两条分支探针也不可达。行为已由 BschemaCustomTransactionSignerContractTest 记录",
+          "missed": [
+            {"method": "getSignature", "line": 21, "lineMissed": 4, "methodMissed": 0, "branchMissed": 2}
+          ]
+        }
+      ]
     }
   }
 }

@@ -4813,7 +4813,236 @@
               "kind": "interface"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/BschemaCustomTransactionSignerContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "getSignatureFailsOnTheUnimplementedEventStreamStub",
+                  "returnType": "void",
+                  "line": 15,
+                  "classification": "unit"
+                },
+                {
+                  "name": "extendSignatureAndKeyKeepsTheProvidedValues",
+                  "returnType": "void",
+                  "line": 24,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultBapBaseFactoryContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "buildBapBaseFromXprvStoresTheClientIdentityInTheThreadLocal",
+                  "returnType": "void",
+                  "line": 30,
+                  "classification": "unit"
+                },
+                {
+                  "name": "buildBapBaseWrapsAnInvalidXprvAndKeepsTheThreadLocalEmpty",
+                  "returnType": "void",
+                  "line": 39,
+                  "classification": "unit"
+                },
+                {
+                  "name": "buildBapBaseFromExplicitKeysIsStillAStub",
+                  "returnType": "void",
+                  "line": 48,
+                  "classification": "unit"
+                },
+                {
+                  "name": "threadLocalIsolatesAndClearsTheBapBase",
+                  "returnType": "void",
+                  "line": 54,
+                  "classification": "unit"
+                },
+                {
+                  "name": "keyBagAndPayAccountKeyAreDerivedFromTheStoredBapBase",
+                  "returnType": "void",
+                  "line": 71,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultCompleteTxFactoryContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "completePrepareTxBuildsAndBroadcastsTheTransaction",
+                  "returnType": "void",
+                  "line": 51,
+                  "classification": "unit"
+                },
+                {
+                  "name": "completePrepareTxWithoutBapBaseUsesTheFactoryBapBase",
+                  "returnType": "void",
+                  "line": 72,
+                  "classification": "unit"
+                },
+                {
+                  "name": "completePrepareTxWithExplicitOutputsIsStillAStub",
+                  "returnType": "void",
+                  "line": 82,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultDuplicateSubmitPreventionContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "isDuplicateSubmitAlwaysReturnsFalseForNow",
+                  "returnType": "void",
+                  "line": 13,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultPrepareOnchainTxResolverContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "getFeeKbIsOneHundredSatoshisPerKilobyte",
+                  "returnType": "void",
+                  "line": 42,
+                  "classification": "unit"
+                },
+                {
+                  "name": "broadcastTxDelegatesToTheBroadcaster",
+                  "returnType": "void",
+                  "line": 47,
+                  "classification": "unit"
+                },
+                {
+                  "name": "buildTxSignsTheDataOutputAndTheChangeOutput",
+                  "returnType": "void",
+                  "line": 52,
+                  "classification": "unit"
+                },
+                {
+                  "name": "buildTxSignsWithAnExplicitlyProvidedSigner",
+                  "returnType": "void",
+                  "line": 65,
+                  "classification": "unit"
+                },
+                {
+                  "name": "buildTxWrapsSignErrorFromTheSigner",
+                  "returnType": "void",
+                  "line": 74,
+                  "classification": "unit"
+                },
+                {
+                  "name": "buildTxPropagatesFailureWhenTheWalletCannotRedeemTheUtxo",
+                  "returnType": "void",
+                  "line": 104,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remainingMethodsAreStillStubs",
+                  "returnType": "void",
+                  "line": 113,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultUnSpendableDataResolverContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "buildBapRootEmbedsTheIdentityKeyAndRootAddress",
+                  "returnType": "void",
+                  "line": 25,
+                  "classification": "unit"
+                },
+                {
+                  "name": "buildBapIdEmbedsTheCurrentAddress",
+                  "returnType": "void",
+                  "line": 37,
+                  "classification": "unit"
+                },
+                {
+                  "name": "buildFollowAndUnFollowSignTheBsocialDataLock",
+                  "returnType": "void",
+                  "line": 48,
+                  "classification": "unit"
+                },
+                {
+                  "name": "buildDeaultPostEmbedsTheContentTitleAndTags",
+                  "returnType": "void",
+                  "line": 66,
+                  "classification": "unit"
+                },
+                {
+                  "name": "buildDeaultPostFallsBackToEmptyContent",
+                  "returnType": "void",
+                  "line": 78,
+                  "classification": "unit"
+                },
+                {
+                  "name": "buildDeaultReplyEmbedsTheContentAndNoteId",
+                  "returnType": "void",
+                  "line": 88,
+                  "classification": "unit"
+                },
+                {
+                  "name": "buildLikeAndUnLikeSignTheMapDataLock",
+                  "returnType": "void",
+                  "line": 103,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultUtxoResolverContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "listUtxoAddressDerivesTheAddressFromTheFactoryPayAccountKey",
+                  "returnType": "void",
+                  "line": 29,
+                  "classification": "unit"
+                },
+                {
+                  "name": "listUtxoDelegatesToTheGivenProvider",
+                  "returnType": "void",
+                  "line": 41,
+                  "classification": "unit"
+                },
+                {
+                  "name": "listUtxoReturnsTheProviderResultUnchangedWhenThereIsNoUtxo",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "unit"
+                },
+                {
+                  "name": "selectUtxoAndGetBalanceAreStillStubs",
+                  "returnType": "void",
+                  "line": 57,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/StubBapBaseFactory.java",
+              "classification": "fixture",
+              "classificationReason": "受控替身/夹具，无直接 @Test 方法",
+              "methods": []
+            },
+            {
+              "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/TxTestFixture.java",
+              "classification": "fixture",
+              "classificationReason": "受控替身/夹具，无直接 @Test 方法",
+              "methods": []
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
