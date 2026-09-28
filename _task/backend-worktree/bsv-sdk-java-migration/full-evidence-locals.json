@@ -1064,6 +1064,25 @@
       "java_report": [
         ".cache/evidence/keyderiver-formal-20260929/java-surefire.xml"
       ]
+    },
+    {
+      "name": "protowallet-additional",
+      "catalog": ".cache/evidence/protowallet-additional-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/protowallet-additional-plan-20260929/mapping.json",
+      "input_plan": "protowallet-additional-input-plan.json",
+      "capture": "capture-protowallet-additional-side.py",
+      "ts_inputs": ".cache/evidence/protowallet-additional-formal2-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/protowallet-additional-formal2-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/protowallet-additional-formal2-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/protowallet-additional-formal2-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/protowallet-additional-formal2-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/protowallet-additional-formal2-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/protowallet-additional-formal2-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/protowallet-additional-formal2-20260929/java-surefire.xml"
+      ]
     }
   ]
 }
