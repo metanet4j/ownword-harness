@@ -346,8 +346,12 @@
       ],
       "evidence": [
         "store-sql 提交 c8c45c3：11/0/0/0，LINE 24/24、BRANCH 4/4、METHOD 14/14，证据 evidence/20260928T132352Z/。",
-        "store-mongo 提交 4904dac：56/0/0/0，LINE 311/315、BRANCH 54/56，缺口为不可达 friendState 分支；证据 evidence/20260928T135300Z/。"
-      ]
+        "store-mongo 提交 4904dac：56/0/0/0，LINE 311/315、BRANCH 54/56，缺口为不可达 friendState 分支；证据 evidence/20260928T135300Z/。",
+        "store-search 提交 fb29000：32/0/0/0，LINE 97/98、BRANCH 31/31、METHOD 35/36，缺口为已登记的 IndexConstant 隐式构造器；证据 evidence/20260928T155239Z/。",
+        "验收入口修复：verify-unit.py 的例外分支计数比较改为 counters.get(\"BRANCH\", 0)，避免无 BRANCH 计数器的例外类被误判（U3 证据回放确认）。",
+        "剩余：三模块的真实存储集成测试（MySQL/MongoDB/ES 实连、独立库表索引）尚未实施。"
+      ],
+      "statusNote": "2026-09-28：store-sql、store-mongo、store-search 三模块单元验收通过；U5 的实连集成证据待补。"
     },
     {
       "id": "unit-u6-business",

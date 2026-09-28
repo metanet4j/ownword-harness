@@ -223,6 +223,17 @@
           ]
         }
       ]
+    },
+    "metanet4j-store-search": {
+      "entries": [
+        {
+          "class": "com/metanet4j/store/search/repository/IndexConstant",
+          "reason": "隐式默认构造器，仅提供索引名常量，无业务行为（与 component-common 常量类同一口径）",
+          "missed": [
+            {"method": "<init>", "line": 3, "lineMissed": 1, "methodMissed": 1}
+          ]
+        }
+      ]
     }
   }
 }

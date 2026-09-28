@@ -226,7 +226,7 @@ def inspect(module, output, strict):
                                              "methodMissed": item["methodMissed"],
                                              "branchMissed": item.get("branchMissed", 0)}
                             for item in expected["missed"]}
-                if counters.get("BRANCH") != sum(item.get("branchMissed", 0) for item in expected["missed"]):
+                if counters.get("BRANCH", 0) != sum(item.get("branchMissed", 0) for item in expected["missed"]):
                     problems.append(f"覆盖率例外分支计数不符：{class_name}")
                 if missed_methods != recorded:
                     problems.append(f"覆盖率例外清单不符：{class_name} 实测 {missed_methods or '无'}，"

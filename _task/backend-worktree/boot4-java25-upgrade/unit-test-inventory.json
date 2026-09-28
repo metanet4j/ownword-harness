@@ -5597,10 +5597,251 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/EsConfigContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "clientBeanBuildsAClientWithTheJackson3JsonpMapper",
+                  "returnType": "void",
+                  "line": 13,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/AbstractRepositoryContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "saveSendsTheDocumentToTheGivenIndexAndId",
+                  "returnType": "void",
+                  "line": 38,
+                  "classification": "unit"
+                },
+                {
+                  "name": "saveReturnsNullWhenTheClientFails",
+                  "returnType": "void",
+                  "line": 49,
+                  "classification": "unit"
+                },
+                {
+                  "name": "deleteSendsTheDocumentIdAndReturnsIt",
+                  "returnType": "void",
+                  "line": 56,
+                  "classification": "unit"
+                },
+                {
+                  "name": "deleteReturnsNullWhenTheClientFails",
+                  "returnType": "void",
+                  "line": 65,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchBuildsShouldClausesAndReturnsHitSources",
+                  "returnType": "void",
+                  "line": 72,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchReturnsAnEmptyListWhenNothingMatches",
+                  "returnType": "void",
+                  "line": 92,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchSkipsShouldTermsWithEmptyFieldOrValue",
+                  "returnType": "void",
+                  "line": 100,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchKeepsWhitespaceOnlyValuesBecauseOnlyEmptinessIsFiltered",
+                  "returnType": "void",
+                  "line": 111,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchBuildsMustClausesWhenTheListIsMust",
+                  "returnType": "void",
+                  "line": 123,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchSkipsMustTermsWithEmptyFieldOrValue",
+                  "returnType": "void",
+                  "line": 137,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchIgnoresUnsupportedBoolTypes",
+                  "returnType": "void",
+                  "line": 148,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchMapsEverySupportedFieldKind",
+                  "returnType": "void",
+                  "line": 161,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchReturnsAnEmptyListForFieldKindsWithoutMapping",
+                  "returnType": "void",
+                  "line": 184,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchReturnsAnEmptyListWhenTheClientFails",
+                  "returnType": "void",
+                  "line": 197,
+                  "classification": "unit"
+                },
+                {
+                  "name": "queryTermDefaultsToMatchKind",
+                  "returnType": "void",
+                  "line": 207,
+                  "classification": "unit"
+                },
+                {
+                  "name": "queryTermKeepsAnExplicitKind",
+                  "returnType": "void",
+                  "line": 216,
+                  "classification": "unit"
+                },
+                {
+                  "name": "queryTermListKeepsItsBoolType",
+                  "returnType": "void",
+                  "line": 221,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/BapIdentityRepositoryContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "saveIdentityUsesTheIdentityKeyAsDocumentId",
+                  "returnType": "void",
+                  "line": 28,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchQueriesNameAndHomeLocationInTheIdentityIndex",
+                  "returnType": "void",
+                  "line": 40,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchDropsTheConditionsThatAreNotProvided",
+                  "returnType": "void",
+                  "line": 57,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/BitcoinSchemaBinaryRepositoryContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "searchAddsOneClausePerProvidedCondition",
+                  "returnType": "void",
+                  "line": 27,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchDropsTheEmptyConditions",
+                  "returnType": "void",
+                  "line": 45,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchSendsAnEmptyBoolQueryWhenNothingIsProvided",
+                  "returnType": "void",
+                  "line": 59,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/BitcoinSchemaContentRepositoryContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "searchAddsOneClausePerProvidedCondition",
+                  "returnType": "void",
+                  "line": 27,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchDropsTheBlankConditions",
+                  "returnType": "void",
+                  "line": 45,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchSendsAnEmptyBoolQueryWhenNothingIsProvided",
+                  "returnType": "void",
+                  "line": 59,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/BitcoinSchemaMapRepositoryContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "searchAddsOneClausePerProvidedCondition",
+                  "returnType": "void",
+                  "line": 27,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchDropsTheBlankConditions",
+                  "returnType": "void",
+                  "line": 43,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchSendsAnEmptyBoolQueryWhenNothingIsProvided",
+                  "returnType": "void",
+                  "line": 56,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/BsocialSearchRepositoryContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "searchQueriesContentAndTagsInTheBsocialIndex",
+                  "returnType": "void",
+                  "line": 27,
+                  "classification": "unit"
+                },
+                {
+                  "name": "searchSendsNoClauseWhenTheKeywordIsMissing",
+                  "returnType": "void",
+                  "line": 42,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/EsClientStub.java",
+              "classification": "fixture",
+              "classificationReason": "受控 ES client 替身，无直接 @Test 方法",
+              "methods": []
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
-          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "classificationReason": "已补齐仓储查询组装、ES client 受控替身与 EsConfig Bean 的离线单元测试；ES 实连集成测试见 integrationCases",
           "integrationCases": [
             {
               "boundary": "Elasticsearch repository 的索引与搜索",
