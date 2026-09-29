@@ -1257,6 +1257,25 @@
       "java_report": [
         ".cache/evidence/live-policy-final-20260929/java-surefire.xml"
       ]
+    },
+    {
+      "name": "transaction-ef-cache",
+      "catalog": ".cache/evidence/transaction-ef-cache-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/transaction-ef-cache-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/transaction-ef-cache-plan-20260929/input-plan.json",
+      "capture": "capture-transaction-local.py",
+      "ts_inputs": ".cache/evidence/transaction-ef-cache-standard-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/transaction-ef-cache-standard-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/transaction-ef-cache-standard-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/transaction-ef-cache-standard-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/transaction-ef-cache-standard-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/transaction-ef-cache-standard-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/transaction-ef-cache-standard-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/transaction-ef-cache-standard-20260929/java-surefire.xml"
+      ]
     }
   ]
 }

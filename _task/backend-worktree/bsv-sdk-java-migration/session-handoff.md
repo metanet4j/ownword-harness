@@ -21,7 +21,7 @@
 
 ## 验证与收工
 
-- `migration-impl-transaction-base` 推进中：Java 提交 `45d19e5`（来源 `f971ee13`）下五个原测试类聚焦 `clean test` 74／74 通过；两个标准双侧局部已绑定该来源——`fee-model-satoshis-per-kilobyte` 18 例／35 输入／21 断言、`live-policy` 8 例／25 输入／17 断言，verify 与 tamper 均通过，当前来源复核 26 例。剩余 Transaction.ef-cache 4、Transaction.additional 20、TransactionSignature.additional 24 共 48 例需要新建探针、冻结计划、适配器与 Java 重放入口；证书与 wallet-keys 的 13 个局部因本次 Java 改动过期，须在本项 Java 改动收尾后统一重采。
+- `migration-impl-transaction-base` 推进中：Java 提交 `45d19e5`（来源 `f971ee13`）下五个原测试类聚焦 `clean test` 74／74 通过；两个标准双侧局部已绑定该来源——`fee-model-satoshis-per-kilobyte` 18 例／35 输入／21 断言、`live-policy` 8 例／25 输入／17 断言，verify 与 tamper 均通过，`transaction-ef-cache` 局部（4 例／36 输入／20 断言）随后落地在 Java 提交 `f6e92e5`。剩余 Transaction.additional 20、TransactionSignature.additional 24 共 44 例需要新建探针、冻结计划、适配器与 Java 重放入口；本项 Java 改动收尾后统一重采 5 个局部，证书与 wallet-keys 的 13 个局部同样因 Java 改动过期、随最终全量运行重采。
 任务级对照用 `python3 local-task-parity.py --task <id> --local <局部> … --output <目录>`（复用 `audit-tests.py` 的比较规则并核对冻结用例覆盖）。`node audit-api.cjs batches` 检查结构分配，单批可用 `--batch ID`；完整门禁是无过滤 `node audit-api.cjs check`、`python3 audit-tests.py check`，后者还需 `module-scope.json.scopeReview=reviewed` 与当前源码版本的完整原始报告和结果。Maven／pnpm 使用任务目录 `./mvn.sh`、`./pnpm.sh`；集成和接口测试须在宿主提权环境运行。本代理 shell 的 PATH 前置 DSH checkout 的 `node_modules/.bin`，`pnpm --version` 会解析到 11.7.0，使 `./init.sh` 报“全局 pnpm 版本未变”失败；去掉该 PATH 项后 `./init.sh` 全绿（全局 pnpm 仍为 11.23.0），任务命令走 `./pnpm.sh`，不受影响。
 
 每个已完成 Java 功能均在目标仓库独立提交。对称与 Compat 功能项状态已更新；继续逐项核对依赖链、当前接口行为和 P0 全量输入证据。新增 Java 变更后重跑完整 clean test 并封存 XML；现有完整回归快照绑定 `c23c6f6`。其他无关工作区修改不得暂存或提交。不读 Archive，不调用真实外部钱包或广播。
