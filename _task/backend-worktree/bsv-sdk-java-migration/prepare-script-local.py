@@ -12,7 +12,7 @@ from collections import defaultdict
 from pathlib import Path
 
 TASK = Path(__file__).resolve().parent
-spec = importlib.util.spec_from_file_location('transaction_locals', TASK / 'transaction-locals.py')
+spec = importlib.util.spec_from_file_location('script_locals', TASK / 'script-locals.py')
 locals_module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(locals_module)
 
@@ -83,14 +83,17 @@ def plan_for(mapped, grouped, runs, loops):
     for case_id, items in grouped.items():
         site_ids = mapped[case_id]['assertionIds']
         count = runs[case_id]
-        require(count > 0 and count % len(site_ids) == 0,
-                f'断言执行次数与冻结站点数不整除，需登记循环语义：{case_id}／{count}／{len(site_ids)}')
-        instances, sites = [], {}
-        for round_index in range(1, count // len(site_ids) + 1):
-            for site in site_ids:
-                identity = site if round_index == 1 else f'{site}#{round_index}'
-                instances.append(identity)
-                sites[identity] = site
+        require(count > 0, f'固定用例未执行任何断言：{case_id}')
+        # 原测试的公共辅助函数（如 expectCode）会在同一用例内执行未单独归属的断言站点，
+        # 因此按站点顺序循环登记实例：同一站点第 2 次执行起记为 `<站点>#<轮次>`，
+        # assertionSites 仍指回原站点；整除时与逐轮展开的结果完全一致。
+        instances, sites, used = [], {}, defaultdict(int)
+        for position in range(count):
+            site = site_ids[position % len(site_ids)]
+            used[site] += 1
+            identity = site if used[site] == 1 else f'{site}#{used[site]}'
+            instances.append(identity)
+            sites[identity] = site
         # 循环站点只做结构覆盖：原测试的循环在辅助函数或 hooks 中执行时没有逐用例样本，
         # 统一按该用例实际采集到的入口样本登记（与 bn-arithmetic 的登记方式一致）。
         plan[case_id] = {'sampleIds': [sample['sampleId'] for sample in items],

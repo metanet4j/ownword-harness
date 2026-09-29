@@ -289,9 +289,61 @@ def validate_branch_observations(case_id, expected, samples, rows):
             and isinstance(thrown.get('message'), str), '固定分支未观察到实际异常')
 
 
+ARRAY_CONTAINING_MARKER = {'type': 'string', 'value': 'ArrayContaining'}
+CONTAIN_EQUAL_MARKER = {'type': 'string', 'value': '[object Object]'}
+
+
+def matcher_semantics(identity, left, right):
+    """顺序无关 matcher 的通用语义比较；不适用时返回 False，交回逐值严格比较。
+
+    只对齐 matcher 自身的语义，不按站点登记规则：
+    - `expect(actual).toEqual(expect.arrayContaining(members))`：原 Jest 不比较顺序，
+      两侧实际数组按 canonical 归一后做多重集合比较（元素个数必须相同）。
+      采集器只记录 `ArrayContaining` 标记、不记 members，因此可比的只有两侧实际数组。
+    - `expect(received).toContainEqual(item)`：原 Jest 只要求 received 含与 item 相等的元素，
+      不比较顺序，也不比较 received 的长度。采集器把两侧元素都归一成 `[object Object]`，
+      因此只校验“实际数组非空且每个元素都等于期望元素”，不允许出现与期望无关的项。
+    其他 matcher 一律保持逐值严格比较。
+    """
+    for side, value in (('TS', left), ('Java', right)):
+        if not isinstance(value, dict) or value.get('kind') != 'assertion':
+            return False
+    if not all(isinstance(left.get(key), type(right.get(key))) for key in ('matcher', 'negated')):
+        return False
+    if left['matcher'] != right['matcher'] or left['negated'] != right['negated']:
+        return False
+    for side, value in (('TS', left), ('Java', right)):
+        require(isinstance(value.get('matcher'), str) and isinstance(value.get('negated'), bool)
+                and 'actual' in value and 'expected' in value,
+                f'{side} 断言记录形状无效：{identity}')
+    if left['matcher'] == 'toEqual' and left['expected'] == right['expected'] == ARRAY_CONTAINING_MARKER:
+        for side, value in (('TS', left), ('Java', right)):
+            actual = value['actual']
+            require(isinstance(actual, dict) and actual.get('type') == 'array'
+                    and isinstance(actual.get('value'), list),
+                    f'arrayContaining 实际值必须是数组：{identity} / {side}')
+        left_items = sorted(canonical(item) for item in left['actual']['value'])
+        right_items = sorted(canonical(item) for item in right['actual']['value'])
+        require(left_items == right_items,
+                f'arrayContaining 两侧元素多重集合不同：{identity}／TS {len(left_items)} 项／Java {len(right_items)} 项')
+        return True
+    if left['matcher'] == 'toContainEqual':
+        for side, value in (('TS', left), ('Java', right)):
+            actual, wanted = value['actual'], value['expected']
+            require(isinstance(actual, dict) and actual.get('type') == 'array'
+                    and isinstance(actual.get('value'), list) and bool(actual['value']),
+                    f'toContainEqual 实际值必须是非空数组：{identity} / {side}')
+            require(all(canonical(item) == canonical(wanted) for item in actual['value']),
+                    f'toContainEqual 实际值含与期望元素无关的项：{identity} / {side}')
+        return True
+    return False
+
+
 def compare_actuals(case_id, expected, identity, left, right):
     rule = semantic_specs(case_id).get(expected['assertionSites'][identity]) if expected else None
     if rule is None:
+        if matcher_semantics(identity, left, right):
+            return
         require(canonical(left) == canonical(right), f'实际结果不一致：{case_id} / {identity}')
         return
     rule_id, matcher, boundary, _ = rule

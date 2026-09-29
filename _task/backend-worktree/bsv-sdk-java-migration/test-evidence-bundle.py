@@ -107,6 +107,63 @@ class BundleTest(unittest.TestCase):
         self.assertEqual(len(result['cases'][0]['inputSamples']['TS']), 3)
         self.assertEqual(json.loads(audit.stdout)['comparedAssertions'], 2)
 
+    def assertion_rows(self, side):
+        return [json.loads(line) for line in self.path(side + '-assertions.jsonl').read_text().splitlines()]
+
+    def set_first_assertion(self, ts_value, java_value):
+        """替换第一个断言的两侧实际记录；重写来源清单，让校验走到逐值比较。"""
+        for side, value in (('ts', ts_value), ('java', java_value)):
+            rows = self.assertion_rows(side)
+            rows[0]['value'] = value
+            self.write_lines(side + '-assertions.jsonl', rows)
+        self.manifests()
+
+    @staticmethod
+    def equal_array_containing(items, marker='ArrayContaining'):
+        return {'kind': 'assertion', 'matcher': 'toEqual', 'negated': False,
+                'actual': {'type': 'array', 'value': [{'type': 'string', 'value': item} for item in items]},
+                'expected': {'type': 'string', 'value': marker}}
+
+    @staticmethod
+    def contain_equal(length, element='[object Object]'):
+        return {'kind': 'assertion', 'matcher': 'toContainEqual', 'negated': False,
+                'actual': {'type': 'array', 'value': [{'type': 'string', 'value': element}] * length},
+                'expected': {'type': 'string', 'value': element}}
+
+    def test_array_containing_compares_as_a_multiset(self):
+        self.set_first_assertion(self.equal_array_containing(['a', 'b', 'c']),
+                                 self.equal_array_containing(['c', 'a', 'b']))
+        bundle = self.bundle()
+        self.assertEqual(bundle.returncode, 0, bundle.stderr)
+
+    def test_contain_equal_ignores_received_length(self):
+        self.set_first_assertion(self.contain_equal(2), self.contain_equal(3))
+        bundle = self.bundle()
+        self.assertEqual(bundle.returncode, 0, bundle.stderr)
+
+    def test_array_containing_rejects_element_or_count_change(self):
+        self.set_first_assertion(self.equal_array_containing(['a', 'b', 'c']),
+                                 self.equal_array_containing(['a', 'b', 'd']))
+        self.assertIn('arrayContaining 两侧元素多重集合不同', self.bundle().stderr)
+        self.set_first_assertion(self.equal_array_containing(['a', 'b', 'c']),
+                                 self.equal_array_containing(['a', 'b']))
+        self.assertIn('arrayContaining 两侧元素多重集合不同', self.bundle().stderr)
+
+    def test_contain_equal_rejects_empty_or_unrelated_elements(self):
+        empty = self.contain_equal(2)
+        empty['actual']['value'] = []
+        self.set_first_assertion(empty, self.contain_equal(2))
+        self.assertIn('toContainEqual 实际值必须是非空数组', self.bundle().stderr)
+        unrelated = self.contain_equal(2)
+        unrelated['actual']['value'].append({'type': 'string', 'value': 'other'})
+        self.set_first_assertion(self.contain_equal(2), unrelated)
+        self.assertIn('toContainEqual 实际值含与期望元素无关的项', self.bundle().stderr)
+
+    def test_plain_equal_still_compares_order_strictly(self):
+        self.set_first_assertion(self.equal_array_containing(['a', 'b', 'c'], marker='plain'),
+                                 self.equal_array_containing(['c', 'a', 'b'], marker='plain'))
+        self.assertIn('实际结果不一致', self.bundle().stderr)
+
     def test_unpaired_utf16_surrogate_is_escaped_and_compared(self):
         for side in ('ts', 'java'):
             path = self.path(side + '-inputs.jsonl')

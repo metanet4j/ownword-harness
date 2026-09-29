@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""transaction-base 局部的清单/映射/样本编号：冻结与把本轮探针轨迹转成 TS 输入。
+"""keys 局部的清单/映射/样本编号：冻结与把本轮探针轨迹转成 TS 输入。
 
 样本编号按探针记录的入口顺序生成（`<入口>-<序号>`）；样本值只保留可比对的
 `method/args/result`，源码行号留在探针原始轨迹里。值由标准双侧采集当场比较，
@@ -12,7 +12,7 @@ from collections import defaultdict
 from pathlib import Path
 
 TASK = Path(__file__).resolve().parent
-spec = importlib.util.spec_from_file_location('transaction_locals', TASK / 'transaction-locals.py')
+spec = importlib.util.spec_from_file_location('keys_locals', TASK / 'keys-locals.py')
 locals_module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(locals_module)
 

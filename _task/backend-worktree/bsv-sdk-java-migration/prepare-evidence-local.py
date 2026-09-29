@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""transaction-base 局部的清单/映射/样本编号：冻结与把本轮探针轨迹转成 TS 输入。
+"""结构补强局部的清单/映射/样本编号：冻结与把本轮探针轨迹转成 TS 输入。
+
+与 prepare-transaction-local.py 同一套逻辑，只有两处差别：
+
+1. 登记表换成 evidence-locals.py；
+2. 一个原文件可能同时映射多个 Java 测试类（例如 Script.test.ts 的 1030 条向量归
+   ScriptVectorsTest、其余 39 例归 ScriptTest），因此清单片段按登记里的 java_class
+   只保留本局部负责的用例，并随之只保留这些用例实际引用的断言站点。
 
 样本编号按探针记录的入口顺序生成（`<入口>-<序号>`）；样本值只保留可比对的
 `method/args/result`，源码行号留在探针原始轨迹里。值由标准双侧采集当场比较，
@@ -12,7 +19,7 @@ from collections import defaultdict
 from pathlib import Path
 
 TASK = Path(__file__).resolve().parent
-spec = importlib.util.spec_from_file_location('transaction_locals', TASK / 'transaction-locals.py')
+spec = importlib.util.spec_from_file_location('evidence_locals', TASK / 'evidence-locals.py')
 locals_module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(locals_module)
 
@@ -35,17 +42,23 @@ def fragment(entry):
     source = next(file for file in catalog['files'] if file['path'] == entry['file'])
     mapping_all = read(TASK / 'test-map.json')
     ids = {case['id'] for case in source['cases']}
-    mapping_cases = [case for case in mapping_all['cases'] if case['id'] in ids]
-    require(len(mapping_cases) == len(ids), 'Java 映射用例数不同：' + entry['file'])
-    for case in mapping_cases:
-        require(len(case['java']) == 1 and case['java'][0]['className'] == entry['java_class'],
-                'Java 用例未独立注册：' + entry['file'])
-    sites = {site['id'] for site in source['sites']}
-    reviews = [review for review in mapping_all['siteReviews'] if review['id'] in sites]
+    mapping_cases = [case for case in mapping_all['cases'] if case['id'] in ids
+                     and len(case['java']) == 1 and case['java'][0]['className'] == entry['java_class']]
+    require(bool(mapping_cases), 'Java 用例未独立注册：' + entry['file'])
+    require(len(mapping_cases) == len({case['id'] for case in mapping_cases}), 'Java 用例重复注册：' + entry['file'])
+    owned = {case['id'] for case in mapping_cases}
+    cases = [case for case in source['cases'] if case['id'] in owned]
+    # 只有本局部用例实际引用的断言站点才留在清单片段里；其余站点属于同文件的其他局部。
+    used = {site for case in mapping_cases for site in case['assertionIds']}
+    sites = [site for site in source['sites'] if site['kind'] != 'assertion' or site['id'] in used]
+    require(used <= {site['id'] for site in sites}, '本局部断言站点缺失：' + entry['file'])
+    reviews = [review for review in mapping_all['siteReviews']
+               if review['id'] in {site['id'] for site in sites}]
     require(len(reviews) == len(sites), '站点审阅缺失：' + entry['file'])
-    return ({**catalog, 'files': [source], 'partialImplementationOnly': True},
+    return ({**catalog, 'files': [{**source, 'cases': cases, 'sites': sites}],
+             'partialImplementationOnly': True},
             {**mapping_all, 'cases': mapping_cases, 'siteReviews': reviews},
-            {case['id']: case for case in source['cases']},
+            {case['id']: case for case in cases},
             {case['id']: case for case in mapping_cases})
 
 

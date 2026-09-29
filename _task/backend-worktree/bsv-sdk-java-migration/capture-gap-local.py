@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""transaction-base 标准双侧采集适配器：按局部计划运行 TS 探针与 Java 聚焦测试。"""
+"""结构覆盖率缺口标准双侧采集适配器：按局部计划运行 TS 探针与 Java 聚焦测试。"""
 import argparse
 import importlib.util
 import os
@@ -9,7 +9,7 @@ from pathlib import Path
 
 TASK = Path(__file__).resolve().parent
 SDK = TASK.parents[2] / 'reference/ts-stack/packages/sdk'
-spec = importlib.util.spec_from_file_location('transaction_locals', TASK / 'transaction-locals.py')
+spec = importlib.util.spec_from_file_location('gap_locals', TASK / 'gap-locals.py')
 locals_module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(locals_module)
 

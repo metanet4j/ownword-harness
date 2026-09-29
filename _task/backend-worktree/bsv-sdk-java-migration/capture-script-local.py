@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""transaction-base 标准双侧采集适配器：按局部计划运行 TS 探针与 Java 聚焦测试。"""
+"""script 批标准双侧采集适配器：按局部计划运行 TS 探针与 Java 聚焦测试。"""
 import argparse
 import importlib.util
 import os
@@ -9,7 +9,7 @@ from pathlib import Path
 
 TASK = Path(__file__).resolve().parent
 SDK = TASK.parents[2] / 'reference/ts-stack/packages/sdk'
-spec = importlib.util.spec_from_file_location('transaction_locals', TASK / 'transaction-locals.py')
+spec = importlib.util.spec_from_file_location('script_locals', TASK / 'script-locals.py')
 locals_module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(locals_module)
 
@@ -28,14 +28,14 @@ def main():
     parser.add_argument('--report', type=Path, required=True)
     args = parser.parse_args()
     if args.side != os.environ.get('EVIDENCE_SIDE'):
-        parser.error('交易采集侧别与运行环境不同')
+        parser.error('script 采集侧别与运行环境不同')
     name = args.local
     if name is None:
         # 计划目录名形如 <局部>-plan-<日期>，按登记名反查；同名前缀取最长匹配。
         folder = args.plan.name
         candidates = [key for key in locals_module.LOCALS if folder.startswith(key + '-')]
         if not candidates:
-            parser.error('无法从计划目录推断局部：' + folder)
+            parser.error('无法从计划目录推断 script 局部：' + folder)
         name = max(candidates, key=len)
     entry = locals_module.local(name)
     plan = args.plan.resolve()
@@ -56,7 +56,7 @@ def main():
         network = Path(env['MIGRATION_NETWORK_LOG'])
         if network.exists() and network.read_text().strip():
             raise RuntimeError('固定原测试出现网络调用：' + entry['file'])
-        run(['python3', str(TASK / 'prepare-transaction-local.py'), 'emit-ts', '--local', name,
+        run(['python3', str(TASK / 'prepare-script-local.py'), 'emit-ts', '--local', name,
              '--raw', env[entry['ts_observations_env']], '--plan', str(plan / 'input-plan.json'),
              '--output', os.environ['EVIDENCE_INPUTS_PATH']], env=env)
     else:
