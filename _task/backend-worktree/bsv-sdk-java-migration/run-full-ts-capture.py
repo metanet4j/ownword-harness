@@ -72,7 +72,12 @@ def build_env(options):
 
 
 def jest_command(options, env, catalog):
+    # jest.config.js 里 testPathIgnorePatterns 含 `\.man\.test\.ts$`，只给 --runTestsByPath 时
+    # 这些文件仍会被过滤掉（实测 --listTests 不列出），因此显式覆盖为只忽略 node_modules——
+    # 与 run-ts-baseline.py / collect-cases.cjs 的既有做法一致，否则 `AESGCM.man.test.ts`
+    # 会被全量 TS 捕获静默跳过，strict 模式下以“轨迹缺失”整轮非零退出。
     command = [str(TASK / 'pnpm.sh'), '--dir', str(SDK), 'exec', 'jest', '--runInBand', '--watchman=false',
+               '--testPathIgnorePatterns', '/node_modules/',
                '--setupFilesAfterEnv', str(TASK / 'ts-offline-guard.cjs'),
                str(TASK / 'capture-full-dispatch.cjs'), str(TASK / 'capture-parity.cjs')]
     selected = []
