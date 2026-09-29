@@ -129,6 +129,14 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### spend 批收尾完成、全仓接近静默（20260930 09:30）
+
+spend/链跟踪修缺代理**已停笔**，两局部全绿且 `currentCaptureVerified=true`：`spend-additional` 69/70/76、`whats-on-chain-chain-tracker` 8/26/10；`planErrors=[]`、聚焦 `clean test` 77/0/0/0、`test-compile` BUILD SUCCESS。三处根因均为接线/投影：①spend 构造实参漏镜像 TS 的 `memoryLimit`/`isRelaxed`/`unlockingScript`；②**该文件 4 例 `PrivateKey.fromRandom()` 使探针自身不确定**（冻结自采与标准采集拿到不同密钥）→ 新增 `spend-seeded-entropy.cjs` 种子加载（对齐 `verifier-seeded-entropy.cjs` 口径，已实测对无随机熵文件逐行无影响）；③WOC tracker 构造体内又造了一个未包装客户端，导致一次 HTTP 调用被记两次入口。
+
+**静默进度**：全仓最后一次 Java 写入是 06:37（已停笔）；`AESGCMManualInputReplay.java`／`AESGCMManualTest.java` 早在 06:08–06:09 就绪且未再改。唯一在跑的是 `AESGCM.man` 的 66 分钟 TS 冻结运行（06:10 起，只写 `.cache`，不碰 `src`）。
+
+**下一轮起可执行的收尾序列**（长跑结束后立刻做）：①代理冻结计划 + `register-local.py`（覆盖率应达 5329/5329）；②`cd metanet4j-bsv-sdk && git add -A && git commit`（冻结来源）；③`./final-window-guard.sh 10` 应六项全过；④后台启动 `./recapture-all.sh final-$(date +%Y%m%d)`（105+ 局部，约 3.5–4 小时）。
+
 ### 守卫复跑（20260930 09:20）
 
 ①静默 ✗（spend 代理 10 分钟内有改动）；②编译 ✓；③计划 ✓（137 检查／0 失败）；④分派表 ✓（152 局部／132 原文件／150 探针／114 环境变量，`unresolved=0`，无探针原文件 1 个）；⑤覆盖率 ✗ 5328/5329（仅 `AESGCM.man` 1 例）；⑥工作树 ✗ 94 个未提交（冻结时提交）。
