@@ -129,6 +129,14 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 死锁诊断与第二次策略切换（20260930 02:20）
+
+**诊断**：最近 45 分钟全队 **0 个采集落地**。锁并非卡死（持有者是 480% CPU 的 Maven 运行），真正原因是**8 路代理并行编辑同一测试模块**：任何一个 2–4 分钟的捕获窗口内都会有别人的文件在飞，于是捕获必然以 `BUILD FAILURE`（他人在飞文件）或“采集期间源码发生变化”收场——互相等待形成死锁。
+
+**切换**：已通知全部 8 路代理**停止一切采集**（recapture／tamper／聚焦 clean test 都不再执行，编译自检最多一次 `test-compile`），改为把代码侧做到“一编译就过”并用不占锁手段自检（javac 单编、`offline-*-check.sh`、`audit-tests.compare_actuals` 离线比对），然后交简报（用例/输入/断言数、文件清单、是否已登记、还差哪一步）。
+
+**后续**：等所有人交完代码侧，主代理确认 `test-compile` 干净、提交在飞文件，再**独占**运行统一采集窗口（`recapture-all.sh final-<日期>`，含篡改门禁与 preflight）。期间不再允许任何并行 Maven 操作。
+
 ### 采集队列瓶颈（20260930 02:00）
 
 各代理已进入采集阶段，但**共享 `run.lock` 成为唯一瓶颈**：现场有 5 个 flock 等待者 + 1 个 java 进程，多个局部已完成 TS 侧（01:32–01:54）却还在排队等 Java 侧 `clean test`。按每个局部 2–4 分钟估算，仅当前排队的采集就需要 1–2 小时；主代理因此**完全不占锁**（连编译复检都停掉），只做只读校验与登记。
