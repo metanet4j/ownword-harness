@@ -14,8 +14,8 @@
       "跨工程发布、部署或远端推送"
     ]
   },
-  "activeItem": "migration-impl-auth-certificates",
-  "nextItem": "migration-impl-auth-certificates",
+  "activeItem": "migration-impl-transaction-base",
+  "nextItem": "migration-impl-transaction-base",
   "features": [
     {
       "id": "migration-env",
@@ -877,7 +877,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "auth：证书、验证与钱包辅助类",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-wallet-keys"
       ],
@@ -919,8 +919,9 @@
       ],
       "evidence": [
         "目标提交 fa67ce4、58a8f73；固定 TS 五个原测试 50/50、128 条断言。",
-        "提交后干净目标工作树 Maven 50/50，失败、错误、跳过均为 0；.cache/evidence/auth-certificates-task-parity.json 逐实际值 50/50、128/128，缺失和额外断言均为 0。",
-        "71 项 API、50 个原用例及 180 个源码站点已映射；证书签名与字段加解密运行真实钱包算法。"
+        "当前 Java 来源 0a119349（提交 1da225e）：六个原测试文件全部重采为标准双侧同输入局部——MasterCertificate 构造 2/7/6、MasterCertificate 其余 13/84/26、getVerifiableCertificates 5/12/12、validateCertificates 8/21/16、Certificate 15/42/51、VerifiableCertificate 7/112/17，合计 50 例、278 条入口、128 条断言；六项 local-evidence-gate verify 与 tamper 均通过，full-evidence-preflight 记为 currentCaptureVerified。",
+        "任务级同来源逐断言对照 .cache/evidence/auth-certificates-same-source-20260929/task-parity.json：50/50 例、128/128 条断言，缺失、额外与未比较项均为 0，输入摘要与断言身份顺序逐用例核对，比较规则复用 audit-tests.py 的固定语义实现；反例（改写实际值、缺少局部）均被拒绝，见该目录 negative/。",
+        "证书签名与字段加解密运行真实钱包算法；71 项 API、50 个原用例及 180 个源码站点已映射。"
       ],
       "modules": [
         "auth"
@@ -933,7 +934,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/auth-certificates-task-parity.json"
+        "compareReport": ".cache/evidence/auth-certificates-same-source-20260929/task-parity.json"
       }
     },
     {

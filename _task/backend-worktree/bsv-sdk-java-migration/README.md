@@ -35,10 +35,10 @@ Maven 和 pnpm 分别使用 `./mvn.sh`、`./pnpm.sh`；这两个入口固定工�
 
 迁移单位是完整模块，范围复核确认 `primitives`、`compat`、`script`、`transaction`、`wallet`、`auth` 六模块，含 133 个测试文件、5,329 个注册用例（含 manual）。范围依据见[完整模块与 API 映射](doc/完整模块与API映射-20260920-122800.md)，完整性脚本和数据格式见[检查器说明](doc/测试完整性脚本-20260920-104440.md)。
 
-已完成 Hex、BigNumber 构造、完整大整数/模运算、哈希/HMAC/PBKDF2/随机源、曲线与点运算，以及字节编解码和 Reader/Writer；累计映射 632/5329 个上游原用例，余 4697 个未映射。字节事项的 192 个原用例、1242 条断言实际值已全部匹配，Java 全量 `clean test` 656/656 通过。完整六模块验收仍待后续事项，`audit-tests.py check` 和无过滤 API check 继续按全范围拒绝未完成项。
+API 映射 3576/3576 项已复核，原用例映射 5329/5329 个、源码测试站点映射 7554/7554 个；固定 TS 标准与 manual Jest 原始报告合计 5329/5329。目标工程在提交 `1da225e` 的宿主无过滤 `clean test` 通过 5437/5437，失败/错误/跳过均为 0。当前来源 `0a119349` 只有 wallet-keys 六文件（71 例）与认证证书六文件（50 例）通过标准双侧同输入局部复核，其余 68 个局部须在最终单次全量运行中重采；完整六模块验收仍未通过，`audit-tests.py check` 和无过滤 API check 继续按全范围拒绝未完成项。
 
 [实施前审查](doc/实施前审查-20260920-115837.md)确认可以进入 P0；编码任务、嵌入 API 前检及最终门禁已登记在 [feature_list.json](feature_list.json)，范围复核及[完整 TS 基线](doc/TS完整基线-20260920-124400.md)已完成（5329/5329，含原规模 manual）；已完成 Hex 与 BigNumber 构造原文件对应的内部实施项；已复核文件、剩余映射和授权差异见[当前进度](progress.md)及[API 契约](doc/完整模块与API映射-20260920-122800.md)。每个编码任务内先复核对应 API，再 TDD 并落实原测试及真实结果对照；完整模块最终验收仍须完成 P0 联合验收。
 
 逐步执行入口：[模块迁移计划](doc/模块迁移计划-20260920-103547.md)中的“编码任务与 API 前检”“文件和脚本的职责”“按顺序执行”和“单行为执行示例”，逐项说明输入、脚本、产物与完成条件；尚未实现的运行/采集入口已明确标记。后续交接：[session-handoff.md](session-handoff.md)。
 
-当前按功能组拆为 28 个编码任务（6 项 done、1 项 in-progress、21 项 not-started），API 复核嵌入任务前检；values、hash-random、curve 共 816 项已复核。当前执行 `migration-impl-keys-signatures`，其冻结范围为 146 个原用例。任务范围、依赖及独立验收条件以 feature_list.json 为准。
+当前按功能组拆为 28 个编码任务，连同基线与全量门禁共 43 个执行事项（22 项 done、6 项 in-progress、15 项 not-started）；API 复核嵌入任务前检，21 个嵌入批次均已完成。下一项为 `migration-impl-transaction-base`。任务范围、依赖及独立验收条件以 feature_list.json 为准。
