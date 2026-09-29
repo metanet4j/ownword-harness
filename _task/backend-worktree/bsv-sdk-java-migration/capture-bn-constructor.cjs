@@ -1,3 +1,4 @@
+// 固定原文件：src/primitives/__tests/BigNumber.constructor.test.ts
 // 原测试不改写；只记录真实 API 调用、原断言实参和循环内的每次执行。
 const fs = require('node:fs')
 const path = require('node:path')

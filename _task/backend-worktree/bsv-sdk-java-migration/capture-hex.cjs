@@ -1,3 +1,4 @@
+// 固定原文件：src/primitives/__tests/hex.test.ts
 // 只观察原始 hex.test.ts 的实际调用；返回值、异常和 Jest 断言保持不变。
 const fs = require('node:fs')
 const path = require('node:path')

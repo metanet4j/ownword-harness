@@ -79,6 +79,16 @@ SA9：`locking-unlocking-script` 12 例、`script-additional` 14 例、`binary-f
 
 `run-full-ts-capture.py` 需要采集后校验：所有原始轨迹存在且非空、raw 型转换成功，任一缺失即整轮非零退出（防止“跑完但没有输入”的假绿）。
 
+## 协作策略切换：先收口代码，统一窗口再采集（20260929 晚）
+
+`run.lock` 一度积压 12 个等待者（队首约 30 分钟），且测试模块被多份在飞文件反复打断编译。已通知全部在跑代理：**停止重试式采集**，改为①优先修完各自文件的编译错误（当前阻塞项：`HashTest`、`PublicKeyTest`、`PublicKeyAdditionalTest`、`ReductionContextTest`、`SignatureTest`）；②把探针、计划、Java 重放、测试接线、登记等代码侧做完；③需要验证时低频取锁（先 `test-compile`，失败等 5 分钟）；④各自交“待采集清单”。随后由主代理在静默窗口按登记表串行重采（`recapture-all.sh`）并出任务级对照。
+
+### hex-bn 转换器（本轮已完成部分）
+
+- 新增 `prepare-hex-bn-inputs.py`：把旧管线 `replay-legacy-inputs.emit_ts` 包成 CLI（`emit-ts` 子命令），`capture-legacy-side.py` 改为调用它；用既有轨迹验证：输入 71 行、断言 71 行，身份与值与旧输出**逐项一致**。
+- 两个旧探针补了“固定原文件：src/...test.ts”声明，分派表因此能把探针唯一对应到原文件（原文件解析数 66→77、探针 80→93）。
+- 仍未解析：分派表无法为 `hex-bn` 解析 raw 轨迹的环境变量取值（旧驱动用 `evidence / (kind + '.raw.jsonl')` 计算，解析器不认），且该局部断言来自旧转换器而非 `capture-parity`。**待办**：在 `build-full-run-probes.py` 增加 `full-run-overrides.json` 覆盖机制，或把 hex-bn 升级为标准局部（探针 + `emit-assertion-observations`）。
+
 ## 全量运行接口已交付（20260929）
 
 `fullRun` 段已写入 `full-evidence-locals.json`，preflight 的 `missingFullRunInterfaces=[]` 达成。新增：`build-full-run-probes.py`（生成 `full-run-probes.json`：84 局部／66 原文件／80 探针）、`capture-full-dispatch.cjs`（按 testPath 分派探针）、`run-full-ts-capture.py`（全量 TS + raw→emit-ts 转换 + 采集后校验）、`run-full-java-capture.py`（无过滤 `clean test` + 全部 `MIGRATION_*_TS_INPUTS` 指向本轮 ts-inputs + Surefire 汇总）。自测：三类代表子集 Jest 69/69、官方 `evidence-bundle capture` 端到端 EXIT=0（inputs 251 行、assertions 159 行、missing/extra/duplicates 均为 0）。

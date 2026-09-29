@@ -18,7 +18,9 @@
       "java_report": [
         ".cache/evidence/input-replay-hex-bn-20260926/java-hex-surefire.xml",
         ".cache/evidence/input-replay-hex-bn-20260926/java-bn-surefire.xml"
-      ]
+      ],
+      "capture": "capture-legacy-side.py",
+      "replay": ".cache/evidence/input-replay-hex-bn-20260926/replay-inputs.jsonl"
     },
     {
       "name": "byte-base58",
@@ -1383,6 +1385,102 @@
       "mapping": ".cache/evidence/reduction-context-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/reduction-context-plan-20260929/input-plan.json",
       "capture": "capture-primitives-local.py"
+    },
+    {
+      "name": "script",
+      "catalog": ".cache/evidence/script-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/script-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/script-plan-20260929/input-plan.json",
+      "capture": "capture-evidence-local.py",
+      "ts_inputs": ".cache/evidence/script-standard-20260929-b/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/script-standard-20260929-b/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/script-standard-20260929-b/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/script-standard-20260929-b/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/script-standard-20260929-b/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/script-standard-20260929-b/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/script-standard-20260929-b/java-run.json",
+      "java_report": [
+        ".cache/evidence/script-standard-20260929-b/java-surefire.xml"
+      ]
+    },
+    {
+      "name": "hd",
+      "catalog": ".cache/evidence/hd-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/hd-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/hd-plan-20260929/input-plan.json",
+      "capture": "capture-evidence-local.py"
+    },
+    {
+      "name": "r-puzzle",
+      "catalog": ".cache/evidence/r-puzzle-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/r-puzzle-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/r-puzzle-plan-20260929/input-plan.json",
+      "capture": "capture-script-local.py"
+    },
+    {
+      "name": "p2pkh-async-backend",
+      "catalog": ".cache/evidence/p2pkh-async-backend-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/p2pkh-async-backend-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/p2pkh-async-backend-plan-20260929/input-plan.json",
+      "capture": "capture-script-local.py"
+    },
+    {
+      "name": "push-drop",
+      "catalog": ".cache/evidence/push-drop-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/push-drop-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/push-drop-plan-20260929/input-plan.json",
+      "capture": "capture-script-local.py"
+    },
+    {
+      "name": "transaction-evidence",
+      "catalog": ".cache/evidence/transaction-evidence-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/transaction-evidence-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/transaction-evidence-plan-20260929/input-plan.json",
+      "capture": "capture-script-local.py"
+    },
+    {
+      "name": "transaction-verifier",
+      "catalog": ".cache/evidence/transaction-verifier-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/transaction-verifier-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/transaction-verifier-plan-20260929/input-plan.json",
+      "capture": "capture-script-local.py"
+    },
+    {
+      "name": "transaction-evidence-coordinator",
+      "catalog": ".cache/evidence/transaction-evidence-coordinator-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/transaction-evidence-coordinator-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/transaction-evidence-coordinator-plan-20260929/input-plan.json",
+      "capture": "capture-script-local.py"
+    },
+    {
+      "name": "locking-unlocking-script",
+      "catalog": ".cache/evidence/locking-unlocking-script-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/locking-unlocking-script-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/locking-unlocking-script-plan-20260929/input-plan.json",
+      "capture": "capture-misc-local.py"
+    },
+    {
+      "name": "script-additional",
+      "catalog": ".cache/evidence/script-additional-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/script-additional-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/script-additional-plan-20260929/input-plan.json",
+      "capture": "capture-misc-local.py"
+    },
+    {
+      "name": "binary-fetch-client",
+      "catalog": ".cache/evidence/binary-fetch-client-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/binary-fetch-client-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/binary-fetch-client-plan-20260929/input-plan.json",
+      "capture": "capture-misc-local.py"
+    },
+    {
+      "name": "bignumber-additional",
+      "catalog": ".cache/evidence/bignumber-additional-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/bignumber-additional-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/bignumber-additional-plan-20260929/input-plan.json",
+      "capture": "capture-misc-local.py"
     }
   ],
   "fullRun": {
