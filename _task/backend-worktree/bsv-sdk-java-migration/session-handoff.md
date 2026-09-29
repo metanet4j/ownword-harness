@@ -110,6 +110,19 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 
 **仍有未计划用例的事项（共约 565 例，交给下一波代理）**：wallet-client 100、script-spend 91、transaction-complete 86、auth-sessions 85、http-chain 47、curve 38、keys-signatures 37、script-vectors 26、hash-random 22、transaction-beef 21（beef 在做）、symmetric 7、auth-transport 3、bignumber 2。
 
+### 第五波分工（20260930 凌晨已派发，5 路并行）
+
+| 代理 | 范围 | 用例 |
+| --- | --- | --- |
+| beef 代理 | `Beef.test.ts` 21 例（镜像 `BeefTest`） | 21 |
+| wallet-client 代理 | WalletClient 三文件 | 100 |
+| auth 代理 | auth-sessions 六文件 + SimplifiedFetchTransport 基础 3 例 | 88 |
+| spend 代理 | script-spend 缺口 91 + script-vectors 缺口 26 | 117 |
+| tx-complete 代理 | `Transaction.test.ts` 61 + `Transaction.performance.test.ts` 25 | 86 |
+| curve/keys 代理 | Curve.unit 18 + Curve.additional 20 + keys-signatures 剩余 37 | 75 |
+
+派完后仍未分配的缺口：hash-random 22、symmetric 7、bignumber 2、http-chain 47（共 78 例），等有代理空闲再派。
+
 ### 最终窗口规模与预计耗时（20260930 凌晨）
 
 可重采局部 **65 个**（58 个已有运行产物）；每个局部的 Java 侧都要一次无过滤口径的 `clean test -Dtest=<类>`，模块重编译主导，预计 **2–3 小时**串行。窗口内禁止任何人改 Java 源码，否则来源摘要前移、该批作废。当前唯一在改 Java 的是 `beef` 代理（`BeefInputReplay.java` 还剩 1 处类型错误），其余 10 个代理均已收工。
