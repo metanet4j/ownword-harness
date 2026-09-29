@@ -129,6 +129,12 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 重试结果（20260930 05:35）
+
+趁 8 分钟静默重试 4 个 churn 类局部：**`wallet-client-substrate` 38/38/70 通过**（含篡改门禁）；`wallet-client`、`spend-chronicle-vector` 仍被“采集期间源码发生变化”拒绝；`curve-unit` 被 **`PeerCertificatePolicyTest.java` 的编译错误**挡住（认证修缺代理在飞文件，非曲线内容问题）。
+
+结论再次确认：只要还有代理在改共享测试模块，任何采集都可能被拒；这类局部只能等全部停笔后的统一窗口。运行产物 114 个局部。
+
 ### 修复代理逐个收口（20260930 05:25）
 
 - `peer-certificate-policy` 修复后采集通过：**15 例／35 输入／47 断言**（verify ✓）；`simplified-fetch-transport` 在采。
