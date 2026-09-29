@@ -24,11 +24,12 @@ for name in "${NAMES[@]}"; do
   run=".cache/evidence/${name}-standard-${LABEL}"
   rm -rf "$run"
   echo "=== $name ==="
-  if ! ./lock.sh python3 recapture-local.py --name "$name" --run "$run" --update 2>&1 | tail -1; then
+  # 每个局部给 2 小时上限（AESGCM.man 的 66 分钟 TS 长跑 + Java 侧需要余量），避免个别局部挂死拖住整窗。
+  if ! timeout 7200 ./lock.sh python3 recapture-local.py --name "$name" --run "$run" --update 2>&1 | tail -1; then
     failed+=("$name:recapture")
     continue
   fi
-  if ! ./lock.sh python3 local-evidence-gate.py tamper --name "$name" 2>&1 | tail -1; then
+  if ! timeout 3600 ./lock.sh python3 local-evidence-gate.py tamper --name "$name" 2>&1 | tail -1; then
     failed+=("$name:tamper")
   fi
 done
