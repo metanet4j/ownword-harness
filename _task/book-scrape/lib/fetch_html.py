@@ -19,7 +19,7 @@ import bookkit
 
 
 def curl(url, out):
-    cmd = ['curl', '-sS', '--compressed', '--max-time', '90',
+    cmd = ['curl', '-sSL', '--compressed', '--max-time', '90',
            '-o', out, '-w', '%{http_code}', url]
     r = subprocess.run(cmd, capture_output=True, text=True)
     return r.stdout.strip(), r.stderr.strip()
