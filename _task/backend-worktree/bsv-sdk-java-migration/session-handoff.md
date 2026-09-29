@@ -129,6 +129,12 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 最终窗口守卫脚本（20260930 05:15，主代理）
+
+新增 `final-window-guard.sh [静默分钟数]`：开窗前必须六项全过——①最近 N 分钟无人改 Java；②`test-compile` 通过；③`validate-plans.py` 0 失败；④`build-full-run-probes.py` `unresolved=0`；⑤计划覆盖率 = 5329/5329；⑥SDK 工作树无未提交改动。任一失败即非零退出并打印失败项，避免“带病开窗”（窗口一开来源就冻结，返工代价极高）。
+
+首次运行结果（20260930 05:15）：②③④通过（`validate-plans` 134 检查 0 失败；分派表 149 局部／129 原文件／147 探针／111 环境变量，`unresolved=0`，**无探针原文件仅剩 4 个**）；①⑤⑥未过——①静默未达（三路代理在改）、⑤覆盖率 5320/5329（缺 9 例，原语剩余批在建）、⑥SDK 工作树 86 个未提交改动（待冻结时提交）。
+
 ### 重采环境性失败（20260930 05:00）
 
 对 5 个“环境性失败”局部重采：**`wallet-client-additional` 61/107/108** 与 **`block-headers-service` 19/47/24** 通过（含篡改门禁）；`wallet-client`、`wallet-client-substrate`、`curve-unit`、`spend-chronicle-vector` 仍被“采集期间源码发生变化”拒绝（三路修复代理在改 Java）。结论：这类被 churn 反复拒绝的局部只能留到最终静默窗口，逐个重试没有收益。
