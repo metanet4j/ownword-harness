@@ -1,0 +1,339 @@
+{
+  "migration-impl-hex": {
+    "status": "done",
+    "frozenCases": 8,
+    "coveredCases": 8,
+    "uncoveredCases": 0,
+    "locals": {
+      "hex-bn": 8
+    }
+  },
+  "migration-impl-bignumber-constructor": {
+    "status": "done",
+    "frozenCases": 28,
+    "coveredCases": 28,
+    "uncoveredCases": 0,
+    "locals": {
+      "hex-bn": 28
+    }
+  },
+  "migration-impl-bignumber": {
+    "status": "done",
+    "frozenCases": 174,
+    "coveredCases": 172,
+    "uncoveredCases": 2,
+    "locals": {
+      "bignumber-additional": 19,
+      "bignumber-arithmetic": 52,
+      "bignumber-binary": 20,
+      "bignumber-serializers": 16,
+      "bn-utils36": 36,
+      "reduction-context": 29
+    }
+  },
+  "migration-impl-hash-random": {
+    "status": "done",
+    "frozenCases": 86,
+    "coveredCases": 64,
+    "uncoveredCases": 22,
+    "locals": {
+      "drbg29": 29,
+      "hash": 30,
+      "hmac-vectors": 5
+    }
+  },
+  "migration-impl-curve": {
+    "status": "done",
+    "frozenCases": 144,
+    "coveredCases": 106,
+    "uncoveredCases": 38,
+    "locals": {
+      "jacobian": 35,
+      "point-additional": 60,
+      "point11": 11
+    }
+  },
+  "migration-impl-byte-codecs": {
+    "status": "done",
+    "frozenCases": 192,
+    "coveredCases": 192,
+    "uncoveredCases": 0,
+    "locals": {
+      "byte-base58": 6,
+      "reader": 37,
+      "reader-uint8array": 37,
+      "utils-base58-check": 4,
+      "utils-base58-decode": 4,
+      "utils-diagnostic": 1,
+      "utils-null": 5,
+      "utils-point-infinity": 3,
+      "utils-property": 3,
+      "utils-simple": 12,
+      "utils-utf8-bounds": 3,
+      "utils-utf8-misc": 24,
+      "writer": 27,
+      "writer-uint8array": 26
+    }
+  },
+  "migration-impl-keys-signatures": {
+    "status": "done",
+    "frozenCases": 146,
+    "coveredCases": 109,
+    "uncoveredCases": 37,
+    "locals": {
+      "ecdsa": 15,
+      "public-key": 14,
+      "public-key-additional": 32,
+      "schnorr": 12,
+      "signature": 36
+    }
+  },
+  "migration-impl-symmetric": {
+    "status": "done",
+    "frozenCases": 52,
+    "coveredCases": 45,
+    "uncoveredCases": 7,
+    "locals": {
+      "aesgcm": 30,
+      "symmetric-key": 15
+    }
+  },
+  "migration-impl-compat": {
+    "status": "done",
+    "frozenCases": 122,
+    "coveredCases": 122,
+    "uncoveredCases": 0,
+    "locals": {
+      "compat-bsm": 6,
+      "ecies": 9,
+      "hd": 49,
+      "mnemonic-additional": 8,
+      "mnemonic-original": 50
+    }
+  },
+  "migration-impl-wallet-contracts": {
+    "status": "done",
+    "frozenCases": 253,
+    "coveredCases": 253,
+    "uncoveredCases": 0,
+    "locals": {
+      "brc100-byte-encoding": 23,
+      "json-byte-encoding": 10,
+      "validation-helpers": 147,
+      "wallet-error": 39,
+      "wallet-property": 2,
+      "werr-constructors": 32
+    }
+  },
+  "migration-impl-wallet-keys": {
+    "status": "done",
+    "frozenCases": 71,
+    "coveredCases": 71,
+    "uncoveredCases": 0,
+    "locals": {
+      "cached-keyderiver": 13,
+      "keyderiver": 17,
+      "protowallet": 19,
+      "protowallet-additional": 11,
+      "protowallet-async": 5,
+      "protowallet-native": 6
+    }
+  },
+  "migration-impl-auth-certificates": {
+    "status": "done",
+    "frozenCases": 50,
+    "coveredCases": 50,
+    "uncoveredCases": 0,
+    "locals": {
+      "auth-certificate-class": 15,
+      "auth-get-verifiable-certificates": 5,
+      "auth-master-certificate-constructors": 2,
+      "auth-master-certificate-remaining": 13,
+      "auth-validate-certificates": 8,
+      "auth-verifiable-certificate": 7
+    }
+  },
+  "migration-impl-http-chain": {
+    "status": "done",
+    "frozenCases": 78,
+    "coveredCases": 31,
+    "uncoveredCases": 47,
+    "locals": {
+      "binary-fetch-client": 12,
+      "broadcaster": 11,
+      "default-chain-tracker": 5,
+      "transaction-chain-tracker": 3
+    }
+  },
+  "migration-impl-script-model": {
+    "status": "done",
+    "frozenCases": 1104,
+    "coveredCases": 1104,
+    "uncoveredCases": 0,
+    "locals": {
+      "locking-unlocking-script": 12,
+      "script": 39,
+      "script-additional": 14,
+      "script-evaluation-error": 9,
+      "script-spend-shared-vectors": 1030
+    }
+  },
+  "migration-impl-transaction-base": {
+    "status": "done",
+    "frozenCases": 74,
+    "coveredCases": 74,
+    "uncoveredCases": 0,
+    "locals": {
+      "fee-model-satoshis-per-kilobyte": 18,
+      "live-policy": 8,
+      "transaction-additional": 20,
+      "transaction-ef-cache": 4,
+      "transaction-signature-additional": 24
+    }
+  },
+  "migration-impl-transaction-beef": {
+    "status": "in-progress",
+    "frozenCases": 83,
+    "coveredCases": 62,
+    "uncoveredCases": 21,
+    "locals": {
+      "beef-party-additional": 3,
+      "merkle-path": 25,
+      "merkle-path-bench": 13,
+      "merkle-path-safe-offsets": 21
+    }
+  },
+  "migration-impl-script-templates": {
+    "status": "not-started",
+    "frozenCases": 17,
+    "coveredCases": 17,
+    "uncoveredCases": 0,
+    "locals": {
+      "p2pkh-async-backend": 2,
+      "push-drop": 6,
+      "r-puzzle": 9
+    }
+  },
+  "migration-impl-script-spend": {
+    "status": "not-started",
+    "frozenCases": 546,
+    "coveredCases": 455,
+    "uncoveredCases": 91,
+    "locals": {
+      "script-spend-shared-vectors": 455
+    }
+  },
+  "migration-impl-script-vectors": {
+    "status": "not-started",
+    "frozenCases": 555,
+    "coveredCases": 529,
+    "uncoveredCases": 26,
+    "locals": {
+      "chronicle-opcodes": 74,
+      "script-spend-shared-vectors": 455
+    }
+  },
+  "migration-impl-broadcasters": {
+    "status": "done",
+    "frozenCases": 68,
+    "coveredCases": 68,
+    "uncoveredCases": 0,
+    "locals": {
+      "arc-additional30": 30,
+      "arc-broadcaster": 15,
+      "teranode-broadcaster": 17,
+      "woc-broadcaster": 6
+    }
+  },
+  "migration-impl-transaction-complete": {
+    "status": "not-started",
+    "frozenCases": 745,
+    "coveredCases": 659,
+    "uncoveredCases": 86,
+    "locals": {
+      "transaction-shared-vectors": 659
+    }
+  },
+  "migration-impl-transaction-verification": {
+    "status": "not-started",
+    "frozenCases": 53,
+    "coveredCases": 53,
+    "uncoveredCases": 0,
+    "locals": {
+      "transaction-evidence": 4,
+      "transaction-evidence-coordinator": 34,
+      "transaction-verifier": 15
+    }
+  },
+  "migration-impl-wallet-wire": {
+    "status": "in-progress",
+    "frozenCases": 128,
+    "coveredCases": 128,
+    "uncoveredCases": 0,
+    "locals": {
+      "http-wallet-wire": 46,
+      "wallet-wire": 82
+    }
+  },
+  "migration-impl-wallet-json": {
+    "status": "done",
+    "frozenCases": 58,
+    "coveredCases": 58,
+    "uncoveredCases": 0,
+    "locals": {
+      "http-wallet-json": 53,
+      "origin-header5": 5
+    }
+  },
+  "migration-impl-wallet-hosts": {
+    "status": "in-progress",
+    "frozenCases": 126,
+    "coveredCases": 126,
+    "uncoveredCases": 0,
+    "locals": {
+      "react-native25": 25,
+      "window-cwi": 31,
+      "xdm-browser-boundary": 70
+    }
+  },
+  "migration-impl-wallet-client": {
+    "status": "in-progress",
+    "frozenCases": 100,
+    "coveredCases": 0,
+    "uncoveredCases": 100,
+    "locals": {}
+  },
+  "migration-impl-auth-sessions": {
+    "status": "not-started",
+    "frozenCases": 85,
+    "coveredCases": 0,
+    "uncoveredCases": 85,
+    "locals": {}
+  },
+  "migration-impl-auth-transport": {
+    "status": "not-started",
+    "frozenCases": 183,
+    "coveredCases": 180,
+    "uncoveredCases": 3,
+    "locals": {
+      "auth-fetch-additional-bodies": 26,
+      "auth-fetch-additional-context-peer": 3,
+      "auth-fetch-additional-deterministic": 15,
+      "auth-fetch-additional-errors": 7,
+      "auth-fetch-additional-logging-summary": 6,
+      "auth-fetch-additional-payment-headers": 8,
+      "auth-fetch-additional-retry-fallback": 4,
+      "auth-fetch-additional-serialize": 10,
+      "auth-fetch-additional-validated-fallback": 3,
+      "auth-fetch-additional-wait": 5,
+      "auth-fetch-boundary": 15,
+      "auth-fetch-known-txids": 17,
+      "auth-fetch-peer": 6,
+      "auth-fetch-primary-cert-request": 3,
+      "auth-fetch-primary-context-labels": 3,
+      "auth-fetch-primary-retry": 2,
+      "auth-fetch-property": 1,
+      "simplified-fetch-transport-additional": 46
+    }
+  }
+}
