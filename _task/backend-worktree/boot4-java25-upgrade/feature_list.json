@@ -7,8 +7,8 @@
     "blocked",
     "done"
   ],
-  "activeItem": "unit-u9-acceptance",
-  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1—U6 均已完成；U7 进行中：component-file、component-cache、component-message 已完成（含 base 的 BitcoinSchemaDto 缺陷修复），api-common 与外围集成待实施。",
+  "activeItem": null,
+  "note": "Boot 4 / Java 25 升级、U0 测试基线与 U1—U9 全部完成。全量单元 841 例 0/0/0、23 模块 gaps 全 0；全量集成 18 类 124 例通过。唯一保留项是 SFTPFileClient 的 doInit 成功构造行（2 行），因无可用 SSH 服务，按胡先生决定按现状收尾。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -425,7 +425,7 @@
       "id": "unit-u9-acceptance",
       "name": "U9 全量验收与交付",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "unit-u8-tools"
       ],
@@ -434,9 +434,10 @@
         "全量单元验收 `verify-unit.py --mode accept --scope all` 通过（evidence/20260929T155751Z/）：25 个 POM、23 个源码模块、841 例，0 failures/0 errors/0 skipped，全部模块 gaps=0。",
         "由 Surefire XML 独立核算复核：177 个测试类、841 例、0/0/0；由 JaCoCo XML 独立核算：LINE 5469/115、BRANCH 1255/28、METHOD 1477/38，未覆盖部分全部落在 42 类 57 条精确登记的例外内。",
         "全量集成测试通过：18 个测试类、124 例（含新增的 FTP 7 例），共享中间件无 it_u* 残留。",
-        "报告已更新至含 FTP 结果的版本。"
+        "报告已更新至含 FTP 结果的版本。",
+        "2026-09-29 胡先生决定：SFTP 集成暂不处理，按现状收尾。SftpFileClient.doInit 的 2 行继续按精确清单登记为覆盖例外，报告明确记录为外部环境阻塞；其余 22 个模块的验收结论不受影响。"
       ],
-      "statusNote": "2026-09-29：全量单元与集成验收通过，报告已交付；仅 SFTP 集成因无可用 SSH 服务未完成。"
+      "statusNote": "2026-09-29：全量单元与集成验收通过，报告已交付；胡先生决定 SFTP 集成按现状收尾，本项验收完成。"
     }
   ],
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
