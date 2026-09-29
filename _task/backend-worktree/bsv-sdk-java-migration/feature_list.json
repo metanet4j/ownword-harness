@@ -14,8 +14,8 @@
       "跨工程发布、部署或远端推送"
     ]
   },
-  "activeItem": "migration-impl-transaction-base",
-  "nextItem": "migration-impl-transaction-base",
+  "activeItem": "migration-impl-transaction-beef",
+  "nextItem": "migration-impl-transaction-beef",
   "features": [
     {
       "id": "migration-env",
@@ -1098,7 +1098,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "transaction/primitives：交易构造、费率与签名格式",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-script-model",
         "migration-impl-http-chain",
@@ -1149,7 +1149,10 @@
       ],
       "evidence": [
         "目标提交 0a6a81e；固定 TS/Java 原用例 74/74、115 条实际断言逐项一致；.cache/evidence/transaction-base-local-parity-root.json。",
-        "干净累计提交 4da4459：相关 16 类 Maven 402/402 通过；任务级固定 TS/Java 逐断言对照见 .cache/evidence/transaction-base-clean-parity.json。"
+        "当前 Java 来源 21d6cded（提交 e741afa）：五个原测试文件全部为标准双侧同输入局部——fee-model-satoshis-per-kilobyte 18 例/35 输入/21 断言、live-policy 8/25/17、transaction-ef-cache 4/36/20、transaction-additional 20/24/27、transaction-signature-additional 24/30/30，合计 74 例/150 条输入/115 条断言；五项 local-evidence-gate verify 与 tamper 全部通过，full-evidence-preflight 记为 currentCaptureVerified。",
+        "聚焦 clean test 74/74（TransactionSignatureAdditionalTest 24、TransactionAdditionalTest 20、TransactionEfCacheTest 4、LivePolicyTest 8、SatoshisPerKilobyteTest 18），失败/错误/跳过均为 0。",
+        "任务级同来源逐断言对照 .cache/evidence/transaction-base-same-source-20260929/task-parity.json：74/74 例、115/115 条断言，缺失、额外与未比较项均为 0，输入摘要与断言身份顺序逐用例核对，比较规则复用 audit-tests.py 的固定实现。",
+        "ParityRecorder 的 Map 观察对齐采集器（toBeDefined 下 Map 只保留条目值），修正 cache.hashOutputsSingle 的跨语言可观察差异。"
       ],
       "modules": [
         "primitives",
@@ -1164,7 +1167,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/transaction-base-clean-parity.json"
+        "compareReport": ".cache/evidence/transaction-base-same-source-20260929/task-parity.json"
       }
     },
     {
