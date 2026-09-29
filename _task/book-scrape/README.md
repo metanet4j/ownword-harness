@@ -38,6 +38,8 @@ python3 lib/verify_book.py "<书名-英文名>"
 
 目录里的链接可能指向错误页面（站点自身的笔误），抓完先用 `scan_questions.py` 看问答编号是否连续，有缺口就按 sitemap 找回正确地址再补抓。
 
+整页导出的书（一个 HTML 装全书，如 31team.org 的 Drupal book export）：把导出的 HTML 放进该书 `raw/` 目录，在 manifest 里写好 `inline` 段与每章的 `selector`，其余步骤相同。
+
 `fetch_html.py` 支持断点续抓：已存在且大于 20 KB 的章节会跳过，可用 `--start N` 指定起始序号、`--limit N` 先抓前几章验证选择器。
 
 ## manifest.json 字段
@@ -49,6 +51,7 @@ python3 lib/verify_book.py "<书名-英文名>"
 | `site.title_selector` | 章节标题选择器，默认 `h1.entry-title` |
 | `site.audio_selector` | 朗读音频地址选择器，默认 `audio source[src]`，命中后写入章节 Markdown 的引用行 |
 | `site.drop_selector` | 转换前丢弃的元素，默认 `audio, .wp-audio-shortcode, script, style, .sharedaddy, .jp-relatedposts` |
+| `inline` | 整页导出模式（如 Drupal 的 `book/export/html/N`）：全书在一个 HTML 里，按 `selector_field`/`title_selector`/`body_selector` 切章，`fetch_html.py` 会自动跳过网络抓取 |
 | `docx` | 排版参数：中英文字体、字号、行距、纸张、页边距、页码、输出文件名 |
 | `chapters[]` | `part`（部分标题，可空）、`category`（分类标题，可空，用于问答体这类有二级归类的书）、`title`（章节标题）、`slug`（文件名，建议 `序号-英文短名`）、`url` |
 

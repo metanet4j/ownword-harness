@@ -38,15 +38,10 @@ class ChapterConverter(MarkdownConverter):
         return text
 
 
-def extract(path, site):
-    soup = BeautifulSoup(open(path, encoding='utf-8').read(), 'lxml')
-    title_el = soup.select_one(site['title_selector']) if site['title_selector'] else None
-    title = title_el.get_text(strip=True) if title_el else ''
-    content = soup.select_one(site['content_selector'])
-    if content is None:
-        return title, '', []
-    audio = [a['src'] for a in content.select(site['audio_selector'])]
-    for tag in content.select(site['drop_selector']):
+def extract_element(content):
+    """从一个正文容器取出 (音频地址列表, 清洗后的 HTML)。"""
+    audio = [a['src'] for a in content.select('audio source[src]')]
+    for tag in content.select('audio, .wp-audio-shortcode, script, style, .sharedaddy, .jp-relatedposts'):
         tag.decompose()
     # <em>/<i> 会被转成 *…*，与正文里作为书名号的 * 混在一起造成解析歧义：直接取纯文本
     for tag in content.select('em, i'):
@@ -57,66 +52,63 @@ def extract(path, site):
     # 正文里的超链接只保留可读文字，链接地址已在页面出处中给出
     for tag in content.find_all('a'):
         tag.replace_with(tag.get_text())
-    return title, content.decode_contents(), audio
+    return audio, content.decode_contents()
+
+
+def extract(path, site):
+    soup = BeautifulSoup(open(path, encoding='utf-8').read(), 'lxml')
+    title_el = soup.select_one(site['title_selector']) if site['title_selector'] else None
+    title = title_el.get_text(strip=True) if title_el else ''
+    content = soup.select_one(site['content_selector'])
+    if content is None:
+        return title, '', []
+    audio, inner = extract_element(content)
+    return title, inner, audio
 
 
 BOLD_RE = re.compile(r'(?<!\\)\*\*(.+?)(?<!\\)\*\*', re.S)
 
 
-def align_bold_markers(md):
-    """按块（标题、段落、列表项）两两配对 `**`，配不上的按字面文字去掉。
+def normalize_bold_markers(md):
+    """只保留块内成对、且都紧贴文字的 `**`，其余按字面删除。
 
-    源站部分段落的强调标签跨越了标题与正文，转换后会出现「段首一个 `**`、
-    段中一个 `**`」这种半截标记；只要块内 `**` 个数为奇数，这一块就是错位的，
-    整块去标记比留下半截更接近原意。
+    畸形标记有两个来源：源页面强调标签跨了块（`****文字**`），以及正文里本来
+    就有的裸星号（如 `改革宗信仰*(The Reformed Faith)`）被凑成了假配对。
+    健壮的粗体标记两侧都紧贴非空白字符，且块内个数为偶数。
     """
     out = []
     for line in md.split('\n'):
-        runs = list(re.finditer(r'(?<!\\)\*\*', line))
-        if len(runs) % 2:
-            line = re.sub(r'(?<!\\)\*\*', '', line)
-        out.append(line)
+        runs = [(m.start(), m.end()) for m in re.finditer(r'(?<!\\)\*\*', line)]
+        keep = []
+        if len(runs) % 2 == 0:
+            for i in range(0, len(runs) - 1, 2):
+                start, end = runs[i]
+                nxt_start, nxt_end = runs[i + 1]
+                opens = end < len(line) and line[end] not in ' \t'
+                closes = nxt_start > 0 and line[nxt_start - 1] not in ' \t'
+                if opens and closes and line[end:nxt_start].strip():
+                    keep.extend((i, i + 1))
+        if len(keep) == len(runs):
+            out.append(line)
+            continue
+        buf, pos = [], 0
+        for i, (start, end) in enumerate(runs):
+            buf.append(line[pos:start])
+            buf.append(line[start:end] if i in keep else '')
+            pos = end
+        buf.append(line[pos:])
+        out.append(''.join(buf))
     return '\n'.join(out)
 
 
-def normalize_bold_markers(md):
-    """把源页面强调标签造成的畸形粗体标记还原成成对的 `**粗体**`。
+def escape_literal_asterisks(md):
+    """把单星号转义为字面量。
 
-    形如 `#### 解读1：****「免我们的债」**意味着什么？**`：三个 `**` 里只有一对
-    是真正的粗体。先把按出现顺序能配成对的留下，配不上的交给 align_bold_markers。
+    文档里的裸星号都来自源文（如「改革宗信仰*(The Reformed Faith)」这种原文标注），
+    转义后 Markdown 显示为 `*`，Word 生成器再把 `\\*` 还原成字面星号。
     """
-    md = re.sub(r'\*{3,}', '**', md)
-    runs = [(m.start(), m.end()) for m in re.finditer(r'(?<!\\)\*\*', md)]
-    keep = set()
-    for i in range(0, len(runs) - 1):
-        if i in keep or i + 1 in keep:
-            continue
-        start, end = runs[i]
-        nxt_start, nxt_end = runs[i + 1]
-        if not md[end:nxt_start].strip():
-            continue                      # 中间没有内容，不成对
-        if md[end] in ' \t' or md[nxt_start - 1] in ' \t':
-            continue                      # 标记内侧留白，不成对
-        keep.update((i, i + 1))
-    out, pos = [], 0
-    for i, (start, end) in enumerate(runs):
-        out.append(md[pos:start])
-        out.append(md[start:end] if i in keep else '')
-        pos = end
-    out.append(md[pos:])
-    return ''.join(out)
-
-
-def escape_stray_asterisks(md):
-    """转义 **粗体** 之外的裸星号，避免书名等文字被 Markdown 误解析为强调。"""
-    keep = [(m.start(), m.end()) for m in BOLD_RE.finditer(md)]
-    out, pos = [], 0
-    for start, end in keep:
-        out.append(md[pos:start].replace('*', '\\*'))
-        out.append(md[start:end])
-        pos = end
-    out.append(md[pos:].replace('*', '\\*'))
-    return ''.join(out)
+    return re.sub(r'(?<!\\)(\*\*|\*)',
+                  lambda m: '**' if m.group(0) == '**' else '\\*', md)
 
 
 def normalize_heading_levels(md):
@@ -197,21 +189,51 @@ def chapter_filename(ch):
     return f"{ch['slug']}.md"
 
 
+def load_inline_parts(manifest):
+    """整页导出模式：一本书只有一个 HTML（如 Drupal 的 book/export/html），
+    按容器选择器切成多章，返回 [{chapter, page_title, inner, audio}]。"""
+    inline = manifest['inline']
+    path = f"raw/{inline['file']}"
+    if not os.path.exists(path):
+        raise SystemExit(f'缺少整页导出文件: {path}')
+    soup = BeautifulSoup(open(path, encoding='utf-8').read(), 'lxml')
+    out = []
+    for ch in manifest['chapters']:
+        node = soup.select_one(ch[inline.get('selector_field', 'selector')])
+        if node is None:
+            continue
+        title_el = node.select_one(inline.get('title_selector', 'h1')) if inline.get('title_selector', 'h1') else None
+        page_title = title_el.get_text(strip=True) if title_el else ch['title']
+        body_el = node.select_one(inline['body_selector'])
+        if body_el is None:
+            continue
+        audio, inner = extract_element(body_el)
+        out.append({'chapter': ch, 'page_title': page_title, 'inner': inner, 'audio': audio})
+    return out
+
+
 def main():
     bookkit.book_dir(sys.argv[1] if len(sys.argv) > 1 else None)
     mf = bookkit.load_manifest()
     site = {**SITE_DEFAULTS, **mf.get('site', {})}
+    inline_parts = load_inline_parts(mf) if mf.get('inline') else None
 
     doc_parts, missing = [], []
     for ch in mf['chapters']:
-        src = f"raw/{ch['slug']}.html"
-        if not os.path.exists(src):
-            missing.append(ch['slug'])
-            continue
-        page_title, inner, audio = extract(src, site)
-        body = escape_stray_asterisks(align_bold_markers(normalize_bold_markers(
-            normalize_heading_levels(
-                tidy(ChapterConverter(heading_style='ATX', bullets='-').convert(inner))))))
+        if inline_parts is not None:
+            part = next((p for p in inline_parts if p['chapter'] is ch), None)
+            if part is None:
+                missing.append(ch['slug'])
+                continue
+            page_title, inner, audio = part['page_title'], part['inner'], part['audio']
+        else:
+            src = f"raw/{ch['slug']}.html"
+            if not os.path.exists(src):
+                missing.append(ch['slug'])
+                continue
+            page_title, inner, audio = extract(src, site)
+        body = escape_literal_asterisks(normalize_bold_markers(normalize_heading_levels(
+            tidy(ChapterConverter(heading_style='ATX', bullets='-').convert(inner)))))
         heading = f"# {ch['title']}"
         # 页面标题形如「第一章 个人查经是必须的 Personal Bible Study Is a Must」
         subtitle = page_title[len(ch['title']):].strip() if page_title.startswith(ch['title']) else ''
@@ -236,8 +258,8 @@ def main():
     # 总目录：每章一个文件，目录里的链接直接指向该文件
     lines = [f"# {mf['book']}\n"]
     if mf.get('author'):
-        lines.append(f"作者：{mf['author']}" + (f"（{mf['title_en']}，{mf['publisher_en']}）  "
-                                              if mf.get('title_en') else '  '))
+        extra = '，'.join(x for x in (mf.get('title_en'), mf.get('publisher_en')) if x)
+        lines.append(f"作者：{mf['author']}" + (f"（{extra}）  " if extra else '  '))
     if mf.get('translator'):
         lines.append(f"翻译：{mf['translator']}  ")
     if mf.get('source'):

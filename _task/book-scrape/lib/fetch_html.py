@@ -26,6 +26,16 @@ def curl(url, out):
 
 
 def fetch(ch, out, start_delay=20):
+    url = ch.get('url')
+    if not url:
+        raise SystemExit(f"{ch['slug']} 没有 url：整页导出模式请用 --limit 0 之类的本地模式，"
+                         "或先手工放置 raw/ 文件")
+    if url.startswith('file:'):
+        import shutil
+        src = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..',
+                           url[len('file:'):].lstrip('/'))
+        shutil.copyfile(src, out)
+        return os.path.getsize(out), 1
     delay = start_delay
     for attempt in range(1, 12):
         code, err = curl(ch['url'], out)
@@ -35,7 +45,7 @@ def fetch(ch, out, start_delay=20):
         print(f"    {ch['slug']}: HTTP {code} size={size} {err[:80]} -> sleep {delay}s", flush=True)
         time.sleep(delay)
         delay = min(int(delay * 1.8), 300)
-    raise RuntimeError(f'gave up on {ch["url"]}')
+    raise RuntimeError(f'gave up on {url}')
 
 
 def parse_opt(flag, default):
