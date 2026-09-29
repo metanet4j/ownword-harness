@@ -129,6 +129,12 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 采集推进（20260930 04:00）
+
+- `default-http-client` 3/5/10 ✓、`private-key` **7/55/40021** ✓（10,000 次循环 × 4 断言 = 4 万断言实例，验证了“输入取样 + 断言逐执行登记”的 1:1 口径在现有工具链下可跑通；最终全量的断言文件会相应变大，属预期）。
+- spend/http 修复批只剩 `chronicle`、`normative-vectors` 重采；BEEF 字节差异诊断在跑第 4 轮采集。
+- 运行产物 96 个局部；局部登记 144 个。
+
 ### peer 生产缺陷授权修复（20260930 03:45）
 
 `peer` 代理定位到 `Peer.processGeneralMessage`（`auth/Peer.java:662`）的真实移植缺陷：Java 用 `for (var callback : generalCallbacks.values())` 遍历，而原测试的监听器会在回调里 `stopListeningForGeneralMessages` 自己 → `ConcurrentModificationException`，后续监听器不再执行、消息丢失、用例挂死；TS 的 `for (const callback of …values())` 允许迭代中删除，故 TS 正常。
