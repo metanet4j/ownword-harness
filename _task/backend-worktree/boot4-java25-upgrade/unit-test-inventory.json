@@ -6374,72 +6374,6 @@
               ]
             },
             {
-              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/common/CommonTest.java",
-              "classification": "unit",
-              "methods": [
-                {
-                  "name": "testFormatUtxoJson",
-                  "returnType": "void",
-                  "line": 15,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testInteger",
-                  "returnType": "void",
-                  "line": 22,
-                  "classification": "unit"
-                }
-              ]
-            },
-            {
-              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/common/StateCalculatorTest.java",
-              "classification": "unit",
-              "methods": [
-                {
-                  "name": "testCalculateStatusWithNoLogs",
-                  "returnType": "void",
-                  "line": 15,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testCalculateStatusWithUnfollowLogs",
-                  "returnType": "void",
-                  "line": 27,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testCalculateStatusWithFollowLogs",
-                  "returnType": "void",
-                  "line": 41,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testCalculateStatusWithUnfollowAndFollowLogs",
-                  "returnType": "void",
-                  "line": 55,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testCalculateStatusWithUnfollowAndMultipleFollowLogs",
-                  "returnType": "void",
-                  "line": 69,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testCalculateStatusWithMultipleUnfollowAndFollowLogsFollowCountGreaterThanUnfollowCount",
-                  "returnType": "void",
-                  "line": 84,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testCalculateStatusWithMultipleUnfollowAndFollowLogsUnfollowCountGreaterThanFollowCount",
-                  "returnType": "void",
-                  "line": 101,
-                  "classification": "unit"
-                }
-              ]
-            },
-            {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/compltetx/ComplteTxFactoryTest.java",
               "classification": "external",
               "methods": [
@@ -6447,19 +6381,28 @@
                   "name": "testFollow",
                   "returnType": "void",
                   "line": 41,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.component.tx.DefaultCompleteTxFactoryContractTest"
+                  ]
                 },
                 {
                   "name": "testUnFollow",
                   "returnType": "void",
                   "line": 47,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.component.tx.DefaultCompleteTxFactoryContractTest"
+                  ]
                 },
                 {
                   "name": "testPostAndTags",
                   "returnType": "void",
                   "line": 52,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.component.tx.DefaultCompleteTxFactoryContractTest"
+                  ]
                 }
               ]
             },
@@ -6471,7 +6414,11 @@
                   "name": "testParseTx",
                   "returnType": "void",
                   "line": 22,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.tx.convertor.AIPConverterContractTest",
+                    "com.metanet4j.tx.convertor.MAPConverterContractTest"
+                  ]
                 }
               ]
             },
@@ -6483,7 +6430,10 @@
                   "name": "test",
                   "returnType": "void",
                   "line": 43,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BobTxoConversionContractTest"
+                  ]
                 },
                 {
                   "name": "testAddress",
@@ -6877,19 +6827,29 @@
                   "name": "test",
                   "returnType": "void",
                   "line": 32,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.tx.convertor.PlanariaBapConvertorContractTest"
+                  ]
                 },
                 {
                   "name": "testIdConvert",
                   "returnType": "void",
                   "line": 40,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.tx.convertor.BapModelToDtoConverterContractTest"
+                  ]
                 },
                 {
                   "name": "testAppendData",
                   "returnType": "void",
                   "line": 50,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.tx.convertor.PlanariaBapConvertorContractTest",
+                    "com.metanet4j.tx.convertor.BapModelToDtoConverterContractTest"
+                  ]
                 }
               ]
             },
@@ -6901,61 +6861,91 @@
                   "name": "test",
                   "returnType": "void",
                   "line": 30,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.tx.convertor.PlanariaBsocialConvertorContractTest"
+                  ]
                 },
                 {
                   "name": "testBPP",
                   "returnType": "void",
                   "line": 38,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.tx.convertor.PlanariaBsocialConvertorContractTest"
+                  ]
                 },
                 {
                   "name": "testB",
                   "returnType": "void",
                   "line": 45,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest"
+                  ]
                 },
                 {
                   "name": "testTip",
                   "returnType": "void",
                   "line": 51,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.tx.convertor.BsocialModelToDtoConverterContractTest"
+                  ]
                 },
                 {
                   "name": "testPost",
                   "returnType": "void",
                   "line": 57,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest"
+                  ]
                 },
                 {
                   "name": "testFollow",
                   "returnType": "void",
                   "line": 63,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest"
+                  ]
                 },
                 {
                   "name": "testRepost",
                   "returnType": "void",
                   "line": 69,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest"
+                  ]
                 },
                 {
                   "name": "testLike",
                   "returnType": "void",
                   "line": 75,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest"
+                  ]
                 },
                 {
                   "name": "testBigData",
                   "returnType": "void",
                   "line": 85,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest"
+                  ]
                 },
                 {
                   "name": "testSdkPost",
                   "returnType": "void",
                   "line": 91,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest"
+                  ]
                 }
               ]
             },
@@ -7039,25 +7029,29 @@
                   "name": "testInsertOne",
                   "returnType": "void",
                   "line": 34,
-                  "classification": "external"
+                  "classification": "external",
+                  "manualReason": "手动：区块同步依赖外部全节点与主网数据，单元层由 component-tx 的DefaultCompleteTxFactoryContractTest 覆盖交易组装，块同步本身不在单元范围"
                 },
                 {
                   "name": "testQueryByStatus",
                   "returnType": "void",
                   "line": 54,
-                  "classification": "external"
+                  "classification": "external",
+                  "manualReason": "手动：同上，BlockTaskService 未在其它模块有单元替身，属主网块同步的存储层封装"
                 },
                 {
                   "name": "testUpdateStatusByblkhash",
                   "returnType": "void",
                   "line": 61,
-                  "classification": "external"
+                  "classification": "external",
+                  "manualReason": "手动：同上"
                 },
                 {
                   "name": "testGetLastUpdateList",
                   "returnType": "void",
                   "line": 66,
-                  "classification": "external"
+                  "classification": "external",
+                  "manualReason": "手动：同上"
                 }
               ]
             },
@@ -7067,76 +7061,14 @@
               "methods": []
             },
             {
-              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/BapBaseTest.java",
-              "classification": "unit",
-              "methods": [
-                {
-                  "name": "testWordList",
-                  "returnType": "void",
-                  "line": 28,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testBapSeed",
-                  "returnType": "void",
-                  "line": 40,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testBapDefault",
-                  "returnType": "void",
-                  "line": 52,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testFromSignatureAddress",
-                  "returnType": "void",
-                  "line": 62,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testBapAddress",
-                  "returnType": "void",
-                  "line": 71,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testEncrypt",
-                  "returnType": "void",
-                  "line": 88,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testDecrypt",
-                  "returnType": "void",
-                  "line": 97,
-                  "classification": "unit"
-                }
-              ]
-            },
-            {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/BaseDataTest.java",
-              "classification": "unit",
-              "methods": [
-                {
-                  "name": "testFollowXpriv",
-                  "returnType": "void",
-                  "line": 23,
-                  "classification": "unit"
-                }
-              ]
+              "classification": "fixture",
+              "methods": []
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/BitcoinschemaTransactionTest.java",
-              "classification": "invalid-test-signature",
-              "methods": [
-                {
-                  "name": "testBsocialReply",
-                  "returnType": "String",
-                  "line": 187,
-                  "classification": "invalid-test-signature"
-                }
-              ]
+              "classification": "fixture",
+              "methods": []
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/CommonTest.java",
@@ -7217,7 +7149,28 @@
                   "name": "testAddUtxo",
                   "returnType": "void",
                   "line": 29,
-                  "classification": "external"
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.component.tx.DefaultUtxoResolverContractTest"
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/BsocialReplyTransactionContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "bsocialReplyTransactionIsAssembledAndVerifiesLocally",
+                  "returnType": "void",
+                  "line": 21,
+                  "classification": "unit"
+                },
+                {
+                  "name": "differentFixturesProduceDifferentTransactions",
+                  "returnType": "void",
+                  "line": 28,
+                  "classification": "unit"
                 }
               ]
             }
@@ -9526,7 +9479,50 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "mybatispuls-generator/src/test/java/io/metanet/mybatispuls/generator/MybatisPulsCodeGeneratorTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "scannerReturnsTheTypedValue",
+                  "returnType": "void",
+                  "line": 33,
+                  "classification": "unit"
+                },
+                {
+                  "name": "scannerTrimsToTheFirstLineAndIgnoresTrailingInput",
+                  "returnType": "void",
+                  "line": 39,
+                  "classification": "unit"
+                },
+                {
+                  "name": "scannerStopsAtTheFirstWhitespace",
+                  "returnType": "void",
+                  "line": 45,
+                  "classification": "unit"
+                },
+                {
+                  "name": "scannerRejectsALineWithNoToken",
+                  "returnType": "void",
+                  "line": 53,
+                  "classification": "unit"
+                },
+                {
+                  "name": "scannerRejectsWhitespaceOnlyInput",
+                  "returnType": "void",
+                  "line": 64,
+                  "classification": "unit"
+                },
+                {
+                  "name": "scannerRejectsAnExhaustedStream",
+                  "returnType": "void",
+                  "line": 71,
+                  "classification": "unit"
+                }
+              ]
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",

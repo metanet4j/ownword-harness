@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "unit-u7-adapters",
+  "activeItem": "unit-u9-acceptance",
   "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1—U6 均已完成；U7 进行中：component-file、component-cache、component-message 已完成（含 base 的 BitcoinSchemaDto 缺陷修复），api-common 与外围集成待实施。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
@@ -378,7 +378,7 @@
       "id": "unit-u7-adapters",
       "name": "U7 外围能力",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "unit-u6-business"
       ],
@@ -402,27 +402,40 @@
         "Kafka 集成记录的行为：topic 名非法时 KafkaTemplate 同步抛 KafkaException(\"Send failed\")，未返回 future，whenComplete 从未注册，failConsumer 与默认失败日志都不执行；bootstrap-servers 在配置中以 List 保存。",
         "未完成：FTP/SFTP 的本地可控服务集成。共享基础设施无 FTP/SFTP 服务；尝试用 JDK 自带 socket 自研最小 FTP 服务端已能覆盖 doInit 的连接建立与路径规范化，但数据通道与 commons-net 的 storeFile 无法可靠互通（客户端发完数据不关闭写侧连接，协议无结束标记），手写实现即使跑通也不代表真实 FTP 行为，故不采用。FtpFileClient/SftpFileClient 的 doInit 成功构造行维持按精确清单登记（unit-coverage-exceptions.json），等待可用的真实 FTP/SFTP 服务后再补。"
       ],
-      "statusNote": "2026-09-29：四个模块的单元测试全部严格验收通过（file 59、cache 34、message 31、api-common 59，均 gaps=0），并完成 Redis 与 Kafka 实连集成、修复 Redisson 配置装配缺陷；仅 FTP/SFTP 的本地可控服务集成未完成，原因见证据末条。"
+      "statusNote": "2026-09-29：四模块单元全部严格验收通过（file 59、cache 34、message 31、api-common 59，均 gaps=0），Redis 与 Kafka 实连集成完成并修复 Redisson 配置装配缺陷。仅 FTP/SFTP 的本地可控服务集成未完成，无可用 FTP/SFTP 服务，不阻塞 U8/U9。"
     },
     {
       "id": "unit-u8-tools",
       "name": "U8 工具与测试应用收口",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "unit-u7-adapters"
       ],
-      "evidence": []
+      "evidence": [
+        "mybatispuls-generator 提交 774e49c：6/0/0/0，覆盖 scanner 的正常输入、多余行、空行/纯空白/输入流耗尽三类拒绝路径；main 及其 6 个配置 lambda 按精确清单登记（交互式控制台输入 + 真实 MySQL + 覆盖源码目录，U8 完成条件之一即不连库不覆盖源码）。",
+        "metanet4j-component-test 提交 3078453/559f530：32→14 例、0/0/0、gaps=0。修复 testDecrypt 硬编码非法密文（Base32 解码后无 BIE1 魔数）与 BitcoinSchemaTransactionTest 标 @Test 却返回 String 导致 JUnit 拒绝整类的问题。",
+        "夹具下沉核对：component-test 的 StateCalculatorTest、BapBaseTest 测的分别是 component-common 的 StateHelper 与 sdk 的 BapBase，二者已有更完整的契约测试，删除重复副本；两个只打印不断言的类（common/CommonTest、BaseDataTest#testFollowXpriv）一并清理。",
+        "集成测试清单核对：15 个测试类、101 例，全部连共享中间件并按轮清理；发现并修复 Redis 集成用例绕过键登记导致的 4 个键残留（提交 13155bc）。",
+        "verify-unit.py 类级计数核对修正：JaCoCo 类级 LINE 不重复计入 lambda 体内的行，此前简单求和会让任何含 lambda 的例外被误判。"
+      ],
+      "statusNote": "2026-09-29：两模块严格验收 gaps=0，集中纯逻辑测试已下沉到归属模块，集成测试清单核对完成。"
     },
     {
       "id": "unit-u9-acceptance",
       "name": "U9 全量验收与交付",
       "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "unit-u8-tools"
       ],
-      "evidence": []
+      "evidence": [
+        "全量单元验收 `verify-unit.py --mode accept --scope all` 通过（evidence/20260929T150657Z/）：25 个 POM、23 个源码模块、840 例，0 failures/0 errors/0 skipped，全部模块 gaps=0。",
+        "由 Surefire XML 独立核算复核：177 个测试类、840 例、0/0/0；由 JaCoCo XML 独立核算复核：LINE 5467/117、BRANCH 1255/28、METHOD 1477/38，未覆盖部分全部落在 43 类 58 条精确登记的例外内。",
+        "全量集成测试通过：15 个测试类、101 例，共享中间件无 it_u* 残留。",
+        "交付报告：doc/验收报告-单元测试全覆盖-20260929-232313.md。"
+      ],
+      "statusNote": "2026-09-29：全量单元与集成验收通过，报告已交付；仅 FTP/SFTP 集成一项因无服务未完成。"
     }
   ],
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",

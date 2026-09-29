@@ -593,6 +593,103 @@
           ]
         }
       ]
+    },
+    "mybatispuls-generator": {
+      "entries": [
+        {
+          "class": "io/metanet/mybatispuls/generator/MybatisPulsCodeGenerator",
+          "reason": "工具类的隐式默认构造器（无行为，与 component-common 工具类同一口径）；scanner 里 StringUtils.isNotBlank(ipt) 的假分支：Scanner.next() 按空白分词，拿到的 token 不可能是空白串，判空分支不可达；main(String[]) 及其 6 个配置 lambda：main 是连接真实 MySQL 的交互式入口，先用 scanner 从控制台读模块名与表名，再以硬编码 JDBC URL/账号调用 FastAutoGenerator.execute() 生成并覆盖源码。单元环境既无交互输入也无该库连接，且执行它会写入 PROJECT_PATH 下的源码目录（U8 完成条件之一即「生成工具不连接真实数据库或覆盖源码」）（逐方法值为 JaCoCo 实测；类级 LINE=26 小于逐方法和=32，差额 6 即 lambda 体内被外层 main 重复计入的行）",
+          "missed": [
+            {
+              "method": "<init>",
+              "line": 21,
+              "lineMissed": 1,
+              "methodMissed": 1,
+              "branchMissed": 0
+            },
+            {
+              "method": "scanner",
+              "line": 34,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
+            },
+            {
+              "method": "main",
+              "line": 48,
+              "lineMissed": 11,
+              "methodMissed": 1,
+              "branchMissed": 0
+            },
+            {
+              "method": "lambda$main$0",
+              "line": 53,
+              "lineMissed": 4,
+              "methodMissed": 1,
+              "branchMissed": 0
+            },
+            {
+              "method": "lambda$main$1",
+              "line": 58,
+              "lineMissed": 3,
+              "methodMissed": 1,
+              "branchMissed": 0
+            },
+            {
+              "method": "lambda$main$2",
+              "line": 62,
+              "lineMissed": 7,
+              "methodMissed": 1,
+              "branchMissed": 0
+            },
+            {
+              "method": "lambda$main$3",
+              "line": 70,
+              "lineMissed": 1,
+              "methodMissed": 1,
+              "branchMissed": 0
+            },
+            {
+              "method": "lambda$main$4",
+              "line": 72,
+              "lineMissed": 1,
+              "methodMissed": 1,
+              "branchMissed": 0
+            },
+            {
+              "method": "lambda$main$5",
+              "line": 72,
+              "lineMissed": 4,
+              "methodMissed": 1,
+              "branchMissed": 0
+            }
+          ]
+        }
+      ]
+    },
+    "metanet4j-component-test": {
+      "entries": [
+        {
+          "class": "com/metanet4j/component/test/Metanet4jComponentTestApplication",
+          "reason": "测试应用入口。main(String[]) 启动整个 Spring 上下文（含 Feign、Mongo、ES 等外部依赖），单元范围只用 @SpringBootTest 验证上下文可加载，不单独拉起进程；隐式构造器同样只在 Spring 实例化路径上被调用（与工具类同一口径）",
+          "missed": [
+            {
+              "method": "<init>",
+              "line": 25,
+              "lineMissed": 1,
+              "methodMissed": 1,
+              "branchMissed": 0
+            },
+            {
+              "method": "main",
+              "line": 28,
+              "lineMissed": 2,
+              "methodMissed": 1,
+              "branchMissed": 0
+            }
+          ]
+        }
+      ]
     }
   }
 }
