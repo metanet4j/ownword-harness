@@ -62,6 +62,16 @@ SA9：`locking-unlocking-script` 12 例、`script-additional` 14 例、`binary-f
 | B7 | script-model（65） | Script.test(39，进行中)、Script.additional(14)、LockingUnlockingScript(12) | — |
 | B8 | curve（38）／bignumber（50）／keys-signatures（73）／symmetric（22）／hash-random（39）／compat（9） | Curve.unit(18)、Curve.additional(20)、BigNumber.additional(19)、ReductionContext(29，进行中)、PublicKey(14)、PublicKey.additional(32)、ECDSA(15)、Schnorr(12)、SymmetricKey(15)、Hash(17，进行中)、ECIES(9) | 已完成事项的补强 |
 
+## 全量探针映射的三类权威来源（20260929 核实）
+
+`build-full-run-probes.py` 生成 `full-run-probes.json` 后仍有 46 个局部未解析，来源如下：
+
+1. **直写型 16 个**（`auth-fetch-additional-*`／`auth-fetch-primary-*`，`specialized-local` + `deriveCatalogFromPlan`）：探针与局部同名 `capture-<局部名>.cjs`，自己写 `EVIDENCE_*` 最终行，无需额外变量；原文件由该局部 `input_plan` 的 caseId 反查。
+2. **适配器 replay 型 17 个**（arc-*、broadcaster、cached-keyderiver、fee-model、http-wallet-json、keyderiver、protowallet*、mnemonic*、wallet-property、werr-constructors、三类字节编码、validation-helpers、origin-header5、drbg29 等）：探针与语料变量都在适配器 TS 分支的 `env[...] = ...` 里；raw 型还需复用适配器里的 `prepare-*-inputs.py emit-ts` 转换。
+3. **命名不规则的 13 个**：权威来源是该局部的 `*-local-gate.py`（含探针、catalog／plan 与期望报告），逐个取用；确实没有可复用探针的必须在严格模式下报错，不得猜测。
+
+`run-full-ts-capture.py` 需要采集后校验：所有原始轨迹存在且非空、raw 型转换成功，任一缺失即整轮非零退出（防止“跑完但没有输入”的假绿）。
+
 ## 全量分派策略（已拍板）
 
 `run-full-ts-capture.py` 必须把三类探针都纳入分派：直写型、raw 型（再经 `prepare-*-local.py emit-ts` 转换）、外部语料型（由分派器按适配器 TS 分支的 `env[...]` 设置 `MIGRATION_*_RANDOM`／`_VECTOR_CATALOG`／`_META`／`_TS_CLOCK` 等语料变量）。**默认严格**：无法解析探针或语料的原文件必须让整轮非零退出并打印缺口，同时写 `unmapped-files.jsonl`／`unresolved-probes.json`；`--allow-unresolved` 只允许子集自测使用，不得出现在 `fullRun.tsCommand` 里。全量运行不允许出现“绿但不完整”。
