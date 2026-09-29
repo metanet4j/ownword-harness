@@ -604,18 +604,19 @@
       "catalog": ".cache/evidence/fee-model-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/fee-model-plan-20260927/mapping.json",
       "input_plan": ".cache/evidence/fee-model-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/fee-model-formal-ts-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/fee-model-formal-ts-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/fee-model-formal-ts-20260927/manifest.json",
+      "ts_inputs": ".cache/evidence/fee-model-satoshis-standard-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/fee-model-satoshis-standard-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/fee-model-satoshis-standard-20260929/ts-run.json",
       "ts_report": [
-        ".cache/evidence/fee-model-formal-ts-20260927/jest.json"
+        ".cache/evidence/fee-model-satoshis-standard-20260929/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/fee-model-formal-java-ae5d421-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/fee-model-formal-java-ae5d421-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/fee-model-formal-java-ae5d421-20260927/manifest.json",
+      "java_inputs": ".cache/evidence/fee-model-satoshis-standard-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/fee-model-satoshis-standard-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/fee-model-satoshis-standard-20260929/java-run.json",
       "java_report": [
-        ".cache/evidence/fee-model-formal-java-ae5d421-20260927/surefire.xml"
-      ]
+        ".cache/evidence/fee-model-satoshis-standard-20260929/java-surefire.xml"
+      ],
+      "capture": "capture-fee-model-side.py"
     },
     {
       "name": "transaction-chain-tracker",

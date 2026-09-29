@@ -29,10 +29,12 @@ def main():
     replay = args.replay.resolve()
     report = args.report.resolve()
     folder = report.parent
-    raw = folder / 'calls.raw.jsonl'
-    assertions = folder / 'assertions.raw.jsonl'
+    # 标准双侧采集两侧共用同一运行目录，原始轨迹必须按侧别分开命名。
+    raw = folder / f'{args.side}-calls.raw.jsonl'
+    assertions = folder / f'{args.side}-assertions.raw.jsonl'
     env = dict(os.environ, MIGRATION_PARITY_TS_OBSERVATIONS=str(assertions),
-               MIGRATION_NETWORK_LOG=str(folder / 'network.jsonl'))
+               MIGRATION_PARITY_JAVA_OUTPUT=str(assertions),
+               MIGRATION_NETWORK_LOG=str(folder / f'{args.side}-network.jsonl'))
     plan = replay.parent
     if args.side == 'ts':
         if args.clean or args.test:

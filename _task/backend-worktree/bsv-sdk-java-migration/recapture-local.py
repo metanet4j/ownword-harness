@@ -50,9 +50,10 @@ def plan_replay(item):
         if len(options) == 1:
             replay = options[0]
         else:
-            # 证书类适配器用 --plan 自取 TS 输入，不需要重放语料文件。
+            # 证书类适配器用 --plan 自取 TS 输入，不需要重放语料文件；只看适配器
+            # 自己声明的参数名，避免把内部调用 emit 脚本的 '--plan' 误当入参。
             adapter = (TASK / item['capture']).read_text() if item.get('capture') else ''
-            if "'--plan'" in adapter and not options:
+            if "add_argument('--plan'" in adapter and not options:
                 replay = None
             else:
                 raise ValueError(f'{item["name"]} 的重放语料不唯一，请在登记里写 replay')
@@ -79,7 +80,7 @@ def capture(name, item, side, run):
         command += ['clean', 'test']
     # 适配器有两种入参约定：早期用 --replay 指重放语料，较新的用 --plan 指计划目录。
     adapter = (TASK / script).read_text()
-    if "'--plan'" in adapter:
+    if "add_argument('--plan'" in adapter:
         command += ['--plan', str(catalog.parent), '--report', str(report)]
     else:
         command += ['--replay', str(replay), '--report', str(report)]
