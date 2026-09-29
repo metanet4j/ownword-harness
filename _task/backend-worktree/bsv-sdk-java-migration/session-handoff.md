@@ -129,6 +129,14 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### spend 修复批全部完成（20260930 04:25）
+
+`chronicle` 3/4/3 与 `normative-vectors` 9/**7506**/340 已修复并采集通过（tamper 两个 true、`planValid=true`）。根因仍是投影/接线：①32 位字段两侧表示不同（TS 无符号 number vs Java 有符号 int，如 `sourceOutputIndex` 4294967295/-1、`transactionVersion` 2383752062/-1911215234）→ 探针共享库 `spend-probe-lib.cjs` 新增 `jsInt32`（按同一 32 位模式的有符号十进制）与 `jsSatoshis`（undefined→0 且不做截断）；②`formatOTDA` 被 `ignoreChronicle` 开关污染（TS 只给 `format` 的副本）；③`toBeInstanceOf` 期望值口径（改用全仓既有的 `Exception.class`，catch 已限定 RuntimeException）；④`checksum` 登记成 null。
+
+影响面已核：口径改动对 <2^31 的值是恒等映射，新旧冻结计划逐字节相同，不影响其它局部。
+
+**至此 spend/http 修复批 5 个局部（spend-core、spend-verifier、default-http-client、chronicle、normative-vectors）全部通过。**
+
 ### 本轮四项结论（20260930 04:15）
 
 **1) BEEF 差异不是生产缺陷（重要更正）**：`toHex-194` 的“字节不同”是误判——Java 测试把 `isValid` 写在 `toHex` 之前，而重放按 `cursor` 位置比对样本，于是 Java 第一个断言就消费了 `toHex` 样本。恢复原测试顺序后，cb017c 用例 **196/196 样本逐字段一致**（`toHex` 两侧同为 13922 字符十六进制），`Beef.mergeProvenTxs`/`MerklePath.combine`/`trim` 一行未动。
