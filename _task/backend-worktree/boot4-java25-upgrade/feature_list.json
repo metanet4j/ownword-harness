@@ -8,7 +8,7 @@
     "done"
   ],
   "activeItem": "unit-u7-adapters",
-  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1—U6 均已完成；U7 进行中：component-file、component-cache 已完成，component-message → api-common 与外围集成待实施。",
+  "note": "原 Boot 4 / Java 25 升级、U0 测试基线和 U1—U6 均已完成；U7 进行中：component-file、component-cache、component-message 已完成（含 base 的 BitcoinSchemaDto 缺陷修复），api-common 与外围集成待实施。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -390,9 +390,12 @@
         "component-cache 提交 a7359a8：34/0/0/0，LINE 335/340、BRANCH 74/76、METHOD 74/74，缺口为登记的 redisson 超时分支与连接释放兜底 catch；证据 evidence/20260928T235318Z/。",
         "component-cache 覆盖口径：RedisUtils 全部 58 个方法经受控 RedisTemplate/ops 替身验证委托与兜底返回值（含「客户端全抛异常」用例），RedissonAutoConfiguration 覆盖单机创建/关闭、reactive/rx 委托与集群配置装配，CacheManagerConfig 验证缓存 TTL 与 KeyGenerator 的 SHA-256。",
         "component-cache 记录的当前行为：未提供 redisson.config 时 Redisson.create(null) 抛 NPE；集群模式下节点不可达即创建失败（配置装配先完成）；findKeysForPage 的 page 为 0 基。",
-        "待实施：component-message → api-common 单元测试，以及文件协议（本地可控服务）、Redis、Kafka 集成。"
+        "component-message 提交 d77695d：31/0/0/0，INSTRUCTION 1461/1461、BRANCH 14/14、LINE 408/408、METHOD 199/199，零缺口；证据 evidence/20260929T002046Z/。",
+        "发现并修复缺陷（base 提交 53ed9ad）：BitcoinSchemaDto 缺少无参构造器，Jackson 反序列化 flink_bap_sink_topic 负载必然失败，BitcoinSchemaConsumer 的发布分支在生产不可达；补 @NoArgsConstructor 后回归用例转绿（修复前红）。",
+        "component-message 记录的当前行为：Listener.ackMode 与 noPollThreshold 未设默认值（上游 Spring Boot 为 BATCH/0.0，消费端由 KafkaConsumerConfiguration 显式设 MANUAL）；DataSize 类映射（batch.size/fetch.min.bytes/cache.max.bytes.buffering）经 asInt 产出 Integer。",
+        "待实施：api-common 单元测试，以及文件协议（本地可控服务）、Redis、Kafka 集成。"
       ],
-      "statusNote": "2026-09-28：component-file、component-cache 已完成并严格验收，继续 message/api-common。"
+      "statusNote": "2026-09-28：component-file、component-cache、component-message 已完成并严格验收（message 零缺口，并修复 base 的 DTO 缺陷），继续 api-common。"
     },
     {
       "id": "unit-u8-tools",

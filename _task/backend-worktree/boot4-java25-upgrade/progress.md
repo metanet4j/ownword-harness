@@ -6,7 +6,7 @@
 
 - **Last Updated**：2026-09-28。
 - **Current Objective**：为四个子仓库建立完整单元测试、集成测试与逐模块验收证据。
-- **Active Item**：`unit-u7-adapters` 进行中：component-file（2195d08）、component-cache（a7359a8）已完成，component-message → api-common 与外围集成待实施。
+- **Active Item**：`unit-u7-adapters` 进行中：component-file（2195d08）、component-cache（a7359a8）、component-message（d77695d，零缺口）已完成，api-common 与外围集成待实施。
 - U3 三模块严格验收均通过：component-model 20/0/0/0（LINE 73/78、BRANCH 2/2、METHOD 18/19，evidence/20260928T100401Z/）、component-common 41/0/0/0（LINE 239/248、BRANCH 42/42、METHOD 86/95，evidence/20260928T103233Z/）、component-core 纯接口 N/A（evidence/20260928T103553Z/）。提交：component 63560a3、4d3cf66。
 - component 仓库根启用 `lombok.config`（`addLombokGeneratedAnnotation`），Lombok 生成成员由 JaCoCo 内置 `AnnotationGeneratedFilter` 逐成员识别；聚合 POM 补 JUnit/Mockito 测试依赖与 `jacoco.unit.check.excludes` 属性。缺口一律按 `unit-coverage-exceptions.json` 精确清单登记并由 `verify-unit.py` 双向核对。
 - U3 测试暴露并最小修复：`ConvertTypeEnum` 构造器未写入 `id`、`JacksonBeanUtils.copyProperty` 忽略目标类型；`StateHelper` 删除不可达空 `default`；`LocalTestUtxoProvider` 目录可配置、`BitcoinSchemaTransaction` 可注入 UTXO provider（默认行为不变）。
@@ -26,7 +26,13 @@
 - U6 集成（提交 8a778c9）：MongoBusinessChainIntegrationTest 6/0/0/0 与 MysqlBusinessChainIntegrationTest 4/0/0/0，均为本地离线构造签名的真实原始交易（不联网、不广播）走 解析器 → DTO → Store handler → 存储；证据 `evidence/20260928T211704Z/`（含无 `it_u6_*` 残留检查），同轮回归了 U5 三个存储模块集成用例（6/4/5 例）。单元验收复跑 76/0/0/0（`evidence/20260928T211756Z/`）。
 - U7 进展：component-file 59/0/0/0（LINE 188/199、BRANCH 52/52、METHOD 63/66，`evidence/20260928T232443Z/`，提交 2195d08）；原 8 个 `@Disabled` 用例全部改写为有效测试（local 用 `@TempDir`；FTP/SFTP 注入替身 + 本地不可达端口；S3 用 MinioClient 替身并覆盖三家云 endpoint/domain/region 推导）。
 - U7 进展：component-cache 34/0/0/0（LINE 335/340、BRANCH 74/76、METHOD 74/74，`evidence/20260928T235318Z/`，提交 a7359a8）——RedisUtils 58 个方法全部经受控替身验证（含「客户端全抛异常」兜底用例），RedissonAutoConfiguration 覆盖单机创建/关闭与集群装配，CacheManagerConfig 验证缓存 TTL 与 KeyGenerator。
+- U7 进展：component-message 31/0/0/0，LINE 408/408、BRANCH 14/14、METHOD 199/199 **零缺口**（`evidence/20260929T002046Z/`，提交 d77695d）；覆盖 Kafka 配置（含反射逐项验证 60 个存取器与 92 个无参取值方法）、生产者四个重载与成功/失败回调、三个监听器的发布与提交行为。
+- U7 缺陷修复：`BitcoinSchemaDto` 无无参构造器导致 Jackson 反序列化 `flink_bap_sink_topic` 必然失败（监听器发布分支生产不可达）；补 `@NoArgsConstructor` 后回归用例转绿（base 提交 53ed9ad，base 复验 20/0/0/0、`evidence/20260929T002545Z/`）。
+- U7 记录的行为：`KafkaProperties.Listener` 的 ackMode/noPollThreshold 未设默认值（上游为 BATCH/0.0）；DataSize 类映射经 asInt 产出 Integer。
 - U7 记录的行为：未提供 redisson.config 时 `Redisson.create(null)` 抛 NPE；集群模式下节点不可达即创建失败；`RedisUtils.findKeysForPage` 的 page 为 0 基。
+- U7 进展：component-message 31/0/0/0，LINE 408/408、BRANCH 14/14、METHOD 199/199 **零缺口**（`evidence/20260929T002046Z/`，提交 d77695d）；覆盖 Kafka 配置（含反射逐项验证 60 个存取器与 92 个无参取值方法）、生产者四个重载与成功/失败回调、三个监听器的发布与提交行为。
+- U7 缺陷修复：`BitcoinSchemaDto` 无无参构造器导致 Jackson 反序列化 `flink_bap_sink_topic` 必然失败（监听器发布分支生产不可达）；补 `@NoArgsConstructor` 后回归用例转绿（base 提交 53ed9ad，base 复验 20/0/0/0、`evidence/20260929T002545Z/`）。
+- U7 记录的行为：`KafkaProperties.Listener` 的 ackMode/noPollThreshold 未设默认值（上游为 BATCH/0.0）；DataSize 类映射经 asInt 产出 Integer。
 - U7 记录的行为：无 bucket 前缀的腾讯云 endpoint 推导出空 region 被 MinioClient 拒绝；带 scheme 的 endpoint 走 MinIO 的 domain 拼法。FTP/SFTP 的「构造即连服务」行因共享基础设施无该服务，按精确清单登记为例外（成功构造路径留待本地可控服务）。
 - `verify-unit.py` 例外核对改为按「方法名:行号」建键，修复同名重载（如 `createTempFile` ×3）互相覆盖导致的类级计数误判。
 - U6 集成记录的行为：ID 交易由 root 签名时 `isRootBap` 为真 → 走 root 分支整体替换 signers（而非追加）；两个 handler 的搜索事件发布仍被注释，事件驱动的 ES 索引不会触发；手工装配 MyBatis-Plus 时需显式挂 `MetaObjectHandler`，事务代理需 `proxyTargetClass=true`（否则 `@Resource` 按具体类型注入失败）。
@@ -38,4 +44,4 @@
 
 ## Recommended Next Step
 
-继续 U7：补 component-message（KafkaProperties/生产者/消费者共 10 类）与 api-common（异常翻译、R/ApiResult、日志切面、JWT 共 10 类）单元测试，逐个 `verify-unit.py --mode accept --scope <模块>` 严格验收；随后补 Redis（6379）与 Kafka（9092）实连集成及文件协议的本地可控服务集成。
+继续 U7：补 api-common（异常翻译、BaseApiResult/R/ApiResult、GlobalApiLogAspect/LogAspect、ValidateUtils、JwtTokenProvider 共 10 类）单元测试并 `verify-unit.py --mode accept --scope metanet4j-api-common` 严格验收；随后补 Redis（6379）与 Kafka（9092）实连集成及文件协议的本地可控服务集成，最后进入 U8/U9。
