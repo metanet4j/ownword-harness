@@ -233,7 +233,9 @@ class Resolver:
         if isinstance(node, ast.BinOp):
             left, right = self.eval(node.left, depth + 1), self.eval(node.right, depth + 1)
             if isinstance(node.op, ast.Div):
-                if right and right[0] == 'file' and left in (('task',), ('plan_dir',), ('run_dir',), ('plan',)):
+                # 运行目录表达式一律是本轮产物：`evidence / 'x.jsonl'` 不能因为计划目录里
+                # 恰好有同名残留文件而被判成冻结语料。
+                if right and right[0] == 'file' and left in (('task',), ('plan_dir',), ('plan',)):
                     return right
                 if left in (('task',), ('plan_dir',)) and right and right[0] in ('literal', 'filelit'):
                     base = TASK if left == ('task',) else self.plan_dir
@@ -242,8 +244,12 @@ class Resolver:
                     return ('file', self.plan_dir / right[1])
                 if left == ('replay',) and right and right[0] in ('literal', 'filelit'):
                     return ('plan_dir',)
-                if left == ('run_dir',) and right and right[0] in ('literal', 'filelit'):
-                    return ('output', right[1])
+                if left == ('run_dir',) and right:
+                    if right[0] in ('literal', 'filelit'):
+                        return ('output', right[1])
+                    # 计划目录里恰好有同名残留文件时 right 会是 ('file', 该文件)，仍按本轮产物处理。
+                    if right[0] == 'file':
+                        return ('output', Path(right[1]).name)
                 if left and left[0] == 'file' and right and right[0] in ('literal', 'filelit'):
                     return ('file', Path(left[1]) / right[1])
                 if left and left[0] == 'output' and right:

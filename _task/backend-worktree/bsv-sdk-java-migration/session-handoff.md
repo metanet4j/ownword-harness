@@ -129,6 +129,17 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 分派表解析缺陷修复（20260930 03:40，主代理）
+
+**现象**：spend（9）与 http-chain（5）等 14 个局部登记后**没有进入全量分派表**（`unresolved`），最终单次全量运行会拿不到它们的输入。
+
+**根因**（两步定位）：①驱动里 `env[entry['ts_observations_env']] = str(evidence / 'ts-calls.raw.jsonl')` 的右值先按字面量求值，`existing()` 会到**计划目录**里找同名文件；这些代理的探针把 `ts-calls.raw.jsonl` 残留在了计划目录，于是被判成“冻结语料”（`file`）而不是“本轮产物”（`output`）；②`Div` 分支里 `('run_dir',)` 与判成 `file` 的右值组合没有兜底，最终 `plan['outputs']` 为空 → 该局部 unresolved。
+
+**修法**（`build-full-run-probes.py`，两处最小改动）：`Div` 分支的语料直取规则排除 `run_dir`；`run_dir / x` 分支在右值被判成 `file` 时按 `output` 处理（取 basename）。
+（先试过“按文件名过滤计划目录”，但会误伤 ARC 的合法语料 `MIGRATION_ARC_RANDOM_REPLAY`，已回退。）
+
+**结果**：分派表 **123 原文件／141 探针／105 环境变量，`unresolved=0`**；无探针原文件 23→10，且其中**已计划却拿不到输入的用例为 0**——剩余 10 个原文件（Peer 30、Transaction.performance 25、PrivateKey 系列、Random 系列、Hash.additional、AESGCM.man、AsyncCryptoBackend、SymmetricKeyCompatibility、BigNumber.dhGroup，共 94 例）正是三路在跑代理的范围。
+
 ### beef 投影二次收敛与更实质的差异（20260930 03:20）
 
 - 第一次采集失败在 `constructor-01`：探针的 `MerklePath` 构造投影仍带 `txid`，Java 侧对应站点也带。已把**构造投影**两侧一并收敛为只比较 `{offset, hash}`，重跑探针（21/21、390 输入、123 断言，注意轨迹文件是**追加写**，重跑前必须先删）后重新冻结，计划不变。
