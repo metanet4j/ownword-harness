@@ -129,6 +129,10 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 窗口吞吐实测（20260930 11:20）
+
+已完成 5 个局部：hex-bn（失败，见上）、wallet-property、werr-constructors、auth-master-certificate-constructors、auth-master-certificate-remaining；相邻完成间隔 1.3／4.3／1.4／0.3 分钟（4.3 那次包含我并行跑 hex-bn 抢锁），即**约 1.8 分钟/局部**，106 个局部预计 **约 3.2 小时**，与预估一致。窗口目前**无失败项**。
+
 ### 最终窗口已启动 + 两处工具修复（20260930 11:00）
 
 **守卫六项全过**：静默 ✓、`test-compile` ✓、`validate-plans` **138 检查/0 失败** ✓、分派表 **153 局部／133 原文件／151 探针／115 环境变量，`unresolved=0`、`unmappedCatalogFiles=0`** ✓、覆盖率 **5329/5329（100%）** ✓、工作树已冻结（SDK `ba10dd4`）✓。
