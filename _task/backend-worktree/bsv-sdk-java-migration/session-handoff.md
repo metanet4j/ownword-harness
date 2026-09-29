@@ -89,6 +89,20 @@ SA9：`locking-unlocking-script` 12 例、`script-additional` 14 例、`binary-f
 
 `324d3c3`（SDK）：恢复普通对象浅表示 + 新增 `recordJsMapDefined`/`assertDefinedJsMap`；聚焦运行 `RecordingAssertionsSemanticsTest` 21/21、`TransactionSignatureAdditionalTest` 24/24、`TransactionAdditionalTest` 20/20，合计 65/65 BUILD SUCCESS。
 
+### 本轮进展（20260929 深夜）
+
+- **已采集并通过 verify+tamper 的局部**：`hd` 49/227/92、`push-drop` 6/151/85、`transaction-evidence` 4/12/12、`transaction-verifier` 15/35/30、`script` 39/99/96、`beef-party-additional` 3/73/7、`merkle-path` 25/125/63、`merkle-path-safe-offsets` 21/87/70、`merkle-path-bench` 13/2643/1290。
+- **已交付但待采**：`window-cwi` 31/60/61、`hash` 30/150/92、`p2pkh-async-backend` 2/10/2、`r-puzzle` 9/17/9、`aesgcm` 30/457/334、`signature` 36/51/46、`reduction-context` 29/38/70、keys 六局部 97/223/134、misc 四局部 57/134/106、`chronicle-opcodes` 74/154/77、`simplified-fetch-transport-additional` 46/89/68；上一批失败均为**他人编译错误**或“采集期间源码变化”，不是内容不符。
+- **两个生产缺陷已修**（SDK 仓 `d5c3f42` + 前一提交 `Signature.toCompact`）：① `Utils.toArray` 缺 BigNumber 类数组分支、② `Hash.bytes` 把 BigNumber 当空输入（此前 `sha256(BigNumber)` == `sha256("")`，使 RFC6979 签名与固定 TS 不同）。新增 `UtilsBigNumberArrayRegressionTest`（2 例，额外 Java 回归）。聚焦验证 97/97。
+- **唯一在跑的代码缺口**：`beef`（Beef.test.ts，21 例）已派新代理接手；`BeefTest` 同时承载 `Transaction.test.ts` 用例，要求先出探针与计划、再一次性重写并保持既有断言与映射身份。
+
+### 统一窗口顺序（待 beef 落地后执行）
+
+1. `./lock.sh ./mvn.sh -f metanet4j-bsv-sdk/pom.xml test-compile` 确认编译干净；
+2. `./recapture-all.sh final-<日期>`（对所有登记了 capture 的局部逐个重采 + 篡改门禁，目录与来源统一）；
+3. `./lock.sh python3 full-evidence-preflight.py --output .cache/evidence/preflight-final-<日期>.json`（期望 `planErrors=[]`、大量 `currentCaptureVerified=true`）；
+4. 对可结项事项跑 `local-task-parity.py` 出任务级报告并更新 feature_list。
+
 ## 协作策略切换：先收口代码，统一窗口再采集（20260929 晚）
 
 `run.lock` 一度积压 12 个等待者（队首约 30 分钟），且测试模块被多份在飞文件反复打断编译。已通知全部在跑代理：**停止重试式采集**，改为①优先修完各自文件的编译错误（当前阻塞项：`HashTest`、`PublicKeyTest`、`PublicKeyAdditionalTest`、`ReductionContextTest`、`SignatureTest`）；②把探针、计划、Java 重放、测试接线、登记等代码侧做完；③需要验证时低频取锁（先 `test-compile`，失败等 5 分钟）；④各自交“待采集清单”。随后由主代理在静默窗口按登记表串行重采（`recapture-all.sh`）并出任务级对照。
