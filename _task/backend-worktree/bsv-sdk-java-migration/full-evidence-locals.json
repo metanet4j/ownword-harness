@@ -96,39 +96,117 @@
     },
     {
       "name": "auth-master-certificate-constructors",
-      "deriveCatalogFromPlan": true,
       "input_plan": "auth-certificate-master-constructor-plan.json",
-      "captureKind": "specialized-local"
+      "catalog": ".cache/evidence/auth-master-certificate-constructors-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/auth-master-certificate-constructors-plan-20260929/mapping.json",
+      "capture": "capture-certificate-side.py",
+      "ts_inputs": ".cache/evidence/auth-master-certificate-constructors-formal-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/auth-master-certificate-constructors-formal-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/auth-master-certificate-constructors-formal-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/auth-master-certificate-constructors-formal-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/auth-master-certificate-constructors-formal-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/auth-master-certificate-constructors-formal-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/auth-master-certificate-constructors-formal-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/auth-master-certificate-constructors-formal-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "auth-master-certificate-remaining",
-      "deriveCatalogFromPlan": true,
       "input_plan": "auth-certificate-master-remaining-plan.json",
-      "captureKind": "specialized-local"
+      "catalog": ".cache/evidence/auth-master-certificate-remaining-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/auth-master-certificate-remaining-plan-20260929/mapping.json",
+      "capture": "capture-certificate-side.py",
+      "ts_inputs": ".cache/evidence/auth-master-certificate-remaining-formal-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/auth-master-certificate-remaining-formal-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/auth-master-certificate-remaining-formal-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/auth-master-certificate-remaining-formal-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/auth-master-certificate-remaining-formal-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/auth-master-certificate-remaining-formal-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/auth-master-certificate-remaining-formal-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/auth-master-certificate-remaining-formal-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "auth-get-verifiable-certificates",
-      "deriveCatalogFromPlan": true,
       "input_plan": "auth-certificate-get-verifiable-plan.json",
-      "captureKind": "specialized-local"
+      "catalog": ".cache/evidence/auth-get-verifiable-certificates-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/auth-get-verifiable-certificates-plan-20260929/mapping.json",
+      "capture": "capture-certificate-side.py",
+      "ts_inputs": ".cache/evidence/auth-get-verifiable-certificates-formal-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/auth-get-verifiable-certificates-formal-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/auth-get-verifiable-certificates-formal-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/auth-get-verifiable-certificates-formal-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/auth-get-verifiable-certificates-formal-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/auth-get-verifiable-certificates-formal-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/auth-get-verifiable-certificates-formal-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/auth-get-verifiable-certificates-formal-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "auth-validate-certificates",
-      "deriveCatalogFromPlan": true,
       "input_plan": "auth-certificate-validate-plan.json",
-      "captureKind": "specialized-local"
+      "catalog": ".cache/evidence/auth-validate-certificates-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/auth-validate-certificates-plan-20260929/mapping.json",
+      "capture": "capture-certificate-side.py",
+      "ts_inputs": ".cache/evidence/auth-validate-certificates-formal-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/auth-validate-certificates-formal-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/auth-validate-certificates-formal-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/auth-validate-certificates-formal-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/auth-validate-certificates-formal-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/auth-validate-certificates-formal-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/auth-validate-certificates-formal-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/auth-validate-certificates-formal-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "auth-certificate-class",
-      "deriveCatalogFromPlan": true,
       "input_plan": "auth-certificate-class-plan.json",
-      "captureKind": "specialized-local"
+      "catalog": ".cache/evidence/auth-certificate-class-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/auth-certificate-class-plan-20260929/mapping.json",
+      "capture": "capture-certificate-side.py",
+      "ts_inputs": ".cache/evidence/auth-certificate-class-formal-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/auth-certificate-class-formal-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/auth-certificate-class-formal-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/auth-certificate-class-formal-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/auth-certificate-class-formal-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/auth-certificate-class-formal-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/auth-certificate-class-formal-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/auth-certificate-class-formal-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "auth-verifiable-certificate",
-      "deriveCatalogFromPlan": true,
       "input_plan": "auth-certificate-verifiable-plan.json",
-      "captureKind": "specialized-local"
+      "catalog": ".cache/evidence/auth-verifiable-certificate-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/auth-verifiable-certificate-plan-20260929/mapping.json",
+      "capture": "capture-certificate-side.py",
+      "ts_inputs": ".cache/evidence/auth-verifiable-certificate-formal-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/auth-verifiable-certificate-formal-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/auth-verifiable-certificate-formal-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/auth-verifiable-certificate-formal-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/auth-verifiable-certificate-formal-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/auth-verifiable-certificate-formal-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/auth-verifiable-certificate-formal-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/auth-verifiable-certificate-formal-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "auth-fetch-additional-bodies",

@@ -47,12 +47,20 @@ def plan_replay(item):
     else:
         options = [folder / name for name in ('replay-inputs.jsonl', 'replay.jsonl')
                    if (folder / name).exists()]
-        if len(options) != 1:
-            raise ValueError(f'{item["name"]} 的重放语料不唯一，请在登记里写 replay')
-        replay = options[0]
-    for path in (catalog, mapping, replay):
+        if len(options) == 1:
+            replay = options[0]
+        else:
+            # 证书类适配器用 --plan 自取 TS 输入，不需要重放语料文件。
+            adapter = (TASK / item['capture']).read_text() if item.get('capture') else ''
+            if "'--plan'" in adapter and not options:
+                replay = None
+            else:
+                raise ValueError(f'{item["name"]} 的重放语料不唯一，请在登记里写 replay')
+    for path in (catalog, mapping):
         if not path.exists():
             raise ValueError('登记路径不存在：' + str(path))
+    if replay is not None and not replay.exists():
+        raise ValueError('登记路径不存在：' + str(replay))
     return catalog, mapping, replay
 
 

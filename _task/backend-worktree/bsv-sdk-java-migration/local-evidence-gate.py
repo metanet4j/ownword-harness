@@ -116,6 +116,18 @@ def verify(name, output=None):
             'tsRunId': ts['runId'], 'javaRunId': java['runId'], 'javaRevision': java['sourceRevision']}
 
 
+def guarded_sites(rows):
+    """按清点器的固定语义表列出有专用规则的断言站点。"""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('audit_tests', TASK / 'audit-tests.py')
+    audit = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(audit)
+    guarded = set()
+    for case_id in {row['caseId'] for row in rows}:
+        guarded |= set(audit.semantic_specs(case_id))
+    return guarded
+
+
 def tamper(name):
     verify(name)
     item = local(name)
@@ -128,7 +140,18 @@ def tamper(name):
         raise ValueError('篡改目标缺失')
 
     def rewrite(rows):
-        rows[0]['value']['actual'] = {'type': 'string', 'value': 'tampered'}
+        # 语义规则站点由专用规则校验，篡改它只会被那条规则拒绝，走不到逐值比较；
+        # 因此跳过这些站点，取第一条真正经过 compare_actuals 的记录做篡改。
+        guarded = guarded_sites(rows)
+        for row in rows:
+            value = row.get('value')
+            if not isinstance(value, dict) or 'actual' not in value:
+                continue
+            if row.get('assertionId') in guarded:
+                continue
+            value['actual'] = {'type': 'string', 'value': 'tampered'}
+            return
+        raise ValueError('篡改目标缺失：没有可进入逐值比较的断言记录')
 
     for artifact, field, expected, mutate in (
             ('java_inputs', 'inputsSha256', 'TS/Java 输入或前置状态不同', retag),
