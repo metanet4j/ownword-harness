@@ -79,6 +79,16 @@ SA9：`locking-unlocking-script` 12 例、`script-additional` 14 例、`binary-f
 
 `run-full-ts-capture.py` 需要采集后校验：所有原始轨迹存在且非空、raw 型转换成功，任一缺失即整轮非零退出（防止“跑完但没有输入”的假绿）。
 
+### 统一窗口待执行清单（代理已交付）
+
+- **window-cwi**（代码侧就绪，已证明 TS 探针 31/31、带语料 Java 31/31 且输入逐字段一致）：`./lock.sh python3 recapture-local.py --name window-cwi --run .cache/evidence/window-cwi-standard-<新目录> --update` → `./lock.sh python3 local-evidence-gate.py tamper --name window-cwi` → 聚焦 `clean test -Dtest=WindowCWISubstrateTest,HTTPWalletWireTest` → `full-evidence-preflight.py`。可选反向验证：改冻结语料里 `getVersion` 的返回值应立刻报“Java 实际 window.CWI 入口或结果与固定 TS 不同”。
+- **http-wallet-wire**：四项已绿（46/126/51、tamper 两个 true、verify 退出 0）；统一窗口会一并刷新。
+- **transaction-signature-additional**：`ParityRecorder` 修复后重采被他人编译错误挡住，留待统一窗口（修复本身已在聚焦运行中验证 65/65）。
+
+### 本轮修复验证
+
+`324d3c3`（SDK）：恢复普通对象浅表示 + 新增 `recordJsMapDefined`/`assertDefinedJsMap`；聚焦运行 `RecordingAssertionsSemanticsTest` 21/21、`TransactionSignatureAdditionalTest` 24/24、`TransactionAdditionalTest` 20/20，合计 65/65 BUILD SUCCESS。
+
 ## 协作策略切换：先收口代码，统一窗口再采集（20260929 晚）
 
 `run.lock` 一度积压 12 个等待者（队首约 30 分钟），且测试模块被多份在飞文件反复打断编译。已通知全部在跑代理：**停止重试式采集**，改为①优先修完各自文件的编译错误（当前阻塞项：`HashTest`、`PublicKeyTest`、`PublicKeyAdditionalTest`、`ReductionContextTest`、`SignatureTest`）；②把探针、计划、Java 重放、测试接线、登记等代码侧做完；③需要验证时低频取锁（先 `test-compile`，失败等 5 分钟）；④各自交“待采集清单”。随后由主代理在静默窗口按登记表串行重采（`recapture-all.sh`）并出任务级对照。
