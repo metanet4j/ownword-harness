@@ -35,6 +35,14 @@
 
 已知残留风险：`prepare-transaction-local.py` 的 `loopSamples` 采用“该用例入口样本”做结构覆盖（与 bn-arithmetic 登记方式一致），最终全量门禁若对循环样本有更严要求，需要按站点补真实循环样本。
 
+## 证据完整性复查（20260929）
+
+对 13 个已登记标准局部逐个复跑 `local-evidence-gate.py verify`，全部与登记时一致、无损坏：交易基础五局部 74 例/150 输入/115 断言、广播器四局部 68/231/169、钱包宿主与 WalletWire 三局部 177/542/526，合计 319 个用例的既有证据可用。
+
+## 全量运行接口
+
+最终 `audit-tests.py check` 需要 `full-evidence-locals.json` 的 `fullRun.tsCommand/javaCommand/tsReports/javaReports`：TS 侧由一个按 `testPath` 分派探针的 `capture-full-dispatch.cjs` 在一次 Jest 运行里覆盖全部原文件，Java 侧用无过滤 `clean test` 并把全部 `MIGRATION_*_TS_INPUTS` 指向本轮汇总输入。该接口由基础设施子代理实现，完成后 `full-evidence-preflight.py` 的 `missingFullRunInterfaces` 应为空；覆盖率补齐后再跑单次双侧全量采集。
+
 ## 收尾统一重采
 
 并行子代理的 Java 改动会不断推进来源摘要，因此**收尾时**在所有人停止改源码后执行一次统一重采：`./recapture-all.sh <日期标签> [局部名...]`（不传局部名则重采全部登记了 capture 适配器的标准局部，并逐个跑篡改门禁）。随后 `python3 full-evidence-preflight.py` 应显示这些局部 `currentCaptureVerified=true`；再对每个待结项用 `python3 local-task-parity.py --task <事项> --local ... --output <目录>` 出任务级报告，最后提交。
