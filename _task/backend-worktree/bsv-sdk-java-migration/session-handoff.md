@@ -129,6 +129,12 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 登记一致性体检（20260930 04:40，主代理）
+
+对 147 个登记局部做只读体检：**`input_plan`／`capture`／已登记运行产物路径全部存在，无悬空引用**；唯一异常是 **16 个 `auth-fetch-additional-*` 局部缺 `catalog.json`／`mapping.json`**（计划仍在、且已被合并进全局计划）。它们属早期专用局部、没有 `capture` 适配器（47 个无 capture 的局部之一），全量运行用的是全局 catalog/mapping 与探针分派，因此不影响最终验收；如后续要单独复采这些局部，需要重新生成它们的 catalog/mapping。
+
+另：`beef` 内容已对齐（196/196 样本一致），但连续多次采集都被“采集期间源码发生变化”拒绝——并行代理仍在改 Java，该局部与其余绑定旧来源的局部一并在最终静默窗口重采。
+
 ### spend 修复批全部完成（20260930 04:25）
 
 `chronicle` 3/4/3 与 `normative-vectors` 9/**7506**/340 已修复并采集通过（tamper 两个 true、`planValid=true`）。根因仍是投影/接线：①32 位字段两侧表示不同（TS 无符号 number vs Java 有符号 int，如 `sourceOutputIndex` 4294967295/-1、`transactionVersion` 2383752062/-1911215234）→ 探针共享库 `spend-probe-lib.cjs` 新增 `jsInt32`（按同一 32 位模式的有符号十进制）与 `jsSatoshis`（undefined→0 且不做截断）；②`formatOTDA` 被 `ignoreChronicle` 开关污染（TS 只给 `format` 的副本）；③`toBeInstanceOf` 期望值口径（改用全仓既有的 `Exception.class`，catch 已限定 RuntimeException）；④`checksum` 登记成 null。
