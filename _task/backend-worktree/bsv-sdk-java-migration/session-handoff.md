@@ -129,6 +129,12 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 缺口收敛到 94 例（20260930 03:30）
+
+- `spend-core` 修复成功并采集成 20 例／20 输入／34 断言（`verify` 通过）——首采暴露的断言差异由修复代理解决。
+- `item-locals.json` 刷新：**22/28 个实现事项计划完整**；未计划 94 例，全部落在在跑代理范围内（auth-sessions 30 由 peer 接线、hash-random 22／keys-signatures 8／symmetric 7／bignumber 2 由原语剩余批、transaction-complete 25 见下）。
+- **补派最后一处无人认领的缺口**：`Transaction.performance.test.ts`（25 例）→ 局部 `transaction-performance`，并明确性能类口径：耗时阈值按“布尔是否满足 + 规模计数”记录，确定性字节/哈希/txid 仍逐值比较，跨语言毫秒不逐值比较。
+
 ### 分派表解析缺陷修复（20260930 03:40，主代理）
 
 **现象**：spend（9）与 http-chain（5）等 14 个局部登记后**没有进入全量分派表**（`unresolved`），最终单次全量运行会拿不到它们的输入。

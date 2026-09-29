@@ -80,13 +80,14 @@
   "migration-impl-keys-signatures": {
     "status": "done",
     "frozenCases": 146,
-    "coveredCases": 131,
-    "uncoveredCases": 15,
+    "coveredCases": 138,
+    "uncoveredCases": 8,
     "locals": {
       "bug-31": 1,
       "ecdh": 2,
       "ecdsa": 15,
       "ecdsa-additional": 12,
+      "private-key": 7,
       "public-key": 14,
       "public-key-additional": 32,
       "schnorr": 12,
@@ -162,15 +163,18 @@
   "migration-impl-http-chain": {
     "status": "done",
     "frozenCases": 78,
-    "coveredCases": 61,
-    "uncoveredCases": 17,
+    "coveredCases": 78,
+    "uncoveredCases": 0,
     "locals": {
       "binary-fetch-client": 12,
       "block-headers-service": 19,
       "broadcaster": 11,
       "default-chain-tracker": 5,
+      "default-http-client": 3,
+      "default-http-client-additional": 6,
       "transaction-chain-tracker": 3,
-      "whats-on-chain-additional": 11
+      "whats-on-chain-additional": 11,
+      "whats-on-chain-chain-tracker": 8
     }
   },
   "migration-impl-script-model": {
@@ -202,9 +206,10 @@
   "migration-impl-transaction-beef": {
     "status": "in-progress",
     "frozenCases": 83,
-    "coveredCases": 62,
-    "uncoveredCases": 21,
+    "coveredCases": 83,
+    "uncoveredCases": 0,
     "locals": {
+      "beef": 21,
       "beef-party-additional": 3,
       "merkle-path": 25,
       "merkle-path-bench": 13,
@@ -225,21 +230,29 @@
   "migration-impl-script-spend": {
     "status": "not-started",
     "frozenCases": 546,
-    "coveredCases": 455,
-    "uncoveredCases": 91,
+    "coveredCases": 546,
+    "uncoveredCases": 0,
     "locals": {
-      "script-spend-shared-vectors": 455
+      "script-spend-shared-vectors": 455,
+      "spend-additional": 69,
+      "spend-codeseparator": 1,
+      "spend-complex": 1,
+      "spend-core": 20
     }
   },
   "migration-impl-script-vectors": {
     "status": "not-started",
     "frozenCases": 555,
-    "coveredCases": 530,
-    "uncoveredCases": 25,
+    "coveredCases": 555,
+    "uncoveredCases": 0,
     "locals": {
+      "chronicle": 3,
       "chronicle-opcodes": 74,
+      "lrshiftnum": 4,
+      "normative-vectors": 9,
       "script-spend-shared-vectors": 455,
-      "spend-chronicle-vector": 1
+      "spend-chronicle-vector": 1,
+      "spend-verifier": 9
     }
   },
   "migration-impl-broadcasters": {
@@ -257,9 +270,10 @@
   "migration-impl-transaction-complete": {
     "status": "not-started",
     "frozenCases": 745,
-    "coveredCases": 659,
-    "uncoveredCases": 86,
+    "coveredCases": 720,
+    "uncoveredCases": 25,
     "locals": {
+      "transaction": 61,
       "transaction-shared-vectors": 659
     }
   },
@@ -319,12 +333,13 @@
   "migration-impl-auth-sessions": {
     "status": "not-started",
     "frozenCases": 85,
-    "coveredCases": 40,
-    "uncoveredCases": 45,
+    "coveredCases": 55,
+    "uncoveredCases": 30,
     "locals": {
       "auth-build": 20,
       "cryptononce": 7,
       "peer-boundary": 2,
+      "peer-certificate-policy": 15,
       "session-manager": 11
     }
   },
