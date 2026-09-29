@@ -1,10 +1,31 @@
 {
   "book": "如何明白圣经（朗读版）",
-  "author": "诺顿·史特瑞博士 (Dr. T. Norton Sterrett)",
   "title_en": "How to Understand Your Bible",
-  "publisher_en": "Inter Varsity Press, 1974",
+  "author": "诺顿·史特瑞博士 (Dr. T. Norton Sterrett)",
   "translator": "曾盛泉 译（1985），基督、使命与教会 校译",
+  "publisher_en": "Inter Varsity Press, 1974",
   "source": "https://cmchurch.org/how-to-understand-your-bible/",
+  "docx": {
+    "body_cn": "宋体",
+    "head_cn": "黑体",
+    "body_en": "Times New Roman",
+    "head_en": "Arial",
+    "body_size": 12,
+    "line_spacing": 1.5,
+    "page": "A4",
+    "margin_cm": [
+      2.5,
+      2.8
+    ],
+    "page_number": true,
+    "filename": "如何明白圣经.docx"
+  },
+  "site": {
+    "content_selector": "div.entry-content",
+    "title_selector": "h1.entry-title",
+    "audio_selector": "audio source[src]",
+    "drop_selector": "audio, .wp-audio-shortcode, script, style, .sharedaddy, .jp-relatedposts"
+  },
   "chapters": [
     {
       "part": null,

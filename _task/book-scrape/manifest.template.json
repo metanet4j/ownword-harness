@@ -1,0 +1,40 @@
+{
+  "book": "书名",
+  "title_en": "Book Title in English",
+  "author": "作者",
+  "translator": "译者",
+  "publisher_en": "Publisher, Year",
+  "source": "https://example.org/book-index/",
+  "docx": {
+    "body_cn": "宋体",
+    "head_cn": "黑体",
+    "body_en": "Times New Roman",
+    "head_en": "Arial",
+    "body_size": 12,
+    "line_spacing": 1.5,
+    "page": "A4",
+    "margin_cm": [2.5, 2.8],
+    "page_number": true,
+    "filename": "书名.docx"
+  },
+  "site": {
+    "content_selector": "div.entry-content",
+    "title_selector": "h1.entry-title",
+    "audio_selector": "audio source[src]",
+    "drop_selector": "audio, .wp-audio-shortcode, script, style, .sharedaddy, .jp-relatedposts"
+  },
+  "chapters": [
+    {
+      "part": null,
+      "title": "序言",
+      "slug": "00-preface",
+      "url": "https://example.org/book/preface/"
+    },
+    {
+      "part": "第一部分 部分标题",
+      "title": "第一章 章节标题",
+      "slug": "01-chapter-slug",
+      "url": "https://example.org/book/chapter-1/"
+    }
+  ]
+}

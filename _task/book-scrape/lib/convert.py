@@ -1,26 +1,32 @@
 #!/usr/bin/env python3
-"""把抓取到的章节 HTML 转换为 Markdown，并生成合并稿与目录。
+"""把 raw/ 里的章节 HTML 转成 Markdown（一章一个文件）并生成总目录。
 
 用法:
-  PYTHONPATH=pylibs python3 convert.py
+  python3 lib/convert.py <书名目录>
 """
-import html as H
 import json
 import os
 import re
 import sys
 
-from bs4 import BeautifulSoup
-from markdownify import MarkdownConverter
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import bookkit
 
-BASE = os.path.dirname(os.path.abspath(__file__))
-os.chdir(BASE)
+bookkit.use_pylibs()
 
-mf = json.load(open('manifest.json', encoding='utf-8'))
+from bs4 import BeautifulSoup  # noqa: E402
+from markdownify import MarkdownConverter  # noqa: E402
+
+SITE_DEFAULTS = {
+    'content_selector': 'div.entry-content',
+    'title_selector': 'h1.entry-title',
+    'audio_selector': 'audio source[src]',
+    'drop_selector': 'audio, .wp-audio-shortcode, script, style, .sharedaddy, .jp-relatedposts',
+}
 
 
 class ChapterConverter(MarkdownConverter):
-    """保留中文全角缩进，丢弃音频播放器等站点元素。"""
+    """丢弃音频播放器等站点元素，保留中文全角缩进。"""
 
     def convert_audio(self, el, text, parent_tags=None, **kw):
         return ''
@@ -32,15 +38,15 @@ class ChapterConverter(MarkdownConverter):
         return text
 
 
-def extract(path):
+def extract(path, site):
     soup = BeautifulSoup(open(path, encoding='utf-8').read(), 'lxml')
-    title_el = soup.select_one('h1.entry-title')
+    title_el = soup.select_one(site['title_selector']) if site['title_selector'] else None
     title = title_el.get_text(strip=True) if title_el else ''
-    content = soup.select_one('div.entry-content')
+    content = soup.select_one(site['content_selector'])
     if content is None:
         return title, '', []
-    audio = [a['src'] for a in content.select('audio source[src]')]
-    for tag in content.select('audio, .wp-audio-shortcode, script, style, .sharedaddy, .jp-relatedposts'):
+    audio = [a['src'] for a in content.select(site['audio_selector'])]
+    for tag in content.select(site['drop_selector']):
         tag.decompose()
     # <em>/<i> 会被转成 *…*，与正文里作为书名号的 * 混在一起造成解析歧义：直接取纯文本
     for tag in content.select('em, i'):
@@ -127,17 +133,22 @@ def split_bold(text):
     return [(unescape(t), b) for t, b in out if t] or [(text, False)]
 
 
+def chapter_filename(ch):
+    return f"{ch['slug']}.md"
+
+
 def main():
-    parts = []
-    toc = []
-    missing = []
-    doc_parts = []
+    bookkit.book_dir(sys.argv[1] if len(sys.argv) > 1 else None)
+    mf = bookkit.load_manifest()
+    site = {**SITE_DEFAULTS, **mf.get('site', {})}
+
+    doc_parts, missing = [], []
     for ch in mf['chapters']:
         src = f"raw/{ch['slug']}.html"
         if not os.path.exists(src):
             missing.append(ch['slug'])
             continue
-        page_title, inner, audio = extract(src)
+        page_title, inner, audio = extract(src, site)
         body = escape_stray_asterisks(
             tidy(ChapterConverter(heading_style='ATX', bullets='-').convert(inner)))
         heading = f"# {ch['title']}"
@@ -149,11 +160,9 @@ def main():
         if audio:
             header += f"\n> 朗读音频：{audio[0]}\n"
         md = f"{header}\n{body}"
-        open(f"{ch['slug']}.md", 'w', encoding='utf-8').write(md)
-        parts.append((ch, md))
+        open(chapter_filename(ch), 'w', encoding='utf-8').write(md)
         doc_parts.append({'part': ch['part'], 'title': ch['title'], 'slug': ch['slug'],
                           'audio': audio[0] if audio else None, 'blocks': to_blocks(md)})
-        toc.append((ch['part'], ch['title'], ch['slug']))
         print(f"{ch['slug']:46s} {len(body):7d} chars", flush=True)
 
     if missing:
@@ -161,27 +170,32 @@ def main():
         return 2
 
     # 总目录：每章一个文件，目录里的链接直接指向该文件
-    lines = [f"# {mf['book']}\n",
-             f"作者：{mf['author']}（{mf['title_en']}，{mf['publisher_en']}）  ",
-             f"翻译：{mf['translator']}  ",
-             f"来源：{mf['source']}\n",
-             '## 目录\n']
+    lines = [f"# {mf['book']}\n"]
+    if mf.get('author'):
+        lines.append(f"作者：{mf['author']}" + (f"（{mf['title_en']}，{mf['publisher_en']}）  "
+                                              if mf.get('title_en') else '  '))
+    if mf.get('translator'):
+        lines.append(f"翻译：{mf['translator']}  ")
+    if mf.get('source'):
+        lines.append(f"来源：{mf['source']}\n")
+    lines.append('## 目录\n')
     cur = None
     for ch in mf['chapters']:
-        title, slug = ch['title'], ch['slug']
-        if ch['part'] != cur:
-            cur = ch['part']
+        if ch.get('part') != cur:
+            cur = ch.get('part')
             if cur:
                 lines.append(f"\n**{cur}**\n")
-        lines.append(f"- [{title}]({slug}.md)")
+        lines.append(f"- [{ch['title']}]({chapter_filename(ch)})")
     lines.append('')
     open('目录.md', 'w', encoding='utf-8').write('\n'.join(lines).strip() + '\n')
-    json.dump({'meta': {k: mf[k] for k in ('book', 'author', 'title_en', 'publisher_en',
-                                           'translator', 'source')},
+
+    json.dump({'meta': {k: mf.get(k) for k in
+                        ('book', 'author', 'title_en', 'publisher_en', 'translator', 'source')},
+               'docx': mf['docx'],
                'chapters': doc_parts},
               open('book.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-    total = sum(len(m) for _, m in parts)
-    print(f"\n完成：{len(parts)} 章 Markdown + 目录.md，正文 {total} 字符")
+    total = sum(len(json.dumps(p, ensure_ascii=False)) for p in doc_parts)
+    print(f"\n完成：{len(doc_parts)} 章 Markdown + 目录.md + book.json")
     return 0
 
 
