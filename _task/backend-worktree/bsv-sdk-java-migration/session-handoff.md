@@ -114,6 +114,13 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 
 对 24 个最近采集的标准局部逐个复跑 `local-evidence-gate.py verify`（不跑 Maven、不占共享锁）：**24/24 通过**，覆盖 hash、window-cwi、r-puzzle、p2pkh-async-backend、aesgcm、signature、reduction-context、public-key、public-key-additional、locking-unlocking-script、script-additional、binary-fetch-client、bignumber-additional、ecdsa、schnorr、hd、script、push-drop、transaction-evidence、transaction-verifier、beef-party-additional、merkle-path、merkle-path-safe-offsets、merkle-path-bench。它们绑定不同 Java 来源（并行改动所致），最终窗口统一重采后即可全部 `currentCaptureVerified=true`。
 
+### 结构覆盖率跃升（20260930 02:00）
+
+- **已计划 4998/5329（93%）**，未计划降到 **331 例**；113 个标准局部的计划全部通过结构校验，且**没有任何用例被两个局部同时登记**（无冲突）。
+- **计划已完整的事项 18 个**（上轮仅 4 个）：script-model 1104、wallet-contracts 253、byte-codecs 192、auth-transport 183、curve 144、wallet-wire 128、wallet-hosts 126、compat 122、wallet-client 100、transaction-base 74、wallet-keys 71、broadcasters 68 等。
+- 仍有缺口：script-spend 91、transaction-complete 86、auth-sessions 45（代理登记中）、script-vectors 25、hash-random 22、transaction-beef 21（beef 在做）、http-chain 17、keys-signatures 15。
+- `item-locals.json` 已按最新登记刷新，可用于最终窗口后逐事项出任务级对照。
+
 ### 编译恢复与本轮协调（20260930 01:30）
 
 - 我修掉最后一个阻塞：`auth/SessionManagerInputReplay.describeOptional` 的返回类型从 `Map<String,Object>` 改为 `Object`（原语义是 `value ?? undefined()`，非空时可能是字符串），整模块恢复可编译。

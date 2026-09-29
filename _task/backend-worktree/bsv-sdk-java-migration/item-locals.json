@@ -45,9 +45,11 @@
   "migration-impl-curve": {
     "status": "done",
     "frozenCases": 144,
-    "coveredCases": 106,
-    "uncoveredCases": 38,
+    "coveredCases": 144,
+    "uncoveredCases": 0,
     "locals": {
+      "curve-additional": 20,
+      "curve-unit": 18,
       "jacobian": 35,
       "point-additional": 60,
       "point11": 11
@@ -78,13 +80,17 @@
   "migration-impl-keys-signatures": {
     "status": "done",
     "frozenCases": 146,
-    "coveredCases": 109,
-    "uncoveredCases": 37,
+    "coveredCases": 131,
+    "uncoveredCases": 15,
     "locals": {
+      "bug-31": 1,
+      "ecdh": 2,
       "ecdsa": 15,
+      "ecdsa-additional": 12,
       "public-key": 14,
       "public-key-additional": 32,
       "schnorr": 12,
+      "secp256r1": 7,
       "signature": 36
     }
   },
@@ -156,13 +162,15 @@
   "migration-impl-http-chain": {
     "status": "done",
     "frozenCases": 78,
-    "coveredCases": 31,
-    "uncoveredCases": 47,
+    "coveredCases": 61,
+    "uncoveredCases": 17,
     "locals": {
       "binary-fetch-client": 12,
+      "block-headers-service": 19,
       "broadcaster": 11,
       "default-chain-tracker": 5,
-      "transaction-chain-tracker": 3
+      "transaction-chain-tracker": 3,
+      "whats-on-chain-additional": 11
     }
   },
   "migration-impl-script-model": {
@@ -226,11 +234,12 @@
   "migration-impl-script-vectors": {
     "status": "not-started",
     "frozenCases": 555,
-    "coveredCases": 529,
-    "uncoveredCases": 26,
+    "coveredCases": 530,
+    "uncoveredCases": 25,
     "locals": {
       "chronicle-opcodes": 74,
-      "script-spend-shared-vectors": 455
+      "script-spend-shared-vectors": 455,
+      "spend-chronicle-vector": 1
     }
   },
   "migration-impl-broadcasters": {
@@ -299,22 +308,31 @@
   "migration-impl-wallet-client": {
     "status": "in-progress",
     "frozenCases": 100,
-    "coveredCases": 0,
-    "uncoveredCases": 100,
-    "locals": {}
+    "coveredCases": 100,
+    "uncoveredCases": 0,
+    "locals": {
+      "wallet-client": 1,
+      "wallet-client-additional": 61,
+      "wallet-client-substrate": 38
+    }
   },
   "migration-impl-auth-sessions": {
     "status": "not-started",
     "frozenCases": 85,
-    "coveredCases": 0,
-    "uncoveredCases": 85,
-    "locals": {}
+    "coveredCases": 40,
+    "uncoveredCases": 45,
+    "locals": {
+      "auth-build": 20,
+      "cryptononce": 7,
+      "peer-boundary": 2,
+      "session-manager": 11
+    }
   },
   "migration-impl-auth-transport": {
     "status": "not-started",
     "frozenCases": 183,
-    "coveredCases": 180,
-    "uncoveredCases": 3,
+    "coveredCases": 183,
+    "uncoveredCases": 0,
     "locals": {
       "auth-fetch-additional-bodies": 26,
       "auth-fetch-additional-context-peer": 3,
@@ -333,6 +351,7 @@
       "auth-fetch-primary-context-labels": 3,
       "auth-fetch-primary-retry": 2,
       "auth-fetch-property": 1,
+      "simplified-fetch-transport": 3,
       "simplified-fetch-transport-additional": 46
     }
   }
