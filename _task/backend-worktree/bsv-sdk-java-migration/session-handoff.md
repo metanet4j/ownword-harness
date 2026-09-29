@@ -129,6 +129,19 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 本轮四项结论（20260930 04:15）
+
+**1) BEEF 差异不是生产缺陷（重要更正）**：`toHex-194` 的“字节不同”是误判——Java 测试把 `isValid` 写在 `toHex` 之前，而重放按 `cursor` 位置比对样本，于是 Java 第一个断言就消费了 `toHex` 样本。恢复原测试顺序后，cb017c 用例 **196/196 样本逐字段一致**（`toHex` 两侧同为 13922 字符十六进制），`Beef.mergeProvenTxs`/`MerklePath.combine`/`trim` 一行未动。
+　　续查发现：TS 的 `toAtomicBEEF`／`toUint8ArrayAtomic` **内部**会调用 `findAtomicTransaction`／`isAtomic`，探针把这些内部调用也记为入口样本，因此 Java 必须“消费样本但不加断言”（上游 `8_toBinaryAtomic` 只有 7 条断言）。已按此补两行调用；另删除 Java 侧自加的两条断言（TS 无对应）。
+
+**2) spend/http 三局部全部修复并通过**：`spend-core` 20/20/34、`spend-verifier` 9/9/20、`default-http-client` 3/5/10，三次 `tamper` 均两个 true，preflight `planErrors=[]`、三局部 `planValid=true`。根因分别是：Jest 把类构造函数源码当 expected（改用 `assertThrowsClassSource` + 提取资源文件）、Java 直接 `new Spend(params)` 绕过重放入口（改 `replay.spend`）、环境投影 `globalFetch` 布尔不一致（改用已有 `globalFetchStub()`）。
+
+**3) `test-map.json` 映射缺陷（孤例）**：`Transaction.performance.test.ts` 的 `it.each` 两个变体共用回调，constructed 变体被错挂到下一个用例的 6 个站点上，导致冻结必然失败。已授权修复为与 parsed 变体同站点（271/278/280）；代理写了精确检测器复核**全 133 个原文件中仅此一组**不一致，修后 `validate-plans.py` 129 通过／0 失败、`planErrors=[]`；断言实例总数 11555→11552（siteReviews 7554 不变）。
+
+**4) `peer` 生产修复已落地**：`Peer.processGeneralMessage` 改为遍历快照并附注释说明（TS 允许迭代中删除、Java 需快照避免 CME 丢消息）。
+
+**另**：`private-key` 7/55/**40021** 与 `private-key-split` 8/99/17 采集通过（前者验证“输入取样 + 断言逐执行登记”口径；代理并指出循环类随机用例必须两侧同熵，否则 4 万条断言无法逐值比较，已按固定熵记录回放）。
+
 ### 采集推进（20260930 04:00）
 
 - `default-http-client` 3/5/10 ✓、`private-key` **7/55/40021** ✓（10,000 次循环 × 4 断言 = 4 万断言实例，验证了“输入取样 + 断言逐执行登记”的 1:1 口径在现有工具链下可跑通；最终全量的断言文件会相应变大，属预期）。
