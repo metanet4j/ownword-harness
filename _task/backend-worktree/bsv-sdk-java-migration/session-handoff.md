@@ -114,6 +114,24 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 
 对 24 个最近采集的标准局部逐个复跑 `local-evidence-gate.py verify`（不跑 Maven、不占共享锁）：**24/24 通过**，覆盖 hash、window-cwi、r-puzzle、p2pkh-async-backend、aesgcm、signature、reduction-context、public-key、public-key-additional、locking-unlocking-script、script-additional、binary-fetch-client、bignumber-additional、ecdsa、schnorr、hd、script、push-drop、transaction-evidence、transaction-verifier、beef-party-additional、merkle-path、merkle-path-safe-offsets、merkle-path-bench。它们绑定不同 Java 来源（并行改动所致），最终窗口统一重采后即可全部 `currentCaptureVerified=true`。
 
+### 第八波待派（并发已满，等一路空闲立即派发）
+
+**并发上限 8 个活跃子代理**（超出时报 `subagent limit reached`）。当前 8 路在跑，因此最后一批 46 例待有空位再派，范围已核准：
+
+| 文件 | 缺口 | 局部名 |
+| --- | --- | --- |
+| `src/primitives/__tests/PrivateKey.test.ts` | 7 | `private-key` |
+| `src/primitives/__tests/PrivateKey.split.test.ts` | 8 | `private-key-split` |
+| `src/primitives/__tests/Random.test.ts` | 5 | `random` |
+| `src/primitives/__tests/Random.additional.test.ts` | 8 | `random-additional` |
+| `src/primitives/__tests/Hash.additional.test.ts` | 9 | `hash-additional` |
+| `src/primitives/__tests/AESGCM.man.test.ts` | 1 | `aesgcm-man` |
+| `src/primitives/__tests/AsyncCryptoBackend.test.ts` | 3 | `async-crypto-backend` |
+| `src/primitives/__tests/SymmetricKeyCompatibility.test.ts` | 3 | `symmetric-key-compatibility` |
+| `src/primitives/__tests/BigNumber.dhGroup.test.ts` | 2 | `bignumber-dh-group` |
+
+注意：`Random*`／`AsyncCryptoBackend` 在 `audit-tests.py` 里已有固定语义规则，探针必须按原观察形状记录；`PrivateKey.test.ts` 的 10,000 次循环按既定 1:1 口径（输入样本取代表迭代 + 断言逐执行登记）。
+
 ### 第七波（补派，小范围）
 
 - `keys-small` 代理：ECDSA.additional 12 + ECDH 2 + Secp256r1 7 + bug-31 1（22 例，四个小文件）。
