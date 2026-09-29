@@ -129,6 +129,15 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 三批交付汇总（20260930 07:10）
+
+**① 原语剩余批 7 个局部收口**（该批合计 42 例／229 输入／**40362 断言**）：private-key 7/55/40021、private-key-split 8/99/17、random 5/11/219、random-additional 8/10/62、hash-additional 9/22/19、symmetric-key-compatibility 3/22/22、bignumber-dh-group 2/10/2；七者 recapture 与 tamper 均通过、`verify` 复核通过。新增共享支撑 `support/TsInputReplay.java` 与 `capture-parity-array-length.cjs`。
+
+**② 认证修缺两处收口**：`peer-certificate-policy` 15/35/47、`simplified-fetch-transport` 3/6/10，两次重采**同一来源 `161bc96e`**，tamper 两个 true、preflight 两局部 **`currentCaptureVerified=true`**（全仓当前仅这两个 + peer 为 true）。
+　差异根因：前者 Java 只登记了 `requestCertificates` 第一个实参（TS 是 `[policy, "remote"]`）；后者请求 `body` 被记成 `{type=string,value=INSTANCE}`，实为生产用 `Undefined.INSTANCE` 表达 TS 的 undefined，重放投影只判了 `null`。两处均只改投影/接线。
+
+**③ `AESGCM.man` 的特殊排期**（重要）：该 TS 用例单次运行需 **66 分钟**（512MB 明文；Java 仅 49 秒），标准流程要跑两次（冻结 + 正式采集）。裁决：**冻结 + 登记现在做**（TS-only 运行不占 `run.lock`），**正式双侧采集留给最终窗口**（窗口因此延长约 70 分钟，可接受）；并要求沿既有传统采用“大数组记 `length + sha256`、witness 仍逐字节循环”的记录口径。
+
 ### `simplified-fetch-transport` 采集通过（20260930 07:00）
 
 认证修缺代理两处全部收口：`peer-certificate-policy` 15/35/47、`simplified-fetch-transport` 3 例（第二次换目录重试成功，verify ✓）。
