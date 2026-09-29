@@ -17,7 +17,6 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 os.chdir(BASE)
 
 mf = json.load(open('manifest.json', encoding='utf-8'))
-os.makedirs('md', exist_ok=True)
 
 
 class ChapterConverter(MarkdownConverter):
@@ -150,7 +149,7 @@ def main():
         if audio:
             header += f"\n> 朗读音频：{audio[0]}\n"
         md = f"{header}\n{body}"
-        open(f"md/{ch['slug']}.md", 'w', encoding='utf-8').write(md)
+        open(f"{ch['slug']}.md", 'w', encoding='utf-8').write(md)
         parts.append((ch, md))
         doc_parts.append({'part': ch['part'], 'title': ch['title'], 'slug': ch['slug'],
                           'audio': audio[0] if audio else None, 'blocks': to_blocks(md)})
@@ -161,37 +160,28 @@ def main():
         print('MISSING:', missing, file=sys.stderr)
         return 2
 
-    # 目录
+    # 总目录：每章一个文件，目录里的链接直接指向该文件
     lines = [f"# {mf['book']}\n",
              f"作者：{mf['author']}（{mf['title_en']}，{mf['publisher_en']}）  ",
              f"翻译：{mf['translator']}  ",
              f"来源：{mf['source']}\n",
              '## 目录\n']
     cur = None
-    for part, title, slug in toc:
-        if part != cur:
-            if part:
-                lines.append(f"\n**{part}**\n")
-            cur = part
-        lines.append(f"- [{title}](#{slug})")
-    lines.append('')
-
-    # 合并稿：加锚点，便于 Markdown 目录内跳转
-    book = ['\n'.join(lines)]
-    cur = None
-    for ch, md in parts:
-        if ch['part'] and ch['part'] != cur:
-            book.append(f"\n---\n\n<a id=\"part-{len(book)}\"></a>\n\n## {ch['part']}\n")
+    for ch in mf['chapters']:
+        title, slug = ch['title'], ch['slug']
+        if ch['part'] != cur:
             cur = ch['part']
-        book.append(f"\n---\n\n<a id=\"{ch['slug']}\"></a>\n\n" + md)
-    open('如何明白圣经-全文.md', 'w', encoding='utf-8').write('\n'.join(book).strip() + '\n')
+            if cur:
+                lines.append(f"\n**{cur}**\n")
+        lines.append(f"- [{title}]({slug}.md)")
+    lines.append('')
     open('目录.md', 'w', encoding='utf-8').write('\n'.join(lines).strip() + '\n')
     json.dump({'meta': {k: mf[k] for k in ('book', 'author', 'title_en', 'publisher_en',
                                            'translator', 'source')},
                'chapters': doc_parts},
               open('book.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     total = sum(len(m) for _, m in parts)
-    print(f"\n合并完成：{len(parts)} 篇，{total} 字符")
+    print(f"\n完成：{len(parts)} 章 Markdown + 目录.md，正文 {total} 字符")
     return 0
 
 

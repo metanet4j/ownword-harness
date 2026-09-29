@@ -1,15 +1,14 @@
 # 《如何明白圣经》抓取任务
 
-把 cmchurch.org 的《如何明白圣经》朗读版全书（序言 + 22 章）抓成 Markdown，并生成 Word 文档。
+把 cmchurch.org 的《如何明白圣经》朗读版全书（序言 + 22 章）抓成 Markdown，一章一个文件并配总目录，另生成 Word 文档。
 
 ## 产物
 
 | 文件 | 说明 |
 | --- | --- |
-| `如何明白圣经-全文.md` | 全书合并稿，含目录与章节锚点（约 27 万字节） |
+| `目录.md` | 总目录，链接指向各章 Markdown 文件 |
+| `00-preface.md` … `22-responding-to-gods-word.md` | 分章 Markdown，共 23 篇 |
 | `如何明白圣经.docx` | 全书 Word 文档，A4、宋体正文、黑体标题、首行缩进 2 字符、页脚页码 |
-| `目录.md` | 目录清单 |
-| `md/*.md` | 按章拆分的 Markdown，共 23 篇 |
 | `book.json` | 章节结构（供 docx 生成器使用） |
 | `manifest.json` | 书名、作者、章节与来源 URL 清单 |
 
@@ -18,7 +17,7 @@
 | 脚本 | 作用 |
 | --- | --- |
 | `fetch_html.py` | 串行抓取章节 HTML 到 `raw/`，遇 429 指数退避 |
-| `convert.py` | HTML → Markdown，生成 `md/`、`book.json`、合并稿与目录 |
+| `convert.py` | HTML → 分章 Markdown，生成 `book.json` 与 `目录.md` |
 | `build_docx.py` | `book.json` → `如何明白圣经.docx` |
 
 执行顺序：
@@ -37,7 +36,8 @@ PYTHONPATH=pylibs python3 build_docx.py
 
 ## 校验
 
-- 逐章比对网页段落与文档文本：23 章共 662 个段落全部命中，无缺失、无星号或链接语法残留。
+- 逐章比对网页段落与 Markdown、Word 文本：23 章共 662 个段落全部命中，无缺失、无星号或链接语法残留。
+- 总目录 23 条链接全部指向存在的章节文件。
 - Word 文档：900 段（含封面、目录与分页空段）、93,250 正文字符、386 处粗体 run。
 
 ## 中间数据
