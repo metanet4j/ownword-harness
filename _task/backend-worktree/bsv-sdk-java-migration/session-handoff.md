@@ -114,6 +114,13 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 
 对 24 个最近采集的标准局部逐个复跑 `local-evidence-gate.py verify`（不跑 Maven、不占共享锁）：**24/24 通过**，覆盖 hash、window-cwi、r-puzzle、p2pkh-async-backend、aesgcm、signature、reduction-context、public-key、public-key-additional、locking-unlocking-script、script-additional、binary-fetch-client、bignumber-additional、ecdsa、schnorr、hd、script、push-drop、transaction-evidence、transaction-verifier、beef-party-additional、merkle-path、merkle-path-safe-offsets、merkle-path-bench。它们绑定不同 Java 来源（并行改动所致），最终窗口统一重采后即可全部 `currentCaptureVerified=true`。
 
+### 编译恢复与本轮协调（20260930 01:30）
+
+- 我修掉最后一个阻塞：`auth/SessionManagerInputReplay.describeOptional` 的返回类型从 `Map<String,Object>` 改为 `Object`（原语义是 `value ?? undefined()`，非空时可能是字符串），整模块恢复可编译。
+- spend 代理确认 `clean test-compile` **exit=0、零错误**；http-chain 代理按我的提示把 10 处 `MockFetch` 改成 `new FetchHttpClient(fetch)` 后其文件零错误。
+- 四路代理（wallet-client、curve、auth、http-chain）与 spend、beef、transaction、keys-small 已陆续进入采集阶段；`run.lock` 队列饱和（我的编译复检排队 600 秒超时），因此主代理暂停一切会占锁的操作，把窗口让给采集。
+- 局部登记数 125（89 个有运行产物，正在快速增加）。
+
 ### 并发阻塞与协调（20260930 01:06）
 
 - `script` 包在飞文件出现实参表**尾随逗号**语法错误（`ChronicleTest:27`、`LrShiftNumTest:23`、`NormativeVectorsTest:35/59`、`SpendAdditionalTest:94`、`SpendCoreTest:51`、`SpendVerifierTest:34`），导致整个测试模块编译失败，wallet-client／curve／auth 等代理的采集全部被拒；已定向通知 spend 代理优先修复。
