@@ -129,6 +129,10 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 覆盖率 5328/5329（20260930 07:40）
+
+`async-crypto-backend`（3 例）已冻结计划并进入采集（`async-crypto-backend-plan-20260930`／`-probe-20260930`／`-standard-20260930-a`），**全仓仅剩 `AESGCM.man` 1 例未计划**；该例需一次 66 分钟 TS 冻结运行（不占锁）。
+
 ### 等待收尾（20260930 07:30）
 
 覆盖率仍 5325/5329（`async-crypto-backend` 3 + `AESGCM.man` 1）；`spend-additional` 仍在修（最近改动 `SpendObservation.java` 05:58）。**提醒后续轮次**：此刻再提交任何 Java 改动都会让在飞的 `spend-additional` 采集作废，因此冻结提交要等到三路全部停笔。
