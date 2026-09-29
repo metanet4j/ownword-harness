@@ -114,6 +114,14 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 
 对 24 个最近采集的标准局部逐个复跑 `local-evidence-gate.py verify`（不跑 Maven、不占共享锁）：**24/24 通过**，覆盖 hash、window-cwi、r-puzzle、p2pkh-async-backend、aesgcm、signature、reduction-context、public-key、public-key-additional、locking-unlocking-script、script-additional、binary-fetch-client、bignumber-additional、ecdsa、schnorr、hd、script、push-drop、transaction-evidence、transaction-verifier、beef-party-additional、merkle-path、merkle-path-safe-offsets、merkle-path-bench。它们绑定不同 Java 来源（并行改动所致），最终窗口统一重采后即可全部 `currentCaptureVerified=true`。
 
+### hex-bn 收尾（方案①，20260930 02:20）
+
+- 给 `build-full-run-probes.py` 增加 **`full-run-overrides.json` 覆盖机制**（合并 files 探针、把 resolvedLocals 从 unresolved 移除）；
+- 新增 `full-run-overrides.json`：为 `hex.test.ts`（探针 `capture-hex.cjs`）与 `BigNumber.constructor.test.ts`（`capture-bn-constructor.cjs`）登记输出环境变量，并在 hex 探针上挂 emit：`prepare-hex-bn-inputs.py emit-ts --kind both --raw-hex {runDir}/hex.raw.jsonl --raw-bn {runDir}/bn.raw.jsonl --inputs {output} --assertions {runDir}/ts-assertions.jsonl`（断言由 legacy 转换器直接写入本轮断言文件；这些探针不加载 `capture-parity`，标准断言发射器会因“没有原始断言轨迹”跳过，不会互相覆盖）；
+- `prepare-hex-bn-inputs.py` 的 `--run-id` 改为可缺省（回退 `EVIDENCE_RUN_ID`），因为全量分派表只替换 `{runDir}`／`{local}`／`{output}`；
+- **分派表现状：110 原文件／125 探针／90 环境变量，`unresolved=0`，无探针原文件 23 个（均为尚未计划的代理在飞范围）**。
+- 待办：在锁空闲时用 `run-full-ts-capture.py` 做一次只含这两个文件的子集自测（`--files` + `--allow-unresolved`），确认 emit 与断言落地格式正确。
+
 ### 全量分派表收敛（20260930 02:10）
 
 - `public-key`／`public-key-additional` 两个局部此前不在全量分派表里（探针用变量索引读 `process.env[...]`，静态扫描识别不到）。按既有约定在各自探针头部加了一行字面量声明（`process.env.MIGRATION_PUBLIC_KEY[_ADDITIONAL]_TS_OBSERVATIONS`）后已正确解析。

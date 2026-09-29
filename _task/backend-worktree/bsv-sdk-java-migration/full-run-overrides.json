@@ -1,0 +1,60 @@
+{
+  "note": "手工覆盖：旧管线局部（如 hex-bn）的驱动用变量计算轨迹路径，静态解析不出环境变量取值；这里显式登记探针、输出与 emit-ts 命令。",
+  "resolvedLocals": [
+    "hex-bn"
+  ],
+  "files": {
+    "src/primitives/__tests/hex.test.ts": {
+      "probes": [
+        {
+          "local": "hex-bn",
+          "probe": "capture-hex.cjs",
+          "mode": "raw",
+          "tier": "override",
+          "driver": "capture-legacy-side.py",
+          "env": "MIGRATION_HEX_OBSERVATIONS",
+          "outputs": {
+            "MIGRATION_HEX_OBSERVATIONS": "hex.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-hex-bn-inputs.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-hex-bn-inputs.py",
+              "emit-ts",
+              "--kind",
+              "both",
+              "--raw-hex",
+              "{runDir}/hex.raw.jsonl",
+              "--raw-bn",
+              "{runDir}/bn.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/input-replay-hex-bn-20260926/replay-inputs.jsonl",
+              "--inputs",
+              "{output}",
+              "--assertions",
+              "{runDir}/ts-assertions.jsonl",
+              "--side",
+              "ts"
+            ]
+          }
+        }
+      ]
+    },
+    "src/primitives/__tests/BigNumber.constructor.test.ts": {
+      "probes": [
+        {
+          "local": "hex-bn",
+          "probe": "capture-bn-constructor.cjs",
+          "mode": "raw",
+          "tier": "override",
+          "driver": "capture-legacy-side.py",
+          "env": "MIGRATION_BN_OBSERVATIONS",
+          "outputs": {
+            "MIGRATION_BN_OBSERVATIONS": "bn.raw.jsonl"
+          }
+        }
+      ]
+    }
+  }
+}

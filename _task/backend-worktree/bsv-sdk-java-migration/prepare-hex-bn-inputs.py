@@ -6,6 +6,7 @@
 """
 import argparse
 import importlib.util
+import os
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -30,9 +31,13 @@ def main():
     emit.add_argument('--plan', type=Path, required=True)
     emit.add_argument('--inputs', type=Path, required=True)
     emit.add_argument('--assertions', type=Path, required=True)
-    emit.add_argument('--run-id', required=True)
+    emit.add_argument('--run-id', help='缺省时取环境变量 EVIDENCE_RUN_ID（全量运行的分派表只替换 runDir/local/output）')
     emit.add_argument('--side', default='ts')
     options = parser.parse_args()
+    if not options.run_id:
+        options.run_id = os.environ.get('EVIDENCE_RUN_ID')
+    if not options.run_id:
+        parser.error('缺少本轮运行身份：请传 --run-id 或设置 EVIDENCE_RUN_ID')
     legacy().emit_ts(SimpleNamespace(kind=options.kind, raw=options.raw, raw_hex=options.raw_hex,
         raw_bn=options.raw_bn, plan=options.plan, run_id=options.run_id, side=options.side,
         inputs=options.inputs, assertions=options.assertions))

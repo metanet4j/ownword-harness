@@ -10162,6 +10162,62 @@
       ],
       "probe": "capture-xdm-inputs.cjs",
       "env": "MIGRATION_XDM_TS_OBSERVATIONS"
+    },
+    "src/primitives/__tests/hex.test.ts": {
+      "probes": [
+        {
+          "local": "hex-bn",
+          "probe": "capture-hex.cjs",
+          "mode": "raw",
+          "tier": "override",
+          "driver": "capture-legacy-side.py",
+          "env": "MIGRATION_HEX_OBSERVATIONS",
+          "outputs": {
+            "MIGRATION_HEX_OBSERVATIONS": "hex.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-hex-bn-inputs.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-hex-bn-inputs.py",
+              "emit-ts",
+              "--kind",
+              "both",
+              "--raw-hex",
+              "{runDir}/hex.raw.jsonl",
+              "--raw-bn",
+              "{runDir}/bn.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/input-replay-hex-bn-20260926/replay-inputs.jsonl",
+              "--inputs",
+              "{output}",
+              "--assertions",
+              "{runDir}/ts-assertions.jsonl",
+              "--side",
+              "ts"
+            ]
+          }
+        }
+      ],
+      "probe": "capture-hex.cjs",
+      "env": "MIGRATION_HEX_OBSERVATIONS"
+    },
+    "src/primitives/__tests/BigNumber.constructor.test.ts": {
+      "probes": [
+        {
+          "local": "hex-bn",
+          "probe": "capture-bn-constructor.cjs",
+          "mode": "raw",
+          "tier": "override",
+          "driver": "capture-legacy-side.py",
+          "env": "MIGRATION_BN_OBSERVATIONS",
+          "outputs": {
+            "MIGRATION_BN_OBSERVATIONS": "bn.raw.jsonl"
+          }
+        }
+      ],
+      "probe": "capture-bn-constructor.cjs",
+      "env": "MIGRATION_BN_OBSERVATIONS"
     }
   },
   "envs": {
@@ -10257,20 +10313,12 @@
     "MIGRATION_WINDOW_CWI_TS_INPUTS": "window-cwi"
   },
   "pending": [],
-  "unresolved": [
-    {
-      "local": "hex-bn",
-      "capture": "capture-legacy-side.py",
-      "inputPlan": ".cache/evidence/input-replay-hex-bn-20260926/input-plan.json",
-      "reason": "capture-bn-constructor.cjs: 环境变量无法解析（capture-legacy-side.py: MIGRATION_BN_OBSERVATIONS）；capture-hex.cjs: 环境变量无法解析（capture-legacy-side.py: MIGRATION_HEX_OBSERVATIONS）"
-    }
-  ],
+  "unresolved": [],
   "unmappedCatalogFiles": [
     "src/auth/__tests/Peer.certificatePolicy.test.ts",
     "src/auth/__tests/Peer.test.ts",
     "src/primitives/__tests/AESGCM.man.test.ts",
     "src/primitives/__tests/AsyncCryptoBackend.test.ts",
-    "src/primitives/__tests/BigNumber.constructor.test.ts",
     "src/primitives/__tests/BigNumber.dhGroup.test.ts",
     "src/primitives/__tests/Hash.additional.test.ts",
     "src/primitives/__tests/PrivateKey.split.test.ts",
@@ -10278,7 +10326,6 @@
     "src/primitives/__tests/Random.additional.test.ts",
     "src/primitives/__tests/Random.test.ts",
     "src/primitives/__tests/SymmetricKeyCompatibility.test.ts",
-    "src/primitives/__tests/hex.test.ts",
     "src/script/__tests/Chronicle.test.ts",
     "src/script/__tests/NormativeVectors.test.ts",
     "src/script/__tests/Spend.additional.test.ts",

@@ -764,6 +764,18 @@ def main():
                     row['probes'].append(probe)
             row['probe'] = row['probes'][0]['probe']
             row['env'] = row['probes'][0]['env']
+    overrides_path = TASK / 'full-run-overrides.json'
+    if overrides_path.exists():
+        overrides = json.loads(overrides_path.read_text())
+        for local_name in overrides.get('resolvedLocals', []):
+            unresolved = [row for row in unresolved if row['local'] != local_name]
+        for path, entry in (overrides.get('files') or {}).items():
+            row = files.setdefault(path, {'probes': []})
+            for probe in entry.get('probes', []):
+                if not any(existing['probe'] == probe['probe'] for existing in row['probes']):
+                    row['probes'].append(probe)
+            row['probe'] = row['probes'][0]['probe']
+            row['env'] = row['probes'][0].get('env')
     mapped = set(files)
     uncovered = sorted(path for path in (file['path'] for file in catalog['files']) if path not in mapped)
     result = {
