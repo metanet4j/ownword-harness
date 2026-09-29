@@ -2,9 +2,22 @@
 
 ## 执行位置
 
-权威任务状态见 [feature_list.json](feature_list.json)：43 个执行事项中 24 个 `done`、4 个 `in-progress`、15 个 `not-started`；`activeItem=nextItem=migration-impl-transaction-beef`。API 映射 3576／3576 项已复核，21 个嵌入批次均完成；原用例映射 5329／5329 个、源码测试站点映射 7554／7554 个。六模块完整门禁尚未通过。
+权威任务状态见 [feature_list.json](feature_list.json)：43 个执行事项中 **28 个实现事项的输入计划已 100% 冻结**（覆盖 5328／5329 个原用例，仅 `AESGCM.man` 的 1 例待其 66 分钟冻结运行登记），事项排期状态仍是 24 `done`／4 `in-progress`／15 `not-started` —— **状态翻转统一放在最终窗口之后**，因为 `taskAcceptance` 要求所有局部在同一 Java 来源下重采。
 
-目标 Java 工程在提交 `1da225e` 的宿主无过滤 `clean test` 通过 5437／5437，失败／错误／跳过均为 0；167 份 Surefire 报告覆盖全部 5329 个映射身份且无重复，另有 108 个 Java 回归，报告封存于 `.cache/evidence/wallet-keys-full-surefire-20260929/`，日志 `.cache/evidence/wallet-keys-full-java-20260929.log`，Java 来源摘要 `0a119349…`（与 wallet-keys 六个局部采集同一来源）。此前绑定 `382ac6c6` 的快照已过期。已结项事项的聚焦累计回归（广播器五类 79、交易基础五类 74、钱包宿主与 WalletWire 三类 177）在当前工作树一次运行 330／330 通过，失败／错误／跳过均为 0，日志 `.cache/evidence/logs/` 下由各次运行留存。固定 TypeScript 仓库及其他四个 Java 工程只读；目标工程 `metanet4j-bsv-sdk` 是唯一可改代码仓库。工作区根仓的既有无关改动保留。
+当前证据盘子：`full-evidence-locals.json` 登记 **153 个局部**，其中 **117 个已有运行产物**；`full-run-probes.json` 全量分派表 **151 局部／131 原文件／149 探针／113 环境变量，`unresolved=0`**、无探针原文件仅 2 个（均在收尾）。证据一致性抽检：111 份 `parity.json` 全部自洽。
+
+## 迁移中发现并修复的生产缺陷（均带独立回归）
+
+| 缺陷 | 现象 | 修复 | 回归 |
+| --- | --- | --- | --- |
+| `Signature.toCompact(int,Object,String)` | `Boolean` 实参按子类型匹配 `Object` 形参优先于拆箱，选中自身 → 无限递归 `StackOverflowError` | 显式取 `booleanValue()` 走编码重载 | `SignatureToCompactRegressionTest` |
+| `Utils.toArray` | 缺 TS `Array.from(msg, Math.trunc)` 的类数组分支 | 补 `BigNumber` 分支（按名义字长产出 NaN 元素） | `UtilsBigNumberArrayRegressionTest` |
+| `Hash.bytes` | 把 `BigNumber` 当空输入，`sha256(BigNumber)` 等于 `sha256("")`，导致 RFC6979 签名与固定 TS 不同 | 补 `BigNumber` 分支走 `toArray` | 同上 |
+| `Peer` 三处分发循环 | 监听器在回调里自注销（原测试真实用法）触发 `ConcurrentModificationException`，丢消息并挂死；固定 TS 的 Map 迭代允许删除 | `generalCallbacks`／`certificateRequestCallbacks`／`certificateCallbacks` 三处改遍历快照 | `PeerGeneralListenerUnsubscribeTest`（红绿验证：缺陷态 3/3 快速失败，修复态 3/3 通过） |
+
+## 收尾流程（已脚本化）
+
+`final-window-guard.sh`（静默／编译／计划／分派／覆盖率／工作树六项）→ 提交冻结来源 → `recapture-all.sh final-<标签>`（动态枚举 105+ 个可采局部，约 3.5–4 小时，含 `AESGCM.man` 的 66 分钟长跑）→ `full-evidence-preflight.py` → `close-items.sh <标签>`（逐事项任务级对照）→ `run-full-ts-capture.py` + `run-full-java-capture.py` 单次双侧全量运行 → `audit-tests.py check` + `audit-api.cjs check`。手册见 [全量验收运行手册](doc/全量验收运行手册-20260929-192735.md) 第五节。
 
 ## 已取得的任务级验收
 
