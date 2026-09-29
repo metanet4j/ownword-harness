@@ -5429,6 +5429,12 @@
                   "returnType": "void",
                   "line": 93,
                   "classification": "unit"
+                },
+                {
+                  "name": "initConnectsSuccessfullyAgainstALocalFtpService",
+                  "returnType": "void",
+                  "line": 131,
+                  "classification": "unit"
                 }
               ]
             },
@@ -5731,6 +5737,59 @@
                   "classification": "unit"
                 }
               ]
+            },
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/FtpFileClientIntegrationTest.java",
+              "classification": "integration",
+              "methods": [
+                {
+                  "name": "constructionSucceedsAgainstALocalFtpService",
+                  "returnType": "void",
+                  "line": 64,
+                  "classification": "integration"
+                },
+                {
+                  "name": "basePathIsNormalisedToEndWithSlash",
+                  "returnType": "void",
+                  "line": 72,
+                  "classification": "integration"
+                },
+                {
+                  "name": "uploadStoresTheFileAndReturnsTheDomainUrl",
+                  "returnType": "void",
+                  "line": 90,
+                  "classification": "integration"
+                },
+                {
+                  "name": "getContentReadsBackWhatWasUploaded",
+                  "returnType": "void",
+                  "line": 101,
+                  "classification": "integration"
+                },
+                {
+                  "name": "deleteRemovesTheStoredFile",
+                  "returnType": "void",
+                  "line": 110,
+                  "classification": "integration"
+                },
+                {
+                  "name": "separateClientsShareTheSameRemoteDirectory",
+                  "returnType": "void",
+                  "line": 121,
+                  "classification": "integration"
+                },
+                {
+                  "name": "largerPayloadSurvivesTheRoundTrip",
+                  "returnType": "void",
+                  "line": 131,
+                  "classification": "integration"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/MiniFtpServer.java",
+              "classification": "fixture",
+              "methods": []
             }
           ],
           "classificationReviewed": true,

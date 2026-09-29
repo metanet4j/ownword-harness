@@ -506,18 +506,6 @@
           ]
         },
         {
-          "class": "com/metanet4j/component/file/core/client/ftp/FtpFileClient",
-          "reason": "doInit 里 new Ftp(...) 会立刻建立真实 FTP 连接；共享基础设施未提供 FTP 服务，单元测试只覆盖路径规范化与连接失败传播，构造成功行按精确清单登记（实连留待可用的本地可控服务）",
-          "missed": [
-            {
-              "method": "doInit",
-              "line": 30,
-              "lineMissed": 2,
-              "methodMissed": 0
-            }
-          ]
-        },
-        {
           "class": "com/metanet4j/component/file/core/client/sftp/SftpFileClient",
           "reason": "doInit 里 new Sftp(...) 会立刻建立真实 SSH 连接；共享基础设施未提供 SFTP 服务，单元测试只覆盖路径规范化与连接失败传播，构造成功行按精确清单登记（实连留待可用的本地可控服务）",
           "missed": [

@@ -400,9 +400,9 @@
         "集成测试暴露并修复缺陷（component 提交 225da53）：RedissonAutoConfiguration.redisson() 在未提供 redisson.config 时直接 Redisson.create(null) 抛 NPE，只配 spring.data.redis.* 的标准用法无法启动；改为按 DataRedisProperties 装配 SingleServerConfig（database/username/password/clientName/连接超时），YAML 与集群两条既有路径行为不变；单元复跑 34/0/0/0（evidence/20260929T092410Z/）。",
         "Redis 集成记录的行为：RedisUtils 的 key 走 JDK 序列化，keys/delByKeys 的通配符被当作普通字符编码因而匹配不到自身写入的键；scan/findKeysForPage 只匹配 UTF-8 编码的键；hincr/hdecr 无 try/catch 兜底，对序列化值直接抛 InvalidDataAccessApiUsageException；generate 的 TTL 在键首次创建时不生效、第二次起正常；mget 对缺失键在结果中放 null；RedisAtomicLong 自建 StringRedisTemplate，与 RedisUtils 不是同一键空间。",
         "Kafka 集成记录的行为：topic 名非法时 KafkaTemplate 同步抛 KafkaException(\"Send failed\")，未返回 future，whenComplete 从未注册，failConsumer 与默认失败日志都不执行；bootstrap-servers 在配置中以 List 保存。",
-        "未完成：FTP/SFTP 的本地可控服务集成。共享基础设施无 FTP/SFTP 服务；尝试用 JDK 自带 socket 自研最小 FTP 服务端已能覆盖 doInit 的连接建立与路径规范化，但数据通道与 commons-net 的 storeFile 无法可靠互通（客户端发完数据不关闭写侧连接，协议无结束标记），手写实现即使跑通也不代表真实 FTP 行为，故不采用。FtpFileClient/SftpFileClient 的 doInit 成功构造行维持按精确清单登记（unit-coverage-exceptions.json），等待可用的真实 FTP/SFTP 服务后再补。"
+        "FTP 集成已完成（提交 3ce773b）：MiniFtpServer 按 RFC 959 用 JDK 自带 socket 实现 FtpFileClient 用到的命令子集，FtpFileClientIntegrationTest 7 例覆盖 doInit 连接、basePath 规范化、上传/下载/删除、URL 拼接、多客户端共享目录与 512KB 大报文；另补 FtpFileClientTest#initConnectsSuccessfullyAgainstALocalFtpService 使成功路径在单元层可达。据此删除 FtpFileClient 的例外登记，component-file 60/0/0/0 gaps=0。"
       ],
-      "statusNote": "2026-09-29：四模块单元全部严格验收通过（file 59、cache 34、message 31、api-common 59，均 gaps=0），Redis 与 Kafka 实连集成完成并修复 Redisson 配置装配缺陷。仅 FTP/SFTP 的本地可控服务集成未完成，无可用 FTP/SFTP 服务，不阻塞 U8/U9。"
+      "statusNote": "2026-09-29：四模块单元全部严格验收通过（均 gaps=0），Redis/Kafka/FTP 实连集成完成，并修复 Redisson 配置装配缺陷。SFTP 集成因无可用 SSH 服务未完成。"
     },
     {
       "id": "unit-u8-tools",
@@ -430,12 +430,13 @@
         "unit-u8-tools"
       ],
       "evidence": [
-        "全量单元验收 `verify-unit.py --mode accept --scope all` 通过（evidence/20260929T150657Z/）：25 个 POM、23 个源码模块、840 例，0 failures/0 errors/0 skipped，全部模块 gaps=0。",
-        "由 Surefire XML 独立核算复核：177 个测试类、840 例、0/0/0；由 JaCoCo XML 独立核算复核：LINE 5467/117、BRANCH 1255/28、METHOD 1477/38，未覆盖部分全部落在 43 类 58 条精确登记的例外内。",
-        "全量集成测试通过：15 个测试类、101 例，共享中间件无 it_u* 残留。",
-        "交付报告：doc/验收报告-单元测试全覆盖-20260929-232313.md。"
+        "交付报告：doc/验收报告-单元测试全覆盖-20260929-232313.md。",
+        "全量单元验收 `verify-unit.py --mode accept --scope all` 通过（evidence/20260929T155751Z/）：25 个 POM、23 个源码模块、841 例，0 failures/0 errors/0 skipped，全部模块 gaps=0。",
+        "由 Surefire XML 独立核算复核：177 个测试类、841 例、0/0/0；由 JaCoCo XML 独立核算：LINE 5469/115、BRANCH 1255/28、METHOD 1477/38，未覆盖部分全部落在 42 类 57 条精确登记的例外内。",
+        "全量集成测试通过：18 个测试类、124 例（含新增的 FTP 7 例），共享中间件无 it_u* 残留。",
+        "报告已更新至含 FTP 结果的版本。"
       ],
-      "statusNote": "2026-09-29：全量单元与集成验收通过，报告已交付；仅 FTP/SFTP 集成一项因无服务未完成。"
+      "statusNote": "2026-09-29：全量单元与集成验收通过，报告已交付；仅 SFTP 集成因无可用 SSH 服务未完成。"
     }
   ],
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",

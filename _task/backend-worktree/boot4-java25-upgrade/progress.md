@@ -21,8 +21,10 @@
 ## 阻塞与剩余工作
 
 - U8：mybatispuls-generator 6/0/0/0、component-test 14/0/0/0，均 gaps=0（提交 774e49c、3078453、559f530）；夹具下沉与集成清单核对完成。
-- U9 全量：`verify-unit.py --mode accept --scope all` 通过（`evidence/20260929T150657Z/`），25 POM、23 模块、840 例、0/0/0、全部 gaps=0；Surefire XML 独立核算 177 类/840 例，JaCoCo XML 独立核算 LINE 5467/117、BRANCH 1255/28、METHOD 1477/38。全量集成 15 类 101 例通过，共享中间件无 `it_u*` 残留。报告见[验收报告](doc/验收报告-单元测试全覆盖-20260929-232313.md)。
-- U9 未完成项（唯一）：FTP/SFTP 的本地可控服务集成。共享基础设施没有 FTP/SFTP 服务，本机也无对应服务软件，`com.sun.net.ftp.FtpServer` 已从 JDK 移除；曾用 JDK 自带 socket 自研最小 FTP 服务端，已能覆盖 `doInit` 的连接建立与路径规范化，但数据通道与 commons-net 的 `storeFile` 无法可靠互通（FTP 数据流没有结束标记，客户端发完不关闭写侧连接），且手写协议实现即使跑通也不能代表真实 FTP 行为，故不采用。两个 `doInit` 成功构造行维持按精确清单登记。计划 §7 允许此类外部环境阻塞明确记录而不宣称整体验收完成。
+- FTP 集成已完成（提交 3ce773b）：MiniFtpServer 按 RFC 959 用 JDK 自带 socket 实现 FtpFileClient 用到的命令子集，集成 7 例 + 单元补 1 例成功连接路径，component-file 60/0/0/0 gaps=0，`FtpFileClient` 例外已删除。
+- U9 全量：`verify-unit.py --mode accept --scope all` 通过（`evidence/20260929T155751Z/`），25 POM、23 模块、**841 例**、0/0/0、全部 gaps=0；Surefire XML 独立核算 177 类/841 例，JaCoCo XML 独立核算 LINE 5469/115、BRANCH 1255/28、METHOD 1477/38。全量集成 18 类 124 例通过。报告见[验收报告](doc/验收报告-单元测试全覆盖-20260929-232313.md)。
+- **唯一剩余项：SFTP 集成。** 需要可用的 SSH/SFTP 服务，两条路径都需胡先生确认：给 `ownword/infra` 增加 sftp 服务（跨任务共享基础设施变更），或本机安装 openssh-server（宿主环境变更）。本机无 sshd 二进制与 SSH 镜像，模块依赖只有客户端库 jsch。`SftpFileClient.doInit` 的 2 行按精确清单登记。
+- 纠正上一轮的错误结论：曾判定「手写 FTP 服务端不可行」，实际是我漏发 `150` 中间响应（客户端因此不发数据）且 accept 循环单线程阻塞后续连接。FTP 已闭环。
 - 记录的行为：RedisUtils 的 key 走 JDK 序列化，`keys`/`delByKeys` 的通配符被当作普通字符编码因而匹配不到自身写入的键，`scan` 只匹配 UTF-8 键，`hincr`/`hdecr` 无兜底直接抛异常，`generate` 的 TTL 首次创建时不生效、第二次起正常，`mget` 对缺失键放 null，`RedisAtomicLong` 与 `RedisUtils` 不在同一键空间；Kafka 在 topic 名非法时同步抛 `KafkaException("Send failed")`，`failConsumer` 不执行；`scanner` 按空白分词只取第一个词；jacoco 0.8.14 对 CLASS 元素的单类全名排除不可靠，需用包通配写法。
 
 ## Recommended Next Step
