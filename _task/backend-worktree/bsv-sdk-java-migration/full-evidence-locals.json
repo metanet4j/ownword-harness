@@ -1331,7 +1331,19 @@
       "catalog": ".cache/evidence/aesgcm-plan-20260929/catalog.json",
       "mapping": ".cache/evidence/aesgcm-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/aesgcm-plan-20260929/input-plan.json",
-      "capture": "capture-primitives-local.py"
+      "capture": "capture-primitives-local.py",
+      "ts_inputs": ".cache/evidence/aesgcm-standard-wa-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/aesgcm-standard-wa-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/aesgcm-standard-wa-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/aesgcm-standard-wa-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/aesgcm-standard-wa-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/aesgcm-standard-wa-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/aesgcm-standard-wa-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/aesgcm-standard-wa-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "http-wallet-wire",
@@ -1357,28 +1369,76 @@
       "catalog": ".cache/evidence/window-cwi-plan-20260929/catalog.json",
       "mapping": ".cache/evidence/window-cwi-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/window-cwi-plan-20260929/input-plan.json",
-      "capture": "capture-transaction-local.py"
+      "capture": "capture-transaction-local.py",
+      "ts_inputs": ".cache/evidence/window-cwi-standard-wa-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/window-cwi-standard-wa-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/window-cwi-standard-wa-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/window-cwi-standard-wa-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/window-cwi-standard-wa-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/window-cwi-standard-wa-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/window-cwi-standard-wa-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/window-cwi-standard-wa-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "hash",
       "catalog": ".cache/evidence/hash-plan-20260929/catalog.json",
       "mapping": ".cache/evidence/hash-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/hash-plan-20260929/input-plan.json",
-      "capture": "capture-evidence-local.py"
+      "capture": "capture-evidence-local.py",
+      "ts_inputs": ".cache/evidence/hash-standard-wa-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/hash-standard-wa-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/hash-standard-wa-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/hash-standard-wa-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/hash-standard-wa-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/hash-standard-wa-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/hash-standard-wa-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/hash-standard-wa-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "signature",
       "catalog": ".cache/evidence/signature-plan-20260929/catalog.json",
       "mapping": ".cache/evidence/signature-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/signature-plan-20260929/input-plan.json",
-      "capture": "capture-primitives-local.py"
+      "capture": "capture-primitives-local.py",
+      "ts_inputs": ".cache/evidence/signature-standard-wa-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/signature-standard-wa-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/signature-standard-wa-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/signature-standard-wa-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/signature-standard-wa-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/signature-standard-wa-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/signature-standard-wa-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/signature-standard-wa-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "reduction-context",
       "catalog": ".cache/evidence/reduction-context-plan-20260929/catalog.json",
       "mapping": ".cache/evidence/reduction-context-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/reduction-context-plan-20260929/input-plan.json",
-      "capture": "capture-primitives-local.py"
+      "capture": "capture-primitives-local.py",
+      "ts_inputs": ".cache/evidence/reduction-context-standard-wa-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/reduction-context-standard-wa-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/reduction-context-standard-wa-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/reduction-context-standard-wa-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/reduction-context-standard-wa-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/reduction-context-standard-wa-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/reduction-context-standard-wa-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/reduction-context-standard-wa-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "script",
@@ -1423,14 +1483,38 @@
       "catalog": ".cache/evidence/r-puzzle-plan-20260929/catalog.json",
       "mapping": ".cache/evidence/r-puzzle-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/r-puzzle-plan-20260929/input-plan.json",
-      "capture": "capture-script-local.py"
+      "capture": "capture-script-local.py",
+      "ts_inputs": ".cache/evidence/r-puzzle-standard-wa-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/r-puzzle-standard-wa-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/r-puzzle-standard-wa-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/r-puzzle-standard-wa-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/r-puzzle-standard-wa-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/r-puzzle-standard-wa-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/r-puzzle-standard-wa-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/r-puzzle-standard-wa-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "p2pkh-async-backend",
       "catalog": ".cache/evidence/p2pkh-async-backend-plan-20260929/catalog.json",
       "mapping": ".cache/evidence/p2pkh-async-backend-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/p2pkh-async-backend-plan-20260929/input-plan.json",
-      "capture": "capture-script-local.py"
+      "capture": "capture-script-local.py",
+      "ts_inputs": ".cache/evidence/p2pkh-async-backend-standard-wa-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/p2pkh-async-backend-standard-wa-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/p2pkh-async-backend-standard-wa-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/p2pkh-async-backend-standard-wa-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/p2pkh-async-backend-standard-wa-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/p2pkh-async-backend-standard-wa-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/p2pkh-async-backend-standard-wa-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/p2pkh-async-backend-standard-wa-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "push-drop",
@@ -1501,28 +1585,76 @@
       "catalog": ".cache/evidence/locking-unlocking-script-plan-20260929/catalog.json",
       "mapping": ".cache/evidence/locking-unlocking-script-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/locking-unlocking-script-plan-20260929/input-plan.json",
-      "capture": "capture-misc-local.py"
+      "capture": "capture-misc-local.py",
+      "ts_inputs": ".cache/evidence/locking-unlocking-script-standard-wa-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/locking-unlocking-script-standard-wa-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/locking-unlocking-script-standard-wa-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/locking-unlocking-script-standard-wa-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/locking-unlocking-script-standard-wa-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/locking-unlocking-script-standard-wa-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/locking-unlocking-script-standard-wa-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/locking-unlocking-script-standard-wa-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "script-additional",
       "catalog": ".cache/evidence/script-additional-plan-20260929/catalog.json",
       "mapping": ".cache/evidence/script-additional-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/script-additional-plan-20260929/input-plan.json",
-      "capture": "capture-misc-local.py"
+      "capture": "capture-misc-local.py",
+      "ts_inputs": ".cache/evidence/script-additional-standard-wa-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/script-additional-standard-wa-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/script-additional-standard-wa-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/script-additional-standard-wa-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/script-additional-standard-wa-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/script-additional-standard-wa-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/script-additional-standard-wa-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/script-additional-standard-wa-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "binary-fetch-client",
       "catalog": ".cache/evidence/binary-fetch-client-plan-20260929/catalog.json",
       "mapping": ".cache/evidence/binary-fetch-client-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/binary-fetch-client-plan-20260929/input-plan.json",
-      "capture": "capture-misc-local.py"
+      "capture": "capture-misc-local.py",
+      "ts_inputs": ".cache/evidence/binary-fetch-client-standard-wa-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/binary-fetch-client-standard-wa-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/binary-fetch-client-standard-wa-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/binary-fetch-client-standard-wa-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/binary-fetch-client-standard-wa-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/binary-fetch-client-standard-wa-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/binary-fetch-client-standard-wa-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/binary-fetch-client-standard-wa-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "bignumber-additional",
       "catalog": ".cache/evidence/bignumber-additional-plan-20260929/catalog.json",
       "mapping": ".cache/evidence/bignumber-additional-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/bignumber-additional-plan-20260929/input-plan.json",
-      "capture": "capture-misc-local.py"
+      "capture": "capture-misc-local.py",
+      "ts_inputs": ".cache/evidence/bignumber-additional-standard-wa-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/bignumber-additional-standard-wa-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/bignumber-additional-standard-wa-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/bignumber-additional-standard-wa-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/bignumber-additional-standard-wa-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/bignumber-additional-standard-wa-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/bignumber-additional-standard-wa-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/bignumber-additional-standard-wa-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "merkle-path-bench",
@@ -1586,14 +1718,38 @@
       "catalog": ".cache/evidence/public-key-plan-20260929/catalog.json",
       "mapping": ".cache/evidence/public-key-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/public-key-plan-20260929/input-plan.json",
-      "capture": "capture-keys-local.py"
+      "capture": "capture-keys-local.py",
+      "ts_inputs": ".cache/evidence/public-key-standard-wb-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/public-key-standard-wb-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/public-key-standard-wb-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/public-key-standard-wb-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/public-key-standard-wb-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/public-key-standard-wb-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/public-key-standard-wb-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/public-key-standard-wb-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "public-key-additional",
       "catalog": ".cache/evidence/public-key-additional-plan-20260929/catalog.json",
       "mapping": ".cache/evidence/public-key-additional-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/public-key-additional-plan-20260929/input-plan.json",
-      "capture": "capture-keys-local.py"
+      "capture": "capture-keys-local.py",
+      "ts_inputs": ".cache/evidence/public-key-additional-standard-wb-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/public-key-additional-standard-wb-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/public-key-additional-standard-wb-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/public-key-additional-standard-wb-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/public-key-additional-standard-wb-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/public-key-additional-standard-wb-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/public-key-additional-standard-wb-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/public-key-additional-standard-wb-20260929/java-surefire.xml"
+      ]
     },
     {
       "name": "ecdsa",
@@ -1625,9 +1781,9 @@
     },
     {
       "name": "simplified-fetch-transport-additional",
-      "catalog": ".cache/evidence/sfta-plan-20260929/catalog.json",
-      "mapping": ".cache/evidence/sfta-plan-20260929/mapping.json",
-      "input_plan": ".cache/evidence/sfta-plan-20260929/input-plan.json",
+      "catalog": ".cache/evidence/simplified-fetch-transport-additional-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/simplified-fetch-transport-additional-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/simplified-fetch-transport-additional-plan-20260929/input-plan.json",
       "capture": "capture-gap-local.py"
     }
   ],

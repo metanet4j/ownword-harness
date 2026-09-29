@@ -96,6 +96,14 @@ SA9：`locking-unlocking-script` 12 例、`script-additional` 14 例、`binary-f
 - **两个生产缺陷已修**（SDK 仓 `d5c3f42` + 前一提交 `Signature.toCompact`）：① `Utils.toArray` 缺 BigNumber 类数组分支、② `Hash.bytes` 把 BigNumber 当空输入（此前 `sha256(BigNumber)` == `sha256("")`，使 RFC6979 签名与固定 TS 不同）。新增 `UtilsBigNumberArrayRegressionTest`（2 例，额外 Java 回归）。聚焦验证 97/97。
 - **唯一在跑的代码缺口**：`beef`（Beef.test.ts，21 例）已派新代理接手；`BeefTest` 同时承载 `Transaction.test.ts` 用例，要求先出探针与计划、再一次性重写并保持既有断言与映射身份。
 
+### 本轮批量采集结果（13 个局部 / 270 例 / 785 断言，来源 `00f91838`）
+
+aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/150/92、window-cwi 31/60/61、public-key 14/34/18、public-key-additional 32/48/47、locking-unlocking-script 12/29/14、script-additional 14/37/30、binary-fetch-client 12/13/25、bignumber-additional 19/55/37、r-puzzle 9/17/9、p2pkh-async-backend 2/10/2 —— 全部 verify + tamper 通过。
+
+修掉两处适配器缺陷：`capture-keys-local.py`／`capture-gap-local.py` 误调 `prepare-transaction-local.py`（改用各自登记表的 prepare），以及 `sfta` 计划目录名不含局部名导致反查失败（已重命名为 `<局部>-plan-<日期>` 并重新登记）。
+
+**仍待采集 6 个**：ecdsa、schnorr、symmetric-key、ecies、chronicle-opcodes、simplified-fetch-transport-additional —— 本轮失败均因 `beef` 代理正在书写 `BeefInputReplay.java` 导致模块编译中断（非内容问题），随最终窗口一并重采。
+
 ### 统一窗口顺序（待 beef 落地后执行）
 
 1. `./lock.sh ./mvn.sh -f metanet4j-bsv-sdk/pom.xml test-compile` 确认编译干净；

@@ -56,7 +56,7 @@ def main():
         network = Path(env['MIGRATION_NETWORK_LOG'])
         if network.exists() and network.read_text().strip():
             raise RuntimeError('固定原测试出现网络调用：' + entry['file'])
-        run(['python3', str(TASK / 'prepare-transaction-local.py'), 'emit-ts', '--local', name,
+        run(['python3', str(TASK / 'prepare-gap-local.py'), 'emit-ts', '--local', name,
              '--raw', env[entry['ts_observations_env']], '--plan', str(plan / 'input-plan.json'),
              '--output', os.environ['EVIDENCE_INPUTS_PATH']], env=env)
     else:
