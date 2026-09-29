@@ -19,6 +19,10 @@
 - Java 侧提交会推进来源摘要（`382ac6c6`→`f16b01df`→`8cf69655`→`0a119349`），已完成的局部随即变为过期；钱包契约六文件（253 例）与钱包 JSON 两文件（58 例）仍绑定 `382ac6c6`，DRBG 29 例绑定 `c23c6f6`，都须在后续统一重采。
 - P0 采集来源门禁的语义规则 10／10、bundle 18／18、关联 3／3、宿主审计 41／41 自测通过。最新 `full-evidence-preflight.py` 结构计划覆盖 4099／5329，仍缺 1230 例，来源复核覆盖 121 例、12 个局部（`.cache/evidence/full-preflight-round13.json`：wallet-keys 六文件 71 例、认证证书六文件 50 例，均为当前来源 `0a119349`）；其余 68 个局部绑定旧执行器或旧 Java 版本，须在最终单次全量运行中重采。`ParityRecorder.errorName` 现按异常公共 `name` 字段记录 JS 可见错误名，WERR 系列不再被记成 `Error`。旧 Java 完整回归和 TS 原始报告不能代替单次完整双侧来源。通用断言 helper 已修复一批 null/undefined 伪记录，余下的完整调用历史和对象匹配语义正在修复并重新核对受影响局部证据。完整 `audit-tests.py check` 仍须全量真实输入和断言采集。
 
+## 收尾统一重采
+
+并行子代理的 Java 改动会不断推进来源摘要，因此**收尾时**在所有人停止改源码后执行一次统一重采：`./recapture-all.sh <日期标签> [局部名...]`（不传局部名则重采全部登记了 capture 适配器的标准局部，并逐个跑篡改门禁）。随后 `python3 full-evidence-preflight.py` 应显示这些局部 `currentCaptureVerified=true`；再对每个待结项用 `python3 local-task-parity.py --task <事项> --local ... --output <目录>` 出任务级报告，最后提交。
+
 ## 验证与收工
 
 - `migration-impl-transaction-base` 五个文件全部落地标准双侧局部（fee-model 18、live-policy 8、ef-cache 4、transaction-additional 20、signature-additional 24，合计 74 例／150 输入／115 断言），同一 Java 来源下 verify 与 tamper 通过，聚焦 `clean test` 74／74。任务级对照与 `done` 待并行子代理的 Java 改动提交后统一执行。
