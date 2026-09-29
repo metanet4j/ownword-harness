@@ -129,6 +129,12 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 窗口待发（20260930 10:15）
+
+`AESGCM.man` 长跑已约 38 分钟（预计 07:16 前后结束）。窗口命令已定：`./recapture-all.sh final-20260930`，将处理 **106 个可采局部**（含即将登记的 `aesgcm-man`），预计 3.5–4 小时（该局部本身占约 70 分钟）。
+
+启动后建议按 30–60 分钟粒度读取作业输出；窗口内**严禁**任何 Maven／采集／源文件改动。
+
 ### 来源冻结完成（20260930 10:00）
 
 静默达标后执行冻结提交：SDK 仓 `ba10dd4`（94 个文件：primitives 31／script 18／transaction 12／wallet 8／auth 8／chaintrackers 6／http 4／support 2），提交前 `test-compile` **BUILD SUCCESS**，提交后 `git status` **0 未提交**。
