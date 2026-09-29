@@ -43,6 +43,21 @@
 
 最终 `audit-tests.py check` 需要 `full-evidence-locals.json` 的 `fullRun.tsCommand/javaCommand/tsReports/javaReports`：TS 侧由一个按 `testPath` 分派探针的 `capture-full-dispatch.cjs` 在一次 Jest 运行里覆盖全部原文件，Java 侧用无过滤 `clean test` 并把全部 `MIGRATION_*_TS_INPUTS` 指向本轮汇总输入。该接口由基础设施子代理实现，完成后 `full-evidence-preflight.py` 的 `missingFullRunInterfaces` 应为空；覆盖率补齐后再跑单次双侧全量采集。
 
+## 第二波分工（待第一波交付后派发）
+
+各子代理完成后**不要闲置**：按下列批次用 `send_message` 续派（保持同一子代理的管线上下文最省事）。
+
+| 批次 | 事项 | 文件（未计划例数） | 备注 |
+| --- | --- | --- | --- |
+| B1 | wallet-client（100） | WalletClient.substrate(38)、WalletClient.additional(61)、WalletClient(1) | 依赖 wallet-wire／wallet-hosts 结项 |
+| B2 | auth-sessions（85） | Peer(30)、Peer.certificatePolicy(15)、Peer.boundary(2)、SessionManager(11)、build(20)、cryptononce(7) | 依赖 wallet-client |
+| B3 | auth-transport（49） | SimplifiedFetchTransport.additional(46)、SimplifiedFetchTransport(3) | 依赖 auth-sessions |
+| B4 | script-spend（91） | Spend.additional(69)、Spend(20)、SpendComplex(1)、Spend.codeseparator(1) | 455 例已有旧局部 |
+| B5 | script-vectors（26） | NormativeVectors(9)、Spend.verifier(9)、lrshiftnum(4)、Chronicle(3)、SpendValildVectors(1) | 529 例已计划 |
+| B6 | transaction-complete（86） | Transaction.test(61)、Transaction.performance(25) | 659 例已计划 |
+| B7 | script-model（65） | Script.test(39，进行中)、Script.additional(14)、LockingUnlockingScript(12) | — |
+| B8 | curve（38）／bignumber（50）／keys-signatures（73）／symmetric（22）／hash-random（39）／compat（9） | Curve.unit(18)、Curve.additional(20)、BigNumber.additional(19)、ReductionContext(29，进行中)、PublicKey(14)、PublicKey.additional(32)、ECDSA(15)、Schnorr(12)、SymmetricKey(15)、Hash(17，进行中)、ECIES(9) | 已完成事项的补强 |
+
 ## 收尾统一重采
 
 并行子代理的 Java 改动会不断推进来源摘要，因此**收尾时**在所有人停止改源码后执行一次统一重采：`./recapture-all.sh <日期标签> [局部名...]`（不传局部名则重采全部登记了 capture 适配器的标准局部，并逐个跑篡改门禁）。随后 `python3 full-evidence-preflight.py` 应显示这些局部 `currentCaptureVerified=true`；再对每个待结项用 `python3 local-task-parity.py --task <事项> --local ... --output <目录>` 出任务级报告，最后提交。
