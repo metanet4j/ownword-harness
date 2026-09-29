@@ -129,6 +129,16 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### beef 投影二次收敛与更实质的差异（20260930 03:20）
+
+- 第一次采集失败在 `constructor-01`：探针的 `MerklePath` 构造投影仍带 `txid`，Java 侧对应站点也带。已把**构造投影**两侧一并收敛为只比较 `{offset, hash}`，重跑探针（21/21、390 输入、123 断言，注意轨迹文件是**追加写**，重跑前必须先删）后重新冻结，计划不变。
+- 第二次采集：`constructor-01` 差异消失，只剩 `batchProvenMergeEqualsSequentialBytes`（caseId `cb017c09…`）的 **`toHex-194` 结果字节不同**——即同一输入下 TS 与 Java 生成的 BEEF 字节不一致。这已超出“投影/别名副作用”范畴，指向 Java 侧 `combineCompatibleBumps`／`MerklePath.combine`／`trim` 的合并语义差异。
+- 已派诊断代理：先定位首个差异字节与长度差，对照 TS `Beef.mergeProvenTxs` + `MerklePath.combine/trim` 与 Java 同名实现，确认是否生产缺陷；是则最小改动修复并重新采集+门禁，否则给出可复现证据与可选处置。
+
+### transaction 局部交付
+
+`transaction`（`Transaction.test.ts` 61 例／233 输入／161 断言）代码侧完成并登记，离线自检：JUnit Launcher 61/61、java-inputs 233/233 全等、`compare_actuals` 零不一致。其冻结副本按登记的 8 个 Java 类裁剪用例（同文件另有 659 例向量局部），并把 8 份 Surefire 合并成一个 `<testsuites>`。
+
 ### 首采暴露内容问题与定点修复（20260930 03:00）
 
 对**风险最高**的已交付局部先做小窗口采集，结果：`lrshiftnum` 4/28/29、`default-http-client-additional` 6/10/14 通过（含篡改门禁）；5 个局部失败——`spend-core`（断言实际结果不一致 `Spend.test.ts:580:7`）、`spend-verifier`（Java 缺一个输入用例 `db11cbc5…`）、`chronicle` 与 `normative-vectors`（同一族：`TransactionSignature.formatOTDA-02` 的入口/参数投影不一致）、`default-http-client`（`defaultHttpClient-01` 参数一致但 Java 返回 null）。均为**重放接线/投影问题**，非生产算法差异。

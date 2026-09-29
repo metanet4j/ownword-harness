@@ -330,8 +330,9 @@ function installMerklePath (moduleObject) {
   const Original = moduleObject.default
   return new Proxy(Original, {
     construct (target, args, newTarget) {
+      // 调用方传入的路径按输入侧口径比较（不含 txid 标志），与 Java 重放一致。
       const descriptor = [jsNumber(args[0]), args[1] === undefined ? null : describe(() => args[1].map(
-        level => level.map(leafDescriptor))), args[2] === undefined ? null : args[2],
+        level => level.map(leaf => leafDescriptor(leaf, false)))), args[2] === undefined ? null : args[2],
       args[3] === undefined ? null : args[3]]
       return observeConstruction('constructor', descriptor,
         () => Reflect.construct(target, args, newTarget))
