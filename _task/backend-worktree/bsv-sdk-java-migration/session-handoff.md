@@ -43,6 +43,10 @@
 
 最终 `audit-tests.py check` 需要 `full-evidence-locals.json` 的 `fullRun.tsCommand/javaCommand/tsReports/javaReports`：TS 侧由一个按 `testPath` 分派探针的 `capture-full-dispatch.cjs` 在一次 Jest 运行里覆盖全部原文件，Java 侧用无过滤 `clean test` 并把全部 `MIGRATION_*_TS_INPUTS` 指向本轮汇总输入。该接口由基础设施子代理实现，完成后 `full-evidence-preflight.py` 的 `missingFullRunInterfaces` 应为空；覆盖率补齐后再跑单次双侧全量采集。
 
+## 第三波（已派发）
+
+SA9：`locking-unlocking-script` 12 例、`script-additional` 14 例、`binary-fetch-client` 12 例、`bignumber-additional` 19 例（合计 57 例），用独立登记表 `misc-locals.py` + `prepare-misc-local.py` + `capture-misc-local.py`，避免与在跑的四个登记表冲突。
+
 ## 第二波分工（待第一波交付后派发）
 
 各子代理完成后**不要闲置**：按下列批次用 `send_message` 续派（保持同一子代理的管线上下文最省事）。
