@@ -110,6 +110,12 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 
 **仍有未计划用例的事项（共约 565 例，交给下一波代理）**：wallet-client 100、script-spend 91、transaction-complete 86、auth-sessions 85、http-chain 47、curve 38、keys-signatures 37、script-vectors 26、hash-random 22、transaction-beef 21（beef 在做）、symmetric 7、auth-transport 3、bignumber 2。
 
+### 第七波（补派，小范围）
+
+- `keys-small` 代理：ECDSA.additional 12 + ECDH 2 + Secp256r1 7 + bug-31 1（22 例，四个小文件）。
+- `http-chain` 代理：先核对 http-chain 事项中仍无计划的文件（约 47 例，含 BlockHeadersService 19 等），要求范围偏大时优先收口前 2 个文件并交剩余清单，不留半成品 Java。
+- 计划结构校验：96 个标准局部全部通过（并行期仍可用 `validate-plans.py` 体检）。未计划用例仍为 565 例，等各代理登记后下降。
+
 ### 第六波（20260930 凌晨）与代理失败情况
 
 - `tx-complete` 与 `curve/keys` 两路代理**中途失败且未留收尾报告**：前者未落任何文件；后者留下 `curve-locals.py`、`prepare-curve-local.py`、`capture-curve-local.py`、`capture-curve-additional-inputs.cjs`、`CurveAdditionalInputReplay.java`（可续用）。
