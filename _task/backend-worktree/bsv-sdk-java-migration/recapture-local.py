@@ -69,7 +69,12 @@ def capture(name, item, side, run):
                'python3', str(TASK / script), side]
     if side == 'java':
         command += ['clean', 'test']
-    command += ['--replay', str(replay), '--report', str(report)]
+    # 适配器有两种入参约定：早期用 --replay 指重放语料，较新的用 --plan 指计划目录。
+    adapter = (TASK / script).read_text()
+    if "'--plan'" in adapter:
+        command += ['--plan', str(catalog.parent), '--report', str(report)]
+    else:
+        command += ['--replay', str(replay), '--report', str(report)]
     return run_and_report(command)
 
 

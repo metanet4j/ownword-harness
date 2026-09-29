@@ -2,9 +2,9 @@
 
 ## 执行位置
 
-权威任务状态见 [feature_list.json](feature_list.json)：43 个执行事项中 20 个 `done`、8 个 `in-progress`、15 个 `not-started`；`activeItem=nextItem=migration-impl-wallet-keys`。API 映射 3576／3576 项已复核，21 个嵌入批次均完成；原用例映射 5329／5329 个、源码测试站点映射 7554／7554 个。六模块完整门禁尚未通过。
+权威任务状态见 [feature_list.json](feature_list.json)：43 个执行事项中 21 个 `done`、7 个 `in-progress`、15 个 `not-started`；`activeItem=nextItem=migration-impl-auth-certificates`。API 映射 3576／3576 项已复核，21 个嵌入批次均完成；原用例映射 5329／5329 个、源码测试站点映射 7554／7554 个。六模块完整门禁尚未通过。
 
-目标 Java 工程在提交 `4e656ae` 的宿主无过滤 `clean test` 通过 5437／5437，失败／错误／跳过均为 0；167 份 Surefire 报告覆盖全部 5329 个映射身份且无重复，另有 108 个 Java 回归，报告封存于 `.cache/evidence/wallet-contracts-full-surefire-20260929/`，日志 `.cache/evidence/wallet-contracts-full-java-20260929.log`，Java 来源摘要 `382ac6c6…`（与八个当前局部采集同一来源）。此前绑定 `1c979fa` 的快照已过期。固定 TypeScript 仓库及其他四个 Java 工程只读；目标工程 `metanet4j-bsv-sdk` 是唯一可改代码仓库。工作区根仓的既有无关改动保留。
+目标 Java 工程在提交 `1da225e` 的宿主无过滤 `clean test` 通过 5437／5437，失败／错误／跳过均为 0；167 份 Surefire 报告覆盖全部 5329 个映射身份且无重复，另有 108 个 Java 回归，报告封存于 `.cache/evidence/wallet-keys-full-surefire-20260929/`，日志 `.cache/evidence/wallet-keys-full-java-20260929.log`，Java 来源摘要 `0a119349…`（与 wallet-keys 六个局部采集同一来源）。此前绑定 `382ac6c6` 的快照已过期。固定 TypeScript 仓库及其他四个 Java 工程只读；目标工程 `metanet4j-bsv-sdk` 是唯一可改代码仓库。工作区根仓的既有无关改动保留。
 
 ## 已取得的任务级验收
 
@@ -32,4 +32,4 @@ P0 采集来源门禁已修复旧版本、同源伪轨迹、缺失断言及跨�
 ProtoWallet.native-hash 已完成标准双侧局部：6 例、19 条入口、18 条断言（65536 字节载荷按字面量登记，describe 级构造按计划归位），verify 与 tamper 通过。
 ProtoWallet.async-backend 已完成标准双侧局部：5 例、21 条入口、8 条断言（从桶文件出口替换 ProtoWallet／KeyDeriver，注册与注销按后端支持的操作集记录），verify 与 tamper 通过。
 
-wallet-keys 已完成四个文件的标准双侧同输入局部：KeyDeriver 17 例、49 条入口、37 条断言；ProtoWallet 19 例、111 条入口、44 条断言（深度守卫、原 helper 的 undefined originator 与固定系统时间对齐）；CachedKeyDeriver 13 例、49 条入口、44 条断言（含 LRU／最近使用循环站点样本与 `timing-ms-v1` 耗时语义规则）；ProtoWallet.additional 11 例、22 条入口、11 条断言（记录 keyDeriver 前置状态，测试侧用 `WalletKeysEntropy` 与 TS 探针的固定熵流对齐，双方消费同一把随机密钥 `40919c65…`）。两者均通过局部门禁 verify 与 tamper。KeyDeriver `local-evidence-gate.py` 的 verify 与 tamper 通过，TS 探针按“立即调用者是原测试”判定边界，Java 侧重放用子类覆写加深度守卫实现同一规则。Java 侧每次提交都会推进来源摘要（`382ac6c6`→`f16b01df`→`8cf69655`），因此已完成的局部会在下一次 Java 改动后变为过期；按计划在 wallet-keys 的 Java 侧改动全部落地后统一重采全部受影响局部。最新预检（20260929）的结构计划为 4099／5329，仍缺 1230 例；六个 wallet-keys 局部共 71 例均已产出，当前来源复核覆盖 5 例（其余待统一重采）；现有局部运行不能拼接为正式全量来源，见 `doc/全量证据采集前置-20260927-005500.md`。完整 `audit-tests.py check` 还需当前源码下单次双侧全量输入、逐断言实例、随机／耗时语义和条件分支证据。
+wallet-keys 已完成四个文件的标准双侧同输入局部：KeyDeriver 17 例、49 条入口、37 条断言；ProtoWallet 19 例、111 条入口、44 条断言（深度守卫、原 helper 的 undefined originator 与固定系统时间对齐）；CachedKeyDeriver 13 例、49 条入口、44 条断言（含 LRU／最近使用循环站点样本与 `timing-ms-v1` 耗时语义规则）；ProtoWallet.additional 11 例、22 条入口、11 条断言（记录 keyDeriver 前置状态，测试侧用 `WalletKeysEntropy` 与 TS 探针的固定熵流对齐，双方消费同一把随机密钥 `40919c65…`）。两者均通过局部门禁 verify 与 tamper。KeyDeriver `local-evidence-gate.py` 的 verify 与 tamper 通过，TS 探针按“立即调用者是原测试”判定边界，Java 侧重放用子类覆写加深度守卫实现同一规则。Java 侧每次提交都会推进来源摘要（`382ac6c6`→`f16b01df`→`8cf69655`），因此已完成的局部会在下一次 Java 改动后变为过期；按计划在 wallet-keys 的 Java 侧改动全部落地后统一重采全部受影响局部。最新预检（20260929）的结构计划为 4099／5329，仍缺 1230 例；wallet-keys 六个局部（71 例）已在同一来源 `0a119349` 统一重采并通过来源复核，是本项结项依据；其余局部待各自收尾后统一重采；现有局部运行不能拼接为正式全量来源，见 `doc/全量证据采集前置-20260927-005500.md`。完整 `audit-tests.py check` 还需当前源码下单次双侧全量输入、逐断言实例、随机／耗时语义和条件分支证据。

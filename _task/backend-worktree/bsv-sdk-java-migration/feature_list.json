@@ -14,8 +14,8 @@
       "跨工程发布、部署或远端推送"
     ]
   },
-  "activeItem": "migration-impl-wallet-keys",
-  "nextItem": "migration-impl-wallet-keys",
+  "activeItem": "migration-impl-auth-certificates",
+  "nextItem": "migration-impl-auth-certificates",
   "features": [
     {
       "id": "migration-env",
@@ -819,7 +819,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "wallet：密钥派生、缓存与 ProtoWallet",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-wallet-contracts"
       ],
@@ -854,7 +854,9 @@
       ],
       "evidence": [
         "目标提交 b81b37f；干净目标工作树 Maven 六类 71/71、失败/错误/跳过均为 0；固定 TS 六文件 71/71、162 条断言，网络请求 0。",
-        ".cache/evidence/wallet-keys-clean-parity.json：71/71、162/162、missing/uncompared/extra=0；仅性能用例两条耗时按原阈值比较。75 项 API、71 用例及 246 个源码站点已映射。"
+        "当前 Java 来源 0a119349（提交 1da225e）：六个文件均为标准双侧同输入局部——KeyDeriver 17/49/37、CachedKeyDeriver 13/49/44、ProtoWallet.additional 11/22/11、ProtoWallet 19/111/44、ProtoWallet.native-hash 6/19/18、ProtoWallet.async-backend 5/21/8，合计 71 例、271 条入口、162 条断言，局部门禁 verify 与 tamper 通过，full-evidence-preflight 记为 currentCaptureVerified。",
+        "同来源宿主无过滤 clean test 5437/5437，167 份 Surefire 覆盖全部 5329 个映射身份，另有 108 个 Java 回归；报告 .cache/evidence/wallet-keys-full-surefire-20260929/。",
+        ".cache/evidence/wallet-keys-clean-parity.json：71/71、162/162、missing/uncompared/extra=0；75 项 API、71 用例及 246 个源码站点已映射。"
       ],
       "modules": [
         "wallet"
