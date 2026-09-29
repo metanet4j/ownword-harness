@@ -129,6 +129,12 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 守卫复跑（20260930 09:20）
+
+①静默 ✗（spend 代理 10 分钟内有改动）；②编译 ✓；③计划 ✓（137 检查／0 失败）；④分派表 ✓（152 局部／132 原文件／150 探针／114 环境变量，`unresolved=0`，无探针原文件 1 个）；⑤覆盖率 ✗ 5328/5329（仅 `AESGCM.man` 1 例）；⑥工作树 ✗ 94 个未提交（冻结时提交）。
+
+结论：六项里只有三项待办，且都属“等长跑 + 等停笔 + 冻结提交”这类时序事项，无技术风险项。
+
 ### 等待期状态（20260930 09:10）
 
 `AESGCM.man` 冻结运行约 24 分钟；spend/链跟踪修缺代理在做收尾复验（06:33 仍改 `WhatsOnChainChainTrackerInputReplay`）。两路之外全部代理已停笔。
