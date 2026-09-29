@@ -129,6 +129,14 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### peer 生产缺陷授权修复（20260930 03:45）
+
+`peer` 代理定位到 `Peer.processGeneralMessage`（`auth/Peer.java:662`）的真实移植缺陷：Java 用 `for (var callback : generalCallbacks.values())` 遍历，而原测试的监听器会在回调里 `stopListeningForGeneralMessages` 自己 → `ConcurrentModificationException`，后续监听器不再执行、消息丢失、用例挂死；TS 的 `for (const callback of …values())` 允许迭代中删除，故 TS 正常。
+
+已授权其应用 1 行修复（遍历 `new java.util.ArrayList<>(generalCallbacks.values())` 快照），并要求：加一条独立 Java 回归（两个监听器、第一个自注销、断言不抛 CME 且第二个仍收到消息、与上游用例分开计数）、跑 `PeerTest`/`PeerTransportErrorTest`/回归全绿、再登记+采集+篡改门禁。同时认可其证书 `fieldNames` 口径修正（字段密文逐证随机，比较字段名不削弱断言侧）。
+
+另：`spend-verifier` 修复后采集通过（9 例／9 输入／20 断言），`spend-core` 亦已通过；spend/http 修复批次只剩 `chronicle`、`normative-vectors`、`default-http-client` 在重采。
+
 ### 缺口收敛到 94 例（20260930 03:30）
 
 - `spend-core` 修复成功并采集成 20 例／20 输入／34 断言（`verify` 通过）——首采暴露的断言差异由修复代理解决。
