@@ -13,7 +13,8 @@ _task/book-scrape/
 │   ├── fetch_html.py         抓取章节 HTML
 │   ├── convert.py            HTML → 分章 Markdown + 目录.md + book.json
 │   ├── build_docx.py         book.json → Word 文档
-│   └── verify_book.py        核对抓取结果与源页面段落
+│   ├── verify_book.py        核对抓取结果与源页面段落
+│   └── scan_questions.py     统计分类页覆盖的问答编号，检查目录是否漏页
 ├── manifest.template.json    新书清单模板
 └── <书名-英文名>/             每本书一个目录
     ├── manifest.json
@@ -34,6 +35,8 @@ python3 lib/convert.py    "<书名-英文名>"
 python3 lib/build_docx.py "<书名-英文名>"
 python3 lib/verify_book.py "<书名-英文名>"
 ```
+
+目录里的链接可能指向错误页面（站点自身的笔误），抓完先用 `scan_questions.py` 看问答编号是否连续，有缺口就按 sitemap 找回正确地址再补抓。
 
 `fetch_html.py` 支持断点续抓：已存在且大于 20 KB 的章节会跳过，可用 `--start N` 指定起始序号、`--limit N` 先抓前几章验证选择器。
 

@@ -168,12 +168,13 @@ def main():
             r.head(p, cur, 13)
         if ch.get('category') and ch['category'] != cur_cat:
             cur_cat = ch['category']
-            p = doc.add_paragraph()
-            p.paragraph_format.space_before = Pt(6)
-            p.paragraph_format.space_after = Pt(2)
-            p.paragraph_format.left_indent = Cm(0.5)
-            r.body(p, ch['category'], size=cfg['body_size'] - 1,
-                   color=RGBColor(0x44, 0x44, 0x44))
+            if cur_cat != ch['title']:
+                p = doc.add_paragraph()
+                p.paragraph_format.space_before = Pt(6)
+                p.paragraph_format.space_after = Pt(2)
+                p.paragraph_format.left_indent = Cm(0.5)
+                r.body(p, ch['category'], size=cfg['body_size'] - 1,
+                       color=RGBColor(0x44, 0x44, 0x44))
         p = doc.add_paragraph()
         p.paragraph_format.space_after = Pt(4)
         p.paragraph_format.left_indent = Cm(0.8)

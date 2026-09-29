@@ -119,6 +119,16 @@ def escape_stray_asterisks(md):
     return ''.join(out)
 
 
+def normalize_heading_levels(md):
+    """正文标题层级从 h2 起，避免与章节标题（h1）之间跳级。
+
+    源页面里问答标题用 h4，转换后直接是 h4，Word 里层级跳跃。
+    """
+    def shift(m):
+        return '#' * max(2, len(m.group(1)) - 2) + ' ' + m.group(2)
+    return re.sub(r'^(#{3,6})\s+(.*)$', shift, md, flags=re.M)
+
+
 def tidy(md):
     md = md.replace('\u00a0', ' ')
     md = re.sub(r'[ \t]+\n', '\n', md)
@@ -200,14 +210,15 @@ def main():
             continue
         page_title, inner, audio = extract(src, site)
         body = escape_stray_asterisks(align_bold_markers(normalize_bold_markers(
-            tidy(ChapterConverter(heading_style='ATX', bullets='-').convert(inner)))))
+            normalize_heading_levels(
+                tidy(ChapterConverter(heading_style='ATX', bullets='-').convert(inner))))))
         heading = f"# {ch['title']}"
         # 页面标题形如「第一章 个人查经是必须的 Personal Bible Study Is a Must」
         subtitle = page_title[len(ch['title']):].strip() if page_title.startswith(ch['title']) else ''
         if subtitle:
             heading += f"\n\n## {subtitle}"
         header = heading + '\n'
-        if ch.get('category'):
+        if ch.get('category') and ch['category'] != ch['title']:
             header += f"\n> {ch['category']}\n"
         if audio:
             header += f"\n> 朗读音频：{audio[0]}\n"
@@ -240,7 +251,8 @@ def main():
                 lines.append(f"\n**{cur}**\n")
         if ch.get('category') and ch['category'] != cur_cat:
             cur_cat = ch['category']
-            lines.append(f"\n*{cur_cat}*\n")
+            if cur_cat != ch['title']:      # 分类名与章节名相同的书不必重复列一行
+                lines.append(f"\n*{cur_cat}*\n")
         lines.append(f"- [{ch['title']}]({chapter_filename(ch)})")
     lines.append('')
     open('目录.md', 'w', encoding='utf-8').write('\n'.join(lines).strip() + '\n')
