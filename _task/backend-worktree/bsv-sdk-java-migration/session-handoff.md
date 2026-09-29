@@ -129,6 +129,12 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 窗口前登记体检（20260930 09:45）
+
+对全部已采集局部逐条核对 `ts_run_manifest`／`java_run_manifest`／`ts_inputs`／`java_inputs` 四类路径：**0 个悬空引用**。最新两局部（spend-additional、whats-on-chain-chain-tracker）均指向以 `d` 结尾的成功运行目录。
+
+`AESGCM.man` 长跑进行中（已约 36 分钟，预计 07:16 前后结束）。
+
 ### spend 批收尾完成、全仓接近静默（20260930 09:30）
 
 spend/链跟踪修缺代理**已停笔**，两局部全绿且 `currentCaptureVerified=true`：`spend-additional` 69/70/76、`whats-on-chain-chain-tracker` 8/26/10；`planErrors=[]`、聚焦 `clean test` 77/0/0/0、`test-compile` BUILD SUCCESS。三处根因均为接线/投影：①spend 构造实参漏镜像 TS 的 `memoryLimit`/`isRelaxed`/`unlockingScript`；②**该文件 4 例 `PrivateKey.fromRandom()` 使探针自身不确定**（冻结自采与标准采集拿到不同密钥）→ 新增 `spend-seeded-entropy.cjs` 种子加载（对齐 `verifier-seeded-entropy.cjs` 口径，已实测对无随机熵文件逐行无影响）；③WOC tracker 构造体内又造了一个未包装客户端，导致一次 HTTP 调用被记两次入口。
