@@ -2,13 +2,21 @@
   "schemaVersion": 1,
   "producer": "build-full-run-probes.py",
   "localsModules": [
+    "auth-locals.py",
     "certificate-locals.py",
+    "curve-locals.py",
     "evidence-locals.py",
+    "gap-locals.py",
+    "http-chain-locals.py",
     "keys-locals.py",
+    "keys-small-locals.py",
     "misc-locals.py",
     "primitives-locals.py",
     "script-locals.py",
-    "transaction-locals.py"
+    "spend-locals.py",
+    "transaction-locals.py",
+    "tx-local-locals.py",
+    "wallet-client-locals.py"
   ],
   "locals": {
     "aesgcm": {
@@ -205,6 +213,67 @@
       "inputs_env": "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
       "probe": "capture-arc-broadcaster-inputs.cjs",
       "env": "MIGRATION_ARC_TS_OBSERVATIONS"
+    },
+    "auth-build": {
+      "local": "auth-build",
+      "capture": "capture-auth-local.py",
+      "files": [
+        "src/auth/__tests/build.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/auth-build-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "auth-build",
+          "probe": "capture-auth-build-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-auth-local.py",
+          "outputs": {
+            "MIGRATION_AUTH_BUILD_TS_OBSERVATIONS": "auth-build.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/auth-build.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/auth-build-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_AUTH_BUILD_TS_OBSERVATIONS",
+          "raw": "auth-build.calls.raw.jsonl",
+          "rawOwner": "auth-build"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_AUTH_BUILD_TS_OBSERVATIONS": "auth-build.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_BUILD_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_AUTH_BUILD_TS_INPUTS",
+      "probe": "capture-auth-build-inputs.cjs",
+      "env": "MIGRATION_AUTH_BUILD_TS_OBSERVATIONS"
     },
     "auth-certificate-class": {
       "local": "auth-certificate-class",
@@ -1018,6 +1087,67 @@
       "probe": "capture-beef-party-additional-inputs.cjs",
       "env": "MIGRATION_BEEF_PARTY_ADDITIONAL_TS_OBSERVATIONS"
     },
+    "bignumber-additional": {
+      "local": "bignumber-additional",
+      "capture": "capture-misc-local.py",
+      "files": [
+        "src/primitives/__tests/BigNumber.additional.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/bignumber-additional-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "bignumber-additional",
+          "probe": "capture-bignumber-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-misc-local.py",
+          "outputs": {
+            "MIGRATION_BIGNUMBER_ADDITIONAL_TS_OBSERVATIONS": "bignumber-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/bignumber-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/bignumber-additional-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_BIGNUMBER_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "bignumber-additional.calls.raw.jsonl",
+          "rawOwner": "bignumber-additional"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_BIGNUMBER_ADDITIONAL_TS_OBSERVATIONS": "bignumber-additional.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_BIGNUMBER_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_BIGNUMBER_ADDITIONAL_TS_INPUTS",
+      "probe": "capture-bignumber-additional-inputs.cjs",
+      "env": "MIGRATION_BIGNUMBER_ADDITIONAL_TS_OBSERVATIONS"
+    },
     "bignumber-arithmetic": {
       "local": "bignumber-arithmetic",
       "capture": null,
@@ -1146,6 +1276,128 @@
       "inputs_env": "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
       "probe": "capture-bn-arithmetic-inputs.cjs",
       "env": "MIGRATION_BN_ARITHMETIC_RAW"
+    },
+    "binary-fetch-client": {
+      "local": "binary-fetch-client",
+      "capture": "capture-misc-local.py",
+      "files": [
+        "src/transaction/http/__tests/BinaryFetchClient.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/binary-fetch-client-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "binary-fetch-client",
+          "probe": "capture-binary-fetch-client-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-misc-local.py",
+          "outputs": {
+            "MIGRATION_BINARY_FETCH_CLIENT_TS_OBSERVATIONS": "binary-fetch-client.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/binary-fetch-client.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/binary-fetch-client-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_BINARY_FETCH_CLIENT_TS_OBSERVATIONS",
+          "raw": "binary-fetch-client.calls.raw.jsonl",
+          "rawOwner": "binary-fetch-client"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_BINARY_FETCH_CLIENT_TS_OBSERVATIONS": "binary-fetch-client.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_BINARY_FETCH_CLIENT_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_BINARY_FETCH_CLIENT_TS_INPUTS",
+      "probe": "capture-binary-fetch-client-inputs.cjs",
+      "env": "MIGRATION_BINARY_FETCH_CLIENT_TS_OBSERVATIONS"
+    },
+    "block-headers-service": {
+      "local": "block-headers-service",
+      "capture": "capture-http-chain-local.py",
+      "files": [
+        "src/transaction/chaintrackers/__tests/BlockHeadersService.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/block-headers-service-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "block-headers-service",
+          "probe": "capture-block-headers-service-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-http-chain-local.py",
+          "outputs": {
+            "MIGRATION_BLOCK_HEADERS_SERVICE_TS_OBSERVATIONS": "block-headers-service.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-http-chain-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-http-chain-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/block-headers-service.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/block-headers-service-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_BLOCK_HEADERS_SERVICE_TS_OBSERVATIONS",
+          "raw": "block-headers-service.calls.raw.jsonl",
+          "rawOwner": "block-headers-service"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_BLOCK_HEADERS_SERVICE_TS_OBSERVATIONS": "block-headers-service.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_BLOCK_HEADERS_SERVICE_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_BLOCK_HEADERS_SERVICE_TS_INPUTS",
+      "probe": "capture-block-headers-service-inputs.cjs",
+      "env": "MIGRATION_BLOCK_HEADERS_SERVICE_TS_OBSERVATIONS"
     },
     "bn-utils36": {
       "local": "bn-utils36",
@@ -1307,6 +1559,67 @@
       "probe": "capture-broadcaster-inputs.cjs",
       "env": "MIGRATION_PARITY_TS_OBSERVATIONS"
     },
+    "bug-31": {
+      "local": "bug-31",
+      "capture": "capture-keys-small-local.py",
+      "files": [
+        "src/primitives/__tests/bug-31.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/bug-31-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "bug-31",
+          "probe": "capture-bug-31-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-small-local.py",
+          "outputs": {
+            "MIGRATION_BUG_31_TS_OBSERVATIONS": "bug-31.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/bug-31.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/bug-31-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_BUG_31_TS_OBSERVATIONS",
+          "raw": "bug-31.calls.raw.jsonl",
+          "rawOwner": "bug-31"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_BUG_31_TS_OBSERVATIONS": "bug-31.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_BUG_31_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_BUG_31_TS_INPUTS",
+      "probe": "capture-bug-31-inputs.cjs",
+      "env": "MIGRATION_BUG_31_TS_OBSERVATIONS"
+    },
     "byte-base58": {
       "local": "byte-base58",
       "capture": null,
@@ -1395,6 +1708,67 @@
       "probe": "capture-cached-keyderiver-inputs.cjs",
       "env": "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS"
     },
+    "chronicle-opcodes": {
+      "local": "chronicle-opcodes",
+      "capture": "capture-gap-local.py",
+      "files": [
+        "src/script/__tests/ChronicleOpcodes.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/chronicle-opcodes-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "chronicle-opcodes",
+          "probe": "capture-chronicle-opcodes-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-gap-local.py",
+          "outputs": {
+            "MIGRATION_CHRONICLE_OPCODES_TS_OBSERVATIONS": "chronicle-opcodes.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-gap-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-gap-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/chronicle-opcodes.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/chronicle-opcodes-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_CHRONICLE_OPCODES_TS_OBSERVATIONS",
+          "raw": "chronicle-opcodes.calls.raw.jsonl",
+          "rawOwner": "chronicle-opcodes"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_CHRONICLE_OPCODES_TS_OBSERVATIONS": "chronicle-opcodes.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_CHRONICLE_OPCODES_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_CHRONICLE_OPCODES_TS_INPUTS",
+      "probe": "capture-chronicle-opcodes-inputs.cjs",
+      "env": "MIGRATION_CHRONICLE_OPCODES_TS_OBSERVATIONS"
+    },
     "compat-bsm": {
       "local": "compat-bsm",
       "capture": null,
@@ -1433,6 +1807,189 @@
       "inputs_env": "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
       "probe": "capture-bsm-inputs.cjs",
       "env": null
+    },
+    "cryptononce": {
+      "local": "cryptononce",
+      "capture": "capture-auth-local.py",
+      "files": [
+        "src/auth/utils/__tests/cryptononce.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/cryptononce-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "cryptononce",
+          "probe": "capture-cryptononce-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-auth-local.py",
+          "outputs": {
+            "MIGRATION_AUTH_CRYPTONONCE_TS_OBSERVATIONS": "cryptononce.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/cryptononce.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/cryptononce-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_AUTH_CRYPTONONCE_TS_OBSERVATIONS",
+          "raw": "cryptononce.calls.raw.jsonl",
+          "rawOwner": "cryptononce"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_AUTH_CRYPTONONCE_TS_OBSERVATIONS": "cryptononce.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_CRYPTONONCE_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_AUTH_CRYPTONONCE_TS_INPUTS",
+      "probe": "capture-cryptononce-inputs.cjs",
+      "env": "MIGRATION_AUTH_CRYPTONONCE_TS_OBSERVATIONS"
+    },
+    "curve-additional": {
+      "local": "curve-additional",
+      "capture": "capture-curve-local.py",
+      "files": [
+        "src/primitives/__tests/Curve.additional.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/curve-additional-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "curve-additional",
+          "probe": "capture-curve-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-curve-local.py",
+          "outputs": {
+            "MIGRATION_CURVE_ADDITIONAL_TS_OBSERVATIONS": "curve-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-curve-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-curve-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/curve-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/curve-additional-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_CURVE_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "curve-additional.calls.raw.jsonl",
+          "rawOwner": "curve-additional"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_CURVE_ADDITIONAL_TS_OBSERVATIONS": "curve-additional.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_CURVE_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_CURVE_ADDITIONAL_TS_INPUTS",
+      "probe": "capture-curve-additional-inputs.cjs",
+      "env": "MIGRATION_CURVE_ADDITIONAL_TS_OBSERVATIONS"
+    },
+    "curve-unit": {
+      "local": "curve-unit",
+      "capture": "capture-curve-local.py",
+      "files": [
+        "src/primitives/__tests/Curve.unit.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/curve-unit-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "curve-unit",
+          "probe": "capture-curve-unit-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-curve-local.py",
+          "outputs": {
+            "MIGRATION_CURVE_UNIT_TS_OBSERVATIONS": "curve-unit.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-curve-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-curve-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/curve-unit.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/curve-unit-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_CURVE_UNIT_TS_OBSERVATIONS",
+          "raw": "curve-unit.calls.raw.jsonl",
+          "rawOwner": "curve-unit"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_CURVE_UNIT_TS_OBSERVATIONS": "curve-unit.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_CURVE_UNIT_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_CURVE_UNIT_TS_INPUTS",
+      "probe": "capture-curve-unit-inputs.cjs",
+      "env": "MIGRATION_CURVE_UNIT_TS_OBSERVATIONS"
     },
     "default-chain-tracker": {
       "local": "default-chain-tracker",
@@ -1539,6 +2096,250 @@
       "inputs_env": "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
       "probe": "capture-drbg-inputs.cjs",
       "env": "MIGRATION_DRBG_TS_OBSERVATIONS"
+    },
+    "ecdh": {
+      "local": "ecdh",
+      "capture": "capture-keys-small-local.py",
+      "files": [
+        "src/primitives/__tests/ECDH.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/ecdh-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "ecdh",
+          "probe": "capture-ecdh-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-small-local.py",
+          "outputs": {
+            "MIGRATION_ECDH_TS_OBSERVATIONS": "ecdh.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/ecdh.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/ecdh-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_ECDH_TS_OBSERVATIONS",
+          "raw": "ecdh.calls.raw.jsonl",
+          "rawOwner": "ecdh"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_ECDH_TS_OBSERVATIONS": "ecdh.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_ECDH_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_ECDH_TS_INPUTS",
+      "probe": "capture-ecdh-inputs.cjs",
+      "env": "MIGRATION_ECDH_TS_OBSERVATIONS"
+    },
+    "ecdsa": {
+      "local": "ecdsa",
+      "capture": "capture-keys-local.py",
+      "files": [
+        "src/primitives/__tests/ECDSA.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/ecdsa-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "ecdsa",
+          "probe": "capture-ecdsa-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-local.py",
+          "outputs": {
+            "MIGRATION_ECDSA_TS_OBSERVATIONS": "ecdsa.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/ecdsa.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/ecdsa-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_ECDSA_TS_OBSERVATIONS",
+          "raw": "ecdsa.calls.raw.jsonl",
+          "rawOwner": "ecdsa"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_ECDSA_TS_OBSERVATIONS": "ecdsa.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_ECDSA_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_ECDSA_TS_INPUTS",
+      "probe": "capture-ecdsa-inputs.cjs",
+      "env": "MIGRATION_ECDSA_TS_OBSERVATIONS"
+    },
+    "ecdsa-additional": {
+      "local": "ecdsa-additional",
+      "capture": "capture-keys-small-local.py",
+      "files": [
+        "src/primitives/__tests/ECDSA.additional.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/ecdsa-additional-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "ecdsa-additional",
+          "probe": "capture-ecdsa-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-small-local.py",
+          "outputs": {
+            "MIGRATION_ECDSA_ADDITIONAL_TS_OBSERVATIONS": "ecdsa-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/ecdsa-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/ecdsa-additional-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_ECDSA_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "ecdsa-additional.calls.raw.jsonl",
+          "rawOwner": "ecdsa-additional"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_ECDSA_ADDITIONAL_TS_OBSERVATIONS": "ecdsa-additional.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_ECDSA_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_ECDSA_ADDITIONAL_TS_INPUTS",
+      "probe": "capture-ecdsa-additional-inputs.cjs",
+      "env": "MIGRATION_ECDSA_ADDITIONAL_TS_OBSERVATIONS"
+    },
+    "ecies": {
+      "local": "ecies",
+      "capture": "capture-keys-local.py",
+      "files": [
+        "src/compat/__tests/ECIES.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/ecies-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "ecies",
+          "probe": "capture-ecies-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-local.py",
+          "outputs": {
+            "MIGRATION_ECIES_TS_OBSERVATIONS": "ecies.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/ecies.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/ecies-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_ECIES_TS_OBSERVATIONS",
+          "raw": "ecies.calls.raw.jsonl",
+          "rawOwner": "ecies"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_ECIES_TS_OBSERVATIONS": "ecies.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_ECIES_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_ECIES_TS_INPUTS",
+      "probe": "capture-ecies-inputs.cjs",
+      "env": "MIGRATION_ECIES_TS_OBSERVATIONS"
     },
     "fee-model-satoshis-per-kilobyte": {
       "local": "fee-model-satoshis-per-kilobyte",
@@ -1659,45 +2460,6 @@
       "inputs_env": "MIGRATION_HASH_TS_INPUTS",
       "probe": "capture-hash-inputs.cjs",
       "env": "MIGRATION_HASH_TS_OBSERVATIONS"
-    },
-    "hash-pbkdf2-vectors": {
-      "local": "hash-pbkdf2-vectors",
-      "capture": null,
-      "files": [
-        "src/primitives/__tests/Hash.test.ts"
-      ],
-      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/hash-pbkdf2-plan-20260927-v2/input-plan.json",
-      "tier": "file-driver",
-      "probes": [
-        {
-          "local": "hash-pbkdf2-vectors",
-          "probe": "capture-hash-pbkdf2-inputs.cjs",
-          "mode": "direct",
-          "tier": "file-driver",
-          "driver": "capture-hash-pbkdf2-side.py",
-          "env": null,
-          "raw": null,
-          "outputs": {}
-        }
-      ],
-      "outputs": {},
-      "inputs_envs": [
-        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
-        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
-        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
-        "MIGRATION_HASH_PBKDF2_TS_INPUTS",
-        "MIGRATION_KEYDERIVER_TS_INPUTS",
-        "MIGRATION_LIVE_POLICY_TS_INPUTS",
-        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
-        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
-        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
-        "MIGRATION_PROTOWALLET_TS_INPUTS",
-        "MIGRATION_VALIDATION_TS_INPUTS",
-        "MIGRATION_VECTOR_TS_INPUTS"
-      ],
-      "inputs_env": "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
-      "probe": "capture-hash-pbkdf2-inputs.cjs",
-      "env": null
     },
     "hd": {
       "local": "hd",
@@ -2102,6 +2864,250 @@
       "probe": "capture-live-policy-inputs.cjs",
       "env": "MIGRATION_LIVE_POLICY_TS_OBSERVATIONS"
     },
+    "locking-unlocking-script": {
+      "local": "locking-unlocking-script",
+      "capture": "capture-misc-local.py",
+      "files": [
+        "src/script/__tests/LockingUnlockingScript.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/locking-unlocking-script-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "locking-unlocking-script",
+          "probe": "capture-locking-unlocking-script-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-misc-local.py",
+          "outputs": {
+            "MIGRATION_LOCKING_UNLOCKING_SCRIPT_TS_OBSERVATIONS": "locking-unlocking-script.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/locking-unlocking-script.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/locking-unlocking-script-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_LOCKING_UNLOCKING_SCRIPT_TS_OBSERVATIONS",
+          "raw": "locking-unlocking-script.calls.raw.jsonl",
+          "rawOwner": "locking-unlocking-script"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_LOCKING_UNLOCKING_SCRIPT_TS_OBSERVATIONS": "locking-unlocking-script.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_LOCKING_UNLOCKING_SCRIPT_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_LOCKING_UNLOCKING_SCRIPT_TS_INPUTS",
+      "probe": "capture-locking-unlocking-script-inputs.cjs",
+      "env": "MIGRATION_LOCKING_UNLOCKING_SCRIPT_TS_OBSERVATIONS"
+    },
+    "merkle-path": {
+      "local": "merkle-path",
+      "capture": "capture-transaction-local.py",
+      "files": [
+        "src/transaction/__tests/MerklePath.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/merkle-path-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "merkle-path",
+          "probe": "capture-merkle-path-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-transaction-local.py",
+          "outputs": {
+            "MIGRATION_MERKLE_PATH_TS_OBSERVATIONS": "merkle-path.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-transaction-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-transaction-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/merkle-path.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/merkle-path-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_MERKLE_PATH_TS_OBSERVATIONS",
+          "raw": "merkle-path.calls.raw.jsonl",
+          "rawOwner": "merkle-path"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_MERKLE_PATH_TS_OBSERVATIONS": "merkle-path.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_MERKLE_PATH_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_MERKLE_PATH_TS_INPUTS",
+      "probe": "capture-merkle-path-inputs.cjs",
+      "env": "MIGRATION_MERKLE_PATH_TS_OBSERVATIONS"
+    },
+    "merkle-path-bench": {
+      "local": "merkle-path-bench",
+      "capture": "capture-transaction-local.py",
+      "files": [
+        "src/transaction/__tests/MerklePath.bench.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/merkle-path-bench-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "merkle-path-bench",
+          "probe": "capture-merkle-path-bench-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-transaction-local.py",
+          "outputs": {
+            "MIGRATION_MERKLE_PATH_BENCH_TS_OBSERVATIONS": "merkle-path-bench.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-transaction-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-transaction-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/merkle-path-bench.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/merkle-path-bench-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_MERKLE_PATH_BENCH_TS_OBSERVATIONS",
+          "raw": "merkle-path-bench.calls.raw.jsonl",
+          "rawOwner": "merkle-path-bench"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_MERKLE_PATH_BENCH_TS_OBSERVATIONS": "merkle-path-bench.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_MERKLE_PATH_BENCH_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_MERKLE_PATH_BENCH_TS_INPUTS",
+      "probe": "capture-merkle-path-bench-inputs.cjs",
+      "env": "MIGRATION_MERKLE_PATH_BENCH_TS_OBSERVATIONS"
+    },
+    "merkle-path-safe-offsets": {
+      "local": "merkle-path-safe-offsets",
+      "capture": "capture-transaction-local.py",
+      "files": [
+        "src/transaction/__tests/MerklePath.safeOffsets.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/merkle-path-safe-offsets-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "merkle-path-safe-offsets",
+          "probe": "capture-merkle-path-safe-offsets-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-transaction-local.py",
+          "outputs": {
+            "MIGRATION_MERKLE_PATH_SAFE_OFFSETS_TS_OBSERVATIONS": "merkle-path-safe-offsets.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-transaction-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-transaction-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/merkle-path-safe-offsets.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/merkle-path-safe-offsets-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_MERKLE_PATH_SAFE_OFFSETS_TS_OBSERVATIONS",
+          "raw": "merkle-path-safe-offsets.calls.raw.jsonl",
+          "rawOwner": "merkle-path-safe-offsets"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_MERKLE_PATH_SAFE_OFFSETS_TS_OBSERVATIONS": "merkle-path-safe-offsets.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_MERKLE_PATH_SAFE_OFFSETS_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_MERKLE_PATH_SAFE_OFFSETS_TS_INPUTS",
+      "probe": "capture-merkle-path-safe-offsets-inputs.cjs",
+      "env": "MIGRATION_MERKLE_PATH_SAFE_OFFSETS_TS_OBSERVATIONS"
+    },
     "mnemonic-additional": {
       "local": "mnemonic-additional",
       "capture": null,
@@ -2302,6 +3308,67 @@
       "inputs_env": "MIGRATION_P2PKH_ASYNC_BACKEND_TS_INPUTS",
       "probe": "capture-p2pkh-async-backend-inputs.cjs",
       "env": "MIGRATION_P2PKH_ASYNC_BACKEND_TS_OBSERVATIONS"
+    },
+    "peer-boundary": {
+      "local": "peer-boundary",
+      "capture": "capture-auth-local.py",
+      "files": [
+        "src/auth/__tests/Peer.boundary.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/peer-boundary-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "peer-boundary",
+          "probe": "capture-peer-boundary-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-auth-local.py",
+          "outputs": {
+            "MIGRATION_AUTH_PEER_BOUNDARY_TS_OBSERVATIONS": "peer-boundary.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/peer-boundary.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/peer-boundary-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_AUTH_PEER_BOUNDARY_TS_OBSERVATIONS",
+          "raw": "peer-boundary.calls.raw.jsonl",
+          "rawOwner": "peer-boundary"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_AUTH_PEER_BOUNDARY_TS_OBSERVATIONS": "peer-boundary.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_AUTH_PEER_BOUNDARY_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_AUTH_PEER_BOUNDARY_TS_INPUTS",
+      "probe": "capture-peer-boundary-inputs.cjs",
+      "env": "MIGRATION_AUTH_PEER_BOUNDARY_TS_OBSERVATIONS"
     },
     "point-additional": {
       "local": "point-additional",
@@ -2558,6 +3625,128 @@
       "inputs_env": "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
       "probe": "capture-protowallet-native-inputs.cjs",
       "env": "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS"
+    },
+    "public-key": {
+      "local": "public-key",
+      "capture": "capture-keys-local.py",
+      "files": [
+        "src/primitives/__tests/PublicKey.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/public-key-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "public-key",
+          "probe": "capture-public-key-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-local.py",
+          "outputs": {
+            "MIGRATION_PUBLIC_KEY_TS_OBSERVATIONS": "public-key.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/public-key.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/public-key-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_PUBLIC_KEY_TS_OBSERVATIONS",
+          "raw": "public-key.calls.raw.jsonl",
+          "rawOwner": "public-key"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_PUBLIC_KEY_TS_OBSERVATIONS": "public-key.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_PUBLIC_KEY_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_PUBLIC_KEY_TS_INPUTS",
+      "probe": "capture-public-key-inputs.cjs",
+      "env": "MIGRATION_PUBLIC_KEY_TS_OBSERVATIONS"
+    },
+    "public-key-additional": {
+      "local": "public-key-additional",
+      "capture": "capture-keys-local.py",
+      "files": [
+        "src/primitives/__tests/PublicKey.additional.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/public-key-additional-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "public-key-additional",
+          "probe": "capture-public-key-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-local.py",
+          "outputs": {
+            "MIGRATION_PUBLIC_KEY_ADDITIONAL_TS_OBSERVATIONS": "public-key-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/public-key-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/public-key-additional-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_PUBLIC_KEY_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "public-key-additional.calls.raw.jsonl",
+          "rawOwner": "public-key-additional"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_PUBLIC_KEY_ADDITIONAL_TS_OBSERVATIONS": "public-key-additional.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_PUBLIC_KEY_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_PUBLIC_KEY_ADDITIONAL_TS_INPUTS",
+      "probe": "capture-public-key-additional-inputs.cjs",
+      "env": "MIGRATION_PUBLIC_KEY_ADDITIONAL_TS_OBSERVATIONS"
     },
     "push-drop": {
       "local": "push-drop",
@@ -2916,6 +4105,67 @@
       "probe": "capture-reduction-context-inputs.cjs",
       "env": "MIGRATION_REDUCTION_CONTEXT_TS_OBSERVATIONS"
     },
+    "schnorr": {
+      "local": "schnorr",
+      "capture": "capture-keys-local.py",
+      "files": [
+        "src/primitives/__tests/Schnorr.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/schnorr-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "schnorr",
+          "probe": "capture-schnorr-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-local.py",
+          "outputs": {
+            "MIGRATION_SCHNORR_TS_OBSERVATIONS": "schnorr.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/schnorr.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/schnorr-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_SCHNORR_TS_OBSERVATIONS",
+          "raw": "schnorr.calls.raw.jsonl",
+          "rawOwner": "schnorr"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_SCHNORR_TS_OBSERVATIONS": "schnorr.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_SCHNORR_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_SCHNORR_TS_INPUTS",
+      "probe": "capture-schnorr-inputs.cjs",
+      "env": "MIGRATION_SCHNORR_TS_OBSERVATIONS"
+    },
     "script": {
       "local": "script",
       "capture": "capture-evidence-local.py",
@@ -2976,6 +4226,67 @@
       "inputs_env": "MIGRATION_SCRIPT_TS_INPUTS",
       "probe": "capture-script-inputs.cjs",
       "env": "MIGRATION_SCRIPT_TS_OBSERVATIONS"
+    },
+    "script-additional": {
+      "local": "script-additional",
+      "capture": "capture-misc-local.py",
+      "files": [
+        "src/script/__tests/Script.additional.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/script-additional-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "script-additional",
+          "probe": "capture-script-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-misc-local.py",
+          "outputs": {
+            "MIGRATION_SCRIPT_ADDITIONAL_TS_OBSERVATIONS": "script-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/script-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/script-additional-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_SCRIPT_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "script-additional.calls.raw.jsonl",
+          "rawOwner": "script-additional"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_SCRIPT_ADDITIONAL_TS_OBSERVATIONS": "script-additional.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_SCRIPT_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_SCRIPT_ADDITIONAL_TS_INPUTS",
+      "probe": "capture-script-additional-inputs.cjs",
+      "env": "MIGRATION_SCRIPT_ADDITIONAL_TS_OBSERVATIONS"
     },
     "script-evaluation-error": {
       "local": "script-evaluation-error",
@@ -3058,6 +4369,128 @@
       "probe": "capture-script-vector-inputs.cjs",
       "env": "MIGRATION_VECTOR_TS_INPUTS"
     },
+    "secp256r1": {
+      "local": "secp256r1",
+      "capture": "capture-keys-small-local.py",
+      "files": [
+        "src/primitives/__tests/Secp256r1.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/secp256r1-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "secp256r1",
+          "probe": "capture-secp256r1-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-small-local.py",
+          "outputs": {
+            "MIGRATION_SECP256R1_TS_OBSERVATIONS": "secp256r1.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/secp256r1.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/secp256r1-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_SECP256R1_TS_OBSERVATIONS",
+          "raw": "secp256r1.calls.raw.jsonl",
+          "rawOwner": "secp256r1"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_SECP256R1_TS_OBSERVATIONS": "secp256r1.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_SECP256R1_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_SECP256R1_TS_INPUTS",
+      "probe": "capture-secp256r1-inputs.cjs",
+      "env": "MIGRATION_SECP256R1_TS_OBSERVATIONS"
+    },
+    "session-manager": {
+      "local": "session-manager",
+      "capture": "capture-auth-local.py",
+      "files": [
+        "src/auth/__tests/SessionManager.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/session-manager-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "session-manager",
+          "probe": "capture-session-manager-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-auth-local.py",
+          "outputs": {
+            "MIGRATION_AUTH_SESSION_MANAGER_TS_OBSERVATIONS": "session-manager.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/session-manager.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/session-manager-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_AUTH_SESSION_MANAGER_TS_OBSERVATIONS",
+          "raw": "session-manager.calls.raw.jsonl",
+          "rawOwner": "session-manager"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_AUTH_SESSION_MANAGER_TS_OBSERVATIONS": "session-manager.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_AUTH_SESSION_MANAGER_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_AUTH_SESSION_MANAGER_TS_INPUTS",
+      "probe": "capture-session-manager-inputs.cjs",
+      "env": "MIGRATION_AUTH_SESSION_MANAGER_TS_OBSERVATIONS"
+    },
     "signature": {
       "local": "signature",
       "capture": "capture-primitives-local.py",
@@ -3118,6 +4551,245 @@
       "inputs_env": "MIGRATION_SIGNATURE_TS_INPUTS",
       "probe": "capture-signature-inputs.cjs",
       "env": "MIGRATION_SIGNATURE_TS_OBSERVATIONS"
+    },
+    "simplified-fetch-transport": {
+      "local": "simplified-fetch-transport",
+      "capture": "capture-auth-local.py",
+      "files": [
+        "src/auth/transports/__tests__/SimplifiedFetchTransport.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/simplified-fetch-transport-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "simplified-fetch-transport",
+          "probe": "capture-simplified-fetch-transport-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-auth-local.py",
+          "outputs": {
+            "MIGRATION_AUTH_SIMPLIFIED_FETCH_TRANSPORT_TS_OBSERVATIONS": "simplified-fetch-transport.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/simplified-fetch-transport.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/simplified-fetch-transport-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_AUTH_SIMPLIFIED_FETCH_TRANSPORT_TS_OBSERVATIONS",
+          "raw": "simplified-fetch-transport.calls.raw.jsonl",
+          "rawOwner": "simplified-fetch-transport"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_AUTH_SIMPLIFIED_FETCH_TRANSPORT_TS_OBSERVATIONS": "simplified-fetch-transport.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_AUTH_SIMPLIFIED_FETCH_TRANSPORT_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_AUTH_SIMPLIFIED_FETCH_TRANSPORT_TS_INPUTS",
+      "probe": "capture-simplified-fetch-transport-inputs.cjs",
+      "env": "MIGRATION_AUTH_SIMPLIFIED_FETCH_TRANSPORT_TS_OBSERVATIONS"
+    },
+    "simplified-fetch-transport-additional": {
+      "local": "simplified-fetch-transport-additional",
+      "capture": "capture-gap-local.py",
+      "files": [
+        "src/auth/transports/__tests__/SimplifiedFetchTransport.additional.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/simplified-fetch-transport-additional-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "simplified-fetch-transport-additional",
+          "probe": "capture-simplified-fetch-transport-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-gap-local.py",
+          "outputs": {
+            "MIGRATION_SIMPLIFIED_FETCH_TRANSPORT_ADDITIONAL_TS_OBSERVATIONS": "simplified-fetch-transport-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-gap-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-gap-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/simplified-fetch-transport-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/simplified-fetch-transport-additional-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_SIMPLIFIED_FETCH_TRANSPORT_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "simplified-fetch-transport-additional.calls.raw.jsonl",
+          "rawOwner": "simplified-fetch-transport-additional"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_SIMPLIFIED_FETCH_TRANSPORT_ADDITIONAL_TS_OBSERVATIONS": "simplified-fetch-transport-additional.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_SIMPLIFIED_FETCH_TRANSPORT_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_SIMPLIFIED_FETCH_TRANSPORT_ADDITIONAL_TS_INPUTS",
+      "probe": "capture-simplified-fetch-transport-additional-inputs.cjs",
+      "env": "MIGRATION_SIMPLIFIED_FETCH_TRANSPORT_ADDITIONAL_TS_OBSERVATIONS"
+    },
+    "spend-chronicle-vector": {
+      "local": "spend-chronicle-vector",
+      "capture": "capture-spend-local.py",
+      "files": [
+        "src/script/__tests/SpendValildVectors.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/spend-chronicle-vector-plan-20260929/input-plan.json",
+      "tier": "file-driver",
+      "probes": [
+        {
+          "local": "spend-chronicle-vector",
+          "probe": "capture-script-vector-inputs.cjs",
+          "mode": "raw",
+          "tier": "file-driver",
+          "driver": "script-vector-evidence.py",
+          "outputs": {
+            "MIGRATION_VECTOR_TS_INPUTS": "script-spend-shared-vectors.calls.raw.jsonl"
+          },
+          "corpus": {
+            "MIGRATION_VECTOR_CATALOG": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/spend-chronicle-vector-plan-20260929/catalog.json"
+          },
+          "emit": {
+            "script": null,
+            "argv": [],
+            "unresolved": []
+          },
+          "env": "MIGRATION_VECTOR_TS_INPUTS",
+          "raw": "script-spend-shared-vectors.calls.raw.jsonl",
+          "rawOwner": "script-spend-shared-vectors"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_VECTOR_TS_INPUTS": "spend-chronicle-vector.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_SPEND_CHRONICLE_VECTOR_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_SPEND_CHRONICLE_VECTOR_TS_INPUTS",
+      "probe": "capture-script-vector-inputs.cjs",
+      "env": "MIGRATION_VECTOR_TS_INPUTS",
+      "notes": [
+        "capture-spend-chronicle-vector-inputs.cjs: 未确定原始轨迹输出环境变量",
+        "capture-spend-chronicle-vector-inputs.cjs: 未确定原始轨迹输出环境变量"
+      ]
+    },
+    "symmetric-key": {
+      "local": "symmetric-key",
+      "capture": "capture-keys-local.py",
+      "files": [
+        "src/primitives/__tests/SymmetricKey.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/symmetric-key-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "symmetric-key",
+          "probe": "capture-symmetric-key-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-local.py",
+          "outputs": {
+            "MIGRATION_SYMMETRIC_KEY_TS_OBSERVATIONS": "symmetric-key.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/symmetric-key.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/symmetric-key-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_SYMMETRIC_KEY_TS_OBSERVATIONS",
+          "raw": "symmetric-key.calls.raw.jsonl",
+          "rawOwner": "symmetric-key"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_SYMMETRIC_KEY_TS_OBSERVATIONS": "symmetric-key.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_SYMMETRIC_KEY_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_SYMMETRIC_KEY_TS_INPUTS",
+      "probe": "capture-symmetric-key-inputs.cjs",
+      "env": "MIGRATION_SYMMETRIC_KEY_TS_OBSERVATIONS"
     },
     "teranode-broadcaster": {
       "local": "teranode-broadcaster",
@@ -4227,6 +5899,189 @@
       "probe": "capture-validation-helpers.cjs",
       "env": "MIGRATION_VALIDATION_TS_INPUTS"
     },
+    "wallet-client": {
+      "local": "wallet-client",
+      "capture": "capture-wallet-client-local.py",
+      "files": [
+        "src/wallet/__tests/WalletClient.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/wallet-client-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "wallet-client",
+          "probe": "capture-wallet-client-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-wallet-client-local.py",
+          "outputs": {
+            "MIGRATION_WALLET_CLIENT_TS_OBSERVATIONS": "wallet-client.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-wallet-client-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-wallet-client-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/wallet-client.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/wallet-client-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_WALLET_CLIENT_TS_OBSERVATIONS",
+          "raw": "wallet-client.calls.raw.jsonl",
+          "rawOwner": "wallet-client"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_WALLET_CLIENT_TS_OBSERVATIONS": "wallet-client.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS",
+        "MIGRATION_WALLET_CLIENT_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_WALLET_CLIENT_TS_INPUTS",
+      "probe": "capture-wallet-client-inputs.cjs",
+      "env": "MIGRATION_WALLET_CLIENT_TS_OBSERVATIONS"
+    },
+    "wallet-client-additional": {
+      "local": "wallet-client-additional",
+      "capture": "capture-wallet-client-local.py",
+      "files": [
+        "src/wallet/__tests/WalletClient.additional.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/wallet-client-additional-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "wallet-client-additional",
+          "probe": "capture-wallet-client-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-wallet-client-local.py",
+          "outputs": {
+            "MIGRATION_WALLET_CLIENT_ADDITIONAL_TS_OBSERVATIONS": "wallet-client-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-wallet-client-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-wallet-client-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/wallet-client-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/wallet-client-additional-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_WALLET_CLIENT_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "wallet-client-additional.calls.raw.jsonl",
+          "rawOwner": "wallet-client-additional"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_WALLET_CLIENT_ADDITIONAL_TS_OBSERVATIONS": "wallet-client-additional.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS",
+        "MIGRATION_WALLET_CLIENT_ADDITIONAL_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_WALLET_CLIENT_ADDITIONAL_TS_INPUTS",
+      "probe": "capture-wallet-client-additional-inputs.cjs",
+      "env": "MIGRATION_WALLET_CLIENT_ADDITIONAL_TS_OBSERVATIONS"
+    },
+    "wallet-client-substrate": {
+      "local": "wallet-client-substrate",
+      "capture": "capture-wallet-client-local.py",
+      "files": [
+        "src/wallet/__tests/WalletClient.substrate.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/wallet-client-substrate-plan-20260929/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "wallet-client-substrate",
+          "probe": "capture-wallet-client-substrate-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-wallet-client-local.py",
+          "outputs": {
+            "MIGRATION_WALLET_CLIENT_SUBSTRATE_TS_OBSERVATIONS": "wallet-client-substrate.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-wallet-client-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-wallet-client-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/wallet-client-substrate.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/wallet-client-substrate-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_WALLET_CLIENT_SUBSTRATE_TS_OBSERVATIONS",
+          "raw": "wallet-client-substrate.calls.raw.jsonl",
+          "rawOwner": "wallet-client-substrate"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_WALLET_CLIENT_SUBSTRATE_TS_OBSERVATIONS": "wallet-client-substrate.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS",
+        "MIGRATION_WALLET_CLIENT_SUBSTRATE_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_WALLET_CLIENT_SUBSTRATE_TS_INPUTS",
+      "probe": "capture-wallet-client-substrate-inputs.cjs",
+      "env": "MIGRATION_WALLET_CLIENT_SUBSTRATE_TS_OBSERVATIONS"
+    },
     "wallet-error": {
       "local": "wallet-error",
       "capture": "capture-wallet-error-side.py",
@@ -4450,6 +6305,67 @@
       "inputs_env": "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
       "probe": "capture-werr-constructors.cjs",
       "env": "MIGRATION_WERR_TS_INPUTS"
+    },
+    "whats-on-chain-additional": {
+      "local": "whats-on-chain-additional",
+      "capture": "capture-http-chain-local.py",
+      "files": [
+        "src/transaction/chaintrackers/__tests/WhatsOnChain.additional.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/whats-on-chain-additional-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "whats-on-chain-additional",
+          "probe": "capture-whats-on-chain-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-http-chain-local.py",
+          "outputs": {
+            "MIGRATION_WHATS_ON_CHAIN_ADDITIONAL_TS_OBSERVATIONS": "whats-on-chain-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-http-chain-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-http-chain-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/whats-on-chain-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/whats-on-chain-additional-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_WHATS_ON_CHAIN_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "whats-on-chain-additional.calls.raw.jsonl",
+          "rawOwner": "whats-on-chain-additional"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_WHATS_ON_CHAIN_ADDITIONAL_TS_OBSERVATIONS": "whats-on-chain-additional.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS",
+        "MIGRATION_WHATS_ON_CHAIN_ADDITIONAL_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_WHATS_ON_CHAIN_ADDITIONAL_TS_INPUTS",
+      "probe": "capture-whats-on-chain-additional-inputs.cjs",
+      "env": "MIGRATION_WHATS_ON_CHAIN_ADDITIONAL_TS_OBSERVATIONS"
     },
     "window-cwi": {
       "local": "window-cwi",
@@ -4866,6 +6782,42 @@
       "probe": "capture-arc-broadcaster-inputs.cjs",
       "env": "MIGRATION_ARC_TS_OBSERVATIONS"
     },
+    "src/auth/__tests/build.test.ts": {
+      "probes": [
+        {
+          "local": "auth-build",
+          "probe": "capture-auth-build-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-auth-local.py",
+          "outputs": {
+            "MIGRATION_AUTH_BUILD_TS_OBSERVATIONS": "auth-build.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/auth-build.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/auth-build-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_AUTH_BUILD_TS_OBSERVATIONS",
+          "raw": "auth-build.calls.raw.jsonl",
+          "rawOwner": "auth-build"
+        }
+      ],
+      "probe": "capture-auth-build-inputs.cjs",
+      "env": "MIGRATION_AUTH_BUILD_TS_OBSERVATIONS"
+    },
     "src/auth/certificates/__tests/Certificate.test.ts": {
       "probes": [
         {
@@ -5206,6 +7158,42 @@
       "probe": "capture-beef-party-additional-inputs.cjs",
       "env": "MIGRATION_BEEF_PARTY_ADDITIONAL_TS_OBSERVATIONS"
     },
+    "src/primitives/__tests/BigNumber.additional.test.ts": {
+      "probes": [
+        {
+          "local": "bignumber-additional",
+          "probe": "capture-bignumber-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-misc-local.py",
+          "outputs": {
+            "MIGRATION_BIGNUMBER_ADDITIONAL_TS_OBSERVATIONS": "bignumber-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/bignumber-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/bignumber-additional-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_BIGNUMBER_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "bignumber-additional.calls.raw.jsonl",
+          "rawOwner": "bignumber-additional"
+        }
+      ],
+      "probe": "capture-bignumber-additional-inputs.cjs",
+      "env": "MIGRATION_BIGNUMBER_ADDITIONAL_TS_OBSERVATIONS"
+    },
     "src/primitives/__tests/BigNumber.arithmatic.test.ts": {
       "probes": [
         {
@@ -5286,6 +7274,78 @@
       ],
       "probe": "capture-bn-arithmetic-inputs.cjs",
       "env": "MIGRATION_BN_ARITHMETIC_RAW"
+    },
+    "src/transaction/http/__tests/BinaryFetchClient.test.ts": {
+      "probes": [
+        {
+          "local": "binary-fetch-client",
+          "probe": "capture-binary-fetch-client-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-misc-local.py",
+          "outputs": {
+            "MIGRATION_BINARY_FETCH_CLIENT_TS_OBSERVATIONS": "binary-fetch-client.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/binary-fetch-client.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/binary-fetch-client-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_BINARY_FETCH_CLIENT_TS_OBSERVATIONS",
+          "raw": "binary-fetch-client.calls.raw.jsonl",
+          "rawOwner": "binary-fetch-client"
+        }
+      ],
+      "probe": "capture-binary-fetch-client-inputs.cjs",
+      "env": "MIGRATION_BINARY_FETCH_CLIENT_TS_OBSERVATIONS"
+    },
+    "src/transaction/chaintrackers/__tests/BlockHeadersService.test.ts": {
+      "probes": [
+        {
+          "local": "block-headers-service",
+          "probe": "capture-block-headers-service-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-http-chain-local.py",
+          "outputs": {
+            "MIGRATION_BLOCK_HEADERS_SERVICE_TS_OBSERVATIONS": "block-headers-service.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-http-chain-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-http-chain-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/block-headers-service.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/block-headers-service-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_BLOCK_HEADERS_SERVICE_TS_OBSERVATIONS",
+          "raw": "block-headers-service.calls.raw.jsonl",
+          "rawOwner": "block-headers-service"
+        }
+      ],
+      "probe": "capture-block-headers-service-inputs.cjs",
+      "env": "MIGRATION_BLOCK_HEADERS_SERVICE_TS_OBSERVATIONS"
     },
     "src/primitives/__tests/BigNumber.utils.test.ts": {
       "probes": [
@@ -5373,6 +7433,42 @@
       "probe": "capture-broadcaster-inputs.cjs",
       "env": "MIGRATION_PARITY_TS_OBSERVATIONS"
     },
+    "src/primitives/__tests/bug-31.test.ts": {
+      "probes": [
+        {
+          "local": "bug-31",
+          "probe": "capture-bug-31-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-small-local.py",
+          "outputs": {
+            "MIGRATION_BUG_31_TS_OBSERVATIONS": "bug-31.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/bug-31.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/bug-31-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_BUG_31_TS_OBSERVATIONS",
+          "raw": "bug-31.calls.raw.jsonl",
+          "rawOwner": "bug-31"
+        }
+      ],
+      "probe": "capture-bug-31-inputs.cjs",
+      "env": "MIGRATION_BUG_31_TS_OBSERVATIONS"
+    },
     "src/primitives/__tests/utils.test.ts": {
       "probes": [
         {
@@ -5451,6 +7547,42 @@
       "probe": "capture-cached-keyderiver-inputs.cjs",
       "env": "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS"
     },
+    "src/script/__tests/ChronicleOpcodes.test.ts": {
+      "probes": [
+        {
+          "local": "chronicle-opcodes",
+          "probe": "capture-chronicle-opcodes-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-gap-local.py",
+          "outputs": {
+            "MIGRATION_CHRONICLE_OPCODES_TS_OBSERVATIONS": "chronicle-opcodes.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-gap-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-gap-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/chronicle-opcodes.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/chronicle-opcodes-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_CHRONICLE_OPCODES_TS_OBSERVATIONS",
+          "raw": "chronicle-opcodes.calls.raw.jsonl",
+          "rawOwner": "chronicle-opcodes"
+        }
+      ],
+      "probe": "capture-chronicle-opcodes-inputs.cjs",
+      "env": "MIGRATION_CHRONICLE_OPCODES_TS_OBSERVATIONS"
+    },
     "src/compat/__tests/BSM.test.ts": {
       "probes": [
         {
@@ -5466,6 +7598,114 @@
       ],
       "probe": "capture-bsm-inputs.cjs",
       "env": null
+    },
+    "src/auth/utils/__tests/cryptononce.test.ts": {
+      "probes": [
+        {
+          "local": "cryptononce",
+          "probe": "capture-cryptononce-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-auth-local.py",
+          "outputs": {
+            "MIGRATION_AUTH_CRYPTONONCE_TS_OBSERVATIONS": "cryptononce.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/cryptononce.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/cryptononce-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_AUTH_CRYPTONONCE_TS_OBSERVATIONS",
+          "raw": "cryptononce.calls.raw.jsonl",
+          "rawOwner": "cryptononce"
+        }
+      ],
+      "probe": "capture-cryptononce-inputs.cjs",
+      "env": "MIGRATION_AUTH_CRYPTONONCE_TS_OBSERVATIONS"
+    },
+    "src/primitives/__tests/Curve.additional.test.ts": {
+      "probes": [
+        {
+          "local": "curve-additional",
+          "probe": "capture-curve-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-curve-local.py",
+          "outputs": {
+            "MIGRATION_CURVE_ADDITIONAL_TS_OBSERVATIONS": "curve-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-curve-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-curve-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/curve-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/curve-additional-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_CURVE_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "curve-additional.calls.raw.jsonl",
+          "rawOwner": "curve-additional"
+        }
+      ],
+      "probe": "capture-curve-additional-inputs.cjs",
+      "env": "MIGRATION_CURVE_ADDITIONAL_TS_OBSERVATIONS"
+    },
+    "src/primitives/__tests/Curve.unit.test.ts": {
+      "probes": [
+        {
+          "local": "curve-unit",
+          "probe": "capture-curve-unit-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-curve-local.py",
+          "outputs": {
+            "MIGRATION_CURVE_UNIT_TS_OBSERVATIONS": "curve-unit.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-curve-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-curve-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/curve-unit.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/curve-unit-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_CURVE_UNIT_TS_OBSERVATIONS",
+          "raw": "curve-unit.calls.raw.jsonl",
+          "rawOwner": "curve-unit"
+        }
+      ],
+      "probe": "capture-curve-unit-inputs.cjs",
+      "env": "MIGRATION_CURVE_UNIT_TS_OBSERVATIONS"
     },
     "src/transaction/chaintrackers/__tests/DefaultChainTracker.test.ts": {
       "probes": [
@@ -5524,6 +7764,150 @@
       ],
       "probe": "capture-drbg-inputs.cjs",
       "env": "MIGRATION_DRBG_TS_OBSERVATIONS"
+    },
+    "src/primitives/__tests/ECDH.test.ts": {
+      "probes": [
+        {
+          "local": "ecdh",
+          "probe": "capture-ecdh-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-small-local.py",
+          "outputs": {
+            "MIGRATION_ECDH_TS_OBSERVATIONS": "ecdh.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/ecdh.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/ecdh-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_ECDH_TS_OBSERVATIONS",
+          "raw": "ecdh.calls.raw.jsonl",
+          "rawOwner": "ecdh"
+        }
+      ],
+      "probe": "capture-ecdh-inputs.cjs",
+      "env": "MIGRATION_ECDH_TS_OBSERVATIONS"
+    },
+    "src/primitives/__tests/ECDSA.test.ts": {
+      "probes": [
+        {
+          "local": "ecdsa",
+          "probe": "capture-ecdsa-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-local.py",
+          "outputs": {
+            "MIGRATION_ECDSA_TS_OBSERVATIONS": "ecdsa.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/ecdsa.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/ecdsa-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_ECDSA_TS_OBSERVATIONS",
+          "raw": "ecdsa.calls.raw.jsonl",
+          "rawOwner": "ecdsa"
+        }
+      ],
+      "probe": "capture-ecdsa-inputs.cjs",
+      "env": "MIGRATION_ECDSA_TS_OBSERVATIONS"
+    },
+    "src/primitives/__tests/ECDSA.additional.test.ts": {
+      "probes": [
+        {
+          "local": "ecdsa-additional",
+          "probe": "capture-ecdsa-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-small-local.py",
+          "outputs": {
+            "MIGRATION_ECDSA_ADDITIONAL_TS_OBSERVATIONS": "ecdsa-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/ecdsa-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/ecdsa-additional-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_ECDSA_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "ecdsa-additional.calls.raw.jsonl",
+          "rawOwner": "ecdsa-additional"
+        }
+      ],
+      "probe": "capture-ecdsa-additional-inputs.cjs",
+      "env": "MIGRATION_ECDSA_ADDITIONAL_TS_OBSERVATIONS"
+    },
+    "src/compat/__tests/ECIES.test.ts": {
+      "probes": [
+        {
+          "local": "ecies",
+          "probe": "capture-ecies-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-local.py",
+          "outputs": {
+            "MIGRATION_ECIES_TS_OBSERVATIONS": "ecies.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/ecies.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/ecies-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_ECIES_TS_OBSERVATIONS",
+          "raw": "ecies.calls.raw.jsonl",
+          "rawOwner": "ecies"
+        }
+      ],
+      "probe": "capture-ecies-inputs.cjs",
+      "env": "MIGRATION_ECIES_TS_OBSERVATIONS"
     },
     "src/transaction/fee-models/__tests/SatoshisPerKilobyte.test.ts": {
       "probes": [
@@ -5590,16 +7974,6 @@
           "env": "MIGRATION_HASH_TS_OBSERVATIONS",
           "raw": "hash.calls.raw.jsonl",
           "rawOwner": "hash"
-        },
-        {
-          "local": "hash-pbkdf2-vectors",
-          "probe": "capture-hash-pbkdf2-inputs.cjs",
-          "mode": "direct",
-          "tier": "file-driver",
-          "driver": "capture-hash-pbkdf2-side.py",
-          "env": null,
-          "raw": null,
-          "outputs": {}
         }
       ],
       "probe": "capture-hash-inputs.cjs",
@@ -5846,6 +8220,150 @@
       "probe": "capture-live-policy-inputs.cjs",
       "env": "MIGRATION_LIVE_POLICY_TS_OBSERVATIONS"
     },
+    "src/script/__tests/LockingUnlockingScript.test.ts": {
+      "probes": [
+        {
+          "local": "locking-unlocking-script",
+          "probe": "capture-locking-unlocking-script-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-misc-local.py",
+          "outputs": {
+            "MIGRATION_LOCKING_UNLOCKING_SCRIPT_TS_OBSERVATIONS": "locking-unlocking-script.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/locking-unlocking-script.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/locking-unlocking-script-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_LOCKING_UNLOCKING_SCRIPT_TS_OBSERVATIONS",
+          "raw": "locking-unlocking-script.calls.raw.jsonl",
+          "rawOwner": "locking-unlocking-script"
+        }
+      ],
+      "probe": "capture-locking-unlocking-script-inputs.cjs",
+      "env": "MIGRATION_LOCKING_UNLOCKING_SCRIPT_TS_OBSERVATIONS"
+    },
+    "src/transaction/__tests/MerklePath.test.ts": {
+      "probes": [
+        {
+          "local": "merkle-path",
+          "probe": "capture-merkle-path-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-transaction-local.py",
+          "outputs": {
+            "MIGRATION_MERKLE_PATH_TS_OBSERVATIONS": "merkle-path.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-transaction-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-transaction-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/merkle-path.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/merkle-path-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_MERKLE_PATH_TS_OBSERVATIONS",
+          "raw": "merkle-path.calls.raw.jsonl",
+          "rawOwner": "merkle-path"
+        }
+      ],
+      "probe": "capture-merkle-path-inputs.cjs",
+      "env": "MIGRATION_MERKLE_PATH_TS_OBSERVATIONS"
+    },
+    "src/transaction/__tests/MerklePath.bench.test.ts": {
+      "probes": [
+        {
+          "local": "merkle-path-bench",
+          "probe": "capture-merkle-path-bench-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-transaction-local.py",
+          "outputs": {
+            "MIGRATION_MERKLE_PATH_BENCH_TS_OBSERVATIONS": "merkle-path-bench.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-transaction-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-transaction-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/merkle-path-bench.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/merkle-path-bench-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_MERKLE_PATH_BENCH_TS_OBSERVATIONS",
+          "raw": "merkle-path-bench.calls.raw.jsonl",
+          "rawOwner": "merkle-path-bench"
+        }
+      ],
+      "probe": "capture-merkle-path-bench-inputs.cjs",
+      "env": "MIGRATION_MERKLE_PATH_BENCH_TS_OBSERVATIONS"
+    },
+    "src/transaction/__tests/MerklePath.safeOffsets.test.ts": {
+      "probes": [
+        {
+          "local": "merkle-path-safe-offsets",
+          "probe": "capture-merkle-path-safe-offsets-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-transaction-local.py",
+          "outputs": {
+            "MIGRATION_MERKLE_PATH_SAFE_OFFSETS_TS_OBSERVATIONS": "merkle-path-safe-offsets.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-transaction-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-transaction-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/merkle-path-safe-offsets.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/merkle-path-safe-offsets-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_MERKLE_PATH_SAFE_OFFSETS_TS_OBSERVATIONS",
+          "raw": "merkle-path-safe-offsets.calls.raw.jsonl",
+          "rawOwner": "merkle-path-safe-offsets"
+        }
+      ],
+      "probe": "capture-merkle-path-safe-offsets-inputs.cjs",
+      "env": "MIGRATION_MERKLE_PATH_SAFE_OFFSETS_TS_OBSERVATIONS"
+    },
     "src/compat/__tests/Mnemonic.additional.test.ts": {
       "probes": [
         {
@@ -5961,6 +8479,42 @@
       ],
       "probe": "capture-p2pkh-async-backend-inputs.cjs",
       "env": "MIGRATION_P2PKH_ASYNC_BACKEND_TS_OBSERVATIONS"
+    },
+    "src/auth/__tests/Peer.boundary.test.ts": {
+      "probes": [
+        {
+          "local": "peer-boundary",
+          "probe": "capture-peer-boundary-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-auth-local.py",
+          "outputs": {
+            "MIGRATION_AUTH_PEER_BOUNDARY_TS_OBSERVATIONS": "peer-boundary.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/peer-boundary.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/peer-boundary-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_AUTH_PEER_BOUNDARY_TS_OBSERVATIONS",
+          "raw": "peer-boundary.calls.raw.jsonl",
+          "rawOwner": "peer-boundary"
+        }
+      ],
+      "probe": "capture-peer-boundary-inputs.cjs",
+      "env": "MIGRATION_AUTH_PEER_BOUNDARY_TS_OBSERVATIONS"
     },
     "src/primitives/__tests/Point.additional.test.ts": {
       "probes": [
@@ -6113,6 +8667,78 @@
       ],
       "probe": "capture-protowallet-native-inputs.cjs",
       "env": "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS"
+    },
+    "src/primitives/__tests/PublicKey.test.ts": {
+      "probes": [
+        {
+          "local": "public-key",
+          "probe": "capture-public-key-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-local.py",
+          "outputs": {
+            "MIGRATION_PUBLIC_KEY_TS_OBSERVATIONS": "public-key.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/public-key.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/public-key-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_PUBLIC_KEY_TS_OBSERVATIONS",
+          "raw": "public-key.calls.raw.jsonl",
+          "rawOwner": "public-key"
+        }
+      ],
+      "probe": "capture-public-key-inputs.cjs",
+      "env": "MIGRATION_PUBLIC_KEY_TS_OBSERVATIONS"
+    },
+    "src/primitives/__tests/PublicKey.additional.test.ts": {
+      "probes": [
+        {
+          "local": "public-key-additional",
+          "probe": "capture-public-key-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-local.py",
+          "outputs": {
+            "MIGRATION_PUBLIC_KEY_ADDITIONAL_TS_OBSERVATIONS": "public-key-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/public-key-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/public-key-additional-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_PUBLIC_KEY_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "public-key-additional.calls.raw.jsonl",
+          "rawOwner": "public-key-additional"
+        }
+      ],
+      "probe": "capture-public-key-additional-inputs.cjs",
+      "env": "MIGRATION_PUBLIC_KEY_ADDITIONAL_TS_OBSERVATIONS"
     },
     "src/script/templates/__tests/PushDrop.test.ts": {
       "probes": [
@@ -6324,6 +8950,42 @@
       "probe": "capture-reduction-context-inputs.cjs",
       "env": "MIGRATION_REDUCTION_CONTEXT_TS_OBSERVATIONS"
     },
+    "src/primitives/__tests/Schnorr.test.ts": {
+      "probes": [
+        {
+          "local": "schnorr",
+          "probe": "capture-schnorr-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-local.py",
+          "outputs": {
+            "MIGRATION_SCHNORR_TS_OBSERVATIONS": "schnorr.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/schnorr.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/schnorr-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_SCHNORR_TS_OBSERVATIONS",
+          "raw": "schnorr.calls.raw.jsonl",
+          "rawOwner": "schnorr"
+        }
+      ],
+      "probe": "capture-schnorr-inputs.cjs",
+      "env": "MIGRATION_SCHNORR_TS_OBSERVATIONS"
+    },
     "src/script/__tests/Script.test.ts": {
       "probes": [
         {
@@ -6380,6 +9042,42 @@
       ],
       "probe": "capture-script-inputs.cjs",
       "env": "MIGRATION_SCRIPT_TS_OBSERVATIONS"
+    },
+    "src/script/__tests/Script.additional.test.ts": {
+      "probes": [
+        {
+          "local": "script-additional",
+          "probe": "capture-script-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-misc-local.py",
+          "outputs": {
+            "MIGRATION_SCRIPT_ADDITIONAL_TS_OBSERVATIONS": "script-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-misc-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/script-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/script-additional-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_SCRIPT_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "script-additional.calls.raw.jsonl",
+          "rawOwner": "script-additional"
+        }
+      ],
+      "probe": "capture-script-additional-inputs.cjs",
+      "env": "MIGRATION_SCRIPT_ADDITIONAL_TS_OBSERVATIONS"
     },
     "src/script/__tests/ScriptEvaluationError.test.ts": {
       "probes": [
@@ -6451,6 +9149,78 @@
       "probe": "capture-script-vector-inputs.cjs",
       "env": "MIGRATION_VECTOR_TS_INPUTS"
     },
+    "src/primitives/__tests/Secp256r1.test.ts": {
+      "probes": [
+        {
+          "local": "secp256r1",
+          "probe": "capture-secp256r1-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-small-local.py",
+          "outputs": {
+            "MIGRATION_SECP256R1_TS_OBSERVATIONS": "secp256r1.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-small-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/secp256r1.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/secp256r1-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_SECP256R1_TS_OBSERVATIONS",
+          "raw": "secp256r1.calls.raw.jsonl",
+          "rawOwner": "secp256r1"
+        }
+      ],
+      "probe": "capture-secp256r1-inputs.cjs",
+      "env": "MIGRATION_SECP256R1_TS_OBSERVATIONS"
+    },
+    "src/auth/__tests/SessionManager.test.ts": {
+      "probes": [
+        {
+          "local": "session-manager",
+          "probe": "capture-session-manager-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-auth-local.py",
+          "outputs": {
+            "MIGRATION_AUTH_SESSION_MANAGER_TS_OBSERVATIONS": "session-manager.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/session-manager.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/session-manager-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_AUTH_SESSION_MANAGER_TS_OBSERVATIONS",
+          "raw": "session-manager.calls.raw.jsonl",
+          "rawOwner": "session-manager"
+        }
+      ],
+      "probe": "capture-session-manager-inputs.cjs",
+      "env": "MIGRATION_AUTH_SESSION_MANAGER_TS_OBSERVATIONS"
+    },
     "src/primitives/__tests/Signature.test.ts": {
       "probes": [
         {
@@ -6486,6 +9256,114 @@
       ],
       "probe": "capture-signature-inputs.cjs",
       "env": "MIGRATION_SIGNATURE_TS_OBSERVATIONS"
+    },
+    "src/auth/transports/__tests__/SimplifiedFetchTransport.test.ts": {
+      "probes": [
+        {
+          "local": "simplified-fetch-transport",
+          "probe": "capture-simplified-fetch-transport-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-auth-local.py",
+          "outputs": {
+            "MIGRATION_AUTH_SIMPLIFIED_FETCH_TRANSPORT_TS_OBSERVATIONS": "simplified-fetch-transport.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-auth-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/simplified-fetch-transport.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/simplified-fetch-transport-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_AUTH_SIMPLIFIED_FETCH_TRANSPORT_TS_OBSERVATIONS",
+          "raw": "simplified-fetch-transport.calls.raw.jsonl",
+          "rawOwner": "simplified-fetch-transport"
+        }
+      ],
+      "probe": "capture-simplified-fetch-transport-inputs.cjs",
+      "env": "MIGRATION_AUTH_SIMPLIFIED_FETCH_TRANSPORT_TS_OBSERVATIONS"
+    },
+    "src/auth/transports/__tests__/SimplifiedFetchTransport.additional.test.ts": {
+      "probes": [
+        {
+          "local": "simplified-fetch-transport-additional",
+          "probe": "capture-simplified-fetch-transport-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-gap-local.py",
+          "outputs": {
+            "MIGRATION_SIMPLIFIED_FETCH_TRANSPORT_ADDITIONAL_TS_OBSERVATIONS": "simplified-fetch-transport-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-gap-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-gap-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/simplified-fetch-transport-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/simplified-fetch-transport-additional-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_SIMPLIFIED_FETCH_TRANSPORT_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "simplified-fetch-transport-additional.calls.raw.jsonl",
+          "rawOwner": "simplified-fetch-transport-additional"
+        }
+      ],
+      "probe": "capture-simplified-fetch-transport-additional-inputs.cjs",
+      "env": "MIGRATION_SIMPLIFIED_FETCH_TRANSPORT_ADDITIONAL_TS_OBSERVATIONS"
+    },
+    "src/primitives/__tests/SymmetricKey.test.ts": {
+      "probes": [
+        {
+          "local": "symmetric-key",
+          "probe": "capture-symmetric-key-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-keys-local.py",
+          "outputs": {
+            "MIGRATION_SYMMETRIC_KEY_TS_OBSERVATIONS": "symmetric-key.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-keys-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/symmetric-key.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/symmetric-key-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_SYMMETRIC_KEY_TS_OBSERVATIONS",
+          "raw": "symmetric-key.calls.raw.jsonl",
+          "rawOwner": "symmetric-key"
+        }
+      ],
+      "probe": "capture-symmetric-key-inputs.cjs",
+      "env": "MIGRATION_SYMMETRIC_KEY_TS_OBSERVATIONS"
     },
     "src/transaction/broadcasters/__tests/Teranode.test.ts": {
       "probes": [
@@ -6849,6 +9727,114 @@
       "probe": "capture-validation-helpers.cjs",
       "env": "MIGRATION_VALIDATION_TS_INPUTS"
     },
+    "src/wallet/__tests/WalletClient.test.ts": {
+      "probes": [
+        {
+          "local": "wallet-client",
+          "probe": "capture-wallet-client-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-wallet-client-local.py",
+          "outputs": {
+            "MIGRATION_WALLET_CLIENT_TS_OBSERVATIONS": "wallet-client.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-wallet-client-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-wallet-client-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/wallet-client.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/wallet-client-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_WALLET_CLIENT_TS_OBSERVATIONS",
+          "raw": "wallet-client.calls.raw.jsonl",
+          "rawOwner": "wallet-client"
+        }
+      ],
+      "probe": "capture-wallet-client-inputs.cjs",
+      "env": "MIGRATION_WALLET_CLIENT_TS_OBSERVATIONS"
+    },
+    "src/wallet/__tests/WalletClient.additional.test.ts": {
+      "probes": [
+        {
+          "local": "wallet-client-additional",
+          "probe": "capture-wallet-client-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-wallet-client-local.py",
+          "outputs": {
+            "MIGRATION_WALLET_CLIENT_ADDITIONAL_TS_OBSERVATIONS": "wallet-client-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-wallet-client-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-wallet-client-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/wallet-client-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/wallet-client-additional-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_WALLET_CLIENT_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "wallet-client-additional.calls.raw.jsonl",
+          "rawOwner": "wallet-client-additional"
+        }
+      ],
+      "probe": "capture-wallet-client-additional-inputs.cjs",
+      "env": "MIGRATION_WALLET_CLIENT_ADDITIONAL_TS_OBSERVATIONS"
+    },
+    "src/wallet/__tests/WalletClient.substrate.test.ts": {
+      "probes": [
+        {
+          "local": "wallet-client-substrate",
+          "probe": "capture-wallet-client-substrate-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-wallet-client-local.py",
+          "outputs": {
+            "MIGRATION_WALLET_CLIENT_SUBSTRATE_TS_OBSERVATIONS": "wallet-client-substrate.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-wallet-client-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-wallet-client-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/wallet-client-substrate.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/wallet-client-substrate-plan-20260929/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_WALLET_CLIENT_SUBSTRATE_TS_OBSERVATIONS",
+          "raw": "wallet-client-substrate.calls.raw.jsonl",
+          "rawOwner": "wallet-client-substrate"
+        }
+      ],
+      "probe": "capture-wallet-client-substrate-inputs.cjs",
+      "env": "MIGRATION_WALLET_CLIENT_SUBSTRATE_TS_OBSERVATIONS"
+    },
     "src/wallet/__tests/WalletError.test.ts": {
       "probes": [
         {
@@ -6968,6 +9954,42 @@
       ],
       "probe": "capture-werr-constructors.cjs",
       "env": "MIGRATION_WERR_TS_INPUTS"
+    },
+    "src/transaction/chaintrackers/__tests/WhatsOnChain.additional.test.ts": {
+      "probes": [
+        {
+          "local": "whats-on-chain-additional",
+          "probe": "capture-whats-on-chain-additional-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-http-chain-local.py",
+          "outputs": {
+            "MIGRATION_WHATS_ON_CHAIN_ADDITIONAL_TS_OBSERVATIONS": "whats-on-chain-additional.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-http-chain-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-http-chain-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/whats-on-chain-additional.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/whats-on-chain-additional-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_WHATS_ON_CHAIN_ADDITIONAL_TS_OBSERVATIONS",
+          "raw": "whats-on-chain-additional.calls.raw.jsonl",
+          "rawOwner": "whats-on-chain-additional"
+        }
+      ],
+      "probe": "capture-whats-on-chain-additional-inputs.cjs",
+      "env": "MIGRATION_WHATS_ON_CHAIN_ADDITIONAL_TS_OBSERVATIONS"
     },
     "src/wallet/substrates/__tests/window.CWI.test.ts": {
       "probes": [
@@ -7155,6 +10177,7 @@
     "MIGRATION_PROTOWALLET_TS_INPUTS": "xdm-browser-boundary",
     "MIGRATION_VALIDATION_TS_INPUTS": "xdm-browser-boundary",
     "MIGRATION_VECTOR_TS_INPUTS": "xdm-browser-boundary",
+    "MIGRATION_AUTH_BUILD_TS_INPUTS": "auth-build",
     "MIGRATION_AUTH_CERTIFICATE_CLASS_TS_INPUTS": "utils-property",
     "MIGRATION_AUTH_FETCH_ADDITIONAL_BODIES_TS_INPUTS": "utils-property",
     "MIGRATION_AUTH_FETCH_ADDITIONAL_CONTEXT_PEER_TS_INPUTS": "utils-property",
@@ -7176,20 +10199,47 @@
     "MIGRATION_AUTH_CERTIFICATE_VALIDATE_TS_INPUTS": "utils-property",
     "MIGRATION_AUTH_CERTIFICATE_VERIFIABLE_TS_INPUTS": "utils-property",
     "MIGRATION_BEEF_PARTY_ADDITIONAL_TS_INPUTS": "beef-party-additional",
+    "MIGRATION_BIGNUMBER_ADDITIONAL_TS_INPUTS": "bignumber-additional",
+    "MIGRATION_BINARY_FETCH_CLIENT_TS_INPUTS": "binary-fetch-client",
+    "MIGRATION_BLOCK_HEADERS_SERVICE_TS_INPUTS": "block-headers-service",
     "MIGRATION_BRC100_TS_INPUTS": "brc100-byte-encoding",
+    "MIGRATION_BUG_31_TS_INPUTS": "bug-31",
+    "MIGRATION_CHRONICLE_OPCODES_TS_INPUTS": "chronicle-opcodes",
     "MIGRATION_BSM_TS_INPUTS": "compat-bsm",
-    "MIGRATION_HASH_PBKDF2_TS_INPUTS": "hash-pbkdf2-vectors",
+    "MIGRATION_AUTH_CRYPTONONCE_TS_INPUTS": "cryptononce",
+    "MIGRATION_CURVE_ADDITIONAL_TS_INPUTS": "curve-additional",
+    "MIGRATION_CURVE_UNIT_TS_INPUTS": "curve-unit",
+    "MIGRATION_ECDH_TS_INPUTS": "ecdh",
+    "MIGRATION_ECDSA_TS_INPUTS": "ecdsa",
+    "MIGRATION_ECDSA_ADDITIONAL_TS_INPUTS": "ecdsa-additional",
+    "MIGRATION_ECIES_TS_INPUTS": "ecies",
+    "MIGRATION_HASH_PBKDF2_TS_INPUTS": "hash",
     "MIGRATION_HASH_TS_INPUTS": "hash",
     "MIGRATION_HD_TS_INPUTS": "hd",
     "MIGRATION_HTTP_WALLET_WIRE_TS_INPUTS": "http-wallet-wire",
     "MIGRATION_JSON_BYTE_TS_INPUTS": "json-byte-encoding",
+    "MIGRATION_LOCKING_UNLOCKING_SCRIPT_TS_INPUTS": "locking-unlocking-script",
+    "MIGRATION_MERKLE_PATH_TS_INPUTS": "merkle-path",
+    "MIGRATION_MERKLE_PATH_BENCH_TS_INPUTS": "merkle-path-bench",
+    "MIGRATION_MERKLE_PATH_SAFE_OFFSETS_TS_INPUTS": "merkle-path-safe-offsets",
     "MIGRATION_P2PKH_ASYNC_BACKEND_TS_INPUTS": "p2pkh-async-backend",
+    "MIGRATION_AUTH_PEER_BOUNDARY_TS_INPUTS": "peer-boundary",
+    "MIGRATION_PUBLIC_KEY_TS_INPUTS": "public-key",
+    "MIGRATION_PUBLIC_KEY_ADDITIONAL_TS_INPUTS": "public-key-additional",
     "MIGRATION_PUSH_DROP_TS_INPUTS": "push-drop",
     "MIGRATION_R_PUZZLE_TS_INPUTS": "r-puzzle",
     "MIGRATION_REDUCTION_CONTEXT_TS_INPUTS": "reduction-context",
+    "MIGRATION_SCHNORR_TS_INPUTS": "schnorr",
     "MIGRATION_SCRIPT_TS_INPUTS": "script",
+    "MIGRATION_SCRIPT_ADDITIONAL_TS_INPUTS": "script-additional",
     "MIGRATION_SCRIPT_ERROR_TS_INPUTS": "script-evaluation-error",
+    "MIGRATION_SECP256R1_TS_INPUTS": "secp256r1",
+    "MIGRATION_AUTH_SESSION_MANAGER_TS_INPUTS": "session-manager",
     "MIGRATION_SIGNATURE_TS_INPUTS": "signature",
+    "MIGRATION_AUTH_SIMPLIFIED_FETCH_TRANSPORT_TS_INPUTS": "simplified-fetch-transport",
+    "MIGRATION_SIMPLIFIED_FETCH_TRANSPORT_ADDITIONAL_TS_INPUTS": "simplified-fetch-transport-additional",
+    "MIGRATION_SPEND_CHRONICLE_VECTOR_TS_INPUTS": "spend-chronicle-vector",
+    "MIGRATION_SYMMETRIC_KEY_TS_INPUTS": "symmetric-key",
     "MIGRATION_TRANSACTION_ADDITIONAL_TS_INPUTS": "transaction-additional",
     "MIGRATION_TRANSACTION_EF_CACHE_TS_INPUTS": "transaction-ef-cache",
     "MIGRATION_TRANSACTION_EVIDENCE_TS_INPUTS": "transaction-evidence",
@@ -7197,19 +10247,17 @@
     "MIGRATION_TRANSACTION_SIGNATURE_TS_INPUTS": "transaction-signature-additional",
     "MIGRATION_TRANSACTION_VERIFIER_TS_INPUTS": "transaction-verifier",
     "MIGRATION_UTILS_PROPERTY_TS_INPUTS": "utils-property",
+    "MIGRATION_WALLET_CLIENT_TS_INPUTS": "wallet-client",
+    "MIGRATION_WALLET_CLIENT_ADDITIONAL_TS_INPUTS": "wallet-client-additional",
+    "MIGRATION_WALLET_CLIENT_SUBSTRATE_TS_INPUTS": "wallet-client-substrate",
     "MIGRATION_WALLET_ERROR_TS_INPUTS": "wallet-error",
     "MIGRATION_WALLET_PROPERTY_TS_INPUTS": "wallet-property",
     "MIGRATION_WERR_TS_INPUTS": "werr-constructors",
+    "MIGRATION_WHATS_ON_CHAIN_ADDITIONAL_TS_INPUTS": "whats-on-chain-additional",
     "MIGRATION_WINDOW_CWI_TS_INPUTS": "window-cwi"
   },
   "pending": [],
   "unresolved": [
-    {
-      "local": "chronicle-opcodes",
-      "capture": null,
-      "inputPlan": ".cache/evidence/chronicle-opcodes-plan-20260927/input-plan.json",
-      "reason": "没有可用探针"
-    },
     {
       "local": "hex-bn",
       "capture": "capture-legacy-side.py",
@@ -7218,61 +10266,30 @@
     }
   ],
   "unmappedCatalogFiles": [
-    "src/auth/__tests/Peer.boundary.test.ts",
     "src/auth/__tests/Peer.certificatePolicy.test.ts",
     "src/auth/__tests/Peer.test.ts",
-    "src/auth/__tests/SessionManager.test.ts",
-    "src/auth/__tests/build.test.ts",
-    "src/auth/transports/__tests__/SimplifiedFetchTransport.additional.test.ts",
-    "src/auth/transports/__tests__/SimplifiedFetchTransport.test.ts",
-    "src/auth/utils/__tests/cryptononce.test.ts",
-    "src/compat/__tests/ECIES.test.ts",
     "src/primitives/__tests/AESGCM.man.test.ts",
     "src/primitives/__tests/AsyncCryptoBackend.test.ts",
-    "src/primitives/__tests/BigNumber.additional.test.ts",
     "src/primitives/__tests/BigNumber.constructor.test.ts",
     "src/primitives/__tests/BigNumber.dhGroup.test.ts",
-    "src/primitives/__tests/Curve.additional.test.ts",
-    "src/primitives/__tests/Curve.unit.test.ts",
-    "src/primitives/__tests/ECDH.test.ts",
-    "src/primitives/__tests/ECDSA.additional.test.ts",
-    "src/primitives/__tests/ECDSA.test.ts",
     "src/primitives/__tests/Hash.additional.test.ts",
     "src/primitives/__tests/PrivateKey.split.test.ts",
     "src/primitives/__tests/PrivateKey.test.ts",
-    "src/primitives/__tests/PublicKey.additional.test.ts",
-    "src/primitives/__tests/PublicKey.test.ts",
     "src/primitives/__tests/Random.additional.test.ts",
     "src/primitives/__tests/Random.test.ts",
-    "src/primitives/__tests/Schnorr.test.ts",
-    "src/primitives/__tests/Secp256r1.test.ts",
-    "src/primitives/__tests/SymmetricKey.test.ts",
     "src/primitives/__tests/SymmetricKeyCompatibility.test.ts",
-    "src/primitives/__tests/bug-31.test.ts",
     "src/primitives/__tests/hex.test.ts",
     "src/script/__tests/Chronicle.test.ts",
-    "src/script/__tests/ChronicleOpcodes.test.ts",
-    "src/script/__tests/LockingUnlockingScript.test.ts",
     "src/script/__tests/NormativeVectors.test.ts",
-    "src/script/__tests/Script.additional.test.ts",
     "src/script/__tests/Spend.additional.test.ts",
     "src/script/__tests/Spend.codeseparator.test.ts",
     "src/script/__tests/Spend.verifier.test.ts",
     "src/script/__tests/SpendComplex.test.ts",
     "src/script/__tests/lrshiftnum.test.ts",
     "src/transaction/__tests/Beef.test.ts",
-    "src/transaction/__tests/MerklePath.bench.test.ts",
-    "src/transaction/__tests/MerklePath.safeOffsets.test.ts",
-    "src/transaction/__tests/MerklePath.test.ts",
     "src/transaction/__tests/Transaction.performance.test.ts",
-    "src/transaction/chaintrackers/__tests/BlockHeadersService.test.ts",
-    "src/transaction/chaintrackers/__tests/WhatsOnChain.additional.test.ts",
     "src/transaction/chaintrackers/__tests/WhatsOnChainChainTracker.test.ts",
-    "src/transaction/http/__tests/BinaryFetchClient.test.ts",
     "src/transaction/http/__tests/DefaultHttpClient.additional.test.ts",
-    "src/transaction/http/__tests/DefaultHttpClient.test.ts",
-    "src/wallet/__tests/WalletClient.additional.test.ts",
-    "src/wallet/__tests/WalletClient.substrate.test.ts",
-    "src/wallet/__tests/WalletClient.test.ts"
+    "src/transaction/http/__tests/DefaultHttpClient.test.ts"
   ]
 }

@@ -1,3 +1,4 @@
+// 全量运行分派表按字面量识别本局部的输出环境变量：process.env.MIGRATION_PUBLIC_KEY_TS_OBSERVATIONS
 // 固定 PublicKey.test.ts 与 PublicKey.additional.test.ts：只记录原测试直接发起的
 // PublicKey 构造与公开方法调用。两个原文件共用同一份包装实现（装载顺序决定哪个探针
 // 实例赢得 jest.doMock 注册），因此本文件在两个局部里内容完全相同。
