@@ -19,6 +19,22 @@
 - Java 侧提交会推进来源摘要（`382ac6c6`→`f16b01df`→`8cf69655`→`0a119349`），已完成的局部随即变为过期；钱包契约六文件（253 例）与钱包 JSON 两文件（58 例）仍绑定 `382ac6c6`，DRBG 29 例绑定 `c23c6f6`，都须在后续统一重采。
 - P0 采集来源门禁的语义规则 10／10、bundle 18／18、关联 3／3、宿主审计 41／41 自测通过。最新 `full-evidence-preflight.py` 结构计划覆盖 4099／5329，仍缺 1230 例，来源复核覆盖 121 例、12 个局部（`.cache/evidence/full-preflight-round13.json`：wallet-keys 六文件 71 例、认证证书六文件 50 例，均为当前来源 `0a119349`）；其余 68 个局部绑定旧执行器或旧 Java 版本，须在最终单次全量运行中重采。`ParityRecorder.errorName` 现按异常公共 `name` 字段记录 JS 可见错误名，WERR 系列不再被记成 `Error`。旧 Java 完整回归和 TS 原始报告不能代替单次完整双侧来源。通用断言 helper 已修复一批 null/undefined 伪记录，余下的完整调用历史和对象匹配语义正在修复并重新核对受影响局部证据。完整 `audit-tests.py check` 仍须全量真实输入和断言采集。
 
+## 并行路线（20260929）
+
+`python3 item-readiness.py` 给出各事项的冻结用例／已计划／当前来源复核与缺计划文件；据此排的后续分工：
+
+| 子代理 | 当前 | 下一步（依赖满足后） |
+| --- | --- | --- |
+| SA2 | HTTPWalletWire 46 + window.CWI 31 | wallet-client 100（3 文件全无计划） |
+| SA3 | transaction-beef 83 | script-templates 17 → script-spend 缺 91 |
+| SA4 | Signature 36 + AESGCM 30 + ReductionContext 29 | transaction-verification 53 或 auth-sessions 85 |
+| SA5 | HD 49 + Script 39 + Hash 17 | script-vectors 缺 26 → transaction-complete 缺 86 |
+| 主代理 | 协调、验收、提交、统一重采 | auth-transport 缺 49；最终全量门禁 |
+
+依赖链：beef → script-templates → script-spend → script-vectors → transaction-complete → transaction-verification；wallet-wire + wallet-hosts → wallet-client → auth-sessions → auth-transport。
+
+已知残留风险：`prepare-transaction-local.py` 的 `loopSamples` 采用“该用例入口样本”做结构覆盖（与 bn-arithmetic 登记方式一致），最终全量门禁若对循环样本有更严要求，需要按站点补真实循环样本。
+
 ## 收尾统一重采
 
 并行子代理的 Java 改动会不断推进来源摘要，因此**收尾时**在所有人停止改源码后执行一次统一重采：`./recapture-all.sh <日期标签> [局部名...]`（不传局部名则重采全部登记了 capture 适配器的标准局部，并逐个跑篡改门禁）。随后 `python3 full-evidence-preflight.py` 应显示这些局部 `currentCaptureVerified=true`；再对每个待结项用 `python3 local-task-parity.py --task <事项> --local ... --output <目录>` 出任务级报告，最后提交。
