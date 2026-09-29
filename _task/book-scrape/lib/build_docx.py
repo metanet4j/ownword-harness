@@ -158,14 +158,22 @@ def main():
     p.paragraph_format.space_after = Pt(18)
     r.head(p, '目　录', 20)
 
-    cur = None
+    cur, cur_cat = None, None
     for ch in chapters:
         if ch.get('part') and ch['part'] != cur:
-            cur = ch['part']
+            cur, cur_cat = ch['part'], None
             p = doc.add_paragraph()
             p.paragraph_format.space_before = Pt(10)
             p.paragraph_format.space_after = Pt(4)
             r.head(p, cur, 13)
+        if ch.get('category') and ch['category'] != cur_cat:
+            cur_cat = ch['category']
+            p = doc.add_paragraph()
+            p.paragraph_format.space_before = Pt(6)
+            p.paragraph_format.space_after = Pt(2)
+            p.paragraph_format.left_indent = Cm(0.5)
+            r.body(p, ch['category'], size=cfg['body_size'] - 1,
+                   color=RGBColor(0x44, 0x44, 0x44))
         p = doc.add_paragraph()
         p.paragraph_format.space_after = Pt(4)
         p.paragraph_format.left_indent = Cm(0.8)
@@ -173,16 +181,22 @@ def main():
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
     # 正文
-    cur = None
+    cur, cur_cat = None, None
     for idx, ch in enumerate(chapters):
         if ch.get('part') and ch['part'] != cur:
-            cur = ch['part']
+            cur, cur_cat = ch['part'], None
             if idx:
                 doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
             p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
             p.paragraph_format.space_before = Pt(60)
             r.head(p, cur, 22)
             doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
+
+        if ch.get('category'):
+            p = doc.add_paragraph()
+            p.paragraph_format.space_before = Pt(10)
+            p.paragraph_format.space_after = Pt(10)
+            r.head(p, ch['category'], 14)
 
         for b in ch['blocks']:
             t, text = b['type'], b['text']

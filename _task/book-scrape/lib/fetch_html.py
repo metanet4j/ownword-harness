@@ -2,7 +2,7 @@
 """抓取一本书的所有章节 HTML 到 <书名目录>/raw/。
 
 用法:
-  python3 lib/fetch_html.py <书名目录> [起始序号]
+  python3 lib/fetch_html.py <书名目录> [--start N] [--limit N]
 
 说明：站点会对浏览器 User-Agent 的自动请求返回 403/429，隐藏 UA 反而稳定返回
 200；脚本因此不发送 UA，并在每页之间等待 18-26 秒。
@@ -38,10 +38,18 @@ def fetch(ch, out, start_delay=20):
     raise RuntimeError(f'gave up on {ch["url"]}')
 
 
+def parse_opt(flag, default):
+    """读取 --flag N 形式的可选参数。"""
+    if flag in sys.argv:
+        i = sys.argv.index(flag)
+        if i + 1 < len(sys.argv) and sys.argv[i + 1].isdigit():
+            return int(sys.argv[i + 1])
+    return default
+
+
 def main():
-    start = 0
-    if len(sys.argv) > 2 and sys.argv[2].isdigit():
-        start = int(sys.argv[2])
+    start = parse_opt('--start', 0)
+    limit = parse_opt('--limit', 0)
     bookkit.book_dir(sys.argv[1] if len(sys.argv) > 1 else None)
     mf = bookkit.load_manifest()
     os.makedirs('raw', exist_ok=True)
@@ -50,6 +58,8 @@ def main():
     pending = [c for c in chapters
                if not (os.path.exists(f"raw/{c['slug']}.html")
                        and os.path.getsize(f"raw/{c['slug']}.html") > 20000)]
+    if limit:
+        pending = pending[:limit]
     print(f'{len(pending)} pages to fetch', flush=True)
     for i, ch in enumerate(pending, 1):
         t0 = time.time()

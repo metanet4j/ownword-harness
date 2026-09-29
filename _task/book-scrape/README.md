@@ -35,7 +35,7 @@ python3 lib/build_docx.py "<书名-英文名>"
 python3 lib/verify_book.py "<书名-英文名>"
 ```
 
-`fetch_html.py` 支持断点续抓：已存在且大于 20 KB 的章节会跳过，第二个参数可指定起始序号。
+`fetch_html.py` 支持断点续抓：已存在且大于 20 KB 的章节会跳过，可用 `--start N` 指定起始序号、`--limit N` 先抓前几章验证选择器。
 
 ## manifest.json 字段
 
@@ -47,7 +47,9 @@ python3 lib/verify_book.py "<书名-英文名>"
 | `site.audio_selector` | 朗读音频地址选择器，默认 `audio source[src]`，命中后写入章节 Markdown 的引用行 |
 | `site.drop_selector` | 转换前丢弃的元素，默认 `audio, .wp-audio-shortcode, script, style, .sharedaddy, .jp-relatedposts` |
 | `docx` | 排版参数：中英文字体、字号、行距、纸张、页边距、页码、输出文件名 |
-| `chapters[]` | `part`（部分标题，可空）、`title`（章节标题）、`slug`（文件名，建议 `序号-英文短名`）、`url` |
+| `chapters[]` | `part`（部分标题，可空）、`category`（分类标题，可空，用于问答体这类有二级归类的书）、`title`（章节标题）、`slug`（文件名，建议 `序号-英文短名`）、`url` |
+
+`part` 与 `category` 都为空时，Markdown 与 Word 的目录会扁平列出章节；填了则按层级分组。
 
 ## 抓取注意
 
