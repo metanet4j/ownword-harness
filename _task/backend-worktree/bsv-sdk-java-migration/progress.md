@@ -4,7 +4,7 @@
 
 权威任务状态见 [feature_list.json](feature_list.json)：43 个执行事项中 24 个 `done`、4 个 `in-progress`、15 个 `not-started`；`activeItem=nextItem=migration-impl-transaction-beef`。API 映射 3576／3576 项已复核，21 个嵌入批次均完成；原用例映射 5329／5329 个、源码测试站点映射 7554／7554 个。六模块完整门禁尚未通过。
 
-目标 Java 工程在提交 `1da225e` 的宿主无过滤 `clean test` 通过 5437／5437，失败／错误／跳过均为 0；167 份 Surefire 报告覆盖全部 5329 个映射身份且无重复，另有 108 个 Java 回归，报告封存于 `.cache/evidence/wallet-keys-full-surefire-20260929/`，日志 `.cache/evidence/wallet-keys-full-java-20260929.log`，Java 来源摘要 `0a119349…`（与 wallet-keys 六个局部采集同一来源）。此前绑定 `382ac6c6` 的快照已过期。固定 TypeScript 仓库及其他四个 Java 工程只读；目标工程 `metanet4j-bsv-sdk` 是唯一可改代码仓库。工作区根仓的既有无关改动保留。
+目标 Java 工程在提交 `1da225e` 的宿主无过滤 `clean test` 通过 5437／5437，失败／错误／跳过均为 0；167 份 Surefire 报告覆盖全部 5329 个映射身份且无重复，另有 108 个 Java 回归，报告封存于 `.cache/evidence/wallet-keys-full-surefire-20260929/`，日志 `.cache/evidence/wallet-keys-full-java-20260929.log`，Java 来源摘要 `0a119349…`（与 wallet-keys 六个局部采集同一来源）。此前绑定 `382ac6c6` 的快照已过期。已结项事项的聚焦累计回归（广播器五类 79、交易基础五类 74、钱包宿主与 WalletWire 三类 177）在当前工作树一次运行 330／330 通过，失败／错误／跳过均为 0，日志 `.cache/evidence/logs/` 下由各次运行留存。固定 TypeScript 仓库及其他四个 Java 工程只读；目标工程 `metanet4j-bsv-sdk` 是唯一可改代码仓库。工作区根仓的既有无关改动保留。
 
 ## 已取得的任务级验收
 
