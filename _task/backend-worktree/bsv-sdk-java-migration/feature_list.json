@@ -1423,7 +1423,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "transaction：广播器与默认选择",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-transaction-base"
       ],
@@ -1460,7 +1460,9 @@
       ],
       "evidence": [
         "目标提交 acd99a2；固定 TS 四个原测试 68/68、169 条断言，干净独立目标工作树 Maven 68/68、失败/错误/跳过均为 0。",
-        ".cache/evidence/broadcasters-task-parity-acd99a2.json：68/68、169/169，缺失、额外及未比较断言均为 0；随机输入原流重放 44/44。",
+        "当前 Java 来源 21d6cded（提交 e741afa）：四个文件均为标准双侧同输入局部——arc-broadcaster 15 例/15 输入/43 断言、arc-additional30 30/179/78、teranode-broadcaster 17/31/38、woc-broadcaster 6/6/10，合计 68 例/231 条输入/169 条断言；四项 verify 与 tamper 全部通过，full-evidence-preflight 记为 currentCaptureVerified。",
+        "聚焦 clean test 79/79（ARCTest 15、ARCAdditionalTest 30、TeranodeTest 17、WhatsOnChainBroadcasterTest 6、BroadcasterTest 11），失败/错误/跳过均为 0。",
+        "任务级同来源逐断言对照 .cache/evidence/broadcasters-same-source-20260929/task-parity.json：68/68 例、169/169 条断言，缺失、额外与未比较项均为 0。",
         "45 项 API、68 个原用例及 290 个源码站点已映射。"
       ],
       "modules": [
@@ -1474,7 +1476,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/broadcasters-task-parity-acd99a2.json"
+        "compareReport": ".cache/evidence/broadcasters-same-source-20260929/task-parity.json"
       }
     },
     {

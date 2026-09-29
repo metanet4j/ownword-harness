@@ -22,6 +22,7 @@
 ## 验证与收工
 
 - `migration-impl-transaction-base` 五个文件全部落地标准双侧局部（fee-model 18、live-policy 8、ef-cache 4、transaction-additional 20、signature-additional 24，合计 74 例／150 输入／115 断言），同一 Java 来源下 verify 与 tamper 通过，聚焦 `clean test` 74／74。任务级对照与 `done` 待并行子代理的 Java 改动提交后统一执行。
+- 广播器四文件已结项（68/68、169/169，提交 `1f1c660` 记录适配器升级）；xdm-browser-boundary、react-native25、wallet-wire 三局部已验证，钱包宿主与 WalletWire 两项仍缺 HTTPWalletWire 46 例、window.CWI 31 例；transaction-beef 五文件 83 例已派给第三个子代理。
 - 并行协作已启用：`lock.sh` 串行化共享目标工程的 Maven／采集，`register-local.py` 带 flock 登记局部，`doc/子代理采集作业说明-20260929-175251.md` 是子代理作业规范；两个后台子代理分别处理广播器五局部与钱包宿主／WalletWire 三局部。
 任务级对照用 `python3 local-task-parity.py --task <id> --local <局部> … --output <目录>`（复用 `audit-tests.py` 的比较规则并核对冻结用例覆盖）。`node audit-api.cjs batches` 检查结构分配，单批可用 `--batch ID`；完整门禁是无过滤 `node audit-api.cjs check`、`python3 audit-tests.py check`，后者还需 `module-scope.json.scopeReview=reviewed` 与当前源码版本的完整原始报告和结果。Maven／pnpm 使用任务目录 `./mvn.sh`、`./pnpm.sh`；集成和接口测试须在宿主提权环境运行。本代理 shell 的 PATH 前置 DSH checkout 的 `node_modules/.bin`，`pnpm --version` 会解析到 11.7.0，使 `./init.sh` 报“全局 pnpm 版本未变”失败；去掉该 PATH 项后 `./init.sh` 全绿（全局 pnpm 仍为 11.23.0），任务命令走 `./pnpm.sh`，不受影响。
 

@@ -2,7 +2,7 @@
 
 ## 执行位置
 
-权威任务状态见 [feature_list.json](feature_list.json)：43 个执行事项中 22 个 `done`、6 个 `in-progress`、15 个 `not-started`；`activeItem=nextItem=migration-impl-transaction-base`。API 映射 3576／3576 项已复核，21 个嵌入批次均完成；原用例映射 5329／5329 个、源码测试站点映射 7554／7554 个。六模块完整门禁尚未通过。
+权威任务状态见 [feature_list.json](feature_list.json)：43 个执行事项中 24 个 `done`、4 个 `in-progress`、15 个 `not-started`；`activeItem=nextItem=migration-impl-transaction-beef`。API 映射 3576／3576 项已复核，21 个嵌入批次均完成；原用例映射 5329／5329 个、源码测试站点映射 7554／7554 个。六模块完整门禁尚未通过。
 
 目标 Java 工程在提交 `1da225e` 的宿主无过滤 `clean test` 通过 5437／5437，失败／错误／跳过均为 0；167 份 Surefire 报告覆盖全部 5329 个映射身份且无重复，另有 108 个 Java 回归，报告封存于 `.cache/evidence/wallet-keys-full-surefire-20260929/`，日志 `.cache/evidence/wallet-keys-full-java-20260929.log`，Java 来源摘要 `0a119349…`（与 wallet-keys 六个局部采集同一来源）。此前绑定 `382ac6c6` 的快照已过期。固定 TypeScript 仓库及其他四个 Java 工程只读；目标工程 `metanet4j-bsv-sdk` 是唯一可改代码仓库。工作区根仓的既有无关改动保留。
 
@@ -20,6 +20,8 @@
 - Wallet Contracts：六个原测试文件在当前 Java 来源 `382ac6c6` 全部重采为标准双侧同输入局部（253 例、918 输入样本、1003 断言），local-evidence-gate 的 verify／tamper 均通过，full-evidence-preflight 记为 `currentCaptureVerified`；任务级对照 `.cache/evidence/wallet-contracts-clean-parity.json`，刷新记录见 [钱包契约与钱包JSON证据刷新](doc/钱包契约与钱包JSON证据刷新-20260929-020724.md)。
 - Wallet JSON：HTTPWalletJSON 53 例与 toOriginHeader 5 例在同一来源 `382ac6c6` 重采为标准双侧同输入局部，输入与断言两类篡改被拒；文档 [HTTPWalletJSON原输入验收](doc/HTTPWalletJSON原输入验收-20260929-004232.md)。两项前置完成后已按依赖顺序标记 `done`。
 - 交易基础：目标提交 `e741afa`（来源 `21d6cded`）；五个原测试文件 74 例、150 条真实输入、115 条断言全部双侧一致，五项 verify 与 tamper 通过，任务级报告 `.cache/evidence/transaction-base-same-source-20260929/task-parity.json` 为 74／74、115／115；聚焦 `clean test` 74／74。`migration-impl-transaction-base` 已标记 `done`，`nextItem` 改为 `migration-impl-transaction-beef`。
+- 广播器：目标提交 `e741afa`（来源 `21d6cded`）；四个文件 68 例、231 条真实输入、169 条断言双侧一致，四项 verify 与 tamper 通过，任务级报告 `.cache/evidence/broadcasters-same-source-20260929/task-parity.json` 为 68／68、169／169；聚焦 `clean test` 79／79。`migration-impl-broadcasters` 已标记 `done`。
+- 钱包宿主与 WalletWire（部分）：`xdm-browser-boundary` 70 例／275 输入／186 断言、`react-native25` 25／88／40、`wallet-wire` 82／179／300 已升级为标准双侧局部并通过 verify 与 tamper；聚焦 `clean test` 分别 70／25／82 全通过；wallet-wire 另有 4 MiB BEEF 大数组双侧字节逐条一致。两项仍缺 `HTTPWalletWire.test.ts` 46 例与 `window.CWI.test.ts` 31 例，未结项。
 - 认证证书：目标提交 `fa67ce4`、`58a8f73`；固定 TS 五个原测试 50／50 例、128 条断言。当前 Java 来源 `0a119349`（提交 `1da225e`）下六个文件已全部升级为标准双侧同输入局部（MasterCertificate 构造 2 例、MasterCertificate 其余 13 例、getVerifiableCertificates 5 例、validateCertificates 8 例、Certificate 15 例、VerifiableCertificate 7 例，合计 278 条入口），`local-evidence-gate.py` 的 verify 与 tamper 六项全通过；任务级同来源报告 `.cache/evidence/auth-certificates-same-source-20260929/task-parity.json` 为 50／50、128／128，改写实际值与缺少局部两类反例均被拒。`migration-impl-auth-certificates` 已标记 `done`。
 - HTTPWalletJSON：目标提交 `c88a04e`、断言记录对齐 `1c979fa`，同一来源的宿主无过滤 `clean test` 5437／5437；固定 TS／Java 53／53 原例，214／214 条真实入口（构造、公开 api、fetch 请求／响应／拒绝）与 73／73 条原断言逐值一致，53 条线上请求体解析后一致，输入与断言两类篡改被拒，文档 [HTTPWalletJSON原输入验收](doc/HTTPWalletJSON原输入验收-20260929-004232.md)。该局部经 `full-evidence-preflight.py` 来源复核，使 `currentCaptureVerifiedCases` 首次非零（53）。
 
