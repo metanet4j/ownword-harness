@@ -604,17 +604,17 @@
       "catalog": ".cache/evidence/fee-model-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/fee-model-plan-20260927/mapping.json",
       "input_plan": ".cache/evidence/fee-model-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/fee-model-satoshis-standard-20260929/ts-inputs.jsonl",
-      "ts_assertions": ".cache/evidence/fee-model-satoshis-standard-20260929/ts-assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/fee-model-satoshis-standard-20260929/ts-run.json",
+      "ts_inputs": ".cache/evidence/fee-model-final-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/fee-model-final-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/fee-model-final-20260929/ts-run.json",
       "ts_report": [
-        ".cache/evidence/fee-model-satoshis-standard-20260929/ts-jest.json"
+        ".cache/evidence/fee-model-final-20260929/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/fee-model-satoshis-standard-20260929/java-inputs.jsonl",
-      "java_assertions": ".cache/evidence/fee-model-satoshis-standard-20260929/java-assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/fee-model-satoshis-standard-20260929/java-run.json",
+      "java_inputs": ".cache/evidence/fee-model-final-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/fee-model-final-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/fee-model-final-20260929/java-run.json",
       "java_report": [
-        ".cache/evidence/fee-model-satoshis-standard-20260929/java-surefire.xml"
+        ".cache/evidence/fee-model-final-20260929/java-surefire.xml"
       ],
       "capture": "capture-fee-model-side.py"
     },
@@ -1237,6 +1237,25 @@
       "java_run_manifest": ".cache/evidence/protowallet-async-final-20260929/java-run.json",
       "java_report": [
         ".cache/evidence/protowallet-async-final-20260929/java-surefire.xml"
+      ]
+    },
+    {
+      "name": "live-policy",
+      "catalog": ".cache/evidence/live-policy-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/live-policy-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/live-policy-plan-20260929/input-plan.json",
+      "capture": "capture-live-policy-side.py",
+      "ts_inputs": ".cache/evidence/live-policy-final-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/live-policy-final-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/live-policy-final-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/live-policy-final-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/live-policy-final-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/live-policy-final-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/live-policy-final-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/live-policy-final-20260929/java-surefire.xml"
       ]
     }
   ]
