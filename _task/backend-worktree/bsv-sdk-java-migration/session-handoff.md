@@ -129,6 +129,18 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 最终窗口已启动 + 两处工具修复（20260930 11:00）
+
+**守卫六项全过**：静默 ✓、`test-compile` ✓、`validate-plans` **138 检查/0 失败** ✓、分派表 **153 局部／133 原文件／151 探针／115 环境变量，`unresolved=0`、`unmappedCatalogFiles=0`** ✓、覆盖率 **5329/5329（100%）** ✓、工作树已冻结（SDK `ba10dd4`）✓。
+
+**最终窗口已启动**：`./recapture-all.sh final-20260930`（后台，日志 `.cache/evidence/final-window-20260930.log`），处理 **106 个可采局部**，预计 3.5–4 小时；已完成 5 个、其中 3 个篡改门禁通过。
+
+**本轮两处工具修复**：
+1. `capture-legacy-side.py`：`--kind` 缺省 `both`、单报告自动派生与合并（`<testsuite>` / jest JSON），使旧管线局部适配标准 recapture 流程；
+2. `capture-full-dispatch.cjs`：**整轮共享环境变量不再被逐文件覆盖**（`MIGRATION_PARITY_TS_OBSERVATIONS` 等）——否则 `broadcaster`／`wallet-wire` 的断言行会落到各自的文件里，全量断言转换读不到而 strict 失败（由最后 2 文件代理发现）。
+
+**hex-bn（36 例）暂挂**：其旧管线在标准流程下 Java 侧报错（28+36+8 例 Errors，可见次级 `BigNumberObservation.complete()` NPE），且 tamper 因无成功运行目录而报“来源不匹配”。它的 36 例**已在全量分派表中**（探针 + legacy emit 覆盖，见第 30 轮），因此最终单次双侧全量运行仍会为其产出证据；逐局部采集留待窗口后单独处理。
+
 ### 长跑进入收尾阶段（20260930 10:30）
 
 `AESGCM.man` 的 jest 运行已约 42 分钟：探针已开始产出入口轨迹（`ts-calls.raw.jsonl` 784 字节，06:52），`ts-jest.json` 尚未落盘（即 jest 仍在跑）。预计 07:16 前后结束，随后冻结计划并登记，覆盖率即达 5329/5329。

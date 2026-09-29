@@ -35,7 +35,12 @@ if (!entry) {
       continue
     }
     // 输出轨迹先落到本轮运行目录；语料与固定取值按分派表原样注入。
+    // 整轮共享的轨迹/日志环境变量（断言轨迹、网络日志）由 run-full-ts-capture.py 统一设置，
+    // 不能被逐文件覆盖：否则这些文件的断言行会落到各自的文件里，全量断言转换读不到 → strict 失败。
+    const SHARED_ENVS = new Set(['MIGRATION_PARITY_TS_OBSERVATIONS', 'MIGRATION_PARITY_JAVA_OUTPUT',
+                                 'MIGRATION_NETWORK_LOG'])
     for (const [env, name] of Object.entries(item.outputs || {})) {
+      if (SHARED_ENVS.has(env)) continue
       process.env[env] = path.join(runDir, name)
     }
     for (const [env, value] of Object.entries(item.corpus || {})) process.env[env] = value
