@@ -110,6 +110,14 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 
 **仍有未计划用例的事项（共约 565 例，交给下一波代理）**：wallet-client 100、script-spend 91、transaction-complete 86、auth-sessions 85、http-chain 47、curve 38、keys-signatures 37、script-vectors 26、hash-random 22、transaction-beef 21（beef 在做）、symmetric 7、auth-transport 3、bignumber 2。
 
+### 第六波（20260930 凌晨）与代理失败情况
+
+- `tx-complete` 与 `curve/keys` 两路代理**中途失败且未留收尾报告**：前者未落任何文件；后者留下 `curve-locals.py`、`prepare-curve-local.py`、`capture-curve-local.py`、`capture-curve-additional-inputs.cjs`、`CurveAdditionalInputReplay.java`（可续用）。
+- 因此改为**小范围重派**：`transaction`（Transaction.test.ts 61 例）与 `curve-unit`+`curve-additional`（38 例，续用前任产物）各一路。
+- 失败代理提示：范围过大（8 个文件/75 例）时容易中途终止；后续按 1–2 个文件为单位派发。
+- **PrivateKey.test.ts 的 10,000 次循环决策**：按 1:1 口径处理——探针记录有代表性的若干次迭代作为输入样本（供 `loopSamples` 结构覆盖），断言实例仍按每次执行登记（`<站点>#<轮次>`），即该用例的计划会达到 4 万级实例；这是原测试真实执行量的忠实反映，不做抽样削减。
+- 本轮补采成功：`ecdsa` 15/31/21、`schnorr` 12/63/15（verify + tamper 通过）。`symmetric-key`、`ecies` 因“采集期间源码变化”失败，`chronicle-opcodes`、`simplified-fetch-transport-additional` 因他人在飞编译错误失败——四者代码侧均已就绪，随最终窗口重采。
+
 ### 第五波分工（20260930 凌晨已派发，5 路并行）
 
 | 代理 | 范围 | 用例 |
