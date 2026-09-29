@@ -129,6 +129,14 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### peer 生产修复落地并采集通过（20260930 04:20）
+
+`Peer.processGeneralMessage` 改为遍历监听器快照（原因：原测试的监听器会在回调里自注销，Java `LinkedHashMap` 迭代中删除会抛 CME 丢消息，而固定 TS 的 Map 迭代允许删除）。新增 `PeerGeneralListenerUnsubscribeTest` 作为额外 Java 回归（与上游断言分开计数）。
+
+采集结果：**peer 30 例 / 147 输入 / 60 断言**，`verify` 与 `tamper`（两个 true）均通过；生产修复随 SDK 仓 `a9050d6` 提交。`random`（5 例）亦已采集落地。
+
+剩余缺口仍为原语剩余批的 6 个文件（26 例）：Hash.additional 9、Random.additional 8、AsyncCryptoBackend 3、SymmetricKeyCompatibility 3、BigNumber.dhGroup 2、AESGCM.man 1；另有 `transaction-performance`（25 例）在建。
+
 ### 覆盖率 99%（20260930 04:05）
 
 已计划 **5303/5329 = 99%**，未计划仅剩 **26 例**，全部在原语剩余批代理手上：`Hash.additional` 9、`Random.additional` 8、`AsyncCryptoBackend` 3、`SymmetricKeyCompatibility` 3、`BigNumber.dhGroup` 2、`AESGCM.man` 1。`Peer.test.ts` 30 例已随 peer 代理登记进入计划。局部登记 148 个，100 个已有运行产物。
