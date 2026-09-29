@@ -1322,6 +1322,93 @@
       "java_report": [
         ".cache/evidence/transaction-signature-additional-final-20260929/java-surefire.xml"
       ]
+    },
+    {
+      "name": "beef-party-additional",
+      "catalog": ".cache/evidence/beef-party-additional-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/beef-party-additional-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/beef-party-additional-plan-20260929/input-plan.json",
+      "capture": "capture-transaction-local.py"
+    },
+    {
+      "name": "aesgcm",
+      "catalog": ".cache/evidence/aesgcm-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/aesgcm-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/aesgcm-plan-20260929/input-plan.json",
+      "capture": "capture-primitives-local.py"
+    },
+    {
+      "name": "http-wallet-wire",
+      "catalog": ".cache/evidence/http-wallet-wire-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/http-wallet-wire-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/http-wallet-wire-plan-20260929/input-plan.json",
+      "capture": "capture-transaction-local.py",
+      "ts_inputs": ".cache/evidence/http-wallet-wire-standard-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/http-wallet-wire-standard-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/http-wallet-wire-standard-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/http-wallet-wire-standard-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/http-wallet-wire-standard-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/http-wallet-wire-standard-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/http-wallet-wire-standard-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/http-wallet-wire-standard-20260929/java-surefire.xml"
+      ]
+    },
+    {
+      "name": "window-cwi",
+      "catalog": ".cache/evidence/window-cwi-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/window-cwi-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/window-cwi-plan-20260929/input-plan.json",
+      "capture": "capture-transaction-local.py"
+    },
+    {
+      "name": "hash",
+      "catalog": ".cache/evidence/hash-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/hash-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/hash-plan-20260929/input-plan.json",
+      "capture": "capture-evidence-local.py"
+    },
+    {
+      "name": "signature",
+      "catalog": ".cache/evidence/signature-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/signature-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/signature-plan-20260929/input-plan.json",
+      "capture": "capture-primitives-local.py"
+    },
+    {
+      "name": "reduction-context",
+      "catalog": ".cache/evidence/reduction-context-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/reduction-context-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/reduction-context-plan-20260929/input-plan.json",
+      "capture": "capture-primitives-local.py"
     }
-  ]
+  ],
+  "fullRun": {
+    "tsCommand": [
+      "python3",
+      "run-full-ts-capture.py",
+      "--run-dir",
+      "{runDir}",
+      "--report",
+      "ts-jest.json"
+    ],
+    "javaCommand": [
+      "python3",
+      "run-full-java-capture.py",
+      "--run-dir",
+      "{runDir}",
+      "--reports",
+      "java-surefire.xml",
+      "clean",
+      "test"
+    ],
+    "tsReports": [
+      "ts-jest.json"
+    ],
+    "javaReports": [
+      "java-surefire.xml"
+    ]
+  }
 }

@@ -72,6 +72,17 @@ SA9：`locking-unlocking-script` 12 例、`script-additional` 14 例、`binary-f
 
 `run-full-ts-capture.py` 需要采集后校验：所有原始轨迹存在且非空、raw 型转换成功，任一缺失即整轮非零退出（防止“跑完但没有输入”的假绿）。
 
+## 全量运行接口已交付（20260929）
+
+`fullRun` 段已写入 `full-evidence-locals.json`，preflight 的 `missingFullRunInterfaces=[]` 达成。新增：`build-full-run-probes.py`（生成 `full-run-probes.json`：84 局部／66 原文件／80 探针）、`capture-full-dispatch.cjs`（按 testPath 分派探针）、`run-full-ts-capture.py`（全量 TS + raw→emit-ts 转换 + 采集后校验）、`run-full-java-capture.py`（无过滤 `clean test` + 全部 `MIGRATION_*_TS_INPUTS` 指向本轮 ts-inputs + Surefire 汇总）。自测：三类代表子集 Jest 69/69、官方 `evidence-bundle capture` 端到端 EXIT=0（inputs 251 行、assertions 159 行、missing/extra/duplicates 均为 0）。
+
+**严格模式仍会拒绝的三类缺口**（最终全量运行前必须清零或明确处置）：
+1. `unresolved` 2 个：`chronicle-opcodes`（无可用探针）、`hex-bn`（跨 2 原文件 2 探针且无 CLI 转换器）；
+2. **67 个 catalog 原文件没有任何探针**（auth 8／compat 2／primitives 25／script 13／transaction 14／wallet 5）；
+3. **30 个 raw 局部缺 CLI emit-ts 转换器**（auth-fetch-property、bignumber-*、byte-base58、cached-keyderiver、drbg29、http-wallet-json、jacobian、json-byte-encoding、keyderiver、mnemonic-*、origin-header5、point-*、protowallet*、script-spend-shared-vectors、transaction-shared-vectors、utils-property、validation-helpers、wallet-error、wallet-property、wallet-wire、werr-constructors）。
+
+另：Java 侧 35 个 `MIGRATION_*_TS_INPUTS` 可全部共用同一份 `<runDir>/ts-inputs.jsonl`；另有 38 个 `-Dmigration.*` 冻结语料属性仍驱动部分重放（不消费本轮输入），属“局部尚未升级到标准接口”。
+
 ## 全量分派策略（已拍板）
 
 `run-full-ts-capture.py` 必须把三类探针都纳入分派：直写型、raw 型（再经 `prepare-*-local.py emit-ts` 转换）、外部语料型（由分派器按适配器 TS 分支的 `env[...]` 设置 `MIGRATION_*_RANDOM`／`_VECTOR_CATALOG`／`_META`／`_TS_CLOCK` 等语料变量）。**默认严格**：无法解析探针或语料的原文件必须让整轮非零退出并打印缺口，同时写 `unmapped-files.jsonl`／`unresolved-probes.json`；`--allow-unresolved` 只允许子集自测使用，不得出现在 `fullRun.tsCommand` 里。全量运行不允许出现“绿但不完整”。
