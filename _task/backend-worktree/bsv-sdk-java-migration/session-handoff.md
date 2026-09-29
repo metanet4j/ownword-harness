@@ -129,6 +129,19 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 代码优先策略见效（20260930 02:30）
+
+切换后已有两路交回**代码侧完成**的简报，且都附了无锁离线证据：
+
+| 代理 | 局部 | 用例/输入/断言 | 离线证据 |
+| --- | --- | --- | --- |
+| wallet-client | wallet-client／-additional／-substrate | 1/3/6、61/107/108、38/38/70 | javac 子集编译 0 error；JUnit launcher 100 全绿；Java 写出输入与样本 ID 完全对齐；复用 `evidence-bundle.build` 比对三局部全部 ok；篡改模拟两条路径均被拒；清空输入环境变量后行为不变 |
+| curve | curve-unit／curve-additional | 18/82/61、20/23/40 | 隔离 javac 0 error；JUnit 38/38；输入同 ID 同序；`audit-tests.compare_actuals` 逐断言 **0 处不符** |
+
+主代理独立核验（不占锁）：`validate-plans.py` **114 个标准局部通过、0 失败**；分派表 **110 原文件／126 探针／91 环境变量，`unresolved=0`**；上述五个局部均已登记且各自的原文件都已接入探针。
+
+当前唯一编译阻塞：`transaction/TransactionInputReplay.java:356`（transaction 代理在飞）。其余代理继续代码收口。
+
 ### 死锁诊断与第二次策略切换（20260930 02:20）
 
 **诊断**：最近 45 分钟全队 **0 个采集落地**。锁并非卡死（持有者是 480% CPU 的 Maven 运行），真正原因是**8 路代理并行编辑同一测试模块**：任何一个 2–4 分钟的捕获窗口内都会有别人的文件在飞，于是捕获必然以 `BUILD FAILURE`（他人在飞文件）或“采集期间源码发生变化”收场——互相等待形成死锁。

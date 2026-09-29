@@ -4849,6 +4849,67 @@
       "probe": "capture-teranode-inputs.cjs",
       "env": "MIGRATION_TERANODE_TS_OBSERVATIONS"
     },
+    "transaction": {
+      "local": "transaction",
+      "capture": "capture-tx-local.py",
+      "files": [
+        "src/transaction/__tests/Transaction.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/transaction-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "transaction",
+          "probe": "capture-transaction-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-tx-local.py",
+          "outputs": {
+            "MIGRATION_TRANSACTION_TS_OBSERVATIONS": "transaction.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-tx-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-tx-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/transaction.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/transaction-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_TRANSACTION_TS_OBSERVATIONS",
+          "raw": "transaction.calls.raw.jsonl",
+          "rawOwner": "transaction"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_TRANSACTION_TS_OBSERVATIONS": "transaction.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_TRANSACTION_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_TRANSACTION_TS_INPUTS",
+      "probe": "capture-transaction-inputs.cjs",
+      "env": "MIGRATION_TRANSACTION_TS_OBSERVATIONS"
+    },
     "transaction-additional": {
       "local": "transaction-additional",
       "capture": "capture-transaction-local.py",
@@ -9399,6 +9460,64 @@
       "probe": "capture-teranode-inputs.cjs",
       "env": "MIGRATION_TERANODE_TS_OBSERVATIONS"
     },
+    "src/transaction/__tests/Transaction.test.ts": {
+      "probes": [
+        {
+          "local": "transaction",
+          "probe": "capture-transaction-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-tx-local.py",
+          "outputs": {
+            "MIGRATION_TRANSACTION_TS_OBSERVATIONS": "transaction.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-tx-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-tx-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/transaction.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/transaction-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_TRANSACTION_TS_OBSERVATIONS",
+          "raw": "transaction.calls.raw.jsonl",
+          "rawOwner": "transaction"
+        },
+        {
+          "local": "transaction-shared-vectors",
+          "probe": "capture-transaction-vector-inputs.cjs",
+          "mode": "raw",
+          "tier": "file-driver",
+          "driver": "transaction-vector-evidence.py",
+          "outputs": {
+            "MIGRATION_VECTOR_TS_INPUTS": "transaction-shared-vectors.calls.raw.jsonl"
+          },
+          "corpus": {
+            "MIGRATION_VECTOR_CATALOG": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/module-tests.json",
+            "MIGRATION_VECTOR_MAPPING": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/test-map.json"
+          },
+          "emit": {
+            "script": null,
+            "argv": [],
+            "unresolved": []
+          },
+          "env": "MIGRATION_VECTOR_TS_INPUTS",
+          "raw": "transaction-shared-vectors.calls.raw.jsonl",
+          "rawOwner": "transaction-shared-vectors"
+        }
+      ],
+      "probe": "capture-transaction-inputs.cjs",
+      "env": "MIGRATION_TRANSACTION_TS_OBSERVATIONS"
+    },
     "src/transaction/__tests/Transaction.additional.test.ts": {
       "probes": [
         {
@@ -9576,34 +9695,6 @@
       ],
       "probe": "capture-transaction-evidence-coordinator-inputs.cjs",
       "env": "MIGRATION_TRANSACTION_EVIDENCE_COORDINATOR_TS_OBSERVATIONS"
-    },
-    "src/transaction/__tests/Transaction.test.ts": {
-      "probes": [
-        {
-          "local": "transaction-shared-vectors",
-          "probe": "capture-transaction-vector-inputs.cjs",
-          "mode": "raw",
-          "tier": "file-driver",
-          "driver": "transaction-vector-evidence.py",
-          "outputs": {
-            "MIGRATION_VECTOR_TS_INPUTS": "transaction-shared-vectors.calls.raw.jsonl"
-          },
-          "corpus": {
-            "MIGRATION_VECTOR_CATALOG": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/module-tests.json",
-            "MIGRATION_VECTOR_MAPPING": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/test-map.json"
-          },
-          "emit": {
-            "script": null,
-            "argv": [],
-            "unresolved": []
-          },
-          "env": "MIGRATION_VECTOR_TS_INPUTS",
-          "raw": "transaction-shared-vectors.calls.raw.jsonl",
-          "rawOwner": "transaction-shared-vectors"
-        }
-      ],
-      "probe": "capture-transaction-vector-inputs.cjs",
-      "env": "MIGRATION_VECTOR_TS_INPUTS"
     },
     "src/primitives/__tests/TransactionSignature.additional.test.ts": {
       "probes": [
@@ -10296,6 +10387,7 @@
     "MIGRATION_SIMPLIFIED_FETCH_TRANSPORT_ADDITIONAL_TS_INPUTS": "simplified-fetch-transport-additional",
     "MIGRATION_SPEND_CHRONICLE_VECTOR_TS_INPUTS": "spend-chronicle-vector",
     "MIGRATION_SYMMETRIC_KEY_TS_INPUTS": "symmetric-key",
+    "MIGRATION_TRANSACTION_TS_INPUTS": "transaction",
     "MIGRATION_TRANSACTION_ADDITIONAL_TS_INPUTS": "transaction-additional",
     "MIGRATION_TRANSACTION_EF_CACHE_TS_INPUTS": "transaction-ef-cache",
     "MIGRATION_TRANSACTION_EVIDENCE_TS_INPUTS": "transaction-evidence",
