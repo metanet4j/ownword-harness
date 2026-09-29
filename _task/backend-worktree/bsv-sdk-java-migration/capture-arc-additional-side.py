@@ -22,20 +22,24 @@ def main():
     parser.add_argument('clean', nargs='?')
     parser.add_argument('test', nargs='?')
     parser.add_argument('--replay', type=Path, required=True)
-    parser.add_argument('--random-replay', type=Path, required=True)
+    # 冻结随机语料与重放语料同目录（random.json），缺省时按计划目录取。
+    parser.add_argument('--random-replay', type=Path)
     parser.add_argument('--report', type=Path, required=True)
     args = parser.parse_args()
     if args.side != os.environ.get('EVIDENCE_SIDE'):
         parser.error('capture 侧别与环境不同')
     replay = args.replay.resolve()
-    random_replay = args.random_replay.resolve()
+    random_replay = (args.random_replay or replay.parent / 'random.json').resolve()
+    if not random_replay.exists():
+        parser.error('缺少冻结随机语料：' + str(random_replay))
     report = args.report.resolve()
+    # 两侧共用同一运行目录：原始轨迹与网络日志按侧别命名，避免互相覆盖。
     folder = report.parent
-    raw = folder / 'calls.raw.jsonl'
-    random_raw = folder / 'random.raw.jsonl'
-    assertions = folder / 'assertions.raw.jsonl'
+    raw = folder / f'{args.side}-calls.raw.jsonl'
+    random_raw = folder / f'{args.side}-random.raw.jsonl'
+    assertions = folder / f'{args.side}-assertions.raw.jsonl'
     env = dict(os.environ, MIGRATION_PARITY_TS_OBSERVATIONS=str(assertions),
-               MIGRATION_NETWORK_LOG=str(folder / 'network.jsonl'))
+               MIGRATION_NETWORK_LOG=str(folder / f'{args.side}-network.jsonl'))
     plan = replay.parent
     if args.side == 'ts':
         if args.clean or args.test:
@@ -67,7 +71,8 @@ def main():
         '--catalog', str(plan / 'catalog.json'), '--mapping', str(plan / 'mapping.json'),
         '--plan', str(plan / 'input-plan.json'), '--side', args.side,
         '--raw', str(assertions), '--run-id', env['EVIDENCE_RUN_ID'],
-        '--output', env['EVIDENCE_ASSERTIONS_PATH'], env=env)
+        '--output', env['EVIDENCE_ASSERTIONS_PATH'],
+        '--allow-ts-extra' if args.side == 'ts' else '--allow-java-extra', env=env)
 
 
 if __name__ == '__main__':

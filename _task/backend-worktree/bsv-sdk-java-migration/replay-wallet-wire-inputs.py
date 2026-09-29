@@ -134,49 +134,17 @@ def prepare(args):
                       'output': str(folder)}))
 
 
-def assertions_for(side, raw, mapping, run_id):
-    reports = rows(raw)
-    by_method = {case['java'][0]['name']: case for case in mapping['cases']}
-    file = next(item for item in read(TASK / 'module-tests.json')['files'] if item['path'] == FILE)
-    by_test = {}
-    case_occurrences = {}
-    for case in file['cases']:
-        name = ' '.join(case['names'])
-        occurrence = case_occurrences.get(name, 0) + 1
-        case_occurrences[name] = occurrence
-        by_test[(name, occurrence)] = case
-    mapped = {case['id']: case for case in mapping['cases']}
-    output, positions = [], {}
-    for item in reports:
-        case = by_test[(item['test'], item['occurrence'])] if side == 'ts' else by_method[item['method']]
-        if side == 'java':
-            assert item['test'] == JAVA_CLASS + '#' + item['method']
-        position = positions.get(case['id'], 0)
-        positions[case['id']] = position + 1
-        if side == 'java':
-            assert item['index'] == position + 1
-        identity = assertion_instances(mapped[case['id']])[0][position]
-        output.append({'runId': run_id, 'side': side, 'caseId': case['id'], 'assertionId': identity,
-                       'value': {'matcher': item['matcher'], 'negated': item['negated'], 'actual': item['actual']}})
-    assert len(output) == 300
-    return output
-
-
 def emit_ts(args):
+    """按冻结计划核对本轮 TS 原始帧、熵与时钟，只写输入轨迹；断言由标准发射器输出。"""
     planned = rows(args.plan)
     assert planned == input_plan(args.frames, args.entropy, args.clock, args.parity), '固定 TS 帧、熵与时钟不等于运行前计划'
     write_rows(args.inputs, [dict(row, runId=args.run_id, side='ts') for row in planned])
-    write_rows(args.assertions, assertions_for('ts', args.parity, source()[2], args.run_id))
-
-
-def emit_java(args):
-    write_rows(args.assertions, assertions_for('java', args.parity, source()[2], args.run_id))
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=('prepare', 'emit-ts', 'emit-java'))
-    for name in ('frames', 'entropy', 'clock', 'parity', 'output', 'plan', 'side', 'run-id', 'inputs', 'assertions'):
+    parser.add_argument('action', choices=('prepare', 'emit-ts'))
+    for name in ('frames', 'entropy', 'clock', 'parity', 'output', 'plan', 'run-id', 'inputs'):
         parser.add_argument('--' + name, required=name == 'parity')
     args = parser.parse_args()
-    {'prepare': prepare, 'emit-ts': emit_ts, 'emit-java': emit_java}[args.action](args)
+    {'prepare': prepare, 'emit-ts': emit_ts}[args.action](args)

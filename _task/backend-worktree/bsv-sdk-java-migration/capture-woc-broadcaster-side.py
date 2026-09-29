@@ -28,11 +28,12 @@ def main():
         parser.error('capture 侧别与环境不同')
     replay = args.replay.resolve()
     report = args.report.resolve()
+    # 两侧共用同一运行目录：原始轨迹与网络日志按侧别命名，避免互相覆盖。
     folder = report.parent
-    raw = folder / 'calls.raw.jsonl'
-    assertions = folder / 'assertions.raw.jsonl'
+    raw = folder / f'{args.side}-calls.raw.jsonl'
+    assertions = folder / f'{args.side}-assertions.raw.jsonl'
     env = dict(os.environ, MIGRATION_PARITY_TS_OBSERVATIONS=str(assertions),
-               MIGRATION_NETWORK_LOG=str(folder / 'network.jsonl'))
+               MIGRATION_NETWORK_LOG=str(folder / f'{args.side}-network.jsonl'))
     plan = replay.parent
     if args.side == 'ts':
         if args.clean or args.test:
@@ -61,7 +62,8 @@ def main():
         '--catalog', str(plan / 'catalog.json'), '--mapping', str(plan / 'mapping.json'),
         '--plan', str(plan / 'input-plan.json'), '--side', args.side,
         '--raw', str(assertions), '--run-id', env['EVIDENCE_RUN_ID'],
-        '--output', env['EVIDENCE_ASSERTIONS_PATH'], env=env)
+        '--output', env['EVIDENCE_ASSERTIONS_PATH'],
+        '--allow-ts-extra' if args.side == 'ts' else '--allow-java-extra', env=env)
 
 
 if __name__ == '__main__':

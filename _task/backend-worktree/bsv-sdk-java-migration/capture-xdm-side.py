@@ -29,39 +29,40 @@ def main():
     replay = args.replay.resolve()
     report = args.report.resolve()
     evidence = report.parent
-    raw = evidence / 'inputs.raw.jsonl'
-    parity = evidence / 'assertions.raw.jsonl'
-    env = dict(os.environ, MIGRATION_PARITY_TS_OBSERVATIONS=str(parity),
-               MIGRATION_NETWORK_LOG=str(evidence / 'network.jsonl'))
+    # 两侧共用同一运行目录：原始轨迹与网络日志按侧别分开命名。
+    calls = evidence / f'{args.side}-calls.raw.jsonl'
+    parity = evidence / f'{args.side}-assertions.raw.jsonl'
+    network = evidence / 'ts-network.jsonl'
     plan = replay.parent
     if args.side == 'ts':
         if args.clean or args.test:
             parser.error('TS 不接受 Maven 阶段')
-        env['MIGRATION_XDM_TS_OBSERVATIONS'] = str(raw)
+        env = dict(os.environ, MIGRATION_PARITY_TS_OBSERVATIONS=str(parity),
+                   MIGRATION_XDM_TS_OBSERVATIONS=str(calls),
+                   MIGRATION_NETWORK_LOG=str(network))
         run(str(TASK / 'pnpm.sh'), '--dir', str(SDK), 'exec', 'jest', '--runInBand',
             '--watchman=false', '--runTestsByPath', SOURCE, '--setupFilesAfterEnv',
             str(TASK / 'ts-offline-guard.cjs'), str(TASK / 'capture-xdm-inputs.cjs'),
             str(TASK / 'capture-parity.cjs'), '--json', '--outputFile=' + str(report), env=env)
-        network = Path(env['MIGRATION_NETWORK_LOG'])
         if network.exists() and network.read_text().strip():
             raise RuntimeError('固定 XDM 原测试出现网络调用')
-        run('python3', str(TASK / 'prepare-xdm-inputs.py'), 'emit-ts', '--raw', str(raw),
+        run('python3', str(TASK / 'prepare-xdm-inputs.py'), 'emit-ts', '--raw', str(calls),
             '--replay', str(replay), '--output', env['EVIDENCE_INPUTS_PATH'], env=env)
     else:
         if (args.clean, args.test) != ('clean', 'test'):
             parser.error('Java 必须执行 clean test')
-        env['MIGRATION_PARITY_JAVA_OUTPUT'] = str(parity)
+        env = dict(os.environ, MIGRATION_PARITY_JAVA_OUTPUT=str(parity))
         run(str(TASK / 'mvn.sh'), '-f', str(TASK / 'metanet4j-bsv-sdk/pom.xml'),
             'clean', 'test', '-Dtest=XDMSubstrateTest', '-Dmigration.xdm.corpus=' + str(replay),
             '-Dmigration.parity.java.output=' + str(parity), env=env)
         source = TASK / ('metanet4j-bsv-sdk/target/surefire-reports/TEST-' + JAVA + '.xml')
         shutil.copyfile(source, report)
-    command = ['python3', str(TASK / 'emit-assertion-observations.py'),
-               '--catalog', str(plan / 'catalog.json'), '--mapping', str(plan / 'mapping.json'),
-               '--plan', str(plan / 'input-plan.json'), '--side', args.side,
-               '--raw', str(parity), '--run-id', env['EVIDENCE_RUN_ID'],
-               '--output', env['EVIDENCE_ASSERTIONS_PATH']]
-    run(*command, env=env)
+    run('python3', str(TASK / 'emit-assertion-observations.py'),
+        '--catalog', str(plan / 'catalog.json'), '--mapping', str(plan / 'mapping.json'),
+        '--plan', str(plan / 'input-plan.json'), '--side', args.side,
+        '--raw', str(parity), '--run-id', env['EVIDENCE_RUN_ID'],
+        '--output', env['EVIDENCE_ASSERTIONS_PATH'],
+        '--allow-ts-extra' if args.side == 'ts' else '--allow-java-extra', env=env)
 
 
 if __name__ == '__main__':

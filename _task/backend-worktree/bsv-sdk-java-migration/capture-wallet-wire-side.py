@@ -15,6 +15,17 @@ replay = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(replay)
 
 
+def emit_assertions(plan, side, raw):
+    """标准断言发射器：按本侧原始断言轨迹写冻结身份的实际观察。"""
+    subprocess.run(['python3', str(TASK / 'emit-assertion-observations.py'),
+                    '--catalog', str(plan / 'catalog.json'), '--mapping', str(plan / 'mapping.json'),
+                    '--plan', str(plan / 'input-plan.json'), '--side', side, '--raw', str(raw),
+                    '--run-id', os.environ['EVIDENCE_RUN_ID'],
+                    '--output', os.environ['EVIDENCE_ASSERTIONS_PATH'],
+                    '--allow-ts-extra' if side == 'ts' else '--allow-java-extra'],
+                   cwd=TASK, check=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('side', choices=('ts', 'java'))
@@ -26,15 +37,18 @@ def main():
     args.report = args.report.resolve()
     if args.side != os.environ.get('EVIDENCE_SIDE'):
         parser.error('capture 侧别与运行环境不同')
+    plan = args.replay.resolve().parent
     evidence = args.report.parent
-    parity = evidence / 'assertions.raw.jsonl'
-    assertion_index = args.replay.resolve().parent / 'assertion-index.json'
+    # 两侧共用同一运行目录：原始轨迹与网络日志按侧别分开命名。
+    parity = evidence / f'{args.side}-assertions.raw.jsonl'
+    assertion_index = plan / 'assertion-index.json'
     if args.side == 'java':
         if (args.clean, args.test) != ('clean', 'test'):
             parser.error('Java 必须执行 clean test')
-        large = evidence / 'large-actuals.jsonl'
+        large = evidence / 'java-large-actuals.jsonl'
         env = dict(os.environ, MIGRATION_WALLET_WIRE_ASSERTION_INDEX=str(assertion_index),
-                   MIGRATION_WALLET_WIRE_JAVA_LARGE_ACTUALS=str(large))
+                   MIGRATION_WALLET_WIRE_JAVA_LARGE_ACTUALS=str(large),
+                   MIGRATION_PARITY_JAVA_OUTPUT=str(parity))
         command = [str(TASK / 'mvn.sh'), '-f', str(TASK / 'metanet4j-bsv-sdk/pom.xml'),
                    'clean', 'test', '-Dtest=WalletWireIntegrationTest',
                    '-Dmigration.walletWire.plan=' + str(args.replay.resolve()),
@@ -46,16 +60,15 @@ def main():
         shutil.copyfile(source, args.report)
         if len(replay.rows(large)) != 4:
             raise RuntimeError('Java 四条大型 BEEF 原断言缺完整实际字节')
-        replay.emit_java(SimpleNamespace(side='java', run_id=os.environ['EVIDENCE_RUN_ID'], parity=parity,
-            assertions=os.environ['EVIDENCE_ASSERTIONS_PATH']))
+        emit_assertions(plan, 'java', parity)
         return
     if args.clean or args.test:
         parser.error('TypeScript 不接受 Maven 阶段')
-    frames = evidence / 'frames.raw.jsonl'
-    entropy = evidence / 'entropy.raw.jsonl'
-    clock = evidence / 'clock.raw.jsonl'
-    large = evidence / 'large-actuals.jsonl'
-    network = evidence / 'network.jsonl'
+    frames = evidence / 'ts-frames.raw.jsonl'
+    entropy = evidence / 'ts-entropy.raw.jsonl'
+    clock = evidence / 'ts-clock.raw.jsonl'
+    large = evidence / 'ts-large-actuals.jsonl'
+    network = evidence / 'ts-network.jsonl'
     env = dict(os.environ, MIGRATION_WALLET_WIRE_TS_FRAMES=str(frames),
                MIGRATION_WALLET_WIRE_TS_ENTROPY=str(entropy),
                MIGRATION_WALLET_WIRE_TS_CLOCK=str(clock),
@@ -72,9 +85,9 @@ def main():
     if len(replay.rows(large)) != 4:
         raise RuntimeError('TS 四条大型 BEEF 原断言缺完整实际字节')
     replay.emit_ts(SimpleNamespace(frames=frames, entropy=entropy, clock=clock,
-        parity=parity, plan=args.replay,
-        side='ts', run_id=os.environ['EVIDENCE_RUN_ID'], inputs=os.environ['EVIDENCE_INPUTS_PATH'],
-        assertions=os.environ['EVIDENCE_ASSERTIONS_PATH']))
+        parity=parity, plan=args.replay.resolve(),
+        run_id=os.environ['EVIDENCE_RUN_ID'], inputs=os.environ['EVIDENCE_INPUTS_PATH']))
+    emit_assertions(plan, 'ts', parity)
 
 
 if __name__ == '__main__':

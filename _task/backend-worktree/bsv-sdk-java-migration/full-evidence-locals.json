@@ -369,17 +369,18 @@
       "catalog": ".cache/evidence/wallet-wire-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/wallet-wire-plan-20260927/mapping.json",
       "input_plan": ".cache/evidence/wallet-wire-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/wallet-wire-ts-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/wallet-wire-ts-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/wallet-wire-ts-20260927/manifest.json",
+      "capture": "capture-wallet-wire-side.py",
+      "ts_inputs": ".cache/evidence/wallet-wire-standard-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/wallet-wire-standard-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/wallet-wire-standard-20260929/ts-run.json",
       "ts_report": [
-        ".cache/evidence/wallet-wire-ts-20260927/jest.json"
+        ".cache/evidence/wallet-wire-standard-20260929/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/wallet-wire-java-20260927-v2/inputs.jsonl",
-      "java_assertions": ".cache/evidence/wallet-wire-java-20260927-v2/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/wallet-wire-java-20260927-v2/manifest.json",
+      "java_inputs": ".cache/evidence/wallet-wire-standard-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/wallet-wire-standard-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/wallet-wire-standard-20260929/java-run.json",
       "java_report": [
-        ".cache/evidence/wallet-wire-java-20260927-v2/surefire.xml"
+        ".cache/evidence/wallet-wire-standard-20260929/java-surefire.xml"
       ]
     },
     {
@@ -604,17 +605,17 @@
       "catalog": ".cache/evidence/fee-model-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/fee-model-plan-20260927/mapping.json",
       "input_plan": ".cache/evidence/fee-model-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/fee-model-final-20260929/ts-inputs.jsonl",
-      "ts_assertions": ".cache/evidence/fee-model-final-20260929/ts-assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/fee-model-final-20260929/ts-run.json",
+      "ts_inputs": ".cache/evidence/fee-model-satoshis-per-kilobyte-final-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/fee-model-satoshis-per-kilobyte-final-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/fee-model-satoshis-per-kilobyte-final-20260929/ts-run.json",
       "ts_report": [
-        ".cache/evidence/fee-model-final-20260929/ts-jest.json"
+        ".cache/evidence/fee-model-satoshis-per-kilobyte-final-20260929/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/fee-model-final-20260929/java-inputs.jsonl",
-      "java_assertions": ".cache/evidence/fee-model-final-20260929/java-assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/fee-model-final-20260929/java-run.json",
+      "java_inputs": ".cache/evidence/fee-model-satoshis-per-kilobyte-final-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/fee-model-satoshis-per-kilobyte-final-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/fee-model-satoshis-per-kilobyte-final-20260929/java-run.json",
       "java_report": [
-        ".cache/evidence/fee-model-final-20260929/java-surefire.xml"
+        ".cache/evidence/fee-model-satoshis-per-kilobyte-final-20260929/java-surefire.xml"
       ],
       "capture": "capture-fee-model-side.py"
     },
@@ -731,17 +732,18 @@
       "catalog": ".cache/evidence/broadcaster-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/broadcaster-plan-20260927/mapping.json",
       "input_plan": ".cache/evidence/broadcaster-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/broadcaster-formal-ts-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/broadcaster-formal-ts-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/broadcaster-formal-ts-20260927/manifest.json",
+      "capture": "capture-broadcaster-side.py",
+      "ts_inputs": ".cache/evidence/broadcaster-standard-20260929-c/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/broadcaster-standard-20260929-c/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/broadcaster-standard-20260929-c/ts-run.json",
       "ts_report": [
-        ".cache/evidence/broadcaster-formal-ts-20260927/jest.json"
+        ".cache/evidence/broadcaster-standard-20260929-c/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/broadcaster-formal-java-7247aea-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/broadcaster-formal-java-7247aea-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/broadcaster-formal-java-7247aea-20260927/manifest.json",
+      "java_inputs": ".cache/evidence/broadcaster-standard-20260929-c/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/broadcaster-standard-20260929-c/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/broadcaster-standard-20260929-c/java-run.json",
       "java_report": [
-        ".cache/evidence/broadcaster-formal-java-7247aea-20260927/surefire.xml"
+        ".cache/evidence/broadcaster-standard-20260929-c/java-surefire.xml"
       ]
     },
     {
@@ -857,17 +859,18 @@
       "catalog": ".cache/evidence/woc-broadcaster-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/woc-broadcaster-plan-20260927/mapping.json",
       "input_plan": ".cache/evidence/woc-broadcaster-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/woc-broadcaster-formal-ts-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/woc-broadcaster-formal-ts-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/woc-broadcaster-formal-ts-20260927/manifest.json",
+      "capture": "capture-woc-broadcaster-side.py",
+      "ts_inputs": ".cache/evidence/woc-broadcaster-standard-20260929-b/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/woc-broadcaster-standard-20260929-b/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/woc-broadcaster-standard-20260929-b/ts-run.json",
       "ts_report": [
-        ".cache/evidence/woc-broadcaster-formal-ts-20260927/jest.json"
+        ".cache/evidence/woc-broadcaster-standard-20260929-b/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/woc-broadcaster-formal-java-ca3d82f-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/woc-broadcaster-formal-java-ca3d82f-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/woc-broadcaster-formal-java-ca3d82f-20260927/manifest.json",
+      "java_inputs": ".cache/evidence/woc-broadcaster-standard-20260929-b/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/woc-broadcaster-standard-20260929-b/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/woc-broadcaster-standard-20260929-b/java-run.json",
       "java_report": [
-        ".cache/evidence/woc-broadcaster-formal-java-ca3d82f-20260927/surefire.xml"
+        ".cache/evidence/woc-broadcaster-standard-20260929-b/java-surefire.xml"
       ]
     },
     {
@@ -929,17 +932,18 @@
       "catalog": ".cache/evidence/arc-broadcaster-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/arc-broadcaster-plan-20260927/mapping.json",
       "input_plan": ".cache/evidence/arc-broadcaster-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/arc-broadcaster-formal-ts-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/arc-broadcaster-formal-ts-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/arc-broadcaster-formal-ts-20260927/manifest.json",
+      "capture": "capture-arc-broadcaster-side.py",
+      "ts_inputs": ".cache/evidence/arc-broadcaster-standard-20260929-b/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/arc-broadcaster-standard-20260929-b/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/arc-broadcaster-standard-20260929-b/ts-run.json",
       "ts_report": [
-        ".cache/evidence/arc-broadcaster-formal-ts-20260927/jest.json"
+        ".cache/evidence/arc-broadcaster-standard-20260929-b/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/arc-broadcaster-formal-java-e8d4f43-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/arc-broadcaster-formal-java-e8d4f43-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/arc-broadcaster-formal-java-e8d4f43-20260927/manifest.json",
+      "java_inputs": ".cache/evidence/arc-broadcaster-standard-20260929-b/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/arc-broadcaster-standard-20260929-b/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/arc-broadcaster-standard-20260929-b/java-run.json",
       "java_report": [
-        ".cache/evidence/arc-broadcaster-formal-java-e8d4f43-20260927/surefire.xml"
+        ".cache/evidence/arc-broadcaster-standard-20260929-b/java-surefire.xml"
       ]
     },
     {
@@ -965,17 +969,18 @@
       "catalog": ".cache/evidence/teranode-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/teranode-plan-20260927/mapping.json",
       "input_plan": ".cache/evidence/teranode-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/teranode-formal-ts-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/teranode-formal-ts-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/teranode-formal-ts-20260927/manifest.json",
+      "capture": "capture-teranode-side.py",
+      "ts_inputs": ".cache/evidence/teranode-broadcaster-standard-20260929-b/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/teranode-broadcaster-standard-20260929-b/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/teranode-broadcaster-standard-20260929-b/ts-run.json",
       "ts_report": [
-        ".cache/evidence/teranode-formal-ts-20260927/jest.json"
+        ".cache/evidence/teranode-broadcaster-standard-20260929-b/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/teranode-formal-java-6139cd0-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/teranode-formal-java-6139cd0-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/teranode-formal-java-6139cd0-20260927/manifest.json",
+      "java_inputs": ".cache/evidence/teranode-broadcaster-standard-20260929-b/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/teranode-broadcaster-standard-20260929-b/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/teranode-broadcaster-standard-20260929-b/java-run.json",
       "java_report": [
-        ".cache/evidence/teranode-formal-java-6139cd0-20260927/surefire.xml"
+        ".cache/evidence/teranode-broadcaster-standard-20260929-b/java-surefire.xml"
       ]
     },
     {
@@ -983,17 +988,18 @@
       "catalog": ".cache/evidence/xdm-plan-v2-20260927/catalog.json",
       "mapping": ".cache/evidence/xdm-plan-v2-20260927/mapping.json",
       "input_plan": ".cache/evidence/xdm-plan-v2-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/xdm-ts-v2-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/xdm-ts-v2-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/xdm-ts-v2-20260927/manifest.json",
+      "capture": "capture-xdm-side.py",
+      "ts_inputs": ".cache/evidence/xdm-standard-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/xdm-standard-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/xdm-standard-20260929/ts-run.json",
       "ts_report": [
-        ".cache/evidence/xdm-ts-v2-20260927/jest.json"
+        ".cache/evidence/xdm-standard-20260929/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/xdm-java-formal-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/xdm-java-formal-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/xdm-java-formal-20260927/manifest.json",
+      "java_inputs": ".cache/evidence/xdm-standard-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/xdm-standard-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/xdm-standard-20260929/java-run.json",
       "java_report": [
-        ".cache/evidence/xdm-java-formal-20260927/surefire.xml"
+        ".cache/evidence/xdm-standard-20260929/java-surefire.xml"
       ]
     },
     {
@@ -1019,17 +1025,18 @@
       "catalog": ".cache/evidence/arc-additional-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/arc-additional-plan-20260927/mapping.json",
       "input_plan": ".cache/evidence/arc-additional-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/arc-additional-ts-formal-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/arc-additional-ts-formal-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/arc-additional-ts-formal-20260927/manifest.json",
+      "capture": "capture-arc-additional-side.py",
+      "ts_inputs": ".cache/evidence/arc-additional30-standard-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/arc-additional30-standard-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/arc-additional30-standard-20260929/ts-run.json",
       "ts_report": [
-        ".cache/evidence/arc-additional-ts-formal-20260927/jest.json"
+        ".cache/evidence/arc-additional30-standard-20260929/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/arc-additional-java-formal-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/arc-additional-java-formal-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/arc-additional-java-formal-20260927/manifest.json",
+      "java_inputs": ".cache/evidence/arc-additional30-standard-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/arc-additional30-standard-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/arc-additional30-standard-20260929/java-run.json",
       "java_report": [
-        ".cache/evidence/arc-additional-java-formal-20260927/surefire.xml"
+        ".cache/evidence/arc-additional30-standard-20260929/java-surefire.xml"
       ]
     },
     {
@@ -1037,17 +1044,18 @@
       "catalog": ".cache/evidence/react-native-plan-20260927/catalog.json",
       "mapping": ".cache/evidence/react-native-plan-20260927/mapping.json",
       "input_plan": ".cache/evidence/react-native-plan-20260927/input-plan.json",
-      "ts_inputs": ".cache/evidence/react-native-ts-formal-v2-20260927/inputs.jsonl",
-      "ts_assertions": ".cache/evidence/react-native-ts-formal-v2-20260927/assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/react-native-ts-formal-v2-20260927/manifest.json",
+      "capture": "capture-react-native-side.py",
+      "ts_inputs": ".cache/evidence/react-native-standard-20260929-r2/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/react-native-standard-20260929-r2/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/react-native-standard-20260929-r2/ts-run.json",
       "ts_report": [
-        ".cache/evidence/react-native-ts-formal-v2-20260927/jest.json"
+        ".cache/evidence/react-native-standard-20260929-r2/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/react-native-java-formal-20260927/inputs.jsonl",
-      "java_assertions": ".cache/evidence/react-native-java-formal-20260927/assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/react-native-java-formal-20260927/manifest.json",
+      "java_inputs": ".cache/evidence/react-native-standard-20260929-r2/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/react-native-standard-20260929-r2/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/react-native-standard-20260929-r2/java-run.json",
       "java_report": [
-        ".cache/evidence/react-native-java-formal-20260927/surefire.xml"
+        ".cache/evidence/react-native-standard-20260929-r2/java-surefire.xml"
       ]
     },
     {
@@ -1264,17 +1272,55 @@
       "mapping": ".cache/evidence/transaction-ef-cache-plan-20260929/mapping.json",
       "input_plan": ".cache/evidence/transaction-ef-cache-plan-20260929/input-plan.json",
       "capture": "capture-transaction-local.py",
-      "ts_inputs": ".cache/evidence/transaction-ef-cache-standard-20260929/ts-inputs.jsonl",
-      "ts_assertions": ".cache/evidence/transaction-ef-cache-standard-20260929/ts-assertions.jsonl",
-      "ts_run_manifest": ".cache/evidence/transaction-ef-cache-standard-20260929/ts-run.json",
+      "ts_inputs": ".cache/evidence/transaction-ef-cache-final-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/transaction-ef-cache-final-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/transaction-ef-cache-final-20260929/ts-run.json",
       "ts_report": [
-        ".cache/evidence/transaction-ef-cache-standard-20260929/ts-jest.json"
+        ".cache/evidence/transaction-ef-cache-final-20260929/ts-jest.json"
       ],
-      "java_inputs": ".cache/evidence/transaction-ef-cache-standard-20260929/java-inputs.jsonl",
-      "java_assertions": ".cache/evidence/transaction-ef-cache-standard-20260929/java-assertions.jsonl",
-      "java_run_manifest": ".cache/evidence/transaction-ef-cache-standard-20260929/java-run.json",
+      "java_inputs": ".cache/evidence/transaction-ef-cache-final-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/transaction-ef-cache-final-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/transaction-ef-cache-final-20260929/java-run.json",
       "java_report": [
-        ".cache/evidence/transaction-ef-cache-standard-20260929/java-surefire.xml"
+        ".cache/evidence/transaction-ef-cache-final-20260929/java-surefire.xml"
+      ]
+    },
+    {
+      "name": "transaction-additional",
+      "catalog": ".cache/evidence/transaction-additional-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/transaction-additional-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/transaction-additional-plan-20260929/input-plan.json",
+      "capture": "capture-transaction-local.py",
+      "ts_inputs": ".cache/evidence/transaction-additional-final-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/transaction-additional-final-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/transaction-additional-final-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/transaction-additional-final-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/transaction-additional-final-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/transaction-additional-final-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/transaction-additional-final-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/transaction-additional-final-20260929/java-surefire.xml"
+      ]
+    },
+    {
+      "name": "transaction-signature-additional",
+      "catalog": ".cache/evidence/transaction-signature-additional-plan-20260929/catalog.json",
+      "mapping": ".cache/evidence/transaction-signature-additional-plan-20260929/mapping.json",
+      "input_plan": ".cache/evidence/transaction-signature-additional-plan-20260929/input-plan.json",
+      "capture": "capture-transaction-local.py",
+      "ts_inputs": ".cache/evidence/transaction-signature-additional-final-20260929/ts-inputs.jsonl",
+      "ts_assertions": ".cache/evidence/transaction-signature-additional-final-20260929/ts-assertions.jsonl",
+      "ts_run_manifest": ".cache/evidence/transaction-signature-additional-final-20260929/ts-run.json",
+      "ts_report": [
+        ".cache/evidence/transaction-signature-additional-final-20260929/ts-jest.json"
+      ],
+      "java_inputs": ".cache/evidence/transaction-signature-additional-final-20260929/java-inputs.jsonl",
+      "java_assertions": ".cache/evidence/transaction-signature-additional-final-20260929/java-assertions.jsonl",
+      "java_run_manifest": ".cache/evidence/transaction-signature-additional-final-20260929/java-run.json",
+      "java_report": [
+        ".cache/evidence/transaction-signature-additional-final-20260929/java-surefire.xml"
       ]
     }
   ]
