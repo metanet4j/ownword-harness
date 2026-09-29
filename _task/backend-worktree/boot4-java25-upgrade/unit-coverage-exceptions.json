@@ -9,71 +9,126 @@
           "class": "com/metanet4j/sdk/BobHelper",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 26, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 26,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/sdk/TxoHelper",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 25, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 25,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/sdk/bap/TaggedDerivation",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 12, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 12,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/sdk/ordinals/OrdScriptBuilder",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 19, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 19,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/sdk/ordinals/OrdScriptBuilder$LocalSigner",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 67, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 67,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/sdk/ordinals/OrdScriptBuilder$RemoteSigner",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 71, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 71,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/sdk/script/SigHashExtend",
           "reason": "隐式默认构造器；hashForForkIdSignature 的 IOException 包装在 UnsafeByteArrayOutputStream 固定内存流下不可达",
           "missed": [
-            {"method": "<init>", "line": 15, "lineMissed": 1, "methodMissed": 1},
-            {"method": "hashForForkIdSignature", "line": 23, "lineMissed": 2, "methodMissed": 0}
+            {
+              "method": "<init>",
+              "line": 15,
+              "lineMissed": 1,
+              "methodMissed": 1
+            },
+            {
+              "method": "hashForForkIdSignature",
+              "line": 23,
+              "lineMissed": 2,
+              "methodMissed": 0
+            }
           ]
         },
         {
           "class": "com/metanet4j/sdk/utils/TxHelperExtend",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 21, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 21,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/sdk/utxo/impl/bitails/BitailsClient",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 14, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 14,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/sdk/utxo/impl/gorillapool/GorillaClient",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 11, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 11,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         }
       ]
@@ -84,7 +139,12 @@
           "class": "com/metanet4j/model/api/CustomResultCode",
           "reason": "枚举的 2 参构造器无任何常量使用；枚举构造器被 JDK 禁止反射创建（Cannot reflectively create enum objects），无合法触发路径。探针 evidence/20260928-u3-model/enum-ctor-probe.log",
           "missed": [
-            {"method": "<init>", "line": 15, "lineMissed": 5, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 15,
+              "lineMissed": 5,
+              "methodMissed": 1
+            }
           ]
         }
       ]
@@ -95,63 +155,108 @@
           "class": "com/metanet4j/component/common/transaction/MyBapBase",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 6, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 6,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/component/common/state/StateHelper",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 8, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 8,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/component/common/utils/JacksonBeanUtils",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 5, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 5,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/component/common/utils/SqlHelper",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 5, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 5,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/component/common/utils/ClientXprvThreadLocal",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 5, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 5,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/component/common/constants/SingleBapOutKeyConstant",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 6, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 6,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/component/common/constants/AppendDataBapOutKeyConstant",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 6, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 6,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/component/common/constants/SetCmdConstant",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 3, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 3,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/component/common/config/PlanariaConfiguration",
           "reason": "隐式默认构造器，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 9, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 9,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         }
       ]
@@ -162,42 +267,78 @@
           "class": "com/metanet4j/tx/convertor/BUtils",
           "reason": "隐式默认构造器，仅提供静态工具方法",
           "missed": [
-            {"method": "<init>", "line": 12, "lineMissed": 1, "methodMissed": 1, "branchMissed": 0}
+            {
+              "method": "<init>",
+              "line": 12,
+              "lineMissed": 1,
+              "methodMissed": 1,
+              "branchMissed": 0
+            }
           ]
         },
         {
           "class": "com/metanet4j/tx/convertor/bsocial/BConverter",
           "reason": "bytes 局部变量恒为 null（CellItem.bytes 从未被赋值），整个字节分支不可达",
           "missed": [
-            {"method": "convert", "line": 26, "lineMissed": 9, "methodMissed": 0, "branchMissed": 11}
+            {
+              "method": "convert",
+              "line": 26,
+              "lineMissed": 9,
+              "methodMissed": 0,
+              "branchMissed": 11
+            }
           ]
         },
         {
           "class": "com/metanet4j/tx/convertor/bsocial/DefaultProtocolConverterFactory$ListToProtocolBean",
           "reason": "ClassNotFoundException 为防御性捕获：targetType 是真实 Class，forName 恒成功",
           "missed": [
-            {"method": "convert", "line": 31, "lineMissed": 2, "methodMissed": 0, "branchMissed": 0}
+            {
+              "method": "convert",
+              "line": 31,
+              "lineMissed": 2,
+              "methodMissed": 0,
+              "branchMissed": 0
+            }
           ]
         },
         {
           "class": "com/metanet4j/tx/convertor/impl/PlanariaBapConvertor",
           "reason": "BapTypeEnum.fromDesc 恒返回非 null（未匹配时为 UNKNOWN），非有效类型的判断不可达",
           "missed": [
-            {"method": "verifyAndConvertToBap", "line": 135, "lineMissed": 1, "methodMissed": 0, "branchMissed": 1}
+            {
+              "method": "verifyAndConvertToBap",
+              "line": 135,
+              "lineMissed": 1,
+              "methodMissed": 0,
+              "branchMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/tx/convertor/impl/PlanariaBsocialConvertor",
           "reason": "CellItem.bytes 从未被赋值，签名消息的原始字节分支不可达",
           "missed": [
-            {"method": "lambda$convert$8", "line": 144, "lineMissed": 2, "methodMissed": 0, "branchMissed": 3}
+            {
+              "method": "lambda$convert$8",
+              "line": 144,
+              "lineMissed": 2,
+              "methodMissed": 0,
+              "branchMissed": 3
+            }
           ]
         },
         {
           "class": "com/metanet4j/tx/convertor/impl/UtxoConvertor",
           "reason": "script != null 恒为 true（new Script(...) 不会返回 null）",
           "missed": [
-            {"method": "convert", "line": 26, "lineMissed": 0, "methodMissed": 0, "branchMissed": 1}
+            {
+              "method": "convert",
+              "line": 26,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
+            }
           ]
         }
       ]
@@ -208,7 +349,13 @@
           "class": "com/metanet4j/tx/filter/MetaIdProtocolTxFilter",
           "reason": "lambda 内以十六进制串比较字面量 \"meta\"，条件恒为 false（空 if 体）→ 真分支不可达",
           "missed": [
-            {"method": "lambda$filter$0", "line": 20, "lineMissed": 0, "methodMissed": 0, "branchMissed": 1}
+            {
+              "method": "lambda$filter$0",
+              "line": 20,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
+            }
           ]
         }
       ]
@@ -219,7 +366,13 @@
           "class": "com/metanet4j/store/mongo/bap/repository/baprelation/CustomizedBapRelationRepositoryImpl",
           "reason": "StateHelper 对 FRIEND 状态无计数逻辑，calculateState 恒返回 UNKNOWN，friendState 分支不可达",
           "missed": [
-            {"method": "addOrUpdateRel", "line": 93, "lineMissed": 4, "methodMissed": 0, "branchMissed": 2}
+            {
+              "method": "addOrUpdateRel",
+              "line": 93,
+              "lineMissed": 4,
+              "methodMissed": 0,
+              "branchMissed": 2
+            }
           ]
         }
       ]
@@ -230,7 +383,12 @@
           "class": "com/metanet4j/store/search/repository/IndexConstant",
           "reason": "隐式默认构造器，仅提供索引名常量，无业务行为（与 component-common 常量类同一口径）",
           "missed": [
-            {"method": "<init>", "line": 3, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 3,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         }
       ]
@@ -241,7 +399,13 @@
           "class": "com/metanet4j/component/tx/BschemaCustomTransactionSigner",
           "reason": "getSignature 是未实现的远程签名器桩：extendSignatureAndKey 硬编码为 null，取 sha256Hash 即 NPE，if 真分支与 return（第 34、35、37 行）不可达；条件求值抛异常导致两条分支探针也不可达。行为已由 BschemaCustomTransactionSignerContractTest 记录",
           "missed": [
-            {"method": "getSignature", "line": 21, "lineMissed": 4, "methodMissed": 0, "branchMissed": 2}
+            {
+              "method": "getSignature",
+              "line": 21,
+              "lineMissed": 4,
+              "methodMissed": 0,
+              "branchMissed": 2
+            }
           ]
         }
       ]
@@ -252,7 +416,13 @@
           "class": "com/metanet4j/component/bap/handler/MongoStoreBapDtoHandler",
           "reason": "handleDataBapTransaction 先判 BapHelper.isRootBap(dto)，而 isRootBap 要求 type==ID；handle 只在 type==DATA(4) 时进入该方法，两者互斥 → 早退分支恒成立，其后构造并保存 BapAttest 的 12 行不可达（当前行为由 MongoStoreBapDtoHandlerContractTest 记录）",
           "missed": [
-            {"method": "handleDataBapTransaction", "line": 114, "lineMissed": 12, "methodMissed": 0, "branchMissed": 1}
+            {
+              "method": "handleDataBapTransaction",
+              "line": 114,
+              "lineMissed": 12,
+              "methodMissed": 0,
+              "branchMissed": 1
+            }
           ]
         }
       ]
@@ -263,7 +433,12 @@
           "class": "com/metanet4j/component/bsocial/converter/ConverterHelper",
           "reason": "隐式默认构造器，仅提供静态拷贝方法，无业务行为",
           "missed": [
-            {"method": "<init>", "line": 7, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 7,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         }
       ]
@@ -274,39 +449,84 @@
           "class": "com/metanet4j/component/file/core/utils/FileUtils",
           "reason": "隐式默认构造器（仅静态工具方法）；createTempFile 三个重载的受检异常包装行是 @SneakyThrows 生成的合成 catch 块，单元环境无法触达（File/FileUtil 写临时文件不会失败）",
           "missed": [
-            {"method": "<init>", "line": 19, "lineMissed": 1, "methodMissed": 1},
-            {"method": "createTempFile", "line": 28, "lineMissed": 1, "methodMissed": 0},
-            {"method": "createTempFile", "line": 43, "lineMissed": 1, "methodMissed": 0},
-            {"method": "createTempFile", "line": 57, "lineMissed": 1, "methodMissed": 0}
+            {
+              "method": "<init>",
+              "line": 19,
+              "lineMissed": 1,
+              "methodMissed": 1
+            },
+            {
+              "method": "createTempFile",
+              "line": 28,
+              "lineMissed": 1,
+              "methodMissed": 0
+            },
+            {
+              "method": "createTempFile",
+              "line": 43,
+              "lineMissed": 1,
+              "methodMissed": 0
+            },
+            {
+              "method": "createTempFile",
+              "line": 57,
+              "lineMissed": 1,
+              "methodMissed": 0
+            }
           ]
         },
         {
           "class": "com/metanet4j/component/file/core/utils/FileTypeUtils",
           "reason": "隐式默认构造器（仅静态工具方法）；getMineType(byte[]) 的合成 catch 行是 @SneakyThrows 包装，Tika 检测不会抛受检异常",
           "missed": [
-            {"method": "<init>", "line": 12, "lineMissed": 1, "methodMissed": 1},
-            {"method": "getMineType", "line": 22, "lineMissed": 1, "methodMissed": 0}
+            {
+              "method": "<init>",
+              "line": 12,
+              "lineMissed": 1,
+              "methodMissed": 1
+            },
+            {
+              "method": "getMineType",
+              "line": 22,
+              "lineMissed": 1,
+              "methodMissed": 0
+            }
           ]
         },
         {
           "class": "com/metanet4j/component/file/validation/ValidationUtils",
           "reason": "隐式默认构造器，仅提供静态校验方法",
           "missed": [
-            {"method": "<init>", "line": 18, "lineMissed": 1, "methodMissed": 1}
+            {
+              "method": "<init>",
+              "line": 18,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         },
         {
           "class": "com/metanet4j/component/file/core/client/ftp/FtpFileClient",
           "reason": "doInit 里 new Ftp(...) 会立刻建立真实 FTP 连接；共享基础设施未提供 FTP 服务，单元测试只覆盖路径规范化与连接失败传播，构造成功行按精确清单登记（实连留待可用的本地可控服务）",
           "missed": [
-            {"method": "doInit", "line": 30, "lineMissed": 2, "methodMissed": 0}
+            {
+              "method": "doInit",
+              "line": 30,
+              "lineMissed": 2,
+              "methodMissed": 0
+            }
           ]
         },
         {
           "class": "com/metanet4j/component/file/core/client/sftp/SftpFileClient",
           "reason": "doInit 里 new Sftp(...) 会立刻建立真实 SSH 连接；共享基础设施未提供 SFTP 服务，单元测试只覆盖路径规范化与连接失败传播，构造成功行按精确清单登记（实连留待可用的本地可控服务）",
           "missed": [
-            {"method": "doInit", "line": 26, "lineMissed": 2, "methodMissed": 0}
+            {
+              "method": "doInit",
+              "line": 26,
+              "lineMissed": 2,
+              "methodMissed": 0
+            }
           ]
         }
       ]
@@ -315,17 +535,61 @@
       "entries": [
         {
           "class": "com/metanet4j/component/cache/RedissonAutoConfiguration",
-          "reason": "redisson() 中 timeoutValue instanceof Integer 判定与 (Integer) 强转分支：Spring Boot 4 的 DataRedisProperties.getTimeout() 返回 Duration，Integer 分支不可达；clusterMethod != null 的假分支需要旧版 DataRedisProperties（无 getCluster()）才会出现。集群与单机两条真实路径均已覆盖",
+          "reason": "redisson() 中新增的 else 分支（无 redisson.config 时按 spring.data.redis.* 装配单机配置）只由集成测试覆盖，单元测试只走 YAML 路径与集群路径；另有 timeoutValue instanceof Integer 判定与 (Integer) 强转分支：Spring Boot 4 的 DataRedisProperties.getTimeout() 返回 Duration，Integer 分支不可达；clusterMethod != null 的假分支需要旧版 DataRedisProperties（无 getCluster()）才会出现",
           "missed": [
-            {"method": "redisson", "line": 95, "lineMissed": 1, "methodMissed": 0, "branchMissed": 2}
+            {
+              "method": "redisson",
+              "line": 96,
+              "lineMissed": 4,
+              "methodMissed": 0,
+              "branchMissed": 5
+            }
           ]
         },
         {
           "class": "com/metanet4j/component/cache/RedisUtils",
           "reason": "scan/findKeysForPage 释放连接的内层 catch：Spring 的 RedisConnectionUtils.releaseConnection 在受控替身下不会抛异常（实测连接 close 已调用且异常被其内部处理），该防御性兜底在单元环境不可达",
           "missed": [
-            {"method": "scan", "line": 124, "lineMissed": 2, "methodMissed": 0},
-            {"method": "findKeysForPage", "line": 149, "lineMissed": 2, "methodMissed": 0}
+            {
+              "method": "scan",
+              "line": 124,
+              "lineMissed": 2,
+              "methodMissed": 0
+            },
+            {
+              "method": "findKeysForPage",
+              "line": 149,
+              "lineMissed": 2,
+              "methodMissed": 0
+            }
+          ]
+        }
+      ]
+    },
+    "metanet4j-api-common": {
+      "entries": [
+        {
+          "class": "com/metanet4j/api/common/base/BaseApiResult",
+          "reason": "枚举的 2 参构造器无任何常量使用（两个常量均走 3 参构造器）；枚举构造器不能从类外调用，反射创建被 JDK 拒绝（Cannot reflectively create enum objects），无合法触发路径（与 component-model CustomResultCode 同一口径）",
+          "missed": [
+            {
+              "method": "<init>",
+              "line": 16,
+              "lineMissed": 5,
+              "methodMissed": 1
+            }
+          ]
+        },
+        {
+          "class": "com/metanet4j/api/common/utils/ValidateUtils",
+          "reason": "隐式默认构造器，仅提供静态校验方法，无业务行为（与 component-common 工具类同一口径）",
+          "missed": [
+            {
+              "method": "<init>",
+              "line": 13,
+              "lineMissed": 1,
+              "methodMissed": 1
+            }
           ]
         }
       ]

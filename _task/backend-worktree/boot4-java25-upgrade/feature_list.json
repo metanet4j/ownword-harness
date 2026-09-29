@@ -393,9 +393,16 @@
         "component-message 提交 d77695d：31/0/0/0，INSTRUCTION 1461/1461、BRANCH 14/14、LINE 408/408、METHOD 199/199，零缺口；证据 evidence/20260929T002046Z/。",
         "发现并修复缺陷（base 提交 53ed9ad）：BitcoinSchemaDto 缺少无参构造器，Jackson 反序列化 flink_bap_sink_topic 负载必然失败，BitcoinSchemaConsumer 的发布分支在生产不可达；补 @NoArgsConstructor 后回归用例转绿（修复前红）。",
         "component-message 记录的当前行为：Listener.ackMode 与 noPollThreshold 未设默认值（上游 Spring Boot 为 BATCH/0.0，消费端由 KafkaConsumerConfiguration 显式设 MANUAL）；DataSize 类映射（batch.size/fetch.min.bytes/cache.max.bytes.buffering）经 asInt 产出 Integer。",
-        "待实施：api-common 单元测试，以及文件协议（本地可控服务）、Redis、Kafka 集成。"
+        "metanet4j-api-common 提交 6a1b0af：59/0/0/0，覆盖 10 个生产类（异常翻译 12 类、全局与 LogModel 两个切面、BaseApiResult/R/ApiResult、ValidateUtils、JwtTokenProvider、注解默认值）；证据 evidence/20260929T081536Z/，严格验收 gaps=0。",
+        "api-common 缺口按精确清单登记两类：BaseApiResult 的无调用点枚举构造器、ValidateUtils 的隐式默认构造器，聚合 POM 的 jacoco.unit.check.excludes 同步排除。",
+        "Redis 实连集成 14/0/0/0（共享 Redis 7.4，6379，无密码）：RedisUtils 的值/TTL/自增/哈希/集合/有序集合/列表/扫描/批量读写、RedisService、RedissonSpringCacheManager 缓存往返、CacheManagerConfig 的 KeyGenerator；每轮唯一 key 前缀，用例结束逐 key 清理，共享库无残留。",
+        "Kafka 实连集成 6/0/0/0（共享 Kafka 4.2 KRaft，9092）：生产者与消费者配置的真实装配、四个 sendMsg 重载的成功回调、指定分区与 key 的发送；每轮唯一 topic 与 consumer group，结束后删除 topic，broker 无残留。",
+        "集成测试暴露并修复缺陷（component 提交 225da53）：RedissonAutoConfiguration.redisson() 在未提供 redisson.config 时直接 Redisson.create(null) 抛 NPE，只配 spring.data.redis.* 的标准用法无法启动；改为按 DataRedisProperties 装配 SingleServerConfig（database/username/password/clientName/连接超时），YAML 与集群两条既有路径行为不变；单元复跑 34/0/0/0（evidence/20260929T092410Z/）。",
+        "Redis 集成记录的行为：RedisUtils 的 key 走 JDK 序列化，keys/delByKeys 的通配符被当作普通字符编码因而匹配不到自身写入的键；scan/findKeysForPage 只匹配 UTF-8 编码的键；hincr/hdecr 无 try/catch 兜底，对序列化值直接抛 InvalidDataAccessApiUsageException；generate 的 TTL 在键首次创建时不生效、第二次起正常；mget 对缺失键在结果中放 null；RedisAtomicLong 自建 StringRedisTemplate，与 RedisUtils 不是同一键空间。",
+        "Kafka 集成记录的行为：topic 名非法时 KafkaTemplate 同步抛 KafkaException(\"Send failed\")，未返回 future，whenComplete 从未注册，failConsumer 与默认失败日志都不执行；bootstrap-servers 在配置中以 List 保存。",
+        "未完成：FTP/SFTP 的本地可控服务集成。共享基础设施无 FTP/SFTP 服务；尝试用 JDK 自带 socket 自研最小 FTP 服务端已能覆盖 doInit 的连接建立与路径规范化，但数据通道与 commons-net 的 storeFile 无法可靠互通（客户端发完数据不关闭写侧连接，协议无结束标记），手写实现即使跑通也不代表真实 FTP 行为，故不采用。FtpFileClient/SftpFileClient 的 doInit 成功构造行维持按精确清单登记（unit-coverage-exceptions.json），等待可用的真实 FTP/SFTP 服务后再补。"
       ],
-      "statusNote": "2026-09-28：component-file、component-cache、component-message 已完成并严格验收（message 零缺口，并修复 base 的 DTO 缺陷），继续 api-common。"
+      "statusNote": "2026-09-29：四个模块的单元测试全部严格验收通过（file 59、cache 34、message 31、api-common 59，均 gaps=0），并完成 Redis 与 Kafka 实连集成、修复 Redisson 配置装配缺陷；仅 FTP/SFTP 的本地可控服务集成未完成，原因见证据末条。"
     },
     {
       "id": "unit-u8-tools",

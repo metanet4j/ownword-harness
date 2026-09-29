@@ -4,9 +4,9 @@
 
 ## Current State
 
-- **Last Updated**：2026-09-28。
+- **Last Updated**：2026-09-29。
 - **Current Objective**：为四个子仓库建立完整单元测试、集成测试与逐模块验收证据。
-- **Active Item**：`unit-u7-adapters` 进行中：component-file（2195d08）、component-cache（a7359a8）、component-message（d77695d，零缺口）已完成，api-common 与外围集成待实施。
+- **Active Item**：`unit-u7-adapters` 收尾中：四个模块单元全部严格验收通过，Redis 与 Kafka 实连集成完成，FTP/SFTP 本地可控服务集成未完成（见下）。
 - U3 三模块严格验收均通过：component-model 20/0/0/0（LINE 73/78、BRANCH 2/2、METHOD 18/19，evidence/20260928T100401Z/）、component-common 41/0/0/0（LINE 239/248、BRANCH 42/42、METHOD 86/95，evidence/20260928T103233Z/）、component-core 纯接口 N/A（evidence/20260928T103553Z/）。提交：component 63560a3、4d3cf66。
 - component 仓库根启用 `lombok.config`（`addLombokGeneratedAnnotation`），Lombok 生成成员由 JaCoCo 内置 `AnnotationGeneratedFilter` 逐成员识别；聚合 POM 补 JUnit/Mockito 测试依赖与 `jacoco.unit.check.excludes` 属性。缺口一律按 `unit-coverage-exceptions.json` 精确清单登记并由 `verify-unit.py` 双向核对。
 - U3 测试暴露并最小修复：`ConvertTypeEnum` 构造器未写入 `id`、`JacksonBeanUtils.copyProperty` 忽略目标类型；`StateHelper` 删除不可达空 `default`；`LocalTestUtxoProvider` 目录可配置、`BitcoinSchemaTransaction` 可注入 UTXO provider（默认行为不变）。
@@ -19,6 +19,12 @@
 - U2 sdk 严格验收 203/0/0/0，证据 `evidence/20260928T093257Z/`（head 670ee3d）；U1 base 回归 19/0/0/0，证据 `evidence/20260928T092443Z/`。
 
 ## 阻塞与剩余工作
+
+- U7 单元：api-common 59/0/0/0（提交 6a1b0af，证据 `evidence/20260929T081536Z/`），覆盖 GlobalExceptionTranslator 的 12 类异常翻译、GlobalApiLogAspect/LogAspect 的切点与通知、BaseApiResult/R/ApiResult、ValidateUtils、JwtTokenProvider 与注解；缺口为登记的 BaseApiResult 无调用点枚举构造器与 ValidateUtils 隐式构造器。
+- U7 集成（提交 225da53）：Redis 实连 14/0/0/0（`evidence/20260929T104221Z/` 同轮回归单元）、Kafka 实连 6/0/0/0，均连共享中间件，用例自建唯一 key 前缀/topic 并在结束时清理，实测无残留。
+- 集成测试暴露并修复：`RedissonAutoConfiguration.redisson()` 未提供 `redisson.config` 时 `Redisson.create(null)` 抛 NPE，只配 `spring.data.redis.*` 的标准用法无法启动；改为按 `DataRedisProperties` 装配 `SingleServerConfig`，YAML 与集群路径不变，单元复跑 34/0/0/0（`evidence/20260929T092410Z/`）。
+- U7 未完成项：FTP/SFTP 的本地可控服务集成。共享基础设施没有 FTP/SFTP 服务，本机也无对应服务软件；曾用 JDK 自带 socket 自研最小 FTP 服务端，已能覆盖 `doInit` 的连接建立与路径规范化，但数据通道与 commons-net 的 `storeFile` 无法可靠互通（FTP 数据流没有结束标记，客户端发完不关闭写侧连接），且手写协议实现即使跑通也不能代表真实 FTP 行为，故不采用。`FtpFileClient`/`SftpFileClient` 的 `doInit` 成功构造行维持按精确清单登记，等有可用的真实服务再补。
+- 记录的行为：RedisUtils 的 key 走 JDK 序列化，`keys`/`delByKeys` 的通配符被当作普通字符编码因而匹配不到自身写入的键，`scan` 只匹配 UTF-8 键，`hincr`/`hdecr` 无兜底直接抛异常，`generate` 的 TTL 首次创建时不生效、第二次起正常，`mget` 对缺失键放 null，`RedisAtomicLong` 与 `RedisUtils` 不在同一键空间；Kafka 在 topic 名非法时同步抛 `KafkaException("Send failed")`，`failConsumer` 不执行。
 
 - component-bsocial 76/0/0/0（LINE 529/530、BRANCH 118/118、METHOD 153/154，`evidence/20260928T190248Z/`，提交 b9bfb97）：12 个测试类覆盖 manager/resolver/两个 handler/三个 service/两个 listener/五组转换器/两个 MapStruct 包（含嵌套 rels、childs 与上下文缓存分支）；缺口为登记的 `ConverterHelper` 隐式构造器。
 - component-bsocial 记录的当前行为：不受支持的 `linkIdentity`/`linkBsocial` 类型不建交易、随后解引用 NPE；`mapList` 为空时 handler 与 MySQL 转换器抛 `NoSuchElementException`（经 ConversionService 包装为 `ConversionFailedException`）；`BsocialDoMapper` 对 null 列表保持 null（不调用 MAPConvert）。
@@ -44,4 +50,4 @@
 
 ## Recommended Next Step
 
-继续 U7：补 api-common（异常翻译、BaseApiResult/R/ApiResult、GlobalApiLogAspect/LogAspect、ValidateUtils、JwtTokenProvider 共 10 类）单元测试并 `verify-unit.py --mode accept --scope metanet4j-api-common` 严格验收；随后补 Redis（6379）与 Kafka（9092）实连集成及文件协议的本地可控服务集成，最后进入 U8/U9。
+U7 只剩 FTP/SFTP 的本地可控服务集成：需要一个可用的真实 FTP/SFTP 服务（共享基础设施不提供，本机也无服务软件）。补上后即可把 U7 标记完成并进入 U8（mybatispuls-generator → component-test）。在此之前可并行推进 U8 的模块验收，不必等待。

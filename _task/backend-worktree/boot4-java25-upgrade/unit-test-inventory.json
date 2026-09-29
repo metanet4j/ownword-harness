@@ -2609,7 +2609,410 @@
               "kind": "class"
             }
           ],
-          "testSources": [],
+          "testSources": [
+            {
+              "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/GlobalExceptionTranslatorContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "missingRequestParameterReturnsFailure",
+                  "returnType": "void",
+                  "line": 37,
+                  "classification": "unit"
+                },
+                {
+                  "name": "methodArgumentTypeMismatchReturnsFailure",
+                  "returnType": "void",
+                  "line": 44,
+                  "classification": "unit"
+                },
+                {
+                  "name": "methodArgumentNotValidReturnsTheFieldMessage",
+                  "returnType": "void",
+                  "line": 52,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bindExceptionReturnsFailure",
+                  "returnType": "void",
+                  "line": 65,
+                  "classification": "unit"
+                },
+                {
+                  "name": "constraintViolationReturnsFailure",
+                  "returnType": "void",
+                  "line": 72,
+                  "classification": "unit"
+                },
+                {
+                  "name": "noHandlerFoundReturnsFailure",
+                  "returnType": "void",
+                  "line": 81,
+                  "classification": "unit"
+                },
+                {
+                  "name": "messageNotReadableReturnsFailure",
+                  "returnType": "void",
+                  "line": 88,
+                  "classification": "unit"
+                },
+                {
+                  "name": "requestMethodNotSupportedReturnsFailure",
+                  "returnType": "void",
+                  "line": 95,
+                  "classification": "unit"
+                },
+                {
+                  "name": "mediaTypeNotSupportedReturnsFailure",
+                  "returnType": "void",
+                  "line": 100,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sqlExceptionReturnsTheDatabaseHint",
+                  "returnType": "void",
+                  "line": 105,
+                  "classification": "unit"
+                },
+                {
+                  "name": "genericExceptionAndThrowableReturnFailure",
+                  "returnType": "void",
+                  "line": 113,
+                  "classification": "unit"
+                },
+                {
+                  "name": "dataAccessExceptionIsDeclaredOnTheSqlHandlerButNotAcceptedByItsSignature",
+                  "returnType": "void",
+                  "line": 119,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/annotations/AnnotationsContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "logModelDefaultsDescribeALocalMethodLog",
+                  "returnType": "void",
+                  "line": 20,
+                  "classification": "unit"
+                },
+                {
+                  "name": "logTypeCoversEveryDeclaredChannel",
+                  "returnType": "void",
+                  "line": 36,
+                  "classification": "unit"
+                },
+                {
+                  "name": "enableApiLogImportsTheLogAspectOnTypesOnly",
+                  "returnType": "void",
+                  "line": 47,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/aspect/GlobalApiLogAspectContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "pointcutTargetsThePublicControllerExecutionOnly",
+                  "returnType": "void",
+                  "line": 41,
+                  "classification": "unit"
+                },
+                {
+                  "name": "doBeforeLogsTheRequestWithoutThrowing",
+                  "returnType": "void",
+                  "line": 54,
+                  "classification": "unit"
+                },
+                {
+                  "name": "doBeforeToleratesNullArguments",
+                  "returnType": "void",
+                  "line": 59,
+                  "classification": "unit"
+                },
+                {
+                  "name": "doBeforeSwallowsLoggingFailures",
+                  "returnType": "void",
+                  "line": 70,
+                  "classification": "unit"
+                },
+                {
+                  "name": "doBeforeRequiresABoundRequest",
+                  "returnType": "void",
+                  "line": 79,
+                  "classification": "unit"
+                },
+                {
+                  "name": "doAroundReturnsTheProceededResult",
+                  "returnType": "void",
+                  "line": 86,
+                  "classification": "unit"
+                },
+                {
+                  "name": "doAroundPropagatesProceedFailures",
+                  "returnType": "void",
+                  "line": 95,
+                  "classification": "unit"
+                },
+                {
+                  "name": "doAroundSwallowsLoggingFailures",
+                  "returnType": "void",
+                  "line": 103,
+                  "classification": "unit"
+                },
+                {
+                  "name": "doAroundRequiresABoundRequest",
+                  "returnType": "void",
+                  "line": 114,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/aspect/LogAspectContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "pointcutMatchesTheLogModelAnnotation",
+                  "returnType": "void",
+                  "line": 29,
+                  "classification": "unit"
+                },
+                {
+                  "name": "advicesEvaluateTheIdExpressionFromTheArguments",
+                  "returnType": "void",
+                  "line": 43,
+                  "classification": "unit"
+                },
+                {
+                  "name": "advicesSkipEvaluationWhenTheMethodHasNoParameters",
+                  "returnType": "void",
+                  "line": 55,
+                  "classification": "unit"
+                },
+                {
+                  "name": "advicesSkipEvaluationWhenTheIdExpressionIsEmpty",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                },
+                {
+                  "name": "advicesSkipEvaluationWhenParameterNamesCannotBeDiscovered",
+                  "returnType": "void",
+                  "line": 72,
+                  "classification": "unit"
+                },
+                {
+                  "name": "advicesSwallowBrokenPropertyExpressions",
+                  "returnType": "void",
+                  "line": 86,
+                  "classification": "unit"
+                },
+                {
+                  "name": "advicesSwallowMalformedExpressions",
+                  "returnType": "void",
+                  "line": 94,
+                  "classification": "unit"
+                },
+                {
+                  "name": "advicesSwallowUnexpectedExpressionFailures",
+                  "returnType": "void",
+                  "line": 102,
+                  "classification": "unit"
+                },
+                {
+                  "name": "doAroundReturnsNullWhenTheTargetReturnsNull",
+                  "returnType": "void",
+                  "line": 116,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/base/BaseApiResultContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "successCarriesZeroCodeAndItsMessages",
+                  "returnType": "void",
+                  "line": 13,
+                  "classification": "unit"
+                },
+                {
+                  "name": "failCarriesMinusOneCodeAndItsMessages",
+                  "returnType": "void",
+                  "line": 20,
+                  "classification": "unit"
+                },
+                {
+                  "name": "enumImplementsTheApiResultContract",
+                  "returnType": "void",
+                  "line": 27,
+                  "classification": "unit"
+                },
+                {
+                  "name": "defaultSystemMsgFallsBackToTheShownMessage",
+                  "returnType": "void",
+                  "line": 38,
+                  "classification": "unit"
+                },
+                {
+                  "name": "enumLookupsResolveTheDeclaredConstants",
+                  "returnType": "void",
+                  "line": 56,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/base/RContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "defaultConstructorStartsAsSuccess",
+                  "returnType": "void",
+                  "line": 16,
+                  "classification": "unit"
+                },
+                {
+                  "name": "dataConstructorKeepsTheSuccessDefaults",
+                  "returnType": "void",
+                  "line": 28,
+                  "classification": "unit"
+                },
+                {
+                  "name": "allArgumentsConstructorAndBuilderExposeEveryField",
+                  "returnType": "void",
+                  "line": 36,
+                  "classification": "unit"
+                },
+                {
+                  "name": "successFactoriesProduceSuccessfulResults",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "unit"
+                },
+                {
+                  "name": "failureFromApiResultCarriesItsOwnMessages",
+                  "returnType": "void",
+                  "line": 62,
+                  "classification": "unit"
+                },
+                {
+                  "name": "failureFromTheGenericApiResultInterfaceUsesItsMessages",
+                  "returnType": "void",
+                  "line": 72,
+                  "classification": "unit"
+                },
+                {
+                  "name": "failureWithCustomSystemMessageOverridesOnlyTheSystemMessage",
+                  "returnType": "void",
+                  "line": 98,
+                  "classification": "unit"
+                },
+                {
+                  "name": "failureFromBaseApiResultUsesTheEnumMessages",
+                  "returnType": "void",
+                  "line": 108,
+                  "classification": "unit"
+                },
+                {
+                  "name": "deprecatedFailureWithDataKeepsThePayload",
+                  "returnType": "void",
+                  "line": 117,
+                  "classification": "unit"
+                },
+                {
+                  "name": "isSuccessComparesTheCodeWithTheSuccessConstant",
+                  "returnType": "void",
+                  "line": 128,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/security/JwtTokenProviderContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "createdTokenCarriesTheIdentityKeyAndCanBeParsedBack",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "unit"
+                },
+                {
+                  "name": "tokensDifferForDifferentIdentityKeys",
+                  "returnType": "void",
+                  "line": 44,
+                  "classification": "unit"
+                },
+                {
+                  "name": "resolveTokenReadsTheBearerHeaderOnly",
+                  "returnType": "void",
+                  "line": 53,
+                  "classification": "unit"
+                },
+                {
+                  "name": "validateTokenRejectsMalformedTokens",
+                  "returnType": "void",
+                  "line": 71,
+                  "classification": "unit"
+                },
+                {
+                  "name": "validateTokenRejectsTokensSignedWithAnotherKey",
+                  "returnType": "void",
+                  "line": 78,
+                  "classification": "unit"
+                },
+                {
+                  "name": "expiredTokensAreRejected",
+                  "returnType": "void",
+                  "line": 91,
+                  "classification": "unit"
+                },
+                {
+                  "name": "derivedKeyIsStableAcrossInstancesWithTheSameSecret",
+                  "returnType": "void",
+                  "line": 100,
+                  "classification": "unit"
+                },
+                {
+                  "name": "initReportsAMissingSha256Digest",
+                  "returnType": "void",
+                  "line": 112,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/utils/ValidateUtilsContractTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "validateParamAcceptsAValidBean",
+                  "returnType": "void",
+                  "line": 14,
+                  "classification": "unit"
+                },
+                {
+                  "name": "validateParamRejectsEverySingleViolation",
+                  "returnType": "void",
+                  "line": 19,
+                  "classification": "unit"
+                },
+                {
+                  "name": "validateParamRejectsNullInput",
+                  "returnType": "void",
+                  "line": 26,
+                  "classification": "unit"
+                }
+              ]
+            }
+          ],
           "classificationReviewed": true,
           "integrationReview": "已识别边界和执行方案；集成测试待实施",
           "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
@@ -4190,7 +4593,7 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "redissonFailsWithoutAnyConfig",
+                  "name": "redissonFallsBackToASingleServerBuiltFromTheSpringRedisProperties",
                   "returnType": "void",
                   "line": 92,
                   "classification": "unit"
@@ -4206,6 +4609,96 @@
                   "returnType": "void",
                   "line": 114,
                   "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-cache/src/test/java/com/metanet4j/component/cache/RedisCacheIntegrationTest.java",
+              "classification": "integration",
+              "methods": [
+                {
+                  "name": "valueOperationsRoundTripThroughRealRedis",
+                  "returnType": "void",
+                  "line": 115,
+                  "classification": "integration"
+                },
+                {
+                  "name": "expiryIsWrittenToTheServerAndReadableBack",
+                  "returnType": "void",
+                  "line": 130,
+                  "classification": "integration"
+                },
+                {
+                  "name": "setNxOnlyWritesWhenTheKeyIsAbsent",
+                  "returnType": "void",
+                  "line": 143,
+                  "classification": "integration"
+                },
+                {
+                  "name": "countersIncrementAndDecrementAgainstTheServer",
+                  "returnType": "void",
+                  "line": 150,
+                  "classification": "integration"
+                },
+                {
+                  "name": "hashOperationsPersistEveryField",
+                  "returnType": "void",
+                  "line": 157,
+                  "classification": "integration"
+                },
+                {
+                  "name": "setOperationsDeduplicateAndReportMembership",
+                  "returnType": "void",
+                  "line": 183,
+                  "classification": "integration"
+                },
+                {
+                  "name": "sortedSetScoresAndRanksMatchTheServer",
+                  "returnType": "void",
+                  "line": 197,
+                  "classification": "integration"
+                },
+                {
+                  "name": "listOperationsPreserveOrderAndSupportIndexUpdate",
+                  "returnType": "void",
+                  "line": 223,
+                  "classification": "integration"
+                },
+                {
+                  "name": "scanAndPagedScanMatchTheRawKeyBytesOnTheServer",
+                  "returnType": "void",
+                  "line": 243,
+                  "classification": "integration"
+                },
+                {
+                  "name": "batchHelpersReadAndDeleteById",
+                  "returnType": "void",
+                  "line": 260,
+                  "classification": "integration"
+                },
+                {
+                  "name": "generateProducesAUniqueIncreasingSequence",
+                  "returnType": "void",
+                  "line": 283,
+                  "classification": "integration"
+                },
+                {
+                  "name": "redisServiceStoresPlainStringsWithAndWithoutExpiry",
+                  "returnType": "void",
+                  "line": 299,
+                  "classification": "integration"
+                },
+                {
+                  "name": "redissonCacheManagerRoundTripsThroughRedis",
+                  "returnType": "void",
+                  "line": 310,
+                  "classification": "integration"
+                },
+                {
+                  "name": "keyGeneratorHashesTheArgumentsDeterministically",
+                  "returnType": "void",
+                  "line": 327,
+                  "classification": "integration"
                 }
               ]
             }
@@ -5580,6 +6073,48 @@
                   "returnType": "void",
                   "line": 117,
                   "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "metanet4j-component-message/src/test/java/com/metanet4j/component/message/KafkaMessageIntegrationTest.java",
+              "classification": "integration",
+              "methods": [
+                {
+                  "name": "producerConfigurationReachesTheRealBroker",
+                  "returnType": "void",
+                  "line": 133,
+                  "classification": "integration"
+                },
+                {
+                  "name": "consumerConfigurationUsesTheBuiltConfigsAndManualAck",
+                  "returnType": "void",
+                  "line": 142,
+                  "classification": "integration"
+                },
+                {
+                  "name": "sendMsgDeliversTheSerializedMessageToTheTopic",
+                  "returnType": "void",
+                  "line": 152,
+                  "classification": "integration"
+                },
+                {
+                  "name": "successCallbackReceivesTheOriginalMessage",
+                  "returnType": "void",
+                  "line": 168,
+                  "classification": "integration"
+                },
+                {
+                  "name": "failureCallbackReportsTheBrokerError",
+                  "returnType": "void",
+                  "line": 185,
+                  "classification": "integration"
+                },
+                {
+                  "name": "messageCanBeProducedWithAnExplicitPartitionAndKey",
+                  "returnType": "void",
+                  "line": 208,
+                  "classification": "integration"
                 }
               ]
             }
