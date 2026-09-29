@@ -35,6 +35,13 @@
 
 已知残留风险：`prepare-transaction-local.py` 的 `loopSamples` 采用“该用例入口样本”做结构覆盖（与 bn-arithmetic 登记方式一致），最终全量门禁若对循环样本有更严要求，需要按站点补真实循环样本。
 
+## 本轮交付（20260929 晚）
+
+- `http-wallet-wire` 已完成：46 例／126 输入／51 断言，recapture／tamper（两个 true）／gate verify 全绿，带冻结语料的聚焦 Java 测试 46/46 逐字段一致。钱包宿主与 WalletWire 事项的冻结用例已全部有标准局部（wallet-wire 82 + http-wallet-wire 46 = 128），待静默窗口统一重采后出任务级对照并结项。
+- `window-cwi` 的 TS 探针、冻结（31 例／60 输入／61 断言）与带语料聚焦测试 31/31 已通过，仅剩正式双侧采集。
+- `hd` 49 例／227 样本／92 断言、`script` 39/99/96、`hash` 30/150/92 计划已冻结并登记，正在采集。
+- 编译阻塞已清除：`ScriptInputReplay`（6 处 `List.of` 包成 `Arguments` lambda + 2 处 `action.run()`）、`HDInputReplay`、`HashInputReplay`（泛型放宽为 `List<?>` 并保留 Number 校验）修复后 `test-compile` 5437 源文件编译成功。
+
 ## 证据完整性复查（20260929）
 
 对 13 个已登记标准局部逐个复跑 `local-evidence-gate.py verify`，全部与登记时一致、无损坏：交易基础五局部 74 例/150 输入/115 断言、广播器四局部 68/231/169、钱包宿主与 WalletWire 三局部 177/542/526，合计 319 个用例的既有证据可用。
