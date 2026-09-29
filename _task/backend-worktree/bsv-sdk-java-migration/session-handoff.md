@@ -129,6 +129,12 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 窗口内两处局部问题的处置（20260930 11:40）
+
+1. **`validation-helpers`（147 例，占 2.8%）**：TS 阶段报 `FileNotFoundError: .../validation-helpers-formal-20260929/input-plan.json`。根因是适配器按约定读 `<catalog父目录>/input-plan.json`，而该局部的计划文件此前只存在于任务根（`validation-helpers-input-plan.json`）。已按约定把计划复制到 `<formal>/input-plan.json`（147 用例），并单独排队重采（后台，日志 `.cache/evidence/validation-helpers-recapture.log`）。
+2. **全量扫描**：153 个登记局部的 `input_plan` 全部存在且为合法 JSON（0 异常），说明这是孤例。
+3. `broadcaster`（11 例）在窗口中**采集通过**，说明代理担心的 parity 环境变量冲突只影响全量运行（已在 `capture-full-dispatch.cjs` 修复），不影响逐局部采集。
+
 ### 窗口吞吐实测（20260930 11:20）
 
 已完成 5 个局部：hex-bn（失败，见上）、wallet-property、werr-constructors、auth-master-certificate-constructors、auth-master-certificate-remaining；相邻完成间隔 1.3／4.3／1.4／0.3 分钟（4.3 那次包含我并行跑 hex-bn 抢锁），即**约 1.8 分钟/局部**，106 个局部预计 **约 3.2 小时**，与预估一致。窗口目前**无失败项**。
