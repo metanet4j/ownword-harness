@@ -129,6 +129,14 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 来源冻结完成（20260930 10:00）
+
+静默达标后执行冻结提交：SDK 仓 `ba10dd4`（94 个文件：primitives 31／script 18／transaction 12／wallet 8／auth 8／chaintrackers 6／http 4／support 2），提交前 `test-compile` **BUILD SUCCESS**，提交后 `git status` **0 未提交**。
+
+至此守卫六项中 ①②③④⑥ 全部通过，**只剩 ⑤ 覆盖率 5328/5329**，等 `AESGCM.man` 的 66 分钟冻结运行（06:10 起）结束后登记即达 100%。
+
+**重要约束**：`ba10dd4` 之后不得再编辑 SDK 仓任何源码；若必须修改，冻结失效，需重新提交并从窗口第一步重来。
+
 ### 窗口前登记体检（20260930 09:45）
 
 对全部已采集局部逐条核对 `ts_run_manifest`／`java_run_manifest`／`ts_inputs`／`java_inputs` 四类路径：**0 个悬空引用**。最新两局部（spend-additional、whats-on-chain-chain-tracker）均指向以 `d` 结尾的成功运行目录。
