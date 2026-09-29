@@ -11,6 +11,7 @@
     "keys-locals.py",
     "keys-small-locals.py",
     "misc-locals.py",
+    "primitives-last-locals.py",
     "primitives-locals.py",
     "primitives-rest-locals.py",
     "script-locals.py",
@@ -215,6 +216,67 @@
       "inputs_env": "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
       "probe": "capture-arc-broadcaster-inputs.cjs",
       "env": "MIGRATION_ARC_TS_OBSERVATIONS"
+    },
+    "async-crypto-backend": {
+      "local": "async-crypto-backend",
+      "capture": "capture-primitives-last-local.py",
+      "files": [
+        "src/primitives/__tests/AsyncCryptoBackend.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/async-crypto-backend-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "async-crypto-backend",
+          "probe": "capture-async-crypto-backend-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-primitives-last-local.py",
+          "outputs": {
+            "MIGRATION_ASYNC_CRYPTO_BACKEND_TS_OBSERVATIONS": "async-crypto-backend.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-primitives-last-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-primitives-last-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/async-crypto-backend.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/async-crypto-backend-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_ASYNC_CRYPTO_BACKEND_TS_OBSERVATIONS",
+          "raw": "async-crypto-backend.calls.raw.jsonl",
+          "rawOwner": "async-crypto-backend"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_ASYNC_CRYPTO_BACKEND_TS_OBSERVATIONS": "async-crypto-backend.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_ASYNC_CRYPTO_BACKEND_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_ASYNC_CRYPTO_BACKEND_TS_INPUTS",
+      "probe": "capture-async-crypto-backend-inputs.cjs",
+      "env": "MIGRATION_ASYNC_CRYPTO_BACKEND_TS_OBSERVATIONS"
     },
     "auth-build": {
       "local": "auth-build",
@@ -8192,6 +8254,42 @@
       "probe": "capture-arc-broadcaster-inputs.cjs",
       "env": "MIGRATION_ARC_TS_OBSERVATIONS"
     },
+    "src/primitives/__tests/AsyncCryptoBackend.test.ts": {
+      "probes": [
+        {
+          "local": "async-crypto-backend",
+          "probe": "capture-async-crypto-backend-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-primitives-last-local.py",
+          "outputs": {
+            "MIGRATION_ASYNC_CRYPTO_BACKEND_TS_OBSERVATIONS": "async-crypto-backend.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-primitives-last-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-primitives-last-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/async-crypto-backend.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/async-crypto-backend-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_ASYNC_CRYPTO_BACKEND_TS_OBSERVATIONS",
+          "raw": "async-crypto-backend.calls.raw.jsonl",
+          "rawOwner": "async-crypto-backend"
+        }
+      ],
+      "probe": "capture-async-crypto-backend-inputs.cjs",
+      "env": "MIGRATION_ASYNC_CRYPTO_BACKEND_TS_OBSERVATIONS"
+    },
     "src/auth/__tests/build.test.ts": {
       "probes": [
         {
@@ -12489,6 +12587,7 @@
     "MIGRATION_PROTOWALLET_TS_INPUTS": "xdm-browser-boundary",
     "MIGRATION_VALIDATION_TS_INPUTS": "xdm-browser-boundary",
     "MIGRATION_VECTOR_TS_INPUTS": "xdm-browser-boundary",
+    "MIGRATION_ASYNC_CRYPTO_BACKEND_TS_INPUTS": "async-crypto-backend",
     "MIGRATION_AUTH_BUILD_TS_INPUTS": "auth-build",
     "MIGRATION_AUTH_CERTIFICATE_CLASS_TS_INPUTS": "utils-property",
     "MIGRATION_AUTH_FETCH_ADDITIONAL_BODIES_TS_INPUTS": "utils-property",
@@ -12594,7 +12693,6 @@
   "pending": [],
   "unresolved": [],
   "unmappedCatalogFiles": [
-    "src/primitives/__tests/AESGCM.man.test.ts",
-    "src/primitives/__tests/AsyncCryptoBackend.test.ts"
+    "src/primitives/__tests/AESGCM.man.test.ts"
   ]
 }
