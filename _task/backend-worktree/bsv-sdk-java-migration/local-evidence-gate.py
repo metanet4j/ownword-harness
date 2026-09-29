@@ -128,6 +128,14 @@ def guarded_sites(rows):
     return guarded
 
 
+def tamper_skipped(assertion_id, guarded):
+    """语义规则站点由专用规则校验，篡改它只会被那条规则拒绝，走不到逐值比较。
+
+    重复执行的同一站点实例身份是 `<站点>#<轮次>`，必须按裸站点 ID 判定是否受固定规则约束。
+    """
+    return str(assertion_id).split('#', 1)[0] in guarded
+
+
 def tamper(name):
     verify(name)
     item = local(name)
@@ -147,7 +155,7 @@ def tamper(name):
             value = row.get('value')
             if not isinstance(value, dict) or 'actual' not in value:
                 continue
-            if row.get('assertionId') in guarded:
+            if tamper_skipped(row.get('assertionId'), guarded):
                 continue
             value['actual'] = {'type': 'string', 'value': 'tampered'}
             return
