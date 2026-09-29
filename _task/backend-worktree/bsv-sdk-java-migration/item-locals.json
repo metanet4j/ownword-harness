@@ -34,12 +34,15 @@
   "migration-impl-hash-random": {
     "status": "done",
     "frozenCases": 86,
-    "coveredCases": 64,
-    "uncoveredCases": 22,
+    "coveredCases": 86,
+    "uncoveredCases": 0,
     "locals": {
       "drbg29": 29,
       "hash": 30,
-      "hmac-vectors": 5
+      "hash-additional": 9,
+      "hmac-vectors": 5,
+      "random": 5,
+      "random-additional": 8
     }
   },
   "migration-impl-curve": {
@@ -80,14 +83,15 @@
   "migration-impl-keys-signatures": {
     "status": "done",
     "frozenCases": 146,
-    "coveredCases": 138,
-    "uncoveredCases": 8,
+    "coveredCases": 146,
+    "uncoveredCases": 0,
     "locals": {
       "bug-31": 1,
       "ecdh": 2,
       "ecdsa": 15,
       "ecdsa-additional": 12,
       "private-key": 7,
+      "private-key-split": 8,
       "public-key": 14,
       "public-key-additional": 32,
       "schnorr": 12,
@@ -98,11 +102,12 @@
   "migration-impl-symmetric": {
     "status": "done",
     "frozenCases": 52,
-    "coveredCases": 45,
-    "uncoveredCases": 7,
+    "coveredCases": 48,
+    "uncoveredCases": 4,
     "locals": {
       "aesgcm": 30,
-      "symmetric-key": 15
+      "symmetric-key": 15,
+      "symmetric-key-compatibility": 3
     }
   },
   "migration-impl-compat": {
@@ -270,10 +275,11 @@
   "migration-impl-transaction-complete": {
     "status": "not-started",
     "frozenCases": 745,
-    "coveredCases": 720,
-    "uncoveredCases": 25,
+    "coveredCases": 745,
+    "uncoveredCases": 0,
     "locals": {
       "transaction": 61,
+      "transaction-performance": 25,
       "transaction-shared-vectors": 659
     }
   },
@@ -333,11 +339,12 @@
   "migration-impl-auth-sessions": {
     "status": "not-started",
     "frozenCases": 85,
-    "coveredCases": 55,
-    "uncoveredCases": 30,
+    "coveredCases": 85,
+    "uncoveredCases": 0,
     "locals": {
       "auth-build": 20,
       "cryptononce": 7,
+      "peer": 30,
       "peer-boundary": 2,
       "peer-certificate-policy": 15,
       "session-manager": 11
