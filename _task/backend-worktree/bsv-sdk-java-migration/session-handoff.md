@@ -114,6 +114,12 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 
 对 24 个最近采集的标准局部逐个复跑 `local-evidence-gate.py verify`（不跑 Maven、不占共享锁）：**24/24 通过**，覆盖 hash、window-cwi、r-puzzle、p2pkh-async-backend、aesgcm、signature、reduction-context、public-key、public-key-additional、locking-unlocking-script、script-additional、binary-fetch-client、bignumber-additional、ecdsa、schnorr、hd、script、push-drop、transaction-evidence、transaction-verifier、beef-party-additional、merkle-path、merkle-path-safe-offsets、merkle-path-bench。它们绑定不同 Java 来源（并行改动所致），最终窗口统一重采后即可全部 `currentCaptureVerified=true`。
 
+### 采集队列瓶颈（20260930 02:00）
+
+各代理已进入采集阶段，但**共享 `run.lock` 成为唯一瓶颈**：现场有 5 个 flock 等待者 + 1 个 java 进程，多个局部已完成 TS 侧（01:32–01:54）却还在排队等 Java 侧 `clean test`。按每个局部 2–4 分钟估算，仅当前排队的采集就需要 1–2 小时；主代理因此**完全不占锁**（连编译复检都停掉），只做只读校验与登记。
+
+推论：最终统一窗口（65+ 个局部）必须在**所有代理停止采集之后**独占运行，否则队列会互相拖延；窗口期间也不要并行做任何 Maven 操作。
+
 ### 结构覆盖率跃升（20260930 02:00）
 
 - **已计划 4998/5329（93%）**，未计划降到 **331 例**；113 个标准局部的计划全部通过结构校验，且**没有任何用例被两个局部同时登记**（无冲突）。
