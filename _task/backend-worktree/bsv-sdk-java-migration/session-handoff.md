@@ -129,6 +129,19 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 六处失败：5 处已修复并核验（20260930 16:40）
+
+| 局部 | 用例/输入/断言 | 状态 |
+| --- | --- | --- |
+| validation-helpers | 147/149/203 | ✓ verify |
+| hex-bn | 36/71/71 | ✓ verify（相对路径修复）|
+| beef | 21/390/123 | ✓（比较层零实参 matcher 规则）|
+| drbg29 | 29/72/30 | ✓ verify（适配器缺省参数）|
+| chronicle-opcodes | 74/154/77 | ✓ verify（caseId 映射，SDK 改动 2 文件）|
+| simplified-fetch-transport-additional | — | 进行中（SDK 改动 2 文件已落地）|
+
+SDK 侧当前 4 个文件改动，均在批准范围内。等最后一个局部通过后即执行“重跑计划”一节。
+
 ### 重跑计划（20260930 16:15）
 
 等修复代理把 2 处 SDK 测试源码改动落地并逐项验证（聚焦 `clean test` 全绿 + 各自 recapture/tamper 通过）后，按序执行：
