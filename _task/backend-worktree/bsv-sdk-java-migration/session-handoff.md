@@ -14,6 +14,9 @@
 
 - **v9 存活确认（21:41）**：cron 拉起后已跑 7 分 22 秒、jest **127 文件 PASS／0 FAIL**，进程父级为 cron，会话空闲清理不再影响它 ✓。
 - **v10 进度（22:44）**：存活 16 分钟、jest 尚无 PASS —— 首个文件即重型文件（jest 按历史耗时把最慢的排最前，v9 也是同一现象的另一端），预计总时长 ~76–80 分钟，**仍在 90 分钟上限内**。
+**路径 C（更省，已交路径 B 代理评估，20260901 02:00）**：主代理实测发现——统一窗口 v2 的 **107 个运行目录每个都已具备全套产物**（`ts-inputs.jsonl`、`ts-assertions.jsonl`、`ts-assertions.raw.jsonl`、`java-inputs.jsonl`、`java-assertions.jsonl`、`java-assertions.raw.jsonl`），且 preflight 显示**同为来源 `13f34162199d`**（= 当前工作树）。因此可以：合并 106 个标准局部的 TS 产物（**零重跑**）→ 跑**一次**无过滤 `clean test` 拿 Java 侧 → `audit-tests.py check` 显式传路径跑模块门禁 → `audit-api.cjs check`。
+**诚实性要求**：路径 C 的 TS 侧来自 106 次同源单文件采集，**不是**单进程单次运行；若门禁通过，必须在文档与结项说明里写明这一事实与依据（同源摘要、逐用例双侧同输入），不得表述为“单次全量运行”。
+
 **路径 B 的实测坑（主代理亲测，已同步给代理）**：局部适配器有**两种接口形态** —— ①标准：`capture-*-local.py --local <名> --plan <计划目录> --report <路径> ts`；②旧式：`capture-broadcaster-side.py ts --replay <replay-inputs.jsonl> --report <路径>`（`broadcaster`／`capture-legacy-side.py`／`capture-drbg-side.py`，**没有 `--local`/`--plan`**）。实测 `capture-broadcaster-side.py --local broadcaster --plan … ts` 会报 `argument side: invalid choice: 'broadcaster'`。
 **必须复用 `recapture-local.py` 的分派规则**：登记项有 `catalog` → `--plan <catalog 父目录>`；否则有 `replay` → `--replay <该路径>`；并且**必须设 `EVIDENCE_SIDE=ts`**（否则适配器报“采集侧别与运行环境不同”），输入写到 `EVIDENCE_INPUTS_PATH=<子目录>/inputs.jsonl`。
 
