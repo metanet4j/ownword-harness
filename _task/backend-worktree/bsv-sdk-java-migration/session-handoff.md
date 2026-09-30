@@ -12,17 +12,18 @@
 
 **v8 进度（21:30）**：11 分钟内即 **127 文件 PASS／0 FAIL**（远快于上一轮同点的 132 文件/55 分钟），随后停在重型文件上（jest 自 21:03 持续 111% CPU，疑为 66 分钟的 `AESGCM.man`）。若总时长仍 <90 分钟，则**无需** 180 分钟档，v8 会直接跑完。
 
-**正在跑：单次双侧全量运行 v8（90 分钟档，已脱离会话）**
+**正在跑：单次双侧全量运行 v9（90 分钟档，由 cron 拉起）**
 
-- 目录 `.cache/evidence/full-run-8-20260901/`，日志 `.cache/evidence/full-run-8.log`
-- 启动方式：`setsid nohup python3 full-evidence-run.py run --run-dir .cache/evidence/full-run-8-20260901 > .cache/evidence/full-run-8.log 2>&1 < /dev/null & disown`
-- **运维教训（重要）**：会话暂停会杀掉后台作业——v6 就是这样死的（manifest 停在 `status: running`、文件时间定格、进程消失），**没有任何 manifest 可引用**，因此不满足 180 分钟协议、必须重跑。后续长作业一律用 `setsid` 脱离会话启动，且每次都用**新运行目录**（运行目录只能执行一次）。
-- 整套约 2 小时；若被 90 分钟上限终止即为**预期**（且这正是解锁 180 分钟档所需的证据）。
+- 目录 `.cache/evidence/full-run-9-20260901/`，日志 `.cache/evidence/full-run-9.log`
+- 启动方式（**必须这样跑**）：`.cache/run-full-detached.sh` + crontab 条目 `*/2 * * * * /bin/bash .../.cache/run-full-detached.sh`（幂等：已完成或已在跑则直接退出）
+- **运维教训（两轮踩坑）**：会话空闲会**清理交互进程树**——`nohup ... &`（v6）与 `setsid nohup ... & disown`（v8）**都被杀掉**，manifest 停在中途、没有终态，导致 180 分钟协议无法满足。只有 **cron 拉起**的进程能活过会话空闲 ✓。
+- 收尾后**务必删除该 crontab 条目**（`crontab -r` 或去掉那一行），避免每次开机空转。
+- 整套约 2 小时；若被 90 分钟上限终止即为**预期**（且这正是解锁 180 分钟档所需的证据）。届时把 `run-full-detached.sh` 里的 `RUN` 换成新目录、命令行加 `--timeout-minutes 180 --retry-after .cache/evidence/full-run-9-20260901/full-run.json` 再交给 cron 即可。
 
 **接手动作（按序）**
 
 1. 等 v6 结束；若因 90 分钟上限被终止（`elapsedSeconds ≥ 90*60`），立刻用 180 分钟档重跑（协议要求引用真实超时的 manifest）：
-   `python3 full-evidence-run.py run --run-dir .cache/evidence/full-run-7-20260901 --timeout-minutes 180 --retry-after .cache/evidence/full-run-8-20260901/full-run.json`
+   `python3 full-evidence-run.py run --run-dir .cache/evidence/full-run-7-20260901 --timeout-minutes 180 --retry-after .cache/evidence/full-run-9-20260901/full-run.json`
 2. 校验：`python3 full-evidence-run.py verify .cache/evidence/full-run-<n>-20260930/full-run.json`
 3. 接口面：`node audit-api.cjs check`
 4. 逐事项复核：`./close-items.sh <标签>`（14 项已过；其余随全量运行）
