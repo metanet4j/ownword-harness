@@ -155,6 +155,20 @@
 
 **工具速查**：`lock.sh`（所有 Maven／采集前置）、`recapture-all.sh`（逐局部重采 + 篡改门禁）、`final-window-guard.sh`（开窗六项守卫）、`close-items.sh`（逐事项任务级对照）、`full-evidence-run.py run|verify`（单次全量）、`audit-tests.py check`、`audit-api.cjs check`、`full-evidence-preflight.py`。
 
+### full-run-14 精确读数与三项收尾分工（20260901 11:40，以此为准）
+
+代理用流式统计更正了我此前的读数（`evidence-bundle.py::same()` 只打印缺失集合的前 4 个做示例，所以“4 个用例”是假象）：
+
+| 项 | 计划 | 覆盖 | 缺失 |
+| --- | --- | --- | --- |
+| Java **输入**用例 | 5329 | 1987 | **3342**（78% 是向量四类：`ScriptVectorsTest` 1030／`TransactionCompleteVectorsTest` 659／`SpendValidVectorsTest` 455／`SpendStandaloneValidVectorsTest` 455）|
+| Java **断言**用例 | 5329 | 124 | **5205**（`emit-assertion-observations.py` 解析 839 MB 原始轨迹时被 OOM 杀，kernel log `06:54:12` 确认）|
+
+完整 3342 个缺失 caseId 已落盘 `.cache/evidence/full-run-14-20260901/missing-java-input-cases.json`。
+
+**三项分工**：**B**＝断言发射改流式（独立、有界，代理先做，用现成自测 + run-14 的 839 MB 轨迹单点验证）；**A1**＝向量四类 2599 例（设 `MIGRATION_VECTOR_JAVA_INPUTS` + 调两个证据脚本的 `normalize`）；**A2**＝其余 34 类 743 例（各读自己的 `-Dmigration.*` 属性或自有 env，见 `java-capture-report.json` 的 `propertyDrivenReplays`）→ 已另派专代理建「局部→Java 入口」映射表。
+三项齐活、两路都停笔、工具集重新冻结后，才统一放行 `full-run-15`（一次约 70 分钟）。
+
 ## 并行路线（20260929）
 
 `python3 item-readiness.py` 给出各事项的冻结用例／已计划／当前来源复核与缺计划文件；据此排的后续分工：
