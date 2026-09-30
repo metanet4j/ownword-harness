@@ -14,6 +14,8 @@
 
 - **v9 存活确认（21:41）**：cron 拉起后已跑 7 分 22 秒、jest **127 文件 PASS／0 FAIL**，进程父级为 cron，会话空闲清理不再影响它 ✓。
 - **v10 进度（22:44）**：存活 16 分钟、jest 尚无 PASS —— 首个文件即重型文件（jest 按历史耗时把最慢的排最前，v9 也是同一现象的另一端），预计总时长 ~76–80 分钟，**仍在 90 分钟上限内**。
+**路径 B 冒烟全绿（20260901 03:25）**：`ts-serial-shapes-20260901`（四形态，4 文件／23 用例／8.8 秒，`problems=[]` ✓）与 `ts-serial-vector-20260901`（vector 形态，**659 用例／1159 输入／1159 断言／29.9 秒，`problems=[]` ✓**）均通过。剩余：`script-spend-shared-vectors`（1940 例）与 154 局部全量串行。
+
 **两路状态回报（20260901 03:20）**
 
 - **路径 A（分派机制）**：已定位并改完五类根因（均非猜测）——①9 个 spend 探针读 `EVIDENCE_INPUT_PLAN` 同目录 `catalog.json` 失败 → 运行期把局部冻结计划复制到 `<runDir>/plans/<local>/` 并重指；②31 个 raw 局部无 emit 转换器（驱动用 `replay.emit_ts()` 内联而非字面量 `emit-ts` argv）→ 新增 `full-run-overrides.json` 的 `locals` 段逐局部登记 emit（`full-emit.py`／`full-emit-inline.py`／`full-emit-special.py`）；③断言缺口源于**共享断言轨迹的 matcher 序号被破坏**（`capture-bn-constructor.cjs` 等替换 `global.expect`，行格式不同）→ 这些局部改走 legacy 断言通道；④`capture-wallet-wire-parity.cjs` 与共享层双重记录同一 matcher → 从分派表移除；⑤24028 缺失样本是前四者的合成结果。下一步四个小子集自测 → 133 文件严格自测，ETA 40–60 分钟。
