@@ -14,6 +14,8 @@
 
 - **v9 存活确认（21:41）**：cron 拉起后已跑 7 分 22 秒、jest **127 文件 PASS／0 FAIL**，进程父级为 cron，会话空闲清理不再影响它 ✓。
 - **v10 进度（22:44）**：存活 16 分钟、jest 尚无 PASS —— 首个文件即重型文件（jest 按历史耗时把最慢的排最前，v9 也是同一现象的另一端），预计总时长 ~76–80 分钟，**仍在 90 分钟上限内**。
+**路径 B 全量串行已启动（20260901 03:45）**：子集自测报告为 **7 文件／763 用例／8768 输入／1613 断言／122 秒／`problems=[]`** ✓；随后**全量串行**已启动——目录 `.cache/evidence/ts-serial-full-20260901/`、日志同名前缀 `.log`、进程 `run-full-ts-serial.py --run-dir .cache/evidence/ts-serial-full-20260901`。预计 TS 侧 ~48 分钟（其中 `aesgcm-man` 40 分钟），之后接一次无过滤 `clean test` 与两套审计。
+
 **路径 B 更大子集自测（20260901 03:35）**：`ts-serial-selftest-20260901` 覆盖多个局部（`broadcaster`、`byte-base58`、`chronicle`、`compat-bsm`、`normative-vectors` 等，逐局部 `local/` 子目录），产出 **8768 行输入 / 1613 行断言**（约占全集 38092 样本的 23%）；`ts-serial-report.json` 尚未写出（收尾中）。
 
 **路径 B 冒烟全绿（20260901 03:25）**：`ts-serial-shapes-20260901`（四形态，4 文件／23 用例／8.8 秒，`problems=[]` ✓）与 `ts-serial-vector-20260901`（vector 形态，**659 用例／1159 输入／1159 断言／29.9 秒，`problems=[]` ✓**）均通过。剩余：`script-spend-shared-vectors`（1940 例）与 154 局部全量串行。
