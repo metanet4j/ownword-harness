@@ -129,6 +129,22 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 最终窗口完成（20260930 14:45）
+
+`recapture-all.sh final-20260930` 跑完：**处理 108 项、篡改门禁通过 101 项、失败 6 项**（合计 353 例），耗时约 3 小时 20 分钟（含 `aesgcm-man` 的 66 分钟长跑）。
+
+**六个失败项与定性**：
+| 局部 | 例数 | 现象 |
+| --- | --- | --- |
+| validation-helpers | 147 | TS 读 `<formal>/input-plan.json` 不存在（已复制修复，待重跑）|
+| chronicle-opcodes | 74 | Java：`固定 TS Chronicle 输入缺失：ChronicleOpcodesTest#chronicleCase001` |
+| simplified-fetch-transport-additional | 46 | Java：`send-0…` 入口结果不一致 |
+| hex-bn | 36 | 旧管线 Java 侧失败（其 36 例已由全量分派表覆盖）|
+| drbg29 | 29 | TS 适配器仍需 `--catalog/--mapping`（旧式参数）|
+| beef | 21 | 断言不一致 `Beef.test.ts:93:7` |
+
+已派一路专用代理按 2→4→5→6→3→1 顺序定点修复（严禁改 SDK 源码，因其已冻结在 `ba10dd4`）。
+
 ### 窗口收尾：仅剩 aesgcm-man 长跑（20260930 14:30）
 
 窗口已处理 107 项、篡改门禁通过 **100** 个、**无失败项**；最后一个局部 `aesgcm-man` 的 TS 长跑 09:43 启动（66 分钟），预计 10:50 前后完成，随后窗口退出并打印汇总。
