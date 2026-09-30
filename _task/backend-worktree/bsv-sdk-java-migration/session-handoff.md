@@ -129,6 +129,19 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 长跑收尾（20260930 23:20）
+
+`aesgcm-man` 的 66 分钟 TS 长跑已约 38 分钟（14:21 启动，预计 15:27 前后结束）；窗口其余 106 个局部**全部完成、零失败、同为来源 `13f34162199d`**。
+
+**长跑结束后立即执行**（命令已固化）：
+```bash
+./lock.sh python3 full-evidence-preflight.py --output .cache/evidence/preflight-final2.json
+python3 full-evidence-run.py run --run-dir .cache/evidence/full-run-2-20260930 --timeout-minutes 180
+python3 full-evidence-run.py verify .cache/evidence/full-run-2-20260930/full-run.json
+node audit-api.cjs check
+```
+注意：`full-evidence-run.py run` 会依次跑 tsCommand（含 66 分钟长跑）与 javaCommand（一次无过滤 `clean test`）并自动校验，全程约 2–2.5 小时；**必须用 `--timeout-minutes 180`**。
+
 ### 14 个事项取得完整任务级对照并入册（20260930 22:50）
 
 用 `./close-items.sh final2` 对**计划完整的实现事项**跑任务级对照：**14 个成功**（每个都是 cases 全等、missing/uncompared 全 0、`taskAcceptancePassed=true`）：
