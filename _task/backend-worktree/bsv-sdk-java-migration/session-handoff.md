@@ -14,6 +14,8 @@
 
 - **v9 存活确认（21:41）**：cron 拉起后已跑 7 分 22 秒、jest **127 文件 PASS／0 FAIL**，进程父级为 cron，会话空闲清理不再影响它 ✓。
 - **v10 进度（22:44）**：存活 16 分钟、jest 尚无 PASS —— 首个文件即重型文件（jest 按历史耗时把最慢的排最前，v9 也是同一现象的另一端），预计总时长 ~76–80 分钟，**仍在 90 分钟上限内**。
+**当前两路并行（20260901 01:40）**：路径 A＝修 `capture-full-dispatch.cjs`／`run-full-ts-capture.py` 的单进程分派（已派代理，尚无落盘产物）；路径 B＝**后备实现**（已派第二路代理，任务书含我实测确认的机制细节：单局部适配器逐文件跑 jest、parity 写 `evidence/ts-assertions.raw.jsonl`、`prepare-*-local.py emit-ts --output` 是**覆盖写**（故每个局部用独立子目录收集 inputs 后再合并）、断言转换复用 `emit-assertion-observations.py`、排序与对账直接 import `run-full-ts-capture.py` 的函数）。路径 B 先用 5 个局部自测（含 v10 里“轨迹缺失”的典型四个），再跑全量 106 个标准局部。
+
 **后备方案（路径 B，若路径 A 修不动就改走它）**：把“单次全量 TS 采集”实现为**逐局部 TS 采集的串行合并**——
 
 1. 新建一个 driver：遍历 153 个可采局部，对每个局部调用它**已跑通的** TS 适配器（`capture-*-local.py ts`），
