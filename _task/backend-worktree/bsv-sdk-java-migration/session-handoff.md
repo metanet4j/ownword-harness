@@ -129,6 +129,10 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 90 分钟档全量运行进行中（20260901 00:30）
+
+`full-evidence-run.py run --run-dir .cache/evidence/full-run-5-20260930`（90 分钟档）已跑约 28 分钟：产出 11 个文件轨迹、jest **26 个文件 PASS、0 FAIL**，当前停在一个重型向量文件上（与之前全量尝试同一位置），预计 16:35 前后触及 90 分钟上限被终止并写出 manifest，随后用 `--retry-after` 跑 180 分钟档。
+
 ### 窗口 v2 完美收官 + 全量运行门禁协议（20260930 23:50）
 
 **窗口 v2 完成**：汇总为「**全部局部重采与篡改门禁通过**」，**零失败**；`aesgcm-man` 1/2/3 也验证通过。`full-evidence-preflight.py`：`casesTotal 5329`、`structurallyPlannedCases 5329`、`readyForFullCapture=true`、`currentCaptureVerifiedCases 2052`。
