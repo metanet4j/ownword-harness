@@ -159,6 +159,15 @@
 
 **B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
 
+**用户裁决：6 例记为已知缺口（20260901 13:00）** —— 胡先生选择「记为已知缺口并如实披露」，**不重新冻结 SDK**（补齐那 6 例需新增 300+ 行 `AuthFetchPeerInputReplay.java` 并接线 6 个 `@Test` → 会改 `java_revision` → 窗口 v2 的 106 个同源局部与 14 项 task-parity 全部重跑）。
+
+**A2 只读排查的三条硬结论（已核实，不得当作口径问题绕过）**：
+1. `specialized-local` 只豁免**逐局部来源校验**（`recapture-local.py:27`／`local-evidence-gate.py:45`／`recapture-all.sh:17`／`full-evidence-preflight.py:161`），**不免**「全量计划逐用例双侧同输入」——`evidence-bundle.py:83` 用冻结清单全量比对（`:59` fail），`:96-106` 还要求 sampleId 序列与逐字节同值 → **这 7 例是真缺口**。
+2. 6 个 peer 例在**全部 evidence 里 0 个 Java 产物**（只在 TS 产物里出现），无可并入之物；第 7 例有 2 份旧产物但 `javaRevision` 为旧值且 manifest 旧格式，`evidence-bundle.py:186` 要求行内 `runId` 等于本轮 manifest → **搬旧行必被拒**（绕过即伪造）。
+3. 第 7 例只需 **TS 侧**接线（把 peer 探针并入该局部本轮 TS 汇总），不动 SDK、只需重跑该局部 TS + 一轮全量。
+
+**已交办（A2 代理）**：①等 `full-run-15` 结束后做第 7 例 TS 接线（最小追加，落在 `run-full-ts-serial.py`／`ts-serial-entries.json`）；②新增 `known-gaps.json` 显式登记 6 例（caseId／局部／`ruleId`（拟 `frozen-test-without-replay-entry-v1`）／原因／证据指针／「补齐需要什么」），让 `evidence-bundle.py` 与 `audit-tests.py` **只读该登记**把其记为 `knownUnroutableCases` 并在每份报告/manifest 里**显式可见**，**不得放宽其它任何校验**（登记外缺口仍硬失败，禁止自由文本理由），并加三条自测（命中通过／登记外仍失败／篡改登记失败）；③随后 `full-run-16`（90 分钟档）并给出 stage + `verify` + `audit-tests.py check` + `audit-api.cjs check` + `knownUnroutableCases` 实际计数（期望 6）。
+
 **A2 收尾完成、三组接线全部落地（20260901 12:40）**：
 
 - **改了 4 个文件**：`run-full-java-capture.py`（唯一注入点，最后写入 07:35）—— A1 两行、wallet-wire 4 项**一起**注入（注释写明“只给一半”的两种退化）、A2 的 33 个 `-Dmigration.*` + 4 个自有 env、Maven 后 `full-java-serial-convert.py` 产标准行，并加运行期前置校验（引用文件存在／语料 javaMethod 不重叠／语料 sampleId 与 `input-plan.json` 逐项一致，不符则在 Maven 前中止）；`EXCLUDED_TS_INPUT_ENVS` 未动。新增 `build-java-serial-entries.py` + `java-serial-entries.json`（**36 局部／736 例**，`--check upToDate=true`）、`full-java-serial-convert.py`、`verify-java-serial.py`、报告文档。
