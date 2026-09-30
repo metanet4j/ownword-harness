@@ -10,6 +10,8 @@
 - 任务级对照：**14 个事项**已有 `task-parity.json`（合计约 1312 例，`missingCases`／`missingAssertions`／`uncompared` 全 0），已写入 `feature_list.json` 的 `taskAcceptance`。
 - 冻结来源：SDK 仓 **`8b8e13d`**（`src/main` 零改动，仅 4 个测试文件）。
 
+**v8 进度（21:30）**：11 分钟内即 **127 文件 PASS／0 FAIL**（远快于上一轮同点的 132 文件/55 分钟），随后停在重型文件上（jest 自 21:03 持续 111% CPU，疑为 66 分钟的 `AESGCM.man`）。若总时长仍 <90 分钟，则**无需** 180 分钟档，v8 会直接跑完。
+
 **正在跑：单次双侧全量运行 v8（90 分钟档，已脱离会话）**
 
 - 目录 `.cache/evidence/full-run-8-20260901/`，日志 `.cache/evidence/full-run-8.log`
