@@ -14,6 +14,8 @@
 
 - **v9 存活确认（21:41）**：cron 拉起后已跑 7 分 22 秒、jest **127 文件 PASS／0 FAIL**，进程父级为 cron，会话空闲清理不再影响它 ✓。
 - **v10 进度（22:44）**：存活 16 分钟、jest 尚无 PASS —— 首个文件即重型文件（jest 按历史耗时把最慢的排最前，v9 也是同一现象的另一端），预计总时长 ~76–80 分钟，**仍在 90 分钟上限内**。
+**进展（20260901 03:00）**：路径 B 新增 `build-ts-serial-entries.py`（00:33，映射表生成器，可复现）与 `ts-serial-entries.json`（47 条「局部→TS 入口」，含 shape/script/args）✓；路径 A 继续改 `run-full-ts-capture.py` 与 `full-run-overrides.json`。全量串行运行尚未启动。
+
 **等待期（20260901 02:45）**：两路代理均无新落盘（无 `run-full-ts-serial`／`run-full-ts-capture` 进程、无新证据目录）。当前可交付状态：路径 B 的 driver 已冒烟通过、四形态扩展方案已批准并写入本文档；路径 A 已改三个机制文件但未验证。**下一位接手者的最短路径**：①先问/查两路代理的当前状态；②优先把路径 B 扩到四形态并跑满 133 文件（TS 侧实测仅 ~48 分钟，其中 aesgcm-man 40 分钟）；③一次无过滤 `clean test`；④`audit-tests.py check` 显式传路径 + `audit-api.cjs check`；⑤结清剩余 12 项。
 
 **路径 B 进展（20260901 02:35）**：`run-full-ts-serial.py`（506 行）与 `full-emit.py` 已落盘，冒烟测试目录 `.cache/evidence/ts-serial-smoke-20260901/` 产出完整的合并产物（`ts-inputs.jsonl`、`ts-assertions.jsonl`、`ts-assertions.raw.jsonl`、`ts-jest.json`、逐局部 `local/` 子目录、`ts-serial-report.json`），报告含 `casesCovered/casesPlanned`、`filesCovered/filesPlanned`、`inputsWritten`、`assertionsWritten`、`jestFiles/jestTests`、`localsFailed`、`problems=[]` ✓。下一步：扩到四形态并跑满 133 文件。
