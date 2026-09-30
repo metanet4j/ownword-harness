@@ -14,6 +14,8 @@
 
 - **v9 存活确认（21:41）**：cron 拉起后已跑 7 分 22 秒、jest **127 文件 PASS／0 FAIL**，进程父级为 cron，会话空闲清理不再影响它 ✓。
 - **v10 进度（22:44）**：存活 16 分钟、jest 尚无 PASS —— 首个文件即重型文件（jest 按历史耗时把最慢的排最前，v9 也是同一现象的另一端），预计总时长 ~76–80 分钟，**仍在 90 分钟上限内**。
+**全量串行进度（20260901 04:35）**：**153/154 局部 passed**（累计 15.6 分钟），仅剩 `aesgcm-man`（约 40 分钟长跑）在跑。
+
 **全量串行进度（20260901 04:25）**：已完成 **145 个局部、全部 passed**（累计约 14.5 分钟）；剩余 9 个：`private-key-split`、`random`、`transaction-performance`、`random-additional`、`hash-additional`、`symmetric-key-compatibility`、`bignumber-dh-group`、`async-crypto-backend`、**`aesgcm-man`（约 40 分钟）**。
 
 **全量串行进度（20260901 04:05）**：`89/154` 局部已完成、**全部 passed**、累计 8.2 分钟（日志逐行给出 `step/local/status/seconds/elapsed`）✓。
