@@ -14,6 +14,9 @@
 
 - **v9 存活确认（21:41）**：cron 拉起后已跑 7 分 22 秒、jest **127 文件 PASS／0 FAIL**，进程父级为 cron，会话空闲清理不再影响它 ✓。
 - **v10 进度（22:44）**：存活 16 分钟、jest 尚无 PASS —— 首个文件即重型文件（jest 按历史耗时把最慢的排最前，v9 也是同一现象的另一端），预计总时长 ~76–80 分钟，**仍在 90 分钟上限内**。
+**路径 B 进展（20260901 02:35）**：`run-full-ts-serial.py`（506 行）与 `full-emit.py` 已落盘，冒烟测试目录 `.cache/evidence/ts-serial-smoke-20260901/` 产出完整的合并产物（`ts-inputs.jsonl`、`ts-assertions.jsonl`、`ts-assertions.raw.jsonl`、`ts-jest.json`、逐局部 `local/` 子目录、`ts-serial-report.json`），报告含 `casesCovered/casesPlanned`、`filesCovered/filesPlanned`、`inputsWritten`、`assertionsWritten`、`jestFiles/jestTests`、`localsFailed`、`problems=[]` ✓。下一步：扩到四形态并跑满 133 文件。
+**路径 A 进展**：`capture-full-dispatch.cjs`／`run-full-ts-capture.py`／`build-full-run-probes.py` 已在 23:38–23:41 被修改（代理仍在迭代）。
+
 **决定性与更正（20260901 02:30，代理核算 + 主代理批准）**：
 - **标准局部只覆盖 2088／5329 用例** ✗。剩余 **3241 用例／14630 样本**落在 **26 个文件**上：18 个 `specialized-local`（`script-spend-shared-vectors` 1940 + `transaction-shared-vectors` 659 = 2599）＋ **29 个登记项缺 `capture` 字段的旧管线局部**（`mnemonic-original`、`bignumber-arithmetic`、`reader/writer`、`point-additional`、`jacobian`、`utils.*` 等，共 509 用例）；另有 4 个文件被标准与非标准局部**共同切分**。
 - 硬门禁 `audit-tests.py::compare_ts` 要求 TS 报告含**全部 133 文件**且逐用例名一致、`audit.compare` 要求 Java 执行全部映射用例 → **必须 133 文件全覆盖**，只做标准局部永远到不了终点。
