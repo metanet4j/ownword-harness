@@ -75,6 +75,8 @@
 可行性依据：逐局部 TS/Java 双侧在窗口 v2 已 107/108 通过、0 失败；缺的只是“把它们串起来产出一份同源全量证据”。
 代价：新增一个 driver（约百余行），但**全部复用已验证组件**，比修 `capture-full-dispatch.cjs` 的装载机制更可控。
 
+**一行修复的预验证 + full-run-13 开跑（20260901 08:25）**：代理在改工具前先做**廉价预验证**——用汇总 `ts-inputs.jsonl`（排除该变量）单跑 `HashTest` → `Tests run: 30, Errors: 0, BUILD SUCCESS`（改前同路径 13 errors）✓；自检确认 `java_ts_input_envs()` 79→78、报告新增 `excludedTsInputEnvs`。**`full-run-13` 已由 cron 于 04:19:01 启动**（`.cache/run-full-e2e.sh` 带 `.started` 守卫 + **10 分钟静默窗口守卫**：任务侧 `.py/.cjs/.mjs/.sh` 近 10 分钟无改动且工作树干净才开跑——04:10 那次 tick 正确推迟）。预计 ~70 分钟（约 05:30）出结果。
+
 **full-run-12 stage 结果（20260901 08:10）**：`ts-capture` **exit=0／2763 秒**（133/133 文件、5329/5329 用例、38092 输入、56744 断言、`problems=[]`）✓；`java-capture` **exit=1／1425 秒**——无过滤 `clean test` 得 `Tests run 5444, Failures 0, Errors 13, Skipped 0`，13 个错误全部来自 `HashTest` 的 PBKDF2 向量 ✗。总耗时 4189 秒（70 分钟），**90 分钟档有约 20 分钟余量，不需要 180 档**。
 
 **根因（已定位到行）**：`HashPbkdf2InputReplay.load()`（冻结 SDK 测试代码）要求这 13 个用例 `sampleId == "call-0"`，而汇总计划用的是标准局部 `hash` 的口径 **`pbkdf2-01`** → `IllegalStateException: PBKDF2 固定 TS 输入缺失或重复：0`。逐局部全绿是因为该 replay 仅在 `MIGRATION_HASH_PBKDF2_TS_INPUTS` **被设置**时才消费语料（逐局部从不设置它，属**已退役局部** `hash-pbkdf2-vectors` 的遗留变量）；全量必炸是因为 `run-full-java-capture.py::java_ts_input_envs()` 会把 Java 源码里出现的**全部** `MIGRATION_*_TS_INPUTS` 指向本轮汇总输入，从而激活这个休眠变量。该变量全仓仅被 `HashPbkdf2InputReplay.java` 读取；同一批样本由 `HashTest` 主路径按 `pbkdf2-01` 正常产出（`java-inputs.jsonl` 有该行）→ **不设它不丢证据**，而喂 `call-0` 会产生计划外样本被 `evidence-bundle` 拒。
