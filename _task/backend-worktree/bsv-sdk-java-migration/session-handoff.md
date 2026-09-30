@@ -14,6 +14,16 @@
 
 - **v9 存活确认（21:41）**：cron 拉起后已跑 7 分 22 秒、jest **127 文件 PASS／0 FAIL**，进程父级为 cron，会话空闲清理不再影响它 ✓。
 - **v10 进度（22:44）**：存活 16 分钟、jest 尚无 PASS —— 首个文件即重型文件（jest 按历史耗时把最慢的排最前，v9 也是同一现象的另一端），预计总时长 ~76–80 分钟，**仍在 90 分钟上限内**。
+**后备方案（路径 B，若路径 A 修不动就改走它）**：把“单次全量 TS 采集”实现为**逐局部 TS 采集的串行合并**——
+
+1. 新建一个 driver：遍历 153 个可采局部，对每个局部调用它**已跑通的** TS 适配器（`capture-*-local.py ts`），
+   把各自的输入行与 parity 断言行**追加**到统一运行目录（`ts-inputs.jsonl`、`ts-assertions.raw.jsonl`）；
+2. 用现有 `run-full-java-capture.py`（它把汇总输入按局部切给全部 Java 重放，跑一次无过滤 `clean test`）；
+3. 断言与对账沿用 `run-full-ts-capture.py` 后段的 `emit_assertion_observations` + 计划对账。
+
+可行性依据：逐局部 TS/Java 双侧在窗口 v2 已 107/108 通过、0 失败；缺的只是“把它们串起来产出一份同源全量证据”。
+代价：新增一个 driver（约百余行），但**全部复用已验证组件**，比修 `capture-full-dispatch.cjs` 的装载机制更可控。
+
 **当前卡点：全量运行的 TS 分派机制未跑通（已派专代理修）**
 
 - v10（`.cache/evidence/full-run-10-20260901/`）里 **jest 133/133 文件全绿、0 失败** ✓，但阶段仍失败，`ts-run.json.log` 给出五类问题：
