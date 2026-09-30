@@ -1,0 +1,639 @@
+{
+  "reviewType": "全量设计评审与代表场景检查",
+  "report": "../../全量设计评审-20260919-181000.md",
+  "prototypeCommit": "fe5319d2a2b7577c340f52fcf36a700bded238fe",
+  "preview": "http://127.0.0.1:4313/",
+  "findings": {
+    "P0": 0,
+    "P1": 2,
+    "P2": 5,
+    "P3": 3
+  },
+  "sourceChanged": false,
+  "startupCheck": {
+    "command": "node bootstrap.mjs --check",
+    "result": "passed",
+    "identityAssertions": 92,
+    "artifactModelGroups": 12,
+    "note": "启动时运行，报告写入后未重复执行模型检查。"
+  },
+  "audits": [
+    {
+      "file": "02-a11y.json",
+      "counts": {
+        "inapplicable": 52,
+        "incomplete": 0,
+        "passes": 37,
+        "violations": 0
+      },
+      "incomplete": []
+    },
+    {
+      "file": "05-a11y.json",
+      "counts": {
+        "inapplicable": 54,
+        "incomplete": 0,
+        "passes": 35,
+        "violations": 0
+      },
+      "incomplete": []
+    },
+    {
+      "file": "09-a11y.json",
+      "counts": {
+        "inapplicable": 49,
+        "incomplete": 0,
+        "passes": 40,
+        "violations": 0
+      },
+      "incomplete": []
+    },
+    {
+      "file": "13-a11y.json",
+      "counts": {
+        "inapplicable": 50,
+        "incomplete": 0,
+        "passes": 39,
+        "violations": 0
+      },
+      "incomplete": []
+    },
+    {
+      "file": "16-a11y.json",
+      "counts": {
+        "inapplicable": 51,
+        "incomplete": 1,
+        "passes": 38,
+        "violations": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              "span[role=\"img\"]"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "17-a11y.json",
+      "counts": {
+        "inapplicable": 48,
+        "incomplete": 0,
+        "passes": 41,
+        "violations": 0
+      },
+      "incomplete": []
+    },
+    {
+      "file": "19-a11y.json",
+      "counts": {
+        "inapplicable": 51,
+        "incomplete": 1,
+        "passes": 38,
+        "violations": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              "span[role=\"img\"]"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "20-a11y.json",
+      "counts": {
+        "inapplicable": 51,
+        "incomplete": 1,
+        "passes": 38,
+        "violations": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              "span[role=\"img\"]"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "22-a11y.json",
+      "counts": {
+        "inapplicable": 54,
+        "incomplete": 1,
+        "passes": 35,
+        "violations": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              "li:nth-child(1) > span"
+            ],
+            [
+              "li:nth-child(2) > span"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "25-a11y.json",
+      "counts": {
+        "inapplicable": 48,
+        "incomplete": 1,
+        "passes": 41,
+        "violations": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".s2d-button-primary"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "26-a11y.json",
+      "counts": {
+        "inapplicable": 49,
+        "incomplete": 1,
+        "passes": 40,
+        "violations": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              "span[role=\"img\"]"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "32-a11y.json",
+      "counts": {
+        "inapplicable": 50,
+        "incomplete": 1,
+        "passes": 39,
+        "violations": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".s2d-button-accent"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "34-a11y.json",
+      "counts": {
+        "inapplicable": 52,
+        "incomplete": 0,
+        "passes": 37,
+        "violations": 0
+      },
+      "incomplete": []
+    },
+    {
+      "file": "52-a11y.json",
+      "counts": {
+        "inapplicable": 58,
+        "incomplete": 0,
+        "passes": 31,
+        "violations": 0
+      },
+      "incomplete": []
+    },
+    {
+      "file": "53-a11y.json",
+      "counts": {
+        "inapplicable": 47,
+        "incomplete": 1,
+        "passes": 42,
+        "violations": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              "span[role=\"img\"]"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "01-initial.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "02-identity.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "03-public.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "04-public-back.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "05-artifacts-loaded.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "05-artifacts.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "06-detail-content.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "07-ownership.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "08-proof.png",
+      "width": 1440,
+      "height": 1743
+    },
+    {
+      "file": "09-transfer-mobile.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "file": "09-transfer.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "10-transfer-error.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "file": "11-transfer-review-mobile.png",
+      "width": 390,
+      "height": 895
+    },
+    {
+      "file": "12-transfer-wallet.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "file": "13-create.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "14-create-review.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "15-create-result.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "16-content-loaded.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "16-content.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "17-editor.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "18-editor-320.png",
+      "width": 320,
+      "height": 1140
+    },
+    {
+      "file": "19-content-review-320.png",
+      "width": 320,
+      "height": 1168
+    },
+    {
+      "file": "20-review-dark-zh.png",
+      "width": 320,
+      "height": 1121
+    },
+    {
+      "file": "21-publish-modal.png",
+      "width": 320,
+      "height": 780
+    },
+    {
+      "file": "22-published-result.png",
+      "width": 320,
+      "height": 839
+    },
+    {
+      "file": "23-reader-desktop.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "23-reader.png",
+      "width": 320,
+      "height": 916
+    },
+    {
+      "file": "24-reader-proof-open.png",
+      "width": 1440,
+      "height": 1409
+    },
+    {
+      "file": "24-reader-proof.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "25-editor-dark.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "26-edit-profile-dark.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "27-profile-review.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "28-profile-updated.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "29-stale-associated-name.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "30-stale-public-profile.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "31-find.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "32-find-mobile.png",
+      "width": 320,
+      "height": 938
+    },
+    {
+      "file": "32-find-result.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "33-find-invalid.png",
+      "width": 320,
+      "height": 780
+    },
+    {
+      "file": "34-identity-unverified-320.png",
+      "width": 320,
+      "height": 853
+    },
+    {
+      "file": "35-unverified-artifacts-320.png",
+      "width": 320,
+      "height": 1684
+    },
+    {
+      "file": "35-unverified-retry.png",
+      "width": 320,
+      "height": 1238
+    },
+    {
+      "file": "36-selector-unverified.png",
+      "width": 320,
+      "height": 1242
+    },
+    {
+      "file": "37-binding-review.png",
+      "width": 320,
+      "height": 780
+    },
+    {
+      "file": "38-binding-result.png",
+      "width": 320,
+      "height": 842
+    },
+    {
+      "file": "39-number-six.png",
+      "width": 320,
+      "height": 1277
+    },
+    {
+      "file": "40-reorg.png",
+      "width": 320,
+      "height": 1379
+    },
+    {
+      "file": "41-empty-editor.png",
+      "width": 320,
+      "height": 780
+    },
+    {
+      "file": "42-empty-editor-error-full.png",
+      "width": 320,
+      "height": 1169
+    },
+    {
+      "file": "42-empty-editor-error-viewport.png",
+      "width": 320,
+      "height": 780
+    },
+    {
+      "file": "43-artifacts-mobile.png",
+      "width": 320,
+      "height": 1116
+    },
+    {
+      "file": "44-artifacts-empty.png",
+      "width": 320,
+      "height": 780
+    },
+    {
+      "file": "45-artifacts-error.png",
+      "width": 320,
+      "height": 780
+    },
+    {
+      "file": "46-long-number.png",
+      "width": 320,
+      "height": 780
+    },
+    {
+      "file": "47-notfound.png",
+      "width": 320,
+      "height": 780
+    },
+    {
+      "file": "48-find-error-loaded.png",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "file": "48-find-error.png",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "file": "49-image-upload-tablet.png",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "file": "49-valid-upload-tablet.png",
+      "width": 768,
+      "height": 1443
+    },
+    {
+      "file": "50-invalid-upload-retains-image.png",
+      "width": 768,
+      "height": 1487
+    },
+    {
+      "file": "51-upload-review-mobile.png",
+      "width": 320,
+      "height": 936
+    },
+    {
+      "file": "51-upload-review-tablet.png",
+      "width": 768,
+      "height": 1360
+    },
+    {
+      "file": "52-after-connect-new.png",
+      "width": 320,
+      "height": 780
+    },
+    {
+      "file": "52-setup-desktop.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "52-setup-mobile.png",
+      "width": 320,
+      "height": 780
+    },
+    {
+      "file": "53-setup-desktop.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "53-setup-mobile.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "54-connected-gate.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "55-artifact-connected-gate.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "56-connected-content-gate.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "issue01-result.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "issue01-step1.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "issue01-step2.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "issue01-step3.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "issue01-step4.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "issue02-repeated.png",
+      "width": 320,
+      "height": 1684
+    }
+  ],
+  "recording": {
+    "result": "unavailable",
+    "reason": "ffmpeg not found；有逐步截图，无可播放录像。"
+  },
+  "limitations": [
+    "未穷举语言、主题、屏宽的笛卡尔积。",
+    "未重做所有转移成功、未知结果、多标签页及账户切换分支。",
+    "未使用真实屏幕阅读器；axe incomplete 不能作为对比度合格结论。",
+    "不接真实钱包或生产 API。"
+  ]
+}

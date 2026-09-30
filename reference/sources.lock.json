@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-09-18T22:44:50+08:00",
+  "purpose": "reference-only",
+  "acquisition": "shallow-git-clone",
+  "previousSnapshotsBackup": "reference/.snapshot-backup-20260918-identity",
+  "sources": [
+    {
+      "path": "reference/bap-master/bap-master",
+      "repository": "https://github.com/BitcoinSchema/bap.git",
+      "branch": "master",
+      "commit": "c732cfce9e8582d42137997db551f2f8a20e307a",
+      "tree": "88f853d0b427b6801d11e5b4d0dfd01fafc88435",
+      "committedAt": "2026-08-31T20:30:42-04:00",
+      "trackedFiles": 35,
+      "packageVersion": "0.3.7"
+    },
+    {
+      "path": "reference/yours-wallet-main/yours-wallet-main",
+      "repository": "https://github.com/yours-org/yours-wallet.git",
+      "branch": "main",
+      "commit": "e77a7ed8d3b92428399a5735066a89d8ef0ff6fb",
+      "tree": "6758019dd12b3b83c5915be06d9923564e13c2ae",
+      "committedAt": "2026-09-16T14:29:05-07:00",
+      "trackedFiles": 330,
+      "packageVersion": "5.1.0",
+      "dependencies": {
+        "@1sat/actions": "0.0.212",
+        "@1sat/client": "0.0.51"
+      }
+    },
+    {
+      "path": "reference/1sat-ordinals-master/1sat-ordinals-master",
+      "repository": "https://github.com/BitcoinSchema/1sat-ordinals.git",
+      "branch": "master",
+      "commit": "e3cf3951fe66076c90f61466b7b25d5316d17f83",
+      "tree": "342dfad6600e4a39d6678987f46ee70a145b0496",
+      "committedAt": "2026-07-28T23:22:10-04:00",
+      "trackedFiles": 47
+    },
+    {
+      "path": "reference/1sat-sdk",
+      "repository": "https://github.com/b-open-io/1sat-sdk.git",
+      "branch": "master",
+      "commit": "8fee4fa5cbc39569e9429393b200802772e50b7d",
+      "tree": "d487fbd9ce9ab0c239d6097c43bc6d7293b9cd1d",
+      "committedAt": "2026-09-12T23:34:16-04:00",
+      "trackedFiles": 1127,
+      "packages": {
+        "@1sat/actions": "0.0.221",
+        "@1sat/client": "0.0.55"
+      }
+    },
+    {
+      "path": "reference/1sat-stack",
+      "repository": "https://github.com/b-open-io/1sat-stack.git",
+      "branch": "master",
+      "commit": "3d4062a1fffef1b10af5c9e97d5d22c1996c42fb",
+      "tree": "00eda5787e29e6bb7a90083c2438891efc796672",
+      "committedAt": "2026-09-12T22:42:09-04:00",
+      "trackedFiles": 502
+    }
+  ]
+}

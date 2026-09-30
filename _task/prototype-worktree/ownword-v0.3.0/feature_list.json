@@ -1,0 +1,799 @@
+{
+  "schemaVersion": 1,
+  "purpose": "完成 v0.3.0 Identity Artifact 高保真原型 A01–A09，以及用户授权的外观与体验修正。",
+  "lastUpdated": "2026-09-19",
+  "allowedStatuses": [
+    "not-started",
+    "in-progress",
+    "needs-review",
+    "blocked",
+    "done"
+  ],
+  "activeFeature": null,
+  "nextFeature": null,
+  "executionScope": "artifact-features",
+  "environment": {
+    "worktree": "ownword-prototype",
+    "sourceRepository": "designs/own-word-prototype-s2-astra-001",
+    "sourceRemote": "https://github.com/metanet4j/ownword-design-prototype.git",
+    "sourceRef": "origin/dev",
+    "baselineCommit": "006acbf3cb551bf3c5de68681420238667dab06d",
+    "branch": "codex/prototype-v0.3.0-artifact",
+    "prdVersion": "v0.3.0",
+    "prdSource": "_task/system-design/spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md",
+    "previewHost": "127.0.0.1",
+    "previewPort": 4313,
+    "previewLog": ".runtime/preview.log",
+    "designSystem": "react-spectrum-s2",
+    "designSystemNamespace": "ReactSpectrumS2_ad4872",
+    "restoredDesignSystem": "designs/react-spectrum-s2",
+    "designSystemRecovery": "基线 _ds 运行时消费副本；不包含完整生成工程",
+    "backend": "none; deterministic prototype fixtures only"
+  },
+  "features": [
+    {
+      "id": "H00",
+      "name": "设计审查与 harness 初始化",
+      "description": "完成设计审查、独立基线、S2 资源、启动入口和浏览器基线验证，准备后汇报。",
+      "dependencies": [],
+      "status": "needs-review",
+      "doneCriteria": [
+        "设计审查无未处理阻塞项，结论可追溯",
+        "基线与上一版最终交付一致，独立 worktree 和 S2 资源可用",
+        "Windows 与 Bash 启动入口可重复运行，端口冲突明确失败",
+        "基线正常与相关边界有截图和日志；Artifact 功能证据分别登记",
+        "提交本轮文件并向用户汇报，人工复核前保持 needs-review"
+      ],
+      "evidence": "evidence/environment-check.json；该记录说明初始化基线，功能当前状态见本清单 A01–A09。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review"
+    },
+    {
+      "id": "A01",
+      "name": "身份入口与 Artifact 工作台",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "H00"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-A",
+        "A01-B",
+        "A01-C"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/A01.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "a1738db940b3086a13dd3a62cf4a9d4780d2894c"
+    },
+    {
+      "id": "A02",
+      "name": "创建内容与预览",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A01"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A02-A",
+        "A02-B",
+        "X03"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/A02.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "14ae9568605f00eba4c7c3f837dc6d63817958fe"
+    },
+    {
+      "id": "A03",
+      "name": "Review、身份签名与创建",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A02"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A03-A",
+        "A03-B",
+        "A03-C",
+        "A03-D",
+        "A03-E",
+        "X04",
+        "X05"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/A03.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "93ed9ac19783b318a2852745da6dba2ba9e044dd"
+    },
+    {
+      "id": "A04",
+      "name": "Artifact 详情与 Proof",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A03"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A04-A",
+        "A04-B",
+        "A04-C",
+        "X04"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/A04.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "a6f84835947340c587969e6294461472239c82ca"
+    },
+    {
+      "id": "A05",
+      "name": "编号追踪与稳定状态",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A04"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A05-A",
+        "A05-B",
+        "A05-C",
+        "A05-D"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/A05.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "be76e6bf7982e7856d6edb84b2f50a9687fa81f6"
+    },
+    {
+      "id": "A06",
+      "name": "多 Artifact 与 Current 切换",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A04",
+        "A05"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A06-A",
+        "A06-B",
+        "X05"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/A06.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "9c80b5dcf7d23084555c1c504d618156fb52cb05"
+    },
+    {
+      "id": "A07",
+      "name": "Artifact 转移",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A06",
+        "A08"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A07-A",
+        "A07-B",
+        "A07-C",
+        "X05"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/A07.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "e26e3f0b83e3f451c4a24d569ff26bbeb465d128"
+    },
+    {
+      "id": "A08",
+      "name": "无效关联处理",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A06"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A08-A",
+        "A08-B",
+        "X05"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/A08.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "ad4647257dfbdc3dd9c397d13ebf79d901e6e25a"
+    },
+    {
+      "id": "A09",
+      "name": "数字 ID 精确查找",
+      "description": "行为以 PRD 对应章节和第 7 节制作映射为准，不在清单重复定义。",
+      "dependencies": [
+        "A01",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A09-A",
+        "A09-B",
+        "A09-C",
+        "A09-D",
+        "X01",
+        "X02",
+        "X03",
+        "X04",
+        "X05"
+      ],
+      "doneCriteria": [
+        "实现适用 PRD 行为及对应 BDD，记录逐项证据",
+        "正常与相关边界、受影响截图及浏览器日志已审阅",
+        "原型独立提交并交付复核，未复核时保持 needs-review"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/A09.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "1c7de427f153959012e7f4bd7e89e113443fdb4e"
+    },
+    {
+      "id": "R01",
+      "name": "移除默认装饰图案",
+      "description": "根据用户图案反馈，移除默认穹顶线条、Logo 大图和口号；数字 ID 与关联身份优先，默认内容改为简洁信息条。",
+      "dependencies": [
+        "A09"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A04-A",
+        "A04-C",
+        "X02"
+      ],
+      "doneCriteria": [
+        "共享默认内容展示不再绘制装饰图案，列表、详情与创建 Review 保持一致",
+        "详情默认内容不阻挡编号、关联身份与操作，上传图片仍完整预览",
+        "验证桌面正常页面、419px 手机详情及上传图片边界，记录截图与浏览器错误",
+        "提交原型和文档，交付用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R01.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "ad69e4a7ad160faba676ae40a77acee38e511cf8"
+    },
+    {
+      "id": "R02",
+      "name": "全面体验审查与修正",
+      "description": "实查 Artifact 工作台、详情、查找、创建、Review、关联、转移、异常恢复及共用导航；按用户反馈收敛视觉，修复可复现的交互与移动端问题。",
+      "dependencies": [
+        "R01"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-A",
+        "A02-A",
+        "A03-A",
+        "A04-A",
+        "A06-A",
+        "A07-A",
+        "A08-A",
+        "A09-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "审查桌面、平板和 390/320px 手机布局，含中英文与深色代表场景",
+        "问题有复现证据与修复结果；数字 ID、关联身份、主次操作和默认内容层次清晰",
+        "核心操作、错误恢复、键盘与弹窗检查通过，本轮发现问题全部关闭",
+        "每个完成的修正提交，报告与最终截图可追溯，模型、语法、token 及浏览器错误检查通过"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R02/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "c2b185a600dad3001ba4779e38317cdd6a273c7f"
+    },
+    {
+      "id": "R03",
+      "name": "统一收敛页面说明与编号样式",
+      "description": "按用户五条批注检查同类问题：删去重复小标题，辅助规则按需展示，统一纯数字编号，将模拟说明集中在演示面板。",
+      "dependencies": [
+        "R02"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A03-A",
+        "A04-A",
+        "A06-A",
+        "A07-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "确认及关联页面的重复说明已收敛，重要操作对象与影响仍可辨认",
+        "帮助入口支持悬浮、焦点、点击和 Escape，手机可用且无横向溢出",
+        "编号显示统一为纯数字，完整复制与兼容 # 查询保持有效",
+        "模型、受影响流程和截图检查通过，文档、证据与提交齐备"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R03/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "e4238ca40193e922312e6a00d0d0dd1e199a4bf6"
+    },
+    {
+      "id": "R04",
+      "name": "模块结构与身份页布局",
+      "description": "依据既有平行模块结构，调整身份摘要、模块下拉导航和 S2 中性色层次，审查同类无具体含义文案。",
+      "dependencies": [
+        "R03"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-A",
+        "A01-B",
+        "A08-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "身份、Artifact、内容各有独立工作区；身份页仅保留资料与紧凑数字标识",
+        "当前模块下拉支持键盘、外部关闭和移动端，切换仍执行未保存保护",
+        "中性边框与 S2 表面层次一致，当前状态与键盘焦点清晰",
+        "相关正常、边界及受影响截图验证通过，文档、证据与提交齐备"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R04/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "7d89750236ae42f1fe654943544705c1bc5ef6e6"
+    },
+    {
+      "id": "R05",
+      "name": "批注体验修正与关联资格",
+      "description": "处理用户 16 条具体批注，覆盖身份卡比例、通知、浮层、空状态、写入锁、结果页、详情及选择流程。",
+      "dependencies": [
+        "R04"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-B",
+        "A03-A",
+        "A04-A",
+        "A05-A",
+        "A06-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "16 条批注逐项有实现与验证说明",
+        "编号待确认或不可核实不能新增 Current，排序与筛选有真实区分",
+        "跨标签页仍防止覆盖但闲置身份页面不占用 Artifact 编辑锁",
+        "相关正常、边界、窄屏和键盘检查通过，设计文档及证据同步提交"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R05/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "19b24b4a9640ecf209ba74b51f5ce6db4224f8d7"
+    },
+    {
+      "id": "R06",
+      "name": "外观与语言入口精修",
+      "description": "按用户批注，以 S2 Contrast 图标与 ActionButton 改进头部偏好入口。",
+      "dependencies": [
+        "R05"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "使用现有 S2 图标和按钮，深浅色层次与展开态清晰",
+        "偏好开关、Escape 与 320px 触控范围验证通过，提交截图和状态"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R06/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "8e60a22a019d44b09dbdfa4606e8481d7c95278a"
+    },
+    {
+      "id": "R07",
+      "name": "My Artifact 设计原则审查修复",
+      "description": "修复已确认的信息层级、筛选语义、操作关系、移动端密度及内容和历史组织问题；核对 S2 来源边界。",
+      "dependencies": [
+        "R06"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-A",
+        "A04-A",
+        "A06-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "历史与资格不混用，当前编号突出，列表直接进入关联确认",
+        "编号复制和刷新贴近对象，关联操作位于关联区，铭文内容与持有及交易记录分组",
+        "历史显示有证据的时间和结束原因，旧数据不虚构记录",
+        "验证正常关联与待确认边界、移动端和键盘展开，保存截图、来源核对及检查证据"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R07/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "452a080b63b548c59be463ad709ffcb9115c14cf"
+    },
+    {
+      "id": "R08",
+      "name": "设计系统样式去重与按钮图标统一",
+      "description": "清理重复 CSS 入口、基础控件覆盖和同级失效规则，统一图标按钮及 S2 图标资产入口。",
+      "dependencies": [
+        "R07"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "设计系统仅加载单一 CSS 入口；页面不再另定义输入框及图标按钮外观",
+        "共用按钮保留 S2 variant、禁用和焦点；44px 点击区域集中适配",
+        "基础图标引用绑定 S2 资产，不手绘通用箭头或确认符号",
+        "桌面与窄屏检查、表单正常与错误状态及键盘验证通过，提交证据并记录封装限制"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R08/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "23e4d9d1fc05a4feb38650532f76f2d241da614d"
+    },
+    {
+      "id": "R09",
+      "name": "公开身份卡内容溢出修复",
+      "description": "修复身份卡固定比例与内容高度冲突，合并相应布局规则。",
+      "dependencies": [
+        "R08"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "桌面正反面内容均在卡面内，不与外部复制区域重叠",
+        "保持 PRD 的正反面独立高度；320px 与长文本边界不溢出",
+        "翻面、键盘操作及受影响截图验证通过，保存证据并提交"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R09/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "cb06773fcf67632dfb3cf66f15dd277a4bdc2e31"
+    },
+    {
+      "id": "R10",
+      "name": "Artifact 表单焦点与详情分组优化",
+      "description": "依据绑定 S2 修正输入焦点，帮助入口紧邻对象，详情改用 Tab 与内容卡片。",
+      "dependencies": [
+        "R09"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A04-A",
+        "A04-B",
+        "A07-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "鼠标输入采用中性聚焦边框，键盘可见焦点和错误状态保留",
+        "地址及转移帮助紧邻字段或标题，点击和键盘可用",
+        "详情四类信息以 Tab 切换，内容与操作完整，方向键和窄屏可用",
+        "启动及定向浏览器检查、截图、提交完成"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R10/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "fe5319d2a2b7577c340f52fcf36a700bded238fe"
+    },
+    {
+      "id": "R11",
+      "name": "统一当前身份资料",
+      "description": "修复全量设计评审第 1 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R10"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R11/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "0807cc5f74a145e929910573c67406a2bd626265"
+    },
+    {
+      "id": "R12",
+      "name": "区分待核实和空关联",
+      "description": "修复全量设计评审第 2 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R11"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R12/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "74be3bcb30b677801e3733e968e3e6aa46e97a13",
+      "commits": [
+        "85e636f",
+        "74be3bcb30b677801e3733e968e3e6aa46e97a13"
+      ]
+    },
+    {
+      "id": "R13",
+      "name": "发布校验反馈可见",
+      "description": "修复全量设计评审第 3 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R12"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R13/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "da1fb67"
+    },
+    {
+      "id": "R14",
+      "name": "按钱包阶段引导内容入口",
+      "description": "修复全量设计评审第 4 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R13"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R14/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "21069c1"
+    },
+    {
+      "id": "R15",
+      "name": "收紧手机编辑器头部",
+      "description": "修复全量设计评审第 5 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R14"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R15/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "a8ee02f"
+    },
+    {
+      "id": "R16",
+      "name": "明确复制控件名称",
+      "description": "修复全量设计评审第 6 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R15"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R16/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "eb48ad8"
+    },
+    {
+      "id": "R17",
+      "name": "统一标题选择控件",
+      "description": "修复全量设计评审第 7 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R16"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R17/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "d8319c9"
+    },
+    {
+      "id": "R18",
+      "name": "统一任务标题",
+      "description": "修复全量设计评审第 8 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R17"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R18/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "5651dcc",
+      "commits": [
+        "816efb5",
+        "5651dcc"
+      ]
+    },
+    {
+      "id": "R19",
+      "name": "关联筛选帮助就近布局",
+      "description": "修复全量设计评审第 9 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R18"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R19/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "808bc59"
+    },
+    {
+      "id": "R20",
+      "name": "修复列表摘要分词",
+      "description": "修复全量设计评审第 10 项；问题与验收引用全量设计评审-20260919-181000.md。",
+      "dependencies": [
+        "R19"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "按评审问题修复并验证正常场景与相关边界",
+        "截图、检查与独立提交齐备；保留用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R20/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "bc31951"
+    },
+    {
+      "id": "R21",
+      "name": "查找身份页面重新设计",
+      "description": "按用户两条批注收敛查询布局、输入提示、结果关系和反馈状态，移除演示快捷入口。",
+      "dependencies": [
+        "R20"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A09-A",
+        "A09-B",
+        "A09-C",
+        "A09-D",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "查询区宽度受控，标签、输入、提示及操作关联清晰；页面没有样例快捷按钮",
+        "关联身份、Artifact 及未找到、无关联、输入错误、服务异常状态层级清楚，精确查找逻辑保留",
+        "检查用户批注尺寸、手机窄屏、中英文深浅色代表场景及键盘，记录截图、日志和启动检查",
+        "原型及任务状态分别提交，等待用户视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R21/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "9aedd92b669e61ab2c2e495cf83893d21714a250"
+    }
+  ],
+  "designReview": {
+    "status": "passed-with-corrections",
+    "reviewer": "Codex，用户指定设计审查",
+    "source": "_task/system-design/spec/prd/v0.3.0/设计审查v0.3.0-20260918-225543.md",
+    "scope": "产品一致性、交互恢复、安全预览、模拟边界、制作映射和基线条件；不是用户视觉批准。"
+  },
+  "authorization": "用户批注授权重新设计查找身份页面，并质疑样例快捷入口；本轮收敛查询页及结果状态，移除页面样例按钮。",
+  "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
+  "fullDesignReview": {
+    "status": "completed-with-findings",
+    "report": "全量设计评审-20260919-181000.md",
+    "evidence": "evidence/review-20260919/verification.json",
+    "prototypeCommit": "fe5319d2a2b7577c340f52fcf36a700bded238fe",
+    "scope": "全量评审基线与优先级；用户随后授权修复，全部10项已实现并验证，待视觉复核。",
+    "resolutionStatus": "implemented-and-verified",
+    "resolutionReport": "设计评审修复验收-20260919-215551.md",
+    "fixedPrototypeCommit": "9e4f6dbbaeeb9806f97d2076d644885b24fdd148",
+    "resolutionEvidence": "ownword-prototype/evidence/artifact-v030/review-fixes/verification.json"
+  },
+  "finalVerification": "evidence/R21-init.txt",
+  "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md"
+}

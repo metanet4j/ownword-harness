@@ -1,9 +1,7 @@
 # 当前进展
 
-交付事项 design-content-v020 为 needs-review。内容原型及 R01–R05 调整已实现、定向验证并提交，等待用户复核。当前交付为全站输入控件样式统一。
+v0.3.0 查找身份页 R21 已重新设计并移除演示样例按钮，源码、验证与原型提交齐备，等待用户视觉复核。原型提交 9aedd92b669e61ab2c2e495cf83893d21714a250，无进行中实现事项。
 
-当前结果、提交与证据以[任务清单](../prototype-worktree/ownword-v0.2.0/feature_list.json)为准。从[任务 AGENTS.md](../prototype-worktree/ownword-v0.2.0/AGENTS.md)续接，运行 ./init.sh。
+状态与验收只查[版本任务清单](../prototype-worktree/ownword-v0.3.0/feature_list.json)和[R21 验证记录](../prototype-worktree/ownword-v0.3.0/ownword-prototype/evidence/artifact-v030/R21/verification.json)。本轮为页面布局和表达调整，产品规则仍以核心认知及PRD为准。
 
-预览 http://127.0.0.1:4312/，日志位于任务 .runtime/preview.log。旧版 4311 保留；签名、发布和 Proof 为模拟。
-
-唯一下一步：用户刷新，复核身份表单、链接弹窗与内容编辑页面的输入样式。v0.2.0 保留任务分支，尚未合并或推送；根仓库原有技能改动不纳入任务提交。
+唯一下一步：用户复核查询页。预览 http://127.0.0.1:4313/?design=find#/find 保留，测试会话已关闭；未合并或推送。续接先读版本 harness 的 AGENTS.md 与状态文件。
