@@ -75,17 +75,20 @@
 可行性依据：逐局部 TS/Java 双侧在窗口 v2 已 107/108 通过、0 失败；缺的只是“把它们串起来产出一份同源全量证据”。
 代价：新增一个 driver（约百余行），但**全部复用已验证组件**，比修 `capture-full-dispatch.cjs` 的装载机制更可控。
 
-**当前卡点：全量运行的 TS 分派机制未跑通（已派专代理修）**
+**全量 TS 证据已完备，e2e 正在跑（20260901 06:05）——卡点解除**
 
-- v10（`.cache/evidence/full-run-10-20260901/`）里 **jest 133/133 文件全绿、0 失败** ✓，但阶段仍失败，`ts-run.json.log` 给出五类问题：
-  1. 有原文件没有可用探针或探针装载失败（`Chronicle.test.ts`、`NormativeVectors.test.ts` 等）；
-  2. 原始轨迹缺失或为空（约 15 个局部：`broadcaster`、`chronicle`、`lrshiftnum`、`normative-vectors`、`spend-additional`、`spend-chronicle-vector`、`spend-codeseparator` …）；
-  3. raw 型转换器未全部成功（数十个局部）；
-  4. **本轮输入缺少 24028 个计划样本**（计划 38092 → 缺 63%）；
-  5. 断言转换失败：`原 TS matcher 序号不连续`。
-- **重要判断**：**逐局部采集机制完全可用**（窗口 v2：108 项／107 通过／0 失败，106 局部同源），失败的只是**单次全量分派**（`capture-full-dispatch.cjs` + `run-full-ts-capture.py`）——问题在探针装载与轨迹/转换环节，不在原测试，也不在逐局部适配器。
-- 已派专代理修该机制，任务书要点：先按单文件自测（`run-full-ts-capture.py --files ... --allow-unresolved`）逐段定位（探针装载→轨迹→emit），对照**已跑通的单局部适配器**（`capture-spend-local.py`／`capture-evidence-local.py` 等）找差异，只改任务侧工具；`--allow-unresolved` 不得出现在 `fullRun.tsCommand` 里。
-- **cron 条目已删除**（避免无人值守空转）；v6–v10 的运行目录均为死胡同，保留作参考。
+路径 B（逐局部串行采集后合并）已交付并验证，两条证据全过：
+
+1. **154/154 局部通过**（`.cache/evidence/ts-serial-full-20260901`，`--resume` 补齐 `utils-property`／`auth-fetch-property` 后 `--verify-only` 全量复核）：
+   `localsFailed=[]`、**`filesCovered 133/133`**、**`casesCovered 5329/5329`**、`inputsWritten 38092`、`assertionsWritten 56744`、`missingCases=0`、`missingSamples=0`、`problems=[]`；形态分布 standard 107／adapter 27／direct 18／vector 2。
+2. **driver 内置 `compare_ts` 自检通过**（与最终门禁同一函数）：`{"files": 133, "cases": 5329}`、`jestFiles 133`、`jestTests 5329`；`crossCheck = {localsChecked: 117, skippedCustomConversion: 7, failures: []}`。
+   顺带修掉真缺口：旧管线 `hex-bn` 用 `--kind both` 产两份 Jest 报告，而 `capture-legacy-side.py` 只在 Java 分支合并 → TS 分支漏合，`BigNumber.constructor.test.ts` 进不了报告；driver 现收全部 `ts-jest*.json` 按文件去重合并（未改该适配器）。
+
+**配置切换已应用**（`full-evidence-locals.json` 仅 1 行）：`fullRun.tsCommand[1]`：`run-full-ts-capture.py` → **`run-full-ts-serial.py`**；`locals`／`retired`／`tsReports`／`javaCommand`／`javaReports` 逐字段未变；`full-evidence-preflight.py` 报 `readyForFullCapture=true`，`full-evidence-run.py::frozen()` 通过（133 文件／5329 用例，`javaRevision 13f3416…` = 窗口 v2 同源）。
+
+**e2e 现状**：cron 于 02:00:01 拉起 `full-evidence-run.py run --run-dir .cache/evidence/full-run-11-20260901`（日志 `.cache/evidence/full-run-11.log`，90 分钟档）；TS 阶段已过 68/154，`input-plan.json` 与登记计划 5329 用例逐项同序相同。预计 TS ~50 分钟（含 `aesgcm-man` 实测 2524.5 秒）+ Java 一次无过滤 `clean test`；若被上限终止，其 manifest 即 180 分钟档所需的真实超时证据。
+
+**诚实性口径（写进结项说明）**：全量运行的 TS 侧是**逐局部串行真实采集后合并**（同一运行目录、同一来源 `13f34162199d`、逐用例双侧同输入），**不是**单进程单次运行；`fullRun.tsCommand` 如实记录为 `run-full-ts-serial.py`。
 
 **接手动作（按序）**
 
