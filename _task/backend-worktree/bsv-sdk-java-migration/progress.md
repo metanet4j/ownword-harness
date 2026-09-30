@@ -2,9 +2,15 @@
 
 ## 执行位置
 
-权威任务状态见 [feature_list.json](feature_list.json)：43 个执行事项中 **28 个实现事项的输入计划已 100% 冻结**（覆盖 5328／5329 个原用例，仅 `AESGCM.man` 的 1 例待其 66 分钟冻结运行登记），事项排期状态仍是 24 `done`／4 `in-progress`／15 `not-started` —— **状态翻转统一放在最终窗口之后**，因为 `taskAcceptance` 要求所有局部在同一 Java 来源下重采。
+权威任务状态见 [feature_list.json](feature_list.json)：43 个执行事项中 **31 个 `done`、0 个 `in-progress`、12 个未结**。
 
-当前证据盘子：`full-evidence-locals.json` 登记 **153 个局部**，其中 **117 个已有运行产物**；`full-run-probes.json` 全量分派表 **151 局部／131 原文件／149 探针／113 环境变量，`unresolved=0`**、无探针原文件仅 2 个（均在收尾）。证据一致性抽检：111 份 `parity.json` 全部自洽。
+**未结 12 项**：4 个实现事项（`script-spend`、`script-vectors`、`transaction-complete`、`auth-transport`，均含**专用局部**，不走标准双侧流程）+ 8 个总门禁（`api-contract`、`test-mapping`、`input-replay`、`result-capture`、`evidence-gate`、`map`、`core-modules`、`sdk-acceptance`）。它们的验收由**单次双侧全量运行 + `audit-tests.py check` + `audit-api.cjs check`** 决定。
+
+**证据层现状**：输入计划 **5329／5329 = 100%**；`full-evidence-preflight.py` 报 `readyForFullCapture=true`、`planErrors=[]`、`completePlanError` 空。统一窗口 v2（`recapture-all.sh final2-20260930`）**108 项处理、107 项篡改门禁通过、0 失败**，汇总「全部局部重采与篡改门禁通过」；106 个局部同为来源 `13f34162199d`（等于当前工作树）。**14 个事项**已有任务级 `task-parity.json`（合计约 1312 例，缺失与未比较计数全 0）并写入 `taskAcceptance`。
+
+**来源冻结**：SDK 仓 `8b8e13d`（`src/main` 零改动，仅 4 个测试文件：`SimplifiedFetchTransportAdditionalInputReplay`／`SimplifiedFetchTransportAdditionalTest`／`ChronicleOpcodesInputReplay`／`ChronicleOpcodesTest`）。登记 153 个局部、118 个有运行产物；全量分派表 153 局部／133 原文件／151 探针／115 环境变量，`unresolved=0`、无探针原文件 0。
+
+**正在跑**：单次双侧全量运行 v6（90 分钟档，`.cache/evidence/full-run-6-20260930/`）。整套约 2 小时；若被 90 分钟上限终止，按协议用 `--timeout-minutes 180 --retry-after .cache/evidence/full-run-6-20260930/full-run.json` 重跑。
 
 ## 迁移中发现并修复的生产缺陷（均带独立回归）
 
