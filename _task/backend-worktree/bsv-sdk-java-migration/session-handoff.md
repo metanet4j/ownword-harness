@@ -155,6 +155,10 @@
 
 **工具速查**：`lock.sh`（所有 Maven／采集前置）、`recapture-all.sh`（逐局部重采 + 篡改门禁）、`final-window-guard.sh`（开窗六项守卫）、`close-items.sh`（逐事项任务级对照）、`full-evidence-run.py run|verify`（单次全量）、`audit-tests.py check`、`audit-api.cjs check`、`full-evidence-preflight.py`。
 
+**零冲突约定（20260901 11:50 已批准）**：A1 只新建自包含的 `java-vector-inputs.py`，预验证走等价外层包装，**暂不动** `run-full-java-capture.py`；等 A2 停笔后由 A1 一方统一加两行接线（设 `MIGRATION_VECTOR_JAVA_INPUTS` + Maven 后调该脚本）。A2 若发现必须在同一文件改，须先停下问主代理。
+
+**B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
+
 ### full-run-14 精确读数与三项收尾分工（20260901 11:40，以此为准）
 
 代理用流式统计更正了我此前的读数（`evidence-bundle.py::same()` 只打印缺失集合的前 4 个做示例，所以“4 个用例”是假象）：
