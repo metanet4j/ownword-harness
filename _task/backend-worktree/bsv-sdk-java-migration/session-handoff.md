@@ -13,13 +13,17 @@
 **v8 进度（21:30）**：11 分钟内即 **127 文件 PASS／0 FAIL**（远快于上一轮同点的 132 文件/55 分钟），随后停在重型文件上（jest 自 21:03 持续 111% CPU，疑为 66 分钟的 `AESGCM.man`）。若总时长仍 <90 分钟，则**无需** 180 分钟档，v8 会直接跑完。
 
 - **v9 存活确认（21:41）**：cron 拉起后已跑 7 分 22 秒、jest **127 文件 PASS／0 FAIL**，进程父级为 cron，会话空闲清理不再影响它 ✓。
-**正在跑：单次双侧全量运行 v9（90 分钟档，由 cron 拉起）**
+**正在跑：单次双侧全量运行 v10（90 分钟档，由 cron 拉起）**
 
-- 目录 `.cache/evidence/full-run-9-20260901/`，日志 `.cache/evidence/full-run-9.log`
-- 启动方式（**必须这样跑**）：`.cache/run-full-detached.sh` + crontab 条目 `*/2 * * * * /bin/bash .../.cache/run-full-detached.sh`（幂等：已完成或已在跑则直接退出）
-- **运维教训（两轮踩坑）**：会话空闲会**清理交互进程树**——`nohup ... &`（v6）与 `setsid nohup ... & disown`（v8）**都被杀掉**，manifest 停在中途、没有终态，导致 180 分钟协议无法满足。只有 **cron 拉起**的进程能活过会话空闲 ✓。
-- 收尾后**务必删除该 crontab 条目**（`crontab -r` 或去掉那一行），避免每次开机空转。
-- 整套约 2 小时；若被 90 分钟上限终止即为**预期**（且这正是解锁 180 分钟档所需的证据）。届时把 `run-full-detached.sh` 里的 `RUN` 换成新目录、命令行加 `--timeout-minutes 180 --retry-after .cache/evidence/full-run-9-20260901/full-run.json` 再交给 cron 即可。
+- 目录 `.cache/evidence/full-run-10-20260901/`，日志 `.cache/evidence/full-run-10.log`
+- 启动方式：`.cache/run-full-detached.sh` + crontab `*/2 * * * * /bin/bash .../.cache/run-full-detached.sh`（**幂等**：manifest 存在且不是 `"status": "running"` 即退出；已在跑也退出）
+- **运维教训 1**：会话空闲会清理交互进程树 —— `nohup ... &`（v6）与 `setsid nohup ... & disown`（v8）都被杀，只有 **cron 拉起**能活过空闲 ✓。
+- **运维教训 2**：v9 的 TS jest **133/133 全绿**，但阶段在最后写输入行时崩了：
+  `UnicodeEncodeError: 'utf-8' codec can't encode character '\ud800' … surrogates not allowed` —— **JS 字符串可含未配对代理字符**，Python 直接以 UTF-8 写会抛错。
+  修法：`run-full-ts-capture.py` 的 `write_rows` 改用 `ensure_ascii=True`（转义成 `\uXXXX`，文件纯 ASCII，`json.loads` 往返一致；已用含 `\ud800` 的行验证）。
+  注意：**两侧写入器必须对称**，`run-full-java-capture.py` 的行写入也已统一为 `ensure_ascii=True`。
+- **运维教训 3**：cron 守卫早期版本只认大写 `PASS|FAIL`，而 manifest 实际写的是小写 `failed`，导致二次启动撞已存在目录（`[Errno 17] File exists`）——现守卫改为「非 running 即视为终态」。
+- 收尾后**删除 crontab 条目**。v10 预计 ~40 分钟跑完 TS 阶段、再跑 Java 阶段；若总时长 <90 分钟则**直接完成**，否则被上限终止并写下 90 分钟超时 manifest，供 180 分钟档重跑引用。
 
 **接手动作（按序）**
 

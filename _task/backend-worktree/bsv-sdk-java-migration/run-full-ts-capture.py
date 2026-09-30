@@ -45,8 +45,11 @@ def read_rows(path):
 
 
 def write_rows(path, rows):
+    # ensure_ascii=True：JS 字符串可含未配对代理字符（\ud800 等），直接以 UTF-8 写会抛
+    # UnicodeEncodeError；转义成 \uXXXX 后文件是纯 ASCII，任何消费者都能读回同一字符串。
     Path(path).parent.mkdir(parents=True, exist_ok=True)
-    Path(path).write_text(''.join(json.dumps(row, ensure_ascii=False) + '\n' for row in rows))
+    Path(path).write_text(''.join(json.dumps(row, ensure_ascii=True) + '\n' for row in rows),
+                          encoding='utf-8')
 
 
 def build_env(options):
