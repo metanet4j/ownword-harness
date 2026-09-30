@@ -21,25 +21,36 @@ source_revision = common.source_revision
 SDK = common.SDK
 FILE = 'src/transaction/__tests/Transaction.test.ts'
 CLASS = 'com.metanet4j.bsv.transaction.TransactionCompleteVectorsTest'
+# 该站点的唯一调用点在原测试的 sighash 向量用例体里（`scriptFromLegacyData(scriptbuf)` 无条件执行，
+# 位于 Transaction.fromBinary/TransactionSignature.format 之前），所以只有这些用例把 925 行循环纳入
+# 本局部的结构覆盖；站点窗口据此从 909-914／995-1066 扩展到 925 行。
+LOOP_SITE = FILE + ':925:7:loop'
 
 
 def prepare(folder):
     catalog, mapping = read(TASK / 'module-tests.json'), read(TASK / 'test-map.json')
     selected = [case for case in mapping['cases'] if any(java['className'] == CLASS for java in case['java'])]
     audit.require(len(selected) == 659, '固定 Transaction 向量注册数变化')
+    loops = [case for case in selected if case['java'][0]['name'].startswith('sighashVector')]
+    audit.require(len(loops) == 500, '固定 sighash 向量用例数变化')
     ids = {case['id'] for case in selected}
     source = next(file for file in catalog['files'] if file['path'] == FILE)
+    audit.require(LOOP_SITE in {site['id'] for site in source['sites'] if site['kind'] == 'loop'},
+                  '固定 Transaction 逐字节解析循环站点变化')
     local_file = dict(source, cases=[case for case in source['cases'] if case['id'] in ids],
                       sites=[site for site in source['sites'] if 909 <= site['line'] <= 914
-                             or 995 <= site['line'] <= 1066])
+                             or site['id'] == LOOP_SITE or 995 <= site['line'] <= 1066])
     local_catalog = dict(catalog, files=[local_file], partialImplementationOnly=True)
     sites = {site['id'] for site in local_file['sites']}
     local_mapping = dict(mapping, cases=selected, siteReviews=[
         dict(review, caseIds=[key for key in review['caseIds'] if key in ids])
         for review in mapping['siteReviews'] if review['id'] in sites])
-    plan = {case['id']: {'sampleIds': ['input#1', 'input#2'] if case['java'][0]['name'].startswith('sighashVector')
-             else ['input#1'], 'assertionIds': case['assertionIds'],
-             'assertionSites': {identity: identity for identity in case['assertionIds']}, 'loopSamples': {}}
+    samples = {case['id']: ['input#1', 'input#2'] if case['java'][0]['name'].startswith('sighashVector')
+               else ['input#1'] for case in selected}
+    covered = {case['id'] for case in loops}
+    plan = {case['id']: {'sampleIds': samples[case['id']], 'assertionIds': case['assertionIds'],
+             'assertionSites': {identity: identity for identity in case['assertionIds']},
+             'loopSamples': {LOOP_SITE: samples[case['id']]} if case['id'] in covered else {}}
             for case in selected}
     preflight.validate_subset(catalog, mapping, local_catalog, local_mapping, plan)
     folder.mkdir(parents=True, exist_ok=False)

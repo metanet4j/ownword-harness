@@ -73,6 +73,8 @@ def main():
     parser.add_argument('--replay', type=Path, required=True)
     parser.add_argument('--report', type=Path, action='append', required=True)
     args = parser.parse_args()
+    # 标准 recapture 按登记表原样传相对路径；Java 侧 CWD 是模块目录，必须绝对化。
+    args.replay = args.replay.resolve()
     if args.side != os.environ.get('EVIDENCE_SIDE'):
         parser.error('capture 侧别与运行环境不同')
     if args.side == 'java':

@@ -19,9 +19,17 @@ def main():
     parser.add_argument('side', choices=('ts', 'java'))
     parser.add_argument('clean', nargs='?')
     parser.add_argument('test', nargs='?')
-    for name in ('catalog', 'mapping', 'report', 'replay'):
-        parser.add_argument('--' + name, type=Path, required=True)
+    parser.add_argument('--report', type=Path, required=True)
+    parser.add_argument('--replay', type=Path, required=True)
+    # 标准 recapture 流程只传 --replay/--report；清单与映射按约定与固定语料同目录派生。
+    for name in ('catalog', 'mapping'):
+        parser.add_argument('--' + name, type=Path, default=None)
     args = parser.parse_args()
+    for name in ('catalog', 'mapping'):
+        value = getattr(args, name) or args.replay.resolve().parent / (name + '.json')
+        if not value.exists():
+            parser.error(f'缺少 --{name}，且同目录派生不存在：{value}')
+        setattr(args, name, value)
     if args.side != os.environ.get('EVIDENCE_SIDE') or not os.environ.get('EVIDENCE_RUN_ID'):
         parser.error('缺少本轮 capture 侧别或 runId')
     if args.side == 'java' and (args.clean, args.test) != ('clean', 'test'):
@@ -30,8 +38,9 @@ def main():
         parser.error('TS DRBG 不接受 Java 阶段参数')
     report = args.report.resolve()
     report.parent.mkdir(parents=True, exist_ok=True)
-    raw_inputs = report.parent / 'inputs.raw.jsonl'
-    raw_assertions = report.parent / 'assertions.raw.jsonl'
+    # 两侧共用同一运行目录：原始轨迹按侧别命名，否则 Java 侧会追加到 TS 轨迹后面。
+    raw_inputs = report.parent / f'{args.side}-inputs.raw.jsonl'
+    raw_assertions = report.parent / f'{args.side}-assertions.raw.jsonl'
     if args.side == 'java':
         command = [str(TASK / 'mvn.sh'), '-f', str(TASK / 'metanet4j-bsv-sdk/pom.xml'),
                    'clean', 'test', '-Dtest=' + JAVA_CLASS,
@@ -76,7 +85,7 @@ def collect_inputs(args, raw_inputs):
 def convert_assertions(args, raw_assertions):
     # 固定 Jest toThrow()（任意异常）与 Java assertThrowsAny 都以空实参记录；
     # 统一按类型化 undefined 表示“无期望”，两端一致；原始轨迹保持原样。
-    normalized = raw_assertions.with_name('assertions.normalized.jsonl')
+    normalized = raw_assertions.with_name(raw_assertions.stem + '.normalized.jsonl')
     with normalized.open('w') as stream:
         for line in raw_assertions.read_text().splitlines():
             row = json.loads(line)

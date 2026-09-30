@@ -66,6 +66,14 @@ def samples(entry, raw):
         grouped[case_id].append({'sampleId': f"{row['method']}-{row['sequence']:02d}",
                                  'value': {'method': row['method'], 'args': row['args'], 'result': row['result']}})
     require(set(grouped) == set(cases), '固定 TS 原用例未全部触达公开入口：' + entry['file'])
+    # 登记在案的“Java 不可复现样本”：只在该局部显式登记时剔除，且必须精确命中，
+    # 避免样本编号变化后静默丢掉别的入口。
+    for case_id, sample_ids in (entry.get('unmirrorable_samples') or {}).items():
+        require(case_id in grouped, '不可复现样本的用例不在本轮范围：' + case_id)
+        before = len(grouped[case_id])
+        grouped[case_id] = [item for item in grouped[case_id] if item['sampleId'] not in sample_ids]
+        require(len(grouped[case_id]) == before - len(sample_ids),
+                '不可复现样本不存在或编号不符：' + case_id)
     return catalog, mapping, mapped, grouped, identities
 
 

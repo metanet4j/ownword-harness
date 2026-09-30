@@ -77,6 +77,8 @@ def fragment_from_plan(catalog, mapping, plan):
     ids = set(plan)
     sites = {site for row in plan.values() for site in row['assertionSites'].values()}
     sites.update(site for row in plan.values() for site in row.get('loopSamples', {}))
+    # 恒假哨兵等已证明的未执行站点同样属于计划，投影清单必须保留它们。
+    sites.update(site for row in plan.values() for site in row.get('unexecutedSites', {}))
     sites.update(review['id'] for review in mapping['siteReviews']
                  if review['caseIds'] and set(review['caseIds']) <= ids)
     files = [dict(file, cases=[case for case in file['cases'] if case['id'] in ids],

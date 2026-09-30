@@ -3,7 +3,8 @@
 
 用法：
     python3 register-local.py --name live-policy --catalog <catalog.json> --mapping <mapping.json> \
-        --input-plan <input-plan.json> --capture <capture-*-side.py> [--replay <replay.jsonl>]
+        --input-plan <input-plan.json> --capture <capture-*-side.py> [--replay <replay.jsonl>] \
+        [--capture-kind specialized-local]
 """
 import argparse
 import fcntl
@@ -21,11 +22,19 @@ def main():
     parser.add_argument('--catalog', required=True)
     parser.add_argument('--mapping', required=True)
     parser.add_argument('--input-plan', required=True)
-    parser.add_argument('--capture', required=True)
+    parser.add_argument('--capture', help='标准双侧采集适配器；专用局部没有采集适配器，可省略')
+    parser.add_argument('--capture-kind', choices=('specialized-local',),
+                        help='专用局部只登记结构计划，不参与标准双侧来源校验')
     parser.add_argument('--replay')
     options = parser.parse_args()
+    if not options.capture and options.capture_kind != 'specialized-local':
+        parser.error('缺少 --capture：标准局部必须登记采集适配器')
     entry = {'name': options.name, 'catalog': options.catalog, 'mapping': options.mapping,
-             'input_plan': options.input_plan, 'capture': options.capture}
+             'input_plan': options.input_plan}
+    if options.capture:
+        entry['capture'] = options.capture
+    if options.capture_kind:
+        entry['captureKind'] = options.capture_kind
     if options.replay:
         entry['replay'] = options.replay
     for key in ('catalog', 'mapping', 'input_plan', 'replay'):

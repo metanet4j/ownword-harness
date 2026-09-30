@@ -40,17 +40,40 @@ function thrown (error) {
 function describeHeaders (headers) {
   return Object.entries(headers).map(([key, value]) => [String(key).toLowerCase(), String(value)])
 }
-function describeBody (body) {
+// JSON 对象键序不是原测试的断言对象（原用例把 auth 消息体 JSON.parse 后再比较）；
+// 两侧统一按排序键重新序列化后比较，字段与值仍逐项严格比较。
+function canonicalJson (text) {
+  try {
+    return JSON.stringify(sortKeys(JSON.parse(text)))
+  } catch (error) {
+    return text
+  }
+}
+function sortKeys (value) {
+  if (Array.isArray(value)) return value.map(sortKeys)
+  if (value !== null && typeof value === 'object') {
+    const out = {}
+    for (const key of Object.keys(value).sort()) out[key] = sortKeys(value[key])
+    return out
+  }
+  return value
+}
+function describeBody (body, headers) {
   if (body === undefined) return { type: 'undefined' }
   if (body === null) return { type: 'null' }
-  if (typeof body === 'string') return { type: 'string', value: body }
+  if (typeof body === 'string') {
+    const contentType = headers.find(([key]) => key === 'content-type')
+    const json = contentType !== undefined && String(contentType[1]).includes('application/json')
+    return { type: 'string', value: json ? canonicalJson(body) : body }
+  }
   if (body instanceof Uint8Array) return { type: 'array', value: Array.from(body, byte => byte & 0xff) }
   return { type: 'string', value: String(body) }
 }
 function describeOptions (options) {
+  const headers = describeHeaders(options && options.headers ? options.headers : {})
   return { method: options && options.method !== undefined ? String(options.method) : null,
-    headers: describeHeaders(options && options.headers ? options.headers : {}),
-    body: describeBody(options ? options.body : undefined) }
+    headers,
+    body: describeBody(options ? options.body : undefined, headers) }
 }
 // 原测试直接调用的解析入口：method／urlPostfix／headers 逐值比较，body 按原始字节比较。
 function describeDeserialized (result) {

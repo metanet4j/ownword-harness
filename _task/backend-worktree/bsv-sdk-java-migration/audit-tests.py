@@ -231,12 +231,153 @@ def validate_semantic_observations(case_id, expected, rows):
                     f'随机源长度断言与逐字节断言不来自同一数组：{case_id}')
 
 
+# 恒假哨兵：`try` 块内紧跟一次必然抛错的调用之后的 `expect(<字面量>).toBe(<字面量的逻辑反面>)`。
+# 它在该用例的每个冻结样本里都不可达；只有形态、逐样本异常观测与 catch 断言三件事同时成立才允许豁免。
+UNREACHABLE_RULE = 'unreachable-guard-after-throw-v1'
+UNREACHABLE_LITERALS = {('true', 'false'), ('false', 'true')}
+# Jest/JUnit 断言失败也是“异常”，不能用来冒充被调用方抛出的错误。
+ASSERTION_ERROR_NAMES = frozenset({'JestAssertionError', 'AssertionError', 'AssertionFailedError'})
+TRY_OPEN = re.compile(r'try\s*\{')
+CATCH_OPEN = re.compile(r'\}\s*catch\s*\([A-Za-z_$][\w$]*\)\s*\{')
+SENTINEL_CALL = re.compile(r'expect\((?P<left>[^()]*)\)\.toBe\((?P<right>[^()]*)\)')
+ASSERTION_CALL = re.compile(r'expect\([^()]*\)\.(?:not\.)?[A-Za-z_$][\w$]*\([^()]*\)')
+# 紧邻哨兵之前的单行调用：可选 await、可选 `const x = `，被调用者是普通标识符，不能是 expect 断言。
+GUARD_CALL = re.compile(r'(?:await\s+)?(?:(?:const|let|var)\s+[A-Za-z_$][\w$]*\s*=\s*)?'
+                        r'(?P<callee>[A-Za-z_$][\w$]*)\([^()]*\)')
+
+
+def indent_of(text):
+    return len(text) - len(text.lstrip())
+
+
+def frozen_source_lines(catalog, source, label):
+    """按冻结清单的路径与摘要读取原测试源码行；路径或摘要不符一律拒绝。"""
+    require(catalog.get('upstreamCommit') == SEMANTIC_UPSTREAM
+            and isinstance(source.get('path'), str) and source['path'].endswith('.test.ts')
+            and isinstance(source.get('sha256'), str)
+            and bool(re.fullmatch(r'[0-9a-f]{64}', source['sha256'])), f'{label}与固定上游源码不符')
+    config = read(TASK / 'workspace.json')['upstream']
+    path = TASK.parents[2] / config['path'] / config['packagePath'] / source['path']
+    require(path.is_file() and digest(path) == source['sha256'], f'{label}的冻结源码摘要不符')
+    return path.read_text().splitlines()
+
+
+def next_code_line(lines, number):
+    """number 之后（含 number）的第一条代码行号；注释与空行不算。"""
+    while number <= len(lines) and (not lines[number - 1].strip()
+                                    or lines[number - 1].lstrip().startswith('//')):
+        number += 1
+    return number
+
+
+def unreachable_guard_shape(path, lines, site, assertion_sites):
+    """解析恒假哨兵的冻结源码形态；任何一处不符返回 None。
+
+    逐字要求：站点行列处是 `expect(<字面量>).toBe(<逻辑反面>)`；紧邻其前是同块内一次
+    单行调用（不是 expect 断言）；两者同处一个 `try {` 块；紧随其后是它的 `} catch (...) {`，
+    且 catch 的第一条语句就是本文件的冻结断言站点。
+    """
+    line, column = site.get('line'), site.get('column')
+    if not (isinstance(line, int) and isinstance(column, int) and 2 <= line < len(lines)):
+        return None
+    text = lines[line - 1]
+    if not (1 <= column <= len(text)) or text[:column - 1].strip():
+        return None
+    sentinel = SENTINEL_CALL.fullmatch(text[column - 1:].strip())
+    if sentinel is None or (sentinel['left'], sentinel['right']) not in UNREACHABLE_LITERALS:
+        return None
+    indent = indent_of(text)
+    guard_text = lines[line - 2]
+    guard = GUARD_CALL.fullmatch(guard_text.strip())
+    if guard is None or guard['callee'] == 'expect' or indent_of(guard_text) < indent:
+        return None
+    index = line - 2
+    while index >= 1:
+        above = lines[index - 1]
+        if not above.strip() or above.lstrip().startswith('//') or indent_of(above) >= indent:
+            index -= 1
+            continue
+        break
+    if index < 1 or TRY_OPEN.fullmatch(lines[index - 1].strip()) is None:
+        return None
+    catch_line = next_code_line(lines, line + 1)
+    if catch_line > len(lines) or CATCH_OPEN.fullmatch(lines[catch_line - 1].strip()) is None:
+        return None
+    assertion_line = next_code_line(lines, catch_line + 1)
+    if assertion_line > len(lines):
+        return None
+    assertion_text = lines[assertion_line - 1]
+    if indent_of(assertion_text) <= indent_of(lines[catch_line - 1]) \
+            or ASSERTION_CALL.fullmatch(assertion_text.strip()) is None:
+        return None
+    catch_site = f'{path}:{assertion_line}:{assertion_text.index("expect") + 1}:assertion'
+    if catch_site not in assertion_sites:
+        return None
+    return {'guardSiteId': f'{path}:{line - 1}:{guard_text.index(guard["callee"]) + 1}:call',
+            'catchSiteId': catch_site}
+
+
+def validate_unreachable_plan(catalog, case_id, source, expected):
+    """恒假哨兵豁免的计划侧校验：形态、调用站点、实际执行断言与样本归属缺一不可。"""
+    lines = frozen_source_lines(catalog, source, f'恒假哨兵规则与固定上游源码不符：{case_id}')
+    sites = {site['id']: site for site in source['sites'] if site['kind'] == 'assertion'}
+    shapes, sample_ids = {}, set()
+    for site_id, proof in sorted(expected['unexecutedSites'].items()):
+        require(site_id in sites, f'未执行站点不是本文件的冻结断言站点：{case_id} / {site_id}')
+        require(isinstance(proof, dict) and set(proof) == {'ruleId', 'guardSiteId', 'sampleId'}
+                and proof['ruleId'] == UNREACHABLE_RULE,
+                f'恒假哨兵豁免必须绑定规则、紧邻调用站点与实际样本：{case_id} / {site_id}')
+        shape = unreachable_guard_shape(source['path'], lines, sites[site_id], sites)
+        require(shape is not None, f'站点不是 try 内紧跟调用之后的恒假哨兵，不能豁免：{case_id} / {site_id}')
+        require(proof['guardSiteId'] == shape['guardSiteId'],
+                f'恒假哨兵豁免必须引用哨兵之前那次调用的站点：{case_id} / {site_id}')
+        require(proof['sampleId'] in expected['sampleIds'],
+                f'恒假哨兵豁免样本不属于该用例：{case_id} / {site_id}')
+        shapes[site_id] = shape
+        sample_ids.add(proof['sampleId'])
+    catches = {shape['catchSiteId'] for shape in shapes.values()}
+    require(len(catches) == 1 and set(expected['assertionSites'].values()) == catches,
+            f'恒假哨兵用例实际执行的断言必须就是同一 catch 块里的那条：{case_id}')
+    require(len(sample_ids) == 1, f'同一用例的恒假哨兵必须引用同一份样本观测：{case_id}')
+    # 循环体每次迭代都会执行 catch 断言，但个别样本可能在哨兵之前就更早抛错（探针不再记录该次调用），
+    # 因此只要求“每个冻结样本至少对应一次 catch 断言观测”，逐样本的异常由观测侧核对。
+    require(len(expected['assertionIds']) >= len(expected['sampleIds']),
+            f'恒假哨兵豁免要求每个冻结样本都有对应的 catch 断言观测：{case_id}')
+    return set(expected['unexecutedSites'])
+
+
+def validate_unreachable_observations(case_id, expected, samples, rows):
+    """恒假哨兵豁免的观测侧校验：每个冻结样本都必须留下一次真实异常记录。"""
+    total = len(expected['sampleIds'])
+    sites = set(expected['assertionSites'].values())
+    require(len(sites) == 1, f'恒假哨兵用例只能执行同一 catch 断言：{case_id}')
+    site = next(iter(sites))
+    # 每个冻结样本都必须在 catch 断言上留下一次异常观测；只查一个样本或漏掉迭代一律拒绝。
+    require(len(samples) == total and len(rows) >= total,
+            f'恒假哨兵豁免必须逐个冻结样本记录 catch 断言观测：{case_id}')
+    proof = next(iter(expected['unexecutedSites'].values()))
+    require(sum(sample['sampleId'] == proof['sampleId'] for sample in samples) == 1,
+            f'恒假哨兵豁免缺少唯一实际输入样本：{case_id}')
+    for row in rows:
+        require(expected['assertionSites'].get(row['id']) == site,
+                f'恒假哨兵用例出现非 catch 断言观测：{case_id} / {row["id"]}')
+        value = row['value']
+        require(isinstance(value, dict) and value.get('kind') == 'assertion'
+                and isinstance(value.get('matcher'), str) and value.get('negated') is False,
+                f'恒假哨兵豁免必须保留原 catch 断言观测：{case_id} / {row["id"]}')
+        thrown = value.get('actual')
+        require(isinstance(thrown, dict) and thrown.get('kind') == 'throw'
+                and isinstance(thrown.get('name'), str) and bool(thrown['name'])
+                and thrown['name'] not in ASSERTION_ERROR_NAMES
+                and isinstance(thrown.get('message'), str),
+                f'恒假哨兵之前的调用没有在每个样本上抛出异常：{case_id} / {row["id"]}')
+
+
 def validate_branch_plan(catalog, case_id, source, expected):
     exclusions = expected.get('unexecutedSites', {})
     require(isinstance(exclusions, dict), f'未执行断言证明格式无效：{case_id}')
     if case_id not in DRBG_BRANCH_CASES:
-        require(not exclusions, f'没有已核验的固定分支规则，不能豁免断言：{case_id}')
-        return set()
+        return validate_unreachable_plan(catalog, case_id, source, expected) if exclusions else set()
     require(catalog['upstreamCommit'] == SEMANTIC_UPSTREAM and source['path'] == DRBG_FILE
             and source.get('sha256') == DRBG_SHA
             and catalog.get('moduleFiles', {}).get(DRBG_VECTORS) == DRBG_VECTORS_SHA,
@@ -258,6 +399,8 @@ def validate_branch_plan(catalog, case_id, source, expected):
 
 def validate_branch_observations(case_id, expected, samples, rows):
     if case_id not in DRBG_BRANCH_CASES:
+        if expected.get('unexecutedSites'):
+            validate_unreachable_observations(case_id, expected, samples, rows)
         return
     config = read(TASK / 'workspace.json')['upstream']
     fixture = TASK.parents[2] / config['path'] / config['packagePath'] / DRBG_VECTORS
@@ -291,6 +434,12 @@ def validate_branch_observations(case_id, expected, samples, rows):
 
 ARRAY_CONTAINING_MARKER = {'type': 'string', 'value': 'ArrayContaining'}
 CONTAIN_EQUAL_MARKER = {'type': 'string', 'value': '[object Object]'}
+# 零实参 matcher：Jest 与 Java helper 都只判定 actual，实参不参与判定。
+ZERO_ARITY_MATCHERS = frozenset({
+    'toBeNull', 'not.toBeNull', 'toBeUndefined', 'not.toBeUndefined',
+    'toBeDefined', 'not.toBeDefined', 'toBeTruthy', 'toBeFalsy'})
+# 两侧采集器对“无期望”的三种记法：裸空数组、类型化 undefined、空 varargs 值。
+EMPTY_EXPECTATIONS = ([], {'type': 'undefined'}, {'type': 'array', 'value': []})
 
 
 def matcher_semantics(identity, left, right):
@@ -303,6 +452,11 @@ def matcher_semantics(identity, left, right):
     - `expect(received).toContainEqual(item)`：原 Jest 只要求 received 含与 item 相等的元素，
       不比较顺序，也不比较 received 的长度。采集器把两侧元素都归一成 `[object Object]`，
       因此只校验“实际数组非空且每个元素都等于期望元素”，不允许出现与期望无关的项。
+    - 零实参 matcher（`toBeNull`／`toBeUndefined`／`toBeDefined`／`toBeTruthy`／`toBeFalsy`
+      及其 `not.` 形式）：原 Jest 调用里的实参不参与判定（`toBeUndefined(undefined)`
+      与 `toBeUndefined()` 等价），而两侧采集器记法不同——TS 记字面实参（裸空数组或
+      `{type:undefined}`），Java 的 `toBeNull` 记空 varargs 值 `{type:array,value:[]}`、
+      其余记裸空数组。因此只要求两侧 expected 都是上述空形态，actual 仍逐值相等。
     其他 matcher 一律保持逐值严格比较。
     """
     for side, value in (('TS', left), ('Java', right)):
@@ -335,6 +489,14 @@ def matcher_semantics(identity, left, right):
                     f'toContainEqual 实际值必须是非空数组：{identity} / {side}')
             require(all(canonical(item) == canonical(wanted) for item in actual['value']),
                     f'toContainEqual 实际值含与期望元素无关的项：{identity} / {side}')
+        return True
+    if left['matcher'] in ZERO_ARITY_MATCHERS and left['expected'] != right['expected']:
+        # 只在两侧“无期望”记法不同时启用；记法已经一致时交回逐值严格比较。
+        for side, value in (('TS', left), ('Java', right)):
+            require(any(value['expected'] == empty for empty in EMPTY_EXPECTATIONS),
+                    f'零实参 matcher 期望记法不同且不是“无期望”形态：{identity} / {side} / {value["expected"]!r}')
+        require(canonical(left['actual']) == canonical(right['actual']),
+                f'零实参 matcher 两侧实际值不同：{identity}')
         return True
     return False
 

@@ -83,6 +83,67 @@
       "probe": "capture-aesgcm-inputs.cjs",
       "env": "MIGRATION_AESGCM_TS_OBSERVATIONS"
     },
+    "aesgcm-man": {
+      "local": "aesgcm-man",
+      "capture": "capture-primitives-last-local.py",
+      "files": [
+        "src/primitives/__tests/AESGCM.man.test.ts"
+      ],
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/aesgcm-man-plan-20260930/input-plan.json",
+      "tier": "locals-module",
+      "probes": [
+        {
+          "local": "aesgcm-man",
+          "probe": "capture-aesgcm-man-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-primitives-last-local.py",
+          "outputs": {
+            "MIGRATION_AESGCM_MAN_TS_OBSERVATIONS": "aesgcm-man.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-primitives-last-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-primitives-last-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/aesgcm-man.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/aesgcm-man-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_AESGCM_MAN_TS_OBSERVATIONS",
+          "raw": "aesgcm-man.calls.raw.jsonl",
+          "rawOwner": "aesgcm-man"
+        }
+      ],
+      "outputs": {
+        "MIGRATION_AESGCM_MAN_TS_OBSERVATIONS": "aesgcm-man.calls.raw.jsonl"
+      },
+      "inputs_envs": [
+        "MIGRATION_AESGCM_MAN_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_BOUNDARY_TS_INPUTS",
+        "MIGRATION_AUTH_FETCH_KNOWN_TXIDS_TS_INPUTS",
+        "MIGRATION_CACHED_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_KEYDERIVER_TS_INPUTS",
+        "MIGRATION_LIVE_POLICY_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ADDITIONAL_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_ASYNC_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_NATIVE_TS_INPUTS",
+        "MIGRATION_PROTOWALLET_TS_INPUTS",
+        "MIGRATION_VALIDATION_TS_INPUTS",
+        "MIGRATION_VECTOR_TS_INPUTS"
+      ],
+      "inputs_env": "MIGRATION_AESGCM_MAN_TS_INPUTS",
+      "probe": "capture-aesgcm-man-inputs.cjs",
+      "env": "MIGRATION_AESGCM_MAN_TS_OBSERVATIONS"
+    },
     "arc-additional30": {
       "local": "arc-additional30",
       "capture": "capture-arc-additional-side.py",
@@ -5537,7 +5598,7 @@
       "files": [
         "src/auth/transports/__tests__/SimplifiedFetchTransport.additional.test.ts"
       ],
-      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/simplified-fetch-transport-additional-plan-20260929/input-plan.json",
+      "plan": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/simplified-fetch-transport-additional-plan-20260930/input-plan.json",
       "tier": "locals-module",
       "probes": [
         {
@@ -5560,7 +5621,7 @@
               "--raw",
               "{runDir}/simplified-fetch-transport-additional.calls.raw.jsonl",
               "--plan",
-              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/simplified-fetch-transport-additional-plan-20260929/input-plan.json",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/simplified-fetch-transport-additional-plan-20260930/input-plan.json",
               "--output",
               "{output}"
             ],
@@ -8169,6 +8230,42 @@
       ],
       "probe": "capture-aesgcm-inputs.cjs",
       "env": "MIGRATION_AESGCM_TS_OBSERVATIONS"
+    },
+    "src/primitives/__tests/AESGCM.man.test.ts": {
+      "probes": [
+        {
+          "local": "aesgcm-man",
+          "probe": "capture-aesgcm-man-inputs.cjs",
+          "mode": "raw",
+          "tier": "locals-module",
+          "driver": "capture-primitives-last-local.py",
+          "outputs": {
+            "MIGRATION_AESGCM_MAN_TS_OBSERVATIONS": "aesgcm-man.calls.raw.jsonl"
+          },
+          "emit": {
+            "script": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-primitives-last-local.py",
+            "argv": [
+              "python3",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/prepare-primitives-last-local.py",
+              "emit-ts",
+              "--local",
+              "{local}",
+              "--raw",
+              "{runDir}/aesgcm-man.calls.raw.jsonl",
+              "--plan",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/aesgcm-man-plan-20260930/input-plan.json",
+              "--output",
+              "{output}"
+            ],
+            "unresolved": []
+          },
+          "env": "MIGRATION_AESGCM_MAN_TS_OBSERVATIONS",
+          "raw": "aesgcm-man.calls.raw.jsonl",
+          "rawOwner": "aesgcm-man"
+        }
+      ],
+      "probe": "capture-aesgcm-man-inputs.cjs",
+      "env": "MIGRATION_AESGCM_MAN_TS_OBSERVATIONS"
     },
     "src/transaction/broadcasters/__tests/ARC.additional.test.ts": {
       "probes": [
@@ -11387,7 +11484,7 @@
               "--raw",
               "{runDir}/simplified-fetch-transport-additional.calls.raw.jsonl",
               "--plan",
-              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/simplified-fetch-transport-additional-plan-20260929/input-plan.json",
+              "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/simplified-fetch-transport-additional-plan-20260930/input-plan.json",
               "--output",
               "{output}"
             ],
@@ -12587,6 +12684,7 @@
     "MIGRATION_PROTOWALLET_TS_INPUTS": "xdm-browser-boundary",
     "MIGRATION_VALIDATION_TS_INPUTS": "xdm-browser-boundary",
     "MIGRATION_VECTOR_TS_INPUTS": "xdm-browser-boundary",
+    "MIGRATION_AESGCM_MAN_TS_INPUTS": "aesgcm-man",
     "MIGRATION_ASYNC_CRYPTO_BACKEND_TS_INPUTS": "async-crypto-backend",
     "MIGRATION_AUTH_BUILD_TS_INPUTS": "auth-build",
     "MIGRATION_AUTH_CERTIFICATE_CLASS_TS_INPUTS": "utils-property",
@@ -12692,7 +12790,5 @@
   },
   "pending": [],
   "unresolved": [],
-  "unmappedCatalogFiles": [
-    "src/primitives/__tests/AESGCM.man.test.ts"
-  ]
+  "unmappedCatalogFiles": []
 }

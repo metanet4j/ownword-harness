@@ -443,6 +443,139 @@ class SemanticTest(unittest.TestCase):
             self.f.write_lines(name, rows)
         self.assertNotEqual(self.bundle().returncode, 0)
 
+    def test_zero_arity_matchers_compare_actuals_not_inert_arguments(self):
+        # 真实站点：Beef.test.ts 的 toBeUndefined(undefined) 与两处 toBeNull()。
+        sites = [('93:7', observation('toBeUndefined', {'type': 'undefined'}, {'type': 'undefined'}),
+                  observation('toBeUndefined', {'type': 'undefined'}, [])),
+                 ('434:5', observation('toBeNull', {'type': 'null'}, []),
+                  observation('toBeNull', {'type': 'null'}, {'type': 'array', 'value': []})),
+                 ('435:5', observation('toBeNull', {'type': 'null'}, []),
+                  observation('toBeNull', {'type': 'null'}, {'type': 'array', 'value': []}))]
+        self.case('5235c6bc34f190ec5c5267b9b31b6bc4ea404493bead65d22868df0cc8189be3',
+                  [(suffix, None, left, right) for suffix, left, right in sites])
+        self.accepts()
+        original = self.f.path('java-assertions.jsonl').read_text()
+        for label, change in [
+            ('Java 实际值不同', lambda value: value.update(actual={'type': 'null'})),
+            ('Java 期望换成非空值', lambda value: value.update(expected=text_value('undefined'))),
+            ('Java 期望换成任意真值', lambda value: value.update(expected={'type': 'number', 'value': '0'})),
+            ('Java matcher 改动', lambda value: value.update(matcher='toBeTruthy')),
+            ('Java 否定标记改动', lambda value: value.update(negated=True)),
+        ]:
+            with self.subTest(label=label):
+                self.f.path('java-assertions.jsonl').write_text(original)
+                self.mutate_java(lambda rows: change(rows[0]['value']))
+                self.assertNotEqual(self.bundle().returncode, 0)
+        self.f.path('java-assertions.jsonl').write_text(original)
+        ts_original = self.f.path('ts-assertions.jsonl').read_text()
+        ts_rows = [json.loads(line) for line in ts_original.splitlines()]
+        ts_rows[0]['value']['actual'] = {'type': 'null'}
+        self.f.write_lines('ts-assertions.jsonl', ts_rows)
+        self.assertNotEqual(self.bundle().returncode, 0)
+        self.f.path('ts-assertions.jsonl').write_text(ts_original)
+
+
+    def sentinel_fixture(self, actuals=None):
+        """真实 lrshiftnum 无效用例的恒假哨兵夹具：22:9 实际执行，20:9 按规则豁免。
+
+        冻结源码形态固定为 `try { ... executeScriptCode(script, stack); expect(true).toBe(false) }
+        catch (e) { expect(e).toBeTruthy() }`；样本数（2）少于 catch 断言次数（3）也是真实形态：
+        个别样本在哨兵之前就更早抛错。"""
+        file = 'src/script/__tests/lrshiftnum.test.ts'
+        catch, sentinel = file + ':22:9:assertion', file + ':20:9:assertion'
+        value = observation('toBeTruthy', {'kind': 'throw', 'name': 'ScriptEvaluationError',
+                                          'message': 'Script evaluation error'}, [])
+        self.case('c9e1e295fa0ff38abd11b752ce995b5dfb2954395e2a5758f6c3dcd3e9d83ccd',
+                  [('22:9', None, value, value)])
+        catalog = json.loads(self.f.path('catalog.json').read_text())
+        original = next(f for f in json.loads((TASK/'module-tests.json').read_text())['files']
+                        if f['path'] == file)
+        extra = [site for site in original['sites'] if site['id'] == sentinel]
+        catalog['files'][0]['sites'].extend(extra)
+        self.f.write('catalog.json', catalog)
+        mapping = json.loads(self.f.path('mapping.json').read_text())
+        mapping['siteReviews'].extend({'id': site['id'], 'status': 'reviewed', 'note': '恒假哨兵工具夹具',
+                                       'caseIds': [self.case_id]} for site in extra)
+        self.f.write('mapping.json', mapping)
+        plan = json.loads(self.f.path('plan.json').read_text())
+        samples = ['Spend.constructor-01', 'Spend.constructor-02']
+        instances = [catch, catch + '#2', catch + '#3']
+        plan[self.case_id].update(sampleIds=samples, assertionIds=instances,
+                                  assertionSites={identity: catch for identity in instances},
+                                  unexecutedSites={sentinel: {
+                                      'ruleId': 'unreachable-guard-after-throw-v1',
+                                      'guardSiteId': file + ':19:25:call', 'sampleId': samples[0]}})
+        self.f.write('plan.json', plan)
+        observed = actuals or [{'kind': 'throw', 'name': 'ScriptEvaluationError', 'message': f'样本 {n}'}
+                               for n in (1, 2, 3)]
+        for side in ('ts', 'java'):
+            meta = {'caseId': self.case_id, 'side': side, 'runId': ('a' if side == 'ts' else 'b') * 32}
+            self.f.write_lines(side + '-inputs.jsonl', [
+                dict(meta, sampleId=sample, value={'method': 'Spend.constructor', 'args': [], 'result': None})
+                for sample in samples])
+            self.f.write_lines(side + '-assertions.jsonl', [
+                dict(meta, assertionId=identity, value=observation('toBeTruthy', actual, []))
+                for identity, actual in zip(instances, observed)])
+        return sentinel, catch
+
+    def rewrite_assertions(self, change):
+        """两侧同步改写断言观测，确保逐值比较通过、只剩豁免规则能拒绝。"""
+        for side in ('ts', 'java'):
+            rows = [json.loads(line) for line in self.f.path(side + '-assertions.jsonl').read_text().splitlines()]
+            change(rows)
+            self.f.write_lines(side + '-assertions.jsonl', rows)
+
+    def test_unreachable_guard_requires_frozen_shape_and_per_sample_throw(self):
+        sentinel, catch = self.sentinel_fixture()
+        self.accepts()
+        self.rejects_mutations('plan.json', [
+            ('自由文本理由', lambda data: data[self.case_id]['unexecutedSites'].update({sentinel: 'not reached'})),
+            ('未知规则', lambda data: data[self.case_id]['unexecutedSites'][sentinel].update(ruleId='skip')),
+            ('伪调用站点', lambda data: data[self.case_id]['unexecutedSites'][sentinel].update(
+                guardSiteId='src/script/__tests/lrshiftnum.test.ts:18:1:call')),
+            ('样本不属于该用例', lambda data: data[self.case_id]['unexecutedSites'][sentinel].update(sampleId='invented')),
+            ('豁免 catch 断言自己', lambda data: data[self.case_id]['unexecutedSites'].update({
+                catch: dict(data[self.case_id]['unexecutedSites'][sentinel])})),
+        ])
+        self.rejects_mutations('catalog.json', [
+            ('源码摘要改变', lambda data: data['files'][0].update(sha256='0' * 64)),
+            ('上游版本改变', lambda data: data.update(upstreamCommit='0' * 40)),
+        ])
+        # 紧邻调用没有抛错：某次迭代只观察到普通值，或只观察到断言失败（哨兵自己执行了）。
+        self.rewrite_assertions(lambda rows: rows[1]['value'].update(actual={'type': 'boolean', 'value': True}))
+        self.assertNotEqual(self.bundle().returncode, 0)
+        self.rewrite_assertions(lambda rows: rows[1]['value'].update(
+            actual={'kind': 'throw', 'name': 'JestAssertionError', 'message': 'expect(received).toBe(expected)'}))
+        self.assertNotEqual(self.bundle().returncode, 0)
+        self.rewrite_assertions(lambda rows: rows[0]['value'].update(
+            actual={'kind': 'throw', 'name': 'AssertionError', 'message': 'assertion failed'}))
+        self.assertNotEqual(self.bundle().returncode, 0)
+        # 冻结样本多于异常观测：漏掉某个样本的异常，即使同步扩充计划与两侧输入也必须拒绝。
+        plan = json.loads(self.f.path('plan.json').read_text())
+        plan[self.case_id]['sampleIds'].append('Spend.constructor-03')
+        self.f.write('plan.json', plan)
+        for side in ('ts', 'java'):
+            rows = [json.loads(line) for line in self.f.path(side+'-inputs.jsonl').read_text().splitlines()]
+            self.f.write_lines(side+'-inputs.jsonl', rows + [dict(rows[0], sampleId='Spend.constructor-03')])
+        self.assertNotEqual(self.bundle().returncode, 0)
+        # 站点形态不符：同一文件里的普通断言站点（不是 try 内紧跟调用的恒假哨兵）不能豁免。
+        catalog = json.loads(self.f.path('catalog.json').read_text())
+        original = next(f for f in json.loads((TASK/'module-tests.json').read_text())['files']
+                        if f['path'] == 'src/script/__tests/lrshiftnum.test.ts')
+        plain = [site for site in original['sites']
+                 if site['id'] == 'src/script/__tests/lrshiftnum.test.ts:30:7:assertion']
+        catalog['files'][0]['sites'].extend(plain)
+        self.f.write('catalog.json', catalog)
+        mapping = json.loads(self.f.path('mapping.json').read_text())
+        mapping['siteReviews'].extend({'id': site['id'], 'status': 'reviewed', 'note': '恒假哨兵工具夹具',
+                                       'caseIds': [self.case_id]} for site in plain)
+        self.f.write('mapping.json', mapping)
+        plan[self.case_id]['unexecutedSites'] = {plain[0]['id']: plan[self.case_id]['unexecutedSites'][sentinel]}
+        self.f.write('plan.json', plan)
+        result = self.bundle()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('恒假哨兵', result.stderr)
+
 
 if __name__ == '__main__':
     unittest.main()
