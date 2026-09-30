@@ -75,6 +75,9 @@
 可行性依据：逐局部 TS/Java 双侧在窗口 v2 已 107/108 通过、0 失败；缺的只是“把它们串起来产出一份同源全量证据”。
 代价：新增一个 driver（约百余行），但**全部复用已验证组件**，比修 `capture-full-dispatch.cjs` 的装载机制更可控。
 
+**路径 A 自测结果（备用路径有效证据，20260901 07:05）**：`selftest-all-20261001`（132 文件，除 `AESGCM.man`）**跑完**——jest **132 suites／5328 tests／0 失败**、**unmapped-files = 0**、**缺失原始轨迹 = 0**（探针装载与轨迹产出两类根因已消除）、标准断言轨迹裁剪 56648 行且手动重跑 `emit-assertion-observations.py` 退出码 0 ✓。仍待收尾 **8 个输入转换器**：`auth-fetch-property`、`utils-property`（缺 FAST_CHECK 固定与内联折算）、`reader`／`reader-uint8array`／`writer`／`writer-uint8array`（四者共用 374 行轨迹，需按 `source.file` 过滤）、`wallet-wire`（并发 OOM 特征）、**`script-spend-shared-vectors`（真实缺陷：`dc69e1c2…` 属 `Spend.test.ts` 且该文件已跑，报 0 vs 1 → Script／Spend 两探针共存时漏记，需专项定位）**。
+**协调结果**：路径 A 已从 **02:22:30** 起停止一切任务侧写入并静默待命（不跑 jest／Maven）；**路径 B 在冻结工具集上独占复跑 e2e**（先自查 02:22:30 后无任务侧工具变动再开跑）。
+
 ### 操作红线（新增，代价 51 分钟）：e2e 前必须冻结「SDK 源码 + 任务侧工具」
 
 **20260901 02:51 的失败**：路径 B 的 e2e（02:00 cron 拉起，已跑到 TS 阶段末）被判 `{"status": "FAIL", "reason": "当前源码、工具或清单与本轮来源不同：producerSha256"}` ✗。
