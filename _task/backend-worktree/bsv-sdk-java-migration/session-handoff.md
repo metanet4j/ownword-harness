@@ -129,6 +129,17 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 六处失败全部修好；三项判断的裁决（20260930 17:00）
+
+修复代理终报：**6/6 全部修好**，每项 recapture 退出 0、tamper 两个 true。补充根因：`drbg29` 还叠加了“两侧共用 `assertions.raw.jsonl`、Java 追加到 TS 轨迹后”的问题（改为按侧别命名）；`chronicle-opcodes` 修完身份后又见 `inputSequence/lockTime` 的 Long vs Integer 类型差（改走 `numeric(...)` 并扩 long 分支）；`simplified-fetch-transport-additional` 实际是**六层问题叠加**（undefined body 投影、URL 字面量、deserialize 实参形状与字面量、null 捕获/varargs、JSON 键序、两处断言表示）。
+
+**我对三项判断的裁决（全部接受）**：
+1. **1 条“Java 不可复现样本”登记**（`sft-additional` 的 `malformedHeaderErrorKeepsCauseText` / `send-02`）：原用例对 `JSON.parse` 抛**字符串**，Java 异常必带 Throwable 原因，无法产出同一 message；该用例的构造入口仍重放、两条消息断言原样保留。计划重冻结为 46 例／**88** 样本／68 断言，全局 `plannedSamples` 38093 → **38092**。接受，并要求在最终报告里如实列出这条排除。
+2. **JSON 键序规范化**作为**探针侧投影**（不改生产序列化）：原用例本就只断言解析后的对象，字段/值仍严格比较。接受（比改生产字节序更符合“只做迁移、不改行为”）。
+3. **比较层零实参 matcher 语义规则**：最终全量门禁共用，必须在场；代理已扫 788 份既有证据的 1631 条零实参断言、形态仅 `[]`/`null`/`{type:array,value:[]}`/`{type:undefined}`，记法一致的站点仍走严格比较，并加自测。接受。
+
+**新发现的既有阻塞项**：`completePlanError = 冻结断言站点覆盖：缺失 2 … lrshiftnum.test.ts:20:9 与 :39:9` → `readyForFullCapture=false`。这两处是 `try { <调用必然抛错>; expect(true).toBe(false) } catch { expect(e).toBeTruthy() }` 里**设计上不可达的哨兵断言**，而现有 `unexecutedSites` 豁免**硬绑定 DRBG**（`if case_id not in DRBG_BRANCH_CASES: require(not exclusions, …)`）。已派代理新增同等严格的通用规则 `unreachable-guard-after-throw-v1`（要求：该用例每个冻结样本的紧邻调用都记录到异常、实际执行的是同一 catch 块的断言、站点形态与冻结源码逐字匹配），并加正反自测、把 `lrshiftnum` 计划补齐到 `completePlanError` 为空。
+
 ### 六处失败：5 处已修复并核验（20260930 16:40）
 
 | 局部 | 用例/输入/断言 | 状态 |
