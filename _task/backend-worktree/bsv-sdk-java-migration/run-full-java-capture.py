@@ -26,6 +26,8 @@ PROJECT = TASK / 'metanet4j-bsv-sdk'
 SUREFIRE = PROJECT / 'target/surefire-reports'
 LOCK = TASK / '.cache/run.lock'
 JAVA_TEST_ROOT = PROJECT / 'src/test/java'
+# 只排除这一个退役局部的语料变量；不要顺手扩大范围（理由见 java_ts_input_envs 的说明）。
+EXCLUDED_TS_INPUT_ENVS = ('MIGRATION_HASH_PBKDF2_TS_INPUTS',)
 
 
 def read_json(path):
@@ -33,12 +35,22 @@ def read_json(path):
 
 
 def java_ts_input_envs():
-    """Java 测试源码里读的全部 MIGRATION_*_TS_INPUTS：本轮都要指向同一份 ts-inputs.jsonl。"""
+    """Java 测试源码里读的全部 MIGRATION_*_TS_INPUTS：本轮都要指向同一份 ts-inputs.jsonl。
+
+    例外（EXCLUDED_TS_INPUT_ENVS）：`MIGRATION_HASH_PBKDF2_TS_INPUTS` 属于**已退役**局部
+    `hash-pbkdf2-vectors` 的语料变量——`HashPbkdf2InputReplay.derive` 只在显式给出当年
+    `call-0` 口径语料时才启用该 replay，指向本轮汇总输入会把它激活，而现行计划里这 13 个
+    PBKDF2 用例的 sampleId 是标准局部 `hash` 的 `pbkdf2-01` 口径，于是整类报
+    「PBKDF2 固定 TS 输入缺失或重复」。两条事实依据：①该变量全仓仅被
+    `com/metanet4j/bsv/primitives/HashPbkdf2InputReplay.java` 读取；②不设置时 `derive()`
+    直接走生产实现，而这些样本由 `HashTest` 主路径按 `pbkdf2-01` 正常消费（逐局部 `hash`
+    运行的 java-inputs.jsonl 已证实），因此不覆盖它不会丢任何证据。
+    """
     envs = set()
     for path in JAVA_TEST_ROOT.rglob('*.java'):
         envs.update(re.findall(r'System\.getenv\("(MIGRATION_[A-Z0-9_]*_TS_INPUTS)"\)',
                                path.read_text(errors='replace')))
-    return sorted(envs)
+    return sorted(envs - set(EXCLUDED_TS_INPUT_ENVS))
 
 
 def java_property_replays():
@@ -169,7 +181,10 @@ def main():
     table = read_json(options.probes) if options.probes.is_file() else {'envs': {}, 'locals': {}}
     configured = sorted({name for name in table.get('envs', {}) if name.endswith('_TS_INPUTS')})
     discovered = java_ts_input_envs()
-    targets = sorted(set(configured) | set(discovered))
+    # 真正的注入点是这里：既要覆盖源码扫描到的变量，也要覆盖分派表登记（configured）的变量。
+    # 只在 java_ts_input_envs() 里过滤不够——分派表 envs（115 个）会把退役局部的语料变量
+    # 重新并回来（full-run-13 实测：configured 仍含它 → HashTest 13 个 PBKDF2 用例报错）。
+    targets = sorted((set(configured) | set(discovered)) - set(EXCLUDED_TS_INPUT_ENVS))
     for name in targets:
         env[name] = str(ts_inputs)
     raw_assertions = options.run_dir / 'java-assertions.raw.jsonl'
@@ -186,6 +201,7 @@ def main():
                'maven': command, 'mavenExitCode': result.returncode,
                'tsInputs': str(ts_inputs), 'tsInputEnvs': targets,
                'tsInputEnvsNotInProbeTable': sorted(set(discovered) - set(configured)),
+               'excludedTsInputEnvs': list(EXCLUDED_TS_INPUT_ENVS),
                'propertyDrivenReplays': java_property_replays()}
     problems = []
     if result.returncode:

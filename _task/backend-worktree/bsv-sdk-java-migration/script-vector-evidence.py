@@ -152,7 +152,9 @@ def fingerprints(plan_folder):
 
 def capture(side, folder, plan_folder, java):
     folder.mkdir(parents=True, exist_ok=False)
-    run_id = uuid.uuid4().hex
+    # 全量串行采集（run-full-ts-serial.py）会传入本轮身份，使本局部的行与整轮同源；
+    # 独立运行时不传，仍自生成。
+    run_id = os.environ.get('EVIDENCE_RUN_ID') or uuid.uuid4().hex
     source = source_revision(side, java)
     fixed = fingerprints(plan_folder)
     environment = dict(os.environ, EVIDENCE_RUN_ID=run_id, EVIDENCE_SIDE=side,

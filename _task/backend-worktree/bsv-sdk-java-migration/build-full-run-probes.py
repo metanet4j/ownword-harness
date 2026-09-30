@@ -116,10 +116,22 @@ def pick_variant(tables, local_file):
     return None, None
 
 
-def probe_envs(path):
+def probe_envs(path, variant=None):
+    """探针读取的环境变量；`MIGRATION_${VARIANT}_X` 这类模板按局部变体展开。
+
+    数量变体共用一个探针时（例如 bignumber-binary 复用 capture-bn-arithmetic-inputs.cjs），
+    探针里写的是 `process.env['MIGRATION_' + variant.toUpperCase() + '_RAW']`，静态扫描只能看到
+    `MIGRATION_BN_VARIANT`，因此这里按 vari:True 的覆盖把变体名再扫一遍。
+    """
     text = Path(path).read_text(errors='replace')
-    return set(re.findall(r'process\.env\.([A-Z0-9_]+)', text)) \
+    names = set(re.findall(r'process\.env\.([A-Z0-9_]+)', text)) \
         | set(re.findall(r'process\.env\[[\'"]([A-Z0-9_]+)[\'"]\]', text))
+    if variant:
+        prefix = variant.upper().replace('-', '_')
+        for name in re.findall(r"process\.env\[['\"]MIGRATION_['\"]\s*\+\s*[A-Za-z_$][\w$]*"
+                               r"\.toUpperCase\(\)\s*\+\s*['\"]([A-Z0-9_]+)['\"]\]", text):
+            names.add(f'MIGRATION_{prefix}{name}')
+    return names
 
 
 def probe_direct(path):
@@ -445,9 +457,9 @@ def primary_env(outputs, module_entry):
         return preferred
     for suffix in ('_TS_OBSERVATIONS', '_OBSERVATIONS', '_TS_INPUTS', '_INPUTS', '_FRAMES', '_RAW'):
         for name in outputs:
-            if name.endswith(suffix):
+            if name.endswith(suffix) and name not in GLOBAL_ENVS:
                 return name
-    return next(iter(outputs), None)
+    return next((name for name in outputs if name not in GLOBAL_ENVS), None)
 
 
 def emit_recipe(resolver, nodes, primary, outputs):
@@ -491,9 +503,10 @@ def emit_recipe(resolver, nodes, primary, outputs):
     return {'script': script, 'argv': argv, 'unresolved': []}
 
 
-def probe_plans(probe_name, probe_path, drivers, files, module_entry, plan_dir, replay, preferred=None):
+def probe_plans(probe_name, probe_path, drivers, files, module_entry, plan_dir, replay, preferred=None,
+                variant=None, extra_env=None):
     """为单个探针找齐输出／语料／取值环境变量；返回 (plan, 未解析原因)。"""
-    needed = probe_envs(probe_path)
+    needed = probe_envs(probe_path, variant)
     if not needed:
         return {'driver': str(preferred['path'].relative_to(TASK)) if preferred else None,
                 'outputs': {}, 'corpus': {}, 'values': {}}, []
@@ -536,9 +549,80 @@ def driver_for(drivers, capture):
     return next((row for row in drivers if row['path'].name == capture), None)
 
 
-def build_entry(item, locals_modules, catalog_files, drivers, all_probes, local_names):
+def replay_corpus(entry, override):
+    """旧管线局部转换器要读的冻结语料（replay*.jsonl）：登记优先，其次按约定反查。
+
+    约定候选：局部计划目录里的 replay-inputs.jsonl／replay.jsonl、`.cache/evidence/<局部-plan-*>`、
+    以及 `.cache/evidence/*plan*/` 里以局部名开头（忽略连字符）的目录。解析不出来就不登记，
+    由 strict 模式在本轮转换时报错，绝不猜测。
+    """
+    if override.get('replay'):
+        return str((TASK / override['replay']).resolve()) if not Path(override['replay']).is_absolute() \
+            else override['replay']
+    local = entry['local']
+    plan_dir = Path(entry['plan']).parent
+    candidates = []
+    for base in (plan_dir, TASK / '.cache/evidence'):
+        if not base.is_dir():
+            continue
+        for pattern in (f'{local}-plan-*/replay.jsonl', f'{local}-plan-*/replay-inputs.jsonl',
+                        '*/replay.jsonl', '*/replay-inputs.jsonl'):
+            for path in sorted(base.glob(pattern)):
+                if base == plan_dir or path.parent.name.startswith(local):
+                    candidates.append(path)
+    slugs = ('bignumber-arithmetic-shared', 'bn-utils') if local.startswith('bignumber-') \
+        or local.startswith('bn-') else ()
+    if not candidates and slugs:
+        for slug in slugs:
+            candidates.extend(sorted((TASK / '.cache/evidence').glob(f'{slug}-*plan*/replay.jsonl')))
+    for path in candidates:
+        if path.is_file():
+            return str(path.resolve())
+    return None
+
+
+def apply_local_overrides(entry, override):
+    """把 full-run-overrides.json 的 locals 段合并进局部条目。
+
+    全量运行只有一份共享的原始断言轨迹，旧管线局部（探针自己记录原断言）必须显式登记：
+      parity      "legacy" 表示该探针写自己的断言轨迹／不参与标准断言转换；
+      planDir     true 表示该探针要读局部冻结计划目录的 catalog.json／input-plan.json
+                  （例如 spend-probe-lib 按 EVIDENCE_INPUT_PLAN 同目录的冻结清单过滤用例）；
+      legacyEmit  本轮转换器 argv：{runDir}／{local}／{output}／{assertions} 占位；
+      env         extra environment for the probe（{runDir} 占位）；
+      fork        true 表示该探针在共享断言层之后装载（保留替换后的 global.expect）。
+    """
+    if not override:
+        return entry
+    for probe in entry['probes']:
+        if override.get('parity') == 'legacy':
+            probe['parity'] = 'legacy'
+        if override.get('planDir'):
+            # 探针按 EVIDENCE_INPUT_PLAN 同目录的冻结清单解析自己的用例；全量运行把该目录
+            # 复制到 <runDir>/plans/<local>/（内容与冻结目录同源），这里把探针指到副本。
+            probe['probePlan'] = entry['local']
+            probe.setdefault('envOverrides', {})['EVIDENCE_INPUT_PLAN'] = \
+                '{runDir}/plans/' + entry['local'] + '/input-plan.json'
+        if override.get('fork'):
+            probe['fork'] = True
+        if override.get('env'):
+            probe['envOverrides'] = dict(override['env'])
+    if override.get('parity') == 'legacy':
+        entry['legacyEmit'] = override.get('legacyEmit')
+        entry['parity'] = 'legacy'
+        entry['legacyPlan'] = bool(override.get('planDir'))
+        entry['replay'] = override.get('replay') or replay_corpus(entry, override)
+        # 断言来源：standard＝共享断言轨迹经标准转换器（绝大多数旧局部）；
+        # sidecar＝本局部转换器自己产断言（其轨迹行不带共享层的 matcher 序号口径）。
+        entry['assertionSource'] = override.get('assertionSource', 'standard')
+    return entry
+
+
+def build_entry(item, locals_modules, catalog_files, drivers, all_probes, local_names, override=None):
     """把一个局部登记折算成探针条目；返回 (entry, problem)。"""
     name = item['name']
+    override = override or {}
+    variant = override.get('variant')
     plan_path = (TASK / item['input_plan']).resolve()
     module_entry = locals_modules.get(name)
     replay = (TASK / item['replay']).resolve() if item.get('replay') else None
@@ -598,7 +682,8 @@ def build_entry(item, locals_modules, catalog_files, drivers, all_probes, local_
                 reasons.append(f'{probe_name}: 多原文件多探针，无法唯一确定对应关系')
                 continue
             plan, missing = probe_plans(probe_name, probe_path, drivers, files, module_entry,
-                                        plan_path.parent, replay, preferred)
+                                        plan_path.parent, replay, preferred, variant,
+                                        (override.get('env') or {}).keys())
             mode = 'direct' if probe_direct(probe_path) else 'raw'
             if mode == 'raw':
                 if not probe_envs(probe_path):
@@ -611,6 +696,9 @@ def build_entry(item, locals_modules, catalog_files, drivers, all_probes, local_
                     reasons.append(f'{probe_name}: 未确定原始轨迹输出环境变量')
                     continue
             row = {'local': name, 'probe': probe_name, 'mode': mode, 'tier': label}
+            if variant:
+                row['variant'] = variant
+                row.setdefault('values', {})['MIGRATION_BN_VARIANT'] = variant
             if plan:
                 row['driver'] = plan['driver']
                 if plan['outputs']:
@@ -648,6 +736,7 @@ def build_entry(item, locals_modules, catalog_files, drivers, all_probes, local_
             entry = {
                 'local': name, 'capture': item.get('capture'), 'files': files, 'plan': str(plan_path),
                 'tier': label, 'probes': probe_rows, 'outputs': outputs,
+                'cases': sorted(ids) if plan_path.is_file() else [],
                 'inputs_envs': sorted(inputs_envs | ({(module_entry or {}).get('inputs_env')}
                                                      if (module_entry or {}).get('inputs_env') else set())),
                 'inputs_env': (module_entry or {}).get('inputs_env') or (sorted(inputs_envs)[0]
@@ -661,35 +750,41 @@ def build_entry(item, locals_modules, catalog_files, drivers, all_probes, local_
 
 
 def canonicalize(locals_out):
-    """同一（探针，环境变量）在全量运行里只装一次、只写一个轨迹文件；名字取排序后第一个局部。"""
+    """同一（探针，变体，环境变量）在全量运行里只装一次、只写一个轨迹文件。
+
+    名字取排序后第一个局部；数量变体（bignumber-*）共用探针但各自设置 MIGRATION_BN_VARIANT 与
+    变体化的输出环境变量，因此用变体名做二次区分，否则四个变体会互相覆盖同一份轨迹。
+    """
     canonical, owners = {}, {}
     for name in sorted(locals_out):
         entry = locals_out[name]
         for probe in entry['probes']:
+            key_prefix = (probe['probe'], probe.get('variant'))
             for env in probe.get('outputs', {}):
-                canonical.setdefault((probe['probe'], env), f'{name}.calls.raw.jsonl' if env == probe['env']
+                canonical.setdefault((*key_prefix, env), f'{name}.calls.raw.jsonl' if env == probe['env']
                                      else f'{name}.{output_slug(env)}.raw.jsonl')
-                owners.setdefault((probe['probe'], env), name)
+                owners.setdefault((*key_prefix, env), name)
     for name, entry in locals_out.items():
         for probe in entry['probes']:
             if probe['mode'] != 'raw':
                 continue
+            key_prefix = (probe['probe'], probe.get('variant'))
             primary_raw = None
             for env in list(probe.get('outputs', {})):
-                target = canonical[(probe['probe'], env)]
+                target = canonical[(*key_prefix, env)]
                 probe['outputs'][env] = target
                 if env == probe['env']:
                     primary_raw = target
             probe['raw'] = primary_raw
             if primary_raw:
-                probe['rawOwner'] = owners[(probe['probe'], probe['env'])]
+                probe['rawOwner'] = owners[(*key_prefix, probe['env'])]
             argv = probe.get('emit', {}).get('argv')
             if argv:
                 def substitute(part):
                     if part == '{raw}':
                         return '{runDir}/' + primary_raw if primary_raw else part
                     if part.startswith('{out:') and part.endswith('}'):
-                        name = canonical.get((probe['probe'], part[5:-1]))
+                        name = canonical.get((*key_prefix, part[5:-1]))
                         return '{runDir}/' + name if name else part
                     return part
                 probe['emit']['argv'] = [substitute(part) for part in argv]
@@ -734,6 +829,10 @@ def main():
 
     config = read_locked(options.config)
     catalog = json.loads(options.catalog.read_text())
+    overrides_path = TASK / 'full-run-overrides.json'
+    overrides = json.loads(overrides_path.read_text()) if overrides_path.exists() else {}
+    local_overrides = overrides.get('locals') or {}
+    file_overrides = overrides
     catalog_files = {case['id']: file['path'] for file in catalog['files'] for case in file['cases']}
     locals_modules, module_names = load_locals_modules()
     drivers = load_drivers()
@@ -743,13 +842,14 @@ def main():
     files, envs, locals_out, unresolved, pending = {}, {}, {}, [], []
     for item in sorted(config['locals'], key=lambda row: row['name']):
         entry, problem = build_entry(item, locals_modules, catalog_files, drivers,
-                                     all_probes, local_names)
+                                     all_probes, local_names, local_overrides.get(item['name']))
         if problem:
             kind, detail = problem
             record = {'local': item['name'], 'capture': item.get('capture'),
                       'inputPlan': item['input_plan'], 'reason': detail}
             (pending if kind == 'pending' else unresolved).append(record)
             continue
+        entry = apply_local_overrides(entry, local_overrides.get(item['name']))
         locals_out[entry['local']] = entry
         for env in entry['inputs_envs']:
             envs[env] = entry['local']
@@ -761,27 +861,61 @@ def main():
             row['probe'] = row['probes'][0]['probe']
             row['env'] = row['probes'][0]['env']
     canonical = canonicalize(locals_out)
-    files = {}
-    for entry in locals_out.values():
+    files, owners = {}, {}
+    for name, entry in locals_out.items():
         for path in entry['files']:
-            row = files.setdefault(path, {'probes': []})
+            owners.setdefault(path, name)
+    for name, entry in locals_out.items():
+        for path in entry['files']:
+            row = files.setdefault(path, {'probes': [], 'locals': []})
+            row['locals'].append(name)
             for probe in entry['probes']:
-                if not any(existing['probe'] == probe['probe'] for existing in row['probes']):
+                # 同一探针可能被多个局部复用（数量变体、共享轨迹的局部）：文件只装一份，
+                # 优先取“该文件归属局部”的那份，才能带上正确的变体与输出环境变量。
+                same = [existing for existing in row['probes'] if existing['probe'] == probe['probe']]
+                if not same:
                     row['probes'].append(probe)
+                elif owners.get(path) == name:
+                    same[0].update(probe)
             row['probe'] = row['probes'][0]['probe']
             row['env'] = row['probes'][0]['env']
-    overrides_path = TASK / 'full-run-overrides.json'
-    if overrides_path.exists():
-        overrides = json.loads(overrides_path.read_text())
-        for local_name in overrides.get('resolvedLocals', []):
-            unresolved = [row for row in unresolved if row['local'] != local_name]
-        for path, entry in (overrides.get('files') or {}).items():
-            row = files.setdefault(path, {'probes': []})
-            for probe in entry.get('probes', []):
-                if not any(existing['probe'] == probe['probe'] for existing in row['probes']):
-                    row['probes'].append(probe)
+    for path, entry in (file_overrides.get('files') or {}).items():
+        row = files.setdefault(path, {'probes': []})
+        drop = set(entry.get('dropProbes') or [])
+        if drop:
+            row['probes'] = [probe for probe in row['probes'] if probe['probe'] not in drop]
+        for probe in entry.get('probes', []):
+            if not any(existing['probe'] == probe['probe'] for existing in row['probes']):
+                row['probes'].append(probe)
+        if row['probes']:
             row['probe'] = row['probes'][0]['probe']
             row['env'] = row['probes'][0].get('env')
+    # 静态解析不出探针的旧局部（hex-bn）：由覆盖段给出文件／探针，条目在这里合成。
+    for local_name, override in local_overrides.items():
+        if not override.get('synthesize') or local_name in locals_out:
+            continue
+        item = next((row for row in config['locals'] if row['name'] == local_name), None)
+        if item is None:
+            continue
+        plan_file = (TASK / item['input_plan']).resolve()
+        cases = sorted(json.loads(plan_file.read_text())) if plan_file.is_file() else []
+        local_files = sorted({catalog_files[case] for case in cases if case in catalog_files})
+        probes = [probe for path in local_files
+                  for probe in (file_overrides.get('files') or {}).get(path, {}).get('probes', [])]
+        if not local_files or not probes:
+            continue
+        entry = {'local': local_name, 'capture': item.get('capture'), 'files': local_files,
+                 'plan': str(plan_file), 'tier': 'override', 'probes': probes,
+                 'outputs': {}, 'cases': cases, 'inputs_envs': [], 'inputs_env': None,
+                 'probe': probes[0]['probe'], 'env': probes[0].get('env')}
+        locals_out[local_name] = apply_local_overrides(entry, override)
+    dropped = {probe for entry in (file_overrides.get('files') or {}).values()
+               for probe in (entry.get('dropProbes') or [])}
+    for entry in locals_out.values():
+        if dropped:
+            entry['probes'] = [probe for probe in entry['probes'] if probe['probe'] not in dropped]
+    for local_name in overrides.get('resolvedLocals', []):
+        unresolved = [row for row in unresolved if row['local'] != local_name]
     mapped = set(files)
     uncovered = sorted(path for path in (file['path'] for file in catalog['files']) if path not in mapped)
     result = {
