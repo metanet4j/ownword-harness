@@ -75,6 +75,12 @@
 可行性依据：逐局部 TS/Java 双侧在窗口 v2 已 107/108 通过、0 失败；缺的只是“把它们串起来产出一份同源全量证据”。
 代价：新增一个 driver（约百余行），但**全部复用已验证组件**，比修 `capture-full-dispatch.cjs` 的装载机制更可控。
 
+**full-run-12 stage 结果（20260901 08:10）**：`ts-capture` **exit=0／2763 秒**（133/133 文件、5329/5329 用例、38092 输入、56744 断言、`problems=[]`）✓；`java-capture` **exit=1／1425 秒**——无过滤 `clean test` 得 `Tests run 5444, Failures 0, Errors 13, Skipped 0`，13 个错误全部来自 `HashTest` 的 PBKDF2 向量 ✗。总耗时 4189 秒（70 分钟），**90 分钟档有约 20 分钟余量，不需要 180 档**。
+
+**根因（已定位到行）**：`HashPbkdf2InputReplay.load()`（冻结 SDK 测试代码）要求这 13 个用例 `sampleId == "call-0"`，而汇总计划用的是标准局部 `hash` 的口径 **`pbkdf2-01`** → `IllegalStateException: PBKDF2 固定 TS 输入缺失或重复：0`。逐局部全绿是因为该 replay 仅在 `MIGRATION_HASH_PBKDF2_TS_INPUTS` **被设置**时才消费语料（逐局部从不设置它，属**已退役局部** `hash-pbkdf2-vectors` 的遗留变量）；全量必炸是因为 `run-full-java-capture.py::java_ts_input_envs()` 会把 Java 源码里出现的**全部** `MIGRATION_*_TS_INPUTS` 指向本轮汇总输入，从而激活这个休眠变量。该变量全仓仅被 `HashPbkdf2InputReplay.java` 读取；同一批样本由 `HashTest` 主路径按 `pbkdf2-01` 正常产出（`java-inputs.jsonl` 有该行）→ **不设它不丢证据**，而喂 `call-0` 会产生计划外样本被 `evidence-bundle` 拒。
+
+**已批准一行修复（任务侧）**：在 `run-full-java-capture.py` 的全局覆盖里**精确排除**该变量，并在返回值与报告里记录被排除项（`tsInputEnvs` 79 → 78 + `excludedTsInputEnvs`）。改完重新冻结 → 跑 `full-run-13`（90 分钟档）→ `verify` + 两套审计。
+
 **e2e 复跑越过关键节点（20260901 07:50）**：`full-run-12` 的 **TS 阶段已完成**（含 `aesgcm-man`，154/154），已生成 `java-capture.log`／`java-inputs.jsonl`／`java-maven.log`／`java-run.json` → **Java 阶段（一次无过滤 `clean test`）正在跑**，预计 10–20 分钟。这已越过上次失败的 `producerSha256` 检查点 ✓。
 
 **e2e 复跑已启动（20260901 07:15）**：工具集自 02:22:30 起**无任何任务侧 `.py/.cjs/.sh` 变动**（已用 `find -newermt` 核验为空 ✓），路径 B 的 `full-evidence-run.py run` 已拉起（`.cache/evidence/full-run-12.log`、`full-run-12.started`、pid 2046286）。路径 A 代理已结束并静默待命，其 8 项收尾与 `script-spend-shared-vectors` 探针共存缺陷（`jest.doMock` 争用 + `restoreAllMocks` 误伤）已定位为备用方案。
