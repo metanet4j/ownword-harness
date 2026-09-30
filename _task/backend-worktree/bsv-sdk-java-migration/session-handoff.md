@@ -129,6 +129,17 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 两处缺口闭合、冻结 v2、窗口重跑已启动（20260930 19:15）
+
+**两处缺口闭合**（哨兵规则代理终报）：`completePlanError = null`、**`readyForFullCapture = true`**、`planErrors=[]`、`missingFullRunInterfaces=[]`、`structurallyPlannedCases 5329/5329`、`plannedSamples 38092`（loopSamples 不新增样本）。
+- 哨兵规则 `unreachable-guard-after-throw-v1`：严格形态（冻结源码 path+sha256 逐字匹配、恒假哨兵）、同块紧邻调用、catch 首语句即冻结断言站点、proof 绑定 `{ruleId,guardSiteId,sampleId}`、两侧观测逐样本 `kind=throw` 且排除断言失败名；DRBG 分支逐字未改；`lrshiftnum` 4/28/29 + tamper 两个 true + `currentCaptureVerified=true`。
+- 925:7 循环：唯一调用点 `Transaction.test.ts:1003`，冻结轨迹里 500 个 sighash 用例 **100% 命中**（jest 720/720），只为这 500 例登记 `loopSamples`（49 例 scriptbuf 为空时不迭代，属结构性站点覆盖，已在报告说明）。
+- 自测：semantics **14 OK**（含新增哨兵正反例）、bundle 24 OK、preflight 13 OK、`node --test test-audit.test.cjs` **43 pass/0 fail**。
+
+**风险处置**：代理报告 12:34–12:36 有进程对工作区做过一次**整仓恢复**（其改动被短暂清空），故立即双仓提交保护：任务仓 `339f5a6`、SDK 仓 **`8b8e13d`（冻结来源 v2）**。
+
+**窗口 v2 已启动**：守卫六项全过（静默/编译/计划 138-0/分派 `unresolved=0` 且无探针原文件 0/覆盖率 5329-5329/工作树干净）；`./recapture-all.sh final2-20260930`（后台，日志 `.cache/evidence/final-window2-20260930.log`），首个局部 `hex-bn` 已通过篡改门禁（其相对路径修复生效）。
+
 ### 哨兵规则落地 + 发现被掩盖的第二处缺口（20260930 18:45）
 
 **已完成（哨兵豁免）**：`audit-tests.py` 新增 `unreachable-guard-after-throw-v1`（严格形态 + 逐样本异常结局 + proof 绑定，DRBG 路径未改）；`prepare-spend-local.py` 支持写入 `unexecutedSites`（重跑 freeze 可复现）；新计划 `.cache/evidence/lrshiftnum-plan-guard-20260930`；重采 `lrshiftnum-standard-guard-20260930` → **4 例／28 样本／29 断言**、tamper 两个 true、`planValid=true` 且 `currentCaptureVerified=true`；`20:9`／`39:9` 不再缺失。
