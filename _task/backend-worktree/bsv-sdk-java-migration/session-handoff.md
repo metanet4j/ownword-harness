@@ -129,6 +129,12 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 同源性验证（20260930 22:20）
+
+主代理独立核对：窗口 v2 的 **106 个局部全部记录同一来源 `13f34162199d`**，且与当前 `audit-tests.java_revision()` 一致 → **同源达标**，`close-items.sh`／`local-task-parity.py` 的前提（干净工作树 + 同一来源摘要）已满足。
+
+`aesgcm-man` 长跑进行中（14:21 启动，预计 15:27 前后结束），窗口其余部分已全部完成、零失败。
+
 ### 窗口 v2 全部局部完成、零失败（20260930 22:00）
 
 **107 项已处理、篡改门禁通过 106、失败 0** —— 仅剩最后一个局部 `aesgcm-man` 的 66 分钟 TS 长跑（14:21 启动，预计 15:27 前后结束），结束后窗口即退出并打印汇总。对比窗口 v1（6 处失败、353 例），本轮修复全部生效。
