@@ -129,6 +129,24 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 重跑计划（20260930 16:15）
+
+等修复代理把 2 处 SDK 测试源码改动落地并逐项验证（聚焦 `clean test` 全绿 + 各自 recapture/tamper 通过）后，按序执行：
+
+```bash
+# 1. 新冻结提交（记录改动文件与理由）
+cd metanet4j-bsv-sdk && git add -A && git commit -m 'test(migration): 冻结来源 v2（sft-additional 补 Undefined 分支、chronicle-opcodes caseId 映射）' && cd ..
+# 2. 重跑完整统一窗口（后台，约 3.3 小时；日志 .cache/evidence/final-window2-20260930.log）
+nohup ./recapture-all.sh final2-20260930 > .cache/evidence/final-window2-20260930.log 2>&1 &
+# 3. 复核 + 单次双侧全量运行（注意 --timeout-minutes 180，全量 TS 含 66 分钟长跑）
+./lock.sh python3 full-evidence-preflight.py --output .cache/evidence/preflight-final2.json
+python3 full-evidence-run.py run --run-dir .cache/evidence/full-run-2-20260930 --timeout-minutes 180
+# 4. 逐事项对照与接口复核
+./close-items.sh final2 && node audit-api.cjs check
+```
+
+注意：窗口重跑会覆盖 101 个局部的证据（新旧一视同仁），但 `validation-helpers`／`hex-bn`／`beef`／`drbg29` 四处修复已包含在任务侧工具里，会随窗口生效。
+
 ### 六处失败：修好 4 个、批准 2 处 SDK 改动（20260930 16:00）
 
 修复代理成果（**均未改 SDK 源码**，revision 仍 `f5c7e707`）：
