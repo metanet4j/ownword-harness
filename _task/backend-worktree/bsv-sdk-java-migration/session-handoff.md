@@ -75,6 +75,8 @@
 可行性依据：逐局部 TS/Java 双侧在窗口 v2 已 107/108 通过、0 失败；缺的只是“把它们串起来产出一份同源全量证据”。
 代价：新增一个 driver（约百余行），但**全部复用已验证组件**，比修 `capture-full-dispatch.cjs` 的装载机制更可控。
 
+**full-run-14 结果：TS ✓、Java ✓、bundle ✗（仅 4 个用例）（20260901 11:05）**：`06:54:18` 结束 exit=1。`java-capture` **全绿**（`Tests run: 5444, Failures: 0, Errors: 0`）——PBKDF2 修复生效 ✓✓；失败阶段是 `bundle`，唯一报错为 `Java 输入用例：缺失 [...]`，**只有 4 个 caseId**（5329 中的 4 个）。已把这 4 个 caseId 交给代理：反查所属局部/原文件 → 定位为何没进 Java 输入（该给却没给／sampleId 口径／本应由别的路径产出）→ 单点预验证 → `full-run-15`。
+
 **真注入链已找到并修复（20260901 09:50）**：根因是 `run-full-java-capture.py::main()` 的 `targets = set(configured) | set(discovered)` —— `configured` 来自 `full-run-probes.json['envs']`（115 个 `*_TS_INPUTS`，含 `MIGRATION_HASH_PBKDF2_TS_INPUTS`），**并集把上一版在 `discovered` 上排掉的变量又并了回来**。修复：`targets = sorted((set(configured) | set(discovered)) - set(EXCLUDED_TS_INPUT_ENVS))`（排除仍精确到一个变量，报告记 `excludedTsInputEnvs`）；**无需改 `full-run-probes.json`／`build-full-run-probes.py`**（登记本身没错）。
 **两轮单点预验证**（均用 run-13 的 `ts-inputs.jsonl`、完整复刻注入表达式）：修复前并集 → 115 个变量、含 pbkdf2、`HashTest` **13 errors**（精确复现 run-13）；修复后 → **114 个变量、不含 pbkdf2、`Tests run: 30, Errors: 0, BUILD SUCCESS`** ✓。
 **一处更正**：`tsInputEnvs`／`excludedTsInputEnvs` 写在 `java-capture-report.json`（非 `java-run.json`）；run-13 该报告实为 `tsInputEnvs: 115` + `excludedTsInputEnvs: [...]`，即「字段生效但并集旁路」。
