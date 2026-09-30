@@ -11,6 +11,8 @@
 | `1sat-stack/` | 服务端路由、索引与身份解析实现，已补充 | [b-open-io/1sat-stack](https://github.com/b-open-io/1sat-stack) |
 | `react-spectrum-main/` | 既有 Adobe 源码快照，本次未核对 | 未登记 |
 | `schema-master/` | 既有 BitcoinSchema 快照，本次未核对 | 未登记 |
+| `go-sdk/` | 已下载、未检出的参考仓库，本轮迁移不使用 | [bsv-blockchain/go-sdk](https://github.com/bsv-blockchain/go-sdk) |
+| `ts-stack/` | TypeScript SDK 固定源码，版本由[迁移工作区](../_task/backend-worktree/bsv-sdk-java-migration/workspace.json)维护 | [bsv-blockchain/ts-stack](https://github.com/bsv-blockchain/ts-stack) |
 
 五份已核对资料的分支、commit、Git tree、文件数、核对时间和关键包版本集中记录在来源锁定清单。它们是浅克隆，仅用于参考；后续更新须先检查本地改动，再同步上游并重验清单。现有目录名沿用旧名称，以保持设计文档链接有效。先前列出的 `xLog-dev/` 当前不存在，不作为可用本地资料。
 

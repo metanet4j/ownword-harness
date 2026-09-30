@@ -1,0 +1,839 @@
+{
+  "8d5be137b4734597127f64ac84009a20c7e0bf1da55a2d48bcd5674bdfd1e944": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:41:constructor:case1#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:42:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:42:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:42:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "2cd9c04a8a254b160a602d12928d8e28677fb2a574cd55c51844d034af25d98a": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:46:constructor:case1#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:47:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:47:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:47:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "d30c902ae501dcd91734579489e1e06d3a519ce2c2aaa8479e9aa29a6e7134ef": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:51:constructor:case1#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:52:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:52:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:52:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "3353c200a77c44c4c1a79fe8b99a4e46d4fd42d436bc07c6fd9e944541f38674": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:57:constructor:case1#0001"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:62:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:62:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:62:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "60392e3ee07975433a8540b9d2df0f649de02d6b975be64c275eeff7d731aa54": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:75:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:75:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:75:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:77:5:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:79:5:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:80:5:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:81:5:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:82:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:77:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:77:5:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:79:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:79:5:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:80:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:80:5:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:81:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:81:5:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:82:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:82:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "fa1dfd6d0a9752be64d428ab1fe1e2b9836c27b51c9a7406f95dbd38c947eed6": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:89:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:89:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:89:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:93:5:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:94:5:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:95:5:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:96:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:93:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:93:5:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:94:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:94:5:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:95:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:95:5:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:96:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:96:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "3ec60884242900849f969dc9bf657870ff4e33d682fb4069d4700cc64ae9f44c": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:103:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:103:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:103:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:106:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:106:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:106:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "28cff002861d2e44d70181ff1b5c53f9d6069d323be1f8d947604acf45bc8305": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:111:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:113:api:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:113:11:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:114:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:113:11:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:113:11:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:114:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:114:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "435df850b81ab87a1a197bdadb4c6754811517a075c45f85b4e31b6c2caf18a1": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:133:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:136:api:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:133:fetchRequest:case1#0004",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:133:fetchResponse:case1#0005",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:136:fetchRequest:case1#0006",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:136:fetchResponse:case1#0007"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:133:11:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:139:7:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:140:7:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:141:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:133:11:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:133:11:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:139:7:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:139:7:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:140:7:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:140:7:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:141:7:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:141:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "c605d7646f99f662166067e8b822e37774f8b0cb849f7442a64860fd9b63979b": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:156:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:156:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:156:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:159:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:159:7:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:159:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "80386fde70cefb44da3b6bf245536fca1c502141dae9e7e1d0e029e3e2b4cc61": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:173:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:178:api:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:173:fetchRequest:case1#0004",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:173:fetchResponse:case1#0005",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:178:fetchRequest:case1#0006",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:178:fetchResponse:case1#0007"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:173:11:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:181:7:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:182:7:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:183:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:173:11:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:173:11:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:181:7:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:181:7:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:182:7:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:182:7:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:183:7:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:183:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "ee1144e5b51293dc5c0961307f5f81928fa8222ecc5ad0f8bf9380e807f5e1b4": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:198:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:203:api:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:198:fetchRequest:case1#0004",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:198:fetchResponse:case1#0005",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:203:fetchRequest:case1#0006",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:203:fetchResponse:case1#0007"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:198:11:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:206:7:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:207:7:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:208:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:198:11:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:198:11:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:206:7:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:206:7:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:207:7:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:207:7:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:208:7:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:208:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "3ea10cb0aa7a890078391487313c690f859860e98bd814364d393eb4d565bc63": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:216:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:219:api:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:216:fetchRequest:case1#0004",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:216:fetchResponse:case1#0005",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:219:fetchRequest:case1#0006",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:219:fetchResponse:case1#0007"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:216:11:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:222:7:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:223:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:216:11:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:216:11:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:222:7:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:222:7:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:223:7:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:223:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "cebb93946c5f455038b5ae62071636d81c3968dc8c9f21a65d82a8ca7384ba26": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:232:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:232:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:232:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:235:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:235:7:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:235:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "7e7a4219009518933fa36ccdb682af512e78baa4107b7c6a6f7789427d80941f": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:245:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:245:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:245:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:245:11:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:245:11:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:245:11:assertion"
+    },
+    "loopSamples": {}
+  },
+  "fa36345d8ce5dca5b688ba9e80c8280bc403557a65b4d206c534d717575b09a8": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:258:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:258:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:258:fetchReject:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:258:11:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:258:11:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:258:11:assertion"
+    },
+    "loopSamples": {}
+  },
+  "9726d5b5574cf83330495da4209d22f648d851c3236cc61a796b19bda8469241": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:284:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:284:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:284:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "b2679f0217ce2943edbeec4afced04d4ac90bd4dce0403fb10013b0911a9aff9": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:288:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:288:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:288:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "93587a14a0d0a3f31e186d1babcafffe9fc261cc9f928c697896d8d747ad0e71": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:292:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:292:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:292:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "9cb3e11a8c6d883857687e0797ca09d47b849de90059fcb3ef1cc3d606c7c964": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:296:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:296:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:296:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "3aee3cfae6927b8244a5c90d19970ca509b35b0d3471949fb9b79abbb0d86f6f": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:301:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:301:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:301:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "32c76e16fca15f5b2b42bee7b3e477b5806a12a68697bf55ca9869ec3b4615ef": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:307:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:307:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:307:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "b7b0808f5fb65dcb815a98617d9b879c8bd3f657fbecef3ff1e3c7febf293ab1": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:312:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:312:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:312:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5648e6b1e75d27d66da3221886623c55969b7a1c3cd7c1106d4e61d0a2385e0e": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:318:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:318:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:318:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "40059719429996dfb438c2168057b7558876ad618804d8bbf4280d64143e4543": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:323:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:323:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:323:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "52bfc8011935deae52515eb7c32f75d00bcf02fe15fb29c5783da0239dc654d4": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:331:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:331:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:331:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "aa06cf8843574fe98e8f5068f9d7e7fc1b93dbed87782013b199c712aa7c5527": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:343:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:343:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:343:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "cdeff75fe5c3c0cca2eb5f0acea42f8f906ea3ad0c128ff1e8a453010bbe4ce8": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:350:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:350:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:350:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "685163294435aa5acc63cf0097e10d3a4cb1e2cd073608be2309cbc0a6a101cc": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:357:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:357:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:357:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "3aba74ac6f34830b048121748c2c927d4f29cd9e9b9f2593f9f0c065b3210849": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:364:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:364:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:364:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8a4bbade4eaefb0a986e7c2a0b640c3e3a7b87405538f615dfd34802d5d4a1bf": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:371:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:371:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:371:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "68396fb9d0fce2cd2014312f91434b63e66704787427dd88d8ec10e8ab0b5140": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:379:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:379:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:379:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8e21d7e461609cc7f57cc9aa67afc4c9c2fcc81ecdc0415fb5b9c189c1a09b43": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:392:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:392:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:392:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8ddeedfa46d5acef9c696085c862820a4edcf5d0ee02acd376a79a8f5088f63c": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:405:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:405:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:405:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "9274f0240a775a368b549e183868a474ab9da869666ee31481009de0d9f27dc8": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:413:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:413:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:413:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "e1d986d96ff9a6cf305dd2b62e88968153b1b4edbb2ae0cc10b300a219f6657d": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:425:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:425:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:425:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "cc09dbf5b6a830e6e88bd6b47069375943692172f20c64d01cf9687f191e61da": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:432:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:432:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:432:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5523b05444bf5c35ef46e3c42782fef6f87c16b9fb1e88fb60b262b28d92adca": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:439:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:439:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:439:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "c7c3fa41b189ad6ee962fb6ec0a7fb18f0dd9b155dcfab416d0fb884196ab1d9": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:445:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:445:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:445:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "93e3f6bf80232d78c6338b1bb0db9389a0df4ea1ad888fe59d40e3ad56cd5131": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:449:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:449:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:449:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "9ddfdfd16fe458ec87b133063dc64cc03a7f7388df8dce108e72d12c7104475e": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:453:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:453:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:453:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "d625cc724687a440301b31b7f858ccdf995bc4e5a3eef6927c09d100e9fda64c": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:457:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:457:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:457:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "280b412b8e2f1ccd65e603bb8c21e070ee2d25c5aaaa49ac8f94b91253bdf96a": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:461:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:461:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:461:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "434c23867be43767ff154332b3ae4e9a2b401fe8600f2fee44c67033e4653fce": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:465:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:465:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:465:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:280:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "52c2ea02c5c0ae6fe045a6abe9f5e76571d661f36d1fda70564a45b281f8e7d1": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:479:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:479:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:479:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:480:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:480:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:480:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "a1ebeb5b7b96ae09dfa350e92dea3dd09272b970b812a27aba626f1814265fe7": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:488:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:488:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:488:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:489:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:489:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:489:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "4f21116188a45f30a2e768218073f59a78cf0ba4e6d6f7581aeb58991720f50f": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:497:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:497:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:497:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:498:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:498:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:498:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "3595e011571733bc6d89ae1873c18cc307dd1b250a94326936d8f4856a082491": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:514:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:514:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:514:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:515:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:515:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:515:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "7b51824ed2e940a98036c5fc13a64edf0677717043c25657604a415386cd11c1": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:523:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:523:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:523:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:524:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:524:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:524:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "e52ddc2cd791656285b81db7d616d41ab6521ac4027750f044ce99f5d80f72ad": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:534:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:534:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:534:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:535:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:535:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:535:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "43c67320790a1427e6cd4e9d99f4213540aa23cf4fe05fdfe0ef33802b989d65": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:546:api:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:550:api:case1#0004",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:546:fetchRequest:case1#0005",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:546:fetchResponse:case1#0006",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:550:fetchRequest:case1#0007",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:550:fetchResponse:case1#0008"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:546:11:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:549:11:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:546:11:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:546:11:assertion",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:549:11:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:549:11:assertion"
+    },
+    "loopSamples": {}
+  },
+  "1839b6ebb02fbc0497805575e763b7b9487cb06de9417467899e1424259dcf22": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:563:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:563:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:563:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:564:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:564:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:564:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5b4dfe0feafe1a7f533339828801220971c0bd642770e8bf4dc2c30cc94d9842": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:32:constructor:case1#0001",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:571:api:case1#0002",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:571:fetchRequest:case1#0003",
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:571:fetchResponse:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:577:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:577:5:assertion": "src/wallet/substrates/__tests/HTTPWalletJSON.test.ts:577:5:assertion"
+    },
+    "loopSamples": {}
+  }
+}

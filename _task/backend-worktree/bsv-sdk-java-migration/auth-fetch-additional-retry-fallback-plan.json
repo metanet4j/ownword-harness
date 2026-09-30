@@ -1,0 +1,51 @@
+{
+  "c74e8b18e2c7fdd0e4f35879024641b7b99b2028bca2ddae3655725c279e53ca": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:78:11:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:78:11:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:78:11:assertion"
+    }
+  },
+  "3518ef4bf413c105c71ad7cc4e169e66624731dc02289205fc41b9391ffedf5d": {
+    "sampleIds": [
+      "call-0",
+      "call-1"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:122:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:125:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:122:11:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:122:11:assertion",
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:125:5:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:125:5:assertion"
+    }
+  },
+  "b46ac6e1f0d26a0e4c7778f8e7fd0f8d68082c3262bd4cda17a6355c7bc0fe6a": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:150:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:151:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:150:5:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:150:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:151:5:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:151:5:assertion"
+    }
+  },
+  "2c69600dda4666aad181e40ea68cbbe83d9d7f159a60c54ff74426613b79ac60": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:168:11:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:168:11:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:168:11:assertion"
+    }
+  }
+}

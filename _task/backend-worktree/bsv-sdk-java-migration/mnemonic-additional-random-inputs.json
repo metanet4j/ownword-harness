@@ -1,0 +1,59 @@
+[
+  {
+    "test": "Mnemonic – additional coverage fromRandom – default and edge-case bits uses 128 bits when bits is undefined",
+    "occurrence": 1,
+    "sequence": 3,
+    "method": "Random",
+    "args": [
+      {
+        "kind": "Number",
+        "value": "16"
+      }
+    ],
+    "preState": {
+      "generatedBytesHex": "a0ced2aa96170c64536a544bc2c5fda0"
+    },
+    "source": {
+      "file": "src/compat/__tests/Mnemonic.additional.test.ts",
+      "line": 8
+    }
+  },
+  {
+    "test": "Mnemonic – additional coverage fromRandom – default and edge-case bits uses 128 bits when bits is 0",
+    "occurrence": 1,
+    "sequence": 3,
+    "method": "Random",
+    "args": [
+      {
+        "kind": "Number",
+        "value": "16"
+      }
+    ],
+    "preState": {
+      "generatedBytesHex": "1f56ac914360c7e89a93caa8df731077"
+    },
+    "source": {
+      "file": "src/compat/__tests/Mnemonic.additional.test.ts",
+      "line": 13
+    }
+  },
+  {
+    "test": "Mnemonic – additional coverage fromRandom – default and edge-case bits uses 128 bits when bits is NaN",
+    "occurrence": 1,
+    "sequence": 4,
+    "method": "Random",
+    "args": [
+      {
+        "kind": "Number",
+        "value": "16"
+      }
+    ],
+    "preState": {
+      "generatedBytesHex": "66d2d21c71482154ba5f8d9cd76f335f"
+    },
+    "source": {
+      "file": "src/compat/__tests/Mnemonic.additional.test.ts",
+      "line": 18
+    }
+  }
+]

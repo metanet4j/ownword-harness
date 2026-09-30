@@ -1,0 +1,272 @@
+{
+  "b7c14ceaf97e587e65213c07bfa28a215ff102ef9eb856aa3f39d265cb62a3f0": {
+    "sampleIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:22:constructor:case1#0001",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:37:derivePublicKey:case1#0002",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:46:derivePublicKey:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:42:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:43:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:51:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:52:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:42:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:42:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:43:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:43:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:51:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:51:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:52:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:52:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "a50dfa24c76d62045d5f1f24d09e8523befee066f2b8370f2f1c5d7b759435e5": {
+    "sampleIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:22:constructor:case1#0001",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:70:derivePublicKey:case1#0002",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:75:derivePublicKey:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:80:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:81:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:82:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:80:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:80:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:81:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:81:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:82:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:82:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "5276670926064586933df273d2d5e4e93e734ff5a27944c4053c0ad0dff823d3": {
+    "sampleIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:22:constructor:case1#0001",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:96:derivePrivateKey:case1#0002",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:105:derivePrivateKey:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:101:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:102:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:110:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:111:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:101:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:101:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:102:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:102:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:110:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:110:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:111:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:111:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "839ffaa5d807d6eaaaca5643de6e4ae7c7d3fa45d4e898bdccb56b79f5152365": {
+    "sampleIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:22:constructor:case1#0001",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:126:derivePrivateKey:case1#0002",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:134:derivePrivateKey:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:131:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:139:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:140:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:131:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:131:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:139:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:139:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:140:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:140:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8db11665ac042f7d133cd67e53210040a3eaee9eebfc6db1dabfec2fc7476427": {
+    "sampleIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:22:constructor:case1#0001",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:156:derivePrivateKeys:case1#0002",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:159:derivePrivateKeys:case1#0003",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:165:derivePrivateKeys:case1#0004"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:157:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:158:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:160:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:161:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:162:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:166:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:167:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:168:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:157:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:157:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:158:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:158:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:160:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:160:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:161:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:161:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:162:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:162:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:166:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:166:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:167:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:167:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:168:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:168:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "1a5d4dc9838eb99e9ff0efc1c0a1650a3418817d1c967f6c028a993535bc529a": {
+    "sampleIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:22:constructor:case1#0001",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:182:deriveSymmetricKey:case1#0002",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:191:deriveSymmetricKey:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:187:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:188:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:196:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:197:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:187:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:187:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:188:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:188:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:196:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:196:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:197:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:197:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "64435d8cdf3013606716c2c9129e868e1c73be47a4f9de2e1898042cc339618d": {
+    "sampleIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:22:constructor:case1#0001",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:210:deriveSymmetricKey:case1#0002"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:209:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:209:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:209:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "c2475f47d4340edc2e3d4e5018bfe0ae6faee9dcf50baa0391088dba7800adb8": {
+    "sampleIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:22:constructor:case1#0001",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:223:revealCounterpartySecret:case1#0002",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:228:revealCounterpartySecret:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:224:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:225:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:229:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:230:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:224:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:224:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:225:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:225:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:229:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:229:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:230:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:230:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "c7c005e1dcefb5ef2317761affb7cc41ec2e2eac058a8d8cca0f3c295b54838a": {
+    "sampleIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:22:constructor:case1#0001",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:244:revealSpecificSecret:case1#0002",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:253:revealSpecificSecret:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:249:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:250:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:258:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:259:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:249:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:249:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:250:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:250:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:258:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:258:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:259:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:259:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "1cda0e00952046b341b8c7392c0f8703093333c81317d6109fcdb9c753406cbd": {
+    "sampleIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:22:constructor:case1#0001",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:276:revealSpecificSecret:case1#0002",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:284:revealSpecificSecret:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:281:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:289:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:290:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:281:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:281:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:289:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:289:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:290:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:290:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "90e2f43a8a2d26c7b707d1d04213f23f3583f9f038c30ea7e9228ac19aeab2dc": {
+    "sampleIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:22:constructor:case1#0001",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:298:constructor:case1#0002",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:317:derivePublicKey:case1#0003",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:317:derivePublicKey:case1#0004",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:317:derivePublicKey:case1#0005",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:317:derivePublicKey:case1#0006",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:317:derivePublicKey:case1#0007",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:324:derivePublicKey:case1#0008",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:327:derivePublicKey:case1#0009"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:321:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:330:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:334:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:321:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:321:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:330:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:330:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:334:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:334:7:assertion"
+    },
+    "loopSamples": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:316:7:loop": [
+        "src/wallet/__tests/CachedKeyDeriver.test.ts:317:derivePublicKey:case1#0003",
+        "src/wallet/__tests/CachedKeyDeriver.test.ts:317:derivePublicKey:case1#0004",
+        "src/wallet/__tests/CachedKeyDeriver.test.ts:317:derivePublicKey:case1#0005",
+        "src/wallet/__tests/CachedKeyDeriver.test.ts:317:derivePublicKey:case1#0006",
+        "src/wallet/__tests/CachedKeyDeriver.test.ts:317:derivePublicKey:case1#0007"
+      ]
+    }
+  },
+  "aad82083f77b6eb6e4882a0dfdb5e5bf45008b567dfad09597d6eb1dc69d3607": {
+    "sampleIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:22:constructor:case1#0001",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:345:constructor:case1#0002",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:360:derivePublicKey:case1#0003",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:360:derivePublicKey:case1#0004",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:360:derivePublicKey:case1#0005",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:364:derivePublicKey:case1#0006",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:370:derivePublicKey:case1#0007"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:373:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:373:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:373:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8cafa389ea1819ec6268cd946171ee603bb27f4bdc4a0cab23277aaf37a1abd0": {
+    "sampleIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:22:constructor:case1#0001",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:398:derivePublicKey:case1#0002",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:402:derivePublicKey:case1#0003"
+    ],
+    "assertionIds": [
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:405:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:406:7:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:405:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:405:7:assertion",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:406:7:assertion": "src/wallet/__tests/CachedKeyDeriver.test.ts:406:7:assertion"
+    },
+    "loopSamples": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:391:9:loop": [
+        "src/wallet/__tests/CachedKeyDeriver.test.ts:398:derivePublicKey:case1#0002"
+      ]
+    },
+    "comparisonRules": {
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:405:7:assertion": "timing-ms-v1",
+      "src/wallet/__tests/CachedKeyDeriver.test.ts:406:7:assertion": "timing-ms-v1"
+    }
+  }
+}

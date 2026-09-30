@@ -1,0 +1,135 @@
+[
+  {
+    "test": "Mnemonic should generate a mnemonic phrase that passes the check",
+    "occurrence": 1,
+    "sequence": 3,
+    "method": "Random",
+    "args": [
+      {
+        "kind": "Number",
+        "value": "16"
+      }
+    ],
+    "preState": {
+      "generatedBytesHex": "78ee24f6bddca4e0f9d9576ba02ea012"
+    },
+    "source": {
+      "file": "src/compat/__tests/Mnemonic.test.ts",
+      "line": 42
+    }
+  },
+  {
+    "test": "Mnemonic should generate a mnemonic phrase that passes the check",
+    "occurrence": 1,
+    "sequence": 7,
+    "method": "Random",
+    "args": [
+      {
+        "kind": "Number",
+        "value": "16"
+      }
+    ],
+    "preState": {
+      "generatedBytesHex": "516d8fa97272b9493353608c6e0a8f13"
+    },
+    "source": {
+      "file": "src/compat/__tests/Mnemonic.test.ts",
+      "line": 44
+    }
+  },
+  {
+    "test": "Mnemonic #toBinary should convert to a binary array",
+    "occurrence": 1,
+    "sequence": 3,
+    "method": "Random",
+    "args": [
+      {
+        "kind": "Number",
+        "value": "16"
+      }
+    ],
+    "preState": {
+      "generatedBytesHex": "3e4277c50f003cdf7253b01b2ed895f8"
+    },
+    "source": {
+      "file": "src/compat/__tests/Mnemonic.test.ts",
+      "line": 74
+    }
+  },
+  {
+    "test": "Mnemonic #fromBinary should convert from a binary array",
+    "occurrence": 1,
+    "sequence": 3,
+    "method": "Random",
+    "args": [
+      {
+        "kind": "Number",
+        "value": "16"
+      }
+    ],
+    "preState": {
+      "generatedBytesHex": "b1153b5e47a62145de668adb96877aca"
+    },
+    "source": {
+      "file": "src/compat/__tests/Mnemonic.test.ts",
+      "line": 84
+    }
+  },
+  {
+    "test": "Mnemonic #fromEntropy should build from entropy",
+    "occurrence": 1,
+    "sequence": 2,
+    "method": "Random",
+    "args": [
+      {
+        "kind": "Number",
+        "value": "32"
+      }
+    ],
+    "preState": {
+      "generatedBytesHex": "b62b5e29c91edcc3b340484571c0fc8dfc0b7ebb855c4b7febe63b2eaa764f96"
+    },
+    "source": {
+      "file": "src/compat/__tests/Mnemonic.test.ts",
+      "line": 121
+    }
+  },
+  {
+    "test": "Mnemonic @fromEntropy should build from entropy",
+    "occurrence": 1,
+    "sequence": 1,
+    "method": "Random",
+    "args": [
+      {
+        "kind": "Number",
+        "value": "32"
+      }
+    ],
+    "preState": {
+      "generatedBytesHex": "c7fc7ce5a9b2879d3be8989f68dbc9fdec66336162b0d007d20556538f3e9c39"
+    },
+    "source": {
+      "file": "src/compat/__tests/Mnemonic.test.ts",
+      "line": 128
+    }
+  },
+  {
+    "test": "Mnemonic #toEntropy should round-trip fromRandom → toEntropy",
+    "occurrence": 1,
+    "sequence": 1,
+    "method": "Random",
+    "args": [
+      {
+        "kind": "Number",
+        "value": "32"
+      }
+    ],
+    "preState": {
+      "generatedBytesHex": "989da1abf0644ea8f90a4c19819f11a5a2719d52628fdfe7ce1b4a58c58d1d81"
+    },
+    "source": {
+      "file": "src/compat/__tests/Mnemonic.test.ts",
+      "line": 231
+    }
+  }
+]

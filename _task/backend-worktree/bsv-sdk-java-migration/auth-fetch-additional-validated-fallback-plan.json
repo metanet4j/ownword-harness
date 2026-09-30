@@ -1,0 +1,37 @@
+{
+  "cc4784e6a59d60d151ef1bac564d6362aab1903e51d55598207b86b1b56f4b2a": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:195:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:196:5:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:195:5:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:195:5:assertion",
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:196:5:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:196:5:assertion"
+    }
+  },
+  "7886034e2da3c346779a142decd3c05e1435c912a401a683cfb3dd204469fed3": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:211:11:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:211:11:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:211:11:assertion"
+    }
+  },
+  "69c0cd7ca7b511faff2dfeca4835dc13485d534a9c33aa154267667ea8e039d3": {
+    "sampleIds": [
+      "call-0"
+    ],
+    "assertionIds": [
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:226:11:assertion"
+    ],
+    "assertionSites": {
+      "src/auth/clients/__tests__/AuthFetch.additional.test.ts:226:11:assertion": "src/auth/clients/__tests__/AuthFetch.additional.test.ts:226:11:assertion"
+    }
+  }
+}

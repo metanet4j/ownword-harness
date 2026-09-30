@@ -1,0 +1,62 @@
+{
+  "64035ca82bf9420d683c9f0a5ec13bd77ff1cb010ac82a51baf52b2074020843": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:26:call:case1#originLocalhost"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:27:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:27:5:assertion": "src/wallet/substrates/__tests/toOriginHeader.test.ts:27:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8b8667997286c0658b76ca5ecec66390b401a82bbb10b421bce36a79cbe01ae4": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:26:call:case1#originLocalhostPort"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:27:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:27:5:assertion": "src/wallet/substrates/__tests/toOriginHeader.test.ts:27:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "9580b49db0b2384ef737c86217094998b038c18b9465af9b0a2dd05c47b3fda8": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:26:call:case1#originHttpsFallback"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:27:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:27:5:assertion": "src/wallet/substrates/__tests/toOriginHeader.test.ts:27:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "321539f9412c8b13c73aae45e68df7d18a7ebb09439f75301978e5d93a8b371c": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:26:call:case1#originExplicitHttps"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:27:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:27:5:assertion": "src/wallet/substrates/__tests/toOriginHeader.test.ts:27:5:assertion"
+    },
+    "loopSamples": {}
+  },
+  "7f1cfb1fb6121b2af02931e915942e7c781950faf8028c61e37f39815e756d99": {
+    "sampleIds": [
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:31:call:case1#rejectsMalformedOriginator"
+    ],
+    "assertionIds": [
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:31:5:assertion"
+    ],
+    "assertionSites": {
+      "src/wallet/substrates/__tests/toOriginHeader.test.ts:31:5:assertion": "src/wallet/substrates/__tests/toOriginHeader.test.ts:31:5:assertion"
+    },
+    "loopSamples": {}
+  }
+}

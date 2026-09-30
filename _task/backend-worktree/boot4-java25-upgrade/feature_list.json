@@ -8,7 +8,7 @@
     "done"
   ],
   "activeItem": null,
-  "note": "只记录阶段状态与依赖；各阶段目标、改动清单、验收门禁见 doc/升级计划-Boot4-Java25.md。任务已全部完成（P0~P6 + 交付后修复），交付物见 doc/验收报告-Boot4-Java25-20260916-1320.md；四仓库 origin/feature/java25 已快进合入 dev 并推送（dev = feature/java25，2026-09-17；旧分支 feature/java21 已删除，master 未触碰）。",
+  "note": "Boot 4 / Java 25 升级、U0 测试基线与 U1—U9 全部完成。全量单元 841 例 0/0/0、23 模块 gaps 全 0；全量集成 18 类 124 例通过。唯一保留项是 SFTPFileClient 的 doInit 成功构造行（2 行），因无可用 SSH 服务，按胡先生决定按现状收尾。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -214,6 +214,232 @@
         "修复 II 后门禁复跑：component clean test -DexcludedGroups=external BUILD SUCCESS，component-test 101/0/0（原 95）；contextLoads 9 处 PASS；用例账目 130 = 101 执行 + 28 external 排除 + 1 非 void @Test 被 Jupiter 忽略",
         "第三轮推送：component d585194 → e634982，远端与本地一致"
       ]
+    },
+    {
+      "id": "unit-plan",
+      "name": "单元测试全覆盖计划与现状调查",
+      "description": "用户要求先制定所有子仓库的单元测试计划；范围、分阶段清单与验收见 doc/单元测试全覆盖计划-20260920-090603.md。",
+      "status": "done",
+      "dependencies": [],
+      "statusNote": "2026-09-20：计划已完成；本轮未修改子仓库代码、POM 或测试，未运行 Maven 测试。",
+      "evidence": [
+        "静态盘点：4 个仓库、25 个 POM、23 个源码模块、369 个生产 Java 文件（20,712 物理行）、52 个测试目录 Java 文件；component 21 个子模块中 18 个无本模块测试源码。",
+        "读取既有 Surefire XML（2026-09-16）：base 2/0/0/0、sdk 26/0/0/0、connect-planaria 1/0/0/0、component-file 8/0/0/8、component-test 101/0/0/0（tests/failures/errors/skipped）；不是本轮执行结果。",
+        "POM 无 JaCoCo 配置、无 jacoco.xml，当前覆盖率未知；计划明确逐模块行/分支/方法 100% 和单元测试零失败、零错误、零跳过。",
+        "./init.sh 退出 0，任务工具链及隔离仓库可用，四子仓库 feature/java25 且干净；本执行环境中间件检查告警，宿主状态未复核。",
+        "计划产物：doc/单元测试全覆盖计划-20260920-090603.md；U0—U9 均未开工。"
+      ]
+    },
+    {
+      "id": "unit-plan-review",
+      "name": "单元测试计划评审与修订",
+      "description": "评审范围、问题与当前处置见 doc/review-单元测试全覆盖计划-20260920-091540.md；执行约束统一回写 testPlanDoc。",
+      "status": "done",
+      "dependencies": [
+        "unit-plan"
+      ],
+      "statusNote": "2026-09-20：2 项 P1 与 2 项 P2 已在计划层面闭环，可进入 U0；未修改子仓库代码或 POM，未运行 Maven 测试。",
+      "evidence": [
+        "完整性与依赖：4 仓库、25 POM、21 个 component 子模块均覆盖；解析 component 内 39 条直接依赖，无依赖后续阶段的边。",
+        "本地 surefire 3.5.6 插件描述符 failIfNoTests 默认 false；核对 JaCoCo v0.8.14 CheckMojo 源码确认缺 .exec 跳过。计划改为统一入口强制验证完整性并要求 U0 验证门禁反例。",
+        "源码确认 BitailsProviderTest 两个测试无 external 标签，却调用 BitailsClient 实际 HTTP 路径；计划明确先分类和修正标签再采集基线。",
+        "计划区分 baseline/accept 入口，固定严格阈值；明确单元采集路径、逐模块证据保存时点和集成回归的独立路径。",
+        "./init.sh 本轮退出 0，四子仓库干净且在 feature/java25；当前环境中间件检查告警，宿主状态未复核。"
+      ]
+    },
+    {
+      "id": "unit-u0-baseline",
+      "name": "U0 单元与集成测试基线及公共配置",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "done",
+      "dependencies": [
+        "unit-plan-review"
+      ],
+      "evidence": [
+        "parent 4112a48：JaCoCo 0.8.14 的 unit-coverage profile 和 integration/external 分组隔离。",
+        "sdk BitailsProviderTest 标记 external；component Spring 基类、EsTest 与 SSE 类标记 integration。",
+        "宿主 ./init.sh 退出 0，infra/status.sh 五服务 healthy；四仓 Maven 基线 reactor 全部退出 0。",
+        "python3 verify-unit.py --mode baseline --scope all：25 POM 核对成功；证据 evidence/20260926T064228Z/；入口因真实缺口退出 1。",
+        "同份证据严格检查退出 1：17 个可执行模块零测试，8 个 skipped，255 项覆盖缺口，54 个 external 待映射，1 个非法测试签名；component-core 纯接口 N/A。",
+        "五类证据反例均返回非零；详见 doc/测试基线与障碍-20260926-145423.md 和 evidence/20260926-u0-pilot/。"
+      ],
+      "statusNote": "2026-09-26：25 POM、369 生产 Java、52 测试 Java 完成安全分类；19 项集成边界列明入口、隔离和观测；全仓基线与严格入口反例均已实测。U0 完成不代表完整测试目标达标。"
+    },
+    {
+      "id": "unit-u1-base",
+      "name": "U1 base 单元测试",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "done",
+      "dependencies": [
+        "unit-u0-baseline"
+      ],
+      "evidence": [
+        "base 提交 bae7eb6：UTXO outpoint 相等性先红后绿；提交 77ad9fd：AIP/BAP、协议枚举、DTO、Jackson 工具测试与坏签名修复。",
+        "最终提交后执行 python3 verify-unit.py --mode accept --scope metanet4j-base，退出 0；19/0/0/0，LINE 208/208、BRANCH 76/76、METHOD 51/51，jacoco:check 报 All coverage checks have been met；证据 evidence/20260926T072220Z/。",
+        "同一 base 提交执行 Maven install -DskipTests BUILD SUCCESS，构件供 sdk 使用；该安装不代替测试证据。"
+      ],
+      "statusNote": "2026-09-26：base 全部手写可执行类的行、分支、方法覆盖率达到 100%；19 个单元测试零失败/错误/跳过。"
+    },
+    {
+      "id": "unit-u2-sdk",
+      "name": "U2 sdk 单元测试",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "done",
+      "dependencies": [
+        "unit-u1-base"
+      ],
+      "evidence": [
+        "SDK 提交 670ee3d：远程转移公开 sendOrdinal(RemoteBapBase, …) 保留 Transaction 返回并改用 RemoteOrdTransactionBuilder，新增 prepareSendOrdinal(…)、addOrdInput 与 ordinals 输入签名；契约测试 16 例（新增 4 例：无签名转移、两输入远程签名、reinscription 三阶段、空 reinscription 回退）。",
+        "用户批准的 12 行精确例外（10 个无行为隐式构造器 + SigHashExtend 不可达 IOException 包装 2 行）记入 unit-coverage-exceptions.json；verify-unit.py 严格模式双向核对，jacoco:check 按 metanet4j-sdk 属性显式排除；反例证据 evidence/20260928-u2-exception-controls/（CLI check 通过；篡改清单后 gaps=2 拒绝）。",
+        "提交后严格验收：python3 verify-unit.py --mode accept --scope metanet4j-sdk 退出 0，203/0/0/0，LINE 1965/1977、BRANCH 514/514、METHOD 445/455，实测缺口恰为例外清单 12 行；证据 evidence/20260928T093257Z/（head 670ee3d）。",
+        "同一提交 install -DskipTests BUILD SUCCESS，安装 metanet4j-sdk-0.2.0.jar 供 component 使用；日志 evidence/20260928T093257Z/metanet4j-sdk/install.log。",
+        "父 POM 例外机制提交 metanet4j-parent 7302e1b；base 回归严格验收 19/0/0/0 且 LINE 208/208、BRANCH 76/76、METHOD 51/51，证据 evidence/20260928T092443Z/。",
+        "SDK 本地 HTTP 集成测试 5/0/0/0；evidence/20260926-u2-http/integration/。HTTP 单元定向 6/0/0/0，HttpClientFactory 逐类 LINE/BRANCH/METHOD 100%；evidence/20260927-u2-http-sighash-remote-green/。",
+        "BAP encryptSelf 加密当前 identityKey 并由 decryptSelf 往返；缺失路径异常定向验证 13/0/0/0；evidence/20260927-u2-bap-http-targeted/。",
+        "BOB/TXO 不可达异常捕获清理后的转换测试 7/0/0/0；evidence/20260927-u2-bob-txo-catch-green/。公钥压缩复用 bitcoinj 后签名回归 3/0/0/0 且 EcKeyLiteExtend 逐类 100%；evidence/20260927-u2-eckey-compression-green/。",
+        "交易构建、本地和远程签名、Ord/Bsocial、加密与脚本协议的离线契约测试，以及仓库内八组历史 Ordinal 交易固定向量与 Sigma 验签定向 8/0/0/0；evidence/20260927-u2-ord-fixtures-sigma-targeted/。源码与测试分类见 unit-test-inventory.json。",
+        "31 个旧 external 用例均登记精确替代测试，47 条替代引用已核实存在；需实时 UTXO 或主网广播的部分另记人工原因。"
+      ],
+      "statusNote": "2026-09-28 完成：远程转移入口按决定保留返回类型并新增准备入口；SDK 严格验收 203/0/0/0，LINE/BRANCH/METHOD 除批准清单 12 行外全部 100%，实测缺口与例外清单逐项一致；产物已安装供 component 使用。"
+    },
+    {
+      "id": "unit-u3-foundation",
+      "name": "U3 component 基础模块",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "done",
+      "dependencies": [
+        "unit-u2-sdk"
+      ],
+      "evidence": [
+        "component 提交 63560a3（model）与 4d3cf66（common）：新增 lombok.config（Lombok 生成成员由 JaCoCo 内置 AnnotationGeneratedFilter 逐成员识别）、聚合 POM 补 JUnit/Mockito 与 jacoco:check 例外属性。",
+        "component-model：20/0/0/0，LINE 73/78、BRANCH 2/2、METHOD 18/19，缺口为登记的枚举无调用构造器 5 行；严格验收 evidence/20260928T100401Z/，探针 evidence/20260928-u3-model/enum-ctor-probe.log。",
+        "component-common：41/0/0/0，LINE 239/248、BRANCH 42/42、METHOD 86/95，缺口为 9 个无行为隐式构造器；严格验收 evidence/20260928T103233Z/。",
+        "component-core：2 个纯接口按实测 N/A，严格验收 evidence/20260928T103553Z/（0 可执行方法，gaps=0）。",
+        "测试暴露并最小修复：ConvertTypeEnum 构造器未写入 id、JacksonBeanUtils.copyProperty 忽略目标类型；可测性调整 LocalTestUtxoProvider 目录可配置与 BitcoinSchemaTransaction 可注入 UTXO provider。"
+      ],
+      "statusNote": "2026-09-28 完成：model/common/core 三模块相继达到 §3 口径，剩余缺口均为精确清单登记的无行为或不可达字节码；component 仓库 lombok.config 与聚合 POM 配置就位。"
+    },
+    {
+      "id": "unit-u4-protocol",
+      "name": "U4 数据输入与协议处理",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "done",
+      "dependencies": [
+        "unit-u3-foundation"
+      ],
+      "evidence": [
+        "component 提交 53d5d62（connect-planaria）、347635f（tx-convertor）、后续提交（tx-filter/tx-validator）。",
+        "connect-planaria：12/0/0/0，LINE/BRANCH/METHOD 全 100%，恒真占位 AppTest 删除；证据 evidence/20260928T110034Z/。",
+        "tx-convertor：54/0/0/0，LINE 383/398、BRANCH 144/160、METHOD 65/66，缺口为 6 条不可达或防御性字节码；证据 evidence/20260928T122818Z/。",
+        "tx-filter：7/0/0/0，LINE 16/16、BRANCH 5/6、METHOD 9/9；tx-validator：4/0/0/0 全 100%；证据 evidence/20260928T130137Z/ 与 evidence/20260928T130312Z/。",
+        "测试暴露并最小修复：UtxoConvertor 输出分支互换、BAP append-data 签名地址与 appendData 缺失、协议反射工厂前缀错位与非文本字段跳过。"
+      ],
+      "statusNote": "2026-09-28 完成：四模块相继达到 §3 口径（54+12+7+4 例，缺口均为精确清单登记的不可达字节码）。"
+    },
+    {
+      "id": "unit-u5-storage",
+      "name": "U5 存储层",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "done",
+      "dependencies": [
+        "unit-u4-protocol"
+      ],
+      "evidence": [
+        "store-sql 提交 c8c45c3：单元 11/0/0/0，LINE 24/24、BRANCH 4/4、METHOD 14/14；最终证据 evidence/20260928T162746Z/。",
+        "store-mongo 提交 4904dac：单元 56/0/0/0，LINE 311/315、BRANCH 54/56，缺口为登记的 friendState 不可达分支；最终证据 evidence/20260928T162233Z/。",
+        "store-search 提交 fb29000：单元 32/0/0/0，LINE 97/98、BRANCH 31/31、METHOD 35/36，缺口为登记的 IndexConstant 隐式构造器；最终证据 evidence/20260928T161725Z/。",
+        "集成（提交 5174917）：store-search 4/0/0/0（evidence/20260928T160246Z/）、store-mongo 6/0/0/0（evidence/20260928T161101Z/）、store-sql 5/0/0/0（evidence/20260928T161623Z/）；均为本机真实 ES 9.4.5 / Mongo 8.0.32 / MySQL 8.4.11，每轮唯一索引或库并自行清理，共享数据未改动。",
+        "验收入口修复：verify-unit.py 例外分支计数比较改用 counters.get(\"BRANCH\", 0)，U3 证据回放由 8 条误报降为 0 条。"
+      ],
+      "statusNote": "2026-09-28 完成：三模块单元覆盖率达标（缺口均按精确清单登记），并各留实连集成证据；集成测试覆盖成功、失败/异常与数据可观察性，资源每轮唯一且已核验无残留。"
+    },
+    {
+      "id": "unit-u6-business",
+      "name": "U6 核心业务链路",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "done",
+      "dependencies": [
+        "unit-u5-storage"
+      ],
+      "evidence": [
+        "component-tx 提交 630303b：29/0/0/0，LINE 107/111、BRANCH 4/6、METHOD 48/48，缺口为登记的远程签名器桩不可达代码；证据 evidence/20260928T164728Z/。",
+        "component-bap 提交 2fbd3f7：63/0/0/0，LINE 293/305、BRANCH 69/70、METHOD 88/88，缺口为登记的 MongoStoreBapDtoHandler 数据分支不可达；证据 evidence/20260928T180551Z/。",
+        "component-bap 暴露并最小修复：BapSearchListener 的 BapSearchService 字段漏写 @Autowired，BapSearchEvent 发布即 NPE、搜索身份不落库；已先用 Spring 上下文回归用例复现再修复。",
+        "component-bsocial 提交 b9bfb97：76/0/0/0，LINE 529/530、BRANCH 118/118、METHOD 153/154，缺口为登记的 ConverterHelper 隐式构造器；证据 evidence/20260928T190248Z/。",
+        "记录的当前行为：MongoBapService/MongoBsocialService 空 Optional 直接抛 NoSuchElementException；不受支持的 linkIdentity/linkBsocial 类型不建交易、随后解引用 NPE；mapList 为空时 bsocial handler 与 MySQL 转换器抛 NoSuchElementException（经 ConversionService 包装为 ConversionFailedException）；Mongo 的 DATA 类 BAP 交易恒被忽略。",
+        "component-bitcoinschema 提交 2648727：4/0/0/0，LINE 7/7、BRANCH 4/4、METHOD 2/2（无缺口）；证据 evidence/20260928T194451Z/。",
+        "component-handler 提交 2648727：5/0/0/0，LINE 12/12、BRANCH 4/4、METHOD 5/5（无缺口）；证据 evidence/20260928T195825Z/。记录的行为：BitcoinSchemaTxHandler.handleBsocialTx 转换结果未被使用（该入口不落库）。",
+        "U6 跨存储链路集成（提交 8a778c9）：MongoBusinessChainIntegrationTest 6/0/0/0 与 MysqlBusinessChainIntegrationTest 4/0/0/0，均为真实中间件 + 本地离线构造签名的原始交易（不联网、不广播）；证据 evidence/20260928T211704Z/，含 ES/Mongo/MySQL 无 it_u6_* 残留检查。",
+        "集成暴露/记录的行为：ID 交易由 root 签名时 isRootBap 为真，走 root 分支整体替换 signers（而非追加）；两个 handler 的 BsocialSearchEvent/BapSearchEvent 发布仍被注释，事件驱动的 ES 索引不会触发。"
+      ],
+      "statusNote": "2026-09-28 完成：五模块单元验收通过（含 1 处监听器漏注入的最小修复），并补齐 Mongo/MySQL 两条跨存储链路的成功与失败传播证据。"
+    },
+    {
+      "id": "unit-u7-adapters",
+      "name": "U7 外围能力",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "done",
+      "dependencies": [
+        "unit-u6-business"
+      ],
+      "evidence": [
+        "component-file 提交 2195d08：59/0/0/0，LINE 188/199、BRANCH 52/52、METHOD 63/66，缺口全部为登记的精确例外；证据 evidence/20260928T232443Z/。",
+        "原 8 个 @Disabled 用例全部改写为有效测试：local 用 @TempDir 验证读写删，FTP/SFTP 用注入替身验证上传/下载/删除委托 + 本地不可达端口验证路径规范化与连接失败传播，S3 用 MinioClient 替身验证 Put/Remove/Get 参数并覆盖 MinIO/阿里云/腾讯云 endpoint/domain/region 推导。",
+        "记录的行为：无 bucket 前缀的腾讯云 endpoint（cos.<region>.myqcloud.com）推导出空 region，被 MinioClient 拒绝；带 scheme 的 endpoint 走 MinIO 的 domain 拼法（endpoint/bucket）。",
+        "verify-unit.py 修复：例外清单按「方法名:行号」建键，避免同名重载互相覆盖造成类级计数误判（tx/bap/bsocial 证据回放无回归）。",
+        "component-cache 提交 a7359a8：34/0/0/0，LINE 335/340、BRANCH 74/76、METHOD 74/74，缺口为登记的 redisson 超时分支与连接释放兜底 catch；证据 evidence/20260928T235318Z/。",
+        "component-cache 覆盖口径：RedisUtils 全部 58 个方法经受控 RedisTemplate/ops 替身验证委托与兜底返回值（含「客户端全抛异常」用例），RedissonAutoConfiguration 覆盖单机创建/关闭、reactive/rx 委托与集群配置装配，CacheManagerConfig 验证缓存 TTL 与 KeyGenerator 的 SHA-256。",
+        "component-cache 记录的当前行为：未提供 redisson.config 时 Redisson.create(null) 抛 NPE；集群模式下节点不可达即创建失败（配置装配先完成）；findKeysForPage 的 page 为 0 基。",
+        "component-message 提交 d77695d：31/0/0/0，INSTRUCTION 1461/1461、BRANCH 14/14、LINE 408/408、METHOD 199/199，零缺口；证据 evidence/20260929T002046Z/。",
+        "发现并修复缺陷（base 提交 53ed9ad）：BitcoinSchemaDto 缺少无参构造器，Jackson 反序列化 flink_bap_sink_topic 负载必然失败，BitcoinSchemaConsumer 的发布分支在生产不可达；补 @NoArgsConstructor 后回归用例转绿（修复前红）。",
+        "component-message 记录的当前行为：Listener.ackMode 与 noPollThreshold 未设默认值（上游 Spring Boot 为 BATCH/0.0，消费端由 KafkaConsumerConfiguration 显式设 MANUAL）；DataSize 类映射（batch.size/fetch.min.bytes/cache.max.bytes.buffering）经 asInt 产出 Integer。",
+        "metanet4j-api-common 提交 6a1b0af：59/0/0/0，覆盖 10 个生产类（异常翻译 12 类、全局与 LogModel 两个切面、BaseApiResult/R/ApiResult、ValidateUtils、JwtTokenProvider、注解默认值）；证据 evidence/20260929T081536Z/，严格验收 gaps=0。",
+        "api-common 缺口按精确清单登记两类：BaseApiResult 的无调用点枚举构造器、ValidateUtils 的隐式默认构造器，聚合 POM 的 jacoco.unit.check.excludes 同步排除。",
+        "Redis 实连集成 14/0/0/0（共享 Redis 7.4，6379，无密码）：RedisUtils 的值/TTL/自增/哈希/集合/有序集合/列表/扫描/批量读写、RedisService、RedissonSpringCacheManager 缓存往返、CacheManagerConfig 的 KeyGenerator；每轮唯一 key 前缀，用例结束逐 key 清理，共享库无残留。",
+        "Kafka 实连集成 6/0/0/0（共享 Kafka 4.2 KRaft，9092）：生产者与消费者配置的真实装配、四个 sendMsg 重载的成功回调、指定分区与 key 的发送；每轮唯一 topic 与 consumer group，结束后删除 topic，broker 无残留。",
+        "集成测试暴露并修复缺陷（component 提交 225da53）：RedissonAutoConfiguration.redisson() 在未提供 redisson.config 时直接 Redisson.create(null) 抛 NPE，只配 spring.data.redis.* 的标准用法无法启动；改为按 DataRedisProperties 装配 SingleServerConfig（database/username/password/clientName/连接超时），YAML 与集群两条既有路径行为不变；单元复跑 34/0/0/0（evidence/20260929T092410Z/）。",
+        "Redis 集成记录的行为：RedisUtils 的 key 走 JDK 序列化，keys/delByKeys 的通配符被当作普通字符编码因而匹配不到自身写入的键；scan/findKeysForPage 只匹配 UTF-8 编码的键；hincr/hdecr 无 try/catch 兜底，对序列化值直接抛 InvalidDataAccessApiUsageException；generate 的 TTL 在键首次创建时不生效、第二次起正常；mget 对缺失键在结果中放 null；RedisAtomicLong 自建 StringRedisTemplate，与 RedisUtils 不是同一键空间。",
+        "Kafka 集成记录的行为：topic 名非法时 KafkaTemplate 同步抛 KafkaException(\"Send failed\")，未返回 future，whenComplete 从未注册，failConsumer 与默认失败日志都不执行；bootstrap-servers 在配置中以 List 保存。",
+        "FTP 集成已完成（提交 3ce773b）：MiniFtpServer 按 RFC 959 用 JDK 自带 socket 实现 FtpFileClient 用到的命令子集，FtpFileClientIntegrationTest 7 例覆盖 doInit 连接、basePath 规范化、上传/下载/删除、URL 拼接、多客户端共享目录与 512KB 大报文；另补 FtpFileClientTest#initConnectsSuccessfullyAgainstALocalFtpService 使成功路径在单元层可达。据此删除 FtpFileClient 的例外登记，component-file 60/0/0/0 gaps=0。"
+      ],
+      "statusNote": "2026-09-29：四模块单元全部严格验收通过（均 gaps=0），Redis/Kafka/FTP 实连集成完成，并修复 Redisson 配置装配缺陷。SFTP 集成因无可用 SSH 服务未完成。"
+    },
+    {
+      "id": "unit-u8-tools",
+      "name": "U8 工具与测试应用收口",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "done",
+      "dependencies": [
+        "unit-u7-adapters"
+      ],
+      "evidence": [
+        "mybatispuls-generator 提交 774e49c：6/0/0/0，覆盖 scanner 的正常输入、多余行、空行/纯空白/输入流耗尽三类拒绝路径；main 及其 6 个配置 lambda 按精确清单登记（交互式控制台输入 + 真实 MySQL + 覆盖源码目录，U8 完成条件之一即不连库不覆盖源码）。",
+        "metanet4j-component-test 提交 3078453/559f530：32→14 例、0/0/0、gaps=0。修复 testDecrypt 硬编码非法密文（Base32 解码后无 BIE1 魔数）与 BitcoinSchemaTransactionTest 标 @Test 却返回 String 导致 JUnit 拒绝整类的问题。",
+        "夹具下沉核对：component-test 的 StateCalculatorTest、BapBaseTest 测的分别是 component-common 的 StateHelper 与 sdk 的 BapBase，二者已有更完整的契约测试，删除重复副本；两个只打印不断言的类（common/CommonTest、BaseDataTest#testFollowXpriv）一并清理。",
+        "集成测试清单核对：15 个测试类、101 例，全部连共享中间件并按轮清理；发现并修复 Redis 集成用例绕过键登记导致的 4 个键残留（提交 13155bc）。",
+        "verify-unit.py 类级计数核对修正：JaCoCo 类级 LINE 不重复计入 lambda 体内的行，此前简单求和会让任何含 lambda 的例外被误判。"
+      ],
+      "statusNote": "2026-09-29：两模块严格验收 gaps=0，集中纯逻辑测试已下沉到归属模块，集成测试清单核对完成。"
+    },
+    {
+      "id": "unit-u9-acceptance",
+      "name": "U9 全量验收与交付",
+      "description": "范围与完成条件见 doc/单元测试全覆盖计划-20260920-090603.md §5—§7。",
+      "status": "done",
+      "dependencies": [
+        "unit-u8-tools"
+      ],
+      "evidence": [
+        "交付报告：doc/验收报告-单元测试全覆盖-20260929-232313.md。",
+        "全量单元验收 `verify-unit.py --mode accept --scope all` 通过（evidence/20260929T155751Z/）：25 个 POM、23 个源码模块、841 例，0 failures/0 errors/0 skipped，全部模块 gaps=0。",
+        "由 Surefire XML 独立核算复核：177 个测试类、841 例、0/0/0；由 JaCoCo XML 独立核算：LINE 5469/115、BRANCH 1255/28、METHOD 1477/38，未覆盖部分全部落在 42 类 57 条精确登记的例外内。",
+        "全量集成测试通过：18 个测试类、124 例（含新增的 FTP 7 例），共享中间件无 it_u* 残留。",
+        "报告已更新至含 FTP 结果的版本。",
+        "2026-09-29 胡先生决定：SFTP 集成暂不处理，按现状收尾。SftpFileClient.doInit 的 2 行继续按精确清单登记为覆盖例外，报告明确记录为外部环境阻塞；其余 22 个模块的验收结论不受影响。"
+      ],
+      "statusNote": "2026-09-29：全量单元与集成验收通过，报告已交付；胡先生决定 SFTP 集成按现状收尾，本项验收完成。"
     }
-  ]
+  ],
+  "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
+  "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md"
 }

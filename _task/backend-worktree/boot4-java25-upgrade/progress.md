@@ -1,96 +1,32 @@
-# progress.md — boot4-java25-upgrade 进度
+# progress.md — Boot 4 / Java 25 测试任务
 
-> 会话连续性日志：只写**当前状态**与下一步。任务内容见 `doc/升级计划-Boot4-Java25.md`，
-> 共享规则见 `../AGENTS.md`；某处为什么这么改，查 git log（文档不留变更记录）。
+范围与验收标准见[单元测试全覆盖计划](doc/单元测试全覆盖计划-20260920-090603.md)；逐模块状态见 `feature_list.json`，源码与测试分类见 `unit-test-inventory.json`。
 
-## Current State（当前状态）
+## Current State
 
-- **Last Updated**：2026-09-17（交付后修复 I/II 完成；2026-09-17 分支更名 `feature/java25` 并快进合入 `dev` 推送）
-- **Current Objective**：无（本任务已交付；交付物见 `doc/验收报告-Boot4-Java25-20260916-1320.md`）
-- **Recommended Next Step**：无必做项；如有后续动作，先看文末「下一步」与「未决项」
-- **远端状态**：四仓库已推送 `origin/feature/java25`（三轮：交付成果 → 交付后修复 I → 交付后修复 II），远端 `master` 未被触碰，`dev` 已于 2026-09-17 快进合入本次成果并推送（`dev` = `feature/java25`，旧分支 `feature/java21` 已删除）；ownword 文档已推送
-- **执行授权**：用户 2026-09-16 指示「继续执行，改代码不必逐项确认」；仅在计划未覆盖的架构决策/取舍上停下问（`AGENTS.md` §5）
-- **依赖基座**：parent / base / sdk / component 的 0.2.0 均可构建安装
-- **中间件**：共享设施 `ownword/infra/` 五个容器 healthy 运行中
-- **全局工具链**：JDK 8 / Maven 3.9.9 未被改动（`./init.sh` 每次校验）
+- **Last Updated**：2026-09-29。
+- **Current Objective**：为四个子仓库建立完整单元测试、集成测试与逐模块验收证据。
+- **Active Item**：`unit-u9-acceptance` 收尾：全量单元与集成验收均已通过，验收报告已交付；仅 FTP/SFTP 集成一项因无服务未完成。
+- U3 三模块严格验收均通过：component-model 20/0/0/0（LINE 73/78、BRANCH 2/2、METHOD 18/19，evidence/20260928T100401Z/）、component-common 41/0/0/0（LINE 239/248、BRANCH 42/42、METHOD 86/95，evidence/20260928T103233Z/）、component-core 纯接口 N/A（evidence/20260928T103553Z/）。提交：component 63560a3、4d3cf66。
+- component 仓库根启用 `lombok.config`（`addLombokGeneratedAnnotation`），Lombok 生成成员由 JaCoCo 内置 `AnnotationGeneratedFilter` 逐成员识别；聚合 POM 补 JUnit/Mockito 测试依赖与 `jacoco.unit.check.excludes` 属性。缺口一律按 `unit-coverage-exceptions.json` 精确清单登记并由 `verify-unit.py` 双向核对。
+- U3 测试暴露并最小修复：`ConvertTypeEnum` 构造器未写入 `id`、`JacksonBeanUtils.copyProperty` 忽略目标类型；`StateHelper` 删除不可达空 `default`；`LocalTestUtxoProvider` 目录可配置、`BitcoinSchemaTransaction` 可注入 UTXO provider（默认行为不变）。
+- U5 单元（最终重跑，源码含集成测试文件）：store-sql 11/0/0/0（LINE 24/24、BRANCH 4/4、METHOD 14/14，`evidence/20260928T162746Z/`）、store-mongo 56/0/0/0（LINE 311/315、BRANCH 54/56，`evidence/20260928T162233Z/`）、store-search 32/0/0/0（LINE 97/98、BRANCH 31/31、METHOD 35/36，`evidence/20260928T161725Z/`）；提交 c8c45c3、4904dac、fb29000。
+- U5 集成（提交 5174917）：store-search 4/0/0/0 连 ES 9.4.5（唯一索引，`evidence/20260928T160246Z/`）、store-mongo 6/0/0/0 连 Mongo 8.0.32（唯一库 + Spring Data 仓库与事件监听真实装配，`evidence/20260928T161101Z/`）、store-sql 5/0/0/0 连 MySQL 8.4.11（唯一库 + Druid/MyBatis-Plus/XML mapper/事务真实装配，`evidence/20260928T161623Z/`）。各证据含 maven.log、Surefire XML、元数据与服务侧日志/残留检查；ES、Mongo、MySQL 均确认无 `it-u5-*` 残留，共享数据未改动。
+- store-search 单元测试用受控 ES client 替身（`EsClientStub` 执行被测代码传入的请求 lambda 并还原请求对象）；`IndexConstant` 隐式构造器按既有口径登记为精确例外。记录的行为：未映射的 Field Kind 在构造 Query 时即抛 `MissingRequiredPropertyException`，被 `search` 的 catch 转成空结果。
+- 修复 `verify-unit.py` 的例外分支计数比较（`counters.get("BRANCH", 0)`）：无 BRANCH 计数器的例外类此前被误判为“例外分支计数不符”，U3 证据回放已验证修复。
+- U4 四模块严格验收均通过：connect-planaria 12/0/0/0（`evidence/20260928T110034Z/`）、tx-convertor 54/0/0/0（`evidence/20260928T122818Z/`）、tx-filter 7/0/0/0（`evidence/20260928T130137Z/`）、tx-validator 4/0/0/0（`evidence/20260928T130312Z/`）。提交：component 53d5d62、347635f 及后续。
+- U4 测试暴露并最小修复：UtxoConvertor 输出分支互换（P2PKH/P2PK 均抛异常）、BAP append-data 未设签名地址与 appendData、协议反射工厂前缀错位与非文本字段跳过。
+- U2 sdk 严格验收 203/0/0/0，证据 `evidence/20260928T093257Z/`（head 670ee3d）；U1 base 回归 19/0/0/0，证据 `evidence/20260928T092443Z/`。
 
-## 门禁与证据（最新一轮）
+## 阻塞与剩余工作
 
-| 模块 | 执行数 | 结果 |
-|---|---|---|
-| metanet4j-base | 2 | 2 通过 |
-| metanet4j-sdk | 26 | 26 通过（含交付后新增 3 个离线回归用例；另 29 个 external 被排除） |
-| metanet4j-connect-planaria | 1 | 1 通过 |
-| metanet4j-component-file | 8 | 8 通过（8 skipped 为需凭据的 S3/SFTP 用例） |
-| metanet4j-component-test | 101 | 101 通过（交付后修复 II 后 +6：3 个撤销 external 的 resolver 用例、1 个补断言的 `testAddress`、2 个新回归类实例） |
+- U8：mybatispuls-generator 6/0/0/0、component-test 14/0/0/0，均 gaps=0（提交 774e49c、3078453、559f530）；夹具下沉与集成清单核对完成。
+- FTP 集成已完成（提交 3ce773b）：MiniFtpServer 按 RFC 959 用 JDK 自带 socket 实现 FtpFileClient 用到的命令子集，集成 7 例 + 单元补 1 例成功连接路径，component-file 60/0/0/0 gaps=0，`FtpFileClient` 例外已删除。
+- U9 全量：`verify-unit.py --mode accept --scope all` 通过（`evidence/20260929T155751Z/`），25 POM、23 模块、**841 例**、0/0/0、全部 gaps=0；Surefire XML 独立核算 177 类/841 例，JaCoCo XML 独立核算 LINE 5469/115、BRANCH 1255/28、METHOD 1477/38。全量集成 18 类 124 例通过。报告见[验收报告](doc/验收报告-单元测试全覆盖-20260929-232313.md)。
+- **唯一剩余项：SFTP 集成。** 需要可用的 SSH/SFTP 服务，两条路径都需胡先生确认：给 `ownword/infra` 增加 sftp 服务（跨任务共享基础设施变更），或本机安装 openssh-server（宿主环境变更）。本机无 sshd 二进制与 SSH 镜像，模块依赖只有客户端库 jsch。`SftpFileClient.doInit` 的 2 行按精确清单登记。
+- 纠正上一轮的错误结论：曾判定「手写 FTP 服务端不可行」，实际是我漏发 `150` 中间响应（客户端因此不发数据）且 accept 循环单线程阻塞后续连接。FTP 已闭环。
+- 记录的行为：RedisUtils 的 key 走 JDK 序列化，`keys`/`delByKeys` 的通配符被当作普通字符编码因而匹配不到自身写入的键，`scan` 只匹配 UTF-8 键，`hincr`/`hdecr` 无兜底直接抛异常，`generate` 的 TTL 首次创建时不生效、第二次起正常，`mget` 对缺失键放 null，`RedisAtomicLong` 与 `RedisUtils` 不在同一键空间；Kafka 在 topic 名非法时同步抛 `KafkaException("Send failed")`，`failConsumer` 不执行；`scanner` 按空白分词只取第一个词；jacoco 0.8.14 对 CLASS 元素的单类全名排除不可靠，需用包通配写法。
 
-- 复跑：`export JAVA_HOME=$HOME/.sdkman/candidates/java/25.0.4.1-tem`；`MVN="$HOME/.sdkman/candidates/maven/3.9.16/bin/mvn -s $HOME/.m2/metanet4j-settings.xml -B"`；
-  `(cd metanet4j-component && $MVN clean test -DexcludedGroups=external)`
-- `contextLoads` 在 9 个类的 `TEST-*.xml` 中真实执行。**注意口径**：surefire 的 `.txt` 只记失败项，
-  通过用例不出现 → 判定 `contextLoads` 必须看 XML，`grep *.txt` 会误报"未执行"。
-- §6.6 九条 grep 门禁全绿（pom 25 / 0.1.0 字面量 0 / `metanet4j.version=0.1.0` 0 / `java.version=11` 0 /
-  `import javax.*` 仅白名单 `AesCBCUtil` / Boot 4 旧包名 0 / Jackson 旧 core·databind 0 /
-  `RedissonAutoConfigurationV2` 0 / http·RestClient·RestClientTransport 0）
-- 依赖树断言：`elasticsearch-java:9.4.5` + `elasticsearch-rest5-client:9.4.5`（无 legacy rest-client）、
-  `redisson-spring-data-41:4.7.0`（无 2x）、`kafka-clients:4.2.1`、`mongodb-driver-sync:5.8.1`、`mysql-connector-j:9.7.0`
-- 原始日志：`/tmp/boot4-p5-diag/`（`full-gate.log`、`component-test-green.log`、`diag-before/after.log`、
-  `repro-mongo*.log`、`es*.log`、`resolver*.log`）
+## Recommended Next Step
 
-## What's Done（已完成）
-
-| 事项 | 证据 |
-|---|---|
-| P0 环境（工具链 + 共享中间件 `ownword/infra`） | ownword 提交 `8770634`；五服务握手 PASS |
-| P0 基线清理（移除 5 个模块的过期 Maven Wrapper） | metanet4j-component `d677634` |
-| P0.5 依赖预取（隔离仓库 265MB/516 jar → 352MB/705 jar，0 失败） | `/tmp/boot4-prefetch/prefetch.log` |
-| P1 版本号统一 0.2.0（82 处 + 属性 + 13 处 `java.version=11` 清零） | parent `5f462fa` / base `d0e2384` / sdk `52e59bb` / component `6ecd226` |
-| P2 父 POM（Boot 4.1.1 / Java 25 / claim 清理 / compiler 3.15.0 / enforcer） | parent `935b5f5` + `a82ab4e` |
-| P3 base + sdk（jakarta·JSpecify / Jackson 3 / 日志） | base `4f5a65a`；sdk `097870d` |
-| P4 component（22 pom + 源码迁移 + ES 9 + Redisson 4.7.0 + 测试基建） | component `b468ba8`（含 6 处先改计划的偏差） |
-| 测试门禁（全仓 39 文件迁 Jupiter + sdk 两处构造链缺陷修复 + 联网用例打 Tag） | parent `50598c0` / base `6e16cfa` / sdk `451020e`·`bc966e5` / component `0ce5c18` |
-| **P5 验证与收敛**（Mongo 认证根因、ES 两处、resolver 两类、`ComplteTxFactoryTest` 定性；门禁复跑全绿） | 见计划 §11「P5 验证」记录与本文件「门禁与证据」；component 提交 `73e3ad4` |
-| **P6 收尾**（四仓库提交确认 + 文档同步 + 验收报告输出） | `doc/验收报告-Boot4-Java25-20260916-1320.md`；ownword 提交见 git log |
-| **交付后修复 I**（sdk `initSignType` 死代码 + 测试应用 Redis/MySQL 配置对齐） | sdk `bae4c36`（含离线回归用例 + 负向验证）、component `d585194`；已推送 |
-| **交付后修复 II**（`MongoBapService.findIdentityKey` 空桩 + `TxoBobConverter` 用例从未执行） | component `e634982`（含自足回归用例 + 负向验证；3 个 resolver 用例撤销 external 并自足化）；已推送 |
-
-## 关键事实（避免重复踩坑）
-
-1. **不改 lombok 钉死则编译不通**：lombok 1.18.20 + JDK 25 = `Fatal error compiling: TypeTag :: UNKNOWN`。
-2. **测试必须 `clean test`**：陈旧 `target/` 字节码会产生假 error。
-3. **MongoDB 认证必须带 `authSource=admin`**；Boot 4 的连接配置前缀是 **`spring.mongodb.uri`**（`spring.data.mongodb.*` 全系 deprecated）。
-4. **YAML 顶层键不能插在 `spring:` 块中间**：一旦顶格插入（如 `planaria:`），其后所有 `spring.*` 键会被归到插入键之下，
-   Spring 侧表现为"配置静默不生效"（本次真实踩坑：Mongo 无凭据连接 → `Command find requires authentication`；
-   修复见计划 §11 P5 记录）。写嵌套配置后建议用 `python -c "import yaml;..."` 打印真实结构核对。
-5. **Kafka 是 KRaft**：4.x 已移除 ZooKeeper；`CLUSTER_ID` 固定，数据卷复用时不可改。
-6. **ES 9 迁移面很小**：改动集中在 `EsConfig` 的 mapper/transport 与依赖坐标；索引/字段是否真的存在要用 `_mapping` 查（本次 `txInMemoryPoolTimeStamp` 就是"产品里不存在的字段"）。
-7. **Docker Hub 不可达**：镜像走 `docker.m.daocloud.io/` 全限定名（`docker.elastic.co` 可直连）。
-8. **worktree 的 `.git` 是文件**：判定仓库用 `git rev-parse --git-dir`。
-9. **`spring-kafka` 不要带 4.2.1 版本号**：4.2.1 是 `kafka-clients`；`spring-kafka` 由 BOM 管（4.1.1）。
-10. **`spring-boot-starter-aop` 在 4.1.1 上不存在**，替代坐标 `spring-boot-starter-aspectj`。
-11. **ES 9.4.5 客户端同时带 Jackson 2 与 Jackson 3**（预期）。
-12. **depMgmt 里不带 `<version>` 的条目会屏蔽 Boot BOM**：跟随 BOM 的坐标必须整条删除 depMgmt 条目。
-13. **Jackson 3 只有 core/databind 三件套**：`datatype-jdk8`/`datatype-jsr310`/`module-parameter-names` 已并入 databind。
-14. **纯 JUnit4 模块不会静默跳过**：surefire 3.5.6 见到 `junit:junit` 会自动选 junit4 provider。
-15. **Jupiter 会静默忽略非 void 的 `@Test` 方法**（`@Test public String foo()` 不报错也不执行）；
-    报告里没出现的类要能逐条解释（AGENTS §8 口径）。
-16. **`BapDataLockBuilder.initSignType` 曾是死代码**（父类 `signType` 已初始化成 `CURRENT`，非 null，导致 `if (signType == null)` 恒假）→ `buildRoot()`/`buildId()` 用 CURRENT 地址签名、
-    `BapHelper.isRootBap` 判 false、解析器认不出 root。**已于交付后修复**（sdk `bae4c36`：直接写入 `signType`；新增离线回归用例 `BapDataLockBuilderSignTypeTest` + 负向验证）。
-17. **`MongoBapService.findIdentityKey` 是返回 null 的桩**且带 `@Primary` → Mongo-only 部署下「签名地址 → identityKey」反查恒失效；
-    真实实现在 `MysqlBapService`（本测试应用按设计未纳入 store-sql）。相关用例已打 `@Tag("external")`。
-
-## 未决项（需用户决策）
-
-| # | 事项 | 影响 | 建议 |
-|---|---|---|---|
-| 1 | ~~sdk `initSignType` 死代码~~ **已修** | — | ✅ sdk `bae4c36`（含离线回归用例 + 负向验证），已推送 |
-| 2 | ~~测试应用 Redis/MySQL 配置与共享设施不一致~~ **已对齐** | — | ✅ component `d585194`，已推送 |
-| 3 | ~~`MongoBapService.findIdentityKey` 空桩~~ **已修** | — | ✅ component `e634982`（委托 `BapIdRepository.findIdentityKey`；自足回归用例 + 负向验证），已推送 |
-| 4 | ~~`TxoBobConverter`（3 个用例）从未被 surefire 选中~~ **已修** | — | ✅ component `e634982`：改名 `TxoBobConverterTest`；1 补断言入门禁 / 1 空用例删除 / 1 打方法级 external |
-| 5 | 未打基线 tag `pre-boot4-java25` | 计划 §8 草案要求开工前打；实测 `dev` 全程未移动，回滚等价 `git checkout dev` | 如需留痕可补打 |
-| 6 | 57 个用例被 `@Tag("external")` 排除 | sdk 29 + component-test 28（需公网广播、本机绝对路径夹具、MySQL/S3 凭据、2023 主网 outpoint 等） | 已逐类定性归档；不进常规门禁 |
-
-## 下一步（Next）
-
-1. 本任务已交付并已推送：提交 ID = parent `50598c0` / base `6e16cfa` / sdk **`bae4c36`** / component **`e634982`**；
-   远端 `origin/feature/java25`（四仓库一致）；验收报告见 `doc/验收报告-Boot4-Java25-20260916-1320.md`。
-2. 如需继续：① 需要留痕则补打基线 tag `pre-boot4-java25`；② ownword 任务文档若要推送需明确指示。
+U7 与 U8 已完成，U9 的全量单元与集成验收均通过、报告已交付。唯一剩余项是 FTP/SFTP 的本地可控服务集成：一旦有可用的真实 FTP/SFTP 服务（共享基础设施需新增，或本地装 vsftpd/pure-ftpd/sshd），补上 `FtpFileClient`/`SftpFileClient` 的 `doInit` 成功构造路径集成测试，删除对应例外登记，再复跑一次 `--scope all` 即可收尾。

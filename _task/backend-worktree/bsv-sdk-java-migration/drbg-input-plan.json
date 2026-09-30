@@ -1,0 +1,587 @@
+{
+  "b432ac30f3bce72b304c6ecc3b0da498289d8cfbc14b0a4ca7198f8ae38b8b9f": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "815d687a457b961303e27f521497e86c7fd3c0a4795ec56d6f5c25e9e596fcb2": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "0aaab0d4003bc57d98b2d13d29ab93202648205ec094a299142fc08fb56b3bb8": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "36ecfdbba4fa56c867b06c90fcecb03ac2e81d168e920a057371dd6a6d53e99f": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "3cae9aa2068d821c903cf7856d07f379a1f8af1fcc1a8d9db284e93a4494e7c7": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "59659762ce653a8394f4ab5153cdc71fdbffdf97fdde947369c5f98294c7807f": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "fd01ba9cc2ff0f985cd02ea983272bca8c8d1696ed063c67d6aa860a3a8a71ed": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "0478a7194e24164e06e44eee83c5cc8178d119461cd08f28ac4aa93e7f085cc4": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "b69e3c49f6f64e2840f331fd63b97db1285ce289b257ae7349743805d9d1bf1c": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "ba46f65d9e32cd100d6c4bf1ca7819fd48f3033d9c50c4121b537d0b320578b4": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "4c2155c89db6d9d1de21e941dd1b72628ff3dd6ca708dca101cc66bf5bc56ebf": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "bc28ad06d632a39ae907f3fb90cdf2785f935d1cf1f29d59375ffa6570be9d9a": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "3a51c7ab4fdec0e539c34ba6ffc9119d178f82549449d1efdb43f2f99523be26": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "1aecd613b5535c6d925b92777d819c97bac15f81f9291a86e04eb2f4b8b39af5": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "71292348b546fbe50260e91e7577543e3fa34978e187218f7dd7ec7fc6dc8d4b": {
+    "sampleIds": [
+      "branch-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:16:11:assertion": "src/primitives/__tests/DRBG.test.ts:16:11:assertion"
+    },
+    "loopSamples": {},
+    "unexecutedSites": {
+      "src/primitives/__tests/DRBG.test.ts:26:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      },
+      "src/primitives/__tests/DRBG.test.ts:27:9:assertion": {
+        "ruleId": "drbg-nist-invalid-input-v1",
+        "guardSiteId": "src/primitives/__tests/DRBG.test.ts:15:9:conditional",
+        "sampleId": "branch-0001"
+      }
+    }
+  },
+  "8c4a321727a8cc61d30cf3934d9fac0185888240fb6e9c25aed971092bcfb7f7": {
+    "sampleIds": [
+      "call-0001"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:37:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:37:7:assertion": "src/primitives/__tests/DRBG.test.ts:37:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "f0b4d71cf9d0a1a3512dddf424276cd1a9cdd648cd98fc628ff36da3c9436740": {
+    "sampleIds": [
+      "call-0001"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:44:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:44:7:assertion": "src/primitives/__tests/DRBG.test.ts:44:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "6bd1b06b630641a31951f3a5d0ceaaac787caf4553ad8d32c1efbf8cd4f64175": {
+    "sampleIds": [
+      "call-0001"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:51:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:51:7:assertion": "src/primitives/__tests/DRBG.test.ts:51:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "235cff60e26c757a8ca86918eab54853cf5f056f313a93aab21c2c2a94c9d2d2": {
+    "sampleIds": [
+      "call-0001"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:58:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:58:7:assertion": "src/primitives/__tests/DRBG.test.ts:58:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "9fff85f75a1b73e9557c8aa4879ed13656c23f89e464208a13f1ba12679ef6e9": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:74:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:74:7:assertion": "src/primitives/__tests/DRBG.test.ts:74:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "3ca1e812e82d3c9a90ee76fdc5bd1c800e18a3c51621391c4bb592af956adbe5": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004",
+      "call-0005",
+      "call-0006",
+      "call-0007",
+      "call-0008"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:90:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:90:7:assertion": "src/primitives/__tests/DRBG.test.ts:90:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "c35f9a64ede0fa199454fdc3802f9cbdb418743e943c2f254b504e4e38c60afb": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:101:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:101:7:assertion": "src/primitives/__tests/DRBG.test.ts:101:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "a0e152a24b1cd9a4ee7614bd63a7ec7dfe4a1599526f32723911563b4fa939ea": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:112:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:112:7:assertion": "src/primitives/__tests/DRBG.test.ts:112:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "b3494993975f9883caf6231e9a5a030aa1729900a28fd64277b84ee451fc6301": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:126:7:assertion",
+      "src/primitives/__tests/DRBG.test.ts:127:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:126:7:assertion": "src/primitives/__tests/DRBG.test.ts:126:7:assertion",
+      "src/primitives/__tests/DRBG.test.ts:127:7:assertion": "src/primitives/__tests/DRBG.test.ts:127:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "8a55ea5359382054d7bf152c0090b9a2aee991bcba16ff35798a3b0280c1331f": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:136:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:136:7:assertion": "src/primitives/__tests/DRBG.test.ts:136:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "4f77da4d2cfe3593170a22609e7c55668cc69c60f0387e001619e5aec38a667e": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:151:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:151:7:assertion": "src/primitives/__tests/DRBG.test.ts:151:7:assertion"
+    },
+    "loopSamples": {}
+  },
+  "38b6221d3e7dd444aabcc79e038a24a2032102dce0b4b4b9d9dfd01525c5734a": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:207:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:207:7:assertion": "src/primitives/__tests/DRBG.test.ts:207:7:assertion"
+    },
+    "loopSamples": {
+      "src/primitives/__tests/DRBG.test.ts:164:7:loop": [
+        "call-0001"
+      ]
+    }
+  },
+  "8a127cf09d1b22a26fce1ff2b7775922c89983e3110527af3b22c5792ad34463": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:232:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:232:7:assertion": "src/primitives/__tests/DRBG.test.ts:232:7:assertion"
+    },
+    "loopSamples": {
+      "src/primitives/__tests/DRBG.test.ts:164:7:loop": [
+        "call-0001"
+      ]
+    }
+  },
+  "0ff55c346b5718c3d2b90e2255c88925b78be06c691017e64737f9c68fa1e1f6": {
+    "sampleIds": [
+      "call-0001",
+      "call-0002",
+      "call-0003",
+      "call-0004"
+    ],
+    "assertionIds": [
+      "src/primitives/__tests/DRBG.test.ts:250:7:assertion"
+    ],
+    "assertionSites": {
+      "src/primitives/__tests/DRBG.test.ts:250:7:assertion": "src/primitives/__tests/DRBG.test.ts:250:7:assertion"
+    },
+    "loopSamples": {
+      "src/primitives/__tests/DRBG.test.ts:164:7:loop": [
+        "call-0001"
+      ]
+    }
+  }
+}
