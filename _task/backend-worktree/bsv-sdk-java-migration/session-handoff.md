@@ -14,6 +14,11 @@
 
 - **v9 存活确认（21:41）**：cron 拉起后已跑 7 分 22 秒、jest **127 文件 PASS／0 FAIL**，进程父级为 cron，会话空闲清理不再影响它 ✓。
 - **v10 进度（22:44）**：存活 16 分钟、jest 尚无 PASS —— 首个文件即重型文件（jest 按历史耗时把最慢的排最前，v9 也是同一现象的另一端），预计总时长 ~76–80 分钟，**仍在 90 分钟上限内**。
+**两路状态回报（20260901 03:20）**
+
+- **路径 A（分派机制）**：已定位并改完五类根因（均非猜测）——①9 个 spend 探针读 `EVIDENCE_INPUT_PLAN` 同目录 `catalog.json` 失败 → 运行期把局部冻结计划复制到 `<runDir>/plans/<local>/` 并重指；②31 个 raw 局部无 emit 转换器（驱动用 `replay.emit_ts()` 内联而非字面量 `emit-ts` argv）→ 新增 `full-run-overrides.json` 的 `locals` 段逐局部登记 emit（`full-emit.py`／`full-emit-inline.py`／`full-emit-special.py`）；③断言缺口源于**共享断言轨迹的 matcher 序号被破坏**（`capture-bn-constructor.cjs` 等替换 `global.expect`，行格式不同）→ 这些局部改走 legacy 断言通道；④`capture-wallet-wire-parity.cjs` 与共享层双重记录同一 matcher → 从分派表移除；⑤24028 缺失样本是前四者的合成结果。下一步四个小子集自测 → 133 文件严格自测，ETA 40–60 分钟。
+- **路径 B（串行合并 driver）**：映射表**已完成**——47 个非标准局部全部核实到真实入口、0 个 unresolved（27 个 adapter 按登记 manifest 里当时跑通的原命令还原；18 个 direct；2 个 vector 覆盖 2599 例），5 个 `/tmp` 语料副本消失的局部回退到冻结 SDK 资源并记 `substitutions`；driver 四形态已接入，标准/`adapter` 形态冒烟通过，`direct` 形态 2 个局部在定位，另修一处自研 `order_rows` 包装 NameError；ETA 30–45 分钟冒烟全绿，随后 154 局部全量串行（交 cron）。
+
 **环境体检（20260901 03:15）**：`crontab` 已无条目 ✓（长跑用完即删的纪律已落实）、无残留 `mvn`／`jest`／`full-evidence` 进程 ✓、共享锁空闲 ✓。两路代理仍在运行（近数分钟静默，属正常分析间歇）。
 
 **进展（20260901 03:00）**：路径 B 新增 `build-ts-serial-entries.py`（00:33，映射表生成器，可复现）与 `ts-serial-entries.json`（47 条「局部→TS 入口」，含 shape/script/args）✓；路径 A 继续改 `run-full-ts-capture.py` 与 `full-run-overrides.json`。全量串行运行尚未启动。
