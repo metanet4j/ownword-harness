@@ -129,6 +129,12 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 哨兵规则重派（20260930 17:30）
+
+第一路哨兵规则代理**中途失败、未产出可用产物**（`audit-tests.py` 现有的 +19 行是 beef 代理的零实参 matcher 规则与自测，已核实完好）。已重派一路，并在任务书里给出更明确的切入顺序（先读 `validate_unexecuted`／`validate_branch_observations` 弄清 `samples`／`rows` 形状 → 复现 `completePlanError` → 读 catalog 站点原文 → 再设计规则）。
+
+规则要求不变：`unreachable-guard-after-throw-v1` 必须同时满足“站点形态与冻结源码逐字匹配（恒假哨兵，紧跟必然抛错的调用）”“该用例**每个**样本的紧邻调用都有异常结局”“实际执行的是同一 catch 块的断言”，任一不满足即拒绝。
+
 ### 六处失败全部修好；三项判断的裁决（20260930 17:00）
 
 修复代理终报：**6/6 全部修好**，每项 recapture 退出 0、tamper 两个 true。补充根因：`drbg29` 还叠加了“两侧共用 `assertions.raw.jsonl`、Java 追加到 TS 轨迹后”的问题（改为按侧别命名）；`chronicle-opcodes` 修完身份后又见 `inputSequence/lockTime` 的 Long vs Integer 类型差（改走 `numeric(...)` 并扩 long 分支）；`simplified-fetch-transport-additional` 实际是**六层问题叠加**（undefined body 投影、URL 字面量、deserialize 实参形状与字面量、null 捕获/varargs、JSON 键序、两处断言表示）。
