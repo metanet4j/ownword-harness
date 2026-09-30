@@ -159,6 +159,14 @@
 
 **B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
 
+**A2 收尾完成、三组接线全部落地（20260901 12:40）**：
+
+- **改了 4 个文件**：`run-full-java-capture.py`（唯一注入点，最后写入 07:35）—— A1 两行、wallet-wire 4 项**一起**注入（注释写明“只给一半”的两种退化）、A2 的 33 个 `-Dmigration.*` + 4 个自有 env、Maven 后 `full-java-serial-convert.py` 产标准行，并加运行期前置校验（引用文件存在／语料 javaMethod 不重叠／语料 sampleId 与 `input-plan.json` 逐项一致，不符则在 Maven 前中止）；`EXCLUDED_TS_INPUT_ENVS` 未动。新增 `build-java-serial-entries.py` + `java-serial-entries.json`（**36 局部／736 例**，`--check upToDate=true`）、`full-java-serial-convert.py`、`verify-java-serial.py`、报告文档。
+- **聚焦验证三轮全绿**：focus1（5 类）`Tests run: 400, Failures: 0, Errors: 0`，147+82+62+39+70 例全部有输入、`sampleIdMismatchAgainstFrozenPlan=0`、`problems=[]`；focus2（2 类）✓；focus3（向量四类）**2599/2599 例／9445 行**、`problems=[]`。wallet-wire 硬指标：raw 轨迹 **377 KB**、见证 **33.56 MB／4 条**。
+- **两项发现**：①emit 的 OOM 由 wallet-wire recipe 顺带解决（原始轨迹 800.2 MB → 约 43 MB，其中 757.5 MB 是那 4 条巨行）；②`migration.parity.largeArrays=true` 是 **JVM 级全局开关**，会误伤 2 条断言（`PushDropTest#passesVariousTestVectors#37` 70000 B、`TransactionPerformanceTest#deepSourceGraph` 186101 B）→ 处置：`repair_digest_actuals()` 做**验证性还原**（仅当 TS 同 `(caseId, assertionId)` 按字节重算的 length+sha256 完全一致才替换，否则保留并记 `problems`），已做正/反向验证。**主代理已批准保留**，并要求在最终报告写明判据与双向验证、`problems` 非空必须在 manifest 可见。
+- **缺口收敛**：3342 例中 **3335 例已接通**（A1 2599 + A2 736）。**剩 7 例**：`auth-fetch-peer` 6 例（`AuthFetchPeerTest` 无任何输入重放入口，全 evidence 无这些 caseId 的 java-inputs 记录）+ `auth-fetch-known-txids` 1 例（TS 侧聚合缺口：该用例只有 `AuthFetch.knownTxidsInput` 行，replay 要 `knownTxidsPeerInput`）。已要求 A2 **只读**排查三问（是否属 `specialized-local` 而本不该要求／是否已有逐局部 Java 产物可合法并入／若必须改冻结 SDK 测试源码则给最小改动），由主代理决定。
+- **`full-run-15` 已就绪**：`.cache/run-full-e2e.sh` 已改指 `full-run-15-20260901`（90 分钟档 + 静默守卫），crontab 已装；最后工具写入 07:35 → 守卫将在 ~07:46 后自动开跑。
+
 **三项收尾的最新结论（20260901 12:20）**：
 
 - **B 不是发射器问题**：4 条巨行全部来自 `WalletWireIntegrationTest#preservesLargeTypedBeef`（各 132 MB／3300 万元素的 typed array，解析峰值实测 2.88 GB/行）。逐局部早有约定：大数组记 `{length, sha256}` + 逐字节见证落 `java-large-actuals.jsonl`（`wallet-wire` 局部 raw 仅 0.1 MB、见证 33.6 MB）；全量没走这条约定，是因为 **Java 侧重放的开关键没打开**。已预验证 4 项 recipe（`MIGRATION_WALLET_WIRE_ASSERTION_INDEX` + `MIGRATION_WALLET_WIRE_JAVA_LARGE_ACTUALS` + `-Dmigration.walletWire.plan=…` + `-Dmigration.parity.largeArrays=true`）→ `WalletWireIntegrationTest` **82/0/0**、raw **0.12 MB**、见证 **33.56 MB**、该局部 82 例输入一并补齐。**四项必须同给**：只给 flag 不给 plan，raw 会变小但见证不产出。
