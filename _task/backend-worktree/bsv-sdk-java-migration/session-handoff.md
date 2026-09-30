@@ -129,6 +129,16 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 窗口后复核与结构性发现（20260930 15:10）
+
+`full-evidence-preflight.py` 复核：**`casesTotal 5329`、`structurallyPlannedCases 5329`（100%）、`plannedSamples 38093`、`plannedAssertionInstances 56744`、`planErrors=[]`**；`currentCaptureVerifiedCases 1882`（102 个局部）。
+
+**关键结构性发现**：未同源复核的 52 个局部（3447 例，占 65%）绝大多数是**专用局部**（`auth-fetch-additional-*` 等约 47 个），preflight 对它们标注“专用局部采集的结构计划；尚未接入标准双侧 capture，不计当前全量来源”。也就是说：**这 65% 的验收路径不是逐局部采集，而是单次双侧全量运行**（`run-full-ts-capture.py` + `run-full-java-capture.py` + `audit-tests.py check`）——全量分派表已为它们的原文件配好探针（`unmappedCatalogFiles=0`），全量 Java 侧则以一次 `clean test` 覆盖全部测试类。
+
+**已启动全量 TS 捕获**（后台，日志 `.cache/evidence/full-ts-capture.log`，运行目录 `.cache/evidence/full-run-final-20260930/`）：它只跑 jest、不占 `run.lock`，因此与修复代理并行；预计 1.5–2.5 小时（含 `AESGCM.man` 的 66 分钟）。
+
+**顺序约束**：全量 Java 侧（一次 `clean test`）必须等 6 处失败的 Java 侧问题修好后再跑，否则会整体失败。
+
 ### 最终窗口完成（20260930 14:45）
 
 `recapture-all.sh final-20260930` 跑完：**处理 108 项、篡改门禁通过 101 项、失败 6 项**（合计 353 例），耗时约 3 小时 20 分钟（含 `aesgcm-man` 的 66 分钟长跑）。
