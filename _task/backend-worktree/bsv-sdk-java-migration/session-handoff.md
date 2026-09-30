@@ -129,6 +129,20 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 六处失败：修好 4 个、批准 2 处 SDK 改动（20260930 16:00）
+
+修复代理成果（**均未改 SDK 源码**，revision 仍 `f5c7e707`）：
+1. `validation-helpers` 147/149/203 —— 计划文件复制生效，tamper 两个 true；
+2. `hex-bn` 36/71/71 —— 根因是**适配器把相对路径直接拼进 `-Dmigration.input.plan=`**，而 surefire 的 CWD 是模块目录 → `NoSuchFileException` → `LegacyInputReplay.<clinit>` 失败；改为 `args.replay.resolve()`；
+3. `beef` 21/390/123 —— 根因是**零实参 matcher 的 expected 记法**（TS `toBeUndefined(undefined)` 记 `{type:undefined}`、Java 记 `[]`；`toBeNull()` 反之），在**比较层** `audit-tests.py::matcher_semantics` 增加零实参 matcher 语义规则（要求 matcher/negated 相同、两侧 expected 均为空形态、actual 仍逐值相等）并加自测；
+4. `drbg29` —— 照 legacy 适配器思路，`capture-drbg-side.py` 的 `--catalog/--mapping` 改为可缺省并按语料同目录派生。
+
+**批准 2 处 SDK 测试源码改动**（皆真实缺陷，共 120 例）：
+- `simplified-fetch-transport-additional`（46）：additional 类漏镜像基类 `body == Undefined.INSTANCE → undefined()` 分支 → 只加该分支，不动显式 null 口径；
+- `chronicle-opcodes`（74）：`ChronicleOpcodesTest` 把 `...ChronicleOpcodesTest#chronicleCaseNNN` 当 caseId，而计划/协议用 64 位 hash（历史上三次采集从未成功）→ 按序号映射到计划 hash（照 `BeefTest` 的 `CASES` 写法）。
+
+**代价与后续（已确认）**：`audit-tests.java_revision()` 哈希所有仓库全部 tracked+untracked 文件，改 `src/test` 会让 revision 前移 → 窗口内 101 个局部与刚跑的**全量 TS 长跑证据全部作废**。因此：①已**停掉在跑的全量 TS 长跑**（省算力）；②等代理改完并逐项验证后，**重新冻结来源 → 重跑完整统一窗口（约 3.3 小时）→ 再跑单次双侧全量运行 + `audit-tests.py check`**。
+
 ### 窗口后复核与结构性发现（20260930 15:10）
 
 `full-evidence-preflight.py` 复核：**`casesTotal 5329`、`structurallyPlannedCases 5329`（100%）、`plannedSamples 38093`、`plannedAssertionInstances 56744`、`planErrors=[]`**；`currentCaptureVerifiedCases 1882`（102 个局部）。
