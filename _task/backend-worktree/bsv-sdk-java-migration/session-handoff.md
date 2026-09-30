@@ -14,6 +14,8 @@
 
 - **v9 存活确认（21:41）**：cron 拉起后已跑 7 分 22 秒、jest **127 文件 PASS／0 FAIL**，进程父级为 cron，会话空闲清理不再影响它 ✓。
 - **v10 进度（22:44）**：存活 16 分钟、jest 尚无 PASS —— 首个文件即重型文件（jest 按历史耗时把最慢的排最前，v9 也是同一现象的另一端），预计总时长 ~76–80 分钟，**仍在 90 分钟上限内**。
+**全量串行跑完（20260901 05:55）**：`01:53:04` 结束（exit=0），`localsSelected 154`、**`filesCovered 130`**（比上一版多出 `aesgcm-man` 的文件），`localsFailed` 仍只有已知的 `utils-property`／`auth-fetch-property`（driver bug 已修，待 `--resume` 补跑）。代理已恢复活动（`run-full-ts-serial.py` 01:56 有更新）。
+
 **driver 自检能力已确认（20260901 05:10）**：`run-full-ts-serial.py` 具备 `--resume`（跳过已完成局部）与 `--allow-partial`（仅子集自测；**不加该开关时覆盖不足即非零退出**），且报告说明各局部 jest JSON 按文件去重合并成一份以满足 `audit-tests.compare_ts` ✓。`aesgcm-man` 长跑仍在进行（约 01:35 起，预计 ~02:15 结束）；`fullRun.tsCommand` 待代理应用批准。
 
 **全量串行阶段报告（20260901 05:00）**：`filesCovered 129`、**`casesCovered 5328`**、`inputsWritten 37114`、`assertionsWritten 55165`；`localsFailed` 仅 `utils-property`／`auth-fetch-property`（driver 预建 `--raw-dir` 的 bug，已修待 `--resume` 补跑），其 `problems` 正是这两个局部对应的 976 个缺失样本 + 4 个用例断言 ✓。`aesgcm-man` 仍在长跑（进程存活）。`fullRun.tsCommand` 尚未切换（等代理应用批准）。
