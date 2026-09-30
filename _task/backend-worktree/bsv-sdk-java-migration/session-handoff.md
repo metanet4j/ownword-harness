@@ -75,6 +75,16 @@
 可行性依据：逐局部 TS/Java 双侧在窗口 v2 已 107/108 通过、0 失败；缺的只是“把它们串起来产出一份同源全量证据”。
 代价：新增一个 driver（约百余行），但**全部复用已验证组件**，比修 `capture-full-dispatch.cjs` 的装载机制更可控。
 
+### 操作红线（新增，代价 51 分钟）：e2e 前必须冻结「SDK 源码 + 任务侧工具」
+
+**20260901 02:51 的失败**：路径 B 的 e2e（02:00 cron 拉起，已跑到 TS 阶段末）被判 `{"status": "FAIL", "reason": "当前源码、工具或清单与本轮来源不同：producerSha256"}` ✗。
+**根因**：`full-evidence-run.py::producers()` 会哈希**全部任务侧 `.py`／`.cjs`／`.mjs`／`.sh` 文件**（不只是 SDK 源码），而路径 A 的代理在同一时段仍在编辑 `run-full-ts-capture.py`／`full-emit*.py`／`full-run-overrides.json`／`build-full-run-probes.py` → 在飞运行作废。
+**红线（后续必须遵守）**：
+1. 启动 `full-evidence-run.py run` 前，**SDK 源码与任务侧工具都必须冻结**（两路代理都停笔）；
+2. 运行期间只允许写 `.cache/` 下的运行产物（不在 `producers()` 范围）；
+3. 任何一处工具改动都会让整轮 e2e 白跑（本轮代价 51 分钟）。
+**已采取动作**：已要求路径 A 立即停止写入、先跑完它自己的严格自测并报结果；已要求路径 B 暂不重跑，等工具集冻结后再开。
+
 **路径 A 也打通了（20260901 06:40）**：机制五类根因全部修好（探针装载 `envOverrides` + `<runDir>/plans/<local>/`；`full-run-overrides.json` + `full-emit.py`／`full-emit-inline.py`／`full-emit-special.py`／`full-emit-hex-bn.py`；只有真替换 `global.expect` 的 hex-bn 走自产断言 sidecar，其余回共享轨迹 + 标准转换器并按“计划内原文件”裁剪；`capture-wallet-wire-parity.cjs` 从分派表移除以消除双重记录；`transaction` 加 `probePlan`；fast-check 固定种子；per-local 轨迹按 `source.file` 过滤）。已验证子集：Chronicle+KeyDeriver `problems=0`；39 个旧管线局部 jest **3613/3613**、输入 13642 行；`hex-bn` **71 样本 + 71 断言与冻结计划完全一致**。**全量 133 文件严格自测已启动**（`.cache/evidence/selftest-full-20261001`，无 `--allow-unresolved`）。
 **两路并行现状**：路径 B 的 e2e（`full-run-11-20260901`）TS 阶段 153/154、在跑 `aesgcm-man`；路径 A 的全量严格自测在跑。**以先到者为准**，另一路保留作交叉验证。
 
