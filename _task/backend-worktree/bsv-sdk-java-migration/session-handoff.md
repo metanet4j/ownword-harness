@@ -75,6 +75,11 @@
 可行性依据：逐局部 TS/Java 双侧在窗口 v2 已 107/108 通过、0 失败；缺的只是“把它们串起来产出一份同源全量证据”。
 代价：新增一个 driver（约百余行），但**全部复用已验证组件**，比修 `capture-full-dispatch.cjs` 的装载机制更可控。
 
+**真注入链已找到并修复（20260901 09:50）**：根因是 `run-full-java-capture.py::main()` 的 `targets = set(configured) | set(discovered)` —— `configured` 来自 `full-run-probes.json['envs']`（115 个 `*_TS_INPUTS`，含 `MIGRATION_HASH_PBKDF2_TS_INPUTS`），**并集把上一版在 `discovered` 上排掉的变量又并了回来**。修复：`targets = sorted((set(configured) | set(discovered)) - set(EXCLUDED_TS_INPUT_ENVS))`（排除仍精确到一个变量，报告记 `excludedTsInputEnvs`）；**无需改 `full-run-probes.json`／`build-full-run-probes.py`**（登记本身没错）。
+**两轮单点预验证**（均用 run-13 的 `ts-inputs.jsonl`、完整复刻注入表达式）：修复前并集 → 115 个变量、含 pbkdf2、`HashTest` **13 errors**（精确复现 run-13）；修复后 → **114 个变量、不含 pbkdf2、`Tests run: 30, Errors: 0, BUILD SUCCESS`** ✓。
+**一处更正**：`tsInputEnvs`／`excludedTsInputEnvs` 写在 `java-capture-report.json`（非 `java-run.json`）；run-13 该报告实为 `tsInputEnvs: 115` + `excludedTsInputEnvs: [...]`，即「字段生效但并集旁路」。
+**full-run-14 已就位**：`.cache/run-full-e2e.sh` 指向 `full-run-14-20260901`（90 分钟档 + 静默守卫；最后工具写入 05:35 → **05:46 自动开跑**），预计 ~07:00 出结果。
+
 **full-run-13 结果：Java 阶段仍失败（20260901 09:40）**：`05:28:31` 结束 exit=1，`java-capture` 失败；`Tests run: 5444, Failures: 0, Errors: 13`，13 个错误仍是 `HashTest.passesPbkdf2Vector0..12` ✗ —— **上一处排除没有生效到实际注入链路**。
 **主代理定位**：`grep -rln MIGRATION_HASH_PBKDF2_TS_INPUTS`（排除 `.cache/`）只剩 `capture-hash-pbkdf2-side.py`、**`full-run-probes.json`**、`run-full-java-capture.py` —— 分派表里仍登记着该变量（115 个 env 之一），全量 Java 阶段的注入很可能来自这里；且该轮 `java-run.json` 的 `tsInputEnvs` 长度为 0、`excludedTsInputEnvs` 为 None，与新增报告字段对不上。已要求代理先定位**真实注入链路**（`full-evidence-run.py` 的 stage env 构造／`full-run-probes.json` 的 `envs`／`build-full-run-probes.py`），在该点精确排除并做单点预验证，再开 `full-run-14`。
 
