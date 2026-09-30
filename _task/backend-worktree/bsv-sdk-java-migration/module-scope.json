@@ -9,8 +9,8 @@
     "wallet",
     "auth"
   ],
-  "scopeReview": "pending",
-  "note": "六个完整模块纳入：原四模块加 wallet/auth。类型接口与 PushDrop 的真实钱包测试辅助依赖不能省略；其余九模块经复核排除。scopeReview 仍待 P0 联合验收。",
+  "scopeReview": "reviewed",
+  "note": "六个完整模块纳入：原四模块加 wallet/auth。类型接口与 PushDrop 的真实钱包测试辅助依赖不能省略；其余九模块经复核排除。scopeReview 已置 reviewed：复核条件由 audit-tests.py collect() 复核——pendingModules 与 crossModuleTestsPending 均为空，moduleReviews 给出六模块的 decision/reason/evidence，crossModuleTestOwners 为每个跨模块测试文件指定归属与理由，依赖复核见 doc/完整模块与API-20260920-122800.md。",
   "crossModuleTestOwners": {
     "src/__tests/LookupResolver.diagnostics.test.ts": {
       "module": "overlay-tools",
