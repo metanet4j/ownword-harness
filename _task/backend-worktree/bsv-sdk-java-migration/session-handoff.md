@@ -129,6 +129,10 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 窗口进度（20260930 13:40）
+
+已处理 **101/106**、篡改门禁通过 **94**、**无失败项**。剩余 6 个：`random-additional`、`hash-additional`、`symmetric-key-compatibility`、`bighumber-dh-group`、`async-crypto-backend`（各约 1.5 分钟）与 **`aesgcm-man`（约 70 分钟，含 66 分钟 TS 长跑）**，整体预计再约 80 分钟。
+
 ### 窗口进度（20260930 13:15）
 
 已处理 **83/106**、篡改门禁通过 **77**、**无失败项**；剩余约 35 分钟。
