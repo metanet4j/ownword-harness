@@ -129,6 +129,31 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 14 个事项取得完整任务级对照并入册（20260930 22:50）
+
+用 `./close-items.sh final2` 对**计划完整的实现事项**跑任务级对照：**14 个成功**（每个都是 cases 全等、missing/uncompared 全 0、`taskAcceptancePassed=true`）：
+
+| 事项 | 用例 | 断言 |
+| --- | --- | --- |
+| wallet-contracts | 253/253 | 1003 |
+| keys-signatures | 146/146 | **40242** |
+| wallet-wire | 128/128 | 351 |
+| wallet-hosts | 126/126 | 287 |
+| wallet-client | 100/100 | 184 |
+| auth-sessions | 85/85 | 160 |
+| transaction-beef | 83/83 | 1553 |
+| transaction-base | 74/74 | 115 |
+| wallet-keys | 71/71 | 162 |
+| broadcasters | 68/68 | 169 |
+| wallet-json | 58/58 | 78 |
+| transaction-verification | 53/53 | 162 |
+| auth-certificates | 50/50 | 128 |
+| script-templates | 17/17 | 96 |
+
+已把 14 个事项写入 `feature_list.json`（`status=done` + `taskAcceptance{status,casesCompared,assertionsCompared,missing*,uncompared,compareReport}`）；**事项状态分布：done 31 / not-started 12 / in-progress 0**。
+
+**剩余 12 个**：4 个实现事项（`script-spend`、`script-vectors`、`transaction-complete`、`auth-transport`——它们含**专用局部**，`local-task-parity.py` 只处理标准局部，其验收随单次全量运行）与 8 个**总门禁**（`migration-api-contract`／`test-mapping`／`input-replay`／`result-capture`／`evidence-gate`／`map`／`core-modules`／`sdk-acceptance`）——后者由最终全量运行 + `audit-tests.py check` + `audit-api.cjs check` 决定。
+
 ### 同源性验证（20260930 22:20）
 
 主代理独立核对：窗口 v2 的 **106 个局部全部记录同一来源 `13f34162199d`**，且与当前 `audit-tests.java_revision()` 一致 → **同源达标**，`close-items.sh`／`local-task-parity.py` 的前提（干净工作树 + 同一来源摘要）已满足。

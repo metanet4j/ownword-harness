@@ -622,7 +622,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/keys-final-20260926-133303/keys-parity.json"
+        "compareReport": ".cache/evidence/migration-impl-keys-signatures-final-final2/task-parity.json"
       }
     },
     {
@@ -811,7 +811,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/wallet-contracts-clean-parity.json"
+        "compareReport": ".cache/evidence/migration-impl-wallet-contracts-final-final2/task-parity.json"
       }
     },
     {
@@ -869,7 +869,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/wallet-keys-clean-parity.json"
+        "compareReport": ".cache/evidence/migration-impl-wallet-keys-final-final2/task-parity.json"
       }
     },
     {
@@ -934,7 +934,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/auth-certificates-same-source-20260929/task-parity.json"
+        "compareReport": ".cache/evidence/migration-impl-auth-certificates-final-final2/task-parity.json"
       }
     },
     {
@@ -1167,7 +1167,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/transaction-base-same-source-20260929/task-parity.json"
+        "compareReport": ".cache/evidence/migration-impl-transaction-base-final-final2/task-parity.json"
       }
     },
     {
@@ -1175,7 +1175,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "transaction：MerklePath 与 BEEF",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-transaction-base"
       ],
@@ -1231,7 +1231,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/transaction-beef-final-parity.json"
+        "compareReport": ".cache/evidence/migration-impl-transaction-beef-final-final2/task-parity.json"
       }
     },
     {
@@ -1239,7 +1239,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "script：完整交易脚本模板",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "migration-impl-transaction-beef",
         "migration-impl-auth-certificates",
@@ -1295,7 +1295,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/script-templates-clean-parity.json"
+        "compareReport": ".cache/evidence/migration-impl-script-templates-final-final2/task-parity.json"
       }
     },
     {
@@ -1476,7 +1476,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/broadcasters-same-source-20260929/task-parity.json"
+        "compareReport": ".cache/evidence/migration-impl-broadcasters-final-final2/task-parity.json"
       }
     },
     {
@@ -1546,7 +1546,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "transaction：验证后端、证据与协调器",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "migration-impl-transaction-complete"
       ],
@@ -1600,7 +1600,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/transaction-verification-parity-main-20260926.json"
+        "compareReport": ".cache/evidence/migration-impl-transaction-verification-final-final2/task-parity.json"
       }
     },
     {
@@ -1608,7 +1608,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "wallet：二进制协议与 Wire 传输",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-auth-certificates"
       ],
@@ -1655,7 +1655,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/wallet-wire-clean-parity-f6034bf.json"
+        "compareReport": ".cache/evidence/migration-impl-wallet-wire-final-final2/task-parity.json"
       }
     },
     {
@@ -1709,7 +1709,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/wallet-json-clean-parity.json"
+        "compareReport": ".cache/evidence/migration-impl-wallet-json-final-final2/task-parity.json"
       }
     },
     {
@@ -1717,7 +1717,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "wallet：浏览器与 React Native 桥接",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-wallet-contracts"
       ],
@@ -1763,7 +1763,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/wallet-hosts-clean-task-parity.json"
+        "compareReport": ".cache/evidence/migration-impl-wallet-hosts-final-final2/task-parity.json"
       }
     },
     {
@@ -1771,7 +1771,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "wallet：WalletClient 连接与模块收口",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "migration-impl-wallet-wire",
         "migration-impl-wallet-json",
@@ -1820,7 +1820,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/wallet-client-clean-parity-9ae1f87.json"
+        "compareReport": ".cache/evidence/migration-impl-wallet-client-final-final2/task-parity.json"
       }
     },
     {
@@ -1828,7 +1828,7 @@
       "phase": "P1",
       "kind": "implementation-slice",
       "name": "auth：会话、Peer 与认证 nonce",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "migration-impl-wallet-client",
         "migration-impl-auth-certificates"
@@ -1885,7 +1885,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/auth-sessions-parity-main-7c382f6.json"
+        "compareReport": ".cache/evidence/migration-impl-auth-sessions-final-final2/task-parity.json"
       }
     },
     {
