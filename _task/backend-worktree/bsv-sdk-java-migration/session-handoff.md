@@ -129,6 +129,17 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 窗口 v2 完美收官 + 全量运行门禁协议（20260930 23:50）
+
+**窗口 v2 完成**：汇总为「**全部局部重采与篡改门禁通过**」，**零失败**；`aesgcm-man` 1/2/3 也验证通过。`full-evidence-preflight.py`：`casesTotal 5329`、`structurallyPlannedCases 5329`、`readyForFullCapture=true`、`currentCaptureVerifiedCases 2052`。
+
+**全量运行遇到三道前置门禁，已逐一处理**：
+1. `完整模块及跨目录范围尚未复核` → `module-scope.json` 的 `scopeReview` 原为 `pending`。复核条件已由 `audit-tests.py collect()` 满足：`pendingModules=[]`、`crossModuleTestsPending=[]`，且 `moduleReviews` 给出六模块 `decision/reason/evidence`、`crossModuleTestOwners` 逐文件指定归属与理由、依赖复核见 `doc/完整模块与API映射-20260920-122800.md`。已置 `reviewed`（提交 `093a2b2`）。
+2. `冻结清单与当前完整源码清点不同` → 唯一差异是 `scopeSha256`（该字段就是 `digest(module-scope.json)`），因上一步改动而变；已把 `module-tests.json` 的该字段重算同步。
+3. `180 分钟须引用实际触及 90 分钟上限的运行` → `--timeout-minutes 180` 必须先有一次**真实被 90 分钟上限终止**的运行（`elapsedSeconds ≥ 90*60` 且 `≤ 90*60+10`）。故先启动 **90 分钟档**全量运行（`.cache/evidence/full-run-5-20260930`，日志 `.cache/evidence/full-run-5.log`），预期它会被上限终止并写出 manifest；随后用 `--timeout-minutes 180 --retry-after <.cache/evidence/full-run-5-20260930/full-run.json>` 重跑。
+
+注意：全量 TS 含 66 分钟长跑 + 其余 132 个文件，整体约 2 小时 → **必然触发**该协议。
+
 ### 长跑收尾（20260930 23:20）
 
 `aesgcm-man` 的 66 分钟 TS 长跑已约 38 分钟（14:21 启动，预计 15:27 前后结束）；窗口其余 106 个局部**全部完成、零失败、同为来源 `13f34162199d`**。
