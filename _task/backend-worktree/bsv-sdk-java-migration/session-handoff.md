@@ -75,6 +75,8 @@
 可行性依据：逐局部 TS/Java 双侧在窗口 v2 已 107/108 通过、0 失败；缺的只是“把它们串起来产出一份同源全量证据”。
 代价：新增一个 driver（约百余行），但**全部复用已验证组件**，比修 `capture-full-dispatch.cjs` 的装载机制更可控。
 
+**e2e 进度（20260901 06:15）**：cron 于 02:00:01 拉起，`full-evidence-run.py run --run-dir .cache/evidence/full-run-11-20260901`（90 分钟档）；`full-run.json`／`input-plan.json`／`preflight.json`／`local/` 已生成，串行 driver 正在逐局部采集。预计 TS ~02:50 结束、之后 Java 一次无过滤 `clean test`（~10–20 分钟）→ ~03:10 出 stage 结果。
+
 **全量 TS 证据已完备，e2e 正在跑（20260901 06:05）——卡点解除**
 
 路径 B（逐局部串行采集后合并）已交付并验证，两条证据全过：
