@@ -129,6 +129,18 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 全量运行 ts-capture 失败定位与修复（20260901 01:30）
+
+90 分钟档运行在 ~55 分钟时提前失败：`完整运行阶段失败：ts-capture`，jest 计数 132 PASS / **2 FAIL**，唯一失败文件是 `src/transaction/__tests/Broadcaster.test.ts`。
+
+**根因**：`capture-broadcaster-inputs.cjs` 的 `afterEach` 用 `fs.readFileSync(parity, 'utf8')` 读**全局** parity 轨迹（逐局部采集时该文件很小，全量时是所有文件共享的同一份）；实测全量 parity 轨迹达 **805.8 MB**，其中 4 行分别 126–252 MB（个别用例把大数组逐元素写进断言轨迹）→ 撞上 V8 字符串上限（`Cannot create a string longer than 0x1fffffe8`）。
+
+**修复**：把该探针改为**分块扫描**（8 MB 块 + 逐行按需 `JSON.parse`，只保留属于本用例的行），内存占用与文件大小无关；已确认全仓仅此一个探针用该模式（`grep -ln "readFileSync(parity" capture-*.cjs` 仅命中它）。
+
+**重新启动**：90 分钟档全量运行 v6（`.cache/evidence/full-run-6-20260930`，日志 `.cache/evidence/full-run-6.log`）；它会通过 Broadcaster，若整套仍需 >90 分钟则被上限终止，从而**解锁** 180 分钟档重跑。
+
+**遗留观察**：全量 parity 轨迹 805 MB / 运行目录 930 MB 属预期规模（大数组用例的逐元素断言），`emit-assertion-observations.py` 逐行处理可承受；如后续 OOM 再评估。
+
 ### 90 分钟档全量运行进行中（20260901 00:30）
 
 `full-evidence-run.py run --run-dir .cache/evidence/full-run-5-20260930`（90 分钟档）已跑约 28 分钟：产出 11 个文件轨迹、jest **26 个文件 PASS、0 FAIL**，当前停在一个重型向量文件上（与之前全量尝试同一位置），预计 16:35 前后触及 90 分钟上限被终止并写出 manifest，随后用 `--retry-after` 跑 180 分钟档。

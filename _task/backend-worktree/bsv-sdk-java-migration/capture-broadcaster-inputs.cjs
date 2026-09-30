@@ -43,12 +43,40 @@ function observeGuard (method, actual, result) {
   write(method, [JSON.parse(JSON.stringify(actual))], result, Number(line[1]))
 }
 
+// 全量运行时 MIGRATION_PARITY_TS_OBSERVATIONS 是所有文件共享的断言轨迹，可能达数百 MB
+// （个别用例会把大数组逐元素写进去），readFileSync(..., 'utf8') 会撞上 V8 的字符串上限。
+// 因此按块扫描、只解析属于本用例的行，内存占用与文件大小无关。
+function rowsForTest (file, test, occurrence) {
+  const fd = fs.openSync(file, 'r')
+  const size = fs.fstatSync(fd).size
+  const chunk = 8 * 1024 * 1024
+  const buffer = Buffer.allocUnsafe(chunk)
+  const needle = '"' + test + '"'
+  const rows = []
+  let carry = ''
+  const consider = text => {
+    if (!text.includes(needle)) return
+    const row = JSON.parse(text)
+    if (row.test === test && row.occurrence === occurrence) rows.push(row)
+  }
+  for (let position = 0; position < size;) {
+    const read = fs.readSync(fd, buffer, 0, chunk, position)
+    position += read
+    const text = carry + buffer.toString('utf8', 0, read)
+    const lines = text.split('\n')
+    carry = lines.pop()
+    for (const line of lines) consider(line)
+  }
+  consider(carry)
+  fs.closeSync(fd)
+  return rows
+}
+
 afterEach(() => {
   const test = expect.getState().currentTestName
   const spec = shapeCases[test]
   if (!spec) return
-  const rows = fs.readFileSync(parity, 'utf8').split('\n').filter(Boolean).map(JSON.parse)
-    .filter(row => row.test === test && row.occurrence === occurrence)
+  const rows = rowsForTest(parity, test, occurrence)
   if (rows.length !== spec.length || sequence !== 0) throw new Error('纯接口原用例属性读取数不同')
   const matcherCounts = new Map()
   rows.forEach((row, index) => {
