@@ -10,16 +10,17 @@
 - 任务级对照：**14 个事项**已有 `task-parity.json`（合计约 1312 例，`missingCases`／`missingAssertions`／`uncompared` 全 0），已写入 `feature_list.json` 的 `taskAcceptance`。
 - 冻结来源：SDK 仓 **`8b8e13d`**（`src/main` 零改动，仅 4 个测试文件）。
 
-**正在跑：单次双侧全量运行 v6（90 分钟档）**
+**正在跑：单次双侧全量运行 v8（90 分钟档，已脱离会话）**
 
-- 目录 `.cache/evidence/full-run-6-20260930/`，日志 `.cache/evidence/full-run-6.log`
-- 命令 `python3 full-evidence-run.py run --run-dir .cache/evidence/full-run-6-20260930`
-- `Broadcaster.test.ts` 已确认通过（上一轮整阶段失败的卡点已修）；整套约 2 小时，**若被 90 分钟上限终止属预期**。
+- 目录 `.cache/evidence/full-run-8-20260901/`，日志 `.cache/evidence/full-run-8.log`
+- 启动方式：`setsid nohup python3 full-evidence-run.py run --run-dir .cache/evidence/full-run-8-20260901 > .cache/evidence/full-run-8.log 2>&1 < /dev/null & disown`
+- **运维教训（重要）**：会话暂停会杀掉后台作业——v6 就是这样死的（manifest 停在 `status: running`、文件时间定格、进程消失），**没有任何 manifest 可引用**，因此不满足 180 分钟协议、必须重跑。后续长作业一律用 `setsid` 脱离会话启动，且每次都用**新运行目录**（运行目录只能执行一次）。
+- 整套约 2 小时；若被 90 分钟上限终止即为**预期**（且这正是解锁 180 分钟档所需的证据）。
 
 **接手动作（按序）**
 
 1. 等 v6 结束；若因 90 分钟上限被终止（`elapsedSeconds ≥ 90*60`），立刻用 180 分钟档重跑（协议要求引用真实超时的 manifest）：
-   `python3 full-evidence-run.py run --run-dir .cache/evidence/full-run-7-20260901 --timeout-minutes 180 --retry-after .cache/evidence/full-run-6-20260930/full-run.json`
+   `python3 full-evidence-run.py run --run-dir .cache/evidence/full-run-7-20260901 --timeout-minutes 180 --retry-after .cache/evidence/full-run-8-20260901/full-run.json`
 2. 校验：`python3 full-evidence-run.py verify .cache/evidence/full-run-<n>-20260930/full-run.json`
 3. 接口面：`node audit-api.cjs check`
 4. 逐事项复核：`./close-items.sh <标签>`（14 项已过；其余随全量运行）
