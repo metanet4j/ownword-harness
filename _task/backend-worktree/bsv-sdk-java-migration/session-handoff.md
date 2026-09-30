@@ -14,17 +14,17 @@
 
 - **v9 存活确认（21:41）**：cron 拉起后已跑 7 分 22 秒、jest **127 文件 PASS／0 FAIL**，进程父级为 cron，会话空闲清理不再影响它 ✓。
 - **v10 进度（22:44）**：存活 16 分钟、jest 尚无 PASS —— 首个文件即重型文件（jest 按历史耗时把最慢的排最前，v9 也是同一现象的另一端），预计总时长 ~76–80 分钟，**仍在 90 分钟上限内**。
-**正在跑：单次双侧全量运行 v10（90 分钟档，由 cron 拉起）**
+**当前卡点：全量运行的 TS 分派机制未跑通（已派专代理修）**
 
-- 目录 `.cache/evidence/full-run-10-20260901/`，日志 `.cache/evidence/full-run-10.log`
-- 启动方式：`.cache/run-full-detached.sh` + crontab `*/2 * * * * /bin/bash .../.cache/run-full-detached.sh`（**幂等**：manifest 存在且不是 `"status": "running"` 即退出；已在跑也退出）
-- **运维教训 1**：会话空闲会清理交互进程树 —— `nohup ... &`（v6）与 `setsid nohup ... & disown`（v8）都被杀，只有 **cron 拉起**能活过空闲 ✓。
-- **运维教训 2**：v9 的 TS jest **133/133 全绿**，但阶段在最后写输入行时崩了：
-  `UnicodeEncodeError: 'utf-8' codec can't encode character '\ud800' … surrogates not allowed` —— **JS 字符串可含未配对代理字符**，Python 直接以 UTF-8 写会抛错。
-  修法：`run-full-ts-capture.py` 的 `write_rows` 改用 `ensure_ascii=True`（转义成 `\uXXXX`，文件纯 ASCII，`json.loads` 往返一致；已用含 `\ud800` 的行验证）。
-  注意：**两侧写入器必须对称**，`run-full-java-capture.py` 的行写入也已统一为 `ensure_ascii=True`。
-- **运维教训 3**：cron 守卫早期版本只认大写 `PASS|FAIL`，而 manifest 实际写的是小写 `failed`，导致二次启动撞已存在目录（`[Errno 17] File exists`）——现守卫改为「非 running 即视为终态」。
-- 收尾后**删除 crontab 条目**。v10 预计 ~40 分钟跑完 TS 阶段、再跑 Java 阶段；若总时长 <90 分钟则**直接完成**，否则被上限终止并写下 90 分钟超时 manifest，供 180 分钟档重跑引用。
+- v10（`.cache/evidence/full-run-10-20260901/`）里 **jest 133/133 文件全绿、0 失败** ✓，但阶段仍失败，`ts-run.json.log` 给出五类问题：
+  1. 有原文件没有可用探针或探针装载失败（`Chronicle.test.ts`、`NormativeVectors.test.ts` 等）；
+  2. 原始轨迹缺失或为空（约 15 个局部：`broadcaster`、`chronicle`、`lrshiftnum`、`normative-vectors`、`spend-additional`、`spend-chronicle-vector`、`spend-codeseparator` …）；
+  3. raw 型转换器未全部成功（数十个局部）；
+  4. **本轮输入缺少 24028 个计划样本**（计划 38092 → 缺 63%）；
+  5. 断言转换失败：`原 TS matcher 序号不连续`。
+- **重要判断**：**逐局部采集机制完全可用**（窗口 v2：108 项／107 通过／0 失败，106 局部同源），失败的只是**单次全量分派**（`capture-full-dispatch.cjs` + `run-full-ts-capture.py`）——问题在探针装载与轨迹/转换环节，不在原测试，也不在逐局部适配器。
+- 已派专代理修该机制，任务书要点：先按单文件自测（`run-full-ts-capture.py --files ... --allow-unresolved`）逐段定位（探针装载→轨迹→emit），对照**已跑通的单局部适配器**（`capture-spend-local.py`／`capture-evidence-local.py` 等）找差异，只改任务侧工具；`--allow-unresolved` 不得出现在 `fullRun.tsCommand` 里。
+- **cron 条目已删除**（避免无人值守空转）；v6–v10 的运行目录均为死胡同，保留作参考。
 
 **接手动作（按序）**
 
