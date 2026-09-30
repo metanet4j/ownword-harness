@@ -75,6 +75,9 @@
 可行性依据：逐局部 TS/Java 双侧在窗口 v2 已 107/108 通过、0 失败；缺的只是“把它们串起来产出一份同源全量证据”。
 代价：新增一个 driver（约百余行），但**全部复用已验证组件**，比修 `capture-full-dispatch.cjs` 的装载机制更可控。
 
+**路径 A 也打通了（20260901 06:40）**：机制五类根因全部修好（探针装载 `envOverrides` + `<runDir>/plans/<local>/`；`full-run-overrides.json` + `full-emit.py`／`full-emit-inline.py`／`full-emit-special.py`／`full-emit-hex-bn.py`；只有真替换 `global.expect` 的 hex-bn 走自产断言 sidecar，其余回共享轨迹 + 标准转换器并按“计划内原文件”裁剪；`capture-wallet-wire-parity.cjs` 从分派表移除以消除双重记录；`transaction` 加 `probePlan`；fast-check 固定种子；per-local 轨迹按 `source.file` 过滤）。已验证子集：Chronicle+KeyDeriver `problems=0`；39 个旧管线局部 jest **3613/3613**、输入 13642 行；`hex-bn` **71 样本 + 71 断言与冻结计划完全一致**。**全量 133 文件严格自测已启动**（`.cache/evidence/selftest-full-20261001`，无 `--allow-unresolved`）。
+**两路并行现状**：路径 B 的 e2e（`full-run-11-20260901`）TS 阶段 153/154、在跑 `aesgcm-man`；路径 A 的全量严格自测在跑。**以先到者为准**，另一路保留作交叉验证。
+
 **e2e 进度（20260901 06:35）**：TS 阶段 **136/154 局部 passed**（446 秒），剩余含 `aesgcm-man`（42 分钟）→ TS 约 03:00 结束，随后 Java 一次无过滤 `clean test`。
 
 **e2e 进度（20260901 06:25）**：已生成 **121/154** 个局部子目录，进程存活 ✓，仍在 TS 串行阶段。
