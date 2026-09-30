@@ -129,6 +129,14 @@ aesgcm 30/457/334、signature 36/51/46、reduction-context 29/38/70、hash 30/15
 - **关键风险清单**：无探针原文件里只有 **36 例是“已计划但全量运行拿不到输入”**——即 `hex-bn` 旧管线覆盖的 `BigNumber.constructor.test.ts` 28 例 + `hex.test.ts` 8 例；其余 250 例尚未计划（正在收口的代理会补）。
 - `hex-bn` 收尾两选一：①给 `build-full-run-probes.py` 加 `full-run-overrides.json` 覆盖机制，并让该局部的探针改为同时喂 `capture-parity`（断言交给标准发射器），legacy 转换器只产输入；②在分派表里为该局部登记“direct 模式 + 自定义 emit”，并让 run-full-ts-capture 支持 emit 写 sidecar 断言后合并。二者都要在锁空闲时实测。
 
+### 哨兵规则落地 + 发现被掩盖的第二处缺口（20260930 18:45）
+
+**已完成（哨兵豁免）**：`audit-tests.py` 新增 `unreachable-guard-after-throw-v1`（严格形态 + 逐样本异常结局 + proof 绑定，DRBG 路径未改）；`prepare-spend-local.py` 支持写入 `unexecutedSites`（重跑 freeze 可复现）；新计划 `.cache/evidence/lrshiftnum-plan-guard-20260930`；重采 `lrshiftnum-standard-guard-20260930` → **4 例／28 样本／29 断言**、tamper 两个 true、`planValid=true` 且 `currentCaptureVerified=true`；`20:9`／`39:9` 不再缺失。
+
+**新发现（被 `same_keys` 首次报错掩盖）**：断言缺口修好后，`completePlanError` 暴露第二处——`冻结循环站点覆盖：缺失 1 … src/transaction/__tests/Transaction.test.ts:925:7:loop`。根因：925 行的 while 循环在 `Transaction.fromBinary` 内，唯一执行它的用例 `da0cd369…`（"1 mb transaction"）归**专用局部** `transaction-shared-vectors`，而该局部由 `transaction-vector-evidence.py:prepare` 生成、站点窗口写死 909-914/995-1066（排除 925）、`loopSamples` 全空；`transaction` 局部只登记了同文件另外 7 个循环。两处计划分别冻结于 09-27 与 09-30 01:28，**均早于本轮改动 → 缺口本就存在**。计划校验顺序是“先断言、后循环”，所以此前只报断言缺口。
+
+**已批准修法**（任务侧工具+计划数据，不碰 SDK）：扩展 `transaction-vector-evidence.py` 的 prepare 把 925:7 纳入专用局部清单并登记 `loopSamples`，prepare 到新 `transaction-vector-plan-20260930`，`register-local.py` 增 `--capture-kind` 以保留 `specialized-local`；并要求**先验证该循环在冻结轨迹里确有执行记录**——若轨迹里没有，只改计划会与轨迹不符，必须先让该局部 TS 探针纳入观测并重跑 TS。旧计划与旧成品保留不动。
+
 ### 比较层改动独立验证（20260930 18:00）
 
 主代理独立复跑 beef 代理留下的比较层改动与自测：`python3 test-evidence-semantics.py` → **OK**；`node --test test-audit.test.cjs` → **43 pass / 0 fail**。改动（`audit-tests.py` +19、`test-evidence-semantics.py` +31）确认无回归。
