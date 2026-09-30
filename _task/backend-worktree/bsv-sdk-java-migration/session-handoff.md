@@ -75,6 +75,8 @@
 可行性依据：逐局部 TS/Java 双侧在窗口 v2 已 107/108 通过、0 失败；缺的只是“把它们串起来产出一份同源全量证据”。
 代价：新增一个 driver（约百余行），但**全部复用已验证组件**，比修 `capture-full-dispatch.cjs` 的装载机制更可控。
 
+**full-run-13 进入 Java 阶段（20260901 09:15）**：TS 阶段（含 `AESGCM.man`）已完成并生成 `ts-run.json`；`java-*` 产物已出现（7 个），即一次无过滤 `clean test` 正在跑，预计 ~24 分钟（约 05:35 出总结果）。
+
 **一行修复的预验证 + full-run-13 开跑（20260901 08:25）**：代理在改工具前先做**廉价预验证**——用汇总 `ts-inputs.jsonl`（排除该变量）单跑 `HashTest` → `Tests run: 30, Errors: 0, BUILD SUCCESS`（改前同路径 13 errors）✓；自检确认 `java_ts_input_envs()` 79→78、报告新增 `excludedTsInputEnvs`。**`full-run-13` 已由 cron 于 04:19:01 启动**（`.cache/run-full-e2e.sh` 带 `.started` 守卫 + **10 分钟静默窗口守卫**：任务侧 `.py/.cjs/.mjs/.sh` 近 10 分钟无改动且工作树干净才开跑——04:10 那次 tick 正确推迟）。预计 ~70 分钟（约 05:30）出结果。
 
 **full-run-12 stage 结果（20260901 08:10）**：`ts-capture` **exit=0／2763 秒**（133/133 文件、5329/5329 用例、38092 输入、56744 断言、`problems=[]`）✓；`java-capture` **exit=1／1425 秒**——无过滤 `clean test` 得 `Tests run 5444, Failures 0, Errors 13, Skipped 0`，13 个错误全部来自 `HashTest` 的 PBKDF2 向量 ✗。总耗时 4189 秒（70 分钟），**90 分钟档有约 20 分钟余量，不需要 180 档**。
