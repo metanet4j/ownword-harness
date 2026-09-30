@@ -8,7 +8,7 @@
     "done"
   ],
   "activeItem": null,
-  "note": "Boot 4 / Java 25 升级、U0 测试基线与 U1—U9 全部完成。全量单元 841 例 0/0/0、23 模块 gaps 全 0；全量集成 18 类 124 例通过。唯一保留项是 SFTPFileClient 的 doInit 成功构造行（2 行），因无可用 SSH 服务，按胡先生决定按现状收尾。",
+  "note": "Boot 4 / Java 25 升级、U0 测试基线与 U1—U9 全部完成，任务已结项。全量单元 841 例 0/0/0、23 模块 gaps 全 0；全量集成 18 类 124 例通过；2026-09-30 活体重跑复核一致（单元 evidence/20260930T125355Z/、集成 evidence/20260930T130119Z-integration/）。唯一保留项是 SftpFileClient 的 doInit 成功构造行（2 行），按胡先生 2026-09-30 决定继续按精确例外登记，不再是待办。",
   "planDoc": "doc/升级计划-Boot4-Java25.md",
   "features": [
     {
@@ -400,9 +400,10 @@
         "集成测试暴露并修复缺陷（component 提交 225da53）：RedissonAutoConfiguration.redisson() 在未提供 redisson.config 时直接 Redisson.create(null) 抛 NPE，只配 spring.data.redis.* 的标准用法无法启动；改为按 DataRedisProperties 装配 SingleServerConfig（database/username/password/clientName/连接超时），YAML 与集群两条既有路径行为不变；单元复跑 34/0/0/0（evidence/20260929T092410Z/）。",
         "Redis 集成记录的行为：RedisUtils 的 key 走 JDK 序列化，keys/delByKeys 的通配符被当作普通字符编码因而匹配不到自身写入的键；scan/findKeysForPage 只匹配 UTF-8 编码的键；hincr/hdecr 无 try/catch 兜底，对序列化值直接抛 InvalidDataAccessApiUsageException；generate 的 TTL 在键首次创建时不生效、第二次起正常；mget 对缺失键在结果中放 null；RedisAtomicLong 自建 StringRedisTemplate，与 RedisUtils 不是同一键空间。",
         "Kafka 集成记录的行为：topic 名非法时 KafkaTemplate 同步抛 KafkaException(\"Send failed\")，未返回 future，whenComplete 从未注册，failConsumer 与默认失败日志都不执行；bootstrap-servers 在配置中以 List 保存。",
-        "FTP 集成已完成（提交 3ce773b）：MiniFtpServer 按 RFC 959 用 JDK 自带 socket 实现 FtpFileClient 用到的命令子集，FtpFileClientIntegrationTest 7 例覆盖 doInit 连接、basePath 规范化、上传/下载/删除、URL 拼接、多客户端共享目录与 512KB 大报文；另补 FtpFileClientTest#initConnectsSuccessfullyAgainstALocalFtpService 使成功路径在单元层可达。据此删除 FtpFileClient 的例外登记，component-file 60/0/0/0 gaps=0。"
+        "FTP 集成已完成（提交 3ce773b）：MiniFtpServer 按 RFC 959 用 JDK 自带 socket 实现 FtpFileClient 用到的命令子集，FtpFileClientIntegrationTest 7 例覆盖 doInit 连接、basePath 规范化、上传/下载/删除、URL 拼接、多客户端共享目录与 512KB 大报文；另补 FtpFileClientTest#initConnectsSuccessfullyAgainstALocalFtpService 使成功路径在单元层可达。据此删除 FtpFileClient 的例外登记，component-file 60/0/0/0 gaps=0。",
+        "SFTP 实连保留为精确例外（SftpFileClient.doInit 成功构造行 2 行）。2026-09-30 复核确认三条可选路径——共享 infra 加 sftp 服务、宿主安装 openssh-server、以及本轮新确认的 test 作用域内嵌 org.apache.sshd:sshd-core + sshd-sftp（纯 Java 进程内 SSH/SFTP 服务端，与 MiniFtpServer 同构，不改共享 infra 与宿主环境）；胡先生评估后决定按现状收尾，该 2 行继续登记，将来若要让缺口归零可走内嵌服务端方案（JSch 0.1.55 与其算法协商需先实测）。"
       ],
-      "statusNote": "2026-09-29：四模块单元全部严格验收通过（均 gaps=0），Redis/Kafka/FTP 实连集成完成，并修复 Redisson 配置装配缺陷。SFTP 集成因无可用 SSH 服务未完成。"
+      "statusNote": "2026-09-30：四模块单元全部严格验收通过（均 gaps=0），Redis/Kafka/FTP 实连集成完成，并修复 Redisson 配置装配缺陷；SFTP 实连保留为精确例外，胡先生决定按现状收尾。"
     },
     {
       "id": "unit-u8-tools",
@@ -435,9 +436,10 @@
         "由 Surefire XML 独立核算复核：177 个测试类、841 例、0/0/0；由 JaCoCo XML 独立核算：LINE 5469/115、BRANCH 1255/28、METHOD 1477/38，未覆盖部分全部落在 42 类 57 条精确登记的例外内。",
         "全量集成测试通过：18 个测试类、124 例（含新增的 FTP 7 例），共享中间件无 it_u* 残留。",
         "报告已更新至含 FTP 结果的版本。",
-        "2026-09-29 胡先生决定：SFTP 集成暂不处理，按现状收尾。SftpFileClient.doInit 的 2 行继续按精确清单登记为覆盖例外，报告明确记录为外部环境阻塞；其余 22 个模块的验收结论不受影响。"
+        "2026-09-30 收尾复核（活体重跑）：单元 `evidence/20260930T125355Z/`，严格入口 `--evidence` 复核 23 模块 gaps=0，独立核算 177 类/841 例、0/0/0、LINE 5469/115、BRANCH 1255/28、METHOD 1477/38，与 09-29 归档逐项一致；集成 `evidence/20260930T130119Z-integration/`，18 类 124 例、0/0/0，共享中间件无 it_u*/it-u* 残留（EsTest 先删后建应用默认索引属既有设计，索引内只有测试写入的文档）。本轮未改任何生产代码/测试/构建文件，未执行 `-N install`（会话沙箱将隔离仓库挂为只读，四仓库 HEAD 未变）。",
+        "2026-09-30 胡先生决定：SFTP 实连按现状收尾，不再作为待办。SftpFileClient.doInit 的 2 行继续按精确清单登记为覆盖例外；已评估的替代方案（给 component-file 加 test 作用域内嵌 Apache MINA SSHD）记入报告第 6 节，将来若要让缺口归零可直接采用。"
       ],
-      "statusNote": "2026-09-29：全量单元与集成验收通过，报告已交付；胡先生决定 SFTP 集成按现状收尾，本项验收完成。"
+      "statusNote": "2026-09-30：全量单元与集成验收通过并经活体重跑复核，报告已交付；胡先生决定 SFTP 实连按现状收尾，本项验收完成，任务结项。"
     }
   ],
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
