@@ -95,6 +95,11 @@ def build(args):
     if routed:
         fail(f'已登记为无消费入口的用例出现了 Java 输入，登记需更新：{routed[:4]}')
     audit.validate_plan(catalog, mapping, plan)
+    # 断言来源侧文件：由 run-full-java-capture.py 写出（JVM 端 legacy 行 + 共享轨迹行的计数）。
+    sources_path = Path(args.java_assertions).with_name('java-assertion-sources.json')
+    sources = read(sources_path) if sources_path.is_file() else None
+    if sources is not None:
+        audit.check_assertion_sources(sources, sum(len(rows) for rows in java_results.values()), len(cases))
     output = []
     for case_id in cases:
         expected_samples = plan[case_id].get('sampleIds')
@@ -159,6 +164,7 @@ def build(args):
         output.append(entry)
     revision, run_hashes = audit.runtime_provenance(args, catalog, capture_paths)
     return {'upstreamCommit': catalog['upstreamCommit'], 'javaRevision': revision,
+            'assertionSources': sources,
             'knownUnroutableCases': audit.known_unroutable_summary(
                 catalog, mapping, getattr(args, 'known_gaps', None)),
             'knownGapsSha256': digest(Path(getattr(args, 'known_gaps', None) or audit.KNOWN_GAPS)),

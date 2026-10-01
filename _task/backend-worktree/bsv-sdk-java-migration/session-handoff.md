@@ -159,6 +159,13 @@
 
 **B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
 
+**四项确认通过 + 串行自动化启动（20260901 22:35 本地 14:05）**：
+① 合并修法落盘：`run-full-java-capture.py::emit_assertions()` 改为「补齐+合并」（子计划=全量−covered → emit 侧文件 → 按计划 case/assertionIds 顺序合并写回；身份重复/缺失/计划外一律记问题，**有问题不写最终文件并让阶段非零退出**）；报告加 `assertionSources` 并写侧文件 `java-assertion-sources.json`；`evidence-bundle.build()` 核验（legacy+shared==total==实际行数、两侧 case 数之和==计划 case 数）；`audit-tests.py compare()` 用同一 `check_assertion_sources()` **重算比对**（篡改即失败）。
+② **5 条自测**（新增 `AssertionMergeTest`，直接调真实 `emit_assertions()`：正常合并／身份重复／共享缺口／计划外 case／`assertionSources` 篡改 4 变体）；**四套件全绿 88+18+13+14=133**。
+③ **离线复跑走真实代码路径**（run-17 产物）：`problems=[]`、**`assertionSources = legacy{168,1713} + shared{5161,55031} = 56744`**、最终 **56744 行 = 计划总数**、缺/计划外/逐 case 条数不符 **全 0** ✓。
+④ **承载方式（优于原方案）**：不改两次开关，而是新增**串行脚本 `.cache/run-full-19-20.sh`**（crontab 只留它一条）：run-19（`--timeout-minutes 90`、无 `--retry-after`）→ 被上限终止后**自动**跑 run-20（`--timeout-minutes 180 --retry-after run-19 的 manifest`）→ 自动 `verify` + `audit-tests.py check`（显式传路径）+ `node audit-api.cjs check`，结果写 `.cache/evidence/full-run-20.log` → **两轮之间无需任何写入**（满足跨接零写入）且不受会话空闲影响 ✓。
+**实际启动**：13:54:01，`full-run-19-20260901`（pid 5540）。**时间线**：run-19 → ~15:24 触限；run-20 → 15:25 起，TS ~16:31、Java ~17:11、bundle/check ~17:16、审计 ~17:20。**这 3.3 小时内任何任务侧 `.py/.cjs/.mjs/.sh` 或 SDK 工作树改动都会作废来源**（A2 已转只读观察）。
+
 **重试协议还有一道校验：`producerSha256`（20260901 22:20 本地 13:52）** —— `full-run-18`（180 分钟档 + `--retry-after` run-16 的 manifest）**立即失败**：
 `{"status": "FAIL", "reason": "180 分钟重试来源已变化：producerSha256"}` ✗。即 `validate_retry` 除 `timeoutMinutes/elapsedSeconds/interface` 外，还要求**重试来源与当前工具集同源**；A2 为实现合并修法改了 `run-full-java-capture.py` 等 → run-16 的超时 manifest 不可再引用（**主代理判断疏漏**，非实现问题）。
 **修正路径（两步，跨接零写入）**：

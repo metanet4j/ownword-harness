@@ -12,6 +12,13 @@ import unittest
 TASK = Path(__file__).resolve().parent
 
 
+def _load(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 class BundleTest(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(prefix='evidence-bundle-test-')
@@ -609,6 +616,99 @@ class CrossLanguageTest(BundleTest):
                                 capture_output=True, text=True)
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('不允许替换跨语言输入替换表', result.stderr)
+
+
+class AssertionMergeTest(unittest.TestCase):
+    """Java 断言「JVM 端 legacy 行 + 共享轨迹行」合并逻辑的门禁自测（直接调真实函数）。"""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory(prefix='assertion-merge-test-')
+        self.root = Path(self.tmp.name)
+        self.run = self.root / 'run'
+        self.run.mkdir()
+        self.module = _load('run_full_java_capture', TASK / 'run-full-java-capture.py')
+        self.write('catalog.json', {'upstreamCommit': 'fixed', 'files': [{
+            'path': 'src/compat/example.test.ts', 'cases': [
+                {'id': 'shared', 'names': ['suite', 'shared'], 'occurrence': 1, 'mode': 'run'},
+                {'id': 'legacy', 'names': ['suite', 'legacy'], 'occurrence': 1, 'mode': 'run'}]}]})
+        self.write('mapping.json', {'upstreamCommit': 'fixed', 'cases': [
+            {'id': 'shared', 'java': [{'className': 'ExampleTest', 'name': 'shared'}], 'assertionIds': ['a-shared']},
+            {'id': 'legacy', 'java': [{'className': 'ExampleTest', 'name': 'legacy'}], 'assertionIds': ['a-legacy']}]})
+        self.write('plan.json', {'shared': {'sampleIds': ['s'], 'assertionIds': ['a-shared']},
+                                 'legacy': {'sampleIds': ['s'], 'assertionIds': ['a-legacy']}})
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def write(self, name, value):
+        (self.root / name).write_text(json.dumps(value, ensure_ascii=False))
+
+    def row(self, case_id, assertion_id, run_id='r' * 32):
+        return {'runId': run_id, 'side': 'java', 'caseId': case_id, 'assertionId': assertion_id,
+                'value': {'kind': 'assertion', 'matcher': 'toBe', 'negated': False,
+                          'actual': {'type': 'number', 'value': '1'}, 'expected': []}}
+
+    def write_lines(self, path, rows):
+        Path(path).write_text(''.join(json.dumps(row, ensure_ascii=False) + '\n' for row in rows))
+
+    def env(self, legacy_rows, raw_rows):
+        legacy = self.run / 'java-assertions.jsonl'
+        self.write_lines(legacy, legacy_rows)
+        raw = self.run / 'java-assertions.raw.jsonl'
+        self.write_lines(raw, raw_rows)
+        return {'EVIDENCE_ASSERTIONS_PATH': str(legacy), 'EVIDENCE_INPUT_PLAN': str(self.root / 'plan.json'),
+                'EVIDENCE_CATALOG': str(self.root / 'catalog.json'),
+                'EVIDENCE_MAPPING': str(self.root / 'mapping.json'),
+                'EVIDENCE_RUN_ID': 'r' * 32, 'EVIDENCE_SIDE': 'java'}, raw
+
+    def raw_row(self, method):
+        return {'test': 'ExampleTest#' + method, 'method': method, 'index': 1, 'matcher': 'toBe',
+                'negated': False, 'actual': {'type': 'number', 'value': '1'}, 'expected': []}
+
+    def run_merge(self, legacy_rows, raw_rows):
+        env, raw = self.env(legacy_rows, raw_rows)
+        summary, problems = {}, []
+        self.module.emit_assertions(self.run, env, raw, summary, problems)
+        return summary, problems, Path(env['EVIDENCE_ASSERTIONS_PATH'])
+
+    def test_merge_combines_both_producers(self):
+        summary, problems, output = self.run_merge([self.row('legacy', 'a-legacy')],
+                                                  [self.raw_row('shared')])
+        self.assertEqual(problems, [])
+        rows = [json.loads(line) for line in output.read_text().splitlines()]
+        self.assertEqual([(row['caseId'], row['assertionId']) for row in rows],
+                         [('shared', 'a-shared'), ('legacy', 'a-legacy')])   # 按计划顺序
+        self.assertEqual(summary['assertionSources'],
+                         {'legacy': {'cases': 1, 'rows': 1}, 'shared': {'cases': 1, 'rows': 1}, 'total': 2})
+        self.assertEqual(json.loads((self.run / 'java-assertion-sources.json').read_text()),
+                         summary['assertionSources'])
+
+    def test_duplicate_identity_fails(self):
+        _summary, problems, _output = self.run_merge(
+            [self.row('legacy', 'a-legacy'), self.row('legacy', 'a-legacy')], [self.raw_row('shared')])
+        self.assertTrue(any('断言行重复' in item for item in problems), problems)
+
+    def test_shared_producer_gap_fails(self):
+        _summary, problems, _output = self.run_merge([self.row('legacy', 'a-legacy')], [])
+        self.assertTrue(any('共享断言转换失败' in item for item in problems), problems)
+
+    def test_unplanned_legacy_case_fails(self):
+        _summary, problems, _output = self.run_merge(
+            [self.row('other', 'a-other'), self.row('legacy', 'a-legacy')], [self.raw_row('shared')])
+        self.assertTrue(any('计划外用例' in item for item in problems), problems)
+
+    def test_missing_or_tampered_sources_fail(self):
+        audit = _load('audit_module', TASK / 'audit-tests.py')
+        audit.check_assertion_sources({'legacy': {'cases': 1, 'rows': 1},
+                                       'shared': {'cases': 1, 'rows': 1}, 'total': 2}, 2, 2)
+        for tampered, message in (
+                ({'legacy': {'cases': 1, 'rows': 1}, 'shared': {'cases': 1, 'rows': 1}, 'total': 3}, '行数不符'),
+                ({'legacy': {'cases': 1, 'rows': 0}, 'shared': {'cases': 1, 'rows': 1}, 'total': 1}, '行数不符'),
+                ({'legacy': {'cases': 3, 'rows': 1}, 'shared': {'cases': 0, 'rows': 1}, 'total': 2}, '用例数之和'),
+                ({'legacy': {'cases': 1, 'rows': 1}, 'shared': {'cases': 1, 'rows': 1}}, '形状无效')):
+            with self.subTest(message=message):
+                with self.assertRaisesRegex(ValueError, message):
+                    audit.check_assertion_sources(tampered, 2, 2)
 
 
 if __name__ == '__main__':

@@ -377,6 +377,27 @@ def normalize_input_rows(case_id, file_path, ts_rows, java_rows, rules):
     return out_ts, out_java, substitutions, unordered
 
 
+def check_assertion_sources(sources, rows, cases, label='Java 断言行'):
+    """核验「JVM 端 + 共享轨迹」两侧断言来源计数与实际断言行一致；篡改计数即失败。"""
+    require(isinstance(sources, dict) and set(sources) == {'legacy', 'shared', 'total'},
+            f'{label}来源计数形状无效：{sources}')
+    for side in ('legacy', 'shared'):
+        entry = sources[side]
+        require(isinstance(entry, dict) and set(entry) == {'cases', 'rows'}
+                and all(type(entry[key]) is int and entry[key] >= 0 for key in ('cases', 'rows')),
+                f'{label}来源计数无效：{side}={entry}')
+    require(type(sources['total']) is int and sources['total'] == rows,
+            f'{label}来源计数与实际行数不符：total={sources["total"]} 实际={rows}')
+    require(sources['legacy']['rows'] + sources['shared']['rows'] == rows,
+            f'{label}来源计数之和与实际行数不符：'
+            + json.dumps({'legacy': sources['legacy']['rows'], 'shared': sources['shared']['rows'],
+                          '实际': rows}, ensure_ascii=False))
+    require(sources['legacy']['cases'] + sources['shared']['cases'] == cases,
+            f'{label}来源用例数之和与计划不符：'
+            + json.dumps({'legacy': sources['legacy']['cases'], 'shared': sources['shared']['cases'],
+                          '计划': cases}, ensure_ascii=False))
+
+
 def cross_language_summary(cases, substitutions, unordered):
     """报告/manifest 统一使用的计数与 caseId 列表。"""
     unordered_count = unordered if isinstance(unordered, int) else len(unordered)
@@ -1193,6 +1214,12 @@ def compare(args):
         revision, run_hashes = runtime_provenance(args, catalog, capture_paths)
         require(observations['javaRevision'] == revision, '汇总 Java 版本与实际运行来源不符')
         require(observations.get('runManifestSha256') == run_hashes, '汇总运行 manifest 校验值不符')
+    sources = observations.get('assertionSources')
+    if sources is not None:
+        raw_java_assertions = capture_paths.get('javaAssertions')
+        if raw_java_assertions:
+            check_assertion_sources(sources, sum(len(rows) for rows in raw_captures['javaAssertions'].values()),
+                                    len(cases))
     observed = indexed(observations['cases'], lambda c: c['id'], '逐用例结果')
     same_keys(cases, observed, '逐用例结果')
     assertion_count = 0

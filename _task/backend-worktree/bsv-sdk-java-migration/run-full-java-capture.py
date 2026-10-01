@@ -389,25 +389,96 @@ def collect_reports(run_dir, requested):
     return produced, problems
 
 
-def emit_assertions(run_dir, env, raw, summary):
-    output = env.get('EVIDENCE_ASSERTIONS_PATH')
-    if not output:
+def read_rows(path):
+    text = Path(path).read_text() if Path(path).is_file() else ''
+    return [json.loads(line) for line in text.splitlines() if line.strip()]
+
+
+def merge_assertion_rows(plan, legacy, shared, problems):
+    """按计划顺序合并两侧断言行；身份重复、缺失、计划外一律记问题（不静默取舍）。"""
+    index = {}
+    for label, rows in (('JVM 端', legacy), ('共享轨迹', shared)):
+        for row in rows:
+            key = (row.get('caseId'), row.get('assertionId'))
+            if key in index:
+                problems.append(f'断言行重复（{index[key][0]} 与 {label}）：{key[0]}/{key[1]}')
+                continue
+            index[key] = (label, row)
+    ordered, missing, extra = [], [], []
+    for case_id, spec in plan.items():
+        for assertion_id in spec.get('assertionIds', []):
+            found = index.pop((case_id, assertion_id), None)
+            if found is None:
+                missing.append(f'{case_id}/{assertion_id}')
+            else:
+                ordered.append(found[1])
+    for key in index:
+        extra.append(f'{key[0]}/{key[1]}')
+    if missing:
+        problems.append(f'Java 断言行缺失 {len(missing)} 条，例如 {missing[:3]}')
+    if extra:
+        problems.append(f'Java 断言行出现计划外身份 {len(extra)} 条，例如 {extra[:3]}')
+    return ordered
+
+
+def emit_assertions(run_dir, env, raw, summary, problems):
+    """把本轮 Java 断言补齐成计划全集：**合并**而不是覆盖。
+
+    两个产出者写同一个文件：
+      ① JVM 内的 legacy 重放（`LegacyInputReplay` 等）在 Maven 期间直接向 EVIDENCE_ASSERTIONS_PATH
+         追加行——它们的测试类不使用共享记录器，共享 parity 轨迹里根本没有这些用例；
+      ② `emit-assertion-observations.py` 按共享轨迹产出其余用例。
+    因此这里先读 JVM 端已写的行，用「全量计划 − 已覆盖用例」的**子计划**调共享转换（写侧文件），
+    再按计划的用例顺序与逐用例 assertionIds 顺序合并写回。任何身份冲突、缺失、计划外或计数不符都
+    记问题并保持最终文件不被改写（阶段非零退出），不放宽共享转换自身的逐用例严格性。
+    """
+    output = Path(env.get('EVIDENCE_ASSERTIONS_PATH') or (run_dir / 'java-assertions.jsonl'))
+    if not env.get('EVIDENCE_ASSERTIONS_PATH'):
         summary['assertions'] = {'skipped': '缺少 EVIDENCE_ASSERTIONS_PATH'}
         return
-    plan = env.get('EVIDENCE_INPUT_PLAN')
+    plan_path = env.get('EVIDENCE_INPUT_PLAN')
     catalog = Path(env.get('EVIDENCE_CATALOG', TASK / 'module-tests.json'))
     mapping = Path(env.get('EVIDENCE_MAPPING', TASK / 'test-map.json'))
-    if not plan or not Path(plan).is_file():
-        plan = run_dir / 'input-plan.json'
-    command = ['python3', str(TASK / 'emit-assertion-observations.py'),
-               '--catalog', str(catalog), '--mapping', str(mapping), '--plan', str(plan),
-               '--side', 'java', '--raw', str(raw), '--run-id', env.get('EVIDENCE_RUN_ID', ''),
-               '--output', output, '--allow-java-extra']
-    result = subprocess.run(command, cwd=TASK, env=env, capture_output=True, text=True)
-    if result.returncode:
-        summary['assertions'] = {'error': (result.stderr or result.stdout)[-800:], 'argv': command}
-    else:
-        summary['assertions'] = json.loads(result.stdout.strip().splitlines()[-1])
+    if not plan_path or not Path(plan_path).is_file():
+        plan_path = run_dir / 'input-plan.json'
+    plan = read_json(plan_path)
+    legacy = read_rows(output)
+    covered = {row.get('caseId') for row in legacy}
+    unknown = sorted(covered - set(plan))
+    if unknown:
+        problems.append(f'JVM 端断言行出现计划外用例 {len(unknown)} 个：{unknown[:3]}')
+    subplan = {case_id: spec for case_id, spec in plan.items() if case_id not in covered}
+    side = run_dir / 'java-assertions.shared.jsonl'
+    if side.exists():
+        side.unlink()
+    shared, emitted = [], None
+    if subplan:
+        subplan_path = run_dir / 'java-assertions.subplan.json'
+        subplan_path.write_text(json.dumps(subplan, ensure_ascii=False) + '\n')
+        command = ['python3', str(TASK / 'emit-assertion-observations.py'),
+                   '--catalog', str(catalog), '--mapping', str(mapping), '--plan', str(subplan_path),
+                   '--side', 'java', '--raw', str(raw), '--run-id', env.get('EVIDENCE_RUN_ID', ''),
+                   '--output', str(side), '--allow-java-extra']
+        result = subprocess.run(command, cwd=TASK, env=env, capture_output=True, text=True)
+        if result.returncode:
+            summary['assertions'] = {'error': (result.stderr or result.stdout)[-800:], 'argv': command}
+            problems.append(f'共享断言转换失败（退出码 {result.returncode}）：'
+                            + (result.stderr or result.stdout)[-300:])
+            return
+        emitted = json.loads(result.stdout.strip().splitlines()[-1])
+        shared = read_rows(side)
+    ordered = merge_assertion_rows(plan, legacy, shared, problems)
+    sources = {'legacy': {'cases': len(covered), 'rows': len(legacy)},
+               'shared': {'cases': len({row.get('caseId') for row in shared}), 'rows': len(shared)},
+               'total': len(ordered)}
+    summary['assertionSources'] = sources
+    summary['assertions'] = {'subplan': emitted, 'mergedRows': len(ordered), 'sources': sources,
+                             'legacyRows': len(legacy), 'sharedRows': len(shared)}
+    if problems:
+        return
+    output.write_text(''.join(json.dumps(row, ensure_ascii=False) + '\n' for row in ordered))
+    (run_dir / 'java-assertion-sources.json').write_text(
+        json.dumps(sources, ensure_ascii=False, indent=2) + '\n')
 
 
 def main():
@@ -474,7 +545,7 @@ def main():
     produced, report_problems = collect_reports(options.run_dir, options.reports or ['java-surefire.xml'])
     summary['reports'] = produced
     problems.extend(report_problems)
-    emit_assertions(options.run_dir, env, raw_assertions, summary)
+    emit_assertions(options.run_dir, env, raw_assertions, summary, problems)
     # 最后一道：把被 largeArrays 摘要化、而 TS 记全量数组的实际值按摘要校验后还原。
     repair_digest_actuals(options.run_dir, env, summary, problems)
     summary['problems'] = problems
