@@ -159,6 +159,15 @@
 
 **B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
 
+**重试协议还有一道校验：`producerSha256`（20260901 22:20 本地 13:52）** —— `full-run-18`（180 分钟档 + `--retry-after` run-16 的 manifest）**立即失败**：
+`{"status": "FAIL", "reason": "180 分钟重试来源已变化：producerSha256"}` ✗。即 `validate_retry` 除 `timeoutMinutes/elapsedSeconds/interface` 外，还要求**重试来源与当前工具集同源**；A2 为实现合并修法改了 `run-full-java-capture.py` 等 → run-16 的超时 manifest 不可再引用（**主代理判断疏漏**，非实现问题）。
+**修正路径（两步，跨接零写入）**：
+1. 先跑 **`full-run-19`（90 分钟档、不带 `--retry-after`）**，用当前工具集跑到上限被终止 → 产出**与当前工具集同源**的超时 manifest；
+2. 紧接着跑 **`full-run-20`（180 分钟档）**：`--timeout-minutes 180 --retry-after .cache/evidence/full-run-19-20260901/full-run.json` → **验收轮**；
+3. **两轮之间绝对零写入**（改脚本必须在 run-19 启动前全部完成）。
+**开工前四项确认**：①合并修法落盘；②5 条自测通过；③离线复跑证明（run-17 产物合并后 **56744** 行、缺/计划外/逐 case 条数不符均为 0）；④`.cache/run-full-e2e.sh` 指向 run-19 且 `--timeout-minutes 90`、无 `--retry-after`。
+**总耗时**：90 分钟 + ~110 分钟 ≈ **3.3 小时**（诚实告知）。
+
 **根因定案 + 合并修法获批准（20260901 22:05 本地 13:45）**：`bundle` 缺断言**不是接线重复**，而是 **Java 侧两个断言产出者写同一文件**：
 ① JVM 内 legacy 重放在 Maven 期间**追加** `EVIDENCE_ASSERTIONS_PATH`（run-17 现有 **1713 行 / 168 case**，属 6 个 legacy 局部：brc100-property 600／bn-binary 521／bn-utils 284／bn-arithmetic 176／bn-serializers 55／hex-bn 71／utils 6）；
 ② 随后 `emit-assertion-observations.py` 按共享 parity 轨迹**重写整个文件**，而这些 legacy 测试类不使用共享记录器（`HexTest`/`BigNumberConstructorTest` 命中 0）→ 必然「原断言缺少用例」并覆盖 legacy 行。
