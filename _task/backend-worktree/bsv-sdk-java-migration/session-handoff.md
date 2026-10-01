@@ -159,6 +159,11 @@
 
 **B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
 
+**根因已定位（20260901 13:20，主代理）**：`java-maven.log:148-155` 显示
+`SurefireBooterForkException: The forked VM terminated without properly saying goodbye` + **`Process Exit Code: 137`**（128+9 = SIGKILL）→
+**surefire fork 的 JVM 被 OOM killer 杀**（`AESGCMManualTest` 要处理 512 MB 大数组），**不是断言失败、也不是接线错误**。
+已把该证据交 A2，要求：①先查该局部逐局部采集时的堆参数（`capture-*` java 分支／当年 manifest `command`）并**照抄**到全量阶段；②若本来没带，则补一个够用不夸张的堆（如 `-DargLine=-Xmx3g`），且全量 Java 阶段**独占**（本机曾出现 Python 侧 5.9 GB 被 OOM 杀，总内存有限）；③单点预验证 `mvn test -Dtest=AESGCMManualTest` 期望 `Tests run: 1, Failures: 0, Errors: 0` 且退出码 0；④再继续第 7 例与 `known-gaps.json`，最后 `full-run-16`。若考虑「把这一例拆出来单独带大堆跑」，必须保持同一 runDir／runId／来源的单次运行语义，禁止伪造 manifest 拼接。
+
 **full-run-15 结果：Java 阶段新缺陷（20260901 13:10）** —— `08:59:15` 结束 exit=1，失败在 **`java-capture`**（不是 bundle）。
 `java-maven.log` 报 `BUILD FAILURE`／surefire 阶段，唯一失败类 **`com.metanet4j.bsv.primitives.AESGCMManualTest`**（`Tests run: 885` 即止）；因 Maven 早退，`vectorInputs` 跳过、`assertions.error` 非空、`full-java-serial-convert.py` 也失败。
 该用例在**逐局部**（窗口 v2）与 **TS 侧全量**（42 分钟）都通过 → 属「全量 Java 阶段」下的**资源/环境**问题（512 MB 大数组，疑 heap 或超时），**不是接线错误**。
