@@ -159,6 +159,13 @@
 
 **B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
 
+**run-19 → run-20 交接失败：manifest 时间记账内部矛盾（20260901 23:30 本地 15:25）**：
+- `run-19` 于 **15:24:44** 被 90 分钟上限终止 ✓（`status=timed-out`、`timeoutMinutes=90`、`elapsedSeconds=5400.055` ∈ [5400,5410] ✓）；
+- 但 **`run-20` 于 15:25:18 立即失败**：`{"status": "FAIL", "reason": "重试来源的超时时间记录无效"}` ✗；
+- **根因（定位到 `full-evidence-run.py:146-150`）**：校验要求 `abs((finishedAtNs - startedAtNs)/1e9 - elapsedSeconds) < 5`，而 run-19 的 wall 时间 ≈ **5444 s**（比 `elapsedSeconds` 多 **44 秒**，正是“所有后代进程已停止”那段**清理时间**）→ |5444−5400| = 44 ≥ 5 → 判为无效 ✗。属**工具侧时间记账 bug**（上限触发时先记 elapsed、清理后才记 finishedAt），不是自动化脚本问题。
+- **已交 A2 的最小修法**：在上限触发那一刻（清理之前）同时记录 `finishedAtNs` 与 `elapsedSeconds`（后者仍为**真实经过时间**，非硬编码 ✗；清理耗时另记 `cleanupSeconds`，不得影响这两个字段的一致性）；加三条自测（正常完成一致／超时路径 `elapsedSeconds ∈ [5400,5410]` 且 `|wall−elapsed| < 5` 且 `stages[].timedOut`／**篡改任一字段必被 `validate_retry` 拒**）；并用 run-19 的 manifest 做离线 dry-run 证明 `validate_retry` 可通过。
+- **重跑链路**：`run-21`（90 分钟档）→ 自动 `run-22`（180 分钟档，验收）→ 自动三阶段审计；跨接零写入、crontab 仅一条、跑完删除。**再耗 ~90 + ~110 分钟 ≈ 3.4 小时**（诚实告知）。
+
 **四项确认通过 + 串行自动化启动（20260901 22:35 本地 14:05）**：
 ① 合并修法落盘：`run-full-java-capture.py::emit_assertions()` 改为「补齐+合并」（子计划=全量−covered → emit 侧文件 → 按计划 case/assertionIds 顺序合并写回；身份重复/缺失/计划外一律记问题，**有问题不写最终文件并让阶段非零退出**）；报告加 `assertionSources` 并写侧文件 `java-assertion-sources.json`；`evidence-bundle.build()` 核验（legacy+shared==total==实际行数、两侧 case 数之和==计划 case 数）；`audit-tests.py compare()` 用同一 `check_assertion_sources()` **重算比对**（篡改即失败）。
 ② **5 条自测**（新增 `AssertionMergeTest`，直接调真实 `emit_assertions()`：正常合并／身份重复／共享缺口／计划外 case／`assertionSources` 篡改 4 变体）；**四套件全绿 88+18+13+14=133**。
