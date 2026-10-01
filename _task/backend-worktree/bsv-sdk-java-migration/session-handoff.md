@@ -159,6 +159,11 @@
 
 **B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
 
+**`full-run-16` 触及 90 分钟上限、180 分钟档已启动（20260901 19:40 本地时间 11:36）**：
+`full-run-16` 于 **11:24:35** 因 90 分钟上限被终止（`status: timed-out`、`elapsedSeconds 90.0 min`、`reason 完整运行触及上限；所有后代进程已停止`）——**这正是 180 分钟档协议所需的真实超时证据** ✓。
+Java 阶段在被终止前**没有出现 OOM**（`-Xmx3g` 生效 ✓，逐模块 `Tests run: … Failures: 0, Errors: 0`），只是**时间不够**（TS 46 min 后 Java 才开始，90 分钟档容不下 ~70 分钟总量 + Java 全量）。
+已把 `.cache/run-full-e2e.sh` 改为 **`full-run-17-20260901`**，命令加 `--timeout-minutes 180 --retry-after .cache/evidence/full-run-16-20260901/full-run.json`，crontab 重新安装；**11:36:01 已启动**（pid 3762240）。预计 TS → ~12:22、Java → ~12:50、随后 bundle。
+
 **四项改动全部落地、四套自测全绿、`full-run-16` 已启动（20260901 14:00）**：
 
 1. **堆修复**：`-DargLine=-Xmx3g`（常量 `MAVEN_ARG_LINE`，注释含 dmesg 证据与 4 组实测），报告加 `mavenArgLine`。
