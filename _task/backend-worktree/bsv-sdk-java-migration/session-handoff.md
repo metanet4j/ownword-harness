@@ -159,6 +159,11 @@
 
 **B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
 
+**full-run-15 结果：Java 阶段新缺陷（20260901 13:10）** —— `08:59:15` 结束 exit=1，失败在 **`java-capture`**（不是 bundle）。
+`java-maven.log` 报 `BUILD FAILURE`／surefire 阶段，唯一失败类 **`com.metanet4j.bsv.primitives.AESGCMManualTest`**（`Tests run: 885` 即止）；因 Maven 早退，`vectorInputs` 跳过、`assertions.error` 非空、`full-java-serial-convert.py` 也失败。
+该用例在**逐局部**（窗口 v2）与 **TS 侧全量**（42 分钟）都通过 → 属「全量 Java 阶段」下的**资源/环境**问题（512 MB 大数组，疑 heap 或超时），**不是接线错误**。
+已交 A2：①先诊断该类真实异常（读 `metanet4j-bsv-sdk/target/surefire-reports/` 下该类报告；对照该局部逐局部 recipe 是否本来带堆参数），给最小任务侧修法（例如全量 Java 阶段补 `MAVEN_OPTS`／`-DargLine`），**不改 SDK 源码**，我确认后再动；②第 7 例 TS 接线；③`known-gaps.json` 登记 + 三条自测；④预验证后跑 `full-run-16` 并交付两套审计与 `knownUnroutableCases` 计数。
+
 **用户裁决：6 例记为已知缺口（20260901 13:00）** —— 胡先生选择「记为已知缺口并如实披露」，**不重新冻结 SDK**（补齐那 6 例需新增 300+ 行 `AuthFetchPeerInputReplay.java` 并接线 6 个 `@Test` → 会改 `java_revision` → 窗口 v2 的 106 个同源局部与 14 项 task-parity 全部重跑）。
 
 **A2 只读排查的三条硬结论（已核实，不得当作口径问题绕过）**：
