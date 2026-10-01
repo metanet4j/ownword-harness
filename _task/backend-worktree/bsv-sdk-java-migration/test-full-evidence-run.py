@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import sys
+import tempfile
 import time
 import unittest
 from unittest.mock import patch
@@ -236,6 +237,88 @@ class FullRunTest(unittest.TestCase):
         self.assertLess(record['exitCode'], 0)
         with self.assertRaises(ProcessLookupError):
             os.kill(record['pid'], 0)
+
+
+class TimeoutAccountingTest(unittest.TestCase):
+    """超时路径的时间记账：elapsedSeconds 必须与 startedAtNs/finishedAtNs 同一时钟、同一时刻导出。
+
+    背景：以前 elapsedSeconds 用 time.monotonic()、起止时间用 time.time_ns()，本机（WSL2）90 分钟
+    两者漂移 10.7 s，加上清理窗口后 |wall-elapsed| = 10.673 s，被 validate_retry 的 <5 s 一致性
+    检查拒掉（full-run-19 → full-run-20 的真实失败）。这里既验证记账形状，也验证协议未被放宽。
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory(prefix='timeout-accounting-')
+        self.root = Path(self.tmp.name)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_normal_completion_fields_are_consistent(self):
+        record = runner.run_process([sys.executable, '-c', 'print("ok")'],
+                                    self.root / 'ok.log', time.monotonic() + 30, dict(os.environ))
+        self.assertIsNone(record.get('timedOut'))
+        self.assertEqual(record['exitCode'], 0)
+        wall = (record['finishedAtNs'] - record['startedAtNs']) / 1e9
+        self.assertLess(abs(wall - record['elapsedSeconds']), 0.05)
+
+    def test_timeout_records_deadline_instant_and_cleanup_separately(self):
+        record = runner.run_process([sys.executable, '-c', 'import time; time.sleep(60)'],
+                                    self.root / 'slow.log', time.monotonic() + 2, dict(os.environ))
+        self.assertTrue(record.get('timedOut'))
+        self.assertEqual(record['finishedAtNs'], record['deadlineHitAtNs'])
+        self.assertGreater(record['cleanupSeconds'], 0)
+        wall = (record['finishedAtNs'] - record['startedAtNs']) / 1e9
+        self.assertLess(abs(wall - record['elapsedSeconds']), 0.05)   # 同一时钟对导出
+        self.assertLess(abs(wall - 2), 1.0)                           # 恰好停在截止时刻附近
+
+    def retry_source(self, elapsed, wall=None, timed_out=True):
+        """按 capture() 的记账口径合成一份 90 分钟档 manifest。"""
+        started = 1_700_000_000_000_000_000
+        wall = elapsed if wall is None else wall
+        document = {'schemaVersion': 1, 'status': 'timed-out' if timed_out else 'failed',
+                    'timeoutMinutes': 90, 'elapsedSeconds': elapsed, 'fullRunId': 'a' * 32,
+                    'startedAtNs': started, 'finishedAtNs': started + int(wall * 1e9),
+                    'interface': {'tsCommand': ['x']}, 'inputPlanSha256': 'b' * 64}
+        path = self.root / ('retry-%s.json' % elapsed)
+        path.write_text(json.dumps(document))
+        return path, {'schemaVersion': 1}
+
+    def test_validate_retry_accepts_consistent_90_minute_source(self):
+        path, _ = self.retry_source(5400.05)
+        with patch.object(runner, 'commands_for', return_value=[]), \
+             patch.object(runner.audit, 'digest', return_value='b' * 64):
+            document = json.loads(path.read_text())
+            document['stages'] = [{'name': 'ts-capture', 'command': ['x'], 'pid': 1,
+                                   'startedAtNs': document['startedAtNs'] + 1,
+                                   'finishedAtNs': document['finishedAtNs'], 'timedOut': True,
+                                   'exitCode': -15, 'logSha256': 'c' * 64}]
+            path.write_text(json.dumps(document))
+            runner.validate_retry(180, path, self.state(document), document['interface'],
+                                  document['inputPlanSha256'])
+
+    def state(self, document):
+        """重试来源需要与当前 state 的键值一致；只取能对齐的键做形状验证。"""
+        return {key: document.get(key) for key in document
+                if key not in ('status', 'elapsedSeconds', 'finishedAtNs', 'error', 'stages')}
+
+    def test_validate_retry_rejects_inconsistent_or_tampered_records(self):
+        for elapsed, wall, message in ((5400.0, 5444.0, '记录无效'),      # 硬写 5400 但 wall 不一致
+                                       (5400.05, 5406.5, '记录无效'),    # 差 > 5 s
+                                       (5390.0, 5390.0, '触及 90 分钟上限')):  # 没到上限
+            with self.subTest(message=message, elapsed=elapsed):
+                path, _ = self.retry_source(elapsed, wall)
+                with patch.object(runner, 'commands_for', return_value=[]), \
+                     patch.object(runner.audit, 'digest', return_value='b' * 64):
+                    document = json.loads(path.read_text())
+                    document['stages'] = [{'name': 'ts-capture', 'command': ['x'], 'pid': 1,
+                                           'startedAtNs': document['startedAtNs'] + 1,
+                                           'finishedAtNs': document['finishedAtNs'], 'timedOut': True,
+                                           'exitCode': -15, 'logSha256': 'c' * 64}]
+                    path.write_text(json.dumps(document))
+                    with self.assertRaisesRegex(ValueError, message):
+                        runner.validate_retry(180, path, self.state(document), document['interface'],
+                                              document['inputPlanSha256'])
 
 
 if __name__ == '__main__':

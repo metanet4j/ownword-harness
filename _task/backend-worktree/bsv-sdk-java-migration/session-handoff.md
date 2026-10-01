@@ -159,6 +159,14 @@
 
 **B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
 
+**时间记账修法落盘并通过自测；链路 run-21 → run-22 已就绪（20260901 23:55 本地 15:40）**：
+- **更根本的根因**：`elapsedSeconds` 用 `time.monotonic()`，而 `startedAtNs/finishedAtNs` 用 `time.time_ns()` —— **两个时钟域**在本机（WSL2）90 分钟**漂移 10.7 秒**，叠加清理时间 → `validate_retry` 的 `|wall−elapsed| < 5` 必然失败 ✗。
+- **修法**（`full-evidence-run.py` 超时路径，只改记账、不伪造）：`run_process()` 超时分支在**发 SIGTERM/SIGKILL 之前**记 `deadlineHitAtNs`；阶段 `timedOut` 时 `finishedAtNs = deadlineHitAtNs`、`elapsedSeconds = (finishedAtNs − startedAtNs)/1e9`、`cleanupSeconds = 真实结束 − deadlineHitAtNs`；`capture()` 的 `finally` 同步用同一对 wall 时间戳导出 ⇒ **`|wall − elapsed| ≡ 0`**，`elapsedSeconds` 仍是**真实经过时间**（非硬编码）。
+- **自测 4 条**（含我要求的“篡改必拒”）：正常完成一致／超时记录 deadline 且 `cleanupSeconds>0`／合成的 90 分钟来源被 `validate_retry` 接受／篡改三变体（硬写 5400、差 6.45 s、elapsed=5390）**必被拒**；**四套件全绿 22+88+13+14 = 137**。
+- **离线 dry-run**（`/tmp/retry-sim` 副本）：按新口径重算 run-19 → `elapsed=wall=5400.000`、`cleanupSeconds=10.728` → `validate_retry(180,…)` **通过** ✓；并**诚实附注**：本次修法又改了工具集 ⇒ run-19 不再是合法来源，**必须**用 run-21 重新产出同源超时来源（协议本意，未绕过）。
+- **链路已就绪**：`.cache/run-full-21-22.sh`（run-21 90 分钟档 → 自动 run-22 180 分钟档 + `--retry-after` → 自动 `verify` + `audit-tests.py check` + `node audit-api.cjs check`，结果落 `.cache/evidence/full-run-22.log`）；crontab 仅此一条；两轮之间**零写入**。**主代理已确认有效**。
+- **时间线**：run-21 ~16:05 启动 → ~17:35 触限 → run-22 ~17:36 起 → 约 **19:30** 出全部结果。
+
 **run-19 → run-20 交接失败：manifest 时间记账内部矛盾（20260901 23:30 本地 15:25）**：
 - `run-19` 于 **15:24:44** 被 90 分钟上限终止 ✓（`status=timed-out`、`timeoutMinutes=90`、`elapsedSeconds=5400.055` ∈ [5400,5410] ✓）；
 - 但 **`run-20` 于 15:25:18 立即失败**：`{"status": "FAIL", "reason": "重试来源的超时时间记录无效"}` ✗；

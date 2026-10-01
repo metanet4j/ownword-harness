@@ -106,6 +106,10 @@ def run_process(command, log, deadline, environment):
             record['exitCode'] = process.wait(timeout=max(0, deadline - time.monotonic()))
         except subprocess.TimeoutExpired:
             record['timedOut'] = True
+            # 上限触发的**那一刻**：把它记成该阶段的结束时间（清理不计入运行时间窗），
+            # 清理耗时另记 cleanupSeconds。这样阶段时间窗与顶层时间窗用同一个时钟、同一时刻，
+            # 且 elapsedSeconds 完全由这一对 wall 时间戳导出（见 capture() 的记账）。
+            record['deadlineHitAtNs'] = time.time_ns()
             try:
                 os.killpg(process.pid, signal.SIGTERM)
             except ProcessLookupError:
@@ -126,8 +130,16 @@ def run_process(command, log, deadline, environment):
             process.wait()
             raise
         record['exitCode'] = process.returncode
-    record.update(finishedAtNs=time.time_ns(), elapsedSeconds=time.monotonic() - start,
-                  logSha256=audit.digest(log))
+    ended = time.time_ns()
+    if record.get('timedOut'):
+        hit = record['deadlineHitAtNs']
+        record['finishedAtNs'] = hit
+        record['elapsedSeconds'] = (hit - record['startedAtNs']) / 1e9
+        record['cleanupSeconds'] = (ended - hit) / 1e9
+    else:
+        record['finishedAtNs'] = ended
+        record['elapsedSeconds'] = (ended - record['startedAtNs']) / 1e9
+    record['logSha256'] = audit.digest(log)
     return record
 
 
@@ -221,7 +233,15 @@ def capture(config_path, folder, timeout, previous=None):
         manifest['error'] = str(error)
         raise
     finally:
-        manifest.update(finishedAtNs=time.time_ns(), elapsedSeconds=time.monotonic() - started)
+        # 记账只用一个时钟：elapsedSeconds 由 startedAtNs/finishedAtNs 这对 wall 时间戳导出，
+        # 因此 |wall - elapsed| 恒为 0（此前 elapsed 用 monotonic、起止用 wall，本机 90 分钟漂移
+        # 10.7 s，validate_retry 的 <5 s 一致性检查因此必挂）。超时路径的 finishedAtNs 取该阶段的
+        # 上限触发时刻（清理耗时另记 cleanupSeconds），语义仍是"实际触及上限时的真实经过时间"。
+        stages = manifest['stages']
+        timed = next((stage for stage in stages if stage.get('timedOut')), None)
+        ended = timed['deadlineHitAtNs'] if timed else time.time_ns()
+        manifest.update(finishedAtNs=ended, elapsedSeconds=(ended - manifest['startedAtNs']) / 1e9,
+                        cleanupSeconds=round(sum(stage.get('cleanupSeconds', 0) for stage in stages), 3))
         write(path, manifest)
     try:
         result = verify(path)
