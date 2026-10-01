@@ -187,9 +187,17 @@ def capture(config_path, folder, timeout, previous=None):
     folder.mkdir(parents=True, exist_ok=False)
     write(folder / 'input-plan.json', plan)
     write(folder / 'preflight.json', pre)
+    known = audit.known_unroutable_canonical()
+    _, rules_sha = audit.cross_language_canonical()
+    require(known['count'] == known['registryEntries'],
+            '已知缺口登记存在冻结清单外的条目，禁止开跑：'
+            + json.dumps({'已落地': known['count'], '登记条数': known['registryEntries']},
+                         ensure_ascii=False))
     manifest = dict(state, schemaVersion=1, fullRunId=uuid.uuid4().hex, status='running',
         formalAcceptance=False, upstreamCommit=catalog['upstreamCommit'],
         casesTotal=sum(len(file['cases']) for file in catalog['files']),
+        knownUnroutableCases=known, knownGapsSha256=known['registrySha256'],
+        crossLanguageRulesSha256=rules_sha,
         inputPlanSha256=audit.digest(folder / 'input-plan.json'), interface=interface,
         timeoutMinutes=timeout, retryAfter=retry, startedAtNs=time.time_ns(), stages=[])
     path = folder / 'full-run.json'
@@ -243,6 +251,14 @@ def verify(path):
         require(audit.digest(checked_path(folder, name)) == manifest['artifactSha256'][name],
                 '完整运行文件摘要不同：' + name)
     require(manifest['inputPlanSha256'] == audit.digest(folder / 'input-plan.json'), '运行前输入计划不同')
+    # 已知缺口登记属于本轮来源：摘要与计数都要与当前文件一致，否则整轮作废。
+    known = audit.known_unroutable_canonical()
+    require(manifest.get('knownGapsSha256') == known['registrySha256']
+            and manifest.get('knownUnroutableCases') == known,
+            '完整运行的已知缺口登记与当前登记不同')
+    _, rules_sha = audit.cross_language_canonical()
+    require(manifest.get('crossLanguageRulesSha256') == rules_sha,
+            '完整运行的跨语言输入替换表与当前不同')
     commands = commands_for(interface, folder)
     require([stage.get('name') for stage in manifest['stages']] == list(STAGES), '完整执行顺序或阶段缺失')
     last = manifest['startedAtNs']

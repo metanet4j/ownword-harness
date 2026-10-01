@@ -159,6 +159,15 @@
 
 **B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
 
+**四项改动全部落地、四套自测全绿、`full-run-16` 已启动（20260901 14:00）**：
+
+1. **堆修复**：`-DargLine=-Xmx3g`（常量 `MAVEN_ARG_LINE`，注释含 dmesg 证据与 4 组实测），报告加 `mavenArgLine`。
+2. **任务①第 7 例**：`build-ts-serial-entries.py` 增 `EXTRA_PROBES`（含 `replaces`/`reason`，条目 diff 仅 `auth-fetch-known-txids` 一条，summary 不变）；`run-full-ts-serial.py` 增 `merge_extra_probes()`——**额外探针用独立 jest 调用**（避开 `jest.doMock` 模块工厂争用），只并入输入行并按 `replaces` 覆盖入口探针同身份行，未登记替换/产出入口没有的身份即报错。单点：该局部 `passed`、`inputsWritten 17`（16 行 `knownTxidsInput` + **1 行 `knownTxidsPeerInput`**，caseId `189790cbac…`）；Java 侧 `-Dtest=AuthFetchKnownTxidsTest` → **17/0/0**，peer 行两侧输入 sha256 **完全相同**（`c1db4f4076164cf9…`）。
+3. **任务②已知缺口**：`known-gaps.json` 6 条（caseId／局部／`ruleId=frozen-test-without-replay-entry-v1`／Java 注册身份／证据指针（含 absence-scan 0 命中命令）／`newFile`）；`audit-tests.py::known_gaps()` **逐条机器核验**（caseId 属清单、注册身份匹配、Java 源码确无重放入口、待新建文件尚不存在、证据指针存在、ruleId 枚举、**禁止自由文本 reason**）；`evidence-bundle.py` 只放行登记内 caseId 的 **Java 输入缺失**一项，登记内一旦又出现 Java 输入也失败（**防登记过期**），登记外缺失/多余仍硬失败；`knownUnroutableCases`+`knownGapsSha256` 出现在 bundle 输出／capture manifest／`full-run.json`／`audit check`；**自测 5 条**。
+4. **方案 A 跨语言替换表**：`cross-language-input-rules.json` **16 条精确规则**（文件+字面键/`[]` 路径+TS 形状+Java 形状，**出现 `*`/`?` 直接拒绝**，每条注 `gate` 出处）+ 1 条 `kind=unordered`（nonce 多重集，两侧必须相等才排序归一）；用 **run-14 真实数据穷举**：25402 个双侧身份里原 25 个不一致 → 归一后 **25/25 一致、0 残留**（42 次 substitute + 1 次 unordered）；接入 bundle/`audit compare`/`full-run.json`（`crossLanguageRulesSha256`）；**自测 6 条**。
+**四套测试全绿**：bundle 83／full-evidence-run 18／preflight 13／semantics 14；preflight 报 `readyForFullCapture=true`、5329 用例、`planErrors=[]`。
+**`full-run-16`**：cron 09:54:01 启动（pid 3439716；09:50 那次 tick 正确推迟）；预计 TS ≈10:45、Java ≈11:00–11:10，上限 11:24；交付时给 stage 结果 + `verify` + `audit-tests.py check` + `audit-api.cjs check` + `knownUnroutableCases`（期望 6）与 `crossLanguageInputSubstitutions.count`（期望 25）。
+
 **第二处结构性阻塞与裁决（20260901 13:50）**：A2 用 run-14 产物做预测检查发现 —— `evidence-bundle` 对**输入值**严格比较，而 auth-fetch 家族有 **25 例**的 TS/Java 输入值**按设计不同**（逐局部 gate 明确归一，bundle 不做）→ 若不处理，run-16 会在 `bundle` 以「TS/Java 输入或前置状态不同」失败（既有结构问题，此前被“缺用例”挡住、从未跑到）。
 分布：`AuthFetch.boundary.test.ts` 15（`.kind`：TS `AuthFetch.boundaryInput` vs Java `AuthFetch.boundaryEntry`；`.mockInputs.waitResults[i].value`：TS `{"type":"undefined"}` vs Java `null`）、`AuthFetch.knownTxids.test.ts` 6（`.paymentCalls[i].response.bodyUsed`：TS `false` vs Java **无该键**）、`AuthFetch.test.ts` 4（`.mockReturns.request.name`：TS `Error` vs Java `SdkException`）；涉及局部 `auth-fetch-boundary` 15／`auth-fetch-known-txids` 6／`auth-fetch-primary-cert-request` 3／`auth-fetch-primary-retry` 1。
 依据（冻结 gate 的硬 `require`）：`auth-fetch-knownTxids-payment-local-gate.py:159-162`、`auth-fetch-boundary-entry-local-gate.py:36-48` 与 `:207-208`、`auth-fetch-primary-cert-request-local-gate.py:195`。

@@ -49,6 +49,7 @@ class BundleTest(unittest.TestCase):
                                      {'ancestorTitles': ['suite'], 'title': 'second', 'status': 'passed'}]}]})
         self.path('surefire.xml').write_text('<testsuite tests="2" failures="0" errors="0" skipped="0"><testcase classname="ExampleTest" name="first"/><testcase classname="ExampleTest" name="second"/></testsuite>')
         self.path('ExampleTest.java').write_text('// 夹具：无任何输入重放入口\nclass ExampleTest {}\n')
+        self.registry_path = self.registry()   # 默认夹具登记：空列表（全部校验照旧严格）
         self.manifests()
 
     def registry(self, cases=None, rule=None):
@@ -107,22 +108,25 @@ class BundleTest(unittest.TestCase):
     def write_lines(self, name, rows):
         self.path(name).write_text(''.join(json.dumps(row, ensure_ascii=False) + '\n' for row in rows))
 
-    def common(self):
-        return ['--catalog', str(self.path('catalog.json')), '--mapping', str(self.path('mapping.json')),
-                '--input-plan', str(self.path('plan.json')), '--ts-inputs', str(self.path('ts-inputs.jsonl')),
-                '--java-inputs', str(self.path('java-inputs.jsonl')), '--ts-assertions', str(self.path('ts-assertions.jsonl')),
-                '--java-assertions', str(self.path('java-assertions.jsonl')), '--ts-report', str(self.path('jest.json')),
-                '--java-report', str(self.path('surefire.xml')),
-                '--ts-run-manifest', str(self.path('ts.manifest.json')),
-                '--java-run-manifest', str(self.path('java.manifest.json')),
-                '--known-gaps', self.registry()]
+    def common(self, registry=None, rules=None):
+        common = ['--catalog', str(self.path('catalog.json')), '--mapping', str(self.path('mapping.json')),
+                  '--input-plan', str(self.path('plan.json')), '--ts-inputs', str(self.path('ts-inputs.jsonl')),
+                  '--java-inputs', str(self.path('java-inputs.jsonl')), '--ts-assertions', str(self.path('ts-assertions.jsonl')),
+                  '--java-assertions', str(self.path('java-assertions.jsonl')), '--ts-report', str(self.path('jest.json')),
+                  '--java-report', str(self.path('surefire.xml')),
+                  '--ts-run-manifest', str(self.path('ts.manifest.json')),
+                  '--java-run-manifest', str(self.path('java.manifest.json'))]
+        common += ['--known-gaps', registry or self.registry_path]
+        if rules:
+            common += ['--cross-language-rules', rules]
+        return common
 
-    def bundle(self):
-        return subprocess.run(['python3', str(TASK/'evidence-bundle.py'), *self.common(),
+    def bundle(self, registry=None, rules=None):
+        return subprocess.run(['python3', str(TASK/'evidence-bundle.py'), *self.common(registry, rules),
                                '--java-revision', 'test-revision', '--output', str(self.path('results.json'))], capture_output=True, text=True)
 
-    def audit(self):
-        return subprocess.run(['python3', str(TASK/'audit-tests.py'), 'compare', *self.common(),
+    def audit(self, registry=None, rules=None):
+        return subprocess.run(['python3', str(TASK/'audit-tests.py'), 'compare', *self.common(registry, rules),
                                '--observations', str(self.path('results.json')), '--java-revision', 'test-revision'], capture_output=True, text=True)
 
     def test_real_pipeline_shape(self):
@@ -433,6 +437,178 @@ print('合成工具执行夹具，不计 SDK 测试')
         result = subprocess.run(self.capture_command('print("no tests")\n'), capture_output=True, text=True)
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('captureError', json.loads(self.path('fresh/run.json').read_text()))
+
+
+class KnownGapTest(BundleTest):
+    """已知缺口登记（known-gaps.json）的门禁自测：只放行已核验"无输入重放入口"的用例。"""
+
+    def registered_bundle(self, entry=None):
+        registry = self.registry([entry or self.gap_entry()])
+        self.drop_java_inputs('case2')
+        result = self.bundle(registry)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        return registry, json.loads(self.path('results.json').read_text())
+
+    def test_registered_gap_is_reported_and_does_not_fail(self):
+        registry, result = self.registered_bundle()
+        known = result['knownUnroutableCases']
+        self.assertEqual(known['count'], 1)
+        self.assertEqual(known['cases'], ['case2'])
+        self.assertEqual(known['ruleIds'], {'frozen-test-without-replay-entry-v1': 1})
+        self.assertEqual(result['knownGapsSha256'], hashlib.sha256(
+            Path(registry).read_bytes()).hexdigest())
+        gap_case = next(case for case in result['cases'] if case['id'] == 'case2')
+        self.assertIsNone(gap_case['javaInputSha256'])
+        self.assertEqual(gap_case['inputSamples']['Java'], [])
+        self.assertEqual(gap_case['knownUnroutable']['javaTest'], 'ExampleTest#second')
+        self.assertEqual([case['id'] for case in result['cases']], ['case1', 'case2'])
+        audit = self.audit(registry)
+        self.assertEqual(audit.returncode, 0, audit.stderr)
+        self.assertEqual(json.loads(audit.stdout)['knownUnroutableCases']['count'], 1)
+
+    def test_unregistered_missing_java_input_still_fails(self):
+        self.drop_java_inputs('case2')
+        result = self.bundle(self.registry())
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Java 输入用例：缺失', result.stderr)
+        self.assertIn('case2', result.stderr)
+
+    def test_registered_case_with_routed_java_input_fails(self):
+        """登记为"无消费入口"的用例一旦真出现 Java 输入，必须失败（登记过期）。"""
+        result = self.bundle(self.registry([self.gap_entry()]))
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('出现了 Java 输入', result.stderr)
+
+    def test_tampered_registry_is_rejected(self):
+        cases = [
+            (self.gap_entry(caseId='case1'), 'Java 注册身份与映射表不符'),
+            (self.gap_entry(ruleId='free-text-reason'), 'ruleId 未登记'),
+            (self.gap_entry(evidence=[]), '缺少证据指针'),
+            (self.gap_entry(evidence=[{'kind': 'report', 'path': 'no-such-report.md'}]), '证据指针不存在'),
+            (self.gap_entry(javaSource=str(self.path('missing.java'))), 'Java 源码不存在'),
+            (self.gap_entry(newFile=str(self.path('ExampleTest.java'))), '已存在'),
+            ({**self.gap_entry(), 'reason': '自由文本'}, '字段不合法'),
+        ]
+        for entry, message in cases:
+            with self.subTest(message=message):
+                self.drop_java_inputs('case2')
+                result = self.bundle(self.registry([entry]))
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn(message, result.stderr)
+
+    def test_registry_cannot_be_swapped_in_formal_check(self):
+        result = subprocess.run(['python3', str(TASK/'audit-tests.py'), 'check', *self.common(),
+                                 '--known-gaps', self.registry(), '--observations',
+                                 str(self.path('results.json'))], capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('不允许替换已知缺口登记', result.stderr)
+
+
+class CrossLanguageTest(BundleTest):
+    """跨语言输入记法替换表（cross-language-input-rules.json）的门禁自测。"""
+
+    RULES = [
+        {'kind': 'substitute', 'file': 'src/compat/example.test.ts', 'path': ['kind'],
+         'ts': 'TsKind', 'java': 'JavaKind', 'gate': 'audit-tests.py:1',
+         'reason': '夹具：TS/Java 记法不同名。'},
+        {'kind': 'substitute', 'file': 'src/compat/example.test.ts',
+         'path': ['inner', '[]', 'response', 'bodyUsed'], 'ts': False,
+         'java': {'$absent': True}, 'gate': 'audit-tests.py:2',
+         'reason': '夹具：TS 记 bodyUsed、Java 不记。'},
+    ]
+
+    def rules_file(self, rules=None):
+        self.write('cross-language-input-rules.json', {
+            'schemaVersion': 1, 'absent': {'$absent': True}, 'rules': rules or self.RULES})
+        return str(self.path('cross-language-input-rules.json'))
+
+    def set_case_values(self, ts_value, java_value, case_id='case1'):
+        """把某个用例两侧的输入值换成给定形状（其余用例不动），并重写来源清单。"""
+        for side, value in (('ts', ts_value), ('java', java_value)):
+            name = side + '-inputs.jsonl'
+            rows = [json.loads(line) for line in self.path(name).read_text().splitlines()]
+            rows = [dict(row, value=value) if row['caseId'] == case_id else row for row in rows]
+            self.write_lines(name, rows)
+        self.manifests()
+
+    @staticmethod
+    def same_pair(extra=None):
+        ts = {'kind': 'TsKind', 'inner': [{'response': {'bodyUsed': False}}]}
+        java = {'kind': 'JavaKind', 'inner': [{'response': {}}]}
+        if extra:
+            ts['extra'], java['extra'] = extra
+        return ts, java
+
+    def test_rule_hit_normalizes_and_is_reported(self):
+        ts, java = self.same_pair()
+        self.set_case_values(ts, java)
+        rules = self.rules_file()
+        result = self.bundle(rules=rules)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        data = json.loads(self.path('results.json').read_text())
+        summary = data['crossLanguageInputSubstitutions']
+        self.assertEqual(summary['count'], 1)
+        self.assertEqual(summary['cases'], ['case1'])
+        self.assertEqual(summary['substitutions'], 6)   # case1 有 3 个样本，每条规则各命中一次
+        self.assertEqual(data['crossLanguageRulesSha256'],
+                         hashlib.sha256(Path(rules).read_bytes()).hexdigest())
+        case = next(item for item in data['cases'] if item['id'] == 'case1')
+        self.assertEqual(case['javaInputSha256'], case['tsInputSha256'])
+        audit = self.audit(rules=rules)
+        self.assertEqual(audit.returncode, 0, audit.stderr)
+        self.assertEqual(json.loads(audit.stdout)['crossLanguageInputSubstitutions']['count'], 1)
+
+    def test_shape_mismatch_is_not_substituted_and_still_fails(self):
+        ts, java = self.same_pair()
+        java['kind'] = 'OtherKind'          # 与规则声明的 Java 形状不符
+        self.set_case_values(ts, java)
+        result = self.bundle(rules=self.rules_file())
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('输入或前置状态不同', result.stderr)
+
+    def test_difference_outside_the_table_still_fails(self):
+        ts, java = self.same_pair(extra=('a', 'b'))   # 表外差异
+        self.set_case_values(ts, java)
+        result = self.bundle(rules=self.rules_file())
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('输入或前置状态不同', result.stderr)
+
+    def test_tampered_table_is_rejected(self):
+        cases = [
+            ([{**self.RULES[0], 'path': ['*']}], '只允许字面键'),
+            ([{**self.RULES[0], 'path': ['kind', '?']}], '只允许字面键'),
+            ([{**self.RULES[0], 'gate': 'no-such-gate.py:3'}], 'gate 脚本不存在'),
+            ([{**self.RULES[0], 'gate': 'audit-tests.py:999999'}], '行号超出文件范围'),
+            ([{**self.RULES[0], 'file': 'src/none/example.test.ts'}], '输入或前置状态不同'),
+            ([{'kind': 'substitute', 'file': 'src/compat/example.test.ts', 'path': ['kind'],
+               'ts': 'TsKind', 'gate': 'audit-tests.py:1'}], '缺少字段'),
+            ([{**self.RULES[0], 'kind': 'ignore-field'}], 'kind 不合法'),
+        ]
+        ts, java = self.same_pair()
+        for rules, message in cases:
+            with self.subTest(message=message):
+                self.set_case_values(ts, java)
+                result = self.bundle(rules=self.rules_file(rules))
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn(message, result.stderr)
+
+    def test_rule_outside_frozen_catalog_is_rejected_by_formal_check(self):
+        """正式验收要求替换表里每条规则都能在冻结清单里落地（夹具规则在真实清单里不存在）。"""
+        spec = importlib.util.spec_from_file_location('audit_module', TASK / 'audit-tests.py')
+        audit = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(audit)
+        with self.assertRaisesRegex(ValueError, '冻结清单外的规则'):
+            audit.cross_language_canonical(self.rules_file())
+
+    def test_rules_file_cannot_be_swapped_in_formal_check(self):
+        result = subprocess.run(['python3', str(TASK/'audit-tests.py'), 'check',
+                                 '--catalog', str(self.path('catalog.json')),
+                                 '--mapping', str(self.path('mapping.json')),
+                                 '--cross-language-rules', self.rules_file(),
+                                 '--observations', str(self.path('results.json'))],
+                                capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('不允许替换跨语言输入替换表', result.stderr)
 
 
 if __name__ == '__main__':

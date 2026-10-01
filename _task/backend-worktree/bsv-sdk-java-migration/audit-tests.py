@@ -176,8 +176,11 @@ def known_gaps(catalog=None, mapping=None, path=None):
         require(isinstance(entry, dict) and set(entry) == KNOWN_GAP_FIELDS,
                 f'已知缺口条目字段不合法：{sorted(entry) if isinstance(entry, dict) else entry}')
         case_id = entry['caseId']
-        require(case_id in owners, f'已知缺口登记了冻结清单外的 caseId：{case_id}')
         require(case_id not in result, f'已知缺口 caseId 重复：{case_id}')
+        if case_id not in owners:
+            # 本次调用只带一个局部片段或合成夹具：该条目不在范围内，跳过（正式门禁另行要求
+            # 全部条目都能在冻结清单里落地，见 known_unroutable_summary 的 registryEntries 比对）。
+            continue
         require(owners[case_id] == entry['tsFile'],
                 f'已知缺口的 TS 文件与清单不符：{case_id}')
         require(entry['javaTest'] + '#' + entry['javaMethod'] in identities.get(case_id, []),
@@ -209,13 +212,253 @@ def known_gaps(catalog=None, mapping=None, path=None):
     return result
 
 
+CROSS_LANGUAGE_RULES = TASK / 'cross-language-input-rules.json'
+
+
+def cross_language_rules(path=None, catalog=None):
+    """读取并逐条核验跨语言输入记法替换表；返回 (规则列表, 文件摘要)。
+
+    每条规则必须精确给出 (文件, JSON 路径, TS 期望形状, Java 期望形状)：
+      * 路径只允许字面键与 `[]`（数组逐元素，不是键通配）；出现 `*`、`?` 之类通配一律拒绝；
+      * TS/Java 形状必须是具体值（Java 侧允许 `{"$absent": true}` 表示"该键必须不存在"）；
+      * `gate` 必须形如 `<脚本>.py:<行号>[-<行号>]`，且该脚本存在、行号在文件范围内；
+      * `file` 必须是冻结清单里的 TS 原文件；
+      * 可选 `parent` 要求叶子所在字典两侧的 `type` 都等于给定值；可选 `cases` 限定 caseId 白名单。
+    形状不符时不做任何替换（随后由严格比较照旧失败），因此这张表不能用来"忽略字段"。
+    """
+    rules_path = Path(path) if path else CROSS_LANGUAGE_RULES
+    require(rules_path.is_file(), f'缺少跨语言输入替换表：{rules_path}')
+    document = read(rules_path)
+    require(document.get('schemaVersion') == 1, '跨语言输入替换表版本无效')
+    require(document.get('absent') == {'$absent': True}, '跨语言输入替换表缺少 absent 哨兵定义')
+    rules = document.get('rules')
+    require(isinstance(rules, list) and rules, '跨语言输入替换表为空')
+    files = {file['path'] for file in (catalog or read(TASK / 'module-tests.json'))['files']}
+    loaded, skipped = [], 0
+    for rule in rules:
+        require(isinstance(rule, dict) and set(rule) <= {'kind', 'file', 'path', 'ts', 'java', 'parent',
+                                                         'cases', 'gate', 'reason'}, f'替换规则字段不合法：{rule}')
+        require(rule.get('kind', 'substitute') in ('substitute', 'unordered'),
+                f'替换规则 kind 不合法：{rule.get("kind")}')
+        needed = {'substitute': {'file', 'path', 'ts', 'java', 'gate'},
+                  'unordered': {'file', 'path', 'gate', 'cases'}}[rule.get('kind', 'substitute')]
+        require(needed <= set(rule), f'替换规则缺少字段 {sorted(needed - set(rule))}：{rule}')
+        if rule['file'] not in files:
+            # 本次调用只带局部片段或合成夹具：该规则不在范围内，跳过（正式验收另行要求全部规则
+            # 都能在冻结清单里落地，见 cross_language_canonical）。
+            skipped += 1
+            continue
+        path_value = rule['path']
+        require(isinstance(path_value, list) and path_value, f'替换规则缺少路径：{rule["file"]}')
+        for step in path_value:
+            require(isinstance(step, str) and step and not any(ch in step for ch in '*?[]')
+                    or step == '[]', f'替换规则路径只允许字面键与 []：{path_value}')
+        require(isinstance(rule['gate'], str), f'替换规则缺少 gate 出处：{rule["file"]}')
+        match = re.fullmatch(r'([A-Za-z0-9_.-]+\.py):(\d+)(?:-(\d+))?', rule['gate'])
+        require(bool(match), f'替换规则的 gate 出处格式不合法：{rule["gate"]}')
+        script = TASK / match.group(1)
+        require(script.is_file(), f'替换规则引用的 gate 脚本不存在：{match.group(1)}')
+        lines = len(script.read_text(errors='replace').splitlines())
+        require(int(match.group(2)) <= lines and (match.group(3) is None or int(match.group(3)) <= lines),
+                f'替换规则引用的 gate 行号超出文件范围：{rule["gate"]}')
+        if 'parent' in rule:
+            require(isinstance(rule['parent'], str) and rule['parent'], f'替换规则 parent 不合法：{rule["file"]}')
+        if 'cases' in rule:
+            require(isinstance(rule['cases'], list) and rule['cases']
+                    and all(isinstance(item, str) for item in rule['cases']),
+                    f'替换规则 cases 白名单不合法：{rule["file"]}')
+        loaded.append(rule)
+    return loaded, digest(rules_path)
+
+
+def cross_language_canonical(path=None):
+    """按**冻结清单**核验替换表：正式门禁专用，要求每条规则都能在冻结清单里落地。"""
+    document = read(Path(path) if path else CROSS_LANGUAGE_RULES)
+    rules, rules_sha = cross_language_rules(path, read(TASK / 'module-tests.json'))
+    require(len(rules) == len(document.get('rules', [])),
+            '跨语言输入替换表存在冻结清单外的规则：'
+            + json.dumps({'已落地': len(rules), '规则条数': len(document.get('rules', []))},
+                         ensure_ascii=False))
+    return rules, rules_sha
+
+
+def substitute_cross_language_inputs(case_id, file_path, ts_value, java_value, rules):
+    """按替换表把 Java 记法归一到 TS 记法；返回 (新 Java 值, 命中列表)。形状不符就不动。"""
+    hits = []
+
+    def element(java, ts, rule, case_id, trail):
+        """数组元素本身作为叶子：形状完全一致时整行换成 TS 行。"""
+        if 'cases' in rule and case_id not in rule['cases']:
+            return java, False
+        if 'parent' in rule:
+            return java, False
+        if ts != rule['ts'] or java != rule['java']:
+            return java, False
+        hits.append({'caseId': case_id, 'file': file_path, 'path': '/'.join(trail),
+                     'gate': rule['gate']})
+        return rule['ts'], True
+
+    def walk(java, ts, steps, rule, trail):
+        if not steps:
+            return java, False
+        step, rest = steps[0], steps[1:]
+        if step == '[]':
+            if not (isinstance(java, list) and isinstance(ts, list) and len(java) == len(ts)):
+                return java, False
+            if not rest:
+                # 数组元素本身就是叶子（整行替换，如 gate 的固定拒绝样本）。
+                changed = False
+                output = []
+                for index, (item, other) in enumerate(zip(java, ts)):
+                    value, hit = element(item, other, rule, case_id, trail + [str(index)])
+                    output.append(value)
+                    changed = changed or hit
+                return (output if changed else java), changed
+            changed = False
+            output = []
+            for index, (item, other) in enumerate(zip(java, ts)):
+                value, hit = walk(item, other, rest, rule, trail + [str(index)])
+                output.append(value)
+                changed = changed or hit
+            return (output if changed else java), changed
+        if not (isinstance(java, dict) and isinstance(ts, dict) and step in ts):
+            return java, False
+        if not rest:
+            if 'cases' in rule and case_id not in rule['cases']:
+                return java, False
+            if rule.get('parent') and not (java.get('type') == rule['parent']
+                                           and ts.get('type') == rule['parent']):
+                return java, False
+            if ts[step] != rule['ts']:
+                return java, False
+            expected = rule['java']
+            if expected == {'$absent': True}:
+                if step in java:
+                    return java, False
+            elif step not in java or java[step] != expected:
+                return java, False
+            hits.append({'caseId': case_id, 'file': file_path, 'path': '/'.join(trail + [step]),
+                         'gate': rule['gate']})
+            return {**java, step: rule['ts']}, True
+        if step not in java:
+            return java, False
+        value, hit = walk(java[step], ts[step], rest, rule, trail + [step])
+        if not hit:
+            return java, False
+        return {**java, step: value}, True
+
+    result = java_value
+    for rule in rules:
+        if rule['file'] != file_path or rule.get('kind', 'substitute') != 'substitute':
+            continue
+        value, hit = walk(result, ts_value, list(rule['path']), rule, [])
+        if hit:
+            result = value
+    return result, hits
+
+
+def normalize_input_rows(case_id, file_path, ts_rows, java_rows, rules):
+    """按替换表把两侧样本归一到同一记法；返回 (TS 行, Java 行, 替换命中, 无序命中)。
+
+    入参行形如 `{'sampleId': ..., 'value': ...}`；只改 `value`，不动 `sampleId` 与顺序。
+    两侧都归一（无序规则要求两侧同时排序），因此归一后的 TS/Java 输入值仍然逐字段可比。
+    """
+    substitutions, unordered = [], []
+    out_ts, out_java = [], []
+    for ts_row, java_row in zip(ts_rows, java_rows):
+        java_value, hits = substitute_cross_language_inputs(case_id, file_path,
+                                                            ts_row['value'], java_row['value'], rules)
+        ts_value, java_value, hits2 = unordered_cross_language_paths(case_id, file_path,
+                                                                    ts_row['value'], java_value, rules)
+        out_ts.append({**ts_row, 'value': ts_value})
+        out_java.append({**java_row, 'value': java_value})
+        substitutions += hits
+        unordered += hits2
+    return out_ts, out_java, substitutions, unordered
+
+
+def cross_language_summary(cases, substitutions, unordered):
+    """报告/manifest 统一使用的计数与 caseId 列表。"""
+    unordered_count = unordered if isinstance(unordered, int) else len(unordered)
+    return {'count': len(cases), 'cases': sorted(cases),
+            'substitutions': len(substitutions), 'unorderedComparisons': unordered_count,
+            'rules': sorted({item['gate'] + ' → ' + item['path'] for item in substitutions
+                             + ([] if isinstance(unordered, int) else unordered)})}
+
+
+def unordered_cross_language_paths(case_id, file_path, ts_value, java_value, rules):
+    """`kind = unordered` 的规则：两侧同时按规范形式排序，仅在多重集相等时生效。
+
+    gate 对这些路径只比较长度与集合（顺序不参与判定），因此这里把两侧都排序后再走原来的逐值比较；
+    多重集不等就原样返回，随后由严格比较照旧失败。
+    """
+    hits = []
+
+    def sort_at(value, steps, trail):
+        if not steps:
+            return value, False
+        step, rest = steps[0], steps[1:]
+        if step == '[]':
+            if not isinstance(value, list):
+                return value, False
+            output, changed = [], False
+            for index, item in enumerate(value):
+                item_value, hit = sort_at(item, rest, trail + [str(index)])
+                output.append(item_value)
+                changed = changed or hit
+            return (output if changed else value), changed
+        if not isinstance(value, dict) or step not in value:
+            return value, False
+        if not rest:
+            target = value[step]
+            if not isinstance(target, list) or not all(isinstance(item, (str, int, float)) for item in target):
+                return value, False
+            return {**value, step: sorted(target, key=lambda item: canonical(item))}, True
+        child, hit = sort_at(value[step], rest, trail + [step])
+        if not hit:
+            return value, False
+        return {**value, step: child}, True
+
+    left, right = ts_value, java_value
+    for rule in rules:
+        if rule['file'] != file_path or rule.get('kind') != 'unordered':
+            continue
+        if 'cases' in rule and case_id not in rule['cases']:
+            continue
+        candidate_left, left_hit = sort_at(left, list(rule['path']), [])
+        if not left_hit:
+            continue
+        candidate_right, right_hit = sort_at(right, list(rule['path']), [])
+        if not right_hit:
+            continue
+        probe_left, _ = sort_at(candidate_left, list(rule['path']), [])
+        probe_right, _ = sort_at(candidate_right, list(rule['path']), [])
+        if canonical(probe_left) != canonical(probe_right):
+            continue   # 多重集不等：不归一，交由严格比较报错
+        left, right = candidate_left, candidate_right
+        hits.append({'caseId': case_id, 'file': file_path, 'path': '/'.join(rule['path']),
+                     'gate': rule['gate']})
+    return left, right, hits
+
+
+def known_unroutable_canonical(path=None):
+    """按**冻结清单**（module-tests.json／test-map.json）核验登记：正式门禁专用。
+
+    与按调用范围过滤的 known_unroutable_summary 不同，这里要求登记里的每一条都能在冻结清单里
+    落地（count == registryEntries），因此把登记挪到清单外的篡改会被抓住。
+    """
+    return known_unroutable_summary(read(TASK / 'module-tests.json'), read(TASK / 'test-map.json'), path)
+
+
 def known_unroutable_summary(catalog=None, mapping=None, path=None):
     """报告/manifest 统一使用的计数与 caseId 列表。"""
     gaps = known_gaps(catalog, mapping, path)
     rule_ids = {}
     for entry in gaps.values():
         rule_ids[entry['ruleId']] = rule_ids.get(entry['ruleId'], 0) + 1
+    document = read(Path(path) if path else KNOWN_GAPS)
     return {'count': len(gaps), 'cases': sorted(gaps), 'ruleIds': rule_ids,
+            'registryEntries': len(document.get('cases', [])),
             'registrySha256': digest(Path(path) if path else KNOWN_GAPS)}
 
 
@@ -920,8 +1163,11 @@ def compare(args):
     capture_names = {'inputPlan': 'input_plan', 'tsInputs': 'ts_inputs', 'javaInputs': 'java_inputs',
                      'tsAssertions': 'ts_assertions', 'javaAssertions': 'java_assertions'}
     capture_paths = {name: getattr(args, option, None) for name, option in capture_names.items()}
-    # 已知缺口登记无论走不走完整验收分支都要先核验（登记本身有问题就必须失败）。
+    # 已知缺口登记与跨语言替换表无论走不走完整验收分支都要先核验（本身有问题就必须失败）。
     gaps = known_gaps(catalog, mapping, getattr(args, 'known_gaps', None))
+    rules, rules_sha = cross_language_rules(getattr(args, 'cross_language_rules', None), catalog)
+    file_of = {case['id']: file['path'] for file in catalog['files'] for case in file['cases']}
+    substituted, substitution_hits, unordered_total = set(), [], []
     if getattr(args, 'command', 'compare') == 'check' or observations.get('captureSha256') is not None or any(capture_paths.values()):
         require(all(capture_paths.values()) and isinstance(observations.get('captureSha256'), dict),
                 '完整验收缺少两端原始采集、独立输入/断言计划或校验值')
@@ -953,6 +1199,15 @@ def compare(args):
     for key, observation in observed.items():
         require(bool(re.fullmatch(r'[0-9a-f]{64}', observation['inputSha256'])), f'缺少输入/前置状态校验值：{key}')
         unroutable = gaps.get(key) if capture_paths['inputPlan'] else None
+        normalized = None
+        if capture_paths['inputPlan'] and unroutable is None:
+            left, right, hits, unordered = normalize_input_rows(
+                key, file_of[key], raw_captures['tsInputs'][key], raw_captures['javaInputs'][key], rules)
+            normalized = {'TS': left, 'Java': right}
+            if hits or unordered:
+                substituted.add(key)
+                substitution_hits += hits
+                unordered_total += unordered
         if unroutable is None:
             require(observation['inputSha256'] == observation['tsInputSha256'] == observation['javaInputSha256'], f'TS/Java 输入或前置状态不同：{key}')
         else:
@@ -969,7 +1224,9 @@ def compare(args):
             for side in ('TS', 'Java') if unroutable is None else ('TS',):
                 require([row['sampleId'] for row in samples[side]] == plan[key]['sampleIds'],
                         f'{side} 输入样本数量、顺序或 ID 不符：{key}')
-                raw = raw_captures['tsInputs' if side == 'TS' else 'javaInputs'][key]
+                # 惰性取值：已登记缺口的用例没有 Java 原始行，不能在 TS 分支就把它取出来。
+                raw = (normalized[side] if normalized is not None
+                       else raw_captures['tsInputs' if side == 'TS' else 'javaInputs'][key])
                 require(canonical(samples[side]) == canonical([{'sampleId': row['sampleId'], 'value': row['value']} for row in raw]),
                         f'{side} 汇总输入与原始采集不同：{key}')
                 require(hashlib.sha256(canonical(samples[side]).encode()).hexdigest() == observation['inputSha256'],
@@ -1001,6 +1258,9 @@ def compare(args):
     return {'files': len(files), 'cases': len(cases), 'javaCases': len(java_owners),
             'knownUnroutableCases': known_unroutable_summary(catalog, mapping,
                                                              getattr(args, 'known_gaps', None)),
+            'crossLanguageInputSubstitutions': cross_language_summary(substituted, substitution_hits,
+                                                                      unordered_total),
+            'crossLanguageRulesSha256': rules_sha,
             'comparedAssertions': assertion_count,
             'justifiedUnexecutedAssertions': sum(len(case.get('unexecutedSites', {})) for case in plan.values())
                 if capture_paths['inputPlan'] else 0,
@@ -1076,9 +1336,10 @@ def main():
         command.add_argument('--java-revision', help='compare 调试时核对源码摘要；check 始终从当前 Java 工作树重新计算')
         for name in ('input-plan', 'ts-inputs', 'java-inputs', 'ts-assertions', 'java-assertions'):
             command.add_argument('--' + name)
-        # 已知缺口登记：默认就是任务根下的唯一登记；compare 允许指向夹具（自测用），
-        # check 是正式验收，下面强制它只能用默认登记。
+        # 已知缺口登记与跨语言替换表：默认就是任务根下的唯一文件；compare 允许指向夹具（自测用），
+        # check 是正式验收，下面强制它只能用默认文件。
         command.add_argument('--known-gaps', default=str(KNOWN_GAPS))
+        command.add_argument('--cross-language-rules', default=str(CROSS_LANGUAGE_RULES))
         for side in ('ts', 'java'):
             command.add_argument('--' + side + '-run-manifest')
     args = parser.parse_args()
@@ -1095,7 +1356,15 @@ def main():
             if args.command == 'check':
                 require(Path(args.known_gaps).resolve() == KNOWN_GAPS.resolve(),
                         '正式验收不允许替换已知缺口登记')
+                require(Path(args.cross_language_rules).resolve() == CROSS_LANGUAGE_RULES.resolve(),
+                        '正式验收不允许替换跨语言输入替换表')
                 current = collect()
+                summary = known_unroutable_canonical()
+                cross_language_canonical()
+                require(summary['count'] == summary['registryEntries'],
+                        '已知缺口登记存在冻结清单外的条目：'
+                        + json.dumps({'已落地': summary['count'],
+                                      '登记条数': summary['registryEntries']}, ensure_ascii=False))
                 require(current == read(args.catalog), '冻结清单与重新清点不一致：存在源码/测试/参数行/模块范围漂移；禁止直接覆盖后当作通过')
                 args.java_revision = java_revision()
             result = compare(args)

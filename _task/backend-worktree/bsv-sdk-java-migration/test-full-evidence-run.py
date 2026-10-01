@@ -66,8 +66,13 @@ class FullRunTest(unittest.TestCase):
             stages.append({'name': name, 'command': command, 'exitCode': 0, 'pid': 123 + index,
                 'startedAtNs': 90 + index * 100, 'finishedAtNs': 120 + index * 100,
                 'logSha256': runner.audit.digest(log)})
+        # 夹具 manifest 必须与 capture() 写出的字段一致：已知缺口登记同样进 manifest 并参与重验。
+        known = runner.audit.known_unroutable_canonical()
+        _, rules_sha = runner.audit.cross_language_rules()
         self.manifest = dict(runner.snapshot(), schemaVersion=1, fullRunId='f' * 32,
             status='passed', upstreamCommit='fixed', casesTotal=2, interface=self.interface,
+            knownUnroutableCases=known, knownGapsSha256=known['registrySha256'],
+            crossLanguageRulesSha256=rules_sha,
             inputPlanSha256=runner.audit.digest(self.folder / 'input-plan.json'),
             timeoutMinutes=90, retryAfter=None, startedAtNs=80, finishedAtNs=430,
             elapsedSeconds=1.0, stages=stages, formalAcceptance=False)

@@ -82,6 +82,9 @@ def build(args):
     # 已知缺口登记（known-gaps.json）只豁免「已核验无输入重放入口」的 caseId 的 Java 输入一项；
     # 登记外的缺失或多余一律硬失败，其它三张轨迹照旧逐用例全等。
     gaps = audit.known_gaps(catalog, mapping, getattr(args, 'known_gaps', None))
+    rules, rules_sha = audit.cross_language_rules(getattr(args, 'cross_language_rules', None), catalog)
+    file_of = {case['id']: file['path'] for file in catalog['files'] for case in file['cases']}
+    substituted, unordered_hits, all_substitutions = set(), [], []
     for label, rows in [('TS 输入', ts_inputs), ('TS 断言', ts_results), ('Java 断言', java_results)]:
         same(cases, rows, label + '用例')
     missing_java = sorted(set(cases) - set(java_inputs) - set(gaps))
@@ -111,6 +114,18 @@ def build(args):
             if any('value' not in row for row in rows):
                 fail(f'{label} 输入缺少实际值：{case_id}')
             inputs[label] = [{'sampleId': row['sampleId'], 'value': row['value']} for row in rows]
+        if case_id in gaps:
+            inputs['Java'] = []   # 保持两端样本键形状，便于门禁逐侧核对；摘要仍为 None
+        else:
+            # 跨语言记法替换：只在 (文件, 路径, TS 形状, Java 形状) 精确匹配时生效（判据见
+            # cross-language-input-rules.json 里逐条引用的冻结 gate）；形状不符就不动，随后照旧硬失败。
+            left, right, hits, unordered = audit.normalize_input_rows(
+                case_id, file_of[case_id], inputs['TS'], inputs['Java'], rules)
+            if hits or unordered:
+                substituted.add(case_id)
+                all_substitutions.extend(hits)
+                unordered_hits += unordered
+            inputs['TS'], inputs['Java'] = left, right
         ts_hash = hashlib.sha256(canonical(inputs['TS']).encode()).hexdigest()
         java_hash = None if case_id in gaps else \
             hashlib.sha256(canonical(inputs['Java']).encode()).hexdigest()
@@ -147,6 +162,9 @@ def build(args):
             'knownUnroutableCases': audit.known_unroutable_summary(
                 catalog, mapping, getattr(args, 'known_gaps', None)),
             'knownGapsSha256': digest(Path(getattr(args, 'known_gaps', None) or audit.KNOWN_GAPS)),
+            'crossLanguageInputSubstitutions': audit.cross_language_summary(
+                substituted, all_substitutions, unordered_hits),
+            'crossLanguageRulesSha256': rules_sha,
             'runManifestSha256': run_hashes,
             'catalogSha256': digest(args.catalog),
             'tsReportSha256': sorted(digest(p) for p in args.ts_report),
@@ -187,8 +205,10 @@ def capture(args):
         return revision
 
     known = audit.known_unroutable_summary(catalog, mapping, getattr(args, 'known_gaps', None))
+    _, rules_sha = audit.cross_language_rules(getattr(args, 'cross_language_rules', None), catalog)
     manifest = {'schemaVersion': 1, 'side': args.side, 'runId': uuid.uuid4().hex,
                 'knownUnroutableCases': known, 'knownGapsSha256': known['registrySha256'],
+                'crossLanguageRulesSha256': rules_sha,
                 'producerSha256': digest(__file__), 'upstreamCommit': catalog['upstreamCommit'],
                 'sourceRevision': source_revision(), 'catalogSha256': digest(args.catalog),
                 'mappingSha256': digest(args.mapping), 'inputPlanSha256': digest(args.input_plan),
@@ -228,6 +248,7 @@ def capture_main():
     for name in ('catalog', 'mapping', 'input-plan', 'inputs', 'assertions', 'output'):
         parser.add_argument('--' + name, required=True)
     parser.add_argument('--known-gaps', default=str(audit.KNOWN_GAPS))
+    parser.add_argument('--cross-language-rules', default=str(audit.CROSS_LANGUAGE_RULES))
     parser.add_argument('--report', action='append', required=True)
     parser.add_argument('command', nargs=argparse.REMAINDER)
     args = parser.parse_args(sys.argv[2:])
@@ -244,6 +265,7 @@ def main():
         parser.add_argument('--' + name, required=True)
     parser.add_argument('--java-revision', help='只校验运行来源版本，不能覆盖 manifest 中的版本')
     parser.add_argument('--known-gaps', default=str(audit.KNOWN_GAPS))
+    parser.add_argument('--cross-language-rules', default=str(audit.CROSS_LANGUAGE_RULES))
     parser.add_argument('--ts-run-manifest')
     parser.add_argument('--java-run-manifest')
     parser.add_argument('--ts-report', action='append', required=True)
