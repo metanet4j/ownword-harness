@@ -2,284 +2,38 @@
 
 ## 接手入口（先读这一节）
 
-**当前状态（20260901 01:40）**：证据层已完备、来源已冻结，只剩「单次双侧全量运行 + 两套审计」即可结项。
+**当前状态（20260901 16:50）**：迁移代码**已完成并冻结**、双侧单元测试**已全绿**；只剩「验收管线在**同一次运行**里跑通 bundle + 两套审计」这一步。
 
-- 权威状态：[feature_list.json](feature_list.json) —— 43 个事项中 **31 done／0 in-progress／12 未结**（4 个含专用局部的实现事项 + 8 个总门禁）。
-- 输入计划：**5329／5329 = 100%**；`full-evidence-preflight.py` → `readyForFullCapture=true`、`planErrors=[]`、`completePlanError` 空。
-- 统一窗口 v2（`recapture-all.sh final2-20260930`）：**108 项处理／107 篡改门禁通过／0 失败**，汇总「全部局部重采与篡改门禁通过」；106 个局部同为来源 `13f34162199d`（= 当前工作树）。
-- 任务级对照：**14 个事项**已有 `task-parity.json`（合计约 1312 例，`missingCases`／`missingAssertions`／`uncompared` 全 0），已写入 `feature_list.json` 的 `taskAcceptance`。
-- 冻结来源：SDK 仓 **`8b8e13d`**（`src/main` 零改动，仅 4 个测试文件）。
+### 一、已确证的事实（有据可查）
 
-**v8 进度（21:30）**：11 分钟内即 **127 文件 PASS／0 FAIL**（远快于上一轮同点的 132 文件/55 分钟），随后停在重型文件上（jest 自 21:03 持续 111% CPU，疑为 66 分钟的 `AESGCM.man`）。若总时长仍 <90 分钟，则**无需** 180 分钟档，v8 会直接跑完。
+- **SDK 代码冻结**：仓库 `metanet4j-bsv-sdk` 工作树 **0 改动**、`src/main` **0 改动**、HEAD=`8b8e13d`，153 个生产类就位。
+- **单元测试全绿**：`full-run-17`（`.cache/evidence/full-run-17-20260901/`）
+  - `ts-capture` **exit=0**：133/133 文件、**5329/5329 用例**、38092 输入、56744 断言、`problems=[]`；
+  - `java-capture` **exit=0**：**`Tests run: 5444, Failures: 0, Errors: 0`**（含 66 分钟 `AESGCMManualTest`）。
+- **逐局部证据**：窗口 v2（`recapture-all.sh final2-20260930`）108 项处理、**107 篡改门禁通过、0 失败**，106 局部同源 `13f34162199d`。
+- **事项级对照**：**14 项**已入册（`feature_list.json` 的 `taskAcceptance`，约 1312 例，缺失/未比较全 0）。
+- **输入计划**：**5329/5329 = 100%**；`full-evidence-preflight.py` 报 `readyForFullCapture=true`、`planErrors=[]`。
+- **工具链自测**：`22 + 88 + 13 + 14 = 137` 全绿（含多条“篡改必须被拒”，证明未放宽门禁）。
 
-- **v9 存活确认（21:41）**：cron 拉起后已跑 7 分 22 秒、jest **127 文件 PASS／0 FAIL**，进程父级为 cron，会话空闲清理不再影响它 ✓。
-- **v10 进度（22:44）**：存活 16 分钟、jest 尚无 PASS —— 首个文件即重型文件（jest 按历史耗时把最慢的排最前，v9 也是同一现象的另一端），预计总时长 ~76–80 分钟，**仍在 90 分钟上限内**。
-**全量串行跑完（20260901 05:55）**：`01:53:04` 结束（exit=0），`localsSelected 154`、**`filesCovered 130`**（比上一版多出 `aesgcm-man` 的文件），`localsFailed` 仍只有已知的 `utils-property`／`auth-fetch-property`（driver bug 已修，待 `--resume` 补跑）。代理已恢复活动（`run-full-ts-serial.py` 01:56 有更新）。
+### 二、正在跑：验收链路（cron 串行，自动衔接）
 
-**driver 自检能力已确认（20260901 05:10）**：`run-full-ts-serial.py` 具备 `--resume`（跳过已完成局部）与 `--allow-partial`（仅子集自测；**不加该开关时覆盖不足即非零退出**），且报告说明各局部 jest JSON 按文件去重合并成一份以满足 `audit-tests.compare_ts` ✓。`aesgcm-man` 长跑仍在进行（约 01:35 起，预计 ~02:15 结束）；`fullRun.tsCommand` 待代理应用批准。
+`.cache/run-full-21-22.sh`（crontab 仅此一条 `*/2`）：
 
-**全量串行阶段报告（20260901 05:00）**：`filesCovered 129`、**`casesCovered 5328`**、`inputsWritten 37114`、`assertionsWritten 55165`；`localsFailed` 仅 `utils-property`／`auth-fetch-property`（driver 预建 `--raw-dir` 的 bug，已修待 `--resume` 补跑），其 `problems` 正是这两个局部对应的 976 个缺失样本 + 4 个用例断言 ✓。`aesgcm-man` 仍在长跑（进程存活）。`fullRun.tsCommand` 尚未切换（等代理应用批准）。
+1. **`run-21`（90 分钟档）** —— 只为产出**与当前工具集同源**的超时来源（协议要求；**跑满被切断是预期，不是失败**）。15:42:01 启动，预计 **~17:12** 触限。
+2. **`run-22`（180 分钟档，验收轮）** —— `--timeout-minutes 180 --retry-after .cache/evidence/full-run-21-20260901/full-run.json`；跑完自动执行 `verify` + `audit-tests.py check`（显式传路径）+ `node audit-api.cjs check`，结果落 `.cache/evidence/full-run-22.log`。预计 **~19:05** 出全部结果。
 
-**已批准接入（20260901 04:45）**：`fullRun.tsCommand` 由 `run-full-ts-capture.py` 换成 **`run-full-ts-serial.py`**（只改这一处；`tsReports` 与 `javaCommand` 不变）。四形态均已实跑通过（standard 55+／adapter 27／direct 18／vector 2，含 1940 例的 `script-spend-shared-vectors`）；仅 `utils-property`／`auth-fetch-property` 因 driver 预建 `--raw-dir` 失败，已修并单独复跑 **2/2 通过**。
-**开跑前要求的两条证据**：①`--verify-only`／`--resume` 后 154 局部全通过；②driver 内置 `compare_ts` 自检（合并报告覆盖 **133 文件**且逐用例名与 `module-tests.json` 一致）。随后 `full-evidence-run.py run --run-dir .cache/evidence/full-run-11-20260901 --timeout-minutes 90`（cron 拉起；若被上限终止即为 180 分钟档所需的真实超时证据）。
-**诚实性口径**：交付文档须写明 TS 侧是**逐局部串行采集后合并**（非单进程单次运行），与结项说明一致。
+**铁律**：run-21/run-22 期间**不得写任何任务侧 `.py/.cjs/.mjs/.sh`**（`full-evidence-run.py::producers()` 会哈希全部任务侧脚本）、**不得动 SDK 工作树**（`java_revision`）；否则来源作废、整轮白跑。改 `.md` 文档是安全的。
 
-**全量串行进度（20260901 04:35）**：**153/154 局部 passed**（累计 15.6 分钟），仅剩 `aesgcm-man`（约 40 分钟长跑）在跑。
+### 三、run-22 通过后要做（结项）
 
-**全量串行进度（20260901 04:25）**：已完成 **145 个局部、全部 passed**（累计约 14.5 分钟）；剩余 9 个：`private-key-split`、`random`、`transaction-performance`、`random-additional`、`hash-additional`、`symmetric-key-compatibility`、`bignumber-dh-group`、`async-crypto-backend`、**`aesgcm-man`（约 40 分钟）**。
+1. 取七项交付：三阶段 exit/耗时、`full-evidence-run.py verify`、`audit-tests.py check`、`node audit-api.cjs check`、`knownUnroutableCases`=**6**、`crossLanguageInputSubstitutions.count`=**25**、`assertionSources`（legacy 168/1713 + shared 5161/55031 = **56744**）。
+2. **删除 crontab 条目**（`crontab -r`）。
+3. 把剩余 **12 项**写入 `feature_list.json`：4 个含专用局部的实现事项（`script-spend`／`script-vectors`／`transaction-complete`／`auth-transport`）+ 8 个总门禁（`api-contract`／`test-mapping`／`input-replay`／`result-capture`／`evidence-gate`／`map`／`core-modules`／`sdk-acceptance`），并同步 `progress.md`。
+4. **在结项说明里如实写明两处例外**：6 例 `auth-fetch-peer` 已知缺口（`known-gaps.json`，原因=冻结 SDK 测试无输入重放入口，用户已裁决不重新冻结）与 25 例按设计的跨语言输入差异（`cross-language-input-rules.json`，逐条有 gate 出处）；另记 1 例既有 async 竞态 flake（`TransactionEvidenceCoordinatorTest`，同参数单跑通过）。
 
-**全量串行进度（20260901 04:05）**：`89/154` 局部已完成、**全部 passed**、累计 8.2 分钟（日志逐行给出 `step/local/status/seconds/elapsed`）✓。
+### 四、本轮暴露并已修复的工具链问题（12 条，详见下文各节）
 
-**路径 B 全量串行已启动（20260901 03:45）**：子集自测报告为 **7 文件／763 用例／8768 输入／1613 断言／122 秒／`problems=[]`** ✓；随后**全量串行**已启动——目录 `.cache/evidence/ts-serial-full-20260901/`、日志同名前缀 `.log`、进程 `run-full-ts-serial.py --run-dir .cache/evidence/ts-serial-full-20260901`。预计 TS 侧 ~48 分钟（其中 `aesgcm-man` 40 分钟），之后接一次无过滤 `clean test` 与两套审计。
-
-**路径 B 更大子集自测（20260901 03:35）**：`ts-serial-selftest-20260901` 覆盖多个局部（`broadcaster`、`byte-base58`、`chronicle`、`compat-bsm`、`normative-vectors` 等，逐局部 `local/` 子目录），产出 **8768 行输入 / 1613 行断言**（约占全集 38092 样本的 23%）；`ts-serial-report.json` 尚未写出（收尾中）。
-
-**路径 B 冒烟全绿（20260901 03:25）**：`ts-serial-shapes-20260901`（四形态，4 文件／23 用例／8.8 秒，`problems=[]` ✓）与 `ts-serial-vector-20260901`（vector 形态，**659 用例／1159 输入／1159 断言／29.9 秒，`problems=[]` ✓**）均通过。剩余：`script-spend-shared-vectors`（1940 例）与 154 局部全量串行。
-
-**两路状态回报（20260901 03:20）**
-
-- **路径 A（分派机制）**：已定位并改完五类根因（均非猜测）——①9 个 spend 探针读 `EVIDENCE_INPUT_PLAN` 同目录 `catalog.json` 失败 → 运行期把局部冻结计划复制到 `<runDir>/plans/<local>/` 并重指；②31 个 raw 局部无 emit 转换器（驱动用 `replay.emit_ts()` 内联而非字面量 `emit-ts` argv）→ 新增 `full-run-overrides.json` 的 `locals` 段逐局部登记 emit（`full-emit.py`／`full-emit-inline.py`／`full-emit-special.py`）；③断言缺口源于**共享断言轨迹的 matcher 序号被破坏**（`capture-bn-constructor.cjs` 等替换 `global.expect`，行格式不同）→ 这些局部改走 legacy 断言通道；④`capture-wallet-wire-parity.cjs` 与共享层双重记录同一 matcher → 从分派表移除；⑤24028 缺失样本是前四者的合成结果。下一步四个小子集自测 → 133 文件严格自测，ETA 40–60 分钟。
-- **路径 B（串行合并 driver）**：映射表**已完成**——47 个非标准局部全部核实到真实入口、0 个 unresolved（27 个 adapter 按登记 manifest 里当时跑通的原命令还原；18 个 direct；2 个 vector 覆盖 2599 例），5 个 `/tmp` 语料副本消失的局部回退到冻结 SDK 资源并记 `substitutions`；driver 四形态已接入，标准/`adapter` 形态冒烟通过，`direct` 形态 2 个局部在定位，另修一处自研 `order_rows` 包装 NameError；ETA 30–45 分钟冒烟全绿，随后 154 局部全量串行（交 cron）。
-
-**环境体检（20260901 03:15）**：`crontab` 已无条目 ✓（长跑用完即删的纪律已落实）、无残留 `mvn`／`jest`／`full-evidence` 进程 ✓、共享锁空闲 ✓。两路代理仍在运行（近数分钟静默，属正常分析间歇）。
-
-**进展（20260901 03:00）**：路径 B 新增 `build-ts-serial-entries.py`（00:33，映射表生成器，可复现）与 `ts-serial-entries.json`（47 条「局部→TS 入口」，含 shape/script/args）✓；路径 A 继续改 `run-full-ts-capture.py` 与 `full-run-overrides.json`。全量串行运行尚未启动。
-
-**等待期（20260901 02:45）**：两路代理均无新落盘（无 `run-full-ts-serial`／`run-full-ts-capture` 进程、无新证据目录）。当前可交付状态：路径 B 的 driver 已冒烟通过、四形态扩展方案已批准并写入本文档；路径 A 已改三个机制文件但未验证。**下一位接手者的最短路径**：①先问/查两路代理的当前状态；②优先把路径 B 扩到四形态并跑满 133 文件（TS 侧实测仅 ~48 分钟，其中 aesgcm-man 40 分钟）；③一次无过滤 `clean test`；④`audit-tests.py check` 显式传路径 + `audit-api.cjs check`；⑤结清剩余 12 项。
-
-**路径 B 进展（20260901 02:35）**：`run-full-ts-serial.py`（506 行）与 `full-emit.py` 已落盘，冒烟测试目录 `.cache/evidence/ts-serial-smoke-20260901/` 产出完整的合并产物（`ts-inputs.jsonl`、`ts-assertions.jsonl`、`ts-assertions.raw.jsonl`、`ts-jest.json`、逐局部 `local/` 子目录、`ts-serial-report.json`），报告含 `casesCovered/casesPlanned`、`filesCovered/filesPlanned`、`inputsWritten`、`assertionsWritten`、`jestFiles/jestTests`、`localsFailed`、`problems=[]` ✓。下一步：扩到四形态并跑满 133 文件。
-**路径 A 进展**：`capture-full-dispatch.cjs`／`run-full-ts-capture.py`／`build-full-run-probes.py` 已在 23:38–23:41 被修改（代理仍在迭代）。
-
-**决定性与更正（20260901 02:30，代理核算 + 主代理批准）**：
-- **标准局部只覆盖 2088／5329 用例** ✗。剩余 **3241 用例／14630 样本**落在 **26 个文件**上：18 个 `specialized-local`（`script-spend-shared-vectors` 1940 + `transaction-shared-vectors` 659 = 2599）＋ **29 个登记项缺 `capture` 字段的旧管线局部**（`mnemonic-original`、`bignumber-arithmetic`、`reader/writer`、`point-additional`、`jacobian`、`utils.*` 等，共 509 用例）；另有 4 个文件被标准与非标准局部**共同切分**。
-- 硬门禁 `audit-tests.py::compare_ts` 要求 TS 报告含**全部 133 文件**且逐用例名一致、`audit.compare` 要求 Java 执行全部映射用例 → **必须 133 文件全覆盖**，只做标准局部永远到不了终点。
-- **路径 C 放弃**：拼装 v2 的 107 份产物覆盖仍只有 107 文件，且 `full-evidence-run.py verify` 会校验两侧 `-run.json` 的 `fullRunId`／`producerSha256` 与阶段时间窗，**拼装证据只能靠伪造 manifest 过关 → 不可验证，永不采纳**。
-- 成本数据（代理实测）：v2 的 TS 侧合计仅 **0.80 h**，其中 `aesgcm-man` 占 40 分钟、其余 106 个仅 **8 分钟** → 串行重跑可接受。
-- **已批准路径 B 扩展**：同一个 driver 覆盖四形态——①标准 `--plan`；②旧式 `--replay`；③16 个 auth-fetch 直写探针；④`script-vector-evidence.py ts`／`transaction-vector-evidence.py ts`（覆盖 2599 用例）；并为 29 个无 `capture` 的旧管线局部**逐个核实真实 TS 入口**后补「局部→入口」映射。jest 报告合并沿用 `merge_reports` 做法，但必须保证逐用例名与 `module-tests.json` 完全一致。
-
-**路径 C（更省，已交路径 B 代理评估，20260901 02:00）**：主代理实测发现——统一窗口 v2 的 **107 个运行目录每个都已具备全套产物**（`ts-inputs.jsonl`、`ts-assertions.jsonl`、`ts-assertions.raw.jsonl`、`java-inputs.jsonl`、`java-assertions.jsonl`、`java-assertions.raw.jsonl`），且 preflight 显示**同为来源 `13f34162199d`**（= 当前工作树）。因此可以：合并 106 个标准局部的 TS 产物（**零重跑**）→ 跑**一次**无过滤 `clean test` 拿 Java 侧 → `audit-tests.py check` 显式传路径跑模块门禁 → `audit-api.cjs check`。
-**诚实性要求**：路径 C 的 TS 侧来自 106 次同源单文件采集，**不是**单进程单次运行；若门禁通过，必须在文档与结项说明里写明这一事实与依据（同源摘要、逐用例双侧同输入），不得表述为“单次全量运行”。
-
-**路径 B 的实测坑（主代理亲测，已同步给代理）**：局部适配器有**两种接口形态** —— ①标准：`capture-*-local.py --local <名> --plan <计划目录> --report <路径> ts`；②旧式：`capture-broadcaster-side.py ts --replay <replay-inputs.jsonl> --report <路径>`（`broadcaster`／`capture-legacy-side.py`／`capture-drbg-side.py`，**没有 `--local`/`--plan`**）。实测 `capture-broadcaster-side.py --local broadcaster --plan … ts` 会报 `argument side: invalid choice: 'broadcaster'`。
-**必须复用 `recapture-local.py` 的分派规则**：登记项有 `catalog` → `--plan <catalog 父目录>`；否则有 `replay` → `--replay <该路径>`；并且**必须设 `EVIDENCE_SIDE=ts`**（否则适配器报“采集侧别与运行环境不同”），输入写到 `EVIDENCE_INPUTS_PATH=<子目录>/inputs.jsonl`。
-
-**当前两路并行（20260901 01:40）**：路径 A＝修 `capture-full-dispatch.cjs`／`run-full-ts-capture.py` 的单进程分派（已派代理，尚无落盘产物）；路径 B＝**后备实现**（已派第二路代理，任务书含我实测确认的机制细节：单局部适配器逐文件跑 jest、parity 写 `evidence/ts-assertions.raw.jsonl`、`prepare-*-local.py emit-ts --output` 是**覆盖写**（故每个局部用独立子目录收集 inputs 后再合并）、断言转换复用 `emit-assertion-observations.py`、排序与对账直接 import `run-full-ts-capture.py` 的函数）。路径 B 先用 5 个局部自测（含 v10 里“轨迹缺失”的典型四个），再跑全量 106 个标准局部。
-
-**后备方案（路径 B，若路径 A 修不动就改走它）**：把“单次全量 TS 采集”实现为**逐局部 TS 采集的串行合并**——
-
-1. 新建一个 driver：遍历 153 个可采局部，对每个局部调用它**已跑通的** TS 适配器（`capture-*-local.py ts`），
-   把各自的输入行与 parity 断言行**追加**到统一运行目录（`ts-inputs.jsonl`、`ts-assertions.raw.jsonl`）；
-2. 用现有 `run-full-java-capture.py`（它把汇总输入按局部切给全部 Java 重放，跑一次无过滤 `clean test`）；
-3. 断言与对账沿用 `run-full-ts-capture.py` 后段的 `emit_assertion_observations` + 计划对账。
-
-可行性依据：逐局部 TS/Java 双侧在窗口 v2 已 107/108 通过、0 失败；缺的只是“把它们串起来产出一份同源全量证据”。
-代价：新增一个 driver（约百余行），但**全部复用已验证组件**，比修 `capture-full-dispatch.cjs` 的装载机制更可控。
-
-**full-run-14 结果：TS ✓、Java ✓、bundle ✗（仅 4 个用例）（20260901 11:05）**：`06:54:18` 结束 exit=1。`java-capture` **全绿**（`Tests run: 5444, Failures: 0, Errors: 0`）——PBKDF2 修复生效 ✓✓；失败阶段是 `bundle`，唯一报错为 `Java 输入用例：缺失 [...]`，**只有 4 个 caseId**（5329 中的 4 个）。已把这 4 个 caseId 交给代理：反查所属局部/原文件 → 定位为何没进 Java 输入（该给却没给／sampleId 口径／本应由别的路径产出）→ 单点预验证 → `full-run-15`。
-
-**真注入链已找到并修复（20260901 09:50）**：根因是 `run-full-java-capture.py::main()` 的 `targets = set(configured) | set(discovered)` —— `configured` 来自 `full-run-probes.json['envs']`（115 个 `*_TS_INPUTS`，含 `MIGRATION_HASH_PBKDF2_TS_INPUTS`），**并集把上一版在 `discovered` 上排掉的变量又并了回来**。修复：`targets = sorted((set(configured) | set(discovered)) - set(EXCLUDED_TS_INPUT_ENVS))`（排除仍精确到一个变量，报告记 `excludedTsInputEnvs`）；**无需改 `full-run-probes.json`／`build-full-run-probes.py`**（登记本身没错）。
-**两轮单点预验证**（均用 run-13 的 `ts-inputs.jsonl`、完整复刻注入表达式）：修复前并集 → 115 个变量、含 pbkdf2、`HashTest` **13 errors**（精确复现 run-13）；修复后 → **114 个变量、不含 pbkdf2、`Tests run: 30, Errors: 0, BUILD SUCCESS`** ✓。
-**一处更正**：`tsInputEnvs`／`excludedTsInputEnvs` 写在 `java-capture-report.json`（非 `java-run.json`）；run-13 该报告实为 `tsInputEnvs: 115` + `excludedTsInputEnvs: [...]`，即「字段生效但并集旁路」。
-**full-run-14 已就位**：`.cache/run-full-e2e.sh` 指向 `full-run-14-20260901`（90 分钟档 + 静默守卫；最后工具写入 05:35 → **05:46 自动开跑**），预计 ~07:00 出结果。
-
-**full-run-13 结果：Java 阶段仍失败（20260901 09:40）**：`05:28:31` 结束 exit=1，`java-capture` 失败；`Tests run: 5444, Failures: 0, Errors: 13`，13 个错误仍是 `HashTest.passesPbkdf2Vector0..12` ✗ —— **上一处排除没有生效到实际注入链路**。
-**主代理定位**：`grep -rln MIGRATION_HASH_PBKDF2_TS_INPUTS`（排除 `.cache/`）只剩 `capture-hash-pbkdf2-side.py`、**`full-run-probes.json`**、`run-full-java-capture.py` —— 分派表里仍登记着该变量（115 个 env 之一），全量 Java 阶段的注入很可能来自这里；且该轮 `java-run.json` 的 `tsInputEnvs` 长度为 0、`excludedTsInputEnvs` 为 None，与新增报告字段对不上。已要求代理先定位**真实注入链路**（`full-evidence-run.py` 的 stage env 构造／`full-run-probes.json` 的 `envs`／`build-full-run-probes.py`），在该点精确排除并做单点预验证，再开 `full-run-14`。
-
-**full-run-13 进入 Java 阶段（20260901 09:15）**：TS 阶段（含 `AESGCM.man`）已完成并生成 `ts-run.json`；`java-*` 产物已出现（7 个），即一次无过滤 `clean test` 正在跑，预计 ~24 分钟（约 05:35 出总结果）。
-
-**一行修复的预验证 + full-run-13 开跑（20260901 08:25）**：代理在改工具前先做**廉价预验证**——用汇总 `ts-inputs.jsonl`（排除该变量）单跑 `HashTest` → `Tests run: 30, Errors: 0, BUILD SUCCESS`（改前同路径 13 errors）✓；自检确认 `java_ts_input_envs()` 79→78、报告新增 `excludedTsInputEnvs`。**`full-run-13` 已由 cron 于 04:19:01 启动**（`.cache/run-full-e2e.sh` 带 `.started` 守卫 + **10 分钟静默窗口守卫**：任务侧 `.py/.cjs/.mjs/.sh` 近 10 分钟无改动且工作树干净才开跑——04:10 那次 tick 正确推迟）。预计 ~70 分钟（约 05:30）出结果。
-
-**full-run-12 stage 结果（20260901 08:10）**：`ts-capture` **exit=0／2763 秒**（133/133 文件、5329/5329 用例、38092 输入、56744 断言、`problems=[]`）✓；`java-capture` **exit=1／1425 秒**——无过滤 `clean test` 得 `Tests run 5444, Failures 0, Errors 13, Skipped 0`，13 个错误全部来自 `HashTest` 的 PBKDF2 向量 ✗。总耗时 4189 秒（70 分钟），**90 分钟档有约 20 分钟余量，不需要 180 档**。
-
-**根因（已定位到行）**：`HashPbkdf2InputReplay.load()`（冻结 SDK 测试代码）要求这 13 个用例 `sampleId == "call-0"`，而汇总计划用的是标准局部 `hash` 的口径 **`pbkdf2-01`** → `IllegalStateException: PBKDF2 固定 TS 输入缺失或重复：0`。逐局部全绿是因为该 replay 仅在 `MIGRATION_HASH_PBKDF2_TS_INPUTS` **被设置**时才消费语料（逐局部从不设置它，属**已退役局部** `hash-pbkdf2-vectors` 的遗留变量）；全量必炸是因为 `run-full-java-capture.py::java_ts_input_envs()` 会把 Java 源码里出现的**全部** `MIGRATION_*_TS_INPUTS` 指向本轮汇总输入，从而激活这个休眠变量。该变量全仓仅被 `HashPbkdf2InputReplay.java` 读取；同一批样本由 `HashTest` 主路径按 `pbkdf2-01` 正常产出（`java-inputs.jsonl` 有该行）→ **不设它不丢证据**，而喂 `call-0` 会产生计划外样本被 `evidence-bundle` 拒。
-
-**已批准一行修复（任务侧）**：在 `run-full-java-capture.py` 的全局覆盖里**精确排除**该变量，并在返回值与报告里记录被排除项（`tsInputEnvs` 79 → 78 + `excludedTsInputEnvs`）。改完重新冻结 → 跑 `full-run-13`（90 分钟档）→ `verify` + 两套审计。
-
-**e2e 复跑越过关键节点（20260901 07:50）**：`full-run-12` 的 **TS 阶段已完成**（含 `aesgcm-man`，154/154），已生成 `java-capture.log`／`java-inputs.jsonl`／`java-maven.log`／`java-run.json` → **Java 阶段（一次无过滤 `clean test`）正在跑**，预计 10–20 分钟。这已越过上次失败的 `producerSha256` 检查点 ✓。
-
-**e2e 复跑已启动（20260901 07:15）**：工具集自 02:22:30 起**无任何任务侧 `.py/.cjs/.sh` 变动**（已用 `find -newermt` 核验为空 ✓），路径 B 的 `full-evidence-run.py run` 已拉起（`.cache/evidence/full-run-12.log`、`full-run-12.started`、pid 2046286）。路径 A 代理已结束并静默待命，其 8 项收尾与 `script-spend-shared-vectors` 探针共存缺陷（`jest.doMock` 争用 + `restoreAllMocks` 误伤）已定位为备用方案。
-
-**路径 A 自测结果（备用路径有效证据，20260901 07:05）**：`selftest-all-20261001`（132 文件，除 `AESGCM.man`）**跑完**——jest **132 suites／5328 tests／0 失败**、**unmapped-files = 0**、**缺失原始轨迹 = 0**（探针装载与轨迹产出两类根因已消除）、标准断言轨迹裁剪 56648 行且手动重跑 `emit-assertion-observations.py` 退出码 0 ✓。仍待收尾 **8 个输入转换器**：`auth-fetch-property`、`utils-property`（缺 FAST_CHECK 固定与内联折算）、`reader`／`reader-uint8array`／`writer`／`writer-uint8array`（四者共用 374 行轨迹，需按 `source.file` 过滤）、`wallet-wire`（并发 OOM 特征）、**`script-spend-shared-vectors`（真实缺陷：`dc69e1c2…` 属 `Spend.test.ts` 且该文件已跑，报 0 vs 1 → Script／Spend 两探针共存时漏记，需专项定位）**。
-**协调结果**：路径 A 已从 **02:22:30** 起停止一切任务侧写入并静默待命（不跑 jest／Maven）；**路径 B 在冻结工具集上独占复跑 e2e**（先自查 02:22:30 后无任务侧工具变动再开跑）。
-
-### 操作红线（新增，代价 51 分钟）：e2e 前必须冻结「SDK 源码 + 任务侧工具」
-
-**20260901 02:51 的失败**：路径 B 的 e2e（02:00 cron 拉起，已跑到 TS 阶段末）被判 `{"status": "FAIL", "reason": "当前源码、工具或清单与本轮来源不同：producerSha256"}` ✗。
-**根因**：`full-evidence-run.py::producers()` 会哈希**全部任务侧 `.py`／`.cjs`／`.mjs`／`.sh` 文件**（不只是 SDK 源码），而路径 A 的代理在同一时段仍在编辑 `run-full-ts-capture.py`／`full-emit*.py`／`full-run-overrides.json`／`build-full-run-probes.py` → 在飞运行作废。
-**红线（后续必须遵守）**：
-1. 启动 `full-evidence-run.py run` 前，**SDK 源码与任务侧工具都必须冻结**（两路代理都停笔）；
-2. 运行期间只允许写 `.cache/` 下的运行产物（不在 `producers()` 范围）；
-3. 任何一处工具改动都会让整轮 e2e 白跑（本轮代价 51 分钟）。
-**已采取动作**：已要求路径 A 立即停止写入、先跑完它自己的严格自测并报结果；已要求路径 B 暂不重跑，等工具集冻结后再开。
-
-**路径 A 也打通了（20260901 06:40）**：机制五类根因全部修好（探针装载 `envOverrides` + `<runDir>/plans/<local>/`；`full-run-overrides.json` + `full-emit.py`／`full-emit-inline.py`／`full-emit-special.py`／`full-emit-hex-bn.py`；只有真替换 `global.expect` 的 hex-bn 走自产断言 sidecar，其余回共享轨迹 + 标准转换器并按“计划内原文件”裁剪；`capture-wallet-wire-parity.cjs` 从分派表移除以消除双重记录；`transaction` 加 `probePlan`；fast-check 固定种子；per-local 轨迹按 `source.file` 过滤）。已验证子集：Chronicle+KeyDeriver `problems=0`；39 个旧管线局部 jest **3613/3613**、输入 13642 行；`hex-bn` **71 样本 + 71 断言与冻结计划完全一致**。**全量 133 文件严格自测已启动**（`.cache/evidence/selftest-full-20261001`，无 `--allow-unresolved`）。
-**两路并行现状**：路径 B 的 e2e（`full-run-11-20260901`）TS 阶段 153/154、在跑 `aesgcm-man`；路径 A 的全量严格自测在跑。**以先到者为准**，另一路保留作交叉验证。
-
-**e2e 进度（20260901 06:35）**：TS 阶段 **136/154 局部 passed**（446 秒），剩余含 `aesgcm-man`（42 分钟）→ TS 约 03:00 结束，随后 Java 一次无过滤 `clean test`。
-
-**e2e 进度（20260901 06:25）**：已生成 **121/154** 个局部子目录，进程存活 ✓，仍在 TS 串行阶段。
-
-**e2e 进度（20260901 06:15）**：cron 于 02:00:01 拉起，`full-evidence-run.py run --run-dir .cache/evidence/full-run-11-20260901`（90 分钟档）；`full-run.json`／`input-plan.json`／`preflight.json`／`local/` 已生成，串行 driver 正在逐局部采集。预计 TS ~02:50 结束、之后 Java 一次无过滤 `clean test`（~10–20 分钟）→ ~03:10 出 stage 结果。
-
-**全量 TS 证据已完备，e2e 正在跑（20260901 06:05）——卡点解除**
-
-路径 B（逐局部串行采集后合并）已交付并验证，两条证据全过：
-
-1. **154/154 局部通过**（`.cache/evidence/ts-serial-full-20260901`，`--resume` 补齐 `utils-property`／`auth-fetch-property` 后 `--verify-only` 全量复核）：
-   `localsFailed=[]`、**`filesCovered 133/133`**、**`casesCovered 5329/5329`**、`inputsWritten 38092`、`assertionsWritten 56744`、`missingCases=0`、`missingSamples=0`、`problems=[]`；形态分布 standard 107／adapter 27／direct 18／vector 2。
-2. **driver 内置 `compare_ts` 自检通过**（与最终门禁同一函数）：`{"files": 133, "cases": 5329}`、`jestFiles 133`、`jestTests 5329`；`crossCheck = {localsChecked: 117, skippedCustomConversion: 7, failures: []}`。
-   顺带修掉真缺口：旧管线 `hex-bn` 用 `--kind both` 产两份 Jest 报告，而 `capture-legacy-side.py` 只在 Java 分支合并 → TS 分支漏合，`BigNumber.constructor.test.ts` 进不了报告；driver 现收全部 `ts-jest*.json` 按文件去重合并（未改该适配器）。
-
-**配置切换已应用**（`full-evidence-locals.json` 仅 1 行）：`fullRun.tsCommand[1]`：`run-full-ts-capture.py` → **`run-full-ts-serial.py`**；`locals`／`retired`／`tsReports`／`javaCommand`／`javaReports` 逐字段未变；`full-evidence-preflight.py` 报 `readyForFullCapture=true`，`full-evidence-run.py::frozen()` 通过（133 文件／5329 用例，`javaRevision 13f3416…` = 窗口 v2 同源）。
-
-**e2e 现状**：cron 于 02:00:01 拉起 `full-evidence-run.py run --run-dir .cache/evidence/full-run-11-20260901`（日志 `.cache/evidence/full-run-11.log`，90 分钟档）；TS 阶段已过 68/154，`input-plan.json` 与登记计划 5329 用例逐项同序相同。预计 TS ~50 分钟（含 `aesgcm-man` 实测 2524.5 秒）+ Java 一次无过滤 `clean test`；若被上限终止，其 manifest 即 180 分钟档所需的真实超时证据。
-
-**诚实性口径（写进结项说明）**：全量运行的 TS 侧是**逐局部串行真实采集后合并**（同一运行目录、同一来源 `13f34162199d`、逐用例双侧同输入），**不是**单进程单次运行；`fullRun.tsCommand` 如实记录为 `run-full-ts-serial.py`。
-
-**接手动作（按序）**
-
-1. 等 v6 结束；若因 90 分钟上限被终止（`elapsedSeconds ≥ 90*60`），立刻用 180 分钟档重跑（协议要求引用真实超时的 manifest）：
-   `python3 full-evidence-run.py run --run-dir .cache/evidence/full-run-7-20260901 --timeout-minutes 180 --retry-after .cache/evidence/full-run-9-20260901/full-run.json`
-2. 校验：`python3 full-evidence-run.py verify .cache/evidence/full-run-<n>-20260930/full-run.json`
-3. 接口面：`node audit-api.cjs check`
-4. 逐事项复核：`./close-items.sh <标签>`（14 项已过；其余随全量运行）
-5. 结项：把剩余 4 个实现事项（`script-spend`、`script-vectors`、`transaction-complete`、`auth-transport`）与 8 个总门禁写入 `feature_list.json`，并同步 `progress.md`。
-
-**已知风险与注意**
-
-- 全量 parity 轨迹 **805 MB**（4 行 126–252MB：个别用例把大数组逐元素写进断言轨迹）。`capture-broadcaster-inputs.cjs` 已改**分块扫描**（原 `readFileSync(...,'utf8')` 撞 V8 字符串上限，会让 ts-capture 整阶段失败）。
-- `AESGCM.man.test.ts` 单次 TS 运行 **66 分钟**（窗口内已通过；全量运行同样会跑到）。
-- 90→180 分钟协议：`--timeout-minutes 180` 必须引用一次**真实被 90 分钟上限终止**的运行。
-- **严禁**在窗口／全量运行期间改 SDK 源码：`audit-tests.java_revision()` 哈希全部 tracked+untracked 文件，任何改动都会让 107 个局部与全量证据作废。
-- 改 `module-scope.json` 必须同步 `module-tests.json` 的 `scopeSha256`（该字段即 `digest(module-scope.json)`）；`scopeReview` 已于提交 `093a2b2` 置 `reviewed`。
-
-**工具速查**：`lock.sh`（所有 Maven／采集前置）、`recapture-all.sh`（逐局部重采 + 篡改门禁）、`final-window-guard.sh`（开窗六项守卫）、`close-items.sh`（逐事项任务级对照）、`full-evidence-run.py run|verify`（单次全量）、`audit-tests.py check`、`audit-api.cjs check`、`full-evidence-preflight.py`。
-
-**零冲突约定（20260901 11:50 已批准）**：A1 只新建自包含的 `java-vector-inputs.py`，预验证走等价外层包装，**暂不动** `run-full-java-capture.py`；等 A2 停笔后由 A1 一方统一加两行接线（设 `MIGRATION_VECTOR_JAVA_INPUTS` + Maven 后调该脚本）。A2 若发现必须在同一文件改，须先停下问主代理。
-
-**B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
-
-**时间记账修法落盘并通过自测；链路 run-21 → run-22 已就绪（20260901 23:55 本地 15:40）**：
-- **更根本的根因**：`elapsedSeconds` 用 `time.monotonic()`，而 `startedAtNs/finishedAtNs` 用 `time.time_ns()` —— **两个时钟域**在本机（WSL2）90 分钟**漂移 10.7 秒**，叠加清理时间 → `validate_retry` 的 `|wall−elapsed| < 5` 必然失败 ✗。
-- **修法**（`full-evidence-run.py` 超时路径，只改记账、不伪造）：`run_process()` 超时分支在**发 SIGTERM/SIGKILL 之前**记 `deadlineHitAtNs`；阶段 `timedOut` 时 `finishedAtNs = deadlineHitAtNs`、`elapsedSeconds = (finishedAtNs − startedAtNs)/1e9`、`cleanupSeconds = 真实结束 − deadlineHitAtNs`；`capture()` 的 `finally` 同步用同一对 wall 时间戳导出 ⇒ **`|wall − elapsed| ≡ 0`**，`elapsedSeconds` 仍是**真实经过时间**（非硬编码）。
-- **自测 4 条**（含我要求的“篡改必拒”）：正常完成一致／超时记录 deadline 且 `cleanupSeconds>0`／合成的 90 分钟来源被 `validate_retry` 接受／篡改三变体（硬写 5400、差 6.45 s、elapsed=5390）**必被拒**；**四套件全绿 22+88+13+14 = 137**。
-- **离线 dry-run**（`/tmp/retry-sim` 副本）：按新口径重算 run-19 → `elapsed=wall=5400.000`、`cleanupSeconds=10.728` → `validate_retry(180,…)` **通过** ✓；并**诚实附注**：本次修法又改了工具集 ⇒ run-19 不再是合法来源，**必须**用 run-21 重新产出同源超时来源（协议本意，未绕过）。
-- **链路已就绪**：`.cache/run-full-21-22.sh`（run-21 90 分钟档 → 自动 run-22 180 分钟档 + `--retry-after` → 自动 `verify` + `audit-tests.py check` + `node audit-api.cjs check`，结果落 `.cache/evidence/full-run-22.log`）；crontab 仅此一条；两轮之间**零写入**。**主代理已确认有效**。
-- **时间线**：run-21 ~16:05 启动 → ~17:35 触限 → run-22 ~17:36 起 → 约 **19:30** 出全部结果。
-
-**run-19 → run-20 交接失败：manifest 时间记账内部矛盾（20260901 23:30 本地 15:25）**：
-- `run-19` 于 **15:24:44** 被 90 分钟上限终止 ✓（`status=timed-out`、`timeoutMinutes=90`、`elapsedSeconds=5400.055` ∈ [5400,5410] ✓）；
-- 但 **`run-20` 于 15:25:18 立即失败**：`{"status": "FAIL", "reason": "重试来源的超时时间记录无效"}` ✗；
-- **根因（定位到 `full-evidence-run.py:146-150`）**：校验要求 `abs((finishedAtNs - startedAtNs)/1e9 - elapsedSeconds) < 5`，而 run-19 的 wall 时间 ≈ **5444 s**（比 `elapsedSeconds` 多 **44 秒**，正是“所有后代进程已停止”那段**清理时间**）→ |5444−5400| = 44 ≥ 5 → 判为无效 ✗。属**工具侧时间记账 bug**（上限触发时先记 elapsed、清理后才记 finishedAt），不是自动化脚本问题。
-- **已交 A2 的最小修法**：在上限触发那一刻（清理之前）同时记录 `finishedAtNs` 与 `elapsedSeconds`（后者仍为**真实经过时间**，非硬编码 ✗；清理耗时另记 `cleanupSeconds`，不得影响这两个字段的一致性）；加三条自测（正常完成一致／超时路径 `elapsedSeconds ∈ [5400,5410]` 且 `|wall−elapsed| < 5` 且 `stages[].timedOut`／**篡改任一字段必被 `validate_retry` 拒**）；并用 run-19 的 manifest 做离线 dry-run 证明 `validate_retry` 可通过。
-- **重跑链路**：`run-21`（90 分钟档）→ 自动 `run-22`（180 分钟档，验收）→ 自动三阶段审计；跨接零写入、crontab 仅一条、跑完删除。**再耗 ~90 + ~110 分钟 ≈ 3.4 小时**（诚实告知）。
-
-**四项确认通过 + 串行自动化启动（20260901 22:35 本地 14:05）**：
-① 合并修法落盘：`run-full-java-capture.py::emit_assertions()` 改为「补齐+合并」（子计划=全量−covered → emit 侧文件 → 按计划 case/assertionIds 顺序合并写回；身份重复/缺失/计划外一律记问题，**有问题不写最终文件并让阶段非零退出**）；报告加 `assertionSources` 并写侧文件 `java-assertion-sources.json`；`evidence-bundle.build()` 核验（legacy+shared==total==实际行数、两侧 case 数之和==计划 case 数）；`audit-tests.py compare()` 用同一 `check_assertion_sources()` **重算比对**（篡改即失败）。
-② **5 条自测**（新增 `AssertionMergeTest`，直接调真实 `emit_assertions()`：正常合并／身份重复／共享缺口／计划外 case／`assertionSources` 篡改 4 变体）；**四套件全绿 88+18+13+14=133**。
-③ **离线复跑走真实代码路径**（run-17 产物）：`problems=[]`、**`assertionSources = legacy{168,1713} + shared{5161,55031} = 56744`**、最终 **56744 行 = 计划总数**、缺/计划外/逐 case 条数不符 **全 0** ✓。
-④ **承载方式（优于原方案）**：不改两次开关，而是新增**串行脚本 `.cache/run-full-19-20.sh`**（crontab 只留它一条）：run-19（`--timeout-minutes 90`、无 `--retry-after`）→ 被上限终止后**自动**跑 run-20（`--timeout-minutes 180 --retry-after run-19 的 manifest`）→ 自动 `verify` + `audit-tests.py check`（显式传路径）+ `node audit-api.cjs check`，结果写 `.cache/evidence/full-run-20.log` → **两轮之间无需任何写入**（满足跨接零写入）且不受会话空闲影响 ✓。
-**实际启动**：13:54:01，`full-run-19-20260901`（pid 5540）。**时间线**：run-19 → ~15:24 触限；run-20 → 15:25 起，TS ~16:31、Java ~17:11、bundle/check ~17:16、审计 ~17:20。**这 3.3 小时内任何任务侧 `.py/.cjs/.mjs/.sh` 或 SDK 工作树改动都会作废来源**（A2 已转只读观察）。
-
-**重试协议还有一道校验：`producerSha256`（20260901 22:20 本地 13:52）** —— `full-run-18`（180 分钟档 + `--retry-after` run-16 的 manifest）**立即失败**：
-`{"status": "FAIL", "reason": "180 分钟重试来源已变化：producerSha256"}` ✗。即 `validate_retry` 除 `timeoutMinutes/elapsedSeconds/interface` 外，还要求**重试来源与当前工具集同源**；A2 为实现合并修法改了 `run-full-java-capture.py` 等 → run-16 的超时 manifest 不可再引用（**主代理判断疏漏**，非实现问题）。
-**修正路径（两步，跨接零写入）**：
-1. 先跑 **`full-run-19`（90 分钟档、不带 `--retry-after`）**，用当前工具集跑到上限被终止 → 产出**与当前工具集同源**的超时 manifest；
-2. 紧接着跑 **`full-run-20`（180 分钟档）**：`--timeout-minutes 180 --retry-after .cache/evidence/full-run-19-20260901/full-run.json` → **验收轮**；
-3. **两轮之间绝对零写入**（改脚本必须在 run-19 启动前全部完成）。
-**开工前四项确认**：①合并修法落盘；②5 条自测通过；③离线复跑证明（run-17 产物合并后 **56744** 行、缺/计划外/逐 case 条数不符均为 0）；④`.cache/run-full-e2e.sh` 指向 run-19 且 `--timeout-minutes 90`、无 `--retry-after`。
-**总耗时**：90 分钟 + ~110 分钟 ≈ **3.3 小时**（诚实告知）。
-
-**根因定案 + 合并修法获批准（20260901 22:05 本地 13:45）**：`bundle` 缺断言**不是接线重复**，而是 **Java 侧两个断言产出者写同一文件**：
-① JVM 内 legacy 重放在 Maven 期间**追加** `EVIDENCE_ASSERTIONS_PATH`（run-17 现有 **1713 行 / 168 case**，属 6 个 legacy 局部：brc100-property 600／bn-binary 521／bn-utils 284／bn-arithmetic 176／bn-serializers 55／hex-bn 71／utils 6）；
-② 随后 `emit-assertion-observations.py` 按共享 parity 轨迹**重写整个文件**，而这些 legacy 测试类不使用共享记录器（`HexTest`/`BigNumberConstructorTest` 命中 0）→ 必然「原断言缺少用例」并覆盖 legacy 行。
-先前的 `原断言次数多于计划：fc92a0c3…` 只是先撞到的另一处（`BigNumberArithmeticTest` 的 `assertEquals(msg, assertThrows(...).getMessage())` 记 2 次 matcher，legacy 通道为该断言只写 1 行）；**合并后自动消失**。
-**已批准的最小修法**（只改 `run-full-java-capture.py` 的 `emit_assertions()`，零放宽）：读出 JVM 已写行 → 子计划 = 全量计划 − 已覆盖 case → emit 写侧文件 → 按计划顺序**合并写回** → 严格对账（同 case 双产出／缺失／计划外／逐 case 条数不符一律失败）→ 报告新增 `assertionSources`；另加 5 条自测。
-**离线证明**（用 run-17 现成产物，仅 `/tmp` scratch）：legacy 1713 行／168 case + 子计划 5161 case／55031 实例 → emit exit 0 → **合并 56744 行 = 计划总数**，缺 0／计划外 0／逐 case 条数不符 0 ✓。
-**正式验收仍需整轮**：`verify` 会重验 stage 的 `exitCode/pid/时间窗` 与全部 `artifactSha256`（含 `parity-results.json`），且 `full-evidence-run.py` 无 stage 级 resume（`capture()` 要求 runDir 新建）→ 原地补跑只能作修复验证。已放行 **`full-run-18`**（180 分钟档，`--retry-after` 引用 run-16 的超时 manifest，前提仍成立），预计 TS ~66 分 + Java ~40 分 + bundle/check ~5 分 ≈ **110 分钟**。
-
-**emit 异常已定位到行（20260901 21:35 本地 13:30）**：`emit-assertion-observations.py:91` 抛
-`ValueError: 原断言次数多于计划：fc92a0c3ad1d24263d09d93dc5a84326d09cc529878d388330d848da44cc047e` —— 即**该 caseId 的 Java 原始轨迹断言次数多于冻结计划**（与当年 `wallet-wire` 双记 600 vs 300 同类形状），发生在其余接线/替换路径上。
-已交 A2：①反查该 caseId 身份 + 计划条数 vs Java raw 实际条数 + 多出行形状（是否成对重复／同一 `assertionId` 多记／两侧各记一遍）；②根因 + 最小修法（**不得**放宽 `require`、跳过用例或改 SDK 源码）；③用 run-17 现有 raw 轨迹单点预验证 emit（期望 56744 条、`error` 为空、只影响该用例）；④评估**原地补跑**（同 runDir/runId/来源补 emit+bundle+check，禁伪造 manifest），否则重跑整轮（~110 分钟）。**待主代理确认方案后才动手。**
-
-**`full-run-17` 结果：TS ✓、Java ✓（5444/0/0）、bundle ✗ 只剩断言发射（20260901 21:20 本地 13:15）**：
-- `ts-capture` exit=0 ✓（133/133 文件、5329/5329 用例）；
-- **`java-capture` exit=0 ✓** —— `Tests run: 5444, Failures: 0, Errors: 0`，`TransactionEvidenceCoordinatorTest` 的 flake **未复现** ✓、`-Xmx3g` 有效 ✓；
-- `bundle` exit=1（13:08:57）：报 **`Java 断言用例：缺失 [...]`**；`java-assertions.jsonl` 仅 **1713** 行（应约 56744），但 `java-assertions.raw.jsonl` 已降到 **32.9 MB** ✓（wallet-wire recipe 生效，**不再是 OOM**）→ `java-capture-report.json` 的 `assertions.error` 指向 `emit-assertion-observations.py:139 in main（rows, extras …）` **抛异常**。
-- 已交 A2：①取完整 traceback；②根因一句；③最小修法 + 用 run-17 现有 raw 轨迹的单点预验证（期望覆盖 56744 且 `assertions.error` 为空，**不得放宽比较层或跳过用例**）；④评估能否**原地补跑 emit + bundle + check**（同一 runDir/runId/来源，禁止伪造 manifest），否则重跑整轮。**主代理确认方案后才动手。**
-
-**`full-run-16` 触及 90 分钟上限、180 分钟档已启动（20260901 19:40 本地时间 11:36）**：
-`full-run-16` 于 **11:24:35** 因 90 分钟上限被终止（`status: timed-out`、`elapsedSeconds 90.0 min`、`reason 完整运行触及上限；所有后代进程已停止`）——**这正是 180 分钟档协议所需的真实超时证据** ✓。
-Java 阶段在被终止前**没有出现 OOM**（`-Xmx3g` 生效 ✓，逐模块 `Tests run: … Failures: 0, Errors: 0`），只是**时间不够**（TS 46 min 后 Java 才开始，90 分钟档容不下 ~70 分钟总量 + Java 全量）。
-已把 `.cache/run-full-e2e.sh` 改为 **`full-run-17-20260901`**，命令加 `--timeout-minutes 180 --retry-after .cache/evidence/full-run-16-20260901/full-run.json`，crontab 重新安装；**11:36:01 已启动**（pid 3762240）。预计 TS → ~12:22、Java → ~12:50、随后 bundle。
-
-**四项改动全部落地、四套自测全绿、`full-run-16` 已启动（20260901 14:00）**：
-
-1. **堆修复**：`-DargLine=-Xmx3g`（常量 `MAVEN_ARG_LINE`，注释含 dmesg 证据与 4 组实测），报告加 `mavenArgLine`。
-2. **任务①第 7 例**：`build-ts-serial-entries.py` 增 `EXTRA_PROBES`（含 `replaces`/`reason`，条目 diff 仅 `auth-fetch-known-txids` 一条，summary 不变）；`run-full-ts-serial.py` 增 `merge_extra_probes()`——**额外探针用独立 jest 调用**（避开 `jest.doMock` 模块工厂争用），只并入输入行并按 `replaces` 覆盖入口探针同身份行，未登记替换/产出入口没有的身份即报错。单点：该局部 `passed`、`inputsWritten 17`（16 行 `knownTxidsInput` + **1 行 `knownTxidsPeerInput`**，caseId `189790cbac…`）；Java 侧 `-Dtest=AuthFetchKnownTxidsTest` → **17/0/0**，peer 行两侧输入 sha256 **完全相同**（`c1db4f4076164cf9…`）。
-3. **任务②已知缺口**：`known-gaps.json` 6 条（caseId／局部／`ruleId=frozen-test-without-replay-entry-v1`／Java 注册身份／证据指针（含 absence-scan 0 命中命令）／`newFile`）；`audit-tests.py::known_gaps()` **逐条机器核验**（caseId 属清单、注册身份匹配、Java 源码确无重放入口、待新建文件尚不存在、证据指针存在、ruleId 枚举、**禁止自由文本 reason**）；`evidence-bundle.py` 只放行登记内 caseId 的 **Java 输入缺失**一项，登记内一旦又出现 Java 输入也失败（**防登记过期**），登记外缺失/多余仍硬失败；`knownUnroutableCases`+`knownGapsSha256` 出现在 bundle 输出／capture manifest／`full-run.json`／`audit check`；**自测 5 条**。
-4. **方案 A 跨语言替换表**：`cross-language-input-rules.json` **16 条精确规则**（文件+字面键/`[]` 路径+TS 形状+Java 形状，**出现 `*`/`?` 直接拒绝**，每条注 `gate` 出处）+ 1 条 `kind=unordered`（nonce 多重集，两侧必须相等才排序归一）；用 **run-14 真实数据穷举**：25402 个双侧身份里原 25 个不一致 → 归一后 **25/25 一致、0 残留**（42 次 substitute + 1 次 unordered）；接入 bundle/`audit compare`/`full-run.json`（`crossLanguageRulesSha256`）；**自测 6 条**。
-**四套测试全绿**：bundle 83／full-evidence-run 18／preflight 13／semantics 14；preflight 报 `readyForFullCapture=true`、5329 用例、`planErrors=[]`。
-**`full-run-16`**：cron 09:54:01 启动（pid 3439716；09:50 那次 tick 正确推迟）；预计 TS ≈10:45、Java ≈11:00–11:10，上限 11:24；交付时给 stage 结果 + `verify` + `audit-tests.py check` + `audit-api.cjs check` + `knownUnroutableCases`（期望 6）与 `crossLanguageInputSubstitutions.count`（期望 25）。
-
-**第二处结构性阻塞与裁决（20260901 13:50）**：A2 用 run-14 产物做预测检查发现 —— `evidence-bundle` 对**输入值**严格比较，而 auth-fetch 家族有 **25 例**的 TS/Java 输入值**按设计不同**（逐局部 gate 明确归一，bundle 不做）→ 若不处理，run-16 会在 `bundle` 以「TS/Java 输入或前置状态不同」失败（既有结构问题，此前被“缺用例”挡住、从未跑到）。
-分布：`AuthFetch.boundary.test.ts` 15（`.kind`：TS `AuthFetch.boundaryInput` vs Java `AuthFetch.boundaryEntry`；`.mockInputs.waitResults[i].value`：TS `{"type":"undefined"}` vs Java `null`）、`AuthFetch.knownTxids.test.ts` 6（`.paymentCalls[i].response.bodyUsed`：TS `false` vs Java **无该键**）、`AuthFetch.test.ts` 4（`.mockReturns.request.name`：TS `Error` vs Java `SdkException`）；涉及局部 `auth-fetch-boundary` 15／`auth-fetch-known-txids` 6／`auth-fetch-primary-cert-request` 3／`auth-fetch-primary-retry` 1。
-依据（冻结 gate 的硬 `require`）：`auth-fetch-knownTxids-payment-local-gate.py:159-162`、`auth-fetch-boundary-entry-local-gate.py:36-48` 与 `:207-208`、`auth-fetch-primary-cert-request-local-gate.py:195`。
-**裁决：批准方案 A** —— 在 `evidence-bundle.py` 加**显式、逐条可核验**的跨语言替换表（按 `(文件, JSON 路径, TS 形状, Java 形状)` 精确匹配，形状不符即不动、其它差异照旧硬失败），在算 `ts_hash`/`java_hash` 之前应用，并报 `crossLanguageInputSubstitutions`（计数 + caseId 列表）；**4 条自测**（命中替换／形状不符不替换／表外差异硬失败／篡改表失败）。备选（改 TS 探针写 Java 形状）会推翻已冻结 gate 的判据，**否决**。
-执行顺序：任务②（`known-gaps.json` + `knownUnroutableCases`，已完成 6 条）→ 方案 A（含自测）→ 任务①（第 7 例，已预验证）→ 静默 10 分钟 → `full-run-16`。
-
-**堆修法已实测并获批准（20260901 13:35）**：A2 补足硬证据 —— 内核 `oom-kill: constraint=NONE … global_oom, task=java`、`Killed process (java) … anon-rss:4183468kB`，Maven `exit 137`；根因是 surefire fork 默认堆上限 ≈ 物理内存 1/4（≈3.9 GiB），而本机 15 GiB 已被 infra 容器+编辑器占约 6 GiB、**swap 用满 3.9/4.0 GiB**。
-同一用例实测：默认 1/1 通过（峰值 2230 MB）、`-Xmx2g` **OOM 失败**、`-Xmx2560m` 通过（2382 MB）、**`-Xmx3g` 通过（2236 MB）**；逐局部 recipe 里**没有**堆参数可抄（`capture-primitives-last-local.py` 只有 `clean test -Dtest=…`，逐局部能过只因当时宿主机空闲），SDK 的 surefire 未自带 `argLine`，故 `-DargLine=` 生效。
-**已批准**：`run-full-java-capture.py` 加 `-DargLine=-Xmx3g`（常量 `MAVEN_ARG_LINE`，注释含 dmesg/exit137 证据与实测表），报告新增 `mavenArgLine`。风险已知悉并接受：该 flag 对整套 suite 生效，若另有 >3 GiB 的类会以**可定位的 `OutOfMemoryError`** 暴露（优于内核 137）；备选的"停宿主机 infra 容器"不在授权范围。证据：`.cache/evidence/aesgcm-heap-probe/{default,xmx2g,xmx2560m,xmx3g}/`；`xmx3g` 的 `java-inputs.jsonl` 2 行与全量计划逐项一致 ✓。
-A2 继续：第 7 例 TS 接线 → `known-gaps.json` + 三条自测 → `full-run-16`。
-
-**根因已定位（20260901 13:20，主代理）**：`java-maven.log:148-155` 显示
-`SurefireBooterForkException: The forked VM terminated without properly saying goodbye` + **`Process Exit Code: 137`**（128+9 = SIGKILL）→
-**surefire fork 的 JVM 被 OOM killer 杀**（`AESGCMManualTest` 要处理 512 MB 大数组），**不是断言失败、也不是接线错误**。
-已把该证据交 A2，要求：①先查该局部逐局部采集时的堆参数（`capture-*` java 分支／当年 manifest `command`）并**照抄**到全量阶段；②若本来没带，则补一个够用不夸张的堆（如 `-DargLine=-Xmx3g`），且全量 Java 阶段**独占**（本机曾出现 Python 侧 5.9 GB 被 OOM 杀，总内存有限）；③单点预验证 `mvn test -Dtest=AESGCMManualTest` 期望 `Tests run: 1, Failures: 0, Errors: 0` 且退出码 0；④再继续第 7 例与 `known-gaps.json`，最后 `full-run-16`。若考虑「把这一例拆出来单独带大堆跑」，必须保持同一 runDir／runId／来源的单次运行语义，禁止伪造 manifest 拼接。
-
-**full-run-15 结果：Java 阶段新缺陷（20260901 13:10）** —— `08:59:15` 结束 exit=1，失败在 **`java-capture`**（不是 bundle）。
-`java-maven.log` 报 `BUILD FAILURE`／surefire 阶段，唯一失败类 **`com.metanet4j.bsv.primitives.AESGCMManualTest`**（`Tests run: 885` 即止）；因 Maven 早退，`vectorInputs` 跳过、`assertions.error` 非空、`full-java-serial-convert.py` 也失败。
-该用例在**逐局部**（窗口 v2）与 **TS 侧全量**（42 分钟）都通过 → 属「全量 Java 阶段」下的**资源/环境**问题（512 MB 大数组，疑 heap 或超时），**不是接线错误**。
-已交 A2：①先诊断该类真实异常（读 `metanet4j-bsv-sdk/target/surefire-reports/` 下该类报告；对照该局部逐局部 recipe 是否本来带堆参数），给最小任务侧修法（例如全量 Java 阶段补 `MAVEN_OPTS`／`-DargLine`），**不改 SDK 源码**，我确认后再动；②第 7 例 TS 接线；③`known-gaps.json` 登记 + 三条自测；④预验证后跑 `full-run-16` 并交付两套审计与 `knownUnroutableCases` 计数。
-
-**用户裁决：6 例记为已知缺口（20260901 13:00）** —— 胡先生选择「记为已知缺口并如实披露」，**不重新冻结 SDK**（补齐那 6 例需新增 300+ 行 `AuthFetchPeerInputReplay.java` 并接线 6 个 `@Test` → 会改 `java_revision` → 窗口 v2 的 106 个同源局部与 14 项 task-parity 全部重跑）。
-
-**A2 只读排查的三条硬结论（已核实，不得当作口径问题绕过）**：
-1. `specialized-local` 只豁免**逐局部来源校验**（`recapture-local.py:27`／`local-evidence-gate.py:45`／`recapture-all.sh:17`／`full-evidence-preflight.py:161`），**不免**「全量计划逐用例双侧同输入」——`evidence-bundle.py:83` 用冻结清单全量比对（`:59` fail），`:96-106` 还要求 sampleId 序列与逐字节同值 → **这 7 例是真缺口**。
-2. 6 个 peer 例在**全部 evidence 里 0 个 Java 产物**（只在 TS 产物里出现），无可并入之物；第 7 例有 2 份旧产物但 `javaRevision` 为旧值且 manifest 旧格式，`evidence-bundle.py:186` 要求行内 `runId` 等于本轮 manifest → **搬旧行必被拒**（绕过即伪造）。
-3. 第 7 例只需 **TS 侧**接线（把 peer 探针并入该局部本轮 TS 汇总），不动 SDK、只需重跑该局部 TS + 一轮全量。
-
-**已交办（A2 代理）**：①等 `full-run-15` 结束后做第 7 例 TS 接线（最小追加，落在 `run-full-ts-serial.py`／`ts-serial-entries.json`）；②新增 `known-gaps.json` 显式登记 6 例（caseId／局部／`ruleId`（拟 `frozen-test-without-replay-entry-v1`）／原因／证据指针／「补齐需要什么」），让 `evidence-bundle.py` 与 `audit-tests.py` **只读该登记**把其记为 `knownUnroutableCases` 并在每份报告/manifest 里**显式可见**，**不得放宽其它任何校验**（登记外缺口仍硬失败，禁止自由文本理由），并加三条自测（命中通过／登记外仍失败／篡改登记失败）；③随后 `full-run-16`（90 分钟档）并给出 stage + `verify` + `audit-tests.py check` + `audit-api.cjs check` + `knownUnroutableCases` 实际计数（期望 6）。
-
-**A2 收尾完成、三组接线全部落地（20260901 12:40）**：
-
-- **改了 4 个文件**：`run-full-java-capture.py`（唯一注入点，最后写入 07:35）—— A1 两行、wallet-wire 4 项**一起**注入（注释写明“只给一半”的两种退化）、A2 的 33 个 `-Dmigration.*` + 4 个自有 env、Maven 后 `full-java-serial-convert.py` 产标准行，并加运行期前置校验（引用文件存在／语料 javaMethod 不重叠／语料 sampleId 与 `input-plan.json` 逐项一致，不符则在 Maven 前中止）；`EXCLUDED_TS_INPUT_ENVS` 未动。新增 `build-java-serial-entries.py` + `java-serial-entries.json`（**36 局部／736 例**，`--check upToDate=true`）、`full-java-serial-convert.py`、`verify-java-serial.py`、报告文档。
-- **聚焦验证三轮全绿**：focus1（5 类）`Tests run: 400, Failures: 0, Errors: 0`，147+82+62+39+70 例全部有输入、`sampleIdMismatchAgainstFrozenPlan=0`、`problems=[]`；focus2（2 类）✓；focus3（向量四类）**2599/2599 例／9445 行**、`problems=[]`。wallet-wire 硬指标：raw 轨迹 **377 KB**、见证 **33.56 MB／4 条**。
-- **两项发现**：①emit 的 OOM 由 wallet-wire recipe 顺带解决（原始轨迹 800.2 MB → 约 43 MB，其中 757.5 MB 是那 4 条巨行）；②`migration.parity.largeArrays=true` 是 **JVM 级全局开关**，会误伤 2 条断言（`PushDropTest#passesVariousTestVectors#37` 70000 B、`TransactionPerformanceTest#deepSourceGraph` 186101 B）→ 处置：`repair_digest_actuals()` 做**验证性还原**（仅当 TS 同 `(caseId, assertionId)` 按字节重算的 length+sha256 完全一致才替换，否则保留并记 `problems`），已做正/反向验证。**主代理已批准保留**，并要求在最终报告写明判据与双向验证、`problems` 非空必须在 manifest 可见。
-- **缺口收敛**：3342 例中 **3335 例已接通**（A1 2599 + A2 736）。**剩 7 例**：`auth-fetch-peer` 6 例（`AuthFetchPeerTest` 无任何输入重放入口，全 evidence 无这些 caseId 的 java-inputs 记录）+ `auth-fetch-known-txids` 1 例（TS 侧聚合缺口：该用例只有 `AuthFetch.knownTxidsInput` 行，replay 要 `knownTxidsPeerInput`）。已要求 A2 **只读**排查三问（是否属 `specialized-local` 而本不该要求／是否已有逐局部 Java 产物可合法并入／若必须改冻结 SDK 测试源码则给最小改动），由主代理决定。
-- **`full-run-15` 已就绪**：`.cache/run-full-e2e.sh` 已改指 `full-run-15-20260901`（90 分钟档 + 静默守卫），crontab 已装；最后工具写入 07:35 → 守卫将在 ~07:46 后自动开跑。
-
-**三项收尾的最新结论（20260901 12:20）**：
-
-- **B 不是发射器问题**：4 条巨行全部来自 `WalletWireIntegrationTest#preservesLargeTypedBeef`（各 132 MB／3300 万元素的 typed array，解析峰值实测 2.88 GB/行）。逐局部早有约定：大数组记 `{length, sha256}` + 逐字节见证落 `java-large-actuals.jsonl`（`wallet-wire` 局部 raw 仅 0.1 MB、见证 33.6 MB）；全量没走这条约定，是因为 **Java 侧重放的开关键没打开**。已预验证 4 项 recipe（`MIGRATION_WALLET_WIRE_ASSERTION_INDEX` + `MIGRATION_WALLET_WIRE_JAVA_LARGE_ACTUALS` + `-Dmigration.walletWire.plan=…` + `-Dmigration.parity.largeArrays=true`）→ `WalletWireIntegrationTest` **82/0/0**、raw **0.12 MB**、见证 **33.56 MB**、该局部 82 例输入一并补齐。**四项必须同给**：只给 flag 不给 plan，raw 会变小但见证不产出。
-- **A1 已完成并预验证**：新增自包含 `java-vector-inputs.py`（口径与 `normalize()` 逐字段一致）；4 个向量类一次跑齐 **2599/0/0** → `rowsAppended 9445`、`script-spend-shared-vectors 1940/1940`、`transaction-shared-vectors 659/659`、`unknownTests 0`、`problems []`。
-- **接线方式（已定，采纳代理建议 (b)）**：三组线（A1 两行 + wallet-wire 4 项 + A2 自身 34 类）**全部由 A2 代理一次写入** `run-full-java-capture.py`（单一写者，最干净）；路径 B 代理已停手、不再改该文件。
-- **收尾顺序**：A2 三组接线 + 聚焦验证 → 两路静默 10 分钟 → 带静默守卫的 cron 放行 **`full-run-15`**（90 分钟档，TS ~46 min + Java ~24 min）→ `verify` + `audit-tests.py check` + `node audit-api.cjs check`。
-
-### full-run-14 精确读数与三项收尾分工（20260901 11:40，以此为准）
-
-代理用流式统计更正了我此前的读数（`evidence-bundle.py::same()` 只打印缺失集合的前 4 个做示例，所以“4 个用例”是假象）：
-
-| 项 | 计划 | 覆盖 | 缺失 |
-| --- | --- | --- | --- |
-| Java **输入**用例 | 5329 | 1987 | **3342**（78% 是向量四类：`ScriptVectorsTest` 1030／`TransactionCompleteVectorsTest` 659／`SpendValidVectorsTest` 455／`SpendStandaloneValidVectorsTest` 455）|
-| Java **断言**用例 | 5329 | 124 | **5205**（`emit-assertion-observations.py` 解析 839 MB 原始轨迹时被 OOM 杀，kernel log `06:54:12` 确认）|
-
-完整 3342 个缺失 caseId 已落盘 `.cache/evidence/full-run-14-20260901/missing-java-input-cases.json`。
-
-**三项分工**：**B**＝断言发射改流式（独立、有界，代理先做，用现成自测 + run-14 的 839 MB 轨迹单点验证）；**A1**＝向量四类 2599 例（设 `MIGRATION_VECTOR_JAVA_INPUTS` + 调两个证据脚本的 `normalize`）；**A2**＝其余 34 类 743 例（各读自己的 `-Dmigration.*` 属性或自有 env，见 `java-capture-report.json` 的 `propertyDrivenReplays`）→ 已另派专代理建「局部→Java 入口」映射表。
-三项齐活、两路都停笔、工具集重新冻结后，才统一放行 `full-run-15`（一次约 70 分钟）。
+TS 单进程分派不可用→逐局部串行合并；Broadcaster 探针读 805 MB 全局轨迹撞 V8 上限→分块扫描；退役局部休眠 env 被“并集”重新注入（13 个 PBKDF2 报错）→精确排除；3342 例 Java 输入未接线→A1 向量 + A2 映射表 736 例；`largeArrays` 约定未开启致 839 MB 轨迹与 OOM→4 项 recipe + 分块；surefire fork 默认堆被全局 OOM 杀（exit 137）→`-DargLine=-Xmx3g`；**两个断言产出者写同一文件**（legacy 追加 vs emit 重写覆盖，1713/56744）→补齐+合并 + `assertionSources`；25 例跨语言输入差异→16 条精确规则；6 例无入口→显式登记；运行期改工具致 `producerSha256` 作废→冻结 + 10 分钟静默守卫 + cron；180 分钟档要求同源超时来源；**时间记账跨时钟域**（`monotonic` vs `time_ns`，WSL2 漂移 10.7 s）→统一到同一对 wall 时间戳 + `cleanupSeconds`。
 
 ## 并行路线（20260929）
 

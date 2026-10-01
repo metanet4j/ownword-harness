@@ -2,15 +2,11 @@
 
 ## 执行位置
 
-权威任务状态见 [feature_list.json](feature_list.json)：43 个执行事项中 **31 个 `done`、0 个 `in-progress`、12 个未结**。
+权威任务状态见 [feature_list.json](feature_list.json)：43 个事项中 **31 个 `done`、0 个 `in-progress`、12 个未结**（4 个含专用局部的实现事项 + 8 个总门禁），它们的验收由**单次双侧全量运行 + `audit-tests.py check` + `audit-api.cjs check`** 决定。
 
-**未结 12 项**：4 个实现事项（`script-spend`、`script-vectors`、`transaction-complete`、`auth-transport`，均含**专用局部**，不走标准双侧流程）+ 8 个总门禁（`api-contract`、`test-mapping`、`input-replay`、`result-capture`、`evidence-gate`、`map`、`core-modules`、`sdk-acceptance`）。它们的验收由**单次双侧全量运行 + `audit-tests.py check` + `audit-api.cjs check`** 决定。
+**代码与测试状态**：SDK 仓 `metanet4j-bsv-sdk` 冻结在 `8b8e13d`（工作树 0 改动、`src/main` 0 改动，153 个生产类）；`full-run-17` 已证明双侧全绿——`ts-capture` exit=0（133/133 文件、5329/5329 用例、38092 输入、56744 断言），`java-capture` exit=0（`Tests run: 5444, Failures: 0, Errors: 0`）。逐局部证据（窗口 v2：107 项篡改门禁通过、0 失败、同源 `13f34162199d`）与 **14 项**任务级对照（约 1312 例）均已入册；输入计划 **5329/5329 = 100%**。
 
-**证据层现状**：输入计划 **5329／5329 = 100%**；`full-evidence-preflight.py` 报 `readyForFullCapture=true`、`planErrors=[]`、`completePlanError` 空。统一窗口 v2（`recapture-all.sh final2-20260930`）**108 项处理、107 项篡改门禁通过、0 失败**，汇总「全部局部重采与篡改门禁通过」；106 个局部同为来源 `13f34162199d`（等于当前工作树）。**14 个事项**已有任务级 `task-parity.json`（合计约 1312 例，缺失与未比较计数全 0）并写入 `taskAcceptance`。
-
-**来源冻结**：SDK 仓 `8b8e13d`（`src/main` 零改动，仅 4 个测试文件：`SimplifiedFetchTransportAdditionalInputReplay`／`SimplifiedFetchTransportAdditionalTest`／`ChronicleOpcodesInputReplay`／`ChronicleOpcodesTest`）。登记 153 个局部、118 个有运行产物；全量分派表 153 局部／133 原文件／151 探针／115 环境变量，`unresolved=0`、无探针原文件 0。
-
-**正在跑**：单次双侧全量运行 v6（90 分钟档，`.cache/evidence/full-run-6-20260930/`）。整套约 2 小时；若被 90 分钟上限终止，按协议用 `--timeout-minutes 180 --retry-after .cache/evidence/full-run-6-20260930/full-run.json` 重跑。
+**正在跑**：验收链路 `.cache/run-full-21-22.sh`（cron 串行）——`run-21`（90 分钟档，产出与当前工具集同源的超时来源，触限属预期）→ **`run-22`（180 分钟档，验收轮）**，跑完自动执行 `verify` + `audit-tests.py check` + `node audit-api.cjs check`。预计约 19:05 出全部结果。期间**禁止**改动任务侧 `.py/.cjs/.mjs/.sh` 与 SDK 工作树（否则来源作废）。
 
 ## 迁移中发现并修复的生产缺陷（均带独立回归）
 
