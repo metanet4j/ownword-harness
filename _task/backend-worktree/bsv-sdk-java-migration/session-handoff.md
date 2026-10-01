@@ -159,6 +159,10 @@
 
 **B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
 
+**emit 异常已定位到行（20260901 21:35 本地 13:30）**：`emit-assertion-observations.py:91` 抛
+`ValueError: 原断言次数多于计划：fc92a0c3ad1d24263d09d93dc5a84326d09cc529878d388330d848da44cc047e` —— 即**该 caseId 的 Java 原始轨迹断言次数多于冻结计划**（与当年 `wallet-wire` 双记 600 vs 300 同类形状），发生在其余接线/替换路径上。
+已交 A2：①反查该 caseId 身份 + 计划条数 vs Java raw 实际条数 + 多出行形状（是否成对重复／同一 `assertionId` 多记／两侧各记一遍）；②根因 + 最小修法（**不得**放宽 `require`、跳过用例或改 SDK 源码）；③用 run-17 现有 raw 轨迹单点预验证 emit（期望 56744 条、`error` 为空、只影响该用例）；④评估**原地补跑**（同 runDir/runId/来源补 emit+bundle+check，禁伪造 manifest），否则重跑整轮（~110 分钟）。**待主代理确认方案后才动手。**
+
 **`full-run-17` 结果：TS ✓、Java ✓（5444/0/0）、bundle ✗ 只剩断言发射（20260901 21:20 本地 13:15）**：
 - `ts-capture` exit=0 ✓（133/133 文件、5329/5329 用例）；
 - **`java-capture` exit=0 ✓** —— `Tests run: 5444, Failures: 0, Errors: 0`，`TransactionEvidenceCoordinatorTest` 的 flake **未复现** ✓、`-Xmx3g` 有效 ✓；
