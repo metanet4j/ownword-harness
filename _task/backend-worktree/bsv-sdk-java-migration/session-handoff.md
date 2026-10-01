@@ -159,6 +159,12 @@
 
 **B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
 
+**`full-run-17` 结果：TS ✓、Java ✓（5444/0/0）、bundle ✗ 只剩断言发射（20260901 21:20 本地 13:15）**：
+- `ts-capture` exit=0 ✓（133/133 文件、5329/5329 用例）；
+- **`java-capture` exit=0 ✓** —— `Tests run: 5444, Failures: 0, Errors: 0`，`TransactionEvidenceCoordinatorTest` 的 flake **未复现** ✓、`-Xmx3g` 有效 ✓；
+- `bundle` exit=1（13:08:57）：报 **`Java 断言用例：缺失 [...]`**；`java-assertions.jsonl` 仅 **1713** 行（应约 56744），但 `java-assertions.raw.jsonl` 已降到 **32.9 MB** ✓（wallet-wire recipe 生效，**不再是 OOM**）→ `java-capture-report.json` 的 `assertions.error` 指向 `emit-assertion-observations.py:139 in main（rows, extras …）` **抛异常**。
+- 已交 A2：①取完整 traceback；②根因一句；③最小修法 + 用 run-17 现有 raw 轨迹的单点预验证（期望覆盖 56744 且 `assertions.error` 为空，**不得放宽比较层或跳过用例**）；④评估能否**原地补跑 emit + bundle + check**（同一 runDir/runId/来源，禁止伪造 manifest），否则重跑整轮。**主代理确认方案后才动手。**
+
 **`full-run-16` 触及 90 分钟上限、180 分钟档已启动（20260901 19:40 本地时间 11:36）**：
 `full-run-16` 于 **11:24:35** 因 90 分钟上限被终止（`status: timed-out`、`elapsedSeconds 90.0 min`、`reason 完整运行触及上限；所有后代进程已停止`）——**这正是 180 分钟档协议所需的真实超时证据** ✓。
 Java 阶段在被终止前**没有出现 OOM**（`-Xmx3g` 生效 ✓，逐模块 `Tests run: … Failures: 0, Errors: 0`），只是**时间不够**（TS 46 min 后 Java 才开始，90 分钟档容不下 ~70 分钟总量 + Java 全量）。
