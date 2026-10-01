@@ -607,7 +607,16 @@
       "plan": "auth-fetch-knownTxids-input-plan.json",
       "source": "full-run-probes.json 的 direct 探针",
       "kind": "specialized-local",
-      "input_plan": "auth-fetch-knownTxids-input-plan.json"
+      "input_plan": "auth-fetch-knownTxids-input-plan.json",
+      "extraProbes": [
+        {
+          "probe": "capture-auth-fetch-knownTxids-peer-inputs.cjs",
+          "replaces": [
+            "189790cbac0f42250b37519c090b906ad9619403b2b3dd8f02ee0be3fe1e1b09"
+          ],
+          "reason": "付款探针与 Peer 探针都会为该用例写 sampleId=call-0 的一行（value.kind 分别是 AuthFetch.knownTxidsInput 与 AuthFetch.knownTxidsPeerInput），而计划只有 1 个样本；Java 侧 AuthFetchKnownTxidsPeerInputReplay 只认 Peer 行（付款重放的固定 case 表里没有这一例），因此用独立 jest 调用采 Peer 观测并显式替换付款行。"
+        }
+      ]
     },
     "auth-fetch-peer": {
       "shape": "direct",

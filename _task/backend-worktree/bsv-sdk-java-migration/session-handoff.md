@@ -159,6 +159,11 @@
 
 **B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
 
+**堆修法已实测并获批准（20260901 13:35）**：A2 补足硬证据 —— 内核 `oom-kill: constraint=NONE … global_oom, task=java`、`Killed process (java) … anon-rss:4183468kB`，Maven `exit 137`；根因是 surefire fork 默认堆上限 ≈ 物理内存 1/4（≈3.9 GiB），而本机 15 GiB 已被 infra 容器+编辑器占约 6 GiB、**swap 用满 3.9/4.0 GiB**。
+同一用例实测：默认 1/1 通过（峰值 2230 MB）、`-Xmx2g` **OOM 失败**、`-Xmx2560m` 通过（2382 MB）、**`-Xmx3g` 通过（2236 MB）**；逐局部 recipe 里**没有**堆参数可抄（`capture-primitives-last-local.py` 只有 `clean test -Dtest=…`，逐局部能过只因当时宿主机空闲），SDK 的 surefire 未自带 `argLine`，故 `-DargLine=` 生效。
+**已批准**：`run-full-java-capture.py` 加 `-DargLine=-Xmx3g`（常量 `MAVEN_ARG_LINE`，注释含 dmesg/exit137 证据与实测表），报告新增 `mavenArgLine`。风险已知悉并接受：该 flag 对整套 suite 生效，若另有 >3 GiB 的类会以**可定位的 `OutOfMemoryError`** 暴露（优于内核 137）；备选的"停宿主机 infra 容器"不在授权范围。证据：`.cache/evidence/aesgcm-heap-probe/{default,xmx2g,xmx2560m,xmx3g}/`；`xmx3g` 的 `java-inputs.jsonl` 2 行与全量计划逐项一致 ✓。
+A2 继续：第 7 例 TS 接线 → `known-gaps.json` + 三条自测 → `full-run-16`。
+
 **根因已定位（20260901 13:20，主代理）**：`java-maven.log:148-155` 显示
 `SurefireBooterForkException: The forked VM terminated without properly saying goodbye` + **`Process Exit Code: 137`**（128+9 = SIGKILL）→
 **surefire fork 的 JVM 被 OOM killer 杀**（`AESGCMManualTest` 要处理 512 MB 大数组），**不是断言失败、也不是接线错误**。

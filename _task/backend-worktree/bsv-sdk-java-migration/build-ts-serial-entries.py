@@ -23,6 +23,19 @@ from pathlib import Path
 TASK = Path(__file__).resolve().parent
 CONFIG = TASK / 'full-evidence-locals.json'
 PROBES = TASK / 'full-run-probes.json'
+# 额外直写探针：少数局部的观测分散在多个直写探针里，而登记表只登记了其中一个。
+# `replaces` 必须显式列出会被覆盖的 caseId——两个探针会对同一 (caseId, sampleId) 各写一行，
+# 而计划里该用例只有一个样本；驱动用独立 jest 调用采集（避免探针之间争用 jest.doMock 的模块工厂），
+# 并且只保留这里声明的那一行。
+EXTRA_PROBES = {
+    'auth-fetch-known-txids': [{
+        'probe': 'capture-auth-fetch-knownTxids-peer-inputs.cjs',
+        'replaces': ['189790cbac0f42250b37519c090b906ad9619403b2b3dd8f02ee0be3fe1e1b09'],
+        'reason': '付款探针与 Peer 探针都会为该用例写 sampleId=call-0 的一行（value.kind 分别是 '
+                  'AuthFetch.knownTxidsInput 与 AuthFetch.knownTxidsPeerInput），而计划只有 1 个样本；'
+                  'Java 侧 AuthFetchKnownTxidsPeerInputReplay 只认 Peer 行（付款重放的固定 case 表里没有这一例），'
+                  '因此用独立 jest 调用采 Peer 观测并显式替换付款行。'}],
+}
 UNRESOLVED = {'shape': 'unresolved'}
 
 
@@ -177,6 +190,11 @@ def check_paths(entry):
     script = TASK / str(entry.get('script') or entry.get('probe') or '')
     if not script.is_file():
         missing.append('脚本不存在：' + str(script))
+    for extra in entry.get('extraProbes', []):
+        if not (TASK / extra.get('probe', '')).is_file():
+            missing.append('额外探针不存在：' + str(extra.get('probe')))
+        if not extra.get('replaces') or not extra.get('reason'):
+            missing.append('额外探针缺少 replaces/reason：' + str(extra.get('probe')))
     if missing:
         entry.update(shape='unresolved', reason='入口引用的路径已不存在：' + '；'.join(missing))
     return entry
@@ -196,6 +214,8 @@ def main():
         entry = classify(item, table)
         entry['kind'] = item.get('captureKind') or 'old-pipeline'
         entry['input_plan'] = item['input_plan']
+        if item['name'] in EXTRA_PROBES:
+            entry['extraProbes'] = EXTRA_PROBES[item['name']]
         if entry['shape'] != 'unresolved':
             entry = check_paths(entry)
         if entry['shape'] != 'unresolved':

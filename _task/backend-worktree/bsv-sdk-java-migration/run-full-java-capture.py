@@ -36,6 +36,14 @@ VECTOR_INPUTS_SCRIPT = 'java-vector-inputs.py'
 # A2 旧接口局部（736 例）：局部 → Java 入口映射表（build-java-serial-entries.py 生成）与其后置转换器。
 JAVA_SERIAL_ENTRIES = TASK / 'java-serial-entries.json'
 JAVA_SERIAL_CONVERTER = 'full-java-serial-convert.py'
+# surefire fork 的堆上限：full-run-15 实测该 fork 在 AESGCMManualTest 处被内核 OOM 杀掉
+# （dmesg：`Killed process … (java) anon-rss:4183468kB`；Maven：`Process Exit Code: 137`），
+# 因为默认上限（物理内存 1/4 ≈ 3.9 GiB）允许它涨到 4.18 GiB RSS，而宿主机常驻 infra 容器 +
+# 编辑器已占约 6 GiB、swap 用满。单点实测（同一用例、同一机器）：默认堆峰值 2230 MB 通过；
+# `-Xmx2g` 报 `OutOfMemoryError: Java heap space`；`-Xmx2560m`／`-Xmx3g` 均 1/1 通过
+# （峰值 2382／2236 MB）。取 3g：高于实测需求，又把 fork 的 RSS 封在约 3.2 GiB 内，不再被内核挑中。
+# SDK 的 surefire 只配了 failIfNoTests、没有自带 argLine，因此这个 -DargLine 不会覆盖既有 JVM 参数。
+MAVEN_ARG_LINE = '-Xmx3g'
 
 
 def read_json(path):
@@ -314,7 +322,8 @@ def lock_held():
 
 def maven_command(report_path, properties=None):
     command = [str(TASK / 'lock.sh'), str(TASK / 'mvn.sh'), '-f', str(PROJECT / 'pom.xml'),
-               'clean', 'test', '-Dmigration.parity.java.output=' + str(report_path)]
+               'clean', 'test', '-Dmigration.parity.java.output=' + str(report_path),
+               '-DargLine=' + MAVEN_ARG_LINE]
     for name, value in sorted((properties or {}).items()):
         command.append(f'-D{name}={value}')
     if lock_held():
@@ -452,6 +461,7 @@ def main():
                'tsInputs': str(ts_inputs), 'tsInputEnvs': targets,
                'tsInputEnvsNotInProbeTable': sorted(set(discovered) - set(configured)),
                'excludedTsInputEnvs': list(EXCLUDED_TS_INPUT_ENVS),
+               'mavenArgLine': MAVEN_ARG_LINE,
                'serialEntries': serial_summary,
                'serialProperties': sorted(properties), 'serialEnv': sorted(serial_env),
                'propertyDrivenReplays': java_property_replays()}
