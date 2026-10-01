@@ -124,6 +124,101 @@ def canonical(value):
     return json.dumps(value, sort_keys=True, ensure_ascii=True, separators=(',', ':'), allow_nan=False)
 
 
+# ---------------------------------------------------------------------------
+# 已知无法路由的用例登记（known-gaps.json）
+#
+# 唯一允许的规则是「冻结测试没有输入重放入口」：Java 测试类源码里既没有 migration.* 属性、也不读
+# MIGRATION_*_TS_INPUTS、也不写 EVIDENCE_INPUTS_PATH，因此全量 Java 阶段根本产不出 java-inputs 行。
+# 登记必须逐条机器可核验，且只影响这些 caseId 的「Java 输入」一项——样本顺序/唯一性、断言比较、
+# 逐用例覆盖等其它校验一律不放宽；登记外的任何缺口仍然硬失败。
+# ---------------------------------------------------------------------------
+KNOWN_GAPS = TASK / 'known-gaps.json'
+KNOWN_GAP_RULES = ('frozen-test-without-replay-entry-v1',)
+KNOWN_GAP_EVIDENCE_KINDS = ('report', 'source', 'bundle-error', 'absence-scan')
+REPLAY_ENTRY_MARKERS = ('System.getProperty("migration.', 'MIGRATION_', 'EVIDENCE_INPUTS_PATH')
+KNOWN_GAP_FIELDS = {'caseId', 'local', 'tsFile', 'javaTest', 'javaMethod', 'javaSource', 'ruleId',
+                    'newFile', 'evidence'}
+
+
+def _task_path(value):
+    """登记里的路径：相对路径按任务根解析，绝对路径原样；两者都必须真实存在（newFile 另行判定）。"""
+    path = Path(value)
+    return path if path.is_absolute() else TASK / path
+
+
+def known_gaps(catalog=None, mapping=None, path=None):
+    """读取并逐条核验已知缺口登记；返回 {caseId: 登记项（含规则里的 reason/remediation）}。"""
+    gaps_path = Path(path) if path else KNOWN_GAPS
+    require(gaps_path.is_file(), f'缺少已知缺口登记：{gaps_path}')
+    document = read(gaps_path)
+    require(document.get('schemaVersion') == 1, '已知缺口登记版本无效')
+    rules = document.get('rules')
+    require(isinstance(rules, dict) and set(rules) == set(KNOWN_GAP_RULES),
+            f'已知缺口规则只允许 {list(KNOWN_GAP_RULES)}，禁止自由文本理由')
+    for name, rule in rules.items():
+        require(isinstance(rule, dict) and set(rule) == {'reason', 'remediation'},
+                f'规则字段不合法：{name}')
+        require(isinstance(rule['reason'], str) and rule['reason'].strip(), f'规则缺少原因：{name}')
+        remediation = rule['remediation']
+        require(isinstance(remediation, dict) and set(remediation) == {'wiring', 'impact'}
+                and all(isinstance(remediation[key], str) and remediation[key].strip()
+                        for key in ('wiring', 'impact')), f'规则缺少补齐说明：{name}')
+    entries = document.get('cases')
+    # 空列表是合法状态（当前没有已核验的不可路由用例），此时全部校验照旧严格。
+    require(isinstance(entries, list), '已知缺口登记的 cases 必须是列表')
+    catalog = catalog or read(TASK / 'module-tests.json')
+    mapping = mapping or read(TASK / 'test-map.json')
+    owners = {case['id']: file['path'] for file in catalog['files'] for case in file['cases']}
+    identities = {case['id']: [item['className'] + '#' + item['name'] for item in case['java']]
+                  for case in mapping['cases']}
+    result = {}
+    for entry in entries:
+        require(isinstance(entry, dict) and set(entry) == KNOWN_GAP_FIELDS,
+                f'已知缺口条目字段不合法：{sorted(entry) if isinstance(entry, dict) else entry}')
+        case_id = entry['caseId']
+        require(case_id in owners, f'已知缺口登记了冻结清单外的 caseId：{case_id}')
+        require(case_id not in result, f'已知缺口 caseId 重复：{case_id}')
+        require(owners[case_id] == entry['tsFile'],
+                f'已知缺口的 TS 文件与清单不符：{case_id}')
+        require(entry['javaTest'] + '#' + entry['javaMethod'] in identities.get(case_id, []),
+                f'已知缺口的 Java 注册身份与映射表不符：{case_id}')
+        require(entry['ruleId'] in rules, f'已知缺口 ruleId 未登记：{case_id}')
+        require(isinstance(entry['local'], str) and entry['local'].strip(), f'已知缺口缺少局部：{case_id}')
+        source = _task_path(entry['javaSource'])
+        require(source.is_file(), f'已知缺口的 Java 源码不存在：{entry["javaSource"]}')
+        text = source.read_text(errors='replace')
+        markers = [marker for marker in REPLAY_ENTRY_MARKERS if marker in text]
+        require(not markers,
+                f'已知缺口的 Java 测试类其实存在输入重放入口（{markers[:2]}），登记不成立：{case_id}')
+        require(not _task_path(entry['newFile']).exists(),
+                f'已知缺口声明"尚需新建"的文件已存在，登记需更新：{entry["newFile"]}')
+        evidence = entry['evidence']
+        require(isinstance(evidence, list) and evidence, f'已知缺口缺少证据指针：{case_id}')
+        for item in evidence:
+            require(isinstance(item, dict) and item.get('kind') in KNOWN_GAP_EVIDENCE_KINDS,
+                    f'已知缺口证据类型不合法：{case_id}')
+            if item['kind'] in ('report', 'source'):
+                require(isinstance(item.get('path'), str) and _task_path(item['path']).exists(),
+                        f'已知缺口证据指针不存在：{case_id} / {item.get("path")}')
+            else:
+                require(isinstance(item.get('detail'), str) and item['detail'].strip(),
+                        f'已知缺口证据缺少说明：{case_id}')
+        result[case_id] = {**entry, 'reason': rules[entry['ruleId']]['reason'],
+                           'remediation': rules[entry['ruleId']]['remediation'],
+                           'registrySha256': digest(gaps_path)}
+    return result
+
+
+def known_unroutable_summary(catalog=None, mapping=None, path=None):
+    """报告/manifest 统一使用的计数与 caseId 列表。"""
+    gaps = known_gaps(catalog, mapping, path)
+    rule_ids = {}
+    for entry in gaps.values():
+        rule_ids[entry['ruleId']] = rule_ids.get(entry['ruleId'], 0) + 1
+    return {'count': len(gaps), 'cases': sorted(gaps), 'ruleIds': rule_ids,
+            'registrySha256': digest(Path(path) if path else KNOWN_GAPS)}
+
+
 def capture_rows(path, identity):
     rows = {}
     for number, line in enumerate(Path(path).read_text().splitlines(), 1):
@@ -825,6 +920,8 @@ def compare(args):
     capture_names = {'inputPlan': 'input_plan', 'tsInputs': 'ts_inputs', 'javaInputs': 'java_inputs',
                      'tsAssertions': 'ts_assertions', 'javaAssertions': 'java_assertions'}
     capture_paths = {name: getattr(args, option, None) for name, option in capture_names.items()}
+    # 已知缺口登记无论走不走完整验收分支都要先核验（登记本身有问题就必须失败）。
+    gaps = known_gaps(catalog, mapping, getattr(args, 'known_gaps', None))
     if getattr(args, 'command', 'compare') == 'check' or observations.get('captureSha256') is not None or any(capture_paths.values()):
         require(all(capture_paths.values()) and isinstance(observations.get('captureSha256'), dict),
                 '完整验收缺少两端原始采集、独立输入/断言计划或校验值')
@@ -838,7 +935,15 @@ def compare(args):
             ('tsInputs', 'sampleId'), ('javaInputs', 'sampleId'),
             ('tsAssertions', 'assertionId'), ('javaAssertions', 'assertionId'))}
         for name, rows in raw_captures.items():
-            same_keys(cases, rows, f'{name} 原始采集用例')
+            if name != 'javaInputs':
+                same_keys(cases, rows, f'{name} 原始采集用例')
+                continue
+            missing = set(cases) - set(rows)
+            unrelated = sorted(missing - set(gaps))
+            require(not unrelated and not set(rows) - set(cases),
+                    f'javaInputs 原始采集用例：缺失 {unrelated[:4]}；多余 {sorted(set(rows) - set(cases))[:4]}')
+            routed = sorted(set(gaps) & set(rows))
+            require(not routed, f'已登记为无消费入口的用例出现了 Java 输入，登记需更新：{routed[:4]}')
         revision, run_hashes = runtime_provenance(args, catalog, capture_paths)
         require(observations['javaRevision'] == revision, '汇总 Java 版本与实际运行来源不符')
         require(observations.get('runManifestSha256') == run_hashes, '汇总运行 manifest 校验值不符')
@@ -847,11 +952,21 @@ def compare(args):
     assertion_count = 0
     for key, observation in observed.items():
         require(bool(re.fullmatch(r'[0-9a-f]{64}', observation['inputSha256'])), f'缺少输入/前置状态校验值：{key}')
-        require(observation['inputSha256'] == observation['tsInputSha256'] == observation['javaInputSha256'], f'TS/Java 输入或前置状态不同：{key}')
+        unroutable = gaps.get(key) if capture_paths['inputPlan'] else None
+        if unroutable is None:
+            require(observation['inputSha256'] == observation['tsInputSha256'] == observation['javaInputSha256'], f'TS/Java 输入或前置状态不同：{key}')
+        else:
+            require(observation['inputSha256'] == observation['tsInputSha256'],
+                    f'已登记用例的 TS 输入摘要不符：{key}')
+            require(observation.get('knownUnroutable', {}).get('ruleId') == unroutable['ruleId'],
+                    f'已登记用例缺少登记标记或规则不符：{key}')
+            require(observation.get('javaInputSha256') is None
+                    and observation.get('inputSamples', {}).get('Java') == [],
+                    f'已登记用例的 Java 输入应为空：{key}')
         if capture_paths['inputPlan']:
             samples = observation.get('inputSamples')
             require(isinstance(samples, dict) and set(samples) == {'TS', 'Java'}, f'缺少两端实际输入样本：{key}')
-            for side in ('TS', 'Java'):
+            for side in ('TS', 'Java') if unroutable is None else ('TS',):
                 require([row['sampleId'] for row in samples[side]] == plan[key]['sampleIds'],
                         f'{side} 输入样本数量、顺序或 ID 不符：{key}')
                 raw = raw_captures['tsInputs' if side == 'TS' else 'javaInputs'][key]
@@ -880,8 +995,12 @@ def compare(args):
             validate_semantic_observations(key, plan[key], observation['ts'])
             validate_semantic_observations(key, plan[key], observation['java'])
             for side, label in (('ts', 'TS'), ('java', 'Java')):
+                if side == 'java' and gaps.get(key) is not None:
+                    continue
                 validate_branch_observations(key, plan[key], observation['inputSamples'][label], observation[side])
     return {'files': len(files), 'cases': len(cases), 'javaCases': len(java_owners),
+            'knownUnroutableCases': known_unroutable_summary(catalog, mapping,
+                                                             getattr(args, 'known_gaps', None)),
             'comparedAssertions': assertion_count,
             'justifiedUnexecutedAssertions': sum(len(case.get('unexecutedSites', {})) for case in plan.values())
                 if capture_paths['inputPlan'] else 0,
@@ -957,6 +1076,9 @@ def main():
         command.add_argument('--java-revision', help='compare 调试时核对源码摘要；check 始终从当前 Java 工作树重新计算')
         for name in ('input-plan', 'ts-inputs', 'java-inputs', 'ts-assertions', 'java-assertions'):
             command.add_argument('--' + name)
+        # 已知缺口登记：默认就是任务根下的唯一登记；compare 允许指向夹具（自测用），
+        # check 是正式验收，下面强制它只能用默认登记。
+        command.add_argument('--known-gaps', default=str(KNOWN_GAPS))
         for side in ('ts', 'java'):
             command.add_argument('--' + side + '-run-manifest')
     args = parser.parse_args()
@@ -971,6 +1093,8 @@ def main():
             print(json.dumps({'modules': result['modules'], 'sourceAndTestFiles': len(result['moduleFiles']), 'testFiles': len(result['files']), 'cases': sum(len(f['cases']) for f in result['files'])}, ensure_ascii=False))
         else:
             if args.command == 'check':
+                require(Path(args.known_gaps).resolve() == KNOWN_GAPS.resolve(),
+                        '正式验收不允许替换已知缺口登记')
                 current = collect()
                 require(current == read(args.catalog), '冻结清单与重新清点不一致：存在源码/测试/参数行/模块范围漂移；禁止直接覆盖后当作通过')
                 args.java_revision = java_revision()

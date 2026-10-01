@@ -159,6 +159,12 @@
 
 **B 的新洞察**：839 MB 里 **4 行占 795 MB**（单行 264.8／264.8／132.4／132.4 MB，行号 962–965），即**单行 JSON 反序列化本身就是主要内存峰值** → 只把 `read_text().splitlines()` 换逐行读不够。已要求代理：①先实测单行解析峰值再设计；②若绕过巨行反序列化，**必须保持与比较层口径一致**（用 `test-audit.test.cjs`／`test-evidence-semantics.py` + 一次真跑证明，禁止“OOM 消失但审计不过”的假通过）；③优先对齐既有「大数组记 `{length, sha256}` + 逐字节见证」约定（`aesgcm-man`／`wallet-wire` 有先例），不得擅改计划/比较层口径。
 
+**第二处结构性阻塞与裁决（20260901 13:50）**：A2 用 run-14 产物做预测检查发现 —— `evidence-bundle` 对**输入值**严格比较，而 auth-fetch 家族有 **25 例**的 TS/Java 输入值**按设计不同**（逐局部 gate 明确归一，bundle 不做）→ 若不处理，run-16 会在 `bundle` 以「TS/Java 输入或前置状态不同」失败（既有结构问题，此前被“缺用例”挡住、从未跑到）。
+分布：`AuthFetch.boundary.test.ts` 15（`.kind`：TS `AuthFetch.boundaryInput` vs Java `AuthFetch.boundaryEntry`；`.mockInputs.waitResults[i].value`：TS `{"type":"undefined"}` vs Java `null`）、`AuthFetch.knownTxids.test.ts` 6（`.paymentCalls[i].response.bodyUsed`：TS `false` vs Java **无该键**）、`AuthFetch.test.ts` 4（`.mockReturns.request.name`：TS `Error` vs Java `SdkException`）；涉及局部 `auth-fetch-boundary` 15／`auth-fetch-known-txids` 6／`auth-fetch-primary-cert-request` 3／`auth-fetch-primary-retry` 1。
+依据（冻结 gate 的硬 `require`）：`auth-fetch-knownTxids-payment-local-gate.py:159-162`、`auth-fetch-boundary-entry-local-gate.py:36-48` 与 `:207-208`、`auth-fetch-primary-cert-request-local-gate.py:195`。
+**裁决：批准方案 A** —— 在 `evidence-bundle.py` 加**显式、逐条可核验**的跨语言替换表（按 `(文件, JSON 路径, TS 形状, Java 形状)` 精确匹配，形状不符即不动、其它差异照旧硬失败），在算 `ts_hash`/`java_hash` 之前应用，并报 `crossLanguageInputSubstitutions`（计数 + caseId 列表）；**4 条自测**（命中替换／形状不符不替换／表外差异硬失败／篡改表失败）。备选（改 TS 探针写 Java 形状）会推翻已冻结 gate 的判据，**否决**。
+执行顺序：任务②（`known-gaps.json` + `knownUnroutableCases`，已完成 6 条）→ 方案 A（含自测）→ 任务①（第 7 例，已预验证）→ 静默 10 分钟 → `full-run-16`。
+
 **堆修法已实测并获批准（20260901 13:35）**：A2 补足硬证据 —— 内核 `oom-kill: constraint=NONE … global_oom, task=java`、`Killed process (java) … anon-rss:4183468kB`，Maven `exit 137`；根因是 surefire fork 默认堆上限 ≈ 物理内存 1/4（≈3.9 GiB），而本机 15 GiB 已被 infra 容器+编辑器占约 6 GiB、**swap 用满 3.9/4.0 GiB**。
 同一用例实测：默认 1/1 通过（峰值 2230 MB）、`-Xmx2g` **OOM 失败**、`-Xmx2560m` 通过（2382 MB）、**`-Xmx3g` 通过（2236 MB）**；逐局部 recipe 里**没有**堆参数可抄（`capture-primitives-last-local.py` 只有 `clean test -Dtest=…`，逐局部能过只因当时宿主机空闲），SDK 的 surefire 未自带 `argLine`，故 `-DargLine=` 生效。
 **已批准**：`run-full-java-capture.py` 加 `-DargLine=-Xmx3g`（常量 `MAVEN_ARG_LINE`，注释含 dmesg/exit137 证据与实测表），报告新增 `mavenArgLine`。风险已知悉并接受：该 flag 对整套 suite 生效，若另有 >3 GiB 的类会以**可定位的 `OutOfMemoryError`** 暴露（优于内核 137）；备选的"停宿主机 infra 容器"不在授权范围。证据：`.cache/evidence/aesgcm-heap-probe/{default,xmx2g,xmx2560m,xmx3g}/`；`xmx3g` 的 `java-inputs.jsonl` 2 行与全量计划逐项一致 ✓。

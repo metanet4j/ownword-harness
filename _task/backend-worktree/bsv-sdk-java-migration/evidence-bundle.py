@@ -79,8 +79,18 @@ def build(args):
     same(cases, plan, '输入计划用例')
     ts_inputs, java_inputs = grouped(args.ts_inputs, 'sampleId'), grouped(args.java_inputs, 'sampleId')
     ts_results, java_results = grouped(args.ts_assertions, 'assertionId'), grouped(args.java_assertions, 'assertionId')
-    for label, rows in [('TS 输入', ts_inputs), ('Java 输入', java_inputs), ('TS 断言', ts_results), ('Java 断言', java_results)]:
+    # 已知缺口登记（known-gaps.json）只豁免「已核验无输入重放入口」的 caseId 的 Java 输入一项；
+    # 登记外的缺失或多余一律硬失败，其它三张轨迹照旧逐用例全等。
+    gaps = audit.known_gaps(catalog, mapping, getattr(args, 'known_gaps', None))
+    for label, rows in [('TS 输入', ts_inputs), ('TS 断言', ts_results), ('Java 断言', java_results)]:
         same(cases, rows, label + '用例')
+    missing_java = sorted(set(cases) - set(java_inputs) - set(gaps))
+    extra_java = sorted(set(java_inputs) - set(cases))
+    if missing_java or extra_java:
+        fail(f'Java 输入用例：缺失 {missing_java[:4]}；多余 {extra_java[:4]}')
+    routed = sorted(set(gaps) & set(java_inputs))
+    if routed:
+        fail(f'已登记为无消费入口的用例出现了 Java 输入，登记需更新：{routed[:4]}')
     audit.validate_plan(catalog, mapping, plan)
     output = []
     for case_id in cases:
@@ -93,7 +103,8 @@ def build(args):
         if not isinstance(expected_assertions, list) or not expected_assertions or len(set(expected_assertions)) != len(expected_assertions):
             fail(f'独立断言计划为空或重复：{case_id}')
         inputs = {}
-        for label, rows in [('TS', ts_inputs[case_id]), ('Java', java_inputs[case_id])]:
+        for label, rows in ([('TS', ts_inputs[case_id])] if case_id in gaps
+                            else [('TS', ts_inputs[case_id]), ('Java', java_inputs[case_id])]):
             unique(rows, 'sampleId', label + ' 输入')
             if [row['sampleId'] for row in rows] != expected_samples:
                 fail(f'{label} 输入样本顺序、数量或 ID 不符：{case_id}')
@@ -101,8 +112,9 @@ def build(args):
                 fail(f'{label} 输入缺少实际值：{case_id}')
             inputs[label] = [{'sampleId': row['sampleId'], 'value': row['value']} for row in rows]
         ts_hash = hashlib.sha256(canonical(inputs['TS']).encode()).hexdigest()
-        java_hash = hashlib.sha256(canonical(inputs['Java']).encode()).hexdigest()
-        if ts_hash != java_hash:
+        java_hash = None if case_id in gaps else \
+            hashlib.sha256(canonical(inputs['Java']).encode()).hexdigest()
+        if java_hash is not None and java_hash != ts_hash:
             fail(f'TS/Java 输入或前置状态不同：{case_id}')
         results = {}
         for label, rows in [('TS', ts_results[case_id]), ('Java', java_results[case_id])]:
@@ -116,12 +128,25 @@ def build(args):
             audit.compare_actuals(case_id, plan[case_id], left['id'], left['value'], right['value'])
         for side in ('TS', 'Java'):
             audit.validate_semantic_observations(case_id, plan[case_id], results[side])
+            if side == 'Java' and case_id in gaps:
+                continue
             audit.validate_branch_observations(case_id, plan[case_id], inputs[side], results[side])
-        output.append({'id': case_id, 'inputSha256': ts_hash, 'tsInputSha256': ts_hash,
-                       'javaInputSha256': java_hash, 'inputSamples': inputs,
-                       'ts': results['TS'], 'java': results['Java']})
+        entry = {'id': case_id, 'inputSha256': ts_hash, 'tsInputSha256': ts_hash,
+                 'javaInputSha256': java_hash, 'inputSamples': inputs,
+                 'ts': results['TS'], 'java': results['Java']}
+        if case_id in gaps:
+            entry['knownUnroutable'] = {'ruleId': gaps[case_id]['ruleId'],
+                                        'local': gaps[case_id]['local'],
+                                        'javaTest': gaps[case_id]['javaTest'] + '#'
+                                                    + gaps[case_id]['javaMethod'],
+                                        'newFile': gaps[case_id]['newFile'],
+                                        'reason': gaps[case_id]['reason']}
+        output.append(entry)
     revision, run_hashes = audit.runtime_provenance(args, catalog, capture_paths)
     return {'upstreamCommit': catalog['upstreamCommit'], 'javaRevision': revision,
+            'knownUnroutableCases': audit.known_unroutable_summary(
+                catalog, mapping, getattr(args, 'known_gaps', None)),
+            'knownGapsSha256': digest(Path(getattr(args, 'known_gaps', None) or audit.KNOWN_GAPS)),
             'runManifestSha256': run_hashes,
             'catalogSha256': digest(args.catalog),
             'tsReportSha256': sorted(digest(p) for p in args.ts_report),
@@ -161,7 +186,9 @@ def capture(args):
                       'TS 采集来源工作区有修改')
         return revision
 
+    known = audit.known_unroutable_summary(catalog, mapping, getattr(args, 'known_gaps', None))
     manifest = {'schemaVersion': 1, 'side': args.side, 'runId': uuid.uuid4().hex,
+                'knownUnroutableCases': known, 'knownGapsSha256': known['registrySha256'],
                 'producerSha256': digest(__file__), 'upstreamCommit': catalog['upstreamCommit'],
                 'sourceRevision': source_revision(), 'catalogSha256': digest(args.catalog),
                 'mappingSha256': digest(args.mapping), 'inputPlanSha256': digest(args.input_plan),
@@ -200,6 +227,7 @@ def capture_main():
     parser.add_argument('--side', choices=('ts', 'java'), required=True)
     for name in ('catalog', 'mapping', 'input-plan', 'inputs', 'assertions', 'output'):
         parser.add_argument('--' + name, required=True)
+    parser.add_argument('--known-gaps', default=str(audit.KNOWN_GAPS))
     parser.add_argument('--report', action='append', required=True)
     parser.add_argument('command', nargs=argparse.REMAINDER)
     args = parser.parse_args(sys.argv[2:])
@@ -215,6 +243,7 @@ def main():
                  'ts-assertions', 'java-assertions', 'output'):
         parser.add_argument('--' + name, required=True)
     parser.add_argument('--java-revision', help='只校验运行来源版本，不能覆盖 manifest 中的版本')
+    parser.add_argument('--known-gaps', default=str(audit.KNOWN_GAPS))
     parser.add_argument('--ts-run-manifest')
     parser.add_argument('--java-run-manifest')
     parser.add_argument('--ts-report', action='append', required=True)

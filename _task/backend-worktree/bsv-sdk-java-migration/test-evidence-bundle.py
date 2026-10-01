@@ -48,6 +48,33 @@ class BundleTest(unittest.TestCase):
                 'assertionResults': [{'ancestorTitles': ['suite'], 'title': 'first', 'status': 'passed'},
                                      {'ancestorTitles': ['suite'], 'title': 'second', 'status': 'passed'}]}]})
         self.path('surefire.xml').write_text('<testsuite tests="2" failures="0" errors="0" skipped="0"><testcase classname="ExampleTest" name="first"/><testcase classname="ExampleTest" name="second"/></testsuite>')
+        self.path('ExampleTest.java').write_text('// 夹具：无任何输入重放入口\nclass ExampleTest {}\n')
+        self.manifests()
+
+    def registry(self, cases=None, rule=None):
+        """夹具用的已知缺口登记：默认空列表（全部校验照旧严格）。"""
+        self.write('known-gaps.json', {
+            'schemaVersion': 1,
+            'rules': {'frozen-test-without-replay-entry-v1': rule or {
+                'reason': '夹具：冻结测试类没有输入重放入口。',
+                'remediation': {'wiring': '夹具：新增重放并接线。', 'impact': '夹具：会改 java_revision。'}}},
+            'cases': cases or []})
+        return str(self.path('known-gaps.json'))
+
+    def gap_entry(self, case_id='case2', method='second', **overrides):
+        entry = {'caseId': case_id, 'local': 'fixture-local',
+                 'tsFile': 'src/compat/example.test.ts', 'javaTest': 'ExampleTest',
+                 'javaMethod': method, 'javaSource': str(self.path('ExampleTest.java')),
+                 'ruleId': 'frozen-test-without-replay-entry-v1',
+                 'newFile': str(self.path('ExampleTestInputReplay.java')),
+                 'evidence': [{'kind': 'source', 'path': str(self.path('ExampleTest.java'))}]}
+        entry.update(overrides)
+        return entry
+
+    def drop_java_inputs(self, case_id):
+        """删掉某个用例的 Java 输入行并重写来源清单（模拟"无消费入口"）。"""
+        rows = [json.loads(line) for line in self.path('java-inputs.jsonl').read_text().splitlines()]
+        self.write_lines('java-inputs.jsonl', [row for row in rows if row['caseId'] != case_id])
         self.manifests()
 
     def manifests(self):
@@ -87,7 +114,8 @@ class BundleTest(unittest.TestCase):
                 '--java-assertions', str(self.path('java-assertions.jsonl')), '--ts-report', str(self.path('jest.json')),
                 '--java-report', str(self.path('surefire.xml')),
                 '--ts-run-manifest', str(self.path('ts.manifest.json')),
-                '--java-run-manifest', str(self.path('java.manifest.json'))]
+                '--java-run-manifest', str(self.path('java.manifest.json')),
+                '--known-gaps', self.registry()]
 
     def bundle(self):
         return subprocess.run(['python3', str(TASK/'evidence-bundle.py'), *self.common(),
@@ -368,6 +396,7 @@ class BundleTest(unittest.TestCase):
             '--catalog', str(self.path('catalog.json')), '--mapping', str(self.path('mapping.json')),
             '--input-plan', str(self.path('plan.json')), '--inputs', str(self.path('fresh/inputs.jsonl')),
             '--assertions', str(self.path('fresh/assertions.jsonl')), '--report', str(self.path('fresh/surefire.xml')),
+            '--known-gaps', self.registry(),
             '--output', str(self.path('fresh/run.json')), '--', sys.executable, str(self.path('producer.py')),
             'clean', 'test']
 

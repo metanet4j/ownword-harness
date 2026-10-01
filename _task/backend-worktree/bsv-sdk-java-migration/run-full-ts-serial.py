@@ -275,6 +275,57 @@ def rows_of(path):
     return read_rows(path) if Path(path).is_file() else []
 
 
+def merge_extra_probes(job, subdir, run_id, plan_path, timeout):
+    """额外直写探针：独立 jest 调用采集，并按登记的 `replaces` 覆盖入口探针的同身份行。
+
+    必须独立调用：多个直写探针在同一次 jest 里会争用同一个模块工厂（`jest.doMock` 后注册者生效），
+    而且同一 (caseId, sampleId) 会被两个探针各写一行，破坏「逐用例样本唯一」。本函数只并入输入行；
+    额外调用的断言轨迹写进丢弃文件（入口调用已经覆盖全部用例的断言）。
+    `replaces` 之外的覆盖、以及入口运行没有的身份，一律报错而不是静默接受。
+    """
+    extras = job.get('entry', {}).get('extraProbes') or []
+    if not extras:
+        return None
+    inputs = subdir / 'inputs.jsonl'
+    rows = rows_of(inputs)
+    index = {(row.get('caseId'), row.get('sampleId')): position for position, row in enumerate(rows)}
+    replaced = []
+    for number, extra in enumerate(extras, 1):
+        probe, allowed = extra['probe'], set(extra['replaces'])
+        stem = subdir / ('extra-probe-' + str(number))
+        command = [str(TASK / 'pnpm.sh'), '--dir', str(SDK), 'exec', 'jest', '--runInBand',
+                   '--watchman=false', '--runTestsByPath', job['entry']['file'], '--setupFilesAfterEnv',
+                   str(TASK / 'ts-offline-guard.cjs'), str(TASK / probe), str(TASK / 'capture-parity.cjs'),
+                   '--json', '--outputFile=' + str(stem.with_suffix('.jest.json'))]
+        env = local_environment(run_id, subdir, plan_path)
+        env.update(EVIDENCE_INPUTS_PATH=str(stem.with_suffix('.inputs.jsonl')),
+                   EVIDENCE_ASSERTIONS_PATH=str(stem.with_suffix('.assertions.jsonl')),
+                   MIGRATION_PARITY_TS_OBSERVATIONS=str(stem.with_suffix('.parity.jsonl')),
+                   MIGRATION_NETWORK_LOG=str(stem.with_suffix('.network.jsonl')))
+        log = subdir / ('extra-probe-' + str(number) + '.log')
+        try:
+            with log.open('w') as stream:
+                result = subprocess.run(command, cwd=TASK, env=env, stdout=stream,
+                                        stderr=subprocess.STDOUT, timeout=timeout)
+        except (subprocess.TimeoutExpired, OSError) as error:
+            return f'{probe} 无法完成：{error}'
+        if result.returncode:
+            return f'{probe} 退出码非零（日志 {log.name}）'
+        produced = rows_of(stem.with_suffix('.inputs.jsonl'))
+        if not produced:
+            return f'{probe} 未产出输入行'
+        for row in produced:
+            key = (row.get('caseId'), row.get('sampleId'))
+            if key not in index:
+                return f'{probe} 产出了入口运行没有的身份：{key}'
+            if key[0] not in allowed:
+                return f'{probe} 未登记替换该 caseId：{key[0]}'
+            rows[index[key]] = row
+            replaced.append({'caseId': key[0], 'sampleId': key[1], 'probe': probe})
+    inputs.write_text(''.join(json.dumps(row, ensure_ascii=False) + '\n' for row in rows))
+    return replaced
+
+
 def order_rows(rows, plan, plan_path):
     """按汇总计划重排去重，复用 run-full-ts-capture.order_rows。
 
@@ -364,6 +415,12 @@ def capture_one(job, run_dir, run_id, timeout, resume):
         return record
     if record['exitCode']:
         record['problems'].append(f'入口命令退出码非零：{record["exitCode"]}')
+    if job['shape'] == 'direct' and not record['problems']:
+        replaced = merge_extra_probes(job, subdir, run_id, plan_path, timeout)
+        if isinstance(replaced, str):
+            record['problems'].append('额外探针失败：' + replaced)
+        elif replaced:
+            record['extraProbes'] = replaced
     if job['shape'] == 'vector' and not record['problems']:
         failure = collect_vector(subdir)
         if failure:
