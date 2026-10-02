@@ -2,15 +2,14 @@
 
 ## 当前目标（Current Objective）
 
-完成 v0.4.0 个人主页原型。状态与唯一下一步见 [progress.md](progress.md)，功能依赖和验收引用见 [feature_list.json](feature_list.json)。
+v0.4.0 个人主页原型已交付。状态与唯一下一步见 [progress.md](progress.md)，逐项提交及证据见 [feature_list.json](feature_list.json)，验收范围见[交付说明](交付验收v0.4.0-20261002-183602.md)。
 
 ## 恢复入口（Next Session Startup）
 
-1. 按 [AGENTS.md](AGENTS.md) 读取依据及当前状态，核对 `ownword-prototype` 的分支、HEAD 与工作区差异。
-2. 本目录运行 `./init.ps1` 或 `./init.sh`；需要预览时使用 `-Serve` 或 `--serve`，端口为 4314。
-3. 先核实 `.runtime/server.json` 中的预览进程，再决定复用或重启；只推进清单允许的下一项。
+1. 按 [AGENTS.md](AGENTS.md) 读取依据和当前状态，核对 `ownword-prototype` 分支及工作区差异。
+2. 在本目录运行 `./init.ps1`；需要重启预览时先核实 `.runtime/server.json`，再使用 `./init.ps1 -Serve`。端口为 4314。
+3. 当前没有待实施功能。依据胡先生后续复核意见登记调整项，再进入实施。
 
-## 文件与阻塞（Files / Blockers）
+## 文件与边界（Files / Blockers）
 
-- 任务规则、初始化和证据位于本目录；界面源码在 `ownword-prototype`，两者由主代理分别提交。
-- 当前没有需要用户决定的阻塞；待人工视觉复核的功能保持 `needs-review`。
+任务状态与交付说明由根仓库管理；源码、构建产物及浏览器证据在独立原型 worktree。仅有人工视觉复核尚未进行，无已知实现阻塞。旧版 4313 预览未改动。

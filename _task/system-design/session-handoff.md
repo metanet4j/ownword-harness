@@ -1,7 +1,7 @@
-# 当前进展与交接
+# 会话交接
 
-v0.3.0 品质基线已完成并提交1355bdc，保留人工视觉复核。用户已授权建立新worktree并完成v0.4.0个人主页原型。
+v0.4.0 个人主页原型已交付，当前状态与唯一下一步见 [progress.md](progress.md)。恢复前读取本目录规则和[版本任务清单](../prototype-worktree/ownword-v0.4.0/feature_list.json)。
 
-当前在独立分支codex/prototype-v0.4.0-homepage推进P01–P06。功能状态与证据只查[版本任务清单](../prototype-worktree/ownword-v0.4.0/feature_list.json)，产品行为以[当前PRD](spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md)为准。
+界面源码位于独立原型 worktree，根仓库仅维护任务状态与文档。到 `_task/prototype-worktree/ownword-v0.4.0` 运行 `./init.ps1` 检查；需要恢复 4314 预览时先核实该任务 `.runtime/server.json`，再执行 `./init.ps1 -Serve`。
 
-唯一下一步：完成新环境检查，依次实现公开主页、Hero、身份卡、内容展示、阅读与版本关联。旧预览4313保持运行，新版本使用4314。
+等待胡先生视觉复核。未经新需求不扩展版本，不将代理检查记为用户批准。

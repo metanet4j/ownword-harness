@@ -9,12 +9,12 @@
     "done",
     "archived"
   ],
-  "activeItem": "prototype-homepage-v040",
+  "activeItem": null,
   "features": [
     {
       "id": "prototype-homepage-v040",
       "name": "v0.4.0 公开个人主页高保真原型",
-      "status": "in-progress",
+      "status": "needs-review",
       "goal": "基于v0.3.0品质基线完成公开个人主页、内容展示、阅读与版本关联。",
       "scope": "P01–P06可交互高保真模拟原型。",
       "dependencies": [
@@ -29,10 +29,12 @@
       "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
       "harnessPath": "_task/prototype-worktree/ownword-v0.4.0",
       "output": "_task/prototype-worktree/ownword-v0.4.0/ownword-prototype",
-      "implementationStatus": "in-progress",
+      "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "evidence": "_task/prototype-worktree/ownword-v0.4.0/feature_list.json",
-      "nextStep": "完成环境检查，按P01–P06实施。"
+      "nextStep": "胡先生视觉复核；依据明确意见登记后续调整。",
+      "latestPrototypeCommit": "7c505ee",
+      "delivery": "_task/prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261002-183602.md"
     },
     {
       "id": "prototype-artifact-v030",
