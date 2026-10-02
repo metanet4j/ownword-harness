@@ -104,6 +104,7 @@ console.log(run(process.execPath, ['check-model.cjs']));
 console.log(run(process.execPath, ['check-content.cjs']));
 console.log(run(process.execPath, ['check-artifact.cjs']));
 console.log(run(process.execPath, ['check-ui.cjs']));
+if (fs.existsSync(path.join(prototype,'check-homepage.cjs'))) console.log(run(process.execPath,['check-homepage.cjs']));
 console.log(run(process.execPath, [path.join(workspace, '.agents/skills/harness-creator/scripts/validate-harness.mjs'),
   '--target', taskDir]));
 const python = process.platform === 'win32' ? 'python' : 'python3';
@@ -131,3 +132,4 @@ if (mode === '--serve') {
   log.end();
   process.exitCode = code ?? 0;
 }
+

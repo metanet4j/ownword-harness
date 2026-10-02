@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": null,
-  "nextFeature": "P01",
+  "activeFeature": "P02",
+  "nextFeature": "P02",
   "authorization": "用户已授权新 worktree 连续完成 P01–P06；已验证功能等待人工视觉复核期间继续后续功能。",
   "environment": {
     "worktree": "ownword-prototype",
@@ -54,7 +54,7 @@
       "id": "P01",
       "name": "公开个人主页",
       "description": "沿用 identity-view 路由和身份卡，按 BAP ID 聚合公开发布内容，补齐加载、失败与空态。",
-      "status": "not-started",
+      "status": "needs-review",
       "dependencies": [
         "H00"
       ],
@@ -65,13 +65,17 @@
         "访客无需钱包即可查看对应身份与公开内容，聚合按作者 BAP ID 隔离。",
         "正常、加载、失败重试、空内容与无效入口可恢复，刷新和返回连贯。",
         "受影响模型、浏览器与初始化检查通过，证据归档并独立提交。"
-      ]
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "ownword-prototype/evidence/homepage-v040/P01/verification.json",
+      "commit": "53daba1"
     },
     {
       "id": "P02",
       "name": "Identity Hero",
       "description": "整理 Avatar、Name、Bio、BAP ID 首屏层级，沿用已有数字 ID 语义与品牌视觉。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "P01"
       ],

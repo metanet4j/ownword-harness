@@ -4,7 +4,7 @@
 
 ## 当前状态（Current State）
 
-H00基线检查与浏览器预览通过，保持needs-review。权威状态见[功能清单](feature_list.json)。
+P01公开主页与恢复状态已实现、验证并提交，保持needs-review。权威状态见[功能清单](feature_list.json)。
 
 ## 验证（Verification Evidence）
 
@@ -16,4 +16,5 @@ H00基线检查与浏览器预览通过，保持needs-review。权威状态见[�
 
 ## 下一步（Next Session）
 
-开始P01：公开主页数据、内容聚合与恢复状态。预览保持http://127.0.0.1:4314/运行。
+开始P02：整理Identity Hero与响应式布局。预览保持http://127.0.0.1:4314/运行。
+
