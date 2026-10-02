@@ -10,7 +10,7 @@
     "done"
   ],
   "activeFeature": null,
-  "nextFeature": "R27",
+  "nextFeature": "R28",
   "executionScope": "artifact-features",
   "environment": {
     "worktree": "ownword-prototype",
@@ -900,6 +900,28 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "6ea1f9e"
+    },
+    {
+      "id": "R27",
+      "name": "内容列表操作层级",
+      "description": "修正手机草稿继续写作被挤入窄日期栏、管理操作反而更突出的层级问题。",
+      "dependencies": [
+        "R26"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "标题、摘要和状态关系清晰；继续写作与阅读动作可读，管理操作使用 S2 更多入口",
+        "验证草稿继续写作、菜单键盘及删除取消、已发布阅读、320px 和中文深色代表场景",
+        "截图、浏览器日志、构建与初始化检查通过，独立提交并保留人工复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R27/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "2a0f206"
     }
   ],
   "designReview": {
@@ -921,7 +943,7 @@
     "fixedPrototypeCommit": "9e4f6dbbaeeb9806f97d2076d644885b24fdd148",
     "resolutionEvidence": "ownword-prototype/evidence/artifact-v030/review-fixes/verification.json"
   },
-  "finalVerification": "evidence/R26-init.txt",
+  "finalVerification": "evidence/R27-init.txt",
   "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md",
-  "nextStep": "登记并修正内容列表主次操作层级，验证继续写作与草稿管理。"
+  "nextStep": "登记 R28，补齐公开身份的只读数字 ID 与编号状态，并验证公开详情返回。"
 }
