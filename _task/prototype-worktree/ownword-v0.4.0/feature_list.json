@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": "P03",
-  "nextFeature": "P03",
+  "activeFeature": "P04",
+  "nextFeature": "P04",
   "authorization": "用户已授权新 worktree 连续完成 P01–P06；已验证功能等待人工视觉复核期间继续后续功能。",
   "environment": {
     "worktree": "ownword-prototype",
@@ -96,7 +96,7 @@
       "id": "P03",
       "name": "身份卡片",
       "description": "完善身份、发布记录与证明信息，保持模拟边界清晰。",
-      "status": "in-progress",
+      "status": "needs-review",
       "dependencies": [
         "P02"
       ],
@@ -107,13 +107,17 @@
         "正面与证明展开信息一致，不把模拟或缺失证明表示为真实验证成功。",
         "复制、展开与键盘可用，窄屏长标识和浅深色可读。",
         "受影响检查与初始化通过，证据归档并独立提交。"
-      ]
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "ownword-prototype/evidence/homepage-v040/P03/verification.json",
+      "commit": "d0fda6e"
     },
     {
       "id": "P04",
       "name": "内容展示",
       "description": "细化公开内容标题、摘要、作者与版本信息，以及内容卡片和空态。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "P03"
       ],
