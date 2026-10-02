@@ -263,6 +263,26 @@
       "reviewStatus": "awaiting-user-review",
       "evidence": "ownword-prototype/evidence/homepage-v040/R04/verification.json",
       "commit": "7b6adcf"
+    },
+    {
+      "id": "R05",
+      "name": "页首品牌图标居中",
+      "description": "品牌图标独立居于页首正中，作者名在左侧，操作在右侧。",
+      "status": "needs-review",
+      "dependencies": [
+        "R04"
+      ],
+      "acceptanceRefs": [
+        "访问公开个人主页"
+      ],
+      "doneCriteria": [
+        "品牌图标在桌面和手机均与页首及视口中心对齐。",
+        "窄屏操作不与品牌或姓名重叠，分享与偏好入口可用；构建及初始化通过。"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R05/verification.json",
+      "commit": "6a6ab02"
     }
   ]
 }

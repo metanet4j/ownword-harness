@@ -2,7 +2,7 @@
 
 ## 当前目标（Current Objective）
 
-v0.4.0 个人主页原型及 R01–R04 公开个人网站调整已交付，当前入口为 `http://127.0.0.1:4314/profile.html`。状态与唯一下一步见 [progress.md](progress.md)，逐项提交及证据见 [feature_list.json](feature_list.json)，验收范围见[交付说明](交付验收v0.4.0-20261002-183602.md)。
+v0.4.0 个人主页原型及 R01–R05 公开个人网站调整已交付，当前入口为 `http://127.0.0.1:4314/profile.html`。状态与唯一下一步见 [progress.md](progress.md)，逐项提交及证据见 [feature_list.json](feature_list.json)，验收范围见[交付说明](交付验收v0.4.0-20261002-183602.md)。
 
 用户明确要求从本轮起不使用任何子代理，后续设计、实施与验证均由主代理直接执行。
 
