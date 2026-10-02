@@ -12,6 +12,35 @@
   "activeItem": null,
   "features": [
     {
+      "id": "frontend-identity-v010-plan",
+      "name": "v0.1.0 身份前端实现计划",
+      "status": "needs-review",
+      "goal": "为指定 Next.js 仓库制定还原 v0.1 身份高保真原型的可执行计划，定义后端及钱包 Mock 契约。",
+      "scope": "计划与契约设计；不实施前端业务代码。所有阻塞依赖允许 Mock，真实接入作为后续阶段。",
+      "dependencies": [
+        "用户确认仅 v0.1 身份功能",
+        "用户允许后端、钱包及其他阻塞流程先 Mock"
+      ],
+      "doneCriteria": [
+        "核对指定仓库、v0.1 PRD、原型提交和真实钱包 API 来源",
+        "定义路由、组件、状态迁移、Mock 与真实适配边界、HTTP 契约和替换条件",
+        "形成分阶段任务与 28 条 BDD 的验收映射，检查引用并交付审阅"
+      ],
+      "prdVersion": "v0.1",
+      "prdSource": "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+      "targetRepository": "_task/fronted-worktree/own-word-web",
+      "output": "_task/system-design/spec/frontend/前端实现计划v0.1.0-20261002-230500.md",
+      "implementationStatus": "plan-written-and-checked",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": {
+        "scope": "PRD 31 场景减去已延期的 3 条密钥轮换，映射 28 条适用场景。",
+        "sources": "核对前端依赖与 Git 起点、当前原型及 v0.1 行为基线、S2 官方本地文档、钱包 SDK 和后端模块。",
+        "document": "14 条本地链接均存在；Markdown 与差异检查通过。",
+        "implementation": "前端仓库未改动；未执行前端实现测试或真实钱包、后端及交易。"
+      },
+      "nextStep": "按计划进入 F00–F05 的 Mock 身份前端实现；本次请求仅交付计划。"
+    },
+    {
       "id": "prototype-homepage-v040",
       "name": "v0.4.0 公开个人主页高保真原型",
       "status": "needs-review",
