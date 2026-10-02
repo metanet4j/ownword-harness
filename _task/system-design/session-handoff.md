@@ -1,7 +1,7 @@
-# 当前交接
+# 当前进展与交接
 
-v0.3.0 查找身份页 R21 已重新设计并移除演示样例按钮，源码、验证与原型提交齐备，等待用户视觉复核。原型提交 9aedd92b669e61ab2c2e495cf83893d21714a250，无进行中实现事项。
+v0.3.0 原型正按用户指定的 Awwwards、Webby Awards、FWA 品质目标持续自查与改进。R22 首页叙事及公开探索已实现、验证并提交 be03af4，保留用户视觉复核。当前唯一进行中事项为 R23 启动性能与编辑器按需加载。
 
-状态与验收只查[版本任务清单](../prototype-worktree/ownword-v0.3.0/feature_list.json)和[R21 验证记录](../prototype-worktree/ownword-v0.3.0/ownword-prototype/evidence/artifact-v030/R21/verification.json)。本轮为页面布局和表达调整，产品规则仍以核心认知及PRD为准。
+功能状态与验收只查[版本任务清单](../prototype-worktree/ownword-v0.3.0/feature_list.json)，品质审查见[审查记录](../prototype-worktree/ownword-v0.3.0/品质审查-20261002-202600.md)。慢速移动端 Lighthouse 性能34、LCP35.5秒、TBT5870毫秒，整站品质目标尚未达到。
 
-唯一下一步：用户复核查询页。预览 http://127.0.0.1:4313/?design=find#/find 保留，测试会话已关闭；未合并或推送。续接先读版本 harness 的 AGENTS.md 与状态文件。
+唯一下一步：预编译页面并拆分编辑器加载，复测慢速启动与受影响流程，再继续整站改进。预览 http://127.0.0.1:4313/ 保持运行；未合并或推送。

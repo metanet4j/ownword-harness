@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "purpose": "完成 v0.3.0 Identity Artifact 高保真原型 A01–A09，以及用户授权的外观与体验修正。",
-  "lastUpdated": "2026-09-19",
+  "lastUpdated": "2026-10-02",
   "allowedStatuses": [
     "not-started",
     "in-progress",
@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": null,
-  "nextFeature": null,
+  "activeFeature": "R23",
+  "nextFeature": "R23",
   "executionScope": "artifact-features",
   "environment": {
     "worktree": "ownword-prototype",
@@ -773,6 +773,58 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "9aedd92b669e61ab2c2e495cf83893d21714a250"
+    },
+    {
+      "id": "R22",
+      "name": "首页叙事与公开探索品质提升",
+      "description": "以用户指定的 Awwwards、Webby Awards、FWA 品质目标推进整站迭代；本功能先关闭首页产品关系不清、公开探索入口隐蔽与无效无障碍证据问题。",
+      "dependencies": [
+        "R21"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-C",
+        "A09-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "首页清楚表达 Identity、Words、Proof 的关系，真实公开阅读入口无需连接钱包",
+        "保持穹顶品牌、S2 控件与既有业务状态，样例与密码学验证边界准确",
+        "桌面、320px 手机、短屏、中英与浅深代表场景无溢出，主要操作首屏可达",
+        "实际键盘、减少动态效果、有效无障碍扫描、运行错误与性能取证完成",
+        "截图、审查记录与独立提交齐备；整站品质目标持续推进，不以首页交付代替完成"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R22/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "be03af41da55cfed9ba776e5361aa6e1c5354089"
+    },
+    {
+      "id": "R23",
+      "name": "启动性能与编辑器按需加载",
+      "description": "关闭Lighthouse慢速移动端LCP35.5秒和TBT5870毫秒的真实性能缺口；预编译页面，并让公开读取不加载完整编辑器。",
+      "dependencies": [
+        "R22"
+      ],
+      "status": "in-progress",
+      "acceptanceRefs": [
+        "A01-C",
+        "A02-A",
+        "A09-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "页面不再在浏览器实时编译JSX，源文件可继续维护且构建可重复",
+        "Markdown公开读取沿用原有安全解析，完整编辑器在写作时加载，失败可重试且不丢草稿",
+        "原型与初始化验证引用正确，构建产物过期会明确失败",
+        "冷启动慢速移动端LCP低于2.5秒、主线程阻塞小于200毫秒、CLS低于0.1，记录实际测量与限制",
+        "首页公开探索、查找、身份与Artifact操作以及写作编辑受影响流程验证通过；提交后保留视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R23/verification.json",
+      "implementationStatus": "in-progress",
+      "reviewStatus": "awaiting-user-review"
     }
   ],
   "designReview": {
