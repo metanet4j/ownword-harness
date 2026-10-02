@@ -11,7 +11,7 @@
   ],
   "activeFeature": null,
   "nextFeature": null,
-  "authorization": "用户已授权新 worktree 连续完成 P01–P06；已验证功能等待人工视觉复核期间继续后续功能。",
+  "authorization": "用户已授权新 worktree 连续完成 P01–P06，并要求 R01 独立页面与对外展示定位；实现验证后保留人工视觉复核。",
   "environment": {
     "worktree": "ownword-prototype",
     "sourceRepository": "designs/own-word-prototype-s2-astra-001",
@@ -53,7 +53,7 @@
     {
       "id": "P01",
       "name": "公开个人主页",
-      "description": "沿用 identity-view 路由和身份卡，按 BAP ID 聚合公开发布内容，补齐加载、失败与空态。",
+      "description": "复用身份卡，按 BAP ID 聚合公开发布内容，补齐加载、失败与空态。",
       "status": "needs-review",
       "dependencies": [
         "H00"
@@ -177,6 +177,28 @@
       "reviewStatus": "awaiting-user-review",
       "evidence": "ownword-prototype/evidence/homepage-v040/P06/verification.json",
       "commit": "7c505ee"
+    },
+    {
+      "id": "R01",
+      "name": "独立个人主页页面",
+      "description": "按用户复核意见，将个人主页作为独立的对外展示窗口，围绕作者、文字、阅读与分享组织内容。",
+      "status": "needs-review",
+      "dependencies": [
+        "P06"
+      ],
+      "acceptanceRefs": [
+        "访问公开个人主页",
+        "查看内容归属"
+      ],
+      "doneCriteria": [
+        "个人主页为独立页面，直接访问与刷新不显示工作区导航或管理表单。",
+        "作者、查找和我的身份入口进入独立主页；阅读与返回保持作者及版本正确。",
+        "复用已有主页组件和S2，构建初始化与代表性浏览器路径通过。"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R01/verification.json",
+      "commit": "1f03beb"
     }
   ]
 }
