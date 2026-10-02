@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": "R24",
-  "nextFeature": "R24",
+  "activeFeature": null,
+  "nextFeature": null,
   "executionScope": "artifact-features",
   "environment": {
     "worktree": "ownword-prototype",
@@ -834,7 +834,7 @@
       "dependencies": [
         "R23"
       ],
-      "status": "in-progress",
+      "status": "needs-review",
       "acceptanceRefs": [
         "A01-C",
         "A02-A",
@@ -849,8 +849,9 @@
         "构建可重复并验证过期产物，初始化、运行错误和受影响截图通过；提交并记录真实限制。"
       ],
       "evidence": "ownword-prototype/evidence/artifact-v030/R24/verification.json",
-      "implementationStatus": "in-progress",
-      "reviewStatus": "awaiting-user-review"
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "dfe9595581d6956bf9a7cb2b2e1b65dd52074570"
     }
   ],
   "designReview": {
@@ -872,6 +873,7 @@
     "fixedPrototypeCommit": "9e4f6dbbaeeb9806f97d2076d644885b24fdd148",
     "resolutionEvidence": "ownword-prototype/evidence/artifact-v030/review-fixes/verification.json"
   },
-  "finalVerification": "ownword-prototype/evidence/artifact-v030/R23/init-check.txt",
-  "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md"
+  "finalVerification": "evidence/R24-closeout-init.txt",
+  "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md",
+  "nextStep": "本轮按用户要求收尾并提交。恢复优化时先审查公开查找、阅读与身份页面的视觉层级及操作连续性，登记下一功能后实施；只有实际卡顿或相关改动才检查性能。"
 }
