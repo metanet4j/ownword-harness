@@ -199,6 +199,28 @@
       "reviewStatus": "awaiting-user-review",
       "evidence": "ownword-prototype/evidence/homepage-v040/R01/verification.json",
       "commit": "1f03beb"
+    },
+    {
+      "id": "R02",
+      "name": "个人网站构图与搜索新页面入口",
+      "description": "按用户意见重做公共个人主页构图，搜索结果的身份与主页链接在新标签页打开，保留个人信息、紧凑标识与文章列表。",
+      "status": "needs-review",
+      "dependencies": [
+        "R01"
+      ],
+      "acceptanceRefs": [
+        "访问公开个人主页",
+        "查看内容归属"
+      ],
+      "doneCriteria": [
+        "页面以作者为主体，品牌移至页脚，文章列表紧接介绍，不呈现工作区外壳。",
+        "搜索结果身份与主页链接使用原生链接打开新标签页，原搜索结果保留。",
+        "桌面和483/390px代表页面、阅读往返、键盘及相关边界通过，证据提交。"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R02/verification.json",
+      "commit": "07f78de"
     }
   ]
 }
