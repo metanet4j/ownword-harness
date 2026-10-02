@@ -4,11 +4,11 @@
 
 ## 当前状态（Current State）
 
-P01公开主页与恢复状态已实现、验证并提交，保持needs-review。权威状态见[功能清单](feature_list.json)。
+P01、P02 已实现、验证并提交，保持 needs-review。权威状态见[功能清单](feature_list.json)。
 
 ## 验证（Verification Evidence）
 
-初始化通过7项登记、2项标题BDD映射；仅代表基线和结构检查。4314公开身份截图已查看，无运行错误。证据见[evidence/H00-init.txt](evidence/H00-init.txt)。
+P02 构建与初始化通过；1440/390/320、中文深色、长资料、头像失败、键盘复制通过。Hero axe 0 违规，渐变头像对比度仍有工具未判定项。证据见 [P02 验证](ownword-prototype/evidence/homepage-v040/P02/verification.json)。
 
 ## 阻塞（Blockers）
 
@@ -16,5 +16,4 @@ P01公开主页与恢复状态已实现、验证并提交，保持needs-review�
 
 ## 下一步（Next Session）
 
-开始P02：整理Identity Hero与响应式布局。预览保持http://127.0.0.1:4314/运行。
-
+执行 P03：完善身份卡与证明状态。预览保持http://127.0.0.1:4314/运行。

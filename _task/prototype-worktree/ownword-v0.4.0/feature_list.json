@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": "P02",
-  "nextFeature": "P02",
+  "activeFeature": "P03",
+  "nextFeature": "P03",
   "authorization": "用户已授权新 worktree 连续完成 P01–P06；已验证功能等待人工视觉复核期间继续后续功能。",
   "environment": {
     "worktree": "ownword-prototype",
@@ -75,7 +75,7 @@
       "id": "P02",
       "name": "Identity Hero",
       "description": "整理 Avatar、Name、Bio、BAP ID 首屏层级，沿用已有数字 ID 语义与品牌视觉。",
-      "status": "in-progress",
+      "status": "needs-review",
       "dependencies": [
         "P01"
       ],
@@ -86,13 +86,17 @@
         "首屏身份可辨识，完整 BAP ID 可复制，资料缺失或较长时仍清晰。",
         "桌面和 320/390px、中文深色代表场景、键盘与对比度实测通过。",
         "复用 S2 组件与 Token，构建和初始化通过，截图归档并独立提交。"
-      ]
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "ownword-prototype/evidence/homepage-v040/P02/verification.json",
+      "commit": "e120673"
     },
     {
       "id": "P03",
       "name": "身份卡片",
       "description": "完善身份、发布记录与证明信息，保持模拟边界清晰。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "P02"
       ],
