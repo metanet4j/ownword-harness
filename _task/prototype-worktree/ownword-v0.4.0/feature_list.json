@@ -283,6 +283,27 @@
       "reviewStatus": "awaiting-user-review",
       "evidence": "ownword-prototype/evidence/homepage-v040/R05/verification.json",
       "commit": "6a6ab02"
+    },
+    {
+      "id": "R06",
+      "name": "个人主页主体整体居中",
+      "description": "按用户澄清，将作者资料和文章列表围绕同一条中轴布局，调整原左右分栏的视觉重心。",
+      "status": "needs-review",
+      "dependencies": [
+        "R05"
+      ],
+      "acceptanceRefs": [
+        "访问公开个人主页",
+        "查看内容归属"
+      ],
+      "doneCriteria": [
+        "作者头像、姓名、简介与标识居中，文章列表与页脚位于同一居中内容栏。",
+        "桌面和手机页面对齐、无溢出；文章阅读、空态等相关路径及构建初始化通过。"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R06/verification.json",
+      "commit": "532ef9c"
     }
   ]
 }
