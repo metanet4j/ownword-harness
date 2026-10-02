@@ -11,7 +11,7 @@
   ],
   "activeFeature": null,
   "nextFeature": null,
-  "authorization": "用户已授权新 worktree 连续完成 P01–P06，并要求 R01 独立页面与对外展示定位；实现验证后保留人工视觉复核。",
+  "authorization": "用户已授权完成 P01–P06、R01 独立公开页面、R02 搜索新标签页入口，以及使用 high-end-visual-design 的 R03 重设计；当前禁止使用子代理。实现验证后保留人工视觉复核。",
   "environment": {
     "worktree": "ownword-prototype",
     "sourceRepository": "designs/own-word-prototype-s2-astra-001",
@@ -221,6 +221,28 @@
       "reviewStatus": "awaiting-user-review",
       "evidence": "ownword-prototype/evidence/homepage-v040/R02/verification.json",
       "commit": "07f78de"
+    },
+    {
+      "id": "R03",
+      "name": "高端视觉技能重设计",
+      "description": "使用用户指定的 high-end-visual-design，重做作者展示、非对称文章卡片、悬浮导航与克制动效，保留既有公共访问行为。",
+      "status": "needs-review",
+      "dependencies": [
+        "R02"
+      ],
+      "acceptanceRefs": [
+        "访问公开个人主页",
+        "查看内容归属"
+      ],
+      "doneCriteria": [
+        "采用鲜明的新构图、大字无衬线标题、双层卡片与嵌套阅读图标，符合固定 Spectrum S2 约束。",
+        "手机单列、中文深色、减少动态效果、键盘阅读与偏好面板可用。",
+        "正常与相关边界、构建及初始化通过，查看截图并提交证据。"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R03/verification.json",
+      "commit": "f1603bc"
     }
   ]
 }

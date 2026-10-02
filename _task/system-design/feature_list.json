@@ -16,7 +16,7 @@
       "name": "v0.4.0 公开个人主页高保真原型",
       "status": "needs-review",
       "goal": "基于 v0.3.0 品质基线完成独立的对外展示主页、内容阅读与版本关联。",
-      "scope": "P01–P06 与 R01–R02 独立个人网站、搜索新标签页入口的可交互高保真模拟原型。",
+      "scope": "P01–P06 与 R01–R03 独立公开主页、搜索新标签页入口及高端视觉重设计的可交互模拟原型。",
       "dependencies": [
         "prototype-artifact-v030"
       ],
@@ -32,8 +32,8 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "evidence": "_task/prototype-worktree/ownword-v0.4.0/feature_list.json",
-      "nextStep": "胡先生复核个人网站构图与搜索新标签页入口；后续由主代理直接执行。",
-      "latestPrototypeCommit": "07f78de",
+      "nextStep": "胡先生复核 R03 公开主页视觉设计；当前没有待实施功能。",
+      "latestPrototypeCommit": "f1603bc",
       "delivery": "_task/prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261002-183602.md"
     },
     {
