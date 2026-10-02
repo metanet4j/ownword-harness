@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "purpose": "依照 v0.4.0 PRD 连续完成个人主页高保真原型，并按用户指定的国际设计奖项品质目标自查。",
+  "lastUpdated": "2026-10-02",
+  "allowedStatuses": [
+    "not-started",
+    "in-progress",
+    "needs-review",
+    "blocked",
+    "done"
+  ],
+  "activeFeature": null,
+  "nextFeature": "P01",
+  "authorization": "用户已授权新 worktree 连续完成 P01–P06；已验证功能等待人工视觉复核期间继续后续功能。",
+  "environment": {
+    "worktree": "ownword-prototype",
+    "sourceRepository": "designs/own-word-prototype-s2-astra-001",
+    "sourceRemote": "https://github.com/metanet4j/ownword-design-prototype.git",
+    "baselineCommit": "1355bdc4a14197d1d2dfec09e26096446d080be5",
+    "branch": "codex/prototype-v0.4.0-homepage",
+    "prdVersion": "v0.4.0",
+    "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
+    "previewHost": "127.0.0.1",
+    "previewPort": 4314,
+    "previewLog": ".runtime/preview.log",
+    "designSystem": "react-spectrum-s2",
+    "designSystemNamespace": "ReactSpectrumS2_ad4872",
+    "restoredDesignSystem": "designs/react-spectrum-s2",
+    "designSystemRecovery": "沿用基线 S2 轻量运行时消费副本，不升级；对应 @react-spectrum/s2@1.6.0 和 @adobe/spectrum-tokens@14.15.0。",
+    "backend": "无生产后端，仅确定性的原型模拟数据。"
+  },
+  "designReview": {
+    "status": "reviewed-with-implementation-guidance",
+    "source": "_task/prototype-worktree/ownword-v0.4.0/设计审查v0.4.0-20261002-174225.md",
+    "scope": "核心认知、PRD 范围与实施顺序核对；不是用户视觉批准。"
+  },
+  "features": [
+    {
+      "id": "H00",
+      "name": "设计审查与环境初始化",
+      "description": "建立可恢复规则，验证独立 worktree、S2 绑定、启动入口与浏览器基线。",
+      "status": "needs-review",
+      "dependencies": [],
+      "acceptanceRefs": [],
+      "doneCriteria": [
+        "基线与分支、S2 消费副本和两项 BDD 映射核对通过。",
+        "初始化检查和 4314 预览实测通过，记录真实证据及基线边界。"
+      ],
+      "evidence": "evidence/H00-init.txt；evidence/H00-baseline.png",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review"
+    },
+    {
+      "id": "P01",
+      "name": "公开个人主页",
+      "description": "沿用 identity-view 路由和身份卡，按 BAP ID 聚合公开发布内容，补齐加载、失败与空态。",
+      "status": "not-started",
+      "dependencies": [
+        "H00"
+      ],
+      "acceptanceRefs": [
+        "访问公开个人主页"
+      ],
+      "doneCriteria": [
+        "访客无需钱包即可查看对应身份与公开内容，聚合按作者 BAP ID 隔离。",
+        "正常、加载、失败重试、空内容与无效入口可恢复，刷新和返回连贯。",
+        "受影响模型、浏览器与初始化检查通过，证据归档并独立提交。"
+      ]
+    },
+    {
+      "id": "P02",
+      "name": "Identity Hero",
+      "description": "整理 Avatar、Name、Bio、BAP ID 首屏层级，沿用已有数字 ID 语义与品牌视觉。",
+      "status": "not-started",
+      "dependencies": [
+        "P01"
+      ],
+      "acceptanceRefs": [
+        "访问公开个人主页"
+      ],
+      "doneCriteria": [
+        "首屏身份可辨识，完整 BAP ID 可复制，资料缺失或较长时仍清晰。",
+        "桌面和 320/390px、中文深色代表场景、键盘与对比度实测通过。",
+        "复用 S2 组件与 Token，构建和初始化通过，截图归档并独立提交。"
+      ]
+    },
+    {
+      "id": "P03",
+      "name": "身份卡片",
+      "description": "完善身份、发布记录与证明信息，保持模拟边界清晰。",
+      "status": "not-started",
+      "dependencies": [
+        "P02"
+      ],
+      "acceptanceRefs": [
+        "访问公开个人主页"
+      ],
+      "doneCriteria": [
+        "正面与证明展开信息一致，不把模拟或缺失证明表示为真实验证成功。",
+        "复制、展开与键盘可用，窄屏长标识和浅深色可读。",
+        "受影响检查与初始化通过，证据归档并独立提交。"
+      ]
+    },
+    {
+      "id": "P04",
+      "name": "内容展示",
+      "description": "细化公开内容标题、摘要、作者与版本信息，以及内容卡片和空态。",
+      "status": "not-started",
+      "dependencies": [
+        "P03"
+      ],
+      "acceptanceRefs": [
+        "访问公开个人主页",
+        "查看内容归属"
+      ],
+      "doneCriteria": [
+        "仅展示对应作者的已发布内容，摘要、作者与版本可辨识，空列表有清晰说明。",
+        "长标题、长摘要和手机布局可读，阅读入口明确且符合键盘与触控要求。",
+        "受影响检查与初始化通过，证据归档并独立提交。"
+      ]
+    },
+    {
+      "id": "P05",
+      "name": "内容阅读入口",
+      "description": "接通主页与已有公开阅读，保持作者、文章与返回来源连续。",
+      "status": "not-started",
+      "dependencies": [
+        "P04"
+      ],
+      "acceptanceRefs": [
+        "查看内容归属"
+      ],
+      "doneCriteria": [
+        "主页进入对应只读文章，作者按 authorBapId 展示并可查看身份。",
+        "阅读、返回、直接链接与刷新保持文章和作者一致，无钱包门槛。",
+        "复用现有阅读器，受影响检查与初始化通过，证据归档并独立提交。"
+      ]
+    },
+    {
+      "id": "P06",
+      "name": "版本关联",
+      "description": "核验当前版本、历史版本及其关系，完成两项 PRD BDD 端到端验收。",
+      "status": "not-started",
+      "dependencies": [
+        "P05"
+      ],
+      "acceptanceRefs": [
+        "查看内容归属",
+        "访问公开个人主页"
+      ],
+      "doneCriteria": [
+        "多版本文章可浏览历史与当前版本，归属一致，已发布内容只读且关系清楚。",
+        "历史链接、刷新、返回和缺失版本可恢复，无误导的真实上链证明。",
+        "两项 BDD 实际通过，完成受影响响应式、键盘、无障碍和错误复核；初始化通过，交付证据并独立提交。"
+      ]
+    }
+  ]
+}

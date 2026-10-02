@@ -9,12 +9,35 @@
     "done",
     "archived"
   ],
-  "activeItem": "prototype-artifact-v030",
+  "activeItem": "prototype-homepage-v040",
   "features": [
+    {
+      "id": "prototype-homepage-v040",
+      "name": "v0.4.0 公开个人主页高保真原型",
+      "status": "in-progress",
+      "goal": "基于v0.3.0品质基线完成公开个人主页、内容展示、阅读与版本关联。",
+      "scope": "P01–P06可交互高保真模拟原型。",
+      "dependencies": [
+        "prototype-artifact-v030"
+      ],
+      "doneCriteria": [
+        "P01–P06按PRD逐项实现、验证并提交",
+        "正常与相关边界、响应式、双语主题、键盘及运行日志有证据",
+        "独立worktree可重新启动，提交交付与人工视觉复核状态完整"
+      ],
+      "prdVersion": "v0.4.0",
+      "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
+      "harnessPath": "_task/prototype-worktree/ownword-v0.4.0",
+      "output": "_task/prototype-worktree/ownword-v0.4.0/ownword-prototype",
+      "implementationStatus": "in-progress",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "_task/prototype-worktree/ownword-v0.4.0/feature_list.json",
+      "nextStep": "完成环境检查，按P01–P06实施。"
+    },
     {
       "id": "prototype-artifact-v030",
       "name": "v0.3.0 Identity Artifact 高保真原型",
-      "status": "in-progress",
+      "status": "needs-review",
       "goal": "以用户指定的Awwwards、Webby Awards、FWA获奖品质持续自查并提升整站原型。",
       "scope": "按已审查 PRD 制作可交互原型；不接真实钱包或生产 API。",
       "dependencies": [
@@ -30,18 +53,10 @@
       "prdSource": "_task/system-design/spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md",
       "harnessPath": "_task/prototype-worktree/ownword-v0.3.0",
       "output": "_task/prototype-worktree/ownword-v0.3.0/ownword-prototype",
-      "implementationStatus": "in-progress",
+      "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json；R25 已完成公开路径返回验证，整站品质迭代继续。",
-      "nextStep": "修复 390px 当前数字 ID 换行，继续视觉及操作品质检查。",
-      "currentChange": {
-        "id": "R25",
-        "status": "needs-review",
-        "harness": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json",
-        "implementationStatus": "implemented-and-verified",
-        "evidence": "_task/prototype-worktree/ownword-v0.3.0/ownword-prototype/evidence/artifact-v030/R25/verification.json",
-        "commit": "d2bb7de"
-      }
+      "evidence": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json；最新1355bdc，R31与品质收敛证据完整。",
+      "nextStep": "保留人工视觉复核，版本后续工作转到v0.4.0独立worktree。"
     },
     {
       "id": "prototype-artifact-v030-bootstrap",
