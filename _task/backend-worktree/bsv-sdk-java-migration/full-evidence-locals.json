@@ -2670,7 +2670,7 @@
   "fullRun": {
     "tsCommand": [
       "python3",
-      "run-full-ts-capture.py",
+      "run-full-ts-serial.py",
       "--run-dir",
       "{runDir}",
       "--report",
