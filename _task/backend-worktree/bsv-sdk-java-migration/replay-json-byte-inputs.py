@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """固定 jsonByteEncoding.test.ts 10 例的真实 API 入参、replacer holder 和原断言。"""
 import argparse
+import importlib.util
 import json
 from pathlib import Path
 
@@ -83,6 +84,8 @@ def prepare(args):
     folder.mkdir(parents=True, exist_ok=True)
     write(folder / 'catalog.json', catalog)
     write(folder / 'mapping.json', mapping)
+    # 登记 audit-tests.py 已固定的语义规则（两侧 actual 相同、expected 按跨语言约定不同）。
+    _semantic_rules().apply_semantic_rules(plan)
     write(folder / 'input-plan.json', plan)
     write_rows(folder / 'replay-inputs.jsonl', inputs)
     print(json.dumps({'cases': 10, 'inputSamples': 26, 'assertions': 19, 'output': str(folder)}))
@@ -105,7 +108,9 @@ def assertions_for(side, raw, mapping, run_id):
             assert item['index'] == position + 1
         identity = mapped[case['id']]['assertionIds'][position]
         output.append({'runId': run_id, 'side': side, 'caseId': case['id'], 'assertionId': identity,
-                       'value': {'matcher': item['matcher'], 'negated': item['negated'], 'actual': item['actual']}})
+                       'value': {'kind': 'assertion', 'matcher': item['matcher'],
+                                 'negated': item['negated'], 'actual': item['actual'],
+                                 'expected': item['expected']}})
     assert len(output) == 19
     return output
 
@@ -131,3 +136,10 @@ if __name__ == '__main__':
         parser.add_argument('--' + name, required=name == 'parity')
     args = parser.parse_args()
     {'prepare': prepare, 'emit-ts': emit_ts, 'emit-java': emit_java}[args.action](args)
+
+def _semantic_rules():
+    spec = importlib.util.spec_from_file_location('semantic_plan_rules',
+                                                  TASK / 'semantic-plan-rules.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module

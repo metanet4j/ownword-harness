@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """固定 WERR.test.ts 32 个构造器用例的真实输入和 40 条原断言重放计划。"""
 import argparse
+import importlib.util
 import json
 from pathlib import Path
 
@@ -77,6 +78,8 @@ def prepare(args):
     folder.mkdir(parents=True, exist_ok=True)
     write(folder / 'catalog.json', catalog)
     write(folder / 'mapping.json', mapping)
+    # 登记 audit-tests.py 已固定的语义规则（两侧 actual 相同、expected 按跨语言约定不同）。
+    _semantic_rules().apply_semantic_rules(plan)
     write(folder / 'input-plan.json', plan)
     write_rows(folder / 'replay-inputs.jsonl', inputs)
     print(json.dumps({'cases': 32, 'inputSamples': len(inputs), 'assertions': 40, 'output': str(folder)}))
@@ -103,7 +106,9 @@ def assertions_for(side, raw, mapping, run_id):
             next(entry for entry in mapping['cases'] if entry['id'] == case['id'])['assertionIds']
         identity = identities[position]
         output.append({'runId': run_id, 'side': side, 'caseId': case['id'], 'assertionId': identity,
-                       'value': {'matcher': item['matcher'], 'negated': item['negated'], 'actual': item['actual']}})
+                       'value': {'kind': 'assertion', 'matcher': item['matcher'],
+                                 'negated': item['negated'], 'actual': item['actual'],
+                                 'expected': item['expected']}})
     assert len(output) == 40
     return output
 
@@ -136,3 +141,10 @@ if __name__ == '__main__':
     parser.add_argument('--assertions')
     args = parser.parse_args()
     {'prepare': prepare, 'emit-ts': emit_ts, 'emit-java': emit_java}[args.action](args)
+
+def _semantic_rules():
+    spec = importlib.util.spec_from_file_location('semantic_plan_rules',
+                                                  TASK / 'semantic-plan-rules.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module

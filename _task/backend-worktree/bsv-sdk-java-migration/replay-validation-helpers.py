@@ -127,8 +127,9 @@ def assertions_for(side, raw, file, mapping):
         if side == 'ts':
             assert item['pass'] is True
         result.append({'caseId': case_id, 'assertionId': identity,
-                       'value': {'matcher': item['matcher'], 'negated': item['negated'],
-                                 'actual': item['actual']}})
+                       'value': {'kind': 'assertion', 'matcher': item['matcher'],
+                                 'negated': item['negated'], 'actual': item['actual'],
+                                 'expected': item['expected']}})
     assert len(result) == 203
     for entry in mapping['cases']:
         assert positions[entry['id']] == len(entry['assertionIds'])
@@ -154,6 +155,8 @@ def prepare(args):
     output.mkdir(parents=True, exist_ok=True)
     write(output / 'catalog.json', catalog)
     write(output / 'mapping.json', mapping)
+    # 登记 audit-tests.py 已固定的语义规则（两侧 actual 相同、expected 按跨语言约定不同）。
+    _semantic_rules().apply_semantic_rules(plan)
     write(output / 'input-plan.json', plan)
     write_rows(output / 'frozen-ts-inputs.jsonl', ts_inputs)
     print(json.dumps({'cases': 147, 'calls': 148, 'samples': 149, 'assertions': 203,
@@ -255,3 +258,10 @@ if __name__ == '__main__':
     else:
         assert args.plan and args.java_inputs and args.java_assertions and args.report
         compare(args)
+
+def _semantic_rules():
+    spec = importlib.util.spec_from_file_location('semantic_plan_rules',
+                                                  TASK / 'semantic-plan-rules.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module

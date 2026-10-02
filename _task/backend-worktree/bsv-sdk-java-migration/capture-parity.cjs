@@ -111,7 +111,11 @@ function wrapAssertion(assertion, received, negated, promiseMode = null) {
             expected: matcher === 'toHaveBeenCalledWith'
               ? { type: 'array', value: args.map(canonicalCallArg) }
               : args.length === 1
-              ? (matcher === 'toBeInstanceOf' ? canonical(args[0].name) : canonical(args[0], 0, matcher === 'toEqual'))
+              ? ((matcher === 'toBeInstanceOf' || matcher === 'toThrow')
+                  // toThrow(ErrorClass) 与 toBeInstanceOf(ErrorClass) 一样传入的是类；
+                  // canonical(类) 会退化成 String(类) 的整段源码，必须取类名才与实际观察同形。
+                  ? canonicalCallArg(args[0])
+                  : canonical(args[0], 0, matcher === 'toEqual'))
               : args.map(a => canonical(a, 0, matcher === 'toEqual')),
             pass
           }

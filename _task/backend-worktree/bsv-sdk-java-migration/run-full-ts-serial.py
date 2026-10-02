@@ -104,10 +104,27 @@ def select(config, names, exclude):
 
 
 def merge_plans(config):
-    """按登记顺序合并全部局部计划；与 full-evidence-preflight.inspect 的 merged 口径一致。"""
+    """按登记顺序合并全部局部计划；与 full-evidence-preflight.inspect 的 merged 口径一致。
+
+    局部计划多存放在 .cache/ 下（不入版本库），其中 `comparisonRules` 由各 prepare 脚本
+    按需写入。为避免某个局部漏写，这里依据 audit-tests.py 已固定的语义规则统一补齐：
+    只按 SEMANTIC_CASES 与该用例自己的 assertionSites 登记，不新增任何规则，也不放宽
+    任何比较——validate_plan 会逐条核对这些登记，多登记或错登记都会硬失败。
+    """
+    audit = preflight.audit
     merged = {}
     for item in config['locals']:
         for case_id, value in read_json(TASK / item['input_plan']).items():
+            value = dict(value)
+            fixed = audit.semantic_specs(case_id)
+            if fixed:
+                sites = value.get('assertionSites') or {}
+                rules = dict(value.get('comparisonRules') or {})
+                for identity in value.get('assertionIds') or []:
+                    site = sites.get(identity)
+                    if site in fixed:
+                        rules[identity] = fixed[site][0]
+                value['comparisonRules'] = rules
             if case_id in merged and canonical(merged[case_id]) != canonical(value):
                 raise ValueError('同用例计划冲突：' + case_id + '／' + item['name'])
             merged[case_id] = value

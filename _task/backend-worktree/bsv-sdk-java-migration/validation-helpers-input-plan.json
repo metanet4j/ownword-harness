@@ -1367,7 +1367,10 @@
     "assertionSites": {
       "src/wallet/__tests/validationHelpers.test.ts:894:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:894:5:assertion"
     },
-    "loopSamples": {}
+    "loopSamples": {},
+    "comparisonRules": {
+      "src/wallet/__tests/validationHelpers.test.ts:894:5:assertion": "exception-class-adapter-v1"
+    }
   },
   "f1e1f702c9b7b40b74200f489c84d06c9d94f7dc2700c24d98a292cda8814fcf": {
     "sampleIds": [
@@ -1489,7 +1492,10 @@
     "assertionSites": {
       "src/wallet/__tests/validationHelpers.test.ts:976:5:assertion": "src/wallet/__tests/validationHelpers.test.ts:976:5:assertion"
     },
-    "loopSamples": {}
+    "loopSamples": {},
+    "comparisonRules": {
+      "src/wallet/__tests/validationHelpers.test.ts:976:5:assertion": "exception-class-adapter-v1"
+    }
   },
   "617aa790119df880495a527f39b81c5f731b5871818373be1b67fb57fa290392": {
     "sampleIds": [

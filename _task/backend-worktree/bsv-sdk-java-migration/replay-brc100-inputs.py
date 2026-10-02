@@ -6,6 +6,7 @@ from pathlib import Path
 
 TASK = Path(__file__).resolve().parent
 FILE = 'src/wallet/__tests/BRC100ByteEncoding.test.ts'
+
 JAVA_CLASS = 'com.metanet4j.bsv.wallet.BRC100ByteEncodingTest'
 LOOP_METHOD = 'rejectsPrimitivesAndHostileRecordsWithoutThrowing'
 LOOP_SITE = FILE + ':60:5:loop'
@@ -122,7 +123,9 @@ def assertions_for(side, raw, mapping, run_id):
             assert item['index'] == position + 1
         identity = assertion_instances(mapped[case['id']])[0][position]
         output.append({'runId': run_id, 'side': side, 'caseId': case['id'], 'assertionId': identity,
-                       'value': {'matcher': item['matcher'], 'negated': item['negated'], 'actual': item['actual']}})
+                       'value': {'kind': 'assertion', 'matcher': item['matcher'],
+                                 'negated': item['negated'], 'actual': item['actual'],
+                                 'expected': item['expected']}})
     assert len(output) == 62
     return output
 
