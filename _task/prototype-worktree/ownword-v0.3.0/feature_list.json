@@ -10,7 +10,7 @@
     "done"
   ],
   "activeFeature": null,
-  "nextFeature": "R31",
+  "nextFeature": null,
   "executionScope": "artifact-features",
   "environment": {
     "worktree": "ownword-prototype",
@@ -994,6 +994,28 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "be6bafd"
+    },
+    {
+      "id": "R31",
+      "name": "窄屏头部完整点击区域",
+      "description": "修复320px英文长模块名称挤出外观按钮的问题；极窄屏使用品牌图标保留首页入口。",
+      "dependencies": [
+        "R30"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "320px英文与中文下品牌、模块菜单、外观按钮均完整位于视口内，高宽不低于44px",
+        "390px和桌面保留完整品牌字标，320px图标仍有明确可访问名称，键盘菜单和偏好可用",
+        "实际按钮边界与点击命中探针、代表截图、构建及初始化通过，提交并保留视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R31/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "1355bdc"
     }
   ],
   "designReview": {
@@ -1015,7 +1037,7 @@
     "fixedPrototypeCommit": "9e4f6dbbaeeb9806f97d2076d644885b24fdd148",
     "resolutionEvidence": "ownword-prototype/evidence/artifact-v030/review-fixes/verification.json"
   },
-  "finalVerification": "evidence/R30-init.txt",
+  "finalVerification": "evidence/R31-init.txt",
   "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md",
-  "nextStep": "登记R31，修正320px英文长导航标题下外观按钮的点击区域裁切。"
+  "nextStep": "交付当前原型供人工视觉复核；根据具体反馈继续迭代。已发现的实质品质问题均已关闭。"
 }
