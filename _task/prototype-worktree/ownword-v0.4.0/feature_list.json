@@ -243,6 +243,26 @@
       "reviewStatus": "awaiting-user-review",
       "evidence": "ownword-prototype/evidence/homepage-v040/R03/verification.json",
       "commit": "f1603bc"
+    },
+    {
+      "id": "R04",
+      "name": "公开主页页首品牌图标",
+      "description": "按用户要求在页首恢复 Ownword 品牌图标，与作者名一起展示。",
+      "status": "needs-review",
+      "dependencies": [
+        "R03"
+      ],
+      "acceptanceRefs": [
+        "访问公开个人主页"
+      ],
+      "doneCriteria": [
+        "页首展示现有品牌图标，保持作者名和公开主页结构。",
+        "桌面与窄屏主题代表场景无溢出，图标加载和链接键盘操作可用，构建与初始化通过。"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R04/verification.json",
+      "commit": "7b6adcf"
     }
   ]
 }
