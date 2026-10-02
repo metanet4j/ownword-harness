@@ -4,9 +4,11 @@
 
 ## 当前状态（Current State）
 
-H00、P01–P06 与 R01–R06 已实现并验证，保持 `needs-review` 等待人工视觉复核。当前公开主页采用用户指定 high-end-visual-design 的居中作者资料、双层文章卡片与悬浮导航，具体视觉方案见 v0.4.0 PRD。功能状态、提交及证据的唯一来源见[功能清单](feature_list.json)。
+H00、P01–P06 与 R01–R07 已实现并验证，保持 `needs-review` 等待人工视觉复核。当前公开主页采用用户指定 high-end-visual-design 的居中作者资料、双层文章卡片与悬浮导航，具体视觉方案见 v0.4.0 PRD。功能状态、提交及证据的唯一来源见[功能清单](feature_list.json)。
 
 ## 验证（Verification Evidence）
+
+R07 已删除首页冗余的 Identity / Words / Proof 介绍区，保留品牌主视觉与连接、查找入口。1440px 和 528px 截图已查看，连接弹窗打开、Escape 关闭并恢复焦点通过，手机无横向溢出，受测页面无运行错误。构建及初始化通过；本轮未重跑全量浏览器、主题语言或 axe 检查。见 [R07 证据](ownword-prototype/evidence/homepage-v040/R07/verification.json) 与 [初始化输出](evidence/R07-init.txt)。
 
 R06 按用户澄清将主页主体整体居中。1440px 桌面和 320px 手机的头像、姓名、简介、标识、文章列表与页脚均与视口中轴对齐，偏差小于 0.01px，无横向溢出。1440/483px 浅色与 320px 中文深色截图已查看，文章进入返回、空态通过；受测页面无运行错误，320px axe 零违规、零未判定项。构建和初始化通过，映射 13 项任务和两项 PRD 标题 BDD。见 [R06 证据](ownword-prototype/evidence/homepage-v040/R06/verification.json) 与 [初始化输出](evidence/R06-init.txt)。
 

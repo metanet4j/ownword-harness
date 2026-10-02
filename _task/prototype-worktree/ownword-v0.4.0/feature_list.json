@@ -304,6 +304,24 @@
       "reviewStatus": "awaiting-user-review",
       "evidence": "ownword-prototype/evidence/homepage-v040/R06/verification.json",
       "commit": "532ef9c"
+    },
+    {
+      "id": "R07",
+      "name": "移除首页冗余介绍区",
+      "description": "删除用户标注的 Identity / Words / Proof 介绍区，保留首页主视觉和主操作。",
+      "status": "needs-review",
+      "dependencies": [
+        "R06"
+      ],
+      "acceptanceRefs": [],
+      "doneCriteria": [
+        "首页不再呈现该介绍区，首屏主操作仍可用。",
+        "构建、初始化及桌面和手机代表页面检查通过。"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R07/verification.json",
+      "commit": "c76ad3d"
     }
   ]
 }

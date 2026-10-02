@@ -16,7 +16,7 @@
       "name": "v0.4.0 公开个人主页高保真原型",
       "status": "needs-review",
       "goal": "基于 v0.3.0 品质基线完成独立的对外展示主页、内容阅读与版本关联。",
-      "scope": "P01–P06 与 R01–R06 独立公开主页、搜索新标签页、视觉重设计、品牌展示及主体整体居中的可交互模拟原型。",
+      "scope": "P01–P06 与 R01–R07 独立公开主页、搜索新标签页、视觉重设计、品牌展示及主体整体居中与首页冗余介绍区移除的可交互模拟原型。",
       "dependencies": [
         "prototype-artifact-v030"
       ],
@@ -33,7 +33,7 @@
       "reviewStatus": "awaiting-user-review",
       "evidence": "_task/prototype-worktree/ownword-v0.4.0/feature_list.json",
       "nextStep": "胡先生复核当前公开主页；当前没有待实施功能。",
-      "latestPrototypeCommit": "532ef9c",
+      "latestPrototypeCommit": "c76ad3d",
       "delivery": "_task/prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261002-183602.md"
     },
     {
