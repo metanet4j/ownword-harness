@@ -4,7 +4,7 @@
 
 ## 当前状态（Current State）
 
-P01–P04 已实现、验证并提交，保持 needs-review。权威状态见[功能清单](feature_list.json)。
+P01–P05 已实现、验证并提交，保持 needs-review。权威状态见[功能清单](feature_list.json)。
 
 ## 验证（Verification Evidence）
 
@@ -16,4 +16,4 @@ P02 构建与初始化通过；1440/390/320、中文深色、长资料、头像�
 
 ## 下一步（Next Session）
 
-执行 P05：修复公开阅读同步与失败恢复，验证归属和返回路径。预览保持http://127.0.0.1:4314/运行。
+执行 P06：完成版本关联、两项 BDD 与最终交付复核。预览保持http://127.0.0.1:4314/运行。

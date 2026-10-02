@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": "P05",
-  "nextFeature": "P05",
+  "activeFeature": "P06",
+  "nextFeature": "P06",
   "authorization": "用户已授权新 worktree 连续完成 P01–P06；已验证功能等待人工视觉复核期间继续后续功能。",
   "environment": {
     "worktree": "ownword-prototype",
@@ -139,7 +139,7 @@
       "id": "P05",
       "name": "内容阅读入口",
       "description": "接通主页与已有公开阅读，保持作者、文章与返回来源连续。",
-      "status": "in-progress",
+      "status": "needs-review",
       "dependencies": [
         "P04"
       ],
@@ -150,13 +150,17 @@
         "主页进入对应只读文章，作者按 authorBapId 展示并可查看身份。",
         "阅读、返回、直接链接与刷新保持文章和作者一致，无钱包门槛。",
         "复用现有阅读器，受影响检查与初始化通过，证据归档并独立提交。"
-      ]
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "ownword-prototype/evidence/homepage-v040/P05/verification.json",
+      "commit": "01d6d98"
     },
     {
       "id": "P06",
       "name": "版本关联",
       "description": "核验当前版本、历史版本及其关系，完成两项 PRD BDD 端到端验收。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "P05"
       ],
