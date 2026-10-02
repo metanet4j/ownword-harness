@@ -797,7 +797,10 @@ def canonicalize(locals_out):
 def write_full_run(config_path, ts_reports, java_reports):
     """把 fullRun 段写进 full-evidence-locals.json；整体读改写都在 flock 内（与 register-local.py 同锁）。"""
     entry = {
-        'tsCommand': ['python3', 'run-full-ts-capture.py', '--run-dir', '{runDir}',
+        # 串行 driver：逐局部采集后按汇总计划合并，单进程分派那条 path A 已被取代
+        # （见 a568cff）。此前这一行硬编码成 run-full-ts-capture.py，使得手工把
+        # tsCommand 改回串行后，任何一次 build-full-run-probes.py 都会把它改回去。
+        'tsCommand': ['python3', 'run-full-ts-serial.py', '--run-dir', '{runDir}',
                       '--report', ts_reports[0]],
         # 尾部的 clean test 是固定阶段声明：evidence-bundle capture 与 preflight 都要求
         # 最终 Java 命令自身含无过滤的 clean test；脚本内部始终按无过滤 clean test 执行。
