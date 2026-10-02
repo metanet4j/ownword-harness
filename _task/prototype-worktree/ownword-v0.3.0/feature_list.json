@@ -852,6 +852,31 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "dfe9595581d6956bf9a7cb2b2e1b65dd52074570"
+    },
+    {
+      "id": "R25",
+      "name": "公开探索返回连续性",
+      "description": "修复公开身份和阅读返回私有工作区的问题，保留查找输入与查询，正确显示公开页面导航语义。",
+      "dependencies": [
+        "R24"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-C",
+        "A04-A",
+        "A09-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "查找至身份或 Artifact 的返回保留查询，访客无需连接钱包；返回标签与目标一致",
+        "首页阅读和身份探索可回到首页，直接公开链接有合理公开返回入口；浏览器后退和刷新保持可用",
+        "桌面、390px 与键盘代表场景、日志、截图和启动检查通过；原型与任务状态独立提交"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R25/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "d2bb7de"
     }
   ],
   "designReview": {
@@ -873,7 +898,7 @@
     "fixedPrototypeCommit": "9e4f6dbbaeeb9806f97d2076d644885b24fdd148",
     "resolutionEvidence": "ownword-prototype/evidence/artifact-v030/review-fixes/verification.json"
   },
-  "finalVerification": "evidence/R24-closeout-init.txt",
+  "finalVerification": "evidence/R25-init.txt",
   "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md",
-  "nextStep": "本轮按用户要求收尾并提交。恢复优化时先审查公开查找、阅读与身份页面的视觉层级及操作连续性，登记下一功能后实施；只有实际卡顿或相关改动才检查性能。"
+  "nextStep": "修复 390px 当前数字 ID 换行问题，随后复查列表操作层级与公开身份信息完整性。"
 }

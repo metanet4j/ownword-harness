@@ -32,15 +32,15 @@
       "output": "_task/prototype-worktree/ownword-v0.3.0/ownword-prototype",
       "implementationStatus": "in-progress",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json；本轮 R24 证据见原型 evidence/artifact-v030/R24/verification.json。",
-      "nextStep": "本轮已收尾并提交；恢复优化时优先审查公开页视觉层级、导航与操作连续性，登记后实施。",
+      "evidence": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json；R25 已完成公开路径返回验证，整站品质迭代继续。",
+      "nextStep": "修复 390px 当前数字 ID 换行，继续视觉及操作品质检查。",
       "currentChange": {
-        "id": "R24",
+        "id": "R25",
         "status": "needs-review",
         "harness": "_task/prototype-worktree/ownword-v0.3.0/feature_list.json",
         "implementationStatus": "implemented-and-verified",
-        "evidence": "_task/prototype-worktree/ownword-v0.3.0/ownword-prototype/evidence/artifact-v030/R24/verification.json",
-        "commit": "dfe9595581d6956bf9a7cb2b2e1b65dd52074570"
+        "evidence": "_task/prototype-worktree/ownword-v0.3.0/ownword-prototype/evidence/artifact-v030/R25/verification.json",
+        "commit": "d2bb7de"
       }
     },
     {
