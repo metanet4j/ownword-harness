@@ -10,7 +10,7 @@
     "done"
   ],
   "activeFeature": null,
-  "nextFeature": "R30",
+  "nextFeature": "R31",
   "executionScope": "artifact-features",
   "environment": {
     "worktree": "ownword-prototype",
@@ -970,6 +970,30 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "da9907c"
+    },
+    {
+      "id": "R30",
+      "name": "公开阅读与作者身份连贯性",
+      "description": "关闭独立整站品质审查指出的静态署名断点，让读者通过现有BAP ID查看作者公开身份。",
+      "dependencies": [
+        "R29"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-C",
+        "A09-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "署名入口使用文章authorBapId，连接现有公开身份，无钱包门槛且不扩张主页功能",
+        "身份页返回同一文章和版本，刷新后返回、键盘与长姓名窄屏可用",
+        "独立审查复验、受影响截图、浏览器日志、构建与初始化检查通过，提交并保留视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R30/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "be6bafd"
     }
   ],
   "designReview": {
@@ -991,7 +1015,7 @@
     "fixedPrototypeCommit": "9e4f6dbbaeeb9806f97d2076d644885b24fdd148",
     "resolutionEvidence": "ownword-prototype/evidence/artifact-v030/review-fixes/verification.json"
   },
-  "finalVerification": "evidence/R29-init.txt",
+  "finalVerification": "evidence/R30-init.txt",
   "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md",
-  "nextStep": "登记R30，连接公开文章署名至作者身份并验证返回原文章。"
+  "nextStep": "登记R31，修正320px英文长导航标题下外观按钮的点击区域裁切。"
 }
