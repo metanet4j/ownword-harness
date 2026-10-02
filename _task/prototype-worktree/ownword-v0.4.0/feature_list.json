@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": "P04",
-  "nextFeature": "P04",
+  "activeFeature": "P05",
+  "nextFeature": "P05",
   "authorization": "用户已授权新 worktree 连续完成 P01–P06；已验证功能等待人工视觉复核期间继续后续功能。",
   "environment": {
     "worktree": "ownword-prototype",
@@ -117,7 +117,7 @@
       "id": "P04",
       "name": "内容展示",
       "description": "细化公开内容标题、摘要、作者与版本信息，以及内容卡片和空态。",
-      "status": "in-progress",
+      "status": "needs-review",
       "dependencies": [
         "P03"
       ],
@@ -129,13 +129,17 @@
         "仅展示对应作者的已发布内容，摘要、作者与版本可辨识，空列表有清晰说明。",
         "长标题、长摘要和手机布局可读，阅读入口明确且符合键盘与触控要求。",
         "受影响检查与初始化通过，证据归档并独立提交。"
-      ]
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "ownword-prototype/evidence/homepage-v040/P04/verification.json",
+      "commit": "f383776"
     },
     {
       "id": "P05",
       "name": "内容阅读入口",
       "description": "接通主页与已有公开阅读，保持作者、文章与返回来源连续。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "P04"
       ],
