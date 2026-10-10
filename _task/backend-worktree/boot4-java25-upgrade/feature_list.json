@@ -965,7 +965,8 @@
         "R3 测试迁移（metanet4j-sdk 提交 d8dd9ca）：TransactionBuilderContractTest（244 行，即 §12 中定义费用口径的那个用例所在文件）批量换到新 API——类型（KeyBag→SigningKeyProvider、UTXOProvider 泛型、UTXO→BsvUtxo、Coin→BsvAmount、Address→AddressEnhance、Transaction/Script→新 SDK）、访问器（inputs/outputs.get(i)、inputSum/outputSum 助手、new Transaction(Net.X)→new Transaction()、ScriptBuilder→Script 链式）、新增 toBoxed/inputSum/outputSum 助手，并删除 9 个旧 import。**该文件 io.bitcoinsv 引用清零，旧引用测试文件 17 → 16**（起点 41，降 61%）；剩 4 处其它旧用法待续。过程记录：批量替换在 import 行误加泛型（与第 30 轮同一错误），再次验证「import 行必须整行替换」。",
         "R3 测试迁移（metanet4j-sdk 提交 e32a726）：TransactionBuilderContractTest 继续迁移——getInputs/getOutputs→inputs/outputs、getOutpoint().getIndex/getHash→sourceOutputIndex/sourceTXID、output.getValue()→BsvAmount.fromSdkValue(output.satoshis)、getScriptBytes/getProgram→lockingScript.toUint8Array()/toUint8Array()、Script.op→writeOpCode、去掉 ScriptBuilder 残留的 .build()。仍有 5 处错误（第 84/88 行的 addOutput 等新 SDK 交易构造）。过程记录：**第二次犯「正则吞掉接收者」的错误**（批量替换 output.getValue() 时替换串写成 BsvAmount.fromSdkValue(.outputs.get(N).satoshis)），已用补回接收者的正则修复；结论已固化：带接收者的替换必须用 ([\\w.()\\[\\]]+?) 捕获接收者。",
         "R3 测试迁移（metanet4j-sdk 提交 cc9f559）：TransactionBuilderContractTest 继续——AddressLite::toBase58→AddressEnhance::toBase58、funding.addOutput(BsvAmount,AddressEnhance)→outputs.add(new TransactionOutput(P2PKH.lock(hash160), 5000d))、getInputSum→inputSum 助手、getConnectedOutput→sourceOutput 助手（新增）、getScriptSig→unlockingScript、correctlySpends 块→assertUnlockingScriptValid（新增助手与 asScript，删除 ScriptUtils_legacy/ScriptVerifyFlag import）。该文件仍有 5 处错误。旧引用测试文件 16/54。",
-        "R3 测试迁移（metanet4j-sdk 提交 756e336）：TransactionBuilderContractTest 收尾——输入脚本断言改 unlockingScriptBytes 助手；签名器失败用例改为「密钥提供者解析不到密钥」；构造器用例重写为新的 2 个构造器（(bap, existing, keyProvider) 沿用实例 + (bap, keyProvider) 空交易），getKeyBag→getKeyProvider；修掉被 `.data(...)` 批量正则改坏的 payload 取数行。错误数 5 → 4。**注意**：本文件的多处返工都源于同一批正则替换（吞接收者、误改 import、改坏方法体），已再次确认「批量正则不适合处理带接收者与方法体的改写」。"
+        "R3 测试迁移（metanet4j-sdk 提交 756e336）：TransactionBuilderContractTest 收尾——输入脚本断言改 unlockingScriptBytes 助手；签名器失败用例改为「密钥提供者解析不到密钥」；构造器用例重写为新的 2 个构造器（(bap, existing, keyProvider) 沿用实例 + (bap, keyProvider) 空交易），getKeyBag→getKeyProvider；修掉被 `.data(...)` 批量正则改坏的 payload 取数行。错误数 5 → 4。**注意**：本文件的多处返工都源于同一批正则替换（吞接收者、误改 import、改坏方法体），已再次确认「批量正则不适合处理带接收者与方法体的改写」。",
+        "R3 测试迁移（metanet4j-sdk 提交 f5eab54）：TransactionBuilderContractTest 修正被批量正则改坏的 payload 断言（getScriptPubKey().getChunks().get(i+2).writeBin(toBoxed()) → ScriptHelper.getPushData(lockingScript.getChunks().get(i+2))）。**并发现一个产品代码功能缺口**（migration-rules §25）：`TransactionBuilder.getUnLockScriptSize` 恒用 65 字节估算，**未实现「能取到私钥时按实际公钥长度（压缩 33 字节）计费」的路径**，因此该用例断言的 32 字节差异不存在——需先改产品代码（由 keyProvider.findKeyFromPubHash 取密钥决定传 33 或 -1），再改用例（full 用 keyProvider、publicOnly 用返回 null 的 provider）并跑通验证。这是费用估算的语义问题，touching 所有找零计算，必须在上下文充足时与用例一起完成。"
       ],
       "commits": [
         {
@@ -1219,6 +1220,10 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "756e336"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "f5eab54"
         }
       ],
       "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，有错文件 6 个；旧引用测试文件 16/54（起点 41，降 61%）。",
