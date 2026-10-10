@@ -940,7 +940,8 @@
         "R3 测试迁移（metanet4j-sdk 提交 7c4eaaf／a3f1b1f／aa265fc／160dcbd）：迁移 EciesContractTest、MasterPrivateKeyContractTest、OrdScriptBuilderContractTest、OrdTransactionBuilderContractTest 四个文件；**并通过测试迁移发现并修正一个真实缺陷**——旧流程由 TransactionSigner 携带 hashFlags/anyoneCanPay，新流程改解锁模板后这两个参数未传下去（硬编码 all/false），导致 SIGHASH_NONE／SINGLE／ANYONECANPAY 被静默丢弃，与 V09 冻结向量不符；已新增 completeAndSignTx(provider, hashFlags, anyoneCanPay) 与 signOutputsOf 映射并贯通。有编译错误的测试文件数 11 → 9；旧引用测试文件数 36 → 34。剩余 9 个文件的迁移配方见 migration-rules §21。",
         "R3 测试迁移（metanet4j-sdk 提交 d6ea38d、0bfb936）：补齐 EcKeyLiteExtend 在迁移中丢失的三处公开能力（verify(BsvHashBytes,byte[])／verify(BsvHashBytes,String) 用 fromMsgHashAndCompactSignature 恢复比对、fromPrivateUncompressed 非压缩实例入口、requireConsistentKeys 密钥一致性校验并保留「recoverable key」表述），并登记新 SDK 未公开非压缩公钥编码的局限；重写 EcKeyLiteExtendContractTest；迁移 BapBaseTest 与 BapProviderKeyBagTest（getPubKeyHash 经业务 PublicKey、getPrivKey→getKey、删除已取消的 findRedeemDataFromScriptHash 断言）。有编译错误的测试文件数 9 → 7。剩余 7 个：BapBaseCoreContractTest 62、KeyAddressContractTest 38、OrdTransactionTemplateContractTest 36、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、BapBaseLifecycleTest 14、RemoteOrdTransactionTemplateContractTest 8。",
         "R3 测试迁移（metanet4j-sdk 提交 a13576d、f638adf）：迁移两个 Template 契约测试到新 SDK 交易模型（Address/AddressLite→AddressEnhance、KeyBag→SigningKeyProvider、UTXO→BsvUtxo、Coin→BsvAmount、Sha256Hash.wrap→BsvHashBytes.of、交易访问器 getInputs/getOutputs/getOutput(i)/getProgram/getScriptBytes/getValue → inputs/outputs/outputs.get(i)/toUint8Array()/lockingScript.toUint8Array()/satoshis）。RemoteOrdTransactionTemplateContractTest 已编译清零。**测量更正（重要）**：此前多轮报出的「7 个有编译错误的测试文件」大部分是**级联噪音**——模板测试硬失败时 javac 会对其依赖同一批类的文件报伪错误；模板测试错误数下降后，BapBaseCoreContractTest／KeyAddressContractTest／CryptoHelperContractTest／SpecifyBapBaseContractTest／BapBaseLifecycleTest 的报错曾整体消失又随编译推进复现。结论：**有错文件数在 javac 提前中止时也会失真**，唯一可靠的收敛判据是「test-compile 退出码为 0」。当前剩余 6 个有错文件。",
-        "R3 测试迁移（metanet4j-sdk 提交 9015fbf、c966b6e）：迁移 OrdTransactionTemplateContractTest（去掉旧 TransactionSigner mock、类型与脚本 API 换新、helper 改构造 BsvUtxo）与 KeyAddressContractTest（MainNetParams/TestNet3Params→BsvNetwork、旧 ECKeyLite 夹具改业务 PrivateKey.of、验签改 EcKeyLiteExtend.verify、transformAddress 两处用法改直接调用）。旧引用测试文件数 32 → 31。**测量结论（第四次踩坑后最终版）**：`grep` 统计的「有错文件数」与「错误总数」都会被 javac 提前中止/上限封顶双重失真——同一文件在不同批次里会反复「清零」又「复现」。**唯一可靠判据是 `mvn -o -f metanet4j-sdk/pom.xml clean test-compile` 的退出码**（当前为 1）。剩余 6 个文件确有真实错误：BapBaseCoreContractTest、RemoteOrdTransactionTemplateContractTest、OrdTransactionTemplateContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest。"
+        "R3 测试迁移（metanet4j-sdk 提交 9015fbf、c966b6e）：迁移 OrdTransactionTemplateContractTest（去掉旧 TransactionSigner mock、类型与脚本 API 换新、helper 改构造 BsvUtxo）与 KeyAddressContractTest（MainNetParams/TestNet3Params→BsvNetwork、旧 ECKeyLite 夹具改业务 PrivateKey.of、验签改 EcKeyLiteExtend.verify、transformAddress 两处用法改直接调用）。旧引用测试文件数 32 → 31。**测量结论（第四次踩坑后最终版）**：`grep` 统计的「有错文件数」与「错误总数」都会被 javac 提前中止/上限封顶双重失真——同一文件在不同批次里会反复「清零」又「复现」。**唯一可靠判据是 `mvn -o -f metanet4j-sdk/pom.xml clean test-compile` 的退出码**（当前为 1）。剩余 6 个文件确有真实错误：BapBaseCoreContractTest、RemoteOrdTransactionTemplateContractTest、OrdTransactionTemplateContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest。",
+        "R3 测试迁移（metanet4j-sdk 提交 dfb908e）：RemoteOrdTransactionTemplateContractTest 继续迁移（createOutputScript→P2PKH.lock、getInput(i)→inputs.get(i)、输入 lockingScript→unlockingScript、getConnectedOutput()→sourceOutput 助手、getInputSum/getOutputSum→inputSum/outputSum 助手）；`ScriptUtils_legacy.correctlySpends` 无新 SDK 等价入口，改为 assertUnlockingScriptValid（解锁脚本非空 + 首项推送以合法 SIGHASH 尾字节结束），**脚本级花费校验移至 R6 向量验收（V09）承担，此为已登记偏差**。该文件错误数 54 → 46（未清零）。"
       ],
       "commits": [
         {
@@ -1098,9 +1099,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "c966b6e"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "dfb908e"
         }
       ],
-      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1（6 个文件有真实错误）、旧引用测试文件 31/54。",
+      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，剩余 6 个文件（RemoteOrdTransactionTemplateContractTest 46、BapBaseCoreContractTest 62、OrdTransactionTemplateContractTest 28、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、BapBaseLifecycleTest 14）。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
