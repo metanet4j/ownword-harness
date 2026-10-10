@@ -5,8 +5,9 @@ R0 生成映射，R1—R5 每阶段用它复核「映射是否仍然成立、旧
 只读：不修改任何仓库。
 
 用法：
-  python3 bsv-api-audit.py check          # 核对映射与实际源码（缺项/未收口返回非零）
-  python3 bsv-api-audit.py check --json   # 以 JSON 输出结论（供 evidence 记录）
+  python3 bsv-api-audit.py check            # 核对 API 映射与实际源码（缺项/未收口返回非零）
+  python3 bsv-api-audit.py check --json     # 以 JSON 输出结论（供 evidence 记录）
+  python3 bsv-api-audit.py test-map         # 核对测试映射与 unit-test-inventory.json 的一致性
 
 判定口径：
   * 映射覆盖：baseline.json 的 67 个生产旧引用文件与映射条目一一对应；
@@ -15,6 +16,12 @@ R0 生成映射，R1—R5 每阶段用它复核「映射是否仍然成立、旧
     （公开方法与 public 字段都接受；新 SDK 大量以字段而非 getter 暴露状态）。
   * 未收口：源码中仍存在旧 import 时报告进度（count > 0 属正常，R5 之后必须为 0）。
   * 清理门禁：--require-clean 时旧 import 必须为 0，否则非零退出（R5/R6 使用）。
+
+test-map 判定口径：
+  * 覆盖：测试映射的条目与 unit-test-inventory.json 的 testSources 一一对应，模块与文件数一致。
+  * 逐方法：每个清单方法都在映射中存在（类名 + 方法名），且 unit 方法总数与该清单一致；
+    出现清单有、映射无（或反之）即为缺项。
+  * 同步义务：清单与映射任何一个被改动而另一个未同步时报警，避免验收时静默漂移。
 """
 
 from __future__ import annotations
@@ -72,13 +79,80 @@ def scan_old_imports() -> dict:
     return report
 
 
+def audit_test_map(as_json: bool) -> int:
+    inventory = json.loads((TASK / "unit-test-inventory.json").read_text())
+    test_map = json.loads((TASK / "bsv-replace-test-map.json").read_text())
+    checks: list[dict] = []
+
+    def check(name: str, ok: bool, detail: str) -> None:
+        checks.append({"check": name, "ok": bool(ok), "detail": detail})
+
+    mapped: dict[str, dict[str, str]] = {}
+    for entry in test_map["entries"]:
+        mapped.setdefault(entry["class"], {})[entry["path"]] = entry
+    by_path = {e["path"]: e for e in test_map["entries"]}
+
+    missing_files, missing_methods, extra_methods = [], [], []
+    counts = {"unit": 0, "integration": 0, "external": 0}
+    for repo in inventory["repositories"]:
+        for module in repo["modules"]:
+            for source in module["testSources"]:
+                rel = f"{repo['repository']}/{source['path']}"
+                entry = by_path.get(source["path"]) or by_path.get(rel)
+                if entry is None:
+                    missing_files.append(rel)
+                    continue
+                registered = {(m["name"], m["line"]) for m in entry["methods"]}
+                listed = {(m["name"], m["line"]) for m in source["methods"]}
+                for name, line in sorted(listed - registered):
+                    missing_methods.append(f"{rel} {entry['class']}#{name}:{line}")
+                for name, line in sorted(registered - listed):
+                    extra_methods.append(f"{rel} {entry['class']}#{name}:{line}")
+                for m in source["methods"]:
+                    counts[m["classification"]] += 1
+
+    check("testMap.coversAllTestSources", not missing_files,
+          f"{len(by_path)} 个映射条目；清单中未映射的测试文件：{missing_files[:5]}")
+    check("testMap.coversAllMethods", not missing_methods,
+          f"清单有、映射无的方法：{missing_methods[:5]}")
+    check("testMap.noExtraMethods", not extra_methods,
+          f"映射有、清单无的方法（需同步清单）：{extra_methods[:5]}")
+    baseline_total = test_map["baselineCounts"]["methods"]
+    same_counts = all(baseline_total.get(k) == v for k, v in counts.items())
+    check("testMap.methodCountsMatchInventory", same_counts,
+          f"清单 {counts} vs 映射记录 {baseline_total}")
+    check("testMap.unitTotalIs841", counts["unit"] == 841, f"unit 方法 {counts['unit']}")
+    set_checks = {
+        "sdkLocalHttp": (len(test_map["integrationSets"]["sdkLocalHttp"]["methods"]) == 5),
+        "componentIntegrationClasses": (test_map["integrationSets"]["componentIntegration"]["classCount"] == 18),
+        "componentIntegrationCases": (test_map["integrationSets"]["componentIntegration"]["executedCases"] == 124),
+        "behaviorSamples": (len(test_map["behaviorSamples"]) == 14),
+    }
+    for name, ok in set_checks.items():
+        check(f"testMap.{name}", ok, "符合既有基线")
+
+    failed = [c for c in checks if not c["ok"]]
+    report = {"artifact": "bsv-replace-test-map.json", "checks": checks,
+              "inventoryMethodCounts": counts, "status": "PASS" if not failed else "FAIL"}
+    if as_json:
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+    else:
+        for c in checks:
+            print(f"  [{'OK' if c['ok'] else 'FAIL'}] {c['check']}：{c['detail']}")
+        print(f"结论：{report['status']}")
+    return 1 if failed else 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=("check",))
+    parser.add_argument("action", choices=("check", "test-map"))
     parser.add_argument("--json", action="store_true", help="以 JSON 输出")
     parser.add_argument("--require-clean", action="store_true",
                         help="旧 import 必须为 0（R5/R6 清理门禁）")
     args = parser.parse_args()
+
+    if args.action == "test-map":
+        return audit_test_map(args.json)
 
     api = json.loads((TASK / "bsv-replace-api-map.json").read_text())
     baseline = json.loads((TASK / "baseline.json").read_text())

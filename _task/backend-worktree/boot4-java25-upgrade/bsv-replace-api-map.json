@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "featureId": "bsv-r0-api",
-  "generatedAt": "2026-10-10T18:47:15+08:00",
+  "generatedAt": "2026-10-10T18:53:04+08:00",
   "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
   "planSection": "4 R0 工作项 2；3 类型与行为迁移方案",
   "handlingLegend": {
@@ -41,8 +41,8 @@
   "summary": {
     "oldTypes": 62,
     "byHandling": {
-      "adapt": 13,
-      "delete": 15,
+      "adapt": 16,
+      "delete": 12,
       "replace": 30,
       "gap": 4
     },
@@ -1426,16 +1426,36 @@
         "io.bitcoinsv.bitcoinjsv.temp.KeyBag"
       ],
       "oldKind": "top-level",
-      "handling": "delete",
+      "handling": "adapt",
       "phase": "R3",
-      "target": null,
-      "targetMethods": [],
-      "targetMethodsVerified": null,
-      "plannedEntryPoints": [
-        "com.metanet4j.bsv.wallet.KeyDeriverApi",
-        "com.metanet4j.bsv.wallet.ProtoWallet",
-        "com.metanet4j.bsv.script.templates.P2PKH#unlock"
+      "target": {
+        "fqn": "com.metanet4j.bsv.wallet.KeyDeriverApi",
+        "source": "new-sdk-index"
+      },
+      "targetMethods": [
+        {
+          "method": "derivePrivateKey",
+          "exists": true,
+          "searchedIn": "com.metanet4j.bsv.wallet.KeyDeriverApi"
+        },
+        {
+          "method": "derivePublicKey",
+          "exists": true,
+          "searchedIn": "com.metanet4j.bsv.wallet.KeyDeriverApi"
+        },
+        {
+          "method": "identityKey",
+          "exists": true,
+          "searchedIn": "com.metanet4j.bsv.wallet.KeyDeriverApi"
+        },
+        {
+          "method": "rootKey",
+          "exists": true,
+          "searchedIn": "com.metanet4j.bsv.wallet.KeyDeriverApi"
+        }
       ],
+      "targetMethodsVerified": true,
+      "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
       "oldConstructorSiteCount": 0,
@@ -1463,7 +1483,7 @@
         "V09",
         "V13"
       ],
-      "note": "无按 hash160/脚本反查密钥的等价能力。BapProviderKeyBag/SpecifyProviderKeyBag 改为显式派生（protocolID/keyID/counterparty）并提供解锁模板；公开构造参数随类型删除变化，R3 登记；V09/V13"
+      "note": "新 SDK 无按 hash160/脚本反查密钥的能力（KeyBag 抽象取消）。业务侧改为显式派生：以 KeyDeriverApi.derivePrivateKey(protocolID,keyID,counterparty) 或按派生索引物化的 pubKeyHash→PrivateKey 映射选出签名私钥，再注入 TransactionInput.unlockingScriptTemplate；BapProviderKeyBag／SpecifyProviderKeyBag 随之取消。公开构造参数变化在 R3 登记；V09/V13"
     },
     {
       "oldSimpleName": "KeyCrypterException",
@@ -2089,19 +2109,30 @@
     },
     {
       "oldSimpleName": "RedeemData",
-      "newSdkPublicFields": [],
+      "newSdkPublicFields": [
+        "unlockingScriptTemplate"
+      ],
       "oldFqns": [
         "io.bitcoinsv.bitcoinjsv.temp.RedeemData"
       ],
       "oldKind": "top-level",
-      "handling": "delete",
+      "handling": "adapt",
       "phase": "R3",
-      "target": null,
-      "targetMethods": [],
-      "targetMethodsVerified": null,
+      "target": {
+        "fqn": "com.metanet4j.bsv.transaction.TransactionInput",
+        "source": "new-sdk-index"
+      },
+      "targetMethods": [
+        {
+          "method": "unlockingScriptTemplate",
+          "exists": true,
+          "searchedIn": "com.metanet4j.bsv.transaction.TransactionInput",
+          "note": "公开字段（新 SDK 以 public 字段暴露，非 getter）"
+        }
+      ],
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [
-        "com.metanet4j.bsv.script.ScriptTemplateUnlock",
-        "com.metanet4j.bsv.transaction.TransactionInput#unlockingScriptTemplate"
+        "com.metanet4j.bsv.script.ScriptTemplateUnlock"
       ],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -2121,7 +2152,7 @@
         "V09",
         "V13"
       ],
-      "note": "旧库赎回模型（keys+script）取消，改为每输入自带 unlockingScriptTemplate；RedeemDataExtend 随之删除；V09/V13"
+      "note": "旧库赎回模型（keys+redeemScript）取消：改为每输入自带 unlockingScriptTemplate；RedeemDataExtend 与 TxHelperExtend.getConnectedRedeemDataExtend 一并取消，其职责（选出可签名私钥 + 提供赎回脚本）由显式派生与模板注入承接；V09/V13"
     },
     {
       "oldSimpleName": "Script",
@@ -3913,18 +3944,36 @@
     },
     {
       "oldSimpleName": "TxHelper",
-      "newSdkPublicFields": [],
+      "newSdkPublicFields": [
+        "sourceTransaction",
+        "unlockingScriptTemplate"
+      ],
       "oldFqns": [
         "io.bitcoinsv.bitcoinjsv.msg.protocol.TxHelper"
       ],
       "oldKind": "top-level",
-      "handling": "delete",
+      "handling": "adapt",
       "phase": "R3",
-      "target": null,
-      "targetMethods": [],
-      "targetMethodsVerified": null,
+      "target": {
+        "fqn": "com.metanet4j.bsv.transaction.TransactionInput",
+        "source": "new-sdk-index"
+      },
+      "targetMethods": [
+        {
+          "method": "sourceTransaction",
+          "exists": true,
+          "searchedIn": "com.metanet4j.bsv.transaction.TransactionInput",
+          "note": "公开字段（新 SDK 以 public 字段暴露，非 getter）"
+        },
+        {
+          "method": "unlockingScriptTemplate",
+          "exists": true,
+          "searchedIn": "com.metanet4j.bsv.transaction.TransactionInput",
+          "note": "公开字段（新 SDK 以 public 字段暴露，非 getter）"
+        }
+      ],
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [
-        "com.metanet4j.bsv.transaction.TransactionInput#sourceTransaction",
         "com.metanet4j.bsv.script.templates.P2PKH#unlock"
       ],
       "oldMethodsObserved": [
@@ -3960,7 +4009,7 @@
         "V09",
         "V13"
       ],
-      "note": "TxHelperExtend 不再继承；getConnectedRedeemData（按 KeyBag 反查脚本与密钥）无等价入口，改为显式派生 + unlockingScriptTemplate 注入；V09/V13"
+      "note": "TxHelperExtend 不再继承；getConnectedRedeemData（按 KeyBag 反查连接输出与密钥）无等价入口，改为从 TransactionInput.sourceTransaction/sourceTXID 取连接输出 + 显式派生私钥 + unlockingScriptTemplate 注入；V09/V13"
     },
     {
       "oldSimpleName": "TxInput",
@@ -5060,6 +5109,89 @@
     "conclusion": "配置与反射扫描未发现引用旧库类名的入口：无 META-INF/services、无 spring.factories、无 ServiceLoader、无 system scope/手工 JAR。非 Java 命中全部是 POM 与文档文本。因此旧库替换是纯编译期符号替换；JCL 五项仅为 parent dependencyManagement 声明，Java 源码未使用 JCL 包，R1 接入后按 resolved tree 确认真实引入路径，R5 删除。",
     "jclUsageInJavaSource": "none-found"
   },
+  "resolveCapabilityGaps": [
+    {
+      "id": "RC-DERIVE-KEY-BY-PUBKEYHASH",
+      "missing": "按 pubKeyHash/脚本反查私钥（旧 KeyBag.findKeyFromPubHash）",
+      "sdkChecked": [
+        "com.metanet4j.bsv.wallet.KeyDeriverApi#derivePrivateKey",
+        "com.metanet4j.bsv.wallet.ProtoWallet#getPublicKey"
+      ],
+      "decision": "取消反查，改为显式派生（protocolID/keyID/counterparty）或按派生索引物化 pubKeyHash→PrivateKey 映射；签名私钥在构造输入时确定并注入 unlockingScriptTemplate",
+      "carriedBy": [
+        "R3 密钥与身份组",
+        "R3 交易与签名组"
+      ],
+      "evidence": "V09/V13（含 AllHashSigThreadLocalContractTest 的线程隔离）"
+    },
+    {
+      "id": "RC-SCRIPT-VERIFY-POLICY",
+      "missing": "旧 ScriptVerifyFlag.GENESIS_SET 验证标志集合",
+      "sdkChecked": [
+        "com.metanet4j.bsv.script.Spend#validate",
+        "com.metanet4j.bsv.script.Spend#validateWith"
+      ],
+      "decision": "不再需要标志集合；脚本校验统一走 Spend.validate/validateWith，验证策略由 SDK 后端与参数决定，测试断言保留「合法花费通过、非法花费拒绝」语义",
+      "carriedBy": [
+        "R3 脚本与解析组",
+        "R4 component-common"
+      ],
+      "evidence": "V08/V14"
+    },
+    {
+      "id": "RC-ADDRESS-FROM-SCRIPT",
+      "missing": "旧 ScriptUtils.getToAddress 与 Script.isSentToAddress/isPayToScriptHash 等类型判定",
+      "sdkChecked": [
+        "com.metanet4j.bsv.script.Script",
+        "com.metanet4j.bsv.script.templates.P2PKH#lock",
+        "com.metanet4j.bsv.primitives.Utils#toBase58Check"
+      ],
+      "decision": "按业务实际调用点以 Script+OP+Utils 组合判定与构造；Script.isLockingScript/isUnlockingScript 在 SDK 中抛未实现异常，禁止调用，业务侧以类型本身区分 LockingScript/UnlockingScript",
+      "carriedBy": [
+        "R3 脚本与解析组"
+      ],
+      "evidence": "V08"
+    },
+    {
+      "id": "RC-TXID-DISPLAY-ORDER",
+      "missing": "旧 Sha256Hash.toString 的显示序（反转 hex）",
+      "sdkChecked": [
+        "com.metanet4j.bsv.transaction.Transaction#id",
+        "com.metanet4j.bsv.transaction.Transaction#hash"
+      ],
+      "decision": "由业务 HashBytes 统一内部字节与显示序转换；txid/outpoint 打印与比对一律走该类型",
+      "carriedBy": [
+        "R2 base",
+        "R3 交易与签名组"
+      ],
+      "evidence": "V07"
+    },
+    {
+      "id": "RC-ORDINALS-NESTED-SCRIPT-KEY",
+      "missing": "Ordinals 嵌套脚本（信封内公钥哈希）与连接输出的密钥选择，旧路径依赖 KeyBag 反查，新 SDK 无等价入口",
+      "sdkChecked": [
+        "com.metanet4j.bsv.ordinals（无该能力）",
+        "com.metanet4j.bsv.wallet.KeyDeriverApi#derivePrivateKey"
+      ],
+      "decision": "归属 R3 密钥与身份组：以 BapBase 派生索引规则物化 pubKeyHash→PrivateKey 映射，由业务侧完成 Ordinals 嵌套脚本的哈希匹配；不修改新 SDK",
+      "carriedBy": [
+        "R3 密钥与身份组",
+        "R3 协议与远程流程组"
+      ],
+      "evidence": "V12/V13"
+    },
+    {
+      "id": "RC-JCL-RESOLVED-PATH",
+      "missing": "JCL 五项旧制的实际引入路径（resolved tree）",
+      "sdkChecked": [],
+      "decision": "R1 接入 SDK 制品后按 resolved dependency tree 补齐引入路径，R5 删除并复扫",
+      "carriedBy": [
+        "R1 制品接入",
+        "R5 旧依赖清理"
+      ],
+      "evidence": "R6 的 25 POM 依赖树检查"
+    }
+  ],
   "capabilityGaps": [
     {
       "id": "GAP-NETWORK",
@@ -5150,7 +5282,7 @@
         "signInputs"
       ],
       "conclusion": "新 SDK 无按 hash160/脚本反查密钥的 KeyBag、无 RedeemData 赎回模型、无 TxHelper.getConnectedRedeemData；签名为每输入自带解锁模板 + Transaction.sign()。",
-      "resolution": "删除 KeyBag/RedeemData 抽象，改为显式派生（protocolID/keyID/counterparty）+ TransactionInput.unlockingScriptTemplate；涉及的公开构造与方法签名变化在 R3 登记。",
+      "resolution": "取消 KeyBag/RedeemData 反查抽象，改为显式派生（protocolID/keyID/counterparty）+ TransactionInput.unlockingScriptTemplate；涉及的公开构造与方法签名变化在 R3 登记。",
       "closed": true,
       "evidence": "V09/V13；ws-d-new-sdk-index.json#oldToNewCandidates[KeyBag,RedeemData,TxHelper,TransactionSigner]"
     },

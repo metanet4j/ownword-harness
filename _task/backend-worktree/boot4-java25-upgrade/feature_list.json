@@ -606,7 +606,7 @@
       "name": "固定逐用例迁移清单",
       "description": "对应计划 R0；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r0-baseline",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "bsv-r0-api"
       ],
@@ -619,9 +619,22 @@
       "deliverables": [
         "bsv-replace-test-map.json"
       ],
-      "evidence": [],
-      "commits": [],
-      "statusNote": "待前置执行项及阶段门禁通过。"
+      "evidence": [
+        "bsv-replace-test-map.json：221 个测试源文件、1016 个方法（unit 841／integration 121／external 54）逐类逐方法条目，含处理方式、目标、行为编号（V01—V14）、标签与继承、计数口径；sha256 9fd4dc09…。",
+        "分类去向：68 个文件改写旧库调用、1 个文件（RedeemDataExtendContractTest）因旧实现删除失去意义并登记承接验证、152 个保持不变；9 个受删除实现影响的类逐个给出 subjectDisposition（承接阶段、新验证内容、行为编号）。",
+        "两个集成集合单列：业务 SDK 本地 HTTP 集成 1 类 5 例（BitailsAndGorillaHttpIntegrationTest，@Tag integration）；component 集成 18 类／实测 124 例（声明 116，差值来自继承的 contextLoads 与类级标签继承）。",
+        "bsv-api-audit.py test-map --json → evidence/bsv-replace/r0-api-work/test-map-audit.json：9 项检查 PASS（文件与方法双向全覆盖、计数与清单一致、unit=841、集成集合与 14 组样本齐全）。",
+        "evidence/bsv-replace/r0-api-work/test-map-summary.json：产物指纹、命令与退出码、口径一致性、同步义务、已知陷阱与仓库状态。"
+      ],
+      "commits": [
+        {
+          "repository": "ownword",
+          "commit": "PENDING"
+        }
+      ],
+      "statusNote": "221 文件／1016 方法（unit 841）全部登记去向；静态计数与清单及既有报告三方一致；失去实现的用例已映射到承接验证；SDK 5 例与 component 18 类／124 例分开列出。",
+      "startedAt": "2026-10-10T19:10:00+08:00",
+      "completedAt": "2026-10-10T18:55:18+08:00"
     },
     {
       "id": "bsv-r0-vectors",
@@ -1174,7 +1187,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-10T18:49:21+08:00",
+  "updatedAt": "2026-10-10T18:55:18+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1187,7 +1200,7 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": "bsv-r0-tests",
+  "nextItem": "bsv-r0-vectors",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
@@ -1211,7 +1224,7 @@
       ],
       "progress": {
         "total": 6,
-        "done": 3
+        "done": 4
       }
     },
     {
