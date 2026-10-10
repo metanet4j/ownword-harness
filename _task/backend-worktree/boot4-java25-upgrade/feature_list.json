@@ -934,7 +934,8 @@
         "R3 测试迁移清单实测（metanet4j-sdk 提交 241d08a）：移除已删除类 TransactionExtend 的 import 后，测试编译从「早期中止的 2 处错误」推进到暴露真实工作量——**200 处错误、14 个测试文件**：BapBaseCoreContractTest 62、KeyAddressContractTest 38、CryptoHelperContractTest 20、SpecifyBapBaseContractTest 18、BapBaseLifecycleTest 14、BapProviderKeyBagTest 12、EcKeyLiteExtendContractTest 10、PreSignHashContextContractTest 6、BapBaseTest 6、WordsvBapBaseTest 4、PrivateKeyTest 4、BapVariantContractTest 2、AddressLiteTest 2、OrdHistoricalFixtureContractTest 2。根因是测试仍按旧签名调用已迁移的业务类（如 signHash(Sha256Hash) 现收 BsvHashBytes）。测试侧另有 41/54 个文件仍 import io.bitcoinsv。",
         "R3 测试迁移起步（metanet4j-sdk 提交 9fe6f8c）：按 §20 字典迁移三个最小文件——PreSignHashContextContractTest（Sha256Hash→BsvHashBytes、Coin→BsvAmount）、PrivateKeyTest（MainNetParams.get()→BsvNetwork.MAINNET）、AddressLiteTest（AddressLite/RegTestParams→AddressEnhance.fromBase58(BsvNetwork.REGTEST,...)）。旧引用测试文件数 41 → 38；有编译错误的测试文件数 14 → 13。**测量更正**：测试编译错误总数恒为 200，系 javac 错误上限封顶，不能作为进度尺；后续以「有错误的文件数」与「旧引用文件数」双指标衡量。",
         "R3 测试迁移继续（metanet4j-sdk 提交 cf50712）：OrdHistoricalFixtureContractTest 的旧 Transaction(Net.MAINNET, bytes) 改新 SDK Transaction.fromBinary(...)；BapVariantContractTest 的 HDUtils.parsePath + List<ChildNumber> 改 BapPath.parse(...)、HDUtils.formatPath 改 path.toString()。**有编译错误的测试文件数 13 → 11；旧引用测试文件数 38 → 36**。剩余 11 个文件：BapBaseCoreContractTest、KeyAddressContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest、BapProviderKeyBagTest、EcKeyLiteExtendContractTest、EciesContractTest、BapBaseTest、WordsvBapBaseTest、PreSignHashContextContractTest。",
-        "R3 测试迁移本轮收口（metanet4j-sdk 提交 90db91c）：PreSignHashContextContractTest 的公钥构造改为业务侧 PrivateKey.of(BigInteger.TWO).getPublicKey()。**本轮累计：有编译错误的测试文件数 13 → 10；旧引用测试文件数 38 → 36**。剩余 10 个有错文件：BapBaseCoreContractTest、KeyAddressContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest、BapProviderKeyBagTest、EcKeyLiteExtendContractTest、EciesContractTest、BapBaseTest、WordsvBapBaseTest。"
+        "R3 测试迁移本轮收口（metanet4j-sdk 提交 90db91c）：PreSignHashContextContractTest 的公钥构造改为业务侧 PrivateKey.of(BigInteger.TWO).getPublicKey()。**本轮累计：有编译错误的测试文件数 13 → 10；旧引用测试文件数 38 → 36**。剩余 10 个有错文件：BapBaseCoreContractTest、KeyAddressContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest、BapProviderKeyBagTest、EcKeyLiteExtendContractTest、EciesContractTest、BapBaseTest、WordsvBapBaseTest。",
+        "R3 测试迁移（metanet4j-sdk 提交 c37bf7a）：WordsvBapBaseTest 的 Ecies 调用适配新签名——encrypt 第二实参改 getEncryptKey().getPublicKey().getPublicKey()、decrypt 第二实参改 getEncryptKey().getKey()。有编译错误的测试文件数 10 → 9。剩余 9 个：BapBaseCoreContractTest、KeyAddressContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest、BapProviderKeyBagTest、EcKeyLiteExtendContractTest、EciesContractTest、BapBaseTest。"
       ],
       "commits": [
         {
@@ -1048,9 +1049,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "90db91c"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "c37bf7a"
         }
       ],
-      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试有错文件 10（本轮 13 → 10）、旧引用测试文件 36/54。",
+      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试有错文件 9、旧引用测试文件 36/54。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
