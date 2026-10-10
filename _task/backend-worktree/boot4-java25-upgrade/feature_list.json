@@ -928,7 +928,9 @@
         "两个 Remote 构建器与远程签名器迁移（metanet4j-sdk 提交 aaccdad，§14.4）：RemoteTransactionSigner 不再实现旧 TransactionSigner（改业务组件，Signature.fromDER + toChecksigFormat 回填、P2PKH.unlock 注入模板）；RemoteTransactionBuilder 构造器改 SigningKeyProvider、预签名哈希改 BsvHashBytes、前像走 SigHashExtend；RemoteOrdTransactionBuilder 对齐新签名并改 BsvUtxo/AddressEnhance/BsvAmount。**生产旧引用文件数 17 → 14**；剩余 136 处集中在 RemoteOrdTransactionTemplate 44、OrdTransactionBuilder 38、OrdinalsTransactionSigner 26、OrdTransactionTemplate 16 与三个 LockBuilder。",
         "OrdTransactionBuilder 与 OrdScriptBuilder 迁移（metanet4j-sdk 提交 678cde5）：前者构造器 5→2、addOrdInput 改 BsvUtxo 与新输入模型、addOrdOutput 改 AddressEnhance/BsvAmount、signTx 改 SigningKeyProvider + SIGHASH int、空输入脚本改注入解锁模板；后者 buildInscription 改收 AddressEnhance 且脚本构造改新 SDK Script.writeOpCode/writeBin 链式写法、LocalSigner.idKey 改新 SDK PrivateKey。**生产旧引用文件数 14 → 12**（起点 49，已降 76%）；剩余 142 处集中在 RemoteOrdTransactionTemplate 60、OrdTransactionTemplate 46、OrdinalsTransactionSigner 26 与三个 LockBuilder。",
         "LockBuilder 与远程签名器清理（metanet4j-sdk 提交 e5e6849）：RemoteTransactionSigner 移除冲突重载并按 TransactionSignature.toChecksigFormat 回填签名；UnSpendableDataLockBuilder 锁定脚本改用新 SDK Script。编译错误 142 → 136；生产旧引用文件数 12（起点 49，已降 76%）。剩余集中在四个文件：RemoteOrdTransactionTemplate 60、OrdTransactionTemplate 46、OrdinalsTransactionSigner 26、UnSpendableDataLockBuilder 2、RemoteTransactionSigner 2。",
-        "OrdinalsTransactionSigner 改业务组件（metanet4j-sdk 提交 83f975c，计划 §3）：不再实现旧 TransactionSigner，删除 ScriptVerifyFlag／KeyBag／Translate／ECKey／旧 TransactionSignature；signInput 改 (Transaction, int, SigningKeyProvider, int hashFlags, boolean anyoneCanPay)，新增 signInputs 逐输入注入解锁模板后 Transaction.sign()。**生产旧引用文件数 12 → 11**；编译错误 136 → 118；该文件自身错误清零。"
+        "OrdinalsTransactionSigner 改业务组件（metanet4j-sdk 提交 83f975c，计划 §3）：不再实现旧 TransactionSigner，删除 ScriptVerifyFlag／KeyBag／Translate／ECKey／旧 TransactionSignature；signInput 改 (Transaction, int, SigningKeyProvider, int hashFlags, boolean anyoneCanPay)，新增 signInputs 逐输入注入解锁模板后 Transaction.sign()。**生产旧引用文件数 12 → 11**；编译错误 136 → 118；该文件自身错误清零。",
+        "**SDK 生产编译清零**（metanet4j-sdk 提交 f69691d）：收尾最后 6 处错误——RemoteOrdTransactionTemplate 的构建器实参改 resolveKeyProvider（远程流程不本地签名）、sendOrdinal 便捷重载补齐 remoteSignType 实参；RemoteTransactionSigner 的签名编码三元表达式显式归一（toChecksigFormat→List<Integer>、toDER→List<Double>）；UnSpendableDataLockBuilder 的 ScriptBuilder 返回值包一层转新 SDK Script。实测 metanet4j-sdk 生产编译错误 **0**（本轮起点 12，R3 起点 26）。",
+        "生产旧引用文件数 11 → 3（metanet4j-sdk 提交 82d514f、9d332d4）：清除 AllHashSigThreadLocal（Sha256Hash→BsvHashBytes）、TaggedDerivation（→JDK MessageDigest SHA-256）、ReadUtils（去 ProtocolException/TxParams，改本地 32 MiB 上限常量）、UTXOProvider（仅注释引用）、UnSpendableDataLockBuilder（脚本构造改新 SDK 链式写法）、SpecifyBapBase（删 4 个未使用 import）。剩余 3 个为 input/output 增强类（TransactionInputEnhance／TransactionOutPointEnhance／TransactionOutputEnhance），生产代码已不再引用它们，仅被 TransactionEnhanceContractTest 使用，按 §13.1 改写为持有者即可。测试侧仍有 41/54 个文件引用旧库。"
       ],
       "commits": [
         {
@@ -1014,9 +1016,21 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "83f975c"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "f69691d"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "82d514f"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "9d332d4"
         }
       ],
-      "statusNote": "进行中（原子重构模式）：生产旧引用文件数 11（起点 49，已降 78%）；base 47 例严格验收绿色；SDK 剩 118 处错误，集中在两个 Template（106）与两个小项（4）+ LockBuilder（2）。",
+      "statusNote": "进行中：**SDK 生产编译错误 0**；生产旧引用文件数 3（起点 49，已降 94%），剩余 3 个仅测试使用；下一步为 R3 测试迁移（41/54 个文件引用旧库）与严格验收。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
