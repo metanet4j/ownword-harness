@@ -8,33 +8,22 @@
 
 ## Blockers
 
-- 无开工授权阻塞；R0 离线准备可执行。
-- 沙箱缓存只读且本机网络受限，Maven／本地 HTTP／中间件测试使用宿主权限。
-- SDK 制品接入待 R1；五个共享设施停止、资源隔离待集成前处理，不阻塞 R0。
-- 原 SDK 裸 clean test 缺少重放变量时有 4 例 HTTP 失败；复用正确来源校验与打包入口，不修改只读原任务消解缺口。
+- 无硬阻塞。轮次上限已由用户提升至 10000 并重新激活（此前 40 轮用尽的状态已解除）。
+- 未完成项：R3 测试迁移（**有错文件 6 个**）、R3 严格验收、R4（component 52 生产／115 测试旧引用）、
+  R5（旧依赖清理）、R6（全量验收与交付）。未完成项**未标记 done**（符合 DoD）。
 
-## Files
+## 当前度量（每轮重测）
 
-拆分已提交；来源冻结新增 baseline.json，原始证据在 evidence/bsv-replace/r0-source-20261010-1130。bsv-r0-api 新增任务根目录 bsv-replace-api-map.json 与可复用入口 bsv-api-audit.py（`check` 核对映射，`--require-clean` 供 R5/R6 清零门禁）；取证与复核证据在 evidence/bsv-replace/r0-api-work（该目录被任务 .gitignore 忽略，属本地证据，不随提交）。bsv-r0-tests 新增 bsv-replace-test-map.json，并扩展 bsv-api-audit.py 的 `test-map` 子命令（核对测试映射与清单双向一致）。bsv-r0-vectors 新增 bsv-replace-vectors.json 与纯 Python 独立复算脚本 check-vectors.py 及复核脚本 verify-vectors.py。bsv-r0-gate 新增可重跑阶段门禁 bsv-task-gate.py（按阶段检查允许的未提交改动）与证据刷新入口 refresh-r0-api-evidence.sh；R1 新增 bsv-replace-artifact.json、bsv-replace-dependencies.json、bsv-replace-fingerprint.json，并改造 verify-unit.py 绑定 SDK 制品指纹；R2 完成 base 迁移（BsvNetwork 新类型 + AipHelper／BapHelper 改写 + 110 项新旧奇偶校验）与 base 严格验收。四子仓库均在 feature/bsv-sdk-replace；base/pom.xml 既有 diff 必须保存，不还原、不提前提交孤立改动。原 SDK 固定 3dd8bebe4e465625f2930179bb3c5fcf71b637a2。
-
-主仓 AGENTS.md、infra、其他任务数据删除及 .opencode 的既有无关改动保留，不混入提交。子仓库独立提交，Maven 和共享 target 串行运行；不推送、不广播交易、不读 Archive。
-
-## Next Session
-
-**当前处于用户批准的原子重构中间态**（工作区编译未通过，不再中途还原）。起点备份：`/tmp/r16-src-backup`；检查点：`/tmp/r16-checkpoint-src`、`/tmp/r17-checkpoint-src`。BobHelper 已完成（提交 11112b9）；签名载体已改造并删除 TransactionExtend（提交 78a4813），编译错误 6（随后去残留引用回升到 86，暴露调用方真实依赖）。检查点新增 `/tmp/r18-checkpoint-src`、`/tmp/r19-checkpoint-src`、`/tmp/r22-checkpoint-src`。
-
-唯一下一步是继续迁移这批调用方到新交易模型与 `SigningKeyProvider`：`signers/OrdinalsTransactionSigner`（两处 redeem 调用 + `Translate.toTx` + 旧 `TransactionSignature`）、`ordinals/OrdTransactionBuilder`、`transcation/TransactionBuilder`（基类：`KeyBag→SigningKeyProvider`、`Coin→BsvAmount`、`Transaction→新 SDK`、`AddressLite→AddressEnhance`、`UTXO→compat.Utxo`）、`remote/RemoteTransactionBuilder` 与 `RemoteOrdTransactionBuilder`、`remote/RemoteTransactionSigner`、`BobHelper`。字段级对应表见 migration-rules §7，`ScriptExtend` 契约见 §11。**进度以 `grep -rl 'io\.bitcoinsv' metanet4j-sdk/src/main/java --include=*.java | wc -l` 的文件数下降为准**（当前 28，起点 49），不要以编译错误数判断（旧依赖仍在 SDK pom 中，编译期可解析）。R3 共五组（keys／scripts／transactions／protocols／accept），只在五组全部通过后完成阶段。注意 unit-test-inventory.json 必须与源码增删同步，否则严格验收直接拒绝。持续实施授权已记录。门禁用法 `python3 bsv-task-gate.py --stage r0|r1|...`。
-
-阶段门禁用法：`python3 bsv-task-gate.py --stage r0|r1|...`；证据刷新：`./refresh-r0-api-evidence.sh`。
-
-## Blockers
-
-- **轮次预算用尽**（40/40），非技术阻塞：R3 测试侧 9 个文件、R3 严格验收、R4（component 52 生产／115 测试旧引用）、
-  R5（旧依赖清理）、R6（全量验收与交付）未完成，按估算还需 21—37 轮。工作区干净、`./init.sh` 通过、无残留临时文件。
-- 未完成项**未标记 done**（符合 DoD）。
+| 维度 | 数值 |
+| --- | --- |
+| `metanet4j-sdk` 生产编译错误 | 0 |
+| `metanet4j-sdk` 生产旧引用文件 | 3（起点 49） |
+| `metanet4j-sdk` 测试 `test-compile` 退出码 | 1 |
+| 有编译错误的测试文件 | 6 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、BsocialDataLockBuilderContractTest 26、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、OrdTransactionTest 4 |
+| 测试旧引用文件 | 18 / 54（起点 41） |
 
 ## 交接入口
 
 - 阶段报告：`BSV依赖替换阶段报告-20261011-221500.md`（度量、约束执行情况、证据索引、剩余工作量与建议）
-- 执行配方：`evidence/bsv-replace/r3-keys-20261010/migration-rules.md` §14—§20（字典与三步法，无需重新调研）
-- 测量纪律：只用「有错误的文件数」与「旧引用文件数」双指标，每轮先重跑 `test-compile` 取真实基线
+- 执行配方：`evidence/bsv-replace/r3-keys-20261010/migration-rules.md` §14—§24（字典、三步法、共同父类、覆盖迁移登记）
+- 测量纪律：**唯一可靠判据是 `clean test-compile` 退出码**；grep 统计的错误数与文件数会被 javac 提前中止／上限封顶双重失真
