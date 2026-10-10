@@ -8,14 +8,14 @@ Before writing code：
 
 1. `pwd` 确认在本目录。
 2. 读 `../AGENTS.md`（工程与环境共享规则）与 `../mvn-command.md`（Maven 命令固定模板）。
-3. 读 `doc/升级计划-Boot4-Java25.md`——本任务执行与验收依据，不覆盖核心认知。
-4. 读本目录的 `feature_list.json` 与 `session-handoff.md`——阶段状态与唯一下一步。
+3. 读本目录的 `feature_list.json`，按其 `planDoc` 加载当前实施与验收计划；`upgradePlanDoc` 仅为既有升级依据，不覆盖核心认知。
+4. 读 `progress.md` 与 `session-handoff.md`——实际证据、阻塞与唯一下一步。执行状态只在 `feature_list.json` 维护，`stages` 汇总阶段，`features` 定义执行项。
 5. 运行 `./init.sh` 检查环境与仓库状态；异常先诊断，修复仍须遵守代码、环境及共享设施的授权边界。
 6. 需要改代码时**先取得用户明确批准**，再动手。**选方案 ≠ 批准开工。**
 
 批准在已授权事项内持续有效；换文件、常规验证或续接会话不重复申请，阶段批准不自动延伸到其他阶段。
 
-**One feature at a time（一次只做一项）**：从 `feature_list.json` 只取一项做完再取下一项。
+**One feature at a time（一次只做一项）**：从 `feature_list.json.features` 只取一个执行项，按 `dependencies` 与阶段门禁推进；`activeItem` 指向唯一 `in-progress` 项。阶段 `stages` 不独立执行，全部子项完成后才汇总为 `done`。持续授权以清单 `authorization` 为准。
 
 **Stay in scope（不越界）**：只动该项相关的文件；不顺手重构、不提前做后续阶段、不改无关模块。
 
@@ -24,7 +24,7 @@ Before writing code：
 一项只有**同时**满足以下四条才算完成：
 
 - [ ] 计划文档中该阶段的产物已产出
-- [ ] 该阶段要求的验证**真的跑过**，命令与输出留存（`./init.sh --full` 或阶段门禁命令）
+- [ ] 该 feature 及所在阶段要求的验证**真的跑过**，命令、退出码与输出留存；构建／测试使用当前计划的严格验收命令，`./init.sh` 仅自检，不接受 `--full`
 - [ ] 证据写入 `feature_list.json` 的 `evidence` 与 `progress.md`
 - [ ] `./init.sh` 通过，本任务改动已提交、临时文件已处理；既有无关改动保留并报告，不作为完成阻塞，不清理或混入提交
 

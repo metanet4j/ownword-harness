@@ -520,7 +520,12 @@
         "evidence/bsv-replace/r0-source-20261010-1130/revision.log 与 full-evidence-verify.log：两个命令均退出 0，来源摘要与旧验收一致，复核已有证据、未重跑测试体。",
         "evidence/bsv-replace/r0-source-20261010-1130/init.log：./init.sh 退出 0；旧分支告警将在下一 feature 修正。"
       ],
-      "commits": [],
+      "commits": [
+        {
+          "repository": "ownword",
+          "commit": "b0db12c0e9ea61ab63edc02365fe6abdfc60a25b"
+        }
+      ],
       "statusNote": "五仓库、25 POM 和 67／69 个旧引用文件已冻结；SDK 来源摘要一致、原完整证据 verify PASS。",
       "startedAt": "2026-10-10T11:29:13+08:00",
       "completedAt": "2026-10-10T11:31:26+08:00"
@@ -530,7 +535,7 @@
       "name": "校正任务入口与状态门禁",
       "description": "对应计划 R0；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r0-baseline",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "bsv-r0-source"
       ],
@@ -543,11 +548,18 @@
       "deliverables": [
         "AGENTS.md",
         "init.sh",
+        "test-init.py",
         "evidence/bsv-replace/r0-harness-*/checks.json"
       ],
-      "evidence": [],
+      "evidence": [
+        "AGENTS.md 与 init.sh：加载 planDoc，只自检，不运行构建。",
+        "python3 test-init.py：12 项真实进程检查，正常状态退出 0，旧 --full 退出 2，其余无效状态退出 1；原始输出见 evidence/bsv-replace/r0-harness-20261010/checks.log。",
+        "evidence/bsv-replace/r0-harness-20261010/checks.json：Bash/Python 语法、./init.sh、12 项异常退出及子仓库基线保持检查 PASS。"
+      ],
       "commits": [],
-      "statusNote": "待前置执行项及阶段门禁通过。"
+      "statusNote": "当前计划及替换分支检查已校正；状态、依赖、证据及阶段门禁异常返回非零，旧 --full 拒绝执行。",
+      "startedAt": "2026-10-10T11:32:04+08:00",
+      "completedAt": "2026-10-10T11:36:00+08:00"
     },
     {
       "id": "bsv-r0-api",
@@ -1144,7 +1156,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-10T11:31:26+08:00",
+  "updatedAt": "2026-10-10T11:36:00+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1157,7 +1169,7 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": "bsv-r0-harness",
+  "nextItem": "bsv-r0-api",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
@@ -1181,7 +1193,7 @@
       ],
       "progress": {
         "total": 6,
-        "done": 1
+        "done": 2
       }
     },
     {

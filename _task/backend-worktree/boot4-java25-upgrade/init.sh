@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
-# init.sh — metanet4j 升级任务的环境与状态自检
+# init.sh — metanet4j 当前任务的环境与状态自检
 #
-#   ./init.sh          环境 + 仓库状态（秒级，不触发构建）
-#   ./init.sh --full   追加真实构建与测试（P2 之前预期失败，属正常进度）
+#   ./init.sh          环境 + 仓库 + feature 状态（不触发构建）
+# 构建与测试使用 feature_list.json.planDoc 的严格验收命令。
 #
 # 退出码：0 = 通过；1 = 有必须先修的异常
 #
-# fail-fast：本脚本不用 `set -e`（自检要把所有项都报出来），而是在结尾以退出码汇总；
-# 逐项判定只设 fail 标记，不做提前退出。构建步骤（--full）在子 shell 中执行并回报状态。
+# 自检汇总所有异常，逐项判定设置 fail 标记，结尾返回非零。
 set -uo pipefail
+
+if [ "$#" -ne 0 ]; then
+  printf '不支持参数 %s；init.sh 仅自检，构建／测试入口见 feature_list.json.planDoc。\n' "$*" >&2
+  exit 2
+fi
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 JAVA_HOME_EXPECTED="$HOME/.sdkman/candidates/java/25.0.4.1-tem"
@@ -17,8 +21,7 @@ SETTINGS="$HOME/.m2/metanet4j-settings.xml"
 LOCAL_REPO="$HOME/.m2/metanet4j"
 REPOS=(metanet4j-parent metanet4j-base metanet4j-sdk metanet4j-component)
 COMPOSE_PROJECT="ownword-infra"
-FULL=0
-[ "${1:-}" = "--full" ] && FULL=1
+EXPECTED_BRANCH="feature/bsv-sdk-replace"
 
 fail=0
 ok()   { printf '  [OK]   %s\n' "$1"; }
@@ -66,21 +69,25 @@ for r in "${REPOS[@]}"; do
   if ! git -C "$d" rev-parse --git-dir >/dev/null 2>&1; then bad "$r 不是 git 仓库"; continue; fi
   br="$(git -C "$d" branch --show-current 2>/dev/null)"
   dirt="$(git -C "$d" status --porcelain 2>/dev/null | wc -l)"
-  if [ "$br" = "feature/java25" ]; then
+  if [ "$br" = "$EXPECTED_BRANCH" ]; then
     [ "$dirt" = "0" ] && ok "$r：分支 $br，工作区干净" || warn "$r：分支 $br，有 $dirt 个未提交改动"
   else
-    warn "$r：分支为 $br（预期 feature/java25）"
+    bad "$r：分支为 $br（预期 $EXPECTED_BRANCH）"
   fi
 done
 
 sec "4. 共享中间件（ownword/infra）"
 if command -v docker >/dev/null 2>&1; then
-  running="$(docker ps --filter "label=com.docker.compose.project=$COMPOSE_PROJECT" --format '{{.Names}}' 2>/dev/null | wc -l)"
-  healthy="$(docker ps --filter "label=com.docker.compose.project=$COMPOSE_PROJECT" --format '{{.Status}}' 2>/dev/null | grep -c healthy)"
-  if [ "$running" = "5" ] && [ "$healthy" = "5" ]; then
-    ok "五个容器运行中且全部 healthy"
+  if container_status="$(docker ps --filter "label=com.docker.compose.project=$COMPOSE_PROJECT" --format '{{.Status}}' 2>/dev/null)"; then
+    running="$(printf '%s\n' "$container_status" | grep -c . || true)"
+    healthy="$(printf '%s\n' "$container_status" | grep -c '(healthy)' || true)"
+    if [ "$running" = "5" ] && [ "$healthy" = "5" ]; then
+      ok "五个容器运行中且全部 healthy"
+    else
+      warn "容器状态：运行 $running 个，healthy $healthy 个（应各为 5）；仅阻塞集成，集成前使用 ownword/infra/up.sh"
+    fi
   else
-    warn "容器状态：运行 $running 个，healthy $healthy 个（应各为 5）→ 运行 'cd $HOME/ownword/infra && ./up.sh'"
+    warn "无法读取 Docker 状态（可能是执行权限限制）；集成前在宿主核查，不推断容器已停止"
   fi
   for p in 27017 9200 9092 6379 3306; do
     timeout 2 bash -c "cat < /dev/null > /dev/tcp/127.0.0.1/$p" 2>/dev/null \
@@ -90,49 +97,104 @@ else
   warn "docker 不可用，跳过中间件检查"
 fi
 
-sec "5. 阶段进度速览"
+sec "5. 当前计划与执行状态"
 if command -v python3 >/dev/null 2>&1; then
-  python3 - "$ROOT/feature_list.json" <<'PY'
+  if python3 - "$ROOT" <<'PY'
 import json, sys
+from pathlib import Path
+
 try:
-    d = json.load(open(sys.argv[1], encoding="utf-8"))
-except Exception as e:
-    print(f"  [FAIL] feature_list.json 解析失败：{e}")
+    root = Path(sys.argv[1])
+    d = json.loads((root / 'feature_list.json').read_text())
+    for key in ('planDoc', 'upgradePlanDoc', 'testPlanDoc'):
+        value = d.get(key)
+        if not isinstance(value, str) or not (root / value).is_file():
+            raise ValueError(f'{key} 未指定有效文件：{value}')
+    if d.get('authorization', {}).get('status') != 'approved':
+        raise ValueError('当前计划未记录明确实施授权')
+    features = d['features']
+    by_id = {f['id']: f for f in features}
+    if len(by_id) != len(features):
+        raise ValueError('feature ID 重复')
+    allowed = set(d['allowedStatuses'])
+    visiting, visited = set(), set()
+
+    def visit(fid):
+        if fid in visiting:
+            raise ValueError(f'feature 依赖有环：{fid}')
+        if fid in visited:
+            return
+        if fid not in by_id:
+            raise ValueError(f'依赖 feature 不存在：{fid}')
+        visiting.add(fid)
+        f = by_id[fid]
+        if f['status'] not in allowed:
+            raise ValueError(f'未知状态：{fid}')
+        for dep in f.get('dependencies', []):
+            visit(dep)
+            if f['status'] in ('in-progress', 'done') and by_id[dep]['status'] != 'done':
+                raise ValueError(f'{fid} 的依赖 {dep} 未完成')
+        if f['status'] == 'done' and not f.get('evidence'):
+            raise ValueError(f'{fid} 完成但无证据')
+        visiting.remove(fid)
+        visited.add(fid)
+
+    for fid in by_id:
+        visit(fid)
+    current = [f['id'] for f in features if f['status'] == 'in-progress']
+    expected = [] if d.get('activeItem') is None else [d['activeItem']]
+    if current != expected:
+        raise ValueError(f'activeItem 与唯一执行项不符：{current} / {expected}')
+    if d.get('nextItem') is not None and d['nextItem'] not in by_id:
+        raise ValueError('nextItem 不存在')
+    stages = d['stages']
+    stages_by_id = {s['id']: s for s in stages}
+    if len(stages_by_id) != len(stages):
+        raise ValueError('阶段 ID 重复')
+    assigned = []
+    for stage in stages:
+        children = [by_id[fid] for fid in stage['featureIds']]
+        if not children or any(f.get('stageId') != stage['id'] for f in children):
+            raise ValueError(f"阶段分配不符：{stage['id']}")
+        assigned.extend(f['id'] for f in children)
+        counts = {'total': len(children), 'done': sum(f['status'] == 'done' for f in children)}
+        if stage['progress'] != counts:
+            raise ValueError(f"阶段计数不符：{stage['id']}")
+        if any(f['status'] == 'blocked' for f in children):
+            status = 'blocked'
+        elif counts['done'] == counts['total']:
+            status = 'done'
+        elif any(f['status'] in ('done', 'in-progress') for f in children):
+            status = 'in-progress'
+        else:
+            status = 'not-started'
+        if stage['status'] != status:
+            raise ValueError(f"阶段状态不符：{stage['id']} / {status}")
+        for dep in stage.get('dependencies', []):
+            prerequisite = stages_by_id.get(dep) or by_id.get(dep)
+            if prerequisite is None:
+                raise ValueError(f'阶段依赖不存在：{dep}')
+            if status != 'not-started' and prerequisite['status'] != 'done':
+                raise ValueError(f"阶段 {stage['id']} 的前置门禁 {dep} 未完成")
+    leaves = {f['id'] for f in features if 'stageId' in f}
+    if len(assigned) != len(set(assigned)) or set(assigned) != leaves:
+        raise ValueError('阶段子项重复或遗漏')
+    print(f"  [OK] 当前计划：{d['planDoc']}")
+    print(f"  activeItem = {d.get('activeItem')}，nextItem = {d.get('nextItem')}")
+    for stage in stages:
+        print(f"  {stage['id']}: {stage['status']}，{stage['progress']['done']}/{stage['progress']['total']}")
+    print('  [OK] feature 状态、依赖、完成证据及阶段门禁一致')
+except (ValueError, KeyError, TypeError, OSError) as e:
+    print(f'  [FAIL] 当前计划或执行状态异常：{e}')
     sys.exit(1)
-print(f"  activeItem = {d.get('activeItem')}")
-for f in d.get("features", []):
-    mark = {"done": "[x]", "in-progress": "[~]", "blocked": "[!]", "not-started": "[ ]"}.get(f.get("status"), "[?]")
-    print(f"  {mark} {f['id']:<22} {f.get('status')}")
 PY
-fi
-
-if [ "$FULL" = "1" ]; then
-  sec "6. 真实构建与测试（--full）"
-  echo "  说明：这是 build 级校验（clean package），P2 完成前预期失败（当前 parent 仍是 Boot 2.3.2 + lombok 1.18.20，JDK 25 下编译崩）。"
-  install_and_test() {
-    local dir="$1"; shift
-    echo "  --- $dir：$*"
-    ( cd "$ROOT/$dir" && JAVA_HOME="$JAVA_HOME_EXPECTED" "$MVN_BIN" -s "$SETTINGS" -B "$@" 2>&1 | tail -12 )
-    return "${PIPESTATUS[0]}"
-  }
-  if install_and_test metanet4j-parent -N install; then ok "parent install"; else warn "parent install 失败（见上）"; fi
-  if install_and_test metanet4j-base clean test; then ok "base test"; else warn "base test 失败（见上）"; fi
-  if install_and_test metanet4j-sdk clean test; then ok "sdk test"; else warn "sdk test 失败（见上）"; fi
-  if install_and_test metanet4j-component clean package; then ok "component package"; else warn "component package 失败（见上）"; fi
-
-  sec "6b. 分模块测试执行数（不接受总数口径）"
-  found=0
-  for r in "${REPOS[@]}"; do
-    for rep in "$ROOT/$r"/target/surefire-reports "$ROOT/$r"/*/target/surefire-reports; do
-      [ -d "$rep" ] || continue
-      line="$(grep -h 'Tests run' "$rep"/*.txt 2>/dev/null | tail -1)"
-      [ -n "$line" ] && { printf '  %-58s %s\n' "${rep#$ROOT/}" "$line"; found=1; }
-    done
-  done
-  [ "$found" = "0" ] && warn "未找到 surefire 报告（构建未到测试阶段）"
-  grep -rq 'contextLoads' "$ROOT"/*/target/surefire-reports/*.txt 2>/dev/null \
-    && ok "contextLoads 出现在 surefire 报告（基类上下文用例真的执行了）" \
-    || warn "contextLoads 未出现在 surefire 报告（上下文冒烟未执行）"
+  then
+    ok "执行状态检查通过"
+  else
+    bad "执行状态检查失败"
+  fi
+else
+  bad "python3 不可用，无法核对执行状态"
 fi
 
 sec "结论"
