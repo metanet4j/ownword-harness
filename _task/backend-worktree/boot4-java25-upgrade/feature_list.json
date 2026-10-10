@@ -925,7 +925,8 @@
         "清单一致性教训：verify-unit.py 的清单检查会遍历四仓库，SDK 的原子重构中间态（删除 TransactionExtend、新增 SigningKeyProvider／BapPath）会阻塞 base 验收；已同步 unit-test-inventory.json，并在 R3 期间每次增删源码后立即同步。",
         "UTXOProvider 迁移（metanet4j-sdk 提交 ad4ef6d，§13.3 第一步）：泛型上界换 base 的 BsvUtxo、地址参数换 AddressEnhance；BitailsUtxoProvider 与 OrdinalsOriginGorillaUtxoProvider 两个实现同步（txid 显示序 → BsvHashBytes、金额整数 satoshi、锁定脚本走新 SDK Script.fromBinary）。生产旧引用文件数 21 → 19；剩余 86 处集中在 TransactionBuilder 家族 6 个文件。",
         "TransactionBuilder 基类迁移（metanet4j-sdk 提交 5938905，§14 落地）：字段（KeyBag→SigningKeyProvider、Coin→BsvAmount、Net 与 TransactionSigner 删除、Address→AddressEnhance）、构造器 5→2、7 个方法按 §14.3 换新模型、签名改「注入 unlockingScriptTemplate + Transaction.sign()」、UTXO 入参改 BsvUtxo、LockingScriptBuilder 返回类型换新 SDK Script。**基类自身编译错误清零**；生产旧引用文件数 19 → 17；剩余 156 处集中在 4 个子类与 2 个 Template。",
-        "两个 Remote 构建器与远程签名器迁移（metanet4j-sdk 提交 aaccdad，§14.4）：RemoteTransactionSigner 不再实现旧 TransactionSigner（改业务组件，Signature.fromDER + toChecksigFormat 回填、P2PKH.unlock 注入模板）；RemoteTransactionBuilder 构造器改 SigningKeyProvider、预签名哈希改 BsvHashBytes、前像走 SigHashExtend；RemoteOrdTransactionBuilder 对齐新签名并改 BsvUtxo/AddressEnhance/BsvAmount。**生产旧引用文件数 17 → 14**；剩余 136 处集中在 RemoteOrdTransactionTemplate 44、OrdTransactionBuilder 38、OrdinalsTransactionSigner 26、OrdTransactionTemplate 16 与三个 LockBuilder。"
+        "两个 Remote 构建器与远程签名器迁移（metanet4j-sdk 提交 aaccdad，§14.4）：RemoteTransactionSigner 不再实现旧 TransactionSigner（改业务组件，Signature.fromDER + toChecksigFormat 回填、P2PKH.unlock 注入模板）；RemoteTransactionBuilder 构造器改 SigningKeyProvider、预签名哈希改 BsvHashBytes、前像走 SigHashExtend；RemoteOrdTransactionBuilder 对齐新签名并改 BsvUtxo/AddressEnhance/BsvAmount。**生产旧引用文件数 17 → 14**；剩余 136 处集中在 RemoteOrdTransactionTemplate 44、OrdTransactionBuilder 38、OrdinalsTransactionSigner 26、OrdTransactionTemplate 16 与三个 LockBuilder。",
+        "OrdTransactionBuilder 与 OrdScriptBuilder 迁移（metanet4j-sdk 提交 678cde5）：前者构造器 5→2、addOrdInput 改 BsvUtxo 与新输入模型、addOrdOutput 改 AddressEnhance/BsvAmount、signTx 改 SigningKeyProvider + SIGHASH int、空输入脚本改注入解锁模板；后者 buildInscription 改收 AddressEnhance 且脚本构造改新 SDK Script.writeOpCode/writeBin 链式写法、LocalSigner.idKey 改新 SDK PrivateKey。**生产旧引用文件数 14 → 12**（起点 49，已降 76%）；剩余 142 处集中在 RemoteOrdTransactionTemplate 60、OrdTransactionTemplate 46、OrdinalsTransactionSigner 26 与三个 LockBuilder。"
       ],
       "commits": [
         {
@@ -999,9 +1000,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "aaccdad"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "678cde5"
         }
       ],
-      "statusNote": "进行中（原子重构模式）：生产旧引用文件数 14（起点 49，已降 71%）；base 47 例严格验收绿色；SDK 剩 136 处错误，集中在 4 个 Template／Builder 与 3 个 LockBuilder。",
+      "statusNote": "进行中（原子重构模式）：生产旧引用文件数 12（起点 49，已降 76%）；base 47 例严格验收绿色；SDK 剩 142 处错误，集中在两个 Template（106）、OrdinalsTransactionSigner（26）与三个 LockBuilder（8）。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
