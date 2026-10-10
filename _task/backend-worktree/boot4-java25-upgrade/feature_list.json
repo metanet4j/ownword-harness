@@ -485,7 +485,12 @@
         "node .agents/skills/harness-creator/scripts/validate-harness.mjs --target _task/backend-worktree/boot4-java25-upgrade --json：退出 0，100/100，仅结构检查。",
         "evidence/bsv-replace/feature-split-20261010/init.log：./init.sh 退出 0，工具链隔离通过，旧分支与设施告警待对应阶段处理。"
       ],
-      "commits": [],
+      "commits": [
+        {
+          "repository": "ownword",
+          "commit": "1439448ebdfb28eb61ea72c9b42749ac6a4c5ab1"
+        }
+      ],
       "startedAt": "2026-10-10T11:27:30+08:00",
       "statusNote": "28 个执行项／7 阶段拆分通过，23 个既有事项未改变，单一当前项及依赖无环检查通过。",
       "completedAt": "2026-10-10T11:28:48+08:00"
@@ -495,7 +500,7 @@
       "name": "冻结仓库与 SDK 来源",
       "description": "对应计划 R0；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r0-baseline",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "bsv-replace-features"
       ],
@@ -509,9 +514,16 @@
         "baseline.json",
         "evidence/bsv-replace/r0-source-*/existing-base-pom.patch"
       ],
-      "evidence": [],
+      "evidence": [
+        "baseline.json：保存五仓库提交／分支、源码及 POM 指纹、完整既有 diff、25 POM 指纹和直接旧引用清单。",
+        "evidence/bsv-replace/r0-source-20261010-1130/existing-base-pom.patch：保存已有新 SDK POM 接入，未修改 base。",
+        "evidence/bsv-replace/r0-source-20261010-1130/revision.log 与 full-evidence-verify.log：两个命令均退出 0，来源摘要与旧验收一致，复核已有证据、未重跑测试体。",
+        "evidence/bsv-replace/r0-source-20261010-1130/init.log：./init.sh 退出 0；旧分支告警将在下一 feature 修正。"
+      ],
       "commits": [],
-      "statusNote": "待前置执行项及阶段门禁通过。"
+      "statusNote": "五仓库、25 POM 和 67／69 个旧引用文件已冻结；SDK 来源摘要一致、原完整证据 verify PASS。",
+      "startedAt": "2026-10-10T11:29:13+08:00",
+      "completedAt": "2026-10-10T11:31:26+08:00"
     },
     {
       "id": "bsv-r0-harness",
@@ -1132,7 +1144,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-10T11:28:48+08:00",
+  "updatedAt": "2026-10-10T11:31:26+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1145,13 +1157,13 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": "bsv-r0-source",
+  "nextItem": "bsv-r0-harness",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
       "name": "R0 固定基线与方法级映射",
       "description": "固定五仓库来源、既有改动、API／测试对应及独立向量；按计划更新任务自检。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "bsv-replace-plan"
       ],
@@ -1169,7 +1181,7 @@
       ],
       "progress": {
         "total": 6,
-        "done": 0
+        "done": 1
       }
     },
     {

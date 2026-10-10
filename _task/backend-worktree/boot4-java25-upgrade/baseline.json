@@ -1,0 +1,754 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-10-10T11:29:49+08:00",
+  "featureId": "bsv-r0-source",
+  "sourcePolicy": "四目标仓库为本次实施输入；原 SDK 源码／测试／POM 及冻结证据只读。",
+  "repositories": [
+    {
+      "repository": "metanet4j-parent",
+      "path": "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-parent",
+      "head": "7302e1bf3c2de2e77b3de011edeea68aa12e4384",
+      "branch": "feature/bsv-sdk-replace",
+      "gitStatus": "",
+      "sourceAndPomSha256": "f06ef82a9a38e03bcb2ffe3ddcbe1b6f4d7b088f56c20163a3f02e998419058c",
+      "sourceAndPomFiles": 1,
+      "existingDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "existingDiff": ""
+    },
+    {
+      "repository": "metanet4j-base",
+      "path": "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-base",
+      "head": "53ed9ad69f9046a87def0453dc970ec976a926b9",
+      "branch": "feature/bsv-sdk-replace",
+      "gitStatus": "M pom.xml",
+      "sourceAndPomSha256": "c97548ed532ac2b5597a5dd016e64d8d4bfda82625f6332d6cbd909cae09f989",
+      "sourceAndPomFiles": 36,
+      "existingDiffSha256": "1ab48e1de0fe4107e8937a10e8cfb864d540da69b49eae1241c68ad682fba69b",
+      "existingDiff": "diff --git a/pom.xml b/pom.xml\nindex 12e5e8e..8afca55 100644\n--- a/pom.xml\n+++ b/pom.xml\n@@ -75,9 +75,12 @@\n       <scope>test</scope>\n     </dependency>\n \n+    <!-- BSV 能力层：由 metanet4j-bsv-sdk 提供（@bsv/sdk 2.7.1 的 Java 移植），\n+         取代原 io.bitcoinsv.bitcoinjsv:bitcoinj-base -->\n     <dependency>\n-      <groupId>io.bitcoinsv.bitcoinjsv</groupId>\n-      <artifactId>bitcoinj-base</artifactId>\n+      <groupId>com.metanet4j</groupId>\n+      <artifactId>metanet4j-bsv-sdk</artifactId>\n+      <version>${metanet4j.version}</version>\n     </dependency>\n \n     <dependency>\n"
+    },
+    {
+      "repository": "metanet4j-sdk",
+      "path": "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-sdk",
+      "head": "670ee3d7cfd940141d43d19410b73572ae5c92fb",
+      "branch": "feature/bsv-sdk-replace",
+      "gitStatus": "",
+      "sourceAndPomSha256": "6167a24f75828932c7394bc43cccb2be443abeeb1ae5edb8986765c7756d208e",
+      "sourceAndPomFiles": 148,
+      "existingDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "existingDiff": ""
+    },
+    {
+      "repository": "metanet4j-component",
+      "path": "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component",
+      "head": "3ce773baba7e25db8bd4f10290ec908111f9c227",
+      "branch": "feature/bsv-sdk-replace",
+      "gitStatus": "",
+      "sourceAndPomSha256": "1ea7359ffa7a442a564428aa5430c529c6827ca8aaf597b267c360e5e39e6539",
+      "sourceAndPomFiles": 482,
+      "existingDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "existingDiff": ""
+    },
+    {
+      "repository": "metanet4j-bsv-sdk",
+      "path": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/metanet4j-bsv-sdk",
+      "head": "3dd8bebe4e465625f2930179bb3c5fcf71b637a2",
+      "branch": "feature/bsv-sdk-java-migration",
+      "gitStatus": "",
+      "sourceAndPomSha256": "04752258ab704b72924be9679610cd7a022862f9240ee5b69b97ee262f5fa5ab",
+      "sourceAndPomFiles": 551,
+      "existingDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "existingDiff": ""
+    }
+  ],
+  "pomCount": 25,
+  "poms": [
+    {
+      "path": "metanet4j-base/pom.xml",
+      "sha256": "36f979fa95e4825036c7eff271a77dc37273a4ab43764b5e8cbb42f30653066a"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-api-common/pom.xml",
+      "sha256": "c167908ebc5c28004d2e788377d8b90730d918602e119c26f35c792f0b7357c4"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-component-bap/pom.xml",
+      "sha256": "7213dbaafd2e31b15144a01bfe1ccee950c337aeee33a4213c378e366a44583b"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-component-bitcoinschema/pom.xml",
+      "sha256": "320d1ac501bcb8a7165823e8da2cb581212a59d8d26f2510076e61a45fe6c226"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-component-bsocial/pom.xml",
+      "sha256": "3422a6a5c4fbed07f03b5f4555c55c36028071e6089fdaeee7decadc3d22a8e1"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-component-cache/pom.xml",
+      "sha256": "22d9efd793b7415cafea0f3255e33a72062f5ea88ceba17496b5be0a78951c8b"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-component-common/pom.xml",
+      "sha256": "ec2bb928682d082b2aff654457d23a36ab1484defcd113a84c4c0a5ff16790b0"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-component-core/pom.xml",
+      "sha256": "aac89cf60b5d36c1cf0b77a65d24bdaa607ca3cead90a4902e4a0ca9b1c08357"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-component-file/pom.xml",
+      "sha256": "fa79016c70e3f26721a5a214c363ef678d6e35708299c8041b755e37c2e8392a"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-component-handler/pom.xml",
+      "sha256": "cec8e684c770a8d1290dab81101d105c56617a08bddb593a533c747af834016c"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-component-message/pom.xml",
+      "sha256": "b5265164890e054b3374ae1dc34eb74212601ae02892f8da9fb22c790e2a6ffd"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-component-model/pom.xml",
+      "sha256": "4f042f48af5b0a32774232b22e1929fdbd1c70b2a8bbd4ec62c1a7a3843f4fbb"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-component-test/pom.xml",
+      "sha256": "a4697948f0b2e4065f4be9438e7870e191fdebf27a8572ec096b18610bbaa32a"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-component-tx/pom.xml",
+      "sha256": "8db1cfe7a400d47944a635a8c253ac3f7a07b7e752470fddc71299bf4b19654a"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-connect-planaria/pom.xml",
+      "sha256": "3b50341447464e2ad8b07465bbf95e1a2bfb23d5c1efe9bfe84b4719aeeead0d"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-store-mongo/pom.xml",
+      "sha256": "35bc3fa3de8f3f5e24a60cdfbab464d10f86f836f3faedef9010a975f8e5aa44"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-store-search/pom.xml",
+      "sha256": "33e67bced83a5a8b07130056bfccd887d46b75391cb4aa558d15b928a2338ace"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-store-sql/pom.xml",
+      "sha256": "7cbfa17b1c356a1c0dee99fa1df1f0a8de3df612a0f862ee335ea7e5f2f343d0"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-tx-convertor/pom.xml",
+      "sha256": "928fe05751a8c6fb2e1b53cb06eb237b2b8c619444b7c0641358778893b5e5d8"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-tx-filter/pom.xml",
+      "sha256": "2e8e56644f2111262f8dcb864261eba6a98cedb4406925bd02386a920ebb4c46"
+    },
+    {
+      "path": "metanet4j-component/metanet4j-tx-validator/pom.xml",
+      "sha256": "f6aee278e06bb8a87b388b43d4c52a59f465d89dfdab3bac53e66e766315adcc"
+    },
+    {
+      "path": "metanet4j-component/mybatispuls-generator/pom.xml",
+      "sha256": "25ee67e95fc5531e5ce40f9a75f321304b16255b1d59ee7fce70faf770338a3f"
+    },
+    {
+      "path": "metanet4j-component/pom.xml",
+      "sha256": "fe486605782a5e02814a23130b59bc98d203a8afc5706e08ec811ac9194fc26e"
+    },
+    {
+      "path": "metanet4j-parent/pom.xml",
+      "sha256": "45da8c17e30fb026908d8975a22734ac88053f6308c6e4157b4cd0aa19cf414b"
+    },
+    {
+      "path": "metanet4j-sdk/pom.xml",
+      "sha256": "de497bb8676c9210d0f94fd3968f736b0b0edcd85e6dc89a0437028a9f37ba94"
+    }
+  ],
+  "oldReferences": {
+    "production": [
+      {
+        "path": "metanet4j-base/src/main/java/com/metanet4j/base/aip/AipHelper.java",
+        "sha256": "78743d704c432e4357d0e105d9a7beb9f02c25d03812613691d98b35be45bbfc"
+      },
+      {
+        "path": "metanet4j-base/src/main/java/com/metanet4j/base/bap/BapHelper.java",
+        "sha256": "e9a68d97e38f64569ebfb6c87827a82e64989a352027a14334d1772d2c7f9879"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/BobHelper.java",
+        "sha256": "8623fc0c327f01b03f12d6358686c70d50b91910d4c87a374d87cf5bb552f014"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/EcKeyLiteExtend.java",
+        "sha256": "8a15e4837de3fa1a62e3aa493c207e5db0976b072133f08b5437a8ae3000301c"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/PrivateKey.java",
+        "sha256": "6d2759322b32ee4b3ec51bb5a78d7c6467a35ef5eec99910cec187b8b8d413ec"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/PublicKey.java",
+        "sha256": "85b9660a79af4f8afd74a4c289de6cf92eac151c88b3aff3d9d47d4b68959cae"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/TxoHelper.java",
+        "sha256": "ac326520ee40194e6a40b67c8db4ad3fc43fcc2d947c5a0d4caa75049d0e557e"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/address/AddressEnhance.java",
+        "sha256": "25b1409f75adde7f5e49b524b886e14c9c421ba28e177fea6f11e13033d57b54"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/bap/BapBase.java",
+        "sha256": "86c1f7b80786d6776a55e97c10803825c0faf1a69ac3b219607ce9857c8062d8"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/bap/BapBaseAbstract.java",
+        "sha256": "7b76eeb2808abd4be0dfe8062aa0ef844180fab65faf249c6ada2b0dbeceaa01"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/bap/BapBaseCore.java",
+        "sha256": "35165797bd3bf9064ff7ab92bdc81b9e4eaf4da6718a11b45811bd84c660b9a2"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/bap/MasterKeyBapBase.java",
+        "sha256": "41a3c60e3a8ce02ebb9024a2793304299e1d3c4f385a01c2998a48ee67f818ee"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/bap/PandaBapBase.java",
+        "sha256": "2f8bdbaba137eb7887a1508b4662b89728b097b5eec905bebff0129030439274"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/bap/RemoteBapBase.java",
+        "sha256": "71d1a960377cf9b45170aaca7a1a7aa227f446ee06710dcba4f4b71a3e3b792c"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/bap/SpecifyBapBase.java",
+        "sha256": "113e64379af7c69fa3e394ccc7bdecef967f27dbfb06765bd798a3a8a317b3c3"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/bap/TaggedDerivation.java",
+        "sha256": "915e16809ee931dcdfb283493f9c9e548492dc684859637def88220d5acb5104"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/context/PreSignHashContext.java",
+        "sha256": "88f0592d140f7163f5fdb672f5265843bed6c76bd056460a8c20c4a46e499d3e"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/crypto/CryptoHelper.java",
+        "sha256": "57072638749d95aa88e3f18bba76925e2c6c4e4f6c9e546bc7ebac6acfbd85b9"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/crypto/Ecies.java",
+        "sha256": "a03330946916b56e66fabf0805186cf338e08a15d12931d4fc71c3c9398a2177"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/crypto/MasterPrivateKey.java",
+        "sha256": "e8ee8eefcbbc477c7f11b04b3ce7ddde4a05099dfadcf59127489bf090805985"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/input/TransactionInputEnhance.java",
+        "sha256": "c020a4b7f9ccdd7f4e618805157c7ca0c430879ffcbd090a81723e4d4fd8325d"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/input/TransactionOutPointEnhance.java",
+        "sha256": "f3c32034c729cce165279e156b76f91fee7fb4854e7c6c0410be0fa3d683f4bd"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/ordinals/OrdScriptBuilder.java",
+        "sha256": "cf15b5bc7af1bcb2eebef7b0da4f99204358bf0c980ead027a771cc68aa3450b"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/ordinals/OrdTransactionBuilder.java",
+        "sha256": "0bcd8c56c42f35c165789cb4c0b02cb70740a01d352545ac9d52675d3fd5131c"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/ordinals/OrdTransactionTemplate.java",
+        "sha256": "f4ec2a63f71d54d143545217ab791cb07bdf0a6f434670116f55b5a082783560"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/output/TransactionOutputEnhance.java",
+        "sha256": "9ed42a618431bedac8fc8f623c7e5c08b41cf62e580b951accee4f96b9bf5b71"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/remote/PreSignHashUtils.java",
+        "sha256": "6cf9d5827f1f344b3b7eb481887cff44f0740687583b374871b7edf057f6082b"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/remote/RemoteOrdTransactionBuilder.java",
+        "sha256": "ba95a2eae55c80095b76b5eb8cd0ff71d8aadcb1f7a874138c7f8e683ad6dec0"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplate.java",
+        "sha256": "0c072394c3c7c4231d14bacf0443fd18585d9c19af0801bed6e98e8b6ce53b16"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/remote/RemoteTransactionBuilder.java",
+        "sha256": "62f33dc55709afc7ae7ef68dd5524b41fa9d5ef3bac669eb0f9dcd0b05c3e422"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/remote/RemoteTransactionSigner.java",
+        "sha256": "3621d7262c27a99d6ff58de4f803839517ec60790ba12d816870dbd192ad9b20"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/script/ScriptExtend.java",
+        "sha256": "07f3b9b044d603d7552deb13a3c511a4c448d63c236f84073b201ff76ed11c9c"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/script/SigHashExtend.java",
+        "sha256": "350dba348f8706a2f8e02e7d295fcfb676d2a2069eabbd2033a6c51866da96b9"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/sigma/Sig.java",
+        "sha256": "242a84fa86bdf20066c6a5bc874a0c4ce7a3657a11eb22fbe569807a10fb1454"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/sigma/Sigma.java",
+        "sha256": "aef30634f080fd5bba9ccb69567bab48b7c37415528fcc26f16c959943717f1c"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/sigma/SignResponse.java",
+        "sha256": "20c45194bc4e90778f9a9b6479af3dd5e5fac7d530cc1169f2d19e79bd701a44"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/signers/AllHashSigThreadLocal.java",
+        "sha256": "9274360f699e229152fa52466a83b044f0cc4b0ac3753b4599fc13342cf4d55e"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/signers/ExtendForSignTransaction.java",
+        "sha256": "62aa9565c8b7f928ca8c9e6c92b1a995380d078e22735e5c0635170a479186e3"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/signers/OrdinalsTransactionSigner.java",
+        "sha256": "37d5ce1818aae8a9f1c5a98f9bb7122d405a191c245f167e20258aa96b859c0a"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/signers/TransactionExtend.java",
+        "sha256": "45514b8c3c676e8c9584497b3d3d56c439c0309075dd9c2f843220d70f70d9ba"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/transcation/LockingScriptBuilder.java",
+        "sha256": "bbe11cfa883873833c266e81876ef041cac75904f13bcfa154c17e91a9a7c006"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/transcation/TransactionBuilder.java",
+        "sha256": "fb90e353188074a7769b49d487ec90d85c93c67ed9c04ac842c1da9dac2b37d9"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/transcation/UnSpendableDataLockBuilder.java",
+        "sha256": "b3569ea0f90d5daec7dcdfa1cc66df22b417d76d6ad4406d469f88d1264823d9"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/utils/ReadUtils.java",
+        "sha256": "210031c3d2c1a860a486d9717e2516e4a540106a8df509caff57fe86620f6401"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/utils/RedeemDataExtend.java",
+        "sha256": "c067b62158ebad2568f4b181b997b6d5492a1120c65c21fd4a51c1ff44e860b0"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/utils/ScriptHelper.java",
+        "sha256": "0079918de70315544e7f4a16b6bada972fffe5d8501afc4bfd844068a5c3524e"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/utils/TxHelperExtend.java",
+        "sha256": "683d29882f5ee23010fe4a8d443f3b42b7c0f1d362a0b1321af85e8763694b94"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/utils/UtilsExtend.java",
+        "sha256": "6dd3945bd87d2f9803a2bb6d5a210e6e19e86c5f5dd323b8a55438acf7b959c3"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/utxo/UTXOProvider.java",
+        "sha256": "8ecb4cb23f2210ec2fad121aa41415a9373dae42de44a0b5936ffd6942b62379"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/utxo/impl/bitails/BitailsUtxoProvider.java",
+        "sha256": "aeb89cd7c8f4f9ca3e4358f6ed5c9efd65c76fec0179d5a0d6b5dc82a90c24cf"
+      },
+      {
+        "path": "metanet4j-sdk/src/main/java/com/metanet4j/sdk/utxo/impl/gorillapool/OrdinalsOriginGorillaUtxoProvider.java",
+        "sha256": "e59dd3d8f5d02eb69b0e2c74de6994e0ac57307d8461913fdb871fe1e504656f"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-bap/src/main/java/com/metanet4j/component/bap/validator/DefaultBapValidator.java",
+        "sha256": "d79e3bc8f8d9027d5f8ac155012fbaa3ea5ec6a46ab5d64c7d11308b277eaaa5"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-common/src/main/java/com/metanet4j/component/common/transaction/BitcoinSchemaTransaction.java",
+        "sha256": "625c29135d9efbd38a3c747e06e8c2ce194da0b1faaad3331d36fe8319f26532"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-common/src/main/java/com/metanet4j/component/common/transaction/LocalTestUtxoProvider.java",
+        "sha256": "fb19a8c9ab924ec369a56e10bbc224f16c50c4a8289bc4e35289519c820bd2da"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/BschemaCustomTransactionSigner.java",
+        "sha256": "8e4beef97ced7002964c24a2e1cf5a9cc9ac95fcd344fe9d5ceb75a377887f67"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/DefaultBapBaseFactory.java",
+        "sha256": "6d0f934376e51b125436f50b7f61db6f0b11ccc9ad8d4865abb04308937d3348"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/DefaultCompleteTxFactory.java",
+        "sha256": "23fc60145f8c0f3477881d56bf8bdea219efc44ac4093969b3c3ca74102c6928"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/DefaultPrepareOnchainTxResolver.java",
+        "sha256": "fb79b3de78c27d867765bc5a6ce59ceca99262da1f8d5835edb3954ddc8631e9"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/DefaultUtxoResolver.java",
+        "sha256": "3393155b5f078ecb6722dda184c78ac5608f780be8e6c479c2a150c629512dbb"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/core/BapBaseFactory.java",
+        "sha256": "75eac6ade6719cd6076e86d6aed61c4ca155b1c89eeedfd2382ba06700071efb"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/core/CompleteTxFactory.java",
+        "sha256": "5172f3137cf305c0b239db5a06e3d8f3470988b4d1f51220a25fa7c8b35a327a"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/core/PrepareOnchainTxResolver.java",
+        "sha256": "5ab1d0f2d832b488bdce43b4d4c1f7e6d207e796b808a438fb84dc9cb90e4f4e"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/core/UtxoResolver.java",
+        "sha256": "6e8690ccc2469053a4041304c7b59f7c196bdb9179187cdfc43e938cdc4c0009"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-tx-convertor/src/main/java/com/metanet4j/tx/convertor/impl/UtxoConvertor.java",
+        "sha256": "70f2ff38b43e7dba70db26f14d956f26e34eb38a890fcc7e883a1f93d274859f"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-tx-filter/src/main/java/com/metanet4j/tx/filter/MetaIdProtocolTxFilter.java",
+        "sha256": "bb4bb54c9b32f4c0bbdb005135c75d2630e6327b1c667deab37117a21e330d14"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-tx-filter/src/main/java/com/metanet4j/tx/filter/RepeatSourceDataFilter.java",
+        "sha256": "91b8a5741e61588325b8f1d635cf04d75f56d3e13e2cc50858fd23850990a05e"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-tx-filter/src/main/java/com/metanet4j/tx/filter/SourceDataFilterChain.java",
+        "sha256": "eb13d8dac8f0b7befe67293d3b6f3e17ccbebe1972b91416ae1466df0b0e0528"
+      }
+    ],
+    "tests": [
+      {
+        "path": "metanet4j-base/src/test/java/com/metanet4j/base/AipTest.java",
+        "sha256": "b3e6101b49194ac3a1da5aba27b0cd36ba75c5fbf3c44facd037103d49b1c251"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/BobTxoConversionContractTest.java",
+        "sha256": "804b8f6d3aed2a506b0e7544bea9f888e977b00d705ff5e6dc95218bb6a6af2c"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/EcKeyLiteExtendContractTest.java",
+        "sha256": "66f80d5264b2d8ad6f378bd6134f1042439d41ecd10e90df9fff62649c9f0360"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/KeyAddressContractTest.java",
+        "sha256": "68c4e9a712b4092404413fd0b6c2c5c4ddae7291c03a421955f8742ed34fdcac"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/OrdHistoricalFixtureContractTest.java",
+        "sha256": "0543fa36fc18ba401f738ee194ddf94c9253d87b8d71cf5430986aadd483d473"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/PrivateKeyTest.java",
+        "sha256": "ce11835f75ed0d35d62be37c4568c01cf4ce5d7f911cd0aff08080cf5cc400b3"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/address/AddressLiteTest.java",
+        "sha256": "1595b5e41dd11f94cf37216716a706129004f060b6eb3c222bedd7521a31368d"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/bap/BapBaseCoreContractTest.java",
+        "sha256": "1091c28f5baceaaec3b56e35494f5e11f0a56fa164031808c8cdc8ead9d7b0a8"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/bap/BapBaseLifecycleTest.java",
+        "sha256": "f9d3378f47edaf20b38e8bf2db6935dfa58fc0332872b5901919ae8b61dc351b"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/bap/BapVariantContractTest.java",
+        "sha256": "e4abefa9c8e65cbc5f95f0fb9a61760723a5804d9b1aaa468cc7faa5d2918f71"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/bap/SpecifyBapBaseContractTest.java",
+        "sha256": "3d0e291eb7be173d56822ccadc23de254a96b09bcb9b0f8b05bac465063c26af"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/context/PreSignHashContextContractTest.java",
+        "sha256": "ebd9813d33ba7af66f864b10af314ab882f989411849ef641e97d1e2a186ccaf"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/crypto/CryptoHelperContractTest.java",
+        "sha256": "21d6ae4d9770cc526be23f1f4505c8d0cd2ee59ba1e8ba84975f873c755c41e1"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/crypto/EciesContractTest.java",
+        "sha256": "ff81b9a992f253e3af8f26fd52f034bb9b8f8b20968acf7e256cb3cbb3765ad2"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/crypto/MasterPrivateKeyContractTest.java",
+        "sha256": "2d659e7148dd2a1b4e4851ce3692b3b3962c5db84dc940d830ece1c2e2970d7d"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/input/TransactionEnhanceContractTest.java",
+        "sha256": "d561936ce0531ed939e427bd986e26068443718ab8907aaa8973c2bce464d3a1"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/ordinals/OrdScriptBuilderContractTest.java",
+        "sha256": "ce4d7ed12386d1aa0e9685955c565754cc388dcd77b5481147b21be0e80ba677"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionBuilderContractTest.java",
+        "sha256": "c090c28541b8aa28931603e349e6723b47270c4dc41b836efc210a8748dc40ee"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionTemplateContractTest.java",
+        "sha256": "7507adc590e9d00ea7f54f4fa2931ed888b3e90e546b4407da36044052c62169"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java",
+        "sha256": "26a00dd1eaa48b609a553348581aded6410e11860f8001fca678644c4e06c129"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/remote/RemoteTransactionContractTest.java",
+        "sha256": "95ed9a2bcd8dae6cdfdfb42b6a1e07b56c8c1149ea1dd0eabaf5af82da4b47ed"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/script/ScriptExtendContractTest.java",
+        "sha256": "0d12e1e48b4e6d38401e4e34c5201e9f66b68b5714bd372334b77c47594ff441"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/script/SigHashExtendContractTest.java",
+        "sha256": "12f35d0380a051567f24135211e0bc588be5ea96638d5bc738d062f92467cdf9"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/sigma/SigmaHashContractTest.java",
+        "sha256": "92f16bb655cd00004a06818aa0c194e4b413beb7c49957a60a58ee4bb5e46dd1"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/sigma/SigmaProtocolModelTest.java",
+        "sha256": "4dc0bd8413538f7934e24ecaf1fa51a4310103ed9d657633b3e159ea19509795"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/sigma/SigmaSignContractTest.java",
+        "sha256": "9df2543d15d13a157eff3fe1c3d0157168c2d2f080df98b5920c9e7f62cdf690"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/signers/AllHashSigThreadLocalContractTest.java",
+        "sha256": "766c113467da1ad4ffe0cef151ba3178d212438649e1cf460673bf3f12809bc8"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java",
+        "sha256": "0e354fa14da8289b5d88b15f1a75296fda84e19e6cc2ced756c1ffc92d7d42c1"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/transcation/BitcoinschemaTransactionTest.java",
+        "sha256": "4c1b08d6a500fb885cf8b2aae79b3c4feaecb3b75829954617296771706cccc7"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/transcation/BsocialDataLockBuilderContractTest.java",
+        "sha256": "2383ebc4027c4913707e7657f6b532d8a006830b258b07de78345b999d568f56"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/transcation/OrdTransactionTest.java",
+        "sha256": "5e2555d653317a7188b3469e17f16c815bde95481d68cef48620ad9084dc9487"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/transcation/RemoteSignBitcoinschemaTransactionTest.java",
+        "sha256": "103d35d9d8bc76886b8a5fc900bc8a002a243ffd93bd1f8f3346dd5648ba394d"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java",
+        "sha256": "8ca0917f41c8caa8efd30242db7bccca73a2f1bd4300bd829c53de8389172555"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/transcation/TransactionContextTest.java",
+        "sha256": "9f98b666dbe1439c6de76513aab887c7f8239317ba4f2c13fab2484ab0b2ddeb"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/transcation/UnSpendableDataLockBuilderContractTest.java",
+        "sha256": "fec562cba42516716f452d01094624da19236361710126e56b90650a3b29d47f"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/utils/ReadUtilsTest.java",
+        "sha256": "17f92a7c4efee67864e68c629d4937a5794a5fe91d93737a88bb0a7cd2e05133"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/utils/RedeemDataExtendContractTest.java",
+        "sha256": "4045e85f561cfd6699de50b0b778e65b55981f9b69347edb9e70de280f5e811e"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/utils/ScriptHelperContractTest.java",
+        "sha256": "35f849ee397c45b57f7bbb7e47825fa9f25dd814937e1086da84a02536998227"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/utils/TxHelperExtendContractTest.java",
+        "sha256": "b59aa778aa4e55f4b706448b565351a15c453b3f07b7d722be0a4ea46e582b0d"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/utxo/BitailsAndGorillaHttpIntegrationTest.java",
+        "sha256": "a5284361d2f5cb74c53cd46bf1726f2cdcc4af2b719d5a11b8af826df0265ea7"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/utxo/BitailsProviderTest.java",
+        "sha256": "666bdfae009aaa8e3df84dea4d21176bd77f8fa1a821f1a2865d904acf96c44e"
+      },
+      {
+        "path": "metanet4j-sdk/src/test/java/com/metanet4j/sdk/utxo/UtxoProvidersTest.java",
+        "sha256": "b78bba10da7ec4940b88c4a6bbf7a8f1c6fa340be8f2acfb71e387f15896eaef"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/BapTestFixture.java",
+        "sha256": "6fe46eb85d4927f486ed5f1976eb7f0ae46a47abe86a8441d7121727d1b217d5"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/manager/BapManagerContractTest.java",
+        "sha256": "421d481b185c7707f175302b598932f6cbe99258eab5fa375deb52fcd8109750"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/BsocialTestFixture.java",
+        "sha256": "b66edf55567d51f28798e9e793c8ba5c5c55754f48d6c91538eca0e0866f5b73"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MongoBusinessChainIntegrationTest.java",
+        "sha256": "8fc521413d7245281b0cd209e7b172e46c52bcc2a8c1c5e5c1b13e17a19c6c3f"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MysqlBusinessChainIntegrationTest.java",
+        "sha256": "5873cead782c9d86311345561a8c532bc7e0207a8dd66e5a80d1933a70a3764b"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/manager/BsocialManagerContractTest.java",
+        "sha256": "31b4a88fb9f117635cd2eda1e883d1d6976266500ad53a1e3396dec01c57b482"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-common/src/test/java/com/metanet4j/component/common/transaction/BitcoinSchemaTransactionContractTest.java",
+        "sha256": "ca7ca29586c9584c08896991f60f53f8c3e17199ab0ff7aa31a36e02cabc1bc4"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-common/src/test/java/com/metanet4j/component/common/transaction/LocalTestUtxoProviderContractTest.java",
+        "sha256": "2fe40480fa56a793cd90f3a2fd40b7616e6b369d79324ee98ba4563e1fcba4d0"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-test/src/test/java/com/metanet4j/component/test/convertor/MetaIdConvertorTest.java",
+        "sha256": "0ceecad20eb51c1698bf714172e91ed5acf743762cdd0ac1e51f80f605b93d34"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-test/src/test/java/com/metanet4j/component/test/convertor/TxoBobConverterTest.java",
+        "sha256": "bb96e5e8bb2f2433ba4b2e9f46f75c4fd5be63875a00a0049c988e02e0b24af7"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/BitcoinschemaTransactionTest.java",
+        "sha256": "de0f116e2b362aaa9f18600c84955cdfefc6ed576920a62b621c56078e605227"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/CommonTest.java",
+        "sha256": "8165383f27c17b8710db621b0a99a7994ecc333ea947acb3f6dd500ace09cfd4"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/LocalTestUtxoProvider.java",
+        "sha256": "7186b522e81ac8915ee88886b5ae871fe700b2de8f7a8380209cf32f54e72ed3"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-test/src/test/java/com/metanet4j/component/test/utxo/TxUtxoServiceTest.java",
+        "sha256": "3318023b90d66c12d523418013104a68f9c6c0dfc3f02a503372c4689d5b7820"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/BschemaCustomTransactionSignerContractTest.java",
+        "sha256": "9e090841e326b4e5a009adeb654734953ef79488763817d9a9a3708f20da2b23"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultBapBaseFactoryContractTest.java",
+        "sha256": "2ad1af7475e9ed5169b81879929b6aa999b963122379bdd3f304a08f1aab317f"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultCompleteTxFactoryContractTest.java",
+        "sha256": "a526a474a7e78bf39cdfdd30293e6abc3874e855bff9f20fd584d79d1edf4118"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultPrepareOnchainTxResolverContractTest.java",
+        "sha256": "3e91876b3f06c8b68971a814753dc4ba8a6bdcea4cf02dd08e2c764e19643aca"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultUtxoResolverContractTest.java",
+        "sha256": "a264e179b83981045a1882bdc24b5201b621dc79eb138b44923a24b772f46b11"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/StubBapBaseFactory.java",
+        "sha256": "c8d2d9b7e51ff3794217e831aa7c0bb5e7aa5ad30a288c8a6f6cec17e65119fb"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/TxTestFixture.java",
+        "sha256": "ec2947f3b337369ad2ecbf9bedf045ed375dd7ff94aa114b6d9ed3aa7dd52acb"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bap/repository/bapid/CustomizedBapIdRepositoryImplContractTest.java",
+        "sha256": "cccc044a5f6d10ca125a3a2ee1ce6338a0c0816570e2185d3bc0e4f5d70e8988"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/impl/PlanariaBapConvertorContractTest.java",
+        "sha256": "182ab2bdb90d256283141a8bea5a33a42124c15a65df4e051a8aa847f68c873f"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/impl/PlanariaBsocialConvertorContractTest.java",
+        "sha256": "20083eca4609d76d1d804d9ebd3a5ac7211d2f9e68deb03f0ae0c01f12187bf3"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/impl/UtxoConvertorContractTest.java",
+        "sha256": "1320ab20cceb87185a164d7b6b807f2d45b56f23ea26e692613e5c09b2a2dfea"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-tx-filter/src/test/java/com/metanet4j/tx/filter/SourceDataFilterChainContractTest.java",
+        "sha256": "38345dd8cf7b7f32681da0f1a54b3393904b77c06ba51ab648a5b9256aae6bce"
+      },
+      {
+        "path": "metanet4j-component/metanet4j-tx-filter/src/test/java/com/metanet4j/tx/filter/SourceDataFiltersContractTest.java",
+        "sha256": "929173a0545e4c83e9e1cb85431516b74180da870d7d9c60d26fb07c3cabe538"
+      }
+    ]
+  },
+  "sdkAcceptance": {
+    "gitHead": "3dd8bebe4e465625f2930179bb3c5fcf71b637a2",
+    "javaRevision": "ce6b50d7cb353422cd3b25f83239ca2013862dccc83575b5b5df532ff2c8be1c",
+    "javaRevisionMeaning": "audit-tests.py 对原任务所有 Java 仓库提交及文件生成的 SHA-256 来源摘要，非 Git revision",
+    "formalAcceptance": true,
+    "manifestPath": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/evidence/full-run-52-20260901/full-run.json",
+    "manifestSha256": "a5b4ee3f90c43efb26faa6266035423fcca0d50a55f964a11e56d0c8141788bc",
+    "verification": "PASS；复核已有证据，未重跑测试体"
+  },
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "audit-tests.py",
+        "revision"
+      ],
+      "cwd": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration",
+      "exitCode": 0,
+      "log": "evidence/bsv-replace/r0-source-20261010-1130/revision.log"
+    },
+    {
+      "command": [
+        "python3",
+        "full-evidence-run.py",
+        "verify",
+        ".cache/evidence/full-run-52-20260901/full-run.json"
+      ],
+      "cwd": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration",
+      "exitCode": 0,
+      "log": "evidence/bsv-replace/r0-source-20261010-1130/full-evidence-verify.log"
+    }
+  ],
+  "evidenceDir": "evidence/bsv-replace/r0-source-20261010-1130",
+  "knownConditions": [
+    "目标缓存尚未接入 SDK 制品，R1 处理。",
+    "五个共享服务停止，集成前处理。",
+    "base 既有 POM 修改冻结，R2 与实现共同提交。"
+  ]
+}
