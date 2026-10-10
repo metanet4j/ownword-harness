@@ -957,7 +957,8 @@
         "R3 测试迁移（metanet4j-sdk 提交 0b3c234）：**SignerTransactionContractTest 按 §23 重写清零（14 → 0）**——原文件 14 个用例测的是三个已删除/重新设计的抽象，重写为聚焦新架构的 5 个用例（范围载体、签名尾字节、缺失连接输出的单输入报错与批量跳过、未知密钥的单输入 false 与批量跳过、FORKID 位置位）。删除的 9 个用例逐条登记去向（§23.3）：序列化保真→SigHashExtendContractTest、签名范围→本案与 OrdTransactionBuilderContractTest、网络参数→KeyAddressContractTest，其余 4 个属新 SDK 不具备的能力（legacy hashing、密钥加密锁、中途失去私钥访问、旧解析器特性），登记为「新架构下不再可验证」而非迁移遗漏；unit-test-inventory.json 同步为 5 个方法。执行中发现原文件实为 14 个方法（先前只列 11 个），已补回「未知密钥」覆盖，避免静默减少覆盖。旧引用测试文件 24 → 23。",
         "R3 测试迁移（metanet4j-sdk 提交 dd0e4dd）：**BapBaseLifecycleTest 编译清零（14 → 0）**——HD 路径改用 BapPath（HDUtils.parsePath + List<ChildNumber> → BapPath.parse；去掉 List.copyOf；fromRootChildNumberList 第二实参改 BapPath）、末位断言 ChildNumber.num() → BapPath.lastIndex()、Ecies 的 DeterministicHierarchy/DeterministicKey 派生改为 BapPath.derive(masterHD) + HD.pubKey，与 Ecies.encrypt(String, PublicKey, PrivateKey) 新签名对齐。旧引用测试文件 23 → 22；另显形 BitcoinschemaTransactionTest（12）。当前有错文件 5 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、BitcoinschemaTransactionTest 12。",
         "R3 测试迁移（metanet4j-sdk 提交 dd0e4dd 后继续）：BitcoinschemaTransactionTest（12 处）定位到其**共同父类** transcation/TransactionContextTest（138 行）——BitcoinschemaTransactionTest、RemoteSignBitcoinschemaTransactionTest、OrdTransactionTest 三者都继承它，是共同上游；其旧依赖为 AddressLite 字段、旧交易型 parseTx/correctlySpends、TxHelper.getConnectedRedeemData 与 ScriptUtils_legacy.correctlySpends（两处均无新 SDK 等价物，脚本级校验移至 R6 V09，已登记偏差）。迁移配方与执行顺序见 migration-rules §24。先迁父类可让三个子类同时收敛。",
-        "R3 测试迁移（metanet4j-sdk 提交 fc3a516）：BitcoinschemaTransactionTest 的 4 个旧 import 与用法换到新 API（Address→AddressEnhance、Coin→BsvAmount、MainNetParams 删除、Transaction→新 SDK、Address.fromBase58(net,x)→AddressEnhance.fromBase58(x)、getKeyBag→getKeyProvider、addInputs 显式类型化）——**该文件的 io.bitcoinsv 引用清零，旧引用测试文件 22 → 21**。错误数 12 → 22 属暴露面转移：剩余错误全部指向其父类 TransactionContextTest（6 处，新显形），该类同时是 RemoteSignBitcoinschemaTransactionTest 与 OrdTransactionTest 的父类，属共同上游（§24）。另有 SigmaProtocolModelTest（2）新显形。当前有错文件 7 个。"
+        "R3 测试迁移（metanet4j-sdk 提交 fc3a516）：BitcoinschemaTransactionTest 的 4 个旧 import 与用法换到新 API（Address→AddressEnhance、Coin→BsvAmount、MainNetParams 删除、Transaction→新 SDK、Address.fromBase58(net,x)→AddressEnhance.fromBase58(x)、getKeyBag→getKeyProvider、addInputs 显式类型化）——**该文件的 io.bitcoinsv 引用清零，旧引用测试文件 22 → 21**。错误数 12 → 22 属暴露面转移：剩余错误全部指向其父类 TransactionContextTest（6 处，新显形），该类同时是 RemoteSignBitcoinschemaTransactionTest 与 OrdTransactionTest 的父类，属共同上游（§24）。另有 SigmaProtocolModelTest（2）新显形。当前有错文件 7 个。",
+        "R3 测试迁移（metanet4j-sdk 提交 fa6ee8d）：**迁移三个交易测试的共同父类 TransactionContextTest（6 → 0）**——字段 AddressLite/Address→AddressEnhance、KeyBag→SigningKeyProvider；交易改新 SDK（parseTx 用 fromBinary、新增 hex(tx) 取代 bitcoinSerialize）；chunk 访问改 chunk.op 与 ScriptHelper.getPushData、isOpReturnAfterGenesis 改「首操作码为 OP_RETURN」；删除引用已取消 KeyBag/RedeemData 反查的 addOutputs；correctlySpends 改 assertUnlockingScriptValid 并登记偏差（脚本级校验移至 R6 V09）。**收敛效果**：BitcoinschemaTransactionTest 22 → 4；旧引用测试文件 21 → 20。另显形 BsocialDataLockBuilderContractTest（24）。当前有错文件 7 个。**这验证了「先迁共同上游」的判断**：一处改动让三个子类同时受益。"
       ],
       "commits": [
         {
@@ -1171,9 +1172,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "fc3a516"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "fa6ee8d"
         }
       ],
-      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，有错文件 7 个；旧引用测试文件 21/54。下一步先迁共同父类 TransactionContextTest（§24），可同时收敛 BitcoinschemaTransactionTest／RemoteSignBitcoinschemaTransactionTest／OrdTransactionTest。",
+      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，有错文件 7 个；旧引用测试文件 20/54。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
