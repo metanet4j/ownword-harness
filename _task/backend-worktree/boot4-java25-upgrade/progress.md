@@ -2,7 +2,7 @@
 
 ## Current State
 
-- **Last Updated**：2026-10-11T02:35:00+08:00。
+- **Last Updated**：2026-10-11T03:25:00+08:00。
 - **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射、逐用例迁移清单和 V01—V14 独立样本，R0、R1、R2 三个阶段已完成，进入 R3 业务 SDK 适配（5 个执行项）。
 - **Active Item**：`bsv-r3-keys`（in-progress）；**R0（6/6）、R1（3/3）、R2（2/2）阶段完成**，R3 进行中。实时状态唯一来源为 [feature_list.json](feature_list.json)。实时状态唯一来源为 [feature_list.json](feature_list.json)。
 - **授权范围**：胡先生已明确指令“开始按照计划执行，先拆feature，记录执行进度和状态”。授权覆盖既定 R0—R6，原 SDK 输入、共享设施配置及远端边界继续适用。
@@ -93,6 +93,7 @@
 - 迁移参考已固化：`evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（四组统一改写规则、类型对应表、硬性约定、验证命令）与 `old-api-reference.md`（36 个旧类型的 javap 权威签名 × 新 SDK 入口，43 KB）。
 - **SDK BIP39／BIP32 层已迁移**（sdk 提交 `5424b34`）：`MasterPrivateKey` 改用 `compat.HD`／`compat.Mnemonic`／`Bip39WordlistEn`，助记词→seed→主密钥链与 xprv／xpub 语义不变。
 - **SDK BAP 结构改写完成**（sdk 提交 `c9df398`）：新增 `BapPath` 值类型（解析 `M/44H/236H` 与 `m/44'/236'`、硬化位、前缀／追加／派生）与 `SigningKeyProvider` 接口（取代 `KeyBag` 反查）；`BapBase`／`MasterKeyBapBase` 的密钥派生全部改走 `compat.HD`，`BapProviderKeyBag`／`SpecifyProviderKeyBag` 不再实现旧 `KeyBag`；`RemoteBapBase` 地址字段统一 `AddressEnhance`。新增 `BapPathTest`（8 例）与独立核验 14 项 0 差异。
+- **TxoHelper 已迁移**（sdk 提交 `8706eb9`）：改用新交易模型与 `BsvAddress`／`OP`；**新旧实现同输入对照 6 个历史交易夹具，txid 全部一致、1 个全文一致**；其余 5 个仅 `out[].e.a` 不同（旧库 `getToAddress` 对部分 Ordinals 铭文脚本返回 ASM 文本，新实现回退脚本 hex），已登记为可评审偏差。生产旧引用文件数 **34 → 33**，编译错误 14 → 10（仅剩 Sigma 8、BobHelper 2）。
 - **CryptoHelper 已迁移**（sdk 提交 `a3746c5`）：改走 `compat.HD`／`compat.Mnemonic`／`BapPath`，根派生路径 `m/44'/236'/0'/0/0` 与旧实现逐段一致；`CryptoBase.deterministicKey` 类型改为 `HD`（对应测试断言待测试迁移时同步）。生产旧引用文件数 **35 → 34**。
 - **脚本工具已迁移**（sdk 提交 `171ab43`）：`UtilsExtend` 不再继承旧 `Utils`（自持 BSM 前缀 + `Writer` VarInt + `BsvHashBytes`），`ScriptHelper` 改用新 SDK `ScriptChunk`／`Script` 与 `BsvAddress`。生产旧引用文件数 **37 → 35**。
 - **口径修正（重要）**：SDK 生产编译错误曾从 24 降到 4，但这**不代表接近完成**——`metanet4j-sdk/pom.xml` 仍声明旧 `bitcoinj-base`／`bitcoinj-legacy`，编译期可解析旧类，因此 **36 个生产文件 + 41 个测试文件仍引用 `io.bitcoinsv`**，R5 移除依赖时才会集中暴露。真实进度以「旧引用文件数」衡量，不以编译错误数衡量。
@@ -103,9 +104,9 @@
 
 继续 `bsv-r3-keys` 收口 SDK 生产编译（按 `migration-rules.md` §5 配方执行）：
 
-按「旧引用文件数」推进（当前生产 **34**、测试 41），建议顺序：
+按「旧引用文件数」推进（当前生产 **33**、测试 41），建议顺序：
 
-1. **ScriptChunk／交易模型边界（当前全部 14 处编译错误）**：`BobHelper`、`TxoHelper`、`sigma/Sigma` 三个文件同时使用旧 `TxBean`／`TxInput`／`Script`／`ScriptChunk`／`Coin`／`Sha256Hash`，必须**整体迁移**（`ScriptHelper.getPushData`／`getPushDataAsString` 已备好）；**不要只改调用点**——本轮实测只改调用点会把错误从 18 推到 66。同类还有 `script/ScriptExtend`、`script/SigHashExtend`、`signers/TransactionExtend`、`input/*`、`output/*`、`sigma/Sig`、`sigma/SignResponse`；
+1. **Sigma 与 BobHelper（当前全部 10 处编译错误）**：`sigma/Sigma.java`（8 处）与 `BobHelper.java`（2 处）仍用旧脚本／交易类型；二者与已迁移的 `TxoHelper`／`ScriptHelper` 交互，可直接参照 TxoHelper 的迁移手法（`Script.fromBinary`、`ScriptHelper.getPushData`、`OP.name`、`BsvAddress`）。其余同类文件：`script/ScriptExtend`、`script/SigHashExtend`、`signers/TransactionExtend`、`input/*`、`output/*`、`sigma/Sig`、`sigma/SignResponse`；**提醒：整体迁移单个文件，不要只改调用点**（实测只改调用点会把错误从 18 推到 66）；
 2. 交易与签名组（`transcation/TransactionBuilder`、`signers/*`、`remote/*`、`ordinals/*`、`utils/TxHelperExtend`、`utils/RedeemDataExtend`）→ 按 migration-rules §3 把 KeyBag／RedeemData 改为 `SigningKeyProvider` + 解锁模板；
 4. UTXO（`utxo/*`）与 `context/PreSignHashContext`；
 5. 每完成一个文件即重跑 `grep -rl 'io\.bitcoinsv' metanet4j-sdk/src/main/java --include=*.java | wc -l`（当前 35），以文件数单调下降为准；生产清零后再动 41 个测试文件。
