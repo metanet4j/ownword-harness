@@ -72,6 +72,10 @@
               "kind": "enum"
             },
             {
+              "path": "src/main/java/com/metanet4j/base/bsv/BsvUtxo.java",
+              "kind": "class"
+            },
+            {
               "path": "src/main/java/com/metanet4j/base/constants/ProtocolConstant.java",
               "kind": "class"
             },
@@ -267,6 +271,36 @@
                   "name": "versionBytesMatchFixedVectors",
                   "returnType": "void",
                   "line": 92,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "src/test/java/com/metanet4j/base/bsv/BsvUtxoTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "exposesHashIndexAmountAndFlags",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit"
+                },
+                {
+                  "name": "optionalFieldsMayBeAbsent",
+                  "returnType": "void",
+                  "line": 38,
+                  "classification": "unit"
+                },
+                {
+                  "name": "scriptAccessorIsDefensiveCopy",
+                  "returnType": "void",
+                  "line": 48,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsMissingHash",
+                  "returnType": "void",
+                  "line": 59,
                   "classification": "unit"
                 }
               ]
@@ -511,6 +545,10 @@
               "kind": "interface"
             },
             {
+              "path": "src/main/java/com/metanet4j/sdk/bap/BapPath.java",
+              "kind": "class"
+            },
+            {
               "path": "src/main/java/com/metanet4j/sdk/bap/DefaultBapBaseConfig.java",
               "kind": "class"
             },
@@ -529,6 +567,10 @@
             {
               "path": "src/main/java/com/metanet4j/sdk/bap/RemoteBapBase.java",
               "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/sdk/bap/SigningKeyProvider.java",
+              "kind": "interface"
             },
             {
               "path": "src/main/java/com/metanet4j/sdk/bap/SpecifyBapBase.java",
@@ -664,10 +706,6 @@
             },
             {
               "path": "src/main/java/com/metanet4j/sdk/signers/OrdinalsTransactionSigner.java",
-              "kind": "class"
-            },
-            {
-              "path": "src/main/java/com/metanet4j/sdk/signers/TransactionExtend.java",
               "kind": "class"
             },
             {
@@ -1105,6 +1143,60 @@
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapPathTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "parsesLegacyHardenedNotation",
+                  "returnType": "void",
+                  "line": 24,
+                  "classification": "unit"
+                },
+                {
+                  "name": "parsesStandardNotationAndMixedCase",
+                  "returnType": "void",
+                  "line": 33,
+                  "classification": "unit"
+                },
+                {
+                  "name": "parsesEmptyAndRootPaths",
+                  "returnType": "void",
+                  "line": 46,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsMalformedSegmentsAndOutOfRangeIndices",
+                  "returnType": "void",
+                  "line": 55,
+                  "classification": "unit"
+                },
+                {
+                  "name": "supportsAppendPrefixAndSegmentQueries",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                },
+                {
+                  "name": "appendFollowsCurrentNumberListConvention",
+                  "returnType": "void",
+                  "line": 76,
+                  "classification": "unit"
+                },
+                {
+                  "name": "derivesTheSameKeyAsTheStandardVectorPath",
+                  "returnType": "void",
+                  "line": 84,
+                  "classification": "unit"
+                },
+                {
+                  "name": "deriveRejectsHardenedDerivationOnPublicNode",
+                  "returnType": "void",
+                  "line": 98,
+                  "classification": "unit"
+                }
+              ]
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/BapProviderKeyBagTest.java",
