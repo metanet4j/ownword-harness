@@ -946,7 +946,8 @@
         "R3 测试迁移（metanet4j-sdk 提交 0710c71）：**RemoteOrdTransactionTemplateContractTest 编译清零**（30 → 0）——远程签名回填改用业务 PrivateKey（sign(hash) 返回新 SDK Signature，取 DER 后经 toBytes 包装再 Base64，因 Hutool Base64.encode 不收 List<Double>）、公钥改业务 PublicKey、AddressLite→AddressEnhance、UTXO→BsvUtxo、Object 型 unlockingScript 统一走 unlockingBytes 助手、脚本类型改新 SDK Script。剩余 6 个有错文件：BapBaseCoreContractTest 62、RemoteTransactionContractTest 54、OrdTransactionTemplateContractTest 28、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、BapBaseLifecycleTest 14。",
         "R3 测试迁移（metanet4j-sdk 提交见历史）：**OrdTransactionTemplateContractTest 编译清零**（28 → 0）——补 BsvAmount/ScriptHelper import、交易访问器改 inputs.get(i)、金额求和改 inputSum/outputSum 助手、BsvAmount 无 isLessThan 改 getValue() 比较、assertSpendable 走 unlockingScriptBytes + assertUnlockingScriptValid、correctlySpends 清除（脚本级校验移至 R6 V09，已登记偏差）。剩余 5 个有错文件：RemoteTransactionContractTest 82、BapBaseCoreContractTest 62、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、BapBaseLifecycleTest 14。",
         "R3 测试迁移（metanet4j-sdk 提交 e2ef71e、80e0023）：RemoteTransactionContractTest 批量迁移——类型与 import（Address→AddressEnhance、Coin→BsvAmount、UTXO→BsvUtxo、Transaction/Script→新 SDK、KeyBag→SigningKeyProvider，删除 ECKey/Sha256Hash/Net/SigHash/ScriptBuilder/ScriptOpCodes/TransactionSigner）、访问器（getInput/getOutput→inputs.outputs.get(i)、getProgram→toUint8Array、scriptBytes→助手、getConnectedOutput→sourceOutput）、密钥（ECKey→业务 PrivateKey、sign→toDER+toBytes+Base64、公钥取 getPublicKey()）、ExtendForSignTransaction 与 signInputs 改新签名。**该文件 io.bitcoinsv 引用清零**；错误数 82 → 66。旧引用测试文件 31 → 29。**并新增一个有错文件 ScriptExtendContractTest（16）**，系此前被掩盖、随编译推进显形。",
-        "R3 测试迁移（metanet4j-sdk 提交 b628106）：迁移 ScriptExtendContractTest 时发现 ScriptExtend 遗漏了 migration-rules §11 冻结契约要求的「创建时间」能力（旧 Script.getCreationTimeSeconds()），已补 creationTimeSeconds 字段、getCreationTimeSeconds() 访问器与 of(byte[], long) 工厂（替代旧 new ScriptExtend(program, creationTimeSeconds)；工具类不持有脚本，programBytes 仅为签名兼容）。生产编译错误保持 0。该测试文件的重写留下一轮。"
+        "R3 测试迁移（metanet4j-sdk 提交 b628106）：迁移 ScriptExtendContractTest 时发现 ScriptExtend 遗漏了 migration-rules §11 冻结契约要求的「创建时间」能力（旧 Script.getCreationTimeSeconds()），已补 creationTimeSeconds 字段、getCreationTimeSeconds() 访问器与 of(byte[], long) 工厂（替代旧 new ScriptExtend(program, creationTimeSeconds)；工具类不持有脚本，programBytes 仅为签名兼容）。生产编译错误保持 0。该测试文件的重写留下一轮。",
+        "R3 测试迁移（metanet4j-sdk 提交 5e283b0）：**ScriptExtendContractTest 编译清零（16 → 0）**——按 migration-rules §11 的 9 条冻结断言重写：构造脚本改 P2PKH.lock／writeOpCode／writeBin（含 1-of-1 多签与 P2SH 的 OP_HASH160+hash160+OP_EQUAL）、花费尺寸与签名填充改静态入口、SIG_SIZE 取 ScriptExtend.SIG_SIZE、创建时间用 ScriptExtend.of(program, t)、推送数据经 ScriptHelper.getPushData、空推送用 OP_0。旧引用测试文件 29 → 28；另显形此前被掩盖的 SigHashExtendContractTest（10）。当前有错文件 6 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、BapBaseLifecycleTest 14、SigHashExtendContractTest 10。"
       ],
       "commits": [
         {
@@ -1128,9 +1129,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "b628106"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "5e283b0"
         }
       ],
-      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，有错文件 6 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、ScriptExtendContractTest 16、BapBaseLifecycleTest 14。",
+      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，有错文件 6 个；旧引用测试文件 28/54。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
