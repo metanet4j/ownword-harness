@@ -927,7 +927,8 @@
         "TransactionBuilder 基类迁移（metanet4j-sdk 提交 5938905，§14 落地）：字段（KeyBag→SigningKeyProvider、Coin→BsvAmount、Net 与 TransactionSigner 删除、Address→AddressEnhance）、构造器 5→2、7 个方法按 §14.3 换新模型、签名改「注入 unlockingScriptTemplate + Transaction.sign()」、UTXO 入参改 BsvUtxo、LockingScriptBuilder 返回类型换新 SDK Script。**基类自身编译错误清零**；生产旧引用文件数 19 → 17；剩余 156 处集中在 4 个子类与 2 个 Template。",
         "两个 Remote 构建器与远程签名器迁移（metanet4j-sdk 提交 aaccdad，§14.4）：RemoteTransactionSigner 不再实现旧 TransactionSigner（改业务组件，Signature.fromDER + toChecksigFormat 回填、P2PKH.unlock 注入模板）；RemoteTransactionBuilder 构造器改 SigningKeyProvider、预签名哈希改 BsvHashBytes、前像走 SigHashExtend；RemoteOrdTransactionBuilder 对齐新签名并改 BsvUtxo/AddressEnhance/BsvAmount。**生产旧引用文件数 17 → 14**；剩余 136 处集中在 RemoteOrdTransactionTemplate 44、OrdTransactionBuilder 38、OrdinalsTransactionSigner 26、OrdTransactionTemplate 16 与三个 LockBuilder。",
         "OrdTransactionBuilder 与 OrdScriptBuilder 迁移（metanet4j-sdk 提交 678cde5）：前者构造器 5→2、addOrdInput 改 BsvUtxo 与新输入模型、addOrdOutput 改 AddressEnhance/BsvAmount、signTx 改 SigningKeyProvider + SIGHASH int、空输入脚本改注入解锁模板；后者 buildInscription 改收 AddressEnhance 且脚本构造改新 SDK Script.writeOpCode/writeBin 链式写法、LocalSigner.idKey 改新 SDK PrivateKey。**生产旧引用文件数 14 → 12**（起点 49，已降 76%）；剩余 142 处集中在 RemoteOrdTransactionTemplate 60、OrdTransactionTemplate 46、OrdinalsTransactionSigner 26 与三个 LockBuilder。",
-        "LockBuilder 与远程签名器清理（metanet4j-sdk 提交 e5e6849）：RemoteTransactionSigner 移除冲突重载并按 TransactionSignature.toChecksigFormat 回填签名；UnSpendableDataLockBuilder 锁定脚本改用新 SDK Script。编译错误 142 → 136；生产旧引用文件数 12（起点 49，已降 76%）。剩余集中在四个文件：RemoteOrdTransactionTemplate 60、OrdTransactionTemplate 46、OrdinalsTransactionSigner 26、UnSpendableDataLockBuilder 2、RemoteTransactionSigner 2。"
+        "LockBuilder 与远程签名器清理（metanet4j-sdk 提交 e5e6849）：RemoteTransactionSigner 移除冲突重载并按 TransactionSignature.toChecksigFormat 回填签名；UnSpendableDataLockBuilder 锁定脚本改用新 SDK Script。编译错误 142 → 136；生产旧引用文件数 12（起点 49，已降 76%）。剩余集中在四个文件：RemoteOrdTransactionTemplate 60、OrdTransactionTemplate 46、OrdinalsTransactionSigner 26、UnSpendableDataLockBuilder 2、RemoteTransactionSigner 2。",
+        "OrdinalsTransactionSigner 改业务组件（metanet4j-sdk 提交 83f975c，计划 §3）：不再实现旧 TransactionSigner，删除 ScriptVerifyFlag／KeyBag／Translate／ECKey／旧 TransactionSignature；signInput 改 (Transaction, int, SigningKeyProvider, int hashFlags, boolean anyoneCanPay)，新增 signInputs 逐输入注入解锁模板后 Transaction.sign()。**生产旧引用文件数 12 → 11**；编译错误 136 → 118；该文件自身错误清零。"
       ],
       "commits": [
         {
@@ -1009,9 +1010,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "e5e6849"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "83f975c"
         }
       ],
-      "statusNote": "进行中（原子重构模式）：生产旧引用文件数 12（起点 49，已降 76%）；base 47 例严格验收绿色；SDK 剩 136 处错误，集中在两个 Template（106）、OrdinalsTransactionSigner（26）与两个小项（4）。",
+      "statusNote": "进行中（原子重构模式）：生产旧引用文件数 11（起点 49，已降 78%）；base 47 例严格验收绿色；SDK 剩 118 处错误，集中在两个 Template（106）与两个小项（4）+ LockBuilder（2）。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
