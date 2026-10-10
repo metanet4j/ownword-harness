@@ -905,7 +905,9 @@
         "base 侧共享值类型基座：BsvHashBytes／BsvAddress／BsvAmount（提交 caaeb8b），base 严格验收 43 例 0 失败／错误／跳过、行与指令未覆盖为 0、gaps=0。",
         "SDK 密钥／地址层第一批迁移（metanet4j-sdk 提交 56058b4）：EcKeyLiteExtend 不再继承旧 ECKeyLite、PublicKey／PrivateKey 包装新 SDK 密钥（NetworkParameters → BsvNetwork）、AddressEnhance 组合 BsvAddress、Ecies 改用新 SDK 密钥且报文结构与 ecdh 顺序不变、BAP 密钥访问器返回业务 PrivateKey。",
         "证据：evidence/bsv-replace/r3-keys-20261010/migration-rules.md（四组统一改写规则）、old-api-reference.md（36 个旧类型的 javap 权威签名 × 新 SDK 入口）、build-old-api-reference.py。",
-        "当前 SDK 生产编译剩余 24 处错误（KeyBag／RedeemData 签名链、CryptoHelper 的 DeterministicKey 迁移、部分 DeterministicKey 构造点）；本项**未完成**，不标记 done。"
+        "当前 SDK 生产编译剩余 24 处错误（KeyBag／RedeemData 签名链、CryptoHelper 的 DeterministicKey 迁移、部分 DeterministicKey 构造点）；本项**未完成**，不标记 done。",
+        "SDK BIP39／BIP32 层迁移（metanet4j-sdk 提交 5424b34）：MasterPrivateKey 改用 compat.HD／compat.Mnemonic／Bip39WordlistEn，助记词→seed→主密钥链与 xprv／xpub 序列化语义不变；Sigma／BapBase／SpecifyBapBase 修正密钥类型用法。",
+        "当前 SDK 生产编译剩余 34 处错误，全部集中在 HD 结构改写：BapBase（89 处引用）、CryptoHelper（15）、MasterKeyBapBase（13）、PandaBapBase（4）、RemoteBapBase（2）、SpecifyBapBase（2）、Sigma（1）；改写配方见 evidence/bsv-replace/r3-keys-20261010/migration-rules.md §5。"
       ],
       "commits": [
         {
@@ -915,10 +917,15 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "56058b4"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "5424b34"
         }
       ],
-      "statusNote": "进行中：base 共享值类型完成并通过严格验收；SDK 密钥／地址层与 BAP 密钥访问入口已迁移，生产编译尚余 24 处错误待闭合（签名链与 CryptoHelper 为主）。",
-      "startedAt": "2026-10-10T20:09:15+08:00"
+      "statusNote": "进行中：base 共享值类型完成并通过严格验收；SDK 密钥／地址层与 BIP39／BIP32 层已迁移；生产编译剩余 34 处错误，集中在 BAP 的 HD 结构改写（ChildNumber／HDUtils／DeterministicHierarchy → compat.HD.derive）与 KeyBag 签名链。",
+      "startedAt": "2026-10-10T20:09:15+08:00",
+      "completedAt": null
     },
     {
       "id": "bsv-r3-scripts",
