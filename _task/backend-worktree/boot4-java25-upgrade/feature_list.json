@@ -917,7 +917,8 @@
         "Sigma 与 pre-sign 上下文迁移（metanet4j-sdk 提交 8d6269f）：Sigma 改用 BsvHashBytes 与新 SDK Transaction／Script（outputs／inputs 公开字段、lockingScript、satoshis、Script.writeBin、OP.OP_RETURN、ScriptHelper.getPushData、BsvAddress），SignResponse／PreSignHashContext／PreSignHashUtils／Sig 同步；公开方法 getMessageHash／getDataHash／getInputHash 返回类型由 Sha256Hash 改为 BsvHashBytes（测试断言待同步）。生产旧引用文件数 33 → 28；编译错误暴露面转移到交易／签名组（RemoteTransactionBuilder 8、TransactionBuilder／UnSpendableDataLockBuilder 各 4、RemoteTransactionSigner／RemoteOrdTransactionBuilder／BobHelper 各 2）。",
         "SigHashExtend 迁移（metanet4j-sdk 提交 fe273b5）：按 §8 自下而上第一层——hashForForkIdSignature 参数由 (Tx,int,byte[],Coin,SigHash.Flags,boolean) 改为 (Transaction,int,byte[],BsvAmount,int,boolean)，内部适配新 SDK 的 TransactionSignature.formatBip143 再取双 SHA-256，返回 BsvHashBytes；不再继承旧 SigHash。等价性逐字段核对（hashPrevouts／hashSequence／hashOutputs ALL 与 SINGLE／前像次序／金额 LE 编码／sighash 字节）见 evidence/bsv-replace/r3-keys-20261010/sighash-extend-equivalence.json，并确认计划要求的独立前像计算器 referenceDigest 保留未替换。生产旧引用文件数 28 → 27；编译错误 18 → 26（暴露面转移到 4 个调用方，属同组后续目标）。",
         "脚本工具层落地（metanet4j-sdk 提交 c8f9079）：按 §9／§10／§11 完成 ScriptExtend（工具类，重建脚本判定／签名位填充／花费尺寸估算，SIG_SIZE=75）与 TxHelperExtend（去 TxHelper 继承、Ordinals 判定改新 ScriptChunk、新增显式派生版 getConnectedRedeemDataExtend）；RedeemDataExtend 重写为业务值类型；TransactionBuilder.getUnLockScriptSize 切为无赎回数据实现。生产旧引用文件数 27 → 24。",
-        "用户决策（本轮）：R3 剩余 27 个生产文件已全部落在「签名流程重构」耦合团（18 文件／2080 行／20 个测试依赖），单点改动只能在 26～48 之间搬运错误；经询问，胡先生选择「允许长时间原子重构」，因此本任务在 R3 收口期间接受工作区处于编译未通过的中间态，不再中途还原。"
+        "用户决策（本轮）：R3 剩余 27 个生产文件已全部落在「签名流程重构」耦合团（18 文件／2080 行／20 个测试依赖），单点改动只能在 26～48 之间搬运错误；经询问，胡先生选择「允许长时间原子重构」，因此本任务在 R3 收口期间接受工作区处于编译未通过的中间态，不再中途还原。",
+        "BobHelper 迁移（metanet4j-sdk 提交 11112b9，原子重构第二步）：TxBean／TxInput／TxOutput／Script／ScriptChunk／ScriptOpCodes／ScriptUtils／BasicAddress → 新 SDK 交易与脚本模型 + BsvAddress／BsvHashBytes；chunk 访问走 ScriptHelper.getPushData，OP_FALSE 按新 SDK 常量改 OP_0；新增 asScript／txidOf／satoshisOf／isOpReturn／addressOfPubKey／addressOfScript 辅助。生产旧引用文件数 24 → 23；BobHelper 自身错误清零；剩余 56 处集中在 signers／ordinals／remote／TransactionBuilder。"
       ],
       "commits": [
         {
@@ -959,9 +960,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "c8f9079"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "11112b9"
         }
       ],
-      "statusNote": "进行中（原子重构模式）：base 值类型基座完成；SDK 密钥／地址／BIP32／BAP 结构／脚本工具／CryptoHelper／TxoHelper／Sigma／SigHashExtend／脚本工具层已迁移；生产旧引用文件数 24（起点 49），测试 41；当前处于用户批准的中间态（编译未通过），下一步批量迁移 signers／ordinals／remote／BobHelper。",
+      "statusNote": "进行中（原子重构模式）：生产旧引用文件数 23（起点 49），测试 41；当前处于用户批准的中间态（编译未通过），剩余 signers／ordinals／remote／TransactionBuilder 待迁。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },

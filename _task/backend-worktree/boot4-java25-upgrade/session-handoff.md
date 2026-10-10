@@ -21,7 +21,7 @@
 
 ## Next Session
 
-**当前处于用户批准的原子重构中间态**（工作区编译未通过，不再中途还原）。起点备份：`/tmp/r16-src-backup`；本轮检查点：`/tmp/r16-checkpoint-src`。
+**当前处于用户批准的原子重构中间态**（工作区编译未通过，不再中途还原）。起点备份：`/tmp/r16-src-backup`；检查点：`/tmp/r16-checkpoint-src`、`/tmp/r17-checkpoint-src`。BobHelper 已完成（提交 11112b9，自身错误清零）。
 
 唯一下一步是继续迁移这批调用方到新交易模型与 `SigningKeyProvider`：`signers/OrdinalsTransactionSigner`（两处 redeem 调用 + `Translate.toTx` + 旧 `TransactionSignature`）、`ordinals/OrdTransactionBuilder`、`transcation/TransactionBuilder`（基类：`KeyBag→SigningKeyProvider`、`Coin→BsvAmount`、`Transaction→新 SDK`、`AddressLite→AddressEnhance`、`UTXO→compat.Utxo`）、`remote/RemoteTransactionBuilder` 与 `RemoteOrdTransactionBuilder`、`remote/RemoteTransactionSigner`、`BobHelper`。字段级对应表见 migration-rules §7，`ScriptExtend` 契约见 §11。**进度以 `grep -rl 'io\.bitcoinsv' metanet4j-sdk/src/main/java --include=*.java | wc -l` 的文件数下降为准**（当前 28，起点 49），不要以编译错误数判断（旧依赖仍在 SDK pom 中，编译期可解析）。R3 共五组（keys／scripts／transactions／protocols／accept），只在五组全部通过后完成阶段。注意 unit-test-inventory.json 必须与源码增删同步，否则严格验收直接拒绝。持续实施授权已记录。门禁用法 `python3 bsv-task-gate.py --stage r0|r1|...`。
 
