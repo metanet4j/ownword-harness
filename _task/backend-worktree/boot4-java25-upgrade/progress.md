@@ -2,9 +2,9 @@
 
 ## Current State
 
-- **Last Updated**：2026-10-10T22:25:00+08:00。
+- **Last Updated**：2026-10-10T23:35:00+08:00。
 - **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射、逐用例迁移清单和 V01—V14 独立样本，R0、R1、R2 三个阶段已完成，进入 R3 业务 SDK 适配（5 个执行项）。
-- **Active Item**：无；**R0（6/6）、R1（3/3）、R2（2/2）阶段全部完成**；R3 进行中，`bsv-r3-keys` 的共享值类型基座已落地，下一项继续 SDK 密钥与身份组迁移。实时状态唯一来源为 [feature_list.json](feature_list.json)。
+- **Active Item**：`bsv-r3-keys`（in-progress）；**R0（6/6）、R1（3/3）、R2（2/2）阶段完成**，R3 进行中。实时状态唯一来源为 [feature_list.json](feature_list.json)。实时状态唯一来源为 [feature_list.json](feature_list.json)。
 - **授权范围**：胡先生已明确指令“开始按照计划执行，先拆feature，记录执行进度和状态”。授权覆盖既定 R0—R6，原 SDK 输入、共享设施配置及远端边界继续适用。
 - 七阶段汇总与 28 个执行项已拆分；每项记录依赖、产物、完成条件、验证证据及提交，一次只推进一个执行项。
 
@@ -87,6 +87,20 @@
 - 验收：`verify-unit.py --mode accept --scope metanet4j-base` 退出 0，**43 例 0 失败／错误／跳过，行与指令未覆盖为 0，gaps=0**；base 提交 `caaeb8b`。
 - SDK 侧待迁移面：`metanet4j-sdk` 生产 49 个文件、测试 41 个文件仍含旧引用（生产 246 处、测试 242 处 import），按密钥／脚本／交易／协议四组推进，五组全部通过才算 R3 完成。
 
+### bsv-r3-keys 进行中（第二批）
+
+- SDK 密钥／地址层已迁移（metanet4j-sdk 提交 `56058b4`）：`EcKeyLiteExtend` 不再继承旧 `ECKeyLite`（改用 `ECDSA.sign` + `Signature.toCompact` 与 `compat.BSM`）；`PublicKey`／`PrivateKey` 包装新 SDK 密钥，网络类型 `NetworkParameters` → `BsvNetwork`；`AddressEnhance` 组合 base 的 `BsvAddress`；`Ecies` 改用新 SDK 密钥且**报文结构与 ecdh 顺序不变**（兼容既有密文）；BAP 密钥访问器返回业务 `PrivateKey`。
+- 迁移参考已固化：`evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（四组统一改写规则、类型对应表、硬性约定、验证命令）与 `old-api-reference.md`（36 个旧类型的 javap 权威签名 × 新 SDK 入口，43 KB）。
+- **当前状态：SDK 生产编译剩余 24 处错误**，集中在 `KeyBag`／`RedeemData` 签名链（`BapProviderKeyBag`／`SpecifyProviderKeyBag`、`TransactionSigner`）与 `CryptoHelper` 的 `DeterministicKey` 迁移；因此 `bsv-r3-keys` **未完成**，不标记 done。
+- `init.sh` 阶段状态判定已扩展为支持「阶段内首项开工即 in-progress」，自检恢复通过。
+
 ## Recommended Next Step
 
-继续 `bsv-r3-keys`：迁移 `metanet4j-sdk` 的密钥与身份组（`PrivateKey`／`PublicKey`／`EcKeyLiteExtend`／`AddressEnhance`／`MasterPrivateKey`／`CryptoHelper`／`Ecies`／BAP 变体与派生），用 `BsvHashBytes`／`BsvAddress`／`BsvAmount`／`BsvNetwork` 承接旧类型；`KeyBag` 反查改为显式派生 + `unlockingScriptTemplate`。注意 SDK 仓库要整模块编译通过才能验收，跨组编译依赖按最小必要修改闭合并在 feature 证据中登记。R4—R6 待前置阶段门禁。
+继续 `bsv-r3-keys` 收口 SDK 生产编译：
+
+1. 删除 `BapProviderKeyBag`／`SpecifyProviderKeyBag` 的旧 `KeyBag` 实现，按 `migration-rules.md` §3 改为显式派生 + 解锁模板（签名链的改造与 `bsv-r3-transactions` 共用）；
+2. 迁移 `CryptoHelper`／`MasterPrivateKey` 的 `DeterministicKey`／`HDKeyDerivation`／`MnemonicCode` 到 `compat.HD`／`compat.Mnemonic`；
+3. 每次改动后跑 `mvn -o -f metanet4j-sdk/pom.xml clean compile` 收敛错误数，再跑 `clean test-compile` 与组内测试；
+4. 组内旧 import 清零后，按 `verify-unit.py --mode accept --scope metanet4j-sdk` 做整模块验收。
+
+R4—R6 待前置阶段门禁。

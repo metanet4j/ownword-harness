@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": null,
+  "activeItem": "bsv-r3-keys",
   "note": "已获 R0—R6 实施授权；28 个执行项按依赖串行，七阶段在 stages 汇总。23 个既有事项保留。状态以本清单为准。",
   "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
   "features": [
@@ -887,7 +887,7 @@
       "name": "业务 SDK 密钥与身份适配",
       "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r3-sdk",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "bsv-r2-accept"
       ],
@@ -901,9 +901,24 @@
         "metanet4j-sdk",
         "evidence/bsv-replace/r3-keys-*/"
       ],
-      "evidence": [],
-      "commits": [],
-      "statusNote": "待前置执行项及阶段门禁通过。"
+      "evidence": [
+        "base 侧共享值类型基座：BsvHashBytes／BsvAddress／BsvAmount（提交 caaeb8b），base 严格验收 43 例 0 失败／错误／跳过、行与指令未覆盖为 0、gaps=0。",
+        "SDK 密钥／地址层第一批迁移（metanet4j-sdk 提交 56058b4）：EcKeyLiteExtend 不再继承旧 ECKeyLite、PublicKey／PrivateKey 包装新 SDK 密钥（NetworkParameters → BsvNetwork）、AddressEnhance 组合 BsvAddress、Ecies 改用新 SDK 密钥且报文结构与 ecdh 顺序不变、BAP 密钥访问器返回业务 PrivateKey。",
+        "证据：evidence/bsv-replace/r3-keys-20261010/migration-rules.md（四组统一改写规则）、old-api-reference.md（36 个旧类型的 javap 权威签名 × 新 SDK 入口）、build-old-api-reference.py。",
+        "当前 SDK 生产编译剩余 24 处错误（KeyBag／RedeemData 签名链、CryptoHelper 的 DeterministicKey 迁移、部分 DeterministicKey 构造点）；本项**未完成**，不标记 done。"
+      ],
+      "commits": [
+        {
+          "repository": "metanet4j-base",
+          "commit": "caaeb8b"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "56058b4"
+        }
+      ],
+      "statusNote": "进行中：base 共享值类型完成并通过严格验收；SDK 密钥／地址层与 BAP 密钥访问入口已迁移，生产编译尚余 24 处错误待闭合（签名链与 CryptoHelper 为主）。",
+      "startedAt": "2026-10-10T20:09:15+08:00"
     },
     {
       "id": "bsv-r3-scripts",
@@ -1276,7 +1291,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-10T19:49:29+08:00",
+  "updatedAt": "2026-10-10T20:09:15+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1363,7 +1378,7 @@
       "id": "bsv-replace-r3-sdk",
       "name": "R3 业务 SDK 适配",
       "description": "按调用依赖迁移密钥、BAP、脚本、交易、Sigma、Ordinals 与远程签名，完成 SDK 严格验收。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "bsv-replace-r2-base"
       ],

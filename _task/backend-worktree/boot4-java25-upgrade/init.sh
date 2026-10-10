@@ -165,6 +165,7 @@ try:
         elif counts['done'] == counts['total']:
             status = 'done'
         elif any(f['status'] in ('done', 'in-progress') for f in children):
+            # 阶段内有任意项已开工或已完成：阶段为 in-progress（门禁仍由各子项承担）
             status = 'in-progress'
         else:
             status = 'not-started'
