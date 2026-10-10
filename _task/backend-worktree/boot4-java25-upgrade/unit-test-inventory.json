@@ -56,6 +56,18 @@
               "kind": "class"
             },
             {
+              "path": "src/main/java/com/metanet4j/base/bsv/BsvAddress.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/bsv/BsvAmount.java",
+              "kind": "class"
+            },
+            {
+              "path": "src/main/java/com/metanet4j/base/bsv/BsvHashBytes.java",
+              "kind": "class"
+            },
+            {
               "path": "src/main/java/com/metanet4j/base/bsv/BsvNetwork.java",
               "kind": "enum"
             },
@@ -255,6 +267,90 @@
                   "name": "versionBytesMatchFixedVectors",
                   "returnType": "void",
                   "line": 92,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "src/test/java/com/metanet4j/base/bsv/BsvValueTypesTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "hashBytesExposeInternalAndDisplayOrder",
+                  "returnType": "void",
+                  "line": 38,
+                  "classification": "unit"
+                },
+                {
+                  "name": "hashBytesMatchSha256AndDoubleSha256",
+                  "returnType": "void",
+                  "line": 50,
+                  "classification": "unit"
+                },
+                {
+                  "name": "hashBytesRejectInvalidLengthAndHex",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                },
+                {
+                  "name": "hashBytesCompareAndListRoundTrip",
+                  "returnType": "void",
+                  "line": 72,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addressMatchesFixedVectorsOnBothNetworks",
+                  "returnType": "void",
+                  "line": 83,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addressFromPublicKeyUsesCompressedHash160",
+                  "returnType": "void",
+                  "line": 95,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addressRejectsCrossNetworkAndMalformedInput",
+                  "returnType": "void",
+                  "line": 106,
+                  "classification": "unit"
+                },
+                {
+                  "name": "p2shAddressUsesScriptHashHeader",
+                  "returnType": "void",
+                  "line": 124,
+                  "classification": "unit"
+                },
+                {
+                  "name": "amountKeepsIntegerPrecisionAndBoundaries",
+                  "returnType": "void",
+                  "line": 135,
+                  "classification": "unit"
+                },
+                {
+                  "name": "amountRejectsNonIntegerAndOutOfRangeInput",
+                  "returnType": "void",
+                  "line": 150,
+                  "classification": "unit"
+                },
+                {
+                  "name": "valueTypesExposeStableEqualityAndOrdering",
+                  "returnType": "void",
+                  "line": 169,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addressAndHashRejectOutOfRangeHashLengths",
+                  "returnType": "void",
+                  "line": 205,
+                  "classification": "unit"
+                },
+                {
+                  "name": "valueTypesCoverBoundaryBranches",
+                  "returnType": "void",
+                  "line": 223,
                   "classification": "unit"
                 }
               ]

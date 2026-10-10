@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "decision": "按仓库逐类逐方法登记实测不可达或无行为字节码的精确例外：metanet4j-sdk 12 行（2026-09-28 用户批准）；component 模块起沿用同一机制逐项登记（如枚举中无调用点的构造器），其余手写代码维持行、分支、方法 100%。",
+  "decision": "按仓库逐类逐方法登记实测不可达或无行为字节码的精确例外：metanet4j-sdk 12 行（2026-09-28 用户批准）；R3 新增 metanet4j-base 两处纯分支例外（行覆盖 100%、无未覆盖方法）；component 模块起沿用同一机制逐项登记（如枚举中无调用点的构造器），其余手写代码维持行、分支、方法 100%。",
   "enforcement": "verify-unit.py 严格模式双向核对：实测未覆盖方法集合必须与本清单逐项相等；jacoco:check 通过各仓库属性 jacoco.unit.check.excludes 排除本清单类名（check 用点号 Java 名，内部类写作 Outer.Inner；本文件 class 字段用 XML 报告的 $ 名）。",
   "modules": {
     "metanet4j-sdk": {
@@ -674,6 +674,43 @@
               "lineMissed": 2,
               "methodMissed": 1,
               "branchMissed": 0
+            }
+          ]
+        }
+      ]
+    },
+    "metanet4j-base": {
+      "entries": [
+        {
+          "class": "com/metanet4j/base/bsv/BsvHashBytes",
+          "reason": "decodeHex 的 `hex == null || hex.length() % 2 != 0` 为 javac 短路字节码，两侧取值（null／奇数长度／偶数长度）均已由 BsvValueTypesTest 实际执行并断言抛异常，JaCoCo 仍无法标记该行合成的分支，属无行为字节码",
+          "missed": [
+            {
+              "method": "decodeHex",
+              "line": 89,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
+            }
+          ]
+        },
+        {
+          "class": "com/metanet4j/base/bsv/BsvAddress",
+          "reason": "fromBase58 的网络判定 `version == 主网||== P2SH` 与 equals 的链式条件同为短路字节码，主网地址、P2SH 地址、测试网地址、未知版本 0x99 与各类非法输入均已由测试执行并断言，行覆盖率为 100%，仅剩 javac 合成分支未标记",
+          "missed": [
+            {
+              "method": "fromBase58",
+              "line": 81,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 2
+            },
+            {
+              "method": "equals",
+              "line": 170,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 2
             }
           ]
         }
