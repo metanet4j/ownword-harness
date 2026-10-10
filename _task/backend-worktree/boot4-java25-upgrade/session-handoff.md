@@ -2,7 +2,7 @@
 
 ## 当前状态
 
-胡先生已于 2026-10-10 授权“开始按照计划执行，先拆feature，记录执行进度和状态”，并在本次会话明确“目标是计划完全执行完成”。[feature_list.json](feature_list.json) 是执行状态的唯一来源；七个阶段汇总和 28 个执行项已拆分，当前无 activeItem，下一项 bsv-r3-keys；**R0（6/6）、R1（3/3）、R2（2/2）阶段全部完成、门禁 PASS**，进入 R3 业务 SDK 适配；`bsv-r3-keys` **进行中**：base 共享值类型基座完成（提交 caaeb8b，base 严格验收 43 例 0 失败、gaps=0），SDK 密钥／地址层（56058b4）与 BIP39／BIP32 层（5424b34）已迁移，SDK 生产编译尚余 34 处错误，全部集中在 BAP 的 HD 结构改写。既有升级与测试事项保持原样，不计为本次验收。
+胡先生已于 2026-10-10 授权“开始按照计划执行，先拆feature，记录执行进度和状态”，并在本次会话明确“目标是计划完全执行完成”。[feature_list.json](feature_list.json) 是执行状态的唯一来源；七个阶段汇总和 28 个执行项已拆分，当前无 activeItem，下一项 bsv-r3-keys；**R0（6/6）、R1（3/3）、R2（2/2）阶段全部完成、门禁 PASS**，进入 R3 业务 SDK 适配；`bsv-r3-keys` **进行中**：base 共享值类型基座完成（提交 caaeb8b，base 严格验收 43 例 0 失败、gaps=0），SDK 密钥／地址层（56058b4）与 BIP39／BIP32 层（5424b34）已迁移，SDK 的 BAP 结构改写已完成（BapPath + compat.HD + SigningKeyProvider，sdk 提交 c9df398）；生产编译错误降到 4（仅 CryptoHelper），但**生产仍有 36 个文件、测试 41 个文件引用 io.bitcoinsv**（旧依赖未移除，编译期可解析）。既有升级与测试事项保持原样，不计为本次验收。
 
 重启先读 ../AGENTS.md、../mvn-command.md、本目录 AGENTS.md、feature_list.json.planDoc、feature_list.json 与 progress.md，运行不带参数的 ./init.sh。授权在既定计划范围持续有效，无需重复请求。一次只做一个执行项，验证及提交齐全后更新状态。
 
@@ -21,6 +21,6 @@
 
 ## Next Session
 
-唯一下一步是继续 bsv-r3-keys 收口 HD 结构改写：按 evidence/bsv-replace/r3-keys-20261010/migration-rules.md §5 的配方，先把 BapBase（89 处引用）从 DeterministicKey／ChildNumber／HDUtils／DeterministicHierarchy 迁到 compat.HD.derive，再同步 MasterKeyBapBase／PandaBapBase／RemoteBapBase／SpecifyBapBase／CryptoHelper 与 Sigma；KeyBag 实现改为 findKeyFromPubHash + unlockTemplate 供 R3 交易组使用。当前生产编译错误 34 处，用 `mvn -o -f metanet4j-sdk/pom.xml clean compile` 观察错误数单调下降。R3 共五组（keys／scripts／transactions／protocols／accept），只在五组全部通过后完成阶段。注意 unit-test-inventory.json 必须与源码增删同步，否则严格验收直接拒绝。持续实施授权已记录。门禁用法 `python3 bsv-task-gate.py --stage r0|r1|...`。
+唯一下一步是继续 bsv-r3-keys：先迁 `crypto/CryptoHelper`（4 处编译错误，唯一阻塞干净编译者），随后按 migration-rules.md 的组划分继续迁移剩余 36 个生产文件（脚本／读取 11 个、交易与签名 13 个、UTXO 3 个、Sigma 3 个、其他 6 个）。**进度以 `grep -rl 'io\.bitcoinsv' metanet4j-sdk/src/main/java --include=*.java | wc -l` 的文件数下降为准**（当前 36），不要以编译错误数判断，因为旧依赖仍在 SDK pom 中。生产清零后再处理 41 个测试文件。R3 共五组（keys／scripts／transactions／protocols／accept），只在五组全部通过后完成阶段。注意 unit-test-inventory.json 必须与源码增删同步，否则严格验收直接拒绝。持续实施授权已记录。门禁用法 `python3 bsv-task-gate.py --stage r0|r1|...`。
 
 阶段门禁用法：`python3 bsv-task-gate.py --stage r0|r1|...`；证据刷新：`./refresh-r0-api-evidence.sh`。

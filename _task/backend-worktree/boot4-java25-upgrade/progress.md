@@ -2,7 +2,7 @@
 
 ## Current State
 
-- **Last Updated**：2026-10-11T00:20:00+08:00。
+- **Last Updated**：2026-10-11T01:10:00+08:00。
 - **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射、逐用例迁移清单和 V01—V14 独立样本，R0、R1、R2 三个阶段已完成，进入 R3 业务 SDK 适配（5 个执行项）。
 - **Active Item**：`bsv-r3-keys`（in-progress）；**R0（6/6）、R1（3/3）、R2（2/2）阶段完成**，R3 进行中。实时状态唯一来源为 [feature_list.json](feature_list.json)。实时状态唯一来源为 [feature_list.json](feature_list.json)。
 - **授权范围**：胡先生已明确指令“开始按照计划执行，先拆feature，记录执行进度和状态”。授权覆盖既定 R0—R6，原 SDK 输入、共享设施配置及远端边界继续适用。
@@ -92,17 +92,21 @@
 - SDK 密钥／地址层已迁移（metanet4j-sdk 提交 `56058b4`）：`EcKeyLiteExtend` 不再继承旧 `ECKeyLite`（改用 `ECDSA.sign` + `Signature.toCompact` 与 `compat.BSM`）；`PublicKey`／`PrivateKey` 包装新 SDK 密钥，网络类型 `NetworkParameters` → `BsvNetwork`；`AddressEnhance` 组合 base 的 `BsvAddress`；`Ecies` 改用新 SDK 密钥且**报文结构与 ecdh 顺序不变**（兼容既有密文）；BAP 密钥访问器返回业务 `PrivateKey`。
 - 迁移参考已固化：`evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（四组统一改写规则、类型对应表、硬性约定、验证命令）与 `old-api-reference.md`（36 个旧类型的 javap 权威签名 × 新 SDK 入口，43 KB）。
 - **SDK BIP39／BIP32 层已迁移**（sdk 提交 `5424b34`）：`MasterPrivateKey` 改用 `compat.HD`／`compat.Mnemonic`／`Bip39WordlistEn`，助记词→seed→主密钥链与 xprv／xpub 语义不变。
-- **当前状态：SDK 生产编译剩余 34 处错误**，全部集中在 **HD 结构改写**：`BapBase`（89 处引用 `DeterministicKey`／`ChildNumber`／`HDUtils`／`DeterministicHierarchy`）、`CryptoHelper`（15）、`MasterKeyBapBase`（13）、`PandaBapBase`（4）、`RemoteBapBase`（2）、`SpecifyBapBase`（2）、`Sigma`（1）。改写配方（类型对应表、`BapBase` 六步改写顺序、`CryptoHelper` 处理、收敛命令）已写入 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md` §5。因此 `bsv-r3-keys` **未完成**，不标记 done。
+- **SDK BAP 结构改写完成**（sdk 提交 `c9df398`）：新增 `BapPath` 值类型（解析 `M/44H/236H` 与 `m/44'/236'`、硬化位、前缀／追加／派生）与 `SigningKeyProvider` 接口（取代 `KeyBag` 反查）；`BapBase`／`MasterKeyBapBase` 的密钥派生全部改走 `compat.HD`，`BapProviderKeyBag`／`SpecifyProviderKeyBag` 不再实现旧 `KeyBag`；`RemoteBapBase` 地址字段统一 `AddressEnhance`。新增 `BapPathTest`（8 例）与独立核验 14 项 0 差异。
+- **口径修正（重要）**：SDK 生产编译错误已从 24 降到 **4**（仅剩 `CryptoHelper`），但这**不代表接近完成**——`metanet4j-sdk/pom.xml` 仍声明旧 `bitcoinj-base`／`bitcoinj-legacy`，编译期可解析旧类，因此 **36 个生产文件 + 41 个测试文件仍引用 `io.bitcoinsv`**，R5 移除依赖时才会集中暴露。真实进度以「旧引用文件数」衡量，不以编译错误数衡量。
+因此 `bsv-r3-keys` **未完成**，不标记 done。
 - `init.sh` 阶段状态判定已扩展为支持「阶段内首项开工即 in-progress」，自检恢复通过。
 
 ## Recommended Next Step
 
 继续 `bsv-r3-keys` 收口 SDK 生产编译（按 `migration-rules.md` §5 配方执行）：
 
-1. `BapBase`：字段 `DeterministicKey` → `HD`；`getKeyBaseRoot`／`getKeyBasePath` 改收路径串或索引数组；`HDUtils.parsePath` 调用点直接传路径；`ChildNumber` 列表改索引列表；`DeterministicHierarchy.deriveChild` → `HD.derive(...).deriveChild(...)`；
-2. `MasterKeyBapBase`／`PandaBapBase`／`RemoteBapBase`／`SpecifyBapBase`：同步跟随 `BapBase` 的新签名；
-3. `CryptoHelper`（@Deprecated）：`CryptoBase.deterministicKey` → `HD`，`generateRootCryptoBase` 走 `MasterPrivateKey` + `HD.derive("m/44'/236'/0'/0/0")`，并同步 `CryptoHelperContractTest` 断言；
-4. `BapProviderKeyBag`／`SpecifyProviderKeyBag` 改为暴露 `findKeyFromPubHash(byte[])` 与 `unlockTemplate(byte[])`，供 `bsv-r3-transactions` 注入解锁模板；
-5. 每步以 `grep -c 'ERROR.*\.java'` 观察错误数单调下降；生产编译为 0 后转 `clean test-compile`。
+按「旧引用文件数」推进（当前生产 36、测试 41），建议顺序：
+
+1. `crypto/CryptoHelper`（4 处编译错误，唯一阻塞干净编译的文件）：`CryptoBase.deterministicKey` → `HD`，`generateRootCryptoBase` 走 `MasterPrivateKey` + `HD.derive`，同步 `CryptoHelperContractTest`；
+2. 脚本与读取组（`script/ScriptExtend`、`utils/ReadUtils`、`utils/ScriptHelper`、`utils/UtilsExtend`、`BobHelper`、`TxoHelper`、`input/*`、`output/*`）→ 对应 `bsv-r3-scripts`；
+3. 交易与签名组（`transcation/*`、`signers/*`、`remote/*`、`ordinals/*`、`sigma/*`、`context/PreSignHashContext`）→ 对应 `bsv-r3-transactions`／`bsv-r3-protocols`；
+4. UTXO（`utxo/*`）与 `sigma/*` 剩余部分；
+5. 每完成一个文件即重跑 `grep -rl 'io\.bitcoinsv' metanet4j-sdk/src/main/java --include=*.java | wc -l`，以文件数单调下降为准；生产清零后再动测试（41 个文件）。
 
 R4—R6 待前置阶段门禁。

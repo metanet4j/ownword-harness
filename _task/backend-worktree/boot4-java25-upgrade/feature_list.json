@@ -907,7 +907,9 @@
         "证据：evidence/bsv-replace/r3-keys-20261010/migration-rules.md（四组统一改写规则）、old-api-reference.md（36 个旧类型的 javap 权威签名 × 新 SDK 入口）、build-old-api-reference.py。",
         "当前 SDK 生产编译剩余 24 处错误（KeyBag／RedeemData 签名链、CryptoHelper 的 DeterministicKey 迁移、部分 DeterministicKey 构造点）；本项**未完成**，不标记 done。",
         "SDK BIP39／BIP32 层迁移（metanet4j-sdk 提交 5424b34）：MasterPrivateKey 改用 compat.HD／compat.Mnemonic／Bip39WordlistEn，助记词→seed→主密钥链与 xprv／xpub 序列化语义不变；Sigma／BapBase／SpecifyBapBase 修正密钥类型用法。",
-        "当前 SDK 生产编译剩余 34 处错误，全部集中在 HD 结构改写：BapBase（89 处引用）、CryptoHelper（15）、MasterKeyBapBase（13）、PandaBapBase（4）、RemoteBapBase（2）、SpecifyBapBase（2）、Sigma（1）；改写配方见 evidence/bsv-replace/r3-keys-20261010/migration-rules.md §5。"
+        "当前 SDK 生产编译剩余 34 处错误，全部集中在 HD 结构改写：BapBase（89 处引用）、CryptoHelper（15）、MasterKeyBapBase（13）、PandaBapBase（4）、RemoteBapBase（2）、SpecifyBapBase（2）、Sigma（1）；改写配方见 evidence/bsv-replace/r3-keys-20261010/migration-rules.md §5。",
+        "SDK BAP 结构改写（metanet4j-sdk 提交 c9df398）：新增 BapPath 值类型与 SigningKeyProvider 接口，BapBase／MasterKeyBapBase 的派生改用 compat.HD，BapProviderKeyBag／SpecifyProviderKeyBag 不再实现旧 KeyBag；新增 BapPathTest（8 例）与独立核验 evidence/bsv-replace/r3-keys-20261010/bap-path-check.log（14 项比较 0 差异，含 BIP39→BIP32 固定向量 xprv）。",
+        "实测口径修正：SDK 生产编译错误 24 → 4（仅剩 CryptoHelper），但生产源码仍有 36 个文件引用 io.bitcoinsv（旧 bitcoinj 依赖仍在 SDK pom 中，编译期可解析，R5 才移除）——真实剩余工作量以「旧引用文件数」为准，不以编译错误数衡量。"
       ],
       "commits": [
         {
@@ -921,9 +923,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "5424b34"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "c9df398"
         }
       ],
-      "statusNote": "进行中：base 共享值类型完成并通过严格验收；SDK 密钥／地址层与 BIP39／BIP32 层已迁移；生产编译剩余 34 处错误，集中在 BAP 的 HD 结构改写（ChildNumber／HDUtils／DeterministicHierarchy → compat.HD.derive）与 KeyBag 签名链。",
+      "statusNote": "进行中：base 值类型基座完成；SDK 密钥／地址／BIP32 层与 BAP 结构（BapPath + compat.HD + SigningKeyProvider）已迁移；剩余 36 个生产文件仍引用 io.bitcoinsv（脚本／交易／签名链／UTXO／远程签名／Sigma 等），CryptoHelper 待迁移。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
