@@ -914,7 +914,8 @@
         "CryptoHelper 迁移（metanet4j-sdk 提交 a3746c5）：改走 compat.HD／compat.Mnemonic／BapPath，根派生路径 m/44'/236'/0'/0/0 与旧实现一致，CryptoBase.deterministicKey 类型改为 HD；ScriptHelper 增加 getPushData／getPushDataAsString 访问器。生产旧引用文件数 35 → 34，编译错误 18 → 14（剩余全部为 ScriptChunk 类型扩散：BobHelper／TxoHelper／Sigma）。",
         "过程记录（避免误判）：曾尝试用脚本把 BobHelper／TxoHelper／Sigma 的 scriptChunk.data.data() 改为 ScriptHelper.getPushData()，但三者的 ScriptChunk 仍是旧类型、编译错误反增至 66，已按「不与类型边界抢跑」原则还原这三个文件；这三个文件属于脚本／交易组，需与交易模型一起迁移。",
         "TxoHelper 迁移（metanet4j-sdk 提交 8706eb9）：改用新 SDK Transaction／Script／OP 与 BsvAddress；新旧实现同输入对照 6 个历史交易夹具，txid 全部一致、1 个全文一致；其余 5 个仅 out[].e.a 不同（旧库 getToAddress 对部分 Ordinals 铭文脚本返回 ASM 文本，新实现回退脚本 hex），已登记为可评审偏差：evidence/bsv-replace/r3-keys-20261010/txo-parity-result.json。过程中修正一处重复 OP_ 前缀缺陷。生产旧引用文件数 34 → 33。",
-        "Sigma 与 pre-sign 上下文迁移（metanet4j-sdk 提交 8d6269f）：Sigma 改用 BsvHashBytes 与新 SDK Transaction／Script（outputs／inputs 公开字段、lockingScript、satoshis、Script.writeBin、OP.OP_RETURN、ScriptHelper.getPushData、BsvAddress），SignResponse／PreSignHashContext／PreSignHashUtils／Sig 同步；公开方法 getMessageHash／getDataHash／getInputHash 返回类型由 Sha256Hash 改为 BsvHashBytes（测试断言待同步）。生产旧引用文件数 33 → 28；编译错误暴露面转移到交易／签名组（RemoteTransactionBuilder 8、TransactionBuilder／UnSpendableDataLockBuilder 各 4、RemoteTransactionSigner／RemoteOrdTransactionBuilder／BobHelper 各 2）。"
+        "Sigma 与 pre-sign 上下文迁移（metanet4j-sdk 提交 8d6269f）：Sigma 改用 BsvHashBytes 与新 SDK Transaction／Script（outputs／inputs 公开字段、lockingScript、satoshis、Script.writeBin、OP.OP_RETURN、ScriptHelper.getPushData、BsvAddress），SignResponse／PreSignHashContext／PreSignHashUtils／Sig 同步；公开方法 getMessageHash／getDataHash／getInputHash 返回类型由 Sha256Hash 改为 BsvHashBytes（测试断言待同步）。生产旧引用文件数 33 → 28；编译错误暴露面转移到交易／签名组（RemoteTransactionBuilder 8、TransactionBuilder／UnSpendableDataLockBuilder 各 4、RemoteTransactionSigner／RemoteOrdTransactionBuilder／BobHelper 各 2）。",
+        "SigHashExtend 迁移（metanet4j-sdk 提交 fe273b5）：按 §8 自下而上第一层——hashForForkIdSignature 参数由 (Tx,int,byte[],Coin,SigHash.Flags,boolean) 改为 (Transaction,int,byte[],BsvAmount,int,boolean)，内部适配新 SDK 的 TransactionSignature.formatBip143 再取双 SHA-256，返回 BsvHashBytes；不再继承旧 SigHash。等价性逐字段核对（hashPrevouts／hashSequence／hashOutputs ALL 与 SINGLE／前像次序／金额 LE 编码／sighash 字节）见 evidence/bsv-replace/r3-keys-20261010/sighash-extend-equivalence.json，并确认计划要求的独立前像计算器 referenceDigest 保留未替换。生产旧引用文件数 28 → 27；编译错误 18 → 26（暴露面转移到 4 个调用方，属同组后续目标）。"
       ],
       "commits": [
         {
@@ -948,9 +949,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "8d6269f"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "fe273b5"
         }
       ],
-      "statusNote": "进行中：base 值类型基座完成；SDK 密钥／地址／BIP32／BAP 结构／脚本工具／CryptoHelper／TxoHelper／Sigma 与 pre-sign 上下文已迁移；生产旧引用文件数 28（起点 49），测试 41。",
+      "statusNote": "进行中：base 值类型基座完成；SDK 密钥／地址／BIP32／BAP 结构／脚本工具／CryptoHelper／TxoHelper／Sigma／签名原语 SigHashExtend 已迁移；生产旧引用文件数 27（起点 49），测试 41。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
