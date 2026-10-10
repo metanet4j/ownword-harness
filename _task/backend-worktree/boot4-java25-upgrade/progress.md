@@ -2,7 +2,7 @@
 
 ## Current State
 
-- **Last Updated**：2026-10-11T07:25:00+08:00。
+- **Last Updated**：2026-10-11T07:50:00+08:00。
 - **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射、逐用例迁移清单和 V01—V14 独立样本，R0、R1、R2 三个阶段已完成，进入 R3 业务 SDK 适配（5 个执行项）。
 - **Active Item**：`bsv-r3-keys`（in-progress）；**R0（6/6）、R1（3/3）、R2（2/2）阶段完成**，R3 进行中。实时状态唯一来源为 [feature_list.json](feature_list.json)。实时状态唯一来源为 [feature_list.json](feature_list.json)。
 - **授权范围**：胡先生已明确指令“开始按照计划执行，先拆feature，记录执行进度和状态”。授权覆盖既定 R0—R6，原 SDK 输入、共享设施配置及远端边界继续适用。
@@ -109,7 +109,8 @@
 
 按「旧引用文件数」推进（当前生产 **28**、测试 41），建议顺序：
 
-1. **脚本工具层 + 赎回数据取消（五个文件一批）**：本轮实测——草稿落地后错误 26 → 48，原因是 4 个调用方**都**依赖 `TxHelperExtend.getConnectedRedeemDataExtend`（返回旧 `ECKey`／`RedeemData`）。正确批次是：`RedeemDataExtend` 删除 + `TxHelperExtend` 去继承 + `ScriptExtend` 改工具类 + 三个调用方改「显式派生 + 解锁模板」。建议先单独把 `TransactionBuilder.getUnLockScriptSize` 改成不依赖赎回数据（手续费估算，可独立验证），再处理签名流程。详见 `migration-rules.md` §10。
+1. **`ScriptExtend` 契约已冻结**：`ScriptExtendContractTest` 给出 9 条精确断言（P2PKH／裸公钥／多签／P2SH／Ordinals／未支持类型／创建时间），`SIG_SIZE=75`；实现草稿已按该契约核对，见 `migration-rules.md` §11。手续费估算切口的依赖与反推方法见 §12（`getUnLockScriptSize` 只需公钥长度与 P2SH 赎回脚本，且必须用 `TransactionBuilderContractTest:216-222` 反推口径，不能凭结构猜测）。
+2. **脚本工具层 + 赎回数据取消（五个文件一批）**：本轮实测——草稿落地后错误 26 → 48，原因是 4 个调用方**都**依赖 `TxHelperExtend.getConnectedRedeemDataExtend`（返回旧 `ECKey`／`RedeemData`）。正确批次是：`RedeemDataExtend` 删除 + `TxHelperExtend` 去继承 + `ScriptExtend` 改工具类 + 三个调用方改「显式派生 + 解锁模板」。建议先单独把 `TransactionBuilder.getUnLockScriptSize` 改成不依赖赎回数据（手续费估算，可独立验证），再处理签名流程。详见 `migration-rules.md` §10。
 2. 交易与签名组（`transcation/TransactionBuilder`、`signers/*`、`remote/*`、`ordinals/*`、`utils/TxHelperExtend`、`utils/RedeemDataExtend`）→ 按 migration-rules §3 把 KeyBag／RedeemData 改为 `SigningKeyProvider` + 解锁模板；
 4. UTXO（`utxo/*`）与 `context/PreSignHashContext`；
 5. 每完成一个文件即重跑 `grep -rl 'io\.bitcoinsv' metanet4j-sdk/src/main/java --include=*.java | wc -l`（当前 35），以文件数单调下降为准；生产清零后再动 41 个测试文件。
