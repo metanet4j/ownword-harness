@@ -8,8 +8,8 @@
     "done"
   ],
   "activeItem": null,
-  "note": "Boot 4 / Java 25 升级、U0 测试基线与 U1—U9 全部完成，任务已结项。全量单元 841 例 0/0/0、23 模块 gaps 全 0；全量集成 18 类 124 例通过；2026-09-30 活体重跑复核一致（单元 evidence/20260930T125355Z/、集成 evidence/20260930T130119Z-integration/）。唯一保留项是 SftpFileClient 的 doInit 成功构造行（2 行），按胡先生 2026-09-30 决定继续按精确例外登记，不再是待办。",
-  "planDoc": "doc/升级计划-Boot4-Java25.md",
+  "note": "既有 Boot 4 / Java 25 升级及 U0—U9 测试已完成。BSV 依赖替换计划已交付，实施 R0—R6 均未开工；本轮授权仅文档。唯一下一步是取得明确实施指令后执行 R0，方案与验收以 planDoc 为准。四仓库当前使用 feature/bsv-sdk-replace，base/pom.xml 的既有修改保留。",
+  "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
   "features": [
     {
       "id": "boot4-p0-env",
@@ -440,8 +440,110 @@
         "2026-09-30 胡先生决定：SFTP 实连按现状收尾，不再作为待办。SftpFileClient.doInit 的 2 行继续按精确清单登记为覆盖例外；已评估的替代方案（给 component-file 加 test 作用域内嵌 Apache MINA SSHD）记入报告第 6 节，将来若要让缺口归零可直接采用。"
       ],
       "statusNote": "2026-09-30：全量单元与集成验收通过并经活体重跑复核，报告已交付；胡先生决定 SFTP 实连按现状收尾，本项验收完成，任务结项。"
+    },
+    {
+      "id": "bsv-replace-plan",
+      "name": "BSV 依赖替换实施与验收计划",
+      "description": "在指定工作区移除 io.bitcoinsv 并接入固定 metanet4j-bsv-sdk；先交付可执行、可验收的计划。",
+      "status": "done",
+      "dependencies": [],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "evidence": [
+        "doc/BSV依赖替换计划-20261010-103802.md：定义 R0—R6 的范围、依赖、产物、执行命令与门禁，覆盖固定 SDK 来源和跨缓存制品接入、公开类型迁移、14 组行为验收及 25 个 POM 旧依赖清零。",
+        "evidence/bsv-replace/plan-20261010-103802/static-check.json：6 个本地链接有效、10 个 Bash 代码块通过 bash -n、嵌入 Python 语法通过；25 个 POM 与原清单一致，23 个既有事项原样保留，7 个实施阶段依赖齐全。",
+        "源码与清单核对：SDK 的 BitailsAndGorillaHttpIntegrationTest 为 integration 标签，含 5 个用例；计划要求独立运行，不以原 component 124 例报告替代。",
+        "./init.sh 退出 0：JDK 25/Maven 3.9.16 隔离通过；当前分支与旧预期不符及共享中间件不可达均为告警，计划已明确处理阶段；不是构建或测试验收。",
+        "harness-creator 的 validate-harness.mjs 退出 0，仅用于任务入口、状态、范围和交接的结构检查，不代表 SDK 或迁移功能通过。",
+        "git diff --check 通过；四子仓库与指定 SDK 未被本轮修改，base/pom.xml 的既有修改保留。"
+      ],
+      "statusNote": "2026-10-10：计划文档及任务入口已交付，静态复核通过；本轮仅文档工作，R0—R6 均未开工，未执行 Maven 构建或业务测试。"
+    },
+    {
+      "id": "bsv-replace-r0-baseline",
+      "name": "R0 固定基线与方法级映射",
+      "description": "固定五仓库来源、既有改动、API／测试对应及独立向量；按计划更新任务自检。",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-replace-plan"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "evidence": [],
+      "statusNote": "本轮仅编写计划；实施须取得明确批准并满足计划前置门禁。"
+    },
+    {
+      "id": "bsv-replace-r1-artifact",
+      "name": "R1 固定 SDK 制品接入",
+      "description": "通过原任务缓存打包固定 SDK、接入目标缓存并为严格验收绑定制品指纹。",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-replace-r0-baseline"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "evidence": [],
+      "statusNote": "本轮仅编写计划；实施须取得明确批准并满足计划前置门禁。"
+    },
+    {
+      "id": "bsv-replace-r2-base",
+      "name": "R2 base 适配",
+      "description": "迁移 BAP 标识与 AIP 验签，清除 base 的旧类型并完成严格测试及安装。",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-replace-r1-artifact"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "evidence": [],
+      "statusNote": "本轮仅编写计划；实施须取得明确批准并满足计划前置门禁。"
+    },
+    {
+      "id": "bsv-replace-r3-sdk",
+      "name": "R3 业务 SDK 适配",
+      "description": "按调用依赖迁移密钥、BAP、脚本、交易、Sigma、Ordinals 与远程签名，完成 SDK 严格验收。",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-replace-r2-base"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "evidence": [],
+      "statusNote": "本轮仅编写计划；实施须取得明确批准并满足计划前置门禁。"
+    },
+    {
+      "id": "bsv-replace-r4-component",
+      "name": "R4 component 适配",
+      "description": "迁移交易组件及全部下游调用、同步测试并隔离集成资源，完成组件严格验收。",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-replace-r3-sdk"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "evidence": [],
+      "statusNote": "本轮仅编写计划；实施须取得明确批准并满足计划前置门禁。"
+    },
+    {
+      "id": "bsv-replace-r5-cleanup",
+      "name": "R5 旧依赖清理",
+      "description": "移除旧依赖及全部过渡引用，同步测试源码清单和精确例外，核对 API／测试映射。",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-replace-r4-component"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "evidence": [],
+      "statusNote": "本轮仅编写计划；实施须取得明确批准并满足计划前置门禁。"
+    },
+    {
+      "id": "bsv-replace-r6-acceptance",
+      "name": "R6 全量验收与交付",
+      "description": "全量单元严格验收、SDK 与 component 集成、25 个 POM 的依赖树、制品指纹及交付报告。",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-replace-r5-cleanup"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "evidence": [],
+      "statusNote": "本轮仅编写计划；实施须取得明确批准并满足计划前置门禁。"
     }
   ],
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
-  "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md"
+  "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
+  "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md"
 }
