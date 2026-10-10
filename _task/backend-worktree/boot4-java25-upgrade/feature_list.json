@@ -922,7 +922,8 @@
         "签名载体改造（metanet4j-sdk 提交 78a4813，原子重构第三步）：ExtendForSignTransaction 不再继承旧 TransactionSigner.ProposedTransaction，改为持有新 SDK Transaction 与 hashFlags／useForkId／anyoneCanPay 的业务载体（新增 signatureScope()）；删除 TransactionExtend（R0 判定 delete）。**编译错误 56 → 6，生产旧引用文件数 23 → 21**。剩余 6 处为 TransactionExtend 缺失的 import 与 SigHash.Flags，实际属于 TransactionBuilder 基类的 KeyBag／Coin／Transaction 迁移范围（下一步）。",
         "去 TransactionExtend 残留引用（metanet4j-sdk 提交 37247f3）：三处调用改为直传新 SDK Transaction，SigHash.Flags.ALL → TransactionSignature.SIGHASH_ALL。显式错误 6 → 86，属移除中间层后暴露调用方真实依赖的预期现象；剩余错误分布：OrdinalsTransactionSigner 26、RemoteTransactionSigner 14、OrdTransactionBuilder 14、TransactionBuilder 12、RemoteTransactionBuilder 12、RemoteOrdTransactionBuilder 8——即 TransactionBuilder 基类迁移的直接对象。",
         "base 新增 UTXO 值类型 BsvUtxo（metanet4j-base 提交 cd0428e）：实测发现新 SDK 的 compat.Utxo 只有 JsonUtxo 记录与 fromUtxo 入口、不是 UTXO 模型，无法作为 UTXOProvider 泛型上界；故在 base 补业务值类型（BsvHashBytes 哈希 + index + 整数 satoshi + height + coinbase + 可选地址／脚本），新增 BsvUtxoTest（4 例）。base 严格验收恢复绿色：verify-unit.py --mode accept --scope metanet4j-base 退出 0，47 例 0 失败／错误／跳过、行与指令未覆盖为 0、gaps=0。",
-        "清单一致性教训：verify-unit.py 的清单检查会遍历四仓库，SDK 的原子重构中间态（删除 TransactionExtend、新增 SigningKeyProvider／BapPath）会阻塞 base 验收；已同步 unit-test-inventory.json，并在 R3 期间每次增删源码后立即同步。"
+        "清单一致性教训：verify-unit.py 的清单检查会遍历四仓库，SDK 的原子重构中间态（删除 TransactionExtend、新增 SigningKeyProvider／BapPath）会阻塞 base 验收；已同步 unit-test-inventory.json，并在 R3 期间每次增删源码后立即同步。",
+        "UTXOProvider 迁移（metanet4j-sdk 提交 ad4ef6d，§13.3 第一步）：泛型上界换 base 的 BsvUtxo、地址参数换 AddressEnhance；BitailsUtxoProvider 与 OrdinalsOriginGorillaUtxoProvider 两个实现同步（txid 显示序 → BsvHashBytes、金额整数 satoshi、锁定脚本走新 SDK Script.fromBinary）。生产旧引用文件数 21 → 19；剩余 86 处集中在 TransactionBuilder 家族 6 个文件。"
       ],
       "commits": [
         {
@@ -984,9 +985,13 @@
         {
           "repository": "ownword",
           "commit": "1680d3a"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "ad4ef6d"
         }
       ],
-      "statusNote": "进行中（原子重构模式）：生产旧引用文件数 21（起点 49）；base 侧 47 例严格验收绿色；SDK 剩 86 处编译错误集中在 TransactionBuilder 家族（迁移规格见 migration-rules §13，其中 UTXOProvider 泛型上界已更正为 BsvUtxo）。",
+      "statusNote": "进行中（原子重构模式）：生产旧引用文件数 19（起点 49）；base 侧 47 例严格验收绿色；SDK 剩 86 处编译错误，全部在 TransactionBuilder 家族（§13 规格，第 1 步已完成）。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
