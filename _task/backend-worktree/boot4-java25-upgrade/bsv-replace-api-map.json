@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "featureId": "bsv-r0-api",
-  "generatedAt": "2026-10-10T18:53:04+08:00",
+  "generatedAt": "2026-10-10T19:30:08+08:00",
   "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
   "planSection": "4 R0 工作项 2；3 类型与行为迁移方案",
   "handlingLegend": {
@@ -5112,6 +5112,11 @@
   "resolveCapabilityGaps": [
     {
       "id": "RC-DERIVE-KEY-BY-PUBKEYHASH",
+      "oldTypes": [
+        "KeyBag",
+        "RedeemData",
+        "TxHelper"
+      ],
       "missing": "按 pubKeyHash/脚本反查私钥（旧 KeyBag.findKeyFromPubHash）",
       "sdkChecked": [
         "com.metanet4j.bsv.wallet.KeyDeriverApi#derivePrivateKey",
@@ -5126,6 +5131,9 @@
     },
     {
       "id": "RC-SCRIPT-VERIFY-POLICY",
+      "oldTypes": [
+        "ScriptVerifyFlag"
+      ],
       "missing": "旧 ScriptVerifyFlag.GENESIS_SET 验证标志集合",
       "sdkChecked": [
         "com.metanet4j.bsv.script.Spend#validate",
@@ -5140,6 +5148,10 @@
     },
     {
       "id": "RC-ADDRESS-FROM-SCRIPT",
+      "oldTypes": [
+        "ScriptUtils",
+        "Script"
+      ],
       "missing": "旧 ScriptUtils.getToAddress 与 Script.isSentToAddress/isPayToScriptHash 等类型判定",
       "sdkChecked": [
         "com.metanet4j.bsv.script.Script",
@@ -5154,6 +5166,11 @@
     },
     {
       "id": "RC-TXID-DISPLAY-ORDER",
+      "oldTypes": [
+        "Sha256Hash",
+        "TxBean",
+        "TransactionOutPoint"
+      ],
       "missing": "旧 Sha256Hash.toString 的显示序（反转 hex）",
       "sdkChecked": [
         "com.metanet4j.bsv.transaction.Transaction#id",
@@ -5168,6 +5185,11 @@
     },
     {
       "id": "RC-ORDINALS-NESTED-SCRIPT-KEY",
+      "oldTypes": [
+        "KeyBag",
+        "TxHelper",
+        "RedeemData"
+      ],
       "missing": "Ordinals 嵌套脚本（信封内公钥哈希）与连接输出的密钥选择，旧路径依赖 KeyBag 反查，新 SDK 无等价入口",
       "sdkChecked": [
         "com.metanet4j.bsv.ordinals（无该能力）",
@@ -5182,6 +5204,7 @@
     },
     {
       "id": "RC-JCL-RESOLVED-PATH",
+      "oldTypes": [],
       "missing": "JCL 五项旧制的实际引入路径（resolved tree）",
       "sdkChecked": [],
       "decision": "R1 接入 SDK 制品后按 resolved dependency tree 补齐引入路径，R5 删除并复扫",

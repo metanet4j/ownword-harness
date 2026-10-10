@@ -2,9 +2,9 @@
 
 ## Current State
 
-- **Last Updated**：2026-10-10T20:05:00+08:00。
-- **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射、逐用例迁移清单和 V01—V14 独立样本，继续 R0 阶段门禁复核。
-- **Active Item**：无；R0 已完成 5/6，下一项 `bsv-r0-gate`。实时状态唯一来源为 [feature_list.json](feature_list.json)。
+- **Last Updated**：2026-10-10T20:30:00+08:00。
+- **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射、逐用例迁移清单和 V01—V14 独立样本，R0 阶段门禁已通过，进入 R1 制品接入。
+- **Active Item**：无；**R0 阶段已完成 6/6**，下一项 `bsv-r1-package`（R1 阶段）。实时状态唯一来源为 [feature_list.json](feature_list.json)。
 - **授权范围**：胡先生已明确指令“开始按照计划执行，先拆feature，记录执行进度和状态”。授权覆盖既定 R0—R6，原 SDK 输入、共享设施配置及远端边界继续适用。
 - 七阶段汇总与 28 个执行项已拆分；每项记录依赖、产物、完成条件、验证证据及提交，一次只推进一个执行项。
 
@@ -29,7 +29,7 @@
 - [baseline.json](baseline.json)：五仓库与 25 POM 指纹、67 个生产／69 个测试直接旧引用、base 既有 diff 已冻结。
 - `evidence/bsv-replace/r0-source-20261010-1130/`：来源 revision、full-evidence verify 和 ./init.sh 均退出 0。原验收证据复核 PASS，未重跑测试体。
 
-- 任务入口及状态门禁提交：`fa59f4b`；实施执行项已完成 **5/28**，R0 为 **5/6**，其余阶段尚未开始。
+- 任务入口及状态门禁提交：`fa59f4b`；实施执行项已完成 **6/28**，**R0 阶段 done**，R1—R6 尚未开始。
 - `evidence/bsv-replace/r0-harness-20261010/`：自检正常状态退出 0，12 项真实进程门禁检查通过，异常返回非零；子仓库及既有 base diff 保持。
 
 ### bsv-r0-api 方法级 API 与调用映射
@@ -55,6 +55,14 @@
 - 独立复核 14 项 PASS：组齐全、场景与计划第 5 节逐字一致、样本文件／类名／方法真实存在、每组均有独立预期值、指纹可复现、长字面量回读命中。
 - 自洽断言 55 条单独标注，不作为兼容性证据；ECIES 与固定 DER 签名字面量缺失、V08 pushdata 边界与 V10 负数／越界／溢出无既有用例，均登记 notFound 并转入 R3／R4 补充验证。
 
+### bsv-r0-gate R0 阶段门禁
+
+- 新增可重跑门禁 [bsv-task-gate.py](bsv-task-gate.py)：只读输入（SDK HEAD／工作区／原验收清单指纹）、四仓库基线与既有 diff 保留、阶段产物存在、执行项完成度与证据齐备、能力缺口收口、证据↔产物指纹交叉核对、`./init.sh`。R0 结论 **PASS（28 项检查）**。
+- 证据刷新入口 [refresh-r0-api-evidence.sh](refresh-r0-api-evidence.sh)：重跑三份产物生成与全部独立复核后同步指纹；产物内容不变时指纹与 `generatedAt` 均不变，连跑两次已验证可复现。
+- 门禁检出一次真实漂移：API 映射在证据冻结后更新（KeyBag／RedeemData／TxHelper 由删除改为适配、追加缺口结论与 `oldTypes`），按门禁要求重跑复核并同步指纹（`032c91c0 → ac803812`），结论未变。
+- 证据：`evidence/bsv-replace/r0-gate-20261010/`（gate.json、summary.json）。
+- R0 交付物指纹：baseline `10f9679c`、API 映射 `ac803812`、测试映射 `4365a421`、向量 `8179f162`。
+
 ## Recommended Next Step
 
-执行 `bsv-r0-gate`：复核 R0 完整性与阶段门禁——来源、自检、API 映射、逐用例映射与 14 组样本是否齐全，确认无遗漏旧调用与未决能力缺口，各准备产物来源与检查输出可复查；门禁通过后才允许进入 R1。R1—R6 均待前置阶段门禁。
+执行 `bsv-r1-package`：按计划第 6 节在只读 SDK 源仓库用其 `mvn.sh -o clean package -Dmaven.test.skip=true` 打包固定制品，校验主 JAR 含 `com/metanet4j/bsv/transaction/Transaction.class` 且非 sources／tests JAR，记录 JAR 与 POM 的 SHA-256；该步骤只打包，不代表测试通过。随后 `bsv-r1-parent` 在 parent 的 dependencyManagement 加入新坐标并 install，`bsv-r1-fingerprint` 完成接入与指纹绑定。

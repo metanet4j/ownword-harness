@@ -676,7 +676,7 @@
       "name": "复核 R0 完整性",
       "description": "对应计划 R0；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r0-baseline",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "bsv-r0-vectors"
       ],
@@ -689,9 +689,21 @@
       "deliverables": [
         "evidence/bsv-replace/r0-gate-*/summary.json"
       ],
-      "evidence": [],
-      "commits": [],
-      "statusNote": "待前置执行项及阶段门禁通过。"
+      "evidence": [
+        "bsv-task-gate.py --stage r0：可重跑阶段门禁（只读输入、四仓库基线、既有 diff 保留、产物存在、证据齐备、能力缺口收口、证据↔产物指纹交叉核对、./init.sh），结论 PASS。",
+        "evidence/bsv-replace/r0-gate-20261010/summary.json：门禁汇总（22 项检查明细、命令与退出码、R0 六项执行项状态、产物指纹、残留旧 import 基线、已知限制）。",
+        "refresh-r0-api-evidence.sh + sync-evidence-fingerprints.py：证据刷新入口，重跑生成与独立复核后同步指纹；产物内容不变时指纹与 generatedAt 均不变（已连跑两次验证可复现）。",
+        "证据漂移已按门禁要求修正：API 映射在冻结后更新，门禁检出 crosscheck 不一致，重跑生成与复核后同步指纹（032c91c0 → 4d662ce4），结论未变、复核与审计仍 PASS。"
+      ],
+      "commits": [
+        {
+          "repository": "ownword",
+          "commit": "PENDING"
+        }
+      ],
+      "statusNote": "R0 六项全部完成：来源、自检、API 映射、逐用例映射、14 组样本齐全；无遗漏旧调用（逐文件回读 import 认领 100%）、无未决能力缺口（4 类缺口 + 6 项结论）；各产物来源与检查输出可复查；基础设施停止只影响集成阶段。阶段门禁 PASS，允许进入 R1。",
+      "startedAt": "2026-10-10T20:05:00+08:00",
+      "completedAt": "2026-10-10T19:29:24+08:00"
     },
     {
       "id": "bsv-r1-package",
@@ -1200,7 +1212,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-10T19:24:49+08:00",
+  "updatedAt": "2026-10-10T19:29:24+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1213,13 +1225,13 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": "bsv-r0-gate",
+  "nextItem": "bsv-r1-package",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
       "name": "R0 固定基线与方法级映射",
       "description": "固定五仓库来源、既有改动、API／测试对应及独立向量；按计划更新任务自检。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "bsv-replace-plan"
       ],
@@ -1237,7 +1249,7 @@
       ],
       "progress": {
         "total": 6,
-        "done": 5
+        "done": 6
       }
     },
     {
