@@ -942,7 +942,8 @@
         "R3 测试迁移（metanet4j-sdk 提交 a13576d、f638adf）：迁移两个 Template 契约测试到新 SDK 交易模型（Address/AddressLite→AddressEnhance、KeyBag→SigningKeyProvider、UTXO→BsvUtxo、Coin→BsvAmount、Sha256Hash.wrap→BsvHashBytes.of、交易访问器 getInputs/getOutputs/getOutput(i)/getProgram/getScriptBytes/getValue → inputs/outputs/outputs.get(i)/toUint8Array()/lockingScript.toUint8Array()/satoshis）。RemoteOrdTransactionTemplateContractTest 已编译清零。**测量更正（重要）**：此前多轮报出的「7 个有编译错误的测试文件」大部分是**级联噪音**——模板测试硬失败时 javac 会对其依赖同一批类的文件报伪错误；模板测试错误数下降后，BapBaseCoreContractTest／KeyAddressContractTest／CryptoHelperContractTest／SpecifyBapBaseContractTest／BapBaseLifecycleTest 的报错曾整体消失又随编译推进复现。结论：**有错文件数在 javac 提前中止时也会失真**，唯一可靠的收敛判据是「test-compile 退出码为 0」。当前剩余 6 个有错文件。",
         "R3 测试迁移（metanet4j-sdk 提交 9015fbf、c966b6e）：迁移 OrdTransactionTemplateContractTest（去掉旧 TransactionSigner mock、类型与脚本 API 换新、helper 改构造 BsvUtxo）与 KeyAddressContractTest（MainNetParams/TestNet3Params→BsvNetwork、旧 ECKeyLite 夹具改业务 PrivateKey.of、验签改 EcKeyLiteExtend.verify、transformAddress 两处用法改直接调用）。旧引用测试文件数 32 → 31。**测量结论（第四次踩坑后最终版）**：`grep` 统计的「有错文件数」与「错误总数」都会被 javac 提前中止/上限封顶双重失真——同一文件在不同批次里会反复「清零」又「复现」。**唯一可靠判据是 `mvn -o -f metanet4j-sdk/pom.xml clean test-compile` 的退出码**（当前为 1）。剩余 6 个文件确有真实错误：BapBaseCoreContractTest、RemoteOrdTransactionTemplateContractTest、OrdTransactionTemplateContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest。",
         "R3 测试迁移（metanet4j-sdk 提交 dfb908e）：RemoteOrdTransactionTemplateContractTest 继续迁移（createOutputScript→P2PKH.lock、getInput(i)→inputs.get(i)、输入 lockingScript→unlockingScript、getConnectedOutput()→sourceOutput 助手、getInputSum/getOutputSum→inputSum/outputSum 助手）；`ScriptUtils_legacy.correctlySpends` 无新 SDK 等价入口，改为 assertUnlockingScriptValid（解锁脚本非空 + 首项推送以合法 SIGHASH 尾字节结束），**脚本级花费校验移至 R6 向量验收（V09）承担，此为已登记偏差**。该文件错误数 54 → 46（未清零）。",
-        "R3 测试迁移（metanet4j-sdk 提交 6f42283）：RemoteOrdTransactionTemplateContractTest 继续——inputSum/outputSum 取值改 getValue()、输入 lockingScript→unlockingScript（含 builder.build() 接收者）、新增 unlockingScriptBytes(tx,i) 处理 Object 型字段、失败签名器测试改为「密钥提供者解析不到密钥」、旧 TransactionSigner 引用清零。该文件错误数 46 → 33。"
+        "R3 测试迁移（metanet4j-sdk 提交 6f42283）：RemoteOrdTransactionTemplateContractTest 继续——inputSum/outputSum 取值改 getValue()、输入 lockingScript→unlockingScript（含 builder.build() 接收者）、新增 unlockingScriptBytes(tx,i) 处理 Object 型字段、失败签名器测试改为「密钥提供者解析不到密钥」、旧 TransactionSigner 引用清零。该文件错误数 46 → 33。",
+        "R3 测试迁移（metanet4j-sdk 提交 0710c71）：**RemoteOrdTransactionTemplateContractTest 编译清零**（30 → 0）——远程签名回填改用业务 PrivateKey（sign(hash) 返回新 SDK Signature，取 DER 后经 toBytes 包装再 Base64，因 Hutool Base64.encode 不收 List<Double>）、公钥改业务 PublicKey、AddressLite→AddressEnhance、UTXO→BsvUtxo、Object 型 unlockingScript 统一走 unlockingBytes 助手、脚本类型改新 SDK Script。剩余 6 个有错文件：BapBaseCoreContractTest 62、RemoteTransactionContractTest 54、OrdTransactionTemplateContractTest 28、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、BapBaseLifecycleTest 14。"
       ],
       "commits": [
         {
@@ -1108,9 +1109,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "6f42283"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "0710c71"
         }
       ],
-      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，剩余 6 个文件（RemoteOrdTransactionTemplateContractTest 46、BapBaseCoreContractTest 62、OrdTransactionTemplateContractTest 28、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、BapBaseLifecycleTest 14）。",
+      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，剩余 6 个文件（BapBaseCoreContractTest 62、RemoteTransactionContractTest 54、OrdTransactionTemplateContractTest 28、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、BapBaseLifecycleTest 14）。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
