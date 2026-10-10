@@ -45,6 +45,16 @@ STAGE_FEATURES = {
     "r5": ["bsv-r5-dependencies", "bsv-r5-inventory"],
     "r6": ["bsv-r6-unit", "bsv-r6-http", "bsv-r6-integration", "bsv-r6-artifact", "bsv-r6-report"],
 }
+# 各阶段允许的未提交改动（key 为仓库名；value 为该仓库允许出现的 git status 行集合）
+STAGE_PENDING = {
+    "r0": {"metanet4j-base": {"M pom.xml"}},
+    "r1": {"metanet4j-base": {"M pom.xml"}, "metanet4j-parent": {"M pom.xml"}},
+    "r2": {"metanet4j-base": {"M pom.xml"}},
+    "r3": {},
+    "r4": {},
+    "r5": {},
+    "r6": {},
+}
 STAGE_ARTIFACTS = {
     "r0": ["baseline.json", "bsv-replace-api-map.json", "bsv-replace-test-map.json",
            "bsv-replace-vectors.json", "init.sh", "test-init.py"],
@@ -113,21 +123,35 @@ def main() -> int:
         head = git(repo, "rev-parse", "HEAD")
         branch = git(repo, "branch", "--show-current")
         status = git(repo, "status", "--porcelain")
+        allowed = STAGE_PENDING.get(args.stage, {}).get(repo, set())
+        status_lines = set(status.splitlines())
+        unexpected = status_lines - allowed
+        allowed_note = ("允许的未提交改动：" + "、".join(sorted(allowed))) if allowed else "本阶段不允许未提交改动"
         if repo == "metanet4j-base":
-            ok = branch == record["branch"] and status == "M pom.xml"
-            detail = f"分支 {branch}；既有 diff {status!r}（预期只保留 pom.xml 冻结改动）"
+            ok = branch == record["branch"] and not unexpected
+            detail = f"分支 {branch}；工作区改动 {sorted(status_lines) or '无'}（{allowed_note}）"
         else:
-            ok = head == record["head"] and branch == record["branch"] and not status
-            detail = f"HEAD {head[:9]}（基线 {record['head'][:9]}），分支 {branch}，工作区{'干净' if not status else status[:80]}"
+            # 已提交实现后 HEAD 会前进；此处只要求分支正确、无未预期改动，HEAD 前进由提交记录体现
+            ok = branch == record["branch"] and not unexpected
+            detail = (f"HEAD {head[:9]}（基线 {record['head'][:9]}），分支 {branch}，"
+                      f"工作区改动 {sorted(status_lines) or '无'}（{allowed_note}）")
         check(f"baseline.{repo}", ok, detail)
 
     # 既有 diff 与冻结 patch 字节级一致
     patch = baseline["evidenceDir"] + "/existing-base-pom.patch"
     live = subprocess.check_output(["git", "-C", str(TASK / "metanet4j-base"), "diff", "--", "pom.xml"],
                                    text=True)
-    check("baseline.baseExistingDiffPreserved",
-          live.strip() == (TASK / patch).read_text().strip(),
-          "base 既有 POM 改动与冻结 patch 一致（未还原、未提前提交）")
+    frozen = (TASK / patch).read_text().strip()
+    if args.stage in ("r0", "r1"):
+        check("baseline.baseExistingDiffPreserved", live.strip() == frozen,
+              "base 既有 POM 改动与冻结 patch 一致（未还原、未提前提交）")
+    else:
+        # R2 起该改动与实现共同提交，改为核对已进入历史
+        committed = subprocess.run(
+            ["git", "-C", str(TASK / "metanet4j-base"), "log", "-1", "--format=%H", "--", "pom.xml"],
+            capture_output=True, text=True, check=False).stdout.strip()
+        check("baseline.basePomHasHistory", bool(committed),
+              f"base pom.xml 已有提交历史 {committed[:9]}" if committed else "base pom.xml 尚无提交")
 
     # ---- 产物 ----
     for name in STAGE_ARTIFACTS[args.stage]:

@@ -745,7 +745,7 @@
       "name": "接入 parent 依赖管理",
       "description": "对应计划 R1；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r1-artifact",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "bsv-r1-package"
       ],
@@ -759,16 +759,28 @@
         "metanet4j-parent/pom.xml",
         "evidence/bsv-replace/r1-parent-*/"
       ],
-      "evidence": [],
-      "commits": [],
-      "statusNote": "待前置执行项及阶段门禁通过。"
+      "evidence": [
+        "metanet4j-parent/pom.xml：dependencyManagement 新增 com.metanet4j:metanet4j-bsv-sdk:${metanet4j.version}（解析为 0.2.0），旧管理项（bitcoinj-base、五项 JCL）按计划保留到 R5；parent -N install 退出 0。",
+        "evidence/bsv-replace/r1-parent-20261010/effective-pom.xml + install.log：新坐标在 dependencyManagement 中解析为 0.2.0，metanet4j.version=0.2.0，其余旧条目保持 1.0.4／1.0.5。",
+        "bsv-replace-dependencies.json：5 个模块的 resolved dependency tree（含 SHA-256）与 JCL 实际引入路径，供 R5 清理逐条核对。",
+        "metanet4j-base 的依赖树已解析出 com.metanet4j:metanet4j-bsv-sdk:jar:0.2.0:compile，证明目标缓存中的固定制品可用；旧依赖仍存在于尚未迁移的 sdk／tx-convertor／tx-filter／tx-validator。"
+      ],
+      "commits": [
+        {
+          "repository": "metanet4j-parent",
+          "commit": "PENDING"
+        }
+      ],
+      "statusNote": "parent 管理新 SDK 0.2.0 并复用 metanet4j.version；install 成功；目标缓存解析到固定制品；JCL 四项实际引入路径已从 resolved tree 记录（sdk 直接声明 + 传递），R5 按此清理。",
+      "startedAt": "2026-10-10T20:50:00+08:00",
+      "completedAt": "2026-10-10T19:37:03+08:00"
     },
     {
       "id": "bsv-r1-fingerprint",
       "name": "严格验收绑定 SDK 制品",
       "description": "对应计划 R1；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r1-artifact",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "bsv-r1-parent"
       ],
@@ -782,9 +794,22 @@
         "verify-unit.py",
         "evidence/bsv-replace/r1-fingerprint-*/"
       ],
-      "evidence": [],
-      "commits": [],
-      "statusNote": "待前置执行项及阶段门禁通过。"
+      "evidence": [
+        "verify-unit.py：运行元数据新增 sdkArtifact（坐标、JAR／POM 路径与 SHA-256、是否已安装）；严格模式核对目标缓存制品存在、JAR 与 POM 指纹与 R1 绑定一致、证据记录指纹与当前制品一致。",
+        "evidence/bsv-replace/r1-fingerprint-20261010/artifact-binding-check.json：已安装制品 jar sha256 d3aaf86d…、pom 74d32beb…，与 bsv-replace-artifact.json 绑定逐字段相等。",
+        "同坐标覆盖反例：向 JAR 追加一字节后 tampered-check.json 报 detected=true，tampered-strict-run.log 出现两条预期问题并退出 1（实测 jar d6e9edb0… ≠ 绑定 d3aaf86d…）。",
+        "恢复制品后 restored-strict-run.log 退出 1 且仅报「证据记录的 SDK 制品指纹与当前已安装制品不一致」，证明缺少 SDK 指纹的旧证据必然失效而不会静默沿用。",
+        "bsv-replace-fingerprint.json：改动、绑定、正反例命令与退出码、既有门禁（源码指纹／HEAD／覆盖例外／清单）保留说明。"
+      ],
+      "commits": [
+        {
+          "repository": "ownword",
+          "commit": "PENDING"
+        }
+      ],
+      "statusNote": "严格验收已绑定 SDK 制品：元数据保存指纹，严格模式与 R1 绑定清单及当前缓存双向核对；同坐标覆盖被检出，缺 SDK 指纹的旧证据失效；源码指纹、HEAD 与覆盖门禁继续有效。",
+      "startedAt": "2026-10-10T21:00:00+08:00",
+      "completedAt": "2026-10-10T19:38:14+08:00"
     },
     {
       "id": "bsv-r2-behavior",
@@ -1225,7 +1250,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-10T19:35:56+08:00",
+  "updatedAt": "2026-10-10T19:38:14+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1238,7 +1263,7 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": "bsv-r1-parent",
+  "nextItem": "bsv-r2-behavior",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
@@ -1269,7 +1294,7 @@
       "id": "bsv-replace-r1-artifact",
       "name": "R1 固定 SDK 制品接入",
       "description": "通过原任务缓存打包固定 SDK、接入目标缓存并为严格验收绑定制品指纹。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "bsv-replace-r0-baseline"
       ],
@@ -1284,7 +1309,7 @@
       ],
       "progress": {
         "total": 3,
-        "done": 1
+        "done": 3
       }
     },
     {

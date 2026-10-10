@@ -2,9 +2,9 @@
 
 ## Current State
 
-- **Last Updated**：2026-10-10T20:30:00+08:00。
-- **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射、逐用例迁移清单和 V01—V14 独立样本，R0 阶段门禁已通过，进入 R1 制品接入。
-- **Active Item**：无；**R0 阶段已完成 6/6**，下一项 `bsv-r1-package`（R1 阶段）。实时状态唯一来源为 [feature_list.json](feature_list.json)。
+- **Last Updated**：2026-10-10T21:20:00+08:00。
+- **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射、逐用例迁移清单和 V01—V14 独立样本，R0 阶段门禁与 R1 制品接入均已完成，进入 R2 base 适配。
+- **Active Item**：无；**R0、R1 阶段已完成**（6/6、3/3），下一项 `bsv-r2-behavior`（R2 阶段）。实时状态唯一来源为 [feature_list.json](feature_list.json)。
 - **授权范围**：胡先生已明确指令“开始按照计划执行，先拆feature，记录执行进度和状态”。授权覆盖既定 R0—R6，原 SDK 输入、共享设施配置及远端边界继续适用。
 - 七阶段汇总与 28 个执行项已拆分；每项记录依赖、产物、完成条件、验证证据及提交，一次只推进一个执行项。
 
@@ -29,7 +29,7 @@
 - [baseline.json](baseline.json)：五仓库与 25 POM 指纹、67 个生产／69 个测试直接旧引用、base 既有 diff 已冻结。
 - `evidence/bsv-replace/r0-source-20261010-1130/`：来源 revision、full-evidence verify 和 ./init.sh 均退出 0。原验收证据复核 PASS，未重跑测试体。
 
-- 任务入口及状态门禁提交：`fa59f4b`；实施执行项已完成 **6/28**，**R0 阶段 done**，R1—R6 尚未开始。
+- 任务入口及状态门禁提交：`fa59f4b`；实施执行项已完成 **9/28**，**R0、R1 阶段 done**，R2—R6 尚未开始。
 - `evidence/bsv-replace/r0-harness-20261010/`：自检正常状态退出 0，12 项真实进程门禁检查通过，异常返回非零；子仓库及既有 base diff 保持。
 
 ### bsv-r0-api 方法级 API 与调用映射
@@ -63,6 +63,14 @@
 - 证据：`evidence/bsv-replace/r0-gate-20261010/`（gate.json、summary.json）。
 - R0 交付物指纹：baseline `10f9679c`、API 映射 `ac803812`、测试映射 `4365a421`、向量 `8179f162`。
 
+### bsv-r1-package／bsv-r1-parent／bsv-r1-fingerprint（R1 阶段，全部完成）
+
+- 制品：[bsv-replace-artifact.json](bsv-replace-artifact.json) 记录来源（HEAD `3dd8beb`、src/main+POM 指纹 `d622c3a0…`）、打包命令与退出码、目标缓存安装与双向哈希；主 JAR 476 条目含 `Transaction.class`、0 个 `.java`、无 test 条目，源与缓存 `d3aaf86d…` 一致。
+- parent：[metanet4j-parent/pom.xml](metanet4j-parent/pom.xml) 在 dependencyManagement 接入 `com.metanet4j:metanet4j-bsv-sdk:${metanet4j.version}`（解析 0.2.0），旧管理项保留到 R5；`-N install` 退出 0。
+- 依赖路径：[bsv-replace-dependencies.json](bsv-replace-dependencies.json) 记录 5 个模块的 resolved tree 与 JCL 实际引入路径（sdk 直接声明 `jcl-store-levelDB` 并传递 `jcl-tools`／`jcl-store`／`jcl-store-keyValue`），供 R5 清理核对。
+- 指纹绑定：[verify-unit.py](verify-unit.py) 运行元数据新增 `sdkArtifact`，严格模式与 R1 绑定清单双向核对；向同坐标 JAR 追加一字节后严格验收退出 1 并报出两条预期问题，恢复后缺 SDK 指纹的旧证据仍被拒（[bsv-replace-fingerprint.json](bsv-replace-fingerprint.json)）。
+- R1 门禁 `bsv-task-gate.py --stage r1` 退出 0。
+
 ## Recommended Next Step
 
-执行 `bsv-r1-package`：按计划第 6 节在只读 SDK 源仓库用其 `mvn.sh -o clean package -Dmaven.test.skip=true` 打包固定制品，校验主 JAR 含 `com/metanet4j/bsv/transaction/Transaction.class` 且非 sources／tests JAR，记录 JAR 与 POM 的 SHA-256；该步骤只打包，不代表测试通过。随后 `bsv-r1-parent` 在 parent 的 dependencyManagement 加入新坐标并 install，`bsv-r1-fingerprint` 完成接入与指纹绑定。
+执行 `bsv-r2-behavior`（R2 起点）：核对并采用 base 既有 POM 修改，按 [bsv-replace-api-map.json](bsv-replace-api-map.json) 在 `metanet4j-base` 建立 `BsvNetwork`／`HashBytes`／`BsvAddress` 最小业务类型，迁移 `BapHelper`、`AipHelper` 及其测试，替换公开接口中的 `NetworkParameters`／`AddressLite`／`ECKeyLite`／`Sha256Data` 等旧类型；随后 `bsv-r2-accept` 用 `python3 verify-unit.py --mode accept --scope metanet4j-base` 严格验收并安装 base 制品。R3—R6 待前置阶段门禁。

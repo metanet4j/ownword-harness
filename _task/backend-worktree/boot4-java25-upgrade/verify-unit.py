@@ -18,6 +18,40 @@ MVN = Path.home() / ".sdkman/candidates/maven/3.9.16/bin/mvn"
 SETTINGS = Path.home() / ".m2/metanet4j-settings.xml"
 JDK = Path.home() / ".sdkman/candidates/java/25.0.4.1-tem"
 REPOSITORIES = ("metanet4j-parent", "metanet4j-base", "metanet4j-sdk", "metanet4j-component")
+# BSV 能力层制品：运行元数据保存其指纹，严格验收时与固定清单及已安装制品比对。
+# 同坐标制品被覆盖后，旧证据必须失效而不是静默沿用。
+SDK_COORDINATE = ("com.metanet4j", "metanet4j-bsv-sdk", "0.2.0")
+SDK_MANIFEST = ROOT / "bsv-replace-artifact.json"
+SDK_CACHE = Path.home() / ".m2/metanet4j"
+
+
+def sdk_artifact() -> dict:
+    """返回已安装 SDK 制品的坐标、路径与 SHA-256；缺失时 hashes 为 None。"""
+    group, artifact, version = SDK_COORDINATE
+    base = SDK_CACHE / group.replace(".", "/") / artifact / version
+    jar, pom = base / f"{artifact}-{version}.jar", base / f"{artifact}-{version}.pom"
+    result = {"coordinate": ":".join(SDK_COORDINATE), "jarPath": str(jar), "pomPath": str(pom),
+              "jarSha256": None, "pomSha256": None, "installed": jar.is_file() and pom.is_file()}
+    for key, path in (("jarSha256", jar), ("pomSha256", pom)):
+        if path.is_file():
+            result[key] = hashlib.sha256(path.read_bytes()).hexdigest()
+    return result
+
+
+def sdk_manifest() -> dict:
+    """读取 R1 绑定的固定制品清单；缺失时返回空。"""
+    if not SDK_MANIFEST.is_file():
+        return {}
+    data = json.loads(SDK_MANIFEST.read_text())
+    artifact = data.get("artifact", {})
+    cache = data.get("installedToTargetCache", {})
+    return {"coordinate": ":".join(SDK_COORDINATE),
+            "jarSha256": (artifact.get("sourceJar") or {}).get("sha256"),
+            "pomSha256": (artifact.get("sourcePom") or {}).get("sha256"),
+            "installedJarSha256": (cache.get("jar") or {}).get("sha256"),
+            "installedPomSha256": (cache.get("pom") or {}).get("sha256"),
+            "sourceFingerprint": (data.get("source") or {}).get("srcMainAndPomSha256"),
+            "gitHead": (data.get("source") or {}).get("gitHead")}
 
 
 def inventory():
@@ -104,7 +138,8 @@ def save_artifacts(repo, module, run_root, command, exit_code, log_path):
                                     "rev-parse", "HEAD"], text=True).strip()
     metadata = {"head": head, "command": command, "exitCode": exit_code,
                 "artifactId": module["artifactId"], "repository": repo["repository"],
-                "sourceFingerprint": fingerprint(repo["repository"], module)}
+                "sourceFingerprint": fingerprint(repo["repository"], module),
+                "sdkArtifact": sdk_artifact()}
     (output / "metadata.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n")
     return output
 
@@ -154,6 +189,21 @@ def inspect(module, output, strict):
         if "-DskipTests" in command_text or "maven.test.skip" in command_text:
             problems.append("命令跳过测试")
         if strict:
+            artifact = sdk_artifact()
+            expected = sdk_manifest()
+            if not artifact["installed"]:
+                problems.append("目标缓存缺少 SDK 制品：" + artifact["coordinate"])
+            elif expected:
+                if artifact["jarSha256"] != expected.get("installedJarSha256") \
+                        or artifact["pomSha256"] != expected.get("installedPomSha256"):
+                    problems.append(
+                        "SDK 制品指纹与 R1 绑定不一致（同坐标制品可能已被覆盖）："
+                        f"实测 jar={str(artifact['jarSha256'])[:12]}… pom={str(artifact['pomSha256'])[:12]}…；"
+                        f"绑定 jar={str(expected.get('installedJarSha256'))[:12]}… "
+                        f"pom={str(expected.get('installedPomSha256'))[:12]}…")
+            recorded = (metadata.get("sdkArtifact") or {}).get("jarSha256")
+            if recorded != artifact["jarSha256"]:
+                problems.append("证据记录的 SDK 制品指纹与当前已安装制品不一致")
             repo_name = metadata.get("repository", "")
             if repo_name not in REPOSITORIES or metadata.get("sourceFingerprint") != fingerprint(repo_name, module):
                 problems.append("证据与当前源码不一致")

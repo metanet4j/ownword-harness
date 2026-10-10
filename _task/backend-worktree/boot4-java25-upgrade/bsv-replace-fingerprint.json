@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "featureId": "bsv-r1-fingerprint",
+  "generatedAt": "2026-10-10T19:37:55+08:00",
+  "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+  "planSection": "4 R1；6 R1 打包并接入制品",
+  "change": {
+    "file": "verify-unit.py",
+    "sha256": "fa9a131daedbdf3250cdd33c1871882d7cf26743d75951b15771141f585a3630",
+    "added": [
+      "运行元数据 metadata.json 新增 sdkArtifact：坐标、JAR／POM 路径与 SHA-256、是否已安装",
+      "严格模式（--mode accept）核对：目标缓存制品存在、JAR 与 POM 指纹与 R1 绑定清单一致、证据记录指纹与当前制品一致",
+      "SDK 绑定清单来源 bsv-replace-artifact.json（R1 打包产物记录）"
+    ],
+    "oldEvidenceRejected": "旧证据 metadata.json 无 sdkArtifact 字段，严格模式判为「证据记录的 SDK 制品指纹与当前已安装制品不一致」而非静默沿用"
+  },
+  "binding": {
+    "artifact": {
+      "coordinate": "com.metanet4j:metanet4j-bsv-sdk:0.2.0",
+      "jarPath": "/home/haodev/.m2/metanet4j/com/metanet4j/metanet4j-bsv-sdk/0.2.0/metanet4j-bsv-sdk-0.2.0.jar",
+      "pomPath": "/home/haodev/.m2/metanet4j/com/metanet4j/metanet4j-bsv-sdk/0.2.0/metanet4j-bsv-sdk-0.2.0.pom",
+      "jarSha256": "d3aaf86dce9ef7fb9b5439a5a5559e7e32c87d73ed3f78aeea1fd6eb7afb39b7",
+      "pomSha256": "74d32beb37e8bbc8b92d2293b64916cb3d3a17ceb2f84b57ce70621b26e4b4ab",
+      "installed": true
+    },
+    "manifest": {
+      "coordinate": "com.metanet4j:metanet4j-bsv-sdk:0.2.0",
+      "jarSha256": "d3aaf86dce9ef7fb9b5439a5a5559e7e32c87d73ed3f78aeea1fd6eb7afb39b7",
+      "pomSha256": "74d32beb37e8bbc8b92d2293b64916cb3d3a17ceb2f84b57ce70621b26e4b4ab",
+      "installedJarSha256": "d3aaf86dce9ef7fb9b5439a5a5559e7e32c87d73ed3f78aeea1fd6eb7afb39b7",
+      "installedPomSha256": "74d32beb37e8bbc8b92d2293b64916cb3d3a17ceb2f84b57ce70621b26e4b4ab",
+      "sourceFingerprint": "d622c3a0dfe8dcfd64596bbf79130d79c89753aa8c21e11829aed20a051d31c9",
+      "gitHead": "3dd8bebe4e465625f2930179bb3c5fcf71b637a2"
+    },
+    "result": {
+      "correctArtifactMatchesBinding": true,
+      "sourceJarEqualsInstalledJar": true,
+      "coordinates": "com.metanet4j:metanet4j-bsv-sdk:0.2.0"
+    }
+  },
+  "negativeCheck": {
+    "scenario": "同坐标制品被覆盖（向 JAR 追加一个字节）",
+    "detected": true,
+    "installedJarSha256": "46748bcbad867fbcbc25de26a6677fad6dd9932c4f62c276f87c68dd9e968e37",
+    "boundJarSha256": "d3aaf86dce9ef7fb9b5439a5a5559e7e32c87d73ed3f78aeea1fd6eb7afb39b7",
+    "expectedProblem": "SDK 制品指纹与 R1 绑定不一致（同坐标制品可能已被覆盖）",
+    "strictRunLog": "evidence/bsv-replace/r1-fingerprint-20261010/tampered-strict-run.log",
+    "exitCode": 1,
+    "observedProblems": [
+      "SDK 制品指纹与 R1 绑定不一致（同坐标制品可能已被覆盖）：实测 jar=d6e9edb04dd6… pom=74d32beb37e8…",
+      "证据记录的 SDK 制品指纹与当前已安装制品不一致"
+    ],
+    "restored": true,
+    "restoredJarSha256": "d3aaf86dce9ef7fb9b5439a5a5559e7e32c87d73ed3f78aeea1fd6eb7afb39b7"
+  },
+  "positiveCheck": {
+    "artifactMatchesBinding": true,
+    "sourceJarEqualsInstalledJar": true,
+    "noteSeedCase": "正确的制品的正向判定由产物装载逻辑覆盖：verify-unit.py 的 sdk_artifact() 读出坐标 0.2.0、JAR sha256 d3aaf86d…、POM sha256 74d32beb…，与 bsv-replace-artifact.json 的绑定逐字段相等；首个端到端正向实例在 R2 的 base 严格验收产生并记录"
+  },
+  "existingGatesPreserved": {
+    "sourceFingerprint": "每模块 production+testSources+POM 的 SHA-256 继续写入 metadata 并在严格模式复核",
+    "headCheck": "严格模式继续核对 git HEAD",
+    "coverageExceptions": "unit-coverage-exceptions.json 的精确例外双向核对不变",
+    "inventory": "unit-test-inventory.json 的源码清单与分类门禁不变"
+  },
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "verify-unit.py",
+        "--mode",
+        "accept",
+        "--scope",
+        "metanet4j-base",
+        "--evidence",
+        "evidence/20260930T125355Z"
+      ],
+      "exitCode": 1,
+      "scenario": "篡改同坐标制品后",
+      "log": "evidence/bsv-replace/r1-fingerprint-20261010/tampered-strict-run.log"
+    },
+    {
+      "command": [
+        "python3",
+        "verify-unit.py",
+        "--mode",
+        "accept",
+        "--scope",
+        "metanet4j-base",
+        "--evidence",
+        "evidence/20260930T125355Z"
+      ],
+      "exitCode": 1,
+      "scenario": "恢复制品后（旧证据因缺少 SDK 指纹被拒，属预期的失效行为）",
+      "log": "evidence/bsv-replace/r1-fingerprint-20261010/restored-strict-run.log"
+    }
+  ]
+}

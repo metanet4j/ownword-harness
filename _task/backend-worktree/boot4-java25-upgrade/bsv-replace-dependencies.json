@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "featureId": "bsv-r1-parent",
+  "generatedAt": "2026-10-10T19:36:53+08:00",
+  "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+  "planSection": "4 R1；2.2 直接引用范围",
+  "change": {
+    "file": "metanet4j-parent/pom.xml",
+    "sha256": "d236b7d9320d08f2555b214caddb95bb2010f447c8986840323dcb16a7fbc191",
+    "added": [
+      {
+        "groupId": "com.metanet4j",
+        "artifactId": "metanet4j-bsv-sdk",
+        "version": "${metanet4j.version}",
+        "resolvedVersion": "0.2.0",
+        "scope": "compile（继承默认）"
+      }
+    ],
+    "keptOldManagement": [
+      "io.bitcoinsv.bitcoinjsv:bitcoinj-base:${bitcoinjsv.version}=1.0.4",
+      "io.bitcoinsv.jcl:jcl-store-levelDB:${bitcoinsv-jcl.version}=1.0.5",
+      "io.bitcoinsv.jcl:jcl-store:1.0.5",
+      "io.bitcoinsv.jcl:jcl-store-keyValue:1.0.5",
+      "io.bitcoinsv.jcl:jcl-tools:1.0.5",
+      "io.bitcoinsv.jcl:jcl-net:1.0.5"
+    ],
+    "reason": "R1 只接入新坐标；旧管理项按计划保留到 R5 统一删除，避免打断尚未迁移的模块"
+  },
+  "commands": [
+    {
+      "command": [
+        "mvn",
+        "-s",
+        "~/.m2/metanet4j-settings.xml",
+        "-B",
+        "-N",
+        "-f",
+        "metanet4j-parent/pom.xml",
+        "install"
+      ],
+      "exitCode": 0,
+      "log": "evidence/bsv-replace/r1-parent-20261010/install.log"
+    },
+    {
+      "command": [
+        "mvn",
+        "-N",
+        "-f",
+        "metanet4j-parent/pom.xml",
+        "help:effective-pom"
+      ],
+      "exitCode": 0,
+      "log": "evidence/bsv-replace/r1-parent-20261010/effective-pom.log",
+      "artifact": "evidence/bsv-replace/r1-parent-20261010/effective-pom.xml"
+    },
+    {
+      "command": [
+        "mvn",
+        "-f",
+        "<module pom>",
+        "dependency:tree"
+      ],
+      "exitCode": 0,
+      "log": "evidence/bsv-replace/r1-parent-20261010/dependency-trees/"
+    }
+  ],
+  "resolution": {
+    "newSdkManaged": true,
+    "managedVersionResolvesTo": "0.2.0",
+    "newSdkOnClasspathOf": [
+      "metanet4j-base"
+    ],
+    "oldStillOnClasspathOf": [
+      "metanet4j-component/metanet4j-tx-convertor",
+      "metanet4j-component/metanet4j-tx-filter",
+      "metanet4j-component/metanet4j-tx-validator",
+      "metanet4j-sdk"
+    ]
+  },
+  "jclActualPaths": {
+    "note": "R5 删除旧依赖时按此路径逐条清理；字面量扫描不能代替依赖树检查",
+    "paths": {
+      "metanet4j-sdk": [
+        "metanet4j-sdk:compile → io.bitcoinsv.jcl:jcl-store-levelDB:1.0.5（该模块 pom 直接声明）",
+        "jcl-store-levelDB:1.0.5 → jcl-tools:1.0.5、jcl-store:1.0.5、jcl-store-keyValue:1.0.5（传递）"
+      ],
+      "metanet4j-component/metanet4j-tx-convertor": [
+        "metanet4j-sdk:compile → jcl-store-levelDB:1.0.5 → jcl-tools/jcl-store/jcl-store-keyValue:1.0.5",
+        "metanet4j-sdk:compile → bitcoinj-legacy:1.0.4 → bitcoinj-extensions:1.0.4"
+      ],
+      "metanet4j-component/metanet4j-tx-validator": [
+        "metanet4j-sdk:compile → jcl-store-levelDB:1.0.5 → jcl-tools/jcl-store/jcl-store-keyValue:1.0.5"
+      ],
+      "metanet4j-component/metanet4j-tx-filter": [
+        "无 JCL；仅 io.bitcoinsv.bitcoinjsv:bitcoinj-base:1.0.4（该模块 pom 直接声明）"
+      ],
+      "metanet4j-base": [
+        "无 JCL；已解析到 com.metanet4j:metanet4j-bsv-sdk:0.2.0"
+      ]
+    },
+    "jclNotUsedInJavaSource": true
+  },
+  "trees": {
+    "metanet4j-base_pom.xml.tree.txt": {
+      "file": "evidence/bsv-replace/r1-parent-20261010/dependency-trees/metanet4j-base_pom.xml.tree.txt",
+      "sha256": "10d4ffcef252cc74d454641f0937968f452fc9d353fbc97cc8d990101eda3951",
+      "lines": 39,
+      "oldDependencyLines": [],
+      "jclLines": [],
+      "newSdkLines": [
+        "+- com.metanet4j:metanet4j-bsv-sdk:jar:0.2.0:compile"
+      ]
+    },
+    "metanet4j-component_metanet4j-tx-convertor_pom.xml.tree.txt": {
+      "file": "evidence/bsv-replace/r1-parent-20261010/dependency-trees/metanet4j-component_metanet4j-tx-convertor_pom.xml.tree.txt",
+      "sha256": "9788aab035995502212ae314b597bcc53b7dd313fba123b4f323fb8df2c82999",
+      "lines": 96,
+      "oldDependencyLines": [
+        "|  |  +- io.bitcoinsv.jcl:jcl-store-levelDB:jar:1.0.5:compile",
+        "|  |  |  +- io.bitcoinsv.jcl:jcl-tools:jar:1.0.5:compile",
+        "|  |  |  +- io.bitcoinsv.jcl:jcl-store:jar:1.0.5:compile",
+        "|  |  |  +- io.bitcoinsv.jcl:jcl-store-keyValue:jar:1.0.5:compile",
+        "|  |  \\- io.bitcoinsv.bitcoinjsv:bitcoinj-legacy:jar:1.0.4:compile",
+        "|  |     +- io.bitcoinsv.bitcoinjsv:bitcoinj-extensions:jar:1.0.4:compile",
+        "+- io.bitcoinsv.bitcoinjsv:bitcoinj-base:jar:1.0.4:compile"
+      ],
+      "jclLines": [
+        "|  |  +- io.bitcoinsv.jcl:jcl-store-levelDB:jar:1.0.5:compile",
+        "|  |  |  +- io.bitcoinsv.jcl:jcl-tools:jar:1.0.5:compile",
+        "|  |  |  +- io.bitcoinsv.jcl:jcl-store:jar:1.0.5:compile",
+        "|  |  |  +- io.bitcoinsv.jcl:jcl-store-keyValue:jar:1.0.5:compile"
+      ],
+      "newSdkLines": []
+    },
+    "metanet4j-component_metanet4j-tx-filter_pom.xml.tree.txt": {
+      "file": "evidence/bsv-replace/r1-parent-20261010/dependency-trees/metanet4j-component_metanet4j-tx-filter_pom.xml.tree.txt",
+      "sha256": "a4dab8e18fb44a9fb3bef3903aaa8369747d777ac498c4b8f49f1c32e622e32f",
+      "lines": 89,
+      "oldDependencyLines": [
+        "+- io.bitcoinsv.bitcoinjsv:bitcoinj-base:jar:1.0.4:compile"
+      ],
+      "jclLines": [],
+      "newSdkLines": []
+    },
+    "metanet4j-component_metanet4j-tx-validator_pom.xml.tree.txt": {
+      "file": "evidence/bsv-replace/r1-parent-20261010/dependency-trees/metanet4j-component_metanet4j-tx-validator_pom.xml.tree.txt",
+      "sha256": "861f6ba218943576c917608b3d4b7e43d18b93676230bd33380bcb7804600f44",
+      "lines": 80,
+      "oldDependencyLines": [
+        "|  |  +- io.bitcoinsv.jcl:jcl-store-levelDB:jar:1.0.5:compile",
+        "|  |  |  +- io.bitcoinsv.jcl:jcl-tools:jar:1.0.5:compile",
+        "|  |  |  +- io.bitcoinsv.jcl:jcl-store:jar:1.0.5:compile",
+        "|  |  |  +- io.bitcoinsv.jcl:jcl-store-keyValue:jar:1.0.5:compile",
+        "|  |  \\- io.bitcoinsv.bitcoinjsv:bitcoinj-legacy:jar:1.0.4:compile",
+        "|  |     +- io.bitcoinsv.bitcoinjsv:bitcoinj-extensions:jar:1.0.4:compile",
+        "+- io.bitcoinsv.bitcoinjsv:bitcoinj-base:jar:1.0.4:compile"
+      ],
+      "jclLines": [
+        "|  |  +- io.bitcoinsv.jcl:jcl-store-levelDB:jar:1.0.5:compile",
+        "|  |  |  +- io.bitcoinsv.jcl:jcl-tools:jar:1.0.5:compile",
+        "|  |  |  +- io.bitcoinsv.jcl:jcl-store:jar:1.0.5:compile",
+        "|  |  |  +- io.bitcoinsv.jcl:jcl-store-keyValue:jar:1.0.5:compile"
+      ],
+      "newSdkLines": []
+    },
+    "metanet4j-sdk_pom.xml.tree.txt": {
+      "file": "evidence/bsv-replace/r1-parent-20261010/dependency-trees/metanet4j-sdk_pom.xml.tree.txt",
+      "sha256": "c171c591f59e8b9724e679cd1fed0a7763d53c0728a5d99b3cc43bc5b2265d08",
+      "lines": 57,
+      "oldDependencyLines": [
+        "+- io.bitcoinsv.jcl:jcl-store-levelDB:jar:1.0.5:compile",
+        "|  +- io.bitcoinsv.jcl:jcl-tools:jar:1.0.5:compile",
+        "|  +- io.bitcoinsv.jcl:jcl-store:jar:1.0.5:compile",
+        "|  +- io.bitcoinsv.jcl:jcl-store-keyValue:jar:1.0.5:compile",
+        "+- io.bitcoinsv.bitcoinjsv:bitcoinj-legacy:jar:1.0.4:compile",
+        "|  +- io.bitcoinsv.bitcoinjsv:bitcoinj-extensions:jar:1.0.4:compile",
+        "+- io.bitcoinsv.bitcoinjsv:bitcoinj-base:jar:1.0.4:compile"
+      ],
+      "jclLines": [
+        "+- io.bitcoinsv.jcl:jcl-store-levelDB:jar:1.0.5:compile",
+        "|  +- io.bitcoinsv.jcl:jcl-tools:jar:1.0.5:compile",
+        "|  +- io.bitcoinsv.jcl:jcl-store:jar:1.0.5:compile",
+        "|  +- io.bitcoinsv.jcl:jcl-store-keyValue:jar:1.0.5:compile"
+      ],
+      "newSdkLines": []
+    }
+  }
+}
