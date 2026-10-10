@@ -571,7 +571,7 @@
       "name": "完成方法级 API 与调用映射",
       "description": "对应计划 R0；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r0-baseline",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "bsv-r0-harness"
       ],
@@ -584,9 +584,22 @@
       "deliverables": [
         "bsv-replace-api-map.json"
       ],
-      "evidence": [],
-      "commits": [],
-      "statusNote": "待前置执行项及阶段门禁通过。"
+      "evidence": [
+        "bsv-replace-api-map.json：62 个旧类型决议条目（replace 30／adapt 13／delete 15／gap 4），逐条含旧 FQN、实际调用方法、callerFiles、目标类型与新 SDK 目标方法、行为编号（V01—V14）与阶段。",
+        "evidence/bsv-replace/r0-api-work/summary.json：产物指纹 sha256=032c91c0…、命令与退出码、基线残留旧 import（生产 308／测试 358，R2—R5 收口）、仓库状态与已知限制。",
+        "evidence/bsv-replace/r0-api-work/api-map-verify.py 的 api-map-verify.json：11 项独立复核 PASS（文件覆盖、旧 import 逐条认领、目标类型与成员真实性、决议完整性、行为挂接、配置与反射一致）。",
+        "bsv-api-audit.py check --json → api-audit.json：status=PASS，映射与四仓库源码一致，按仓库给出生产／测试旧 import 残留基线。",
+        "evidence/bsv-replace/r0-api-work/ws-a-old-symbols.json（67 文件的旧符号与 1313 个使用点）、ws-b-test-evidence.json（69 测试文件与 V01—V14 定位）、ws-c-pom-config.json（25 POM、配置、反射、手工制品）、ws-d-new-sdk-index.json（新 SDK 139 个公开类型、1333 方法与 179 构造器）、api-resolution.json（调用点 × javap 签名）。"
+      ],
+      "commits": [
+        {
+          "repository": "ownword",
+          "commit": "PENDING"
+        }
+      ],
+      "statusNote": "62 个旧类型全部有决议与阶段；67/67 生产文件、25 POM、配置与反射均收口；7 项能力缺口全部有结论（NetworkParameters／Net、Sha256Hash、Address 族、Coin、KeyBag／RedeemData／TxHelper、脚本工具、txid 显示序），并登记 6 个业务新类型落点。",
+      "startedAt": "2026-10-10T18:22:00+08:00",
+      "completedAt": "2026-10-10T18:49:21+08:00"
     },
     {
       "id": "bsv-r0-tests",
@@ -1161,7 +1174,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-10T11:37:58+08:00",
+  "updatedAt": "2026-10-10T18:49:21+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1174,7 +1187,7 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": "bsv-r0-api",
+  "nextItem": "bsv-r0-tests",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
@@ -1198,7 +1211,7 @@
       ],
       "progress": {
         "total": 6,
-        "done": 2
+        "done": 3
       }
     },
     {
