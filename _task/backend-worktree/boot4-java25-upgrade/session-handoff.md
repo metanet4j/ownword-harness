@@ -19,8 +19,8 @@
 | `metanet4j-sdk` 生产编译错误 | 0 |
 | `metanet4j-sdk` 生产旧引用文件 | 3（起点 49） |
 | `metanet4j-sdk` 测试 `test-compile` 退出码 | 1 |
-| 有编译错误的测试文件 | 6 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、BsocialDataLockBuilderContractTest 26、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、TransactionBuilderContractTest 4 |
-| 测试旧引用文件 | 16 / 54（起点 41，降 61%） |
+| 有编译错误的测试文件 | 5 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、BsocialDataLockBuilderContractTest 26、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、TransactionBuilderContractTest 4 |
+| 测试旧引用文件 | 15 / 54（起点 41，降 63%） |
 
 ## 交接入口
 
