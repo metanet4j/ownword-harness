@@ -7,7 +7,7 @@
 - **Active Item**：无。`bsv-replace-plan` 已完成，R0—R6 均未开工。
 - **授权范围**：本轮仅文档。代码实施仍按本任务 AGENTS.md 的明确批准要求执行。
 - 四仓库当前均为 `feature/bsv-sdk-replace`；提交仍是 parent `7302e1b`、base `53ed9ad`、sdk `670ee3d`、component `3ce773b`。base 的 `pom.xml` 已有未提交的新 SDK 接入修改，保留作为实施输入。
-- 指定 SDK 在原任务工作区，固定提交 `3dd8beb`。其生产源码及 POM 与原完整验收绑定提交 `ce6b50d` 无差异；原 SDK 输入保持只读。
+- 指定 SDK 在原任务工作区，固定 Git 提交 `3dd8beb`。原验收的 `javaRevision` 为全部 Java 工作树的 SHA-256 摘要，不是 Git 提交；当前重新计算与原验收一致，完整证据复核 PASS。原 SDK 输入保持只读。
 
 ## 已有验收依据
 
@@ -21,8 +21,10 @@ SFTP 成功连接的 2 行继续按胡先生 2026-09-30 的决定保留为精确
 - 任务 harness 结构检查通过，结果只代表入口和交接结构有效。
 - 本轮 `./init.sh` 退出 0，JDK 25／Maven 3.9.16 及全局工具链隔离检查通过。
 - 原自检仍预期 `feature/java25`，当前分支告警已在计划 R0 中安排处理；原 `--full` 不能替代严格构建验收。
-- 当前执行环境未能访问共享中间件，宿主状态尚需在实施时复核；这不阻塞计划交付及离线工作。
-- 本轮未执行 Maven 构建、单元或集成测试，未修改子仓库源码、POM、测试、新 SDK 输入或任务验证脚本。
+- 宿主只读核查已确认目标 Maven 缓存可写，五个共享容器均 exited、五端口均拒绝连接；当前沙箱缓存只读且限制本机网络。构建须使用宿主执行环境，集成前启动已有共享设施并隔离测试资源。
+- 新 SDK 主 JAR 在源缓存存在，但尚未安装到目标缓存；R1 重新打包校验后接入。
+- `python3 full-evidence-run.py verify .../full-run.json` 退出 0、PASS：核对 5329 个用例和 56744 条断言的现有完整证据；未重跑测试体。当前环境核查证据：`evidence/bsv-replace/plan-20261010-103802/environment-check.json`。
+- 本轮仅核查环境、复核旧证据并修正计划中的来源校验；未运行 Maven 构建或测试体，未启动容器，未修改子仓库源码、POM、测试、新 SDK 输入或任务验证脚本。
 
 ## Recommended Next Step
 

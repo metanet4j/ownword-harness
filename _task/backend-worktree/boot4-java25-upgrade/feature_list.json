@@ -454,9 +454,11 @@
         "源码与清单核对：SDK 的 BitailsAndGorillaHttpIntegrationTest 为 integration 标签，含 5 个用例；计划要求独立运行，不以原 component 124 例报告替代。",
         "./init.sh 退出 0：JDK 25/Maven 3.9.16 隔离通过；当前分支与旧预期不符及共享中间件不可达均为告警，计划已明确处理阶段；不是构建或测试验收。",
         "harness-creator 的 validate-harness.mjs 退出 0，仅用于任务入口、状态、范围和交接的结构检查，不代表 SDK 或迁移功能通过。",
-        "git diff --check 通过；四子仓库与指定 SDK 未被本轮修改，base/pom.xml 的既有修改保留。"
+        "git diff --check 通过；四子仓库与指定 SDK 未被本轮修改，base/pom.xml 的既有修改保留。",
+        "environment-check.json：宿主目标 Maven 缓存可写，五个共享中间件容器均 exited，五端口拒绝连接；沙箱缓存只读且限制本机网络。新 SDK 在源缓存有 JAR、目标缓存未接入。完整路径见 progress.md。",
+        "SDK 完整证据复核：python3 full-evidence-run.py verify .cache/evidence/full-run-52-20260901/full-run.json 退出 0、PASS；当前 javaRevision 与原来源摘要相同，5329 用例及 56744 条断言既有证据核对通过，未重跑测试体。"
       ],
-      "statusNote": "2026-10-10：计划文档及任务入口已交付，静态复核通过；本轮仅文档工作，R0—R6 均未开工，未执行 Maven 构建或业务测试。"
+      "statusNote": "2026-10-10：计划及开工前环境核查已交付。验收 javaRevision 已明确为来源摘要，校验命令已修正；本轮未实施迁移，R0—R6 均未开工。"
     },
     {
       "id": "bsv-replace-r0-baseline",
