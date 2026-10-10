@@ -2,7 +2,7 @@
 
 ## Current State
 
-- **Last Updated**：2026-10-11T05:05:00+08:00。
+- **Last Updated**：2026-10-11T05:40:00+08:00。
 - **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射、逐用例迁移清单和 V01—V14 独立样本，R0、R1、R2 三个阶段已完成，进入 R3 业务 SDK 适配（5 个执行项）。
 - **Active Item**：`bsv-r3-keys`（in-progress）；**R0（6/6）、R1（3/3）、R2（2/2）阶段完成**，R3 进行中。实时状态唯一来源为 [feature_list.json](feature_list.json)。实时状态唯一来源为 [feature_list.json](feature_list.json)。
 - **授权范围**：胡先生已明确指令“开始按照计划执行，先拆feature，记录执行进度和状态”。授权覆盖既定 R0—R6，原 SDK 输入、共享设施配置及远端边界继续适用。
@@ -108,7 +108,7 @@
 
 按「旧引用文件数」推进（当前生产 **28**、测试 41），建议顺序：
 
-1. **交易与签名组（当前 18 处编译错误）**：`remote/RemoteTransactionBuilder`（8）、`transcation/TransactionBuilder`（4）、`remote/RemoteTransactionSigner`／`remote/RemoteOrdTransactionBuilder`／`BobHelper`（各 2）。目标形态（字段级对应表、`KeyBag → SigningKeyProvider`、`Coin → BsvAmount`、`TransactionSigner → 解锁模板`、建议顺序与公开 API 风险）见 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md` §7。其余同类文件：`script/ScriptExtend`、`script/SigHashExtend`、`signers/TransactionExtend`、`input/*`、`output/*`、`sigma/Sig`、`sigma/SignResponse`；**提醒：整体迁移单个文件，不要只改调用点**（实测只改调用点会把错误从 18 推到 66）；
+1. **签名原语层先行（当前 18 处编译错误的真正根因）**：受控实验证明，只改 `RemoteTransactionBuilder` 的局部类型**一处错误都不减**——错误全部由 `TransactionBuilder.targetTransaction`（旧 `Transaction`）与 `SigHashExtend.hashForForkIdSignature`（返回旧 `Sha256Hash`）决定。正确顺序是自下而上：先迁 `script/SigHashExtend`／`ScriptExtend`、`utils/TxHelperExtend`／`RedeemDataExtend`、`input/*`、`output/*`、`signers/*`，再迁 `transcation/TransactionBuilder` 基类，最后是两个 Remote 子类与 `BobHelper`。详见 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md` §8。
 2. 交易与签名组（`transcation/TransactionBuilder`、`signers/*`、`remote/*`、`ordinals/*`、`utils/TxHelperExtend`、`utils/RedeemDataExtend`）→ 按 migration-rules §3 把 KeyBag／RedeemData 改为 `SigningKeyProvider` + 解锁模板；
 4. UTXO（`utxo/*`）与 `context/PreSignHashContext`；
 5. 每完成一个文件即重跑 `grep -rl 'io\.bitcoinsv' metanet4j-sdk/src/main/java --include=*.java | wc -l`（当前 35），以文件数单调下降为准；生产清零后再动 41 个测试文件。
