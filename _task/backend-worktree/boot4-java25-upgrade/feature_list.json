@@ -937,7 +937,8 @@
         "R3 测试迁移本轮收口（metanet4j-sdk 提交 90db91c）：PreSignHashContextContractTest 的公钥构造改为业务侧 PrivateKey.of(BigInteger.TWO).getPublicKey()。**本轮累计：有编译错误的测试文件数 13 → 10；旧引用测试文件数 38 → 36**。剩余 10 个有错文件：BapBaseCoreContractTest、KeyAddressContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest、BapProviderKeyBagTest、EcKeyLiteExtendContractTest、EciesContractTest、BapBaseTest、WordsvBapBaseTest。",
         "R3 测试迁移（metanet4j-sdk 提交 c37bf7a）：WordsvBapBaseTest 的 Ecies 调用适配新签名——encrypt 第二实参改 getEncryptKey().getPublicKey().getPublicKey()、decrypt 第二实参改 getEncryptKey().getKey()。有编译错误的测试文件数 10 → 9。剩余 9 个：BapBaseCoreContractTest、KeyAddressContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest、BapProviderKeyBagTest、EcKeyLiteExtendContractTest、EciesContractTest、BapBaseTest。",
         "阶段报告产出（本轮次预算用尽）：`BSV依赖替换阶段报告-20261011-221500.md`——汇总 R0—R2 完成、R3 生产侧完成（生产编译 0 错误、旧引用 49 → 3）、R3 测试侧进行中（有错文件 14 → 9、旧引用测试文件 36/54），R4—R6 未开始；含关键度量、测量纪律、证据索引、剩余工作量估算（R3 测试 4—8 轮 + 验收 2—3 轮、R4 8—15 轮、R5 3—5 轮、R6 4—6 轮）与后续排期建议。",
-        "R3 测试迁移（metanet4j-sdk 提交 7c4eaaf／a3f1b1f／aa265fc／160dcbd）：迁移 EciesContractTest、MasterPrivateKeyContractTest、OrdScriptBuilderContractTest、OrdTransactionBuilderContractTest 四个文件；**并通过测试迁移发现并修正一个真实缺陷**——旧流程由 TransactionSigner 携带 hashFlags/anyoneCanPay，新流程改解锁模板后这两个参数未传下去（硬编码 all/false），导致 SIGHASH_NONE／SINGLE／ANYONECANPAY 被静默丢弃，与 V09 冻结向量不符；已新增 completeAndSignTx(provider, hashFlags, anyoneCanPay) 与 signOutputsOf 映射并贯通。有编译错误的测试文件数 11 → 9；旧引用测试文件数 36 → 34。剩余 9 个文件的迁移配方见 migration-rules §21。"
+        "R3 测试迁移（metanet4j-sdk 提交 7c4eaaf／a3f1b1f／aa265fc／160dcbd）：迁移 EciesContractTest、MasterPrivateKeyContractTest、OrdScriptBuilderContractTest、OrdTransactionBuilderContractTest 四个文件；**并通过测试迁移发现并修正一个真实缺陷**——旧流程由 TransactionSigner 携带 hashFlags/anyoneCanPay，新流程改解锁模板后这两个参数未传下去（硬编码 all/false），导致 SIGHASH_NONE／SINGLE／ANYONECANPAY 被静默丢弃，与 V09 冻结向量不符；已新增 completeAndSignTx(provider, hashFlags, anyoneCanPay) 与 signOutputsOf 映射并贯通。有编译错误的测试文件数 11 → 9；旧引用测试文件数 36 → 34。剩余 9 个文件的迁移配方见 migration-rules §21。",
+        "R3 测试迁移（metanet4j-sdk 提交 d6ea38d、0bfb936）：补齐 EcKeyLiteExtend 在迁移中丢失的三处公开能力（verify(BsvHashBytes,byte[])／verify(BsvHashBytes,String) 用 fromMsgHashAndCompactSignature 恢复比对、fromPrivateUncompressed 非压缩实例入口、requireConsistentKeys 密钥一致性校验并保留「recoverable key」表述），并登记新 SDK 未公开非压缩公钥编码的局限；重写 EcKeyLiteExtendContractTest；迁移 BapBaseTest 与 BapProviderKeyBagTest（getPubKeyHash 经业务 PublicKey、getPrivKey→getKey、删除已取消的 findRedeemDataFromScriptHash 断言）。有编译错误的测试文件数 9 → 7。剩余 7 个：BapBaseCoreContractTest 62、KeyAddressContractTest 38、OrdTransactionTemplateContractTest 36、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、BapBaseLifecycleTest 14、RemoteOrdTransactionTemplateContractTest 8。"
       ],
       "commits": [
         {
@@ -1071,9 +1072,17 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "160dcbd"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "d6ea38d"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "0bfb936"
         }
       ],
-      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试有错文件 9、旧引用测试文件 34/54；本轮修正 SIGHASH 范围未贯通缺陷（提交 160dcbd）。",
+      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试有错文件 7、旧引用测试文件 34/54。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
