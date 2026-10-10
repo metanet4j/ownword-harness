@@ -2,7 +2,7 @@
 
 ## Current State
 
-- **Last Updated**：2026-10-11T09:15:00+08:00。
+- **Last Updated**：2026-10-11T09:50:00+08:00。
 - **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射、逐用例迁移清单和 V01—V14 独立样本，R0、R1、R2 三个阶段已完成，进入 R3 业务 SDK 适配（5 个执行项）。
 - **Active Item**：`bsv-r3-keys`（in-progress）；**R0（6/6）、R1（3/3）、R2（2/2）阶段完成**，R3 进行中。实时状态唯一来源为 [feature_list.json](feature_list.json)。实时状态唯一来源为 [feature_list.json](feature_list.json)。
 - **授权范围**：胡先生已明确指令“开始按照计划执行，先拆feature，记录执行进度和状态”。授权覆盖既定 R0—R6，原 SDK 输入、共享设施配置及远端边界继续适用。
@@ -94,6 +94,7 @@
 - **SDK BIP39／BIP32 层已迁移**（sdk 提交 `5424b34`）：`MasterPrivateKey` 改用 `compat.HD`／`compat.Mnemonic`／`Bip39WordlistEn`，助记词→seed→主密钥链与 xprv／xpub 语义不变。
 - **SDK BAP 结构改写完成**（sdk 提交 `c9df398`）：新增 `BapPath` 值类型（解析 `M/44H/236H` 与 `m/44'/236'`、硬化位、前缀／追加／派生）与 `SigningKeyProvider` 接口（取代 `KeyBag` 反查）；`BapBase`／`MasterKeyBapBase` 的密钥派生全部改走 `compat.HD`，`BapProviderKeyBag`／`SpecifyProviderKeyBag` 不再实现旧 `KeyBag`；`RemoteBapBase` 地址字段统一 `AddressEnhance`。新增 `BapPathTest`（8 例）与独立核验 14 项 0 差异。
 - **签名流程重构进入原子模式**（用户决策）：R3 剩余 27 个生产文件全部落在同一耦合团（18 文件／2080 行／20 个测试依赖），单点改动只能在 26～48 间搬运错误。胡先生选择「允许长时间原子重构」，**R3 收口期间工作区接受编译未通过的中间态，不再中途还原**。
+- **签名载体改造 + 删除 TransactionExtend**（sdk 提交 `78a4813`，原子重构第三步）：`ExtendForSignTransaction` 改为普通业务载体（持有新 SDK `Transaction` + `signatureScope()`），`TransactionExtend` 按 R0 判定删除。**编译错误 56 → 6，生产旧引用文件数 23 → 21**。
 - **BobHelper 已迁移**（sdk 提交 `11112b9`，原子重构第二步）：改新交易与脚本模型，chunk 访问走 `ScriptHelper.getPushData`、操作码 `OP.OP_*`（`OP_FALSE` 按新 SDK 实际常量改 `OP_0`）、地址走 `BsvAddress`；**BobHelper 自身错误清零**。生产旧引用文件数 **24 → 23**。
 - **脚本工具层落地**（sdk 提交 `c8f9079`）：`ScriptExtend` 改工具类（重建脚本判定、签名位填充、花费尺寸估算，`SIG_SIZE=75`）；`TxHelperExtend` 去 `TxHelper` 继承、Ordinals 判定改新 `ScriptChunk`、新增**显式派生版** `getConnectedRedeemDataExtend`；`RedeemDataExtend` 重写为业务值类型；`TransactionBuilder.getUnLockScriptSize` 切为无赎回数据的费用估算。生产旧引用文件数 **27 → 24**。批内错误数曾降到 **6**（证明脚本层切口有效），补回赎回数据入口后升至 60（调用方待迁）。
 - **SigHashExtend 已迁移**（sdk 提交 `fe273b5`）：按 §8 自下而上第一层——`hashForForkIdSignature` 参数改 `(Transaction,int,byte[],BsvAmount,int,boolean)`、内部适配新 SDK 的 `TransactionSignature.formatBip143` + 双 SHA-256、返回 `BsvHashBytes`、不再继承旧 `SigHash`；等价性逐字段核对见 `evidence/bsv-replace/r3-keys-20261010/sighash-extend-equivalence.json`（**独立前像计算器 `referenceDigest` 保留未替换**）。生产旧引用文件数 **28 → 27**。
