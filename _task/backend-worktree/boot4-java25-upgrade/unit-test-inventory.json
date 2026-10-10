@@ -1876,86 +1876,32 @@
                 {
                   "name": "proposedTransactionKeepsRequestedSigningMode",
                   "returnType": "void",
-                  "line": 40,
+                  "line": 43,
                   "classification": "unit"
                 },
                 {
-                  "name": "twoArgumentRequestKeepsItsForkIdFlag",
+                  "name": "signerEncodesRequestedScopeIntoTheSignature",
                   "returnType": "void",
-                  "classification": "unit",
-                  "line": 60
-                },
-                {
-                  "name": "threeArgumentRequestPassesForkIdModeToTheStandardLocalSigner",
-                  "returnType": "void",
-                  "classification": "unit",
-                  "line": 67
-                },
-                {
-                  "name": "transactionConversionPreservesSerializedHeaderAndPayments",
-                  "returnType": "void",
-                  "line": 78,
+                  "line": 63,
                   "classification": "unit"
                 },
                 {
-                  "name": "transactionConversionRetainsTheOriginalNetwork",
+                  "name": "missingConnectedOutputIsReportedAndBatchSkipsIt",
                   "returnType": "void",
-                  "classification": "unit",
-                  "line": 93
-                },
-                {
-                  "name": "parserConstructorsReadTheSameTransactionWithOffsetsAndRetentionModes",
-                  "returnType": "void",
-                  "classification": "unit",
-                  "line": 103
-                },
-                {
-                  "name": "signerUsesRequestedForkIdHashFlagsAndAnyoneCanPay",
-                  "returnType": "void",
-                  "line": 123,
+                  "line": 75,
                   "classification": "unit"
                 },
                 {
-                  "name": "missingConnectedOutputHasExplicitSingleInputErrorAndBatchSkip",
+                  "name": "singleInputSigningCreatesAForkIdSignature",
                   "returnType": "void",
-                  "line": 142,
+                  "line": 90,
                   "classification": "unit"
                 },
                 {
-                  "name": "statelessSignerIsReadyBeforeAndAfterStateSerialization",
+                  "name": "unknownKeysAreSkippedByBatchAndReportedUnavailableBySingleInput",
                   "returnType": "void",
-                  "classification": "unit",
-                  "line": 155
-                },
-                {
-                  "name": "singleInputSigningCreatesAValidForkIdSignature",
-                  "returnType": "void",
-                  "classification": "unit",
-                  "line": 166
-                },
-                {
-                  "name": "batchSigningSupportsLegacyHashingAndAnyoneCanPay",
-                  "returnType": "void",
-                  "classification": "unit",
-                  "line": 177
-                },
-                {
-                  "name": "publicOnlyKeysAreSkippedByBatchAndReportedUnavailableBySingleInput",
-                  "returnType": "void",
-                  "classification": "unit",
-                  "line": 189
-                },
-                {
-                  "name": "keyLockFailuresPropagateWithoutChangingTheInputScript",
-                  "returnType": "void",
-                  "classification": "unit",
-                  "line": 201
-                },
-                {
-                  "name": "privateKeyAccessLostDuringSigningLeavesTheInputUnsigned",
-                  "returnType": "void",
-                  "classification": "unit",
-                  "line": 219
+                  "line": 104,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "内存交易验证头字段保留、ForkID签名标志及缺少连接输出处理，未连接外部服务"
