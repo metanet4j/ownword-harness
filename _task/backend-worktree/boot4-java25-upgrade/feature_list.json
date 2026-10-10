@@ -936,7 +936,8 @@
         "R3 测试迁移继续（metanet4j-sdk 提交 cf50712）：OrdHistoricalFixtureContractTest 的旧 Transaction(Net.MAINNET, bytes) 改新 SDK Transaction.fromBinary(...)；BapVariantContractTest 的 HDUtils.parsePath + List<ChildNumber> 改 BapPath.parse(...)、HDUtils.formatPath 改 path.toString()。**有编译错误的测试文件数 13 → 11；旧引用测试文件数 38 → 36**。剩余 11 个文件：BapBaseCoreContractTest、KeyAddressContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest、BapProviderKeyBagTest、EcKeyLiteExtendContractTest、EciesContractTest、BapBaseTest、WordsvBapBaseTest、PreSignHashContextContractTest。",
         "R3 测试迁移本轮收口（metanet4j-sdk 提交 90db91c）：PreSignHashContextContractTest 的公钥构造改为业务侧 PrivateKey.of(BigInteger.TWO).getPublicKey()。**本轮累计：有编译错误的测试文件数 13 → 10；旧引用测试文件数 38 → 36**。剩余 10 个有错文件：BapBaseCoreContractTest、KeyAddressContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest、BapProviderKeyBagTest、EcKeyLiteExtendContractTest、EciesContractTest、BapBaseTest、WordsvBapBaseTest。",
         "R3 测试迁移（metanet4j-sdk 提交 c37bf7a）：WordsvBapBaseTest 的 Ecies 调用适配新签名——encrypt 第二实参改 getEncryptKey().getPublicKey().getPublicKey()、decrypt 第二实参改 getEncryptKey().getKey()。有编译错误的测试文件数 10 → 9。剩余 9 个：BapBaseCoreContractTest、KeyAddressContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest、BapProviderKeyBagTest、EcKeyLiteExtendContractTest、EciesContractTest、BapBaseTest。",
-        "阶段报告产出（本轮次预算用尽）：`BSV依赖替换阶段报告-20261011-221500.md`——汇总 R0—R2 完成、R3 生产侧完成（生产编译 0 错误、旧引用 49 → 3）、R3 测试侧进行中（有错文件 14 → 9、旧引用测试文件 36/54），R4—R6 未开始；含关键度量、测量纪律、证据索引、剩余工作量估算（R3 测试 4—8 轮 + 验收 2—3 轮、R4 8—15 轮、R5 3—5 轮、R6 4—6 轮）与后续排期建议。"
+        "阶段报告产出（本轮次预算用尽）：`BSV依赖替换阶段报告-20261011-221500.md`——汇总 R0—R2 完成、R3 生产侧完成（生产编译 0 错误、旧引用 49 → 3）、R3 测试侧进行中（有错文件 14 → 9、旧引用测试文件 36/54），R4—R6 未开始；含关键度量、测量纪律、证据索引、剩余工作量估算（R3 测试 4—8 轮 + 验收 2—3 轮、R4 8—15 轮、R5 3—5 轮、R6 4—6 轮）与后续排期建议。",
+        "R3 测试迁移（metanet4j-sdk 提交 7c4eaaf／a3f1b1f／aa265fc／160dcbd）：迁移 EciesContractTest、MasterPrivateKeyContractTest、OrdScriptBuilderContractTest、OrdTransactionBuilderContractTest 四个文件；**并通过测试迁移发现并修正一个真实缺陷**——旧流程由 TransactionSigner 携带 hashFlags/anyoneCanPay，新流程改解锁模板后这两个参数未传下去（硬编码 all/false），导致 SIGHASH_NONE／SINGLE／ANYONECANPAY 被静默丢弃，与 V09 冻结向量不符；已新增 completeAndSignTx(provider, hashFlags, anyoneCanPay) 与 signOutputsOf 映射并贯通。有编译错误的测试文件数 11 → 9；旧引用测试文件数 36 → 34。剩余 9 个文件的迁移配方见 migration-rules §21。"
       ],
       "commits": [
         {
@@ -1054,9 +1055,25 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "c37bf7a"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "7c4eaaf"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "a3f1b1f"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "aa265fc"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "160dcbd"
         }
       ],
-      "statusNote": "进行中（轮次预算用尽，未完成）：R0／R1／R2 完成；R3 生产侧完成（SDK 生产编译 0 错误、生产旧引用 3）；R3 测试侧 9 个文件待迁；R4／R5／R6 未开始。阶段报告见 BSV依赖替换阶段报告-20261011-221500.md。",
+      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试有错文件 9、旧引用测试文件 34/54；本轮修正 SIGHASH 范围未贯通缺陷（提交 160dcbd）。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
