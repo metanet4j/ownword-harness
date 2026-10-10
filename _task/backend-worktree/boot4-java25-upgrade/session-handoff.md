@@ -21,6 +21,6 @@
 
 ## Next Session
 
-唯一下一步是继续 bsv-r3-keys 的脚本类型工具层：`ScriptExtend`（改工具类）与 `TxHelperExtend`（去继承）**必须与 4 个调用方（RemoteTransactionSigner、OrdinalsTransactionSigner、TransactionBuilder、OrdTransactionBuilder）一次性提交**，否则错误数在 26／48 间搬运。两个实现草稿在 evidence/bsv-replace/r3-keys-20261010/script-layer-drafts/，缺口与算法见 migration-rules.md §9。之后再按 §8 迁基类与 Remote 子类、BobHelper。**进度以 `grep -rl 'io\.bitcoinsv' metanet4j-sdk/src/main/java --include=*.java | wc -l` 的文件数下降为准**（当前 28，起点 49），不要以编译错误数判断（旧依赖仍在 SDK pom 中，编译期可解析）。R3 共五组（keys／scripts／transactions／protocols／accept），只在五组全部通过后完成阶段。注意 unit-test-inventory.json 必须与源码增删同步，否则严格验收直接拒绝。持续实施授权已记录。门禁用法 `python3 bsv-task-gate.py --stage r0|r1|...`。
+唯一下一步是继续 bsv-r3-keys：先单独把 `TransactionBuilder.getUnLockScriptSize` 改为不依赖赎回数据的费用估算（可独立验证），再一次性处理「`RedeemDataExtend` 删除 + `TxHelperExtend` 去继承 + `ScriptExtend` 改工具类 + 三个调用方（OrdinalsTransactionSigner 两处、OrdTransactionBuilder、TransactionBuilder）改显式派生 + 解锁模板」。草稿在 evidence/bsv-replace/r3-keys-20261010/script-layer-drafts/，实测与建议见 migration-rules.md §10。**进度以 `grep -rl 'io\.bitcoinsv' metanet4j-sdk/src/main/java --include=*.java | wc -l` 的文件数下降为准**（当前 28，起点 49），不要以编译错误数判断（旧依赖仍在 SDK pom 中，编译期可解析）。R3 共五组（keys／scripts／transactions／protocols／accept），只在五组全部通过后完成阶段。注意 unit-test-inventory.json 必须与源码增删同步，否则严格验收直接拒绝。持续实施授权已记录。门禁用法 `python3 bsv-task-gate.py --stage r0|r1|...`。
 
 阶段门禁用法：`python3 bsv-task-gate.py --stage r0|r1|...`；证据刷新：`./refresh-r0-api-evidence.sh`。
