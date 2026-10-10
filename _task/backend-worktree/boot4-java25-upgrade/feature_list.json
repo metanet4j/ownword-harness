@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "initializedAt": "2026-09-16",
   "allowedStatuses": [
     "not-started",
@@ -8,7 +8,7 @@
     "done"
   ],
   "activeItem": null,
-  "note": "既有 Boot 4 / Java 25 升级及 U0—U9 测试已完成。BSV 依赖替换计划已交付，实施 R0—R6 均未开工；本轮授权仅文档。唯一下一步是取得明确实施指令后执行 R0，方案与验收以 planDoc 为准。四仓库当前使用 feature/bsv-sdk-replace，base/pom.xml 的既有修改保留。",
+  "note": "已获 R0—R6 实施授权；28 个执行项按依赖串行，七阶段在 stages 汇总。23 个既有事项保留。状态以本清单为准。",
   "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
   "features": [
     {
@@ -458,8 +458,695 @@
         "environment-check.json：宿主目标 Maven 缓存可写，五个共享中间件容器均 exited，五端口拒绝连接；沙箱缓存只读且限制本机网络。新 SDK 在源缓存有 JAR、目标缓存未接入。完整路径见 progress.md。",
         "SDK 完整证据复核：python3 full-evidence-run.py verify .cache/evidence/full-run-52-20260901/full-run.json 退出 0、PASS；当前 javaRevision 与原来源摘要相同，5329 用例及 56744 条断言既有证据核对通过，未重跑测试体。"
       ],
-      "statusNote": "2026-10-10：计划及开工前环境核查已交付。验收 javaRevision 已明确为来源摘要，校验命令已修正；本轮未实施迁移，R0—R6 均未开工。"
+      "statusNote": "计划已交付；2026-10-10 用户明确指令开始按计划实施，持续授权记录见 authorization。"
     },
+    {
+      "id": "bsv-replace-features",
+      "name": "拆分实施 feature 与建立执行状态",
+      "description": "将 R0—R6 拆成可提交、可验收的执行项，记录持续授权、阶段依赖和唯一当前事项。",
+      "status": "done",
+      "dependencies": [
+        "bsv-replace-plan"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "28 个执行项完整覆盖七阶段，依赖无环且引用有效。",
+        "23 个既有升级／测试事项原样保留；仅一个执行项 in-progress。",
+        "状态、进度、交接及当前计划一致，结构验证和 init.sh 实际通过。"
+      ],
+      "deliverables": [
+        "feature_list.json",
+        "progress.md",
+        "session-handoff.md",
+        "doc/BSV依赖替换计划-20261010-103802.md"
+      ],
+      "evidence": [
+        "evidence/bsv-replace/feature-split-20261010/checks.json：依赖、状态、阶段分组、历史事项保留及计划命令语法 PASS。",
+        "node .agents/skills/harness-creator/scripts/validate-harness.mjs --target _task/backend-worktree/boot4-java25-upgrade --json：退出 0，100/100，仅结构检查。",
+        "evidence/bsv-replace/feature-split-20261010/init.log：./init.sh 退出 0，工具链隔离通过，旧分支与设施告警待对应阶段处理。"
+      ],
+      "commits": [],
+      "startedAt": "2026-10-10T11:27:30+08:00",
+      "statusNote": "28 个执行项／7 阶段拆分通过，23 个既有事项未改变，单一当前项及依赖无环检查通过。",
+      "completedAt": "2026-10-10T11:28:48+08:00"
+    },
+    {
+      "id": "bsv-r0-source",
+      "name": "冻结仓库与 SDK 来源",
+      "description": "对应计划 R0；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r0-baseline",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-replace-features"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "四目标仓库及 SDK 的 HEAD、分支、状态、已有 diff 和源码／POM 指纹已保存。",
+        "SDK HEAD 固定、工作区干净；javaRevision 与冻结清单相同，原证据 verify 退出 0。",
+        "base/pom.xml 的既有 diff 单独保存，未覆盖或提前提交。"
+      ],
+      "deliverables": [
+        "baseline.json",
+        "evidence/bsv-replace/r0-source-*/existing-base-pom.patch"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r0-harness",
+      "name": "校正任务入口与状态门禁",
+      "description": "对应计划 R0；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r0-baseline",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r0-source"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "AGENTS.md 从 feature_list.json.planDoc 加载当前计划，自检确认四仓库的替换分支。",
+        "JSON、依赖、唯一 activeItem 及完成证据异常均导致非零退出。",
+        "自检不承担构建验收；旧 --full 入口明确拒绝，保留工具链隔离及按阶段的中间件告警。"
+      ],
+      "deliverables": [
+        "AGENTS.md",
+        "init.sh",
+        "evidence/bsv-replace/r0-harness-*/checks.json"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r0-api",
+      "name": "完成方法级 API 与调用映射",
+      "description": "对应计划 R0；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r0-baseline",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r0-harness"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "全部 67 个生产直接引用文件及间接调用、公开类型变更均有具体旧方法／新入口。",
+        "配置、反射和 JCL 声明已扫描；每个能力为直接替换、业务适配、删除或有据缺口。",
+        "影响后续实施的能力缺口已关闭，不能以编译时再判断代替结论。"
+      ],
+      "deliverables": [
+        "bsv-replace-api-map.json"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r0-tests",
+      "name": "固定逐用例迁移清单",
+      "description": "对应计划 R0；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r0-baseline",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r0-api"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "全部基线单元及集成测试按类／方法登记目标、处理方式和行为编号。",
+        "保留、等价替换、删除的具体去向可核对，继承及参数化实例的计数规则明确。",
+        "SDK 5 例本地 HTTP 集成与 component 18 类／124 例分开列出。"
+      ],
+      "deliverables": [
+        "bsv-replace-test-map.json"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r0-vectors",
+      "name": "冻结 V01—V14 独立样本",
+      "description": "对应计划 R0；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r0-baseline",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r0-tests"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "14 组行为绑定实际测试方法、固定输入、独立预期值及源码来源。",
+        "历史交易、签名、前像、路径和协议字节样本可追溯 SHA-256。",
+        "预期值不是由新被测实现自身生成，金额与非法输入边界有明确预期。"
+      ],
+      "deliverables": [
+        "bsv-replace-vectors.json"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r0-gate",
+      "name": "复核 R0 完整性",
+      "description": "对应计划 R0；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r0-baseline",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r0-vectors"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "来源、自检、API、逐用例映射及 14 组样本全部齐全。",
+        "无遗漏旧调用和未决能力缺口；各准备产物来源及检查输出可复查。",
+        "阶段 gate 明确通过后才允许 R1，基础设施停止只影响集成。"
+      ],
+      "deliverables": [
+        "evidence/bsv-replace/r0-gate-*/summary.json"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r1-package",
+      "name": "固定 SDK 打包与跨缓存接入",
+      "description": "对应计划 R1；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r1-artifact",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r0-gate"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "从固定源码使用原任务 mvn.sh 打包，保留命令、退出码、源缓存与目标缓存路径。",
+        "主 JAR 含 Transaction.class，真实 POM、JAR 和来源指纹已核对并安装到目标缓存。",
+        "SDK 源码／测试／POM 及原冻结证据未修改；打包证据与测试证据分开。"
+      ],
+      "deliverables": [
+        "bsv-replace-artifact.json"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r1-parent",
+      "name": "接入 parent 依赖管理",
+      "description": "对应计划 R1；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r1-artifact",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r1-package"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "parent 管理新 SDK 0.2.0，复用 metanet4j.version；尚未迁移的旧管理项按计划保留。",
+        "parent -N install 成功，目标缓存解析出固定新 SDK。",
+        "记录 resolved tree 的 JCL 实际引入路径供 R5 清理。"
+      ],
+      "deliverables": [
+        "metanet4j-parent/pom.xml",
+        "evidence/bsv-replace/r1-parent-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r1-fingerprint",
+      "name": "严格验收绑定 SDK 制品",
+      "description": "对应计划 R1；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r1-artifact",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r1-parent"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "verify-unit.py 保存并核对 SDK 来源、JAR／POM 哈希及实际坐标。",
+        "替换同坐标制品时旧证据必须失败；原源码、提交与精确覆盖门禁继续有效。",
+        "针对正确制品和变化制品的检查实际执行，R1 完整门禁通过。"
+      ],
+      "deliverables": [
+        "verify-unit.py",
+        "evidence/bsv-replace/r1-fingerprint-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r2-behavior",
+      "name": "迁移 base BAP 与 AIP",
+      "description": "对应计划 R2；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r2-base",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r1-fingerprint"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "采用既有 POM 输入并迁移 BapHelper、AipHelper、公开旧类型及其全部调用。",
+        "BAP 标识、compact 公钥恢复、消息前缀、网络和非法输入相关测试实际通过。",
+        "base 生产和测试无旧类型，测试映射已同步。"
+      ],
+      "deliverables": [
+        "metanet4j-base",
+        "evidence/bsv-replace/r2-behavior-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r2-accept",
+      "name": "base 严格验收与安装",
+      "description": "对应计划 R2；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r2-base",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r2-behavior"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "verify-unit.py --mode accept --scope metanet4j-base 退出 0。",
+        "failures/errors/skipped 均为 0，gaps=0，既有行为和 V01/V02/V04/V05 对账。",
+        "已验证 base 安装成功，独立提交包含本任务相关 POM 和实现。"
+      ],
+      "deliverables": [
+        "evidence/bsv-replace/r2-accept-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r3-keys",
+      "name": "业务 SDK 密钥与身份适配",
+      "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r3-sdk",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r2-accept"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "密钥、地址、HD、ECIES、CryptoHelper、BAP 派生迁移并闭合全部编译调用。",
+        "V02—V06 相关合同测试 clean test 实际通过，历史密文与身份标识兼容。",
+        "公开接口变化登记，必要跨组调用修改不计作下一组完成。"
+      ],
+      "deliverables": [
+        "metanet4j-sdk",
+        "evidence/bsv-replace/r3-keys-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r3-scripts",
+      "name": "业务 SDK 脚本与交易读取适配",
+      "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r3-sdk",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r3-keys"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "ScriptExtend/Helper、ReadUtils、Bob/Txo、UTXO 与 Ord 脚本全部适配。",
+        "V07/V08 历史 raw 往返、字段、字节序及 pushdata 边界实际通过。",
+        "JSON 和协议数据字段保持，API 与测试映射同步。"
+      ],
+      "deliverables": [
+        "metanet4j-sdk",
+        "evidence/bsv-replace/r3-scripts-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r3-transactions",
+      "name": "业务 SDK 交易与签名适配",
+      "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r3-sdk",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r3-scripts"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "交易模型、Builder、SIGHASH、signers、金额、费率、找零与输出顺序迁移。",
+        "V09/V10 各原 API 支持模式与边界实际通过；独立前像计算器保留。",
+        "同仓库生产及测试类型调用闭合，无未验证签名路径。"
+      ],
+      "deliverables": [
+        "metanet4j-sdk",
+        "evidence/bsv-replace/r3-transactions-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r3-protocols",
+      "name": "业务 SDK Sigma、Ordinals 与远程签名适配",
+      "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r3-sdk",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r3-transactions"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "Sigma、Ord 创建／转移、远程预签名及回填与上下文迁移。",
+        "V11—V13 协议哈希、历史样本、无效回填及线程隔离实际通过。",
+        "身份签名和花费签名职责保持，未广播真实交易。"
+      ],
+      "deliverables": [
+        "metanet4j-sdk",
+        "evidence/bsv-replace/r3-protocols-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r3-accept",
+      "name": "业务 SDK 严格验收与安装",
+      "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r3-sdk",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r3-protocols"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "verify-unit.py --mode accept --scope metanet4j-sdk 退出 0，全部基线行为有实际执行记录。",
+        "SDK 生产及测试旧类型为 0；failures/errors/skipped=0、gaps=0。",
+        "已验证 SDK 制品安装成功，各实施组独立提交完成。"
+      ],
+      "deliverables": [
+        "evidence/bsv-replace/r3-accept-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r4-foundation",
+      "name": "组件 common、转换与过滤适配",
+      "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r4-component",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r3-accept"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "common、UtxoConvertor、交易转换、重复过滤及 MetaId 过滤调用迁移。",
+        "P2PKH/P2PK、异常 UTXO、历史交易字段、去重与过滤测试实际通过。",
+        "涉及模块逐项严格验收，测试／API 映射同步。"
+      ],
+      "deliverables": [
+        "metanet4j-component",
+        "evidence/bsv-replace/r4-foundation-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r4-transactions",
+      "name": "组件 BAP 与交易工厂适配",
+      "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r4-component",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r4-foundation"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "DefaultBapValidator、factory、resolver、BschemaCustomTransactionSigner 与接口迁移。",
+        "身份验签及 BitcoinSchemaTransaction 离线构造链路相关测试实际通过。",
+        "涉及模块逐项严格验收，公开类型调用闭合。"
+      ],
+      "deliverables": [
+        "metanet4j-component",
+        "evidence/bsv-replace/r4-transactions-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r4-downstream",
+      "name": "下游业务与集中测试适配",
+      "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r4-component",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r4-transactions"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "Bsocial、存储、集中测试夹具及所有受公开接口影响的调用同步。",
+        "涉及模块逐项严格验收；V14 正常、异常、业务链路验证去向齐全。",
+        "全部组件生产及测试无旧类型，聚合编译通过。"
+      ],
+      "deliverables": [
+        "metanet4j-component",
+        "evidence/bsv-replace/r4-downstream-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r4-isolation",
+      "name": "隔离集成测试资源",
+      "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r4-component",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r4-downstream"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "库、索引、表、topic/group、key 前缀按本轮唯一标识登记。",
+        "EsTest 清理独立测试索引，所有清理仅限本轮资源。",
+        "实际检查配置与清理路径；集成设施可用条件单独登记。"
+      ],
+      "deliverables": [
+        "metanet4j-component",
+        "evidence/bsv-replace/r4-isolation-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r4-accept",
+      "name": "组件聚合严格验收",
+      "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r4-component",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r4-isolation"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "verify-unit.py --mode accept --scope metanet4j-component 退出 0。",
+        "逐模块 failures/errors/skipped=0、gaps=0，纯接口 N/A 有据。",
+        "相关源码已提交，集成执行保留完整范围给 R6。"
+      ],
+      "deliverables": [
+        "evidence/bsv-replace/r4-accept-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r5-dependencies",
+      "name": "删除旧依赖并核对 25 个依赖树",
+      "description": "对应计划 R5；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r5-cleanup",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r4-accept"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "删除 bitcoinj/JCL 直接项、管理项、版本属性及全部过渡旧引用。",
+        "生产、测试、POM、配置、反射和本地 JAR 无旧库残留。",
+        "25 个目标 POM resolved dependency tree 齐全且无 io.bitcoinsv/org.bitcoinj。"
+      ],
+      "deliverables": [
+        "metanet4j-parent",
+        "metanet4j-sdk",
+        "metanet4j-component",
+        "evidence/bsv-replace/r5-dependencies-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r5-inventory",
+      "name": "收口源码、测试及覆盖清单",
+      "description": "对应计划 R5；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r5-cleanup",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r5-dependencies"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "unit-test-inventory 与实际源码及逐方法测试映射一致。",
+        "删除实现对应精确例外已清理，剩余例外双向核对，无新增整包排除或门禁下降。",
+        "API／测试映射无未迁移项，必需行为均绑定实际验证。"
+      ],
+      "deliverables": [
+        "unit-test-inventory.json",
+        "unit-coverage-exceptions.json",
+        "bsv-replace-api-map.json",
+        "bsv-replace-test-map.json"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r6-unit",
+      "name": "全量单元严格验收",
+      "description": "对应计划 R6；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r6-acceptance",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r5-inventory"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "verify-unit.py --mode accept --scope all 退出 0，25 POM／23 模块无遗漏。",
+        "逐模块用例、失败、错误、跳过及 gaps 对账；原 841 例变化逐方法说明。",
+        "单元 Surefire/JaCoCo、源码和 SDK 指纹已独立保存。"
+      ],
+      "deliverables": [
+        "evidence/bsv-replace/r6-unit-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r6-http",
+      "name": "业务 SDK 本地 HTTP 集成验收",
+      "description": "对应计划 R6；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r6-acceptance",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r6-unit"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "BitailsAndGorillaHttpIntegrationTest clean test 的 5 例全部实际执行。",
+        "failures/errors/skipped=0；在宿主本地网络执行，不调用真实外部业务接口。",
+        "报告独立保存，避免覆盖单元证据。"
+      ],
+      "deliverables": [
+        "evidence/bsv-replace/r6-http-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r6-integration",
+      "name": "共享设施与组件全集成验收",
+      "description": "对应计划 R6；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r6-acceptance",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r6-http"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "现有 infra/up.sh 启动五服务，healthy、端口和认证握手通过。",
+        "完整集成按类／方法及参数化实例对账，基线 18 类／124 例变化有具体依据。",
+        "逐模块 failures/errors/skipped=0，保存报告并确认本轮测试资源无残留。"
+      ],
+      "deliverables": [
+        "evidence/bsv-replace/r6-integration-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r6-artifact",
+      "name": "最终制品与依赖来源复核",
+      "description": "对应计划 R6；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r6-acceptance",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r6-integration"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "已验收代码打包、固定 SDK 制品和来源一致。",
+        "最终 25 POM 依赖树与旧引用扫描清零，V01—V14 按实际报告对账。",
+        "SDK 输入及既有无关改动保持，四仓库源码均已提交。"
+      ],
+      "deliverables": [
+        "evidence/bsv-replace/r6-artifact-*/"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    },
+    {
+      "id": "bsv-r6-report",
+      "name": "提交后证据绑定与交付报告",
+      "description": "对应计划 R6；范围及阶段门禁见 planDoc。",
+      "stageId": "bsv-replace-r6-acceptance",
+      "status": "not-started",
+      "dependencies": [
+        "bsv-r6-artifact"
+      ],
+      "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+      "doneCriteria": [
+        "最终提交后的源码／POM／SDK 指纹及证据绑定实际复核通过。",
+        "若未实现有据绑定，最终提交后重新严格验收；不手改旧 metadata。",
+        "时间戳验收报告包含提交、命令、退出码、逐模块结果、覆盖率、行为及保留限制。"
+      ],
+      "deliverables": [
+        "doc/验收报告-BSV依赖替换-<时间戳>.md",
+        "progress.md",
+        "session-handoff.md"
+      ],
+      "evidence": [],
+      "commits": [],
+      "statusNote": "待前置执行项及阶段门禁通过。"
+    }
+  ],
+  "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
+  "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
+  "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
+  "updatedAt": "2026-10-10T11:28:48+08:00",
+  "authorization": {
+    "status": "approved",
+    "approvedAt": "2026-10-10T11:27:30+08:00",
+    "instruction": "开始按照计划执行，先拆feature，记录执行进度和状态",
+    "scope": "按 planDoc 执行 R0—R6；先拆分 feature，持续记录进度和状态。既定只读 SDK、共享设施配置及远端边界继续适用。"
+  },
+  "executionPolicy": {
+    "singleActiveFeature": true,
+    "stageSummary": "stages 按 featureIds 汇总，不作为独立执行项；每阶段最后一个执行项承担阶段门禁。",
+    "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
+    "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
+  },
+  "nextItem": "bsv-r0-source",
+  "stages": [
     {
       "id": "bsv-replace-r0-baseline",
       "name": "R0 固定基线与方法级映射",
@@ -470,7 +1157,20 @@
       ],
       "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
       "evidence": [],
-      "statusNote": "本轮仅编写计划；实施须取得明确批准并满足计划前置门禁。"
+      "statusNote": "按所列执行项汇总；全部子项及阶段门禁通过后完成。",
+      "kind": "stage",
+      "featureIds": [
+        "bsv-r0-source",
+        "bsv-r0-harness",
+        "bsv-r0-api",
+        "bsv-r0-tests",
+        "bsv-r0-vectors",
+        "bsv-r0-gate"
+      ],
+      "progress": {
+        "total": 6,
+        "done": 0
+      }
     },
     {
       "id": "bsv-replace-r1-artifact",
@@ -482,7 +1182,17 @@
       ],
       "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
       "evidence": [],
-      "statusNote": "本轮仅编写计划；实施须取得明确批准并满足计划前置门禁。"
+      "statusNote": "按所列执行项汇总；全部子项及阶段门禁通过后完成。",
+      "kind": "stage",
+      "featureIds": [
+        "bsv-r1-package",
+        "bsv-r1-parent",
+        "bsv-r1-fingerprint"
+      ],
+      "progress": {
+        "total": 3,
+        "done": 0
+      }
     },
     {
       "id": "bsv-replace-r2-base",
@@ -494,7 +1204,16 @@
       ],
       "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
       "evidence": [],
-      "statusNote": "本轮仅编写计划；实施须取得明确批准并满足计划前置门禁。"
+      "statusNote": "按所列执行项汇总；全部子项及阶段门禁通过后完成。",
+      "kind": "stage",
+      "featureIds": [
+        "bsv-r2-behavior",
+        "bsv-r2-accept"
+      ],
+      "progress": {
+        "total": 2,
+        "done": 0
+      }
     },
     {
       "id": "bsv-replace-r3-sdk",
@@ -506,7 +1225,19 @@
       ],
       "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
       "evidence": [],
-      "statusNote": "本轮仅编写计划；实施须取得明确批准并满足计划前置门禁。"
+      "statusNote": "按所列执行项汇总；全部子项及阶段门禁通过后完成。",
+      "kind": "stage",
+      "featureIds": [
+        "bsv-r3-keys",
+        "bsv-r3-scripts",
+        "bsv-r3-transactions",
+        "bsv-r3-protocols",
+        "bsv-r3-accept"
+      ],
+      "progress": {
+        "total": 5,
+        "done": 0
+      }
     },
     {
       "id": "bsv-replace-r4-component",
@@ -518,7 +1249,19 @@
       ],
       "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
       "evidence": [],
-      "statusNote": "本轮仅编写计划；实施须取得明确批准并满足计划前置门禁。"
+      "statusNote": "按所列执行项汇总；全部子项及阶段门禁通过后完成。",
+      "kind": "stage",
+      "featureIds": [
+        "bsv-r4-foundation",
+        "bsv-r4-transactions",
+        "bsv-r4-downstream",
+        "bsv-r4-isolation",
+        "bsv-r4-accept"
+      ],
+      "progress": {
+        "total": 5,
+        "done": 0
+      }
     },
     {
       "id": "bsv-replace-r5-cleanup",
@@ -530,7 +1273,16 @@
       ],
       "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
       "evidence": [],
-      "statusNote": "本轮仅编写计划；实施须取得明确批准并满足计划前置门禁。"
+      "statusNote": "按所列执行项汇总；全部子项及阶段门禁通过后完成。",
+      "kind": "stage",
+      "featureIds": [
+        "bsv-r5-dependencies",
+        "bsv-r5-inventory"
+      ],
+      "progress": {
+        "total": 2,
+        "done": 0
+      }
     },
     {
       "id": "bsv-replace-r6-acceptance",
@@ -542,10 +1294,19 @@
       ],
       "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
       "evidence": [],
-      "statusNote": "本轮仅编写计划；实施须取得明确批准并满足计划前置门禁。"
+      "statusNote": "按所列执行项汇总；全部子项及阶段门禁通过后完成。",
+      "kind": "stage",
+      "featureIds": [
+        "bsv-r6-unit",
+        "bsv-r6-http",
+        "bsv-r6-integration",
+        "bsv-r6-artifact",
+        "bsv-r6-report"
+      ],
+      "progress": {
+        "total": 5,
+        "done": 0
+      }
     }
-  ],
-  "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
-  "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
-  "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md"
+  ]
 }
