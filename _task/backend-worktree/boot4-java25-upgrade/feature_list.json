@@ -950,7 +950,8 @@
         "R3 测试迁移（metanet4j-sdk 提交 5e283b0）：**ScriptExtendContractTest 编译清零（16 → 0）**——按 migration-rules §11 的 9 条冻结断言重写：构造脚本改 P2PKH.lock／writeOpCode／writeBin（含 1-of-1 多签与 P2SH 的 OP_HASH160+hash160+OP_EQUAL）、花费尺寸与签名填充改静态入口、SIG_SIZE 取 ScriptExtend.SIG_SIZE、创建时间用 ScriptExtend.of(program, t)、推送数据经 ScriptHelper.getPushData、空推送用 OP_0。旧引用测试文件 29 → 28；另显形此前被掩盖的 SigHashExtendContractTest（10）。当前有错文件 6 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、BapBaseLifecycleTest 14、SigHashExtendContractTest 10。",
         "R3 测试迁移：SigHashExtendContractTest（10 处）已定位但未执行——其夹具用旧 TxBean 构造交易，而 SigHashExtend 已收新 SDK Transaction。迁移配方（夹具改 Transaction.fromBinary/inputs.outputs、referenceDigest 只换类型与访问器、**不得改为调用 SigHashExtend**）见 migration-rules §22。该文件是计划 §3 要求的独立前像计算器所在处，为 V09 向量验收前置。",
         "R3 测试迁移（metanet4j-sdk 提交 5b7ec78）：**SigHashExtendContractTest 编译清零（10 → 0）**——按 §22 重写到新 SDK 交易模型，**并遵守计划 §3 的硬约束：referenceDigest 仍是独立拼装的 BIP143 前像计算器，未改为调用 SigHashExtend**（V09 验收的独立参照因此保留）。夹具改直接构造 Transaction、referenceDigest 只换类型与访问器、第三用例由懒序列化改为「手工构建与解析得到相同摘要」、越界断言改 IllegalArgumentException。旧引用测试文件 28 → 27；另显形 SigmaHashContractTest（12）。当前有错文件 6 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、BapBaseLifecycleTest 14、SigmaHashContractTest 12。",
-        "R3 测试迁移（metanet4j-sdk 提交 3031b85）：**SigmaHashContractTest 编译清零（12 → 0）**——夹具改新 SDK Transaction 直接构造（txid 显示序 + sourceOutputIndex、sequence、TransactionOutput(script, satoshis)）、Coin→BsvAmount、Sha256Hash→BsvHashBytes（零哈希用 ZERO_HASH）、ScriptBuilder/ScriptOpCodes→新 SDK Script 的 writeBin/writeOpCode 链式写法、getOutput(i)→outputs.get(i)、getProgram()→toUint8Array()。旧引用测试文件 27 → 26；另显形 SigmaSignContractTest（14）。当前有错文件 6 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、SigmaSignContractTest 14、BapBaseLifecycleTest 14。"
+        "R3 测试迁移（metanet4j-sdk 提交 3031b85）：**SigmaHashContractTest 编译清零（12 → 0）**——夹具改新 SDK Transaction 直接构造（txid 显示序 + sourceOutputIndex、sequence、TransactionOutput(script, satoshis)）、Coin→BsvAmount、Sha256Hash→BsvHashBytes（零哈希用 ZERO_HASH）、ScriptBuilder/ScriptOpCodes→新 SDK Script 的 writeBin/writeOpCode 链式写法、getOutput(i)→outputs.get(i)、getProgram()→toUint8Array()。旧引用测试文件 27 → 26；另显形 SigmaSignContractTest（14）。当前有错文件 6 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、SigmaSignContractTest 14、BapBaseLifecycleTest 14。",
+        "R3 测试迁移（metanet4j-sdk 提交 fca3978）：**SigmaSignContractTest 编译清零（14 → 0）**——夹具改新 SDK Transaction（新增 newTransaction 助手：零哈希输入 + sequence 全 F）、Coin→BsvAmount、Sha256Hash→BsvHashBytes（含 sigma.getMessageHash() 接收类型）、ScriptBuilder/ScriptOpCodes→新 SDK Script 链式写法、输出脚本推送数据经 ScriptHelper.getPushData。旧引用测试文件 26 → 25；另显形 AllHashSigThreadLocalContractTest（14）。当前有错文件 6 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、AllHashSigThreadLocalContractTest 14、BapBaseLifecycleTest 14。"
       ],
       "commits": [
         {
@@ -1144,9 +1145,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "3031b85"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "fca3978"
         }
       ],
-      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，有错文件 6 个；旧引用测试文件 26/54。",
+      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，有错文件 6 个；旧引用测试文件 25/54。Sigma 系列（Hash/Sign）已全部迁移清零。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
