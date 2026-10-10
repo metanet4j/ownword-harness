@@ -48,7 +48,7 @@ STAGE_FEATURES = {
 STAGE_ARTIFACTS = {
     "r0": ["baseline.json", "bsv-replace-api-map.json", "bsv-replace-test-map.json",
            "bsv-replace-vectors.json", "init.sh", "test-init.py"],
-    "r1": ["bsv-replace-artifact.json"],
+    "r1": ["bsv-replace-artifact.json", "metanet4j-parent/pom.xml", "verify-unit.py"],
     "r2": [],
     "r3": [],
     "r4": [],

@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "featureId": "bsv-r1-package",
+  "generatedAt": "2026-10-10T19:35:33+08:00",
+  "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+  "planSection": "4 R1；6 R1 打包并接入制品",
+  "source": {
+    "repository": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/metanet4j-bsv-sdk",
+    "gitHead": "3dd8bebe4e465625f2930179bb3c5fcf71b637a2",
+    "gitStatus": "",
+    "branch": "feature/bsv-sdk-java-migration",
+    "srcMainFileCount": 157,
+    "srcMainAndPomSha256": "d622c3a0dfe8dcfd64596bbf79130d79c89753aa8c21e11829aed20a051d31c9",
+    "pomSha256": "74d32beb37e8bbc8b92d2293b64916cb3d3a17ceb2f84b57ce70621b26e4b4ab",
+    "sourceModifiedByThisTask": false,
+    "note": "只读输入：源码、测试、POM 与原冻结证据均未修改；打包只生成 target/ 与 .cache/maven 本地构建产物"
+  },
+  "build": {
+    "wrapper": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/mvn.sh",
+    "cwd": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration",
+    "command": [
+      "./mvn.sh",
+      "-o",
+      "-f",
+      "metanet4j-bsv-sdk/pom.xml",
+      "clean",
+      "package",
+      "-Dmaven.test.skip=true"
+    ],
+    "exitCode": 0,
+    "log": "evidence/bsv-replace/r1-package-20261010/package.log",
+    "meaning": "只做打包；跳过测试不代表 SDK 测试通过，测试依据是原任务完整验收与本次业务行为验证",
+    "builtAt": "2026-10-10T19:31:47+08:00",
+    "durationSeconds": 8.072
+  },
+  "artifact": {
+    "coordinates": {
+      "groupId": "com.metanet4j",
+      "artifactId": "metanet4j-bsv-sdk",
+      "version": "0.2.0",
+      "packaging": "jar"
+    },
+    "sourceJar": {
+      "path": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/metanet4j-bsv-sdk/target/metanet4j-bsv-sdk-0.2.0.jar",
+      "bytes": 857959,
+      "sha256": "d3aaf86dce9ef7fb9b5439a5a5559e7e32c87d73ed3f78aeea1fd6eb7afb39b7"
+    },
+    "sourcePom": {
+      "path": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/metanet4j-bsv-sdk/pom.xml",
+      "bytes": 1698,
+      "sha256": "74d32beb37e8bbc8b92d2293b64916cb3d3a17ceb2f84b57ce70621b26e4b4ab"
+    },
+    "jarEntryCount": 476,
+    "containsTransactionClass": true,
+    "javaSourceEntries": 0,
+    "testEntries": [],
+    "isSourcesJar": false,
+    "isTestsJar": false
+  },
+  "installedToTargetCache": {
+    "targetCache": "/home/haodev/.m2/metanet4j",
+    "sourceCache": "/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration/.cache/maven",
+    "jar": {
+      "path": "/home/haodev/.m2/metanet4j/com/metanet4j/metanet4j-bsv-sdk/0.2.0/metanet4j-bsv-sdk-0.2.0.jar",
+      "bytes": 857959,
+      "sha256": "d3aaf86dce9ef7fb9b5439a5a5559e7e32c87d73ed3f78aeea1fd6eb7afb39b7"
+    },
+    "pom": {
+      "path": "/home/haodev/.m2/metanet4j/com/metanet4j/metanet4j-bsv-sdk/0.2.0/metanet4j-bsv-sdk-0.2.0.pom",
+      "bytes": 1698,
+      "sha256": "74d32beb37e8bbc8b92d2293b64916cb3d3a17ceb2f84b57ce70621b26e4b4ab"
+    },
+    "hashesMatchSource": true,
+    "commands": [
+      {
+        "command": [
+          "mvn",
+          "-s",
+          "~/.m2/metanet4j-settings.xml",
+          "-B",
+          "-f",
+          "metanet4j-parent/pom.xml",
+          "-N",
+          "install"
+        ],
+        "exitCode": 0,
+        "log": "evidence/bsv-replace/r1-package-20261010/install-parent.log"
+      },
+      {
+        "command": [
+          "mvn",
+          "-s",
+          "~/.m2/metanet4j-settings.xml",
+          "-B",
+          "-f",
+          "metanet4j-parent/pom.xml",
+          "install:install-file",
+          "-Dfile=<JAR>",
+          "-DpomFile=<SDK pom>",
+          "-DgroupId=com.metanet4j",
+          "-DartifactId=metanet4j-bsv-sdk",
+          "-Dversion=0.2.0",
+          "-Dpackaging=jar"
+        ],
+        "exitCode": 0,
+        "log": "evidence/bsv-replace/r1-package-20261010/install-artifact.log"
+      },
+      {
+        "command": [
+          "mvn",
+          "-o",
+          "-f",
+          "metanet4j-parent/pom.xml",
+          "dependency:get",
+          "-Dartifact=com.metanet4j:metanet4j-bsv-sdk:0.2.0"
+        ],
+        "exitCode": 0,
+        "log": "evidence/bsv-replace/r1-package-20261010/resolve-check.log"
+      }
+    ]
+  },
+  "effectivePom": {
+    "artifact": "evidence/bsv-replace/r1-package-20261010/effective-pom-summary.json",
+    "command": "mvn -f <SDK pom> help:effective-pom",
+    "exitCode": 0,
+    "dependencyCount": 5,
+    "dependencies": [
+      {
+        "groupId": "tools.jackson.core",
+        "artifactId": "jackson-databind",
+        "version": "3.1.5",
+        "scope": "compile",
+        "optional": null
+      },
+      {
+        "groupId": "org.apache.httpcomponents.client5",
+        "artifactId": "httpclient5",
+        "version": "5.6.4",
+        "scope": "compile",
+        "optional": null
+      },
+      {
+        "groupId": "org.junit.jupiter",
+        "artifactId": "junit-jupiter",
+        "version": "6.0.3",
+        "scope": "test",
+        "optional": null
+      },
+      {
+        "groupId": "org.projectlombok",
+        "artifactId": "lombok",
+        "version": "1.18.46",
+        "scope": "provided",
+        "optional": null
+      },
+      {
+        "groupId": "org.mapstruct",
+        "artifactId": "mapstruct",
+        "version": "1.5.5.Final",
+        "scope": "compile",
+        "optional": null
+      }
+    ],
+    "conclusion": "生成的 POM 保留真实运行依赖（jackson-databind、httpclient5、mapstruct）与 test／provided 作用域，未丢失运行依赖"
+  },
+  "sdkAcceptanceBinding": {
+    "originalJavaRevision": "ce6b50d7cb353422cd3b25f83239ca2013862dccc83575b5b5df532ff2c8be1c",
+    "originalManifest": "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/../bsv-sdk-java-migration/.cache/evidence/full-run-52-20260901/full-run.json",
+    "note": "本次业务适配的制品来源指纹为 srcMainAndPomSha256；与原验收的 javaRevision 是不同算法，分别记录、不混用"
+  },
+  "evidenceSeparation": {
+    "packagingEvidence": "evidence/bsv-replace/r1-package-20261010/（打包、安装、解析、有效 POM）",
+    "testEvidence": "本次未运行 SDK 测试；SDK 测试依据见原任务证据 .cache/evidence/full-run-52-20260901 与 doc/验收报告 系列",
+    "rule": "打包不得记为 SDK 测试通过"
+  }
+}

@@ -710,7 +710,7 @@
       "name": "固定 SDK 打包与跨缓存接入",
       "description": "对应计划 R1；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r1-artifact",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "bsv-r0-gate"
       ],
@@ -723,9 +723,22 @@
       "deliverables": [
         "bsv-replace-artifact.json"
       ],
-      "evidence": [],
-      "commits": [],
-      "statusNote": "待前置执行项及阶段门禁通过。"
+      "evidence": [
+        "bsv-replace-artifact.json：SDK 来源（HEAD 3dd8beb、工作区干净、src/main+POM 指纹 d622c3a0…、POM 74d32beb…）、打包命令与退出码、主 JAR 内容校验、目标缓存安装与哈希一致性、有效 POM 运行依赖、证据分离说明。",
+        "evidence/bsv-replace/r1-package-20261010/package.log + package.exit：../bsv-sdk-java-migration/mvn.sh -o -f metanet4j-bsv-sdk/pom.xml clean package -Dmaven.test.skip=true，退出 0，8.072 秒。",
+        "evidence/bsv-replace/r1-package-20261010/install-parent.log（parent -N install 退出 0）、install-artifact.log（install:install-file 退出 0）、resolve-check.log（dependency:get 退出 0）。",
+        "JAR 校验：476 个条目、含 com/metanet4j/bsv/transaction/Transaction.class、0 个 .java 条目、无 test 条目；源 JAR 与目标缓存 JAR sha256 均为 d3aaf86d…（857,959 字节），POM sha256 74d32beb…。",
+        "evidence/bsv-replace/r1-package-20261010/effective-pom-summary.json：5 项依赖（jackson-databind 3.1.5、httpclient5 5.6.4、junit-jupiter 6.0.3 test、lombok 1.18.46 provided、mapstruct 1.5.5.Final）。"
+      ],
+      "commits": [
+        {
+          "repository": "ownword",
+          "commit": "PENDING"
+        }
+      ],
+      "statusNote": "固定 SDK 已打包并装入目标缓存，坐标 com.metanet4j:metanet4j-bsv-sdk:0.2.0；主 JAR 含 Transaction.class 且非 sources／tests JAR；源与缓存哈希一致；SDK 源码未修改。",
+      "startedAt": "2026-10-10T20:35:00+08:00",
+      "completedAt": "2026-10-10T19:35:56+08:00"
     },
     {
       "id": "bsv-r1-parent",
@@ -1212,7 +1225,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-10T19:29:24+08:00",
+  "updatedAt": "2026-10-10T19:35:56+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1225,7 +1238,7 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": "bsv-r1-package",
+  "nextItem": "bsv-r1-parent",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
@@ -1256,7 +1269,7 @@
       "id": "bsv-replace-r1-artifact",
       "name": "R1 固定 SDK 制品接入",
       "description": "通过原任务缓存打包固定 SDK、接入目标缓存并为严格验收绑定制品指纹。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "bsv-replace-r0-baseline"
       ],
@@ -1271,7 +1284,7 @@
       ],
       "progress": {
         "total": 3,
-        "done": 0
+        "done": 1
       }
     },
     {
