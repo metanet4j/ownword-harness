@@ -930,7 +930,8 @@
         "LockBuilder 与远程签名器清理（metanet4j-sdk 提交 e5e6849）：RemoteTransactionSigner 移除冲突重载并按 TransactionSignature.toChecksigFormat 回填签名；UnSpendableDataLockBuilder 锁定脚本改用新 SDK Script。编译错误 142 → 136；生产旧引用文件数 12（起点 49，已降 76%）。剩余集中在四个文件：RemoteOrdTransactionTemplate 60、OrdTransactionTemplate 46、OrdinalsTransactionSigner 26、UnSpendableDataLockBuilder 2、RemoteTransactionSigner 2。",
         "OrdinalsTransactionSigner 改业务组件（metanet4j-sdk 提交 83f975c，计划 §3）：不再实现旧 TransactionSigner，删除 ScriptVerifyFlag／KeyBag／Translate／ECKey／旧 TransactionSignature；signInput 改 (Transaction, int, SigningKeyProvider, int hashFlags, boolean anyoneCanPay)，新增 signInputs 逐输入注入解锁模板后 Transaction.sign()。**生产旧引用文件数 12 → 11**；编译错误 136 → 118；该文件自身错误清零。",
         "**SDK 生产编译清零**（metanet4j-sdk 提交 f69691d）：收尾最后 6 处错误——RemoteOrdTransactionTemplate 的构建器实参改 resolveKeyProvider（远程流程不本地签名）、sendOrdinal 便捷重载补齐 remoteSignType 实参；RemoteTransactionSigner 的签名编码三元表达式显式归一（toChecksigFormat→List<Integer>、toDER→List<Double>）；UnSpendableDataLockBuilder 的 ScriptBuilder 返回值包一层转新 SDK Script。实测 metanet4j-sdk 生产编译错误 **0**（本轮起点 12，R3 起点 26）。",
-        "生产旧引用文件数 11 → 3（metanet4j-sdk 提交 82d514f、9d332d4）：清除 AllHashSigThreadLocal（Sha256Hash→BsvHashBytes）、TaggedDerivation（→JDK MessageDigest SHA-256）、ReadUtils（去 ProtocolException/TxParams，改本地 32 MiB 上限常量）、UTXOProvider（仅注释引用）、UnSpendableDataLockBuilder（脚本构造改新 SDK 链式写法）、SpecifyBapBase（删 4 个未使用 import）。剩余 3 个为 input/output 增强类（TransactionInputEnhance／TransactionOutPointEnhance／TransactionOutputEnhance），生产代码已不再引用它们，仅被 TransactionEnhanceContractTest 使用，按 §13.1 改写为持有者即可。测试侧仍有 41/54 个文件引用旧库。"
+        "生产旧引用文件数 11 → 3（metanet4j-sdk 提交 82d514f、9d332d4）：清除 AllHashSigThreadLocal（Sha256Hash→BsvHashBytes）、TaggedDerivation（→JDK MessageDigest SHA-256）、ReadUtils（去 ProtocolException/TxParams，改本地 32 MiB 上限常量）、UTXOProvider（仅注释引用）、UnSpendableDataLockBuilder（脚本构造改新 SDK 链式写法）、SpecifyBapBase（删 4 个未使用 import）。剩余 3 个为 input/output 增强类（TransactionInputEnhance／TransactionOutPointEnhance／TransactionOutputEnhance），生产代码已不再引用它们，仅被 TransactionEnhanceContractTest 使用，按 §13.1 改写为持有者即可。测试侧仍有 41/54 个文件引用旧库。",
+        "R3 测试迁移清单实测（metanet4j-sdk 提交 241d08a）：移除已删除类 TransactionExtend 的 import 后，测试编译从「早期中止的 2 处错误」推进到暴露真实工作量——**200 处错误、14 个测试文件**：BapBaseCoreContractTest 62、KeyAddressContractTest 38、CryptoHelperContractTest 20、SpecifyBapBaseContractTest 18、BapBaseLifecycleTest 14、BapProviderKeyBagTest 12、EcKeyLiteExtendContractTest 10、PreSignHashContextContractTest 6、BapBaseTest 6、WordsvBapBaseTest 4、PrivateKeyTest 4、BapVariantContractTest 2、AddressLiteTest 2、OrdHistoricalFixtureContractTest 2。根因是测试仍按旧签名调用已迁移的业务类（如 signHash(Sha256Hash) 现收 BsvHashBytes）。测试侧另有 41/54 个文件仍 import io.bitcoinsv。"
       ],
       "commits": [
         {
@@ -1028,9 +1029,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "9d332d4"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "241d08a"
         }
       ],
-      "statusNote": "进行中：**SDK 生产编译错误 0**；生产旧引用文件数 3（起点 49，已降 94%），剩余 3 个仅测试使用；下一步为 R3 测试迁移（41/54 个文件引用旧库）与严格验收。",
+      "statusNote": "进行中：SDK **生产**编译错误 0、旧引用 3（仅测试使用）；**测试**编译错误 200、14 个文件，测试侧 41/54 个文件仍引用旧库；下一步为 R3 测试迁移与严格验收。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
