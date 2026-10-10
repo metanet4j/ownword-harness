@@ -2,7 +2,7 @@
 
 ## 当前状态
 
-胡先生已于 2026-10-10 授权“开始按照计划执行，先拆feature，记录执行进度和状态”，并在本次会话明确“目标是计划完全执行完成”。[feature_list.json](feature_list.json) 是执行状态的唯一来源；七个阶段汇总和 28 个执行项已拆分，当前无 activeItem，下一项 bsv-r3-keys；**R0（6/6）、R1（3/3）、R2（2/2）阶段全部完成、门禁 PASS**，进入 R3 业务 SDK 适配；`bsv-r3-keys` **进行中**：base 共享值类型基座完成（提交 caaeb8b，base 严格验收 43 例 0 失败、gaps=0），SDK 密钥／地址层（56058b4）与 BIP39／BIP32 层（5424b34）已迁移，SDK 的 BAP 结构改写已完成（BapPath + compat.HD + SigningKeyProvider，sdk 提交 c9df398）；脚本工具 UtilsExtend／ScriptHelper 亦已迁移（提交 171ab43）；**生产仍有 35 个文件、测试 41 个文件引用 io.bitcoinsv**（旧依赖未移除，编译期可解析），当前编译错误集中在 ScriptChunk 类型扩散。既有升级与测试事项保持原样，不计为本次验收。
+胡先生已于 2026-10-10 授权“开始按照计划执行，先拆feature，记录执行进度和状态”，并在本次会话明确“目标是计划完全执行完成”。[feature_list.json](feature_list.json) 是执行状态的唯一来源；七个阶段汇总和 28 个执行项已拆分，当前无 activeItem，下一项 bsv-r3-keys；**R0（6/6）、R1（3/3）、R2（2/2）阶段全部完成、门禁 PASS**，进入 R3 业务 SDK 适配；`bsv-r3-keys` **进行中**：base 共享值类型基座完成（提交 caaeb8b，base 严格验收 43 例 0 失败、gaps=0），SDK 密钥／地址层（56058b4）与 BIP39／BIP32 层（5424b34）已迁移，SDK 的 BAP 结构改写已完成（BapPath + compat.HD + SigningKeyProvider，sdk 提交 c9df398）；CryptoHelper 亦已迁移（提交 a3746c5）；**生产仍有 34 个文件、测试 41 个文件引用 io.bitcoinsv**（旧依赖未移除，编译期可解析）。当前 14 处编译错误全部是 ScriptChunk／交易模型边界（BobHelper／TxoHelper／Sigma）。既有升级与测试事项保持原样，不计为本次验收。
 
 重启先读 ../AGENTS.md、../mvn-command.md、本目录 AGENTS.md、feature_list.json.planDoc、feature_list.json 与 progress.md，运行不带参数的 ./init.sh。授权在既定计划范围持续有效，无需重复请求。一次只做一个执行项，验证及提交齐全后更新状态。
 
@@ -21,6 +21,6 @@
 
 ## Next Session
 
-唯一下一步是继续 bsv-r3-keys：先解决 ScriptChunk／Script 类型扩散（BobHelper、TxoHelper、sigma/*、script/*、signers/TransactionExtend、input/*、output/*），再迁 CryptoHelper，然后处理交易／签名组的 KeyBag→SigningKeyProvider 改造。**进度以 `grep -rl 'io\.bitcoinsv' metanet4j-sdk/src/main/java --include=*.java | wc -l` 的文件数下降为准**（当前 35，起点 49），不要以编译错误数判断（旧依赖仍在 SDK pom 中，编译期可解析）。R3 共五组（keys／scripts／transactions／protocols／accept），只在五组全部通过后完成阶段。注意 unit-test-inventory.json 必须与源码增删同步，否则严格验收直接拒绝。持续实施授权已记录。门禁用法 `python3 bsv-task-gate.py --stage r0|r1|...`。
+唯一下一步是继续 bsv-r3-keys：整体迁移 BobHelper／TxoHelper／Sigma 到新交易模型与脚本类型（三者是当前全部 14 处编译错误的来源；ScriptHelper.getPushData 已备好，切勿只改调用点）。**进度以 `grep -rl 'io\.bitcoinsv' metanet4j-sdk/src/main/java --include=*.java | wc -l` 的文件数下降为准**（当前 35，起点 49），不要以编译错误数判断（旧依赖仍在 SDK pom 中，编译期可解析）。R3 共五组（keys／scripts／transactions／protocols／accept），只在五组全部通过后完成阶段。注意 unit-test-inventory.json 必须与源码增删同步，否则严格验收直接拒绝。持续实施授权已记录。门禁用法 `python3 bsv-task-gate.py --stage r0|r1|...`。
 
 阶段门禁用法：`python3 bsv-task-gate.py --stage r0|r1|...`；证据刷新：`./refresh-r0-api-evidence.sh`。
