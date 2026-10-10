@@ -2,7 +2,7 @@
 
 ## 当前状态
 
-胡先生已于 2026-10-10 授权“开始按照计划执行，先拆feature，记录执行进度和状态”，并在本次会话明确“目标是计划完全执行完成”。[feature_list.json](feature_list.json) 是执行状态的唯一来源；七个阶段汇总和 28 个执行项已拆分，当前无 activeItem，下一项 bsv-r3-keys；**R0（6/6）、R1（3/3）、R2（2/2）阶段全部完成、门禁 PASS**，进入 R3 业务 SDK 适配；`bsv-r3-keys` **进行中**：base 共享值类型基座完成（提交 caaeb8b，base 严格验收 43 例 0 失败、gaps=0），SDK 密钥／地址层（56058b4）与 BIP39／BIP32 层（5424b34）已迁移，SDK 的 BAP 结构改写已完成（BapPath + compat.HD + SigningKeyProvider，sdk 提交 c9df398）；Sigma 与 pre-sign 上下文亦已迁移（提交 8d6269f）；**生产仍有 28 个文件、测试 41 个文件引用 io.bitcoinsv**。当前 22 处编译错误集中在交易／签名组（RemoteTransactionBuilder 8、TransactionBuilder／UnSpendableDataLockBuilder 各 4、其余各 2）。既有升级与测试事项保持原样，不计为本次验收。
+胡先生已于 2026-10-10 授权“开始按照计划执行，先拆feature，记录执行进度和状态”，并在本次会话明确“目标是计划完全执行完成”。[feature_list.json](feature_list.json) 是执行状态的唯一来源；七个阶段汇总和 28 个执行项已拆分，当前无 activeItem，下一项 bsv-r3-keys；**R0（6/6）、R1（3/3）、R2（2/2）阶段全部完成、门禁 PASS**，进入 R3 业务 SDK 适配；`bsv-r3-keys` **进行中**：base 共享值类型基座完成（提交 caaeb8b，base 严格验收 43 例 0 失败、gaps=0），SDK 密钥／地址层（56058b4）与 BIP39／BIP32 层（5424b34）已迁移，SDK 的 BAP 结构改写已完成（BapPath + compat.HD + SigningKeyProvider，sdk 提交 c9df398）；UnSpendableDataLockBuilder 亦已迁移（哈希换 BsvHashBytes）；**生产仍有 28 个文件、测试 41 个文件引用 io.bitcoinsv**。当前 18 处编译错误全部在交易／签名组：RemoteTransactionBuilder 8、TransactionBuilder 4、RemoteTransactionSigner／RemoteOrdTransactionBuilder／BobHelper 各 2。既有升级与测试事项保持原样，不计为本次验收。
 
 重启先读 ../AGENTS.md、../mvn-command.md、本目录 AGENTS.md、feature_list.json.planDoc、feature_list.json 与 progress.md，运行不带参数的 ./init.sh。授权在既定计划范围持续有效，无需重复请求。一次只做一个执行项，验证及提交齐全后更新状态。
 
@@ -21,6 +21,6 @@
 
 ## Next Session
 
-唯一下一步是继续 bsv-r3-keys：处理交易／签名组（RemoteTransactionBuilder、TransactionBuilder、UnSpendableDataLockBuilder、RemoteTransactionSigner、RemoteOrdTransactionBuilder、BobHelper），并把 KeyBag 签名链改为 SigningKeyProvider + 解锁模板；Sigma 的迁移（8d6269f）可作参照。**进度以 `grep -rl 'io\.bitcoinsv' metanet4j-sdk/src/main/java --include=*.java | wc -l` 的文件数下降为准**（当前 28，起点 49），不要以编译错误数判断（旧依赖仍在 SDK pom 中，编译期可解析）。R3 共五组（keys／scripts／transactions／protocols／accept），只在五组全部通过后完成阶段。注意 unit-test-inventory.json 必须与源码增删同步，否则严格验收直接拒绝。持续实施授权已记录。门禁用法 `python3 bsv-task-gate.py --stage r0|r1|...`。
+唯一下一步是继续 bsv-r3-keys：按 evidence/bsv-replace/r3-keys-20261010/migration-rules.md §7 的字段级对应表改造交易与签名组，顺序为 TransactionBuilder（基类）→ RemoteTransactionBuilder／RemoteOrdTransactionBuilder → RemoteTransactionSigner → BobHelper；KeyBag 改 SigningKeyProvider、Coin 改 BsvAmount、TransactionSigner 改解锁模板注入，构造器签名变化需逐条登记。**进度以 `grep -rl 'io\.bitcoinsv' metanet4j-sdk/src/main/java --include=*.java | wc -l` 的文件数下降为准**（当前 28，起点 49），不要以编译错误数判断（旧依赖仍在 SDK pom 中，编译期可解析）。R3 共五组（keys／scripts／transactions／protocols／accept），只在五组全部通过后完成阶段。注意 unit-test-inventory.json 必须与源码增删同步，否则严格验收直接拒绝。持续实施授权已记录。门禁用法 `python3 bsv-task-gate.py --stage r0|r1|...`。
 
 阶段门禁用法：`python3 bsv-task-gate.py --stage r0|r1|...`；证据刷新：`./refresh-r0-api-evidence.sh`。
