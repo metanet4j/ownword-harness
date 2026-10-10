@@ -954,7 +954,8 @@
         "R3 测试迁移（metanet4j-sdk 提交 fca3978）：**SigmaSignContractTest 编译清零（14 → 0）**——夹具改新 SDK Transaction（新增 newTransaction 助手：零哈希输入 + sequence 全 F）、Coin→BsvAmount、Sha256Hash→BsvHashBytes（含 sigma.getMessageHash() 接收类型）、ScriptBuilder/ScriptOpCodes→新 SDK Script 链式写法、输出脚本推送数据经 ScriptHelper.getPushData。旧引用测试文件 26 → 25；另显形 AllHashSigThreadLocalContractTest（14）。当前有错文件 6 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、AllHashSigThreadLocalContractTest 14、BapBaseLifecycleTest 14。",
         "R3 测试迁移（metanet4j-sdk 提交 28ecdb3）：**AllHashSigThreadLocalContractTest 编译清零（14 → 0）**——Sha256Hash → BsvHashBytes（含 of(...) 工厂），与生产侧 AllHashSigThreadLocal.getSignedHashContext(BsvHashBytes) 对齐。旧引用测试文件 25 → 24；另显形 SignerTransactionContractTest（14）。当前有错文件 6 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、SignerTransactionContractTest 14、BapBaseLifecycleTest 14（后者涉及 HD→BapPath、ChildNumber、Ecies 密钥类型三处较复杂的适配）。",
         "R3 测试迁移：SignerTransactionContractTest（254 行、11 用例）已定位为**需整体重写**——它测的是三个已被计划删除/重新设计的抽象（TransactionExtend 已删、ExtendForSignTransaction 已改签名、TransactionSigner 抽象已取消），因此不是换类型而是换被测对象。逐用例归属（保留改写 5 个／删除 6 个）与**覆盖迁移登记表**见 migration-rules §23；删除的用例需同步 unit-test-inventory.json，覆盖去向须写入 evidence 以避免静默减少覆盖。",
-        "R3 测试迁移（metanet4j-sdk 提交 0b3c234）：**SignerTransactionContractTest 按 §23 重写清零（14 → 0）**——原文件 14 个用例测的是三个已删除/重新设计的抽象，重写为聚焦新架构的 5 个用例（范围载体、签名尾字节、缺失连接输出的单输入报错与批量跳过、未知密钥的单输入 false 与批量跳过、FORKID 位置位）。删除的 9 个用例逐条登记去向（§23.3）：序列化保真→SigHashExtendContractTest、签名范围→本案与 OrdTransactionBuilderContractTest、网络参数→KeyAddressContractTest，其余 4 个属新 SDK 不具备的能力（legacy hashing、密钥加密锁、中途失去私钥访问、旧解析器特性），登记为「新架构下不再可验证」而非迁移遗漏；unit-test-inventory.json 同步为 5 个方法。执行中发现原文件实为 14 个方法（先前只列 11 个），已补回「未知密钥」覆盖，避免静默减少覆盖。旧引用测试文件 24 → 23。"
+        "R3 测试迁移（metanet4j-sdk 提交 0b3c234）：**SignerTransactionContractTest 按 §23 重写清零（14 → 0）**——原文件 14 个用例测的是三个已删除/重新设计的抽象，重写为聚焦新架构的 5 个用例（范围载体、签名尾字节、缺失连接输出的单输入报错与批量跳过、未知密钥的单输入 false 与批量跳过、FORKID 位置位）。删除的 9 个用例逐条登记去向（§23.3）：序列化保真→SigHashExtendContractTest、签名范围→本案与 OrdTransactionBuilderContractTest、网络参数→KeyAddressContractTest，其余 4 个属新 SDK 不具备的能力（legacy hashing、密钥加密锁、中途失去私钥访问、旧解析器特性），登记为「新架构下不再可验证」而非迁移遗漏；unit-test-inventory.json 同步为 5 个方法。执行中发现原文件实为 14 个方法（先前只列 11 个），已补回「未知密钥」覆盖，避免静默减少覆盖。旧引用测试文件 24 → 23。",
+        "R3 测试迁移（metanet4j-sdk 提交 dd0e4dd）：**BapBaseLifecycleTest 编译清零（14 → 0）**——HD 路径改用 BapPath（HDUtils.parsePath + List<ChildNumber> → BapPath.parse；去掉 List.copyOf；fromRootChildNumberList 第二实参改 BapPath）、末位断言 ChildNumber.num() → BapPath.lastIndex()、Ecies 的 DeterministicHierarchy/DeterministicKey 派生改为 BapPath.derive(masterHD) + HD.pubKey，与 Ecies.encrypt(String, PublicKey, PrivateKey) 新签名对齐。旧引用测试文件 23 → 22；另显形 BitcoinschemaTransactionTest（12）。当前有错文件 5 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、BitcoinschemaTransactionTest 12。"
       ],
       "commits": [
         {
@@ -1160,9 +1161,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "0b3c234"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "dd0e4dd"
         }
       ],
-      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，有错文件 5 个（RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、BapBaseLifecycleTest 14）；旧引用测试文件 23/54。",
+      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，有错文件 5 个；旧引用测试文件 22/54。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
