@@ -2,7 +2,7 @@
 
 ## 当前状态
 
-胡先生已于 2026-10-10 授权“开始按照计划执行，先拆feature，记录执行进度和状态”，并在本次会话明确“目标是计划完全执行完成”。[feature_list.json](feature_list.json) 是执行状态的唯一来源；七个阶段汇总和 28 个执行项已拆分，当前无 activeItem，下一项 bsv-r3-keys；**R0（6/6）、R1（3/3）、R2（2/2）阶段全部完成、门禁 PASS**，进入 R3 业务 SDK 适配。既有升级与测试事项保持原样，不计为本次验收。
+胡先生已于 2026-10-10 授权“开始按照计划执行，先拆feature，记录执行进度和状态”，并在本次会话明确“目标是计划完全执行完成”。[feature_list.json](feature_list.json) 是执行状态的唯一来源；七个阶段汇总和 28 个执行项已拆分，当前无 activeItem，下一项 bsv-r3-keys；**R0（6/6）、R1（3/3）、R2（2/2）阶段全部完成、门禁 PASS**，进入 R3 业务 SDK 适配；R3 首组已开始，base 侧共享值类型基座（BsvHashBytes／BsvAddress／BsvAmount）完成并通过 base 严格验收。既有升级与测试事项保持原样，不计为本次验收。
 
 重启先读 ../AGENTS.md、../mvn-command.md、本目录 AGENTS.md、feature_list.json.planDoc、feature_list.json 与 progress.md，运行不带参数的 ./init.sh。授权在既定计划范围持续有效，无需重复请求。一次只做一个执行项，验证及提交齐全后更新状态。
 
@@ -21,6 +21,6 @@
 
 ## Next Session
 
-唯一下一步是 bsv-r3-keys：迁移 metanet4j-sdk 的密钥与身份组（PrivateKey／PublicKey／EcKeyLiteExtend／AddressEnhance／MasterPrivateKey／CryptoHelper／Ecies／BAP 变体与派生），KeyBag 反查改为显式派生 + unlockingScriptTemplate；改完核对 API／测试映射并运行该组行为测试。R3 共五组（keys／scripts／transactions／protocols／accept），只在五组全部通过后完成阶段。注意 unit-test-inventory.json 必须与源码增删同步，否则严格验收直接拒绝。持续实施授权已记录。门禁用法 `python3 bsv-task-gate.py --stage r0|r1|...`。
+唯一下一步是继续 bsv-r3-keys：SDK 侧密钥与身份组迁移（metanet4j-sdk 生产 49 文件／测试 41 文件含旧引用），用 base 的 BsvHashBytes／BsvAddress／BsvAmount／BsvNetwork 承接；SDK 需整模块编译通过，跨组最小必要修改要在证据中登记。R3 共五组（keys／scripts／transactions／protocols／accept），只在五组全部通过后完成阶段。注意 unit-test-inventory.json 必须与源码增删同步，否则严格验收直接拒绝。持续实施授权已记录。门禁用法 `python3 bsv-task-gate.py --stage r0|r1|...`。
 
 阶段门禁用法：`python3 bsv-task-gate.py --stage r0|r1|...`；证据刷新：`./refresh-r0-api-evidence.sh`。

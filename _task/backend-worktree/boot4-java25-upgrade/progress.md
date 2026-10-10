@@ -2,9 +2,9 @@
 
 ## Current State
 
-- **Last Updated**：2026-10-10T21:55:00+08:00。
+- **Last Updated**：2026-10-10T22:25:00+08:00。
 - **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射、逐用例迁移清单和 V01—V14 独立样本，R0、R1、R2 三个阶段已完成，进入 R3 业务 SDK 适配（5 个执行项）。
-- **Active Item**：无；**R0（6/6）、R1（3/3）、R2（2/2）阶段全部完成**，下一项 `bsv-r3-keys`（R3 阶段）。实时状态唯一来源为 [feature_list.json](feature_list.json)。
+- **Active Item**：无；**R0（6/6）、R1（3/3）、R2（2/2）阶段全部完成**；R3 进行中，`bsv-r3-keys` 的共享值类型基座已落地，下一项继续 SDK 密钥与身份组迁移。实时状态唯一来源为 [feature_list.json](feature_list.json)。
 - **授权范围**：胡先生已明确指令“开始按照计划执行，先拆feature，记录执行进度和状态”。授权覆盖既定 R0—R6，原 SDK 输入、共享设施配置及远端边界继续适用。
 - 七阶段汇总与 28 个执行项已拆分；每项记录依赖、产物、完成条件、验证证据及提交，一次只推进一个执行项。
 
@@ -29,7 +29,7 @@
 - [baseline.json](baseline.json)：五仓库与 25 POM 指纹、67 个生产／69 个测试直接旧引用、base 既有 diff 已冻结。
 - `evidence/bsv-replace/r0-source-20261010-1130/`：来源 revision、full-evidence verify 和 ./init.sh 均退出 0。原验收证据复核 PASS，未重跑测试体。
 
-- 任务入口及状态门禁提交：`fa59f4b`；实施执行项已完成 **11/28**，**R0、R1、R2 阶段 done**，R3—R6 尚未开始。
+- 任务入口及状态门禁提交：`fa59f4b`；实施执行项已完成 **11/28**，**R0、R1、R2 阶段 done**；R3 首组（`bsv-r3-keys`）已开始，base 侧共享值类型基座完成。
 - `evidence/bsv-replace/r0-harness-20261010/`：自检正常状态退出 0，12 项真实进程门禁检查通过，异常返回非零；子仓库及既有 base diff 保持。
 
 ### bsv-r0-api 方法级 API 与调用映射
@@ -79,6 +79,14 @@
 - 严格验收：`verify-unit.py --mode accept --scope metanet4j-base` 退出 0，**30 例（8 类）0 失败 0 错误 0 跳过，覆盖率未覆盖全为 0，gaps=0**；base 制品安装后源／缓存 JAR 哈希一致（`04a34cf7…`）。
 - 证据：[bsv-replace-r2-behavior.json](bsv-replace-r2-behavior.json)、[bsv-replace-r2-accept.json](bsv-replace-r2-accept.json) 与 `evidence/bsv-replace/r2-{behavior,accept}-20261010/`；base 提交 `bf294ef`。R2 门禁 `bsv-task-gate.py --stage r2` **PASS**。
 
+### bsv-r3-keys 进行中：共享值类型基座已完成
+
+- 新增 [BsvHashBytes](metanet4j-base/src/main/java/com/metanet4j/base/bsv/BsvHashBytes.java)（32 字节哈希，显式内部序／显示序）、[BsvAddress](metanet4j-base/src/main/java/com/metanet4j/base/bsv/BsvAddress.java)（base58 地址与网络校验）、[BsvAmount](metanet4j-base/src/main/java/com/metanet4j/base/bsv/BsvAmount.java)（long satoshi 与边界校验），作为 SDK／component 迁移的统一值类型载体。
+- [BsvValueTypesTest](metanet4j-base/src/test/java/com/metanet4j/base/bsv/BsvValueTypesTest.java) 13 例覆盖 V01（字节序）、V02（双网络地址与跨网络拒绝）、V10（金额边界）相关判定。
+- 清单与例外同步：[unit-test-inventory.json](unit-test-inventory.json) 登记 3 个生产类与 1 个测试类；[unit-coverage-exceptions.json](unit-coverage-exceptions.json) 新增 metanet4j-base 两处经核对的纯分支例外（行覆盖 100%、无未覆盖方法，仅 javac 短路字节码的合成分支无法标记）。
+- 验收：`verify-unit.py --mode accept --scope metanet4j-base` 退出 0，**43 例 0 失败／错误／跳过，行与指令未覆盖为 0，gaps=0**；base 提交 `caaeb8b`。
+- SDK 侧待迁移面：`metanet4j-sdk` 生产 49 个文件、测试 41 个文件仍含旧引用（生产 246 处、测试 242 处 import），按密钥／脚本／交易／协议四组推进，五组全部通过才算 R3 完成。
+
 ## Recommended Next Step
 
-执行 `bsv-r3-keys`（R3 首组：密钥与身份）：按 [bsv-replace-api-map.json](bsv-replace-api-map.json) 迁移 `PrivateKey`／`PublicKey`／`EcKeyLiteExtend`／`AddressEnhance`／`MasterPrivateKey`／`CryptoHelper`／`Ecies`／BAP 变体与派生，删除 `KeyBag` 反查改为显式派生 + 解锁模板；每组改完核对 API／测试映射并运行该组全部行为测试。R4—R6 待前置阶段门禁。
+继续 `bsv-r3-keys`：迁移 `metanet4j-sdk` 的密钥与身份组（`PrivateKey`／`PublicKey`／`EcKeyLiteExtend`／`AddressEnhance`／`MasterPrivateKey`／`CryptoHelper`／`Ecies`／BAP 变体与派生），用 `BsvHashBytes`／`BsvAddress`／`BsvAmount`／`BsvNetwork` 承接旧类型；`KeyBag` 反查改为显式派生 + `unlockingScriptTemplate`。注意 SDK 仓库要整模块编译通过才能验收，跨组编译依赖按最小必要修改闭合并在 feature 证据中登记。R4—R6 待前置阶段门禁。
