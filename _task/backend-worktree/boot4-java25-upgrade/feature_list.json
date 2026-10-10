@@ -962,7 +962,8 @@
         "R3 测试迁移（metanet4j-sdk 提交 baec956、1577002）：**BitcoinschemaTransactionTest 与 SigmaProtocolModelTest 编译清零**（前者 246 行的旧 Address/PrivKey 用法改 AddressEnhance.fromPrivateKey；后者 ScriptBuilder/Net/旧 Script/旧 Transaction 改新 SDK）；**OrdTransactionTest 换到新 API**（keyBag→keyProvider、UTXO→BsvUtxo、旧 Transaction→新 SDK、Address.fromBase58(net,x)→AddressEnhance.fromBase58(x)，其 io.bitcoinsv 引用清零，剩 4 处其它旧用法待续）。**旧引用测试文件 20 → 18**。当前有错文件 6 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、BsocialDataLockBuilderContractTest 26、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、OrdTransactionTest 4。",
         "R3 测试迁移（metanet4j-sdk 提交 a56489d、53bd659）：**OrdTransactionTest 编译清零（4 → 0）**——Transaction(Net,bytes)→fromBinary、getHashAsString()→id(\"hex\")、SigHash.Flags.*→TransactionSignature int 常量；**RemoteSignBitcoinschemaTransactionTest 换到新 API**（Coin→BsvAmount、旧 Transaction→新 SDK、getKeyBag→getKeyProvider、signTx(null,…)→signTx(keyProvider,…)、PublicKey.fromHex(privKey.getPublicKeyAsHex())→privKey.getPublicKey()），其 io.bitcoinsv 引用清零，剩 4 处待续。**TransactionContextTest 的三个子类已全部换到新 API**。**旧引用测试文件 18 → 17**（起点 41，降 59%）。当前有错文件 6 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、BsocialDataLockBuilderContractTest 26、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18、RemoteSignBitcoinschemaTransactionTest 4。",
         "R3 测试迁移（metanet4j-sdk 提交 f9a6042）：**RemoteSignBitcoinschemaTransactionTest 编译清零（4 → 0）**——公钥访问改 privKey.getPublicKey()、签名类型由旧 ECDSASignature+encodeToDER() 改新 SDK Signature+toDER()（toBytes 包装再 Base64）、RemoteTransactionBuilder 构造实参由 new RemoteTransactionSigner() 改 keyProvider（远程签名器按 §3 不再是构造参数）。**至此 TransactionContextTest 家族（父类 + Bitcoinschema / Ord / RemoteSignBitcoinschema 三个子类）全部迁移完成。** 剩 5 个有错文件：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、BsocialDataLockBuilderContractTest 26、CryptoHelperContractTest 24、SpecifyBapBaseContractTest 18，另显形 TransactionBuilderContractTest（4）。旧引用测试文件 17/54。",
-        "R3 测试迁移（metanet4j-sdk 提交 d8dd9ca）：TransactionBuilderContractTest（244 行，即 §12 中定义费用口径的那个用例所在文件）批量换到新 API——类型（KeyBag→SigningKeyProvider、UTXOProvider 泛型、UTXO→BsvUtxo、Coin→BsvAmount、Address→AddressEnhance、Transaction/Script→新 SDK）、访问器（inputs/outputs.get(i)、inputSum/outputSum 助手、new Transaction(Net.X)→new Transaction()、ScriptBuilder→Script 链式）、新增 toBoxed/inputSum/outputSum 助手，并删除 9 个旧 import。**该文件 io.bitcoinsv 引用清零，旧引用测试文件 17 → 16**（起点 41，降 61%）；剩 4 处其它旧用法待续。过程记录：批量替换在 import 行误加泛型（与第 30 轮同一错误），再次验证「import 行必须整行替换」。"
+        "R3 测试迁移（metanet4j-sdk 提交 d8dd9ca）：TransactionBuilderContractTest（244 行，即 §12 中定义费用口径的那个用例所在文件）批量换到新 API——类型（KeyBag→SigningKeyProvider、UTXOProvider 泛型、UTXO→BsvUtxo、Coin→BsvAmount、Address→AddressEnhance、Transaction/Script→新 SDK）、访问器（inputs/outputs.get(i)、inputSum/outputSum 助手、new Transaction(Net.X)→new Transaction()、ScriptBuilder→Script 链式）、新增 toBoxed/inputSum/outputSum 助手，并删除 9 个旧 import。**该文件 io.bitcoinsv 引用清零，旧引用测试文件 17 → 16**（起点 41，降 61%）；剩 4 处其它旧用法待续。过程记录：批量替换在 import 行误加泛型（与第 30 轮同一错误），再次验证「import 行必须整行替换」。",
+        "R3 测试迁移（metanet4j-sdk 提交 e32a726）：TransactionBuilderContractTest 继续迁移——getInputs/getOutputs→inputs/outputs、getOutpoint().getIndex/getHash→sourceOutputIndex/sourceTXID、output.getValue()→BsvAmount.fromSdkValue(output.satoshis)、getScriptBytes/getProgram→lockingScript.toUint8Array()/toUint8Array()、Script.op→writeOpCode、去掉 ScriptBuilder 残留的 .build()。仍有 5 处错误（第 84/88 行的 addOutput 等新 SDK 交易构造）。过程记录：**第二次犯「正则吞掉接收者」的错误**（批量替换 output.getValue() 时替换串写成 BsvAmount.fromSdkValue(.outputs.get(N).satoshis)），已用补回接收者的正则修复；结论已固化：带接收者的替换必须用 ([\\w.()\\[\\]]+?) 捕获接收者。"
       ],
       "commits": [
         {
@@ -1204,6 +1205,10 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "d8dd9ca"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "e32a726"
         }
       ],
       "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，有错文件 6 个；旧引用测试文件 16/54（起点 41，降 61%）。",
