@@ -2,7 +2,7 @@
 
 ## 当前状态
 
-胡先生已于 2026-10-10 授权“开始按照计划执行，先拆feature，记录执行进度和状态”。[feature_list.json](feature_list.json) 是执行状态的唯一来源；七个阶段汇总和 28 个执行项已拆分，拆分项已提交 1439448，来源冻结已完成，任务入口已完成，当前无 activeItem，下一项 bsv-r0-api；R0 进度 2/6。既有升级与测试事项保持原样，不计为本次验收。
+胡先生已于 2026-10-10 授权“开始按照计划执行，先拆feature，记录执行进度和状态”。[feature_list.json](feature_list.json) 是执行状态的唯一来源；七个阶段汇总和 28 个执行项已拆分，拆分项已提交 1439448，来源冻结已完成，任务入口已提交 fa59f4b，当前无 activeItem，下一项 bsv-r0-api；R0 进度 2/6。既有升级与测试事项保持原样，不计为本次验收。
 
 重启先读 ../AGENTS.md、../mvn-command.md、本目录 AGENTS.md、feature_list.json.planDoc、feature_list.json 与 progress.md，运行不带参数的 ./init.sh。授权在既定计划范围持续有效，无需重复请求。一次只做一个执行项，验证及提交齐全后更新状态。
 

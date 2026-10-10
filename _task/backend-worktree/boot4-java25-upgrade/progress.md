@@ -2,7 +2,7 @@
 
 ## Current State
 
-- **Last Updated**：2026-10-10T11:36:00+08:00。
+- **Last Updated**：2026-10-10T11:37:58+08:00。
 - **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结和任务入口，继续方法级 API 映射。
 - **Active Item**：无；R0 已完成 2/6，下一项 `bsv-r0-api`。实时状态唯一来源为 [feature_list.json](feature_list.json)。
 - **授权范围**：胡先生已明确指令“开始按照计划执行，先拆feature，记录执行进度和状态”。授权覆盖既定 R0—R6，原 SDK 输入、共享设施配置及远端边界继续适用。
@@ -29,6 +29,7 @@
 - [baseline.json](baseline.json)：五仓库与 25 POM 指纹、67 个生产／69 个测试直接旧引用、base 既有 diff 已冻结。
 - `evidence/bsv-replace/r0-source-20261010-1130/`：来源 revision、full-evidence verify 和 ./init.sh 均退出 0。原验收证据复核 PASS，未重跑测试体。
 
+- 任务入口及状态门禁提交：`fa59f4b`；实施执行项已完成 **2/28**，R0 为 **2/6**，其余阶段尚未开始。
 - `evidence/bsv-replace/r0-harness-20261010/`：自检正常状态退出 0，12 项真实进程门禁检查通过，异常返回非零；子仓库及既有 base diff 保持。
 
 ## Recommended Next Step

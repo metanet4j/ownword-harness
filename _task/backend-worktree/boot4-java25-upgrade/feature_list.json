@@ -556,7 +556,12 @@
         "python3 test-init.py：12 项真实进程检查，正常状态退出 0，旧 --full 退出 2，其余无效状态退出 1；原始输出见 evidence/bsv-replace/r0-harness-20261010/checks.log。",
         "evidence/bsv-replace/r0-harness-20261010/checks.json：Bash/Python 语法、./init.sh、12 项异常退出及子仓库基线保持检查 PASS。"
       ],
-      "commits": [],
+      "commits": [
+        {
+          "repository": "ownword",
+          "commit": "fa59f4b049f492fcc8385313c10557ab4a673347"
+        }
+      ],
       "statusNote": "当前计划及替换分支检查已校正；状态、依赖、证据及阶段门禁异常返回非零，旧 --full 拒绝执行。",
       "startedAt": "2026-10-10T11:32:04+08:00",
       "completedAt": "2026-10-10T11:36:00+08:00"
@@ -1156,7 +1161,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-10T11:36:00+08:00",
+  "updatedAt": "2026-10-10T11:37:58+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
