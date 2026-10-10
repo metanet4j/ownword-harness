@@ -816,7 +816,7 @@
       "name": "迁移 base BAP 与 AIP",
       "description": "对应计划 R2；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r2-base",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "bsv-r1-fingerprint"
       ],
@@ -830,16 +830,29 @@
         "metanet4j-base",
         "evidence/bsv-replace/r2-behavior-*/"
       ],
-      "evidence": [],
-      "commits": [],
-      "statusNote": "待前置执行项及阶段门禁通过。"
+      "evidence": [
+        "bsv-replace-r2-behavior.json：改动清单、产物指纹、公开类型变化（NetworkParameters → BsvNetwork）、110 项新旧实现奇偶校验结论与证据分离说明。",
+        "evidence/bsv-replace/r2-behavior-20261010/parity/：一次性奇偶校验工程（Parity.java + parity.log），旧路径 bitcoinj-base 1.0.4、新路径 metanet4j-bsv-sdk 0.2.0，同输入 110 项比较 0 差异、退出 0。",
+        "base 生产与测试源码旧引用清零：grep io.bitcoinsv／org.bitcoinj 无命中；bsv-api-audit.py 记录 base 残留 0／0。",
+        "unit-test-inventory.json 同步：新增 BsvNetwork（生产）与 BsvNetworkTest（7 个 unit 方法），清单与磁盘逐文件一致。",
+        "evidence/bsv-replace/r2-behavior-20261010/verify-unit-base.log：迁移后严格验收退出 0（30 例 0 失败／错误／跳过）。"
+      ],
+      "commits": [
+        {
+          "repository": "metanet4j-base",
+          "commit": "bf294ef"
+        }
+      ],
+      "statusNote": "采用既有 POM 输入；BapHelper／AipHelper 与全部调用迁移完成；V01／V02／V04／V05 相关行为由测试与奇偶校验覆盖。",
+      "startedAt": "2026-10-10T21:30:00+08:00",
+      "completedAt": "2026-10-10T19:49:29+08:00"
     },
     {
       "id": "bsv-r2-accept",
       "name": "base 严格验收与安装",
       "description": "对应计划 R2；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r2-base",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "bsv-r2-behavior"
       ],
@@ -852,9 +865,22 @@
       "deliverables": [
         "evidence/bsv-replace/r2-accept-*/"
       ],
-      "evidence": [],
-      "commits": [],
-      "statusNote": "待前置执行项及阶段门禁通过。"
+      "evidence": [
+        "bsv-replace-r2-accept.json：命令与退出码、逐类执行数、制品指纹、V01／V02／V04／V05 逐条对账。",
+        "evidence/bsv-replace/r2-accept-20261010/verify-unit-base.log：verify-unit.py --mode accept --scope metanet4j-base 退出 0，tests=30 failures=0 errors=0 skipped=0，覆盖率六类计数未覆盖全为 0，gaps=0。",
+        "evidence/bsv-replace/r2-accept-20261010/surefire-per-class.json：8 个测试类的逐类执行数（AipTest 7、BapTest 2、ProtocolContractTest 2、BsvNetworkTest 7、BitcoinSchemaDtoTest 3、TxUtxoDtoTest 4、ProtocolTypeTest 2、JacksonUtilTest 3）。",
+        "evidence/bsv-replace/r2-accept-20261010/install-base.log 与 JAR 双向哈希：com.metanet4j:metanet4j-base:0.2.0 源 JAR 与目标缓存 JAR sha256 一致（04a34cf7…）。",
+        "独立提交 bf294ef 同时包含本任务 POM 与实现改动，base 工作区干净。"
+      ],
+      "commits": [
+        {
+          "repository": "metanet4j-base",
+          "commit": "bf294ef"
+        }
+      ],
+      "statusNote": "严格验收通过且 base 制品已安装；failures／errors／skipped 全为 0、gaps=0，V01／V02／V04／V05 逐条对账通过。",
+      "startedAt": "2026-10-10T21:30:00+08:00",
+      "completedAt": "2026-10-10T19:49:29+08:00"
     },
     {
       "id": "bsv-r3-keys",
@@ -1250,7 +1276,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-10T19:38:14+08:00",
+  "updatedAt": "2026-10-10T19:49:29+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1263,7 +1289,7 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": "bsv-r2-behavior",
+  "nextItem": "bsv-r3-keys",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
@@ -1316,7 +1342,7 @@
       "id": "bsv-replace-r2-base",
       "name": "R2 base 适配",
       "description": "迁移 BAP 标识与 AIP 验签，清除 base 的旧类型并完成严格测试及安装。",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "bsv-replace-r1-artifact"
       ],
@@ -1330,7 +1356,7 @@
       ],
       "progress": {
         "total": 2,
-        "done": 0
+        "done": 2
       }
     },
     {

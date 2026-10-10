@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "featureId": "bsv-r2-accept",
+  "generatedAt": "2026-10-10T19:49:18+08:00",
+  "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+  "planSection": "4 R2 命令与门禁；6 R2 至 R4",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "verify-unit.py",
+        "--mode",
+        "accept",
+        "--scope",
+        "metanet4j-base"
+      ],
+      "exitCode": 0,
+      "log": "evidence/bsv-replace/r2-accept-20261010/verify-unit-base.log",
+      "output": "tests=30 failures=0 errors=0 skipped=0；覆盖率未覆盖 0（INSTRUCTION/BRANCH/LINE/COMPLEXITY/METHOD/CLASS 全为 0 missed）；gaps=0"
+    },
+    {
+      "command": [
+        "mvn",
+        "-o",
+        "-f",
+        "metanet4j-base/pom.xml",
+        "install",
+        "-DskipTests"
+      ],
+      "exitCode": 0,
+      "log": "evidence/bsv-replace/r2-accept-20261010/install-base.log"
+    }
+  ],
+  "surefire": {
+    "perClass": [
+      {
+        "class": "com.metanet4j.base.AipTest",
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.metanet4j.base.BapTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.metanet4j.base.ProtocolContractTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.metanet4j.base.bsv.BsvNetworkTest",
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.metanet4j.base.dto.BitcoinSchemaDtoTest",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.metanet4j.base.dto.TxUtxoDtoTest",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.metanet4j.base.type.ProtocolTypeTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.metanet4j.base.util.JacksonUtilTest",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    ],
+    "total": {
+      "tests": 30,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "artifactInstalled": {
+    "coordinates": "com.metanet4j:metanet4j-base:0.2.0",
+    "sourceJarSha256": "04a34cf75a33e85f66c6d6384371536b09b40f329bb5374ec2ff4562009040d5",
+    "installedJarSha256": "04a34cf75a33e85f66c6d6384371536b09b40f329bb5374ec2ff4562009040d5"
+  },
+  "behaviorReconciliation": {
+    "note": "V01—V14 中与 base 相关的样本按测试映射逐条对账",
+    "V01": {
+      "sample": "Base58Check 往返与 CompactSize 边界（BsvNetworkTest.versionBytesMatchFixedVectors 使用 V02 固定 hash160；AipHelper 的 VarInt 长度编码由消息体验签覆盖）",
+      "status": "covered"
+    },
+    "V02": {
+      "sample": "主网 1cMh228HTCiwS8ZsaakH8A8wze1JR5ZsP 与测试网 mg8Jz5776UdyiYcBb9Z873NTozEiADRW5H 由 BsvNetworkTest 逐字核对；网络版本字节拒绝由 acceptsOwnVersionsAndRejectsForeignOnes 覆盖",
+      "status": "covered"
+    },
+    "V04": {
+      "sample": "BAP 身份标识 3bcbMuLoBYTYTXKjthzjwiWze4Eg 由 BapTest 与奇偶校验 110 项对账",
+      "status": "covered"
+    },
+    "V05": {
+      "sample": "compact 签名头 27..34、非法 Base64、1／64／65／66 字节、篡改恢复选择子与跨网络拒绝由 AipTest 7 例覆盖；110 项新旧奇偶比较一致",
+      "status": "covered"
+    }
+  },
+  "commits": [
+    {
+      "repository": "metanet4j-base",
+      "commit": "bf294ef"
+    }
+  ],
+  "knownLimitations": [
+    "base 无 integration／external 用例，故本轮无 skipped；其余模块待后续阶段。"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "featureId": "bsv-r2-behavior",
+  "generatedAt": "2026-10-10T19:48:11+08:00",
+  "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
+  "planSection": "4 R2；3 类型与行为迁移方案",
+  "changes": {
+    "added": [
+      "metanet4j-base/src/main/java/com/metanet4j/base/bsv/BsvNetwork.java（最小网络值类型）",
+      "metanet4j-base/src/test/java/com/metanet4j/base/bsv/BsvNetworkTest.java"
+    ],
+    "migrated": [
+      "metanet4j-base/src/main/java/com/metanet4j/base/aip/AipHelper.java",
+      "metanet4j-base/src/main/java/com/metanet4j/base/bap/BapHelper.java",
+      "metanet4j-base/src/test/java/com/metanet4j/base/AipTest.java"
+    ],
+    "inventoryUpdated": [
+      "unit-test-inventory.json：新增 BsvNetwork（生产）与 BsvNetworkTest（测试，7 个 unit 方法）"
+    ],
+    "oldTypesRemoved": [
+      "NetworkParameters",
+      "MainNetParams",
+      "AddressLite",
+      "ECKeyLite",
+      "Sha256Hash",
+      "Utils（bitcoinjsv）",
+      "VarInt",
+      "ECDSASignature",
+      "Base58"
+    ],
+    "publicApiChanges": [
+      "AipHelper.verifySign(..., NetworkParameters) → verifySign(..., BsvNetwork)：公开类型替换，调用方同步（AipTest）",
+      "新增 BsvNetwork 承载网络版本字节；不重建旧库创世块／DNS／检查点等字段"
+    ]
+  },
+  "artifactFingerprints": {
+    "metanet4j-base/src/main/java/com/metanet4j/base/bsv/BsvNetwork.java": "859a05db1c94bea98cc153d674346af06dfe5e3315b470edafd64697a8c0016b",
+    "metanet4j-base/src/main/java/com/metanet4j/base/aip/AipHelper.java": "5163909f6863a42823dfdac1424d96585a8060b7b3b45d405ca307609f30da72",
+    "metanet4j-base/src/main/java/com/metanet4j/base/bap/BapHelper.java": "76057c948dd9928aa36f6e04204b3ee3b5d2b12184d9bf0bf200ee01ecdf5b80",
+    "metanet4j-base/src/test/java/com/metanet4j/base/AipTest.java": "3a490f3e26ac49bb68a1e945f82a69398a671966a1800114d0ee83540ceff918",
+    "metanet4j-base/src/test/java/com/metanet4j/base/bsv/BsvNetworkTest.java": "e69382c468eb5c60a4258ce21bc1292404d65a7e6ed4cc1e8a719ca4e5ac0e3e",
+    "unit-test-inventory.json": "a94e782608cbb3302bd6752ce0cd5fe046ff7b7df00bf26b3e63875eb30161d0"
+  },
+  "parityCheck": {
+    "purpose": "新旧实现同输入逐项比较，证明替换未改变既有行为",
+    "source": "evidence/bsv-replace/r2-behavior-20261010/parity/Parity.java",
+    "log": "evidence/bsv-replace/r2-behavior-20261010/parity/parity.log",
+    "oldPath": "bitcoinj-base 1.0.4（ECKeyLite／Sha256Hash／VarInt／AddressLite／MainNetParams）+ spongycastle 1.51.0.0",
+    "newPath": "metanet4j-bsv-sdk 0.2.0（Hash／PublicKey／Utils／Writer）+ BsvNetwork",
+    "comparisons": 110,
+    "differences": 0,
+    "exitCode": 0,
+    "covered": [
+      "BAP 身份标识（root 地址 → Base58(RIPEMD160(SHA256))），并与既有固定向量 3bcbMuLoBYTYTXKjthzjwiWze4Eg 一致",
+      "BSM 验签：4 条消息 × 3 个地址 × 8 种签名（含非法 Base64、1 字节、65 字节全零、头字节 35、64 字节、66 字节）",
+      "recovery 头 27..34 全量轮换（含非压缩头导致地址不匹配的分支）",
+      "主网／测试网地址由 hash160 + 版本字节构造"
+    ],
+    "finding": "替换过程中修正了两处实际缺陷：SDK 的 BigNumber 不接受 byte[]（需 List）、以及恢复公钥取 hash160 时必须按 compact 头的压缩标志选择公钥编码；两处修正后 110 项比较全部一致"
+  },
+  "evidenceSeparation": {
+    "packaging": "R1 制品证据",
+    "behavior": "本文件与 parity/",
+    "unit": "evidence/20261010T114732Z 与 EV/unit-evidence"
+  },
+  "knownLimitations": [
+    "base 仅 2 个生产类涉及旧库，其余模块（sdk／component）待 R3／R4 迁移。"
+  ]
+}

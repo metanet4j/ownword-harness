@@ -56,6 +56,10 @@
               "kind": "class"
             },
             {
+              "path": "src/main/java/com/metanet4j/base/bsv/BsvNetwork.java",
+              "kind": "enum"
+            },
+            {
               "path": "src/main/java/com/metanet4j/base/constants/ProtocolConstant.java",
               "kind": "class"
             },
@@ -203,6 +207,54 @@
                   "name": "commonStatusNamesAndMessageTimestampAreAvailable",
                   "returnType": "void",
                   "line": 20,
+                  "classification": "unit"
+                }
+              ]
+            },
+            {
+              "path": "src/test/java/com/metanet4j/base/bsv/BsvNetworkTest.java",
+              "classification": "unit",
+              "methods": [
+                {
+                  "name": "exposesMainnetVersionBytes",
+                  "returnType": "void",
+                  "line": 20,
+                  "classification": "unit"
+                },
+                {
+                  "name": "exposesTestnetVersionBytes",
+                  "returnType": "void",
+                  "line": 32,
+                  "classification": "unit"
+                },
+                {
+                  "name": "regtestSharesTestnetEncodingAndIsTestLike",
+                  "returnType": "void",
+                  "line": 44,
+                  "classification": "unit"
+                },
+                {
+                  "name": "resolvesNamesAndAliases",
+                  "returnType": "void",
+                  "line": 56,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsUnknownOrMissingNames",
+                  "returnType": "void",
+                  "line": 68,
+                  "classification": "unit"
+                },
+                {
+                  "name": "acceptsOwnVersionsAndRejectsForeignOnes",
+                  "returnType": "void",
+                  "line": 75,
+                  "classification": "unit"
+                },
+                {
+                  "name": "versionBytesMatchFixedVectors",
+                  "returnType": "void",
+                  "line": 92,
                   "classification": "unit"
                 }
               ]

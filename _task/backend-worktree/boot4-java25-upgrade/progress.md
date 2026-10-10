@@ -2,9 +2,9 @@
 
 ## Current State
 
-- **Last Updated**：2026-10-10T21:20:00+08:00。
-- **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射、逐用例迁移清单和 V01—V14 独立样本，R0 阶段门禁与 R1 制品接入均已完成，进入 R2 base 适配。
-- **Active Item**：无；**R0、R1 阶段已完成**（6/6、3/3），下一项 `bsv-r2-behavior`（R2 阶段）。实时状态唯一来源为 [feature_list.json](feature_list.json)。
+- **Last Updated**：2026-10-10T21:55:00+08:00。
+- **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射、逐用例迁移清单和 V01—V14 独立样本，R0、R1、R2 三个阶段已完成，进入 R3 业务 SDK 适配（5 个执行项）。
+- **Active Item**：无；**R0（6/6）、R1（3/3）、R2（2/2）阶段全部完成**，下一项 `bsv-r3-keys`（R3 阶段）。实时状态唯一来源为 [feature_list.json](feature_list.json)。
 - **授权范围**：胡先生已明确指令“开始按照计划执行，先拆feature，记录执行进度和状态”。授权覆盖既定 R0—R6，原 SDK 输入、共享设施配置及远端边界继续适用。
 - 七阶段汇总与 28 个执行项已拆分；每项记录依赖、产物、完成条件、验证证据及提交，一次只推进一个执行项。
 
@@ -29,7 +29,7 @@
 - [baseline.json](baseline.json)：五仓库与 25 POM 指纹、67 个生产／69 个测试直接旧引用、base 既有 diff 已冻结。
 - `evidence/bsv-replace/r0-source-20261010-1130/`：来源 revision、full-evidence verify 和 ./init.sh 均退出 0。原验收证据复核 PASS，未重跑测试体。
 
-- 任务入口及状态门禁提交：`fa59f4b`；实施执行项已完成 **9/28**，**R0、R1 阶段 done**，R2—R6 尚未开始。
+- 任务入口及状态门禁提交：`fa59f4b`；实施执行项已完成 **11/28**，**R0、R1、R2 阶段 done**，R3—R6 尚未开始。
 - `evidence/bsv-replace/r0-harness-20261010/`：自检正常状态退出 0，12 项真实进程门禁检查通过，异常返回非零；子仓库及既有 base diff 保持。
 
 ### bsv-r0-api 方法级 API 与调用映射
@@ -71,6 +71,14 @@
 - 指纹绑定：[verify-unit.py](verify-unit.py) 运行元数据新增 `sdkArtifact`，严格模式与 R1 绑定清单双向核对；向同坐标 JAR 追加一字节后严格验收退出 1 并报出两条预期问题，恢复后缺 SDK 指纹的旧证据仍被拒（[bsv-replace-fingerprint.json](bsv-replace-fingerprint.json)）。
 - R1 门禁 `bsv-task-gate.py --stage r1` 退出 0。
 
+### bsv-r2-behavior／bsv-r2-accept（R2 阶段，全部完成）
+
+- base 旧库清零：`AipHelper` 改用 `PublicKey`／`Hash`／`Utils`／`Writer`，`BapHelper` 改用 `Hash.sha256`／`Hash.ripemd160`／`Utils.toBase58`；新增最小网络值类型 [BsvNetwork](metanet4j-base/src/main/java/com/metanet4j/base/bsv/BsvNetwork.java)（地址头／P2SH 头／WIF 前缀／BIP32 版本／测试网标志／名称解析／版本校验），公开参数 `NetworkParameters` → `BsvNetwork`。
+- **新旧实现奇偶校验 110 项 0 差异**：一次性工程 `evidence/bsv-replace/r2-behavior-20261010/parity/`，旧路径 bitcoinj-base 1.0.4、新路径 metanet4j-bsv-sdk 0.2.0，覆盖 BAP 身份标识、BSM 验签 4×3×8 组合、recovery 头 27..34 轮换、主网／测试网地址。过程中修正两处实际缺陷：SDK `BigNumber` 不接受 `byte[]`；恢复公钥取 hash160 必须按 compact 头的压缩标志选择公钥编码。
+- 清单同步：[unit-test-inventory.json](unit-test-inventory.json) 新增 `BsvNetwork` 与 `BsvNetworkTest`（7 个 unit 方法），与磁盘逐文件一致。
+- 严格验收：`verify-unit.py --mode accept --scope metanet4j-base` 退出 0，**30 例（8 类）0 失败 0 错误 0 跳过，覆盖率未覆盖全为 0，gaps=0**；base 制品安装后源／缓存 JAR 哈希一致（`04a34cf7…`）。
+- 证据：[bsv-replace-r2-behavior.json](bsv-replace-r2-behavior.json)、[bsv-replace-r2-accept.json](bsv-replace-r2-accept.json) 与 `evidence/bsv-replace/r2-{behavior,accept}-20261010/`；base 提交 `bf294ef`。R2 门禁 `bsv-task-gate.py --stage r2` **PASS**。
+
 ## Recommended Next Step
 
-执行 `bsv-r2-behavior`（R2 起点）：核对并采用 base 既有 POM 修改，按 [bsv-replace-api-map.json](bsv-replace-api-map.json) 在 `metanet4j-base` 建立 `BsvNetwork`／`HashBytes`／`BsvAddress` 最小业务类型，迁移 `BapHelper`、`AipHelper` 及其测试，替换公开接口中的 `NetworkParameters`／`AddressLite`／`ECKeyLite`／`Sha256Data` 等旧类型；随后 `bsv-r2-accept` 用 `python3 verify-unit.py --mode accept --scope metanet4j-base` 严格验收并安装 base 制品。R3—R6 待前置阶段门禁。
+执行 `bsv-r3-keys`（R3 首组：密钥与身份）：按 [bsv-replace-api-map.json](bsv-replace-api-map.json) 迁移 `PrivateKey`／`PublicKey`／`EcKeyLiteExtend`／`AddressEnhance`／`MasterPrivateKey`／`CryptoHelper`／`Ecies`／BAP 变体与派生，删除 `KeyBag` 反查改为显式派生 + 解锁模板；每组改完核对 API／测试映射并运行该组全部行为测试。R4—R6 待前置阶段门禁。
