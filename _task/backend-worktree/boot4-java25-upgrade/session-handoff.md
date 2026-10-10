@@ -26,3 +26,15 @@
 唯一下一步是继续迁移这批调用方到新交易模型与 `SigningKeyProvider`：`signers/OrdinalsTransactionSigner`（两处 redeem 调用 + `Translate.toTx` + 旧 `TransactionSignature`）、`ordinals/OrdTransactionBuilder`、`transcation/TransactionBuilder`（基类：`KeyBag→SigningKeyProvider`、`Coin→BsvAmount`、`Transaction→新 SDK`、`AddressLite→AddressEnhance`、`UTXO→compat.Utxo`）、`remote/RemoteTransactionBuilder` 与 `RemoteOrdTransactionBuilder`、`remote/RemoteTransactionSigner`、`BobHelper`。字段级对应表见 migration-rules §7，`ScriptExtend` 契约见 §11。**进度以 `grep -rl 'io\.bitcoinsv' metanet4j-sdk/src/main/java --include=*.java | wc -l` 的文件数下降为准**（当前 28，起点 49），不要以编译错误数判断（旧依赖仍在 SDK pom 中，编译期可解析）。R3 共五组（keys／scripts／transactions／protocols／accept），只在五组全部通过后完成阶段。注意 unit-test-inventory.json 必须与源码增删同步，否则严格验收直接拒绝。持续实施授权已记录。门禁用法 `python3 bsv-task-gate.py --stage r0|r1|...`。
 
 阶段门禁用法：`python3 bsv-task-gate.py --stage r0|r1|...`；证据刷新：`./refresh-r0-api-evidence.sh`。
+
+## Blockers
+
+- **轮次预算用尽**（40/40），非技术阻塞：R3 测试侧 9 个文件、R3 严格验收、R4（component 52 生产／115 测试旧引用）、
+  R5（旧依赖清理）、R6（全量验收与交付）未完成，按估算还需 21—37 轮。工作区干净、`./init.sh` 通过、无残留临时文件。
+- 未完成项**未标记 done**（符合 DoD）。
+
+## 交接入口
+
+- 阶段报告：`BSV依赖替换阶段报告-20261011-221500.md`（度量、约束执行情况、证据索引、剩余工作量与建议）
+- 执行配方：`evidence/bsv-replace/r3-keys-20261010/migration-rules.md` §14—§20（字典与三步法，无需重新调研）
+- 测量纪律：只用「有错误的文件数」与「旧引用文件数」双指标，每轮先重跑 `test-compile` 取真实基线

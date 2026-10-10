@@ -935,7 +935,8 @@
         "R3 测试迁移起步（metanet4j-sdk 提交 9fe6f8c）：按 §20 字典迁移三个最小文件——PreSignHashContextContractTest（Sha256Hash→BsvHashBytes、Coin→BsvAmount）、PrivateKeyTest（MainNetParams.get()→BsvNetwork.MAINNET）、AddressLiteTest（AddressLite/RegTestParams→AddressEnhance.fromBase58(BsvNetwork.REGTEST,...)）。旧引用测试文件数 41 → 38；有编译错误的测试文件数 14 → 13。**测量更正**：测试编译错误总数恒为 200，系 javac 错误上限封顶，不能作为进度尺；后续以「有错误的文件数」与「旧引用文件数」双指标衡量。",
         "R3 测试迁移继续（metanet4j-sdk 提交 cf50712）：OrdHistoricalFixtureContractTest 的旧 Transaction(Net.MAINNET, bytes) 改新 SDK Transaction.fromBinary(...)；BapVariantContractTest 的 HDUtils.parsePath + List<ChildNumber> 改 BapPath.parse(...)、HDUtils.formatPath 改 path.toString()。**有编译错误的测试文件数 13 → 11；旧引用测试文件数 38 → 36**。剩余 11 个文件：BapBaseCoreContractTest、KeyAddressContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest、BapProviderKeyBagTest、EcKeyLiteExtendContractTest、EciesContractTest、BapBaseTest、WordsvBapBaseTest、PreSignHashContextContractTest。",
         "R3 测试迁移本轮收口（metanet4j-sdk 提交 90db91c）：PreSignHashContextContractTest 的公钥构造改为业务侧 PrivateKey.of(BigInteger.TWO).getPublicKey()。**本轮累计：有编译错误的测试文件数 13 → 10；旧引用测试文件数 38 → 36**。剩余 10 个有错文件：BapBaseCoreContractTest、KeyAddressContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest、BapProviderKeyBagTest、EcKeyLiteExtendContractTest、EciesContractTest、BapBaseTest、WordsvBapBaseTest。",
-        "R3 测试迁移（metanet4j-sdk 提交 c37bf7a）：WordsvBapBaseTest 的 Ecies 调用适配新签名——encrypt 第二实参改 getEncryptKey().getPublicKey().getPublicKey()、decrypt 第二实参改 getEncryptKey().getKey()。有编译错误的测试文件数 10 → 9。剩余 9 个：BapBaseCoreContractTest、KeyAddressContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest、BapProviderKeyBagTest、EcKeyLiteExtendContractTest、EciesContractTest、BapBaseTest。"
+        "R3 测试迁移（metanet4j-sdk 提交 c37bf7a）：WordsvBapBaseTest 的 Ecies 调用适配新签名——encrypt 第二实参改 getEncryptKey().getPublicKey().getPublicKey()、decrypt 第二实参改 getEncryptKey().getKey()。有编译错误的测试文件数 10 → 9。剩余 9 个：BapBaseCoreContractTest、KeyAddressContractTest、CryptoHelperContractTest、SpecifyBapBaseContractTest、BapBaseLifecycleTest、BapProviderKeyBagTest、EcKeyLiteExtendContractTest、EciesContractTest、BapBaseTest。",
+        "阶段报告产出（本轮次预算用尽）：`BSV依赖替换阶段报告-20261011-221500.md`——汇总 R0—R2 完成、R3 生产侧完成（生产编译 0 错误、旧引用 49 → 3）、R3 测试侧进行中（有错文件 14 → 9、旧引用测试文件 36/54），R4—R6 未开始；含关键度量、测量纪律、证据索引、剩余工作量估算（R3 测试 4—8 轮 + 验收 2—3 轮、R4 8—15 轮、R5 3—5 轮、R6 4—6 轮）与后续排期建议。"
       ],
       "commits": [
         {
@@ -1055,7 +1056,7 @@
           "commit": "c37bf7a"
         }
       ],
-      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试有错文件 9、旧引用测试文件 36/54。",
+      "statusNote": "进行中（轮次预算用尽，未完成）：R0／R1／R2 完成；R3 生产侧完成（SDK 生产编译 0 错误、生产旧引用 3）；R3 测试侧 9 个文件待迁；R4／R5／R6 未开始。阶段报告见 BSV依赖替换阶段报告-20261011-221500.md。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
