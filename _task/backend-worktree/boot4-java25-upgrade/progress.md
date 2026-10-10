@@ -2,9 +2,9 @@
 
 ## Current State
 
-- **Last Updated**：2026-10-10T19:35:00+08:00。
-- **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射和逐用例迁移清单，继续冻结 V01—V14 独立样本。
-- **Active Item**：无；R0 已完成 4/6，下一项 `bsv-r0-vectors`。实时状态唯一来源为 [feature_list.json](feature_list.json)。
+- **Last Updated**：2026-10-10T20:05:00+08:00。
+- **Current Objective**：按 [实施计划](doc/BSV依赖替换计划-20261010-103802.md) 串行执行 R0—R6，已完成 feature 拆分、基线冻结、任务入口、方法级 API 映射、逐用例迁移清单和 V01—V14 独立样本，继续 R0 阶段门禁复核。
+- **Active Item**：无；R0 已完成 5/6，下一项 `bsv-r0-gate`。实时状态唯一来源为 [feature_list.json](feature_list.json)。
 - **授权范围**：胡先生已明确指令“开始按照计划执行，先拆feature，记录执行进度和状态”。授权覆盖既定 R0—R6，原 SDK 输入、共享设施配置及远端边界继续适用。
 - 七阶段汇总与 28 个执行项已拆分；每项记录依赖、产物、完成条件、验证证据及提交，一次只推进一个执行项。
 
@@ -29,7 +29,7 @@
 - [baseline.json](baseline.json)：五仓库与 25 POM 指纹、67 个生产／69 个测试直接旧引用、base 既有 diff 已冻结。
 - `evidence/bsv-replace/r0-source-20261010-1130/`：来源 revision、full-evidence verify 和 ./init.sh 均退出 0。原验收证据复核 PASS，未重跑测试体。
 
-- 任务入口及状态门禁提交：`fa59f4b`；实施执行项已完成 **4/28**，R0 为 **4/6**，其余阶段尚未开始。
+- 任务入口及状态门禁提交：`fa59f4b`；实施执行项已完成 **5/28**，R0 为 **5/6**，其余阶段尚未开始。
 - `evidence/bsv-replace/r0-harness-20261010/`：自检正常状态退出 0，12 项真实进程门禁检查通过，异常返回非零；子仓库及既有 base diff 保持。
 
 ### bsv-r0-api 方法级 API 与调用映射
@@ -48,6 +48,13 @@
 - 口径一致：静态源码计数 = `unit-test-inventory.json` = 既有验收报告，三方 841 且逐模块零差异；`bsv-api-audit.py test-map` 9 项检查 PASS。
 - 已登记两个陷阱：`TxUtxoServiceTest` 类级 external + 继承 integration 会被两组同时排除；JUnit 5 类级 `@Tag` 会被子类继承，禁止用声明数冒充执行数。
 
+### bsv-r0-vectors 冻结 V01—V14 独立样本
+
+- 产物 [bsv-replace-vectors.json](bsv-replace-vectors.json)：14 组全部冻结，134 条样本、126 项独立预期值、19 项指纹；sha256 `ec4f2831…`。
+- 独立复算 24 项 PASS：secp256k1 标量乘法与压缩公钥、Base58Check 地址（主网／测试网）、Hash160、四组 WIF、BSM 前缀、CompactSize 七个边界、BIP39→BIP32 根 xprv（正向复算 + 反向解码）、BAP 标识、6 个历史交易 txid 双 SHA-256 与显示序；全部为纯 Python 实现，不使用被测 Java 代码。
+- 独立复核 14 项 PASS：组齐全、场景与计划第 5 节逐字一致、样本文件／类名／方法真实存在、每组均有独立预期值、指纹可复现、长字面量回读命中。
+- 自洽断言 55 条单独标注，不作为兼容性证据；ECIES 与固定 DER 签名字面量缺失、V08 pushdata 边界与 V10 负数／越界／溢出无既有用例，均登记 notFound 并转入 R3／R4 补充验证。
+
 ## Recommended Next Step
 
-执行 `bsv-r0-vectors`：为 V01—V14 十四组行为冻结独立样本，登记输入、独立预期值、来源提交与 SHA-256；预期值不得由新实现自身生成，历史 raw 交易、签名、前像、路径与协议字节样本须可追溯。需要旧库生成补充样本时在 `evidence/bsv-replace/` 下用独立临时工程、只引用基线旧制品。R1—R6 均待前置阶段门禁。
+执行 `bsv-r0-gate`：复核 R0 完整性与阶段门禁——来源、自检、API 映射、逐用例映射与 14 组样本是否齐全，确认无遗漏旧调用与未决能力缺口，各准备产物来源与检查输出可复查；门禁通过后才允许进入 R1。R1—R6 均待前置阶段门禁。

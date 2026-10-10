@@ -641,7 +641,7 @@
       "name": "冻结 V01—V14 独立样本",
       "description": "对应计划 R0；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r0-baseline",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "bsv-r0-tests"
       ],
@@ -654,9 +654,22 @@
       "deliverables": [
         "bsv-replace-vectors.json"
       ],
-      "evidence": [],
-      "commits": [],
-      "statusNote": "待前置执行项及阶段门禁通过。"
+      "evidence": [
+        "bsv-replace-vectors.json：V01—V14 十四组全部冻结，134 条样本、126 项独立预期值、19 项输入／预期指纹；每组含实际测试类与行号、固定输入、独立预期值、源码来源、SHA-256 与 notFound；sha256 ec4f2831…。",
+        "evidence/bsv-replace/r0-api-work/vectors-independent-check.json：24 项纯 Python 独立复算全部 PASS（secp256k1 标量乘法与压缩公钥、Base58Check 地址、Hash160、四组 WIF、BSM 前缀、CompactSize 七边界、BIP39→BIP32 根 xprv 正向与反向解码、BAP 标识、6 个历史交易 txid 双 SHA-256 与显示序）。",
+        "evidence/bsv-replace/r0-api-work/vectors-verify.json：14 项独立复核 PASS（组齐全、场景与计划第 5 节逐字一致、样本文件／类名／方法真实存在、每组均有独立预期值、指纹可复现、长字面量回读命中、金额与非法输入边界已登记）。",
+        "evidence/bsv-replace/r0-api-work/vectors-summary.json：产物指纹、命令与退出码、逐组统计与已知限制。",
+        "取证来源：ws-v-vectors-a（V03／V04）、ws-v-vectors-b2（V08／V09）、ws-v-vectors-c1（V05／V06）、ws-v-vectors-c2（V11／V13）、ws-v-vectors-own（V01／V02／V07／V10／V12／V14）。"
+      ],
+      "commits": [
+        {
+          "repository": "ownword",
+          "commit": "PENDING"
+        }
+      ],
+      "statusNote": "14 组全部冻结；独立预期值 126 项，自洽断言 55 条单独标注；24 项纯 Python 独立复算 PASS。缺口已登记：ECIES 无既有密文字面量、无固定 DER 签名字面量、V10 负数／越界／溢出无既有用例、V08 pushdata 长度边界无既有用例，均需在 R3／R4 补充验证。",
+      "startedAt": "2026-10-10T19:40:00+08:00",
+      "completedAt": "2026-10-10T19:24:49+08:00"
     },
     {
       "id": "bsv-r0-gate",
@@ -1187,7 +1200,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-10T18:55:18+08:00",
+  "updatedAt": "2026-10-10T19:24:49+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1200,7 +1213,7 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": "bsv-r0-vectors",
+  "nextItem": "bsv-r0-gate",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
@@ -1224,7 +1237,7 @@
       ],
       "progress": {
         "total": 6,
-        "done": 4
+        "done": 5
       }
     },
     {
