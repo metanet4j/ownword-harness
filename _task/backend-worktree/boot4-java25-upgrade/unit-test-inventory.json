@@ -2717,19 +2717,25 @@
                 {
                   "name": "rejectsMissingConnectedOutputWhenResolvingSpendInfo",
                   "returnType": "void",
-                  "line": 257,
+                  "line": 262,
                   "classification": "unit"
                 },
                 {
                   "name": "walksTheWholeOrdinalLockingScriptChainAndItsFailureSides",
                   "returnType": "void",
-                  "line": 311,
+                  "line": 316,
                   "classification": "unit"
                 },
                 {
                   "name": "coversMalformedScriptBranchesOfTheOrdinalHelpers",
                   "returnType": "void",
-                  "line": 436,
+                  "line": 441,
+                  "classification": "unit"
+                },
+                {
+                  "name": "walksTheSharedP2pkhShapeCheckWithRawByteScripts",
+                  "returnType": "void",
+                  "line": 495,
                   "classification": "unit"
                 }
               ],
