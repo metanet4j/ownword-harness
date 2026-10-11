@@ -390,7 +390,7 @@
         },
         {
           "class": "com/metanet4j/sdk/transcation/TransactionBuilder",
-          "reason": "outputSize 的 lockingScript==null 侧不可达：唯一调用点传硬编码非 null（§99，E7）；sign() 三方向（输入侧/输出侧/整体）均容忍，catch 不可达（§108，E10）；satoshisOf 的 null 兜底被更早校验遮蔽（§109，E11）",
+          "reason": "outputSize 的 lockingScript==null 侧不可达：唯一调用点传硬编码非 null（§99，E7）；sign() 三方向（输入侧/输出侧/整体）均容忍，catch 不可达（§108，E10）；satoshisOf 的 null 兜底被更早校验遮蔽（§109，E11）（§361：因 R6 修正 attachSourceOutput 与 completeAndSignTx，outputSize 由 289 行移至 292 行、satoshisOf 由 308 行移至 321 行，属计划第 192 行「仅因行号变化调整精确登记」的情形）",
           "missed": [
             {
               "method": "completeAndSignTx",
@@ -401,14 +401,14 @@
             },
             {
               "method": "outputSize",
-              "line": 289,
+              "line": 292,
               "lineMissed": 0,
               "methodMissed": 0,
               "branchMissed": 1
             },
             {
               "method": "satoshisOf",
-              "line": 308,
+              "line": 321,
               "lineMissed": 0,
               "methodMissed": 0,
               "branchMissed": 1
