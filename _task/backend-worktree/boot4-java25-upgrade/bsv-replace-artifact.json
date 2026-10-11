@@ -172,5 +172,24 @@
     "packagingEvidence": "evidence/bsv-replace/r1-package-20261010/（打包、安装、解析、有效 POM）",
     "testEvidence": "本次未运行 SDK 测试；SDK 测试依据见原任务证据 .cache/evidence/full-run-52-20260901 与 doc/验收报告 系列",
     "rule": "打包不得记为 SDK 测试通过"
-  }
+  },
+  "upstreamDefects": [
+    {
+      "id": "UPSTREAM-001",
+      "artifact": "com.metanet4j:metanet4j-bsv-sdk:0.2.0",
+      "component": "com.metanet4j.bsv.script.Script#parseChunks",
+      "symptom": "解析脚本时遇到 OP_RETURN 后停止切分，其后的 push 数据全部丢失（getChunks() 缺失尾部 chunk）。",
+      "evidence": [
+        "夹具脚本 5 chunk / hex 046c656674057269676874006a047461696c（旧 ScriptBuilder.build() 正确）",
+        "旧 Transaction.bitcoinSerialize() 输出 156 字符 hex，containsTail=true",
+        "新 SDK script.getChunks() 仅 4 chunk（ops=4,5,0,106），tail 丢失",
+        "script.toUint8Array() 仍返回完整 18 字节，证明原始字节未丢、丢失发生在 parseChunks"
+      ],
+      "impact": "任何「OP_RETURN 之后仍带数据」的脚本读取不全；本项目 BOB tape 与 Ordinals 铭文均属该形态。",
+      "decision": "按 R1 边界（外部制品、源码只读）登记为上游缺陷，并在本侧等价规避：BobHelper 改用自实现的 chunksOf(Script) 按 BIP 脚本编码切分；上游修复后可回退。",
+      "workaroundCommit": "见 metanet4j-sdk 本轮提交",
+      "foundAt": "r3-keys（round 117）",
+      "notModifiedUpstream": true
+    }
+  ]
 }
