@@ -2598,49 +2598,49 @@
                 {
                   "name": "changeAmountToleratesMissingOrNonNumericFields",
                   "returnType": "void",
-                  "line": 207,
+                  "line": 213,
                   "classification": "unit"
                 },
                 {
                   "name": "prepareInputsRejectsNullProviderAndToleratesUnusableInputs",
                   "returnType": "void",
-                  "line": 238,
+                  "line": 244,
                   "classification": "unit"
                 },
                 {
                   "name": "feeEstimationFallsBackForUnrecognizableScripts",
                   "returnType": "void",
-                  "line": 272,
+                  "line": 278,
                   "classification": "unit"
                 },
                 {
                   "name": "addInputHandlesAllThreeUtxoShapes",
                   "returnType": "void",
-                  "line": 293,
+                  "line": 299,
                   "classification": "unit"
                 },
                 {
                   "name": "broadcastDelegatesOnlyToTheProvidedLocalFunction",
                   "returnType": "void",
-                  "line": 326,
+                  "line": 332,
                   "classification": "unit"
                 },
                 {
                   "name": "constructorsPreserveTheExistingTransactionAndKeyProvider",
                   "returnType": "void",
-                  "line": 339,
+                  "line": 345,
                   "classification": "unit"
                 },
                 {
                   "name": "sigmaSigningKeepsThePayloadAndExposesAVerifiableCurrentIdentitySignature",
                   "returnType": "void",
-                  "line": 356,
+                  "line": 362,
                   "classification": "unit"
                 },
                 {
                   "name": "publicOnlyKeyUsesAConservativeUnlockingSizeForChangeEstimation",
                   "returnType": "void",
-                  "line": 378,
+                  "line": 384,
                   "classification": "unit"
                 }
               ],
