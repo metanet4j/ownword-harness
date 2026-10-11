@@ -1658,62 +1658,56 @@
                 {
                   "name": "requestsAndAppliesRemotePaymentSignatureInMemory",
                   "returnType": "void",
-                  "line": 60,
+                  "line": 59,
                   "classification": "unit"
                 },
                 {
                   "name": "routesPaymentAndOrdinalHashesToTheirRespectiveAddresses",
                   "returnType": "void",
-                  "line": 83,
+                  "line": 79,
                   "classification": "unit"
                 },
                 {
                   "name": "collectsOnlyUnsignedDataHashesAndSkipsDisconnectedInputs",
                   "returnType": "void",
-                  "line": 104,
+                  "line": 99,
                   "classification": "unit"
                 },
                 {
                   "name": "signsTheRequestedSingleAnyoneCanPayHash",
                   "returnType": "void",
-                  "line": 127,
+                  "line": 122,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalBuilderReportsSignerFailure",
                   "returnType": "void",
-                  "line": 147,
+                  "line": 137,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalBuilderForwardsForkId",
                   "returnType": "void",
-                  "line": 156,
+                  "line": 147,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalOutputCarriesTheRequestedContentAndPendingBsmHash",
                   "returnType": "void",
-                  "line": 170,
+                  "line": 159,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteSignerLeavesAnAlreadyDisconnectedInputUntouched",
                   "returnType": "void",
-                  "classification": "unit",
-                  "line": 188
+                  "line": 177,
+                  "classification": "unit"
                 },
                 {
                   "name": "fourArgumentRemoteOrdinalOutputUsesTheDefaultSigningIdentity",
                   "returnType": "void",
-                  "classification": "unit",
-                  "line": 202
-                },
-                {
-                  "name": "remoteSignerHasNoSerializedPrivateState",
-                  "returnType": "void",
-                  "classification": "unit",
-                  "line": 219
+                  "line": 193,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "本地密钥、内存UTXO与受控签名上下文验证远程交易摘要和签名，未连接远程服务"

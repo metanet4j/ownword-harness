@@ -982,7 +982,8 @@
         "R3 测试迁移 + **修复产品代码缺口**（metanet4j-sdk 提交 84395a2）：① `TxHelperExtend.getConnectedRedeemDataExtend` 此前返回 `RedeemDataExtend.of(key, null)`，**redeemScript 恒为空**，调用方无法据此重建输入脚本或校验地址——改为回填连接输出的锁定脚本（P2SH 场景下即为赎回脚本本身）；② `TxHelperExtendContractTest` 按新签名重写（AddressEnhance/新 SDK Script、P2PKH.lock、畸形脚本用例改构造 List<ScriptChunk>、`getConnectedRedeemDataExtend` 入参改 TransactionOutput + SigningKeyProvider、「无连接输出」由 NPE 断言改为返回 null、并明确断言 redeemScript 等于锁定脚本）；清单同步为 4 个方法。**该文件 42 → 0；旧引用测试文件 7 → 6**（起点 41，降 85%）。**只剩 2 个有错文件**：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62。",
         "R3 测试迁移（metanet4j-sdk 提交 284429a）：**BapBaseCoreContractTest 编译清零（62 → 0）**——匿名 BapBaseCore 的六个密钥访问器与 key(long) 助手改业务 PrivateKey、地址构造改 AddressEnhance.fromPrivateKey、Ecies 密钥实参改 .getKey()、旧 import 清理。**旧引用测试文件 6 → 5**（起点 41，降 88%）。**至此 `test-compile` 只剩 1 个有错文件：RemoteTransactionContractTest（66 处）。**该文件清零后即可进入 R3 严格验收（`verify-unit.py --mode accept --scope metanet4j-sdk`）。",
         "R3 测试迁移（第八十四轮，实验并还原）：最后一个文件 `RemoteTransactionContractTest`（262 行）的迁移清单已定稿（migration-rules §27）——它早期已清掉 io.bitcoinsv import，剩余错误全是**遗留调用形态**：构造实参 `new RemoteTransactionSigner()`→`keyProvider`、`new Transaction(Net.MAINNET)`→`new Transaction()`、`addOutput/addInput` 改新 SDK 形式、`signInputs` 参数、以及 2 个 mock 签名器用例需重写（前提已消失）。本轮尝试机械替换**未取得净收益**（错误数在 66—78 间波动，javac 归因不稳定），**已按纪律还原，工作区干净**。结论：该文件改动互相咬合，须**整体重写**（同 TransactionBuilderContractTest 第 70 轮的成功方式），不可分批替换。",
-        "R3 测试迁移（metanet4j-sdk 提交 b20f392）：RemoteTransactionContractTest 按 §27 清单开始迁移——4 处`new RemoteTransactionBuilder(remoteBap, new RemoteTransactionSigner())` → `keyProvider`、`paymentAddress` 改为直接取 `bap.getPayAccountAddress()`。**测量结论**：该文件错误计数在 javac 归因波动下**不可靠**（同一文件多次编译报过 66／70／78／82，含还原后的重测），故不再以该文件的错误计数判断净收益，改以「按清单逐类改完 + 最终 test-compile 退出码」为准。剩余待改：mock 签名器用例（前提已消失需重写）、交易构造（new Transaction(Net)、addInput/addOutput）、signInputs 参数、辅助方法。"
+        "R3 测试迁移（metanet4j-sdk 提交 b20f392）：RemoteTransactionContractTest 按 §27 清单开始迁移——4 处`new RemoteTransactionBuilder(remoteBap, new RemoteTransactionSigner())` → `keyProvider`、`paymentAddress` 改为直接取 `bap.getPayAccountAddress()`。**测量结论**：该文件错误计数在 javac 归因波动下**不可靠**（同一文件多次编译报过 66／70／78／82，含还原后的重测），故不再以该文件的错误计数判断净收益，改以「按清单逐类改完 + 最终 test-compile 退出码」为准。剩余待改：mock 签名器用例（前提已消失需重写）、交易构造（new Transaction(Net)、addInput/addOutput）、signInputs 参数、辅助方法。",
+        "**【里程碑】metanet4j-sdk test-compile 退出码归零**（metanet4j-sdk 提交 d0a4218）：最后一个有错文件 RemoteTransactionContractTest 按 §27 清单整体迁移清零——补 keyProvider 字段与 sourceOutput/signatureHashType 助手、交易构造改新 SDK（inputs.add(new TransactionInput(...))／outputs.add(new TransactionOutput(...))）、signInputs 新签名、输出金额取值等逐处修正；**删除 remoteSignerHasNoSerializedPrivateState 并登记覆盖去向**（isReady/serialize/deserialize 属已取消的旧 TransactionSigner 接口）；两个 mock 签名器用例改写为「密钥解析不到 → SignErrorException」与「断言签名 SIGHASH 尾字节」。**至此 metanet4j-sdk 的生产与测试源码全部编译通过**；旧引用文件：生产 3、测试 5。过程记录：该文件错误计数在 javac 归因波动下不可靠（同一文件报过 66/70/78/82/56/24/16/2），故按 §27 清单逐类改完再看退出码判断，而非以中间计数判断净收益。**下一步：R3 严格验收**（`verify-unit.py --mode accept --scope metanet4j-sdk`）。"
       ],
       "commits": [
         {
@@ -1296,9 +1297,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "b20f392"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "d0a4218"
         }
       ],
-      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，**只剩 1 个有错文件**（RemoteTransactionContractTest 66）；旧引用测试文件 5/54（起点 41，降 88%）。",
+      "statusNote": "进行中：**SDK 生产与测试编译全部通过（test-compile 退出码 0）**；生产旧引用文件 3、测试旧引用文件 5；下一步 R3 严格验收。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
