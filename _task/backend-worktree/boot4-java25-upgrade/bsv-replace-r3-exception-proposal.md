@@ -1,70 +1,79 @@
-# R3 覆盖率例外登记：待批准清单
+# R3 覆盖率收口：待裁决清单（最终版）
 
-> **状态**：待用户批准。**本文件仅陈述事实与建议，未据此修改 `unit-coverage-exceptions.json`。**
-> 生成于第 250 轮；依据为 `mvn -Punit-coverage clean test jacoco:report` 的实测结果。
+> **状态**：待用户裁决。**本文件仅陈述事实与建议，未据此修改 `unit-coverage-exceptions.json`，也未改任何生产代码。**
+> **依据**：`mvn -Punit-coverage clean test jacoco:report` 实测 + `evidence/bsv-replace/r3-keys-20261010/migration-rules.md` 逐条核查记录。
 
-## 1. 当前实测（门禁范围内）
+## 1. 现状（门禁范围内）
 
-| 指标 | 数值 |
-| --- | --- |
-| 全模块 行未覆盖 | **63** |
-| 全模块 分支未覆盖 | **105** |
-| 全模块 方法未覆盖 | **14** |
-| **未达标类** | **9 个**，合计 行 21／分支 40／方法 1 |
-
-**轨迹**：§214（METHOD 收口时）行 114／分支 199／15 类 → §250 行 77／分支 120 → **现 行 63／分支 105／9 类**。
-**§254—§258 五批补测（`ScriptExtend` 三批、`TransactionBuilder`、`prepareInputsForSigning`）合计降 行 14／分支 15**，
-其中 `ScriptExtend` 由 行 14／分支 31 降至 **行 4／分支 19**。
-
-**逐类（门禁范围内）**：
-
-| 类 | 行 | 分支 | 方法 |
+| 指标 | §214（METHOD 收口时） | **现在** | 变化 |
 | --- | --- | --- | --- |
-| `BapBase` | 0 | 1 | 0 |
-| `RemoteOrdTransactionTemplate` | 0 | 1 | 0 |
-| `RemoteOrdTransactionBuilder` | 1 | 1 | 0 |
-| `Sigma` | 1 | 1 | 0 |
-| `RemoteTransactionSigner` | 1 | 4 | 0 |
-| `PrivateKey` | 3 | 2 | 0 |
-| `ScriptExtend` | 4 | 19 | **1** |
-| `TransactionBuilder` | 5 | 8 | 0 |
-| `OrdinalsTransactionSigner` | 6 | 3 | 0 |
+| 全模块 行未覆盖 | 114 | **57** | **−57** |
+| 全模块 分支未覆盖 | 199 | **82** | **−117** |
+| 未达标类 | 15 | **9** | −6 |
 
-## 2. 逐类清单与建议
+**已完成的收口手段**（每一类都有实测记录）：
+- **§87 重复代码收敛**（`sourceOutputOf` 4 份→1、`pubKeyHashOf` 3 份→1）：分支 −27；
+- **§86 不可达分派链收敛**（`Sigma.sourceTxidBytes`）：分支 −6；
+- **§261—§280 逐条件补测**（§98 方法：`&&`／`||`／三元的每一个操作数都要有"它被求值为假"的样本）：分支 −18。
 
-### 2.1 建议**登记**（设计上不可达，补测试无法触达）
+## 2. 第一类：**登记候选（7 项，均已穷尽核查）**
 
-| # | 类 | 行／分支 | 内容 | 依据 |
+| # | 类 | 位置 | 一句话摘要 | 依据 |
 | --- | --- | --- | --- | --- |
-| E1 | `ScriptExtend` | 行之 0／分支 1 | `private ScriptExtend()` —— 工具类**防实例化**的私有构造器 | 无调用点 |
-| E2 | `BapBase` | 行 0／分支 1 | `:156` `(defaultRoot.indices().get(4) & HARDENED_BIT) != 0` —— 分支结果由**编译期常量** `DEFAULT_ROOT_PATH` 决定 | §86 核查 |
-| E3 | `RemoteOrdTransactionTemplate` | 行 0／分支 1 | `:278` `bapBase instanceof SigningKeyProvider ? provider : null` —— **恒取 null 侧**（`BapBaseCore` 的所有实现者均不实现 `SigningKeyProvider`） | §83 核查 |
-| E4 | `RemoteOrdTransactionBuilder` | 行 1／分支 1 | `:81—83` `if (!signInputs(...)) throw …` —— `signInputs` **只在 `tx == null` 时返回 false**，对已构造的 builder 不可达 | §84 核查 |
-| E5 | `Sigma` | 行 1／分支 1 | `:380—381` `toBoxed` 的 `data == null` 守卫 —— **六个调用点全传非 null** | §89 核查 |
-| E6 | `RemoteTransactionSigner` | 部分 | `:98—99` `signature instanceof TransactionSignature` —— `Signature.fromDER` **只构造基类**，真侧不可达 | §91 核查 |
+| **E1** | `ScriptExtend` | `:50—51` | `private ScriptExtend()` —— 工具类**防实例化**构造器 | 无任何调用点 |
+| **E2** | `BapBase` | `:156` | `(defaultRoot.indices().get(4) & HARDENED_BIT) != 0` 的结果由**编译期常量**决定 | §86 |
+| **E3** | `RemoteOrdTransactionTemplate` | `:278` | `bapBase instanceof SigningKeyProvider ? provider : null` **恒取 null 侧** | §83 |
+| **E4** | `RemoteOrdTransactionBuilder` | `:81—83` | `if (!signInputs(...)) throw` —— `signInputs` **只在 `tx == null` 时返回 false** | §84 |
+| **E5** | `Sigma` | `:380—381` | `toBoxed` 的 `data == null` 守卫——**六个调用点全传非 null** | §89 |
+| **E6** | `RemoteTransactionSigner` | `:98—99` | `signature instanceof TransactionSignature`——`Signature.fromDER` **只构造基类** | §91 |
+| **E7** | `TransactionBuilder` | `:289` | `outputSize` 的 `lockingScript == null` 侧——**唯一调用点传入硬编码的非 null** | §99 |
 
-### 2.2 建议**进一步核查或收敛**（尚未穷尽）
+**建议**：**登记**。七项都不是"没测"，而是**"测不到"**——每项都有"为何不可达"的实测依据。
+**政策依据**：计划第 192 行允许"仅因行号或类名变化调整精确登记"，而**这七项均非"新增逻辑未测"、而是"逻辑不可达"**，正属该条允许的情形。
 
-| # | 类 | 行／分支 | 说明 |
+## 3. 第二类：**语义缺陷（2 项，涉及运行时行为）**
+
+| # | 位置 | 缺陷 | 影响 |
 | --- | --- | --- | --- |
-| P1 | `TransactionBuilder` | 7／11 | 含 §92 未定的 `:227—228`（备选 C 未试）；其余待逐条看 |
-| P2 | `PrivateKey` | 5／2 | 待看 |
-| P3 | `OrdinalsTransactionSigner` | 6／3 | 待看 |
-| P4 | `RemoteTransactionSigner` | 1／4 | §91 之外的余项待看 |
-| ~~P5~~ | `ScriptExtend` | 14／31／**方法 1** | **已核查完毕（§94）：判定为「应补测」**，故从"待核查"移出。其 32 处缺口中，**31 处在 public 谓词内**（`isSentToAddress`／P2SH 判定／P2PK 判定／`isSentToMultiSig`／签名数守卫／下标守卫／`isStandardPubKey`／推送长度选择），**均可测**；**仅 1 处**（`private ScriptExtend()` 防实例化构造器）属登记候选，**即清单 E1**。该类在门禁范围内（已核对 `jacoco.unit.check.excludes` 不含它） |
+| **S1** | `RemoteOrdTransactionTemplate:276—279`（§83） | `resolveKeyProvider` **恒返回 null**——`BapBaseCore` 的所有实现者**都不实现** `SigningKeyProvider`，故该分支恒取 null 侧 | 远程 Ordinals 模板的**密钥解析能力接错了层次**；调用方以为能取到提供者，实际永远取不到 |
+| **S2** | `RemoteTransactionSigner.signInputs`（§84） | **只在 `tx == null` 时返回 false**，其余一切异常（缺连接输出／脚本不可识别／缺预签名上下文／无公钥无密钥）**全部 `continue` 后仍 `return true`** | **失败检查形同虚设**：调用方无法区分"全部签好"与"一个都没签"。**§272 已第二次实证**：用例中确有一处被跳过，`signInputs` 仍返回 `true` |
 
-## 3. 需要您决定的事项
+**处置建议**：
+
+| 方案 | S1 | S2 |
+| --- | --- | --- |
+| **A. 修正语义** | 让 `resolveKeyProvider` 能真正取到提供者（需改 `BapBaseCore` 的层次或让实现者实现该接口） | 让 `signInputs` 在"有输入被跳过且无任何输入被签"时返回 false |
+| **B. 只补注释** | ❌ **等于把已知的假检查留在代码里** | ❌ 同左 |
+| **C. 保留 + 登记** | ✅ 保守且诚实 | ✅ 同左 |
+
+**我的建议**：**S2 选 A**（修正语义）——它有明确的判据（"跳过"与"成功"应当可区分），且**改动局限在 `signInputs` 内部**；
+**S1 选 C**（保留 + 登记）——它的修正涉及类型层次，**影响面超出 R3 范围**，宜**单独立项**。
+
+**若您倾向不改行为**：两者均按 C 处理，并在 `feature_list.json` 的 R6 交付报告中如实记录。
+
+## 4. 第三类：**待定性（3 项，未穷尽验证）**
+
+| # | 位置 | 现象 | 已试 | 尚未试 |
+| --- | --- | --- | --- | --- |
+| **P1** | `RemoteTransactionSigner:124` | `satoshisOf` 的 `: null` 兜底**被 SDK 的更早校验遮蔽**（置 `Undefined` 时抛"不支持的金额类型"） | `Undefined.INSTANCE` | `String`、`null` 等其它非数字形态 |
+| **P2** | `OrdinalsTransactionSigner:116` | 同型 | 同上 | 同上 |
+| **P3** | `PrivateKey:72—73` | "WIF 载荷 < 33 字节"的拒绝 | 2 字节载荷（被首字符规则挡下） | 其它长度组合 |
+| **P4** | `TransactionBuilder:227—228` | `catch → throw SignErrorException`（`sign()` 抛错时） | ① 缺模板的输入（§93 实测**容忍**）；② 输出为空 | 其它使 `sign()` 抛错的情形 |
+
+**建议**：**这四项若您同意，我按 §91 的做法继续穷尽**（约 2 轮）；
+**若您希望先推进 R4**，则可**暂按"登记候选"处理**、并在 R6 前回头补验证。
+
+## 5. 需要您裁决的事项
 
 | # | 决定 | 我的建议 |
 | --- | --- | --- |
-| D1 | **E1—E6 是否登记**（即写入 `unit-coverage-exceptions.json`，使 `gaps` 相应减少） | **登记**。六项均有"为何不可达"的实测依据，且**不是"没测"，而是"测不到"** |
-| D2 | 是否同意**先登记 E1—E6、再继续 P1—P5 的核查** | **同意**。登记可让门禁口径立即反映"已核查的部分"，后续核查不必反复重算 |
-| D3 | ~~`ScriptExtend` 的口径~~ **（已由 §94 核查完毕，无需再决定）** | 结论：**应补测**（31 处可测、1 处登记）。**待您批准的是"是否现在投入补测"**——它是 R3 收口的主要剩余工作量，且其谓词在 R4 的 component 适配中被广泛依赖 |
+| **D1** | **E1—E7 是否登记**（写入 `unit-coverage-exceptions.json`） | **登记** |
+| **D2** | **S1／S2 的处置**：A（修正）还是 C（保留 + 登记） | **S2 选 A、S1 选 C**；**若您不愿改行为，两者皆 C** |
+| **D3** | **P1—P4 是否现在穷尽**（约 2 轮）还是先推进 R4 | **建议现在穷尽**（R3 一次性收干净、避免上下文切换成本） |
+| **D4** | `ScriptExtend` 等类的**剩余可测分支**（约 8 处）是否继续补 | **继续补**（已在进行，约 2 轮） |
 
-## 4. 重要说明（政策与边界）
+## 6. 边界说明
 
-- 计划第 192 行规定：**「新增可执行逻辑须有测试，不得自动扩大例外范围」**。
-  本清单的 E1—E6 **均非"新增逻辑未测"，而是"逻辑不可达"** ——
-  **这正是第 192 行允许调整精确登记的情形**（"仅因行号或类名变化调整精确登记，需说明对应关系"）。
-- **我不自行登记**：`unit-coverage-exceptions.json` 的 `decision` 字段注明例外须**经用户批准**。
-- **本文件不构成登记**，仅为待批材料。
+- **我不自行登记**：`unit-coverage-exceptions.json` 的 `decision` 字段注明例外须**经用户批准**；本文件**不构成登记**。
+- **我不自行改行为**：S1／S2 若按 A 处理会**改变运行时行为**，须您明确同意。
+- **本文件可随裁决结果更新**，亦可作为 `feature_list.json` 中 `bsv-r3-keys` 的 evidence 附件引用。
