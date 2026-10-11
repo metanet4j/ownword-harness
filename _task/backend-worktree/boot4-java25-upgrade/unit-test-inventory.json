@@ -2483,21 +2483,21 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "sortsKeysAndKeepsAnIndependentList",
+                  "name": "holdsTheKeyAndTheRedeemScript",
                   "returnType": "void",
-                  "line": 21,
+                  "line": 29,
                   "classification": "unit"
                 },
                 {
-                  "name": "adaptsLibraryRedeemDataAndSelectsAvailablePrivateKey",
+                  "name": "absentKeyIsRepresentedAsNull",
                   "returnType": "void",
-                  "line": 40,
+                  "line": 42,
                   "classification": "unit"
                 },
                 {
-                  "name": "singleKeyFactoryReturnsNullForUnknownKey",
+                  "name": "redeemScriptMayBeAbsentForNonP2shInputs",
                   "returnType": "void",
-                  "line": 55,
+                  "line": 51,
                   "classification": "unit"
                 }
               ],
