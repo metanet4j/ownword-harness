@@ -1072,7 +1072,8 @@
         "R3 验收（第一百七十轮）：**验收恢复正常运行，门禁 1、2 确认达成**——`unit-test-inventory.json` 的 `production` 清单同步（移除已删除的 `TransactionInputEnhance.java`，74 → 73 条）后，验收不再报「生产源码清单不一致」，完整跑通：**tests=207、failures=0、errors=0、skipped=0**；**覆盖率：LINE 2302 覆盖 / 179 未覆盖，BRANCH 859 / 234**。**剩余问题仅三项、全部属覆盖率**：① `覆盖率例外分支计数不符：TxHelperExtend`；② `覆盖率例外清单不符：TxHelperExtend`（实测 6 项 vs 记录仅 `<init>`）；③ `覆盖率未达标：ScriptHelper LINE/BRANCH`（§169 新增 `chunksOf` 唯一实现及其边界测试后，该类的分支自身尚需补齐）。**说明**：验收前置检查对生产清单做**精确比对**（`actual != listed` 即失败），故删除生产文件后必须同步清单——这也是删类操作的必要收尾步骤。**至此 R3 门禁 5 条中已确认达成 2 条**（无旧类型、failures/errors/skipped=0）。",
         "R3 验收（第一百七十一轮）：**R3 门禁逐条核对完成——五条中已达成四条，唯一剩项是覆盖率 gaps=0**（migration-rules §67）——① **无旧类型** ✅（生产 0 文件、测试 0 文件）；② **failures/errors/skipped=0** ✅（tests=207）；③ **第 5 节协议向量通过** ✅（14 个向量组**全部 frozen**、47 条绑定测试条目**现全部通过**；另 40 项 `notFound` 是 **R0 时就已登记**的「基线中不存在该固定样本」的**审计结论**，属记录在案的缺失、非失败）；④ **全部原行为有去向且已实际执行** ✅（验收「用例未发现」= **0**，54 个测试文件全部方法在磁盘上存在并执行；各阶段删除/改写的用例均逐条登记去向：覆盖例外登记、§23.3 删除用例登记、§29/§97 前提改写登记、§169 被删类覆盖去向）；⑤ **gaps=0** ⬜（行 2302/179、分支 859/234）。**本轮首次以证据逐条落实门禁判定**，并澄清了此前未区分的一点：**`notFound` 与「用例未发现」都是已登记事项，不是失败**。**下一轮唯一方向：把未覆盖数降到 0**（三件工具：找重复→收敛、找死代码→消除、补测试→政策要求）。",
         "R3 验收（第一百七十二轮）：先查使用情况再动手——两处死代码零成本消除（migration-rules §68；sdk 提交 761a70e）。按 §67.2 顺序（先找死代码、再补测试），对 ScriptHelper 与 TxHelperExtend 的未覆盖项先逐一 grep 其是否真被使用，找出两处：① ScriptHelper.getPushDataAsString 全项目 0 引用（迁移遗留的无用公共方法）→ 删除；② TxHelperExtend 的 if (key == null) return null; 永不成立（提供者 BapProviderKeyBag 解析不到密钥时抛 RuntimeException 而非返回 null，§132 已确认且其测试要求该行为）→ 按 §62.4 方案 C 消除并加注。实测收益：全模块行未覆盖 179 → 176 下降、分支 234 → 231 下降；TxHelperExtend 6/14 → 5/13、ScriptHelper 3/6 → 1/4（接近达标）。本轮零测试、零例外——两次 grep 加两处删除。若按补测试思路：第一处无法触发（0 引用）、第二处也无法触发（分支永不成立），最后只能走与计划第 192 行冲突的登记例外。故顺序很重要：先问这段代码还会被执行吗，再问怎么覆盖它。验证：17 例全绿、无回归。",
-        "R3 验收（第一百七十三轮）：**`ScriptHelper` 接近达标、全模块未覆盖再降**（sdk 提交 c75dbf4）——① **删除 `hasPushData` 的冗余条件** `&& scriptChunk.op != OP_ZERO`：`isPushDataOpCode` 的实现为 `op == PUSHDATA1/2/4 || (op > OP_ZERO && op < PUSHDATA1)`，**已蕴含 `op > OP_ZERO`**，故 `op == 0` 时左侧必 false、该条件右侧**永不求值**（§53 已确认不可达）→ 按 §62.4 方案 C 消除并加注；② **为 `getAddressByOrdinalScript` 缺少公钥哈希 chunk 的抛错分支补测试**——该分支**真实可达**（调用方传入的 Base64 脚本可能形态不足），按计划第 192 行补测试，覆盖「chunk 数 < 3」与「第 3 个 chunk 无数据」两种形态。**验证：ScriptHelperContractTest 4（原 3 + 新 1）、TxHelperExtendContractTest 6 = 10 例全绿**；清单已同步。**实测收益**：全模块行未覆盖 176 → **175** ↓、分支 231 → **229** ↓；**`ScriptHelper` 降至 行 0 / 分支 2 / 方法 0**（接近达标，仅余 2 个分支待处理）。**本轮体现了两种手段的正确分工**：不可达的（冗余条件）→ **消除**；真实可达的（抛错分支）→ **补测试**。"
+        "R3 验收（第一百七十三轮）：**`ScriptHelper` 接近达标、全模块未覆盖再降**（sdk 提交 c75dbf4）——① **删除 `hasPushData` 的冗余条件** `&& scriptChunk.op != OP_ZERO`：`isPushDataOpCode` 的实现为 `op == PUSHDATA1/2/4 || (op > OP_ZERO && op < PUSHDATA1)`，**已蕴含 `op > OP_ZERO`**，故 `op == 0` 时左侧必 false、该条件右侧**永不求值**（§53 已确认不可达）→ 按 §62.4 方案 C 消除并加注；② **为 `getAddressByOrdinalScript` 缺少公钥哈希 chunk 的抛错分支补测试**——该分支**真实可达**（调用方传入的 Base64 脚本可能形态不足），按计划第 192 行补测试，覆盖「chunk 数 < 3」与「第 3 个 chunk 无数据」两种形态。**验证：ScriptHelperContractTest 4（原 3 + 新 1）、TxHelperExtendContractTest 6 = 10 例全绿**；清单已同步。**实测收益**：全模块行未覆盖 176 → **175** ↓、分支 231 → **229** ↓；**`ScriptHelper` 降至 行 0 / 分支 2 / 方法 0**（接近达标，仅余 2 个分支待处理）。**本轮体现了两种手段的正确分工**：不可达的（冗余条件）→ **消除**；真实可达的（抛错分支）→ **补测试**。",
+        "R3 验收（第一百七十四轮）：**`ScriptHelper` 覆盖率达标（行 0 / 分支 0 未覆盖）**（sdk 提交 4402259、本轮后续提交）——① 为其最后两个分支补精确脚本形态：`getAddressByOrdinalScript` 的第 3 个 chunk 为**纯操作码**（`data == null`，覆盖 `||` 右侧为真）与「PUSHDATA1 声明长度为 0」对照形态；`chunksOf` 补 **op=79** 脚本（>75 且非 PUSHDATA，走末位 else）；② 进而发现 `chunksOf` 的 `else if (op >= 1 && op <= 75)` 中 **`op >= 1` 的假侧不可达**（`op` 为无符号字节、`op == 0` 已被上一分支捕获），按 §62.4 方案 C 收敛为 `op <= 75` 并加注。**验证：ScriptHelperContractTest 4、BobTxoConversionContractTest 7、OrdHistoricalFixtureContractTest 8 = 19 例全绿**；**实测 ScriptHelper 行 0 / 分支 0 未覆盖——该类达标**。**说明**：`ScriptHelper` 是 §160 收敛 `chunksOf` 唯一实现后**首个被要求达标的类**，其达标意味着那次收敛的『代价方』已结清。"
       ],
       "commits": [
         {
@@ -1458,9 +1459,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "c75dbf4"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "4402259"
         }
       ],
-      "statusNote": "进行中（R3 第 1 组）：门禁 5 条已达成 4 条，唯一剩项 **gaps=0**（行 2302/175、分支 856/229 未覆盖）；tests=208、failures=0、errors=0、skipped=0；生产/测试旧类型均 0 文件；**ScriptHelper 已降至 行0/分支2/方法0**。",
+      "statusNote": "进行中（R3 第 1 组）：门禁 5 条已达成 4 条，唯一剩项 **gaps=0**（全模块行 175、分支 228 未覆盖）；tests=208、failures=0、errors=0、skipped=0；**`ScriptHelper` 已达标（行0/分支0）**；下一步转 `TxHelperExtend`（行5/分支13）。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
