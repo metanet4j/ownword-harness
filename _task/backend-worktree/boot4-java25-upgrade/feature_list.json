@@ -1135,7 +1135,8 @@
         "R3 验收（第二百三十二轮）：§87 收敛第一步完成——两个助手就位于 TxHelperExtend（sdk 提交 18899bc）。按 §160 已验证的做法（先加公共实现并单独编译，再逐类改造），本提交只做第一步：① 新增公共 sourceOutputOf(TransactionInput)（取连接输出，无法取得返回 null；三条件缺一不可）；② 把已有的 pubKeyHashOfP2pkh(Script) 由 private 改为 public——它与三个类里的 pubKeyHashOf 是同一逻辑，且已用的是 ScriptHelper.chunksOf（非上游截断版），故无需新增方法、只需开放可见性（省一步）。两处都加了 §87 说明性 javadoc。过程修正：该文件对该包类型惯例用全限定名（见第 123 行），新方法亦改用全限定名、未引入新 import。验证：test-compile 退出码 0——尚未改动任何调用方，故现有测试不受影响。下一步（§59.4 纪律）：逐个类改为委托、每类改完立即编译、优先用替换方法体为委托而非删除。",
         "R3 验收（第二百三十三轮）：§87 收敛第二步之一——RemoteTransactionSigner 的两个助手改为委托（sdk 提交 3584d18）。按 §59.4 纪律逐类进行、每类改完立即编译，本提交只改一个类：sourceOutputOf(TransactionInput)（原三条件合取）与 pubKeyHashOf(Script)（原五段 P2PKH 判定）均改为委托 TxHelperExtend 的唯一实现。采用替换方法体为委托而非删除方法（§160 的实证：删除两次越界吃掉邻接方法，委托法两次都一次成功）。附带收益：原 pubKeyHashOf 用的是上游截断版 script.getChunks()，而唯一实现内部用 ScriptHelper.chunksOf，本次委托一并消除了这处潜在的脚本截断风险（即 UPSTREAM-001 在本类的一个未触发点）。验证：SignerTransactionContractTest 8、RemoteTransactionContractTest 15，共 23 例全绿、无回归。下一步：按同一方式改 OrdinalsTransactionSigner（同样含两个助手），再单独编译。",
         "R3 验收（第二百三十四轮）：**§87 收敛第二步之二——`OrdinalsTransactionSigner` 的两个助手改为委托**（sdk 提交见历史）——按 §59.4 逐类进行、每类改完立即编译，本提交只改第二个类：`sourceOutputOf` 与 `pubKeyHashOf` 均委托 `TxHelperExtend` 唯一实现；同样**替换方法体为委托而非删除**；`pubKeyHashOf` 原用上游截断版 `getChunks()`，委托后**该类的这处潜在截断风险一并消除**。**验证：SignerTransactionContractTest 8、OrdTransactionBuilderContractTest 6、OrdHistoricalFixtureContractTest 8 = 22 例全绿、无回归**（含真实链上签名的历史夹具）。**进度：4 个类已完成 2 个**（`RemoteTransactionSigner`、`OrdinalsTransactionSigner`）；**余 `TransactionBuilder`、`RemoteTransactionBuilder`**。",
-        "R3 验收（第二百三十五轮）：§87 收敛第二步之三——TransactionBuilder 的两个助手改为委托（sdk 提交 396dbbd）。按 §59.4 逐类进行、每类改完立即编译，本提交只改第三个类：sourceOutputOf 与 pubKeyHashOf 均委托 TxHelperExtend 唯一实现；同样替换方法体为委托而非删除；其 pubKeyHashOf 原用上游截断版 getChunks()，委托后该类的这处潜在截断风险一并消除。验证：TransactionBuilderContractTest 9、SignerTransactionContractTest 8、OrdTransactionBuilderContractTest 6、BobTxoConversionContractTest 7，共 30 例全绿、无回归。进度：4 个类已完成 3 个；余 RemoteTransactionBuilder（只含 sourceOutputOf）。三次改造均一次通过，印证 §160 的先加后改、逐类验证两条做法的有效性。"
+        "R3 验收（第二百三十五轮）：§87 收敛第二步之三——TransactionBuilder 的两个助手改为委托（sdk 提交 396dbbd）。按 §59.4 逐类进行、每类改完立即编译，本提交只改第三个类：sourceOutputOf 与 pubKeyHashOf 均委托 TxHelperExtend 唯一实现；同样替换方法体为委托而非删除；其 pubKeyHashOf 原用上游截断版 getChunks()，委托后该类的这处潜在截断风险一并消除。验证：TransactionBuilderContractTest 9、SignerTransactionContractTest 8、OrdTransactionBuilderContractTest 6、BobTxoConversionContractTest 7，共 30 例全绿、无回归。进度：4 个类已完成 3 个；余 RemoteTransactionBuilder（只含 sourceOutputOf）。三次改造均一次通过，印证 §160 的先加后改、逐类验证两条做法的有效性。",
+        "R3 验收（第二百三十六轮）：§87 收敛完成——分支未覆盖 167 到 140（降 27），验证了重复副本是主要负担的判断（migration-rules §88；sdk 提交 0ed8ec5 等）。§87 收敛四步全部完成：① 公共实现就位（§232，test-compile 0、未动调用方）；② 四个类逐个改委托（§233 到 §236），每类改完立即编译、四次全部一次通过、零回归；采用替换方法体为委托而非删除（§160 实证）。实测收益（与 §87.4 预期对照）：全模块 BRANCH 未覆盖 167 到 140（降 27）、LINE 99 到 95、未达标类 12 到 9；逐类分支降幅：RemoteTransactionSigner 19 到 11、OrdinalsTransactionSigner 18 到 9、TransactionBuilder 23 到 14、RemoteTransactionBuilder 1 到 0（达标）；§87.4 预期合计可降 20 以上，实测降 27，判断成立。由此确立两点：① 重复副本是剩余覆盖率债务的主要来源已被数据证实——四个类里三个是分支数最高的（19、18、23），收敛后降幅也最大（降 8、9、9），即居高的分支数大部分不是功能复杂、而是同一段逻辑被算了四遍；② 先修结构再补覆盖的顺序是对的——若按原计划逐类补测试，那两个助手要在 4 与 3 个类里各写一遍（合计约 7 遍），收敛后只需一遍，结构改动省下的工作量远大于其成本。可复用纪律：先加后改、逐类验证——本轮五次改动全部一次通过，而 §158 的一次全改当初直接失败，差别不在细心程度而在这两条做法。"
       ],
       "commits": [
         {
@@ -1609,9 +1610,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "05912df"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "0ed8ec5"
         }
       ],
-      "statusNote": "进行中（R3 第 1 组）：门禁 5 条已达成 4 条，唯一剩项 gaps=0（全模块 行约99、分支约167、方法 14）；tests=240、failures=0、errors=0、skipped=0；未达标类 12 个（3 个为登记候选）；§87 收敛进度 3/4（三个类已改委托、三次均一次通过、无回归）；余 RemoteTransactionBuilder。",
+      "statusNote": "进行中（R3 第 1 组）：门禁 5 条已达成 4 条，唯一剩项 gaps=0（全模块 行 95、分支 140、方法 14）；tests=240、failures=0、errors=0、skipped=0；未达标类 9 个（3 个为登记候选）；§87 收敛已完成、分支降 27；下一步为两个公共实现补齐条件覆盖（一次覆盖即满足四个类）。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
