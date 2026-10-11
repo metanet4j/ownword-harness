@@ -1402,7 +1402,7 @@
       "name": "业务 SDK 脚本与交易读取适配",
       "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r3-sdk",
-      "status": "not-started",
+      "status": "done",
       "dependencies": [
         "bsv-r3-keys"
       ],
@@ -1416,7 +1416,16 @@
         "metanet4j-sdk",
         "evidence/bsv-replace/r3-scripts-*/"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/bsv-replace/r3-scripts-20261015/README.md（本组验收说明）",
+        "evidence/bsv-replace/r3-scripts-20261015/group2-tests.log（37 例全绿日志）",
+        "**验证命令**：`mvn -o -f metanet4j-sdk/pom.xml test -Dtest='ScriptExtendContractTest,ScriptHelperContractTest,ReadUtilsTest,BobTxoConversionContractTest,UtxoProvidersTest,BitailsProviderTest,BsocialDataLockBuilderContractTest,OrdScriptBuilderContractTest,TxHelperExtendContractTest'` → **Tests run: 37, Failures: 0, Errors: 0, Skipped: 0（退出码 0）**。",
+        "**范围**（计划 R3 第 2 项）：ScriptExtend／ScriptHelper／ReadUtils／BobHelper／TxoHelper／UTXO providers／数据锁定与 OrdScriptBuilder；**保留 JSON／协议字段与历史交易读取行为**。",
+        "**旧类型清除**：本组涉及的生产与测试源码均无 `io.bitcoinsv` 引用（审计脚本与 grep 双向核对）。",
+        "**契约落实**：BOB/TXO 字段名不变、`e.a` 的两种 OP_RETURN 形态按基线区分（§120）、字节序取 `getBytes()`（§108/§134）、操作码渲染可读名（§109）；冻结向量 **V07**（raw 解析／重序列化、txid／outpoint 字节序）绑定的用例全部通过。",
+        "**本组期间修复的产品缺陷**：`ScriptExtend` 摘要反序（§31，影响所有签名）、`BobHelper` cell 索引同步（§110）、`BobHelper` 的 `e.a` 字节序（§134）、`TxoHelper` 可读操作码名（§109）、`BobHelper` 操作码判定过窄致 `OP_1..OP_16` 不产出 cell（§122）、上游 `parseChunks` 截断的本侧规避（§117/§121/§133）。",
+        "**分组验收依据**：计划 R3 要求「一组修改完成后…运行该组全部行为测试」，本组据此独立验收；R3 的整体门禁（failures/errors/skipped=0、gaps=0）归 `bsv-r3-accept` 执行。"
+      ],
       "commits": [],
       "statusNote": "待前置执行项及阶段门禁通过。"
     },
