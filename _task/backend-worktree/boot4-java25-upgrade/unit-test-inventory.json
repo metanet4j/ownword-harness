@@ -1086,55 +1086,61 @@
                 {
                   "name": "testWordList",
                   "returnType": "void",
-                  "line": 27,
+                  "line": 28,
                   "classification": "unit"
                 },
                 {
                   "name": "testBapDefault",
                   "returnType": "void",
-                  "line": 35,
+                  "line": 36,
                   "classification": "unit"
                 },
                 {
                   "name": "testBapAddress",
                   "returnType": "void",
-                  "line": 47,
+                  "line": 48,
                   "classification": "unit"
                 },
                 {
                   "name": "testEncrypt",
                   "returnType": "void",
-                  "line": 75,
+                  "line": 76,
                   "classification": "unit"
                 },
                 {
                   "name": "testGetSigningPathFromHex",
                   "returnType": "void",
-                  "line": 100,
+                  "line": 101,
                   "classification": "unit"
                 },
                 {
                   "name": "testGetFriendPublicKey",
                   "returnType": "void",
-                  "line": 113,
+                  "line": 114,
                   "classification": "unit"
                 },
                 {
                   "name": "testAddress",
                   "returnType": "void",
-                  "line": 124,
+                  "line": 125,
                   "classification": "unit"
                 },
                 {
                   "name": "testBytes",
                   "returnType": "void",
-                  "line": 129,
+                  "line": 130,
                   "classification": "unit"
                 },
                 {
                   "name": "testBytes2",
                   "returnType": "void",
-                  "line": 140,
+                  "line": 141,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsEmptyRootPathWhenDerivingTheNextChildNumbers",
+                  "returnType": "void",
+                  "line": 153,
                   "classification": "unit"
                 }
               ],
