@@ -7,12 +7,28 @@
 
 | 指标 | 数值 |
 | --- | --- |
-| 全模块 行未覆盖 | **77** |
-| 全模块 分支未覆盖 | **120** |
+| 全模块 行未覆盖 | **63** |
+| 全模块 分支未覆盖 | **105** |
 | 全模块 方法未覆盖 | **14** |
-| **未达标类** | **9 个**，合计 行 35／分支 55／方法 1 |
+| **未达标类** | **9 个**，合计 行 21／分支 40／方法 1 |
 
-**轨迹**：§214（METHOD 收口时）为 行 114／分支 199／15 类 → 现为 行 77／分支 120／9 类。
+**轨迹**：§214（METHOD 收口时）行 114／分支 199／15 类 → §250 行 77／分支 120 → **现 行 63／分支 105／9 类**。
+**§254—§258 五批补测（`ScriptExtend` 三批、`TransactionBuilder`、`prepareInputsForSigning`）合计降 行 14／分支 15**，
+其中 `ScriptExtend` 由 行 14／分支 31 降至 **行 4／分支 19**。
+
+**逐类（门禁范围内）**：
+
+| 类 | 行 | 分支 | 方法 |
+| --- | --- | --- | --- |
+| `BapBase` | 0 | 1 | 0 |
+| `RemoteOrdTransactionTemplate` | 0 | 1 | 0 |
+| `RemoteOrdTransactionBuilder` | 1 | 1 | 0 |
+| `Sigma` | 1 | 1 | 0 |
+| `RemoteTransactionSigner` | 1 | 4 | 0 |
+| `PrivateKey` | 3 | 2 | 0 |
+| `ScriptExtend` | 4 | 19 | **1** |
+| `TransactionBuilder` | 5 | 8 | 0 |
+| `OrdinalsTransactionSigner` | 6 | 3 | 0 |
 
 ## 2. 逐类清单与建议
 
