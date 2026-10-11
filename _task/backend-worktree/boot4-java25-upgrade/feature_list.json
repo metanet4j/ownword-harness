@@ -1070,7 +1070,8 @@
         "R3 验收（第一百六十八轮）：**再清两个门禁文件——R3 门禁「测试源码无旧类型」已达 3/4**（sdk 提交 9b67c7d、9d07344）——① `MasterPrivateKeyContractTest`（提交 9b67c7d）：仅 1 处旧引用 `MnemonicCode.INSTANCE.getWordList()`，改用业务侧已有入口 **`MasterPrivateKey.wordList()`**（单词表副本，可避免测试依赖 SDK compat 层），**2 例全绿、旧引用 0**；② `RemoteOrdTransactionTemplateContractTest`（提交 9d07344）：3 处旧引用（`ECKey`／`ECKeyLite`／`Sha256Hash`）**在文件内完全未使用**（逐一 grep 确认仅出现在 import 行），属迁移遗留的未使用 import，**纯删除、无语义改动**，**16 例全绿、旧引用 0**。**至此 4 个残留旧类型测试文件已清 3 个**，仅剩 `input/TransactionEnhanceContractTest`（9 处，需配合 §13.1 把 3 个 `TransactionInputEnhance`／`TransactionOutPointEnhance`／`TransactionOutputEnhance` 改写为持有者——那是生产侧的连带改动）。",
         "**【里程碑】R3 门禁「业务 SDK 生产及测试源码无旧类型」达成**（sdk 提交 c3d7cf4）——按计划 §13.1 第 451 行明确指示处置 3 个 enhancer（三者**仅被各自测试引用、SDK 外零引用**，属死代码）：① **删除 `input/TransactionInputEnhance`**（旧库 `TransactionInput` 子类，构造时置空 scriptBytes；新 SDK 的 `unlockingScript` 默认即空哨兵 `Undefined`，不存在该场景）；② **`TransactionOutPointEnhance` 改写为持有者**（`sourceTXID` 显示序 hex + `index` + `connectedOutput`）；③ **`TransactionOutputEnhance` 改写为持有者**（`lockingScript` + `satoshis` + `index`）；`TransactionEnhanceContractTest` 相应重写，被删除类的原断言（scriptBytes 为空）**覆盖去向已在测试类 javadoc 登记**。**验证：test-compile 退出码 0；该测试 2 例全绿；`grep -rl io.bitcoinsv metanet4j-sdk/src/main/java` = 0 文件、`src/test/java` = 0 文件。** 至此 R3 门禁五条中已达成两条：**「测试/生产源码无旧类型」✓、「failures/errors/skipped = 0」✓**；剩余「第 5 节协议向量」「全部原行为有去向且已实际执行」（部分待核）、「gaps=0」（覆盖率，行180/分支234 未覆盖）。",
         "R3 验收（第一百七十轮）：**验收恢复正常运行，门禁 1、2 确认达成**——`unit-test-inventory.json` 的 `production` 清单同步（移除已删除的 `TransactionInputEnhance.java`，74 → 73 条）后，验收不再报「生产源码清单不一致」，完整跑通：**tests=207、failures=0、errors=0、skipped=0**；**覆盖率：LINE 2302 覆盖 / 179 未覆盖，BRANCH 859 / 234**。**剩余问题仅三项、全部属覆盖率**：① `覆盖率例外分支计数不符：TxHelperExtend`；② `覆盖率例外清单不符：TxHelperExtend`（实测 6 项 vs 记录仅 `<init>`）；③ `覆盖率未达标：ScriptHelper LINE/BRANCH`（§169 新增 `chunksOf` 唯一实现及其边界测试后，该类的分支自身尚需补齐）。**说明**：验收前置检查对生产清单做**精确比对**（`actual != listed` 即失败），故删除生产文件后必须同步清单——这也是删类操作的必要收尾步骤。**至此 R3 门禁 5 条中已确认达成 2 条**（无旧类型、failures/errors/skipped=0）。",
-        "R3 验收（第一百七十一轮）：**R3 门禁逐条核对完成——五条中已达成四条，唯一剩项是覆盖率 gaps=0**（migration-rules §67）——① **无旧类型** ✅（生产 0 文件、测试 0 文件）；② **failures/errors/skipped=0** ✅（tests=207）；③ **第 5 节协议向量通过** ✅（14 个向量组**全部 frozen**、47 条绑定测试条目**现全部通过**；另 40 项 `notFound` 是 **R0 时就已登记**的「基线中不存在该固定样本」的**审计结论**，属记录在案的缺失、非失败）；④ **全部原行为有去向且已实际执行** ✅（验收「用例未发现」= **0**，54 个测试文件全部方法在磁盘上存在并执行；各阶段删除/改写的用例均逐条登记去向：覆盖例外登记、§23.3 删除用例登记、§29/§97 前提改写登记、§169 被删类覆盖去向）；⑤ **gaps=0** ⬜（行 2302/179、分支 859/234）。**本轮首次以证据逐条落实门禁判定**，并澄清了此前未区分的一点：**`notFound` 与「用例未发现」都是已登记事项，不是失败**。**下一轮唯一方向：把未覆盖数降到 0**（三件工具：找重复→收敛、找死代码→消除、补测试→政策要求）。"
+        "R3 验收（第一百七十一轮）：**R3 门禁逐条核对完成——五条中已达成四条，唯一剩项是覆盖率 gaps=0**（migration-rules §67）——① **无旧类型** ✅（生产 0 文件、测试 0 文件）；② **failures/errors/skipped=0** ✅（tests=207）；③ **第 5 节协议向量通过** ✅（14 个向量组**全部 frozen**、47 条绑定测试条目**现全部通过**；另 40 项 `notFound` 是 **R0 时就已登记**的「基线中不存在该固定样本」的**审计结论**，属记录在案的缺失、非失败）；④ **全部原行为有去向且已实际执行** ✅（验收「用例未发现」= **0**，54 个测试文件全部方法在磁盘上存在并执行；各阶段删除/改写的用例均逐条登记去向：覆盖例外登记、§23.3 删除用例登记、§29/§97 前提改写登记、§169 被删类覆盖去向）；⑤ **gaps=0** ⬜（行 2302/179、分支 859/234）。**本轮首次以证据逐条落实门禁判定**，并澄清了此前未区分的一点：**`notFound` 与「用例未发现」都是已登记事项，不是失败**。**下一轮唯一方向：把未覆盖数降到 0**（三件工具：找重复→收敛、找死代码→消除、补测试→政策要求）。",
+        "R3 验收（第一百七十二轮）：先查使用情况再动手——两处死代码零成本消除（migration-rules §68；sdk 提交 761a70e）。按 §67.2 顺序（先找死代码、再补测试），对 ScriptHelper 与 TxHelperExtend 的未覆盖项先逐一 grep 其是否真被使用，找出两处：① ScriptHelper.getPushDataAsString 全项目 0 引用（迁移遗留的无用公共方法）→ 删除；② TxHelperExtend 的 if (key == null) return null; 永不成立（提供者 BapProviderKeyBag 解析不到密钥时抛 RuntimeException 而非返回 null，§132 已确认且其测试要求该行为）→ 按 §62.4 方案 C 消除并加注。实测收益：全模块行未覆盖 179 → 176 下降、分支 234 → 231 下降；TxHelperExtend 6/14 → 5/13、ScriptHelper 3/6 → 1/4（接近达标）。本轮零测试、零例外——两次 grep 加两处删除。若按补测试思路：第一处无法触发（0 引用）、第二处也无法触发（分支永不成立），最后只能走与计划第 192 行冲突的登记例外。故顺序很重要：先问这段代码还会被执行吗，再问怎么覆盖它。验证：17 例全绿、无回归。"
       ],
       "commits": [
         {
@@ -1448,9 +1449,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "c3d7cf4"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "761a70e"
         }
       ],
-      "statusNote": "进行中（R3 第 1 组）：**门禁 5 条已达成 4 条**（无旧类型、测试零失败、协议向量、原行为去向）；唯一剩项 **gaps=0**（行 2302/179、分支 859/234）；tests=207、failures=0、errors=0、skipped=0。",
+      "statusNote": "进行中（R3 第 1 组）：门禁 5 条已达成 4 条，唯一剩项 gaps=0（行 2301/176、分支 858/231 未覆盖）；tests=207、failures=0、errors=0、skipped=0；生产/测试旧类型均 0 文件；本轮消除两处死代码（零测试零例外）。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
