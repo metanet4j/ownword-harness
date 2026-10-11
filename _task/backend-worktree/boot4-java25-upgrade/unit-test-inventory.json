@@ -1461,7 +1461,7 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "constructorsKeepTheSelectedNetworkTransactionAndSigner",
+                  "name": "constructorsKeepTheSelectedTransactionAndKeyProvider",
                   "returnType": "void",
                   "classification": "unit",
                   "line": 42
@@ -1473,19 +1473,19 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "rejectsASignerThatReportsFailure",
+                  "name": "rejectsInputsWithoutAResolvableKey",
                   "returnType": "void",
                   "line": 89,
                   "classification": "unit"
                 },
                 {
-                  "name": "forwardsRequestedSignatureModeToTheSigner",
+                  "name": "appliesRequestedSignatureScopeToTheSignature",
                   "returnType": "void",
                   "line": 98,
                   "classification": "unit"
                 },
                 {
-                  "name": "simpleSignatureOverloadHonorsItsForkIdArgument",
+                  "name": "simpleSignatureOverloadDefaultsToAll",
                   "returnType": "void",
                   "line": 116,
                   "classification": "unit"
@@ -1767,7 +1767,7 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "manuallyBuiltTransactionHashesBeforeItsSerializedSizeIsKnown",
+                  "name": "manuallyBuiltAndParsedTransactionsProduceTheSameDigest",
                   "returnType": "void",
                   "classification": "unit",
                   "line": 57
