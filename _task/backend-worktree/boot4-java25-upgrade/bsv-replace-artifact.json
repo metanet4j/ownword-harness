@@ -191,5 +191,35 @@
       "foundAt": "r3-keys（round 117）",
       "notModifiedUpstream": true
     }
+  ],
+  "deferredItems": [
+    {
+      "id": "SIGMA-VERIFY-001",
+      "title": "Sigma 历史签名校验不通过（verify() 返回 false）",
+      "artifact": "com.metanet4j:metanet4j-bsv-sdk:0.2.0 + 本项目 Sigma 实现",
+      "symptom": "OrdHistoricalFixtureContractTest#sigmaFixtureVerifiesItsFixedSignedMessageAddress：用 fixture 中的历史 SIGMA 签名调用 Sigma.verify() 返回 false（早期为抛 No signature provided，已修）。",
+      "exclusionsWithEvidence": [
+        "最终消息的字节序（原序/反序各验一次，均 false）— migration-rules §43",
+        "vin 选择（交易仅 1 个输入，refVin/sigVin/targetVout 均为 0）— §44",
+        "各哈希自身的字节序（4 组合全败）— §45",
+        "dataHash 取数范围 start∈{0,1}×cut∈{0,1}（4 变体全败）— §46",
+        "消息构造方式（顺序交换/单双哈希/单分量，6 变体全败）— §47",
+        "输入被截断（上游 parseChunks 问题，已修且实测 dataHash 变化证明生效）— §133/§46",
+        "dataHash 起始位置 start∈{0..4}×cut∈{0,1}（10 组合全败）— §49"
+      ],
+      "confirmedCorrect": [
+        "sigIdx=27 / chunks=32 与用例断言的 s27=SIGMA、s28=BSM、s29=地址 完全吻合",
+        "sourceTxidBytes(String) 已正确执行 显示序→内部序 转换（BsvHashBytes.fromDisplayHex(text).getBytes()）"
+      ],
+      "nextSteps": [
+        "对 inputHash 的 36 字节 outpoint 布局做判定性实验（index 的端序、txid 与 index 的前后顺序、是否双哈希）",
+        "考虑 dataHash 可能不是「脚本字节的哈希」而另有构造（例如对推送数据逐个哈希后再组合）",
+        "用基线实现（6efd289）对同一 fixture 跑一次，取得权威期望值作为第三方参照"
+      ],
+      "decision": "本轮起停止单点消耗；登记为专项排查项，保留失败信号，不修改断言、不跳过测试。",
+      "roundsSpent": 8,
+      "foundAt": "r3-keys（rounds 133—140）",
+      "blockingR3": false
+    }
   ]
 }
