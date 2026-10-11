@@ -2529,25 +2529,25 @@
                 {
                   "name": "extractsDestinationFromInscriptionWithOptionalMapMetadata",
                   "returnType": "void",
-                  "line": 34,
+                  "line": 39,
                   "classification": "unit"
                 },
                 {
                   "name": "rejectsOrdinaryAndIncompleteInscriptionScripts",
                   "returnType": "void",
-                  "line": 52,
+                  "line": 57,
                   "classification": "unit"
                 },
                 {
-                  "name": "resolvesConnectedInscriptionAndOrdinaryPaymentThroughKeyBag",
+                  "name": "resolvesConnectedInscriptionAndOrdinaryPaymentThroughKeyProvider",
                   "returnType": "void",
-                  "line": 86,
+                  "line": 92,
                   "classification": "unit"
                 },
                 {
                   "name": "rejectsDisconnectedOutputAndUnknownInscriptionKey",
                   "returnType": "void",
-                  "line": 106,
+                  "line": 113,
                   "classification": "unit"
                 }
               ],
