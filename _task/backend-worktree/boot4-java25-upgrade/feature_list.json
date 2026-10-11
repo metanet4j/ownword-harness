@@ -1125,7 +1125,8 @@
         "R3 验收（第二百二十二轮）：LINE/BRANCH 收口第六批——一个用例覆盖 BapPath 的 5 处缺口（sdk 提交 fbaedac）。5 处缺口集中在路径解析与边界校验，故一个用例一并覆盖：① 第 38 行的 startsWith m 或 startsWith M 假侧——断言不带前缀的 0/1 与其带前缀形式等价（m 与 M 各一）；② 第 47 行的三种硬化后缀——断言撇号、h、H 三种写法互相等价，并对比未加后缀者；③ 第 91 行的 prefix 越界——下界与上界各断言一次（-1 与 size 加一）；④ 第 107 到 108 行空路径取末段——断言抛 IllegalStateException；⑤ 第 182 行的 equals 假侧——断言与字符串比较及与 null 比较均返回 false（而非抛 ClassCastException）。为何合为一个用例：这 5 处同属路径字符串的解析与边界这一契约，分开写会重复建场；而断言各自独立、失败时消息可区分，不影响可诊断性。验证：BapPathTest 10 例全绿（一次通过）；清单已同步。BapPath 应已达标。",
         "R3 验收（第二百二十三轮）：**LINE/BRANCH 收口第七批——覆盖 `AddressEnhance` 的 P2SH 构造侧与 `equals` 假侧**（sdk 提交见历史）——① **构造器的 `version == network.getP2SHHeader() ? fromScriptHash : fromPubKeyHash` 的 P2SH 侧**：以 `new AddressEnhance(BsvNetwork.MAINNET, MAINNET.getP2SHHeader(), hash)` 构造，断言 `isP2SHAddress()` 为真，并以默认构造的 P2PKH 地址作对照（断言为假）——**这是真实功能：脚本哈希地址是与公钥哈希地址并列的另一类地址形态**，此前只覆盖了后者；② **`equals` 的 `other instanceof AddressEnhance value && …` 假侧**：断言**脚本哈希与公钥哈希地址不相等**、**与非同类（字符串）比较返回 false**、**与 `null` 比较返回 false**（即**不抛 `ClassCastException`／`NullPointerException`**）。**验证：AddressLiteTest 3 例全绿（一次通过）**；清单已同步。`AddressEnhance` 应已达标。**说明**：本轮再次印证「未覆盖项中相当一部分是**真实功能的另一条分支**」（如 P2SH 侧），**补它是在测另一类输入形态，而非为覆盖率凑数**。",
         "R3 验收（第二百二十四轮）：**LINE/BRANCH 收口第八批——覆盖 `EcKeyLiteExtend` 的守卫与错误路径**（sdk 提交见历史）——该类 **6 处缺口全是守卫与错误路径**，故以一个用例覆盖：① **`:30` 的 `priv == null ? null : fromScalar(priv)` null 侧**——只传公钥构造、断言 `getPrivateKey()` 为 null；② **`:34—35` 两参皆空**——断言抛 `IllegalArgumentException`；③ **`:85—86` 签名不合法返回 false**——**null 签名**与**长度非 65** 各断言一次；④ **`:100—101` 的 null 侧**——`verify(hash, (String) null)` 返回 false（**短路、不做 Base64 解码**）；⑤ **`:163—164` 仅公钥不可签名**——断言抛 `IllegalStateException`（**而非静默产出无效签名**）。**过程修正**：缺 `BsvHashBytes` 的 import。**验证：EcKeyLiteExtendTest 3 例全绿**；清单已同步。**说明**：这些**都不是边角分支**——「两参皆空」「长度非 65 的签名」「仅公钥却要签名」**都是调用方真会犯的错**，断言它们保证的是**「报错而非静默产出无效结果」**。",
-        "R3 验收（第二百二十五轮）：**LINE/BRANCH 收口第九批——覆盖 `PrivateKey` 的构造器与 WIF 校验**（sdk 提交见历史）——覆盖 4 处守卫路径：① **`:30—31` 底层私钥为空** → 抛 `IllegalArgumentException`；② **`:35` 网络为 `null`** → **默认主网**（真实用法：多数调用方只关心密钥本身）；③ **`:44—45` WIF 为空** → 抛 `InvalidKeyException`；④ **`:68—69` WIF 解码失败** → 非 base58 字符时**转 `InvalidKeyException`，而非泄漏原始 `RuntimeException`**。**验证：PrivateKeyTest 3 例全绿（一次通过）**；清单已同步。**该类另有两处待覆盖（下一批）**：⑤ **`:72—73` WIF 载荷长度 < 33 的拒绝**——需构造「校验和合法但载荷过短」的 base58 串，手写易错，**宜由 `toWif` 反向构造或使用固定向量**；⑥ **`:75—77` WIF 版本字节与网络不符的拒绝**——需一条**测试网 WIF** 走主网解析，**同样宜由 `toWif(prefix)` 生成而非硬编码字面量**（**硬编码会随实现变动而失效**）。"
+        "R3 验收（第二百二十五轮）：**LINE/BRANCH 收口第九批——覆盖 `PrivateKey` 的构造器与 WIF 校验**（sdk 提交见历史）——覆盖 4 处守卫路径：① **`:30—31` 底层私钥为空** → 抛 `IllegalArgumentException`；② **`:35` 网络为 `null`** → **默认主网**（真实用法：多数调用方只关心密钥本身）；③ **`:44—45` WIF 为空** → 抛 `InvalidKeyException`；④ **`:68—69` WIF 解码失败** → 非 base58 字符时**转 `InvalidKeyException`，而非泄漏原始 `RuntimeException`**。**验证：PrivateKeyTest 3 例全绿（一次通过）**；清单已同步。**该类另有两处待覆盖（下一批）**：⑤ **`:72—73` WIF 载荷长度 < 33 的拒绝**——需构造「校验和合法但载荷过短」的 base58 串，手写易错，**宜由 `toWif` 反向构造或使用固定向量**；⑥ **`:75—77` WIF 版本字节与网络不符的拒绝**——需一条**测试网 WIF** 走主网解析，**同样宜由 `toWif(prefix)` 生成而非硬编码字面量**（**硬编码会随实现变动而失效**）。",
+        "R3 验收（第二百二十六轮）：补齐 PrivateKey 的 WIF 载荷校验，并查明版本检查经该入口不可达（§85）（sdk 提交 05912df）。① 第 72 到 73 行载荷不足 33 字节已覆盖：用 Utils.toBase58Check 由 API 自身构造一条 2 字节载荷的 base58check 串、断言被拒绝（仍遵循 §225 的原则：不硬编码字面量，使断言与编码细节无关）。② 第 75 到 77 行版本字节与网络不符——经 fromWIF(String) 不可达：该入口在比对版本前先执行 BsvNetwork networkType = decodeNetworkType(wif)，即从 WIF 自身推断网络；故随后的 payload.get(0) != networkType.getDumpedPrivateKeyHeader() 按构造必然成立，该分支是对推断结果的冗余自检；我最初为它写的用例（测试网 WIF 走主网解析应被拒）因此失败，已改正为断言真实契约（fromWIF 应能从 WIF 推断出所属网络，测试网 WIF 解析出 TESTNET3）。验证：PrivateKeyTest 4 例全绿；清单已同步。结论：该处与 §83 的 resolveKeyProvider、§84 的 signInputs 返回值同类，都是检查无法按表面语义触发；区别是本条属良性的冗余自检（推断后不可能不符），故不宜删除（它守的是推断函数与版本常量保持一致这一内部约定），列为登记候选第 5 项。"
       ],
       "commits": [
         {
@@ -1595,9 +1596,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "5b6b437"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "05912df"
         }
       ],
-      "statusNote": "进行中（R3 第 1 组）：门禁 5 条已达成 4 条，唯一剩项 **gaps=0**（全模块 行约103／分支约176／方法 14）；tests=238、failures=0、errors=0、skipped=0；METHOD 覆盖已达可达上限；LINE/BRANCH 收口进行中（已清 7 个类；`PrivateKey` 余 2 处）；**登记候选 4 项**（§83／§84 两项为语义缺陷）。",
+      "statusNote": "进行中（R3 第 1 组）：门禁 5 条已达成 4 条，唯一剩项 gaps=0（全模块 行约102、分支约175、方法 14）；tests=239、failures=0、errors=0、skipped=0；METHOD 覆盖已达可达上限；LINE/BRANCH 收口进行中（已清 8 个类）；登记候选 5 项（§83 与 §84 两项为语义缺陷，§85 为良性冗余自检）。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
