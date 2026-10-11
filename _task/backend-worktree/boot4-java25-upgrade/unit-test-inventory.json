@@ -2886,6 +2886,17 @@
                   "classification": "unit"
                 }
               ]
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/bap/MasterKeyBapBaseTest.java",
+              "methods": [
+                {
+                  "name": "derivesTheSameKeyThroughBothGetKeyBasePathOverloads",
+                  "returnType": "void",
+                  "line": 19,
+                  "classification": "unit"
+                }
+              ]
             }
           ],
           "classificationReviewed": true,
