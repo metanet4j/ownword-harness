@@ -2571,15 +2571,27 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "walksTheWholeOrdinalLockingScriptChainAndItsFailureSides",
+                  "name": "coversPushdataEncodingVariantsAndTheOrdinalHashLookup",
                   "returnType": "void",
                   "line": 147,
                   "classification": "unit"
                 },
                 {
+                  "name": "rejectsMissingConnectedOutputWhenResolvingSpendInfo",
+                  "returnType": "void",
+                  "line": 190,
+                  "classification": "unit"
+                },
+                {
+                  "name": "walksTheWholeOrdinalLockingScriptChainAndItsFailureSides",
+                  "returnType": "void",
+                  "line": 199,
+                  "classification": "unit"
+                },
+                {
                   "name": "coversMalformedScriptBranchesOfTheOrdinalHelpers",
                   "returnType": "void",
-                  "line": 237,
+                  "line": 289,
                   "classification": "unit"
                 }
               ],
