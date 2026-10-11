@@ -1723,15 +1723,21 @@
               "classification": "unit",
               "methods": [
                 {
+                  "name": "mapsEveryBaseSignatureScopeIncludingNone",
+                  "returnType": "void",
+                  "line": 34,
+                  "classification": "unit"
+                },
+                {
                   "name": "estimatesSpendSizeForCommonAndOrdinalScripts",
                   "returnType": "void",
-                  "line": 25,
+                  "line": 49,
                   "classification": "unit"
                 },
                 {
                   "name": "insertsSignaturesAtTheCorrectPositionForEachScriptType",
                   "returnType": "void",
-                  "line": 50,
+                  "line": 75,
                   "classification": "unit"
                 }
               ],
