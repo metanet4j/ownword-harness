@@ -2506,27 +2506,33 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "broadcastDelegatesOnlyToTheProvidedLocalFunction",
+                  "name": "addInputHandlesAllThreeUtxoShapes",
                   "returnType": "void",
                   "line": 144,
                   "classification": "unit"
                 },
                 {
+                  "name": "broadcastDelegatesOnlyToTheProvidedLocalFunction",
+                  "returnType": "void",
+                  "line": 171,
+                  "classification": "unit"
+                },
+                {
                   "name": "constructorsPreserveTheExistingTransactionAndKeyProvider",
                   "returnType": "void",
-                  "line": 157,
+                  "line": 184,
                   "classification": "unit"
                 },
                 {
                   "name": "sigmaSigningKeepsThePayloadAndExposesAVerifiableCurrentIdentitySignature",
                   "returnType": "void",
-                  "line": 174,
+                  "line": 201,
                   "classification": "unit"
                 },
                 {
                   "name": "publicOnlyKeyUsesAConservativeUnlockingSizeForChangeEstimation",
                   "returnType": "void",
-                  "line": 196,
+                  "line": 223,
                   "classification": "unit"
                 }
               ],
