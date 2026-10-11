@@ -1944,19 +1944,25 @@
                 {
                   "name": "missingConnectedOutputIsReportedAndBatchSkipsIt",
                   "returnType": "void",
-                  "line": 75,
+                  "line": 76,
                   "classification": "unit"
                 },
                 {
                   "name": "singleInputSigningCreatesAForkIdSignature",
                   "returnType": "void",
-                  "line": 90,
+                  "line": 91,
                   "classification": "unit"
                 },
                 {
                   "name": "unknownKeysAreSkippedByBatchAndReportedUnavailableBySingleInput",
                   "returnType": "void",
-                  "line": 104,
+                  "line": 106,
+                  "classification": "unit"
+                },
+                {
+                  "name": "reportsTheHashFlagsItWasConstructedWith",
+                  "returnType": "void",
+                  "line": 148,
                   "classification": "unit"
                 }
               ],
