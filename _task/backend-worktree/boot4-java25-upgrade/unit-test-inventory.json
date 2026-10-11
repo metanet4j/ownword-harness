@@ -999,13 +999,19 @@
                 {
                   "name": "testBase58",
                   "returnType": "void",
-                  "line": 10,
+                  "line": 13,
                   "classification": "unit"
                 },
                 {
                   "name": "delegatesNetworkVersionScriptHashFlagAndHashCodeToBsvAddress",
                   "returnType": "void",
-                  "line": 18,
+                  "line": 21,
+                  "classification": "unit"
+                },
+                {
+                  "name": "constructsScriptHashAddressesAndComparesByUnderlyingAddress",
+                  "returnType": "void",
+                  "line": 45,
                   "classification": "unit"
                 }
               ],
