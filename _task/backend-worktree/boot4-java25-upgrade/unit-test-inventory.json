@@ -1754,69 +1754,75 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "skipsInputsWhoseSourceTransactionHasNullOutputs",
+                  "name": "remoteSignerSkipsInputsItCannotResolveInsteadOfFailing",
                   "returnType": "void",
                   "line": 129,
                   "classification": "unit"
                 },
                 {
+                  "name": "skipsInputsWhoseSourceTransactionHasNullOutputs",
+                  "returnType": "void",
+                  "line": 155,
+                  "classification": "unit"
+                },
+                {
                   "name": "skipsInputsWhoseSourceTransactionIsNotATransaction",
                   "returnType": "void",
-                  "line": 151,
+                  "line": 177,
                   "classification": "unit"
                 },
                 {
                   "name": "skipsInputsWhoseSourceTransactionHasNoOutputs",
                   "returnType": "void",
-                  "line": 171,
+                  "line": 197,
                   "classification": "unit"
                 },
                 {
                   "name": "treatsAnOutputWithoutLockingScriptAsAnEmptyScript",
                   "returnType": "void",
-                  "line": 195,
+                  "line": 221,
                   "classification": "unit"
                 },
                 {
                   "name": "collectsOnlyUnsignedDataHashesAndSkipsDisconnectedInputs",
                   "returnType": "void",
-                  "line": 209,
+                  "line": 235,
                   "classification": "unit"
                 },
                 {
                   "name": "signsTheRequestedSingleAnyoneCanPayHash",
                   "returnType": "void",
-                  "line": 232,
+                  "line": 258,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalBuilderReportsSignerFailure",
                   "returnType": "void",
-                  "line": 247,
+                  "line": 273,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalBuilderForwardsForkId",
                   "returnType": "void",
-                  "line": 261,
+                  "line": 287,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalOutputCarriesTheRequestedContentAndPendingBsmHash",
                   "returnType": "void",
-                  "line": 279,
+                  "line": 305,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteSignerLeavesAnAlreadyDisconnectedInputUntouched",
                   "returnType": "void",
-                  "line": 297,
+                  "line": 323,
                   "classification": "unit"
                 },
                 {
                   "name": "fourArgumentRemoteOrdinalOutputUsesTheDefaultSigningIdentity",
                   "returnType": "void",
-                  "line": 313,
+                  "line": 339,
                   "classification": "unit"
                 }
               ],
