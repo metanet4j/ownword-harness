@@ -1463,31 +1463,37 @@
                 {
                   "name": "constructorsKeepTheSelectedTransactionAndKeyProvider",
                   "returnType": "void",
-                  "classification": "unit",
-                  "line": 42
+                  "line": 44,
+                  "classification": "unit"
                 },
                 {
                   "name": "signsPaymentAndInscribedInputsInMemory",
                   "returnType": "void",
-                  "line": 65,
+                  "line": 59,
                   "classification": "unit"
                 },
                 {
                   "name": "rejectsInputsWithoutAResolvableKey",
                   "returnType": "void",
-                  "line": 89,
+                  "line": 77,
                   "classification": "unit"
                 },
                 {
                   "name": "appliesRequestedSignatureScopeToTheSignature",
                   "returnType": "void",
-                  "line": 98,
+                  "line": 87,
                   "classification": "unit"
                 },
                 {
                   "name": "simpleSignatureOverloadDefaultsToAll",
                   "returnType": "void",
-                  "line": 116,
+                  "line": 99,
+                  "classification": "unit"
+                },
+                {
+                  "name": "addOrdInputWithoutScriptFallsBackToAnEmptyScript",
+                  "returnType": "void",
+                  "line": 122,
                   "classification": "unit"
                 }
               ],
