@@ -955,19 +955,25 @@
                 {
                   "name": "test",
                   "returnType": "void",
-                  "line": 13,
+                  "line": 14,
                   "classification": "unit"
                 },
                 {
                   "name": "coversFactoryOverloadsNetworkTypeCompressionAndEcKeyTransform",
                   "returnType": "void",
-                  "line": 27,
+                  "line": 28,
                   "classification": "unit"
                 },
                 {
                   "name": "validatesConstructorAndWifInputs",
                   "returnType": "void",
-                  "line": 54,
+                  "line": 55,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsWifWithUnknownNetworkAndIllegalPayload",
+                  "returnType": "void",
+                  "line": 82,
                   "classification": "unit"
                 }
               ],
