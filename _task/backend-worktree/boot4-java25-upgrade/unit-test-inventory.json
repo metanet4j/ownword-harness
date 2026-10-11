@@ -1388,19 +1388,25 @@
                 {
                   "name": "aesCbcMatchesThePlatformPkcs5Cipher",
                   "returnType": "void",
-                  "line": 21,
+                  "line": 22,
                   "classification": "unit"
                 },
                 {
                   "name": "explicitEphemeralKeyProducesAuthenticatedRoundTrip",
                   "returnType": "void",
-                  "line": 38,
+                  "line": 39,
+                  "classification": "unit"
+                },
+                {
+                  "name": "roundTripsTheBase64StringOverloads",
+                  "returnType": "void",
+                  "line": 57,
                   "classification": "unit"
                 },
                 {
                   "name": "randomEphemeralKeyAndTamperingAreHandled",
                   "returnType": "void",
-                  "line": 56,
+                  "line": 77,
                   "classification": "unit"
                 }
               ],
