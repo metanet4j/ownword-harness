@@ -2816,6 +2816,23 @@
                 }
               ],
               "classificationReason": "静态客户端替身下验证 UTXO 映射、空结果与 spend 优先级"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/EcKeyLiteExtendTest.java",
+              "methods": [
+                {
+                  "name": "exposesDerHashAndHexOfTheUnderlyingPublicKey",
+                  "returnType": "void",
+                  "line": 25,
+                  "classification": "unit"
+                },
+                {
+                  "name": "distinguishesPrivateBearingInstancesFromPublicOnlyOnes",
+                  "returnType": "void",
+                  "line": 45,
+                  "classification": "unit"
+                }
+              ]
             }
           ],
           "classificationReviewed": true,
