@@ -1978,9 +1978,15 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "reportsTheHashFlagsItWasConstructedWith",
+                  "name": "rejectsANullPartialTransaction",
                   "returnType": "void",
                   "line": 168,
+                  "classification": "unit"
+                },
+                {
+                  "name": "reportsTheHashFlagsItWasConstructedWith",
+                  "returnType": "void",
+                  "line": 178,
                   "classification": "unit"
                 }
               ],
