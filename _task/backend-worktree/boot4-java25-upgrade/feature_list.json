@@ -1024,7 +1024,8 @@
         "R3 验收（第一百二十三轮）：**第十九个产品缺陷——无限递归**（sdk 提交 0188a70）——`OrdTransactionTemplateContractTest#defaultCreateBapOrdinalIncludesRootAndSigmaProofs` 报 `StackOverflowError`，栈内**全部**是 `OrdTransactionTemplate.createBapOrdinal(...:129)`。根因：该类有两个 7 参重载——便捷版收 `BapBase`、方法体只有一句转调；实现版收 `BapBaseCore`，而 `BapBase` 是 `BapBaseCore` 的**子类**，Java 重载解析对 7 参调用**永远选中更具体的 `BapBase` 版本**，于是转调解析回自己 → 无限递归（与本项目第 30—33 轮「删参数后重载塌缩」同源）。修复：删除该冗余便捷重载（传 `BapBase` 会自动解析到 `BapBaseCore` 版本，语义等价），并加注禁止加回。**验证：该类 errors 1 → 0（StackOverflow 消除）**；test-compile 退出码 0。该类剩余 2 项（本地签名路径解锁脚本为空、期望 SignErrorException）。累计修复 19 个产品缺陷。",
         "R3 验收（第一百二十四轮）：**第二十个产品缺陷——本地签名路径不认 Ordinals 铭文输入**（sdk 提交 ade5488）——`OrdTransactionTemplateContractTest#defaultSendOrdinalSignsBothInputsWithoutReinscription` 报「输入 0 的解锁脚本不应为空」。根因：`TransactionBuilder` 在 `getUnLockScriptSize`（172 行）与 `prepareInputsForSigning`（245 行）都用 `pubKeyHashOf(script)`，而它**只认 5 chunk 的纯 P2PKH**；Ordinals 铭文脚本是 P2PKH 前缀 + 铭文包络（13 chunk），故返回空 → **铭文输入被整体跳过、解锁脚本始终为空**。这与 §96 修过的 `RemoteTransactionSigner` 同类，当时**本地路径漏改**。修复：新增 `pubKeyHashWithOrdinalsFallback(Script)`（先 P2PKH、空则回退 `TxHelperExtend.getPubKeyHashByOrdinalScript`），两处调用点改用它。**验证：该用例由失败转通过，该类失败 2 → 1**；test-compile 退出码 0。剩余 1 项 `sendOrdinalPropagatesSignerFailure`（属旧「可注入签名器」前提，下轮按 §23 处置）。累计修复 20 个产品缺陷。",
         "R3 验收（第一百二十五轮）：主动排查同类缺陷——修掉只认 P2PKH 的第 3 处（sdk 提交 06ce262）。按上轮复盘改为「修完一处即 grep 同类模式」，搜得 OrdinalsTransactionSigner.signInput 第 58 行仍只用 pubKeyHashOf，且为空时 log.warn + return false，即铭文输入被整体跳过并上报签名失败。修复：与另两处一致，为空时回退 TxHelperExtend.getPubKeyHashByOrdinalScript，告警文案改为 neither P2PKH nor ordinal inscription。实测 test-compile 退出码 0、相关签名器测试 5 例通过。这是「同一语义错误散落在多个调用点」的第 3 次出现（§96 远程签名器、§124 TransactionBuilder、本轮），故改为主动搜索而非等测试暴露——该做法已纳入后续每轮的固定动作。",
-        "R3 验收（第一百二十六轮）：**`OrdTransactionTemplateContractTest` 8 例全绿**——最后一个用例 `sendOrdinalPropagatesSignerFailure` 按 §23 覆盖迁移纪律改写：旧前提「可注入且会报失败的签名器」已按 §3 取消；新架构下等价路径是「密钥提供者解析不到密钥 → `prepareInputsForSigning` 抛 `SignErrorException`」（已核实生产实现第 250—252 行确实如此），故入参由可用 keyBag 换成无密钥提供者，**断言的仍是「签名失败会向上传播」这一契约本身**，并登记原覆盖去向。该类此前还修掉两个产品缺陷（`createBapOrdinal` 无限递归、`TransactionBuilder` 不认铭文输入）。**已单类验证全绿增至 10 个类（64 例）。**"
+        "R3 验收（第一百二十六轮）：**`OrdTransactionTemplateContractTest` 8 例全绿**——最后一个用例 `sendOrdinalPropagatesSignerFailure` 按 §23 覆盖迁移纪律改写：旧前提「可注入且会报失败的签名器」已按 §3 取消；新架构下等价路径是「密钥提供者解析不到密钥 → `prepareInputsForSigning` 抛 `SignErrorException`」（已核实生产实现第 250—252 行确实如此），故入参由可用 keyBag 换成无密钥提供者，**断言的仍是「签名失败会向上传播」这一契约本身**，并登记原覆盖去向。该类此前还修掉两个产品缺陷（`createBapOrdinal` 无限递归、`TransactionBuilder` 不认铭文输入）。**已单类验证全绿增至 10 个类（64 例）。**",
+        "R3 验收（第一百二十七轮）：**第二十一个产品缺陷——字节序（第 3 次同族）**（sdk 提交 cfa942f）——`UtilsExtendTest` 两项失败期望 `5658e532…f726`、实得 `26f76803…5856`，**逐字节互为整体反序**。根因：`UtilsExtend.toHash` 用 `BsvHashBytes.of(bytes).toString()`（注释还声称与旧库一致），而 §108 的实验已证明**旧库「显示序」就是摘要原样**、`toString()` 会再反转一次。修复为 `HexUtil.encodeHexStr(...getBytes())`。**验证：UtilsExtendTest 3 例全绿**；test-compile 退出码 0。**同类扫描**（第 125 轮起的固定动作）另发现 TxoHelper 162/168/175 与 BobHelper 323/329 共 5 处同字面用法，但它们位于 **txid 转换**处且已被**冻结向量 V07**（场景含 txid/outpoint 字节序、status: frozen）绑定的测试验证通过，**不需改动**——即同名字面量在不同语义位置上正确性相反，**不可机械统一**。同轮另定位：`BapPathTest` 为 HD 缺 `equals`（比对同 xprv 引用不同）、`BapBaseLifecycleTest` 为路径格式（`M/424150H/…` vs `m/424150'/…`）与 `IllegalStateException` 期望。**累计修复 21 个产品缺陷。**"
       ],
       "commits": [
         {
@@ -1368,7 +1369,7 @@
           "commit": "b97fbee"
         }
       ],
-      "statusNote": "进行中（R3 严格验收）：编译全绿；已修 20 个产品缺陷 + 1 处同类主动排查 + 1 个上游缺陷；**10 个测试类全绿（64 例）**；验收剩余约 10 项。",
+      "statusNote": "进行中（R3 严格验收）：编译全绿；已修 **21** 个产品缺陷 + 1 处主动排查 + 1 个上游缺陷；**11 个测试类全绿（67 例）**；验收剩余约 8 项。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
