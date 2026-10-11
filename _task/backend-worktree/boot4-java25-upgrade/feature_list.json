@@ -999,7 +999,8 @@
         "**R3 严格验收第五跑**（evidence/20261011T011825Z）：tests=201、failures=25、errors=7（合计 **32**）。**收敛曲线：84 → 55 → 50 → 49 → 32**（较上跑降 35%），本跑体现了第九个产品缺陷修复（远程回填不依赖本地私钥 + SIGHASH 尾字节）与 `RemoteOrdTransactionTemplateContractTest` 清零的效果。剩余失败分布（按类）：OrdHistoricalFixtureContractTest 4、BobTxoConversionContractTest 4、SigHashExtendContractTest 3、OrdTransactionTemplateContractTest 3、BapProviderKeyBagTest 3、KeyAddressContractTest 3、UtilsExtendTest 2、OrdTransactionBuilderContractTest 2、BapBaseLifecycleTest 2、TxHelperExtendContractTest 1 等。**已累计修复 9 个产品缺陷**；已单类验证全绿 4 个测试类（33 例）。",
         "**R3 验收迭代：KeyAddressContractTest 3 → 1**（sdk 提交见历史）——修两处测试侧口径：① 新 SDK 私钥类型无 `equals`，直接 `assertEquals` 两个同标量对象因**引用不同**而失败，改为比对 32 字节 hex；② 「坏长度／坏校验和／坏压缩标记」用例期望 `RuntimeException`，实际抛 `InvalidKeyException`（**受检**异常，非 RuntimeException 子类），断言类型对齐。剩余 1 项：`roundTripsCompressedAndUncompressedWifOnBothNetworks` 报「Compressed keys must have last byte set as 0x01. Yours is [51]」，即**非压缩 WIF 往返**失败，下一轮取证判定是产品缺陷还是新 SDK 不支持该输入。",
         "R3 验收：KeyAddressContractTest 清零（3 例全绿）+ 第十个产品缺陷（sdk 提交 3822878）。WIF 往返失败取证后查出两处缺陷：① fromWIF 的压缩标记校验读错字节——payload 含 4 字节校验和，payload.get(size-1) 取到的是校验和末字节（实测 0x33=51），把合法 WIF 判为非法并抛 \"Compressed keys must have last byte set as 0x01\"，影响所有 WIF 导入，属高影响缺陷；修复为校验和验证后 payload = body。② toWif 忽略 compressed 标志——新 SDK 的 toWif(prefix) 内部固定追加 0x01（只产出压缩 WIF），导致非压缩私钥往返后变成压缩 WIF；修复为压缩时沿用 SDK、非压缩时自行按 Base58Check 组装。实测 3 例 0 失败 0 错误。累计修复 10 个产品缺陷；已单类验证全绿的测试类增至 5 个（36 例）。",
-        "R3 验收（第一百零一轮）：SigHashExtendContractTest 三项失败已**裁决**（migration-rules §31）——期望值来自测试内**独立的 BIP143 前映像计算器**，git 考古确认**该计算器是基线自带的**（非我编写）且基线下与旧库一致，故**责任在 SigHashExtend 一侧**（§3 硬约束：绝不能把 referenceDigest 改成调用 SigHashExtend 来对齐）。已逐项**排除**：txid 字节序（两侧同为内部序）、hashPrevouts/hashSequence 置零规则、SIGHASH 范围拼接、最终双 SHA-256。**下一轮改用「比对前映像字节」取证**（不比对摘要，摘要不同无法指出差异位置），最可能的差异点是 script 的写入方式（`Script.fromBinary` 会先解析再序列化）。本轮**未改动任何代码**，三项失败保持原样作为可靠信号。"
+        "R3 验收（第一百零一轮）：SigHashExtendContractTest 三项失败已**裁决**（migration-rules §31）——期望值来自测试内**独立的 BIP143 前映像计算器**，git 考古确认**该计算器是基线自带的**（非我编写）且基线下与旧库一致，故**责任在 SigHashExtend 一侧**（§3 硬约束：绝不能把 referenceDigest 改成调用 SigHashExtend 来对齐）。已逐项**排除**：txid 字节序（两侧同为内部序）、hashPrevouts/hashSequence 置零规则、SIGHASH 范围拼接、最终双 SHA-256。**下一轮改用「比对前映像字节」取证**（不比对摘要，摘要不同无法指出差异位置），最可能的差异点是 script 的写入方式（`Script.fromBinary` 会先解析再序列化）。本轮**未改动任何代码**，三项失败保持原样作为可靠信号。",
+        "R3 验收：SigHashExtendContractTest 清零（3 例全绿）+ 第十一个产品缺陷（sdk 提交 1dda752）。取证（§31.3 定的方法）：先裁决归属（期望值来自**基线自带**的独立 BIP143 计算器，责任在被测实现一侧），再逐项排除（txid 字节序、置零规则、SIGHASH 拼接、双 SHA-256 均一致），最后**打印两侧前映像字节**——实测**两侧前映像逐字节完全相同**（len=160、hex 一致），从而把差异锁定在「前映像→摘要」这一步。根因：SigHashExtend 用 BsvHashBytes.fromList(List)（按显示序解释）承载双 SHA-256 结果，而独立计算器用 of(byte[])（内部序），得到同一哈希的两种字节序，故**摘要整体反序**。**影响面最大**：hashForForkIdSignature 是所有本地签名与预签名哈希的入口，摘要反序意味着**每个签名都签在错误的哈希上**、交易一律无法通过脚本校验。修复：改用 of(toBytes(...)) 承载内部序字节，新增 toBytes 助手；**未改动 referenceDigest**（§3 硬约束）。实测 3 例 0 失败 0 错误。累计修复 11 个产品缺陷；已单类验证全绿增至 6 个类（39 例）。"
       ],
       "commits": [
         {
@@ -1343,7 +1344,7 @@
           "commit": "b97fbee"
         }
       ],
-      "statusNote": "进行中（R3 严格验收）：编译全绿；验收失败 84 → 30；已修 10 个产品缺陷；5 个测试类单类验证全绿（36 例）。",
+      "statusNote": "进行中（R3 严格验收）：编译全绿；验收失败 84 → ~27；已修 11 个产品缺陷；6 个测试类单类验证全绿（39 例）。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
