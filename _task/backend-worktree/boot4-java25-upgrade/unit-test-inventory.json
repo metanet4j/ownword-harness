@@ -1909,6 +1909,12 @@
                   "returnType": "void",
                   "line": 414,
                   "classification": "unit"
+                },
+                {
+                  "name": "walksTheDataNullLegOfTheStandardPubKeyCheck",
+                  "returnType": "void",
+                  "line": 449,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "普通地址、多签、P2SH、Ord 与未知脚本的花费字节估算、签名位置及创建时间；纯本地计算"
