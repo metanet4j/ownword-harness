@@ -1754,93 +1754,99 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "remoteSignerHonoursTheSingleOutputSignatureFlavour",
+                  "name": "probeNonNumericSourceAmountForms",
                   "returnType": "void",
                   "line": 129,
                   "classification": "unit"
                 },
                 {
-                  "name": "remoteSignerWritesTheAnyoneCanPayFlagIntoTheUnlockingScript",
+                  "name": "remoteSignerHonoursTheSingleOutputSignatureFlavour",
                   "returnType": "void",
                   "line": 150,
                   "classification": "unit"
                 },
                 {
+                  "name": "remoteSignerWritesTheAnyoneCanPayFlagIntoTheUnlockingScript",
+                  "returnType": "void",
+                  "line": 185,
+                  "classification": "unit"
+                },
+                {
                   "name": "remoteSignerPrefersContextPublicKeyThenFallsBackToLocalKey",
                   "returnType": "void",
-                  "line": 180,
+                  "line": 215,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteSignerSkipsInputsItCannotResolveInsteadOfFailing",
                   "returnType": "void",
-                  "line": 219,
+                  "line": 254,
                   "classification": "unit"
                 },
                 {
                   "name": "skipsInputsWhoseSourceTransactionHasNullOutputs",
                   "returnType": "void",
-                  "line": 245,
+                  "line": 280,
                   "classification": "unit"
                 },
                 {
                   "name": "skipsInputsWhoseSourceTransactionIsNotATransaction",
                   "returnType": "void",
-                  "line": 267,
+                  "line": 302,
                   "classification": "unit"
                 },
                 {
                   "name": "skipsInputsWhoseSourceTransactionHasNoOutputs",
                   "returnType": "void",
-                  "line": 287,
+                  "line": 322,
                   "classification": "unit"
                 },
                 {
                   "name": "treatsAnOutputWithoutLockingScriptAsAnEmptyScript",
                   "returnType": "void",
-                  "line": 311,
+                  "line": 346,
                   "classification": "unit"
                 },
                 {
                   "name": "collectsOnlyUnsignedDataHashesAndSkipsDisconnectedInputs",
                   "returnType": "void",
-                  "line": 325,
+                  "line": 360,
                   "classification": "unit"
                 },
                 {
                   "name": "signsTheRequestedSingleAnyoneCanPayHash",
                   "returnType": "void",
-                  "line": 348,
+                  "line": 383,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalBuilderReportsSignerFailure",
                   "returnType": "void",
-                  "line": 363,
+                  "line": 398,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalBuilderForwardsForkId",
                   "returnType": "void",
-                  "line": 377,
+                  "line": 412,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalOutputCarriesTheRequestedContentAndPendingBsmHash",
                   "returnType": "void",
-                  "line": 395,
+                  "line": 430,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteSignerLeavesAnAlreadyDisconnectedInputUntouched",
                   "returnType": "void",
-                  "line": 413,
+                  "line": 448,
                   "classification": "unit"
                 },
                 {
                   "name": "fourArgumentRemoteOrdinalOutputUsesTheDefaultSigningIdentity",
                   "returnType": "void",
-                  "line": 429,
+                  "line": 464,
                   "classification": "unit"
                 }
               ],
