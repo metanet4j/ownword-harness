@@ -1865,13 +1865,19 @@
                 {
                   "name": "rejectsMultiSigShapedScriptsThatFailItsThreeInternalChecks",
                   "returnType": "void",
-                  "line": 204,
+                  "line": 207,
                   "classification": "unit"
                 },
                 {
                   "name": "replacesTheSignatureInPlaceAndPicksThePushOpCodeByLength",
                   "returnType": "void",
-                  "line": 242,
+                  "line": 245,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsScriptsThatHaveTheRightShapeButOneWrongOpCodeOrLength",
+                  "returnType": "void",
+                  "line": 285,
                   "classification": "unit"
                 }
               ],
