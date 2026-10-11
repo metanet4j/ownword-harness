@@ -1171,49 +1171,55 @@
                 {
                   "name": "parsesLegacyHardenedNotation",
                   "returnType": "void",
-                  "line": 24,
+                  "line": 25,
                   "classification": "unit"
                 },
                 {
                   "name": "parsesStandardNotationAndMixedCase",
                   "returnType": "void",
-                  "line": 33,
+                  "line": 34,
                   "classification": "unit"
                 },
                 {
                   "name": "parsesEmptyAndRootPaths",
                   "returnType": "void",
-                  "line": 46,
+                  "line": 47,
                   "classification": "unit"
                 },
                 {
                   "name": "rejectsMalformedSegmentsAndOutOfRangeIndices",
                   "returnType": "void",
-                  "line": 55,
+                  "line": 56,
                   "classification": "unit"
                 },
                 {
                   "name": "supportsAppendPrefixAndSegmentQueries",
                   "returnType": "void",
-                  "line": 63,
+                  "line": 64,
                   "classification": "unit"
                 },
                 {
                   "name": "appendFollowsCurrentNumberListConvention",
                   "returnType": "void",
-                  "line": 76,
+                  "line": 77,
                   "classification": "unit"
                 },
                 {
                   "name": "derivesTheSameKeyAsTheStandardVectorPath",
                   "returnType": "void",
-                  "line": 84,
+                  "line": 85,
                   "classification": "unit"
                 },
                 {
                   "name": "deriveRejectsHardenedDerivationOnPublicNode",
                   "returnType": "void",
-                  "line": 98,
+                  "line": 100,
+                  "classification": "unit"
+                },
+                {
+                  "name": "appendsIndicesAndPathsAndKeepsHashCodeConsistentWithEquals",
+                  "returnType": "void",
+                  "line": 110,
                   "classification": "unit"
                 }
               ]
@@ -1401,13 +1407,19 @@
                 {
                   "name": "generatedWordListsHaveRequestedDistinctDictionaryWords",
                   "returnType": "void",
-                  "line": 19,
+                  "line": 16,
                   "classification": "unit"
                 },
                 {
                   "name": "bip39VectorAndSerializationRoundTrip",
                   "returnType": "void",
                   "line": 31,
+                  "classification": "unit"
+                },
+                {
+                  "name": "exposesTheMasterPrivateKeyAndItsSerialisedHex",
+                  "returnType": "void",
+                  "line": 49,
                   "classification": "unit"
                 }
               ],
