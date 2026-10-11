@@ -2510,7 +2510,13 @@
                 {
                   "name": "acceptsOnlyNonEmptyPushDataChunks",
                   "returnType": "void",
-                  "line": 14,
+                  "line": 20,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsNullChunk",
+                  "returnType": "void",
+                  "line": 36,
                   "classification": "unit"
                 }
               ],
