@@ -2907,13 +2907,19 @@
                 {
                   "name": "exposesDerHashAndHexOfTheUnderlyingPublicKey",
                   "returnType": "void",
-                  "line": 25,
+                  "line": 28,
                   "classification": "unit"
                 },
                 {
                   "name": "distinguishesPrivateBearingInstancesFromPublicOnlyOnes",
                   "returnType": "void",
-                  "line": 45,
+                  "line": 48,
+                  "classification": "unit"
+                },
+                {
+                  "name": "guardsNullKeysMalformedSignaturesAndPublicOnlySigning",
+                  "returnType": "void",
+                  "line": 71,
                   "classification": "unit"
                 }
               ]
