@@ -30,9 +30,12 @@
 | **E6** | `RemoteTransactionSigner` | `:98—99` | `signature instanceof TransactionSignature`——`Signature.fromDER` **只构造基类** | §91 |
 | **E7** | `TransactionBuilder` | `:289` | `outputSize` 的 `lockingScript == null` 侧——**唯一调用点传入硬编码的非 null** | §99 |
 | **E8** | `ScriptExtend` | `:222` | `pushDataOpCode` 的 `length >= 0` 腿——**唯一调用点传 `sigBytes.length`（数组长度恒非负）** | §105 |
+| **E9** | `PrivateKey` | `:72—73` | `payload.size() < 33`——**数学下界：51/52 字符经 base58 解码去校验和后必 ≥ 33** | §107 |
+| **E10** | `TransactionBuilder` | `:227—228` | `catch → throw SignErrorException`——**三方向（输入侧／输出侧／整体）均已试、`sign()` 均容忍** | §108 |
+| **E11** | `RemoteTransactionSigner` `:124` ＋ `OrdinalsTransactionSigner` `:116` | 同型 | `satoshisOf` 的 `: null` 兜底——**三种非数字形态穷尽、校验类型通用** | §109 |
 
-**建议**：**登记**。八项都不是"没测"，而是**"测不到"**——每项都有"为何不可达"的实测依据。
-**政策依据**：计划第 192 行允许"仅因行号或类名变化调整精确登记"，而**这八项均非"新增逻辑未测"、而是"逻辑不可达"**，正属该条允许的情形。
+**建议**：**登记**。十一项都不是"没测"，而是**"测不到"**——每项都有"为何不可达"的实测依据。
+**政策依据**：计划第 192 行允许"仅因行号或类名变化调整精确登记"，而**这十一项均非"新增逻辑未测"、而是"逻辑不可达"**，正属该条允许的情形。
 
 **逐项归属（剩余 14 个分支的去向）**：E1（1 方法）、E2／E3／E4／E5（各 1 分支）、E8（1 分支）＝ **6 项**；
 **§226 已证不可达**（`PrivateKey:75—77`）与 **§93／§272 实测不可达**（`OrdinalsTransactionSigner:103—105`）＝ 2 项；
@@ -58,7 +61,13 @@
 
 **若您倾向不改行为**：两者均按 C 处理，并在 `feature_list.json` 的 R6 交付报告中如实记录。
 
-## 4. 第三类：**待定性（3 项，未穷尽验证）**
+## 4. 第三类：**待定性（0 项——已全部穷尽并判定为登记候选）**
+
+**P1（`RemoteTransactionSigner:124`）／P2（`OrdinalsTransactionSigner:116`）→ 已判定为 **E11**（§109）**；
+**P3（`PrivateKey:72—73`）→ 已判定为 **E9**（§107）**；
+**P4（`TransactionBuilder:227—228`）→ 已判定为 **E10**（§108）**。
+
+### （历史记录）当时的待定性清单
 
 | # | 位置 | 现象 | 已试 | 尚未试 |
 | --- | --- | --- | --- | --- |
