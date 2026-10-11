@@ -1841,19 +1841,25 @@
                 {
                   "name": "mapsEveryBaseSignatureScopeIncludingNone",
                   "returnType": "void",
-                  "line": 34,
+                  "line": 36,
                   "classification": "unit"
                 },
                 {
                   "name": "estimatesSpendSizeForCommonAndOrdinalScripts",
                   "returnType": "void",
-                  "line": 49,
+                  "line": 51,
                   "classification": "unit"
                 },
                 {
                   "name": "insertsSignaturesAtTheCorrectPositionForEachScriptType",
                   "returnType": "void",
-                  "line": 75,
+                  "line": 77,
+                  "classification": "unit"
+                },
+                {
+                  "name": "recognizesEveryStandardScriptShape",
+                  "returnType": "void",
+                  "line": 181,
                   "classification": "unit"
                 }
               ],
