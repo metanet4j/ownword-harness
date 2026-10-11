@@ -1086,7 +1086,8 @@
         "R3 验收（第一百八十四轮）：**删除 `BapBase.getDeterministicKey(BapPath)` 死代码**（sdk 提交见历史）——按 §70.2 判断，`BapBase:218` 的未覆盖是**「行」而非「分支」**（从未执行），故先按 §164/§172 经验**查调用点**：① `deriveBapId(...)` **有 6 处引用**（第 46/47/48 行等），非死代码；② 但包含 L218 的 **`BapBase.getDeterministicKey(BapPath)` 是私有方法且 0 调用**——grep 到的另外 7 处 `getDeterministicKey` 全属 **`CryptoHelper`** 的同名方法（另一个类）。**删除该私有方法**，L218 的未覆盖随之消失；**验证：test-compile 退出码 0、无回归**。**再次印证「先查使用情况」的顺序价值**：若直接补测试，会发现该私有方法**根本无从调用**，最终只能走与政策冲突的「登记例外」。",
         "R3 验收（第一百八十五轮）：**查明 `BapBase:96` 断言的完整调用链，为补测试铺路**（migration-rules §71）——`BapBase:96` 的 `Assert.isTrue(!root.isEmpty(), \"root 路径不能为空\")` 位于**私有静态** `nextChildNumbers(BapPath)`（L95）内，其**唯一调用点**在 L88：`fromRootChildNumberList(masterPrivateKey, rootChildNumberList, config)` → `new BapBase(..., nextChildNumbers(rootChildNumberList), ...)`。**故 L96 断言失败侧可经 public 的 `fromRootChildNumberList` 传入空 `BapPath` 触达**（真实可达）。**待确认项**：`BapBaseTest` 现有用例**未使用 `BapBaseConfig`／`fromRootChildNumberList`／`BapPath.of`**，故需先确认测试中 `BapBaseConfig` 的构造方式（查其他测试类的先例），再写用例；另需确认 `Assert.isTrue` 抛出的异常类型（Hutool 的 `Assert.isTrue` 抛 `IllegalArgumentException`）以匹配 `assertThrows`。**本轮仅完成链路勘查，未改代码**（避免在未确认配置构造方式时贸然动笔）。",
         "R3 验收（第一百八十五轮）：**覆盖 `BapBase` 空 root 路径的断言失败侧**（sdk 提交见历史）——按 §71 查明的调用链（`BapBase:96` 在私有静态 `nextChildNumbers(BapPath)` 内，唯一调用点在 public 的 `fromRootChildNumberList`），新增用例经该 public 入口传入**空 `BapPath`**、断言抛 `IllegalArgumentException`。**过程修正**：初版 import 写作 `com.metanet4j.sdk.bap.config.DefaultBapBaseConfig`，但该类实际就在 `com.metanet4j.sdk.bap`（与测试同包）、**无需 import**，已移除。**验证：BapBaseTest 10 例全绿**（原 9 + 新 1）；清单已同步。**注**：本轮前段另完成 `BapBase:96` 断言的链路勘查（§71），并确认测试中 `BapBaseConfig` 的构造先例为 `new DefaultBapBaseConfig()`（见 `BapBaseLifecycleTest`）。",
-        "R3 验收（第一百八十六轮）：覆盖 BapBase 加密路径为空白串的一侧（sdk 提交见历史）。BapBase:227 的判断为 encryptPath == null || encryptPath.isBlank()；既有用例 selfExportReportsMissingEncryptionPathWithItsCause 用 getDefaultEncryptPath() 返回 null 覆盖了左侧，而右侧 isBlank() 一直未覆盖。新增用例以同一模式（匿名子类覆写）返回纯空白串，断言同样抛 IllegalStateException、消息为 BAP 身份加密失败 且带 cause。该侧真实可达：配置里写空格与完全没写，对调用方是同一种没配。验证：BapBaseLifecycleTest 9 例全绿（原 8 + 新 1）；清单已同步。说明：本轮的定位方式即 §70 所判定的断言/抛错侧——该类未覆盖项多为同一判断的另一侧（已有用例只覆盖了一边），故照既有用例的模式补另一侧即可，成本极低。"
+        "R3 验收（第一百八十六轮）：覆盖 BapBase 加密路径为空白串的一侧（sdk 提交见历史）。BapBase:227 的判断为 encryptPath == null || encryptPath.isBlank()；既有用例 selfExportReportsMissingEncryptionPathWithItsCause 用 getDefaultEncryptPath() 返回 null 覆盖了左侧，而右侧 isBlank() 一直未覆盖。新增用例以同一模式（匿名子类覆写）返回纯空白串，断言同样抛 IllegalStateException、消息为 BAP 身份加密失败 且带 cause。该侧真实可达：配置里写空格与完全没写，对调用方是同一种没配。验证：BapBaseLifecycleTest 9 例全绿（原 8 + 新 1）；清单已同步。说明：本轮的定位方式即 §70 所判定的断言/抛错侧——该类未覆盖项多为同一判断的另一侧（已有用例只覆盖了一边），故照既有用例的模式补另一侧即可，成本极低。",
+        "R3 验收（第一百八十七轮）：覆盖 RemoteTransactionBuilder 的空锁定脚本兜底（sdk 提交见历史）——RemoteTransactionBuilder:99-100 的 sourceOutput.lockingScript == null ? new Script() : sourceOutput.lockingScript 与此前 §148 处理过的 OrdTransactionBuilder:43 是同一模式，故照该次写法补测试。新增用例向 builder 加入锁定脚本为 null 的 TransactionOutput（new TransactionOutput(null, 1d)），断言 getTxInputSignHash(...) 不抛错且仍产出 1 条待签哈希，即该输入按空脚本正常参与签名哈希计算——该行为由本用例首次固定下来。验证：RemoteTransactionContractTest 10 例全绿（原 9 + 新 1）；清单已同步。说明：未为 RemoteOrdTransactionBuilder 新建测试类（§70.3）——新建会引入新的覆盖面，优先在已有测试类中覆盖。"
       ],
       "commits": [
         {
@@ -1506,7 +1507,7 @@
           "commit": "43e0f22"
         }
       ],
-      "statusNote": "进行中（R3 第 1 组）：门禁 5 条已达成 4 条，唯一剩项 gaps=0（22 类、行约130/分支157/方法36）；tests=214、failures=0、errors=0、skipped=0；ScriptHelper 已达标；快速项推进中（已删 1 处死代码 + 补 2 处分支/断言侧）。",
+      "statusNote": "进行中（R3 第 1 组）：门禁 5 条已达成 4 条，唯一剩项 gaps=0（22 类、行约130/分支157/方法36）；tests=215、failures=0、errors=0、skipped=0；ScriptHelper 已达标；快速项推进中（已删 1 处死代码 + 补 3 处分支/断言/空值侧）。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
