@@ -986,7 +986,8 @@
         "**【里程碑】metanet4j-sdk test-compile 退出码归零**（metanet4j-sdk 提交 d0a4218）：最后一个有错文件 RemoteTransactionContractTest 按 §27 清单整体迁移清零——补 keyProvider 字段与 sourceOutput/signatureHashType 助手、交易构造改新 SDK（inputs.add(new TransactionInput(...))／outputs.add(new TransactionOutput(...))）、signInputs 新签名、输出金额取值等逐处修正；**删除 remoteSignerHasNoSerializedPrivateState 并登记覆盖去向**（isReady/serialize/deserialize 属已取消的旧 TransactionSigner 接口）；两个 mock 签名器用例改写为「密钥解析不到 → SignErrorException」与「断言签名 SIGHASH 尾字节」。**至此 metanet4j-sdk 的生产与测试源码全部编译通过**；旧引用文件：生产 3、测试 5。过程记录：该文件错误计数在 javac 归因波动下不可靠（同一文件报过 66/70/78/82/56/24/16/2），故按 §27 清单逐类改完再看退出码判断，而非以中间计数判断净收益。**下一步：R3 严格验收**（`verify-unit.py --mode accept --scope metanet4j-sdk`）。",
         "**R3 严格验收首次运行**（`verify-unit.py --mode accept --scope metanet4j-sdk`，证据目录 evidence/20261011T002922Z）：测试**真的运行了**——metanet4j-sdk tests=201、failures=25、errors=59；另有 5 处「用例未发现」（我重命名/删除的用例需同步冻结清单）与「缺少 JaCoCo XML」（覆盖报告未生成）。**首次运行即暴露第三个、也是最严重的系统性产品缺陷**（sdk 提交 698bd97）：新 SDK 的 `P2PKH.lock(Object)` 只接受「地址字符串或数字列表」，**不接受 `byte[]`**，而 `AddressEnhance.getHash160()` 返回 byte[]，导致所有 `new P2PKH().lock(address.getHash160())` **运行时必抛** IllegalArgumentException。受影响生产代码 5 处：`TransactionBuilder` 4 处（输入锁定脚本／输出／找零／找零尺寸）、`OrdScriptBuilder` 1 处（铭文前缀）——即「无法构造任何输出、无法构造任何铭文」，编译能过、一用即崩。已改为传地址字符串（`lock(x.toBase58())`），测试侧同名写法 24 处同步（sdk 提交见历史）。生产编译错误保持 0、test-compile 退出码保持 0。",
         "**R3 严格验收迭代**（证据 evidence/20261011T003257Z、20261011T003741Z）：① P2PKH 修复后 errors 59 → 19（失败 25 → 36，因代码能跑更远、断言开始显形）；② 又发现并修复**第四个产品缺陷**（sdk 提交 310fe56）：8 处 `IllegalStateException: Unsupported script type` 从 `ScriptExtend.getNumberOfBytesRequiredToSpend` 抛出——**手续费估算不应因非标准锁定脚本而中断构链**（真实链上存在非标准脚本；且该异常会掩盖其后真正的签名错误，例如 `OrdTransactionTemplateContractTest#sendOrdinalPropagatesSignerFailure` 期望 `SignErrorException` 却先被它打断）。已改为捕获后按保守值估算（`SIG_SIZE + 65`，与「取不到密钥」口径一致）+ debug 日志。修复后 errors 19 → 12。**验收轨迹：失败用例 84 → 55 → 50；errors 59 → 19 → 12。**仍待处理：38 个断言失败（多为测试迁移口径）、12 个错误、5 处「用例未发现」的冻结清单同步、JaCoCo XML 覆盖报告。",
-        "**R3 严格验收迭代**（第三跑 evidence/20261011T003741Z：tests=201、failures=38、errors=12，失败合计 50）：本轮修复 **第五个产品缺陷**（sdk 提交 2b0d3f6）——`BobHelper.toTape` 的 `globalCellItemIndex` 对每个 chunk 自增、而 `globalCellItems.add` 只在推送 chunk 执行，二者不同步；该字段被当作列表 0 基下标使用（切片用 +1、收尾用 subList(pre, index)），遇到非推送 chunk（如纯操作码输入）即越界（`IndexOutOfBoundsException: toIndex = 1`）。迁移诱因是旧 `scriptChunk.isPushData()`（opcode<=OP_PUSHDATA4，含 OP_0）被我换成了更严格的 `ScriptHelper.hasPushData`（额外要求 data 非空且 op!=0），使计入的 chunk 变少而暴露该不同步。修复：把自增移入 hasPushData 分支、紧随加入之后，索引与列表严格同步。另修复**测试侧错误**（sdk 提交 6a400d4）：`SignerTransactionContractTest` 两个用例在 `signInput` 后直接读解锁脚本——`signInput` 只注入模板、实际签名由 `Transaction.sign()` 触发，已补 `tx.sign()`。test-compile 退出码保持 0。"
+        "**R3 严格验收迭代**（第三跑 evidence/20261011T003741Z：tests=201、failures=38、errors=12，失败合计 50）：本轮修复 **第五个产品缺陷**（sdk 提交 2b0d3f6）——`BobHelper.toTape` 的 `globalCellItemIndex` 对每个 chunk 自增、而 `globalCellItems.add` 只在推送 chunk 执行，二者不同步；该字段被当作列表 0 基下标使用（切片用 +1、收尾用 subList(pre, index)），遇到非推送 chunk（如纯操作码输入）即越界（`IndexOutOfBoundsException: toIndex = 1`）。迁移诱因是旧 `scriptChunk.isPushData()`（opcode<=OP_PUSHDATA4，含 OP_0）被我换成了更严格的 `ScriptHelper.hasPushData`（额外要求 data 非空且 op!=0），使计入的 chunk 变少而暴露该不同步。修复：把自增移入 hasPushData 分支、紧随加入之后，索引与列表严格同步。另修复**测试侧错误**（sdk 提交 6a400d4）：`SignerTransactionContractTest` 两个用例在 `signInput` 后直接读解锁脚本——`signInput` 只注入模板、实际签名由 `Transaction.sign()` 触发，已补 `tx.sign()`。test-compile 退出码保持 0。",
+        "**R3 严格验收第四跑**（evidence/20261011T004641Z）：tests=201、failures=40、errors=9（合计 49；较第三跑 errors 12 → 9）。**失败分类路线图已定稿**（migration-rules §28）：疑似产品缺陷 5 类（SIGHASH 范围未贯通——期望 0xC3 实得 0xC1、脚本多 1 字节、字段恒 null、remoteSignType 判错、密钥对象相等性）与测试侧 4 类（SignErrorException 前提变化、断言上下文、`signInput` 后未调 `tx.sign()`、异常类型——**本轮已修 `ReadUtilsTest`**，sdk 提交 c5c7c00）。**累计已修复 5 个产品缺陷**；收敛曲线：84 → 55 → 50 → 49。"
       ],
       "commits": [
         {
@@ -1320,9 +1321,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "6a400d4"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "c5c7c00"
         }
       ],
-      "statusNote": "进行中（R3 严格验收迭代）：编译全绿；验收失败用例 84 → 50 →（本轮再修 2 类）；**已累计修复 5 个产品缺陷**（费用口径、redeemScript、P2PKH.lock、费用估算健壮性、BobHelper cell 索引）；剩断言失败与 5 处清单同步、JaCoCo。",
+      "statusNote": "进行中（R3 严格验收）：编译全绿；验收失败 84 → 55 → 50 → 49；已修 5 个产品缺陷 + 若干测试项；失败分类路线图见 migration-rules §28。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
