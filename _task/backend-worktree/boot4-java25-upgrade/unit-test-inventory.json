@@ -2535,31 +2535,37 @@
                 {
                   "name": "extractsDestinationFromInscriptionWithOptionalMapMetadata",
                   "returnType": "void",
-                  "line": 39,
+                  "line": 40,
                   "classification": "unit"
                 },
                 {
                   "name": "rejectsOrdinaryAndIncompleteInscriptionScripts",
                   "returnType": "void",
-                  "line": 57,
+                  "line": 58,
                   "classification": "unit"
                 },
                 {
                   "name": "resolvesConnectedInscriptionAndOrdinaryPaymentThroughKeyProvider",
                   "returnType": "void",
-                  "line": 92,
+                  "line": 93,
                   "classification": "unit"
                 },
                 {
                   "name": "rejectsDisconnectedOutputAndUnknownInscriptionKey",
                   "returnType": "void",
-                  "line": 113,
+                  "line": 114,
                   "classification": "unit"
                 },
                 {
                   "name": "coversDefensiveBranchesAndThePublicHashListAccessor",
                   "returnType": "void",
-                  "line": 131,
+                  "line": 132,
+                  "classification": "unit"
+                },
+                {
+                  "name": "coversMalformedScriptBranchesOfTheOrdinalHelpers",
+                  "returnType": "void",
+                  "line": 147,
                   "classification": "unit"
                 }
               ],
