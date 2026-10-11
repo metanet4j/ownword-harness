@@ -2590,57 +2590,63 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "feeEstimationResolvesTheKeyLengthOnlyWhenBothPreconditionsHold",
+                  "name": "preparingInputsToleratesASourceOutputWithoutLockingScript",
                   "returnType": "void",
                   "line": 175,
                   "classification": "unit"
                 },
                 {
+                  "name": "feeEstimationResolvesTheKeyLengthOnlyWhenBothPreconditionsHold",
+                  "returnType": "void",
+                  "line": 196,
+                  "classification": "unit"
+                },
+                {
                   "name": "changeAmountToleratesMissingOrNonNumericFields",
                   "returnType": "void",
-                  "line": 213,
+                  "line": 234,
                   "classification": "unit"
                 },
                 {
                   "name": "prepareInputsRejectsNullProviderAndToleratesUnusableInputs",
                   "returnType": "void",
-                  "line": 244,
+                  "line": 265,
                   "classification": "unit"
                 },
                 {
                   "name": "feeEstimationFallsBackForUnrecognizableScripts",
                   "returnType": "void",
-                  "line": 278,
+                  "line": 299,
                   "classification": "unit"
                 },
                 {
                   "name": "addInputHandlesAllThreeUtxoShapes",
                   "returnType": "void",
-                  "line": 299,
+                  "line": 320,
                   "classification": "unit"
                 },
                 {
                   "name": "broadcastDelegatesOnlyToTheProvidedLocalFunction",
                   "returnType": "void",
-                  "line": 332,
+                  "line": 353,
                   "classification": "unit"
                 },
                 {
                   "name": "constructorsPreserveTheExistingTransactionAndKeyProvider",
                   "returnType": "void",
-                  "line": 345,
+                  "line": 366,
                   "classification": "unit"
                 },
                 {
                   "name": "sigmaSigningKeepsThePayloadAndExposesAVerifiableCurrentIdentitySignature",
                   "returnType": "void",
-                  "line": 362,
+                  "line": 383,
                   "classification": "unit"
                 },
                 {
                   "name": "publicOnlyKeyUsesAConservativeUnlockingSizeForChangeEstimation",
                   "returnType": "void",
-                  "line": 384,
+                  "line": 405,
                   "classification": "unit"
                 }
               ],
