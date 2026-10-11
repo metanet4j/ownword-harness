@@ -1954,21 +1954,27 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "singleInputSigningCreatesAForkIdSignature",
+                  "name": "ordinalBatchSigningRejectsNullAndSignsEveryInput",
                   "returnType": "void",
                   "line": 91,
                   "classification": "unit"
                 },
                 {
+                  "name": "singleInputSigningCreatesAForkIdSignature",
+                  "returnType": "void",
+                  "line": 111,
+                  "classification": "unit"
+                },
+                {
                   "name": "unknownKeysAreSkippedByBatchAndReportedUnavailableBySingleInput",
                   "returnType": "void",
-                  "line": 106,
+                  "line": 126,
                   "classification": "unit"
                 },
                 {
                   "name": "reportsTheHashFlagsItWasConstructedWith",
                   "returnType": "void",
-                  "line": 148,
+                  "line": 168,
                   "classification": "unit"
                 }
               ],
