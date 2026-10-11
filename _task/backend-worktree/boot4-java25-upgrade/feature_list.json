@@ -975,7 +975,8 @@
         "R3 测试迁移（metanet4j-sdk 提交 70af6b6）：**RedeemDataExtendContractTest 编译清零（18 → 0）**——旧实现持有 List<ECKey> 并排序、可从旧库 RedeemData 适配；按计划 §3 改为值类型后测试重写为三个用例（getFullKey/getPubKeyBytes/getKeyHex 与 redeemScript、无私钥返回 null、非 P2SH 赎回脚本为空）。**随之取消的覆盖已登记**：密钥排序、列表防御性复制、旧 RedeemData 适配、多密钥中挑选有私钥者——这些行为在新架构下不再存在（KeyBag 反查已取消），非迁移遗漏；清单同步为 3 个方法。**旧引用测试文件 13 → 12**（起点 41，降 71%）。剩 4 个有错文件：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、BsocialDataLockBuilderContractTest 26、CryptoHelperContractTest 24。",
         "R3 测试迁移（metanet4j-sdk 提交 c948695）：**CryptoHelperContractTest 编译清零（24 → 0）**——按新 API 重写：网络参数改 BsvNetwork、子密钥派生改 BapPath.derive(HD)（取代 DeterministicHierarchy + List<ChildNumber> + HDKeyDerivation）、私钥比对改 HD.privKey 的 hex、地址期望值由独立派生的公钥经 AddressEnhance.fromPublicKey 得到。**旧引用测试文件 12 → 11**（起点 41，降 73%）。另显形 TxHelperExtendContractTest（42）与 BitailsAndGorillaHttpIntegrationTest（4）。当前有错文件 5 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、TxHelperExtendContractTest 42、BsocialDataLockBuilderContractTest 26、BitailsAndGorillaHttpIntegrationTest 4。",
         "R3 测试迁移（metanet4j-sdk 提交 d3a8261）：**BitailsAndGorillaHttpIntegrationTest 编译清零（4 → 0）**——AddressLite/MainNetParams → AddressEnhance.fromBase58(\"...\")（新 SDK 无网络入参）、金额断言改 long（BsvUtxo.getValue() 返回 BsvAmount）。**旧引用测试文件 11 → 10**（起点 41，降 76%）。另显形 UtxoProvidersTest（2）。当前有错文件 5 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、TxHelperExtendContractTest 42、BsocialDataLockBuilderContractTest 26、UtxoProvidersTest 2。",
-        "R3 测试迁移（metanet4j-sdk 提交 e5c801f）：**UtxoProvidersTest 编译清零（2 → 0）**——AddressLite/MainNetParams → AddressEnhance.fromBase58(\"...\")、UTXO → BsvUtxo、Coin.valueOf → BsvAmount.valueOf。**旧引用测试文件 10 → 9**（起点 41，降 78%）。另显形 BitailsProviderTest（2）。当前有错文件 5 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、TxHelperExtendContractTest 42、BsocialDataLockBuilderContractTest 26、BitailsProviderTest 2。"
+        "R3 测试迁移（metanet4j-sdk 提交 e5c801f）：**UtxoProvidersTest 编译清零（2 → 0）**——AddressLite/MainNetParams → AddressEnhance.fromBase58(\"...\")、UTXO → BsvUtxo、Coin.valueOf → BsvAmount.valueOf。**旧引用测试文件 10 → 9**（起点 41，降 78%）。另显形 BitailsProviderTest（2）。当前有错文件 5 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、TxHelperExtendContractTest 42、BsocialDataLockBuilderContractTest 26、BitailsProviderTest 2。",
+        "R3 测试迁移（metanet4j-sdk 提交 0cb38aa）：**BitailsProviderTest 编译清零（2 → 0）**——MainNetParams.get() → BsvNetwork.MAINNET（保留主网语义，该用例打真实 API）、UTXO → BsvUtxo。**旧引用测试文件 9 → 8**（起点 41，降 80%）；**有错文件降至 4 个且本轮无新文件显形**。剩 4 个：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、TxHelperExtendContractTest 42、BsocialDataLockBuilderContractTest 26——共 196 处，占全部剩余错误。"
       ],
       "commits": [
         {
@@ -1269,9 +1270,13 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "e5c801f"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "0cb38aa"
         }
       ],
-      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，有错文件 5 个；旧引用测试文件 9/54（起点 41，降 78%）。",
+      "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，有错文件 4 个（共 196 处）；旧引用测试文件 8/54（起点 41，降 80%）。",
       "startedAt": "2026-10-10T20:09:15+08:00",
       "completedAt": null
     },
