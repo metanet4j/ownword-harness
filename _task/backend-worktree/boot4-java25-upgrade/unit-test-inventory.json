@@ -2554,45 +2554,51 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "prepareInputsRejectsNullProviderAndToleratesUnusableInputs",
+                  "name": "amountAndSizeHelpersTolerateMissingOrNonNumericFields",
                   "returnType": "void",
                   "line": 146,
                   "classification": "unit"
                 },
                 {
+                  "name": "prepareInputsRejectsNullProviderAndToleratesUnusableInputs",
+                  "returnType": "void",
+                  "line": 175,
+                  "classification": "unit"
+                },
+                {
                   "name": "feeEstimationFallsBackForUnrecognizableScripts",
                   "returnType": "void",
-                  "line": 180,
+                  "line": 209,
                   "classification": "unit"
                 },
                 {
                   "name": "addInputHandlesAllThreeUtxoShapes",
                   "returnType": "void",
-                  "line": 201,
+                  "line": 230,
                   "classification": "unit"
                 },
                 {
                   "name": "broadcastDelegatesOnlyToTheProvidedLocalFunction",
                   "returnType": "void",
-                  "line": 228,
+                  "line": 257,
                   "classification": "unit"
                 },
                 {
                   "name": "constructorsPreserveTheExistingTransactionAndKeyProvider",
                   "returnType": "void",
-                  "line": 241,
+                  "line": 270,
                   "classification": "unit"
                 },
                 {
                   "name": "sigmaSigningKeepsThePayloadAndExposesAVerifiableCurrentIdentitySignature",
                   "returnType": "void",
-                  "line": 258,
+                  "line": 287,
                   "classification": "unit"
                 },
                 {
                   "name": "publicOnlyKeyUsesAConservativeUnlockingSizeForChangeEstimation",
                   "returnType": "void",
-                  "line": 280,
+                  "line": 309,
                   "classification": "unit"
                 }
               ],
