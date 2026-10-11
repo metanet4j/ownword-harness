@@ -981,7 +981,8 @@
         "R3 测试迁移（metanet4j-sdk 提交 e1ce096）：**BsocialDataLockBuilderContractTest 编译清零（26 → 0）**——按 §26 第三条替换纪律**逐处手工改**：13 处 `chunk.data()` → `ScriptHelper.getPushData(chunk)`（每处先读出外围表达式再整体替换）、2 处 `.opcode` → `.op`、`Ecies.decrypt` 密钥实参改 `getEncryptKey().getKey()`、夹具改业务 `PrivateKey.of`、`ScriptChunk` 改新 SDK 类型。**旧引用测试文件 8 → 7**（起点 41，降 83%）。**上一轮的正则实验（26 → 58）与本轮的逐处手工改（26 → 0）形成直接对照**，验证了 §26 结论。剩 3 个有错文件：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62、TxHelperExtendContractTest 42（共 170 处）。",
         "R3 测试迁移 + **修复产品代码缺口**（metanet4j-sdk 提交 84395a2）：① `TxHelperExtend.getConnectedRedeemDataExtend` 此前返回 `RedeemDataExtend.of(key, null)`，**redeemScript 恒为空**，调用方无法据此重建输入脚本或校验地址——改为回填连接输出的锁定脚本（P2SH 场景下即为赎回脚本本身）；② `TxHelperExtendContractTest` 按新签名重写（AddressEnhance/新 SDK Script、P2PKH.lock、畸形脚本用例改构造 List<ScriptChunk>、`getConnectedRedeemDataExtend` 入参改 TransactionOutput + SigningKeyProvider、「无连接输出」由 NPE 断言改为返回 null、并明确断言 redeemScript 等于锁定脚本）；清单同步为 4 个方法。**该文件 42 → 0；旧引用测试文件 7 → 6**（起点 41，降 85%）。**只剩 2 个有错文件**：RemoteTransactionContractTest 66、BapBaseCoreContractTest 62。",
         "R3 测试迁移（metanet4j-sdk 提交 284429a）：**BapBaseCoreContractTest 编译清零（62 → 0）**——匿名 BapBaseCore 的六个密钥访问器与 key(long) 助手改业务 PrivateKey、地址构造改 AddressEnhance.fromPrivateKey、Ecies 密钥实参改 .getKey()、旧 import 清理。**旧引用测试文件 6 → 5**（起点 41，降 88%）。**至此 `test-compile` 只剩 1 个有错文件：RemoteTransactionContractTest（66 处）。**该文件清零后即可进入 R3 严格验收（`verify-unit.py --mode accept --scope metanet4j-sdk`）。",
-        "R3 测试迁移（第八十四轮，实验并还原）：最后一个文件 `RemoteTransactionContractTest`（262 行）的迁移清单已定稿（migration-rules §27）——它早期已清掉 io.bitcoinsv import，剩余错误全是**遗留调用形态**：构造实参 `new RemoteTransactionSigner()`→`keyProvider`、`new Transaction(Net.MAINNET)`→`new Transaction()`、`addOutput/addInput` 改新 SDK 形式、`signInputs` 参数、以及 2 个 mock 签名器用例需重写（前提已消失）。本轮尝试机械替换**未取得净收益**（错误数在 66—78 间波动，javac 归因不稳定），**已按纪律还原，工作区干净**。结论：该文件改动互相咬合，须**整体重写**（同 TransactionBuilderContractTest 第 70 轮的成功方式），不可分批替换。"
+        "R3 测试迁移（第八十四轮，实验并还原）：最后一个文件 `RemoteTransactionContractTest`（262 行）的迁移清单已定稿（migration-rules §27）——它早期已清掉 io.bitcoinsv import，剩余错误全是**遗留调用形态**：构造实参 `new RemoteTransactionSigner()`→`keyProvider`、`new Transaction(Net.MAINNET)`→`new Transaction()`、`addOutput/addInput` 改新 SDK 形式、`signInputs` 参数、以及 2 个 mock 签名器用例需重写（前提已消失）。本轮尝试机械替换**未取得净收益**（错误数在 66—78 间波动，javac 归因不稳定），**已按纪律还原，工作区干净**。结论：该文件改动互相咬合，须**整体重写**（同 TransactionBuilderContractTest 第 70 轮的成功方式），不可分批替换。",
+        "R3 测试迁移（metanet4j-sdk 提交 b20f392）：RemoteTransactionContractTest 按 §27 清单开始迁移——4 处`new RemoteTransactionBuilder(remoteBap, new RemoteTransactionSigner())` → `keyProvider`、`paymentAddress` 改为直接取 `bap.getPayAccountAddress()`。**测量结论**：该文件错误计数在 javac 归因波动下**不可靠**（同一文件多次编译报过 66／70／78／82，含还原后的重测），故不再以该文件的错误计数判断净收益，改以「按清单逐类改完 + 最终 test-compile 退出码」为准。剩余待改：mock 签名器用例（前提已消失需重写）、交易构造（new Transaction(Net)、addInput/addOutput）、signInputs 参数、辅助方法。"
       ],
       "commits": [
         {
@@ -1291,6 +1292,10 @@
         {
           "repository": "metanet4j-sdk",
           "commit": "284429a"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "b20f392"
         }
       ],
       "statusNote": "进行中：SDK 生产编译 0 错误、生产旧引用 3；测试 test-compile 退出码 1，**只剩 1 个有错文件**（RemoteTransactionContractTest 66）；旧引用测试文件 5/54（起点 41，降 88%）。",
