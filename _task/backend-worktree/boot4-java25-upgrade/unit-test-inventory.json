@@ -1912,6 +1912,12 @@
                   "returnType": "void",
                   "line": 98,
                   "classification": "unit"
+                },
+                {
+                  "name": "rejectsUnresolvedAndNullSourceTxidWithItsCause",
+                  "returnType": "void",
+                  "line": 138,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "构造本地小交易，用独立 SHA-256 对照输入、输出、消息哈希和 Sigma 脚本解析"
