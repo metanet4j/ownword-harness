@@ -955,13 +955,19 @@
                 {
                   "name": "test",
                   "returnType": "void",
-                  "line": 12,
+                  "line": 13,
                   "classification": "unit"
                 },
                 {
                   "name": "coversFactoryOverloadsNetworkTypeCompressionAndEcKeyTransform",
                   "returnType": "void",
-                  "line": 26,
+                  "line": 27,
+                  "classification": "unit"
+                },
+                {
+                  "name": "validatesConstructorAndWifInputs",
+                  "returnType": "void",
+                  "line": 54,
                   "classification": "unit"
                 }
               ],
