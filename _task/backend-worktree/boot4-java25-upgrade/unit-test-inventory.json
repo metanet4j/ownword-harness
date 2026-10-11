@@ -2056,45 +2056,51 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "singleInputSigningSkipsUnrecognizableScripts",
+                  "name": "singleInputSigningTreatsAThrowingProviderAsNoKey",
                   "returnType": "void",
                   "line": 91,
                   "classification": "unit"
                 },
                 {
+                  "name": "singleInputSigningSkipsUnrecognizableScripts",
+                  "returnType": "void",
+                  "line": 108,
+                  "classification": "unit"
+                },
+                {
                   "name": "singleInputSigningRejectsNullTransactionAndOutOfRangeIndex",
                   "returnType": "void",
-                  "line": 109,
+                  "line": 126,
                   "classification": "unit"
                 },
                 {
                   "name": "ordinalBatchSigningRejectsNullAndSignsEveryInput",
                   "returnType": "void",
-                  "line": 132,
+                  "line": 149,
                   "classification": "unit"
                 },
                 {
                   "name": "singleInputSigningCreatesAForkIdSignature",
                   "returnType": "void",
-                  "line": 152,
+                  "line": 169,
                   "classification": "unit"
                 },
                 {
                   "name": "unknownKeysAreSkippedByBatchAndReportedUnavailableBySingleInput",
                   "returnType": "void",
-                  "line": 167,
+                  "line": 184,
                   "classification": "unit"
                 },
                 {
                   "name": "rejectsANullPartialTransaction",
                   "returnType": "void",
-                  "line": 209,
+                  "line": 226,
                   "classification": "unit"
                 },
                 {
                   "name": "reportsTheHashFlagsItWasConstructedWith",
                   "returnType": "void",
-                  "line": 219,
+                  "line": 236,
                   "classification": "unit"
                 }
               ],
