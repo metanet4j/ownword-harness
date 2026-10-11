@@ -2543,6 +2543,12 @@
                   "returnType": "void",
                   "line": 113,
                   "classification": "unit"
+                },
+                {
+                  "name": "coversDefensiveBranchesAndThePublicHashListAccessor",
+                  "returnType": "void",
+                  "line": 131,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "本地脚本和内存交易验证 Ord 识别、地址提取、关联输出及密钥查找，无网络或外部状态"
