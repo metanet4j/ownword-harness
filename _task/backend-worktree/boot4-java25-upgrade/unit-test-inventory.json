@@ -1245,6 +1245,12 @@
                   "returnType": "void",
                   "line": 38,
                   "classification": "unit"
+                },
+                {
+                  "name": "exposesTheWrappedBapBase",
+                  "returnType": "void",
+                  "line": 49,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "BAP KeyBag 的签名、支付与 Ord 密钥查找，未知哈希和公钥查找；纯本地计算"
