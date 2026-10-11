@@ -2572,19 +2572,25 @@
                 {
                   "name": "testHash",
                   "returnType": "void",
-                  "line": 9,
+                  "line": 11,
                   "classification": "unit"
                 },
                 {
                   "name": "hashesBytesAndExplicitCharacterEncodings",
                   "returnType": "void",
-                  "line": 23,
+                  "line": 22,
                   "classification": "unit"
                 },
                 {
                   "name": "formatsBitcoinSignedMessageAtVarIntBoundary",
                   "returnType": "void",
-                  "line": 36,
+                  "line": 35,
+                  "classification": "unit"
+                },
+                {
+                  "name": "convertsBetweenBytesHexAndBoxedLists",
+                  "returnType": "void",
+                  "line": 50,
                   "classification": "unit"
                 }
               ],
