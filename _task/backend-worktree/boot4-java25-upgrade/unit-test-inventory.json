@@ -7056,22 +7056,6 @@
               ]
             },
             {
-              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/convertor/MetaIdConvertorTest.java",
-              "classification": "external",
-              "methods": [
-                {
-                  "name": "testParseTx",
-                  "returnType": "void",
-                  "line": 22,
-                  "classification": "external",
-                  "replacementTests": [
-                    "com.metanet4j.tx.convertor.AIPConverterContractTest",
-                    "com.metanet4j.tx.convertor.MAPConverterContractTest"
-                  ]
-                }
-              ]
-            },
-            {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/convertor/TxoBobConverterTest.java",
               "classification": "mixed",
               "methods": [
@@ -7720,72 +7704,6 @@
               "methods": []
             },
             {
-              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/CommonTest.java",
-              "classification": "unit",
-              "methods": [
-                {
-                  "name": "test",
-                  "returnType": "void",
-                  "line": 39,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testHex",
-                  "returnType": "void",
-                  "line": 46,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testBap",
-                  "returnType": "void",
-                  "line": 52,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testVerifyAip",
-                  "returnType": "void",
-                  "line": 66,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testIsRoot",
-                  "returnType": "void",
-                  "line": 86,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testClose",
-                  "returnType": "void",
-                  "line": 94,
-                  "classification": "unit"
-                },
-                {
-                  "name": "convertJson",
-                  "returnType": "void",
-                  "line": 100,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testType",
-                  "returnType": "void",
-                  "line": 138,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testPlanaria",
-                  "returnType": "void",
-                  "line": 153,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testBapBase",
-                  "returnType": "void",
-                  "line": 161,
-                  "classification": "unit"
-                }
-              ]
-            },
-            {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/LocalTestUtxoProvider.java",
               "classification": "fixture",
               "methods": []
@@ -7841,10 +7759,6 @@
           "artifactId": "metanet4j-component-tx",
           "production": [
             {
-              "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/BschemaCustomTransactionSigner.java",
-              "kind": "class"
-            },
-            {
               "path": "metanet4j-component-tx/src/main/java/com/metanet4j/component/tx/DefaultBapBaseFactory.java",
               "kind": "class"
             },
@@ -7894,24 +7808,6 @@
             }
           ],
           "testSources": [
-            {
-              "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/BschemaCustomTransactionSignerContractTest.java",
-              "classification": "unit",
-              "methods": [
-                {
-                  "name": "getSignatureFailsOnTheUnimplementedEventStreamStub",
-                  "returnType": "void",
-                  "line": 15,
-                  "classification": "unit"
-                },
-                {
-                  "name": "extendSignatureAndKeyKeepsTheProvidedValues",
-                  "returnType": "void",
-                  "line": 24,
-                  "classification": "unit"
-                }
-              ]
-            },
             {
               "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultBapBaseFactoryContractTest.java",
               "classification": "unit",
@@ -8004,18 +7900,6 @@
                   "name": "buildTxSignsTheDataOutputAndTheChangeOutput",
                   "returnType": "void",
                   "line": 52,
-                  "classification": "unit"
-                },
-                {
-                  "name": "buildTxSignsWithAnExplicitlyProvidedSigner",
-                  "returnType": "void",
-                  "line": 65,
-                  "classification": "unit"
-                },
-                {
-                  "name": "buildTxWrapsSignErrorFromTheSigner",
-                  "returnType": "void",
-                  "line": 74,
                   "classification": "unit"
                 },
                 {
