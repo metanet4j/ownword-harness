@@ -993,7 +993,13 @@
                 {
                   "name": "testBase58",
                   "returnType": "void",
-                  "line": 9,
+                  "line": 10,
+                  "classification": "unit"
+                },
+                {
+                  "name": "delegatesNetworkVersionScriptHashFlagAndHashCodeToBsvAddress",
+                  "returnType": "void",
+                  "line": 18,
                   "classification": "unit"
                 }
               ],
