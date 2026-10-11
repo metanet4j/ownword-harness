@@ -1754,87 +1754,93 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "remoteSignerWritesTheAnyoneCanPayFlagIntoTheUnlockingScript",
+                  "name": "remoteSignerHonoursTheSingleOutputSignatureFlavour",
                   "returnType": "void",
                   "line": 129,
                   "classification": "unit"
                 },
                 {
+                  "name": "remoteSignerWritesTheAnyoneCanPayFlagIntoTheUnlockingScript",
+                  "returnType": "void",
+                  "line": 150,
+                  "classification": "unit"
+                },
+                {
                   "name": "remoteSignerPrefersContextPublicKeyThenFallsBackToLocalKey",
                   "returnType": "void",
-                  "line": 159,
+                  "line": 180,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteSignerSkipsInputsItCannotResolveInsteadOfFailing",
                   "returnType": "void",
-                  "line": 198,
+                  "line": 219,
                   "classification": "unit"
                 },
                 {
                   "name": "skipsInputsWhoseSourceTransactionHasNullOutputs",
                   "returnType": "void",
-                  "line": 224,
+                  "line": 245,
                   "classification": "unit"
                 },
                 {
                   "name": "skipsInputsWhoseSourceTransactionIsNotATransaction",
                   "returnType": "void",
-                  "line": 246,
+                  "line": 267,
                   "classification": "unit"
                 },
                 {
                   "name": "skipsInputsWhoseSourceTransactionHasNoOutputs",
                   "returnType": "void",
-                  "line": 266,
+                  "line": 287,
                   "classification": "unit"
                 },
                 {
                   "name": "treatsAnOutputWithoutLockingScriptAsAnEmptyScript",
                   "returnType": "void",
-                  "line": 290,
+                  "line": 311,
                   "classification": "unit"
                 },
                 {
                   "name": "collectsOnlyUnsignedDataHashesAndSkipsDisconnectedInputs",
                   "returnType": "void",
-                  "line": 304,
+                  "line": 325,
                   "classification": "unit"
                 },
                 {
                   "name": "signsTheRequestedSingleAnyoneCanPayHash",
                   "returnType": "void",
-                  "line": 327,
+                  "line": 348,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalBuilderReportsSignerFailure",
                   "returnType": "void",
-                  "line": 342,
+                  "line": 363,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalBuilderForwardsForkId",
                   "returnType": "void",
-                  "line": 356,
+                  "line": 377,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalOutputCarriesTheRequestedContentAndPendingBsmHash",
                   "returnType": "void",
-                  "line": 374,
+                  "line": 395,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteSignerLeavesAnAlreadyDisconnectedInputUntouched",
                   "returnType": "void",
-                  "line": 392,
+                  "line": 413,
                   "classification": "unit"
                 },
                 {
                   "name": "fourArgumentRemoteOrdinalOutputUsesTheDefaultSigningIdentity",
                   "returnType": "void",
-                  "line": 408,
+                  "line": 429,
                   "classification": "unit"
                 }
               ],
