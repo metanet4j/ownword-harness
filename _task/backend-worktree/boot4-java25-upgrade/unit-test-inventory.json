@@ -2577,21 +2577,27 @@
                   "classification": "unit"
                 },
                 {
+                  "name": "coversChunkShapesThatSurviveOnlyAsRawBytes",
+                  "returnType": "void",
+                  "line": 214,
+                  "classification": "unit"
+                },
+                {
                   "name": "rejectsMissingConnectedOutputWhenResolvingSpendInfo",
                   "returnType": "void",
-                  "line": 190,
+                  "line": 257,
                   "classification": "unit"
                 },
                 {
                   "name": "walksTheWholeOrdinalLockingScriptChainAndItsFailureSides",
                   "returnType": "void",
-                  "line": 199,
+                  "line": 311,
                   "classification": "unit"
                 },
                 {
                   "name": "coversMalformedScriptBranchesOfTheOrdinalHelpers",
                   "returnType": "void",
-                  "line": 289,
+                  "line": 436,
                   "classification": "unit"
                 }
               ],
