@@ -2502,67 +2502,73 @@
                 {
                   "name": "addsProviderUtxoDataAndChangeWithoutLosingValue",
                   "returnType": "void",
-                  "line": 48,
+                  "line": 49,
                   "classification": "unit"
                 },
                 {
                   "name": "acceptsAddressListUtxoListAndExistingFundingOutput",
                   "returnType": "void",
-                  "line": 83,
+                  "line": 84,
                   "classification": "unit"
                 },
                 {
                   "name": "calculateChangeUsesTheFeeRatePassedToThePublicMethod",
                   "returnType": "void",
-                  "line": 108,
+                  "line": 109,
                   "classification": "unit"
                 },
                 {
                   "name": "signsTheConnectedInputAndProducesASpendableTransaction",
                   "returnType": "void",
-                  "line": 119,
+                  "line": 120,
                   "classification": "unit"
                 },
                 {
                   "name": "reportsSignerFailureInsteadOfReturningAnUnsignedTransaction",
                   "returnType": "void",
-                  "line": 134,
+                  "line": 135,
+                  "classification": "unit"
+                },
+                {
+                  "name": "prepareInputsRejectsNullProviderAndToleratesUnusableInputs",
+                  "returnType": "void",
+                  "line": 146,
                   "classification": "unit"
                 },
                 {
                   "name": "feeEstimationFallsBackForUnrecognizableScripts",
                   "returnType": "void",
-                  "line": 145,
+                  "line": 180,
                   "classification": "unit"
                 },
                 {
                   "name": "addInputHandlesAllThreeUtxoShapes",
                   "returnType": "void",
-                  "line": 166,
+                  "line": 201,
                   "classification": "unit"
                 },
                 {
                   "name": "broadcastDelegatesOnlyToTheProvidedLocalFunction",
                   "returnType": "void",
-                  "line": 193,
+                  "line": 228,
                   "classification": "unit"
                 },
                 {
                   "name": "constructorsPreserveTheExistingTransactionAndKeyProvider",
                   "returnType": "void",
-                  "line": 206,
+                  "line": 241,
                   "classification": "unit"
                 },
                 {
                   "name": "sigmaSigningKeepsThePayloadAndExposesAVerifiableCurrentIdentitySignature",
                   "returnType": "void",
-                  "line": 223,
+                  "line": 258,
                   "classification": "unit"
                 },
                 {
                   "name": "publicOnlyKeyUsesAConservativeUnlockingSizeForChangeEstimation",
                   "returnType": "void",
-                  "line": 245,
+                  "line": 280,
                   "classification": "unit"
                 }
               ],
