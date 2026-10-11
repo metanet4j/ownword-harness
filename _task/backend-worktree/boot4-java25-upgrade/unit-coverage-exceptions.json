@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "decision": "按仓库逐类逐方法登记实测不可达或无行为字节码的精确例外：metanet4j-sdk 12 行（2026-09-28 用户批准）；R3 新增 metanet4j-base 两处纯分支例外（行覆盖 100%、无未覆盖方法）；component 模块起沿用同一机制逐项登记（如枚举中无调用点的构造器），其余手写代码维持行、分支、方法 100%。",
+  "decision": "按仓库逐类逐方法登记实测不可达或无行为字节码的精确例外：metanet4j-sdk 12 行（2026-09-28 用户批准）；R3 新增 metanet4j-base 两处纯分支例外（行覆盖 100%、无未覆盖方法）；component 模块起沿用同一机制逐项登记（如枚举中无调用点的构造器），其余手写代码维持行、分支、方法 100%。R3 收口再新增 9 个类共 14 项例外（E1—E11，均经逐条核查判定为不可达：私有防实例化构造器、编译期常量决定的分支、恒取 null 侧、返回值语义决定的不可达抛错侧、无生产者的守卫、只构造基类的 instanceof、唯一调用点硬编码非 null、数学下界、类型通用校验遮蔽；对应关系见 migration-rules §83—§113）。",
   "enforcement": "verify-unit.py 严格模式双向核对：实测未覆盖方法集合必须与本清单逐项相等；jacoco:check 通过各仓库属性 jacoco.unit.check.excludes 排除本清单类名（check 用点号 Java 名，内部类写作 Outer.Inner；本文件 class 字段用 XML 报告的 $ 名）。",
   "modules": {
     "metanet4j-sdk": {
@@ -128,6 +128,158 @@
               "line": 11,
               "lineMissed": 1,
               "methodMissed": 1
+            }
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/script/ScriptExtend",
+          "reason": "私有防实例化构造器（无调用点）——E1（migration-rules §94）；pushDataOpCode 的 length>=0 腿不可达：唯一调用点传 sigBytes.length，数组长度恒非负——E8（§105）",
+          "missed": [
+            {
+              "method": "<init>",
+              "line": 50,
+              "lineMissed": 2,
+              "methodMissed": 1,
+              "branchMissed": 0
+            },
+            {
+              "method": "pushDataOpCode",
+              "line": 222,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
+            }
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/bap/BapBase",
+          "reason": "分支由编译期常量 DEFAULT_ROOT_PATH 决定，假侧不可达——E2（§86）",
+          "missed": [
+            {
+              "method": "fromSignatureAddress",
+              "line": 152,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
+            }
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/remote/RemoteOrdTransactionTemplate",
+          "reason": "instanceof SigningKeyProvider 恒取 null 侧（BapBaseCore 实现者均不实现该接口）——E3（§83）",
+          "missed": [
+            {
+              "method": "resolveKeyProvider",
+              "line": 278,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
+            }
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/remote/RemoteOrdTransactionBuilder",
+          "reason": "signInputs 只在 tx 为 null 时返回 false，对已构造的 builder 该抛错侧不可达——E4（§84）",
+          "missed": [
+            {
+              "method": "signTx",
+              "line": 81,
+              "lineMissed": 1,
+              "methodMissed": 0,
+              "branchMissed": 1
+            }
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/sigma/Sigma",
+          "reason": "toBoxed 的 data==null 守卫：六个调用点全传非 null——E5（§89）",
+          "missed": [
+            {
+              "method": "toBoxed",
+              "line": 380,
+              "lineMissed": 1,
+              "methodMissed": 0,
+              "branchMissed": 1
+            }
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/remote/RemoteTransactionSigner",
+          "reason": "Signature.fromDER 只构造基类，instanceof TransactionSignature 真侧不可达（§91，E6）；satoshisOf 的 null 兜底被更早的类型校验遮蔽（§109，E11）",
+          "missed": [
+            {
+              "method": "signInputs",
+              "line": 43,
+              "lineMissed": 1,
+              "methodMissed": 0,
+              "branchMissed": 3
+            },
+            {
+              "method": "satoshisOf",
+              "line": 124,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
+            }
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/transcation/TransactionBuilder",
+          "reason": "outputSize 的 lockingScript==null 侧不可达：唯一调用点传硬编码非 null（§99，E7）；sign() 三方向（输入侧/输出侧/整体）均容忍，catch 不可达（§108，E10）；satoshisOf 的 null 兜底被更早校验遮蔽（§109，E11）",
+          "missed": [
+            {
+              "method": "completeAndSignTx",
+              "line": 224,
+              "lineMissed": 2,
+              "methodMissed": 0,
+              "branchMissed": 0
+            },
+            {
+              "method": "outputSize",
+              "line": 289,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
+            },
+            {
+              "method": "satoshisOf",
+              "line": 308,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
+            }
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/PrivateKey",
+          "reason": "payload.size()<33 不可达：51/52 字符经 base58 解码去校验和后必 >=33（数学下界，§107，E9）；版本字节检查经 fromWIF 不可达（§226）",
+          "missed": [
+            {
+              "method": "fromWIF",
+              "line": 44,
+              "lineMissed": 3,
+              "methodMissed": 0,
+              "branchMissed": 2
+            }
+          ]
+        },
+        {
+          "class": "com/metanet4j/sdk/signers/OrdinalsTransactionSigner",
+          "reason": "satoshisOf 的 null 兜底被更早的类型校验遮蔽（§109，E11）；批量签名外层 catch 实测不可达（§93/§272）",
+          "missed": [
+            {
+              "method": "signInputs",
+              "line": 93,
+              "lineMissed": 3,
+              "methodMissed": 0,
+              "branchMissed": 0
+            },
+            {
+              "method": "satoshisOf",
+              "line": 116,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
             }
           ]
         }
