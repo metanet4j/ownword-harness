@@ -1,133 +1,298 @@
 {
   "schemaVersion": 1,
-  "decision": "按仓库逐类逐方法登记实测不可达或无行为字节码的精确例外：metanet4j-sdk 12 行（2026-09-28 用户批准）；R3 新增 metanet4j-base 两处纯分支例外（行覆盖 100%、无未覆盖方法）；component 模块起沿用同一机制逐项登记（如枚举中无调用点的构造器），其余手写代码维持行、分支、方法 100%。R3 收口再新增 9 个类共 14 项例外（E1—E11，均经逐条核查判定为不可达：私有防实例化构造器、编译期常量决定的分支、恒取 null 侧、返回值语义决定的不可达抛错侧、无生产者的守卫、只构造基类的 instanceof、唯一调用点硬编码非 null、数学下界、类型通用校验遮蔽；对应关系见 migration-rules §83—§113）。",
+  "decision": "按仓库逐类逐方法登记实测不可达或无行为字节码的精确例外：metanet4j-sdk 12 行（2026-09-28 用户批准）；R3 新增 metanet4j-base 两处纯分支例外（行覆盖 100%、无未覆盖方法）；component 模块起沿用同一机制逐项登记（如枚举中无调用点的构造器），其余手写代码维持行、分支、方法 100%。R3 收口再新增 9 个类共 14 项例外（E1—E11，均经逐条核查判定为不可达：私有防实例化构造器、编译期常量决定的分支、恒取 null 侧、返回值语义决定的不可达抛错侧、无生产者的守卫、只构造基类的 instanceof、唯一调用点硬编码非 null、数学下界、类型通用校验遮蔽；对应关系见 migration-rules §83—§113）。同轮（§114）将既有 10 个排除类的登记按实测更新（R2／R3 期间这些类的行号位移、方法集变化，属计划第 192 行「仅因行号或类名变化调整精确登记」的情形）。",
   "enforcement": "verify-unit.py 严格模式双向核对：实测未覆盖方法集合必须与本清单逐项相等；jacoco:check 通过各仓库属性 jacoco.unit.check.excludes 排除本清单类名（check 用点号 Java 名，内部类写作 Outer.Inner；本文件 class 字段用 XML 报告的 $ 名）。",
   "modules": {
     "metanet4j-sdk": {
       "entries": [
         {
           "class": "com/metanet4j/sdk/BobHelper",
-          "reason": "隐式默认构造器，无业务行为",
+          "reason": "隐式默认构造器，无业务行为（§114：因 R2／R3 期间代码改动，行号与方法集已按实测更新；原登记仅覆盖其中的隐式构造器）",
           "missed": [
             {
               "method": "<init>",
-              "line": 26,
+              "line": 23,
               "lineMissed": 1,
-              "methodMissed": 1
+              "methodMissed": 1,
+              "branchMissed": 0
+            },
+            {
+              "method": "toTape",
+              "line": 125,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
+            },
+            {
+              "method": "asScript",
+              "line": 263,
+              "lineMissed": 1,
+              "methodMissed": 0,
+              "branchMissed": 1
+            },
+            {
+              "method": "isOpReturn",
+              "line": 271,
+              "lineMissed": 2,
+              "methodMissed": 1,
+              "branchMissed": 4
+            },
+            {
+              "method": "addressOfScript",
+              "line": 284,
+              "lineMissed": 4,
+              "methodMissed": 0,
+              "branchMissed": 14
+            },
+            {
+              "method": "txidOf",
+              "line": 326,
+              "lineMissed": 2,
+              "methodMissed": 0,
+              "branchMissed": 2
+            },
+            {
+              "method": "satoshisOf",
+              "line": 337,
+              "lineMissed": 1,
+              "methodMissed": 0,
+              "branchMissed": 1
+            },
+            {
+              "method": "isOpReturnAfterGenesis",
+              "line": 346,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
             }
           ]
         },
         {
           "class": "com/metanet4j/sdk/TxoHelper",
-          "reason": "隐式默认构造器，无业务行为",
+          "reason": "隐式默认构造器，无业务行为（§114：因 R2／R3 期间代码改动，行号与方法集已按实测更新；原登记仅覆盖其中的隐式构造器）",
           "missed": [
             {
               "method": "<init>",
-              "line": 25,
+              "line": 30,
               "lineMissed": 1,
-              "methodMissed": 1
+              "methodMissed": 1,
+              "branchMissed": 0
+            },
+            {
+              "method": "toTxo",
+              "line": 44,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
+            },
+            {
+              "method": "toScript",
+              "line": 150,
+              "lineMissed": 1,
+              "methodMissed": 0,
+              "branchMissed": 1
+            },
+            {
+              "method": "txidOf",
+              "line": 167,
+              "lineMissed": 2,
+              "methodMissed": 0,
+              "branchMissed": 2
+            },
+            {
+              "method": "satoshisOf",
+              "line": 178,
+              "lineMissed": 1,
+              "methodMissed": 0,
+              "branchMissed": 1
+            },
+            {
+              "method": "isOpReturn",
+              "line": 187,
+              "lineMissed": 2,
+              "methodMissed": 1,
+              "branchMissed": 4
+            },
+            {
+              "method": "isStandardPubKey",
+              "line": 193,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 4
+            },
+            {
+              "method": "addressOfScript",
+              "line": 204,
+              "lineMissed": 3,
+              "methodMissed": 0,
+              "branchMissed": 12
+            },
+            {
+              "method": "isOpReturnAfterGenesis",
+              "line": 257,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
+            },
+            {
+              "method": "chunksOf",
+              "line": 266,
+              "lineMissed": 1,
+              "methodMissed": 1,
+              "branchMissed": 0
             }
           ]
         },
         {
           "class": "com/metanet4j/sdk/bap/TaggedDerivation",
-          "reason": "隐式默认构造器，无业务行为",
+          "reason": "隐式默认构造器，无业务行为（§114：因 R2／R3 期间代码改动，行号与方法集已按实测更新；原登记仅覆盖其中的隐式构造器）",
           "missed": [
             {
               "method": "<init>",
               "line": 12,
               "lineMissed": 1,
-              "methodMissed": 1
+              "methodMissed": 1,
+              "branchMissed": 0
+            },
+            {
+              "method": "sha256",
+              "line": 32,
+              "lineMissed": 2,
+              "methodMissed": 0,
+              "branchMissed": 0
             }
           ]
         },
         {
           "class": "com/metanet4j/sdk/ordinals/OrdScriptBuilder",
-          "reason": "隐式默认构造器，无业务行为",
+          "reason": "隐式默认构造器，无业务行为（§114：因 R2／R3 期间代码改动，行号与方法集已按实测更新；原登记仅覆盖其中的隐式构造器）",
           "missed": [
             {
               "method": "<init>",
-              "line": 19,
+              "line": 17,
               "lineMissed": 1,
-              "methodMissed": 1
+              "methodMissed": 1,
+              "branchMissed": 0
+            },
+            {
+              "method": "buildInscription",
+              "line": 32,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
             }
           ]
         },
         {
           "class": "com/metanet4j/sdk/ordinals/OrdScriptBuilder$LocalSigner",
-          "reason": "隐式默认构造器，无业务行为",
+          "reason": "隐式默认构造器，无业务行为（§114：因 R2／R3 期间代码改动，行号与方法集已按实测更新；原登记仅覆盖其中的隐式构造器）",
           "missed": [
             {
               "method": "<init>",
-              "line": 67,
+              "line": 78,
               "lineMissed": 1,
-              "methodMissed": 1
+              "methodMissed": 1,
+              "branchMissed": 0
             }
           ]
         },
         {
           "class": "com/metanet4j/sdk/ordinals/OrdScriptBuilder$RemoteSigner",
-          "reason": "隐式默认构造器，无业务行为",
+          "reason": "隐式默认构造器，无业务行为（§114：因 R2／R3 期间代码改动，行号与方法集已按实测更新；原登记仅覆盖其中的隐式构造器）",
           "missed": [
             {
               "method": "<init>",
-              "line": 71,
+              "line": 83,
               "lineMissed": 1,
-              "methodMissed": 1
+              "methodMissed": 1,
+              "branchMissed": 0
             }
           ]
         },
         {
           "class": "com/metanet4j/sdk/script/SigHashExtend",
-          "reason": "隐式默认构造器；hashForForkIdSignature 的 IOException 包装在 UnsafeByteArrayOutputStream 固定内存流下不可达",
+          "reason": "隐式默认构造器；hashForForkIdSignature 的 IOException 包装在 UnsafeByteArrayOutputStream 固定内存流下不可达（§114：因 R2／R3 期间代码改动，行号与方法集已按实测更新；原登记仅覆盖其中的隐式构造器）",
           "missed": [
             {
               "method": "<init>",
-              "line": 15,
+              "line": 27,
               "lineMissed": 1,
-              "methodMissed": 1
+              "methodMissed": 1,
+              "branchMissed": 0
             },
             {
               "method": "hashForForkIdSignature",
-              "line": 23,
+              "line": 48,
+              "lineMissed": 1,
+              "methodMissed": 0,
+              "branchMissed": 3
+            },
+            {
+              "method": "hashHexForForkIdSignature",
+              "line": 83,
               "lineMissed": 2,
-              "methodMissed": 0
+              "methodMissed": 1,
+              "branchMissed": 0
+            },
+            {
+              "method": "txidOf",
+              "line": 89,
+              "lineMissed": 8,
+              "methodMissed": 0,
+              "branchMissed": 7
+            },
+            {
+              "method": "sequenceOf",
+              "line": 110,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
+            },
+            {
+              "method": "toBytes",
+              "line": 114,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 1
             }
           ]
         },
         {
           "class": "com/metanet4j/sdk/utils/TxHelperExtend",
-          "reason": "隐式默认构造器，无业务行为",
+          "reason": "隐式默认构造器，无业务行为（§114：因 R2／R3 期间代码改动，行号与方法集已按实测更新；原登记仅覆盖其中的隐式构造器）",
           "missed": [
             {
-              "method": "<init>",
-              "line": 21,
-              "lineMissed": 1,
-              "methodMissed": 1
+              "method": "isPushData",
+              "line": 100,
+              "lineMissed": 0,
+              "methodMissed": 0,
+              "branchMissed": 2
             }
           ]
         },
         {
           "class": "com/metanet4j/sdk/utxo/impl/bitails/BitailsClient",
-          "reason": "隐式默认构造器，无业务行为",
+          "reason": "隐式默认构造器，无业务行为（§114：因 R2／R3 期间代码改动，行号与方法集已按实测更新；原登记仅覆盖其中的隐式构造器）",
           "missed": [
             {
               "method": "<init>",
               "line": 14,
               "lineMissed": 1,
-              "methodMissed": 1
+              "methodMissed": 1,
+              "branchMissed": 0
             }
           ]
         },
         {
           "class": "com/metanet4j/sdk/utxo/impl/gorillapool/GorillaClient",
-          "reason": "隐式默认构造器，无业务行为",
+          "reason": "隐式默认构造器，无业务行为（§114：因 R2／R3 期间代码改动，行号与方法集已按实测更新；原登记仅覆盖其中的隐式构造器）",
           "missed": [
             {
               "method": "<init>",
               "line": 11,
               "lineMissed": 1,
-              "methodMissed": 1
+              "methodMissed": 1,
+              "branchMissed": 0
             }
           ]
         },
