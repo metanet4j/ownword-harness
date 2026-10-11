@@ -2851,6 +2851,23 @@
                   "classification": "unit"
                 }
               ]
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/PublicConstructorContractTest.java",
+              "methods": [
+                {
+                  "name": "constructsBothExceptionTypesWithTheirIntendedPayload",
+                  "returnType": "void",
+                  "line": 30,
+                  "classification": "unit"
+                },
+                {
+                  "name": "constructsTheSignerOverAPartialTransactionAndWrapsABsvPrivateKey",
+                  "returnType": "void",
+                  "line": 39,
+                  "classification": "unit"
+                }
+              ]
             }
           ],
           "classificationReviewed": true,
