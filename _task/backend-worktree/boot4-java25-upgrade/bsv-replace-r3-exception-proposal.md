@@ -35,7 +35,7 @@
 | P2 | `PrivateKey` | 5／2 | 待看 |
 | P3 | `OrdinalsTransactionSigner` | 6／3 | 待看 |
 | P4 | `RemoteTransactionSigner` | 1／4 | §91 之外的余项待看 |
-| P5 | `ScriptExtend` | 14／31／**方法 1** | **最大一块**；该类**已在 `jacoco.unit.check.excludes` 中**，需确认其排除范围与门禁口径 |
+| P5 | `ScriptExtend` | 14／31／**方法 1** | **最大一块**。**订正**：经核对 `metanet4j-sdk/pom.xml` 的 `jacoco.unit.check.excludes`，该清单为 `BobHelper`／`TxoHelper`／`TaggedDerivation`／`OrdScriptBuilder`（含两个内部类）／`SigHashExtend`／`TxHelperExtend`／`BitailsClient`／`GorillaClient`——**`ScriptExtend` 不在其中**，即**它确实在门禁范围内**、需要处理 |
 
 ## 3. 需要您决定的事项
 
@@ -43,7 +43,7 @@
 | --- | --- | --- |
 | D1 | **E1—E6 是否登记**（即写入 `unit-coverage-exceptions.json`，使 `gaps` 相应减少） | **登记**。六项均有"为何不可达"的实测依据，且**不是"没测"，而是"测不到"** |
 | D2 | 是否同意**先登记 E1—E6、再继续 P1—P5 的核查** | **同意**。登记可让门禁口径立即反映"已核查的部分"，后续核查不必反复重算 |
-| D3 | `ScriptExtend`（P5）的处理口径：它已在排除清单中，是否仍需逐条核查其 31 个分支 | **需要**——"排除"与"不可达"是两件事，建议按类核查后决定登记还是补测 |
+| D3 | `ScriptExtend`（P5）的处理口径：**它在门禁范围内、且是全项目分支缺口最大的一块（31 个分支／方法 1）**，是否逐条核查 | **需要**——建议按类逐条核查其 31 个分支，区分"不可达（登记）"与"可达（补测）"；**这也是 R3 收口的主要剩余工作量** |
 
 ## 4. 重要说明（政策与边界）
 
