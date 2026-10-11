@@ -2512,19 +2512,25 @@
                 {
                   "name": "acceptsOnlyNonEmptyPushDataChunks",
                   "returnType": "void",
-                  "line": 22,
+                  "line": 23,
                   "classification": "unit"
                 },
                 {
                   "name": "rejectsNullChunk",
                   "returnType": "void",
-                  "line": 38,
+                  "line": 39,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsOrdinalScriptsWithoutAPubKeyHashChunk",
+                  "returnType": "void",
+                  "line": 44,
                   "classification": "unit"
                 },
                 {
                   "name": "splitsEveryPushdataVariantAndToleratesTruncatedScripts",
                   "returnType": "void",
-                  "line": 43,
+                  "line": 61,
                   "classification": "unit"
                 }
               ],
