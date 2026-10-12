@@ -2,7 +2,7 @@
 
 ## 状态
 
-用户已批准修复至计划完成。当前执行项：bsv-r4-downstream；状态以 feature_list.json 为准。
+用户已批准修复至计划完成。当前执行项：bsv-r4-isolation；状态以 feature_list.json 为准。
 
 ## Blockers
 
@@ -16,4 +16,4 @@
 
 ## Next Session
 
-下游业务与集中测试适配。
+隔离集成测试资源。

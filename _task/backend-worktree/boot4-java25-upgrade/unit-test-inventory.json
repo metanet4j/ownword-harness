@@ -5785,16 +5785,21 @@
                   "classification": "unit"
                 },
                 {
+                  "name": "defaultPostEmbedsContentAndToleratesEmptyContent",
+                  "returnType": "void",
+                  "line": 52,
+                  "classification": "unit"
+                },
+                {
                   "name": "followAndUnfollowBuildSpendableDataTransactions",
                   "returnType": "void",
                   "line": 34,
                   "classification": "unit"
                 },
                 {
-                  "name": "defaultPostEmbedsContentAndToleratesEmptyContent",
-                  "returnType": "void",
-                  "line": 52,
-                  "classification": "unit"
+                  "name": "rejectsAFailedScriptValidation",
+                  "classification": "unit",
+                  "reason": "当前计划要求的真实边界回归"
                 }
               ]
             },
