@@ -1,7 +1,9 @@
 # 当前交接
 
-v0.3.0 查找身份页 R21 已重新设计并移除演示样例按钮，源码、验证与原型提交齐备，等待用户视觉复核。原型提交 9aedd92b669e61ab2c2e495cf83893d21714a250，无进行中实现事项。
+当前产出是 [v0.4.0 Identity 个人主页设计文档](spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md)，已同步[核心认知](spec/核心认知.md)；事项 `design-homepage-v040-doc` 为 `needs-review`，无进行中事项。状态和文档验证证据以[任务清单](feature_list.json)为准。
 
-状态与验收只查[版本任务清单](../prototype-worktree/ownword-v0.3.0/feature_list.json)和[R21 验证记录](../prototype-worktree/ownword-v0.3.0/ownword-prototype/evidence/artifact-v030/R21/verification.json)。本轮为页面布局和表达调整，产品规则仍以核心认知及PRD为准。
+续接先读本目录 AGENTS.md、任务清单与 progress.md，再读版本文档和核心认知。协议解释及本地参考版本、目录可用性差异见版本文档第 8 节，不将来源清单或模拟原型当作生产实现证据。
 
-唯一下一步：用户复核查询页。预览 http://127.0.0.1:4313/?design=find#/find 保留，测试会话已关闭；未合并或推送。续接先读版本 harness 的 AGENTS.md 与状态文件。
+唯一下一步：取得用户对 v0.4.0 事实、范围、验收和制作映射的审阅结果；通过后再登记原型制作事项、实际 S2 绑定和输出路径。本轮没有创建 v0.4.0 原型环境。
+
+既有 v0.3.0 R21 的待复核状态与证据保留，另查[版本任务清单](../prototype-worktree/ownword-v0.3.0/feature_list.json)；不因新文档交付自动关闭旧事项。

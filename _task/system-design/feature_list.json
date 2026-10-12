@@ -12,6 +12,35 @@
   "activeItem": null,
   "features": [
     {
+      "id": "design-homepage-v040-doc",
+      "name": "v0.4.0 Identity 个人主页高保真设计文档",
+      "status": "needs-review",
+      "targetVersion": "v0.4.0",
+      "goal": "落实公开博客与独立多媒体、关注与公开关系列表、BitcoinSchema Friend 申请和接受，完成核心认知与高保真原型设计文档供审阅。",
+      "scope": "核心认知、现有 v0.4.0 版本设计文档和任务状态；本轮交付文档，不制作原型或实现生产服务。",
+      "dependencies": [
+        "用户确认好友需申请且遵循 BitcoinSchema Friend，多媒体包含独立条目，关注与粉丝列表全部公开",
+        "spec/核心认知.md 与 standard/OwnWord设计与设计系统.md",
+        "BitcoinSchema 官方 Social Schema 与现有 Spectrum S2 设计资料",
+        "现有 v0.2.0 内容阅读及 v0.3.0 身份标识和授权流程"
+      ],
+      "doneCriteria": [
+        "核心认知承载跨版本事实，版本文档引用并落实界面",
+        "文档覆盖页面、内容与关系状态、访问上下文、组件、异常和可验证 BDD",
+        "每项功能映射到拟制作原型，协议事实与待验证生产契约明确区分",
+        "本地链接、BDD 映射、JSON 与差异检查通过，只提交本任务文档",
+        "交付用户审阅，人工复核前保持 needs-review"
+      ],
+      "prdVersion": "v0.4.0",
+      "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
+      "output": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
+      "implementationStatus": "documentation-written-and-checked",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "核心认知与版本文档已同步；10 项功能、32 条唯一 BDD 及制作映射完整。37 处本地引用已核对，版本文档及新增引用有效，核心认知 5 处既有参考缺失保留说明。协议官网、本地 BAP 与 S2 依据及参考版本差异见 PRD 第 8 节；未进行原型或生产验证。",
+      "statusNote": "用户已确认关键需求；文档交付后仍待事实、范围、验收和制作映射复核，未制作原型。",
+      "nextStep": "用户审阅 v0.4.0 文档；通过后按经审阅文档登记并初始化原型任务。"
+    },
+    {
       "id": "prototype-artifact-v030",
       "name": "v0.3.0 Identity Artifact 高保真原型",
       "status": "needs-review",
