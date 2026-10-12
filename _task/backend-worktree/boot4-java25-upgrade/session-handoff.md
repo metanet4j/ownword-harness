@@ -2,7 +2,7 @@
 
 ## 状态
 
-用户已批准修复至计划完成。当前执行项：bsv-r6-unit；状态以 feature_list.json 为准。
+用户已批准修复至计划完成。当前执行项：bsv-r6-http；状态以 feature_list.json 为准。
 
 ## Blockers
 
@@ -16,4 +16,4 @@
 
 ## Next Session
 
-全量单元严格验收。
+业务 SDK 本地 HTTP 集成验收。

@@ -926,11 +926,11 @@
       "entries": [
         {
           "class": "com/metanet4j/base/bsv/BsvHashBytes",
-          "reason": "decodeHex 的 `hex == null || hex.length() % 2 != 0` 为 javac 短路字节码，两侧取值（null／奇数长度／偶数长度）均已由 BsvValueTypesTest 实际执行并断言抛异常，JaCoCo 仍无法标记该行合成的分支，属无行为字节码",
+          "reason": "decodeHex 的 `hex == null || hex.length() % 2 != 0` 为 javac 短路字节码，两侧取值（null／奇数长度／偶数长度）均已由 BsvValueTypesTest 实际执行并断言抛异常，JaCoCo 仍无法标记该行合成的分支，属无行为字节码；清除旧库 Javadoc 后 decodeHex 定位由 89 行移到 88 行，方法与计数不变。",
           "missed": [
             {
               "method": "decodeHex",
-              "line": 89,
+              "line": 88,
               "lineMissed": 0,
               "methodMissed": 0,
               "branchMissed": 1
