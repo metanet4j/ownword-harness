@@ -166,27 +166,45 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "verifyStrMsg",
+                  "name": "changingRecoverySelectorInvalidatesSignerAddress",
                   "returnType": "void",
-                  "line": 26,
+                  "line": 142,
                   "classification": "unit"
                 },
                 {
-                  "name": "verifiesBapFieldsAndRejectsUnsignedAppendData",
+                  "name": "rejectsBlankAndMalformedSignatures",
                   "returnType": "void",
-                  "line": 35,
-                  "classification": "unit"
+                  "classification": "unit",
+                  "line": 115
                 },
                 {
                   "name": "rejectsMalformedOrTruncatedSignatures",
                   "returnType": "void",
-                  "line": 55,
+                  "line": 60,
                   "classification": "unit"
                 },
                 {
-                  "name": "changingRecoverySelectorInvalidatesSignerAddress",
+                  "name": "roundTripsFreshlySignedMessagesOnBothNetworks",
                   "returnType": "void",
-                  "line": 74,
+                  "classification": "unit",
+                  "line": 96
+                },
+                {
+                  "name": "verifiesAgainstTheRequestedNetworkOnly",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 79
+                },
+                {
+                  "name": "verifiesBapFieldsAndRejectsUnsignedAppendData",
+                  "returnType": "void",
+                  "line": 40,
+                  "classification": "unit"
+                },
+                {
+                  "name": "verifyStrMsg",
+                  "returnType": "void",
+                  "line": 31,
                   "classification": "unit"
                 }
               ]
@@ -805,15 +823,9 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "separatesOpReturnTapeAndKeepsPayloadInTxoFields",
+                  "name": "keepsFalseReturnPairTogetherAfterEarlierPayload",
                   "returnType": "void",
-                  "line": 64,
-                  "classification": "unit"
-                },
-                {
-                  "name": "rejectsIncompleteRawTransaction",
-                  "returnType": "void",
-                  "line": 104,
+                  "line": 139,
                   "classification": "unit"
                 },
                 {
@@ -823,15 +835,21 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "keepsFalseReturnPairTogetherAfterEarlierPayload",
-                  "returnType": "void",
-                  "line": 139,
-                  "classification": "unit"
-                },
-                {
                   "name": "opcodeOnlyInputFallsBackToScriptIdentity",
                   "returnType": "void",
                   "line": 158,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsIncompleteRawTransaction",
+                  "returnType": "void",
+                  "line": 104,
+                  "classification": "unit"
+                },
+                {
+                  "name": "separatesOpReturnTapeAndKeepsPayloadInTxoFields",
+                  "returnType": "void",
+                  "line": 64,
                   "classification": "unit"
                 },
                 {
@@ -848,12 +866,6 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "signsBinaryMessageAndRecoversThePublicKey",
-                  "returnType": "void",
-                  "line": 22,
-                  "classification": "unit"
-                },
-                {
                   "name": "compactSignaturePreservesUncompressedPublicKeyFormat",
                   "returnType": "void",
                   "line": 47,
@@ -864,6 +876,12 @@
                   "returnType": "void",
                   "line": 65,
                   "classification": "unit"
+                },
+                {
+                  "name": "signsBinaryMessageAndRecoversThePublicKey",
+                  "returnType": "void",
+                  "line": 22,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "固定二进制消息验证签名、预映像哈希和公钥恢复，无网络或外部状态"
@@ -872,12 +890,6 @@
               "path": "src/test/java/com/metanet4j/sdk/KeyAddressContractTest.java",
               "classification": "unit",
               "methods": [
-                {
-                  "name": "roundTripsCompressedAndUncompressedWifOnBothNetworks",
-                  "returnType": "void",
-                  "line": 31,
-                  "classification": "unit"
-                },
                 {
                   "name": "exposesKnownPublicKeyAddressAndSignature",
                   "returnType": "void",
@@ -889,6 +901,12 @@
                   "returnType": "void",
                   "line": 81,
                   "classification": "unit"
+                },
+                {
+                  "name": "roundTripsCompressedAndUncompressedWifOnBothNetworks",
+                  "returnType": "void",
+                  "line": 31,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "独立 key=2 WIF、公钥哈希、地址固定向量；四种 WIF 往返和异常输入"
@@ -898,21 +916,9 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "reInscriptionCarriesGltfAndMap",
+                  "name": "marketFixtureHasFourPaymentOutputsWithoutNewInscription",
                   "returnType": "void",
-                  "line": 23,
-                  "classification": "unit"
-                },
-                {
-                  "name": "opnsCarriesTextMapAndSigma",
-                  "returnType": "void",
-                  "line": 35,
-                  "classification": "unit"
-                },
-                {
-                  "name": "pngInscriptionCarriesPngSignature",
-                  "returnType": "void",
-                  "line": 47,
+                  "line": 93,
                   "classification": "unit"
                 },
                 {
@@ -922,9 +928,27 @@
                   "classification": "unit"
                 },
                 {
+                  "name": "opnsCarriesTextMapAndSigma",
+                  "returnType": "void",
+                  "line": 35,
+                  "classification": "unit"
+                },
+                {
                   "name": "ordinaryInscriptionFixtureMatchesTheMetadataVector",
                   "returnType": "void",
                   "line": 63,
+                  "classification": "unit"
+                },
+                {
+                  "name": "pngInscriptionCarriesPngSignature",
+                  "returnType": "void",
+                  "line": 47,
+                  "classification": "unit"
+                },
+                {
+                  "name": "reInscriptionCarriesGltfAndMap",
+                  "returnType": "void",
+                  "line": 23,
                   "classification": "unit"
                 },
                 {
@@ -938,12 +962,6 @@
                   "returnType": "void",
                   "line": 82,
                   "classification": "unit"
-                },
-                {
-                  "name": "marketFixtureHasFourPaymentOutputsWithoutNewInscription",
-                  "returnType": "void",
-                  "line": 93,
-                  "classification": "unit"
                 }
               ],
               "classificationReason": "八组仓库内历史 Ordinal 原始交易，固定交易 ID、输入输出、铭文、MAP、Sigma 验签、转移与市场金额字段；两份同字节资源核对一致"
@@ -953,27 +971,27 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "test",
-                  "returnType": "void",
-                  "line": 14,
-                  "classification": "unit"
-                },
-                {
                   "name": "coversFactoryOverloadsNetworkTypeCompressionAndEcKeyTransform",
                   "returnType": "void",
                   "line": 28,
                   "classification": "unit"
                 },
                 {
-                  "name": "validatesConstructorAndWifInputs",
-                  "returnType": "void",
-                  "line": 55,
-                  "classification": "unit"
-                },
-                {
                   "name": "rejectsWifWithUnknownNetworkAndIllegalPayload",
                   "returnType": "void",
                   "line": 99,
+                  "classification": "unit"
+                },
+                {
+                  "name": "test",
+                  "returnType": "void",
+                  "line": 14,
+                  "classification": "unit"
+                },
+                {
+                  "name": "validatesConstructorAndWifInputs",
+                  "returnType": "void",
+                  "line": 55,
                   "classification": "unit"
                 }
               ],
@@ -984,15 +1002,15 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "testParse",
-                  "returnType": "void",
-                  "line": 44,
-                  "classification": "unit"
-                },
-                {
                   "name": "testContentType",
                   "returnType": "void",
                   "line": 56,
+                  "classification": "unit"
+                },
+                {
+                  "name": "testParse",
+                  "returnType": "void",
+                  "line": 44,
                   "classification": "unit"
                 }
               ],
@@ -1009,9 +1027,9 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "testBase58",
+                  "name": "constructsScriptHashAddressesAndComparesByUnderlyingAddress",
                   "returnType": "void",
-                  "line": 13,
+                  "line": 45,
                   "classification": "unit"
                 },
                 {
@@ -1021,9 +1039,9 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "constructsScriptHashAddressesAndComparesByUnderlyingAddress",
+                  "name": "testBase58",
                   "returnType": "void",
-                  "line": 45,
+                  "line": 13,
                   "classification": "unit"
                 }
               ],
@@ -1059,9 +1077,9 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "rotatingSignatureKeysPreservesIdentityAndTracksPreviousKey",
+                  "name": "factoryEntryPointsPreserveTheConfiguredRootAndApp",
                   "returnType": "void",
-                  "line": 18,
+                  "line": 87,
                   "classification": "unit"
                 },
                 {
@@ -1071,27 +1089,21 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "signatureAddressLookupReturnsMatchingIdentityOrReportsFailure",
+                  "name": "rotatingSignatureKeysPreservesIdentityAndTracksPreviousKey",
                   "returnType": "void",
-                  "line": 55,
-                  "classification": "unit"
-                },
-                {
-                  "name": "signingPathHandlesUnsignedHexChunksAndHardening",
-                  "returnType": "void",
-                  "line": 78,
-                  "classification": "unit"
-                },
-                {
-                  "name": "factoryEntryPointsPreserveTheConfiguredRootAndApp",
-                  "returnType": "void",
-                  "line": 87,
+                  "line": 18,
                   "classification": "unit"
                 },
                 {
                   "name": "selfDecryptUsesTheConfiguredAbsoluteEncryptionPathAndReportsBadCiphertext",
                   "returnType": "void",
                   "line": 107,
+                  "classification": "unit"
+                },
+                {
+                  "name": "selfExportAlsoRejectsABlankEncryptionPath",
+                  "returnType": "void",
+                  "line": 143,
                   "classification": "unit"
                 },
                 {
@@ -1107,9 +1119,15 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "selfExportAlsoRejectsABlankEncryptionPath",
+                  "name": "signatureAddressLookupReturnsMatchingIdentityOrReportsFailure",
                   "returnType": "void",
-                  "line": 143,
+                  "line": 55,
+                  "classification": "unit"
+                },
+                {
+                  "name": "signingPathHandlesUnsignedHexChunksAndHardening",
+                  "returnType": "void",
+                  "line": 78,
                   "classification": "unit"
                 }
               ],
@@ -1120,15 +1138,15 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "testWordList",
+                  "name": "rejectsEmptyRootPathWhenDerivingTheNextChildNumbers",
                   "returnType": "void",
-                  "line": 28,
+                  "line": 153,
                   "classification": "unit"
                 },
                 {
-                  "name": "testBapDefault",
+                  "name": "testAddress",
                   "returnType": "void",
-                  "line": 36,
+                  "line": 125,
                   "classification": "unit"
                 },
                 {
@@ -1138,27 +1156,9 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "testEncrypt",
+                  "name": "testBapDefault",
                   "returnType": "void",
-                  "line": 76,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testGetSigningPathFromHex",
-                  "returnType": "void",
-                  "line": 101,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testGetFriendPublicKey",
-                  "returnType": "void",
-                  "line": 114,
-                  "classification": "unit"
-                },
-                {
-                  "name": "testAddress",
-                  "returnType": "void",
-                  "line": 125,
+                  "line": 36,
                   "classification": "unit"
                 },
                 {
@@ -1174,9 +1174,27 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "rejectsEmptyRootPathWhenDerivingTheNextChildNumbers",
+                  "name": "testEncrypt",
                   "returnType": "void",
-                  "line": 153,
+                  "line": 76,
+                  "classification": "unit"
+                },
+                {
+                  "name": "testGetFriendPublicKey",
+                  "returnType": "void",
+                  "line": 114,
+                  "classification": "unit"
+                },
+                {
+                  "name": "testGetSigningPathFromHex",
+                  "returnType": "void",
+                  "line": 101,
+                  "classification": "unit"
+                },
+                {
+                  "name": "testWordList",
+                  "returnType": "void",
+                  "line": 28,
                   "classification": "unit"
                 }
               ],
@@ -1187,21 +1205,51 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "parsesLegacyHardenedNotation",
+                  "name": "appendFollowsCurrentNumberListConvention",
                   "returnType": "void",
-                  "line": 25,
+                  "line": 77,
                   "classification": "unit"
                 },
                 {
-                  "name": "parsesStandardNotationAndMixedCase",
+                  "name": "appendsIndicesAndPathsAndKeepsHashCodeConsistentWithEquals",
                   "returnType": "void",
-                  "line": 34,
+                  "line": 110,
+                  "classification": "unit"
+                },
+                {
+                  "name": "deriveRejectsHardenedDerivationOnPublicNode",
+                  "returnType": "void",
+                  "line": 100,
+                  "classification": "unit"
+                },
+                {
+                  "name": "derivesTheSameKeyAsTheStandardVectorPath",
+                  "returnType": "void",
+                  "line": 85,
                   "classification": "unit"
                 },
                 {
                   "name": "parsesEmptyAndRootPaths",
                   "returnType": "void",
                   "line": 47,
+                  "classification": "unit"
+                },
+                {
+                  "name": "parsesLegacyHardenedNotation",
+                  "returnType": "void",
+                  "line": 25,
+                  "classification": "unit"
+                },
+                {
+                  "name": "parsesOptionalPrefixHardenedSuffixesAndValidatesBounds",
+                  "returnType": "void",
+                  "line": 133,
+                  "classification": "unit"
+                },
+                {
+                  "name": "parsesStandardNotationAndMixedCase",
+                  "returnType": "void",
+                  "line": 34,
                   "classification": "unit"
                 },
                 {
@@ -1215,36 +1263,6 @@
                   "returnType": "void",
                   "line": 64,
                   "classification": "unit"
-                },
-                {
-                  "name": "appendFollowsCurrentNumberListConvention",
-                  "returnType": "void",
-                  "line": 77,
-                  "classification": "unit"
-                },
-                {
-                  "name": "derivesTheSameKeyAsTheStandardVectorPath",
-                  "returnType": "void",
-                  "line": 85,
-                  "classification": "unit"
-                },
-                {
-                  "name": "deriveRejectsHardenedDerivationOnPublicNode",
-                  "returnType": "void",
-                  "line": 100,
-                  "classification": "unit"
-                },
-                {
-                  "name": "appendsIndicesAndPathsAndKeepsHashCodeConsistentWithEquals",
-                  "returnType": "void",
-                  "line": 110,
-                  "classification": "unit"
-                },
-                {
-                  "name": "parsesOptionalPrefixHardenedSuffixesAndValidatesBounds",
-                  "returnType": "void",
-                  "line": 133,
-                  "classification": "unit"
                 }
               ]
             },
@@ -1252,18 +1270,6 @@
               "path": "src/test/java/com/metanet4j/sdk/bap/BapProviderKeyBagTest.java",
               "classification": "unit",
               "methods": [
-                {
-                  "name": "findsRootAndCurrentSignatureKeysByPublicKeyHash",
-                  "returnType": "void",
-                  "line": 13,
-                  "classification": "unit"
-                },
-                {
-                  "name": "findsPaymentAndOrdKeysOutsideTheSignatureSearchRange",
-                  "returnType": "void",
-                  "line": 24,
-                  "classification": "unit"
-                },
                 {
                   "name": "bagBuiltFromIdentityResolvesPublicKeysButNotScriptHashes",
                   "returnType": "void",
@@ -1275,6 +1281,18 @@
                   "returnType": "void",
                   "line": 49,
                   "classification": "unit"
+                },
+                {
+                  "name": "findsPaymentAndOrdKeysOutsideTheSignatureSearchRange",
+                  "returnType": "void",
+                  "line": 24,
+                  "classification": "unit"
+                },
+                {
+                  "name": "findsRootAndCurrentSignatureKeysByPublicKeyHash",
+                  "returnType": "void",
+                  "line": 13,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "BAP KeyBag 的签名、支付与 Ord 密钥查找，未知哈希和公钥查找；纯本地计算"
@@ -1284,15 +1302,15 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "remoteIdentityUsesPublicAddressesAndHasNoPrivateKeys",
-                  "returnType": "void",
-                  "line": 19,
-                  "classification": "unit"
-                },
-                {
                   "name": "builtInConfigurationsExposeStablePaths",
                   "returnType": "void",
                   "line": 50,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteIdentityUsesPublicAddressesAndHasNoPrivateKeys",
+                  "returnType": "void",
+                  "line": 19,
                   "classification": "unit"
                 },
                 {
@@ -1328,15 +1346,15 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "testServerBapBase",
-                  "returnType": "void",
-                  "line": 13,
-                  "classification": "unit"
-                },
-                {
                   "name": "testClientBapBase",
                   "returnType": "void",
                   "line": 20,
+                  "classification": "unit"
+                },
+                {
+                  "name": "testServerBapBase",
+                  "returnType": "void",
+                  "line": 13,
                   "classification": "unit"
                 }
               ],
@@ -1360,9 +1378,9 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "roundTripsRequiredFieldsWithoutOptionalFeeOrPublicKey",
+                  "name": "preservesAnAbsentPreSignHashBeforeSigning",
                   "returnType": "void",
-                  "line": 19,
+                  "line": 58,
                   "classification": "unit"
                 },
                 {
@@ -1372,9 +1390,9 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "preservesAnAbsentPreSignHashBeforeSigning",
+                  "name": "roundTripsRequiredFieldsWithoutOptionalFeeOrPublicKey",
                   "returnType": "void",
-                  "line": 58,
+                  "line": 19,
                   "classification": "unit"
                 }
               ],
@@ -1385,12 +1403,6 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "fixedMnemonicDerivesExpectedRootAndConsistentPublicValues",
-                  "returnType": "void",
-                  "line": 26,
-                  "classification": "unit"
-                },
-                {
                   "name": "childDerivationRespectsNetworkAndParentKey",
                   "returnType": "void",
                   "line": 46,
@@ -1400,6 +1412,12 @@
                   "name": "emptyMnemonicAndNoArgumentFactoryCreateUsableKeys",
                   "returnType": "void",
                   "line": 62,
+                  "classification": "unit"
+                },
+                {
+                  "name": "fixedMnemonicDerivesExpectedRootAndConsistentPublicValues",
+                  "returnType": "void",
+                  "line": 26,
                   "classification": "unit"
                 }
               ],
@@ -1422,15 +1440,15 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "roundTripsTheBase64StringOverloads",
-                  "returnType": "void",
-                  "line": 57,
-                  "classification": "unit"
-                },
-                {
                   "name": "randomEphemeralKeyAndTamperingAreHandled",
                   "returnType": "void",
                   "line": 77,
+                  "classification": "unit"
+                },
+                {
+                  "name": "roundTripsTheBase64StringOverloads",
+                  "returnType": "void",
+                  "line": 57,
                   "classification": "unit"
                 }
               ],
@@ -1440,24 +1458,6 @@
               "path": "src/test/java/com/metanet4j/sdk/crypto/MasterPrivateKeyContractTest.java",
               "classification": "unit",
               "methods": [
-                {
-                  "name": "historicalWordSequenceRestoresTheOriginalMasterKey",
-                  "returnType": "void",
-                  "line": 18,
-                  "classification": "unit"
-                },
-                {
-                  "name": "standardWordCountsGenerateImportableBip39Phrases",
-                  "returnType": "void",
-                  "line": 31,
-                  "classification": "unit"
-                },
-                {
-                  "name": "generatedWordListsRespectCountsAndDictionaryBounds",
-                  "returnType": "void",
-                  "line": 40,
-                  "classification": "unit"
-                },
                 {
                   "name": "bip39VectorAndSerializationRoundTrip",
                   "returnType": "void",
@@ -1469,6 +1469,24 @@
                   "returnType": "void",
                   "line": 77,
                   "classification": "unit"
+                },
+                {
+                  "name": "generatedWordListsRespectCountsAndDictionaryBounds",
+                  "returnType": "void",
+                  "line": 40,
+                  "classification": "unit"
+                },
+                {
+                  "name": "historicalWordSequenceRestoresTheOriginalMasterKey",
+                  "returnType": "void",
+                  "line": 18,
+                  "classification": "unit"
+                },
+                {
+                  "name": "standardWordCountsGenerateImportableBip39Phrases",
+                  "returnType": "void",
+                  "line": 31,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "独立旧制品派生向量、BIP39/BIP32 序列化、新钱包 checksum 与非标准长度采样边界"
@@ -1478,15 +1496,15 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "testGenerateWordList",
-                  "returnType": "void",
-                  "line": 10,
-                  "classification": "unit"
-                },
-                {
                   "name": "testFromWordList",
                   "returnType": "void",
                   "line": 16,
+                  "classification": "unit"
+                },
+                {
+                  "name": "testGenerateWordList",
+                  "returnType": "void",
+                  "line": 10,
                   "classification": "unit"
                 }
               ],
@@ -1497,15 +1515,15 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "preservesExplicitOutpointHashAndConnectedAddressOutput",
-                  "returnType": "void",
-                  "line": 23,
-                  "classification": "unit"
-                },
-                {
                   "name": "keepsRawOutputScriptAndDetachedIndex",
                   "returnType": "void",
                   "line": 47,
+                  "classification": "unit"
+                },
+                {
+                  "name": "preservesExplicitOutpointHashAndConnectedAddressOutput",
+                  "returnType": "void",
+                  "line": 23,
                   "classification": "unit"
                 }
               ],
@@ -1522,15 +1540,15 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "missingContentOrMediaTypeKeepsOrdEnvelopeOut",
-                  "returnType": "void",
-                  "line": 50,
-                  "classification": "unit"
-                },
-                {
                   "name": "mapMetadataRequiresAppAndTypeAndOmitsCommandField",
                   "returnType": "void",
                   "line": 58,
+                  "classification": "unit"
+                },
+                {
+                  "name": "missingContentOrMediaTypeKeepsOrdEnvelopeOut",
+                  "returnType": "void",
+                  "line": 50,
                   "classification": "unit"
                 }
               ],
@@ -1541,21 +1559,9 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "constructorsKeepTheSelectedTransactionAndKeyProvider",
+                  "name": "addOrdInputWithoutScriptFallsBackToAnEmptyScript",
                   "returnType": "void",
-                  "line": 44,
-                  "classification": "unit"
-                },
-                {
-                  "name": "signsPaymentAndInscribedInputsInMemory",
-                  "returnType": "void",
-                  "line": 59,
-                  "classification": "unit"
-                },
-                {
-                  "name": "rejectsInputsWithoutAResolvableKey",
-                  "returnType": "void",
-                  "line": 77,
+                  "line": 122,
                   "classification": "unit"
                 },
                 {
@@ -1565,15 +1571,27 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "simpleSignatureOverloadDefaultsToAll",
+                  "name": "constructorsKeepTheSelectedTransactionAndKeyProvider",
                   "returnType": "void",
-                  "line": 99,
+                  "line": 44,
                   "classification": "unit"
                 },
                 {
-                  "name": "addOrdInputWithoutScriptFallsBackToAnEmptyScript",
+                  "name": "rejectsInputsWithoutAResolvableKey",
                   "returnType": "void",
-                  "line": 122,
+                  "line": 77,
+                  "classification": "unit"
+                },
+                {
+                  "name": "signsPaymentAndInscribedInputsInMemory",
+                  "returnType": "void",
+                  "line": 59,
+                  "classification": "unit"
+                },
+                {
+                  "name": "simpleSignatureOverloadDefaultsToAll",
+                  "returnType": "void",
+                  "line": 99,
                   "classification": "unit"
                 }
               ],
@@ -1583,6 +1601,36 @@
               "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionTemplateContractTest.java",
               "classification": "unit",
               "methods": [
+                {
+                  "name": "defaultCreateBapOrdinalIncludesRootAndSigmaProofs",
+                  "returnType": "void",
+                  "line": 144,
+                  "classification": "unit"
+                },
+                {
+                  "name": "defaultCreateOrdinalSignsThePaymentInputAndBalancesChange",
+                  "returnType": "void",
+                  "line": 92,
+                  "classification": "unit"
+                },
+                {
+                  "name": "defaultSendOrdinalSignsBothInputsWithoutReinscription",
+                  "returnType": "void",
+                  "line": 104,
+                  "classification": "unit"
+                },
+                {
+                  "name": "deprecatedSendUtxosBuildsAndSignsTheChangePayment",
+                  "returnType": "void",
+                  "line": 133,
+                  "classification": "unit"
+                },
+                {
+                  "name": "emptyReinscriptionFieldsUseTheOrdinaryTransferOutput",
+                  "returnType": "void",
+                  "line": 116,
+                  "classification": "unit"
+                },
                 {
                   "name": "postOrdinalIncludesTheAppAndPostMetadata",
                   "returnType": "void",
@@ -1600,36 +1648,6 @@
                   "returnType": "void",
                   "line": 82,
                   "classification": "unit"
-                },
-                {
-                  "name": "defaultCreateOrdinalSignsThePaymentInputAndBalancesChange",
-                  "returnType": "void",
-                  "line": 92,
-                  "classification": "unit"
-                },
-                {
-                  "name": "defaultSendOrdinalSignsBothInputsWithoutReinscription",
-                  "returnType": "void",
-                  "line": 104,
-                  "classification": "unit"
-                },
-                {
-                  "name": "emptyReinscriptionFieldsUseTheOrdinaryTransferOutput",
-                  "returnType": "void",
-                  "line": 116,
-                  "classification": "unit"
-                },
-                {
-                  "name": "deprecatedSendUtxosBuildsAndSignsTheChangePayment",
-                  "returnType": "void",
-                  "line": 133,
-                  "classification": "unit"
-                },
-                {
-                  "name": "defaultCreateBapOrdinalIncludesRootAndSigmaProofs",
-                  "returnType": "void",
-                  "line": 144,
-                  "classification": "unit"
                 }
               ],
               "classificationReason": "内存 UTXO 与签名替身验证本地 Ord 帖文元数据、重新铭刻媒体类型及签名失败传播，未广播交易"
@@ -1645,75 +1663,15 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "postOrdinalIncludesPostMetadataInItsLockingScript",
+                  "name": "createsUnsignedBapOrdinalWhenBothSigningStagesAreDisabled",
                   "returnType": "void",
-                  "line": 93,
-                  "classification": "unit"
-                },
-                {
-                  "name": "inputSigningSwitchControlsWhetherTheSignerRuns",
-                  "returnType": "void",
-                  "line": 111,
+                  "line": 299,
                   "classification": "unit"
                 },
                 {
                   "name": "defaultConstructorEnablesBothSigningStages",
                   "returnType": "void",
                   "line": 125,
-                  "classification": "unit"
-                },
-                {
-                  "name": "sendsAnExistingOrdinalWithTwoSpendableInputs",
-                  "returnType": "void",
-                  "line": 132,
-                  "classification": "unit"
-                },
-                {
-                  "name": "reinscriptionKeepsTheRequestedMediaType",
-                  "returnType": "void",
-                  "line": 151,
-                  "classification": "unit"
-                },
-                {
-                  "name": "incompleteReinscriptionFallsBackToAnOrdinaryTransfer",
-                  "returnType": "void",
-                  "line": 167,
-                  "classification": "unit"
-                },
-                {
-                  "name": "remoteSendCanReturnAnUnsignedOrdinalTransferWhenSigningIsDisabled",
-                  "returnType": "void",
-                  "line": 185,
-                  "classification": "unit"
-                },
-                {
-                  "name": "stagedRemoteTransferSignsBothInputsFromExternallyPreparedHashes",
-                  "returnType": "void",
-                  "line": 202,
-                  "classification": "unit"
-                },
-                {
-                  "name": "reinscribedRemoteTransferSignsBsmThenBothInputs",
-                  "returnType": "void",
-                  "line": 231,
-                  "classification": "unit"
-                },
-                {
-                  "name": "prepareSendOrdinalFallsBackToAnOrdinaryTransferForIncompleteReinscriptions",
-                  "returnType": "void",
-                  "line": 269,
-                  "classification": "unit"
-                },
-                {
-                  "name": "sendOrdinalPropagatesSignerFailure",
-                  "returnType": "void",
-                  "line": 289,
-                  "classification": "unit"
-                },
-                {
-                  "name": "createsUnsignedBapOrdinalWhenBothSigningStagesAreDisabled",
-                  "returnType": "void",
-                  "line": 299,
                   "classification": "unit"
                 },
                 {
@@ -1729,9 +1687,74 @@
                   "classification": "unit"
                 },
                 {
+                  "name": "incompleteReinscriptionFallsBackToAnOrdinaryTransfer",
+                  "returnType": "void",
+                  "line": 167,
+                  "classification": "unit"
+                },
+                {
+                  "name": "inputSigningSwitchControlsWhetherTheSignerRuns",
+                  "returnType": "void",
+                  "line": 111,
+                  "classification": "unit"
+                },
+                {
+                  "name": "postOrdinalIncludesPostMetadataInItsLockingScript",
+                  "returnType": "void",
+                  "line": 93,
+                  "classification": "unit"
+                },
+                {
+                  "name": "prepareSendOrdinalFallsBackToAnOrdinaryTransferForIncompleteReinscriptions",
+                  "returnType": "void",
+                  "line": 269,
+                  "classification": "unit"
+                },
+                {
+                  "name": "reinscribedRemoteTransferSignsBsmThenBothInputs",
+                  "returnType": "void",
+                  "line": 231,
+                  "classification": "unit"
+                },
+                {
+                  "name": "reinscriptionKeepsTheRequestedMediaType",
+                  "returnType": "void",
+                  "line": 151,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteSendCanReturnAnUnsignedOrdinalTransferWhenSigningIsDisabled",
+                  "returnType": "void",
+                  "line": 185,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sendOrdinalPropagatesSignerFailure",
+                  "returnType": "void",
+                  "line": 289,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sendsAnExistingOrdinalWithTwoSpendableInputs",
+                  "returnType": "void",
+                  "line": 132,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sendsAnOrdinalFromANonzeroSourceOutput",
+                  "classification": "unit",
+                  "reason": "协议兼容及真实脚本执行回归"
+                },
+                {
                   "name": "signsBsmThenInputFromTwoLocallyPreparedRemoteContexts",
                   "returnType": "void",
                   "line": 344,
+                  "classification": "unit"
+                },
+                {
+                  "name": "stagedRemoteTransferSignsBothInputsFromExternallyPreparedHashes",
+                  "returnType": "void",
+                  "line": 202,
                   "classification": "unit"
                 }
               ],
@@ -1742,21 +1765,15 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "requestsAndAppliesRemotePaymentSignatureInMemory",
+                  "name": "collectsOnlyUnsignedDataHashesAndSkipsDisconnectedInputs",
                   "returnType": "void",
-                  "line": 61,
+                  "line": 361,
                   "classification": "unit"
                 },
                 {
-                  "name": "routesPaymentAndOrdinalHashesToTheirRespectiveAddresses",
+                  "name": "fourArgumentRemoteOrdinalOutputUsesTheDefaultSigningIdentity",
                   "returnType": "void",
-                  "line": 81,
-                  "classification": "unit"
-                },
-                {
-                  "name": "remoteBuilderSkipsLocalSigningPreparation",
-                  "returnType": "void",
-                  "line": 101,
+                  "line": 478,
                   "classification": "unit"
                 },
                 {
@@ -1766,9 +1783,62 @@
                   "classification": "unit"
                 },
                 {
+                  "name": "partialRemoteBatchKeepsTheSignatureItCanFill",
+                  "returnType": "void",
+                  "line": 463,
+                  "classification": "unit"
+                },
+                {
                   "name": "probeNonNumericSourceAmountForms",
                   "returnType": "void",
                   "line": 130,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsARemoteSignatureFromAnotherOwner",
+                  "returnType": "void",
+                  "line": 76,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsAWellFormedSignatureOfAnotherDigest",
+                  "returnType": "void",
+                  "line": 86,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteBuilderCompletesUsingOnlyThePublicSignatureContext",
+                  "returnType": "void",
+                  "line": 63,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteBuilderRejectsCompletionWithoutASignedContext",
+                  "classification": "unit",
+                  "reason": "远程签名实际摘要与脚本校验回归"
+                },
+                {
+                  "name": "remoteBuilderSkipsLocalSigningPreparation",
+                  "returnType": "void",
+                  "line": 101,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteOrdinalBuilderForwardsForkId",
+                  "returnType": "void",
+                  "line": 411,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteOrdinalBuilderReportsSignerFailure",
+                  "returnType": "void",
+                  "line": 399,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteOrdinalOutputCarriesTheRequestedContentAndPendingBsmHash",
+                  "returnType": "void",
+                  "line": 429,
                   "classification": "unit"
                 },
                 {
@@ -1778,9 +1848,9 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "remoteSignerWritesTheAnyoneCanPayFlagIntoTheUnlockingScript",
+                  "name": "remoteSignerLeavesAnAlreadyDisconnectedInputUntouched",
                   "returnType": "void",
-                  "line": 186,
+                  "line": 447,
                   "classification": "unit"
                 },
                 {
@@ -1796,6 +1866,36 @@
                   "classification": "unit"
                 },
                 {
+                  "name": "remoteSignerWritesTheAnyoneCanPayFlagIntoTheUnlockingScript",
+                  "returnType": "void",
+                  "line": 186,
+                  "classification": "unit"
+                },
+                {
+                  "name": "requestsAndAppliesRemotePaymentSignatureInMemory",
+                  "returnType": "void",
+                  "line": 61,
+                  "classification": "unit"
+                },
+                {
+                  "name": "routesPaymentAndOrdinalHashesToTheirRespectiveAddresses",
+                  "returnType": "void",
+                  "line": 81,
+                  "classification": "unit"
+                },
+                {
+                  "name": "signsEverySupportedScope",
+                  "returnType": "void",
+                  "line": 427,
+                  "classification": "unit"
+                },
+                {
+                  "name": "skipsInputsWhoseSourceTransactionHasNoOutputs",
+                  "returnType": "void",
+                  "line": 323,
+                  "classification": "unit"
+                },
+                {
                   "name": "skipsInputsWhoseSourceTransactionHasNullOutputs",
                   "returnType": "void",
                   "line": 281,
@@ -1808,63 +1908,9 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "skipsInputsWhoseSourceTransactionHasNoOutputs",
-                  "returnType": "void",
-                  "line": 323,
-                  "classification": "unit"
-                },
-                {
                   "name": "treatsAnOutputWithoutLockingScriptAsAnEmptyScript",
                   "returnType": "void",
                   "line": 347,
-                  "classification": "unit"
-                },
-                {
-                  "name": "collectsOnlyUnsignedDataHashesAndSkipsDisconnectedInputs",
-                  "returnType": "void",
-                  "line": 361,
-                  "classification": "unit"
-                },
-                {
-                  "name": "signsTheRequestedSingleAnyoneCanPayHash",
-                  "returnType": "void",
-                  "line": 384,
-                  "classification": "unit"
-                },
-                {
-                  "name": "remoteOrdinalBuilderReportsSignerFailure",
-                  "returnType": "void",
-                  "line": 399,
-                  "classification": "unit"
-                },
-                {
-                  "name": "remoteOrdinalBuilderForwardsForkId",
-                  "returnType": "void",
-                  "line": 411,
-                  "classification": "unit"
-                },
-                {
-                  "name": "remoteOrdinalOutputCarriesTheRequestedContentAndPendingBsmHash",
-                  "returnType": "void",
-                  "line": 429,
-                  "classification": "unit"
-                },
-                {
-                  "name": "remoteSignerLeavesAnAlreadyDisconnectedInputUntouched",
-                  "returnType": "void",
-                  "line": 447,
-                  "classification": "unit"
-                },
-                {
-                  "name": "partialRemoteBatchKeepsTheSignatureItCanFill",
-                  "returnType": "void",
-                  "line": 463,
-                  "classification": "unit"
-                },
-                {
-                  "name": "fourArgumentRemoteOrdinalOutputUsesTheDefaultSigningIdentity",
-                  "returnType": "void",
-                  "line": 478,
                   "classification": "unit"
                 }
               ],
@@ -1875,12 +1921,6 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "mapsEveryBaseSignatureScopeIncludingNone",
-                  "returnType": "void",
-                  "line": 36,
-                  "classification": "unit"
-                },
-                {
                   "name": "estimatesSpendSizeForCommonAndOrdinalScripts",
                   "returnType": "void",
                   "line": 51,
@@ -1890,6 +1930,12 @@
                   "name": "insertsSignaturesAtTheCorrectPositionForEachScriptType",
                   "returnType": "void",
                   "line": 77,
+                  "classification": "unit"
+                },
+                {
+                  "name": "mapsEveryBaseSignatureScopeIncludingNone",
+                  "returnType": "void",
+                  "line": 36,
                   "classification": "unit"
                 },
                 {
@@ -1905,27 +1951,27 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "replacesTheSignatureInPlaceAndPicksThePushOpCodeByLength",
-                  "returnType": "void",
-                  "line": 245,
-                  "classification": "unit"
-                },
-                {
                   "name": "rejectsScriptsThatHaveTheRightShapeButOneWrongOpCodeOrLength",
                   "returnType": "void",
                   "line": 285,
                   "classification": "unit"
                 },
                 {
-                  "name": "walksEveryConditionOfEachPredicateIndividually",
-                  "returnType": "void",
-                  "line": 332,
-                  "classification": "unit"
-                },
-                {
                   "name": "replacesASignatureThatIsNotTheFirstAvailableSlot",
                   "returnType": "void",
                   "line": 383,
+                  "classification": "unit"
+                },
+                {
+                  "name": "replacesTheSignatureInPlaceAndPicksThePushOpCodeByLength",
+                  "returnType": "void",
+                  "line": 245,
+                  "classification": "unit"
+                },
+                {
+                  "name": "walksEveryConditionOfEachPredicateIndividually",
+                  "returnType": "void",
+                  "line": 332,
                   "classification": "unit"
                 },
                 {
@@ -1948,15 +1994,15 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "testGetAddressByOrdinalScript",
-                  "returnType": "void",
-                  "line": 10,
-                  "classification": "unit"
-                },
-                {
                   "name": "testGetAddressByOrdinalScrip2",
                   "returnType": "void",
                   "line": 18,
+                  "classification": "unit"
+                },
+                {
+                  "name": "testGetAddressByOrdinalScript",
+                  "returnType": "void",
+                  "line": 10,
                   "classification": "unit"
                 }
               ],
@@ -1973,16 +2019,16 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "singleWithoutCorrespondingOutputUsesZeroOutputHash",
-                  "returnType": "void",
-                  "line": 44,
-                  "classification": "unit"
-                },
-                {
                   "name": "manuallyBuiltAndParsedTransactionsProduceTheSameDigest",
                   "returnType": "void",
                   "classification": "unit",
                   "line": 57
+                },
+                {
+                  "name": "singleWithoutCorrespondingOutputUsesZeroOutputHash",
+                  "returnType": "void",
+                  "line": 44,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "内存交易和独立 ForkID 预映像计算，无网络或外部状态"
@@ -1998,15 +2044,15 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "parsesSigmaPushesAndHashesOnlyPriorData",
-                  "returnType": "void",
-                  "line": 71,
-                  "classification": "unit"
-                },
-                {
                   "name": "missingInputUsesTheDocumentedDummyHash",
                   "returnType": "void",
                   "line": 98,
+                  "classification": "unit"
+                },
+                {
+                  "name": "parsesSigmaPushesAndHashesOnlyPriorData",
+                  "returnType": "void",
+                  "line": 71,
                   "classification": "unit"
                 },
                 {
@@ -2036,9 +2082,9 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "signsAndVerifiesForEachLocalKeySelection",
+                  "name": "existingOpReturnUsesPipeSeparatorAndKeepsPriorData",
                   "returnType": "void",
-                  "line": 28,
+                  "line": 118,
                   "classification": "unit"
                 },
                 {
@@ -2054,9 +2100,9 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "existingOpReturnUsesPipeSeparatorAndKeepsPriorData",
+                  "name": "signsAndVerifiesForEachLocalKeySelection",
                   "returnType": "void",
-                  "line": 118,
+                  "line": 28,
                   "classification": "unit"
                 }
               ],
@@ -2086,33 +2132,9 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "proposedTransactionKeepsRequestedSigningMode",
-                  "returnType": "void",
-                  "line": 44,
-                  "classification": "unit"
-                },
-                {
-                  "name": "signerEncodesRequestedScopeIntoTheSignature",
-                  "returnType": "void",
-                  "line": 64,
-                  "classification": "unit"
-                },
-                {
-                  "name": "missingConnectedOutputIsReportedAndBatchSkipsIt",
-                  "returnType": "void",
-                  "line": 77,
-                  "classification": "unit"
-                },
-                {
                   "name": "batchSigningSkipsInputsItCannotSignWithoutAbortingTheBatch",
                   "returnType": "void",
                   "line": 92,
-                  "classification": "unit"
-                },
-                {
-                  "name": "partialBatchSigningKeepsTheSignableInput",
-                  "returnType": "void",
-                  "line": 113,
                   "classification": "unit"
                 },
                 {
@@ -2122,21 +2144,9 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "singleInputSigningTreatsAThrowingProviderAsNoKey",
+                  "name": "missingConnectedOutputIsReportedAndBatchSkipsIt",
                   "returnType": "void",
-                  "line": 137,
-                  "classification": "unit"
-                },
-                {
-                  "name": "singleInputSigningSkipsUnrecognizableScripts",
-                  "returnType": "void",
-                  "line": 161,
-                  "classification": "unit"
-                },
-                {
-                  "name": "singleInputSigningRejectsNullTransactionAndOutOfRangeIndex",
-                  "returnType": "void",
-                  "line": 179,
+                  "line": 77,
                   "classification": "unit"
                 },
                 {
@@ -2146,15 +2156,15 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "singleInputSigningCreatesAForkIdSignature",
+                  "name": "partialBatchSigningKeepsTheSignableInput",
                   "returnType": "void",
-                  "line": 222,
+                  "line": 113,
                   "classification": "unit"
                 },
                 {
-                  "name": "unknownKeysAreSkippedByBatchAndReportedUnavailableBySingleInput",
+                  "name": "proposedTransactionKeepsRequestedSigningMode",
                   "returnType": "void",
-                  "line": 237,
+                  "line": 44,
                   "classification": "unit"
                 },
                 {
@@ -2168,6 +2178,42 @@
                   "returnType": "void",
                   "line": 289,
                   "classification": "unit"
+                },
+                {
+                  "name": "signerEncodesRequestedScopeIntoTheSignature",
+                  "returnType": "void",
+                  "line": 64,
+                  "classification": "unit"
+                },
+                {
+                  "name": "singleInputSigningCreatesAForkIdSignature",
+                  "returnType": "void",
+                  "line": 222,
+                  "classification": "unit"
+                },
+                {
+                  "name": "singleInputSigningRejectsNullTransactionAndOutOfRangeIndex",
+                  "returnType": "void",
+                  "line": 179,
+                  "classification": "unit"
+                },
+                {
+                  "name": "singleInputSigningSkipsUnrecognizableScripts",
+                  "returnType": "void",
+                  "line": 161,
+                  "classification": "unit"
+                },
+                {
+                  "name": "singleInputSigningTreatsAThrowingProviderAsNoKey",
+                  "returnType": "void",
+                  "line": 137,
+                  "classification": "unit"
+                },
+                {
+                  "name": "unknownKeysAreSkippedByBatchAndReportedUnavailableBySingleInput",
+                  "returnType": "void",
+                  "line": 237,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "内存交易验证头字段保留、ForkID签名标志及缺少连接输出处理，未连接外部服务"
@@ -2176,12 +2222,6 @@
               "path": "src/test/java/com/metanet4j/sdk/transcation/BapDataLockBuilderSignTypeTest.java",
               "classification": "unit",
               "methods": [
-                {
-                  "name": "buildRootSignsWithRootAddress",
-                  "returnType": "void",
-                  "line": 23,
-                  "classification": "unit"
-                },
                 {
                   "name": "buildAliasSignsWithCurrentAddress",
                   "returnType": "void",
@@ -2193,6 +2233,12 @@
                   "returnType": "void",
                   "line": 35,
                   "classification": "unit"
+                },
+                {
+                  "name": "buildRootSignsWithRootAddress",
+                  "returnType": "void",
+                  "line": 23,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
@@ -2201,17 +2247,6 @@
               "path": "src/test/java/com/metanet4j/sdk/transcation/BitcoinschemaTransactionTest.java",
               "classification": "external",
               "methods": [
-                {
-                  "name": "testBapRootTransaction",
-                  "returnType": "void",
-                  "line": 34,
-                  "classification": "external",
-                  "replacementTests": [
-                    "com.metanet4j.sdk.transcation.BapDataLockBuilderSignTypeTest#buildIdSignsWithPreviousAddress",
-                    "com.metanet4j.sdk.transcation.TransactionBuilderContractTest#signsTheConnectedInputAndProducesASpendableTransaction"
-                  ],
-                  "manualReason": "旧方法名写 root，实际调用 buildId；旧用例查询实时 UTXO 并向 BSV 主网广播；自动回归不能复现链上确认或交易 ID。"
-                },
                 {
                   "name": "testBapAliasTransaction",
                   "returnType": "void",
@@ -2224,14 +2259,15 @@
                   "manualReason": "identity.json 的具体身份内容与主网广播结果未在离线测试中逐项断言；旧用例查询实时 UTXO 并向 BSV 主网广播；自动回归不能复现链上确认或交易 ID。"
                 },
                 {
-                  "name": "testBsocialUnFollowTransaction",
+                  "name": "testBapRootTransaction",
                   "returnType": "void",
-                  "line": 60,
+                  "line": 34,
                   "classification": "external",
                   "replacementTests": [
-                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#relationshipsAndReactionsUseTheirProtocolFieldNames"
+                    "com.metanet4j.sdk.transcation.BapDataLockBuilderSignTypeTest#buildIdSignsWithPreviousAddress",
+                    "com.metanet4j.sdk.transcation.TransactionBuilderContractTest#signsTheConnectedInputAndProducesASpendableTransaction"
                   ],
-                  "manualReason": "旧用例查询实时 UTXO 并向 BSV 主网广播；自动回归不能复现链上确认或交易 ID。"
+                  "manualReason": "旧方法名写 root，实际调用 buildId；旧用例查询实时 UTXO 并向 BSV 主网广播；自动回归不能复现链上确认或交易 ID。"
                 },
                 {
                   "name": "testBsocialFollowTransaction",
@@ -2242,6 +2278,36 @@
                     "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#relationshipsAndReactionsUseTheirProtocolFieldNames"
                   ],
                   "manualReason": "旧用例查询实时 UTXO 并向 BSV 主网广播；自动回归不能复现链上确认或交易 ID。"
+                },
+                {
+                  "name": "testBsocialImapgePostTransaction",
+                  "returnType": "void",
+                  "line": 148,
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#binaryContentWithoutEncodingKeepsItsBytesAndFieldBoundaries"
+                  ],
+                  "manualReason": "旧示例读取 bsv1.jpeg 并向主网广播；离线测试验证二进制内容边界，但未断言该 JPEG 文件或主网发布结果。"
+                },
+                {
+                  "name": "testBsocialLikeTransaction",
+                  "returnType": "void",
+                  "line": 194,
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#relationshipsAndReactionsUseTheirProtocolFieldNames"
+                  ],
+                  "manualReason": "旧示例引用固定历史 txId 并向主网广播；离线测试仅验证 like 协议字段。"
+                },
+                {
+                  "name": "testBsocialPdfTransaction",
+                  "returnType": "void",
+                  "line": 171,
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#binaryContentWithoutEncodingKeepsItsBytesAndFieldBoundaries"
+                  ],
+                  "manualReason": "旧示例引用的 MMS/吉姆第一本书…pdf 不在 SDK 测试资源中，无法重现该文件内容；主网发布结果亦不进入自动回归。"
                 },
                 {
                   "name": "testBsocialPostTransaction",
@@ -2277,34 +2343,25 @@
                   "manualReason": "旧示例组合固定历史 txId、文字内容并广播；现有离线测试分别校验 reply 协议字段与正文，未验证该固定链上引用及广播。"
                 },
                 {
-                  "name": "testBsocialImapgePostTransaction",
+                  "name": "testBsocialUnFollowTransaction",
                   "returnType": "void",
-                  "line": 148,
-                  "classification": "external",
-                  "replacementTests": [
-                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#binaryContentWithoutEncodingKeepsItsBytesAndFieldBoundaries"
-                  ],
-                  "manualReason": "旧示例读取 bsv1.jpeg 并向主网广播；离线测试验证二进制内容边界，但未断言该 JPEG 文件或主网发布结果。"
-                },
-                {
-                  "name": "testBsocialPdfTransaction",
-                  "returnType": "void",
-                  "line": 171,
-                  "classification": "external",
-                  "replacementTests": [
-                    "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#binaryContentWithoutEncodingKeepsItsBytesAndFieldBoundaries"
-                  ],
-                  "manualReason": "旧示例引用的 MMS/吉姆第一本书…pdf 不在 SDK 测试资源中，无法重现该文件内容；主网发布结果亦不进入自动回归。"
-                },
-                {
-                  "name": "testBsocialLikeTransaction",
-                  "returnType": "void",
-                  "line": 194,
+                  "line": 60,
                   "classification": "external",
                   "replacementTests": [
                     "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest#relationshipsAndReactionsUseTheirProtocolFieldNames"
                   ],
-                  "manualReason": "旧示例引用固定历史 txId 并向主网广播；离线测试仅验证 like 协议字段。"
+                  "manualReason": "旧用例查询实时 UTXO 并向 BSV 主网广播；自动回归不能复现链上确认或交易 ID。"
+                },
+                {
+                  "name": "testEckeyLiteExtend",
+                  "returnType": "void",
+                  "line": 244,
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.bap.BapBaseCoreContractTest#defaultAddressesUseTheirOwnPrivateKeys",
+                    "com.metanet4j.sdk.bap.BapProviderKeyBagTest#findsPaymentAndOrdKeysOutsideTheSignatureSearchRange",
+                    "com.metanet4j.sdk.KeyAddressContractTest#exposesKnownPublicKeyAddressAndSignature"
+                  ]
                 },
                 {
                   "name": "testSendUtxo",
@@ -2328,17 +2385,6 @@
                     "com.metanet4j.sdk.transcation.TransactionBuilderContractTest#signsTheConnectedInputAndProducesASpendableTransaction"
                   ],
                   "manualReason": "旧示例依赖 Bitails 实时 UTXO、三个指定金额输出并向主网广播；离线测试覆盖多输入和签名，未复现该笔链上交易。"
-                },
-                {
-                  "name": "testEckeyLiteExtend",
-                  "returnType": "void",
-                  "line": 244,
-                  "classification": "external",
-                  "replacementTests": [
-                    "com.metanet4j.sdk.bap.BapBaseCoreContractTest#defaultAddressesUseTheirOwnPrivateKeys",
-                    "com.metanet4j.sdk.bap.BapProviderKeyBagTest#findsPaymentAndOrdKeysOutsideTheSignatureSearchRange",
-                    "com.metanet4j.sdk.KeyAddressContractTest#exposesKnownPublicKeyAddressAndSignature"
-                  ]
                 }
               ],
               "classificationReason": "类级 external 标签；涉及实时 UTXO 与主网广播，U2 应拆出可离线行为"
@@ -2348,45 +2394,9 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "encryptedPostsRemainDecryptableWithoutChangingTheCallerContentType",
-                  "returnType": "void",
-                  "line": 49,
-                  "classification": "unit"
-                },
-                {
-                  "name": "relationshipsAndReactionsUseTheirProtocolFieldNames",
-                  "returnType": "void",
-                  "line": 70,
-                  "classification": "unit"
-                },
-                {
-                  "name": "tipsIncludeCurrencyAndAmountOnlyWhenBothArePresent",
-                  "returnType": "void",
-                  "line": 90,
-                  "classification": "unit"
-                },
-                {
-                  "name": "postsSupportTextExtensionsAndSeparateTagMaps",
-                  "returnType": "void",
-                  "line": 102,
-                  "classification": "unit"
-                },
-                {
-                  "name": "mixedContentAndPaymentsAreSortedByIndexBeforeTheirMap",
-                  "returnType": "void",
-                  "line": 121,
-                  "classification": "unit"
-                },
-                {
                   "name": "binaryContentWithoutEncodingKeepsItsBytesAndFieldBoundaries",
                   "returnType": "void",
                   "line": 143,
-                  "classification": "unit"
-                },
-                {
-                  "name": "paymentOnlyContentSupportsMultipleMapsWithoutATrailingSeparator",
-                  "returnType": "void",
-                  "line": 157,
                   "classification": "unit"
                 },
                 {
@@ -2396,9 +2406,9 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "suppliedProtocolPrefixIsKeptAndRemotePostSignatureVerifies",
+                  "name": "encryptedPostsRemainDecryptableWithoutChangingTheCallerContentType",
                   "returnType": "void",
-                  "line": 191,
+                  "line": 49,
                   "classification": "unit"
                 },
                 {
@@ -2412,6 +2422,42 @@
                   "returnType": "void",
                   "line": 238,
                   "classification": "unit"
+                },
+                {
+                  "name": "mixedContentAndPaymentsAreSortedByIndexBeforeTheirMap",
+                  "returnType": "void",
+                  "line": 121,
+                  "classification": "unit"
+                },
+                {
+                  "name": "paymentOnlyContentSupportsMultipleMapsWithoutATrailingSeparator",
+                  "returnType": "void",
+                  "line": 157,
+                  "classification": "unit"
+                },
+                {
+                  "name": "postsSupportTextExtensionsAndSeparateTagMaps",
+                  "returnType": "void",
+                  "line": 102,
+                  "classification": "unit"
+                },
+                {
+                  "name": "relationshipsAndReactionsUseTheirProtocolFieldNames",
+                  "returnType": "void",
+                  "line": 70,
+                  "classification": "unit"
+                },
+                {
+                  "name": "suppliedProtocolPrefixIsKeptAndRemotePostSignatureVerifies",
+                  "returnType": "void",
+                  "line": 191,
+                  "classification": "unit"
+                },
+                {
+                  "name": "tipsIncludeCurrencyAndAmountOnlyWhenBothArePresent",
+                  "returnType": "void",
+                  "line": 90,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "确定性脚本与固定密钥验证Bsocial协议、加密、排序、MAP校验和远程签名，未连接外部服务"
@@ -2420,6 +2466,16 @@
               "path": "src/test/java/com/metanet4j/sdk/transcation/OrdTransactionTest.java",
               "classification": "external",
               "methods": [
+                {
+                  "name": "testCreateBapOrdinal",
+                  "returnType": "void",
+                  "line": 60,
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest#defaultCreateBapOrdinalIncludesRootAndSigmaProofs"
+                  ],
+                  "manualReason": "旧示例查询实时付款 UTXO 并向主网广播；离线测试验证 BAP/Ord 输出与签名，不验证链上确认。"
+                },
                 {
                   "name": "testCreateOrdinal",
                   "returnType": "void",
@@ -2432,14 +2488,13 @@
                   "manualReason": "旧示例从 Bitails 查询实时付款 UTXO、向主网广播并等待确认；离线测试验证确定性铭文与可花费签名，不验证链上确认。"
                 },
                 {
-                  "name": "testCreateBapOrdinal",
+                  "name": "testOpns",
                   "returnType": "void",
-                  "line": 60,
+                  "line": 123,
                   "classification": "external",
                   "replacementTests": [
-                    "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest#defaultCreateBapOrdinalIncludesRootAndSigmaProofs"
-                  ],
-                  "manualReason": "旧示例查询实时付款 UTXO 并向主网广播；离线测试验证 BAP/Ord 输出与签名，不验证链上确认。"
+                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#opnsCarriesTextMapAndSigma"
+                  ]
                 },
                 {
                   "name": "testSendOrdinalByCreateUtxo",
@@ -2462,48 +2517,13 @@
                   "manualReason": "旧示例使用另一固定 origin 与外部收款地址查询实时 UTXO、向主网广播；离线测试验证转移结构与签名，未复现该笔链上转移。"
                 },
                 {
-                  "name": "testTransactionOrdReInscriptionby2ndkeyDeserialize",
+                  "name": "testSighashType",
                   "returnType": "void",
-                  "line": 113,
+                  "line": 193,
                   "classification": "external",
                   "replacementTests": [
-                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#reInscriptionCarriesGltfAndMap"
-                  ]
-                },
-                {
-                  "name": "testOpns",
-                  "returnType": "void",
-                  "line": 123,
-                  "classification": "external",
-                  "replacementTests": [
-                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#opnsCarriesTextMapAndSigma"
-                  ]
-                },
-                {
-                  "name": "testTransactionOrdSigmaDeserialize",
-                  "returnType": "void",
-                  "line": 133,
-                  "classification": "external",
-                  "replacementTests": [
-                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#sigmaFixtureVerifiesItsFixedSignedMessageAddress"
-                  ]
-                },
-                {
-                  "name": "testTransactionOrdPngDeserialize",
-                  "returnType": "void",
-                  "line": 148,
-                  "classification": "external",
-                  "replacementTests": [
-                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#pngInscriptionCarriesPngSignature"
-                  ]
-                },
-                {
-                  "name": "testTransactionOrdMetadataDeserialize",
-                  "returnType": "void",
-                  "line": 158,
-                  "classification": "external",
-                  "replacementTests": [
-                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#metadataInscriptionCarriesGltfAndGeohash"
+                    "com.metanet4j.sdk.script.SigHashExtendContractTest#forkIdDigestMatchesIndependentPreimageAcrossFlags",
+                    "com.metanet4j.sdk.signers.SignerTransactionContractTest#signerUsesRequestedForkIdHashFlagsAndAnyoneCanPay"
                   ]
                 },
                 {
@@ -2516,15 +2536,6 @@
                   ]
                 },
                 {
-                  "name": "testTransactionOrdTransferDeserialize",
-                  "returnType": "void",
-                  "line": 178,
-                  "classification": "external",
-                  "replacementTests": [
-                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#transferHasOneSatDestinationWithoutNewInscription"
-                  ]
-                },
-                {
                   "name": "testTransactionOrdMarketDeserialize",
                   "returnType": "void",
                   "line": 187,
@@ -2534,13 +2545,48 @@
                   ]
                 },
                 {
-                  "name": "testSighashType",
+                  "name": "testTransactionOrdMetadataDeserialize",
                   "returnType": "void",
-                  "line": 193,
+                  "line": 158,
                   "classification": "external",
                   "replacementTests": [
-                    "com.metanet4j.sdk.script.SigHashExtendContractTest#forkIdDigestMatchesIndependentPreimageAcrossFlags",
-                    "com.metanet4j.sdk.signers.SignerTransactionContractTest#signerUsesRequestedForkIdHashFlagsAndAnyoneCanPay"
+                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#metadataInscriptionCarriesGltfAndGeohash"
+                  ]
+                },
+                {
+                  "name": "testTransactionOrdPngDeserialize",
+                  "returnType": "void",
+                  "line": 148,
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#pngInscriptionCarriesPngSignature"
+                  ]
+                },
+                {
+                  "name": "testTransactionOrdReInscriptionby2ndkeyDeserialize",
+                  "returnType": "void",
+                  "line": 113,
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#reInscriptionCarriesGltfAndMap"
+                  ]
+                },
+                {
+                  "name": "testTransactionOrdSigmaDeserialize",
+                  "returnType": "void",
+                  "line": 133,
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#sigmaFixtureVerifiesItsFixedSignedMessageAddress"
+                  ]
+                },
+                {
+                  "name": "testTransactionOrdTransferDeserialize",
+                  "returnType": "void",
+                  "line": 178,
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.OrdHistoricalFixtureContractTest#transferHasOneSatDestinationWithoutNewInscription"
                   ]
                 }
               ],
@@ -2590,75 +2636,9 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "addsProviderUtxoDataAndChangeWithoutLosingValue",
-                  "returnType": "void",
-                  "line": 49,
-                  "classification": "unit"
-                },
-                {
                   "name": "acceptsAddressListUtxoListAndExistingFundingOutput",
                   "returnType": "void",
                   "line": 84,
-                  "classification": "unit"
-                },
-                {
-                  "name": "calculateChangeUsesTheFeeRatePassedToThePublicMethod",
-                  "returnType": "void",
-                  "line": 109,
-                  "classification": "unit"
-                },
-                {
-                  "name": "signsTheConnectedInputAndProducesASpendableTransaction",
-                  "returnType": "void",
-                  "line": 120,
-                  "classification": "unit"
-                },
-                {
-                  "name": "reportsSignerFailureInsteadOfReturningAnUnsignedTransaction",
-                  "returnType": "void",
-                  "line": 135,
-                  "classification": "unit"
-                },
-                {
-                  "name": "amountAndSizeHelpersTolerateMissingOrNonNumericFields",
-                  "returnType": "void",
-                  "line": 146,
-                  "classification": "unit"
-                },
-                {
-                  "name": "probeSignerFailurePath",
-                  "returnType": "void",
-                  "line": 175,
-                  "classification": "unit"
-                },
-                {
-                  "name": "preparingInputsToleratesASourceOutputWithoutLockingScript",
-                  "returnType": "void",
-                  "line": 191,
-                  "classification": "unit"
-                },
-                {
-                  "name": "feeEstimationResolvesTheKeyLengthOnlyWhenBothPreconditionsHold",
-                  "returnType": "void",
-                  "line": 212,
-                  "classification": "unit"
-                },
-                {
-                  "name": "changeAmountToleratesMissingOrNonNumericFields",
-                  "returnType": "void",
-                  "line": 250,
-                  "classification": "unit"
-                },
-                {
-                  "name": "prepareInputsRejectsNullProviderAndToleratesUnusableInputs",
-                  "returnType": "void",
-                  "line": 281,
-                  "classification": "unit"
-                },
-                {
-                  "name": "feeEstimationFallsBackForUnrecognizableScripts",
-                  "returnType": "void",
-                  "line": 315,
                   "classification": "unit"
                 },
                 {
@@ -2668,9 +2648,33 @@
                   "classification": "unit"
                 },
                 {
+                  "name": "addsProviderUtxoDataAndChangeWithoutLosingValue",
+                  "returnType": "void",
+                  "line": 49,
+                  "classification": "unit"
+                },
+                {
+                  "name": "amountAndSizeHelpersTolerateMissingOrNonNumericFields",
+                  "returnType": "void",
+                  "line": 146,
+                  "classification": "unit"
+                },
+                {
                   "name": "broadcastDelegatesOnlyToTheProvidedLocalFunction",
                   "returnType": "void",
                   "line": 369,
+                  "classification": "unit"
+                },
+                {
+                  "name": "calculateChangeUsesTheFeeRatePassedToThePublicMethod",
+                  "returnType": "void",
+                  "line": 109,
+                  "classification": "unit"
+                },
+                {
+                  "name": "changeAmountToleratesMissingOrNonNumericFields",
+                  "returnType": "void",
+                  "line": 250,
                   "classification": "unit"
                 },
                 {
@@ -2680,15 +2684,57 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "sigmaSigningKeepsThePayloadAndExposesAVerifiableCurrentIdentitySignature",
+                  "name": "feeEstimationFallsBackForUnrecognizableScripts",
                   "returnType": "void",
-                  "line": 399,
+                  "line": 315,
+                  "classification": "unit"
+                },
+                {
+                  "name": "feeEstimationResolvesTheKeyLengthOnlyWhenBothPreconditionsHold",
+                  "returnType": "void",
+                  "line": 212,
+                  "classification": "unit"
+                },
+                {
+                  "name": "prepareInputsRejectsNullProviderAndToleratesUnusableInputs",
+                  "returnType": "void",
+                  "line": 281,
+                  "classification": "unit"
+                },
+                {
+                  "name": "preparingInputsToleratesASourceOutputWithoutLockingScript",
+                  "returnType": "void",
+                  "line": 191,
+                  "classification": "unit"
+                },
+                {
+                  "name": "probeSignerFailurePath",
+                  "returnType": "void",
+                  "line": 175,
                   "classification": "unit"
                 },
                 {
                   "name": "publicOnlyKeyUsesAConservativeUnlockingSizeForChangeEstimation",
                   "returnType": "void",
                   "line": 421,
+                  "classification": "unit"
+                },
+                {
+                  "name": "reportsSignerFailureInsteadOfReturningAnUnsignedTransaction",
+                  "returnType": "void",
+                  "line": 135,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sigmaSigningKeepsThePayloadAndExposesAVerifiableCurrentIdentitySignature",
+                  "returnType": "void",
+                  "line": 399,
+                  "classification": "unit"
+                },
+                {
+                  "name": "signsTheConnectedInputAndProducesASpendableTransaction",
+                  "returnType": "void",
+                  "line": 120,
                   "classification": "unit"
                 }
               ],
@@ -2705,57 +2751,9 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "remoteRequestIsStableAndTheSameBuilderAcceptsItsSignature",
+                  "name": "explicitRemoteKeyIsPreservedAcrossBapOperations",
                   "returnType": "void",
-                  "line": 37,
-                  "classification": "unit"
-                },
-                {
-                  "name": "localSignaturesVerifyTheOriginalBinaryPayloadForEveryBapKey",
-                  "returnType": "void",
-                  "line": 60,
-                  "classification": "unit"
-                },
-                {
-                  "name": "remoteSignatureVerifiesTheOriginalBinaryPayload",
-                  "returnType": "void",
-                  "line": 76,
-                  "classification": "unit"
-                },
-                {
-                  "name": "missingRemoteSignatureLeavesTheBuilderUnsignedAndRetryable",
-                  "returnType": "void",
-                  "line": 88,
-                  "classification": "unit"
-                },
-                {
-                  "name": "remoteSignatureMustComeFromTheRequestedBapAddress",
-                  "returnType": "void",
-                  "line": 107,
-                  "classification": "unit"
-                },
-                {
-                  "name": "malformedRemoteSignaturesDoNotChangeTheUnsignedScript",
-                  "returnType": "void",
-                  "line": 131,
-                  "classification": "unit"
-                },
-                {
-                  "name": "nullLocalSignTypeUsesTheSameCurrentKeyAsTheDefaultConstructor",
-                  "returnType": "void",
-                  "line": 146,
-                  "classification": "unit"
-                },
-                {
-                  "name": "remoteEnumCannotSilentlyProduceAnIncompleteLocalSignature",
-                  "returnType": "void",
-                  "line": 156,
-                  "classification": "unit"
-                },
-                {
-                  "name": "rebuildingBapDataClearsThePreviousSignedState",
-                  "returnType": "void",
-                  "line": 165,
+                  "line": 192,
                   "classification": "unit"
                 },
                 {
@@ -2765,9 +2763,57 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "explicitRemoteKeyIsPreservedAcrossBapOperations",
+                  "name": "localSignaturesVerifyTheOriginalBinaryPayloadForEveryBapKey",
                   "returnType": "void",
-                  "line": 192,
+                  "line": 60,
+                  "classification": "unit"
+                },
+                {
+                  "name": "malformedRemoteSignaturesDoNotChangeTheUnsignedScript",
+                  "returnType": "void",
+                  "line": 131,
+                  "classification": "unit"
+                },
+                {
+                  "name": "missingRemoteSignatureLeavesTheBuilderUnsignedAndRetryable",
+                  "returnType": "void",
+                  "line": 88,
+                  "classification": "unit"
+                },
+                {
+                  "name": "nullLocalSignTypeUsesTheSameCurrentKeyAsTheDefaultConstructor",
+                  "returnType": "void",
+                  "line": 146,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rebuildingBapDataClearsThePreviousSignedState",
+                  "returnType": "void",
+                  "line": 165,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteEnumCannotSilentlyProduceAnIncompleteLocalSignature",
+                  "returnType": "void",
+                  "line": 156,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteRequestIsStableAndTheSameBuilderAcceptsItsSignature",
+                  "returnType": "void",
+                  "line": 37,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteSignatureMustComeFromTheRequestedBapAddress",
+                  "returnType": "void",
+                  "line": 107,
+                  "classification": "unit"
+                },
+                {
+                  "name": "remoteSignatureVerifiesTheOriginalBinaryPayload",
+                  "returnType": "void",
+                  "line": 76,
                   "classification": "unit"
                 }
               ],
@@ -2797,15 +2843,15 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "holdsTheKeyAndTheRedeemScript",
-                  "returnType": "void",
-                  "line": 29,
-                  "classification": "unit"
-                },
-                {
                   "name": "absentKeyIsRepresentedAsNull",
                   "returnType": "void",
                   "line": 42,
+                  "classification": "unit"
+                },
+                {
+                  "name": "holdsTheKeyAndTheRedeemScript",
+                  "returnType": "void",
+                  "line": 29,
                   "classification": "unit"
                 },
                 {
@@ -2840,15 +2886,15 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "splitsEveryPushdataVariantAndToleratesTruncatedScripts",
-                  "returnType": "void",
-                  "line": 70,
-                  "classification": "unit"
-                },
-                {
                   "name": "returnsNullTextForChunksThatAreNotPushData",
                   "returnType": "void",
                   "line": 91,
+                  "classification": "unit"
+                },
+                {
+                  "name": "splitsEveryPushdataVariantAndToleratesTruncatedScripts",
+                  "returnType": "void",
+                  "line": 70,
                   "classification": "unit"
                 }
               ],
@@ -2859,9 +2905,45 @@
               "classification": "unit",
               "methods": [
                 {
+                  "name": "coversChunkShapesThatSurviveOnlyAsRawBytes",
+                  "returnType": "void",
+                  "line": 216,
+                  "classification": "unit"
+                },
+                {
+                  "name": "coversDefensiveBranchesAndThePublicHashListAccessor",
+                  "returnType": "void",
+                  "line": 134,
+                  "classification": "unit"
+                },
+                {
+                  "name": "coversMalformedScriptBranchesOfTheOrdinalHelpers",
+                  "returnType": "void",
+                  "line": 443,
+                  "classification": "unit"
+                },
+                {
+                  "name": "coversPushdataEncodingVariantsAndTheOrdinalHashLookup",
+                  "returnType": "void",
+                  "line": 149,
+                  "classification": "unit"
+                },
+                {
                   "name": "extractsDestinationFromInscriptionWithOptionalMapMetadata",
                   "returnType": "void",
                   "line": 42,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsDisconnectedOutputAndUnknownInscriptionKey",
+                  "returnType": "void",
+                  "line": 116,
+                  "classification": "unit"
+                },
+                {
+                  "name": "rejectsMissingConnectedOutputWhenResolvingSpendInfo",
+                  "returnType": "void",
+                  "line": 264,
                   "classification": "unit"
                 },
                 {
@@ -2877,57 +2959,9 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "rejectsDisconnectedOutputAndUnknownInscriptionKey",
+                  "name": "sourceOutputOfReturnsNullWhenIndexIsNegative",
                   "returnType": "void",
-                  "line": 116,
-                  "classification": "unit"
-                },
-                {
-                  "name": "coversDefensiveBranchesAndThePublicHashListAccessor",
-                  "returnType": "void",
-                  "line": 134,
-                  "classification": "unit"
-                },
-                {
-                  "name": "coversPushdataEncodingVariantsAndTheOrdinalHashLookup",
-                  "returnType": "void",
-                  "line": 149,
-                  "classification": "unit"
-                },
-                {
-                  "name": "coversChunkShapesThatSurviveOnlyAsRawBytes",
-                  "returnType": "void",
-                  "line": 216,
-                  "classification": "unit"
-                },
-                {
-                  "name": "rejectsMissingConnectedOutputWhenResolvingSpendInfo",
-                  "returnType": "void",
-                  "line": 264,
-                  "classification": "unit"
-                },
-                {
-                  "name": "walksTheWholeOrdinalLockingScriptChainAndItsFailureSides",
-                  "returnType": "void",
-                  "line": 318,
-                  "classification": "unit"
-                },
-                {
-                  "name": "coversMalformedScriptBranchesOfTheOrdinalHelpers",
-                  "returnType": "void",
-                  "line": 443,
-                  "classification": "unit"
-                },
-                {
-                  "name": "walksTheSharedP2pkhShapeCheckWithRawByteScripts",
-                  "returnType": "void",
-                  "line": 497,
-                  "classification": "unit"
-                },
-                {
-                  "name": "sourceOutputOfTakesTheOutputAtTheGivenIndex",
-                  "returnType": "void",
-                  "line": 560,
+                  "line": 576,
                   "classification": "unit"
                 },
                 {
@@ -2937,15 +2971,27 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "sourceOutputOfReturnsNullWhenIndexIsNegative",
-                  "returnType": "void",
-                  "line": 576,
-                  "classification": "unit"
-                },
-                {
                   "name": "sourceOutputOfReturnsNullWithoutSourceTransaction",
                   "returnType": "void",
                   "line": 582,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sourceOutputOfTakesTheOutputAtTheGivenIndex",
+                  "returnType": "void",
+                  "line": 560,
+                  "classification": "unit"
+                },
+                {
+                  "name": "walksTheSharedP2pkhShapeCheckWithRawByteScripts",
+                  "returnType": "void",
+                  "line": 497,
+                  "classification": "unit"
+                },
+                {
+                  "name": "walksTheWholeOrdinalLockingScriptChainAndItsFailureSides",
+                  "returnType": "void",
+                  "line": 318,
                   "classification": "unit"
                 }
               ],
@@ -2956,15 +3002,9 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "testHash",
+                  "name": "convertsBetweenBytesHexAndBoxedLists",
                   "returnType": "void",
-                  "line": 11,
-                  "classification": "unit"
-                },
-                {
-                  "name": "hashesBytesAndExplicitCharacterEncodings",
-                  "returnType": "void",
-                  "line": 22,
+                  "line": 50,
                   "classification": "unit"
                 },
                 {
@@ -2974,9 +3014,15 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "convertsBetweenBytesHexAndBoxedLists",
+                  "name": "hashesBytesAndExplicitCharacterEncodings",
                   "returnType": "void",
-                  "line": 50,
+                  "line": 22,
+                  "classification": "unit"
+                },
+                {
+                  "name": "testHash",
+                  "returnType": "void",
+                  "line": 11,
                   "classification": "unit"
                 }
               ],
@@ -3024,17 +3070,6 @@
               "classification": "external",
               "methods": [
                 {
-                  "name": "getUtxoByAddress",
-                  "returnType": "void",
-                  "line": 18,
-                  "classification": "external",
-                  "replacementTests": [
-                    "com.metanet4j.sdk.utxo.UtxoProvidersTest#bitailsMapsUnspentOutputsAndHandlesEmptyResults",
-                    "com.metanet4j.sdk.utxo.BitailsAndGorillaHttpIntegrationTest#providersMapLocalHttpResponsesAndPropagateServerFailures"
-                  ],
-                  "manualReason": "旧用例查询 Bitails 公网地址的实时 UTXO 并打印；本地 HTTP/固定 DTO 已验证映射，实时余额随链变化且不能用稳定断言替代。"
-                },
-                {
                   "name": "getBalanceByAddress",
                   "returnType": "void",
                   "line": 29,
@@ -3044,6 +3079,17 @@
                     "com.metanet4j.sdk.utxo.BitailsAndGorillaHttpIntegrationTest#bitailsUsesLocalEndpointForReadAndBroadcast"
                   ],
                   "manualReason": "旧用例查询 Bitails 公网地址的实时余额并打印；本地 HTTP 已验证请求/解析，公网即时余额无稳定自动断言。"
+                },
+                {
+                  "name": "getUtxoByAddress",
+                  "returnType": "void",
+                  "line": 18,
+                  "classification": "external",
+                  "replacementTests": [
+                    "com.metanet4j.sdk.utxo.UtxoProvidersTest#bitailsMapsUnspentOutputsAndHandlesEmptyResults",
+                    "com.metanet4j.sdk.utxo.BitailsAndGorillaHttpIntegrationTest#providersMapLocalHttpResponsesAndPropagateServerFailures"
+                  ],
+                  "manualReason": "旧用例查询 Bitails 公网地址的实时 UTXO 并打印；本地 HTTP/固定 DTO 已验证映射，实时余额随链变化且不能用稳定断言替代。"
                 }
               ],
               "classificationReason": "两个测试真实访问 Bitails HTTP，当前无标签；分类修复前不得运行 sdk 自动基线"
@@ -3052,6 +3098,12 @@
               "path": "src/test/java/com/metanet4j/sdk/utxo/HttpClientFactoryTest.java",
               "classification": "unit",
               "methods": [
+                {
+                  "name": "bodyHandlerDecodesUtf8AcrossByteBuffers",
+                  "returnType": "void",
+                  "classification": "unit",
+                  "line": 116
+                },
                 {
                   "name": "createsRequestsWithMethodHeadersAndTimeout",
                   "returnType": "void",
@@ -3065,10 +3117,10 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "returnsNullForIoFailureAndRestoresInterruptedStatus",
+                  "name": "defaultSendUsesFactoryClientAndDecodesItsResponse",
                   "returnType": "void",
-                  "line": 74,
-                  "classification": "unit"
+                  "classification": "unit",
+                  "line": 100
                 },
                 {
                   "name": "rejectsInformationalResponseBelowSuccessRange",
@@ -3077,16 +3129,10 @@
                   "line": 86
                 },
                 {
-                  "name": "defaultSendUsesFactoryClientAndDecodesItsResponse",
+                  "name": "returnsNullForIoFailureAndRestoresInterruptedStatus",
                   "returnType": "void",
-                  "classification": "unit",
-                  "line": 100
-                },
-                {
-                  "name": "bodyHandlerDecodesUtf8AcrossByteBuffers",
-                  "returnType": "void",
-                  "classification": "unit",
-                  "line": 116
+                  "line": 74,
+                  "classification": "unit"
                 }
               ],
               "classificationReason": "公开请求/发送入口，经 Mockito HttpClient 替身，不发起网络请求"
@@ -3139,15 +3185,15 @@
               "path": "src/test/java/com/metanet4j/sdk/EcKeyLiteExtendTest.java",
               "methods": [
                 {
-                  "name": "exposesDerHashAndHexOfTheUnderlyingPublicKey",
-                  "returnType": "void",
-                  "line": 28,
-                  "classification": "unit"
-                },
-                {
                   "name": "distinguishesPrivateBearingInstancesFromPublicOnlyOnes",
                   "returnType": "void",
                   "line": 48,
+                  "classification": "unit"
+                },
+                {
+                  "name": "exposesDerHashAndHexOfTheUnderlyingPublicKey",
+                  "returnType": "void",
+                  "line": 28,
                   "classification": "unit"
                 },
                 {
@@ -3188,6 +3234,12 @@
                 }
               ],
               "classification": "unit"
+            },
+            {
+              "path": "src/test/java/com/metanet4j/sdk/TransactionScriptAssertions.java",
+              "classification": "fixture",
+              "methods": [],
+              "classificationReason": "共享真实 Spend 脚本断言，不是测试类"
             }
           ],
           "classificationReviewed": true,
@@ -7114,18 +7166,9 @@
               "classification": "mixed",
               "methods": [
                 {
-                  "name": "test",
-                  "returnType": "void",
-                  "line": 43,
-                  "classification": "external",
-                  "replacementTests": [
-                    "com.metanet4j.sdk.transcation.BobTxoConversionContractTest"
-                  ]
-                },
-                {
                   "name": "testAddress",
                   "returnType": "void",
-                  "line": 159,
+                  "line": 18,
                   "classification": "unit"
                 }
               ]
