@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-10-12T19:50:08.291029+08:00",
-  "result": "source-verified",
+  "result": "baseline-verified",
   "scope": "已取得 v0.3.0 最新源码并核对祖先；当前 v0.4.0 尚未制作。",
   "source": {
     "repository": "https://github.com/metanet4j/ownword-design-prototype.git",
@@ -11,8 +11,8 @@
     "registeredCommit": "9aedd92b669e61ab2c2e495cf83893d21714a250",
     "registeredCommitIsAncestor": true
   },
-  "actualWorktreeCreated": false,
+  "actualWorktreeCreated": true,
   "featuresStarted": 0,
-  "browserVerification": "not-started",
-  "nextStep": "从最新 v0.3.0 创建独立 worktree，验证后连续制作当前 P01–P10。"
+  "browserVerification": "current-baseline-verification.json",
+  "nextStep": "进入 P01，按当前范围连续制作。"
 }

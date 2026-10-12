@@ -9,7 +9,7 @@
 3. 运行 `./init.sh --plan` 检查任务与验收登记；运行 `./init.sh` 检查真实 worktree 和继承基线。Windows 使用 init.ps1。
 4. 基线未恢复时只推进可独立完成的审查与任务准备；基线、worktree 和页面均未通过时不得称为已初始化或已制作。
 
-## 范围与授权
+## 范围与授权（Scope）
 
 - 用户已授权审查后连续完成 P01–P10，不在每项结束时重复请求批准。
 - 本任务独立执行，不使用子代理。
@@ -26,6 +26,7 @@
 - `./init.sh --plan`：检查 PRD、32 条 BDD、功能依赖、状态和文档引用；不表示 worktree 可用。
 - 源码、CSS、模型或页面模板修改后运行 `npm run build`；纯文档修改无需重建。预览使用预编译资源，不在浏览器内使用 Babel。
 - `./init.sh`：检查预编译产物的新鲜度、来源对象、Git 祖先、实际 S2 绑定和资源、语法、继承模型与 harness 结构。
+- 模型测试（model tests）：`node ownword-prototype/check-model.cjs`、`node ownword-prototype/check-content.cjs` 与 `node ownword-prototype/check-artifact.cjs` 已纳入初始化；新增关系模型检查也纳入同一入口。
 - `./init.sh --serve`：通过检查后前台启动独立预览，端口占用时明确失败，不终止其他进程。
 - 每项默认验证正常场景、相关边界和受影响截图，按 PRD 累积全部 BDD 证据。好友必须完成双方操作，媒体必须实际播放；不默认重跑全量旧版矩阵。
 - 浏览器使用 agent-browser 独立 session。检查、实际浏览器证据、视觉评审和生产验证分别记录。
@@ -37,4 +38,4 @@
 
 ## 收尾（End of Session）
 
-更新 feature_list.json、progress.md 与 session-handoff.md，保留唯一下一步。根 system-design 只引用本任务的功能状态与证据，不重复定义设计事实。环境需可重复启动，未完成工作如实交接。
+更新 feature_list.json、progress.md 与 session-handoff.md，保留唯一下一步。根 system-design 只引用本任务的功能状态与证据，不重复定义设计事实。环境需可重复启动（restartable），未完成工作如实交接。

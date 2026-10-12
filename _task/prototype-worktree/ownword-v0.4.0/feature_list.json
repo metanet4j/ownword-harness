@@ -9,18 +9,18 @@
     "blocked",
     "done"
   ],
-  "activeFeature": "H00",
-  "nextFeature": "H00",
+  "activeFeature": null,
+  "nextFeature": "P01",
   "executionScope": "homepage-full",
   "environment": {
     "worktree": "ownword-prototype",
-    "worktreeStatus": "not-created",
+    "worktreeStatus": "created",
     "sourceRepository": "designs/own-word-prototype-s2-astra-001",
     "sourceRemote": "https://github.com/metanet4j/ownword-design-prototype.git",
     "sourceRef": "codex/prototype-v0.3.0-artifact",
     "baselineVersion": "v0.3.0",
     "baselineCommit": "1355bdc4a14197d1d2dfec09e26096446d080be5",
-    "baselineStatus": "source-verified",
+    "baselineStatus": "git-build-model-browser-verified",
     "branch": "codex/prototype-v0.4.0-homepage",
     "prdVersion": "v0.4.0",
     "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
@@ -34,22 +34,23 @@
   "designReview": {
     "source": "_task/system-design/spec/prd/v0.4.0/设计审查v0.4.0-20261012-185625.md",
     "result": "agent-review-passed",
-    "limit": "设计审查通过，v0.3.0 源码已取得；实际 worktree、页面与用户视觉验收尚未完成。"
+    "limit": "设计、Git、构建、继承模型和浏览器基线已核对；当前 P01–P10 及用户视觉验收未完成。"
   },
   "features": [
     {
       "id": "H00",
       "name": "设计审查与 v0.3.0 基线初始化",
       "dependencies": [],
-      "status": "in-progress",
+      "status": "needs-review",
       "doneCriteria": [
         "设计问题闭合，审查依据可追溯",
         "取得实际 v0.3.0 源码并建立继承该提交的 worktree",
         "S2 绑定、启动检查和浏览器基线验证通过",
         "独立提交并交付核对，未以任务文件替代运行环境"
       ],
-      "implementationStatus": "source-verified-worktree-pending",
-      "evidence": "evidence/baseline-audit.json"
+      "implementationStatus": "implemented-and-verified",
+      "evidence": "evidence/current-baseline-verification.json",
+      "description": "核实最新 v0.3.0 源码、继承关系、构建与浏览器基线。"
     },
     {
       "id": "P01",
