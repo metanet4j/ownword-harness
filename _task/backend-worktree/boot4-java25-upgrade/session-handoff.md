@@ -2,7 +2,7 @@
 
 ## 状态
 
-用户已批准修复至计划完成。当前执行项：bsv-r4-accept；状态以 feature_list.json 为准。
+用户已批准修复至计划完成。当前执行项：bsv-r5-dependencies；状态以 feature_list.json 为准。
 
 ## Blockers
 
@@ -16,4 +16,4 @@
 
 ## Next Session
 
-组件聚合严格验收。
+删除旧依赖并核对 25 个依赖树。
