@@ -12,6 +12,33 @@
   "activeItem": null,
   "features": [
     {
+      "id": "reference-1sat-v040-restore",
+      "name": "补齐 v0.4.0 查阅所需 1sat 参考源码",
+      "status": "needs-review",
+      "goal": "从已登记的官方仓库恢复缺失的 1sat-sdk 和 1sat-stack 固定版本，验证来源并同步受影响的文档说明。",
+      "scope": "reference 下的两个缺失源码目录、来源说明与锁定清单，以及 v0.4.0 设计文档和任务状态；保留既有 BAP 快照，不升级产品运行依赖。",
+      "dependencies": [
+        "用户要求拉取补充缺失的 1sat 资料",
+        "reference/sources.lock.json 中的官方仓库地址与 commit",
+        "v0.4.0 设计文档及核心认知中的查阅入口"
+      ],
+      "doneCriteria": [
+        "两个参考仓库恢复到已登记 commit，不覆盖现有资料",
+        "Git commit、tree、文件数、包版本及来源完整性验证通过",
+        "身份、签名与公开读取入口已实际查阅，文档准确记录当前资料可用性",
+        "受影响链接、JSON 和差异检查通过，仅提交本任务文档",
+        "交付核对结果，保留设计事项的人工作业复核状态"
+      ],
+      "prdVersion": "v0.4.0",
+      "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
+      "output": "reference/README.md",
+      "implementationStatus": "restored-and-source-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "两个参考仓库的 commit、tree、文件数、包版本、官方 remote、干净工作区及 git fsck 均通过；来源清单登记本次验证范围。原核心认知 5 处缺失引用已全部恢复；核心认知、PRD 和 reference 说明共 68 处本地引用可定位。已查阅身份、AIP、Friend 公钥、BSocial、BAP 和 OrdFS 入口，生产验证边界见 PRD 第 8.2 节。",
+      "statusNote": "补齐及来源验证完成，保留既有参考快照并修正资料可用性说明；未安装运行依赖、启动服务或调用真实钱包。",
+      "nextStep": "与 v0.4.0 设计文档一并交付用户审阅；生产适配按实际依赖组合另行验证。"
+    },
+    {
       "id": "design-homepage-v040-doc",
       "name": "v0.4.0 Identity 个人主页高保真设计文档",
       "status": "needs-review",
@@ -36,7 +63,7 @@
       "output": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
       "implementationStatus": "documentation-written-and-checked",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "核心认知与版本文档已同步；10 项功能、32 条唯一 BDD 及制作映射完整。37 处本地引用已核对，版本文档及新增引用有效，核心认知 5 处既有参考缺失保留说明。协议官网、本地 BAP 与 S2 依据及参考版本差异见 PRD 第 8 节；未进行原型或生产验证。",
+      "evidence": "核心认知与版本文档已同步；10 项功能、32 条唯一 BDD 及制作映射完整。1sat 参考恢复后，两个设计文档 48 处本地引用全部可定位；新增源码查阅与参考版本差异见 PRD 第 8 节。未进行原型或生产验证，补齐及来源证据见 reference-1sat-v040-restore。",
       "statusNote": "用户已确认关键需求；文档交付后仍待事实、范围、验收和制作映射复核，未制作原型。",
       "nextStep": "用户审阅 v0.4.0 文档；通过后按经审阅文档登记并初始化原型任务。"
     },

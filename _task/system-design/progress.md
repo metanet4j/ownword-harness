@@ -1,11 +1,13 @@
 # 当前进展
 
-v0.4.0 Identity 个人主页设计文档已编写并检查，核心认知同步，事项 `design-homepage-v040-doc` 为 `needs-review`。本轮产出为文档，未制作原型或接入生产服务。
+v0.4.0 Identity 个人主页设计文档已编写并检查，核心认知同步；缺失的 1sat 参考源码已补齐并完成来源验证。事项 `design-homepage-v040-doc` 与 `reference-1sat-v040-restore` 为 `needs-review`，无进行中事项。
 
 权威产出见[版本设计文档](spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md)，产品事实见[核心认知](spec/核心认知.md)，状态与证据见[任务清单](feature_list.json)。本地协议资料、BAP 源码和 S2 依据及其可用性差异记录在版本文档第 8 节。
 
-文档检查：10 项功能与 32 条 BDD 唯一且完整映射；37 处本地引用已核对，新引入引用有效，核心认知 5 处既有参考缺失已说明。Markdown 围栏、章节编号、JSON 和差异检查通过。没有将文档检查计作浏览器、实际签名或媒体播放验证。
+来源核对：两个参考仓库的官方 remote、固定 commit、tree、文件数、包版本、干净工作区及 Git 完整性检查通过，资料版本以[来源清单](../../reference/sources.lock.json)为准。恢复后的身份、签名、社交和内容读取代码入口已实际查阅，说明见 [reference](../../reference/README.md)及版本文档第 8.2 节；既有 BAP 快照的版本差异仍明确保留。
+
+文档检查：10 项功能与 32 条 BDD 唯一且完整映射；核心认知、版本文档和 reference 说明的 68 处本地引用可定位，原缺失引用已恢复。Markdown 围栏、章节编号、JSON 和差异检查通过。本轮没有安装运行依赖、启动服务或执行钱包交易，不将来源验证计作生产流程通过。
 
 唯一下一步：用户审阅 v0.4.0 的事实、范围、页面方案、验收与制作映射；审阅通过后登记原型任务。生产依赖的待验证项见版本文档第 8 节，本轮无需以生产能力齐备为文档交付条件。
 
-既有 v0.3.0 R21 仍待用户视觉复核，证据保留在[版本任务清单](../prototype-worktree/ownword-v0.3.0/feature_list.json)与[R21 验证记录](../prototype-worktree/ownword-v0.3.0/ownword-prototype/evidence/artifact-v030/R21/verification.json)；本轮不改变其验收状态。
+既有 v0.3.0 R21 仍待用户视觉复核，状态以[版本任务清单](../prototype-worktree/ownword-v0.3.0/feature_list.json)为准；其中登记的 R21 验证文件当前无法定位，复核前需先恢复证据。本轮不改变其验收状态。
