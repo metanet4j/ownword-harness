@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "bsv-r4-foundation",
+  "activeItem": "bsv-r4-transactions",
   "note": "已获 R0—R6 实施授权；28 个执行项按依赖串行，七阶段在 stages 汇总。23 个既有事项保留。状态以本清单为准。",
   "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
   "features": [
@@ -1061,7 +1061,7 @@
       "name": "组件 common、转换与过滤适配",
       "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r4-component",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "bsv-r3-accept"
       ],
@@ -1079,17 +1079,34 @@
         "metanet4j-sdk"
       ],
       "evidence": [
-        "R4 基础层适配完成：`component-common` 4 文件（`BitcoinSchemaTransaction`／`LocalTestUtxoProvider` 等）迁移并**整批测试全绿**（§311）。"
+        {
+          "path": "evidence/bsv-replace/repair-20261012/r4-foundation/summary.json",
+          "verification": "实际执行及输出见该证据，不以状态文字代替门禁"
+        }
       ],
-      "commits": [],
-      "statusNote": "转换层原 54 例通过但异常分支未覆盖；发现共享金额边界遗漏，按当前计划明确范围后修复。"
+      "commits": [
+        {
+          "repository": "metanet4j-base",
+          "commit": "c85d0cdabea01c9340371cd3ac757fe4743217cb"
+        },
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "65e833dd303b3dd89482174bfe6004ce630fd79b"
+        },
+        {
+          "repository": "metanet4j-component",
+          "commit": "dda0936a2f6730d4d3844853259e6bc730b3f27d"
+        }
+      ],
+      "statusNote": "已按修复后的实际代码与执行证据复核；最终阶段仍须全量严格验收。",
+      "completedAt": "2026-10-12T11:47:48+08:00"
     },
     {
       "id": "bsv-r4-transactions",
       "name": "组件 BAP 与交易工厂适配",
       "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r4-component",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "bsv-r4-foundation"
       ],
@@ -1363,7 +1380,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-12T11:12:09+08:00",
+  "updatedAt": "2026-10-12T11:47:48+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1378,7 +1395,7 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": "bsv-r4-foundation",
+  "nextItem": "bsv-r4-transactions",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
@@ -1493,7 +1510,7 @@
       ],
       "progress": {
         "total": 5,
-        "done": 0
+        "done": 1
       }
     },
     {

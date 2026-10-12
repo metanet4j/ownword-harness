@@ -357,25 +357,18 @@
         },
         {
           "class": "com/metanet4j/sdk/transcation/TransactionBuilder",
-          "reason": "outputSize 的 lockingScript==null 侧不可达：唯一调用点传硬编码非 null（§99，E7）；sign() 三方向（输入侧/输出侧/整体）均容忍，catch 不可达（§108，E10）；satoshisOf 的 null 兜底被更早校验遮蔽（§109，E11）（§361：因 R6 修正 attachSourceOutput 与 completeAndSignTx，outputSize 由 289 行移至 292 行、satoshisOf 由 308 行移至 321 行，属计划第 192 行「仅因行号变化调整精确登记」的情形）",
+          "reason": "outputSize 唯一调用点传非 null 锁定脚本；原生签名整体 catch 沿用已批准的精确例外（原 E7、E10）。已删除的 satoshisOf 不再登记。",
           "missed": [
             {
               "method": "completeAndSignTx",
-              "line": 224,
+              "line": 234,
               "lineMissed": 2,
               "methodMissed": 0,
               "branchMissed": 0
             },
             {
               "method": "outputSize",
-              "line": 292,
-              "lineMissed": 0,
-              "methodMissed": 0,
-              "branchMissed": 1
-            },
-            {
-              "method": "satoshisOf",
-              "line": 321,
+              "line": 306,
               "lineMissed": 0,
               "methodMissed": 0,
               "branchMissed": 1
@@ -611,19 +604,6 @@
               "branchMissed": 3
             }
           ]
-        },
-        {
-          "class": "com/metanet4j/tx/convertor/impl/UtxoConvertor",
-          "reason": "script != null 恒为 true（new Script(...) 不会返回 null）",
-          "missed": [
-            {
-              "method": "convert",
-              "line": 26,
-              "lineMissed": 0,
-              "methodMissed": 0,
-              "branchMissed": 1
-            }
-          ]
         }
       ]
     },
@@ -635,7 +615,7 @@
           "missed": [
             {
               "method": "lambda$filter$0",
-              "line": 20,
+              "line": 21,
               "lineMissed": 0,
               "methodMissed": 0,
               "branchMissed": 1

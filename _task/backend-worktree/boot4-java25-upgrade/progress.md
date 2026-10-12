@@ -8,25 +8,25 @@
 - R1 固定 SDK 制品接入：done（3/3）
 - R2 base 适配：done（2/2）
 - R3 业务 SDK 适配：done（5/5）
-- R4 component 适配：in-progress（0/5）
+- R4 component 适配：in-progress（1/5）
 - R5 旧依赖清理：not-started（0/2）
 - R6 全量验收与交付：not-started（0/5）
 
 ## Last Updated
 
-2026-10-12T11:12:09+08:00
+2026-10-12T11:47:48+08:00
 
 ## Current Objective
 
-组件 common、转换与过滤适配
+组件 BAP 与交易工厂适配
 
 ## 当前证据
 
-- 最近完成：bsv-r3-accept。
-- 证据：evidence/bsv-replace/repair-20261012/r3-accept/summary.json。
-- 提交：metanet4j-sdk 5fe32bbadfa8b71d06af3277729615c074048f28。
+- 最近完成：bsv-r4-foundation。
+- 证据：evidence/bsv-replace/repair-20261012/r4-foundation/summary.json。
+- 提交：metanet4j-component dda0936a2f6730d4d3844853259e6bc730b3f27d。
 - 修复前状态：evidence/bsv-replace/repair-20261012/pre-repair-feature-list.json。
 
 ## Recommended Next Step
 
-组件 common、转换与过滤适配；严格按计划依赖及完成条件执行。
+组件 BAP 与交易工厂适配；严格按计划依赖及完成条件执行。
