@@ -1744,121 +1744,127 @@
                 {
                   "name": "requestsAndAppliesRemotePaymentSignatureInMemory",
                   "returnType": "void",
-                  "line": 60,
+                  "line": 61,
                   "classification": "unit"
                 },
                 {
                   "name": "routesPaymentAndOrdinalHashesToTheirRespectiveAddresses",
                   "returnType": "void",
-                  "line": 80,
+                  "line": 81,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteBuilderSkipsLocalSigningPreparation",
                   "returnType": "void",
-                  "line": 100,
+                  "line": 101,
                   "classification": "unit"
                 },
                 {
                   "name": "ordBuilderAcceptsAnInputWithoutAScript",
                   "returnType": "void",
-                  "line": 116,
+                  "line": 117,
                   "classification": "unit"
                 },
                 {
                   "name": "probeNonNumericSourceAmountForms",
                   "returnType": "void",
-                  "line": 129,
+                  "line": 130,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteSignerHonoursTheSingleOutputSignatureFlavour",
                   "returnType": "void",
-                  "line": 150,
+                  "line": 151,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteSignerWritesTheAnyoneCanPayFlagIntoTheUnlockingScript",
                   "returnType": "void",
-                  "line": 185,
+                  "line": 186,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteSignerPrefersContextPublicKeyThenFallsBackToLocalKey",
                   "returnType": "void",
-                  "line": 215,
+                  "line": 216,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteSignerSkipsInputsItCannotResolveInsteadOfFailing",
                   "returnType": "void",
-                  "line": 254,
+                  "line": 255,
                   "classification": "unit"
                 },
                 {
                   "name": "skipsInputsWhoseSourceTransactionHasNullOutputs",
                   "returnType": "void",
-                  "line": 280,
+                  "line": 281,
                   "classification": "unit"
                 },
                 {
                   "name": "skipsInputsWhoseSourceTransactionIsNotATransaction",
                   "returnType": "void",
-                  "line": 302,
+                  "line": 303,
                   "classification": "unit"
                 },
                 {
                   "name": "skipsInputsWhoseSourceTransactionHasNoOutputs",
                   "returnType": "void",
-                  "line": 322,
+                  "line": 323,
                   "classification": "unit"
                 },
                 {
                   "name": "treatsAnOutputWithoutLockingScriptAsAnEmptyScript",
                   "returnType": "void",
-                  "line": 346,
+                  "line": 347,
                   "classification": "unit"
                 },
                 {
                   "name": "collectsOnlyUnsignedDataHashesAndSkipsDisconnectedInputs",
                   "returnType": "void",
-                  "line": 360,
+                  "line": 361,
                   "classification": "unit"
                 },
                 {
                   "name": "signsTheRequestedSingleAnyoneCanPayHash",
                   "returnType": "void",
-                  "line": 383,
+                  "line": 384,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalBuilderReportsSignerFailure",
                   "returnType": "void",
-                  "line": 398,
+                  "line": 399,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalBuilderForwardsForkId",
                   "returnType": "void",
-                  "line": 412,
+                  "line": 411,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteOrdinalOutputCarriesTheRequestedContentAndPendingBsmHash",
                   "returnType": "void",
-                  "line": 430,
+                  "line": 429,
                   "classification": "unit"
                 },
                 {
                   "name": "remoteSignerLeavesAnAlreadyDisconnectedInputUntouched",
                   "returnType": "void",
-                  "line": 448,
+                  "line": 447,
+                  "classification": "unit"
+                },
+                {
+                  "name": "partialRemoteBatchKeepsTheSignatureItCanFill",
+                  "returnType": "void",
+                  "line": 463,
                   "classification": "unit"
                 },
                 {
                   "name": "fourArgumentRemoteOrdinalOutputUsesTheDefaultSigningIdentity",
                   "returnType": "void",
-                  "line": 464,
+                  "line": 478,
                   "classification": "unit"
                 }
               ],
@@ -2082,73 +2088,85 @@
                 {
                   "name": "proposedTransactionKeepsRequestedSigningMode",
                   "returnType": "void",
-                  "line": 43,
+                  "line": 44,
                   "classification": "unit"
                 },
                 {
                   "name": "signerEncodesRequestedScopeIntoTheSignature",
                   "returnType": "void",
-                  "line": 63,
+                  "line": 64,
                   "classification": "unit"
                 },
                 {
                   "name": "missingConnectedOutputIsReportedAndBatchSkipsIt",
                   "returnType": "void",
-                  "line": 76,
+                  "line": 77,
                   "classification": "unit"
                 },
                 {
                   "name": "batchSigningSkipsInputsItCannotSignWithoutAbortingTheBatch",
                   "returnType": "void",
-                  "line": 91,
+                  "line": 92,
+                  "classification": "unit"
+                },
+                {
+                  "name": "partialBatchSigningKeepsTheSignableInput",
+                  "returnType": "void",
+                  "line": 113,
+                  "classification": "unit"
+                },
+                {
+                  "name": "emptyBatchesNeedNoSignatures",
+                  "returnType": "void",
+                  "line": 129,
                   "classification": "unit"
                 },
                 {
                   "name": "singleInputSigningTreatsAThrowingProviderAsNoKey",
                   "returnType": "void",
-                  "line": 114,
+                  "line": 137,
                   "classification": "unit"
                 },
                 {
                   "name": "singleInputSigningSkipsUnrecognizableScripts",
                   "returnType": "void",
-                  "line": 131,
+                  "line": 161,
                   "classification": "unit"
                 },
                 {
                   "name": "singleInputSigningRejectsNullTransactionAndOutOfRangeIndex",
                   "returnType": "void",
-                  "line": 149,
+                  "line": 179,
                   "classification": "unit"
                 },
                 {
                   "name": "ordinalBatchSigningRejectsNullAndSignsEveryInput",
                   "returnType": "void",
-                  "line": 172,
+                  "line": 202,
                   "classification": "unit"
                 },
                 {
                   "name": "singleInputSigningCreatesAForkIdSignature",
                   "returnType": "void",
-                  "line": 192,
+                  "line": 222,
                   "classification": "unit"
                 },
                 {
                   "name": "unknownKeysAreSkippedByBatchAndReportedUnavailableBySingleInput",
                   "returnType": "void",
-                  "line": 207,
+                  "line": 237,
                   "classification": "unit"
                 },
                 {
                   "name": "rejectsANullPartialTransaction",
                   "returnType": "void",
-                  "line": 249,
+                  "line": 279,
                   "classification": "unit"
                 },
                 {
                   "name": "reportsTheHashFlagsItWasConstructedWith",
                   "returnType": "void",
-                  "line": 259,
+                  "line": 289,
                   "classification": "unit"
                 }
               ],

@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "bsv-r3-transactions",
+  "activeItem": "bsv-r3-protocols",
   "note": "已获 R0—R6 实施授权；28 个执行项按依赖串行，七阶段在 stages 汇总。23 个既有事项保留。状态以本清单为准。",
   "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
   "features": [
@@ -956,7 +956,7 @@
       "name": "业务 SDK 交易与签名适配",
       "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r3-sdk",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "bsv-r3-scripts"
       ],
@@ -971,17 +971,26 @@
         "evidence/bsv-replace/r3-transactions-*/"
       ],
       "evidence": [
-        "R3 交易层适配完成：`TransactionBuilder`／各 `*TransactionSigner`／`Transaction.fromBinary`／`toBinary`／`hash(\"hex\")` 等均迁移完成；**R4 的 `component-tx` 25 例全绿依赖于此**；**R6 在此查并修 3 处缺陷（两个密钥包 §351、`sourceOutputOf` §354、`attachSourceOutput` §355）**。"
+        {
+          "path": "evidence/bsv-replace/repair-20261012/r3-transactions/summary.json",
+          "verification": "实际执行及输出见该证据，不以状态文字代替门禁"
+        }
       ],
-      "commits": [],
-      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
+      "commits": [
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "e828e38ce690ed2f2b03d3dd3eb74a53ce514303"
+        }
+      ],
+      "statusNote": "已按修复后的实际代码与执行证据复核；最终阶段仍须全量严格验收。",
+      "completedAt": "2026-10-12T09:38:22+08:00"
     },
     {
       "id": "bsv-r3-protocols",
       "name": "业务 SDK Sigma、Ordinals 与远程签名适配",
       "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r3-sdk",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "bsv-r3-transactions"
       ],
@@ -1329,7 +1338,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-12T09:23:22+08:00",
+  "updatedAt": "2026-10-12T09:38:22+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1344,7 +1353,7 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": "bsv-r3-transactions",
+  "nextItem": "bsv-r3-protocols",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
@@ -1435,7 +1444,7 @@
       ],
       "progress": {
         "total": 5,
-        "done": 2
+        "done": 3
       }
     },
     {
