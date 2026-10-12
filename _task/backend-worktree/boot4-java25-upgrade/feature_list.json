@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": null,
+  "activeItem": "bsv-r3-keys",
   "note": "已获 R0—R6 实施授权；28 个执行项按依赖串行，七阶段在 stages 汇总。23 个既有事项保留。状态以本清单为准。",
   "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
   "features": [
@@ -887,7 +887,7 @@
       "name": "业务 SDK 密钥与身份适配",
       "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r3-sdk",
-      "status": "done",
+      "status": "in-progress",
       "dependencies": [
         "bsv-r2-accept"
       ],
@@ -1740,16 +1740,15 @@
           "commit": "0ed8ec5"
         }
       ],
-      "statusNote": "**完成**（R3 第 1 组）：**五条门禁全部达成**；**并延伸完成 R4（43／43 文件）／R5（四仓库 9 处旧依赖清除）／R6（六维度验收 ＋ 交付报告）**；**核心两仓最终达标**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、**余 10 例已逐条定性、无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**R6 自身产出 7 项修复**（**含 2 项由本次替换引入、已在验收中发现并修好**）；**交付报告见 `bsv-replace-r6-delivery-report.md`（10 章、301 行）**；**未推送远端**。",
-      "startedAt": "2026-10-10T20:09:15+08:00",
-      "completedAt": null
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。",
+      "startedAt": "2026-10-10T20:09:15+08:00"
     },
     {
       "id": "bsv-r3-scripts",
       "name": "业务 SDK 脚本与交易读取适配",
       "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r3-sdk",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r3-keys"
       ],
@@ -1769,15 +1768,14 @@
         "R3 脚本层适配完成：`ScriptExtend`／`ScriptHelper.chunksOf`（**非截断版，全项目唯一实现**）／`pubKeyHashOfP2pkh` 等谓词均已迁移并被 §254／§261／§262 的用例覆盖；**其中 `chunksOf` 在 R6 修复 `MetaIdProtocolTxFilter` 的截断缺陷时起了决定作用（§317）**。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r3-transactions",
       "name": "业务 SDK 交易与签名适配",
       "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r3-sdk",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r3-scripts"
       ],
@@ -1795,15 +1793,14 @@
         "R3 交易层适配完成：`TransactionBuilder`／各 `*TransactionSigner`／`Transaction.fromBinary`／`toBinary`／`hash(\"hex\")` 等均迁移完成；**R4 的 `component-tx` 25 例全绿依赖于此**；**R6 在此查并修 3 处缺陷（两个密钥包 §351、`sourceOutputOf` §354、`attachSourceOutput` §355）**。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r3-protocols",
       "name": "业务 SDK Sigma、Ordinals 与远程签名适配",
       "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r3-sdk",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r3-transactions"
       ],
@@ -1821,15 +1818,14 @@
         "R3 协议层适配完成：BAP／BSocial／Sigma／Ordinals 的构建器与解析路径均迁移完成，**14 组冻结协议向量通过**（R0 冻结、R3 复验）。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r3-accept",
       "name": "业务 SDK 严格验收与安装",
       "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r3-sdk",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r3-protocols"
       ],
@@ -1846,15 +1842,14 @@
         "R3 验收完成：**五条门禁全部达成**——① 无旧库类型；② 测试全绿；③ 冻结向量通过；④ 行为处置已登记（§1—§114）；⑤ **覆盖率缺口 `gaps=0`**（`base` 与 `sdk`）。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r4-foundation",
       "name": "组件 common、转换与过滤适配",
       "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r4-component",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r3-accept"
       ],
@@ -1872,15 +1867,14 @@
         "R4 基础层适配完成：`component-common` 4 文件（`BitcoinSchemaTransaction`／`LocalTestUtxoProvider` 等）迁移并**整批测试全绿**（§311）。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r4-transactions",
       "name": "组件 BAP 与交易工厂适配",
       "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r4-component",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r4-foundation"
       ],
@@ -1898,15 +1892,14 @@
         "R4 交易层适配完成：`component-tx` **16 文件**（9 生产 ＋ 7 测试）迁移完成，**25 例全绿**；**并删除一处被架构取代的类**（`BschemaCustomTransactionSigner`，§323）。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r4-downstream",
       "name": "下游业务与集中测试适配",
       "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r4-component",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r4-transactions"
       ],
@@ -1924,15 +1917,14 @@
         "R4 下游模块适配完成：`tx-convertor`（54 例）／`tx-filter`（7 例）／`component-bap`／`bsocial`／`component-test`／`store-mongo` 均迁移完成；**全 component 旧库引用计数归零**。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r4-isolation",
       "name": "隔离集成测试资源",
       "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r4-component",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r4-downstream"
       ],
@@ -1950,15 +1942,14 @@
         "R4 依赖隔离完成：**`bitcoinj` 传递来的隐式依赖 `spongycastle` 已被消除**（`Sigma` 与 `UnSpendableDataLockBuilder` 的 2 处用法改为 `java.util.Base64` 与本类实现），**不新增任何依赖**（§343）。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r4-accept",
       "name": "组件聚合严格验收",
       "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r4-component",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r4-isolation"
       ],
@@ -1975,15 +1966,14 @@
         "R4 验收完成：**43／43 文件**；`component-common`／`tx-convertor`／`tx-filter`／`component-tx`（25 例）测试全绿；**全 component `test-compile` 退出码 0**。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r5-dependencies",
       "name": "删除旧依赖并核对 25 个依赖树",
       "description": "对应计划 R5；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r5-cleanup",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r4-accept"
       ],
@@ -2003,15 +1993,14 @@
         "R5 旧依赖清理完成：**四仓库共 9 处旧坐标声明全部移除**（`component` 3 ＋ `parent` 6 ＋ `sdk` 3）；**JCL 6 处经查代码引用为 0**；**四仓库 POM 旧坐标计数为 0**（§342／§343）。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r5-inventory",
       "name": "收口源码、测试及覆盖清单",
       "description": "对应计划 R5；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r5-cleanup",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r5-dependencies"
       ],
@@ -2031,15 +2020,14 @@
         "R5 依赖清单收口：**四仓库全量核查确认——POM 旧坐标 0、源码旧类型 0**（`base` 的 5 处经逐条核实仅 Javadoc）；**`tx-validator` 属纯 POM 清理**（源码 0 引用）。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r6-unit",
       "name": "全量单元严格验收",
       "description": "对应计划 R6；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r6-acceptance",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r5-inventory"
       ],
@@ -2056,15 +2044,14 @@
         "R6 单元测试维度完成：**`metanet4j-sdk` 271 例、0 失败 0 错误、`gaps=0`**；**`metanet4j-base` 47 例、`gaps=0`**；**并为 R6 自身新增的分支补了 4 个边界用例**（§361）。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r6-http",
       "name": "业务 SDK 本地 HTTP 集成验收",
       "description": "对应计划 R6；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r6-acceptance",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r6-unit"
       ],
@@ -2081,15 +2068,14 @@
         "R6 HTTP 维度完成：**R0 冻结的 14 组协议向量全部通过**（R3 复验）；`sdk` 的 HTTP 相关用例包含在 271 例中。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r6-integration",
       "name": "共享设施与组件全集成验收",
       "description": "对应计划 R6；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r6-acceptance",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r6-http"
       ],
@@ -2106,15 +2092,14 @@
         "R6 集成维度完成：**启动共享中间件（五容器 healthy）后复验**——**`component` 侧错误由 96 降到 10（−90%）**；**余 10 例逐条定性**（助记词产品缺陷／Spring 配置／外网），**无一由旧库替换造成**（§346—§357）。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r6-artifact",
       "name": "最终制品与依赖来源复核",
       "description": "对应计划 R6；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r6-acceptance",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r6-integration"
       ],
@@ -2131,15 +2116,14 @@
         "R6 制品维度完成：**四仓库 POM 依赖一致性核查通过**（旧坐标 0）；**制品指纹与依赖树见 R1 的产物**。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     },
     {
       "id": "bsv-r6-report",
       "name": "提交后证据绑定与交付报告",
       "description": "对应计划 R6；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r6-acceptance",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-r6-artifact"
       ],
@@ -2158,19 +2142,20 @@
         "R6 报告维度完成：**`bsv-replace-r6-delivery-report.md`（10 章、301 行）**——含各阶段产物、**按模块的验证证据**、feature 状态、已知例外与登记、**R6 的 7 项修复**、未解决项与建议、**本地提交记录（注明未推送远端）**、以及**三条可复现的判定方法**。"
       ],
       "commits": [],
-      "statusNote": "**完成**（实际工作已于本会话完成；**详细证据与逐轮记录集中在 `bsv-r3-keys` 的 evidence 与 `evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（§1—§123）**）。**核心结论**：`metanet4j-base` 47 例 `gaps=0`、`metanet4j-sdk` 271 例 `gaps=0`；**component 侧错误由 96 降到 10（−90%）**、余 10 例逐条定性、**无一由本次替换造成**；**四仓库 POM 旧坐标与源码旧类型均为 0**；**交付报告 `bsv-replace-r6-delivery-report.md`（10 章）**；**未推送远端**。",
-      "completedAt": "2026-10-11"
+      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
     }
   ],
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-10T20:09:15+08:00",
+  "updatedAt": "2026-10-12T09:07:42+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
     "instruction": "开始按照计划执行，先拆feature，记录执行进度和状态",
-    "scope": "按 planDoc 执行 R0—R6；先拆分 feature，持续记录进度和状态。既定只读 SDK、共享设施配置及远端边界继续适用。"
+    "scope": "按 planDoc 执行 R0—R6；先拆分 feature，持续记录进度和状态。既定只读 SDK、共享设施配置及远端边界继续适用。",
+    "repairInstruction": "请开始修复，直到计划完成为止",
+    "repairApprovedAt": "2026-10-12T09:07:42+08:00"
   },
   "executionPolicy": {
     "singleActiveFeature": true,
@@ -2178,7 +2163,7 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": null,
+  "nextItem": "bsv-r3-scripts",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
@@ -2252,7 +2237,7 @@
       "id": "bsv-replace-r3-sdk",
       "name": "R3 业务 SDK 适配",
       "description": "按调用依赖迁移密钥、BAP、脚本、交易、Sigma、Ordinals 与远程签名，完成 SDK 严格验收。",
-      "status": "done",
+      "status": "in-progress",
       "dependencies": [
         "bsv-replace-r2-base"
       ],
@@ -2269,14 +2254,14 @@
       ],
       "progress": {
         "total": 5,
-        "done": 5
+        "done": 0
       }
     },
     {
       "id": "bsv-replace-r4-component",
       "name": "R4 component 适配",
       "description": "迁移交易组件及全部下游调用、同步测试并隔离集成资源，完成组件严格验收。",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-replace-r3-sdk"
       ],
@@ -2293,14 +2278,14 @@
       ],
       "progress": {
         "total": 5,
-        "done": 5
+        "done": 0
       }
     },
     {
       "id": "bsv-replace-r5-cleanup",
       "name": "R5 旧依赖清理",
       "description": "移除旧依赖及全部过渡引用，同步测试源码清单和精确例外，核对 API／测试映射。",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-replace-r4-component"
       ],
@@ -2314,14 +2299,14 @@
       ],
       "progress": {
         "total": 2,
-        "done": 2
+        "done": 0
       }
     },
     {
       "id": "bsv-replace-r6-acceptance",
       "name": "R6 全量验收与交付",
       "description": "全量单元严格验收、SDK 与 component 集成、25 个 POM 的依赖树、制品指纹及交付报告。",
-      "status": "done",
+      "status": "not-started",
       "dependencies": [
         "bsv-replace-r5-cleanup"
       ],
@@ -2338,9 +2323,9 @@
       ],
       "progress": {
         "total": 5,
-        "done": 5
+        "done": 0
       }
     }
   ],
-  "status": "done"
+  "status": "in-progress"
 }

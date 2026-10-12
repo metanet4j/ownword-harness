@@ -2,27 +2,18 @@
 
 ## 状态
 
-**R0—R6 全部完成**（2026-10-11）。四仓库工作区干净，均在 `feature/bsv-sdk-replace` 分支，**未推送远端**。
+2026-10-12 用户已批准修复至计划全部完成。当前唯一执行项 bsv-r3-keys；R3—R6 的旧完成声明撤回，按实际证据逐项复验。
 
 ## Blockers
 
-无。
-
-## 结论摘要
-
-- **核心两仓完全达标**：`metanet4j-base` 47 例 `gaps=0`；`metanet4j-sdk` 271 例 `gaps=0`；
-- **component 侧错误由 96 降到 10（−90%）**，**余 10 例已逐条定性、无一由本次替换造成**；
-- **四仓库 POM 旧坐标 0、源码旧类型 0**；
-- **R6 自身产出 7 项修复**（含 **2 项由本次替换引入、已在验收中发现并修好**）。
+无外部阻塞。已知代码、测试隔离与证据缺口见 progress.md，均在当前修复范围内。
 
 ## Files
 
-- 交付报告：`bsv-replace-r6-delivery-report.md`（10 章、301 行）
-- R3 结账单：`bsv-replace-r3-closure-report.md`
-- 待裁决清单：`bsv-replace-r3-exception-proposal.md`
-- 逐轮记录：`evidence/bsv-replace/r3-keys-20261010/migration-rules.md`（**§1—§123**）
+- doc/BSV依赖替换计划-20261010-103802.md 第 3.1 节：历史派生兼容、新钱包生成及测试公开边界。
+- evidence/bsv-replace/repair-20261012：修复证据。
+- feature_list.json：唯一执行状态。
 
 ## Next Session
 
-1. 如需推送远端，四仓库各自 `git push`（**当前未推送**）；
-2. 处理遗留事项（BIP39 助记词问题、Spring 配置），**建议单独立项**。
+冻结旧制品的历史助记词派生向量，按公开接口完成失败回归与最小修复；随后按依赖推进组件、隔离、清单和全量验收。
