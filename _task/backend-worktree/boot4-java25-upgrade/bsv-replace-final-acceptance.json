@@ -1,0 +1,924 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "generatedAt": "2026-10-12T15:52:37+08:00",
+  "repositoryHeads": {
+    "metanet4j-parent": "d69ad1b17ec719d804595598150cb3ec7196ab6f",
+    "metanet4j-base": "5d3a262b318d5db1c758af689f57cef2fd7746ae",
+    "metanet4j-sdk": "70010f2f5dace76646379ed8ed63722a9c169c00",
+    "metanet4j-component": "b23792e58c01150bb0d071782c14bab5a49e2e06"
+  },
+  "unit": {
+    "evidence": "evidence/20261012T073110Z",
+    "exitCode": 0,
+    "modules": [
+      {
+        "repository": "metanet4j-parent",
+        "module": "metanet4j-parent",
+        "counts": {
+          "tests": 0,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {},
+        "noExecutableReason": "纯 POM，无生产与测试源码",
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-base",
+        "module": "metanet4j-base",
+        "counts": {
+          "tests": 47,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            2153,
+            0
+          ],
+          "BRANCH": [
+            199,
+            5
+          ],
+          "LINE": [
+            412,
+            0
+          ],
+          "COMPLEXITY": [
+            224,
+            5
+          ],
+          "METHOD": [
+            127,
+            0
+          ],
+          "CLASS": [
+            17,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-sdk",
+        "module": "metanet4j-sdk",
+        "counts": {
+          "tests": 301,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            11842,
+            287
+          ],
+          "BRANCH": [
+            943,
+            72
+          ],
+          "LINE": [
+            2415,
+            53
+          ],
+          "COMPLEXITY": [
+            1032,
+            71
+          ],
+          "METHOD": [
+            578,
+            14
+          ],
+          "CLASS": [
+            68,
+            2
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-api-common",
+        "counts": {
+          "tests": 59,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            758,
+            17
+          ],
+          "BRANCH": [
+            28,
+            0
+          ],
+          "LINE": [
+            198,
+            6
+          ],
+          "COMPLEXITY": [
+            60,
+            2
+          ],
+          "METHOD": [
+            46,
+            2
+          ],
+          "CLASS": [
+            9,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-component-bap",
+        "counts": {
+          "tests": 63,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            1228,
+            47
+          ],
+          "BRANCH": [
+            69,
+            1
+          ],
+          "LINE": [
+            293,
+            12
+          ],
+          "COMPLEXITY": [
+            124,
+            1
+          ],
+          "METHOD": [
+            88,
+            0
+          ],
+          "CLASS": [
+            22,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-component-bitcoinschema",
+        "counts": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            26,
+            0
+          ],
+          "BRANCH": [
+            4,
+            0
+          ],
+          "LINE": [
+            7,
+            0
+          ],
+          "COMPLEXITY": [
+            4,
+            0
+          ],
+          "METHOD": [
+            2,
+            0
+          ],
+          "CLASS": [
+            1,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-component-bsocial",
+        "counts": {
+          "tests": 76,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            2261,
+            3
+          ],
+          "BRANCH": [
+            118,
+            0
+          ],
+          "LINE": [
+            529,
+            1
+          ],
+          "COMPLEXITY": [
+            218,
+            1
+          ],
+          "METHOD": [
+            153,
+            1
+          ],
+          "CLASS": [
+            42,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-component-cache",
+        "counts": {
+          "tests": 34,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            1312,
+            28
+          ],
+          "BRANCH": [
+            77,
+            5
+          ],
+          "LINE": [
+            344,
+            8
+          ],
+          "COMPLEXITY": [
+            110,
+            5
+          ],
+          "METHOD": [
+            74,
+            0
+          ],
+          "CLASS": [
+            4,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-component-common",
+        "counts": {
+          "tests": 42,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            1043,
+            27
+          ],
+          "BRANCH": [
+            46,
+            0
+          ],
+          "LINE": [
+            266,
+            9
+          ],
+          "COMPLEXITY": [
+            113,
+            9
+          ],
+          "METHOD": [
+            88,
+            9
+          ],
+          "CLASS": [
+            28,
+            4
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-component-core",
+        "counts": {
+          "tests": 0,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {},
+        "noExecutableReason": "仅有两个无 default/static 实现的接口；编译产物无可执行方法",
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-component-file",
+        "counts": {
+          "tests": 60,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            937,
+            44
+          ],
+          "BRANCH": [
+            52,
+            0
+          ],
+          "LINE": [
+            190,
+            9
+          ],
+          "COMPLEXITY": [
+            89,
+            3
+          ],
+          "METHOD": [
+            63,
+            3
+          ],
+          "CLASS": [
+            13,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-component-handler",
+        "counts": {
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            44,
+            0
+          ],
+          "BRANCH": [
+            4,
+            0
+          ],
+          "LINE": [
+            12,
+            0
+          ],
+          "COMPLEXITY": [
+            7,
+            0
+          ],
+          "METHOD": [
+            5,
+            0
+          ],
+          "CLASS": [
+            2,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-component-message",
+        "counts": {
+          "tests": 31,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            1461,
+            0
+          ],
+          "BRANCH": [
+            14,
+            0
+          ],
+          "LINE": [
+            408,
+            0
+          ],
+          "COMPLEXITY": [
+            206,
+            0
+          ],
+          "METHOD": [
+            199,
+            0
+          ],
+          "CLASS": [
+            21,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-component-model",
+        "counts": {
+          "tests": 20,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            251,
+            14
+          ],
+          "BRANCH": [
+            2,
+            0
+          ],
+          "LINE": [
+            73,
+            5
+          ],
+          "COMPLEXITY": [
+            19,
+            1
+          ],
+          "METHOD": [
+            18,
+            1
+          ],
+          "CLASS": [
+            9,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-component-test",
+        "counts": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            0,
+            8
+          ],
+          "LINE": [
+            0,
+            3
+          ],
+          "COMPLEXITY": [
+            0,
+            2
+          ],
+          "METHOD": [
+            0,
+            2
+          ],
+          "CLASS": [
+            0,
+            1
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-component-tx",
+        "counts": {
+          "tests": 25,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            416,
+            0
+          ],
+          "BRANCH": [
+            6,
+            0
+          ],
+          "LINE": [
+            99,
+            0
+          ],
+          "COMPLEXITY": [
+            47,
+            0
+          ],
+          "METHOD": [
+            44,
+            0
+          ],
+          "CLASS": [
+            7,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-connect-planaria",
+        "counts": {
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            191,
+            0
+          ],
+          "BRANCH": [
+            8,
+            0
+          ],
+          "LINE": [
+            47,
+            0
+          ],
+          "COMPLEXITY": [
+            18,
+            0
+          ],
+          "METHOD": [
+            14,
+            0
+          ],
+          "CLASS": [
+            6,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-store-mongo",
+        "counts": {
+          "tests": 56,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            1717,
+            22
+          ],
+          "BRANCH": [
+            54,
+            2
+          ],
+          "LINE": [
+            311,
+            4
+          ],
+          "COMPLEXITY": [
+            83,
+            2
+          ],
+          "METHOD": [
+            57,
+            0
+          ],
+          "CLASS": [
+            12,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-store-search",
+        "counts": {
+          "tests": 32,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            485,
+            3
+          ],
+          "BRANCH": [
+            31,
+            0
+          ],
+          "LINE": [
+            97,
+            1
+          ],
+          "COMPLEXITY": [
+            52,
+            1
+          ],
+          "METHOD": [
+            35,
+            1
+          ],
+          "CLASS": [
+            10,
+            1
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-store-sql",
+        "counts": {
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            102,
+            0
+          ],
+          "BRANCH": [
+            4,
+            0
+          ],
+          "LINE": [
+            24,
+            0
+          ],
+          "COMPLEXITY": [
+            16,
+            0
+          ],
+          "METHOD": [
+            14,
+            0
+          ],
+          "CLASS": [
+            10,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-tx-convertor",
+        "counts": {
+          "tests": 57,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            1869,
+            65
+          ],
+          "BRANCH": [
+            155,
+            15
+          ],
+          "LINE": [
+            401,
+            15
+          ],
+          "COMPLEXITY": [
+            145,
+            10
+          ],
+          "METHOD": [
+            69,
+            1
+          ],
+          "CLASS": [
+            12,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-tx-filter",
+        "counts": {
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            94,
+            0
+          ],
+          "BRANCH": [
+            7,
+            1
+          ],
+          "LINE": [
+            20,
+            0
+          ],
+          "COMPLEXITY": [
+            13,
+            1
+          ],
+          "METHOD": [
+            10,
+            0
+          ],
+          "CLASS": [
+            3,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-tx-validator",
+        "counts": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            35,
+            0
+          ],
+          "BRANCH": [
+            2,
+            0
+          ],
+          "LINE": [
+            9,
+            0
+          ],
+          "COMPLEXITY": [
+            5,
+            0
+          ],
+          "METHOD": [
+            4,
+            0
+          ],
+          "CLASS": [
+            2,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "mybatispuls-generator",
+        "counts": {
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "INSTRUCTION": [
+            35,
+            93
+          ],
+          "BRANCH": [
+            3,
+            1
+          ],
+          "LINE": [
+            9,
+            26
+          ],
+          "COMPLEXITY": [
+            2,
+            9
+          ],
+          "METHOD": [
+            1,
+            8
+          ],
+          "CLASS": [
+            1,
+            0
+          ]
+        },
+        "noExecutableReason": null,
+        "gaps": 0
+      },
+      {
+        "repository": "metanet4j-component",
+        "module": "metanet4j-component",
+        "counts": {
+          "tests": 0,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {},
+        "noExecutableReason": "纯 POM，无生产与测试源码",
+        "gaps": 0
+      }
+    ],
+    "tests": 956
+  },
+  "http": {
+    "evidence": "evidence/20261012T070925Z-http-integration",
+    "exitCode": 0,
+    "tests": 5
+  },
+  "integration": {
+    "evidence": "evidence/20261012T073734Z-component-integration",
+    "exitCode": 0,
+    "tests": 124,
+    "classes": 18,
+    "residuals": {
+      "mongo": [],
+      "mysql": [],
+      "mysql-table": [],
+      "es": [],
+      "kafka-topic": [],
+      "kafka-group": [],
+      "redis-prefix": [],
+      "temp-dir": [],
+      "tcp-port": []
+    }
+  },
+  "sdkArtifact": {
+    "coordinate": "com.metanet4j:metanet4j-bsv-sdk:0.2.0",
+    "jarPath": "/home/haodev/.m2/metanet4j/com/metanet4j/metanet4j-bsv-sdk/0.2.0/metanet4j-bsv-sdk-0.2.0.jar",
+    "pomPath": "/home/haodev/.m2/metanet4j/com/metanet4j/metanet4j-bsv-sdk/0.2.0/metanet4j-bsv-sdk-0.2.0.pom",
+    "jarSha256": "d3aaf86dce9ef7fb9b5439a5a5559e7e32c87d73ed3f78aeea1fd6eb7afb39b7",
+    "pomSha256": "74d32beb37e8bbc8b92d2293b64916cb3d3a17ceb2f84b57ce70621b26e4b4ab",
+    "installed": true
+  },
+  "originalSdkEvidence": "evidence/bsv-replace/repair-20261012/r6-source-sdk-original-evidence.log",
+  "dependencies": "bsv-replace-dependencies.json",
+  "artifacts": "bsv-replace-final-artifacts.json",
+  "vectorBindings": "bsv-replace-current-vector-bindings.json",
+  "report": "doc/验收报告-BSV依赖替换-20261012-155237.md"
+}
