@@ -1,104 +1,43 @@
 ---
 name: react-spectrum
-description: Spectrum S2 implementation rules for OwnWord frontend development.
+description: 在实现、修改或验收 OwnWord 界面与原型时，核对项目绑定版本的 Spectrum S2 组件、Token、交互和无障碍行为。产品事实、页面结构与视觉方向遵循项目设计文档。
 ---
 
-# Spectrum S2 Implementation Skill
+# Spectrum S2 实现检查
 
-## Purpose
+## 依据与范围
 
-Per `_task/system-design/spec/核心认知.md` section 10.5, Spectrum S2 is the fixed and only primary design system for OwnWord.
+按[设计指南](../../../standard/OwnWord设计与设计系统.md)的顺序读取[核心认知](../../../_task/system-design/spec/核心认知.md)、设计指南和当前版本相关设计文档；已加载的内容无需重读。设计规则、技能分工、版本与来源判定统一以设计指南为准。
 
-This skill is the implementation guardrail for applying Spectrum S2 to OwnWord frontend work. It does not choose a design system and does not define product facts or product positioning.
+本技能只检查本次实现涉及的组件和交互。验证范围遵循[测试与验证](../../../standard/测试与验证-20260917-194638.md)，浏览器操作使用 `agent-browser`。
 
-Before applying this skill, read:
+## 1. 核对实际来源
 
-1. `_task/system-design/spec/核心认知.md`
-2. the current version design document
-3. `standard/design-skill-architecture.md`
+- 原型按设计指南第 5 节读取绑定元数据、设计系统提示和来源记录；应用工程检查依赖声明、锁文件及实际导入。确认页面使用的 S2 版本，不能只凭本地参考仓库的版本推断。
+- 沿页面入口追踪组件导入、封装、bundle 和 CSS；运行预览后检查实际加载的资源及目标元素的计算样式，确认修改生效且没有被旧资源或自定义样式覆盖。
+- 对照绑定版本的官方实现检查受影响组件。本地参考源码位置见设计指南第 5 节；版本不匹配时查找对应版本资料，不能用另一版本作符合性结论。
 
-## Binding Rule
+## 2. 检查组件与 Token
 
-Always use Spectrum S2 as the primary design system, as required by Core Cognition section 10.5.
+| 检查项 | 核验方法 |
+| --- | --- |
+| 标准交互组件 | 对按钮、表单、菜单、对话框等受影响交互，核实导入来源、使用的属性和封装行为；若使用自定义实现，说明官方组件不能满足的需求，并检查对应行为。 |
+| Token | 追踪颜色、字体、间距和状态样式到绑定版本的 Token 或主题配置；检查硬编码及覆盖值是否有版本设计依据，是否重复已有 Token。 |
+| 组件状态 | 触发本次改动涉及的悬停、按下、焦点、禁用、选中、加载或错误状态，对照官方实现和页面状态要求；不适用的状态无需增加。 |
+| 主题与视觉 | 修改颜色或状态样式时，检查受影响元素在 Light/Dark 下的实际对比度、焦点可见性和非颜色提示；调整布局时检查相关屏宽下的阅读及操作顺序。 |
 
-Do not replace or parallel it with another primary system such as Material, Fluent, Carbon, shadcn/ui, or Radix Themes.
+## 3. 检查键盘、焦点与无障碍
 
-Visual specialist skills may influence composition, density, typography, or motion only where their rules remain compatible with Spectrum S2 and the current version design document.
+在预览中走通受影响交互，按组件类型选择检查项：
 
-## Use Spectrum S2 for
+- **键盘操作**：用 Tab / Shift+Tab 检查焦点顺序和可见性；按绑定版本组件的交互约定验证 Enter、Space、方向键或 Escape，不将同一组按键要求套到所有组件。
+- **浮层焦点**：打开对话框或菜单，检查焦点进入、移动及关闭后的返回位置；需要限制焦点范围的模态对话框，确认焦点不会逃到背景。
+- **语义与名称**：检查 DOM 或无障碍树中的角色、可访问名称、标签、说明、错误关联及状态；图标按钮要有可访问名称。
+- **动态反馈**：检查异步状态和错误能否通过适当的语义或通知机制被感知；需要确认读屏播报时进行实际读屏验证，不能仅凭 ARIA 属性存在宣称通过。
+- **动效**：本次修改动效时，开启减少动态效果偏好，检查信息和操作仍然可用。
 
-- Button
-- Dialog
-- Menu
-- Form controls
-- Selection components
-- Common navigation and action patterns
-- Common component states
-- Accessible interaction patterns
-- Design Tokens
-- Focus and interaction behavior
+## 4. 记录结果与修复
 
-## Custom OwnWord UI
+在任务现有交付说明中记录受影响页面或组件、绑定版本及证据位置、实际检查结果、与官方实现的差异和未核实项；不为常规检查另建报告。
 
-Custom layouts and components are allowed for OwnWord-specific expression, including:
-
-- Personal homepage Hero
-- Identity presentation
-- Content Showcase
-- Artifact presentation
-- Custom storytelling layouts
-- Unique content visualization
-
-Custom UI must:
-
-- prefer Spectrum S2 tokens where applicable;
-- reuse Spectrum S2 components for standard interactions;
-- follow Spectrum S2 state and interaction conventions;
-- preserve Spectrum S2 accessibility requirements;
-- avoid creating a parallel generic component system.
-
-## Component Rules
-
-Prefer official Spectrum S2 components before creating custom equivalents when they satisfy the required interaction.
-
-Create custom components when the requirement is OwnWord-specific or cannot be expressed coherently with an existing Spectrum S2 component.
-
-Do not restyle a standard interaction into a separate visual language merely to satisfy a visual specialist skill.
-
-## Design Token Rules
-
-Use Spectrum S2 tokens and theme capabilities for:
-
-- Color
-- Typography
-- Spacing
-- Component states
-- Focus and interaction states
-
-Avoid arbitrary values when an existing Spectrum S2 token can express the requirement.
-
-Project-specific visual tokens may be introduced only when required by the current version design document and when they do not duplicate an existing Spectrum S2 token or create a parallel token system.
-
-## Accessibility Rules
-
-Interactive components must support:
-
-- Keyboard navigation
-- Focus management
-- Screen reader usage
-- Correct semantic structure
-- Required contrast
-- Non-color state communication
-- Reduced-motion behavior where applicable
-
-## Boundary
-
-Product facts come from `_task/system-design/spec/核心认知.md`.
-
-Page structure, visual direction and version-specific interaction requirements come from the current version design document.
-
-Spectrum S2 defines the fixed design-system foundation.
-
-`baoyu-design` organizes the design workflow. `design-taste-frontend` and `high-end-visual-design` may improve visual execution only inside the Spectrum S2 boundary.
-
-This skill checks Spectrum S2 implementation behavior, tokens, interaction consistency and accessibility. It must not override Core Cognition or the current version design document.
+发现差异时，按设计指南第 7 节修复可维护源文件并更新原型资源，再复查受影响交互。缺少版本、源码或运行环境时，明确缺失证据及影响范围，不将未检查项记为通过。

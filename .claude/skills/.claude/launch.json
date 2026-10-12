@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "astra-004-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "C:/haodev/ownword/designs/own-word-prototype-s2-astra-004", "run", "dev", "--", "--port", "5414", "--strictPort"],
+      "port": 5414
+    }
+  ]
+}

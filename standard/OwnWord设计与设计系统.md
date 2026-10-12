@@ -109,63 +109,29 @@ OwnWord 特有的 Hero、Identity 表达、Content Showcase、Artifact 表达可
 
 ## 6. 设计能力体系
 
-### 6.1 Design Orchestrator：baoyu-design
+常规高保真原型任务使用 `baoyu-design` 和 `react-spectrum`，分别负责设计执行与实现检查。公开展示页需要视觉探索时，才加载 `design-taste-frontend`。
 
-`baoyu-design` 是 OwnWord 高保真设计任务的主设计执行框架，负责：
+### 6.1 设计执行：baoyu-design
 
-- 理解任务和设计上下文；
-- 按本文组织设计判断；
-- 使用 Spectrum S2；
-- 完成高保真设计和交互原型；
-- Preview、验证和迭代。
+[baoyu-design](../.agents/skills/baoyu-design/SKILL.md) 负责设计上下文收集、设计系统导入、高保真原型生成、预览和迭代。
 
 OwnWord 已固定 Spectrum S2。若其通用流程要求选择设计系统，直接采用项目绑定的 Spectrum S2。
 
-`baoyu-design` 不能定义 OwnWord 产品事实，也不能覆盖核心认知、本文或当前版本已经确定的设计约束。
+### 6.2 实现检查：react-spectrum
 
-### 6.2 Design Specialist：design-taste-frontend
+[react-spectrum](../.agents/skills/react-spectrum/SKILL.md) 负责核对实际组件来源、Token、组件状态、键盘交互、焦点和无障碍行为。具体检查步骤统一维护在该技能中。
 
-`design-taste-frontend` 用于强化：
+检查以第 5 节的版本与来源证据为依据，不重新定义产品事实、页面结构或视觉主题。
 
-- 页面设计语言判断；
-- anti-slop / anti-template；
-- Typography、spacing、layout；
-- Visual density；
-- Motion intensity；
-- Responsive mechanics；
-- 前端设计 pre-flight check。
+### 6.3 按需视觉探索：design-taste-frontend
 
-其“选择设计系统”能力在 OwnWord 中不适用。
+[design-taste-frontend](../.agents/skills/design-taste-frontend/SKILL.md) 仅用于公开个人主页、Landing、Content Showcase 等公开展示页的视觉探索，辅助判断构图、排版、密度、响应式和动效。
 
-| 页面类型 | 使用方式 |
-| --- | --- |
-| Public Personal Homepage、Landing、Content Showcase、公开展示页 | 强使用，强化构图、密度、排版、动效和 anti-slop |
-| Public Post Reader、内容阅读页 | 中等使用，强化排版、密度、响应式和细节质量 |
-| Identity Setup、Wallet Connect | 选择性使用，只采用排版、响应式、anti-slop 和检查规则 |
-| Publish Review、Wallet Confirmation、Settings、Proof / Transaction Details | 轻量使用，以清晰度、状态完整性、响应式和实现质量为主 |
+- 只有任务明确需要视觉探索时才加载，不因页面属于公开展示页就自动加载。
+- 内容阅读页的常规迭代，以及 Identity Setup、Wallet Connect、Publish Review、Wallet Confirmation、Settings、Proof / Transaction Details 等业务界面不加载。
+- 其设计系统选择、技术栈、字体、图标和组件外观建议受本文及项目绑定 S2 约束，不得改写业务流程、状态机或信息优先级。
 
-任何情况下，不得为了视觉变化改写业务流程、状态机、信息优先级或 Spectrum S2。
-
-### 6.3 Design Specialist：high-end-visual-design
-
-`high-end-visual-design` 只在页面目标明确需要强品牌、premium、agency 或 cinematic 表达时使用，例如品牌型 Hero 或展示型页面的局部视觉探索。
-
-其 typography、macro whitespace、非对称布局、复杂 motion、卡片、按钮、阴影、圆角等建议只有在与 OwnWord 设计原则、当前版本设计文档和 Spectrum S2 相容时才能采用。
-
-不得把其固定视觉套路全局应用到 Wallet、Publish、Settings、Proof 等任务型 UI。
-
-### 6.4 Implementation Guardrail：react-spectrum
-
-`react-spectrum` skill 用于实现和验收阶段的 Spectrum S2 检查：
-
-- 是否优先使用合适的官方组件；
-- 是否优先使用绑定版本的 Token；
-- 组件状态和交互是否一致；
-- keyboard、focus、semantic、screen reader 等 Accessibility 是否满足；
-- 自定义组件是否确有 OwnWord 特有表达需求；
-- 自定义实现是否仍满足 Spectrum S2 基线。
-
-它不决定产品定位、页面信息架构或产品视觉主题。
+`high-end-visual-design` 不纳入 OwnWord 技能链。品牌表达由当前版本设计文档定义，按需使用上述视觉探索能力。
 
 ## 7. 与原型实现配合
 
@@ -189,15 +155,14 @@ OwnWord 设计与设计系统（设计总指南）
         ↓
 确认项目绑定 Spectrum S2
         ↓
-baoyu-design
-   ├─ design-taste-frontend（按页面类型加载）
-   └─ high-end-visual-design（按视觉目标加载）
+baoyu-design（设计执行）
+   └─ design-taste-frontend（仅在公开展示页需要视觉探索时加载）
         ↓
-Prototype / Preview
+原型 / 预览
         ↓
-react-spectrum 实现检查
+react-spectrum（实现检查）
         ↓
-Verify
+验证
 ```
 
 执行时：
@@ -208,7 +173,7 @@ Verify
 4. 明确用户任务、信息层级、内容关系和操作顺序；
 5. 确认 Spectrum S2 绑定版本和实际实现来源；
 6. 使用 `baoyu-design` 组织设计；
-7. 按页面需要加载 specialist；
+7. 仅在符合第 6.3 节条件时加载 `design-taste-frontend`；
 8. Preview；
 9. 使用 `react-spectrum` 检查组件、Token、交互与 Accessibility；
 10. 验证页面同时满足核心认知、本文、版本设计文档和绑定版本 S2。
@@ -221,8 +186,7 @@ Verify
 - 是否属于跨版本设计规则；属于时更新本文；
 - 是否只是当前版本的页面决策；属于时写入版本设计文档；
 - Spectrum S2 是否已有对应 Token、组件或模式；
-- 新能力属于 Orchestrator、Specialist 还是 Implementation Guardrail；
-- 是否与现有设计能力重复；
+- 是否提供现有设计执行、视觉探索或实现检查流程缺少的具体能力；
 - 是否会形成第二套设计系统；
 - 是否会改变既定业务流程、信息层级、状态语义或 Accessibility 基线。
 

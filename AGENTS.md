@@ -7,7 +7,8 @@
 - 回答简洁，但不省略关键证据和验证方式。
 
 ## 文档编写
-- 编写或修改文档时使用 `caveman`、`writing-clearly-and-concisely`；持久化文档使用完整、清晰的中文。
+- 编写或修改文档时使用`writing-clearly-and-concisely`；
+持久化文档使用完整、清晰的中文。
 - 新建独立报告、设计文档的 Markdown 文件名带时间戳；固定入口和状态文件（如 AGENTS.md、SKILL.md、README.md、progress.md）除外，修改已有文件不因此重命名。
 - 文档只保留当前内容，不追加变更历史；变更及原因写入 git commit。
 
