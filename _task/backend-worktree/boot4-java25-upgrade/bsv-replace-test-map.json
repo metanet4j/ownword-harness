@@ -7448,7 +7448,7 @@
       "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java",
       "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
       "testSourceClassification": "unit",
-      "declaredTestMethods": 15,
+      "declaredTestMethods": 16,
       "framework": "junit5",
       "tags": [],
       "extendsTestClass": null,
@@ -7487,6 +7487,11 @@
       "methods": [
         {
           "name": "batchSigningPreservesLegacyScopesAndValidScripts",
+          "classification": "unit",
+          "reason": "当前计划要求的真实边界回归"
+        },
+        {
+          "name": "batchSigningSkipsDisconnectedInputsAndSignsTheRemainingInput",
           "classification": "unit",
           "reason": "当前计划要求的真实边界回归"
         },
@@ -7820,7 +7825,7 @@
               "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
             }
           ],
-          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+          "reason": "本地单输入缺连接输出显式报错，批量跳过且保持输入脚本不变；全跳过返回 false 属计划批准的失败语义修复。远程跳过另行覆盖。"
         },
         {
           "baselineMethod": "statelessSignerIsReadyBeforeAndAfterStateSerialization",

@@ -6,6 +6,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from xml.etree import ElementTree
 
 ROOT = Path(__file__).resolve().parent
 spec = importlib.util.spec_from_file_location('unit', ROOT / 'verify-unit.py')
@@ -61,8 +62,19 @@ def verify(data):
     frozen = json.loads((ROOT/'evidence/bsv-replace/r0-api-work/vectors-summary.json').read_text())
     require(binding['frozenSha256'] == sha(ROOT/'bsv-replace-vectors.json') == frozen['artifactFingerprint']['sha256'], '冻结输入或独立预期值被改写')
     require(len(binding['groups']) == 14 and binding.get('formalAcceptance') is True and all(g.get('verified') is True for g in binding['groups']), 'V01—V14 缺少实际执行绑定')
+    executed = {}
+    for key in ('unit', 'http', 'integration'):
+        directory = ROOT/data[key]['evidence']
+        for report in directory.rglob('TEST-*.xml'):
+            suite = ElementTree.parse(report).getroot()
+            executed.setdefault(suite.get('name'), set()).update(c.get('name') for c in suite.findall('testcase'))
+    require(binding.get('frozenSampleCount') == 134 and sum(len(g.get('samples', [])) for g in binding['groups']) == 134, '冻结样本未逐项绑定')
     for group in binding['groups']:
-        require(all(item.get('executed') or item['disposition'] == 'cancelled-subject' for item in group['bindings']), group['id'] + ' 绑定方法未执行')
+        for item in group['bindings'] + group.get('samples', []):
+            if item['disposition'] == 'cancelled-subject': continue
+            require(bool(item['targets']) and all(any(name == t['method'] or name.startswith(t['method'] + '(') for name in executed.get(t['class'], set())) for t in item['targets']), group['id'] + ' 绑定方法未实际执行：' + str(item.get('baselineMethod')))
+    for path, expected in binding['resourceFingerprints'].items():
+        require(sha(ROOT/path) == expected, '固定资源输入被改写：' + path)
     features = json.loads((ROOT/'feature_list.json').read_text())
     for feature in features['features']:
         if not feature['id'].startswith('bsv-'): continue

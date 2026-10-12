@@ -522,7 +522,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "1d16a2b455579191864c2324cdb8f5231d2a3acc",
+      "head": "aad4a540a7b9e8063b7343034531e852b47ddff8",
       "modules": [
         {
           "path": ".",
@@ -2193,6 +2193,11 @@
               "methods": [
                 {
                   "name": "batchSigningPreservesLegacyScopesAndValidScripts",
+                  "classification": "unit",
+                  "reason": "当前计划要求的真实边界回归"
+                },
+                {
+                  "name": "batchSigningSkipsDisconnectedInputsAndSignsTheRemainingInput",
                   "classification": "unit",
                   "reason": "当前计划要求的真实边界回归"
                 },
