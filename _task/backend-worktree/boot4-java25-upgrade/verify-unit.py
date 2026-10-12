@@ -5,6 +5,8 @@ import argparse
 import hashlib
 import json
 import os
+import re
+import shlex
 import shutil
 import subprocess
 import sys
@@ -23,6 +25,15 @@ REPOSITORIES = ("metanet4j-parent", "metanet4j-base", "metanet4j-sdk", "metanet4
 SDK_COORDINATE = ("com.metanet4j", "metanet4j-bsv-sdk", "0.2.0")
 SDK_MANIFEST = ROOT / "bsv-replace-artifact.json"
 SDK_CACHE = Path.home() / ".m2/metanet4j"
+
+
+def declared_tests(source):
+    """清点 Java 中真实声明的 Jupiter 测试方法，不把夹具方法当成测试。"""
+    source = re.sub(r"/\*.*?\*/|//[^\n]*", "", source, flags=re.S)
+    pattern = (r"(?m)^\s*@(?:Test|ParameterizedTest|RepeatedTest|TestFactory|TestTemplate)\b"
+               r"(?:\([^)]*\))?\s*(?:@\w+(?:\([^)]*\))?\s*)*"
+               r"(?:(?:public|protected|private|static|final)\s+)*[\w<>\[\],.?]+\s+(\w+)\s*\(")
+    return set(re.findall(pattern, source))
 
 
 def sdk_artifact() -> dict:
@@ -76,6 +87,14 @@ def inventory():
             listed_tests = {item["path"] for item in module["testSources"]}
             if actual_tests != listed_tests:
                 raise ValueError(f"{module['artifactId']} 测试源码清单不一致")
+            for entry in module["testSources"]:
+                source = (ROOT / repo["repository"] / entry["path"]).read_text()
+                actual_methods = declared_tests(source)
+                listed_methods = {method["name"] for method in entry["methods"]}
+                if actual_methods != listed_methods:
+                    raise ValueError(f"{entry['path']} 测试方法清单不一致："
+                                     f"缺少 {sorted(actual_methods - listed_methods)}；"
+                                     f"多列 {sorted(listed_methods - actual_methods)}")
             if module.get("noExecutableReason") and (module["testSources"] or any(
                     item["kind"] not in ("interface", "@interface") for item in module["production"])):
                 raise ValueError(f"{module['artifactId']} 无可执行代码标记与源码清单冲突")
@@ -105,20 +124,40 @@ def run_maven(repo_name, args, log_path):
     command = [str(MVN), "-s", str(SETTINGS), "-B", *args]
     environment = os.environ.copy()
     environment["JAVA_HOME"] = str(JDK)
+    invocation = {"command": command, "javaHome": str(JDK),
+                  "startedAt": datetime.now(timezone.utc).timestamp()}
+    if "clean" in args and "test" in args:
+        modules = [module for repo in inventory() if repo["repository"] == repo_name
+                   for module in repo["modules"]]
+        invocation["startFingerprints"] = {
+            module["artifactId"]: fingerprint(repo_name, module) for module in modules}
+        invocation["startHead"] = subprocess.check_output(
+            ["git", "-C", str(ROOT / repo_name), "rev-parse", "HEAD"], text=True).strip()
+    invocation_path = log_path.with_suffix(".command.json")
+    invocation_path.write_text(json.dumps(invocation, ensure_ascii=False, indent=2) + "\n")
     with log_path.open("w") as log:
         result = subprocess.run(command, cwd=ROOT / repo_name, env=environment,
                                 stdout=log, stderr=subprocess.STDOUT, check=False)
+    invocation.update(exitCode=result.returncode, finishedAt=datetime.now(timezone.utc).timestamp())
+    invocation_path.write_text(json.dumps(invocation, ensure_ascii=False, indent=2) + "\n")
     print(f"{repo_name}: exit={result.returncode}，日志 {log_path}", flush=True)
     return result.returncode, command
 
 
 def fingerprint(repo_name, module):
     digest = hashlib.sha256()
-    for source in sorted([*module["production"], *module["testSources"]], key=lambda item: item["path"]):
-        path = ROOT / repo_name / source["path"]
-        digest.update(source["path"].encode())
+    directory = ROOT / repo_name / module["path"]
+    sources = [path for kind in ("main", "test")
+               for path in (directory / "src" / kind).rglob("*") if path.is_file()]
+    for path in sorted(sources):
+        digest.update(path.relative_to(ROOT / repo_name).as_posix().encode())
         digest.update(path.read_bytes())
-    digest.update((ROOT / repo_name / module["path"] / "pom.xml").read_bytes())
+    poms = {ROOT / repo_name / module["path"] / "pom.xml", ROOT / "metanet4j-parent/pom.xml"}
+    if repo_name == "metanet4j-component":
+        poms.add(ROOT / repo_name / "pom.xml")
+    for pom in sorted(poms):
+        digest.update(pom.relative_to(ROOT).as_posix().encode())
+        digest.update(pom.read_bytes())
     return digest.hexdigest()
 
 
@@ -126,17 +165,24 @@ def save_artifacts(repo, module, run_root, command, exit_code, log_path):
     target = ROOT / repo["repository"] / module["path"] / "target"
     output = run_root / repo["repository"] / module["artifactId"] / "unit"
     output.mkdir(parents=True, exist_ok=True)
-    for source, name in ((target / "surefire-reports", "surefire-reports"),
-                         (target / "site/jacoco-unit", "jacoco-unit")):
-        if source.exists():
-            shutil.copytree(source, output / name, dirs_exist_ok=True)
-    if (target / "jacoco-unit.exec").exists():
+    invocation = json.loads(log_path.with_suffix(".command.json").read_text())
+    started = invocation["startedAt"]
+    reports = target / "surefire-reports"
+    if reports.exists():
+        for report in reports.iterdir():
+            if report.is_file() and report.stat().st_mtime >= started:
+                (output / "surefire-reports").mkdir(exist_ok=True)
+                shutil.copy2(report, output / "surefire-reports" / report.name)
+    coverage = target / "site/jacoco-unit"
+    if (coverage / "jacoco.xml").is_file() and (coverage / "jacoco.xml").stat().st_mtime >= started:
+        shutil.copytree(coverage, output / "jacoco-unit", dirs_exist_ok=True)
+    if (target / "jacoco-unit.exec").is_file() and (target / "jacoco-unit.exec").stat().st_mtime >= started:
         shutil.copy2(target / "jacoco-unit.exec", output / "jacoco-unit.exec")
     if log_path.exists():
         shutil.copy2(log_path, output / "maven.log")
     head = subprocess.check_output(["git", "-C", str(ROOT / repo["repository"]),
                                     "rev-parse", "HEAD"], text=True).strip()
-    metadata = {"head": head, "command": command, "exitCode": exit_code,
+    metadata = {"head": head, "command": command, "exitCode": exit_code, "invocation": invocation,
                 "artifactId": module["artifactId"], "repository": repo["repository"],
                 "sourceFingerprint": fingerprint(repo["repository"], module),
                 "sdkArtifact": sdk_artifact()}
@@ -183,14 +229,22 @@ def inspect(module, output, strict):
         if metadata.get("exitCode") != 0:
             problems.append(f"记录的 Maven 退出码非零：{metadata.get('exitCode')}")
         command = metadata.get("command", [])
-        command_text = command if isinstance(command, str) else " ".join(command)
-        if "clean" not in command_text or "test" not in command_text:
+        command = shlex.split(command) if isinstance(command, str) else command
+        command_text = " ".join(command)
+        if "clean" not in command or "test" not in command:
             problems.append("命令未包含 clean test")
-        if "-DskipTests" in command_text or "maven.test.skip" in command_text:
+        if "-DskipTests" in command_text or "maven.test.skip" in command_text \
+                or "maven.test.failure.ignore=true" in command_text:
             problems.append("命令跳过测试")
         if strict:
+            if "-Punit-coverage" not in command or "jacoco:check" not in command:
+                problems.append("命令未启用严格覆盖率检查")
+            if "-DexcludedGroups=integration,external" not in command:
+                problems.append("命令未明确单元测试分层")
             artifact = sdk_artifact()
             expected = sdk_manifest()
+            if not expected:
+                problems.append("缺少固定 SDK 制品清单")
             if not artifact["installed"]:
                 problems.append("目标缓存缺少 SDK 制品：" + artifact["coordinate"])
             elif expected:
@@ -204,7 +258,14 @@ def inspect(module, output, strict):
             recorded = (metadata.get("sdkArtifact") or {}).get("jarSha256")
             if recorded != artifact["jarSha256"]:
                 problems.append("证据记录的 SDK 制品指纹与当前已安装制品不一致")
+            if (metadata.get("sdkArtifact") or {}).get("pomSha256") != artifact["pomSha256"]:
+                problems.append("证据记录的 SDK POM 指纹与当前已安装制品不一致")
             repo_name = metadata.get("repository", "")
+            invocation = metadata.get("invocation", {})
+            if invocation.get("startFingerprints", {}).get(module["artifactId"]) != metadata.get("sourceFingerprint"):
+                problems.append("执行前后源码或测试资源发生变化，证据失效")
+            if invocation.get("startHead") != metadata.get("head"):
+                problems.append("执行前后提交发生变化，证据失效")
             if repo_name not in REPOSITORIES or metadata.get("sourceFingerprint") != fingerprint(repo_name, module):
                 problems.append("证据与当前源码不一致")
             elif metadata.get("head") != subprocess.check_output(
@@ -339,7 +400,8 @@ def main():
                 continue
             chosen_modules = [(repo, module) for repo, module in selected
                               if repo["repository"] == repo_name]
-            command_args = ["-Punit-coverage", "clean", "test", "jacoco:report"]
+            command_args = ["-Punit-coverage", "clean", "test", "jacoco:report",
+                            "-DexcludedGroups=integration,external"]
             if args.mode == "accept":
                 command_args.append("jacoco:check")
             if repo_name == "metanet4j-component" and args.scope != "all":
