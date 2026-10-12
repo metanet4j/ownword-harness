@@ -1,54 +1,18 @@
 {
-  "checkedAt": "2026-10-12T19:08:50.763605+08:00",
-  "result": "blocked",
-  "scope": "设计审查与任务规划通过；基线缺失，未创建 worktree 或制作页面。",
-  "registeredBaseline": {
-    "version": "v0.3.0",
-    "commit": "9aedd92b669e61ab2c2e495cf83893d21714a250",
-    "localObjectPresent": false,
-    "registeredSourceDirectoryPresent": false
-  },
+  "checkedAt": "2026-10-12T19:50:08.291029+08:00",
+  "result": "source-verified",
+  "scope": "已取得 v0.3.0 最新源码并核对祖先；当前 v0.4.0 尚未制作。",
   "source": {
     "repository": "https://github.com/metanet4j/ownword-design-prototype.git",
-    "remoteRefs": [
-      {
-        "ref": "master",
-        "commit": "e43b5bda28e648b673d390a6e15829ec236fd0a4"
-      },
-      {
-        "ref": "dev",
-        "commit": "006acbf3cb551bf3c5de68681420238667dab06d"
-      },
-      {
-        "ref": "prototype/astra",
-        "commit": "a66a3baadd92f4dbc797ddaaccb8f1a4944172cf"
-      },
-      {
-        "ref": "prototype/v0.2.0-content",
-        "commit": "006acbf3cb551bf3c5de68681420238667dab06d"
-      }
-    ],
-    "remoteRefsCommand": "git ls-remote origin",
-    "v030RefFound": false,
-    "remoteDefaultTree": "212e3d0e5d0bd9ab2076390a7e76a85f9102451f",
-    "v020Tree": "212e3d0e5d0bd9ab2076390a7e76a85f9102451f",
-    "fetchRegisteredBaselineResult": "upload-pack: not our ref 9aedd92b669e61ab2c2e495cf83893d21714a250"
-  },
-  "planningCheck": {
-    "command": "./init.sh --plan",
-    "exitCode": 0,
-    "evidence": "plan-check.txt",
-    "features": 11,
-    "mappedBDD": 32
-  },
-  "initializationCheck": {
-    "command": "./init.sh",
-    "exitCode": 1,
-    "evidence": "baseline-gate.txt",
-    "result": "blocked-on-missing-baseline"
+    "localRepository": "designs/own-word-prototype-s2-astra-001",
+    "ref": "origin/codex/prototype-v0.3.0-artifact",
+    "commit": "1355bdc4a14197d1d2dfec09e26096446d080be5",
+    "version": "v0.3.0",
+    "registeredCommit": "9aedd92b669e61ab2c2e495cf83893d21714a250",
+    "registeredCommitIsAncestor": true
   },
   "actualWorktreeCreated": false,
   "featuresStarted": 0,
   "browserVerification": "not-started",
-  "nextStep": "取得包含 v0.3.0 成果的分支或源码位置后创建 worktree，并继续 P01–P10。"
+  "nextStep": "从最新 v0.3.0 创建独立 worktree，验证后连续制作当前 P01–P10。"
 }

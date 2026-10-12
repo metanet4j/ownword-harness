@@ -140,18 +140,11 @@ OwnWord 已固定 Spectrum S2。若其通用流程要求选择设计系统，直
 
 `baoyu-design` 不能定义 OwnWord 产品事实，也不能覆盖核心认知、本文或当前版本已经确定的设计约束。
 
-### 6.2 Implementation Guardrail：react-spectrum
+### 6.2 实现检查：react-spectrum
 
-`react-spectrum` skill 用于实现和验收阶段的 Spectrum S2 检查：
+[react-spectrum](../.agents/skills/react-spectrum/SKILL.md) 负责核对实际组件来源、Token、组件状态、键盘交互、焦点和无障碍行为。具体检查步骤统一维护在该技能中。
 
-- 是否优先使用合适的官方组件；
-- 是否优先使用绑定版本的 Token；
-- 组件状态和交互是否一致；
-- keyboard、focus、semantic、screen reader 等 Accessibility 是否满足；
-- 自定义组件是否确有 OwnWord 特有表达需求；
-- 自定义实现是否仍满足 Spectrum S2 基线。
-
-它不决定产品定位、页面信息架构或产品视觉主题。
+检查以第 5 节的版本与来源证据为依据，不重新定义产品事实、页面结构或视觉主题。
 
 ## 7. 与原型实现配合
 

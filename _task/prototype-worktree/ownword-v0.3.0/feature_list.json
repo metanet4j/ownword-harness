@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "purpose": "完成 v0.3.0 Identity Artifact 高保真原型 A01–A09，以及用户授权的外观与体验修正。",
-  "lastUpdated": "2026-09-19",
+  "purpose": "依照 v0.3.0 PRD 完成原型，并以用户指定的 Awwwards、Webby Awards、FWA 品质目标持续自查及改进整站。",
+  "lastUpdated": "2026-10-02",
   "allowedStatuses": [
     "not-started",
     "in-progress",
@@ -773,6 +773,249 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-review",
       "commit": "9aedd92b669e61ab2c2e495cf83893d21714a250"
+    },
+    {
+      "id": "R22",
+      "name": "首页叙事与公开探索品质提升",
+      "description": "以用户指定的 Awwwards、Webby Awards、FWA 品质目标推进整站迭代；本功能先关闭首页产品关系不清、公开探索入口隐蔽与无效无障碍证据问题。",
+      "dependencies": [
+        "R21"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-C",
+        "A09-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "首页清楚表达 Identity、Words、Proof 的关系，真实公开阅读入口无需连接钱包",
+        "保持穹顶品牌、S2 控件与既有业务状态，样例与密码学验证边界准确",
+        "桌面、320px 手机、短屏、中英与浅深代表场景无溢出，主要操作首屏可达",
+        "实际键盘、减少动态效果、有效无障碍扫描、运行错误与性能取证完成",
+        "截图、审查记录与独立提交齐备；整站品质目标持续推进，不以首页交付代替完成"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R22/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "be03af41da55cfed9ba776e5361aa6e1c5354089"
+    },
+    {
+      "id": "R23",
+      "name": "启动性能与编辑器按需加载",
+      "description": "关闭Lighthouse慢速移动端LCP35.5秒和TBT5870毫秒的真实性能缺口；预编译页面，并让公开读取不加载完整编辑器。",
+      "dependencies": [
+        "R22"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-C",
+        "A02-A",
+        "A09-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "页面不再在浏览器实时编译JSX，源文件可继续维护且构建可重复",
+        "Markdown公开读取沿用原有安全解析，完整编辑器在写作时加载，失败可重试且不丢草稿",
+        "原型与初始化验证引用正确，构建产物过期会明确失败",
+        "冷启动慢速移动端LCP低于2.5秒、主线程阻塞小于200毫秒、CLS低于0.1，记录实际测量与限制",
+        "首页公开探索、查找、身份与Artifact操作以及写作编辑受影响流程验证通过；提交后保留视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R23/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "db6ff192f1e5d78bac966d90383d274b277e6dfd"
+    },
+    {
+      "id": "R24",
+      "name": "冷启动交互加载链优化",
+      "description": "针对 R23 首屏显示后仍等待约6秒才可交互的问题，减少运行资源请求与重复字节，保留同一 App 和共享依赖。",
+      "dependencies": [
+        "R23"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-C",
+        "A02-A",
+        "A09-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "运行加载链有实际网络证据，合并消费者构建不修改绑定 S2 源文件。",
+        "当前同口径实际限速 ownword-interactive 比 R23 缩短至少20%，LCP低于2.5秒、TBT低于200毫秒、CLS低于0.1；默认模拟另行记录。",
+        "启动失败重试与提前点击、公开阅读、安全解析、身份和 Artifact 创建及编辑器草稿恢复保持可操作。",
+        "构建可重复并验证过期产物，初始化、运行错误和受影响截图通过；提交并记录真实限制。"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R24/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "dfe9595581d6956bf9a7cb2b2e1b65dd52074570"
+    },
+    {
+      "id": "R25",
+      "name": "公开探索返回连续性",
+      "description": "修复公开身份和阅读返回私有工作区的问题，保留查找输入与查询，正确显示公开页面导航语义。",
+      "dependencies": [
+        "R24"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-C",
+        "A04-A",
+        "A09-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "查找至身份或 Artifact 的返回保留查询，访客无需连接钱包；返回标签与目标一致",
+        "首页阅读和身份探索可回到首页，直接公开链接有合理公开返回入口；浏览器后退和刷新保持可用",
+        "桌面、390px 与键盘代表场景、日志、截图和启动检查通过；原型与任务状态独立提交"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R25/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "d2bb7de"
+    },
+    {
+      "id": "R26",
+      "name": "当前数字 ID 手机布局",
+      "description": "关闭独立审查发现的 390px 当前数字 ID 165 被挤成两行问题，明确编号、状态和详情操作的布局关系。",
+      "dependencies": [
+        "R25"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "390px 当前短编号完整一行；详情操作不挤压编号或状态",
+        "320px、414px 和长编号边界无横向溢出，深色中文代表场景可读，操作至少 44px",
+        "截图、构建、Token 与初始化检查通过，完成原型和任务状态独立提交"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R26/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "6ea1f9e"
+    },
+    {
+      "id": "R27",
+      "name": "内容列表操作层级",
+      "description": "修正手机草稿继续写作被挤入窄日期栏、管理操作反而更突出的层级问题。",
+      "dependencies": [
+        "R26"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "标题、摘要和状态关系清晰；继续写作与阅读动作可读，管理操作使用 S2 更多入口",
+        "验证草稿继续写作、菜单键盘及删除取消、已发布阅读、320px 和中文深色代表场景",
+        "截图、浏览器日志、构建与初始化检查通过，独立提交并保留人工复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R27/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "2a0f206"
+    },
+    {
+      "id": "R28",
+      "name": "公开身份数字 ID 与统一入口",
+      "description": "按核心认知10.5.2补齐公开身份首屏标识，复用既有编号和关联状态；合并两个公开入口的路由与返回行为。",
+      "dependencies": [
+        "R27"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-A",
+        "A04-A",
+        "A09-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "公开身份首屏展示可复制 BAP ID、当前有效数字 ID 与独立编号状态；无公开管理或设置动作",
+        "无关联、编号待确认或重组、关联不可核实或失效、资产缺失均不误示为有效数字 ID",
+        "工作区和公开查找共享固定公开路由，查看 Artifact 后返回原身份，卡片翻面与资料展开可用",
+        "桌面、320/390px 与中文深色代表场景、键盘、构建、模型和初始化检查通过；独立提交并保留人工复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R28/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "0bfd0b9"
+    },
+    {
+      "id": "R29",
+      "name": "身份文字与确认状态清晰度",
+      "description": "处理公开身份卡高光覆盖文字的对比度风险，并移除身份确认页孤立的签名标签。",
+      "dependencies": [
+        "R28"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "卡面高光不覆盖文字，正反面保持原有交互；按实际前景和背景颜色补核对对比度",
+        "身份确认页不把发布状态误置于裸签名标签之下，确认及取消流程仍可用",
+        "手机与桌面、浅深色代表截图、键盘、构建与初始化检查通过，提交并保留视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R29/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "da9907c"
+    },
+    {
+      "id": "R30",
+      "name": "公开阅读与作者身份连贯性",
+      "description": "关闭独立整站品质审查指出的静态署名断点，让读者通过现有BAP ID查看作者公开身份。",
+      "dependencies": [
+        "R29"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "A01-C",
+        "A09-A",
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "署名入口使用文章authorBapId，连接现有公开身份，无钱包门槛且不扩张主页功能",
+        "身份页返回同一文章和版本，刷新后返回、键盘与长姓名窄屏可用",
+        "独立审查复验、受影响截图、浏览器日志、构建与初始化检查通过，提交并保留视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R30/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "be6bafd"
+    },
+    {
+      "id": "R31",
+      "name": "窄屏头部完整点击区域",
+      "description": "修复320px英文长模块名称挤出外观按钮的问题；极窄屏使用品牌图标保留首页入口。",
+      "dependencies": [
+        "R30"
+      ],
+      "status": "needs-review",
+      "acceptanceRefs": [
+        "X01",
+        "X02"
+      ],
+      "doneCriteria": [
+        "320px英文与中文下品牌、模块菜单、外观按钮均完整位于视口内，高宽不低于44px",
+        "390px和桌面保留完整品牌字标，320px图标仍有明确可访问名称，键盘菜单和偏好可用",
+        "实际按钮边界与点击命中探针、代表截图、构建及初始化通过，提交并保留视觉复核"
+      ],
+      "evidence": "ownword-prototype/evidence/artifact-v030/R31/verification.json",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-review",
+      "commit": "1355bdc"
     }
   ],
   "designReview": {
@@ -781,7 +1024,7 @@
     "source": "_task/system-design/spec/prd/v0.3.0/设计审查v0.3.0-20260918-225543.md",
     "scope": "产品一致性、交互恢复、安全预览、模拟边界、制作映射和基线条件；不是用户视觉批准。"
   },
-  "authorization": "用户批注授权重新设计查找身份页面，并质疑样例快捷入口；本轮收敛查询页及结果状态，移除页面样例按钮。",
+  "authorization": "用户授权持续自查并反复提升整站品质；各功能提交后保持人工视觉复核，继续后续优化。",
   "deliveryReport": "ownword-prototype/交付验收v0.3.0-20260919-005031.md",
   "fullDesignReview": {
     "status": "completed-with-findings",
@@ -794,6 +1037,7 @@
     "fixedPrototypeCommit": "9e4f6dbbaeeb9806f97d2076d644885b24fdd148",
     "resolutionEvidence": "ownword-prototype/evidence/artifact-v030/review-fixes/verification.json"
   },
-  "finalVerification": "evidence/R21-init.txt",
-  "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md"
+  "finalVerification": "evidence/R31-init.txt",
+  "experienceReview": "ownword-prototype/evidence/artifact-v030/R05/批注体验审查-20260919-134718.md",
+  "nextStep": "交付当前原型供人工视觉复核；根据具体反馈继续迭代。已发现的实质品质问题均已关闭。"
 }

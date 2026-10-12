@@ -9,7 +9,7 @@
     "blocked",
     "done"
   ],
-  "activeFeature": null,
+  "activeFeature": "H00",
   "nextFeature": "H00",
   "executionScope": "homepage-full",
   "environment": {
@@ -19,8 +19,8 @@
     "sourceRemote": "https://github.com/metanet4j/ownword-design-prototype.git",
     "sourceRef": "codex/prototype-v0.3.0-artifact",
     "baselineVersion": "v0.3.0",
-    "baselineCommit": "9aedd92b669e61ab2c2e495cf83893d21714a250",
-    "baselineStatus": "unavailable",
+    "baselineCommit": "1355bdc4a14197d1d2dfec09e26096446d080be5",
+    "baselineStatus": "source-verified",
     "branch": "codex/prototype-v0.4.0-homepage",
     "prdVersion": "v0.4.0",
     "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
@@ -34,23 +34,22 @@
   "designReview": {
     "source": "_task/system-design/spec/prd/v0.4.0/设计审查v0.4.0-20261012-185625.md",
     "result": "agent-review-passed",
-    "limit": "基线缺失，未完成实际页面、用户视觉或生产验证。"
+    "limit": "设计审查通过，v0.3.0 源码已取得；实际 worktree、页面与用户视觉验收尚未完成。"
   },
   "features": [
     {
       "id": "H00",
       "name": "设计审查与 v0.3.0 基线初始化",
       "dependencies": [],
-      "status": "blocked",
+      "status": "in-progress",
       "doneCriteria": [
         "设计问题闭合，审查依据可追溯",
         "取得实际 v0.3.0 源码并建立继承该提交的 worktree",
         "S2 绑定、启动检查和浏览器基线验证通过",
         "独立提交并交付核对，未以任务文件替代运行环境"
       ],
-      "implementationStatus": "planning-verified-baseline-missing",
-      "evidence": "evidence/baseline-audit.json",
-      "blocker": "登记的 v0.3.0 源码及 Git 对象缺失，用户给定远端未包含该版本。"
+      "implementationStatus": "source-verified-worktree-pending",
+      "evidence": "evidence/baseline-audit.json"
     },
     {
       "id": "P01",

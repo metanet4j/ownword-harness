@@ -4,24 +4,24 @@
 
 ## 当前目标（Current Objective）
 
-按已审查 PRD，从 v0.3.0 继续完整制作 v0.4.0。
+依照当前 PRD，从最新 v0.3.0 连续完成 P01–P10。
 
 ## 当前状态（Current State）
 
-任务容器已准备，H00 因基线缺失为 blocked，其余 P01–P10 为 not-started；未创建原型 worktree，未启动预览。状态以[任务清单](feature_list.json)为准。
+H00 为 in-progress；v0.3.0 来源已核对，当前 P01–P10 未开始。worktree 与预览尚未创建，状态查[任务清单](feature_list.json)。
 
 ## 已完成（What）
 
-设计审查和基线核对已完成，原型制作权限已由用户明确授予。不能把结构检查通过写成环境初始化或页面验收通过。
+设计审查、32 条 BDD 映射与源码祖先核对通过。旧 v0.4.0 已按用户要求删除，不继承旧实现或验收。
 
 ## 阻塞与限制（Blockers）
 
-当前官方远端没有登记的 v0.3.0 提交；用户需提供可取得分支或实际源码位置。具体证据见 evidence/baseline-audit.json 和[审查报告](../../system-design/spec/prd/v0.4.0/设计审查v0.4.0-20261012-185625.md)。
+当前没有源码阻塞；环境和浏览器基线待验证。未完成实际页面、人工视觉或生产验证。
 
 ## 文件与环境（Files）
 
-新目录的 AGENTS.md、feature_list.json、bootstrap.mjs、init.sh 与 init.ps1 是任务准备；实际源码与独立 Git worktree 尚不存在。
+来源为 designs/own-word-prototype-s2-astra-001 的 origin/codex/prototype-v0.3.0-artifact@1355bdc；新分支 codex/prototype-v0.4.0-homepage，预览端口 4314。来源详情见 evidence/baseline-audit.json。
 
 ## 唯一下一步（Next Session / Recommended Next Step）
 
-恢复可验证的 v0.3.0，更新环境来源并建立 worktree；启动检查通过后连续制作 P01–P10。不要再次询问已经确定的范围或设计系统。
+创建独立 worktree 并通过初始化；按依赖制作全部功能。用户已授权连续完成，无需再次确认，独立执行且不使用子代理。

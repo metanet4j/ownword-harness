@@ -93,6 +93,7 @@ try {
     if (/^(?:https?:|data:|#)/.test(match[1])) continue;
     assert.ok(fs.existsSync(path.join(prototype, match[1].split('?')[0])), `页面资源缺失：${match[1]}`);
   }
+  console.log(run(process.execPath, ['build-prototype.mjs', '--check'], prototype));
   const require = createRequire(import.meta.url);
   const Babel = require(path.join(prototype, 'vendor/babel.min.js'));
   for (const file of fs.readdirSync(prototype)) {
@@ -115,9 +116,10 @@ try {
     fs.mkdirSync(path.dirname(logPath), {recursive: true});
     const log = fs.createWriteStream(logPath, {flags: 'a'});
     const python = process.platform === 'win32' ? 'python' : 'python3';
-    const child = spawn(python, ['-u', '-m', 'http.server', String(env.previewPort), '--bind', env.previewHost,
+    const child = spawn(python, ['-u', path.join(taskDir, 'preview-server.py'), String(env.previewPort), '--bind', env.previewHost,
       '--directory', prototype], {cwd: taskDir, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe']});
     for (const stream of [child.stdout, child.stderr]) stream.on('data', chunk => {log.write(chunk); process.stdout.write(chunk);});
+    fs.writeFileSync(path.join(taskDir, '.runtime/server.json'), JSON.stringify({parentPid: process.pid, pid: child.pid, port: env.previewPort, directory: prototype, startedAt: new Date().toISOString()}, null, 2));
     console.log(`预览：http://${env.previewHost}:${env.previewPort}/；日志：${logPath}`);
     for (const signal of ['SIGINT', 'SIGTERM']) process.once(signal, () => child.kill('SIGTERM'));
     const code = await new Promise((resolve, reject) => {child.once('error', reject); child.once('exit', resolve);});

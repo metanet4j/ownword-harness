@@ -94,6 +94,7 @@ for (const match of html.matchAll(/<(?:script|link)\b[^>]*\b(?:src|href)=["']([^
   assert.ok(fs.existsSync(path.join(prototype, match[1].split('?')[0])), `页面资源缺失：${match[1]}`);
 }
 for (const file of ['model.js', 'content-model.js', 'copy.js']) run(process.execPath, ['--check', file]);
+console.log(run(process.execPath, ['build-prototype.mjs', '--check']));
 const require = createRequire(import.meta.url);
 const Babel = require(path.join(prototype, 'vendor/babel.min.js'));
 for (const file of fs.readdirSync(prototype).filter(name => name.endsWith('.jsx'))) {
@@ -119,7 +120,7 @@ if (mode === '--serve') {
   const logPath = path.resolve(taskDir, env.previewLog);
   fs.mkdirSync(path.dirname(logPath), {recursive: true});
   const log = fs.createWriteStream(logPath, {flags: 'a'});
-  const child = spawn(python, ['-u', '-m', 'http.server', String(env.previewPort), '--bind', env.previewHost,
+  const child = spawn(python, ['-u', path.join(taskDir, 'preview-server.py'), String(env.previewPort), '--bind', env.previewHost,
     '--directory', prototype], {cwd: taskDir, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe']});
   for (const stream of [child.stdout, child.stderr]) stream.on('data', chunk => {log.write(chunk); process.stdout.write(chunk);});
   fs.writeFileSync(path.join(taskDir, '.runtime/server.json'), JSON.stringify({parentPid: process.pid,
