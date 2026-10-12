@@ -1,26 +1,63 @@
 ---
 name: "frontend-design"
-description: "Frontend design\nAesthetic direction for designs outside an existing brand system"
+description: "前端设计：从真实内容与用户任务出发，先评审方案，再实现和复核；适用于新建或重塑 UI，以及既有设计系统内的页面表达改进。"
+license: "Apache-2.0，见 frontend-design.LICENSE.txt"
+source: "https://github.com/anthropics/skills/blob/main/skills/frontend-design/SKILL.md"
+source_checked_on: "2026-10-12"
+source_sha256: "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3"
 ---
-Use this guidance when designing frontend/UI work that is NOT governed by an existing brand or design system. Create distinctive HTML with exceptional attention to aesthetic details and creative choices.
 
-### Design Thinking
+# 前端设计
 
-Before coding, understand the context and commit to a BOLD aesthetic direction:
-- **Purpose**: What problem does this interface solve? Who uses it?
-- **Tone**: Pick an extreme: brutally minimal, maximalist chaos, retro-futuristic, organic/natural, luxury/refined, playful/toy-like, editorial/magazine, brutalist/raw, art deco/geometric, soft/pastel, industrial/utilitarian, etc. Use these for inspiration but design one that is true to the aesthetic direction.
-- **Differentiation**: What makes this UNFORGETTABLE? What's the one thing someone will remember?
+本文件基于 Anthropic 官方 frontend-design 改写：使用中文整理方法，并加入既有设计系统的使用边界与项目规范适配。上游来源和核对快照见 front matter，许可全文见 [frontend-design.LICENSE.txt](frontend-design.LICENSE.txt)。
 
-Choose a clear conceptual direction and execute it with precision. Bold maximalism and refined minimalism both work — the key is intentionality, not intensity.
+## 使用范围
 
-### Aesthetics Guidelines
+用于前端/UI 的新建、重设计，以及页面构图、排版、密度和表达的评审。已有品牌或设计系统的页面同样适用：沿用已绑定的组件、Token、字体与交互约束，在这些约束内改进内容表达。
 
-- **Typography**: Choose fonts that are beautiful, unique, and interesting. Avoid generic fonts like Arial and Inter; opt for distinctive, characterful choices. Pair a distinctive display font with a refined body font.
-- **Color & Theme**: Commit to a cohesive aesthetic. Use CSS variables for consistency. Dominant colors with sharp accents outperform timid, evenly-distributed palettes.
-- **Motion**: Use animations for effects and micro-interactions. Prioritize CSS-only solutions for HTML. Focus on high-impact moments: one well-orchestrated page load with staggered reveals creates more delight than scattered micro-interactions.
-- **Spatial Composition**: Unexpected layouts. Asymmetry. Overlap. Diagonal flow. Grid-breaking elements. Generous negative space OR controlled density.
-- **Backgrounds & Visual Details**: Create atmosphere and depth rather than defaulting to solid colors. Gradient meshes, noise textures, geometric patterns, layered transparencies, dramatic shadows, decorative borders, grain overlays. For generated textures or atmospheric imagery (when a backend is available), see [`generate-images.md`](generate-images.md); for photography, use a real attributed stock photo when the harness exposes stock search, otherwise use a replaceable image slot.
+项目已有设计指南时，按其优先级执行；OwnWord 的事实来源、设计系统绑定和评审流程见[设计总指南](../../../../standard/OwnWord设计与设计系统.md)。本文提供通用方法，不定义产品事实，也不替换项目设计原则。
 
-Vary between light and dark themes, different fonts, different aesthetics. NEVER converge on the same choices across generations.
+## 从具体内容出发
 
-Match implementation complexity to the aesthetic vision. Maximalist designs need elaborate animations and effects. Minimalist designs need restraint, precision, and careful attention to spacing and subtle details.
+先读用户材料、现有页面和设计依据，明确对象、受众、主要任务与实际内容。资料不足时，只询问会改变设计结果的缺口；已确定的约束直接沿用。真实来源决定内容，示例与占位内容明确标注。
+
+首屏用适合题材的内容表达最重要的对象或行动：可以是标题、真实作品、内容片段或可操作组件。强调方式要能说明它与本次任务的关系。
+
+## 先形成方案，再对照需求评审
+
+动手前用简短说明、ASCII 草图或低保真布局表达方案：
+
+- 颜色与字体：点名绑定系统的角色和用法；已有系统时引用其 Token，不另起一套。
+- 布局：说明主次内容、分组、对齐和阅读顺序。
+- 强调：说明最需要被看见的内容，以及为何采用这种表达。
+- 交互：说明主要操作及本次涉及的状态。
+
+对照材料审查每项选择是否服务于当前任务。方向确有歧义时，展示少量有明确差异的候选，并说明各自的维度和取舍。改版与定点修复沿用已确定的表达；方案自评后进入实现。
+
+## 让结构传递信息
+
+边框、卡片、分隔线、标签、编号和留白用于表达内容关系。编号适用于真实顺序；卡片适用于独立对象或明确分组；标签用于帮助识别。
+
+同级、同类内容可以使用一致的布局。不同信息角色采用符合其阅读方式的组织。避免将所有内容机械切成同规格卡片，或在每个标题上重复放置没有信息作用的小标签。
+
+这些都是需要结合任务判断的选择，不是对某种字体、配色、圆角或标点的一律禁用。
+
+## 控制排版与动效
+
+用清晰的字级、字重、行长和间距表达层级，检查当前语言的换行与阅读体验。不要为了制造差异随意替换已绑定字体，或把标题中的一个词改色、换字体作为惯例。
+
+自动播放的动效只在确有注意力或叙事需要时使用。用户触发的展开、确认和切换应清楚表达状态变化；避免对每个区块、每张卡片重复添加入场或悬浮效果。遵守绑定系统的交互、焦点与 reduced-motion 要求。
+
+## 文案服务于理解和操作
+
+使用用户理解的对象名称与具体动词。同一动作在按钮、过程中和结果中保持一致；空状态说明如何开始，错误说明发生了什么及怎样恢复。
+
+删除没有信息作用的口号、装饰性元数据和凑数内容。协议术语、标识与已确认事实按项目规范保留；不为视觉整齐编造数据或裁掉必要信息。
+
+## 根据实际预览自评并迭代
+
+按项目规定的工具和验证范围预览页面。截图中检查主次是否清楚、分组是否表达关系、密度是否合适，以及每个强调和装饰是否有作用。
+
+每条反馈定位到具体页面或区域，说明观察、对任务的影响和修改方向。重新读取目标文件，在当前版本上定点修改，再复核受影响区域。
+
+只报告实际检查过的页面、视口和状态，无法从截图判断的交互明确留待验证。保留任务相关的响应式、键盘焦点、对比度与 reduced-motion 检查。设计自评、实现检查和用户批准分别记录，按项目的资产审阅流程更新状态。
