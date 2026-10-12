@@ -2,7 +2,7 @@
 
 ## 状态
 
-用户已批准修复至计划完成。当前执行项：bsv-r3-accept；状态以 feature_list.json 为准。
+用户已批准修复至计划完成。当前执行项：bsv-r4-foundation；状态以 feature_list.json 为准。
 
 ## Blockers
 
@@ -16,4 +16,4 @@
 
 ## Next Session
 
-业务 SDK 严格验收与安装。
+组件 common、转换与过滤适配。

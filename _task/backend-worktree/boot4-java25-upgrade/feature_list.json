@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "bsv-r3-accept",
+  "activeItem": "bsv-r4-foundation",
   "note": "已获 R0—R6 实施授权；28 个执行项按依赖串行，七阶段在 stages 汇总。23 个既有事项保留。状态以本清单为准。",
   "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
   "features": [
@@ -1024,7 +1024,7 @@
       "name": "业务 SDK 严格验收与安装",
       "description": "对应计划 R3；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r3-sdk",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "bsv-r3-protocols"
       ],
@@ -1038,17 +1038,30 @@
         "evidence/bsv-replace/r3-accept-*/"
       ],
       "evidence": [
-        "R3 验收完成：**五条门禁全部达成**——① 无旧库类型；② 测试全绿；③ 冻结向量通过；④ 行为处置已登记（§1—§114）；⑤ **覆盖率缺口 `gaps=0`**（`base` 与 `sdk`）。"
+        {
+          "path": "evidence/bsv-replace/repair-20261012/r3-accept/summary.json",
+          "verification": "实际执行及输出见该证据，不以状态文字代替门禁"
+        }
       ],
-      "commits": [],
-      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
+      "commits": [
+        {
+          "repository": "metanet4j-sdk",
+          "commit": "5fe32bbadfa8b71d06af3277729615c074048f28"
+        },
+        {
+          "repository": "ownword",
+          "commit": "825f97d2f4aa2469de5356a4f90cc5bbe20f9ef6"
+        }
+      ],
+      "statusNote": "已按修复后的实际代码与执行证据复核；最终阶段仍须全量严格验收。",
+      "completedAt": "2026-10-12T11:12:09+08:00"
     },
     {
       "id": "bsv-r4-foundation",
       "name": "组件 common、转换与过滤适配",
       "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r4-component",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "bsv-r3-accept"
       ],
@@ -1056,17 +1069,20 @@
       "doneCriteria": [
         "common、UtxoConvertor、交易转换、重复过滤及 MetaId 过滤调用迁移。",
         "P2PKH/P2PK、异常 UTXO、历史交易字段、去重与过滤测试实际通过。",
-        "涉及模块逐项严格验收，测试／API 映射同步。"
+        "涉及模块逐项严格验收，测试／API 映射同步。",
+        "补齐 base／业务 SDK 共享金额边界，原有合法交易结果保持；非数字／负数／非整数／SDK 不安全整数／余额不足／费用溢出有真实回归。"
       ],
       "deliverables": [
         "metanet4j-component",
-        "evidence/bsv-replace/r4-foundation-*/"
+        "evidence/bsv-replace/r4-foundation-*/",
+        "metanet4j-base",
+        "metanet4j-sdk"
       ],
       "evidence": [
         "R4 基础层适配完成：`component-common` 4 文件（`BitcoinSchemaTransaction`／`LocalTestUtxoProvider` 等）迁移并**整批测试全绿**（§311）。"
       ],
       "commits": [],
-      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
+      "statusNote": "转换层原 54 例通过但异常分支未覆盖；发现共享金额边界遗漏，按当前计划明确范围后修复。"
     },
     {
       "id": "bsv-r4-transactions",
@@ -1347,7 +1363,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-12T10:58:20+08:00",
+  "updatedAt": "2026-10-12T11:12:09+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1362,7 +1378,7 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": "bsv-r3-accept",
+  "nextItem": "bsv-r4-foundation",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
@@ -1436,7 +1452,7 @@
       "id": "bsv-replace-r3-sdk",
       "name": "R3 业务 SDK 适配",
       "description": "按调用依赖迁移密钥、BAP、脚本、交易、Sigma、Ordinals 与远程签名，完成 SDK 严格验收。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "bsv-replace-r2-base"
       ],
@@ -1453,14 +1469,14 @@
       ],
       "progress": {
         "total": 5,
-        "done": 4
+        "done": 5
       }
     },
     {
       "id": "bsv-replace-r4-component",
       "name": "R4 component 适配",
       "description": "迁移交易组件及全部下游调用、同步测试并隔离集成资源，完成组件严格验收。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "bsv-replace-r3-sdk"
       ],

@@ -2672,16 +2672,20 @@
                   "classification": "unit"
                 },
                 {
-                  "name": "changeAmountToleratesMissingOrNonNumericFields",
-                  "returnType": "void",
-                  "line": 250,
-                  "classification": "unit"
+                  "name": "changeAmountRejectsMissingOrNonNumericFields",
+                  "classification": "unit",
+                  "reason": "按当前计划补齐金额与异常输入边界"
                 },
                 {
                   "name": "constructorsPreserveTheExistingTransactionAndKeyProvider",
                   "returnType": "void",
                   "line": 382,
                   "classification": "unit"
+                },
+                {
+                  "name": "feeAndInputTotalsRejectLongOverflow",
+                  "classification": "unit",
+                  "reason": "按当前计划补齐金额与异常输入边界"
                 },
                 {
                   "name": "feeEstimationFallsBackForUnrecognizableScripts",
@@ -2736,6 +2740,11 @@
                   "returnType": "void",
                   "line": 120,
                   "classification": "unit"
+                },
+                {
+                  "name": "transactionAmountEntrypointsRejectNegativeAndUnsafeIntegers",
+                  "classification": "unit",
+                  "reason": "按当前计划补齐金额与异常输入边界"
                 }
               ],
               "classificationReason": "内存 UTXO 和本地替身验证找零、签名与广播回调，未连接网络或真实广播"
@@ -9919,16 +9928,31 @@
               "classification": "unit",
               "methods": [
                 {
+                  "name": "coinbaseRequiresTheCanonicalNullOutpointAndSingleInput",
+                  "classification": "unit",
+                  "reason": "当前计划要求的真实边界回归"
+                },
+                {
                   "name": "convertsAddressesRawKeysAndInputsIntoTheirUtxoEntries",
                   "returnType": "void",
                   "line": 32,
                   "classification": "unit"
                 },
                 {
+                  "name": "ignoresOutputsWithoutALockingScript",
+                  "classification": "unit",
+                  "reason": "当前计划要求的真实边界回归"
+                },
+                {
                   "name": "marksCoinbaseInputsAsSuch",
                   "returnType": "void",
                   "line": 53,
                   "classification": "unit"
+                },
+                {
+                  "name": "rejectsMalformedNumericOutputValues",
+                  "classification": "unit",
+                  "reason": "当前计划要求的真实边界回归"
                 },
                 {
                   "name": "reportsItsConvertType",
