@@ -10,23 +10,23 @@
 - R3 业务 SDK 适配：done（5/5）
 - R4 component 适配：done（5/5）
 - R5 旧依赖清理：done（2/2）
-- R6 全量验收与交付：in-progress（3/5）
+- R6 全量验收与交付：in-progress（4/5）
 
 ## Last Updated
 
-2026-10-12T15:46:14+08:00
+2026-10-12T15:52:32+08:00
 
 ## Current Objective
 
-最终制品与依赖来源复核
+提交后证据绑定与交付报告
 
 ## 当前证据
 
-- 最近完成：bsv-r6-integration。
-- 证据：evidence/20261012T073734Z-component-integration/summary.json。
-- 提交：metanet4j-component b23792e。
+- 最近完成：bsv-r6-artifact。
+- 证据：bsv-replace-final-artifacts.json。
+- 提交：metanet4j-sdk 70010f2。
 - 修复前状态：evidence/bsv-replace/repair-20261012/pre-repair-feature-list.json。
 
 ## Recommended Next Step
 
-最终制品与依赖来源复核；严格按计划依赖及完成条件执行。
+提交后证据绑定与交付报告；严格按计划依赖及完成条件执行。

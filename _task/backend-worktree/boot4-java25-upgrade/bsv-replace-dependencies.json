@@ -1,13 +1,13 @@
 {
   "schemaVersion": 2,
   "featureId": "bsv-r5-dependencies",
-  "generatedAt": "2026-10-12T06:09:19.826357+00:00",
+  "generatedAt": "2026-10-12T07:51:08.267636+00:00",
   "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
   "repositoryHeads": {
     "metanet4j-parent": "d69ad1b17ec719d804595598150cb3ec7196ab6f",
     "metanet4j-base": "5d3a262b318d5db1c758af689f57cef2fd7746ae",
-    "metanet4j-sdk": "1d16a2b455579191864c2324cdb8f5231d2a3acc",
-    "metanet4j-component": "41fd8fec63f1c8daac87013ae99d3cc4771d58a2"
+    "metanet4j-sdk": "70010f2f5dace76646379ed8ed63722a9c169c00",
+    "metanet4j-component": "b23792e58c01150bb0d071782c14bab5a49e2e06"
   },
   "treeCount": 25,
   "trees": [
@@ -16,7 +16,7 @@
       "module": "metanet4j-base",
       "pom": "metanet4j-base/pom.xml",
       "pomSha256": "48438223bb8c7eb2e598f3605b3c3009baa009990874dec5619874ebb9bfc8c5",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-base-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-base-dependency-tree.txt",
       "sha256": "10d4ffcef252cc74d454641f0937968f452fc9d353fbc97cc8d990101eda3951",
       "exitCode": 0
     },
@@ -25,7 +25,7 @@
       "module": "metanet4j-api-common",
       "pom": "metanet4j-component/metanet4j-api-common/pom.xml",
       "pomSha256": "c167908ebc5c28004d2e788377d8b90730d918602e119c26f35c792f0b7357c4",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-api-common-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-api-common-dependency-tree.txt",
       "sha256": "4adf75e4c30af30c36fc9dbf7b2480919b7ed669d6ccf5d4326e666718810a16",
       "exitCode": 0
     },
@@ -34,7 +34,7 @@
       "module": "metanet4j-component-bap",
       "pom": "metanet4j-component/metanet4j-component-bap/pom.xml",
       "pomSha256": "7213dbaafd2e31b15144a01bfe1ccee950c337aeee33a4213c378e366a44583b",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-bap-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-bap-dependency-tree.txt",
       "sha256": "fe1e93a638f0d0c7fe0b466c9f8aa52e7b96ae2d6de3b437286a413c1c90d700",
       "exitCode": 0
     },
@@ -43,7 +43,7 @@
       "module": "metanet4j-component-bitcoinschema",
       "pom": "metanet4j-component/metanet4j-component-bitcoinschema/pom.xml",
       "pomSha256": "320d1ac501bcb8a7165823e8da2cb581212a59d8d26f2510076e61a45fe6c226",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-bitcoinschema-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-bitcoinschema-dependency-tree.txt",
       "sha256": "a00a465296c48f7a07f64ad630ca81185865129b495771c1fb19f168053779d5",
       "exitCode": 0
     },
@@ -52,7 +52,7 @@
       "module": "metanet4j-component-bsocial",
       "pom": "metanet4j-component/metanet4j-component-bsocial/pom.xml",
       "pomSha256": "3422a6a5c4fbed07f03b5f4555c55c36028071e6089fdaeee7decadc3d22a8e1",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-bsocial-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-bsocial-dependency-tree.txt",
       "sha256": "ca69091a43e3f2e11c0e5114dc13a4fd40af33c8bd932d2b2f76a08c0da5cee3",
       "exitCode": 0
     },
@@ -61,7 +61,7 @@
       "module": "metanet4j-component-cache",
       "pom": "metanet4j-component/metanet4j-component-cache/pom.xml",
       "pomSha256": "22d9efd793b7415cafea0f3255e33a72062f5ea88ceba17496b5be0a78951c8b",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-cache-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-cache-dependency-tree.txt",
       "sha256": "300e97dd8f26101733df28da92cdd8b007586bf8504e1793b233bbafe7284297",
       "exitCode": 0
     },
@@ -70,7 +70,7 @@
       "module": "metanet4j-component-common",
       "pom": "metanet4j-component/metanet4j-component-common/pom.xml",
       "pomSha256": "ec2bb928682d082b2aff654457d23a36ab1484defcd113a84c4c0a5ff16790b0",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-common-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-common-dependency-tree.txt",
       "sha256": "9f01f919c386480217780e493247c9eb0e874bd1bacd161b273c4893ac08200b",
       "exitCode": 0
     },
@@ -79,7 +79,7 @@
       "module": "metanet4j-component-core",
       "pom": "metanet4j-component/metanet4j-component-core/pom.xml",
       "pomSha256": "aac89cf60b5d36c1cf0b77a65d24bdaa607ca3cead90a4902e4a0ca9b1c08357",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-core-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-core-dependency-tree.txt",
       "sha256": "170113e18bdcbb6809a1fb5727e981d89a40802b79e5bee152dd3084213acab4",
       "exitCode": 0
     },
@@ -88,7 +88,7 @@
       "module": "metanet4j-component-file",
       "pom": "metanet4j-component/metanet4j-component-file/pom.xml",
       "pomSha256": "fa79016c70e3f26721a5a214c363ef678d6e35708299c8041b755e37c2e8392a",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-file-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-file-dependency-tree.txt",
       "sha256": "fef8edfcce164f4be37c60592d3085bcb0ac71ba829286a2e042eadb49cc5035",
       "exitCode": 0
     },
@@ -97,7 +97,7 @@
       "module": "metanet4j-component-handler",
       "pom": "metanet4j-component/metanet4j-component-handler/pom.xml",
       "pomSha256": "cec8e684c770a8d1290dab81101d105c56617a08bddb593a533c747af834016c",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-handler-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-handler-dependency-tree.txt",
       "sha256": "383366bc92b1a6d3858eb77a92e2c482235b5b88e6e15ee3610ea30b3c49b06b",
       "exitCode": 0
     },
@@ -106,7 +106,7 @@
       "module": "metanet4j-component-message",
       "pom": "metanet4j-component/metanet4j-component-message/pom.xml",
       "pomSha256": "b5265164890e054b3374ae1dc34eb74212601ae02892f8da9fb22c790e2a6ffd",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-message-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-message-dependency-tree.txt",
       "sha256": "198a1279cdb52d61c8cc590aac679d7829651dba0d95af7ee3bcfb9d18575c63",
       "exitCode": 0
     },
@@ -115,7 +115,7 @@
       "module": "metanet4j-component-model",
       "pom": "metanet4j-component/metanet4j-component-model/pom.xml",
       "pomSha256": "4f042f48af5b0a32774232b22e1929fdbd1c70b2a8bbd4ec62c1a7a3843f4fbb",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-model-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-model-dependency-tree.txt",
       "sha256": "24bf58358a02f64005a9608816018ef01eb2bb6743c1836fa0f340591e1098f0",
       "exitCode": 0
     },
@@ -124,7 +124,7 @@
       "module": "metanet4j-component-test",
       "pom": "metanet4j-component/metanet4j-component-test/pom.xml",
       "pomSha256": "a4697948f0b2e4065f4be9438e7870e191fdebf27a8572ec096b18610bbaa32a",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-test-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-test-dependency-tree.txt",
       "sha256": "766cc82343d6883a192c3e842be1556919669c012578354a29904e42977f54f8",
       "exitCode": 0
     },
@@ -133,7 +133,7 @@
       "module": "metanet4j-component-tx",
       "pom": "metanet4j-component/metanet4j-component-tx/pom.xml",
       "pomSha256": "8db1cfe7a400d47944a635a8c253ac3f7a07b7e752470fddc71299bf4b19654a",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-tx-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-tx-dependency-tree.txt",
       "sha256": "1aad8eef76de6102ca972e38461c1941f3e3aa52d2ff9b1bf993a72fc4fe6402",
       "exitCode": 0
     },
@@ -142,7 +142,7 @@
       "module": "metanet4j-connect-planaria",
       "pom": "metanet4j-component/metanet4j-connect-planaria/pom.xml",
       "pomSha256": "3b50341447464e2ad8b07465bbf95e1a2bfb23d5c1efe9bfe84b4719aeeead0d",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-connect-planaria-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-connect-planaria-dependency-tree.txt",
       "sha256": "ede3fccb3ecaaddde872339d65ff09e9d4702d26f28c104cb02906003a94e4ae",
       "exitCode": 0
     },
@@ -151,7 +151,7 @@
       "module": "metanet4j-store-mongo",
       "pom": "metanet4j-component/metanet4j-store-mongo/pom.xml",
       "pomSha256": "35bc3fa3de8f3f5e24a60cdfbab464d10f86f836f3faedef9010a975f8e5aa44",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-store-mongo-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-store-mongo-dependency-tree.txt",
       "sha256": "55a228c1275fc765dcf09c90156b196632f51f93001f7aff55c8b2758c859dae",
       "exitCode": 0
     },
@@ -160,7 +160,7 @@
       "module": "metanet4j-store-search",
       "pom": "metanet4j-component/metanet4j-store-search/pom.xml",
       "pomSha256": "33e67bced83a5a8b07130056bfccd887d46b75391cb4aa558d15b928a2338ace",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-store-search-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-store-search-dependency-tree.txt",
       "sha256": "6b7286481fd5536fd3f3c1f0b30fe0f3ba9146cd91e15c6288173497941de97f",
       "exitCode": 0
     },
@@ -169,7 +169,7 @@
       "module": "metanet4j-store-sql",
       "pom": "metanet4j-component/metanet4j-store-sql/pom.xml",
       "pomSha256": "7cbfa17b1c356a1c0dee99fa1df1f0a8de3df612a0f862ee335ea7e5f2f343d0",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-store-sql-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-store-sql-dependency-tree.txt",
       "sha256": "b910d4004031e54291a6bc8e3aea8592f453fffe1bd2a69280ccc651ca68b207",
       "exitCode": 0
     },
@@ -178,7 +178,7 @@
       "module": "metanet4j-tx-convertor",
       "pom": "metanet4j-component/metanet4j-tx-convertor/pom.xml",
       "pomSha256": "4477576457eb89c2a3224b8784f8629c78ae6bba8eaf2391feb99195321719c1",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-tx-convertor-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-tx-convertor-dependency-tree.txt",
       "sha256": "ddbc0f397c79127d28489ea8c37c53749d87e2cbd757cd280c236c130e88679c",
       "exitCode": 0
     },
@@ -187,7 +187,7 @@
       "module": "metanet4j-tx-filter",
       "pom": "metanet4j-component/metanet4j-tx-filter/pom.xml",
       "pomSha256": "3a8f09e92ced9666c2e4afb91e7e6504ddc393cba457fbd6a986e51e131a63b4",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-tx-filter-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-tx-filter-dependency-tree.txt",
       "sha256": "761d20418b19738ca2efb96dabb35a596e2f4784eaf3ef7cf1e356f71cd8f120",
       "exitCode": 0
     },
@@ -196,7 +196,7 @@
       "module": "metanet4j-tx-validator",
       "pom": "metanet4j-component/metanet4j-tx-validator/pom.xml",
       "pomSha256": "03ac7c63b50771574de259165d6b583e203e7ed05cff72e94041bfd0839795d7",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-tx-validator-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-tx-validator-dependency-tree.txt",
       "sha256": "6218838afda5794d22cb3a6ea708ac3b9b89f51bbab43b853149dd6459d562ed",
       "exitCode": 0
     },
@@ -205,7 +205,7 @@
       "module": "mybatispuls-generator",
       "pom": "metanet4j-component/mybatispuls-generator/pom.xml",
       "pomSha256": "25ee67e95fc5531e5ce40f9a75f321304b16255b1d59ee7fce70faf770338a3f",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__mybatispuls-generator-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__mybatispuls-generator-dependency-tree.txt",
       "sha256": "c66bcb2099e2c7bf8ffd8689d7d81dcb112029694160a434ceff19f9d2ffc158",
       "exitCode": 0
     },
@@ -214,7 +214,7 @@
       "module": "metanet4j-component",
       "pom": "metanet4j-component/pom.xml",
       "pomSha256": "082152b199827b98f1c3c20fb0d01a15be071441bab2d5382a3190e2be5afd8d",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component-dependency-tree.txt",
       "sha256": "dd0125daeeb09122291f20f5b5ca8fc3928a5b4749a60cea65a261270c3e0d11",
       "exitCode": 0
     },
@@ -223,7 +223,7 @@
       "module": "metanet4j-parent",
       "pom": "metanet4j-parent/pom.xml",
       "pomSha256": "8a44582d026cf62bab6a7ec299e03e80c12af9c373c0b07e7edf051f941ccaa5",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-parent-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-parent-dependency-tree.txt",
       "sha256": "1ef54f16838b19eca38a4419f3f48db7a3fced02070cda451f09c21dbe2612d5",
       "exitCode": 0
     },
@@ -232,13 +232,13 @@
       "module": "metanet4j-sdk",
       "pom": "metanet4j-sdk/pom.xml",
       "pomSha256": "630a373781241cdb386ef3d10a5e952becec991e5e43e9d6ef47a9a8959c4949",
-      "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-sdk-dependency-tree.txt",
+      "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-sdk-dependency-tree.txt",
       "sha256": "227c8ea78142229656eb1cff3a9331b98b86da0937b2627b68a561b25240dd7a",
       "exitCode": 0
     }
   ],
   "oldReferences": {
-    "path": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/old-references.txt",
+    "path": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/old-references.txt",
     "count": 0,
     "scanExitCode": 1
   },
@@ -255,11 +255,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-base/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-base-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-base-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-base-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-base-dependency-tree.log"
     },
     {
       "command": [
@@ -271,11 +271,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-api-common/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-api-common-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-api-common-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-api-common-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-api-common-dependency-tree.log"
     },
     {
       "command": [
@@ -287,11 +287,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-component-bap/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-bap-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-bap-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-bap-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-bap-dependency-tree.log"
     },
     {
       "command": [
@@ -303,11 +303,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-component-bitcoinschema/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-bitcoinschema-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-bitcoinschema-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-bitcoinschema-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-bitcoinschema-dependency-tree.log"
     },
     {
       "command": [
@@ -319,11 +319,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-component-bsocial/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-bsocial-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-bsocial-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-bsocial-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-bsocial-dependency-tree.log"
     },
     {
       "command": [
@@ -335,11 +335,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-component-cache/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-cache-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-cache-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-cache-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-cache-dependency-tree.log"
     },
     {
       "command": [
@@ -351,11 +351,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-component-common/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-common-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-common-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-common-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-common-dependency-tree.log"
     },
     {
       "command": [
@@ -367,11 +367,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-component-core/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-core-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-core-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-core-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-core-dependency-tree.log"
     },
     {
       "command": [
@@ -383,11 +383,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-component-file/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-file-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-file-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-file-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-file-dependency-tree.log"
     },
     {
       "command": [
@@ -399,11 +399,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-component-handler/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-handler-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-handler-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-handler-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-handler-dependency-tree.log"
     },
     {
       "command": [
@@ -415,11 +415,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-component-message/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-message-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-message-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-message-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-message-dependency-tree.log"
     },
     {
       "command": [
@@ -431,11 +431,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-component-model/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-model-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-model-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-model-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-model-dependency-tree.log"
     },
     {
       "command": [
@@ -447,11 +447,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-component-test/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-test-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-test-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-test-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-test-dependency-tree.log"
     },
     {
       "command": [
@@ -463,11 +463,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-component-tx/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-tx-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-tx-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-component-tx-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-component-tx-dependency-tree.log"
     },
     {
       "command": [
@@ -479,11 +479,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-connect-planaria/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-connect-planaria-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-connect-planaria-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-connect-planaria-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-connect-planaria-dependency-tree.log"
     },
     {
       "command": [
@@ -495,11 +495,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-store-mongo/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-store-mongo-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-store-mongo-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-store-mongo-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-store-mongo-dependency-tree.log"
     },
     {
       "command": [
@@ -511,11 +511,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-store-search/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-store-search-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-store-search-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-store-search-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-store-search-dependency-tree.log"
     },
     {
       "command": [
@@ -527,11 +527,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-store-sql/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-store-sql-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-store-sql-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-store-sql-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-store-sql-dependency-tree.log"
     },
     {
       "command": [
@@ -543,11 +543,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-tx-convertor/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-tx-convertor-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-tx-convertor-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-tx-convertor-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-tx-convertor-dependency-tree.log"
     },
     {
       "command": [
@@ -559,11 +559,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-tx-filter/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-tx-filter-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-tx-filter-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-tx-filter-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-tx-filter-dependency-tree.log"
     },
     {
       "command": [
@@ -575,11 +575,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/metanet4j-tx-validator/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-tx-validator-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-tx-validator-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__metanet4j-tx-validator-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__metanet4j-tx-validator-dependency-tree.log"
     },
     {
       "command": [
@@ -591,11 +591,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/mybatispuls-generator/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__mybatispuls-generator-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__mybatispuls-generator-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component__mybatispuls-generator-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component__mybatispuls-generator-dependency-tree.log"
     },
     {
       "command": [
@@ -607,11 +607,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-component-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-component-dependency-tree.log"
     },
     {
       "command": [
@@ -623,11 +623,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-parent/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-parent-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-parent-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-parent-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-parent-dependency-tree.log"
     },
     {
       "command": [
@@ -639,11 +639,11 @@
         "/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/metanet4j-sdk/pom.xml",
         "-N",
         "dependency:tree",
-        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-sdk-dependency-tree.txt",
+        "-DoutputFile=/home/haodev/ownword/_task/backend-worktree/boot4-java25-upgrade/evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-sdk-dependency-tree.txt",
         "-DappendOutput=false"
       ],
       "exitCode": 0,
-      "log": "evidence/bsv-replace/repair-20261012/r5-final-dependencies/metanet4j-sdk-dependency-tree.log"
+      "log": "evidence/bsv-replace/repair-20261012/r6-final-dependencies/metanet4j-sdk-dependency-tree.log"
     }
   ]
 }
