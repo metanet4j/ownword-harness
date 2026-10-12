@@ -2,7 +2,7 @@
 
 ## 状态
 
-用户已批准修复至计划完成。当前执行项：bsv-r3-scripts；状态以 feature_list.json 为准。
+用户已批准修复至计划完成。当前执行项：bsv-r3-transactions；状态以 feature_list.json 为准。
 
 ## Blockers
 
@@ -16,4 +16,4 @@
 
 ## Next Session
 
-业务 SDK 脚本与交易读取适配。
+业务 SDK 交易与签名适配。
