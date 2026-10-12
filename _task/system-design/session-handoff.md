@@ -1,9 +1,9 @@
 # 当前交接
 
-当前产出是 [v0.4.0 Identity 个人主页设计文档](spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md)，已同步[核心认知](spec/核心认知.md)，并补齐缺失的 1sat 参考源码。事项 `design-homepage-v040-doc` 与 `reference-1sat-v040-restore` 为 `needs-review`，无进行中事项；状态与验证证据以[任务清单](feature_list.json)为准。
+当前目标是从 v0.3.0 完整制作 v0.4.0。用户已明确授权 review、建立 worktree 与连续完成 P01–P10；设计审查通过，任务容器已准备，实际基线缺失使总体事项为 blocked。
 
-续接先读本目录 AGENTS.md、任务清单与 progress.md，再读版本文档和核心认知。1sat 两个独立仓库恢复为[来源清单](../../reference/sources.lock.json)中的固定 commit，原文档链接可用；协议解释、源码入口与 BAP 版本差异见版本文档第 8 节。不能因完成参考资料补齐就关闭生产适配验证项。
+续接先读本目录规则与状态，再读[v0.4.0 任务指南](../prototype-worktree/ownword-v0.4.0/AGENTS.md)及其状态文件。权威页面与验收见[版本文档](spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md)，修正与基线结论见[审查报告](spec/prd/v0.4.0/设计审查v0.4.0-20261012-185625.md)。
 
-唯一下一步：取得用户对 v0.4.0 事实、范围、验收和制作映射的审阅结果；通过后再登记原型制作事项、实际 S2 绑定和输出路径。本轮没有创建 v0.4.0 原型环境。
+用户补充的来源是 `https://github.com/metanet4j/ownword-design-prototype.git`。已检查全部引用，未取得登记的 v0.3.0 提交；具体命令、结果和规划检查查[核对记录](../prototype-worktree/ownword-v0.4.0/evidence/baseline-audit.json)。实际 worktree 与原型页面尚未创建，不能从只有 v0.2.0 的远端直接开始并宣称继承了 v0.3.0。
 
-既有 v0.3.0 R21 的待复核状态与证据保留，另查[版本任务清单](../prototype-worktree/ownword-v0.3.0/feature_list.json)；不因新文档交付自动关闭旧事项。
+唯一下一步：取得可用的 v0.3.0 分支或源码路径，更新来源并验证后创建 worktree、运行 init.sh，再连续制作全部功能。无需再次请求原型制作授权，不把人工作业复核或生产接口缺口变成模拟原型开工门禁。

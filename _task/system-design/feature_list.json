@@ -12,6 +12,36 @@
   "activeItem": null,
   "features": [
     {
+      "id": "prototype-homepage-v040",
+      "name": "v0.4.0 Identity 个人主页完整高保真原型",
+      "status": "blocked",
+      "goal": "审查并修正设计文档，从 v0.3.0 最终原型建立独立 worktree，连续完成 P01–P10 的实现、验证和提交。",
+      "scope": "版本设计审查、v0.3.0 基线恢复、独立 worktree 与 harness、高保真原型制作和验收；身份、钱包与链上结果采用确定性模拟。",
+      "dependencies": [
+        "用户明确授权 review 后完成整个 v0.4.0，并要求以 v0.3.0 为基线保持连续性",
+        "核心认知与 v0.4.0 设计文档",
+        "v0.3.0 最后登记原型提交 9aedd92b669e61ab2c2e495cf83893d21714a250",
+        "现有原型仓库、Spectrum S2 绑定及启动验证模式"
+      ],
+      "doneCriteria": [
+        "设计审查无未处理阻塞项，记录问题、处理与依据",
+        "worktree 的实际祖先包含 v0.3.0 最终提交，保留旧功能和 S2 连续性",
+        "P01–P10 全部实现，32 条 BDD 有对应可复现证据",
+        "新增页面正常、相关边界、媒体实际播放及受影响截图验证通过",
+        "每项功能独立提交，harness 可重复启动与检查",
+        "成果交付用户视觉复核，人工复核前保持 needs-review"
+      ],
+      "prdVersion": "v0.4.0",
+      "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
+      "harnessPath": "_task/prototype-worktree/ownword-v0.4.0",
+      "output": "_task/prototype-worktree/ownword-v0.4.0/ownword-prototype",
+      "implementationStatus": "design-reviewed-planning-prepared-baseline-missing",
+      "reviewStatus": "agent-design-review-passed-environment-blocked",
+      "evidence": "设计审查见 spec/prd/v0.4.0/设计审查v0.4.0-20261012-185625.md；任务登记、32 条 BDD 映射及缺失基线守卫验证见 _task/prototype-worktree/ownword-v0.4.0/evidence/baseline-audit.json。尚未创建实际 worktree、启动预览或制作页面。",
+      "blocker": "登记的 v0.3.0 最终源码缺失；用户给定远端的全部引用不包含该版本，master 与 v0.2.0 的代码树相同，取得 9aedd92 返回 not our ref。需要可取得的 v0.3.0 分支或实际源码位置。",
+      "nextStep": "恢复 v0.3.0 基线后创建 worktree，启动检查通过后连续完成 P01–P10；制作授权已具备。"
+    },
+    {
       "id": "reference-1sat-v040-restore",
       "name": "补齐 v0.4.0 查阅所需 1sat 参考源码",
       "status": "needs-review",
@@ -63,9 +93,9 @@
       "output": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
       "implementationStatus": "documentation-written-and-checked",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "核心认知与版本文档已同步；10 项功能、32 条唯一 BDD 及制作映射完整。1sat 参考恢复后，两个设计文档 48 处本地引用全部可定位；新增源码查阅与参考版本差异见 PRD 第 8 节。未进行原型或生产验证，补齐及来源证据见 reference-1sat-v040-restore。",
-      "statusNote": "用户已确认关键需求；文档交付后仍待事实、范围、验收和制作映射复核，未制作原型。",
-      "nextStep": "用户审阅 v0.4.0 文档；通过后按经审阅文档登记并初始化原型任务。"
+      "evidence": "核心认知与版本文档已同步；10 项功能、32 条唯一 BDD 及制作映射完整，本次文档引用可定位。代理设计审查通过并补齐 v0.3.0 连续性、双向样例事件读取与内容路由适配约束；审查报告见当前 PRD 目录。原型和环境状态以 prototype-homepage-v040 为准；参考来源证据见 reference-1sat-v040-restore。",
+      "statusNote": "用户已确认关键需求并授权代理 review 后完整制作；三项设计边界已修正，设计审查通过，人工视觉复核仍保留。",
+      "nextStep": "设计审查及任务准备已完成；实际基线阻塞与后续制作以 prototype-homepage-v040 为准。"
     },
     {
       "id": "prototype-artifact-v030",

@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 1,
+  "purpose": "从 v0.3.0 基线完整制作 v0.4.0 Identity 个人主页 P01–P10。",
+  "lastUpdated": "2026-10-12",
+  "allowedStatuses": [
+    "not-started",
+    "in-progress",
+    "needs-review",
+    "blocked",
+    "done"
+  ],
+  "activeFeature": null,
+  "nextFeature": "H00",
+  "executionScope": "homepage-full",
+  "environment": {
+    "worktree": "ownword-prototype",
+    "worktreeStatus": "not-created",
+    "sourceRepository": "designs/own-word-prototype-s2-astra-001",
+    "sourceRemote": "https://github.com/metanet4j/ownword-design-prototype.git",
+    "sourceRef": "codex/prototype-v0.3.0-artifact",
+    "baselineVersion": "v0.3.0",
+    "baselineCommit": "9aedd92b669e61ab2c2e495cf83893d21714a250",
+    "baselineStatus": "unavailable",
+    "branch": "codex/prototype-v0.4.0-homepage",
+    "prdVersion": "v0.4.0",
+    "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
+    "previewHost": "127.0.0.1",
+    "previewPort": 4314,
+    "previewLog": ".runtime/preview.log",
+    "designSystem": "react-spectrum-s2",
+    "designSystemNamespace": "ReactSpectrumS2_ad4872",
+    "backend": "none; deterministic prototype fixtures only"
+  },
+  "designReview": {
+    "source": "_task/system-design/spec/prd/v0.4.0/设计审查v0.4.0-20261012-185625.md",
+    "result": "agent-review-passed",
+    "limit": "基线缺失，未完成实际页面、用户视觉或生产验证。"
+  },
+  "features": [
+    {
+      "id": "H00",
+      "name": "设计审查与 v0.3.0 基线初始化",
+      "dependencies": [],
+      "status": "blocked",
+      "doneCriteria": [
+        "设计问题闭合，审查依据可追溯",
+        "取得实际 v0.3.0 源码并建立继承该提交的 worktree",
+        "S2 绑定、启动检查和浏览器基线验证通过",
+        "独立提交并交付核对，未以任务文件替代运行环境"
+      ],
+      "implementationStatus": "planning-verified-baseline-missing",
+      "evidence": "evidence/baseline-audit.json",
+      "blocker": "登记的 v0.3.0 源码及 Git 对象缺失，用户给定远端未包含该版本。"
+    },
+    {
+      "id": "P01",
+      "name": "公开主页与入口",
+      "description": "以 PRD 对应章节和第 7 节制作映射为准，不重复定义产品事实。",
+      "dependencies": [
+        "H00"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "P01-A",
+        "P01-B",
+        "P01-C"
+      ],
+      "doneCriteria": [
+        "实现对应 PRD 行为与 BDD，记录可复现证据",
+        "验证正常、相关边界及受影响截图，实际审阅日志",
+        "每项原型独立提交并交付视觉复核"
+      ]
+    },
+    {
+      "id": "P02",
+      "name": "身份介绍与标识",
+      "description": "以 PRD 对应章节和第 7 节制作映射为准，不重复定义产品事实。",
+      "dependencies": [
+        "P01"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "P02-A",
+        "P02-B",
+        "P02-C"
+      ],
+      "doneCriteria": [
+        "实现对应 PRD 行为与 BDD，记录可复现证据",
+        "验证正常、相关边界及受影响截图，实际审阅日志",
+        "每项原型独立提交并交付视觉复核"
+      ]
+    },
+    {
+      "id": "P03",
+      "name": "公开内容流",
+      "description": "以 PRD 对应章节和第 7 节制作映射为准，不重复定义产品事实。",
+      "dependencies": [
+        "P02"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "P03-A",
+        "P03-B",
+        "P03-C"
+      ],
+      "doneCriteria": [
+        "实现对应 PRD 行为与 BDD，记录可复现证据",
+        "验证正常、相关边界及受影响截图，实际审阅日志",
+        "每项原型独立提交并交付视觉复核"
+      ]
+    },
+    {
+      "id": "P04",
+      "name": "博客阅读与版本",
+      "description": "以 PRD 对应章节和第 7 节制作映射为准，不重复定义产品事实。",
+      "dependencies": [
+        "P03"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "P04-A",
+        "P04-B",
+        "P04-C"
+      ],
+      "doneCriteria": [
+        "实现对应 PRD 行为与 BDD，记录可复现证据",
+        "验证正常、相关边界及受影响截图，实际审阅日志",
+        "每项原型独立提交并交付视觉复核"
+      ]
+    },
+    {
+      "id": "P05",
+      "name": "多媒体详情",
+      "description": "以 PRD 对应章节和第 7 节制作映射为准，不重复定义产品事实。",
+      "dependencies": [
+        "P03"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "P05-A",
+        "P05-B",
+        "P05-C"
+      ],
+      "doneCriteria": [
+        "实现对应 PRD 行为与 BDD，记录可复现证据",
+        "验证正常、相关边界及受影响截图，实际审阅日志",
+        "每项原型独立提交并交付视觉复核"
+      ]
+    },
+    {
+      "id": "P06",
+      "name": "关注与取消关注",
+      "description": "以 PRD 对应章节和第 7 节制作映射为准，不重复定义产品事实。",
+      "dependencies": [
+        "P09"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "P06-A",
+        "P06-B",
+        "P06-C"
+      ],
+      "doneCriteria": [
+        "实现对应 PRD 行为与 BDD，记录可复现证据",
+        "验证正常、相关边界及受影响截图，实际审阅日志",
+        "每项原型独立提交并交付视觉复核"
+      ]
+    },
+    {
+      "id": "P07",
+      "name": "好友申请与接受",
+      "description": "以 PRD 对应章节和第 7 节制作映射为准，不重复定义产品事实。",
+      "dependencies": [
+        "P09"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "P07-A",
+        "P07-B",
+        "P07-C",
+        "P07-D"
+      ],
+      "doneCriteria": [
+        "实现对应 PRD 行为与 BDD，记录可复现证据",
+        "验证正常、相关边界及受影响截图，实际审阅日志",
+        "每项原型独立提交并交付视觉复核"
+      ]
+    },
+    {
+      "id": "P08",
+      "name": "关注与粉丝列表",
+      "description": "以 PRD 对应章节和第 7 节制作映射为准，不重复定义产品事实。",
+      "dependencies": [
+        "P06",
+        "P07"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "P08-A",
+        "P08-B",
+        "P08-C"
+      ],
+      "doneCriteria": [
+        "实现对应 PRD 行为与 BDD，记录可复现证据",
+        "验证正常、相关边界及受影响截图，实际审阅日志",
+        "每项原型独立提交并交付视觉复核"
+      ]
+    },
+    {
+      "id": "P09",
+      "name": "关系操作确认与恢复",
+      "description": "以 PRD 对应章节和第 7 节制作映射为准，不重复定义产品事实。",
+      "dependencies": [
+        "P02"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "P09-A",
+        "P09-B",
+        "P09-C",
+        "P09-D"
+      ],
+      "doneCriteria": [
+        "实现对应 PRD 行为与 BDD，记录可复现证据",
+        "验证正常、相关边界及受影响截图，实际审阅日志",
+        "每项原型独立提交并交付视觉复核"
+      ]
+    },
+    {
+      "id": "P10",
+      "name": "导航与体验质量",
+      "description": "以 PRD 对应章节和第 7 节制作映射为准，不重复定义产品事实。",
+      "dependencies": [
+        "P04",
+        "P05",
+        "P08"
+      ],
+      "status": "not-started",
+      "acceptanceRefs": [
+        "P10-A",
+        "P10-B",
+        "P10-C"
+      ],
+      "doneCriteria": [
+        "实现对应 PRD 行为与 BDD，记录可复现证据",
+        "验证正常、相关边界及受影响截图，实际审阅日志",
+        "每项原型独立提交并交付视觉复核"
+      ]
+    }
+  ]
+}
