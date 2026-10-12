@@ -73,10 +73,26 @@
       "phase": "R3",
       "target": {
         "fqn": "com.metanet4j.base.bsv.BsvAddress",
-        "source": "business-new-type"
+        "source": "current-implementation"
       },
-      "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethods": [
+        {
+          "method": "fromBase58",
+          "searchedIn": "com.metanet4j.base.bsv.BsvAddress",
+          "exists": true
+        },
+        {
+          "method": "fromPubKeyHash",
+          "searchedIn": "com.metanet4j.base.bsv.BsvAddress",
+          "exists": true
+        },
+        {
+          "method": "toBase58",
+          "searchedIn": "com.metanet4j.base.bsv.BsvAddress",
+          "exists": true
+        }
+      ],
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [
         "fromBase58"
@@ -122,7 +138,22 @@
       "behaviorCases": [
         "V02"
       ],
-      "note": "新 SDK 无第一类地址类型（PublicKey.toAddress/Utils.toBase58Check/P2PKH.lock）。业务侧 BsvAddress 承载 base58 解析与网络校验；V02"
+      "note": "业务地址值类型与 SDK AddressEnhance 复用",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "fromBase58",
+          "fromPubKeyHash",
+          "toBase58"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_base_bsv_BsvAddress.javap.txt"
+      }
     },
     {
       "oldSimpleName": "AddressFormatException",
@@ -135,7 +166,7 @@
       "phase": "R3",
       "target": null,
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [
         "com.metanet4j.bsv.errors.SdkSyntaxException"
       ],
@@ -151,7 +182,12 @@
       "callerCount": 1,
       "testFiles": [],
       "behaviorCases": [],
-      "note": "旧库受检异常仅出现在未使用 import；SDK 侧以 SdkSyntaxException（非受检）表达格式错误"
+      "note": "旧库受检异常仅出现在未使用 import；SDK 侧以 SdkSyntaxException（非受检）表达格式错误",
+      "currentImplementation": {
+        "status": "deleted",
+        "reason": "旧库受检异常仅出现在未使用 import；SDK 侧以 SdkSyntaxException（非受检）表达格式错误",
+        "oldReferences": 0
+      }
     },
     {
       "oldSimpleName": "AddressLite",
@@ -163,11 +199,27 @@
       "handling": "adapt",
       "phase": "R2",
       "target": {
-        "fqn": "com.metanet4j.base.bsv.BsvAddress",
-        "source": "business-new-type"
+        "fqn": "com.metanet4j.sdk.address.AddressEnhance",
+        "source": "current-implementation"
       },
-      "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethods": [
+        {
+          "method": "fromBase58",
+          "searchedIn": "com.metanet4j.sdk.address.AddressEnhance",
+          "exists": true
+        },
+        {
+          "method": "fromPubKeyHash",
+          "searchedIn": "com.metanet4j.sdk.address.AddressEnhance",
+          "exists": true
+        },
+        {
+          "method": "toBase58",
+          "searchedIn": "com.metanet4j.sdk.address.AddressEnhance",
+          "exists": true
+        }
+      ],
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [
         "fromBase58"
@@ -214,7 +266,22 @@
         "V02",
         "V04"
       ],
-      "note": "AddressLite(network,pubKeyHash).toBase58() → BsvAddress.fromPubKeyHash(network,hash).toBase58()；AipHelper 验签地址比对 V04/V05"
+      "note": "外部调用通过既有地址门面；底层为 BsvAddress",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "fromBase58",
+          "fromPubKeyHash",
+          "toBase58"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_sdk_address_AddressEnhance.javap.txt"
+      }
     },
     {
       "oldSimpleName": "Addressable",
@@ -225,7 +292,7 @@
       "phase": "R3",
       "target": null,
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -237,7 +304,12 @@
       "callerCount": 1,
       "testFiles": [],
       "behaviorCases": [],
-      "note": "旧库地址接口，随 Address/AddressLite 迁移删除；仅通配 import 可达"
+      "note": "旧库地址接口，随 Address/AddressLite 迁移删除；仅通配 import 可达",
+      "currentImplementation": {
+        "status": "deleted",
+        "reason": "旧库地址接口，随 Address/AddressLite 迁移删除；仅通配 import 可达",
+        "oldReferences": 0
+      }
     },
     {
       "oldSimpleName": "Base58",
@@ -311,7 +383,23 @@
       "behaviorCases": [
         "V01"
       ],
-      "note": "Base58.decodeChecked/encode → Utils.fromBase58Check/toBase58Check；校验和与前导零语义由 SDK 承担，行为用例 V01"
+      "note": "Base58.decodeChecked/encode → Utils.fromBase58Check/toBase58Check；校验和与前导零语义由 SDK 承担，行为用例 V01",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "fromBase58Check",
+          "toBase58Check",
+          "fromBase58",
+          "toBase58"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_primitives_Utils.javap.txt"
+      }
     },
     {
       "oldSimpleName": "BasicAddress",
@@ -324,10 +412,26 @@
       "phase": "R3",
       "target": {
         "fqn": "com.metanet4j.base.bsv.BsvAddress",
-        "source": "business-new-type"
+        "source": "current-implementation"
       },
-      "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethods": [
+        {
+          "method": "fromBase58",
+          "searchedIn": "com.metanet4j.base.bsv.BsvAddress",
+          "exists": true
+        },
+        {
+          "method": "fromPubKeyHash",
+          "searchedIn": "com.metanet4j.base.bsv.BsvAddress",
+          "exists": true
+        },
+        {
+          "method": "toBase58",
+          "searchedIn": "com.metanet4j.base.bsv.BsvAddress",
+          "exists": true
+        }
+      ],
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -344,7 +448,22 @@
       "behaviorCases": [
         "V02"
       ],
-      "note": "BasicAddress(network,hash).toBase58() → BsvAddress；调用点在 TxBean 解析路径"
+      "note": "业务最小地址类型",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "fromBase58",
+          "fromPubKeyHash",
+          "toBase58"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_base_bsv_BsvAddress.javap.txt"
+      }
     },
     {
       "oldSimpleName": "BitcoinObjectImpl",
@@ -357,7 +476,7 @@
       "phase": "R3",
       "target": null,
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -373,7 +492,12 @@
       "behaviorCases": [
         "V07"
       ],
-      "note": "旧库序列化基类，仅作为父类出现；继承体系重写后不再需要"
+      "note": "旧库序列化基类，仅作为父类出现；继承体系重写后不再需要",
+      "currentImplementation": {
+        "status": "deleted",
+        "reason": "旧库序列化基类，仅作为父类出现；继承体系重写后不再需要",
+        "oldReferences": 0
+      }
     },
     {
       "oldSimpleName": "ChildNumber",
@@ -420,7 +544,21 @@
       "behaviorCases": [
         "V03"
       ],
-      "note": "ChildNumber(INDEX, hardened) → 路径字符串 \"m/0'/1\"；硬化位由 HD.derive 承担；V03"
+      "note": "ChildNumber(INDEX, hardened) → 路径字符串 \"m/0'/1\"；硬化位由 HD.derive 承担；V03",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "derive",
+          "deriveChild"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_compat_HD.javap.txt"
+      }
     },
     {
       "oldSimpleName": "Coin",
@@ -433,10 +571,36 @@
       "phase": "R3",
       "target": {
         "fqn": "com.metanet4j.base.bsv.BsvAmount",
-        "source": "business-new-type"
+        "source": "current-implementation"
       },
-      "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethods": [
+        {
+          "method": "valueOf",
+          "searchedIn": "com.metanet4j.base.bsv.BsvAmount",
+          "exists": true
+        },
+        {
+          "method": "fromSdkValue",
+          "searchedIn": "com.metanet4j.base.bsv.BsvAmount",
+          "exists": true
+        },
+        {
+          "method": "toSdkValue",
+          "searchedIn": "com.metanet4j.base.bsv.BsvAmount",
+          "exists": true
+        },
+        {
+          "method": "add",
+          "searchedIn": "com.metanet4j.base.bsv.BsvAmount",
+          "exists": true
+        },
+        {
+          "method": "subtract",
+          "searchedIn": "com.metanet4j.base.bsv.BsvAmount",
+          "exists": true
+        }
+      ],
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [
         "valueOf"
@@ -576,7 +740,24 @@
       "behaviorCases": [
         "V10"
       ],
-      "note": "新 SDK 金额为 long/double satoshi，无 Coin 类型。业务侧以 BsvAmount（long satoshi）承载，禁止浮点换算；V10 覆盖负数/非整数/越界/累加溢出"
+      "note": "有符号业务金额保留；SDK 边界使用非负安全整数",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "valueOf",
+          "fromSdkValue",
+          "toSdkValue",
+          "add",
+          "subtract"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_base_bsv_BsvAmount.javap.txt"
+      }
     },
     {
       "oldSimpleName": "CustomTransactionSigner",
@@ -588,14 +769,19 @@
       "handling": "adapt",
       "phase": "R4",
       "target": {
-        "fqn": "com.metanet4j.bsv.script.ScriptTemplateUnlock",
-        "source": "new-sdk-index"
+        "fqn": "com.metanet4j.sdk.signers.OrdinalsTransactionSigner",
+        "source": "current-implementation"
       },
       "targetMethods": [
         {
-          "method": "sign",
-          "exists": true,
-          "searchedIn": "com.metanet4j.bsv.script.ScriptTemplateUnlock"
+          "method": "signInputs",
+          "searchedIn": "com.metanet4j.sdk.signers.OrdinalsTransactionSigner",
+          "exists": true
+        },
+        {
+          "method": "signInput",
+          "searchedIn": "com.metanet4j.sdk.signers.OrdinalsTransactionSigner",
+          "exists": true
         }
       ],
       "targetMethodsVerified": true,
@@ -615,7 +801,21 @@
         "V12",
         "V14"
       ],
-      "note": "BschemaCustomTransactionSigner 不再继承旧 signer，改为实现解锁模板/显式签名器；V12/V14"
+      "note": "定制签名职责由业务签名器及原生模板承接",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "signInputs",
+          "signInput"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_sdk_signers_OrdinalsTransactionSigner.javap.txt"
+      }
     },
     {
       "oldSimpleName": "DeterministicHierarchy",
@@ -660,7 +860,21 @@
       "behaviorCases": [
         "V03"
       ],
-      "note": "层级缓存 → 每次 HD.derive 返回新实例；轮换与派生稳定性 V03"
+      "note": "层级缓存 → 每次 HD.derive 返回新实例；轮换与派生稳定性 V03",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "derive",
+          "deriveChild"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_compat_HD.javap.txt"
+      }
     },
     {
       "oldSimpleName": "DeterministicKey",
@@ -748,7 +962,26 @@
       "behaviorCases": [
         "V03"
       ],
-      "note": "deserializeB58 → HD.fromString；getPrivKey/getPubKey → HD 内部 PrivateKey/PublicKey；V03"
+      "note": "deserializeB58 → HD.fromString；getPrivKey/getPubKey → HD 内部 PrivateKey/PublicKey；V03",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "fromSeed",
+          "derive",
+          "deriveChild",
+          "toPublic",
+          "toString",
+          "toBinary",
+          "isPrivate"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_compat_HD.javap.txt"
+      }
     },
     {
       "oldSimpleName": "ECDSASignature",
@@ -808,7 +1041,21 @@
       "behaviorCases": [
         "V05"
       ],
-      "note": "ECDSASignature(r,s)/decodeFromDER → Signature.fromDER/Signature(r,s)；DER 与 compact 编码 V05"
+      "note": "ECDSASignature(r,s)/decodeFromDER → Signature.fromDER/Signature(r,s)；DER 与 compact 编码 V05",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "toString",
+          "toDER"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_primitives_Signature.javap.txt"
+      }
     },
     {
       "oldSimpleName": "ECKey",
@@ -917,7 +1164,24 @@
         "V02",
         "V05"
       ],
-      "note": "ECKey.fromPrivate → PrivateKey.fromString(hex)/new PrivateKey；加密态异常类随类型删除；V02/V05"
+      "note": "ECKey.fromPrivate → PrivateKey.fromString(hex)/new PrivateKey；加密态异常类随类型删除；V02/V05",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "fromRandom",
+          "toPublicKey",
+          "toWif",
+          "sign",
+          "verify"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_primitives_PrivateKey.javap.txt"
+      }
     },
     {
       "oldSimpleName": "ECKey.KeyIsEncryptedException",
@@ -928,7 +1192,7 @@
       "phase": "R3",
       "target": null,
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -940,7 +1204,12 @@
       "callerCount": 1,
       "testFiles": [],
       "behaviorCases": [],
-      "note": "新 SDK 无加密私钥态，catch 分支随实现删除（OrdinalsTransactionSigner）"
+      "note": "新 SDK 无加密私钥态，catch 分支随实现删除（OrdinalsTransactionSigner）",
+      "currentImplementation": {
+        "status": "deleted",
+        "reason": "新 SDK 无加密私钥态，catch 分支随实现删除（OrdinalsTransactionSigner）",
+        "oldReferences": 0
+      }
     },
     {
       "oldSimpleName": "ECKey.MissingPrivateKeyException",
@@ -951,7 +1220,7 @@
       "phase": "R3",
       "target": null,
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -963,7 +1232,12 @@
       "callerCount": 1,
       "testFiles": [],
       "behaviorCases": [],
-      "note": "同上；公钥-only 场景改为显式 PublicKey 分支"
+      "note": "同上；公钥-only 场景改为显式 PublicKey 分支",
+      "currentImplementation": {
+        "status": "deleted",
+        "reason": "同上；公钥-only 场景改为显式 PublicKey 分支",
+        "oldReferences": 0
+      }
     },
     {
       "oldSimpleName": "ECKeyLite",
@@ -1211,7 +1485,25 @@
         "V02",
         "V05"
       ],
-      "note": "密钥对合一 → PrivateKey/PublicKey 分离；recoverFromSignature → PublicKey.fromMsgHashAndCompactSignature；publicPointFromPrivate/isCompressed 等继承成员改 PublicKey 方法；V02/V05"
+      "note": "密钥对合一 → PrivateKey/PublicKey 分离；recoverFromSignature → PublicKey.fromMsgHashAndCompactSignature；publicPointFromPrivate/isCompressed 等继承成员改 PublicKey 方法；V02/V05",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "fromString",
+          "fromRandom",
+          "toPublicKey",
+          "toHex",
+          "toAddress",
+          "toWif"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_primitives_PrivateKey.javap.txt"
+      }
     },
     {
       "oldSimpleName": "HDKeyDerivation",
@@ -1280,7 +1572,22 @@
       "behaviorCases": [
         "V03"
       ],
-      "note": "createMasterPrivateKey(seed) → HD.fromSeed(seed)；deriveChildKey → HD.deriveChild/derive(path)；V03"
+      "note": "createMasterPrivateKey(seed) → HD.fromSeed(seed)；deriveChildKey → HD.deriveChild/derive(path)；V03",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "fromSeed",
+          "derive",
+          "deriveChild"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_compat_HD.javap.txt"
+      }
     },
     {
       "oldSimpleName": "HDUtils",
@@ -1417,7 +1724,20 @@
       "behaviorCases": [
         "V03"
       ],
-      "note": "HDUtils.formatPath/parsePath → HD.derive(path) 的路径解析；非法路径拒绝 V03"
+      "note": "HDUtils.formatPath/parsePath → HD.derive(path) 的路径解析；非法路径拒绝 V03",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "derive"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_compat_HD.javap.txt"
+      }
     },
     {
       "oldSimpleName": "KeyBag",
@@ -1429,29 +1749,14 @@
       "handling": "adapt",
       "phase": "R3",
       "target": {
-        "fqn": "com.metanet4j.bsv.wallet.KeyDeriverApi",
-        "source": "new-sdk-index"
+        "fqn": "com.metanet4j.sdk.bap.SigningKeyProvider",
+        "source": "current-implementation"
       },
       "targetMethods": [
         {
-          "method": "derivePrivateKey",
-          "exists": true,
-          "searchedIn": "com.metanet4j.bsv.wallet.KeyDeriverApi"
-        },
-        {
-          "method": "derivePublicKey",
-          "exists": true,
-          "searchedIn": "com.metanet4j.bsv.wallet.KeyDeriverApi"
-        },
-        {
-          "method": "identityKey",
-          "exists": true,
-          "searchedIn": "com.metanet4j.bsv.wallet.KeyDeriverApi"
-        },
-        {
-          "method": "rootKey",
-          "exists": true,
-          "searchedIn": "com.metanet4j.bsv.wallet.KeyDeriverApi"
+          "method": "findKeyFromPubHash",
+          "searchedIn": "com.metanet4j.sdk.bap.SigningKeyProvider",
+          "exists": true
         }
       ],
       "targetMethodsVerified": true,
@@ -1483,7 +1788,20 @@
         "V09",
         "V13"
       ],
-      "note": "新 SDK 无按 hash160/脚本反查密钥的能力（KeyBag 抽象取消）。业务侧改为显式派生：以 KeyDeriverApi.derivePrivateKey(protocolID,keyID,counterparty) 或按派生索引物化的 pubKeyHash→PrivateKey 映射选出签名私钥，再注入 TransactionInput.unlockingScriptTemplate；BapProviderKeyBag／SpecifyProviderKeyBag 随之取消。公开构造参数变化在 R3 登记；V09/V13"
+      "note": "BapProviderKeyBag／SpecifyProviderKeyBag 保留为业务提供者；不接入 Wallet KeyDeriverApi",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "findKeyFromPubHash"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_sdk_bap_SigningKeyProvider.javap.txt"
+      }
     },
     {
       "oldSimpleName": "KeyCrypterException",
@@ -1496,7 +1814,7 @@
       "phase": "R3",
       "target": null,
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -1510,7 +1828,12 @@
       "callerCount": 1,
       "testFiles": [],
       "behaviorCases": [],
-      "note": "随加密私钥态删除"
+      "note": "随加密私钥态删除",
+      "currentImplementation": {
+        "status": "deleted",
+        "reason": "随加密私钥态删除",
+        "oldReferences": 0
+      }
     },
     {
       "oldSimpleName": "LocalTransactionSigner",
@@ -1551,7 +1874,20 @@
       "behaviorCases": [
         "V09"
       ],
-      "note": "本地签名 → P2PKH.unlock(...)/Transaction.sign()；component-tx 的 DefaultPrepareOnchainTxResolver 同步调整"
+      "note": "本地签名 → P2PKH.unlock(...)/Transaction.sign()；component-tx 的 DefaultPrepareOnchainTxResolver 同步调整",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "unlock"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_script_templates_P2PKH.javap.txt"
+      }
     },
     {
       "oldSimpleName": "MainNetParams",
@@ -1567,7 +1903,7 @@
         "source": "business-new-type"
       },
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [
         "get"
@@ -1798,7 +2134,18 @@
       "behaviorCases": [
         "V02"
       ],
-      "note": "MainNetParams.get() → BsvNetwork.MAINNET；地址头/WIF 前缀作为参数传给 PrivateKey.toWif(prefix)/PublicKey.toAddress(prefix)"
+      "note": "MainNetParams.get() → BsvNetwork.MAINNET；地址头/WIF 前缀作为参数传给 PrivateKey.toWif(prefix)/PublicKey.toAddress(prefix)",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_base_bsv_BsvNetwork.javap.txt"
+      }
     },
     {
       "oldSimpleName": "Message",
@@ -1846,7 +2193,22 @@
       "behaviorCases": [
         "V05"
       ],
-      "note": "旧消息签名入口 → compat.BSM；前缀、Base64 65 字节与恢复地址 V05"
+      "note": "旧消息签名入口 → compat.BSM；前缀、Base64 65 字节与恢复地址 V05",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "sign",
+          "verify",
+          "magicHash"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_compat_BSM.javap.txt"
+      }
     },
     {
       "oldSimpleName": "MnemonicCode",
@@ -1942,7 +2304,25 @@
       "behaviorCases": [
         "V03"
       ],
-      "note": "toSeed(wordList,salt) → Mnemonic.fromString(phrase).toSeed(passphrase)；getWordList → Bip39WordlistEn；V03"
+      "note": "toSeed(wordList,salt) → Mnemonic.fromString(phrase).toSeed(passphrase)；getWordList → Bip39WordlistEn；V03",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "fromString",
+          "toString",
+          "toSeed",
+          "isValid",
+          "fromEntropy",
+          "toEntropy"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_compat_Mnemonic.javap.txt"
+      }
     },
     {
       "oldSimpleName": "Net",
@@ -1958,7 +2338,7 @@
         "source": "business-new-type"
       },
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [
         "params"
@@ -2034,7 +2414,18 @@
       "behaviorCases": [
         "V02"
       ],
-      "note": "旧 Net 枚举（MAINNET/TESTNET3/REGTEST/STN/UNITTEST…）→ BsvNetwork 常量；params() 由 BsvNetwork 自身承担；新 SDK 只有 isTestnet 布尔，缺 REGTEST"
+      "note": "旧 Net 枚举（MAINNET/TESTNET3/REGTEST/STN/UNITTEST…）→ BsvNetwork 常量；params() 由 BsvNetwork 自身承担；新 SDK 只有 isTestnet 布尔，缺 REGTEST",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_base_bsv_BsvNetwork.javap.txt"
+      }
     },
     {
       "oldSimpleName": "NetworkParameters",
@@ -2050,7 +2441,7 @@
         "source": "business-new-type"
       },
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -2070,7 +2461,18 @@
       "behaviorCases": [
         "V02"
       ],
-      "note": "新 SDK 无网络参数类型（无 NetworkParameters/MainNetParams/TxParams）。业务侧新增最小网络值类型 BsvNetwork（地址头、WIF 前缀、BIP32 版本字节、测试网标志、网络不匹配拒绝），只覆盖业务实际使用的字段；V02"
+      "note": "新 SDK 无网络参数类型（无 NetworkParameters/MainNetParams/TxParams）。业务侧新增最小网络值类型 BsvNetwork（地址头、WIF 前缀、BIP32 版本字节、测试网标志、网络不匹配拒绝），只覆盖业务实际使用的字段；V02",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_base_bsv_BsvNetwork.javap.txt"
+      }
     },
     {
       "oldSimpleName": "ProtocolException",
@@ -2082,11 +2484,11 @@
       "handling": "adapt",
       "phase": "R3",
       "target": {
-        "fqn": "com.metanet4j.base.bsv.BsvBusinessException",
-        "source": "business-new-type"
+        "fqn": "java.lang.IllegalArgumentException",
+        "source": "current-implementation"
       },
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [
         "com.metanet4j.bsv.errors.SdkException"
       ],
@@ -2105,7 +2507,18 @@
       "behaviorCases": [
         "V05"
       ],
-      "note": "旧库受检协议异常 → 业务统一异常；公开签名去除 throws ProtocolException 需在 R3 登记公开类型变化"
+      "note": "移除旧受检声明；非法协议输入保留 SDK 原异常或明确参数错误，不建立空的业务异常体系",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/java_lang_IllegalArgumentException.javap.txt"
+      }
     },
     {
       "oldSimpleName": "RedeemData",
@@ -2152,7 +2565,20 @@
         "V09",
         "V13"
       ],
-      "note": "旧库赎回模型（keys+redeemScript）取消：改为每输入自带 unlockingScriptTemplate；RedeemDataExtend 与 TxHelperExtend.getConnectedRedeemDataExtend 一并取消，其职责（选出可签名私钥 + 提供赎回脚本）由显式派生与模板注入承接；V09/V13"
+      "note": "旧库赎回模型（keys+redeemScript）取消：改为每输入自带 unlockingScriptTemplate；RedeemDataExtend 与 TxHelperExtend.getConnectedRedeemDataExtend 一并取消，其职责（选出可签名私钥 + 提供赎回脚本）由显式派生与模板注入承接；V09/V13",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "unlockingScriptTemplate"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_transaction_TransactionInput.javap.txt"
+      }
     },
     {
       "oldSimpleName": "Script",
@@ -2251,7 +2677,28 @@
       "behaviorCases": [
         "V08"
       ],
-      "note": "ScriptExtend 不再继承（旧 Script 是可继承类）；地址/类型判定与 sigop 计数为新 SDK 缺口，需自建；V08"
+      "note": "ScriptExtend 不再继承（旧 Script 是可继承类）；地址/类型判定与 sigop 计数为新 SDK 缺口，需自建；V08",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "fromHex",
+          "fromBinary",
+          "toHex",
+          "toBinary",
+          "toASM",
+          "getChunks",
+          "setChunks",
+          "writeOpCode",
+          "writeBin"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_script_Script.javap.txt"
+      }
     },
     {
       "oldSimpleName": "ScriptBuilder",
@@ -2349,7 +2796,24 @@
       "behaviorCases": [
         "V08"
       ],
-      "note": "ScriptBuilder.createOutputScript/createInputScript/updateScriptWithSignature → Script 链式 write* + P2PKH.lock/unlock；V08/V09"
+      "note": "ScriptBuilder.createOutputScript/createInputScript/updateScriptWithSignature → Script 链式 write* + P2PKH.lock/unlock；V08/V09",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "writeOpCode",
+          "writeBin",
+          "writeNumber",
+          "writeScript",
+          "writeBn"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_script_Script.javap.txt"
+      }
     },
     {
       "oldSimpleName": "ScriptChunk",
@@ -2365,7 +2829,7 @@
         "source": "new-sdk-index"
       },
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -2387,7 +2851,18 @@
       "behaviorCases": [
         "V08"
       ],
-      "note": "ScriptChunk(op,data) 同名直替；data()/opcode() 访问器按新 SDK 字段；V08"
+      "note": "ScriptChunk(op,data) 同名直替；data()/opcode() 访问器按新 SDK 字段；V08",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_script_ScriptChunk.javap.txt"
+      }
     },
     {
       "oldSimpleName": "ScriptExecutionException",
@@ -2399,11 +2874,11 @@
       "handling": "adapt",
       "phase": "R3",
       "target": {
-        "fqn": "com.metanet4j.base.bsv.BsvBusinessException",
-        "source": "business-new-type"
+        "fqn": "com.metanet4j.sdk.exception.SignErrorException",
+        "source": "current-implementation"
       },
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [
         "com.metanet4j.bsv.script.ScriptEvaluationError"
       ],
@@ -2426,7 +2901,18 @@
       "behaviorCases": [
         "V08"
       ],
-      "note": "脚本执行失败 → SDK ScriptEvaluationError 由业务包装；保留受检语义以减少公开签名变化（6 处调用、含 4 处 catch）"
+      "note": "签名及共用脚本自检出口包装真实失败；解析路径保留 SDK ScriptEvaluationError",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_sdk_exception_SignErrorException.javap.txt"
+      }
     },
     {
       "oldSimpleName": "ScriptOpCodes",
@@ -2515,7 +3001,21 @@
       "behaviorCases": [
         "V08"
       ],
-      "note": "静态通配 import 的 OP_* 常量 → OP.OP_*（190 个常量）；getOpCodeName → OP.name；V08"
+      "note": "静态通配 import 的 OP_* 常量 → OP.OP_*（190 个常量）；getOpCodeName → OP.name；V08",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "code",
+          "name"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_script_OP.javap.txt"
+      }
     },
     {
       "oldSimpleName": "ScriptParseException",
@@ -2528,7 +3028,7 @@
       "phase": "R3",
       "target": null,
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [
         "com.metanet4j.bsv.errors.SdkSyntaxException"
       ],
@@ -2544,7 +3044,12 @@
       "callerCount": 1,
       "testFiles": [],
       "behaviorCases": [],
-      "note": "脚本解析失败改由 SDK 非受检异常表达"
+      "note": "脚本解析失败改由 SDK 非受检异常表达",
+      "currentImplementation": {
+        "status": "deleted",
+        "reason": "脚本解析失败改由 SDK 非受检异常表达",
+        "oldReferences": 0
+      }
     },
     {
       "oldSimpleName": "ScriptUtils",
@@ -2608,7 +3113,21 @@
       "behaviorCases": [
         "V08"
       ],
-      "note": "ScriptUtils.getToAddress 无等价类，改为 P2PKH/Utils 组合 + BsvAddress；脚本类型判定需自建"
+      "note": "ScriptUtils.getToAddress 无等价类，改为 P2PKH/Utils 组合 + BsvAddress；脚本类型判定需自建",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "fromHex",
+          "toHex"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_script_Script.javap.txt"
+      }
     },
     {
       "oldSimpleName": "ScriptUtils_legacy",
@@ -2620,19 +3139,14 @@
       "handling": "adapt",
       "phase": "R4",
       "target": {
-        "fqn": "com.metanet4j.bsv.script.Spend",
-        "source": "new-sdk-index"
+        "fqn": "com.metanet4j.component.common.transaction.BitcoinSchemaTransaction",
+        "source": "current-implementation"
       },
       "targetMethods": [
         {
-          "method": "validate",
-          "exists": true,
-          "searchedIn": "com.metanet4j.bsv.script.Spend"
-        },
-        {
-          "method": "validateWith",
-          "exists": true,
-          "searchedIn": "com.metanet4j.bsv.script.Spend"
+          "method": "correctlySpends",
+          "searchedIn": "com.metanet4j.component.common.transaction.BitcoinSchemaTransaction",
+          "exists": true
         }
       ],
       "targetMethodsVerified": true,
@@ -2662,7 +3176,20 @@
       "behaviorCases": [
         "V14"
       ],
-      "note": "correctlySpends → Spend.validate/validateWith；component-common 的 BitcoinSchemaTransaction 验签路径；V14"
+      "note": "原脚本自检用 Spend 执行，未注册可选后端不再跳过",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "correctlySpends"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_component_common_transaction_BitcoinSchemaTransaction.javap.txt"
+      }
     },
     {
       "oldSimpleName": "ScriptVerifyFlag",
@@ -2675,7 +3202,7 @@
       "phase": "R3",
       "target": null,
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -2693,7 +3220,12 @@
       "behaviorCases": [
         "V08"
       ],
-      "note": "旧库脚本验证标志位集合；新 SDK Spend 以参数与后端表达校验策略，不再有枚举集合"
+      "note": "旧库脚本验证标志位集合；新 SDK Spend 以参数与后端表达校验策略，不再有枚举集合",
+      "currentImplementation": {
+        "status": "deleted",
+        "reason": "旧库脚本验证标志位集合；新 SDK Spend 以参数与后端表达校验策略，不再有枚举集合",
+        "oldReferences": 0
+      }
     },
     {
       "oldSimpleName": "SerializeMode",
@@ -2706,7 +3238,7 @@
       "phase": "R3",
       "target": null,
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -2722,7 +3254,12 @@
       "behaviorCases": [
         "V07"
       ],
-      "note": "旧库序列化模式枚举，新 SDK 不暴露该开关；读取路径改为显式 fromHex/BEEF 入口"
+      "note": "旧库序列化模式枚举，新 SDK 不暴露该开关；读取路径改为显式 fromHex/BEEF 入口",
+      "currentImplementation": {
+        "status": "deleted",
+        "reason": "旧库序列化模式枚举，新 SDK 不暴露该开关；读取路径改为显式 fromHex/BEEF 入口",
+        "oldReferences": 0
+      }
     },
     {
       "oldSimpleName": "Sha256Hash",
@@ -2734,30 +3271,42 @@
       "handling": "adapt",
       "phase": "R2",
       "target": {
-        "fqn": "com.metanet4j.base.bsv.HashBytes",
-        "source": "business-new-type"
+        "fqn": "com.metanet4j.base.bsv.BsvHashBytes",
+        "source": "current-implementation"
       },
       "targetMethods": [
         {
-          "method": "sha256",
-          "exists": null,
-          "searchedIn": "com.metanet4j.base.bsv.HashBytes",
-          "note": "目标非新 SDK 类型，编译期核对"
+          "method": "wrap",
+          "searchedIn": "com.metanet4j.base.bsv.BsvHashBytes",
+          "exists": true
         },
         {
-          "method": "hash256",
-          "exists": null,
-          "searchedIn": "com.metanet4j.base.bsv.HashBytes",
-          "note": "目标非新 SDK 类型，编译期核对"
+          "method": "of",
+          "searchedIn": "com.metanet4j.base.bsv.BsvHashBytes",
+          "exists": true
         },
         {
-          "method": "hash160",
-          "exists": null,
-          "searchedIn": "com.metanet4j.base.bsv.HashBytes",
-          "note": "目标非新 SDK 类型，编译期核对"
+          "method": "twiceOf",
+          "searchedIn": "com.metanet4j.base.bsv.BsvHashBytes",
+          "exists": true
+        },
+        {
+          "method": "fromDisplayHex",
+          "searchedIn": "com.metanet4j.base.bsv.BsvHashBytes",
+          "exists": true
+        },
+        {
+          "method": "fromInternalHex",
+          "searchedIn": "com.metanet4j.base.bsv.BsvHashBytes",
+          "exists": true
+        },
+        {
+          "method": "toString",
+          "searchedIn": "com.metanet4j.base.bsv.BsvHashBytes",
+          "exists": true
         }
       ],
-      "targetMethodsVerified": false,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [
         "com.metanet4j.bsv.primitives.Hash#sha256",
         "com.metanet4j.bsv.primitives.Hash#hash256",
@@ -3017,7 +3566,25 @@
         "V01",
         "V07"
       ],
-      "note": "新 SDK 无 32 字节哈希值类型（哈希为 List<Double>/byte[]/hex String）。业务侧以 HashBytes 统一承载，明确定义内部字节序与显示序（equal/toString/hashCode 语义），禁止散落 byte[] 直比。行为用例 V01/V07"
+      "note": "直接包装与哈希计算分开；显示序由值类型统一转换",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "wrap",
+          "of",
+          "twiceOf",
+          "fromDisplayHex",
+          "fromInternalHex",
+          "toString"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_base_bsv_BsvHashBytes.javap.txt"
+      }
     },
     {
       "oldSimpleName": "SigHash",
@@ -3106,7 +3673,26 @@
       "behaviorCases": [
         "V09"
       ],
-      "note": "SigHashExtend 不再继承（固定内存流的 IOException 包装随旧基类消失，覆盖率例外需在 R5 同步）；V09"
+      "note": "SigHashExtend 不再继承（固定内存流的 IOException 包装随旧基类消失，覆盖率例外需在 R5 同步）；V09",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "formatBip143",
+          "format",
+          "SIGHASH_ALL",
+          "SIGHASH_NONE",
+          "SIGHASH_SINGLE",
+          "SIGHASH_ANYONECANPAY",
+          "SIGHASH_FORKID"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_primitives_TransactionSignature.javap.txt"
+      }
     },
     {
       "oldSimpleName": "SigHash.Flags",
@@ -3182,7 +3768,24 @@
       "behaviorCases": [
         "V09"
       ],
-      "note": "Flags 枚举 → TransactionSignature.SIGHASH_ALL/NONE/SINGLE/ANYONECANPAY/FORKID int 常量；V09"
+      "note": "Flags 枚举 → TransactionSignature.SIGHASH_ALL/NONE/SINGLE/ANYONECANPAY/FORKID int 常量；V09",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "SIGHASH_ALL",
+          "SIGHASH_NONE",
+          "SIGHASH_SINGLE",
+          "SIGHASH_ANYONECANPAY",
+          "SIGHASH_FORKID"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_primitives_TransactionSignature.javap.txt"
+      }
     },
     {
       "oldSimpleName": "Transaction",
@@ -3318,7 +3921,34 @@
       "behaviorCases": [
         "V07"
       ],
-      "note": "TransactionExtend 不再继承（组合/工具化）；id()/hash() 返回 byte[]/hex，显示序与旧 txid 字符串一致；V07"
+      "note": "TransactionExtend 不再继承（组合/工具化）；id()/hash() 返回 byte[]/hex，显示序与旧 txid 字符串一致；V07",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "fromHex",
+          "fromBinary",
+          "toHex",
+          "toBinary",
+          "addInput",
+          "addOutput",
+          "id",
+          "hash",
+          "sign",
+          "preimage",
+          "inputs",
+          "outputs",
+          "version",
+          "lockTime",
+          "metadata"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_transaction_Transaction.javap.txt"
+      }
     },
     {
       "oldSimpleName": "TransactionInput",
@@ -3394,7 +4024,24 @@
       "behaviorCases": [
         "V07"
       ],
-      "note": "TransactionInputEnhance 不再继承；outpoint 拆为 sourceTXID+sourceOutputIndex；V07"
+      "note": "TransactionInputEnhance 不再继承；outpoint 拆为 sourceTXID+sourceOutputIndex；V07",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "sourceTXID",
+          "sourceOutputIndex",
+          "unlockingScript",
+          "unlockingScriptTemplate",
+          "sequence"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_transaction_TransactionInput.javap.txt"
+      }
     },
     {
       "oldSimpleName": "TransactionOutPoint",
@@ -3446,7 +4093,21 @@
       "behaviorCases": [
         "V07"
       ],
-      "note": "TransactionOutPointEnhance 不再继承；getHashAsString/getIndex → txid 显示序 + index；V07"
+      "note": "TransactionOutPointEnhance 不再继承；getHashAsString/getIndex → txid 显示序 + index；V07",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "sourceTXID",
+          "sourceOutputIndex"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_transaction_TransactionInput.javap.txt"
+      }
     },
     {
       "oldSimpleName": "TransactionOutput",
@@ -3511,7 +4172,22 @@
       "behaviorCases": [
         "V10"
       ],
-      "note": "TransactionOutputEnhance 不再继承；金额为 satoshi 数值（配 BsvAmount 边界校验）；V10"
+      "note": "TransactionOutputEnhance 不再继承；金额为 satoshi 数值（配 BsvAmount 边界校验）；V10",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "satoshis",
+          "lockingScript",
+          "change"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_transaction_TransactionOutput.javap.txt"
+      }
     },
     {
       "oldSimpleName": "TransactionSignature",
@@ -3618,7 +4294,28 @@
       "behaviorCases": [
         "V09"
       ],
-      "note": "calcSigHashValue → TransactionSignature.calcSigHashValue；V09 各 SIGHASH 模式与 ForkID"
+      "note": "calcSigHashValue → TransactionSignature.calcSigHashValue；V09 各 SIGHASH 模式与 ForkID",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "formatBip143",
+          "formatOTDA",
+          "format",
+          "SIGHASH_ALL",
+          "SIGHASH_NONE",
+          "SIGHASH_SINGLE",
+          "SIGHASH_ANYONECANPAY",
+          "SIGHASH_FORKID",
+          "SIGHASH_CHRONICLE"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_primitives_TransactionSignature.javap.txt"
+      }
     },
     {
       "oldSimpleName": "TransactionSigner",
@@ -3630,14 +4327,19 @@
       "handling": "adapt",
       "phase": "R3",
       "target": {
-        "fqn": "com.metanet4j.bsv.script.ScriptTemplateUnlock",
-        "source": "new-sdk-index"
+        "fqn": "com.metanet4j.sdk.signers.OrdinalsTransactionSigner",
+        "source": "current-implementation"
       },
       "targetMethods": [
         {
-          "method": "sign",
-          "exists": true,
-          "searchedIn": "com.metanet4j.bsv.script.ScriptTemplateUnlock"
+          "method": "signInputs",
+          "searchedIn": "com.metanet4j.sdk.signers.OrdinalsTransactionSigner",
+          "exists": true
+        },
+        {
+          "method": "signInput",
+          "searchedIn": "com.metanet4j.sdk.signers.OrdinalsTransactionSigner",
+          "exists": true
         }
       ],
       "targetMethodsVerified": true,
@@ -3669,7 +4371,21 @@
         "V09",
         "V13"
       ],
-      "note": "外部 signer 遍历输入 + KeyBag 查键 → 每输入自带解锁模板 + Transaction.sign()；signInputs 的 CompletableFuture 语义需在 R3 明确；V09/V13"
+      "note": "显式提供者选键，原生模板签名；Boolean 表示进展，未签入任何输入为 false",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "signInputs",
+          "signInput"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_sdk_signers_OrdinalsTransactionSigner.javap.txt"
+      }
     },
     {
       "oldSimpleName": "TransactionSigner.ProposedTransaction",
@@ -3680,7 +4396,7 @@
       "phase": "R3",
       "target": null,
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -3694,7 +4410,12 @@
       "callerCount": 3,
       "testFiles": [],
       "behaviorCases": [],
-      "note": "ExtendForSignTransaction 不再继承该嵌套类；提案交易由 Transaction 本体承担"
+      "note": "ExtendForSignTransaction 不再继承该嵌套类；提案交易由 Transaction 本体承担",
+      "currentImplementation": {
+        "status": "deleted",
+        "reason": "ExtendForSignTransaction 不再继承该嵌套类；提案交易由 Transaction 本体承担",
+        "oldReferences": 0
+      }
     },
     {
       "oldSimpleName": "Translate",
@@ -3707,7 +4428,7 @@
       "phase": "R4",
       "target": null,
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [
         "toTx"
@@ -3761,7 +4482,12 @@
       "behaviorCases": [
         "V07"
       ],
-      "note": "旧库 Tx 转换工具（toTx），由 component 侧解析改为新 SDK Transaction.fromHex/新 convertor 实现，调用点重写"
+      "note": "旧库 Tx 转换工具（toTx），由 component 侧解析改为新 SDK Transaction.fromHex/新 convertor 实现，调用点重写",
+      "currentImplementation": {
+        "status": "deleted",
+        "reason": "旧库 Tx 转换工具（toTx），由 component 侧解析改为新 SDK Transaction.fromHex/新 convertor 实现，调用点重写",
+        "oldReferences": 0
+      }
     },
     {
       "oldSimpleName": "Tx",
@@ -3829,7 +4555,24 @@
         "V07",
         "V14"
       ],
-      "note": "旧库接口/Bean 分层取消，统一 Transaction；tx-convertor/tx-filter 的解析路径重写；V07/V14"
+      "note": "旧库接口/Bean 分层取消，统一 Transaction；tx-convertor/tx-filter 的解析路径重写；V07/V14",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "fromHex",
+          "toHex",
+          "id",
+          "inputs",
+          "outputs"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_transaction_Transaction.javap.txt"
+      }
     },
     {
       "oldSimpleName": "TxActor",
@@ -3844,14 +4587,18 @@
       "phase": "R4",
       "target": {
         "fqn": "com.metanet4j.bsv.transaction.Transaction",
-        "source": "new-sdk-index"
+        "source": "current-implementation"
       },
       "targetMethods": [
         {
-          "method": "inputs",
-          "exists": true,
+          "method": "id",
           "searchedIn": "com.metanet4j.bsv.transaction.Transaction",
-          "note": "公开字段（新 SDK 以 public 字段暴露，非 getter）"
+          "exists": true
+        },
+        {
+          "method": "fromBinary",
+          "searchedIn": "com.metanet4j.bsv.transaction.Transaction",
+          "exists": true
         }
       ],
       "targetMethodsVerified": true,
@@ -3881,7 +4628,21 @@
       "behaviorCases": [
         "V14"
       ],
-      "note": "TxActor.isCoinBase(tx) → 业务判定（首个输入 sourceTXID 全零且 index=0xFFFFFFFF）；tx-convertor UtxoConvertor；V14"
+      "note": "txid 使用 id 显示序；coinbase 由 UtxoConvertor 完整 outpoint 条件承接",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "id",
+          "fromBinary"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_transaction_Transaction.javap.txt"
+      }
     },
     {
       "oldSimpleName": "TxBean",
@@ -3940,7 +4701,23 @@
       "behaviorCases": [
         "V07"
       ],
-      "note": "calculateHash().toString() → Transaction.id('hex')；getInputs/getOutputs → 新方法名；V07"
+      "note": "calculateHash().toString() → Transaction.id('hex')；getInputs/getOutputs → 新方法名；V07",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "fromHex",
+          "id",
+          "inputs",
+          "outputs"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_transaction_Transaction.javap.txt"
+      }
     },
     {
       "oldSimpleName": "TxHelper",
@@ -4009,7 +4786,21 @@
         "V09",
         "V13"
       ],
-      "note": "TxHelperExtend 不再继承；getConnectedRedeemData（按 KeyBag 反查连接输出与密钥）无等价入口，改为从 TransactionInput.sourceTransaction/sourceTXID 取连接输出 + 显式派生私钥 + unlockingScriptTemplate 注入；V09/V13"
+      "note": "TxHelperExtend 不再继承；getConnectedRedeemData（按 KeyBag 反查连接输出与密钥）无等价入口，改为从 TransactionInput.sourceTransaction/sourceTXID 取连接输出 + 显式派生私钥 + unlockingScriptTemplate 注入；V09/V13",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "sourceTransaction",
+          "unlockingScriptTemplate"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_transaction_TransactionInput.javap.txt"
+      }
     },
     {
       "oldSimpleName": "TxInput",
@@ -4074,7 +4865,23 @@
       "behaviorCases": [
         "V07"
       ],
-      "note": "getScriptBytes → getUnlockingScript().toBinary()；getOutpoint().getHashAsString/getIndex → sourceTXID/sourceOutputIndex；V07"
+      "note": "getScriptBytes → getUnlockingScript().toBinary()；getOutpoint().getHashAsString/getIndex → sourceTXID/sourceOutputIndex；V07",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "sourceTXID",
+          "sourceOutputIndex",
+          "unlockingScript",
+          "sequence"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_transaction_TransactionInput.javap.txt"
+      }
     },
     {
       "oldSimpleName": "TxOutput",
@@ -4125,7 +4932,21 @@
       "behaviorCases": [
         "V10"
       ],
-      "note": "getScriptBytes → getLockingScript().toBinary()；getValue → getSatoshis；V10"
+      "note": "getScriptBytes → getLockingScript().toBinary()；getValue → getSatoshis；V10",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "satoshis",
+          "lockingScript"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_transaction_TransactionOutput.javap.txt"
+      }
     },
     {
       "oldSimpleName": "TxParams",
@@ -4138,7 +4959,7 @@
       "phase": "R3",
       "target": null,
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -4152,7 +4973,12 @@
       "callerCount": 1,
       "testFiles": [],
       "behaviorCases": [],
-      "note": "旧库网络参数容器；由 BsvNetwork 取代"
+      "note": "旧库网络参数容器；由 BsvNetwork 取代",
+      "currentImplementation": {
+        "status": "deleted",
+        "reason": "旧库网络参数容器；由 BsvNetwork 取代",
+        "oldReferences": 0
+      }
     },
     {
       "oldSimpleName": "UTXO",
@@ -4164,14 +4990,29 @@
       "handling": "adapt",
       "phase": "R3",
       "target": {
-        "fqn": "com.metanet4j.bsv.compat.Utxo",
-        "source": "new-sdk-index"
+        "fqn": "com.metanet4j.base.bsv.BsvUtxo",
+        "source": "current-implementation"
       },
       "targetMethods": [
         {
-          "method": "fromUtxo",
-          "exists": true,
-          "searchedIn": "com.metanet4j.bsv.compat.Utxo"
+          "method": "getHash",
+          "searchedIn": "com.metanet4j.base.bsv.BsvUtxo",
+          "exists": true
+        },
+        {
+          "method": "getIndex",
+          "searchedIn": "com.metanet4j.base.bsv.BsvUtxo",
+          "exists": true
+        },
+        {
+          "method": "getSatoshis",
+          "searchedIn": "com.metanet4j.base.bsv.BsvUtxo",
+          "exists": true
+        },
+        {
+          "method": "getScript",
+          "searchedIn": "com.metanet4j.base.bsv.BsvUtxo",
+          "exists": true
         }
       ],
       "targetMethodsVerified": true,
@@ -4204,7 +5045,23 @@
       "behaviorCases": [
         "V14"
       ],
-      "note": "UTXO 记录 → compat.Utxo.fromUtxo(utxo, unlockingScriptTemplate) 产出 TransactionInput；UTXOProvider 泛型参数随之调整；V14"
+      "note": "业务 provider 使用记录值类型；连接输出按实际索引放置",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "getHash",
+          "getIndex",
+          "getSatoshis",
+          "getScript"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_base_bsv_BsvUtxo.javap.txt"
+      }
     },
     {
       "oldSimpleName": "UnsafeByteArrayOutputStream",
@@ -4218,7 +5075,7 @@
         "source": "jdk-or-existing"
       },
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -4232,7 +5089,18 @@
       "behaviorCases": [
         "V07"
       ],
-      "note": "旧库内存流 → JDK ByteArrayOutputStream；仅通配 import 可达，注意补 import"
+      "note": "旧库内存流 → JDK ByteArrayOutputStream；仅通配 import 可达，注意补 import",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/java_io_ByteArrayOutputStream.javap.txt"
+      }
     },
     {
       "oldSimpleName": "Utils",
@@ -4487,7 +5355,25 @@
         "V01",
         "V05"
       ],
-      "note": "bitcoinjsv Utils 的 sha256hash160→primitives.Utils.hash160；BITCOIN_SIGNED_MESSAGE_HEADER_BYTES 以业务常量承载；V01/V05 边界"
+      "note": "bitcoinjsv Utils 的 sha256hash160→primitives.Utils.hash160；BITCOIN_SIGNED_MESSAGE_HEADER_BYTES 以业务常量承载；V01/V05 边界",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "toHex",
+          "encode",
+          "toArray",
+          "toUTF8",
+          "toBase58Check",
+          "fromBase58Check"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_primitives_Utils.javap.txt"
+      }
     },
     {
       "oldSimpleName": "VarInt",
@@ -4551,7 +5437,22 @@
       "behaviorCases": [
         "V01"
       ],
-      "note": "VarInt(value).encode()/sizeOf → Writer.varIntNum/writeVarIntNum；CompactSize 长度边界 V01"
+      "note": "VarInt(value).encode()/sizeOf → Writer.varIntNum/writeVarIntNum；CompactSize 长度边界 V01",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [
+          "writeVarIntNum",
+          "varIntNum",
+          "writeVarIntBn"
+        ],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/com_metanet4j_bsv_primitives_Writer.javap.txt"
+      }
     },
     {
       "oldSimpleName": "WrongNetworkException",
@@ -4563,11 +5464,11 @@
       "handling": "adapt",
       "phase": "R3",
       "target": {
-        "fqn": "com.metanet4j.base.bsv.BsvBusinessException",
-        "source": "business-new-type"
+        "fqn": "java.lang.IllegalArgumentException",
+        "source": "current-implementation"
       },
       "targetMethods": [],
-      "targetMethodsVerified": null,
+      "targetMethodsVerified": true,
       "plannedEntryPoints": [],
       "oldMethodsObserved": [],
       "oldMethodCallSites": {},
@@ -4583,7 +5484,18 @@
       "behaviorCases": [
         "V02"
       ],
-      "note": "网络不匹配拒绝改为业务异常 + BsvNetwork 校验；V02"
+      "note": "BsvNetwork／BsvAddress 显式拒绝跨网络编码",
+      "currentImplementation": {
+        "status": "migrated",
+        "targetClassVerified": true,
+        "verifiedMembers": [],
+        "callerCompileEvidence": [
+          "evidence/20261012T033718Z",
+          "evidence/20261012T050041Z"
+        ],
+        "oldReferences": 0,
+        "javapEvidence": "evidence/bsv-replace/repair-20261012/r5-inventory/java_lang_IllegalArgumentException.javap.txt"
+      }
     }
   ],
   "businessNewTypes": {
@@ -4605,7 +5517,7 @@
       ],
       "evidenceObligation": "V02 网络编码与拒绝行为；不得为对齐旧类而重建整类网络参数"
     },
-    "com.metanet4j.base.bsv.HashBytes": {
+    "com.metanet4j.base.bsv.BsvHashBytes": {
       "module": "metanet4j-base",
       "phase": "R2",
       "kind": "value",
@@ -4649,24 +5561,6 @@
       ],
       "evidenceObligation": "V10 0/负数/非整数/越界/累加溢出"
     },
-    "com.metanet4j.base.bsv.BsvBusinessException": {
-      "module": "metanet4j-base",
-      "phase": "R3",
-      "kind": "exception",
-      "responsibility": "业务异常基类：包装 SDK 非受检异常（SdkException/SdkSyntaxException/ScriptEvaluationError）并保留业务语义",
-      "replaces": [
-        "ProtocolException",
-        "WrongNetworkException",
-        "ScriptExecutionException",
-        "AddressFormatException",
-        "KeyCrypterException",
-        "ScriptParseException"
-      ],
-      "notCovered": [
-        "旧库异常的具体类型层次"
-      ],
-      "evidenceObligation": "R3 登记去除 throws 的公开签名变化；V02/V05/V08 非法输入分支"
-    },
     "com.metanet4j.sdk.exception.SignErrorException": {
       "module": "metanet4j-sdk",
       "phase": "R3",
@@ -4677,6 +5571,15 @@
       ],
       "notCovered": [],
       "evidenceObligation": "V09/V13 失败分支"
+    },
+    "com.metanet4j.base.bsv.BsvUtxo": {
+      "module": "metanet4j-base",
+      "phase": "R2",
+      "kind": "value",
+      "responsibility": "业务 UTXO 记录，显式 hash/index/satoshi/script",
+      "replaces": [
+        "UTXO"
+      ]
     }
   },
   "newSdkErrorTypes": [
@@ -5107,7 +6010,8 @@
     ],
     "manualArtifacts": [],
     "conclusion": "配置与反射扫描未发现引用旧库类名的入口：无 META-INF/services、无 spring.factories、无 ServiceLoader、无 system scope/手工 JAR。非 Java 命中全部是 POM 与文档文本。因此旧库替换是纯编译期符号替换；JCL 五项仅为 parent dependencyManagement 声明，Java 源码未使用 JCL 包，R1 接入后按 resolved tree 确认真实引入路径，R5 删除。",
-    "jclUsageInJavaSource": "none-found"
+    "jclUsageInJavaSource": "none-found",
+    "currentOldReferences": 0
   },
   "resolveCapabilityGaps": [
     {
@@ -5122,7 +6026,7 @@
         "com.metanet4j.bsv.wallet.KeyDeriverApi#derivePrivateKey",
         "com.metanet4j.bsv.wallet.ProtoWallet#getPublicKey"
       ],
-      "decision": "取消反查，改为显式派生（protocolID/keyID/counterparty）或按派生索引物化 pubKeyHash→PrivateKey 映射；签名私钥在构造输入时确定并注入 unlockingScriptTemplate",
+      "decision": "按 BapBase 既有派生索引由业务 SigningKeyProvider.findKeyFromPubHash 显式提供私钥；远程签名优先使用公开上下文且不查询私钥。",
       "carriedBy": [
         "R3 密钥与身份组",
         "R3 交易与签名组"
@@ -5251,7 +6155,7 @@
         "hash160"
       ],
       "conclusion": "新 SDK 无 32 字节哈希值类型，哈希为 List<Double>/byte[]/hex String。",
-      "resolution": "在 metanet4j-base 新增 com.metanet4j.base.bsv.HashBytes 统一承载内部字节序与显示序、equal/hashCode；禁止散落 byte[] 直比。",
+      "resolution": "在 metanet4j-base 新增 com.metanet4j.base.bsv.BsvHashBytes 统一承载内部字节序与显示序、equal/hashCode；禁止散落 byte[] 直比。",
       "closed": true,
       "evidence": "V01/V07；ws-d-new-sdk-index.json#moduleCapabilities.primitives"
     },
@@ -5305,9 +6209,13 @@
         "signInputs"
       ],
       "conclusion": "新 SDK 无按 hash160/脚本反查密钥的 KeyBag、无 RedeemData 赎回模型、无 TxHelper.getConnectedRedeemData；签名为每输入自带解锁模板 + Transaction.sign()。",
-      "resolution": "取消 KeyBag/RedeemData 反查抽象，改为显式派生（protocolID/keyID/counterparty）+ TransactionInput.unlockingScriptTemplate；涉及的公开构造与方法签名变化在 R3 登记。",
+      "resolution": "由业务 SigningKeyProvider.findKeyFromPubHash 显式提供私钥；BapProviderKeyBag 按既有派生索引物化匹配，RedeemDataExtend 只持有单密钥与脚本；每输入注入 unlockingScriptTemplate。",
       "closed": true,
-      "evidence": "V09/V13；ws-d-new-sdk-index.json#oldToNewCandidates[KeyBag,RedeemData,TxHelper,TransactionSigner]"
+      "evidence": "V09/V13；ws-d-new-sdk-index.json#oldToNewCandidates[KeyBag,RedeemData,TxHelper,TransactionSigner]",
+      "currentResolution": {
+        "KeyBag": "BapProviderKeyBag／SpecifyProviderKeyBag 保留为业务提供者；不接入 Wallet KeyDeriverApi",
+        "TransactionSigner": "显式提供者选键，原生模板签名；Boolean 表示进展，未签入任何输入为 false"
+      }
     },
     {
       "id": "GAP-SCRIPT-UTILS",
@@ -5342,7 +6250,7 @@
         "concat"
       ],
       "conclusion": "txid/outpoint 的显示字节序（反转 hex）在旧库由 Sha256Hash.toString 承担，新 SDK 以 id('hex')/hash('hex') 提供，须逐点核对显示序以免兼容性回归。",
-      "resolution": "由 com.metanet4j.base.bsv.HashBytes 明确定义内部字节与显示序转换，所有 txid/outpoint 打印与比对走该类型。",
+      "resolution": "由 com.metanet4j.base.bsv.BsvHashBytes 明确定义内部字节与显示序转换，所有 txid/outpoint 打印与比对走该类型。",
       "closed": true,
       "evidence": "V07 固定历史交易 raw hex 往返与 txid 一致"
     }
@@ -5354,5 +6262,13 @@
     "historicalTransactions": "不变：历史 raw 交易可解析且 txid 一致（V07）",
     "identitySigning": "不变：身份签名与花费签名职责边界保持（核心认知 6.4/10.1）",
     "binaryCompatibility": "不承诺：依赖旧库类型的外部 Java 调用方二进制兼容性不在本次范围（公开类型变化已逐条登记）"
+  },
+  "currentReconciliation": {
+    "status": "complete",
+    "entries": 62,
+    "unmigrated": 0,
+    "unverified": 0,
+    "evidence": "evidence/bsv-replace/repair-20261012/r5-inventory",
+    "expectedValuesPolicy": "R0 原始证据保持；这里只同步当前类型、成员和实际编译结果"
   }
 }

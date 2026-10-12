@@ -59,11 +59,11 @@ STAGE_ARTIFACTS = {
     "r0": ["baseline.json", "bsv-replace-api-map.json", "bsv-replace-test-map.json",
            "bsv-replace-vectors.json", "init.sh", "test-init.py"],
     "r1": ["bsv-replace-artifact.json", "metanet4j-parent/pom.xml", "verify-unit.py"],
-    "r2": [],
-    "r3": [],
-    "r4": [],
-    "r5": [],
-    "r6": [],
+    "r2": ["bsv-replace-r2-behavior.json", "bsv-replace-r2-accept.json"],
+    "r3": ["unit-test-inventory.json", "unit-coverage-exceptions.json", "verify-unit.py"],
+    "r4": ["verify-integration.py", "unit-test-inventory.json"],
+    "r5": ["bsv-replace-dependencies.json", "bsv-replace-api-map.json", "bsv-replace-test-map.json", "bsv-replace-current-vector-bindings.json"],
+    "r6": ["bsv-replace-final-acceptance.json", "bsv-replace-current-vector-bindings.json", "verify-final.py", "bsv-replace-r6-delivery-report.md"],
 }
 
 
@@ -257,6 +257,10 @@ def main() -> int:
               f"目标缓存 {'已有制品' if jar.is_file() else '尚无新 SDK 制品'}")
 
     failed = [c for c in checks if not c["ok"]]
+    if args.stage == "r6":
+        final = subprocess.run([sys.executable, str(TASK / "verify-final.py")], capture_output=True, text=True)
+        check("final.currentFullAcceptance", final.returncode == 0, final.stdout + final.stderr)
+        failed = [c for c in checks if not c["ok"]]
     report = {
         "stage": args.stage.upper(),
         "generatedAt": datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds"),

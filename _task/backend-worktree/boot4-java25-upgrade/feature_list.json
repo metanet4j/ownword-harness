@@ -458,7 +458,13 @@
         "environment-check.json：宿主目标 Maven 缓存可写，五个共享中间件容器均 exited，五端口拒绝连接；沙箱缓存只读且限制本机网络。新 SDK 在源缓存有 JAR、目标缓存未接入。完整路径见 progress.md。",
         "SDK 完整证据复核：python3 full-evidence-run.py verify .cache/evidence/full-run-52-20260901/full-run.json 退出 0、PASS；当前 javaRevision 与原来源摘要相同，5329 用例及 56744 条断言既有证据核对通过，未重跑测试体。"
       ],
-      "statusNote": "计划已交付；2026-10-10 用户明确指令开始按计划实施，持续授权记录见 authorization。"
+      "statusNote": "计划已交付；2026-10-10 用户明确指令开始按计划实施，持续授权记录见 authorization。",
+      "commits": [
+        {
+          "repository": "ownword",
+          "commit": "bd153af193397e19ee51a269d0bd868fe30289d3"
+        }
+      ]
     },
     {
       "id": "bsv-replace-features",
@@ -629,7 +635,7 @@
       "commits": [
         {
           "repository": "ownword",
-          "commit": "PENDING"
+          "commit": "434573fd6f00855084da40103120771e5af3b08c"
         }
       ],
       "statusNote": "221 文件／1016 方法（unit 841）全部登记去向；静态计数与清单及既有报告三方一致；失去实现的用例已映射到承接验证；SDK 5 例与 component 18 类／124 例分开列出。",
@@ -664,7 +670,7 @@
       "commits": [
         {
           "repository": "ownword",
-          "commit": "PENDING"
+          "commit": "434573fd6f00855084da40103120771e5af3b08c"
         }
       ],
       "statusNote": "14 组全部冻结；独立预期值 126 项，自洽断言 55 条单独标注；24 项纯 Python 独立复算 PASS。缺口已登记：ECIES 无既有密文字面量、无固定 DER 签名字面量、V10 负数／越界／溢出无既有用例、V08 pushdata 长度边界无既有用例，均需在 R3／R4 补充验证。",
@@ -698,7 +704,7 @@
       "commits": [
         {
           "repository": "ownword",
-          "commit": "PENDING"
+          "commit": "20fa17a7ef360da73c9e1c9369e4882e269e1099"
         }
       ],
       "statusNote": "R0 六项全部完成：来源、自检、API 映射、逐用例映射、14 组样本齐全；无遗漏旧调用（逐文件回读 import 认领 100%）、无未决能力缺口（4 类缺口 + 6 项结论）；各产物来源与检查输出可复查；基础设施停止只影响集成阶段。阶段门禁 PASS，允许进入 R1。",
@@ -733,7 +739,7 @@
       "commits": [
         {
           "repository": "ownword",
-          "commit": "PENDING"
+          "commit": "463a49c1d8fc7e1fd3130a4a9a0ac883ce0c7d66"
         }
       ],
       "statusNote": "固定 SDK 已打包并装入目标缓存，坐标 com.metanet4j:metanet4j-bsv-sdk:0.2.0；主 JAR 含 Transaction.class 且非 sources／tests JAR；源与缓存哈希一致；SDK 源码未修改。",
@@ -768,7 +774,7 @@
       "commits": [
         {
           "repository": "metanet4j-parent",
-          "commit": "PENDING"
+          "commit": "aed8092b1230be9dada0987c00000aea174ec503"
         }
       ],
       "statusNote": "parent 管理新 SDK 0.2.0 并复用 metanet4j.version；install 成功；目标缓存解析到固定制品；JCL 四项实际引入路径已从 resolved tree 记录（sdk 直接声明 + 传递），R5 按此清理。",
@@ -804,7 +810,7 @@
       "commits": [
         {
           "repository": "ownword",
-          "commit": "PENDING"
+          "commit": "825f97d2f4aa2469de5356a4f90cc5bbe20f9ef6"
         }
       ],
       "statusNote": "严格验收已绑定 SDK 制品：元数据保存指纹，严格模式与 R1 绑定清单及当前缓存双向核对；同坐标覆盖被检出，缺 SDK 指纹的旧证据失效；源码指纹、HEAD 与覆盖门禁继续有效。",
@@ -1317,11 +1323,9 @@
       "deliverables": [
         "evidence/bsv-replace/r6-unit-*/"
       ],
-      "evidence": [
-        "R6 单元测试维度完成：**`metanet4j-sdk` 271 例、0 失败 0 错误、`gaps=0`**；**`metanet4j-base` 47 例、`gaps=0`**；**并为 R6 自身新增的分支补了 4 个边界用例**（§361）。"
-      ],
+      "evidence": [],
       "commits": [],
-      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
+      "statusNote": "等待本轮严格全量验证，尚未验收。"
     },
     {
       "id": "bsv-r6-http",
@@ -1341,11 +1345,9 @@
       "deliverables": [
         "evidence/bsv-replace/r6-http-*/"
       ],
-      "evidence": [
-        "R6 HTTP 维度完成：**R0 冻结的 14 组协议向量全部通过**（R3 复验）；`sdk` 的 HTTP 相关用例包含在 271 例中。"
-      ],
+      "evidence": [],
       "commits": [],
-      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
+      "statusNote": "等待本轮严格全量验证，尚未验收。"
     },
     {
       "id": "bsv-r6-integration",
@@ -1365,11 +1367,9 @@
       "deliverables": [
         "evidence/bsv-replace/r6-integration-*/"
       ],
-      "evidence": [
-        "R6 集成维度完成：**启动共享中间件（五容器 healthy）后复验**——**`component` 侧错误由 96 降到 10（−90%）**；**余 10 例逐条定性**（助记词产品缺陷／Spring 配置／外网），**无一由旧库替换造成**（§346—§357）。"
-      ],
+      "evidence": [],
       "commits": [],
-      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
+      "statusNote": "等待本轮严格全量验证，尚未验收。"
     },
     {
       "id": "bsv-r6-artifact",
@@ -1389,11 +1389,9 @@
       "deliverables": [
         "evidence/bsv-replace/r6-artifact-*/"
       ],
-      "evidence": [
-        "R6 制品维度完成：**四仓库 POM 依赖一致性核查通过**（旧坐标 0）；**制品指纹与依赖树见 R1 的产物**。"
-      ],
+      "evidence": [],
       "commits": [],
-      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
+      "statusNote": "等待本轮严格全量验证，尚未验收。"
     },
     {
       "id": "bsv-r6-report",
@@ -1415,11 +1413,9 @@
         "progress.md",
         "session-handoff.md"
       ],
-      "evidence": [
-        "R6 报告维度完成：**`bsv-replace-r6-delivery-report.md`（10 章、301 行）**——含各阶段产物、**按模块的验证证据**、feature 状态、已知例外与登记、**R6 的 7 项修复**、未解决项与建议、**本地提交记录（注明未推送远端）**、以及**三条可复现的判定方法**。"
-      ],
+      "evidence": [],
       "commits": [],
-      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
+      "statusNote": "等待本轮严格全量验证，尚未验收。"
     }
   ],
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",

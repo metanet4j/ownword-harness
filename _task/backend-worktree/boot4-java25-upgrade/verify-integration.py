@@ -191,7 +191,8 @@ def main():
     summary = {"scope": args.scope, "full": not args.tests, "moduleCounts": module_counts,
                "classes": class_summary, "resources": resources, "residuals": left, "problems": problems,
                "formalAcceptance": not problems}
-    (evidence / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n")
+    if not args.evidence:
+        (evidence / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps({"modules": module_counts, "classes": len(cases), "problems": problems,
                       "resources": {kind: len(names) for kind, names in resources.items()}, "residuals": left}, ensure_ascii=False))
     print("证据：" + str(evidence))

@@ -1,0 +1,3358 @@
+{
+  "schemaVersion": 1,
+  "frozenFile": "bsv-replace-vectors.json",
+  "frozenSha256": "8179f16218853953ebd449486cd19cc69a72adab3444698e7fd9064d28a7edac",
+  "policy": "冻结输入与独立预期值保持不变；当前方法去向逐项列出，最终必须绑定实际执行报告。",
+  "groups": [
+    {
+      "id": "V01",
+      "scenario": "Base58／校验和、前导零、UTF-8、空消息及 CompactSize 长度边界",
+      "bindings": [
+        {
+          "baselineClass": "com.metanet4j.base.AipTest",
+          "baselineMethod": "verifyStrMsg",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.base.AipTest",
+              "method": "verifyStrMsg",
+              "path": "src/test/java/com/metanet4j/base/AipTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.base.AipTest",
+          "baselineMethod": "verifiesBapFieldsAndRejectsUnsignedAppendData",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.base.AipTest",
+              "method": "verifiesBapFieldsAndRejectsUnsignedAppendData",
+              "path": "src/test/java/com/metanet4j/base/AipTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.base.AipTest",
+          "baselineMethod": "rejectsMalformedOrTruncatedSignatures",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.base.AipTest",
+              "method": "rejectsMalformedOrTruncatedSignatures",
+              "path": "src/test/java/com/metanet4j/base/AipTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.base.AipTest",
+          "baselineMethod": "changingRecoverySelectorInvalidatesSignerAddress",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.base.AipTest",
+              "method": "changingRecoverySelectorInvalidatesSignerAddress",
+              "path": "src/test/java/com/metanet4j/base/AipTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.KeyAddressContractTest",
+          "baselineMethod": "roundTripsCompressedAndUncompressedWifOnBothNetworks",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.KeyAddressContractTest",
+              "method": "roundTripsCompressedAndUncompressedWifOnBothNetworks",
+              "path": "src/test/java/com/metanet4j/sdk/KeyAddressContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.KeyAddressContractTest",
+          "baselineMethod": "exposesKnownPublicKeyAddressAndSignature",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.KeyAddressContractTest",
+              "method": "exposesKnownPublicKeyAddressAndSignature",
+              "path": "src/test/java/com/metanet4j/sdk/KeyAddressContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.KeyAddressContractTest",
+          "baselineMethod": "rejectsBadLengthChecksumAndCompressionMarker",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.KeyAddressContractTest",
+              "method": "rejectsBadLengthChecksumAndCompressionMarker",
+              "path": "src/test/java/com/metanet4j/sdk/KeyAddressContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.address.AddressLiteTest",
+          "baselineMethod": "testBase58",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.address.AddressLiteTest",
+              "method": "testBase58",
+              "path": "src/test/java/com/metanet4j/sdk/address/AddressLiteTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.PrivateKeyTest",
+          "baselineMethod": "test",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.PrivateKeyTest",
+              "method": "test",
+              "path": "src/test/java/com/metanet4j/sdk/PrivateKeyTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        }
+      ]
+    },
+    {
+      "id": "V02",
+      "scenario": "压缩／非压缩公钥、主网／测试网／regtest 地址及 WIF，错误网络与非法编码",
+      "bindings": [
+        {
+          "baselineClass": "com.metanet4j.sdk.KeyAddressContractTest",
+          "baselineMethod": "roundTripsCompressedAndUncompressedWifOnBothNetworks",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.KeyAddressContractTest",
+              "method": "roundTripsCompressedAndUncompressedWifOnBothNetworks",
+              "path": "src/test/java/com/metanet4j/sdk/KeyAddressContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.KeyAddressContractTest",
+          "baselineMethod": "exposesKnownPublicKeyAddressAndSignature",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.KeyAddressContractTest",
+              "method": "exposesKnownPublicKeyAddressAndSignature",
+              "path": "src/test/java/com/metanet4j/sdk/KeyAddressContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.KeyAddressContractTest",
+          "baselineMethod": "rejectsBadLengthChecksumAndCompressionMarker",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.KeyAddressContractTest",
+              "method": "rejectsBadLengthChecksumAndCompressionMarker",
+              "path": "src/test/java/com/metanet4j/sdk/KeyAddressContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.address.AddressLiteTest",
+          "baselineMethod": "testBase58",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.address.AddressLiteTest",
+              "method": "testBase58",
+              "path": "src/test/java/com/metanet4j/sdk/address/AddressLiteTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        }
+      ]
+    },
+    {
+      "id": "V03",
+      "scenario": "助记词、seed、xprv／xpub、硬化与非硬化派生、非法路径",
+      "bindings": [
+        {
+          "baselineClass": "com.metanet4j.sdk.crypto.MasterPrivateKeyContractTest",
+          "baselineMethod": "generatedWordListsHaveRequestedDistinctDictionaryWords",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.crypto.MasterPrivateKeyContractTest",
+              "method": "generatedWordListsRespectCountsAndDictionaryBounds",
+              "path": "src/test/java/com/metanet4j/sdk/crypto/MasterPrivateKeyContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.crypto.MasterPrivateKeyContractTest",
+          "baselineMethod": "bip39VectorAndSerializationRoundTrip",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.crypto.MasterPrivateKeyContractTest",
+              "method": "bip39VectorAndSerializationRoundTrip",
+              "path": "src/test/java/com/metanet4j/sdk/crypto/MasterPrivateKeyContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.bap.BapVariantContractTest",
+          "baselineMethod": "remoteIdentityUsesPublicAddressesAndHasNoPrivateKeys",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.bap.BapVariantContractTest",
+              "method": "remoteIdentityUsesPublicAddressesAndHasNoPrivateKeys",
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapVariantContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.bap.BapVariantContractTest",
+          "baselineMethod": "builtInConfigurationsExposeStablePaths",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.bap.BapVariantContractTest",
+              "method": "builtInConfigurationsExposeStablePaths",
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapVariantContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.bap.BapVariantContractTest",
+          "baselineMethod": "taggedDerivationMatchesFixedVectorAndCommandOutput",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.bap.BapVariantContractTest",
+              "method": "taggedDerivationMatchesFixedVectorAndCommandOutput",
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapVariantContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        }
+      ]
+    },
+    {
+      "id": "V04",
+      "scenario": "BAP 标识、初始签名、轮换和历史签名验证",
+      "bindings": [
+        {
+          "baselineClass": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+          "baselineMethod": "rotatingSignatureKeysPreservesIdentityAndTracksPreviousKey",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+              "method": "rotatingSignatureKeysPreservesIdentityAndTracksPreviousKey",
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseLifecycleTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+          "baselineMethod": "reconstructingRotatedIdentityRecoversThePreviousSignatureKey",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+              "method": "reconstructingRotatedIdentityRecoversThePreviousSignatureKey",
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseLifecycleTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+          "baselineMethod": "signatureAddressLookupReturnsMatchingIdentityOrReportsFailure",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+              "method": "signatureAddressLookupReturnsMatchingIdentityOrReportsFailure",
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseLifecycleTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+          "baselineMethod": "signingPathHandlesUnsignedHexChunksAndHardening",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+              "method": "signingPathHandlesUnsignedHexChunksAndHardening",
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseLifecycleTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+          "baselineMethod": "factoryEntryPointsPreserveTheConfiguredRootAndApp",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+              "method": "factoryEntryPointsPreserveTheConfiguredRootAndApp",
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseLifecycleTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+          "baselineMethod": "selfDecryptUsesTheConfiguredAbsoluteEncryptionPathAndReportsBadCiphertext",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+              "method": "selfDecryptUsesTheConfiguredAbsoluteEncryptionPathAndReportsBadCiphertext",
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseLifecycleTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+          "baselineMethod": "selfExportEncryptsCurrentIdentityAndCanBeRestored",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+              "method": "selfExportEncryptsCurrentIdentityAndCanBeRestored",
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseLifecycleTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+          "baselineMethod": "selfExportReportsMissingEncryptionPathWithItsCause",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.bap.BapBaseLifecycleTest",
+              "method": "selfExportReportsMissingEncryptionPathWithItsCause",
+              "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseLifecycleTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.base.AipTest",
+          "baselineMethod": "verifyStrMsg",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.base.AipTest",
+              "method": "verifyStrMsg",
+              "path": "src/test/java/com/metanet4j/base/AipTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.base.AipTest",
+          "baselineMethod": "verifiesBapFieldsAndRejectsUnsignedAppendData",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.base.AipTest",
+              "method": "verifiesBapFieldsAndRejectsUnsignedAppendData",
+              "path": "src/test/java/com/metanet4j/base/AipTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.base.AipTest",
+          "baselineMethod": "rejectsMalformedOrTruncatedSignatures",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.base.AipTest",
+              "method": "rejectsMalformedOrTruncatedSignatures",
+              "path": "src/test/java/com/metanet4j/base/AipTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.base.AipTest",
+          "baselineMethod": "changingRecoverySelectorInvalidatesSignerAddress",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.base.AipTest",
+              "method": "changingRecoverySelectorInvalidatesSignerAddress",
+              "path": "src/test/java/com/metanet4j/base/AipTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+          "baselineMethod": "validateAcceptsARegisteredRootIdentity",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+              "method": "validateAcceptsARegisteredRootIdentity",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/validator/DefaultBapValidatorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+          "baselineMethod": "validateRejectsAnUnknownIdentity",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+              "method": "validateRejectsAnUnknownIdentity",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/validator/DefaultBapValidatorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+          "baselineMethod": "generateRandomSignHashHexStrIsA64CharHexDigest",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+              "method": "generateRandomSignHashHexStrIsA64CharHexDigest",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/validator/DefaultBapValidatorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+          "baselineMethod": "verifySigFailsForAnUnknownIdentity",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+              "method": "verifySigFailsForAnUnknownIdentity",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/validator/DefaultBapValidatorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+          "baselineMethod": "verifySigDelegatesToAipHelperWithTheRootAddress",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+              "method": "verifySigDelegatesToAipHelperWithTheRootAddress",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/validator/DefaultBapValidatorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+          "baselineMethod": "verifySigReturnsFalseWhenTheSignatureDoesNotMatch",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+              "method": "verifySigReturnsFalseWhenTheSignatureDoesNotMatch",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/validator/DefaultBapValidatorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        }
+      ]
+    },
+    {
+      "id": "V05",
+      "scenario": "compact／DER 签名、BSM 前缀与消息、公钥恢复、非法头／截断／篡改",
+      "bindings": [
+        {
+          "baselineClass": "com.metanet4j.sdk.crypto.EciesContractTest",
+          "baselineMethod": "aesCbcMatchesThePlatformPkcs5Cipher",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.crypto.EciesContractTest",
+              "method": "aesCbcMatchesThePlatformPkcs5Cipher",
+              "path": "src/test/java/com/metanet4j/sdk/crypto/EciesContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.crypto.EciesContractTest",
+          "baselineMethod": "explicitEphemeralKeyProducesAuthenticatedRoundTrip",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.crypto.EciesContractTest",
+              "method": "explicitEphemeralKeyProducesAuthenticatedRoundTrip",
+              "path": "src/test/java/com/metanet4j/sdk/crypto/EciesContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.crypto.EciesContractTest",
+          "baselineMethod": "randomEphemeralKeyAndTamperingAreHandled",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.crypto.EciesContractTest",
+              "method": "randomEphemeralKeyAndTamperingAreHandled",
+              "path": "src/test/java/com/metanet4j/sdk/crypto/EciesContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.EcKeyLiteExtendContractTest",
+          "baselineMethod": "signsBinaryMessageAndRecoversThePublicKey",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.EcKeyLiteExtendContractTest",
+              "method": "signsBinaryMessageAndRecoversThePublicKey",
+              "path": "src/test/java/com/metanet4j/sdk/EcKeyLiteExtendContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.EcKeyLiteExtendContractTest",
+          "baselineMethod": "compactSignaturePreservesUncompressedPublicKeyFormat",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.EcKeyLiteExtendContractTest",
+              "method": "compactSignaturePreservesUncompressedPublicKeyFormat",
+              "path": "src/test/java/com/metanet4j/sdk/EcKeyLiteExtendContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.EcKeyLiteExtendContractTest",
+          "baselineMethod": "rejectsSignatureWhenPrivateAndPublicKeysDoNotMatch",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.EcKeyLiteExtendContractTest",
+              "method": "rejectsSignatureWhenPrivateAndPublicKeysDoNotMatch",
+              "path": "src/test/java/com/metanet4j/sdk/EcKeyLiteExtendContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "proposedTransactionKeepsRequestedSigningMode",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "proposedTransactionKeepsRequestedSigningMode",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "twoArgumentRequestKeepsItsForkIdFlag",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "proposedTransactionKeepsRequestedSigningMode",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "threeArgumentRequestPassesForkIdModeToTheStandardLocalSigner",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "proposedTransactionKeepsRequestedSigningMode",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "transactionConversionPreservesSerializedHeaderAndPayments",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.script.SigHashExtendContractTest",
+              "method": "manuallyBuiltAndParsedTransactionsProduceTheSameDigest",
+              "path": "src/test/java/com/metanet4j/sdk/script/SigHashExtendContractTest.java"
+            }
+          ],
+          "reason": "旧抽象已取消，行为由当前独立测试承接。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "transactionConversionRetainsTheOriginalNetwork",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.KeyAddressContractTest",
+              "method": "roundTripsCompressedAndUncompressedWifOnBothNetworks",
+              "path": "src/test/java/com/metanet4j/sdk/KeyAddressContractTest.java"
+            }
+          ],
+          "reason": "旧抽象已取消，行为由当前独立测试承接。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "parserConstructorsReadTheSameTransactionWithOffsetsAndRetentionModes",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.script.SigHashExtendContractTest",
+              "method": "manuallyBuiltAndParsedTransactionsProduceTheSameDigest",
+              "path": "src/test/java/com/metanet4j/sdk/script/SigHashExtendContractTest.java"
+            }
+          ],
+          "reason": "旧抽象已取消，行为由当前独立测试承接。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "signerUsesRequestedForkIdHashFlagsAndAnyoneCanPay",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "signerEncodesRequestedScopeIntoTheSignature",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "missingConnectedOutputHasExplicitSingleInputErrorAndBatchSkip",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "missingConnectedOutputIsReportedAndBatchSkipsIt",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "statelessSignerIsReadyBeforeAndAfterStateSerialization",
+          "baselineClassification": "unit",
+          "disposition": "cancelled-subject",
+          "targets": [],
+          "reason": "计划 §3 取消旧 TransactionSigner 的 isReady 与状态序列化接口；业务签名器不再存在这些方法。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "singleInputSigningCreatesAValidForkIdSignature",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "singleInputSigningCreatesAForkIdSignature",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "batchSigningSupportsLegacyHashingAndAnyoneCanPay",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "batchSigningPreservesLegacyScopesAndValidScripts",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "publicOnlyKeysAreSkippedByBatchAndReportedUnavailableBySingleInput",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "unknownKeysAreSkippedByBatchAndReportedUnavailableBySingleInput",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "keyLockFailuresPropagateWithoutChangingTheInputScript",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "singleInputSigningTreatsAThrowingProviderAsNoKey",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "privateKeyAccessLostDuringSigningLeavesTheInputUnsigned",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "singleInputSigningTreatsAThrowingProviderAsNoKey",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.base.AipTest",
+          "baselineMethod": "verifyStrMsg",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.base.AipTest",
+              "method": "verifyStrMsg",
+              "path": "src/test/java/com/metanet4j/base/AipTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.base.AipTest",
+          "baselineMethod": "verifiesBapFieldsAndRejectsUnsignedAppendData",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.base.AipTest",
+              "method": "verifiesBapFieldsAndRejectsUnsignedAppendData",
+              "path": "src/test/java/com/metanet4j/base/AipTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.base.AipTest",
+          "baselineMethod": "rejectsMalformedOrTruncatedSignatures",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.base.AipTest",
+              "method": "rejectsMalformedOrTruncatedSignatures",
+              "path": "src/test/java/com/metanet4j/base/AipTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.base.AipTest",
+          "baselineMethod": "changingRecoverySelectorInvalidatesSignerAddress",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.base.AipTest",
+              "method": "changingRecoverySelectorInvalidatesSignerAddress",
+              "path": "src/test/java/com/metanet4j/base/AipTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        }
+      ]
+    },
+    {
+      "id": "V06",
+      "scenario": "既有 ECIES 密文与加解密、MAC 失败",
+      "bindings": [
+        {
+          "baselineClass": "com.metanet4j.sdk.crypto.EciesContractTest",
+          "baselineMethod": "aesCbcMatchesThePlatformPkcs5Cipher",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.crypto.EciesContractTest",
+              "method": "aesCbcMatchesThePlatformPkcs5Cipher",
+              "path": "src/test/java/com/metanet4j/sdk/crypto/EciesContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.crypto.EciesContractTest",
+          "baselineMethod": "explicitEphemeralKeyProducesAuthenticatedRoundTrip",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.crypto.EciesContractTest",
+              "method": "explicitEphemeralKeyProducesAuthenticatedRoundTrip",
+              "path": "src/test/java/com/metanet4j/sdk/crypto/EciesContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.crypto.EciesContractTest",
+          "baselineMethod": "randomEphemeralKeyAndTamperingAreHandled",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.crypto.EciesContractTest",
+              "method": "randomEphemeralKeyAndTamperingAreHandled",
+              "path": "src/test/java/com/metanet4j/sdk/crypto/EciesContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.crypto.CryptoHelperContractTest",
+          "baselineMethod": "fixedMnemonicDerivesExpectedRootAndConsistentPublicValues",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.crypto.CryptoHelperContractTest",
+              "method": "fixedMnemonicDerivesExpectedRootAndConsistentPublicValues",
+              "path": "src/test/java/com/metanet4j/sdk/crypto/CryptoHelperContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.crypto.CryptoHelperContractTest",
+          "baselineMethod": "childDerivationRespectsNetworkAndParentKey",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.crypto.CryptoHelperContractTest",
+              "method": "childDerivationRespectsNetworkAndParentKey",
+              "path": "src/test/java/com/metanet4j/sdk/crypto/CryptoHelperContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.crypto.CryptoHelperContractTest",
+          "baselineMethod": "emptyMnemonicAndNoArgumentFactoryCreateUsableKeys",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.crypto.CryptoHelperContractTest",
+              "method": "emptyMnemonicAndNoArgumentFactoryCreateUsableKeys",
+              "path": "src/test/java/com/metanet4j/sdk/crypto/CryptoHelperContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        }
+      ]
+    },
+    {
+      "id": "V07",
+      "scenario": "raw 交易解析／重序列化、txid／outpoint 字节序、sequence／lockTime",
+      "bindings": [
+        {
+          "baselineClass": "com.metanet4j.sdk.utils.ReadUtilsTest",
+          "baselineMethod": "readsSequentialBytesIncludingAnEmptySlice",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.utils.ReadUtilsTest",
+              "method": "readsSequentialBytesIncludingAnEmptySlice",
+              "path": "src/test/java/com/metanet4j/sdk/utils/ReadUtilsTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.utils.ReadUtilsTest",
+          "baselineMethod": "rejectsNegativeTruncatedAndOversizedReads",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.utils.ReadUtilsTest",
+              "method": "rejectsNegativeTruncatedAndOversizedReads",
+              "path": "src/test/java/com/metanet4j/sdk/utils/ReadUtilsTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.BobTxoConversionContractTest",
+          "baselineMethod": "convertsP2pkhInputAndOutputToPublicAddressAndValueFields",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.BobTxoConversionContractTest",
+              "method": "convertsP2pkhInputAndOutputToPublicAddressAndValueFields",
+              "path": "src/test/java/com/metanet4j/sdk/BobTxoConversionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.BobTxoConversionContractTest",
+          "baselineMethod": "separatesOpReturnTapeAndKeepsPayloadInTxoFields",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.BobTxoConversionContractTest",
+              "method": "separatesOpReturnTapeAndKeepsPayloadInTxoFields",
+              "path": "src/test/java/com/metanet4j/sdk/BobTxoConversionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.BobTxoConversionContractTest",
+          "baselineMethod": "rejectsIncompleteRawTransaction",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.BobTxoConversionContractTest",
+              "method": "rejectsIncompleteRawTransaction",
+              "path": "src/test/java/com/metanet4j/sdk/BobTxoConversionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.BobTxoConversionContractTest",
+          "baselineMethod": "keepsNonP2pkhInputAndOpReturnAfterEarlierData",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.BobTxoConversionContractTest",
+              "method": "keepsNonP2pkhInputAndOpReturnAfterEarlierData",
+              "path": "src/test/java/com/metanet4j/sdk/BobTxoConversionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.BobTxoConversionContractTest",
+          "baselineMethod": "keepsFalseReturnPairTogetherAfterEarlierPayload",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.BobTxoConversionContractTest",
+              "method": "keepsFalseReturnPairTogetherAfterEarlierPayload",
+              "path": "src/test/java/com/metanet4j/sdk/BobTxoConversionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.BobTxoConversionContractTest",
+          "baselineMethod": "opcodeOnlyInputFallsBackToScriptIdentity",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.BobTxoConversionContractTest",
+              "method": "opcodeOnlyInputFallsBackToScriptIdentity",
+              "path": "src/test/java/com/metanet4j/sdk/BobTxoConversionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.BobTxoConversionContractTest",
+          "baselineMethod": "zeroPushInputIsReportedAsAnOpcode",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.BobTxoConversionContractTest",
+              "method": "zeroPushInputIsReportedAsAnOpcode",
+              "path": "src/test/java/com/metanet4j/sdk/BobTxoConversionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+          "baselineMethod": "reInscriptionCarriesGltfAndMap",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+              "method": "reInscriptionCarriesGltfAndMap",
+              "path": "src/test/java/com/metanet4j/sdk/OrdHistoricalFixtureContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+          "baselineMethod": "opnsCarriesTextMapAndSigma",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+              "method": "opnsCarriesTextMapAndSigma",
+              "path": "src/test/java/com/metanet4j/sdk/OrdHistoricalFixtureContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+          "baselineMethod": "pngInscriptionCarriesPngSignature",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+              "method": "pngInscriptionCarriesPngSignature",
+              "path": "src/test/java/com/metanet4j/sdk/OrdHistoricalFixtureContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+          "baselineMethod": "metadataInscriptionCarriesGltfAndGeohash",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+              "method": "metadataInscriptionCarriesGltfAndGeohash",
+              "path": "src/test/java/com/metanet4j/sdk/OrdHistoricalFixtureContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+          "baselineMethod": "ordinaryInscriptionFixtureMatchesTheMetadataVector",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+              "method": "ordinaryInscriptionFixtureMatchesTheMetadataVector",
+              "path": "src/test/java/com/metanet4j/sdk/OrdHistoricalFixtureContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+          "baselineMethod": "sigmaFixtureVerifiesItsFixedSignedMessageAddress",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+              "method": "sigmaFixtureVerifiesItsFixedSignedMessageAddress",
+              "path": "src/test/java/com/metanet4j/sdk/OrdHistoricalFixtureContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+          "baselineMethod": "transferHasOneSatDestinationWithoutNewInscription",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+              "method": "transferHasOneSatDestinationWithoutNewInscription",
+              "path": "src/test/java/com/metanet4j/sdk/OrdHistoricalFixtureContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+          "baselineMethod": "marketFixtureHasFourPaymentOutputsWithoutNewInscription",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.OrdHistoricalFixtureContractTest",
+              "method": "marketFixtureHasFourPaymentOutputsWithoutNewInscription",
+              "path": "src/test/java/com/metanet4j/sdk/OrdHistoricalFixtureContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        }
+      ]
+    },
+    {
+      "id": "V08",
+      "scenario": "P2PKH／P2PK、pushdata 长度边界、OP_RETURN 与 Ordinals 包络",
+      "bindings": [
+        {
+          "baselineClass": "com.metanet4j.sdk.script.ScriptExtendContractTest",
+          "baselineMethod": "estimatesSpendSizeForCommonAndOrdinalScripts",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.script.ScriptExtendContractTest",
+              "method": "estimatesSpendSizeForCommonAndOrdinalScripts",
+              "path": "src/test/java/com/metanet4j/sdk/script/ScriptExtendContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.script.ScriptExtendContractTest",
+          "baselineMethod": "insertsSignaturesAtTheCorrectPositionForEachScriptType",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.script.ScriptExtendContractTest",
+              "method": "insertsSignaturesAtTheCorrectPositionForEachScriptType",
+              "path": "src/test/java/com/metanet4j/sdk/script/ScriptExtendContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.utils.ScriptHelperContractTest",
+          "baselineMethod": "acceptsOnlyNonEmptyPushDataChunks",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.utils.ScriptHelperContractTest",
+              "method": "acceptsOnlyNonEmptyPushDataChunks",
+              "path": "src/test/java/com/metanet4j/sdk/utils/ScriptHelperContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdScriptBuilderContractTest",
+          "baselineMethod": "inscriptionPreservesDestinationAndPushesMediaEnvelope",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdScriptBuilderContractTest",
+              "method": "inscriptionPreservesDestinationAndPushesMediaEnvelope",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdScriptBuilderContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdScriptBuilderContractTest",
+          "baselineMethod": "missingContentOrMediaTypeKeepsOrdEnvelopeOut",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdScriptBuilderContractTest",
+              "method": "missingContentOrMediaTypeKeepsOrdEnvelopeOut",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdScriptBuilderContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdScriptBuilderContractTest",
+          "baselineMethod": "mapMetadataRequiresAppAndTypeAndOmitsCommandField",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdScriptBuilderContractTest",
+              "method": "mapMetadataRequiresAppAndTypeAndOmitsCommandField",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdScriptBuilderContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        }
+      ]
+    },
+    {
+      "id": "V09",
+      "scenario": "ALL／NONE／SINGLE × ANYONECANPAY，ForkID；原 API 支持的其他模式和 SINGLE 缺输出",
+      "bindings": [
+        {
+          "baselineClass": "com.metanet4j.sdk.script.SigHashExtendContractTest",
+          "baselineMethod": "forkIdDigestMatchesIndependentPreimageAcrossFlags",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.script.SigHashExtendContractTest",
+              "method": "forkIdDigestMatchesIndependentPreimageAcrossFlags",
+              "path": "src/test/java/com/metanet4j/sdk/script/SigHashExtendContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.script.SigHashExtendContractTest",
+          "baselineMethod": "singleWithoutCorrespondingOutputUsesZeroOutputHash",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.script.SigHashExtendContractTest",
+              "method": "singleWithoutCorrespondingOutputUsesZeroOutputHash",
+              "path": "src/test/java/com/metanet4j/sdk/script/SigHashExtendContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.script.SigHashExtendContractTest",
+          "baselineMethod": "manuallyBuiltTransactionHashesBeforeItsSerializedSizeIsKnown",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.script.SigHashExtendContractTest",
+              "method": "manuallyBuiltAndParsedTransactionsProduceTheSameDigest",
+              "path": "src/test/java/com/metanet4j/sdk/script/SigHashExtendContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "proposedTransactionKeepsRequestedSigningMode",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "proposedTransactionKeepsRequestedSigningMode",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "twoArgumentRequestKeepsItsForkIdFlag",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "proposedTransactionKeepsRequestedSigningMode",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "threeArgumentRequestPassesForkIdModeToTheStandardLocalSigner",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "proposedTransactionKeepsRequestedSigningMode",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "transactionConversionPreservesSerializedHeaderAndPayments",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.script.SigHashExtendContractTest",
+              "method": "manuallyBuiltAndParsedTransactionsProduceTheSameDigest",
+              "path": "src/test/java/com/metanet4j/sdk/script/SigHashExtendContractTest.java"
+            }
+          ],
+          "reason": "旧抽象已取消，行为由当前独立测试承接。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "transactionConversionRetainsTheOriginalNetwork",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.KeyAddressContractTest",
+              "method": "roundTripsCompressedAndUncompressedWifOnBothNetworks",
+              "path": "src/test/java/com/metanet4j/sdk/KeyAddressContractTest.java"
+            }
+          ],
+          "reason": "旧抽象已取消，行为由当前独立测试承接。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "parserConstructorsReadTheSameTransactionWithOffsetsAndRetentionModes",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.script.SigHashExtendContractTest",
+              "method": "manuallyBuiltAndParsedTransactionsProduceTheSameDigest",
+              "path": "src/test/java/com/metanet4j/sdk/script/SigHashExtendContractTest.java"
+            }
+          ],
+          "reason": "旧抽象已取消，行为由当前独立测试承接。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "signerUsesRequestedForkIdHashFlagsAndAnyoneCanPay",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "signerEncodesRequestedScopeIntoTheSignature",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "missingConnectedOutputHasExplicitSingleInputErrorAndBatchSkip",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "missingConnectedOutputIsReportedAndBatchSkipsIt",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "statelessSignerIsReadyBeforeAndAfterStateSerialization",
+          "baselineClassification": "unit",
+          "disposition": "cancelled-subject",
+          "targets": [],
+          "reason": "计划 §3 取消旧 TransactionSigner 的 isReady 与状态序列化接口；业务签名器不再存在这些方法。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "singleInputSigningCreatesAValidForkIdSignature",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "singleInputSigningCreatesAForkIdSignature",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "batchSigningSupportsLegacyHashingAndAnyoneCanPay",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "batchSigningPreservesLegacyScopesAndValidScripts",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "publicOnlyKeysAreSkippedByBatchAndReportedUnavailableBySingleInput",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "unknownKeysAreSkippedByBatchAndReportedUnavailableBySingleInput",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "keyLockFailuresPropagateWithoutChangingTheInputScript",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "singleInputSigningTreatsAThrowingProviderAsNoKey",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+          "baselineMethod": "privateKeyAccessLostDuringSigningLeavesTheInputUnsigned",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "singleInputSigningTreatsAThrowingProviderAsNoKey",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": null,
+          "baselineMethod": null,
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.script.SigHashExtendContractTest",
+              "method": "legacyDigestMatchesIndependentPreimageAcrossFlagsAndSingleBug",
+              "path": "src/test/java/com/metanet4j/sdk/script/SigHashExtendContractTest.java"
+            }
+          ],
+          "reason": "新增实际签名兼容回归与独立前像核对。"
+        },
+        {
+          "baselineClass": null,
+          "baselineMethod": null,
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "batchSigningPreservesLegacyScopesAndValidScripts",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "新增实际签名兼容回归与独立前像核对。"
+        }
+      ]
+    },
+    {
+      "id": "V10",
+      "scenario": "金额 0／负数／非整数／越界、费率、找零、余额不足和输出次序",
+      "bindings": [
+        {
+          "baselineClass": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+          "baselineMethod": "addsProviderUtxoDataAndChangeWithoutLosingValue",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+              "method": "addsProviderUtxoDataAndChangeWithoutLosingValue",
+              "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+          "baselineMethod": "acceptsAddressListUtxoListAndExistingFundingOutput",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+              "method": "acceptsAddressListUtxoListAndExistingFundingOutput",
+              "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+          "baselineMethod": "calculateChangeUsesTheFeeRatePassedToThePublicMethod",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+              "method": "calculateChangeUsesTheFeeRatePassedToThePublicMethod",
+              "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+          "baselineMethod": "signsTheConnectedInputAndProducesASpendableTransaction",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+              "method": "signsTheConnectedInputAndProducesASpendableTransaction",
+              "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+          "baselineMethod": "reportsSignerFailureInsteadOfReturningAnUnsignedTransaction",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+              "method": "reportsSignerFailureInsteadOfReturningAnUnsignedTransaction",
+              "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+          "baselineMethod": "broadcastDelegatesOnlyToTheProvidedLocalFunction",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+              "method": "broadcastDelegatesOnlyToTheProvidedLocalFunction",
+              "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+          "baselineMethod": "constructorsPreserveTheSelectedNetworkAndExistingTransaction",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+              "method": "constructorsPreserveTheExistingTransactionAndKeyProvider",
+              "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+          "baselineMethod": "sigmaSigningKeepsThePayloadAndExposesAVerifiableCurrentIdentitySignature",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+              "method": "sigmaSigningKeepsThePayloadAndExposesAVerifiableCurrentIdentitySignature",
+              "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+          "baselineMethod": "publicOnlyKeyUsesAConservativeUnlockingSizeForChangeEstimation",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+              "method": "publicOnlyKeyUsesAConservativeUnlockingSizeForChangeEstimation",
+              "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+          "baselineMethod": "completionForwardsTheRequestedForkIdModeToTheSigner",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+              "method": "completionHonoursTheLegacyHashingSwitch",
+              "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.input.TransactionEnhanceContractTest",
+          "baselineMethod": "preservesExplicitOutpointHashAndConnectedAddressOutput",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.input.TransactionEnhanceContractTest",
+              "method": "preservesExplicitOutpointHashAndConnectedAddressOutput",
+              "path": "src/test/java/com/metanet4j/sdk/input/TransactionEnhanceContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.input.TransactionEnhanceContractTest",
+          "baselineMethod": "keepsRawOutputScriptAndDetachedIndex",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.input.TransactionEnhanceContractTest",
+              "method": "keepsRawOutputScriptAndDetachedIndex",
+              "path": "src/test/java/com/metanet4j/sdk/input/TransactionEnhanceContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": null,
+          "baselineMethod": null,
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+              "method": "completionHonoursTheLegacyHashingSwitch",
+              "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "新增实际签名兼容回归与独立前像核对。"
+        },
+        {
+          "baselineClass": null,
+          "baselineMethod": null,
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.transcation.TransactionBuilderContractTest",
+              "method": "defaultPreparationOverloadProducesAForkIdSignature",
+              "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "新增实际签名兼容回归与独立前像核对。"
+        }
+      ]
+    },
+    {
+      "id": "V11",
+      "scenario": "Sigma 消息哈希、输入引用、签名者与结果写回",
+      "bindings": [
+        {
+          "baselineClass": "com.metanet4j.sdk.sigma.SigmaHashContractTest",
+          "baselineMethod": "hashesOutpointAndUnsignedOutputScript",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.sigma.SigmaHashContractTest",
+              "method": "hashesOutpointAndUnsignedOutputScript",
+              "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaHashContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.sigma.SigmaHashContractTest",
+          "baselineMethod": "parsesSigmaPushesAndHashesOnlyPriorData",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.sigma.SigmaHashContractTest",
+              "method": "parsesSigmaPushesAndHashesOnlyPriorData",
+              "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaHashContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.sigma.SigmaHashContractTest",
+          "baselineMethod": "missingInputUsesTheDocumentedDummyHash",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.sigma.SigmaHashContractTest",
+              "method": "missingInputUsesTheDocumentedDummyHash",
+              "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaHashContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.sigma.SigmaSignContractTest",
+          "baselineMethod": "signsAndVerifiesForEachLocalKeySelection",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.sigma.SigmaSignContractTest",
+              "method": "signsAndVerifiesForEachLocalKeySelection",
+              "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaSignContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.sigma.SigmaSignContractTest",
+          "baselineMethod": "remoteSigningUsesMatchingPreSignHashAndClearsThreadContext",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.sigma.SigmaSignContractTest",
+              "method": "remoteSigningUsesMatchingPreSignHashAndClearsThreadContext",
+              "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaSignContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.sigma.SigmaSignContractTest",
+          "baselineMethod": "resigningReplacesTheSelectedInstanceWithoutDroppingOutputData",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.sigma.SigmaSignContractTest",
+              "method": "resigningReplacesTheSelectedInstanceWithoutDroppingOutputData",
+              "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaSignContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.sigma.SigmaSignContractTest",
+          "baselineMethod": "existingOpReturnUsesPipeSeparatorAndKeepsPriorData",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.sigma.SigmaSignContractTest",
+              "method": "existingOpReturnUsesPipeSeparatorAndKeepsPriorData",
+              "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaSignContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        }
+      ]
+    },
+    {
+      "id": "V12",
+      "scenario": "Ordinals 创建／转移、历史交易及 BAP／BitcoinSchema 内容构造",
+      "bindings": [
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdTransactionBuilderContractTest",
+          "baselineMethod": "constructorsKeepTheSelectedNetworkTransactionAndSigner",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdTransactionBuilderContractTest",
+              "method": "constructorsKeepTheSelectedTransactionAndKeyProvider",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdTransactionBuilderContractTest",
+          "baselineMethod": "signsPaymentAndInscribedInputsInMemory",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdTransactionBuilderContractTest",
+              "method": "signsPaymentAndInscribedInputsInMemory",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdTransactionBuilderContractTest",
+          "baselineMethod": "rejectsASignerThatReportsFailure",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdTransactionBuilderContractTest",
+              "method": "rejectsInputsWithoutAResolvableKey",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdTransactionBuilderContractTest",
+          "baselineMethod": "forwardsRequestedSignatureModeToTheSigner",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdTransactionBuilderContractTest",
+              "method": "appliesRequestedSignatureScopeToTheSignature",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdTransactionBuilderContractTest",
+          "baselineMethod": "simpleSignatureOverloadHonorsItsForkIdArgument",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdTransactionBuilderContractTest",
+              "method": "simpleSignatureOverloadDefaultsToAll",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionBuilderContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+          "baselineMethod": "postOrdinalIncludesTheAppAndPostMetadata",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+              "method": "postOrdinalIncludesTheAppAndPostMetadata",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+          "baselineMethod": "reinscriptionKeepsItsMediaType",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+              "method": "reinscriptionKeepsItsMediaType",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+          "baselineMethod": "sendOrdinalPropagatesSignerFailure",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+              "method": "sendOrdinalPropagatesSignerFailure",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+          "baselineMethod": "defaultCreateOrdinalSignsThePaymentInputAndBalancesChange",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+              "method": "defaultCreateOrdinalSignsThePaymentInputAndBalancesChange",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+          "baselineMethod": "defaultSendOrdinalSignsBothInputsWithoutReinscription",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+              "method": "defaultSendOrdinalSignsBothInputsWithoutReinscription",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+          "baselineMethod": "emptyReinscriptionFieldsUseTheOrdinaryTransferOutput",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+              "method": "emptyReinscriptionFieldsUseTheOrdinaryTransferOutput",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+          "baselineMethod": "deprecatedSendUtxosBuildsAndSignsTheChangePayment",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+              "method": "deprecatedSendUtxosBuildsAndSignsTheChangePayment",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+          "baselineMethod": "defaultCreateBapOrdinalIncludesRootAndSigmaProofs",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.ordinals.OrdTransactionTemplateContractTest",
+              "method": "defaultCreateBapOrdinalIncludesRootAndSigmaProofs",
+              "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        }
+      ]
+    },
+    {
+      "id": "V13",
+      "scenario": "远程预签名、回填、篡改／缺失签名、上下文清理",
+      "bindings": [
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+          "baselineMethod": "requestsAndAppliesRemotePaymentSignatureInMemory",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+              "method": "requestsAndAppliesRemotePaymentSignatureInMemory",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteTransactionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+          "baselineMethod": "routesPaymentAndOrdinalHashesToTheirRespectiveAddresses",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+              "method": "routesPaymentAndOrdinalHashesToTheirRespectiveAddresses",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteTransactionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+          "baselineMethod": "collectsOnlyUnsignedDataHashesAndSkipsDisconnectedInputs",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+              "method": "collectsOnlyUnsignedDataHashesAndSkipsDisconnectedInputs",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteTransactionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+          "baselineMethod": "signsTheRequestedSingleAnyoneCanPayHash",
+          "baselineClassification": "unit",
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+              "method": "signsEverySupportedScope",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteTransactionContractTest.java"
+            }
+          ],
+          "reason": "按计划替换旧库抽象；直接验证当前可观察的业务结果。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+          "baselineMethod": "remoteOrdinalBuilderReportsSignerFailure",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+              "method": "remoteOrdinalBuilderReportsSignerFailure",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteTransactionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+          "baselineMethod": "remoteOrdinalBuilderForwardsForkId",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+              "method": "remoteOrdinalBuilderForwardsForkId",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteTransactionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+          "baselineMethod": "remoteOrdinalOutputCarriesTheRequestedContentAndPendingBsmHash",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+              "method": "remoteOrdinalOutputCarriesTheRequestedContentAndPendingBsmHash",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteTransactionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+          "baselineMethod": "remoteSignerLeavesAnAlreadyDisconnectedInputUntouched",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+              "method": "remoteSignerLeavesAnAlreadyDisconnectedInputUntouched",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteTransactionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+          "baselineMethod": "fourArgumentRemoteOrdinalOutputUsesTheDefaultSigningIdentity",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+              "method": "fourArgumentRemoteOrdinalOutputUsesTheDefaultSigningIdentity",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteTransactionContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+          "baselineMethod": "remoteSignerHasNoSerializedPrivateState",
+          "baselineClassification": "unit",
+          "disposition": "cancelled-subject",
+          "targets": [],
+          "reason": "计划 §3 取消旧 TransactionSigner 序列化接口；远程签名由公开签名上下文驱动，其无私钥查询的实际行为有独立回归。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "createsAnUnsignedOrdinalWithPendingHashesAndBalancedChange",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "createsAnUnsignedOrdinalWithPendingHashesAndBalancedChange",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "postOrdinalIncludesPostMetadataInItsLockingScript",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "postOrdinalIncludesPostMetadataInItsLockingScript",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "inputSigningSwitchControlsWhetherTheSignerRuns",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "inputSigningSwitchControlsWhetherTheSignerRuns",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "defaultConstructorEnablesBothSigningStages",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "defaultConstructorEnablesBothSigningStages",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "sendsAnExistingOrdinalWithTwoSpendableInputs",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "sendsAnExistingOrdinalWithTwoSpendableInputs",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "reinscriptionKeepsTheRequestedMediaType",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "reinscriptionKeepsTheRequestedMediaType",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "incompleteReinscriptionFallsBackToAnOrdinaryTransfer",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "incompleteReinscriptionFallsBackToAnOrdinaryTransfer",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "remoteSendCanReturnAnUnsignedOrdinalTransferWhenSigningIsDisabled",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "remoteSendCanReturnAnUnsignedOrdinalTransferWhenSigningIsDisabled",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "stagedRemoteTransferSignsBothInputsFromExternallyPreparedHashes",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "stagedRemoteTransferSignsBothInputsFromExternallyPreparedHashes",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "reinscribedRemoteTransferSignsBsmThenBothInputs",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "reinscribedRemoteTransferSignsBsmThenBothInputs",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "prepareSendOrdinalFallsBackToAnOrdinaryTransferForIncompleteReinscriptions",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "prepareSendOrdinalFallsBackToAnOrdinaryTransferForIncompleteReinscriptions",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "sendOrdinalPropagatesSignerFailure",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "sendOrdinalPropagatesSignerFailure",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "createsUnsignedBapOrdinalWhenBothSigningStagesAreDisabled",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "createsUnsignedBapOrdinalWhenBothSigningStagesAreDisabled",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "defaultPostOverloadBuildsPostMetadataWithoutSigning",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "defaultPostOverloadBuildsPostMetadataWithoutSigning",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "deprecatedSendUtxosSpendsLocalPaymentInputWithoutBroadcast",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "deprecatedSendUtxosSpendsLocalPaymentInputWithoutBroadcast",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+          "baselineMethod": "signsBsmThenInputFromTwoLocallyPreparedRemoteContexts",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteOrdTransactionTemplateContractTest",
+              "method": "signsBsmThenInputFromTwoLocallyPreparedRemoteContexts",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.AllHashSigThreadLocalContractTest",
+          "baselineMethod": "findsMatchingSigningContextAndRejectsUnknownHash",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.AllHashSigThreadLocalContractTest",
+              "method": "findsMatchingSigningContextAndRejectsUnknownHash",
+              "path": "src/test/java/com/metanet4j/sdk/signers/AllHashSigThreadLocalContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.signers.AllHashSigThreadLocalContractTest",
+          "baselineMethod": "keepsSigningContextsSeparateAcrossThreads",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.AllHashSigThreadLocalContractTest",
+              "method": "keepsSigningContextsSeparateAcrossThreads",
+              "path": "src/test/java/com/metanet4j/sdk/signers/AllHashSigThreadLocalContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.context.PreSignHashContextContractTest",
+          "baselineMethod": "roundTripsRequiredFieldsWithoutOptionalFeeOrPublicKey",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.context.PreSignHashContextContractTest",
+              "method": "roundTripsRequiredFieldsWithoutOptionalFeeOrPublicKey",
+              "path": "src/test/java/com/metanet4j/sdk/context/PreSignHashContextContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.context.PreSignHashContextContractTest",
+          "baselineMethod": "roundTripsOptionalFeeAndPublicKey",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.context.PreSignHashContextContractTest",
+              "method": "roundTripsOptionalFeeAndPublicKey",
+              "path": "src/test/java/com/metanet4j/sdk/context/PreSignHashContextContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.sdk.context.PreSignHashContextContractTest",
+          "baselineMethod": "preservesAnAbsentPreSignHashBeforeSigning",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.context.PreSignHashContextContractTest",
+              "method": "preservesAnAbsentPreSignHashBeforeSigning",
+              "path": "src/test/java/com/metanet4j/sdk/context/PreSignHashContextContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": null,
+          "baselineMethod": null,
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+              "method": "remoteBuildersPreserveLegacyScopesWithoutPrivateKeyLookup",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteTransactionContractTest.java"
+            }
+          ],
+          "reason": "新增实际签名兼容回归与独立前像核对。"
+        },
+        {
+          "baselineClass": null,
+          "baselineMethod": null,
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.remote.RemoteTransactionContractTest",
+              "method": "remotePreparationOverloadDefaultsToForkId",
+              "path": "src/test/java/com/metanet4j/sdk/remote/RemoteTransactionContractTest.java"
+            }
+          ],
+          "reason": "新增实际签名兼容回归与独立前像核对。"
+        }
+      ]
+    },
+    {
+      "id": "V14",
+      "scenario": "UTXO 转换、交易过滤／去重、BAP 校验、业务存储与事件链路",
+      "bindings": [
+        {
+          "baselineClass": "com.metanet4j.component.bsocial.chain.MongoBusinessChainIntegrationTest",
+          "baselineMethod": "bapRootTransactionIsParsedAndStoredAsRootIdentity",
+          "baselineClassification": "integration",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bsocial.chain.MongoBusinessChainIntegrationTest",
+              "method": "bapRootTransactionIsParsedAndStoredAsRootIdentity",
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MongoBusinessChainIntegrationTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bsocial.chain.MongoBusinessChainIntegrationTest",
+          "baselineMethod": "bapIdTransactionAppendsTheCurrentAddressAsSignerThroughMongoLookup",
+          "baselineClassification": "integration",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bsocial.chain.MongoBusinessChainIntegrationTest",
+              "method": "bapIdTransactionAppendsTheCurrentAddressAsSignerThroughMongoLookup",
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MongoBusinessChainIntegrationTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bsocial.chain.MongoBusinessChainIntegrationTest",
+          "baselineMethod": "bsocialFollowTransactionResolvesTheSignerIdentityFromMongo",
+          "baselineClassification": "integration",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bsocial.chain.MongoBusinessChainIntegrationTest",
+              "method": "bsocialFollowTransactionResolvesTheSignerIdentityFromMongo",
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MongoBusinessChainIntegrationTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bsocial.chain.MongoBusinessChainIntegrationTest",
+          "baselineMethod": "bsocialPostTransactionStoresTheNoteWithItsTags",
+          "baselineClassification": "integration",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bsocial.chain.MongoBusinessChainIntegrationTest",
+              "method": "bsocialPostTransactionStoresTheNoteWithItsTags",
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MongoBusinessChainIntegrationTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bsocial.chain.MongoBusinessChainIntegrationTest",
+          "baselineMethod": "bsocialTransactionFromAnUnknownSignerIsRejectedWithoutWritingAnything",
+          "baselineClassification": "integration",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bsocial.chain.MongoBusinessChainIntegrationTest",
+              "method": "bsocialTransactionFromAnUnknownSignerIsRejectedWithoutWritingAnything",
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MongoBusinessChainIntegrationTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bsocial.chain.MongoBusinessChainIntegrationTest",
+          "baselineMethod": "handlerChainDoesNotPublishSearchEventsYet",
+          "baselineClassification": "integration",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bsocial.chain.MongoBusinessChainIntegrationTest",
+              "method": "handlerChainDoesNotPublishSearchEventsYet",
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MongoBusinessChainIntegrationTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bsocial.chain.MysqlBusinessChainIntegrationTest",
+          "baselineMethod": "bapRootTransactionIsStoredAsIdentityAndSignerRows",
+          "baselineClassification": "integration",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bsocial.chain.MysqlBusinessChainIntegrationTest",
+              "method": "bapRootTransactionIsStoredAsIdentityAndSignerRows",
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MysqlBusinessChainIntegrationTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bsocial.chain.MysqlBusinessChainIntegrationTest",
+          "baselineMethod": "bapIdTransactionReplacesTheSignerWithTheCurrentAddress",
+          "baselineClassification": "integration",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bsocial.chain.MysqlBusinessChainIntegrationTest",
+              "method": "bapIdTransactionReplacesTheSignerWithTheCurrentAddress",
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MysqlBusinessChainIntegrationTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bsocial.chain.MysqlBusinessChainIntegrationTest",
+          "baselineMethod": "bsocialPostTransactionIsStoredAsTransactionRecord",
+          "baselineClassification": "integration",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bsocial.chain.MysqlBusinessChainIntegrationTest",
+              "method": "bsocialPostTransactionIsStoredAsTransactionRecord",
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MysqlBusinessChainIntegrationTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bsocial.chain.MysqlBusinessChainIntegrationTest",
+          "baselineMethod": "bsocialTransactionFromAnUnknownSignerWritesNothing",
+          "baselineClassification": "integration",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bsocial.chain.MysqlBusinessChainIntegrationTest",
+              "method": "bsocialTransactionFromAnUnknownSignerWritesNothing",
+              "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MysqlBusinessChainIntegrationTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.tx.convertor.impl.UtxoConvertorContractTest",
+          "baselineMethod": "convertsAddressesRawKeysAndInputsIntoTheirUtxoEntries",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.tx.convertor.impl.UtxoConvertorContractTest",
+              "method": "convertsAddressesRawKeysAndInputsIntoTheirUtxoEntries",
+              "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/impl/UtxoConvertorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.tx.convertor.impl.UtxoConvertorContractTest",
+          "baselineMethod": "marksCoinbaseInputsAsSuch",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.tx.convertor.impl.UtxoConvertorContractTest",
+              "method": "marksCoinbaseInputsAsSuch",
+              "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/impl/UtxoConvertorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.tx.convertor.impl.UtxoConvertorContractTest",
+          "baselineMethod": "reportsItsConvertType",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.tx.convertor.impl.UtxoConvertorContractTest",
+              "method": "reportsItsConvertType",
+              "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/impl/UtxoConvertorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.store.sql.utxo.txUtxo.service.impl.TxUtxoServiceImplContractTest",
+          "baselineMethod": "insertsNewUtxosUnderTheirGeneratedId",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.store.sql.utxo.txUtxo.service.impl.TxUtxoServiceImplContractTest",
+              "method": "insertsNewUtxosUnderTheirGeneratedId",
+              "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/utxo/txUtxo/service/impl/TxUtxoServiceImplContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.store.sql.utxo.txUtxo.service.impl.TxUtxoServiceImplContractTest",
+          "baselineMethod": "updatesSpentUtxosWhenTheStoredRecordIsSpent",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.store.sql.utxo.txUtxo.service.impl.TxUtxoServiceImplContractTest",
+              "method": "updatesSpentUtxosWhenTheStoredRecordIsSpent",
+              "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/utxo/txUtxo/service/impl/TxUtxoServiceImplContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.store.sql.utxo.txUtxo.service.impl.TxUtxoServiceImplContractTest",
+          "baselineMethod": "updatesUnspentUtxosWhenTheStoredRecordIsNotSpent",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.store.sql.utxo.txUtxo.service.impl.TxUtxoServiceImplContractTest",
+              "method": "updatesUnspentUtxosWhenTheStoredRecordIsNotSpent",
+              "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/utxo/txUtxo/service/impl/TxUtxoServiceImplContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.store.sql.utxo.txUtxo.service.impl.TxUtxoServiceImplContractTest",
+          "baselineMethod": "propagatesMapperFailures",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.store.sql.utxo.txUtxo.service.impl.TxUtxoServiceImplContractTest",
+              "method": "propagatesMapperFailures",
+              "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/utxo/txUtxo/service/impl/TxUtxoServiceImplContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.tx.DefaultUtxoResolverContractTest",
+          "baselineMethod": "listUtxoAddressDerivesTheAddressFromTheFactoryPayAccountKey",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.tx.DefaultUtxoResolverContractTest",
+              "method": "listUtxoAddressDerivesTheAddressFromTheFactoryPayAccountKey",
+              "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultUtxoResolverContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.tx.DefaultUtxoResolverContractTest",
+          "baselineMethod": "listUtxoDelegatesToTheGivenProvider",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.tx.DefaultUtxoResolverContractTest",
+              "method": "listUtxoDelegatesToTheGivenProvider",
+              "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultUtxoResolverContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.tx.DefaultUtxoResolverContractTest",
+          "baselineMethod": "listUtxoReturnsTheProviderResultUnchangedWhenThereIsNoUtxo",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.tx.DefaultUtxoResolverContractTest",
+              "method": "listUtxoReturnsTheProviderResultUnchangedWhenThereIsNoUtxo",
+              "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultUtxoResolverContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.tx.DefaultUtxoResolverContractTest",
+          "baselineMethod": "selectUtxoAndGetBalanceAreStillStubs",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.tx.DefaultUtxoResolverContractTest",
+              "method": "selectUtxoAndGetBalanceAreStillStubs",
+              "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultUtxoResolverContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.tx.filter.SourceDataFilterChainContractTest",
+          "baselineMethod": "stopsAtTheFirstFilterThatKeepsTheTransaction",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.tx.filter.SourceDataFilterChainContractTest",
+              "method": "stopsAtTheFirstFilterThatKeepsTheTransaction",
+              "path": "metanet4j-tx-filter/src/test/java/com/metanet4j/tx/filter/SourceDataFilterChainContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.tx.filter.SourceDataFilterChainContractTest",
+          "baselineMethod": "keepsNothingWhenEveryFilterAbstains",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.tx.filter.SourceDataFilterChainContractTest",
+              "method": "keepsNothingWhenEveryFilterAbstains",
+              "path": "metanet4j-tx-filter/src/test/java/com/metanet4j/tx/filter/SourceDataFilterChainContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.tx.filter.SourceDataFilterChainContractTest",
+          "baselineMethod": "filterListKeepsOnlyTransactionsAcceptedByTheChain",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.tx.filter.SourceDataFilterChainContractTest",
+              "method": "filterListKeepsOnlyTransactionsAcceptedByTheChain",
+              "path": "metanet4j-tx-filter/src/test/java/com/metanet4j/tx/filter/SourceDataFilterChainContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.tx.filter.SourceDataFiltersContractTest",
+          "baselineMethod": "repeatFilterNeverFilters",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.tx.filter.SourceDataFiltersContractTest",
+              "method": "repeatFilterNeverFilters",
+              "path": "metanet4j-tx-filter/src/test/java/com/metanet4j/tx/filter/SourceDataFiltersContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.tx.filter.SourceDataFiltersContractTest",
+          "baselineMethod": "metaIdFilterKeepsAnyTransactionWithOutputs",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.tx.filter.SourceDataFiltersContractTest",
+              "method": "metaIdFilterKeepsAnyTransactionWithOutputs",
+              "path": "metanet4j-tx-filter/src/test/java/com/metanet4j/tx/filter/SourceDataFiltersContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.tx.filter.SourceDataFiltersContractTest",
+          "baselineMethod": "metaIdFilterFailsOnScriptsWithoutAPayloadSlot",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.tx.filter.SourceDataFiltersContractTest",
+              "method": "metaIdFilterFailsOnScriptsWithoutAPayloadSlot",
+              "path": "metanet4j-tx-filter/src/test/java/com/metanet4j/tx/filter/SourceDataFiltersContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.tx.filter.SourceDataFiltersContractTest",
+          "baselineMethod": "metaMarkerEncodesToItsHexadecimalForm",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.tx.filter.SourceDataFiltersContractTest",
+              "method": "metaMarkerEncodesToItsHexadecimalForm",
+              "path": "metanet4j-tx-filter/src/test/java/com/metanet4j/tx/filter/SourceDataFiltersContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+          "baselineMethod": "validateAcceptsARegisteredRootIdentity",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+              "method": "validateAcceptsARegisteredRootIdentity",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/validator/DefaultBapValidatorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+          "baselineMethod": "validateRejectsAnUnknownIdentity",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+              "method": "validateRejectsAnUnknownIdentity",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/validator/DefaultBapValidatorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+          "baselineMethod": "generateRandomSignHashHexStrIsA64CharHexDigest",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+              "method": "generateRandomSignHashHexStrIsA64CharHexDigest",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/validator/DefaultBapValidatorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+          "baselineMethod": "verifySigFailsForAnUnknownIdentity",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+              "method": "verifySigFailsForAnUnknownIdentity",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/validator/DefaultBapValidatorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+          "baselineMethod": "verifySigDelegatesToAipHelperWithTheRootAddress",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+              "method": "verifySigDelegatesToAipHelperWithTheRootAddress",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/validator/DefaultBapValidatorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+          "baselineMethod": "verifySigReturnsFalseWhenTheSignatureDoesNotMatch",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.validator.DefaultBapValidatorContractTest",
+              "method": "verifySigReturnsFalseWhenTheSignatureDoesNotMatch",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/validator/DefaultBapValidatorContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.manager.BapManagerContractTest",
+          "baselineMethod": "createRootChainsDataLockCompletionAndRawStrHandling",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.manager.BapManagerContractTest",
+              "method": "createRootChainsDataLockCompletionAndRawStrHandling",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/manager/BapManagerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleRejectsTransactionsWithoutIdentityKey",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+              "method": "handleRejectsTransactionsWithoutIdentityKey",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MongoStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleStoresARootIdDocumentWithItsFirstSigner",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+              "method": "handleStoresARootIdDocumentWithItsFirstSigner",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MongoStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleAppendsANewSignerForANonRootIdTransaction",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+              "method": "handleAppendsANewSignerForANonRootIdTransaction",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MongoStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleStoresAnAttestationWithItsOptionallyAppendedData",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+              "method": "handleStoresAnAttestationWithItsOptionallyAppendedData",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MongoStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleLeavesTheAttestationDataEmptyWhenNothingIsAppended",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+              "method": "handleLeavesTheAttestationDataEmptyWhenNothingIsAppended",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MongoStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleUpdatesTheIdentityJsonForAliasTransactions",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+              "method": "handleUpdatesTheIdentityJsonForAliasTransactions",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MongoStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleStoresRevokedAttestationsPointingToTheirOwnTransaction",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+              "method": "handleStoresRevokedAttestationsPointingToTheirOwnTransaction",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MongoStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleIgnoresUnknownBapTypes",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+              "method": "handleIgnoresUnknownBapTypes",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MongoStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleDataTransactionsRequireARootIdSignatureBeforeTheyCanBeStored",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MongoStoreBapDtoHandlerContractTest",
+              "method": "handleDataTransactionsRequireARootIdSignatureBeforeTheyCanBeStored",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MongoStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleStoresRootAndSignerForANewRootId",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+              "method": "handleStoresRootAndSignerForANewRootId",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MysqlStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleStoresRootAndSignerWhenTheRootIdExplicitlySaysNotDestroyed",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+              "method": "handleStoresRootAndSignerWhenTheRootIdExplicitlySaysNotDestroyed",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MysqlStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleDestroysTheIdentityForADestroyRootId",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+              "method": "handleDestroysTheIdentityForADestroyRootId",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MysqlStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleStoresOnlyTheSignerForANonRootId",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+              "method": "handleStoresOnlyTheSignerForANonRootId",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MysqlStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleStoresOnlyTheSignerWhenANonRootIdIsNotDestroyed",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+              "method": "handleStoresOnlyTheSignerWhenANonRootIdIsNotDestroyed",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MysqlStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleStoresTheAliasIdentity",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+              "method": "handleStoresTheAliasIdentity",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MysqlStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleTreatsAttestationsAsIdRows",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+              "method": "handleTreatsAttestationsAsIdRows",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MysqlStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleIgnoresDataAndRevokeTransactions",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+              "method": "handleIgnoresDataAndRevokeTransactions",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MysqlStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+          "baselineMethod": "handleRejectsTransactionsWithoutIdentityKey",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.component.bap.handler.MysqlStoreBapDtoHandlerContractTest",
+              "method": "handleRejectsTransactionsWithoutIdentityKey",
+              "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MysqlStoreBapDtoHandlerContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.store.mongo.bap.repository.bapid.CustomizedBapIdRepositoryImplContractTest",
+          "baselineMethod": "saveSignerResetsCurrentFlagsAndPushesTheNewSigner",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.store.mongo.bap.repository.bapid.CustomizedBapIdRepositoryImplContractTest",
+              "method": "saveSignerResetsCurrentFlagsAndPushesTheNewSigner",
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bap/repository/bapid/CustomizedBapIdRepositoryImplContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.store.mongo.bap.repository.bapid.CustomizedBapIdRepositoryImplContractTest",
+          "baselineMethod": "updateIdentityByIdWritesTheIdentityDocumentAndTransaction",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.store.mongo.bap.repository.bapid.CustomizedBapIdRepositoryImplContractTest",
+              "method": "updateIdentityByIdWritesTheIdentityDocumentAndTransaction",
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bap/repository/bapid/CustomizedBapIdRepositoryImplContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.store.mongo.bap.repository.bapid.CustomizedBapIdRepositoryImplContractTest",
+          "baselineMethod": "findIdentityKeyFallsBackToAnEmptyDocument",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.store.mongo.bap.repository.bapid.CustomizedBapIdRepositoryImplContractTest",
+              "method": "findIdentityKeyFallsBackToAnEmptyDocument",
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bap/repository/bapid/CustomizedBapIdRepositoryImplContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.store.mongo.bap.repository.bapid.CustomizedBapIdRepositoryImplContractTest",
+          "baselineMethod": "findCurrentSignerIsStillAStub",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.store.mongo.bap.repository.bapid.CustomizedBapIdRepositoryImplContractTest",
+              "method": "findCurrentSignerIsStillAStub",
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bap/repository/bapid/CustomizedBapIdRepositoryImplContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.store.mongo.bap.repository.bapid.CustomizedBapIdRepositoryImplContractTest",
+          "baselineMethod": "findShowIdentityPagesByEventTime",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.store.mongo.bap.repository.bapid.CustomizedBapIdRepositoryImplContractTest",
+              "method": "findShowIdentityPagesByEventTime",
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bap/repository/bapid/CustomizedBapIdRepositoryImplContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.store.mongo.bap.repository.bapid.CustomizedBapIdRepositoryImplContractTest",
+          "baselineMethod": "listBapIdQueriesByIdentityKeys",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.store.mongo.bap.repository.bapid.CustomizedBapIdRepositoryImplContractTest",
+              "method": "listBapIdQueriesByIdentityKeys",
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bap/repository/bapid/CustomizedBapIdRepositoryImplContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        },
+        {
+          "baselineClass": "com.metanet4j.store.mongo.bap.repository.bapid.CustomizedBapIdRepositoryImplContractTest",
+          "baselineMethod": "signingBaseStubsStayDocumented",
+          "baselineClassification": "unit",
+          "disposition": "retained",
+          "targets": [
+            {
+              "class": "com.metanet4j.store.mongo.bap.repository.bapid.CustomizedBapIdRepositoryImplContractTest",
+              "method": "signingBaseStubsStayDocumented",
+              "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bap/repository/bapid/CustomizedBapIdRepositoryImplContractTest.java"
+            }
+          ],
+          "reason": "保留原断言语义；只替换依赖类型和必要访问器。"
+        }
+      ]
+    }
+  ]
+}

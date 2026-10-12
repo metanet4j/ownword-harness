@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "status": "partial-reviewed",
+  "status": "reviewed",
   "scope": "所有 4 仓库、25 POM；已完成现有测试的执行安全分类，覆盖率与集成边界仍待补齐",
   "repositories": [
     {
       "repository": "metanet4j-parent",
-      "head": "4112a4826d052e8a32be08e3582e473dfb5d2ccd",
+      "head": "d69ad1b17ec719d804595598150cb3ec7196ab6f",
       "modules": [
         {
           "path": ".",
@@ -13,7 +13,7 @@
           "production": [],
           "testSources": [],
           "classificationReviewed": true,
-          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "classificationReason": "纯 POM，无可执行源码；不要求人为添加测试。",
           "integrationReview": "N/A：父 POM，无运行时代码",
           "integrationCases": []
         }
@@ -21,7 +21,7 @@
     },
     {
       "repository": "metanet4j-base",
-      "head": "77ad9fd463f5186a8befb5b8f0c609458981c8f8",
+      "head": "5d3a262b318d5db1c758af689f57cef2fd7746ae",
       "modules": [
         {
           "path": ".",
@@ -207,7 +207,8 @@
                   "line": 31,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/base/BapTest.java",
@@ -225,7 +226,8 @@
                   "line": 28,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/base/ProtocolContractTest.java",
@@ -243,7 +245,8 @@
                   "line": 20,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/base/bsv/BsvNetworkTest.java",
@@ -291,7 +294,8 @@
                   "line": 92,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/base/bsv/BsvUtxoTest.java",
@@ -321,7 +325,8 @@
                   "line": 59,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/base/bsv/BsvValueTypesTest.java",
@@ -405,7 +410,8 @@
                   "line": 223,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/base/dto/BitcoinSchemaDtoTest.java",
@@ -429,7 +435,8 @@
                   "line": 39,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/base/dto/TxUtxoDtoTest.java",
@@ -459,7 +466,8 @@
                   "line": 49,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/base/type/ProtocolTypeTest.java",
@@ -477,7 +485,8 @@
                   "line": 21,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/base/util/JacksonUtilTest.java",
@@ -501,7 +510,8 @@
                   "line": 45,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -512,7 +522,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "18124c8d5cc27133628afc612b72b501fb4ab6ad",
+      "head": "1d16a2b455579191864c2324cdb8f5231d2a3acc",
       "modules": [
         {
           "path": ".",
@@ -859,7 +869,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "内存序列化交易验证 BOB/TXO 地址、金额、OP_RETURN 和 tape 分隔，未连接外部服务"
+              "classificationReason": "内存序列化交易验证 BOB/TXO 地址、金额、OP_RETURN 和 tape 分隔，未连接外部服务",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/EcKeyLiteExtendContractTest.java",
@@ -884,7 +895,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "固定二进制消息验证签名、预映像哈希和公钥恢复，无网络或外部状态"
+              "classificationReason": "固定二进制消息验证签名、预映像哈希和公钥恢复，无网络或外部状态",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/KeyAddressContractTest.java",
@@ -909,7 +921,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "独立 key=2 WIF、公钥哈希、地址固定向量；四种 WIF 往返和异常输入"
+              "classificationReason": "独立 key=2 WIF、公钥哈希、地址固定向量；四种 WIF 往返和异常输入",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/OrdHistoricalFixtureContractTest.java",
@@ -964,7 +977,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "八组仓库内历史 Ordinal 原始交易，固定交易 ID、输入输出、铭文、MAP、Sigma 验签、转移与市场金额字段；两份同字节资源核对一致"
+              "classificationReason": "八组仓库内历史 Ordinal 原始交易，固定交易 ID、输入输出、铭文、MAP、Sigma 验签、转移与市场金额字段；两份同字节资源核对一致",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/PrivateKeyTest.java",
@@ -995,7 +1009,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/TestData.java",
@@ -1014,13 +1029,15 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/WordsvTestData.java",
               "classification": "fixture",
               "methods": [],
-              "classificationReason": "无直接 @Test 方法，供其他用例使用"
+              "classificationReason": "无直接 @Test 方法，供其他用例使用",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/address/AddressLiteTest.java",
@@ -1045,7 +1062,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseCoreContractTest.java",
@@ -1070,7 +1088,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "BAP 默认地址映射、真实密钥加解密和无效密文／密钥异常；纯本地计算"
+              "classificationReason": "BAP 默认地址映射、真实密钥加解密和无效密文／密钥异常；纯本地计算",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseLifecycleTest.java",
@@ -1131,7 +1150,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "BAP 本地密钥轮换、重建、地址反查、工厂入口、无符号 hex 路径和身份加解密；包含成功、边界与失败路径"
+              "classificationReason": "BAP 本地密钥轮换、重建、地址反查、工厂入口、无符号 hex 路径和身份加解密；包含成功、边界与失败路径",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/BapBaseTest.java",
@@ -1198,7 +1218,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/BapPathTest.java",
@@ -1264,7 +1285,8 @@
                   "line": 64,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/BapProviderKeyBagTest.java",
@@ -1295,7 +1317,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "BAP KeyBag 的签名、支付与 Ord 密钥查找，未知哈希和公钥查找；纯本地计算"
+              "classificationReason": "BAP KeyBag 的签名、支付与 Ord 密钥查找，未知哈希和公钥查找；纯本地计算",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/BapVariantContractTest.java",
@@ -1320,7 +1343,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "远程 BAP 公共地址与无私钥契约、内置路径配置、独立固定 tagged derivation 向量；纯本地计算"
+              "classificationReason": "远程 BAP 公共地址与无私钥契约、内置路径配置、独立固定 tagged derivation 向量；纯本地计算",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/SpecifyBapBaseContractTest.java",
@@ -1339,7 +1363,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "显式 BAP 所有构造入口及支付／Ord 私钥检索，公钥查找失败路径先红后绿；纯本地计算"
+              "classificationReason": "显式 BAP 所有构造入口及支付／Ord 私钥检索，公钥查找失败路径先红后绿；纯本地计算",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/WordsvBapBaseTest.java",
@@ -1358,7 +1383,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/common/CommonTest.java",
@@ -1371,7 +1397,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/context/PreSignHashContextContractTest.java",
@@ -1396,7 +1423,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "远程签名上下文必需/可选字段往返与 Number 费用转换"
+              "classificationReason": "远程签名上下文必需/可选字段往返与 Number 费用转换",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/crypto/CryptoHelperContractTest.java",
@@ -1421,7 +1449,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "旧版助记词根／子密钥派生、主网与测试网 WIF／地址及随机输入；纯本地计算"
+              "classificationReason": "旧版助记词根／子密钥派生、主网与测试网 WIF／地址及随机输入；纯本地计算",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/crypto/EciesContractTest.java",
@@ -1452,7 +1481,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "平台 AES/SHA-512 对照、固定和随机 ECIES 临时密钥、篡改检测；不联网"
+              "classificationReason": "平台 AES/SHA-512 对照、固定和随机 ECIES 临时密钥、篡改检测；不联网",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/crypto/MasterPrivateKeyContractTest.java",
@@ -1489,7 +1519,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "独立旧制品派生向量、BIP39/BIP32 序列化、新钱包 checksum 与非标准长度采样边界"
+              "classificationReason": "独立旧制品派生向量、BIP39/BIP32 序列化、新钱包 checksum 与非标准长度采样边界",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/crypto/MasterPrivateKeyTest.java",
@@ -1508,7 +1539,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/input/TransactionEnhanceContractTest.java",
@@ -1527,7 +1559,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "内存交易验证扩展输入、输出、outpoint 的索引、关联输出和空脚本，无网络或外部状态"
+              "classificationReason": "内存交易验证扩展输入、输出、outpoint 的索引、关联输出和空脚本，无网络或外部状态",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdScriptBuilderContractTest.java",
@@ -1552,7 +1585,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "Ord 内容封装、缺失字段与 MAP 元数据序列化；纯本地脚本构建"
+              "classificationReason": "Ord 内容封装、缺失字段与 MAP 元数据序列化；纯本地脚本构建",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionBuilderContractTest.java",
@@ -1595,7 +1629,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "内存UTXO和脚本解释器验证Ord构建、签名模式与失败处理，未广播交易"
+              "classificationReason": "内存UTXO和脚本解释器验证Ord构建、签名模式与失败处理，未广播交易",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/ordinals/OrdTransactionTemplateContractTest.java",
@@ -1650,7 +1685,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "内存 UTXO 与签名替身验证本地 Ord 帖文元数据、重新铭刻媒体类型及签名失败传播，未广播交易"
+              "classificationReason": "内存 UTXO 与签名替身验证本地 Ord 帖文元数据、重新铭刻媒体类型及签名失败传播，未广播交易",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/remote/RemoteOrdTransactionTemplateContractTest.java",
@@ -1758,7 +1794,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "内存 UTXO 与签名替身验证远程 Ord 创建、转移、MAP、开关和签名失败传播，未连接外部服务"
+              "classificationReason": "内存 UTXO 与签名替身验证远程 Ord 创建、转移、MAP、开关和签名失败传播，未连接外部服务",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/remote/RemoteTransactionContractTest.java",
@@ -1824,6 +1861,11 @@
                   "classification": "unit"
                 },
                 {
+                  "name": "remoteBuildersPreserveLegacyScopesWithoutPrivateKeyLookup",
+                  "classification": "unit",
+                  "reason": "当前计划要求的真实边界回归"
+                },
+                {
                   "name": "remoteOrdinalBuilderForwardsForkId",
                   "returnType": "void",
                   "line": 411,
@@ -1840,6 +1882,11 @@
                   "returnType": "void",
                   "line": 429,
                   "classification": "unit"
+                },
+                {
+                  "name": "remotePreparationOverloadDefaultsToForkId",
+                  "classification": "unit",
+                  "reason": "当前计划要求的真实边界回归"
                 },
                 {
                   "name": "remoteSignerHonoursTheSingleOutputSignatureFlavour",
@@ -1914,7 +1961,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "本地密钥、内存UTXO与受控签名上下文验证远程交易摘要和签名，未连接远程服务"
+              "classificationReason": "本地密钥、内存UTXO与受控签名上下文验证远程交易摘要和签名，未连接远程服务",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/script/ScriptExtendContractTest.java",
@@ -1987,7 +2035,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "普通地址、多签、P2SH、Ord 与未知脚本的花费字节估算、签名位置及创建时间；纯本地计算"
+              "classificationReason": "普通地址、多签、P2SH、Ord 与未知脚本的花费字节估算、签名位置及创建时间；纯本地计算",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/script/ScriptTest.java",
@@ -2006,7 +2055,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/script/SigHashExtendContractTest.java",
@@ -2017,6 +2067,11 @@
                   "returnType": "void",
                   "line": 27,
                   "classification": "unit"
+                },
+                {
+                  "name": "legacyDigestMatchesIndependentPreimageAcrossFlagsAndSingleBug",
+                  "classification": "unit",
+                  "reason": "当前计划要求的真实边界回归"
                 },
                 {
                   "name": "manuallyBuiltAndParsedTransactionsProduceTheSameDigest",
@@ -2031,7 +2086,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "内存交易和独立 ForkID 预映像计算，无网络或外部状态"
+              "classificationReason": "内存交易和独立 ForkID 预映像计算，无网络或外部状态",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaHashContractTest.java",
@@ -2062,7 +2118,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "构造本地小交易，用独立 SHA-256 对照输入、输出、消息哈希和 Sigma 脚本解析"
+              "classificationReason": "构造本地小交易，用独立 SHA-256 对照输入、输出、消息哈希和 Sigma 脚本解析",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaProtocolModelTest.java",
@@ -2075,7 +2132,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "真实空交易与脚本验证 Sigma 签名协议字段及 BSM 枚举"
+              "classificationReason": "真实空交易与脚本验证 Sigma 签名协议字段及 BSM 枚举",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/sigma/SigmaSignContractTest.java",
@@ -2106,7 +2164,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "真实 BAP 密钥对本地及远程 Sigma 签名验证；ThreadLocal 上下文清理"
+              "classificationReason": "真实 BAP 密钥对本地及远程 Sigma 签名验证；ThreadLocal 上下文清理",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/signers/AllHashSigThreadLocalContractTest.java",
@@ -2125,12 +2184,18 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "本地线程验证签名上下文按哈希查找和线程隔离，无外部状态"
+              "classificationReason": "本地线程验证签名上下文按哈希查找和线程隔离，无外部状态",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java",
               "classification": "unit",
               "methods": [
+                {
+                  "name": "batchSigningPreservesLegacyScopesAndValidScripts",
+                  "classification": "unit",
+                  "reason": "当前计划要求的真实边界回归"
+                },
                 {
                   "name": "batchSigningSkipsInputsItCannotSignWithoutAbortingTheBatch",
                   "returnType": "void",
@@ -2216,7 +2281,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "内存交易验证头字段保留、ForkID签名标志及缺少连接输出处理，未连接外部服务"
+              "classificationReason": "内存交易验证头字段保留、ForkID签名标志及缺少连接输出处理，未连接外部服务",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/transcation/BapDataLockBuilderSignTypeTest.java",
@@ -2241,7 +2307,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit"
+              "classificationReason": "静态检查未见网络调用，待逐方法复核后标记 unit",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/transcation/BitcoinschemaTransactionTest.java",
@@ -2387,7 +2454,8 @@
                   "manualReason": "旧示例依赖 Bitails 实时 UTXO、三个指定金额输出并向主网广播；离线测试覆盖多输入和签名，未复现该笔链上交易。"
                 }
               ],
-              "classificationReason": "类级 external 标签；涉及实时 UTXO 与主网广播，U2 应拆出可离线行为"
+              "classificationReason": "类级 external 标签；涉及实时 UTXO 与主网广播，U2 应拆出可离线行为",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/transcation/BsocialDataLockBuilderContractTest.java",
@@ -2460,7 +2528,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "确定性脚本与固定密钥验证Bsocial协议、加密、排序、MAP校验和远程签名，未连接外部服务"
+              "classificationReason": "确定性脚本与固定密钥验证Bsocial协议、加密、排序、MAP校验和远程签名，未连接外部服务",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/transcation/OrdTransactionTest.java",
@@ -2590,7 +2659,8 @@
                   ]
                 }
               ],
-              "classificationReason": "类级 external 标签；涉及实时 UTXO 与主网广播，U2 应拆出可离线行为"
+              "classificationReason": "类级 external 标签；涉及实时 UTXO 与主网广播，U2 应拆出可离线行为",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/transcation/RemoteSignBitcoinschemaTransactionTest.java",
@@ -2629,7 +2699,8 @@
                   "manualReason": "旧示例查询实时付款 UTXO并向主网广播；离线测试验证两个远程签名阶段和可花费交易，未复现链上确认。"
                 }
               ],
-              "classificationReason": "类级 external 标签；涉及实时 UTXO 与主网广播，U2 应拆出可离线行为"
+              "classificationReason": "类级 external 标签；涉及实时 UTXO 与主网广播，U2 应拆出可离线行为",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionBuilderContractTest.java",
@@ -2677,10 +2748,20 @@
                   "reason": "按当前计划补齐金额与异常输入边界"
                 },
                 {
+                  "name": "completionHonoursTheLegacyHashingSwitch",
+                  "classification": "unit",
+                  "reason": "当前计划要求的真实边界回归"
+                },
+                {
                   "name": "constructorsPreserveTheExistingTransactionAndKeyProvider",
                   "returnType": "void",
                   "line": 382,
                   "classification": "unit"
+                },
+                {
+                  "name": "defaultPreparationOverloadProducesAForkIdSignature",
+                  "classification": "unit",
+                  "reason": "当前计划要求的真实边界回归"
                 },
                 {
                   "name": "feeAndInputTotalsRejectLongOverflow",
@@ -2747,13 +2828,15 @@
                   "reason": "按当前计划补齐金额与异常输入边界"
                 }
               ],
-              "classificationReason": "内存 UTXO 和本地替身验证找零、签名与广播回调，未连接网络或真实广播"
+              "classificationReason": "内存 UTXO 和本地替身验证找零、签名与广播回调，未连接网络或真实广播",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/transcation/TransactionContextTest.java",
               "classification": "fixture",
               "methods": [],
-              "classificationReason": "无直接 @Test 方法，供其他用例使用"
+              "classificationReason": "无直接 @Test 方法，供其他用例使用",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/transcation/UnSpendableDataLockBuilderContractTest.java",
@@ -2826,7 +2909,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "固定 BAP 密钥与内存脚本验证原始二进制签名、远程预签名稳定性和失败后重试，未连接外部服务"
+              "classificationReason": "固定 BAP 密钥与内存脚本验证原始二进制签名、远程预签名稳定性和失败后重试，未连接外部服务",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utils/ReadUtilsTest.java",
@@ -2845,7 +2929,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "真实字节序列与协议异常断言，覆盖空切片、游标、负长度和越界"
+              "classificationReason": "真实字节序列与协议异常断言，覆盖空切片、游标、负长度和越界",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utils/RedeemDataExtendContractTest.java",
@@ -2870,7 +2955,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "真实公私钥验证赎回数据排序、拷贝、适配和可用私钥查找，无网络或外部状态"
+              "classificationReason": "真实公私钥验证赎回数据排序、拷贝、适配和可用私钥查找，无网络或外部状态",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utils/ScriptHelperContractTest.java",
@@ -2907,7 +2993,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "构造实际 ScriptChunk 覆盖有效 push data、OP_RETURN、空数据及 OP_0"
+              "classificationReason": "构造实际 ScriptChunk 覆盖有效 push data、OP_RETURN、空数据及 OP_0",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utils/TxHelperExtendContractTest.java",
@@ -3004,7 +3091,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "本地脚本和内存交易验证 Ord 识别、地址提取、关联输出及密钥查找，无网络或外部状态"
+              "classificationReason": "本地脚本和内存交易验证 Ord 识别、地址提取、关联输出及密钥查找，无网络或外部状态",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utils/UtilsExtendTest.java",
@@ -3035,7 +3123,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "固定 SHA-256 和 Bitcoin 签名消息向量，覆盖字符串编码、字节与 VarInt 边界"
+              "classificationReason": "固定 SHA-256 和 Bitcoin 签名消息向量，覆盖字符串编码、字节与 VarInt 边界",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utxo/BitailsAndGorillaHttpIntegrationTest.java",
@@ -3072,7 +3161,8 @@
                   "classification": "integration"
                 }
               ],
-              "classificationReason": "本机随机端口 HTTP 服务；断言请求及响应，覆盖客户端与 Provider 成功、畸形 JSON 和 503"
+              "classificationReason": "本机随机端口 HTTP 服务；断言请求及响应，覆盖客户端与 Provider 成功、畸形 JSON 和 503",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utxo/BitailsProviderTest.java",
@@ -3101,7 +3191,8 @@
                   "manualReason": "旧用例查询 Bitails 公网地址的实时 UTXO 并打印；本地 HTTP/固定 DTO 已验证映射，实时余额随链变化且不能用稳定断言替代。"
                 }
               ],
-              "classificationReason": "两个测试真实访问 Bitails HTTP，当前无标签；分类修复前不得运行 sdk 自动基线"
+              "classificationReason": "两个测试真实访问 Bitails HTTP，当前无标签；分类修复前不得运行 sdk 自动基线",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utxo/HttpClientFactoryTest.java",
@@ -3144,7 +3235,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "公开请求/发送入口，经 Mockito HttpClient 替身，不发起网络请求"
+              "classificationReason": "公开请求/发送入口，经 Mockito HttpClient 替身，不发起网络请求",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utxo/HttpClientsTest.java",
@@ -3169,7 +3261,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "静态传输替身下验证默认/本地 URL 和广播载荷，不发起网络请求"
+              "classificationReason": "静态传输替身下验证默认/本地 URL 和广播载荷，不发起网络请求",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/utxo/UtxoProvidersTest.java",
@@ -3188,7 +3281,8 @@
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "静态客户端替身下验证 UTXO 映射、空结果与 spend 优先级"
+              "classificationReason": "静态客户端替身下验证 UTXO 映射、空结果与 spend 优先级",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/EcKeyLiteExtendTest.java",
@@ -3212,7 +3306,8 @@
                   "classification": "unit"
                 }
               ],
-              "classification": "unit"
+              "classification": "unit",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/PublicConstructorContractTest.java",
@@ -3230,7 +3325,8 @@
                   "classification": "unit"
                 }
               ],
-              "classification": "unit"
+              "classification": "unit",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/bap/MasterKeyBapBaseTest.java",
@@ -3242,13 +3338,15 @@
                   "classification": "unit"
                 }
               ],
-              "classification": "unit"
+              "classification": "unit",
+              "classificationReviewed": true
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/TransactionScriptAssertions.java",
               "classification": "fixture",
               "methods": [],
-              "classificationReason": "共享真实 Spend 脚本断言，不是测试类"
+              "classificationReason": "共享真实 Spend 脚本断言，不是测试类",
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -3267,7 +3365,7 @@
     },
     {
       "repository": "metanet4j-component",
-      "head": "de1f59fa765e0225f263332a7402ed2817da6ad6",
+      "head": "41fd8fec63f1c8daac87013ae99d3cc4771d58a2",
       "modules": [
         {
           "path": "metanet4j-api-common",
@@ -3391,7 +3489,8 @@
                   "line": 119,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/annotations/AnnotationsContractTest.java",
@@ -3415,7 +3514,8 @@
                   "line": 47,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/aspect/GlobalApiLogAspectContractTest.java",
@@ -3475,7 +3575,8 @@
                   "line": 114,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/aspect/LogAspectContractTest.java",
@@ -3535,7 +3636,8 @@
                   "line": 116,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/base/BaseApiResultContractTest.java",
@@ -3571,7 +3673,8 @@
                   "line": 56,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/base/RContractTest.java",
@@ -3637,7 +3740,8 @@
                   "line": 128,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/security/JwtTokenProviderContractTest.java",
@@ -3691,7 +3795,8 @@
                   "line": 112,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-api-common/src/test/java/com/metanet4j/api/common/utils/ValidateUtilsContractTest.java",
@@ -3715,7 +3820,8 @@
                   "line": 26,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -3820,7 +3926,8 @@
               "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/BapTestFixture.java",
               "classification": "fixture",
               "classificationReason": "受控替身/夹具，无直接 @Test 方法",
-              "methods": []
+              "methods": [],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/converter/BapConvertersContractTest.java",
@@ -3868,7 +3975,8 @@
                   "line": 132,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MongoStoreBapDtoHandlerContractTest.java",
@@ -3928,7 +4036,8 @@
                   "line": 168,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/handler/MysqlStoreBapDtoHandlerContractTest.java",
@@ -3988,7 +4097,8 @@
                   "line": 121,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/listener/BapListenerContractTest.java",
@@ -4006,7 +4116,8 @@
                   "line": 38,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/manager/BapManagerContractTest.java",
@@ -4018,7 +4129,8 @@
                   "line": 45,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/mapstruct/mongo/BapIdDoMapperContractTest.java",
@@ -4042,7 +4154,8 @@
                   "line": 60,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/resolver/BapRawStrResolverContractTest.java",
@@ -4078,7 +4191,8 @@
                   "line": 104,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/service/BapSearchServiceContractTest.java",
@@ -4102,7 +4216,8 @@
                   "line": 63,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/service/MongoBapServiceContractTest.java",
@@ -4150,7 +4265,8 @@
                   "line": 121,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/service/MysqlBapServiceContractTest.java",
@@ -4222,7 +4338,8 @@
                   "line": 225,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bap/src/test/java/com/metanet4j/component/bap/validator/DefaultBapValidatorContractTest.java",
@@ -4264,7 +4381,8 @@
                   "line": 92,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -4317,7 +4435,8 @@
                   "line": 65,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -4442,7 +4561,8 @@
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/BsocialTestFixture.java",
               "classification": "fixture",
               "classificationReason": "受控替身/夹具，无直接 @Test 方法",
-              "methods": []
+              "methods": [],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MongoBusinessChainIntegrationTest.java",
@@ -4484,7 +4604,8 @@
                   "line": 218,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/chain/MysqlBusinessChainIntegrationTest.java",
@@ -4514,7 +4635,8 @@
                   "line": 240,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/converter/BsocialConvertersContractTest.java",
@@ -4604,7 +4726,8 @@
                   "line": 218,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/handler/MongoStoreBsocialHandlerContractTest.java",
@@ -4664,7 +4787,8 @@
                   "line": 173,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/handler/MysqlStoreBsocialHandlerContractTest.java",
@@ -4694,7 +4818,8 @@
                   "line": 71,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/listener/BsocialListenerContractTest.java",
@@ -4712,7 +4837,8 @@
                   "line": 32,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/manager/BsocialManagerContractTest.java",
@@ -4766,7 +4892,8 @@
                   "line": 115,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/mapstruct/BsocialMapperUtilsContractTest.java",
@@ -4802,7 +4929,8 @@
                   "line": 50,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/mapstruct/mongo/BsocialMappingContractTest.java",
@@ -4880,7 +5008,8 @@
                   "line": 224,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/mapstruct/search/BsocialSearchEntityMapperContractTest.java",
@@ -4904,7 +5033,8 @@
                   "line": 49,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/resolver/BsocialRawResolverContractTest.java",
@@ -4940,7 +5070,8 @@
                   "line": 111,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/service/BsocialSearchServiceContractTest.java",
@@ -4952,7 +5083,8 @@
                   "line": 34,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/service/MongoBsocialServiceContractTest.java",
@@ -5006,7 +5138,8 @@
                   "line": 148,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-bsocial/src/test/java/com/metanet4j/component/bsocial/service/MysqlBsocialServiceContractTest.java",
@@ -5042,7 +5175,8 @@
                   "line": 91,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -5111,7 +5245,8 @@
                   "line": 52,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-cache/src/test/java/com/metanet4j/component/cache/RedisServiceContractTest.java",
@@ -5141,7 +5276,8 @@
                   "line": 57,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-cache/src/test/java/com/metanet4j/component/cache/RedisUtilsContractTest.java",
@@ -5261,7 +5397,8 @@
                   "line": 471,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-cache/src/test/java/com/metanet4j/component/cache/RedissonAutoConfigurationContractTest.java",
@@ -5315,7 +5452,8 @@
                   "line": 114,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-cache/src/test/java/com/metanet4j/component/cache/RedisCacheIntegrationTest.java",
@@ -5405,7 +5543,8 @@
                   "line": 327,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -5580,7 +5719,8 @@
                   "line": 58,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/config/PlanariaConfigurationContractTest.java",
@@ -5604,7 +5744,8 @@
                   "line": 35,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/constants/ProtocolConstantsContractTest.java",
@@ -5628,7 +5769,8 @@
                   "line": 55,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/dto/BaseDtoContractTest.java",
@@ -5646,7 +5788,8 @@
                   "line": 22,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/enums/ComponentCommonEnumContractTest.java",
@@ -5682,7 +5825,8 @@
                   "line": 73,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/events/ComponentCommonEventsContractTest.java",
@@ -5712,7 +5856,8 @@
                   "line": 61,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/exception/ComponentCommonExceptionContractTest.java",
@@ -5748,7 +5893,8 @@
                   "line": 55,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/state/StateHelperContractTest.java",
@@ -5772,7 +5918,8 @@
                   "line": 44,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/transaction/BitcoinSchemaTransactionContractTest.java",
@@ -5801,7 +5948,8 @@
                   "classification": "unit",
                   "reason": "当前计划要求的真实边界回归"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/transaction/LocalTestUtxoProviderContractTest.java",
@@ -5825,7 +5973,8 @@
                   "line": 62,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/utils/ComponentCommonUtilsContractTest.java",
@@ -5849,7 +5998,8 @@
                   "line": 53,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-common/src/test/java/com/metanet4j/component/common/utils/SimpleBeanUtilsContractTest.java",
@@ -5879,7 +6029,8 @@
                   "line": 99,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -6014,13 +6165,15 @@
                   "line": 12,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/config/package-info.java",
               "classification": "fixture",
               "classificationReason": "夹具/包信息，无直接 @Test 方法",
-              "methods": []
+              "methods": [],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/AbstractFileClientContractTest.java",
@@ -6050,7 +6203,8 @@
                   "line": 39,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/FileClientFactoryImplContractTest.java",
@@ -6080,7 +6234,8 @@
                   "line": 50,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/db/DBFileClientContractTest.java",
@@ -6098,7 +6253,8 @@
                   "line": 30,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/ftp/FtpFileClientTest.java",
@@ -6146,7 +6302,8 @@
                   "line": 131,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/local/LocalFileClientTest.java",
@@ -6182,7 +6339,8 @@
                   "line": 62,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/s3/S3FileClientTest.java",
@@ -6260,7 +6418,8 @@
                   "line": 157,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/client/sftp/SftpFileClientTest.java",
@@ -6296,7 +6455,8 @@
                   "line": 75,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/enums/FileStorageEnumContractTest.java",
@@ -6326,13 +6486,15 @@
                   "line": 59,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/enums/package-info.java",
               "classification": "fixture",
               "classificationReason": "夹具/包信息，无直接 @Test 方法",
-              "methods": []
+              "methods": [],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/utils/FileTypeUtilsContractTest.java",
@@ -6362,7 +6524,8 @@
                   "line": 30,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/core/utils/FileUtilsContractTest.java",
@@ -6404,7 +6567,8 @@
                   "line": 59,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/validation/ValidationUtilsContractTest.java",
@@ -6446,7 +6610,8 @@
                   "line": 61,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/FtpFileClientIntegrationTest.java",
@@ -6494,12 +6659,14 @@
                   "line": 131,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-file/src/test/java/com/metanet4j/component/file/MiniFtpServer.java",
               "classification": "fixture",
-              "methods": []
+              "methods": [],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -6544,7 +6711,8 @@
                   "line": 53,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-handler/src/test/java/com/metanet4j/component/listener/BitcoinSchemaTxListenerContractTest.java",
@@ -6568,7 +6736,8 @@
                   "line": 53,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -6651,7 +6820,8 @@
                   "line": 54,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-message/src/test/java/com/metanet4j/component/message/config/KafkaProducerConfigurationContractTest.java",
@@ -6669,7 +6839,8 @@
                   "line": 44,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-message/src/test/java/com/metanet4j/component/message/config/KafkaPropertiesContractTest.java",
@@ -6747,7 +6918,8 @@
                   "line": 250,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-message/src/test/java/com/metanet4j/component/message/consumer/ConsumersContractTest.java",
@@ -6789,7 +6961,8 @@
                   "line": 109,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-message/src/test/java/com/metanet4j/component/message/producer/MessageProducerContractTest.java",
@@ -6843,7 +7016,8 @@
                   "line": 117,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-message/src/test/java/com/metanet4j/component/message/KafkaMessageIntegrationTest.java",
@@ -6885,7 +7059,8 @@
                   "line": 208,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -6998,7 +7173,8 @@
                   "line": 89,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-model/src/test/java/com/metanet4j/model/api/CustomResultCodeContractTest.java",
@@ -7022,7 +7198,8 @@
                   "line": 25,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-model/src/test/java/com/metanet4j/model/api/ListResultContractTest.java",
@@ -7040,7 +7217,8 @@
                   "line": 23,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-model/src/test/java/com/metanet4j/model/domain/bap/BapDomainContractTest.java",
@@ -7064,7 +7242,8 @@
                   "line": 84,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-model/src/test/java/com/metanet4j/model/domain/bsocial/BsocialDomainContractTest.java",
@@ -7094,7 +7273,8 @@
                   "line": 112,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-model/src/test/java/com/metanet4j/model/planaria/PlanariaContractTest.java",
@@ -7112,7 +7292,8 @@
                   "line": 26,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -7140,7 +7321,8 @@
                   "line": 9,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/compltetx/ComplteTxFactoryTest.java",
@@ -7173,7 +7355,8 @@
                     "com.metanet4j.component.tx.DefaultCompleteTxFactoryContractTest"
                   ]
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/convertor/TxoBobConverterTest.java",
@@ -7185,7 +7368,8 @@
                   "line": 18,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/elasticsearch/BapSearchServiceTest.java",
@@ -7197,7 +7381,8 @@
                   "line": 17,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/elasticsearch/EsTest.java",
@@ -7359,7 +7544,8 @@
                   "line": 439,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/message/MessageProducerTest.java",
@@ -7371,7 +7557,8 @@
                   "line": 20,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/BapMongodbTest.java",
@@ -7467,12 +7654,14 @@
                   "line": 197,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/BsocialMongodbTest.java",
               "classification": "integration",
-              "methods": []
+              "methods": [],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/BsocialReplyMongodbTest.java",
@@ -7532,7 +7721,8 @@
                   "line": 122,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/DataTest.java",
@@ -7544,7 +7734,8 @@
                   "line": 104,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/MongoBapServiceFindIdentityKeyTest.java",
@@ -7556,12 +7747,14 @@
                   "line": 31,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/mongodb/schema/BsocialSchema.java",
               "classification": "fixture",
-              "methods": []
+              "methods": [],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/planaria/BapConvertorTest.java",
@@ -7595,7 +7788,8 @@
                     "com.metanet4j.tx.convertor.BapModelToDtoConverterContractTest"
                   ]
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/planaria/BsocailConvertorTest.java",
@@ -7691,7 +7885,8 @@
                     "com.metanet4j.sdk.transcation.BsocialDataLockBuilderContractTest"
                   ]
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/resolver/BapRawStrResolverTest.java",
@@ -7745,7 +7940,8 @@
                   "line": 98,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/resolver/BsocialRawResolverTest.java",
@@ -7763,7 +7959,8 @@
                   "line": 44,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/slave/BlockTaskServiceTest.java",
@@ -7797,27 +7994,32 @@
                   "classification": "external",
                   "manualReason": "手动：同上"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/sse/ServerSentEventsClientApplicationTest.java",
               "classification": "integration",
-              "methods": []
+              "methods": [],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/BaseDataTest.java",
               "classification": "fixture",
-              "methods": []
+              "methods": [],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/BitcoinschemaTransactionTest.java",
               "classification": "fixture",
-              "methods": []
+              "methods": [],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/LocalTestUtxoProvider.java",
               "classification": "fixture",
-              "methods": []
+              "methods": [],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/utxo/TxUtxoServiceTest.java",
@@ -7832,7 +8034,8 @@
                     "com.metanet4j.component.tx.DefaultUtxoResolverContractTest"
                   ]
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/transaction/BsocialReplyTransactionContractTest.java",
@@ -7850,13 +8053,15 @@
                   "line": 28,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/IntegrationResources.java",
               "classification": "fixture",
               "methods": [],
-              "reason": "本轮唯一资源的登记与 JUnit 根生命周期清理"
+              "reason": "本轮唯一资源的登记与 JUnit 根生命周期清理",
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -7959,7 +8164,8 @@
                   "line": 71,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultCompleteTxFactoryContractTest.java",
@@ -7983,7 +8189,8 @@
                   "line": 82,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultDuplicateSubmitPreventionContractTest.java",
@@ -7995,7 +8202,8 @@
                   "line": 13,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultPrepareOnchainTxResolverContractTest.java",
@@ -8031,7 +8239,8 @@
                   "line": 113,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultUnSpendableDataResolverContractTest.java",
@@ -8079,7 +8288,8 @@
                   "line": 103,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/DefaultUtxoResolverContractTest.java",
@@ -8109,19 +8319,22 @@
                   "line": 57,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/StubBapBaseFactory.java",
               "classification": "fixture",
               "classificationReason": "受控替身/夹具，无直接 @Test 方法",
-              "methods": []
+              "methods": [],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-component-tx/src/test/java/com/metanet4j/component/tx/TxTestFixture.java",
               "classification": "fixture",
               "classificationReason": "受控替身/夹具，无直接 @Test 方法",
-              "methods": []
+              "methods": [],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -8214,7 +8427,8 @@
                   "line": 116,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-connect-planaria/src/test/java/com/metanet4j/component/planaria/block/pull/DefaultBlockPullerImplContractTest.java",
@@ -8232,7 +8446,8 @@
                   "line": 42,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-connect-planaria/src/test/java/com/metanet4j/component/planaria/block/request/PullBlockDataRequestContractTest.java",
@@ -8250,7 +8465,8 @@
                   "line": 34,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-connect-planaria/src/test/java/com/metanet4j/component/planaria/fegin/DefaultFeginClientConfigContractTest.java",
@@ -8268,7 +8484,8 @@
                   "line": 17,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -8481,7 +8698,8 @@
                   "line": 172,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/StoreMongoWiringContractTest.java",
@@ -8499,7 +8717,8 @@
                   "line": 29,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bap/BapRecordListenerContractTest.java",
@@ -8541,7 +8760,8 @@
                   "line": 107,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bap/repository/bapid/CustomizedBapIdRepositoryImplContractTest.java",
@@ -8589,7 +8809,8 @@
                   "line": 94,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bap/repository/baprelation/CustomizedBapRelationRepositoryImplContractTest.java",
@@ -8643,7 +8864,8 @@
                   "line": 113,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bsocail/BsocialRecordListenerContractTest.java",
@@ -8685,7 +8907,8 @@
                   "line": 100,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bsocail/repository/bsocial/CustomizedBsocialRepositoryImplContractTest.java",
@@ -8715,7 +8938,8 @@
                   "line": 59,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bsocail/repository/bsocialrelation/CustomizedBsocialRelationRepositoryImplContractTest.java",
@@ -8769,7 +8993,8 @@
                   "line": 105,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-mongo/src/test/java/com/metanet4j/store/mongo/bsocail/repository/bsocialreply/CustomizedBsocialReplyRepositoryImplContractTest.java",
@@ -8865,7 +9090,8 @@
                   "line": 301,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -8962,7 +9188,8 @@
                   "line": 13,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/AbstractRepositoryContractTest.java",
@@ -9070,7 +9297,8 @@
                   "line": 221,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/BapIdentityRepositoryContractTest.java",
@@ -9094,7 +9322,8 @@
                   "line": 57,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/BitcoinSchemaBinaryRepositoryContractTest.java",
@@ -9118,7 +9347,8 @@
                   "line": 59,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/BitcoinSchemaContentRepositoryContractTest.java",
@@ -9142,7 +9372,8 @@
                   "line": 59,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/BitcoinSchemaMapRepositoryContractTest.java",
@@ -9166,7 +9397,8 @@
                   "line": 56,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/BsocialSearchRepositoryContractTest.java",
@@ -9184,13 +9416,15 @@
                   "line": 42,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/EsClientStub.java",
               "classification": "fixture",
               "classificationReason": "受控替身/夹具，无直接 @Test 方法",
-              "methods": []
+              "methods": [],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-search/src/test/java/com/metanet4j/store/search/repository/EsRepositoryIntegrationTest.java",
@@ -9220,7 +9454,8 @@
                   "line": 107,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -9393,7 +9628,8 @@
                   "line": 192,
                   "classification": "integration"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/StoreSqlWiringContractTest.java",
@@ -9405,7 +9641,8 @@
                   "line": 15,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/handler/MetanetObjectHandlerContractTest.java",
@@ -9435,7 +9672,8 @@
                   "line": 63,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/slave/blockTask/service/impl/BlockTaskServiceImplContractTest.java",
@@ -9447,7 +9685,8 @@
                   "line": 16,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/utxo/txRawkeyIndex/service/impl/TxRawkeyIndexServiceImplContractTest.java",
@@ -9459,7 +9698,8 @@
                   "line": 10,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-store-sql/src/test/java/com/metanet4j/store/sql/utxo/txUtxo/service/impl/TxUtxoServiceImplContractTest.java",
@@ -9489,7 +9729,8 @@
                   "line": 64,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -9608,7 +9849,8 @@
                   "line": 58,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/bap/BapModelToDtoConverterContractTest.java",
@@ -9626,7 +9868,8 @@
                   "line": 41,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/bsocial/AIPConverterContractTest.java",
@@ -9650,7 +9893,8 @@
                   "line": 42,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/bsocial/BConverterContractTest.java",
@@ -9674,7 +9918,8 @@
                   "line": 50,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/bsocial/BsocialModelToDtoConverterContractTest.java",
@@ -9692,7 +9937,8 @@
                   "line": 62,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/bsocial/DefaultProtocolConverterFactoryContractTest.java",
@@ -9716,7 +9962,8 @@
                   "line": 40,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/bsocial/MAPConverterContractTest.java",
@@ -9776,7 +10023,8 @@
                   "line": 81,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/executor/SourceTxConvertorExecutorContractTest.java",
@@ -9800,7 +10048,8 @@
                   "line": 51,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/impl/PlanariaBapConvertorContractTest.java",
@@ -9890,7 +10139,8 @@
                   "line": 184,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/impl/PlanariaBsocialConvertorContractTest.java",
@@ -9932,7 +10182,8 @@
                   "line": 118,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-tx-convertor/src/test/java/com/metanet4j/tx/convertor/impl/UtxoConvertorContractTest.java",
@@ -9971,7 +10222,8 @@
                   "line": 63,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -10030,7 +10282,8 @@
                   "line": 31,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-tx-filter/src/test/java/com/metanet4j/tx/filter/SourceDataFiltersContractTest.java",
@@ -10060,7 +10313,8 @@
                   "line": 55,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -10115,7 +10369,8 @@
                   "line": 36,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             },
             {
               "path": "metanet4j-tx-validator/src/test/java/com/metanet4j/tx/validator/strategy/impl/CommonValidateStrategyContractTest.java",
@@ -10127,7 +10382,8 @@
                   "line": 12,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -10185,7 +10441,8 @@
                   "line": 71,
                   "classification": "unit"
                 }
-              ]
+              ],
+              "classificationReviewed": true
             }
           ],
           "classificationReviewed": true,
@@ -10207,7 +10464,7 @@
           "testSources": [],
           "classificationReviewed": true,
           "integrationReview": "N/A：聚合 POM，无运行时代码",
-          "classificationReason": "无现有测试源码；执行安全已确认，覆盖缺口待补",
+          "classificationReason": "纯 POM，无可执行源码；不要求人为添加测试。",
           "integrationCases": []
         }
       ]

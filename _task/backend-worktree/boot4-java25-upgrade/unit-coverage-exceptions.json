@@ -211,7 +211,7 @@
         },
         {
           "class": "com/metanet4j/sdk/script/SigHashExtend",
-          "reason": "隐式默认构造器；hashForForkIdSignature 的 IOException 包装在 UnsafeByteArrayOutputStream 固定内存流下不可达（§114：因 R2／R3 期间代码改动，行号与方法集已按实测更新；原登记仅覆盖其中的隐式构造器）",
+          "reason": "保持原精确例外预算；摘要主体移动到 hashForSignature 承接 ForkID／legacy，新增模式与 SINGLE 特例均有真实回归。",
           "missed": [
             {
               "method": "<init>",
@@ -221,36 +221,36 @@
               "branchMissed": 0
             },
             {
-              "method": "hashForForkIdSignature",
-              "line": 48,
+              "method": "hashForSignature",
+              "line": 56,
               "lineMissed": 1,
               "methodMissed": 0,
               "branchMissed": 3
             },
             {
               "method": "hashHexForForkIdSignature",
-              "line": 82,
+              "line": 96,
               "lineMissed": 2,
               "methodMissed": 1,
               "branchMissed": 0
             },
             {
               "method": "txidOf",
-              "line": 88,
+              "line": 102,
               "lineMissed": 8,
               "methodMissed": 0,
               "branchMissed": 7
             },
             {
               "method": "sequenceOf",
-              "line": 109,
+              "line": 123,
               "lineMissed": 0,
               "methodMissed": 0,
               "branchMissed": 1
             },
             {
               "method": "toBytes",
-              "line": 113,
+              "line": 127,
               "lineMissed": 0,
               "methodMissed": 0,
               "branchMissed": 1
@@ -302,14 +302,14 @@
           "missed": [
             {
               "method": "<init>",
-              "line": 50,
+              "line": 87,
               "lineMissed": 2,
               "methodMissed": 1,
               "branchMissed": 0
             },
             {
               "method": "pushDataOpCode",
-              "line": 222,
+              "line": 259,
               "lineMissed": 0,
               "methodMissed": 0,
               "branchMissed": 1
@@ -361,14 +361,14 @@
           "missed": [
             {
               "method": "completeAndSignTx",
-              "line": 234,
+              "line": 239,
               "lineMissed": 2,
               "methodMissed": 0,
               "branchMissed": 0
             },
             {
               "method": "outputSize",
-              "line": 306,
+              "line": 310,
               "lineMissed": 0,
               "methodMissed": 0,
               "branchMissed": 1
@@ -394,14 +394,14 @@
           "missed": [
             {
               "method": "signInputs",
-              "line": 93,
+              "line": 103,
               "lineMissed": 3,
               "methodMissed": 0,
               "branchMissed": 0
             },
             {
               "method": "satoshisOf",
-              "line": 119,
+              "line": 129,
               "lineMissed": 0,
               "methodMissed": 0,
               "branchMissed": 1
