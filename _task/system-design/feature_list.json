@@ -35,10 +35,10 @@
       "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
       "harnessPath": "_task/prototype-worktree/ownword-v0.4.0",
       "output": "_task/prototype-worktree/ownword-v0.4.0/ownword-prototype",
-      "implementationStatus": "baseline-verified-features-pending",
+      "implementationStatus": "partially-implemented-and-verified",
       "reviewStatus": "agent-design-review-passed",
-      "evidence": "当前设计审查见 spec/prd/v0.4.0/设计审查v0.4.0-20261012-185625.md；v0.3.0 源码与祖先核对见 _task/prototype-worktree/ownword-v0.4.0/evidence/baseline-audit.json。当前 P01–P10 尚未制作，旧版 v0.4.0 记录和证据已删除，不用于当前验收。 新 worktree 的 Git、构建、模型、UI 与浏览器正常/输入边界验证通过，见 evidence/current-baseline-verification.json。",
-      "nextStep": "从 P01 开始，按依赖连续制作 P01–P10。"
+      "evidence": "详细状态、逐项源码提交与实际证据见 _task/prototype-worktree/ownword-v0.4.0/feature_list.json；旧版证据已删除。",
+      "nextStep": "继续 P03，按依赖完成剩余功能。"
     },
     {
       "id": "reference-1sat-v040-restore",
