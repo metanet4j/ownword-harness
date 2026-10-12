@@ -15,7 +15,7 @@
 ./verify.sh ts-modules   # 六模块真实完整基线，含原规模 manual，耗时较长
 python3 inventory-tests.py  # 重建上游测试文件及辅助向量清单
 node test-audit.test.cjs    # 检查器自身正常与反例测试
-node audit-api.cjs check    # 重新扫描源码并检查 Java API 映射；当前应报告未完成
+node audit-api.cjs check    # 重新扫描源码并检查完整 Java API 映射
 node audit-api.cjs batches  # 核对编码任务分配、依赖和嵌入 API 复核清单
 node api-hash-random-probe.cjs # 哈希/DRBG/随机宿主行为观察，非 Java 验收
 node api-values-probe.mjs  # 观察固定 TS 的数值/容器/模运算边界；输出不是测试报告
@@ -35,6 +35,6 @@ Maven 和 pnpm 分别使用 `./mvn.sh`、`./pnpm.sh`；这两个入口固定工�
 
 迁移单位是完整模块，范围复核确认 `primitives`、`compat`、`script`、`transaction`、`wallet`、`auth` 六模块，含 133 个测试文件、5,329 个注册用例（含 manual）。范围依据见[完整模块与 API 映射](doc/完整模块与API映射-20260920-122800.md)，完整性脚本和数据格式见[检查器说明](doc/测试完整性脚本-20260920-104440.md)。
 
-本轮正在修复 6 例输入重放缺口、25 例跨语言输入差异与 32 条未执行断言相关问题，随后按当前来源重新进行 TS/Java 单次全量验收。历史 `full-run-52-20260901` 只作为定位基线，不作为本轮完成结论。
+本轮修复及正式全量验收已完成：`full-run-repaired-20261012` 四阶段全 exit=0，133 原文件、5329 原用例、38092 输入样本、56744 实际断言逐项一致，`formalAcceptance=true`。六例重放缺口与 25 例输入差异已修复，缺口/输入替换/无序豁免均为 0；32 条原本不可达站点按用户确认保留证明，独立有效 DRBG 分支 3/3 通过。
 
-当前事项、检查结果及唯一下一步见 [progress.md](progress.md)；权威队列与最终门禁见 [feature_list.json](feature_list.json)，接手约束见 [session-handoff.md](session-handoff.md)。
+当前 Java 完整测试 5451/5451 通过，JAR 与 sources 已安装任务缓存。43 个事项全部 done，28 个实施事项的当前来源报告已逐项刷新。三项独立终审复核均通过，命令和明确口径见 [session-handoff.md](session-handoff.md)；当前证据及交付见 [progress.md](progress.md)。

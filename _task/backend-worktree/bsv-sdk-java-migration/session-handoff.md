@@ -1,31 +1,39 @@
 # 会话交接
 
-## 当前任务
+## 当前状态
 
-用户要求先修复 6 例输入重放缺口、25 例输入差异和 32 条未执行断言相关问题（32 条已按用户确认保留原样，并补独立有效 DRBG 分支验证），然后重新进行全量验收。当前事项为 `migration-input-replay`；本轮尚未通过验收。
+本轮修复与正式全量验收已完成。43 个事项全部 `done`，下一项为空；当前证据与完整覆盖见 [progress.md](progress.md)。
 
-当前状态与命令结果见 [progress.md](progress.md)，最终门禁状态见 [feature_list.json](feature_list.json)。
+正式来源：`.cache/evidence/full-run-repaired-20261012/full-run.json`，`status=passed`、`formalAcceptance=true`，133 原文件、5329 原用例、38092 输入、56744 实际断言；四阶段均 exit=0，耗时 5072.2 秒。
 
-## 来源与环境
+输入缺口及输入替换均为 0。32 条原样不可达站点按用户确认保留证明，另有独立有效 DRBG 分支 3/3 通过，不计入原例。
 
-- 工作目录：`/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration`。
-- SDK 分支：`feature/bsv-sdk-java-migration`；修复已提交，当前 HEAD 为 `6a5569a`，工作树干净。
-- 固定 TS：`f999e0c1aad9a7afd0cbadaaf23841d049af9d5a`，只读。
-- `./init.sh` 与宿主 `node audit-api.cjs batches` 已通过。
-- Maven/pnpm 使用任务入口；Maven 与采集统一经 `./lock.sh` 串行执行。
+## 只读复核
 
-## 必须保留的边界
+在 `/home/haodev/ownword/_task/backend-worktree/bsv-sdk-java-migration` 执行：
 
-原 TS 用例、原断言与原规模向量保持不变。补齐缺失输入必须来自 Java 实际消费的公开入口，不能复制 TS 实际输出或靠比较器放宽取得通过。
+```bash
+RUN_FOLDER=.cache/evidence/full-run-repaired-20261012
+python3 full-evidence-run.py verify "$RUN_FOLDER/full-run.json"
+python3 audit-tests.py check --catalog module-tests.json --mapping test-map.json \
+  --input-plan "$RUN_FOLDER/input-plan.json" --ts-inputs "$RUN_FOLDER/ts-inputs.jsonl" \
+  --java-inputs "$RUN_FOLDER/java-inputs.jsonl" --ts-assertions "$RUN_FOLDER/ts-assertions.jsonl" \
+  --java-assertions "$RUN_FOLDER/java-assertions.jsonl" --ts-run-manifest "$RUN_FOLDER/ts-run.json" \
+  --java-run-manifest "$RUN_FOLDER/java-run.json" --ts-report "$RUN_FOLDER/ts-jest.json" \
+  --java-report "$RUN_FOLDER/java-surefire.xml" --observations "$RUN_FOLDER/parity-results.json"
+node audit-api.cjs check
+```
 
-32 条未执行站点正在核对原测试控制流；真实不可达断言不能登记为已执行。跨语言实际输入须区分语义表示与真实重放差异，保留原始观测与独立比较表示。
+三个入口已独立复跑 exit=0，日志在 `.cache/evidence/repair-exceptions-20261012/final-*.log`。Node/git 子进程及完整运行在本机需宿主权限；Maven/pnpm 必须使用任务入口。
 
-## 验收执行
+## 已验证交付
 
-历史 `.cache/evidence/full-run-52-20260901/` 仅为基线。修复改变 SDK、工具或清单后必须重新生成证据。源码提交冻结后运行 `full-evidence-preflight.py`，随后 `full-evidence-run.py run` 单次串行完成 TS、Java、bundle 和 check；默认 90 分钟，只有真实同源超时来源才可采用 180 分钟重试。
+当前 Java 完整 `clean test` 5451/5451，失败/错误/跳过为 0。SDK 和 sources JAR 已安装 `.cache/maven/com/metanet4j/metanet4j-bsv-sdk/0.2.0/`；字节码 major 69、六模块和许可资源齐全，详见 `.cache/evidence/repair-exceptions-20261012/delivery.json`。
 
-当前常规 `clean test` 已 5451/5451 通过，HTTP 缺省运行与 Coordinator 通知顺序已修复，JAR 已安装任务缓存。清空 6 例缺口后额外发现并修复 4 条 expected 缺失，最新六例输入与 28 条原断言严格对照通过。全量阶段需无输入缺口、无输入替换豁免；32 条控制流不可达证明仍单列，独立 DRBG 回归不充抵原用例。
+SDK HEAD `6a5569a`，工作树干净；Java 来源摘要 `f12d567a889626d019ef9404b0650a1a11c7f70d22e88a118e6d30bc4fbbc6a0`，完整运行 ID `1958913b59f84b43a4712a4ae07c7bc1`。固定 TS 上游 `f999e0c1aad9a7afd0cbadaaf23841d049af9d5a`，全程只读；其他四工程未引入修改。
 
-## 下一步
+## 后续约束
 
-全量前检已就绪（5329 原例、38092 输入、56744 断言实例）。正式目录 `.cache/evidence/full-run-repaired-20261012/`；冻结工具后按 90 分钟上限运行单次双侧全量采集与终审，最后从通过的当前 clean test 产物安装 JAR 并核对全部交付。
+SDK、根 `.py/.cjs/.mjs/.sh`、清单、映射、输入计划或豁免登记的变化会使本轮证据不能直接沿用；重新采集必须使用新目录，默认 90 分钟，只有真实同源超时来源才允许 180 分钟重试。
+
+普通测试和广播/钱包场景保持离线，不调用真实资金或业务接口；只在 `metanet4j-bsv-sdk` 内继续开发。本轮没有待处理事项，未推送。

@@ -1,41 +1,41 @@
 # 当前进度
 
-## 当前目标
+## 当前结论
 
-先修复 6 例输入重放缺口、25 例跨语言输入差异及 32 条未执行断言相关问题，再以修复后的固定来源执行 TS/Java 单次全量验收。当前任务进行中，不能沿用历史通过声明作为本轮结论。
+本轮修复及全量验收已完成。43 个事项全部 `done`，`activeItem` 与 `nextItem` 已清空，权威状态见 [feature_list.json](feature_list.json)。
 
-权威队列见 [feature_list.json](feature_list.json)。当前事项为 `migration-input-replay`；结果采集、证据门禁、P0 收口、P1 联合验收及 P2 交付验收已重新打开。
+正式运行：`.cache/evidence/full-run-repaired-20261012/full-run.json`，2026-10-12 18:15:12 至 19:39:44（北京时间），5072.2 秒；`status=passed`、`formalAcceptance=true`，17 项产物哈希已固定。
 
-## 修复范围与当前证据
+| 阶段 | exit | 耗时 |
+| --- | --- | --- |
+| ts-capture | 0 | 3784.0 秒 |
+| java-capture | 0 | 1202.3 秒 |
+| bundle | 0 | 39.5 秒 |
+| check | 0 | 44.0 秒 |
 
-- 6 例 `AuthFetch.peer`：已补齐真实消费账本，6/6 原例通过；与 TS 逐项严格一致，缺口登记已清空。SDK 提交 `e296767`。
-- 25 例输入差异：已修复标签、原始拒绝值、Void/错误详情、插入顺序与真实正文状态。涉及的四个原文件共 46/46 用例输入严格一致，替换规则已撤掉。
-- 32 条未执行断言：用户已确认保留原测试及真实不可达证明，补独立有效 DRBG 分支。固定 TS 3 组 × 5 次生成的真实参考序列已保存；Java hex/数组/重复构造 3/3 独立回归通过，单独计数。
-- 常规测试 4 例失败及 Coordinator 竞态：非采集请求直通与通知时序已修复；HTTP 6/6、Coordinator 34/34 聚焦通过。完整常规 `clean test` 5451/5451 通过，失败/错误/跳过均为 0；JAR 已安装到任务缓存。
+## 完整覆盖
 
-## 已执行检查
+六个完整模块，133/133 原文件、5329/5329 原用例、38092 输入样本、56744 条实际断言逐项一致。输入重放缺口、跨语言输入替换、无序豁免、漏采和未比较均为 0。
 
-- `./init.sh`：exit=0；五仓分支/基线、固定 TS、清单与工具链隔离均通过。
-- `node audit-api.cjs batches`：沙箱内 Node 启动 git 被 EPERM 拦截；宿主执行 exit=0，28 个编码任务、133 源/API 文件、133 原测试文件、5329 用例、3576 声明分配完整。
-- 修复前五个 Java 仓库工作树干净；ownword 主仓的既有无关修改保持不动。
+Java 当前完整 `clean test` 5451/5451 通过，失败/错误/跳过均为 0；额外 Java 用例 122，包含独立分支和表示层回归，不充抵原用例。28 个实施事项已从本轮全量结果按冻结范围逐项复核，当前报告在 `.cache/evidence/repair-exceptions-20261012/items/`。
 
-- 聚焦累计 `clean test`：93/93，失败/错误/跳过均为 0；46 个原用例实际输入逐项严格一致，报告 `strict-input-repair-parity.json`。
-- 门禁自测：Node 43/43、bundle 88/88、语义 14/14、联合来源 24/24（含输入缺口/替换豁免拒绝反例）；不计 SDK 用例。
-- 无过滤 `node audit-api.cjs check`：3576 声明结构核对通过，实际行为由全量结果验收。
+无过滤 API 检查覆盖 3576 声明；`full-evidence-run.py verify`、`audit-tests.py check`、`audit-api.cjs check` 已独立重跑，均 exit=0。原始复核日志在 `.cache/evidence/repair-exceptions-20261012/final-*.log`。
 
-- 六例缺口登记清空后发现 4 条旧原断言 expected 缺失；已补齐固定原期望，并增加真实工厂参数观察，取消 expected 缺失豁免。聚焦 27/27 通过，6/6 输入及 28/28 原断言严格一致，报告 `peer-strict-input-assertion-parity.json`。
+## 修复结果与明确口径
 
-## 证据与执行约束
+- 六个 `AuthFetch.peer` 原用例已有真实消费账本；移除豁免后额外发现的四条 expected 缺失也已补齐，6 条输入及 28 条原断言严格一致。
+- 25 例输入差异已通过真实行为和独立表示修复：保留原始拒绝值、Void 契约、缺省/显式 null、插入顺序及正文消费状态；输入替换登记为空。
+- 32 条原测试控制流不可达站点按用户确认保留证明，单独计数，不当作实际执行。新增有效 DRBG 参考序列及 3 个独立 Java 回归均通过。
+- HTTP 非采集模式的四例失败和 Coordinator 通知竞态已修复；原断言未删改或放宽。
 
-修复证据目录：`.cache/evidence/repair-exceptions-20261012/`。历史全量来源为 `.cache/evidence/full-run-52-20260901/`，仅用于定位和回归输入。
+## 来源与交付
 
-仅修改 `metanet4j-bsv-sdk` 与任务根的验证工具/清单/文档；固定 TS 和其他四工程只读。Maven 使用 `./mvn.sh`，pnpm 使用 `./pnpm.sh`；目标工程测试、采集及共享清单写入经 `./lock.sh` 串行执行。
+SDK HEAD：`6a5569a`；功能提交为 `e296767`、`289ddac`、`6a5569a`，工作树干净。任务工具冻结提交为 `50d59b5`，SDK 与工具没有在正式运行期间改动。
 
-修复完成后提交并冻结 SDK、采集工具、映射与计划；运行期间不再修改来源。随后重新生成一轮双侧全量证据，执行完整 API 与测试门禁、JAR 交付核验。
+`fullRunId=1958913b59f84b43a4712a4ae07c7bc1`，`javaRevision=f12d567a889626d019ef9404b0650a1a11c7f70d22e88a118e6d30bc4fbbc6a0`。TS 固定提交 `f999e0c1aad9a7afd0cbadaaf23841d049af9d5a`；其他四工程只读。
 
-- 当前 SDK 修复已提交并冻结：`e296767`、`289ddac`、`6a5569a`，SDK 工作树干净。
-- 全量前检：5329/5329 结构计划、38092 输入、56744 断言实例，`readyForFullCapture=true`；历史局部当前来源验证为 0，必须以新单次全量运行证明。
+JAR 和 sources 已安装任务缓存。444 个类均为 Java 25 字节码（major 69），六模块及原许可资源齐全。交付报告：`.cache/evidence/repair-exceptions-20261012/delivery.json`；JAR SHA-256：`614cede42b550745c50bb3c318f886dcde0edcffac7d9d8ea028fd6b3736f64a`。
 
-## 唯一下一步
+## 复跑与下一步
 
-在 `.cache/evidence/full-run-repaired-20261012/` 以 90 分钟上限启动单次 TS/Java 全量采集、汇总和终审；通过后独立复核全部门禁并同步交付状态。
+[session-handoff.md](session-handoff.md) 提供本轮复核命令。修改 SDK、根脚本或冻结清单后必须重新采集；本轮无需继续实施事项。未推送远端。

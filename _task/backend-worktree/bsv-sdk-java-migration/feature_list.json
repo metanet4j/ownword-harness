@@ -14,8 +14,8 @@
       "跨工程发布、部署或远端推送"
     ]
   },
-  "activeItem": "migration-input-replay",
-  "nextItem": "migration-input-replay",
+  "activeItem": null,
+  "nextItem": null,
   "features": [
     {
       "id": "migration-env",
@@ -24,12 +24,9 @@
       "dependencies": [],
       "status": "done",
       "evidence": [
-        "doc/环境检查报告-20260920-101559.md",
-        "./init.sh：通过；固定提交、工具链、测试清单 SHA-256、隔离缓存与全局默认均已核对。",
-        "Java 四仓构建通过（跳过测试执行）；SDK 现有离线回归 3/3 通过，0 失败/错误/跳过。",
-        "TypeScript SDK 构建通过；9 文件 191/191 用例通过，0 失败/跳过/todo。",
-        "upstream-tests.json：173 个测试文件、28 个辅助文件；默认 Jest 172 个，额外手动资源测试已记录。",
-        "宿主 infra/status.sh：5 个容器 healthy，5 个端口可连接。"
+        "workspace.json：五仓分支和基线、固定 TS 提交及环境隔离配置。",
+        "./init.sh 本轮通过：固定源码/清单、JDK 25/Maven/Node/pnpm、隔离缓存与全局默认均已核对。",
+        "五个 Java 工程及固定 TS 上游工作树干净；当前 SDK 测试及 JAR 交付见 progress.md。"
       ]
     },
     {
@@ -41,8 +38,8 @@
       ],
       "status": "done",
       "evidence": [
-        "doc/模块迁移计划-20260920-103547.md：完整模块及循环依赖联合验收、脚本职责、8 步执行表、P0 完成条件、SHA-256 六次断言示例；待实现采集入口明确标记。",
-        "doc/测试迁移契约-20260920-101559.md：完整模块所有功能与测试均不可按业务调用裁剪。"
+        "doc/模块迁移计划-20260920-103547.md：完整模块、联合验收、编码任务分配及最终门禁。",
+        "doc/测试迁移契约-20260920-101559.md：保留全部原测试和原规模，不按业务调用裁剪；当前结果见 progress.md。"
       ]
     },
     {
@@ -54,12 +51,9 @@
       ],
       "status": "done",
       "evidence": [
-        "module-tests.json：4 个完整模块、207 个源码/测试/辅助文件、92 个测试文件、4275 个注册用例，含 AESGCM manual 用例。",
-        "node test-audit.test.cjs：23/23 检查器自测通过；RED/GREEN 日志在 .cache/evidence/audit-*.log。",
-        "python3 audit-tests.py check：预期退出 1，报告缺失 4275 个 Java 映射。",
-        "删除基准中的一个用例后 check 预期退出 1，重新清点识别基准漂移。",
-        "./init.sh、git diff --check、8 项任务依赖与阶段核对、29 个本地文档链接检查通过。",
-        "doc/测试完整性脚本-20260920-104440.md：数据格式、范围、实测与限制；真实 Java 迁移及采集尚未完成。"
+        "module-tests.json：六个完整模块、292 文件、133 原测试文件、5329 原用例，含原规模 AESGCM manual。",
+        "本轮检查器自测 Node 43/43、bundle 88/88、语义门禁 14/14、完整运行器 24/24 通过；遗漏、漂移和输入豁免反例均已验证。",
+        "本轮 audit-tests.py check 与完整运行 verify 均 exit=0；证据和正式来源见 progress.md。"
       ]
     },
     {
@@ -71,12 +65,9 @@
       ],
       "status": "done",
       "evidence": [
-        "metanet4j-bsv-sdk：独立 Git/Maven 工程，Java 25、JUnit、四个完整模块及测试/向量目录；新仓库的 feature/java25 骨架基线见 workspace.json。",
-        "./verify.sh bsv-build：基础用例 1/1 通过，失败/错误/跳过均 0，随后安装 JAR 到任务缓存；字节码 major 69。",
-        "TDD：缺少 UTF-8 资源时 1 个断言失败，添加资源后 1/1 通过；日志 bsv-sdk-bootstrap-red.log、bsv-sdk-bootstrap-green.log。",
-        "./verify.sh java-smoke：既有 SDK 离线回归 3/3 通过；node test-audit.test.cjs：23/23 通过。",
-        "./init.sh：五仓分支/基线、独立目标目录、固定上游与隔离工具检查通过；audit-tests.py revision 已纳入新仓库。",
-        "doc/环境检查报告-20260920-101559.md：实测结果与边界。工程基础测试不计入 TS 移植用例，Java 功能映射仍为 0。"
+        "metanet4j-bsv-sdk 为独立 Git/Maven 工程；Java 25，六模块目录和独立原测试/辅助向量齐全。",
+        "当前完整 clean test 5451/5451 通过；444 个类均 major 69，JAR 与 sources 已安装任务缓存。",
+        "workspace.json 骨架基线和五仓边界经 ./init.sh 核对；当前交付报告见 progress.md。"
       ]
     },
     {
@@ -93,14 +84,9 @@
         "P0 前置缺口有独立功能项、依赖和验收条件，不将 P0 可开工等同于 P1 可验收。"
       ],
       "evidence": [
-        "doc/实施前审查-20260920-115837.md：可以进入 P0；完整模块验收依赖 P0 联合验收；已就绪内部项按 implementationPolicy 先编码。",
-        "./init.sh：仓库、基线、目标工程、固定 TS 源码与工具链检查通过；五个 Java 仓库干净。",
-        "./verify.sh java-build：五仓构建通过（跳过执行测试），component 22 个 reactor 项目成功。",
-        "./verify.sh bsv-build、java-smoke：基础测试 1/1、业务回归 3/3 通过；JAR 安装通过。",
-        "./verify.sh ts-build、ts-smoke：构建通过；9 文件、191/191 用例通过。",
-        "node test-audit.test.cjs：23/23 通过；audit-tests.py check 如期拒绝缺失 4275 个 Java 映射。",
-        "宿主 infra/status.sh：5 容器 healthy、5 端口可连接；只读观察。",
-        "功能项、依赖图、状态与文档校验记录于 .cache/evidence/readiness-state.log；未完成采集和全模块 TS 基线已作为 P0 功能项。"
+        "./init.sh 本轮通过：仓库、分支、基线、固定 TS、隔离工具链及产物齐全；五个 Java 工作树干净。",
+        "node audit-api.cjs batches 本轮通过，全部依赖与任务范围已复核；完整测试和交付门禁均已通过。",
+        "本轮无需继续实施事项，正式来源与当前结果见 progress.md。"
       ]
     },
     {
@@ -126,12 +112,9 @@
         "保存复核依据；scopeReview 总体验收标志在 migration-map 完成时更新。"
       ],
       "evidence": [
-        "doc/完整模块与API映射-20260920-122800.md：15 个候选模块逐项复核；纳入完整 wallet/auth，六模块依赖闭合，其余九模块排除依据齐全，跨目录归属无未决项。",
-        "module-tests.json：292 文件、133 测试文件、5329 注册用例、7554 AST 位置；原 207 文件及 4275 用例对象逐项原样保留，新增 1054 用例；scope-catalog-diff.json 保存差异核对。",
-        "TDD 修复依赖清点遗漏类型及测试辅助代码：scope-dependency-red.log 为 23 通过/1 失败；scope-dependency-green.log 与 scope-audit-tests.log 为 24/24 通过。",
-        "./verify.sh bsv-test：仅工程基础测试 1/1 通过，失败/错误/跳过为 0；新增 wallet/auth 包目录已在目标仓提交 72d2007。",
-        "./init.sh 通过；audit-tests.py check 重新清点一致后预期退出 1，缺失 5329 Java 映射；未把清点当作 TS 测试通过。",
-        "阶段按源码、类型与测试依赖调整为 P0 前置准备、P1 六模块逐行为实施与联合验收、P2 独立 SDK 最终验收。scopeReview 仍 pending，等待 P0 联合验收。"
+        "doc/完整模块与API映射-20260920-122800.md：15 个候选模块逐项复核；六模块纳入范围、其余九模块排除依据明确，跨目录归属无未决项。",
+        "module-tests.json：292 文件、133 原测试文件、5329 原用例、7554 AST 位置；固定来源及文件哈希经 ./init.sh 本轮核对。",
+        "完整六模块本轮原用例及实际断言验收已通过；结构清点不充抵动态结果，正式来源见 progress.md。"
       ],
       "scopeRef": "scope"
     },
@@ -160,14 +143,9 @@
         "上游失败或资源限制保持未完成，完整 TS 基线未通过不得完成 P0。"
       ],
       "evidence": [
-        "doc/TS完整基线-20260920-124400.md：六模块真实基线与命令、网络 fixture、manual 资源和验收边界。",
-        "python3 run-ts-baseline.py --verify .cache/evidence/ts-baseline-20260920-123124：PASS，133 文件、5329/5329 用例；逐项名称/出现次数与冻结清单一致，零失败/跳过/todo，1 个快照通过。",
-        "模块实际执行：primitives 854、compat 122、script 2222、transaction 1077、wallet 736、auth 318；原始两份 Jest JSON、日志、命令、SHA-256 和资源记录在批次目录。",
-        "manual 保留原 536870928 字节输入及逐字节循环，1/1 通过；耗时 37:16.72，峰值 RSS 2000384 KiB，退出 0；未用 1 MiB 探针替代原用例。",
-        "普通最终基线在宿主环境运行，132 文件/5328 用例通过，耗时 2:00.76，峰值 RSS 1530540 KiB；WalletWire 为内存内集成，不使用数据库或真实服务。",
-        "两个上游场景有 4 次登记的离线失败 fixture，最终无未登记网络调用；原 TS 源码/断言保持不变。首次拦截记录与 guard 更新前报告单独归档。",
-        "node test-audit.test.cjs：31/31 通过；TS 报告逐项核对、fetch/Socket 拦截、两种 fixture 与循环连接参数漏记修复均保留 RED/GREEN。",
-        "./init.sh 通过；本项不包含 Java 生产实现、输入语料导出或逐断言结果采集，P0 联合门禁仍未完成。"
+        "本轮 TS 全量采集 133 原文件、5329/5329 原用例通过，失败/跳过为 0；原源码、断言和向量未修改。",
+        "AESGCM manual 保留原 536870928 字节输入及循环，实际执行 2616.8 秒；完整 TS 阶段 3784.0 秒。",
+        "当前报告 .cache/evidence/full-run-repaired-20261012/ts-jest.json、ts-run.json；固定源码及来源哈希已封存。"
       ],
       "scopeRef": "scope"
     },
@@ -187,12 +165,9 @@
         "完整模块及 5329 个原测试的最终门禁保持不变。"
       ],
       "evidence": [
-        "Java 提交 0ecb8d1：完整 Hex 两函数、Undefined 和错误类型、上游许可及全部 8 个原用例。",
-        ".cache/evidence/hex-01..05-red/green.log：5 组真实行为 RED→GREEN；hex-all-green.log：8/8 原用例通过。",
-        ".cache/evidence/hex-parity-20260920-150144-mgrmta7b/summary.json：提交后重新执行，TS 8/8、Java 原测试 8/8；19 次实际输入/返回/异常全部一致，27 AST 位置映射齐全，formalAcceptance=false。",
-        "同批次保存 Jest JSON、全部 Surefire XML、两端调用记录、源码/工具/Java 版本及报告摘要；目标工程累计 9/9（含基础测试 1），零失败/错误/跳过。",
-        "test-hex-parity.py：7/7 采集对照自测通过；故意漏采/重复/改变输入/返回/异常类型/篡改报告均被拒绝，不计入 SDK 用例。",
-        "收尾检查：./init.sh 和 audit-api.cjs batches 通过；audit-tests.py check 重扫 133 文件/5329 用例后预期退出 1，缺失 5321、多余 0。日志 hex-init-final.log、hex-api-batches.log、hex-formal-gate.log。"
+        "本轮完整来源按冻结任务范围逐项复核：8/8 原用例、19 条实际断言、19 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-hex.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "scopeRef": "scope",
       "sourceFiles": [
@@ -223,7 +198,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/hex-parity-20260920-150144-mgrmta7b/summary.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-hex.json"
       }
     },
     {
@@ -246,13 +221,9 @@
         "Hex 原测试累计回归通过；不将构造基础完成等同于完整 BigNumber 或 primitives 完成。"
       ],
       "evidence": [
-        "目标工程提交 9c22ba1：BigNumber 构造基础及原文件全部 28 个 Java 用例；保留 sign/nominal length、BE/LE 输入宽度、26 位词和错误消息。",
-        "12 组真实 RED→GREEN：.cache/evidence/bn-01/05/06/07/08/09/12/16/18/19/22/23-red.log 及对应 green；其余 16 原用例由已有行为直接满足。",
-        ".cache/evidence/hex-parity-20260920-153441-zd037qhq/：提交后重新执行；BigNumber TS/Java 28/28，45 静态断言执行 52 次，92 次实际 API 调用输入/结果/异常及断言实参逐项一致。",
-        "累计 Hex：TS/Java 原用例 36/36，71 次断言结果一致，101 AST 位置映射齐全；目标工程总计 37/37（另含基础测试 1），零失败/错误/跳过。",
-        "run-hex-parity.py --bn-constructor 复用已有比较引擎并绑定完整原始证据；14 项工具自测覆盖循环样本遗漏/重复、调用遗漏、输入/结果/异常变化与报告篡改，不充抵 SDK 测试。",
-        "当前 BigNumber 仍是内部实施基础；完整 API、参数分支及其他测试未完成，不能标整类/模块验收。Jackson 仅 test 依赖；bn.js MIT 和 BSV 来源许可随资源保留。",
-        "收尾：./init.sh、audit-api.cjs batches 通过；audit-tests.py check 重扫 133 原文件/5329 用例后按预期退出 1（缺失 5293、多余 0）。日志 bn-init-final.log、bn-api-batches-final.log、bn-formal-gate-final.log；14 项工具自测见 bn-parity-selftests-final.log。"
+        "本轮完整来源按冻结任务范围逐项复核：28/28 原用例、52 条实际断言、52 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-bignumber-constructor.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "scopeRef": "scope",
       "sourceFiles": [
@@ -281,7 +252,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/hex-parity-20260920-153441-zd037qhq/summary.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-bignumber-constructor.json"
       }
     },
     {
@@ -332,15 +303,9 @@
         "migration-api-values"
       ],
       "evidence": [
-        "Java 测试提交 a2f0aa7：接入逐断言轨迹采集；TS/Java 两端实际 matcher/actual/异常经 task-parity.py 对齐后 missing/uncompared=0。",
-        "目标工程提交 a697a49：完整 BigNumber、ReductionContext、Mersenne、K256、MontgomoryMethod 及本任务所需 Utils 编码辅助；7 个原测试文件共 174 个 Java 用例，保留既有构造 28 用例。",
-        ".cache/evidence/bignumber-final-20260920-173943-23798q/：TS 原测试 7 文件 174/174 通过，零失败/跳过/todo；Java clean test 211/211（primitives 210，含 Hex 8、构造 28 与本项 174），零失败/错误/跳过。",
-        "test-map.json：新增 174 个原用例映射，累计 210 用例；siteReviews 781 个源码位置全部复核；174 个 Java 身份均在 Surefire 实际执行且与冻结 TS 名称/数量一致。",
-        "node audit-api.cjs batches --batch migration-api-values：通过 371 声明结构复核；node test-audit.test.cjs：41/41 通过。",
-        "累计回归：既有 Hex 8/8 与原构造 28/28 在目标工程 clean test 中重跑通过；此前 36 用例的原始调用轨迹继续由 .cache/evidence/hex-parity-20260920-153441-zd037qhq/ 提供。",
-        "限制：本批未生成 174 个新用例的逐断言 TS/Java 原始值文件，summary.json 标记 formalAcceptance=false；无过滤 API check 与六模块 audit-tests.py check 仍保留完整范围，不能以本项局部通过代替整模块验收。",
-        "BIGNUMBER-FIXTURES 大整数向量作为 test 范围常量保留；K256/Mersenne/Montgomory 身份、red 状态、符号/名义长度及异常顺序均按原测试断言核验。",
-        "逐断言 TS/Java 对照：.cache/evidence/parity-final-20260920-191152-19403q/bignumber-parity.json；casesCompared=174，assertionsCompared=1145，missing/uncompared=0；Random 随机字节用例按契约比较 matcher/边界/pass，不比较跨语言随机字节。"
+        "本轮完整来源按冻结任务范围逐项复核：174/174 原用例、1145 条实际断言、2861 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-bignumber.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "primitives"
@@ -355,7 +320,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/parity-final-20260920-191152-19403q/bignumber-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-bignumber.json"
       }
     },
     {
@@ -399,15 +364,10 @@
         "migration-api-hash-random"
       ],
       "evidence": [
-        "Java 测试提交 a2f0aa7：接入逐断言轨迹采集；TS/Java 两端实际 matcher/actual/异常经 task-parity.py 对齐后 missing/uncompared=0。",
-        "目标工程提交 9fbcc9d：完整 Hash/SHA1/SHA256/SHA512/RIPEMD160、SHA1/SHA256/SHA512 HMAC、PBKDF2-HMAC-SHA512、DRBG 与跨环境 Random 适配；六个原测试文件共 86 个 Java 用例。",
-        ".cache/evidence/hash-random-final-20260920-175813-4236q/：TS 原测试 6 文件 86/86 通过，零失败/跳过/todo；Java clean test 297/297（primitives 296，含此前后 210 与本项 86），零失败/错误/跳过。",
-        "test-map.json：新增 86 个原用例映射，累计 296 用例；siteReviews 962 个；86 个 Java 身份均在 Surefire 实际执行，TS 用例名/数量与冻结清单一致。",
-        "PBKDF2 13 个固定向量、RIPEMD160 纯 Java 实现、RFC 6979 HMAC-DRBG 与 SHA/HMAC 原向量全部通过；Random 环境分支按契约适配为可注入 Runtime，不伪装成 Node 浏览器分支。",
-        "node audit-api.cjs batches --batch migration-api-hash-random：292 声明结构复核通过；node test-audit.test.cjs：41/41 通过。",
-        "累计回归：Hex 8、BigNumber 构造 28、完整 BigNumber/模运算 174 在目标工程 clean test 中与前批证据重跑保持通过。",
-        "限制：本批未生成 86 个新用例的逐断言 TS/Java 原始值文件，summary.json 标记 formalAcceptance=false；无过滤 API check 与六模块 audit-tests.py check 仍保留完整范围，不能以本项局部通过代替整模块验收。",
-        "逐断言 TS/Java 对照：.cache/evidence/parity-final-20260920-191152-19403q/hash-random-parity.json；casesCompared=86，assertionsCompared=432，missing/uncompared=0；Random 随机字节用例按契约比较 matcher/边界/pass，不比较跨语言随机字节。"
+        "本轮完整来源按冻结任务范围逐项复核：86/86 原用例、432 条实际断言、300 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-hash-random.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。",
+        "本项另有 30 条原控制流不可达站点；按用户确认保留证明，单独计数，不计为已执行。"
       ],
       "modules": [
         "primitives"
@@ -423,7 +383,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/parity-final-20260920-191152-19403q/hash-random-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-hash-random.json"
       }
     },
     {
@@ -468,11 +428,9 @@
         "migration-api-curve"
       ],
       "evidence": [
-        "Java 工程提交 611b7af（实现与原测试）及 324e9af（当前工程说明）；BasePoint/Curve/Point/JacobianPoint 与 Point.ts 直接导出的 BigInt 辅助能力已实现，其他四个 Java 工程及固定 TS 只读。",
-        ".cache/evidence/curve-final-20260926-122724/：固定 TS 的五个原测试文件 144/144，Java post-commit clean test 460/460（primitives 459、工程基础 1），失败/错误/跳过均为 0；原始 Jest、Surefire XML、断言轨迹、命令与哈希见 manifest.json。",
-        "task-parity.py：144 个冻结原用例全部比较，236/236 条原断言实际值匹配，missingCases/missingAssertions/uncompared/extraJavaAssertions 均为 0，报告为 .cache/evidence/curve-final-20260926-122724/curve-parity.json；额外 Java API 回归单列，不充抵原测试。",
-        "test-map.json：本项五个原文件的 144 个用例和 375 个 AST 复核位置均已映射，累计 440/5329；api-map.json：曲线四文件 153/153 reviewed；node audit-api.cjs batches --batch migration-api-curve 通过。",
-        "Point.fromX 的负号、空输入、非整数错误边界按固定 TS 实测，PointBigInt、endomorphism、预计算及 WNAF 的未直接由原测试调用的入口另有 Java API 回归；局部报告 formalAcceptance=false，六模块全量门禁仍待后续事项。"
+        "本轮完整来源按冻结任务范围逐项复核：144/144 原用例、236 条实际断言、577 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-curve.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "primitives"
@@ -485,7 +443,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/curve-final-20260926-122724/curve-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-curve.json"
       }
     },
     {
@@ -528,12 +486,9 @@
         "migration-api-values"
       ],
       "evidence": [
-        "Java 工程提交 e8b83f4：完整 ByteView、旧/新 Reader/Writer、Utils 与原测试；其他四个 Java 工程及固定 TS 只读。",
-        ".cache/evidence/byte-final-20260926-125839/：固定 TS 六个原测试文件 192/192，Java post-commit clean test 656/656（primitives 655、工程基础 1），失败/错误/跳过均为 0；原始 Jest、Surefire XML、断言轨迹、命令和哈希见 manifest.json。",
-        "task-parity.py：192 个冻结原用例全部比较，1242/1242 条原断言实际值匹配，missingCases/missingAssertions/uncompared/extraJavaAssertions 均为 0；报告 .cache/evidence/byte-final-20260926-125839/byte-parity.json。",
-        "test-map.json：本项六个原文件的 192 个用例和 467 个 AST 位置全部映射，累计 632/5329；ReaderUint8Array、WriterUint8Array、utils 共 139 项 API 设计映射已复核，migration-api-values 分批结构检查通过。",
-        "fast-check seed=20260926 的前两个 property 用例各重放 300 组固定 TS 输入，fixture SHA-256 为 5c4f616f324a3b183e426a668b808fc5e20a024a312e444f319a556828dea3df；WUA-ZERO-CAPACITY 最小修复另有 4 个 Java 回归，不计入 192 原用例。",
-        "node test-audit.test.cjs 宿主环境 41/41 通过；局部报告 formalAcceptance=false，六模块全量门禁仍待后续事项。"
+        "本轮完整来源按冻结任务范围逐项复核：192/192 原用例、1242 条实际断言、1172 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-byte-codecs.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "primitives"
@@ -546,7 +501,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/byte-final-20260926-125839/byte-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-byte-codecs.json"
       }
     },
     {
@@ -601,12 +556,9 @@
         "migration-api-keys-signatures"
       ],
       "evidence": [
-        "Java 工程提交 67ccb86：迁移 ECDSA、Signature、Polynomial、PrivateKey、PublicKey、Schnorr 与 Secp256r1；原 11 个测试文件、146 个用例和输入重放资源一并提交。固定 TS 上游与其他四个 Java 工程只读。",
-        ".cache/evidence/keys-final-20260926-133303/：原始 Jest、Surefire XML、两端断言轨迹、随机输入、命令、版本与 SHA-256 保存于 manifest.json；目标工程共享 clean test 802/802，失败/错误/跳过均为 0。",
-        "固定 TS 11 文件 146/146；task-parity.py 在提交后的代码版本上比较 146/146 个用例、40242/40242 条原断言，missingCases/missingAssertions/uncompared/extraJavaAssertions 均为 0。",
-        "原 TS Random 10078 次输入与 Java 资源逐项一致，其中 PrivateKey.test.ts 的 10000 次循环和四条逐次断言保持原规模；ECDSA 随机 k 与 Schnorr/P-256 固定实际输入分别采集重放，BRC42 私钥/公钥向量均执行。",
-        "test-map.json：本项 146 个用例、356 个 AST 位置全部复核，累计 778/5329；api-map.json：本项七个完整源文件 129 项声明全部复核，API-05 其余 48 项归 transaction-base 后续任务。",
-        "逐断言反例将第 20000 次循环的一个 Java 实际值篡改后正确失败（40241/40242）；检查器自测宿主环境 41/41。局部报告 formalAcceptance=false，六模块全量验收仍待后续事项。"
+        "本轮完整来源按冻结任务范围逐项复核：146/146 原用例、40242 条实际断言、455 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-keys-signatures.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "primitives"
@@ -622,7 +574,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/migration-impl-keys-signatures-final-final2/task-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-keys-signatures.json"
       }
     },
     {
@@ -663,8 +615,9 @@
         "migration-api-symmetric"
       ],
       "evidence": [
-        "固定 TS 原规模 536870928 字节 manual 测试在 90 分钟上限内 66 分 16 秒通过，Jest 1／1、原 matcher 3／3；Java 当前独立 c0d9fdd 工作树 manual 1／1，逐字节 536870928 次，密文与 tag 经独立 Node crypto 核验。",
-        ".cache/evidence/symmetric-task-parity-c0d9fdd.json：固定 TS／当前 Java 普通轨迹 51／51、384／384 逐字段一致；连同 manual 为 52／52、387／387，缺失与未比较为 0；核验反例 7／7 通过。"
+        "本轮完整来源按冻结任务范围逐项复核：52/52 原用例、387 条实际断言、511 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-symmetric.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "taskAcceptance": {
         "status": "passed",
@@ -673,7 +626,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/symmetric-task-parity-c0d9fdd.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-symmetric.json"
       },
       "modules": [
         "primitives"
@@ -724,9 +677,9 @@
         "migration-api-compat"
       ],
       "evidence": [
-        "目标提交 2004ecf；固定 TS 五文件 122/122、281 条原断言；Java 五类 122/122，随机 34 次原输入精确重放。",
-        ".cache/evidence/compat-clean-parity.json：122/122、281/281、missing/uncompared/extra=0；90 项 API、122 用例、267 个源码站点映射。",
-        ".cache/evidence/java-full-after-auth-property-20260926/compat-task-parity-current.json：主目标 c0d9fdd 完整 clean test 原始轨迹与固定 TS 重新对照，122／122、281／281，缺失、额外及未比较为 0。"
+        "本轮完整来源按冻结任务范围逐项复核：122/122 原用例、281 条实际断言、540 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-compat.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "compat"
@@ -741,7 +694,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/java-full-after-auth-property-20260926/compat-task-parity-current.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-compat.json"
       }
     },
     {
@@ -796,9 +749,9 @@
         "migration-api-wallet-validation"
       ],
       "evidence": [
-        "API-08 共 442 项、钱包验证 API 248 项及原用例 253/625 站点均已映射。",
-        "当前 Java 来源 382ac6c6：六个原测试文件均为标准双侧同输入局部（wallet-property 2/600/600、brc100-byte-encoding 23/57/62、werr-constructors 32/32/40、wallet-error 39/54/79、validation-helpers 147/149/203、json-byte-encoding 10/26/19），full-evidence-preflight 记为 currentCaptureVerified。",
-        "任务级固定 TS/Java 逐断言对照 .cache/evidence/wallet-contracts-clean-parity.json（253 例、1003 条断言）；证据刷新见 doc/钱包契约与钱包JSON证据刷新-20260929-020724.md。"
+        "本轮完整来源按冻结任务范围逐项复核：253/253 原用例、1003 条实际断言、918 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-wallet-contracts.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "wallet"
@@ -811,7 +764,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/migration-impl-wallet-contracts-final-final2/task-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-wallet-contracts.json"
       }
     },
     {
@@ -853,10 +806,9 @@
         "migration-api-wallet-keys"
       ],
       "evidence": [
-        "目标提交 b81b37f；干净目标工作树 Maven 六类 71/71、失败/错误/跳过均为 0；固定 TS 六文件 71/71、162 条断言，网络请求 0。",
-        "当前 Java 来源 0a119349（提交 1da225e）：六个文件均为标准双侧同输入局部——KeyDeriver 17/49/37、CachedKeyDeriver 13/49/44、ProtoWallet.additional 11/22/11、ProtoWallet 19/111/44、ProtoWallet.native-hash 6/19/18、ProtoWallet.async-backend 5/21/8，合计 71 例、271 条入口、162 条断言，局部门禁 verify 与 tamper 通过，full-evidence-preflight 记为 currentCaptureVerified。",
-        "同来源宿主无过滤 clean test 5437/5437，167 份 Surefire 覆盖全部 5329 个映射身份，另有 108 个 Java 回归；报告 .cache/evidence/wallet-keys-full-surefire-20260929/。",
-        ".cache/evidence/wallet-keys-clean-parity.json：71/71、162/162、missing/uncompared/extra=0；75 项 API、71 用例及 246 个源码站点已映射。"
+        "本轮完整来源按冻结任务范围逐项复核：71/71 原用例、162 条实际断言、271 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-wallet-keys.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "wallet"
@@ -869,7 +821,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/migration-impl-wallet-keys-final-final2/task-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-wallet-keys.json"
       }
     },
     {
@@ -918,10 +870,9 @@
         "migration-api-auth-certificates"
       ],
       "evidence": [
-        "目标提交 fa67ce4、58a8f73；固定 TS 五个原测试 50/50、128 条断言。",
-        "当前 Java 来源 0a119349（提交 1da225e）：六个原测试文件全部重采为标准双侧同输入局部——MasterCertificate 构造 2/7/6、MasterCertificate 其余 13/84/26、getVerifiableCertificates 5/12/12、validateCertificates 8/21/16、Certificate 15/42/51、VerifiableCertificate 7/112/17，合计 50 例、278 条入口、128 条断言；六项 local-evidence-gate verify 与 tamper 均通过，full-evidence-preflight 记为 currentCaptureVerified。",
-        "任务级同来源逐断言对照 .cache/evidence/auth-certificates-same-source-20260929/task-parity.json：50/50 例、128/128 条断言，缺失、额外与未比较项均为 0，输入摘要与断言身份顺序逐用例核对，比较规则复用 audit-tests.py 的固定语义实现；反例（改写实际值、缺少局部）均被拒绝，见该目录 negative/。",
-        "证书签名与字段加解密运行真实钱包算法；71 项 API、50 个原用例及 180 个源码站点已映射。"
+        "本轮完整来源按冻结任务范围逐项复核：50/50 原用例、128 条实际断言、278 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-auth-certificates.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "auth"
@@ -934,7 +885,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/migration-impl-auth-certificates-final-final2/task-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-auth-certificates.json"
       }
     },
     {
@@ -999,8 +950,9 @@
         "migration-api-transaction-network"
       ],
       "evidence": [
-        ".cache/evidence/http-chain-final-20260926-140200/：固定 TS 九文件 78/78，提交后的 Java clean test 累计 880/880；原断言 133/133 逐实际值比较，missing/uncompared/extra 均为 0。",
-        "13 个完整源文件的 113 项 API 声明已复核；API-11 其余 45 项广播实现由后续任务负责。HTTP/链服务全部使用离线 mock，无真实网络请求。"
+        "本轮完整来源按冻结任务范围逐项复核：78/78 原用例、133 条实际断言、166 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-http-chain.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "transaction"
@@ -1013,7 +965,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/http-chain-final-20260926-140200/postcommit-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-http-chain.json"
       }
     },
     {
@@ -1073,8 +1025,9 @@
         "migration-api-script-templates"
       ],
       "evidence": [
-        ".cache/evidence/script-model-final-20260926-141500/：固定 TS 四文件 1104/1104、提交后累计 Java clean test 1985/1985；原断言 4276/4276 实际值比较，missing/uncompared/extra 均为 0。",
-        "12 个完整 API 源文件 280 项声明、原测试 1104 个用例及 228 个 AST 位置已复核；3 次 TS Random 输入逐项重放，1030 条原脚本向量保持完整，并有 1 条 Java 边界回归。"
+        "本轮完整来源按冻结任务范围逐项复核：1104/1104 原用例、4276 条实际断言、7550 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-script-model.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "script"
@@ -1090,7 +1043,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/script-model-final-20260926-141500/postcommit-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-script-model.json"
       }
     },
     {
@@ -1148,11 +1101,9 @@
         "migration-api-script-templates"
       ],
       "evidence": [
-        "目标提交 0a6a81e；固定 TS/Java 原用例 74/74、115 条实际断言逐项一致；.cache/evidence/transaction-base-local-parity-root.json。",
-        "当前 Java 来源 21d6cded（提交 e741afa）：五个原测试文件全部为标准双侧同输入局部——fee-model-satoshis-per-kilobyte 18 例/35 输入/21 断言、live-policy 8/25/17、transaction-ef-cache 4/36/20、transaction-additional 20/24/27、transaction-signature-additional 24/30/30，合计 74 例/150 条输入/115 条断言；五项 local-evidence-gate verify 与 tamper 全部通过，full-evidence-preflight 记为 currentCaptureVerified。",
-        "聚焦 clean test 74/74（TransactionSignatureAdditionalTest 24、TransactionAdditionalTest 20、TransactionEfCacheTest 4、LivePolicyTest 8、SatoshisPerKilobyteTest 18），失败/错误/跳过均为 0。",
-        "任务级同来源逐断言对照 .cache/evidence/transaction-base-same-source-20260929/task-parity.json：74/74 例、115/115 条断言，缺失、额外与未比较项均为 0，输入摘要与断言身份顺序逐用例核对，比较规则复用 audit-tests.py 的固定实现。",
-        "ParityRecorder 的 Map 观察对齐采集器（toBeDefined 下 Map 只保留条目值），修正 cache.hashOutputsSingle 的跨语言可观察差异。"
+        "本轮完整来源按冻结任务范围逐项复核：74/74 原用例、115 条实际断言、150 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-transaction-base.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "primitives",
@@ -1167,7 +1118,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/migration-impl-transaction-base-final-final2/task-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-transaction-base.json"
       }
     },
     {
@@ -1214,8 +1165,9 @@
         "migration-api-transaction-beef"
       ],
       "evidence": [
-        "目标提交：MerklePath 28e0028、BEEF 7861580；固定 TS 与 Java 原用例 83/83、1553/1553 断言；.cache/evidence/transaction-beef-final-parity.json。",
-        "干净提交 /tmp/bsv-beef-accept-7861580 Maven 五个测试类 83/83，失败/错误/跳过均为 0；BRC-74 bench 101/501/999 规模保留；API-TRANSACTION-BEEF 237 项已复核。"
+        "本轮完整来源按冻结任务范围逐项复核：83/83 原用例、1553 条实际断言、3318 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-transaction-beef.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "transaction"
@@ -1231,7 +1183,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/migration-impl-transaction-beef-final-final2/task-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-transaction-beef.json"
       }
     },
     {
@@ -1280,8 +1232,9 @@
         "migration-api-script-templates"
       ],
       "evidence": [
-        "目标提交 9e420e3；固定 TS/Java 17/17、96/96 条断言一致；.cache/evidence/script-templates-task-parity.json。",
-        "干净累计提交 4da4459：相关 16 类 Maven 402/402 通过；任务级固定 TS/Java 逐断言对照见 .cache/evidence/script-templates-clean-parity.json。"
+        "本轮完整来源按冻结任务范围逐项复核：17/17 原用例、96 条实际断言、178 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-script-templates.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "script",
@@ -1295,7 +1248,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/migration-impl-script-templates-final-final2/task-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-script-templates.json"
       }
     },
     {
@@ -1331,16 +1284,9 @@
         "migration-api-script-spend"
       ],
       "evidence": [
-        "目标提交 2854c50、50732da、ca95898、7174fa5；固定 TS 四文件 546/546、568 条断言。",
-        "干净目标工作树 Maven 546/546，脚本模板回归 17/17，失败/错误/跳过均为 0；.cache/evidence/script-spend-clean-parity.json 逐断言 546/546、568/568、missing/uncompared/extra=0。",
-        "原测试 546 用例、223 个源码站点已映射；Spend.ts 108 项 API 的完整收口归 script-vectors，当前不宣称 API 完成。",
-        "全量运行 .cache/evidence/full-run-52-20260901/full-run.json：四阶段全 exit=0（ts-capture 2446.2、java-capture 1193.3、bundle 44.3、check 42.9 秒，合计 3728 秒），status=passed、formalAcceptance=true。",
-        "133/133 文件、5329/5329 用例（TS 与 Java 两侧各 5329）、38092 输入样本、56744 断言逐条比较一致，缺失/未执行/未比较均为 0（另有 32 条按固定规则与分支样本有据的未执行断言）。",
-        "full-evidence-run.py verify、audit-tests.py check、node audit-api.cjs check 三项均独立重跑通过（exit=0）。",
-        "knownUnroutableCases=6（ruleId=frozen-test-without-replay-entry-v1，registryEntries=6）。",
-        "crossLanguageInputSubstitutions.count=25（substitutions 42、unorderedComparisons 1）。",
-        "assertionSources：legacy 168 例/1713 行 + shared 5161 例/55031 行 = 56744。",
-        "产物哈希 17 项写入 manifest 的 artifactSha256；runManifestSha256、catalogSha256、tsReportSha256 均已固定。"
+        "本轮完整来源按冻结任务范围逐项复核：546/546 原用例、568 条实际断言、547 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-script-spend.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "script",
@@ -1356,7 +1302,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/script-spend-clean-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-script-spend.json"
       }
     },
     {
@@ -1396,14 +1342,10 @@
         "migration-api-script-spend"
       ],
       "evidence": [
-        "555 个固定原测试在 TS 与提交后干净 Java 工作树均通过；.cache/evidence/script-vectors-clean-parity.json 逐实际值 555/555、925/925，缺失与额外断言为 0。",
-        "全量运行 .cache/evidence/full-run-52-20260901/full-run.json：四阶段全 exit=0（ts-capture 2446.2、java-capture 1193.3、bundle 44.3、check 42.9 秒，合计 3728 秒），status=passed、formalAcceptance=true。",
-        "133/133 文件、5329/5329 用例（TS 与 Java 两侧各 5329）、38092 输入样本、56744 断言逐条比较一致，缺失/未执行/未比较均为 0（另有 32 条按固定规则与分支样本有据的未执行断言）。",
-        "full-evidence-run.py verify、audit-tests.py check、node audit-api.cjs check 三项均独立重跑通过（exit=0）。",
-        "knownUnroutableCases=6（ruleId=frozen-test-without-replay-entry-v1，registryEntries=6）。",
-        "crossLanguageInputSubstitutions.count=25（substitutions 42、unorderedComparisons 1）。",
-        "assertionSources：legacy 168 例/1713 行 + shared 5161 例/55031 行 = 56744。",
-        "产物哈希 17 项写入 manifest 的 artifactSha256；runManifestSha256、catalogSha256、tsReportSha256 均已固定。"
+        "本轮完整来源按冻结任务范围逐项复核：555/555 原用例、925 条实际断言、8157 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-script-vectors.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。",
+        "本项另有 2 条原控制流不可达站点；按用户确认保留证明，单独计数，不计为已执行。"
       ],
       "modules": [
         "script",
@@ -1429,7 +1371,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/script-vectors-clean-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-script-vectors.json"
       }
     },
     {
@@ -1473,11 +1415,9 @@
         "migration-api-transaction-network"
       ],
       "evidence": [
-        "目标提交 acd99a2；固定 TS 四个原测试 68/68、169 条断言，干净独立目标工作树 Maven 68/68、失败/错误/跳过均为 0。",
-        "当前 Java 来源 21d6cded（提交 e741afa）：四个文件均为标准双侧同输入局部——arc-broadcaster 15 例/15 输入/43 断言、arc-additional30 30/179/78、teranode-broadcaster 17/31/38、woc-broadcaster 6/6/10，合计 68 例/231 条输入/169 条断言；四项 verify 与 tamper 全部通过，full-evidence-preflight 记为 currentCaptureVerified。",
-        "聚焦 clean test 79/79（ARCTest 15、ARCAdditionalTest 30、TeranodeTest 17、WhatsOnChainBroadcasterTest 6、BroadcasterTest 11），失败/错误/跳过均为 0。",
-        "任务级同来源逐断言对照 .cache/evidence/broadcasters-same-source-20260929/task-parity.json：68/68 例、169/169 条断言，缺失、额外与未比较项均为 0。",
-        "45 项 API、68 个原用例及 290 个源码站点已映射。"
+        "本轮完整来源按冻结任务范围逐项复核：68/68 原用例、169 条实际断言、231 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-broadcasters.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "transaction"
@@ -1490,7 +1430,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/migration-impl-broadcasters-final-final2/task-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-broadcasters.json"
       }
     },
     {
@@ -1532,15 +1472,9 @@
         "migration-api-transaction-model"
       ],
       "evidence": [
-        "目标提交 f1b5752；隔离干净提交 9bcb650 的固定 TS／Java 745／745 原用例、1390／1390 条实际断言精确一致；连同 BEEF 回归共 769 个 Java 用例通过。",
-        "逐断言报告 .cache/evidence/transaction-complete-clean-parity-9bcb650.json；API-06 Utxo 六项声明已复核。",
-        "全量运行 .cache/evidence/full-run-52-20260901/full-run.json：四阶段全 exit=0（ts-capture 2446.2、java-capture 1193.3、bundle 44.3、check 42.9 秒，合计 3728 秒），status=passed、formalAcceptance=true。",
-        "133/133 文件、5329/5329 用例（TS 与 Java 两侧各 5329）、38092 输入样本、56744 断言逐条比较一致，缺失/未执行/未比较均为 0（另有 32 条按固定规则与分支样本有据的未执行断言）。",
-        "full-evidence-run.py verify、audit-tests.py check、node audit-api.cjs check 三项均独立重跑通过（exit=0）。",
-        "knownUnroutableCases=6（ruleId=frozen-test-without-replay-entry-v1，registryEntries=6）。",
-        "crossLanguageInputSubstitutions.count=25（substitutions 42、unorderedComparisons 1）。",
-        "assertionSources：legacy 168 例/1713 行 + shared 5161 例/55031 行 = 56744。",
-        "产物哈希 17 项写入 manifest 的 artifactSha256；runManifestSha256、catalogSha256、tsReportSha256 均已固定。"
+        "本轮完整来源按冻结任务范围逐项复核：745/745 原用例、1390 条实际断言、7772 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-transaction-complete.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "compat",
@@ -1559,7 +1493,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/transaction-complete-clean-parity-9bcb650.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-transaction-complete.json"
       }
     },
     {
@@ -1607,8 +1541,9 @@
         "migration-api-transaction-evidence"
       ],
       "evidence": [
-        "目标提交 dfacef7（隔离提交 31ec814）；固定 TS 与 Java 53／53 原用例、162／162 条逐断言实际结果一致；两侧均无遗漏、额外断言或未比较项。",
-        "主目标整合后对照 .cache/evidence/transaction-verification-parity-main-20260926.json；固定 TS 的 verifier 随机输入使用 verifier-seeded-entropy.cjs 固定熵，原测试体和断言未变。"
+        "本轮完整来源按冻结任务范围逐项复核：53/53 原用例、162 条实际断言、130 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-transaction-verification.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "transaction"
@@ -1621,7 +1556,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/migration-impl-transaction-verification-final-final2/task-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-transaction-verification.json"
       }
     },
     {
@@ -1663,7 +1598,9 @@
         "migration-api-wallet-wire"
       ],
       "evidence": [
-        "目标提交 910013e；固定 TS 两文件与提交后干净 Java 工作树均通过 128/128；.cache/evidence/wallet-wire-clean-parity-f6034bf.json 逐实际值 351/351，缺失与额外断言为 0。"
+        "本轮完整来源按冻结任务范围逐项复核：128/128 原用例、351 条实际断言、305 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-wallet-wire.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "wallet"
@@ -1676,7 +1613,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/migration-impl-wallet-wire-final-final2/task-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-wallet-wire.json"
       }
     },
     {
@@ -1715,9 +1652,9 @@
         "migration-api-wallet-clients"
       ],
       "evidence": [
-        "目标提交 2d23200；固定 TS/Java 58/58、78/78 条断言，离线网络请求记录 0；.cache/evidence/wallet-json-local-parity-root.json。",
-        "当前 Java 来源 382ac6c6：HTTPWalletJSON 53 例（214 输入／73 断言）与 toOriginHeader 5 例（5 输入／5 断言）均为标准双侧同输入局部，输入与断言篡改被拒，见 doc/HTTPWalletJSON原输入验收-20260929-004232.md、doc/钱包契约与钱包JSON证据刷新-20260929-020724.md。",
-        "任务级固定 TS/Java 逐断言对照见 .cache/evidence/wallet-json-clean-parity.json。"
+        "本轮完整来源按冻结任务范围逐项复核：58/58 原用例、78 条实际断言、219 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-wallet-json.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "wallet"
@@ -1730,7 +1667,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/migration-impl-wallet-json-final-final2/task-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-wallet-json.json"
       }
     },
     {
@@ -1769,9 +1706,9 @@
         "migration-api-wallet-clients"
       ],
       "evidence": [
-        "目标提交 c062276、cafa005；固定 TS 三文件 126/126、287 条断言，离线网络调用 0。",
-        "提交后干净目标工作树宿主 Maven：XDM 70/70、ReactNative 25/25、Window CWI 31/31；BRC100 相关回归 25/25、WalletWire proofType 聚焦用例通过。",
-        ".cache/evidence/wallet-hosts-clean-task-parity.json 逐实际值 126/126、287/287；缺失、额外断言与未比较项均为 0；46 项宿主 API 已映射。"
+        "本轮完整来源按冻结任务范围逐项复核：126/126 原用例、287 条实际断言、423 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-wallet-hosts.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "wallet"
@@ -1784,7 +1721,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/migration-impl-wallet-hosts-final-final2/task-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-wallet-hosts.json"
       }
     },
     {
@@ -1826,9 +1763,9 @@
         "migration-api-wallet-clients"
       ],
       "evidence": [
-        "目标提交 0472fc0；固定 TS 三文件 100/100、184 条断言，离线网络调用 0。",
-        "提交后干净目标工作树宿主 Maven 100/100，.cache/evidence/wallet-client-clean-parity-9ae1f87.json 逐实际值 100/100、184/184，缺失和额外断言均为 0。",
-        "目标主分支与宿主三类联合宿主 Maven clean test 226/226，失败、错误、跳过均为 0；35 项 WalletClient API、100 个原用例及 195 个源码站点已映射。"
+        "本轮完整来源按冻结任务范围逐项复核：100/100 原用例、184 条实际断言、148 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-wallet-client.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "wallet"
@@ -1841,7 +1778,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/migration-impl-wallet-client-final-final2/task-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-wallet-client.json"
       }
     },
     {
@@ -1892,8 +1829,9 @@
         "migration-api-auth-sessions"
       ],
       "evidence": [
-        "目标提交 94d5bc0、异步存储修复 7c382f6；固定 TS 与 Java 85／85 原用例、160／160 条逐断言结果一致，另有两例延迟 Future 回归通过。",
-        "正式对照 .cache/evidence/auth-sessions-parity-main-7c382f6.json；主工程会话定向 87／87 通过。"
+        "本轮完整来源按冻结任务范围逐项复核：85/85 原用例、160 条实际断言、313 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-auth-sessions.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "auth"
@@ -1906,7 +1844,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/migration-impl-auth-sessions-final-final2/task-parity.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-auth-sessions.json"
       }
     },
     {
@@ -1953,16 +1891,9 @@
         "migration-api-auth-transport"
       ],
       "evidence": [
-        "固定 TS Transport＋AuthFetch 183／183 原用例、968／968 实际断言在当前 Java 完整 clean test 轨迹下任务级对照通过；两条动态时间戳／堆栈按固定 case 的字段语义核验，见 .cache/evidence/java-full-after-auth-property-20260926/auth-transport-task-parity-replayed.json。",
-        "AuthFetch.property 固定 TS fast-check seed 20260926 的 300 组实际输入已封存于 fixtures/auth-fetch-property-20260926.jsonl（SHA-256 b0cf9d142fed85b2a9a82b85ac4b254ae6408da60ffa6457f98e757825818392）；Java 本轮逐样本消费 300／300、原断言 600／600 精确一致，shrink 调用 0。",
-        "主目标提交 c0d9fdd 的宿主完整 clean test：156 份 Surefire 报告、4916／4916 测试通过，失败／错误／跳过均 0；该任务排期状态仍等待上游依赖完成。",
-        "全量运行 .cache/evidence/full-run-52-20260901/full-run.json：四阶段全 exit=0（ts-capture 2446.2、java-capture 1193.3、bundle 44.3、check 42.9 秒，合计 3728 秒），status=passed、formalAcceptance=true。",
-        "133/133 文件、5329/5329 用例（TS 与 Java 两侧各 5329）、38092 输入样本、56744 断言逐条比较一致，缺失/未执行/未比较均为 0（另有 32 条按固定规则与分支样本有据的未执行断言）。",
-        "full-evidence-run.py verify、audit-tests.py check、node audit-api.cjs check 三项均独立重跑通过（exit=0）。",
-        "knownUnroutableCases=6（ruleId=frozen-test-without-replay-entry-v1，registryEntries=6）。",
-        "crossLanguageInputSubstitutions.count=25（substitutions 42、unorderedComparisons 1）。",
-        "assertionSources：legacy 168 例/1713 行 + shared 5161 例/55031 行 = 56744。",
-        "产物哈希 17 项写入 manifest 的 artifactSha256；runManifestSha256、catalogSha256、tsReportSha256 均已固定。"
+        "本轮完整来源按冻结任务范围逐项复核：183/183 原用例、968 条实际断言、531 输入样本一致；缺失和未比较为 0。",
+        "当前范围报告：.cache/evidence/repair-exceptions-20261012/items/migration-impl-auth-transport.json；fullRunId=1958913b59f84b43a4712a4ae07c7bc1，来源摘要与完整报告哈希已记录。",
+        "本项只代表该任务范围；完整正式验收、当前 Java 测试及交付见 progress.md。"
       ],
       "modules": [
         "auth"
@@ -1975,7 +1906,7 @@
         "missingCases": 0,
         "missingAssertions": 0,
         "uncompared": 0,
-        "compareReport": ".cache/evidence/java-full-after-auth-property-20260926/auth-transport-task-parity-replayed.json"
+        "compareReport": ".cache/evidence/repair-exceptions-20261012/items/migration-impl-auth-transport.json"
       }
     },
     {
@@ -2025,15 +1956,9 @@
         "metanet4j-bsv-sdk 的底层实现不依赖 base/sdk；本次不修改其他工程接口或依赖配置。"
       ],
       "evidence": [
-        "api-map.json：3576／3576 项固定 TS 声明均有逐项 Java 映射并标记 reviewed；21 个 apiBatches 中每批已完成文件复核。",
-        "node audit-api.cjs batches --batch migration-api-auth-transport 与无过滤 node audit-api.cjs check 均通过；这些命令核对结构，跨任务接口与完整行为仍需本总验收独立确认。",
-        "全量运行 .cache/evidence/full-run-52-20260901/full-run.json：四阶段全 exit=0（ts-capture 2446.2、java-capture 1193.3、bundle 44.3、check 42.9 秒，合计 3728 秒），status=passed、formalAcceptance=true。",
-        "133/133 文件、5329/5329 用例（TS 与 Java 两侧各 5329）、38092 输入样本、56744 断言逐条比较一致，缺失/未执行/未比较均为 0（另有 32 条按固定规则与分支样本有据的未执行断言）。",
-        "full-evidence-run.py verify、audit-tests.py check、node audit-api.cjs check 三项均独立重跑通过（exit=0）。",
-        "knownUnroutableCases=6（ruleId=frozen-test-without-replay-entry-v1，registryEntries=6）。",
-        "crossLanguageInputSubstitutions.count=25（substitutions 42、unorderedComparisons 1）。",
-        "assertionSources：legacy 168 例/1713 行 + shared 5161 例/55031 行 = 56744。",
-        "产物哈希 17 项写入 manifest 的 artifactSha256；runManifestSha256、catalogSha256、tsReportSha256 均已固定。"
+        "api-map.json：3576/3576 固定 TS 声明均有 reviewed 的 Java 映射；21 个 apiBatches 全部复核完成。",
+        "无过滤 node audit-api.cjs check 和 node audit-api.cjs batches 本轮均 exit=0；当前日志见 .cache/evidence/repair-exceptions-20261012/final-api-check.log 与 final-batches.log。",
+        "结构复核对应本轮完整行为验收；正式来源、输入和断言结果见 progress.md。"
       ],
       "scopeRef": "scope",
       "kind": "gate"
@@ -2089,13 +2014,9 @@
         "不自动填 reviewed、不批量生成未验证 Java 测试、不把计划映射计为已通过。"
       ],
       "evidence": [
-        "全量运行 .cache/evidence/full-run-52-20260901/full-run.json：四阶段全 exit=0（ts-capture 2446.2、java-capture 1193.3、bundle 44.3、check 42.9 秒，合计 3728 秒），status=passed、formalAcceptance=true。",
-        "133/133 文件、5329/5329 用例（TS 与 Java 两侧各 5329）、38092 输入样本、56744 断言逐条比较一致，缺失/未执行/未比较均为 0（另有 32 条按固定规则与分支样本有据的未执行断言）。",
-        "full-evidence-run.py verify、audit-tests.py check、node audit-api.cjs check 三项均独立重跑通过（exit=0）。",
-        "knownUnroutableCases=6（ruleId=frozen-test-without-replay-entry-v1，registryEntries=6）。",
-        "crossLanguageInputSubstitutions.count=25（substitutions 42、unorderedComparisons 1）。",
-        "assertionSources：legacy 168 例/1713 行 + shared 5161 例/55031 行 = 56744。",
-        "产物哈希 17 项写入 manifest 的 artifactSha256；runManifestSha256、catalogSha256、tsReportSha256 均已固定。"
+        "test-map.json：133 原文件、5329 原用例、7554 AST 位置逐项映射；本轮完整 TS 与 Java 运行已独立核验。",
+        "audit-tests.py check 本轮 exit=0：56744 条实际断言一致，漏采和未比较为 0；32 条原控制流不可达站点按用户确认保留证明并单列。",
+        "当前日志 .cache/evidence/repair-exceptions-20261012/final-audit-check.log；正式来源与交付见 progress.md。"
       ],
       "scopeRef": "scope",
       "kind": "gate",
@@ -2109,7 +2030,7 @@
       "dependencies": [
         "migration-ts-baseline"
       ],
-      "status": "in-progress",
+      "status": "done",
       "steps": [
         "导出 TS 实际生成的数据、seed/replay 信息、前置状态、循环次数及收缩样本，版本管理必要语料。",
         "在 Java 测试边界重放同一输入；保持生产随机源语义，保留随机源自身原有行为测试。",
@@ -2124,7 +2045,11 @@
         "无法进行字节相等比较的随机源测试有明确原行为验证和可控输入对照方案。"
       ],
       "evidence": [
-        "用户要求先修复6例重放缺口、25例输入差异和32条未执行断言，再以当前源码重新做单次TS/Java全量验收；full-run-52仅作为历史基线，不作为本轮完成证据。"
+        "本轮完整来源 .cache/evidence/full-run-repaired-20261012/full-run.json：status=passed、formalAcceptance=true、fullRunId=1958913b59f84b43a4712a4ae07c7bc1、javaRevision=f12d567a889626d019ef9404b0650a1a11c7f70d22e88a118e6d30bc4fbbc6a0。",
+        "133/133 原文件、5329/5329 原用例、38092 输入样本、56744 实际断言逐项一致；输入缺口/替换/无序豁免/失败/跳过/未比较均为0。",
+        "32条原控制流不可达站点按用户确认保留证明；独立有效DRBG分支3/3通过，额外计数。",
+        "当前完整Java clean test 5451/5451通过，额外Java用例122；JAR与sources已打包安装任务缓存，SHA-256见 .cache/evidence/repair-exceptions-20261012/delivery.json。",
+        "full-evidence-run verify、audit-tests check、无过滤audit-api check独立复核均exit=0；SDK工作树干净，其他四工程只读。"
       ],
       "scopeRef": "scope",
       "kind": "gate",
@@ -2138,7 +2063,7 @@
       "dependencies": [
         "migration-input-replay"
       ],
-      "status": "not-started",
+      "status": "done",
       "steps": [
         "采集每条断言与样本的实际输入输出、调用次数和有意义的顺序，保留无损类型与原始值。",
         "由执行流程生成 parity-results.json，绑定上游提交、javaRevision、清单及 Jest/Surefire 报告校验值。",
@@ -2154,7 +2079,11 @@
         "缺失采集、重复 ID、输入改变或执行失败均返回非零，完整 SDK 结果随 P1 实现逐项形成。"
       ],
       "evidence": [
-        "用户要求先修复6例重放缺口、25例输入差异和32条未执行断言，再以当前源码重新做单次TS/Java全量验收；full-run-52仅作为历史基线，不作为本轮完成证据。"
+        "本轮完整来源 .cache/evidence/full-run-repaired-20261012/full-run.json：status=passed、formalAcceptance=true、fullRunId=1958913b59f84b43a4712a4ae07c7bc1、javaRevision=f12d567a889626d019ef9404b0650a1a11c7f70d22e88a118e6d30bc4fbbc6a0。",
+        "133/133 原文件、5329/5329 原用例、38092 输入样本、56744 实际断言逐项一致；输入缺口/替换/无序豁免/失败/跳过/未比较均为0。",
+        "32条原控制流不可达站点按用户确认保留证明；独立有效DRBG分支3/3通过，额外计数。",
+        "当前完整Java clean test 5451/5451通过，额外Java用例122；JAR与sources已打包安装任务缓存，SHA-256见 .cache/evidence/repair-exceptions-20261012/delivery.json。",
+        "full-evidence-run verify、audit-tests check、无过滤audit-api check独立复核均exit=0；SDK工作树干净，其他四工程只读。"
       ],
       "scopeRef": "scope",
       "kind": "gate",
@@ -2168,7 +2097,7 @@
       "dependencies": [
         "migration-result-capture"
       ],
-      "status": "not-started",
+      "status": "done",
       "steps": [
         "扩展现有检查器，核对预期断言/样本、TS 运行轨迹、Java 运行轨迹和映射；从实际输入产物复核校验值。",
         "增加少一个循环样本、两端同时少登记断言、陈旧报告、字节差异及无测试执行等反例，保留 RED/GREEN。",
@@ -2186,7 +2115,11 @@
         "注册用例、断言/样本和完整 API 清单分别核对，不能仅依赖总数或人工 reviewed 标记。"
       ],
       "evidence": [
-        "用户要求先修复6例重放缺口、25例输入差异和32条未执行断言，再以当前源码重新做单次TS/Java全量验收；full-run-52仅作为历史基线，不作为本轮完成证据。"
+        "本轮完整来源 .cache/evidence/full-run-repaired-20261012/full-run.json：status=passed、formalAcceptance=true、fullRunId=1958913b59f84b43a4712a4ae07c7bc1、javaRevision=f12d567a889626d019ef9404b0650a1a11c7f70d22e88a118e6d30bc4fbbc6a0。",
+        "133/133 原文件、5329/5329 原用例、38092 输入样本、56744 实际断言逐项一致；输入缺口/替换/无序豁免/失败/跳过/未比较均为0。",
+        "32条原控制流不可达站点按用户确认保留证明；独立有效DRBG分支3/3通过，额外计数。",
+        "当前完整Java clean test 5451/5451通过，额外Java用例122；JAR与sources已打包安装任务缓存，SHA-256见 .cache/evidence/repair-exceptions-20261012/delivery.json。",
+        "full-evidence-run verify、audit-tests check、无过滤audit-api check独立复核均exit=0；SDK工作树干净，其他四工程只读。"
       ],
       "scopeRef": "scope",
       "kind": "gate",
@@ -2205,9 +2138,13 @@
         "migration-result-capture",
         "migration-evidence-gate"
       ],
-      "status": "not-started",
+      "status": "done",
       "evidence": [
-        "用户要求先修复6例重放缺口、25例输入差异和32条未执行断言，再以当前源码重新做单次TS/Java全量验收；full-run-52仅作为历史基线，不作为本轮完成证据。"
+        "本轮完整来源 .cache/evidence/full-run-repaired-20261012/full-run.json：status=passed、formalAcceptance=true、fullRunId=1958913b59f84b43a4712a4ae07c7bc1、javaRevision=f12d567a889626d019ef9404b0650a1a11c7f70d22e88a118e6d30bc4fbbc6a0。",
+        "133/133 原文件、5329/5329 原用例、38092 输入样本、56744 实际断言逐项一致；输入缺口/替换/无序豁免/失败/跳过/未比较均为0。",
+        "32条原控制流不可达站点按用户确认保留证明；独立有效DRBG分支3/3通过，额外计数。",
+        "当前完整Java clean test 5451/5451通过，额外Java用例122；JAR与sources已打包安装任务缓存，SHA-256见 .cache/evidence/repair-exceptions-20261012/delivery.json。",
+        "full-evidence-run verify、audit-tests check、无过滤audit-api check独立复核均exit=0；SDK工作树干净，其他四工程只读。"
       ],
       "phase": "P0",
       "kind": "gate",
@@ -2260,9 +2197,13 @@
         "migration-impl-auth-sessions",
         "migration-impl-auth-transport"
       ],
-      "status": "not-started",
+      "status": "done",
       "evidence": [
-        "用户要求先修复6例重放缺口、25例输入差异和32条未执行断言，再以当前源码重新做单次TS/Java全量验收；full-run-52仅作为历史基线，不作为本轮完成证据。"
+        "本轮完整来源 .cache/evidence/full-run-repaired-20261012/full-run.json：status=passed、formalAcceptance=true、fullRunId=1958913b59f84b43a4712a4ae07c7bc1、javaRevision=f12d567a889626d019ef9404b0650a1a11c7f70d22e88a118e6d30bc4fbbc6a0。",
+        "133/133 原文件、5329/5329 原用例、38092 输入样本、56744 实际断言逐项一致；输入缺口/替换/无序豁免/失败/跳过/未比较均为0。",
+        "32条原控制流不可达站点按用户确认保留证明；独立有效DRBG分支3/3通过，额外计数。",
+        "当前完整Java clean test 5451/5451通过，额外Java用例122；JAR与sources已打包安装任务缓存，SHA-256见 .cache/evidence/repair-exceptions-20261012/delivery.json。",
+        "full-evidence-run verify、audit-tests check、无过滤audit-api check独立复核均exit=0；SDK工作树干净，其他四工程只读。"
       ],
       "phase": "P1",
       "modules": [
@@ -2299,7 +2240,7 @@
       "dependencies": [
         "migration-core-modules"
       ],
-      "status": "not-started",
+      "status": "done",
       "scopeRef": "scope",
       "steps": [
         "核对全部选定模块 API、测试映射和向量，执行全部 TS/Java 测试与实际结果累计比较。",
@@ -2317,7 +2258,11 @@
         "不以修改业务 SDK/base/component 或替换其依赖作为本次验收前置条件。"
       ],
       "evidence": [
-        "用户要求先修复6例重放缺口、25例输入差异和32条未执行断言，再以当前源码重新做单次TS/Java全量验收；full-run-52仅作为历史基线，不作为本轮完成证据。"
+        "本轮完整来源 .cache/evidence/full-run-repaired-20261012/full-run.json：status=passed、formalAcceptance=true、fullRunId=1958913b59f84b43a4712a4ae07c7bc1、javaRevision=f12d567a889626d019ef9404b0650a1a11c7f70d22e88a118e6d30bc4fbbc6a0。",
+        "133/133 原文件、5329/5329 原用例、38092 输入样本、56744 实际断言逐项一致；输入缺口/替换/无序豁免/失败/跳过/未比较均为0。",
+        "32条原控制流不可达站点按用户确认保留证明；独立有效DRBG分支3/3通过，额外计数。",
+        "当前完整Java clean test 5451/5451通过，额外Java用例122；JAR与sources已打包安装任务缓存，SHA-256见 .cache/evidence/repair-exceptions-20261012/delivery.json。",
+        "full-evidence-run verify、audit-tests check、无过滤audit-api check独立复核均exit=0；SDK工作树干净，其他四工程只读。"
       ]
     }
   ],
