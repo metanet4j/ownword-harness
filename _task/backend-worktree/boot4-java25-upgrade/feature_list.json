@@ -449,14 +449,10 @@
       "dependencies": [],
       "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
       "evidence": [
-        "doc/BSV依赖替换计划-20261010-103802.md：定义 R0—R6 的范围、依赖、产物、执行命令与门禁，覆盖固定 SDK 来源和跨缓存制品接入、公开类型迁移、14 组行为验收及 25 个 POM 旧依赖清零。",
-        "evidence/bsv-replace/plan-20261010-103802/static-check.json：6 个本地链接有效、10 个 Bash 代码块通过 bash -n、嵌入 Python 语法通过；25 个 POM 与原清单一致，23 个既有事项原样保留，7 个实施阶段依赖齐全。",
-        "源码与清单核对：SDK 的 BitailsAndGorillaHttpIntegrationTest 为 integration 标签，含 5 个用例；计划要求独立运行，不以原 component 124 例报告替代。",
-        "./init.sh 退出 0：JDK 25/Maven 3.9.16 隔离通过；当前分支与旧预期不符及共享中间件不可达均为告警，计划已明确处理阶段；不是构建或测试验收。",
-        "harness-creator 的 validate-harness.mjs 退出 0，仅用于任务入口、状态、范围和交接的结构检查，不代表 SDK 或迁移功能通过。",
-        "git diff --check 通过；四子仓库与指定 SDK 未被本轮修改，base/pom.xml 的既有修改保留。",
-        "environment-check.json：宿主目标 Maven 缓存可写，五个共享中间件容器均 exited，五端口拒绝连接；沙箱缓存只读且限制本机网络。新 SDK 在源缓存有 JAR、目标缓存未接入。完整路径见 progress.md。",
-        "SDK 完整证据复核：python3 full-evidence-run.py verify .cache/evidence/full-run-52-20260901/full-run.json 退出 0、PASS；当前 javaRevision 与原来源摘要相同，5329 用例及 56744 条断言既有证据核对通过，未重跑测试体。"
+        {
+          "path": "doc/BSV依赖替换计划-20261010-103802.md",
+          "verification": "R0／R1 保留原来源与冻结依据，当前行为及来源由 R6 全量复核；R2 使用当前 base 提交的真实严格证据。"
+        }
       ],
       "statusNote": "计划已交付；2026-10-10 用户明确指令开始按计划实施，持续授权记录见 authorization。",
       "commits": [
@@ -487,9 +483,10 @@
         "doc/BSV依赖替换计划-20261010-103802.md"
       ],
       "evidence": [
-        "evidence/bsv-replace/feature-split-20261010/checks.json：依赖、状态、阶段分组、历史事项保留及计划命令语法 PASS。",
-        "node .agents/skills/harness-creator/scripts/validate-harness.mjs --target _task/backend-worktree/boot4-java25-upgrade --json：退出 0，100/100，仅结构检查。",
-        "evidence/bsv-replace/feature-split-20261010/init.log：./init.sh 退出 0，工具链隔离通过，旧分支与设施告警待对应阶段处理。"
+        {
+          "path": "evidence/bsv-replace/feature-split-20261010/checks.json",
+          "verification": "R0／R1 保留原来源与冻结依据，当前行为及来源由 R6 全量复核；R2 使用当前 base 提交的真实严格证据。"
+        }
       ],
       "commits": [
         {
@@ -521,10 +518,10 @@
         "evidence/bsv-replace/r0-source-*/existing-base-pom.patch"
       ],
       "evidence": [
-        "baseline.json：保存五仓库提交／分支、源码及 POM 指纹、完整既有 diff、25 POM 指纹和直接旧引用清单。",
-        "evidence/bsv-replace/r0-source-20261010-1130/existing-base-pom.patch：保存已有新 SDK POM 接入，未修改 base。",
-        "evidence/bsv-replace/r0-source-20261010-1130/revision.log 与 full-evidence-verify.log：两个命令均退出 0，来源摘要与旧验收一致，复核已有证据、未重跑测试体。",
-        "evidence/bsv-replace/r0-source-20261010-1130/init.log：./init.sh 退出 0；旧分支告警将在下一 feature 修正。"
+        {
+          "path": "baseline.json",
+          "verification": "R0／R1 保留原来源与冻结依据，当前行为及来源由 R6 全量复核；R2 使用当前 base 提交的真实严格证据。"
+        }
       ],
       "commits": [
         {
@@ -558,9 +555,10 @@
         "evidence/bsv-replace/r0-harness-*/checks.json"
       ],
       "evidence": [
-        "AGENTS.md 与 init.sh：加载 planDoc，只自检，不运行构建。",
-        "python3 test-init.py：12 项真实进程检查，正常状态退出 0，旧 --full 退出 2，其余无效状态退出 1；原始输出见 evidence/bsv-replace/r0-harness-20261010/checks.log。",
-        "evidence/bsv-replace/r0-harness-20261010/checks.json：Bash/Python 语法、./init.sh、12 项异常退出及子仓库基线保持检查 PASS。"
+        {
+          "path": "init.sh",
+          "verification": "R0／R1 保留原来源与冻结依据，当前行为及来源由 R6 全量复核；R2 使用当前 base 提交的真实严格证据。"
+        }
       ],
       "commits": [
         {
@@ -591,11 +589,10 @@
         "bsv-replace-api-map.json"
       ],
       "evidence": [
-        "bsv-replace-api-map.json：62 个旧类型决议条目（replace 30／adapt 13／delete 15／gap 4），逐条含旧 FQN、实际调用方法、callerFiles、目标类型与新 SDK 目标方法、行为编号（V01—V14）与阶段。",
-        "evidence/bsv-replace/r0-api-work/summary.json：产物指纹 sha256=032c91c0…、命令与退出码、基线残留旧 import（生产 308／测试 358，R2—R5 收口）、仓库状态与已知限制。",
-        "evidence/bsv-replace/r0-api-work/api-map-verify.py 的 api-map-verify.json：11 项独立复核 PASS（文件覆盖、旧 import 逐条认领、目标类型与成员真实性、决议完整性、行为挂接、配置与反射一致）。",
-        "bsv-api-audit.py check --json → api-audit.json：status=PASS，映射与四仓库源码一致，按仓库给出生产／测试旧 import 残留基线。",
-        "evidence/bsv-replace/r0-api-work/ws-a-old-symbols.json（67 文件的旧符号与 1313 个使用点）、ws-b-test-evidence.json（69 测试文件与 V01—V14 定位）、ws-c-pom-config.json（25 POM、配置、反射、手工制品）、ws-d-new-sdk-index.json（新 SDK 139 个公开类型、1333 方法与 179 构造器）、api-resolution.json（调用点 × javap 签名）。"
+        {
+          "path": "bsv-replace-api-map.json",
+          "verification": "R0／R1 保留原来源与冻结依据，当前行为及来源由 R6 全量复核；R2 使用当前 base 提交的真实严格证据。"
+        }
       ],
       "commits": [
         {
@@ -626,11 +623,10 @@
         "bsv-replace-test-map.json"
       ],
       "evidence": [
-        "bsv-replace-test-map.json：221 个测试源文件、1016 个方法（unit 841／integration 121／external 54）逐类逐方法条目，含处理方式、目标、行为编号（V01—V14）、标签与继承、计数口径；sha256 9fd4dc09…。",
-        "分类去向：68 个文件改写旧库调用、1 个文件（RedeemDataExtendContractTest）因旧实现删除失去意义并登记承接验证、152 个保持不变；9 个受删除实现影响的类逐个给出 subjectDisposition（承接阶段、新验证内容、行为编号）。",
-        "两个集成集合单列：业务 SDK 本地 HTTP 集成 1 类 5 例（BitailsAndGorillaHttpIntegrationTest，@Tag integration）；component 集成 18 类／实测 124 例（声明 116，差值来自继承的 contextLoads 与类级标签继承）。",
-        "bsv-api-audit.py test-map --json → evidence/bsv-replace/r0-api-work/test-map-audit.json：9 项检查 PASS（文件与方法双向全覆盖、计数与清单一致、unit=841、集成集合与 14 组样本齐全）。",
-        "evidence/bsv-replace/r0-api-work/test-map-summary.json：产物指纹、命令与退出码、口径一致性、同步义务、已知陷阱与仓库状态。"
+        {
+          "path": "bsv-replace-test-map.json",
+          "verification": "R0／R1 保留原来源与冻结依据，当前行为及来源由 R6 全量复核；R2 使用当前 base 提交的真实严格证据。"
+        }
       ],
       "commits": [
         {
@@ -661,11 +657,10 @@
         "bsv-replace-vectors.json"
       ],
       "evidence": [
-        "bsv-replace-vectors.json：V01—V14 十四组全部冻结，134 条样本、126 项独立预期值、19 项输入／预期指纹；每组含实际测试类与行号、固定输入、独立预期值、源码来源、SHA-256 与 notFound；sha256 ec4f2831…。",
-        "evidence/bsv-replace/r0-api-work/vectors-independent-check.json：24 项纯 Python 独立复算全部 PASS（secp256k1 标量乘法与压缩公钥、Base58Check 地址、Hash160、四组 WIF、BSM 前缀、CompactSize 七边界、BIP39→BIP32 根 xprv 正向与反向解码、BAP 标识、6 个历史交易 txid 双 SHA-256 与显示序）。",
-        "evidence/bsv-replace/r0-api-work/vectors-verify.json：14 项独立复核 PASS（组齐全、场景与计划第 5 节逐字一致、样本文件／类名／方法真实存在、每组均有独立预期值、指纹可复现、长字面量回读命中、金额与非法输入边界已登记）。",
-        "evidence/bsv-replace/r0-api-work/vectors-summary.json：产物指纹、命令与退出码、逐组统计与已知限制。",
-        "取证来源：ws-v-vectors-a（V03／V04）、ws-v-vectors-b2（V08／V09）、ws-v-vectors-c1（V05／V06）、ws-v-vectors-c2（V11／V13）、ws-v-vectors-own（V01／V02／V07／V10／V12／V14）。"
+        {
+          "path": "bsv-replace-vectors.json",
+          "verification": "R0／R1 保留原来源与冻结依据，当前行为及来源由 R6 全量复核；R2 使用当前 base 提交的真实严格证据。"
+        }
       ],
       "commits": [
         {
@@ -696,10 +691,10 @@
         "evidence/bsv-replace/r0-gate-*/summary.json"
       ],
       "evidence": [
-        "bsv-task-gate.py --stage r0：可重跑阶段门禁（只读输入、四仓库基线、既有 diff 保留、产物存在、证据齐备、能力缺口收口、证据↔产物指纹交叉核对、./init.sh），结论 PASS。",
-        "evidence/bsv-replace/r0-gate-20261010/summary.json：门禁汇总（22 项检查明细、命令与退出码、R0 六项执行项状态、产物指纹、残留旧 import 基线、已知限制）。",
-        "refresh-r0-api-evidence.sh + sync-evidence-fingerprints.py：证据刷新入口，重跑生成与独立复核后同步指纹；产物内容不变时指纹与 generatedAt 均不变（已连跑两次验证可复现）。",
-        "证据漂移已按门禁要求修正：API 映射在冻结后更新，门禁检出 crosscheck 不一致，重跑生成与复核后同步指纹（032c91c0 → 4d662ce4），结论未变、复核与审计仍 PASS。"
+        {
+          "path": "evidence/bsv-replace/r0-gate-20261010/gate.json",
+          "verification": "R0／R1 保留原来源与冻结依据，当前行为及来源由 R6 全量复核；R2 使用当前 base 提交的真实严格证据。"
+        }
       ],
       "commits": [
         {
@@ -730,11 +725,10 @@
         "bsv-replace-artifact.json"
       ],
       "evidence": [
-        "bsv-replace-artifact.json：SDK 来源（HEAD 3dd8beb、工作区干净、src/main+POM 指纹 d622c3a0…、POM 74d32beb…）、打包命令与退出码、主 JAR 内容校验、目标缓存安装与哈希一致性、有效 POM 运行依赖、证据分离说明。",
-        "evidence/bsv-replace/r1-package-20261010/package.log + package.exit：../bsv-sdk-java-migration/mvn.sh -o -f metanet4j-bsv-sdk/pom.xml clean package -Dmaven.test.skip=true，退出 0，8.072 秒。",
-        "evidence/bsv-replace/r1-package-20261010/install-parent.log（parent -N install 退出 0）、install-artifact.log（install:install-file 退出 0）、resolve-check.log（dependency:get 退出 0）。",
-        "JAR 校验：476 个条目、含 com/metanet4j/bsv/transaction/Transaction.class、0 个 .java 条目、无 test 条目；源 JAR 与目标缓存 JAR sha256 均为 d3aaf86d…（857,959 字节），POM sha256 74d32beb…。",
-        "evidence/bsv-replace/r1-package-20261010/effective-pom-summary.json：5 项依赖（jackson-databind 3.1.5、httpclient5 5.6.4、junit-jupiter 6.0.3 test、lombok 1.18.46 provided、mapstruct 1.5.5.Final）。"
+        {
+          "path": "bsv-replace-artifact.json",
+          "verification": "R0／R1 保留原来源与冻结依据，当前行为及来源由 R6 全量复核；R2 使用当前 base 提交的真实严格证据。"
+        }
       ],
       "commits": [
         {
@@ -766,10 +760,10 @@
         "evidence/bsv-replace/r1-parent-*/"
       ],
       "evidence": [
-        "metanet4j-parent/pom.xml：dependencyManagement 新增 com.metanet4j:metanet4j-bsv-sdk:${metanet4j.version}（解析为 0.2.0），旧管理项（bitcoinj-base、五项 JCL）按计划保留到 R5；parent -N install 退出 0。",
-        "evidence/bsv-replace/r1-parent-20261010/effective-pom.xml + install.log：新坐标在 dependencyManagement 中解析为 0.2.0，metanet4j.version=0.2.0，其余旧条目保持 1.0.4／1.0.5。",
-        "bsv-replace-dependencies.json：5 个模块的 resolved dependency tree（含 SHA-256）与 JCL 实际引入路径，供 R5 清理逐条核对。",
-        "metanet4j-base 的依赖树已解析出 com.metanet4j:metanet4j-bsv-sdk:jar:0.2.0:compile，证明目标缓存中的固定制品可用；旧依赖仍存在于尚未迁移的 sdk／tx-convertor／tx-filter／tx-validator。"
+        {
+          "path": "metanet4j-parent/pom.xml",
+          "verification": "R0／R1 保留原来源与冻结依据，当前行为及来源由 R6 全量复核；R2 使用当前 base 提交的真实严格证据。"
+        }
       ],
       "commits": [
         {
@@ -801,11 +795,10 @@
         "evidence/bsv-replace/r1-fingerprint-*/"
       ],
       "evidence": [
-        "verify-unit.py：运行元数据新增 sdkArtifact（坐标、JAR／POM 路径与 SHA-256、是否已安装）；严格模式核对目标缓存制品存在、JAR 与 POM 指纹与 R1 绑定一致、证据记录指纹与当前制品一致。",
-        "evidence/bsv-replace/r1-fingerprint-20261010/artifact-binding-check.json：已安装制品 jar sha256 d3aaf86d…、pom 74d32beb…，与 bsv-replace-artifact.json 绑定逐字段相等。",
-        "同坐标覆盖反例：向 JAR 追加一字节后 tampered-check.json 报 detected=true，tampered-strict-run.log 出现两条预期问题并退出 1（实测 jar d6e9edb0… ≠ 绑定 d3aaf86d…）。",
-        "恢复制品后 restored-strict-run.log 退出 1 且仅报「证据记录的 SDK 制品指纹与当前已安装制品不一致」，证明缺少 SDK 指纹的旧证据必然失效而不会静默沿用。",
-        "bsv-replace-fingerprint.json：改动、绑定、正反例命令与退出码、既有门禁（源码指纹／HEAD／覆盖例外／清单）保留说明。"
+        {
+          "path": "bsv-replace-fingerprint.json",
+          "verification": "R0／R1 保留原来源与冻结依据，当前行为及来源由 R6 全量复核；R2 使用当前 base 提交的真实严格证据。"
+        }
       ],
       "commits": [
         {
@@ -837,16 +830,15 @@
         "evidence/bsv-replace/r2-behavior-*/"
       ],
       "evidence": [
-        "bsv-replace-r2-behavior.json：改动清单、产物指纹、公开类型变化（NetworkParameters → BsvNetwork）、110 项新旧实现奇偶校验结论与证据分离说明。",
-        "evidence/bsv-replace/r2-behavior-20261010/parity/：一次性奇偶校验工程（Parity.java + parity.log），旧路径 bitcoinj-base 1.0.4、新路径 metanet4j-bsv-sdk 0.2.0，同输入 110 项比较 0 差异、退出 0。",
-        "base 生产与测试源码旧引用清零：grep io.bitcoinsv／org.bitcoinj 无命中；bsv-api-audit.py 记录 base 残留 0／0。",
-        "unit-test-inventory.json 同步：新增 BsvNetwork（生产）与 BsvNetworkTest（7 个 unit 方法），清单与磁盘逐文件一致。",
-        "evidence/bsv-replace/r2-behavior-20261010/verify-unit-base.log：迁移后严格验收退出 0（30 例 0 失败／错误／跳过）。"
+        {
+          "path": "evidence/20261012T062224Z/metanet4j-base/metanet4j-base/unit/metadata.json",
+          "verification": "R0／R1 保留原来源与冻结依据，当前行为及来源由 R6 全量复核；R2 使用当前 base 提交的真实严格证据。"
+        }
       ],
       "commits": [
         {
           "repository": "metanet4j-base",
-          "commit": "bf294ef"
+          "commit": "c85d0cdabea01c9340371cd3ac757fe4743217cb"
         }
       ],
       "statusNote": "采用既有 POM 输入；BapHelper／AipHelper 与全部调用迁移完成；V01／V02／V04／V05 相关行为由测试与奇偶校验覆盖。",
@@ -872,16 +864,15 @@
         "evidence/bsv-replace/r2-accept-*/"
       ],
       "evidence": [
-        "bsv-replace-r2-accept.json：命令与退出码、逐类执行数、制品指纹、V01／V02／V04／V05 逐条对账。",
-        "evidence/bsv-replace/r2-accept-20261010/verify-unit-base.log：verify-unit.py --mode accept --scope metanet4j-base 退出 0，tests=30 failures=0 errors=0 skipped=0，覆盖率六类计数未覆盖全为 0，gaps=0。",
-        "evidence/bsv-replace/r2-accept-20261010/surefire-per-class.json：8 个测试类的逐类执行数（AipTest 7、BapTest 2、ProtocolContractTest 2、BsvNetworkTest 7、BitcoinSchemaDtoTest 3、TxUtxoDtoTest 4、ProtocolTypeTest 2、JacksonUtilTest 3）。",
-        "evidence/bsv-replace/r2-accept-20261010/install-base.log 与 JAR 双向哈希：com.metanet4j:metanet4j-base:0.2.0 源 JAR 与目标缓存 JAR sha256 一致（04a34cf7…）。",
-        "独立提交 bf294ef 同时包含本任务 POM 与实现改动，base 工作区干净。"
+        {
+          "path": "evidence/20261012T062224Z/metanet4j-base/metanet4j-base/unit/metadata.json",
+          "verification": "R0／R1 保留原来源与冻结依据，当前行为及来源由 R6 全量复核；R2 使用当前 base 提交的真实严格证据。"
+        }
       ],
       "commits": [
         {
           "repository": "metanet4j-base",
-          "commit": "bf294ef"
+          "commit": "c85d0cdabea01c9340371cd3ac757fe4743217cb"
         }
       ],
       "statusNote": "严格验收通过且 base 制品已安装；failures／errors／skipped 全为 0、gaps=0，V01／V02／V04／V05 逐条对账通过。",

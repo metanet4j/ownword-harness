@@ -522,7 +522,7 @@
     },
     {
       "repository": "metanet4j-sdk",
-      "head": "aad4a540a7b9e8063b7343034531e852b47ddff8",
+      "head": "70010f2f5dace76646379ed8ed63722a9c169c00",
       "modules": [
         {
           "path": ".",
@@ -2206,6 +2206,11 @@
                   "returnType": "void",
                   "line": 92,
                   "classification": "unit"
+                },
+                {
+                  "name": "directSigningRejectsInvalidAmountsBeforeInstallingATemplate",
+                  "classification": "unit",
+                  "reason": "当前计划要求的真实边界回归"
                 },
                 {
                   "name": "emptyBatchesNeedNoSignatures",

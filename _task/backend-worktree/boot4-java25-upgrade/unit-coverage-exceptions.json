@@ -390,7 +390,7 @@
         },
         {
           "class": "com/metanet4j/sdk/signers/OrdinalsTransactionSigner",
-          "reason": "satoshisOf 的 null 兜底被更早的类型校验遮蔽（§109，E11）；批量签名外层 catch 实测不可达（§93/§272）",
+          "reason": "保留原批量签名外层 catch 的精确登记；删除静默金额兜底，直接签名统一使用 BsvAmount 验证，未新增例外。",
           "missed": [
             {
               "method": "signInputs",
@@ -398,13 +398,6 @@
               "lineMissed": 3,
               "methodMissed": 0,
               "branchMissed": 0
-            },
-            {
-              "method": "satoshisOf",
-              "line": 133,
-              "lineMissed": 0,
-              "methodMissed": 0,
-              "branchMissed": 1
             }
           ]
         }

@@ -2791,6 +2791,19 @@
             }
           ],
           "reason": "本地批量跳过缺失输出并签好其余输入，执行真实脚本验证。"
+        },
+        {
+          "baselineClass": null,
+          "baselineMethod": null,
+          "disposition": "migrated",
+          "targets": [
+            {
+              "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
+              "method": "directSigningRejectsInvalidAmountsBeforeInstallingATemplate",
+              "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java"
+            }
+          ],
+          "reason": "直接签名拒绝缺失、非数值、负数、小数、非有限和超出精确范围金额；安全边界不被误拒。"
         }
       ],
       "samples": [

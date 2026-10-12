@@ -52,6 +52,18 @@ def verify(data):
         require(path.is_file() and sha(path) == tree['sha256'] and sha(pom) == tree['pomSha256'] and tree['exitCode'] == 0, '依赖树来源不符：' + tree['pom'])
         if path.is_file(): require(not any(p in path.read_text() for p in ['io.bitcoinsv', 'org.bitcoinj']), '依赖树残留旧库：' + tree['pom'])
     require(dependencies['oldReferences']['count'] == 0 and dependencies['attachedJars'] == 0, '旧引用或手工 JAR 未清零')
+    artifacts = json.loads((ROOT/'bsv-replace-final-artifacts.json').read_text())
+    modules = {m['artifactId']: (r['repository'], m) for r in repos for m in r['modules']}
+    require(artifacts.get('status') == 'PASS' and artifacts.get('repositoryHeads') == heads, '制品来源或验收不符')
+    require(len(artifacts['artifacts']) == 25 and {a['module'] for a in artifacts['artifacts']} == set(modules), '已验证制品不齐全')
+    for artifact in artifacts['artifacts']:
+        repository, module = modules[artifact['module']]
+        pom = ROOT/repository/module['path']/'pom.xml'
+        require(sha(Path(artifact['pom'])) == artifact['pomSha256'] == sha(pom), '已安装 POM 与当前源码不符：' + artifact['module'])
+        require(artifact['sourceFingerprint'] == unit.fingerprint(repository, module), '制品源码已漂移：' + artifact['module'])
+        if artifact['packaging'] != 'pom':
+            jar = Path(artifact['jar'])
+            require(sha(jar) == artifact['jarSha256'] == sha(pom.parent/'target'/jar.name), '已安装 JAR 与本轮产物不符：' + artifact['module'])
     api = json.loads((ROOT/'bsv-replace-api-map.json').read_text())
     require(api['currentReconciliation']['unmigrated'] == 0 and api['currentReconciliation']['unverified'] == 0, 'API 映射未验收')
     require(all(e.get('targetMethodsVerified') for e in api['entries']), 'API 成员存在未核实项')

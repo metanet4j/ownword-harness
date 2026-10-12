@@ -7448,7 +7448,7 @@
       "path": "src/test/java/com/metanet4j/sdk/signers/SignerTransactionContractTest.java",
       "class": "com.metanet4j.sdk.signers.SignerTransactionContractTest",
       "testSourceClassification": "unit",
-      "declaredTestMethods": 16,
+      "declaredTestMethods": 17,
       "framework": "junit5",
       "tags": [],
       "extendsTestClass": null,
@@ -7500,6 +7500,11 @@
           "returnType": "void",
           "line": 92,
           "classification": "unit"
+        },
+        {
+          "name": "directSigningRejectsInvalidAmountsBeforeInstallingATemplate",
+          "classification": "unit",
+          "reason": "当前计划要求的真实边界回归"
         },
         {
           "name": "emptyBatchesNeedNoSignatures",

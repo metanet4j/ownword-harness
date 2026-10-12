@@ -63,7 +63,7 @@ STAGE_ARTIFACTS = {
     "r3": ["unit-test-inventory.json", "unit-coverage-exceptions.json", "verify-unit.py"],
     "r4": ["verify-integration.py", "unit-test-inventory.json"],
     "r5": ["bsv-replace-dependencies.json", "bsv-replace-api-map.json", "bsv-replace-test-map.json", "bsv-replace-current-vector-bindings.json"],
-    "r6": ["bsv-replace-final-acceptance.json", "bsv-replace-current-vector-bindings.json", "verify-final.py", "bsv-replace-r6-delivery-report.md"],
+    "r6": ["bsv-replace-final-acceptance.json", "bsv-replace-final-artifacts.json", "bsv-replace-current-vector-bindings.json", "verify-final.py", "bsv-replace-r6-delivery-report.md"],
 }
 
 
