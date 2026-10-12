@@ -2,11 +2,11 @@
 
 ## Current State
 
-BSV 依赖替换 R0—R6 已完成，28/28 执行项已验收。状态唯一来源为 feature_list.json；无活动项及计划内待办。
+BSV 依赖替换 R0—R6 已完成，28/28 执行项已验收；四个后端仓库均已合并并提交到 dev。状态唯一来源为 feature_list.json；无活动项及计划内待办。
 
 ## Last Updated
 
-2026-10-12T15:55:49+08:00
+2026-10-12T16:42:25+08:00
 
 ## Current Objective
 
@@ -20,6 +20,7 @@ BSV 依赖替换 R0—R6 已完成，28/28 执行项已验收。状态唯一来�
 - R6 总门禁：19 项检查全部 PASS，退出 0，证据为 evidence/bsv-replace/repair-20261012/r6-final-gate.json。
 - 当前报告：[验收报告-BSV依赖替换-20261012-155237.md](doc/验收报告-BSV依赖替换-20261012-155237.md)。
 - 完整提交、原始报告来源、覆盖率及 SDK 指纹：bsv-replace-final-acceptance.json。
+- dev 合并提交与来源树一致性：bsv-replace-dev-merge.json；四仓库工作区干净，已验收文件树保持一致。
 
 ## Recommended Next Step
 

@@ -1,0 +1,122 @@
+{
+  "status": "PASS",
+  "generatedAt": "2026-10-12T16:41:29+08:00",
+  "sourceBranch": "feature/bsv-sdk-replace",
+  "targetBranch": "dev",
+  "strategy": "no-ff",
+  "pushed": false,
+  "records": [
+    {
+      "repository": "metanet4j-parent",
+      "worktree": "/home/haodev/ownword/backend/metanet4j-parent",
+      "devBefore": "5579576e9c632fc978868f37e76f30e0da3c85e5",
+      "featureHead": "d69ad1b17ec719d804595598150cb3ec7196ab6f",
+      "featureTree": "283869f54101e5d7d3828e5e0bd288e9768cc5dd",
+      "devAfter": "917b7bd4d52d3466f538183deedc1312de10ecbc",
+      "devTree": "283869f54101e5d7d3828e5e0bd288e9768cc5dd",
+      "parents": [
+        "5579576e9c632fc978868f37e76f30e0da3c85e5",
+        "d69ad1b17ec719d804595598150cb3ec7196ab6f"
+      ],
+      "command": [
+        "git",
+        "-C",
+        "/home/haodev/ownword/backend/metanet4j-parent",
+        "merge",
+        "--no-ff",
+        "-m",
+        "chore(merge): 将已验收的 BSV 依赖替换修复合并到 dev",
+        "feature/bsv-sdk-replace"
+      ],
+      "exitCode": 0
+    },
+    {
+      "repository": "metanet4j-base",
+      "worktree": "/home/haodev/ownword/backend/metanet4j-base",
+      "devBefore": "cd0428ebfe63299fa72d4595b6171e74d8cfd315",
+      "featureHead": "5d3a262b318d5db1c758af689f57cef2fd7746ae",
+      "featureTree": "6c6acf844ccd4a4400023fefd032fc51d224a3f9",
+      "devAfter": "279a7a610fc1faec5316b260d75c8a233ef6d6ca",
+      "devTree": "6c6acf844ccd4a4400023fefd032fc51d224a3f9",
+      "parents": [
+        "cd0428ebfe63299fa72d4595b6171e74d8cfd315",
+        "5d3a262b318d5db1c758af689f57cef2fd7746ae"
+      ],
+      "command": [
+        "git",
+        "-C",
+        "/home/haodev/ownword/backend/metanet4j-base",
+        "merge",
+        "--no-ff",
+        "-m",
+        "chore(merge): 将已验收的 BSV 依赖替换修复合并到 dev",
+        "feature/bsv-sdk-replace"
+      ],
+      "exitCode": 0
+    },
+    {
+      "repository": "metanet4j-sdk",
+      "worktree": "/home/haodev/ownword/backend/metanet4j-sdk",
+      "devBefore": "fd50bfd382e151fae6c193f5dd8db94555f215f3",
+      "featureHead": "70010f2f5dace76646379ed8ed63722a9c169c00",
+      "featureTree": "cfd53cdab8a7e6087158a02b12355de9bd921226",
+      "devAfter": "bb298d0db955705eef90206d2e5686f31bade913",
+      "devTree": "cfd53cdab8a7e6087158a02b12355de9bd921226",
+      "parents": [
+        "fd50bfd382e151fae6c193f5dd8db94555f215f3",
+        "70010f2f5dace76646379ed8ed63722a9c169c00"
+      ],
+      "command": [
+        "git",
+        "-C",
+        "/home/haodev/ownword/backend/metanet4j-sdk",
+        "merge",
+        "--no-ff",
+        "-m",
+        "chore(merge): 将已验收的 BSV 依赖替换修复合并到 dev",
+        "feature/bsv-sdk-replace"
+      ],
+      "exitCode": 0
+    },
+    {
+      "repository": "metanet4j-component",
+      "worktree": "/home/haodev/ownword/backend/metanet4j-component",
+      "devBefore": "351a6e19f640287132b91a93e5fe91fbc385ec6f",
+      "featureHead": "b23792e58c01150bb0d071782c14bab5a49e2e06",
+      "featureTree": "23a5e88e074bb10e07f4bafc3fef0e5525bcfa08",
+      "devAfter": "e20016bbc3bd22fd563b99f2c097a69e736af42d",
+      "devTree": "23a5e88e074bb10e07f4bafc3fef0e5525bcfa08",
+      "parents": [
+        "351a6e19f640287132b91a93e5fe91fbc385ec6f",
+        "b23792e58c01150bb0d071782c14bab5a49e2e06"
+      ],
+      "command": [
+        "git",
+        "-C",
+        "/home/haodev/ownword/backend/metanet4j-component",
+        "merge",
+        "--no-ff",
+        "-m",
+        "chore(merge): 将已验收的 BSV 依赖替换修复合并到 dev",
+        "feature/bsv-sdk-replace"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "verification": {
+    "method": "合并提交双亲与 Git 文件树相等，复用来源提交的完整测试证据；无新增代码差异。",
+    "gate": {
+      "command": [
+        "python3",
+        "bsv-task-gate.py",
+        "--stage",
+        "r6",
+        "--json"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "checks": 19,
+      "evidence": "evidence/bsv-replace/repair-20261012/r6-after-dev-merge-gate.json"
+    }
+  }
+}
