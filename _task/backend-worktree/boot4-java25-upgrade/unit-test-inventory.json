@@ -7851,6 +7851,12 @@
                   "classification": "unit"
                 }
               ]
+            },
+            {
+              "path": "metanet4j-component-test/src/test/java/com/metanet4j/component/test/IntegrationResources.java",
+              "classification": "fixture",
+              "methods": [],
+              "reason": "本轮唯一资源的登记与 JUnit 根生命周期清理"
             }
           ],
           "classificationReviewed": true,
