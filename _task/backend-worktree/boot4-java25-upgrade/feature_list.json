@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "bsv-r5-inventory",
+  "activeItem": "bsv-r6-unit",
   "note": "已获 R0—R6 实施授权；28 个执行项按依赖串行，七阶段在 stages 汇总。23 个既有事项保留。状态以本清单为准。",
   "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
   "features": [
@@ -1283,7 +1283,7 @@
       "name": "收口源码、测试及覆盖清单",
       "description": "对应计划 R5；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r5-cleanup",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "bsv-r5-dependencies"
       ],
@@ -1300,17 +1300,26 @@
         "bsv-replace-test-map.json"
       ],
       "evidence": [
-        "R5 依赖清单收口：**四仓库全量核查确认——POM 旧坐标 0、源码旧类型 0**（`base` 的 5 处经逐条核实仅 Javadoc）；**`tx-validator` 属纯 POM 清理**（源码 0 引用）。"
+        {
+          "path": "evidence/bsv-replace/repair-20261012/r5-inventory/summary.json",
+          "verification": "实际执行及输出见该证据，不以状态文字代替门禁"
+        }
       ],
-      "commits": [],
-      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
+      "commits": [
+        {
+          "repository": "ownword",
+          "commit": "6a700db7bb0e88553c2948db96c55f759f7ae0e3"
+        }
+      ],
+      "statusNote": "已按修复后的实际代码与执行证据复核；最终阶段仍须全量严格验收。",
+      "completedAt": "2026-10-12T14:10:12+08:00"
     },
     {
       "id": "bsv-r6-unit",
       "name": "全量单元严格验收",
       "description": "对应计划 R6；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r6-acceptance",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "bsv-r5-inventory"
       ],
@@ -1421,7 +1430,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-12T13:13:56+08:00",
+  "updatedAt": "2026-10-12T14:10:12+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1436,7 +1445,7 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": "bsv-r5-inventory",
+  "nextItem": "bsv-r6-unit",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
@@ -1558,7 +1567,7 @@
       "id": "bsv-replace-r5-cleanup",
       "name": "R5 旧依赖清理",
       "description": "移除旧依赖及全部过渡引用，同步测试源码清单和精确例外，核对 API／测试映射。",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "bsv-replace-r4-component"
       ],
@@ -1572,14 +1581,14 @@
       ],
       "progress": {
         "total": 2,
-        "done": 1
+        "done": 2
       }
     },
     {
       "id": "bsv-replace-r6-acceptance",
       "name": "R6 全量验收与交付",
       "description": "全量单元严格验收、SDK 与 component 集成、25 个 POM 的依赖树、制品指纹及交付报告。",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "bsv-replace-r5-cleanup"
       ],

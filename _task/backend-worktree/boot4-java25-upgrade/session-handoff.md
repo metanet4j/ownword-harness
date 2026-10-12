@@ -2,7 +2,7 @@
 
 ## 状态
 
-用户已批准修复至计划完成。当前执行项：bsv-r5-inventory；状态以 feature_list.json 为准。
+用户已批准修复至计划完成。当前执行项：bsv-r6-unit；状态以 feature_list.json 为准。
 
 ## Blockers
 
@@ -16,4 +16,4 @@
 
 ## Next Session
 
-收口源码、测试及覆盖清单。
+全量单元严格验收。
