@@ -38,4 +38,4 @@ JAR 和 sources 已安装任务缓存。444 个类均为 Java 25 字节码（maj
 
 ## 复跑与下一步
 
-[session-handoff.md](session-handoff.md) 提供本轮复核命令。修改 SDK、根脚本或冻结清单后必须重新采集；本轮无需继续实施事项。未推送远端。
+[session-handoff.md](session-handoff.md) 提供本轮复核命令。修改 SDK、根脚本或冻结清单后必须重新采集；本轮无需继续实施事项。SDK 迁移分支已推送至 [metanet4j-bsv-sdk](https://github.com/metanet4j/metanet4j-bsv-sdk/tree/feature/bsv-sdk-java-migration)，远端 HEAD 与已验收提交 `6a5569a` 一致。任务根仓库的文档和工具已本地提交，推送范围待用户确认。
