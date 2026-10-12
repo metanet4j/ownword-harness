@@ -1441,25 +1441,37 @@
               "classification": "unit",
               "methods": [
                 {
-                  "name": "generatedWordListsHaveRequestedDistinctDictionaryWords",
+                  "name": "historicalWordSequenceRestoresTheOriginalMasterKey",
                   "returnType": "void",
-                  "line": 16,
+                  "line": 18,
                   "classification": "unit"
                 },
                 {
-                  "name": "bip39VectorAndSerializationRoundTrip",
+                  "name": "standardWordCountsGenerateImportableBip39Phrases",
                   "returnType": "void",
                   "line": 31,
                   "classification": "unit"
                 },
                 {
+                  "name": "generatedWordListsRespectCountsAndDictionaryBounds",
+                  "returnType": "void",
+                  "line": 40,
+                  "classification": "unit"
+                },
+                {
+                  "name": "bip39VectorAndSerializationRoundTrip",
+                  "returnType": "void",
+                  "line": 59,
+                  "classification": "unit"
+                },
+                {
                   "name": "exposesTheMasterPrivateKeyAndItsSerialisedHex",
                   "returnType": "void",
-                  "line": 49,
+                  "line": 77,
                   "classification": "unit"
                 }
               ],
-              "classificationReason": "独立 BIP39/BIP32 xprv 向量、主密钥序列化、助记词唯一性与不可能长度边界"
+              "classificationReason": "独立旧制品派生向量、BIP39/BIP32 序列化、新钱包 checksum 与非标准长度采样边界"
             },
             {
               "path": "src/test/java/com/metanet4j/sdk/crypto/MasterPrivateKeyTest.java",
@@ -2831,67 +2843,91 @@
                 {
                   "name": "extractsDestinationFromInscriptionWithOptionalMapMetadata",
                   "returnType": "void",
-                  "line": 40,
+                  "line": 42,
                   "classification": "unit"
                 },
                 {
                   "name": "rejectsOrdinaryAndIncompleteInscriptionScripts",
                   "returnType": "void",
-                  "line": 58,
+                  "line": 60,
                   "classification": "unit"
                 },
                 {
                   "name": "resolvesConnectedInscriptionAndOrdinaryPaymentThroughKeyProvider",
                   "returnType": "void",
-                  "line": 93,
+                  "line": 95,
                   "classification": "unit"
                 },
                 {
                   "name": "rejectsDisconnectedOutputAndUnknownInscriptionKey",
                   "returnType": "void",
-                  "line": 114,
+                  "line": 116,
                   "classification": "unit"
                 },
                 {
                   "name": "coversDefensiveBranchesAndThePublicHashListAccessor",
                   "returnType": "void",
-                  "line": 132,
+                  "line": 134,
                   "classification": "unit"
                 },
                 {
                   "name": "coversPushdataEncodingVariantsAndTheOrdinalHashLookup",
                   "returnType": "void",
-                  "line": 147,
+                  "line": 149,
                   "classification": "unit"
                 },
                 {
                   "name": "coversChunkShapesThatSurviveOnlyAsRawBytes",
                   "returnType": "void",
-                  "line": 214,
+                  "line": 216,
                   "classification": "unit"
                 },
                 {
                   "name": "rejectsMissingConnectedOutputWhenResolvingSpendInfo",
                   "returnType": "void",
-                  "line": 262,
+                  "line": 264,
                   "classification": "unit"
                 },
                 {
                   "name": "walksTheWholeOrdinalLockingScriptChainAndItsFailureSides",
                   "returnType": "void",
-                  "line": 316,
+                  "line": 318,
                   "classification": "unit"
                 },
                 {
                   "name": "coversMalformedScriptBranchesOfTheOrdinalHelpers",
                   "returnType": "void",
-                  "line": 441,
+                  "line": 443,
                   "classification": "unit"
                 },
                 {
                   "name": "walksTheSharedP2pkhShapeCheckWithRawByteScripts",
                   "returnType": "void",
-                  "line": 495,
+                  "line": 497,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sourceOutputOfTakesTheOutputAtTheGivenIndex",
+                  "returnType": "void",
+                  "line": 560,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sourceOutputOfReturnsNullWhenIndexIsOutOfBounds",
+                  "returnType": "void",
+                  "line": 568,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sourceOutputOfReturnsNullWhenIndexIsNegative",
+                  "returnType": "void",
+                  "line": 576,
+                  "classification": "unit"
+                },
+                {
+                  "name": "sourceOutputOfReturnsNullWithoutSourceTransaction",
+                  "returnType": "void",
+                  "line": 582,
                   "classification": "unit"
                 }
               ],

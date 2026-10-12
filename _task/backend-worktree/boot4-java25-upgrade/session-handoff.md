@@ -2,18 +2,18 @@
 
 ## 状态
 
-2026-10-12 用户已批准修复至计划全部完成。当前唯一执行项 bsv-r3-keys；R3—R6 的旧完成声明撤回，按实际证据逐项复验。
+用户已批准修复至计划完成。当前执行项：bsv-r3-scripts；状态以 feature_list.json 为准。
 
 ## Blockers
 
-无外部阻塞。已知代码、测试隔离与证据缺口见 progress.md，均在当前修复范围内。
+无外部阻塞。后续未验收项保持未完成；SDK 来源、共享设施配置与远端边界继续有效。
 
 ## Files
 
-- doc/BSV依赖替换计划-20261010-103802.md 第 3.1 节：历史派生兼容、新钱包生成及测试公开边界。
-- evidence/bsv-replace/repair-20261012：修复证据。
-- feature_list.json：唯一执行状态。
+- feature_list.json、progress.md：实际执行与最近证据。
+- doc/BSV依赖替换计划-20261010-103802.md：实施与验收标准。
+- evidence/bsv-replace/repair-20261012：本轮修复证据。
 
 ## Next Session
 
-冻结旧制品的历史助记词派生向量，按公开接口完成失败回归与最小修复；随后按依赖推进组件、隔离、清单和全量验收。
+业务 SDK 脚本与交易读取适配。
