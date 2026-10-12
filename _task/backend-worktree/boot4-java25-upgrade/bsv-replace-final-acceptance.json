@@ -920,5 +920,19 @@
   "dependencies": "bsv-replace-dependencies.json",
   "artifacts": "bsv-replace-final-artifacts.json",
   "vectorBindings": "bsv-replace-current-vector-bindings.json",
-  "report": "doc/验收报告-BSV依赖替换-20261012-155237.md"
+  "report": "doc/验收报告-BSV依赖替换-20261012-155237.md",
+  "finalGate": {
+    "command": [
+      "python3",
+      "bsv-task-gate.py",
+      "--stage",
+      "r6",
+      "--json"
+    ],
+    "exitCode": 0,
+    "status": "PASS",
+    "evidence": "evidence/bsv-replace/repair-20261012/r6-final-gate.json",
+    "sha256": "2626b7d05d0dcd37775dc66643326a15297ac2076b372a4d1d12e8d96e024eb4",
+    "generatedAt": "2026-10-12T15:54:08+08:00"
+  }
 }

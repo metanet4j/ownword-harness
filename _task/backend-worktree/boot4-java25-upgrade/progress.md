@@ -2,31 +2,25 @@
 
 ## Current State
 
-已获授权修复至计划完成；实际状态以 feature_list.json 为准。四仓库使用 feature/bsv-sdk-replace，本轮不推送。
-
-- R0 固定基线与方法级映射：done（6/6）
-- R1 固定 SDK 制品接入：done（3/3）
-- R2 base 适配：done（2/2）
-- R3 业务 SDK 适配：done（5/5）
-- R4 component 适配：done（5/5）
-- R5 旧依赖清理：done（2/2）
-- R6 全量验收与交付：in-progress（4/5）
+BSV 依赖替换 R0—R6 已完成，28/28 执行项已验收。状态唯一来源为 feature_list.json；无活动项及计划内待办。
 
 ## Last Updated
 
-2026-10-12T15:52:32+08:00
+2026-10-12T15:55:49+08:00
 
 ## Current Objective
 
-提交后证据绑定与交付报告
+任务已完成。
 
 ## 当前证据
 
-- 最近完成：bsv-r6-artifact。
-- 证据：bsv-replace-final-artifacts.json。
-- 提交：metanet4j-sdk 70010f2。
-- 修复前状态：evidence/bsv-replace/repair-20261012/pre-repair-feature-list.json。
+- 单元：956 例，失败／错误／跳过均为 0；精确例外核对后 gaps=0，纯 POM／纯接口 N/A 有据。
+- 本地 HTTP：5 例；组件集成：18 类、124 例；失败／错误／跳过均为 0，临时资源无残留。
+- 25 个 POM 的依赖树和已安装制品核对通过；旧引用与手工附加 JAR 均为 0。
+- R6 总门禁：19 项检查全部 PASS，退出 0，证据为 evidence/bsv-replace/repair-20261012/r6-final-gate.json。
+- 当前报告：[验收报告-BSV依赖替换-20261012-155237.md](doc/验收报告-BSV依赖替换-20261012-155237.md)。
+- 完整提交、原始报告来源、覆盖率及 SDK 指纹：bsv-replace-final-acceptance.json。
 
 ## Recommended Next Step
 
-提交后证据绑定与交付报告；严格按计划依赖及完成条件执行。
+本计划内无剩余事项。所有任务改动已作本地提交，未推送远端。底层 SDK 原任务的保留限制见当前报告。
