@@ -9,8 +9,8 @@
     "blocked",
     "done"
   ],
-  "activeFeature": "P10",
-  "nextFeature": "P10",
+  "activeFeature": null,
+  "nextFeature": null,
   "executionScope": "homepage-full",
   "environment": {
     "worktree": "ownword-prototype",
@@ -262,7 +262,7 @@
         "P05",
         "P08"
       ],
-      "status": "in-progress",
+      "status": "needs-review",
       "acceptanceRefs": [
         "P10-A",
         "P10-B",
@@ -272,7 +272,10 @@
         "实现对应 PRD 行为与 BDD，记录可复现证据",
         "验证正常、相关边界及受影响截图，实际审阅日志",
         "每项原型独立提交并交付视觉复核"
-      ]
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "commit": "a49bdb9fea48980a8ca2cc8ba7bc4ee1c7b7af97",
+      "evidence": "ownword-prototype/evidence/homepage-v040/P10/verification.json"
     }
   ]
 }
