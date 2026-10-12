@@ -27427,7 +27427,8 @@
         }
       ],
       "currentSourceExists": true,
-      "classificationReviewed": true
+      "classificationReviewed": true,
+      "fixtureIsolation": "每例仅在本轮唯一 MongoDB 内创建自己的根身份或回复父链，不依赖方法顺序及既有业务库。"
     },
     {
       "repository": "metanet4j-component",
@@ -27730,7 +27731,8 @@
         }
       ],
       "currentSourceExists": true,
-      "classificationReviewed": true
+      "classificationReviewed": true,
+      "fixtureIsolation": "每例仅在本轮唯一 MongoDB 内创建自己的根身份或回复父链，不依赖方法顺序及既有业务库。"
     },
     {
       "repository": "metanet4j-component",
