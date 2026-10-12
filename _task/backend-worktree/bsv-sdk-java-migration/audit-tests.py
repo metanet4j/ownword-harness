@@ -121,9 +121,6 @@ SEMANTIC_CASES = {
         (CACHE_FILE, '66fbf8f800232d906dae3fe83736bbaf4875f45e24ae1f5b9283439d4624d698',
          {'405:7': ('timing-ms-v1', 'toBeGreaterThanOrEqual', 50, 1),
           '406:7': ('timing-ms-v1', 'toBeLessThan', 10, 1)}),
-    'b695d5fe60f609923a84b22ccea5de14273143bdfd40c7f4a5e6fccd765de5d3':
-        (AUTH_BOUNDARY_FILE, '3433ae64def745066c5bb1fc9f49f83417ad284ae7fe07b662fa901762b1ce36',
-         {'354:11': ('rejected-string-throw-adapter-v1', 'toBe', None, 1)}),
     # 以下 8 个用例共 10 条断言：两侧 actual 逐字节相同，仅 expected 按固定跨语言约定不同——
     # TS 的基类 Error / 原消息文本 对应 Java 的 SdkException / SdkTypeException，
     # 以及 toMatch 的 Java 侧把原正则补成等价但更宽松的写法。逐站点固定，不做通配。
@@ -271,7 +268,7 @@ def cross_language_rules(path=None, catalog=None):
     require(document.get('schemaVersion') == 1, '跨语言输入替换表版本无效')
     require(document.get('absent') == {'$absent': True}, '跨语言输入替换表缺少 absent 哨兵定义')
     rules = document.get('rules')
-    require(isinstance(rules, list) and rules, '跨语言输入替换表为空')
+    require(isinstance(rules, list), '跨语言输入替换表的 rules 必须是列表')
     files = {file['path'] for file in (catalog or read(TASK / 'module-tests.json'))['files']}
     loaded, skipped = [], 0
     for rule in rules:
@@ -910,45 +907,9 @@ def matcher_semantics(identity, left, right):
     return False
 
 
-def unroutable_expected_absent(case_id, left, right):
-    """判断是否属于「已登记无输入重放入口、Java 侧只记 actual 未记 expected」这一既定形态。
-
-    仅对 known-gaps.json 在册的 caseId 生效，并要求：两侧都是 assertion、matcher 与 negated 相同、
-    两侧 actual 逐字节相等，且恰为「Java expected 为 {"type":"null"}、TS expected 为非 null 的真实
-    冻结预期」。两侧 expected 都缺失或都不是该形态时不适用。
-    """
-    try:
-        registered = {entry['caseId'] for entry in read(KNOWN_GAPS)['cases']}
-    except (OSError, KeyError, TypeError, ValueError):
-        return False
-    if case_id not in registered:
-        return False
-    for value in (left, right):
-        if not isinstance(value, dict) or value.get('kind') != 'assertion':
-            return False
-        if value.get('matcher') is None or 'negated' not in value or 'actual' not in value:
-            return False
-    if left['matcher'] != right['matcher'] or left['negated'] != right['negated']:
-        return False
-    if canonical(left['actual']) != canonical(right['actual']):
-        return False
-    null_expected = {'type': 'null'}
-    ts_expected = left.get('expected')
-    return (right.get('expected') == null_expected
-            and isinstance(ts_expected, dict) and ts_expected != null_expected
-            # TS 侧预期必须是原 matcher 的真实非空预期，避免两侧 expected 同时被伪造为空。
-            and ts_expected.get('type') in ('array', 'string', 'number', 'object', 'boolean')
-            and bool(ts_expected.get('value')))
-
-
 def compare_actuals(case_id, expected, identity, left, right):
     rule = semantic_specs(case_id).get(expected['assertionSites'][identity]) if expected else None
     if rule is None:
-        if unroutable_expected_absent(case_id, left, right):
-            # 已登记「无输入重放入口」的用例：Java 侧只记录实际观察值，未带上原 TS 断言的
-            # expected（固定为 {"type":"null"}）。这里不放宽实际值——两侧 actual 必须逐字节相等，
-            # matcher 与 negated 也必须一致；仅允许这一种既定缺失形态，且只对登记在册的 caseId 生效。
-            return
         if matcher_semantics(identity, left, right):
             return
         require(canonical(left) == canonical(right), f'实际结果不一致：{case_id} / {identity}')
@@ -1013,26 +974,6 @@ def compare_actuals(case_id, expected, identity, left, right):
                     and value['negated'] is False and value.get('pass', True) is True
                     and value['actual'] == actual and value['expected'] == original_expected,
                     f'固定 Java null 适配 {side} 必须保留 undefined/null 实际观测：{identity}')
-        return
-    if rule_id == 'rejected-string-throw-adapter-v1':
-        # 固定站点 AuthFetch.boundary.test.ts:354：原测试用 `Promise.reject('untrusted rejection')`
-        # 抛裸字符串，Java 用 Error 携带同一原因。两侧必须各自保留真实的拒绝观测与原预期，
-        # 只把「拒绝原因」这一语义配对，不放宽 matcher、negated、expected 或拒绝事实本身。
-        keys = {'kind', 'matcher', 'negated', 'actual', 'expected'}
-        for side, value in (('TS', left), ('Java', right)):
-            require(isinstance(value, dict) and
-                    keys <= set(value) <= keys | {'pass'}
-                    and value['kind'] == 'assertion' and value['matcher'] == 'toBe'
-                    and value['negated'] is False and value.get('pass', True) is True
-                    and value['expected'] == {'type': 'string', 'value': 'untrusted rejection'}
-                    and isinstance(value['actual'], dict) and value['actual'].get('kind') == 'throw',
-                    f'固定拒绝原因断言 {side} 必须保留原 matcher/预期与真实拒绝观测：{identity}')
-        ts_actual, java_actual = left['actual'], right['actual']
-        # TS 抛裸字符串：name=String 且无 message；Java 抛 Error：name=Error 且 message 为该原因。
-        require(ts_actual == {'kind': 'throw', 'name': 'String'} and
-                java_actual.get('name') == 'Error' and
-                java_actual.get('message') == left['expected']['value'],
-                f'固定拒绝原因两侧必须保留 TS 裸字符串与 Java Error 的真实差异：{identity}')
         return
     if rule_id == 'exception-class-adapter-v1':
         # 固定的 8 条断言：两侧 actual 逐字节相同（真实抛出的异常名与消息都必须一致），

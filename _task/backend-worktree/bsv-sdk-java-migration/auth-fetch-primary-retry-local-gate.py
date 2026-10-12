@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """固定 AuthFetch 付款重试 2/8 原用例的局部门禁。"""
 import argparse
-import copy
 from collections import Counter
 import importlib.util
 import json
@@ -191,24 +190,8 @@ def verify(worktree, output):
         return keyed
     ts_by_id, java_by_id = keyed_inputs(ts_inputs), keyed_inputs(java_inputs)
     require(set(ts_by_id) == set(java_by_id), '两端实际输入身份不同')
-    error_case = '61b4ecc5ca8e8e0e52d508368744a12c06c31d670ea752d08a5d880a62cf5f63'
     for sample_key, ts_value in ts_by_id.items():
-        java_value = copy.deepcopy(java_by_id[sample_key])
-        if sample_key[0] == error_case:
-            ts_returns = ts_value['mockReturns']
-            java_returns = java_value['mockReturns']
-            require(len(ts_returns['fetch']) == len(java_returns['fetch']) == 2
-                    and all(item['type'] == 'rejected' and item['name'] == 'Error'
-                            for item in ts_returns['fetch'])
-                    and all(item['type'] == 'rejected' and item['name'] == 'SdkException'
-                            for item in java_returns['fetch'])
-                    and ts_returns['wait'] == [{'type': 'resolved', 'value': {'type': 'undefined'}}]
-                    and java_returns['wait'] == [{'type': 'resolved', 'value': None}],
-                    '付款错误与 Void 完成值必须保留双方原始表示')
-            for item in java_returns['fetch']:
-                item['name'] = 'Error'
-            java_returns['wait'][0]['value'] = {'type': 'undefined'}
-        require(ts_value == java_value, '两端实际输入不同')
+        require(ts_value == java_by_id[sample_key], '两端实际输入不同')
     for left, right in zip(ts_assertions, java_assertions):
         require(left['caseId'] == right['caseId'] and left['assertionId'] == right['assertionId'], '断言身份不同')
         audit.compare_actuals(left['caseId'], plan[left['caseId']], left['assertionId'], left['value'], right['value'])

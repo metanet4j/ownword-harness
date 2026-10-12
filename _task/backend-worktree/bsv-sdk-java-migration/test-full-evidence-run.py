@@ -106,6 +106,20 @@ class FullRunTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'javaRevision'):
                 runner.verify(self.path)
 
+    def test_disclosed_input_gap_cannot_pass_repaired_final_gate(self):
+        known = dict(self.manifest['knownUnroutableCases'], count=1, registryEntries=1)
+        self.manifest['knownUnroutableCases'] = known
+        self.seal()
+        with patch.object(runner.audit, 'known_unroutable_canonical', return_value=known):
+            with self.assertRaisesRegex(ValueError, '输入缺口或替换豁免'):
+                runner.verify(self.path)
+
+    def test_registered_input_substitution_cannot_pass_repaired_final_gate(self):
+        with patch.object(runner.audit, 'cross_language_canonical', return_value=(
+                [{'kind': 'substitute'}], self.manifest['crossLanguageRulesSha256'])):
+            with self.assertRaisesRegex(ValueError, '输入缺口或替换豁免'):
+                runner.verify(self.path)
+
     def test_old_local_manifest_cannot_be_spliced_even_after_rehash(self):
         child = runner.read(self.folder / 'java-run.json')
         child.update(startedAtNs=1, finishedAtNs=2)

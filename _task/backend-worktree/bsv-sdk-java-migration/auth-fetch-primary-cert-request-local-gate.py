@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """固定 AuthFetch 证书请求 3/8 原用例的局部门禁。"""
 import argparse
-import copy
 from collections import Counter
 import importlib.util
 import json
@@ -185,22 +184,8 @@ def verify(worktree, output):
         return keyed
     ts_by_id, java_by_id = keyed_inputs(ts_inputs), keyed_inputs(java_inputs)
     require(set(ts_by_id) == set(java_by_id), '两端实际输入身份不同')
-    failure = 'a2a3c75a75ce648585c7263e5344fbb5a3ddcb1c009cb247daec4160aa8a408d'
     for sample_key, ts_value in ts_by_id.items():
-        java_value = copy.deepcopy(java_by_id[sample_key])
-        ts_request = ts_value['mockReturns']['request']
-        java_request = java_value['mockReturns']['request']
-        if sample_key[0] == failure:
-            require(ts_request['type'] == java_request['type'] == 'rejected'
-                    and ts_request['name'] == 'Error' and java_request['name'] == 'SdkException',
-                    '固定证书请求异常必须保留双方原始类型')
-            java_request['name'] = 'Error'
-        else:
-            require(ts_request == {'type': 'resolved', 'value': {'type': 'undefined'}}
-                    and java_request == {'type': 'resolved', 'value': None},
-                    '固定证书请求 Void 完成值必须保留双方原始 undefined/null')
-            java_request['value'] = {'type': 'undefined'}
-        require(ts_value == java_value, '两端实际输入不同')
+        require(ts_value == java_by_id[sample_key], '两端实际输入不同')
     for left, right in zip(ts_assertions, java_assertions):
         require(left['caseId'] == right['caseId'] and left['assertionId'] == right['assertionId'], '断言身份不同')
         audit.compare_actuals(left['caseId'], plan[left['caseId']], left['assertionId'], left['value'], right['value'])

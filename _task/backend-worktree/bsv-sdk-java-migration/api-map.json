@@ -41765,7 +41765,7 @@
     {
       "id": "src/auth/clients/AuthFetch.ts#property:AuthFetch.pendingRequestNonces:1",
       "java": "com.metanet4j.bsv.auth.clients.AuthFetch.pendingRequestNonces",
-      "javaSignature": "final Set<String> pendingRequestNonces = ConcurrentHashMap.newKeySet();",
+      "javaSignature": "final Set<String> pendingRequestNonces = Collections.synchronizedSet(new java.util.LinkedHashSet<>());",
       "contract": "doc/完整模块与API映射-20260920-122800.md#api-auth-transport",
       "review": "reviewed",
       "implementationStatus": "source-present-verified",
@@ -41774,7 +41774,8 @@
         "src/auth/clients/AuthFetch.ts:147",
         "metanet4j-bsv-sdk/src/main/java/com/metanet4j/bsv/auth/clients/AuthFetch.java:92",
         "metanet4j-bsv-sdk/src/test/java/com/metanet4j/bsv/auth/clients/AuthFetchTest.java"
-      ]
+      ],
+      "note": "与固定 TS Set 一样保留插入顺序；同步集合保持 Java 异步操作安全，采集迭代在同一集合锁内执行。"
     },
     {
       "id": "src/auth/clients/AuthFetch.ts#property:AuthFetch.requestedCertificates:1",

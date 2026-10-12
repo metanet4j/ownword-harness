@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """固定 knownTxids 六例付款入口的双侧原输入与原断言局部门禁。"""
 import argparse
-import copy
 from collections import Counter
 import importlib.util
 import json
@@ -150,7 +149,7 @@ def verify(worktree, output):
     left = {row['caseId']:row['value'] for row in ts_selected}
     right = {row['caseId']:row['value'] for row in java_selected}
     for case_id, original in left.items():
-        replay = copy.deepcopy(right[case_id])
+        replay = right[case_id]
         require(original['kind'] == replay['kind'] == 'AuthFetch.knownTxidsInput'
                 and original['parseCalls'] == replay['parseCalls'] == []
                 and len(original['paymentCalls']) == len(replay['paymentCalls']),
@@ -158,8 +157,7 @@ def verify(worktree, output):
         for call in original['paymentCalls']:
             require(call['response']['bodyUsed'] is False, '固定 TS 响应正文已消费')
         for call in replay['paymentCalls']:
-            require('bodyUsed' not in call['response'], 'Java 伪造 Response.bodyUsed')
-            call['response']['bodyUsed'] = False
+            require(call['response']['bodyUsed'] is False, 'Java 原响应正文已消费')
         require(original == replay, '双侧付款 URL/config/Response 真输入不同')
     ts_assertions, java_assertions = lines(output / 'ts-assertions.jsonl'), lines(output / 'java-assertions.jsonl')
     require(len(ts_assertions) == len(java_assertions) == 25, '固定六例原断言次数错误')

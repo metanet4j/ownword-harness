@@ -14,8 +14,8 @@
       "跨工程发布、部署或远端推送"
     ]
   },
-  "activeItem": null,
-  "nextItem": null,
+  "activeItem": "migration-input-replay",
+  "nextItem": "migration-input-replay",
   "features": [
     {
       "id": "migration-env",
@@ -2109,7 +2109,7 @@
       "dependencies": [
         "migration-ts-baseline"
       ],
-      "status": "done",
+      "status": "in-progress",
       "steps": [
         "导出 TS 实际生成的数据、seed/replay 信息、前置状态、循环次数及收缩样本，版本管理必要语料。",
         "在 Java 测试边界重放同一输入；保持生产随机源语义，保留随机源自身原有行为测试。",
@@ -2124,13 +2124,7 @@
         "无法进行字节相等比较的随机源测试有明确原行为验证和可控输入对照方案。"
       ],
       "evidence": [
-        "全量运行 .cache/evidence/full-run-52-20260901/full-run.json：四阶段全 exit=0（ts-capture 2446.2、java-capture 1193.3、bundle 44.3、check 42.9 秒，合计 3728 秒），status=passed、formalAcceptance=true。",
-        "133/133 文件、5329/5329 用例（TS 与 Java 两侧各 5329）、38092 输入样本、56744 断言逐条比较一致，缺失/未执行/未比较均为 0（另有 32 条按固定规则与分支样本有据的未执行断言）。",
-        "full-evidence-run.py verify、audit-tests.py check、node audit-api.cjs check 三项均独立重跑通过（exit=0）。",
-        "knownUnroutableCases=6（ruleId=frozen-test-without-replay-entry-v1，registryEntries=6）。",
-        "crossLanguageInputSubstitutions.count=25（substitutions 42、unorderedComparisons 1）。",
-        "assertionSources：legacy 168 例/1713 行 + shared 5161 例/55031 行 = 56744。",
-        "产物哈希 17 项写入 manifest 的 artifactSha256；runManifestSha256、catalogSha256、tsReportSha256 均已固定。"
+        "用户要求先修复6例重放缺口、25例输入差异和32条未执行断言，再以当前源码重新做单次TS/Java全量验收；full-run-52仅作为历史基线，不作为本轮完成证据。"
       ],
       "scopeRef": "scope",
       "kind": "gate",
@@ -2144,7 +2138,7 @@
       "dependencies": [
         "migration-input-replay"
       ],
-      "status": "done",
+      "status": "not-started",
       "steps": [
         "采集每条断言与样本的实际输入输出、调用次数和有意义的顺序，保留无损类型与原始值。",
         "由执行流程生成 parity-results.json，绑定上游提交、javaRevision、清单及 Jest/Surefire 报告校验值。",
@@ -2160,13 +2154,7 @@
         "缺失采集、重复 ID、输入改变或执行失败均返回非零，完整 SDK 结果随 P1 实现逐项形成。"
       ],
       "evidence": [
-        "全量运行 .cache/evidence/full-run-52-20260901/full-run.json：四阶段全 exit=0（ts-capture 2446.2、java-capture 1193.3、bundle 44.3、check 42.9 秒，合计 3728 秒），status=passed、formalAcceptance=true。",
-        "133/133 文件、5329/5329 用例（TS 与 Java 两侧各 5329）、38092 输入样本、56744 断言逐条比较一致，缺失/未执行/未比较均为 0（另有 32 条按固定规则与分支样本有据的未执行断言）。",
-        "full-evidence-run.py verify、audit-tests.py check、node audit-api.cjs check 三项均独立重跑通过（exit=0）。",
-        "knownUnroutableCases=6（ruleId=frozen-test-without-replay-entry-v1，registryEntries=6）。",
-        "crossLanguageInputSubstitutions.count=25（substitutions 42、unorderedComparisons 1）。",
-        "assertionSources：legacy 168 例/1713 行 + shared 5161 例/55031 行 = 56744。",
-        "产物哈希 17 项写入 manifest 的 artifactSha256；runManifestSha256、catalogSha256、tsReportSha256 均已固定。"
+        "用户要求先修复6例重放缺口、25例输入差异和32条未执行断言，再以当前源码重新做单次TS/Java全量验收；full-run-52仅作为历史基线，不作为本轮完成证据。"
       ],
       "scopeRef": "scope",
       "kind": "gate",
@@ -2180,7 +2168,7 @@
       "dependencies": [
         "migration-result-capture"
       ],
-      "status": "done",
+      "status": "not-started",
       "steps": [
         "扩展现有检查器，核对预期断言/样本、TS 运行轨迹、Java 运行轨迹和映射；从实际输入产物复核校验值。",
         "增加少一个循环样本、两端同时少登记断言、陈旧报告、字节差异及无测试执行等反例，保留 RED/GREEN。",
@@ -2198,13 +2186,7 @@
         "注册用例、断言/样本和完整 API 清单分别核对，不能仅依赖总数或人工 reviewed 标记。"
       ],
       "evidence": [
-        "全量运行 .cache/evidence/full-run-52-20260901/full-run.json：四阶段全 exit=0（ts-capture 2446.2、java-capture 1193.3、bundle 44.3、check 42.9 秒，合计 3728 秒），status=passed、formalAcceptance=true。",
-        "133/133 文件、5329/5329 用例（TS 与 Java 两侧各 5329）、38092 输入样本、56744 断言逐条比较一致，缺失/未执行/未比较均为 0（另有 32 条按固定规则与分支样本有据的未执行断言）。",
-        "full-evidence-run.py verify、audit-tests.py check、node audit-api.cjs check 三项均独立重跑通过（exit=0）。",
-        "knownUnroutableCases=6（ruleId=frozen-test-without-replay-entry-v1，registryEntries=6）。",
-        "crossLanguageInputSubstitutions.count=25（substitutions 42、unorderedComparisons 1）。",
-        "assertionSources：legacy 168 例/1713 行 + shared 5161 例/55031 行 = 56744。",
-        "产物哈希 17 项写入 manifest 的 artifactSha256；runManifestSha256、catalogSha256、tsReportSha256 均已固定。"
+        "用户要求先修复6例重放缺口、25例输入差异和32条未执行断言，再以当前源码重新做单次TS/Java全量验收；full-run-52仅作为历史基线，不作为本轮完成证据。"
       ],
       "scopeRef": "scope",
       "kind": "gate",
@@ -2223,15 +2205,9 @@
         "migration-result-capture",
         "migration-evidence-gate"
       ],
-      "status": "done",
+      "status": "not-started",
       "evidence": [
-        "全量运行 .cache/evidence/full-run-52-20260901/full-run.json：四阶段全 exit=0（ts-capture 2446.2、java-capture 1193.3、bundle 44.3、check 42.9 秒，合计 3728 秒），status=passed、formalAcceptance=true。",
-        "133/133 文件、5329/5329 用例（TS 与 Java 两侧各 5329）、38092 输入样本、56744 断言逐条比较一致，缺失/未执行/未比较均为 0（另有 32 条按固定规则与分支样本有据的未执行断言）。",
-        "full-evidence-run.py verify、audit-tests.py check、node audit-api.cjs check 三项均独立重跑通过（exit=0）。",
-        "knownUnroutableCases=6（ruleId=frozen-test-without-replay-entry-v1，registryEntries=6）。",
-        "crossLanguageInputSubstitutions.count=25（substitutions 42、unorderedComparisons 1）。",
-        "assertionSources：legacy 168 例/1713 行 + shared 5161 例/55031 行 = 56744。",
-        "产物哈希 17 项写入 manifest 的 artifactSha256；runManifestSha256、catalogSha256、tsReportSha256 均已固定。"
+        "用户要求先修复6例重放缺口、25例输入差异和32条未执行断言，再以当前源码重新做单次TS/Java全量验收；full-run-52仅作为历史基线，不作为本轮完成证据。"
       ],
       "phase": "P0",
       "kind": "gate",
@@ -2284,15 +2260,9 @@
         "migration-impl-auth-sessions",
         "migration-impl-auth-transport"
       ],
-      "status": "done",
+      "status": "not-started",
       "evidence": [
-        "全量运行 .cache/evidence/full-run-52-20260901/full-run.json：四阶段全 exit=0（ts-capture 2446.2、java-capture 1193.3、bundle 44.3、check 42.9 秒，合计 3728 秒），status=passed、formalAcceptance=true。",
-        "133/133 文件、5329/5329 用例（TS 与 Java 两侧各 5329）、38092 输入样本、56744 断言逐条比较一致，缺失/未执行/未比较均为 0（另有 32 条按固定规则与分支样本有据的未执行断言）。",
-        "full-evidence-run.py verify、audit-tests.py check、node audit-api.cjs check 三项均独立重跑通过（exit=0）。",
-        "knownUnroutableCases=6（ruleId=frozen-test-without-replay-entry-v1，registryEntries=6）。",
-        "crossLanguageInputSubstitutions.count=25（substitutions 42、unorderedComparisons 1）。",
-        "assertionSources：legacy 168 例/1713 行 + shared 5161 例/55031 行 = 56744。",
-        "产物哈希 17 项写入 manifest 的 artifactSha256；runManifestSha256、catalogSha256、tsReportSha256 均已固定。"
+        "用户要求先修复6例重放缺口、25例输入差异和32条未执行断言，再以当前源码重新做单次TS/Java全量验收；full-run-52仅作为历史基线，不作为本轮完成证据。"
       ],
       "phase": "P1",
       "modules": [
@@ -2329,7 +2299,7 @@
       "dependencies": [
         "migration-core-modules"
       ],
-      "status": "done",
+      "status": "not-started",
       "scopeRef": "scope",
       "steps": [
         "核对全部选定模块 API、测试映射和向量，执行全部 TS/Java 测试与实际结果累计比较。",
@@ -2347,13 +2317,7 @@
         "不以修改业务 SDK/base/component 或替换其依赖作为本次验收前置条件。"
       ],
       "evidence": [
-        "全量运行 .cache/evidence/full-run-52-20260901/full-run.json：四阶段全 exit=0（ts-capture 2446.2、java-capture 1193.3、bundle 44.3、check 42.9 秒，合计 3728 秒），status=passed、formalAcceptance=true。",
-        "133/133 文件、5329/5329 用例（TS 与 Java 两侧各 5329）、38092 输入样本、56744 断言逐条比较一致，缺失/未执行/未比较均为 0（另有 32 条按固定规则与分支样本有据的未执行断言）。",
-        "full-evidence-run.py verify、audit-tests.py check、node audit-api.cjs check 三项均独立重跑通过（exit=0）。",
-        "knownUnroutableCases=6（ruleId=frozen-test-without-replay-entry-v1，registryEntries=6）。",
-        "crossLanguageInputSubstitutions.count=25（substitutions 42、unorderedComparisons 1）。",
-        "assertionSources：legacy 168 例/1713 行 + shared 5161 例/55031 行 = 56744。",
-        "产物哈希 17 项写入 manifest 的 artifactSha256；runManifestSha256、catalogSha256、tsReportSha256 均已固定。"
+        "用户要求先修复6例重放缺口、25例输入差异和32条未执行断言，再以当前源码重新做单次TS/Java全量验收；full-run-52仅作为历史基线，不作为本轮完成证据。"
       ]
     }
   ],

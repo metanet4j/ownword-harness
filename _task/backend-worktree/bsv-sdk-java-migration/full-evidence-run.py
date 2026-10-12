@@ -200,7 +200,9 @@ def capture(config_path, folder, timeout, previous=None):
     write(folder / 'input-plan.json', plan)
     write(folder / 'preflight.json', pre)
     known = audit.known_unroutable_canonical()
-    _, rules_sha = audit.cross_language_canonical()
+    rules, rules_sha = audit.cross_language_canonical()
+    require(known['count'] == 0, '修复后全量验收必须没有输入重放缺口')
+    require(not rules, '修复后全量验收禁止跨语言输入替换或无序豁免')
     require(known['count'] == known['registryEntries'],
             '已知缺口登记存在冻结清单外的条目，禁止开跑：'
             + json.dumps({'已落地': known['count'], '登记条数': known['registryEntries']},
@@ -276,7 +278,8 @@ def verify(path):
     require(manifest.get('knownGapsSha256') == known['registrySha256']
             and manifest.get('knownUnroutableCases') == known,
             '完整运行的已知缺口登记与当前登记不同')
-    _, rules_sha = audit.cross_language_canonical()
+    rules, rules_sha = audit.cross_language_canonical()
+    require(known['count'] == 0 and not rules, '当前验收仍存在输入缺口或替换豁免')
     require(manifest.get('crossLanguageRulesSha256') == rules_sha,
             '完整运行的跨语言输入替换表与当前不同')
     commands = commands_for(interface, folder)

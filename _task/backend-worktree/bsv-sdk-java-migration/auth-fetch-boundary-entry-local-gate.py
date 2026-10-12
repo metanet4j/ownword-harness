@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """固定 AuthFetch 边界十五例入口、外部 mock 输入和原断言的局部门禁。"""
 import argparse
-import copy
 from collections import Counter
 import importlib.util
 import json
@@ -23,39 +22,6 @@ FILE = 'src/auth/clients/__tests__/AuthFetch.boundary.test.ts'
 CLASS = 'com.metanet4j.bsv.auth.clients.AuthFetchBoundaryTest'
 PLAN = TASK / 'auth-fetch-boundary-input-plan.json'
 PROBE = TASK / 'capture-auth-fetch-boundary-inputs.cjs'
-NATIVE_VOID_SITES = {
-    '5b5de96b4a89de114908ea30226e30046a4c1653e65e8a4e0361fbfa753963ed': 'sendResults',
-    '8c225000417101dd3d51c72fef4097987387341ffc806678ec9fcdeb0b2902ca': 'sendResults',
-    '16525447c005b181b4b90c9ef548dbba53ba1a46270c7ab562b79a62a18cc72e': 'sendResults',
-    '22b5b437b109b28dc95fda1ee4a647c923bd6773e7e7246d6cebcec534537814': 'waitResults',
-}
-
-
-def comparable_mock(case_id, original, replay):
-    compared = copy.deepcopy(replay)
-    undefined = {'type': 'undefined'}
-    for field in ('sendResults', 'waitResults', 'fallbackResults', 'fetchResults'):
-        if len(original[field]) != len(compared[field]):
-            continue
-        for ts_row, java_row in zip(original[field], compared[field]):
-            if (NATIVE_VOID_SITES.get(case_id) == field and ts_row == {'type': 'resolved', 'value': undefined}
-                    and java_row == {'type': 'resolved', 'value': None}):
-                java_row['value'] = undefined
-            ts_value, java_value = ts_row.get('value'), java_row.get('value')
-            if (isinstance(ts_value, dict) and isinstance(java_value, dict)
-                    and ts_value.get('type') == java_value.get('type') == 'error'
-                    and ts_value.get('details') == undefined and java_value.get('details') is None):
-                java_value['details'] = undefined
-    if case_id == 'b695d5fe60f609923a84b22ccea5de14273143bdfd40c7f4a5e6fccd765de5d3':
-        ts_rejected = {'type': 'rejected', 'value': 'untrusted rejection'}
-        java_rejected = {'type': 'rejected', 'value': {'type': 'error', 'name': 'Error',
-                                                    'message': 'untrusted rejection', 'details': None}}
-        require(original['sendResults'] == [ts_rejected] and compared['sendResults'] == [java_rejected],
-                '固定非 Error 模拟拒绝原值变化')
-        compared['sendResults'] = [ts_rejected]
-    return compared
-
-
 def sources(worktree):
     catalog, mapping, complete = read(TASK / 'module-tests.json'), read(TASK / 'test-map.json'), read(PLAN)
     file = next(item for item in catalog['files'] if item['path'] == FILE)
@@ -204,17 +170,10 @@ def verify(worktree, output):
     require(set(left) == set(right), '双侧边界输入身份不同')
     for key, original in left.items():
         replay = right[key]
-        require(original['kind'] == 'AuthFetch.boundaryInput'
-                and replay['kind'] == 'AuthFetch.boundaryEntry'
+        require(original['kind'] == replay['kind'] == 'AuthFetch.boundaryInput'
                 and isinstance(original['mockInputs'], dict) and isinstance(replay['mockInputs'], dict),
                 '边界原例外部 mock 输入缺失')
-        ts_input, java_input = copy.deepcopy(original['input']), copy.deepcopy(replay['input'])
-        ts_pending, java_pending = ts_input.pop('pendingRequestNonces'), java_input.pop('pendingRequestNonces')
-        require(len(ts_pending) == len(java_pending) and set(ts_pending) == set(java_pending)
-                and ts_input == java_input, '双侧边界入口/前置状态不同')
-        ts_mock, java_mock = original['mockInputs'], replay['mockInputs']
-        require(ts_mock == comparable_mock(key[0], ts_mock, java_mock),
-                '双侧边界外部 mock 输入/结果不同')
+        require(original == replay, '双侧边界入口、前置状态或外部 mock 输入不同')
     ts_assertions, java_assertions = lines(output / 'ts-assertions.jsonl'), lines(output / 'java-assertions.jsonl')
     expected_assertions = sum(len(plan[case['id']]['assertionIds']) for case in cases)
     require(len(ts_assertions) == len(java_assertions) == expected_assertions == 60,

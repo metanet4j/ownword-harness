@@ -35,16 +35,6 @@ Maven 和 pnpm 分别使用 `./mvn.sh`、`./pnpm.sh`；这两个入口固定工�
 
 迁移单位是完整模块，范围复核确认 `primitives`、`compat`、`script`、`transaction`、`wallet`、`auth` 六模块，含 133 个测试文件、5,329 个注册用例（含 manual）。范围依据见[完整模块与 API 映射](doc/完整模块与API映射-20260920-122800.md)，完整性脚本和数据格式见[检查器说明](doc/测试完整性脚本-20260920-104440.md)。
 
-API 映射 3576/3576 项已复核，原用例映射 5329/5329 个、源码测试站点映射 7554/7554 个；固定 TS 标准与 manual Jest 原始报告合计 5329/5329。完整六模块验收**已通过**：`audit-tests.py check` 与无过滤 `node audit-api.cjs check` 均在最终单次全量运行的产物上通过，不再拒绝未完成项。
+本轮正在修复 6 例输入重放缺口、25 例跨语言输入差异与 32 条未执行断言相关问题，随后按当前来源重新进行 TS/Java 单次全量验收。历史 `full-run-52-20260901` 只作为定位基线，不作为本轮完成结论。
 
-[实施前审查](doc/实施前审查-20260920-115837.md)确认可以进入 P0；编码任务、嵌入 API 前检及最终门禁已登记在 [feature_list.json](feature_list.json)，范围复核及[完整 TS 基线](doc/TS完整基线-20260920-124400.md)已完成（5329/5329，含原规模 manual）；已完成 Hex 与 BigNumber 构造原文件对应的内部实施项；已复核文件、剩余映射和授权差异见[当前进度](progress.md)及[API 契约](doc/完整模块与API映射-20260920-122800.md)。每个编码任务内先复核对应 API，再 TDD 并落实原测试及真实结果对照；完整模块最终验收仍须完成 P0 联合验收。
-
-逐步执行入口：[模块迁移计划](doc/模块迁移计划-20260920-103547.md)中的“编码任务与 API 前检”“文件和脚本的职责”“按顺序执行”和“单行为执行示例”，逐项说明输入、脚本、产物与完成条件；尚未实现的运行/采集入口已明确标记。后续交接：[session-handoff.md](session-handoff.md)。
-
-**任务已完成。** 共 43 个执行事项全部 `done`（基线、实现切片与全量门禁），`nextItem` 与 `activeItem` 已清空；API 复核嵌入任务前检，21 个嵌入批次均已完成。
-
-单次双侧全量运行 `full-run-52-20260901` 验收通过：四阶段全 exit=0（ts-capture 2446.2、java-capture 1193.3、bundle 44.3、check 42.9 秒，合计 3728 秒），`status=passed`、`formalAcceptance=true`；133/133 文件、5329/5329 用例、38092 输入、**56744 断言逐条一致**，缺失／未执行／未比较均为 0。`full-evidence-run.py verify`、`audit-tests.py check`、`node audit-api.cjs check` 三项独立复核均通过（API 3576 声明）。
-
-如实披露三处例外：6 例已知缺口（`auth-fetch-peer` 无输入重放入口，用户已裁决不重新冻结）、25 例按设计的跨语言输入差异（16 条精确规则）、32 条有据的未执行断言。
-
-验收结果、复核命令与后续约束见 [session-handoff.md](session-handoff.md)。任务范围、依赖及独立验收条件以 feature_list.json 为准。
+当前事项、检查结果及唯一下一步见 [progress.md](progress.md)；权威队列与最终门禁见 [feature_list.json](feature_list.json)，接手约束见 [session-handoff.md](session-handoff.md)。

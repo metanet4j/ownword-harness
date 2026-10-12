@@ -1,94 +1,41 @@
 # 当前进度
 
-## 执行位置
+## 当前目标
 
-**任务已完成。** 权威状态见 [feature_list.json](feature_list.json)：43 个事项全部 `done`，`nextItem` 与 `activeItem` 已清空。
+先修复 6 例输入重放缺口、25 例跨语言输入差异及 32 条未执行断言相关问题，再以修复后的固定来源执行 TS/Java 单次全量验收。当前任务进行中，不能沿用历史通过声明作为本轮结论。
 
-**验收结果（`full-run-52-20260901`，2026-10-02 19:50 起、20:54 结束，3728 秒）**：
+权威队列见 [feature_list.json](feature_list.json)。当前事项为 `migration-input-replay`；结果采集、证据门禁、P0 收口、P1 联合验收及 P2 交付验收已重新打开。
 
-| 阶段 | exit | 耗时 |
-| --- | --- | --- |
-| ts-capture | 0 | 2446.2 秒 |
-| java-capture | 0 | 1193.3 秒 |
-| bundle | 0 | 44.3 秒 |
-| check | 0 | 42.9 秒 |
+## 修复范围与当前证据
 
-`status=passed`、`formalAcceptance=true`、`fullRunId=240c100e77754b89a2ed02230fd1a3a1`、17 项产物哈希写入 `artifactSha256`。
+- 6 例 `AuthFetch.peer`：已补齐真实消费账本，6/6 原例通过；与 TS 逐项严格一致，缺口登记已清空。SDK 提交 `e296767`。
+- 25 例输入差异：已修复标签、原始拒绝值、Void/错误详情、插入顺序与真实正文状态。涉及的四个原文件共 46/46 用例输入严格一致，替换规则已撤掉。
+- 32 条未执行断言：用户已确认保留原测试及真实不可达证明，补独立有效 DRBG 分支。固定 TS 3 组 × 5 次生成的真实参考序列已保存；Java hex/数组/重复构造 3/3 独立回归通过，单独计数。
+- 常规测试 4 例失败及 Coordinator 竞态：非采集请求直通与通知时序已修复；HTTP 6/6、Coordinator 34/34 聚焦通过。完整常规 `clean test` 5451/5451 通过，失败/错误/跳过均为 0；JAR 已安装到任务缓存。
 
-**覆盖**：133/133 文件、5329/5329 用例（TS 与 Java 两侧各 5329）、38092 输入样本、**56744 断言逐条比较一致**；缺失／未执行／未比较均为 0，另有 32 条按固定规则与分支样本有据的未执行断言。
+## 已执行检查
 
-**三项审计独立复核**（均在验收后重跑，exit=0）：`full-evidence-run.py verify`、`audit-tests.py check`、`node audit-api.cjs check`（3576 声明）。
+- `./init.sh`：exit=0；五仓分支/基线、固定 TS、清单与工具链隔离均通过。
+- `node audit-api.cjs batches`：沙箱内 Node 启动 git 被 EPERM 拦截；宿主执行 exit=0，28 个编码任务、133 源/API 文件、133 原测试文件、5329 用例、3576 声明分配完整。
+- 修复前五个 Java 仓库工作树干净；ownword 主仓的既有无关修改保持不动。
 
-**七项交付**：①四阶段 exit 与耗时见上表；②`verify` 通过；③`audit-tests.py check` 通过；④`audit-api.cjs check` 通过；⑤`knownUnroutableCases=6`（规则 `frozen-test-without-replay-entry-v1`，登记条数 6）；⑥`crossLanguageInputSubstitutions.count=25`（substitutions 42、unorderedComparisons 1）；⑦`assertionSources` = legacy 168 例/1713 行 + shared 5161 例/55031 行 = **56744**。
+- 聚焦累计 `clean test`：93/93，失败/错误/跳过均为 0；46 个原用例实际输入逐项严格一致，报告 `strict-input-repair-parity.json`。
+- 门禁自测：Node 43/43、bundle 88/88、语义 14/14、联合来源 24/24（含输入缺口/替换豁免拒绝反例）；不计 SDK 用例。
+- 无过滤 `node audit-api.cjs check`：3576 声明结构核对通过，实际行为由全量结果验收。
 
-**SDK 来源**：`metanet4j-bsv-sdk` 分支 `feature/bsv-sdk-java-migration`，HEAD `3dd8beb`，验收记录的 `javaRevision` 为 `ce6b50d7cb35…`。
+- 六例缺口登记清空后发现 4 条旧原断言 expected 缺失；已补齐固定原期望，并增加真实工厂参数观察，取消 expected 缺失豁免。聚焦 27/27 通过，6/6 输入及 28/28 原断言严格一致，报告 `peer-strict-input-assertion-parity.json`。
 
-## 迁移中发现并修复的生产缺陷（均带独立回归）
+## 证据与执行约束
 
-| 缺陷 | 现象 | 修复 | 回归 |
-| --- | --- | --- | --- |
-| `Signature.toCompact(int,Object,String)` | `Boolean` 实参按子类型匹配 `Object` 形参优先于拆箱，选中自身 → 无限递归 `StackOverflowError` | 显式取 `booleanValue()` 走编码重载 | `SignatureToCompactRegressionTest` |
-| `Utils.toArray` | 缺 TS `Array.from(msg, Math.trunc)` 的类数组分支 | 补 `BigNumber` 分支（按名义字长产出 NaN 元素） | `UtilsBigNumberArrayRegressionTest` |
-| `Hash.bytes` | 把 `BigNumber` 当空输入，`sha256(BigNumber)` 等于 `sha256("")`，导致 RFC6979 签名与固定 TS 不同 | 补 `BigNumber` 分支走 `toArray` | 同上 |
-| `Peer` 三处分发循环 | 监听器在回调里自注销（原测试真实用法）触发 `ConcurrentModificationException`，丢消息并挂死；固定 TS 的 Map 迭代允许删除 | `generalCallbacks`／`certificateRequestCallbacks`／`certificateCallbacks` 三处改遍历快照 | `PeerGeneralListenerUnsubscribeTest`（红绿验证：缺陷态 3/3 快速失败，修复态 3/3 通过） |
+修复证据目录：`.cache/evidence/repair-exceptions-20261012/`。历史全量来源为 `.cache/evidence/full-run-52-20260901/`，仅用于定位和回归输入。
 
-## 收尾流程（已脚本化）
+仅修改 `metanet4j-bsv-sdk` 与任务根的验证工具/清单/文档；固定 TS 和其他四工程只读。Maven 使用 `./mvn.sh`，pnpm 使用 `./pnpm.sh`；目标工程测试、采集及共享清单写入经 `./lock.sh` 串行执行。
 
-`final-window-guard.sh`（静默／编译／计划／分派／覆盖率／工作树六项）→ 提交冻结来源 → `recapture-all.sh final-<标签>`（动态枚举 105+ 个可采局部，约 3.5–4 小时，含 `AESGCM.man` 的 66 分钟长跑）→ `full-evidence-preflight.py` → `close-items.sh <标签>`（逐事项任务级对照）→ `run-full-ts-capture.py` + `run-full-java-capture.py` 单次双侧全量运行 → `audit-tests.py check` + `audit-api.cjs check`。手册见 [全量验收运行手册](doc/全量验收运行手册-20260929-192735.md) 第五节。
+修复完成后提交并冻结 SDK、采集工具、映射与计划；运行期间不再修改来源。随后重新生成一轮双侧全量证据，执行完整 API 与测试门禁、JAR 交付核验。
 
-## 已取得的任务级验收
+- 当前 SDK 修复已提交并冻结：`e296767`、`289ddac`、`6a5569a`，SDK 工作树干净。
+- 全量前检：5329/5329 结构计划、38092 输入、56744 断言实例，`readyForFullCapture=true`；历史局部当前来源验证为 0，必须以新单次全量运行证明。
 
-- 对称加密：固定 TS 原规模 536,870,928 字节 manual 在原 90 分钟上限内 66 分 16 秒通过；独立 Java `c0d9fdd` 工作树 manual 1／1，逐字节比较 536,870,928 次。普通原始 TS／该版 Java 轨迹 51／51、384／384 逐字段一致；合计 52／52、387／387，报告 `.cache/evidence/symmetric-task-parity-c0d9fdd.json`，篡改反例 7／7 通过。
-- Compat：主目标 `c0d9fdd` 的原始 Java 轨迹与固定 TS 五文件重新比较，122／122 个用例、281／281 条断言一致，报告 `.cache/evidence/java-full-after-auth-property-20260926/compat-task-parity-current.json`；依赖满足后已标记 `done`。
-- 交易完整功能：目标提交 `f1b5752`；固定 TS／Java 745／745 个原用例、1390／1390 条实际断言一致，报告 `.cache/evidence/transaction-complete-clean-parity-9bcb650.json`。
-- 交易验证与证据：目标提交 `dfacef7`；固定 TS／Java 53／53、162／162 条实际断言一致，报告 `.cache/evidence/transaction-verification-parity-main-20260926.json`。交易模型 API-09 的 126 项与证据 API-10 的 176 项均通过单批审计。
-- 认证会话：目标提交 `94d5bc0`，异步存储修复 `7c382f6`，公开异步存储入口 `3e58d02`；固定 TS／Java 85／85、160／160 条实际断言一致，另有两例延迟 Future 回归，报告 `.cache/evidence/auth-sessions-parity-main-7c382f6.json`。API-19 的 101 项通过单批审计。
-- 认证传输：固定 TS／Java 的 Transport＋AuthFetch 183／183 个原用例、968／968 条实际断言已在 `c0d9fdd` 对照通过，报告 `.cache/evidence/java-full-after-auth-property-20260926/auth-transport-task-parity-replayed.json`；两条运行时间戳与堆栈按固定字段语义核验。AuthFetch 属性测试固定 TS 300 组实际生成输入已由 Java 同批重放，600／600 条断言精确一致，语料 SHA-256 为 `b0cf9d142fed85b2a9a82b85ac4b254ae6408da60ffa6457f98e757825818392`。本任务 taskAcceptance 已通过，排期状态仍等待依赖。
-- DRBG：目标提交 `c23c6f6`；固定 TS／Java 原例 29／29、实际断言 30／30 逐值一致，72 条真实入口（57 个构造／生成入口＋15 个 NIST 守卫分支）双端一致，30 条未执行断言按固定规则与分支样本有据，审计摘要 `{"status": "PASS", "comparedAssertions": 30, "justifiedUnexecutedAssertions": 30}`，报告 `.cache/evidence/drbg-parity2-20260928.json`，文档 [DRBG原输入验收](doc/DRBG原输入验收-20260928-181254.md)；输入、断言与分支三类篡改均被拒。
-- knownTxids 付款：目标提交 `79c4b3b`；该文件固定 TS 17／17、Java 17／17，6 个付款用例的 6 条真实输入与 8 次付款调用逐字段一致、25 条断言一致，付款输入与断言两类篡改被拒，文档 [knownTxids付款输入验收](doc/knownTxids付款输入验收-20260928-201034.md)。
-- knownTxids 真实 Peer：目标提交 `b7acbb4`；同一文件 17／17 原例，真实 Peer 付款例的随机源、两次 fetch 入口、Peer 前置状态、交付帧与发送载荷逐字段一致，6 条断言一致，输入与断言两类篡改被拒，文档 [knownTxids真实Peer输入验收](doc/knownTxids真实Peer输入验收-20260928-210831.md)。至此该文件 17 例的输入重放全部落地。
-- Wallet Contracts：六个原测试文件在当前 Java 来源 `382ac6c6` 全部重采为标准双侧同输入局部（253 例、918 输入样本、1003 断言），local-evidence-gate 的 verify／tamper 均通过，full-evidence-preflight 记为 `currentCaptureVerified`；任务级对照 `.cache/evidence/wallet-contracts-clean-parity.json`，刷新记录见 [钱包契约与钱包JSON证据刷新](doc/钱包契约与钱包JSON证据刷新-20260929-020724.md)。
-- Wallet JSON：HTTPWalletJSON 53 例与 toOriginHeader 5 例在同一来源 `382ac6c6` 重采为标准双侧同输入局部，输入与断言两类篡改被拒；文档 [HTTPWalletJSON原输入验收](doc/HTTPWalletJSON原输入验收-20260929-004232.md)。两项前置完成后已按依赖顺序标记 `done`。
-- 交易基础：目标提交 `e741afa`（来源 `21d6cded`）；五个原测试文件 74 例、150 条真实输入、115 条断言全部双侧一致，五项 verify 与 tamper 通过，任务级报告 `.cache/evidence/transaction-base-same-source-20260929/task-parity.json` 为 74／74、115／115；聚焦 `clean test` 74／74。`migration-impl-transaction-base` 已标记 `done`，`nextItem` 改为 `migration-impl-transaction-beef`。
-- 广播器：目标提交 `e741afa`（来源 `21d6cded`）；四个文件 68 例、231 条真实输入、169 条断言双侧一致，四项 verify 与 tamper 通过，任务级报告 `.cache/evidence/broadcasters-same-source-20260929/task-parity.json` 为 68／68、169／169；聚焦 `clean test` 79／79。`migration-impl-broadcasters` 已标记 `done`。
-- 钱包宿主与 WalletWire（部分）：`xdm-browser-boundary` 70 例／275 输入／186 断言、`react-native25` 25／88／40、`wallet-wire` 82／179／300 已升级为标准双侧局部并通过 verify 与 tamper；聚焦 `clean test` 分别 70／25／82 全通过；wallet-wire 另有 4 MiB BEEF 大数组双侧字节逐条一致。两项仍缺 `HTTPWalletWire.test.ts` 46 例与 `window.CWI.test.ts` 31 例，未结项。
-- 认证证书：目标提交 `fa67ce4`、`58a8f73`；固定 TS 五个原测试 50／50 例、128 条断言。当前 Java 来源 `0a119349`（提交 `1da225e`）下六个文件已全部升级为标准双侧同输入局部（MasterCertificate 构造 2 例、MasterCertificate 其余 13 例、getVerifiableCertificates 5 例、validateCertificates 8 例、Certificate 15 例、VerifiableCertificate 7 例，合计 278 条入口），`local-evidence-gate.py` 的 verify 与 tamper 六项全通过；任务级同来源报告 `.cache/evidence/auth-certificates-same-source-20260929/task-parity.json` 为 50／50、128／128，改写实际值与缺少局部两类反例均被拒。`migration-impl-auth-certificates` 已标记 `done`。
-- HTTPWalletJSON：目标提交 `c88a04e`、断言记录对齐 `1c979fa`，同一来源的宿主无过滤 `clean test` 5437／5437；固定 TS／Java 53／53 原例，214／214 条真实入口（构造、公开 api、fetch 请求／响应／拒绝）与 73／73 条原断言逐值一致，53 条线上请求体解析后一致，输入与断言两类篡改被拒，文档 [HTTPWalletJSON原输入验收](doc/HTTPWalletJSON原输入验收-20260929-004232.md)。该局部经 `full-evidence-preflight.py` 来源复核，使 `currentCaptureVerifiedCases` 首次非零（53）。
+## 唯一下一步
 
-固定 TS 原始标准／manual Jest 报告合计 5329／5329，通过 `audit-tests.py compare-ts`。Java 当前轮的 5437 条通过记录也不能代替双端同一次完整采集；原始报告还没有覆盖全部用例的输入计划、双侧输入与断言 manifest，最终 `audit-tests.py check` 尚未通过。部分已通过任务的排期状态仍非 `done`，待逐项核对依赖、当前接口行为及同输入证据。
-
-## 全量证据与后续门禁
-
-API 总验收发现的 `Transaction.verifyQueued`／`completeWithWallet` 同步等待、三个公开异步入口同步抛错及 PATCH 默认传输丢失状态说明均已修复并合入；对应隔离回归分别为 802／802、22／22、54／54，当前主提交累计回归通过。Wallet Contracts 在 `c0d9fdd` 的原始 Java 轨迹与固定 TS 253／253、1003／1003 逐断言一致，报告 `.cache/evidence/java-full-after-auth-property-20260926/wallet-contracts-task-parity-current.json`。BRC100ByteEncoding 两个属性用例的 600 组、WERR 32 例的 32 次输入／40 条断言、JSON 字节 10 例的 26 次输入／19 条断言、BRC100 字节 23 例的 57 次输入／62 条断言，以及 WalletError 39 例的 54 次输入／79 条断言，均有双侧局部同输入核验。ValidationHelpers 严格保留 `undefined`／`null` 后，固定原 147 例的 149 组样本／203 条断言一致，另有 6 个显式 `null` 回归；三类篡改反例被拒绝。证书五文件 50／50 原例、128／128 原断言已在当前来源取得标准双侧局部与任务级同来源对照。
-
-P0 采集来源门禁已修复旧版本、同源伪轨迹、缺失断言及跨文件站点归属等误放行；语义规则自测 10／10、bundle 自测 18／18、宿主审计自测 43／43、关联自测 3／3 通过。Hex＋BigNumber 构造的局部输入重放为 36／36 用例、71／71 样本和断言一致，AuthFetch 属性 300 组实际输入由 Java 重放；byte-codecs 的 Base58 六例在 `75a3dc1` 双侧正式 capture 通过，固定 TS 全文件 Jest 62／62、Java 聚焦 6／6。Spend 两个固定 TS 文件的 455 个向量分别绑定独立 Java 测试身份，隔离 455／455 条原断言通过。Script／Spend 共用向量已有 1940 例的 8286 次输入／5030 条断言局部核验；Transaction 向量 659 例的 1159 次输入／1159 条断言、Chronicle 74 例的 77 次输入／77 条断言也完成局部核验。PBKDF2 的 13 个向量、AuthFetch 等待 5 例及支付响应头 8 例已有独立双侧采集。DRBG 29 例已完成双端正式采集并登记（`drbg29`），但其运行绑定 `c23c6f6`，在当前 Java 版本下被来源复核拒绝，须在最终单次全量运行中重采。最新预检（`.cache/evidence/full-preflight-round13.json`）把来源复核记为 121 例、12 个局部：wallet-keys 六文件 71 例与认证证书六文件 50 例，全部绑定 Java 来源 `0a119349`；其余 68 个局部绑定旧执行器或旧版本，须在最终单次全量运行中重采。结构计划仍为 4099／5329，缺 1230 例、75 个文件，`readyForFullCapture=false`。
-
-- 交易基础（transaction-base，三批 API 前检 177／126／30 声明已通过）：五个原测试文件全部升级为标准双侧同输入局部，在同一 Java 来源下采集——`fee-model-satoshis-per-kilobyte` 18 例／35 输入／21 断言、`live-policy` 8／25／17、`transaction-ef-cache` 4／36／20、`transaction-additional` 20／24／27、`transaction-signature-additional` 24／30／30，合计 74 例、150 条输入、115 条断言，各项 verify 与 tamper 通过；聚焦 `clean test` 74／74（失败／错误／跳过为 0）。任务级同来源对照与 `done` 标记待子代理的 Java 改动提交后统一刷新；见 [交易基础证据推进](doc/交易基础证据推进-20260929-162058.md)。
-ProtoWallet.native-hash 已完成标准双侧局部：6 例、19 条入口、18 条断言（65536 字节载荷按字面量登记，describe 级构造按计划归位），verify 与 tamper 通过。
-ProtoWallet.async-backend 已完成标准双侧局部：5 例、21 条入口、8 条断言（从桶文件出口替换 ProtoWallet／KeyDeriver，注册与注销按后端支持的操作集记录），verify 与 tamper 通过。
-
-wallet-keys 已完成四个文件的标准双侧同输入局部：KeyDeriver 17 例、49 条入口、37 条断言；ProtoWallet 19 例、111 条入口、44 条断言（深度守卫、原 helper 的 undefined originator 与固定系统时间对齐）；CachedKeyDeriver 13 例、49 条入口、44 条断言（含 LRU／最近使用循环站点样本与 `timing-ms-v1` 耗时语义规则）；ProtoWallet.additional 11 例、22 条入口、11 条断言（记录 keyDeriver 前置状态，测试侧用 `WalletKeysEntropy` 与 TS 探针的固定熵流对齐，双方消费同一把随机密钥 `40919c65…`）。两者均通过局部门禁 verify 与 tamper。KeyDeriver `local-evidence-gate.py` 的 verify 与 tamper 通过，TS 探针按“立即调用者是原测试”判定边界，Java 侧重放用子类覆写加深度守卫实现同一规则。Java 侧每次提交都会推进来源摘要（`382ac6c6`→`f16b01df`→`8cf69655`），因此已完成的局部会在下一次 Java 改动后变为过期；按计划在 wallet-keys 的 Java 侧改动全部落地后统一重采全部受影响局部。最新预检（20260929）的结构计划为 4099／5329，仍缺 1230 例；wallet-keys 六个局部（71 例）与认证证书六个局部（50 例）已在同一来源 `0a119349` 统一重采并通过来源复核，分别是两项的结项依据；其余局部待各自收尾后统一重采；现有局部运行不能拼接为正式全量来源，见 `doc/全量证据采集前置-20260927-005500.md`。完整 `audit-tests.py check` 还需当前源码下单次双侧全量输入、逐断言实例、随机／耗时语义和条件分支证据。
-
-## 2026-10-02 验收轮修复的工具链与 SDK 缺陷
-
-`full-run-46` 首次跑完双侧采集并进入 bundle，随后逐个暴露下列缺陷，全部已修并验证。
-
-| 缺陷 | 现象 | 修复 | 验证 |
-| --- | --- | --- | --- |
-| 五个 `replay-*.py` 丢弃 `expected`/`kind` | 403 条断言两侧记法不同（上游 `capture-parity.cjs` 与 raw 轨迹均含该字段） | 补 `expected` 与 `kind`，对齐标准转换器 | 用各转换器自身 `assertions_for()` 重放 run-41 raw：0/403 → 390/403 |
-| `capture-parity.cjs` 对 `toThrow` 的 expected 未取类名 | 61 条记成 `String(类)` 的整段 class 源码 | `toThrow` 与 `toBeInstanceOf` 同走 `canonicalCallArg` | 已验证 `canonicalCallArg` 对非函数入参与 `canonical` 逐类型等价 |
-| `ZERO_ARITY_MATCHERS` 漏收 `toThrow` | 两侧「无期望」记法不同即误报 | 补 `toThrow`/`not.toThrow` | 137 条工具链自测全通过 |
-| `matcher_semantics` 形状守卫顺序 | 两侧同为 `None` 时下标访问抛 `KeyError` | 先校验键存在且非 None | 同上 |
-| `EMPTY_EXPECTATIONS` 缺第四种记法 | Java 对 `not.toThrow` 记 `{"type":"null"}` | 补入该形态 | 同上 |
-| 10 条跨语言断言记法差异 | 两侧 `actual` 逐字节相同，仅 `expected` 按约定不同 | 照既有模式在 `SEMANTIC_CASES`、输入计划 `comparisonRules`、`compare_actuals` 三处登记 | 10/10 通过、11 项篡改反例全被拒 |
-| `build-full-run-probes.py` 硬编码旧 TS driver | 任何一次分派表重建都把 `tsCommand` 改回 `run-full-ts-capture.py`，令 `a568cff` 的切换失效 | 在生成器内直接写串行 driver | 连续两次重建及跑完守卫后仍为串行 driver |
-| `RecordingAssertions` 四处按类源码／原生函数源码记 expected | 采集器改记类名后两侧记法由一致转为不一致（48 处） | 统一改记类简单名，删除 6 个失效冻结语料 | 用 run-48 真实输入聚焦运行 77 例通过；56744 条逐条重放全通过 |
-| `test-map.json` 站点归属遗漏 | TS `test.each` 两变体共享断言站点，Java 拆成两个测试类，登记表只归属其一 | 三个站点的 `caseIds` 各追加第二个变体 | 全表 7554 个站点归属核对 0 条不符 |
-
-**须如实披露的三处例外**（均已在交接单登记，本次验收数值与登记完全一致）：
-
-1. **6 例已知缺口**（`known-gaps.json`，`ruleId=frozen-test-without-replay-entry-v1`）：`auth-fetch-peer` 的 6 个用例在冻结 SDK 测试里没有输入重放入口，补齐需新增重放类并改 `java_revision`。此前用户已裁决记为已知缺口、如实披露、不重新冻结。
-2. **25 例按设计的跨语言输入差异**（`cross-language-input-rules.json` 16 条精确规则）：如 TS `undefined` ↔ Java `null`、`Error` ↔ `SdkException`、无序集合比较。
-3. **32 条按固定规则与分支样本有据的未执行断言**（`justifiedUnexecutedAssertions`），逐条绑定固定条件与实际样本。
-
-另记：`TransactionEvidenceCoordinatorTest` 存在 1 例既有 async 竞态 flake（堆压力下偶发，同参数单跑通过），属迁移测试自身竞态。
+在 `.cache/evidence/full-run-repaired-20261012/` 以 90 分钟上限启动单次 TS/Java 全量采集、汇总和终审；通过后独立复核全部门禁并同步交付状态。
