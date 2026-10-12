@@ -38,7 +38,17 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-visual-review",
       "evidence": "_task/prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261012-224835.md；功能提交、32 条 BDD 与 81 项实际浏览器断言见任务清单和验收汇总。",
-      "nextStep": "用户视觉复核当前 v0.4.0；复核前保持 needs-review。"
+      "nextStep": "用户视觉复核当前 v0.4.0；复核前保持 needs-review。",
+      "currentChange": {
+        "id": "R01",
+        "goal": "落实不使用超大字体及更紧凑的页面排版。",
+        "status": "needs-review",
+        "scope": "当前 v0.4.0 原型字号、公开主页间距、设计依据与定向视觉检查。",
+        "nextStep": "用户查看常规字级与紧凑排版，视觉复核前保持 needs-review。",
+        "implementationStatus": "implemented-and-verified",
+        "commit": "15a51ce",
+        "evidence": "_task/prototype-worktree/ownword-v0.4.0/ownword-prototype/evidence/homepage-v040/R01/verification.json"
+      }
     },
     {
       "id": "reference-1sat-v040-restore",

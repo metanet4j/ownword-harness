@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "purpose": "从 v0.3.0 基线完整制作 v0.4.0 Identity 个人主页 P01–P10。",
-  "lastUpdated": "2026-10-12",
+  "lastUpdated": "2026-10-13",
   "allowedStatuses": [
     "not-started",
     "in-progress",
@@ -276,6 +276,23 @@
       "implementationStatus": "implemented-and-verified",
       "commit": "a49bdb9fea48980a8ca2cc8ba7bc4ee1c7b7af97",
       "evidence": "ownword-prototype/evidence/homepage-v040/P10/verification.json"
+    },
+    {
+      "id": "R01",
+      "name": "常规字级与页面密度",
+      "description": "按用户视觉反馈降低当前原型标题、正文和 Artifact 编号字号，收紧公开主页相关间距；不改变关系、分页或内容数据。",
+      "dependencies": [
+        "P10"
+      ],
+      "status": "needs-review",
+      "doneCriteria": [
+        "主标题及编号不超过 28px，内容列表标题不超过 20px，正文不超过 16px；使用绑定 S2 Token 的应用角色",
+        "桌面、手机首条作品可见，标识可复制，标签及关系弹层键盘操作保持可用",
+        "预编译产物与当前源码一致，相关截图实际审阅，独立提交并交付视觉复核"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "commit": "15a51ce",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R01/verification.json"
     }
   ],
   "delivery": "交付验收v0.4.0-20261012-224835.md"
