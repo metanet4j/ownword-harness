@@ -2,7 +2,7 @@
 
 ## 状态
 
-用户已批准修复至计划完成。当前执行项：bsv-r6-integration；状态以 feature_list.json 为准。
+用户已批准修复至计划完成。当前执行项：bsv-r6-artifact；状态以 feature_list.json 为准。
 
 ## Blockers
 
@@ -16,4 +16,4 @@
 
 ## Next Session
 
-共享设施与组件全集成验收。
+最终制品与依赖来源复核。
