@@ -10,23 +10,23 @@
 - R3 业务 SDK 适配：done（5/5）
 - R4 component 适配：done（5/5）
 - R5 旧依赖清理：done（2/2）
-- R6 全量验收与交付：in-progress（1/5）
+- R6 全量验收与交付：in-progress（2/5）
 
 ## Last Updated
 
-2026-10-12T15:14:16+08:00
+2026-10-12T15:15:52+08:00
 
 ## Current Objective
 
-业务 SDK 本地 HTTP 集成验收
+共享设施与组件全集成验收
 
 ## 当前证据
 
-- 最近完成：bsv-r6-unit。
-- 证据：evidence/bsv-replace/repair-20261012/r6-unit/summary.json。
+- 最近完成：bsv-r6-http。
+- 证据：evidence/20261012T070925Z-http-integration/summary.json。
 - 提交：metanet4j-sdk 70010f2。
 - 修复前状态：evidence/bsv-replace/repair-20261012/pre-repair-feature-list.json。
 
 ## Recommended Next Step
 
-业务 SDK 本地 HTTP 集成验收；严格按计划依赖及完成条件执行。
+共享设施与组件全集成验收；严格按计划依赖及完成条件执行。
