@@ -15,7 +15,7 @@ Before applying this skill, read:
 
 1. `_task/system-design/spec/核心认知.md`
 2. the current version design document
-3. `standard/design-skill-architecture.md`
+3. `standard/OwnWord设计与设计系统.md`
 
 ## Binding Rule
 
@@ -99,6 +99,6 @@ Page structure, visual direction and version-specific interaction requirements c
 
 Spectrum S2 defines the fixed design-system foundation.
 
-`baoyu-design` organizes the design workflow. `design-taste-frontend` and `high-end-visual-design` may improve visual execution only inside the Spectrum S2 boundary.
+`baoyu-design` 在 Spectrum S2 与当前版本设计文档的约束内组织设计流程。
 
 This skill checks Spectrum S2 implementation behavior, tokens, interaction consistency and accessibility. It must not override Core Cognition or the current version design document.
