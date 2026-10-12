@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-10-12T19:50:08.291029+08:00",
   "result": "baseline-verified",
-  "scope": "已取得 v0.3.0 最新源码并核对祖先；当前 v0.4.0 尚未制作。",
+  "scope": "H00 初始化时实际核对 v0.3.0 来源、源码祖先与 worktree；当前功能验收另见任务清单及交付说明。",
   "source": {
     "repository": "https://github.com/metanet4j/ownword-design-prototype.git",
     "localRepository": "designs/own-word-prototype-s2-astra-001",
@@ -12,7 +12,5 @@
     "registeredCommitIsAncestor": true
   },
   "actualWorktreeCreated": true,
-  "featuresStarted": 0,
-  "browserVerification": "current-baseline-verification.json",
-  "nextStep": "进入 P01，按当前范围连续制作。"
+  "browserVerification": "current-baseline-verification.json"
 }

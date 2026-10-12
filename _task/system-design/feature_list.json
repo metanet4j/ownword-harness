@@ -36,9 +36,9 @@
       "harnessPath": "_task/prototype-worktree/ownword-v0.4.0",
       "output": "_task/prototype-worktree/ownword-v0.4.0/ownword-prototype",
       "implementationStatus": "implemented-and-verified",
-      "reviewStatus": "agent-design-review-passed",
-      "evidence": "详细状态、逐项源码提交与实际证据见 _task/prototype-worktree/ownword-v0.4.0/feature_list.json；旧版证据已删除。",
-      "nextStep": "交付当前 v0.4.0 完整原型，等待用户视觉复核。"
+      "reviewStatus": "awaiting-user-visual-review",
+      "evidence": "_task/prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261012-224835.md；功能提交、32 条 BDD 与 81 项实际浏览器断言见任务清单和验收汇总。",
+      "nextStep": "用户视觉复核当前 v0.4.0；复核前保持 needs-review。"
     },
     {
       "id": "reference-1sat-v040-restore",
@@ -94,7 +94,7 @@
       "reviewStatus": "awaiting-user-review",
       "evidence": "核心认知与版本文档已同步；10 项功能、32 条唯一 BDD 及制作映射完整，本次文档引用可定位。代理设计审查通过并补齐 v0.3.0 连续性、双向样例事件读取与内容路由适配约束；审查报告见当前 PRD 目录。原型和环境状态以 prototype-homepage-v040 为准；参考来源证据见 reference-1sat-v040-restore。",
       "statusNote": "用户已确认关键需求并授权代理 review 后完整制作；三项设计边界已修正，设计审查通过，人工视觉复核仍保留。",
-      "nextStep": "设计审查及任务准备已完成；实际基线阻塞与后续制作以 prototype-homepage-v040 为准。"
+      "nextStep": "与当前已实现并验证的 v0.4.0 原型一并交付复核；实际成果以 prototype-homepage-v040 为准。"
     },
     {
       "id": "prototype-artifact-v030",
