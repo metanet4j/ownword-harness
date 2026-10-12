@@ -8,25 +8,25 @@
 - R1 固定 SDK 制品接入：done（3/3）
 - R2 base 适配：done（2/2）
 - R3 业务 SDK 适配：done（5/5）
-- R4 component 适配：in-progress（1/5）
+- R4 component 适配：in-progress（2/5）
 - R5 旧依赖清理：not-started（0/2）
 - R6 全量验收与交付：not-started（0/5）
 
 ## Last Updated
 
-2026-10-12T11:47:48+08:00
+2026-10-12T11:58:46+08:00
 
 ## Current Objective
 
-组件 BAP 与交易工厂适配
+下游业务与集中测试适配
 
 ## 当前证据
 
-- 最近完成：bsv-r4-foundation。
-- 证据：evidence/bsv-replace/repair-20261012/r4-foundation/summary.json。
-- 提交：metanet4j-component dda0936a2f6730d4d3844853259e6bc730b3f27d。
+- 最近完成：bsv-r4-transactions。
+- 证据：evidence/bsv-replace/repair-20261012/r4-transactions/summary.json。
+- 提交：metanet4j-component 596d5816c9ff8ea1a681536c616974d1981b8be5。
 - 修复前状态：evidence/bsv-replace/repair-20261012/pre-repair-feature-list.json。
 
 ## Recommended Next Step
 
-组件 BAP 与交易工厂适配；严格按计划依赖及完成条件执行。
+下游业务与集中测试适配；严格按计划依赖及完成条件执行。

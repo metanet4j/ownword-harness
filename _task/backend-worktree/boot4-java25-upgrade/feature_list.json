@@ -7,7 +7,7 @@
     "blocked",
     "done"
   ],
-  "activeItem": "bsv-r4-transactions",
+  "activeItem": "bsv-r4-downstream",
   "note": "已获 R0—R6 实施授权；28 个执行项按依赖串行，七阶段在 stages 汇总。23 个既有事项保留。状态以本清单为准。",
   "planDoc": "doc/BSV依赖替换计划-20261010-103802.md",
   "features": [
@@ -1106,7 +1106,7 @@
       "name": "组件 BAP 与交易工厂适配",
       "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r4-component",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [
         "bsv-r4-foundation"
       ],
@@ -1121,17 +1121,26 @@
         "evidence/bsv-replace/r4-transactions-*/"
       ],
       "evidence": [
-        "R4 交易层适配完成：`component-tx` **16 文件**（9 生产 ＋ 7 测试）迁移完成，**25 例全绿**；**并删除一处被架构取代的类**（`BschemaCustomTransactionSigner`，§323）。"
+        {
+          "path": "evidence/bsv-replace/repair-20261012/r4-transactions/summary.json",
+          "verification": "实际执行及输出见该证据，不以状态文字代替门禁"
+        }
       ],
-      "commits": [],
-      "statusNote": "2026-10-12 验收发现门禁未满足，按用户授权修复及复验；既有记录仅为历史证据，不能替代本轮验收。"
+      "commits": [
+        {
+          "repository": "metanet4j-component",
+          "commit": "596d5816c9ff8ea1a681536c616974d1981b8be5"
+        }
+      ],
+      "statusNote": "已按修复后的实际代码与执行证据复核；最终阶段仍须全量严格验收。",
+      "completedAt": "2026-10-12T11:58:46+08:00"
     },
     {
       "id": "bsv-r4-downstream",
       "name": "下游业务与集中测试适配",
       "description": "对应计划 R4；范围及阶段门禁见 planDoc。",
       "stageId": "bsv-replace-r4-component",
-      "status": "not-started",
+      "status": "in-progress",
       "dependencies": [
         "bsv-r4-transactions"
       ],
@@ -1380,7 +1389,7 @@
   "testPlanDoc": "doc/单元测试全覆盖计划-20260920-090603.md",
   "reviewDoc": "doc/review-单元测试全覆盖计划-20260920-091540.md",
   "upgradePlanDoc": "doc/升级计划-Boot4-Java25.md",
-  "updatedAt": "2026-10-12T11:47:48+08:00",
+  "updatedAt": "2026-10-12T11:58:46+08:00",
   "authorization": {
     "status": "approved",
     "approvedAt": "2026-10-10T11:27:30+08:00",
@@ -1395,7 +1404,7 @@
     "completion": "产物、实际验证、evidence、独立仓库提交全部具备后标记 done。",
     "nextSelection": "按 dependencies；跨阶段须同时满足前一阶段 gate。"
   },
-  "nextItem": "bsv-r4-transactions",
+  "nextItem": "bsv-r4-downstream",
   "stages": [
     {
       "id": "bsv-replace-r0-baseline",
@@ -1510,7 +1519,7 @@
       ],
       "progress": {
         "total": 5,
-        "done": 1
+        "done": 2
       }
     },
     {
