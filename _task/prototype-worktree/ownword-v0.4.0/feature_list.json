@@ -293,6 +293,24 @@
       "implementationStatus": "implemented-and-verified",
       "commit": "15a51ce",
       "evidence": "ownword-prototype/evidence/homepage-v040/R01/verification.json"
+    },
+    {
+      "id": "R02",
+      "name": "全页字级与密度检查",
+      "description": "按用户要求检查当前原型全部主要页面、管理流程、阅读和媒体详情及相关弹层；修复类似大字号、留白和窄屏排版问题。",
+      "dependencies": [
+        "R01"
+      ],
+      "status": "needs-review",
+      "doneCriteria": [
+        "记录实际检查的页面与状态，桌面、窄屏和相关主题截图有可追溯证据",
+        "修复发现的字号、过多留白和溢出，保留字体角色、完整协议标识和点击区域",
+        "验证受影响的编辑、确认、返回、弹层焦点和媒体控制，源码及预编译资源一致",
+        "独立提交并更新当前交付；人工视觉复核前保持 needs-review"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "commit": "ff055f3",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R02/verification.json"
     }
   ],
   "delivery": "交付验收v0.4.0-20261012-224835.md"
