@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "activeItem": "J02",
+  "authorization": "用户要求 review 通过后开始实施",
+  "plan": "doc/实现计划-20261013-110456.md",
+  "scope": {
+    "source": "reference/js-junglebus",
+    "javaProject": "metanet4j-junglebus",
+    "branch": "feature/java25",
+    "remotePush": false
+  },
+  "features": [
+    {
+      "id": "J00",
+      "name": "原始基线",
+      "dependencies": [],
+      "status": "done",
+      "evidence": "来源锁定与计划审查通过",
+      "description": "原始基线；范围、依赖与验收以实现计划对应阶段为准。"
+    },
+    {
+      "id": "J01",
+      "name": "API 与协议契约",
+      "dependencies": [
+        "J00"
+      ],
+      "status": "done",
+      "evidence": "verify.sh baseline：77 项实际 HTTP/WebSocket 断言；fixtures 固定帧和 API与协议契约-20261013-114000.md，五项入口条件已落实",
+      "description": "API 与协议契约；范围、依赖与验收以实现计划对应阶段为准。"
+    },
+    {
+      "id": "J02",
+      "name": "工程与模型",
+      "dependencies": [
+        "J01"
+      ],
+      "status": "in-progress",
+      "evidence": "",
+      "description": "工程与模型；范围、依赖与验收以实现计划对应阶段为准。"
+    },
+    {
+      "id": "J03",
+      "name": "REST 与 Token",
+      "dependencies": [
+        "J02"
+      ],
+      "status": "not-started",
+      "evidence": "",
+      "description": "REST 与 Token；范围、依赖与验收以实现计划对应阶段为准。"
+    },
+    {
+      "id": "J04",
+      "name": "连接与订阅",
+      "dependencies": [
+        "J03"
+      ],
+      "status": "not-started",
+      "evidence": "",
+      "description": "连接与订阅；范围、依赖与验收以实现计划对应阶段为准。"
+    },
+    {
+      "id": "J05",
+      "name": "队列与生命周期",
+      "dependencies": [
+        "J04"
+      ],
+      "status": "not-started",
+      "evidence": "",
+      "description": "队列与生命周期；范围、依赖与验收以实现计划对应阶段为准。"
+    },
+    {
+      "id": "J06",
+      "name": "完整回归与交付",
+      "dependencies": [
+        "J05"
+      ],
+      "status": "not-started",
+      "evidence": "",
+      "description": "完整回归与交付；范围、依赖与验收以实现计划对应阶段为准。"
+    }
+  ]
+}
