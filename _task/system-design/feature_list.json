@@ -40,7 +40,7 @@
     {
       "id": "prototype-homepage-v040",
       "name": "v0.4.0 Identity 个人主页完整高保真原型",
-      "status": "in-progress",
+      "status": "needs-review",
       "goal": "审查并修正设计文档，从 v0.3.0 最终原型建立独立 worktree，连续完成 P01–P10 的实现、验证和提交。",
       "scope": "版本设计审查、v0.3.0 基线恢复、独立 worktree 与 harness、高保真原型制作和验收；身份、钱包与链上结果采用确定性模拟。",
       "dependencies": [
@@ -64,15 +64,17 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-visual-review",
       "evidence": "_task/prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261012-224835.md；功能提交、32 条 BDD 与 81 项实际浏览器断言见任务清单和验收汇总。",
-      "nextStep": "完成 R12 最终复制抽检和交付审计。",
+      "nextStep": "用户视觉复核当前 v0.4.0 统一原型。",
       "currentChange": {
         "id": "R10–R12",
         "goal": "按设计系统、frontend-design 及一致性 review v0.4.0 内继承各版本的问题，修复并完成验收。",
-        "status": "in-progress",
+        "status": "needs-review",
         "harness": "_task/prototype-worktree/ownword-v0.4.0/feature_list.json",
-        "nextStep": "完成 R12 最终复制抽检和交付审计。",
-        "completed": "R10 2a9a8aa；R11 26055b4，64 张截图、43 项检查与 7 组 axe 通过。",
-        "active": "R12"
+        "nextStep": "用户视觉复核当前 v0.4.0 统一原型。",
+        "completed": "R10 2a9a8aa；R11 26055b4；R12 2e0d847。页面评审、修复和最终验收已完成。",
+        "active": null,
+        "implementationStatus": "implemented-and-verified",
+        "reviewStatus": "awaiting-user-visual-review"
       }
     },
     {
