@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "activeItem": "E00",
+  "allowedStatuses": [
+    "not-started",
+    "in-progress",
+    "needs-review",
+    "blocked",
+    "done"
+  ],
+  "authorization": {
+    "implementation": true,
+    "mergeBackendToDev": true,
+    "createVersionWorktrees": true,
+    "mockScope": [
+      "wallet transport and authorization",
+      "mainnet broadcast result before funding"
+    ],
+    "realMainnetPublishing": "waiting-funds",
+    "pushRemote": false,
+    "agents": "independent"
+  },
+  "documents": {
+    "product": "_task/system-design/spec/核心认知.md",
+    "cognition": "_task/system-design/spec/frontend/集成核心认知v0.1.0-20261013-183000.md",
+    "design": "_task/system-design/spec/frontend/设计文档v0.1.0-真实集成-20261013-183000.md",
+    "prd": "_task/system-design/spec/prd/v0.1/设计文档v0.1.md"
+  },
+  "environment": {
+    "frontendWorktree": "own-word-web",
+    "frontendBranch": "feature/ownword-v0.1.0",
+    "backendTask": "_task/backend-worktree/ownword-v0.1.0",
+    "prototype": "_task/prototype-worktree/ownword-official-s2/ownword-prototype",
+    "prototypeCommit": "f3f68445c953ef988c53b7f4670462e6d09c9ceb",
+    "backendBranch": "feature/ownword-v0.1.0"
+  },
+  "features": [
+    {
+      "id": "D00",
+      "name": "核心认知与集成设计",
+      "dependencies": [],
+      "status": "needs-review",
+      "doneCriteria": [
+        "核心认知先于设计",
+        "缺失接口与完整 CWI 契约已设计",
+        "引用、28 BDD 和门禁检查通过"
+      ],
+      "implementationStatus": "written-and-checked",
+      "description": "核心认知与集成设计；事实与验收以当前设计文档对应阶段为准。",
+      "evidence": "4 份文档、41 条本地引用与围栏、JSON 及 init.sh --plan 检查通过；业务集成未执行。"
+    },
+    {
+      "id": "E00",
+      "name": "仓库合并与版本 worktree",
+      "dependencies": [
+        "D00"
+      ],
+      "status": "in-progress",
+      "doneCriteria": [
+        "六个后端来源合入 dev 的祖先证据",
+        "版本 worktree 独立且来源登记",
+        "前端 Git 元数据恢复并保留源码"
+      ],
+      "implementationStatus": "in-progress",
+      "description": "仓库合并与版本 worktree；事实与验收以当前设计文档对应阶段为准。"
+    },
+    {
+      "id": "W00",
+      "name": "依赖与完整钱包适配",
+      "dependencies": [
+        "E00"
+      ],
+      "status": "not-started",
+      "doneCriteria": [
+        "官方 S2/Next dev 和 build 验证",
+        "28 个 CWI 方法可调用且契约明确",
+        "真实派生及密码学验证"
+      ],
+      "implementationStatus": "not-started",
+      "description": "依赖与完整钱包适配；事实与验收以当前设计文档对应阶段为准。"
+    },
+    {
+      "id": "A00",
+      "name": "真实 Web API 与存储",
+      "dependencies": [
+        "E00"
+      ],
+      "status": "not-started",
+      "doneCriteria": [
+        "真实 MongoDB 和头像持久化",
+        "真实主网读取及逐输出验签",
+        "异常、幂等、双输出和模拟隔离验证"
+      ],
+      "implementationStatus": "not-started",
+      "description": "真实 Web API 与存储；事实与验收以当前设计文档对应阶段为准。"
+    },
+    {
+      "id": "F00",
+      "name": "v0.1 身份页面与流程",
+      "dependencies": [
+        "W00",
+        "A00"
+      ],
+      "status": "not-started",
+      "doneCriteria": [
+        "身份页面与指定原型对应",
+        "28 BDD 累计覆盖并记录真实或模拟",
+        "账户隔离、偏好和离开保护可用"
+      ],
+      "implementationStatus": "not-started",
+      "description": "v0.1 身份页面与流程；事实与验收以当前设计文档对应阶段为准。"
+    },
+    {
+      "id": "V00",
+      "name": "无资金真实集成验收",
+      "dependencies": [
+        "F00"
+      ],
+      "status": "not-started",
+      "doneCriteria": [
+        "I01-I07/I10 实际执行",
+        "production 页面、截图及日志核查",
+        "各仓库提交与复跑说明完整"
+      ],
+      "implementationStatus": "not-started",
+      "description": "无资金真实集成验收；事实与验收以当前设计文档对应阶段为准。"
+    },
+    {
+      "id": "V01",
+      "name": "充值后主网发布验收",
+      "dependencies": [
+        "V00"
+      ],
+      "status": "not-started",
+      "doneCriteria": [
+        "I08 首次 ID+ALIAS 真实广播索引回读",
+        "I09 Profile 更新历史及 BAP ID 不变",
+        "所有最终门禁通过"
+      ],
+      "implementationStatus": "not-started",
+      "description": "充值后主网发布验收；事实与验收以当前设计文档对应阶段为准。"
+    }
+  ],
+  "acceptance": {
+    "I01": {
+      "status": "not-run"
+    },
+    "I02": {
+      "status": "not-run"
+    },
+    "I03": {
+      "status": "not-run"
+    },
+    "I04": {
+      "status": "not-run"
+    },
+    "I05": {
+      "status": "not-run"
+    },
+    "I06": {
+      "status": "not-run"
+    },
+    "I07": {
+      "status": "not-run"
+    },
+    "I08": {
+      "status": "waiting-funds"
+    },
+    "I09": {
+      "status": "waiting-funds"
+    },
+    "I10": {
+      "status": "not-run"
+    }
+  }
+}

@@ -9,7 +9,7 @@
     "done",
     "archived"
   ],
-  "activeItem": "prototype-homepage-v040",
+  "activeItem": null,
   "features": [
     {
       "id": "prototype-visual-alignment-v010-v030",
@@ -380,13 +380,12 @@
     },
     {
       "id": "frontend-identity-v010-plan",
-      "name": "v0.1.0 身份前端实现计划",
+      "name": "v0.1.0 实现文档入口",
       "status": "needs-review",
-      "goal": "为指定 Next.js 仓库制定还原 v0.1 身份高保真原型的可执行计划，定义后端及钱包 Mock 契约。",
-      "scope": "计划与契约设计；不实施前端业务代码。所有阻塞依赖允许 Mock，真实接入作为后续阶段。",
+      "goal": "指向当前核心认知与真实集成设计。",
+      "scope": "文档入口；业务实施与验收由前端任务清单维护。",
       "dependencies": [
-        "用户确认仅 v0.1 身份功能",
-        "用户允许后端、钱包及其他阻塞流程先 Mock"
+        "用户指定官方 S2 原型及新 mock 边界"
       ],
       "doneCriteria": [
         "核对指定仓库、v0.1 PRD、原型提交和真实钱包 API 来源",
@@ -395,7 +394,7 @@
       ],
       "prdVersion": "v0.1",
       "prdSource": "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
-      "targetRepository": "_task/fronted-worktree/own-word-web",
+      "targetRepository": "_task/fronted-worktree/ownword-v0.1.0/own-word-web",
       "output": "_task/system-design/spec/frontend/前端实现计划v0.1.0-20261002-230500.md",
       "implementationStatus": "plan-written-and-checked",
       "reviewStatus": "awaiting-user-review",
@@ -405,8 +404,33 @@
         "document": "14 条本地链接均存在；Markdown 与差异检查通过。",
         "implementation": "前端仓库未改动；未执行前端实现测试或真实钱包、后端及交易。"
       },
-      "nextStep": "旧 v0.4.0 视觉基线已作废；前端实施前重新确认视觉来源，保留现有 v0.1 行为与 Mock 契约计划。",
-      "statusNote": "计划及契约保留供审阅；旧 v0.4.0 视觉来源失效，不能作为当前还原依据。"
+      "nextStep": "按新任务清单实施。",
+      "statusNote": "当前以集成核心认知和真实集成设计为准。"
+    },
+    {
+      "id": "frontend-identity-v010-integration-design",
+      "name": "v0.1.0 核心认知与真实集成设计",
+      "status": "needs-review",
+      "goal": "基于官方 S2 原型，先建立核心认知，再设计前后端及钱包契约，实施真实服务集成。",
+      "scope": "v0.1 身份闭环；仅钱包交互和充值前主网广播结果可模拟，其余服务真实；主网发布验收等待充值。",
+      "dependencies": [
+        "用户指定原型和前端任务目录",
+        "用户授权现有后端成果先合并 dev 再建立 v0.1.0 worktree"
+      ],
+      "doneCriteria": [
+        "核心认知先于设计完成并引用全局产品事实",
+        "接口缺口有输入输出、状态、签名和数据来源设计",
+        "28 条适用 BDD 与真实集成门禁有映射",
+        "本地引用和差异检查通过，文档已提交并交付用户复核"
+      ],
+      "prdVersion": "v0.1.0",
+      "prdSource": "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+      "harnessPath": "_task/fronted-worktree/ownword-v0.1.0",
+      "output": "_task/system-design/spec/frontend/设计文档v0.1.0-真实集成-20261013-183000.md",
+      "implementationStatus": "written-and-checked",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": "核心认知先于设计写入；4 份文档、41 条引用、围栏、JSON 与任务登记通过。实现状态由前端 task harness 维护。",
+      "nextStep": "按前端任务清单连续实施 E00，人工设计审阅状态保留。"
     }
   ]
 }
