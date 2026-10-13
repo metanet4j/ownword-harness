@@ -4,17 +4,17 @@
 
 ## 当前目标（Current Objective）
 
-按用户反馈修正返回按钮的视觉与对齐，延续整站优化方向，frontend-design 参与审核。
+实施用户确认的混合媒体列表收敛方案，统一阅读轴、预览窗口和条目节奏，frontend-design 参与审核。
 
 ## 当前状态（Current State）
 
-R04 已实现、验证并提交 `0146b06`。当前无进行中事项，原型保持 `needs-review`，逐项状态以[任务清单](feature_list.json)为准。
+R05 已实现、验证并提交 `f6d0bd9`。当前无进行中事项，原型保持 `needs-review`，逐项状态以[任务清单](feature_list.json)为准。
 
 ## 产出与验证（What）
 
-共用 BackButton 应用于公开主页、名单、阅读、版本、媒体、编辑及 Artifact 顶部入口。缩小图标、降低字重，图标框与内容左边缘一致；保留 44px 点击高度和 S2 焦点，悬停不再平移。
+图片和视频使用相同的右侧预览窗口，桌面 160×120px、手机 96×72px；加载失败保持尺寸和入口。标题最多两行，摘要桌面两行、手机一行，音频以文字及时长呈现。设计细节见当前 PRD 4.4 节。
 
-`npm run build`、`./init.sh` 通过；7 类页面、9 份布局记录与 10 项导航和运行检查通过，已查看桌面、320px 手机、中文深色、悬停和键盘焦点截图。本次定向检查未重跑全部业务 BDD。审核与证据见[当前交付](交付验收v0.4.0-20261012-224835.md)。
+`npm run build`、`./init.sh` 通过；5 份列表布局记录、另一次 320×720 首屏检查，以及 12 项交互和运行检查通过。已查看桌面、手机、筛选、长标题及资源失败、中文深色截图；该深色主页 axe 为 0 violations、0 incomplete。未重跑全部业务 BDD。审核与证据见[当前交付](交付验收v0.4.0-20261012-224835.md)。
 
 ## 阻塞与限制（Blockers）
 
@@ -22,8 +22,8 @@ R04 已实现、验证并提交 `0146b06`。当前无进行中事项，原型保
 
 ## 文件与环境（Files）
 
-原型 `ownword-prototype`，分支 `codex/prototype-v0.4.0-homepage`，预览 http://127.0.0.1:4314/。本任务目录运行 `./init.sh --serve`；按 R04 verification.json 所列路由与操作用 agent-browser 复核。
+原型 `ownword-prototype`，分支 `codex/prototype-v0.4.0-homepage`，预览 http://127.0.0.1:4314/。本任务目录运行 `./init.sh --serve`；按 R05 verification.json 的路由、操作与临时样例方式用 agent-browser 复核。
 
 ## 唯一下一步（Next Session / Recommended Next Step）
 
-用户复核返回按钮的对齐与视觉，以及当前整站优化效果；复核前保持 `needs-review`。
+用户复核混合内容列表的秩序、媒体比例和阅读密度；复核前保持 `needs-review`。

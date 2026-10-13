@@ -346,6 +346,24 @@
       "implementationStatus": "implemented-and-verified",
       "commit": "0146b06",
       "evidence": "ownword-prototype/evidence/homepage-v040/R04/verification.json"
+    },
+    {
+      "id": "R05",
+      "name": "混合媒体内容列表收敛",
+      "description": "实施用户确认的文字主导紧凑列表，统一阅读轴、预览窗口和条目节奏；方案以 PRD 4.4 节为准。",
+      "dependencies": [
+        "R04"
+      ],
+      "status": "needs-review",
+      "doneCriteria": [
+        "桌面媒体预览 160×120px，手机 96×72px，位于文字右侧且加载和失败不改变窗口尺寸",
+        "四类内容使用一致的标题、元信息与间距；标题至多两行，摘要桌面两行、手机一行",
+        "验证混合列表、长标题和资源失败、筛选、进入详情及返回位置，查看桌面和 320px 截图",
+        "构建及初始化通过，按 frontend-design 与绑定 S2 审核，独立提交后交付视觉复核"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "commit": "f6d0bd9",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R05/verification.json"
     }
   ],
   "delivery": "交付验收v0.4.0-20261012-224835.md"

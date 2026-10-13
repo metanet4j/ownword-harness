@@ -38,16 +38,16 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-visual-review",
       "evidence": "_task/prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261012-224835.md；功能提交、32 条 BDD 与 81 项实际浏览器断言见任务清单和验收汇总。",
-      "nextStep": "用户复核 R04 返回按钮对齐及当前整站体验；复核前保持 needs-review。",
+      "nextStep": "用户复核 R05 混合内容列表的秩序与密度；复核前保持 needs-review。",
       "currentChange": {
-        "id": "R04",
-        "goal": "修正返回按钮的视觉层级与左边缘对齐。",
+        "id": "R05",
+        "goal": "实施用户确认的紧凑混合媒体内容列表方案。",
         "status": "needs-review",
-        "scope": "个人主页、名单、内容阅读及版本、编辑和 Artifact 顶部返回入口。",
-        "nextStep": "用户复核 R04 返回按钮对齐及当前整站体验；复核前保持 needs-review。",
+        "scope": "公开主页内容流及类型筛选，共用行布局与媒体预览。",
+        "nextStep": "用户复核 R05 混合内容列表的秩序与密度；复核前保持 needs-review。",
         "implementationStatus": "implemented-and-verified",
-        "commit": "0146b06",
-        "evidence": "_task/prototype-worktree/ownword-v0.4.0/ownword-prototype/evidence/homepage-v040/R04/verification.json"
+        "commit": "f6d0bd9",
+        "evidence": "_task/prototype-worktree/ownword-v0.4.0/ownword-prototype/evidence/homepage-v040/R05/verification.json"
       }
     },
     {
