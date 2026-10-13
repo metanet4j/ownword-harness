@@ -4,7 +4,7 @@
   "baseCommit": "5b3cdf8",
   "branch": "codex/prototype-official-s2",
   "preview": "http://127.0.0.1:4315/",
-  "activeFeature": "M01",
+  "activeFeature": "M02",
   "features": [
     {
       "id": "M01",
@@ -37,9 +37,41 @@
         "userReview": "pending",
         "oldWorktree": "clean, HEAD 5b3cdf8"
       }
+    },
+    {
+      "id": "M02",
+      "name": "身份分组与内容列表视觉优化",
+      "status": "needs-review",
+      "dependencies": [
+        "M01"
+      ],
+      "doneCriteria": [
+        "个人主页身份主体、标识与操作形成清楚分组，复制紧邻标识",
+        "作品标题恢复内容字级，筛选与标题同组，媒体保持受控窗口",
+        "关联管理页面采用相同分组和对齐原则；桌面、窄屏及深色定向复核",
+        "交付相同数据与视口的前后对比、独立预览及提交"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "prototypeCommit": "bfce237",
+      "evidence": [
+        "ownword-prototype/visual-review.html",
+        "ownword-prototype/evidence/official-s2/visual-v2/verification.json",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "browserAssertions": 10,
+        "browserErrors": 0,
+        "browserWarnings": 0,
+        "screenshots": 17,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      }
     }
   ],
   "implementationStatus": "implemented-and-verified",
   "reviewStatus": "needs-review",
-  "prototypeCommit": "cafdeb8"
+  "prototypeCommit": "bfce237"
 }

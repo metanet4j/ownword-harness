@@ -1,31 +1,40 @@
 # 当前进展
 
-官方组件改造已实现并完成定向验收，等待胡先生视觉复核。版本名称为“官方组件改造版”，资产及功能状态为 `needs-review`，实现状态为 `implemented-and-verified`。
+M02 身份分组与作品列表视觉优化已实现、验证并提交 `bfce237`，等待胡先生视觉复核。M01 官方组件迁移及 M02 的资产状态均保持 `needs-review`，实现状态为 `implemented-and-verified`。
 
-## 工作区与成果
+## 工作区与预览
 
-原型位于本目录的 ownword-prototype，分支 `codex/prototype-official-s2`，基线 `5b3cdf8`，实现提交 `cafdeb8`。预览 <http://127.0.0.1:4315/>，个人主页 <http://127.0.0.1:4315/#/identity/2FfJxP9rMWqeBZQ3KxL2wZsLbS7xw8bVpD>。`./init.sh` 检查，`./init.sh --serve` 启动。
+只修改本目录的 ownword-prototype，分支 `codex/prototype-official-s2`。预览 <http://127.0.0.1:4315/>；前后对照 <http://127.0.0.1:4315/visual-review.html>。
 
-原 `ownword-v0.4.0/ownword-prototype` 仍为 `5b3cdf8`，工作区干净；4314 预览保留。所有原型改动仅在本任务的新 worktree。
+原 `ownword-v0.4.0/ownword-prototype` 仍为 `5b3cdf8`，工作区干净，4314 预览保留。`./init.sh` 检查，`./init.sh --serve` 启动新版本。
 
 ## 设计与实现
 
-沿用核心认知、OwnWord 设计与设计系统及当前 v0.4.0 PRD。已使用 baoyu-design、frontend-design、react-spectrum 和 ponytail；通过 agent-browser 预览。
+依据核心认知、OwnWord 设计与设计系统和 v0.4.0 PRD，以 baoyu-design、frontend-design、react-spectrum 和 ponytail 执行，使用 agent-browser 验证。
 
-保留身份、内容、Artifact、个人主页的主要对象、分组与业务流程；围绕同一中心轴安排内容，以强关联信息紧密成组、同类列表对齐、受控媒体窗口保持秩序。官方控件的尺寸与状态通过公开 API 配置；业务页面保持既定字号上限。桌面媒体窗口 160×120，手机 96×72；窄屏 Tabs 使用官方收敛行为，手机编辑器将链接操作收纳到官方更多菜单。
+- 身份主体与标识分组：头像、名称和简介组成主体，右侧安排行动；BAP ID、复制、有效数字 ID 与详情进入浅底标识条。复制按钮距原值 8px，强关联信息紧密成组。
+- 作品层级：标题与官方 compact Tabs 同行，作品使用 S2 serif 字体，桌面 20px、手机 18px。元数据和摘要使用 subdued 内容角色，列表沿同一左边界，媒体沿同一右边界。
+- 关联管理页面：身份资料与标识分区；内容作者形成紧凑上下文并复用 Identifier／CopyButton；Artifact 当前数字 ID 与持有对象分组，卡片采用官方 tertiary 变体。
+- 系统边界：官方 S2 1.6.0、React 19.3.0 保持锁定，控件内部样式与包源码保持官方来源。浅底、文字、边框及间距引用现有 S2 Token；页面结构与作品排版由 OwnWord 业务组合负责。
 
-官方 @react-spectrum/s2 1.6.0、React／ReactDOM 19.3.0 已锁定。按钮、字段、提示、菜单、Tabs、上传、状态、卡片、弹窗及浮层直接消费官方组件；业务封装负责参数和流程。官方 style 宏控制组件布局宽度，原生包未修改。S2 根主题与 Provider 同步，业务语义 Token 引用既有绑定。主入口不加载本地仿制组件；历史品牌展示及测试场景控制器边界见原型 README。
+方案自评：不增加装饰性统计、编号或大幅 Hero；让真实作者和作品建立主次。保持受控媒体、居中主体和原业务流程。
 
-## 验证
+## 截图复核与验证
 
-- 最终 `./init.sh` 通过：生产构建来源／哈希、95 项身份模型断言、内容与 Markdown、12 组 Artifact、主页与关系模型。
-- 浏览器定向验收 13 项交互断言通过，11 张流程截图；另补中文交付图及最终手机工具栏图，共 13 张。浏览器错误和警告均为零。
-- 正常流程覆盖身份编辑保存、内容编辑发布阅读、Artifact 上传与创建复核、个人主页及复制。边界覆盖必填字段、授权取消、复制失败、内容读取失败、键盘、焦点恢复、中文深色和 320px 手机。
-- 截图逐张审阅；修正了官方 Tabs 组合布局、弹窗操作插槽、卡片宽度、深色文字继承及手机工具栏文字截断。
-- 手写源码 diff 检查通过。生成的 Markdown 编辑器 bundle 含上游模板字符串中的空白，未手工改写生成产物。继承 check-copy.cjs 的 CommonJS／window 不兼容不属于有效验收入口，已在 README 说明。
+| 区域 | 观察与影响 | 已验证的结果 |
+| --- | --- | --- |
+| 主页标识 | 旧版复制入口离原值过远，归属不清 | 复制紧邻原值，成功与窄屏失败展开均通过 |
+| 作品列表 | 旧版标题偏弱，标题到筛选再到正文的间隔过大 | 桌面 20px、手机 18px；320×720 首屏可见首条作品标题 |
+| 响应式筛选 | 新组合一度在恢复宽屏后保留折叠菜单 | 稳定业务容器宽度；官方 Tabs 可恢复展开，方向键切换通过 |
+| 管理工作区 | 内容作者标识垂直错位，Artifact 手机标题换行生硬 | 作者标识与复制居中对齐；手机标题完整，创建操作自然换行 |
+| 主题及媒体 | 必须在不同内容与背景下维持阅读秩序 | 中文深色和英文桌面已复核；媒体为桌面 160×120、手机 96×72 |
 
-证据：`ownword-prototype/evidence/official-s2/verification.json`；来源：`ownword-prototype/vendor/build-manifest.json`。
+最终 `./init.sh` 通过：构建输入／输出哈希、95 项身份模型断言、内容与 Markdown、12 组 Artifact，以及主页和关系模型。浏览器定向验收 10 项断言通过；12 张本轮结果图及 5 张基准图逐张审阅。所有受检页面无水平溢出或越界控件，浏览器错误和警告均为零。
 
-未穷举旧 PRD 全部 BDD、所有浏览器与全部语言／屏宽组合。钱包及链上操作保持模拟，字体保留官方远程来源与系统回退。
+正常流程覆盖复制、身份详情、作品筛选、阅读返回、关系名单及四模块管理入口；边界覆盖复制失败、320px 窄屏、深色、焦点恢复、键盘切换和响应式来回变化。前后对照页已检查。手写文件 diff 检查通过；未手工修改生成 bundle 中的上游空白。
 
-唯一下一步：请胡先生在 4315 预览复核；收到反馈后继续只在本 worktree 调整。
+本轮证据：`ownword-prototype/evidence/official-s2/visual-v2/verification.json`。官方迁移证据继续保留在 `ownword-prototype/evidence/official-s2/verification.json`。
+
+未重复完整发布／转账演练、原 PRD 全部 BDD 或全部浏览器组合。身份、钱包与链上操作仍是确定性模拟。
+
+唯一下一步：胡先生复核 4315 的交互原型及前后对照；后续反馈继续只在本 worktree 修改。
