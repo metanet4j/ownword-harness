@@ -4,7 +4,7 @@
   "baseCommit": "5b3cdf8",
   "branch": "codex/prototype-official-s2",
   "preview": "http://127.0.0.1:4315/",
-  "activeFeature": "M08",
+  "activeFeature": "M09",
   "features": [
     {
       "id": "M01",
@@ -224,7 +224,7 @@
       "prototypeCommit": "93da181",
       "evidence": [
         "ownword-prototype/evidence/official-s2/editor-review/verification.json",
-        "ownword-prototype/visual-review.html",
+        "ownword-prototype/visual-review-v7.html",
         "ownword-prototype/editor-review.html",
         "ownword-prototype/vendor/build-manifest.json"
       ],
@@ -243,7 +243,7 @@
     {
       "id": "M08",
       "name": "补齐身份密钥轮换的版本连续性",
-      "status": "planned",
+      "status": "needs-review",
       "dependencies": [
         "M07"
       ],
@@ -251,12 +251,37 @@
         "身份页提供安全入口，Review 显示完整操作 BAP ID 和不变的身份",
         "轮换走模拟授权、处理、结果，取消、失败和账户变化保持准确",
         "核对 BAP ID 与 Profile 不变，历史签名说明独立；桌面与手机、双语主题验收"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "prototypeCommit": "37bfba6",
+      "evidence": [
+        "ownword-prototype/evidence/official-s2/identity-security/verification.json",
+        "ownword-prototype/visual-review.html",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "models": "143 assertions passed",
+        "rotationModelAssertionsAdded": 48,
+        "behaviorChecks": 26,
+        "behaviorResult": "passed",
+        "a11yAudits": 18,
+        "a11yViolations": 0,
+        "browserErrors": 9,
+        "errorsWithTypekitUrl": 8,
+        "genericNetworkErrors": 1,
+        "overallBrowserRun": "needs-fix due to font network errors",
+        "manualVisualReview": "completed",
+        "userReview": "pending"
+      },
+      "knownLimitations": [
+        "官方 Typekit 动态字体网络错误仍待核实，保留 8 条明确 URL 与 1 条通用网络错误；不能称为零错误验收。",
+        "密钥更新只以内存中的签名代次模拟，不生成或持久化真实密钥。"
       ]
     },
     {
       "id": "M09",
       "name": "转移核对页的信息分组与首屏密度",
-      "status": "planned",
+      "status": "in-progress",
       "dependencies": [
         "M08"
       ],
@@ -264,10 +289,23 @@
         "紧凑呈现 Artifact 编号、状态、接收地址与操作身份，完整标识可复制",
         "保留转移影响和交易详情，复核边界、取消、主题与窄屏",
         "交付同状态前后对照与最终优化验收清单"
+      ],
+      "implementationStatus": "in-progress"
+    },
+    {
+      "id": "M10",
+      "name": "字体网络错误来源与预览稳定性复核",
+      "status": "planned",
+      "dependencies": [
+        "M09"
+      ],
+      "doneCriteria": [
+        "保留 Typekit 失败证据，核实中途导航与稳定加载下的表现，不隐瞒通用网络错误",
+        "在所有具体修改完成后做完成审计；不能把外部字体错误或待用户视觉复核记为已通过"
       ]
     }
   ],
   "implementationStatus": "in-progress",
   "reviewStatus": "needs-review",
-  "prototypeCommit": "93da181"
+  "prototypeCommit": "37bfba6"
 }

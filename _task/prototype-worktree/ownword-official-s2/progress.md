@@ -1,14 +1,18 @@
 # 当前进展
 
-官方组件改造版位于独立分支 codex/prototype-official-s2，提交 93da181。M01–M07 已实现并验证，用户视觉复核保持 needs-review。编辑器复核已交付，下一项为 M08 密钥轮换；持续目标尚未完成。
+官方组件改造版位于独立分支 codex/prototype-official-s2，提交 37bfba6。M01–M08 已实现并验证，用户视觉复核保持 needs-review。编辑器复核已交付，当前进行 M09 转移核对页布局；持续目标尚未完成。
 
 ## 已核实结果
+
+M08 已补齐身份安全、轮换核对、模拟授权、处理、取消、失败重试与完成。新增 48 条轮换不变量断言，总计 143 条身份模型断言通过；26 项浏览器动作与 18 次自动无障碍检查通过。完整复制以真实 Ctrl+V 验证；取消与 Escape 焦点返回通过；授权／处理中的切换和断开均终止旧操作。签名代次仅是原型内存状态，不生成真实密钥。证据为 ownword-prototype/evidence/official-s2/identity-security/verification.json。
+
+本轮整体浏览器运行仍为 needs-fix：8 条 Typekit 字体子集错误与 1 条通用网络错误，未从报告删除。网络中未完成或失败请求均属于 Typekit；通用错误文案匹配其 XHR helper，但尚无精确错误 URL。稳定后正常／500／700／900 中文 FontFace 为 loaded。该限制交 M10 定向复核，不能宣称 CDN 已修复。
 
 M07 修复预览格式误改正文、手机工具栏遮挡、全选任务项与链接边界、多段列表、双栏初始位置及键盘联动、深色查找面板与源码 Tab 入口。沿用官方 S2 控件及既有 CodeMirror／Milkdown，没有修改官方组件内部实现。
 
 编辑器已通过 90 项格式、模式与自动无障碍检查，以及 61 项桌面／手机流程记录。后者组合完整流程与定向复核：桌面局部选区和手机查找菜单各有一次自动化操作失败，改正操作后通过，原始记录仍保留。查找大小写／整词／正则实际匹配、任务项点击／空格键、导入替换、失败保护、保存、离开与模拟发布均有实际动作证据。
 
-汇总证据为 ownword-prototype/evidence/official-s2/editor-review/verification.json；逐动作清单为 ownword-prototype/editor-review.html；六组同条件前后对照为 ownword-prototype/visual-review.html。对照和清单在 320px 无横向溢出，清单自动无障碍违规为零。中文字体对照保留在 visual-review-v6.html。
+汇总证据为 ownword-prototype/evidence/official-s2/editor-review/verification.json；逐动作清单为 ownword-prototype/editor-review.html；六组同条件前后对照为 ownword-prototype/visual-review-v7.html。对照和清单在 320px 无横向溢出，清单自动无障碍违规为零。中文字体对照保留在 visual-review-v6.html。
 
 源码构建、官方包来源／产物校验、全部继承模型及 init.sh 通过。双栏键盘与容器滚动通过，自动化低层 mouse wheel 未产生有效事件，因此不宣称实机滚轮通过。无效文件引发的提示日志属于预期错误路径。原型钱包、签名、发布为模拟，不代表生产链路验收。
 
@@ -16,8 +20,8 @@ M06 主要页面基准包含 60 张桌面／320px 截图、60 次自动无障碍
 
 ## 当前方案与待处理项
 
-M08：依据 v0.1 身份安全流程补齐密钥轮换入口与 Review、模拟授权、处理、结果和取消，核对 BAP ID、Profile 与历史签名说明。
+M08：依据 v0.1 §5.7 补齐身份安全入口、轮换核对、模拟授权、处理与结果。页面沿用居中的任务宽度，以身份与完整可复制 BAP ID 为主体，后接不变事项和轮换动作；安全页与核对页分开，避免把日常 Profile 编辑和敏感操作并排强调。复用 S2 按钮、StatusLight、Identifier 与现有 Modal；只增加模拟签名代次，不引入真实密钥或新的安全架构。方案自评：产品中心是 Identity，稳定 BAP ID 优先于技术细节；页面使用相同字级、间距与取消语义，取消／失败／账户变化分别验证。
 
-M09：收拢 Artifact 转移 Review 的编号、状态、双方标识和影响说明，减少手机首屏的重复大块留白，同时保留完整标识访问与复制。
+M09 方案：在编号、状态和名称构成的对象摘要之后，集中排列完整接收地址与操作 BAP ID；网络标识紧邻接收信息，影响说明与签名按钮保持连续，交易详情仍可展开。复用 NumberStatus、compact Identifier、S2 按钮与帮助；保持上传图片的完整预览，不引入新组件。方案自评：以明确转移对象与双方标识降低误转风险，按信息关系收拢留白，维持绑定 S2 Token、字体与复制行为。收拢 Artifact 转移 Review 的编号、状态、双方标识和影响说明，减少手机首屏的重复大块留白，同时保留完整标识访问与复制。
 
 预览 http://127.0.0.1:4315/，已实际确认 HTTP 200。原 v0.4.0 worktree 保持 clean、HEAD 5b3cdf8。临时 4316 基准服务与已完成的编辑器自动化会话已关闭。
