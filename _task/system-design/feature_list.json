@@ -401,10 +401,10 @@
       "evidence": {
         "scope": "PRD 31 场景减去已延期的 3 条密钥轮换，映射 28 条适用场景。",
         "sources": "核对前端依赖与 Git 起点、当前原型及 v0.1 行为基线、S2 官方本地文档、钱包 SDK 和后端模块。",
-        "document": "14 条本地链接均存在；Markdown 与差异检查通过。",
-        "implementation": "前端仓库未改动；未执行前端实现测试或真实钱包、后端及交易。"
+        "document": "当前认知与设计检查证据见 frontend-identity-v010-integration-design 及统一任务清单。",
+        "implementation": "业务开发已停止；现有未提交基础改动和实际环境、验收状态见前端 task harness。"
       },
-      "nextStep": "按新任务清单实施。",
+      "nextStep": "用户复核当前文档；明确开工前只处理文档反馈。",
       "statusNote": "当前以集成核心认知和真实集成设计为准。"
     },
     {
@@ -412,7 +412,7 @@
       "name": "v0.1.0 核心认知与真实集成设计",
       "status": "needs-review",
       "goal": "基于官方 S2 原型，先建立核心认知，再设计前后端及钱包契约，实施真实服务集成。",
-      "scope": "v0.1 身份闭环；仅钱包交互和充值前主网广播结果可模拟，其余服务真实；主网发布验收等待充值。",
+      "scope": "修订广播前校验、操作恢复、索引覆盖和时间契约四项 review 问题，登记当前原型 tag；业务开发继续停止。",
       "dependencies": [
         "用户指定原型和前端任务目录",
         "用户授权现有后端成果先合并 dev 再建立 v0.1.0 worktree"
@@ -420,6 +420,8 @@
       "doneCriteria": [
         "核心认知先于设计完成并引用全局产品事实",
         "接口缺口有输入输出、状态、签名和数据来源设计",
+        "四项 review 问题落实为广播前校验、恢复、覆盖及时间契约",
+        "当前原型 tag 已核验，技术栈与锁文件/POM 一致",
         "28 条适用 BDD 与真实集成门禁有映射",
         "本地引用和差异检查通过，文档已提交并交付用户复核"
       ],
@@ -429,7 +431,7 @@
       "output": "_task/system-design/spec/frontend/设计文档v0.1.0-真实集成-20261013-183000.md",
       "implementationStatus": "written-and-checked",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "核心认知先于设计写入；4 份文档、41 条引用、围栏、JSON 与任务登记通过。实现状态由前端 task harness 维护。",
+      "evidence": "四项 review 问题已修订；2 份文档的 28 条本地链接、5 段 TypeScript 类型、3 个状态图结构及任务登记检查通过。当前原型 annotated tag 指向 a86850a，commit/tree 已核验；严格技术栈写入设计。业务代码未修改，真实集成未执行；完整状态由前端 task harness 维护。",
       "nextStep": "用户先审阅独立实现核心认知和设计文档，明确开工前不继续业务开发。"
     }
   ]

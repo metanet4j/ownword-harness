@@ -32,7 +32,10 @@
     "frontendBranch": "feature/ownword-v0.1.0",
     "backendTask": "_task/backend-worktree/ownword-v0.1.0",
     "prototype": "_task/prototype-worktree/ownword-official-s2/ownword-prototype",
-    "prototypeCommit": "f3f68445c953ef988c53b7f4670462e6d09c9ceb",
+    "prototypeTag": "prototype/official-s2-20261013-213507",
+    "prototypeCommit": "a86850a225b00962277cf1160ed70f8129924fba",
+    "prototypeTree": "bd4488099d23199f79d65a5c987771e256258e95",
+    "prototypePrdVersion": "v0.4.0",
     "backendBranch": "feature/ownword-v0.1.0"
   },
   "features": [
@@ -44,11 +47,13 @@
       "doneCriteria": [
         "核心认知先于设计",
         "缺失接口与完整 CWI 契约已设计",
+        "四项 review 问题有明确流程、契约及验收映射",
+        "当前原型 tag 和严格技术栈已登记",
         "引用、28 BDD 和门禁检查通过"
       ],
       "implementationStatus": "written-and-checked",
       "description": "核心认知与集成设计；事实与验收以当前设计文档对应阶段为准。",
-      "evidence": "4 份文档、41 条本地引用、围栏、状态图及任务登记通过；独立实现核心认知基于总认知，八项对应关系已核对；业务集成未执行。"
+      "evidence": "四项 review 问题已修订；2 份认知/设计的 28 条本地链接、5 段 TypeScript DTO 类型、3 个状态图结构及 init.sh --plan 通过。annotated 原型 tag、commit、tree 与 environment 一致，技术栈依据锁文件/POM。未修改业务代码、未执行业务集成，仍待用户复核与明确开工。"
     },
     {
       "id": "E00",

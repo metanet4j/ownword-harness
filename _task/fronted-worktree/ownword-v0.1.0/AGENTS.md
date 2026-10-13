@@ -22,7 +22,7 @@
 - 后端本地合并及版本 worktree 已按用户授权完成。当前停在文档审阅阶段；用户明确开工前只处理核心认知和设计反馈，不继续业务开发。实际授权及状态见 feature_list.json；不推送远端。
 - Verification commands：`./init.sh --plan` 检查任务和文档；`./init.sh` 检查实际 Git worktree。源码改动运行当前 package 中 lint、typecheck、test、build；尚未存在的命令先实现再登记，不声称已通过。
 - 后端按共享 Maven 规范显式设置 JDK，真实测试不使用响应 Mock。集成测试、命令、退出码和逐项来源记录到 evidence；主网发布待资金时只完成不依赖资金部分。
-- Definition of done：实现、实际检查、日志/截图核查、相关仓库提交及可重复运行说明齐备。模拟流程不关闭主网 I08/I09；整项未满足全部验收时不标记 done。设计文档人工复核前保持 needs-review，但不阻塞已授权实现。
+- Definition of done：实现、实际检查、日志/截图核查、相关仓库提交及可重复运行说明齐备。模拟流程不关闭主网 I08/I09；整项未满足全部验收时不标记 done。设计文档人工复核前保持 needs-review；业务开发遵循当前明确开工门禁，文档修改请求不自动视为开发授权。
 
 ## 4. 收尾
 
