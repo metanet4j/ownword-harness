@@ -311,6 +311,24 @@
       "implementationStatus": "implemented-and-verified",
       "commit": "ff055f3",
       "evidence": "ownword-prototype/evidence/homepage-v040/R02/verification.json"
+    },
+    {
+      "id": "R03",
+      "name": "整站信息层级与交互表达优化",
+      "description": "用户确认整站优化、个人主页先行，并指定 frontend-design 参与审核；页面决策见当前 PRD 4.2 节。",
+      "dependencies": [
+        "R02"
+      ],
+      "status": "needs-review",
+      "doneCriteria": [
+        "个人主页身份与操作成组，320px 手机可完整访问筛选且首条作品更早出现",
+        "相关管理、内容和关系页面使用一致的任务标题与辅助信息层级，完整标识及复制反馈可访问",
+        "按 frontend-design 与 OwnWord 四项设计原则审阅实际截图，核对绑定 S2 Token、触控、键盘和弹层焦点",
+        "构建与初始化检查通过，正常及相关边界有实际浏览器证据，独立提交并交付用户视觉复核"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "commit": "c0f4d8c",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R03/verification.json"
     }
   ],
   "delivery": "交付验收v0.4.0-20261012-224835.md"

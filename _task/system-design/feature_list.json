@@ -38,16 +38,16 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-visual-review",
       "evidence": "_task/prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261012-224835.md；功能提交、32 条 BDD 与 81 项实际浏览器断言见任务清单和验收汇总。",
-      "nextStep": "用户视觉复核当前 v0.4.0；复核前保持 needs-review。",
+      "nextStep": "用户复核 R03 整站体验优化，重点查看公开主页与名单；复核前保持 needs-review。",
       "currentChange": {
-        "id": "R02",
-        "goal": "全面检查其他页面并修复相似排版问题。",
+        "id": "R03",
+        "goal": "整站体验优化，以个人主页确定信息层级和分组，再应用到相关页面；frontend-design 参与审核。",
         "status": "needs-review",
-        "scope": "当前原型的页面、管理流程、阅读与媒体、相关异常和弹层的视觉与交互检查。",
-        "nextStep": "用户复核当前全页排版；复核前保持 needs-review。",
+        "scope": "当前 v0.4.0 原型的公开主页、内容和关系列表，以及共用标题与标识表达。",
+        "nextStep": "用户复核 R03 整站体验优化，重点查看公开主页与名单；复核前保持 needs-review。",
         "implementationStatus": "implemented-and-verified",
-        "commit": "ff055f3",
-        "evidence": "_task/prototype-worktree/ownword-v0.4.0/ownword-prototype/evidence/homepage-v040/R02/verification.json"
+        "commit": "c0f4d8c",
+        "evidence": "_task/prototype-worktree/ownword-v0.4.0/ownword-prototype/evidence/homepage-v040/R03/verification.json"
       }
     },
     {
