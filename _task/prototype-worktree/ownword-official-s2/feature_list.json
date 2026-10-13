@@ -4,7 +4,7 @@
   "baseCommit": "5b3cdf8",
   "branch": "codex/prototype-official-s2",
   "preview": "http://127.0.0.1:4315/",
-  "activeFeature": "M02",
+  "activeFeature": "M03",
   "features": [
     {
       "id": "M01",
@@ -54,7 +54,7 @@
       "implementationStatus": "implemented-and-verified",
       "prototypeCommit": "bfce237",
       "evidence": [
-        "ownword-prototype/visual-review.html",
+        "ownword-prototype/visual-review-v2.html",
         "ownword-prototype/evidence/official-s2/visual-v2/verification.json",
         "ownword-prototype/vendor/build-manifest.json"
       ],
@@ -69,9 +69,40 @@
         "userReview": "pending",
         "oldWorktree": "clean, HEAD 5b3cdf8"
       }
+    },
+    {
+      "id": "M03",
+      "name": "管理页筛选统一与手机信息密度",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M02"
+      ],
+      "doneCriteria": [
+        "内容、Artifact 和主页复用官方 Tabs 组合，筛选状态和数量准确",
+        "手机当前数字 ID、编号状态与名称成组，列表更早进入首屏",
+        "验证切换、键盘、空列表、失败及窄屏状态；交付本轮同视口前后对照"
+      ],
+      "prototypeCommit": "73d37ce",
+      "evidence": [
+        "ownword-prototype/visual-review.html",
+        "ownword-prototype/evidence/official-s2/visual-v3/verification.json",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "browserAssertions": 18,
+        "browserErrors": 0,
+        "browserWarnings": 0,
+        "screenshots": 14,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      }
     }
   ],
   "implementationStatus": "implemented-and-verified",
   "reviewStatus": "needs-review",
-  "prototypeCommit": "bfce237"
+  "prototypeCommit": "73d37ce"
 }
