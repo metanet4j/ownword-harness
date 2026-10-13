@@ -1,6 +1,6 @@
 # 当前进展
 
-官方组件改造版位于独立分支 codex/prototype-official-s2，提交 a86850a。M01–M10 实现与自验已完成，用户视觉验收尚未确认，相关资产保持 needs-review；持续目标仍 active。
+官方组件改造版位于独立分支 codex/prototype-official-s2，提交 a86850a。M01–M10 实现与自验已完成，用户视觉验收尚未确认，相关资产保持 needs-review。视觉验收问题已发出，等待用户反馈；持续目标尚未完成，运行状态以 get_goal 为准。
 
 ## 当前交付
 
