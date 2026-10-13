@@ -4,7 +4,7 @@
   "baseCommit": "5b3cdf8",
   "branch": "codex/prototype-official-s2",
   "preview": "http://127.0.0.1:4315/",
-  "activeFeature": "M10",
+  "activeFeature": "M11",
   "features": [
     {
       "id": "M01",
@@ -349,11 +349,60 @@
         "历史字体失败原因不能全部归为导航中断，原始记录保留；外部 CDN 不保证永久稳定。",
         "用户视觉复核未确认，完整目标仍未完成。"
       ]
+    },
+    {
+      "id": "M11",
+      "name": "手机主页标识区与阅读页头部轻量调整",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M10"
+      ],
+      "prototypeCommit": "b3e6ef1",
+      "doneCriteria": [
+        "仅收拢手机主页标识区和阅读页头部，保留完整标识访问、编号状态、作者、时间、版本、目录和动作",
+        "相关手机页头操作范围至少44×44px，图标宽度通过官方styles API设置，不修改官方包或新增依赖",
+        "定向复核320px、390px和桌面、中英主题、相关正常操作；交付同条件两组前后对照",
+        "源文件、产物和证据提交，用户视觉复核前保持needs-review"
+      ],
+      "evidence": [
+        "ownword-prototype/visual-review.html",
+        "ownword-prototype/evidence/official-s2/mobile-density/verification.json",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "initialActionChecks": 13,
+        "finalPositionChecks": 4,
+        "layoutChecks": 8,
+        "a11yAudits": 4,
+        "a11yViolations": 0,
+        "a11yIncomplete": 0,
+        "browserErrors": 0,
+        "consoleErrors": 0,
+        "comparisonPairs": 2,
+        "mobileIdentityHeightBefore": 159.19,
+        "mobileIdentityHeightAfter": 127.19,
+        "mobileReaderTitleBefore": 416.75,
+        "mobileReaderTitleAfter": 316.75,
+        "mobileTargetsMinimum": [
+          44,
+          44
+        ],
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      },
+      "knownLimitations": [
+        "浏览器设备预设未启用实际触摸能力；手机视口和44px操作范围由实际DOM测量证明，不宣称实机触摸验收。",
+        "13项动作与4项最终位置复核组合，原始自动化及样式尺寸诊断保留。"
+      ]
     }
   ],
   "implementationStatus": "implemented-and-verified",
   "reviewStatus": "needs-review",
-  "prototypeCommit": "a86850a",
+  "prototypeCommit": "b3e6ef1",
   "remainingWork": [
     "用户视觉验收尚未确认"
   ]
