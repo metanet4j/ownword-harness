@@ -64,15 +64,15 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-visual-review",
       "evidence": "_task/prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261012-224835.md；功能提交、32 条 BDD 与 81 项实际浏览器断言见任务清单和验收汇总。",
-      "nextStep": "推进 R11：逐模块 review 页面与其余实际使用组件，修复后定向验收。",
+      "nextStep": "完成 R12 最终复制抽检和交付审计。",
       "currentChange": {
         "id": "R10–R12",
         "goal": "按设计系统、frontend-design 及一致性 review v0.4.0 内继承各版本的问题，修复并完成验收。",
         "status": "in-progress",
         "harness": "_task/prototype-worktree/ownword-v0.4.0/feature_list.json",
-        "nextStep": "推进 R11：逐模块 review 页面与其余实际使用组件，修复后定向验收。",
-        "completed": "R10 共享按钮与提示修复已提交 2a9a8aa",
-        "active": "R11"
+        "nextStep": "完成 R12 最终复制抽检和交付审计。",
+        "completed": "R10 2a9a8aa；R11 26055b4，64 张截图、43 项检查与 7 组 axe 通过。",
+        "active": "R12"
       }
     },
     {
