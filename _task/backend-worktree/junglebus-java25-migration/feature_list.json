@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeItem": "J02",
+  "activeItem": "J03",
   "authorization": "用户要求 review 通过后开始实施",
   "plan": "doc/实现计划-20261013-110456.md",
   "scope": {
@@ -34,8 +34,8 @@
       "dependencies": [
         "J01"
       ],
-      "status": "in-progress",
-      "evidence": "",
+      "status": "done",
+      "evidence": "mvn.sh -o clean test：ProtocolTest 7 项执行，0 failures/errors/skipped；完整 schema、JS 字节与无符号边界对照通过",
       "description": "工程与模型；范围、依赖与验收以实现计划对应阶段为准。"
     },
     {
@@ -44,7 +44,7 @@
       "dependencies": [
         "J02"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "evidence": "",
       "description": "REST 与 Token；范围、依赖与验收以实现计划对应阶段为准。"
     },

@@ -1,15 +1,13 @@
 # 当前进展
 
-## Current State 当前状态
+## Current State
 
-J01 已通过本地契约验收：实际固定 JS 基线 77 项断言，双格式 × 普通/Lite，HTTP/WebSocket 与固定帧通过。契约见 doc/API与协议契约-20261013-114000.md。发现上游 Protobuf pause/start 对象编码为空 bytes，Java 明确修正为 UTF-8 JSON bytes。
+J01 实际 JS 基线 77 项断言通过；J02 独立 Java 25 工程、生成类型和模型完成，ProtocolTest 7 项通过。完整 schema 逐字段、命令字节及 uint64 边界一致。
 
-当前 J02：独立 Maven 工程、模型、生成协议类型和样本重放测试。真实部署的兼容验证仍待线上证据。
+## Next Steps
 
-## Next Steps 下一步
+当前 J03：实现 REST 与 Token 获取、刷新、超时和有界响应；完成后测试与提交。
 
-唯一下一步：建立 feature/java25 独立工程，运行模型与协议样本测试。
+## Blockers and Risks
 
-## Blockers and Risks 风险
-
-真实服务验证待实际订阅 ID；按契约使用原始高度保守重放。
+真实部署未验证；协议使用固定基线，持久化高度保持保守重放。
