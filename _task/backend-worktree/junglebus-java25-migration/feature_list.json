@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeItem": "J06",
+  "activeItem": null,
   "authorization": "用户要求 review 通过后开始实施",
   "plan": "doc/实现计划-20261013-110456.md",
   "scope": {
@@ -74,8 +74,8 @@
       "dependencies": [
         "J05"
       ],
-      "status": "in-progress",
-      "evidence": "",
+      "status": "done",
+      "evidence": "verify.sh package：clean verify、37 项全部通过；JS 77 项；三类 JAR 与许可证核对；真实 JSON 100 条、0 错误、取消确认并 CLOSED，数据与报告在 artifacts/doc",
       "description": "完整回归与交付；范围、依赖与验收以实现计划对应阶段为准。"
     }
   ]

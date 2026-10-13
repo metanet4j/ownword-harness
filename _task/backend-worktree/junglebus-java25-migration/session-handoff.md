@@ -2,16 +2,16 @@
 
 ## Current Objective
 
-完整实施已授权，J00–J05 完成，当前 J06。独立 Java feature/java25，37 项 Java 测试通过；JS 基线 77 项通过。
+原始仓库固定、计划审查和 J00–J06 实施已完成；用户追加的真实 100 条测试已完成。独立 Java feature/java25，提交 9ff9411，工作区干净。
 
 ## Recommended Next Step
 
-完成真实 100 条交易测试、示例、README、Javadoc 和完整打包验收。
+无需继续本次任务。入口为 README，交付与线上验证结果见 doc/交付与真实集成验收-20261013-124200.md。
 
 ## Files Changed
 
-J05 提交修复协议解析、回调异常和永久流控错误，验证队列容量、恢复和资源释放。
+Java SDK、完整离线验证、示例和交付包配置在独立仓库。根仓保留任务计划、契约、工具、测试证据和状态，未混入其他任务改动。
 
 ## Blockers / Risks
 
-用户已提供真实订阅 ID；目标 junglebus.gorillapool.io、TLS、起始区块 720000、合计 100 条后停止。独立通道 Token 获取在原始 SDK 未提供。
+没有阻塞。真实测试成功输出 100 条区块交易，Mempool 0 条，取消确认并关闭。更广的线上协议和 REST 验证未执行；保守重放契约有效。

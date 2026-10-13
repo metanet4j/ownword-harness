@@ -1,0 +1,95 @@
+{
+  "tests": {
+    "SubscriptionTest": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "duplicateIdAndClosedClientAreRejected",
+        "allChannelsAndModes(Protocol, boolean)[1]",
+        "allChannelsAndModes(Protocol, boolean)[2]",
+        "allChannelsAndModes(Protocol, boolean)[3]",
+        "allChannelsAndModes(Protocol, boolean)[4]",
+        "tokenTtlRefreshAndFragmentedTextReply",
+        "temporaryConnectErrorRefreshesAndPermanentDisconnectStopsRetry",
+        "statusOnlyKeepsDriverAndMempoolOnlyDoesNotCreateBlockChannels"
+      ]
+    },
+    "ProtocolTest": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "generatedSchemaMatchesEveryPinnedJsField",
+        "controlMessageAndUnknownStatusPreserved",
+        "malformedInputRejected",
+        "payloadsMatchActualJsAndPreserveUnsignedValues",
+        "restUnknownFieldsPreservedAndOptionsValidated",
+        "binaryReplyBatchPreservesDataAndLargeOffsets",
+        "commandsMatchActualJsBytes"
+      ]
+    },
+    "RestTest": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "allRoutesTokensAndRawFields",
+        "endpointSchemesOverridesIpv6AndPrefix",
+        "bodyCapacityAndWholeResponseTimeout",
+        "closeFailsPendingCallsAndKeepsInjectedHttpClientOpen",
+        "errorsDoNotBecomeSuccessOrEraseToken",
+        "refreshSingleFlightAndLateResponseCannotOverwriteSetToken"
+      ]
+    },
+    "LifecycleTest": {
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "malformedSubscribePositionIsRejectedAsProtocolError",
+        "cancellationRemovesQueuedCallbacksAndResumeTimers",
+        "callbackCanReturnItsOwnUnsubscribeFuture",
+        "repeatedUnsubscribeAndCloseReleaseOwnedResources",
+        "backpressureWaitsForAsyncCallbackWhileHeartbeatAndMempoolKeepWorking(Protocol)[1]",
+        "backpressureWaitsForAsyncCallbackWhileHeartbeatAndMempoolKeepWorking(Protocol)[2]",
+        "publicFutureContinuationDoesNotBlockHeartbeat",
+        "unprocessedOffsetsAndOldCompletionsAreNotCommittedOnReconnect",
+        "mempoolOverflowIsReportedWithoutPauseOrSilentLoss",
+        "failureAndAssertionErrorStopFollowingCallbacks",
+        "malformedAndOversizedFramesStopConnection",
+        "byteBudgetIncludesInFlightTransaction",
+        "permanentFlowControlErrorFailsSubscription",
+        "failedRecoveryRestartsFromOriginalHeightAndReportsGap",
+        "zeroLowWatermarkResumesOnlyWhenQueueIsEmpty",
+        "temporaryUnsubscribePushResubscribesAndReorgIsOnlyReported"
+      ]
+    }
+  },
+  "total": 37,
+  "classMajorVersion": 69,
+  "jars": {
+    "metanet4j-junglebus-0.1.0-javadoc.jar": {
+      "bytes": 207327,
+      "sha256": "f6639a6fd21ae4e0715a605ec4cda3f62d532b59ff50fa2b2b530d099d660b05",
+      "license": "resources/LICENSE",
+      "notice": "resources/NOTICE"
+    },
+    "metanet4j-junglebus-0.1.0-sources.jar": {
+      "bytes": 140925,
+      "sha256": "903d3100820092fa8daac14da970ab163ee4cb9981e1f09d9d8b0bbe9505ccc5",
+      "license": "META-INF/LICENSE",
+      "notice": "META-INF/NOTICE"
+    },
+    "metanet4j-junglebus-0.1.0.jar": {
+      "bytes": 559054,
+      "sha256": "5f7e08908ff0fb1a82a9853065a9941618703be9cb3435cd61631532ec496591",
+      "license": "META-INF/LICENSE",
+      "notice": "META-INF/NOTICE"
+    }
+  }
+}
