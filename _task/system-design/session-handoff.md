@@ -1,9 +1,9 @@
 # 当前交接
 
-当前事项为 prototype-homepage-v040。已按用户确认的方案完成 R05 混合媒体列表收敛，frontend-design 参与审核。原型已实现、验证并提交，等待用户视觉复核。
+本轮已按用户纠正，将继承模块的视觉同步统一在 v0.4.0 worktree 分支完成。身份 → 内容 → Artifact 依次 review、修改、定向验收和提交，状态为 needs-review。
 
-内容流统一文字阅读轴与右侧预览窗口，标题和摘要限制行数，资源失败保持预览尺寸。构建、初始化、5 份列表布局记录及手机首屏检查通过，12 项交互和运行检查通过；实际查看受影响截图，中文深色主页 axe 无违规及待判定项。未重跑全部业务 BDD 或执行生产验证。
+当前无进行中事项。实现、提交、24 张截图及 23 项布局与交互检查以[v0.4.0 任务清单](../prototype-worktree/ownword-v0.4.0/feature_list.json)和[交付验收](../prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261012-224835.md)为准。构建、初始化通过；中文深色 Artifact 列表 axe 无违规及待判定项。旧版独立文案检查脚本不兼容 window 词典，本次新增文案另经 VM 和浏览器核对；未重跑全部业务 BDD 或生产验证。
 
-方案见[当前 PRD 4.4 节](spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md)。提交、证据和状态查[v0.4.0 清单](../prototype-worktree/ownword-v0.4.0/feature_list.json)，截图与审核见[当前交付](../prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261012-224835.md)。
+源码在 `_task/prototype-worktree/ownword-v0.4.0/ownword-prototype`，分支 `codex/prototype-v0.4.0-homepage`，预览 http://127.0.0.1:4314/。此前 v0.1.0 独立 worktree 的未提交修改保留，已停止在其他版本分支实施。
 
-唯一下一步：用户复核列表的秩序、媒体比例和阅读密度；复核前保持 `needs-review`。
+唯一下一步：用户复核统一预览中的身份、内容和 Artifact 视觉成果；复核前保持 needs-review。

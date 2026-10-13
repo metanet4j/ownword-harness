@@ -34,7 +34,7 @@
   "designReview": {
     "source": "_task/system-design/spec/prd/v0.4.0/设计审查v0.4.0-20261012-185625.md",
     "result": "agent-review-passed",
-    "limit": "P01–P10、32 条 BDD、受影响截图及导航连续性已核对；用户视觉复核和生产验证待完成。"
+    "limit": "P01–P10 既有证据保留；本轮 R06–R08 对继承身份、内容、Artifact 做定向复核，24 张截图与 23 项检查通过；用户视觉复核和生产验证待完成。"
   },
   "features": [
     {
@@ -364,6 +364,57 @@
       "implementationStatus": "implemented-and-verified",
       "commit": "f6d0bd9",
       "evidence": "ownword-prototype/evidence/homepage-v040/R05/verification.json"
+    },
+    {
+      "id": "R06",
+      "name": "继承身份页面视觉复核",
+      "description": "身份查看、编辑与确认页的内容分组、返回入口、长名称及复制失败；统一在 v0.4.0 分支实施。",
+      "dependencies": [
+        "R05"
+      ],
+      "status": "needs-review",
+      "doneCriteria": [
+        "按 frontend-design 与 OwnWord 设计指南 review 实际页面，复用已确认的共享样式",
+        "修改实际发现的布局问题，正常与相关边界的截图及操作可复核",
+        "构建、初始化和定向检查通过，在 v0.4.0 提交并保持 needs-review"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "commit": "5273602",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R06/verification.json"
+    },
+    {
+      "id": "R07",
+      "name": "继承内容页面视觉复核",
+      "description": "我的内容、编辑、阅读与历史页面的列表密度、长标题及返回操作；统一在 v0.4.0 分支实施。",
+      "dependencies": [
+        "R06"
+      ],
+      "status": "needs-review",
+      "doneCriteria": [
+        "按 frontend-design 与 OwnWord 设计指南 review 实际页面，复用已确认的共享样式",
+        "修改实际发现的布局问题，正常与相关边界的截图及操作可复核",
+        "构建、初始化和定向检查通过，在 v0.4.0 提交并保持 needs-review"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "commit": "9e56b37",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R07/verification.json"
+    },
+    {
+      "id": "R08",
+      "name": "继承 Artifact 页面视觉复核",
+      "description": "Artifact 列表、详情及创建确认中的预览尺寸、文字层级和返回操作；统一在 v0.4.0 分支实施。",
+      "dependencies": [
+        "R07"
+      ],
+      "status": "needs-review",
+      "doneCriteria": [
+        "按 frontend-design 与 OwnWord 设计指南 review 实际页面，复用已确认的共享样式",
+        "修改实际发现的布局问题，正常与相关边界的截图及操作可复核",
+        "构建、初始化和定向检查通过，在 v0.4.0 提交并保持 needs-review"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "commit": "bbd8a89",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R08/verification.json"
     }
   ],
   "delivery": "交付验收v0.4.0-20261012-224835.md"

@@ -12,6 +12,32 @@
   "activeItem": null,
   "features": [
     {
+      "id": "prototype-visual-alignment-v010-v030",
+      "name": "v0.4.0 内继承模块的视觉同步",
+      "status": "needs-review",
+      "goal": "在 v0.4.0 分支依次 review、修改并验收继承自 v0.1.0 的身份、v0.2.0 的内容、v0.3.0 的 Artifact 页面。",
+      "scope": "字级与密度、信息层级、返回按钮、复制反馈及各版适用的内容与预览布局。",
+      "dependencies": [
+        "v0.4.0 R01–R05 已实现并验证",
+        "用户明确要求仅在 v0.4.0 worktree 分支继续修改"
+      ],
+      "doneCriteria": [
+        "身份、内容、Artifact 按顺序完成审查、定点修改和浏览器验收",
+        "全部源码和证据提交到 v0.4.0 分支，沿用绑定 S2",
+        "交付统一预览与实际检查记录，用户视觉复核前保持 needs-review"
+      ],
+      "sourcePrototypeCommit": "f6d0bd9",
+      "nextStep": "在统一 v0.4.0 预览中复核身份、内容和 Artifact 的视觉成果。",
+      "output": "_task/prototype-worktree/ownword-v0.4.0/ownword-prototype",
+      "prdVersion": "v0.4.0",
+      "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
+      "harnessPath": "_task/prototype-worktree/ownword-v0.4.0",
+      "retainedWork": "v0.1.0 独立 worktree 的既有未提交改动保留；收到用户纠正后仅在 v0.4.0 分支修改原型，v0.2.0、v0.3.0 未改动。",
+      "implementationStatus": "implemented-and-verified",
+      "reviewStatus": "awaiting-user-visual-review",
+      "evidence": "_task/prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261012-224835.md；R06–R08 的提交与实际检查见该任务 feature_list.json。"
+    },
+    {
       "id": "prototype-homepage-v040",
       "name": "v0.4.0 Identity 个人主页完整高保真原型",
       "status": "needs-review",
@@ -38,16 +64,14 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-visual-review",
       "evidence": "_task/prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261012-224835.md；功能提交、32 条 BDD 与 81 项实际浏览器断言见任务清单和验收汇总。",
-      "nextStep": "用户复核 R05 混合内容列表的秩序与密度；复核前保持 needs-review。",
+      "nextStep": "在统一 v0.4.0 预览中复核身份、内容和 Artifact 的视觉成果。",
       "currentChange": {
-        "id": "R05",
-        "goal": "实施用户确认的紧凑混合媒体内容列表方案。",
+        "id": "R06–R08",
+        "goal": "在 v0.4.0 分支依次 review、修改并验收继承自 v0.1.0 的身份、v0.2.0 的内容、v0.3.0 的 Artifact 页面。",
         "status": "needs-review",
-        "scope": "公开主页内容流及类型筛选，共用行布局与媒体预览。",
-        "nextStep": "用户复核 R05 混合内容列表的秩序与密度；复核前保持 needs-review。",
         "implementationStatus": "implemented-and-verified",
-        "commit": "f6d0bd9",
-        "evidence": "_task/prototype-worktree/ownword-v0.4.0/ownword-prototype/evidence/homepage-v040/R05/verification.json"
+        "harness": "_task/prototype-worktree/ownword-v0.4.0/feature_list.json",
+        "nextStep": "在统一 v0.4.0 预览中复核身份、内容和 Artifact 的视觉成果。"
       }
     },
     {
