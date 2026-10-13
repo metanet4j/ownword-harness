@@ -2,12 +2,12 @@
 
 ## Current State
 
-J00–J03 已完成；JS 基线 77 项断言通过。Java ProtocolTest 7 项、RestTest 6 项均通过，REST、刷新合并、有界响应、正文超时、资源所有权已验证。
+J00–J04 完成。JS 基线 77 项通过；Java ProtocolTest 7、RestTest 6、SubscriptionTest 8，合计 21 项均通过。双格式与三通道已可用。
 
 ## Next Steps
 
-当前 J04：实现双格式 WebSocket、握手、心跳、三类订阅、Token 过期与断线恢复。
+当前 J05：背压、容量、异步回调、断线恢复、取消与关闭竞态专项验证。
 
 ## Blockers and Risks
 
-真实部署未验，安全高度保持原始 fromBlock；本地接口按固定源码契约迁移。
+真实部署未验；getResumeFromBlock 保持原始高度，允许重放重复，不宣称 exactly-once。

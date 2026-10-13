@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeItem": "J04",
+  "activeItem": "J05",
   "authorization": "用户要求 review 通过后开始实施",
   "plan": "doc/实现计划-20261013-110456.md",
   "scope": {
@@ -54,8 +54,8 @@
       "dependencies": [
         "J03"
       ],
-      "status": "in-progress",
-      "evidence": "",
+      "status": "done",
+      "evidence": "mvn.sh -o clean test：ProtocolTest 7、RestTest 6、SubscriptionTest 8 项通过；双格式/Lite/三通道/TTL/分片/永久断开实际验证",
       "description": "连接与订阅；范围、依赖与验收以实现计划对应阶段为准。"
     },
     {
@@ -64,7 +64,7 @@
       "dependencies": [
         "J04"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "evidence": "",
       "description": "队列与生命周期；范围、依赖与验收以实现计划对应阶段为准。"
     },

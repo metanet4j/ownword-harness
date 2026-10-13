@@ -2,16 +2,16 @@
 
 ## Current Objective
 
-用户已授权完整实施；当前 J04，J00–J03 完成。Java feature/java25 已提交模型与 REST，实际 13 项 Java 测试通过。
+完整实施已授权，J00–J04 完成，当前 J05。独立 Java feature/java25，21 项 Java 测试通过；JS 基线 77 项通过。
 
 ## Recommended Next Step
 
-实现连接与三类订阅，并用独立本机 WebSocket 服务验证。
+完成背压、回调失败、断线恢复和取消专项测试，然后进入 J06 打包交付。
 
 ## Files Changed
 
-Java Endpoint/JungleBusClient/RestTest 和状态文件。
+CentrifugeConnection/JungleBusSubscription、独立 FixtureServer 和 SubscriptionTest。
 
 ## Blockers / Risks
 
-目标部署验证仍待真实订阅 ID。
+线上验证待订阅 ID；独立通道 Token 获取在原始 SDK 未提供，仅支持已有连接 Token 契约。
