@@ -1,19 +1,23 @@
 # 当前进展
 
-官方组件改造版位于独立分支 codex/prototype-official-s2，提交 f3f6844。M01–M06 已实现并验证，视觉复核保持 needs-review。当前按用户最新要求优先 M07：逐个检查内容编辑器的每个按钮和动作。
+官方组件改造版位于独立分支 codex/prototype-official-s2，提交 93da181。M01–M07 已实现并验证，用户视觉复核保持 needs-review。编辑器复核已交付，下一项为 M08 密钥轮换；持续目标尚未完成。
 
 ## 已核实结果
 
-M06 对四模块主要页面及相关状态完成 60 张桌面／320px 截图、60 次自动无障碍检查与 11 项交互断言，未发现横向溢出或自动无障碍违规，视频和音频实际播放、暂停通过。完整报告为 ownword-prototype/evidence/official-s2/acceptance-before/verification.json；这不是所有历史 PRD 的全量 BDD 或生产签名验收。
+M07 修复预览格式误改正文、手机工具栏遮挡、全选任务项与链接边界、多段列表、双栏初始位置及键盘联动、深色查找面板与源码 Tab 入口。沿用官方 S2 控件及既有 CodeMirror／Milkdown，没有修改官方组件内部实现。
 
-字体核对发现业务别名缺少官方语言字体顺序。ownword-tokens.css 已按 S2 1.6.0 spectrum-theme.ts 的 sans、serif、code 与简体中文顺序修正；中文正文、标题与官方按钮的计算字体一致。补充两种视口的截图和自动无障碍检查通过，无浏览器错误。前后对照为 ownword-prototype/visual-review.html，上轮对照保留 visual-review-v5.html。
+编辑器已通过 90 项格式、模式与自动无障碍检查，以及 61 项桌面／手机流程记录。后者组合完整流程与定向复核：桌面局部选区和手机查找菜单各有一次自动化操作失败，改正操作后通过，原始记录仍保留。查找大小写／整词／正则实际匹配、任务项点击／空格键、导入替换、失败保护、保存、离开与模拟发布均有实际动作证据。
 
-构建、来源／产物校验与全部继承模型通过。历史两条中文动态字体失败 URL 当前复查 HTTP 200，最新字体加载成功；仍不能据此宣称外部 CDN 的间歇故障已经解决。
+汇总证据为 ownword-prototype/evidence/official-s2/editor-review/verification.json；逐动作清单为 ownword-prototype/editor-review.html；六组同条件前后对照为 ownword-prototype/visual-review.html。对照和清单在 320px 无横向溢出，清单自动无障碍违规为零。中文字体对照保留在 visual-review-v6.html。
+
+源码构建、官方包来源／产物校验、全部继承模型及 init.sh 通过。双栏键盘与容器滚动通过，自动化低层 mouse wheel 未产生有效事件，因此不宣称实机滚轮通过。无效文件引发的提示日志属于预期错误路径。原型钱包、签名、发布为模拟，不代表生产链路验收。
+
+M06 主要页面基准包含 60 张桌面／320px 截图、60 次自动无障碍检查与 11 项交互断言，报告为 evidence/official-s2/acceptance-before/verification.json。字体别名已按 S2 1.6.0 官方顺序修正。历史两个中文字体失败 URL 当前复查 200、最新字体加载成功；不能据此宣称外部 CDN 的间歇故障已经解决。
 
 ## 当前方案与待处理项
 
-编辑器按实际任务检查：输入与选区 → 每项格式与菜单 → 模式切换 → 文件／保存 → 离开与发布。每项记录可观察正文与焦点结果；发现问题先复现再修复。沿用官方 S2 控件和既有 CodeMirror／Milkdown，不引入新的编辑器或视觉规则。
+M08：依据 v0.1 身份安全流程补齐密钥轮换入口与 Review、模拟授权、处理、结果和取消，核对 BAP ID、Profile 与历史签名说明。
 
-跨版本文档核对还发现密钥轮换缺少入口与实现（M08），转移 Review 首屏信息过散（M09）。这两项保留，先处理用户新指出的编辑器。
+M09：收拢 Artifact 转移 Review 的编号、状态、双方标识和影响说明，减少手机首屏的重复大块留白，同时保留完整标识访问与复制。
 
-预览 http://127.0.0.1:4315/。原 v0.4.0 worktree 禁止修改，基线 5b3cdf8。
+预览 http://127.0.0.1:4315/，已实际确认 HTTP 200。原 v0.4.0 worktree 保持 clean、HEAD 5b3cdf8。临时 4316 基准服务与已完成的编辑器自动化会话已关闭。

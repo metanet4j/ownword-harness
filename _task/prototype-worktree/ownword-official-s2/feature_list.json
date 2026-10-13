@@ -4,7 +4,7 @@
   "baseCommit": "5b3cdf8",
   "branch": "codex/prototype-official-s2",
   "preview": "http://127.0.0.1:4315/",
-  "activeFeature": "M07",
+  "activeFeature": "M08",
   "features": [
     {
       "id": "M01",
@@ -154,7 +154,7 @@
       ],
       "prototypeCommit": "13de597",
       "evidence": [
-        "ownword-prototype/visual-review.html",
+        "ownword-prototype/visual-review-v5.html",
         "ownword-prototype/evidence/official-s2/visual-v5/verification.json",
         "ownword-prototype/vendor/build-manifest.json"
       ],
@@ -191,7 +191,7 @@
       "evidence": [
         "ownword-prototype/evidence/official-s2/acceptance-before/verification.json",
         "ownword-prototype/evidence/official-s2/visual-v6/verification.json",
-        "ownword-prototype/visual-review.html"
+        "ownword-prototype/visual-review-v6.html"
       ],
       "validation": {
         "build": "passed",
@@ -211,8 +211,8 @@
     {
       "id": "M07",
       "name": "内容编辑器逐按钮与逐动作复核",
-      "status": "in-progress",
-      "implementationStatus": "in-progress",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
       "dependencies": [
         "M06"
       ],
@@ -220,7 +220,25 @@
         "逐项演练桌面和手机上的每个格式、标题、模式、文件、查找、链接和上下文动作",
         "核对每项动作实际正文、选区、撤销和焦点效果；错误、取消、保存和发布不丢正文",
         "修复实际复现的问题，交付逐动作清单、前后对照、证据和提交"
-      ]
+      ],
+      "prototypeCommit": "93da181",
+      "evidence": [
+        "ownword-prototype/evidence/official-s2/editor-review/verification.json",
+        "ownword-prototype/visual-review.html",
+        "ownword-prototype/editor-review.html",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "formatModeA11yChecks": 90,
+        "flowChecks": 61,
+        "comparisonPairs": 6,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "verificationMethod": "组合完整流程与定向复核，原始自动化失败及工具限制仍保留",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      }
     },
     {
       "id": "M08",
@@ -251,5 +269,5 @@
   ],
   "implementationStatus": "in-progress",
   "reviewStatus": "needs-review",
-  "prototypeCommit": "f3f6844"
+  "prototypeCommit": "93da181"
 }
