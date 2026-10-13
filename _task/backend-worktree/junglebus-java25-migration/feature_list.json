@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeItem": "J03",
+  "activeItem": "J04",
   "authorization": "用户要求 review 通过后开始实施",
   "plan": "doc/实现计划-20261013-110456.md",
   "scope": {
@@ -44,8 +44,8 @@
       "dependencies": [
         "J02"
       ],
-      "status": "in-progress",
-      "evidence": "",
+      "status": "done",
+      "evidence": "mvn.sh -o clean test：RestTest 6 项、ProtocolTest 7 项均通过；真实 HTTP 路径、Token、超时、容量、并发与关闭验证",
       "description": "REST 与 Token；范围、依赖与验收以实现计划对应阶段为准。"
     },
     {
@@ -54,7 +54,7 @@
       "dependencies": [
         "J03"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "evidence": "",
       "description": "连接与订阅；范围、依赖与验收以实现计划对应阶段为准。"
     },

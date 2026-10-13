@@ -2,16 +2,16 @@
 
 ## Current Objective
 
-完整迁移已获授权；J00–J02 完成，当前 J03。Java 独立工程 feature/java25，ProtocolTest 7 项通过；基线与契约已冻结。
+用户已授权完整实施；当前 J04，J00–J03 完成。Java feature/java25 已提交模型与 REST，实际 13 项 Java 测试通过。
 
 ## Recommended Next Step
 
-实现 REST、Token 和实际 HTTP 边界测试。
+实现连接与三类订阅，并用独立本机 WebSocket 服务验证。
 
 ## Files Changed
 
-独立工程 pom/src、generate-schema.py 和阶段状态。
+Java Endpoint/JungleBusClient/RestTest 和状态文件。
 
 ## Blockers / Risks
 
-线上验证待实际订阅 ID。
+目标部署验证仍待真实订阅 ID。
