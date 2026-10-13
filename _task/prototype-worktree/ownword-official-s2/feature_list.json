@@ -1,0 +1,45 @@
+{
+  "version": "官方组件改造版",
+  "baseVersion": "v0.4.0",
+  "baseCommit": "5b3cdf8",
+  "branch": "codex/prototype-official-s2",
+  "preview": "http://127.0.0.1:4315/",
+  "activeFeature": "M01",
+  "features": [
+    {
+      "id": "M01",
+      "name": "官方 S2 组件迁移与独立预览",
+      "status": "needs-review",
+      "dependencies": [
+        "v0.4.0@5b3cdf8"
+      ],
+      "doneCriteria": [
+        "构建直接消费锁定的官方 S2 包及兼容 React，不加载旧本地仿制组件运行时",
+        "迁移通用按钮、字段、提示、Tabs、菜单、上传、状态和弹窗，保留业务流程与媒体秩序",
+        "独立浏览器验证四模块正常与相关边界、双语主题、键盘及截图；原工作区保持原样",
+        "源码与证据提交，并交付官方组件改造版预览及迁移边界"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "evidence": [
+        "ownword-prototype/evidence/official-s2/verification.json",
+        "ownword-prototype/evidence/official-s2/preview-zh.png",
+        "ownword-prototype/evidence/official-s2/editor-mobile-final.png",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "browserAssertions": 13,
+        "browserErrors": 0,
+        "browserWarnings": 0,
+        "screenshots": 13,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      }
+    }
+  ],
+  "implementationStatus": "implemented-and-verified",
+  "reviewStatus": "needs-review",
+  "prototypeCommit": "cafdeb8"
+}
