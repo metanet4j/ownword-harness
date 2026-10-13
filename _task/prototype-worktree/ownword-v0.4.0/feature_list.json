@@ -33,8 +33,8 @@
   },
   "designReview": {
     "source": "_task/system-design/spec/prd/v0.4.0/设计审查v0.4.0-20261012-185625.md",
-    "result": "agent-review-passed",
-    "limit": "P01–P10 既有证据保留；本轮 R06–R08 对继承身份、内容、Artifact 做定向复核，24 张截图与 23 项检查通过；用户视觉复核和生产验证待完成。"
+    "result": "copy-consistency-reviewed-s2-gaps-open",
+    "limit": "R09：10 张截图、32 项定向检查、8 组按钮实测通过；官方 S2 封装差异见交付说明，未作全站符合性结论。R06–R08 既有证据保留；用户视觉复核待完成。"
   },
   "features": [
     {
@@ -415,6 +415,25 @@
       "implementationStatus": "implemented-and-verified",
       "commit": "bbd8a89",
       "evidence": "ownword-prototype/evidence/homepage-v040/R08/verification.json"
+    },
+    {
+      "id": "R09",
+      "name": "复制操作一致性专项修正",
+      "description": "按用户反馈，统一所有标识和阅读链接的复制组件、尺寸、成功反馈及失败恢复；核对本地预览封装与官方 S2 的边界。",
+      "dependencies": [
+        "R08"
+      ],
+      "status": "needs-review",
+      "doneCriteria": [
+        "穷举复制入口，所有标识及阅读链接使用同一 ActionButton 组合，不随 compact 切换按钮类型",
+        "正常复制完整原值，成功反馈一致；失败展示完整值和手动操作说明，键盘可用",
+        "查看公开主页、普通身份、Artifact 编号及阅读页在桌面和窄屏的实际截图，记录 S2 差异",
+        "构建和初始化通过，源码及证据提交至 v0.4.0，保持 needs-review"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "commit": "fac655a",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R09/verification.json",
+      "reviewLimit": "复制入口站内一致性通过；官方 S2 圆角、悬停/按下及 Tooltip 封装差异仍待处理，未判为全部符合。"
     }
   ],
   "delivery": "交付验收v0.4.0-20261012-224835.md"

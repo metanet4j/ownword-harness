@@ -64,14 +64,15 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-visual-review",
       "evidence": "_task/prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261012-224835.md；功能提交、32 条 BDD 与 81 项实际浏览器断言见任务清单和验收汇总。",
-      "nextStep": "在统一 v0.4.0 预览中复核身份、内容和 Artifact 的视觉成果。",
+      "nextStep": "用户复核统一复制入口；官方 S2 封装差异按交付说明继续跟踪。",
       "currentChange": {
-        "id": "R06–R08",
-        "goal": "在 v0.4.0 分支依次 review、修改并验收继承自 v0.1.0 的身份、v0.2.0 的内容、v0.3.0 的 Artifact 页面。",
-        "status": "needs-review",
-        "implementationStatus": "implemented-and-verified",
+        "id": "R09",
+        "goal": "修正用户指出的复制按钮不统一，专项核对全部复制入口及 S2 组件边界。",
+        "status": "implemented-and-verified",
         "harness": "_task/prototype-worktree/ownword-v0.4.0/feature_list.json",
-        "nextStep": "在统一 v0.4.0 预览中复核身份、内容和 Artifact 的视觉成果。"
+        "nextStep": "用户复核统一复制入口；官方 S2 封装差异按交付说明继续跟踪。",
+        "commit": "fac655a",
+        "reviewLimit": "站内复制一致性已验收；官方 S2 完整符合性未通过，差异见任务交付说明。"
       }
     },
     {
