@@ -4,7 +4,7 @@
   "baseCommit": "5b3cdf8",
   "branch": "codex/prototype-official-s2",
   "preview": "http://127.0.0.1:4315/",
-  "activeFeature": "M05",
+  "activeFeature": "M07",
   "features": [
     {
       "id": "M01",
@@ -173,9 +173,83 @@
       "knownLimitations": [
         "本轮字体未报错，上轮官方动态中文字体的偶发请求失败仍未解决；Provider 公开 API 未提供重试配置。"
       ]
+    },
+    {
+      "id": "M06",
+      "name": "跨版本验收覆盖与官方字体统一",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M05"
+      ],
+      "doneCriteria": [
+        "累计检查四模块主要页面与适用错误状态的桌面、320px 布局和自动无障碍",
+        "业务正文和标题复用 S2 1.6.0 中英文完整字体顺序",
+        "记录实际字体网络结果、未覆盖项与可复核证据，交付同条件前后对照"
+      ],
+      "prototypeCommit": "f3f6844",
+      "evidence": [
+        "ownword-prototype/evidence/official-s2/acceptance-before/verification.json",
+        "ownword-prototype/evidence/official-s2/visual-v6/verification.json",
+        "ownword-prototype/visual-review.html"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "browserAssertions": 11,
+        "screenshots": 62,
+        "automatedA11yAudits": 62,
+        "a11yViolations": 0,
+        "browserErrors": 0,
+        "userReview": "pending"
+      },
+      "knownLimitations": [
+        "历史中文字体 CDN 间歇失败的两个 URL 复查均 HTTP 200，本次字体已加载且无错误；尚未证明外部 CDN 稳定性已解决。",
+        "本轮 60 个基准截图的完整浏览器检查在字体别名修正前执行；字体修正定向核对中文深色桌面与手机的正文、标题和官方控件。"
+      ]
+    },
+    {
+      "id": "M07",
+      "name": "内容编辑器逐按钮与逐动作复核",
+      "status": "in-progress",
+      "implementationStatus": "in-progress",
+      "dependencies": [
+        "M06"
+      ],
+      "doneCriteria": [
+        "逐项演练桌面和手机上的每个格式、标题、模式、文件、查找、链接和上下文动作",
+        "核对每项动作实际正文、选区、撤销和焦点效果；错误、取消、保存和发布不丢正文",
+        "修复实际复现的问题，交付逐动作清单、前后对照、证据和提交"
+      ]
+    },
+    {
+      "id": "M08",
+      "name": "补齐身份密钥轮换的版本连续性",
+      "status": "planned",
+      "dependencies": [
+        "M07"
+      ],
+      "doneCriteria": [
+        "身份页提供安全入口，Review 显示完整操作 BAP ID 和不变的身份",
+        "轮换走模拟授权、处理、结果，取消、失败和账户变化保持准确",
+        "核对 BAP ID 与 Profile 不变，历史签名说明独立；桌面与手机、双语主题验收"
+      ]
+    },
+    {
+      "id": "M09",
+      "name": "转移核对页的信息分组与首屏密度",
+      "status": "planned",
+      "dependencies": [
+        "M08"
+      ],
+      "doneCriteria": [
+        "紧凑呈现 Artifact 编号、状态、接收地址与操作身份，完整标识可复制",
+        "保留转移影响和交易详情，复核边界、取消、主题与窄屏",
+        "交付同状态前后对照与最终优化验收清单"
+      ]
     }
   ],
-  "implementationStatus": "implemented-and-verified",
+  "implementationStatus": "in-progress",
   "reviewStatus": "needs-review",
-  "prototypeCommit": "13de597"
+  "prototypeCommit": "f3f6844"
 }

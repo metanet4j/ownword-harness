@@ -1,17 +1,13 @@
 # 当前交接
 
-用户授权在独立“官方组件改造版”中持续 review 和优化。M01–M05 已实现并验证，用户视觉状态 needs-review；不得修改原 v0.4.0 worktree。
+持续目标：继续，直到所有优化验收通过。用户最新明确要求复核内容编辑器的每个按钮和动作，当前优先 M07；不能用布局截图或有限格式检查替代逐动作验收。
 
-工作区：/home/haodev/ownword/_task/prototype-worktree/ownword-official-s2/ownword-prototype。分支 codex/prototype-official-s2，提交 13de597。原 worktree 仍为 5b3cdf8、干净。
+独立工作区 ownword-prototype，分支 codex/prototype-official-s2，提交 f3f6844；原 v0.4.0 worktree 不改。预览 4315 已用实际 HTTP 200 确认仍在运行，不按 sandbox ps 判断停止。
 
-预览 http://127.0.0.1:4315/，最新对照 visual-review.html；上一轮为 visual-review-v4.html，v3、v2 保留。任务目录 ./init.sh 检查，./init.sh --serve 启动服务，不终止其他进程。
+先读 AGENTS.md、feature_list.json、progress.md。M01–M06 implemented-and-verified，用户视觉复核 needs-review。M06 60 个基准页面状态的桌面／手机布局与自动无障碍通过，另定向修复并验证中英文字体顺序。最新对照 visual-review.html，上轮 visual-review-v5.html。
 
-先读本任务 AGENTS.md、feature_list.json、progress.md。源码改动后构建与检查；原型提交在独立仓库，状态提交在根仓库，仅纳入任务改动。用户喜欢同条件前后对照，沿用设计总指南第 8.2 节。
+编辑器浏览器会话 ownword-editor-review 已连接演示钱包、当前身份页；下一步真实点击导航到内容并创建草稿。ReadyContentEditor 在 content-editor.jsx；源码工具 editor-tools.js（CodeMirror），可视化工具 visual-editor.js（Milkdown）。命令按 visual／edit／split／preview 分支执行，需实际核对各分支和选区。
 
-新增官方组件 RadioGroup／Radio，绑定版本仍为 S2 1.6.0。身份名称／类型的必填交给组件；编辑 BAP ID 复用紧凑 Identifier；关系 Review 和钱包确认先显示双方完整标识，再显示说明，无展示名时不重复当姓名展示。复制失败可展开原值，条件变更与钱包授权逻辑未改。
+verify-acceptance.mjs 可复跑主要页面浏览器验收，DOM eval 只读。完整来源检查 npm run check，源码修改后 npm run build；agent-browser 及 native macro 构建需提权。记录逐按钮预期／实际结果和当前失败，不冒充全量历史 PRD 已通过。
 
-M05 证据在 evidence/official-s2/visual-v5/verification.json：17 项检查及 2 项补充复核，3 张前图、8 张结果图。构建与四模块模型通过，两次会话无错误或警告。相关 keyboard、取消保留、必填、复制、创建共用字段、主题双语和关系弹层已验证。
-
-字体仍是已知待优化项：Provider／Fonts 通过官方 Typekit 动态子集加载中文，公开 API 无重试配置。本轮未复现网络失败，不代表上轮偶发失败已解决；M04 原始日志和验证限制保持有效。不能擅自改官方包、屏蔽错误或切换另一套字体规则。
-
-下一步：交付并听取视觉反馈；后续工作继续在此 worktree。
+待处理 M08 密钥轮换缺口、M09 转移 Review 密度。历史官方字体 CDN 间歇失败尚无可复現根因；当前两个失败 URL 复查 200、新会话字体已加载且零错误，不能隐瞒历史限制。
