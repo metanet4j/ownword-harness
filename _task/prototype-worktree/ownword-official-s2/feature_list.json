@@ -4,7 +4,7 @@
   "baseCommit": "5b3cdf8",
   "branch": "codex/prototype-official-s2",
   "preview": "http://127.0.0.1:4315/",
-  "activeFeature": "M09",
+  "activeFeature": "M10",
   "features": [
     {
       "id": "M01",
@@ -256,7 +256,7 @@
       "prototypeCommit": "37bfba6",
       "evidence": [
         "ownword-prototype/evidence/official-s2/identity-security/verification.json",
-        "ownword-prototype/visual-review.html",
+        "ownword-prototype/visual-review-v8.html",
         "ownword-prototype/vendor/build-manifest.json"
       ],
       "validation": {
@@ -266,22 +266,22 @@
         "behaviorResult": "passed",
         "a11yAudits": 18,
         "a11yViolations": 0,
-        "browserErrors": 9,
-        "errorsWithTypekitUrl": 8,
-        "genericNetworkErrors": 1,
-        "overallBrowserRun": "needs-fix due to font network errors",
+        "browserErrors": 0,
+        "errorsWithTypekitUrl": 0,
+        "genericNetworkErrors": 0,
+        "overallBrowserRun": "passed after font/network readiness wait",
         "manualVisualReview": "completed",
         "userReview": "pending"
       },
       "knownLimitations": [
-        "官方 Typekit 动态字体网络错误仍待核实，保留 8 条明确 URL 与 1 条通用网络错误；不能称为零错误验收。",
+        "历史 9 条字体网络错误另存 verification-with-font-errors.json；最新稳定加载复核零错误，不等于外部 CDN 的间歇故障已永久修复。",
         "密钥更新只以内存中的签名代次模拟，不生成或持久化真实密钥。"
       ]
     },
     {
       "id": "M09",
       "name": "转移核对页的信息分组与首屏密度",
-      "status": "in-progress",
+      "status": "needs-review",
       "dependencies": [
         "M08"
       ],
@@ -290,22 +290,71 @@
         "保留转移影响和交易详情，复核边界、取消、主题与窄屏",
         "交付同状态前后对照与最终优化验收清单"
       ],
-      "implementationStatus": "in-progress"
+      "implementationStatus": "implemented-and-verified",
+      "prototypeCommit": "abc1706",
+      "evidence": [
+        "ownword-prototype/evidence/official-s2/transfer-review/verification.json",
+        "ownword-prototype/evidence/official-s2/transfer-review/related.json",
+        "ownword-prototype/visual-review.html",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "transferChecks": 20,
+        "relatedChecks": 7,
+        "persistedA11yAudits": 14,
+        "a11yViolations": 0,
+        "browserErrors": 0,
+        "mobileSignButtonBottomBefore": 823.77,
+        "mobileSignButtonBottomAfter": 651.31,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "verificationMethod": "完整转移流程与相关页定向复核组合，失败诊断保留"
+      }
     },
     {
       "id": "M10",
       "name": "字体网络错误来源与预览稳定性复核",
-      "status": "planned",
+      "status": "needs-review",
       "dependencies": [
         "M09"
       ],
       "doneCriteria": [
         "保留 Typekit 失败证据，核实中途导航与稳定加载下的表现，不隐瞒通用网络错误",
         "在所有具体修改完成后做完成审计；不能把外部字体错误或待用户视觉复核记为已通过"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "prototypeCommit": "a86850a",
+      "evidence": [
+        "ownword-prototype/evidence/official-s2/final-audit/verification.json",
+        "ownword-prototype/evidence/official-s2/identity-security/verification.json",
+        "ownword-prototype/evidence/official-s2/identity-security/verification-with-font-errors.json",
+        "ownword-prototype/acceptance-review.html"
+      ],
+      "validation": {
+        "implementationAuditFeatures": 9,
+        "implementationAuditCriteria": 30,
+        "currentRotationChecks": 26,
+        "currentRotationA11yAudits": 18,
+        "currentBrowserErrors": 0,
+        "reviewPageA11yViolations": 0,
+        "reviewPageWidths": [
+          320,
+          1440
+        ],
+        "userReview": "pending"
+      },
+      "knownLimitations": [
+        "历史字体失败原因不能全部归为导航中断，原始记录保留；外部 CDN 不保证永久稳定。",
+        "用户视觉复核未确认，完整目标仍未完成。"
       ]
     }
   ],
-  "implementationStatus": "in-progress",
+  "implementationStatus": "implemented-and-verified",
   "reviewStatus": "needs-review",
-  "prototypeCommit": "37bfba6"
+  "prototypeCommit": "a86850a",
+  "remainingWork": [
+    "用户视觉验收尚未确认"
+  ]
 }

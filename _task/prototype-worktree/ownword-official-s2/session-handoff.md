@@ -1,23 +1,17 @@
 # 当前交接
 
-持续目标：继续，直到所有优化验收通过。用户最新要求检查内容编辑器每个按钮和动作；M07 和 M08 已实现、验证并提交，整站目标尚未完成。用户状态提问不取消持续目标。
+持续目标：继续，直到所有优化验收通过。M01–M10 实现与自验已完成，用户视觉验收尚未确认，目标仍 active；没有新的已证实待实现项，不自行发明下一轮功能。用户最新问“改了什么，优化了什么”是状态提问，不是视觉批准，已向其说明编辑器、安全轮换和 Artifact 核对的具体成果。
 
-独立工作区 ownword-prototype，分支 codex/prototype-official-s2，HEAD 37bfba6。原 v0.4.0 worktree 禁止修改，已确认 clean、HEAD 5b3cdf8。预览 4315 已实际 HTTP 200，沙箱内网络失败不能据此判断服务停止。
+独立工作区 ownword-prototype，分支 codex/prototype-official-s2，HEAD a86850a。原 v0.4.0 worktree 禁止修改，已确认 clean、HEAD 5b3cdf8。4315 独立预览保留；临时 4316 与本轮自动化会话已关闭。
 
-先读 AGENTS.md、feature_list.json、progress.md。M01–M08 implemented-and-verified，用户视觉复核 needs-review。当前 M09 转移 Review 密度，随后 M10 字体网络定向复核；各项标准已在 feature_list.json。
+先读 AGENTS.md、feature_list.json、progress.md。权威状态为 feature_list.json，剩余项仅用户视觉验收。任务 AGENTS.md 第 12 行：“实现、验证、提交完成后记 implemented-and-verified，用户视觉复核前保持 needs-review。”按真实用户反馈更新，不假定默认选项或超时是批准。
 
-M07 修复：预览格式禁用与命令保护、sticky 工具栏、AllSelection 转文字选区、按段列表与快捷键、链接完整文字范围、双栏初始滚动与 Tab 入口、CodeMirror 公开 theme 适配 S2 深色查找框。编辑器工具继续复用 CodeMirror／Milkdown，官方 S2 包未修改。
+交付 acceptance-review.html，完成审计 evidence/official-s2/final-audit/verification.json；最新 visual-review.html 为 Artifact 核对，身份安全 visual-review-v8.html，编辑器 visual-review-v7.html／editor-review.html，字体 visual-review-v6.html。先给用户具体成果再请求视觉反馈，审计不代表生产签名或全历史 PRD BDD 验收。
 
-编辑器成果：visual-review-v7.html 六组同条件前后对照，editor-review.html 逐动作清单，evidence/official-s2/editor-review/verification.json 权威汇总。90 项格式／模式／自动无障碍检查与 61 项流程记录通过；流程结果组合完整运行和定向复核，保留两次自动化操作失败及更正原因。其他 editor-* 目录包含诊断与中间失败，不作为最终结论。
+验证：官方来源、构建产物及全部模型通过，身份模型 143 断言。编辑器 90 格式／模式／自动无障碍记录、61 流程记录；轮换最新 26 动作、18 自动无障碍、零错误；转移 20 动作、10 自动无障碍，相关页 7 记录、4 持久化自动无障碍。部分记录组合定向复核，失败诊断保留。手机签名按钮底边 823.77→651.31px；21 位编号完整显示和粘贴通过。
 
-核对来源用 npm run check；源码修改后 npm run build（native macro 构建需提权）；init.sh 内含检查，不必无理由重复运行。verify-editor-actions.mjs 和 verify-editor-flows.mjs 为真实浏览器动作脚本；DOM eval 只读。
+verify-security.mjs 已在捕获、偏好与解析后等待 networkidle／字体就绪；不是修改官方字体或吞错。历史 9 条 Typekit 错误保留 verification-with-font-errors.json；不能证明每条错误都由导航导致或 CDN 永久稳定。累计自动无障碍 incomplete 不是自动通过，未进行完整 WCAG 认证或实机读屏。
 
-自动化注意：CodeMirror 输入通过真实键盘清空与 inserttext，fill 绕过事务；模式切换须等实际可见。局部选区按键间等待并先验证 selectedText。可滚动菜单先 scrollintoview，焦点后 Enter。CodeMirror 查找框由 keyup／change 提交，keyboard type 后 Tab 再断言。双栏用键盘与 scroll --selector 验证；mouse wheel 在最小页面亦未投递，不宣称实机滚轮已通过。导出证据需保留 CRLF，.gitattributes 已对 editor-*/export.md 禁用换行归一化。
+浏览器用 agent-browser，输入和动作通过真实键盘／点击。CodeMirror 不用 fill，选区先确认范围；滚动菜单先定位并用焦点＋Enter。复制用 Ctrl+V 验证，clipboard.read 权限被拒绝。复制 Tooltip 打开时 Escape 先关闭提示层；授权取消先聚焦无嵌套提示的取消按钮。返回后先等标题焦点稳定再开演练面板；Artifact 哈希下切换账户保持 Artifact 工作区，不能总假设回身份页。保留点击诊断，不把未触发动作误称产品成功。
 
-所有本轮 editor 自动化会话已关闭，临时 4316 服务已停止；4315 保持运行。此前过多浏览器会话触发 EAGAIN、工具宿主崩溃及自动审核未完成，现已恢复。后续顺序运行浏览器检查并及时关闭临时会话，不关闭用户预览或主服务。
-
-M08 已提交：身份安全入口、Review、授权、结果、取消／失败／账户变化，26 行为与 18 自动无障碍检查通过；模型 143 断言。当前 visual-review.html 展示 M08，用户视觉复核仍待进行。浏览器运行因字体 8 明确错误＋1 通用错误保持 needs-fix；原始报告和网络证据在 evidence/official-s2/identity-security。未伪造零错误结论。M09 已核实 ArtifactActionReview 首屏信息分散，可复用既有 compactNumberStatus／compactIdentifiers；尚未改动。
-
-历史官方中文字体 CDN 间歇失败无确定根因，当前 URL 复查 200、新会话已加载，不隐瞒历史限制。整体目标保持 active，不能因编辑器完成而标记全站完成。
-
-当前没有运行中的安全检查会话；verify-security.mjs 失败时保留会话，成功时关闭。复制验证用 Ctrl+V，不用页面 clipboard.read（权限被拒绝）。授权 Escape 测试先聚焦取消按钮，复制 Tooltip 打开时第一次 Escape 只关闭提示层，这是官方浮层顺序。M09 尚未改源码，先采集其基准截图。
+源码修改后 npm run build（native macro 需提权），核对 npm run check；init.sh 自带检查，不无理由重复。收到具体反馈才改动或扩大测试。若只缺用户视觉反馈，连续至少三个目标回合仍因同一条件无法推进才设置 blocked；当前首次进入只有用户视觉确认剩余的状态，尚未达到 blocked 条件。
