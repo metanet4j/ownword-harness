@@ -402,9 +402,9 @@
         "scope": "PRD 31 场景减去已延期的 3 条密钥轮换，映射 28 条适用场景。",
         "sources": "核对前端依赖与 Git 起点、当前原型及 v0.1 行为基线、S2 官方本地文档、钱包 SDK 和后端模块。",
         "document": "当前认知与设计检查证据见 frontend-identity-v010-integration-design 及统一任务清单。",
-        "implementation": "业务开发已停止；现有未提交基础改动和实际环境、验收状态见前端 task harness。"
+        "implementation": "用户已授权 Tailwind 实施；真实 API 和身份页面已实现。当前证据、未完成的公共事实分流和主网门禁由统一前端 task harness 维护。"
       },
-      "nextStep": "用户复核当前文档；明确开工前只处理文档反馈。",
+      "nextStep": "接入真实索引和 checkpoint 后补公共分流；资金到位后执行主网门禁。",
       "statusNote": "当前以集成核心认知和真实集成设计为准。"
     },
     {
@@ -412,7 +412,7 @@
       "name": "v0.1.0 核心认知与真实集成设计",
       "status": "needs-review",
       "goal": "基于官方 S2 原型，先建立核心认知，再设计前后端及钱包契约，实施真实服务集成。",
-      "scope": "修订广播前校验、操作恢复、索引覆盖和时间契约四项 review 问题，登记当前原型 tag；业务开发继续停止。",
+      "scope": "基于总认知设计真实前后端集成并按明确授权使用 Tailwind 实现；完整状态由统一前端任务清单维护。",
       "dependencies": [
         "用户指定原型和前端任务目录",
         "用户授权现有后端成果先合并 dev 再建立 v0.1.0 worktree"
@@ -431,8 +431,8 @@
       "output": "_task/system-design/spec/frontend/设计文档v0.1.0-真实集成-20261013-183000.md",
       "implementationStatus": "written-and-checked",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "四项 review 问题已修订；2 份文档的 28 条本地链接、5 段 TypeScript 类型、3 个状态图结构及任务登记检查通过。当前原型 annotated tag 指向 a86850a，commit/tree 已核验；严格技术栈写入设计。业务代码未修改，真实集成未执行；完整状态由前端 task harness 维护。",
-      "nextStep": "用户先审阅独立实现核心认知和设计文档，明确开工前不继续业务开发。"
+      "evidence": "独立认知与设计已完成，四项 review、固定原型 tag 与严格栈已落实；业务已获准实施，实际检查和未完成项见统一任务清单及验收报告。",
+      "nextStep": "用户已明确授权 Tailwind CSS 实现并持续验收；当前阶段和证据见统一 task harness。"
     }
   ]
 }

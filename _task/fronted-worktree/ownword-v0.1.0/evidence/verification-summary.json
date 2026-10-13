@@ -1,0 +1,74 @@
+{
+  "apiWalletTests": {
+    "tests": 18,
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0
+  },
+  "javaModules": [
+    {
+      "module": "metanet4j-api-common",
+      "tests": 59,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "metanet4j-component-common",
+      "tests": 42,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "metanet4j-component-model",
+      "tests": 20,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "metanet4j-store-mongo",
+      "tests": 62,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "javaApiJUnitTests": 0,
+  "axe": {
+    "axe-edit-final.json": {
+      "inapplicable": 36,
+      "incomplete": 1,
+      "passes": 26,
+      "violations": 0
+    },
+    "axe-identity-final.json": {
+      "inapplicable": 39,
+      "incomplete": 1,
+      "passes": 23,
+      "violations": 0
+    },
+    "axe-dialog.json": {
+      "inapplicable": 41,
+      "incomplete": 0,
+      "passes": 21,
+      "violations": 0
+    },
+    "axe-preview-mobile.json": {
+      "inapplicable": 37,
+      "incomplete": 1,
+      "passes": 25,
+      "violations": 0
+    },
+    "axe-identity-mobile.json": {
+      "inapplicable": 39,
+      "incomplete": 1,
+      "passes": 23,
+      "violations": 0
+    }
+  },
+  "mainnet": "waiting-funds",
+  "identityCoverage": "waiting-real-source",
+  "javaExecutedTests": 183
+}

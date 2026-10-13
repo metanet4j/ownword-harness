@@ -9,7 +9,7 @@
     "done"
   ],
   "authorization": {
-    "implementation": false,
+    "implementation": true,
     "mergeBackendToDev": true,
     "createVersionWorktrees": true,
     "mockScope": [
@@ -19,13 +19,15 @@
     "realMainnetPublishing": "waiting-funds",
     "pushRemote": false,
     "agents": "independent",
-    "nextImplementationGate": "先交付并审阅核心认知及设计文档，等待用户明确开工。"
+    "nextImplementationGate": "用户已明确授权 Tailwind CSS 实现并持续验收；主网发布仍等待充值。",
+    "realIndexSource": "waiting-for-verifiable-history-and-checkpoint"
   },
   "documents": {
     "product": "_task/system-design/spec/核心认知.md",
     "cognition": "_task/system-design/spec/frontend/集成核心认知v0.1.0-20261013-183000.md",
     "design": "_task/system-design/spec/frontend/设计文档v0.1.0-真实集成-20261013-183000.md",
-    "prd": "_task/system-design/spec/prd/v0.1/设计文档v0.1.md"
+    "prd": "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+    "acceptanceReport": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
   },
   "environment": {
     "frontendWorktree": "own-word-web",
@@ -53,7 +55,7 @@
       ],
       "implementationStatus": "written-and-checked",
       "description": "核心认知与集成设计；事实与验收以当前设计文档对应阶段为准。",
-      "evidence": "四项 review 问题已修订；2 份认知/设计的 28 条本地链接、5 段 TypeScript DTO 类型、3 个状态图结构及 init.sh --plan 通过。annotated 原型 tag、commit、tree 与 environment 一致，技术栈依据锁文件/POM。未修改业务代码、未执行业务集成，仍待用户复核与明确开工。"
+      "evidence": "认知基于总认知且独立保留，接口和钱包边界已设计；用户已明确授权 Tailwind 实现，设计文档仍保留人工复核状态。原型 tag/技术栈已核实，当前验证见 acceptanceReport。"
     },
     {
       "id": "E00",
@@ -77,15 +79,15 @@
       "dependencies": [
         "E00"
       ],
-      "status": "needs-review",
+      "status": "done",
       "doneCriteria": [
         "官方 S2/Next dev 和 build 验证",
         "28 个 CWI 方法可调用且契约明确",
         "真实派生及密码学验证"
       ],
-      "implementationStatus": "partial-unverified-stopped",
+      "implementationStatus": "implemented-and-verified",
       "description": "依赖与完整钱包适配；事实与验收以当前设计文档对应阶段为准。",
-      "evidence": "开发已停止。前端依赖、页面壳和钱包方法骨架为未提交改动；仅执行 1 项钱包基础检查，未运行生产构建、完整钱包路径或真实业务集成，不算 W00 完成。"
+      "evidence": "Next/Tailwind/S2 生产构建、lint、typecheck、2 项真实 Actions/钱包测试通过；独立 dev 页面实际加载 Tailwind utilities。28 CWI 方法已映射，非本期能力明确 unsupported；完整浏览器业务路径留在 I06/I07。"
     },
     {
       "id": "A00",
@@ -93,14 +95,15 @@
       "dependencies": [
         "E00"
       ],
-      "status": "not-started",
+      "status": "done",
       "doneCriteria": [
         "真实 MongoDB 和头像持久化",
         "真实主网读取及逐输出验签",
         "异常、幂等、双输出和模拟隔离验证"
       ],
-      "implementationStatus": "not-started",
-      "description": "真实 Web API 与存储；事实与验收以当前设计文档对应阶段为准。"
+      "implementationStatus": "implemented-and-verified",
+      "description": "真实 Web API 与存储；事实与验收以当前设计文档对应阶段为准。",
+      "evidence": "真实 Java/MongoDB/文件/AIP 已实现；18 项钱包与真实 HTTP 通过。最终 API clean test 的依赖模块实际 183 项；API 模块没有 JUnit，用真实 HTTP 验证。PNG/JPEG/WebP、故障、幂等及重启回读已检查。live 公共解析及投影仍待真实索引来源和主网门禁。"
     },
     {
       "id": "F00",
@@ -109,14 +112,16 @@
         "W00",
         "A00"
       ],
-      "status": "not-started",
+      "status": "blocked",
       "doneCriteria": [
         "身份页面与指定原型对应",
         "28 BDD 累计覆盖并记录真实或模拟",
         "账户隔离、偏好和离开保护可用"
       ],
-      "implementationStatus": "not-started",
-      "description": "v0.1 身份页面与流程；事实与验收以当前设计文档对应阶段为准。"
+      "implementationStatus": "implemented-with-unverified-public-branches",
+      "description": "v0.1 身份页面与流程；事实与验收以当前设计文档对应阶段为准。",
+      "evidence": "3e67a21：Tailwind/S2 页面、偏好、复制、取消、账户隔离与原操作恢复完成；已实际检查可执行 BDD。B06/B07/B08 不用假数据补齐，等待真实索引事实。",
+      "blocker": "公共已发布、未发布和不完整分流缺少真实签名历史与充分索引覆盖；已异步询问现有索引配置。"
     },
     {
       "id": "V00",
@@ -124,14 +129,15 @@
       "dependencies": [
         "F00"
       ],
-      "status": "not-started",
+      "status": "needs-review",
       "doneCriteria": [
         "I01-I07/I10 实际执行",
         "production 页面、截图及日志核查",
         "各仓库提交与复跑说明完整"
       ],
-      "implementationStatus": "not-started",
-      "description": "无资金真实集成验收；事实与验收以当前设计文档对应阶段为准。"
+      "implementationStatus": "independent-checks-passed",
+      "description": "无资金真实集成验收；事实与验收以当前设计文档对应阶段为准。",
+      "evidence": "I01-I07/I10 的已定义无资金检查通过，完整场景验收仍受 F00 公共事实分流阻塞。18 项 API/钱包、连续两次生产构建、稳定态 axe、实际停机/权限故障和截图证据见 acceptanceReport。"
     },
     {
       "id": "V01",
@@ -145,31 +151,46 @@
         "I09 Profile 更新历史及 BAP ID 不变",
         "所有最终门禁通过"
       ],
-      "implementationStatus": "not-started",
-      "description": "充值后主网发布验收；事实与验收以当前设计文档对应阶段为准。"
+      "implementationStatus": "waiting-funds-and-real-index",
+      "description": "充值后主网发布验收；事实与验收以当前设计文档对应阶段为准。",
+      "evidence": "I08/I09 未执行；不会以模拟回执关闭主网验收。"
     }
   ],
   "acceptance": {
     "I01": {
-      "status": "not-run"
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本报告列明的实际检查范围"
     },
     "I02": {
-      "status": "not-run"
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本报告列明的实际检查范围"
     },
     "I03": {
-      "status": "not-run"
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本报告列明的实际检查范围"
     },
     "I04": {
-      "status": "not-run"
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "真实主网只读和覆盖不足保持 unknown；正向公共分流待真实索引。"
     },
     "I05": {
-      "status": "not-run"
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本报告列明的实际检查范围"
     },
     "I06": {
-      "status": "not-run"
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "允许的 CWI 测试适配；实际 Yours live 路径未执行。"
     },
     "I07": {
-      "status": "not-run"
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本报告列明的实际检查范围"
     },
     "I08": {
       "status": "waiting-funds"
@@ -178,7 +199,128 @@
       "status": "waiting-funds"
     },
     "I10": {
-      "status": "not-run"
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本报告列明的实际检查范围"
     }
-  }
+  },
+  "productAcceptance": {
+    "B01": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B02": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B03": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B04": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B05": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B06": {
+      "status": "not-run",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B07": {
+      "status": "not-run",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B08": {
+      "status": "not-run",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B09": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B10": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B11": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B12": {
+      "status": "simulated-passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B13": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B14": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B15": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B16": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B17": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B18": {
+      "status": "simulated-passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B19": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B20": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B21": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B22": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B23": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B24": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B25": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B26": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B27": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B28": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    }
+  },
+  "remaining": [
+    "真实 BAP 索引地址、签名历史、同步 checkpoint 和充分覆盖依据",
+    "B06/B07/B08 正向公共分流和 live 投影重建",
+    "充值后 I08/I09 的真实 Yours 主网发布与更新"
+  ]
 }

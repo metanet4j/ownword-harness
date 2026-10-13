@@ -1,9 +1,7 @@
 # 当前交接
 
-2026-10-13，D00 四项 review 问题及用户补充的原型 tag、严格技术栈要求已落实，文档检查通过，保持 needs-review。完整现状和证据见[progress.md](progress.md)与[任务清单](feature_list.json)。
+无需再次请求开工批准。先取得并接入真实 BAP 索引地址、签名历史与同步 checkpoint，补齐 B06/B07/B08 和 live 投影；之后按资金安排执行 I08/I09。当前状态以 feature_list.json 为准，详细证据见[验收报告](验收报告v0.1.0-20261014-010853.md)。
 
-下一步仅由用户复核当前核心认知和设计；明确开工前只处理文档反馈。修改文档的请求不自动授权业务开发，authorization.implementation 仍为 false。
+前端 3e67a21 和后端 component 265c657 为当前源码，工作区应 clean。production 5041、测试钱包 5042、API 5043 已启动；root 仅提交任务文件，不纳入用户其他脏改动。运行配置保留在私有 _runtime，禁止输出或提交。run-services.py start/status/restart api 可复用；不要重启钱包后声称它仍保留内存记录。
 
-恢复时先按 AGENTS.md 读取任务及文档，运行 ./init.sh --plan。原型实现基线须核对 environment 中的 annotated tag、commit、tree；后续 HEAD 改变不能自动替换它。前端未提交基础改动保留，后端已建立版本 worktree；不重新合并、不擅自提交或回退前端代码。
-
-本轮未修改业务代码、未执行业务集成，主网 I08/I09 仍等待充值。开工后按设计先验证钱包广播前边界及真实索引覆盖，不能以文档检查替代这些验证。
+只使用允许的钱包授权/资金/广播模拟，其余服务与密码学真实。18 项测试和本轮 183 项 Java 依赖回归已通过，不重跑旧模块总数替代本次验证。真实公共正向分流、live 原始交易索引/reorg、真实读屏及主网新交易仍未完成；整个任务不能标记 done。
