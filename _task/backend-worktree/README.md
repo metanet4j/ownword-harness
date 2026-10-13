@@ -13,6 +13,10 @@
 | `boot4-java25-upgrade/metanet4j-sdk/` | `backend/metanet4j-sdk/` | `feature/java25` | `bae4c36` | https://github.com/metanet4j/metanet4j-sdk.git |
 | `boot4-java25-upgrade/metanet4j-component/` | `backend/metanet4j-component/` | `feature/java25` | `e634982` | https://github.com/metanet4j/metanet4j-component.git |
 
+## v0.1.0 实施工作区
+
+[ownword-v0.1.0](ownword-v0.1.0/AGENTS.md) 包含六个从 dev 建立的 `feature/ownword-v0.1.0` worktree；来源和完整提交见[环境登记](ownword-v0.1.0/environment.json)。四仓升级成果已在 dev；独立 BSV SDK 与 JungleBus 也已本地合入 dev，原任务分支保留。业务状态统一见前端任务 harness。
+
 ## 约定
 
 - `boot4-java25-upgrade/` 内的开发规则以该目录的 `AGENTS.md` 与计划文档为准；本文件只登记仓库信息。

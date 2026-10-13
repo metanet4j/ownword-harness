@@ -10,7 +10,7 @@ v0.1.0 身份前后端实现及无资金真实集成。
 
 ## Current State 当前状态
 
-D00 核心认知与设计已编写及检查，保持 needs-review；当前 E00 仓库合并与环境恢复，未开始业务实现。
+D00 核心认知与设计已编写及检查，保持 needs-review；E00 已完成：后端六仓 dev 基线和版本 worktree 已建立，前端恢复且源码保留。当前 W00 依赖与钱包适配。
 
 ## What 已核实
 
@@ -18,7 +18,7 @@ D00 核心认知与设计已编写及检查，保持 needs-review；当前 E00 �
 
 ## Blockers 当前条件
 
-前端主 clone 缺失，正在恢复 Git 元数据；主网发布 I08/I09 等待资金，不阻塞其余实施。
+无环境阻塞；主网发布 I08/I09 等待资金，不阻塞其余实施。
 
 ## Files 入口
 
@@ -26,4 +26,4 @@ D00 核心认知与设计已编写及检查，保持 needs-review；当前 E00 �
 
 ## Next Session / Recommended Next Step 唯一下一步
 
-完成 E00，登记实际来源、合并证据与版本 worktree。
+完成 W00：锁定 S2/SDK、验证 Next 构建与完整 CWI 适配。

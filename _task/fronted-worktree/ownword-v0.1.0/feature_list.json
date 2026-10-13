@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeItem": "E00",
+  "activeItem": "W00",
   "allowedStatuses": [
     "not-started",
     "in-progress",
@@ -55,14 +55,15 @@
       "dependencies": [
         "D00"
       ],
-      "status": "in-progress",
+      "status": "done",
       "doneCriteria": [
         "六个后端来源合入 dev 的祖先证据",
         "版本 worktree 独立且来源登记",
         "前端 Git 元数据恢复并保留源码"
       ],
-      "implementationStatus": "in-progress",
-      "description": "仓库合并与版本 worktree；事实与验收以当前设计文档对应阶段为准。"
+      "implementationStatus": "implemented-and-verified",
+      "description": "仓库合并与版本 worktree；事实与验收以当前设计文档对应阶段为准。",
+      "evidence": "六仓来源均在 dev；BSV SDK 10fd42d/JungleBus 1272067 的 merge tree 与已验收来源一致；六个独立版本 worktree 已建立。前端原 .git 指针修复，19 份源码摘要不变，工作区 clean，init.sh 实際环境检查通过。"
     },
     {
       "id": "W00",
@@ -70,13 +71,13 @@
       "dependencies": [
         "E00"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "doneCriteria": [
         "官方 S2/Next dev 和 build 验证",
         "28 个 CWI 方法可调用且契约明确",
         "真实派生及密码学验证"
       ],
-      "implementationStatus": "not-started",
+      "implementationStatus": "in-progress",
       "description": "依赖与完整钱包适配；事实与验收以当前设计文档对应阶段为准。"
     },
     {

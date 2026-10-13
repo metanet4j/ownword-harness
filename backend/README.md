@@ -1,15 +1,20 @@
 # backend/ 子仓库清单
 
 `backend/` 下的下列子目录均为**独立 Git 仓库**，不纳入 ownword 主仓（根目录 `.gitignore` 已忽略）。
-数据由 `git -C <仓库> remote -v` 与 `git -C <仓库> rev-parse` 采集于 2026-09-17。
+当前基线采集于 2026-10-13；版本任务的准确来源见[环境登记](../_task/backend-worktree/ownword-v0.1.0/environment.json)。
 
 | 子目录 | 当前分支 | HEAD | 远程仓库 |
 |---|---|---|---|
 | `bitcoinj-sv/` | `master` | `1946a149` | https://github.com/bitcoin-sv/bitcoinj-sv.git |
-| `metanet4j-parent/` | `dev` | `50598c0` | https://github.com/metanet4j/metanet4j-parent.git |
-| `metanet4j-base/` | `dev` | `6e16cfa` | https://github.com/metanet4j/metanet4j-base.git |
-| `metanet4j-sdk/` | `dev` | `bae4c36` | https://github.com/metanet4j/metanet4j-sdk.git |
-| `metanet4j-component/` | `dev` | `e634982` | https://github.com/metanet4j/metanet4j-component.git |
+| `metanet4j-parent/` | `dev` | `917b7bd` | https://github.com/metanet4j/metanet4j-parent.git |
+| `metanet4j-base/` | `dev` | `279a7a6` | https://github.com/metanet4j/metanet4j-base.git |
+| `metanet4j-sdk/` | `dev` | `bb298d0` | https://github.com/metanet4j/metanet4j-sdk.git |
+| `metanet4j-component/` | `dev` | `e20016b` | https://github.com/metanet4j/metanet4j-component.git |
+
+| `metanet4j-bsv-sdk/` | `dev` | `10fd42d` | https://github.com/metanet4j/metanet4j-bsv-sdk.git |
+| `metanet4j-junglebus/` | `dev` | `1272067` | 本地独立工程；来源与许可证见原迁移任务 |
+
+BSV SDK 和 JungleBus 的 dev 是新增主 worktree，原迁移检出状态保留；v0.1.0 的六个版本 worktree 位于 `_task/backend-worktree/ownword-v0.1.0/`。
 
 ## 约定
 
