@@ -4,7 +4,7 @@
   "baseCommit": "5b3cdf8",
   "branch": "codex/prototype-official-s2",
   "preview": "http://127.0.0.1:4315/",
-  "activeFeature": "M03",
+  "activeFeature": "M04",
   "features": [
     {
       "id": "M01",
@@ -85,7 +85,7 @@
       ],
       "prototypeCommit": "73d37ce",
       "evidence": [
-        "ownword-prototype/visual-review.html",
+        "ownword-prototype/visual-review-v3.html",
         "ownword-prototype/evidence/official-s2/visual-v3/verification.json",
         "ownword-prototype/vendor/build-manifest.json"
       ],
@@ -100,9 +100,46 @@
         "userReview": "pending",
         "oldWorktree": "clean, HEAD 5b3cdf8"
       }
+    },
+    {
+      "id": "M04",
+      "name": "阅读工具栏与 Artifact 详情信息分组",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M03"
+      ],
+      "doneCriteria": [
+        "阅读复制与导出复用官方图标按钮，320px 常用返回上下文下保持一行",
+        "Artifact 详情的编号、状态和关联身份更紧凑，复制与异常状态仍可用",
+        "必填标记由官方 TextField 统一生成；验证正常、错误、键盘、主题双语与前后对照"
+      ],
+      "prototypeCommit": "426803a",
+      "evidence": [
+        "ownword-prototype/visual-review.html",
+        "ownword-prototype/evidence/official-s2/visual-v4/verification.json",
+        "ownword-prototype/evidence/official-s2/visual-v4/font-network-observation.json",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "browserAssertions": 21,
+        "browserErrors": 8,
+        "browserApplicationErrors": 0,
+        "externalFontErrors": 8,
+        "browserWarnings": 0,
+        "screenshots": 19,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      },
+      "knownLimitations": [
+        "官方字体 CDN 加载失败仍有复现；保留官方字体与系统回退，稳定性需单独处理。未吞掉或隐藏错误，原始观察随证据保存。"
+      ]
     }
   ],
   "implementationStatus": "implemented-and-verified",
   "reviewStatus": "needs-review",
-  "prototypeCommit": "73d37ce"
+  "prototypeCommit": "426803a"
 }
