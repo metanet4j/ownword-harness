@@ -489,6 +489,23 @@
       "implementationStatus": "implemented-and-verified",
       "commit": "2e0d847",
       "evidence": "ownword-prototype/evidence/homepage-v040/R12/verification.json"
+    },
+    {
+      "id": "R13",
+      "name": "平板与长内容布局复核",
+      "dependencies": [
+        "R12"
+      ],
+      "status": "needs-review",
+      "description": "继续用户已确认的居中、媒体秩序与 S2 一致性方向，补查平板宽度和长内容，修复实际发现的问题。",
+      "doneCriteria": [
+        "检查 768px、960px 下主要内容容器和操作对齐，保留相关截图",
+        "用长名称、长标题和图片表单验证布局边界，发现问题后定点修复",
+        "验证受影响流程、必要构建检查并提交，用户视觉复核前保持 needs-review"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "commit": "5b3cdf8",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R13/verification.json"
     }
   ],
   "delivery": "交付验收v0.4.0-20261012-224835.md"

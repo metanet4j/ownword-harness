@@ -1,6 +1,6 @@
 # 当前进展
 
-四模块的设计系统、frontend-design 与一致性评审、修复和代理验收已完成，统一在 v0.4.0 分支实施。R11 页面、箭头及居中提交 `26055b4`，R12 最终验收提交 `2e0d847`。R11 64 张截图与 43 项检查、R12 7 次复制抽检与 12 项检查通过；受检 axe 均无 violations 或 incomplete。
+四模块的设计系统、frontend-design 与一致性评审、修复和代理验收已完成，统一在 v0.4.0 分支实施。R11 页面、箭头及居中提交 `26055b4`，R12 最终验收提交 `2e0d847`。R11 64 张截图与 43 项检查、R12 7 次复制抽检与 12 项检查通过；R10–R12 受检 axe 均无 violations 或 incomplete。R13 补查平板与长内容，修复三处长作者名称溢出，提交 `5b3cdf8`；19 项检查通过，25 张截图已审阅。3 次 axe 均无 violations，授权弹窗的 1 项对比度 incomplete 已逐节点人工核实通过，详见任务证据。
 
 当前无进行中实现事项。唯一下一步是用户视觉复核，成果保持 needs-review。范围、限制及证据见[v0.4.0 清单](../prototype-worktree/ownword-v0.4.0/feature_list.json)和[交付验收](../prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261012-224835.md)。
 
