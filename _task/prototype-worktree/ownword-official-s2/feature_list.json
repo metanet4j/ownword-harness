@@ -4,7 +4,7 @@
   "baseCommit": "5b3cdf8",
   "branch": "codex/prototype-official-s2",
   "preview": "http://127.0.0.1:4315/",
-  "activeFeature": "M04",
+  "activeFeature": "M05",
   "features": [
     {
       "id": "M01",
@@ -116,7 +116,7 @@
       ],
       "prototypeCommit": "426803a",
       "evidence": [
-        "ownword-prototype/visual-review.html",
+        "ownword-prototype/visual-review-v4.html",
         "ownword-prototype/evidence/official-s2/visual-v4/verification.json",
         "ownword-prototype/evidence/official-s2/visual-v4/font-network-observation.json",
         "ownword-prototype/vendor/build-manifest.json"
@@ -137,9 +137,45 @@
       "knownLimitations": [
         "官方字体 CDN 加载失败仍有复现；保留官方字体与系统回退，稳定性需单独处理。未吞掉或隐藏错误，原始观察随证据保存。"
       ]
+    },
+    {
+      "id": "M05",
+      "name": "身份表单与关系确认的官方组件及信息分组",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M04"
+      ],
+      "doneCriteria": [
+        "名称与类型的必填标记由官方组件生成，类型采用互斥 RadioGroup 并支持键盘",
+        "身份编辑上下文复用紧凑可复制 Identifier，桌面与手机分组清楚",
+        "复核编辑和创建共用字段、Review 状态、无改动与错误、双语主题；交付前后对照",
+        "关系确认先展示双方身份，完整可复制标识不被说明挤出手机首屏，弹层焦点与取消行为可用"
+      ],
+      "prototypeCommit": "13de597",
+      "evidence": [
+        "ownword-prototype/visual-review.html",
+        "ownword-prototype/evidence/official-s2/visual-v5/verification.json",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "browserAssertions": 17,
+        "browserFollowupChecks": 2,
+        "browserErrors": 0,
+        "browserWarnings": 0,
+        "screenshots": 11,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      },
+      "knownLimitations": [
+        "本轮字体未报错，上轮官方动态中文字体的偶发请求失败仍未解决；Provider 公开 API 未提供重试配置。"
+      ]
     }
   ],
   "implementationStatus": "implemented-and-verified",
   "reviewStatus": "needs-review",
-  "prototypeCommit": "426803a"
+  "prototypeCommit": "13de597"
 }
