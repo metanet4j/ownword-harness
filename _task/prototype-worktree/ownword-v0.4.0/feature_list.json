@@ -329,6 +329,23 @@
       "implementationStatus": "implemented-and-verified",
       "commit": "c0f4d8c",
       "evidence": "ownword-prototype/evidence/homepage-v040/R03/verification.json"
+    },
+    {
+      "id": "R04",
+      "name": "返回按钮视觉与对齐",
+      "description": "按用户反馈统一页面顶部返回入口，减小图标与字重，将图标框对齐内容左边缘；使用现有 S2 quiet Button、ChevronLeft 与 Token。",
+      "dependencies": [
+        "R03"
+      ],
+      "status": "needs-review",
+      "doneCriteria": [
+        "公开主页及相关页面共用返回样式，图标与文字垂直居中，图标框和内容左边缘对齐",
+        "桌面与 320px 窄屏的受影响截图通过复核，保留 44px 点击区域和键盘返回行为",
+        "构建、初始化与相关浏览器检查通过，独立提交并交付视觉复核"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "commit": "0146b06",
+      "evidence": "ownword-prototype/evidence/homepage-v040/R04/verification.json"
     }
   ],
   "delivery": "交付验收v0.4.0-20261012-224835.md"

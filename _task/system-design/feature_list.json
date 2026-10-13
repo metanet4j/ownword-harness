@@ -38,16 +38,16 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-visual-review",
       "evidence": "_task/prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261012-224835.md；功能提交、32 条 BDD 与 81 项实际浏览器断言见任务清单和验收汇总。",
-      "nextStep": "用户复核 R03 整站体验优化，重点查看公开主页与名单；复核前保持 needs-review。",
+      "nextStep": "用户复核 R04 返回按钮对齐及当前整站体验；复核前保持 needs-review。",
       "currentChange": {
-        "id": "R03",
-        "goal": "整站体验优化，以个人主页确定信息层级和分组，再应用到相关页面；frontend-design 参与审核。",
+        "id": "R04",
+        "goal": "修正返回按钮的视觉层级与左边缘对齐。",
         "status": "needs-review",
-        "scope": "当前 v0.4.0 原型的公开主页、内容和关系列表，以及共用标题与标识表达。",
-        "nextStep": "用户复核 R03 整站体验优化，重点查看公开主页与名单；复核前保持 needs-review。",
+        "scope": "个人主页、名单、内容阅读及版本、编辑和 Artifact 顶部返回入口。",
+        "nextStep": "用户复核 R04 返回按钮对齐及当前整站体验；复核前保持 needs-review。",
         "implementationStatus": "implemented-and-verified",
-        "commit": "c0f4d8c",
-        "evidence": "_task/prototype-worktree/ownword-v0.4.0/ownword-prototype/evidence/homepage-v040/R03/verification.json"
+        "commit": "0146b06",
+        "evidence": "_task/prototype-worktree/ownword-v0.4.0/ownword-prototype/evidence/homepage-v040/R04/verification.json"
       }
     },
     {
