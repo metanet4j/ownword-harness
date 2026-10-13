@@ -1,15 +1,25 @@
-# 当前交接
+# 会话交接
 
-用户最新要求“继续，但不要过度优化”，已按其接受的范围完成M11：仅手机主页标识区和阅读页头部。不要发明下一轮优化或重复全站测试。用户要求继续修改不构成此前视觉验收通过。M01–M11 implemented-and-verified，仍needs-review；持续目标运行状态以get_goal为准，不能自行恢复或完成目标。
+## 工作位置与状态
 
-独立原型仓库 ownword-prototype，分支codex/prototype-official-s2，HEAD b3e6ef1。原v0.4.0工作区禁止修改，已确认clean、HEAD 5b3cdf8。4315预览保留，所有本轮临时浏览器已关闭。
+仅修改 /home/haodev/ownword/_task/prototype-worktree/ownword-official-s2/ownword-prototype，分支 codex/prototype-official-s2，HEAD b4846d1。原 v0.4.0 工作区受保护，HEAD 5b3cdf8 且干净，4314预览保留。当前独立预览 http://127.0.0.1:4315/。
 
-先读AGENTS.md、feature_list.json、progress.md。任务状态以feature_list.json为准；任务AGENTS.md第12行：“实现、验证、提交完成后记 implemented-and-verified，用户视觉复核前保持 needs-review。”已发出的视觉验收问题尚未收到通过反馈；默认选项与超时不是批准。
+M01–M12 implemented-and-verified，用户视觉复核待确认，资产保持 needs-review。持续目标实际状态读取 get_goal；没有用户视觉验收通过的证据，不应将完整目标标为完成。
 
-本轮visual-review.html展示两组同条件320×720英文浅色前后对照，基线a86850a。标识区159.19→127.19px，首条作品提前32px；阅读页正文标题416.75→316.75px，提前100px。手机重复数字ID视觉标签收起但辅助技术名称完整，相关页头操作至少44×44px。使用官方style宏导出的mobileIconWidth和官方styles属性，未改官方包或增加依赖。正文、标识、编号状态、版本、目录与动作均保留。
+## 用户最新要求及交付
 
-构建、来源与全部模型检查通过，身份模型143断言。evidence/official-s2/mobile-density/verification.json包含13项相关动作、4项最终位置复核、8个布局、4次自动无障碍检查，违规和incomplete均零，浏览器／控制台错误零。13项动作在尺寸调整前完成；最终完整BAP ID实际粘贴、详情、复制链接、导出按钮已复核。原始测试历史返回预期错误、设备预设与样式层优先级诊断保留。设备预设未启用真实触摸，不宣称实机触摸验收；44px范围由DOM实际测量证明。
+用户发现很多页面看起来没有居中，希望体现对称的秩序与比例，同时要求不要过度优化。M12只调整OwnWord页面CSS：阅读正文中轴偏移−122→0，阅读页头同轴；全局页头1120px，单栏编辑960px，双栏1184px；桌面任务标题及帮助按钮组居中，正文和字段左对齐。没有改官方包、业务动作或依赖。
 
-当前总览acceptance-review.html，Artifact上一轮对照visual-review-v9.html，身份安全visual-review-v8.html，编辑器visual-review-v7.html／editor-review.html。原final-audit/verification.json属于上一轮审计，保留原提交与范围，不是本轮全站重跑。本轮源码已提交；状态文档在根仓库单独提交。
+最新对照 http://127.0.0.1:4315/visual-review.html，五组同数据、英文浅色1440×1000截图，基线b3e6ef1。手机首屏上轮对照visual-review-v11.html；Artifact核对visual-review-v9.html；身份安全visual-review-v8.html；编辑器visual-review-v7.html及editor-review.html。acceptance-review.html汇总11项交付入口，M10完成审计保持历史范围。
 
-用户恢复目标后重新开始blocked审计；本次用户已授权新的具体修改并完成，旧的连续三个等待回合不能直接用于本次新阻塞判断。收到视觉通过再核对全部门槛并完成目标，收到问题只修具体问题；状态提问仅回答状态。
+## 证据与复核边界
+
+本轮 evidence/official-s2/centering/verification.json：构建来源及模型通过，初查12个页面、修改后13个状态；最终11个布局加标题补正5个布局记录，6项相关操作，8次自动无障碍零违规、1项incomplete，浏览器与控制台错误为零。标题帮助组按实际边界测量居中；正文目录通过真实键盘跳转与焦点等待验证。320/1440px交付页无溢出，10张对照图全部加载。
+
+原始目录缩窄裁切、Artifact未保存离开保护、键盘焦点提交时序与列表非按钮选择器诊断保留；不是产品动作故障。相关记录为组合定向复核，不宣称全站重复回归、实机触摸、读屏或完整WCAG认证。历史外部字体网络失败仍有证据，不保证外部CDN稳定。
+
+## 后续处理
+
+当前已交付具体改动与对照，等待用户反馈。若继续，先定位明确问题并限制范围，沿用frontend-design和Spectrum S2标准；无需另建worktree，不改其他分支，不使用子代理。用户若只提出状态或问题，先直接回答，不自行扩展优化范围。
+
+根仓库存在其他任务的未提交改动，保留；本任务状态仅提交feature_list.json、progress.md、session-handoff.md。

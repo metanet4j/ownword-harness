@@ -4,7 +4,7 @@
   "baseCommit": "5b3cdf8",
   "branch": "codex/prototype-official-s2",
   "preview": "http://127.0.0.1:4315/",
-  "activeFeature": "M11",
+  "activeFeature": "M12",
   "features": [
     {
       "id": "M01",
@@ -295,7 +295,7 @@
       "evidence": [
         "ownword-prototype/evidence/official-s2/transfer-review/verification.json",
         "ownword-prototype/evidence/official-s2/transfer-review/related.json",
-        "ownword-prototype/visual-review.html",
+        "ownword-prototype/visual-review-v9.html",
         "ownword-prototype/vendor/build-manifest.json"
       ],
       "validation": {
@@ -366,7 +366,7 @@
         "源文件、产物和证据提交，用户视觉复核前保持needs-review"
       ],
       "evidence": [
-        "ownword-prototype/visual-review.html",
+        "ownword-prototype/visual-review-v11.html",
         "ownword-prototype/evidence/official-s2/mobile-density/verification.json",
         "ownword-prototype/vendor/build-manifest.json"
       ],
@@ -398,11 +398,66 @@
         "浏览器设备预设未启用实际触摸能力；手机视口和44px操作范围由实际DOM测量证明，不宣称实机触摸验收。",
         "13项动作与4项最终位置复核组合，原始自动化及样式尺寸诊断保留。"
       ]
+    },
+    {
+      "id": "M12",
+      "name": "页面中轴与任务比例统一",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M11"
+      ],
+      "prototypeCommit": "b4846d1",
+      "doneCriteria": [
+        "阅读正文与阅读页头共同居中，外侧目录保持原宽度和键盘跳转行为",
+        "全局页头保持1120px，单栏编辑区960px，双栏保留1184px并共用中轴",
+        "桌面任务标题和帮助按钮组居中，正文与字段保持左对齐，手机沿用既有布局",
+        "构建、模型、相关布局与交互、主题及窄屏复核通过；交付五组同条件前后对照"
+      ],
+      "evidence": [
+        "ownword-prototype/visual-review.html",
+        "ownword-prototype/evidence/official-s2/centering/verification.json",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "baselineCommit": "b3e6ef1",
+        "beforePageStates": 12,
+        "initialAfterPageStates": 13,
+        "finalLayoutRecords": 16,
+        "relatedActionChecks": 6,
+        "a11yAudits": 8,
+        "a11yViolations": 0,
+        "a11yIncomplete": 1,
+        "browserErrors": 0,
+        "consoleErrors": 0,
+        "comparisonPairs": 5,
+        "readerCenterDeltaBefore": -122,
+        "readerCenterDeltaAfter": 0,
+        "desktopHeaderWidth": 1120,
+        "singleEditorWidth": 960,
+        "splitEditorWidth": 1184,
+        "deliveryPageWidths": [
+          320,
+          1440
+        ],
+        "deliveryImagesLoaded": 10,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8",
+        "verificationMethod": "13个页面初查，11个布局定向复核；标题帮助组补正后再核对创建、Review、转移及手机，阅读规则未改动。"
+      },
+      "knownLimitations": [
+        "中文深色自动无障碍有1项背景遮挡判定的incomplete，保留原始记录，不计为自动通过。",
+        "相关布局采用初查和定向复核组合；窄屏目录比例、导航保护、焦点时序和列表选择器诊断保留。",
+        "浏览器视口验收不等于实机触摸、读屏或完整WCAG认证。"
+      ]
     }
   ],
   "implementationStatus": "implemented-and-verified",
   "reviewStatus": "needs-review",
-  "prototypeCommit": "b3e6ef1",
+  "prototypeCommit": "b4846d1",
   "remainingWork": [
     "用户视觉验收尚未确认"
   ]
