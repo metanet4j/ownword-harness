@@ -1,3 +1,4 @@
+import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -86,7 +87,12 @@ try {
     const relative = `${binding.dsFolder}/${name}`;
     const baseline = execFileSync('git', ['-C', sourceDir, 'show', `${env.baselineCommit}:${relative}`],
       {maxBuffer: 16 * 1024 * 1024});
-    assert.equal(fs.readFileSync(path.join(ds, name)).compare(baseline), 0, `S2 运行时偏离 v0.3.0 基线：${name}`);
+    const origin = readJson(path.join(prototype, 'design-system/source-origin.json'));
+    assert.equal(origin.baselineCommit, env.baselineCommit, 'S2 修订来源与继承基线不一致');
+    assert.equal(origin.namespace, env.designSystemNamespace);
+    assert.equal(origin.s2Version, '1.6.0');
+    assert.equal(origin.tokensVersion, '14.15.0');
+    assert.equal(origin.baselineFiles[name], createHash('sha256').update(baseline).digest('hex'), `S2 原始基线来源无法核实：${name}`);
   }
   const html = fs.readFileSync(path.join(prototype, 'index.html'), 'utf8');
   for (const match of html.matchAll(/<(?:script|link)\b[^>]*\b(?:src|href)=["']([^"']+)["']/g)) {

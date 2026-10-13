@@ -9,7 +9,7 @@
     "done",
     "archived"
   ],
-  "activeItem": null,
+  "activeItem": "prototype-homepage-v040",
   "features": [
     {
       "id": "prototype-visual-alignment-v010-v030",
@@ -40,7 +40,7 @@
     {
       "id": "prototype-homepage-v040",
       "name": "v0.4.0 Identity 个人主页完整高保真原型",
-      "status": "needs-review",
+      "status": "in-progress",
       "goal": "审查并修正设计文档，从 v0.3.0 最终原型建立独立 worktree，连续完成 P01–P10 的实现、验证和提交。",
       "scope": "版本设计审查、v0.3.0 基线恢复、独立 worktree 与 harness、高保真原型制作和验收；身份、钱包与链上结果采用确定性模拟。",
       "dependencies": [
@@ -64,15 +64,15 @@
       "implementationStatus": "implemented-and-verified",
       "reviewStatus": "awaiting-user-visual-review",
       "evidence": "_task/prototype-worktree/ownword-v0.4.0/交付验收v0.4.0-20261012-224835.md；功能提交、32 条 BDD 与 81 项实际浏览器断言见任务清单和验收汇总。",
-      "nextStep": "用户复核统一复制入口；官方 S2 封装差异按交付说明继续跟踪。",
+      "nextStep": "推进 R11：逐模块 review 页面与其余实际使用组件，修复后定向验收。",
       "currentChange": {
-        "id": "R09",
-        "goal": "修正用户指出的复制按钮不统一，专项核对全部复制入口及 S2 组件边界。",
-        "status": "implemented-and-verified",
+        "id": "R10–R12",
+        "goal": "按设计系统、frontend-design 及一致性 review v0.4.0 内继承各版本的问题，修复并完成验收。",
+        "status": "in-progress",
         "harness": "_task/prototype-worktree/ownword-v0.4.0/feature_list.json",
-        "nextStep": "用户复核统一复制入口；官方 S2 封装差异按交付说明继续跟踪。",
-        "commit": "fac655a",
-        "reviewLimit": "站内复制一致性已验收；官方 S2 完整符合性未通过，差异见任务交付说明。"
+        "nextStep": "推进 R11：逐模块 review 页面与其余实际使用组件，修复后定向验收。",
+        "completed": "R10 共享按钮与提示修复已提交 2a9a8aa",
+        "active": "R11"
       }
     },
     {
