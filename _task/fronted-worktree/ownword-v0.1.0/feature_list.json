@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeItem": "W00",
+  "activeItem": null,
   "allowedStatuses": [
     "not-started",
     "in-progress",
@@ -9,7 +9,7 @@
     "done"
   ],
   "authorization": {
-    "implementation": true,
+    "implementation": false,
     "mergeBackendToDev": true,
     "createVersionWorktrees": true,
     "mockScope": [
@@ -18,7 +18,8 @@
     ],
     "realMainnetPublishing": "waiting-funds",
     "pushRemote": false,
-    "agents": "independent"
+    "agents": "independent",
+    "nextImplementationGate": "先交付并审阅核心认知及设计文档，等待用户明确开工。"
   },
   "documents": {
     "product": "_task/system-design/spec/核心认知.md",
@@ -71,14 +72,15 @@
       "dependencies": [
         "E00"
       ],
-      "status": "in-progress",
+      "status": "needs-review",
       "doneCriteria": [
         "官方 S2/Next dev 和 build 验证",
         "28 个 CWI 方法可调用且契约明确",
         "真实派生及密码学验证"
       ],
-      "implementationStatus": "in-progress",
-      "description": "依赖与完整钱包适配；事实与验收以当前设计文档对应阶段为准。"
+      "implementationStatus": "partial-unverified-stopped",
+      "description": "依赖与完整钱包适配；事实与验收以当前设计文档对应阶段为准。",
+      "evidence": "开发已停止。前端依赖、页面壳和钱包方法骨架为未提交改动；仅执行 1 项钱包基础检查，未运行生产构建、完整钱包路径或真实业务集成，不算 W00 完成。"
     },
     {
       "id": "A00",
