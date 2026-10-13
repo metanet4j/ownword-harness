@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "verifiedAt": "2026-10-12T18:40:09+08:00",
+  "verifiedAt": "2026-10-13T11:09:54+08:00",
   "purpose": "reference-only",
-  "acquisition": "shallow-git-clone",
+  "acquisition": "git-clone",
   "previousSnapshotsBackup": "reference/.snapshot-backup-20260918-identity",
   "sources": [
     {
@@ -73,11 +73,24 @@
       "localStatus": "verified-pinned-commit",
       "checkout": "detached",
       "verifiedAt": "2026-10-12T18:40:09+08:00"
+    },
+    {
+      "path": "reference/js-junglebus",
+      "repository": "https://github.com/gorillapool/js-junglebus.git",
+      "branch": "master",
+      "commit": "df5a65b1e25445fe5fe8ec699aee4696a455b190",
+      "tree": "6dd10e795bc075174b46d391aba8f8d470155809",
+      "committedAt": "2024-05-06T14:41:18-04:00",
+      "trackedFiles": 37,
+      "packageVersion": "0.4.4",
+      "acquisition": "full-git-clone",
+      "localStatus": "verified-pinned-commit",
+      "checkout": "detached",
+      "verifiedAt": "2026-10-13T11:09:54+08:00"
     }
   ],
   "verificationScope": [
-    "reference/1sat-sdk",
-    "reference/1sat-stack"
+    "reference/js-junglebus"
   ],
   "previousSnapshotsBackupStatus": "not-present"
 }

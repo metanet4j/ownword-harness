@@ -13,10 +13,13 @@
 | `schema-master/` | 既有 BitcoinSchema 快照，本次未核对 | 未登记 |
 | `go-sdk/` | 已下载、未检出的参考仓库，本轮迁移不使用 | [bsv-blockchain/go-sdk](https://github.com/bsv-blockchain/go-sdk) |
 | `ts-stack/` | TypeScript SDK 固定源码，版本由[迁移工作区](../_task/backend-worktree/bsv-sdk-java-migration/workspace.json)维护 | [bsv-blockchain/ts-stack](https://github.com/bsv-blockchain/ts-stack) |
+| `js-junglebus/` | JungleBus Java 25 迁移的原始 SDK 对照源码，固定版本已 clone 并核对 | [gorillapool/js-junglebus](https://github.com/gorillapool/js-junglebus) |
 
 来源锁定清单保存目标仓库、分支、commit、Git tree、文件数和包版本；`verificationScope` 与各条 `localStatus` 表示当前实际核对范围。2026-10-12 已从官方仓库恢复 `1sat-sdk` 和 `1sat-stack` 到登记的 commit，并核对 tree、文件数、包版本、干净工作区和 Git 完整性。两者保留独立 Git 元数据，以 detached HEAD 固定参考版本。
 
 BAP 当前是无 Git 元数据的既有快照，实际包版本与目标版本的差异记录在清单中；其他快照本轮未重新核对，不能称为与清单全部一致。后续更新须先检查本地改动，再同步所需版本并重验清单。现有目录名沿用旧名称，以保持设计引用有效。`xLog-dev/` 当前不存在，不作为可用本地资料。
+
+2026-10-13 按用户要求完整 clone `js-junglebus`，以 detached HEAD 锁定清单登记的提交。已核对官方 remote、commit、tree、37 个受跟踪文件、包版本、干净工作区及 `git fsck --full`；本次 `verificationScope` 只覆盖该仓库，既有仓库的验证时间沿用各条记录。已读取全部四个源码文件、README、依赖锁文件及 LICENSE，迁移方案见[Java 25 实现计划](../_task/backend-worktree/junglebus-java25-migration/doc/实现计划-20261013-110456.md)。该仓库的 `package.json` 标注 MIT，而实际 LICENSE 为 Open BSV；迁移交付须保留实际许可证及原版权声明。
 
 ## 查阅入口与已知差异
 
