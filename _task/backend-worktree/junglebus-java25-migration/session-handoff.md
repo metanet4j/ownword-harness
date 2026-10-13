@@ -2,16 +2,16 @@
 
 ## Current Objective
 
-完整实施已授权，J00–J04 完成，当前 J05。独立 Java feature/java25，21 项 Java 测试通过；JS 基线 77 项通过。
+完整实施已授权，J00–J05 完成，当前 J06。独立 Java feature/java25，37 项 Java 测试通过；JS 基线 77 项通过。
 
 ## Recommended Next Step
 
-完成背压、回调失败、断线恢复和取消专项测试，然后进入 J06 打包交付。
+完成真实 100 条交易测试、示例、README、Javadoc 和完整打包验收。
 
 ## Files Changed
 
-CentrifugeConnection/JungleBusSubscription、独立 FixtureServer 和 SubscriptionTest。
+J05 提交修复协议解析、回调异常和永久流控错误，验证队列容量、恢复和资源释放。
 
 ## Blockers / Risks
 
-线上验证待订阅 ID；独立通道 Token 获取在原始 SDK 未提供，仅支持已有连接 Token 契约。
+用户已提供真实订阅 ID；目标 junglebus.gorillapool.io、TLS、起始区块 720000、合计 100 条后停止。独立通道 Token 获取在原始 SDK 未提供。

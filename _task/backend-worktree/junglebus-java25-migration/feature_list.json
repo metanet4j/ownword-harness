@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeItem": "J05",
+  "activeItem": "J06",
   "authorization": "用户要求 review 通过后开始实施",
   "plan": "doc/实现计划-20261013-110456.md",
   "scope": {
@@ -64,8 +64,8 @@
       "dependencies": [
         "J04"
       ],
-      "status": "in-progress",
-      "evidence": "",
+      "status": "done",
+      "evidence": "mvn.sh -o clean test：37 项通过；LifecycleTest 16 项覆盖双格式背压、异步失败、取消/关闭、零低水位、恢复游标和异常协议",
       "description": "队列与生命周期；范围、依赖与验收以实现计划对应阶段为准。"
     },
     {
@@ -74,7 +74,7 @@
       "dependencies": [
         "J05"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "evidence": "",
       "description": "完整回归与交付；范围、依赖与验收以实现计划对应阶段为准。"
     }
