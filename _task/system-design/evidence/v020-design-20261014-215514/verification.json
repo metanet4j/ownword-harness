@@ -1,0 +1,203 @@
+{
+  "checkedAt": "2026-10-14T22:17:14+08:00",
+  "taskId": "frontend-content-v020-integration-design",
+  "result": "document-checks-passed",
+  "reviewStatus": "awaiting-user-review",
+  "implementationAuthorized": false,
+  "scope": "文档与只读取证；未运行或宣称 v0.2 生产功能验收。",
+  "baselines": {
+    "prototype": {
+      "path": "_task/prototype-worktree/ownword-official-s2/ownword-prototype",
+      "commit": "fb6ed59a6f537ba82d39b8b55dff9ab90238ca4c",
+      "clean": true
+    },
+    "frontend": {
+      "path": "_task/fronted-worktree/ownword-v0.1.0/own-word-web",
+      "commit": "04bb12766f4f565fd39d042e3d37b20e979bee10",
+      "clean": true
+    },
+    "backendComponent": {
+      "path": "_task/backend-worktree/ownword-v0.1.0/metanet4j-component",
+      "commit": "11f925f1eb0f653c1eda267deef8c9661579dcda",
+      "clean": true
+    }
+  },
+  "prototypeTree": "3f0722644d5e409633698be219851e1ebbe5e624",
+  "documents": [
+    {
+      "path": "_task/system-design/spec/frontend/集成核心认知v0.2.0-20261014-215514.md",
+      "sha256": "00efe7952d890e88e876719787f066b3a30835f1670700559372f367b06929dd"
+    },
+    {
+      "path": "_task/system-design/spec/frontend/设计文档v0.2.0-内容真实集成-20261014-215514.md",
+      "sha256": "5b8dd60e649173176f6cf5db61b8ee71301e2c760b32c4837d821574ed874027"
+    }
+  ],
+  "checks": {
+    "bddSourceCount": 33,
+    "bddMappedCount": 33,
+    "bddExactSetMatch": true,
+    "bddIds": [
+      "C01-A",
+      "C01-C",
+      "C01-B",
+      "C02-A",
+      "C02-B",
+      "C02-C",
+      "C02-D",
+      "C03-A",
+      "C03-B",
+      "C04-A",
+      "C04-B",
+      "C04-D",
+      "C04-C",
+      "C04-E",
+      "C04-F",
+      "C05-A",
+      "C05-B",
+      "C06-A",
+      "C06-B",
+      "C07-A",
+      "C07-B",
+      "C07-C",
+      "C07-D",
+      "C07-F",
+      "C07-E",
+      "C08-A",
+      "C08-B",
+      "C09-A",
+      "C09-B",
+      "C10-A",
+      "C10-B",
+      "X01",
+      "X02"
+    ],
+    "uniqueCognitionTableIds": 74,
+    "goals": 5,
+    "plantumlStructureBlocks": 2,
+    "plantumlRenderTested": false,
+    "markdownFencesBalanced": true,
+    "localLinksChecked": 40,
+    "missingLocalLinks": [],
+    "featureJSONValid": true,
+    "activeTaskStateValid": true,
+    "gitDiffWhitespaceCheck": "passed"
+  },
+  "browser": {
+    "tool": "agent-browser",
+    "session": "v020-design",
+    "origin": "http://127.0.0.1:4315",
+    "actions": "原型模拟连接后查看工作台、已有草稿编辑、Review、公开样例阅读；未点击签名发布。",
+    "screenshots": [
+      {
+        "file": "prototype-editor.png",
+        "sha256": "73d6bb89d9f28704ad0e88d1ee577da1b363550ab2407a1c642f01b8d16840e2",
+        "width": 1440,
+        "height": 1000,
+        "agentVisualInspection": true
+      },
+      {
+        "file": "prototype-reader-320.png",
+        "sha256": "12c82a8a5fbae7dcca9731a5f376c3e8aa4ea7174be2819d328ee6c83eab92a2",
+        "width": 320,
+        "height": 720,
+        "agentVisualInspection": true
+      },
+      {
+        "file": "prototype-reader.png",
+        "sha256": "bff8d055759175e280a8bd0404027e768a940e2cdd418e1105b8a1009e9f7745",
+        "width": 1440,
+        "height": 1000,
+        "agentVisualInspection": true
+      },
+      {
+        "file": "prototype-review.png",
+        "sha256": "f37fdcaa4cffbfb9a9d61052a58de087ec6fc0fc159f680ec5ccbb896867c88d",
+        "width": 1440,
+        "height": 1000,
+        "agentVisualInspection": true
+      },
+      {
+        "file": "prototype-workbench.png",
+        "sha256": "67d9daa2d584b99b265aeb94b7b5482280c1b314f1bfe9a59a4cadff3007e9c1",
+        "width": 1440,
+        "height": 1000,
+        "agentVisualInspection": true
+      }
+    ],
+    "mobileReadObservation": {
+      "innerWidth": 320,
+      "scrollWidth": 320
+    },
+    "scope": "页面取证及一个窄屏边界，不是原型或生产全量测试。"
+  },
+  "postCodecProbe": {
+    "script": "post-codec-probe.mjs",
+    "result": "post-codec-probe.json",
+    "reproduceFromWorkspaceRoot": "node _task/system-design/evidence/v020-design-20261014-215514/post-codec-probe.mjs",
+    "finding": "请求 Markdown/ownword，实际 BSocial 输出 text/plain/bsocial。仅内存构造，无钱包或广播。"
+  },
+  "sourceHashes": [
+    {
+      "path": "_task/system-design/spec/核心认知.md",
+      "sha256": "2c7ed6daf006d6ea60cb92f55ea017f8f1a6d11a5e69da26fcca4c0f3a0df956"
+    },
+    {
+      "path": "_task/system-design/spec/prd/v0.2.0/设计文档v0.2.0-20260917-210556.md",
+      "sha256": "3b8fe096d578baf3e7d012d837cc0471776662442d8f3940cb467b0231fe7d0a"
+    },
+    {
+      "path": "_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/domain/journal.ts",
+      "sha256": "337ce43682fdefc019d2bc17590d05bcb00a390aeae86ee4e108ed61ee8b9bc3"
+    },
+    {
+      "path": "_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/wallet/contracts.ts",
+      "sha256": "26e6e9f7687225570800a13d38358ccdb3722ca64015088be69c3256fdd94058"
+    },
+    {
+      "path": "_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/templates/dist/bsocial/bsocial.js",
+      "sha256": "a27c47a3a4fa5d37de78b737f7fea8edbf4db4f229d999f89720f74fd4a08ea4"
+    },
+    {
+      "path": "_task/backend-worktree/ownword-v0.1.0/metanet4j-component/metanet4j-api-ownword/src/main/java/com/metanet4j/api/ownword/TransactionSyncApi.java",
+      "sha256": "2eea13e83655c792577c0917578e3cdad72f803ba79a4afe385b6eaa56a73955"
+    },
+    {
+      "path": "_task/prototype-worktree/ownword-official-s2/ownword-prototype/content-model.js",
+      "sha256": "fd20215318732685c8b7a629b4ef20ff5e0546219b45aa71b4adbd699ea6d6e5"
+    },
+    {
+      "path": "_task/prototype-worktree/ownword-official-s2/ownword-prototype/markdown-tools.mjs",
+      "sha256": "d3c75d613466e25673be92dea8c372de516082818f81fd0de6fe269d2e1bfe42"
+    }
+  ],
+  "externalSources": [
+    {
+      "url": "https://bitcoinschema.org/docs/schemas/content",
+      "checkedOn": "2026-10-14"
+    },
+    {
+      "url": "https://github.com/opldotdev/MAP",
+      "checkedOn": "2026-10-14"
+    }
+  ],
+  "pending": [
+    "用户审核认知与设计",
+    "R01 修订链上契约裁决",
+    "v0.2 全部实现和功能/视觉验收",
+    "沿用的公共历史/checkpoint、实际扩展钱包和资金/主网门禁"
+  ],
+  "notPerformed": [
+    "业务源码修改",
+    "安装或升级依赖",
+    "创建 v0.2 实现 worktree",
+    "签名或广播交易",
+    "生产功能测试",
+    "PlantUML 渲染测试"
+  ],
+  "reviewNotes": [
+    "Review 与广播的恢复状态补齐签名失败和确认中止路径。",
+    "共用日志恢复增加来源模式核对，禁止将模拟记录解释为生产发布。",
+    "R01 方案 B 未获准，不修改总核心认知。"
+  ]
+}

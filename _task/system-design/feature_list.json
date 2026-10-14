@@ -433,6 +433,46 @@
       "reviewStatus": "awaiting-user-review",
       "evidence": "认知先于设计，文档 9f85424、c92813f 定义稳定 WalletProvider、官方核心及助记词隔离。Yours 5.1.1 参考源码固定到 4d9299b；前端 4fe782b、后端 11f925f 已实施，29 项当前检查及真实浏览器官方核心流程通过。详细范围、证据与未验门禁见统一前端报告；设计保留人工复核。",
       "nextStep": "用户已明确授权 Tailwind CSS 实现并持续验收；当前阶段和证据见统一 task harness。"
+    },
+    {
+      "id": "frontend-content-v020-integration-design",
+      "name": "v0.2.0 内容实现核心认知与设计",
+      "status": "needs-review",
+      "goal": "基于最新官方S2原型和v0.1真实集成基线，先完成内容核心认知与实现设计，交付用户审核后才实施。",
+      "scope": "仅设计文档、只读源码取证、原型查看及任务状态；不改业务源码、不创建实现worktree、不安装依赖、不发送交易。",
+      "dependencies": [
+        "用户明确要求先建立核心认知和设计文档，通过后开始实现",
+        "v0.1前端04bb127及后端11f925f",
+        "官方S2原型fb6ed59与v0.2.0 PRD C01–C10"
+      ],
+      "doneCriteria": [
+        "认知覆盖术语、目标、结构、唯一功能/实体/属性/关系编号、PlantUML状态及边界",
+        "设计提供页面、存储、协议、HTTP、发布恢复、实现顺序和33条BDD映射",
+        "证据区分已核实能力、拟新增契约、修订协议待裁决和主网门禁",
+        "引用、编号、映射、JSON及差异检查通过，提交后交付用户审核",
+        "用户审核通过且阻塞决策关闭后才允许实现"
+      ],
+      "prdVersion": "v0.2.0",
+      "prdSource": "_task/system-design/spec/prd/v0.2.0/设计文档v0.2.0-20260917-210556.md",
+      "output": "_task/system-design/spec/frontend/设计文档v0.2.0-内容真实集成-20261014-215514.md",
+      "cognition": "_task/system-design/spec/frontend/集成核心认知v0.2.0-20261014-215514.md",
+      "implementationAuthorized": false,
+      "reviewStatus": "awaiting-user-review",
+      "implementationStatus": "written-and-checked",
+      "evidence": {
+        "verification": "_task/system-design/evidence/v020-design-20261014-215514/verification.json",
+        "scope": "源码、依赖、5 张原型参考图、只读 Post 构造实验、文档结构和 33 条 BDD 映射；不是 v0.2 功能验收。"
+      },
+      "pendingDecisions": [
+        {
+          "id": "R01",
+          "status": "awaiting-user-decision",
+          "owner": "用户",
+          "reference": "_task/system-design/spec/frontend/设计文档v0.2.0-内容真实集成-20261014-215514.md",
+          "description": "修订链上契约：A 继续寻找现成标准；B 标准 Post 上的签名 MAP 应用扩展，需限定修改总认知后实施。"
+        }
+      ],
+      "nextStep": "用户审核认知与设计并裁决 R01；审核通过且阻塞项关闭后按设计第 9 节开始实现。"
     }
   ]
 }
