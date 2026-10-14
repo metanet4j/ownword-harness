@@ -1,13 +1,13 @@
 # 当前交接
 
-本轮链上先行、头像和多余接口删除已完成。前端 abb6b7c；后端 component 18403d4、233bbcb。允许范围内的真实服务与浏览器验收通过，详情见[当前报告](验收报告v0.1.0-20261014-010853.md)及 evidence/chain-first-20261014-112119。无需再次请求开工批准；设计和视觉保留人工复核状态。
+F04 已实施并完成允许范围验收。前端 bf25772；后端 component 11f925f；认知/设计 9f85424。24 项检查、模块边界 lint、类型、最终 build、Java clean package 和真实浏览器正常/取消/停机恢复通过；详情见[当前报告](验收报告v0.1.0-20261014-010853.md)。设计和视觉保留人工复核，无需再次申请已授权范围的开工许可。
 
-唯一下一步：按 D02 实现 F04 的稳定钱包模块、独立 Mock 广播及后端真实业务查询/隔离投影；不能保留 simulationPreview 资料来源或让业务依赖 CWI。之后补真实公共历史与覆盖，资金到位后执行 I08/I09。
+唯一下一步：核实实际 Yours 扩展的准备签名但不广播能力；随后补充分公共历史与 checkpoint，充值后运行 I08/I09。live 默认不放行未验准备能力，不能用本地 Mock 通过冒充主网验收。
 
-5041 前端、5042 CWI 模拟钱包、5043 Java API ready；运行配置在私有 _runtime/services.json（0600、Git 忽略）。run-services.py 可管理已核实的本任务进程；不要重启钱包或清空共享数据库。API 运行独立 jar 副本；重建前端前停止 frontend。冻结原型 tag 不变，5047 保留原型对照。
+5041 production、5042 原测试钱包、5043 Java API ready。配置 _runtime/services.json（0600、忽略）；run-services.py 管理本任务进程。不要重启钱包、清空共享数据或在运行中覆盖前端构建。原型固定 tag，未移动。浏览器上传/截图/HAR 均使用绝对路径，最终会话 ownword-wallet-final 的稳定身份页已检查。
 
-新流程只在钱包原交易回执后调用 transactions/sync，取消和无回执操作不写后端。IndexedDB 保存完整本地恢复依据与账户入口，账户变更后的旧回执仍存入原账户。同步失败不得重新签名；只读查找钱包原 operationId 标签，或使用保存的 rawTx 重放同 TxID。
+公共钱包入口 lib/wallet/index.ts，稳定接口 contracts.ts；具体 CWI/SDK 在 adapters。业务编码和同步在 lib/domain。已签名原交易保存后才广播；接受回执后才 POST 原交易，普通资料/头像/已广播业务恢复查后端。未广播准备恢复仅封装在钱包内部。
 
-账户 0 的测试资料已恢复 Maya Chen、Person、原 76 字符简介，头像为 b://92e174733bf2af03604c3fb02d6879389a81df8ffe6cc03ea3439fe1dfe4c95c。最新模拟操作 b08ae88b-77b2-4a18-9fc8-bc4f7b4cd3e1，TxID b8536c36077e60f565f7e23eab1de1d1bfebf416afec5dda24b33b90525591a0；刷新后从真实 IndexedDB 恢复。账户 1 旧未知操作 162406fd-8a4b-490a-8910-5c92e79af15d 保留，仍需只读恢复，禁止盲目重签。只读旧操作 GET 因此暂留。
+账户 0 恢复 Maya Chen、Person、原 76 字符简介和原 JPEG 字节；最新 Profile TxID 02b0060f4f506e34047ab2ad2484742614802e70f855dec0264278ddbb15798f，头像 b://8871d052209d324260854f22f9aa10f48bee30179358c8529560d8e42526c9ef。操作标识和回执见 evidence/wallet-module-20261014/browser-final-journal.json。账户 1 的旧未知操作 162406fd-8a4b-490a-8910-5c92e79af15d 保留，禁止盲目重签。
 
-修改前端后 npm run format，再执行 lint/typecheck/test/build。完整测试同时指定 OWNWORD_API_TEST_URL 与 OWNWORD_API_ASSET_TEST_DIR，命令见前端 README；缺配置的 skip 不计通过。本轮 18 项通过、skip 0；Java reactor 20/42/59/62 共 183 项，core/API JUnit 为 0。既有 Java Mock 回归不替代真实服务验收。
+复跑 ./init.sh；源码修改按 README 运行 format/lint/typecheck/test/build。完整测试设置真实 API URL 和隔离缓存路径；node 使用 --test-isolation=none 执行实际 24 项，skip 不算通过。Java 依赖 183 项、API JUnit 0；真实接口依据 HTTP。当前 wallet RPC 请求限 2 MiB，未验证主网费用或 5 MiB 图片大交易。

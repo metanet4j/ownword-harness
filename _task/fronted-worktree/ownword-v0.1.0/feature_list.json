@@ -124,7 +124,7 @@
       ],
       "implementationStatus": "implemented-and-verified",
       "description": "真实 Web API 与存储；事实与验收以当前设计文档对应阶段为准。",
-      "evidence": "真实 Java/MongoDB/文件/AIP 已实现；18 项钱包与真实 HTTP 通过。最终 API clean test 的依赖模块实际 183 项；API 模块没有 JUnit，用真实 HTTP 验证。PNG/JPEG/WebP、故障、幂等及重启回读已检查。live 公共解析及投影仍待真实索引来源和主网门禁。"
+      "evidence": "真实 Java/MongoDB/文件/AIP 与主网只读；当前 24 项钱包及真实 HTTP 检查通过。Java clean package 依赖模块 183 项、API JUnit 0；PNG/JPEG/WebP 字节与缓存重建通过。live 公共历史解析和投影仍待真实索引来源及主网门禁。"
     },
     {
       "id": "A01",
@@ -140,7 +140,7 @@
         "真实 HTTP/MongoDB/密码学检查、Java clean test/package 和提交完成"
       ],
       "description": "根据当前设计实现钱包广播后的数据同步；不执行主网新交易，不伪造公共索引。",
-      "evidence": "后端 18403d4、233bbcb：原交易同步与链上头像；旧五类 POST 和无调用公共 GET transactions 删除。18 项当前套件失败/skip 为 0；Java clean package 依赖 183 项通过（API JUnit 为 0）。真实 MongoDB、HTTP、三种图片字节回读及原交易缓存重建通过。新流水线浏览器顺序、取消、停机刷新恢复已验。主网及公开投影仍不在通过范围内。"
+      "evidence": "后端 18403d4、233bbcb、11f925f：真实原交易同步和链上头像，旧五类 POST 删除。GET transactions 恢复并有已广播未知结果的真实消费者；普通身份查询从已验签记录提供隔离投影，无 simulationPreview。24 项当前检查及 Java clean package（依赖 183 项、API JUnit 0）通过；主网及公开投影仍待外部事实。"
     },
     {
       "id": "F00",
@@ -225,7 +225,7 @@
       ],
       "implementationStatus": "independent-checks-passed",
       "description": "无资金真实集成验收；事实与验收以当前设计文档对应阶段为准。",
-      "evidence": "I01-I07/I10 的已定义无资金检查通过，完整场景验收仍受 F00 公共事实分流阻塞。18 项 API/钱包、连续两次生产构建、稳定态 axe、实际停机/权限故障和截图证据见 acceptanceReport。"
+      "evidence": "本地适配器及 Mock 广播范围内，24 项当前检查、最终生产构建及真实浏览器更新/图片/取消/停机恢复通过。完整产品仍受 F00 公共历史和主网资金门禁限制；证据见当前报告。"
     },
     {
       "id": "V01",
@@ -257,36 +257,37 @@
         "明确 SDK 隐式钱包业务查询的迁移方式、恢复和多钱包边界，提交供复核"
       ],
       "description": "根据用户选择先沿用本地钱包适配器，广播 Mock，后端解析、存储和业务读取真实。",
-      "evidence": "基于总认知修订本次独立认知，再修订设计：稳定 WalletProvider、OwnWord DTO、适配器隔离、独立准备/签名/广播、后端真实业务查询与隔离投影。用户选择本地适配器。十个维度、引用、围栏及 JSON 检查通过；新代码尚未实施，保留人工复核。"
+      "evidence": "根文档 9f85424：基于总认知先修订独立认知，再设计稳定 WalletProvider、OwnWord DTO、适配器隔离、独立准备/签名/广播与后端普通查询。十个维度、引用和围栏已核查；代码及真实服务证据见 F04，设计保留人工复核。"
     },
     {
       "id": "F04",
       "name": "独立广播与后端统一业务读取",
-      "status": "not-started",
+      "status": "needs-review",
       "dependencies": [
         "D02",
         "A01",
         "F03"
       ],
-      "implementationStatus": "designed-not-yet-implemented",
+      "implementationStatus": "implemented-and-verified-within-allowed-wallet-simulation",
       "doneCriteria": [
         "真实签名原交易先持久化，独立 Mock 广播成功后才同步同一 TxID",
         "BAP 状态、资料、头像和业务交易恢复统一后端，无 simulationPreview 资料来源分支",
         "后端从已验签原交易建立隔离测试投影，普通查询真实回读且不冒充主网事实",
         "正常、更新、图片、拒绝、同步故障和恢复实际测试、格式/类型/build、浏览器及提交完成"
-      ]
+      ],
+      "evidence": "前端 bf25772、后端 11f925f：稳定钱包接口与私有 CWI 实现，签名原交易先保存、独立 Mock 广播接受后同步；普通 GET 从后端验签交易派生 profile，移除 simulationPreview。24 项检查无失败/skip；格式/lint/类型/build、Java clean package、浏览器资料更新、头像字节回读、取消及实际 API 停机刷新同 TxID 恢复通过。实际 Yours、主网和公共历史门禁保留，详见当前报告。"
     }
   ],
   "acceptance": {
     "I01": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "当前 abb6b7c 的格式/lint/类型和 production build 通过；5041 真实页面已恢复。"
+      "scope": "前端 bf25772 的格式/lint/模块边界规则/类型/生产构建通过；5041 最终构建页面实际刷新检查通过。"
     },
     "I02": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "真实 HTTP/MongoDB 保存原交易；8 路并发同 TxID 仅创建一次，资料从原交易派生；浏览器回执刷新后恢复，同 TxID 重放。"
+      "scope": "原交易真实 HTTP/MongoDB 存储与幂等；普通 GET profile 来自后端验签记录。浏览器停机刷新恢复原 TxID，未再次构造签名。"
     },
     "I03": {
       "status": "passed",
@@ -306,12 +307,12 @@
     "I06": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "允许的 CWI 模拟边界下两阶段及 createAction 内处理、取消、丢回执、签名后账户变化、部分成功恢复通过；真实 API 停止、浏览器刷新、API 恢复后只同步原 TxID。实际 Yours 发布未验。"
+      "scope": "稳定 WalletProvider 隔离 CWI/SDK；签名原交易持久化后独立广播，Mock 接受后才同步；拒绝无 POST、丢准备回执与真实停机同 TxID 恢复、账户隔离通过。实际 Yours 准备不广播及主网发布未验。"
     },
     "I07": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "真实 SDK/签名/后端存储的模拟首次 ID+ALIAS、带头像三步及更新通过；浏览器头像更新和取消通过。公开查询不把模拟资料当主网发布事实。"
+      "scope": "真实 SDK/签名/服务的模拟首次 ID+ALIAS、三步头像与更新通过；生产页面更新及头像两笔同步、取消通过。测试资料读取普通后端 profile，scope=broadcast-mock，不冒充主网事实。"
     },
     "I08": {
       "status": "waiting-funds"
@@ -322,7 +323,7 @@
     "I10": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "沿用冻结原型 UI 基线证据；本轮实际查看新增头像核对、结果、身份及恢复截图，未重复全量 axe/读屏/视觉对照。"
+      "scope": "沿用冻结原型视觉与交互基线；本轮查看最终构建的身份、头像核对、取消及恢复截图，未重跑全量 axe/读屏。"
     }
   },
   "productAcceptance": {
@@ -447,6 +448,7 @@
     }
   },
   "remaining": [
+    "真实 Yours 扩展准备签名但不广播的能力及接口验证",
     "真实 BAP 索引地址、签名历史、同步 checkpoint 和充分覆盖依据",
     "B06/B07/B08 正向公共分流和 live 投影重建",
     "充值后 I08/I09 的真实 Yours 主网发布与更新"

@@ -1,0 +1,31 @@
+✖ 广播 Mock 的业务资料使用正常后端查询字段，空测试空间有明确来源 (2057.995265ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6164.234554
+
+✖ failing tests:
+
+test at tests/backend-read.test.mts:1:254
+✖ 广播 Mock 的业务资料使用正常后端查询字段，空测试空间有明确来源 (2057.995265ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + undefined
+  - 'broadcast-mock'
+
+      at TestContext.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/backend-read.test.mts:13:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'broadcast-mock',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

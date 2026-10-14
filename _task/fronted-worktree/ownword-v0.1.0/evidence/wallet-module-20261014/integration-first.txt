@@ -1,0 +1,109 @@
+
+> own-word-web@0.1.0 test
+> node --import tsx --test --test-isolation=none tests/*.test.mts
+
+✔ 前端发布通过钱包回执后的同步接口完成，后端读取与签名资料一致 (1041.94889ms)
+✔ 新身份头像依次发布 ID、图片和资料，全部由真实同步接口验签 (994.137346ms)
+✖ 钱包回执丢失后只读找回原交易并同步，不创建第二笔交易 (137.27963ms)
+✔ 取消钱包授权不调用交易同步，也不生成后端操作记录 (175.958689ms)
+✖ 同步连接失败时保留真实回执，恢复与重复同步使用同一笔交易 (19.798695ms)
+✖ 提交前持久化失败和账户变化均阻止创建钱包交易 (61.249727ms)
+✔ 错误 AIP 签名在钱包 createAction 之前被拒绝 (100.116222ms)
+✔ 冻结资料不随编辑对象变化而改变链上内容 (308.09893ms)
+✔ 头像或资料步骤取消后继续剩余步骤，不重复已完成的 ID 或图片 (1710.664055ms)
+✖ 账户在签名后变化时保留旧账户回执，阻止向新账户登记钱包输出 (211.007229ms)
+✔ PNG 与 WebP 上链同步逐字节一致，删除文件缓存后从 MongoDB 原交易恢复 (2163.984108ms)
+✔ 广播 Mock 的业务资料使用正常后端查询字段，空测试空间有明确来源 (55.480196ms)
+✔ 后端拒绝 TxID 不匹配与真实签名篡改，不产生对应同步记录 (181.502756ms)
+✔ 钱包先完成交易，后端从原交易同步资料而不接收独立 Profile (200.980957ms)
+✔ 已同步资料不能被独立 JSON 覆盖，旧发布前写入和上传入口退出 (280.714056ms)
+✔ 同一钱包交易并发同步仍只保存同一结果，重试不增加钱包交易 (534.16805ms)
+✔ 头像先由钱包发布 B/MAP/AIP，再同步真实图片且读取字节与原交易一致 (457.804716ms)
+✔ 稳定钱包接口准备真实已签名原交易，准备与广播分开且同 TxID (50.174483ms)
+✔ 替换钱包实例保持接口和错误契约，取消准备不调用广播 (28.668144ms)
+✔ 钱包提供完整 CWI 方法，并区分钱包根公钥与 BAP 身份 (6.101778ms)
+✔ 真实 Actions 首次创建 ID 与 ALIAS，更新只产生 ALIAS 并保持身份 (69.849641ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 17
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12573.93227
+
+✖ failing tests:
+
+test at tests/api.test.mts:1:2696
+✖ 钱包回执丢失后只读找回原交易并同步，不创建第二笔交易 (137.27963ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'preparation-unknown'
+  - 'outcome-unknown'
+
+      at TestContext.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/api.test.mts:127:12)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'preparation-unknown',
+    expected: 'outcome-unknown',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/api.test.mts:1:4734
+✖ 同步连接失败时保留真实回执，恢复与重复同步使用同一笔交易 (19.798695ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: bad port
+        at makeNetworkError (node:internal/deps/undici/undici:10797:35)
+        at mainFetch (node:internal/deps/undici/undici:12173:22)
+        at fetching (node:internal/deps/undici/undici:12160:7)
+        at fetch (node:internal/deps/undici/undici:12031:20)
+        at fetch (node:internal/deps/undici/undici:16555:10)
+        at fetch (node:internal/bootstrap/web/exposed-window-or-worker:83:12)
+        at api (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/domain/types.ts:97:26)
+        at publishProfile (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/domain/publish.ts:328:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async TestContext.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/api.test.mts:203:20)
+  }
+
+test at tests/api.test.mts:1:5483
+✖ 提交前持久化失败和账户变化均阻止创建钱包交易 (61.249727ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+
+  Caught error:
+
+  Error: IDENTITY_SCOPE_MISMATCH
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestContext.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/api.test.mts:223:5)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ServiceError],
+    expected: [Function (anonymous)],
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests/api.test.mts:1:8571
+✖ 账户在签名后变化时保留旧账户回执，阻止向新账户登记钱包输出 (211.007229ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'signed'
+  - 'simulated'
+       ^
+
+      at TestContext.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/api.test.mts:358:12)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'signed',
+    expected: 'simulated',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

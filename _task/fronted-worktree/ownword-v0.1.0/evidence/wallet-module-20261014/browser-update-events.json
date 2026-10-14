@@ -1,0 +1,34 @@
+[
+  {
+    "time": "2026-10-14T07:06:29.8259648Z",
+    "path": "/api/v1/identities/oSuaiZpU1B23hLFMoiLGH6xdL2b",
+    "method": "GET",
+    "status": 200
+  },
+  {
+    "time": "2026-10-14T07:06:30.256706048Z",
+    "path": "/api/wallet/rpc",
+    "method": "createAction",
+    "noSend": true,
+    "status": 200
+  },
+  {
+    "time": "2026-10-14T07:06:30.312125952Z",
+    "path": "/api/wallet/rpc",
+    "method": "signAction",
+    "noSend": true,
+    "status": 200
+  },
+  {
+    "time": "2026-10-14T07:06:30.423139072Z",
+    "path": "/api/v1/transactions/sync",
+    "method": "POST",
+    "status": 201
+  },
+  {
+    "time": "2026-10-14T07:06:30.511766784Z",
+    "path": "/api/v1/identities/oSuaiZpU1B23hLFMoiLGH6xdL2b",
+    "method": "GET",
+    "status": 200
+  }
+]

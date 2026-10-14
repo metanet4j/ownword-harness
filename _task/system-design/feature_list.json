@@ -431,7 +431,7 @@
       "output": "_task/system-design/spec/frontend/设计文档v0.1.0-真实集成-20261013-183000.md",
       "implementationStatus": "written-and-checked",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "用户已选择第一阶段本地钱包适配器；独立认知先修订，随后设计 OwnWord WalletProvider DTO、具体 SDK 隔离、准备/广播拆分和真实后端测试投影普通查询。认知维度、引用和围栏通过；代码新契约未实施，人工复核保留。",
+      "evidence": "认知先于设计，文档 9f85424 定义稳定 WalletProvider、OwnWord DTO、SDK 隔离、准备/广播拆分与后端真实普通查询。前端 bf25772、后端 11f925f 已实施，24 项检查与真实浏览器验收通过；范围、未验项和后续门禁见统一前端任务报告。设计保留人工复核。",
       "nextStep": "用户已明确授权 Tailwind CSS 实现并持续验收；当前阶段和证据见统一 task harness。"
     }
   ]
