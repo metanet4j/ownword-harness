@@ -23,7 +23,9 @@
     "realIndexSource": "waiting-for-verifiable-history-and-checkpoint",
     "prototypeBaseline": "用户确认沿用已打 tag 的原型；不同步 4315 后续标题居中改动。",
     "writeOrder": "用户要求身份创建、资料更新与头像发布均先钱包上链，再调用后端 POST 同步；头像不保留后端预上传。",
-    "redundantApiRemoval": "用户要求先完成钱包先行与接口精简，再处理真实端到端测试。"
+    "redundantApiRemoval": "用户要求先完成钱包先行与接口精简，再处理真实端到端测试。",
+    "walletPreparation": "用户确认第一阶段沿用本地钱包适配器，真实构造签名并 Mock 广播；业务查询统一真实后端。",
+    "walletModule": "用户明确钱包为独立模块，设计稳定隔离接口；替换钱包保持业务调用接口不变。"
   },
   "documents": {
     "product": "_task/system-design/spec/核心认知.md",
@@ -240,6 +242,39 @@
       "implementationStatus": "waiting-funds-and-real-index",
       "description": "充值后主网发布验收；事实与验收以当前设计文档对应阶段为准。",
       "evidence": "I08/I09 未执行；不会以模拟回执关闭主网验收。"
+    },
+    {
+      "id": "D02",
+      "name": "钱包写入与后端查询职责分离认知及设计",
+      "status": "needs-review",
+      "dependencies": [
+        "D01"
+      ],
+      "implementationStatus": "written-and-checked",
+      "doneCriteria": [
+        "基于总认知明确钱包授权写入与后端业务查询边界",
+        "设计签名交易持久化、独立广播 Mock、原交易存储及隔离测试投影",
+        "明确 SDK 隐式钱包业务查询的迁移方式、恢复和多钱包边界，提交供复核"
+      ],
+      "description": "根据用户选择先沿用本地钱包适配器，广播 Mock，后端解析、存储和业务读取真实。",
+      "evidence": "基于总认知修订本次独立认知，再修订设计：稳定 WalletProvider、OwnWord DTO、适配器隔离、独立准备/签名/广播、后端真实业务查询与隔离投影。用户选择本地适配器。十个维度、引用、围栏及 JSON 检查通过；新代码尚未实施，保留人工复核。"
+    },
+    {
+      "id": "F04",
+      "name": "独立广播与后端统一业务读取",
+      "status": "not-started",
+      "dependencies": [
+        "D02",
+        "A01",
+        "F03"
+      ],
+      "implementationStatus": "designed-not-yet-implemented",
+      "doneCriteria": [
+        "真实签名原交易先持久化，独立 Mock 广播成功后才同步同一 TxID",
+        "BAP 状态、资料、头像和业务交易恢复统一后端，无 simulationPreview 资料来源分支",
+        "后端从已验签原交易建立隔离测试投影，普通查询真实回读且不冒充主网事实",
+        "正常、更新、图片、拒绝、同步故障和恢复实际测试、格式/类型/build、浏览器及提交完成"
+      ]
     }
   ],
   "acceptance": {

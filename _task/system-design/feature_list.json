@@ -412,7 +412,7 @@
       "name": "v0.1.0 核心认知与真实集成设计",
       "status": "needs-review",
       "goal": "基于官方 S2 原型，先建立核心认知，再设计前后端及钱包契约，实施真实服务集成。",
-      "scope": "根据用户明确要求修订本期链上先行写入、头像链上图片、原交易同步和恢复契约；范围与授权见统一前端任务清单 D01。",
+      "scope": "按用户明确要求修订钱包独立模块、稳定公共接口、独立 Mock 广播和真实后端业务查询，详见统一前端清单 D02/F04。",
       "dependencies": [
         "用户指定原型和前端任务目录",
         "用户授权现有后端成果先合并 dev 再建立 v0.1.0 worktree"
@@ -431,7 +431,7 @@
       "output": "_task/system-design/spec/frontend/设计文档v0.1.0-真实集成-20261013-183000.md",
       "implementationStatus": "written-and-checked",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "用户确认身份、资料与头像均先钱包上链后后端同步；当前独立认知和设计已修订并检查引用、接口、恢复与验收映射。实现阶段及真实验证由统一前端任务清单维护。",
+      "evidence": "用户已选择第一阶段本地钱包适配器；独立认知先修订，随后设计 OwnWord WalletProvider DTO、具体 SDK 隔离、准备/广播拆分和真实后端测试投影普通查询。认知维度、引用和围栏通过；代码新契约未实施，人工复核保留。",
       "nextStep": "用户已明确授权 Tailwind CSS 实现并持续验收；当前阶段和证据见统一 task harness。"
     }
   ]
