@@ -1,0 +1,505 @@
+{
+  "version": "官方组件改造版",
+  "baseVersion": "v0.4.0",
+  "baseCommit": "5b3cdf8",
+  "branch": "codex/prototype-official-s2",
+  "preview": "http://127.0.0.1:4315/",
+  "activeFeature": "M13",
+  "features": [
+    {
+      "id": "M01",
+      "name": "官方 S2 组件迁移与独立预览",
+      "status": "needs-review",
+      "dependencies": [
+        "v0.4.0@5b3cdf8"
+      ],
+      "doneCriteria": [
+        "构建直接消费锁定的官方 S2 包及兼容 React，不加载旧本地仿制组件运行时",
+        "迁移通用按钮、字段、提示、Tabs、菜单、上传、状态和弹窗，保留业务流程与媒体秩序",
+        "独立浏览器验证四模块正常与相关边界、双语主题、键盘及截图；原工作区保持原样",
+        "源码与证据提交，并交付官方组件改造版预览及迁移边界"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "evidence": [
+        "ownword-prototype/evidence/official-s2/verification.json",
+        "ownword-prototype/evidence/official-s2/preview-zh.png",
+        "ownword-prototype/evidence/official-s2/editor-mobile-final.png",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "browserAssertions": 13,
+        "browserErrors": 0,
+        "browserWarnings": 0,
+        "screenshots": 13,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      }
+    },
+    {
+      "id": "M02",
+      "name": "身份分组与内容列表视觉优化",
+      "status": "needs-review",
+      "dependencies": [
+        "M01"
+      ],
+      "doneCriteria": [
+        "个人主页身份主体、标识与操作形成清楚分组，复制紧邻标识",
+        "作品标题恢复内容字级，筛选与标题同组，媒体保持受控窗口",
+        "关联管理页面采用相同分组和对齐原则；桌面、窄屏及深色定向复核",
+        "交付相同数据与视口的前后对比、独立预览及提交"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "prototypeCommit": "bfce237",
+      "evidence": [
+        "ownword-prototype/visual-review-v2.html",
+        "ownword-prototype/evidence/official-s2/visual-v2/verification.json",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "browserAssertions": 10,
+        "browserErrors": 0,
+        "browserWarnings": 0,
+        "screenshots": 17,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      }
+    },
+    {
+      "id": "M03",
+      "name": "管理页筛选统一与手机信息密度",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M02"
+      ],
+      "doneCriteria": [
+        "内容、Artifact 和主页复用官方 Tabs 组合，筛选状态和数量准确",
+        "手机当前数字 ID、编号状态与名称成组，列表更早进入首屏",
+        "验证切换、键盘、空列表、失败及窄屏状态；交付本轮同视口前后对照"
+      ],
+      "prototypeCommit": "73d37ce",
+      "evidence": [
+        "ownword-prototype/visual-review-v3.html",
+        "ownword-prototype/evidence/official-s2/visual-v3/verification.json",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "browserAssertions": 18,
+        "browserErrors": 0,
+        "browserWarnings": 0,
+        "screenshots": 14,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      }
+    },
+    {
+      "id": "M04",
+      "name": "阅读工具栏与 Artifact 详情信息分组",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M03"
+      ],
+      "doneCriteria": [
+        "阅读复制与导出复用官方图标按钮，320px 常用返回上下文下保持一行",
+        "Artifact 详情的编号、状态和关联身份更紧凑，复制与异常状态仍可用",
+        "必填标记由官方 TextField 统一生成；验证正常、错误、键盘、主题双语与前后对照"
+      ],
+      "prototypeCommit": "426803a",
+      "evidence": [
+        "ownword-prototype/visual-review-v4.html",
+        "ownword-prototype/evidence/official-s2/visual-v4/verification.json",
+        "ownword-prototype/evidence/official-s2/visual-v4/font-network-observation.json",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "browserAssertions": 21,
+        "browserErrors": 8,
+        "browserApplicationErrors": 0,
+        "externalFontErrors": 8,
+        "browserWarnings": 0,
+        "screenshots": 19,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      },
+      "knownLimitations": [
+        "官方字体 CDN 加载失败仍有复现；保留官方字体与系统回退，稳定性需单独处理。未吞掉或隐藏错误，原始观察随证据保存。"
+      ]
+    },
+    {
+      "id": "M05",
+      "name": "身份表单与关系确认的官方组件及信息分组",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M04"
+      ],
+      "doneCriteria": [
+        "名称与类型的必填标记由官方组件生成，类型采用互斥 RadioGroup 并支持键盘",
+        "身份编辑上下文复用紧凑可复制 Identifier，桌面与手机分组清楚",
+        "复核编辑和创建共用字段、Review 状态、无改动与错误、双语主题；交付前后对照",
+        "关系确认先展示双方身份，完整可复制标识不被说明挤出手机首屏，弹层焦点与取消行为可用"
+      ],
+      "prototypeCommit": "13de597",
+      "evidence": [
+        "ownword-prototype/visual-review-v5.html",
+        "ownword-prototype/evidence/official-s2/visual-v5/verification.json",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "browserAssertions": 17,
+        "browserFollowupChecks": 2,
+        "browserErrors": 0,
+        "browserWarnings": 0,
+        "screenshots": 11,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      },
+      "knownLimitations": [
+        "本轮字体未报错，上轮官方动态中文字体的偶发请求失败仍未解决；Provider 公开 API 未提供重试配置。"
+      ]
+    },
+    {
+      "id": "M06",
+      "name": "跨版本验收覆盖与官方字体统一",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M05"
+      ],
+      "doneCriteria": [
+        "累计检查四模块主要页面与适用错误状态的桌面、320px 布局和自动无障碍",
+        "业务正文和标题复用 S2 1.6.0 中英文完整字体顺序",
+        "记录实际字体网络结果、未覆盖项与可复核证据，交付同条件前后对照"
+      ],
+      "prototypeCommit": "f3f6844",
+      "evidence": [
+        "ownword-prototype/evidence/official-s2/acceptance-before/verification.json",
+        "ownword-prototype/evidence/official-s2/visual-v6/verification.json",
+        "ownword-prototype/visual-review-v6.html"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "browserAssertions": 11,
+        "screenshots": 62,
+        "automatedA11yAudits": 62,
+        "a11yViolations": 0,
+        "browserErrors": 0,
+        "userReview": "pending"
+      },
+      "knownLimitations": [
+        "历史中文字体 CDN 间歇失败的两个 URL 复查均 HTTP 200，本次字体已加载且无错误；尚未证明外部 CDN 稳定性已解决。",
+        "本轮 60 个基准截图的完整浏览器检查在字体别名修正前执行；字体修正定向核对中文深色桌面与手机的正文、标题和官方控件。"
+      ]
+    },
+    {
+      "id": "M07",
+      "name": "内容编辑器逐按钮与逐动作复核",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M06"
+      ],
+      "doneCriteria": [
+        "逐项演练桌面和手机上的每个格式、标题、模式、文件、查找、链接和上下文动作",
+        "核对每项动作实际正文、选区、撤销和焦点效果；错误、取消、保存和发布不丢正文",
+        "修复实际复现的问题，交付逐动作清单、前后对照、证据和提交"
+      ],
+      "prototypeCommit": "93da181",
+      "evidence": [
+        "ownword-prototype/evidence/official-s2/editor-review/verification.json",
+        "ownword-prototype/visual-review-v7.html",
+        "ownword-prototype/editor-review.html",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "formatModeA11yChecks": 90,
+        "flowChecks": 61,
+        "comparisonPairs": 6,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "verificationMethod": "组合完整流程与定向复核，原始自动化失败及工具限制仍保留",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      }
+    },
+    {
+      "id": "M08",
+      "name": "补齐身份密钥轮换的版本连续性",
+      "status": "needs-review",
+      "dependencies": [
+        "M07"
+      ],
+      "doneCriteria": [
+        "身份页提供安全入口，Review 显示完整操作 BAP ID 和不变的身份",
+        "轮换走模拟授权、处理、结果，取消、失败和账户变化保持准确",
+        "核对 BAP ID 与 Profile 不变，历史签名说明独立；桌面与手机、双语主题验收"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "prototypeCommit": "37bfba6",
+      "evidence": [
+        "ownword-prototype/evidence/official-s2/identity-security/verification.json",
+        "ownword-prototype/visual-review-v8.html",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "models": "143 assertions passed",
+        "rotationModelAssertionsAdded": 48,
+        "behaviorChecks": 26,
+        "behaviorResult": "passed",
+        "a11yAudits": 18,
+        "a11yViolations": 0,
+        "browserErrors": 0,
+        "errorsWithTypekitUrl": 0,
+        "genericNetworkErrors": 0,
+        "overallBrowserRun": "passed after font/network readiness wait",
+        "manualVisualReview": "completed",
+        "userReview": "pending"
+      },
+      "knownLimitations": [
+        "历史 9 条字体网络错误另存 verification-with-font-errors.json；最新稳定加载复核零错误，不等于外部 CDN 的间歇故障已永久修复。",
+        "密钥更新只以内存中的签名代次模拟，不生成或持久化真实密钥。"
+      ]
+    },
+    {
+      "id": "M09",
+      "name": "转移核对页的信息分组与首屏密度",
+      "status": "needs-review",
+      "dependencies": [
+        "M08"
+      ],
+      "doneCriteria": [
+        "紧凑呈现 Artifact 编号、状态、接收地址与操作身份，完整标识可复制",
+        "保留转移影响和交易详情，复核边界、取消、主题与窄屏",
+        "交付同状态前后对照与最终优化验收清单"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "prototypeCommit": "abc1706",
+      "evidence": [
+        "ownword-prototype/evidence/official-s2/transfer-review/verification.json",
+        "ownword-prototype/evidence/official-s2/transfer-review/related.json",
+        "ownword-prototype/visual-review-v9.html",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "transferChecks": 20,
+        "relatedChecks": 7,
+        "persistedA11yAudits": 14,
+        "a11yViolations": 0,
+        "browserErrors": 0,
+        "mobileSignButtonBottomBefore": 823.77,
+        "mobileSignButtonBottomAfter": 651.31,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "verificationMethod": "完整转移流程与相关页定向复核组合，失败诊断保留"
+      }
+    },
+    {
+      "id": "M10",
+      "name": "字体网络错误来源与预览稳定性复核",
+      "status": "needs-review",
+      "dependencies": [
+        "M09"
+      ],
+      "doneCriteria": [
+        "保留 Typekit 失败证据，核实中途导航与稳定加载下的表现，不隐瞒通用网络错误",
+        "在所有具体修改完成后做完成审计；不能把外部字体错误或待用户视觉复核记为已通过"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "prototypeCommit": "a86850a",
+      "evidence": [
+        "ownword-prototype/evidence/official-s2/final-audit/verification.json",
+        "ownword-prototype/evidence/official-s2/identity-security/verification.json",
+        "ownword-prototype/evidence/official-s2/identity-security/verification-with-font-errors.json",
+        "ownword-prototype/acceptance-review.html"
+      ],
+      "validation": {
+        "implementationAuditFeatures": 9,
+        "implementationAuditCriteria": 30,
+        "currentRotationChecks": 26,
+        "currentRotationA11yAudits": 18,
+        "currentBrowserErrors": 0,
+        "reviewPageA11yViolations": 0,
+        "reviewPageWidths": [
+          320,
+          1440
+        ],
+        "userReview": "pending"
+      },
+      "knownLimitations": [
+        "历史字体失败原因不能全部归为导航中断，原始记录保留；外部 CDN 不保证永久稳定。",
+        "用户视觉复核未确认，完整目标仍未完成。"
+      ]
+    },
+    {
+      "id": "M11",
+      "name": "手机主页标识区与阅读页头部轻量调整",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M10"
+      ],
+      "prototypeCommit": "b3e6ef1",
+      "doneCriteria": [
+        "仅收拢手机主页标识区和阅读页头部，保留完整标识访问、编号状态、作者、时间、版本、目录和动作",
+        "相关手机页头操作范围至少44×44px，图标宽度通过官方styles API设置，不修改官方包或新增依赖",
+        "定向复核320px、390px和桌面、中英主题、相关正常操作；交付同条件两组前后对照",
+        "源文件、产物和证据提交，用户视觉复核前保持needs-review"
+      ],
+      "evidence": [
+        "ownword-prototype/visual-review-v11.html",
+        "ownword-prototype/evidence/official-s2/mobile-density/verification.json",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "initialActionChecks": 13,
+        "finalPositionChecks": 4,
+        "layoutChecks": 8,
+        "a11yAudits": 4,
+        "a11yViolations": 0,
+        "a11yIncomplete": 0,
+        "browserErrors": 0,
+        "consoleErrors": 0,
+        "comparisonPairs": 2,
+        "mobileIdentityHeightBefore": 159.19,
+        "mobileIdentityHeightAfter": 127.19,
+        "mobileReaderTitleBefore": 416.75,
+        "mobileReaderTitleAfter": 316.75,
+        "mobileTargetsMinimum": [
+          44,
+          44
+        ],
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      },
+      "knownLimitations": [
+        "浏览器设备预设未启用实际触摸能力；手机视口和44px操作范围由实际DOM测量证明，不宣称实机触摸验收。",
+        "13项动作与4项最终位置复核组合，原始自动化及样式尺寸诊断保留。"
+      ]
+    },
+    {
+      "id": "M12",
+      "name": "页面中轴与任务比例统一",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M11"
+      ],
+      "prototypeCommit": "b4846d1",
+      "doneCriteria": [
+        "阅读正文与阅读页头共同居中，外侧目录保持原宽度和键盘跳转行为",
+        "全局页头保持1120px，单栏编辑区960px，双栏保留1184px并共用中轴",
+        "任务标题与说明按用户确定的左对齐方向形成连续阅读基准，当前实现及定向证据见M13",
+        "构建、模型、相关布局与交互、主题及窄屏复核通过；交付五组同条件前后对照"
+      ],
+      "evidence": [
+        "ownword-prototype/visual-review-v12.html",
+        "ownword-prototype/evidence/official-s2/centering/verification.json",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "baselineCommit": "b3e6ef1",
+        "beforePageStates": 12,
+        "initialAfterPageStates": 13,
+        "finalLayoutRecords": 16,
+        "relatedActionChecks": 6,
+        "a11yAudits": 8,
+        "a11yViolations": 0,
+        "a11yIncomplete": 1,
+        "browserErrors": 0,
+        "consoleErrors": 0,
+        "comparisonPairs": 5,
+        "readerCenterDeltaBefore": -122,
+        "readerCenterDeltaAfter": 0,
+        "desktopHeaderWidth": 1120,
+        "singleEditorWidth": 960,
+        "splitEditorWidth": 1184,
+        "deliveryPageWidths": [
+          320,
+          1440
+        ],
+        "deliveryImagesLoaded": 10,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8",
+        "verificationMethod": "13个页面初查，11个布局定向复核；标题帮助组补正后再核对创建、Review、转移及手机，阅读规则未改动。"
+      },
+      "knownLimitations": [
+        "中文深色自动无障碍有1项背景遮挡判定的incomplete，保留原始记录，不计为自动通过。",
+        "相关布局采用初查和定向复核组合；窄屏目录比例、导航保护、焦点时序和列表选择器诊断保留。",
+        "浏览器视口验收不等于实机触摸、读屏或完整WCAG认证。"
+      ],
+      "reviewAdjustment": "用户要求任务标题恢复原有左对齐；阅读正文中轴、统一页头及编辑器比例继续保留。"
+    },
+    {
+      "id": "M13",
+      "name": "任务标题与说明恢复左对齐",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M12"
+      ],
+      "prototypeCommit": "fb6ed59",
+      "doneCriteria": [
+        "撤回任务页桌面标题居中规则，身份任务、内容确认及Artifact创建的标题、说明与帮助组沿原有左侧基准排列",
+        "页面主体容器保持居中，沿用阅读正文中轴与编辑器比例",
+        "定向复核三个页面、320px、中文深色和帮助按钮键盘行为，构建与模型通过；交付三组前后对照"
+      ],
+      "evidence": [
+        "ownword-prototype/visual-review.html",
+        "ownword-prototype/evidence/official-s2/task-alignment/verification.json",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "baselineCommit": "b4846d1",
+        "layoutChecks": 5,
+        "relatedChecks": 3,
+        "a11yAudits": 1,
+        "a11yViolations": 0,
+        "a11yIncomplete": 0,
+        "browserErrors": 0,
+        "consoleErrors": 0,
+        "comparisonPairs": 3,
+        "deliveryImagesLoaded": 6,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      },
+      "knownLimitations": [
+        "本轮仅定向验证标题对齐和相关页面；未重复全站验收。"
+      ]
+    }
+  ],
+  "implementationStatus": "implemented-and-verified",
+  "reviewStatus": "needs-review",
+  "prototypeCommit": "fb6ed59",
+  "remainingWork": [
+    "用户视觉验收尚未确认"
+  ]
+}
