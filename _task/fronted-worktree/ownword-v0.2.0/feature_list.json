@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "version": "v0.2.0",
-  "activeItem": "D03",
+  "activeItem": "D04",
   "implementationAuthorized": true,
   "approval": {
     "userReply": "可以",
@@ -87,8 +87,12 @@
         "C06–C08/C10 真实签名及服务闭环",
         "重复、取消、超时、刷新和同步失败恢复"
       ],
-      "status": "in-progress",
-      "evidence": []
+      "status": "done",
+      "evidence": [
+        "前端 1fb21a0；47 项不同测试通过，lint/typecheck/build 通过",
+        "evidence/d03/checks.json：双击、取消、真实回执丢失及刷新零重播、编辑期间同步清理、访客阅读及 CRLF 导出",
+        "阅读页 320px 无横向溢出，修复任务清单无障碍名称后 axe 0 违规"
+      ]
     },
     {
       "id": "D04",
@@ -100,7 +104,7 @@
         "C09 同作者新版本与旧链接不可变",
         "缺失、分支与覆盖不足不冒充最新"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "evidence": []
     },
     {
