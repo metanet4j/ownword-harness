@@ -6,7 +6,7 @@ from pathlib import Path
 import json,subprocess
 base=Path.cwd();root=base.parents[2];state=json.loads((base/'feature_list.json').read_text())
 assert state['implementationAuthorized']
-active=[x['id'] for x in state['features'] if x['status']=='in-progress']
+active=[x['id'] for x in state['features'] if x['status'] in ('in-progress','needs-review')]
 assert active==([state['activeItem']] if state['activeItem'] else [])
 for p in state['documents'].values():assert (root/p).is_file(),p
 for path in [base/'own-word-web',root/'_task/backend-worktree/ownword-v0.2.0/metanet4j-component']:

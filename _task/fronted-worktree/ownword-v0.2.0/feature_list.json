@@ -121,8 +121,14 @@
         "33 条 BDD 与全部集成门禁逐项有证据",
         "构建和关联回归通过，实际扩展/主网/用户视觉复核明确"
       ],
-      "status": "in-progress",
-      "evidence": []
+      "status": "needs-review",
+      "evidence": [
+        "前端 6f9bcca；后端 ccbb03f；原型基线 fb6ed59 未改动",
+        "前端完整测试 48/48；后端关联模块 189/189；最终 lint/typecheck/build 及服务启动检查通过",
+        "验收报告v0.2.0-20261015-015045.md：33 条 BDD 对照及外部门禁",
+        "evidence/d05/checks.json：账户变化、历史操作隔离、写锁接管、日志失败重试、Proof、原型尺寸与 320px 检查",
+        "最终新浏览器会话无未处理异常；用户视觉复核、实际扩展、公共历史/checkpoint 与主网广播未验收"
+      ]
     }
   ],
   "gates": {
