@@ -8,6 +8,7 @@
 | `bap-master/bap-master/` | BAP 身份协议与实现，实际包版本与清单登记不一致 | [BitcoinSchema/bap](https://github.com/BitcoinSchema/bap) |
 | `yours-wallet-main/yours-wallet-main/` | Yours Wallet 5.1.1 官方源码，当前上游提交已同步并核对 | [yours-org/yours-wallet](https://github.com/yours-org/yours-wallet) |
 | `1sat-sdk/` | 钱包 Actions、客户端、身份与签名实现，固定版本已恢复并核对 | [b-open-io/1sat-sdk](https://github.com/b-open-io/1sat-sdk) |
+| `1sat-sdk-yours/` | 当前 Yours 官方钱包核心、助记词与 Node/浏览器工厂对照；保留旧固定 SDK | [b-open-io/1sat-sdk](https://github.com/b-open-io/1sat-sdk) |
 | `1sat-stack/` | 服务端路由、索引与身份解析实现，固定版本已恢复并核对 | [b-open-io/1sat-stack](https://github.com/b-open-io/1sat-stack) |
 | `react-spectrum-main/` | 既有 Adobe 源码快照，本次未核对 | 未登记 |
 | `schema-master/` | 既有 BitcoinSchema 快照，本次未核对 | 未登记 |

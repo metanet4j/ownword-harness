@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "verifiedAt": "2026-10-14T15:54:00+08:00",
+  "verifiedAt": "2026-10-14T08:06:12.621976+00:00",
   "purpose": "reference-only",
   "acquisition": "git-clone",
   "previousSnapshotsBackup": "reference/.snapshot-backup-20260918-identity",
@@ -101,10 +101,29 @@
       "localStatus": "verified-pinned-commit",
       "checkout": "detached",
       "verifiedAt": "2026-10-13T11:09:54+08:00"
+    },
+    {
+      "path": "reference/1sat-sdk-yours",
+      "repository": "https://github.com/b-open-io/1sat-sdk.git",
+      "branch": "master",
+      "commit": "be69d54131aff04720fdee06a68a23bcb51a28b9",
+      "tree": "473306e42f6a78fb1dd5f5fb23c7299ed8ecebe3",
+      "committedAt": "2026-10-13T14:10:04-04:00",
+      "trackedFiles": 1203,
+      "packages": {
+        "wallet": "0.0.121",
+        "wallet-browser": "0.0.107",
+        "wallet-node": "0.0.88",
+        "utils": "0.0.43"
+      },
+      "localStatus": "verified-current-upstream-commit",
+      "checkout": "detached",
+      "verifiedAt": "2026-10-14T08:06:12.621976+00:00"
     }
   ],
   "verificationScope": [
-    "reference/yours-wallet-main/yours-wallet-main"
+    "reference/yours-wallet-main/yours-wallet-main",
+    "reference/1sat-sdk-yours"
   ],
   "previousSnapshotsBackupStatus": "not-present"
 }
