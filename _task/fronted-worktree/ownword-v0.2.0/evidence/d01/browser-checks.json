@@ -1,0 +1,38 @@
+{
+  "scope": "D01 写作与草稿阶段，发布/公共读取/修订在 D02–D04 完成后做联验",
+  "passed": {
+    "privateGate": "刷新私有草稿先连接；未发布新身份不能进入草稿；原身份恢复实际 IndexedDB 文本",
+    "visualFormatting": "真实中文输入、粗体和 Ctrl+Z 撤销；源码与 Review 最新正文一致",
+    "crlfRoundtrip": "导入 UTF-8 BOM + CRLF + 非规范 Markdown，切换可视化/源码/预览及中英/浅深；导出逐字节相同，仅去除 BOM",
+    "autosave": "同一作者落盘 revision 4，刷新重连正文相同",
+    "multipleTabs": "第二标签页只读等待；关闭首标签后自动接管，重新读取已保存草稿",
+    "writeFailure": "真实 IDBObjectStore.put 注入 QuotaExceededError；保存并离开失败，正文保留在编辑页",
+    "externalAccountChange": "真实钱包 account 0→1→0；新账户无旧正文，原账户内存正文仍在",
+    "readRecovery": "真实 index 读取异常；恢复读取后原稿保留，新 UUID 恢复副本先 dirty 且 beforeunload 阻止；实际保存后原稿 rev4、副本 rev1 均在磁盘",
+    "mobileLongDocument": "320px 长文 source/preview 切换，源文相同，selection 12893 保留，scrollTop 19154 保留，document.scrollWidth=320，无 split 模式",
+    "importRejection": "无效 UTF-8 与超限文件均不覆盖正文；替换取消保留原稿",
+    "manualOverLimit": "实际 CodeMirror 事务输入 102401 字节；保存保留，Review 拦截，导出 102401 字节完整",
+    "unsupported": "媒体/HTML/脚注转源码，预览保留文字；脚本未执行、危险 href=null、媒体请求0",
+    "delete": "Escape 取消后草稿3份且焦点返回管理按钮；确认删除测试稿后2份，原稿和恢复副本仍在",
+    "axe": "320px dark editor: 22 passes, 0 violations, 0 incomplete",
+    "ime": "可视化和源码均通过浏览器原生 compositionstart/update/input，候选 zhong→中文→中文组合输入 后正文无重复/截断，见 ime-visual/source.json",
+    "historyFallback": "禁用 Navigation API 后原生 history.back 显示离开对话框；Escape 保留正文，放弃修改后正确返回工作台",
+    "noWebLocks": "禁用 Web Locks 的新标签连接后仅提示只读，不开放编辑",
+    "lateImport": "真实文件读取延迟期间账户 0→1，迟到结果未显示替换对话框；切回 0 原文保持，见 import-account-race.json",
+    "keyboard": "实际 Tab/Enter 从 Visual 切到 Source，aria-pressed=true；Escape 取消对话框后焦点返回原管理按钮",
+    "spectrum": "对照绑定 1.6.0 使用 ToggleButton、Tooltip、Dialog 与 ContextualHelp；原型同样例 174 字节、1440×1000 截图，另含 320px 截图",
+    "finalAxe": "最终编辑页 25 passes，0 violations，0 incomplete"
+  },
+  "gatesStillOpen": [
+    "内容发布与公共列表/阅读/修订",
+    "实际钱包扩展与主网资金广播",
+    "公共索引覆盖与 checkpoint",
+    "用户视觉复核"
+  ],
+  "tools": "agent-browser；CLI 无 IME 候选命令，使用该会话 CDP Input.imeSetComposition/insertText 补测，保留真实 isTrusted composition/input 事件证据",
+  "crossStagePending": [
+    "C01 已发布列表与 C03 阅读一致性在 D02/D03 验证",
+    "C04-E 身份/内容发布互斥在 D03 验证",
+    "D05 全部 33 BDD 汇总及用户视觉复核"
+  ]
+}

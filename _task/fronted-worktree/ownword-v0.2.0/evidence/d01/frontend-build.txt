@@ -1,0 +1,32 @@
+
+> own-word-web@0.2.0 build
+> next build --webpack
+
+▲ Next.js 16.3.8 (webpack)
+✓ Running next.config.ts took 92ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 37.3s
+  Running TypeScript ...
+  Finished TypeScript in 8.3s ...
+  Collecting page data using 10 workers ...
+  Generating static pages using 10 workers (0/6) ...
+  Generating static pages using 10 workers (1/6) 
+  Generating static pages using 10 workers (2/6) 
+  Generating static pages using 10 workers (4/6) 
+✓ Generating static pages using 10 workers (6/6) in 2.9s
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /api/[...path]
+├ ƒ /api/wallet
+├ ƒ /api/wallet/rpc
+├ ƒ /content/[[...screen]]
+└ ƒ /identity/[[...screen]]
+
+
+ƒ  (Dynamic)  server-rendered on demand
+

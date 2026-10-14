@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "version": "v0.2.0",
-  "activeItem": "D01",
+  "activeItem": "D02",
   "implementationAuthorized": true,
   "approval": {
     "userReply": "可以",
@@ -19,9 +19,9 @@
     "backendBaseline": "11f925f1eb0f653c1eda267deef8c9661579dcda",
     "prototypeCommit": "fb6ed59a6f537ba82d39b8b55dff9ab90238ca4c",
     "ports": {
-      "web": 5061,
-      "api": 5063,
-      "wallet": 5068
+      "web": 5071,
+      "api": 5073,
+      "wallet": 5078
     }
   },
   "features": [
@@ -47,12 +47,17 @@
         "D00"
       ],
       "doneCriteria": [
-        "C01–C05 与相关 X 场景实现",
+        "完成 C01–C05 的草稿、编辑、预览、导入导出及相关 X；公共列表/阅读与发布互斥在 D02–D04 联验",
         "保存失败、账户切换、多标签、导入与退出保护实测",
         "编辑器与工作台对照原型"
       ],
-      "status": "in-progress",
-      "evidence": []
+      "status": "done",
+      "evidence": [
+        "前端 00cd8de；后端隔离配置 a5e7db2",
+        "lint/typecheck/build 通过；前端真实服务测试 35/35，后端关联模块 183/183",
+        "evidence/d01/browser-checks.json：原生 IME、读写故障、恢复、账户、多标签、字节保持、320px、键盘",
+        "evidence/d01/editor-prototype-match.png：原型同内容 1440×1000；最终 axe 0 违规"
+      ]
     },
     {
       "id": "D02",
@@ -64,7 +69,7 @@
         "标准 Post 与修订 MAP 的字节及签名验证",
         "内容/身份/头像分派、真实 Mongo 持久化与公共查询"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "evidence": []
     },
     {
