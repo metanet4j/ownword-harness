@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OwnWord · 最新原型 UI 验收</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f8f8f8;color:#292929;font:15px/1.65 system-ui,sans-serif}header{padding:24px 32px;background:#fff;border-bottom:1px solid #dadada}h1{margin:0;font-size:25px}p{max-width:1080px;margin:12px 0}nav{display:flex;flex-wrap:wrap;gap:16px;align-items:center}a{color:#274dea}select{font:inherit;background:white;color:inherit;border:1px solid #929292;padding:8px 12px;border-radius:8px}main{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding:24px}figure{margin:0;min-width:0}figcaption{font-weight:650;margin-bottom:12px}img{display:block;width:100%;height:auto;border:1px solid #dadada}.empty{padding:24px;border:1px solid #dadada;background:#fff;color:#505050}footer{padding:0 32px 32px}summary{cursor:pointer}a:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #465bff;outline-offset:4px}@media(max-width:900px){main{grid-template-columns:1fr}header,footer{padding:20px}}@media(min-width:901px){main.phone img{max-width:390px}}
+</style>
+</head>
+<body>
+<header>
+<h1>OwnWord · 最新原型 UI 验收</h1>
+<p>原型 <strong>fb6ed59</strong> → 实现 <strong>7e9d9ab</strong>。基于官方 Spectrum S2 1.6.0，核对 v0.1 身份流程。布局对照、生产构建、29 项测试与实际创建／取消重试通过。</p>
+<nav><label for="page">查看页面</label><select id="page">
+<option value="edit">编辑资料 · 1440 × 1000</option>
+<option value="mobile-edit">手机编辑 · 390 × 844</option>
+<option value="short-edit">短屏编辑 · 320 × 568</option>
+<option value="zh-dark-edit">中文深色编辑 · 320 × 568</option>
+<option value="setup">创建身份 · 1440 × 1000</option>
+<option value="mobile-setup">手机创建 · 390 × 844</option>
+<option value="review">确认资料 · 1440 × 1000</option>
+<option value="preview">身份卡片 · 1440 × 1000</option>
+<option value="welcome">欢迎页 · 1440 × 1000</option>
+<option value="identity">我的身份 · 1440 × 1000</option>
+</select><a href="http://127.0.0.1:5041/">打开实际应用</a><a href="verification-summary.json">验收数据</a><a href="card-reference-source.json">卡片来源</a></nav>
+<p id="note" aria-live="polite"></p>
+</header>
+<main id="comparison"></main>
+<footer>
+<p>点击截图查看原尺寸。布局测量比较共同区域的位置与尺寸，容差 0.1px；不将真实文案差异或整页高度称为逐像素一致。未采集的状态明确留空。</p>
+<details><summary>交互、无障碍与范围说明</summary>
+<p>已检查空名称、真实创建与更新、钱包取消后重试、后端回读、完整标识原生复制、键盘翻面、减少动态效果、详情展开及中英文主题。<a href="after-result.png">完成结果</a> · <a href="after-cancel.png">钱包取消</a> · <a href="after-card-back-zh-dark.png">中文卡片背面</a> · <a href="after-card-details-zh-dark.png">完整详情</a></p>
+<p>axe 报告无 violation。欢迎页渐变和卡片伪元素需人工判读对比度，卡片正文保守计算为浅色 6.64:1、深色 5.63:1；未进行读屏软件测试。Adobe 在线字体有偶发网络错误，最终使用字体均已加载，原始日志保留。</p>
+<p>v0.1 按现有设计排除公开主页、内容、搜索、数字 ID 与密钥轮换。模拟状态、钱包标识和交易取真实来源；本轮不代表主网发布通过。</p>
+</details>
+</footer>
+<script>
+const notes={edit:'标题、头像、行内标识、字段、返回按钮及操作区对齐；共同测量区域无超过 0.1px 差异。','mobile-edit':'恢复手机头像与字段间距、行内标识及操作栏；共同测量区域无超过 0.1px 差异。','short-edit':'修正短屏断点与底部空间。表单及操作栏一致；真实状态页脚比原型实验控件少 26px。','zh-dark-edit':'中文行距与深色 Token 对齐；共同测量区域无超过 0.1px 差异。',setup:'步骤条默认列表缩进已消除，头像标签与表单对齐。原型与独立测试钱包的 BAP ID 不同。','mobile-setup':'390px 创建表单、头像与操作位置对齐；长页面通过滚动查看，无横向溢出。',review:'相同资料和视口；确认卡片、BAP ID、标题与操作区域对齐。实际页面保留不会主网广播的说明。',preview:'参考由最新原型原始 ArtifactPublicIdentity → IdentityCard 编译，按 v0.1 排除 Artifact 摘要。卡片测量一致；实际来源说明增加整页 49.5px。',welcome:'穹顶、字号、地平线与连接操作对齐。v0.1 排除搜索和下方作品展示，因此整体 main/footer 位置不同。',identity:'实际身份资料来自后端；保留 v0.1 页面范围与真实模拟提示。此处提供本轮改前、改后截图。'};
+const before=new Set(['edit','mobile-edit','preview','welcome','identity']);
+function render(){const page=document.querySelector('#page').value;document.querySelector('#note').textContent=notes[page];const main=document.querySelector('main');main.classList.toggle('phone',page.includes('mobile')||page.includes('short')||page.includes('dark'));const files=[page==='identity'?null:`prototype-${page}.png`,before.has(page)?`before-${page}.png`:null,`after-${page}.png`];main.replaceChildren(...files.map((file,i)=>{const figure=document.createElement('figure'),caption=document.createElement('figcaption');caption.textContent=['最新原型','修正前','修正后 · production'][i];figure.append(caption);if(file){const a=document.createElement('a'),img=document.createElement('img');a.href=file;a.target='_blank';a.rel='noopener';img.src=file;img.alt=`${caption.textContent} · ${page}`;a.append(img);figure.append(a);}else{const p=document.createElement('p');p.className='empty';p.textContent='本轮未采集此状态。';figure.append(p);}return figure;}));}
+document.querySelector('#page').addEventListener('change',render);render();
+</script>
+</body></html>

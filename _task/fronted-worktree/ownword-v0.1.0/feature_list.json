@@ -21,7 +21,7 @@
     "agents": "independent",
     "nextImplementationGate": "用户已明确授权 Tailwind CSS 实现并持续验收；主网发布仍等待充值。",
     "realIndexSource": "waiting-for-verifiable-history-and-checkpoint",
-    "prototypeBaseline": "用户确认沿用已打 tag 的原型；不同步 4315 后续标题居中改动。",
+    "prototypeBaseline": "用户本轮明确指定 official-s2 分支最新代码 fb6ed59；旧 tag 保留，当前 UI 来源单独登记。",
     "writeOrder": "用户要求身份创建、资料更新与头像发布均先钱包上链，再调用后端 POST 同步；头像不保留后端预上传。",
     "redundantApiRemoval": "用户要求先完成钱包先行与接口精简，再处理真实端到端测试。",
     "walletPreparation": "用户明确本地复用 Yours 官方钱包核心 API，保持稳定模块接口；先更新 reference，再按助记词模拟实现。",
@@ -45,10 +45,12 @@
     "prototypeTree": "bd4488099d23199f79d65a5c987771e256258e95",
     "prototypePrdVersion": "v0.4.0",
     "backendBranch": "feature/ownword-v0.1.0",
-    "frontendCommit": "bde801aff7b33971ae2f3f446e53b503740ec891",
+    "frontendCommit": "7e9d9abfbe65fbd32bdd64c42beb102c7bc51450",
     "walletPort": 5048,
     "walletEngine": "yours-core",
-    "legacyWalletPort": 5042
+    "legacyWalletPort": 5042,
+    "uiPrototypeCommit": "fb6ed59a6f537ba82d39b8b55dff9ab90238ca4c",
+    "uiPrototypeTree": "3f0722644d5e409633698be219851e1ebbe5e624"
   },
   "features": [
     {
@@ -326,15 +328,31 @@
         "真实浏览器闲置/切换账户/取消与正常发布验收、格式/lint/类型/test/build、提交及预览恢复"
       ],
       "description": "用户指出页面持续调用 RPC，移除 1.2 秒会话轮询；保留独立官方核心的必要钱包传输。",
-      "evidence": "前端 bde801a：移除 1.2 秒定时 RPC 轮询，前台 focus/visibility 刷新并隔离迟到结果；授权前账户校验与公共契约未改。闲置观察 24→0 次，真实标签切换、取消无 POST、账户 1 批准发布与后端回读通过；29 项、格式/lint/类型及最终构建产物通过。用户“改完就行”后取消追加验收，自动审批拒绝重启/新浏览器复验，未执行。旧运行进程引用已替换资源的问题保留。证据见 evidence/rpc-idle-20261014-172316。",
-      "verificationDecision": "按用户最新要求结束追加验收，仅完成代码修改和提交；保留预览资源复验及主网门禁。"
+      "evidence": "前端 bde801a：移除 1.2 秒定时 RPC 轮询，前台 focus/visibility 刷新并隔离迟到结果；授权前账户校验与公共契约未改。闲置观察 24→0 次，真实标签切换、取消无 POST、账户 1 批准发布与后端回读通过；29 项、格式/lint/类型及最终构建产物通过。该轮按用户要求结束追加验收；当前 F06 在新的 UI 验收授权下已停止前端、构建、重启并完成生产浏览器复验，旧资源引用问题已关闭。证据见 evidence/rpc-idle-20261014-172316。",
+      "verificationDecision": "RPC 改动按该轮用户要求完成提交；生产资源复验在当前 F06 新授权范围完成，主网门禁保留。"
+    },
+    {
+      "id": "F06",
+      "name": "最新原型 UI 逐页还原",
+      "status": "needs-review",
+      "dependencies": [
+        "F01"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "doneCriteria": [
+        "登记原型 fb6ed59 最新来源，逐页核对 v0.1 适用布局、组件、文案和响应式",
+        "保留同视口原型、改前与改后截图，浏览器完成正常与边界、双语主题及键盘验收",
+        "lint、typecheck、test、build 通过，提交本轮代码和验收证据"
+      ],
+      "description": "用户明确指定 official-s2 分支最新代码作为 UI 还原基准；沿用 v0.1 业务范围，保留真实集成状态。",
+      "evidence": "前端 7e9d9ab：对齐最新原型 fb6ed59 的 v0.1 身份布局、头像、标识、字号、间距和响应式。六组同视口共同区域无超过 0.1px 的布局差异；其余页保留真实状态与范围差异。生产截图、9 份 axe（0 violation）、实际创建/取消重试/回读/复制/键盘翻面完成；lint、typecheck、29 项及 build 通过。5041 生产已安全重建并恢复；具体差异、字体网络日志、对比度人工判读与读屏未验范围见 evidence/ui-latest-20261014/verification-summary.json。视觉结果供用户复核。"
     }
   ],
   "acceptance": {
     "I01": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "前端 4fe782b 的格式、模块边界 lint、类型、最终生产构建及浏览器实际刷新通过。"
+      "scope": "前端 7e9d9ab 的最终 lint（含格式与模块边界）、类型、生产构建、29 项和生产浏览器复验通过。"
     },
     "I02": {
       "status": "passed",
@@ -375,7 +393,7 @@
     "I10": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "沿用冻结原型视觉基线，本轮已查看头像 Review、取消、同步待恢复和最终身份截图；未重跑全量 axe/读屏。"
+      "scope": "最新原型 fb6ed59 对照、最终生产截图、320/390/1440px、双语主题、复制/键盘/实际流程通过。9 份 axe 无 violation；渐变对比度需人工判读，未运行读屏软件。完整差异与证据见当前报告。"
     }
   },
   "productAcceptance": {
