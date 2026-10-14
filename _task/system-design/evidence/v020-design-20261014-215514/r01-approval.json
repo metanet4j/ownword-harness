@@ -1,0 +1,21 @@
+{
+  "decision": "R01",
+  "selected": "B",
+  "userReply": "可以",
+  "approved": true,
+  "scope": "标准 Post 上的签名 MAP 修订元数据，按已交付 v0.2 设计继续实施。",
+  "documents": [
+    {
+      "path": "_task/system-design/spec/核心认知.md",
+      "sha256": "103cde2e8e7ee906952898bab4d4d4105ebd922003f2a002224876e07217335e"
+    },
+    {
+      "path": "_task/system-design/spec/frontend/集成核心认知v0.2.0-20261014-215514.md",
+      "sha256": "e8851321fb5e3971b0bca463d451f478b82888f3a01ad32a99df41b57b5c87f2"
+    },
+    {
+      "path": "_task/system-design/spec/frontend/设计文档v0.2.0-内容真实集成-20261014-215514.md",
+      "sha256": "e97461a2a25b64adcd03927b80a3fc8a1734d402c23f71fe3af666c49204577d"
+    }
+  ]
+}

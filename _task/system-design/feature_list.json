@@ -437,7 +437,7 @@
     {
       "id": "frontend-content-v020-integration-design",
       "name": "v0.2.0 内容实现核心认知与设计",
-      "status": "needs-review",
+      "status": "done",
       "goal": "基于最新官方S2原型和v0.1真实集成基线，先完成内容核心认知与实现设计，交付用户审核后才实施。",
       "scope": "仅设计文档、只读源码取证、原型查看及任务状态；不改业务源码、不创建实现worktree、不安装依赖、不发送交易。",
       "dependencies": [
@@ -456,23 +456,27 @@
       "prdSource": "_task/system-design/spec/prd/v0.2.0/设计文档v0.2.0-20260917-210556.md",
       "output": "_task/system-design/spec/frontend/设计文档v0.2.0-内容真实集成-20261014-215514.md",
       "cognition": "_task/system-design/spec/frontend/集成核心认知v0.2.0-20261014-215514.md",
-      "implementationAuthorized": false,
-      "reviewStatus": "awaiting-user-review",
+      "implementationAuthorized": true,
+      "reviewStatus": "approved",
       "implementationStatus": "written-and-checked",
       "evidence": {
         "verification": "_task/system-design/evidence/v020-design-20261014-215514/verification.json",
         "scope": "源码、依赖、5 张原型参考图、只读 Post 构造实验、文档结构和 33 条 BDD 映射；不是 v0.2 功能验收。"
       },
-      "pendingDecisions": [
+      "pendingDecisions": [],
+      "nextStep": "按已批准方案建立 v0.2 工作区并持续实施验收。",
+      "approval": {
+        "userReply": "可以",
+        "scope": "接受已说明的 R01 方案 B，继续原任务实施。"
+      },
+      "decisions": [
         {
           "id": "R01",
-          "status": "awaiting-user-decision",
-          "owner": "用户",
-          "reference": "_task/system-design/spec/frontend/设计文档v0.2.0-内容真实集成-20261014-215514.md",
-          "description": "修订链上契约：A 继续寻找现成标准；B 标准 Post 上的签名 MAP 应用扩展，需限定修改总认知后实施。"
+          "status": "approved",
+          "selected": "B",
+          "evidence": "用户在 R01 说明后回复“可以”。"
         }
-      ],
-      "nextStep": "用户审核认知与设计并裁决 R01；审核通过且阻塞项关闭后按设计第 9 节开始实现。"
+      ]
     }
   ]
 }
