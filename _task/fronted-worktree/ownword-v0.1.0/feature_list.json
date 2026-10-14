@@ -45,7 +45,7 @@
     "prototypeTree": "bd4488099d23199f79d65a5c987771e256258e95",
     "prototypePrdVersion": "v0.4.0",
     "backendBranch": "feature/ownword-v0.1.0",
-    "frontendCommit": "4fe782b7b4b206aab66289290df038cde2f834b4",
+    "frontendCommit": "bde801aff7b33971ae2f3f446e53b503740ec891",
     "walletPort": 5048,
     "walletEngine": "yours-core",
     "legacyWalletPort": 5042
@@ -311,6 +311,23 @@
         "真实业务 HTTP/存储、图片、更新、拒绝与停机恢复通过，格式/类型/build/提交及预览恢复"
       ],
       "evidence": "前端 4fe782b：官方 @1sat/wallet-node 0.0.88 / wallet 0.0.121 与 Yours utils 0.0.43，独立进程、助记词和 SQLite 持久钱包，稳定公共契约未改。29 项实际检查（原 24 项兼容/HTTP + 5 项官方核心）、格式/lint/类型/build、浏览器三笔头像创建、钱包重启、不同钱包隔离、取消无同步和 API 停机刷新同 TxID 恢复通过。Yours 5.1.1 源码已固定，认知/设计 c92813f；证据见 evidence/yours-core-20261014-154941。真实扩展、主网与公共分流门禁保留，交付人工复核。"
+    },
+    {
+      "id": "F05",
+      "name": "移除闲置钱包 RPC 轮询",
+      "status": "needs-review",
+      "dependencies": [
+        "W01"
+      ],
+      "implementationStatus": "code-committed-user-ended-further-verification",
+      "doneCriteria": [
+        "页面闲置不产生持续钱包 RPC，页面回到前台能识别账户变化",
+        "签名/准备/广播前的真实账户校验和稳定钱包公共接口保持不变",
+        "真实浏览器闲置/切换账户/取消与正常发布验收、格式/lint/类型/test/build、提交及预览恢复"
+      ],
+      "description": "用户指出页面持续调用 RPC，移除 1.2 秒会话轮询；保留独立官方核心的必要钱包传输。",
+      "evidence": "前端 bde801a：移除 1.2 秒定时 RPC 轮询，前台 focus/visibility 刷新并隔离迟到结果；授权前账户校验与公共契约未改。闲置观察 24→0 次，真实标签切换、取消无 POST、账户 1 批准发布与后端回读通过；29 项、格式/lint/类型及最终构建产物通过。用户“改完就行”后取消追加验收，自动审批拒绝重启/新浏览器复验，未执行。旧运行进程引用已替换资源的问题保留。证据见 evidence/rpc-idle-20261014-172316。",
+      "verificationDecision": "按用户最新要求结束追加验收，仅完成代码修改和提交；保留预览资源复验及主网门禁。"
     }
   ],
   "acceptance": {

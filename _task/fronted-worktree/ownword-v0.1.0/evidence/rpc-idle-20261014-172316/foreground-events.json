@@ -1,0 +1,20 @@
+{
+  "trigger": "actual browser tab activation and wallet account switch",
+  "methods": {
+    "isAuthenticated": 4,
+    "getPublicKey": 8,
+    "getNetwork": 4
+  },
+  "identityQueries": [
+    {
+      "path": "/api/v1/identities/HR6J9dv65chtsMMjd1cYvaHMhus",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/identities/3ggZAZzzWfZi92mreHvoK7hRszCg",
+      "status": 200
+    }
+  ],
+  "silentReconnect": true,
+  "transactionCalls": 0
+}

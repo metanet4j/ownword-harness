@@ -1,0 +1,22 @@
+{
+  "frontendCommit": "bde801aff7b33971ae2f3f446e53b503740ec891",
+  "idleBefore": 24,
+  "idleAfter": 0,
+  "observationSeconds": 6,
+  "foregroundAccountSwitch": "passed with actual browser tab activation",
+  "cancelNoBroadcastOrBusinessPost": true,
+  "approvedPublishAndBackendRead": "passed with isolated account 1",
+  "tests": {
+    "tests": 29,
+    "pass": 29,
+    "fail": 0,
+    "skipped": 0
+  },
+  "formatLintTypecheck": "passed",
+  "productionBuild": "final artifacts passed; first attempt incomplete",
+  "publicWalletContractChanged": false,
+  "additionalBrowserChecks": "cancelled by user",
+  "previewRestartAndFreshSession": "not executed: automatic approval rejected after user cancellation",
+  "knownPreviewIssue": "old running frontend references replaced chunks; final restart verification pending",
+  "uncommittedUiChanges": "app/globals.css, app/identity-app.tsx, lib/domain/copy.ts excluded from this commit and acceptance"
+}

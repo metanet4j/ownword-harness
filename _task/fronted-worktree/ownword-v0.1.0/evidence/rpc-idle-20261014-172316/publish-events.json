@@ -1,0 +1,40 @@
+[
+  {
+    "path": "/api/wallet/rpc",
+    "method": "createAction",
+    "status": 200,
+    "noSend": true,
+    "sendWith": null,
+    "bapId": null,
+    "txid": null
+  },
+  {
+    "path": "/api/wallet/rpc",
+    "method": "signAction",
+    "status": 200,
+    "noSend": true,
+    "sendWith": null,
+    "bapId": null,
+    "txid": null
+  },
+  {
+    "path": "/api/wallet/rpc",
+    "method": "createAction",
+    "status": 200,
+    "noSend": null,
+    "sendWith": [
+      "fb9d6b702febcec385e2fa6e2ea0b0f916580a11d10debd072d75d1be5ae331d"
+    ],
+    "bapId": null,
+    "txid": null
+  },
+  {
+    "path": "/api/v1/transactions/sync",
+    "method": "POST",
+    "status": 201,
+    "noSend": null,
+    "sendWith": null,
+    "bapId": "HR6J9dv65chtsMMjd1cYvaHMhus",
+    "txid": "fb9d6b702febcec385e2fa6e2ea0b0f916580a11d10debd072d75d1be5ae331d"
+  }
+]
