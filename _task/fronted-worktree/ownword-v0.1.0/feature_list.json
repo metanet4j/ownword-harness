@@ -45,7 +45,7 @@
     "prototypeTree": "bd4488099d23199f79d65a5c987771e256258e95",
     "prototypePrdVersion": "v0.4.0",
     "backendBranch": "feature/ownword-v0.1.0",
-    "frontendCommit": "7e9d9abfbe65fbd32bdd64c42beb102c7bc51450",
+    "frontendCommit": "04bb12766f4f565fd39d042e3d37b20e979bee10",
     "walletPort": 5048,
     "walletEngine": "yours-core",
     "legacyWalletPort": 5042,
@@ -346,23 +346,40 @@
       ],
       "description": "用户明确指定 official-s2 分支最新代码作为 UI 还原基准；沿用 v0.1 业务范围，保留真实集成状态。",
       "evidence": "前端 7e9d9ab：对齐最新原型 fb6ed59 的 v0.1 身份布局、头像、标识、字号、间距和响应式。六组同视口共同区域无超过 0.1px 的布局差异；其余页保留真实状态与范围差异。生产截图、9 份 axe（0 violation）、实际创建/取消重试/回读/复制/键盘翻面完成；lint、typecheck、29 项及 build 通过。5041 生产已安全重建并恢复；具体差异、字体网络日志、对比度人工判读与读屏未验范围见 evidence/ui-latest-20261014/verification-summary.json。视觉结果供用户复核。"
+    },
+    {
+      "id": "V02",
+      "name": "完整实现浏览器验收与缺陷修复",
+      "status": "done",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "F06",
+        "W01"
+      ],
+      "doneCriteria": [
+        "按 28 项产品 BDD 核查当前 v0.1 实现，区分实际通过、专项基线与外部阻塞",
+        "浏览器复核连接/取消/失败、输入和头像边界、离开保护、复制、偏好、账户隔离及恢复",
+        "发现缺陷修复并完成相关回归、要求的源码检查、提交与生产恢复"
+      ],
+      "description": "用户继续完整验收；保留主网资金和真实公共索引门禁，使用独立官方核心测试钱包。",
+      "evidence": "前端 1ee11f2、04bb127 修复浏览器后退丢草稿、测试广播祖先装载与拒绝状态误报；31项真实协议/官方钱包/HTTP测试无失败和跳过，lint/typecheck/build通过。当前28项覆盖来源、浏览器边界与已有专项基线见 evidence/full-acceptance-20261014-184000/bdd-coverage.json。最终生产320px对话框axe为0违规；3类缺陷均已复验。此任务仅关闭无资金本地验收，不关闭真实扩展、B06/B07/B08、I08/I09或F06视觉人工复核。"
     }
   ],
   "acceptance": {
     "I01": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "前端 7e9d9ab 的最终 lint（含格式与模块边界）、类型、生产构建、29 项和生产浏览器复验通过。"
+      "scope": "前端04bb127：最终lint、typecheck、31项测试（0失败/0跳过）、build和主生产新会话通过。"
     },
     "I02": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "29 项检查含原交易真实 HTTP/MongoDB 幂等与普通 GET profile；官方核心浏览器实际停机刷新恢复同 rawTx/TxID，无再次准备或签名。"
+      "scope": "31项真实HTTP/MongoDB检查包含幂等、普通GET profile和PNG/WebP缓存回源；真实API停机浏览器沿用官方核心专项，同TxID恢复本轮集成重验通过。"
     },
     "I03": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "官方核心三笔 JPEG 头像创建及逐字节回读通过；PNG/WebP 与缓存重建仍由本轮兼容/HTTP 用例验证。主网费用和最大交易能力未验。"
+      "scope": "本轮PNG头像实际发布恢复及逐字节回读通过；31项包含PNG/WebP缓存重建和官方核心三步创建更新；主网费用及最大交易能力未验。"
     },
     "I04": {
       "status": "passed",
@@ -382,7 +399,7 @@
     "I07": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "官方核心首次 ID→图片→ALIAS、更新和真实后端查询通过；浏览器取消无 POST、钱包重启、真实 API 停机同 TxID 恢复通过。scope=broadcast-mock 不代表主网事实。"
+      "scope": "官方核心首次ID→图片→ALIAS及更新通过；本轮修复精简和共同祖先验证，实际部分失败恢复复用ID/图片，仅新建资料交易；失败/取消重试及后端valid回读通过。真实停机浏览器沿用已有专项。scope=broadcast-mock不代表主网事实。"
     },
     "I08": {
       "status": "waiting-funds"
@@ -482,7 +499,8 @@
     },
     "B20": {
       "status": "passed",
-      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本轮站内离开、浏览器后退Keep/Discard、前进和Review返回实测通过；历史保护限支持Navigation API的当前Chromium，其他浏览器未验。"
     },
     "B21": {
       "status": "passed",

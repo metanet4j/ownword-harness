@@ -1,0 +1,64 @@
+{
+  "frontendCommit": "04bb12766f4f565fd39d042e3d37b20e979bee10",
+  "navigationCommit": "1ee11f2",
+  "prototypeCommit": "fb6ed59a6f537ba82d39b8b55dff9ab90238ca4c",
+  "scope": "v0.1 身份闭环；官方核心真实签名、真实后端与存储，资金和广播隔离",
+  "result": "无资金本地范围通过；整项主网端到端未完成",
+  "issuesFixed": 3,
+  "checks": {
+    "lint": 0,
+    "typecheck": 0,
+    "test": {
+      "exitCode": 0,
+      "tests": 31,
+      "pass": 31,
+      "fail": 0,
+      "skipped": 0
+    },
+    "build": 0,
+    "axe": {
+      "violations": 0,
+      "incomplete": 1,
+      "scope": "最终320px离开确认对话框；对比度因遮罩重叠需人工判读"
+    }
+  },
+  "bapId": "3c2uFAjANKztoVDngHUkfovUJ4CY",
+  "idTxid": "f9ea05f7f6ca1dbbccb17e1d23c7f51ee8494c7e7c49d2cda0177f75288cbb08",
+  "avatarTxid": "ae4489ab9432394a6d9ce4ebe6c7e5779f82cf80a59809a2cf99b7cc15517e1c",
+  "finalProfileTxid": "27d95edb5c407377161dd77f3a3d9cfc924298d1c2206f77d9ad9d84b61c7afd",
+  "reproduce": {
+    "checks": [
+      "npm run lint",
+      "npm run typecheck",
+      "OWNWORD_API_TEST_URL=http://127.0.0.1:5043 OWNWORD_API_ASSET_TEST_DIR=/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/_runtime/assets npm test",
+      "停止使用同一 .next 的前端后 npm run build，再恢复前端"
+    ],
+    "history": [
+      "进入身份编辑并修改姓名",
+      "点击浏览器后退，出现未保存确认",
+      "Keep editing保留草稿；Discard changes返回，前进重新编辑不恢复已放弃内容"
+    ],
+    "broadcast": [
+      "连接独立官方核心钱包，在Setup选择PNG并填写名称类型简介",
+      "依次发布ID、图片和资料；曾失败的已有ID/头像操作点击Try again，仅同步资料",
+      "更新名称，分别注入钱包fail与cancel，再批准重试；刷新回读"
+    ],
+    "clipboard": [
+      "5052运行独立前端",
+      "临时静态服务打开clipboard-denied.html",
+      "iframe内点击Copy BAP ID，真实Permissions Policy拒绝后出现手动复制提示"
+    ]
+  },
+  "limitations": [
+    "主网I08/I09 waiting-funds；B06/B07/B08公共历史及checkpoint未满足",
+    "真实Chrome Yours扩展桥接与弹窗未验",
+    "Navigation API历史离开保护在当前Chromium实测；无此API的浏览器仅保留站内导航和beforeunload保护，未宣称Firefox/Safari通过",
+    "本轮工具标签切换没有产生原生焦点事件；账户刷新隔离实测，焦点切换沿用此前证据",
+    "axe对话框重叠对比度人工看图通过，未做读屏测试",
+    "ffmpeg不可用，无视频证据；保留连续截图",
+    "沙箱构建的SWC缓存权限视图失败；正常用户权限最终构建通过，见build-sandbox.log与build.log",
+    "本轮未改后端；Java183项沿用已有基线"
+  ],
+  "privateArtifacts": "原始HAR、助记词、SQLite与配置保留忽略的_runtime；提交事件摘要不含凭据",
+  "logFormatting": "提交日志仅规范化终端CR换行、行尾空格与末尾空行，保留所有结果内容。"
+}

@@ -1,0 +1,32 @@
+
+> own-word-web@0.1.0 build
+> next build --webpack
+
+▲ Next.js 16.3.8 (webpack)
+⨯ Failed to load next.config.ts, see more info here https://nextjs.org/docs/messages/next-config-error
+
+> Build error occurred
+Error: Failed to load native binding
+    at ignore-listed frames {
+  [cause]: [
+    Error: Cannot find module './swc.linux-x64-gnu.node'
+    Require stack:
+    - /home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@swc/core/binding.js
+    - /home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@swc/core/index.js
+    - /home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/unplugin-parcel-macros/PackageManager.js
+    - /home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/unplugin-parcel-macros/unplugin-macros.js
+    - /home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/next.config.compiled.js
+    - /home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/next/dist/build/next-config-ts/transpile-config.js
+    - /home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/next/dist/server/config.js
+    - /home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/next/dist/cli/next-test.js
+    - /home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/next/dist/bin/next
+        at ignore-listed frames {
+      code: 'MODULE_NOT_FOUND',
+      requireStack: [Array]
+    },
+    Error: SWC native addon: user cache failed: validate cache root /home/haodev/.cache: cache root has a parent writable by another user without trusted sticky protection; fallback cache failed: validate cache root /tmp: cache root has a parent writable by another user without trusted sticky protection; set SWC_NATIVE_BINDING_CACHE to a safe absolute directory owned by your user whose ancestors do not grant other users replacement rights. Reinstall the native package if its payload is damaged; check SWC_NATIVE_BINDING_CACHE and directory permissions for materialization failures.
+        at ignore-listed frames {
+      code: 'ERR_SWC_NATIVE_CACHE'
+    }
+  ]
+}

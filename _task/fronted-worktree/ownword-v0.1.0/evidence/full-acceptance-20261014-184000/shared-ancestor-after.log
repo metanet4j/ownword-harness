@@ -1,0 +1,12 @@
+(node:32) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 测试广播复用共同祖先，验证同一未确认交易的多个输入 (2370.435954ms)
+✔ 官方核心广播精简 BEEF 时从测试链补齐未确认祖先 (2097.747804ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8165.309575

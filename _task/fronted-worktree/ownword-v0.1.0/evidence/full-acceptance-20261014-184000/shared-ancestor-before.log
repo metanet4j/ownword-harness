@@ -1,0 +1,30 @@
+(node:9) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ 测试广播复用共同祖先，验证同一未确认交易的多个输入 (1923.557908ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6215.63655
+
+✖ failing tests:
+
+test at tests/yours-core.test.mts:1:856
+✖ 测试广播复用共同祖先，验证同一未确认交易的多个输入 (1923.557908ms)
+  AssertionError [ERR_ASSERTION]: Verification failed because the input at index 0 of transaction 976f06ed3a92e11597ba82fb020aa49606e887aed9925f3ee8f2ca23d1aeedad is missing an associated source transaction. This source transaction is required for transaction verification because there is no merkle proof for the transaction spending a UTXO it contains.
+
+  'error' !== 'success'
+
+      at TestContext.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/yours-core.test.mts:40:12)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'error',
+    expected: 'success',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

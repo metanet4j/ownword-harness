@@ -1,0 +1,69 @@
+[
+  {
+    "bapId": "3c2uFAjANKztoVDngHUkfovUJ4CY",
+    "flowId": "bd2a43f5-5c9b-4e68-b432-dd6f4024257b",
+    "kind": "profile-update",
+    "operationId": "b604fc38-2a84-41d3-88e0-f88c7faeafd5",
+    "profile": {
+      "bio": "真实签名、真实存储。头像发布、取消重试与账户隔离验收。",
+      "imageUrl": "b://ae4489ab9432394a6d9ce4ebe6c7e5779f82cf80a59809a2cf99b7cc15517e1c",
+      "name": "OwnWord 完整验收",
+      "type": "Organization"
+    },
+    "rawTxBytes": 839,
+    "status": "broadcast-unknown",
+    "submissionAttempt": {
+      "attemptId": "c9f20b4c-e46b-4b00-bf9a-be92222a1a32",
+      "validationId": "1d8e5a68732bf0acee42f17d8c5def3f4a6e6c39690724d5cee9d45374792b81"
+    },
+    "txid": "4678525ab94369a5b4e5d45edf6aed7743dcc3cd012af2580de65e83ebda92dd"
+  },
+  {
+    "bapId": "3c2uFAjANKztoVDngHUkfovUJ4CY",
+    "broadcastReceipt": {
+      "mode": "simulated",
+      "status": "accepted",
+      "txid": "ae4489ab9432394a6d9ce4ebe6c7e5779f82cf80a59809a2cf99b7cc15517e1c"
+    },
+    "flowId": "bd2a43f5-5c9b-4e68-b432-dd6f4024257b",
+    "kind": "avatar",
+    "operationId": "c1b32ab6-ef31-4fdd-82ef-42c9a1038160",
+    "profile": {
+      "bio": "真实签名、真实存储。头像发布、取消重试与账户隔离验收。",
+      "imageUrl": "b://ae4489ab9432394a6d9ce4ebe6c7e5779f82cf80a59809a2cf99b7cc15517e1c",
+      "name": "OwnWord 完整验收",
+      "type": "Organization"
+    },
+    "rawTxBytes": 49364,
+    "status": "simulated",
+    "submissionAttempt": {
+      "attemptId": "582dee49-3e40-4cae-9866-74d1c088896d",
+      "validationId": "1a78aed337aa3ac9a3c370f6b4b953de4f2b281d3b70d3bc4a58f9a340f34dc4"
+    },
+    "txid": "ae4489ab9432394a6d9ce4ebe6c7e5779f82cf80a59809a2cf99b7cc15517e1c"
+  },
+  {
+    "bapId": "3c2uFAjANKztoVDngHUkfovUJ4CY",
+    "broadcastReceipt": {
+      "mode": "simulated",
+      "status": "accepted",
+      "txid": "f9ea05f7f6ca1dbbccb17e1d23c7f51ee8494c7e7c49d2cda0177f75288cbb08"
+    },
+    "flowId": "bd2a43f5-5c9b-4e68-b432-dd6f4024257b",
+    "kind": "identity-init",
+    "operationId": "f69d8116-ee53-45d0-953f-1f472cfee981",
+    "profile": {
+      "bio": "真实签名、真实存储。头像发布、取消重试与账户隔离验收。",
+      "imageUrl": null,
+      "name": "OwnWord 完整验收",
+      "type": "Organization"
+    },
+    "rawTxBytes": 696,
+    "status": "simulated",
+    "submissionAttempt": {
+      "attemptId": "72c4f572-07a6-4ea5-8a7f-204e4d6ced22",
+      "validationId": "0fe739d032494b23f361c1f81c692503c0c82a5b7298a73816871278ba09c062"
+    },
+    "txid": "f9ea05f7f6ca1dbbccb17e1d23c7f51ee8494c7e7c49d2cda0177f75288cbb08"
+  }
+]
