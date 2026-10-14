@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeItem": null,
+  "activeItem": "W01",
   "allowedStatuses": [
     "not-started",
     "in-progress",
@@ -24,8 +24,9 @@
     "prototypeBaseline": "用户确认沿用已打 tag 的原型；不同步 4315 后续标题居中改动。",
     "writeOrder": "用户要求身份创建、资料更新与头像发布均先钱包上链，再调用后端 POST 同步；头像不保留后端预上传。",
     "redundantApiRemoval": "用户要求先完成钱包先行与接口精简，再处理真实端到端测试。",
-    "walletPreparation": "用户确认第一阶段沿用本地钱包适配器，真实构造签名并 Mock 广播；业务查询统一真实后端。",
-    "walletModule": "用户明确钱包为独立模块，设计稳定隔离接口；替换钱包保持业务调用接口不变。"
+    "walletPreparation": "用户明确本地复用 Yours 官方钱包核心 API，保持稳定模块接口；先更新 reference，再按助记词模拟实现。",
+    "walletModule": "用户明确钱包为独立模块，设计稳定隔离接口；替换钱包保持业务调用接口不变。",
+    "mnemonicWallet": "同一助记词与固定 Yours 派生配置对应同一钱包，不同测试钱包使用不同助记词；私有运行配置保存，后端不接收助记词。"
   },
   "documents": {
     "product": "_task/system-design/spec/核心认知.md",
@@ -276,6 +277,35 @@
         "正常、更新、图片、拒绝、同步故障和恢复实际测试、格式/类型/build、浏览器及提交完成"
       ],
       "evidence": "前端 bf25772、后端 11f925f：稳定钱包接口与私有 CWI 实现，签名原交易先保存、独立 Mock 广播接受后同步；普通 GET 从后端验签交易派生 profile，移除 simulationPreview。24 项检查无失败/skip；格式/lint/类型/build、Java clean package、浏览器资料更新、头像字节回读、取消及实际 API 停机刷新同 TxID 恢复通过。实际 Yours、主网和公共历史门禁保留，详见当前报告。"
+    },
+    {
+      "id": "R01",
+      "name": "更新 Yours 官方参考源码",
+      "status": "done",
+      "dependencies": [],
+      "implementationStatus": "official-yours-source-updated-and-verified",
+      "doneCriteria": [
+        "先保留既有快照，再从官方上游更新到固定提交",
+        "核对来源、commit、tree、实际版本和助记词/API 入口，更新 reference 清单并提交"
+      ],
+      "evidence": "Yours 5.1.1，官方 main 4d9299b06bdba8925ee573451b2e426574234989，tree 4b08ebdc8eb88f1c1a1952de4b13a5cca461bd71；342 文件、remote/干净检出/fsck 通过。旧无 Git 快照完整保留，清单与 README 已更新。SDK 对照源码独立获取，不改旧固定 SDK。"
+    },
+    {
+      "id": "W01",
+      "name": "Yours 官方核心与助记词钱包模拟",
+      "status": "in-progress",
+      "dependencies": [
+        "R01",
+        "D02",
+        "F04"
+      ],
+      "implementationStatus": "revising-mnemonic-wallet-cognition-and-design",
+      "doneCriteria": [
+        "认知与设计明确官方核心来源、助记词唯一钱包及隔离存储，公开接口保持不变",
+        "官方钱包 API 真实构造签名，测试资金/广播隔离，不再以自建 Transaction 模拟官方钱包",
+        "同助记词重开身份及原交易可恢复、不同钱包账户与记录隔离",
+        "真实业务 HTTP/存储、图片、更新、拒绝与停机恢复通过，格式/类型/build/提交及预览恢复"
+      ]
     }
   ],
   "acceptance": {

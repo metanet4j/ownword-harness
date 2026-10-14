@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | `1sat-ordinals-master/1sat-ordinals-master/` | 1Sat 协议与术语，既有快照，本轮未重核 | [BitcoinSchema/1sat-ordinals](https://github.com/BitcoinSchema/1sat-ordinals) |
 | `bap-master/bap-master/` | BAP 身份协议与实现，实际包版本与清单登记不一致 | [BitcoinSchema/bap](https://github.com/BitcoinSchema/bap) |
-| `yours-wallet-main/yours-wallet-main/` | Yours Wallet 源码、依赖与 Provider 文档，既有快照，本轮未重核 | [yours-org/yours-wallet](https://github.com/yours-org/yours-wallet) |
+| `yours-wallet-main/yours-wallet-main/` | Yours Wallet 5.1.1 官方源码，当前上游提交已同步并核对 | [yours-org/yours-wallet](https://github.com/yours-org/yours-wallet) |
 | `1sat-sdk/` | 钱包 Actions、客户端、身份与签名实现，固定版本已恢复并核对 | [b-open-io/1sat-sdk](https://github.com/b-open-io/1sat-sdk) |
 | `1sat-stack/` | 服务端路由、索引与身份解析实现，固定版本已恢复并核对 | [b-open-io/1sat-stack](https://github.com/b-open-io/1sat-stack) |
 | `react-spectrum-main/` | 既有 Adobe 源码快照，本次未核对 | 未登记 |
@@ -35,7 +35,7 @@ BAP 当前是无 Git 元数据的既有快照，实际包版本与目标版本�
 | 编号与内容解析 | [术语](1sat-ordinals-master/1sat-ordinals-master/readme/terms.md)定义 Inscription Number；[OrdFS 客户端](1sat-sdk/packages/client/src/services/OrdfsClient.ts)与[服务端](1sat-stack/pkg/ordfs/routes.go)中的 `sequence` 是资产转移链内序号，不能当作全局 Inscription Number。metanet4j 的编号补齐责任见核心认知。 |
 | 旧公共 API | [public-apis.md](1sat-ordinals-master/1sat-ordinals-master/public-apis.md)已经标注 Historical。旧 GorillaPool 端点只作历史资料，新接入以锁定版本的 SDK、服务端及实际部署为准。 |
 
-清单登记的 Yours 依赖版本与恢复的 SDK 固定版本不同，具体数值见来源锁定清单；Yours 当前快照本轮未重核。后续集成必须选定同一依赖组合验证。资料补齐验证的是源码来源与可用性，本轮没有安装运行依赖、编译钱包、启动服务或调用真实交易。
+Yours 已更新到官方 main 的 4d9299b（5.1.1），旧无 Git 快照完整保存在清单登记的备份目录。已核对官方 remote、commit、tree、实际依赖、干净检出和 Git 完整性；助记词入口为 src/utils/keys.ts，官方钱包工厂入口为 src/initWallet.ts。既有 1sat-sdk 固定版本保留，Yours 所需当前 SDK 对照在独立目录同步。源码同步不等于运行验收；依赖和本地助记词钱包的实际验证由 v0.1.0 前端任务报告维护。
 
 ## 注意
 
