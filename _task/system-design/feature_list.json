@@ -412,7 +412,7 @@
       "name": "v0.1.0 核心认知与真实集成设计",
       "status": "needs-review",
       "goal": "基于官方 S2 原型，先建立核心认知，再设计前后端及钱包契约，实施真实服务集成。",
-      "scope": "按用户明确要求修订钱包独立模块、稳定公共接口、独立 Mock 广播和真实后端业务查询，详见统一前端清单 D02/F04。",
+      "scope": "按用户明确要求修订稳定公共钱包接口与真实后端查询，补充 Yours 官方核心、助记词钱包及持久存储；范围与验收由统一前端清单 D02/W01 维护。",
       "dependencies": [
         "用户指定原型和前端任务目录",
         "用户授权现有后端成果先合并 dev 再建立 v0.1.0 worktree"
@@ -431,7 +431,7 @@
       "output": "_task/system-design/spec/frontend/设计文档v0.1.0-真实集成-20261013-183000.md",
       "implementationStatus": "written-and-checked",
       "reviewStatus": "awaiting-user-review",
-      "evidence": "认知先于设计，文档 9f85424 定义稳定 WalletProvider、OwnWord DTO、SDK 隔离、准备/广播拆分与后端真实普通查询。前端 bf25772、后端 11f925f 已实施，24 项检查与真实浏览器验收通过；范围、未验项和后续门禁见统一前端任务报告。设计保留人工复核。",
+      "evidence": "认知先于设计，文档 9f85424、c92813f 定义稳定 WalletProvider、官方核心及助记词隔离。Yours 5.1.1 参考源码固定到 4d9299b；前端 4fe782b、后端 11f925f 已实施，29 项当前检查及真实浏览器官方核心流程通过。详细范围、证据与未验门禁见统一前端报告；设计保留人工复核。",
       "nextStep": "用户已明确授权 Tailwind CSS 实现并持续验收；当前阶段和证据见统一 task harness。"
     }
   ]

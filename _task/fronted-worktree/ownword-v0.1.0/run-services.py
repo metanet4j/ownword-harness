@@ -19,7 +19,8 @@ java = Path('/home/haodev/.sdkman/candidates/java/25.0.4.1-tem/bin/java')
 config = json.loads((runtime / 'services.json').read_text())
 services = {
     'api': ([str(java), '-jar', str(jar), '--server.address=127.0.0.1', '--server.port=5043'], jar.name, task, 'http://127.0.0.1:5043/health'),
-    'wallet': (['node', '--import', 'tsx', 'scripts/test-wallet-server.ts'], 'scripts/test-wallet-server.ts', web, config['OWNWORD_TEST_WALLET_URL'] + '/health'),
+    'wallet': (['node', '--import', 'tsx', 'scripts/yours-wallet-server.ts'], 'scripts/yours-wallet-server.ts', web, config['OWNWORD_TEST_WALLET_URL'] + '/health'),
+    'legacy-wallet': (['node', '--import', 'tsx', 'scripts/test-wallet-server.ts'], 'scripts/test-wallet-server.ts', web, config.get('OWNWORD_LEGACY_TEST_WALLET_URL', 'http://127.0.0.1:5042') + '/health'),
     'frontend': (['npm', 'start', '--', '--hostname', '127.0.0.1', '--port', '5041'], 'npm start', web, 'http://127.0.0.1:5041/'),
 }
 
@@ -39,7 +40,7 @@ def process(name):
     return pid
 
 def healthy(name):
-    headers = {'Authorization': 'Bearer ' + config['OWNWORD_TEST_WALLET_TOKEN']} if name == 'wallet' else {}
+    headers = {'Authorization': 'Bearer ' + config['OWNWORD_TEST_WALLET_TOKEN']} if name in ['wallet', 'legacy-wallet'] else {}
     request = urllib.request.Request(services[name][3], headers=headers)
     try:
         with urllib.request.build_opener(urllib.request.ProxyHandler({})).open(request, timeout=2) as response:
@@ -55,7 +56,10 @@ def start(name):
     if name == 'api':
         shutil.copy2(jar_source, jar)
     with (runtime / (name + '.log')).open('a') as log:
-        child = subprocess.Popen(command, cwd=cwd, env={**os.environ, **config}, stdout=log, stderr=log, start_new_session=True)
+        env = {**os.environ, **config}
+        if name == 'legacy-wallet':
+            env['OWNWORD_TEST_WALLET_PORT'] = '5042'
+        child = subprocess.Popen(command, cwd=cwd, env=env, stdout=log, stderr=log, start_new_session=True)
     (runtime / (name + '.pid')).write_text(str(child.pid))
     for _ in range(40):
         if child.poll() is not None:
@@ -101,7 +105,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('action', choices=['start', 'stop', 'restart', 'status'])
 parser.add_argument('service', nargs='?', default='all', choices=['all', *services])
 args = parser.parse_args()
-names = list(services) if args.service == 'all' else [args.service]
+names = ['api', 'wallet', 'frontend'] if args.service == 'all' else [args.service]
 for name in names:
     if args.action in ['stop', 'restart']:
         stop(name)

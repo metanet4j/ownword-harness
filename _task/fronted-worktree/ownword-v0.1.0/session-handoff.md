@@ -1,13 +1,13 @@
 # 当前交接
 
-F04 已实施并完成允许范围验收。前端 bf25772；后端 component 11f925f；认知/设计 9f85424。24 项检查、模块边界 lint、类型、最终 build、Java clean package 和真实浏览器正常/取消/停机恢复通过；详情见[当前报告](验收报告v0.1.0-20261014-010853.md)。设计和视觉保留人工复核，无需再次申请已授权范围的开工许可。
+W01 官方核心与助记词钱包实现、检查和提交完成，前端 4fe782b，后端 11f925f（本轮未改）；参考来源 20540d9，认知/设计 c92813f。29 项当前检查、格式/lint/类型/build 及真实浏览器验收通过。W01、D02 保留人工复核，activeItem=null。范围和证据见[当前报告](验收报告v0.1.0-20261014-010853.md)，无需再次申请已授权范围的开工许可。
 
-唯一下一步：核实实际 Yours 扩展的准备签名但不广播能力；随后补充分公共历史与 checkpoint，充值后运行 I08/I09。live 默认不放行未验准备能力，不能用本地 Mock 通过冒充主网验收。
+唯一下一步：核实 Chrome 扩展的准备签名但不广播能力；随后补充分公共历史与 checkpoint，充值后运行 I08/I09。本地官方核心复用不能算插件桥接/权限或主网验收，live 仍保留准备能力门禁。
 
-5041 production、5042 原测试钱包、5043 Java API ready。配置 _runtime/services.json（0600、忽略）；run-services.py 管理本任务进程。不要重启钱包、清空共享数据或在运行中覆盖前端构建。原型固定 tag，未移动。浏览器上传/截图/HAR 均使用绝对路径，最终会话 ownword-wallet-final 的稳定身份页已检查。
+5041 production、5048 官方核心钱包、5043 Java API ready；旧 5042 钱包原进程保留。配置 _runtime/services.json（0600、忽略），新钱包私有记录位于 OWNWORD_YOURS_WALLET_DIR；助记词、存储 ID 和根公钥目录复用，可 restart wallet，不能 restart legacy-wallet。不得清空共享数据或在运行中覆盖前端构建。浏览器上传/截图/HAR 使用绝对路径；最终会话 ownword-yours-core。
 
-公共钱包入口 lib/wallet/index.ts，稳定接口 contracts.ts；具体 CWI/SDK 在 adapters。业务编码和同步在 lib/domain。已签名原交易保存后才广播；接受回执后才 POST 原交易，普通资料/头像/已广播业务恢复查后端。未广播准备恢复仅封装在钱包内部。
+公共入口 lib/wallet/index.ts、稳定 contracts.ts；官方核心在私有 yours-core.ts，由 scripts/yours-wallet-server.ts 独立进程运行。@1sat/wallet-node 0.0.88 / wallet 0.0.121、utils 0.0.43、工具箱 2.14.8 固定。真实 SQLite 保存准备/签名交易；MockServices 仅隔离钱包资金/广播。业务编码和查询/同步在 lib/domain；原交易保存、广播接受后才同步后端。
 
-账户 0 恢复 Maya Chen、Person、原 76 字符简介和原 JPEG 字节；最新 Profile TxID 02b0060f4f506e34047ab2ad2484742614802e70f855dec0264278ddbb15798f，头像 b://8871d052209d324260854f22f9aa10f48bee30179358c8529560d8e42526c9ef。操作标识和回执见 evidence/wallet-module-20261014/browser-final-journal.json。账户 1 的旧未知操作 162406fd-8a4b-490a-8910-5c92e79af15d 保留，禁止盲目重签。
+官方钱包账户 0：BAP ID 3ggZAZzzWfZi92mreHvoK7hRszCg；Maya Chen、Person、原简介及 JPEG 12,108 字节。最终 Profile TxID 391fe964b9cc8263fd6998b033ba049337968fa467d01d0b0e2e25cf461f7a81，头像 b://31da0b77bdc616e65af3ed8eb6d2f8f0af16c2fc1454e850eaa8c52bea66eb0b。原生 signAction、实际同步 body、解析报告在 evidence/yours-core-20261014-154941，三者格式用途不同。账户 1 独立空钱包；旧钱包账户 1 的未知操作 162406fd-8a4b-490a-8910-5c92e79af15d 留在 legacy 服务，不得迁入新种子或盲目重签。
 
-复跑 ./init.sh；源码修改按 README 运行 format/lint/typecheck/test/build。完整测试设置真实 API URL 和隔离缓存路径；node 使用 --test-isolation=none 执行实际 24 项，skip 不算通过。Java 依赖 183 项、API JUnit 0；真实接口依据 HTTP。当前 wallet RPC 请求限 2 MiB，未验证主网费用或 5 MiB 图片大交易。
+复跑 ./init.sh；源码检查按 README。测试需要真实 API URL 和本任务资产缓存目录，--test-isolation=none 必须核对最终实际 29 项、0 skip；不能只看退出码，integration-first.txt 注册不全。后端 Java 183 项为旧基线，API JUnit 0，本轮 API 来自真实 HTTP。钱包 RPC 上限 12 MiB，尚未验 5 MiB 图片/主网费率。新模块公共契约与 bf25772 无差异。

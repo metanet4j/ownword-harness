@@ -1,0 +1,115 @@
+[
+  {
+    "time": "2026-10-14T08:38:54.71040512Z",
+    "path": "/api/wallet/rpc",
+    "method": "createAction",
+    "noSend": true,
+    "sendWith": null,
+    "status": 200
+  },
+  {
+    "time": "2026-10-14T08:38:54.821517056Z",
+    "path": "/api/wallet/rpc",
+    "method": "signAction",
+    "noSend": true,
+    "sendWith": null,
+    "status": 200
+  },
+  {
+    "time": "2026-10-14T08:38:54.955968Z",
+    "path": "/api/wallet/rpc",
+    "method": "createAction",
+    "noSend": null,
+    "sendWith": [
+      "51251875046fd40e56f722508b6d0bec2cefa116ef8d82edc899626b8abd4cbf"
+    ],
+    "status": 200
+  },
+  {
+    "time": "2026-10-14T08:38:55.097665024Z",
+    "path": "/api/v1/transactions/sync",
+    "method": "POST",
+    "status": 201,
+    "txid": "51251875046fd40e56f722508b6d0bec2cefa116ef8d82edc899626b8abd4cbf"
+  },
+  {
+    "time": "2026-10-14T08:38:55.181526016Z",
+    "path": "/api/v1/identities/3ggZAZzzWfZi92mreHvoK7hRszCg",
+    "method": "GET",
+    "status": 200,
+    "txid": null
+  },
+  {
+    "time": "2026-10-14T08:38:55.57486208Z",
+    "path": "/api/wallet/rpc",
+    "method": "createAction",
+    "noSend": true,
+    "sendWith": null,
+    "status": 200
+  },
+  {
+    "time": "2026-10-14T08:38:55.694557952Z",
+    "path": "/api/wallet/rpc",
+    "method": "signAction",
+    "noSend": true,
+    "sendWith": null,
+    "status": 200
+  },
+  {
+    "time": "2026-10-14T08:38:55.928726784Z",
+    "path": "/api/wallet/rpc",
+    "method": "createAction",
+    "noSend": null,
+    "sendWith": [
+      "31da0b77bdc616e65af3ed8eb6d2f8f0af16c2fc1454e850eaa8c52bea66eb0b"
+    ],
+    "status": 200
+  },
+  {
+    "time": "2026-10-14T08:38:56.035774976Z",
+    "path": "/api/v1/transactions/sync",
+    "method": "POST",
+    "status": 201,
+    "txid": "31da0b77bdc616e65af3ed8eb6d2f8f0af16c2fc1454e850eaa8c52bea66eb0b"
+  },
+  {
+    "time": "2026-10-14T08:38:56.712250112Z",
+    "path": "/api/wallet/rpc",
+    "method": "createAction",
+    "noSend": true,
+    "sendWith": null,
+    "status": 200
+  },
+  {
+    "time": "2026-10-14T08:38:56.883343104Z",
+    "path": "/api/wallet/rpc",
+    "method": "signAction",
+    "noSend": true,
+    "sendWith": null,
+    "status": 200
+  },
+  {
+    "time": "2026-10-14T08:38:57.118226176Z",
+    "path": "/api/wallet/rpc",
+    "method": "createAction",
+    "noSend": null,
+    "sendWith": [
+      "4ba660d79bbd8ae5a7ea1a5a5e528325f5a5a68588d310f9bda6241f30e512f4"
+    ],
+    "status": 200
+  },
+  {
+    "time": "2026-10-14T08:38:57.213149184Z",
+    "path": "/api/v1/transactions/sync",
+    "method": "POST",
+    "status": 201,
+    "txid": "4ba660d79bbd8ae5a7ea1a5a5e528325f5a5a68588d310f9bda6241f30e512f4"
+  },
+  {
+    "time": "2026-10-14T08:38:57.396244992Z",
+    "path": "/api/v1/identities/3ggZAZzzWfZi92mreHvoK7hRszCg",
+    "method": "GET",
+    "status": 200,
+    "txid": null
+  }
+]

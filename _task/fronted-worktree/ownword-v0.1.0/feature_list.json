@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeItem": "W01",
+  "activeItem": null,
   "allowedStatuses": [
     "not-started",
     "in-progress",
@@ -44,7 +44,11 @@
     "prototypeCommit": "a86850a225b00962277cf1160ed70f8129924fba",
     "prototypeTree": "bd4488099d23199f79d65a5c987771e256258e95",
     "prototypePrdVersion": "v0.4.0",
-    "backendBranch": "feature/ownword-v0.1.0"
+    "backendBranch": "feature/ownword-v0.1.0",
+    "frontendCommit": "4fe782b7b4b206aab66289290df038cde2f834b4",
+    "walletPort": 5048,
+    "walletEngine": "yours-core",
+    "legacyWalletPort": 5042
   },
   "features": [
     {
@@ -226,7 +230,7 @@
       ],
       "implementationStatus": "independent-checks-passed",
       "description": "无资金真实集成验收；事实与验收以当前设计文档对应阶段为准。",
-      "evidence": "本地适配器及 Mock 广播范围内，24 项当前检查、最终生产构建及真实浏览器更新/图片/取消/停机恢复通过。完整产品仍受 F00 公共历史和主网资金门禁限制；证据见当前报告。"
+      "evidence": "官方核心钱包范围内 29 项当前检查通过，5 项直接使用官方核心及真实 SQLite，其余 24 项为协议/模块兼容和真实 HTTP 检查；生产构建及真实浏览器创建、头像、取消、钱包重启隔离和实际停机恢复通过。Java 后端本轮未修改，183 项沿用已提交基线，非本轮重跑。完整产品仍受 F00 公共事实及 I08/I09 门禁限制。"
     },
     {
       "id": "V01",
@@ -258,7 +262,7 @@
         "明确 SDK 隐式钱包业务查询的迁移方式、恢复和多钱包边界，提交供复核"
       ],
       "description": "根据用户选择先沿用本地钱包适配器，广播 Mock，后端解析、存储和业务读取真实。",
-      "evidence": "根文档 9f85424：基于总认知先修订独立认知，再设计稳定 WalletProvider、OwnWord DTO、适配器隔离、独立准备/签名/广播与后端普通查询。十个维度、引用和围栏已核查；代码及真实服务证据见 F04，设计保留人工复核。"
+      "evidence": "根文档 9f85424、c92813f：基于总认知定义稳定 WalletProvider 和真实后端业务查询，补充 Yours 官方核心、助记词钱包及隔离持久存储。检查与实现证据见 W01 和当前报告；设计保留人工复核。"
     },
     {
       "id": "F04",
@@ -288,41 +292,42 @@
         "先保留既有快照，再从官方上游更新到固定提交",
         "核对来源、commit、tree、实际版本和助记词/API 入口，更新 reference 清单并提交"
       ],
-      "evidence": "Yours 5.1.1，官方 main 4d9299b06bdba8925ee573451b2e426574234989，tree 4b08ebdc8eb88f1c1a1952de4b13a5cca461bd71；342 文件、remote/干净检出/fsck 通过。旧无 Git 快照完整保留，清单与 README 已更新。SDK 对照源码独立获取，不改旧固定 SDK。"
+      "evidence": "Yours 5.1.1，官方 main 4d9299b06bdba8925ee573451b2e426574234989，tree 4b08ebdc8eb88f1c1a1952de4b13a5cca461bd71；342 文件、remote/干净检出/fsck 通过。旧无 Git 快照完整保留，清单与 README 已更新。SDK 对照源码独立获取，不改旧固定 SDK。 根提交 20540d9；匹配 SDK 对照为 be69d54131aff04720fdee06a68a23bcb51a28b9，固定源码干净且 fsck 通过。"
     },
     {
       "id": "W01",
       "name": "Yours 官方核心与助记词钱包模拟",
-      "status": "in-progress",
+      "status": "needs-review",
       "dependencies": [
         "R01",
         "D02",
         "F04"
       ],
-      "implementationStatus": "revising-mnemonic-wallet-cognition-and-design",
+      "implementationStatus": "implemented-and-verified-with-official-core",
       "doneCriteria": [
         "认知与设计明确官方核心来源、助记词唯一钱包及隔离存储，公开接口保持不变",
         "官方钱包 API 真实构造签名，测试资金/广播隔离，不再以自建 Transaction 模拟官方钱包",
         "同助记词重开身份及原交易可恢复、不同钱包账户与记录隔离",
         "真实业务 HTTP/存储、图片、更新、拒绝与停机恢复通过，格式/类型/build/提交及预览恢复"
-      ]
+      ],
+      "evidence": "前端 4fe782b：官方 @1sat/wallet-node 0.0.88 / wallet 0.0.121 与 Yours utils 0.0.43，独立进程、助记词和 SQLite 持久钱包，稳定公共契约未改。29 项实际检查（原 24 项兼容/HTTP + 5 项官方核心）、格式/lint/类型/build、浏览器三笔头像创建、钱包重启、不同钱包隔离、取消无同步和 API 停机刷新同 TxID 恢复通过。Yours 5.1.1 源码已固定，认知/设计 c92813f；证据见 evidence/yours-core-20261014-154941。真实扩展、主网与公共分流门禁保留，交付人工复核。"
     }
   ],
   "acceptance": {
     "I01": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "前端 bf25772 的格式/lint/模块边界规则/类型/生产构建通过；5041 最终构建页面实际刷新检查通过。"
+      "scope": "前端 4fe782b 的格式、模块边界 lint、类型、最终生产构建及浏览器实际刷新通过。"
     },
     "I02": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "原交易真实 HTTP/MongoDB 存储与幂等；普通 GET profile 来自后端验签记录。浏览器停机刷新恢复原 TxID，未再次构造签名。"
+      "scope": "29 项检查含原交易真实 HTTP/MongoDB 幂等与普通 GET profile；官方核心浏览器实际停机刷新恢复同 rawTx/TxID，无再次准备或签名。"
     },
     "I03": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "JPEG/PNG/WebP 钱包 B/MAP/AIP 发布后实际同步并逐字节回读；真实文件缓存删除后由 MongoDB 原交易重建。钱包的主网费用/最大交易能力未验。"
+      "scope": "官方核心三笔 JPEG 头像创建及逐字节回读通过；PNG/WebP 与缓存重建仍由本轮兼容/HTTP 用例验证。主网费用和最大交易能力未验。"
     },
     "I04": {
       "status": "passed",
@@ -337,12 +342,12 @@
     "I06": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "稳定 WalletProvider 隔离 CWI/SDK；签名原交易持久化后独立广播，Mock 接受后才同步；拒绝无 POST、丢准备回执与真实停机同 TxID 恢复、账户隔离通过。实际 Yours 准备不广播及主网发布未验。"
+      "scope": "官方 Yours 核心真实创建签名、独立 Mock 广播、助记词/SQLite 重开、丢签名回执原交易恢复及钱包隔离通过；Chrome 扩展桥接/弹窗和主网发布未验。稳定 WalletProvider 契约未改。"
     },
     "I07": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "真实 SDK/签名/服务的模拟首次 ID+ALIAS、三步头像与更新通过；生产页面更新及头像两笔同步、取消通过。测试资料读取普通后端 profile，scope=broadcast-mock，不冒充主网事实。"
+      "scope": "官方核心首次 ID→图片→ALIAS、更新和真实后端查询通过；浏览器取消无 POST、钱包重启、真实 API 停机同 TxID 恢复通过。scope=broadcast-mock 不代表主网事实。"
     },
     "I08": {
       "status": "waiting-funds"
@@ -353,7 +358,7 @@
     "I10": {
       "status": "passed",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "沿用冻结原型视觉与交互基线；本轮查看最终构建的身份、头像核对、取消及恢复截图，未重跑全量 axe/读屏。"
+      "scope": "沿用冻结原型视觉基线，本轮已查看头像 Review、取消、同步待恢复和最终身份截图；未重跑全量 axe/读屏。"
     }
   },
   "productAcceptance": {

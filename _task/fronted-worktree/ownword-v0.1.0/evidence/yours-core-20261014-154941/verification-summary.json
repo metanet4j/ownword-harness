@@ -1,0 +1,64 @@
+{
+  "scope": "official Yours core local integration; wallet authorization/funding/broadcast isolation only",
+  "frontendCommit": "4fe782b7b4b206aab66289290df038cde2f834b4",
+  "backendCommit": "11f925f",
+  "yoursSourceCommit": "4d9299b06bdba8925ee573451b2e426574234989",
+  "sdkSourceCommit": "be69d54131aff04720fdee06a68a23bcb51a28b9",
+  "tests": {
+    "tests": 29,
+    "pass": 29,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "officialCoreCases": 5,
+  "compatibilityAndRealHttpCases": 24,
+  "formatLintTypecheckBuild": "passed",
+  "publicWalletContractChanged": false,
+  "mnemonicProcessRestartSameIdentityAndReceipts": true,
+  "distinctMnemonicWalletIsolation": true,
+  "browser": {
+    "threeTransactionAvatarCreate": true,
+    "cancelNoBroadcastOrBusinessPost": true,
+    "realApiOfflineReloadSameTransactionRecovery": true,
+    "finalProductionReload": "passed",
+    "unhandledErrors": 0,
+    "finalProfile": {
+      "bapId": "3ggZAZzzWfZi92mreHvoK7hRszCg",
+      "profileTxid": "391fe964b9cc8263fd6998b033ba049337968fa467d01d0b0e2e25cf461f7a81",
+      "avatarTxid": "31da0b77bdc616e65af3ed8eb6d2f8f0af16c2fc1454e850eaa8c52bea66eb0b",
+      "avatarBytes": 12108,
+      "avatarMime": "image/jpeg",
+      "avatarSha256": "6c60544bcf3cad38dcb3015e79a377d3fbe443b42e0fdf95a35e85f366cf152c",
+      "byteIdentical": true,
+      "scope": "broadcast-mock",
+      "signatureStatus": "valid"
+    }
+  },
+  "rawTransaction": {
+    "txid": "4ba660d79bbd8ae5a7ea1a5a5e528325f5a5a68588d310f9bda6241f30e512f4",
+    "bytes": 636,
+    "nativeAtomicBeefLeafMatchesBackendRawTx": true,
+    "actualPostKeys": [
+      "operationId",
+      "bapId",
+      "txid",
+      "rawTx"
+    ],
+    "inspectionJsonIsDiagnosticOnly": true
+  },
+  "java": {
+    "rerunThisRound": false,
+    "baselineDependentTests": 183,
+    "apiJunitTests": 0,
+    "apiAcceptance": "real HTTP"
+  },
+  "notRun": [
+    "Chrome extension bridge/unlock/permissions",
+    "mainnet new transaction publication",
+    "B06/B07/B08 sufficient public historical branches",
+    "I08/I09 awaiting funds and index coverage",
+    "5 MiB image and mainnet fee acceptance",
+    "full axe and screen reader rerun"
+  ]
+}

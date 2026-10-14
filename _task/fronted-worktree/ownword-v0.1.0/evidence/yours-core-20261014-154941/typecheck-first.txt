@@ -1,0 +1,17 @@
+
+> own-word-web@0.1.0 typecheck
+> tsc --noEmit
+
+lib/wallet/yours-core.ts(72,46): error TS2339: Property 'coinbaseTxid' does not exist on type 'BlockHeader'.
+lib/wallet/yours-core.ts(75,3): error TS2322: Type 'import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/cjs/src/transaction/MerklePath").default | undefined' is not assignable to type 'import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/types/src/transaction/MerklePath").default | undefined'.
+  Type 'import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/cjs/src/transaction/MerklePath").default' is not assignable to type 'import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/types/src/transaction/MerklePath").default'.
+    Types of property 'toWriter' are incompatible.
+      Type '(writer: import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/cjs/src/primitives/utils").Writer | import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/cjs/src/primitives/WriterUint8Array").WriterUint8Array) =>...' is not assignable to type '(writer: import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/types/src/primitives/utils").Writer | import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/types/src/primitives/WriterUint8Array").WriterUint8Array...'.
+        Types of parameters 'writer' and 'writer' are incompatible.
+          Type 'import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/types/src/primitives/utils").Writer | import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/types/src/primitives/WriterUint8Array").WriterUint8Array' is not assignable to type 'import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/cjs/src/primitives/utils").Writer | import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/cjs/src/primitives/WriterUint8Array").WriterUint8Array'.
+            Type 'Writer' is not assignable to type 'Writer | WriterUint8Array'.
+              Type 'import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/types/src/primitives/utils").Writer' is not assignable to type 'import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/cjs/src/primitives/utils").Writer'.
+                Types have separate declarations of a private property 'length'.
+lib/wallet/yours-core.ts(75,62): error TS2339: Property 'coinbaseTxid' does not exist on type 'BlockHeader'.
+lib/wallet/yours-core.ts(85,41): error TS2345: Argument of type 'import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/types/src/transaction/Beef").Beef' is not assignable to parameter of type 'import("/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/dist/cjs/src/transaction/Beef").Beef'.
+  Property '#private' in type 'Beef' refers to a different member that cannot be accessed from within type 'Beef'.
