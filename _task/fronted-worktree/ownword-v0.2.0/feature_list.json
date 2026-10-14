@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "version": "v0.2.0",
+  "activeItem": "D01",
+  "implementationAuthorized": true,
+  "approval": {
+    "userReply": "可以",
+    "decision": "R01 B",
+    "commit": "ecd85bc"
+  },
+  "documents": {
+    "cognition": "_task/system-design/spec/frontend/集成核心认知v0.2.0-20261014-215514.md",
+    "design": "_task/system-design/spec/frontend/设计文档v0.2.0-内容真实集成-20261014-215514.md",
+    "prd": "_task/system-design/spec/prd/v0.2.0/设计文档v0.2.0-20260917-210556.md"
+  },
+  "environment": {
+    "branch": "feature/ownword-v0.2.0",
+    "frontendBaseline": "04bb12766f4f565fd39d042e3d37b20e979bee10",
+    "backendBaseline": "11f925f1eb0f653c1eda267deef8c9661579dcda",
+    "prototypeCommit": "fb6ed59a6f537ba82d39b8b55dff9ab90238ca4c",
+    "ports": {
+      "web": 5061,
+      "api": 5063,
+      "wallet": 5068
+    }
+  },
+  "features": [
+    {
+      "id": "D00",
+      "name": "获准契约、隔离工作区与启动检查",
+      "dependencies": [],
+      "doneCriteria": [
+        "用户批准 R01 B 已记录",
+        "工作区、依赖及分支核对，启动检查可运行"
+      ],
+      "status": "done",
+      "evidence": [
+        "ecd85bc：获准契约已落实",
+        "./init.sh：文档、授权与前后端分支通过",
+        "独立 worktree 基线 04bb127/11f925f，其他依赖 clean"
+      ]
+    },
+    {
+      "id": "D01",
+      "name": "草稿、编辑器、统一预览与导入导出",
+      "dependencies": [
+        "D00"
+      ],
+      "doneCriteria": [
+        "C01–C05 与相关 X 场景实现",
+        "保存失败、账户切换、多标签、导入与退出保护实测",
+        "编辑器与工作台对照原型"
+      ],
+      "status": "in-progress",
+      "evidence": []
+    },
+    {
+      "id": "D02",
+      "name": "Post 协议、后端解析与公共读取",
+      "dependencies": [
+        "D01"
+      ],
+      "doneCriteria": [
+        "标准 Post 与修订 MAP 的字节及签名验证",
+        "内容/身份/头像分派、真实 Mongo 持久化与公共查询"
+      ],
+      "status": "not-started",
+      "evidence": []
+    },
+    {
+      "id": "D03",
+      "name": "Review、钱包发布、恢复与 Proof",
+      "dependencies": [
+        "D02"
+      ],
+      "doneCriteria": [
+        "C06–C08/C10 真实签名及服务闭环",
+        "重复、取消、超时、刷新和同步失败恢复"
+      ],
+      "status": "not-started",
+      "evidence": []
+    },
+    {
+      "id": "D04",
+      "name": "修订与版本历史",
+      "dependencies": [
+        "D03"
+      ],
+      "doneCriteria": [
+        "C09 同作者新版本与旧链接不可变",
+        "缺失、分支与覆盖不足不冒充最新"
+      ],
+      "status": "not-started",
+      "evidence": []
+    },
+    {
+      "id": "D05",
+      "name": "完整功能、视觉与集成验收",
+      "dependencies": [
+        "D04"
+      ],
+      "doneCriteria": [
+        "33 条 BDD 与全部集成门禁逐项有证据",
+        "构建和关联回归通过，实际扩展/主网/用户视觉复核明确"
+      ],
+      "status": "not-started",
+      "evidence": []
+    }
+  ],
+  "gates": {
+    "actualExtension": "not-verified",
+    "publicHistoryCheckpoint": "not-verified",
+    "mainnetFundingAndBroadcast": "waiting-funds",
+    "userVisualReview": "not-reviewed"
+  }
+}

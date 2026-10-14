@@ -17,6 +17,10 @@
 
 [ownword-v0.1.0](ownword-v0.1.0/AGENTS.md) 包含六个从 dev 建立的 `feature/ownword-v0.1.0` worktree；来源和完整提交见[环境登记](ownword-v0.1.0/environment.json)。四仓升级成果已在 dev；独立 BSV SDK 与 JungleBus 也已本地合入 dev，原任务分支保留。业务状态统一见前端任务 harness。
 
+## v0.2.0 内容实施工作区
+
+[ownword-v0.2.0](ownword-v0.2.0/AGENTS.md) 从 v0.1 组件提交 11f925f 建立 feature/ownword-v0.2.0 worktree；其他依赖复用已核对基线，见[环境登记](ownword-v0.2.0/environment.json)。统一状态在[前端任务](../fronted-worktree/ownword-v0.2.0/feature_list.json)。
+
 ## 约定
 
 - `boot4-java25-upgrade/` 内的开发规则以该目录的 `AGENTS.md` 与计划文档为准；本文件只登记仓库信息。
