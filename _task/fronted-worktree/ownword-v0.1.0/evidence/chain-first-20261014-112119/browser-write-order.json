@@ -1,0 +1,52 @@
+{
+  "source": "agent-browser HAR from real browser, real HTTP and MongoDB; only wallet/broadcast simulated",
+  "reviewBackendPostCount": 0,
+  "events": [
+    {
+      "at": "2026-10-14T04:50:13.83112704Z",
+      "durationMs": 110.96400000292063,
+      "kind": "wallet",
+      "method": "createAction",
+      "status": 200
+    },
+    {
+      "at": "2026-10-14T04:50:13.976669184Z",
+      "durationMs": 76.67000003416837,
+      "kind": "wallet",
+      "method": "signAction",
+      "status": 200
+    },
+    {
+      "at": "2026-10-14T04:50:14.064187136Z",
+      "durationMs": 245.26399997228384,
+      "kind": "backend",
+      "path": "/api/v1/transactions/sync",
+      "status": 201,
+      "txid": "92e174733bf2af03604c3fb02d6879389a81df8ffe6cc03ea3439fe1dfe4c95c",
+      "operationId": "6edd0071-b427-4ad9-9a54-df2d03c60a97"
+    },
+    {
+      "at": "2026-10-14T04:50:14.514081024Z",
+      "durationMs": 11.485999977633357,
+      "kind": "wallet",
+      "method": "createAction",
+      "status": 200
+    },
+    {
+      "at": "2026-10-14T04:50:14.544253184Z",
+      "durationMs": 19.737000028226525,
+      "kind": "wallet",
+      "method": "signAction",
+      "status": 200
+    },
+    {
+      "at": "2026-10-14T04:50:14.584454912Z",
+      "durationMs": 79.95800000872462,
+      "kind": "backend",
+      "path": "/api/v1/transactions/sync",
+      "status": 201,
+      "txid": "757e4f4e4b7dd10e3fdb1ecdd48222f3d10a56cc279ae7c6cc5d84a1e8f7b32a",
+      "operationId": "94beafa4-22fd-4b0a-b329-1c92593a1ba8"
+    }
+  ]
+}

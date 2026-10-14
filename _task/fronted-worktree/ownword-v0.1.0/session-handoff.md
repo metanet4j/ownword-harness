@@ -1,13 +1,13 @@
 # 当前交接
 
-无需再次请求开工批准。先按 D01 的当前契约实现钱包先行、transactions/sync、链上头像与浏览器恢复，重新执行 I02/I03/I05/I06/I07。随后接入真实 BAP 索引、签名历史与 checkpoint，补 B06/B07/B08；主网广播仍按资金安排等待。当前状态以 feature_list.json 为准，详细证据见[验收报告](验收报告v0.1.0-20261014-010853.md)。
+本轮链上先行、头像和多余接口删除已完成。前端 abb6b7c；后端 component 18403d4、233bbcb。允许范围内的真实服务与浏览器验收通过，详情见[当前报告](验收报告v0.1.0-20261014-010853.md)及 evidence/chain-first-20261014-112119。无需再次请求开工批准；设计和视觉保留人工复核状态。
 
-前端 63b162d 和后端 component 265c657 为当前源码，代码 worktree clean。F01 原型还原修正已实现和验证，needs-review 仅表示视觉人工复核；F02 格式化插件已完成，activeItem 为 null。用户确认冻结 tag，不同步 4315 的后续标题居中改动。
+唯一下一步：取得可验证的真实 BAP 历史、签名顺序、同步 checkpoint 与索引覆盖，再完成 B06/B07/B08 和 live 投影；真实 Yours 钱包充值后执行 I08/I09。不能种模拟公共索引或因 404 开放新建。
 
-前端配置 Prettier、Tailwind 排序插件及 eslint-config-prettier，版本锁定。代码修改后运行 npm run format；npm run lint 自动执行 format:check。VS Code 扩展推荐及保存格式化配置在前端 .vscode；编辑器扩展安装未执行，当前环境无 VS Code CLI。格式化后的 20 个源文件与插件输出一致，格式/lint/类型/18 项真实集成/build 全部通过，证据在 evidence/formatting-20261014-105423。
+5041 前端、5042 CWI 模拟钱包、5043 Java API ready；运行配置在私有 _runtime/services.json（0600、Git 忽略）。run-services.py 可管理已核实的本任务进程；不要重启钱包或清空共享数据库。API 运行独立 jar 副本；重建前端前停止 frontend。冻结原型 tag 不变，5047 保留原型对照。
 
-production 5041、测试钱包 5042、API 5043 已启动；原型／修正前／修正后对照在 5047。root 仅提交任务文件，不纳入用户其他脏改动。运行配置保留在私有 _runtime，禁止输出或提交。run-services.py start/status/restart api 可复用；不要重启钱包后声称它仍保留内存记录。
+新流程只在钱包原交易回执后调用 transactions/sync，取消和无回执操作不写后端。IndexedDB 保存完整本地恢复依据与账户入口，账户变更后的旧回执仍存入原账户。同步失败不得重新签名；只读查找钱包原 operationId 标签，或使用保存的 rawTx 重放同 TxID。
 
-只使用允许的钱包授权/资金/广播模拟，其余服务与密码学真实。此次 UI 还原后 18 项真实集成测试与最终 lint/typecheck/build 通过；183 项 Java 依赖回归属于未改动的后端基线证据。取消后经真实 API 重试并恢复 Maya Chen、Person、原 76 字符简介，当前模拟操作 f8398a09-3ee3-4398-9af8-d9a3fec09f03。账户 1 旧未知操作 162406fd-8a4b-490a-8910-5c92e79af15d 保留，不盲目重试。
+账户 0 的测试资料已恢复 Maya Chen、Person、原 76 字符简介，头像为 b://92e174733bf2af03604c3fb02d6879389a81df8ffe6cc03ea3439fe1dfe4c95c。最新模拟操作 b08ae88b-77b2-4a18-9fc8-bc4f7b4cd3e1，TxID b8536c36077e60f565f7e23eab1de1d1bfebf416afec5dda24b33b90525591a0；刷新后从真实 IndexedDB 恢复。账户 1 旧未知操作 162406fd-8a4b-490a-8910-5c92e79af15d 保留，仍需只读恢复，禁止盲目重签。只读旧操作 GET 因此暂留。
 
-完整复制粘贴、键盘翻面、预览硬刷新、中文深色偏好、320px、减少动态效果和实际 API 停机恢复已验；七种稳定态 axe 为 0 违规，渐变对比度存在 incomplete。真实公共正向分流、live 原始交易索引/reorg、真实读屏及主网新交易仍未完成；整个任务不能标记 done。
+修改前端后 npm run format，再执行 lint/typecheck/test/build。完整测试同时指定 OWNWORD_API_TEST_URL 与 OWNWORD_API_ASSET_TEST_DIR，命令见前端 README；缺配置的 skip 不计通过。本轮 18 项通过、skip 0；Java reactor 20/42/59/62 共 183 项，core/API JUnit 为 0。既有 Java Mock 回归不替代真实服务验收。

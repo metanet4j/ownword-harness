@@ -1,0 +1,77 @@
+
+> own-word-web@0.1.0 test
+> node --import tsx --test --test-isolation=none tests/*.test.mts
+
+✔ 前端发布通过钱包回执后的同步接口完成，后端读取与签名资料一致 (331.815521ms)
+✔ 新身份头像依次发布 ID、图片和资料，全部由真实同步接口验签 (546.446373ms)
+[updateProfile] WalletTestError: 模拟钱包已处理但传输回执丢失
+    at submit (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/wallet/test-wallet.ts:99:13)
+    at async Proxy.value (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/wallet/guard.ts:249:28)
+    at async completeSignedAction (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/actions/src/utils/completeSignedAction.ts:150:21)
+    at async finishCreateAction (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/actions/src/pipeline/runPipeline.ts:102:17)
+    at async Object.execute (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/actions/src/identity/index.ts:543:19)
+    at async executeWalletAction (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/wallet/guard.ts:273:14)
+    at async TestContext.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/api.test.mts:120:21)
+    at async Test.run (node:internal/test_runner/test:1125:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+  code: 'OUTCOME_UNKNOWN',
+  isError: true
+}
+✔ 钱包回执丢失后只读找回原交易并同步，不创建第二笔交易 (234.64471ms)
+[updateProfile] WalletTestError: 用户取消钱包授权
+    at Object.createAction (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/wallet/test-wallet.ts:123:15)
+    at Proxy.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/wallet/guard.ts:227:41)
+    at async runCreateActionPipeline (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/actions/src/pipeline/runPipeline.ts:56:23)
+    at async Object.execute (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/actions/src/identity/index.ts:543:19)
+    at async executeWalletAction (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/wallet/guard.ts:273:14)
+    at async TestContext.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/api.test.mts:171:20)
+    at async Test.run (node:internal/test_runner/test:1125:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+  code: 'USER_REJECTED',
+  isError: true
+}
+✔ 取消钱包授权不调用交易同步，也不生成后端操作记录 (114.766088ms)
+✔ 同步连接失败时保留真实回执，恢复与重复同步使用同一笔交易 (243.560503ms)
+✔ 提交前持久化失败和账户变化均阻止创建钱包交易 (51.757816ms)
+[updateProfile] Error: Unable to find valid recovery factor
+    at Signature.CalculateRecoveryFactor (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@bsv/sdk/src/primitives/Signature.ts:374:11)
+    at AIP.sign (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/templates/src/bitcom/aip.ts:144:30)
+    at async applyBapAip (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/actions/src/signing/aip.ts:143:14)
+    at async buildIdOutput (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/actions/src/identity/index.ts:140:23)
+    at async Object.execute (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/actions/src/identity/index.ts:503:22)
+    at async executeWalletAction (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/wallet/guard.ts:273:14)
+    at async TestContext.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/api.test.mts:255:18)
+    at async Test.run (node:internal/test_runner/test:1125:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:787:7)
+✔ 错误 AIP 签名在钱包 createAction 之前被拒绝 (60.550032ms)
+✔ 冻结资料不随编辑对象变化而改变链上内容 (221.394593ms)
+[updateProfile] WalletTestError: 测试用户取消
+    at Object.createAction (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/api.test.mts:285:19)
+    at Proxy.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/wallet/guard.ts:227:41)
+    at async runCreateActionPipeline (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/actions/src/pipeline/runPipeline.ts:56:23)
+    at async Object.execute (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/actions/src/identity/index.ts:543:19)
+    at async executeWalletAction (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/wallet/guard.ts:273:14)
+    at async TestContext.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/api.test.mts:294:25)
+    at async Test.run (node:internal/test_runner/test:1125:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+  code: 'USER_REJECTED',
+  isError: true
+}
+✔ 头像或资料步骤取消后继续剩余步骤，不重复已完成的 ID 或图片 (1231.782905ms)
+✔ 账户在签名后变化时保留旧账户回执，阻止向新账户登记钱包输出 (261.238147ms)
+✔ PNG 与 WebP 上链同步逐字节一致，删除文件缓存后从 MongoDB 原交易恢复 (1653.101039ms)
+✔ 后端拒绝 TxID 不匹配与真实签名篡改，不产生对应同步记录 (177.021865ms)
+✔ 钱包先完成交易，后端从原交易同步资料而不接收独立 Profile (164.00153ms)
+✔ 已同步资料不能被独立 JSON 覆盖，旧发布前写入和上传入口退出 (224.081707ms)
+✔ 同一钱包交易并发同步仍只保存同一结果，重试不增加钱包交易 (374.364742ms)
+✔ 头像先由钱包发布 B/MAP/AIP，再同步真实图片且读取字节与原交易一致 (370.69726ms)
+✔ 钱包提供完整 CWI 方法，并区分钱包根公钥与 BAP 身份 (2.149571ms)
+✔ 真实 Actions 首次创建 ID 与 ALIAS，更新只产生 ALIAS 并保持身份 (56.298248ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7934.788982

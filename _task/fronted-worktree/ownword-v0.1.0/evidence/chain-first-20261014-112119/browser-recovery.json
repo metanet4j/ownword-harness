@@ -1,0 +1,34 @@
+{
+  "source": "actual API process stopped, browser refreshed, API started, original receipt synced; no HTTP response mock",
+  "passed": true,
+  "events": [
+    {
+      "at": "2026-10-14T04:52:47.235888128Z",
+      "kind": "wallet",
+      "method": "createAction",
+      "status": 200
+    },
+    {
+      "at": "2026-10-14T04:52:47.26168192Z",
+      "kind": "wallet",
+      "method": "signAction",
+      "status": 200
+    },
+    {
+      "at": "2026-10-14T04:52:47.293939968Z",
+      "kind": "backend",
+      "path": "/api/v1/transactions/sync",
+      "status": 503,
+      "txid": "c60febd08621b3d6afb9b25645461a8cf6db025b0630bb1d66981d252a7e750d",
+      "operationId": "80284724-4c40-4cbf-8525-36aa4a0d1fea"
+    },
+    {
+      "at": "2026-10-14T04:53:09.47104Z",
+      "kind": "backend",
+      "path": "/api/v1/transactions/sync",
+      "status": 201,
+      "txid": "c60febd08621b3d6afb9b25645461a8cf6db025b0630bb1d66981d252a7e750d",
+      "operationId": "80284724-4c40-4cbf-8525-36aa4a0d1fea"
+    }
+  ]
+}

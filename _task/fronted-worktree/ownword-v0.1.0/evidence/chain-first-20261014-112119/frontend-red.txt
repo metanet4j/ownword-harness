@@ -1,0 +1,25 @@
+✖ 前端发布通过钱包回执后的同步接口完成，后端读取与签名资料一致 (92.175123ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2024.722254
+
+✖ failing tests:
+
+test at tests/api.test.mts:1:362
+✖ 前端发布通过钱包回执后的同步接口完成，后端读取与签名资料一致 (92.175123ms)
+  Error: WRITE_REQUIRES_TRANSACTION
+      at api (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/domain/types.ts:82:11)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async publishProfile (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/wallet/guard.ts:56:19)
+      at async TestContext.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/api.test.mts:12:18)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    code: 'WRITE_REQUIRES_TRANSACTION',
+    status: 410,
+    field: null
+  }

@@ -1,13 +1,13 @@
 # 当前状态
 
-用户已明确授权 Tailwind CSS 实现，并确认沿用冻结原型 tag。前端当前 63b162d；后端 component 当前 265c657。F01 原型还原修正已实现和验证，保留视觉人工复核状态；F02 格式化插件已完成。D01 钱包先行及链上头像的核心认知和设计已修订、检查，保留人工复核；旧接口实现需按新契约改造。
+钱包先行与接口精简已经实现并完成允许范围内的真实服务验收。前端 abb6b7c；后端 component 18403d4、233bbcb。A01 后端实现完成；F03 实现与验证完成、保留人工复核；设计 D01 与冻结原型视觉 F01 仍为 needs-review。全局状态见 feature_list.json。
 
-格式化采用锁定的 Prettier 与 Tailwind 官方插件；VS Code 推荐扩展及保存自动格式化已配置，lint 会先检查格式。20 个源文件与插件输出一致；格式、lint、类型、18 项真实集成及 production build 通过，预览已恢复。[格式化验证](evidence/formatting-20261014-105423/summary.json)。当前环境没有 VS Code CLI，编辑器扩展需按本仓库 README 的推荐安装。
+后端业务写入只有 POST transactions/sync：钱包先发布，后端从同一原交易解析身份资料与头像，不接受另一份 Profile。旧意图登记、预检、提交许可、钱包结果回写、头像上传及无前端用途的公共交易 GET 已删除。旧无 TxID 操作恢复仍使用只读 GET identity-operations，保留实际迁移消费者。
 
-本次 UI 还原检查：最终 lint、typecheck、production build 通过；18 项真实钱包/API 通过；原生复制粘贴、取消重试、键盘翻面、预览刷新、中文深色和减少动态效果、320px 操作栏、真实 API 停机恢复均已检查。七种稳定态 axe 为 0 违规，渐变对比度仍有 incomplete。截图与范围见[验收报告](验收报告v0.1.0-20261014-010853.md)，交互对照在 http://127.0.0.1:5047。
+浏览器使用 IndexedDB 原子保存操作、转交标记、冻结输出和回执；已广播但同步失败显示 sync-pending，只重放原 TxID。头像使用 B/MAP/AIP 与 b://TxID，首次带头像按 ID、图片、ALIAS 顺序，部分取消不会撤销已完成交易。
 
-后端基线的 183 项依赖检查、格式字节回读、并发许可、幂等、真实 TCP 断连和文件权限故障证据继续有效；此次 UI 修改不重复计作新增 Java 测试。api-ownword 没有 JUnit，接口使用真实 HTTP 验证。
+本轮格式/lint/类型/最终 production build 通过；18 项钱包和真实 HTTP/MongoDB/文件/密码学检查通过，失败和 skip 均为 0。JPEG/PNG/WebP 字节回读及删缓存后原交易重建通过。Java clean package 实际依赖用例 183 项通过，API JUnit 为 0，接口验收来自真实 HTTP。浏览器实际验证头像发布顺序、无预上传、取消无后端 POST、真实 API 停机后刷新与同 TxID 恢复。见[当前验收报告](验收报告v0.1.0-20261014-010853.md)。
 
-production 5041、CWI 测试服务 5042、Java API 5043 当前 ready。私有配置在 _runtime/services.json，权限 0600 且忽略；服务管理为 run-services.py，不清空共享数据。钱包进程保留其测试记录；Java 运行固定 jar 副本。
+5041 前端、5042 钱包、5043 API ready。原型固定 prototype/official-s2-20261013-213507，未修改。只模拟钱包授权/传输、资金与广播；其余真实。钱包进程保留记录，配置位于忽略的 _runtime/services.json（0600），未清空共享数据、未推送。
 
-整个任务未完成：F00 的 B06/B07/B08 缺真实公共索引事实，已询问索引配置；V00 独立检查通过但完整产品场景仍待复核；I08/I09 等待充值及真实索引。不能以模拟预览或 404 宣称身份未发布。
+整个任务仍未完成：B06/B07/B08 缺少真实签名历史与 checkpoint；I08/I09 等待真实 Yours 钱包充值。未执行实际扩展主网发布、公开投影重建/reorg 和真实读屏；不能把模拟预览或公共 404 当作主网发布/未发布事实。

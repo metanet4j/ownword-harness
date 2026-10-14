@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "source": "real browser cancellation; no backend business POST",
+  "events": [
+    {
+      "kind": "wallet",
+      "method": "createAction",
+      "status": 422
+    }
+  ]
+}

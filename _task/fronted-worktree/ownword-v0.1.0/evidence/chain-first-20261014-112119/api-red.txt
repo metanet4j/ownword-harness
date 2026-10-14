@@ -1,0 +1,29 @@
+✖ 钱包先完成交易，后端从原交易同步资料而不接收独立 Profile (248.413856ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3048.983771
+
+✖ failing tests:
+
+test at tests/chain-sync.test.mts:1:316
+✖ 钱包先完成交易，后端从原交易同步资料而不接收独立 Profile (248.413856ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  405 !== 201
+  
+      at TestContext.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/chain-sync.test.mts:25:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 405,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,50 @@
+✔ 前端发布通过钱包回执后的同步接口完成，后端读取与签名资料一致 (735.790283ms)
+✖ 新身份头像依次发布 ID、图片和资料，全部由真实同步接口验签 (1050.374097ms)
+[updateProfile] WalletTestError: 模拟钱包已处理但传输回执丢失
+    at submit (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/wallet/test-wallet.ts:99:13)
+    at async Proxy.value (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/wallet/guard.ts:89:24)
+    at async completeSignedAction (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/actions/src/utils/completeSignedAction.ts:150:21)
+    at async finishCreateAction (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/actions/src/pipeline/runPipeline.ts:102:17)
+    at async Object.execute (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/node_modules/@1sat/actions/src/identity/index.ts:543:19)
+    at async executeWalletAction (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/lib/wallet/guard.ts:98:18)
+    at async TestContext.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/api.test.mts:49:19)
+    at async Test.run (node:internal/test_runner/test:1125:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+  code: 'OUTCOME_UNKNOWN',
+  isError: true
+}
+✔ 钱包回执丢失后只读找回原交易并同步，不创建第二笔交易 (455.718473ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 2
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5596.609596
+
+✖ failing tests:
+
+test at tests/api.test.mts:1:1367
+✖ 新身份头像依次发布 ID、图片和资料，全部由真实同步接口验签 (1050.374097ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      'identity-init',
+      'avatar',
+      'create',
+  +   'profile-update'
+    ]
+  
+      at TestContext.<anonymous> (/home/haodev/ownword/_task/fronted-worktree/ownword-v0.1.0/own-word-web/tests/api.test.mts:39:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'identity-init', 'avatar', 'create', 'profile-update' ],
+    expected: [ 'identity-init', 'avatar', 'create' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
