@@ -4,7 +4,7 @@
   "baseCommit": "5b3cdf8",
   "branch": "codex/prototype-official-s2",
   "preview": "http://127.0.0.1:4315/",
-  "activeFeature": "M12",
+  "activeFeature": "M13",
   "features": [
     {
       "id": "M01",
@@ -411,11 +411,11 @@
       "doneCriteria": [
         "阅读正文与阅读页头共同居中，外侧目录保持原宽度和键盘跳转行为",
         "全局页头保持1120px，单栏编辑区960px，双栏保留1184px并共用中轴",
-        "桌面任务标题和帮助按钮组居中，正文与字段保持左对齐，手机沿用既有布局",
+        "任务标题与说明按用户确定的左对齐方向形成连续阅读基准，当前实现及定向证据见M13",
         "构建、模型、相关布局与交互、主题及窄屏复核通过；交付五组同条件前后对照"
       ],
       "evidence": [
-        "ownword-prototype/visual-review.html",
+        "ownword-prototype/visual-review-v12.html",
         "ownword-prototype/evidence/official-s2/centering/verification.json",
         "ownword-prototype/vendor/build-manifest.json"
       ],
@@ -452,12 +452,53 @@
         "中文深色自动无障碍有1项背景遮挡判定的incomplete，保留原始记录，不计为自动通过。",
         "相关布局采用初查和定向复核组合；窄屏目录比例、导航保护、焦点时序和列表选择器诊断保留。",
         "浏览器视口验收不等于实机触摸、读屏或完整WCAG认证。"
+      ],
+      "reviewAdjustment": "用户要求任务标题恢复原有左对齐；阅读正文中轴、统一页头及编辑器比例继续保留。"
+    },
+    {
+      "id": "M13",
+      "name": "任务标题与说明恢复左对齐",
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "M12"
+      ],
+      "prototypeCommit": "fb6ed59",
+      "doneCriteria": [
+        "撤回任务页桌面标题居中规则，身份任务、内容确认及Artifact创建的标题、说明与帮助组沿原有左侧基准排列",
+        "页面主体容器保持居中，沿用阅读正文中轴与编辑器比例",
+        "定向复核三个页面、320px、中文深色和帮助按钮键盘行为，构建与模型通过；交付三组前后对照"
+      ],
+      "evidence": [
+        "ownword-prototype/visual-review.html",
+        "ownword-prototype/evidence/official-s2/task-alignment/verification.json",
+        "ownword-prototype/vendor/build-manifest.json"
+      ],
+      "validation": {
+        "build": "passed",
+        "models": "passed",
+        "baselineCommit": "b4846d1",
+        "layoutChecks": 5,
+        "relatedChecks": 3,
+        "a11yAudits": 1,
+        "a11yViolations": 0,
+        "a11yIncomplete": 0,
+        "browserErrors": 0,
+        "consoleErrors": 0,
+        "comparisonPairs": 3,
+        "deliveryImagesLoaded": 6,
+        "manualVisualReview": "completed",
+        "userReview": "pending",
+        "oldWorktree": "clean, HEAD 5b3cdf8"
+      },
+      "knownLimitations": [
+        "本轮仅定向验证标题对齐和相关页面；未重复全站验收。"
       ]
     }
   ],
   "implementationStatus": "implemented-and-verified",
   "reviewStatus": "needs-review",
-  "prototypeCommit": "b4846d1",
+  "prototypeCommit": "fb6ed59",
   "remainingWork": [
     "用户视觉验收尚未确认"
   ]
