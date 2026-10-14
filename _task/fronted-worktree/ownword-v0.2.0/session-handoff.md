@@ -1,7 +1,11 @@
-# 当前实施：D02 内容协议与公共查询
+# 当前实施：D03 Review、钱包发布、恢复与 Proof
 
-D01 已提交前端 00cd8de，草稿/编辑/导入导出/恢复阶段验证通过。证据在 evidence/d01/browser-checks.json；原生 IME 与旧浏览器后退问题已修复复测。最终 lint/typecheck/build、35 项前端真实服务测试通过；后端独立库支持提交 a5e7db2，关联模块 183 项 clean test 通过。D01 的公共列表/阅读及发布互斥跨阶段检查保留在 D02–D04，不代表全部 C01–C05 已最终验收。
+D02 已提交前端 c0b2c67、后端 876ab3b。标准 Post / 修订 MAP 原字节验证、独立 Java AIP 验签、历史身份链映射、真实 HTTP/Mongo 查询与关系投影通过。最终前端 41 项测试全通过，lint/typecheck/build 通过；后端关联模块 188 项通过（OwnWord 新增 5 项），最终模块 clean test 和独立 package 通过。证据在 evidence/d02/checks.json；三个测试投影删除后冷启动从原交易重建一致。主网历史/checkpoint 未满足时作者仍 unverified，不能将隔离验证视为主网覆盖。
 
-服务：前端生产模式 5071、API 5073、官方核心钱包 5078，数据库 ownword_v020。python3 run-services.py status/start/restart 可复用，私有配置和钱包在忽略的 _runtime。agent-browser 会话 v020-implementation 当前测试作者已连接，账户 0，320×720 英文浅色；测试稿 8a8488a5-39fb-42c1-b09a-031323363da2 为原型 174 字节样例，其他原稿与恢复副本仍保留，故障已解除。
+服务：前端生产 5071、API 5073、官方核心钱包 5078，数据库 ownword_v020；python3 run-services.py 管理。agent-browser 会话 v020-implementation 当前在 /content 的 Published 筛选，账户 0 已连接，320×720 英文浅色，真实空列表与停止 API 后错误/恢复重试均已验证，3 份草稿保留。所有故障已解除。
 
-唯一下一步：按获准 R01 B 实现标准 Post 与修订 MAP 字节核验、后端原交易独立验签、作者归属和 Mongo 公共查询，再接 D03 钱包发布/恢复。Review 签名按钮目前未接发布，内容 API 未实现。D02–D05 尚未完成；实际扩展、公共索引覆盖/checkpoint、主网资金广播和用户视觉复核门禁保留。
+唯一下一步：接通 Review 冻结快照、共用日志互斥、签名准备/广播/同步、回读后草稿同版本清理、公开阅读和 Proof；再完成 D04 修订与历史、D05 完整验收。Review 签名按钮仍未接发布。
+
+D03 实施注意：lib/domain/publish.ts 可复用 signedScript/snapshotFor/checkPrepared/runTransaction，但当前 recoverOperation 在 simulated 模式会调用广播，内容未知结果恢复不得沿用自动重发。现有 submissionAttempt 在准备前写入，内容流程须区分准备请求和真正广播尝试。lib/domain/journal.ts 使用 v1 operations/accounts，可添加判别内容载荷而不升级库；pending 集合要覆盖 validating/prepared。IdentityProvider 读取日志会直接拷贝 profile，需识别内容 kind 并给出相应恢复入口，不能让身份页承接内容操作。钱包 provider 的 recoverPreparation 目前仅返回 rawTx，没有已广播回执证据，需核对绑定实现的只读查询能力。不得用本地 404 证明未提交。
+
+实际扩展、公共历史覆盖、主网资金广播和用户视觉复核门禁仍开放；D03–D05 未完成。

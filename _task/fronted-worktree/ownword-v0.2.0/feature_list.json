@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "version": "v0.2.0",
-  "activeItem": "D02",
+  "activeItem": "D03",
   "implementationAuthorized": true,
   "approval": {
     "userReply": "可以",
@@ -69,8 +69,13 @@
         "标准 Post 与修订 MAP 的字节及签名验证",
         "内容/身份/头像分派、真实 Mongo 持久化与公共查询"
       ],
-      "status": "in-progress",
-      "evidence": []
+      "status": "done",
+      "evidence": [
+        "前端 c0b2c67；后端 876ab3b",
+        "evidence/d02/checks.json：41 项前端/真实 HTTP 回归通过；后端关联模块 188 项通过",
+        "evidence/d02/rebuild-result.json：删除三条测试内容投影、保留原交易、冷启动重建逐字段一致",
+        "真实浏览器空列表、停止 API 后错误、恢复后重试均通过；主网历史门禁保留"
+      ]
     },
     {
       "id": "D03",
@@ -82,7 +87,7 @@
         "C06–C08/C10 真实签名及服务闭环",
         "重复、取消、超时、刷新和同步失败恢复"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "evidence": []
     },
     {

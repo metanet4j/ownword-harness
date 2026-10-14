@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "database": "ownword_v020",
+  "authorBapId": "sBuM85q3nuSd55ES5CgWDVHHjS2",
+  "txids": [
+    "4e281cb02bdde87a1c0d0220b3c032aae3a5bb6663208e1b8d6f20b01db79a0b",
+    "d69cc438725808a57bc690f11beef2fc1468a465b9a42f71ef53a0b391d9d033",
+    "301f0f1b0ce04002d7943d7e832082b1cf356eedf267938d5d871cfda1dea413"
+  ],
+  "deleted": {
+    "receipts": 3,
+    "contents": 3,
+    "relations": 3
+  },
+  "rebuilt": {
+    "contents": 3,
+    "relations": 3,
+    "receipts": 3
+  },
+  "comparedFields": [
+    "txid",
+    "authorBapId",
+    "markdown",
+    "contentDigest",
+    "firstObservedAt",
+    "revision",
+    "proof"
+  ],
+  "coldProcess": true
+}
