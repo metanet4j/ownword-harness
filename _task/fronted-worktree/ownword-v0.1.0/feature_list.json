@@ -20,7 +20,8 @@
     "pushRemote": false,
     "agents": "independent",
     "nextImplementationGate": "用户已明确授权 Tailwind CSS 实现并持续验收；主网发布仍等待充值。",
-    "realIndexSource": "waiting-for-verifiable-history-and-checkpoint"
+    "realIndexSource": "waiting-for-verifiable-history-and-checkpoint",
+    "prototypeBaseline": "用户确认沿用已打 tag 的原型；不同步 4315 后续标题居中改动。"
   },
   "documents": {
     "product": "_task/system-design/spec/核心认知.md",
@@ -120,8 +121,25 @@
       ],
       "implementationStatus": "implemented-with-unverified-public-branches",
       "description": "v0.1 身份页面与流程；事实与验收以当前设计文档对应阶段为准。",
-      "evidence": "3e67a21：Tailwind/S2 页面、偏好、复制、取消、账户隔离与原操作恢复完成；已实际检查可执行 BDD。B06/B07/B08 不用假数据补齐，等待真实索引事实。",
+      "evidence": "bbf47d9：Tailwind/S2 页面按冻结原型还原，偏好、复制、取消重试、账户隔离与原操作恢复已实现并检查；B06/B07/B08 等待真实索引事实，当前证据见 acceptanceReport。",
       "blocker": "公共已发布、未发布和不完整分流缺少真实签名历史与充分索引覆盖；已异步询问现有索引配置。"
+    },
+    {
+      "id": "F01",
+      "name": "冻结原型还原修正",
+      "dependencies": [
+        "W00",
+        "A00"
+      ],
+      "status": "needs-review",
+      "doneCriteria": [
+        "按冻结 tag 还原本期页面结构、导航、字级、间距及卡片",
+        "保存原型、改前、改后同视口截图并逐页审阅",
+        "真实服务流程与前端检查通过，保留原有主网及公共索引门禁"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "description": "根据用户指出的原型偏差，修正 v0.1 适用页面；基线沿用 environment.prototypeTag。",
+      "evidence": "bbf47d9：按用户确认的冻结 tag 修正 v0.1 UI；逐页截图、19 个对照链接、最终 lint/typecheck/build、18 项真实 API/钱包、原生复制、取消重试、键盘翻面、预览刷新、320px 与真实 API 停机恢复均已检查。视觉结果留待人工复核，完整产品仍受 F00 公共分流及主网资金门禁限制。"
     },
     {
       "id": "V00",

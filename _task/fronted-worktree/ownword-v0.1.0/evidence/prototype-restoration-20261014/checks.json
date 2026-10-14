@@ -1,0 +1,94 @@
+[
+  {
+    "check": "lint",
+    "exitCode": 0
+  },
+  {
+    "check": "typecheck",
+    "exitCode": 0
+  },
+  {
+    "check": "api-tests",
+    "exitCode": 0
+  },
+  {
+    "check": "build",
+    "exitCode": 0
+  },
+  {
+    "check": "final-lint",
+    "exitCode": 0
+  },
+  {
+    "check": "final-typecheck",
+    "exitCode": 0
+  },
+  {
+    "check": "final-build",
+    "exitCode": 0
+  },
+  {
+    "check": "release-lint",
+    "exitCode": 0
+  },
+  {
+    "check": "release-typecheck",
+    "exitCode": 0
+  },
+  {
+    "check": "release-build",
+    "exitCode": 0
+  },
+  {
+    "check": "mobile-build",
+    "exitCode": 0
+  },
+  {
+    "check": "mobile-lint",
+    "exitCode": 0
+  },
+  {
+    "check": "mobile-typecheck",
+    "exitCode": 0
+  },
+  {
+    "check": "acceptance-lint",
+    "exitCode": 0
+  },
+  {
+    "check": "acceptance-typecheck",
+    "exitCode": 0
+  },
+  {
+    "check": "acceptance-api-tests",
+    "exitCode": 0
+  },
+  {
+    "check": "acceptance-build",
+    "exitCode": 0
+  },
+  {
+    "check": "verified-lint",
+    "exitCode": 0
+  },
+  {
+    "check": "verified-typecheck",
+    "exitCode": 0
+  },
+  {
+    "check": "verified-build",
+    "exitCode": 0
+  },
+  {
+    "check": "delivery-lint",
+    "exitCode": 0
+  },
+  {
+    "check": "delivery-typecheck",
+    "exitCode": 0
+  },
+  {
+    "check": "delivery-build",
+    "exitCode": 0
+  }
+]

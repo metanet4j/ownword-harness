@@ -1,8 +1,10 @@
 # 当前状态
 
-用户已明确授权 Tailwind CSS 实现，基础、真实 API 和身份页面均已提交。前端 f344695、dd9aa88、3e67a21；后端 component 6e127d6、9063f89、265c657。
+用户已明确授权 Tailwind CSS 实现，并确认沿用冻结原型 tag。前端当前 bbf47d9；后端 component 当前 265c657。F01 原型还原修正已实现和验证，保留视觉人工复核状态，无进行中的功能项。
 
-本次无资金服务检查：18 项钱包/API 通过；最终 API clean test 只计本轮 reactor 的 183 项依赖用例，api-ownword 没有 JUnit，用真实 HTTP 验证。lint、typecheck、连续两次 production build、PNG/JPEG/WebP 字节回读、服务重启、真实 TCP 断连和本任务文件权限故障已检查。截图、稳定态 axe 与边界说明见[验收报告](验收报告v0.1.0-20261014-010853.md)。
+本次 UI 还原检查：最终 lint、typecheck、production build 通过；18 项真实钱包/API 通过；原生复制粘贴、取消重试、键盘翻面、预览刷新、中文深色和减少动态效果、320px 操作栏、真实 API 停机恢复均已检查。七种稳定态 axe 为 0 违规，渐变对比度仍有 incomplete。截图与范围见[验收报告](验收报告v0.1.0-20261014-010853.md)，交互对照在 http://127.0.0.1:5047。
+
+后端基线的 183 项依赖检查、格式字节回读、并发许可、幂等、真实 TCP 断连和文件权限故障证据继续有效；此次 UI 修改不重复计作新增 Java 测试。api-ownword 没有 JUnit，接口使用真实 HTTP 验证。
 
 production 5041、CWI 测试服务 5042、Java API 5043 当前 ready。私有配置在 _runtime/services.json，权限 0600 且忽略；服务管理为 run-services.py，不清空共享数据。钱包进程保留其测试记录；Java 运行固定 jar 副本。
 
