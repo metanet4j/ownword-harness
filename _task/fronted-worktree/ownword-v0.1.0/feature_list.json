@@ -21,7 +21,8 @@
     "agents": "independent",
     "nextImplementationGate": "用户已明确授权 Tailwind CSS 实现并持续验收；主网发布仍等待充值。",
     "realIndexSource": "waiting-for-verifiable-history-and-checkpoint",
-    "prototypeBaseline": "用户确认沿用已打 tag 的原型；不同步 4315 后续标题居中改动。"
+    "prototypeBaseline": "用户确认沿用已打 tag 的原型；不同步 4315 后续标题居中改动。",
+    "writeOrder": "用户要求身份创建、资料更新与头像发布均先钱包上链，再调用后端 POST 同步；头像不保留后端预上传。"
   },
   "documents": {
     "product": "_task/system-design/spec/核心认知.md",
@@ -57,6 +58,22 @@
       "implementationStatus": "written-and-checked",
       "description": "核心认知与集成设计；事实与验收以当前设计文档对应阶段为准。",
       "evidence": "认知基于总认知且独立保留，接口和钱包边界已设计；用户已明确授权 Tailwind 实现，设计文档仍保留人工复核状态。原型 tag/技术栈已核实，当前验证见 acceptanceReport。"
+    },
+    {
+      "id": "D01",
+      "name": "链上先行写入与头像发布设计",
+      "dependencies": [
+        "D00"
+      ],
+      "status": "needs-review",
+      "implementationStatus": "written-and-checked",
+      "doneCriteria": [
+        "基于总认知修订独立实现核心认知，移除后端先登记和上传约束",
+        "设计钱包先广播、后端按原交易同步、幂等与恢复，包含头像与首次身份依赖",
+        "更新接口及验收映射，检查引用、矛盾及范围，提交供人工复核"
+      ],
+      "description": "用户明确本期所有业务 POST 均先钱包上链后后端同步，头像也作为链上图片发布。",
+      "evidence": "用户明确头像也先钱包发布。独立核心认知先修订，随后设计 transactions/sync、链上 B/MAP/AIP 头像、浏览器恢复日志、首次带头像三笔依赖及对应 I02/I03/I05/I06；引用、JSON 与旧顺序约束检查通过。源码改造及新流程验收尚未完成。"
     },
     {
       "id": "E00",
@@ -197,14 +214,14 @@
       "scope": "本报告列明的实际检查范围"
     },
     "I02": {
-      "status": "passed",
+      "status": "not-run",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "本报告列明的实际检查范围"
+      "scope": "按新钱包先行/链上头像契约重新验收；旧流程证据不关闭本次门禁。"
     },
     "I03": {
-      "status": "passed",
+      "status": "not-run",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "本报告列明的实际检查范围"
+      "scope": "按新钱包先行/链上头像契约重新验收；旧流程证据不关闭本次门禁。"
     },
     "I04": {
       "status": "passed",
@@ -212,19 +229,19 @@
       "scope": "真实主网只读和覆盖不足保持 unknown；正向公共分流待真实索引。"
     },
     "I05": {
-      "status": "passed",
+      "status": "not-run",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "本报告列明的实际检查范围"
+      "scope": "按新钱包先行/链上头像契约重新验收；旧流程证据不关闭本次门禁。"
     },
     "I06": {
-      "status": "passed",
+      "status": "not-run",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "允许的 CWI 测试适配；实际 Yours live 路径未执行。"
+      "scope": "按新钱包先行/链上头像契约重新验收；旧流程证据不关闭本次门禁。"
     },
     "I07": {
-      "status": "passed",
+      "status": "not-run",
       "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
-      "scope": "本报告列明的实际检查范围"
+      "scope": "按新钱包先行/链上头像契约重新验收；旧流程证据不关闭本次门禁。"
     },
     "I08": {
       "status": "waiting-funds"
