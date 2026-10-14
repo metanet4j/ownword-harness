@@ -1,6 +1,8 @@
 # 当前状态
 
-用户已明确授权 Tailwind CSS 实现，并确认沿用冻结原型 tag。前端当前 bbf47d9；后端 component 当前 265c657。F01 原型还原修正已实现和验证，保留视觉人工复核状态，无进行中的功能项。
+用户已明确授权 Tailwind CSS 实现，并确认沿用冻结原型 tag。前端当前 63b162d；后端 component 当前 265c657。F01 原型还原修正已实现和验证，保留视觉人工复核状态；F02 格式化插件已完成，无进行中的功能项。
+
+格式化采用锁定的 Prettier 与 Tailwind 官方插件；VS Code 推荐扩展及保存自动格式化已配置，lint 会先检查格式。20 个源文件与插件输出一致；格式、lint、类型、18 项真实集成及 production build 通过，预览已恢复。[格式化验证](evidence/formatting-20261014-105423/summary.json)。当前环境没有 VS Code CLI，编辑器扩展需按本仓库 README 的推荐安装。
 
 本次 UI 还原检查：最终 lint、typecheck、production build 通过；18 项真实钱包/API 通过；原生复制粘贴、取消重试、键盘翻面、预览刷新、中文深色和减少动态效果、320px 操作栏、真实 API 停机恢复均已检查。七种稳定态 axe 为 0 违规，渐变对比度仍有 incomplete。截图与范围见[验收报告](验收报告v0.1.0-20261014-010853.md)，交互对照在 http://127.0.0.1:5047。
 

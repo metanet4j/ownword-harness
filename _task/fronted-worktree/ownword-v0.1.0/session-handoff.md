@@ -2,7 +2,9 @@
 
 无需再次请求开工批准。先取得并接入真实 BAP 索引地址、签名历史与同步 checkpoint，补齐 B06/B07/B08 和 live 投影；之后按资金安排执行 I08/I09。当前状态以 feature_list.json 为准，详细证据见[验收报告](验收报告v0.1.0-20261014-010853.md)。
 
-前端 bbf47d9 和后端 component 265c657 为当前源码，代码 worktree clean。F01 原型还原修正已实现和验证，needs-review 仅表示视觉人工复核；activeItem 为 null。用户确认冻结 tag，不同步 4315 的后续标题居中改动。
+前端 63b162d 和后端 component 265c657 为当前源码，代码 worktree clean。F01 原型还原修正已实现和验证，needs-review 仅表示视觉人工复核；F02 格式化插件已完成，activeItem 为 null。用户确认冻结 tag，不同步 4315 的后续标题居中改动。
+
+前端配置 Prettier、Tailwind 排序插件及 eslint-config-prettier，版本锁定。代码修改后运行 npm run format；npm run lint 自动执行 format:check。VS Code 扩展推荐及保存格式化配置在前端 .vscode；编辑器扩展安装未执行，当前环境无 VS Code CLI。格式化后的 20 个源文件与插件输出一致，格式/lint/类型/18 项真实集成/build 全部通过，证据在 evidence/formatting-20261014-105423。
 
 production 5041、测试钱包 5042、API 5043 已启动；原型／修正前／修正后对照在 5047。root 仅提交任务文件，不纳入用户其他脏改动。运行配置保留在私有 _runtime，禁止输出或提交。run-services.py start/status/restart api 可复用；不要重启钱包后声称它仍保留内存记录。
 

@@ -1,0 +1,34 @@
+{
+  "frontendCommit": "63b162d",
+  "packages": {
+    "prettier": "3.9.10",
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "eslint-config-prettier": "10.1.8"
+  },
+  "formattedSourceFiles": 20,
+  "sourceEquivalence": "Each modified source equals formatter output of previous HEAD",
+  "exitCodes": {
+    "format:check": 0,
+    "lint": 0,
+    "typecheck": 0,
+    "test": 0,
+    "build": 0
+  },
+  "realApiTests": {
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "production": "http://127.0.0.1:5041/identity",
+    "pageErrors": 0,
+    "consoleErrors": 0,
+    "screenshotReviewed": true
+  },
+  "editor": {
+    "recommendedExtension": "esbenp.prettier-vscode",
+    "formatOnSaveConfigured": true,
+    "extensionInstallation": "Not executed; no VS Code CLI in this environment"
+  },
+  "scope": "Current frontend repository; frozen prototype and Java backend unchanged"
+}

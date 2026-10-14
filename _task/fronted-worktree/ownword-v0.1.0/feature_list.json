@@ -142,6 +142,22 @@
       "evidence": "bbf47d9：按用户确认的冻结 tag 修正 v0.1 UI；逐页截图、19 个对照链接、最终 lint/typecheck/build、18 项真实 API/钱包、原生复制、取消重试、键盘翻面、预览刷新、320px 与真实 API 停机恢复均已检查。视觉结果留待人工复核，完整产品仍受 F00 公共分流及主网资金门禁限制。"
     },
     {
+      "id": "F02",
+      "name": "前端格式化插件与统一代码格式",
+      "dependencies": [
+        "W00"
+      ],
+      "status": "done",
+      "implementationStatus": "implemented-and-verified",
+      "doneCriteria": [
+        "锁定 Prettier 与 Tailwind 插件，编辑器和命令行共享配置",
+        "前端代码实际格式化且 format:check、lint、typecheck、真实集成 test、build 通过",
+        "提交配置、代码与验证记录，预览服务恢复可用"
+      ],
+      "description": "按用户要求接入格式化插件并格式化当前 v0.1.0 前端实现。",
+      "evidence": "63b162d：锁定 Prettier 3.9.10、Tailwind 插件 0.8.1 与 eslint-config-prettier 10.1.8；配置 VS Code 推荐扩展和保存格式化，lint 自动检查格式。20 个源文件均为插件格式化输出，格式/lint/类型/18 项真实集成/生产构建通过，5041 已恢复；证据见 evidence/formatting-20261014-105423。编辑器扩展安装未执行，当前环境无 VS Code CLI。"
+    },
+    {
       "id": "V00",
       "name": "无资金真实集成验收",
       "dependencies": [
