@@ -1,9 +1,13 @@
-# 当前实施：D04 修订与版本历史
+# 当前实施：D05 完整功能与视觉验收
 
-D03 前端已提交 1fb21a0。共用 IndexedDB 日志接通冻结 Review、真实 AIP/原交易准备、广播、同步及独立后端回读；未知结果恢复只查询原操作，prepared 状态需明确继续。47 项不同测试通过（全套 46 项，图片缓存重建另行补跑 1 项）；lint/typecheck/build 通过。浏览器双击单交易、取消保留草稿、广播回执丢失后刷新恢复且零重播、继续编辑不被清理、独立访客阅读、CRLF 导出与 Proof 均通过，证据 evidence/d03/checks.json。任务清单无障碍名称已修复，阅读页 320px axe 0 违规。
+D01–D04 已提交，前端最新 2d2acde（D04）、1fb21a0（D03）；后端 876ab3b。真实内容发布、回读、恢复、修订和版本历史均已联通。D03 47 项不同测试通过；D04 15 项内容回归通过；lint/typecheck/build 通过。证据分别在 evidence/d01–d04/checks.json 或 browser-checks.json。
 
-服务：前端 5071、API 5073、官方核心钱包 5078，数据库 ownword_v020；python3 run-services.py 管理。前端运行 D03 最终构建。agent-browser v020-implementation 在新正文草稿 c2bf1c2e-404e-4d62-a2b2-58e1edf566d2，账户 0 已连接，1440×1000 英文浅色；v020-public 独立无钱包会话在公开阅读 53369cff56a462ce6074acf58b26ce11582299d0fe6a8f737af03fc221cecee4，1440×1000。全部故障已解除；浏览器 fetch 只剩无故障的计数/已释放延迟包装，刷新即可清除。其他原稿两份仍保留。
+D04 浏览器完成唯一修订草稿、继续同稿、无修改拦截、发布第二版、历史往返。原始 695837bf…15c08 的 174 字节不变，新版 5a93e624…6baf6 为 431 字节；完整读取证据在 versions-readback.json。测试 CLI 对 CodeMirror 的 fill 会插入到原文本前；后续更换全文请使用实际 Ctrl+A 后输入，或原生编辑器事务，不把 fill 当完整替换。此次 Review 与签名、回读仍严格一致。
 
-唯一下一步：D04 接通作者创建/继续修订、Review/广播前基线与覆盖复核、/read/:txid/history 历史页，验证新旧版本不变及缺失/分支状态。现有 /versions 阅读按钮需改为设计规定的 /history；后端接口仍 /contents/:txid/versions。lib/content/publish.ts 已有 revisionReference 和签名 MAP；Draft 存储已含 baseTxid/baseMarkdown 及唯一 revisionKey。
+服务：5071 前端、5073 API、5078 官方核心钱包，Mongo ownword_v020；python3 run-services.py 管理。当前运行 D04 最终构建。构建会替换 .next，后续请先停前端再构建并启动，避免浏览器在替换期间加载旧产物。
 
-D02 后端 876ab3b 保持 clean。主网作者归属因公共历史/checkpoint 不足保留 unverified；隔离验证不代表主网覆盖。D04–D05、实际扩展、公共历史、主网资金广播和用户视觉复核仍未完成。
+浏览器：v020-implementation 在首版公开链接，1440×1000，重建导航后未连接；v020-public 在缺失历史页 403294632cb389269e7435024a398c5052d6fe8ddda36837769351f8799f4f3e/history，320×720，无钱包。钱包账户 0，所有故障解除。隔离草稿原文与恢复副本及继续编辑稿仍保留。
+
+唯一下一步：逐项完成 33 条 BDD 和集成门禁清单，重点复核发布中账户变化、未验证/失败 Proof、真实原型视觉、身份和内容日志互斥；修复发现的问题，最终全量回归及启动检查。留意打开旧操作 URL 不应替换当前账户待处理操作的内存入口。阅读作者入口需按现有身份资料查看能力补齐，不能引入 v0.4 主页。
+
+公共历史/checkpoint、实际扩展、主网资金广播和用户视觉复核仍未完成，不能声称整体验收通过。主网作者归属保持 unverified。

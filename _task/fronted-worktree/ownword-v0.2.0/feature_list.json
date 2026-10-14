@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "version": "v0.2.0",
-  "activeItem": "D04",
+  "activeItem": "D05",
   "implementationAuthorized": true,
   "approval": {
     "userReply": "可以",
@@ -104,8 +104,12 @@
         "C09 同作者新版本与旧链接不可变",
         "缺失、分支与覆盖不足不冒充最新"
       ],
-      "status": "in-progress",
-      "evidence": []
+      "status": "done",
+      "evidence": [
+        "前端 2d2acde；15 项内容与真实服务回归通过，lint/typecheck/build 通过",
+        "evidence/d04/checks.json：唯一修订草稿、未改动拦截、真实第二版、旧链接不变、历史往返",
+        "真实 API 竞争版本在广播前阻止；历史缺失/分支分别展示，320/1440 历史页 axe 0 违规"
+      ]
     },
     {
       "id": "D05",
@@ -117,7 +121,7 @@
         "33 条 BDD 与全部集成门禁逐项有证据",
         "构建和关联回归通过，实际扩展/主网/用户视觉复核明确"
       ],
-      "status": "not-started",
+      "status": "in-progress",
       "evidence": []
     }
   ],

@@ -1,0 +1,43 @@
+{
+  "frontendCommit": "2d2acde",
+  "checks": {
+    "lint": "passed",
+    "typecheck": "passed",
+    "build": "passed",
+    "contentTests": {
+      "total": 15,
+      "passed": 15,
+      "skipped": 0,
+      "failed": 0
+    }
+  },
+  "browser": {
+    "doubleClickOneRevisionDraft": {
+      "id": "092f6a0f-382e-4da6-9758-3a8ff9be5cf6",
+      "savedRevision": 1,
+      "bytes": 174
+    },
+    "unchangedBlocked": true,
+    "continueSameDraft": true,
+    "rootTxid": "695837bfe472523ac2bb83d67df21c4787bc6deb942b9e0f7fc45339ccd15c08",
+    "revisionTxid": "5a93e624ca170e38ca722ba43ad76aa30706ad66848f00853d72f4072da6baf6",
+    "operationId": "a7a92ff1-3553-4f6d-8ae8-9deb343ee6ac",
+    "readbackVerified": true,
+    "draftCleanup": "removed",
+    "originalBytesUnchanged": true,
+    "versionHistoryRoundtrip": true,
+    "conflictTxid": "7cb93b3cb05fba91442ec8d004085760b008aea08993e8f901f84a523137e2f7",
+    "conflictBranchesShown": 2,
+    "conflictLatestNotChosen": true,
+    "incompleteTxid": "403294632cb389269e7435024a398c5052d6fe8ddda36837769351f8799f4f3e",
+    "missingVersionNumber": null,
+    "historyViewport": 320,
+    "historyScrollWidth": 320,
+    "axe1440": 0,
+    "axe320": 0
+  },
+  "limits": [
+    "修订只在历史覆盖充分的隔离环境验收；公共历史门禁仍开放",
+    "完整 33 条 BDD、外部扩展与用户视觉复核在 D05 汇总"
+  ]
+}
