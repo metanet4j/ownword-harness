@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "version": "v0.2.0",
+  "activeItem": "D05",
+  "implementationAuthorized": true,
+  "approval": {
+    "userReply": "可以",
+    "decision": "R01 B",
+    "commit": "ecd85bc"
+  },
+  "documents": {
+    "cognition": "_task/system-design/spec/frontend/集成核心认知v0.2.0-20261014-215514.md",
+    "design": "_task/system-design/spec/frontend/设计文档v0.2.0-内容真实集成-20261014-215514.md",
+    "prd": "_task/system-design/spec/prd/v0.2.0/设计文档v0.2.0-20260917-210556.md"
+  },
+  "environment": {
+    "branch": "feature/ownword-v0.2.0",
+    "frontendBaseline": "04bb12766f4f565fd39d042e3d37b20e979bee10",
+    "backendBaseline": "11f925f1eb0f653c1eda267deef8c9661579dcda",
+    "prototypeCommit": "fb6ed59a6f537ba82d39b8b55dff9ab90238ca4c",
+    "ports": {
+      "web": 5071,
+      "api": 5073,
+      "wallet": 5078
+    }
+  },
+  "features": [
+    {
+      "id": "D00",
+      "name": "获准契约、隔离工作区与启动检查",
+      "dependencies": [],
+      "doneCriteria": [
+        "用户批准 R01 B 已记录",
+        "工作区、依赖及分支核对，启动检查可运行"
+      ],
+      "status": "done",
+      "evidence": [
+        "ecd85bc：获准契约已落实",
+        "./init.sh：文档、授权与前后端分支通过",
+        "独立 worktree 基线 04bb127/11f925f，其他依赖 clean"
+      ]
+    },
+    {
+      "id": "D01",
+      "name": "草稿、编辑器、统一预览与导入导出",
+      "dependencies": [
+        "D00"
+      ],
+      "doneCriteria": [
+        "完成 C01–C05 的草稿、编辑、预览、导入导出及相关 X；公共列表/阅读与发布互斥在 D02–D04 联验",
+        "保存失败、账户切换、多标签、导入与退出保护实测",
+        "编辑器与工作台对照原型"
+      ],
+      "status": "done",
+      "evidence": [
+        "前端 00cd8de；后端隔离配置 a5e7db2",
+        "lint/typecheck/build 通过；前端真实服务测试 35/35，后端关联模块 183/183",
+        "evidence/d01/browser-checks.json：原生 IME、读写故障、恢复、账户、多标签、字节保持、320px、键盘",
+        "evidence/d01/editor-prototype-match.png：原型同内容 1440×1000；最终 axe 0 违规"
+      ]
+    },
+    {
+      "id": "D02",
+      "name": "Post 协议、后端解析与公共读取",
+      "dependencies": [
+        "D01"
+      ],
+      "doneCriteria": [
+        "标准 Post 与修订 MAP 的字节及签名验证",
+        "内容/身份/头像分派、真实 Mongo 持久化与公共查询"
+      ],
+      "status": "done",
+      "evidence": [
+        "前端 c0b2c67；后端 876ab3b",
+        "evidence/d02/checks.json：41 项前端/真实 HTTP 回归通过；后端关联模块 188 项通过",
+        "evidence/d02/rebuild-result.json：删除三条测试内容投影、保留原交易、冷启动重建逐字段一致",
+        "真实浏览器空列表、停止 API 后错误、恢复后重试均通过；主网历史门禁保留"
+      ]
+    },
+    {
+      "id": "D03",
+      "name": "Review、钱包发布、恢复与 Proof",
+      "dependencies": [
+        "D02"
+      ],
+      "doneCriteria": [
+        "C06–C08/C10 真实签名及服务闭环",
+        "重复、取消、超时、刷新和同步失败恢复"
+      ],
+      "status": "done",
+      "evidence": [
+        "前端 1fb21a0；47 项不同测试通过，lint/typecheck/build 通过",
+        "evidence/d03/checks.json：双击、取消、真实回执丢失及刷新零重播、编辑期间同步清理、访客阅读及 CRLF 导出",
+        "阅读页 320px 无横向溢出，修复任务清单无障碍名称后 axe 0 违规"
+      ]
+    },
+    {
+      "id": "D04",
+      "name": "修订与版本历史",
+      "dependencies": [
+        "D03"
+      ],
+      "doneCriteria": [
+        "C09 同作者新版本与旧链接不可变",
+        "缺失、分支与覆盖不足不冒充最新"
+      ],
+      "status": "done",
+      "evidence": [
+        "前端 2d2acde；15 项内容与真实服务回归通过，lint/typecheck/build 通过",
+        "evidence/d04/checks.json：唯一修订草稿、未改动拦截、真实第二版、旧链接不变、历史往返",
+        "真实 API 竞争版本在广播前阻止；历史缺失/分支分别展示，320/1440 历史页 axe 0 违规"
+      ]
+    },
+    {
+      "id": "D05",
+      "name": "完整功能、视觉与集成验收",
+      "dependencies": [
+        "D04"
+      ],
+      "doneCriteria": [
+        "33 条 BDD 与全部集成门禁逐项有证据",
+        "构建和关联回归通过，实际扩展/主网/用户视觉复核明确"
+      ],
+      "status": "needs-review",
+      "evidence": [
+        "前端 6f9bcca；后端 ccbb03f；原型基线 fb6ed59 未改动",
+        "前端完整测试 48/48；后端关联模块 189/189；最终 lint/typecheck/build 及服务启动检查通过",
+        "验收报告v0.2.0-20261015-015045.md：33 条 BDD 对照及外部门禁",
+        "evidence/d05/checks.json：账户变化、历史操作隔离、写锁接管、日志失败重试、Proof、原型尺寸与 320px 检查",
+        "最终新浏览器会话无未处理异常；用户视觉复核、实际扩展、公共历史/checkpoint 与主网广播未验收"
+      ]
+    }
+  ],
+  "gates": {
+    "actualExtension": "not-verified",
+    "publicHistoryCheckpoint": "not-verified",
+    "mainnetFundingAndBroadcast": "waiting-funds",
+    "userVisualReview": "not-reviewed"
+  }
+}

@@ -7,10 +7,10 @@ ownword 主仓内有多处子目录本身是**独立 Git 仓库**，不纳入主
 
 | 位置 | 内容 | 明细 |
 |---|---|---|
-| `frontend/` | 1 个独立仓库（仅本地），主仓根直属 | 见下表 |
+| `frontend/` | 1 个独立前端仓库，保留 v0.1/v0.2 版本分支 | 见下表 |
 | `designs/` | 4 个独立仓库 + 1 个被忽略的第三方 vendor | [`designs/README.md`](designs/README.md) |
 | `backend/` | 7 个独立仓库 | [`backend/README.md`](backend/README.md) |
-| `_task/fronted-worktree/` | 1 个独立仓库 + 2 个版本任务 worktree | [`_task/fronted-worktree/README.md`](_task/fronted-worktree/README.md) |
+| `_task/fronted-worktree/` | 前端任务入口说明；旧任务目录已清理 | [`_task/fronted-worktree/README.md`](_task/fronted-worktree/README.md) |
 | `Archive/prototype/` | 3 个仅本地的独立仓库 | [`Archive/prototype/README.md`](Archive/prototype/README.md) |
 | `_task/backend-worktree/` | 后端任务规则与 Maven 规范；旧任务目录已清理 | [`_task/backend-worktree/README.md`](_task/backend-worktree/README.md) |
 | `reference/` | 6 份外部源码快照，非 Git 仓库，整体忽略 | [`reference/README.md`](reference/README.md) |
@@ -19,7 +19,7 @@ ownword 主仓内有多处子目录本身是**独立 Git 仓库**，不纳入主
 
 | 子目录 | 当前分支 | HEAD | 远程仓库 |
 |---|---|---|---|
-| `frontend/` | `master` | `b4a30a1` | 无（仅本地） |
+| `frontend/` | `feature/ownword-v0.2.0` | `6f9bcca` | https://github.com/metanet4j/ownword-web.git |
 
 ## 约定
 

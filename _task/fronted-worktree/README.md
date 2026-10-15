@@ -1,21 +1,18 @@
-# fronted-worktree/ 子仓库清单
+# 前端任务工作区
 
-OwnWord 根仓库只跟踪本目录第一级文件；所有子目录及其中的任务文档、源码、证据和缓存均由根 `.gitignore` 忽略，在本地保留。新的任务目录自动适用，源码继续由各独立 Git 仓库管理。
-主 clone 恢复基线核实于 2026-10-13。主 clone 已恢复，任务 worktree 的 19 份既有源码摘要保持一致；当前登记见[环境文件](ownword-v0.1.0/environment.json)。
+OwnWord 根仓库只跟踪本目录第一级文件；所有任务子目录均由根 `.gitignore` 忽略，新的任务目录自动适用。
 
-| 子目录 | 当前分支 | HEAD | 远程仓库 |
-|---|---|---|---|
-| `own-word-web/` | `master` | `34353ef` | https://github.com/metanet4j/ownword-web.git |
+本目录当前无任务子目录。v0.1.0 和 v0.2.0 的验收报告、任务状态快照及已有环境登记已迁入[前端知识库](../../知识库/前端/README.md)，旧任务脚本、证据与构建缓存已清理。
 
-## 任务 worktree
+## 代码与本地数据
 
-| 任务目录 | worktree 子目录 | 所属主 clone | 分支 | HEAD |
-|---|---|---|---|---|
-| `ownword-v0.1.0/` | `own-word-web/` | `own-word-web/` | `feature/ownword-v0.1.0` | `04bb127` |
-| `ownword-v0.2.0/` | `own-word-web/` | `own-word-web/` | `feature/ownword-v0.2.0` | 起点 `04bb127`；当前见[任务清单](ownword-v0.2.0/feature_list.json) |
+- 完整前端仓库及 Git 数据库位于根目录 `frontend/`，远端为 `https://github.com/metanet4j/ownword-web.git`。
+- 当前检出 `feature/ownword-v0.2.0`，提交 `6f9bcca`；`feature/ownword-v0.1.0`（`04bb127`）和 `master` 均保留。两个版本分支尚未合并到 `master`。
+- 私有钱包、服务配置和头像数据保存在 `.local-state/frontend/ownword-v0.1.0/` 与 `.local-state/frontend/ownword-v0.2.0/`，已逐文件核对，继续在本地保留并由根 Git 忽略。
+- 原任务启动脚本已清理，知识库中的旧启动命令属于实施记录；重新启动服务时需按当前目录准备环境。
 
 ## 约定
 
-- 子仓库独立提交、独立推送，内容不进入 ownword 主仓。
-- 改这些目录时先进对应仓库操作，不要在主仓对它执行 `git add`。
-- 新增或移除子仓库后更新本表，并在根目录总入口登记位置。
+- 源码在独立前端仓库提交和推送；根仓库管理知识库与工作区说明。
+- 临时任务资料保存在本地任务目录，需长期保存的文档迁入知识库。
+- 清理任务目录前，先保存文档、代码引用与私有持久化数据。

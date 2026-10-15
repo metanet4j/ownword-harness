@@ -1,0 +1,544 @@
+{
+  "schemaVersion": 1,
+  "activeItem": null,
+  "allowedStatuses": [
+    "not-started",
+    "in-progress",
+    "needs-review",
+    "blocked",
+    "done"
+  ],
+  "authorization": {
+    "implementation": true,
+    "mergeBackendToDev": true,
+    "createVersionWorktrees": true,
+    "mockScope": [
+      "wallet transport and authorization",
+      "mainnet broadcast result before funding"
+    ],
+    "realMainnetPublishing": "waiting-funds",
+    "pushRemote": false,
+    "agents": "independent",
+    "nextImplementationGate": "用户已明确授权 Tailwind CSS 实现并持续验收；主网发布仍等待充值。",
+    "realIndexSource": "waiting-for-verifiable-history-and-checkpoint",
+    "prototypeBaseline": "用户本轮明确指定 official-s2 分支最新代码 fb6ed59；旧 tag 保留，当前 UI 来源单独登记。",
+    "writeOrder": "用户要求身份创建、资料更新与头像发布均先钱包上链，再调用后端 POST 同步；头像不保留后端预上传。",
+    "redundantApiRemoval": "用户要求先完成钱包先行与接口精简，再处理真实端到端测试。",
+    "walletPreparation": "用户明确本地复用 Yours 官方钱包核心 API，保持稳定模块接口；先更新 reference，再按助记词模拟实现。",
+    "walletModule": "用户明确钱包为独立模块，设计稳定隔离接口；替换钱包保持业务调用接口不变。",
+    "mnemonicWallet": "同一助记词与固定 Yours 派生配置对应同一钱包，不同测试钱包使用不同助记词；私有运行配置保存，后端不接收助记词。"
+  },
+  "documents": {
+    "product": "_task/system-design/spec/核心认知.md",
+    "cognition": "_task/system-design/spec/frontend/集成核心认知v0.1.0-20261013-183000.md",
+    "design": "_task/system-design/spec/frontend/设计文档v0.1.0-真实集成-20261013-183000.md",
+    "prd": "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+    "acceptanceReport": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+  },
+  "environment": {
+    "frontendWorktree": "own-word-web",
+    "frontendBranch": "feature/ownword-v0.1.0",
+    "backendTask": "_task/backend-worktree/ownword-v0.1.0",
+    "prototype": "_task/prototype-worktree/ownword-official-s2/ownword-prototype",
+    "prototypeTag": "prototype/official-s2-20261013-213507",
+    "prototypeCommit": "a86850a225b00962277cf1160ed70f8129924fba",
+    "prototypeTree": "bd4488099d23199f79d65a5c987771e256258e95",
+    "prototypePrdVersion": "v0.4.0",
+    "backendBranch": "feature/ownword-v0.1.0",
+    "frontendCommit": "04bb12766f4f565fd39d042e3d37b20e979bee10",
+    "walletPort": 5048,
+    "walletEngine": "yours-core",
+    "legacyWalletPort": 5042,
+    "uiPrototypeCommit": "fb6ed59a6f537ba82d39b8b55dff9ab90238ca4c",
+    "uiPrototypeTree": "3f0722644d5e409633698be219851e1ebbe5e624"
+  },
+  "features": [
+    {
+      "id": "D00",
+      "name": "核心认知与集成设计",
+      "dependencies": [],
+      "status": "needs-review",
+      "doneCriteria": [
+        "核心认知先于设计",
+        "缺失接口与完整 CWI 契约已设计",
+        "四项 review 问题有明确流程、契约及验收映射",
+        "当前原型 tag 和严格技术栈已登记",
+        "引用、28 BDD 和门禁检查通过"
+      ],
+      "implementationStatus": "written-and-checked",
+      "description": "核心认知与集成设计；事实与验收以当前设计文档对应阶段为准。",
+      "evidence": "认知基于总认知且独立保留，接口和钱包边界已设计；用户已明确授权 Tailwind 实现，设计文档仍保留人工复核状态。原型 tag/技术栈已核实，当前验证见 acceptanceReport。"
+    },
+    {
+      "id": "D01",
+      "name": "链上先行写入与头像发布设计",
+      "dependencies": [
+        "D00"
+      ],
+      "status": "needs-review",
+      "implementationStatus": "written-and-checked",
+      "doneCriteria": [
+        "基于总认知修订独立实现核心认知，移除后端先登记和上传约束",
+        "设计钱包先广播、后端按原交易同步、幂等与恢复，包含头像与首次身份依赖",
+        "更新接口及验收映射，检查引用、矛盾及范围，提交供人工复核"
+      ],
+      "description": "用户明确本期所有业务 POST 均先钱包上链后后端同步，头像也作为链上图片发布。",
+      "evidence": "先修订独立核心认知，再编写钱包先行、链上头像、浏览器日志和原交易同步设计；随后按用户要求直接删除多余接口。实现及允许范围验收见 A01/F03；设计保留人工复核，未修改总核心认知及冻结原型。"
+    },
+    {
+      "id": "E00",
+      "name": "仓库合并与版本 worktree",
+      "dependencies": [
+        "D00"
+      ],
+      "status": "done",
+      "doneCriteria": [
+        "六个后端来源合入 dev 的祖先证据",
+        "版本 worktree 独立且来源登记",
+        "前端 Git 元数据恢复并保留源码"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "description": "仓库合并与版本 worktree；事实与验收以当前设计文档对应阶段为准。",
+      "evidence": "六仓来源均在 dev；BSV SDK 10fd42d/JungleBus 1272067 的 merge tree 与已验收来源一致；六个独立版本 worktree 已建立。前端原 .git 指针修复，19 份源码摘要不变，工作区 clean，init.sh 实際环境检查通过。"
+    },
+    {
+      "id": "W00",
+      "name": "依赖与完整钱包适配",
+      "dependencies": [
+        "E00"
+      ],
+      "status": "done",
+      "doneCriteria": [
+        "官方 S2/Next dev 和 build 验证",
+        "28 个 CWI 方法可调用且契约明确",
+        "真实派生及密码学验证"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "description": "依赖与完整钱包适配；事实与验收以当前设计文档对应阶段为准。",
+      "evidence": "Next/Tailwind/S2 生产构建、lint、typecheck、2 项真实 Actions/钱包测试通过；独立 dev 页面实际加载 Tailwind utilities。28 CWI 方法已映射，非本期能力明确 unsupported；完整浏览器业务路径留在 I06/I07。"
+    },
+    {
+      "id": "A00",
+      "name": "真实 Web API 与存储",
+      "dependencies": [
+        "E00"
+      ],
+      "status": "done",
+      "doneCriteria": [
+        "真实 MongoDB 和头像持久化",
+        "真实主网读取及逐输出验签",
+        "异常、幂等、双输出和模拟隔离验证"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "description": "真实 Web API 与存储；事实与验收以当前设计文档对应阶段为准。",
+      "evidence": "真实 Java/MongoDB/文件/AIP 与主网只读；当前 24 项钱包及真实 HTTP 检查通过。Java clean package 依赖模块 183 项、API JUnit 0；PNG/JPEG/WebP 字节与缓存重建通过。live 公共历史解析和投影仍待真实索引来源及主网门禁。"
+    },
+    {
+      "id": "A01",
+      "name": "原交易同步与链上头像后端",
+      "dependencies": [
+        "D01"
+      ],
+      "status": "done",
+      "implementationStatus": "implemented-and-verified-with-real-services",
+      "doneCriteria": [
+        "transactions/sync 仅接收原交易，真实解析验签、幂等保存与查询",
+        "链上图片真实字节/MIME/摘要与重建读取一致，旧预登记和上传写入口退出",
+        "真实 HTTP/MongoDB/密码学检查、Java clean test/package 和提交完成"
+      ],
+      "description": "根据当前设计实现钱包广播后的数据同步；不执行主网新交易，不伪造公共索引。",
+      "evidence": "后端 18403d4、233bbcb、11f925f：真实原交易同步和链上头像，旧五类 POST 删除。GET transactions 恢复并有已广播未知结果的真实消费者；普通身份查询从已验签记录提供隔离投影，无 simulationPreview。24 项当前检查及 Java clean package（依赖 183 项、API JUnit 0）通过；主网及公开投影仍待外部事实。"
+    },
+    {
+      "id": "F00",
+      "name": "v0.1 身份页面与流程",
+      "dependencies": [
+        "W00",
+        "A00"
+      ],
+      "status": "blocked",
+      "doneCriteria": [
+        "身份页面与指定原型对应",
+        "28 BDD 累计覆盖并记录真实或模拟",
+        "账户隔离、偏好和离开保护可用"
+      ],
+      "implementationStatus": "implemented-with-unverified-public-branches",
+      "description": "v0.1 身份页面与流程；事实与验收以当前设计文档对应阶段为准。",
+      "evidence": "bbf47d9：Tailwind/S2 页面按冻结原型还原，偏好、复制、取消重试、账户隔离与原操作恢复已实现并检查；B06/B07/B08 等待真实索引事实，当前证据见 acceptanceReport。",
+      "blocker": "公共已发布、未发布和不完整分流缺少真实签名历史与充分索引覆盖；已异步询问现有索引配置。"
+    },
+    {
+      "id": "F01",
+      "name": "冻结原型还原修正",
+      "dependencies": [
+        "W00",
+        "A00"
+      ],
+      "status": "needs-review",
+      "doneCriteria": [
+        "按冻结 tag 还原本期页面结构、导航、字级、间距及卡片",
+        "保存原型、改前、改后同视口截图并逐页审阅",
+        "真实服务流程与前端检查通过，保留原有主网及公共索引门禁"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "description": "根据用户指出的原型偏差，修正 v0.1 适用页面；基线沿用 environment.prototypeTag。",
+      "evidence": "bbf47d9：按用户确认的冻结 tag 修正 v0.1 UI；逐页截图、19 个对照链接、最终 lint/typecheck/build、18 项真实 API/钱包、原生复制、取消重试、键盘翻面、预览刷新、320px 与真实 API 停机恢复均已检查。视觉结果留待人工复核，完整产品仍受 F00 公共分流及主网资金门禁限制。"
+    },
+    {
+      "id": "F02",
+      "name": "前端格式化插件与统一代码格式",
+      "dependencies": [
+        "W00"
+      ],
+      "status": "done",
+      "implementationStatus": "implemented-and-verified",
+      "doneCriteria": [
+        "锁定 Prettier 与 Tailwind 插件，编辑器和命令行共享配置",
+        "前端代码实际格式化且 format:check、lint、typecheck、真实集成 test、build 通过",
+        "提交配置、代码与验证记录，预览服务恢复可用"
+      ],
+      "description": "按用户要求接入格式化插件并格式化当前 v0.1.0 前端实现。",
+      "evidence": "63b162d：锁定 Prettier 3.9.10、Tailwind 插件 0.8.1 与 eslint-config-prettier 10.1.8；配置 VS Code 推荐扩展和保存格式化，lint 自动检查格式。20 个源文件均为插件格式化输出，格式/lint/类型/18 项真实集成/生产构建通过，5041 已恢复；证据见 evidence/formatting-20261014-105423。编辑器扩展安装未执行，当前环境无 VS Code CLI。"
+    },
+    {
+      "id": "F03",
+      "name": "钱包先行的前端发布与恢复",
+      "dependencies": [
+        "D01",
+        "A01"
+      ],
+      "status": "needs-review",
+      "implementationStatus": "implemented-and-verified-within-allowed-wallet-simulation",
+      "doneCriteria": [
+        "Review 前不写后端；头像与资料真实钱包回执后才 POST 原交易",
+        "IndexedDB 保存转交和回执；同步失败或丢回执只恢复原交易，不自动重签",
+        "首次带头像依赖、多次授权与部分成功状态准确，头像引用链上 URI",
+        "旧流程测试迁移后格式/lint/类型/真实 API 测试/build 与浏览器实际验收通过，提交并恢复预览"
+      ],
+      "description": "依据新认知切换前端钱包流水线；保留真实公共索引和主网充值门禁。",
+      "evidence": "前端 abb6b7c：IndexedDB 原子登记转交与保存回执；先真实钱包交易编码/签名，再 POST transactions/sync；头像首次 ID→B/MAP/AIP→ALIAS；丢回执只读恢复、同 TxID 重放、账户迟到回执隔离及部分取消已验。格式/lint/类型、18 项真实服务与钱包边界套件、最终 build 和浏览器 HAR 通过，5041 预览已恢复。保留人工复核；真实扩展主网发布与公共分流仍待外部条件。"
+    },
+    {
+      "id": "V00",
+      "name": "无资金真实集成验收",
+      "dependencies": [
+        "F00"
+      ],
+      "status": "needs-review",
+      "doneCriteria": [
+        "I01-I07/I10 实际执行",
+        "production 页面、截图及日志核查",
+        "各仓库提交与复跑说明完整"
+      ],
+      "implementationStatus": "independent-checks-passed",
+      "description": "无资金真实集成验收；事实与验收以当前设计文档对应阶段为准。",
+      "evidence": "官方核心钱包范围内 29 项当前检查通过，5 项直接使用官方核心及真实 SQLite，其余 24 项为协议/模块兼容和真实 HTTP 检查；生产构建及真实浏览器创建、头像、取消、钱包重启隔离和实际停机恢复通过。Java 后端本轮未修改，183 项沿用已提交基线，非本轮重跑。完整产品仍受 F00 公共事实及 I08/I09 门禁限制。"
+    },
+    {
+      "id": "V01",
+      "name": "充值后主网发布验收",
+      "dependencies": [
+        "V00"
+      ],
+      "status": "not-started",
+      "doneCriteria": [
+        "I08 首次 ID+ALIAS 真实广播索引回读",
+        "I09 Profile 更新历史及 BAP ID 不变",
+        "所有最终门禁通过"
+      ],
+      "implementationStatus": "waiting-funds-and-real-index",
+      "description": "充值后主网发布验收；事实与验收以当前设计文档对应阶段为准。",
+      "evidence": "I08/I09 未执行；不会以模拟回执关闭主网验收。"
+    },
+    {
+      "id": "D02",
+      "name": "钱包写入与后端查询职责分离认知及设计",
+      "status": "needs-review",
+      "dependencies": [
+        "D01"
+      ],
+      "implementationStatus": "written-and-checked",
+      "doneCriteria": [
+        "基于总认知明确钱包授权写入与后端业务查询边界",
+        "设计签名交易持久化、独立广播 Mock、原交易存储及隔离测试投影",
+        "明确 SDK 隐式钱包业务查询的迁移方式、恢复和多钱包边界，提交供复核"
+      ],
+      "description": "根据用户选择先沿用本地钱包适配器，广播 Mock，后端解析、存储和业务读取真实。",
+      "evidence": "根文档 9f85424、c92813f：基于总认知定义稳定 WalletProvider 和真实后端业务查询，补充 Yours 官方核心、助记词钱包及隔离持久存储。检查与实现证据见 W01 和当前报告；设计保留人工复核。"
+    },
+    {
+      "id": "F04",
+      "name": "独立广播与后端统一业务读取",
+      "status": "needs-review",
+      "dependencies": [
+        "D02",
+        "A01",
+        "F03"
+      ],
+      "implementationStatus": "implemented-and-verified-within-allowed-wallet-simulation",
+      "doneCriteria": [
+        "真实签名原交易先持久化，独立 Mock 广播成功后才同步同一 TxID",
+        "BAP 状态、资料、头像和业务交易恢复统一后端，无 simulationPreview 资料来源分支",
+        "后端从已验签原交易建立隔离测试投影，普通查询真实回读且不冒充主网事实",
+        "正常、更新、图片、拒绝、同步故障和恢复实际测试、格式/类型/build、浏览器及提交完成"
+      ],
+      "evidence": "前端 bf25772、后端 11f925f：稳定钱包接口与私有 CWI 实现，签名原交易先保存、独立 Mock 广播接受后同步；普通 GET 从后端验签交易派生 profile，移除 simulationPreview。24 项检查无失败/skip；格式/lint/类型/build、Java clean package、浏览器资料更新、头像字节回读、取消及实际 API 停机刷新同 TxID 恢复通过。实际 Yours、主网和公共历史门禁保留，详见当前报告。"
+    },
+    {
+      "id": "R01",
+      "name": "更新 Yours 官方参考源码",
+      "status": "done",
+      "dependencies": [],
+      "implementationStatus": "official-yours-source-updated-and-verified",
+      "doneCriteria": [
+        "先保留既有快照，再从官方上游更新到固定提交",
+        "核对来源、commit、tree、实际版本和助记词/API 入口，更新 reference 清单并提交"
+      ],
+      "evidence": "Yours 5.1.1，官方 main 4d9299b06bdba8925ee573451b2e426574234989，tree 4b08ebdc8eb88f1c1a1952de4b13a5cca461bd71；342 文件、remote/干净检出/fsck 通过。旧无 Git 快照完整保留，清单与 README 已更新。SDK 对照源码独立获取，不改旧固定 SDK。 根提交 20540d9；匹配 SDK 对照为 be69d54131aff04720fdee06a68a23bcb51a28b9，固定源码干净且 fsck 通过。"
+    },
+    {
+      "id": "W01",
+      "name": "Yours 官方核心与助记词钱包模拟",
+      "status": "needs-review",
+      "dependencies": [
+        "R01",
+        "D02",
+        "F04"
+      ],
+      "implementationStatus": "implemented-and-verified-with-official-core",
+      "doneCriteria": [
+        "认知与设计明确官方核心来源、助记词唯一钱包及隔离存储，公开接口保持不变",
+        "官方钱包 API 真实构造签名，测试资金/广播隔离，不再以自建 Transaction 模拟官方钱包",
+        "同助记词重开身份及原交易可恢复、不同钱包账户与记录隔离",
+        "真实业务 HTTP/存储、图片、更新、拒绝与停机恢复通过，格式/类型/build/提交及预览恢复"
+      ],
+      "evidence": "前端 4fe782b：官方 @1sat/wallet-node 0.0.88 / wallet 0.0.121 与 Yours utils 0.0.43，独立进程、助记词和 SQLite 持久钱包，稳定公共契约未改。29 项实际检查（原 24 项兼容/HTTP + 5 项官方核心）、格式/lint/类型/build、浏览器三笔头像创建、钱包重启、不同钱包隔离、取消无同步和 API 停机刷新同 TxID 恢复通过。Yours 5.1.1 源码已固定，认知/设计 c92813f；证据见 evidence/yours-core-20261014-154941。真实扩展、主网与公共分流门禁保留，交付人工复核。"
+    },
+    {
+      "id": "F05",
+      "name": "移除闲置钱包 RPC 轮询",
+      "status": "needs-review",
+      "dependencies": [
+        "W01"
+      ],
+      "implementationStatus": "code-committed-user-ended-further-verification",
+      "doneCriteria": [
+        "页面闲置不产生持续钱包 RPC，页面回到前台能识别账户变化",
+        "签名/准备/广播前的真实账户校验和稳定钱包公共接口保持不变",
+        "真实浏览器闲置/切换账户/取消与正常发布验收、格式/lint/类型/test/build、提交及预览恢复"
+      ],
+      "description": "用户指出页面持续调用 RPC，移除 1.2 秒会话轮询；保留独立官方核心的必要钱包传输。",
+      "evidence": "前端 bde801a：移除 1.2 秒定时 RPC 轮询，前台 focus/visibility 刷新并隔离迟到结果；授权前账户校验与公共契约未改。闲置观察 24→0 次，真实标签切换、取消无 POST、账户 1 批准发布与后端回读通过；29 项、格式/lint/类型及最终构建产物通过。该轮按用户要求结束追加验收；当前 F06 在新的 UI 验收授权下已停止前端、构建、重启并完成生产浏览器复验，旧资源引用问题已关闭。证据见 evidence/rpc-idle-20261014-172316。",
+      "verificationDecision": "RPC 改动按该轮用户要求完成提交；生产资源复验在当前 F06 新授权范围完成，主网门禁保留。"
+    },
+    {
+      "id": "F06",
+      "name": "最新原型 UI 逐页还原",
+      "status": "needs-review",
+      "dependencies": [
+        "F01"
+      ],
+      "implementationStatus": "implemented-and-verified",
+      "doneCriteria": [
+        "登记原型 fb6ed59 最新来源，逐页核对 v0.1 适用布局、组件、文案和响应式",
+        "保留同视口原型、改前与改后截图，浏览器完成正常与边界、双语主题及键盘验收",
+        "lint、typecheck、test、build 通过，提交本轮代码和验收证据"
+      ],
+      "description": "用户明确指定 official-s2 分支最新代码作为 UI 还原基准；沿用 v0.1 业务范围，保留真实集成状态。",
+      "evidence": "前端 7e9d9ab：对齐最新原型 fb6ed59 的 v0.1 身份布局、头像、标识、字号、间距和响应式。六组同视口共同区域无超过 0.1px 的布局差异；其余页保留真实状态与范围差异。生产截图、9 份 axe（0 violation）、实际创建/取消重试/回读/复制/键盘翻面完成；lint、typecheck、29 项及 build 通过。5041 生产已安全重建并恢复；具体差异、字体网络日志、对比度人工判读与读屏未验范围见 evidence/ui-latest-20261014/verification-summary.json。视觉结果供用户复核。"
+    },
+    {
+      "id": "V02",
+      "name": "完整实现浏览器验收与缺陷修复",
+      "status": "done",
+      "implementationStatus": "implemented-and-verified",
+      "dependencies": [
+        "F06",
+        "W01"
+      ],
+      "doneCriteria": [
+        "按 28 项产品 BDD 核查当前 v0.1 实现，区分实际通过、专项基线与外部阻塞",
+        "浏览器复核连接/取消/失败、输入和头像边界、离开保护、复制、偏好、账户隔离及恢复",
+        "发现缺陷修复并完成相关回归、要求的源码检查、提交与生产恢复"
+      ],
+      "description": "用户继续完整验收；保留主网资金和真实公共索引门禁，使用独立官方核心测试钱包。",
+      "evidence": "前端 1ee11f2、04bb127 修复浏览器后退丢草稿、测试广播祖先装载与拒绝状态误报；31项真实协议/官方钱包/HTTP测试无失败和跳过，lint/typecheck/build通过。当前28项覆盖来源、浏览器边界与已有专项基线见 evidence/full-acceptance-20261014-184000/bdd-coverage.json。最终生产320px对话框axe为0违规；3类缺陷均已复验。此任务仅关闭无资金本地验收，不关闭真实扩展、B06/B07/B08、I08/I09或F06视觉人工复核。"
+    }
+  ],
+  "acceptance": {
+    "I01": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "前端04bb127：最终lint、typecheck、31项测试（0失败/0跳过）、build和主生产新会话通过。"
+    },
+    "I02": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "31项真实HTTP/MongoDB检查包含幂等、普通GET profile和PNG/WebP缓存回源；真实API停机浏览器沿用官方核心专项，同TxID恢复本轮集成重验通过。"
+    },
+    "I03": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本轮PNG头像实际发布恢复及逐字节回读通过；31项包含PNG/WebP缓存重建和官方核心三步创建更新；主网费用及最大交易能力未验。"
+    },
+    "I04": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "真实主网只读和覆盖不足保持 unknown；正向公共分流待真实索引。"
+    },
+    "I05": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "真实 BAP/AIP、TxID、冻结资料与字节核对；异常签名在 createAction 前拒绝，后端再次验签；独立 Profile 注入及原交易篡改拒绝，账户切换阻止钱包转交/错误输出登记。"
+    },
+    "I06": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "官方 Yours 核心真实创建签名、独立 Mock 广播、助记词/SQLite 重开、丢签名回执原交易恢复及钱包隔离通过；Chrome 扩展桥接/弹窗和主网发布未验。稳定 WalletProvider 契约未改。"
+    },
+    "I07": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "官方核心首次ID→图片→ALIAS及更新通过；本轮修复精简和共同祖先验证，实际部分失败恢复复用ID/图片，仅新建资料交易；失败/取消重试及后端valid回读通过。真实停机浏览器沿用已有专项。scope=broadcast-mock不代表主网事实。"
+    },
+    "I08": {
+      "status": "waiting-funds"
+    },
+    "I09": {
+      "status": "waiting-funds"
+    },
+    "I10": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "最新原型 fb6ed59 对照、最终生产截图、320/390/1440px、双语主题、复制/键盘/实际流程通过。9 份 axe 无 violation；渐变对比度需人工判读，未运行读屏软件。完整差异与证据见当前报告。"
+    }
+  },
+  "productAcceptance": {
+    "B01": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B02": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B03": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B04": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B05": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B06": {
+      "status": "not-run",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B07": {
+      "status": "not-run",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B08": {
+      "status": "not-run",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B09": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本轮链上先行对应检查见当前报告；主网发布和依赖真实公共索引的 UI 首次分流未关闭。"
+    },
+    "B10": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本轮链上先行对应检查见当前报告；主网发布和依赖真实公共索引的 UI 首次分流未关闭。"
+    },
+    "B11": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B12": {
+      "status": "simulated-passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本轮链上先行对应检查见当前报告；主网发布和依赖真实公共索引的 UI 首次分流未关闭。"
+    },
+    "B13": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本轮链上先行对应检查见当前报告；主网发布和依赖真实公共索引的 UI 首次分流未关闭。"
+    },
+    "B14": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本轮链上先行对应检查见当前报告；主网发布和依赖真实公共索引的 UI 首次分流未关闭。"
+    },
+    "B15": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B16": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B17": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B18": {
+      "status": "simulated-passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本轮链上先行对应检查见当前报告；主网发布和依赖真实公共索引的 UI 首次分流未关闭。"
+    },
+    "B19": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本轮链上先行对应检查见当前报告；主网发布和依赖真实公共索引的 UI 首次分流未关闭。"
+    },
+    "B20": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md",
+      "scope": "本轮站内离开、浏览器后退Keep/Discard、前进和Review返回实测通过；历史保护限支持Navigation API的当前Chromium，其他浏览器未验。"
+    },
+    "B21": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B22": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B23": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B24": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B25": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B26": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B27": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    },
+    "B28": {
+      "status": "passed",
+      "evidence": "_task/fronted-worktree/ownword-v0.1.0/验收报告v0.1.0-20261014-010853.md"
+    }
+  },
+  "remaining": [
+    "真实 Yours 扩展准备签名但不广播的能力及接口验证",
+    "真实 BAP 索引地址、签名历史、同步 checkpoint 和充分覆盖依据",
+    "B06/B07/B08 正向公共分流和 live 投影重建",
+    "充值后 I08/I09 的真实 Yours 主网发布与更新"
+  ]
+}
