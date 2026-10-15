@@ -1,15 +1,14 @@
 # designs/ 子仓库清单
 
 `designs/` 下的下列子目录是**独立 Git 仓库**，不纳入 ownword 主仓（根目录 `.gitignore` 已忽略）。
-数据由 `git -C <仓库> remote -v` 与 `git -C <仓库> rev-parse` 采集于 2026-09-17。
+数据由 `git -C <仓库> remote -v`、`git -C <仓库> worktree list` 与 `git rev-parse` 采集于 2026-10-15。
 
 | 子目录 | 当前分支 | HEAD | 远程仓库 |
 |---|---|---|---|
-| `ownword-design-prototype/` | `master` | `50673d0` | 无（已解除远端关联，仓库保留本地） |
-| `own-word-prototype-s2-astra-001/` | `master` | `a66a3ba` | https://github.com/metanet4j/ownword-design-prototype.git |
-| `own-word-prototype-s2-astra-002/` | `master` | `50673d0` | 无（已解除远端关联，仓库保留本地） |
-| `own-word-prototype-s2-astra-ultra-003/` | `codex/design-astra-ultra-003` | `70d40d9` | 无（仅本地） |
-| `own-word-prototype-s2-astra-004/` | `master` | `093b623` | 无（仅本地） |
+| `own-word-prototype-pick/` | `dev` | `fb6ed59` | https://github.com/metanet4j/ownword-design-prototype.git |
+| `ownword-design-prototype/` | `master` | `50673d0` | 无（同一远端的旧克隆，已解除远端关联，仓库保留本地） |
+
+`own-word-prototype-pick/` 是四个原型任务 worktree 的主仓，任务到 worktree 的对应关系见 [_task/prototype-worktree/README.md](../_task/prototype-worktree/README.md)，链接关系以 `git worktree list` 为准。
 
 ## 被忽略的非仓库目录
 
