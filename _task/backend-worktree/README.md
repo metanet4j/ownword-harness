@@ -1,29 +1,22 @@
-# backend-worktree/ 子仓库清单
+# 后端任务工作区
 
-迁移工作区入口：[bsv-sdk-java-migration](bsv-sdk-java-migration/README.md)。该任务的仓库基线、分支和验证状态由其目录内文件维护。
+OwnWord 根仓库只跟踪本目录第一级文件，包括 [AGENTS.md](AGENTS.md)、[mvn-command.md](mvn-command.md) 和本文件。所有子目录及其中的任务文档、源码、证据和缓存均由根 `.gitignore` 忽略，在本地保留；新的任务目录自动适用。
 
-`_task/backend-worktree/boot4-java25-upgrade/` 下的 4 个目录是**git worktree**，不是普通子目录：
-`.git` 是**文件**（gitdir 指针），主仓库是 `backend/` 下的同名仓库。它们不纳入 ownword 主仓。
-数据由 `git -C <仓库> remote -v` 与 `git -C <仓库> rev-parse` 采集于 2026-09-17。
+## 当前仓库状态
 
-| 子目录（worktree） | 所属主仓库 | 当前分支 | HEAD | 远程仓库 |
-|---|---|---|---|---|
-| `boot4-java25-upgrade/metanet4j-parent/` | `backend/metanet4j-parent/` | `feature/java25` | `50598c0` | https://github.com/metanet4j/metanet4j-parent.git |
-| `boot4-java25-upgrade/metanet4j-base/` | `backend/metanet4j-base/` | `feature/java25` | `6e16cfa` | https://github.com/metanet4j/metanet4j-base.git |
-| `boot4-java25-upgrade/metanet4j-sdk/` | `backend/metanet4j-sdk/` | `feature/java25` | `bae4c36` | https://github.com/metanet4j/metanet4j-sdk.git |
-| `boot4-java25-upgrade/metanet4j-component/` | `backend/metanet4j-component/` | `feature/java25` | `e634982` | https://github.com/metanet4j/metanet4j-component.git |
+以下任务的子仓库提交均已包含在各自的本地 `dev` 分支中，任务目录内已无代码仓库；任务资料仍保存在本地。
 
-## v0.1.0 实施工作区
+| 任务目录 | 已清理子仓库数 |
+| --- | --- |
+| `boot4-java25-upgrade/` | 4 |
+| `bsv-sdk-java-migration/` | 5 |
+| `ownword-v0.1.0/` | 6 |
+| `ownword-v0.2.0/` | 1 |
 
-[ownword-v0.1.0](ownword-v0.1.0/AGENTS.md) 包含六个从 dev 建立的 `feature/ownword-v0.1.0` worktree；来源和完整提交见[环境登记](ownword-v0.1.0/environment.json)。四仓升级成果已在 dev；独立 BSV SDK 与 JungleBus 也已本地合入 dev，原任务分支保留。业务状态统一见前端任务 harness。
-
-## v0.2.0 内容实施工作区
-
-[ownword-v0.2.0](ownword-v0.2.0/AGENTS.md) 从 v0.1 组件提交 11f925f 建立 feature/ownword-v0.2.0 worktree；其他依赖复用已核对基线，见[环境登记](ownword-v0.2.0/environment.json)。统一状态在[前端任务](../fronted-worktree/ownword-v0.2.0/feature_list.json)。
+后端开发入口见 [backend 仓库清单](../../backend/README.md)。`metanet4j-bsv-sdk` 的主仓库与 Git 数据库存放在 `backend/metanet4j-bsv-sdk/`，原任务分支和提交历史保留。
 
 ## 约定
 
-- `boot4-java25-upgrade/` 内的开发规则以该目录的 `AGENTS.md` 与计划文档为准；本文件只登记仓库信息。
-- 四个仓库有依赖顺序：`parent` → `base` → `sdk` → `component`。
-- 子仓库独立提交；本任务不推送远端。
-- 改动经 worktree 写入主仓库，主仓库提交历史独立于 ownword 主仓。
+- 工程与环境规则见 [AGENTS.md](AGENTS.md)，Maven 命令见 [mvn-command.md](mvn-command.md)。
+- 任务资料在本地任务目录维护；源码在对应独立仓库提交。
+- 删除任务 worktree 前，确认工作区干净且 HEAD 已包含在目标分支中，使用 `git worktree remove` 清理关联工作区。

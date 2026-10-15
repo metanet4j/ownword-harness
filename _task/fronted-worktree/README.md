@@ -1,6 +1,6 @@
 # fronted-worktree/ 子仓库清单
 
-`_task/fronted-worktree/` 下的下列子目录是**独立 Git 仓库**，不纳入 ownword 主仓（根目录 `.gitignore` 已忽略）。
+OwnWord 根仓库只跟踪本目录第一级文件；所有子目录及其中的任务文档、源码、证据和缓存均由根 `.gitignore` 忽略，在本地保留。新的任务目录自动适用，源码继续由各独立 Git 仓库管理。
 主 clone 恢复基线核实于 2026-10-13。主 clone 已恢复，任务 worktree 的 19 份既有源码摘要保持一致；当前登记见[环境文件](ownword-v0.1.0/environment.json)。
 
 | 子目录 | 当前分支 | HEAD | 远程仓库 |

@@ -13,35 +13,12 @@
 /backend/metanet4j-junglebus/
 /designs/ownword-design-prototype/
 /designs/own-word-prototype-pick/
-/_task/backend-worktree/boot4-java25-upgrade/metanet4j-parent/
-/_task/backend-worktree/boot4-java25-upgrade/metanet4j-base/
-/_task/backend-worktree/boot4-java25-upgrade/metanet4j-sdk/
-/_task/backend-worktree/boot4-java25-upgrade/metanet4j-component/
-/_task/backend-worktree/bsv-sdk-java-migration/metanet4j-parent/
-/_task/backend-worktree/bsv-sdk-java-migration/metanet4j-bsv-sdk/
-/_task/backend-worktree/bsv-sdk-java-migration/metanet4j-base/
-/_task/backend-worktree/bsv-sdk-java-migration/metanet4j-sdk/
-/_task/backend-worktree/bsv-sdk-java-migration/metanet4j-component/
-/_task/backend-worktree/junglebus-java25-migration/metanet4j-junglebus/
-/_task/backend-worktree/ownword-v0.1.0/metanet4j-parent/
-/_task/backend-worktree/ownword-v0.1.0/metanet4j-base/
-/_task/backend-worktree/ownword-v0.1.0/metanet4j-sdk/
-/_task/backend-worktree/ownword-v0.1.0/metanet4j-component/
-/_task/backend-worktree/ownword-v0.1.0/metanet4j-bsv-sdk/
-/_task/backend-worktree/ownword-v0.1.0/metanet4j-junglebus/
-/_task/backend-worktree/ownword-v0.1.0/.runtime/
-/_task/fronted-worktree/ownword-v0.1.0/.runtime/
-/_task/fronted-worktree/own-word-web/
-/_task/fronted-worktree/ownword-v0.1.0/own-word-web/
-/_task/prototype-worktree/ownword-v0.1.0/ownword-prototype/
-/_task/prototype-worktree/ownword-v0.1.0/.runtime/
-/_task/prototype-worktree/ownword-v0.2.0/ownword-prototype/
-/_task/prototype-worktree/ownword-v0.2.0/.runtime/
-/_task/prototype-worktree/ownword-v0.3.0/ownword-prototype/
-/_task/prototype-worktree/ownword-v0.3.0/.runtime/
-/_task/prototype-worktree/ownword-v0.4.0/ownword-prototype/
-/_task/prototype-worktree/ownword-v0.4.0/.runtime/
 /frontend/
+
+# ============ 任务工作区（仅跟踪第一级文件，所有子目录保留本地）============
+/_task/backend-worktree/*/
+/_task/fronted-worktree/*/
+/_task/prototype-worktree/*/
 
 # ============ 整体忽略的外部资料 / vendor ============
 # reference: 上游参考仓库，只保留说明与来源锁定清单
@@ -82,12 +59,3 @@ coverage/
 .ab-shots/
 .commandcode/
 /.opencode/goals/
-
-/_task/prototype-worktree/ownword-official-s2/ownword-prototype/
-/_task/prototype-worktree/ownword-official-s2/.runtime/
-/_task/fronted-worktree/ownword-v0.1.0/_runtime/
-
-/_task/fronted-worktree/ownword-v0.2.0/own-word-web/
-/_task/fronted-worktree/ownword-v0.2.0/_runtime/
-/_task/backend-worktree/ownword-v0.2.0/metanet4j-component/
-/_task/backend-worktree/ownword-v0.2.0/_runtime/

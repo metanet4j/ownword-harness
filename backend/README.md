@@ -9,12 +9,11 @@
 | `metanet4j-parent/` | `dev` | `917b7bd` | https://github.com/metanet4j/metanet4j-parent.git |
 | `metanet4j-base/` | `dev` | `279a7a6` | https://github.com/metanet4j/metanet4j-base.git |
 | `metanet4j-sdk/` | `dev` | `bb298d0` | https://github.com/metanet4j/metanet4j-sdk.git |
-| `metanet4j-component/` | `dev` | `e20016b` | https://github.com/metanet4j/metanet4j-component.git |
-
+| `metanet4j-component/` | `dev` | `fbb048e` | https://github.com/metanet4j/metanet4j-component.git |
 | `metanet4j-bsv-sdk/` | `dev` | `10fd42d` | https://github.com/metanet4j/metanet4j-bsv-sdk.git |
 | `metanet4j-junglebus/` | `dev` | `1272067` | 本地独立工程；来源与许可证见原迁移任务 |
 
-BSV SDK 和 JungleBus 的 dev 是新增主 worktree，原迁移检出状态保留；v0.1.0 的六个版本 worktree 位于 `_task/backend-worktree/ownword-v0.1.0/`。
+BSV SDK 的主仓库与 Git 数据库存放在 `metanet4j-bsv-sdk/`；JungleBus 的 dev 仍是原迁移仓库的关联 worktree。已合入 dev 的旧任务代码工作区已清理，详情见[后端任务工作区](../_task/backend-worktree/README.md)。
 
 ## 约定
 

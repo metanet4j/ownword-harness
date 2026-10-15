@@ -1,8 +1,0 @@
-{
-  "severity": "medium",
-  "observation": "服务明确拒绝广播后，界面错误显示 Wallet request cancelled。",
-  "rootCause": "rejected 回执映射为 cancelled，混淆技术失败和用户拒绝。",
-  "fix": "明确 rejected 映射 failed/BROADCAST_REJECTED，用户取消保持 cancelled。",
-  "status": "fixed-and-verified",
-  "commit": "04bb12766f4f565fd39d042e3d37b20e979bee10"
-}
