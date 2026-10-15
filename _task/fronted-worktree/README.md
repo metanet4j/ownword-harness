@@ -6,7 +6,7 @@ OwnWord 根仓库只跟踪本目录第一级文件；所有任务子目录均由
 
 ## 代码与本地数据
 
-- 完整前端仓库及 Git 数据库位于根目录 `frontend/`，远端为 `https://github.com/metanet4j/ownword-web.git`。
+- 完整前端仓库及 Git 数据库位于根目录 `frontend/ownword-web/`，远端为 `https://github.com/metanet4j/ownword-web.git`。
 - 当前检出 `feature/ownword-v0.2.0`，提交 `6f9bcca`；`feature/ownword-v0.1.0`（`04bb127`）和 `master` 均保留。两个版本分支尚未合并到 `master`。
 - 私有钱包、服务配置和头像数据保存在 `.local-state/frontend/ownword-v0.1.0/` 与 `.local-state/frontend/ownword-v0.2.0/`，已逐文件核对，继续在本地保留并由根 Git 忽略。
 - 原任务启动脚本已清理，知识库中的旧启动命令属于实施记录；重新启动服务时需按当前目录准备环境。

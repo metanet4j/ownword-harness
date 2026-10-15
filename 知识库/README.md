@@ -14,4 +14,4 @@
 
 当前后端源码与 Git 仓库见[后端仓库清单](../backend/README.md)。
 
-前端源码与版本分支见根目录 `frontend/`；资料见[前端知识库](前端/README.md)。私有钱包及持久化数据保存在 Git 忽略的 `.local-state/frontend/`，不进入知识库或远端。
+前端源码与版本分支见根目录 `frontend/ownword-web/`；资料见[前端知识库](前端/README.md)。私有钱包及持久化数据保存在 Git 忽略的 `.local-state/frontend/`，不进入知识库或远端。
