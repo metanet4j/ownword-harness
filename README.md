@@ -8,7 +8,7 @@ ownword 主仓内有多处子目录本身是**独立 Git 仓库**，不纳入主
 | 位置 | 内容 | 明细 |
 |---|---|---|
 | `frontend/` | `ownword-web/` 独立前端仓库，保留 v0.1/v0.2 版本分支 | [`frontend/README.md`](frontend/README.md) |
-| `designs/` | 4 个独立仓库 + 1 个被忽略的第三方 vendor | [`designs/README.md`](designs/README.md) |
+| `designs/` | 5 个独立仓库 + 1 个被忽略的第三方 vendor | [`designs/README.md`](designs/README.md) |
 | `backend/` | 7 个独立仓库 | [`backend/README.md`](backend/README.md) |
 | `_task/fronted-worktree/` | 前端任务入口说明；旧任务目录已清理 | [`_task/fronted-worktree/README.md`](_task/fronted-worktree/README.md) |
 | `Archive/prototype/` | 3 个仅本地的独立仓库 | [`Archive/prototype/README.md`](Archive/prototype/README.md) |

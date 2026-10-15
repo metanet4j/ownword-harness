@@ -6,7 +6,7 @@
 | 子目录 | 当前分支 | HEAD | 远程仓库 |
 |---|---|---|---|
 | `own-word-prototype-pick/` | `dev` | `fb6ed59` | https://github.com/metanet4j/ownword-design-prototype.git |
-| `ownword-design-prototype/` | `master` | `50673d0` | 无（同一远端的旧克隆，已解除远端关联，仓库保留本地） |
+| `ownword-design-prototype/` | `dev` | `fb6ed59` | https://github.com/metanet4j/ownword-design-prototype.git |
 
 `own-word-prototype-pick/` 是四个原型任务 worktree 的主仓，任务到 worktree 的对应关系见 [_task/prototype-worktree/README.md](../_task/prototype-worktree/README.md)，链接关系以 `git worktree list` 为准。
 
