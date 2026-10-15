@@ -98,7 +98,7 @@ bootstrap.servers=localhost:9092
 
 | 使用方 | 需要的服务 | 对应关系 |
 |---|---|---|
-| metanet4j 升级（Boot 4.1.1 / Java 25）B 档验证 | 五个全部 | 版本矩阵与之一致：Mongo 8.0 / ES 9.4.5 / Kafka 4.2.1 / Redis 7.4 / MySQL 8.4。任务文档见 `_task/backend-worktree/boot4-java25-upgrade/doc/升级计划-Boot4-Java25.md` |
+| metanet4j 升级（Boot 4.1.1 / Java 25）B 档验证 | 五个全部 | 版本矩阵与之一致：Mongo 8.0 / ES 9.4.5 / Kafka 4.2.1 / Redis 7.4 / MySQL 8.4。任务文档见[升级计划](../知识库/后端/boot4-java25-upgrade/升级计划-Boot4-Java25.md) |
 | 后续 ownword 研发任务 | 按需 | 直接连上表端口，不要各自再起一套同端口的中间件 |
 
 > 新增使用方时，在本表补一行，写明任务名与所需服务，避免重复编排同类中间件（DRY）。

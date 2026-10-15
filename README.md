@@ -3,14 +3,16 @@
 ownword 主仓内有多处子目录本身是**独立 Git 仓库**，不纳入主仓管理（根目录 `.gitignore` 已显式忽略）。
 本文件只做总入口，登记"哪个目录装着子仓库"；各仓库的分支、HEAD、远程地址写在对应目录的清单里，避免重复维护。
 
+技术方案、迁移计划、协议契约与验收文档统一从[知识库](知识库/README.md)查阅。
+
 | 位置 | 内容 | 明细 |
 |---|---|---|
 | `frontend/` | 1 个独立仓库（仅本地），主仓根直属 | 见下表 |
 | `designs/` | 4 个独立仓库 + 1 个被忽略的第三方 vendor | [`designs/README.md`](designs/README.md) |
-| `backend/` | 5 个独立仓库 | [`backend/README.md`](backend/README.md) |
+| `backend/` | 7 个独立仓库 | [`backend/README.md`](backend/README.md) |
 | `_task/fronted-worktree/` | 1 个独立仓库 + 2 个版本任务 worktree | [`_task/fronted-worktree/README.md`](_task/fronted-worktree/README.md) |
 | `Archive/prototype/` | 3 个仅本地的独立仓库 | [`Archive/prototype/README.md`](Archive/prototype/README.md) |
-| `_task/backend-worktree/` | 升级任务及 v0.1/v0.2 版本 worktree（主仓库在 `backend/`） | [`_task/backend-worktree/README.md`](_task/backend-worktree/README.md) |
+| `_task/backend-worktree/` | 后端任务规则与 Maven 规范；旧任务目录已清理 | [`_task/backend-worktree/README.md`](_task/backend-worktree/README.md) |
 | `reference/` | 6 份外部源码快照，非 Git 仓库，整体忽略 | [`reference/README.md`](reference/README.md) |
 
 ## 主仓根直属仓库

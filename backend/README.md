@@ -1,7 +1,7 @@
 # backend/ 子仓库清单
 
 `backend/` 下的下列子目录均为**独立 Git 仓库**，不纳入 ownword 主仓（根目录 `.gitignore` 已忽略）。
-当前基线采集于 2026-10-13；版本任务的准确来源见[环境登记](../_task/backend-worktree/ownword-v0.1.0/environment.json)。
+分支与提交以各仓库的实际 Git 状态为准；迁移计划、协议契约和验收文档见[知识库](../知识库/README.md)。
 
 | 子目录 | 当前分支 | HEAD | 远程仓库 |
 |---|---|---|---|
@@ -11,9 +11,9 @@
 | `metanet4j-sdk/` | `dev` | `bb298d0` | https://github.com/metanet4j/metanet4j-sdk.git |
 | `metanet4j-component/` | `dev` | `fbb048e` | https://github.com/metanet4j/metanet4j-component.git |
 | `metanet4j-bsv-sdk/` | `dev` | `10fd42d` | https://github.com/metanet4j/metanet4j-bsv-sdk.git |
-| `metanet4j-junglebus/` | `dev` | `1272067` | 本地独立工程；来源与许可证见原迁移任务 |
+| `metanet4j-junglebus/` | `dev` | `1272067` | 本地独立工程；来源与许可证见[协议契约](../知识库/后端/junglebus-java25-migration/API与协议契约-20261013-114000.md) |
 
-BSV SDK 的主仓库与 Git 数据库存放在 `metanet4j-bsv-sdk/`；JungleBus 的 dev 仍是原迁移仓库的关联 worktree。已合入 dev 的旧任务代码工作区已清理，详情见[后端任务工作区](../_task/backend-worktree/README.md)。
+BSV SDK 和 JungleBus 的主仓库与 Git 数据库分别存放在 `metanet4j-bsv-sdk/` 和 `metanet4j-junglebus/`；原任务分支与提交历史保留。旧任务目录已清理，后端任务规则见[后端任务工作区](../_task/backend-worktree/README.md)。
 
 ## 约定
 
