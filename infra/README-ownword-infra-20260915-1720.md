@@ -2,7 +2,7 @@
 
 长期基础设施，供 ownword 后续所有研发、联调、验证任务复用。**不是某个任务的临时环境**。
 
-一句话原则：**版本固定、端口固定、凭据固定、开机自启、数据落卷。**
+一句话原则：**版本固定、端口固定、凭据固定、按需启动、数据落卷。**
 
 ---
 
@@ -16,9 +16,10 @@
 | Redis | `docker.m.daocloud.io/library/redis:7.4.11` | `infra-redis` | 6379 | `redis-data` |
 | MySQL | `docker.m.daocloud.io/library/mysql:8.4.11` | `infra-mysql` | 3306 | `mysql-data` |
 
-- compose 项目名：`ownword-infra`；`restart: unless-stopped`，docker 随系统启动（`systemctl is-enabled docker` = enabled）。
+- compose 项目名：`ownword-infra`；`restart: "no"` —— **不随 WSL/机器启动**，按需用 `./up.sh`（或 `devstack up infra`）拉起、`./down.sh`（或 `devstack down infra`）停止。docker.service 本身仍随系统启动（`systemctl is-enabled docker` = enabled）。
 - 五个服务均带 healthcheck，`up.sh` 会等到全部 healthy 才返回。
-- 磁盘占用约 6.6GB 镜像 + 数据卷；运行内存约 2.2GB（ES 1.1GB 最大，ES 堆固定 512MB）。
+- 磁盘：镜像约 13.6GB（其中 6.9GB 可 `docker image prune` 回收）+ 数据卷约 2.5GB。
+- 运行内存实测约 **3.7GB**（ES 1.37GB、Kafka 1.19GB、Mongo 0.63GB、MySQL 0.48GB、Redis 0.02GB；含 cgroup 记账的页缓存）。**不跑时占用为 0**。
 
 ---
 

@@ -1,7 +1,7 @@
 # ownword 研发共享中间件（长期基础设施）
 #
 # 定位：供 ownword 后续所有研发/联调/验证任务复用，不是某个任务的临时环境。
-#      固定版本、固定端口、固定凭据、开机自启、数据落卷。
+#      固定版本、固定端口、固定凭据、按需启动（restart: "no"，不随 WSL/机器自启）、数据落卷。
 #
 # 用法：
 #   ./up.sh          # 启动并等待就绪
@@ -28,7 +28,7 @@ services:
   mongo:
     image: docker.m.daocloud.io/library/mongo:8.0.32
     container_name: infra-mongo
-    restart: unless-stopped
+    restart: "no"
     ports: ["27017:27017"]
     environment:
       MONGO_INITDB_ROOT_USERNAME: bschema
@@ -45,7 +45,7 @@ services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.4.5
     container_name: infra-es
-    restart: unless-stopped
+    restart: "no"
     ports: ["9200:9200"]
     environment:
       discovery.type: single-node
@@ -63,7 +63,7 @@ services:
     # Kafka 4.x 起 ZooKeeper 模式已移除，必须 KRaft
     image: docker.m.daocloud.io/apache/kafka:4.2.1
     container_name: infra-kafka
-    restart: unless-stopped
+    restart: "no"
     ports: ["9092:9092"]
     environment:
       # CLUSTER_ID 必须固定：数据卷复用时不匹配会导致 KRaft 拒绝启动
@@ -90,7 +90,7 @@ services:
   redis:
     image: docker.m.daocloud.io/library/redis:7.4.11
     container_name: infra-redis
-    restart: unless-stopped
+    restart: "no"
     ports: ["6379:6379"]
     volumes:
       - redis-data:/data
@@ -103,7 +103,7 @@ services:
   mysql:
     image: docker.m.daocloud.io/library/mysql:8.4.11
     container_name: infra-mysql
-    restart: unless-stopped
+    restart: "no"
     ports: ["3306:3306"]
     environment:
       MYSQL_ROOT_PASSWORD: root123

@@ -1,0 +1,12 @@
+const fs=require('node:fs'),assert=require('node:assert/strict'),{execFileSync}=require('node:child_process');
+const state=JSON.parse(fs.readFileSync('../feature_list.json','utf8')),env=state.environment;
+const run=(cmd,args)=>execFileSync(cmd,args,{encoding:'utf8',stdio:'pipe'}).trim();
+assert.equal(run('git',['branch','--show-current']),env.branch);
+run('git',['merge-base','--is-ancestor',env.baselineCommit,'HEAD']);
+assert.equal(JSON.parse(fs.readFileSync('_d_meta.json','utf8')).primaryDesignSystem,env.designSystem);
+const Babel=require(process.cwd()+'/vendor/babel.min.js');
+for(const file of fs.readdirSync('.').filter(f=>f.endsWith('.jsx')))Babel.transform(fs.readFileSync(file,'utf8'),{presets:['react'],filename:file});
+for(const file of ['check-model.cjs','check-copy.cjs'])console.log(run('node',[file]));
+console.log(run('python3',['check-tokens.py']));
+assert.ok(state.features.filter(f=>f.status==='in-progress').length<=1);
+console.log('v0.1 基线、分支、S2 绑定、JSX、模型、文案和 Token 检查通过。');
