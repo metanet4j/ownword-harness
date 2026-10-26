@@ -9,7 +9,7 @@
     "done",
     "archived"
   ],
-  "activeItem": null,
+  "activeItem": "proto-nav-v030-doc-sync",
   "features": [
     {
       "id": "prototype-visual-alignment-v010-v030",
@@ -477,6 +477,37 @@
           "evidence": "用户在 R01 说明后回复“可以”。"
         }
       ]
+    },
+    {
+      "id": "proto-nav-v030-doc-sync",
+      "name": "v0.3.0 顶部导航去箭头同步",
+      "status": "needs-review",
+      "goal": "让 v0.3.0 设计文档的顶部导航规则与已交付原型（v0.4.0-r4）一致：以当前模块名称 + 工作区图标打开下拉导航，不使用下拉箭头，菜单标出当前模块。",
+      "scope": "仅修改 v0.3.0 设计文档第 4.1 节导航段落，并让原型顶栏控件在触控指针下满足 44px；不改信息架构、模块入口与其他设计事实。",
+      "dependencies": [
+        "用户明确要求“改掉”文档与实现的不一致",
+        "原型 v0.4.0-r4（ef5898a、a7c6f08）已完成头部 H1 改造"
+      ],
+      "doneCriteria": [
+        "文档不再要求下拉箭头，改为当前模块名称 + 工作区图标",
+        "菜单当前模块标记、模块区与辅助操作分组的描述与实现一致",
+        "“触控范围至少 44px”在原型中成立：pointer: coarse 时顶栏控件为 44px",
+        "原型构建、检查与验证脚本通过，文档与原型一并交付审阅"
+      ],
+      "prdVersion": "v0.3.0",
+      "prdSource": "_task/system-design/spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md",
+      "output": "_task/system-design/spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md",
+      "cognition": "_task/system-design/spec/核心认知.md",
+      "implementationAuthorized": true,
+      "reviewStatus": "needs-review",
+      "implementationStatus": "implemented-and-verified",
+      "evidence": [
+        "_task/system-design/spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md",
+        "_task/prototype-worktree/ownword-official-s2/ownword-prototype/visual-review-v15.html",
+        "_task/prototype-worktree/ownword-official-s2/ownword-prototype/evidence/official-s2/header-menu/verification.json"
+      ],
+      "pendingDecisions": [],
+      "nextStep": "用户复核导航措辞与触控尺寸描述；确认后标记 done"
     }
   ]
 }
