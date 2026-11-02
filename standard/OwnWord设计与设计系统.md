@@ -158,6 +158,25 @@ OwnWord 已固定 Spectrum S2。若其通用流程要求选择设计系统，直
 
 方案页、开工确认、基准证据、对照页及验收状态的执行要求统一维护在该技能中；设计执行继续由 `baoyu-design` 负责，实现检查由 `react-spectrum` 负责。
 
+### 6.4 可编辑产物与图表：新版 Artifact 技能
+
+[baoyu-design 上游仓库](https://github.com/JimLiu/baoyu-design/blob/main/README.zh-CN.md)提供以下五个技能。它们按产物格式调用，与第 6.1 节的设计执行框架配合；安装来源与内容校验值见根目录 `skills-lock.json`。
+
+| 技能 | 使用范围与入口 |
+| --- | --- |
+| [claude-design](../.agents/skills/claude-design/SKILL.md) | 可编辑多画板画布，入口为 `project/canvas.json` 与 `.dc.html`；用户要求画布或修改已有该格式产物时使用。 |
+| [claude-slides](../.agents/skills/claude-slides/SKILL.md) | 可编辑幻灯片，入口为 `project/deck.json` 与每页 HTML。 |
+| [claude-design-system](../.agents/skills/claude-design-system/SKILL.md) | 编辑器可读取的设计系统资料，入口为 `project/design-system.json`；OwnWord 中用于整理或适配已绑定版本的 Spectrum S2。 |
+| [claude-dashboard](../.agents/skills/claude-dashboard/SKILL.md) | 有数据集与来源追溯的独立仪表盘、数据报告，内容通过其脚本写入 `db/`。 |
+| [dataviz](../.agents/skills/dataviz/SKILL.md) | 按需补充图表选型、颜色验证、标记、交互和无障碍方法。 |
+
+OwnWord 使用这些技能时：
+
+- 按第 1 节的优先级处理冲突。技能中“仅运行自带 check，未经请求不得额外验证”的要求不能取消项目的 Preview、截图评审和实现检查；“未经请求不提交”的默认要求按根 `AGENTS.md` 的提交规则处理。用户明确要求的范围与授权继续有效。
+- 沿用绑定的 Spectrum S2，不因技能提示重新选择设计系统、采用默认品牌字体或另建配色。图表参数来自绑定系统；需要补充映射时记录来源和待核实项，不反向修改官方 Token。
+- 产物格式各自独立。现有 `_d_meta.json`、`_ds/` 与单文件 HTML 不会自动成为新版 Artifact；在独立目录中按目标格式制作或适配。安装技能不代表现有原型或 S2 资料已完成转换；消费副本与实际组件仍按第 5、7 节核实。
+- `claude-dashboard` 的页面运行时不支持 React，不用于替代 OwnWord 的 S2 产品界面；产品仪表盘页面仍按既定原型流程实现，数据报告可使用该技能。其他新版编辑器能否加载项目绑定的 S2，也须按实际运行结果判断。
+
 ## 7. 与原型实现配合
 
 继续遵循 `baoyu-design` 的设计系统导入、组件组合、预览和验证流程，并遵守以下规则：
