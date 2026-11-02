@@ -9,7 +9,8 @@
 :host([data-theme=dark]){--bg:#242424;--fg:#f5f5f5;--muted:#bbb;--border:#666;--accent:#a7bfff;--on-accent:#172143;--soft:#333;color:#f5f5f5;color-scheme:dark}
 *{box-sizing:border-box} [hidden]{display:none!important}button,input,textarea{font:inherit}button{cursor:pointer;border:1px solid var(--border);border-radius:7px;background:var(--bg);color:var(--fg);min-height:44px;padding:8px 12px}button:hover{background:var(--soft)}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}button:disabled{opacity:.55;cursor:default}.primary,[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}.primary:hover,[aria-pressed=true]:hover{filter:brightness(.95);background:var(--accent)}
 .dock{position:fixed;right:16px;bottom:72px;display:flex;gap:6px;pointer-events:auto;padding:6px;background:var(--bg);border:1px solid var(--border);border-radius:11px;box-shadow:0 3px 14px #0002}.hint{position:fixed;right:16px;bottom:140px;max-width:calc(100vw - 32px);padding:8px 12px;background:var(--accent);color:var(--on-accent);border-radius:7px}.panel{pointer-events:auto;position:fixed;right:16px;bottom:140px;width:350px;max-width:calc(100vw - 32px);max-height:calc(100dvh - 170px);overflow:auto;background:var(--bg);color:var(--fg);border:1px solid var(--border);border-radius:12px;box-shadow:0 6px 28px #0003;padding:16px}.head,.actions{display:flex;align-items:center;gap:8px;justify-content:space-between}.head h2{font-size:17px;line-height:1.4;margin:0}.head button{padding:4px 10px}.muted{color:var(--muted);font-size:12px;overflow-wrap:anywhere}.context{margin:8px 0 12px}.actions{justify-content:flex-end;margin-top:10px}.actions.wrap{flex-wrap:wrap;justify-content:flex-start}.field{display:block;margin:12px 0 5px}textarea{width:100%;min-height:100px;resize:vertical;padding:9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--fg)}.error{color:#b42318;white-space:pre-wrap;margin:8px 0}:host([data-theme=dark]) .error{color:#ffb4ab}.status{color:var(--muted);font-size:12px;margin:8px 0}.threads{margin-top:12px}.thread{display:block;text-align:left;width:100%;margin:7px 0;padding:10px;overflow-wrap:anywhere}.thread span{display:block}.messages article{padding:10px 0;border-bottom:1px solid var(--border)}.messages p{white-space:pre-wrap;overflow-wrap:anywhere;margin:5px 0}.messages strong{font-size:12px}.filter{display:flex;align-items:center;gap:8px;min-height:40px;margin-top:8px}.filter input{width:18px;height:18px}.outline{position:fixed;border:2px solid var(--accent);background:#2856dd12;pointer-events:none}.pin{pointer-events:auto;position:fixed;transform:translate(-50%,-50%);width:44px;height:44px;min-height:44px;padding:0;border:0;background:transparent;display:grid;place-items:center}.pin span{display:grid;place-items:center;background:var(--accent);color:var(--on-accent);border:2px solid var(--bg);border-radius:50%;width:28px;height:28px;box-shadow:0 1px 5px #0005}.pin:hover{background:transparent}.pin.resolved span{background:var(--muted);color:var(--bg)}
-@media(max-width:480px){.panel{bottom:140px;max-height:60dvh}.dock{right:12px}.hint{right:12px}}
+.dock{max-width:calc(100vw - 24px);flex-wrap:wrap}.panel,.hint{bottom:calc(84px + var(--dock-height,58px))}
+@media(max-width:480px){.panel{max-height:55dvh}.dock{right:12px}.hint{right:12px}}
 </style>
 <div class="outline" id="outline" hidden></div><div id="pins"></div>
 <div class="hint" id="hint" role="status" hidden>点击元素或拖动框选；按 Esc 退出标注</div>
@@ -20,7 +21,7 @@
 <section id="detail" hidden><div class="messages" id="messages"></div><div class="actions wrap"><button id="resolve" type="button">标记已解决</button><button id="remove" type="button">删除评论</button></div><form id="reply-form"><label class="field" for="reply">回复内容</label><textarea id="reply" maxlength="10000" required></textarea><div class="actions"><button class="primary" id="reply-save" type="submit">保存回复</button></div></form></section>
 <section id="list-view"><button id="add" class="primary" type="button">添加评论</button><label class="filter"><input id="resolved" type="checkbox">显示已解决</label><div class="threads" id="threads"></div></section><p class="status" id="status" role="status"></p>
 </aside>
-<div class="dock" aria-label="原型评审工具"><button id="pick" type="button" aria-pressed="false" title="Alt+Shift+C 进入或退出标注">评论</button><button id="list" type="button" aria-expanded="false">评论列表 <span id="count">0</span></button></div>`;
+<div class="dock" aria-label="原型评审工具"><button id="design" type="button" title="将当前页添加为可编辑设计稿，打开新版完整编辑器">编辑当前页</button><button id="canvas" type="button">完整画布</button><button id="pick" type="button" aria-pressed="false" title="Alt+Shift+C 进入或退出标注">评论</button><button id="list" type="button" aria-expanded="false">评论列表 <span id="count">0</span></button></div>`;
   const $=id=>ui.getElementById(id), state={threads:[],meta:{},selecting:false,drag:null,pending:null,selected:null,busy:false,blockClickUntil:0};
   const pins=new Map(), route=()=>location.pathname+location.search+location.hash;
   const ours=e=>e.composedPath().includes(host);
@@ -60,6 +61,7 @@
   }
   function outline(box){$('outline').hidden=!box;if(box)Object.assign($('outline').style,{left:box.left+'px',top:box.top+'px',width:Math.max(box.width,3)+'px',height:Math.max(box.height,3)+'px'});}
   function measure(){
+    const dockHeight=ui.querySelector('.dock').offsetHeight+'px';if(host.style.getPropertyValue('--dock-height')!==dockHeight)host.style.setProperty('--dock-height',dockHeight);
     const dark=document.documentElement.dataset.colorScheme==='dark';host.dataset.theme=dark?'dark':'light';
     const visible=new Set(), show=!$('panel').hidden||state.selecting;
     wanted().forEach((t,i)=>{
@@ -116,6 +118,19 @@
   async function action(fn){if(state.busy)return;state.busy=true;$('form-error').textContent='';formState();try{await fn();}catch(e){$('form-error').textContent=e.message;}finally{state.busy=false;formState();}}
   function upsert(t){state.threads=state.threads.filter(x=>x.id!==t.id).concat(t);render();}
   $('pick').onclick=select;$('add').onclick=select;$('close').onclick=close;$('cancel').onclick=close;
+  $('canvas').onclick=()=>window.open(api+'/editor','_blank','noopener');
+  $('design').onclick=async()=>{
+    if($('design').disabled)return;
+    const target=window.open('about:blank','_blank');if(target)target.opener=null;$('design').disabled=true;$('design').textContent='正在添加…';$('form-error').textContent='';
+    try{
+      const {capturePage}=await import(api+'/capture.js');
+      const r=await fetch(api+'/capture',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(await capturePage(host))});
+      const data=await r.json();if(!r.ok)throw new Error(data.message||'设计稿未保存，请重试。');
+      if(target)target.location.href=data.editorUrl;else location.href=data.editorUrl;
+      if(data.warnings?.length){showList();$('status').textContent='设计稿已保存，部分资源未导入；可在完整画布继续补充。';}
+    }catch(e){if(target)target.close();showList();$('form-error').textContent=e.message||'无法添加设计稿，请重试。';}
+    finally{$('design').disabled=false;$('design').textContent='编辑当前页';}
+  };
   $('list').onclick=()=>{$('panel').hidden?(setSelecting(false),showList()):close();};
   $('resolved').onchange=render;$('comment').oninput=formState;$('reply').oninput=formState;
   $('compose').onsubmit=e=>{e.preventDefault();void action(async()=>{

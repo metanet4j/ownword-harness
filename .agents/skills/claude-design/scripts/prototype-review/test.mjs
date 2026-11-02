@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {mkdtemp,writeFile,readFile,rm,mkdir,symlink} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
 import {startReview} from './server.mjs';
 
 test('静态原型评论：预览、持久化、隔离与请求边界',async t=>{
@@ -36,6 +37,30 @@ test('静态原型评论：预览、持久化、隔离与请求边界',async t=>
     assert.equal((await call(endpoint(),'POST',{anchor:JSON.stringify(a),label:'按钮',text:'意见'},'https://elsewhere.example')).status,403);
     assert.equal((await call(endpoint(),'POST',{anchor:JSON.stringify(a),label:'按钮',text:'   '})).status,400);
     assert.equal((await(await fetch(endpoint())).json()).threads.length,0);
+  });
+  await t.test('完整画布导入、已有编辑保护与单画板历史恢复',async()=>{
+    const capture={title:'当前页面',route:'/#/content',width:1440,height:1000,origin:new URL(app.url).origin,nodes:[{tag:'h1',attributes:{},style:{color:'rgb(36, 36, 36)','font-size':'28px','background-image':'url("'+app.url+'asset.png")'},children:['可编辑标题']},{tag:'img',attributes:{src:app.url+'asset.png',alt:'示例'},style:{width:'20px'},children:[]}]};
+    const meta=await(await fetch(app.url+'__prototype-review/meta')).json();assert.ok(meta.editorUrl.includes('/design/'));
+    const editor=await fetch(app.url+'__prototype-review/editor',{redirect:'manual'});assert.equal(editor.status,302);assert.equal(editor.headers.get('location'),meta.editorUrl);assert.equal((await fetch(app.url+'__prototype-review/editor')).status,200);
+    const url=app.url+'__prototype-review/capture';
+    assert.equal((await call(url,'POST',capture,'https://elsewhere.example')).status,403);
+    const first=await call(url,'POST',capture);assert.equal(first.status,201);const result=await first.json();
+    const file=path.join(app.store,'project',result.file),html=await readFile(file,'utf8');
+    assert.match(html,/<h1[^>]*>可编辑标题<\/h1>/);assert.match(html,/_blob\//);assert.match(html,/\.\/support\.js/);
+    assert.match(html,/<helmet><style>.*background-image:url\("\/_blob\/[0-9a-f]{32}"\)/s);assert.doesNotMatch(html,/style="[^"]*url\(/);
+    // 模拟用户在编辑器保存；再次添加页面必须新建画板，不能覆盖已有编辑。
+    await writeFile(file,html.replace('可编辑标题','用户已经修改的标题'));
+    const next=await call(url,'POST',capture);assert.equal(next.status,201);assert.notEqual((await next.json()).file,result.file);
+    assert.match(await readFile(file,'utf8'),/用户已经修改的标题/);
+    const index=JSON.parse(await readFile(path.join(app.store,'project/canvas.json'),'utf8'));assert.equal(index.order.length,2);assert.equal(index.boards[result.file].prototypeSource.url,'/#/content');
+    const history=JSON.parse(await readFile(path.join(app.store,'history/index.json'),'utf8'));
+    const originalVersion=history.versions.find(v=>v.changes['project/'+result.file]===createHash('sha256').update(html).digest('hex'));assert.ok(originalVersion);
+    const restore=await call(new URL('__history/'+originalVersion.n+'/restore',meta.editorUrl),'POST',{paths:['project/'+result.file]},new URL(meta.editorUrl).origin);
+    assert.equal(restore.status,200);assert.ok((await restore.json()).version);assert.equal(await readFile(file,'utf8'),html);
+    assert.equal(JSON.parse(await readFile(path.join(app.store,'project/canvas.json'),'utf8')).order.length,2);
+    const invalid={...capture,nodes:[{tag:'script',attributes:{},style:{},children:['alert(1)']}]};assert.equal((await call(url,'POST',invalid)).status,400);
+    assert.equal((await call(url,'POST',{...capture,fonts:[{family:'forged',style:'normal',weight:'400',base64:'PHNjcmlwdD4='}]})).status,400);
+    assert.equal(JSON.parse(await readFile(path.join(app.store,'project/canvas.json'),'utf8')).order.length,2);
   });
   await t.test('调用原生评论保存、回复、解决和重新打开',async()=>{
     const response=await call(endpoint(),'POST',{anchor:JSON.stringify(a),label:'内容列表 · 按钮',text:'请检查对齐'});

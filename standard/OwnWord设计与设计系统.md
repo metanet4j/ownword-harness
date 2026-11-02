@@ -151,7 +151,7 @@ OwnWord 已固定 Spectrum S2。若其通用流程要求选择设计系统，直
 
 前端/UI 的方案、自评与实际页面评审按第 2.1、8.1 节执行。原型工程使用其现有命令构建和预览；画布先运行 `node .agents/skills/claude-design/scripts/artifact.mjs check <原型目录>`，再用 `open <原型目录>` 启动编辑器，并完成项目要求的浏览器验证。
 
-需要在原型工程的真实页面上评论时，使用 `claude-design` 的[通用评论预览工具](../.agents/skills/claude-design/scripts/prototype-review/README.md)。同一工具按目录复用，评论层独立于产品界面，提供实时元素点选、区域框选与持久化意见；原型工程直接提供真实交互，不要求转换为画布或用截图代替。评审意见的实施范围、方案确认及验收继续按第 6.3 节执行。
+需要在真实页面上评论或使用完整画布编辑器时，使用 `claude-design` 的[通用原型接入工具](../.agents/skills/claude-design/scripts/prototype-review/README.md)。同一工具按目录复用，提供真实交互、直接评论与原生完整画布入口；用户选择画布编辑时，将当前页面作为可编辑元素的设计副本接入，保留业务原型。设计稿与 React 源码分别保存，不能把画布编辑宣称为业务源码已同步；不以整页截图冒充可编辑元素。评审意见的实施范围、方案确认及验收继续按第 6.3 节执行。
 
 旧版 `baoyu-design` 按需提供既有导入、导出及辅助脚本；使用其具体能力时才加载对应说明，不作为新版承接原型的前置步骤。设计技能不能定义 OwnWord 产品事实，也不能覆盖核心认知、本文或当前版本已经确定的设计约束。
 
@@ -169,7 +169,7 @@ OwnWord 已固定 Spectrum S2。若其通用流程要求选择设计系统，直
 
 ### 6.4 可编辑产物与图表：新版 Artifact 技能
 
-[baoyu-design 上游仓库](https://github.com/JimLiu/baoyu-design/blob/main/README.zh-CN.md)提供以下五个技能。主设计职责见第 6.1 节，其他技能按产物需要调用；安装来源与本地内容校验值见根目录 `skills-lock.json`。`claude-design` 入口包含 OwnWord 本地适配，格式与运行脚本沿用上游。
+[baoyu-design 上游仓库](https://github.com/JimLiu/baoyu-design/blob/main/README.zh-CN.md)提供以下五个技能。主设计职责见第 6.1 节，其他技能按产物需要调用；安装来源与本地内容校验值见根目录 `skills-lock.json`。`claude-design` 包含 OwnWord 入口与通用原型接入工具，画布格式和原生编辑器沿用上游。
 
 | 技能 | 使用范围与入口 |
 | --- | --- |

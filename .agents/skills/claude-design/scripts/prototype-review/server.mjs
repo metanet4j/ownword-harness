@@ -8,6 +8,7 @@ import {fileURLToPath, pathToFileURL} from 'node:url';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {Readable} from 'node:stream';
+import {addCapture} from './canvas.mjs';
 
 const exec = promisify(execFile);
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -21,11 +22,11 @@ async function jsonFile(file, fallback) {
   try {return JSON.parse(await readFile(file,'utf8'));}
   catch (e) {if (e.code === 'ENOENT') return fallback; throw e;}
 }
-async function body(req) {
+async function body(req,limit=65536) {
   const chunks=[]; let size=0;
   for await (const chunk of req) {
     size+=chunk.length;
-    if (size>65536) throw Object.assign(new Error('评论请求过大。'),{status:413});
+    if (size>limit) throw Object.assign(new Error('请求内容过大。'),{status:413});
     chunks.push(chunk);
   }
   return Buffer.concat(chunks);
@@ -61,14 +62,23 @@ export async function startReview(givenRoot,{port=4316,store:givenStore}={}) {
         req.resume(); return json(res,403,{message:'不接受跨站评论请求。'});
       }
       const url=new URL(req.url,`http://${req.headers.host}`);
+      if(url.pathname===api+'/editor'){
+        if(!reading)return json(res,405,{message:'不支持该操作。'});
+        res.writeHead(302,{Location:backend.url});return res.end();
+      }
       if (url.pathname===api+'/meta') {
         if (!reading) return json(res,405,{message:'不支持该操作。'});
-        return json(res,200,{project:path.basename(root),version:version?.prototypeVersion??pkg.version??null});
+        return json(res,200,{project:path.basename(root),version:version?.prototypeVersion??pkg.version??null,editorUrl:backend.url});
       }
-      if (url.pathname===api+'/client.js') {
+      if (url.pathname===api+'/capture') {
+        if(req.method!=='POST')return json(res,405,{message:'不支持该操作。'});
+        let data;try{data=JSON.parse((await body(req,4*1024*1024)).toString('utf8'));}catch(e){if(e.status)throw e;return json(res,400,{message:'设计稿格式无效。'});}
+        return json(res,201,await addCapture(data,{root,store,backend,artifact}));
+      }
+      if ([api+'/client.js',api+'/capture.js'].includes(url.pathname)) {
         if (!reading) return json(res,405,{message:'不支持该操作。'});
         res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8'});
-        return res.end(req.method==='HEAD'?undefined:await readFile(path.join(here,'client.js')));
+        return res.end(req.method==='HEAD'?undefined:await readFile(path.join(here,path.basename(url.pathname))));
       }
       const comments=api+'/comments';
       if (url.pathname===comments||url.pathname.startsWith(comments+'/')) {
@@ -136,7 +146,7 @@ async function main(args) {
     else throw new Error(`未知或不完整的参数：${args[i]}`);
   }
   const running=await startReview(args[0],options);
-  console.log(JSON.stringify({url:running.url,prototype:running.root,comments:running.store},null,2));
+  console.log(JSON.stringify({url:running.url,editor:running.url+'__prototype-review/editor',prototype:running.root,comments:running.store},null,2));
   let closing=false;
   for(const signal of ['SIGINT','SIGTERM']) process.on(signal,async()=>{if(closing)return;closing=true;await running.close();process.exit(0);});
 }
