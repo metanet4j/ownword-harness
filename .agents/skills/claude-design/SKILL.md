@@ -23,6 +23,12 @@ license: "Mixed. The skill text, references and editors adapted from Anthropic's
 
 上述项目入口为本地适配。下文保留上游画布说明；其中通用设计建议服从项目已确定的产品事实、设计系统与验证要求。
 
+### 现有原型的直接评论（本地通用工具）
+
+用户要求在真实 HTML／React 原型上预览、点选或框选评论时，读取 [prototype-review 使用说明](scripts/prototype-review/README.md)，用其中的同一工具启动已构建原型目录。它直接提供真实页面与独立评论层，复用新版评论服务；不需要为每个原型重新开发，不以截图画布替代实时原型。评论按原型目录持久保存，代理可读取位置、回复和解决。
+
+业务页面的新增或修改继续遵循项目方案与验收流程。此工具本身是本地预览能力；画布原有的评论方式继续按下文执行。
+
 ## 上游画布流程
 
 This skill is a local build of the claude.ai Design (canvas) artifact type: the rules below are the type's own,

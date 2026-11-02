@@ -151,6 +151,8 @@ OwnWord 已固定 Spectrum S2。若其通用流程要求选择设计系统，直
 
 前端/UI 的方案、自评与实际页面评审按第 2.1、8.1 节执行。原型工程使用其现有命令构建和预览；画布先运行 `node .agents/skills/claude-design/scripts/artifact.mjs check <原型目录>`，再用 `open <原型目录>` 启动编辑器，并完成项目要求的浏览器验证。
 
+需要在原型工程的真实页面上评论时，使用 `claude-design` 的[通用评论预览工具](../.agents/skills/claude-design/scripts/prototype-review/README.md)。同一工具按目录复用，评论层独立于产品界面，提供实时元素点选、区域框选与持久化意见；原型工程直接提供真实交互，不要求转换为画布或用截图代替。评审意见的实施范围、方案确认及验收继续按第 6.3 节执行。
+
 旧版 `baoyu-design` 按需提供既有导入、导出及辅助脚本；使用其具体能力时才加载对应说明，不作为新版承接原型的前置步骤。设计技能不能定义 OwnWord 产品事实，也不能覆盖核心认知、本文或当前版本已经确定的设计约束。
 
 ### 6.2 实现检查：react-spectrum
