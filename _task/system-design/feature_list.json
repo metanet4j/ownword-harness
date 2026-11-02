@@ -12,6 +12,37 @@
   "activeItem": null,
   "features": [
     {
+      "id": "claude-design-prototype-support",
+      "name": "新版设计技能承接 OwnWord 原型",
+      "status": "needs-review",
+      "goal": "让新版 claude-design 默认承接 OwnWord 原型设计与迭代，现有原型沿用源码和构建入口，画布编辑器按需使用。",
+      "scope": "设计总指南、技能入口、原型迭代技能及任务规则；本轮不改动原型页面、运行依赖或产品事实。",
+      "dependencies": [
+        "新版五项技能已安装并完成文件与命令入口检查",
+        "用户明确要求新版承接原型，并质疑迁移页面的必要性",
+        "核心认知中的 Spectrum S2 绑定与既有原型确认、验收规则"
+      ],
+      "doneCriteria": [
+        "新版技能入口明确承接现有 HTML、JSX 原型，不强制转换为画布格式",
+        "设计总指南和任务规则统一使用新版主流程，旧版仅按需提供兼容能力",
+        "既有工程与可选画布的设计系统来源、预览和验证要求清楚",
+        "技能元数据、引用、锁定哈希和差异检查通过，交付规则修改供用户复核"
+      ],
+      "output": "standard/OwnWord设计与设计系统.md",
+      "implementationAuthorized": true,
+      "implementationStatus": "documentation-and-routing-checked",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": [
+        "standard/OwnWord设计与设计系统.md 第 5、6、8 节统一默认主技能、现有工程和可选画布路径",
+        ".agents/skills/claude-design/SKILL.md 新增 OwnWord 本地接入，旧版入口转接新版，prototype-iteration 与任务规则同步",
+        "Codex 技能登记和 YAML 元数据可解析，49 处 Markdown 本地文件引用可定位，claude-design 本地内容哈希已更新",
+        "通用 harness 扫描基线与当前均为 36/100；英文关键词及默认 description 字段不适配现有中文规则和 goal/scope 结构，不作为本轮验收依据",
+        "本轮仅修改规则、技能与状态；未迁移原型页面或改变运行依赖"
+      ],
+      "pendingDecisions": [],
+      "nextStep": "用户复核新版默认承接现有原型、画布按需启用的规则；后续迭代沿用目标工程。"
+    },
+    {
       "id": "prototype-visual-alignment-v010-v030",
       "name": "v0.4.0 内继承模块的视觉同步",
       "status": "needs-review",

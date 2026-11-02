@@ -1,6 +1,8 @@
 ---
 name: claude-design
 description: >-
+  OwnWord 原型设计与迭代的默认技能：直接承接现有 HTML、JSX 工程，沿用源码、构建与预览入口；
+  按项目设计总指南工作，不要求迁移为画布。其他项目以及需要画布编辑器时：
   Make and revise designs in the Design (canvas) artifact format (project/canvas.json plus one
   .dc.html Design Component file per artboard) as local files, then open them in a local canvas
   editor where the user can view the artboards side by side, retype copy and adjust tweaks. Use when
@@ -11,6 +13,17 @@ license: "Mixed. The skill text, references and editors adapted from Anthropic's
 ---
 
 # Design
+
+## OwnWord 项目接入（本地适配）
+
+在 OwnWord 工作区，先按[设计总指南](../../../standard/OwnWord设计与设计系统.md)第 6.1 节选择载体，设计判断、Spectrum S2 绑定、方案确认、预览和验收均按该指南执行。
+
+- 现有或新建原型工程：使用本技能的 [craft.md](artifact-type/reference/craft.md) 中的设计方法，按指南加载 `frontend-design`、`prototype-iteration` 与 `react-spectrum`。在目标工程的可维护源码中实施，沿用实际构建与预览入口；无需创建画布、迁移 HTML/JSX 或改写资源路径。下文的画布格式与 Artifact 命令不约束这一路径。
+- 用户要求画布编辑器，或目标已有 `project/canvas.json`：继续执行下文的画布流程，设计系统来源和实际运行时仍按项目指南核对。
+
+上述项目入口为本地适配。下文保留上游画布说明；其中通用设计建议服从项目已确定的产品事实、设计系统与验证要求。
+
+## 上游画布流程
 
 This skill is a local build of the claude.ai Design (canvas) artifact type: the rules below are the type's own,
 with the Artifact tool replaced by files on disk and this skill's `scripts/artifact.mjs` (The calls). A canvas is a

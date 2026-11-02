@@ -38,7 +38,7 @@
 
 ### 2.1 实现前的设计方案与自评
 
-新页面、重设计或影响信息呈现的改动，按 `baoyu-design` 内置的 `frontend-design` 方法先形成简短方案，再对照当前版本设计文档自评。小改动的说明聚焦目标与受影响范围，方案交付及开工确认仍按第 6.3 节执行；已由当前文档或本次会话确定的约束直接沿用，仅询问会改变结果的缺口。
+新页面、重设计或影响信息呈现的改动，加载 [frontend-design](../.agents/skills/frontend-design/SKILL.md) 和 `claude-design` 的 [craft.md](../.agents/skills/claude-design/artifact-type/reference/craft.md)，先形成简短方案，再对照当前版本设计文档自评。采用其中的内容、构图与表达方法，颜色、字体和组件继续来自绑定的 Spectrum S2。小改动的说明聚焦目标与受影响范围，方案交付及开工确认仍按第 6.3 节执行；已由当前文档或本次会话确定的约束直接沿用，仅询问会改变结果的缺口。
 
 方案说明以下内容：
 
@@ -95,12 +95,14 @@ OwnWord 特有的 Hero、Identity 表达、Content Showcase、Artifact 表达可
 
 设计和评审必须以**项目绑定版本**为依据，不自动采用最新版或其他 Spectrum 版本。
 
-开始前：
+开始前，按原型实际载体读取绑定证据：
 
-1. 读取原型的 `_d_meta.json`；
-2. 读取绑定的 `_ds/<slug>/_ds_prompt.md` 和来源记录；
-3. 确认实际组件包、Token 和版本；
-4. 再进行组件、Token、交互和视觉判断。
+| 载体 | 绑定与来源证据 |
+| --- | --- |
+| 现有 HTML、JSX 或应用工程 | 读取已有 `_d_meta.json`、`_ds/<slug>/_ds_prompt.md` 和来源记录；有依赖声明与锁文件时，核对实际导入的组件包、Token 和版本。 |
+| Design 画布 | 读取 `project/canvas.json` 的 `designSystems`、`project/ds/<slug>/` 中的来源资料，以及所引用设计系统的 `project/README.md`、`project/tokens.json`；结合可维护源码和依赖锁文件确认版本。记录中的 `version: null` 不能作为版本证明。 |
+
+沿用现有原型工程时，继承其绑定与官方来源，不为切换技能重复导入设计系统。完成版本与实际加载资源核对后，再判断组件、Token、交互和视觉。
 
 官方实现优先核对：
 
@@ -130,21 +132,26 @@ OwnWord 特有的 Hero、Identity 表达、Content Showcase、Artifact 表达可
 
 ## 6. 设计能力体系
 
-### 6.1 Design Orchestrator：baoyu-design
+### 6.1 Design Orchestrator：claude-design
 
-`baoyu-design` 是 OwnWord 高保真设计任务的主设计执行框架，负责：
+[claude-design](../.agents/skills/claude-design/SKILL.md) 是 OwnWord 原型设计与迭代的默认主技能，负责：
 
 - 理解任务和设计上下文；
 - 按本文组织设计判断；
 - 使用 Spectrum S2；
-- 完成高保真设计和交互原型；
+- 新建原型、修改既有原型，完成高保真设计和交互；
 - Preview、验证和迭代。
 
 OwnWord 已固定 Spectrum S2。若其通用流程要求选择设计系统，直接采用项目绑定的 Spectrum S2。
 
-涉及前端/UI 的新建、重设计或页面构图评审时，加载 `built-in-skills/frontend-design.md`；已绑定 S2 的页面同样适用。该参考负责通用的内容与表达方法，OwnWord 的方案自评和实际页面评审分别按第 2.1 节、第 8.1 节执行。
+技能选择与文件载体分别处理：
 
-`baoyu-design` 不能定义 OwnWord 产品事实，也不能覆盖核心认知、本文或当前版本已经确定的设计约束。
+- **原型工程**：默认在用户指定的现有仓库或 worktree 中工作，直接修改 HTML、JSX、CSS 等可维护源码，沿用目录、资源引用、构建、预览和检查入口。加载新版的设计方法，不要求改名为 `.dc.html`、新增 `canvas.json` 或迁移页面。新建原型延续项目已有工程方式。
+- **可编辑画布**：用户要求画布编辑器，或目标本来已有 `project/canvas.json` 时，使用新版 Design 格式及其 `scripts/artifact.mjs`。仅此路径适用技能正文中的画布文件格式、上传和编辑器命令；接入既有原型内容时，按本轮已确认范围处理。
+
+前端/UI 的方案、自评与实际页面评审按第 2.1、8.1 节执行。原型工程使用其现有命令构建和预览；画布先运行 `node .agents/skills/claude-design/scripts/artifact.mjs check <原型目录>`，再用 `open <原型目录>` 启动编辑器，并完成项目要求的浏览器验证。
+
+旧版 `baoyu-design` 按需提供既有导入、导出及辅助脚本；使用其具体能力时才加载对应说明，不作为新版承接原型的前置步骤。设计技能不能定义 OwnWord 产品事实，也不能覆盖核心认知、本文或当前版本已经确定的设计约束。
 
 ### 6.2 实现检查：react-spectrum
 
@@ -156,15 +163,15 @@ OwnWord 已固定 Spectrum S2。若其通用流程要求选择设计系统，直
 
 [prototype-iteration](../.agents/skills/prototype-iteration/SKILL.md) 负责高保真原型新增与修改的方案确认和验收交付。新增页面、功能或交互，修改布局、视觉、文案或修复原型问题时加载。
 
-方案页、开工确认、基准证据、对照页及验收状态的执行要求统一维护在该技能中；设计执行继续由 `baoyu-design` 负责，实现检查由 `react-spectrum` 负责。
+方案页、开工确认、基准证据、对照页及验收状态的执行要求统一维护在该技能中；设计执行按第 6.1 节选择载体，实现检查由 `react-spectrum` 负责。
 
 ### 6.4 可编辑产物与图表：新版 Artifact 技能
 
-[baoyu-design 上游仓库](https://github.com/JimLiu/baoyu-design/blob/main/README.zh-CN.md)提供以下五个技能。它们按产物格式调用，与第 6.1 节的设计执行框架配合；安装来源与内容校验值见根目录 `skills-lock.json`。
+[baoyu-design 上游仓库](https://github.com/JimLiu/baoyu-design/blob/main/README.zh-CN.md)提供以下五个技能。主设计职责见第 6.1 节，其他技能按产物需要调用；安装来源与本地内容校验值见根目录 `skills-lock.json`。`claude-design` 入口包含 OwnWord 本地适配，格式与运行脚本沿用上游。
 
 | 技能 | 使用范围与入口 |
 | --- | --- |
-| [claude-design](../.agents/skills/claude-design/SKILL.md) | 可编辑多画板画布，入口为 `project/canvas.json` 与 `.dc.html`；用户要求画布或修改已有该格式产物时使用。 |
+| [claude-design](../.agents/skills/claude-design/SKILL.md) | 默认承接原型工程的设计与迭代；需要可编辑多画板画布时，使用 `project/canvas.json` 与 `.dc.html`。 |
 | [claude-slides](../.agents/skills/claude-slides/SKILL.md) | 可编辑幻灯片，入口为 `project/deck.json` 与每页 HTML。 |
 | [claude-design-system](../.agents/skills/claude-design-system/SKILL.md) | 编辑器可读取的设计系统资料，入口为 `project/design-system.json`；OwnWord 中用于整理或适配已绑定版本的 Spectrum S2。 |
 | [claude-dashboard](../.agents/skills/claude-dashboard/SKILL.md) | 有数据集与来源追溯的独立仪表盘、数据报告，内容通过其脚本写入 `db/`。 |
@@ -174,12 +181,12 @@ OwnWord 使用这些技能时：
 
 - 按第 1 节的优先级处理冲突。技能中“仅运行自带 check，未经请求不得额外验证”的要求不能取消项目的 Preview、截图评审和实现检查；“未经请求不提交”的默认要求按根 `AGENTS.md` 的提交规则处理。用户明确要求的范围与授权继续有效。
 - 沿用绑定的 Spectrum S2，不因技能提示重新选择设计系统、采用默认品牌字体或另建配色。图表参数来自绑定系统；需要补充映射时记录来源和待核实项，不反向修改官方 Token。
-- 产物格式各自独立。现有 `_d_meta.json`、`_ds/` 与单文件 HTML 不会自动成为新版 Artifact；在独立目录中按目标格式制作或适配。安装技能不代表现有原型或 S2 资料已完成转换；消费副本与实际组件仍按第 5、7 节核实。
-- `claude-dashboard` 的页面运行时不支持 React，不用于替代 OwnWord 的 S2 产品界面；产品仪表盘页面仍按既定原型流程实现，数据报告可使用该技能。其他新版编辑器能否加载项目绑定的 S2，也须按实际运行结果判断。
+- 新版技能直接承接现有原型工程；启用画布编辑器及其格式转换按第 6.1 节处理。消费副本与实际组件仍按第 5、7 节核实。
+- `claude-dashboard` 的页面运行时不支持 React；OwnWord 产品仪表盘由 `claude-design` 沿用 S2 工程实现，独立数据报告可使用 `claude-dashboard`。需要画布编辑器时，另行核对其 React 运行时与项目绑定版本的兼容性，不能降级项目依赖或以外观相似的组件替换 S2。
 
 ## 7. 与原型实现配合
 
-继续遵循 `baoyu-design` 的设计系统导入、组件组合、预览和验证流程，并遵守以下规则：
+按第 6.1 节在原型工程或画布中实施，沿用对应载体的资源接入、组件组合、预览和验证方式，并遵守以下规则：
 
 - 符合性以项目绑定版本的官方 S2 为准，导入 bundle 只是原型实现载体；
 - 绑定文件或封装与官方实现有差异时，记录差异及影响，不能以封装行为反向定义 S2；
@@ -199,7 +206,7 @@ OwnWord 设计与设计系统（设计总指南）
         ↓
 确认项目绑定 Spectrum S2
         ↓
-baoyu-design（设计方案与自评）
+claude-design + frontend-design（设计方案与自评）
         ↓
 prototype-iteration（方案页与开工确认）
         ↓
@@ -221,7 +228,7 @@ prototype-iteration（对照页与验收交付）
 3. 定位当前版本相关设计文档；
 4. 明确用户任务、信息层级、内容关系和操作顺序；
 5. 确认 Spectrum S2 绑定版本和实际实现来源；
-6. 新增或修改高保真原型时加载 `prototype-iteration`，使用 `baoyu-design` 按第 2.1 节完成方案与自评，交付方案页并满足该技能的开工确认要求；
+6. 新增或修改高保真原型时加载 `prototype-iteration`，使用 `claude-design` 按第 2.1 节完成方案与自评，交付方案页并满足该技能的开工确认要求；
 7. 按已确认方案实现原型，Preview；
 8. 按第 8.1 节评审实际页面并定点修订；
 9. 使用 `react-spectrum` 检查组件、Token、交互与 Accessibility；

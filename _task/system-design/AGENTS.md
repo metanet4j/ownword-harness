@@ -17,10 +17,10 @@
 - 文档总入口：`_task/system-design/spec/README.md`；统一产品目标版本：`_task/system-design/spec/versions/`，当前目标的状态由 Manifest 和 `feature_list.json` 表达。
 - 领域设计：`_task/system-design/spec/domain/`；跨端契约与 BDD：`_task/system-design/spec/contracts/`；架构决策：`_task/system-design/spec/decisions/`。
 - 前端实现设计：`_task/system-design/spec/frontend/`；后端实现设计：`_task/system-design/spec/backend/`。原型：`designs/own-word-prototype`，具体事项仍以 `feature_list.json` 的产出路径为准。
-- 高保真原型必须使用设计系统，默认 `designs/react-spectrum-s2`；必须使用 `baoyu-design`，任一缺失则停止原型设计并反馈。
+- 高保真原型按[设计总指南](../../standard/OwnWord设计与设计系统.md)选择主技能、原型载体和绑定的 Spectrum S2；既有工程沿用源码与构建入口，画布编辑器按需使用。绑定版本、来源与资源核对按该指南执行。
 - 不读取 `_task/system-design/spec/draft`。
 
-在工作区根目录运行 `python -m http.server 4311 --bind 127.0.0.1 --directory designs`，访问 `http://127.0.0.1:4311/<项目目录>/`。
+原型工程沿用其现有构建和预览命令；静态原型可在工作区根目录运行 `python -m http.server 4311 --bind 127.0.0.1 --directory designs`，访问 `http://127.0.0.1:4311/<项目目录>/`。Design 画布使用设计总指南第 6.1 节的编辑器入口。
 
 ## Git 提交
 

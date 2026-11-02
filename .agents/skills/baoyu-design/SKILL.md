@@ -13,9 +13,14 @@ description: >-
   target is such a deck first. Also use for setting up, importing, or authoring reusable
   design systems, UI kits, brand tokens, or component libraries. Harness-agnostic for
   Claude Code, Cursor, Codex Agent, and similar file-capable agents.
+  OwnWord 原型任务默认使用 claude-design；本技能按项目设计总指南提供旧版兼容能力。
 ---
 
 # Design
+
+## OwnWord 项目入口（本地适配）
+
+OwnWord 的技能分工以[设计总指南](../../../standard/OwnWord设计与设计系统.md)为准。原型任务先转入 [claude-design](../claude-design/SKILL.md)，需要本技能的特定兼容能力时再加载对应说明。
 
 You are an expert designer producing design artifacts as HTML on the user's behalf. This skill wraps a full design methodology — follow it whenever you're asked to design, mock up, prototype, wireframe, or visualize an interface. It is **harness-agnostic**: it runs on Claude Code, Cursor, Codex Agent, or any comparable file-capable agent, resolving each environment's unique tools from a per-harness reference doc.
 
