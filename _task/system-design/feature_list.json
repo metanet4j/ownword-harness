@@ -9,7 +9,7 @@
     "done",
     "archived"
   ],
-  "activeItem": "proto-nav-v030-doc-sync",
+  "activeItem": "backend-identity-ddd-design-v010",
   "features": [
     {
       "id": "prototype-visual-alignment-v010-v030",
@@ -508,6 +508,31 @@
       ],
       "pendingDecisions": [],
       "nextStep": "用户复核导航措辞与触控尺寸描述；确认后标记 done"
+    },
+    {
+      "id": "backend-identity-ddd-design-v010",
+      "name": "OwnWord 后端 Identity 领域驱动设计",
+      "status": "in-progress",
+      "goal": "在 dev 分支的 spec/backend 新增领域设计，结合现有核心认知，设计 Identity 聚合、Artifact Binding 跨上下文协作、领域状态、链上证明与集成边界。",
+      "scope": "仅新增 _task/system-design/spec/backend 中的领域设计文档及必要入口，并维护本任务状态记录；不改动业务源码或既有产品事实。",
+      "dependencies": [
+        "_task/system-design/spec/核心认知.md（SSOT）",
+        "_task/system-design/spec/prd/v0.1/设计文档v0.1.md（Identity）",
+        "_task/system-design/spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md（Artifact）",
+        "_task/system-design/spec/frontend/设计文档v0.1.0-真实集成-20261013-183000.md（集成）"
+      ],
+      "doneCriteria": [
+        "领域文档覆盖上下文、术语、聚合、值对象、不变量、领域事件、状态机、用例、持久化、API/Port、异常和验收映射",
+        "全局规则引用核心认知，现有契约与设计提案分开标注，待确认项有验证责任",
+        "文档位于 spec/backend 并在 dev 提交，完成只读核对；用户复核前保持 needs-review"
+      ],
+      "prdVersion": "v0.1.0（Identity 范围；Artifact 参照 v0.3.0）",
+      "prdSource": "_task/system-design/spec/prd/v0.1/设计文档v0.1.md",
+      "output": "_task/system-design/spec/backend/领域设计-Identity-v0.1.0-20261117-165000.md",
+      "reviewStatus": "awaiting-user-review",
+      "implementationStatus": "not-applicable-design-only",
+      "evidence": [],
+      "nextStep": "撰写领域设计并校验与核心认知、既有集成契约一致性。"
     }
   ]
 }
