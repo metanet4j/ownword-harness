@@ -63,7 +63,7 @@
 
 上下文之间交换稳定标识和经验证的事实快照；不得直接共享可变实体或把别的上下文的数据库集合当领域 API。
 
-````mermaid
+```mermaid
 flowchart LR
   Wallet["Wallet Context（客户端）"] -->|授权并签署原交易| Sync["TransactionSync（应用层）"]
   Sync -->|解析/验签/链上查证| Chain["Blockchain & BAP Indexer"]
@@ -73,7 +73,7 @@ flowchart LR
   Artifact -->|Current Binding 只读投影| Explorer["Explorer Context"]
   Identity -->|公开 Identity/Profile| Explorer
   Content -->|公开 Post| Explorer
-````
+```
 
 **一致性所有权**：Identity 维护身份发布、Profile 与密钥轮换的业务规则；Artifact 维护当前 NFT Binding。Identity 首页所见 Current Artifact 是读取 Artifact 的**投影引用**，不要求在 BapIdentity 聚合内维护一套可写 Binding。
 
@@ -94,7 +94,7 @@ flowchart LR
 
 ### 3.1 身份发布的时序
 
-````mermaid
+```mermaid
 sequenceDiagram
   actor User
   participant UI as Web/UseCase
@@ -118,7 +118,7 @@ sequenceDiagram
     UI->>API: GET identities/{bapId}
     API-->>UI: 公共身份与 Proof
   end
-````
+```
 
 如果钱包广播结果未知，优先按同一 TxID 核查，不能重构交易、自动重签或因为 API 404 就认定未广播。身份首次带头像可能是多笔交易，逐笔执行签名和恢复，完整阶段见[身份真实集成设计 `3.2](../frontend/设计文档v0.1.0-真实集成-20261013-183000.md#32-创建补全与更新)。
 
@@ -158,7 +158,7 @@ sequenceDiagram
 
 建议对外领域行为：
 
-````text
+```text
 BapIdentity
   + bapId: BapId                    // 不可编辑
   + rootPath: IdentitySigningPath    // 稳定
@@ -172,7 +172,7 @@ BapIdentity
   + beginKeyRotation(commandContext)
   + applyVerifiedKeyRotation(proof)
   + markPublicationPending(observation)
-````
+```
 
 - Identity 只在 Proof 与公共观测符合可信门槛后演进为 ACTIVE。`computeBapId` 或服务接收到 rawTx 不足以完成这一演进。
 - 轮换必须验证旧有效路径授权与新路径关联；BAP ID 不变，历史记录按当时生效路径验证。
@@ -190,7 +190,7 @@ Profile 字段类型、必填、长度参考[核心认知 `7.3](../核心认知.
 
 `IdentityNFTBinding` **归 Artifact 上下文管理**，而不是 Identity 聚合内的可写字段。
 
-````text
+```text
 Artifact / BindCurrentArtifact
   1. 校验目标 BAP ID 的公开状态与有效身份签名路径
   2. 校验 Artifact 的 Inscription Number 已分配且链上 Origin 可解析
@@ -199,7 +199,7 @@ Artifact / BindCurrentArtifact
   5. 验证 BAP ID ↔ OrdinalOrigin 的当前唯一性和公开记录
   6. 产生已验证 Binding 投影，旧 Current 进入历史
   7. Identity 首页按查询接口读取 CurrentBindingSummary
-````
+```
 
 - 当前 Binding：同一 BAP ID 最多一个 ACTIVE，同一 Origin 最多对应一个有效 BAP ID。历史保留；不同 Origin 不因相同 NFT 名称合并。
 - `creator`、`signer`、`owner`、`binding` 四者分别验证，不互推；NFT 转移不意味着 BAP ID 或内容作者身份转移。
@@ -231,7 +231,7 @@ Artifact / BindCurrentArtifact
 
 ### 6.1 Identity 生命周期
 
-````mermaid
+```mermaid
 stateDiagram-v2
   [*] --> NOT_PUBLISHED
   NOT_PUBLISHED --> PUBLISHING: 用户授权发布
@@ -242,13 +242,13 @@ stateDiagram-v2
   ROTATING --> ACTIVE: 已验证新密钥路径
   ROTATING --> ACTIVE: 明确取消且无有效轮换
   ACTIVE --> REVOKED: 未来：经协议证明撤销
-````
+```
 
 `NOT_PUBLISHED` 必须有**充分查询覆盖且确认没有有效公开声明**的证据才可作为已核实结论；计算出 BAP ID、钱包 basket 没记录、公共索引暂时 404 都不能单独证明它。后端可额外返回 `UNKNOWN` 查询结果，此状态属于**查询证据**，不是随意增加的产品生命周期状态。
 
 ### 6.2 交易操作与链上观测分离
 
-````text
+```text
 Client Operation:
   REVIEW → AWAITING_SIGNATURE → PREPARED → SUBMISSION_UNKNOWN
                                     └──────→ ACCEPTED / CANCELLED / FAILED
@@ -259,7 +259,7 @@ Backend Sync:
 
 Blockchain:
   BROADCAST → SEEN → ACCEPTED → MINED → IMMUTABLE（产品归一化状态）
-````
+```
 
 以上后端状态属于**建议的技术内部状态**，不是 SDK 官方枚举。网络确认层级按实际证据映射；不能以同步 API 的 200/201 替代 BAP 公开可发现性，也不能把 `PENDING` 自动变为 `FAILED`。
 
@@ -299,7 +299,7 @@ Blockchain:
 
 ### 8.1 推荐端口
 
-````text
+```text
 domain / application ports
   IdentityRepository             // Identity 当前聚合状态和证据引用
   PublicIdentityResolver         // 公共 BAP 查询 + 查询覆盖
@@ -310,13 +310,13 @@ domain / application ports
   BindingQueryPort               // Artifact Current 只读引用
   TransactionSyncRepository      // operationId + txid + 原交易与重试
   DomainEventPublisher           // 已验证事件幂等通知
-````
+```
 
 对外领域端口沿用[核心认知 `5.2](../核心认知.md#52-接口边界)的 `IdentityProvider / BlockchainIndexer / IdentifierResolver` 等名字和能力边界；上列是 Java 后端内部为测试与适配进一步拆分的**建议端口**，不增加第二套公共 Wallet API。
 
 ### 8.2 依赖方向
 
-````text
+```text
 HTTP / Adapter
     ↓
 Application Use Cases
@@ -325,7 +325,7 @@ Identity Domain (Aggregates, Policies, Events, Ports)
     ↑
 Infrastructure: metanet4j BAP/Transaction Verifier,
                 public Indexer, Mongo projection, chain read
-````
+```
 
 建议将领域代码封装到现有 metanet4j 服务体系内；包名/模块名应在实施时对照当前真实源代码与 POM 确认。本设计不宣称 `metanet4j-api-ownword` 的未来接口已部署。
 
@@ -346,7 +346,7 @@ Infrastructure: metanet4j BAP/Transaction Verifier,
 
 ### 8.4 服务端交易验收流水线
 
-````text
+```text
 Validate shape/size
 → Parse rawTx and recompute TxID
 → Check operationId / TxID idempotency
@@ -357,7 +357,7 @@ Validate shape/size
 → Persist raw transaction + evidence
 → Derive Identity/Profile projection
 → Publish verified events and return source-aware status
-````
+```
 
 混合/错误协议应直接拒绝，不通过逐一捕获异常降级到其他协议解释。未确认网络来源或签名覆盖不足，保留 Pending/Unverified，不生成 Verified 身份投影。主网与 `broadcast-mock` 独立存储和查询。
 
