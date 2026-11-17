@@ -9,7 +9,7 @@
     "done",
     "archived"
   ],
-  "activeItem": "system-design-unified-version-v040",
+  "activeItem": null,
   "features": [
     {
       "id": "prototype-visual-alignment-v010-v030",
@@ -549,7 +549,7 @@
     {
       "id": "system-design-unified-version-v040",
       "name": "统一 v0.4.0 设计基线与前后端领域文档结构",
-      "status": "in-progress",
+      "status": "needs-review",
       "goal": "在 dev 分支建立统一 OwnWord v0.4.0 版本清单和稳定开发指南，按 Domain / Contracts / Frontend / Backend 分离责任，并保留已有 PRD、原型与代码版本的真实进度。",
       "scope": "只调整 _task/system-design/spec 设计体系及 _task/system-design 状态/规则；保留原始历史文档、源码仓库、原型和已批准产品事实。",
       "dependencies": [
@@ -569,10 +569,28 @@
       "prdVersion": "v0.4.0",
       "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
       "output": "_task/system-design/spec/README.md",
-      "implementationStatus": "documentation-in-progress",
+      "implementationStatus": "documentation-written-and-references-checked",
       "reviewStatus": "awaiting-user-review",
-      "evidence": [],
-      "nextStep": "编制统一版本清单和领域分层开发指南，引用原型/前后端真实基线。"
+      "evidence": [
+        "_task/system-design/spec/README.md",
+        "_task/system-design/spec/versions/v0.4.0.yaml",
+        "_task/system-design/spec/domain/identity/领域设计-Identity-v0.4.0-20261117-175100.md",
+        "_task/system-design/spec/domain/上下文映射-v0.4.0-20261117-175100.md",
+        "_task/system-design/spec/frontend/identity/实现设计-Identity-v0.4.0-20261117-175100.md",
+        "_task/system-design/spec/backend/identity/实现设计-Identity-v0.4.0-20261117-175100.md",
+        "_task/system-design/spec/contracts/openapi/ownword.yaml",
+        "_task/system-design/spec/contracts/acceptance/identity.feature",
+        "_task/system-design/spec/contracts/acceptance/artifact.feature",
+        "_task/system-design/spec/decisions/ADR-001-统一产品版本与文档职责-20261117-175100.md",
+        "GitHub dev reviewed: 19 new Markdown entry/design files + manifest/openapi/2 BDD, 119 relative links resolve, no unpaired Markdown fences, manifest path references resolve, 2 OpenAPI path items and schema references match, 6 Gherkin scenarios have Given/When/Then structure; no runnable tests/production verification"
+      ],
+      "nextStep": "用户复核 spec/README.md、v0.4.0.yaml 与 Identity 跨端设计；复核后逐项确认 API 契约、公开 Binding 验证和是否锁定 Git Release Tag。",
+      "pendingDecisions": [
+        "v0.4.0 文档目标的人工评审与正式发布基线锁定",
+        "OpenAPI 完整 DTO、错误模型与真实接口样例核对",
+        "Artifact Binding 公共验证协议和 Ordinal Indexer API",
+        "真实 Yours 扩展、主网 BAP 公共历史和资金/广播门禁"
+      ]
     }
   ]
 }
