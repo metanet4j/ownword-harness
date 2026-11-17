@@ -17,3 +17,11 @@ v0.2.0 内容集成设计已获批准，本地功能与技术验收已完成；�
 只读校验：文件已在 `dev` 可读取；14 个章节、3 个 Mermaid 图、来源引用、目录存在性已核对。未执行真实服务、密码学向量或主网测试；R01–R06 仍待验证，用户复核前保持 `needs-review`。提交：`3244b88a`、`a4aa2b88`；任务记录提交 `f05de392`。
 
 此事项下一步：用户审阅领域模型与待确认契约后，再决定是否开始后端实现。此前导航视觉复核事项状态未改变。
+
+## v0.4.0 统一开发设计基线（needs-review）
+
+按用户认可的治理方案，在 `spec/README.md` 建立统一入口，`spec/versions/v0.4.0.yaml` 记录目标版本与独立原型/前端/后端 Git SHA 及验收状态；核心认知和历史 PRD 保持权威与原位。共享 Domain 增加 Context Map、Identity 领域设计及 Artifact/Content/Relationship 缺口入口；Contracts 增加仅覆盖已核实 Java 两项接口的 OpenAPI 草案和 6 个 BDD 设计级场景；Frontend/Backend 分别增加基于现有 TypeScript/Java 的 Identity 实现指南，并创建 ADR-001。原 v0.1 后端设计保留历史，生产源码、原型和 npm/Maven 版本均未改动。
+
+**验证**：GitHub `dev` 上新增路径及相对链接核对通过（119 个相对链接、0 个未解析），YAML 中 18 个文档/证据路径存在，OpenAPI 内部 Schema 引用可解析，6 个 Gherkin 场景具备 Given/When/Then 结构。上述为文档静态检查，**没有**执行 Java/TypeScript 测试、Swagger/OpenAPI 严格 Schema 校验、Wallet 扩展或主网交易。实际 API DTO、Signature/Binding/Indexer 与公共历史仍有未关闭项。
+
+状态 `needs-review`；用户尚未批准 v0.4.0 的正式发布基线，因此 `specSnapshot: null`，未创建 Release Tag。证据和待决条件见 `feature_list.json` 的 `system-design-unified-version-v040`。下一步：用户评审统一版本清单、Identity 跨端职责及待确认的 Contract，随后确定是否批准基线。
