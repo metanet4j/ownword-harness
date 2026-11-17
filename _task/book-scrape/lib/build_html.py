@@ -32,6 +32,8 @@ INLINE_RE = re.compile(
     r'|(?P<link>\[(?P<text>[^\]]+)\]\((?P<href>[^)\s]+)(?:\s+"[^"]*")?\))'
     r'|(?P<code>`[^`]+`)'
 )
+INDEX_HEAD_RE = re.compile(r'^解读\s*(\d+)\s*[、，,.:：]?\s*(.*)$')
+QUESTION_RE = re.compile(r'^(\d+)\s*问\s*[：:]\s*(.*)$')
 
 
 # ---------------------------------------------------------------- Markdown 解析
@@ -172,16 +174,37 @@ def render_inline(text, anchors):
     return ''.join(out)
 
 
+def split_index(text):
+    """把「解读3、标题」拆成 (编号, 标题)；不是解读标题则返回 (None, 原文)。"""
+    m = INDEX_HEAD_RE.match(text.strip())
+    if m and m.group(2).strip():
+        return m.group(1), m.group(2).strip()
+    return None, text.strip()
+
+
+def split_question(title):
+    """把「12问：标题」拆成 (编号, 标题)；没有编号则原样返回。"""
+    m = QUESTION_RE.match(title.strip())
+    if m:
+        return m.group(1), m.group(2).strip()
+    return None, title.strip()
+
+
 def render_block(block, anchors, hid=None):
     kind = block['type']
     if kind == 'p':
         text = block['text'].lstrip('　')
         inner = render_inline(text, anchors)
-        cls = '' if block.get('indent') else ' class="no-indent"'
-        return f'<p{cls}>{inner}</p>'
+        return f'<p>{inner}</p>'
     if kind in ('h2', 'h3', 'h4', 'h5', 'h6'):
         level = min(int(kind[1]), 4)
         attr = f' id="{hid}"' if hid else ''
+        if kind == 'h2':
+            num, text = split_index(block['text'])
+            if num:
+                return (f'<h2{attr}><span class="idx">解读 {html.escape(num, quote=False)}</span>'
+                        f'<span class="ht">{render_inline(text, anchors)}</span></h2>')
+            return f'<h2{attr}><span class="ht">{render_inline(block["text"], anchors)}</span></h2>'
         return f'<h{level}{attr}>{render_inline(block["text"], anchors)}</h{level}>'
     if kind == 'quote':
         text = block['text']
@@ -246,11 +269,13 @@ def render_body(blocks, anchors, cid=None):
                 out.append('<div class="en">' + ''.join(rows) + '</div>')
                 continue
             if ANSWER_RE.match(plain):
-                out.append(f'<div class="answer">{render_inline(text, anchors)}</div>')
+                inner = [render_inline(text, anchors)]
                 i += 1
                 while i < len(blocks) and blocks[i]['type'] in ('ul', 'ol'):
-                    out.append(render_block(blocks[i], anchors))
+                    inner.append(render_block(blocks[i], anchors))
                     i += 1
+                out.append('<div class="answer"><span class="answer-tag">答</span>'
+                           '<div class="answer-text">' + ''.join(inner) + '</div></div>')
                 continue
         out.append(render_block(block, anchors))
         i += 1
@@ -274,12 +299,19 @@ def render_chapter(ch, md, anchors, pager=''):
 
     cid = 'ch-' + ch['slug']
     content, sec = render_body(body, anchors, cid)
+    qnum, qtext = split_question(title)
     kicker = f'<p class="kicker">{html.escape(category, quote=False)}</p>' if category else ''
+    if qnum:
+        head = ('<div class="qmark"><span class="qmark-n">'
+                f'{int(qnum):02d}</span><span class="qmark-w">问</span></div>'
+                f'<h1 class="chapter-title">{html.escape(qtext, quote=False)}</h1>')
+    else:
+        head = f'<h1 class="chapter-title">{html.escape(title, quote=False)}</h1>'
     parts = [
         f'<section class="chapter" id="{cid}" data-title="{html.escape(title, quote=True)}">',
         '<header class="chapter-head">',
         kicker,
-        f'<h1 class="chapter-title">{html.escape(title, quote=False)}</h1>',
+        head,
         '</header>',
         '<div class="chapter-body">',
         content,
@@ -292,8 +324,11 @@ def render_chapter(ch, md, anchors, pager=''):
 
 # ---------------------------------------------------------------- 页面组装
 
-def build_toc_html(chapters):
-    """目录（抽屉）用静态 HTML 输出，保证无脚本也能看到章节目录。"""
+def build_toc_html(chapters, headings):
+    """目录用静态 HTML 输出，保证无脚本也能看到章节目录。
+
+    每章一个小节容器（.toc-kids），默认收起；桌面端展开当前章的小节。
+    """
     parts = ['<nav class="toc" id="toc">']
     cur_part = None
     cur_cat = None
@@ -311,11 +346,44 @@ def build_toc_html(chapters):
                 parts.append(f'<div class="toc-cat">{html.escape(cat, quote=False)}</div>')
             cur_cat = cat
         cid = 'ch-' + ch['slug']
-        parts.append(f'<a class="toc-item" href="#{cid}" data-target="{cid}">'
+        parts.append(f'<div class="toc-row" data-target="{cid}">')
+        parts.append(f'<a class="toc-item" href="#{cid}">'
                      f'{html.escape(ch["title"], quote=False)}</a>')
+        kids = headings.get(cid, [])
+        if kids:
+            parts.append('<div class="toc-kids">')
+            for kid in kids:
+                parts.append(f'<a class="toc-sub" href="#{kid["id"]}">'
+                             f'{html.escape(kid["t"], quote=False)}</a>')
+            parts.append('</div>')
+        parts.append('</div>')
     if cur_part is not None:
         parts.append('</div>')
     parts.append('</nav>')
+    return '\n'.join(parts)
+
+
+def build_numgrid(chapters):
+    """按问号跳转的编号网格。"""
+    parts = ['<div class="numgrid" id="numgrid" hidden>']
+    cur_part = None
+    opened = False
+    for ch in chapters:
+        m = re.match(r'^(\d+)', ch['title'])
+        if not m:
+            continue
+        part = ch.get('part') or ''
+        if part != cur_part:
+            if opened:
+                parts.append('</div>')
+            parts.append(f'<div class="numgrid-part">{html.escape(part, quote=False)}</div>')
+            parts.append('<div class="numgrid-body">')
+            cur_part, opened = part, True
+        cid = 'ch-' + ch['slug']
+        parts.append(f'<a class="num" href="#{cid}" data-target="{cid}">{m.group(1)}</a>')
+    if opened:
+        parts.append('</div>')
+    parts.append('</div>')
     return '\n'.join(parts)
 
 
@@ -334,7 +402,7 @@ def build_index(chapters, headings):
     return json.dumps(data, ensure_ascii=False)
 
 
-def page(meta, chapters_html, toc_html, index_json, stats, filename, first_id):
+def page(meta, chapters_html, toc_html, numgrid_html, index_json, stats, filename, first_id):
     title = meta.get('book', '')
     cover_rows = [
         ('作者 / 解读', meta.get('author')),
@@ -361,183 +429,338 @@ def page(meta, chapters_html, toc_html, index_json, stats, filename, first_id):
     page_html = page_html.replace('{{COVER_SOURCE}}', source_html)
     page_html = page_html.replace('{{STATS}}', stats)
     page_html = page_html.replace('{{TOC}}', toc_html)
+    page_html = page_html.replace('{{NUMGRID}}', numgrid_html)
     page_html = page_html.replace('{{CHAPTERS}}', chapters_html)
     page_html = page_html.replace('{{INDEX}}', index_json)
     page_html = page_html.replace('{{FIRST_ID}}', first_id)
     page_html = page_html.replace('{{FILENAME}}', html.escape(filename, quote=False))
     return page_html
 
-
 TEMPLATE = r"""<!doctype html>
-<html lang="zh-CN" data-theme="sepia">
+<html lang="zh-CN" data-theme="paper">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#f3ead9">
+<meta name="theme-color" content="#f4efe4">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>{{TITLE}}</title>
 <style>
+/* ============================================================
+   阅读令牌：颜色 / 字阶 / 间距 / 圆角 / 字体
+   方向：书籍编辑部式——暖纸底、衬线正文、单一赭红重音
+   ============================================================ */
 :root{
-  --fs:17px; --lh:1.92;
-  --bg:#f2e9d8; --surface:#faf4e8; --surface2:#fffdf7; --text:#2c2721; --muted:#7c7160;
-  --line:#e0d3ba; --accent:#9a5b2c; --accent-weak:rgba(154,91,44,.10); --shadow:rgba(60,40,20,.16);
-  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC","Segoe UI",sans-serif;
+  --paper:#f4efe4;      --surface:#faf6ec;    --card:#fffdf8;
+  --ink:#211d18;        --ink-2:#443c32;      --muted:#6d6353;
+  --rule:#e3d9c5;       --rule-2:#d3c6ad;
+  --accent:#9c4a22;     --accent-2:#c2814f;   --accent-wash:rgba(156,74,34,.09);
+  --on-accent:#fffdf8;
+  --shadow:rgba(74,52,28,.13);
+
+  --fs:17px;  --lh:1.95;  --measure:34em;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px;
+  --r1:7px; --r2:11px; --r3:15px;
+
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC","Segoe UI",Roboto,sans-serif;
   --serif:"Songti SC","Source Han Serif SC","Noto Serif CJK SC","Noto Serif SC","SimSun","STSong",Georgia,"Times New Roman",serif;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
 }
-html[data-theme="plain"]{--bg:#ffffff;--surface:#f6f6f4;--surface2:#ffffff;--text:#1f1f1e;--muted:#6b6b68;--line:#e5e5e1;--accent:#2f5d8a;--accent-weak:rgba(47,93,138,.09);--shadow:rgba(0,0,0,.10)}
-html[data-theme="night"]{--bg:#14161a;--surface:#1b1e24;--surface2:#21252c;--text:#d6d2ca;--muted:#8e8a82;--line:#2d323a;--accent:#d6a26a;--accent-weak:rgba(214,162,106,.13);--shadow:rgba(0,0,0,.45)}
+html[data-theme="plain"]{
+  --paper:#ffffff; --surface:#f7f7f5; --card:#ffffff;
+  --ink:#1c1c1b; --ink-2:#3d3d3a; --muted:#66665f;
+  --rule:#e6e6e1; --rule-2:#d6d6cf;
+  --accent:#8f4520; --accent-2:#b9764a; --accent-wash:rgba(143,69,32,.08);
+  --shadow:rgba(0,0,0,.10);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+}
+html[data-theme="night"]{
+  --paper:#131519; --surface:#181b20; --card:#1e222a;
+  --ink:#ded9d0; --ink-2:#c2bdb4; --muted:#8d877d;
+  --rule:#2b3038; --rule-2:#363c46;
+  --accent:#dd9c68; --accent-2:#b9793f; --accent-wash:rgba(221,156,104,.12);
+  --on-accent:#241a12;
+  --shadow:rgba(0,0,0,.5);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+}
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--text);font-family:var(--serif);font-size:var(--fs);line-height:var(--lh);-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+body{
+  margin:0;background-color:var(--paper);background-image:var(--grain);
+  color:var(--ink);font-family:var(--serif);font-size:var(--fs);line-height:var(--lh);
+  -webkit-font-smoothing:antialiased;overflow-wrap:break-word;
+  text-spacing-trim:space-first;
+}
 a{color:var(--accent)}
-img{max-width:100%;height:auto;border-radius:8px;display:block;margin:1.2em auto}
-hr{border:none;border-top:1px solid var(--line);margin:1.8em 0}
+img{max-width:100%;height:auto;border-radius:var(--r2);display:block;margin:1.4em auto}
+hr{border:none;border-top:1px solid var(--rule);margin:2em 0}
+::selection{background:var(--accent-wash)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
 
-/* 顶栏 */
-.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;pointer-events:none}
+/* ---------- 顶栏 ---------- */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;cursor:pointer}
 .progress span{display:block;height:100%;width:0;background:var(--accent);transition:width .12s linear}
-.bar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:4px;
-  height:calc(52px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 6px 0;
-  background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);
+.bar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:var(--s1);
+  height:calc(54px + env(safe-area-inset-top));padding:env(safe-area-inset-top) var(--s2) 0;
+  background:var(--paper);background:color-mix(in srgb,var(--paper) 86%,transparent);
   -webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px);
-  border-bottom:1px solid var(--line)}
-.bar-title{flex:1;min-width:0;text-align:center;font-family:var(--sans);font-size:15px;font-weight:600;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
-.icon{flex:none;width:40px;height:40px;border:0;background:transparent;color:var(--muted);
-  font-size:17px;border-radius:10px;cursor:pointer;font-family:var(--sans);line-height:1}
-.icon:active{background:var(--accent-weak)}
-html[data-theme="night"] .icon{color:#cfc9bf}
+  border-bottom:1px solid var(--rule)}
+.bar-title{flex:1;min-width:0;text-align:center;font-family:var(--sans);font-size:14.5px;font-weight:600;
+  letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+.icon{flex:none;display:flex;align-items:center;justify-content:center;width:40px;height:40px;
+  border:0;background:transparent;color:var(--muted);border-radius:var(--r1);cursor:pointer;padding:0}
+.icon:hover{background:var(--accent-wash);color:var(--accent)}
+.icon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.icon-text{font-family:var(--serif);font-size:15px;font-weight:600;letter-spacing:.02em}
 
-/* 抽屉 */
-.scrim{position:fixed;inset:0;background:rgba(20,15,8,.42);z-index:45;opacity:0;pointer-events:none;transition:opacity .25s}
+/* ---------- 布局 ---------- */
+.layout{display:block}
+.sidebar{display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;width:min(87vw,364px);z-index:50;
+  background:var(--surface);border-right:1px solid var(--rule);transform:translateX(-102%);
+  transition:transform .3s cubic-bezier(.32,.72,0,1);padding-top:env(safe-area-inset-top)}
+.sidebar.on{transform:none;box-shadow:0 0 60px var(--shadow)}
+.content{min-width:0}
+.scrim{position:fixed;inset:0;background:rgba(24,16,8,.44);z-index:45;opacity:0;pointer-events:none;transition:opacity .25s}
 .scrim.on{opacity:1;pointer-events:auto}
-.drawer{position:fixed;top:0;left:0;bottom:0;width:min(86vw,380px);z-index:50;display:flex;flex-direction:column;
-  background:var(--surface);border-right:1px solid var(--line);transform:translateX(-102%);
-  transition:transform .28s cubic-bezier(.32,.72,0,1);box-shadow:0 0 0 transparent}
-.drawer.on{transform:none;box-shadow:0 0 48px var(--shadow)}
-.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:8px;
-  padding:calc(10px + env(safe-area-inset-top)) 10px 6px 16px;border-bottom:1px solid var(--line)}
-.drawer-head strong{font-family:var(--sans);font-size:16px}
-.search{width:calc(100% - 24px);margin:10px 12px;padding:9px 12px;border-radius:10px;border:1px solid var(--line);
-  background:var(--surface2);color:var(--text);font-family:var(--sans);font-size:15px}
-.search:focus{outline:none;border-color:var(--accent)}
-.toc{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:0 10px calc(28px + env(safe-area-inset-bottom)) 12px;-webkit-overflow-scrolling:touch}
-.toc-part{margin:16px 0 4px;font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.08em;
-  color:var(--accent);text-transform:none}
-.toc-cat{margin:10px 0 2px;padding-left:6px;font-family:var(--sans);font-size:13px;color:var(--muted)}
-.toc-item{display:block;padding:8px 10px;border-radius:9px;font-family:var(--sans);font-size:14.5px;line-height:1.45;
-  color:var(--text);text-decoration:none}
-.toc-item:active{background:var(--accent-weak)}
-.toc-item.current{background:var(--accent-weak);color:var(--accent);font-weight:600}
-.toc-sub{display:block;padding:6px 10px 6px 22px;font-family:var(--sans);font-size:13px;color:var(--muted);text-decoration:none}
-.toc-empty{padding:24px 12px;font-family:var(--sans);font-size:14px;color:var(--muted)}
 
-/* 封面 */
-.cover{min-height:calc(100svh - 52px);display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;padding:56px 26px calc(48px + env(safe-area-inset-bottom));gap:0}
-.cover-mark{width:52px;height:52px;border-radius:14px;background:var(--accent);color:#fff;display:flex;align-items:center;
-  justify-content:center;font-family:var(--sans);font-size:22px;font-weight:700;margin-bottom:26px}
-.cover h1{font-family:var(--sans);font-size:1.62em;line-height:1.4;font-weight:700;margin:0 0 8px;letter-spacing:.01em}
-.cover-en{font-family:var(--serif);font-size:.92em;color:var(--muted);margin:0 0 26px;letter-spacing:.02em}
-.cover-meta{margin:0 0 26px;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:34em}
-.cover-row{margin:0 0 8px;font-family:var(--sans);font-size:14px;line-height:1.6;display:flex;gap:10px;text-align:left}
-.cover-key{flex:none;width:5.6em;color:var(--muted);font-size:13px}
-.cover-val{flex:1;color:var(--text)}
-.cover-source{font-family:var(--sans);font-size:12px;color:var(--muted);margin:14px 0 0;word-break:break-all}
-.cover-source a{color:var(--muted)}
-.cover-stats{display:flex;gap:10px;margin:0 0 30px;font-family:var(--sans);font-size:13px;color:var(--muted)}
-.cover-stats b{color:var(--accent);font-size:1.25em;font-weight:700;margin-right:4px}
-.cover-actions{display:flex;flex-direction:column;gap:10px;width:min(100%,320px)}
-.btn{display:block;padding:13px 20px;border-radius:12px;border:1px solid var(--line);background:var(--surface2);
-  color:var(--text);font-family:var(--sans);font-size:15px;font-weight:600;text-decoration:none;text-align:center;cursor:pointer}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-.cover-foot{margin-top:34px;font-family:var(--sans);font-size:12px;color:var(--muted);line-height:1.8}
+/* ---------- 侧栏 ---------- */
+.side-head{display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  padding:var(--s3) var(--s2) var(--s2) var(--s4)}
+.tabs{display:inline-flex;gap:2px;padding:3px;border-radius:var(--r2);background:var(--paper);border:1px solid var(--rule)}
+.tab{padding:6px 13px;border:0;border-radius:8px;background:transparent;color:var(--muted);
+  font-family:var(--sans);font-size:13px;cursor:pointer}
+.tab.active{background:var(--card);color:var(--accent);font-weight:600;box-shadow:0 1px 2px var(--shadow)}
+.search-wrap{position:relative;padding:0 var(--s3) var(--s2)}
+.search{width:100%;padding:9px 12px 9px 34px;border-radius:var(--r2);border:1px solid var(--rule);
+  background:var(--card);color:var(--ink);font-family:var(--sans);font-size:14.5px}
+.search::placeholder{color:var(--muted)}
+.search:focus{outline:none;border-color:var(--accent-2);box-shadow:0 0 0 3px var(--accent-wash)}
+.search-icon{position:absolute;left:22px;top:50%;transform:translateY(-50%);width:16px;height:16px;
+  fill:none;stroke:var(--muted);stroke-width:1.7;stroke-linecap:round;pointer-events:none}
+.toc{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:0 var(--s2) var(--s3) var(--s3);-webkit-overflow-scrolling:touch}
+.toc-part{margin:var(--s4) 0 var(--s1);padding-top:var(--s3);border-top:1px solid var(--rule);
+  font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.16em;color:var(--accent)}
+.toc-cat{margin:var(--s3) 0 2px;padding-left:2px;font-family:var(--sans);font-size:12.5px;color:var(--muted)}
+.toc-item{position:relative;display:flex;align-items:center;min-height:44px;padding:8px 10px 8px 12px;
+  border-radius:var(--r1);font-family:var(--sans);font-size:14.5px;line-height:1.5;color:var(--ink);text-decoration:none}
+.toc-item:hover{background:var(--accent-wash)}
+.toc-row.current>.toc-item{color:var(--accent);font-weight:600}
+.toc-row.current>.toc-item::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:2px;
+  border-radius:2px;background:var(--accent)}
+.toc-kids{display:none;margin:0 0 var(--s2) 14px;padding-left:10px;border-left:1px solid var(--rule)}
+.toc-row.current>.toc-kids{display:block}
+.toc-sub{display:block;padding:6px 8px;border-radius:6px;font-family:var(--sans);font-size:12.5px;line-height:1.5;
+  color:var(--muted);text-decoration:none}
+.toc-sub:hover{color:var(--ink)}
+.toc-sub.current{color:var(--accent);font-weight:600}
+.toc-empty{padding:var(--s5) var(--s3);font-family:var(--sans);font-size:13.5px;color:var(--muted)}
+.numgrid{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:0 var(--s3) var(--s3);-webkit-overflow-scrolling:touch}
+.numgrid-part{margin:var(--s4) 0 var(--s2);font-family:var(--sans);font-size:11.5px;font-weight:700;
+  letter-spacing:.16em;color:var(--accent)}
+.numgrid-body{display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:6px;margin-bottom:var(--s2)}
+.num{display:flex;align-items:center;justify-content:center;height:44px;border-radius:var(--r1);
+  border:1px solid var(--rule);background:var(--card);color:var(--ink);font-family:var(--sans);font-size:14px;
+  font-variant-numeric:tabular-nums;text-decoration:none}
+.num:hover{border-color:var(--accent-2);color:var(--accent)}
+.num.current{border-color:var(--accent);background:var(--accent-wash);color:var(--accent);font-weight:700}
+.side-foot{flex:none;display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  padding:var(--s3) var(--s4) calc(var(--s3) + env(safe-area-inset-bottom));border-top:1px solid var(--rule);
+  font-family:var(--sans);font-size:11.5px;color:var(--muted)}
+.side-foot button{border:1px solid var(--rule);background:var(--card);color:var(--muted);border-radius:var(--r1);
+  padding:6px 11px;font-family:var(--sans);font-size:12px;cursor:pointer}
+.side-foot button:hover{color:var(--accent);border-color:var(--accent-2)}
 
-/* 正文 */
-main{max-width:44em;margin:0 auto;padding:0 20px calc(96px + env(safe-area-inset-bottom))}
-.chapter{padding:34px 0 8px;scroll-margin-top:60px}
-.chapter-head{margin-bottom:20px}
-.kicker{margin:0 0 8px;font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.1em;color:var(--accent)}
-.chapter-title{margin:0;font-family:var(--sans);font-size:1.34em;line-height:1.42;font-weight:700;letter-spacing:.01em}
-.chapter-body p{margin:0 0 .9em;text-indent:2em;text-align:justify}
-.chapter-body p.no-indent{text-indent:0}
-.chapter-body h2{position:relative;margin:1.9em 0 .8em;padding-left:.72em;font-family:var(--sans);font-size:1.02em;
-  font-weight:700;line-height:1.5;scroll-margin-top:64px}
-.chapter-body h2::before{content:"";position:absolute;left:0;top:.28em;bottom:.28em;width:3px;border-radius:2px;background:var(--accent)}
-.chapter-body h3{font-family:var(--sans);font-size:.98em;font-weight:700;margin:1.4em 0 .6em}
-.chapter-body h4{font-family:var(--sans);font-size:.94em;font-weight:700;margin:1.2em 0 .5em}
-.chapter-body ul,.chapter-body ol{margin:0 0 1em;padding-left:1.55em}
-.chapter-body li{margin:.34em 0}
+/* ---------- 封面（题名页） ---------- */
+.cover{min-height:calc(100svh - 54px);display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:var(--s7) var(--s5) calc(var(--s6) + env(safe-area-inset-bottom))}
+.seal{width:50px;height:50px;border-radius:var(--r1);background:var(--accent);color:var(--on-accent);display:flex;
+  align-items:center;justify-content:center;font-family:var(--serif);font-size:21px;font-weight:600;
+  letter-spacing:.05em;margin-bottom:var(--s5);box-shadow:0 2px 10px var(--accent-wash)}
+.cover h1{font-family:var(--serif);font-size:1.72em;line-height:1.45;font-weight:600;margin:0;
+  padding:var(--s4) 0;letter-spacing:.02em;
+  border-top:1px solid var(--rule-2);border-bottom:3px double var(--rule-2)}
+.cover-en{font-family:var(--sans);font-size:.72em;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);margin:var(--s4) 0 var(--s5)}
+.cover-meta{margin:0 0 var(--s5);padding:var(--s3) 0;width:min(100%,30em);
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.cover-row{margin:0;padding:6px 0;display:flex;gap:var(--s3);text-align:left;
+  font-family:var(--sans);font-size:13.5px;line-height:1.6}
+.cover-row+.cover-row{border-top:1px dotted var(--rule)}
+.cover-key{flex:none;width:5.2em;color:var(--muted);font-size:12.5px}
+.cover-val{flex:1;color:var(--ink-2)}
+.cover-source{font-family:var(--sans);font-size:11.5px;color:var(--muted);margin:var(--s3) 0 0;word-break:break-all}
+.cover-source a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--rule)}
+.cover-stats{display:flex;gap:var(--s4);margin:0 0 var(--s5);font-family:var(--sans);font-size:12.5px;color:var(--muted)}
+.cover-stats b{font-family:var(--serif);color:var(--accent);font-size:1.5em;font-weight:600;margin-right:.3em;
+  font-variant-numeric:tabular-nums}
+.cover-actions{display:flex;flex-direction:column;gap:var(--s2);width:min(100%,300px)}
+.btn{display:block;padding:13px 20px;border-radius:var(--r2);border:1px solid var(--rule-2);background:var(--card);
+  color:var(--ink);font-family:var(--sans);font-size:14.5px;font-weight:600;text-decoration:none;text-align:center;cursor:pointer}
+.btn:hover{border-color:var(--accent-2)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{filter:brightness(1.06)}
+.cover-foot{margin-top:var(--s5);font-family:var(--sans);font-size:11.5px;color:var(--muted);line-height:1.9}
+
+/* ---------- 正文 ---------- */
+main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) + env(safe-area-inset-bottom))}
+.chapter{padding:var(--s7) 0 var(--s4);border-top:1px solid var(--rule);scroll-margin-top:64px}
+.chapter-head{margin-bottom:var(--s5)}
+.kicker{margin:0 0 var(--s3);font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.16em;
+  color:var(--accent)}
+.qmark{display:flex;align-items:baseline;gap:.34em;margin:0 0 .1em}
+.qmark-n{font-family:var(--serif);font-size:2.3em;line-height:1;color:var(--accent);font-weight:600;
+  letter-spacing:.01em;font-variant-numeric:lining-nums}
+.qmark-w{font-family:var(--sans);font-size:.78em;font-weight:700;letter-spacing:.32em;color:var(--muted)}
+.chapter-title{margin:0;font-family:var(--sans);font-size:1.26em;line-height:1.55;font-weight:700;letter-spacing:.01em}
+.chapter-body p{margin:0 0 .92em;text-indent:2em;text-align:justify;line-break:strict;color:var(--ink-2)}
+.chapter-body h2{display:flex;flex-wrap:wrap;align-items:baseline;gap:.7em;
+  margin:2.1em 0 .85em;padding-top:1.15em;border-top:1px solid var(--rule);
+  font-family:var(--sans);font-size:1.14em;font-weight:700;line-height:1.6;scroll-margin-top:70px}
+.chapter-body h2 .idx{flex:none;padding:.2em .72em;border:1px solid var(--accent-2);border-radius:999px;
+  font-size:.62em;font-weight:700;letter-spacing:.14em;color:var(--accent);line-height:1.5}
+.chapter-body h2 .ht{flex:1 1 auto}
+.chapter-body h3{font-family:var(--sans);font-size:.99em;font-weight:700;margin:1.5em 0 .6em}
+.chapter-body ul,.chapter-body ol{margin:0 0 1em;padding-left:1.6em;color:var(--ink-2)}
+.chapter-body li{margin:.36em 0}
 .chapter-body ul ul{list-style:circle;margin:.3em 0}
 .chapter-body ul ul ul{list-style:square}
+.chapter-body ol>li::marker{color:var(--accent);font-weight:600;font-family:var(--sans)}
 .chapter-body li>p{margin:.3em 0}
-.chapter-body blockquote{margin:0 0 1em;padding:.1em 0 .1em .95em;border-left:3px solid var(--line);color:var(--muted)}
-.answer{margin:0 0 1.1em;padding:.85em 1em;background:var(--accent-weak);border-left:3px solid var(--accent);
-  border-radius:0 10px 10px 0;line-height:1.85}
-.en{margin:0 0 1.2em;padding:.2em 0 .2em .9em;border-left:2px solid var(--line);color:var(--muted);font-size:.92em;line-height:1.7}
-.en-row{display:flex;gap:.6em;margin:.35em 0}
-.en-tag{flex:none;width:1.5em;height:1.5em;border-radius:5px;background:var(--accent-weak);color:var(--accent);
-  font-family:var(--sans);font-size:.72em;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:.28em}
-.audio{display:flex;align-items:center;gap:.7em;margin:0 0 1em;padding:.6em .8em;background:var(--surface2);
-  border:1px solid var(--line);border-radius:10px}
-.audio-label{flex:none;font-family:var(--sans);font-size:12px;color:var(--muted)}
+.chapter-body blockquote{margin:0 0 1.1em;padding:.15em 0 .15em 1.1em;color:var(--muted);
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding-top:.7em;padding-bottom:.7em}
+.answer{margin:0 0 1.4em;padding:var(--s4) var(--s4) var(--s3);background:var(--card);
+  border:1px solid var(--rule);border-radius:var(--r2)}
+.answer-tag{display:inline-flex;align-items:center;justify-content:center;width:1.95em;height:1.95em;
+  border-radius:var(--r1);background:var(--accent);color:var(--on-accent);font-family:var(--sans);font-size:.74em;
+  font-weight:700;margin-bottom:var(--s2)}
+.answer-text{color:var(--ink);line-height:1.9}
+.answer-text p{margin:0 0 .5em;text-indent:0;text-align:justify}
+.answer-text p:last-child{margin-bottom:0}
+.answer-text strong{font-weight:700}
+.en{margin:0 0 1.4em;padding:var(--s3) var(--s4);background:var(--surface);
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.en-row{display:flex;gap:.7em;margin:.4em 0;color:var(--muted);font-size:.92em;line-height:1.75}
+.en-tag{flex:none;width:1.5em;height:1.5em;border-radius:50%;background:var(--accent-wash);color:var(--accent);
+  font-family:var(--sans);font-size:.7em;font-weight:700;display:flex;align-items:center;justify-content:center;
+  margin-top:.3em}
+.audio{display:flex;align-items:center;gap:.7em;margin:0 0 1.1em;padding:.6em .9em;background:var(--card);
+  border:1px solid var(--rule);border-radius:var(--r2)}
+.audio-label{flex:none;font-family:var(--sans);font-size:11.5px;color:var(--muted)}
 .audio audio{flex:1;min-width:0;height:34px}
-.jump{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-weak)}
+.jump{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-2)}
 
-/* 章末导航 */
-.pager{display:flex;gap:10px;margin:2.6em 0 0;padding-top:1.4em;border-top:1px solid var(--line)}
-.pager a{flex:1;min-width:0;padding:.72em .85em;border:1px solid var(--line);border-radius:11px;background:var(--surface2);
-  text-decoration:none;font-family:var(--sans);font-size:13px;line-height:1.4;color:var(--text)}
-.pager a span{display:block;color:var(--muted);font-size:11.5px;margin-bottom:3px}
+/* ---------- 章末导航 ---------- */
+.pager{display:flex;gap:var(--s3);margin:var(--s6) 0 0;padding-top:var(--s4);border-top:1px solid var(--rule)}
+.pager a{flex:1;min-width:0;padding:.8em .9em;border:1px solid var(--rule);border-radius:var(--r2);
+  background:var(--card);text-decoration:none;font-family:var(--sans);font-size:13px;line-height:1.5;color:var(--ink)}
+.pager a span{display:block;color:var(--muted);font-size:11px;letter-spacing:.1em;margin-bottom:4px}
 .pager a.next{text-align:right}
-.pager a:active{border-color:var(--accent)}
-@media (max-width:420px){.pager a{font-size:12.5px;padding:.65em .7em}}
+.pager a:hover{border-color:var(--accent-2)}
+.pager a:hover span{color:var(--accent)}
 
-@media (min-width:860px){
+/* ---------- 回到顶部 ---------- */
+.to-top{position:fixed;right:var(--s4);bottom:calc(var(--s4) + env(safe-area-inset-bottom));z-index:35;
+  width:44px;height:44px;border-radius:50%;border:1px solid var(--rule-2);background:var(--card);
+  color:var(--muted);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px var(--shadow);
+  opacity:0;pointer-events:none;transition:opacity .2s;cursor:pointer}
+.to-top.show{opacity:1;pointer-events:auto}
+.to-top svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- 桌面端：侧栏常驻 ---------- */
+@media (min-width:1024px){
   body{font-size:calc(var(--fs) + 1px)}
-  .drawer{width:340px}
-  main{padding:0 28px 120px}
-  .chapter{padding-top:46px}
+  .layout{display:grid;grid-template-columns:336px minmax(0,1fr);align-items:start}
+  .sidebar{position:sticky;top:0;height:100vh;width:auto;transform:none!important;box-shadow:none!important}
+  .side-head{padding-top:var(--s4)}
+  #btnMenu,#btnClose{display:none}
+  .scrim{display:none}
+  .bar-title{text-align:left;padding-left:var(--s2)}
+  main{max-width:calc(var(--measure) + 2em);padding:0 var(--s6) var(--s7)}
+  .chapter{padding-top:var(--s7)}  .cover{min-height:calc(100svh - 54px)}
+  .to-top{right:var(--s6)}
+}
+@media (max-width:420px){
+  main{padding-left:var(--s4);padding-right:var(--s4)}
+  .pager{gap:var(--s2)}
+  .pager a{font-size:12.5px;padding:.7em .75em}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+@media print{
+  .sidebar,.bar,.progress,.scrim,.to-top,.pager,.cover-actions,.side-foot{display:none!important}
+  body{background:#fff;color:#000;font-size:11pt}
+  main{max-width:none;padding:0}
+  .chapter{page-break-inside:avoid;padding-top:1.5em}
+  .answer,.card{background:#fff}
 }
 </style>
 </head>
 <body>
-<div class="progress"><span id="bar"></span></div>
+<div class="progress" id="progress"><span id="bar"></span></div>
 
-<header class="bar">
-  <button class="icon" id="btnMenu" aria-label="目录" title="目录">☰</button>
-  <div class="bar-title" id="barTitle"></div>
-  <button class="icon" id="btnSize" aria-label="字号" title="字号">Aa</button>
-  <button class="icon" id="btnTheme" aria-label="主题" title="主题">◐</button>
-</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar" aria-label="目录">
+    <div class="side-head">
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="toc" role="tab" aria-selected="true">目录</button>
+        <button class="tab" data-tab="num" role="tab" aria-selected="false">按问号</button>
+      </div>
+      <button class="icon" id="btnClose" aria-label="关闭目录">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <input class="search" id="search" type="search" placeholder="搜索问答或解读标题" autocomplete="off">
+    </div>
+    {{TOC}}
+    {{NUMGRID}}
+    <div class="side-foot">
+      <span id="posText">—</span>
+      <button id="btnTop">回到顶部</button>
+    </div>
+  </aside>
+
+  <div class="content">
+    <header class="bar">
+      <button class="icon" id="btnMenu" aria-label="打开目录" title="目录 (T)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </button>
+      <div class="bar-title" id="barTitle"></div>
+      <button class="icon" id="btnSize" aria-label="调整字号" title="字号">
+        <span class="icon-text">Aa</span>
+      </button>
+      <button class="icon" id="btnTheme" aria-label="切换主题" title="主题">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/>
+          <path d="M12 4a8 8 0 010 16z" fill="currentColor" stroke="none"/></svg>
+      </button>
+    </header>
+
+    <main>
+      <section class="cover">
+        <div class="seal">問</div>
+        <h1>{{TITLE}}</h1>
+        {{TITLE_EN}}
+        <div class="cover-meta">{{COVER_ROWS}}{{COVER_SOURCE}}</div>
+        <div class="cover-stats">{{STATS}}</div>
+        <div class="cover-actions">
+          <a class="btn primary" href="#{{FIRST_ID}}" data-jump>开始阅读</a>
+          <a class="btn" id="resumeBtn" href="#{{FIRST_ID}}" data-jump style="display:none">继续阅读</a>
+        </div>
+        <p class="cover-foot">离线单文件版 · 可直接用手机浏览器打开<br>{{FILENAME}}</p>
+      </section>
+      {{CHAPTERS}}
+    </main>
+  </div>
+</div>
 
 <div class="scrim" id="scrim"></div>
-<aside class="drawer" id="drawer" aria-label="目录">
-  <div class="drawer-head">
-    <strong>目录</strong>
-    <button class="icon" id="btnClose" aria-label="关闭">✕</button>
-  </div>
-  <input class="search" id="search" type="search" placeholder="搜索问答或解读标题" autocomplete="off">
-  {{TOC}}
-</aside>
-
-<main>
-  <section class="cover">
-    <div class="cover-mark">問</div>
-    <h1>{{TITLE}}</h1>
-    {{TITLE_EN}}
-    <div class="cover-meta">{{COVER_ROWS}}{{COVER_SOURCE}}</div>
-    <div class="cover-stats">{{STATS}}</div>
-    <div class="cover-actions">
-      <a class="btn primary" href="#{{FIRST_ID}}">开始阅读</a>
-      <a class="btn" id="resumeBtn" href="#{{FIRST_ID}}" style="display:none">继续阅读</a>
-    </div>
-    <p class="cover-foot">离线单文件版 · 可直接用手机浏览器打开<br>{{FILENAME}}</p>
-  </section>
-  {{CHAPTERS}}
-</main>
+<button class="to-top" id="btnTopFloat" aria-label="回到顶部">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+</button>
 
 <script>window.__INDEX__ = {{INDEX}};</script>
 <script>
@@ -547,112 +770,198 @@ main{max-width:44em;margin:0 auto;padding:0 20px calc(96px + env(safe-area-inset
     get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } },
     set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   };
-  var THEMES = ['sepia', 'plain', 'night'];
+  var THEMES = ['paper', 'plain', 'night'];
   var SIZES = [15, 17, 19, 21];
   var FONT_KEY = 'ow_book_theme', SIZE_KEY = 'ow_book_size', POS_KEY = 'ow_book_pos';
+  var DESKTOP = '(min-width:1024px)';
 
-  function applyTheme(t) {
-    doc.setAttribute('data-theme', t);
-    var btn = document.getElementById('btnTheme');
-    if (btn) btn.textContent = t === 'night' ? '☾' : (t === 'plain' ? '☀' : '◐');
-  }
-  function applySize(i) {
-    doc.style.setProperty('--fs', SIZES[i] + 'px');
-  }
-  var theme = THEMES.indexOf(store.get(FONT_KEY, 'sepia'));
+  var theme = THEMES.indexOf(store.get(FONT_KEY, 'paper'));
   if (theme < 0) theme = 0;
-  applyTheme(THEMES[theme]);
+  doc.setAttribute('data-theme', THEMES[theme]);
   var size = SIZES.indexOf(parseInt(store.get(SIZE_KEY, '17'), 10));
   if (size < 0) size = 1;
-  applySize(size);
+  doc.style.setProperty('--fs', SIZES[size] + 'px');
 
   document.getElementById('btnTheme').addEventListener('click', function () {
     theme = (theme + 1) % THEMES.length;
-    applyTheme(THEMES[theme]);
+    doc.setAttribute('data-theme', THEMES[theme]);
     store.set(FONT_KEY, THEMES[theme]);
   });
   document.getElementById('btnSize').addEventListener('click', function () {
     size = (size + 1) % SIZES.length;
-    applySize(size);
+    doc.style.setProperty('--fs', SIZES[size] + 'px');
     store.set(SIZE_KEY, String(SIZES[size]));
   });
 
-  var drawer = document.getElementById('drawer');
+  var sidebar = document.getElementById('sidebar');
   var scrim = document.getElementById('scrim');
-  function openDrawer(on) {
-    drawer.classList.toggle('on', on);
+  var toc = document.getElementById('toc');
+  var numgrid = document.getElementById('numgrid');
+  var search = document.getElementById('search');
+  var bar = document.getElementById('bar');
+  var barTitle = document.getElementById('barTitle');
+  var posText = document.getElementById('posText');
+  var toTop = document.getElementById('btnTopFloat');
+  var resumeBtn = document.getElementById('resumeBtn');
+  var mq = window.matchMedia(DESKTOP);
+
+  function isDesktop() { return mq.matches; }
+  function openSidebar(on) {
+    if (isDesktop()) return;
+    sidebar.classList.toggle('on', on);
     scrim.classList.toggle('on', on);
     document.body.style.overflow = on ? 'hidden' : '';
+    if (on) revealCurrent();
   }
-  document.getElementById('btnMenu').addEventListener('click', function () { openDrawer(!drawer.classList.contains('on')); });
-  document.getElementById('btnClose').addEventListener('click', function () { openDrawer(false); });
-  scrim.addEventListener('click', function () { openDrawer(false); });
-
-  var INDEX = window.__INDEX__ || [];
-  var toc = document.getElementById('toc');
-  var tocItems = Array.prototype.slice.call(toc.querySelectorAll('.toc-item'));
-  var search = document.getElementById('search');
-  var query = '';
-
-  function markCurrent(id) {
-    tocItems.forEach(function (a) { a.classList.toggle('current', a.getAttribute('data-target') === id); });
+  function revealCurrent() {
+    var cur = toc.querySelector('.toc-row.current');
+    if (!cur) return;
+    var top = cur.offsetTop - toc.clientHeight / 2 + cur.offsetHeight / 2;
+    if (top > 0) toc.scrollTop = top;
   }
+  function syncLayout() {
+    if (isDesktop()) {
+      sidebar.classList.add('on');
+      scrim.classList.remove('on');
+      document.body.style.overflow = '';
+    }
+  }
+  mq.addEventListener('change', syncLayout);
+  syncLayout();
+
+  document.getElementById('btnMenu').addEventListener('click', function () { openSidebar(!sidebar.classList.contains('on')); });
+  document.getElementById('btnClose').addEventListener('click', function () { openSidebar(false); });
+  scrim.addEventListener('click', function () { openSidebar(false); });
+
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      var isNum = tab.getAttribute('data-tab') === 'num';
+      toc.hidden = isNum;
+      numgrid.hidden = !isNum;
+      search.parentNode.style.display = isNum ? 'none' : '';
+    });
+  });
+
+  function jumpTo(hash) {
+    var id = decodeURIComponent(hash.replace(/^#/, ''));
+    var el = document.getElementById(id);
+    if (!el) return;
+    var barH = document.querySelector('.bar').offsetHeight;
+    var top = el.getBoundingClientRect().top + window.scrollY - barH - 14;
+    var far = Math.abs(top - window.scrollY) > window.innerHeight * 3;
+    window.scrollTo({ top: Math.max(top, 0), behavior: far ? 'auto' : 'smooth' });
+  }
+  function handleJump(e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    e.preventDefault();
+    jumpTo(a.getAttribute('href'));
+    openSidebar(false);
+  }
+  toc.addEventListener('click', handleJump);
+  numgrid.addEventListener('click', handleJump);
+  document.querySelector('.cover-actions').addEventListener('click', handleJump);
+
+  var rows = Array.prototype.slice.call(toc.querySelectorAll('.toc-row'));
+  var groups = Array.prototype.slice.call(toc.querySelectorAll('.toc-group'));
+  var parts = Array.prototype.slice.call(toc.querySelectorAll('.toc-part'));
 
   function renderSearch(q) {
-    query = q.trim();
-    if (!query) {
-      tocItems.forEach(function (a) { a.style.display = ''; });
-      toc.querySelectorAll('.toc-sub').forEach(function (n) { n.remove(); });
-      toc.querySelectorAll('.toc-empty').forEach(function (n) { n.remove(); });
-      toc.querySelectorAll('.toc-part,.toc-cat').forEach(function (n) { n.style.display = ''; });
-      return;
-    }
-    var lower = q.toLowerCase();
-    toc.querySelectorAll('.toc-sub').forEach(function (n) { n.remove(); });
-    toc.querySelectorAll('.toc-empty').forEach(function (n) { n.remove(); });
-    var hits = 0;
-    INDEX.forEach(function (ch) {
-      var item = toc.querySelector('.toc-item[data-target="' + ch.id + '"]');
-      if (!item) return;
-      var titleHit = ch.t.toLowerCase().indexOf(lower) >= 0;
-      var heads = ch.heads.filter(function (h) { return h.t.toLowerCase().indexOf(lower) >= 0; });
-      var show = titleHit || heads.length;
-      item.style.display = show ? '' : 'none';
-      if (show) hits++;
-      heads.forEach(function (h) {
-        var a = document.createElement('a');
-        a.className = 'toc-sub';
-        a.href = '#' + h.id;
-        a.textContent = h.t;
-        item.parentNode.insertBefore(a, item.nextSibling);
+    q = q.trim().toLowerCase();
+    var hit = 0;
+    rows.forEach(function (row) {
+      var item = row.querySelector('.toc-item');
+      var kids = Array.prototype.slice.call(row.querySelectorAll('.toc-sub'));
+      var titleHit = !!q && item.textContent.toLowerCase().indexOf(q) >= 0;
+      var kidHit = 0;
+      kids.forEach(function (kid) {
+        var on = !!q && kid.textContent.toLowerCase().indexOf(q) >= 0;
+        kid.style.display = on ? '' : 'none';
+        if (on) kidHit++;
       });
+      var show = q ? (titleHit || kidHit) : true;
+      row.style.display = show ? '' : 'none';
+      if (show && q) hit++;
+      var box = row.querySelector('.toc-kids');
+      if (box) box.style.display = (q && kidHit) ? '' : (row.classList.contains('current') ? '' : 'none');
     });
-    toc.querySelectorAll('.toc-part,.toc-cat').forEach(function (n) { n.style.display = 'none'; });
-    if (!hits) {
-      var empty = document.createElement('p');
-      empty.className = 'toc-empty';
+    groups.forEach(function (g) {
+      var any = Array.prototype.some.call(g.querySelectorAll('.toc-row'), function (r) { return r.style.display !== 'none'; });
+      g.style.display = any ? '' : 'none';
+      var cat = g.querySelector('.toc-cat');
+      if (cat) {
+        var anyCat = Array.prototype.some.call(g.querySelectorAll('.toc-item'), function (i) {
+          return i.closest('.toc-row').style.display !== 'none';
+        });
+        cat.style.display = anyCat ? '' : 'none';
+      }
+    });
+    parts.forEach(function (p) {
+      var any = false;
+      var sib = p.nextElementSibling;
+      while (sib && !sib.classList.contains('toc-part')) {
+        if (sib.classList.contains('toc-group') && sib.style.display !== 'none') any = true;
+        sib = sib.nextElementSibling;
+      }
+      p.style.display = any ? '' : 'none';
+    });
+    var empty = toc.querySelector('.toc-empty');
+    if (q && !hit) {
+      if (!empty) {
+        empty = document.createElement('p');
+        empty.className = 'toc-empty';
+        toc.appendChild(empty);
+      }
       empty.textContent = '没有找到「' + q + '」';
-      toc.appendChild(empty);
+      empty.style.display = '';
+    } else if (empty) {
+      empty.style.display = 'none';
     }
   }
   search.addEventListener('input', function () { renderSearch(this.value); });
-  toc.addEventListener('click', function (e) {
-    if (e.target.closest('a')) openDrawer(false);
-  });
+  search.addEventListener('keydown', function (e) { if (e.key === 'Escape') { this.value = ''; renderSearch(''); } });
 
   var sections = Array.prototype.slice.call(document.querySelectorAll('.chapter'));
-  var bar = document.getElementById('bar');
-  var barTitle = document.getElementById('barTitle');
-  var resumeBtn = document.getElementById('resumeBtn');
-  var lastId = null, ticking = false;
+  var heads = Array.prototype.slice.call(document.querySelectorAll('.chapter-body h2[id]'));
+  var lastId = null, lastHead = null, ticking = false;
 
   function currentSection() {
-    var top = window.scrollY + 70;
+    var top = window.scrollY + 72;
     var found = sections[0];
     for (var i = 0; i < sections.length; i++) {
       if (sections[i].offsetTop <= top) found = sections[i]; else break;
     }
     return found;
+  }
+  function currentHead() {
+    var top = window.scrollY + 96;
+    var found = null;
+    for (var i = 0; i < heads.length; i++) {
+      if (heads[i].offsetTop <= top) found = heads[i]; else break;
+    }
+    return found;
+  }
+  function markCurrent(id) {
+    rows.forEach(function (row) {
+      var on = row.getAttribute('data-target') === id;
+      row.classList.toggle('current', on);
+      var box = row.querySelector('.toc-kids');
+      if (box) box.style.display = on ? '' : 'none';
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.num'), function (n) {
+      n.classList.toggle('current', n.getAttribute('data-target') === id);
+    });
+  }
+  function markHead(el) {
+    Array.prototype.forEach.call(document.querySelectorAll('.toc-sub'), function (s) {
+      s.classList.toggle('current', el ? s.getAttribute('href') === '#' + el.id : false);
+    });
   }
   function onScroll() {
     if (ticking) return;
@@ -661,17 +970,31 @@ main{max-width:44em;margin:0 auto;padding:0 20px calc(96px + env(safe-area-inset
       ticking = false;
       var h = document.documentElement.scrollHeight - window.innerHeight;
       bar.style.width = (h > 0 ? Math.min(100, window.scrollY / h * 100) : 0) + '%';
+      toTop.classList.toggle('show', window.scrollY > 600);
       var sec = currentSection();
       if (sec && sec.id !== lastId) {
         lastId = sec.id;
         barTitle.textContent = sec.getAttribute('data-title') || '';
         markCurrent(sec.id);
         store.set(POS_KEY, sec.id);
+        var idx = sections.indexOf(sec);
+        posText.textContent = (idx + 1) + ' / ' + sections.length + ' · ' + (sec.getAttribute('data-title') || '');
       }
+      var head = currentHead();
+      var hid = head ? head.id : null;
+      if (hid !== lastHead) { lastHead = hid; markHead(head); }
     });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
+
+  var progress = document.getElementById('progress');
+  progress.addEventListener('click', function (e) {
+    var r = this.getBoundingClientRect();
+    var ratio = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    window.scrollTo({ top: ratio * max, behavior: 'auto' });
+  });
 
   var saved = store.get(POS_KEY, '');
   if (saved) {
@@ -683,17 +1006,19 @@ main{max-width:44em;margin:0 auto;padding:0 20px calc(96px + env(safe-area-inset
     }
   }
 
+  function goTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  document.getElementById('btnTop').addEventListener('click', goTop);
+  toTop.addEventListener('click', goTop);
+
   document.addEventListener('keydown', function (e) {
     if (e.target.tagName === 'INPUT') return;
-    if (e.key === 'Escape') openDrawer(false);
+    if (e.key === 'Escape') openSidebar(false);
     if (e.key === '[' || e.key === ']') {
       var sec = currentSection(), i = sections.indexOf(sec), next = null;
       if (e.key === '[') next = sections[i - 1]; else next = sections[i + 1];
-      if (next) {
-        e.preventDefault();
-        next.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (next) { e.preventDefault(); jumpTo('#' + next.id); }
     }
+    if (e.key === 't' || e.key === 'T') { e.preventDefault(); openSidebar(!sidebar.classList.contains('on')); }
   });
 
   onScroll();
@@ -747,8 +1072,9 @@ def main():
     stats = ('<span><b>%d</b>章</span><span><b>%d</b>问</span><span><b>%d</b>节解读</span>'
              % (len(chapters), questions, sum(len(v) for v in headings.values())))
     filename = (manifest.get('docx', {}).get('filename') or meta['book']).replace('.docx', '') + '.html'
-    out = page(meta, '\n'.join(parts), build_toc_html(chapters),
-               build_index(chapters, headings), stats, filename, 'ch-' + chapters[0]['slug'])
+    out = page(meta, '\n'.join(parts), build_toc_html(chapters, headings),
+               build_numgrid(chapters), build_index(chapters, headings), stats, filename,
+               'ch-' + chapters[0]['slug'])
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(out)
     print(f'saved {filename}  chapters={len(chapters)}  size={os.path.getsize(filename) // 1024}KB')
