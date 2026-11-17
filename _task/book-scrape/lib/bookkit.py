@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""跨书共用的工具：目录定位、清单与配置加载。"""
+"""跨书共用的工具：目录定位、清单与配置加载、粗体解析。"""
 import json
 import os
+import re
 import sys
 
 LIB = os.path.dirname(os.path.abspath(__file__))
@@ -51,3 +52,21 @@ def load_manifest():
     mf.setdefault('docx', {})
     mf['docx'] = {**DEFAULT_DOCX, **mf['docx']}
     return mf
+
+
+BOLD_RE = re.compile(r'(?<!\\)\*\*(.+?)(?<!\\)\*\*', re.S)
+
+
+def split_bold(text):
+    """把 '前 **粗** 后' 拆成 [(片段, 是否粗体)]，其余星号按字面处理。"""
+    out = []
+    pos = 0
+    for m in BOLD_RE.finditer(text):
+        if m.start() > pos:
+            out.append((text[pos:m.start()], False))
+        out.append((m.group(1), True))
+        pos = m.end()
+    if pos < len(text):
+        out.append((text[pos:], False))
+    unescape = lambda t: t.replace('\\*', '*')  # noqa: E731  反转义 Markdown 中的 \*
+    return [(unescape(t), b) for t, b in out if t] or [(text.replace('\\*', '*'), False)]

@@ -17,6 +17,8 @@ bookkit.use_pylibs()
 from bs4 import BeautifulSoup  # noqa: E402
 from markdownify import MarkdownConverter  # noqa: E402
 
+from bookkit import BOLD_RE, split_bold  # noqa: E402,F401  粗体规则由 bookkit 统一维护
+
 SITE_DEFAULTS = {
     'content_selector': 'div.entry-content',
     'title_selector': 'h1.entry-title',
@@ -64,9 +66,6 @@ def extract(path, site):
         return title, '', []
     audio, inner = extract_element(content)
     return title, inner, audio
-
-
-BOLD_RE = re.compile(r'(?<!\\)\*\*(.+?)(?<!\\)\*\*', re.S)
 
 
 def normalize_bold_markers(md):
@@ -168,21 +167,6 @@ def to_blocks(md):
         para.append(line.strip())
     flush()
     return blocks
-
-
-def split_bold(text):
-    """把 '前 **粗** 后' 拆成 [(片段, 是否粗体)]，其余星号按字面处理。"""
-    out = []
-    pos = 0
-    for m in BOLD_RE.finditer(text):
-        if m.start() > pos:
-            out.append((text[pos:m.start()], False))
-        out.append((m.group(1), True))
-        pos = m.end()
-    if pos < len(text):
-        out.append((text[pos:], False))
-    unescape = lambda t: t.replace('\\*', '*')  # noqa: E731  反转义 Markdown 中的 \*
-    return [(unescape(t), b) for t, b in out if t] or [(text.replace('\\*', '*'), False)]
 
 
 def chapter_filename(ch):

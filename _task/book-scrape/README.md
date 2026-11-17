@@ -1,6 +1,6 @@
 # 书籍抓取工具
 
-把一个网页连载的书抓成 Markdown（一章一个文件 + 总目录）和 Word 文档。脚本跨书共用，每本书只维护自己的 `manifest.json`。
+把一个网页连载的书抓成 Markdown（一章一个文件 + 总目录）、Word 文档和单文件 HTML 阅读版。脚本跨书共用，每本书只维护自己的 `manifest.json`。
 
 ## 目录结构
 
@@ -9,10 +9,11 @@ _task/book-scrape/
 ├── README.md                 本文件
 ├── pylibs/                   依赖（beautifulsoup4、lxml、markdownify、python-docx），不入库
 ├── lib/
-│   ├── bookkit.py            清单与配置加载
+│   ├── bookkit.py            清单与配置加载、粗体解析
 │   ├── fetch_html.py         抓取章节 HTML
 │   ├── convert.py            HTML → 分章 Markdown + 目录.md + book.json
 │   ├── build_docx.py         book.json → Word 文档
+│   ├── build_html.py         分章 Markdown → 单文件 HTML 阅读版
 │   ├── verify_book.py        核对抓取结果与源页面段落
 │   └── scan_questions.py     统计分类页覆盖的问答编号，检查目录是否漏页
 ├── manifest.template.json    新书清单模板
@@ -21,7 +22,8 @@ _task/book-scrape/
     ├── raw/                  原始 HTML（不入库）
     ├── 目录.md               总目录
     ├── <slug>.md             分章 Markdown
-    └── <书名>.docx
+    ├── <书名>.docx
+    └── <书名>.html
 ```
 
 ## 抓一本新书
@@ -33,6 +35,7 @@ cp manifest.template.json "<书名-英文名>/manifest.json"   # 先建目录
 python3 lib/fetch_html.py "<书名-英文名>"
 python3 lib/convert.py    "<书名-英文名>"
 python3 lib/build_docx.py "<书名-英文名>"
+python3 lib/build_html.py "<书名-英文名>"
 python3 lib/verify_book.py "<书名-英文名>"
 ```
 
@@ -56,6 +59,24 @@ python3 lib/verify_book.py "<书名-英文名>"
 | `chapters[]` | `part`（部分标题，可空）、`category`（分类标题，可空，用于问答体这类有二级归类的书）、`title`（章节标题）、`slug`（文件名，建议 `序号-英文短名`）、`url` |
 
 `part` 与 `category` 都为空时，Markdown 与 Word 的目录会扁平列出章节；填了则按层级分组。
+
+## HTML 阅读版
+
+`build_html.py` 把各章 `<slug>.md` 渲染成一个自包含的 HTML：样式、脚本、正文全部内联，不请求任何外部资源，用手机浏览器直接打开本地文件（`file://`）即可阅读。输出文件名取自 `docx.filename`（`.docx` 换成 `.html`）。
+
+页面结构：封面 → 逐章正文 → 章末「上一篇 / 下一篇」。正文按 Markdown 结构排版，`答：` 开头的段落进高亮框，`Q:` / `A:` 开头的段落进中英文对照块，`> 朗读音频：` 引述行渲染成播放器。
+
+阅读功能都在顶栏与抽屉里：
+
+| 功能 | 说明 |
+| --- | --- |
+| 目录抽屉 | 按 `part` → `category` → 章节分层，当前章节高亮 |
+| 搜索 | 同时匹配章节标题与各章小节标题（`解读N`），命中项可直接跳转 |
+| 字号 | 四档（15/17/19/21 px），点击「Aa」循环 |
+| 主题 | 纸色 / 素白 / 夜间三档，点击「◐」循环 |
+| 阅读位置 | 顶栏进度条 + 顶栏显示当前章节；上次位置记在 localStorage，封面出现「继续阅读」 |
+
+正文里的 `**粗体**`、裸星号转义与 Word 生成器共用 `bookkit.split_bold`，两处排版一致。
 
 ## 抓取注意
 
