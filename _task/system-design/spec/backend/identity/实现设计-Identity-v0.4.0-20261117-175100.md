@@ -95,7 +95,7 @@ Mongo 在此阶段承担已同步原交易、日志与可重建读投影；仓�
 - 断网、索引失败和 reorg 只改变证据可信度/投影，不能擦除原始事件。
 - Binding 的双向唯一、转移后失效、公开验证协议待实际 Indexer 和 Wallet Adapter 完成，不依据本地布尔标志直接生效。
 
-验收来源：[Identity 领域 BDD](../../contracts/acceptance/identity.feature)、[v0.1 集成设计](../../frontend/设计文档v0.1.0-真实集成-20261013-183000.md)、[v0.2 验收报告](../../../../知识库/前端/ownword-v0.2.0/README.md)。
+验收来源：[Identity 领域 BDD](../../contracts/acceptance/identity.feature)、[v0.1 集成设计](../../frontend/设计文档v0.1.0-真实集成-20261013-183000.md)、[v0.2 验收报告](../../../../../知识库/前端/ownword-v0.2.0/README.md)。
 
 ## 7. 实施次序与未关闭项目
 
