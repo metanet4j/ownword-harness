@@ -1,0 +1,90 @@
+productVersion: v0.4.0
+kind: design-target
+status: needs-review
+approvedForRelease: false
+observedOn: "2026-11-17"
+
+# Product facts remain sourced only from 核心认知.md.
+specification:
+  repository: metanet4j/ownword-harness
+  workingBranch: dev
+  specSnapshot: null # Lock an immutable approved commit/tag only after review.
+  core: _task/system-design/spec/核心认知.md
+  prd: _task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md
+  contextMap: _task/system-design/spec/domain/上下文映射-v0.4.0-20261117-175100.md
+  identityDomain: _task/system-design/spec/domain/identity/领域设计-Identity-v0.4.0-20261117-175100.md
+  identityFrontend: _task/system-design/spec/frontend/identity/实现设计-Identity-v0.4.0-20261117-175100.md
+  identityBackend: _task/system-design/spec/backend/identity/实现设计-Identity-v0.4.0-20261117-175100.md
+  contract: _task/system-design/spec/contracts/openapi/ownword.yaml
+  acceptance: _task/system-design/spec/contracts/acceptance/
+
+artifacts:
+  prototype:
+    repository: metanet4j/ownword-design-prototype
+    branch: dev
+    observedCommit: fb6ed59a6f537ba82d39b8b55dff9ab90238ca4c
+    productTarget: v0.4.0
+    implementationEvidence: deterministic-prototype
+    review: needs-review
+    productionVerified: false
+  frontend:
+    repository: metanet4j/ownword-web
+    branch: feature/ownword-v0.2.0
+    observedCommit: 6f9bccadc356e4a2e07afe3d8af6c3534f70402b
+    packageVersion: 0.2.0
+    implementationEvidence: v0.2.0-locally-tested
+    review: needs-review
+    productionVerified: false
+  backendOwnwordApi:
+    repository: metanet4j/metanet4j-component
+    branch: dev
+    observedCommit: fbb048eab9ff565ea2f4aff1bd01720b9240d407
+    module: metanet4j-api-ownword
+    mavenParentVersion: 0.2.0
+    implementationEvidence: existing-Java-Mongo-identity-content-sync
+    review: needs-review
+    productionVerified: false
+  otherBackendDependencies:
+    inventory: backend/README.md
+    releaseLock: pending # Verify each actually deployed dependency SHA before release.
+
+modules:
+  identity:
+    design: needs-review
+    implementation: existing-v0.1.0-scope
+    evidence: _task/system-design/spec/frontend/设计文档v0.1.0-真实集成-20261013-183000.md
+  content:
+    design: approved-v0.2.0-integration
+    implementation: locally-tested-v0.2.0
+    evidence: 知识库/前端/ownword-v0.2.0/README.md
+  artifact:
+    design: prototype-v0.3.0-needs-review
+    implementation: production-not-verified
+    evidence: _task/system-design/spec/prd/v0.3.0/设计文档v0.3.0-20260918-215142.md
+  publicProfileAndRelationship:
+    design: prototype-v0.4.0-needs-review
+    implementation: production-not-verified
+    evidence: _task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md
+
+releaseGates:
+  - id: user-review
+    status: open
+    source: _task/system-design/feature_list.json
+  - id: live-wallet-extension
+    status: open
+    source: 知识库/前端/ownword-v0.2.0/README.md
+  - id: public-BAP-history-and-checkpoint
+    status: open
+    source: 知识库/前端/ownword-v0.2.0/README.md
+  - id: mainnet-funding-broadcast-and-observation
+    status: open
+    source: 知识库/前端/ownword-v0.2.0/README.md
+  - id: public-binding-and-ordinal-number-contract
+    status: open
+    source: _task/system-design/spec/核心认知.md
+
+notes:
+  - Product version labels a planned deliverable; package and Maven versions are independent.
+  - A prototype implementation is not evidence of live BAP/BSV publication.
+  - An observed Git SHA is not automatically an approved or tested release commit.
+  - specSnapshot stays null until an approved release baseline is explicitly locked.
