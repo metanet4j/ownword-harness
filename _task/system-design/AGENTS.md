@@ -14,7 +14,9 @@
 
 - 核心认知：`_task/system-design/spec/核心认知.md`，事实来源与 DRY 遵循根 AGENTS.md。
 - PRD：`_task/system-design/spec/prd`，描述原型无法可靠表达的产品事实。
-- 后端设计：`_task/system-design/spec/backend`；原型：`designs/own-word-prototype`，具体事项以 `feature_list.json` 的产出路径为准。
+- 文档总入口：`_task/system-design/spec/README.md`；统一产品目标版本：`_task/system-design/spec/versions/`，当前目标的状态由 Manifest 和 `feature_list.json` 表达。
+- 领域设计：`_task/system-design/spec/domain/`；跨端契约与 BDD：`_task/system-design/spec/contracts/`；架构决策：`_task/system-design/spec/decisions/`。
+- 前端实现设计：`_task/system-design/spec/frontend/`；后端实现设计：`_task/system-design/spec/backend/`。原型：`designs/own-word-prototype`，具体事项仍以 `feature_list.json` 的产出路径为准。
 - 高保真原型必须使用设计系统，默认 `designs/react-spectrum-s2`；必须使用 `baoyu-design`，任一缺失则停止原型设计并反馈。
 - 不读取 `_task/system-design/spec/draft`。
 
@@ -25,6 +27,13 @@
 - 原型在对应独立子仓库或 `_task/prototype-worktree/` 下的原型 worktree 提交；任务文档在根仓库提交。根仓库按 `.gitignore` 显式排除子仓库源码。
 - 原型提交必须带当前 PRD 版本，格式 `(PRD ${prdVersion}_${datetime})`，例如 `(PRD v0.2.0_20260917-210556)`；根仓库不限。
 - 当前 PRD 版本及权威来源路径记入 `feature_list.json` 当前事项，提交前查该记录及来源；不明或冲突时先向用户确认，确认前禁止提交，不猜版本。
+
+## 统一产品版本与开发基线
+
+- 全局使用一个 OwnWord 产品目标版本（如 `v0.4.0`）；PRD、Domain、Contracts、Frontend、Backend 均指向该版本。原型及独立前后端仓库**可按不同进度实现**，不能因版本号相同而声称全部验收完成。
+- `spec/versions/<版本>.yaml` 记录目标状态、产品/文档依据、各交付仓库 Git SHA 和真实验收门禁；批准发布前需锁定不可变的主文档及实际依赖仓库提交。审批前保持 needs-review / `specSnapshot: null`。
+- npm、Maven 的组件依赖版本与 OwnWord 产品版本独立，不为统一产品版本强制修改包版本。
+- `spec/README.md` 和各上下文 `README.md` 提供稳定入口；历史设计文件保留，独立新 Markdown 继续遵循根目录时间戳命名约束。
 
 ## 事实来源
 
