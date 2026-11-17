@@ -9,7 +9,7 @@
     "done",
     "archived"
   ],
-  "activeItem": null,
+  "activeItem": "system-design-unified-version-v040",
   "features": [
     {
       "id": "prototype-visual-alignment-v010-v030",
@@ -545,6 +545,34 @@
         "R05 Rotation 历史校验细节",
         "R06 当前部署与集合/索引验证"
       ]
+    },
+    {
+      "id": "system-design-unified-version-v040",
+      "name": "统一 v0.4.0 设计基线与前后端领域文档结构",
+      "status": "in-progress",
+      "goal": "在 dev 分支建立统一 OwnWord v0.4.0 版本清单和稳定开发指南，按 Domain / Contracts / Frontend / Backend 分离责任，并保留已有 PRD、原型与代码版本的真实进度。",
+      "scope": "只调整 _task/system-design/spec 设计体系及 _task/system-design 状态/规则；保留原始历史文档、源码仓库、原型和已批准产品事实。",
+      "dependencies": [
+        "_task/system-design/spec/核心认知.md（产品事实 SSOT）",
+        "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
+        "_task/system-design/spec/backend/领域设计-Identity-v0.1.0-20261117-165000.md（待评审草案）",
+        "frontend/README.md、designs/README.md、backend/README.md、v0.2.0 验收报告",
+        "用户确认统一产品版本、文档领域分层及独立工程进度"
+      ],
+      "doneCriteria": [
+        "建立 spec/README.md 当前入口和 v0.4.0 版本清单，清单标明目标版本而非已发布版本",
+        "Domain / Contracts / Frontend / Backend / Decisions 各有明确职责和可导航入口，Identity 领域设计与两端实现设计分离",
+        "只把已核实的原型、前端、后端 Git SHA 写入基线，区分模拟、局部通过及未完成的真实验收",
+        "维护已存在历史文档链接，未确认接口/协议显式待验证，不用示例事实代替实际部署",
+        "检查关键路径、Markdown 引用、YAML、API/Gherkin 格式并在 dev 提交；人工复核前保持 needs-review"
+      ],
+      "prdVersion": "v0.4.0",
+      "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
+      "output": "_task/system-design/spec/README.md",
+      "implementationStatus": "documentation-in-progress",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": [],
+      "nextStep": "编制统一版本清单和领域分层开发指南，引用原型/前后端真实基线。"
     }
   ]
 }
