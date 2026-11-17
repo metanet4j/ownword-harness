@@ -47,7 +47,7 @@ html[data-theme="night"]{
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
 }
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 body{
   margin:0;background-color:var(--paper);background-image:var(--grain);
   color:var(--ink);font-family:var(--serif);font-size:var(--fs);line-height:var(--lh);
@@ -78,9 +78,13 @@ hr{border:none;border-top:1px solid var(--rule);margin:2em 0}
 
 /* ---------- 布局 ---------- */
 .layout{display:block}
-.sidebar{display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;width:min(87vw,364px);z-index:50;
+/* 抽屉高度必须贴合可视视口：iOS 上 bottom:0 取的是布局视口，会让固定层超出窗口，
+   而超出窗口的固定元素在 iOS Safari 收不到触摸事件 */
+.sidebar{display:flex;flex-direction:column;position:fixed;top:0;left:0;width:min(87vw,364px);z-index:50;
+  height:calc(100vh - env(safe-area-inset-top));height:calc(100dvh - env(safe-area-inset-top));
   background:var(--surface);border-right:1px solid var(--rule);transform:translateX(-102%);
-  transition:transform .3s cubic-bezier(.32,.72,0,1);padding-top:env(safe-area-inset-top)}
+  transition:transform .3s cubic-bezier(.32,.72,0,1);padding-top:env(safe-area-inset-top);
+  touch-action:pan-y;overscroll-behavior:contain}
 .sidebar.on{transform:none;box-shadow:0 0 60px var(--shadow)}
 .content{min-width:0}
 .scrim{position:fixed;inset:0;background:rgba(24,16,8,.44);z-index:45;opacity:0;pointer-events:none;transition:opacity .25s}
@@ -100,7 +104,7 @@ hr{border:none;border-top:1px solid var(--rule);margin:2em 0}
 .search:focus{outline:none;border-color:var(--accent-2);box-shadow:0 0 0 3px var(--accent-wash)}
 .search-icon{position:absolute;left:22px;top:50%;transform:translateY(-50%);width:16px;height:16px;
   fill:none;stroke:var(--muted);stroke-width:1.7;stroke-linecap:round;pointer-events:none}
-.toc{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:0 var(--s2) var(--s3) var(--s3);-webkit-overflow-scrolling:touch}
+.toc{flex:1;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:0 var(--s2) var(--s3) var(--s3)}
 .toc-part{margin:var(--s4) 0 var(--s1);padding-top:var(--s3);border-top:1px solid var(--rule);
   font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.16em;color:var(--accent)}
 .toc-cat{margin:var(--s3) 0 2px;padding-left:2px;font-family:var(--sans);font-size:12.5px;color:var(--muted)}
@@ -117,7 +121,7 @@ hr{border:none;border-top:1px solid var(--rule);margin:2em 0}
 .toc-sub:hover{color:var(--ink)}
 .toc-sub.current{color:var(--accent);font-weight:600}
 .toc-empty{padding:var(--s5) var(--s3);font-family:var(--sans);font-size:13.5px;color:var(--muted)}
-.numgrid{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:0 var(--s3) var(--s3);-webkit-overflow-scrolling:touch}
+.numgrid{flex:1;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:0 var(--s3) var(--s3)}
 .numgrid-part{margin:var(--s4) 0 var(--s2);font-family:var(--sans);font-size:11.5px;font-weight:700;
   letter-spacing:.16em;color:var(--accent)}
 .numgrid-body{display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:6px;margin-bottom:var(--s2)}
@@ -3955,253 +3959,401 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   var FONT_KEY = 'ow_book_theme', SIZE_KEY = 'ow_book_size', POS_KEY = 'ow_book_pos';
   var DESKTOP = '(min-width:1024px)';
 
-  var theme = THEMES.indexOf(store.get(FONT_KEY, 'paper'));
-  if (theme < 0) theme = 0;
-  doc.setAttribute('data-theme', THEMES[theme]);
-  var size = SIZES.indexOf(parseInt(store.get(SIZE_KEY, '17'), 10));
-  if (size < 0) size = 1;
-  doc.style.setProperty('--fs', SIZES[size] + 'px');
+  function $(id) { return document.getElementById(id); }
+  function fail(what, e) {
+    if (window.console && console.error) console.error(what, e);
+    var t = $('barTitle');
+    if (t) t.textContent = what + '出错';
+  }
+  // 任一模块出错都不影响其他模块：分段执行，异常就地捕获
+  function safe(what, fn) { try { fn(); } catch (e) { fail(what, e); } }
+  window.addEventListener('error', function (ev) {
+    fail('脚本', ev.error || new Error(ev.message));
+  });
 
-  document.getElementById('btnTheme').addEventListener('click', function () {
-    theme = (theme + 1) % THEMES.length;
+  /* ---------- 主题与字号 ---------- */
+  safe('设置', function () {
+    var theme = THEMES.indexOf(store.get(FONT_KEY, 'paper'));
+    if (theme < 0) theme = 0;
     doc.setAttribute('data-theme', THEMES[theme]);
-    store.set(FONT_KEY, THEMES[theme]);
-  });
-  document.getElementById('btnSize').addEventListener('click', function () {
-    size = (size + 1) % SIZES.length;
+    var size = SIZES.indexOf(parseInt(store.get(SIZE_KEY, '17'), 10));
+    if (size < 0) size = 1;
     doc.style.setProperty('--fs', SIZES[size] + 'px');
-    store.set(SIZE_KEY, String(SIZES[size]));
+
+    $('btnTheme').addEventListener('click', function () {
+      var i = THEMES.indexOf(doc.getAttribute('data-theme'));
+      i = (i + 1) % THEMES.length;
+      doc.setAttribute('data-theme', THEMES[i]);
+      store.set(FONT_KEY, THEMES[i]);
+    });
+    $('btnSize').addEventListener('click', function () {
+      var i = SIZES.indexOf(parseInt(doc.style.getPropertyValue('--fs'), 10));
+      i = (i + 1) % SIZES.length;
+      doc.style.setProperty('--fs', SIZES[i] + 'px');
+      store.set(SIZE_KEY, String(SIZES[i]));
+    });
   });
 
-  var sidebar = document.getElementById('sidebar');
-  var scrim = document.getElementById('scrim');
-  var toc = document.getElementById('toc');
-  var numgrid = document.getElementById('numgrid');
-  var search = document.getElementById('search');
-  var bar = document.getElementById('bar');
-  var barTitle = document.getElementById('barTitle');
-  var posText = document.getElementById('posText');
-  var toTop = document.getElementById('btnTopFloat');
-  var resumeBtn = document.getElementById('resumeBtn');
-  var mq = window.matchMedia(DESKTOP);
+  /* ---------- 目录侧栏、跳转、编号网格 ---------- */
+  var sidebar, scrim, toc, numgrid, search, toTop, resumeBtn, mq;
 
-  function isDesktop() { return mq.matches; }
+  /* iOS 上只绑 click 会受 300ms 延迟与滚动取消影响：优先用触摸事件动作，
+     触摸期间只要发生过位移就整段忽略（滚动结束不再当成点击） */
+  var HAS_TOUCH = 'ontouchstart' in window;
+  var TAP_SLOP = 10;
+  var TOUCH_CLICK = false;
+  function bindTap(node, action) {
+    if (!node) return;
+    if (!HAS_TOUCH) { node.addEventListener('click', action); return; }
+    var x = 0, y = 0, moved = false;
+    node.addEventListener('touchstart', function (e) {
+      var t = e.changedTouches[0];
+      x = t.clientX; y = t.clientY; moved = false;
+      TOUCH_CLICK = false;
+    }, { passive: true });
+    node.addEventListener('touchmove', function (e) {
+      var t = e.changedTouches[0];
+      if (Math.abs(t.clientX - x) > TAP_SLOP || Math.abs(t.clientY - y) > TAP_SLOP) moved = true;
+    }, { passive: true });
+    node.addEventListener('touchend', function (e) {
+      TOUCH_CLICK = true;
+      if (moved) return;
+      var t = e.changedTouches[0];
+      if (Math.abs(t.clientX - x) > TAP_SLOP || Math.abs(t.clientY - y) > TAP_SLOP) return;
+      action(e);
+    });
+    // 动作已经在 touchend 执行；这次合成 click 必须吃掉，否则一次点击触发两遍
+    node.addEventListener('click', function (e) {
+      if (TOUCH_CLICK) { e.preventDefault(); return; }
+      action(e);
+    });
+  }
+  // 触摸序列结束后（含滚动）Safari 才会补发合成 click，故在下一轮再清标记
+  document.addEventListener('touchstart', function () { TOUCH_CLICK = false; }, { passive: true });
+
+  /* iOS 不支持 fixed 元素内部的 overflow:hidden 锁滚动，用 body 定位锁 */
+  var bodyLock = { on: false, y: 0, prev: '' };
+  function lockBody(on) {
+    if (on === bodyLock.on) return;
+    bodyLock.on = on;
+    if (on) {
+      bodyLock.y = window.pageYOffset || 0;
+      bodyLock.prev = document.body.style.cssText;
+      document.body.style.position = 'fixed';
+      document.body.style.top = -bodyLock.y + 'px';
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    } else {
+      var back = bodyLock.y;
+      document.body.style.cssText = bodyLock.prev;
+      if (back) window.scrollTo(0, back);
+    }
+  }
+  function hideTop(on) {
+    var t = $('btnTopFloat');
+    if (t) t.classList[on ? 'remove' : 'add']('show');
+  }
+  /* 滚动锁把 body 变成 fixed，window.scrollY 会读成 0；
+     阅读位置必须走这里，否则锁住期间章节定位会跳回第一章 */
+  function scrollPos() {
+    return bodyLock.on ? bodyLock.y : (window.pageYOffset || 0);
+  }
+  /* 键盘弹出时可视视口会变矮，抽屉高度跟着可视视口走 */
+  function syncViewport() {
+    if (!sidebar || !window.visualViewport) return;
+    var vh = window.visualViewport.height;
+    if (vh) sidebar.style.height = vh + 'px';
+  }
+  /* 关闭是幂等的，键盘快捷键与跳转都要用，放在模块作用域共享 */
+  function isDesktop() { return !!(mq && mq.matches); }
+  function closeSidebar() {
+    if (!sidebar || isDesktop()) return;
+    sidebar.classList.remove('on');
+    scrim.classList.remove('on');
+    lockBody(false);
+    hideTop(false);
+  }
+  function toggleSidebar() {
+    if (!sidebar || isDesktop()) return;
+    if (sidebar.classList.contains('on')) closeSidebar(); else openSidebar(true);
+  }
   function openSidebar(on) {
-    if (isDesktop()) return;
-    sidebar.classList.toggle('on', on);
-    scrim.classList.toggle('on', on);
-    document.body.style.overflow = on ? 'hidden' : '';
-    if (on) revealCurrent();
+    if (!sidebar || isDesktop()) return;
+    sidebar.classList[on ? 'add' : 'remove']('on');
+    scrim.classList[on ? 'add' : 'remove']('on');
+    lockBody(on);
+    hideTop(on);
+    if (on) { syncViewport(); revealCurrent(); }
   }
   function revealCurrent() {
+    if (!toc) return;
     var cur = toc.querySelector('.toc-row.current');
     if (!cur) return;
     var top = cur.offsetTop - toc.clientHeight / 2 + cur.offsetHeight / 2;
     if (top > 0) toc.scrollTop = top;
   }
-  function syncLayout() {
-    if (isDesktop()) {
-      sidebar.classList.add('on');
-      scrim.classList.remove('on');
-      document.body.style.overflow = '';
+
+  safe('导航', function () {
+    sidebar = $('sidebar');
+    scrim = $('scrim');
+    toc = $('toc');
+    numgrid = $('numgrid');
+    search = $('search');
+    toTop = $('btnTopFloat');
+    resumeBtn = $('resumeBtn');
+    mq = window.matchMedia(DESKTOP);
+
+    function syncLayout() {
+      if (isDesktop()) {
+        sidebar.classList.add('on');
+        scrim.classList.remove('on');
+        sidebar.style.height = '';
+        lockBody(false);
+        hideTop(false);
+      }
     }
-  }
-  mq.addEventListener('change', syncLayout);
-  syncLayout();
+    // 旧版 Safari 只有 addListener；这一步若抛错会连带后面全部失效，必须做回退
+    if (mq.addEventListener) mq.addEventListener('change', syncLayout);
+    else if (mq.addListener) mq.addListener(syncLayout);
+    syncLayout();
 
-  document.getElementById('btnMenu').addEventListener('click', function () { openSidebar(!sidebar.classList.contains('on')); });
-  document.getElementById('btnClose').addEventListener('click', function () { openSidebar(false); });
-  scrim.addEventListener('click', function () { openSidebar(false); });
-
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-  tabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      tabs.forEach(function (t) {
-        var on = t === tab;
-        t.classList.toggle('active', on);
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', function () {
+        if (sidebar.classList.contains('on') && !isDesktop()) syncViewport();
       });
-      var isNum = tab.getAttribute('data-tab') === 'num';
-      toc.hidden = isNum;
-      numgrid.hidden = !isNum;
-      search.parentNode.style.display = isNum ? 'none' : '';
-    });
-  });
+    }
 
-  function jumpTo(hash) {
-    var id = decodeURIComponent(hash.replace(/^#/, ''));
-    var el = document.getElementById(id);
-    if (!el) return;
-    var barH = document.querySelector('.bar').offsetHeight;
-    var top = el.getBoundingClientRect().top + window.scrollY - barH - 14;
-    var far = Math.abs(top - window.scrollY) > window.innerHeight * 3;
-    window.scrollTo({ top: Math.max(top, 0), behavior: far ? 'auto' : 'smooth' });
-  }
-  function handleJump(e) {
-    var a = e.target.closest('a[href^="#"]');
-    if (!a) return;
-    e.preventDefault();
-    jumpTo(a.getAttribute('href'));
-    openSidebar(false);
-  }
-  toc.addEventListener('click', handleJump);
-  numgrid.addEventListener('click', handleJump);
-  document.querySelector('.cover-actions').addEventListener('click', handleJump);
+    bindTap($('btnMenu'), toggleSidebar);
+    bindTap($('btnClose'), function () { openSidebar(false); });
+    bindTap(scrim, function () { openSidebar(false); });
 
-  var rows = Array.prototype.slice.call(toc.querySelectorAll('.toc-row'));
-  var groups = Array.prototype.slice.call(toc.querySelectorAll('.toc-group'));
-  var parts = Array.prototype.slice.call(toc.querySelectorAll('.toc-part'));
-
-  function renderSearch(q) {
-    q = q.trim().toLowerCase();
-    var hit = 0;
-    rows.forEach(function (row) {
-      var item = row.querySelector('.toc-item');
-      var kids = Array.prototype.slice.call(row.querySelectorAll('.toc-sub'));
-      var titleHit = !!q && item.textContent.toLowerCase().indexOf(q) >= 0;
-      var kidHit = 0;
-      kids.forEach(function (kid) {
-        var on = !!q && kid.textContent.toLowerCase().indexOf(q) >= 0;
-        kid.style.display = on ? '' : 'none';
-        if (on) kidHit++;
-      });
-      var show = q ? (titleHit || kidHit) : true;
-      row.style.display = show ? '' : 'none';
-      if (show && q) hit++;
-      var box = row.querySelector('.toc-kids');
-      if (box) box.style.display = (q && kidHit) ? '' : (row.classList.contains('current') ? '' : 'none');
-    });
-    groups.forEach(function (g) {
-      var any = Array.prototype.some.call(g.querySelectorAll('.toc-row'), function (r) { return r.style.display !== 'none'; });
-      g.style.display = any ? '' : 'none';
-      var cat = g.querySelector('.toc-cat');
-      if (cat) {
-        var anyCat = Array.prototype.some.call(g.querySelectorAll('.toc-item'), function (i) {
-          return i.closest('.toc-row').style.display !== 'none';
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    Array.prototype.forEach.call(tabs, function (tab) {
+      bindTap(tab, function () {
+        Array.prototype.forEach.call(tabs, function (t) {
+          var on = t === tab;
+          t.classList[on ? 'add' : 'remove']('active');
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
         });
-        cat.style.display = anyCat ? '' : 'none';
-      }
+        var isNum = tab.getAttribute('data-tab') === 'num';
+        toc.hidden = isNum;
+        numgrid.hidden = !isNum;
+        search.parentNode.style.display = isNum ? 'none' : '';
+      });
     });
-    parts.forEach(function (p) {
-      var any = false;
-      var sib = p.nextElementSibling;
-      while (sib && !sib.classList.contains('toc-part')) {
-        if (sib.classList.contains('toc-group') && sib.style.display !== 'none') any = true;
-        sib = sib.nextElementSibling;
-      }
-      p.style.display = any ? '' : 'none';
-    });
-    var empty = toc.querySelector('.toc-empty');
-    if (q && !hit) {
-      if (!empty) {
-        empty = document.createElement('p');
-        empty.className = 'toc-empty';
-        toc.appendChild(empty);
-      }
-      empty.textContent = '没有找到「' + q + '」';
-      empty.style.display = '';
-    } else if (empty) {
-      empty.style.display = 'none';
-    }
-  }
-  search.addEventListener('input', function () { renderSearch(this.value); });
-  search.addEventListener('keydown', function (e) { if (e.key === 'Escape') { this.value = ''; renderSearch(''); } });
 
-  var sections = Array.prototype.slice.call(document.querySelectorAll('.chapter'));
-  var heads = Array.prototype.slice.call(document.querySelectorAll('.chapter-body h2[id]'));
-  var lastId = null, lastHead = null, ticking = false;
-
-  function currentSection() {
-    var top = window.scrollY + 72;
-    var found = sections[0];
-    for (var i = 0; i < sections.length; i++) {
-      if (sections[i].offsetTop <= top) found = sections[i]; else break;
-    }
-    return found;
-  }
-  function currentHead() {
-    var top = window.scrollY + 96;
-    var found = null;
-    for (var i = 0; i < heads.length; i++) {
-      if (heads[i].offsetTop <= top) found = heads[i]; else break;
-    }
-    return found;
-  }
-  function markCurrent(id) {
-    rows.forEach(function (row) {
-      var on = row.getAttribute('data-target') === id;
-      row.classList.toggle('current', on);
-      var box = row.querySelector('.toc-kids');
-      if (box) box.style.display = on ? '' : 'none';
-    });
-    Array.prototype.forEach.call(document.querySelectorAll('.num'), function (n) {
-      n.classList.toggle('current', n.getAttribute('data-target') === id);
-    });
-  }
-  function markHead(el) {
-    Array.prototype.forEach.call(document.querySelectorAll('.toc-sub'), function (s) {
-      s.classList.toggle('current', el ? s.getAttribute('href') === '#' + el.id : false);
-    });
-  }
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(function () {
-      ticking = false;
-      var h = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.width = (h > 0 ? Math.min(100, window.scrollY / h * 100) : 0) + '%';
-      toTop.classList.toggle('show', window.scrollY > 600);
-      var sec = currentSection();
-      if (sec && sec.id !== lastId) {
-        lastId = sec.id;
-        barTitle.textContent = sec.getAttribute('data-title') || '';
-        markCurrent(sec.id);
-        store.set(POS_KEY, sec.id);
-        var idx = sections.indexOf(sec);
-        posText.textContent = (idx + 1) + ' / ' + sections.length + ' · ' + (sec.getAttribute('data-title') || '');
+    function scrollToY(top, smooth) {
+      try {
+        window.scrollTo({ top: top, behavior: smooth ? 'smooth' : 'auto' });
+      } catch (e) {
+        window.scrollTo(0, top);
       }
-      var head = currentHead();
-      var hid = head ? head.id : null;
-      if (hid !== lastHead) { lastHead = hid; markHead(head); }
-    });
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
+    }
+    function jumpTo(hash) {
+      var id = decodeURIComponent(String(hash).replace(/^#/, ''));
+      var el = document.getElementById(id);
+      if (!el) return;
+      var barH = document.querySelector('.bar').offsetHeight;
+      var top = el.getBoundingClientRect().top + scrollPos() - barH - 14;
+      var far = Math.abs(top - scrollPos()) > window.innerHeight * 3;
+      scrollToY(Math.max(top, 0), !far);
+    }
+    function handleJump(e) {
+      var node = (e && e.target) || null;
+      while (node && node.nodeType !== 1) node = node.parentNode;
+      if (!node || !node.closest) return;
+      var a = node.closest('a[href^="#"]');
+      if (!a) return;
+      if (e.preventDefault) e.preventDefault();
+      // 必须先恢复 body 滚动再定位：解锁时会把页面移回原位，反过来会覆盖跳转结果
+      openSidebar(false);
+      jumpTo(a.getAttribute('href'));
+    }
+    bindTap(toc, handleJump);
+    bindTap(numgrid, handleJump);
+    var coverActions = document.querySelector('.cover-actions');
+    if (coverActions) bindTap(coverActions, handleJump);
 
-  var progress = document.getElementById('progress');
-  progress.addEventListener('click', function (e) {
-    var r = this.getBoundingClientRect();
-    var ratio = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
-    var max = document.documentElement.scrollHeight - window.innerHeight;
-    window.scrollTo({ top: ratio * max, behavior: 'auto' });
+    var progress = $('progress');
+    function backToTop() { openSidebar(false); scrollToY(0, true); }
+    bindTap($('btnTop'), backToTop);
+    bindTap(toTop, backToTop);
+    bindTap(progress, function (e) {
+      var r = progress.getBoundingClientRect();
+      var ratio = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      scrollToY(ratio * max, false);
+    });
+
+    var saved = store.get(POS_KEY, '');
+    if (saved) {
+      var target = document.getElementById(saved);
+      if (target) {
+        resumeBtn.style.display = '';
+        resumeBtn.textContent = '继续阅读：' + (target.getAttribute('data-title') || '');
+        resumeBtn.setAttribute('href', '#' + saved);
+      }
+    }
   });
 
-  var saved = store.get(POS_KEY, '');
-  if (saved) {
-    var target = document.getElementById(saved);
-    if (target) {
-      resumeBtn.style.display = '';
-      resumeBtn.textContent = '继续阅读：' + (target.getAttribute('data-title') || '');
-      resumeBtn.setAttribute('href', '#' + saved);
+  /* ---------- 键盘快捷键：上下章、关抽屉 ---------- */
+  safe('快捷键', function () {
+    function sections() { return Array.prototype.slice.call(document.querySelectorAll('.chapter')); }
+    function current() {
+      var list = sections(), top = scrollPos() + 72, found = list[0];
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].offsetTop <= top) found = list[i]; else break;
+      }
+      return found;
     }
-  }
-
-  function goTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-  document.getElementById('btnTop').addEventListener('click', goTop);
-  toTop.addEventListener('click', goTop);
-
-  document.addEventListener('keydown', function (e) {
-    if (e.target.tagName === 'INPUT') return;
-    if (e.key === 'Escape') openSidebar(false);
-    if (e.key === '[' || e.key === ']') {
-      var sec = currentSection(), i = sections.indexOf(sec), next = null;
-      if (e.key === '[') next = sections[i - 1]; else next = sections[i + 1];
-      if (next) { e.preventDefault(); jumpTo('#' + next.id); }
-    }
-    if (e.key === 't' || e.key === 'T') { e.preventDefault(); openSidebar(!sidebar.classList.contains('on')); }
+    document.addEventListener('keydown', function (e) {
+      if (e.target && e.target.tagName === 'INPUT') return;
+      if (e.key === 'Escape') closeSidebar();
+      if (e.key === '[' || e.key === ']') {
+        var list = sections(), i = list.indexOf(current());
+        var next = e.key === '[' ? list[i - 1] : list[i + 1];
+        if (next) {
+          e.preventDefault();
+          var barH = document.querySelector('.bar').offsetHeight;
+          var top = next.getBoundingClientRect().top + scrollPos() - barH - 14;
+          try { window.scrollTo({ top: top, behavior: 'smooth' }); } catch (err) { window.scrollTo(0, top); }
+        }
+      }
+    });
   });
 
-  onScroll();
+  /* ---------- 搜索与滚动联动 ---------- */
+  safe('索引', function () {
+    var rows = Array.prototype.slice.call(toc.querySelectorAll('.toc-row'));
+    var groups = Array.prototype.slice.call(toc.querySelectorAll('.toc-group'));
+    var parts = Array.prototype.slice.call(toc.querySelectorAll('.toc-part'));
+    var sections = Array.prototype.slice.call(document.querySelectorAll('.chapter'));
+    var heads = Array.prototype.slice.call(document.querySelectorAll('.chapter-body h2[id]'));
+    var bar = $('bar');
+    var barTitle = $('barTitle');
+    var posText = $('posText');
+    var lastId = null, lastHead = null, ticking = false;
+
+    function renderSearch(q) {
+      q = q.trim().toLowerCase();
+      var hit = 0;
+      rows.forEach(function (row) {
+        var item = row.querySelector('.toc-item');
+        var kids = Array.prototype.slice.call(row.querySelectorAll('.toc-sub'));
+        var titleHit = !!q && item.textContent.toLowerCase().indexOf(q) >= 0;
+        var kidHit = 0;
+        kids.forEach(function (kid) {
+          var on = !!q && kid.textContent.toLowerCase().indexOf(q) >= 0;
+          kid.style.display = on ? '' : 'none';
+          if (on) kidHit++;
+        });
+        var show = q ? (titleHit || kidHit) : true;
+        row.style.display = show ? '' : 'none';
+        if (show && q) hit++;
+        var box = row.querySelector('.toc-kids');
+        if (box) box.style.display = (q && kidHit) ? '' : (row.classList.contains('current') ? '' : 'none');
+      });
+      groups.forEach(function (g) {
+        var any = Array.prototype.some.call(g.querySelectorAll('.toc-row'), function (r) {
+          return r.style.display !== 'none';
+        });
+        g.style.display = any ? '' : 'none';
+        var cat = g.querySelector('.toc-cat');
+        if (cat) {
+          var anyCat = Array.prototype.some.call(g.querySelectorAll('.toc-item'), function (i) {
+            return i.closest('.toc-row').style.display !== 'none';
+          });
+          cat.style.display = anyCat ? '' : 'none';
+        }
+      });
+      parts.forEach(function (p) {
+        var any = false;
+        var sib = p.nextElementSibling;
+        while (sib && !sib.classList.contains('toc-part')) {
+          if (sib.classList.contains('toc-group') && sib.style.display !== 'none') any = true;
+          sib = sib.nextElementSibling;
+        }
+        p.style.display = any ? '' : 'none';
+      });
+      var empty = toc.querySelector('.toc-empty');
+      if (q && !hit) {
+        if (!empty) {
+          empty = document.createElement('p');
+          empty.className = 'toc-empty';
+          toc.appendChild(empty);
+        }
+        empty.textContent = '没有找到「' + q + '」';
+        empty.style.display = '';
+      } else if (empty) {
+        empty.style.display = 'none';
+      }
+    }
+    search.addEventListener('input', function () { renderSearch(this.value); });
+    search.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { this.value = ''; renderSearch(''); }
+    });
+
+    function currentSection() {
+      var top = scrollPos() + 72;
+      var found = sections[0];
+      for (var i = 0; i < sections.length; i++) {
+        if (sections[i].offsetTop <= top) found = sections[i]; else break;
+      }
+      return found;
+    }
+    function currentHead() {
+      var top = scrollPos() + 96;
+      var found = null;
+      for (var i = 0; i < heads.length; i++) {
+        if (heads[i].offsetTop <= top) found = heads[i]; else break;
+      }
+      return found;
+    }
+    function markCurrent(id) {
+      rows.forEach(function (row) {
+        var on = row.getAttribute('data-target') === id;
+        row.classList[on ? 'add' : 'remove']('current');
+        var box = row.querySelector('.toc-kids');
+        if (box) box.style.display = on ? '' : 'none';
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('.num'), function (n) {
+        n.classList[n.getAttribute('data-target') === id ? 'add' : 'remove']('current');
+      });
+    }
+    function markHead(el) {
+      Array.prototype.forEach.call(document.querySelectorAll('.toc-sub'), function (s) {
+        var on = el && s.getAttribute('href') === '#' + el.id;
+        s.classList[on ? 'add' : 'remove']('current');
+      });
+    }
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        ticking = false;
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (h > 0 ? Math.min(100, scrollPos() / h * 100) : 0) + '%';
+        toTop.classList[scrollPos() > 600 ? 'add' : 'remove']('show');
+        var sec = currentSection();
+        if (sec && sec.id !== lastId) {
+          lastId = sec.id;
+          barTitle.textContent = sec.getAttribute('data-title') || '';
+          markCurrent(sec.id);
+          store.set(POS_KEY, sec.id);
+          posText.textContent = (sections.indexOf(sec) + 1) + ' / ' + sections.length
+            + ' · ' + (sec.getAttribute('data-title') || '');
+        }
+        var head = currentHead();
+        var hid = head ? head.id : null;
+        if (hid !== lastHead) { lastHead = hid; markHead(head); }
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+
+    onScroll();
+  });
 })();
 </script>
 </body>
