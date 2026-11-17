@@ -1,0 +1,132 @@
+openapi: 3.1.0
+info:
+  title: OwnWord Identity and Transaction Sync API
+  version: 0.4.0
+  description: >
+    Candidate cross-end contract for the unified OwnWord v0.4.0 design target.
+    This documents the verified shape of selected existing Java endpoints only;
+    it is not a complete API inventory or an approved production contract.
+x-ownword-contract-status: needs-review
+x-ownword-source:
+  repo: metanet4j/metanet4j-component
+  commit: fbb048eab9ff565ea2f4aff1bd01720b9240d407
+  classes:
+    - metanet4j-api-ownword/src/main/java/com/metanet4j/api/ownword/IdentityApi.java
+    - metanet4j-api-ownword/src/main/java/com/metanet4j/api/ownword/TransactionSyncApi.java
+paths:
+  /api/v1/identities/{bapId}:
+    get:
+      operationId: getPublicIdentity
+      summary: Read an identity and its evidence-backed projection
+      description: >
+        The HTTP response can contain kind=unknown if the public source does
+        not provide sufficient coverage. A locally computed BAP ID or absence
+        from a wallet basket does not prove public non-existence.
+      parameters:
+        - name: bapId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: Identity resolution, potentially with unknown coverage
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '400':
+          description: Invalid BAP identifier
+        '502':
+          description: Public source temporarily unavailable
+  /api/v1/transactions/sync:
+    post:
+      operationId: syncSignedTransaction
+      summary: Sync an already signed and broadcast raw transaction
+      description: >
+        The server checks the raw transaction, its TxID, protocol and identity
+        signature. The supplied bapId is an expected identity, not author proof.
+        HTTP success does not by itself mean mainnet publication or confirmation.
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Must equal the lowercase txid in the body
+          schema:
+            $ref: '#/components/schemas/TxId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionSyncRequest'
+      responses:
+        '200':
+          description: Idempotent existing record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '201':
+          description: New synchronous record accepted for processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '202':
+          description: Synchronization or network evidence still pending
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '400':
+          description: Invalid request shape, identifier, or raw transaction input
+        '409':
+          description: Conflicting operationId, txid, rawTx or expected BAP ID
+        '422':
+          description: Parsed transaction or identity proof fails verification
+        '502':
+          description: Upstream source temporarily unavailable
+components:
+  schemas:
+    TxId:
+      type: string
+      pattern: '^[0-9a-f]{64}$'
+    TransactionSyncRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - operationId
+        - bapId
+        - txid
+        - rawTx
+      properties:
+        operationId:
+          type: string
+          format: uuid
+        bapId:
+          type: string
+          minLength: 1
+        txid:
+          $ref: '#/components/schemas/TxId'
+        rawTx:
+          type: string
+          pattern: '^[0-9a-f]+$'
+          description: Complete raw Bitcoin transaction hex, no private key
+    Envelope:
+      type: object
+      required:
+        - data
+        - meta
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+          description: >
+            Endpoint-specific projection. Field-level DTO schema remains
+            needs-review pending alignment to Java and TypeScript fixtures.
+        meta:
+          type: object
+          additionalProperties: true
+          description: Source, observed time and other actual response metadata
