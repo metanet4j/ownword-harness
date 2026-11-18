@@ -1,11 +1,11 @@
 # 当前交接
 
-当前事项 `supporting-domains-v040` 已交付，状态 needs-review，无 in-progress 项。本次仅整理文档；范围和证据见[feature_list.json](feature_list.json)及[progress.md](progress.md)。
+当前事项 `identity-core-convergence-v040` 已交付，状态 needs-review，无 in-progress 项。本次仅收敛 Identity 文档事实；范围和证据见[feature_list.json](feature_list.json)及[progress.md](progress.md)。
 
-从[支撑域 README](spec/domain/supporting/README.md)进入：领域设计承载能力/模型/状态/验收，上游接入依据承载 Yours/1sat 固定版本与 API 证据，Frontend/Backend 分别承载钱包和 Java 接入。四份文档均登记于[Manifest](spec/versions/v0.4.0.yaml)。版本关系引用[统一规则](spec/versions/README.md)，未新增支撑域独立版号。
+从[核心认知](spec/核心认知.md)进入，Identity 的实体/属性、关系、状态、事件及约束以此为唯一权威。[Identity 领域设计](spec/domain/identity/README.md)保留用例、责任与端口；DTO 转换归 Frontend/Backend，接口形状归 Contracts。文档职责已同步总入口及 ADR-001。
 
-已核查的 Action 签名/提交顺序、最终 rawTx、依赖哈希、匿名查询、鉴权说明差异及未验证范围均保留；Java 和 TypeScript 示例未运行，本次未新增网络请求。具体调用与限制以各自文档为准。
+已通过文档路径/锚点、围栏、编号唯一性、JSON、严格 YAML 和差异检查；原八类事件、六行公共查询转换及 36 个 BDD 场景的内容保留。状态图仅检查文本结构，BDD 未执行；未改业务代码、API、依赖或原型，也未重新验证钱包/主网。
 
-生产组合、原执行恢复、公共投影、历史验签、主链/reorg、Ordinal 历史、编号/Binding 和普通 Transfer 身份签名门禁仍开放。前端仓库当前缺失，旧 SHA 待恢复后核实。其他原型与技能待审事项保持原状态；不读取 Archive 或 spec/draft。
+[支撑域分层入口](spec/domain/supporting/README.md)、[上游依据](spec/contracts/upstream/接入依据-Yours与1sat-20261118-164032.md)和[统一版本基线](spec/versions/v0.4.0.yaml)继续有效，相关事项仍 needs-review。类型策略和历史核验待确认统一由核心认知 §12.7/§12.8 维护，其他真实集成与协议门禁未关闭；前端源码与旧 SHA 仍待恢复核实。其他原型与技能待审事项保持原状态；不读取 Archive 或 spec/draft。
 
-唯一下一步：用户复核分层入口后，按统一 v0.4.0 的 A→B→C→D 顺序固定生产依赖、补接口 fixtures，再实施钱包和 Java 集成。批准发布前维持 approvedForRelease=false、specSnapshot=null。
+唯一下一步：人工复核核心认知与下游映射；通过后按统一 v0.4.0 的 A→B→C→D 补 fixtures、关闭对应门禁并实施集成。批准发布前维持 approvedForRelease=false、specSnapshot=null。

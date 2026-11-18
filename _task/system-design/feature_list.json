@@ -12,6 +12,43 @@
   "activeItem": null,
   "features": [
     {
+      "id": "identity-core-convergence-v040",
+      "name": "将 Identity 稳定领域事实收敛至核心认知",
+      "status": "needs-review",
+      "goal": "按 core-principle 将 Identity 术语、实体/属性、关系、状态、事件和业务约束归入核心认知，下游保留用例编排、职责与实现映射。",
+      "scope": "核心认知、Identity 领域和两端相关引用、文档职责/入口、BDD 来源标记及任务状态；不改业务代码、既有 API 或原型。",
+      "dependencies": [
+        "用户要求 Identity 实体、状态等按核心认知要求统一收敛",
+        "core-principle 技能与现有核心认知 §2/§5/§6/§7/§8/§9/§10/§12",
+        "现有 Identity 领域、两端指南与已核实的 Wallet/公共查询边界"
+      ],
+      "doneCriteria": [
+        "核心认知集中 Identity 实体分类/编号、属性约束/来源、关系基数与定位、独立状态维度/PlantUML、事件可信度和不变量",
+        "保留现有能力与未确认事项，不将 DTO、钱包内部状态或未验证类型策略当作新产品事实",
+        "Identity 领域去除重复定义，DTO 映射归实现层；现行引用、链接/锚点、JSON/YAML 与迁移一致性检查通过",
+        "只提交本次文档，保留真实集成门禁，人工复核前保持 needs-review"
+      ],
+      "prdVersion": "v0.4.0",
+      "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
+      "output": "_task/system-design/spec/核心认知.md",
+      "implementationStatus": "documentation-consolidated-awaiting-review",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": [
+        "核心认知 §2/§6.1/§7/§8/§9.2/§10.2 集中术语、5 项功能、9 个相关模型、属性/关系编号、三个 Identity 状态图、8 类事件和 ID-01~12 规则索引；编号不代表新增代码或 HTTP Schema。",
+        "Identity Domain 删除重复模型、状态和规则定义，仅引用核心并映射用例、责任、端口、恢复协作与验收；原六行 scope/kind 转换完整迁至前端实现设计，Java 字段映射引用核心编号。",
+        "文档总入口、Domain/Identity、两端入口、Contracts 与 ADR-001 已统一职责；Identity BDD 仅更新来源注释。",
+        "迁移核对保留原八类事件、全部规则标识及公共查询表；36 个 BDD 场景正文未变且未执行。文档路径/标题锚点、围栏、核心编号唯一性、JSON、Manifest/OpenAPI 严格 YAML 和 diff --check 通过；PlantUML 仅做文本结构检查。",
+        "类型一致性与历史覆盖/生效顺序未假定解决，统一列入核心认知 §12.7/§12.8，注明责任和关闭证据；真实钱包、主网、原执行恢复、全交易签名和 Binding 门禁保持开放。",
+        "本次只修改设计及任务文档；业务代码、API Schema、版本 Manifest、依赖、参考仓库和原型未改。approvedForRelease=false、specSnapshot=null 保持原值。"
+      ],
+      "nextStep": "人工复核核心认知及下游映射；通过后按支撑域 A→B→C→D 补 fixtures、关闭对应门禁并实施集成。",
+      "pendingDecisions": [
+        "核心认知 §12.7：Identity/Profile 类型的映射、变更授权及组织身份能力，需真实声明和 Java/TS Mapper 样例。",
+        "核心认知 §12.8：公共未发布覆盖、Rotation 生效链序、同块/未确认及 reorg 核验，需原交易和不同到达顺序向量。",
+        "真实钱包和主网集成保持原支撑域门禁；文档收敛不替代运行验证或人工复核。"
+      ]
+    },
+    {
       "id": "supporting-domains-v040",
       "name": "明确钱包、交易与链上查询支撑域并整合 Identity 领域设计",
       "status": "needs-review",

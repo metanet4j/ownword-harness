@@ -6,7 +6,7 @@
 
 1. [核心认知](核心认知.md)：产品事实和跨版本不变量的**唯一权威来源（SSOT）**。
 2. [PRD v0.4.0](prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md)：当前目标版本新增的产品范围与原型验收；历史版本见 [PRD 目录](prd/)。
-3. [领域设计入口](domain/README.md)：统一领域语言、上下文映射、聚合和业务用例；由前后端共同遵循。
+3. [领域设计入口](domain/README.md)：引用核心认知的模型和状态，描述上下文责任、用例编排、端口与验收映射；由前后端共同遵循。
 4. [契约入口](contracts/README.md)：当前 API、协议验证的契约状态和 BDD 验收映射。
 5. [前端开发入口](frontend/identity/README.md)和[后端开发入口](backend/identity/README.md)：领域用例如何在各自代码中实施、验证和恢复。
 6. [架构决策](decisions/README.md)与[统一版本清单](versions/v0.4.0.yaml)：明确决策、待决问题及交付进度。
@@ -31,7 +31,7 @@
 
 `核心认知 → PRD → Domain → Contracts → Frontend/Backend Implementation → BDD/集成证据`。
 
-PRD 描述用户任务；Domain 描述业务模型与语义；Contracts 描述系统交互的可验证输入输出；Frontend/Backend 描述实现细节。所有文档引用核心认知的事实，不抄写另一份规则。涉及变更时先查领域规则与 API 兼容性，再改应用代码；验证证据的状态来自[_task/system-design/feature_list.json](../feature_list.json)及各版本验收报告。
+核心认知定义稳定的实体、属性、关系、业务状态、事件和约束；PRD 描述用户任务；Domain 引用这些定义并编排用例、分配职责；Contracts 描述系统交互的可验证输入输出；Frontend/Backend 描述实现映射。其他文档不维护第二份模型或状态定义。涉及变更时先更新核心事实并核对用例和 API 兼容性，再改应用代码；验证证据的状态来自[_task/system-design/feature_list.json](../feature_list.json)及各版本验收报告。
 
 **Identity 与支撑边界**：[支撑域设计](domain/supporting/README.md)按 Yours Wallet 与 SDK 源码明确身份管理、交易签名/提交、链状态和 Ordinal 查询职责。[Identity 技术 Review](domain/identity/评审报告-Identity-v0.4.0-20261118-103500.md)中的独立初始化资格方案已按钱包管理边界修订；当前设计不再要求 OwnWord 自建 Root 控制型初始化协议。钱包实际集成、历史验签、提交恢复及主网门禁仍待实证。
 

@@ -61,13 +61,15 @@ Ports ← Infrastructure (BAP/Bitcoin Verifier, Mongo, Indexer)
 
 ### 3.2 Identity 与 Profile 的类型/字段边界（R-03）
 
+领域属性及类型策略以[核心认知 ID-A01~08、PR-A01~06 和 §12.7](../../核心认知.md#72-bapidentity)为准；下表仅映射当前 Java 字段。
+
 | 领域字段 | Java 当前输入/输出 | 映射 |
 | --- | --- | --- |
 | `BapProfile.name` | `name` | 同名，按核心认知长度验证 |
 | `BapProfile.description` | `bio`，BAP ALIAS 原交易 `description` | 有效声明 → DTO `bio`；写入时相反 |
 | `BapProfile.image` | `imageUrl`，BAP ALIAS 原交易 `image` | 保留原交易 URI 和图片资产证据 |
-| `BapProfile.type` | `Person/Organization` | 可变展示资料，不能自动等于 Identity.type |
-| `BapIdentity.type` | Java API 当前无明确独立 DTO | 身份声明 `PERSON/ORGANIZATION`；如何随 Profile 改动待协议实证 |
+| `BapProfile.type` | `Person/Organization` | 映射 PR-A05；身份类型策略引用核心认知 §12.7 |
+| `BapIdentity.type` | Java API 当前无明确独立 DTO | 按 ID-A05 单独映射，不从 Profile DTO 自动写入 |
 | `BapProfile.updatedAt` | Java Profile DTO 当前未给出 | 使用链上有效资料时点与可信链序；缺失表达 unknown，不制造时间 |
 
 Identity 领域与 DTO 的双向映射放在 Adapter/Assembler；Domain 不直接依赖 BSON `Document`。真实 Java `IdentityProtocol.profile()` 的输入校验已经实现部分字段，但**现有代码 ≠ 所有产品不变量均满足**。

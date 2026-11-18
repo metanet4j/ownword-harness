@@ -1,7 +1,7 @@
 # Backend / Identity
 
 - **统一 v0.4.0 目标的实现指南（needs-review）**：[Identity Java 后端实现设计](实现设计-Identity-v0.4.0-20261117-175100.md)。
-- **共享领域模型**：[Domain / Identity](../../domain/identity/README.md)。
+- **核心模型与状态**：[核心认知](../../核心认知.md)；[Domain / Identity](../../domain/identity/README.md)提供用例与协作映射。
 - **共享支撑能力**：[钱包、交易及公共链/Ordinal 查询](../../domain/supporting/README.md)。
 - **查询接入实施**：[Java 链与 Ordinal 查询实现设计](../supporting/实现设计-链与Ordinal查询-v0.4.0-20261118-164032.md)。
 - **契约与验收**：[Contracts](../../contracts/README.md)。

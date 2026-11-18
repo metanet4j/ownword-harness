@@ -21,15 +21,7 @@
 
 `WalletIdentityPort` 封装本人 BapId、钱包发布记录、Profile、发布/更新/轮换能力。会话、解锁、站点权限和逐笔授权由钱包管理，OwnWord 保存所需会话引用，不复制钱包权限系统或密钥历史写模型。
 
-| 情况 | 前端分流 |
-| --- | --- |
-| 钱包身份明确可新建、公共查询 unknown，无已知冲突和未决操作 | 可 Review 并请求钱包已有 Action；公共身份仍显示待核实 |
-| 钱包已有身份、Profile 不完整 | 更新资料，避免再次初始化 |
-| 钱包状态/权限未知或账户不匹配 | 保留草稿，重读钱包/重新授权 |
-| 公共已核实身份与钱包记录冲突 | 先匹配和恢复钱包跟踪，避免重复 ID |
-| 原 Action/TxID 待恢复 | 进入原操作，不新建相同业务交易 |
-
-删除以公共 `unknown` 单独拦截钱包首次发布的耦合；不新增 OwnWord 的 Root 证明型初始化资格接口。钱包 basket 无记录也不能映射为公共 NOT_PUBLISHED。
+身份状态和分流判定统一见[核心认知 §9.2](../../核心认知.md#92-identity)。本 Adapter 将钱包原始返回映射为 Q-ID-02，Application 调用相应用例；已知状态、未知及会话切换的规则不在前端文档重列。
 
 ### 2.1 资料映射
 
@@ -39,11 +31,20 @@
 | Wallet Schema.org `name / description / image / @type` | 同上 | 与 Java DTO 使用不同 Adapter；不能把 bio 原样传给钱包 |
 | 公共 Profile 缺少可信时点 | `updatedAt` 未知 | 不用浏览器时间补成链上更新时点 |
 
-Yours 当前 `saveProfile` 固定 `@type: Person`；组织资料和 Identity.type / Profile.type 一致性待产品与钱包适配实证，不据此扩写钱包已支持范围。
+Yours 当前 `saveProfile` 固定 `@type: Person`；此实现限制及 Identity/Profile 类型一致性统一见[核心认知 §12.7](../../核心认知.md#12-待确认)，不能据此扩写钱包已支持范围。
 
 ### 2.2 公共查询映射
 
-`mainnet/published` 仅在 Proof/来源有效时成为 PUBLISHED；`not-published` 需要充分历史覆盖，否则 UNKNOWN；`unknown`、失败和坏响应保持 UNKNOWN。`incomplete` 需结合初始声明证据判发布状态，Profile 完整度另判。模拟 `stored/incomplete/empty` 只在隔离 scope 使用。完整映射见[Identity §6](../../domain/identity/领域设计-Identity-v0.4.0-20261117-175100.md#6-状态钱包管理与公共查询)。
+领域结果与成立条件引用[核心认知 §9.2.2](../../核心认知.md#922-公共身份查询)。以下是现有传输兼容值的 Adapter 映射，状态定义引用核心认知；未有实际 fixture 的分支保持待验证。
+
+| scope / kind | 公共身份结果 | 资料与使用限制 |
+| --- | --- | --- |
+| mainnet / published | Proof 和公共证据有效才为 PUBLISHED | 资料按实际字段独立校验 |
+| mainnet / not-published | 历史覆盖充分才为 NOT_PUBLISHED，否则 UNKNOWN | 当前 Java 未核实充分覆盖分支 |
+| mainnet / unknown | UNKNOWN | 不能改写为未发布或单独阻止钱包现有身份动作 |
+| mainnet / incomplete | 只有初始声明已核实才为 PUBLISHED，否则 UNKNOWN | 兼容设计，实际响应 fixture 待验证 |
+| broadcast-mock / stored、incomplete、empty | 隔离模拟结果，不形成主网身份结论 | 不提升为主网 Proof 或授权 |
+| 超时、5xx、坏响应或 scope 不匹配 | UNKNOWN + 错误原因 | 按失败来源决定重试；钱包能力是否可用独立判断 |
 
 ## 3. 交易执行与恢复
 

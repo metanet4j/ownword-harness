@@ -1,139 +1,74 @@
 # Identity 领域设计（OwnWord 统一目标 v0.4.0）
 
-> **状态：needs-review。** 本文为前后端共用的 DDD 领域模型，不代表 v0.4.0 Identity 新功能已在生产实现。业务事实遵循[核心认知](../../核心认知.md)；本文件从历史[Identity 后端设计草案](../../backend/领域设计-Identity-v0.1.0-20261117-165000.md)、[v0.1.0 身份 PRD](../../prd/v0.1/设计文档v0.1.md)、[v0.3.0 Artifact PRD](../../prd/v0.3.0/设计文档v0.3.0-20260918-215142.md)整理跨端共同语义。技术细节见[前端](../../frontend/identity/README.md)、[后端](../../backend/identity/README.md)。
+> 状态：needs-review。本文负责用例编排、上下文责任、领域端口与验收映射；术语、实体/属性、关系、业务状态、事件和不变量统一由[核心认知](../../核心认知.md)定义。具体接口与代码映射见[前端](../../frontend/identity/README.md)、[后端](../../backend/identity/README.md)和[Contracts](../../contracts/README.md)。本文件不作为第二份产品事实来源。
 
 ## 1. 领域目标与上下文边界
 
-Identity 解决稳定身份的业务语义、资料映射、公开发现与历史签名归属。BAP ID 是跨上下文的稳定主键。本人 BAP ID 派生、发布、Profile 更新、当前签名路径与轮换执行委托 Yours Wallet/SDK；OwnWord 组合业务 Review、钱包结果、公共核验及操作恢复，具体边界见[支撑域设计](../supporting/README.md)。Profile 是可修改展示资料；Artifact 是独立可转移资产；Binding 属于 Artifact 的关联模型。
+Identity Application 组合 Wallet 本人身份管理、用户 Review、公共核验和原执行恢复。Wallet/Transaction/Chain Query 的协作见[支撑域](../supporting/README.md)；稳定责任见[核心认知 §5.4](../../核心认知.md#54-支撑能力与产品领域的责任)。
 
-公共内容和关系只将经过核实的 BAP ID 作为作者或端点。公共主页的多模块内容由 Explorer 读取组合，不应把 Content/Artifact/Relationship 聚合塞入 Identity 聚合。上下文对应见[Context Map](../上下文映射-v0.4.0-20261117-175100.md)。
+Identity 负责自身资料和签名归属用例，消费 Artifact 的关联摘要；公共主页由 Explorer 组合多领域查询。依赖方向见 [Context Map](../上下文映射-v0.4.0-20261117-175100.md)，本文件不把 Content/Artifact/Relationship 放入 Identity 聚合。
 
 ## 2. 通用语言
 
-| 领域术语 | 模型中的含义 | 不变量/证据 |
-| --- | --- | --- |
-| `BapId` | 稳定公开身份标识；不可编辑 | 确定性派生不证明已在公共链上发布 |
-| `BapIdentity` | 身份生命周期与签名密钥归属的聚合根 | 发布和轮换必须有可验证交易 |
-| `BapProfile` | 公共展示资料，随有效链上声明演进 | Profile 的更新不能改变 BapId |
-| `IdentityKeyHistory` | 对历史签名地址/路径及生效记录的可验证引用 | 旧交易按签名时有效历史验证 |
-| `IdentitySignatureProof` | 本笔业务交易和关键目标的身份签名证据 | 钱包连接/花费签名不可代替 |
-| `IdentityResolution` | 查询是否已发布及可信度的领域结果 | unknown 与 not-published 必须区分 |
-| `IdentityNFTBinding` | BAP ID 和 Ordinal Origin 的独立关联 | 属于 Artifact，双向唯一且可被重验 |
-| `ChainObservation` | 指向原交易/公共索引的来源、覆盖与时点 | 不以本地缓存判定全网不存在 |
+本文件直接使用核心认知中的命名，通过下表定位定义；不再维护同名释义表。
 
-上述术语的**唯一定义**在[核心认知 §2](../../核心认知.md#2-术语与命名)，结构字段与业务状态见其 §7、§9；本表只给出领域设计职责。
+| 所用概念 | 唯一权威 |
+| --- | --- |
+| BapId、BapIdentity、BapProfile | [核心认知 §2、§7.2–7.3](../../核心认知.md#72-bapidentity) |
+| IdentityKeyHistory、IdentitySignatureProof、IdentityResolution、WalletIdentityState | [核心认知 §7.10](../../核心认知.md#710-identity-证明与查询模型) |
+| ProfileCompleteness、业务生命周期及公共查询 | [核心认知 §9.2](../../核心认知.md#92-identity) |
+| Binding、Origin 与 Artifact | [核心认知 §7.6–7.7](../../核心认知.md#77-identitynftbinding) |
 
 ## 3. 主要 Use Case（跨端共用）
 
-| Use Case | 所属上下文 | 输入/前置条件 | 成功结果与不确定性 |
-| --- | --- | --- | --- |
-| `ResolveMyIdentity` | Identity Application / Query | Wallet 本人身份状态与独立公共查询 | 钱包会话、钱包身份/资料、公共发布证据分别表达；不能互相覆盖 |
-| `PublishIdentity` | Identity Application → Wallet | 钱包提供的发布能力、冻结 Review、无未决原操作及已知冲突 | 调用钱包现有身份 Action；OwnWord 跟踪执行、同步、公共回读 |
-| `UpdateBapProfile` | Identity Application → Wallet | 钱包当前身份与资料能力、字段映射、冻结资料 | 委托钱包资料 Action；首次更新可由 Action 同时产生 ID 与 ALIAS，逐笔记录结果 |
-| `RotateIdentityKey` | Identity Application → Wallet | 钱包当前身份及轮换能力 | 钱包执行旧密钥签署的新声明；OwnWord 验证稳定 BapId 与历史链序，不自行管理密钥序号 |
-| `GetPublicIdentity` | Identity Query | BapId | 公开 Identity/Profile/Proof 与来源覆盖；异常和未知明确 |
-| `ResolveByInscriptionNumber` | **Explorer Application** | 十进制编号或 #前缀 | Artifact 编号→Origin→有效 Current Binding→Identity；**不是 Identity 内部命令** |
+功能定义与输入/业务结果以[核心认知 F-ID-01~05](../../核心认知.md#61-mvp)为准；下表只映射应用编排。
 
-用例可以跨前后端协作，但不要求两端复制同名聚合对象或钱包内部状态机。钱包操作能力与公共存在性分离的判定见 §6。编号解析由 Explorer 组合 Artifact + Identity 的公开读取端口。
+| 功能引用 | 应用用例 | 主要协作 |
+| --- | --- | --- |
+| F-ID-01 | ResolveMyIdentity | 并行读取 WalletIdentityPort 与 PublicIdentityResolver，组合资料映射；按核心认知 §9.2.4 分流 |
+| F-ID-02 | PublishIdentity | Review → WalletExecutionPort → 执行记录/同步 → 公共回读 |
+| F-ID-03 | UpdateBapProfile | Profile Mapper → Review → Wallet 资料能力 → 子交易记录/回读 |
+| F-ID-04 | RotateIdentityKey | Wallet 轮换能力 → 原执行跟踪 → PublicBapHistoryResolver 核验 |
+| F-ID-05 | GetPublicIdentity | 公共解析与来源覆盖 → Profile/Proof 读模型 |
+| Explorer 组合用例 | ResolveByInscriptionNumber | Artifact 编号/Origin/Current Binding 查询 → F-ID-05；不作为 Identity 内部命令 |
+
+上述是逻辑协作，不要求前后端复制同名聚合或钱包内部状态机。
 
 ## 4. 战术模型与聚合
 
-~~~text
-Identity Context
-└── BapIdentity (Aggregate Root)
-    ├── BapId (Value Object, immutable)
-    ├── IdentityStatus + IdentityType (PERSON | ORGANIZATION)
-    ├── IdentitySigningPath / IdentityKeyHistory
-    └── VerifiedPublication / KeyRotation Evidence references
+模型分类、聚合根、属性和事实源统一见[核心认知 §7](../../核心认知.md#7-实体与属性)，关系基数/唯一定位统一见[§8](../../核心认知.md#8-关系)。本应用通过端口使用 E-ID-01/E-ID-02、V-ID-02/03 与 Q-ID-01/02，不根据数据库或 DTO 新建同名业务定义。
 
-Identity Read Model
-└── BapProfile (published, evidence-backed projection)
-
-Artifact Context
-├── BapNFT (Aggregate Root)
-└── IdentityNFTBinding (independent aggregate/association)
-    ├── BapId + OrdinalOrigin
-    ├── ACTIVE / HISTORICAL / INVALID
-    └── evidence reference
-~~~
-
-`BapIdentity` 表达身份稳定标识、已验证状态和历史约束，是 OwnWord 的业务模型；它不复制钱包密钥管理聚合或本人的发布判定。`BapProfile` 可作为链上 ALIAS/图片的可重建资料投影，不要求与聚合在同一数据库事务中保存。
-
-`IdentityNFTBinding` 归 Artifact 上下文，Current 约束由该上下文的聚合及证据验证控制；Identity 工作台读取 `CurrentBindingSummary`，不得双写独立 Current 字段形成两个权威来源。仓储实现、Mongo 集合和 HTTP 适配位于后端实现设计中。
+命令侧调用 Wallet 管理能力；查询侧构建 Identity/Profile/Proof 视图。交易支撑负责执行和证据关联，Artifact 负责 Binding；Identity 不双写另一个 Current 关系。是否同库或同事务由实现设计决定，不能改变核心模型。
 
 ### 4.1 Identity 与 Profile 字段归属
 
-| 概念 | 核心认知属性/约束 | 应用 DTO 现状 | 领域行为 |
-| --- | --- | --- | --- |
-| `BapIdentity.bapId` | 稳定、不可改 | `bapId` | 从 Root 关联派生；从公开证据确认 |
-| `BapIdentity.rootPath/currentPath/previousPath` | Root 稳定、Current 可轮换 | `currentAddress` 为现有服务投影字段，不能等价为全部路径 | 通过 BAP 历史验证，轮换后保留历史 |
-| `BapIdentity.type` | `PERSON / ORGANIZATION`，身份声明 | 无独立 Identity Type DTO 已核实 | 属于身份声明，不得仅靠修改 Profile 推断已更新 |
-| `BapProfile.name` | 必填，可修改，≤100 字符 | `name` | 资料发布前校验，回读后验证生效 |
-| `BapProfile.description` | 可修改，≤1000 字符 | `bio` | 领域 ↔ DTO 显式映射，不能同时维护两份资料 |
-| `BapProfile.image` | 可修改，≤2048 字符 | `imageUrl` | URI 或受控链上内容引用，关联单独交易的证据 |
-| `BapProfile.type` | `Person / Organization`，可修改 | `type` | 展示资料声明；与 Identity.type 的同步/变更协议**待明确** |
-| `BapProfile.updatedAt` | 必填，派生有效更新时点 | 现有 Profile DTO 未含 | 必须来自有效资料记录的可信链序/时点，不得用 HTTP 到达时间冒充链上时点 |
-
-**待明确**：核心认知分别要求 Identity.type 和可修改的 Profile.type，尚未定义二者的变更一致性。现有钱包 `useIdentity.saveProfile` 固定写 `@type: Person`，BAP ID 声明构造不含 PERSON/ORGANIZATION 字段，不能声称组织身份和类型变更已获得钱包支持。由产品/钱包适配负责人通过协议样例确认类型映射与变更策略；不推断 Identity.type 永久不可变，也不自行新增初始化或轮换协议。字段格式与长度唯一权威是[核心认知 §7.2–7.3](../../核心认知.md#72-bapidentity)。
+字段定义以[核心认知 ID-A01~08、PR-A01~06](../../核心认知.md#72-bapidentity)为准；DTO/Schema.org 命名转换分别见[前端资料映射](../../frontend/identity/实现设计-Identity-v0.4.0-20261117-175100.md#21-资料映射)与[Java 字段映射](../../backend/identity/实现设计-Identity-v0.4.0-20261117-175100.md#32-identity-与-profile-的类型字段边界r-03)。类型声明的待确认策略统一见核心认知 §12.7。
 
 ## 5. 领域行为与业务不变量
 
-| 规则标识 | 领域决策 | 责任边界 |
-| --- | --- | --- |
-| ID-01 | BAP ID 创建后不可编辑；轮换不变更 ID | Identity 聚合 |
-| ID-02 | Wallet 可计算 BAP ID ≠ 公共身份已发布 | IdentityResolution |
-| ID-03 | Profile 修改对应新的链上事实；不得直接将本地编辑称为已公开更新 | Identity/Profile 投影 |
-| ID-04 | BAP 密钥历史用于逐笔签名归属验证，不能仅使用当前地址 | Identity Proof 验证 |
-| ID-05 | 每笔 OwnWord 链上交易需有覆盖对应业务内容和关键目标的 identityKey 身份签名 | 全部领域应用用例 |
-| ID-06 | Creator、Signer、Owner、Current Binding 互不推断 | Identity 与 Artifact ACL |
-| ID-07 | 一个 BAP ID 至多有一个当前 Artifact，单个 Origin 至多指向一个有效当前 BAP ID | Artifact Binding |
-| ID-08 | Inscription Number 未经确认不能分配，reorg 后可以变更 | Artifact / Indexer |
-| ID-09 | 协议/网络读取未知不能当作业务不存在 | 全部查询 Use Case |
-| ID-10 | 账户切换使未提交的旧授权失效；已提交交易继续归属旧 BAP ID | Wallet/Application |
-| ID-11 | 本人身份动作委托 Wallet/SDK；公共 unknown 不单独否决钱包已知能力；已知冲突及未决原操作先恢复，不重新初始化 | Wallet Integration / Identity Application |
-| ID-12 | Identity.type 与 Profile.type 不因字段名相似而默认同步；变更策略需要独立事实证据 | Identity/Profile |
+[核心认知 §10.2](../../核心认知.md#102-identity)保存 ID-01~12 的规则索引，本节只分配执行责任。
 
-本节只定义规则在 DDD 模型中的**责任归属**；权威内容和例外仍见[核心认知 §4](../../核心认知.md#4-全局不变量)、[§6.4](../../核心认知.md#64-全部链上交易的身份归属)、[§7.7](../../核心认知.md#77-identitynftbinding)、[§9.4](../../核心认知.md#94-artifact-与-binding)。
+| 核心规则引用 | 执行责任 |
+| --- | --- |
+| ID-01/02/03/12 | Identity Application、Profile Mapper 与公共查询 |
+| ID-04/05 | Identity Proof / 历史归属验证，业务用例消费结果 |
+| ID-06/07/08 | Artifact 验证与查询端口，Identity 仅读取 |
+| ID-09 | 全部公共查询 Adapter 与读模型 |
+| ID-10/11 | Wallet Adapter、业务 Review 和原执行恢复 |
 
 ## 6. 状态、钱包管理与公共查询
 
 ### 6.1 业务生命周期
 
-身份产品状态沿用[核心认知 §9.2](../../核心认知.md#92-identity)。`UNKNOWN` 表达查询证据不足，不加入产品生命周期；钱包回执、已提交、已同步和公共身份已核实各自保留。公共 `NOT_PUBLISHED` 需要充分覆盖；本人钱包中的“尚未发布”只表达钱包管理状态。
+状态集合、转换、初始/异常/未来能力以[核心认知 §9.2](../../核心认知.md#92-identity)及其 PlantUML 为准；领域文件不维护独立状态机。
 
 ### 6.2 状态的责任与使用
 
-| 判断 | 数据/规则来源 | OwnWord 使用方式 |
-| --- | --- | --- |
-| 连接、解锁、站点授权、操作权限 | Yours Wallet 的会话和权限管理 | 适配为可用能力；连接成功不能代替站点或逐笔授权 |
-| 本人 BapId、钱包发布状态、当前资料、轮换路径 | Wallet 身份 Actions、钱包 basket 与 `useIdentity` | 使用钱包管理结果；缓存图片等提示不能提升为已验证状态 |
-| 资料完整度 | 钱包资料 + 核心认知必填字段 | OwnWord 显式映射后做业务字段校验，不另建本人资料权威副本 |
-| 本次操作可执行性 | 钱包 Action 能力/前置条件 + OwnWord Review、scope、会话、冲突及恢复记录 | 提交前重查，调用现有 Action；不另设 Root 控制型初始化协议 |
-| 公共身份和历史签名归属 | 原交易、公开 BAP 观测、历史验证 | 返回带来源/覆盖的 PUBLISHED、NOT_PUBLISHED、UNKNOWN 或冲突原因；不反写钱包发布开关 |
-
-现有传输 DTO 是公共查询的兼容输入，领域映射为：
-
-| scope / kind | 公共身份结果 | 资料与使用限制 |
-| --- | --- | --- |
-| mainnet / published | Proof 和公共证据有效才为 PUBLISHED | 资料按实际字段独立校验 |
-| mainnet / not-published | 历史覆盖充分才为 NOT_PUBLISHED，否则 UNKNOWN | 当前 Java 未核实充分覆盖分支 |
-| mainnet / unknown | UNKNOWN | 不能改写为未发布或单独阻止钱包现有身份动作 |
-| mainnet / incomplete | 只有初始声明已核实才为 PUBLISHED，否则 UNKNOWN | 兼容设计，实际响应 fixture 待验证 |
-| broadcast-mock / stored、incomplete、empty | 隔离模拟结果，不形成主网身份结论 | 不提升为主网 Proof 或授权 |
-| 超时、5xx、坏响应或 scope 不匹配 | UNKNOWN + 错误原因 | 按失败来源决定重试；钱包能力是否可用独立判断 |
+WalletIdentityPort 提供 Q-ID-02，PublicIdentityResolver 提供 Q-ID-01，Profile Mapper 派生 V-ID-04；Application 按核心认知 §9.2 组合，UI 只消费结果。传输 scope/kind 的具体转换归[前端公共查询映射](../../frontend/identity/实现设计-Identity-v0.4.0-20261117-175100.md#22-公共查询映射)，JSON/错误字段归 Contracts 与后端 Adapter，不在 Domain 重列 DTO 状态。
 
 ### 6.3 本人身份操作分流
 
-| 已知情况 | 动作 |
-| --- | --- |
-| 钱包明确提供新建/首次资料 Action，公共查询 UNKNOWN，无已知冲突和未决操作 | 可进入业务 Review 并请求钱包执行；公开状态保持 UNKNOWN，等待交易回读 |
-| 钱包身份已发布，资料不全 | 使用资料更新能力，不重新初始化 |
-| 公共已核实同一身份存在，但钱包本地无对应记录 | 先恢复钱包跟踪/匹配，避免重复 ID 声明 |
-| 钱包读取失败、会话/操作权限未知、BapId 不匹配 | 保留草稿，修复钱包状态后继续 |
-| 原 Action 结果未知或已有原 TxID/reference | 先恢复原执行，不能因索引未查到而创建另一笔 |
-| 会话或 scope 改变 | 作废未提交 Review；已提交交易继续按原身份和网络追踪 |
-
-SDK `publishIdentity` 在本地身份已存在时返回错误；`updateProfile` 在首次发布路径可同笔构造 ID + ALIAS。这两种能力按各自语义适配，不能都描述为“重复调用自动幂等”。钱包本地身份查询也不证明公共历史不存在。
+分流条件与边界统一见[核心认知 §9.2.4](../../核心认知.md#924-本人操作与异常边界)。本用例先读取钱包和未决执行，再形成可供 Review 的应用结果；对所选 Wallet Action 的实际接口限制由[钱包实现设计](../../frontend/supporting/实现设计-钱包与交易执行-v0.4.0-20261118-164032.md)验证。
 
 ### 6.4 执行与恢复
 
@@ -162,22 +97,19 @@ end
 @enduml
 ~~~
 
-已核实的身份 Action 默认路径内部完成构造、签名并尝试提交，返回后才取得最终交易材料；自定义路径需核实 noSend 才能分离最终签名和提交，单独 signAndProcess=false 不足。必须验证钱包在回执丢失时可用的关联与恢复能力；能力不足属于集成门禁。图片/ALIAS 等多笔流程逐笔记账，钱包同笔组合的 ID/ALIAS 只记一笔，详见[支撑域 §4–6](../supporting/领域设计-支撑域-v0.4.0-20261118-141904.md)。
+具体钱包调用、材料与恢复限制见[钱包实现设计](../../frontend/supporting/实现设计-钱包与交易执行-v0.4.0-20261118-164032.md)；原交易校验与查询接入见[Java 实现设计](../../backend/supporting/实现设计-链与Ordinal查询-v0.4.0-20261118-164032.md)。本序列是用例协作，不另定义业务生命周期或钱包状态。
 
 ## 7. 领域事件及其可信度
 
-| 事件 | 何时产生 | 能否直接证明链上已生效 |
-| --- | --- | --- |
-| `WalletIdentityObserved` | 读取本人钱包身份和操作能力，附会话及来源 | 否 |
-| `IdentityPublicationRequested` | 用户确认发布意图 | 否 |
-| `WalletExecutionRecorded` | 记录 Action/reference/已知交易；自定义两阶段可另有 Prepared 记录 | 否 |
-| `BroadcastResultObserved` | Wallet/网络返回可追溯回执 | 需要独立核实 |
-| `IdentityPublicationVerified` | 验签及公开 BAP 事实充分 | 是，附网络和来源 |
-| `ProfileUpdateVerified` | 有效资料交易被核实 | 是，附交易与版本 |
-| `IdentityKeyRotatedVerified` | 轮换与历史路径核实 | 是，附旧/新路径引用 |
-| `ArtifactBindingVerified` | Artifact 上下文按公开契约验证 | 取决于待验证的 Binding 协议 |
+事件定义、触发条件和证据级别统一见[核心认知 EV-ID-01~08](../../核心认知.md#711-identity-相关领域事件)。本用例仅映射生产与消费职责。
 
-领域事件携带来源范围、交易标识、签名验证结果及观测时点；不以本地布尔值替代原始证据。跨上下文消费需幂等、可重放。
+| 事件引用 | 生产方 | 主要消费方 |
+| --- | --- | --- |
+| EV-ID-01 | Wallet Adapter | Identity Application / Review |
+| EV-ID-02 | Identity Application | Transaction Support |
+| EV-ID-03/04 | Wallet / Transaction Adapter | 执行日志与恢复服务 |
+| EV-ID-05/06/07 | 公共解析与历史验证 | Identity/Profile 投影及业务回读 |
+| EV-ID-08 | Artifact | Identity / Explorer 查询组合 |
 
 ## 8. 跨端协作与数据所有权
 
@@ -193,7 +125,7 @@ end
 | `SigningPathAt / RotationHistoryResolver` | 验证签名发生时的有效密钥和链序；历史不足或冲突返回 UNKNOWN / CONFLICT |
 | `CurrentBindingQuery` | 只读 Artifact 的有效关联摘要，不双写 Binding |
 
-**签名归属规则**：先独立验证本笔签名覆盖内容，再由 `SigningPathAt` 判定签名者是否属于该 BAP ID 在该笔交易**有效链序**的路径。历史不完整、重组、冲突及同区块排序不明确时返回 UNKNOWN/CONFLICT；前后端不得显示 `Signature valid` 的 BAP 归属结论。具体 BAP 生效编码与时点仍依赖实际原交易向量关闭。
+历史归属端口消费[核心认知 §7.10](../../核心认知.md#710-identity-证明与查询模型)的证据要求；实际生效编码与交易向量关闭条件见其 §12.8，不在本文件另定验签状态。
 
 - **前端 Application**：适配钱包连接与身份动作、用户 Review、冻结业务快照、持久化执行与恢复日志、同步和公共回读；钱包管理会话、权限和签名路径。
 - **后端 Application/Domain**：验证 rawTx、TxID、BAP 签名归属及历史密钥，核对真实网络来源和查询覆盖；维护可重建投影。
@@ -227,14 +159,14 @@ end
 
 ## 10. 待验证事项与影响
 
-| 项 | 拥有方 | 关闭依据 |
-| --- | --- | --- |
-| 全交易身份签名的实际封装/覆盖，特别是普通 Artifact Transfer | Wallet Adapter / metanet4j | 原交易和独立验证器向量 |
-| Wallet 身份 Action 的实际接口、权限、交易材料与丢回执恢复 | Wallet Adapter / Identity | 锁定版本；新建/已有身份、公共未知、冲突、拒绝及原执行恢复 fixtures |
-| BAP 公共索引覆盖足以证明未发布的条件 | Identity / Indexer | coverage 定义、服务异常和全历史样例 |
-| Binding 创建、替换、撤销、双向唯一及转让后重验协议 | Artifact / Indexer | 可重放链上事件与冲突/重组实验 |
-| Inscription Number、Origin、主链/重组相关 API | Indexer | 真实输出和重组样例 |
-| Rotation 历史签名生效顺序 | BAP 实现 | 历史交易与密钥路径验证 |
-| Identity.type 与 Profile.type 的同步/变更授权 | Identity / 产品 / Protocol | 确认业务规则与真实交易 / Java TS Mapper 样例 |
+待确认产品/协议事实统一见[核心认知 §12](../../核心认知.md#12-待确认)，下表仅记录实施映射；详细参数和 fixtures 进入各端设计/Contracts。
 
-以上属于开发前待关闭的技术契约，不能因为本领域设计完成就记为生产可用。
+| 核心依据 | 实施拥有方 | 所需证据 |
+| --- | --- | --- |
+| §12.2 全交易身份签名 | Wallet Adapter / metanet4j | 各类原交易与独立验证向量 |
+| §12.7 类型声明 | 产品 / Protocol / Wallet Adapter | 类型映射、授权与实际声明样例 |
+| §12.8 公共覆盖与历史归属 | Identity / Indexer / Verifier | 覆盖定义、轮换、同块顺序、未确认与 reorg 样例 |
+| §12.1/§12.4 编号与 Binding | Artifact / Indexer | 公开关联、Origin、编号与重组 fixtures |
+| §9.2.4 原执行恢复 | Wallet / Transaction Support | 固定版本的拒绝、中断、丢回执与重启恢复样例 |
+
+上述实施门禁保持开放；文档收敛不代表技术契约、真实钱包或主网已经验收。

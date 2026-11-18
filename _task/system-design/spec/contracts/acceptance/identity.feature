@@ -1,4 +1,4 @@
-# Sources: 核心认知.md §6.1/§6.4/§7.2-7.3/§10.8/§11.10/§11.17
+# Sources: 核心认知.md F-ID-01~05; §6.4/§7.2-7.3/§7.10-7.11/§9.2/§10.2/§10.8/§11.10/§11.17/§12.7-12.8
 # Review: R-01~R-06. All scenarios are design assertions; not executable tests.
 # @requires-indexer and @requires-mainnet are pending external evidence, not pass status.
 @identity @v0_4_0 @draft

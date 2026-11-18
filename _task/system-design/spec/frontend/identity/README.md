@@ -1,7 +1,7 @@
 # Frontend / Identity
 
 - **统一 v0.4.0 目标的实现指南（needs-review）**：[Identity 前端实现设计](实现设计-Identity-v0.4.0-20261117-175100.md)。
-- **共享领域模型**：[Domain / Identity](../../domain/identity/README.md)。
+- **核心模型与状态**：[核心认知](../../核心认知.md)；[Domain / Identity](../../domain/identity/README.md)提供用例与协作映射。
 - **共享支撑能力**：[钱包身份、交易执行及链/Ordinal 查询](../../domain/supporting/README.md)。
 - **钱包接入实施**：[钱包与交易执行实现设计](../supporting/实现设计-钱包与交易执行-v0.4.0-20261118-164032.md)。
 - **API / BDD**：[Contracts](../../contracts/README.md)。
