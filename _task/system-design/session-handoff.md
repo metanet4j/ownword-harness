@@ -8,6 +8,6 @@
 
 生产接入重点是高层接口未暴露跟踪引用、会话外 pending reference 恢复未实现，需验证持久记录关联与原交易补查。公共身份投影、历史验签、主链/reorg、Ordinal 历史、普通 Transfer 身份签名及编号/Binding 仍有实施门禁。当前设计不再要求 OwnWord 自建 Root 控制型初始化许可协议。
 
-支撑域 §8.1 已给出 Yours 锁定版广播、UTXO、Ord 的确切 API 与复用示例，新增四个依赖包哈希/导出/路由已核实；只读策略接口返回 200，未广播。静态检查见 progress.md；未执行 BDD、真实扩展或主网验收。前端仓库路径当前不存在，旧 SHA 只作记录，恢复后核对。其他原型与技能待审事项保持原状态；不读取 Archive 或 spec/draft。
+支撑域 §8.1 已给出 Yours 锁定版广播、UTXO、Ord 的 API 与复用示例，依赖包哈希/导出/路由已核实。§8.2 补入公共 API 接入与鉴权：匿名查询已返回 200，Swagger 133 条路径可解析；管理 X-Api-Key、BRC-103/104 与公共查询分别处理，未找到自助发 Key 流程，Bearer/固定额度说明未作为生产契约。静态检查见 progress.md；未执行广播、管理/付费请求、浏览器 CORS/POST 预检、BDD、真实扩展或主网验收。前端仓库路径当前不存在，旧 SHA 只作记录，恢复后核对。其他原型与技能待审事项保持原状态；不读取 Archive 或 spec/draft。
 
 唯一下一步：用户复核当前设计后，按支撑域 A→B→C→D 顺序，先固定生产依赖与接口 fixtures，再验证钱包正常/拒绝/中断/丢回执/重启恢复。批准发布前维持 approvedForRelease=false、specSnapshot=null。

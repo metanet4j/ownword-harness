@@ -94,6 +94,22 @@ referenceEvidence:
     path: reference/1sat-sdk
     observedActionsVersion: 0.0.221
     equivalentToYoursRuntime: false
+  oneSatPublicApiAccess:
+    host: https://api.1sat.app
+    observedOn: "2026-11-18"
+    serverSource: reference/1sat-stack
+    serverSourceCommit: 3d4062a1fffef1b10af5c9e97d5d22c1996c42fb
+    hostedDeploymentCommit: unknown
+    anonymousReadsVerified: true
+    verifiedReadRoutes: [capabilities, health, arcade-policy, chaintracks-tip, txo-search]
+    swaggerPaths: 133
+    swaggerParsed: true
+    browserCorsVerified: response-headers-only
+    anonymousBroadcast: source-route-only-not-executed
+    publicKeyApplication: no-public-self-service-process-found
+    hostedRateLimitsAndSla: operator-confirmation-required
+    staticOperatorKeyHeader: X-Api-Key
+    staticOperatorKeyScope: node-management-not-public-dapp-credential
   productionDependencyLock: pending
 
 modules:

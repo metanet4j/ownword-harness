@@ -39,7 +39,7 @@
         "已只读核查 Yours 锁定的 @1sat/actions 0.0.212、wallet-toolbox-client 2.12.0 发布包；两者 SHA-512 均与 bun.lock 一致。确认身份 Action 默认路径内部 signAction→processAction→postBeef，返回 tx 为 Atomic BEEF。",
         "支撑域 §4.4 明确返回 Atomic BEEF 提取、按 TxID 补查原字节、重算 TxID 和保存 rawTx；明确高层未返回 actionId/reference 与会话外 pending reference 恢复缺口。",
         "Identity 18 个场景（Outline 含 8 行样例）、支撑域 16 个、Artifact 2 个均具 Given/When/Then；仅设计结构检查，未执行场景。",
-        "JSON 可解析；Manifest/OpenAPI 严格 YAML 解析无警告；OpenAPI 保留 5 条路由、22 个 Schema、61 处内部引用无悬空。当前 17 份 Markdown 的 193 个相对引用及围栏检查通过；本轮锁定 API 取证见 currentChange。",
+        "JSON 可解析；Manifest/OpenAPI 严格 YAML 解析无警告；OpenAPI 保留 5 条路由、22 个 Schema、61 处内部引用无悬空。当前 17 份 Markdown 的 200 个相对引用及围栏检查通过；API 方法映射见支撑域 §8.1，当前接入鉴权取证见 currentChange。",
         "未修改生产代码、原型、参考仓库或依赖；未执行真实钱包、Java/TS 运行、主网广播或重组实验；发布批准仍为 false，specSnapshot 为 null。"
       ],
       "nextStep": "用户复核支撑边界和固定版本调用链；按支撑域 A→B→C→D 的同一 v0.4.0 范围推进接口 fixtures 与真实钱包集成。",
@@ -48,28 +48,31 @@
         "公共 BAP 事件投影、历史签名归属、主链/reorg 和 Ordinal 历史 fixtures 待实施；普通 Transfer 身份签名、编号、Binding 和类型一致性门禁保留。"
       ],
       "currentChange": {
-        "id": "yours-support-api-reuse",
+        "id": "onesat-public-api-access",
         "status": "needs-review",
-        "goal": "依据 Yours 锁定发布包核实广播、UTXO、Ord 查询的 API 地址与 SDK 入口，补入现有支撑域，给出直接复用方式。",
-        "scope": "现有支撑域技术映射、Manifest 及任务状态；只读参考源码和公开策略接口，不修改或安装业务依赖。",
+        "goal": "核实 api.1sat.app 的 SDK 接入、公共接口鉴权、密钥用途及申请依据，补入现有支撑域。",
+        "scope": "支撑域、Manifest 与任务状态；只读锁定发布包、参考源码和官方公共 GET 接口，不广播或申请账号。",
         "dependencies": [
-          "用户要求核实 Yours 实际使用的 API 以复用",
-          "Yours package.json/bun.lock 与已核实的 Actions/Toolbox 调用链"
+          "用户明确要求写入领域支撑设计并核实如何接入、是否需要密钥及如何申请",
+          "已核实 Yours 锁定 Client 0.0.51 的实际 API 路径",
+          "reference/1sat-stack 实际路由与鉴权实现、官方说明和匿名只读请求"
         ],
         "doneCriteria": [
-          "四个新增锁定发布包与 bun.lock 哈希一致，核实默认主机、广播/状态、UTXO、Ord 查询及钱包动作边界",
-          "现有设计记录实际版本差异、方法/HTTP 路径、复用示例与只读验证范围",
-          "JSON/YAML/相对链接/差异检查通过，仅提交本次文档，保持 needs-review"
+          "设计给出可复用包、SDK/HTTP 接入与基址，区分公共 API、BRC-103/104、节点管理密钥和上游凭据",
+          "明确匿名实测范围、未广播限制、Bearer/额度说明冲突与公开申请入口的核实结果",
+          "JSON/YAML/链接与差异检查通过，只提交本次文档，人工复核前保持 needs-review"
         ],
-        "implementationStatus": "locked-api-source-verified-and-documented",
-        "output": "_task/system-design/spec/domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md#81-yours-实际-api-与可复用入口",
+        "output": "_task/system-design/spec/domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md#82-api1satapp-接入与鉴权",
         "evidence": [
-          "Client 0.0.51、Types 0.0.43、Wallet 0.0.106、Wallet Browser 0.0.92 的只读发布包哈希均与 Yours bun.lock 一致，Manifest 已记录。",
-          "断言核实公开导出、默认 host、postBeef→submitToStack 的 /1sat/tx 路径、状态、TXO、BEEF、OrdFS 和链 tip；区分独立 SDK 的 Arcade 实现。",
-          "只读 GET /1sat/arcade/policy 返回 HTTP 200；/health 返回 404。未广播交易，未做用户资产或真实钱包操作。",
-          "Manifest 严格 YAML 解析无警告，发布门禁不变；17 份 Markdown 的 193 个相对引用及围栏检查通过；JSON 与 git diff --check 通过。"
+          "支撑域 §8.1/8.2 记录 SDK 仓库、显式基址、匿名 HTTP 示例，以及公共接口/BRC-103/104/节点管理 Key/上游凭据的边界。",
+          "只读核实 Client 0.0.51 的 BaseClient 与 Types 0.0.43 的 ClientOptions；无内置 API Key 或默认鉴权头。Stack 路由、认证和管理守卫已核实，源码提交记录于 Manifest，线上部署 SHA 未知。",
+          "不带 Authorization、X-Api-Key、Cookie 的 capabilities/health/policy/chain tip/公开地址 TXO GET 均返回 200；Swagger 完整取得并解析为 133 条路径，无全局 security。首次部分请求超时，只读重试后成功。",
+          "已核查 GET 的跨域响应头；未执行浏览器验收、广播 POST 或任何管理/付费请求。未确认托管额度、SLA 或 Bearer Key 申请机制；说明中的固定额度未作为生产契约。",
+          "未找到公共自助申请入口；设计给出官方联系渠道与自建节点运营者配置方式，不申请账号或发送消息。",
+          "JSON 与 Manifest/OpenAPI 严格 YAML 解析通过，17 份 Markdown 的 200 个相对引用及围栏检查通过；git diff --check 通过，发布门禁未改变。"
         ],
-        "nextStep": "按 §8.1 复用 Wallet Actions 与 OneSatServices；实施前补真实 API fixtures、授权/恢复及查询覆盖验证。"
+        "nextStep": "复核支撑域 §8.2；实施时固定生产依赖并补查询/广播 fixtures，如需专属额度再向运营方确认服务条件。",
+        "implementationStatus": "public-access-source-and-anonymous-reads-verified"
       }
     },
     {
