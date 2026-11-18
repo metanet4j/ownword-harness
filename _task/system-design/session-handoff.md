@@ -12,4 +12,6 @@ v0.2.0 内容集成设计已获批准，本地功能与技术验收已完成；�
 
 静态路径与链接检查通过；OpenAPI 仅为 Identity/TransactionSync 子集草案，BDD 尚未实现 Step Definition；未执行运行时或主网验证，未锁定发布 Tag。完成证据见 `feature_list.json` 的 `system-design-unified-version-v040` 与 `progress.md`。
 
-唯一下一步：用户评审统一版本清单与 Identity 跨端领域/实现分工，决定是否批准文档基线；之后继续既有视觉复核和真实网络验收门禁。
+已完成 Identity 跨端 DDD 静态技术 Review，参见 [Identity v0.4.0 评审报告](spec/domain/identity/评审报告-Identity-v0.4.0-20261118-103500.md)。结论为 Changes Requested，P0×1、P1×5、P2×3；首要阻塞是没有公开投影的初始主网 BAP 身份无法进入发布流程。任务 `review-identity-cross-end-v040` 已记录，原领域设计与统一版本清单仍保持 needs-review，未改动业务代码，未执行真实钱包/主网验收。
+
+唯一下一步：评审并确定 R-01 首次 BAP Identity 发布的领域决策（区分公共存在性验证与初始化操作资格），完成设计与集成证据后再处理 R-02～R-06 的跨端契约和历史签名问题。
