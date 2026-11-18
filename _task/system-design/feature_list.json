@@ -9,7 +9,7 @@
     "done",
     "archived"
   ],
-  "activeItem": "remediate-identity-design-review-v040",
+  "activeItem": null,
   "features": [
     {
       "id": "prototype-visual-alignment-v010-v030",
@@ -637,7 +637,7 @@
     {
       "id": "remediate-identity-design-review-v040",
       "name": "调整 v0.4.0 Identity 跨端设计文档（Review 整改）",
-      "status": "in-progress",
+      "status": "needs-review",
       "goal": "根据 Review R-01~R-08 修正 DDD 共享模型、前后端实现指南、OpenAPI 草案和 BDD，让后续开发能按统一领域语言实现与验证。",
       "scope": "仅 _task/system-design/spec 下当前 Identity/Contract 文档与任务记录；不改核心认知的既定产品事实、真实前后端代码或原型。",
       "dependencies": [
@@ -658,10 +658,26 @@
       "prdVersion": "v0.4.0",
       "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
       "output": "_task/system-design/spec/domain/identity/领域设计-Identity-v0.4.0-20261117-175100.md",
-      "reviewStatus": "awaiting-user-review",
-      "implementationStatus": "documentation-in-progress",
-      "evidence": [],
-      "nextStep": "修订共享领域模型与跨端技术契约，再同步前后端开发指南、BDD和 Review 跟踪。"
+      "reviewStatus": "design-revised-awaiting-user-and-protocol-evidence",
+      "implementationStatus": "documentation-revised-no-code-or-runtime-tests",
+      "evidence": [
+        "_task/system-design/spec/domain/identity/领域设计-Identity-v0.4.0-20261117-175100.md（独立初始化资格/查询事实、字段归属、Rotation 历史签名、Explorer 归属和追溯）",
+        "_task/system-design/spec/frontend/identity/实现设计-Identity-v0.4.0-20261117-175100.md（DTO 映射、UseCase 迁移与恢复）",
+        "_task/system-design/spec/backend/identity/实现设计-Identity-v0.4.0-20261117-175100.md（Root/历史覆盖端口、密钥时点验证、API 兼容）",
+        "_task/system-design/spec/contracts/openapi/ownword.yaml（5 existing routes; 22 schemas; 61 $refs checked, no dangling refs）",
+        "_task/system-design/spec/contracts/acceptance/identity.feature（18 design-level scenarios + 8 outline examples; not executed）",
+        "_task/system-design/spec/versions/v0.4.0.yaml（designRemediation and unresolved release gates; specSnapshot null）",
+        "Static validation: 8 Markdown files, 77 relative links resolve, no unbalanced fences; no YAML strict parser, OpenAPI validator, Java/TypeScript tests or mainnet checks executed"
+      ],
+      "nextStep": "用户评审本轮 v0.4.0 Identity 设计修订；优先让 Wallet/Indexer/Java 确认 R-01 初始化资格所需的公共历史证据，随后实施和验证 R-02~R-06。主网门禁未关闭前保持 needs-review。",
+      "pendingDecisions": [
+        "R-01 P0 runtime: public BAP historical coverage or security-approved Root initialization protocol to grant ALLOW on mainnet",
+        "R-03: BapIdentity.type and BapProfile.type synchronization/authorization policy and real schema fixtures",
+        "R-04: signing-time RotationHistoryResolver and historical/reorg proof vectors",
+        "R-05: real Java/TS response fixture comparison, strict OpenAPI validation, DTO union completeness and error handling",
+        "R-06: Gherkin Step Definition implementation + integration tests, mock vs mainnet evidence",
+        "R-09: reviewed design, locked specSnapshot and cross-repository release SHA"
+      ]
     }
   ]
 }
