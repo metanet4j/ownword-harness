@@ -66,6 +66,19 @@ modules:
     implementation: production-not-verified
     evidence: _task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md
 
+designRemediation:
+  status: design-drafted-awaiting-user-and-protocol-review
+  reviewSource: _task/system-design/spec/domain/identity/评审报告-Identity-v0.4.0-20261118-103500.md
+  identityDomain: _task/system-design/spec/domain/identity/领域设计-Identity-v0.4.0-20261117-175100.md
+  contract: _task/system-design/spec/contracts/openapi/ownword.yaml
+  acceptance: _task/system-design/spec/contracts/acceptance/identity.feature
+  knownBlockers:
+    - mainnet-initialization-history-or-reviewed-root-control-protocol
+    - signing-time-key-rotation-verifier
+    - profile-type-identity-type-change-contract
+    - strict-openapi-validation-and-java-typescript-fixtures
+  testsExecuted: false
+
 releaseGates:
   - id: user-review
     status: open
