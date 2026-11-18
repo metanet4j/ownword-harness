@@ -258,19 +258,15 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 /* ---------- 无脚本兜底 ----------
    iPhone「文件」App 的快速查看只渲染 HTML/CSS、不执行 JavaScript，连表单控件的
    交互也不可靠。因此这里不放任何需要"点一下才出现"的东西：
-   目录直接排进正文流（封面之后一块常驻目录），跳转是原生 a[href="#"]。
+   窄屏下目录直接排进正文最前面（不论脚本能否运行），跳转是原生 a[href="#"]。
    必须有脚本的功能（字号/主题/搜索/阅读进度/编号网格）整块隐去，不留死按钮。 */
 /* [hidden] 要靠作者样式兜住：下面几条 display 规则会把它覆盖掉 */
 .numgrid[hidden],.toc[hidden]{display:none!important}
 .nojs #btnMenu{display:none}
 .inline-toc{display:none}
-.nojs .inline-toc{display:block;margin:var(--s6) 0 var(--s5);padding:var(--s4) 0 var(--s5);
-  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 .inline-toc-head{display:flex;align-items:baseline;gap:var(--s3);margin:0 0 var(--s3);
   font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--accent)}
 .inline-toc-head span{font-size:11px;font-weight:400;letter-spacing:.02em;color:var(--muted)}
-.nojs .inline-toc .toc{display:block;overflow:visible;padding:0}
-.nojs .inline-toc .toc-item{min-height:40px}
 .nojs #numgrid{display:none!important}
 .nojs .tab,.nojs .search-wrap,.nojs .to-top,.nojs .progress,
 .nojs #btnSize,.nojs #btnTheme{display:none!important}
@@ -279,16 +275,19 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   .js .sidebar,.nojs .sidebar{display:none}
   /* 抽屉打开时侧栏才出现 */
   .js .sidebar.on{display:flex}
-  .js .toc-copy,.js .numgrid-copy{display:none!important}
-  /* 侧栏原装那份目录只在桌面端用；手机端用克隆那份，别用 !important 误伤克隆 */
+  /* 侧栏原装那份目录只在桌面端用；窄屏用正文里那份，别用 !important 误伤 */
   .js .sidebar .toc:not(.toc-clone){display:none}
   .js .toc-clone{display:block;flex:1;overflow-y:auto;touch-action:pan-y;
     padding:0 var(--s2) var(--s3) var(--s3)}
   .js .numgrid-clone{flex:1;overflow-y:auto;touch-action:pan-y;padding:0 var(--s3) var(--s3)}
-}
-@media (min-width:1024px){
-  /* 桌面端左侧目录常驻，正文不再重复一份 */
-  .nojs .inline-toc{display:none}
+  /* 窄屏（放不下常驻侧栏）一律把目录排进正文最前面：
+     不论脚本能不能跑、不论在浏览器还是快速查看里，打开就能看到 */
+  .inline-toc{display:block;margin:0 0 var(--s5);padding:var(--s4) 0 var(--s5);
+    border-bottom:1px solid var(--rule)}
+  .inline-toc .toc{display:block;overflow:visible;padding:0;flex:none}
+  .inline-toc .toc-item{min-height:40px}
+  /* 抽屉里已有同一份目录，正文这份够用即可 */
+  .inline-toc .toc-kids{display:none}
 }
 @media print{
   .sidebar,.bar,.progress,.scrim,.to-top,.pager,.cover-actions,.side-foot,
