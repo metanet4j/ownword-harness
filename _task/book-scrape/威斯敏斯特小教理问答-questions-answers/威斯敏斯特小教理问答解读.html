@@ -202,6 +202,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 .chapter-body p{margin:0 0 .92em;text-indent:2em;text-align:justify;line-break:strict;color:var(--ink-2)}
 .chapter-body .verses{white-space:pre-line;margin:0 0 .92em;color:var(--ink-2)}
 .chapter-body p.verse{text-indent:0;padding-left:2.9em;position:relative;scroll-margin-top:76px}
+.chapter-body p.verse span[id]{display:inline;scroll-margin-top:76px}
 .chapter-body p.verse .vnum{position:absolute;left:0;top:0;min-width:2em;font-family:var(--sans);
   font-size:.7em;font-weight:600;line-height:2.35;color:var(--accent);text-decoration:none;letter-spacing:.02em}
 .chapter-body p.verse .vnum:hover{text-decoration:underline}
@@ -238,6 +239,26 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 .toc-ch:hover{border-color:var(--accent-2);color:var(--accent)}
 .toc-ch.current{border-color:var(--accent);background:var(--accent-wash);color:var(--accent);font-weight:700}
 .toc-books{display:flex;flex-direction:column}
+/* 全文检索结果：卷章 + 命中节的经文片段，点一条直接落到该节 */
+.search-results{flex:1;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;
+  padding:0 var(--s2) var(--s3) var(--s3);font-family:var(--sans)}
+.search-results[hidden]{display:none!important}
+.sr-head{margin:var(--s2) 0 var(--s2);font-size:11.5px;letter-spacing:.1em;color:var(--muted)}
+.sr-hit{display:block;padding:.5em .6em;margin:0 0 4px;border:1px solid var(--rule);border-radius:var(--r1);
+  background:var(--card);text-decoration:none;color:var(--ink)}
+.sr-hit:hover{border-color:var(--accent-2)}
+.sr-ref{display:block;font-size:12px;font-weight:700;color:var(--accent)}
+.sr-text{display:block;margin-top:2px;font-family:var(--serif);font-size:13px;line-height:1.65;color:var(--ink-2);
+  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.sr-text mark{background:var(--accent-wash);color:var(--accent);padding:0 .1em}
+.sr-more{margin:.3em 0 0;font-size:11.5px;color:var(--muted)}
+/* 目录里的「跳到本节」：每章展开后可按节选 */
+.toc-jumprow{display:flex;align-items:center;gap:5px;padding:0 0 .6em}
+.toc-jumprow input{width:4em;padding:.25em .4em;border:1px solid var(--rule);border-radius:var(--r1);
+  background:var(--card);color:var(--ink);font:inherit;font-size:12px;text-align:center}
+.toc-jumprow button{padding:.25em .55em;border:1px solid var(--rule);border-radius:var(--r1);
+  background:var(--card);color:var(--ink);font:inherit;font-size:12px;cursor:pointer}
+.toc-jumprow span{font-size:11px;color:var(--muted)}
 .chapter-body h2{display:flex;flex-wrap:wrap;align-items:baseline;gap:.7em;
   margin:2.1em 0 .85em;padding-top:1.15em;border-top:1px solid var(--rule);
   font-family:var(--sans);font-size:1.14em;font-weight:700;line-height:1.6;scroll-margin-top:70px}
@@ -422,6 +443,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         <circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
       <input class="search" id="search" type="search" placeholder="搜索问答或解读标题" autocomplete="off">
     </div>
+    <div class="search-results" id="searchResults" hidden aria-live="polite"></div>
     <nav class="toc" id="toc">
 <div class="toc-part">简介</div>
 <div class="toc-group">
@@ -5994,56 +6016,134 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     var posText = $('posText');
     var lastId = null, lastHead = null, ticking = false;
 
+    // 建一份「节 → 卷章」索引，供全文检索用；按需构建，只建一次
+    var verseIndex = null;
+    function buildVerseIndex() {
+      if (verseIndex) return verseIndex;
+      var list = [];
+      sections.forEach(function (sec) {
+        var book = sec.querySelector('.kicker');
+        var title = sec.getAttribute('data-title') || '';
+        list.push({
+          sec: sec,
+          id: sec.id,
+          vid: sec.getAttribute('data-vid') || '',
+          book: book ? book.textContent : '',
+          title: title,
+          // 章号：从「创世记 第1章」里取
+          chap: (function () {
+            var m = /第(\d+)章/.exec(title);
+            return m ? Number(m[1]) : 0;
+          }())
+        });
+      });
+      verseIndex = list;
+      return verseIndex;
+    }
+
+    // 目录里的「章:节」直达：在搜索框输 约11:35 / 约11 35 这类写法也能跳
+    function parseRef(q) {
+      var m = /^([\u4e00-\u9fa5]{1,8})\s*(\d+)\s*[:：\s]\s*(\d+)$/.exec(q);
+      if (!m) return null;
+      return {book: m[1], chap: Number(m[2]), verse: Number(m[3])};
+    }
+
+    function renderVerseSearch(q, results) {
+      var chapters = buildVerseIndex();
+      var hits = [];
+      var MAX = 200;
+      if (!q) {
+        results.hidden = true;
+        results.innerHTML = '';
+        toc.hidden = false;
+        return;
+      }
+      var ref = parseRef(q);
+      if (ref) {
+        // 精确「卷 章:节」直接当一条结果
+        var found = null;
+        chapters.forEach(function (info) {
+          if (found) return;
+          if (info.book.toLowerCase().indexOf(ref.book.toLowerCase()) >= 0
+              && info.chap === ref.chap
+              && document.getElementById(info.vid + '_' + ref.verse)) {
+            found = {
+              id: info.vid + '_' + ref.verse,
+              ref: info.title + ':' + ref.verse,
+              text: document.getElementById(info.vid + '_' + ref.verse)
+                .parentNode.textContent
+            };
+          }
+        });
+        if (found) hits.push(found);
+      }
+      // 章级匹配：卷名或「第N章」
+      var chapNum = (function () {
+        var m = /^第?\s*(\d+)\s*章?$/.exec(q);
+        return m ? Number(m[1]) : 0;
+      }());
+      chapters.forEach(function (info) {
+        var bookMatch = info.book.toLowerCase().indexOf(q) >= 0;
+        var chapMatch = chapNum && info.chap === chapNum;
+        if (bookMatch || chapMatch) {
+          hits.push({id: info.id, ref: info.title, text: '', whole: true});
+        }
+      });
+      // 节级匹配：逐章扫经文
+      if (hits.length < MAX) {
+        chapters.forEach(function (info) {
+          if (hits.length >= MAX) return;
+          var nodes = info.sec.querySelectorAll('p.verse');
+          Array.prototype.forEach.call(nodes, function (p) {
+            if (hits.length >= MAX) return;
+            var text = p.textContent;
+            if (text.toLowerCase().indexOf(q) < 0) return;
+            var num = (p.querySelector('.vnum') || {}).textContent || '';
+            hits.push({
+              id: p.getAttribute('data-verse'),
+              ref: info.title + ':' + num,
+              text: text,
+              node: p
+            });
+          });
+        });
+      }
+
+      var parts = [];
+      parts.push('<p class="sr-head">' + (hits.length
+        ? hits.length + ' 处命中' + (hits.length >= MAX ? '（只列前 ' + MAX + ' 处）' : '')
+        : '没有找到「' + q.replace(/[<>&]/g, '') + '」') + '</p>');
+      hits.forEach(function (hit) {
+        var label = hit.ref;
+        var snippet = '';
+        if (!hit.whole && hit.text) {
+          snippet = '<span class="sr-text">' + markText(hit.text, q) + '</span>';
+        }
+        parts.push('<a class="sr-hit" href="#' + hit.id + '">'
+          + '<span class="sr-ref">' + label + '</span>' + snippet + '</a>');
+      });
+      results.innerHTML = parts.join('');
+      results.hidden = false;
+      toc.hidden = true;
+    }
+
+    function markText(text, q) {
+      var safe = text.replace(/[&<>]/g, function (c) {
+        return {'&': '&amp;', '<': '&lt;', '>': '&gt;'}[c];
+      });
+      var lower = safe.toLowerCase();
+      var at = lower.indexOf(q);
+      if (at < 0) return safe;
+      return safe.slice(0, at) + '<mark>' + safe.slice(at, at + q.length) + '</mark>'
+        + safe.slice(at + q.length);
+    }
+
     function renderSearch(q) {
       q = q.trim().toLowerCase();
-      function pureNumber(text) {
-        // 「第7章」「7」「7章」都当第 7 章查
-        var m = /^第?\s*(\d+)\s*章?$/.exec(text.trim());
-        return m ? m[1] : null;
-      }
-      // 经文目录是「卷 → 章号」两级，没有 .toc-row，走另一套匹配
-      if (!rows.length) {
-        var bookHit = 0;
-        var books = Array.prototype.slice.call(toc.querySelectorAll('.toc-book'));
-        books.forEach(function (book) {
-          var summary = book.querySelector('summary');
-          var name = summary ? (summary.firstChild ? summary.firstChild.textContent : '') : '';
-          var chaps = Array.prototype.slice.call(book.querySelectorAll('.toc-ch'));
-          var bookMatch = !!q && name.toLowerCase().indexOf(q) >= 0;
-          var chapHit = 0;
-          chaps.forEach(function (a) {
-            var shownNumber = a.textContent.trim();
-            var on = !!q && shownNumber === pureNumber(q);
-            a.hidden = !!q && !bookMatch && !on;
-            if (on) chapHit++;
-          });
-          var show = !q || bookMatch || chapHit > 0;
-          book.hidden = !show;
-          if (show && q) bookHit++;
-          var details = book.querySelector('details');
-          if (details) details.open = !q || show;
-        });
-        Array.prototype.forEach.call(toc.querySelectorAll('.toc-part'), function (p) {
-          var sib = p.nextElementSibling, any = false;
-          while (sib && !sib.classList.contains('toc-part')) {
-            if (sib.classList.contains('toc-books')
-                && sib.querySelector('.toc-book:not([hidden])')) any = true;
-            sib = sib.nextElementSibling;
-          }
-          p.hidden = !!q && !any;
-        });
-        var emptyVerse = toc.querySelector('.toc-empty');
-        if (q && !bookHit) {
-          if (!emptyVerse) {
-            emptyVerse = document.createElement('p');
-            emptyVerse.className = 'toc-empty';
-            toc.appendChild(emptyVerse);
-          }
-          emptyVerse.textContent = '没有找到「' + q + '」';
-          emptyVerse.hidden = false;
-        } else if (emptyVerse) {
-          emptyVerse.hidden = true;
-        }
+      var results = $('searchResults');
+      // 经文模式：搜卷名、章号，也搜每一节的经文；命中直接列成可点的结果
+      if (!rows.length && results) {
+        renderVerseSearch(q, results);
         return;
       }
       var hit = 0;
@@ -6195,7 +6295,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       }
       if (history.replaceState) { history.replaceState(null, '', '#' + id); }
       target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      var block = (target.closest && target.closest('.verse')) || target;
+      var block = (target.closest && target.closest('.verse')) || target.parentNode || target;
       block.classList.add('hit');
       setTimeout(function () { block.classList.remove('hit'); }, 1800);
       input.blur();
@@ -6223,8 +6323,13 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       var re = /^(\d+)(?:[–\-—](\d+))?\s+([\s\S]*)$/;
       Array.prototype.forEach.call(blocks, function (block) {
         var sec = block.closest('.chapter');
-        var prefix = sec ? sec.id.replace(/^ch-/, 'v-') + '-' : '';
+        var prefix = sec ? (sec.getAttribute('data-vid') || '') + '_' : '';
         var lines = block.textContent.split(/\n+/);
+        // 静态节锚点要在重建段落时搬进新 <p>，不能随 textContent 一起清掉
+        var anchors = {};
+        Array.prototype.forEach.call(block.querySelectorAll('span[id]'), function (sp) {
+          anchors[sp.id] = sp;
+        });
         var frag = document.createDocumentFragment();
         lines.forEach(function (line) {
           line = line.replace(/^\s+|\s+$/g, '');
@@ -6239,22 +6344,19 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
           var start = Number(m[1]);
           var end = Number(m[2] || start);
           var label = start === end ? String(start) : start + '–' + end;
-          var id = prefix + start;
           var p = document.createElement('p');
           p.className = 'verse';
-          p.id = id;
+          p.setAttribute('data-verse', prefix + start);
+          for (var n = start; n <= end; n += 1) {
+            var sp = anchors[prefix + n];
+            if (sp) p.appendChild(sp);
+          }
           var a = document.createElement('a');
           a.className = 'vnum';
-          a.href = '#' + id;
+          a.href = '#' + prefix + start;
           a.textContent = label;
           p.appendChild(a);
           p.appendChild(document.createTextNode(m[3]));
-          for (var n = start + 1; n <= end; n += 1) {
-            var sp = document.createElement('span');
-            sp.className = 'vanchor';
-            sp.id = prefix + n;
-            p.appendChild(sp);
-          }
           frag.appendChild(p);
         });
         block.textContent = '';
@@ -6267,7 +6369,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         var count = Number(sec.getAttribute('data-vcount')) || max;
         var box = document.createElement('div');
         box.className = 'verse-jump';
-        box.setAttribute('data-prefix', sec.id.replace(/^ch-/, 'v-') + '-');
+        box.setAttribute('data-prefix', (sec.getAttribute('data-vid') || '') + '_');
         box.setAttribute('data-max', String(max));
         box.innerHTML = '<label>第 <input class="vjump-input" type="number" min="1" max="'
           + max + '" inputmode="numeric" placeholder="节号" aria-label="跳至本章第几节"> 节</label>'
@@ -6278,13 +6380,16 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         var staticCount = head.querySelector('.chapter-count');
         if (staticCount) staticCount.style.display = 'none';
       });
-      // 直接打开 #v-… 时浏览器在解析阶段找不到目标，生成后再补一次定位
-      if (/^#v-/.test(location.hash)) {
+      // 直接打开 #v1_35 这类节链接时，浏览器解析阶段锚点已在静态文本里，
+      // 但高亮与滚动定位要等段落生成后再补一次
+      if (/^#v\d+_/.test(location.hash)) {
         var target = document.getElementById(location.hash.slice(1));
         if (target) {
-          var block = target.closest('.verse') || target;
-          block.classList.add('hit');
-          setTimeout(function () { block.classList.remove('hit'); }, 1800);
+          var para = target.closest ? target.closest('.verse') : null;
+          if (para) {
+            para.classList.add('hit');
+            setTimeout(function () { para.classList.remove('hit'); }, 1800);
+          }
           jumpTo(location.hash);
         }
       }
