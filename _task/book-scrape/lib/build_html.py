@@ -238,6 +238,18 @@ def render_body(blocks, anchors, cid=None, verse_mode=False, slug=None):
     out = []
     sec = 0
     i = 0
+    verse_lines = []
+
+    def flush_verses():
+        """经文按「一行一节」输出，段落、锚点与跳转框交给页面脚本生成。
+
+        这样 31,000 多节不必各写一层 <p> 与 <a>，单文件体积能小四成；无脚本
+        时靠 white-space:pre-line 仍按行显示，节号就在行首。
+        """
+        if verse_lines:
+            out.append('<div class="verses">%s</div>' % '\n'.join(verse_lines))
+            verse_lines.clear()
+
     while i < len(blocks):
         block = blocks[i]
         kind = block['type']
@@ -247,16 +259,11 @@ def render_body(blocks, anchors, cid=None, verse_mode=False, slug=None):
                 start = int(v.group(1))
                 end = int(v.group(2) or start)
                 label = str(start) if start == end else f'{start}–{end}'
-                vid = f'v-{slug}-{start}'
-                # 一节排成两段时，末节也要有锚点，方便 #v-…-30 这样的链接与跳转
-                extra = ''.join(f'<span class="vanchor" id="v-{slug}-{n}"></span>'
-                                for n in range(start + 1, end + 1))
-                out.append(
-                    f'<p class="verse" id="{vid}">'
-                    f'<a class="vnum" href="#{vid}">{label}</a>'
-                    f'{render_inline(v.group(3), anchors)}{extra}</p>')
+                verse_lines.append(f'{label} {html.escape(v.group(3), quote=False)}')
                 i += 1
                 continue
+        if verse_lines:
+            flush_verses()
         if kind == 'h2' and cid:
             sec += 1
             out.append(render_block(block, anchors, f'{cid}-s{sec}'))
@@ -296,6 +303,7 @@ def render_body(blocks, anchors, cid=None, verse_mode=False, slug=None):
                 continue
         out.append(render_block(block, anchors))
         i += 1
+    flush_verses()
     return '\n'.join(out), sec
 
 
@@ -334,22 +342,16 @@ def render_chapter(ch, md, anchors, pager='', nav_top='', summary='', verse_mode
                 f'<h1 class="chapter-title">{html.escape(qtext, quote=False)}</h1>')
     else:
         head = f'<h1 class="chapter-title">{html.escape(title, quote=False)}</h1>'
-    jump = ''
+    attrs = ''
     if verses:
-        last = max(verses)
-        jump = ('<div class="verse-jump" data-prefix="v-%s-" data-max="%d">'
-                '<label>第 <input class="vjump-input" type="number" min="1" max="%d" '
-                'inputmode="numeric" placeholder="节号" aria-label="跳至本章第几节"> 节</label>'
-                '<button type="button" class="vjump-go">跳转</button>'
-                '<span class="verse-count" title="点节号可复制该节链接">共 %d 节</span></div>'
-                % (ch['slug'], last, last, len(verses)))
+        # 跳转框与节锚点都由页面脚本生成，这里只记最大节号与总节数
+        attrs = f' data-vmax="{max(verses)}" data-vcount="{len(verses)}"'
     parts = [
-        f'<section class="chapter" id="{cid}" data-title="{html.escape(title, quote=True)}">',
+        f'<section class="chapter" id="{cid}" data-title="{html.escape(title, quote=True)}"{attrs}>',
         nav_top,
         '<header class="chapter-head">',
         kicker,
         head,
-        jump,
         '</header>',
         summary,
         '<div class="chapter-body">',
@@ -720,6 +722,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 .qmark-w{font-family:var(--sans);font-size:.78em;font-weight:700;letter-spacing:.32em;color:var(--muted)}
 .chapter-title{margin:0;font-family:var(--sans);font-size:1.26em;line-height:1.55;font-weight:700;letter-spacing:.01em}
 .chapter-body p{margin:0 0 .92em;text-indent:2em;text-align:justify;line-break:strict;color:var(--ink-2)}
+.chapter-body .verses{white-space:pre-line;margin:0 0 .92em;color:var(--ink-2)}
 .chapter-body p.verse{text-indent:0;padding-left:2.9em;position:relative;scroll-margin-top:76px}
 .chapter-body p.verse .vnum{position:absolute;left:0;top:0;min-width:2em;font-family:var(--sans);
   font-size:.7em;font-weight:600;line-height:2.35;color:var(--accent);text-decoration:none;letter-spacing:.02em}
@@ -1523,6 +1526,79 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       var box = e.target.closest('.verse-jump');
       if (box) { verseJump(box); }
     });
+
+    // 经文模式：把每章「一行一节」的文本生成段落、节锚点与章首跳转框。
+    // 31,000 多节不在静态 HTML 里各写一层标记，单文件因此能小四成；
+    // 文本本来就在页面里，关掉脚本仍按行显示，只是没有节锚点。
+    (function initVerses() {
+      var blocks = document.querySelectorAll('.verses');
+      if (!blocks.length) return;
+      var re = /^(\d+)(?:[–\-—](\d+))?\s+([\s\S]*)$/;
+      Array.prototype.forEach.call(blocks, function (block) {
+        var sec = block.closest('.chapter');
+        var prefix = sec ? sec.id.replace(/^ch-/, 'v-') + '-' : '';
+        var lines = block.textContent.split(/\n+/);
+        var frag = document.createDocumentFragment();
+        lines.forEach(function (line) {
+          line = line.replace(/^\s+|\s+$/g, '');
+          if (!line) return;
+          var m = re.exec(line);
+          if (!m) {
+            var plain = document.createElement('p');
+            plain.textContent = line;
+            frag.appendChild(plain);
+            return;
+          }
+          var start = Number(m[1]);
+          var end = Number(m[2] || start);
+          var label = start === end ? String(start) : start + '–' + end;
+          var id = prefix + start;
+          var p = document.createElement('p');
+          p.className = 'verse';
+          p.id = id;
+          var a = document.createElement('a');
+          a.className = 'vnum';
+          a.href = '#' + id;
+          a.textContent = label;
+          p.appendChild(a);
+          p.appendChild(document.createTextNode(m[3]));
+          for (var n = start + 1; n <= end; n += 1) {
+            var sp = document.createElement('span');
+            sp.className = 'vanchor';
+            sp.id = prefix + n;
+            p.appendChild(sp);
+          }
+          frag.appendChild(p);
+        });
+        block.textContent = '';
+        block.appendChild(frag);
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('.chapter[data-vmax]'), function (sec) {
+        var head = sec.querySelector('.chapter-head');
+        if (!head) return;
+        var max = Number(sec.getAttribute('data-vmax')) || 0;
+        var count = Number(sec.getAttribute('data-vcount')) || max;
+        var box = document.createElement('div');
+        box.className = 'verse-jump';
+        box.setAttribute('data-prefix', sec.id.replace(/^ch-/, 'v-') + '-');
+        box.setAttribute('data-max', String(max));
+        box.innerHTML = '<label>第 <input class="vjump-input" type="number" min="1" max="'
+          + max + '" inputmode="numeric" placeholder="节号" aria-label="跳至本章第几节"> 节</label>'
+          + '<button type="button" class="vjump-go">跳转</button>'
+          + '<span class="verse-count" title="点节号可复制该节链接">共 ' + count + ' 节</span>';
+        head.appendChild(box);
+      });
+      // 直接打开 #v-… 时浏览器在解析阶段找不到目标，生成后再补一次定位
+      if (/^#v-/.test(location.hash)) {
+        var target = document.getElementById(location.hash.slice(1));
+        if (target) {
+          var block = target.closest('.verse') || target;
+          block.classList.add('hit');
+          setTimeout(function () { block.classList.remove('hit'); }, 1800);
+          jumpTo(location.hash);
+        }
+      }
+    })();
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
