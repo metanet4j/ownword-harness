@@ -7,8 +7,8 @@
 |---|---|---|---|
 | `metanet4j-parent/` | `dev` | `917b7bd` | https://github.com/metanet4j/metanet4j-parent.git |
 | `metanet4j-base/` | `dev` | `279a7a6` | https://github.com/metanet4j/metanet4j-base.git |
-| `metanet4j-sdk/` | `dev` | `bb298d0` | https://github.com/metanet4j/metanet4j-sdk.git |
-| `metanet4j-component/` | `dev` | `0078366` | https://github.com/metanet4j/metanet4j-component.git |
+| `metanet4j-sdk/` | `dev` | `51e1c7d` | https://github.com/metanet4j/metanet4j-sdk.git |
+| `metanet4j-component/` | `dev` | `c3eaba3` | https://github.com/metanet4j/metanet4j-component.git |
 | `metanet4j-bsv-sdk/` | `dev` | `f934cfd` | https://github.com/metanet4j/metanet4j-bsv-sdk.git |
 | `metanet4j-junglebus/` | `master` | `1272067` | https://github.com/metanet4j/metanet4j-junglebus.git |
 
