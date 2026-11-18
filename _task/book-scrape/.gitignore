@@ -2,3 +2,6 @@
 pylibs/
 __pycache__/
 get-pip.py
+
+# 分发打包产物（整本发到手机阅读用）不入库；随书产物为 <书名>.epub / <书名>.html
+*.zip
