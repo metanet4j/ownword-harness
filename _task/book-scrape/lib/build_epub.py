@@ -64,8 +64,13 @@ def xhtml_escape(text):
     return html.escape(text, quote=False)
 
 
-def chapter_filename(slug):
-    return 'c-' + slug + '.xhtml'
+def chapter_filename(slug, fnames):
+    """包内用纯 ASCII 文件名（EPUB 最佳实践）：标题与 id 仍保留中文。"""
+    return fnames[slug]
+
+
+def build_filenames(chapters):
+    return {ch['slug']: f'c-{i:04d}.xhtml' for i, ch in enumerate(chapters)}
 
 
 def sanitize(fragment):
@@ -97,7 +102,7 @@ def make_xhtml(title, body, css_href='style.css'):
             '</head>\n<body>\n' + body + '\n</body>\n</html>\n')
 
 
-def build_nav(manifest, chapters, cid_files):
+def build_nav(manifest, chapters, fnames):
     """EPUB3 导航文档：按 part → category → 章节 分三层，用栈保证标签闭合顺序。"""
     out = ['<nav epub:type="toc" id="toc">', '<h1>目录</h1>']
     stack = []          # 当前打开的结构：'ol' 或 'li'
@@ -113,7 +118,7 @@ def build_nav(manifest, chapters, cid_files):
     for ch in chapters:
         part = ch.get('part') or ''
         cat = ch.get('category') or ''
-        fname = chapter_filename(ch['slug'])
+        fname = chapter_filename(ch['slug'], fnames)
         title = xhtml_escape(ch['title'])
         if part != cur_part:
             close_to(0)
@@ -141,7 +146,7 @@ def build_nav(manifest, chapters, cid_files):
     return '\n'.join(out)
 
 
-def build_ncx(manifest, chapters):
+def build_ncx(manifest, chapters, fnames):
     """EPUB2 目录（Apple Books 新版不需要，老设备会读这个）。"""
     book = xhtml_escape(manifest.get('book', 'Book'))
     points, n = [], 0
@@ -155,7 +160,7 @@ def build_ncx(manifest, chapters):
             f'<content src="{src}"/></navPoint>')
 
     for ch in chapters:
-        add(ch['title'], chapter_filename(ch['slug']))
+        add(ch['title'], chapter_filename(ch['slug'], fnames))
     return ('<?xml version="1.0" encoding="utf-8"?>\n'
             '<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="zh-CN">\n'
             f'<head><meta name="dtb:uid" content="{book}"/></head>\n'
@@ -164,7 +169,7 @@ def build_ncx(manifest, chapters):
             '</ncx>\n')
 
 
-def build_opf(manifest, chapters, cid_files, book_id):
+def build_opf(manifest, chapters, fnames, book_id):
     book = xhtml_escape(manifest.get('book', 'Book'))
     items = ['<item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>',
              '<item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>',
@@ -173,7 +178,7 @@ def build_opf(manifest, chapters, cid_files, book_id):
     spine = ['<itemref idref="cover"/>']
     for i, ch in enumerate(chapters):
         iid = f'ch{i:04d}'
-        items.append(f'<item id="{iid}" href="{chapter_filename(ch["slug"])}" '
+        items.append(f'<item id="{iid}" href="{chapter_filename(ch["slug"], fnames)}" '
                      'media-type="application/xhtml+xml"/>')
         spine.append(f'<itemref idref="{iid}"/>')
     meta = [f'<dc:identifier id="bookid">{book_id}</dc:identifier>',
@@ -194,7 +199,7 @@ def build_opf(manifest, chapters, cid_files, book_id):
             '<spine toc="ncx">\n' + '\n'.join(spine) + '\n</spine>\n</package>\n')
 
 
-def build_cover(manifest, chapters):
+def build_cover(manifest, chapters, fnames):
     book = xhtml_escape(manifest.get('book', 'Book'))
     rows = []
     for key, label in (('author', '作者 / 解读'), ('translator', '翻译'),
@@ -206,7 +211,7 @@ def build_cover(manifest, chapters):
             + (f'<p class="nav">{xhtml_escape(manifest["title_en"])}</p>'
                if manifest.get('title_en') else '')
             + ''.join(rows)
-            + '<p class="nav"><a href="' + chapter_filename(chapters[0]['slug'])
+            + '<p class="nav"><a href="' + chapter_filename(chapters[0]['slug'], fnames)
             + '">开始阅读</a></p>')
     return make_xhtml(manifest.get('book', 'Book'), body)
 
@@ -249,7 +254,8 @@ def main():
     out_name = (manifest.get('docx', {}).get('filename') or manifest.get('book', 'book'))
     out_name = os.path.splitext(out_name)[0] + '.epub'
 
-    cid_files = {'ch-' + ch['slug']: chapter_filename(ch['slug']) for ch in chapters}
+    fnames = build_filenames(chapters)
+    cid_files = {'ch-' + ch['slug']: chapter_filename(ch['slug'], fnames) for ch in chapters}
     book_id = 'urn:uuid:' + str(uuid.uuid5(uuid.NAMESPACE_URL,
                                           manifest.get('book', 'book') + '|epub'))
 
@@ -260,7 +266,7 @@ def main():
             raise SystemExit(f'缺少章节文件: {path}')
         with open(path, encoding='utf-8') as f:
             md = f.read()
-        parts.append((chapter_filename(ch['slug']),
+        parts.append((chapter_filename(ch['slug'], fnames),
                       build_chapter_xhtml(ch, md, cid_files, chapters)))
 
     container = ('<?xml version="1.0" encoding="utf-8"?>\n'
@@ -274,14 +280,14 @@ def main():
         info.compress_type = zipfile.ZIP_STORED
         zf.writestr(info, 'application/epub+zip')
         zf.writestr('META-INF/container.xml', container)
-        zf.writestr('OEBPS/content.opf', build_opf(manifest, chapters, cid_files, book_id),
+        zf.writestr('OEBPS/content.opf', build_opf(manifest, chapters, fnames, book_id),
                     compress_type=zipfile.ZIP_DEFLATED)
-        zf.writestr('OEBPS/nav.xhtml', make_xhtml('目录', build_nav(manifest, chapters, cid_files)),
+        zf.writestr('OEBPS/nav.xhtml', make_xhtml('目录', build_nav(manifest, chapters, fnames)),
                     compress_type=zipfile.ZIP_DEFLATED)
-        zf.writestr('OEBPS/toc.ncx', build_ncx(manifest, chapters),
+        zf.writestr('OEBPS/toc.ncx', build_ncx(manifest, chapters, fnames),
                     compress_type=zipfile.ZIP_DEFLATED)
         zf.writestr('OEBPS/style.css', STYLE, compress_type=zipfile.ZIP_DEFLATED)
-        zf.writestr('OEBPS/cover.xhtml', build_cover(manifest, chapters),
+        zf.writestr('OEBPS/cover.xhtml', build_cover(manifest, chapters, fnames),
                     compress_type=zipfile.ZIP_DEFLATED)
         for fname, content in parts:
             zf.writestr('OEBPS/' + fname, content, compress_type=zipfile.ZIP_DEFLATED)
