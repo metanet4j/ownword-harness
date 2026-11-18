@@ -9,7 +9,7 @@
     "done",
     "archived"
   ],
-  "activeItem": "review-identity-cross-end-v040",
+  "activeItem": null,
   "features": [
     {
       "id": "prototype-visual-alignment-v010-v030",
@@ -595,7 +595,7 @@
     {
       "id": "review-identity-cross-end-v040",
       "name": "Review OwnWord v0.4.0 Identity 跨端 DDD 设计",
-      "status": "in-progress",
+      "status": "needs-review",
       "goal": "对照核心认知、共享领域设计、前端/后端实现指南、OpenAPI/BDD 及现有 Java/TypeScript 代码，输出有证据和优先级的技术评审结论。",
       "scope": "只读代码与设计检查；新增评审报告并同步任务记录，不修改业务源代码、原型或未经批准的领域事实。",
       "dependencies": [
@@ -616,10 +616,23 @@
       "prdVersion": "v0.4.0",
       "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
       "output": "_task/system-design/spec/domain/identity/评审报告-Identity-v0.4.0-20261118-103500.md",
-      "reviewStatus": "review-in-progress",
-      "implementationStatus": "not-applicable-review-only",
-      "evidence": [],
-      "nextStep": "阅读代码/规范，记录问题和关闭条件。"
+      "reviewStatus": "changes-requested-awaiting-remediation",
+      "implementationStatus": "review-report-delivered-no-code-changes",
+      "evidence": [
+        "_task/system-design/spec/domain/identity/评审报告-Identity-v0.4.0-20261118-103500.md",
+        "Review count: 9 findings (P0 1, P1 5, P2 3); static comparison of SSOT, Domain/Context Map, Frontend/Backend designs, TS and Java code, OpenAPI/BDD, v0.4.0 manifest",
+        "GitHub read-only path audit: review report 39 markdown links, 0 unresolved",
+        "Runtime tests, actual Wallet extension, public Indexer, and mainnet transactions were not executed"
+      ],
+      "nextStep": "Identity 域负责人评审 R-01 方案并补初始身份发布状态/授权表；随后按 R-02~R-06 补契约与验收证据。审核完成前 Domain 和 v0.4.0 发布基线继续 needs-review。",
+      "pendingDecisions": [
+        "R-01 P0: mainnet first-publication path blocks when IdentityResolution unknown; define eligible-to-initialize separately from verified-not-published",
+        "R-02 P1: unify Resolution transport-domain mapping including incomplete/stored/empty",
+        "R-03 P1: Identity/Profile type and description/image ↔ bio/imageUrl semantics",
+        "R-04 P1: rotation signing-time history and evidence ordering",
+        "R-05 P1: typed OpenAPI response/error/coverage and recovery endpoints",
+        "R-06 P1: cross-end BDD for initial publish/recovery/key rotation"
+      ]
     }
   ]
 }
