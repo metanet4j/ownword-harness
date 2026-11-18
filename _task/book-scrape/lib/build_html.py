@@ -341,7 +341,7 @@ def render_chapter(ch, md, anchors, pager='', nav_top='', summary='', verse_mode
                 '<label>第 <input class="vjump-input" type="number" min="1" max="%d" '
                 'inputmode="numeric" placeholder="节号" aria-label="跳至本章第几节"> 节</label>'
                 '<button type="button" class="vjump-go">跳转</button>'
-                '<span class="verse-count">共 %d 节</span></div>'
+                '<span class="verse-count" title="点节号可复制该节链接">共 %d 节</span></div>'
                 % (ch['slug'], last, last, len(verses)))
     parts = [
         f'<section class="chapter" id="{cid}" data-title="{html.escape(title, quote=True)}">',
@@ -1291,7 +1291,13 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       if (e.preventDefault) e.preventDefault();
       // 必须先恢复 body 滚动再定位：解锁时会把页面移回原位，反过来会覆盖跳转结果
       openSidebar(false);
-      jumpTo(a.getAttribute('href'));
+      var href = a.getAttribute('href');
+      jumpTo(href);
+      // 目录与编号网格的跳转改地址栏的 hash，章节链接才能直接分享
+      var id = decodeURIComponent(String(href).replace(/^#/, ''));
+      if (document.getElementById(id) && history.replaceState) {
+        history.replaceState(null, '', '#' + id);
+      }
     }
     bindTap(toc, handleJump);
     bindTap(numgrid, handleJump);

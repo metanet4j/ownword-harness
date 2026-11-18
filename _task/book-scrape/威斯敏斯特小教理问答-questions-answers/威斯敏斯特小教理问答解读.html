@@ -5884,7 +5884,13 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       if (e.preventDefault) e.preventDefault();
       // 必须先恢复 body 滚动再定位：解锁时会把页面移回原位，反过来会覆盖跳转结果
       openSidebar(false);
-      jumpTo(a.getAttribute('href'));
+      var href = a.getAttribute('href');
+      jumpTo(href);
+      // 目录与编号网格的跳转改地址栏的 hash，章节链接才能直接分享
+      var id = decodeURIComponent(String(href).replace(/^#/, ''));
+      if (document.getElementById(id) && history.replaceState) {
+        history.replaceState(null, '', '#' + id);
+      }
     }
     bindTap(toc, handleJump);
     bindTap(numgrid, handleJump);
