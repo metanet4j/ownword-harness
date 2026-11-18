@@ -34,6 +34,7 @@ INLINE_RE = re.compile(
 )
 INDEX_HEAD_RE = re.compile(r'^解读\s*(\d+)\s*[、，,.:：]?\s*(.*)$')
 QUESTION_RE = re.compile(r'^(\d+)\s*问\s*[：:]\s*(.*)$')
+VERSE_LINE_RE = re.compile(r'^(\d+)(?:[–\-—](\d+))?\s+(.*)$')
 
 
 # ---------------------------------------------------------------- Markdown 解析
@@ -232,7 +233,7 @@ def render_block(block, anchors, hid=None):
     return ''
 
 
-def render_body(blocks, anchors, cid=None):
+def render_body(blocks, anchors, cid=None, verse_mode=False, slug=None):
     """渲染章节正文，并把「答」「中英文问答」整理成独立块。"""
     out = []
     sec = 0
@@ -240,6 +241,22 @@ def render_body(blocks, anchors, cid=None):
     while i < len(blocks):
         block = blocks[i]
         kind = block['type']
+        if verse_mode and kind == 'p':
+            v = VERSE_LINE_RE.match(block['text'].strip())
+            if v:
+                start = int(v.group(1))
+                end = int(v.group(2) or start)
+                label = str(start) if start == end else f'{start}–{end}'
+                vid = f'v-{slug}-{start}'
+                # 一节排成两段时，末节也要有锚点，方便 #v-…-30 这样的链接与跳转
+                extra = ''.join(f'<span class="vanchor" id="v-{slug}-{n}"></span>'
+                                for n in range(start + 1, end + 1))
+                out.append(
+                    f'<p class="verse" id="{vid}">'
+                    f'<a class="vnum" href="#{vid}">{label}</a>'
+                    f'{render_inline(v.group(3), anchors)}{extra}</p>')
+                i += 1
+                continue
         if kind == 'h2' and cid:
             sec += 1
             out.append(render_block(block, anchors, f'{cid}-s{sec}'))
@@ -282,7 +299,7 @@ def render_body(blocks, anchors, cid=None):
     return '\n'.join(out), sec
 
 
-def render_chapter(ch, md, anchors, pager='', nav_top='', summary=''):
+def render_chapter(ch, md, anchors, pager='', nav_top='', summary='', verse_mode=False):
     """渲染一章：标题 + 章首导航 + 本章要点 + 正文 + 章末导航。"""
     blocks = parse_markdown(md)
     body = [b for b in blocks if b['type'] != 'h1']
@@ -298,7 +315,17 @@ def render_chapter(ch, md, anchors, pager='', nav_top='', summary=''):
         body = body[1:]
 
     cid = 'ch-' + ch['slug']
-    content, sec = render_body(body, anchors, cid)
+    verses = []
+    if verse_mode:
+        for b in body:
+            if b['type'] != 'p':
+                continue
+            v = VERSE_LINE_RE.match(b['text'].strip())
+            if v:
+                start = int(v.group(1))
+                end = int(v.group(2) or start)
+                verses.extend(range(start, end + 1))
+    content, sec = render_body(body, anchors, cid, verse_mode, ch['slug'])
     qnum, qtext = split_question(title)
     kicker = f'<p class="kicker">{html.escape(category, quote=False)}</p>' if category else ''
     if qnum:
@@ -307,12 +334,22 @@ def render_chapter(ch, md, anchors, pager='', nav_top='', summary=''):
                 f'<h1 class="chapter-title">{html.escape(qtext, quote=False)}</h1>')
     else:
         head = f'<h1 class="chapter-title">{html.escape(title, quote=False)}</h1>'
+    jump = ''
+    if verses:
+        last = max(verses)
+        jump = ('<div class="verse-jump" data-prefix="v-%s-" data-max="%d">'
+                '<label>第 <input class="vjump-input" type="number" min="1" max="%d" '
+                'inputmode="numeric" placeholder="节号" aria-label="跳至本章第几节"> 节</label>'
+                '<button type="button" class="vjump-go">跳转</button>'
+                '<span class="verse-count">共 %d 节</span></div>'
+                % (ch['slug'], last, last, len(verses)))
     parts = [
         f'<section class="chapter" id="{cid}" data-title="{html.escape(title, quote=True)}">',
         nav_top,
         '<header class="chapter-head">',
         kicker,
         head,
+        jump,
         '</header>',
         summary,
         '<div class="chapter-body">',
@@ -346,7 +383,9 @@ def build_toc_html(chapters, headings, root_attrs='class="toc" id="toc"'):
             cur_part, cur_cat = part, None
         if cat != cur_cat:
             if cat:
-                parts.append(f'<div class="toc-cat">{html.escape(cat, quote=False)}</div>')
+                # 分类名（圣经里是卷名）直接跳到该分类第一章，方便整卷定位
+                parts.append(f'<a class="toc-cat" href="#ch-{ch["slug"]}">'
+                             f'{html.escape(cat, quote=False)}</a>')
             cur_cat = cat
         cid = 'ch-' + ch['slug']
         parts.append(f'<div class="toc-row" data-target="{cid}">')
@@ -438,7 +477,7 @@ def build_index(chapters, headings):
 
 
 def page(meta, chapters_html, toc_html, numgrid_html, index_json, stats, filename, first_id,
-         inline_toc_html=''):
+         inline_toc_html='', search_hint='搜索问答或解读标题'):
     title = meta.get('book', '')
     cover_rows = [
         ('作者 / 解读', meta.get('author')),
@@ -476,6 +515,7 @@ def page(meta, chapters_html, toc_html, numgrid_html, index_json, stats, filenam
     page_html = page_html.replace('{{INDEX}}', index_json)
     page_html = page_html.replace('{{FIRST_ID}}', first_id)
     page_html = page_html.replace('{{FILENAME}}', html.escape(filename, quote=False))
+    page_html = page_html.replace('{{SEARCH_HINT}}', html.escape(search_hint, quote=False))
     return page_html
 
 TEMPLATE = r"""<!doctype html>
@@ -599,6 +639,8 @@ hr{border:none;border-top:1px solid var(--rule);margin:2em 0}
 .toc-part{margin:var(--s4) 0 var(--s1);padding-top:var(--s3);border-top:1px solid var(--rule);
   font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.16em;color:var(--accent)}
 .toc-cat{margin:var(--s3) 0 2px;padding-left:2px;font-family:var(--sans);font-size:12.5px;color:var(--muted)}
+.toc-cat{display:block;text-decoration:none;border-radius:var(--r1)}
+.toc-cat:hover{color:var(--accent);background:var(--accent-wash)}
 .toc-item{position:relative;display:flex;align-items:center;min-height:44px;padding:8px 10px 8px 12px;
   border-radius:var(--r1);font-family:var(--sans);font-size:14.5px;line-height:1.5;color:var(--ink);text-decoration:none}
 .toc-item:hover{background:var(--accent-wash)}
@@ -678,6 +720,22 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 .qmark-w{font-family:var(--sans);font-size:.78em;font-weight:700;letter-spacing:.32em;color:var(--muted)}
 .chapter-title{margin:0;font-family:var(--sans);font-size:1.26em;line-height:1.55;font-weight:700;letter-spacing:.01em}
 .chapter-body p{margin:0 0 .92em;text-indent:2em;text-align:justify;line-break:strict;color:var(--ink-2)}
+.chapter-body p.verse{text-indent:0;padding-left:2.9em;position:relative;scroll-margin-top:76px}
+.chapter-body p.verse .vnum{position:absolute;left:0;top:0;min-width:2em;font-family:var(--sans);
+  font-size:.7em;font-weight:600;line-height:2.35;color:var(--accent);text-decoration:none;letter-spacing:.02em}
+.chapter-body p.verse .vnum:hover{text-decoration:underline}
+.vanchor{scroll-margin-top:76px}
+.chapter-body p.verse:target,.chapter-body p.verse.hit{background:var(--accent-wash);
+  box-shadow:0 0 0 .3em var(--accent-wash);border-radius:3px}
+.verse-jump{display:flex;align-items:center;gap:.55em;margin:.9em 0 0;font-family:var(--sans);
+  font-size:12.5px;color:var(--muted)}
+.verse-jump input{width:4.4em;padding:.3em .45em;border:1px solid var(--rule);border-radius:var(--r1);
+  background:var(--card);color:var(--ink);font:inherit;text-align:center}
+.verse-jump button{padding:.3em .8em;border:1px solid var(--rule);border-radius:var(--r1);
+  background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
+.verse-jump button:hover{border-color:var(--accent-2);color:var(--accent)}
+.verse-jump input.miss{border-color:var(--accent);background:var(--accent-wash)}
+.nojs .verse-jump{display:none}
 .chapter-body h2{display:flex;flex-wrap:wrap;align-items:baseline;gap:.7em;
   margin:2.1em 0 .85em;padding-top:1.15em;border-top:1px solid var(--rule);
   font-family:var(--sans);font-size:1.14em;font-weight:700;line-height:1.6;scroll-margin-top:70px}
@@ -821,7 +879,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 }
 @media print{
   .sidebar,.bar,.progress,.scrim,.to-top,.pager,.cover-actions,.side-foot,
-  .inline-toc{display:none!important}
+  .inline-toc,.verse-jump{display:none!important}
   .to-toc{display:none!important}
   body{background:#fff;color:#000;font-size:11pt}
   main{max-width:none;padding:0}
@@ -848,7 +906,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     <div class="search-wrap">
       <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
-      <input class="search" id="search" type="search" placeholder="搜索问答或解读标题" autocomplete="off">
+      <input class="search" id="search" type="search" placeholder="{{SEARCH_HINT}}" autocomplete="off">
     </div>
     {{TOC}}
     {{NUMGRID}}
@@ -1426,6 +1484,40 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         if (hid !== lastHead) { lastHead = hid; markHead(head); }
       });
     }
+    // 经文跳转：每章一个「第 N 节」输入框；节号本身也是锚点，可直接分享 #v-… 链接
+    function verseJump(box) {
+      var input = box.querySelector('.vjump-input');
+      var max = parseInt(box.getAttribute('data-max'), 10) || 0;
+      var n = parseInt(input.value, 10);
+      if (!n || n < 1 || n > max) { input.value = ''; input.focus(); return; }
+      var id = box.getAttribute('data-prefix') + n;
+      var target = document.getElementById(id);
+      if (!target) {
+        input.classList.add('miss');
+        setTimeout(function () { input.classList.remove('miss'); }, 1200);
+        return;
+      }
+      if (history.replaceState) { history.replaceState(null, '', '#' + id); }
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var block = (target.closest && target.closest('.verse')) || target;
+      block.classList.add('hit');
+      setTimeout(function () { block.classList.remove('hit'); }, 1800);
+      input.blur();
+    }
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest ? e.target.closest('.vjump-go') : null;
+      if (!btn) { return; }
+      var box = btn.closest('.verse-jump');
+      if (box) { e.preventDefault(); verseJump(box); }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' || !e.target.classList
+          || !e.target.classList.contains('vjump-input')) { return; }
+      e.preventDefault();
+      var box = e.target.closest('.verse-jump');
+      if (box) { verseJump(box); }
+    });
+
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
 
@@ -1445,6 +1537,7 @@ def main():
     meta = {k: v for k, v in manifest.items() if k in
             ('book', 'title_en', 'author', 'translator', 'publisher_en', 'source')}
     chapters = manifest['chapters']
+    verse_mode = bool(manifest.get('site', {}).get('verses'))
 
     anchors = {f"{ch['slug']}.md": 'ch-' + ch['slug'] for ch in chapters}
 
@@ -1489,7 +1582,8 @@ def main():
             summary = ('<nav class="chapter-sum" aria-label="本章要点">'
                        '<span class="sum-label">本章要点</span>' + links + '</nav>')
 
-        rendered, _ = render_chapter(ch, md, anchors, pager, ''.join(nav_top), summary)
+        rendered, _ = render_chapter(ch, md, anchors, pager, ''.join(nav_top), summary,
+                                     verse_mode)
         if '问' in ch['title']:
             questions += 1
         parts.append(rendered)
@@ -1505,14 +1599,16 @@ def main():
     numgrid_inline = (build_numgrid(chapters, 'class="numgrid" id="numgrid-inline"')
                       if has_numbers else '')
     inline_toc = ('<section class="inline-toc" id="inline-toc" aria-label="目录">'
-                  '<p class="inline-toc-head">目录 <span>点标题或问号即可跳转</span></p>'
+                  '<p class="inline-toc-head">目录 <span>%s</span></p>'
+                  % ('点标题或问号即可跳转' if has_numbers else '点标题即可跳转')
                   + numgrid_inline
                   + build_toc_html(chapters, headings, 'class="toc toc-copy"')
                   + '</section>')
     out = page(meta, '\n'.join(parts), build_toc_html(chapters, headings),
                build_numgrid(chapters) if has_numbers else '',
                build_index(chapters, headings), stats, filename,
-               'ch-' + chapters[0]['slug'], inline_toc)
+               'ch-' + chapters[0]['slug'], inline_toc,
+               search_hint='搜索章节标题' if verse_mode else '搜索问答或解读标题')
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(out)
     print(f'saved {filename}  chapters={len(chapters)}  size={os.path.getsize(filename) // 1024}KB')

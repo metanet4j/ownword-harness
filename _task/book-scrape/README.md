@@ -59,6 +59,7 @@ cd _task/book-scrape
 python3 lib/fetch_bible.py "圣经-和合本-bible" manifest   # 读旧约/新约目录页，生成 1189 条 chapters
 python3 lib/fetch_bible.py "圣经-和合本-bible" fetch --workers 3
 python3 lib/fetch_bible.py "圣经-和合本-bible" verify
+python3 lib/fetch_bible.py "圣经-和合本-bible" audit      # 需 pylibs 里装有 pythonbible
 python3 lib/convert.py    "圣经-和合本-bible"
 python3 lib/build_docx.py "圣经-和合本-bible"
 python3 lib/build_html.py "圣经-和合本-bible"
@@ -68,7 +69,8 @@ python3 lib/build_epub.py "圣经-和合本-bible"
 - **只取原文**：manifest 里 `"site": {"verses": true}` 让 `convert.py` 走经文模式，每节一行「节号 + 经文」；逐节注解、祷读、朗读音频都不进产物。
 - **raw/ 存裁剪后的片段**：`fetch` 只把经文的 `<p>` 写进 `raw/<slug>.html`，整个目录几 MB，重新生成不必再联网。
 - **断点续抓**：已落盘的章节直接跳过；`--limit N` 先抓几章验证解析对不对。
-- **校验**：`verify` 逐章核对「节号从 1 起连续覆盖到本章末节」，并汇总全书节数（和合本参考值 31102 节）；发现源站缺节时给出可写入 `source_gaps` 的片段。
+- **校验**：`verify` 逐章核对「节号从 1 起连续覆盖到本章末节」，并汇总全书节数（和合本参考值 31104 节）；发现源站缺节时给出可写入 `source_gaps` 的片段。`audit` 再拿独立的经文分节数据（`pythonbible`）逐章比对，能发现连续节号检查看不出来的末节漏排。
+- **HTML 跳转**：经文模式下每章、每节都有锚点，章首有「第 N 节」跳转框，节号本身是 `#v-…` 链接；卷名在目录里也是链接，点一下跳到该卷第一章。
 - **并节与缺节**：源站把两节并成一段时写作 `【创廿四29~30】`，产物里是一条「29–30」；源站确实漏排的节记进 manifest 的 `source_gaps`，校验时按缺口放行，不再视为解析失败。
 - **标题与文件名**：正典序号 + 英文短名 + 章号组成 slug（如 `01-genesis-001`），全 ASCII，EPUB 与阅读器排序都稳；章标题为「创世记 第1章」，目录按旧约/新约 → 书卷 → 章分三层。
 

@@ -4,7 +4,8 @@
 用法:
   python3 lib/fetch_bible.py <书名目录> manifest        # 读两个目录页，生成 manifest.json
   python3 lib/fetch_bible.py <书名目录> fetch [--start N] [--limit N] [--workers N]
-  python3 lib/fetch_bible.py <书名目录> verify          # 核对章数、节号连续性与总节数
+  python3 lib/fetch_bible.py <书名目录> verify [--write-gaps]   # 章数、节号连续性、总节数
+  python3 lib/fetch_bible.py <书名目录> audit           # 用独立分节数据核对每章节数
 
 站点挂在 WordPress.com 上：带 SNI 的握手会被中间设备直接回 403，不带 SNI、靠
 Host 头路由反而稳定 200。抓取先走这条无 SNI 通道，失败再退回普通 HTTPS，两种
@@ -419,10 +420,51 @@ def cmd_verify(order_dir, manifest, write_gaps=False):
     return 0 if ok else 1
 
 
+def cmd_audit(order_dir, manifest):
+    """用独立的经文分节数据核对每章节数，找出连续节号检查发现不了的漏节。"""
+    try:
+        import pythonbible as pb
+    except ImportError:
+        print("需要 pythonbible：python3 -m pip install --target pylibs pythonbible",
+              file=sys.stderr)
+        return 2
+
+    books = list(pb.Book)
+    declared = manifest.get("source_gaps") or {}
+    total_site = total_ref = 0
+    deviations = []
+    for ch in manifest["chapters"]:
+        order = int(ch["slug"][:2])
+        chapter = int(ch["slug"].rsplit("-", 1)[1])
+        reference = pb.get_number_of_verses(books[order - 1], chapter)
+        path = chapter_path(os.path.join(order_dir, "raw"), ch["slug"])
+        if not os.path.exists(path):
+            print(f"缺文件：{ch['slug']}", file=sys.stderr)
+            return 1
+        pairs = bible.verse_pairs(open(path, encoding="utf-8").read())
+        got = sum(end - start + 1 for start, end, _ in pairs)
+        total_site += got
+        total_ref += reference
+        gaps = len(declared.get(ch["slug"], ()))
+        if got + gaps != reference:
+            deviations.append((ch["slug"], ch["title"], got, gaps, reference))
+
+    print(f"章数：{len(manifest['chapters'])}｜本站 {total_site} 节 / 参考（钦定本分节）"
+          f"{total_ref} 节（差 {total_site - total_ref}）")
+    print("注：和合本在约翰三书（15 节）、启示录 12 章（18 节）比钦定本各多一节，"
+          "约翰福音 7:53 并入了 8:1；差异要逐条看，不等于漏节。")
+    print(f"与参考分节不一致的章：{len(deviations)}")
+    for slug, title, got, gaps, reference in deviations:
+        note = f"，声明缺 {gaps} 节" if gaps else ""
+        print(f"  {slug:26s} {title:14s} 本站 {got:3d}{note} / 参考 {reference:3d}"
+              f"（{got + gaps - reference:+d}）")
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("book_dir")
-    parser.add_argument("command", choices=["manifest", "fetch", "verify"])
+    parser.add_argument("command", choices=["manifest", "fetch", "verify", "audit"])
     parser.add_argument("--start", type=int, default=0)
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--workers", type=int, default=3)
@@ -437,6 +479,8 @@ def main():
     manifest = bookkit.load_manifest()
     if args.command == "fetch":
         return cmd_fetch(order_dir, manifest, args.start, args.limit, args.workers)
+    if args.command == "audit":
+        return cmd_audit(order_dir, manifest)
     return cmd_verify(order_dir, manifest, args.write_gaps)
 
 
