@@ -500,12 +500,13 @@ components:
       required: [data, meta]
       properties:
         data:
-          oneOf:
+          anyOf:
             - $ref: '#/components/schemas/OperationReceipt'
             - $ref: '#/components/schemas/TransactionEvidence'
           description: >
-            Candidate union: stored receipt or chain observation. Actual
-            receipt and observation may overlap; discriminator pending fixtures.
+            Candidate union: stored receipt or chain observation. Receipt
+            may also match the observation schema, so anyOf is intentional.
+            A stricter discriminator requires verified response fixtures.
         meta:
           $ref: '#/components/schemas/Meta'
     OperationEnvelope:
