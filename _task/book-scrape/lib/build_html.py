@@ -523,7 +523,7 @@ def build_numgrid(chapters, root_attrs='class="numgrid" id="numgrid" hidden'):
 
 
 def build_index(chapters, headings):
-    """搜索索引：章节 + 各章小节标题。"""
+    """章节索引：给页面内的搜索脚本或外部工具用（可选，未内联进 HTML）。"""
     data = []
     for ch in chapters:
         cid = 'ch-' + ch['slug']
@@ -537,7 +537,7 @@ def build_index(chapters, headings):
     return json.dumps(data, ensure_ascii=False)
 
 
-def page(meta, chapters_html, toc_html, numgrid_html, index_json, stats, filename, first_id,
+def page(meta, chapters_html, toc_html, numgrid_html, stats, filename, first_id,
          inline_toc_html='', search_hint='搜索问答或解读标题'):
     title = meta.get('book', '')
     cover_rows = [
@@ -573,7 +573,6 @@ def page(meta, chapters_html, toc_html, numgrid_html, index_json, stats, filenam
         page_html = re.sub(r'\s*<button class="tab" data-tab="num"[^>]*>按问号</button>', '',
                            page_html)
     page_html = page_html.replace('{{CHAPTERS}}', chapters_html)
-    page_html = page_html.replace('{{INDEX}}', index_json)
     page_html = page_html.replace('{{FIRST_ID}}', first_id)
     page_html = page_html.replace('{{FILENAME}}', html.escape(filename, quote=False))
     page_html = page_html.replace('{{SEARCH_HINT}}', html.escape(search_hint, quote=False))
@@ -1079,7 +1078,6 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
 </button>
 
-<script>window.__INDEX__ = {{INDEX}};</script>
 <script>
 (function () {
   var doc = document.documentElement;
@@ -1963,9 +1961,9 @@ def main():
     out = page(meta, '\n'.join(parts),
                build_toc_html(chapters, headings, verse_counts=verse_counts),
                build_numgrid(chapters) if has_numbers else '',
-               build_index(chapters, headings), stats, filename,
+               stats, filename,
                'ch-' + chapters[0]['slug'], inline_toc,
-               search_hint='搜索章节标题' if verse_mode else '搜索问答或解读标题')
+               search_hint='搜索经文或卷章' if verse_mode else '搜索问答或解读标题')
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(out)
     print(f'saved {filename}  chapters={len(chapters)}  size={os.path.getsize(filename) // 1024}KB')
