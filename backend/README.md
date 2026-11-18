@@ -8,8 +8,8 @@
 | `metanet4j-parent/` | `dev` | `917b7bd` | https://github.com/metanet4j/metanet4j-parent.git |
 | `metanet4j-base/` | `dev` | `279a7a6` | https://github.com/metanet4j/metanet4j-base.git |
 | `metanet4j-sdk/` | `dev` | `bb298d0` | https://github.com/metanet4j/metanet4j-sdk.git |
-| `metanet4j-component/` | `dev` | `fbb048e` | https://github.com/metanet4j/metanet4j-component.git |
-| `metanet4j-bsv-sdk/` | `dev` | `10fd42d` | https://github.com/metanet4j/metanet4j-bsv-sdk.git |
+| `metanet4j-component/` | `dev` | `0078366` | https://github.com/metanet4j/metanet4j-component.git |
+| `metanet4j-bsv-sdk/` | `dev` | `f934cfd` | https://github.com/metanet4j/metanet4j-bsv-sdk.git |
 | `metanet4j-junglebus/` | `master` | `1272067` | https://github.com/metanet4j/metanet4j-junglebus.git |
 
 BSV SDK 和 JungleBus 的主仓库与 Git 数据库分别存放在 `metanet4j-bsv-sdk/` 和 `metanet4j-junglebus/`；原任务分支与提交历史保留。旧任务目录已清理，后端任务规则见[后端任务工作区](../_task/backend-worktree/README.md)。
