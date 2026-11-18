@@ -9,7 +9,7 @@
     "done",
     "archived"
   ],
-  "activeItem": null,
+  "activeItem": "remediate-identity-design-review-v040",
   "features": [
     {
       "id": "prototype-visual-alignment-v010-v030",
@@ -633,6 +633,35 @@
         "R-05 P1: typed OpenAPI response/error/coverage and recovery endpoints",
         "R-06 P1: cross-end BDD for initial publish/recovery/key rotation"
       ]
+    },
+    {
+      "id": "remediate-identity-design-review-v040",
+      "name": "调整 v0.4.0 Identity 跨端设计文档（Review 整改）",
+      "status": "in-progress",
+      "goal": "根据 Review R-01~R-08 修正 DDD 共享模型、前后端实现指南、OpenAPI 草案和 BDD，让后续开发能按统一领域语言实现与验证。",
+      "scope": "仅 _task/system-design/spec 下当前 Identity/Contract 文档与任务记录；不改核心认知的既定产品事实、真实前后端代码或原型。",
+      "dependencies": [
+        "_task/system-design/spec/核心认知.md",
+        "_task/system-design/spec/domain/identity/评审报告-Identity-v0.4.0-20261118-103500.md",
+        "metanet4j/ownword-web@6f9bccad",
+        "metanet4j/metanet4j-component@fbb048ea"
+      ],
+      "doneCriteria": [
+        "R-01 建立与 IdentityResolution 独立的初始化资格决策、状态矩阵及失败恢复边界；不可伪造公开已未发布",
+        "R-02/03 给出类型/字段的 DTO→领域映射和身份/资料可变性说明",
+        "R-04 给出 signing-time 密钥历史验证端口及重组失败策略",
+        "R-05 OpenAPI 补充类型化结果、错误与交易恢复端点；未经核验的字段明确草案",
+        "R-06 补充带源编号的 BDD 与逐场景验收矩阵",
+        "R-07/08 修正 Explorer 用例归属和前端渐进分层计划",
+        "GitHub dev 静态检查：路径/跨文件引用、schema $ref、BDD 结构；真实运行时与主网门禁保留"
+      ],
+      "prdVersion": "v0.4.0",
+      "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
+      "output": "_task/system-design/spec/domain/identity/领域设计-Identity-v0.4.0-20261117-175100.md",
+      "reviewStatus": "awaiting-user-review",
+      "implementationStatus": "documentation-in-progress",
+      "evidence": [],
+      "nextStep": "修订共享领域模型与跨端技术契约，再同步前后端开发指南、BDD和 Review 跟踪。"
     }
   ]
 }
