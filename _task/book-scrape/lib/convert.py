@@ -173,6 +173,21 @@ def chapter_filename(ch):
     return f"{ch['slug']}.md"
 
 
+def verse_markdown(path, gaps=()):
+    """经文模式：只输出「节号 + 经文」，注释、祷读、音频都不进 Markdown。"""
+    import bible
+
+    pairs = bible.verse_pairs(open(path, encoding='utf-8').read())
+    problem = bible.span_problem(pairs, gaps)
+    if problem:
+        raise SystemExit(f'{path}：{problem}')
+    lines = []
+    for start, end, text in pairs:
+        label = f'{start}' if start == end else f'{start}–{end}'
+        lines.append(f'{label} {text}')
+    return '\n\n'.join(lines)
+
+
 def load_inline_parts(manifest):
     """整页导出模式：一本书只有一个 HTML（如 Drupal 的 book/export/html），
     按容器选择器切成多章，返回 [{chapter, page_title, inner, audio}]。"""
@@ -204,6 +219,7 @@ def main():
 
     doc_parts, missing = [], []
     for ch in mf['chapters']:
+        audio = []
         if inline_parts is not None:
             part = next((p for p in inline_parts if p['chapter'] is ch), None)
             if part is None:
@@ -215,19 +231,26 @@ def main():
             if not os.path.exists(src):
                 missing.append(ch['slug'])
                 continue
-            page_title, inner, audio = extract(src, site)
-        body = escape_literal_asterisks(normalize_bold_markers(normalize_heading_levels(
-            tidy(ChapterConverter(heading_style='ATX', bullets='-').convert(inner)))))
-        heading = f"# {ch['title']}"
-        # 页面标题形如「第一章 个人查经是必须的 Personal Bible Study Is a Must」
-        subtitle = page_title[len(ch['title']):].strip() if page_title.startswith(ch['title']) else ''
-        if subtitle:
-            heading += f"\n\n## {subtitle}"
-        header = heading + '\n'
-        if ch.get('category') and ch['category'] != ch['title']:
-            header += f"\n> {ch['category']}\n"
-        if audio:
-            header += f"\n> 朗读音频：{audio[0]}\n"
+            if not site.get('verses'):
+                page_title, inner, audio = extract(src, site)
+
+        if site.get('verses'):
+            gaps = (mf.get('source_gaps') or {}).get(ch['slug'], ())
+            body = escape_literal_asterisks(verse_markdown(src, gaps))
+            header = f"# {ch['title']}\n"
+        else:
+            body = escape_literal_asterisks(normalize_bold_markers(normalize_heading_levels(
+                tidy(ChapterConverter(heading_style='ATX', bullets='-').convert(inner)))))
+            heading = f"# {ch['title']}"
+            # 页面标题形如「第一章 个人查经是必须的 Personal Bible Study Is a Must」
+            subtitle = page_title[len(ch['title']):].strip() if page_title.startswith(ch['title']) else ''
+            if subtitle:
+                heading += f"\n\n## {subtitle}"
+            header = heading + '\n'
+            if ch.get('category') and ch['category'] != ch['title']:
+                header += f"\n> {ch['category']}\n"
+            if audio:
+                header += f"\n> 朗读音频：{audio[0]}\n"
         md = f"{header}\n{body}"
         open(chapter_filename(ch), 'w', encoding='utf-8').write(md)
         doc_parts.append({'part': ch.get('part'), 'category': ch.get('category'),
@@ -246,6 +269,8 @@ def main():
         lines.append(f"作者：{mf['author']}" + (f"（{extra}）  " if extra else '  '))
     if mf.get('translator'):
         lines.append(f"翻译：{mf['translator']}  ")
+    if mf.get('edition'):
+        lines.append(f"版本：{mf['edition']}  ")
     if mf.get('source'):
         lines.append(f"来源：{mf['source']}\n")
     lines.append('## 目录\n')

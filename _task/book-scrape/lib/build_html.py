@@ -443,6 +443,7 @@ def page(meta, chapters_html, toc_html, numgrid_html, index_json, stats, filenam
     cover_rows = [
         ('作者 / 解读', meta.get('author')),
         ('翻译', meta.get('translator')),
+        ('版本', meta.get('edition')),
         ('英文版', meta.get('publisher_en')),
     ]
     rows = ''.join(
@@ -467,6 +468,10 @@ def page(meta, chapters_html, toc_html, numgrid_html, index_json, stats, filenam
     page_html = page_html.replace('{{TOC}}', toc_html)
     page_html = page_html.replace('{{INLINE_TOC}}', inline_toc_html)
     page_html = page_html.replace('{{NUMGRID}}', numgrid_html)
+    if not numgrid_html:
+        # 没有编号章节的书（如圣经按卷章排）不显示「按问号」页签
+        page_html = re.sub(r'\s*<button class="tab" data-tab="num"[^>]*>按问号</button>', '',
+                           page_html)
     page_html = page_html.replace('{{CHAPTERS}}', chapters_html)
     page_html = page_html.replace('{{INDEX}}', index_json)
     page_html = page_html.replace('{{FIRST_ID}}', first_id)
@@ -1489,8 +1494,12 @@ def main():
             questions += 1
         parts.append(rendered)
 
-    stats = ('<span><b>%d</b>章</span><span><b>%d</b>问</span><span><b>%d</b>节解读</span>'
-             % (len(chapters), questions, sum(len(v) for v in headings.values())))
+    head_count = sum(len(v) for v in headings.values())
+    stats = '<span><b>%d</b>章</span>' % len(chapters)
+    if questions:
+        stats += '<span><b>%d</b>问</span>' % questions
+    if head_count:
+        stats += '<span><b>%d</b>节解读</span>' % head_count
     filename = (manifest.get('docx', {}).get('filename') or meta['book']).replace('.docx', '') + '.html'
     has_numbers = any(chapter_number(ch['title']) is not None for ch in chapters)
     numgrid_inline = (build_numgrid(chapters, 'class="numgrid" id="numgrid-inline"')
@@ -1501,7 +1510,8 @@ def main():
                   + build_toc_html(chapters, headings, 'class="toc toc-copy"')
                   + '</section>')
     out = page(meta, '\n'.join(parts), build_toc_html(chapters, headings),
-               build_numgrid(chapters), build_index(chapters, headings), stats, filename,
+               build_numgrid(chapters) if has_numbers else '',
+               build_index(chapters, headings), stats, filename,
                'ch-' + chapters[0]['slug'], inline_toc)
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(out)

@@ -144,7 +144,8 @@ def main():
         r.body(p, meta['title_en'], size=15, color=RGBColor(0x55, 0x55, 0x55))
     doc.add_paragraph()
     cover = [('作者', meta.get('author')), ('翻译', meta.get('translator')),
-             ('英文版', meta.get('publisher_en')), ('来源', meta.get('source'))]
+             ('版本', meta.get('edition')), ('英文版', meta.get('publisher_en')),
+             ('来源', meta.get('source'))]
     for label, value in cover:
         if not value:
             continue

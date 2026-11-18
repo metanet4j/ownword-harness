@@ -16,7 +16,9 @@ _task/book-scrape/
 │   ├── build_html.py         分章 Markdown → 单文件 HTML 阅读版
 │   ├── build_epub.py         分章 Markdown → EPUB 3（Apple Books 可读）
 │   ├── verify_book.py        核对抓取结果与源页面段落
-│   └── scan_questions.py     统计分类页覆盖的问答编号，检查目录是否漏页
+│   ├── scan_questions.py     统计分类页覆盖的问答编号，检查目录是否漏页
+│   ├── bible.py              圣经正典表（66 卷 1189 章）与经文解析
+│   └── fetch_bible.py        抓圣经经文：目录页 → manifest、逐章抓取、校验
 ├── manifest.template.json    新书清单模板
 └── <书名-英文名>/             每本书一个目录
     ├── manifest.json
@@ -48,11 +50,36 @@ python3 lib/verify_book.py "<书名-英文名>"
 
 `fetch_html.py` 支持断点续抓：已存在且大于 20 KB 的章节会跳过，可用 `--start N` 指定起始序号、`--limit N` 先抓前几章验证选择器。
 
+## 抓圣经
+
+圣经不适合按「一本普通连载书」抓：66 卷 1189 章，源站偶尔把两节并成一段，个别节在源站本身就漏排。正典表与经文解析放在 `lib/bible.py`，抓取流程放在 `lib/fetch_bible.py`，转换、Word、HTML、EPUB 仍用同一套脚本。
+
+```bash
+cd _task/book-scrape
+python3 lib/fetch_bible.py "圣经-和合本-bible" manifest   # 读旧约/新约目录页，生成 1189 条 chapters
+python3 lib/fetch_bible.py "圣经-和合本-bible" fetch --workers 3
+python3 lib/fetch_bible.py "圣经-和合本-bible" verify
+python3 lib/convert.py    "圣经-和合本-bible"
+python3 lib/build_docx.py "圣经-和合本-bible"
+python3 lib/build_html.py "圣经-和合本-bible"
+python3 lib/build_epub.py "圣经-和合本-bible"
+```
+
+- **只取原文**：manifest 里 `"site": {"verses": true}` 让 `convert.py` 走经文模式，每节一行「节号 + 经文」；逐节注解、祷读、朗读音频都不进产物。
+- **raw/ 存裁剪后的片段**：`fetch` 只把经文的 `<p>` 写进 `raw/<slug>.html`，整个目录几 MB，重新生成不必再联网。
+- **断点续抓**：已落盘的章节直接跳过；`--limit N` 先抓几章验证解析对不对。
+- **校验**：`verify` 逐章核对「节号从 1 起连续覆盖到本章末节」，并汇总全书节数（和合本参考值 31102 节）；发现源站缺节时给出可写入 `source_gaps` 的片段。
+- **并节与缺节**：源站把两节并成一段时写作 `【创廿四29~30】`，产物里是一条「29–30」；源站确实漏排的节记进 manifest 的 `source_gaps`，校验时按缺口放行，不再视为解析失败。
+- **标题与文件名**：正典序号 + 英文短名 + 章号组成 slug（如 `01-genesis-001`），全 ASCII，EPUB 与阅读器排序都稳；章标题为「创世记 第1章」，目录按旧约/新约 → 书卷 → 章分三层。
+
 ## manifest.json 字段
 
 | 字段 | 说明 |
 | --- | --- |
 | `book` / `title_en` / `author` / `translator` / `publisher_en` / `source` | 封面与总目录信息，缺失字段自动省略 |
+| `edition` | 版本说明，写在总目录与 Word 封面上（如和合本的底本与校订） |
+| `site.verses` | 经文模式：只输出经文段落，丢弃注释、祷读与音频 |
+| `source_gaps` | 源站确实缺的节：`{"章节 slug": [节号…]}`，校验与转换时按缺口放行 |
 | `site.content_selector` | 正文容器选择器，默认 `div.entry-content` |
 | `site.title_selector` | 章节标题选择器，默认 `h1.entry-title` |
 | `site.audio_selector` | 朗读音频地址选择器，默认 `audio source[src]`，命中后写入章节 Markdown 的引用行 |
@@ -127,6 +154,8 @@ python3 lib/build_epub.py "<书名-英文名>"     # 输出 <书名>.epub
 ## 抓取注意
 
 - 站点在连发请求后会对当前 IP 返回 429，带浏览器 User-Agent 的请求被 403/429 拦截，**隐藏 User-Agent 的请求返回 200**。`fetch_html.py` 因此不发送 UA，并在每页之间等待 18–26 秒；仍建议一章一章慢慢抓。
+- `cmcbiblereading.net` 挂在 WordPress.com 上，同一本书的响应可能在 `Content-Length` 与 `chunked` 之间切换：不按分块编码解码，十六进制长度头会混进正文，个别节会随机丢失。`fetch_bible.py` 还原分块、核对 `Content-Length` 与 `</html>`，不完整就重试；抓完仍要用 `verify` 逐章核对节号。
+- 该站的 HTTPS 握手带 SNI 时会被中间设备直接回 403，不带 SNI、靠 Host 头路由反而稳定 200。`fetch_bible.py` 先走这条通道，失败再退回普通 HTTPS；两条路都只读公开页面。
 - 转换时 `<em>/<i>` 取纯文本、`<a>` 只留可见文字，避免与作为书名号的星号混在一起被 Markdown 误解析；`**粗体**` 之外的裸星号会转义。
 - 原始 HTML 与 Word 文档一并入库，便于核对和直接取用；`raw/` 也是断点续抓与重新生成 Word 的依据。
 

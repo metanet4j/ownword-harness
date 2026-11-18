@@ -14,6 +14,9 @@ sys.path.insert(0, os.path.join(os.getcwd(), 'pylibs'))
 from bs4 import BeautifulSoup  # noqa: E402
 from docx import Document  # noqa: E402
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import bible  # noqa: E402
+
 
 def chapter_paragraphs(d, mf, ch, soup_cache):
     """取出该章在源页面里的段落文本（去空白，仅保留有实质内容的段落）。"""
@@ -31,6 +34,10 @@ def chapter_paragraphs(d, mf, ch, soup_cache):
         path = f"{d}/raw/{ch['slug']}.html"
         if not os.path.exists(path):
             return None
+        if mf.get('site', {}).get('verses'):
+            # 经文模式：只比对经文本身，不看节号与标记
+            pairs = bible.verse_pairs(open(path, encoding='utf-8').read())
+            return [re.sub(r'\s+', '', text) for _start, _end, text in pairs]
         c = BeautifulSoup(open(path, encoding='utf-8').read(), 'lxml').select_one('div.entry-content')
     if c is None:
         return None
@@ -52,6 +59,14 @@ def main():
     dn = re.sub(r'\s+', '', alltext)
 
     soup_cache, bad, no_src = {}, [], []
+    verse_mode = bool(mf.get('site', {}).get('verses'))
+    if verse_mode:
+        # 全书 3 万多节，逐节在整篇 Word 里做子串搜索太慢：先把 Word 段落
+        # 去掉节号、压掉空白放进集合，再按集合命中判断。
+        docx_paras = {re.sub(r'\s+', '',
+                              re.sub(r'^\s*\d+(?:[–\-—]\d+)?\s+', '', p.text))
+                      for p in doc.paragraphs}
+        docx_paras.discard('')
     for ch in mf['chapters']:
         ps = chapter_paragraphs(d, mf, ch, soup_cache)
         if ps is None:
@@ -61,9 +76,13 @@ def main():
         md = re.sub(r'^#+.*$', '', md, flags=re.M)      # 标题行
         md = re.sub(r'^[ \t]*>[ \t]?', '', md, flags=re.M)   # 引用行去掉标记，保留内容
         mdn = re.sub(r'\s+', '', md.replace('**', '').replace('\\*', '*'))
-        dn_cmp = dn.replace('*', '')      # Word 里保留源文的字面星号，比对时忽略
-        miss_docx = [p[:30] for p in ps if p.replace('*', '') not in dn_cmp]
-        miss_md = [p[:30] for p in ps if p.replace('*', '') not in mdn.replace('*', '')]
+        if verse_mode:
+            miss_md = [p[:30] for p in ps if p not in mdn.replace('*', '')]
+            miss_docx = [p[:30] for p in ps if p not in docx_paras]
+        else:
+            dn_cmp = dn.replace('*', '')      # Word 里保留源文的字面星号，比对时忽略
+            miss_docx = [p[:30] for p in ps if p.replace('*', '') not in dn_cmp]
+            miss_md = [p[:30] for p in ps if p.replace('*', '') not in mdn.replace('*', '')]
         if miss_docx or miss_md:
             bad.append((ch['slug'], len(miss_md), len(miss_docx), (miss_md or miss_docx)[0]))
 
