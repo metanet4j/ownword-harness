@@ -324,12 +324,13 @@ def render_chapter(ch, md, anchors, pager=''):
 
 # ---------------------------------------------------------------- 页面组装
 
-def build_toc_html(chapters, headings):
+def build_toc_html(chapters, headings, root_attrs='class="toc" id="toc"'):
     """目录用静态 HTML 输出，保证无脚本也能看到章节目录。
 
     每章一个小节容器（.toc-kids），默认收起；桌面端展开当前章的小节。
+    root_attrs 用于生成第二份副本（无脚本菜单面板），避免重复 id。
     """
-    parts = ['<nav class="toc" id="toc">']
+    parts = [f'<nav {root_attrs}>']
     cur_part = None
     cur_cat = None
     for ch in chapters:
@@ -363,9 +364,9 @@ def build_toc_html(chapters, headings):
     return '\n'.join(parts)
 
 
-def build_numgrid(chapters):
-    """按问号跳转的编号网格。"""
-    parts = ['<div class="numgrid" id="numgrid" hidden>']
+def build_numgrid(chapters, root_attrs='class="numgrid" id="numgrid" hidden'):
+    """按问号跳转的编号网格。root_attrs 供无脚本面板那份用不同的 class。"""
+    parts = [f'<div {root_attrs}>']
     cur_part = None
     opened = False
     for ch in chapters:
@@ -402,7 +403,8 @@ def build_index(chapters, headings):
     return json.dumps(data, ensure_ascii=False)
 
 
-def page(meta, chapters_html, toc_html, numgrid_html, index_json, stats, filename, first_id):
+def page(meta, chapters_html, toc_html, numgrid_html, index_json, stats, filename, first_id,
+         toc_copy_html='', numgrid_copy_html=''):
     title = meta.get('book', '')
     cover_rows = [
         ('作者 / 解读', meta.get('author')),
@@ -429,6 +431,8 @@ def page(meta, chapters_html, toc_html, numgrid_html, index_json, stats, filenam
     page_html = page_html.replace('{{COVER_SOURCE}}', source_html)
     page_html = page_html.replace('{{STATS}}', stats)
     page_html = page_html.replace('{{TOC}}', toc_html)
+    page_html = page_html.replace('{{TOC_COPY}}', toc_copy_html)
+    page_html = page_html.replace('{{NUMGRID_COPY}}', numgrid_copy_html)
     page_html = page_html.replace('{{NUMGRID}}', numgrid_html)
     page_html = page_html.replace('{{CHAPTERS}}', chapters_html)
     page_html = page_html.replace('{{INDEX}}', index_json)
@@ -437,7 +441,7 @@ def page(meta, chapters_html, toc_html, numgrid_html, index_json, stats, filenam
     return page_html
 
 TEMPLATE = r"""<!doctype html>
-<html lang="zh-CN" data-theme="paper">
+<html lang="zh-CN" class="nojs" data-theme="paper">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -677,7 +681,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   .layout{display:grid;grid-template-columns:336px minmax(0,1fr);align-items:start}
   .sidebar{position:sticky;top:0;height:100vh;width:auto;transform:none!important;box-shadow:none!important}
   .side-head{padding-top:var(--s4)}
-  #btnMenu,#btnClose{display:none}
+  #btnMenu{display:none}
   .scrim{display:none}
   .bar-title{text-align:left;padding-left:var(--s2)}
   main{max-width:calc(var(--measure) + 2em);padding:0 var(--s6) var(--s7)}
@@ -692,8 +696,62 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
+
+/* ---------- 无脚本兜底 ----------
+   iPhone「文件」App 的快速查看只渲染 HTML/CSS、不执行 JavaScript，
+   此时导航全部走原生元素：目录开关是 checkbox + label，跳转是 a[href="#"]，
+   字号/主题/搜索/阅读进度这些必须有脚本的功能整块隐去，不留死按钮。 */
+#menu-toggle{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+/* [hidden] 要靠作者样式兜住：下面几条 display 规则会把它覆盖掉 */
+.numgrid[hidden],.toc[hidden]{display:none!important}
+.nojs #btnMenu{display:none}
+.menu-btn{display:none;align-items:center;justify-content:center;flex:none;width:40px;height:40px;
+  border:0;background:transparent;color:var(--muted);border-radius:var(--r1);cursor:pointer}
+.menu-panel{display:none}
+.nojs .menu-btn{display:flex}
+/* 抽屉只有脚本版才有；无脚本版是不遮正文、不锁滚动的下拉目录：
+   × 永远在固定顶栏里，点一下就能收起，正文始终可滚动 */
+/* 面板自身就带高度约束与滚动，不依赖 .nojs —— 脚本被拦时也能正常翻目录 */
+.nojs .menu-panel{position:fixed;top:calc(52px + env(safe-area-inset-top));left:0;right:0;z-index:60;
+  height:calc(100% - 64px - env(safe-area-inset-top));max-height:calc(100% - 64px - env(safe-area-inset-top));
+  overflow:hidden;background:var(--surface);
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  box-shadow:0 14px 40px var(--shadow)}
+.nojs #menu-toggle:checked~.menu-panel{display:block}
+.nojs .menu-head{display:flex}
+.menu-head{display:none;align-items:center;justify-content:space-between;gap:var(--s2);flex:none;
+  padding:var(--s2) var(--s3) var(--s2) var(--s4);border-bottom:1px solid var(--rule)}
+.menu-title{font-family:var(--sans);font-size:14.5px;font-weight:600}
+.side-close{display:flex;align-items:center;justify-content:center;flex:none;width:40px;height:40px;
+  border:0;background:transparent;color:var(--muted);border-radius:var(--r1);cursor:pointer}
+.menu-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.nojs .menu-body{max-height:calc(100vh - 112px);max-height:calc(100dvh - 112px)}
+/* 无脚本版的目录列表是面板主体，样式与抽屉一致 */
+.nojs .menu-body .toc{flex:none;overflow:visible}
+.nojs #numgrid{display:none!important}
+.nojs .tab,.nojs .search-wrap,.nojs .to-top,.nojs .progress,
+.nojs #btnSize,.nojs #btnTheme{display:none!important}
+.nojs .side-foot{display:none}
+@media (max-width:1023px){
+  .js .sidebar,.nojs .sidebar{display:none}
+  /* 抽屉打开时侧栏才出现 */
+  .js .sidebar.on{display:flex}
+  /* 手机端两份目录：面板那份（无脚本用）与侧栏克隆那份（脚本抽屉用），
+     同一时刻只显示一份，避免重复 id 与样式打架 */
+  .nojs .toc-clone,.nojs .numgrid-clone{display:none!important}
+  .js .toc-copy,.js .numgrid-copy{display:none!important}
+  /* 侧栏原装那份目录只在桌面端用；手机端用克隆那份，别用 !important 误伤克隆 */
+  .js .sidebar .toc:not(.toc-clone){display:none}
+  .js .toc-clone{display:block;flex:1;overflow-y:auto;touch-action:pan-y;
+    padding:0 var(--s2) var(--s3) var(--s3)}
+  .js .numgrid-clone{flex:1;overflow-y:auto;touch-action:pan-y;padding:0 var(--s3) var(--s3)}
+}
+@media (min-width:1024px){
+  .nojs .menu-btn{display:none}
+}
 @media print{
-  .sidebar,.bar,.progress,.scrim,.to-top,.pager,.cover-actions,.side-foot{display:none!important}
+  .sidebar,.bar,.progress,.scrim,.to-top,.pager,.cover-actions,.side-foot,
+  .menu-btn,.menu-panel,.menu-card,.menu-head{display:none!important}
   body{background:#fff;color:#000;font-size:11pt}
   main{max-width:none;padding:0}
   .chapter{page-break-inside:avoid;padding-top:1.5em}
@@ -703,6 +761,12 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 </head>
 <body>
 <div class="progress" id="progress"><span id="bar"></span></div>
+
+<!-- 无脚本（iPhone 快速查看）时的目录开关：checkbox + label，不需要任何 JavaScript -->
+<input type="checkbox" id="menu-toggle" aria-hidden="true" tabindex="-1">
+<label class="menu-btn" id="btnMenuLabel" for="menu-toggle" aria-label="打开目录">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+</label>
 
 <div class="layout">
   <aside class="sidebar" id="sidebar" aria-label="目录">
@@ -762,6 +826,18 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 </div>
 
 <div class="scrim" id="scrim"></div>
+
+<!-- 目录兜底副本：只有脚本不可用（如 iPhone「文件」预览）时才显示 -->
+<div class="menu-panel" id="menuPanel" aria-label="目录">
+  <div class="menu-head">
+    <span class="menu-title">目录</span>
+    <label class="side-close" for="menu-toggle" aria-label="关闭目录">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </label>
+  </div>
+  <div class="menu-body">{{TOC_COPY}}{{NUMGRID_COPY}}</div>
+</div>
+
 <button class="to-top" id="btnTopFloat" aria-label="回到顶部">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
 </button>
@@ -780,6 +856,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   var DESKTOP = '(min-width:1024px)';
 
   function $(id) { return document.getElementById(id); }
+  // 脚本能跑：撤掉无脚本兜底的菜单按钮，改由 drawer 那套交互接管
+  doc.classList.remove('nojs');
+  doc.classList.add('js');
   function fail(what, e) {
     if (window.console && console.error) console.error(what, e);
     var t = $('barTitle');
@@ -893,6 +972,8 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     scrim.classList.remove('on');
     lockBody(false);
     hideTop(false);
+    var t = $('menu-toggle');
+    if (t) t.checked = false;
   }
   function toggleSidebar() {
     if (!sidebar || isDesktop()) return;
@@ -924,6 +1005,25 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     resumeBtn = $('resumeBtn');
     mq = window.matchMedia(DESKTOP);
 
+    // 手机端抽屉里的目录/编号网格来自面板那份（.toc-copy / .numgrid-copy），
+    // 模板里侧栏那份只在桌面端用；这里各克隆一份挂到侧栏，不做节点搬移。
+    if (!isDesktop() && toc && sidebar) {
+      var foot = sidebar.querySelector('.side-foot');
+      var tocClone = toc.cloneNode(true);
+      tocClone.className = 'toc toc-clone';
+      tocClone.removeAttribute('id');
+      sidebar.insertBefore(tocClone, foot || null);
+      toc = tocClone;
+      if (numgrid) {
+        var gridClone = numgrid.cloneNode(true);
+        gridClone.className = 'numgrid numgrid-clone';
+        gridClone.removeAttribute('id');
+        gridClone.hidden = true;
+        sidebar.insertBefore(gridClone, foot || null);
+        numgrid = gridClone;
+      }
+    }
+
     function syncLayout() {
       if (isDesktop()) {
         sidebar.classList.add('on');
@@ -945,6 +1045,11 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     }
 
     bindTap($('btnMenu'), toggleSidebar);
+    // 面板的三角形按钮在脚本接管后不再需要切 checkbox，避免和抽屉状态打架
+    bindTap($('btnMenuLabel'), function () {
+      var t = $('menu-toggle');
+      if (t) t.checked = false;
+    });
     bindTap($('btnClose'), function () { openSidebar(false); });
     bindTap(scrim, function () { openSidebar(false); });
 
@@ -1226,7 +1331,9 @@ def main():
     filename = (manifest.get('docx', {}).get('filename') or meta['book']).replace('.docx', '') + '.html'
     out = page(meta, '\n'.join(parts), build_toc_html(chapters, headings),
                build_numgrid(chapters), build_index(chapters, headings), stats, filename,
-               'ch-' + chapters[0]['slug'])
+               'ch-' + chapters[0]['slug'],
+               build_toc_html(chapters, headings, 'class="toc toc-copy"'),
+               build_numgrid(chapters, 'class="numgrid numgrid-copy" hidden'))
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(out)
     print(f'saved {filename}  chapters={len(chapters)}  size={os.path.getsize(filename) // 1024}KB')

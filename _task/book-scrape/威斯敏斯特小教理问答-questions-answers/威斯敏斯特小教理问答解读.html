@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="paper">
+<html lang="zh-CN" class="nojs" data-theme="paper">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -239,7 +239,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   .layout{display:grid;grid-template-columns:336px minmax(0,1fr);align-items:start}
   .sidebar{position:sticky;top:0;height:100vh;width:auto;transform:none!important;box-shadow:none!important}
   .side-head{padding-top:var(--s4)}
-  #btnMenu,#btnClose{display:none}
+  #btnMenu{display:none}
   .scrim{display:none}
   .bar-title{text-align:left;padding-left:var(--s2)}
   main{max-width:calc(var(--measure) + 2em);padding:0 var(--s6) var(--s7)}
@@ -254,8 +254,62 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
+
+/* ---------- 无脚本兜底 ----------
+   iPhone「文件」App 的快速查看只渲染 HTML/CSS、不执行 JavaScript，
+   此时导航全部走原生元素：目录开关是 checkbox + label，跳转是 a[href="#"]，
+   字号/主题/搜索/阅读进度这些必须有脚本的功能整块隐去，不留死按钮。 */
+#menu-toggle{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+/* [hidden] 要靠作者样式兜住：下面几条 display 规则会把它覆盖掉 */
+.numgrid[hidden],.toc[hidden]{display:none!important}
+.nojs #btnMenu{display:none}
+.menu-btn{display:none;align-items:center;justify-content:center;flex:none;width:40px;height:40px;
+  border:0;background:transparent;color:var(--muted);border-radius:var(--r1);cursor:pointer}
+.menu-panel{display:none}
+.nojs .menu-btn{display:flex}
+/* 抽屉只有脚本版才有；无脚本版是不遮正文、不锁滚动的下拉目录：
+   × 永远在固定顶栏里，点一下就能收起，正文始终可滚动 */
+/* 面板自身就带高度约束与滚动，不依赖 .nojs —— 脚本被拦时也能正常翻目录 */
+.nojs .menu-panel{position:fixed;top:calc(52px + env(safe-area-inset-top));left:0;right:0;z-index:60;
+  height:calc(100% - 64px - env(safe-area-inset-top));max-height:calc(100% - 64px - env(safe-area-inset-top));
+  overflow:hidden;background:var(--surface);
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  box-shadow:0 14px 40px var(--shadow)}
+.nojs #menu-toggle:checked~.menu-panel{display:block}
+.nojs .menu-head{display:flex}
+.menu-head{display:none;align-items:center;justify-content:space-between;gap:var(--s2);flex:none;
+  padding:var(--s2) var(--s3) var(--s2) var(--s4);border-bottom:1px solid var(--rule)}
+.menu-title{font-family:var(--sans);font-size:14.5px;font-weight:600}
+.side-close{display:flex;align-items:center;justify-content:center;flex:none;width:40px;height:40px;
+  border:0;background:transparent;color:var(--muted);border-radius:var(--r1);cursor:pointer}
+.menu-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.nojs .menu-body{max-height:calc(100vh - 112px);max-height:calc(100dvh - 112px)}
+/* 无脚本版的目录列表是面板主体，样式与抽屉一致 */
+.nojs .menu-body .toc{flex:none;overflow:visible}
+.nojs #numgrid{display:none!important}
+.nojs .tab,.nojs .search-wrap,.nojs .to-top,.nojs .progress,
+.nojs #btnSize,.nojs #btnTheme{display:none!important}
+.nojs .side-foot{display:none}
+@media (max-width:1023px){
+  .js .sidebar,.nojs .sidebar{display:none}
+  /* 抽屉打开时侧栏才出现 */
+  .js .sidebar.on{display:flex}
+  /* 手机端两份目录：面板那份（无脚本用）与侧栏克隆那份（脚本抽屉用），
+     同一时刻只显示一份，避免重复 id 与样式打架 */
+  .nojs .toc-clone,.nojs .numgrid-clone{display:none!important}
+  .js .toc-copy,.js .numgrid-copy{display:none!important}
+  /* 侧栏原装那份目录只在桌面端用；手机端用克隆那份，别用 !important 误伤克隆 */
+  .js .sidebar .toc:not(.toc-clone){display:none}
+  .js .toc-clone{display:block;flex:1;overflow-y:auto;touch-action:pan-y;
+    padding:0 var(--s2) var(--s3) var(--s3)}
+  .js .numgrid-clone{flex:1;overflow-y:auto;touch-action:pan-y;padding:0 var(--s3) var(--s3)}
+}
+@media (min-width:1024px){
+  .nojs .menu-btn{display:none}
+}
 @media print{
-  .sidebar,.bar,.progress,.scrim,.to-top,.pager,.cover-actions,.side-foot{display:none!important}
+  .sidebar,.bar,.progress,.scrim,.to-top,.pager,.cover-actions,.side-foot,
+  .menu-btn,.menu-panel,.menu-card,.menu-head{display:none!important}
   body{background:#fff;color:#000;font-size:11pt}
   main{max-width:none;padding:0}
   .chapter{page-break-inside:avoid;padding-top:1.5em}
@@ -265,6 +319,12 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 </head>
 <body>
 <div class="progress" id="progress"><span id="bar"></span></div>
+
+<!-- 无脚本（iPhone 快速查看）时的目录开关：checkbox + label，不需要任何 JavaScript -->
+<input type="checkbox" id="menu-toggle" aria-hidden="true" tabindex="-1">
+<label class="menu-btn" id="btnMenuLabel" for="menu-toggle" aria-label="打开目录">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+</label>
 
 <div class="layout">
   <aside class="sidebar" id="sidebar" aria-label="目录">
@@ -3942,6 +4002,1189 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 </div>
 
 <div class="scrim" id="scrim"></div>
+
+<!-- 目录兜底副本：只有脚本不可用（如 iPhone「文件」预览）时才显示 -->
+<div class="menu-panel" id="menuPanel" aria-label="目录">
+  <div class="menu-head">
+    <span class="menu-title">目录</span>
+    <label class="side-close" for="menu-toggle" aria-label="关闭目录">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </label>
+  </div>
+  <div class="menu-body"><nav class="toc toc-copy">
+<div class="toc-part">简介</div>
+<div class="toc-group">
+<div class="toc-row" data-target="ch-000-简介">
+<a class="toc-item" href="#ch-000-简介">《威斯敏斯特小教理问答》解读</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-000-简介-s1">简介</a>
+<a class="toc-sub" href="#ch-000-简介-s2">目录</a>
+<a class="toc-sub" href="#ch-000-简介-s3">第一部分：序言</a>
+<a class="toc-sub" href="#ch-000-简介-s4">第二部分：我们当信什么</a>
+<a class="toc-sub" href="#ch-000-简介-s5">第三部分：我们当怎样行</a>
+</div>
+</div>
+</div>
+<div class="toc-part">第一部分：序言</div>
+<div class="toc-group">
+<div class="toc-cat">一、人生的首要目的</div>
+<div class="toc-row" data-target="ch-001-人生的首要目的是什么">
+<a class="toc-item" href="#ch-001-人生的首要目的是什么">1问：人生的首要目的是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-001-人生的首要目的是什么-s1">解读1、「人生的首要目的」指什么？</a>
+<a class="toc-sub" href="#ch-001-人生的首要目的是什么-s2">解读2、为什么人生的首要目的必须是「荣耀上帝」？</a>
+<a class="toc-sub" href="#ch-001-人生的首要目的是什么-s3">解读3、人生除了「荣耀上帝，以祂为乐」之外，就不可以有其他目的了吗？</a>
+<a class="toc-sub" href="#ch-001-人生的首要目的是什么-s4">解读4、什么是「荣耀上帝」？</a>
+<a class="toc-sub" href="#ch-001-人生的首要目的是什么-s5">解读5、上帝需要我们给祂增添荣耀吗？</a>
+<a class="toc-sub" href="#ch-001-人生的首要目的是什么-s6">解读6：什么是「以祂为乐」？</a>
+<a class="toc-sub" href="#ch-001-人生的首要目的是什么-s7">解读7：为什么要「以祂为乐，直到永远」？</a>
+<a class="toc-sub" href="#ch-001-人生的首要目的是什么-s8">解读8：为什么把「荣耀上帝」和「以祂为乐」合在一起作为人生的首要目的？</a>
+</div>
+</div>
+<div class="toc-cat">二、人生的惟一准则</div>
+<div class="toc-row" data-target="ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢">
+<a class="toc-item" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢">2问：上帝赐下什么准则，指导我们如何荣耀祂，并以祂为乐呢？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s1">解读1：为什么记载于旧新约圣经中的话语被称为上帝的话语呢？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s2">解读2：如何证实圣经的话语确实是上帝的话语呢？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s3">解读3：为什么上帝要把祂的话语书写下来，放在圣经里呢？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s4">解读4：旧约圣经包括哪些？新约圣经包括哪些？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s5">解读5：为什么圣经的前半部称为旧约圣经呢？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s6">解读6：为什么圣经的后半部称为新约圣经呢？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s7">解读7：次经中的经文不是上帝的话语吗？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s8">解读8：圣经的权威是否如天主教人士所称，是由「教会」所赋予的呢？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s9">解读9：为什么圣经被称为指导我们「荣耀上帝、以祂为乐」的准则？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s10">解读10：为什么圣经被称为惟一的准则？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s11">解读11：没有圣经的光照，理性足够指导我们吗？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s12">解读12：罗马天主教在圣经之外的传统能否被当为指导我们的一项准则，特别因为使徒保罗也曾奉劝帖撒罗尼迦人（帖后2:15）要坚守所学的教训，不论是书面的，还是口传的，而罗马天主教同时又声称自己有许多教训也来自使徒的传统？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s13">解读13：能否以所谓个人内在「圣灵之光」，或圣经之外「圣灵的启示」作为我们的指导准则？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s14">解读14：能否以属灵的鸡汤文作为我们的指导准则？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s15">解读15：如何区分「属灵鸡汤文」与「按着正意分解真理的道」（提后2:15）？</a>
+<a class="toc-sub" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢-s16">解读16：为何人喜欢读属灵的鸡汤文，却不喜欢直接读圣经？</a>
+</div>
+</div>
+</div>
+<div class="toc-part">第二部分：我们当信什么</div>
+<div class="toc-group">
+<div class="toc-cat">三、圣经的主要教导</div>
+<div class="toc-row" data-target="ch-003-圣经的主要教导是什么">
+<a class="toc-item" href="#ch-003-圣经的主要教导是什么">3问：圣经的主要教导是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-003-圣经的主要教导是什么-s1">解读1：什么是信？</a>
+<a class="toc-sub" href="#ch-003-圣经的主要教导是什么-s2">解读2：相信圣经的教导意味着什么？</a>
+<a class="toc-sub" href="#ch-003-圣经的主要教导是什么-s3">解读3：圣经涵盖人对上帝应当相信之事的所有要点了吗？</a>
+<a class="toc-sub" href="#ch-003-圣经的主要教导是什么-s4">解读4：人对上帝应当相信之事，是否都必须出自圣经的教导？</a>
+<a class="toc-sub" href="#ch-003-圣经的主要教导是什么-s5">解读5：上帝对人的要求是什么？</a>
+<a class="toc-sub" href="#ch-003-圣经的主要教导是什么-s6">解读6：除了圣经的教导之外，上帝对人是否还有其他要求？</a>
+<a class="toc-sub" href="#ch-003-圣经的主要教导是什么-s7">解读7：圣经如何教导我们？</a>
+<a class="toc-sub" href="#ch-003-圣经的主要教导是什么-s8">解读8：为什么说圣经对人最主要的教导是人对上帝应当相信之事和上帝对人的要求？</a>
+</div>
+</div>
+<div class="toc-cat">四、上帝是怎样的上帝</div>
+<div class="toc-row" data-target="ch-004-何为上帝">
+<a class="toc-item" href="#ch-004-何为上帝">4问：何为上帝？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-004-何为上帝-s1">解读1：什么是灵？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s2">解读2：既然上帝是个灵，为什么在圣经中还说上帝有眼睛、耳朵、嘴、手呢？比如：「耶和华的眼目看顾义人，祂的耳朵听他们的呼求」（诗34:15），「若不听从，反倒悖逆，必被刀剑吞灭。这是耶和华亲口说的」（赛1:20），「落在永生上帝的手里，真是可怕的」（来10:31）等等。</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s3">解读3：人的灵魂和天使都是属灵的，也都是非物质性的实体，与上帝有什么区别呢？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s4">解读4：什么是「无限」（infinite）？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s5">解读5：在什么方面上帝是无限的？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s6">解读6：什么是「永恒」（eternal）？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s7">解读7：如何知道上帝是永恒的？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s8">解读8：在祂的永恒上，上帝与受造物有何不同？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s9">解读9：什么是「不变」（unchangeable）？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s10">解读10：上帝在哪些方面是不变的？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s11">解读11：为什么说上帝的生命、智慧、权能、圣洁、公义、恩慈和信实，都是无限、永恒、不变的？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s12">解读12：什么是上帝的智慧？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s13">解读13：上帝的智慧显明在何处？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s14">解读14：什么是上帝的权能?</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s15">解读15：上帝的权能显明在何处？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s16">解读16：什么是上帝的圣洁？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s17">解读17：上帝的圣洁显明在何处？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s18">解读18：什么是上帝的公义 ？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s19">解读19：上帝的公义显明在何处？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s20">解读20：什么是上帝的恩慈？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s21">解读21：上帝的恩慈显明在何处？</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s22">解读22：什么是上帝的信实?</a>
+<a class="toc-sub" href="#ch-004-何为上帝-s23">解读23：何处显明上帝的信实？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-005-是否有多位上帝">
+<a class="toc-item" href="#ch-005-是否有多位上帝">5问：是否有多位上帝？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-005-是否有多位上帝-s1">解读1：为什么要宣告上帝是独一无二的？</a>
+<a class="toc-sub" href="#ch-005-是否有多位上帝-s2">解读2：为什么要宣告上帝是真神？</a>
+<a class="toc-sub" href="#ch-005-是否有多位上帝-s3">解读3：为什么要宣告上帝是活神？</a>
+<a class="toc-sub" href="#ch-005-是否有多位上帝-s4">解读4：为什么上帝是独一无二的？</a>
+<a class="toc-sub" href="#ch-005-是否有多位上帝-s5">解读5：为什么上帝是活神？</a>
+<a class="toc-sub" href="#ch-005-是否有多位上帝-s6">解读6：为什么上帝是真正存在的真神，或者说确实有上帝？</a>
+<a class="toc-sub" href="#ch-005-是否有多位上帝-s7">解读7：表明上帝存在的第一项证据是什么？</a>
+<a class="toc-sub" href="#ch-005-是否有多位上帝-s8">解读8：万有的存在怎么能表明上帝的存在呢？</a>
+<a class="toc-sub" href="#ch-005-是否有多位上帝-s9">解读9：表明上帝存在的第二项证据是什么？</a>
+<a class="toc-sub" href="#ch-005-是否有多位上帝-s10">解读10：表明上帝存在的第三项证据是什么？</a>
+<a class="toc-sub" href="#ch-005-是否有多位上帝-s11">解读11：表明上帝存在的第四项证据是什么？</a>
+<a class="toc-sub" href="#ch-005-是否有多位上帝-s12">解读12：表明上帝存在的第五项证据是什么？</a>
+<a class="toc-sub" href="#ch-005-是否有多位上帝-s13">解读13：如果确实有上帝，为什么还有这么多的不相信上帝存在的无神论者呢？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-006-上帝有几个位格">
+<a class="toc-item" href="#ch-006-上帝有几个位格">6问：上帝有几个位格？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-006-上帝有几个位格-s1">解读1：有三位上帝吗？</a>
+<a class="toc-sub" href="#ch-006-上帝有几个位格-s2">解读2：上帝有三个位格是什么意思？</a>
+<a class="toc-sub" href="#ch-006-上帝有几个位格-s3">解读3：这三个位格之间的关系是什么？</a>
+<a class="toc-sub" href="#ch-006-上帝有几个位格-s4">解读4：为什么圣父是上帝？</a>
+<a class="toc-sub" href="#ch-006-上帝有几个位格-s5">解读5：为什么圣子是上帝？</a>
+<a class="toc-sub" href="#ch-006-上帝有几个位格-s6">解读6：为什么圣灵是上帝？</a>
+<a class="toc-sub" href="#ch-006-上帝有几个位格-s7">解读7：既然圣父、圣子和圣灵是同一位独一的上帝，为什么被称为三个不同的位格？</a>
+<a class="toc-sub" href="#ch-006-上帝有几个位格-s8">解读8：三位一体这种神学的讨论对我们有什么意义？</a>
+</div>
+</div>
+<div class="toc-cat">五、上帝的定旨</div>
+<div class="toc-row" data-target="ch-007-上帝的定旨是什么">
+<a class="toc-item" href="#ch-007-上帝的定旨是什么">7问：上帝的定旨是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-007-上帝的定旨是什么-s1">解读1：上帝如何预定所必成的事？</a>
+<a class="toc-sub" href="#ch-007-上帝的定旨是什么-s2">解读2：为什么上帝预定了所必成的事？</a>
+<a class="toc-sub" href="#ch-007-上帝的定旨是什么-s3">解读3：上帝的定旨有几种？</a>
+<a class="toc-sub" href="#ch-007-上帝的定旨是什么-s4">解读4：什么是上帝的普通定旨？</a>
+<a class="toc-sub" href="#ch-007-上帝的定旨是什么-s5">解读5：什么是上帝的特别定旨？</a>
+<a class="toc-sub" href="#ch-007-上帝的定旨是什么-s6">解读6：什么是上帝对人拣选的定旨？</a>
+<a class="toc-sub" href="#ch-007-上帝的定旨是什么-s7">解读7：什么是上帝对人弃绝的定旨？</a>
+<a class="toc-sub" href="#ch-007-上帝的定旨是什么-s8">解读8：为什么上帝预定了一些人蒙拣选，其他的人被弃绝？</a>
+<a class="toc-sub" href="#ch-007-上帝的定旨是什么-s9">解读9：人在今生可以知道他们是蒙选还是被弃绝吗？</a>
+<a class="toc-sub" href="#ch-007-上帝的定旨是什么-s10">解读10：上帝的定旨与「宿命论」</a>
+<a class="toc-sub" href="#ch-007-上帝的定旨是什么-s11">解读11：上帝的定旨与「神义论」</a>
+<a class="toc-sub" href="#ch-007-上帝的定旨是什么-s12">解读12：对上帝定旨的正确回应</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-008-上帝如何实施祂的定旨">
+<a class="toc-item" href="#ch-008-上帝如何实施祂的定旨">8问：上帝如何实施祂的定旨？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-008-上帝如何实施祂的定旨-s1">解读1：什么是上帝实施祂的定旨？</a>
+<a class="toc-sub" href="#ch-008-上帝如何实施祂的定旨-s2">解读2：上帝怎样实施祂的定旨？</a>
+</div>
+</div>
+<div class="toc-cat">六、上帝的创造</div>
+<div class="toc-row" data-target="ch-009-何为创造之工">
+<a class="toc-item" href="#ch-009-何为创造之工">9问：何为创造之工？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-009-何为创造之工-s1">解读1：创造的含义是什么？</a>
+<a class="toc-sub" href="#ch-009-何为创造之工-s2">解读2：万有都是上帝创造的吗？</a>
+<a class="toc-sub" href="#ch-009-何为创造之工-s3">解读3：上帝靠什么创造万有？</a>
+<a class="toc-sub" href="#ch-009-何为创造之工-s4">解读4：上帝用多长时间创造了万有？</a>
+<a class="toc-sub" href="#ch-009-何为创造之工-s5">解读5：上帝为什么创造万有？</a>
+<a class="toc-sub" href="#ch-009-何为创造之工-s6">解读6：上帝所创造的万有一开始处于什么样的境况？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-010-上帝是怎样造人的">
+<a class="toc-item" href="#ch-010-上帝是怎样造人的">10问：上帝是怎样造人的？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-010-上帝是怎样造人的-s1">解读1：为什么上帝要造男造女？</a>
+<a class="toc-sub" href="#ch-010-上帝是怎样造人的-s2">解读2：上帝另造的这「配偶」为何不是另一个男人而是女人？</a>
+<a class="toc-sub" href="#ch-010-上帝是怎样造人的-s3">解读3：上帝为何不一次性多造一些人，而是只造了一对男女？</a>
+<a class="toc-sub" href="#ch-010-上帝是怎样造人的-s4">解读4：人是按上帝的形像被造的，上帝的形像有什么含义？</a>
+<a class="toc-sub" href="#ch-010-上帝是怎样造人的-s5">解读5：人起初被造时拥有怎样的上帝的形像？</a>
+<a class="toc-sub" href="#ch-010-上帝是怎样造人的-s6">解读6：当人受造时，悟性上的知识是什么？</a>
+<a class="toc-sub" href="#ch-010-上帝是怎样造人的-s7">解读7：当人受造时，意志上的公义是什么？</a>
+<a class="toc-sub" href="#ch-010-上帝是怎样造人的-s8">解读8：当人受造时，感情上的圣洁是什么？</a>
+<a class="toc-sub" href="#ch-010-上帝是怎样造人的-s9">解读9：当人受造时，拥有怎样的治理权柄？</a>
+</div>
+</div>
+<div class="toc-cat">七、上帝的护理</div>
+<div class="toc-row" data-target="ch-011-上帝的护理之工是什么">
+<a class="toc-item" href="#ch-011-上帝的护理之工是什么">11问：上帝的护理之工是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-011-上帝的护理之工是什么-s1">解读1：上帝的护理包括哪些部分？</a>
+<a class="toc-sub" href="#ch-011-上帝的护理之工是什么-s2">解读2：上帝对万有的维护是什么？</a>
+<a class="toc-sub" href="#ch-011-上帝的护理之工是什么-s3">解读3：上帝对万有的统管是什么？</a>
+<a class="toc-sub" href="#ch-011-上帝的护理之工是什么-s4">解读4：上帝护理的对象是什么？</a>
+<a class="toc-sub" href="#ch-011-上帝的护理之工是什么-s5">解读5：上帝怎样护理恶行？</a>
+<a class="toc-sub" href="#ch-011-上帝的护理之工是什么-s6">解读6：明白了上帝的护理，对基督徒的生活有什么影响？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工">
+<a class="toc-item" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工">12问：上帝对在起初受造本位上的人施行了什么特别的护理之工？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工-s1">解读1：什么是约？</a>
+<a class="toc-sub" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工-s2">解读2：什么是上帝与人的约？</a>
+<a class="toc-sub" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工-s3">解读3：上帝与人立了多少约？</a>
+<a class="toc-sub" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工-s4">解读4 ：上帝何时与人立了行为之约？</a>
+<a class="toc-sub" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工-s5">解读5 ：上帝与人所立的行为之约的应许是什么？</a>
+<a class="toc-sub" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工-s6">解读6：上帝在行为之约中向人所应许的是什么样的生命？</a>
+<a class="toc-sub" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工-s7">解读7：肉体的生命、灵性的生命和永远的生命都是什么？</a>
+<a class="toc-sub" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工-s8">解读8：行为之约的条件是什么？</a>
+<a class="toc-sub" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工-s9">解读9：什么是「完全的顺服」？</a>
+<a class="toc-sub" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工-s10">解读10：在行为之约中禁止什么？</a>
+<a class="toc-sub" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工-s11">解读11：为什么这棵树被称为分别善恶树？</a>
+<a class="toc-sub" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工-s12">解读12：上帝所警告的违背行为之约的惩罚是什么？</a>
+<a class="toc-sub" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工-s13">解读13：上帝所警告的作为犯罪惩罚的死亡是什么？</a>
+<a class="toc-sub" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工-s14">解读14：肉体的死亡、灵性的死亡和永远的死亡都是什么？</a>
+</div>
+</div>
+<div class="toc-cat">八、始祖是如何犯罪的</div>
+<div class="toc-row" data-target="ch-013-我们的始祖守住他们受造时的本位了吗">
+<a class="toc-item" href="#ch-013-我们的始祖守住他们受造时的本位了吗">13问：我们的始祖守住他们受造时的本位了吗？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-013-我们的始祖守住他们受造时的本位了吗-s1">解读1：什么是「自由意志」？</a>
+<a class="toc-sub" href="#ch-013-我们的始祖守住他们受造时的本位了吗-s2">解读2：是不是随心所欲、想做什么就做什么才算有自由意志？</a>
+<a class="toc-sub" href="#ch-013-我们的始祖守住他们受造时的本位了吗-s3">解读3：人起初受造时所享有的自由意志是什么？</a>
+<a class="toc-sub" href="#ch-013-我们的始祖守住他们受造时的本位了吗-s4">解读4：我们的始祖是如何按着自己的自由意志堕落的？</a>
+<a class="toc-sub" href="#ch-013-我们的始祖守住他们受造时的本位了吗-s5">解读5：为何上帝允许始祖被试探？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-014-罪是什么">
+<a class="toc-item" href="#ch-014-罪是什么">14问：罪是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-014-罪是什么-s1">解读1：上帝的律法是什么？</a>
+<a class="toc-sub" href="#ch-014-罪是什么-s2">解读2：上帝的律法在何处能找到？</a>
+<a class="toc-sub" href="#ch-014-罪是什么-s3">解读3：圣经中上帝的律法分几种？</a>
+<a class="toc-sub" href="#ch-014-罪是什么-s4">解读4：什么是上帝眼中的罪？</a>
+<a class="toc-sub" href="#ch-014-罪是什么-s5">解读5：什么是原罪？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-015-什么罪使我们的始祖从他们受造的本位上堕落">
+<a class="toc-item" href="#ch-015-什么罪使我们的始祖从他们受造的本位上堕落">15问：什么罪使我们的始祖从他们受造的本位上堕落？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-015-什么罪使我们的始祖从他们受造的本位上堕落-s1">解读1：为什么上帝禁止我们的始祖吃分别善恶树上的果子？</a>
+<a class="toc-sub" href="#ch-015-什么罪使我们的始祖从他们受造的本位上堕落-s2">解读2：既然禁果没有毒，为什么吃禁果是犯罪呢？</a>
+</div>
+</div>
+<div class="toc-cat">九、始祖犯罪的后果</div>
+<div class="toc-row" data-target="ch-016-是否全人类都在亚当首次犯的罪中堕落了">
+<a class="toc-item" href="#ch-016-是否全人类都在亚当首次犯的罪中堕落了">16问：是否全人类都在亚当首次犯的罪中堕落了？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-016-是否全人类都在亚当首次犯的罪中堕落了-s1">解读1：是否全人类，即亚当的后裔，都在亚当的首次犯罪中堕落了？</a>
+<a class="toc-sub" href="#ch-016-是否全人类都在亚当首次犯的罪中堕落了-s2">解读2：亚当犯罪的时候，他后裔还没有出生，怎么能与他一同堕落呢？</a>
+<a class="toc-sub" href="#ch-016-是否全人类都在亚当首次犯的罪中堕落了-s3">解读3：亚当犯罪的时候，他的后裔还没出生，并没有选择他为他们的代表，亚当怎么能代表他们与上帝立下行为之约呢？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-017-堕落使人类陷入怎样的处境里">
+<a class="toc-item" href="#ch-017-堕落使人类陷入怎样的处境里">17问：堕落使人类陷入怎样的处境里？</a>
+</div>
+<div class="toc-row" data-target="ch-018-人类堕落所陷处境的罪恶在于什么">
+<a class="toc-item" href="#ch-018-人类堕落所陷处境的罪恶在于什么">18问：人类堕落所陷处境的罪恶在于什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-018-人类堕落所陷处境的罪恶在于什么-s1">解读1：什么是原罪？</a>
+<a class="toc-sub" href="#ch-018-人类堕落所陷处境的罪恶在于什么-s2">解读2：天性的败坏怎么会传递给后代呢？</a>
+<a class="toc-sub" href="#ch-018-人类堕落所陷处境的罪恶在于什么-s3">解读3：重生得救的人所生的孩子是不是就没有天性的败坏？</a>
+<a class="toc-sub" href="#ch-018-人类堕落所陷处境的罪恶在于什么-s4">解读4：什么是本罪？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-019-人类堕落所陷处境的悲惨在于什么">
+<a class="toc-item" href="#ch-019-人类堕落所陷处境的悲惨在于什么">19问：人类堕落所陷处境的悲惨在于什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-019-人类堕落所陷处境的悲惨在于什么-s1">解读1：人堕落后的悲惨在于什么？</a>
+<a class="toc-sub" href="#ch-019-人类堕落所陷处境的悲惨在于什么-s2">解读2：人堕落以后，丧失了什么？</a>
+<a class="toc-sub" href="#ch-019-人类堕落所陷处境的悲惨在于什么-s3">解读3：人堕落以后，处于什么境况？</a>
+<a class="toc-sub" href="#ch-019-人类堕落所陷处境的悲惨在于什么-s4">解读4：人堕落以后，将遭受什么惩罚？</a>
+<a class="toc-sub" href="#ch-019-人类堕落所陷处境的悲惨在于什么-s5">解读5：什么是今生的无穷悲苦？</a>
+<a class="toc-sub" href="#ch-019-人类堕落所陷处境的悲惨在于什么-s6">解读6：什么是至终的死亡结局？</a>
+<a class="toc-sub" href="#ch-019-人类堕落所陷处境的悲惨在于什么-s7">解读7：什么是永恒的地狱痛苦？</a>
+</div>
+</div>
+<div class="toc-cat">十、上帝的救恩</div>
+<div class="toc-row" data-target="ch-020-上帝是否任凭全人类在罪恶悲惨的处境中灭亡">
+<a class="toc-item" href="#ch-020-上帝是否任凭全人类在罪恶悲惨的处境中灭亡">20问：上帝是否任凭全人类在罪恶悲惨的处境中灭亡？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-020-上帝是否任凭全人类在罪恶悲惨的处境中灭亡-s1">解读1：是否全人类都要在罪恶和悲惨中沉沦灭亡？</a>
+<a class="toc-sub" href="#ch-020-上帝是否任凭全人类在罪恶悲惨的处境中灭亡-s2">解读2：什么人有资格成为上帝的选民？</a>
+<a class="toc-sub" href="#ch-020-上帝是否任凭全人类在罪恶悲惨的处境中灭亡-s3">解读3：上帝用什么方式来拯救祂的选民？</a>
+<a class="toc-sub" href="#ch-020-上帝是否任凭全人类在罪恶悲惨的处境中灭亡-s4">解读4：恩典之约是与谁立的？</a>
+<a class="toc-sub" href="#ch-020-上帝是否任凭全人类在罪恶悲惨的处境中灭亡-s5">解读5：上帝藉着基督与选民所立的恩典之约的应许是什么？</a>
+<a class="toc-sub" href="#ch-020-上帝是否任凭全人类在罪恶悲惨的处境中灭亡-s6">解读6：恩典之约的条件是什么？</a>
+<a class="toc-sub" href="#ch-020-上帝是否任凭全人类在罪恶悲惨的处境中灭亡-s7">解读7：为什么与选民之约被称为恩典之约？</a>
+<a class="toc-sub" href="#ch-020-上帝是否任凭全人类在罪恶悲惨的处境中灭亡-s8">解读8：上帝与以色列民所立的西乃之约和恩典之约有何异同？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-021-谁是上帝选民的救赎主">
+<a class="toc-item" href="#ch-021-谁是上帝选民的救赎主">21问：谁是上帝选民的救赎主？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-021-谁是上帝选民的救赎主-s1">解读1：上帝选民的救赎主被称为什么？</a>
+<a class="toc-sub" href="#ch-021-谁是上帝选民的救赎主-s2">解读2：为什么祂被称为「主」？</a>
+<a class="toc-sub" href="#ch-021-谁是上帝选民的救赎主-s3">解读3：为什么祂被称为「耶稣」？</a>
+<a class="toc-sub" href="#ch-021-谁是上帝选民的救赎主-s4">解读4：为什么祂被称为「基督」？</a>
+<a class="toc-sub" href="#ch-021-谁是上帝选民的救赎主-s5">解读5：主耶稣基督如何救赎上帝的选民？</a>
+<a class="toc-sub" href="#ch-021-谁是上帝选民的救赎主-s6">解读6：主耶稣基督和上帝是什么关系？</a>
+<a class="toc-sub" href="#ch-021-谁是上帝选民的救赎主-s7">解读7：上帝怎么会有儿子呢？</a>
+<a class="toc-sub" href="#ch-021-谁是上帝选民的救赎主-s8">解读8：为什么救赎主必须是上帝？</a>
+<a class="toc-sub" href="#ch-021-谁是上帝选民的救赎主-s9">解读9：为什么救赎主必须是人？</a>
+<a class="toc-sub" href="#ch-021-谁是上帝选民的救赎主-s10">解读10：基督怎样既是上帝、又是人呢？</a>
+<a class="toc-sub" href="#ch-021-谁是上帝选民的救赎主-s11">解读11：是否主耶稣升天以后就不再是神人二性？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-022-上帝之子基督如何成为人呢">
+<a class="toc-item" href="#ch-022-上帝之子基督如何成为人呢">22问：上帝之子基督如何成为人呢？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-022-上帝之子基督如何成为人呢-s1">解读1：基督成为人是自愿的吗？</a>
+<a class="toc-sub" href="#ch-022-上帝之子基督如何成为人呢-s2">解读2：基督是和其他人一样真正的人吗？</a>
+<a class="toc-sub" href="#ch-022-上帝之子基督如何成为人呢-s3">解读3：基督的出生和其他人的出生一样吗？</a>
+<a class="toc-sub" href="#ch-022-上帝之子基督如何成为人呢-s4">解读4：基督怎能由童贞女出生呢？</a>
+<a class="toc-sub" href="#ch-022-上帝之子基督如何成为人呢-s5">解读5：基督像其他人一样出生在罪中吗？</a>
+</div>
+</div>
+<div class="toc-cat">十一、基督的拯救</div>
+<div class="toc-row" data-target="ch-023-基督作为我们的救赎主-祂所执行的职份有哪些">
+<a class="toc-item" href="#ch-023-基督作为我们的救赎主-祂所执行的职份有哪些">23问：基督作为我们的救赎主，祂所执行的职份有哪些？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-023-基督作为我们的救赎主-祂所执行的职份有哪些-s1">解读1：基督执行哪些职分？</a>
+<a class="toc-sub" href="#ch-023-基督作为我们的救赎主-祂所执行的职份有哪些-s2">解读2：基督只是在地上执行这些职分吗？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-024-基督如何执行祂作为先知的职分呢">
+<a class="toc-item" href="#ch-024-基督如何执行祂作为先知的职分呢">24问：基督如何执行祂作为先知的职分呢？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-024-基督如何执行祂作为先知的职分呢-s1">解读1：基督怎样向我们启示上帝拯救我们的旨意？</a>
+<a class="toc-sub" href="#ch-024-基督如何执行祂作为先知的职分呢-s2">解读2：基督的话语是什么？</a>
+<a class="toc-sub" href="#ch-024-基督如何执行祂作为先知的职分呢-s3">解读3：整个圣经只有一小部分是基督亲自讲说的，怎能说全部是基督的话语呢？</a>
+<a class="toc-sub" href="#ch-024-基督如何执行祂作为先知的职分呢-s4">解读4：没有基督的圣灵，仅仅是基督的话语，足以教导我们明白上帝的旨意，使我们得救吗？</a>
+<a class="toc-sub" href="#ch-024-基督如何执行祂作为先知的职分呢-s5">解读5：没有基督的话语，仅仅是基督的圣灵，足以教导我们明白上帝的旨意，使我们得救吗？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-025-基督如何执行祂作为祭司的职分呢">
+<a class="toc-item" href="#ch-025-基督如何执行祂作为祭司的职分呢">25问：基督如何执行祂作为祭司的职分呢？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-025-基督如何执行祂作为祭司的职分呢-s1">解读1：怎么知道基督是上帝所任命的大祭司？</a>
+<a class="toc-sub" href="#ch-025-基督如何执行祂作为祭司的职分呢-s2">解读2：基督祭司的职分包括哪些？</a>
+<a class="toc-sub" href="#ch-025-基督如何执行祂作为祭司的职分呢-s3">解读3：什么是祭？</a>
+<a class="toc-sub" href="#ch-025-基督如何执行祂作为祭司的职分呢-s4">解读4：基督为我们向上帝所奉献的祭是什么？</a>
+<a class="toc-sub" href="#ch-025-基督如何执行祂作为祭司的职分呢-s5">解读5：为什么基督为我们向上帝献上自己为祭？</a>
+<a class="toc-sub" href="#ch-025-基督如何执行祂作为祭司的职分呢-s6">解读6：在基督的代求中，祂为我们作什么？</a>
+<a class="toc-sub" href="#ch-025-基督如何执行祂作为祭司的职分呢-s7">解读7：基督在何处为我们代求？</a>
+<a class="toc-sub" href="#ch-025-基督如何执行祂作为祭司的职分呢-s8">解读8：基督只是一时为我们代求吗？</a>
+<a class="toc-sub" href="#ch-025-基督如何执行祂作为祭司的职分呢-s9">解读9：基督祭司的职分与礼仪律之下祭司的职分有什么不同？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-026-基督如何执行祂作为君王的职分呢">
+<a class="toc-item" href="#ch-026-基督如何执行祂作为君王的职分呢">26问：基督如何执行祂作为君王的职分呢？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-026-基督如何执行祂作为君王的职分呢-s1">解读1：基督向谁执行祂君王的职分？</a>
+<a class="toc-sub" href="#ch-026-基督如何执行祂作为君王的职分呢-s2">解读2：基督如何向祂的选民执行君王的职分？</a>
+<a class="toc-sub" href="#ch-026-基督如何执行祂作为君王的职分呢-s3">解读3：基督如何向祂和祂的选民的仇敌执行君王的职分？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-027-基督的降卑显明在何事上">
+<a class="toc-item" href="#ch-027-基督的降卑显明在何事上">27问：基督的降卑显明在何事上？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-027-基督的降卑显明在何事上-s1">解读1：基督是怎样降卑自己的？</a>
+<a class="toc-sub" href="#ch-027-基督的降卑显明在何事上-s2">解读2：基督的降卑对我们有什么意义？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-028-基督的升高显明在何事上">
+<a class="toc-item" href="#ch-028-基督的升高显明在何事上">28问：基督的升高显明在何事上？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-028-基督的升高显明在何事上-s1">解读1：基督的升高包括哪四个步骤？</a>
+<a class="toc-sub" href="#ch-028-基督的升高显明在何事上-s2">解读2：如何证明基督是从死里复活了？</a>
+<a class="toc-sub" href="#ch-028-基督的升高显明在何事上-s3">解读3：基督是藉着谁从死里复活的？</a>
+<a class="toc-sub" href="#ch-028-基督的升高显明在何事上-s4">解读4：基督是以埋藏时同样的身体复活的吗？</a>
+<a class="toc-sub" href="#ch-028-基督的升高显明在何事上-s5">解读5：在坟墓中，基督的身体是不是和其他人的身体一样朽坏了？</a>
+<a class="toc-sub" href="#ch-028-基督的升高显明在何事上-s6">解读6：在复活之后，祂的身体还会死吗？</a>
+<a class="toc-sub" href="#ch-028-基督的升高显明在何事上-s7">解读7：基督的复活对我们有什么意义？</a>
+<a class="toc-sub" href="#ch-028-基督的升高显明在何事上-s8">解读8：基督复活之后多久升天？</a>
+<a class="toc-sub" href="#ch-028-基督的升高显明在何事上-s9">解读9：基督为什么升天？</a>
+<a class="toc-sub" href="#ch-028-基督的升高显明在何事上-s10">解读10：基督的升天对我们有什么意义？</a>
+<a class="toc-sub" href="#ch-028-基督的升高显明在何事上-s11">解读11：基督坐在上帝的右边是什么意思？</a>
+<a class="toc-sub" href="#ch-028-基督的升高显明在何事上-s12">解读12：基督何时审判世界？</a>
+</div>
+</div>
+<div class="toc-cat">十二、圣灵的工作</div>
+<div class="toc-row" data-target="ch-029-我们如何能有份于基督所买赎的救恩呢">
+<a class="toc-item" href="#ch-029-我们如何能有份于基督所买赎的救恩呢">29问：我们如何能有份于基督所买赎的救恩呢？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-029-我们如何能有份于基督所买赎的救恩呢-s1">解读1：基督既已为我们成就了救恩，是否全人类都可以自动享有这救恩？</a>
+<a class="toc-sub" href="#ch-029-我们如何能有份于基督所买赎的救恩呢-s2">解读2：在基督降生前的人如何获得救恩？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-030-圣灵如何将基督所买赎的救恩运用在我们的身上呢">
+<a class="toc-item" href="#ch-030-圣灵如何将基督所买赎的救恩运用在我们的身上呢">30问：圣灵如何将基督所买赎的救恩运用在我们的身上呢？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-030-圣灵如何将基督所买赎的救恩运用在我们的身上呢-s1">解读1：圣灵怎样把基督为我们所买来的救赎赐给我们？</a>
+<a class="toc-sub" href="#ch-030-圣灵如何将基督所买赎的救恩运用在我们的身上呢-s2">解读2：我们是怎样联于基督的？</a>
+<a class="toc-sub" href="#ch-030-圣灵如何将基督所买赎的救恩运用在我们的身上呢-s3">解读3：信心是来自我们自己，还是来自上帝？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-031-什么是有效的恩召">
+<a class="toc-item" href="#ch-031-什么是有效的恩召">31问：什么是有效的恩召？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-031-什么是有效的恩召-s1">解读1：有效的恩召和无效的呼召有何不同？</a>
+<a class="toc-sub" href="#ch-031-什么是有效的恩召-s2">解读2：在有效的恩召中，圣灵是怎样在我们里面工作的？</a>
+</div>
+</div>
+<div class="toc-cat">十三、救恩在今生的恩惠</div>
+<div class="toc-row" data-target="ch-032-有效蒙召的人今生能享受什么恩惠">
+<a class="toc-item" href="#ch-032-有效蒙召的人今生能享受什么恩惠">32问：有效蒙召的人今生能享受什么恩惠？</a>
+</div>
+<div class="toc-row" data-target="ch-033-什么是称义">
+<a class="toc-item" href="#ch-033-什么是称义">33问：什么是称义？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-033-什么是称义-s1">解读1：「称义」是什么意思？</a>
+<a class="toc-sub" href="#ch-033-什么是称义-s2">解读2：我们在上帝面前称义，是否因为我们有好言行、好思想、或者比较虔诚？</a>
+<a class="toc-sub" href="#ch-033-什么是称义-s3">解读3：基督的义怎样能称为我们的义呢？</a>
+<a class="toc-sub" href="#ch-033-什么是称义-s4">解读4：被归算给我们的基督的义是什么？</a>
+<a class="toc-sub" href="#ch-033-什么是称义-s5">解读5：我们单单是因信称义，还是因着行为，至少在某种程度上呢？</a>
+<a class="toc-sub" href="#ch-033-什么是称义-s6">解读6：我们的信心是否也可以算作行为呢？</a>
+<a class="toc-sub" href="#ch-033-什么是称义-s7">解读7：既然我们的称义是因着信心，不需要任何行为，是否称义以后也不需要任何行为了？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-034-什么是得着儿子的名分">
+<a class="toc-item" href="#ch-034-什么是得着儿子的名分">34问：什么是得着儿子的名分？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-034-什么是得着儿子的名分-s1">解读1：我们怎样才能得着上帝儿子的名分？</a>
+<a class="toc-sub" href="#ch-034-什么是得着儿子的名分-s2">解读2：上帝如何收养儿女？</a>
+<a class="toc-sub" href="#ch-034-什么是得着儿子的名分-s3">解读3：被收养为上帝儿女的人得享哪些特权？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-035-什么是成圣">
+<a class="toc-item" href="#ch-035-什么是成圣">35问：什么是成圣？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-035-什么是成圣-s1">解读1：什么是成圣？</a>
+<a class="toc-sub" href="#ch-035-什么是成圣-s2">解读2：成圣是靠我们努力做成的吗？</a>
+<a class="toc-sub" href="#ch-035-什么是成圣-s3">解读3：我们的成圣是怎样一个过程？</a>
+<a class="toc-sub" href="#ch-035-什么是成圣-s4">解读4：成圣与称义、收养有什么不同？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-036-直接间接随着称义-得着儿子的名分-成圣而来今生的恩惠有哪些">
+<a class="toc-item" href="#ch-036-直接间接随着称义-得着儿子的名分-成圣而来今生的恩惠有哪些">36问：直接间接随着称义、得着儿子的名分、成圣而来今生的恩惠有哪些？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-036-直接间接随着称义-得着儿子的名分-成圣而来今生的恩惠有哪些-s1">解读1：未称义、未成圣的人就得不到这些恩惠吗？</a>
+<a class="toc-sub" href="#ch-036-直接间接随着称义-得着儿子的名分-成圣而来今生的恩惠有哪些-s2">解读2：为什么并不是所有的基督徒都能得到这些恩惠呢？</a>
+<a class="toc-sub" href="#ch-036-直接间接随着称义-得着儿子的名分-成圣而来今生的恩惠有哪些-s3">解读3：我们怎么知道自己称义并得着上帝儿子的名分了？</a>
+<a class="toc-sub" href="#ch-036-直接间接随着称义-得着儿子的名分-成圣而来今生的恩惠有哪些-s4">解读4：我们怎么知道自己已经在成圣的过程中？</a>
+<a class="toc-sub" href="#ch-036-直接间接随着称义-得着儿子的名分-成圣而来今生的恩惠有哪些-s5">解读5：是不是所有的真正称义、得儿子的名分、成圣的人都会在恩典中持守到底？</a>
+<a class="toc-sub" href="#ch-036-直接间接随着称义-得着儿子的名分-成圣而来今生的恩惠有哪些-s6">解读6：有的信徒一时犯罪，会不会从恩典中堕落？</a>
+<a class="toc-sub" href="#ch-036-直接间接随着称义-得着儿子的名分-成圣而来今生的恩惠有哪些-s7">解读7：今生的恩惠是否也包括物质财富等「世俗」的赐予？</a>
+</div>
+</div>
+<div class="toc-cat">十四、救恩在今生之后的恩惠</div>
+<div class="toc-row" data-target="ch-037-信徒死时将从基督领受的恩惠是什么">
+<a class="toc-item" href="#ch-037-信徒死时将从基督领受的恩惠是什么">37问：信徒死时将从基督领受的恩惠是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-037-信徒死时将从基督领受的恩惠是什么-s1">解读1：信徒死时将在哪些方面领受恩惠？</a>
+<a class="toc-sub" href="#ch-037-信徒死时将从基督领受的恩惠是什么-s2">解读2：信徒死时在灵魂方面领受什么恩惠？</a>
+<a class="toc-sub" href="#ch-037-信徒死时将从基督领受的恩惠是什么-s3">解读3：信徒死时在身体方面领受什么恩惠？</a>
+<a class="toc-sub" href="#ch-037-信徒死时将从基督领受的恩惠是什么-s4">解读4：此处所说的复活是什么？</a>
+<a class="toc-sub" href="#ch-037-信徒死时将从基督领受的恩惠是什么-s5">解读5：非信徒死时的灵魂和身体与信徒有何不同？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-038-信徒复活时将从基督领受的恩惠是什么">
+<a class="toc-item" href="#ch-038-信徒复活时将从基督领受的恩惠是什么">38问：信徒复活时将从基督领受的恩惠是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-038-信徒复活时将从基督领受的恩惠是什么-s1">解读1：信徒复活时从基督所领受了那些方面的恩惠？</a>
+<a class="toc-sub" href="#ch-038-信徒复活时将从基督领受的恩惠是什么-s2">解读2：从复活本身看，信徒将领受什么恩惠？</a>
+<a class="toc-sub" href="#ch-038-信徒复活时将从基督领受的恩惠是什么-s3">解读3：在复活之后审判的日子，信徒将领受什么恩惠？</a>
+<a class="toc-sub" href="#ch-038-信徒复活时将从基督领受的恩惠是什么-s4">解读4：在审判日之后，信徒在天上领受什么恩惠？</a>
+<a class="toc-sub" href="#ch-038-信徒复活时将从基督领受的恩惠是什么-s5">解读5：在末日的时候，非信徒与信徒的状况有何不同？</a>
+</div>
+</div>
+</div>
+<div class="toc-part">第三部分：我们当怎样行</div>
+<div class="toc-group">
+<div class="toc-cat">十五、道德律与十诫</div>
+<div class="toc-row" data-target="ch-039-上帝对人所要求的本分是什么">
+<a class="toc-item" href="#ch-039-上帝对人所要求的本分是什么">39问：上帝对人所要求的本分是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-039-上帝对人所要求的本分是什么-s1">解读1：为什么顺服上帝是人所当守的本分？</a>
+<a class="toc-sub" href="#ch-039-上帝对人所要求的本分是什么-s2">解读2：在上帝之外，还有没有其他权柄可以要求人顺服他们呢？</a>
+<a class="toc-sub" href="#ch-039-上帝对人所要求的本分是什么-s3">解读3：顺服和顺从有什么区别？</a>
+<a class="toc-sub" href="#ch-039-上帝对人所要求的本分是什么-s4">解读4：上帝赐给我们必须遵行的顺服的标准是什么呢？</a>
+<a class="toc-sub" href="#ch-039-上帝对人所要求的本分是什么-s5">解读5：除了明显的旨意，上帝还启示了其他别的旨意吗？</a>
+<a class="toc-sub" href="#ch-039-上帝对人所要求的本分是什么-s6">解读6：顺服上帝的本质是什么？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-040-上帝起初向人启示了什么作为顺服祂的标准呢">
+<a class="toc-item" href="#ch-040-上帝起初向人启示了什么作为顺服祂的标准呢">40问：上帝起初向人启示了什么作为顺服祂的标准呢？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-040-上帝起初向人启示了什么作为顺服祂的标准呢-s1">解读1：今天道德律是否仍然是人应当顺服的法则？</a>
+<a class="toc-sub" href="#ch-040-上帝起初向人启示了什么作为顺服祂的标准呢-s2">解读2：对于非信徒而言，他们并没有读过圣经，上帝的道德律怎能是他们应当顺服的法则呢？</a>
+<a class="toc-sub" href="#ch-040-上帝起初向人启示了什么作为顺服祂的标准呢-s3">解读3：有没有人能够通过顺服道德律、凭良心做事而得到永生呢？</a>
+<a class="toc-sub" href="#ch-040-上帝起初向人启示了什么作为顺服祂的标准呢-s4">解读4：既然靠律法并不能得着永生，为什么上帝还要赐下律法呢？</a>
+<a class="toc-sub" href="#ch-040-上帝起初向人启示了什么作为顺服祂的标准呢-s5">解读5：道德律对信徒的作用是什么？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-041-道德律在哪里有简略的概括">
+<a class="toc-item" href="#ch-041-道德律在哪里有简略的概括">41问：道德律在哪里有简略的概括？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-041-道德律在哪里有简略的概括-s1">解读1：十诫中包括什么？</a>
+<a class="toc-sub" href="#ch-041-道德律在哪里有简略的概括-s2">解读2：道德律中所吩咐或禁止的一切事，是否都在十诫中表达了呢？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-042-十诫的总纲是什么">
+<a class="toc-item" href="#ch-042-十诫的总纲是什么">42问：十诫的总纲是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-042-十诫的总纲是什么-s1">解读1：十诫的总纲是什么？</a>
+<a class="toc-sub" href="#ch-042-十诫的总纲是什么-s2">解读2：总纲的第一条是什么？</a>
+<a class="toc-sub" href="#ch-042-十诫的总纲是什么-s3">解读3：总纲的第二条是什么？</a>
+</div>
+</div>
+<div class="toc-cat">十六、十诫的序言</div>
+<div class="toc-row" data-target="ch-043-十诫的序言是什么">
+<a class="toc-item" href="#ch-043-十诫的序言是什么">43问：十诫的序言是什么？</a>
+</div>
+<div class="toc-row" data-target="ch-044-十诫的序言教导我们什么">
+<a class="toc-item" href="#ch-044-十诫的序言教导我们什么">44问：十诫的序言教导我们什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-044-十诫的序言教导我们什么-s1">解读1：在序言中有多少理由要求我们遵守上帝的一切诫命？</a>
+<a class="toc-sub" href="#ch-044-十诫的序言教导我们什么-s2">解读2：上帝是耶和华，这一事实与我们有责任遵守祂的诫命有什么样的关系呢？</a>
+<a class="toc-sub" href="#ch-044-十诫的序言教导我们什么-s3">解读3：上帝是我们的上帝，这一事实与我们有责任遵守祂的诫命有什么样的关系呢？</a>
+<a class="toc-sub" href="#ch-044-十诫的序言教导我们什么-s4">解读4：上帝是我们的救主，这一事实与我们有责任遵守祂的诫命有什么样的关系呢？</a>
+</div>
+</div>
+<div class="toc-cat">十七、第一条诫命</div>
+<div class="toc-row" data-target="ch-045-第一条诫命是什么">
+<a class="toc-item" href="#ch-045-第一条诫命是什么">45问：第一条诫命是什么？</a>
+</div>
+<div class="toc-row" data-target="ch-046-第一条诫命要求什么">
+<a class="toc-item" href="#ch-046-第一条诫命要求什么">46问：第一条诫命要求什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-046-第一条诫命要求什么-s1">解读1：第一条诫命规定了哪些责任？</a>
+<a class="toc-sub" href="#ch-046-第一条诫命要求什么-s2">解读2：对于上帝，我们应当认识什么？</a>
+<a class="toc-sub" href="#ch-046-第一条诫命要求什么-s3">解读3：我们应当怎样承认上帝？</a>
+<a class="toc-sub" href="#ch-046-第一条诫命要求什么-s4">解读4：我们应该怎样敬拜、事奉和荣耀我们的上帝？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-047-第一条诫命禁止什么">
+<a class="toc-item" href="#ch-047-第一条诫命禁止什么">47问：第一条诫命禁止什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-047-第一条诫命禁止什么-s1">解读1：第一条诫命主要禁止什么罪？</a>
+<a class="toc-sub" href="#ch-047-第一条诫命禁止什么-s2">解读2：什么是无神论？</a>
+<a class="toc-sub" href="#ch-047-第一条诫命禁止什么-s3">解读3：什么是亵渎?</a>
+<a class="toc-sub" href="#ch-047-第一条诫命禁止什么-s4">解读4：什么是偶像崇拜?</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-048-第一条诫命中-在我面前-或-除我以外-一语特别教导我们什么">
+<a class="toc-item" href="#ch-048-第一条诫命中-在我面前-或-除我以外-一语特别教导我们什么">48问：第一条诫命中「在我面前」（或「除我以外」）一语特别教导我们什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-048-第一条诫命中-在我面前-或-除我以外-一语特别教导我们什么-s1">解读1：为什么上帝是无所不见的？</a>
+<a class="toc-sub" href="#ch-048-第一条诫命中-在我面前-或-除我以外-一语特别教导我们什么-s2">解读2：为什么上帝觉察到人所犯另有别神之罪，也必大为不悦呢？</a>
+</div>
+</div>
+<div class="toc-cat">十八、第二条诫命</div>
+<div class="toc-row" data-target="ch-049-第二条诫命是什么">
+<a class="toc-item" href="#ch-049-第二条诫命是什么">49问：第二条诫命是什么？</a>
+</div>
+<div class="toc-row" data-target="ch-050-第二条诫命要求什么">
+<a class="toc-item" href="#ch-050-第二条诫命要求什么">50问：第二条诫命要求什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-050-第二条诫命要求什么-s1">解读1：第一条诫命与第二条诫命所要求的敬拜有何不同之处？</a>
+<a class="toc-sub" href="#ch-050-第二条诫命要求什么-s2">解读2：上帝指定了哪些敬拜方式和律例？</a>
+<a class="toc-sub" href="#ch-050-第二条诫命要求什么-s3">解读3：对于上帝所指定的关于敬拜的律例和方式，我们应当如何去行？</a>
+<a class="toc-sub" href="#ch-050-第二条诫命要求什么-s4">解读4：在第二条诫命中只是说「不可为你自己雕刻偶像」等，为什么说是吩咐我们对于上帝所指定的所有敬拜和律例接受、遵守、保持纯全？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-051-第二条诫命禁止什么">
+<a class="toc-item" href="#ch-051-第二条诫命禁止什么">51问：第二条诫命禁止什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-051-第二条诫命禁止什么-s1">解读1：第一条诫命和第二条诫命所禁止的偶像崇拜有何不同之处？</a>
+<a class="toc-sub" href="#ch-051-第二条诫命禁止什么-s2">解读2：什么是以偶像敬拜上帝？</a>
+<a class="toc-sub" href="#ch-051-第二条诫命禁止什么-s3">解读3：我们可以利用一些形像来帮助祷告、默想或敬拜上帝吗？</a>
+<a class="toc-sub" href="#ch-051-第二条诫命禁止什么-s4">解读4：如果我们只是用人所制造的上帝的形象、图画做装饰、教育用途，并不敬拜它，是否合乎十诫呢？</a>
+<a class="toc-sub" href="#ch-051-第二条诫命禁止什么-s5">解读5：主耶稣道成肉身，有人的形象，我们可以用耶稣的画像或塑像来帮助我们祷告、默想或敬拜吗？</a>
+<a class="toc-sub" href="#ch-051-第二条诫命禁止什么-s6">解读6：什么是迷信？</a>
+<a class="toc-sub" href="#ch-051-第二条诫命禁止什么-s7">解读7：圣经中吩咐说「凡事都要规规矩矩地按着次序行」（林前14:40），教会是否可以因此设立某些仪式呢？</a>
+<a class="toc-sub" href="#ch-051-第二条诫命禁止什么-s8">解读8：怎样分辨是否「以偶像敬拜上帝」？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-052-附加在第二条诫命上的理由是什么">
+<a class="toc-item" href="#ch-052-附加在第二条诫命上的理由是什么">52问：附加在第二条诫命上的理由是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-052-附加在第二条诫命上的理由是什么-s1">解读1：附加在第二条诫命上的第一个理由是什么？</a>
+<a class="toc-sub" href="#ch-052-附加在第二条诫命上的理由是什么-s2">解读2：附加在第二条诫命上的第二个理由是什么？</a>
+<a class="toc-sub" href="#ch-052-附加在第二条诫命上的理由是什么-s3">解读3：附加在第二条诫命上的第三个理由是什么？</a>
+<a class="toc-sub" href="#ch-052-附加在第二条诫命上的理由是什么-s4">解读4：上帝怎能因为父母的过犯而惩罚他们的孩子，「自父及子，直到三四代」（出20:5）呢？</a>
+</div>
+</div>
+<div class="toc-cat">十九、第三条诫命</div>
+<div class="toc-row" data-target="ch-053-第三条诫命是什么">
+<a class="toc-item" href="#ch-053-第三条诫命是什么">53问：第三条诫命是什么？</a>
+</div>
+<div class="toc-row" data-target="ch-054-第三条诫命要求什么">
+<a class="toc-item" href="#ch-054-第三条诫命要求什么">54问：第三条诫命要求什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-054-第三条诫命要求什么-s1">解读1：第三条诫命与第一、第二条诫命所要求的敬拜有何不同之处？</a>
+<a class="toc-sub" href="#ch-054-第三条诫命要求什么-s2">解读2：什么是「上帝的名」？</a>
+<a class="toc-sub" href="#ch-054-第三条诫命要求什么-s3">解读3：我们应当怎样对待上帝的名？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-055-第三条诫命禁止什么">
+<a class="toc-item" href="#ch-055-第三条诫命禁止什么">55问：第三条诫命禁止什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-055-第三条诫命禁止什么-s1">解读1：哪些心思言行是亵渎或滥用上帝的名字、尊称和属性？</a>
+<a class="toc-sub" href="#ch-055-第三条诫命禁止什么-s2">解读2：哪些心思言行是亵渎或滥用上帝所设立的外在方式？</a>
+<a class="toc-sub" href="#ch-055-第三条诫命禁止什么-s3">解读3：哪些心思言行是亵渎或滥用上帝的话语？</a>
+<a class="toc-sub" href="#ch-055-第三条诫命禁止什么-s4">解读4：哪些心思言行是亵渎或滥用上帝的作为？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-056-附加在第三条诫命上的理由是什么">
+<a class="toc-item" href="#ch-056-附加在第三条诫命上的理由是什么">56问：附加在第三条诫命上的理由是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-056-附加在第三条诫命上的理由是什么-s1">解读1：上帝何时惩罚那些妄称上帝之名的人？</a>
+</div>
+</div>
+<div class="toc-cat">二十、第四条诫命</div>
+<div class="toc-row" data-target="ch-057-第四条诫命是什么">
+<a class="toc-item" href="#ch-057-第四条诫命是什么">57问：第四条诫命是什么？</a>
+</div>
+<div class="toc-row" data-target="ch-058-第四条诫命要求什么">
+<a class="toc-item" href="#ch-058-第四条诫命要求什么">58问：第四条诫命要求什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-058-第四条诫命要求什么-s1">解读1：第四条诫命与第一、第二、第二条诫命所要求的敬拜有何不同之处？</a>
+<a class="toc-sub" href="#ch-058-第四条诫命要求什么-s2">解读2：上帝在圣经中指定什么时候向祂守为圣日？</a>
+<a class="toc-sub" href="#ch-058-第四条诫命要求什么-s3">解读3：守安息日的诫命是道德性的，还是礼仪性的？</a>
+<a class="toc-sub" href="#ch-058-第四条诫命要求什么-s4">解读4：我们需要遵守圣诞节、复活节等其他「基督教节日」吗？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-059-上帝所指定每周的安息日是七日里的哪一天">
+<a class="toc-item" href="#ch-059-上帝所指定每周的安息日是七日里的哪一天">59问：上帝所指定每周的安息日是七日里的哪一天？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-059-上帝所指定每周的安息日是七日里的哪一天-s1">解读1：一定要守一周的第七日为圣，作为每周的安息日吗？</a>
+<a class="toc-sub" href="#ch-059-上帝所指定每周的安息日是七日里的哪一天-s2">解读2：起初，上帝指定七日中的哪一日作为每周的安息日？</a>
+<a class="toc-sub" href="#ch-059-上帝所指定每周的安息日是七日里的哪一天-s3">解读3：主耶稣复活之后，上帝指定七日中的哪一日作为基督徒的安息日？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-060-如何守安息日为圣">
+<a class="toc-item" href="#ch-060-如何守安息日为圣">60问：如何守安息日为圣？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-060-如何守安息日为圣-s1">解读1：我们当如何尊安息日为圣？</a>
+<a class="toc-sub" href="#ch-060-如何守安息日为圣-s2">解读2：安息日的休息是指什么？</a>
+<a class="toc-sub" href="#ch-060-如何守安息日为圣-s3">解读3：有些工作可能在安息日比在其余的六日更适合做，这样的工作也不能做吗？</a>
+<a class="toc-sub" href="#ch-060-如何守安息日为圣-s4">解读4：为了守安息日，可以在星期六熬夜学习吗？</a>
+<a class="toc-sub" href="#ch-060-如何守安息日为圣-s5">解读5：既然安息日是要我们从每周的劳碌中得着安息，我们是否可以在安息日从事娱乐、健身、消遣？</a>
+<a class="toc-sub" href="#ch-060-如何守安息日为圣-s6">解读6：在安息日是否可以让员工代替自己工作，或者任凭儿女游戏消遣呢？</a>
+<a class="toc-sub" href="#ch-060-如何守安息日为圣-s7">解读7：在安息日准备食物是否合乎上帝的律法？</a>
+<a class="toc-sub" href="#ch-060-如何守安息日为圣-s8">解读8：上帝允许我们在安息日做什么事？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-061-第四条诫命禁止什么">
+<a class="toc-item" href="#ch-061-第四条诫命禁止什么">61问：第四条诫命禁止什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-061-第四条诫命禁止什么-s1">解读1：第四条诫命禁止哪些罪？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-062-附加在第四条诫命上的理由是什么">
+<a class="toc-item" href="#ch-062-附加在第四条诫命上的理由是什么">62问：附加在第四条诫命上的理由是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-062-附加在第四条诫命上的理由是什么-s1">解读1：第四条诫命附加了哪些理由？</a>
+</div>
+</div>
+<div class="toc-cat">二十一、第五条诫命</div>
+<div class="toc-row" data-target="ch-063-第五条诫命是什么">
+<a class="toc-item" href="#ch-063-第五条诫命是什么">63问：第五条诫命是什么？</a>
+</div>
+<div class="toc-row" data-target="ch-064-第五条诫命要求什么">
+<a class="toc-item" href="#ch-064-第五条诫命要求什么">64问：第五条诫命要求什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-064-第五条诫命要求什么-s1">解读1：第五条诫命只是要求「孝敬父母」吗？</a>
+<a class="toc-sub" href="#ch-064-第五条诫命要求什么-s2">解读2：基督徒是否应该绝对顺服父母和「在上有权柄的」？</a>
+<a class="toc-sub" href="#ch-064-第五条诫命要求什么-s3">解读3：孩子对父母当尽的本分是什么？</a>
+<a class="toc-sub" href="#ch-064-第五条诫命要求什么-s4">解读4：父母对儿女当尽的本分是什么？</a>
+<a class="toc-sub" href="#ch-064-第五条诫命要求什么-s5">解读5：妻子对丈夫当尽的本分是什么？</a>
+<a class="toc-sub" href="#ch-064-第五条诫命要求什么-s6">解读6：丈夫对妻子当尽的本分是什么？</a>
+<a class="toc-sub" href="#ch-064-第五条诫命要求什么-s7">解读7：仆人对主人（员工对雇主）当尽的本分是什么？</a>
+<a class="toc-sub" href="#ch-064-第五条诫命要求什么-s8">解读8：主人对仆人（雇主对员工）当尽的本分是什么？</a>
+<a class="toc-sub" href="#ch-064-第五条诫命要求什么-s9">解读9：会众对牧者当尽的本分是什么？</a>
+<a class="toc-sub" href="#ch-064-第五条诫命要求什么-s10">解读10：牧者对会众当尽的本分是什么？</a>
+<a class="toc-sub" href="#ch-064-第五条诫命要求什么-s11">解读11：人民对政府当尽的本分是什么？</a>
+<a class="toc-sub" href="#ch-064-第五条诫命要求什么-s12">解读12：政府对人民当尽的本分是什么？</a>
+<a class="toc-sub" href="#ch-064-第五条诫命要求什么-s13">解读13：晚辈对长辈当尽的本分是什么？</a>
+<a class="toc-sub" href="#ch-064-第五条诫命要求什么-s14">解读14：长辈对晚辈当尽的本分是什么？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-065-第五条诫命禁止什么">
+<a class="toc-item" href="#ch-065-第五条诫命禁止什么">65问：第五条诫命禁止什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-065-第五条诫命禁止什么-s1">解读1：人与人之间若没有彼此给予对方当受的尊重和对待，也是罪吗？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-066-附加在第五条诫命上的理由是什么">
+<a class="toc-item" href="#ch-066-附加在第五条诫命上的理由是什么">66问：附加在第五条诫命上的理由是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-066-附加在第五条诫命上的理由是什么-s1">解读1：为了鼓励那些遵守第五条诫命的人，这条诫命本身所附加的理由是什么？</a>
+<a class="toc-sub" href="#ch-066-附加在第五条诫命上的理由是什么-s2">解读2：在第二条诫命中也附加了上帝祝福上千代的应许，为什么说第五条诫命是第一条带应许的诫命呢？</a>
+<a class="toc-sub" href="#ch-066-附加在第五条诫命上的理由是什么-s3">解读3：这里应许的是怎样的长寿？</a>
+<a class="toc-sub" href="#ch-066-附加在第五条诫命上的理由是什么-s4">解读4：是不是所有孝敬父母的人都能在这个世界上长寿、兴盛呢？</a>
+</div>
+</div>
+<div class="toc-cat">二十二、第六条诫命</div>
+<div class="toc-row" data-target="ch-067-第六条诫命是什么">
+<a class="toc-item" href="#ch-067-第六条诫命是什么">67问：第六条诫命是什么？</a>
+</div>
+<div class="toc-row" data-target="ch-068-第六条诫命要求什么">
+<a class="toc-item" href="#ch-068-第六条诫命要求什么">68问：第六条诫命要求什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-068-第六条诫命要求什么-s1">解读1：如果我们承认基督的名，肯定就会丧命，这时可以否认基督和祂的真道吗？</a>
+<a class="toc-sub" href="#ch-068-第六条诫命要求什么-s2">解读2：为了保全自己和他人的生命，我们是否可以撒谎？</a>
+<a class="toc-sub" href="#ch-068-第六条诫命要求什么-s3">解读3：在安息日的时候有仇敌来攻击我们，我们可以中断敬拜上帝的本分，抵挡仇敌，保护我们的性命吗？</a>
+<a class="toc-sub" href="#ch-068-第六条诫命要求什么-s4">解读4：我们可以用哪些合乎上帝律法的方法来竭力保全自己的生命？</a>
+<a class="toc-sub" href="#ch-068-第六条诫命要求什么-s5">解读5：我们应当用哪些合乎上帝律法的方法来竭力保全他人的生命？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-069-第六条诫禁止什么">
+<a class="toc-item" href="#ch-069-第六条诫禁止什么">69问：第六条诫禁止什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-069-第六条诫禁止什么-s1">解读1：为了避免羞辱或更大的痛苦，我们可以自杀或安乐死吗？</a>
+<a class="toc-sub" href="#ch-069-第六条诫禁止什么-s2">解读2：如果一个真正重生得救的人自杀，会失去救恩吗？</a>
+<a class="toc-sub" href="#ch-069-第六条诫禁止什么-s3">解读3：对于有严重残疾的胎儿，或者因强暴怀孕的胎儿，可以堕胎吗？</a>
+<a class="toc-sub" href="#ch-069-第六条诫禁止什么-s4">解读4：在什么情况下杀死他人合乎上帝的律法？</a>
+<a class="toc-sub" href="#ch-069-第六条诫禁止什么-s5">解读5：除了直接杀害自己或他人的生命，还有那些间接的方式使我们犯下杀人罪？</a>
+</div>
+</div>
+<div class="toc-cat">二十三、第七条诫命</div>
+<div class="toc-row" data-target="ch-070-第七条诫命是什么">
+<a class="toc-item" href="#ch-070-第七条诫命是什么">70问：第七条诫命是什么？</a>
+</div>
+<div class="toc-row" data-target="ch-071-第七条诫命要求什么">
+<a class="toc-item" href="#ch-071-第七条诫命要求什么">71问：第七条诫命要求什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-071-第七条诫命要求什么-s1">解读1：为什么我们应当保守自己的圣洁？</a>
+<a class="toc-sub" href="#ch-071-第七条诫命要求什么-s2">解读2：我们应当在哪些方面保守自己和他人的圣洁？</a>
+<a class="toc-sub" href="#ch-071-第七条诫命要求什么-s3">解读3：我们应当如何保守自己的贞洁？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-072-第七条诫命禁止什么">
+<a class="toc-item" href="#ch-072-第七条诫命禁止什么">72问：第七条诫命禁止什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-072-第七条诫命禁止什么-s1">解读1：第七条诫命禁止哪些方面的不洁？</a>
+<a class="toc-sub" href="#ch-072-第七条诫命禁止什么-s2">解读2：性是不圣洁的吗？</a>
+<a class="toc-sub" href="#ch-072-第七条诫命禁止什么-s3">解读3：婚姻的首要目的是繁衍后代、生养众多吗？</a>
+<a class="toc-sub" href="#ch-072-第七条诫命禁止什么-s4">解读4：旧约律法中要求最近的亲属当娶寡嫂为逝者生子立后，难道不是以繁衍后代为首要目的吗？是否有淫乱或乱伦之嫌？</a>
+<a class="toc-sub" href="#ch-072-第七条诫命禁止什么-s5">解读5：上帝设立的婚姻只是一男一女的结合吗？</a>
+<a class="toc-sub" href="#ch-072-第七条诫命禁止什么-s6">解读6：基督徒可以离婚吗？</a>
+<a class="toc-sub" href="#ch-072-第七条诫命禁止什么-s7">解读7：基督徒可以未婚同居吗？</a>
+</div>
+</div>
+<div class="toc-cat">二十四、第八条诫命</div>
+<div class="toc-row" data-target="ch-073-第八条诫命是什么">
+<a class="toc-item" href="#ch-073-第八条诫命是什么">73问：第八条诫命是什么？</a>
+</div>
+<div class="toc-row" data-target="ch-074-第八条诫命要求什么">
+<a class="toc-item" href="#ch-074-第八条诫命要求什么">74问：第八条诫命要求什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-074-第八条诫命要求什么-s1">解读1：我们是否「不可偷盗」就行了，有必要努力「获取并增加自己与别人的财富与产业」吗？</a>
+<a class="toc-sub" href="#ch-074-第八条诫命要求什么-s2">解读2：我们应当怎样努力获取并增加财富和产业？</a>
+<a class="toc-sub" href="#ch-074-第八条诫命要求什么-s3">解读3：我们应当怎样帮助他人获取并增加财富和产业？</a>
+<a class="toc-sub" href="#ch-074-第八条诫命要求什么-s4">解读4：上帝提倡私有制吗？</a>
+<a class="toc-sub" href="#ch-074-第八条诫命要求什么-s5">解读5：上帝提倡社会主义或共产主义吗？</a>
+<a class="toc-sub" href="#ch-074-第八条诫命要求什么-s6">解读6：上帝提倡资本主义和市场经济制度吗？</a>
+<a class="toc-sub" href="#ch-074-第八条诫命要求什么-s7">解读7：信徒保护自己的合法权益吗？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-075-第八条诫命禁止什么">
+<a class="toc-item" href="#ch-075-第八条诫命禁止什么">75问：第八条诫命禁止什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-075-第八条诫命禁止什么-s1">解读1：哪些行为会不正当地损害上帝交托我们管理的财富或产业？</a>
+<a class="toc-sub" href="#ch-075-第八条诫命禁止什么-s2">解读2：哪些行为会损害他人的财富或产业？</a>
+</div>
+</div>
+<div class="toc-cat">二十五、第九条诫命</div>
+<div class="toc-row" data-target="ch-076-第九条诫命是什么">
+<a class="toc-item" href="#ch-076-第九条诫命是什么">76问：第九条诫命是什么？</a>
+</div>
+<div class="toc-row" data-target="ch-077-第九条诫命要求什么">
+<a class="toc-item" href="#ch-077-第九条诫命要求什么">77问：第九条诫命要求什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-077-第九条诫命要求什么-s1">解读1：我们应当怎样维护并推进人与人之间的诚实？</a>
+<a class="toc-sub" href="#ch-077-第九条诫命要求什么-s2">解读2：为什么说「不可作假见证陷害人」的诫命也要求我们维护并促进我们自己和他人的好名声？</a>
+<a class="toc-sub" href="#ch-077-第九条诫命要求什么-s3">解读3：我们应当怎样维护并促进我们自己的好名声？</a>
+<a class="toc-sub" href="#ch-077-第九条诫命要求什么-s4">解读4：我们应当怎样维护并促进主内肢体的好名声？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-078-第九条诫命禁止什么">
+<a class="toc-item" href="#ch-078-第九条诫命禁止什么">78问：第九条诫命禁止什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s1">解读1：为什么上帝禁止说谎？</a>
+<a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s2">解读2：恶意的谎言当然不对，善意的、不伤害任何人的谎言可以说吗？</a>
+<a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s3">解读3：我们常常习惯于哪些「白谎」？</a>
+<a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s4">解读4：上帝为什么奖赏说谎的接生婆和妓女喇合？</a>
+<a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s5">解读5：哪些言行会有损我们自己的好名声？</a>
+<a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s6">解读6：哪些言行会有损他人的好名声？</a>
+<a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s7"></a>
+</div>
+</div>
+<div class="toc-cat">二十六、第十条诫命</div>
+<div class="toc-row" data-target="ch-079-第十条诫命是什么">
+<a class="toc-item" href="#ch-079-第十条诫命是什么">79问：第十条诫命是什么？</a>
+</div>
+<div class="toc-row" data-target="ch-080-第十条诫命要求什么">
+<a class="toc-item" href="#ch-080-第十条诫命要求什么">80问：第十条诫命要求什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-080-第十条诫命要求什么-s1">解读1：什么是以自己的境遇为足为乐？</a>
+<a class="toc-sub" href="#ch-080-第十条诫命要求什么-s2">解读2：我们在顺境中怎样知足？</a>
+<a class="toc-sub" href="#ch-080-第十条诫命要求什么-s3">解读3：我们在逆境中怎样知足？</a>
+<a class="toc-sub" href="#ch-080-第十条诫命要求什么-s4">解读4：怎样用正直仁爱的精神对待邻舍及其所拥有的一切？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-081-第十条诫命禁止什么">
+<a class="toc-item" href="#ch-081-第十条诫命禁止什么">81问：第十条诫命禁止什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-081-第十条诫命禁止什么-s1">解读1：为什么上帝不准我们不安于自己所处的位次？</a>
+<a class="toc-sub" href="#ch-081-第十条诫命禁止什么-s2">解读2：为什么上帝不准我们对邻舍的优势不是嫉妒就是难过？</a>
+<a class="toc-sub" href="#ch-081-第十条诫命禁止什么-s3">解读3：为什么上帝不准我们对邻舍的拥有若非动手就是动心？</a>
+</div>
+</div>
+<div class="toc-cat">二十七、罪所当受的处罚</div>
+<div class="toc-row" data-target="ch-082-是否有人能够完全守住上帝的诫命">
+<a class="toc-item" href="#ch-082-是否有人能够完全守住上帝的诫命">82问：是否有人能够完全守住上帝的诫命？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-082-是否有人能够完全守住上帝的诫命-s1">解读1：什么是完全遵守上帝的诫命？</a>
+<a class="toc-sub" href="#ch-082-是否有人能够完全守住上帝的诫命-s2">解读2：曾经有人能够完全遵守上帝的诫命吗？</a>
+<a class="toc-sub" href="#ch-082-是否有人能够完全守住上帝的诫命-s3">解读3：信徒永远无法完全遵守上帝的诫命吗？</a>
+<a class="toc-sub" href="#ch-082-是否有人能够完全守住上帝的诫命-s4">解读4：既然今生无人能完全遵守上帝的诫命，使徒约翰为什么说「凡从上帝生的就不犯罪，因上帝的道存在他心里。他也不能犯罪，因为他是由上帝生的」（约壹3:9）？</a>
+<a class="toc-sub" href="#ch-082-是否有人能够完全守住上帝的诫命-s5">解读5：既然信徒在今生达不到完全，为什么圣经说约伯、希西家、保罗是完全人？</a>
+<a class="toc-sub" href="#ch-082-是否有人能够完全守住上帝的诫命-s6">解读6：人若只是心里想想，并没有付诸言语行为，也是违背上帝的诫命吗？</a>
+<a class="toc-sub" href="#ch-082-是否有人能够完全守住上帝的诫命-s7">解读7：上帝明知无人能完全守住祂的诫命，却又在圣经中反复要求人要遵行出祂的诫命，岂非为难人？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-083-是否所有违反律法的过犯都同样可憎">
+<a class="toc-item" href="#ch-083-是否所有违反律法的过犯都同样可憎">83问：是否所有违反律法的过犯都同样可憎？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-083-是否所有违反律法的过犯都同样可憎-s1">解读1：对上帝来说，所有的罪都是可憎的吗？</a>
+<a class="toc-sub" href="#ch-083-是否所有违反律法的过犯都同样可憎-s2">解读2：什么罪的性质比其它罪更为可憎？</a>
+<a class="toc-sub" href="#ch-083-是否所有违反律法的过犯都同样可憎-s3">解读3：使一些罪比其它罪更为可憎的加重情节是什么？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-084-每项罪都有怎样的报应">
+<a class="toc-item" href="#ch-084-每项罪都有怎样的报应">84问：每项罪都有怎样的报应？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-084-每项罪都有怎样的报应-s1">解读1：每个罪都会遭惹的上帝的忿怒和咒诅是指什么？</a>
+<a class="toc-sub" href="#ch-084-每项罪都有怎样的报应-s2">解读2：是不是每项罪都会遭惹上帝在今世和来生的忿怒与咒诅？</a>
+</div>
+</div>
+<div class="toc-cat">二十八、外在方式</div>
+<div class="toc-row" data-target="ch-085-上帝要求我们怎样逃脱自己因罪而遭惹的烈怒和咒诅">
+<a class="toc-item" href="#ch-085-上帝要求我们怎样逃脱自己因罪而遭惹的烈怒和咒诅">85问：上帝要求我们怎样逃脱自己因罪而遭惹的烈怒和咒诅？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-085-上帝要求我们怎样逃脱自己因罪而遭惹的烈怒和咒诅-s1">解读1：上帝为了让我们逃脱自己因罪所遭惹的烈怒和咒诅，对我们有哪些要求呢？</a>
+<a class="toc-sub" href="#ch-085-上帝要求我们怎样逃脱自己因罪而遭惹的烈怒和咒诅-s2">解读2：为什么上帝要求我们相信耶稣基督？</a>
+<a class="toc-sub" href="#ch-085-上帝要求我们怎样逃脱自己因罪而遭惹的烈怒和咒诅-s3">解读3：为什么上帝要求我们悔改得生？</a>
+<a class="toc-sub" href="#ch-085-上帝要求我们怎样逃脱自己因罪而遭惹的烈怒和咒诅-s4">解读4：为什么上帝要求我们殷勤藉信守一切外在的方法，支取基督所传给我们诸般救赎的恩典？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-086-什么是在耶稣基督里的信心">
+<a class="toc-item" href="#ch-086-什么是在耶稣基督里的信心">86问：什么是在耶稣基督里的信心？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-086-什么是在耶稣基督里的信心-s1">解读1：为什么在耶稣基督里的信心是一种救赎的恩典？</a>
+<a class="toc-sub" href="#ch-086-什么是在耶稣基督里的信心-s2">解读2：谁是这一信心的作者呢？</a>
+<a class="toc-sub" href="#ch-086-什么是在耶稣基督里的信心-s3">解读3：上帝如何在人心中生成信心的呢？</a>
+<a class="toc-sub" href="#ch-086-什么是在耶稣基督里的信心-s4">解读4：这一信心的对象是谁？</a>
+<a class="toc-sub" href="#ch-086-什么是在耶稣基督里的信心-s5">解读5：谁能得着这一信心？</a>
+<a class="toc-sub" href="#ch-086-什么是在耶稣基督里的信心-s6">解读6：信耶稣基督这一行动包括什么？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-087-什么是悔改得生">
+<a class="toc-item" href="#ch-087-什么是悔改得生">87问：什么是悔改得生？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-087-什么是悔改得生-s1">解读1：为什么悔改被称为悔改得生？</a>
+<a class="toc-sub" href="#ch-087-什么是悔改得生-s2">解读2：有没有人能靠自己的力量悔改？</a>
+<a class="toc-sub" href="#ch-087-什么是悔改得生-s3">解读3：悔改得生包括什么？</a>
+<a class="toc-sub" href="#ch-087-什么是悔改得生-s4">解读4：在悔改中转离罪的必要条件是什么？</a>
+<a class="toc-sub" href="#ch-087-什么是悔改得生-s5">解读5：转离罪是指什么？</a>
+<a class="toc-sub" href="#ch-087-什么是悔改得生-s6">解读6：转离罪的人，是不是绝不会再犯同样的罪呢？</a>
+<a class="toc-sub" href="#ch-087-什么是悔改得生-s7">解读7：归向上帝是指什么呢？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-088-基督藉何种外在方式传给我们救赎之恩">
+<a class="toc-item" href="#ch-088-基督藉何种外在方式传给我们救赎之恩">88问：基督藉何种外在方式传给我们救赎之恩？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-088-基督藉何种外在方式传给我们救赎之恩-s1">解读1：基督藉着何种外在普通的方式传给我们救赎之恩？</a>
+<a class="toc-sub" href="#ch-088-基督藉何种外在方式传给我们救赎之恩-s2">解读2：为了得救，我们可否使用任何仅仅只是人指定的条例呢？</a>
+<a class="toc-sub" href="#ch-088-基督藉何种外在方式传给我们救赎之恩-s3">解读3：为什么称基督藉以将救赎之恩传给我们的那些方式为外在普通的方式</a>
+<a class="toc-sub" href="#ch-088-基督藉何种外在方式传给我们救赎之恩-s4">解读4：这些外在普通的方式对于谁有拯救的效力呢？</a>
+</div>
+</div>
+<div class="toc-cat">二十九、圣经与外在方式</div>
+<div class="toc-row" data-target="ch-089-圣经如何促成人的得救呢">
+<a class="toc-item" href="#ch-089-圣经如何促成人的得救呢">89问：圣经如何促成人的得救呢？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-089-圣经如何促成人的得救呢-s1">解读1：圣经怎样使罪人知罪归正？</a>
+<a class="toc-sub" href="#ch-089-圣经如何促成人的得救呢-s2">解读2：圣经怎样在圣洁方面造就圣徒？</a>
+<a class="toc-sub" href="#ch-089-圣经如何促成人的得救呢-s3">解读3：圣经怎样在安慰方面造就圣徒？</a>
+<a class="toc-sub" href="#ch-089-圣经如何促成人的得救呢-s4">解读4：圣经促成人的得救，是靠其自身的力量吗？</a>
+<a class="toc-sub" href="#ch-089-圣经如何促成人的得救呢-s5">解读5：怎样支取圣经拯救的效力？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-090-圣经当如何读如何听-才能促成人的得救呢">
+<a class="toc-item" href="#ch-090-圣经当如何读如何听-才能促成人的得救呢">90问：圣经当如何读如何听，才能促成人的得救呢？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-090-圣经当如何读如何听-才能促成人的得救呢-s1">解读1：在读经、听道前当怎样行，才使圣经生发拯救之效？</a>
+<a class="toc-sub" href="#ch-090-圣经当如何读如何听-才能促成人的得救呢-s2">解读2：在读经、听道时当怎样行，才能使圣经生发拯救之效？</a>
+<a class="toc-sub" href="#ch-090-圣经当如何读如何听-才能促成人的得救呢-s3">解读4：在读经、听道后当怎样行，才能使圣经生发拯救之效？</a>
+</div>
+</div>
+<div class="toc-cat">三十、圣礼与外在方式</div>
+<div class="toc-row" data-target="ch-091-圣礼如何成为促使人得救的方式呢">
+<a class="toc-item" href="#ch-091-圣礼如何成为促使人得救的方式呢">91问：圣礼如何成为促使人得救的方式呢？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-091-圣礼如何成为促使人得救的方式呢-s1">解读1：圣礼本身能促使人得救吗？</a>
+<a class="toc-sub" href="#ch-091-圣礼如何成为促使人得救的方式呢-s2">解读2：圣礼怎么成为促使人得救的方式呢？</a>
+<a class="toc-sub" href="#ch-091-圣礼如何成为促使人得救的方式呢-s3">解读3：圣灵在谁身上藉着圣礼促使人得救呢？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-092-圣礼是什么">
+<a class="toc-item" href="#ch-092-圣礼是什么">92问：圣礼是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-092-圣礼是什么-s1">解读1：「圣礼」一词的含义是什么？</a>
+<a class="toc-sub" href="#ch-092-圣礼是什么-s2">解读2：圣经中并没有「圣礼」这个词，为什么要把基督所设立的这种条例称为「圣礼」呢？</a>
+<a class="toc-sub" href="#ch-092-圣礼是什么-s3">解读3：我们应当采用哪一宗派设立的圣礼？</a>
+<a class="toc-sub" href="#ch-092-圣礼是什么-s4">解读4：一个圣礼包含几个部分？</a>
+<a class="toc-sub" href="#ch-092-圣礼是什么-s5">解读5：圣礼向谁表明、印证并施行基督和新约的恩惠呢？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-093-新约的圣礼是什么">
+<a class="toc-item" href="#ch-093-新约的圣礼是什么">93问：新约的圣礼是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-093-新约的圣礼是什么-s1">解读1：除了新约的圣礼之外，教会中曾经有过其它圣礼吗？</a>
+<a class="toc-sub" href="#ch-093-新约的圣礼是什么-s2">解读2：在福音之下，教会中所用的新约的圣礼是什么？</a>
+<a class="toc-sub" href="#ch-093-新约的圣礼是什么-s3">解读3：关于新约圣礼，罗马大公教会有什么不同的教导？</a>
+</div>
+</div>
+<div class="toc-cat">三十一、洗礼</div>
+<div class="toc-row" data-target="ch-094-洗礼是什么">
+<a class="toc-item" href="#ch-094-洗礼是什么">94问：洗礼是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-094-洗礼是什么-s1">解读1：洗礼的外在标记是什么？</a>
+<a class="toc-sub" href="#ch-094-洗礼是什么-s2">解读2：洗礼中的水代表什么？</a>
+<a class="toc-sub" href="#ch-094-洗礼是什么-s3">解读3：洗礼中的外在行动是什么？</a>
+<a class="toc-sub" href="#ch-094-洗礼是什么-s4">解读4：圣经好几次告诉我们，当人受洗的时候都是进入水中；而且我们在洗礼中要与基督同埋藏，因此在受洗的时候浸在水中，被水覆盖，就如基督在坟墓中被泥土覆盖一样。因此，在洗礼中，是不是确有必要把身体浸在水中呢？</a>
+<a class="toc-sub" href="#ch-094-洗礼是什么-s5">解读5：人当奉谁的名受洗呢？</a>
+<a class="toc-sub" href="#ch-094-洗礼是什么-s6">解读6：我们奉上帝之名受洗，上帝所要表明、印证和施行的是什么呢？</a>
+<a class="toc-sub" href="#ch-094-洗礼是什么-s7">解读7：我们奉圣父、圣子、圣灵的名受洗，要表明我们自己什么心志呢？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-095-谁能接受洗礼呢">
+<a class="toc-item" href="#ch-095-谁能接受洗礼呢">95问：谁能接受洗礼呢？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-095-谁能接受洗礼呢-s1">解读1：信主以后一定要受洗吗？</a>
+<a class="toc-sub" href="#ch-095-谁能接受洗礼呢-s2">解读2：可以为还没信主的人施洗吗？</a>
+<a class="toc-sub" href="#ch-095-谁能接受洗礼呢-s3">解读3：婴孩是否可以受洗？</a>
+</div>
+</div>
+<div class="toc-cat">三十二、圣餐</div>
+<div class="toc-row" data-target="ch-096-圣餐是什么">
+<a class="toc-item" href="#ch-096-圣餐是什么">96问：圣餐是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-096-圣餐是什么-s1">解读1：圣餐的设立者是谁？</a>
+<a class="toc-sub" href="#ch-096-圣餐是什么-s2">解读2：圣餐的外在印记是什么？</a>
+<a class="toc-sub" href="#ch-096-圣餐是什么-s3">解读3：圣餐的目的是什么？</a>
+<a class="toc-sub" href="#ch-096-圣餐是什么-s4">解读4：主耶稣当初明确地对门徒们说：「这是我的身体」，是否圣餐中的饼就转变成基督的真身体了？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-097-敬守圣餐的要求是什么">
+<a class="toc-item" href="#ch-097-敬守圣餐的要求是什么">97问：敬守圣餐的要求是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-097-敬守圣餐的要求是什么-s1">解读1：在敬守圣餐之前，当作什么预备？</a>
+<a class="toc-sub" href="#ch-097-敬守圣餐的要求是什么-s2">解读2：不按理敬守圣餐，会导致什么样的危险？</a>
+</div>
+</div>
+<div class="toc-cat">三十三、祷告与外在方式</div>
+<div class="toc-row" data-target="ch-098-祷告是什么">
+<a class="toc-item" href="#ch-098-祷告是什么">98问：祷告是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-098-祷告是什么-s1">解读1：我们当向谁祷告？</a>
+<a class="toc-sub" href="#ch-098-祷告是什么-s2">解读2：我们当向上帝祷告什么呢？</a>
+<a class="toc-sub" href="#ch-098-祷告是什么-s3">解读3：我们当奉谁的名向上帝祷告？</a>
+<a class="toc-sub" href="#ch-098-祷告是什么-s4">解读4：我们可以凭着自己祷告，得蒙上帝的悦纳吗？</a>
+<a class="toc-sub" href="#ch-098-祷告是什么-s5">解读5：怎样的祷告态度，才能蒙上帝悦纳呢？</a>
+<a class="toc-sub" href="#ch-098-祷告是什么-s6">解读6：信徒的一切祷告，都会得蒙上帝的应允吗？</a>
+<a class="toc-sub" href="#ch-098-祷告是什么-s7">解读7：信徒的祷告和世人的求神问卜有何差别？如何分辨？</a>
+<a class="toc-sub" href="#ch-098-祷告是什么-s8">解读8：什么是禁食祷告？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-099-上帝赐下什么规则指引我们的祷告呢">
+<a class="toc-item" href="#ch-099-上帝赐下什么规则指引我们的祷告呢">99问：上帝赐下什么规则指引我们的祷告呢？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-099-上帝赐下什么规则指引我们的祷告呢-s1">解读1：我们祷告的根据是什么？</a>
+<a class="toc-sub" href="#ch-099-上帝赐下什么规则指引我们的祷告呢-s2">解读2：主祷文是什么呢？</a>
+</div>
+</div>
+<div class="toc-cat">三十四、主祷文的序言</div>
+<div class="toc-row" data-target="ch-100-主祷文的前言教导我们什么">
+<a class="toc-item" href="#ch-100-主祷文的前言教导我们什么">100问：主祷文的前言教导我们什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-100-主祷文的前言教导我们什么-s1">解读1：「我们的父」一词教导我们什么？</a>
+<a class="toc-sub" href="#ch-100-主祷文的前言教导我们什么-s2">解读2：「在天上的」一词教导我们什么？</a>
+</div>
+</div>
+<div class="toc-cat">三十五、主祷文六大祈求</div>
+<div class="toc-row" data-target="ch-101-我们在第一祈愿中的祷告是什么">
+<a class="toc-item" href="#ch-101-我们在第一祈愿中的祷告是什么">101问：我们在第一祈愿中的祷告是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-101-我们在第一祈愿中的祷告是什么-s1">解读1：什么是「上帝的名」？</a>
+<a class="toc-sub" href="#ch-101-我们在第一祈愿中的祷告是什么-s2">解读2：什么是尊上帝的名为圣？</a>
+<a class="toc-sub" href="#ch-101-我们在第一祈愿中的祷告是什么-s3">解读3：「愿人都尊祢的名为圣」意味着祷告什么？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-102-我们在第二祈愿中的祷告是什么">
+<a class="toc-item" href="#ch-102-我们在第二祈愿中的祷告是什么">102问：我们在第二祈愿中的祷告是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-102-我们在第二祈愿中的祷告是什么-s1">解读1：「上帝的国」是指什么？</a>
+<a class="toc-sub" href="#ch-102-我们在第二祈愿中的祷告是什么-s2">解读2：「愿祢的国降临」意味着祷告什么？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-103-我们在第三祈愿中的祷告是什么">
+<a class="toc-item" href="#ch-103-我们在第三祈愿中的祷告是什么">103问：我们在第三祈愿中的祷告是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-103-我们在第三祈愿中的祷告是什么-s1">解读1：「上帝的旨意」包括什么？</a>
+<a class="toc-sub" href="#ch-103-我们在第三祈愿中的祷告是什么-s2">解读2：为什么需要祷告「愿祢的旨意行在地上，如同行在天上」？</a>
+<a class="toc-sub" href="#ch-103-我们在第三祈愿中的祷告是什么-s3">解读3：「愿祢的旨意行在地上，如同行在天上」意味着我们在祷告什么？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-104-我们在第四祈愿中的祷告是什么">
+<a class="toc-item" href="#ch-104-我们在第四祈愿中的祷告是什么">104问：我们在第四祈愿中的祷告是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-104-我们在第四祈愿中的祷告是什么-s1">解读1：为什么主耶稣教导我们先祈求身体的需要，后祈求属灵的需要？</a>
+<a class="toc-sub" href="#ch-104-我们在第四祈愿中的祷告是什么-s2">解读2：「赐」意味着什么？</a>
+<a class="toc-sub" href="#ch-104-我们在第四祈愿中的祷告是什么-s3">解读3：「我们」意味着什么？</a>
+<a class="toc-sub" href="#ch-104-我们在第四祈愿中的祷告是什么-s4">解读4：「日用」和「今日」意味着什么？</a>
+<a class="toc-sub" href="#ch-104-我们在第四祈愿中的祷告是什么-s5">解读5：「饮食」意味着什么？</a>
+<a class="toc-sub" href="#ch-104-我们在第四祈愿中的祷告是什么-s6">解读6：我们若不祷告，上帝就不会赐给我们「日用的饮食」吗？</a>
+<a class="toc-sub" href="#ch-104-我们在第四祈愿中的祷告是什么-s7">解读7：怎样在「日用的饮食」成为上帝赐福的管道？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-105-我们在第五祈愿中的祷告是什么">
+<a class="toc-item" href="#ch-105-我们在第五祈愿中的祷告是什么">105问：我们在第五祈愿中的祷告是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-105-我们在第五祈愿中的祷告是什么-s1">解读1：「免我们的债」意味着祷告什么？</a>
+<a class="toc-sub" href="#ch-105-我们在第五祈愿中的祷告是什么-s2">解读2：「如同我们免了人的债」意味着什么？</a>
+</div>
+</div>
+<div class="toc-row" data-target="ch-106-我们在第六祈愿中的祷告是什么">
+<a class="toc-item" href="#ch-106-我们在第六祈愿中的祷告是什么">106问：我们在第六祈愿中的祷告是什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-106-我们在第六祈愿中的祷告是什么-s1">解读1：「不叫我们遇见试探」意味着祷告什么？</a>
+<a class="toc-sub" href="#ch-106-我们在第六祈愿中的祷告是什么-s2">解读2：「救我们脱离凶恶」意味着祷告什么？</a>
+</div>
+</div>
+<div class="toc-cat">三十六、主祷文结语</div>
+<div class="toc-row" data-target="ch-107-主祷文的结语教导我们什么">
+<a class="toc-item" href="#ch-107-主祷文的结语教导我们什么">107问：主祷文的结语教导我们什么？</a>
+<div class="toc-kids">
+<a class="toc-sub" href="#ch-107-主祷文的结语教导我们什么-s1">解读1：为什么要单单从祷告中寻得上帝的鼓励和安慰？</a>
+<a class="toc-sub" href="#ch-107-主祷文的结语教导我们什么-s2">解读2：为什么要在祷告中赞美上帝，将国度、权柄和荣耀都归给祂？</a>
+<a class="toc-sub" href="#ch-107-主祷文的结语教导我们什么-s3">解读3：「阿们」是什么意思？</a>
+<a class="toc-sub" href="#ch-107-主祷文的结语教导我们什么-s4">解读4：为什么不可高举「雅比斯的祷告」？</a>
+</div>
+</div>
+</div>
+</nav><div class="numgrid numgrid-copy" hidden>
+<div class="numgrid-part">第一部分：序言</div>
+<div class="numgrid-body">
+<a class="num" href="#ch-001-人生的首要目的是什么" data-target="ch-001-人生的首要目的是什么">1</a>
+<a class="num" href="#ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢" data-target="ch-002-上帝赐下什么准则-指导我们如何荣耀祂-并以祂为乐呢">2</a>
+</div>
+<div class="numgrid-part">第二部分：我们当信什么</div>
+<div class="numgrid-body">
+<a class="num" href="#ch-003-圣经的主要教导是什么" data-target="ch-003-圣经的主要教导是什么">3</a>
+<a class="num" href="#ch-004-何为上帝" data-target="ch-004-何为上帝">4</a>
+<a class="num" href="#ch-005-是否有多位上帝" data-target="ch-005-是否有多位上帝">5</a>
+<a class="num" href="#ch-006-上帝有几个位格" data-target="ch-006-上帝有几个位格">6</a>
+<a class="num" href="#ch-007-上帝的定旨是什么" data-target="ch-007-上帝的定旨是什么">7</a>
+<a class="num" href="#ch-008-上帝如何实施祂的定旨" data-target="ch-008-上帝如何实施祂的定旨">8</a>
+<a class="num" href="#ch-009-何为创造之工" data-target="ch-009-何为创造之工">9</a>
+<a class="num" href="#ch-010-上帝是怎样造人的" data-target="ch-010-上帝是怎样造人的">10</a>
+<a class="num" href="#ch-011-上帝的护理之工是什么" data-target="ch-011-上帝的护理之工是什么">11</a>
+<a class="num" href="#ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工" data-target="ch-012-上帝对在起初受造本位上的人施行了什么特别的护理之工">12</a>
+<a class="num" href="#ch-013-我们的始祖守住他们受造时的本位了吗" data-target="ch-013-我们的始祖守住他们受造时的本位了吗">13</a>
+<a class="num" href="#ch-014-罪是什么" data-target="ch-014-罪是什么">14</a>
+<a class="num" href="#ch-015-什么罪使我们的始祖从他们受造的本位上堕落" data-target="ch-015-什么罪使我们的始祖从他们受造的本位上堕落">15</a>
+<a class="num" href="#ch-016-是否全人类都在亚当首次犯的罪中堕落了" data-target="ch-016-是否全人类都在亚当首次犯的罪中堕落了">16</a>
+<a class="num" href="#ch-017-堕落使人类陷入怎样的处境里" data-target="ch-017-堕落使人类陷入怎样的处境里">17</a>
+<a class="num" href="#ch-018-人类堕落所陷处境的罪恶在于什么" data-target="ch-018-人类堕落所陷处境的罪恶在于什么">18</a>
+<a class="num" href="#ch-019-人类堕落所陷处境的悲惨在于什么" data-target="ch-019-人类堕落所陷处境的悲惨在于什么">19</a>
+<a class="num" href="#ch-020-上帝是否任凭全人类在罪恶悲惨的处境中灭亡" data-target="ch-020-上帝是否任凭全人类在罪恶悲惨的处境中灭亡">20</a>
+<a class="num" href="#ch-021-谁是上帝选民的救赎主" data-target="ch-021-谁是上帝选民的救赎主">21</a>
+<a class="num" href="#ch-022-上帝之子基督如何成为人呢" data-target="ch-022-上帝之子基督如何成为人呢">22</a>
+<a class="num" href="#ch-023-基督作为我们的救赎主-祂所执行的职份有哪些" data-target="ch-023-基督作为我们的救赎主-祂所执行的职份有哪些">23</a>
+<a class="num" href="#ch-024-基督如何执行祂作为先知的职分呢" data-target="ch-024-基督如何执行祂作为先知的职分呢">24</a>
+<a class="num" href="#ch-025-基督如何执行祂作为祭司的职分呢" data-target="ch-025-基督如何执行祂作为祭司的职分呢">25</a>
+<a class="num" href="#ch-026-基督如何执行祂作为君王的职分呢" data-target="ch-026-基督如何执行祂作为君王的职分呢">26</a>
+<a class="num" href="#ch-027-基督的降卑显明在何事上" data-target="ch-027-基督的降卑显明在何事上">27</a>
+<a class="num" href="#ch-028-基督的升高显明在何事上" data-target="ch-028-基督的升高显明在何事上">28</a>
+<a class="num" href="#ch-029-我们如何能有份于基督所买赎的救恩呢" data-target="ch-029-我们如何能有份于基督所买赎的救恩呢">29</a>
+<a class="num" href="#ch-030-圣灵如何将基督所买赎的救恩运用在我们的身上呢" data-target="ch-030-圣灵如何将基督所买赎的救恩运用在我们的身上呢">30</a>
+<a class="num" href="#ch-031-什么是有效的恩召" data-target="ch-031-什么是有效的恩召">31</a>
+<a class="num" href="#ch-032-有效蒙召的人今生能享受什么恩惠" data-target="ch-032-有效蒙召的人今生能享受什么恩惠">32</a>
+<a class="num" href="#ch-033-什么是称义" data-target="ch-033-什么是称义">33</a>
+<a class="num" href="#ch-034-什么是得着儿子的名分" data-target="ch-034-什么是得着儿子的名分">34</a>
+<a class="num" href="#ch-035-什么是成圣" data-target="ch-035-什么是成圣">35</a>
+<a class="num" href="#ch-036-直接间接随着称义-得着儿子的名分-成圣而来今生的恩惠有哪些" data-target="ch-036-直接间接随着称义-得着儿子的名分-成圣而来今生的恩惠有哪些">36</a>
+<a class="num" href="#ch-037-信徒死时将从基督领受的恩惠是什么" data-target="ch-037-信徒死时将从基督领受的恩惠是什么">37</a>
+<a class="num" href="#ch-038-信徒复活时将从基督领受的恩惠是什么" data-target="ch-038-信徒复活时将从基督领受的恩惠是什么">38</a>
+</div>
+<div class="numgrid-part">第三部分：我们当怎样行</div>
+<div class="numgrid-body">
+<a class="num" href="#ch-039-上帝对人所要求的本分是什么" data-target="ch-039-上帝对人所要求的本分是什么">39</a>
+<a class="num" href="#ch-040-上帝起初向人启示了什么作为顺服祂的标准呢" data-target="ch-040-上帝起初向人启示了什么作为顺服祂的标准呢">40</a>
+<a class="num" href="#ch-041-道德律在哪里有简略的概括" data-target="ch-041-道德律在哪里有简略的概括">41</a>
+<a class="num" href="#ch-042-十诫的总纲是什么" data-target="ch-042-十诫的总纲是什么">42</a>
+<a class="num" href="#ch-043-十诫的序言是什么" data-target="ch-043-十诫的序言是什么">43</a>
+<a class="num" href="#ch-044-十诫的序言教导我们什么" data-target="ch-044-十诫的序言教导我们什么">44</a>
+<a class="num" href="#ch-045-第一条诫命是什么" data-target="ch-045-第一条诫命是什么">45</a>
+<a class="num" href="#ch-046-第一条诫命要求什么" data-target="ch-046-第一条诫命要求什么">46</a>
+<a class="num" href="#ch-047-第一条诫命禁止什么" data-target="ch-047-第一条诫命禁止什么">47</a>
+<a class="num" href="#ch-048-第一条诫命中-在我面前-或-除我以外-一语特别教导我们什么" data-target="ch-048-第一条诫命中-在我面前-或-除我以外-一语特别教导我们什么">48</a>
+<a class="num" href="#ch-049-第二条诫命是什么" data-target="ch-049-第二条诫命是什么">49</a>
+<a class="num" href="#ch-050-第二条诫命要求什么" data-target="ch-050-第二条诫命要求什么">50</a>
+<a class="num" href="#ch-051-第二条诫命禁止什么" data-target="ch-051-第二条诫命禁止什么">51</a>
+<a class="num" href="#ch-052-附加在第二条诫命上的理由是什么" data-target="ch-052-附加在第二条诫命上的理由是什么">52</a>
+<a class="num" href="#ch-053-第三条诫命是什么" data-target="ch-053-第三条诫命是什么">53</a>
+<a class="num" href="#ch-054-第三条诫命要求什么" data-target="ch-054-第三条诫命要求什么">54</a>
+<a class="num" href="#ch-055-第三条诫命禁止什么" data-target="ch-055-第三条诫命禁止什么">55</a>
+<a class="num" href="#ch-056-附加在第三条诫命上的理由是什么" data-target="ch-056-附加在第三条诫命上的理由是什么">56</a>
+<a class="num" href="#ch-057-第四条诫命是什么" data-target="ch-057-第四条诫命是什么">57</a>
+<a class="num" href="#ch-058-第四条诫命要求什么" data-target="ch-058-第四条诫命要求什么">58</a>
+<a class="num" href="#ch-059-上帝所指定每周的安息日是七日里的哪一天" data-target="ch-059-上帝所指定每周的安息日是七日里的哪一天">59</a>
+<a class="num" href="#ch-060-如何守安息日为圣" data-target="ch-060-如何守安息日为圣">60</a>
+<a class="num" href="#ch-061-第四条诫命禁止什么" data-target="ch-061-第四条诫命禁止什么">61</a>
+<a class="num" href="#ch-062-附加在第四条诫命上的理由是什么" data-target="ch-062-附加在第四条诫命上的理由是什么">62</a>
+<a class="num" href="#ch-063-第五条诫命是什么" data-target="ch-063-第五条诫命是什么">63</a>
+<a class="num" href="#ch-064-第五条诫命要求什么" data-target="ch-064-第五条诫命要求什么">64</a>
+<a class="num" href="#ch-065-第五条诫命禁止什么" data-target="ch-065-第五条诫命禁止什么">65</a>
+<a class="num" href="#ch-066-附加在第五条诫命上的理由是什么" data-target="ch-066-附加在第五条诫命上的理由是什么">66</a>
+<a class="num" href="#ch-067-第六条诫命是什么" data-target="ch-067-第六条诫命是什么">67</a>
+<a class="num" href="#ch-068-第六条诫命要求什么" data-target="ch-068-第六条诫命要求什么">68</a>
+<a class="num" href="#ch-069-第六条诫禁止什么" data-target="ch-069-第六条诫禁止什么">69</a>
+<a class="num" href="#ch-070-第七条诫命是什么" data-target="ch-070-第七条诫命是什么">70</a>
+<a class="num" href="#ch-071-第七条诫命要求什么" data-target="ch-071-第七条诫命要求什么">71</a>
+<a class="num" href="#ch-072-第七条诫命禁止什么" data-target="ch-072-第七条诫命禁止什么">72</a>
+<a class="num" href="#ch-073-第八条诫命是什么" data-target="ch-073-第八条诫命是什么">73</a>
+<a class="num" href="#ch-074-第八条诫命要求什么" data-target="ch-074-第八条诫命要求什么">74</a>
+<a class="num" href="#ch-075-第八条诫命禁止什么" data-target="ch-075-第八条诫命禁止什么">75</a>
+<a class="num" href="#ch-076-第九条诫命是什么" data-target="ch-076-第九条诫命是什么">76</a>
+<a class="num" href="#ch-077-第九条诫命要求什么" data-target="ch-077-第九条诫命要求什么">77</a>
+<a class="num" href="#ch-078-第九条诫命禁止什么" data-target="ch-078-第九条诫命禁止什么">78</a>
+<a class="num" href="#ch-079-第十条诫命是什么" data-target="ch-079-第十条诫命是什么">79</a>
+<a class="num" href="#ch-080-第十条诫命要求什么" data-target="ch-080-第十条诫命要求什么">80</a>
+<a class="num" href="#ch-081-第十条诫命禁止什么" data-target="ch-081-第十条诫命禁止什么">81</a>
+<a class="num" href="#ch-082-是否有人能够完全守住上帝的诫命" data-target="ch-082-是否有人能够完全守住上帝的诫命">82</a>
+<a class="num" href="#ch-083-是否所有违反律法的过犯都同样可憎" data-target="ch-083-是否所有违反律法的过犯都同样可憎">83</a>
+<a class="num" href="#ch-084-每项罪都有怎样的报应" data-target="ch-084-每项罪都有怎样的报应">84</a>
+<a class="num" href="#ch-085-上帝要求我们怎样逃脱自己因罪而遭惹的烈怒和咒诅" data-target="ch-085-上帝要求我们怎样逃脱自己因罪而遭惹的烈怒和咒诅">85</a>
+<a class="num" href="#ch-086-什么是在耶稣基督里的信心" data-target="ch-086-什么是在耶稣基督里的信心">86</a>
+<a class="num" href="#ch-087-什么是悔改得生" data-target="ch-087-什么是悔改得生">87</a>
+<a class="num" href="#ch-088-基督藉何种外在方式传给我们救赎之恩" data-target="ch-088-基督藉何种外在方式传给我们救赎之恩">88</a>
+<a class="num" href="#ch-089-圣经如何促成人的得救呢" data-target="ch-089-圣经如何促成人的得救呢">89</a>
+<a class="num" href="#ch-090-圣经当如何读如何听-才能促成人的得救呢" data-target="ch-090-圣经当如何读如何听-才能促成人的得救呢">90</a>
+<a class="num" href="#ch-091-圣礼如何成为促使人得救的方式呢" data-target="ch-091-圣礼如何成为促使人得救的方式呢">91</a>
+<a class="num" href="#ch-092-圣礼是什么" data-target="ch-092-圣礼是什么">92</a>
+<a class="num" href="#ch-093-新约的圣礼是什么" data-target="ch-093-新约的圣礼是什么">93</a>
+<a class="num" href="#ch-094-洗礼是什么" data-target="ch-094-洗礼是什么">94</a>
+<a class="num" href="#ch-095-谁能接受洗礼呢" data-target="ch-095-谁能接受洗礼呢">95</a>
+<a class="num" href="#ch-096-圣餐是什么" data-target="ch-096-圣餐是什么">96</a>
+<a class="num" href="#ch-097-敬守圣餐的要求是什么" data-target="ch-097-敬守圣餐的要求是什么">97</a>
+<a class="num" href="#ch-098-祷告是什么" data-target="ch-098-祷告是什么">98</a>
+<a class="num" href="#ch-099-上帝赐下什么规则指引我们的祷告呢" data-target="ch-099-上帝赐下什么规则指引我们的祷告呢">99</a>
+<a class="num" href="#ch-100-主祷文的前言教导我们什么" data-target="ch-100-主祷文的前言教导我们什么">100</a>
+<a class="num" href="#ch-101-我们在第一祈愿中的祷告是什么" data-target="ch-101-我们在第一祈愿中的祷告是什么">101</a>
+<a class="num" href="#ch-102-我们在第二祈愿中的祷告是什么" data-target="ch-102-我们在第二祈愿中的祷告是什么">102</a>
+<a class="num" href="#ch-103-我们在第三祈愿中的祷告是什么" data-target="ch-103-我们在第三祈愿中的祷告是什么">103</a>
+<a class="num" href="#ch-104-我们在第四祈愿中的祷告是什么" data-target="ch-104-我们在第四祈愿中的祷告是什么">104</a>
+<a class="num" href="#ch-105-我们在第五祈愿中的祷告是什么" data-target="ch-105-我们在第五祈愿中的祷告是什么">105</a>
+<a class="num" href="#ch-106-我们在第六祈愿中的祷告是什么" data-target="ch-106-我们在第六祈愿中的祷告是什么">106</a>
+<a class="num" href="#ch-107-主祷文的结语教导我们什么" data-target="ch-107-主祷文的结语教导我们什么">107</a>
+</div>
+</div></div>
+</div>
+
 <button class="to-top" id="btnTopFloat" aria-label="回到顶部">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
 </button>
@@ -3960,6 +5203,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   var DESKTOP = '(min-width:1024px)';
 
   function $(id) { return document.getElementById(id); }
+  // 脚本能跑：撤掉无脚本兜底的菜单按钮，改由 drawer 那套交互接管
+  doc.classList.remove('nojs');
+  doc.classList.add('js');
   function fail(what, e) {
     if (window.console && console.error) console.error(what, e);
     var t = $('barTitle');
@@ -4073,6 +5319,8 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     scrim.classList.remove('on');
     lockBody(false);
     hideTop(false);
+    var t = $('menu-toggle');
+    if (t) t.checked = false;
   }
   function toggleSidebar() {
     if (!sidebar || isDesktop()) return;
@@ -4104,6 +5352,25 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     resumeBtn = $('resumeBtn');
     mq = window.matchMedia(DESKTOP);
 
+    // 手机端抽屉里的目录/编号网格来自面板那份（.toc-copy / .numgrid-copy），
+    // 模板里侧栏那份只在桌面端用；这里各克隆一份挂到侧栏，不做节点搬移。
+    if (!isDesktop() && toc && sidebar) {
+      var foot = sidebar.querySelector('.side-foot');
+      var tocClone = toc.cloneNode(true);
+      tocClone.className = 'toc toc-clone';
+      tocClone.removeAttribute('id');
+      sidebar.insertBefore(tocClone, foot || null);
+      toc = tocClone;
+      if (numgrid) {
+        var gridClone = numgrid.cloneNode(true);
+        gridClone.className = 'numgrid numgrid-clone';
+        gridClone.removeAttribute('id');
+        gridClone.hidden = true;
+        sidebar.insertBefore(gridClone, foot || null);
+        numgrid = gridClone;
+      }
+    }
+
     function syncLayout() {
       if (isDesktop()) {
         sidebar.classList.add('on');
@@ -4125,6 +5392,11 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     }
 
     bindTap($('btnMenu'), toggleSidebar);
+    // 面板的三角形按钮在脚本接管后不再需要切 checkbox，避免和抽屉状态打架
+    bindTap($('btnMenuLabel'), function () {
+      var t = $('menu-toggle');
+      if (t) t.checked = false;
+    });
     bindTap($('btnClose'), function () { openSidebar(false); });
     bindTap(scrim, function () { openSidebar(false); });
 
