@@ -24,6 +24,7 @@
 | Use Case / Port | 后端行为 | 核心不变量 |
 | --- | --- | --- |
 | `ResolvePublicIdentity` | 公共 BAP 来源 + 链上观测 + 覆盖，派生 published/not-published/unknown | 覆盖不足不能声称不存在 |
+| `AssessIdentityInitialization` | 验证 Wallet Root 控制证明、当前/历史身份记录、未决操作和覆盖 | 本地无投影/单次 404 不能将 UNKNOWN 提升为 ALLOW |
 | `SyncSignedTransaction` | 校验原交易、重新计算 TxID、精确幂等、逐笔身份签名与 BAP 归属 | 前端传入 `bapId` 只是期望值，不是作者证据 |
 | `BuildIdentityProjection` | 从已验证 ID/ALIAS/图片与密钥历史派生当前 Identity/Profile | 本地存储不是公共链真相 |
 | `VerifyKeyRotation` | 依据签名发生时有效路径核验并保留历史 | BAP ID 稳定，不能只按当前地址判旧交易 |
@@ -44,9 +45,64 @@ Domain（BapIdentity、身份归属、不可变规则、事件）
 Ports ← Infrastructure (BAP/Bitcoin Verifier, Mongo, Indexer)
 ~~~
 
-建议端口：`IdentityProjectionRepository`、`IdentitySignatureVerifier`、`PublicBapResolver`、`BlockchainObservationPort`、`TransactionSyncRepository`、`BindingQueryPort`。
+建议端口：`IdentityProjectionRepository`、`IdentitySignatureVerifier`、`PublicBapResolver`、`PublicBapHistoryResolver`、`WalletRootControlVerifier`（验证钱包提交的 Root 证明）、`BlockchainObservationPort`、`RotationHistoryResolver`、`SigningPathAt`、`TransactionSyncRepository`、`BindingQueryPort`。端口是**目标架构**，不表示已存在同名 Java 接口。
 
 `BapId / TransactionId / IdentitySignatureProof / ChainObservation` 采用不可混淆的值对象；格式检查不等于验证签名、所有权或公共存在性。私钥、Seed Phrase、WIF 永不进入后端。
+
+### 3.1 初始化资格的后端决策（R-01）
+
+`GET /api/v1/identities/{bapId}` 继续**仅返回公共查询事实**。不得偷偷使它在无历史覆盖时返回 `kind=not-published`。另在 Identity Application 内建立逻辑用例 `AssessIdentityInitialization`：
+
+~~~text
+VerifyRootControl(BapId, walletProof)
+    ↓
+FindPendingOperation(BapId, network/scope)
+    ↓
+PublicBapHistoryResolver(BapId, checkpoint)
+    ↓
+ALLOW | BLOCK | NEED_EVIDENCE
+~~~
+
+- **BLOCK**：已有有效公开 Identity；Root/BapId 不匹配；钱包会话变更；有相同 BAP ID 的原交易/广播结果未知（必须恢复）。
+- **ALLOW**：Root 控制成立、没有待恢复提交、查询证据足以确认不存在冲突身份历史，且提交前按证据 checkpoint 重查未过期。
+- **NEED_EVIDENCE**：公共来源超时、覆盖/历史不足、出现相互矛盾的链序、主链重组或身份历史未知。允许保留 Draft/Review，不授权不可逆交易广播。
+
+**当前没有已核实的 `AssessIdentityInitialization` HTTP 端点，也没有足以证明未发布的公共历史覆盖实现**。此处是用例与验证端口设计，具体 HTTP 路径、钱包 Proof 编码与充分覆盖规则必须验证后再加入 OpenAPI。不能用客户端自报 `isNew`、`notPublished`、`valid` 替代证据。
+
+### 3.2 Identity 与 Profile 的类型/字段边界（R-03）
+
+| 领域字段 | Java 当前输入/输出 | 映射 |
+| --- | --- | --- |
+| `BapProfile.name` | `name` | 同名，按核心认知长度验证 |
+| `BapProfile.description` | `bio`，BAP ALIAS 原交易 `description` | 有效声明 → DTO `bio`；写入时相反 |
+| `BapProfile.image` | `imageUrl`，BAP ALIAS 原交易 `image` | 保留原交易 URI 和图片资产证据 |
+| `BapProfile.type` | `Person/Organization` | 可变展示资料，不能自动等于 Identity.type |
+| `BapIdentity.type` | Java API 当前无明确独立 DTO | 身份声明 `PERSON/ORGANIZATION`；如何随 Profile 改动待协议实证 |
+| `BapProfile.updatedAt` | Java Profile DTO 当前未给出 | 使用链上有效资料时点与可信链序；缺失表达 unknown，不制造时间 |
+
+Identity 领域与 DTO 的双向映射放在 Adapter/Assembler；Domain 不直接依赖 BSON `Document`。真实 Java `IdentityProtocol.profile()` 的输入校验已经实现部分字段，但**现有代码 ≠ 所有产品不变量均满足**。
+
+### 3.3 历史签名归属验证（R-04）
+
+~~~text
+TransactionEvidence(network, rawTx, txid, minedPosition?, observedSource)
+     ↓
+Verify cryptographic signature + signed payload coverage
+     ↓
+RotationHistoryResolver(root, verified BAP history, chainOrder)
+     ↓
+SigningPathAt(bapId, txEvidence) = ValidPath | UNKNOWN | CONFLICT
+     ↓
+Verify signer belongs to valid path AT that transaction's chain position
+     ↓
+VerifiedBapAttribution | PendingProof | Rejected
+~~~
+
+- Root 的确定性 BAP ID、轮换事件的旧→新授权链、链序与历史来源完整性分别检查；任何一步缺证据不能得出 `VerifiedBapAttribution`。
+- 同块交易顺序、未确认交易、索引乱序和 reorg 不以本地 `updatedAt` 推断；对没有确定链序的情形保持待核实。
+- 重组后重放受影响历史，从原始 `rawTx`/可靠 Indexer 事实重新派生签名归属。原证明证据保留供审计。
+- 当前 `IdentityApi.currentAddress()` 与 `IdentityProtocol.verify(..., currentAddress)` 并未独立实现上述历史时点查询；这属于新增验证能力的开发事项。
+- 关闭需要旧签名、Rotation、新签名、不同到达顺序、冲突路径和 reorg 的真实交易向量。
 
 ## 4. HTTP 合同与原交易处理
 
@@ -69,7 +125,20 @@ Validate request
 
 实际代码中部分验证与网络观测尚有 `unverified/sync-pending` 分支：不能把“已收到同步请求”误写成“公共 BAP 已发布”。协议不符不得尝试猜测另一种数据格式来降级通过。
 
-**原有接口兼容**：`GET /api/v1/identities/{bapId}`、`GET /api/v1/transactions/{txid}`、`GET /api/v1/operations/{id}` 等由现有 Controller 提供。目标 Contract 草案见 [OpenAPI](../../contracts/openapi/ownword.yaml)，但真实返回字段、错误 code 必须以实际 Java/测试向量逐项确定后才能冻结。
+**原有接口兼容**：`GET /api/v1/identities/{bapId}`、`GET /api/v1/transactions/{txid}`、`GET /api/v1/operations/{id}`、`GET /api/v1/identity-operations/{id}` 等由现有 Controller 提供。目标 Contract 草案见 [OpenAPI](../../contracts/openapi/ownword.yaml)，请求与错误 code 以实际 Java/测试向量核对；DTO 字段仍保留待校验的可选属性，不将草案认定为已批准 SDK。
+
+### 4.1 公共 Identity 查询 DTO 的权威转换（R-02 / R-05）
+
+`IdentityApi` 的 `data.kind` 可能是 `published / incomplete / not-published / unknown / stored / empty` 中的一个兼容值，但不可单独决定授权和事实。转换时必须先验证 `scope`、`meta.source`、`indexCoverage` 与实际签名/网络来源；`broadcast-mock` 的 `stored/incomplete/empty` 是隔离查询。
+
+`ResponseEntity<Document>` 当前以 `data + meta` 返回；错误以 `error.code/retryable/field + meta` 返回。OpenAPI 应覆盖这些现存字段、四字段 Sync、`Idempotency-Key`、回读与恢复接口，并将已确定的字段标强类型，未完成的 JSON 字段**明确标记候选而不扩写现有生产语义**。
+
+### 4.2 交易同步异常与恢复
+
+- 同一 `operationId` 改 TxID：409 `OPERATION_CONFLICT`；同一 TxID 的原交易内容或 BapId 不符：409；不得重签形成第二笔广播。
+- 缺签名或身份归属不匹配：422；未验证签名只可进入可恢复未证实状态，不得产生有效公开身份记录。
+- HTTP 404 `TRANSACTION_NOT_FOUND`（模拟 scope）或上游异常不能证明该笔交易未广播；客户端先按照原 TxID 及 Wallet 回执恢复。
+- `identity-init`、头像、ALIAS 属于可以部分完成的独立交易；每笔签名，分别记录失败或待核实，不能恢复成伪原子事务。
 
 ## 5. 数据模型与一致性
 
@@ -80,7 +149,8 @@ Mongo 在此阶段承担已同步原交易、日志与可重建读投影；仓�
 | 同步操作 | operationId 与 txid 的幂等关系 | 防止重复同步与不同交易覆盖 |
 | BAP 身份投影 | BapId + 已核实来源/环境范围 | Profile 是由有效链上声明派生 |
 | 交易及身份签名证据 | network/scope/txid/输出 | 验证器版本、来源和观测时点要可追溯 |
-| 身份签名路径历史 | BapId + 可验证轮换记录 | 不能仅缓存当前 signer |
+| 身份签名路径历史 | BapId + 可验证轮换记录 | 不能仅缓存当前 signer；需支持 `SigningPathAt(tx)`、冲突与重组重放 |
+| 资格检查结果 | BapId + scope + checkpoint + 有效期 + Root 证明引用 | 短期派生值，不能取代公共历史或私钥授权；证据过期回到 NEED_EVIDENCE |
 | Current Binding 查询 | Artifact 公开关联和 Origin | 不在 Identity 再保存第二份当前关系 |
 
 对现有 Mongo 实际键、部分唯一索引、scope 实现有任何修改前先写迁移与回放测试；本表是**目标逻辑约束**而不是声明已经部署了同名集合或复合键。
@@ -99,9 +169,9 @@ Mongo 在此阶段承担已同步原交易、日志与可重建读投影；仓�
 
 ## 7. 实施次序与未关闭项目
 
-1. 对照现有 `IdentityApi / TransactionSyncApi / IdentityProtocol` 与已批准 HTTP 设计，补接口样例和验证覆盖证据。
-2. 把领域策略与传输层分离，先抽 `IdentitySignatureVerifier`、`PublicBapResolver` 和投影查询接口，不破坏 API。
-3. 补 Key Rotation 历史回放、原交易保存/重建和 Indexer 覆盖失败用例。
+1. **先关闭 R-01**：与 Wallet/Indexer 确定历史覆盖或安全初始化协议，完成 `AssessIdentityInitialization` 实测；当前若缺证据维持 NEED_EVIDENCE，**不**擅改 GET 身份结果。
+2. 补 R-02/03/05 的完整 DTO fixtures、Mapper、Error schema、HTTP 契约测试；再从 Controller 抽 `IdentitySignatureVerifier`、`PublicBapResolver` 和投影端口，不破坏已有 API。
+3. 依据 R-04 补 Key Rotation 历史路径、原交易回放、来源覆盖不足、链序冲突和 reorg 测试。
 4. 在 Artifact 的公开 Binding 与编号契约经过实测后接入只读 `BindingQueryPort`。
 5. 真实钱包扩展、公共历史和主网资金/广播门禁单独验收，不用模拟或本地测试结果代替。
 
