@@ -282,8 +282,8 @@ def render_body(blocks, anchors, cid=None):
     return '\n'.join(out), sec
 
 
-def render_chapter(ch, md, anchors, pager=''):
-    """渲染一章：标题 + 正文 + 章末导航 + 小节锚点。"""
+def render_chapter(ch, md, anchors, pager='', nav_top='', summary=''):
+    """渲染一章：标题 + 章首导航 + 本章要点 + 正文 + 章末导航。"""
     blocks = parse_markdown(md)
     body = [b for b in blocks if b['type'] != 'h1']
     title = ch['title']
@@ -309,10 +309,12 @@ def render_chapter(ch, md, anchors, pager=''):
         head = f'<h1 class="chapter-title">{html.escape(title, quote=False)}</h1>'
     parts = [
         f'<section class="chapter" id="{cid}" data-title="{html.escape(title, quote=True)}">',
+        nav_top,
         '<header class="chapter-head">',
         kicker,
         head,
         '</header>',
+        summary,
         '<div class="chapter-body">',
         content,
         '</div>',
@@ -364,14 +366,46 @@ def build_toc_html(chapters, headings, root_attrs='class="toc" id="toc"'):
     return '\n'.join(parts)
 
 
+CN_DIGITS = {'零': 0, '〇': 0, '一': 1, '二': 2, '两': 2, '三': 3, '四': 4,
+             '五': 5, '六': 6, '七': 7, '八': 8, '九': 9}
+
+
+def cn_to_int(text):
+    """解析 1–99 的中文数字（十、十一、二十、三十六…），失败返回 None。"""
+    if not text or any(ch not in CN_DIGITS and ch != '十' for ch in text):
+        return None
+    if '十' not in text:
+        if len(text) == 1:
+            return CN_DIGITS[text]
+        return None
+    head, _, tail = text.partition('十')
+    if '十' in tail:
+        return None
+    tens = CN_DIGITS[head] if head else 1
+    ones = CN_DIGITS[tail] if tail else 0
+    value = tens * 10 + ones
+    return value if 1 <= value <= 99 else None
+
+
+def chapter_number(title):
+    """取章节标题开头的序号：阿拉伯数字或中文数字，返回 int 或 None。"""
+    m = re.match(r'^(\d+)', title)
+    if m:
+        return int(m.group(1))
+    m = re.match(r'^([一二三四五六七八九十零〇两]+)(?=[、．.，,]|问)', title)
+    if m:
+        return cn_to_int(m.group(1))
+    return None
+
+
 def build_numgrid(chapters, root_attrs='class="numgrid" id="numgrid" hidden'):
     """按问号跳转的编号网格。root_attrs 供无脚本面板那份用不同的 class。"""
     parts = [f'<div {root_attrs}>']
     cur_part = None
     opened = False
     for ch in chapters:
-        m = re.match(r'^(\d+)', ch['title'])
-        if not m:
+        num = chapter_number(ch['title'])
+        if num is None:
             continue
         part = ch.get('part') or ''
         if part != cur_part:
@@ -381,7 +415,7 @@ def build_numgrid(chapters, root_attrs='class="numgrid" id="numgrid" hidden'):
             parts.append('<div class="numgrid-body">')
             cur_part, opened = part, True
         cid = 'ch-' + ch['slug']
-        parts.append(f'<a class="num" href="#{cid}" data-target="{cid}">{m.group(1)}</a>')
+        parts.append(f'<a class="num" href="#{cid}" data-target="{cid}">{num}</a>')
     if opened:
         parts.append('</div>')
     parts.append('</div>')
@@ -487,6 +521,17 @@ html[data-theme="night"]{
   --shadow:rgba(0,0,0,.5);
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
 }
+/* 无脚本环境（快速查看等）跟随系统深色；脚本能跑时由 JS 决定主题 */
+@media (prefers-color-scheme:dark){
+  html:not(.js){
+    --paper:#131519; --surface:#181b20; --card:#1e222a;
+    --ink:#ded9d0; --ink-2:#c2bdb4; --muted:#8d877d;
+    --rule:#2b3038; --rule-2:#363c46;
+    --accent:#dd9c68; --accent-2:#b9793f; --accent-wash:rgba(221,156,104,.12);
+    --on-accent:#241a12;
+    --shadow:rgba(0,0,0,.5);
+  }
+}
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 body{
@@ -577,6 +622,13 @@ hr{border:none;border-top:1px solid var(--rule);margin:2em 0}
 .side-foot button{border:1px solid var(--rule);background:var(--card);color:var(--muted);border-radius:var(--r1);
   padding:6px 11px;font-family:var(--sans);font-size:12px;cursor:pointer}
 .side-foot button:hover{color:var(--accent);border-color:var(--accent-2)}
+.marks{flex:1;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:0 var(--s3) var(--s3)}
+.marks-empty{padding:var(--s5) var(--s3);font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.8}
+.marks .toc-item{padding-left:var(--s3)}
+.mark-row{display:flex;align-items:center;gap:var(--s2)}
+.mark-row .del{flex:none;border:0;background:transparent;color:var(--muted);cursor:pointer;
+  font-size:15px;padding:8px 10px;border-radius:var(--r1)}
+.mark-row .del:hover{color:var(--accent);background:var(--accent-wash)}
 
 /* ---------- 封面（题名页） ---------- */
 .cover{min-height:calc(100svh - 54px);display:flex;flex-direction:column;justify-content:center;align-items:center;
@@ -657,6 +709,26 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 .audio audio{flex:1;min-width:0;height:34px}
 .jump{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-2)}
 
+/* ---------- 章首导航条 ---------- */
+.chapter-nav{display:flex;align-items:center;gap:var(--s2);margin:0 0 var(--s5);padding:0 0 var(--s3);
+  border-bottom:1px solid var(--rule);font-family:var(--sans);font-size:12.5px}
+.chapter-nav a{flex:none;padding:6px 10px;border:1px solid var(--rule);border-radius:999px;
+  color:var(--muted);text-decoration:none;max-width:38%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.chapter-nav a:hover{color:var(--accent);border-color:var(--accent-2)}
+.chapter-nav .toc-jump{margin-left:auto;margin-right:auto;font-weight:600;color:var(--ink)}
+.chapter-nav .next{margin-left:auto}
+.chapter-nav .prev{margin-right:auto}
+.chapter-nav span.gap{flex:none}
+
+/* ---------- 本章要点（小节索引） ---------- */
+.chapter-sum{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;margin:0 0 var(--s5);
+  padding:var(--s3) var(--s4);background:var(--card);border:1px solid var(--rule);border-radius:var(--r2)}
+.chapter-sum .sum-label{flex:none;font-family:var(--sans);font-size:11.5px;font-weight:700;
+  letter-spacing:.14em;color:var(--accent)}
+.chapter-sum a{font-family:var(--sans);font-size:12.5px;color:var(--muted);text-decoration:none;
+  padding:2px 8px;border-radius:999px;background:var(--surface)}
+.chapter-sum a:hover{color:var(--accent);background:var(--accent-wash)}
+
 /* ---------- 章末导航 ---------- */
 .pager{display:flex;gap:var(--s3);margin:var(--s6) 0 0;padding-top:var(--s4);border-top:1px solid var(--rule)}
 .pager a{flex:1;min-width:0;padding:.8em .9em;border:1px solid var(--rule);border-radius:var(--r2);
@@ -735,6 +807,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     border-bottom:1px solid var(--rule)}
   .to-toc{display:flex}
   .inline-toc .toc{display:block;overflow:visible;padding:0;flex:none}
+  .inline-toc .numgrid{flex:none;overflow:visible;padding:0;margin:0 0 var(--s3)}
+  .inline-toc .numgrid-body{grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:4px}
+  .inline-toc .num{height:38px;font-size:13px}
   .inline-toc .toc-item{min-height:40px}
   /* 抽屉里已有同一份目录，正文这份够用即可 */
   .inline-toc .toc-kids{display:none}
@@ -759,6 +834,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       <div class="tabs" role="tablist">
         <button class="tab active" data-tab="toc" role="tab" aria-selected="true">目录</button>
         <button class="tab" data-tab="num" role="tab" aria-selected="false">按问号</button>
+        <button class="tab" data-tab="mark" role="tab" aria-selected="false">书签</button>
       </div>
       <button class="icon" id="btnClose" aria-label="关闭目录">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -771,8 +847,10 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     </div>
     {{TOC}}
     {{NUMGRID}}
+    <div class="marks" id="marks" hidden></div>
     <div class="side-foot">
       <span id="posText">—</span>
+      <button id="btnMark">☆ 收藏本章</button>
       <button id="btnTop">回到顶部</button>
     </div>
   </aside>
@@ -848,8 +926,13 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 
   /* ---------- 主题与字号 ---------- */
   safe('设置', function () {
-    var theme = THEMES.indexOf(store.get(FONT_KEY, 'paper'));
-    if (theme < 0) theme = 0;
+    // 用户没选过主题时跟随系统深色，选过则以用户为准
+    var saved = store.get(FONT_KEY, '');
+    var theme = saved ? THEMES.indexOf(saved) : -1;
+    if (theme < 0) {
+      var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      theme = dark ? 2 : 0;
+    }
     doc.setAttribute('data-theme', THEMES[theme]);
     var size = SIZES.indexOf(parseInt(store.get(SIZE_KEY, '17'), 10));
     if (size < 0) size = 1;
@@ -1028,8 +1111,16 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     });
     bindTap($('btnClose'), function () { openSidebar(false); });
     bindTap(scrim, function () { openSidebar(false); });
+    // 每章顶部的「目录」：窄屏开抽屉，宽屏回顶部（侧栏本来就常驻）
+    Array.prototype.forEach.call(document.querySelectorAll('.toc-jump'), function (a) {
+      bindTap(a, function (e) {
+        if (e && e.preventDefault) e.preventDefault();
+        if (isDesktop()) scrollToY(0, true); else openSidebar(true);
+      });
+    });
 
     var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    var marksBox = $('marks');
     Array.prototype.forEach.call(tabs, function (tab) {
       bindTap(tab, function () {
         Array.prototype.forEach.call(tabs, function (t) {
@@ -1037,12 +1128,80 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
           t.classList[on ? 'add' : 'remove']('active');
           t.setAttribute('aria-selected', on ? 'true' : 'false');
         });
-        var isNum = tab.getAttribute('data-tab') === 'num';
-        toc.hidden = isNum;
+        var kind = tab.getAttribute('data-tab');
+        var isNum = kind === 'num', isMark = kind === 'mark';
+        toc.hidden = isNum || isMark;
         numgrid.hidden = !isNum;
-        search.parentNode.style.display = isNum ? 'none' : '';
+        if (marksBox) marksBox.hidden = !isMark;
+        search.parentNode.style.display = (isNum || isMark) ? 'none' : '';
+        if (isMark) renderMarks();
       });
     });
+
+    /* ---------- 书签 ---------- */
+    var MARKS_KEY = 'ow_book_marks';
+    function getMarks() {
+      try { var v = JSON.parse(store.get(MARKS_KEY, '[]')); return Array.isArray(v) ? v : []; }
+      catch (e) { return []; }
+    }
+    function setMarks(list) { store.set(MARKS_KEY, JSON.stringify(list)); }
+    function curChapter() {
+      var id = store.get(POS_KEY, '');
+      if (id && document.getElementById(id)) return document.getElementById(id);
+      return document.querySelector('.chapter');
+    }
+    function syncMarkBtn() {
+      var btn = $('btnMark'), ch = curChapter();
+      if (!btn || !ch) return;
+      var on = getMarks().indexOf(ch.id) >= 0;
+      btn.textContent = on ? '\u2605 已收藏' : '\u2606 收藏本章';
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    function renderMarks() {
+      if (!marksBox) return;
+      var list = getMarks(), parts = [];
+      if (!list.length) {
+        parts.push('<p class="marks-empty">还没有书签。\u9605读时点左下角「收藏本章」，' +
+                   '\u4e0b次就能在这里一键回到。</p>');
+      } else {
+        list.forEach(function (id) {
+          var ch = document.getElementById(id);
+          if (!ch) return;
+          parts.push('<div class="mark-row"><a class="toc-item" href="#' + id + '">'
+                     + (ch.getAttribute('data-title') || id) + '</a>'
+                     + '<button class="del" data-id="' + id + '" aria-label="删除书签">\u00d7</button></div>');
+        });
+      }
+      marksBox.innerHTML = parts.join('');
+      syncMarkBtn();
+    }
+    bindTap($('btnMark'), function () {
+      var ch = curChapter();
+      if (!ch) return;
+      var list = getMarks(), i = list.indexOf(ch.id);
+      if (i >= 0) list.splice(i, 1); else list.push(ch.id);
+      setMarks(list);
+      syncMarkBtn();
+      if (marksBox && !marksBox.hidden) renderMarks();
+    });
+    if (marksBox) {
+      bindTap(marksBox, function (e) {
+        var node = (e && e.target) || null;
+        while (node && node.nodeType !== 1) node = node.parentNode;
+        if (!node || !node.closest) return;
+        var del = node.closest('button.del');
+        if (del) {
+          if (e.preventDefault) e.preventDefault();
+          var id = del.getAttribute('data-id');
+          var list = getMarks().filter(function (x) { return x !== id; });
+          setMarks(list); renderMarks();
+          return;
+        }
+        var a = node.closest('a[href^="#"]');
+        if (a) { handleJump(e); }
+      });
+    }
+    syncMarkBtn();
 
     function scrollToY(top, smooth) {
       try {
@@ -1236,14 +1395,26 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         var h = document.documentElement.scrollHeight - window.innerHeight;
         bar.style.width = (h > 0 ? Math.min(100, scrollPos() / h * 100) : 0) + '%';
         toTop.classList[scrollPos() > 600 ? 'add' : 'remove']('show');
+        var ratio = h > 0 ? Math.min(1, Math.max(0, scrollPos() / h)) : 0;
         var sec = currentSection();
         if (sec && sec.id !== lastId) {
           lastId = sec.id;
           barTitle.textContent = sec.getAttribute('data-title') || '';
           markCurrent(sec.id);
           store.set(POS_KEY, sec.id);
-          posText.textContent = (sections.indexOf(sec) + 1) + ' / ' + sections.length
-            + ' · ' + (sec.getAttribute('data-title') || '');
+          barTitle.textContent = Math.round(ratio * 100) + '% · ' + (sec.getAttribute('data-title') || '');
+        }
+        if (posText && sec) {
+          var chars = posText.getAttribute('data-chars');
+          if (!chars) {
+            var host = document.querySelector('main');
+            chars = host ? Math.max(1, host.textContent.length) : 1;
+            posText.setAttribute('data-chars', chars);
+          }
+          var left = Math.round((1 - ratio) * Number(chars) / 400);
+          posText.textContent = Math.round(ratio * 100) + '% · '
+            + (sections.indexOf(sec) + 1) + '/' + sections.length
+            + (ratio < 0.999 ? ' · 剩约 ' + left + ' 分钟' : ' · 读完了');
         }
         var head = currentHead();
         var hid = head ? head.id : null;
@@ -1291,13 +1462,29 @@ def main():
                          f'{html.escape(n["title"], quote=False)}</a>')
         pager = f'<nav class="pager">{prev_html}{next_html}</nav>' if (prev_html or next_html) else ''
 
-        rendered, _ = render_chapter(ch, md, anchors, pager)
         cid = 'ch-' + ch['slug']
+        # 小节锚点与正文的 h2 顺序一一对应，先算出再传给渲染器做「本章要点」
         heads = []
         for b in parse_markdown(md):
             if b['type'] == 'h2':
                 heads.append({'id': f'{cid}-s{len(heads) + 1}', 't': b['text']})
         headings[cid] = heads
+
+        nav_top = ['<nav class="chapter-nav" aria-label="章节导航">']
+        if idx > 0:
+            nav_top.append('<a class="prev" href="#ch-%s">‹ 上一章</a>' % chapters[idx - 1]['slug'])
+        nav_top.append('<a class="toc-jump" href="#inline-toc">目录</a>')
+        if idx < len(chapters) - 1:
+            nav_top.append('<a class="next" href="#ch-%s">下一章 ›</a>' % chapters[idx + 1]['slug'])
+        nav_top.append('</nav>')
+        summary = ''
+        if len(heads) >= 2:
+            links = ''.join('<a href="#%s">%s</a>' % (h['id'], html.escape(h['t'], quote=False))
+                            for h in heads)
+            summary = ('<nav class="chapter-sum" aria-label="本章要点">'
+                       '<span class="sum-label">本章要点</span>' + links + '</nav>')
+
+        rendered, _ = render_chapter(ch, md, anchors, pager, ''.join(nav_top), summary)
         if '问' in ch['title']:
             questions += 1
         parts.append(rendered)
@@ -1305,8 +1492,12 @@ def main():
     stats = ('<span><b>%d</b>章</span><span><b>%d</b>问</span><span><b>%d</b>节解读</span>'
              % (len(chapters), questions, sum(len(v) for v in headings.values())))
     filename = (manifest.get('docx', {}).get('filename') or meta['book']).replace('.docx', '') + '.html'
+    has_numbers = any(chapter_number(ch['title']) is not None for ch in chapters)
+    numgrid_inline = (build_numgrid(chapters, 'class="numgrid" id="numgrid-inline"')
+                      if has_numbers else '')
     inline_toc = ('<section class="inline-toc" id="inline-toc" aria-label="目录">'
-                  '<p class="inline-toc-head">目录 <span>点章节标题即可跳转</span></p>'
+                  '<p class="inline-toc-head">目录 <span>点标题或问号即可跳转</span></p>'
+                  + numgrid_inline
                   + build_toc_html(chapters, headings, 'class="toc toc-copy"')
                   + '</section>')
     out = page(meta, '\n'.join(parts), build_toc_html(chapters, headings),
