@@ -8,6 +8,7 @@
 | --- | --- | --- |
 | 全局 Context Map | [上下文映射](上下文映射-v0.4.0-20261117-175100.md) | 设计提案，待评审 |
 | Identity | [Identity 领域设计](identity/README.md) | 已整理跨端草案，待评审 |
+| 支撑域 | [钱包、交易、链与 Ordinal 查询](supporting/README.md) | 基于本地源码划分职责与实施缺口，待评审 |
 | Artifact | [领域入口](artifact/README.md) | 产品与原型已定义；完整链上 Binding 契约待验证 |
 | Content | [领域入口](content/README.md) | 已有 v0.2.0 真实集成与 Revision 契约，待抽取独立领域设计 |
 | Relationship | [领域入口](relationship/README.md) | v0.4.0 原型范围，生产协议待验证 |

@@ -33,6 +33,6 @@
 
 PRD 描述用户任务；Domain 描述业务模型与语义；Contracts 描述系统交互的可验证输入输出；Frontend/Backend 描述实现细节。所有文档引用核心认知的事实，不抄写另一份规则。涉及变更时先查领域规则与 API 兼容性，再改应用代码；验证证据的状态来自[_task/system-design/feature_list.json](../feature_list.json)及各版本验收报告。
 
-**Identity 技术 Review**：[评审报告（Changes Requested）](domain/identity/评审报告-Identity-v0.4.0-20261118-103500.md) 已形成领域状态/初始化资格、字段映射、历史密钥验签、接口与 BDD 的整改设计；首次主网发布仍须真实公共历史证据或经批准的安全初始化协议才可关闭 P0。
+**Identity 与支撑边界**：[支撑域设计](domain/supporting/README.md)按 Yours Wallet 与 SDK 源码明确身份管理、交易签名/提交、链状态和 Ordinal 查询职责。[Identity 技术 Review](domain/identity/评审报告-Identity-v0.4.0-20261118-103500.md)中的独立初始化资格方案已按钱包管理边界修订；当前设计不再要求 OwnWord 自建 Root 控制型初始化协议。钱包实际集成、历史验签、提交恢复及主网门禁仍待实证。
 
 **当前待评审**：统一目录与 v0.4.0 清单、Identity 跨端领域边界、Binding 公共协议和 Mainnet 验收缺口。设计编写完成不自动将任何任务标为 `done`。

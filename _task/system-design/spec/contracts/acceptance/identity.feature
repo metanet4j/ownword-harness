@@ -4,44 +4,45 @@
 @identity @v0_4_0 @draft
 Feature: Consistent BAP identity language and verifiable publication
 
-  @R01 @requires-indexer
-  Scenario: A new BAP identity can be initialized only with adequate independent evidence
-    Given the wallet proves control of the BAP root key for the expected BAP ID
-    And the public identity history is sufficiently covered with no conflicting publication
-    And no previously prepared or unknown-broadcast initialization needs recovery
-    When the user requests initialization eligibility
-    Then the eligibility decision is ALLOW
-    And the public identity resolution remains based on public chain evidence
+  @R01 @wallet
+  Scenario: Wallet identity action can be requested while public history is unknown
+    Given the wallet explicitly provides the initial identity action for the current account
+    And the public identity resolution is UNKNOWN
+    And no known public conflict or unresolved original execution exists
+    When the user confirms the frozen business review
+    Then the application requests the wallet identity action under wallet authorization
+    And the public identity resolution remains UNKNOWN until independent readback
 
   @R01
-  Scenario: Missing public history coverage does not imply identity is unpublished
-    Given the wallet can compute the current BAP ID
-    And the public BAP indexer has not provided sufficient history coverage
-    When the application resolves the identity and assesses initialization
-    Then the public resolution is UNKNOWN
-    And the initialization eligibility is NEED_EVIDENCE
-    And the user may edit a draft but must not broadcast a new initialization transaction
+  Scenario: Wallet local absence is not public absence
+    Given the wallet has no local identity output for the computed BAP ID
+    And public history coverage is insufficient
+    When the application maps wallet and public observations
+    Then the wallet state and the public UNKNOWN result remain separate
+    And the application does not create an independent root-control initialization protocol
+
+  @R01 @wallet
+  Scenario: Unknown wallet capability preserves the draft
+    Given the wallet identity read fails or the current action permission is unresolved
+    When the user requests identity publication
+    Then the application preserves the draft and requests wallet recovery or authorization
+    And it does not treat the wallet read failure as a new identity
 
   @R01
-  Scenario: A transient indexer failure blocks irreversible initial publication
-    Given the public BAP source is unavailable or times out
-    When the user tries to publish an initial BAP identity
-    Then the eligibility decision is NEED_EVIDENCE
-    And the application preserves the draft without preparing a new broadcast
-
-  @R01
-  Scenario: Existing published identity does not qualify for another initialization
-    Given a valid published BAP identity already exists for the same root
-    When the user requests initialization eligibility
-    Then the eligibility decision is BLOCK
-    And the application offers identity management or profile completion instead
+  Scenario: Known public identity conflict requires recovery before initialization
+    Given public evidence verifies the identity already exists
+    And the wallet lacks the corresponding identity tracking record
+    When the user requests identity publication
+    Then the application requests matching or recovery of the existing wallet identity
+    And it does not automatically request another initialization transaction
 
   @R01 @recovery
   Scenario: Unknown broadcast outcome must be recovered by the original transaction
-    Given an initialization transaction has been signed and its rawTx and txid saved
-    And the wallet returned an unknown broadcast result
+    Given an identity action has an unresolved original wallet reference or txid
+    And its final transaction materials may still require recovery
     When the user resumes the operation
-    Then the application queries the original txid and reuses the original operationId
+    Then the application recovers the original wallet execution and queries its txid when known
+    And it reuses the original operationId
     And the application does not create or broadcast a different initialization transaction
 
   @R02

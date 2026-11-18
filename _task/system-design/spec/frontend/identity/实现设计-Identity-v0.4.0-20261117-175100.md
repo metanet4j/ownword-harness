@@ -1,144 +1,76 @@
 # Frontend / Identity 实现设计（OwnWord v0.4.0 目标）
 
-> **状态：needs-review。** 跨端业务语义参考[Identity 领域设计](../../domain/identity/README.md)，事实仍以[核心认知](../../核心认知.md)为权威。本文件是对**现有** Next.js + TypeScript v0.2.0 工程的演进指南，并不声明 v0.4.0 Identity 已完成生产验收。
+> 状态：needs-review。业务语义遵循[核心认知](../../核心认知.md)、[Identity 领域](../../domain/identity/README.md)和[支撑域](../../domain/supporting/README.md)。本文为实施指南，未修改前端代码或验收真实扩展。
 
-## 1. 源码基线
+## 1. 实现基线
 
-仓库：[metanet4j/ownword-web](https://github.com/metanet4j/ownword-web/tree/feature/ownword-v0.2.0)，核实分支 `feature/ownword-v0.2.0`，HEAD `6f9bccadc356e4a2e07afe3d8af6c3534f70402b`（v0.4.0 编写时的只读观察）。
+既有前端登记为 `metanet4j/ownword-web` 的 `feature/ownword-v0.2.0`，观察 SHA `6f9bccadc356e4a2e07afe3d8af6c3534f70402b`，来源见[v0.2.0 验收记录](../../../../../知识库/前端/ownword-v0.2.0/README.md)。当前工作区没有该前端源码目录，本轮不把旧观察当作重新核实的 HEAD；实施前恢复并核对实际仓库。
 
-| 代码位置 | 当前职责 | 目标与约束 |
+| 既有代码位置 | 演进职责 |
+| --- | --- |
+| `app/identity-app.tsx / identity-state.tsx` | UI、加载态、业务 Review 和恢复入口 |
+| `lib/domain/types.ts` | 兼容 DTO、Profile 映射与独立的查询结果 |
+| `lib/domain/publish.ts` | 身份业务用例，消费交易支撑端口 |
+| `lib/domain/journal.ts` | 调用前业务意图、执行引用、原交易与恢复记录 |
+| `lib/wallet/contracts.ts / adapters/` | Yours 会话、本人身份 Actions、交易能力及错误适配 |
+| `lib/content/publish.ts` | Content 业务编排，复用交易支撑；保留自己的载荷与验收 |
+
+沿现有模块逐步接入，不为匹配领域名称搬迁目录。依赖方向为 `UI → Application → Domain/Ports ← Wallet、HTTP、Storage Adapters`。
+
+## 2. 钱包身份适配
+
+`WalletIdentityPort` 封装本人 BapId、钱包发布记录、Profile、发布/更新/轮换能力。会话、解锁、站点权限和逐笔授权由钱包管理，OwnWord 保存所需会话引用，不复制钱包权限系统或密钥历史写模型。
+
+| 情况 | 前端分流 |
+| --- | --- |
+| 钱包身份明确可新建、公共查询 unknown，无已知冲突和未决操作 | 可 Review 并请求钱包已有 Action；公共身份仍显示待核实 |
+| 钱包已有身份、Profile 不完整 | 更新资料，避免再次初始化 |
+| 钱包状态/权限未知或账户不匹配 | 保留草稿，重读钱包/重新授权 |
+| 公共已核实身份与钱包记录冲突 | 先匹配和恢复钱包跟踪，避免重复 ID |
+| 原 Action/TxID 待恢复 | 进入原操作，不新建相同业务交易 |
+
+删除以公共 `unknown` 单独拦截钱包首次发布的耦合；不新增 OwnWord 的 Root 证明型初始化资格接口。钱包 basket 无记录也不能映射为公共 NOT_PUBLISHED。
+
+### 2.1 资料映射
+
+| 来源字段 | 领域字段 | 处理 |
 | --- | --- | --- |
-| `app/identity-app.tsx`, `app/identity-state.tsx` | Identity UI 与状态 | Presentation 只控制渲染、事件和界面反馈，不判断公共身份事实 |
-| `lib/domain/types.ts` | `Profile / Resolution / Operation` 与基础校验 | 分离传输 DTO、业务结果、客户端操作日志，保留现有行为和字段兼容 |
-| `lib/domain/publish.ts` | 身份交易准备/广播/同步编排 | 将可测 Use Case 从 React 抽离；原交易不得在恢复时重构 |
-| `lib/domain/journal.ts` | 钱包操作日志与恢复 | IndexedDB 持久化、旧身份归属、幂等与账户切换门禁 |
-| `lib/wallet/contracts.ts`, `lib/wallet/adapters/` | 钱包能力接口与具体实现 | 保持现有隔离层，业务不直接导入特定钱包 SDK |
-| `lib/content/publish.ts` | Content 发布与修订 | 与 Identity 复用可验证交易基础步骤，不重复定义作者身份归属 |
+| Java DTO `name / bio / imageUrl / type` | `name / description / image / type` | 显式映射；按核心认知校验 |
+| Wallet Schema.org `name / description / image / @type` | 同上 | 与 Java DTO 使用不同 Adapter；不能把 bio 原样传给钱包 |
+| 公共 Profile 缺少可信时点 | `updatedAt` 未知 | 不用浏览器时间补成链上更新时点 |
 
-已存在的目录不必为匹配文档结构一次性搬迁。优先通过文件/模块边界演进，保持通过的 v0.1/v0.2 功能与恢复测试。
+Yours 当前 `saveProfile` 固定 `@type: Person`；组织资料和 Identity.type / Profile.type 一致性待产品与钱包适配实证，不据此扩写钱包已支持范围。
 
-## 2. 目标分层（职责逻辑层，不强制物理文件树）
+### 2.2 公共查询映射
 
-- **Domain**：`BapId`、身份查询结果、可纯函数表达的前置条件、业务行为及状态转移；不调用 HTTP、Wallet 和 React Hook。
-- **Application**：`ResolveMyIdentity`、`PublishIdentity`、`UpdateBapProfile`、`RotateIdentityKey`；按冻结内容、权限、持久化日志和交易结果协调外部端口。
-- **Infrastructure**：`WalletProvider`、`IdentityApiClient`、`OperationJournal` 的具体适配；不能在 Adapter 内发明新的业务语义。
-- **Presentation**：页面、S2 组件、ViewModel、Hook；负责 loading、disabled、dialog 和错误反馈，业务是否允许操作来自用例结果。
+`mainnet/published` 仅在 Proof/来源有效时成为 PUBLISHED；`not-published` 需要充分历史覆盖，否则 UNKNOWN；`unknown`、失败和坏响应保持 UNKNOWN。`incomplete` 需结合初始声明证据判发布状态，Profile 完整度另判。模拟 `stored/incomplete/empty` 只在隔离 scope 使用。完整映射见[Identity §6](../../domain/identity/领域设计-Identity-v0.4.0-20261117-175100.md#6-状态钱包管理与公共查询)。
 
-示意依赖：`React UI → Application Use Case → Domain + Ports ← Wallet/HTTP/Storage Adapters`。
+## 3. 交易执行与恢复
 
-## 3. 应用用例的实施契约
+前端通过 `WalletExecutionPort` 选择已核实的 Action 路径或两阶段路径；具体调用顺序和可取得的材料以[支撑域 §4](../../domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md#4-签名与交易执行)的版本取证为准。
 
-`IdentityResolution`（查询事实）、`ProfileCompleteness`（资料完整性）、`WalletCapability`（当前控制能力）、`PublicationEligibility`（初始化资格）必须是**独立模型**；其唯一业务解释见[共享 Identity 设计 §6](../../domain/identity/领域设计-Identity-v0.4.0-20261117-175100.md#6-状态查询事实与初始化资格)。
+1. Review 冻结操作 BapId、scope、账户、业务字段、目标及所选执行路径。
+2. 调用前保存 operationId、业务意图、flowId/步骤及适配器可用的恢复关联；再次检查会话。
+3. 委托钱包执行，立即保存实际返回的 reference、TxID、交易材料及错误。两阶段路径在继续提交前保存其真实 Prepared 材料。
+4. 高层调用中断或回执丢失时，按可取得的原钱包记录/TxID 恢复；禁止自动再调用创建 Action。当前身份 Action 不返回 actionId/reference，也未接收业务 operationId；Toolbox 会话外 pending reference 恢复未实现。需验证持久查询关联或补适配，缺口保持 UNKNOWN。
+5. 原交易可取得且满足同步条件时，按现有四字段契约同步；独立回读交易状态与公共 Identity/Profile。
 
-### 3.1 初次身份发布（R-01）
+优先从 Action 返回的 `tx` 用 `Transaction.fromAtomicBEEF` 提取目标交易，再 `toHex()` 得 rawTx，并重算 TxID；仅有 TxID 时按[支撑域 §4.4](../../domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md#44-提交后取得最终-rawtx)通过原交易查询补齐，不把整个 BEEF 直接当 rawTx hex。无可恢复材料时不能制造成功回执，也不能推断“从未广播”。
 
-~~~text
-Identity UI / UseCase
-  ├─ ResolveMyIdentity(bapId) → published / not-published / unknown
-  ├─ AssessIdentityInitialization(bapId, walletRootProof, pendingOperation)
-  │    ├─ BLOCK → 现有 Identity / 恢复旧事务 / 新会话
-  │    ├─ NEED_EVIDENCE → 保留 Draft，提示缺历史覆盖并可重新核验
-  │    └─ ALLOW → 冻结 Review / 会话 / BapId / Profile
-  └─ PublishIdentity
-       ├─ 广播前重新执行资格核查；证据过期失效
-       ├─ Wallet 准备并身份签名
-       ├─ IndexedDB 保存同一 rawTx + txid + operationId
-       ├─ Wallet 广播一次；结果未知先查询原 txid
-       ├─ 条件满足时 POST /api/v1/transactions/sync
-       └─ GET /api/v1/identities/{bapId} 回读 Proof/Coverage
-~~~
+多笔流程每笔使用独立 operationId，共享本地 flowId。当前 Sync 请求恰有四字段，不能直接添加 flowId。ID + ALIAS 若由钱包同笔组合则记一笔；头像和后续资料等按实际交易分别恢复。后续取消保留先前提交结果。
 
-在主网 `IdentityResolution=UNKNOWN` 时**允许查看创建说明、填写草稿和 Review**，但在 `PublicationEligibility=NEED_EVIDENCE` 时禁止进入不可逆的签名/广播阶段。需要后端新的公共历史能力或经协议安全评审批准的初始声明方案才可把资格变为 ALLOW；不得将模拟 `empty` 映射为主网 `not-published`。
+账户/网络切换提升 session epoch，作废未提交 Review；迟到的原执行结果仍写入原账户/scope 的日志，不能丢弃恢复证据或改归属新身份。UI 不因 HTTP 成功、已有 TxID 或已同步就显示全部业务成功。
 
-当前 [`identity-app.tsx`](https://github.com/metanet4j/ownword-web/blob/feature/ownword-v0.2.0/app/identity-app.tsx) 和 [`publish.ts`](https://github.com/metanet4j/ownword-web/blob/feature/ownword-v0.2.0/lib/domain/publish.ts) 仍按 `not-published` / `unknown` 直接拦截，**此处是目标设计变更，尚未实施**。
+## 4. 链与 Ordinal 读取
 
-### 3.2 DTO → Domain → ViewModel 映射（R-02/R-03）
+交易详情消费 `TransactionQueryPort` 的来源、原状态、块锚、Proof 与主链结论；接收、传播、观察、接受、入块和业务可读分别显示。断流、超时和 reorg 保留原证据并重新查询原 TxID。
 
-| API `Resolution.kind` | scope | 客户端领域映射 | 页面操作 |
-| --- | --- | --- | --- |
-| `published` | mainnet | `PUBLISHED`（要求 Proof/coverage 已验证） + 独立的 ProfileCompleteness | 已核实则 Identity；不完整则补全 |
-| `not-published` | mainnet | coverage 充分才是 NOT_PUBLISHED，否则 UNKNOWN | 调初始化资格，不从 DTO 直接 Setup |
-| `unknown` | mainnet | UNKNOWN，保留原因和来源 | 草稿/Review 可编辑；初始化提交由独立资格控制 |
-| `incomplete` | mainnet | **兼容预留**：有初始发布证据才 PUBLISHED；否则 UNKNOWN | 待独立样例核对，不凭空补全 |
-| `stored` | broadcast-mock | 模拟内已存储，不等于主网 Published | 仅演示模拟业务状态 |
-| `incomplete` | broadcast-mock | 模拟内部分成功，Profile 不完整 | 允许模拟补全 |
-| `empty` | broadcast-mock | 模拟内无数据，不等于主网未发布 | 可进入测试初始化，不作为真实权益 |
-| 5xx/超时/scope 不一致/JSON 解析失败 | 任意 | UNKNOWN / ERROR | 保留最后观测与重试，不当作空结果 |
+资产界面区分钱包持有列表与公共查询。Wallet tracking ID 用于钱包资产动作；outpoint 用于输出/花费；Origin 用于资产追踪。Ordinal 历史 partial 时展示缺口/继续读取，不宣称最新持有人已确认。sequence、score 和 blockIdx 都不填充全局编号。
 
-`Profile` 映射：`name ⇄ name`，`bio ⇄ BapProfile.description`，`imageUrl ⇄ BapProfile.image`，`type: Person|Organization ⇄ BapProfile.type`。**Identity.type: PERSON|ORGANIZATION 是另一个属性**，不能由前端转换 Profile.type 后宣称已写入身份声明。现有 DTO 无 `updatedAt`，需要后端核实链上时点或标记未知；不可用浏览器时间填补。
+## 5. 实施与验证
 
-推荐 TypeScript 分层结果（**示意，非现有 API 字段**）：
+先固定 Yours 实际依赖和身份/执行接口，核实授权、交易材料及恢复引用；再接入 Mapper、交易日志和公共回读。复用现有 API，不为逻辑端口假设新的 HTTP 路由。签名历史、普通 Transfer 身份签名、编号和 Binding 缺口按支撑域门禁处理。
 
-~~~typescript
-type PublicIdentityResolution =
-  | { kind: "published"; bapId: string; proof: unknown; coverage: unknown }
-  | { kind: "not-published"; bapId: string; coverage: unknown }
-  | { kind: "unknown"; bapId: string; reason: string };
+对应设计验收见[Identity BDD](../../contracts/acceptance/identity.feature)和[支撑域 BDD](../../contracts/acceptance/supporting.feature)。实施时覆盖：钱包新建与已存在、公共 unknown、明确冲突、授权拒绝、会话切换、丢回执恢复、同 TxID 同步、BEEF 解码及多笔部分完成。再运行所改前端的适用类型/构建检查和真实扩展集成；模拟结果与主网结果分别记录。
 
-type InitializationEligibility =
-  | { decision: "allow"; evidenceRef: string; expiresAt: string }
-  | { decision: "block"; reason: string }
-  | { decision: "need-evidence"; reason: string };
-~~~
-
-Domain 层检查授权和状态的**纯函数**可直接测试；接入真实 Wallet/Indexer 后，Application 才负责获取证据及执行副作用。
-
-| 用例 | 前端职责 | 禁止事项 |
-| --- | --- | --- |
-| `ResolveMyIdentity` | 读取当前钱包 BapId，调用公共 Identity API；按 §3.2 映射 Resolution | SDK `resolveBapId` / basket 没记录即解释为主网未发布 |
-| `AssessIdentityInitialization` | 核对 Root 控制、未决交易、网络历史覆盖；返回 ALLOW/BLOCK/NEED_EVIDENCE | UNKNOWN 自动视为未发布、无历史证据时广播 |
-| `PublishIdentity` | Review 冻结 BAP ID、资料和账户；取得授权、准备交易并持久化；广播同一原交易；保存回执后同步并再查询 | 未保存回执先广播、结果未知自动重签或改用另一 TxID |
-| `UpdateBapProfile` | 保持 Draft 与已发布 Profile 分离；逐笔处理 ID/头像/ALIAS 实际交易及部分成功 | 本地修改即声称公共资料生效 |
-| `RotateIdentityKey` | 冻结当前 BAP ID、钱包上下文和 Review；执行钱包签名并观察结果 | 仅凭地址切换就宣布所有旧交易失效 |
-| `Explorer.ResolveByInscriptionNumber` | 在 Explorer 调用 Artifact 的编号→Origin→Binding 查询，再调用 Identity 的 BAP ID 读取 | 在 Identity 聚合内部访问 Artifact 资产状态 |
-
-### 3.3 分层迁移顺序（R-08）
-
-1. 从 `lib/domain/types.ts` 提取 `IdentityResolutionMapper`、`ProfileMapper` 与无副作用的 `IdentityPolicy`；保留旧 DTO 的六个 `kind` 类型兼容。
-2. 以现有 `lib/domain/publish.ts` 为代码事实，把钱包准备/广播、IndexedDB Journal、HTTP Client 抽象为 `WalletPort / OperationJournalPort / IdentityApiPort`。拆分时保持 `operationId/txid/rawTx` 的冻结与幂等，不先搬目录再修业务。
-3. 从 UI 事件到 `ResolveMyIdentityUseCase / AssessIdentityInitializationUseCase / PublishIdentityUseCase` 的接口以 typed result 返回；React Hook 只绑定加载态、错误提示和路由。
-4. 用旧测试与真实 fixture 逐步切换；一次只替换一个依赖，避免一并重写 Wallet Provider 和交易协议。
-
-### 3.4 前端验收边界
-
-前端可自行验证：UNKNOWN UI、Draft/Review 的可编辑性与提交门禁、账号切换失效、rawTx 持久化/回收、同一 TxID 重试、六种 DTO 映射与 exhaustive switch。真实交易能否确认、历史 BAP 覆盖和签名时点归属仍必须由后端/Indexer 的证据和集成测试决定。
-
-## 4. 状态机边界
-
-- **领域查询**：是否已公开、覆盖足够与否，由后端/公共索引证据决定；模拟 `stored/empty` 只在隔离 scope 有意义；在 mainnet UNKNOWN 时可维护草稿但没有自动发布权。
-- **客户端操作**：`reviewing → awaiting-signature → prepared → broadcasting → submitted / broadcast-unknown / cancelled / failed`；这是实现参考，不重定义核心认知产品状态。
-- **链上观察**：`networkAccepted`、`signatureStatus`、确认数、主网可查询性彼此独立。HTTP 200/201/202 不证明所有维度已完成。
-- **会话失效**：Account Switch / Disconnect 提升 session epoch；丢弃迟到回调，旧会话未提交授权失效，已提交交易仍用原 BAP ID/TxID 查询。
-- **数据持久化**：广播前保存本地已签名原交易与恢复日志；读写失败显式反馈，不把未知结果降级为失败再自动重试。
-
-## 5. API、契约与测试
-
-现有真实调用保持 `POST /api/v1/transactions/sync` 四字段契约、`GET /api/v1/identities/{bapId}` 公共身份、`GET /api/v1/transactions/{txid}` 交易核查。机器可读的草案见[OpenAPI](../../contracts/openapi/ownword.yaml)；新增 DTO 前需与 Java 真实返回再次对照。
-
-按[共享 Identity 验收](../../contracts/acceptance/identity.feature)和[原 v0.1/v0.2 BDD](../../prd/v0.1/设计文档v0.1.md)补充适用测试：
-
-- 六类 `Resolution.kind` 与 scope 的映射和 `PublicationEligibility` 三态；mainnet UNKNOWN 允许草稿/Review、禁止未获资格的广播；
-- Profile Draft 取消后保留原稿，成功后从后端公共投影回读；
-- 账户切换、刷新、断网、丢广播回执、同一 TxID 重试；
-- 原交易签名/关键业务内容被篡改，阻止提交；
-- 模拟 Wallet 真实 SDK 核心的覆盖不等于真实浏览器扩展授权或主网验收。
-
-## 6. 与原型的关系
-
-[原型 v0.4.0](https://github.com/metanet4j/ownword-design-prototype/tree/dev)在确定性模拟下表达 Identity、Content、Artifact 和主页交互。视觉与交互遵循 Spectrum S2，但其 `model.js`、fixture 与模拟成功不是生产领域事实来源。已实现界面只提取可观察行为、状态与 BDD，用实际 Wallet、HTTP 和证据替换模拟。
-
-## 7. 实施顺序与待验证
-
-1. 先解决 R-01：Domain 初始化资格与后端公共 BAP 历史验证契约明确后，调整 Setup 的 UI 资格判断，不将 UNKNOWN 擅自改成 NOT_PUBLISHED；若验证能力不足则保留阻塞。
-2. 将 R-02/03 的六种 DTO 与 Profile 字段 Mapper 落地，补齐单测；再按 §3.3 拆分 `ResolveMyIdentity / PublishIdentity` 端口并保持原始交易与恢复日志行为。
-3. 将 DTO 映射与 API 客户端隔离；先运行现有 unit/typecheck/lint/build，再做适用钱包/后端集成测试。
-4. 对 Rotation、主网公开历史、Artifact Binding 接口逐一补真实协议验证；未验证保留门禁。
-
-**待关闭**：真实 Yours 扩展的浏览器授权、主网资金与广播、公共 BAP 历史覆盖，以及相关 Indexer API；不能把原型和隔离模拟验收记为生产完成。
-
-## 8. 证据
-
-- [现有 Identity 真实集成设计](../设计文档v0.1.0-真实集成-20261013-183000.md)
-- [Content 真实集成设计](../设计文档v0.2.0-内容真实集成-20261014-215514.md)
-- [v0.2.0 验收与未关闭门禁](../../../../../知识库/前端/ownword-v0.2.0/README.md)
-- [统一 v0.4.0 版本清单](../../versions/v0.4.0.yaml)
+版本与发布状态见[Manifest](../../versions/v0.4.0.yaml)。原型的确定性模拟不提供钱包或主网能力证据。

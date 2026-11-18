@@ -2,7 +2,7 @@ productVersion: v0.4.0
 kind: design-target
 status: needs-review
 approvedForRelease: false
-observedOn: "2026-11-17"
+observedOn: "2026-11-18"
 
 # Product facts remain sourced only from 核心认知.md.
 specification:
@@ -12,6 +12,7 @@ specification:
   core: _task/system-design/spec/核心认知.md
   prd: _task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md
   contextMap: _task/system-design/spec/domain/上下文映射-v0.4.0-20261117-175100.md
+  supportingDomain: _task/system-design/spec/domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md
   identityDomain: _task/system-design/spec/domain/identity/领域设计-Identity-v0.4.0-20261117-175100.md
   identityFrontend: _task/system-design/spec/frontend/identity/实现设计-Identity-v0.4.0-20261117-175100.md
   identityBackend: _task/system-design/spec/backend/identity/实现设计-Identity-v0.4.0-20261117-175100.md
@@ -32,6 +33,7 @@ artifacts:
     branch: feature/ownword-v0.2.0
     observedCommit: 6f9bccadc356e4a2e07afe3d8af6c3534f70402b
     packageVersion: 0.2.0
+    observationStatus: previously-recorded-SHA-current-checkout-not-present
     implementationEvidence: v0.2.0-locally-tested
     review: needs-review
     productionVerified: false
@@ -48,7 +50,36 @@ artifacts:
     inventory: backend/README.md
     releaseLock: pending # Verify each actually deployed dependency SHA before release.
 
+referenceEvidence:
+  yours:
+    path: reference/yours-wallet-main/yours-wallet-main
+    observedPackageVersion: 5.1.0
+    lockedActionsVersion: 0.0.212
+    lock: bun.lock
+    sourceLockMismatch: true
+  actionsPublishedPackage:
+    version: 0.0.212
+    source: https://registry.npmjs.org/@1sat/actions/-/actions-0.0.212.tgz
+    integrity: sha512-wQecqjmz95ckxuqqVKdu29Ufzog5T7tDCXfSB25v/b4uYgr/uWUERi4lWahRYmrKbWw9zZszDx565NyqQ0lPPg==
+    matchesYoursLock: true
+    inspectedOnly: true
+  walletToolboxPublishedPackage:
+    version: 2.12.0
+    source: https://registry.npmjs.org/@bsv/wallet-toolbox-client/-/wallet-toolbox-client-2.12.0.tgz
+    integrity: sha512-nw7t5/m56B55fgbOTA/GUGd9jk9/FQl778y8y/3UV4+Gv6mSz4hJ6vl3taqa3s8LdJl1g2B1JKeK9OOWWJZg5Q==
+    matchesYoursLock: true
+    inspectedOnly: true
+  independentSdk:
+    path: reference/1sat-sdk
+    observedActionsVersion: 0.0.221
+    equivalentToYoursRuntime: false
+  productionDependencyLock: pending
+
 modules:
+  supporting:
+    design: needs-review
+    implementation: existing-wallet-and-query-capabilities-with-integration-gaps
+    evidence: _task/system-design/spec/domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md
   identity:
     design: needs-review
     implementation: existing-v0.1.0-scope
@@ -67,19 +98,29 @@ modules:
     evidence: _task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md
 
 designRemediation:
-  status: design-drafted-awaiting-user-and-protocol-review
+  status: wallet-boundary-integrated-awaiting-user-and-integration-review
   reviewSource: _task/system-design/spec/domain/identity/评审报告-Identity-v0.4.0-20261118-103500.md
   identityDomain: _task/system-design/spec/domain/identity/领域设计-Identity-v0.4.0-20261117-175100.md
   contract: _task/system-design/spec/contracts/openapi/ownword.yaml
   acceptance: _task/system-design/spec/contracts/acceptance/identity.feature
   knownBlockers:
-    - mainnet-initialization-history-or-reviewed-root-control-protocol
+    - locked-wallet-identity-execution-materials-and-lost-response-recovery
+    - replayable-public-identity-projection
+    - main-chain-and-ordinal-history-query-fixtures
+    - plain-transfer-transaction-identity-signature
     - signing-time-key-rotation-verifier
     - profile-type-identity-type-change-contract
     - strict-openapi-validation-and-java-typescript-fixtures
-  testsExecuted: false
+  runtimeTestsExecuted: false
+  supportingAcceptance: _task/system-design/spec/contracts/acceptance/supporting.feature
 
 releaseGates:
+  - id: production-wallet-sdk-lock-and-execution-recovery
+    status: open
+    source: _task/system-design/spec/domain/supporting/README.md
+  - id: transaction-and-ordinal-query-main-chain-reorg
+    status: open
+    source: _task/system-design/spec/domain/supporting/README.md
   - id: user-review
     status: open
     source: _task/system-design/feature_list.json

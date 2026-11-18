@@ -20,7 +20,9 @@ x-ownword-source:
   pending:
     - Identity projection DTO field-by-field comparison with real response fixtures
     - Public BAP indexCoverage sufficient vs unknown semantics
-    - Signing-time BAP key history and initialization-eligibility API (no path defined yet)
+    - Signing-time BAP key history and replayable public identity projection
+    - Locked wallet identity Action authorization, transaction materials and lost-response recovery
+    - Full transaction chain-state and Ordinal query contracts (no new HTTP paths defined)
 paths:
   /api/v1/identities/{bapId}:
     get:

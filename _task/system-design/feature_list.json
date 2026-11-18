@@ -12,6 +12,43 @@
   "activeItem": null,
   "features": [
     {
+      "id": "supporting-domains-v040",
+      "name": "明确钱包、交易与链上查询支撑域并整合 Identity 领域设计",
+      "status": "needs-review",
+      "goal": "依据 Yours Wallet、SDK 与现有 Java 源码，确定身份管理、交易签名发布、链上状态和 Ordinal 交易查询的支撑边界，并同步当前领域及实现设计。",
+      "scope": "核心认知、Domain/Identity/支撑域、Frontend/Backend Identity 指南、契约验收草案、统一版本清单及任务状态；不修改产品源码、原型或参考仓库。",
+      "dependencies": [
+        "用户确认身份管理由 Yours Wallet 提供，并要求一并确定交易签名、发布、链状态与 Ordinal 查询支撑域",
+        "spec/核心认知.md、统一 v0.4.0 目标及现有 Identity 设计",
+        "reference/yours-wallet-main/yours-wallet-main、reference/1sat-sdk 与现有 backend Java 源码"
+      ],
+      "doneCriteria": [
+        "核心认知明确稳定职责，支撑域设计覆盖钱包、签名/提交/恢复、链状态和 Ordinal 输出/历史查询",
+        "每项能力有实际源码依据、数据所有权、失败语义及现有能力/实施缺口分类",
+        "Identity 与两端指南不重复管理钱包身份，不以公共索引 unknown 单独决定钱包初始化资格",
+        "签名覆盖、广播未知、主链重组、Ordinal 标识和模拟隔离有可验证验收映射",
+        "文档链接、JSON/YAML、契约引用及一致性检查通过，只提交本任务文档；人工复核前保持 needs-review"
+      ],
+      "prdVersion": "v0.4.0",
+      "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
+      "output": "_task/system-design/spec/domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md",
+      "implementationStatus": "documentation-integrated-and-source-verified",
+      "reviewStatus": "awaiting-user-review",
+      "evidence": [
+        "核心认知 §5.4 和支撑域 SUP-01~10 明确钱包身份管理、交易签名/提交/恢复、链状态和 Ordinal 输出/花费/历史查询；Identity、Context Map、两端指南、契约与 Manifest 已同步。",
+        "已只读核查 Yours 锁定的 @1sat/actions 0.0.212、wallet-toolbox-client 2.12.0 发布包；两者 SHA-512 均与 bun.lock 一致。确认身份 Action 默认路径内部 signAction→processAction→postBeef，返回 tx 为 Atomic BEEF。",
+        "支撑域 §4.4 明确返回 Atomic BEEF 提取、按 TxID 补查原字节、重算 TxID 和保存 rawTx；明确高层未返回 actionId/reference 与会话外 pending reference 恢复缺口。",
+        "Identity 18 个场景（Outline 含 8 行样例）、支撑域 16 个、Artifact 2 个均具 Given/When/Then；仅设计结构检查，未执行场景。",
+        "JSON 可解析；Manifest/OpenAPI 严格 YAML 解析无警告；OpenAPI 保留 5 条路由、22 个 Schema、61 处内部引用无悬空。相对链接、围栏与 git diff --check 已检查；最终数量见 progress.md。",
+        "未修改生产代码、原型、参考仓库或依赖；未执行真实钱包、Java/TS 运行、主网广播或重组实验；发布批准仍为 false，specSnapshot 为 null。"
+      ],
+      "nextStep": "用户复核支撑边界和固定版本调用链；按支撑域 A→B→C→D 的同一 v0.4.0 范围推进接口 fixtures 与真实钱包集成。",
+      "pendingDecisions": [
+        "Wallet Adapter 固定实际部署依赖，并验证高层丢回执关联、rawTx 补齐、拒绝/中断/切换及跨重启恢复；不能依赖当前未实现的会话外 pending reference 续签。",
+        "公共 BAP 事件投影、历史签名归属、主链/reorg 和 Ordinal 历史 fixtures 待实施；普通 Transfer 身份签名、编号、Binding 和类型一致性门禁保留。"
+      ]
+    },
+    {
       "id": "claude-design-prototype-support",
       "name": "新版设计技能承接 OwnWord 原型",
       "status": "needs-review",
@@ -655,7 +692,7 @@
         "GitHub read-only path audit: review report 39 markdown links, 0 unresolved",
         "Runtime tests, actual Wallet extension, public Indexer, and mainnet transactions were not executed"
       ],
-      "nextStep": "Identity 域负责人评审 R-01 方案并补初始身份发布状态/授权表；随后按 R-02~R-06 补契约与验收证据。审核完成前 Domain 和 v0.4.0 发布基线继续 needs-review。",
+      "nextStep": "随 supporting-domains-v040 复核当前领域、契约及实现设计，再补接口 fixtures 和钱包/公共查询实证。",
       "pendingDecisions": [
         "R-01 P0: mainnet first-publication path blocks when IdentityResolution unknown; define eligible-to-initialize separately from verified-not-published",
         "R-02 P1: unify Resolution transport-domain mapping including incomplete/stored/empty",
@@ -663,7 +700,9 @@
         "R-04 P1: rotation signing-time history and evidence ordering",
         "R-05 P1: typed OpenAPI response/error/coverage and recovery endpoints",
         "R-06 P1: cross-end BDD for initial publish/recovery/key rotation"
-      ]
+      ],
+      "supersededBy": "supporting-domains-v040",
+      "statusNote": "当前整改以钱包管理边界和支撑域设计为准；不再要求 OwnWord 自建 Root 控制型初始化资格协议。历史验签与真实集成门禁保留。"
     },
     {
       "id": "remediate-identity-design-review-v040",
@@ -700,7 +739,7 @@
         "_task/system-design/spec/versions/v0.4.0.yaml（designRemediation and unresolved release gates; specSnapshot null）",
         "Static validation: 8 Markdown files, 77 relative links resolve, no unbalanced fences; no YAML strict parser, OpenAPI validator, Java/TypeScript tests or mainnet checks executed"
       ],
-      "nextStep": "用户评审本轮 v0.4.0 Identity 设计修订；优先让 Wallet/Indexer/Java 确认 R-01 初始化资格所需的公共历史证据，随后实施和验证 R-02~R-06。主网门禁未关闭前保持 needs-review。",
+      "nextStep": "随 supporting-domains-v040 复核当前领域、契约及实现设计，再补接口 fixtures 和钱包/公共查询实证。",
       "pendingDecisions": [
         "R-01 P0 runtime: public BAP historical coverage or security-approved Root initialization protocol to grant ALLOW on mainnet",
         "R-03: BapIdentity.type and BapProfile.type synchronization/authorization policy and real schema fixtures",
@@ -708,7 +747,9 @@
         "R-05: real Java/TS response fixture comparison, strict OpenAPI validation, DTO union completeness and error handling",
         "R-06: Gherkin Step Definition implementation + integration tests, mock vs mainnet evidence",
         "R-09: reviewed design, locked specSnapshot and cross-repository release SHA"
-      ]
+      ],
+      "supersededBy": "supporting-domains-v040",
+      "statusNote": "当前整改以钱包管理边界和支撑域设计为准；不再要求 OwnWord 自建 Root 控制型初始化资格协议。历史验签与真实集成门禁保留。"
     }
   ]
 }
