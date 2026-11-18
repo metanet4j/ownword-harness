@@ -12,15 +12,15 @@
 
 ## 源码核查与限制
 
-Yours 实际 package.json 为 5.1.0，锁定 Actions 0.0.212；与 reference/sources.lock.json 的部分记录不同。独立参考 SDK 的 Actions 为 0.0.221。已从 npm 只下载读取 0.0.212 和 wallet-toolbox-client 2.12.0 发布包，两者完整性哈希均与 Yours bun.lock 一致，未安装或执行。
+Yours 实际 package.json 为 5.1.0，锁定 Actions 0.0.212；与 reference/sources.lock.json 的部分记录不同。独立参考 SDK 的 Actions 为 0.0.221。已从 npm 只下载读取 Actions 0.0.212、Toolbox Client 2.12.0，以及 Client 0.0.51、Types 0.0.43、Wallet 0.0.106、Wallet Browser 0.0.92；六个包哈希均与 Yours bun.lock 一致，未安装或执行。
 
-固定版本身份 Action 的默认钱包路径内部完成签名并尝试 postBeef，返回最终交易材料没有调用方暂停点；tx 是 Atomic BEEF。最终 rawTx 优先从该返回值提取，或按 TxID 补查原字节，校验 TxID 后保存。完整调用链、适用范围及包哈希见[支撑域 §4、§11](spec/domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md)。
+固定版本身份 Action 的默认钱包路径内部完成签名并尝试 postBeef，返回最终交易材料没有调用方暂停点；tx 是 Atomic BEEF。最终 rawTx 优先从该返回值提取，或按 TxID 补查原字节，校验 TxID 后保存。广播、UTXO、Ord 查询的实际方法、HTTP 路径及复用示例已落实到支撑域 §8.1。完整调用链、适用范围及包哈希见[支撑域 §4、§8、§11](spec/domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md)。
 
 身份高层接口未暴露 actionId/reference 或业务 operationId；Toolbox 会话外 pending reference 续签恢复未实现。生产适配需核实丢回执的持久关联与查询恢复。其余开放项包括公共身份投影、历史验签、主链/reorg、Ordinal 历史、普通 Transfer 身份签名、编号/Binding 和 Identity/Profile 类型策略。
 
 ## 验证范围
 
-本轮已做源码与发布包取证、JSON 解析及严格 YAML 解析（无警告）；OpenAPI 保留 5 条路由、22 个 Schema、61 处内部引用，均无悬空。17 份 Markdown 的 189 个本地引用可定位，无未配对围栏；36 个 Gherkin 场景具备 Given/When/Then，git diff --check 通过。这些检查不构成运行验收。
+本轮已做源码与发布包取证、JSON 解析及严格 YAML 解析（无警告）；OpenAPI 保留 5 条路由、22 个 Schema、61 处内部引用，均无悬空。17 份 Markdown 的 193 个本地引用可定位，无未配对围栏；36 个 Gherkin 场景具备 Given/When/Then，git diff --check 通过。新增四个锁定包的导出/路由断言通过；只读策略接口 HTTP 200，/health 为 404。这些检查不构成运行验收。
 
 未运行正式 OpenAPI 规范验证器、BDD 场景、Java/TypeScript 服务、真实钱包扩展、主网提交或重组实验；未改业务代码、原型和 reference。前端 SHA 为旧登记，本地当前无 frontend/ownword-web 源码目录，实施前须恢复核对。
 

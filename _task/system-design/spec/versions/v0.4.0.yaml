@@ -69,6 +69,27 @@ referenceEvidence:
     integrity: sha512-nw7t5/m56B55fgbOTA/GUGd9jk9/FQl778y8y/3UV4+Gv6mSz4hJ6vl3taqa3s8LdJl1g2B1JKeK9OOWWJZg5Q==
     matchesYoursLock: true
     inspectedOnly: true
+  lockedSupportPackages:
+    source: reference/yours-wallet-main/yours-wallet-main/bun.lock
+    inspectedOnly: true
+    matchesYoursLock: true
+    packages:
+      - name: "@1sat/client"
+        version: 0.0.51
+        source: https://registry.npmjs.org/@1sat/client/-/client-0.0.51.tgz
+        integrity: sha512-VRf0VxETwmyGPdsAHZfV6xCdd9m0BDo61bvO9rEtpScZBqXVa+ZXECsyen+eVSSuAAnf6DexuKrurjBx5QRXOQ==
+      - name: "@1sat/types"
+        version: 0.0.43
+        source: https://registry.npmjs.org/@1sat/types/-/types-0.0.43.tgz
+        integrity: sha512-VDU28M6UKTjEfP6XQn4Sa3AagyX5CiRKOa6F5M6yDmHYJSdBA6pOL4/eNGwH+SI0NjMsPWrIBFpvn5xo7bF7UA==
+      - name: "@1sat/wallet"
+        version: 0.0.106
+        source: https://registry.npmjs.org/@1sat/wallet/-/wallet-0.0.106.tgz
+        integrity: sha512-G1H+BxcPCz2KKvw16nCuKWa6BChNfkktayfs+ZgcCeZnEpIBZWnnVtNl5yAiO4BpkwNV/+sxG39i76rofCv0HA==
+      - name: "@1sat/wallet-browser"
+        version: 0.0.92
+        source: https://registry.npmjs.org/@1sat/wallet-browser/-/wallet-browser-0.0.92.tgz
+        integrity: sha512-ZkNOW3P0IXvB3JQN9AV0WUygh/tDsfvRaCzsijR2chVuQ9+d8qWkIWKdqUVaXdD+5E1DJLhkvtGkKBcso10X4Q==
   independentSdk:
     path: reference/1sat-sdk
     observedActionsVersion: 0.0.221
