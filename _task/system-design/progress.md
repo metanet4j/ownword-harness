@@ -14,15 +14,17 @@
 
 Yours 实际 package.json 为 5.1.0，锁定 Actions 0.0.212；与 reference/sources.lock.json 的部分记录不同。独立参考 SDK 的 Actions 为 0.0.221。已从 npm 只下载读取 Actions 0.0.212、Toolbox Client 2.12.0，以及 Client 0.0.51、Types 0.0.43、Wallet 0.0.106、Wallet Browser 0.0.92；六个包哈希均与 Yours bun.lock 一致，未安装或执行。
 
-固定版本身份 Action 的默认钱包路径内部完成签名并尝试 postBeef，返回最终交易材料没有调用方暂停点；tx 是 Atomic BEEF。最终 rawTx 优先从该返回值提取，或按 TxID 补查原字节，校验 TxID 后保存。广播、UTXO、Ord 查询的实际方法、HTTP 路径及复用示例已落实到支撑域 §8.1；公共 API 接入、鉴权、密钥申请依据和说明差异见 §8.2。完整调用链、适用范围及包哈希见[支撑域 §4、§8、§11](spec/domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md)。
+固定版本身份 Action 的默认钱包路径内部完成签名并尝试 postBeef，返回最终交易材料没有调用方暂停点；tx 是 Atomic BEEF。最终 rawTx 优先从该返回值提取，或按 TxID 补查原字节，校验 TxID 后保存。广播、UTXO、Ord 查询的实际方法、HTTP 路径及复用示例已落实到支撑域 §8.1；公共 API 接入、鉴权、密钥申请依据和说明差异见 §8.2；Java 直连与现有代码调整点见 §8.3。完整调用链、适用范围及包哈希见[支撑域 §4、§8、§11](spec/domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md)。
 
 身份高层接口未暴露 actionId/reference 或业务 operationId；Toolbox 会话外 pending reference 续签恢复未实现。生产适配需核实丢回执的持久关联与查询恢复。其余开放项包括公共身份投影、历史验签、主链/reorg、Ordinal 历史、普通 Transfer 身份签名、编号/Binding 和 Identity/Profile 类型策略。
 
 ## 验证范围
 
-本次核对锁定发布包的鉴权实现、Stack 路由与官方说明；匿名 capabilities、health、policy、chain tip、公开地址 TXO GET 均返回 200，Swagger 完整取得并可解析为 133 条路径。GET 跨域响应头已检查，首次部分请求超时后重试成功；未确认托管额度或 SLA。公共查询无需先申请 Key；未找到公共自助发 Key 入口，节点管理 Key 与说明中的 Bearer/固定额度差异已写入 §8.2。
+本次核对 IdentityApi/TransactionSyncApi 的现有 Java 调用链与 Java 25 基线，补入 JDK HttpClient 直连、JSON/二进制/SSE、原交易示例和查询/同步改造位置。Backend Identity 指南引用支撑域 §8.3；新客户端/配置明确为待实施，Java 示例未编译或运行。
 
-本次 JSON、Manifest/OpenAPI 严格 YAML 解析（无警告）通过；17 份 Markdown 的 200 个本地引用可定位，无未配对围栏，git diff --check 通过。既有契约保持 5 条路由、22 个 Schema、61 处内部引用；已有 36 个 Gherkin 场景，本次未修改或执行。这些检查不构成钱包或主网广播验收。
+本次 JSON 可解析，17 份 Markdown 的 205 个本地引用可定位、围栏成对，git diff --check 通过。此前 Manifest/OpenAPI 严格 YAML 解析无警告；既有契约保持 5 条路由、22 个 Schema、61 处内部引用和 36 个 Gherkin 场景，本次未修改或执行。
+
+先前匿名 capabilities、health、policy、chain tip、公开地址 TXO GET 均返回 200，Swagger 可解析为 133 条路径；GET 跨域响应头已检查，本次未新增网络请求。托管额度/SLA、公开 Key 申请与说明差异仍以支撑域 §8.2 为准。
 
 未运行正式 OpenAPI 规范验证器、BDD 场景、Java/TypeScript 服务、真实钱包扩展、浏览器 CORS/POST 预检、主网提交或重组实验；未改业务代码、原型和 reference。前端 SHA 为旧登记，本地当前无 frontend/ownword-web 源码目录，实施前须恢复核对。
 

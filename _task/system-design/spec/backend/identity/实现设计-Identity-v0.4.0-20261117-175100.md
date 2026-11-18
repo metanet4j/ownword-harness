@@ -147,7 +147,7 @@ Mongo 在此阶段承担已同步原交易、日志与可重建读投影；仓�
 
 ## 6. 链与 Ordinal 查询、验收与恢复
 
-优先适配现有 SDK 的 Arcade/Beef/Chaintracks/Txo/Owner/Ordfs 客户端，分别承担提交状态、原交易/BEEF、主链锚、输出/花费、地址资产与内容版本。上游方法不能直接当作 OwnWord 已有 API。`GET /transactions/{txid}` 当前仅提供存储 receipt 或有限链观测；现有 Java 网络接受判断偏向有确认交易，不能充当完整 mempool 状态查询。
+Java 后端沿用 JDK HttpClient，以具体 OneSatStackClient 适配 1sat HTTP API；TypeScript SDK 的 Arcade/Beef/Chaintracks/Txo/Owner/Ordfs 仅作为协议与调用依据。基址配置、JSON/二进制/SSE、Java 示例及现有代码调整点统一见[支撑域 §8.3](../../domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md#83-java-后端接入)，鉴权引用其 §8.2。该客户端及配置尚未实施，上游方法不能直接当作 OwnWord 已有 API。`GET /api/v1/transactions/{txid}` 当前仅提供存储 receipt 或有限链观测；现有 Java 网络接受判断偏向有确认交易，不能充当完整 mempool 状态查询。
 
 Ordinal 交易详情需结合原交易逐输出解析、getByTxid、getSpend 和 Origin/内容读取。多输出追踪按 sat 连续性解析；历史分页/断点返回 PARTIAL/UNKNOWN/CONFLICT。全局编号尚需 metanet4j 补齐；不得用 OrdFS sequence 代替。主链重查与 reorg 恢复为实施项，不能声称 Chaintracks 已实现 reorg 订阅。
 

@@ -5,5 +5,6 @@
 - **上下文协作**：[Context Map](../上下文映射-v0.4.0-20261117-175100.md)、[Identity](../identity/README.md)。
 - **派生验收**：[supporting.feature](../../contracts/acceptance/supporting.feature)，尚未接入运行器。
 - **1sat API 接入与密钥**：[公共接口、SDK 配置、鉴权与申请依据](领域设计-支撑域-v0.4.0-20261118-141904.md#82-api1satapp-接入与鉴权)。
+- **Java 后端接入**：[JDK HttpClient、格式处理与现有代码调整点](领域设计-支撑域-v0.4.0-20261118-141904.md#83-java-后端接入)。
 
 支撑域复用 Yours Wallet、SDK 与公共查询服务。文档区分源码已有能力、OwnWord 待适配能力和协议缺口，不代表真实钱包或主网已验收。

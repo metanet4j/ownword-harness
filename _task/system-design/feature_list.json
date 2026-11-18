@@ -39,7 +39,7 @@
         "已只读核查 Yours 锁定的 @1sat/actions 0.0.212、wallet-toolbox-client 2.12.0 发布包；两者 SHA-512 均与 bun.lock 一致。确认身份 Action 默认路径内部 signAction→processAction→postBeef，返回 tx 为 Atomic BEEF。",
         "支撑域 §4.4 明确返回 Atomic BEEF 提取、按 TxID 补查原字节、重算 TxID 和保存 rawTx；明确高层未返回 actionId/reference 与会话外 pending reference 恢复缺口。",
         "Identity 18 个场景（Outline 含 8 行样例）、支撑域 16 个、Artifact 2 个均具 Given/When/Then；仅设计结构检查，未执行场景。",
-        "JSON 可解析；Manifest/OpenAPI 严格 YAML 解析无警告；OpenAPI 保留 5 条路由、22 个 Schema、61 处内部引用无悬空。当前 17 份 Markdown 的 200 个相对引用及围栏检查通过；API 方法映射见支撑域 §8.1，当前接入鉴权取证见 currentChange。",
+        "JSON 可解析；Manifest/OpenAPI 严格 YAML 解析无警告；OpenAPI 保留 5 条路由、22 个 Schema、61 处内部引用无悬空。当前 17 份 Markdown 的 205 个相对引用及围栏检查通过；API 与鉴权见支撑域 §8.1/8.2，Java 接入方案见 §8.3 和 currentChange。",
         "未修改生产代码、原型、参考仓库或依赖；未执行真实钱包、Java/TS 运行、主网广播或重组实验；发布批准仍为 false，specSnapshot 为 null。"
       ],
       "nextStep": "用户复核支撑边界和固定版本调用链；按支撑域 A→B→C→D 的同一 v0.4.0 范围推进接口 fixtures 与真实钱包集成。",
@@ -48,31 +48,30 @@
         "公共 BAP 事件投影、历史签名归属、主链/reorg 和 Ordinal 历史 fixtures 待实施；普通 Transfer 身份签名、编号、Binding 和类型一致性门禁保留。"
       ],
       "currentChange": {
-        "id": "onesat-public-api-access",
+        "id": "onesat-java-backend-access",
         "status": "needs-review",
-        "goal": "核实 api.1sat.app 的 SDK 接入、公共接口鉴权、密钥用途及申请依据，补入现有支撑域。",
-        "scope": "支撑域、Manifest 与任务状态；只读锁定发布包、参考源码和官方公共 GET 接口，不广播或申请账号。",
+        "goal": "依据现有 Java 后端明确 1sat HTTP 接入方式、代码落点、二进制/JSON/SSE 处理及钱包执行边界。",
+        "scope": "现有支撑域、Backend Identity 指南及入口/任务状态；只读后端源码，不实现或修改业务代码。",
         "dependencies": [
-          "用户明确要求写入领域支撑设计并核实如何接入、是否需要密钥及如何申请",
-          "已核实 Yours 锁定 Client 0.0.51 的实际 API 路径",
-          "reference/1sat-stack 实际路由与鉴权实现、官方说明和匿名只读请求"
+          "用户追问后端如何接入，承接前述领域支撑设计任务",
+          "核心认知 §5.4、支撑域 §8.1/8.2 及现有后端指南",
+          "IdentityApi、TransactionSyncApi 与 Java 25/JDK HttpClient 基线"
         ],
         "doneCriteria": [
-          "设计给出可复用包、SDK/HTTP 接入与基址，区分公共 API、BRC-103/104、节点管理密钥和上游凭据",
-          "明确匿名实测范围、未广播限制、Bearer/额度说明冲突与公开申请入口的核实结果",
-          "JSON/YAML/链接与差异检查通过，只提交本次文档，人工复核前保持 needs-review"
+          "支撑域明确 Java 直接 HTTP、具体客户端落点与现有代码改造位置，不将 TS 包当作 Maven 依赖",
+          "明确 binary rawTx、JSON 状态/数组、SSE 和广播未知恢复，提供 Java 示例并说明验证范围",
+          "后端指南引用统一技术依据，链接/JSON/差异检查通过，只提交本次文档，保持 needs-review"
         ],
-        "output": "_task/system-design/spec/domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md#82-api1satapp-接入与鉴权",
+        "output": "_task/system-design/spec/domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md#83-java-后端接入",
         "evidence": [
-          "支撑域 §8.1/8.2 记录 SDK 仓库、显式基址、匿名 HTTP 示例，以及公共接口/BRC-103/104/节点管理 Key/上游凭据的边界。",
-          "只读核实 Client 0.0.51 的 BaseClient 与 Types 0.0.43 的 ClientOptions；无内置 API Key 或默认鉴权头。Stack 路由、认证和管理守卫已核实，源码提交记录于 Manifest，线上部署 SHA 未知。",
-          "不带 Authorization、X-Api-Key、Cookie 的 capabilities/health/policy/chain tip/公开地址 TXO GET 均返回 200；Swagger 完整取得并解析为 133 条路径，无全局 security。首次部分请求超时，只读重试后成功。",
-          "已核查 GET 的跨域响应头；未执行浏览器验收、广播 POST 或任何管理/付费请求。未确认托管额度、SLA 或 Bearer Key 申请机制；说明中的固定额度未作为生产契约。",
-          "未找到公共自助申请入口；设计给出官方联系渠道与自建节点运营者配置方式，不申请账号或发送消息。",
-          "JSON 与 Manifest/OpenAPI 严格 YAML 解析通过，17 份 Markdown 的 200 个相对引用及围栏检查通过；git diff --check 通过，发布门禁未改变。"
+          "支撑域 §8.3 明确基于现有 JDK HttpClient 的 Java 直连接入、建议配置/具体客户端及格式处理；均标记为待实施，附 rawTx 读取与 TxID 校验示意。",
+          "源码确认 IdentityApi 复用 HttpClient、代理与超时；transaction 仍调用 WhatsOnChain，identity 丢弃 BAP 正文。TransactionSyncApi 首次同步/重放共用 transaction 查询，设计覆盖两条调用路径。",
+          "Backend Identity §6 改为引用支撑域的 Java HTTP 方案，避免将 TypeScript SDK 解释成 Java 运行依赖；当前 Sync 继续校验/存证/查询，不自动广播。",
+          "17 份 Markdown 的 205 个相对引用可定位、围栏成对，JSON 可解析且 git diff --check 通过。",
+          "未修改 Java/原型/reference/依赖，未编译执行 Java 示例或做本次网络请求；此前匿名 GET 证据继续引用 §8.2，真实钱包、广播、SSE/重组门禁开放。"
         ],
-        "nextStep": "复核支撑域 §8.2；实施时固定生产依赖并补查询/广播 fixtures，如需专属额度再向运营方确认服务条件。",
-        "implementationStatus": "public-access-source-and-anonymous-reads-verified"
+        "nextStep": "复核支撑域 §8.3 后，先实现 Java 查询客户端及原交易/JSON/异常 fixtures，再接现有查询与同步两条路径。",
+        "implementationStatus": "java-http-integration-design-source-verified"
       }
     },
     {
