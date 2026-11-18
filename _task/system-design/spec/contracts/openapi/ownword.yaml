@@ -3,56 +3,61 @@ info:
   title: OwnWord Identity and Transaction Sync API
   version: 0.4.0
   description: >
-    Candidate cross-end contract for the unified OwnWord v0.4.0 design target.
-    This documents the verified shape of selected existing Java endpoints only;
-    it is not a complete API inventory or an approved production contract.
+    Candidate v0.4.0 cross-end contract. Current Java/TypeScript fields are
+    modeled where grounded. Unverified semantics and optional fields are
+    explicitly marked pending; this is not an approved production SDK contract.
 x-ownword-contract-status: needs-review
+x-ownword-approval: pending-code-fixtures-and-Indexer-proofs
 x-ownword-source:
-  repo: metanet4j/metanet4j-component
-  commit: fbb048eab9ff565ea2f4aff1bd01720b9240d407
-  classes:
+  backendRepository: metanet4j/metanet4j-component
+  backendCommit: fbb048eab9ff565ea2f4aff1bd01720b9240d407
+  frontendRepository: metanet4j/ownword-web
+  frontendCommit: 6f9bccadc356e4a2e07afe3d8af6c3534f70402b
+  backendFiles:
     - metanet4j-api-ownword/src/main/java/com/metanet4j/api/ownword/IdentityApi.java
     - metanet4j-api-ownword/src/main/java/com/metanet4j/api/ownword/TransactionSyncApi.java
+  frontendFile: lib/domain/types.ts
+  pending:
+    - Identity projection DTO field-by-field comparison with real response fixtures
+    - Public BAP indexCoverage sufficient vs unknown semantics
+    - Signing-time BAP key history and initialization-eligibility API (no path defined yet)
 paths:
   /api/v1/identities/{bapId}:
     get:
       operationId: getPublicIdentity
-      summary: Read an identity and its evidence-backed projection
+      summary: Read public identity resolution and coverage
       description: >
-        The HTTP response can contain kind=unknown if the public source does
-        not provide sufficient coverage. A locally computed BAP ID or absence
-        from a wallet basket does not prove public non-existence.
+        The server may return kind=unknown with insufficient public coverage.
+        A wallet-local BAP ID or indexer 404 cannot prove public nonexistence.
+        This endpoint does not decide whether a wallet can initialize identity.
       parameters:
-        - name: bapId
-          in: path
-          required: true
-          schema:
-            type: string
-            minLength: 1
+        - $ref: '#/components/parameters/BapId'
       responses:
         '200':
-          description: Identity resolution, potentially with unknown coverage
+          description: Source-aware identity result; mock kinds are isolated
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Envelope'
+                $ref: '#/components/schemas/IdentityEnvelope'
         '400':
-          description: Invalid BAP identifier
+          $ref: '#/components/responses/BadRequest'
         '502':
-          description: Public source temporarily unavailable
+          $ref: '#/components/responses/UpstreamUnavailable'
+        '503':
+          $ref: '#/components/responses/StorageUnavailable'
   /api/v1/transactions/sync:
     post:
       operationId: syncSignedTransaction
-      summary: Sync an already signed and broadcast raw transaction
+      summary: Sync already prepared and broadcast raw transaction
       description: >
-        The server checks the raw transaction, its TxID, protocol and identity
-        signature. The supplied bapId is an expected identity, not author proof.
-        HTTP success does not by itself mean mainnet publication or confirmation.
+        The server validates raw transaction, recomputed TxID, BAP signature,
+        expected identity, idempotency and network observation. HTTP 200/201/202
+        never proves full mainnet history or final confirmation.
       parameters:
         - name: Idempotency-Key
           in: header
           required: true
-          description: Must equal the lowercase txid in the body
+          description: Must equal the body txid (lowercase hex)
           schema:
             $ref: '#/components/schemas/TxId'
       requestBody:
@@ -63,32 +68,148 @@ paths:
               $ref: '#/components/schemas/TransactionSyncRequest'
       responses:
         '200':
-          description: Idempotent existing record
+          description: Existing idempotent transaction receipt
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Envelope'
+                $ref: '#/components/schemas/SyncReceiptEnvelope'
         '201':
-          description: New synchronous record accepted for processing
+          description: New transaction receipt stored
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Envelope'
+                $ref: '#/components/schemas/SyncReceiptEnvelope'
         '202':
-          description: Synchronization or network evidence still pending
+          description: Synchronization or network evidence pending
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Envelope'
+                $ref: '#/components/schemas/SyncReceiptEnvelope'
         '400':
-          description: Invalid request shape, identifier, or raw transaction input
+          $ref: '#/components/responses/BadRequest'
         '409':
-          description: Conflicting operationId, txid, rawTx or expected BAP ID
+          $ref: '#/components/responses/Conflict'
         '422':
-          description: Parsed transaction or identity proof fails verification
+          $ref: '#/components/responses/InvalidProof'
         '502':
-          description: Upstream source temporarily unavailable
+          $ref: '#/components/responses/UpstreamUnavailable'
+        '503':
+          $ref: '#/components/responses/StorageUnavailable'
+  /api/v1/transactions/{txid}:
+    get:
+      operationId: getTransactionEvidence
+      summary: Read recorded receipt or current network transaction observation
+      description: >
+        A 404 (particularly in broadcast-mock) is not proof that a transaction
+        was never broadcast. Preserve operationId and rawTx for recovery.
+      parameters:
+        - $ref: '#/components/parameters/TxId'
+      responses:
+        '200':
+          description: Stored receipt or network observation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEnvelope'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '502':
+          $ref: '#/components/responses/UpstreamUnavailable'
+  /api/v1/operations/{id}:
+    get:
+      operationId: getPublicOperation
+      summary: Read limited operation tracking fields
+      parameters:
+        - $ref: '#/components/parameters/OperationId'
+      responses:
+        '200':
+          description: Sanitized operation status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationEnvelope'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/identity-operations/{id}:
+    get:
+      operationId: getLegacyIdentityOperation
+      deprecated: true
+      summary: Compatibility readback of previously stored Identity operation
+      description: >
+        Existing Java route is used by the v0.1/v0.2 frontend recovery path.
+        Do not remove before client migration and compatibility tests.
+      parameters:
+        - $ref: '#/components/parameters/OperationId'
+      responses:
+        '200':
+          description: Existing full publicOperation projection for legacy recovery
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationEnvelope'
+        '404':
+          $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    BapId:
+      name: bapId
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+    TxId:
+      name: txid
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/TxId'
+    OperationId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+  responses:
+    BadRequest:
+      description: Invalid identifier, request or input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Conflict:
+      description: Operation or transaction idempotency conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    InvalidProof:
+      description: Signature, protocol or identity attribution rejected
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    NotFound:
+      description: Stored record is absent within the currently queried scope
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    UpstreamUnavailable:
+      description: Network or indexer source unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    StorageUnavailable:
+      description: Database or local asset storage unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
     TxId:
       type: string
@@ -96,11 +217,7 @@ components:
     TransactionSyncRequest:
       type: object
       additionalProperties: false
-      required:
-        - operationId
-        - bapId
-        - txid
-        - rawTx
+      required: [operationId, bapId, txid, rawTx]
       properties:
         operationId:
           type: string
@@ -113,20 +230,323 @@ components:
         rawTx:
           type: string
           pattern: '^[0-9a-f]+$'
-          description: Complete raw Bitcoin transaction hex, no private key
-    Envelope:
+          description: Complete Bitcoin raw transaction hex, never a wallet secret
+    Meta:
       type: object
-      required:
-        - data
-        - meta
+      additionalProperties: true
+      required: [requestId, network, respondedAt]
+      properties:
+        requestId:
+          type: string
+        network:
+          type: string
+        respondedAt:
+          type: string
+          format: date-time
+        observedAt:
+          type: [string, 'null']
+          format: date-time
+        source:
+          type: [string, 'null']
+          description: Storage, chain or Indexer source; must not be omitted in conclusions
+    Coverage:
+      type: object
+      additionalProperties: true
+      required: [status, provider, checkpoint, historyComplete, recentWindowComplete, observedAt]
+      properties:
+        status:
+          type: string
+          enum: [sufficient, unknown]
+        provider:
+          type: [string, 'null']
+        checkpoint:
+          oneOf:
+            - type: 'null'
+            - $ref: '#/components/schemas/Checkpoint'
+        historyComplete:
+          type: boolean
+        recentWindowComplete:
+          type: boolean
+        observedAt:
+          type: [string, 'null']
+          format: date-time
+        lastResponse:
+          type: object
+          additionalProperties: true
+          description: Present for some live source checks; not a proof of sufficient coverage
+    Checkpoint:
+      type: object
+      required: [height, blockHash]
+      properties:
+        height:
+          type: integer
+          minimum: 0
+        blockHash:
+          type: string
+    ProfileDto:
+      type: object
+      description: >
+        Current Java/TypeScript transport shape; field names are not the
+        SSOT domain names. description <-> bio and image <-> imageUrl are
+        explicit adapter mappings. Identity.type remains a separate concept.
+      required: [name, type, bio, imageUrl]
+      additionalProperties: true
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum: [Person, Organization]
+        bio:
+          type: string
+        imageUrl:
+          type: [string, 'null']
+    IdentityCommon:
+      type: object
+      description: >
+        Known response fields. Live projection field completeness still
+        requires fixture tests; therefore some properties remain optional.
+      required: [kind, bapId, scope]
+      additionalProperties: true
+      properties:
+        kind:
+          type: string
+        bapId:
+          type: string
+          minLength: 1
+        scope:
+          type: string
+          enum: [mainnet, broadcast-mock]
+        profile:
+          oneOf:
+            - type: 'null'
+            - $ref: '#/components/schemas/ProfileDto'
+        idTxid:
+          type: [string, 'null']
+        profileTxid:
+          type: [string, 'null']
+        signatureStatus:
+          type: string
+          enum: [valid, invalid, unverified]
+        currentAddress:
+          type: [string, 'null']
+        missingFields:
+          type: array
+          items:
+            type: string
+        indexCoverage:
+          $ref: '#/components/schemas/Coverage'
+        networkAccepted:
+          type: [boolean, 'null']
+    PublishedIdentity:
+      allOf:
+        - $ref: '#/components/schemas/IdentityCommon'
+        - type: object
+          required: [kind]
+          properties:
+            kind:
+              type: string
+              const: published
+      description: >
+        Published is a transport value; domain VERIFIED requires separate
+        public evidence and valid BAP attribution.
+    NotPublishedIdentity:
+      allOf:
+        - $ref: '#/components/schemas/IdentityCommon'
+        - type: object
+          required: [kind]
+          properties:
+            kind:
+              type: string
+              const: not-published
+      description: Requires sufficient coverage, not a single indexer 404
+    UnknownIdentity:
+      allOf:
+        - $ref: '#/components/schemas/IdentityCommon'
+        - type: object
+          required: [kind]
+          properties:
+            kind:
+              type: string
+              const: unknown
+    IncompleteIdentity:
+      allOf:
+        - $ref: '#/components/schemas/IdentityCommon'
+        - type: object
+          required: [kind]
+          properties:
+            kind:
+              type: string
+              const: incomplete
+      description: >
+        Mock has this field; mainnet occurrence is compatibility-pending
+        and must be verified against real response fixtures.
+    StoredIdentity:
+      allOf:
+        - $ref: '#/components/schemas/IdentityCommon'
+        - type: object
+          required: [kind, scope]
+          properties:
+            kind:
+              type: string
+              const: stored
+            scope:
+              type: string
+              const: broadcast-mock
+    EmptyIdentity:
+      allOf:
+        - $ref: '#/components/schemas/IdentityCommon'
+        - type: object
+          required: [kind, scope]
+          properties:
+            kind:
+              type: string
+              const: empty
+            scope:
+              type: string
+              const: broadcast-mock
+    IdentityResolutionDto:
+      description: >
+        Six observed/typed kind alternatives. Use an adapter to convert
+        transport values and evidence into the public-domain result.
+      oneOf:
+        - $ref: '#/components/schemas/PublishedIdentity'
+        - $ref: '#/components/schemas/NotPublishedIdentity'
+        - $ref: '#/components/schemas/UnknownIdentity'
+        - $ref: '#/components/schemas/IncompleteIdentity'
+        - $ref: '#/components/schemas/StoredIdentity'
+        - $ref: '#/components/schemas/EmptyIdentity'
+      discriminator:
+        propertyName: kind
+        mapping:
+          published: '#/components/schemas/PublishedIdentity'
+          not-published: '#/components/schemas/NotPublishedIdentity'
+          unknown: '#/components/schemas/UnknownIdentity'
+          incomplete: '#/components/schemas/IncompleteIdentity'
+          stored: '#/components/schemas/StoredIdentity'
+          empty: '#/components/schemas/EmptyIdentity'
+    IdentityEnvelope:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: '#/components/schemas/IdentityResolutionDto'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    OperationReceipt:
+      type: object
+      additionalProperties: true
+      description: >
+        Existing publicOperation output varies by operation type and scope;
+        strict additional fields require real response fixtures before approval.
+      required: [operationId, bapId, txid, status]
+      properties:
+        operationId:
+          type: string
+        bapId:
+          type: string
+        txid:
+          $ref: '#/components/schemas/TxId'
+        rawTx:
+          type: string
+        status:
+          type: string
+        kind:
+          type: string
+        broadcastMode:
+          type: string
+          enum: [live, simulated]
+        identitySignature:
+          type: string
+          enum: [valid, invalid, unverified]
+        networkAccepted:
+          type: [boolean, 'null']
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    SyncReceiptEnvelope:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: '#/components/schemas/OperationReceipt'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    TransactionEvidence:
+      type: object
+      additionalProperties: true
+      required: [txid]
+      properties:
+        txid:
+          $ref: '#/components/schemas/TxId'
+        rawTx:
+          type: string
+        visibility:
+          type: string
+        networkAccepted:
+          type: [boolean, 'null']
+        confirmations:
+          type: [integer, 'null']
+          minimum: 0
+        identitySignature:
+          type: string
+          enum: [valid, invalid, unverified]
+        observedAt:
+          type: string
+          format: date-time
+    TransactionEnvelope:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          oneOf:
+            - $ref: '#/components/schemas/OperationReceipt'
+            - $ref: '#/components/schemas/TransactionEvidence'
+          description: >
+            Candidate union: stored receipt or chain observation. Actual
+            receipt and observation may overlap; discriminator pending fixtures.
+        meta:
+          $ref: '#/components/schemas/Meta'
+    OperationEnvelope:
+      type: object
+      required: [data, meta]
       properties:
         data:
           type: object
           additionalProperties: true
-          description: >
-            Endpoint-specific projection. Field-level DTO schema remains
-            needs-review pending alignment to Java and TypeScript fixtures.
+          required: [operationId]
+          properties:
+            operationId:
+              type: string
+            kind:
+              type: string
+            bapId:
+              type: string
+            txid:
+              type: [string, 'null']
+            status:
+              type: string
         meta:
-          type: object
-          additionalProperties: true
-          description: Source, observed time and other actual response metadata
+          $ref: '#/components/schemas/Meta'
+    ErrorDetail:
+      type: object
+      required: [code, retryable]
+      properties:
+        code:
+          type: string
+          description: >
+            Java ApiError code. Verify each endpoint's emitted code values
+            with fixtures; do not infer from HTTP status alone.
+        retryable:
+          type: boolean
+        field:
+          type: [string, 'null']
+    ErrorEnvelope:
+      type: object
+      required: [error, meta]
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        meta:
+          $ref: '#/components/schemas/Meta'
