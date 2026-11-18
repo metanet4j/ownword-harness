@@ -35,4 +35,6 @@ PRD 描述用户任务；Domain 描述业务模型与语义；Contracts 描述�
 
 **Identity 与支撑边界**：[支撑域设计](domain/supporting/README.md)按 Yours Wallet 与 SDK 源码明确身份管理、交易签名/提交、链状态和 Ordinal 查询职责。[Identity 技术 Review](domain/identity/评审报告-Identity-v0.4.0-20261118-103500.md)中的独立初始化资格方案已按钱包管理边界修订；当前设计不再要求 OwnWord 自建 Root 控制型初始化协议。钱包实际集成、历史验签、提交恢复及主网门禁仍待实证。
 
+支撑域入口按领域语义、上游接入依据、钱包实现和 Java 实现分层导航；HTTP 路径、凭据与源码取证归 Contracts，上下端调用与代码示例归各自实现设计。版本含义与发布快照遵循[统一版本规则](versions/README.md)。
+
 **当前待评审**：统一目录与 v0.4.0 清单、Identity 跨端领域边界、Binding 公共协议和 Mainnet 验收缺口。设计编写完成不自动将任何任务标为 `done`。

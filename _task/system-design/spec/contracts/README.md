@@ -6,6 +6,7 @@
 | --- | --- | --- |
 | OpenAPI | [ownword.yaml](openapi/ownword.yaml) | **needs-review**：当前包含 Identity 查询、TransactionSync、交易与操作恢复的五条已核实 Java 路由；类型与错误 Schema 为候选，仍需响应 fixture 验证 |
 | Acceptance | [BDD 入口](acceptance/README.md) | **needs-review**：Identity 18 个场景（Outline 含 8 行映射）、支撑域 16 个、Artifact 2 个；均尚未接入执行框架 |
+| Upstream | [Yours 与 1sat 接入依据](upstream/接入依据-Yours与1sat-20261118-164032.md) | **needs-review**：外部接口、鉴权与固定版本源码证据；不等同于 OwnWord 已批准 HTTP 契约 |
 
 开发规则：
 

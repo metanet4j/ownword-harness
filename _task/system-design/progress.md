@@ -1,35 +1,25 @@
 # 当前进展
 
-当前交付为 `supporting-domains-v040`，状态 needs-review：已按用户要求将钱包、交易签名/提交、链上状态和 Ordinal 交易查询整合到统一 v0.4.0 领域设计。任务范围与证据见[feature_list.json](feature_list.json)，本文不另定义产品规则。
+当前事项为 `supporting-domains-v040`，状态 needs-review。用户要求核实支撑域版本划分并整理结构，本次已按既有 ADR-001 完成文档分层；任务范围和证据见[feature_list.json](feature_list.json)。
 
 ## 当前产出
 
-- [核心认知 §5.4](spec/核心认知.md#54-支撑能力与产品领域的责任)：明确稳定责任与事实来源。
-- [支撑域](spec/domain/supporting/README.md)：SUP-01~10、操作/链状态、原执行恢复、Ordinal 输出/花费/历史、能力缺口及源码映射。
-- [Identity](spec/domain/identity/README.md)、[Context Map](spec/domain/上下文映射-v0.4.0-20261117-175100.md)、[前端](spec/frontend/identity/README.md)和[后端](spec/backend/identity/README.md)：同步钱包委托边界；公共 unknown 不再单独阻止钱包已有身份动作。
-- [Contracts](spec/contracts/README.md)：保留五条既有路由；Identity 18 个、支撑域 16 个、Artifact 2 个设计场景，尚无 Step Definition。
-- [Manifest](spec/versions/v0.4.0.yaml)：统一目标、独立组件版本和门禁；approvedForRelease=false、specSnapshot=null。
-
-## 源码核查与限制
-
-Yours 实际 package.json 为 5.1.0，锁定 Actions 0.0.212；与 reference/sources.lock.json 的部分记录不同。独立参考 SDK 的 Actions 为 0.0.221。已从 npm 只下载读取 Actions 0.0.212、Toolbox Client 2.12.0，以及 Client 0.0.51、Types 0.0.43、Wallet 0.0.106、Wallet Browser 0.0.92；六个包哈希均与 Yours bun.lock 一致，未安装或执行。
-
-固定版本身份 Action 的默认钱包路径内部完成签名并尝试 postBeef，返回最终交易材料没有调用方暂停点；tx 是 Atomic BEEF。最终 rawTx 优先从该返回值提取，或按 TxID 补查原字节，校验 TxID 后保存。广播、UTXO、Ord 查询的实际方法、HTTP 路径及复用示例已落实到支撑域 §8.1；公共 API 接入、鉴权、密钥申请依据和说明差异见 §8.2；Java 直连与现有代码调整点见 §8.3。完整调用链、适用范围及包哈希见[支撑域 §4、§8、§11](spec/domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md)。
-
-身份高层接口未暴露 actionId/reference 或业务 operationId；Toolbox 会话外 pending reference 续签恢复未实现。生产适配需核实丢回执的持久关联与查询恢复。其余开放项包括公共身份投影、历史验签、主链/reorg、Ordinal 历史、普通 Transfer 身份签名、编号/Binding 和 Identity/Profile 类型策略。
+- [支撑域稳定入口](spec/domain/supporting/README.md)：统一导航领域、上游依据和两端实现。
+- [领域设计](spec/domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md)：保留能力、模型、端口、状态、恢复和验收。
+- [上游接入依据](spec/contracts/upstream/接入依据-Yours与1sat-20261118-164032.md)：集中固定版本源码证据、HTTP 路径、鉴权/密钥与已完成的只读验证。
+- [钱包实现设计](spec/frontend/supporting/实现设计-钱包与交易执行-v0.4.0-20261118-164032.md)与[Java 实现设计](spec/backend/supporting/实现设计-链与Ordinal查询-v0.4.0-20261118-164032.md)：承接原调用链、材料转换、示例与改造点。
+- [统一版本规则](spec/versions/README.md)和 [Manifest](spec/versions/v0.4.0.yaml)：补充版本含义及四份文档路径；发布门禁保持开放。
 
 ## 验证范围
 
-本次核对 IdentityApi/TransactionSyncApi 的现有 Java 调用链与 Java 25 基线，补入 JDK HttpClient 直连、JSON/二进制/SSE、原交易示例和查询/同步改造位置。Backend Identity 指南引用支撑域 §8.3；新客户端/配置明确为待实施，Java 示例未编译或运行。
+本次相对路径、Markdown 标题锚点、围栏、JSON、Manifest/OpenAPI 严格 YAML 和 git diff --check 均通过。迁移核对保留了全部 Java/TypeScript/PowerShell 示例、状态图、HTTP 路径表、SUP-01~10 和已核查包哈希；既有契约和 BDD 未修改。
 
-本次 JSON 可解析，17 份 Markdown 的 205 个本地引用可定位、围栏成对，git diff --check 通过。此前 Manifest/OpenAPI 严格 YAML 解析无警告；既有契约保持 5 条路由、22 个 Schema、61 处内部引用和 36 个 Gherkin 场景，本次未修改或执行。
+本次未新增网络请求、编译运行示例或修改 Java/TypeScript 业务代码。先前包取证与匿名 GET 证据已迁移至上游接入依据，不能算作本次重新验证。设计和示例不构成真实扩展、主网广播、SSE 或重组验收。
 
-先前匿名 capabilities、health、policy、chain tip、公开地址 TXO GET 均返回 200，Swagger 可解析为 133 条路径；GET 跨域响应头已检查，本次未新增网络请求。托管额度/SLA、公开 Key 申请与说明差异仍以支撑域 §8.2 为准。
+## 实施限制与下一步
 
-未运行正式 OpenAPI 规范验证器、BDD 场景、Java/TypeScript 服务、真实钱包扩展、浏览器 CORS/POST 预检、主网提交或重组实验；未改业务代码、原型和 reference。前端 SHA 为旧登记，本地当前无 frontend/ownword-web 源码目录，实施前须恢复核对。
+生产依赖组合、高层 Action 丢回执关联、跨会话恢复、公共身份投影、历史验签、主链/reorg、Ordinal 历史和 Artifact 协议门禁仍待实际集成；详细依据由分层文档及 Manifest 维护。前端旧 SHA 仅作记录，本地当前无 frontend/ownword-web 源码目录，实施前恢复核对。
 
-## 其他事项
+其他原型、技能及 v0.2.0 验收状态保持 feature_list.json 与[既有知识库](../../知识库/前端/ownword-v0.2.0/README.md)中的记录。
 
-v0.2.0 本地功能与技术验收依据保留在[知识库](../../知识库/前端/ownword-v0.2.0/README.md)；真实扩展、公共历史/checkpoint、主网资金与广播门禁仍开放。原型视觉复核、导航与新版技能接入的待审状态继续由 feature_list.json 各自记录；本轮不改变其审批结果。
-
-当前设计统一为 v0.4.0，人工复核前不记 done，不创建发布 Tag。唯一下一步：用户复核当前支撑边界与调用链，按支撑域实施顺序补实际接口 fixtures 与钱包集成证据。
+唯一下一步：用户复核分层入口后，按支撑域 A→B→C→D 顺序固定生产组合、补 fixtures 并实施真实集成。人工复核前不记 done，不创建发布 Tag。

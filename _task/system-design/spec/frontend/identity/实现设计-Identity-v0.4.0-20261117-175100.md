@@ -47,7 +47,7 @@ Yours 当前 `saveProfile` 固定 `@type: Person`；组织资料和 Identity.typ
 
 ## 3. 交易执行与恢复
 
-前端通过 `WalletExecutionPort` 选择已核实的 Action 路径或两阶段路径；具体调用顺序和可取得的材料以[支撑域 §4](../../domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md#4-签名与交易执行)的版本取证为准。
+前端通过 `WalletExecutionPort` 选择已核实的 Action 路径或两阶段路径；具体调用顺序和可取得的材料以[钱包接入 §2–4](../supporting/实现设计-钱包与交易执行-v0.4.0-20261118-164032.md#2-已核实的身份-action-顺序)的版本取证为准。
 
 1. Review 冻结操作 BapId、scope、账户、业务字段、目标及所选执行路径。
 2. 调用前保存 operationId、业务意图、flowId/步骤及适配器可用的恢复关联；再次检查会话。
@@ -55,7 +55,7 @@ Yours 当前 `saveProfile` 固定 `@type: Person`；组织资料和 Identity.typ
 4. 高层调用中断或回执丢失时，按可取得的原钱包记录/TxID 恢复；禁止自动再调用创建 Action。当前身份 Action 不返回 actionId/reference，也未接收业务 operationId；Toolbox 会话外 pending reference 恢复未实现。需验证持久查询关联或补适配，缺口保持 UNKNOWN。
 5. 原交易可取得且满足同步条件时，按现有四字段契约同步；独立回读交易状态与公共 Identity/Profile。
 
-优先从 Action 返回的 `tx` 用 `Transaction.fromAtomicBEEF` 提取目标交易，再 `toHex()` 得 rawTx，并重算 TxID；仅有 TxID 时按[支撑域 §4.4](../../domain/supporting/领域设计-支撑域-v0.4.0-20261118-141904.md#44-提交后取得最终-rawtx)通过原交易查询补齐，不把整个 BEEF 直接当 rawTx hex。无可恢复材料时不能制造成功回执，也不能推断“从未广播”。
+优先从 Action 返回的 `tx` 用 `Transaction.fromAtomicBEEF` 提取目标交易，再 `toHex()` 得 rawTx，并重算 TxID；仅有 TxID 时按[钱包接入 §4](../supporting/实现设计-钱包与交易执行-v0.4.0-20261118-164032.md#4-提交后取得最终-rawtx)通过原交易查询补齐，不把整个 BEEF 直接当 rawTx hex。无可恢复材料时不能制造成功回执，也不能推断“从未广播”。
 
 多笔流程每笔使用独立 operationId，共享本地 flowId。当前 Sync 请求恰有四字段，不能直接添加 flowId。ID + ALIAS 若由钱包同笔组合则记一笔；头像和后续资料等按实际交易分别恢复。后续取消保留先前提交结果。
 
