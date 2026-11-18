@@ -33,4 +33,6 @@
 
 PRD 描述用户任务；Domain 描述业务模型与语义；Contracts 描述系统交互的可验证输入输出；Frontend/Backend 描述实现细节。所有文档引用核心认知的事实，不抄写另一份规则。涉及变更时先查领域规则与 API 兼容性，再改应用代码；验证证据的状态来自[_task/system-design/feature_list.json](../feature_list.json)及各版本验收报告。
 
+**Identity 技术 Review**：[评审报告（Changes Requested）](domain/identity/评审报告-Identity-v0.4.0-20261118-103500.md) 已确认首次主网身份发布的流程阻塞和多项跨端模型/契约缺口；需关闭后再批准开发基线。
+
 **当前待评审**：统一目录与 v0.4.0 清单、Identity 跨端领域边界、Binding 公共协议和 Mainnet 验收缺口。设计编写完成不自动将任何任务标为 `done`。
