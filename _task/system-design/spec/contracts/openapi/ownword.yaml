@@ -135,7 +135,7 @@ paths:
   /api/v1/identity-operations/{id}:
     get:
       operationId: getLegacyIdentityOperation
-      deprecated: true
+      x-ownword-design-proposal: retire-only-after-front-end-compatibility-migration
       summary: Compatibility readback of previously stored Identity operation
       description: >
         Existing Java route is used by the v0.1/v0.2 frontend recovery path.
