@@ -1,6 +1,6 @@
 # OwnWord OpenAPI
 
-- [ownword.yaml](ownword.yaml)：**v0.4.0 产品设计目标下的待评审契约草案**，目前仅覆盖两条已经核实 Java 处理器的接口。
+- [ownword.yaml](ownword.yaml)：**v0.4.0 产品设计目标下的待评审契约草案**，现覆盖五条已有 Java 路由（身份查询、交易同步、交易查询、操作查询和历史兼容操作查询）。
 - 核对来源：[IdentityApi.java](https://github.com/metanet4j/metanet4j-component/blob/dev/metanet4j-api-ownword/src/main/java/com/metanet4j/api/ownword/IdentityApi.java)、[TransactionSyncApi.java](https://github.com/metanet4j/metanet4j-component/blob/dev/metanet4j-api-ownword/src/main/java/com/metanet4j/api/ownword/TransactionSyncApi.java)。
 - 对照前端：[ownword-web/lib/domain/types.ts](https://github.com/metanet4j/ownword-web/blob/feature/ownword-v0.2.0/lib/domain/types.ts)、[publish.ts](https://github.com/metanet4j/ownword-web/blob/feature/ownword-v0.2.0/lib/domain/publish.ts)。
 
