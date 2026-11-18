@@ -25,3 +25,12 @@ v0.2.0 内容集成设计已获批准，本地功能与技术验收已完成；�
 **验证**：GitHub `dev` 上新增路径及相对链接核对通过（119 个相对链接、0 个未解析），YAML 中 18 个文档/证据路径存在，OpenAPI 内部 Schema 引用可解析，6 个 Gherkin 场景具备 Given/When/Then 结构。上述为文档静态检查，**没有**执行 Java/TypeScript 测试、Swagger/OpenAPI 严格 Schema 校验、Wallet 扩展或主网交易。实际 API DTO、Signature/Binding/Indexer 与公共历史仍有未关闭项。
 
 状态 `needs-review`；用户尚未批准 v0.4.0 的正式发布基线，因此 `specSnapshot: null`，未创建 Release Tag。证据和待决条件见 `feature_list.json` 的 `system-design-unified-version-v040`。下一步：用户评审统一版本清单、Identity 跨端职责及待确认的 Contract，随后确定是否批准基线。
+
+
+## Identity 跨端 DDD 技术 Review（Changes Requested）
+
+已静态核对 `核心认知.md`、v0.4.0 Identity 跨端模型、Context Map、Frontend/Backend 实现指南、OpenAPI/BDD、统一版本清单，并对照 `metanet4j/ownword-web@6f9bccad` 与 `metanet4j/metanet4j-component@fbb048ea` 的真实 TypeScript/Java 代码。结果：[评审报告](spec/domain/identity/评审报告-Identity-v0.4.0-20261118-103500.md)。
+
+发现 **P0×1、P1×5、P2×3**：P0 是首次主网身份发布时 `GET identity → unknown`、前端拒绝创建的流程阻塞；P1 涉及查询结果映射、Identity/Profile 属性归属、Rotation 历史签名、类型化 OpenAPI、BDD 验收覆盖；P2 涉及编号查找的上下文归属、TypeScript 分层、发布 SHA 锁定门禁。报告每项附代码证据、影响、责任方和关闭条件。评审方向认可，共享设计及发布基线**不批准**，仍保留 `needs-review`。
+
+证据：报告 39 个相对/外部引用均有明确来源，内部路径 0 个丢失；未执行运行时测试、Wallet 扩展、主网或重组实验。新增 `review-identity-cross-end-v040` 状态为 `needs-review`，未修改真实业务代码/原型、原有 PRD 和身份领域规则。先关闭 R-01，再处理 R-02 至 R-06，最后复核 R-07 至 R-09。
