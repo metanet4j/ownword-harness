@@ -34,3 +34,17 @@ v0.2.0 内容集成设计已获批准，本地功能与技术验收已完成；�
 发现 **P0×1、P1×5、P2×3**：P0 是首次主网身份发布时 `GET identity → unknown`、前端拒绝创建的流程阻塞；P1 涉及查询结果映射、Identity/Profile 属性归属、Rotation 历史签名、类型化 OpenAPI、BDD 验收覆盖；P2 涉及编号查找的上下文归属、TypeScript 分层、发布 SHA 锁定门禁。报告每项附代码证据、影响、责任方和关闭条件。评审方向认可，共享设计及发布基线**不批准**，仍保留 `needs-review`。
 
 证据：报告 39 个相对/外部引用均有明确来源，内部路径 0 个丢失；未执行运行时测试、Wallet 扩展、主网或重组实验。新增 `review-identity-cross-end-v040` 状态为 `needs-review`，未修改真实业务代码/原型、原有 PRD 和身份领域规则。先关闭 R-01，再处理 R-02 至 R-06，最后复核 R-07 至 R-09。
+
+
+## Identity DDD Review 设计整改（needs-review）
+
+按用户要求先修订设计文档（不修改业务代码），根据上轮评审 R-01~R-08 在现有统一 v0.4.0 目标下完成：
+
+- 共享 [Identity 领域设计](spec/domain/identity/领域设计-Identity-v0.4.0-20261117-175100.md)：拆分公开查询、Profile 完整度、Wallet Control 和 Initialization Eligibility；定义 ALLOW/BLOCK/NEED_EVIDENCE 初次身份发布资格、恢复时序、Identity/Profile 关键属性与历史 Key Rotation 的 signing-time 验证端口；编号解析归 Explorer。
+- [Frontend](spec/frontend/identity/实现设计-Identity-v0.4.0-20261117-175100.md) 和 [Backend](spec/backend/identity/实现设计-Identity-v0.4.0-20261117-175100.md)：补实际 TS/Java 类型映射、交易幂等/恢复、Root 历史覆盖及逐步应用层迁移。
+- [OpenAPI](spec/contracts/openapi/ownword.yaml)：现有 5 条 Java 路由的候选类型化契约，包含 6 种 Identity DTO、Coverage、Error、Transaction 恢复；[Identity BDD](spec/contracts/acceptance/identity.feature)：18 个场景、8 行查询状态样例。
+- [v0.4.0 Manifest](spec/versions/v0.4.0.yaml)：记录设计整改状态和仍待实证的技术门禁；`approvedForRelease=false`、`specSnapshot=null` 保持不变。
+
+**已静态检查**：本轮相关 8 份 Markdown 的 77 个相对链接均有效，无未配对代码围栏；OpenAPI 5 个已核实路径、22 个 Schema 和 61 处引用没有悬空；18 个 Gherkin 场景具备 Given/When/Then。**未完成**严格 YAML/OpenAPI 验证器、BDD Step Definition、TypeScript/Java 运行时测试、真实扩展和主网查询/广播。
+
+**关键残余 P0**：有 Root Control 仍不能在公共 BAP 历史覆盖未知时安全断言“可以初始化”；已明确 NEED_EVIDENCE 保护与 PENDING 原交易恢复，但需要 Indexer 的充分历史证据或经过产品/安全批准的链上初始化防冲突协议才能解除广播阻塞。R-03 Identity/Profile type 策略、R-04 历史验签向量和 R-05/06 契约测试仍待实施。当前事项 `remediate-identity-design-review-v040` 为 `needs-review`，未批准开发/正式发布基线。
