@@ -9,7 +9,7 @@
     "done",
     "archived"
   ],
-  "activeItem": null,
+  "activeItem": "review-identity-cross-end-v040",
   "features": [
     {
       "id": "prototype-visual-alignment-v010-v030",
@@ -591,6 +591,35 @@
         "Artifact Binding 公共验证协议和 Ordinal Indexer API",
         "真实 Yours 扩展、主网 BAP 公共历史和资金/广播门禁"
       ]
+    },
+    {
+      "id": "review-identity-cross-end-v040",
+      "name": "Review OwnWord v0.4.0 Identity 跨端 DDD 设计",
+      "status": "in-progress",
+      "goal": "对照核心认知、共享领域设计、前端/后端实现指南、OpenAPI/BDD 及现有 Java/TypeScript 代码，输出有证据和优先级的技术评审结论。",
+      "scope": "只读代码与设计检查；新增评审报告并同步任务记录，不修改业务源代码、原型或未经批准的领域事实。",
+      "dependencies": [
+        "_task/system-design/spec/核心认知.md（SSOT）",
+        "_task/system-design/spec/domain/identity/领域设计-Identity-v0.4.0-20261117-175100.md",
+        "_task/system-design/spec/frontend/identity/实现设计-Identity-v0.4.0-20261117-175100.md",
+        "_task/system-design/spec/backend/identity/实现设计-Identity-v0.4.0-20261117-175100.md",
+        "_task/system-design/spec/contracts/openapi/ownword.yaml",
+        "metanet4j/ownword-web@feature/ownword-v0.2.0",
+        "metanet4j/metanet4j-component@dev"
+      ],
+      "doneCriteria": [
+        "评审 P0/P1/P2 问题具有可查代码/文档定位",
+        "明确每项影响、推荐修复、责任方和关闭证据",
+        "区分现有代码阻塞、目标设计缺口与协议/外部环境待验证",
+        "报告链接加入 Identity 领域 README；任务提交于 dev；不将评审记为产品验收通过"
+      ],
+      "prdVersion": "v0.4.0",
+      "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
+      "output": "_task/system-design/spec/domain/identity/评审报告-Identity-v0.4.0-20261118-103500.md",
+      "reviewStatus": "review-in-progress",
+      "implementationStatus": "not-applicable-review-only",
+      "evidence": [],
+      "nextStep": "阅读代码/规范，记录问题和关闭条件。"
     }
   ]
 }
