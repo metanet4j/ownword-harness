@@ -343,15 +343,18 @@ def render_chapter(ch, md, anchors, pager='', nav_top='', summary='', verse_mode
     else:
         head = f'<h1 class="chapter-title">{html.escape(title, quote=False)}</h1>'
     attrs = ''
+    count_label = ''
     if verses:
-        # 跳转框与节锚点都由页面脚本生成，这里只记最大节号与总节数
-        attrs = f' data-vmax="{max(verses)}" data-vcount="{len(verses)}"'
+        # 节数静态写在标题下：不执行脚本时也能看到本章共几节
+        attrs = (f' data-vmax="{max(verses)}" data-vcount="{len(verses)}"')
+        count_label = f'<p class="chapter-count">共 {len(verses)} 节</p>'
     parts = [
         f'<section class="chapter" id="{cid}" data-title="{html.escape(title, quote=True)}"{attrs}>',
         nav_top,
         '<header class="chapter-head">',
         kicker,
         head,
+        count_label,
         '</header>',
         summary,
         '<div class="chapter-body">',
@@ -365,13 +368,18 @@ def render_chapter(ch, md, anchors, pager='', nav_top='', summary='', verse_mode
 
 # ---------------------------------------------------------------- 页面组装
 
-def build_toc_html(chapters, headings, root_attrs='class="toc" id="toc"'):
+def build_toc_html(chapters, headings, root_attrs='class="toc" id="toc"',
+                   verse_counts=None):
     """目录用静态 HTML 输出，保证无脚本也能看到章节目录。
 
-    每章一个小节容器（.toc-kids），默认收起；桌面端展开当前章的小节。
+    经文类（每章只是一段经文）按卷折叠成章号网格：66 卷 1189 章压成一屏
+    可扫的卷名列表，点卷名展开章号，点章号直达，每格悬停显示该章节数。
+    其他书仍按「章节 → 小节」逐条列出。
     root_attrs 用于生成第二份副本（无脚本菜单面板），避免重复 id。
     """
     parts = [f'<nav {root_attrs}>']
+    if verse_counts:
+        return _verse_toc(chapters, verse_counts, parts)
     cur_part = None
     cur_cat = None
     for ch in chapters:
@@ -402,6 +410,48 @@ def build_toc_html(chapters, headings, root_attrs='class="toc" id="toc"'):
             parts.append('</div>')
         parts.append('</div>')
     if cur_part is not None:
+        parts.append('</div>')
+    parts.append('</nav>')
+    return '\n'.join(parts)
+
+
+def _verse_toc(chapters, verse_counts, parts):
+    """经文目录：旧约/新约 → 卷（<details> 折叠）→ 章号网格。"""
+    per_book = {}
+    for ch in chapters:
+        per_book[ch.get('category') or ''] = per_book.get(ch.get('category') or '', 0) + 1
+
+    cur_part = cur_book = None
+    book_open = part_open = False
+    for ch in chapters:
+        part = ch.get('part') or ''
+        book = ch.get('category') or ''
+        if part != cur_part:
+            if book_open:
+                parts.append('</details></div>')
+            if part_open:
+                parts.append('</div>')
+            parts.append(f'<div class="toc-part">{html.escape(part, quote=False)}</div>')
+            parts.append('<div class="toc-books">')
+            cur_part, cur_book = part, None
+            book_open, part_open = False, True
+        if book != cur_book:
+            if book_open:
+                parts.append('</details></div>')
+            parts.append('<div class="toc-book">')
+            parts.append(f'<details><summary>{html.escape(book, quote=False)}'
+                         f'<span>{per_book[book]} 章</span></summary>'
+                         '<div class="toc-chapgrid">')
+            cur_book, book_open = book, True
+        cid = 'ch-' + ch['slug']
+        number = int(ch['slug'].rsplit('-', 1)[1])
+        verses = verse_counts.get(cid, 0)
+        title = f'{book} 第{number}章 · {verses} 节'
+        parts.append(f'<a class="toc-ch" href="#{cid}" title="{title}"'
+                     f' data-target="{cid}">{number}</a>')
+    if book_open:
+        parts.append('</details></div>')
+    if part_open:
         parts.append('</div>')
     parts.append('</nav>')
     return '\n'.join(parts)
@@ -739,6 +789,27 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 .verse-jump button:hover{border-color:var(--accent-2);color:var(--accent)}
 .verse-jump input.miss{border-color:var(--accent);background:var(--accent-wash)}
 .nojs .verse-jump{display:none}
+.chapter-count{margin:.5em 0 0;font-family:var(--sans);font-size:12.5px;color:var(--muted)}
+/* 经文目录：卷折叠 + 章号网格，66 卷 1189 章压成一屏可扫的列表 */
+.toc-book{margin:0}
+.toc-book>details{border-bottom:1px solid var(--rule)}
+.toc-book>details>summary{display:flex;align-items:center;justify-content:space-between;gap:.6em;
+  min-height:40px;padding:.45em 2px;font-family:var(--sans);font-size:14px;color:var(--ink);
+  cursor:pointer;list-style:none}
+.toc-book>details>summary::-webkit-details-marker{display:none}
+.toc-book>details>summary::after{content:"＋";flex:none;color:var(--muted);font-size:12px}
+.toc-book>details[open]>summary::after{content:"－"}
+.toc-book>details>summary>span{flex:none;margin-left:auto;color:var(--muted);font-size:11.5px}
+.toc-book>details>summary:hover{color:var(--accent)}
+.toc-chapgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:5px;
+  padding:.2em 0 .7em}
+.toc-book[hidden],.toc-ch[hidden],.toc-part[hidden],.toc-empty[hidden]{display:none!important}
+.toc-ch{display:flex;align-items:center;justify-content:center;height:36px;border:1px solid var(--rule);
+  border-radius:var(--r1);background:var(--card);color:var(--ink);font-family:var(--sans);
+  font-size:13px;text-decoration:none}
+.toc-ch:hover{border-color:var(--accent-2);color:var(--accent)}
+.toc-ch.current{border-color:var(--accent);background:var(--accent-wash);color:var(--accent);font-weight:700}
+.toc-books{display:flex;flex-direction:column}
 .chapter-body h2{display:flex;flex-wrap:wrap;align-items:baseline;gap:.7em;
   margin:2.1em 0 .85em;padding-top:1.15em;border-top:1px solid var(--rule);
   font-family:var(--sans);font-size:1.14em;font-weight:700;line-height:1.6;scroll-margin-top:70px}
@@ -827,6 +898,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   .sidebar{position:sticky;top:0;height:100vh;width:auto;transform:none!important;box-shadow:none!important}
   .side-head{padding-top:var(--s4)}
   #btnMenu{display:none}
+  .menu-link,.close-link{display:none!important}
   .scrim{display:none}
   .bar-title{text-align:left;padding-left:var(--s2)}
   main{max-width:calc(var(--measure) + 2em);padding:0 var(--s6) var(--s7)}
@@ -850,6 +922,11 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 /* [hidden] 要靠作者样式兜住：下面几条 display 规则会把它覆盖掉 */
 .numgrid[hidden],.toc[hidden]{display:none!important}
 .nojs #btnMenu{display:none}
+/* 无脚本时改用锚点开合抽屉：<a href="#sidebar"> 靠 :target 滑出 */
+.menu-link{display:none}
+.nojs .menu-link{display:flex}
+.nojs .close-link{display:flex}
+.close-link{display:none}
 .inline-toc{display:none}
 .inline-toc-head{display:flex;align-items:baseline;gap:var(--s3);margin:0 0 var(--s3);
   font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--accent)}
@@ -859,10 +936,13 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 .nojs #btnSize,.nojs #btnTheme{display:none!important}
 .nojs .side-foot{display:none}
 @media (max-width:1023px){
-  .js .sidebar,.nojs .sidebar{display:none}
-  /* 抽屉打开时侧栏才出现 */
-  .js .sidebar.on{display:flex}
-  /* 侧栏原装那份目录只在桌面端用；窄屏用正文里那份，别用 !important 误伤 */
+  /* 抽屉用 CSS :target 打开：#sidebar 命中时侧栏滑出，不依赖脚本。
+     有脚本时仍走 .on 那套（能带当前章定位、锁滚动），两者互不冲突。 */
+  .sidebar{display:none}
+  .sidebar:target,.sidebar.on{display:flex;transform:none;box-shadow:0 0 60px var(--shadow)}
+  /* 遮罩同样只靠 CSS：:has() 得到支持就显示，没支持也不影响抽屉本身 */
+  body:has(.sidebar:target) .scrim{display:block;opacity:1;pointer-events:auto}
+  /* 侧栏原装那份目录只在桌面端用；窄屏用同一份克隆 */
   .js .sidebar .toc:not(.toc-clone){display:none}
   .js .toc-clone{display:block;flex:1;overflow-y:auto;touch-action:pan-y;
     padding:0 var(--s2) var(--s3) var(--s3)}
@@ -905,6 +985,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       <button class="icon" id="btnClose" aria-label="关闭目录">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
+      <a class="icon close-link" href="#close" aria-label="关闭目录">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </a>
     </div>
     <div class="search-wrap">
       <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -926,6 +1009,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       <button class="icon" id="btnMenu" aria-label="打开目录" title="目录 (T)">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
       </button>
+      <a class="icon menu-link" href="#sidebar" aria-label="打开目录">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </a>
       <div class="bar-title" id="barTitle"></div>
       <button class="icon" id="btnSize" aria-label="调整字号" title="字号">
         <span class="icon-text">Aa</span>
@@ -1112,7 +1198,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   }
   function revealCurrent() {
     if (!toc) return;
-    var cur = toc.querySelector('.toc-row.current');
+    var cur = toc.querySelector('.toc-row.current, .toc-ch.current');
     if (!cur) return;
     var top = cur.offsetTop - toc.clientHeight / 2 + cur.offsetHeight / 2;
     if (top > 0) toc.scrollTop = top;
@@ -1369,6 +1455,56 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 
     function renderSearch(q) {
       q = q.trim().toLowerCase();
+      function pureNumber(text) {
+        // 「第7章」「7」「7章」都当第 7 章查
+        var m = /^第?\s*(\d+)\s*章?$/.exec(text.trim());
+        return m ? m[1] : null;
+      }
+      // 经文目录是「卷 → 章号」两级，没有 .toc-row，走另一套匹配
+      if (!rows.length) {
+        var bookHit = 0;
+        var books = Array.prototype.slice.call(toc.querySelectorAll('.toc-book'));
+        books.forEach(function (book) {
+          var summary = book.querySelector('summary');
+          var name = summary ? (summary.firstChild ? summary.firstChild.textContent : '') : '';
+          var chaps = Array.prototype.slice.call(book.querySelectorAll('.toc-ch'));
+          var bookMatch = !!q && name.toLowerCase().indexOf(q) >= 0;
+          var chapHit = 0;
+          chaps.forEach(function (a) {
+            var shownNumber = a.textContent.trim();
+            var on = !!q && shownNumber === pureNumber(q);
+            a.hidden = !!q && !bookMatch && !on;
+            if (on) chapHit++;
+          });
+          var show = !q || bookMatch || chapHit > 0;
+          book.hidden = !show;
+          if (show && q) bookHit++;
+          var details = book.querySelector('details');
+          if (details) details.open = !q || show;
+        });
+        Array.prototype.forEach.call(toc.querySelectorAll('.toc-part'), function (p) {
+          var sib = p.nextElementSibling, any = false;
+          while (sib && !sib.classList.contains('toc-part')) {
+            if (sib.classList.contains('toc-books')
+                && sib.querySelector('.toc-book:not([hidden])')) any = true;
+            sib = sib.nextElementSibling;
+          }
+          p.hidden = !!q && !any;
+        });
+        var emptyVerse = toc.querySelector('.toc-empty');
+        if (q && !bookHit) {
+          if (!emptyVerse) {
+            emptyVerse = document.createElement('p');
+            emptyVerse.className = 'toc-empty';
+            toc.appendChild(emptyVerse);
+          }
+          emptyVerse.textContent = '没有找到「' + q + '」';
+          emptyVerse.hidden = false;
+        } else if (emptyVerse) {
+          emptyVerse.hidden = true;
+        }
+        return;
+      }
       var hit = 0;
       rows.forEach(function (row) {
         var item = row.querySelector('.toc-item');
@@ -1451,6 +1587,16 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       });
       Array.prototype.forEach.call(document.querySelectorAll('.num'), function (n) {
         n.classList[n.getAttribute('data-target') === id ? 'add' : 'remove']('current');
+      });
+      // 经文目录：高亮当前章，并展开它所在的卷（当前卷一直开着，方便连读）
+      Array.prototype.forEach.call(document.querySelectorAll('.toc-ch'), function (a) {
+        var on = a.getAttribute('data-target') === id;
+        a.classList[on ? 'add' : 'remove']('current');
+        if (on) {
+          var book = a.closest('.toc-book');
+          var details = book && book.querySelector('details');
+          if (details) details.open = true;
+        }
       });
     }
     function markHead(el) {
@@ -1587,6 +1733,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
           + '<button type="button" class="vjump-go">跳转</button>'
           + '<span class="verse-count" title="点节号可复制该节链接">共 ' + count + ' 节</span>';
         head.appendChild(box);
+        // 脚本接管后隐去静态节数，避免与跳转框里的「共 N 节」重复
+        var staticCount = head.querySelector('.chapter-count');
+        if (staticCount) staticCount.style.display = 'none';
       });
       // 直接打开 #v-… 时浏览器在解析阶段找不到目标，生成后再补一次定位
       if (/^#v-/.test(location.hash)) {
@@ -1624,12 +1773,24 @@ def main():
     anchors = {f"{ch['slug']}.md": 'ch-' + ch['slug'] for ch in chapters}
 
     parts, headings = [], {}
+    verse_counts = {}
     questions = 0
     for idx, ch in enumerate(chapters):
         path = f"{ch['slug']}.md"
         if not os.path.exists(path):
             raise SystemExit(f'缺少章节文件: {path}')
         md = open(path, encoding='utf-8').read()
+
+        cid = 'ch-' + ch['slug']
+        if verse_mode:
+            total = 0
+            for b in parse_markdown(md):
+                if b['type'] != 'p':
+                    continue
+                v = VERSE_LINE_RE.match(b['text'].strip())
+                if v:
+                    total += int(v.group(2) or v.group(1)) - int(v.group(1)) + 1
+            verse_counts[cid] = total
 
         prev_html = next_html = ''
         if idx > 0:
@@ -1680,13 +1841,13 @@ def main():
     has_numbers = any(chapter_number(ch['title']) is not None for ch in chapters)
     numgrid_inline = (build_numgrid(chapters, 'class="numgrid" id="numgrid-inline"')
                       if has_numbers else '')
+    toc_inline = build_toc_html(chapters, headings, 'class="toc toc-copy"', verse_counts)
     inline_toc = ('<section class="inline-toc" id="inline-toc" aria-label="目录">'
                   '<p class="inline-toc-head">目录 <span>%s</span></p>'
-                  % ('点标题或问号即可跳转' if has_numbers else '点标题即可跳转')
-                  + numgrid_inline
-                  + build_toc_html(chapters, headings, 'class="toc toc-copy"')
-                  + '</section>')
-    out = page(meta, '\n'.join(parts), build_toc_html(chapters, headings),
+                  % ('点标题或问号即可跳转' if has_numbers else '点卷名展开章号')
+                  + numgrid_inline + toc_inline + '</section>')
+    out = page(meta, '\n'.join(parts),
+               build_toc_html(chapters, headings, verse_counts=verse_counts),
                build_numgrid(chapters) if has_numbers else '',
                build_index(chapters, headings), stats, filename,
                'ch-' + chapters[0]['slug'], inline_toc,
