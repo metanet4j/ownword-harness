@@ -1,5 +1,6 @@
 # Identity 领域入口
 
+- **技术 Review（Changes Requested）**：[Identity 跨端设计评审报告](评审报告-Identity-v0.4.0-20261118-103500.md)。发现 P0 首次主网发布闭环与 P1 契约/领域模型缺口；开发前先按报告关闭阻塞项。
 - **当前共享领域草案（v0.4.0 目标，needs-review）**：[Identity 领域设计](领域设计-Identity-v0.4.0-20261117-175100.md)。
 - **唯一产品事实**：[核心认知 §2/§4/§7/§9](../../核心认知.md)，不从 TypeScript DTO 或 Java 表结构反推业务规则。
 - **前端实现入口**：[Frontend / Identity](../../frontend/identity/README.md)。
