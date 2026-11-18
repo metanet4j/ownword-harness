@@ -674,6 +674,14 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 .to-top.show{opacity:1;pointer-events:auto}
 .to-top svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 
+/* ---------- 常驻「目录」入口：窄屏一直可见，读完一章也能一键回目录 ---------- */
+.to-toc{position:fixed;right:var(--s4);bottom:calc(var(--s4) + 56px + env(safe-area-inset-bottom));
+  z-index:35;display:none;align-items:center;justify-content:center;height:44px;padding:0 16px;
+  border-radius:999px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);
+  font-family:var(--sans);font-size:13px;font-weight:600;text-decoration:none;
+  box-shadow:0 3px 14px var(--shadow)}
+.inline-toc{scroll-margin-top:64px}
+
 /* ---------- 桌面端：侧栏常驻 ---------- */
 @media (min-width:1024px){
   body{font-size:calc(var(--fs) + 1px)}
@@ -725,6 +733,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
      不论脚本能不能跑、不论在浏览器还是快速查看里，打开就能看到 */
   .inline-toc{display:block;margin:0 0 var(--s5);padding:var(--s4) 0 var(--s5);
     border-bottom:1px solid var(--rule)}
+  .to-toc{display:flex}
   .inline-toc .toc{display:block;overflow:visible;padding:0;flex:none}
   .inline-toc .toc-item{min-height:40px}
   /* 抽屉里已有同一份目录，正文这份够用即可 */
@@ -733,6 +742,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 @media print{
   .sidebar,.bar,.progress,.scrim,.to-top,.pager,.cover-actions,.side-foot,
   .inline-toc{display:none!important}
+  .to-toc{display:none!important}
   body{background:#fff;color:#000;font-size:11pt}
   main{max-width:none;padding:0}
   .chapter{page-break-inside:avoid;padding-top:1.5em}
@@ -803,6 +813,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 
 <div class="scrim" id="scrim"></div>
 
+<a class="to-toc" id="btnToToc" href="#inline-toc" aria-label="回到目录">目录</a>
 <button class="to-top" id="btnTopFloat" aria-label="回到顶部">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
 </button>
@@ -1008,6 +1019,13 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     }
 
     bindTap($('btnMenu'), toggleSidebar);
+    // 常驻「目录」入口：有脚本时直接开抽屉（带当前章定位），比滚回顶部更好用；
+    // 无脚本时它就是个普通锚点，跳回正文顶部那份目录。
+    bindTap($('btnToToc'), function (e) {
+      if (isDesktop()) return;
+      if (e && e.preventDefault) e.preventDefault();
+      openSidebar(true);
+    });
     bindTap($('btnClose'), function () { openSidebar(false); });
     bindTap(scrim, function () { openSidebar(false); });
 
@@ -1287,7 +1305,7 @@ def main():
     stats = ('<span><b>%d</b>章</span><span><b>%d</b>问</span><span><b>%d</b>节解读</span>'
              % (len(chapters), questions, sum(len(v) for v in headings.values())))
     filename = (manifest.get('docx', {}).get('filename') or meta['book']).replace('.docx', '') + '.html'
-    inline_toc = ('<section class="inline-toc" aria-label="目录">'
+    inline_toc = ('<section class="inline-toc" id="inline-toc" aria-label="目录">'
                   '<p class="inline-toc-head">目录 <span>点章节标题即可跳转</span></p>'
                   + build_toc_html(chapters, headings, 'class="toc toc-copy"')
                   + '</section>')
