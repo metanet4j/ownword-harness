@@ -16,6 +16,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bookkit
+import scripture
 
 from bookkit import split_bold  # noqa: E402
 
@@ -150,12 +151,12 @@ def render_inline(text, anchors):
         pos = 0
         for m in INLINE_RE.finditer(seg):
             if m.start() > pos:
-                pieces.append(html.escape(seg[pos:m.start()], quote=False))
+                pieces.append(render_text(seg[pos:m.start()]))
             if m.group('img'):
                 src = m.group('src')
                 # 单文件必须自包含：远程图片既不内联（撑大体积）也不留请求，
                 # 构建时直接略过，避免标题区出现破图图标
-                if not re.match(r'(?:https?:)?//', src):
+                if not re.match(r'(?:https?://)?//', src):
                     pieces.append(f'<img src="{html.escape(src, quote=True)}" '
                                   f'alt="{html.escape(m.group("alt"), quote=False)}">')
             elif m.group('link'):
@@ -172,9 +173,36 @@ def render_inline(text, anchors):
                 pieces.append(f'<code>{html.escape(m.group(0)[1:-1], quote=False)}</code>')
             pos = m.end()
         if pos < len(seg):
-            pieces.append(html.escape(seg[pos:], quote=False))
+            pieces.append(render_text(seg[pos:]))
         chunk = ''.join(pieces)
         out.append(f'<strong>{chunk}</strong>' if bold else chunk)
+    return ''.join(out)
+
+
+# 圣经引用对照：由 main() 在 manifest 声明 scripture 段时注入
+SCRIPTURE = None
+
+
+def render_text(text):
+    """纯文本片段 → HTML，并把其中的「（卷 章:节）」变成可展开的经文对照。
+
+    只处理「整段括号都是出处」的情形（见 scripture.split_reference_block），
+    叙述句里的零散引用保持原样。
+    """
+    if not SCRIPTURE or '（' not in text:
+        return html.escape(text, quote=False)
+    out = []
+    pos = 0
+    for m in scripture.BRACKET_REF_RE.finditer(text):
+        block = SCRIPTURE.render_block(m.group(1), lambda s: html.escape(s, quote=False))
+        if block is None:
+            continue
+        out.append(html.escape(text[pos:m.start()], quote=False))
+        out.append(block)
+        pos = m.end()
+    if not out:
+        return html.escape(text, quote=False)
+    out.append(html.escape(text[pos:], quote=False))
     return ''.join(out)
 
 
@@ -1176,6 +1204,28 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 .audio audio{flex:1;min-width:0;height:34px}
 .jump{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-2)}
 
+/* ---------- 圣经引用对照 ----------
+   默认只显示出处（「诗篇 86:9」），点一下在下方展开和合本原文。
+   经文默认用 display:none 收起，展开时才参与布局，不占阅读空间。 */
+.refs{display:inline;font-family:var(--sans);font-size:.86em;line-height:1.6;color:var(--accent)}
+.ref{display:inline-block;padding:0 .22em;border-radius:4px;cursor:pointer;
+  border-bottom:1px dotted var(--accent-2);white-space:nowrap}
+.ref:hover{background:var(--accent-wash)}
+/* 源文写了和合本没有的节（本书 4 处，均为原文笔误）：标灰不可点 */
+.ref-miss{display:inline-block;padding:0 .22em;color:var(--muted);cursor:help;
+  border-bottom:1px dotted var(--rule-2);white-space:nowrap}
+.refs.open .ref{background:var(--accent-wash);border-bottom-style:solid}
+.ref-body{display:none}
+.refs.open+.ref-body{display:block}
+.ref-text-wrap{margin:.7em 0 1em;padding:var(--s3) var(--s4);background:var(--surface);
+  border-left:3px solid var(--accent-2);border-radius:0 var(--r1) var(--r1) 0;
+  font-family:var(--serif);font-size:.94em;line-height:1.85;color:var(--ink-2)}
+.ref-text{display:block;margin:.1em 0}
+.ref-v{display:block}
+.ref-v b{display:inline-block;min-width:1.7em;margin-right:.3em;color:var(--accent);
+  font-family:var(--sans);font-size:.78em;font-weight:700}
+.ref-text+.ref-text{border-top:1px dotted var(--rule);padding-top:.3em;margin-top:.3em}
+
 /* ---------- 章首导航条 ---------- */
 .chapter-nav{display:flex;align-items:center;gap:var(--s2);margin:0 0 var(--s5);padding:0 0 var(--s3);
   border-bottom:1px solid var(--rule);font-family:var(--sans);font-size:12.5px}
@@ -1592,6 +1642,59 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     var top = cur.offsetTop - toc.clientHeight / 2 + cur.offsetHeight / 2;
     if (top > 0) toc.scrollTop = top;
   }
+
+  /* ---------- 圣经引用对照：点出处展开原文 ----------
+     经文不预置在 DOM 里（1,640 处会多出上万节点），只以纯文本存在
+     data-text 上；首次展开时才切成段落插入，收起时只隐藏、不重建。 */
+  safe('引用', function () {
+    var wrap = document.querySelector('main');
+    if (!wrap || !document.querySelector('.refs')) return;
+
+    function panelFor(box) {
+      var body = box.nextElementSibling;
+      if (body && body.classList && body.classList.contains('ref-body')) return body;
+      var raw = box.getAttribute('data-text');
+      if (!raw) return null;
+      body = document.createElement('span');
+      body.className = 'ref-body';
+      var inner = document.createElement('span');
+      inner.className = 'ref-text-wrap';
+      raw.split('\n').forEach(function (line) {
+        var tab = line.indexOf('\t');
+        if (tab < 0) return;
+        var row = document.createElement('span');
+        row.className = 'ref-v';
+        var num = document.createElement('b');
+        num.textContent = line.slice(0, tab);
+        row.appendChild(num);
+        row.appendChild(document.createTextNode(line.slice(tab + 1)));
+        var para = document.createElement('span');
+        para.className = 'ref-text';
+        para.appendChild(row);
+        inner.appendChild(para);
+      });
+      body.appendChild(inner);
+      box.parentNode.insertBefore(body, box.nextSibling);
+      return body;
+    }
+
+    bindTap(wrap, function (e) {
+      var node = (e && e.target) || null;
+      while (node && node.nodeType !== 1) node = node.parentNode;
+      if (!node || !node.closest) return;
+      var tag = node.closest('.ref');
+      if (!tag) return;
+      var box = tag.parentNode;                    // .refs
+      if (!box.classList.contains('refs')) return;
+      // 同一处只保留一个展开面板
+      Array.prototype.forEach.call(document.querySelectorAll('.refs.open'), function (o) {
+        if (o !== box) o.classList.remove('open');
+      });
+      var body = panelFor(box);
+      if (!body) return;
+      box.classList.toggle('open');
+    });
+  });
 
   safe('导航', function () {
     sidebar = $('sidebar');
@@ -2184,6 +2287,12 @@ def main():
     chapters = manifest['chapters']
     verse_mode = bool(manifest.get('site', {}).get('verses'))
 
+    # 圣经引用对照：manifest 里声明 scripture 段时启用（见 lib/scripture.py）
+    global SCRIPTURE
+    SCRIPTURE = scripture.load(manifest)
+    if SCRIPTURE:
+        print(f'经文对照：{SCRIPTURE.source.dir}')
+
     anchors = {f"{ch['slug']}.md": 'ch-' + ch['slug'] for ch in chapters}
 
     parts, headings = [], {}
@@ -2286,6 +2395,10 @@ def main():
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(out)
     print(f'saved {filename}  chapters={len(chapters)}  size={os.path.getsize(filename) // 1024}KB')
+    if SCRIPTURE:
+        note = SCRIPTURE.report()
+        if note:
+            print('  ' + note)
     return 0
 
 
