@@ -84,6 +84,27 @@ hr{border:none;border-top:1px solid var(--rule);margin:2em 0}
 .icon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .icon-text{font-family:var(--serif);font-size:15px;font-weight:600;letter-spacing:.02em}
 
+/* ---------- 操作轻提示：换档后回执，避免「点了没反应」的错觉 ---------- */
+.toast{position:fixed;top:calc(58px + env(safe-area-inset-top));left:50%;transform:translate(-50%,-6px);
+  z-index:60;padding:6px 14px;border-radius:999px;border:1px solid var(--rule-2);
+  background:var(--card);color:var(--ink);font-family:var(--sans);font-size:13px;
+  box-shadow:0 3px 14px var(--shadow);opacity:0;pointer-events:none;
+  transition:opacity .18s,transform .18s;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- 字号档位面板：长按「Aa」或 Shift+点击打开 ---------- */
+.size-panel{position:fixed;top:calc(54px + env(safe-area-inset-top));right:var(--s3);z-index:60;
+  display:flex;align-items:center;gap:2px;padding:5px;border-radius:var(--r2);
+  border:1px solid var(--rule-2);background:var(--card);box-shadow:0 3px 14px var(--shadow);
+  font-family:var(--sans)}
+.size-panel[hidden]{display:none!important}
+.size-panel-label{flex:none;padding:0 6px;font-size:11.5px;letter-spacing:.1em;color:var(--muted)}
+.size-opt{min-width:34px;height:30px;border:1px solid transparent;border-radius:var(--r1);
+  background:transparent;color:var(--ink);font-family:var(--sans);font-size:13px;
+  font-variant-numeric:tabular-nums;cursor:pointer}
+.size-opt:hover{background:var(--accent-wash);color:var(--accent)}
+.size-opt.on{border-color:var(--accent);background:var(--accent-wash);color:var(--accent);font-weight:700}
+
 /* ---------- 布局 ---------- */
 .layout{display:block}
 /* 抽屉高度必须贴合可视视口：iOS 上 bottom:0 取的是布局视口，会让固定层超出窗口，
@@ -259,6 +280,28 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 .audio audio{flex:1;min-width:0;height:34px}
 .jump{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-2)}
 
+/* ---------- 圣经引用对照 ----------
+   默认只显示出处（「诗篇 86:9」），点一下在下方展开和合本原文。
+   经文默认用 display:none 收起，展开时才参与布局，不占阅读空间。 */
+.refs{display:inline;font-family:var(--sans);font-size:.86em;line-height:1.6;color:var(--accent)}
+.ref{display:inline-block;padding:0 .22em;border-radius:4px;cursor:pointer;
+  border-bottom:1px dotted var(--accent-2);white-space:nowrap}
+.ref:hover{background:var(--accent-wash)}
+/* 源文写了和合本没有的节（本书 4 处，均为原文笔误）：标灰不可点 */
+.ref-miss{display:inline-block;padding:0 .22em;color:var(--muted);cursor:help;
+  border-bottom:1px dotted var(--rule-2);white-space:nowrap}
+.refs.open .ref{background:var(--accent-wash);border-bottom-style:solid}
+.ref-body{display:none}
+.refs.open+.ref-body{display:block}
+.ref-text-wrap{margin:.7em 0 1em;padding:var(--s3) var(--s4);background:var(--surface);
+  border-left:3px solid var(--accent-2);border-radius:0 var(--r1) var(--r1) 0;
+  font-family:var(--serif);font-size:.94em;line-height:1.85;color:var(--ink-2)}
+.ref-text{display:block;margin:.1em 0}
+.ref-v{display:block}
+.ref-v b{display:inline-block;min-width:1.7em;margin-right:.3em;color:var(--accent);
+  font-family:var(--sans);font-size:.78em;font-weight:700}
+.ref-text+.ref-text{border-top:1px dotted var(--rule);padding-top:.3em;margin-top:.3em}
+
 /* ---------- 章首导航条 ---------- */
 .chapter-nav{display:flex;align-items:center;gap:var(--s2);margin:0 0 var(--s5);padding:0 0 var(--s3);
   border-bottom:1px solid var(--rule);font-family:var(--sans);font-size:12.5px}
@@ -355,6 +398,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 .inline-toc-head span{font-size:11px;font-weight:400;letter-spacing:.02em;color:var(--muted)}
 .nojs #numgrid{display:none!important}
 .nojs .tab,.nojs .search-wrap,.nojs .to-top,.nojs .progress,
+.nojs .toast,.nojs .size-panel,
 .nojs #btnSize,.nojs #btnTheme{display:none!important}
 .nojs .side-foot{display:none}
 @media (max-width:1023px){
@@ -1872,7 +1916,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
       </a>
       <div class="bar-title" id="barTitle"></div>
-      <button class="icon" id="btnSize" aria-label="调整字号" title="字号">
+      <button class="icon" id="btnSize" aria-label="调整字号" title="字号（点击换档，长按选档）">
         <span class="icon-text">Aa</span>
       </button>
       <button class="icon" id="btnTheme" aria-label="切换主题" title="主题">
@@ -1880,6 +1924,16 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
           <path d="M12 4a8 8 0 010 16z" fill="currentColor" stroke="none"/></svg>
       </button>
     </header>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="size-panel" id="sizePanel" hidden aria-label="选择字号">
+      <span class="size-panel-label">字号</span>
+      <button type="button" class="size-opt" data-size="15">15</button>
+      <button type="button" class="size-opt" data-size="17">17</button>
+      <button type="button" class="size-opt" data-size="19">19</button>
+      <button type="button" class="size-opt" data-size="21">21</button>
+      <button type="button" class="size-opt" data-size="23">23</button>
+      <button type="button" class="size-opt" data-size="25">25</button>
+    </div>
 
     <main>
       <span id="inline-toc"></span>
@@ -47215,7 +47269,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   };
   var THEMES = ['paper', 'plain', 'night'];
-  var SIZES = [15, 17, 19, 21];
+  /* 字号档位：从 15 到 25 px。上限比常见阅读器更宽一点 ——
+     视力不佳的读者需要更大的字，「Aa 点三下才回到起点」也不该是唯一入口。 */
+  var SIZES = [15, 17, 19, 21, 23, 25];
   var FONT_KEY = 'ow_book_theme', SIZE_KEY = 'ow_book_size', POS_KEY = 'ow_book_pos';
   var DESKTOP = '(min-width:1024px)';
 
@@ -47234,6 +47290,11 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     fail('脚本', ev.error || new Error(ev.message));
   });
 
+  /* 触摸能力判定：'ontouchstart' 在部分桌面 Chromium（如 headless、安卓平板
+     的桌面模式）上不暴露，maxTouchPoints 更可靠，两者取或。
+     放在最前面：设置模块的长按监听要用到它。 */
+  var HAS_TOUCH = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
   /* ---------- 主题与字号 ---------- */
   safe('设置', function () {
     // 用户没选过主题时跟随系统深色，选过则以用户为准
@@ -47245,20 +47306,91 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     }
     doc.setAttribute('data-theme', THEMES[theme]);
     var size = SIZES.indexOf(parseInt(store.get(SIZE_KEY, '17'), 10));
-    if (size < 0) size = 1;
+    if (size < 0) size = 2;
     doc.style.setProperty('--fs', SIZES[size] + 'px');
+
+    /* 轻提示：点击后短暂显示当前档位，让「变了没有」有明确回执 */
+    var toast = $('toast');
+    var toastTimer = 0;
+    function say(text) {
+      if (!toast) return;
+      toast.textContent = text;
+      toast.classList.add('on');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toast.classList.remove('on'); }, 1400);
+    }
 
     $('btnTheme').addEventListener('click', function () {
       var i = THEMES.indexOf(doc.getAttribute('data-theme'));
       i = (i + 1) % THEMES.length;
       doc.setAttribute('data-theme', THEMES[i]);
       store.set(FONT_KEY, THEMES[i]);
+      say({ paper: '纸色', plain: '素白', night: '夜间' }[THEMES[i]]);
     });
-    $('btnSize').addEventListener('click', function () {
-      var i = SIZES.indexOf(parseInt(doc.style.getPropertyValue('--fs'), 10));
-      i = (i + 1) % SIZES.length;
+
+    /* 字号：点「Aa」依次换档并提示当前 px；长按或点开面板可直接选档 */
+    function applySize(i) {
+      i = Math.max(0, Math.min(SIZES.length - 1, i));
       doc.style.setProperty('--fs', SIZES[i] + 'px');
       store.set(SIZE_KEY, String(SIZES[i]));
+      say('字号 ' + SIZES[i] + 'px');
+      var panel = $('sizePanel');
+      if (panel && !panel.hidden) {
+        Array.prototype.forEach.call(panel.querySelectorAll('.size-opt'), function (b) {
+          b.classList[Number(b.getAttribute('data-size')) === SIZES[i] ? 'add' : 'remove']('on');
+        });
+      }
+    }
+    $('btnSize').addEventListener('click', function (e) {
+      if (e && e.shiftKey) return openSizePanel();
+      var i = SIZES.indexOf(parseInt(doc.style.getPropertyValue('--fs'), 10));
+      applySize((i + 1) % SIZES.length);
+    });
+    // 长按「Aa」直接开档位面板，省得连点四五次
+    if (HAS_TOUCH) {
+      var pressTimer = 0;
+      var sizeBtn = $('btnSize');
+      sizeBtn.addEventListener('touchstart', function () {
+        clearTimeout(pressTimer);
+        pressTimer = setTimeout(openSizePanel, 550);
+      }, { passive: true });
+      ['touchend', 'touchmove', 'touchcancel'].forEach(function (ev) {
+        sizeBtn.addEventListener(ev, function () { clearTimeout(pressTimer); }, { passive: true });
+      });
+    }
+
+    function openSizePanel() {
+      var panel = $('sizePanel');
+      if (!panel) return;
+      panel.hidden = !panel.hidden;
+      if (!panel.hidden) {
+        Array.prototype.forEach.call(panel.querySelectorAll('.size-opt'), function (b) {
+          b.classList[Number(b.getAttribute('data-size'))
+            === parseInt(doc.style.getPropertyValue('--fs'), 10) ? 'add' : 'remove']('on');
+        });
+      }
+    }
+    var sizePanel = $('sizePanel');
+    if (sizePanel) {
+      Array.prototype.forEach.call(sizePanel.querySelectorAll('.size-opt'), function (b) {
+        b.addEventListener('click', function (e) {
+          if (e && e.preventDefault) e.preventDefault();
+          applySize(SIZES.indexOf(Number(b.getAttribute('data-size'))));
+          sizePanel.hidden = true;
+        });
+      });
+      // 点面板与「Aa」之外的任何地方都收起，别让它一直盖在正文上
+      document.addEventListener('click', function (e) {
+        if (sizePanel.hidden) return;
+        var t = e.target;
+        if (t && (t.closest ? (t.closest('#sizePanel') || t.closest('#btnSize')) : false)) return;
+        sizePanel.hidden = true;
+      });
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.target && e.target.tagName === 'INPUT') return;
+      if (e.key === '+' || e.key === '=') applySize(SIZES.indexOf(parseInt(doc.style.getPropertyValue('--fs'), 10)) + 1);
+      if (e.key === '-') applySize(SIZES.indexOf(parseInt(doc.style.getPropertyValue('--fs'), 10)) - 1);
     });
   });
 
@@ -47267,9 +47399,6 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 
   /* iOS 上只绑 click 会受 300ms 延迟与滚动取消影响：优先用触摸事件动作，
      触摸期间只要发生过位移就整段忽略（滚动结束不再当成点击） */
-  /* 触摸能力判定：'ontouchstart' 在部分桌面 Chromium（如 headless、安卓平板
-     的桌面模式）上不暴露，maxTouchPoints 更可靠，两者取或。 */
-  var HAS_TOUCH = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
   /* 章数多的书（见 page() 里的 .cv）开了 content-visibility，
      章节位置会随渲染变化，滚动停下后必须重测。 */
   var HAS_CV = doc.classList.contains('cv');
@@ -47410,6 +47539,59 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     var top = cur.offsetTop - toc.clientHeight / 2 + cur.offsetHeight / 2;
     if (top > 0) toc.scrollTop = top;
   }
+
+  /* ---------- 圣经引用对照：点出处展开原文 ----------
+     经文不预置在 DOM 里（1,640 处会多出上万节点），只以纯文本存在
+     data-text 上；首次展开时才切成段落插入，收起时只隐藏、不重建。 */
+  safe('引用', function () {
+    var wrap = document.querySelector('main');
+    if (!wrap || !document.querySelector('.refs')) return;
+
+    function panelFor(box) {
+      var body = box.nextElementSibling;
+      if (body && body.classList && body.classList.contains('ref-body')) return body;
+      var raw = box.getAttribute('data-text');
+      if (!raw) return null;
+      body = document.createElement('span');
+      body.className = 'ref-body';
+      var inner = document.createElement('span');
+      inner.className = 'ref-text-wrap';
+      raw.split('\n').forEach(function (line) {
+        var tab = line.indexOf('\t');
+        if (tab < 0) return;
+        var row = document.createElement('span');
+        row.className = 'ref-v';
+        var num = document.createElement('b');
+        num.textContent = line.slice(0, tab);
+        row.appendChild(num);
+        row.appendChild(document.createTextNode(line.slice(tab + 1)));
+        var para = document.createElement('span');
+        para.className = 'ref-text';
+        para.appendChild(row);
+        inner.appendChild(para);
+      });
+      body.appendChild(inner);
+      box.parentNode.insertBefore(body, box.nextSibling);
+      return body;
+    }
+
+    bindTap(wrap, function (e) {
+      var node = (e && e.target) || null;
+      while (node && node.nodeType !== 1) node = node.parentNode;
+      if (!node || !node.closest) return;
+      var tag = node.closest('.ref');
+      if (!tag) return;
+      var box = tag.parentNode;                    // .refs
+      if (!box.classList.contains('refs')) return;
+      // 同一处只保留一个展开面板
+      Array.prototype.forEach.call(document.querySelectorAll('.refs.open'), function (o) {
+        if (o !== box) o.classList.remove('open');
+      });
+      var body = panelFor(box);
+      if (!body) return;
+      box.classList.toggle('open');
+    });
+  });
 
   safe('导航', function () {
     sidebar = $('sidebar');
