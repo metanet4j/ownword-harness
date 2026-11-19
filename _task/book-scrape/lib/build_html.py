@@ -152,9 +152,12 @@ def render_inline(text, anchors):
             if m.start() > pos:
                 pieces.append(html.escape(seg[pos:m.start()], quote=False))
             if m.group('img'):
-                src = html.escape(m.group('src'), quote=True)
-                alt = html.escape(m.group('alt'), quote=False)
-                pieces.append(f'<img src="{src}" alt="{alt}" loading="lazy">')
+                src = m.group('src')
+                # 单文件必须自包含：远程图片既不内联（撑大体积）也不留请求，
+                # 构建时直接略过，避免标题区出现破图图标
+                if not re.match(r'(?:https?:)?//', src):
+                    pieces.append(f'<img src="{html.escape(src, quote=True)}" '
+                                  f'alt="{html.escape(m.group("alt"), quote=False)}">')
             elif m.group('link'):
                 label = html.escape(m.group('text'), quote=False)
                 href = m.group('href')
@@ -231,6 +234,32 @@ def render_block(block, anchors, hid=None):
         parts.append(f'</{tag}>')
         return ''.join(parts)
     return ''
+
+
+def drop_empty_headings(blocks):
+    """去掉下面没有任何内容的标题。
+
+    源站偶尔会留一个只有标题的小节（如「简介」章里那个空的「目录」），
+    它会在目录与「本章要点」里生成一条点了没反应的空条目。标题之后若
+    直到下一个同级或更高级标题都没有内容，就整条略过。
+    """
+    kept = []
+    for idx, block in enumerate(blocks):
+        if block['type'] not in ('h2', 'h3', 'h4', 'h5', 'h6'):
+            kept.append(block)
+            continue
+        level = int(block['type'][1])
+        empty = True
+        for nxt in blocks[idx + 1:]:
+            if nxt['type'] in ('h2', 'h3', 'h4', 'h5', 'h6'):
+                if int(nxt['type'][1]) <= level:
+                    break
+                continue
+            empty = False
+            break
+        if not empty:
+            kept.append(block)
+    return kept
 
 
 def render_body(blocks, anchors, cid=None, verse_mode=False, ch_index='v1'):
@@ -315,9 +344,10 @@ def render_body(blocks, anchors, cid=None, verse_mode=False, ch_index='v1'):
 
 
 def render_chapter(ch, md, anchors, pager='', nav_top='', summary='', verse_mode=False,
-                   ch_index='v1'):
+                   ch_index='v1', blocks=None):
     """渲染一章：标题 + 章首导航 + 本章要点 + 正文 + 章末导航。"""
-    blocks = parse_markdown(md)
+    if blocks is None:
+        blocks = drop_empty_headings(parse_markdown(md))
     body = [b for b in blocks if b['type'] != 'h1']
     title = ch['title']
     category = ch.get('category') or ''
@@ -651,16 +681,6 @@ VERSE_JS = r"""
       return verseIndex;
     }
 
-    function markText(text, q) {
-      var safe = text.replace(/[&<>]/g, function (c) {
-        return {'&': '&amp;', '<': '&lt;', '>': '&gt;'}[c];
-      });
-      var at = safe.toLowerCase().indexOf(q);
-      if (at < 0) return safe;
-      return safe.slice(0, at) + '<mark>' + safe.slice(at, at + q.length) + '</mark>'
-        + safe.slice(at + q.length);
-    }
-
     // 搜卷名、章号，也搜每一节的经文；命中直接列成可点的结果
     verseSearch = function (q, results) {
       var chapters = buildVerseIndex();
@@ -686,10 +706,14 @@ VERSE_JS = r"""
           return false;
         });
         if (hitId) {
+          // 取命中那一节的段落：父节点 textContent 自带行首节号（「28 凡劳苦…」），
+          // 会和上面的「太11:28」标签叠成「太11:2828」，先剥掉
+          var node = document.getElementById(hitId);
+          var para = (node.closest && node.closest('p.verse')) || node.parentNode;
           hits.push({
             id: hitId,
             ref: ref[1] + ref[2] + ':' + ref[3],
-            text: document.getElementById(hitId).parentNode.textContent
+            text: para.textContent.replace(/^\s*\d+(?:[–\-—]\d+)?\s*/, '')
           });
         }
       }
@@ -726,7 +750,7 @@ VERSE_JS = r"""
         parts.push('<a class="sr-hit" href="#' + hit.id + '">'
           + '<span class="sr-ref">' + hit.ref + '</span>'
           + (hit.whole || !hit.text ? ''
-             : '<span class="sr-text">' + markText(hit.text, q) + '</span>')
+             : '<span class="sr-text">' + markMatch(hit.text, q) + '</span>')
           + '</a>');
       });
       results.innerHTML = parts.join('');
@@ -880,7 +904,6 @@ TEMPLATE = r"""<!doctype html>
 
   --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC","Segoe UI",Roboto,sans-serif;
   --serif:"Songti SC","Source Han Serif SC","Noto Serif CJK SC","Noto Serif SC","SimSun","STSong",Georgia,"Times New Roman",serif;
-  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
 }
 html[data-theme="plain"]{
   --paper:#ffffff; --surface:#f7f7f5; --card:#ffffff;
@@ -888,7 +911,6 @@ html[data-theme="plain"]{
   --rule:#e6e6e1; --rule-2:#d6d6cf;
   --accent:#8f4520; --accent-2:#b9764a; --accent-wash:rgba(143,69,32,.08);
   --shadow:rgba(0,0,0,.10);
-  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
 }
 html[data-theme="night"]{
   --paper:#131519; --surface:#181b20; --card:#1e222a;
@@ -897,7 +919,6 @@ html[data-theme="night"]{
   --accent:#dd9c68; --accent-2:#b9793f; --accent-wash:rgba(221,156,104,.12);
   --on-accent:#241a12;
   --shadow:rgba(0,0,0,.5);
-  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
 }
 /* 无脚本环境（快速查看等）跟随系统深色；脚本能跑时由 JS 决定主题 */
 @media (prefers-color-scheme:dark){
@@ -913,7 +934,7 @@ html[data-theme="night"]{
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 body{
-  margin:0;background-color:var(--paper);background-image:var(--grain);
+  margin:0;background:var(--paper);
   color:var(--ink);font-family:var(--serif);font-size:var(--fs);line-height:var(--lh);
   -webkit-font-smoothing:antialiased;overflow-wrap:break-word;
   text-spacing-trim:space-first;
@@ -927,11 +948,11 @@ hr{border:none;border-top:1px solid var(--rule);margin:2em 0}
 /* ---------- 顶栏 ---------- */
 .progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;cursor:pointer}
 .progress span{display:block;height:100%;width:0;background:var(--accent);transition:width .12s linear}
+/* 顶栏不透明：实时 backdrop-filter 要在几十万字上做高斯模糊，
+   低端 Android 掉帧明显，纯色观感几乎没差 */
 .bar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:var(--s1);
   height:calc(54px + env(safe-area-inset-top));padding:env(safe-area-inset-top) var(--s2) 0;
-  background:var(--paper);background:color-mix(in srgb,var(--paper) 86%,transparent);
-  -webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px);
-  border-bottom:1px solid var(--rule)}
+  background:var(--paper);border-bottom:1px solid var(--rule)}
 .bar-title{flex:1;min-width:0;text-align:center;font-family:var(--sans);font-size:14.5px;font-weight:600;
   letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
 .icon{flex:none;display:flex;align-items:center;justify-content:center;width:40px;height:40px;
@@ -1011,8 +1032,11 @@ hr{border:none;border-top:1px solid var(--rule);margin:2em 0}
 .mark-row .del:hover{color:var(--accent);background:var(--accent-wash)}
 
 /* ---------- 封面（题名页） ---------- */
+/* 纸感靠一层静态径向渐变：只绘制一次，不随滚动重绘（原先铺满 body 的
+   feTurbulence 噪点每帧都要重新栅格化，是移动端滚动的主要开销） */
 .cover{min-height:calc(100svh - 54px);display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;padding:var(--s7) var(--s5) calc(var(--s6) + env(safe-area-inset-bottom))}
+  text-align:center;padding:var(--s7) var(--s5) calc(var(--s6) + env(safe-area-inset-bottom));
+  background-image:radial-gradient(circle at 50% 30%,var(--surface),transparent 70%)}
 .seal{width:50px;height:50px;border-radius:var(--r1);background:var(--accent);color:var(--on-accent);display:flex;
   align-items:center;justify-content:center;font-family:var(--serif);font-size:21px;font-weight:600;
   letter-spacing:.05em;margin-bottom:var(--s5);box-shadow:0 2px 10px var(--accent-wash)}
@@ -1148,6 +1172,15 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   border-radius:999px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);
   font-family:var(--sans);font-size:13px;font-weight:600;text-decoration:none;
   box-shadow:0 3px 14px var(--shadow)}
+/* 章末的「下一章」固定在右下：手机翻页不必先滑到章尾再找 pager，
+   和「目录」「回到顶部」竖着排，两两相隔 52px 不重叠 */
+.to-next{position:fixed;right:var(--s4);bottom:calc(var(--s4) + 108px + env(safe-area-inset-bottom));
+  z-index:35;display:none;align-items:center;justify-content:center;height:44px;padding:0 16px;
+  border-radius:999px;border:1px solid var(--rule-2);background:var(--card);color:var(--accent);
+  font-family:var(--sans);font-size:13px;font-weight:600;text-decoration:none;
+  box-shadow:0 3px 14px var(--shadow);max-width:40vw;overflow:hidden;
+  white-space:nowrap;text-overflow:ellipsis}
+.to-next[hidden]{display:none!important}
 .inline-toc{scroll-margin-top:64px}
 
 /* ---------- 桌面端：侧栏常驻 ---------- */
@@ -1207,6 +1240,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     border-bottom:1px solid var(--rule)}
   .js .inline-toc{display:none}
   .to-toc{display:flex}
+  .to-next{display:flex}
+  /* 无脚本时「下一章」没有脚本写入目标地址，留着就是个点了不动的按钮 */
+  .nojs .to-next{display:none!important}
   .inline-toc .toc{display:block;overflow:visible;padding:0;flex:none}
   .inline-toc .numgrid{flex:none;overflow:visible;padding:0;margin:0 0 var(--s3)}
   .inline-toc .numgrid-body{grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:4px}
@@ -1219,6 +1255,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   .sidebar,.bar,.progress,.scrim,.to-top,.pager,.cover-actions,.side-foot,
   .inline-toc,.verse-jump{display:none!important}
   .to-toc{display:none!important}
+  .to-next{display:none!important}
   body{background:#fff;color:#000;font-size:11pt}
   main{max-width:none;padding:0}
   .chapter{page-break-inside:avoid;padding-top:1.5em}
@@ -1300,6 +1337,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 <div class="scrim" id="scrim"></div>
 
 <a class="to-toc" id="btnToToc" href="#inline-toc" aria-label="回到目录">目录</a>
+<a class="to-next" id="btnNextFloat" href="#" aria-label="下一章" hidden>下一章 ›</a>
 <button class="to-top" id="btnTopFloat" aria-label="回到顶部">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
 </button>
@@ -1364,7 +1402,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 
   /* iOS 上只绑 click 会受 300ms 延迟与滚动取消影响：优先用触摸事件动作，
      触摸期间只要发生过位移就整段忽略（滚动结束不再当成点击） */
-  var HAS_TOUCH = 'ontouchstart' in window;
+  /* 触摸能力判定：'ontouchstart' 在部分桌面 Chromium（如 headless、安卓平板
+     的桌面模式）上不暴露，maxTouchPoints 更可靠，两者取或。 */
+  var HAS_TOUCH = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
   var TAP_SLOP = 10;
   var TOUCH_CLICK = false;
   function bindTap(node, action) {
@@ -1486,6 +1526,8 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     resumeBtn = $('resumeBtn');
     mq = window.matchMedia(DESKTOP);
 
+    /* 宽屏侧栏常驻（.on），窄屏必须收起来 —— 否则从宽屏缩窄窗口后，
+       抽屉会一直盖住页面，而且遮罩没开，点哪儿都像卡住。 */
     function syncLayout() {
       if (isDesktop()) {
         sidebar.classList.add('on');
@@ -1493,6 +1535,11 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         sidebar.style.height = '';
         lockBody(false);
         hideTop(false);
+      } else {
+        sidebar.classList.remove('on');
+        scrim.classList.remove('on');
+        sidebar.style.height = '';
+        lockBody(false);
       }
     }
     // 旧版 Safari 只有 addListener；这一步若抛错会连带后面全部失效，必须做回退
@@ -1504,6 +1551,31 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       window.visualViewport.addEventListener('resize', function () {
         if (sidebar.classList.contains('on') && !isDesktop()) syncViewport();
       });
+    }
+
+    /* 边缘手势：从屏幕左缘右滑拉出目录，抽屉内左滑关掉。
+       只看横向位移且要求明显大于纵向（否则会跟纵向滚动抢手势），
+       抽屉本身已设 touch-action:pan-y，纵向滚动照旧由浏览器处理。 */
+    if (HAS_TOUCH) {
+      var gx = 0, gy = 0, gOK = false;
+      document.addEventListener('touchstart', function (e) {
+        gOK = false;
+        if (isDesktop()) return;
+        var t = e.touches[0];
+        var open = sidebar.classList.contains('on');
+        // 关抽屉只认抽屉范围内的左滑；开抽屉只认屏幕左缘 24px 内的右滑
+        if (open && sidebar.contains(e.target)) gOK = true;
+        else if (!open && t.clientX <= 24) gOK = true;
+        gx = t.clientX; gy = t.clientY;
+      }, { passive: true });
+      document.addEventListener('touchend', function (e) {
+        if (!gOK) return;
+        gOK = false;
+        var t = e.changedTouches[0];
+        var dx = t.clientX - gx, dy = t.clientY - gy;
+        if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+        if (dx > 0) openSidebar(true); else closeSidebar();
+      }, { passive: true });
     }
 
     bindTap($('btnMenu'), toggleSidebar);
@@ -1695,15 +1767,105 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     var bar = $('bar');
     var barTitle = $('barTitle');
     var posText = $('posText');
+    var nextBtn = $('btnNextFloat');
     var lastId = null, lastHead = null, ticking = false;
-    // 经文类书把自己的全文检索挂在这里；普通书籍保持 null
+    // 经文类书把自己的全文检索挂在这里；普通书籍走下面的 buildTextIndex
     var verseSearch = null;
     {{VERSE_JS}}
+
+    /* 正文全文索引：惰性构建，只建一次。
+       每章只存「小节锚点 + 该小节起的纯文本」，不重复存 DOM 节点；
+       50 万字的书索引约 50 万字符的字符串量，能接受，但不该在首屏付这笔钱。 */
+    var textIndex = null;
+    function buildTextIndex() {
+      if (textIndex) return textIndex;
+      textIndex = [];
+      sections.forEach(function (sec) {
+        var title = sec.getAttribute('data-title') || '';
+        var body = sec.querySelector('.chapter-body');
+        if (!body) return;
+        // 按 h2 切段：每段记住自己的锚点，命中时直接跳过去
+        var anchor = sec.id, buf = [];
+        var flush = function () {
+          var text = buf.join(' ').replace(/\s+/g, ' ').trim();
+          if (text) {
+            textIndex.push({ id: anchor, ch: sec.id, title: title, text: text, lower: text.toLowerCase() });
+          }
+          buf = [];
+        };
+        Array.prototype.forEach.call(body.children, function (node) {
+          if (node.tagName === 'H2') {
+            flush();
+            if (node.id) anchor = node.id;
+            buf.push(node.textContent);
+            return;
+          }
+          var t = node.textContent;
+          if (t) buf.push(t);
+        });
+        flush();
+      });
+      return textIndex;
+    }
+
+    function renderTextSearch(q, results) {
+      var MAX = 60;
+      if (!q) {
+        results.hidden = true;
+        results.innerHTML = '';
+        toc.hidden = false;
+        return 0;
+      }
+      var index = buildTextIndex();
+      var hits = [];
+      for (var i = 0; i < index.length && hits.length < MAX; i++) {
+        var at = index[i].lower.indexOf(q);
+        if (at < 0) continue;
+        hits.push({ id: index[i].id, ref: index[i].title, text: index[i].text, at: at });
+      }
+      if (!hits.length) {
+        results.hidden = true;
+        results.innerHTML = '';
+        return 0;
+      }
+      var parts = ['<p class="sr-head">' + (hits.length >= MAX
+        ? '只列前 ' + MAX + ' 处命中' : hits.length + ' 处命中') + '</p>'];
+      hits.forEach(function (hit) {
+        // 命中位置前后各留一点上下文，比从头截断更能看出命中在哪
+        var from = Math.max(0, hit.at - 24);
+        var snip = (from > 0 ? '…' : '') + hit.text.slice(from, hit.at + q.length + 40) + '…';
+        parts.push('<a class="sr-hit" href="#' + hit.id + '">'
+          + '<span class="sr-ref">' + escapeHtml(hit.ref) + '</span>'
+          + '<span class="sr-text">' + markMatch(snip, q) + '</span></a>');
+      });
+      results.innerHTML = parts.join('');
+      results.hidden = false;
+      toc.hidden = true;
+      return hits.length;
+    }
+
+    function escapeHtml(text) {
+      return String(text).replace(/[&<>]/g, function (c) {
+        return {'&': '&amp;', '<': '&lt;', '>': '&gt;'}[c];
+      });
+    }
+
+    /* 命中词高亮：先转义再按小写定位，切片用原文长度，避免转义后的
+       实体（&amp; 等）把位置算错。经文检索共用这一份。 */
+    function markMatch(text, q) {
+      var esc = escapeHtml(text);
+      var at = String(text).toLowerCase().indexOf(q);
+      if (at < 0) return esc;
+      // 转义只可能让字符串更长，用原文切片再分别转义更稳妥
+      return escapeHtml(text.slice(0, at)) + '<mark>' + escapeHtml(text.slice(at, at + q.length))
+        + '</mark>' + escapeHtml(text.slice(at + q.length));
+    }
 
     function renderSearch(q) {
       q = q.trim().toLowerCase();
       var results = $('searchResults');
       if (verseSearch && results) { verseSearch(q, results); return; }
+      // 先在目录标题里找；一个都没有时再扫正文（避免每次都读 50 万字）
       var hit = 0;
       rows.forEach(function (row) {
         var item = row.querySelector('.toc-item');
@@ -1743,6 +1905,14 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         }
         p.style.display = any ? '' : 'none';
       });
+      // 目录没命中时才扫正文；目录有命中就够用了，不必再花时间读 50 万字。
+      // 正文命中仍然切成结果面板，两者不同时铺开，避免一次搜索出现两套列表。
+      var textHit = 0;
+      if (q && !hit) {
+        var results = $('searchResults');
+        if (results) textHit = renderTextSearch(q, results);
+        if (textHit) return;
+      }
       var empty = toc.querySelector('.toc-empty');
       if (q && !hit) {
         if (!empty) {
@@ -1756,9 +1926,19 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         empty.style.display = 'none';
       }
     }
-    search.addEventListener('input', function () { renderSearch(this.value); });
+    // 输入防抖：50 万字的正文扫描不该每次按键都跑一遍
+    var searchTimer = 0;
+    search.addEventListener('input', function () {
+      var value = this.value;
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(function () { renderSearch(value); }, 120);
+    });
     search.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { this.value = ''; renderSearch(''); }
+      if (e.key === 'Escape') {
+        clearTimeout(searchTimer);
+        this.value = '';
+        renderSearch('');
+      }
     });
 
     function markCurrent(id) {
@@ -1798,6 +1978,26 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       }
       return ans;
     }
+    /* 悬浮「下一章」：章末 pager 的手机替代品。目标直接取该章自带的
+       pager，不另存一份映射；最后一章没有下一篇就隐藏，不留死按钮。 */
+    var shownNext = '';
+    function syncNext(sec) {
+      if (!nextBtn) return;
+      var link = sec.querySelector('.pager a.next');
+      if (!link) {
+        if (shownNext) { shownNext = ''; nextBtn.hidden = true; }
+        return;
+      }
+      var href = link.getAttribute('href');
+      if (href === shownNext) return;
+      shownNext = href;
+      nextBtn.setAttribute('href', href);
+      // pager 里除标题外还有「下一篇」小字，这里把它去掉当提示文案
+      nextBtn.setAttribute('title',
+        link.textContent.replace(/^\s*下一篇\s*/, '').trim());
+      nextBtn.removeAttribute('hidden');
+    }
+
     // 上一次写进 DOM 的值：值没变就不碰，避免无谓的样式与重排
     var shownTitle = '', shownPos = '', posAt = 0;
     function onScroll() {
@@ -1821,6 +2021,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
           lastId = sec.id;
           markCurrent(sec.id);
           store.set(POS_KEY, sec.id);
+          syncNext(sec);
         }
         var titleText = pct + '% · ' + title;
         if (titleText !== shownTitle) { shownTitle = titleText; barTitle.textContent = titleText; }
@@ -1874,11 +2075,14 @@ def main():
         if not os.path.exists(path):
             raise SystemExit(f'缺少章节文件: {path}')
         md = open(path, encoding='utf-8').read()
+        # 整章只解析一次：编号、小节锚点与正文都从这一份 blocks 出发，
+        # 去掉空标题后再编号，目录与小节锚点因此不会错位
+        blocks = drop_empty_headings(parse_markdown(md))
 
         cid = 'ch-' + ch['slug']
         if verse_mode:
             total = 0
-            for b in parse_markdown(md):
+            for b in blocks:
                 if b['type'] != 'p':
                     continue
                 v = VERSE_LINE_RE.match(b['text'].strip())
@@ -1899,10 +2103,8 @@ def main():
 
         cid = 'ch-' + ch['slug']
         # 小节锚点与正文的 h2 顺序一一对应，先算出再传给渲染器做「本章要点」
-        heads = []
-        for b in parse_markdown(md):
-            if b['type'] == 'h2':
-                heads.append({'id': f'{cid}-s{len(heads) + 1}', 't': b['text']})
+        heads = [{'id': f'{cid}-s{n}', 't': b['text']}
+                 for n, b in enumerate((x for x in blocks if x['type'] == 'h2'), 1)]
         headings[cid] = heads
 
         nav_top = ['<nav class="chapter-nav" aria-label="章节导航">']
@@ -1920,7 +2122,7 @@ def main():
                        '<span class="sum-label">本章要点</span>' + links + '</nav>')
 
         rendered, _ = render_chapter(ch, md, anchors, pager, ''.join(nav_top), summary,
-                                     verse_mode, 'v%d' % (idx + 1))
+                                     verse_mode, 'v%d' % (idx + 1), blocks)
         if '问' in ch['title']:
             questions += 1
         parts.append(rendered)

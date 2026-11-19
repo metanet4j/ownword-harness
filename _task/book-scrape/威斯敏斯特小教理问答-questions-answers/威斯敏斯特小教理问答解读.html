@@ -27,7 +27,6 @@
 
   --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC","Segoe UI",Roboto,sans-serif;
   --serif:"Songti SC","Source Han Serif SC","Noto Serif CJK SC","Noto Serif SC","SimSun","STSong",Georgia,"Times New Roman",serif;
-  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
 }
 html[data-theme="plain"]{
   --paper:#ffffff; --surface:#f7f7f5; --card:#ffffff;
@@ -35,7 +34,6 @@ html[data-theme="plain"]{
   --rule:#e6e6e1; --rule-2:#d6d6cf;
   --accent:#8f4520; --accent-2:#b9764a; --accent-wash:rgba(143,69,32,.08);
   --shadow:rgba(0,0,0,.10);
-  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
 }
 html[data-theme="night"]{
   --paper:#131519; --surface:#181b20; --card:#1e222a;
@@ -44,7 +42,6 @@ html[data-theme="night"]{
   --accent:#dd9c68; --accent-2:#b9793f; --accent-wash:rgba(221,156,104,.12);
   --on-accent:#241a12;
   --shadow:rgba(0,0,0,.5);
-  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
 }
 /* 无脚本环境（快速查看等）跟随系统深色；脚本能跑时由 JS 决定主题 */
 @media (prefers-color-scheme:dark){
@@ -60,7 +57,7 @@ html[data-theme="night"]{
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 body{
-  margin:0;background-color:var(--paper);background-image:var(--grain);
+  margin:0;background:var(--paper);
   color:var(--ink);font-family:var(--serif);font-size:var(--fs);line-height:var(--lh);
   -webkit-font-smoothing:antialiased;overflow-wrap:break-word;
   text-spacing-trim:space-first;
@@ -74,11 +71,11 @@ hr{border:none;border-top:1px solid var(--rule);margin:2em 0}
 /* ---------- 顶栏 ---------- */
 .progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;cursor:pointer}
 .progress span{display:block;height:100%;width:0;background:var(--accent);transition:width .12s linear}
+/* 顶栏不透明：实时 backdrop-filter 要在几十万字上做高斯模糊，
+   低端 Android 掉帧明显，纯色观感几乎没差 */
 .bar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:var(--s1);
   height:calc(54px + env(safe-area-inset-top));padding:env(safe-area-inset-top) var(--s2) 0;
-  background:var(--paper);background:color-mix(in srgb,var(--paper) 86%,transparent);
-  -webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px);
-  border-bottom:1px solid var(--rule)}
+  background:var(--paper);border-bottom:1px solid var(--rule)}
 .bar-title{flex:1;min-width:0;text-align:center;font-family:var(--sans);font-size:14.5px;font-weight:600;
   letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
 .icon{flex:none;display:flex;align-items:center;justify-content:center;width:40px;height:40px;
@@ -158,8 +155,11 @@ hr{border:none;border-top:1px solid var(--rule);margin:2em 0}
 .mark-row .del:hover{color:var(--accent);background:var(--accent-wash)}
 
 /* ---------- 封面（题名页） ---------- */
+/* 纸感靠一层静态径向渐变：只绘制一次，不随滚动重绘（原先铺满 body 的
+   feTurbulence 噪点每帧都要重新栅格化，是移动端滚动的主要开销） */
 .cover{min-height:calc(100svh - 54px);display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;padding:var(--s7) var(--s5) calc(var(--s6) + env(safe-area-inset-bottom))}
+  text-align:center;padding:var(--s7) var(--s5) calc(var(--s6) + env(safe-area-inset-bottom));
+  background-image:radial-gradient(circle at 50% 30%,var(--surface),transparent 70%)}
 .seal{width:50px;height:50px;border-radius:var(--r1);background:var(--accent);color:var(--on-accent);display:flex;
   align-items:center;justify-content:center;font-family:var(--serif);font-size:21px;font-weight:600;
   letter-spacing:.05em;margin-bottom:var(--s5);box-shadow:0 2px 10px var(--accent-wash)}
@@ -295,6 +295,15 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   border-radius:999px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);
   font-family:var(--sans);font-size:13px;font-weight:600;text-decoration:none;
   box-shadow:0 3px 14px var(--shadow)}
+/* 章末的「下一章」固定在右下：手机翻页不必先滑到章尾再找 pager，
+   和「目录」「回到顶部」竖着排，两两相隔 52px 不重叠 */
+.to-next{position:fixed;right:var(--s4);bottom:calc(var(--s4) + 108px + env(safe-area-inset-bottom));
+  z-index:35;display:none;align-items:center;justify-content:center;height:44px;padding:0 16px;
+  border-radius:999px;border:1px solid var(--rule-2);background:var(--card);color:var(--accent);
+  font-family:var(--sans);font-size:13px;font-weight:600;text-decoration:none;
+  box-shadow:0 3px 14px var(--shadow);max-width:40vw;overflow:hidden;
+  white-space:nowrap;text-overflow:ellipsis}
+.to-next[hidden]{display:none!important}
 .inline-toc{scroll-margin-top:64px}
 
 /* ---------- 桌面端：侧栏常驻 ---------- */
@@ -354,6 +363,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     border-bottom:1px solid var(--rule)}
   .js .inline-toc{display:none}
   .to-toc{display:flex}
+  .to-next{display:flex}
+  /* 无脚本时「下一章」没有脚本写入目标地址，留着就是个点了不动的按钮 */
+  .nojs .to-next{display:none!important}
   .inline-toc .toc{display:block;overflow:visible;padding:0;flex:none}
   .inline-toc .numgrid{flex:none;overflow:visible;padding:0;margin:0 0 var(--s3)}
   .inline-toc .numgrid-body{grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:4px}
@@ -366,6 +378,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   .sidebar,.bar,.progress,.scrim,.to-top,.pager,.cover-actions,.side-foot,
   .inline-toc,.verse-jump{display:none!important}
   .to-toc{display:none!important}
+  .to-next{display:none!important}
   body{background:#fff;color:#000;font-size:11pt}
   main{max-width:none;padding:0}
   .chapter{page-break-inside:avoid;padding-top:1.5em}
@@ -404,10 +417,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 <a class="toc-item" href="#ch-000-简介">《威斯敏斯特小教理问答》解读</a>
 <div class="toc-kids">
 <a class="toc-sub" href="#ch-000-简介-s1">简介</a>
-<a class="toc-sub" href="#ch-000-简介-s2">目录</a>
-<a class="toc-sub" href="#ch-000-简介-s3">第一部分：序言</a>
-<a class="toc-sub" href="#ch-000-简介-s4">第二部分：我们当信什么</a>
-<a class="toc-sub" href="#ch-000-简介-s5">第三部分：我们当怎样行</a>
+<a class="toc-sub" href="#ch-000-简介-s2">第一部分：序言</a>
+<a class="toc-sub" href="#ch-000-简介-s3">第二部分：我们当信什么</a>
+<a class="toc-sub" href="#ch-000-简介-s4">第三部分：我们当怎样行</a>
 </div>
 </div>
 </div>
@@ -1183,7 +1195,6 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 <a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s4">解读4：上帝为什么奖赏说谎的接生婆和妓女喇合？</a>
 <a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s5">解读5：哪些言行会有损我们自己的好名声？</a>
 <a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s6">解读6：哪些言行会有损他人的好名声？</a>
-<a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s7"></a>
 </div>
 </div>
 <a class="toc-cat" href="#ch-079-第十条诫命是什么">二十六、第十条诫命</a>
@@ -1721,10 +1732,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 <a class="toc-item" href="#ch-000-简介">《威斯敏斯特小教理问答》解读</a>
 <div class="toc-kids">
 <a class="toc-sub" href="#ch-000-简介-s1">简介</a>
-<a class="toc-sub" href="#ch-000-简介-s2">目录</a>
-<a class="toc-sub" href="#ch-000-简介-s3">第一部分：序言</a>
-<a class="toc-sub" href="#ch-000-简介-s4">第二部分：我们当信什么</a>
-<a class="toc-sub" href="#ch-000-简介-s5">第三部分：我们当怎样行</a>
+<a class="toc-sub" href="#ch-000-简介-s2">第一部分：序言</a>
+<a class="toc-sub" href="#ch-000-简介-s3">第二部分：我们当信什么</a>
+<a class="toc-sub" href="#ch-000-简介-s4">第三部分：我们当怎样行</a>
 </div>
 </div>
 </div>
@@ -2500,7 +2510,6 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 <a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s4">解读4：上帝为什么奖赏说谎的接生婆和妓女喇合？</a>
 <a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s5">解读5：哪些言行会有损我们自己的好名声？</a>
 <a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s6">解读6：哪些言行会有损他人的好名声？</a>
-<a class="toc-sub" href="#ch-078-第九条诫命禁止什么-s7"></a>
 </div>
 </div>
 <a class="toc-cat" href="#ch-079-第十条诫命是什么">二十六、第十条诫命</a>
@@ -2774,7 +2783,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         <h1>《威斯敏斯特小教理问答》解读</h1>
         <p class="cover-en">The Westminster Shorter Catechism Explained</p>
         <div class="cover-meta"><p class="cover-row"><span class="cover-key">作者 / 解读</span><span class="cover-val">问答：威斯敏斯特会议（1647）；解读：托马斯·文森特（Thomas Vincent, 1634-1678）</span></p><p class="cover-row"><span class="cover-key">翻译</span><span class="cover-val">基督、使命与教会 译</span></p><p class="cover-row"><span class="cover-key">英文版</span><span class="cover-val">The Orthodox Presbyterian Church, 1956 版（中译底本）</span></p><p class="cover-source">来源：<a href="https://cmchurch.org/%e3%80%8a%e5%a8%81%e6%96%af%e6%95%8f%e6%96%af%e5%be%b7%e5%b0%8f%e6%95%99%e7%90%86%e9%97%ae%e7%ad%94%e3%80%8b/" target="_blank" rel="noopener noreferrer">cmchurch.org</a></p></div>
-        <div class="cover-stats"><span><b>108</b>章</span><span><b>108</b>问</span><span><b>491</b>节解读</span></div>
+        <div class="cover-stats"><span><b>108</b>章</span><span><b>108</b>问</span><span><b>489</b>节解读</span></div>
         <div class="cover-actions">
           <a class="btn primary" href="#ch-000-简介" data-jump>开始阅读</a>
           <a class="btn" id="resumeBtn" href="#ch-000-简介" data-jump style="display:none">继续阅读</a>
@@ -2788,20 +2797,19 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 <h1 class="chapter-title">《威斯敏斯特小教理问答》解读</h1>
 
 </header>
-<nav class="chapter-sum" aria-label="本章要点"><span class="sum-label">本章要点</span><a href="#ch-000-简介-s1">简介</a><a href="#ch-000-简介-s2">目录</a><a href="#ch-000-简介-s3">第一部分：序言</a><a href="#ch-000-简介-s4">第二部分：我们当信什么</a><a href="#ch-000-简介-s5">第三部分：我们当怎样行</a></nav>
+<nav class="chapter-sum" aria-label="本章要点"><span class="sum-label">本章要点</span><a href="#ch-000-简介-s1">简介</a><a href="#ch-000-简介-s2">第一部分：序言</a><a href="#ch-000-简介-s3">第二部分：我们当信什么</a><a href="#ch-000-简介-s4">第三部分：我们当怎样行</a></nav>
 <div class="chapter-body">
 <h2 id="ch-000-简介-s1"><span class="ht">简介</span></h2>
 <p>英国内战期间（1642-1651年，又称为清教徒革命），忠于宗教改革的清教徒（Puritans）在英格兰议会中占多数。他们立法废除由国王控制的主教制（episcopacy），准备在英格兰教会（圣公会，Anglican Church）实行共和式的长老制，并与持守改革宗教义、实行长老制的苏格兰联盟，所以于1643年开始在伦敦威斯敏斯特教堂召开了一个大型神学会议，前后至少有160位牧师、学者和议员参加，包括11位苏格兰代表。他们召开了一千多次会议，最终于1646年底完成了《威斯敏斯特信条 The Westminster Confession of Faith》。这一信条内容完整、精确、简洁、平衡，每个句子都经过小组的仔细斟酌和大会的公开辩论，并根据英格兰议会的要求加上了附注经文，是圣道的忠心仆人用生命为一次交付圣徒的真道所作出的不朽见证。</p>
 <p>威斯敏斯特会议在制定《威斯敏斯特信条》的同时，又于1647年底起草了《威斯敏斯特小教理问答 The Westminster Shorter Catechism》（又被译为《威斯敏斯特小要理问答》、《威斯敏斯德小教理问答》、《西敏斯特小教理问答》、《西敏斯特小要理问答》、《韦斯敏斯德小要理问答》等等）。它用字审慎、字义明晰，简明扼要地阐明了基督教的信仰，是教导孩童和初信者明白基要真理的指南。正如美国神学巨匠华腓德（B. B. Warfield，1851-1921年）所言，威斯敏斯特会议所留给后代的是「迄今为止人所撰述的最详尽的教义陈述」，始终散发出「属灵宗教最美的香气」。</p>
 <p>本中文版由本事工根据美国正信长老会（The Orthodox Presbyterian Church, OPC）的1956年版本译成，并在托马斯·文森特（Thomas Vincent，1634-1678年）所著《The Shorter Catechism Explained and from Scripture》的基础上编撰解读问题。</p>
 <p>我们应当花力气学习威斯敏斯特小教理问答吗？</p>
-<h2 id="ch-000-简介-s2"><span class="ht">目录</span></h2>
-<h2 id="ch-000-简介-s3"><span class="ht">第一部分：序言</span></h2>
+<h2 id="ch-000-简介-s2"><span class="ht">第一部分：序言</span></h2>
 <p><strong>一、人生的首要目的</strong></p>
 <ul><li>1问：人生的首要目的是什么？</li></ul>
 <p><strong>二、人生的惟一准则</strong></p>
 <ul><li>2问：上帝赐下什么准则，指导我们如何荣耀祂，并以祂为乐呢？</li></ul>
-<h2 id="ch-000-简介-s4"><span class="ht">第二部分：我们当信什么</span></h2>
+<h2 id="ch-000-简介-s3"><span class="ht">第二部分：我们当信什么</span></h2>
 <p><strong>三、圣经的主要教导</strong></p>
 <ul><li>3问：圣经的主要教导是什么？</li></ul>
 <p><strong>四、上帝是怎样的上帝</strong></p>
@@ -2826,7 +2834,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 <ul><li>32问：有效蒙召的人今生能享受什么恩惠？</li><li>33问：什么是称义？</li><li>34问：什么是得着儿子的名分？</li><li>35问：什么是成圣？</li><li>36问：直接间接随着称义、得着儿子的名分、成圣而来今生的恩惠有哪些？</li></ul>
 <p><strong>十四、救恩在今生之后的恩惠</strong></p>
 <ul><li>37问：信徒死时将从基督领受的恩惠是什么？</li><li>38问：信徒复活时将从基督领受的恩惠是什么？</li></ul>
-<h2 id="ch-000-简介-s5"><span class="ht">第三部分：我们当怎样行</span></h2>
+<h2 id="ch-000-简介-s4"><span class="ht">第三部分：我们当怎样行</span></h2>
 <p><strong>十五、道德律与十诫</strong></p>
 <ul><li>39问：上帝对人所要求的本分是什么？</li><li>40问：上帝起初向人启示了什么作为顺服祂的标准呢？</li><li>41问：道德律在哪里有简略的概括？</li><li>42问：十诫的总纲是什么？</li></ul>
 <p><strong>十六、十诫的序言</strong></p>
@@ -2871,7 +2879,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 <ul><li>101问：我们在第一祈愿中的祷告是什么？</li><li>102问：我们在第二祈愿中的祷告是什么？</li><li>103问：我们在第三祈愿中的祷告是什么？</li><li>104问：我们在第四祈愿中的祷告是什么？</li><li>105问：我们在第五祈愿中的祷告是什么？</li><li>106问：我们在第六祈愿中的祷告是什么？</li></ul>
 <p><strong>三十六、主祷文结语</strong></p>
 <ul><li>107：主祷文的结语教导我们什么？</li></ul>
-<p><img src="https://i0.wp.com/cmchurch.org/wp-content/uploads/2017/01/wcf.jpg?resize=500%2C333&amp;ssl=1" alt="wcf" loading="lazy"></p>
+<p></p>
 </div>
 <nav class="pager"><a class="next" href="#ch-001-人生的首要目的是什么"><span>下一篇</span>1问：人生的首要目的是什么？</a></nav>
 </section>
@@ -4860,7 +4868,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 <div class="qmark"><span class="qmark-n">78</span><span class="qmark-w">问</span></div><h1 class="chapter-title">第九条诫命禁止什么？</h1>
 
 </header>
-<nav class="chapter-sum" aria-label="本章要点"><span class="sum-label">本章要点</span><a href="#ch-078-第九条诫命禁止什么-s1">解读1：为什么上帝禁止说谎？</a><a href="#ch-078-第九条诫命禁止什么-s2">解读2：恶意的谎言当然不对，善意的、不伤害任何人的谎言可以说吗？</a><a href="#ch-078-第九条诫命禁止什么-s3">解读3：我们常常习惯于哪些「白谎」？</a><a href="#ch-078-第九条诫命禁止什么-s4">解读4：上帝为什么奖赏说谎的接生婆和妓女喇合？</a><a href="#ch-078-第九条诫命禁止什么-s5">解读5：哪些言行会有损我们自己的好名声？</a><a href="#ch-078-第九条诫命禁止什么-s6">解读6：哪些言行会有损他人的好名声？</a><a href="#ch-078-第九条诫命禁止什么-s7"></a></nav>
+<nav class="chapter-sum" aria-label="本章要点"><span class="sum-label">本章要点</span><a href="#ch-078-第九条诫命禁止什么-s1">解读1：为什么上帝禁止说谎？</a><a href="#ch-078-第九条诫命禁止什么-s2">解读2：恶意的谎言当然不对，善意的、不伤害任何人的谎言可以说吗？</a><a href="#ch-078-第九条诫命禁止什么-s3">解读3：我们常常习惯于哪些「白谎」？</a><a href="#ch-078-第九条诫命禁止什么-s4">解读4：上帝为什么奖赏说谎的接生婆和妓女喇合？</a><a href="#ch-078-第九条诫命禁止什么-s5">解读5：哪些言行会有损我们自己的好名声？</a><a href="#ch-078-第九条诫命禁止什么-s6">解读6：哪些言行会有损他人的好名声？</a></nav>
 <div class="chapter-body">
 <div class="answer"><span class="answer-tag">答</span><div class="answer-text"><strong>答：第九条诫命禁止一切不诚实（箴19:5；6:16-19）、或有损自己或他人名誉的言行（利19:16；诗15:3；路3:14）。</strong></div></div>
 <div class="en"><div class="en-row"><span class="en-tag">Q</span><span>What is forbidden in the ninth commandment?</span></div><div class="en-row"><span class="en-tag">A</span><span>The ninth commandment forbids whatsoever is prejudicial to truth, or injurious to our own or our neighbor’s good name.</span></div></div>
@@ -4877,7 +4885,6 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 <ol><li>行为不端：做任何羞辱主名的事，「因为尊重我的，我必重看他；藐视我的，他必被轻视。」（撒上2:30）。</li><li>骄傲自夸：「爱是不自夸，不张狂」（林前13:4），「凡自高的必降为卑，自卑的必升为高」（太23:12）。</li><li>故作谦虚：「不可让人因着故意谦虚……就夺去你们的奖赏」（西2:18）。</li></ol>
 <h2 id="ch-078-第九条诫命禁止什么-s6"><span class="idx">解读 6</span><span class="ht">哪些言行会有损他人的好名声？</span></h2>
 <ol><li>伪证诬告：或者自己作伪证，或者教唆他人作伪证，以损害他人：「谁都不可心里谋害邻舍，也不可喜爱起假誓。因为这些事都为我所恨恶。这是耶和华说的」（亚8:17），「作假见证的，必不免受罚。吐出谎言的，终不能逃脱」（箴19:5）。</li><li>论断他人：尤其是我们自己也有同样的过错，甚至比他人还严重的时候：「你们不要论断人，免得你们被论断……为什么看见你弟兄眼中有刺，却不想自己眼中有梁木呢」（太7:1,3），「你这论断人的，无论你是谁，也无可推诿，你在什么事上论断人，就在什么事上定自己的罪。因你这论断人的，自己所行却和别人一样」（罗2：1）。</li><li>毁谤他人：「耶和华啊，谁能寄居祢的帐幕？谁能住在祢的圣山？……他不以舌头谗谤人，不恶待朋友，也不随伙毁谤邻里」（诗15:1,3）</li><li>搬弄是非：「不可随伙布散谣言」（出23:1），「不可在民中往来搬弄是非」（利19:16），「并且他们又习惯懒惰，挨家闲游。不但是懒惰，又说长道短，好管闲事，说些不当说的话」（提前5:13）。</li></ol>
-<h2 id="ch-078-第九条诫命禁止什么-s7"><span class="ht"></span></h2>
 </div>
 <nav class="pager"><a class="prev" href="#ch-077-第九条诫命要求什么"><span>上一篇</span>77问：第九条诫命要求什么？</a><a class="next" href="#ch-079-第十条诫命是什么"><span>下一篇</span>79问：第十条诫命是什么？</a></nav>
 </section>
@@ -5560,6 +5567,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 <div class="scrim" id="scrim"></div>
 
 <a class="to-toc" id="btnToToc" href="#inline-toc" aria-label="回到目录">目录</a>
+<a class="to-next" id="btnNextFloat" href="#" aria-label="下一章" hidden>下一章 ›</a>
 <button class="to-top" id="btnTopFloat" aria-label="回到顶部">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
 </button>
@@ -5624,7 +5632,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 
   /* iOS 上只绑 click 会受 300ms 延迟与滚动取消影响：优先用触摸事件动作，
      触摸期间只要发生过位移就整段忽略（滚动结束不再当成点击） */
-  var HAS_TOUCH = 'ontouchstart' in window;
+  /* 触摸能力判定：'ontouchstart' 在部分桌面 Chromium（如 headless、安卓平板
+     的桌面模式）上不暴露，maxTouchPoints 更可靠，两者取或。 */
+  var HAS_TOUCH = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
   var TAP_SLOP = 10;
   var TOUCH_CLICK = false;
   function bindTap(node, action) {
@@ -5746,6 +5756,8 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     resumeBtn = $('resumeBtn');
     mq = window.matchMedia(DESKTOP);
 
+    /* 宽屏侧栏常驻（.on），窄屏必须收起来 —— 否则从宽屏缩窄窗口后，
+       抽屉会一直盖住页面，而且遮罩没开，点哪儿都像卡住。 */
     function syncLayout() {
       if (isDesktop()) {
         sidebar.classList.add('on');
@@ -5753,6 +5765,11 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         sidebar.style.height = '';
         lockBody(false);
         hideTop(false);
+      } else {
+        sidebar.classList.remove('on');
+        scrim.classList.remove('on');
+        sidebar.style.height = '';
+        lockBody(false);
       }
     }
     // 旧版 Safari 只有 addListener；这一步若抛错会连带后面全部失效，必须做回退
@@ -5764,6 +5781,31 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       window.visualViewport.addEventListener('resize', function () {
         if (sidebar.classList.contains('on') && !isDesktop()) syncViewport();
       });
+    }
+
+    /* 边缘手势：从屏幕左缘右滑拉出目录，抽屉内左滑关掉。
+       只看横向位移且要求明显大于纵向（否则会跟纵向滚动抢手势），
+       抽屉本身已设 touch-action:pan-y，纵向滚动照旧由浏览器处理。 */
+    if (HAS_TOUCH) {
+      var gx = 0, gy = 0, gOK = false;
+      document.addEventListener('touchstart', function (e) {
+        gOK = false;
+        if (isDesktop()) return;
+        var t = e.touches[0];
+        var open = sidebar.classList.contains('on');
+        // 关抽屉只认抽屉范围内的左滑；开抽屉只认屏幕左缘 24px 内的右滑
+        if (open && sidebar.contains(e.target)) gOK = true;
+        else if (!open && t.clientX <= 24) gOK = true;
+        gx = t.clientX; gy = t.clientY;
+      }, { passive: true });
+      document.addEventListener('touchend', function (e) {
+        if (!gOK) return;
+        gOK = false;
+        var t = e.changedTouches[0];
+        var dx = t.clientX - gx, dy = t.clientY - gy;
+        if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+        if (dx > 0) openSidebar(true); else closeSidebar();
+      }, { passive: true });
     }
 
     bindTap($('btnMenu'), toggleSidebar);
@@ -5955,15 +5997,105 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     var bar = $('bar');
     var barTitle = $('barTitle');
     var posText = $('posText');
+    var nextBtn = $('btnNextFloat');
     var lastId = null, lastHead = null, ticking = false;
-    // 经文类书把自己的全文检索挂在这里；普通书籍保持 null
+    // 经文类书把自己的全文检索挂在这里；普通书籍走下面的 buildTextIndex
     var verseSearch = null;
     
+
+    /* 正文全文索引：惰性构建，只建一次。
+       每章只存「小节锚点 + 该小节起的纯文本」，不重复存 DOM 节点；
+       50 万字的书索引约 50 万字符的字符串量，能接受，但不该在首屏付这笔钱。 */
+    var textIndex = null;
+    function buildTextIndex() {
+      if (textIndex) return textIndex;
+      textIndex = [];
+      sections.forEach(function (sec) {
+        var title = sec.getAttribute('data-title') || '';
+        var body = sec.querySelector('.chapter-body');
+        if (!body) return;
+        // 按 h2 切段：每段记住自己的锚点，命中时直接跳过去
+        var anchor = sec.id, buf = [];
+        var flush = function () {
+          var text = buf.join(' ').replace(/\s+/g, ' ').trim();
+          if (text) {
+            textIndex.push({ id: anchor, ch: sec.id, title: title, text: text, lower: text.toLowerCase() });
+          }
+          buf = [];
+        };
+        Array.prototype.forEach.call(body.children, function (node) {
+          if (node.tagName === 'H2') {
+            flush();
+            if (node.id) anchor = node.id;
+            buf.push(node.textContent);
+            return;
+          }
+          var t = node.textContent;
+          if (t) buf.push(t);
+        });
+        flush();
+      });
+      return textIndex;
+    }
+
+    function renderTextSearch(q, results) {
+      var MAX = 60;
+      if (!q) {
+        results.hidden = true;
+        results.innerHTML = '';
+        toc.hidden = false;
+        return 0;
+      }
+      var index = buildTextIndex();
+      var hits = [];
+      for (var i = 0; i < index.length && hits.length < MAX; i++) {
+        var at = index[i].lower.indexOf(q);
+        if (at < 0) continue;
+        hits.push({ id: index[i].id, ref: index[i].title, text: index[i].text, at: at });
+      }
+      if (!hits.length) {
+        results.hidden = true;
+        results.innerHTML = '';
+        return 0;
+      }
+      var parts = ['<p class="sr-head">' + (hits.length >= MAX
+        ? '只列前 ' + MAX + ' 处命中' : hits.length + ' 处命中') + '</p>'];
+      hits.forEach(function (hit) {
+        // 命中位置前后各留一点上下文，比从头截断更能看出命中在哪
+        var from = Math.max(0, hit.at - 24);
+        var snip = (from > 0 ? '…' : '') + hit.text.slice(from, hit.at + q.length + 40) + '…';
+        parts.push('<a class="sr-hit" href="#' + hit.id + '">'
+          + '<span class="sr-ref">' + escapeHtml(hit.ref) + '</span>'
+          + '<span class="sr-text">' + markMatch(snip, q) + '</span></a>');
+      });
+      results.innerHTML = parts.join('');
+      results.hidden = false;
+      toc.hidden = true;
+      return hits.length;
+    }
+
+    function escapeHtml(text) {
+      return String(text).replace(/[&<>]/g, function (c) {
+        return {'&': '&amp;', '<': '&lt;', '>': '&gt;'}[c];
+      });
+    }
+
+    /* 命中词高亮：先转义再按小写定位，切片用原文长度，避免转义后的
+       实体（&amp; 等）把位置算错。经文检索共用这一份。 */
+    function markMatch(text, q) {
+      var esc = escapeHtml(text);
+      var at = String(text).toLowerCase().indexOf(q);
+      if (at < 0) return esc;
+      // 转义只可能让字符串更长，用原文切片再分别转义更稳妥
+      return escapeHtml(text.slice(0, at)) + '<mark>' + escapeHtml(text.slice(at, at + q.length))
+        + '</mark>' + escapeHtml(text.slice(at + q.length));
+    }
 
     function renderSearch(q) {
       q = q.trim().toLowerCase();
       var results = $('searchResults');
       if (verseSearch && results) { verseSearch(q, results); return; }
+      // 先在目录标题里找；一个都没有时再扫正文（避免每次都读 50 万字）
       var hit = 0;
       rows.forEach(function (row) {
         var item = row.querySelector('.toc-item');
@@ -6003,6 +6135,14 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         }
         p.style.display = any ? '' : 'none';
       });
+      // 目录没命中时才扫正文；目录有命中就够用了，不必再花时间读 50 万字。
+      // 正文命中仍然切成结果面板，两者不同时铺开，避免一次搜索出现两套列表。
+      var textHit = 0;
+      if (q && !hit) {
+        var results = $('searchResults');
+        if (results) textHit = renderTextSearch(q, results);
+        if (textHit) return;
+      }
       var empty = toc.querySelector('.toc-empty');
       if (q && !hit) {
         if (!empty) {
@@ -6016,9 +6156,19 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         empty.style.display = 'none';
       }
     }
-    search.addEventListener('input', function () { renderSearch(this.value); });
+    // 输入防抖：50 万字的正文扫描不该每次按键都跑一遍
+    var searchTimer = 0;
+    search.addEventListener('input', function () {
+      var value = this.value;
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(function () { renderSearch(value); }, 120);
+    });
     search.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { this.value = ''; renderSearch(''); }
+      if (e.key === 'Escape') {
+        clearTimeout(searchTimer);
+        this.value = '';
+        renderSearch('');
+      }
     });
 
     function markCurrent(id) {
@@ -6058,6 +6208,26 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       }
       return ans;
     }
+    /* 悬浮「下一章」：章末 pager 的手机替代品。目标直接取该章自带的
+       pager，不另存一份映射；最后一章没有下一篇就隐藏，不留死按钮。 */
+    var shownNext = '';
+    function syncNext(sec) {
+      if (!nextBtn) return;
+      var link = sec.querySelector('.pager a.next');
+      if (!link) {
+        if (shownNext) { shownNext = ''; nextBtn.hidden = true; }
+        return;
+      }
+      var href = link.getAttribute('href');
+      if (href === shownNext) return;
+      shownNext = href;
+      nextBtn.setAttribute('href', href);
+      // pager 里除标题外还有「下一篇」小字，这里把它去掉当提示文案
+      nextBtn.setAttribute('title',
+        link.textContent.replace(/^\s*下一篇\s*/, '').trim());
+      nextBtn.removeAttribute('hidden');
+    }
+
     // 上一次写进 DOM 的值：值没变就不碰，避免无谓的样式与重排
     var shownTitle = '', shownPos = '', posAt = 0;
     function onScroll() {
@@ -6081,6 +6251,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
           lastId = sec.id;
           markCurrent(sec.id);
           store.set(POS_KEY, sec.id);
+          syncNext(sec);
         }
         var titleText = pct + '% · ' + title;
         if (titleText !== shownTitle) { shownTitle = titleText; barTitle.textContent = titleText; }
