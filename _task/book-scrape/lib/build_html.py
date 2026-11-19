@@ -270,11 +270,10 @@ def render_body(blocks, anchors, cid=None, verse_mode=False, ch_index='v1'):
     verse_lines = []
 
     def flush_verses():
-        """经文按「一行一节」输出，并在行首静态写好节锚点。
+        """经文按「一行一节」输出，行首静态写好节锚点与节号。
 
-        锚点用短 id（v<章序号>_<节号>）：一节约 22 字节就能既显节号又可跳转，
-        不执行脚本的预览里这些锚点照样有效；段落与跳转框仍是脚本生成，
-        31,000 多节不必各写一层 <p> 与 <a>。
+        锚点用短 id（v<章序号>_<节号>）：不执行脚本的预览里这些锚点照样有效，
+        节号静态写着，预览里直接可读；有脚本时再包成可点击的段落。
         """
         if verse_lines:
             out.append('<div class="verses">%s</div>' % '\n'.join(verse_lines))
@@ -568,7 +567,8 @@ def build_index(chapters, headings):
 
 
 def page(meta, chapters_html, toc_html, numgrid_html, stats, filename, first_id,
-         inline_toc_html='', search_hint='搜索问答或解读标题', verse_mode=False):
+         inline_toc_html='', search_hint='搜索问答或解读标题', verse_mode=False,
+         cv_height=0):
     title = meta.get('book', '')
     cover_rows = [
         ('作者 / 解读', meta.get('author')),
@@ -590,6 +590,14 @@ def page(meta, chapters_html, toc_html, numgrid_html, stats, filename, first_id,
                 if meta.get('title_en') else '')
 
     page_html = TEMPLATE
+    # 章数多的书（圣经 1189 章）开启按需渲染：屏幕外的章节不参与布局。
+    # 阈值取 200 —— 百章以内的书整页布局本来就在一帧内。
+    chapter_count = chapters_html.count('<section class="chapter"')
+    if chapter_count > 200:
+        page_html = page_html.replace(
+            '<html lang="zh-CN" class="nojs"',
+            '<html lang="zh-CN" class="nojs cv" style="--cvh:%dpx"' % (cv_height or 2800),
+            1)
     page_html = page_html.replace('{{TITLE}}', html.escape(title, quote=False))
     page_html = page_html.replace('{{TITLE_EN}}', title_en)
     page_html = page_html.replace('{{COVER_ROWS}}', rows)
@@ -800,24 +808,41 @@ VERSE_JS_END = r"""
     (function initVerses() {
       var blocks = document.querySelectorAll('.verses');
       if (!blocks.length) return;
+      // 静态行是「<span id="v1_1"></span>1 起初，神创造天地。」+ 换行：
+      // 节号静态写着（无脚本预览里就看得到），脚本按行切成 <p class="verse">，
+      // 并把静态锚点搬进新段落，再加一个可点击的 .vnum 覆盖在同一位置。
       var re = /^(\d+)(?:[–\-—](\d+))?\s+([\s\S]*)$/;
       Array.prototype.forEach.call(blocks, function (block) {
         var sec = block.closest('.chapter');
         var prefix = sec ? (sec.getAttribute('data-vid') || '') + '_' : '';
-        var lines = block.textContent.split(/\n+/);
-        // 静态节锚点要在重建段落时搬进新 <p>，不能随 textContent 一起清掉
+        // 静态锚点要在重建段落时搬进新 <p>，不能随文本一起丢掉
         var anchors = {};
         Array.prototype.forEach.call(block.querySelectorAll('span[id]'), function (sp) {
           anchors[sp.id] = sp;
         });
+        // 逐子节点攒行：文本里的 \n 才是分行依据（white-space:pre-line 只是显示）
+        var lines = [];
+        var buf = [];
+        Array.prototype.forEach.call(block.childNodes, function (node) {
+          var parts = node.textContent.split(/\n/);
+          if (node.nodeType === 1) buf.push({ el: node });
+          parts.forEach(function (part, idx) {
+            if (idx > 0) { lines.push(buf); buf = []; }
+            if (part) buf.push({ text: part });
+          });
+        });
+        if (buf.length) lines.push(buf);
         var frag = document.createDocumentFragment();
-        lines.forEach(function (line) {
-          line = line.replace(/^\s+|\s+$/g, '');
-          if (!line) return;
-          var m = re.exec(line);
+        lines.forEach(function (cells) {
+          var text = '', nodes = [];
+          cells.forEach(function (c) { if (c.el) nodes.push(c.el); else text += c.text; });
+          text = text.replace(/^\s+|\s+$/g, '');
+          if (!text && !nodes.length) return;
+          var m = re.exec(text);
           if (!m) {
+            if (!text) return;
             var plain = document.createElement('p');
-            plain.textContent = line;
+            plain.textContent = text;
             frag.appendChild(plain);
             return;
           }
@@ -826,9 +851,10 @@ VERSE_JS_END = r"""
           var p = document.createElement('p');
           p.className = 'verse';
           p.setAttribute('data-verse', prefix + start);
+          nodes.forEach(function (el) { p.appendChild(el); });
           for (var n = start; n <= end; n += 1) {
             var sp = anchors[prefix + n];
-            if (sp) p.appendChild(sp);
+            if (sp && nodes.indexOf(sp) < 0) p.appendChild(sp);
           }
           var a = document.createElement('a');
           a.className = 'vnum';
@@ -1071,6 +1097,10 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 .chapter{padding:var(--s7) 0 var(--s4);border-top:1px solid var(--rule);
   scroll-margin-top:calc(54px + env(safe-area-inset-top) + 10px)}
 .chapter-head{margin-bottom:var(--s5)}
+/* 章节超过 ~200 时开启按需渲染：屏幕外的章节跳过样式与布局，首屏能快一倍。
+   contain-intrinsic-size 取该书的平均章高，否则滚动条长度会明显偏。
+   未渲染章节的高度只是估算，跳转后由 jumpTo 再校正一次落点。 */
+.cv .chapter{content-visibility:auto;contain-intrinsic-size:auto var(--cvh,2800px)}
 .kicker{margin:0 0 var(--s3);font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.16em;
   color:var(--accent)}
 .qmark{display:flex;align-items:baseline;gap:.34em;margin:0 0 .1em}
@@ -1405,6 +1435,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   /* 触摸能力判定：'ontouchstart' 在部分桌面 Chromium（如 headless、安卓平板
      的桌面模式）上不暴露，maxTouchPoints 更可靠，两者取或。 */
   var HAS_TOUCH = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+  /* 章数多的书（见 page() 里的 .cv）开了 content-visibility，
+     章节位置会随渲染变化，滚动停下后必须重测。 */
+  var HAS_CV = doc.classList.contains('cv');
   var TAP_SLOP = 10;
   var TOUCH_CLICK = false;
   function bindTap(node, action) {
@@ -1480,6 +1513,16 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     var top = el.getBoundingClientRect().top + scrollPos() - barH - 14;
     var far = Math.abs(top - scrollPos()) > window.innerHeight * 3;
     scrollToY(Math.max(top, 0), !far);
+    // 章节用了 content-visibility:auto，目标未渲染过时它的高度只是估算值，
+    // 落点会差几十到上百像素。下一帧按真实位置再校正一次。
+    if (far) {
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () {
+          var fix = el.getBoundingClientRect().top - barH - 14;
+          if (Math.abs(fix) > 2) scrollToY(el.getBoundingClientRect().top + scrollPos() - barH - 14, false);
+        });
+      });
+    }
   }
   /* 键盘弹出时可视视口会变矮，抽屉高度跟着可视视口走 */
   function syncViewport() {
@@ -1961,11 +2004,16 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 
     /* 滚动联动的性能关键：章节与小节的位置只量一次，之后滚动只做二分查找。
        原先每帧都读 offsetTop —— 500K 字的文档一次强制回流要十几毫秒，
-       再叠加同帧内的 DOM 写入，手机上滑动静止帧率就掉下去了。 */
-    var secTop = [], headTop = [];
+       再叠加同帧内的 DOM 写入，手机上滑动静止帧率就掉下去了。
+
+       例外：章数多的书启用了 content-visibility，屏幕外章节的高度只是估算，
+       滚动经过时会逐段变成真实高度，缓存随之失效。这里在滚动停止后
+       重测一次（滚动进行中不测，避免卡顿），再校正当前章。 */
+    var secTop = [], headTop = [], measuredAt = 0, remeasureTimer = 0;
     function measure() {
       secTop = sections.map(function (el) { return el.offsetTop; });
       headTop = heads.map(function (el) { return el.offsetTop; });
+      measuredAt = Date.now();
       posText.setAttribute('data-chars',
         Math.max(1, (document.querySelector('main') || document.body).textContent.length));
     }
@@ -2040,6 +2088,16 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         var head = hi >= 0 ? heads[hi] : null;
         var hid = head ? head.id : null;
         if (hid !== lastHead) { lastHead = hid; markHead(head); }
+
+        // content-visibility：滚动停下 300ms 后重测一次，让缓存跟上
+        // 逐段渲染出来的真实高度；不重测的话越往后章节标题越对不上。
+        if (HAS_CV) {
+          clearTimeout(remeasureTimer);
+          remeasureTimer = setTimeout(function () {
+            measure();
+            onScroll();
+          }, 300);
+        }
       });
     }
 {{VERSE_JS_END}}
@@ -2070,6 +2128,7 @@ def main():
     parts, headings = [], {}
     verse_counts = {}
     questions = 0
+    cv_chars = cv_chapters = 0
     for idx, ch in enumerate(chapters):
         path = f"{ch['slug']}.md"
         if not os.path.exists(path):
@@ -2126,6 +2185,10 @@ def main():
         if '问' in ch['title']:
             questions += 1
         parts.append(rendered)
+        # 平均章高：只用来给 content-visibility 的占位估算一个接近的值，
+        # 按「每章标题 + 正文文本量」粗算即可（真实高度由浏览器渲染后接管）
+        cv_chars += len(md)
+        cv_chapters += 1
 
     head_count = sum(len(v) for v in headings.values())
     stats = '<span><b>%d</b>章</span>' % len(chapters)
@@ -2137,18 +2200,28 @@ def main():
     has_numbers = any(chapter_number(ch['title']) is not None for ch in chapters)
     numgrid_inline = (build_numgrid(chapters, 'class="numgrid" id="numgrid-inline"')
                       if has_numbers else '')
-    toc_inline = build_toc_html(chapters, headings, 'class="toc toc-copy"', verse_counts)
-    inline_toc = ('<section class="inline-toc" id="inline-toc" aria-label="目录">'
-                  '<p class="inline-toc-head">目录 <span>%s</span></p>'
-                  % ('点标题或问号即可跳转' if has_numbers else '点卷名展开章号')
-                  + numgrid_inline + toc_inline + '</section>')
+    # 经文类书（圣经）的卷-章目录本身就有 150 KB 以上，正文里再存一份副本
+    # 纯粹是重复：它的窄屏抽屉本来就能用 CSS :target 打开，不依赖这份兜底。
+    # 但 #inline-toc 这个锚点被章首「目录」与右下角按钮引用，留一个空占位，
+    # 无脚本时按它仍能跳回目录位置（有脚本时这些入口改开抽屉）。
+    inline_toc = '<span id="inline-toc"></span>' if verse_mode else (
+        '<section class="inline-toc" id="inline-toc" aria-label="目录">'
+        '<p class="inline-toc-head">目录 <span>%s</span></p>'
+        % ('点标题或问号即可跳转' if has_numbers else '点卷名展开章号')
+        + numgrid_inline + build_toc_html(chapters, headings, 'class="toc toc-copy"', verse_counts)
+        + '</section>')
+    # 平均章高估算：正文每 1,000 字符约 2,400px（17px/1.95 行高、手机宽度），
+    # 加上章首标题与上下留白约 500px。只影响滚动条长度的初值。
+    cv_height = 0
+    if cv_chapters:
+        cv_height = int(min(6000, max(800, cv_chars / cv_chapters / 1000 * 2400 + 500)))
     out = page(meta, '\n'.join(parts),
                build_toc_html(chapters, headings, verse_counts=verse_counts),
                build_numgrid(chapters) if has_numbers else '',
                stats, filename,
                'ch-' + chapters[0]['slug'], inline_toc,
                search_hint='搜索经文或卷章' if verse_mode else '搜索问答或解读标题',
-               verse_mode=verse_mode)
+               verse_mode=verse_mode, cv_height=cv_height)
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(out)
     print(f'saved {filename}  chapters={len(chapters)}  size={os.path.getsize(filename) // 1024}KB')
