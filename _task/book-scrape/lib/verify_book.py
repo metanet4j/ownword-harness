@@ -47,7 +47,9 @@ def chapter_paragraphs(d, mf, ch, soup_cache):
     for p in c.find_all('p'):
         txt = re.sub(r'\s+', '', p.get_text())
         if len(txt) > 30:
-            out.append(txt)
+            # 源页面用「1.」「2.」手写序号，产物里由有序列表样式接管，
+            # Word 的列表序号不进段落文本：比对时剥掉序号，否则一律误报缺失
+            out.append(re.sub(r'^\d+[.)、]', '', txt))
     return out
 
 

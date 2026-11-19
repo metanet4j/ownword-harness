@@ -223,7 +223,8 @@ def main():
                 p.paragraph_format.space_after = Pt(4)
                 r.body(p, text, size=10, color=RGBColor(0x60, 0x60, 0x60))
             elif t == 'li':
-                p = doc.add_paragraph(style='List Bullet')
+                # 有序列表用 List Number 保住序号（本书导言的「重要主题」是编号段落）
+                p = doc.add_paragraph(style='List Number' if b.get('num') else 'List Bullet')
                 p.paragraph_format.line_spacing = cfg['line_spacing']
                 p.paragraph_format.space_after = Pt(3)
                 r.body(p, text)

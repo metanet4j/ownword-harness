@@ -162,7 +162,8 @@ def to_blocks(md):
         m = re.match(r'^(\d+)\.\s+(.*)$', line)
         if m:
             flush()
-            blocks.append({'type': 'li', 'text': m.group(2).strip()})
+            blocks.append({'type': 'li', 'text': m.group(2).strip(),
+                           'num': int(m.group(1))})
             continue
         para.append(line.strip())
     flush()
