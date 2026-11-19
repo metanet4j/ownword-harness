@@ -76,7 +76,7 @@ WalletIdentityPort 提供 Q-ID-02，PublicIdentityResolver 提供 Q-ID-01，Prof
 @startuml
 actor User
 participant "Identity Application" as App
-participant "Transaction Support" as Tx
+participant "Backend Transaction" as Tx
 participant "Wallet / SDK Action" as W
 participant "Sync / Public Query" as Q
 App -> W: 读取本人身份与操作能力
@@ -106,7 +106,7 @@ end
 | 事件引用 | 生产方 | 主要消费方 |
 | --- | --- | --- |
 | EV-ID-01 | Wallet Adapter | Identity Application / Review |
-| EV-ID-02 | Identity Application | Transaction Support |
+| EV-ID-02 | Identity Application | Backend Transaction |
 | EV-ID-03/04 | Wallet / Transaction Adapter | 执行日志与恢复服务 |
 | EV-ID-05/06/07 | 公共解析与历史验证 | Identity/Profile 投影及业务回读 |
 | EV-ID-08 | Artifact | Identity / Explorer 查询组合 |
@@ -117,7 +117,7 @@ end
 
 | 端口 | 用途与失败语义 |
 | --- | --- |
-| `WalletIdentityPort` | 读取本人身份，委托发布、资料更新和轮换；由 Wallet Integration 适配，不持有私钥 |
+| `WalletIdentityPort` | 读取本人身份，委托发布、资料更新和轮换；由 Frontend Wallet 适配，不持有私钥 |
 | `WalletExecutionPort` | 委托高层 Action 或支持的两阶段执行，并恢复原 reference / TxID，见支撑域 |
 | `PublicIdentityResolver` | 返回公共身份及来源/覆盖；上游 404 不能直接变为 NOT_PUBLISHED |
 | `PublicBapHistoryResolver` | 读取初始化、Rotation、冲突与重组证据，服务历史签名归属；不承担本人首次发布许可 |
@@ -167,6 +167,6 @@ end
 | §12.7 类型声明 | 产品 / Protocol / Wallet Adapter | 类型映射、授权与实际声明样例 |
 | §12.8 公共覆盖与历史归属 | Identity / Indexer / Verifier | 覆盖定义、轮换、同块顺序、未确认与 reorg 样例 |
 | §12.1/§12.4 编号与 Binding | Artifact / Indexer | 公开关联、Origin、编号与重组 fixtures |
-| §9.2.4 原执行恢复 | Wallet / Transaction Support | 固定版本的拒绝、中断、丢回执与重启恢复样例 |
+| §9.2.4 原执行恢复 | Frontend Wallet / Backend Transaction | 固定版本的拒绝、中断、丢回执与重启恢复样例 |
 
 上述实施门禁保持开放；文档收敛不代表技术契约、真实钱包或主网已经验收。

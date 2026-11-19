@@ -10,7 +10,7 @@
 
 | 需要了解 | 文档 | 内容边界 |
 | --- | --- | --- |
-| 能力、模型、端口与状态 | [领域设计](领域设计-支撑域-v0.4.0-20261118-141904.md) | Wallet Integration、Transaction Support、Chain / Ordinal Query；SUP-01~10、恢复与验收 |
+| 能力、模型、端口与状态 | [领域设计](领域设计-支撑域-v0.4.0-20261118-141904.md) | Frontend Wallet、Backend Transaction、Backend Chain Query；SUP-01~10、恢复与验收 |
 | Yours / 1sat 接口与源码依据 | [上游接入依据](../../contracts/upstream/接入依据-Yours与1sat-20261118-164032.md) | 固定依赖证据、HTTP 路径、鉴权/密钥、线上只读观测；不作为 OwnWord 已批准 API |
 | 前端钱包与交易执行 | [钱包接入实现设计](../../frontend/supporting/实现设计-钱包与交易执行-v0.4.0-20261118-164032.md) | 固定版本 Action 调用链、签名/提交、Atomic BEEF 与 rawTx、丢回执恢复 |
 | Java 查询与同步接入 | [后端实现设计](../../backend/supporting/实现设计-链与Ordinal查询-v0.4.0-20261118-164032.md) | JDK HttpClient、binary/JSON/SSE、现有查询与同步改造点 |

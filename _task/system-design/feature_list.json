@@ -816,10 +816,10 @@
     },
     {
       "id": "domain-subdomain-context-v040",
-      "name": "核心认知补子域类型与限界上下文定义",
+      "name": "核心认知补子域类型与限界上下文，按前后端重划上下文",
       "status": "needs-review",
-      "goal": "在核心认知 §5 结构中定义子域类型（SD-01~12）与限界上下文，给出两套空间的关系与本产品承载映射，并让 domain-design 技能改为引用而非各自描述。",
-      "scope": "核心认知 §2.1 术语表与 §5.1；core-principle 的核心认知模版；新增 domain-design 技能及其 references；Domain 入口编写规范；任务状态记录。不改业务代码、原型、契约或既有领域设计正文。",
+      "goal": "在核心认知 §5 结构中定义子域类型（SD-01~12）、限界上下文，并按执行端把上下文划分为前端与后端两套边界，给出各端的权威来源与接口归属。",
+      "scope": "核心认知 §2.1 术语表、§5.1、§5.2；上下文映射与 Domain 入口；ADR-002 交易执行归属；core-principle 的核心认知模版；新增 domain-design 技能及其 references；任务状态记录。不改业务代码、原型或契约。",
       "dependencies": [
         "用户要求子域类型归入核心认知结构，并要求补充限界上下文",
         "core-principle 的十维要求（结构维：子系统与模块职责划分）",
@@ -828,7 +828,9 @@
       ],
       "doneCriteria": [
         "核心认知 §5.1.1 给出子域判定标准、SD-01~12 编号与判定依据、四条边界规则",
-        "核心认知 §5.1.2 给出限界上下文定义、与子域的两空间关系、8 个上下文的承载映射与五条边界规则",
+        "核心认知 §5.1.2 给出限界上下文定义，并按执行端划分为前端 6 个、后端 6 个、共享 1 个上下文，各自标注权威来源与边界说明",
+        "核心认知 §5.2 按执行端标注 12 个接口归属：前端 5 个（WalletProvider 为唯一交易执行入口），后端 7 个只读与准入端口",
+        "上下文映射按执行端重写，Mermaid 协作图区分前后端，跨上下文约束明确交易只在钱包侧执行、后端不持私钥",
         "§2.1 术语表登记子域类型与限界上下文，指向对应章节",
         "既有 §5.4、#5-结构 等锚点与引用保持有效；新增编号不与既有前缀冲突",
         "domain-design 技能三份文件改为引用 §5.1.1/§5.1.2，围栏成对、相对链接可解析",
@@ -843,7 +845,10 @@
       "reviewStatus": "awaiting-user-review",
       "evidence": [
         "核心认知 §5.1.1 子域类型：三类型判定标准与投入方式、SD-01~12（4 核心域 / 4 支撑域 / 4 通用域）含判定依据、四条边界规则",
-        "核心认知 §5.1.2 限界上下文：定义、问题空间与解决方案空间的关系、8 个上下文承载子域与业务模块映射、五条边界规则；解决 §5.1 六模块与上下文映射八上下文的划分分歧",
+        "核心认知 §5.1.2 按执行端划分限界上下文：前端 Frontend Wallet / Identity / Content / Artifact / Relationship / Reading 六个，后端 Backend Identity / Content / Artifact / Relationship / Transaction / Chain Query 六个，加 Cross-end Reader 共享一个；各端权威来源不同（前端 Wallet、后端 Bitcoin）",
+        "核心认知 §5.2 的 12 个领域接口按执行端归属，WalletProvider 明确为唯一交易执行入口，后端新增 IdentityReader/ContentReader/ArtifactReader/RelationshipReader/TransactionIntake 五个只读与准入端口",
+        "上下文映射重写为前后端两套上下文，Mermaid 图区分 FE/BE 子图；跨上下文约束写入「交易只在钱包侧执行」「后端不持有私钥」「同一子域两端模型不同」三条",
+        "ADR-002 记录交易执行统一由 Yours Wallet 完成的决策；核心认知 §5.4 同步改为「metanet4j 只解析和验证交易，不构造待签交易」",
         "核心认知 §2.1 新增子域类型与限界上下文两条术语，指向 §5.1.1/§5.1.2",
         "domain-design 技能按三轮子代理评审修补：修正 §5.1→§10 界限引用错配、补编号缺口与 OQ-nn、补验收映射表与定义引用表、模版骨架路径改为落地目算、交付检查补 feature_list/progress 证据门禁",
         "core-principle 补齐失效引用：新增 references/core-cognition-template.md，按实际核心认知提炼 15 节骨架、逐节要求、编号约定（E-/V-/Q-/F-/REL-/EV-/SD-）、完工检查与文档分工；与核心认知章节逐节比对完全一致",
