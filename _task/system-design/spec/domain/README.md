@@ -15,6 +15,7 @@
 
 ## 编写规范
 
+- 领域设计按七维组织：目的、结构、功能、关系、属性、状态、边界。结构、各维判据与交付检查按 [domain-design 技能](../../../../.agents/skills/domain-design/SKILL.md)；可复制骨架见[七维模版](../../../../.agents/skills/domain-design/references/domain-design-template.md)。
 - 统一使用核心认知中的 `BapIdentity / BapProfile / BapId / BapNFT / IdentityNFTBinding` 等术语。
 - 稳定的实体/值对象、聚合归属、字段约束、关系基数、业务状态机、事件可信度和异常边界先定义于核心认知。Domain 按编号/章节引用，写用例如何调用端口、分配责任及映射验收，不维护第二份定义表。
 - DTO 字段/状态转换和代码调用归 Frontend/Backend，实现接口归 Contracts；Domain 不写 React Hook、Spring Controller 或 Mongo 集合细节。
