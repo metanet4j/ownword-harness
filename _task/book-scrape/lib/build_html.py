@@ -270,10 +270,11 @@ def render_body(blocks, anchors, cid=None, verse_mode=False, ch_index='v1'):
     verse_lines = []
 
     def flush_verses():
-        """经文按「一行一节」输出，行首静态写好节锚点与节号。
+        """经文按「一行一节」输出：行首是节号，随后是经文。
 
-        锚点用短 id（v<章序号>_<节号>）：不执行脚本的预览里这些锚点照样有效，
-        节号静态写着，预览里直接可读；有脚本时再包成可点击的段落。
+        节锚点不写进静态 HTML —— 31,000 个空 span 要 780 KB，
+        而这套阅读器的目标环境是浏览器，脚本会按行号生成 <p class="verse">
+        与 #v<章>_<节> 锚点，体积与节点数都省下来。
         """
         if verse_lines:
             out.append('<div class="verses">%s</div>' % '\n'.join(verse_lines))
@@ -288,12 +289,7 @@ def render_body(blocks, anchors, cid=None, verse_mode=False, ch_index='v1'):
                 start = int(v.group(1))
                 end = int(v.group(2) or start)
                 label = str(start) if start == end else f'{start}–{end}'
-                # 静态节锚点：短 id + 空 span，一节约 22 字节，预览里也能跳
-                anchor = f'<span id="{ch_index}_{start}"></span>'
-                if end > start:
-                    anchor += ''.join(f'<span id="{ch_index}_{n}"></span>'
-                                      for n in range(start + 1, end + 1))
-                verse_lines.append(f'{anchor}{label} '
+                verse_lines.append(f'{label} '
                                    f'{html.escape(v.group(3), quote=False)}')
                 i += 1
                 continue
@@ -835,46 +831,25 @@ VERSE_JS_END = r"""
     });
 
     // 把每章「一行一节」的文本生成段落、节锚点与章首跳转框。
-    // 31,000 多节不在静态 HTML 里各写一层标记，单文件因此能小四成；
-    // 文本本来就在页面里，关掉脚本仍按行显示，只是没有节锚点。
+    // 31,000 多节不在静态 HTML 里各写一层标记：静态只存「节号 经文」，
+    // 段落、#v<章>_<节> 锚点与可点的节号都由这里生成。
     (function initVerses() {
       var blocks = document.querySelectorAll('.verses');
       if (!blocks.length) return;
-      // 静态行是「<span id="v1_1"></span>1 起初，神创造天地。」+ 换行：
-      // 节号静态写着（无脚本预览里就看得到），脚本按行切成 <p class="verse">，
-      // 并把静态锚点搬进新段落，再加一个可点击的 .vnum 覆盖在同一位置。
       var re = /^(\d+)(?:[–\-—](\d+))?\s+([\s\S]*)$/;
       Array.prototype.forEach.call(blocks, function (block) {
         var sec = block.closest('.chapter');
         var prefix = sec ? (sec.getAttribute('data-vid') || '') + '_' : '';
-        // 静态锚点要在重建段落时搬进新 <p>，不能随文本一起丢掉
-        var anchors = {};
-        Array.prototype.forEach.call(block.querySelectorAll('span[id]'), function (sp) {
-          anchors[sp.id] = sp;
-        });
-        // 逐子节点攒行：文本里的 \n 才是分行依据（white-space:pre-line 只是显示）
-        var lines = [];
-        var buf = [];
-        Array.prototype.forEach.call(block.childNodes, function (node) {
-          var parts = node.textContent.split(/\n/);
-          if (node.nodeType === 1) buf.push({ el: node });
-          parts.forEach(function (part, idx) {
-            if (idx > 0) { lines.push(buf); buf = []; }
-            if (part) buf.push({ text: part });
-          });
-        });
-        if (buf.length) lines.push(buf);
+        // 静态文本按 \n 分行（white-space:pre-line 只是显示效果，textContent 里确有 \n）
+        var lines = block.textContent.split(/\n+/);
         var frag = document.createDocumentFragment();
-        lines.forEach(function (cells) {
-          var text = '', nodes = [];
-          cells.forEach(function (c) { if (c.el) nodes.push(c.el); else text += c.text; });
-          text = text.replace(/^\s+|\s+$/g, '');
-          if (!text && !nodes.length) return;
-          var m = re.exec(text);
+        lines.forEach(function (line) {
+          line = line.replace(/^\s+|\s+$/g, '');
+          if (!line) return;
+          var m = re.exec(line);
           if (!m) {
-            if (!text) return;
             var plain = document.createElement('p');
-            plain.textContent = text;
+            plain.textContent = line;
             frag.appendChild(plain);
             return;
           }
@@ -883,10 +858,11 @@ VERSE_JS_END = r"""
           var p = document.createElement('p');
           p.className = 'verse';
           p.setAttribute('data-verse', prefix + start);
-          nodes.forEach(function (el) { p.appendChild(el); });
+          // 并节（如 29–30）共用一个段落，两个锚点都挂在段首
           for (var n = start; n <= end; n += 1) {
-            var sp = anchors[prefix + n];
-            if (sp && nodes.indexOf(sp) < 0) p.appendChild(sp);
+            var sp = document.createElement('span');
+            sp.id = prefix + n;
+            p.appendChild(sp);
           }
           var a = document.createElement('a');
           a.className = 'vnum';
@@ -918,14 +894,23 @@ VERSE_JS_END = r"""
         var staticCount = head.querySelector('.chapter-count');
         if (staticCount) staticCount.style.display = 'none';
       });
-      // 直接打开 #v1_35 这类节链接时，浏览器解析阶段锚点已在静态文本里，
-      // 但高亮与滚动定位要等段落生成后再补一次
+      /* 直接打开 #v1008_35 这类节链接：锚点由脚本生成，浏览器的原生跳转
+         早已错过。首屏布局在 load 之后才稳定（尤其开了按需渲染），
+         这里等 load + 两帧再定位，之后再补一次校正兜底。 */
       if (/^#v\d+_/.test(location.hash)) {
-        var target = document.getElementById(location.hash.slice(1));
-        if (target) {
+        var goHash = function () {
+          var target = document.getElementById(location.hash.slice(1));
+          if (!target) return;
           markHit(target.closest ? target.closest('.verse') : null);
           jumpTo(location.hash);
-        }
+          // 章节真实高度可能要再等一次重排才定下来，补一次校正
+          setTimeout(function () { jumpTo(location.hash); }, 260);
+        };
+        var kick = function () {
+          window.requestAnimationFrame(function () { window.requestAnimationFrame(goHash); });
+        };
+        if (document.readyState === 'complete') kick();
+        else window.addEventListener('load', kick);
       }
     })();
 """
@@ -1130,6 +1115,9 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
    contain-intrinsic-size 取该书的平均章高，否则滚动条长度会明显偏。
    未渲染章节的高度只是估算，跳转后由 jumpTo 再校正一次落点。 */
 .cv .chapter{content-visibility:auto;contain-intrinsic-size:auto var(--cvh,2800px)}
+/* 被跳转命中的章节退出按需渲染：它的高度一旦是估算值，落到节就会偏，
+   而且恢复按需渲染的瞬间位置还会再变一次。 */
+.cv .chapter.pin{content-visibility:visible}
 .kicker{margin:0 0 var(--s3);font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.16em;
   color:var(--accent)}
 .qmark{display:flex;align-items:baseline;gap:.34em;margin:0 0 .1em}
@@ -1537,23 +1525,36 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       window.scrollTo(0, top);
     }
   }
-  /* 跳转与经文深链都要用：放在模块作用域，别藏在某个 safe() 闭包里 */
+  /* 跳转与经文深链都要用：放在模块作用域，别藏在某个 safe() 闭包里。
+
+     content-visibility 让屏幕外章节的高度只是估算值，直接算落点会偏几百
+     像素。做法：先给目标章节挂 .pin 让它真实排版，量准位置再跳，
+     跳完摘掉 .pin —— 该章节已在视口内，浏览器会记住它的真实高度
+     （contain-intrinsic-size:auto 就是干这个的）。 */
   function jumpTo(hash) {
     var id = decodeURIComponent(String(hash).replace(/^#/, ''));
     var el = document.getElementById(id);
     if (!el) return;
+    var root = document.documentElement;
+    var sec = el.closest ? el.closest('.chapter') : null;
+    if (sec && root.classList.contains('cv')) {
+      // 让目标章节退出按需渲染并强制整页重排，之后量到的才是真实位置
+      sec.classList.add('pin');
+      void document.body.offsetHeight;
+    }
     var barH = document.querySelector('.bar').offsetHeight;
-    var top = el.getBoundingClientRect().top + scrollPos() - barH - 14;
-    var far = Math.abs(top - scrollPos()) > window.innerHeight * 3;
-    scrollToY(Math.max(top, 0), !far);
-    // 章节用了 content-visibility:auto，目标未渲染过时它的高度只是估算值，
-    // 落点会差几十到上百像素。下一帧按真实位置再校正一次。
-    if (far) {
+    var top = el.getBoundingClientRect().top + scrollPos() - barH - 18;
+    scrollToY(Math.max(top, 0), false);
+    if (sec) {
+      /* 摘 pin 后这章退回按需渲染，占位高度与刚才不同会让落点偏移几百像素。
+         把真实高度写进 contain-intrinsic-size 让它一致，再补一次校正兜底。 */
+      sec.style.containIntrinsicSize = 'auto ' + sec.offsetHeight + 'px';
       window.requestAnimationFrame(function () {
-        window.requestAnimationFrame(function () {
-          var fix = el.getBoundingClientRect().top - barH - 14;
-          if (Math.abs(fix) > 2) scrollToY(el.getBoundingClientRect().top + scrollPos() - barH - 14, false);
-        });
+        sec.classList.remove('pin');
+        setTimeout(function () {
+          var fix = el.getBoundingClientRect().top - barH - 18;
+          if (Math.abs(fix) > 2) scrollToY(Math.max(scrollPos() + fix, 0), false);
+        }, 80);
       });
     }
   }
