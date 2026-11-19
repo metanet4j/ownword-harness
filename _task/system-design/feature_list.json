@@ -819,7 +819,7 @@
       "name": "核心认知补子域类型与限界上下文定义",
       "status": "needs-review",
       "goal": "在核心认知 §5 结构中定义子域类型（SD-01~12）与限界上下文，给出两套空间的关系与本产品承载映射，并让 domain-design 技能改为引用而非各自描述。",
-      "scope": "核心认知 §2.1 术语表与 §5.1；新增 domain-design 技能及其 references；Domain 入口编写规范；任务状态记录。不改业务代码、原型、契约或既有领域设计正文。",
+      "scope": "核心认知 §2.1 术语表与 §5.1；core-principle 的核心认知模版；新增 domain-design 技能及其 references；Domain 入口编写规范；任务状态记录。不改业务代码、原型、契约或既有领域设计正文。",
       "dependencies": [
         "用户要求子域类型归入核心认知结构，并要求补充限界上下文",
         "core-principle 的十维要求（结构维：子系统与模块职责划分）",
@@ -832,11 +832,13 @@
         "§2.1 术语表登记子域类型与限界上下文，指向对应章节",
         "既有 §5.4、#5-结构 等锚点与引用保持有效；新增编号不与既有前缀冲突",
         "domain-design 技能三份文件改为引用 §5.1.1/§5.1.2，围栏成对、相对链接可解析",
+        "core-principle 的核心认知模版落地：15 个二级章节与实际核心认知逐节一致，含逐节要求、编号约定、完工检查",
         "人工复核前保持 needs-review，不标记 done"
       ],
       "prdVersion": "v0.4.0",
       "prdSource": "_task/system-design/spec/prd/v0.4.0/设计文档v0.4.0-个人主页-20260918.md",
       "output": "_task/system-design/spec/核心认知.md",
+      "cognitionTemplate": ".agents/skills/core-principle/references/core-cognition-template.md",
       "implementationStatus": "documentation-written-and-checks-passed",
       "reviewStatus": "awaiting-user-review",
       "evidence": [
@@ -844,7 +846,8 @@
         "核心认知 §5.1.2 限界上下文：定义、问题空间与解决方案空间的关系、8 个上下文承载子域与业务模块映射、五条边界规则；解决 §5.1 六模块与上下文映射八上下文的划分分歧",
         "核心认知 §2.1 新增子域类型与限界上下文两条术语，指向 §5.1.1/§5.1.2",
         "domain-design 技能按三轮子代理评审修补：修正 §5.1→§10 界限引用错配、补编号缺口与 OQ-nn、补验收映射表与定义引用表、模版骨架路径改为落地目算、交付检查补 feature_list/progress 证据门禁",
-        "验证：核心认知 8 个上下文名与上下文映射一致，SD 编号 12 个唯一，§5 结构完整；技能三文件围栏成对、围栏外断链 0、骨架路径在 domain/content/ 实测可解析",
+        "core-principle 补齐失效引用：新增 references/core-cognition-template.md，按实际核心认知提炼 15 节骨架、逐节要求、编号约定（E-/V-/Q-/F-/REL-/EV-/SD-）、完工检查与文档分工；与核心认知章节逐节比对完全一致",
+        "验证：核心认知 8 个上下文名与上下文映射一致，SD 编号 12 个唯一，§5 结构完整；技能三文件围栏成对、围栏外断链 0、骨架路径在 domain/content/ 实测可解析；核心认知模版围栏 28 个成对、断链 0",
         "未执行：真实钱包、主网、Java/TS 运行时验证；本次仅文档与技能规则"
       ],
       "nextStep": "用户复核子域分类判定与限界上下文承载映射；确认后按 domain-design 七维重写 Artifact 或 Content 领域设计验证模版。",

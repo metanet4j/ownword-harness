@@ -12,6 +12,8 @@ description: >-
 
 本技能把 [core-principle](../core-principle/SKILL.md) 的核心认知要求落成领域设计文档的七维结构、内容判据、职责归属和交付检查；十维到七维的对应见下节，本技能不另立一套标准。产品事实与定义来自[核心认知](../../../_task/system-design/spec/核心认知.md)，写作遵循[沟通与写作](../../../standard/沟通与写作-20260917-194638.md)，目录、命名与审批遵循[_task/system-design 规则](../../../_task/system-design/AGENTS.md)，领域入口与编写规范遵循 [Domain 入口](../../../_task/system-design/spec/domain/README.md)。
 
+核心认知自身的章节骨架见 [core-principle 的核心认知模版](../core-principle/references/core-cognition-template.md)；需要新建或重写核心认知时按该模版执行，本技能只负责下游领域文档。
+
 领域设计回答一个问题：**这个上下文按什么理由存在、怎么组织、做什么、和谁怎么连、靠什么识别、如何变化、边界在哪。**
 
 ## 唯一认知标准
