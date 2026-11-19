@@ -828,7 +828,7 @@
       ],
       "doneCriteria": [
         "核心认知 §5.1.1 给出子域判定标准、SD-01~12 编号与判定依据、四条边界规则",
-        "核心认知 §5.1.2 给出限界上下文定义，并按执行端划分为前端 6 个、后端 6 个、共享 1 个上下文，各自标注权威来源与边界说明",
+        "核心认知 §5.1.2 给出限界上下文定义，并按执行端划分为前端 6 个、后端 6 个上下文，各自标注权威来源与边界说明",
         "核心认知 §5.2 按执行端标注 12 个接口归属：前端 5 个（WalletProvider 为唯一交易执行入口），后端 7 个只读与准入端口",
         "上下文映射按执行端重写，Mermaid 协作图区分前后端，跨上下文约束明确交易只在钱包侧执行、后端不持私钥",
         "§2.1 术语表登记子域类型与限界上下文，指向对应章节",
@@ -845,7 +845,7 @@
       "reviewStatus": "awaiting-user-review",
       "evidence": [
         "核心认知 §5.1.1 子域类型：三类型判定标准与投入方式、SD-01~12（4 核心域 / 4 支撑域 / 4 通用域）含判定依据、四条边界规则",
-        "核心认知 §5.1.2 按执行端划分限界上下文：前端 Frontend Wallet / Identity / Content / Artifact / Relationship / Reading 六个，后端 Backend Identity / Content / Artifact / Relationship / Transaction / Chain Query 六个，加 Cross-end Reader 共享一个；各端权威来源不同（前端 Wallet、后端 Bitcoin）",
+        "核心认知 §5.1.2 按执行端划分 12 个限界上下文：前端 Wallet / Identity / Content / Artifact / Relationship / Reading，后端 Identity / Content / Artifact / Relationship / Transaction / Chain Query；上下文名不带执行端前缀，由执行端列区分，跨端引用时写全名",
         "核心认知 §5.2 的 12 个领域接口按执行端归属，WalletProvider 明确为唯一交易执行入口，后端新增 IdentityReader/ContentReader/ArtifactReader/RelationshipReader/TransactionIntake 五个只读与准入端口",
         "上下文映射重写为前后端两套上下文，Mermaid 图区分 FE/BE 子图；跨上下文约束写入「交易只在钱包侧执行」「后端不持有私钥」「同一子域两端模型不同」三条",
         "ADR-002 记录交易执行统一由 Yours Wallet 完成的决策；核心认知 §5.4 同步改为「metanet4j 只解析和验证交易，不构造待签交易」",

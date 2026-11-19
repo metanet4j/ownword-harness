@@ -6,15 +6,17 @@
 
 ## 设计入口
 
-| 子域 | 前端上下文 | 后端上下文 | 当前领域入口 | 状态 |
+上下文名称在同端内只用简称（Wallet、Identity、Content），跨端对照时写全名（Frontend Identity / Backend Identity）消歧。
+
+| 子域 | 前端 | 后端 | 当前领域入口 | 状态 |
 | --- | --- | --- | --- | --- |
 | 全局 | — | — | [上下文映射](上下文映射-v0.4.0-20261117-175100.md) | 按执行端重划，待评审 |
-| Identity（SD-01） | Frontend Identity | Backend Identity | [Identity 领域设计](identity/README.md) | 已整理跨端草案，待评审 |
-| Content（SD-02） | Frontend Content | Backend Content | [领域入口](content/README.md) | 已有 v0.2.0 真实集成与 Revision 契约，待抽取独立领域设计 |
-| Artifact（SD-03） | Frontend Artifact | Backend Artifact | [领域入口](artifact/README.md) | SDK 有协议构造；两端业务实现待建 |
-| Relationship（SD-04） | Frontend Relationship | Backend Relationship | [领域入口](relationship/README.md) | 能力未开放，生产协议待验证 |
-| Explorer（SD-05） | Frontend Reading | — | 无独立入口 | 读模型契约待建 |
-| 支撑能力（SD-06~10、SD-12） | Frontend Wallet | Backend Transaction、Backend Chain Query | [支撑域](supporting/README.md) | 基于本地源码划分职责与实施缺口，待评审 |
+| Identity（SD-01） | Identity | Identity | [Identity 领域设计](identity/README.md) | 已整理跨端草案，待评审 |
+| Content（SD-02） | Content | Content | [领域入口](content/README.md) | 已有 v0.2.0 真实集成与 Revision 契约，待抽取独立领域设计 |
+| Artifact（SD-03） | Artifact | Artifact | [领域入口](artifact/README.md) | SDK 有协议构造；两端业务实现待建 |
+| Relationship（SD-04） | Relationship | Relationship | [领域入口](relationship/README.md) | 能力未开放，生产协议待验证 |
+| Explorer（SD-05） | Reading | — | 无独立入口 | 读模型契约待建 |
+| 支撑能力（SD-06~10、SD-12） | Wallet | Transaction、Chain Query | [支撑域](supporting/README.md) | 基于本地源码划分职责与实施缺口，待评审 |
 
 ## 编写规范
 
