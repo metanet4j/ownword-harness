@@ -190,7 +190,9 @@ hr{border:none;border-top:1px solid var(--rule);margin:2em 0}
 
 /* ---------- 正文 ---------- */
 main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) + env(safe-area-inset-bottom))}
-.chapter{padding:var(--s7) 0 var(--s4);border-top:1px solid var(--rule);scroll-margin-top:64px}
+/* 锚点定位要躲开顶栏：顶栏高 54px + 刘海安全区，写死 64px 在刘海屏上会被遮住 */
+.chapter{padding:var(--s7) 0 var(--s4);border-top:1px solid var(--rule);
+  scroll-margin-top:calc(54px + env(safe-area-inset-top) + 10px)}
 .chapter-head{margin-bottom:var(--s5)}
 .kicker{margin:0 0 var(--s3);font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.16em;
   color:var(--accent)}
@@ -200,45 +202,6 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 .qmark-w{font-family:var(--sans);font-size:.78em;font-weight:700;letter-spacing:.32em;color:var(--muted)}
 .chapter-title{margin:0;font-family:var(--sans);font-size:1.26em;line-height:1.55;font-weight:700;letter-spacing:.01em}
 .chapter-body p{margin:0 0 .92em;text-indent:2em;text-align:justify;line-break:strict;color:var(--ink-2)}
-.chapter-body .verses{white-space:pre-line;margin:0 0 .92em;color:var(--ink-2)}
-.chapter-body p.verse{text-indent:0;padding-left:2.9em;position:relative;scroll-margin-top:76px}
-.chapter-body p.verse span[id]{display:inline;scroll-margin-top:76px}
-.chapter-body p.verse .vnum{position:absolute;left:0;top:0;min-width:2em;font-family:var(--sans);
-  font-size:.7em;font-weight:600;line-height:2.35;color:var(--accent);text-decoration:none;letter-spacing:.02em}
-.chapter-body p.verse .vnum:hover{text-decoration:underline}
-.vanchor{scroll-margin-top:76px}
-.chapter-body p.verse:target,.chapter-body p.verse.hit{background:var(--accent-wash);
-  box-shadow:0 0 0 .3em var(--accent-wash);border-radius:3px}
-.verse-jump{display:flex;align-items:center;gap:.55em;margin:.9em 0 0;font-family:var(--sans);
-  font-size:12.5px;color:var(--muted)}
-.verse-jump input{width:4.4em;padding:.3em .45em;border:1px solid var(--rule);border-radius:var(--r1);
-  background:var(--card);color:var(--ink);font:inherit;text-align:center}
-.verse-jump button{padding:.3em .8em;border:1px solid var(--rule);border-radius:var(--r1);
-  background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
-.verse-jump button:hover{border-color:var(--accent-2);color:var(--accent)}
-.verse-jump input.miss{border-color:var(--accent);background:var(--accent-wash)}
-.nojs .verse-jump{display:none}
-.chapter-count{margin:.5em 0 0;font-family:var(--sans);font-size:12.5px;color:var(--muted)}
-/* 经文目录：卷折叠 + 章号网格，66 卷 1189 章压成一屏可扫的列表 */
-.toc-book{margin:0}
-.toc-book>details{border-bottom:1px solid var(--rule)}
-.toc-book>details>summary{display:flex;align-items:center;justify-content:space-between;gap:.6em;
-  min-height:40px;padding:.45em 2px;font-family:var(--sans);font-size:14px;color:var(--ink);
-  cursor:pointer;list-style:none}
-.toc-book>details>summary::-webkit-details-marker{display:none}
-.toc-book>details>summary::after{content:"＋";flex:none;color:var(--muted);font-size:12px}
-.toc-book>details[open]>summary::after{content:"－"}
-.toc-book>details>summary>span{flex:none;margin-left:auto;color:var(--muted);font-size:11.5px}
-.toc-book>details>summary:hover{color:var(--accent)}
-.toc-chapgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:5px;
-  padding:.2em 0 .7em}
-.toc-book[hidden],.toc-ch[hidden],.toc-part[hidden],.toc-empty[hidden]{display:none!important}
-.toc-ch{display:flex;align-items:center;justify-content:center;height:36px;border:1px solid var(--rule);
-  border-radius:var(--r1);background:var(--card);color:var(--ink);font-family:var(--sans);
-  font-size:13px;text-decoration:none}
-.toc-ch:hover{border-color:var(--accent-2);color:var(--accent)}
-.toc-ch.current{border-color:var(--accent);background:var(--accent-wash);color:var(--accent);font-weight:700}
-.toc-books{display:flex;flex-direction:column}
 /* 全文检索结果：卷章 + 命中节的经文片段，点一条直接落到该节 */
 .search-results{flex:1;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;
   padding:0 var(--s2) var(--s3) var(--s3);font-family:var(--sans)}
@@ -252,16 +215,10 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .sr-text mark{background:var(--accent-wash);color:var(--accent);padding:0 .1em}
 .sr-more{margin:.3em 0 0;font-size:11.5px;color:var(--muted)}
-/* 目录里的「跳到本节」：每章展开后可按节选 */
-.toc-jumprow{display:flex;align-items:center;gap:5px;padding:0 0 .6em}
-.toc-jumprow input{width:4em;padding:.25em .4em;border:1px solid var(--rule);border-radius:var(--r1);
-  background:var(--card);color:var(--ink);font:inherit;font-size:12px;text-align:center}
-.toc-jumprow button{padding:.25em .55em;border:1px solid var(--rule);border-radius:var(--r1);
-  background:var(--card);color:var(--ink);font:inherit;font-size:12px;cursor:pointer}
-.toc-jumprow span{font-size:11px;color:var(--muted)}
 .chapter-body h2{display:flex;flex-wrap:wrap;align-items:baseline;gap:.7em;
   margin:2.1em 0 .85em;padding-top:1.15em;border-top:1px solid var(--rule);
-  font-family:var(--sans);font-size:1.14em;font-weight:700;line-height:1.6;scroll-margin-top:70px}
+  font-family:var(--sans);font-size:1.14em;font-weight:700;line-height:1.6;
+  scroll-margin-top:calc(54px + env(safe-area-inset-top) + 14px)}
 .chapter-body h2 .idx{flex:none;padding:.2em .72em;border:1px solid var(--accent-2);border-radius:999px;
   font-size:.62em;font-weight:700;letter-spacing:.14em;color:var(--accent);line-height:1.5}
 .chapter-body h2 .ht{flex:1 1 auto}
@@ -391,15 +348,11 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   .sidebar:target,.sidebar.on{display:flex;transform:none;box-shadow:0 0 60px var(--shadow)}
   /* 遮罩同样只靠 CSS：:has() 得到支持就显示，没支持也不影响抽屉本身 */
   body:has(.sidebar:target) .scrim{display:block;opacity:1;pointer-events:auto}
-  /* 侧栏原装那份目录只在桌面端用；窄屏用同一份克隆 */
-  .js .sidebar .toc:not(.toc-clone){display:none}
-  .js .toc-clone{display:block;flex:1;overflow-y:auto;touch-action:pan-y;
-    padding:0 var(--s2) var(--s3) var(--s3)}
-  .js .numgrid-clone{flex:1;overflow-y:auto;touch-action:pan-y;padding:0 var(--s3) var(--s3)}
-  /* 窄屏（放不下常驻侧栏）一律把目录排进正文最前面：
-     不论脚本能不能跑、不论在浏览器还是快速查看里，打开就能看到 */
+  /* 窄屏（放不下常驻侧栏）在无脚本时把目录排进正文最前面：
+     快速查看里打开就能看到。有脚本时抽屉已经能开，正文这份只会挡住封面。 */
   .inline-toc{display:block;margin:0 0 var(--s5);padding:var(--s4) 0 var(--s5);
     border-bottom:1px solid var(--rule)}
+  .js .inline-toc{display:none}
   .to-toc{display:flex}
   .inline-toc .toc{display:block;overflow:visible;padding:0;flex:none}
   .inline-toc .numgrid{flex:none;overflow:visible;padding:0;margin:0 0 var(--s3)}
@@ -5731,6 +5684,23 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   function scrollPos() {
     return bodyLock.on ? bodyLock.y : (window.pageYOffset || 0);
   }
+  function scrollToY(top, smooth) {
+    try {
+      window.scrollTo({ top: top, behavior: smooth ? 'smooth' : 'auto' });
+    } catch (e) {
+      window.scrollTo(0, top);
+    }
+  }
+  /* 跳转与经文深链都要用：放在模块作用域，别藏在某个 safe() 闭包里 */
+  function jumpTo(hash) {
+    var id = decodeURIComponent(String(hash).replace(/^#/, ''));
+    var el = document.getElementById(id);
+    if (!el) return;
+    var barH = document.querySelector('.bar').offsetHeight;
+    var top = el.getBoundingClientRect().top + scrollPos() - barH - 14;
+    var far = Math.abs(top - scrollPos()) > window.innerHeight * 3;
+    scrollToY(Math.max(top, 0), !far);
+  }
   /* 键盘弹出时可视视口会变矮，抽屉高度跟着可视视口走 */
   function syncViewport() {
     if (!sidebar || !window.visualViewport) return;
@@ -5775,25 +5745,6 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     toTop = $('btnTopFloat');
     resumeBtn = $('resumeBtn');
     mq = window.matchMedia(DESKTOP);
-
-    // 手机端抽屉里的目录/编号网格来自面板那份（.toc-copy / .numgrid-copy），
-    // 模板里侧栏那份只在桌面端用；这里各克隆一份挂到侧栏，不做节点搬移。
-    if (!isDesktop() && toc && sidebar) {
-      var foot = sidebar.querySelector('.side-foot');
-      var tocClone = toc.cloneNode(true);
-      tocClone.className = 'toc toc-clone';
-      tocClone.removeAttribute('id');
-      sidebar.insertBefore(tocClone, foot || null);
-      toc = tocClone;
-      if (numgrid) {
-        var gridClone = numgrid.cloneNode(true);
-        gridClone.className = 'numgrid numgrid-clone';
-        gridClone.removeAttribute('id');
-        gridClone.hidden = true;
-        sidebar.insertBefore(gridClone, foot || null);
-        numgrid = gridClone;
-      }
-    }
 
     function syncLayout() {
       if (isDesktop()) {
@@ -5917,22 +5868,6 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     }
     syncMarkBtn();
 
-    function scrollToY(top, smooth) {
-      try {
-        window.scrollTo({ top: top, behavior: smooth ? 'smooth' : 'auto' });
-      } catch (e) {
-        window.scrollTo(0, top);
-      }
-    }
-    function jumpTo(hash) {
-      var id = decodeURIComponent(String(hash).replace(/^#/, ''));
-      var el = document.getElementById(id);
-      if (!el) return;
-      var barH = document.querySelector('.bar').offsetHeight;
-      var top = el.getBoundingClientRect().top + scrollPos() - barH - 14;
-      var far = Math.abs(top - scrollPos()) > window.innerHeight * 3;
-      scrollToY(Math.max(top, 0), !far);
-    }
     function handleJump(e) {
       var node = (e && e.target) || null;
       while (node && node.nodeType !== 1) node = node.parentNode;
@@ -5955,23 +5890,28 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     var coverActions = document.querySelector('.cover-actions');
     if (coverActions) bindTap(coverActions, handleJump);
 
+    // 顶部进度条在手机上只有 3px 高，点不准还抢状态栏下拉手势：窄屏不接管点击
     var progress = $('progress');
     function backToTop() { openSidebar(false); scrollToY(0, true); }
     bindTap($('btnTop'), backToTop);
     bindTap(toTop, backToTop);
-    bindTap(progress, function (e) {
-      var r = progress.getBoundingClientRect();
-      var ratio = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
-      var max = document.documentElement.scrollHeight - window.innerHeight;
-      scrollToY(ratio * max, false);
-    });
+    if (!HAS_TOUCH) {
+      bindTap(progress, function (e) {
+        var r = progress.getBoundingClientRect();
+        var ratio = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        scrollToY(ratio * max, false);
+      });
+    }
 
+    // 阅读位置只在封面给入口，而封面在最顶上：直接跳到某章再回来就再也见不到。
+    // 章节之间停住时给一条悬浮的「继续上次」，点了回上次停的位置，几秒后自己退场。
     var saved = store.get(POS_KEY, '');
     if (saved) {
-      var target = document.getElementById(saved);
-      if (target) {
+      var savedEl = document.getElementById(saved);
+      if (savedEl && resumeBtn) {
         resumeBtn.style.display = '';
-        resumeBtn.textContent = '继续阅读：' + (target.getAttribute('data-title') || '');
+        resumeBtn.textContent = '继续阅读：' + (savedEl.getAttribute('data-title') || '');
         resumeBtn.setAttribute('href', '#' + saved);
       }
     }
@@ -5990,6 +5930,8 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     document.addEventListener('keydown', function (e) {
       if (e.target && e.target.tagName === 'INPUT') return;
       if (e.key === 'Escape') closeSidebar();
+      // 顶栏菜单按钮 title 一直写着「目录 (T)」，这里补上真实按键
+      if (e.key === 't' || e.key === 'T') { e.preventDefault(); toggleSidebar(); return; }
       if (e.key === '[' || e.key === ']') {
         var list = sections(), i = list.indexOf(current());
         var next = e.key === '[' ? list[i - 1] : list[i + 1];
@@ -5997,7 +5939,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
           e.preventDefault();
           var barH = document.querySelector('.bar').offsetHeight;
           var top = next.getBoundingClientRect().top + scrollPos() - barH - 14;
-          try { window.scrollTo({ top: top, behavior: 'smooth' }); } catch (err) { window.scrollTo(0, top); }
+          scrollToY(top, true);
         }
       }
     });
@@ -6014,137 +5956,14 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     var barTitle = $('barTitle');
     var posText = $('posText');
     var lastId = null, lastHead = null, ticking = false;
-
-    // 建一份「节 → 卷章」索引，供全文检索用；按需构建，只建一次
-    var verseIndex = null;
-    function buildVerseIndex() {
-      if (verseIndex) return verseIndex;
-      var list = [];
-      sections.forEach(function (sec) {
-        var book = sec.querySelector('.kicker');
-        var title = sec.getAttribute('data-title') || '';
-        list.push({
-          sec: sec,
-          id: sec.id,
-          vid: sec.getAttribute('data-vid') || '',
-          book: book ? book.textContent : '',
-          title: title,
-          // 章号：从「创世记 第1章」里取
-          chap: (function () {
-            var m = /第(\d+)章/.exec(title);
-            return m ? Number(m[1]) : 0;
-          }())
-        });
-      });
-      verseIndex = list;
-      return verseIndex;
-    }
-
-    // 目录里的「章:节」直达：在搜索框输 约11:35 / 约11 35 这类写法也能跳
-    function parseRef(q) {
-      var m = /^([\u4e00-\u9fa5]{1,8})\s*(\d+)\s*[:：\s]\s*(\d+)$/.exec(q);
-      if (!m) return null;
-      return {book: m[1], chap: Number(m[2]), verse: Number(m[3])};
-    }
-
-    function renderVerseSearch(q, results) {
-      var chapters = buildVerseIndex();
-      var hits = [];
-      var MAX = 200;
-      if (!q) {
-        results.hidden = true;
-        results.innerHTML = '';
-        toc.hidden = false;
-        return;
-      }
-      var ref = parseRef(q);
-      if (ref) {
-        // 精确「卷 章:节」直接当一条结果
-        var found = null;
-        chapters.forEach(function (info) {
-          if (found) return;
-          if (info.book.toLowerCase().indexOf(ref.book.toLowerCase()) >= 0
-              && info.chap === ref.chap
-              && document.getElementById(info.vid + '_' + ref.verse)) {
-            found = {
-              id: info.vid + '_' + ref.verse,
-              ref: info.title + ':' + ref.verse,
-              text: document.getElementById(info.vid + '_' + ref.verse)
-                .parentNode.textContent
-            };
-          }
-        });
-        if (found) hits.push(found);
-      }
-      // 章级匹配：卷名或「第N章」
-      var chapNum = (function () {
-        var m = /^第?\s*(\d+)\s*章?$/.exec(q);
-        return m ? Number(m[1]) : 0;
-      }());
-      chapters.forEach(function (info) {
-        var bookMatch = info.book.toLowerCase().indexOf(q) >= 0;
-        var chapMatch = chapNum && info.chap === chapNum;
-        if (bookMatch || chapMatch) {
-          hits.push({id: info.id, ref: info.title, text: '', whole: true});
-        }
-      });
-      // 节级匹配：逐章扫经文
-      if (hits.length < MAX) {
-        chapters.forEach(function (info) {
-          if (hits.length >= MAX) return;
-          var nodes = info.sec.querySelectorAll('p.verse');
-          Array.prototype.forEach.call(nodes, function (p) {
-            if (hits.length >= MAX) return;
-            var text = p.textContent;
-            if (text.toLowerCase().indexOf(q) < 0) return;
-            var num = (p.querySelector('.vnum') || {}).textContent || '';
-            hits.push({
-              id: p.getAttribute('data-verse'),
-              ref: info.title + ':' + num,
-              text: text,
-              node: p
-            });
-          });
-        });
-      }
-
-      var parts = [];
-      parts.push('<p class="sr-head">' + (hits.length
-        ? hits.length + ' 处命中' + (hits.length >= MAX ? '（只列前 ' + MAX + ' 处）' : '')
-        : '没有找到「' + q.replace(/[<>&]/g, '') + '」') + '</p>');
-      hits.forEach(function (hit) {
-        var label = hit.ref;
-        var snippet = '';
-        if (!hit.whole && hit.text) {
-          snippet = '<span class="sr-text">' + markText(hit.text, q) + '</span>';
-        }
-        parts.push('<a class="sr-hit" href="#' + hit.id + '">'
-          + '<span class="sr-ref">' + label + '</span>' + snippet + '</a>');
-      });
-      results.innerHTML = parts.join('');
-      results.hidden = false;
-      toc.hidden = true;
-    }
-
-    function markText(text, q) {
-      var safe = text.replace(/[&<>]/g, function (c) {
-        return {'&': '&amp;', '<': '&lt;', '>': '&gt;'}[c];
-      });
-      var lower = safe.toLowerCase();
-      var at = lower.indexOf(q);
-      if (at < 0) return safe;
-      return safe.slice(0, at) + '<mark>' + safe.slice(at, at + q.length) + '</mark>'
-        + safe.slice(at + q.length);
-    }
+    // 经文类书把自己的全文检索挂在这里；普通书籍保持 null
+    var verseSearch = null;
+    
 
     function renderSearch(q) {
       q = q.trim().toLowerCase();
       var results = $('searchResults');
-      // 经文模式：搜卷名、章号，也搜每一节的经文；命中直接列成可点的结果
-      if (!rows.length && results) {
-        renderVerseSearch(q, results);
-        return;
-      }
+      if (verseSearch && results) { verseSearch(q, results); return; }
       var hit = 0;
       rows.forEach(function (row) {
         var item = row.querySelector('.toc-item');
@@ -6202,22 +6021,6 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       if (e.key === 'Escape') { this.value = ''; renderSearch(''); }
     });
 
-    function currentSection() {
-      var top = scrollPos() + 72;
-      var found = sections[0];
-      for (var i = 0; i < sections.length; i++) {
-        if (sections[i].offsetTop <= top) found = sections[i]; else break;
-      }
-      return found;
-    }
-    function currentHead() {
-      var top = scrollPos() + 96;
-      var found = null;
-      for (var i = 0; i < heads.length; i++) {
-        if (heads[i].offsetTop <= top) found = heads[i]; else break;
-      }
-      return found;
-    }
     function markCurrent(id) {
       rows.forEach(function (row) {
         var on = row.getAttribute('data-target') === id;
@@ -6228,16 +6031,6 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       Array.prototype.forEach.call(document.querySelectorAll('.num'), function (n) {
         n.classList[n.getAttribute('data-target') === id ? 'add' : 'remove']('current');
       });
-      // 经文目录：高亮当前章，并展开它所在的卷（当前卷一直开着，方便连读）
-      Array.prototype.forEach.call(document.querySelectorAll('.toc-ch'), function (a) {
-        var on = a.getAttribute('data-target') === id;
-        a.classList[on ? 'add' : 'remove']('current');
-        if (on) {
-          var book = a.closest('.toc-book');
-          var details = book && book.querySelector('details');
-          if (details) details.open = true;
-        }
-      });
     }
     function markHead(el) {
       Array.prototype.forEach.call(document.querySelectorAll('.toc-sub'), function (s) {
@@ -6245,158 +6038,74 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         s.classList[on ? 'add' : 'remove']('current');
       });
     }
+
+    /* 滚动联动的性能关键：章节与小节的位置只量一次，之后滚动只做二分查找。
+       原先每帧都读 offsetTop —— 500K 字的文档一次强制回流要十几毫秒，
+       再叠加同帧内的 DOM 写入，手机上滑动静止帧率就掉下去了。 */
+    var secTop = [], headTop = [];
+    function measure() {
+      secTop = sections.map(function (el) { return el.offsetTop; });
+      headTop = heads.map(function (el) { return el.offsetTop; });
+      posText.setAttribute('data-chars',
+        Math.max(1, (document.querySelector('main') || document.body).textContent.length));
+    }
+    // 最后一项满足 top <= y 的下标；都不满足返回 -1
+    function lastAt(list, y) {
+      var lo = 0, hi = list.length - 1, ans = -1;
+      while (lo <= hi) {
+        var mid = (lo + hi) >> 1;
+        if (list[mid] <= y) { ans = mid; lo = mid + 1; } else { hi = mid - 1; }
+      }
+      return ans;
+    }
+    // 上一次写进 DOM 的值：值没变就不碰，避免无谓的样式与重排
+    var shownTitle = '', shownPos = '', posAt = 0;
     function onScroll() {
       if (ticking) return;
       ticking = true;
       window.requestAnimationFrame(function () {
         ticking = false;
-        var h = document.documentElement.scrollHeight - window.innerHeight;
-        bar.style.width = (h > 0 ? Math.min(100, scrollPos() / h * 100) : 0) + '%';
-        toTop.classList[scrollPos() > 600 ? 'add' : 'remove']('show');
-        var ratio = h > 0 ? Math.min(1, Math.max(0, scrollPos() / h)) : 0;
-        var sec = currentSection();
-        if (sec && sec.id !== lastId) {
+        var y = scrollPos();
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        var ratio = max > 0 ? Math.min(1, Math.max(0, y / max)) : 0;
+        var pct = Math.round(ratio * 100);
+
+        bar.style.width = (ratio * 100) + '%';
+        toTop.classList[y > 600 ? 'add' : 'remove']('show');
+
+        var si = lastAt(secTop, y + 72);
+        var sec = sections[si >= 0 ? si : 0];
+        if (!sec) return;
+        var title = sec.getAttribute('data-title') || '';
+        if (sec.id !== lastId) {
           lastId = sec.id;
-          barTitle.textContent = sec.getAttribute('data-title') || '';
           markCurrent(sec.id);
           store.set(POS_KEY, sec.id);
-          barTitle.textContent = Math.round(ratio * 100) + '% · ' + (sec.getAttribute('data-title') || '');
         }
-        if (posText && sec) {
-          var chars = posText.getAttribute('data-chars');
-          if (!chars) {
-            var host = document.querySelector('main');
-            chars = host ? Math.max(1, host.textContent.length) : 1;
-            posText.setAttribute('data-chars', chars);
-          }
-          var left = Math.round((1 - ratio) * Number(chars) / 400);
-          posText.textContent = Math.round(ratio * 100) + '% · '
-            + (sections.indexOf(sec) + 1) + '/' + sections.length
-            + (ratio < 0.999 ? ' · 剩约 ' + left + ' 分钟' : ' · 读完了');
+        var titleText = pct + '% · ' + title;
+        if (titleText !== shownTitle) { shownTitle = titleText; barTitle.textContent = titleText; }
+
+        // 进度条在抽屉底部，滚动时根本看不见：每半秒才刷新一次就够
+        var now = Date.now();
+        if (now - posAt > 500) {
+          posAt = now;
+          var chars = Number(posText.getAttribute('data-chars')) || 1;
+          var pos = pct + '% · ' + (si + 1) + '/' + sections.length
+            + (ratio < 0.999 ? ' · 剩约 ' + Math.round((1 - ratio) * chars / 400) + ' 分钟' : ' · 读完了');
+          if (pos !== shownPos) { shownPos = pos; posText.textContent = pos; }
         }
-        var head = currentHead();
+
+        var hi = lastAt(headTop, y + 96);
+        var head = hi >= 0 ? heads[hi] : null;
         var hid = head ? head.id : null;
         if (hid !== lastHead) { lastHead = hid; markHead(head); }
       });
     }
-    // 经文跳转：每章一个「第 N 节」输入框；节号本身也是锚点，可直接分享 #v-… 链接
-    function verseJump(box) {
-      var input = box.querySelector('.vjump-input');
-      var max = parseInt(box.getAttribute('data-max'), 10) || 0;
-      var n = parseInt(input.value, 10);
-      if (!n || n < 1 || n > max) { input.value = ''; input.focus(); return; }
-      var id = box.getAttribute('data-prefix') + n;
-      var target = document.getElementById(id);
-      if (!target) {
-        input.classList.add('miss');
-        setTimeout(function () { input.classList.remove('miss'); }, 1200);
-        return;
-      }
-      if (history.replaceState) { history.replaceState(null, '', '#' + id); }
-      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      var block = (target.closest && target.closest('.verse')) || target.parentNode || target;
-      block.classList.add('hit');
-      setTimeout(function () { block.classList.remove('hit'); }, 1800);
-      input.blur();
-    }
-    document.addEventListener('click', function (e) {
-      var btn = e.target.closest ? e.target.closest('.vjump-go') : null;
-      if (!btn) { return; }
-      var box = btn.closest('.verse-jump');
-      if (box) { e.preventDefault(); verseJump(box); }
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key !== 'Enter' || !e.target.classList
-          || !e.target.classList.contains('vjump-input')) { return; }
-      e.preventDefault();
-      var box = e.target.closest('.verse-jump');
-      if (box) { verseJump(box); }
-    });
 
-    // 经文模式：把每章「一行一节」的文本生成段落、节锚点与章首跳转框。
-    // 31,000 多节不在静态 HTML 里各写一层标记，单文件因此能小四成；
-    // 文本本来就在页面里，关掉脚本仍按行显示，只是没有节锚点。
-    (function initVerses() {
-      var blocks = document.querySelectorAll('.verses');
-      if (!blocks.length) return;
-      var re = /^(\d+)(?:[–\-—](\d+))?\s+([\s\S]*)$/;
-      Array.prototype.forEach.call(blocks, function (block) {
-        var sec = block.closest('.chapter');
-        var prefix = sec ? (sec.getAttribute('data-vid') || '') + '_' : '';
-        var lines = block.textContent.split(/\n+/);
-        // 静态节锚点要在重建段落时搬进新 <p>，不能随 textContent 一起清掉
-        var anchors = {};
-        Array.prototype.forEach.call(block.querySelectorAll('span[id]'), function (sp) {
-          anchors[sp.id] = sp;
-        });
-        var frag = document.createDocumentFragment();
-        lines.forEach(function (line) {
-          line = line.replace(/^\s+|\s+$/g, '');
-          if (!line) return;
-          var m = re.exec(line);
-          if (!m) {
-            var plain = document.createElement('p');
-            plain.textContent = line;
-            frag.appendChild(plain);
-            return;
-          }
-          var start = Number(m[1]);
-          var end = Number(m[2] || start);
-          var label = start === end ? String(start) : start + '–' + end;
-          var p = document.createElement('p');
-          p.className = 'verse';
-          p.setAttribute('data-verse', prefix + start);
-          for (var n = start; n <= end; n += 1) {
-            var sp = anchors[prefix + n];
-            if (sp) p.appendChild(sp);
-          }
-          var a = document.createElement('a');
-          a.className = 'vnum';
-          a.href = '#' + prefix + start;
-          a.textContent = label;
-          p.appendChild(a);
-          p.appendChild(document.createTextNode(m[3]));
-          frag.appendChild(p);
-        });
-        block.textContent = '';
-        block.appendChild(frag);
-      });
-      Array.prototype.forEach.call(document.querySelectorAll('.chapter[data-vmax]'), function (sec) {
-        var head = sec.querySelector('.chapter-head');
-        if (!head) return;
-        var max = Number(sec.getAttribute('data-vmax')) || 0;
-        var count = Number(sec.getAttribute('data-vcount')) || max;
-        var box = document.createElement('div');
-        box.className = 'verse-jump';
-        box.setAttribute('data-prefix', (sec.getAttribute('data-vid') || '') + '_');
-        box.setAttribute('data-max', String(max));
-        box.innerHTML = '<label>第 <input class="vjump-input" type="number" min="1" max="'
-          + max + '" inputmode="numeric" placeholder="节号" aria-label="跳至本章第几节"> 节</label>'
-          + '<button type="button" class="vjump-go">跳转</button>'
-          + '<span class="verse-count" title="点节号可复制该节链接">共 ' + count + ' 节</span>';
-        head.appendChild(box);
-        // 脚本接管后隐去静态节数，避免与跳转框里的「共 N 节」重复
-        var staticCount = head.querySelector('.chapter-count');
-        if (staticCount) staticCount.style.display = 'none';
-      });
-      // 直接打开 #v1_35 这类节链接时，浏览器解析阶段锚点已在静态文本里，
-      // 但高亮与滚动定位要等段落生成后再补一次
-      if (/^#v\d+_/.test(location.hash)) {
-        var target = document.getElementById(location.hash.slice(1));
-        if (target) {
-          var para = target.closest ? target.closest('.verse') : null;
-          if (para) {
-            para.classList.add('hit');
-            setTimeout(function () { para.classList.remove('hit'); }, 1800);
-          }
-          jumpTo(location.hash);
-        }
-      }
-    })();
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-
+    window.addEventListener('resize', function () { measure(); onScroll(); });
+    measure();
     onScroll();
   });
 })();
