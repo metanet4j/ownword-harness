@@ -28,6 +28,10 @@ AUDIO_RE = re.compile(r'^(朗读音频|音频)\s*[:：]\s*(\S+)\s*$')
 ANSWER_RE = re.compile(r'^(答|回答)\s*[:：]')
 ENQ_RE = re.compile(r'^(Q\s*[:：])\s*(.*)$', re.S)
 ENA_RE = re.compile(r'^(A\s*[:：])\s*(.*)$', re.S)
+# 英中对照的另一种版式（威斯敏斯特大教理问答）：
+#   ## Question 2: How does it appear…  /  Answer: The very light of nature…
+EN_HEAD_RE = re.compile(r'^Question\s+\d+\s*[:：]\s*(.+)$', re.S)
+EN_ANS_RE = re.compile(r'^Answer\s*[:：]\s*(.+)$', re.S)
 INLINE_RE = re.compile(
     r'(?P<img>!\[(?P<alt>[^\]]*)\]\((?P<src>[^)\s]+)(?:\s+"[^"]*")?\))'
     r'|(?P<link>\[(?P<text>[^\]]+)\]\((?P<href>[^)\s]+)(?:\s+"[^"]*")?\))'
@@ -324,6 +328,27 @@ def render_body(blocks, anchors, cid=None, verse_mode=False, ch_index='v1'):
         if verse_lines:
             flush_verses()
         if kind == 'h2' and cid:
+            # 英文问答标题（「## Question 2: …」）不是一个小节：
+            # 它和随后的 Answer 段落一起放进中英对照块，免得中文「本章要点」
+            # 里混进英文问句。
+            m = EN_HEAD_RE.match(block['text'])
+            if m:
+                rows = [f'<div class="en-row"><span class="en-tag">Q</span>'
+                        f'<span>{render_inline(m.group(1), anchors)}</span></div>']
+                i += 1
+                while i < len(blocks):
+                    nxt = blocks[i]
+                    if nxt['type'] != 'p':
+                        break
+                    body = nxt['text'].lstrip('　')
+                    am = EN_ANS_RE.match(body)
+                    if not am:
+                        break
+                    rows.append(f'<div class="en-row"><span class="en-tag">A</span>'
+                                f'<span>{render_inline(am.group(1), anchors)}</span></div>')
+                    i += 1
+                out.append('<div class="en">' + ''.join(rows) + '</div>')
+                continue
             sec += 1
             out.append(render_block(block, anchors, f'{cid}-s{sec}'))
             i += 1
@@ -352,7 +377,15 @@ def render_body(blocks, anchors, cid=None, verse_mode=False, ch_index='v1'):
                 out.append('<div class="en">' + ''.join(rows) + '</div>')
                 continue
             if ANSWER_RE.match(plain):
-                inner = [render_inline(text, anchors)]
+                # 卡片左上角已有「答」标签，正文再以「答：」开头就成了「答 答：」。
+                # 两种情况都要处理：裸文本「答：…」与粗体「**答：…**」。
+                body = text
+                bm = re.match(r'^\*\*\s*(答|回答)\s*[:：]\s*', body)
+                if bm:
+                    body = '**' + body[bm.end():]
+                else:
+                    body = ANSWER_RE.sub('', body)
+                inner = [render_inline(body, anchors)]
                 i += 1
                 while i < len(blocks) and blocks[i]['type'] in ('ul', 'ol'):
                     inner.append(render_block(blocks[i], anchors))

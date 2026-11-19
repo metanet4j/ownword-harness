@@ -101,16 +101,19 @@ def resolve_book(name):
 # 「诗66:8,9」是同一节的并列（逗号分节），「雅1:22，25」同理；
 # 而「提前6:15，16」这类也是分节。真正的引用分隔只用分号与顿号。
 SPLIT_RE = re.compile(r'[；;、]')
+# 节范围的分隔符：半角连字符、全角连字符（－ U+FF0D）、长短破折号、波浪号
+DASH = r'[-–—－~～]'
 # 「卷 章:节」或「章:节」（省略卷名，沿用上一个）
 ONE_RE = re.compile(
     r'^(?:(?P<book>[\u4e00-\u9fa5]{1,8}?)\s*)?'
     r'(?P<chap>\d+)'
     r'(?:\s*[:：]\s*(?P<verse>\d+)'
-    r'(?:\s*[-–—~]\s*(?P<verse_end>\d+))?'
-    r'(?:\s*[,，]\s*(?P<more>\d+(?:\s*[-–—~]\s*\d+)?'
-    r'(?:\s*[,，]\s*\d+(?:\s*[-–—~]\s*\d+)?)*))?'
+    r'(?:\s*' + DASH + r'\s*(?P<verse_end>\d+))?'
+    r'(?:\s*[,，]\s*(?P<more>\d+(?:\s*' + DASH + r'\s*\d+)?'
+    r'(?:\s*[,，]\s*\d+(?:\s*' + DASH + r'\s*\d+)?)*))?'
     r')?$'
 )
+DASH_RE = re.compile(DASH)
 
 
 def parse_refs(inner, verse_count=None):
@@ -138,7 +141,7 @@ def parse_refs(inner, verse_count=None):
         if not token:
             continue
         # 裸数字：「约壹3:11、23」的 23 是节；「诗67:1-3；…；145」的 145 是章
-        plain = re.match(r'^(\d+)(?:\s*[-–—~]\s*(\d+))?$', token)
+        plain = re.match(r'^(\d+)(?:\s*' + DASH + r'\s*(\d+))?$', token)
         if plain and book:
             s = int(plain.group(1))
             e = int(plain.group(2) or s)
@@ -178,7 +181,7 @@ def parse_refs(inner, verse_count=None):
                 piece = piece.strip()
                 if not piece:
                     continue
-                pm = re.match(r'^(\d+)(?:\s*[-–—~]\s*(\d+))?$', piece)
+                pm = re.match(r'^(\d+)(?:\s*' + DASH + r'\s*(\d+))?$', piece)
                 if not pm:
                     continue
                 s = int(pm.group(1))
@@ -226,7 +229,7 @@ class VerseSource:
         found = {}
         if os.path.exists(path):
             for line in open(path, encoding='utf-8'):
-                m = re.match(r'^\s*(\d+)(?:\s*[-–—~]\s*(\d+))?\s+(.*\S)\s*$', line)
+                m = re.match(r'^\s*(\d+)(?:\s*' + DASH + r'\s*(\d+))?\s+(.*\S)\s*$', line)
                 if not m:
                     continue
                 text = m.group(3)
@@ -296,22 +299,24 @@ class Scripture:
         """refs -> [(标签, [(节号, 经文)])]，按引用顺序。"""
         out = []
         for book, chap, start, end in refs:
-            # 单章书（约二、约三、犹大、腓利门）里「约叁12」指第 12 节，
-            # 不是第 12 章 —— 这些卷整卷只有一章
-            if self.source.single_chapter(book) and start is None:
-                chap, start, end = 1, chap, chap
+            # 单章书（约二、约三、犹大、腓利门、俄巴底亚）整卷只有一章：
+            # 「犹4」是第 4 节，「约叁12」是第 12 节，都不是章号。
+            # 「约贰5:17」这种把节写成章的，按「第 5 节」解释（该卷没有第 5 章）。
+            single = self.source.single_chapter(book)
+            if single:
+                if start is None:
+                    chap, start, end = 1, chap, chap
+                elif chap > 1:
+                    # 章号超出单章书范围：原来的「章」就是节号，:后面那截忽略
+                    chap, start, end = 1, chap, None
             rows = self.source.fetch(book, chap, start, end)
+            label = f'{book} {chap}:{start}' if not single else f'{book} {start}'
+            if end and end != start:
+                label += f'-{end}'
             if not rows:
-                self.misses.append(f'{book} {chap}:{start}')
-                label = f'{book} {chap}:{start}'
-                if end and end != start:
-                    label += f'-{end}'
+                self.misses.append(label)
                 out.append((label, []))
                 continue
-            if end and end != start:
-                label = f'{book} {chap}:{start}-{end}'
-            else:
-                label = f'{book} {chap}:{start}'
             self.verse_chars += sum(len(t) for _, t in rows)
             out.append((label, rows))
         return out
