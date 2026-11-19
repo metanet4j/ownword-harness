@@ -300,7 +300,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   font-family:var(--sans);font-size:13px;font-weight:600;text-decoration:none;
   box-shadow:0 3px 14px var(--shadow)}
 /* 章末的「下一章」固定在右下：手机翻页不必先滑到章尾再找 pager，
-   和「目录」「回到顶部」竖着排，两两相隔 52px 不重叠 */
+   和「查找/目录」「回到顶部」竖着排，两两相隔 52px 不重叠 */
 .to-next{position:fixed;right:var(--s4);bottom:calc(var(--s4) + 108px + env(safe-area-inset-bottom));
   z-index:35;display:none;align-items:center;justify-content:center;height:44px;padding:0 16px;
   border-radius:999px;border:1px solid var(--rule-2);background:var(--card);color:var(--accent);
@@ -5642,6 +5642,10 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   /* 章数多的书（见 page() 里的 .cv）开了 content-visibility，
      章节位置会随渲染变化，滚动停下后必须重测。 */
   var HAS_CV = doc.classList.contains('cv');
+  /* 经文类书（见 page() 里的 .verse）：有按节定位这套东西 */
+  var VERSE = doc.classList.contains('verse');
+  /* 节高亮的定时器：跳转框与搜索结果共用，连续点击时只保留最后一次 */
+  var hitClear = 0;
   var TAP_SLOP = 10;
   var TOUCH_CLICK = false;
   function bindTap(node, action) {
@@ -5826,12 +5830,26 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     }
 
     bindTap($('btnMenu'), toggleSidebar);
-    // 常驻「目录」入口：有脚本时直接开抽屉（带当前章定位），比滚回顶部更好用；
-    // 无脚本时它就是个普通锚点，跳回正文顶部那份目录。
-    bindTap($('btnToToc'), function (e) {
+    /* 常驻入口（右下角）：
+       · 普通书籍是「目录」—— 开抽屉并定位当前章，无脚本时是普通锚点
+       · 经文类书是「查找」—— 开抽屉并聚焦搜索框，那里能直接输
+         「约11:35 / 创1:1 / 诗篇 23」到任意一节，比翻回章首用跳转框快 */
+    var toTocBtn = $('btnToToc');
+    if (VERSE && toTocBtn) {
+      toTocBtn.textContent = '查找';
+      toTocBtn.setAttribute('aria-label', '查找经文');
+    }
+    bindTap(toTocBtn, function (e) {
       if (isDesktop()) return;
       if (e && e.preventDefault) e.preventDefault();
       openSidebar(true);
+      // 聚焦搜索框并选中原内容，接着就能直接输入引用
+      if (VERSE && search) {
+        setTimeout(function () {
+          search.focus();
+          search.select();
+        }, 320);
+      }
     });
     bindTap($('btnClose'), function () { openSidebar(false); });
     bindTap(scrim, function () { openSidebar(false); });
@@ -5943,9 +5961,22 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       if (document.getElementById(id) && history.replaceState) {
         history.replaceState(null, '', '#' + id);
       }
+      // 落到某一节时高亮那一节，否则从搜索结果跳过去只见页面移动、不知落在哪
+      if (/^v\d+_/.test(id)) {
+        var el = document.getElementById(id);
+        var block = el && el.closest ? el.closest('.verse') : null;
+        if (block) {
+          block.classList.add('hit');
+          clearTimeout(hitClear);
+          hitClear = setTimeout(function () { block.classList.remove('hit'); }, 4000);
+        }
+      }
     }
     bindTap(toc, handleJump);
     bindTap(numgrid, handleJump);
+    // 搜索结果里的每条也是 #锚点：点它同样要落到目标节，并收起抽屉
+    var searchResults = $('searchResults');
+    if (searchResults) bindTap(searchResults, handleJump);
     var coverActions = document.querySelector('.cover-actions');
     if (coverActions) bindTap(coverActions, handleJump);
 

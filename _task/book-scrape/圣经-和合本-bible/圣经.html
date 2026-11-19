@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN" class="nojs cv" style="--cvh:2969px" data-theme="paper">
+<html lang="zh-CN" class="nojs verse cv" style="--cvh:2969px" data-theme="paper">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -300,7 +300,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   font-family:var(--sans);font-size:13px;font-weight:600;text-decoration:none;
   box-shadow:0 3px 14px var(--shadow)}
 /* 章末的「下一章」固定在右下：手机翻页不必先滑到章尾再找 pager，
-   和「目录」「回到顶部」竖着排，两两相隔 52px 不重叠 */
+   和「查找/目录」「回到顶部」竖着排，两两相隔 52px 不重叠 */
 .to-next{position:fixed;right:var(--s4);bottom:calc(var(--s4) + 108px + env(safe-area-inset-bottom));
   z-index:35;display:none;align-items:center;justify-content:center;height:44px;padding:0 16px;
   border-radius:999px;border:1px solid var(--rule-2);background:var(--card);color:var(--accent);
@@ -398,14 +398,17 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
 .chapter-body p.verse .vnum:hover{text-decoration:underline}
 .chapter-body p.verse:target,.chapter-body p.verse.hit{background:var(--accent-wash);
   box-shadow:0 0 0 .3em var(--accent-wash);border-radius:3px}
-.verse-jump{display:flex;align-items:center;gap:.55em;margin:.9em 0 0;font-family:var(--sans);
-  font-size:12.5px;color:var(--muted)}
+.verse-jump{display:flex;flex-wrap:wrap;align-items:center;gap:.55em;margin:.9em 0 0;
+  font-family:var(--sans);font-size:12.5px;color:var(--muted)}
 .verse-jump input{width:4.4em;padding:.3em .45em;border:1px solid var(--rule);border-radius:var(--r1);
   background:var(--card);color:var(--ink);font:inherit;text-align:center}
 .verse-jump button{padding:.3em .8em;border:1px solid var(--rule);border-radius:var(--r1);
   background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
 .verse-jump button:hover{border-color:var(--accent-2);color:var(--accent)}
 .verse-jump input.miss{border-color:var(--accent);background:var(--accent-wash)}
+/* 越界/不存在的说明文字：占整行，出现时才占位，平时不留空白 */
+.vjump-tip{display:none;flex:1 1 100%;margin-top:.2em;color:var(--accent);font-size:12px}
+.vjump-tip.on{display:block}
 .nojs .verse-jump{display:none}
 .chapter-count{margin:.5em 0 0;font-family:var(--sans);font-size:12.5px;color:var(--muted)}
 /* 经文目录：卷折叠 + 章号网格，66 卷 1189 章压成一屏可扫的列表 */
@@ -47267,6 +47270,10 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
   /* 章数多的书（见 page() 里的 .cv）开了 content-visibility，
      章节位置会随渲染变化，滚动停下后必须重测。 */
   var HAS_CV = doc.classList.contains('cv');
+  /* 经文类书（见 page() 里的 .verse）：有按节定位这套东西 */
+  var VERSE = doc.classList.contains('verse');
+  /* 节高亮的定时器：跳转框与搜索结果共用，连续点击时只保留最后一次 */
+  var hitClear = 0;
   var TAP_SLOP = 10;
   var TOUCH_CLICK = false;
   function bindTap(node, action) {
@@ -47451,12 +47458,26 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
     }
 
     bindTap($('btnMenu'), toggleSidebar);
-    // 常驻「目录」入口：有脚本时直接开抽屉（带当前章定位），比滚回顶部更好用；
-    // 无脚本时它就是个普通锚点，跳回正文顶部那份目录。
-    bindTap($('btnToToc'), function (e) {
+    /* 常驻入口（右下角）：
+       · 普通书籍是「目录」—— 开抽屉并定位当前章，无脚本时是普通锚点
+       · 经文类书是「查找」—— 开抽屉并聚焦搜索框，那里能直接输
+         「约11:35 / 创1:1 / 诗篇 23」到任意一节，比翻回章首用跳转框快 */
+    var toTocBtn = $('btnToToc');
+    if (VERSE && toTocBtn) {
+      toTocBtn.textContent = '查找';
+      toTocBtn.setAttribute('aria-label', '查找经文');
+    }
+    bindTap(toTocBtn, function (e) {
       if (isDesktop()) return;
       if (e && e.preventDefault) e.preventDefault();
       openSidebar(true);
+      // 聚焦搜索框并选中原内容，接着就能直接输入引用
+      if (VERSE && search) {
+        setTimeout(function () {
+          search.focus();
+          search.select();
+        }, 320);
+      }
     });
     bindTap($('btnClose'), function () { openSidebar(false); });
     bindTap(scrim, function () { openSidebar(false); });
@@ -47568,9 +47589,22 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       if (document.getElementById(id) && history.replaceState) {
         history.replaceState(null, '', '#' + id);
       }
+      // 落到某一节时高亮那一节，否则从搜索结果跳过去只见页面移动、不知落在哪
+      if (/^v\d+_/.test(id)) {
+        var el = document.getElementById(id);
+        var block = el && el.closest ? el.closest('.verse') : null;
+        if (block) {
+          block.classList.add('hit');
+          clearTimeout(hitClear);
+          hitClear = setTimeout(function () { block.classList.remove('hit'); }, 4000);
+        }
+      }
     }
     bindTap(toc, handleJump);
     bindTap(numgrid, handleJump);
+    // 搜索结果里的每条也是 #锚点：点它同样要落到目标节，并收起抽屉
+    var searchResults = $('searchResults');
+    if (searchResults) bindTap(searchResults, handleJump);
     var coverActions = document.querySelector('.cover-actions');
     if (coverActions) bindTap(coverActions, handleJump);
 
@@ -48030,24 +48064,48 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       });
     }
 
+    /* 节定位直接复用 jumpTo：落点统一为「顶栏下方」，不垂直居中
+       （居中会落在半屏偏下，读的时候还得再往上找）。 */
+    function scrollToVerse(target) {
+      jumpTo('#' + target.id);
+    }
+    // 高亮命中那一节；4 秒足够看清，太短会像闪一下就没
+    function markHit(block) {
+      if (!block) return;
+      block.classList.add('hit');
+      clearTimeout(hitClear);
+      hitClear = setTimeout(function () { block.classList.remove('hit'); }, 4000);
+    }
+    // 跳转框下方那行小字：越界与不存在都给出具体原因，而不是让输入框闪一下就没了
+    function verseHint(box, text) {
+      var tip = box.querySelector('.vjump-tip');
+      if (!tip) return;
+      tip.textContent = text || '';
+      tip.classList[text ? 'add' : 'remove']('on');
+    }
     // 经文跳转：每章一个「第 N 节」输入框；节号本身也是锚点，可直接分享 #v-… 链接
     function verseJump(box) {
       var input = box.querySelector('.vjump-input');
       var max = parseInt(box.getAttribute('data-max'), 10) || 0;
       var n = parseInt(input.value, 10);
-      if (!n || n < 1 || n > max) { input.value = ''; input.focus(); return; }
+      if (!n || n < 1 || n > max) {
+        input.value = '';
+        input.focus();
+        verseHint(box, max ? '本章共 ' + max + ' 节，请输入 1–' + max + ' 之间的数字' : '请输入节号');
+        return;
+      }
       var id = box.getAttribute('data-prefix') + n;
       var target = document.getElementById(id);
       if (!target) {
         input.classList.add('miss');
         setTimeout(function () { input.classList.remove('miss'); }, 1200);
+        verseHint(box, '本章没有第 ' + n + ' 节');
         return;
       }
+      verseHint(box, '');
       if (history.replaceState) { history.replaceState(null, '', '#' + id); }
-      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      var block = (target.closest && target.closest('.verse')) || target.parentNode || target;
-      block.classList.add('hit');
-      setTimeout(function () { block.classList.remove('hit'); }, 1800);
+      scrollToVerse(target);
+      markHit((target.closest && target.closest('.verse')) || target.parentNode || target);
       input.blur();
     }
     document.addEventListener('click', function (e) {
@@ -48141,7 +48199,8 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
         box.innerHTML = '<label>第 <input class="vjump-input" type="number" min="1" max="'
           + max + '" inputmode="numeric" placeholder="节号" aria-label="跳至本章第几节"> 节</label>'
           + '<button type="button" class="vjump-go">跳转</button>'
-          + '<span class="verse-count" title="点节号可复制该节链接">共 ' + count + ' 节</span>';
+          + '<span class="verse-count" title="点节号可复制该节链接">共 ' + count + ' 节</span>'
+          + '<span class="vjump-tip" role="status" aria-live="polite"></span>';
         head.appendChild(box);
         // 脚本接管后隐去静态节数，避免与跳转框里的「共 N 节」重复
         var staticCount = head.querySelector('.chapter-count');
@@ -48152,11 +48211,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 var(--s5) calc(var(--s7) +
       if (/^#v\d+_/.test(location.hash)) {
         var target = document.getElementById(location.hash.slice(1));
         if (target) {
-          var para = target.closest ? target.closest('.verse') : null;
-          if (para) {
-            para.classList.add('hit');
-            setTimeout(function () { para.classList.remove('hit'); }, 1800);
-          }
+          markHit(target.closest ? target.closest('.verse') : null);
           jumpTo(location.hash);
         }
       }
