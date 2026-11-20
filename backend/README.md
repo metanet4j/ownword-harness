@@ -5,16 +5,16 @@
 
 | 子目录 | 当前分支 | HEAD | 远程仓库 |
 |---|---|---|---|
-| `metanet4j-parent/` | `dev` | `917b7bd` | https://github.com/metanet4j/metanet4j-parent.git |
-| `metanet4j-base/` | `dev` | `279a7a6` | https://github.com/metanet4j/metanet4j-base.git |
-| `metanet4j-sdk/` | `dev` | `51e1c7d` | https://github.com/metanet4j/metanet4j-sdk.git |
-| `metanet4j-component/` | `dev` | `c3eaba3` | https://github.com/metanet4j/metanet4j-component.git |
+| `metanet4j-parent/` | `dev` | `3df5616` | https://github.com/metanet4j/metanet4j-parent.git |
+| `metanet4j-base/` | `dev` | `10cc8a9` | https://github.com/metanet4j/metanet4j-base.git |
+| `metanet4j-sdk/` | `dev` | `552567c` | https://github.com/metanet4j/metanet4j-sdk.git |
+| `metanet4j-component/` | `dev` | `6bdeaaf` | https://github.com/metanet4j/metanet4j-component.git |
 | `metanet4j-bsv-sdk/` | `dev` | `f934cfd` | https://github.com/metanet4j/metanet4j-bsv-sdk.git |
 | `metanet4j-junglebus/` | `master` | `1272067` | https://github.com/metanet4j/metanet4j-junglebus.git |
 
 BSV SDK 和 JungleBus 的主仓库与 Git 数据库分别存放在 `metanet4j-bsv-sdk/` 和 `metanet4j-junglebus/`；原任务分支与提交历史保留。旧任务目录已清理，后端任务规则见[后端任务工作区](../_task/backend-worktree/README.md)。
 
-`bitcoinj-sv/` 已移除（2026-11-19）：各 POM 无依赖引用，可由 https://github.com/bitcoin-sv/bitcoinj-sv.git 在 `1946a149` 重新克隆。
+`bitcoinj-sv/` 已于 2026-11-19 从基线移除：各 POM 无依赖引用，需要时可由 https://github.com/bitcoin-sv/bitcoinj-sv.git 在 `1946a149` 重新克隆。本工作副本尚未清理该目录，仍为 `1946a149`，可直接删除。
 
 ## 约定
 
